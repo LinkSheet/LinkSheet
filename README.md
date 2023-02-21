@@ -6,7 +6,7 @@ A Material3 replacement for [OpenLinkWith](https://github.com/tasomaniac/OpenLin
 
 ## What does this do?
 
-This replaces the app chooser that was removed in Android 12. 
+This replaces the url-app-chooser that was removed in Android 12. 
 
 ## Acknowledgements
 

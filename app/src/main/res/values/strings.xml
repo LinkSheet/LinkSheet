@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LinkSheet</string>
+    <string name="open_with">Open with</string>
+    <string name="just_once">Just once</string>
+    <string name="always">Always</string>
+    <string name="open_with_app">Open with %s</string>
+    <string name="use_a_different_app">Use a different app</string>
+    <string name="opening_with_app">Opening with %s</string>
+    <string name="preferred_apps">Preferred apps</string>
+    <string name="preferred_apps_settings">Preferred apps settings</string>
+    <string name="set_as_browser">Set as browser</string>
+    <string name="set_as_browser_explainer">To make this app work, tap here to make this app the default browser</string>
+</resources>

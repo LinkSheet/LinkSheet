@@ -3,6 +3,7 @@ package fe.linksheet.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
@@ -18,6 +19,7 @@ import fe.linksheet.composable.preferred.PreferredSettingsRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.preferredSettingsRoute
 import fe.linksheet.settingsRoute
+import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 class MainActivity : ComponentActivity() {
@@ -27,44 +29,49 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            Scaffold(
-                containerColor = Color.Transparent,
-                contentColor = MaterialTheme.colorScheme.onBackground
-            ) { padding ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding)
-                        .consumeWindowInsets(padding)
-                        .windowInsetsPadding(
-                            WindowInsets.safeDrawing.only(
-                                WindowInsetsSides.Horizontal,
+            AppTheme {
+                Scaffold(
+                    containerColor = Color.Transparent,
+                    contentColor = MaterialTheme.colorScheme.background
+                ) { padding ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(padding)
+                            .consumeWindowInsets(padding)
+                            .windowInsetsPadding(
+                                WindowInsets.safeDrawing.only(
+                                    WindowInsetsSides.Horizontal,
+                                ),
                             ),
-                        ),
-                ) {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        TopAppBar(
-                            title = {
-                                Text(
-                                    text = stringResource(id = R.string.app_name),
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontFamily = HkGroteskFontFamily
+                    ) {
+                        Surface(color = MaterialTheme.colorScheme.surface) {
+                            Column(modifier = Modifier.fillMaxSize()) {
+                                TopAppBar(
+                                    title = {
+                                        Text(
+                                            text = stringResource(id = R.string.app_name),
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontFamily = HkGroteskFontFamily,
+                                            color = MaterialTheme.colorScheme.onSurface
+                                        )
+                                    }
                                 )
-                            }
-                        )
 
-                        Spacer(modifier = Modifier.height(5.dp))
+                                Spacer(modifier = Modifier.height(5.dp))
 
-                        NavHost(
-                            navController = navController,
-                            startDestination = settingsRoute,
-                        ) {
-                            composable(route = settingsRoute) {
-                                SettingsRoute(navController)
-                            }
+                                NavHost(
+                                    navController = navController,
+                                    startDestination = settingsRoute,
+                                ) {
+                                    composable(route = settingsRoute) {
+                                        SettingsRoute(navController)
+                                    }
 
-                            composable(route = preferredSettingsRoute){
-                                PreferredSettingsRoute(navController)
+                                    composable(route = preferredSettingsRoute) {
+                                        PreferredSettingsRoute(navController)
+                                    }
+                                }
                             }
                         }
                     }

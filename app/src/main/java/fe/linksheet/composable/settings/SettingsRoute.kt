@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -33,8 +34,12 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                     fontFamily = HkGroteskFontFamily,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(text = stringResource(id = R.string.set_as_browser_explainer))
+                Text(
+                    text = stringResource(id = R.string.set_as_browser_explainer),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
         }
 
@@ -45,8 +50,12 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                     fontFamily = HkGroteskFontFamily,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(text = stringResource(id = R.string.preferred_apps_settings))
+                Text(
+                    text = stringResource(id = R.string.preferred_apps_settings),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
         }
     }

@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -41,14 +42,18 @@ fun PreferredSettingsRoute(
             fontFamily = HkGroteskFontFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp,
+            color = MaterialTheme.colorScheme.onSurface
         )
-        
+
         Spacer(modifier = Modifier.height(10.dp))
 
         LazyColumn(content = {
             items(viewModel.preferredApps) { (host, info) ->
-                if(info != null){
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                if (info != null) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
                         Row {
                             Image(
                                 bitmap = getBitmapFromImage(
@@ -62,13 +67,23 @@ fun PreferredSettingsRoute(
                             Spacer(modifier = Modifier.width(10.dp))
 
                             Column {
-                                Text(text = info.displayLabel, fontSize = 16.sp)
-                                Text(text = host)
+                                Text(
+                                    text = info.displayLabel, fontSize = 16.sp,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Text(
+                                    text = host,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
                             }
                         }
 
                         IconButton(onClick = { viewModel.deletePreferredApp(host) }) {
-                            Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear icon")
+                            Icon(
+                                imageVector = Icons.Default.Clear,
+                                contentDescription = "Clear icon",
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
                         }
                     }
                 }

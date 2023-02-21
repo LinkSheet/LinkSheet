@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "fe.linksheet"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "0.0.1"
@@ -79,8 +79,6 @@ dependencies {
 
     implementation("com.google.android.material:material:1.8.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.29.1-alpha")
-
-    implementation("com.github.BILLyTheLiTTle:LazyColumns:0.2.8")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

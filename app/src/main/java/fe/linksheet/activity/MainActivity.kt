@@ -1,5 +1,6 @@
 package fe.linksheet.activity
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +16,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.R
+import fe.linksheet.appsWhichCanOpenLinks
+import fe.linksheet.composable.apps.AppsWhichCanOpenLinks
 import fe.linksheet.composable.preferred.PreferredSettingsRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.preferredSettingsRoute
@@ -70,6 +73,12 @@ class MainActivity : ComponentActivity() {
 
                                     composable(route = preferredSettingsRoute) {
                                         PreferredSettingsRoute(navController)
+                                    }
+
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                        composable(route = appsWhichCanOpenLinks) {
+                                            AppsWhichCanOpenLinks(navController)
+                                        }
                                     }
                                 }
                             }

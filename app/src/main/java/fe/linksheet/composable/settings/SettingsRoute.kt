@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fe.linksheet.R
+import fe.linksheet.appsWhichCanOpenLinks
 import fe.linksheet.preferredSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
@@ -54,6 +55,22 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                 )
                 Text(
                     text = stringResource(id = R.string.preferred_apps_settings),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
+
+        ClickableRow(onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
+            Column {
+                Text(
+                    text = stringResource(id = R.string.apps_which_can_open_links),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = stringResource(id = R.string.apps_which_can_open_links_explainer_2),
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }

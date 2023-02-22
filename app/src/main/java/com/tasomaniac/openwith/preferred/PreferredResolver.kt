@@ -9,6 +9,7 @@ import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IconLoader
+import fe.linksheet.extension.toDisplayActivityInfo
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.net.URI
@@ -38,13 +39,6 @@ object PreferredResolver : KoinComponent {
             PackageManager.MATCH_DEFAULT_ONLY
         )
 
-        return resolveInfo?.let {
-            DisplayActivityInfo(
-                activityInfo = it.activityInfo,
-                displayLabel = it.loadLabel(context.packageManager).toString()
-            ).apply {
-                displayIcon = IconLoader.loadFor(context, it.activityInfo)
-            }
-        }
+        return resolveInfo?.toDisplayActivityInfo(context)
     }
 }

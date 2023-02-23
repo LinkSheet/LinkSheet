@@ -75,7 +75,10 @@ object ResolveListGrouper {
             lastChosenComponent,
         )
 
-        return Triple(grouped, filteredItem, showExtended)
+        return Triple(grouped, filteredItem, showExtended).also {
+            filteredItem = null
+            showExtended = false
+        }
     }
 
     /**

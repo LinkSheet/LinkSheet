@@ -5,30 +5,43 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fe.linksheet.R
 import fe.linksheet.appsWhichCanOpenLinks
+import fe.linksheet.extension.observeAsState
 import fe.linksheet.preferredSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @Composable
 fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = viewModel()) {
     val context = LocalContext.current
+    var enabled by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.padding(horizontal = 5.dp)) {
-        ClickableRow(onClick = {
-            viewModel.openDefaultBrowserSettings(context)
-        }, enabled = !viewModel.checkDefaultBrowser(context)) {
+    LaunchedEffect(Unit) {
+        enabled = !viewModel.checkDefaultBrowser(context)
+    }
+
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
+    val state = lifecycleState.value
+
+    if (state == Lifecycle.Event.ON_RESUME) {
+        enabled = !viewModel.checkDefaultBrowser(context)
+    }
+
+    Column(modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp)) {
+        ClickableRow(onClick = { viewModel.openDefaultBrowserSettings(context) }, enabled = enabled) {
             Column {
                 Text(
                     text = stringResource(id = R.string.set_as_browser),

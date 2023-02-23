@@ -117,7 +117,6 @@ class BottomSheetActivity : ComponentActivity() {
     @Composable
     private fun OpenWithPreferred(result: IntentResolverResult) {
         val filteredItem = result.filteredItem!!
-        Spacer(modifier = Modifier.height(10.dp))
 
         Row(
             modifier = Modifier

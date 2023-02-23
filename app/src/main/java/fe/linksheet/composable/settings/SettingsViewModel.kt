@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
+import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -85,12 +86,13 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     PackageManager.MATCH_ALL
                 )
             }
-            .filter {
-                val state = manager.getDomainVerificationUserState(it.activityInfo.packageName)
-                state != null && state.isLinkHandlingAllowed && state.hostToStateMap.isNotEmpty()
+            .filter { resolveInfo ->
+                val state = manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
+                state != null && state.isLinkHandlingAllowed && state.hostToStateMap.isNotEmpty() && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
             }
             .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
             .map { it.toDisplayActivityInfo(context) }
+            .sortedBy { it.displayLabel }
             .toList()
     }
 

@@ -122,7 +122,8 @@ class BottomSheetActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 28.dp)
-                .height(60.dp)
+                .height(60.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 bitmap = getBitmapFromImage(
@@ -139,8 +140,10 @@ class BottomSheetActivity : ComponentActivity() {
                 Text(
                     text = stringResource(
                         id = R.string.open_with_app,
-                        filteredItem.displayLabel
-                    )
+                        filteredItem.displayLabel,
+                    ),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold
                 )
             }
         }

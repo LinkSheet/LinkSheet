@@ -12,8 +12,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +33,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppsWhichCanOpenLinks(
@@ -44,10 +43,11 @@ fun AppsWhichCanOpenLinks(
     val context = LocalContext.current
     var refreshing by remember { mutableStateOf(false) }
 
+    var filter by remember { mutableStateOf("") }
     val fetch: suspend CoroutineScope.() -> Unit = {
         refreshing = true
-        viewModel.loadAppsWhichCanHandleLinks(context)
-        delay(50)
+        viewModel.loadAppsWhichCanHandleLinks(context, filter)
+        delay(100)
         refreshing = false
     }
 
@@ -59,9 +59,14 @@ fun AppsWhichCanOpenLinks(
         refreshScope.launch(block = fetch)
     })
 
+
     Box(modifier = Modifier.pullRefresh(state)) {
         PullRefreshIndicator(refreshing, state, Modifier.align(Alignment.TopCenter))
-        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 15.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 15.dp)
+        ) {
             Text(
                 text = stringResource(id = R.string.apps_which_can_open_links),
                 fontFamily = HkGroteskFontFamily,
@@ -76,8 +81,24 @@ fun AppsWhichCanOpenLinks(
                 color = MaterialTheme.colorScheme.onSurface
             )
 
+            Spacer(modifier = Modifier.height(10.dp))
+
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                placeholder = { Text(text = stringResource(id = R.string.search)) },
+                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MaterialTheme.colorScheme.primary),
+                shape = RoundedCornerShape(size = 32.dp),
+                value = filter,
+                onValueChange = { value ->
+                    filter = value
+                    if (value.isNotEmpty()) {
+                        viewModel.loadAppsWhichCanHandleLinks(context, value)
+                    }
+                })
 
             Spacer(modifier = Modifier.height(10.dp))
+
             LazyColumn(modifier = Modifier.fillMaxSize(), content = {
                 if (!refreshing) {
                     items(viewModel.whichAppsCanHandleLinks) { info ->

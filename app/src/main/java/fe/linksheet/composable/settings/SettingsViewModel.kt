@@ -74,7 +74,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun loadAppsWhichCanHandleLinks(context: Context) {
+    fun loadAppsWhichCanHandleLinks(context: Context, filter: String? = null) {
         val manager = context.getSystemService(DomainVerificationManager::class.java)
         viewModelScope.launch(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
@@ -93,6 +93,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     }
                     .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
                     .map { it.toDisplayActivityInfo(context) }
+                    .filter { if (filter != null) it.displayLabel.contains(filter, ignoreCase = true) else true }
                     .sortedBy { it.displayLabel }
                     .toList()
             )

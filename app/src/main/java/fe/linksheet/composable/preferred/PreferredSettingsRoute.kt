@@ -45,51 +45,54 @@ fun PreferredSettingsRoute(
             color = MaterialTheme.colorScheme.onSurface
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
-
-        LazyColumn(content = {
-            items(viewModel.preferredApps) { (host, info) ->
-                if (info != null) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Row {
-                            Image(
-                                bitmap = getBitmapFromImage(
-                                    context,
-                                    info.displayIcon!!
-                                ).asImageBitmap(),
-                                contentDescription = info.displayLabel,
-                                modifier = Modifier.size(42.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
-                                Text(
-                                    text = info.displayLabel, fontSize = 16.sp,
-                                    color = MaterialTheme.colorScheme.onSurface
+        if (viewModel.preferredApps.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(10.dp))
+            LazyColumn(content = {
+                items(viewModel.preferredApps) { (host, info) ->
+                    if (info != null) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row {
+                                Image(
+                                    bitmap = getBitmapFromImage(
+                                        context,
+                                        info.displayIcon!!
+                                    ).asImageBitmap(),
+                                    contentDescription = info.displayLabel,
+                                    modifier = Modifier.size(42.dp)
                                 )
-                                Text(
-                                    text = host,
-                                    color = MaterialTheme.colorScheme.onSurface
+
+                                Spacer(modifier = Modifier.width(10.dp))
+
+                                Column {
+                                    Text(
+                                        text = info.displayLabel, fontSize = 16.sp,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = host,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            }
+
+                            IconButton(onClick = { viewModel.deletePreferredApp(host) }) {
+                                Icon(
+                                    imageVector = Icons.Default.Clear,
+                                    contentDescription = "Clear icon",
+                                    tint = MaterialTheme.colorScheme.onSurface
                                 )
                             }
                         }
 
-                        IconButton(onClick = { viewModel.deletePreferredApp(host) }) {
-                            Icon(
-                                imageVector = Icons.Default.Clear,
-                                contentDescription = "Clear icon",
-                                tint = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
-
-                    Spacer(modifier = Modifier.height(10.dp))
                 }
-            }
-        })
+            })
+        } else {
+            Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+        }
     }
 }

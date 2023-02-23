@@ -8,9 +8,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,7 +30,11 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.util.getBitmapFromImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppsWhichCanOpenLinks(
@@ -34,53 +42,76 @@ fun AppsWhichCanOpenLinks(
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
+    var refreshing by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-        Text(
-            text = stringResource(id = R.string.apps_which_can_open_links),
-            fontFamily = HkGroteskFontFamily,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+    val fetch: suspend CoroutineScope.() -> Unit = {
+        refreshing = true
+        viewModel.loadAppsWhichCanHandleLinks(context)
+        delay(50)
+        refreshing = false
+    }
 
-        Text(
-            text = stringResource(id = R.string.apps_which_can_open_links_explainer),
-            fontFamily = HkGroteskFontFamily,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+    LaunchedEffect(Unit, fetch)
 
-        Spacer(modifier = Modifier.height(10.dp))
+    val refreshScope = rememberCoroutineScope()
 
-        LazyColumn(content = {
-            items(viewModel.loadAppsWhichCanHandleLinks(context)) { info ->
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(6.dp))
-                    .clickable {
-                        viewModel.openOpenByDefaultSettings(context, info.packageName())
-                    }.padding(5.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Image(
-                        bitmap = getBitmapFromImage(
-                            context,
-                            info.displayIcon!!
-                        ).asImageBitmap(),
-                        contentDescription = info.displayLabel,
-                        modifier = Modifier.size(42.dp)
-                    )
+    val state = rememberPullRefreshState(refreshing, onRefresh = {
+        refreshScope.launch(block = fetch)
+    })
 
-                    Spacer(modifier = Modifier.width(10.dp))
+    Box(modifier = Modifier.pullRefresh(state)) {
+        PullRefreshIndicator(refreshing, state, Modifier.align(Alignment.TopCenter))
+        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 15.dp)) {
+            Text(
+                text = stringResource(id = R.string.apps_which_can_open_links),
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
 
-                    Column {
-                        Text(
-                            text = info.displayLabel, fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
+            Text(
+                text = stringResource(id = R.string.apps_which_can_open_links_explainer),
+                fontFamily = HkGroteskFontFamily,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+
+            Spacer(modifier = Modifier.height(10.dp))
+            LazyColumn(modifier = Modifier.fillMaxSize(), content = {
+                if (!refreshing) {
+                    items(viewModel.whichAppsCanHandleLinks) { info ->
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(6.dp))
+                            .clickable {
+                                viewModel.openOpenByDefaultSettings(context, info.packageName())
+                            }
+                            .padding(5.dp), verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                bitmap = getBitmapFromImage(
+                                    context,
+                                    info.displayIcon!!
+                                ).asImageBitmap(),
+                                contentDescription = info.displayLabel,
+                                modifier = Modifier.size(42.dp)
+                            )
+
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Column {
+                                Text(
+                                    text = info.displayLabel, fontSize = 16.sp,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
-
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        })
+            })
+        }
     }
 }

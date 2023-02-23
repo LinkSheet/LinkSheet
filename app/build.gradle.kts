@@ -17,6 +17,7 @@ android {
         targetSdk = 33
         versionCode = 4
         versionName = "0.0.4"
+        setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

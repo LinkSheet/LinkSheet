@@ -2,12 +2,15 @@ package fe.linksheet.composable.settings
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
@@ -73,19 +76,19 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     @RequiresApi(Build.VERSION_CODES.S)
     fun loadAppsWhichCanHandleLinks(context: Context) {
         val manager = context.getSystemService(DomainVerificationManager::class.java)
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
             whichAppsCanHandleLinks.addAll(
-                context.packageManager.getInstalledApplications(PackageManager.MATCH_ALL)
+                context.packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES or PackageManager.GET_SERVICES)
                     .asSequence()
-                    .mapNotNull {
-                        context.packageManager.resolveActivity(
-                            Intent().setPackage(it.packageName),
-                            PackageManager.MATCH_ALL
-                        )
+                    .mapNotNull { packageInfo ->
+                        context.packageManager.queryIntentActivities(
+                            Intent().setPackage(packageInfo.packageName), PackageManager.MATCH_ALL
+                        ).firstOrNull() ?: return@mapNotNull null
                     }
                     .filter { resolveInfo ->
-                        val state = manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
+                        val state =
+                            manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
                         state != null && state.isLinkHandlingAllowed && state.hostToStateMap.isNotEmpty() && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
                     }
                     .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }

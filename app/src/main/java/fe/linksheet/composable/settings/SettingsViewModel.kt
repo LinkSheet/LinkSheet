@@ -32,6 +32,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     private val database by inject<LinkSheetDatabase>()
 
     val preferredApps = mutableStateListOf<Pair<String, DisplayActivityInfo?>>()
+    val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
 
     fun loadPreferredApps(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -75,25 +76,29 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun loadAppsWhichCanHandleLinks(context: Context): List<DisplayActivityInfo> {
+    fun loadAppsWhichCanHandleLinks(context: Context) {
         val manager = context.getSystemService(DomainVerificationManager::class.java)
-
-        return context.packageManager.getInstalledApplications(PackageManager.MATCH_ALL)
-            .asSequence()
-            .mapNotNull {
-                context.packageManager.resolveActivity(
-                    Intent().setPackage(it.packageName),
-                    PackageManager.MATCH_ALL
-                )
-            }
-            .filter { resolveInfo ->
-                val state = manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
-                state != null && state.isLinkHandlingAllowed && state.hostToStateMap.isNotEmpty() && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
-            }
-            .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
-            .map { it.toDisplayActivityInfo(context) }
-            .sortedBy { it.displayLabel }
-            .toList()
+        viewModelScope.launch(Dispatchers.IO){
+            whichAppsCanHandleLinks.clear()
+            whichAppsCanHandleLinks.addAll(
+                context.packageManager.getInstalledApplications(PackageManager.MATCH_ALL)
+                    .asSequence()
+                    .mapNotNull {
+                        context.packageManager.resolveActivity(
+                            Intent().setPackage(it.packageName),
+                            PackageManager.MATCH_ALL
+                        )
+                    }
+                    .filter { resolveInfo ->
+                        val state = manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
+                        state != null && state.isLinkHandlingAllowed && state.hostToStateMap.isNotEmpty() && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
+                    }
+                    .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
+                    .map { it.toDisplayActivityInfo(context) }
+                    .sortedBy { it.displayLabel }
+                    .toList()
+            )
+        }
     }
 
     companion object {

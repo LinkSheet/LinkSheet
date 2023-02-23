@@ -5,13 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.os.Build
-import android.os.UserManager
 import android.util.Log
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.linksheet.BuildConfig
 import fe.linksheet.util.sourceIntent
-import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 object ResolveIntents {
 

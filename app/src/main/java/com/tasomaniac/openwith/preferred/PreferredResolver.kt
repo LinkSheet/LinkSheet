@@ -33,11 +33,10 @@ object PreferredResolver : KoinComponent {
     }
 
     fun PreferredApp.resolve(context: Context): DisplayActivityInfo? {
-        val intent = Intent().setComponent(componentName)
-        val resolveInfo = context.packageManager.resolveActivity(
-            intent,
-            PackageManager.MATCH_DEFAULT_ONLY
-        )
+        val intent = Intent().setPackage(componentName.packageName)
+        Log.d("PreferredResolver", "Resolve intent: $intent")
+        val resolveInfo = context.packageManager.resolveActivity(intent, PackageManager.MATCH_ALL)
+        Log.d("PreferredResolver", "ResolveInfo: $resolveInfo")
 
         return resolveInfo?.toDisplayActivityInfo(context)
     }

@@ -15,8 +15,8 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 26
         targetSdk = 33
-        versionCode = 3
-        versionName = "0.0.3"
+        versionCode = 4
+        versionName = "0.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

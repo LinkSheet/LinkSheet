@@ -37,10 +37,9 @@ fun BottomDrawer(
                 Surface(
                     color = MaterialTheme.colorScheme.surface,
                     tonalElevation = 6.dp,
-
-                    ) {
+                ) {
                     Column {
-                        Spacer(modifier = Modifier.height(15.dp))
+                        Spacer(modifier = Modifier.height(5.dp))
                         sheetContent()
                         Spacer(modifier = Modifier.height(28.dp))
                     }

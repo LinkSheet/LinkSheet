@@ -174,6 +174,8 @@ class BottomSheetActivity : ComponentActivity() {
 
     @Composable
     private fun OpenWith(result: IntentResolverResult) {
+        Spacer(modifier = Modifier.height(10.dp))
+
         Text(
             text = stringResource(id = R.string.open_with),
             fontFamily = HkGroteskFontFamily,

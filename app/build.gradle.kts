@@ -27,10 +27,10 @@ android {
 
     buildTypes {
         release {
-//            minifyEnabled = false
-//            proguardFiles getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro"
+            isMinifyEnabled = true
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -55,14 +55,10 @@ android {
 
 dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.10")
-
-    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
 
     implementation("androidx.room:room-runtime:2.5.0")
     annotationProcessor("androidx.room:room-compiler:2.5.0")
     kapt("androidx.room:room-compiler:2.5.0")
-//    ksp("androidx.room:room-compiler:2.5.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")

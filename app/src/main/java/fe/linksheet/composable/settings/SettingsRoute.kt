@@ -1,6 +1,8 @@
 package fe.linksheet.composable.settings
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -27,16 +29,24 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 @Composable
 fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = viewModel()) {
     val context = LocalContext.current
-    var enabled by remember { mutableStateOf(false) }
+    var defaultBrowserEnabled by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        enabled = !viewModel.checkDefaultBrowser(context)
+        defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
     LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            enabled = !viewModel.checkDefaultBrowser(context)
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME && lifecycleState.second != Lifecycle.Event.ON_START) {
+            defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
+            if(!viewModel.getUsageStatsAllowed(context)){
+                viewModel.onUsageStatsSorting(false)
+            }
+
+            if(viewModel.wasTogglingUsageStatsSorting){
+                viewModel.onUsageStatsSorting(true)
+                viewModel.wasTogglingUsageStatsSorting = false
+            }
         }
     }
 
@@ -49,7 +59,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             ClickableRow(
                 padding = 10.dp,
                 onClick = { viewModel.openDefaultBrowserSettings(context) },
-                enabled = enabled
+                enabled = defaultBrowserEnabled
             ) {
                 Column {
                     Text(

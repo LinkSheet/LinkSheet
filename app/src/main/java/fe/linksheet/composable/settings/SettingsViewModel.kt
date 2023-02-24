@@ -56,8 +56,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
 
     var usageStatsSorting by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
+        preferenceRepository.getBoolean(PreferenceRepository.usageStatsSorting) ?: false
     )
+    var wasTogglingUsageStatsSorting by mutableStateOf(false)
+
     var enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
@@ -189,6 +191,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     fun openUsageStatsSettings(context: Context) {
         context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        wasTogglingUsageStatsSorting = true
     }
 
     fun getUsageStatsAllowed(context: Context): Boolean {

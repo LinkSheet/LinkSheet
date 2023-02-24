@@ -34,15 +34,17 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
-    LaunchedEffect(lifecycleState.value){
+    LaunchedEffect(lifecycleState.value) {
         if (lifecycleState.value == Lifecycle.Event.ON_RESUME) {
             enabled = !viewModel.checkDefaultBrowser(context)
         }
     }
 
-    LazyColumn(modifier = Modifier
-        .fillMaxSize()
-        .padding(horizontal = 5.dp)) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 5.dp)
+    ) {
         item {
             ClickableRow(
                 padding = 10.dp,
@@ -86,7 +88,9 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
         }
 
         item {
-            ClickableRow(padding = 10.dp, onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
+            ClickableRow(
+                padding = 10.dp,
+                onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
                 Column {
                     Text(
                         text = stringResource(id = R.string.apps_which_can_open_links),
@@ -104,29 +108,20 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
         }
 
         item {
-            ClickableRow(padding = 10.dp, verticalAlignment = Alignment.CenterVertically, onClick = {
-                viewModel.onEnableCopyButton(!viewModel.enableCopyButton)
-            }){
-                Column(modifier = Modifier.fillMaxWidth(0.7f)) {
-                    Text(
-                        text = stringResource(id = R.string.enable_copy_button),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = stringResource(id = R.string.enable_copy_button_explainer),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
+            SwitchRow(
+                checked = viewModel.enableCopyButton,
+                onChange = {
+                    viewModel.onEnableCopyButton(it)
+                },
+                headlineId = R.string.enable_copy_button,
+                subtitleId = R.string.enable_copy_button_explainer
+            )
+        }
 
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End){
-                    Switch(checked = viewModel.enableCopyButton, onCheckedChange = {
-                        viewModel.onEnableCopyButton(it)
-                    })
-                }
-            }
+        item {
+            SwitchRow(checked = viewModel.singleTap, onChange = {
+                viewModel.onSingleTap(it)
+            }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)
         }
     }
 }

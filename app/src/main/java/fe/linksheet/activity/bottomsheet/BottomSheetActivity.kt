@@ -112,7 +112,10 @@ class BottomSheetActivity : ComponentActivity() {
                         if (bottomSheetViewModel.result?.filteredItem == null) {
                             OpenWith(result = bottomSheetViewModel.result!!, intent.dataString!!)
                         } else {
-                            OpenWithPreferred(result = bottomSheetViewModel.result!!, intent.dataString!!)
+                            OpenWithPreferred(
+                                result = bottomSheetViewModel.result!!,
+                                intent.dataString!!
+                            )
                         }
                     }
                 })
@@ -205,7 +208,7 @@ class BottomSheetActivity : ComponentActivity() {
                 selectedItem = selectedItem,
                 onSelectedItemChange = { selectedItem = it })
 
-            ButtonRow(url = url,selectedItem != -1) { always ->
+            ButtonRow(url = url, selectedItem != -1) { always ->
                 launchApp(result.resolved[selectedItem], always)
             }
         }
@@ -232,13 +235,21 @@ class BottomSheetActivity : ComponentActivity() {
                             )
                             .combinedClickable(
                                 onClick = {
-                                    if (selectedItem == index) launchApp(info)
-                                    else onSelectedItemChange(index)
+                                    if (bottomSheetViewModel.singleTap) {
+                                        launchApp(info)
+                                    } else {
+                                        if (selectedItem == index) launchApp(info)
+                                        else onSelectedItemChange(index)
+                                    }
                                 },
                                 onDoubleClick = {
                                     launchApp(info)
                                 },
-                                onLongClick = { }
+                                onLongClick = {
+                                    if (bottomSheetViewModel.singleTap) {
+                                        onSelectedItemChange(index)
+                                    }
+                                }
                             )
                             .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else androidx.compose.ui.graphics.Color.Transparent)
                             .padding(10.dp)
@@ -277,7 +288,7 @@ class BottomSheetActivity : ComponentActivity() {
                 .height(50.dp)
                 .padding(horizontal = 15.dp),
         ) {
-            if(bottomSheetViewModel.enableCopyButton){
+            if (bottomSheetViewModel.enableCopyButton) {
                 OutlinedButton(onClick = {
                     clipboard.setPrimaryClip(ClipData.newPlainText("URL", url))
                     Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()

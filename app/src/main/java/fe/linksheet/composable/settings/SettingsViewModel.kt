@@ -30,6 +30,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     val preferredApps = mutableStateListOf<Pair<String, DisplayActivityInfo?>>()
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
+    var enableCopyButton by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false)
+    var singleTap by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false)
 
     fun loadPreferredApps(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -102,6 +104,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onEnableCopyButton(it: Boolean) {
         this.enableCopyButton = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.enableCopyButton, it)
+    }
+
+    fun onSingleTap(it: Boolean) {
+        this.singleTap = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.singleTap, it)
     }
 
 //    companion object {

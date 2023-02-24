@@ -11,16 +11,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.tasomaniac.openwith.resolver.BrowserHandler
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.extension.observeAsState
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,9 +38,14 @@ fun PreferredBrowserSettingsRoute(
         viewModel.loadBrowsers(context)
     }
 
-    Log.d("Browser", "${viewModel.browserMode}")
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
+    LaunchedEffect(lifecycleState.value) {
+        if (lifecycleState.value == Lifecycle.Event.ON_RESUME) {
+            viewModel.loadBrowsers(context)
+        }
+    }
 
-    Column(modifier = Modifier.padding(horizontal = 15.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
         Text(
             text = stringResource(id = R.string.preferred_browser),
             fontFamily = HkGroteskFontFamily,

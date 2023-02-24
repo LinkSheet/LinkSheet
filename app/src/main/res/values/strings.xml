@@ -24,7 +24,7 @@
     <string name="confirm">Confirm</string>
     <string name="clear">Clear</string>
     <string name="usage_stats_sorting">Sort apps by usage</string>
-    <string name="usage_stats_sorting_explainer">Sorts apps by usage stats. Permission is requested on first toggle.</string>
+    <string name="usage_stats_sorting_explainer">Include usage stats in sorting algorithm. Permission is requested on first toggle.</string>
     <string name="preferred_browser">Preferred browser</string>
     <string name="preferred_browser_explainer">Set preferred browser mode</string>
     <string name="always_ask">Always ask</string>

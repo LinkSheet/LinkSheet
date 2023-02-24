@@ -6,14 +6,22 @@ import androidx.lifecycle.LifecycleEventObserver
 
 // https://stackoverflow.com/a/69061897
 @Composable
-fun Lifecycle.observeAsState(): Pair<Lifecycle.Event, Lifecycle.Event> {
+fun Lifecycle.observeAsState(ignoreFirst: Lifecycle.Event? = null): Pair<Lifecycle.Event, Lifecycle.Event> {
     var state by remember { mutableStateOf(Lifecycle.Event.ON_ANY) }
     var lastState by remember { mutableStateOf(Lifecycle.Event.ON_ANY) }
+    var isFirst by remember { mutableStateOf(true) }
 
     DisposableEffect(this) {
         val observer = LifecycleEventObserver { _, event ->
-            lastState = state
-            state = event
+            if(isFirst && event == ignoreFirst){
+                isFirst = false
+                return@LifecycleEventObserver
+            }
+
+            if(!isFirst || ignoreFirst == null){
+                lastState = state
+                state = event
+            }
         }
         this@observeAsState.addObserver(observer)
         onDispose {

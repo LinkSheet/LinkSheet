@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -35,9 +36,9 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
         defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
     }
 
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
     LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME && lifecycleState.second != Lifecycle.Event.ON_START) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
             if(!viewModel.getUsageStatsAllowed(context)){
                 viewModel.onUsageStatsSorting(false)

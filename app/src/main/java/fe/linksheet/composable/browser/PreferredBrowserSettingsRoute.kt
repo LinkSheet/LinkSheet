@@ -33,14 +33,14 @@ fun PreferredBrowserSettingsRoute(
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(Unit) {
         viewModel.loadBrowsers(context)
     }
 
     LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME && lifecycleState.second != Lifecycle.Event.ON_START) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             viewModel.loadBrowsers(context)
         }
     }

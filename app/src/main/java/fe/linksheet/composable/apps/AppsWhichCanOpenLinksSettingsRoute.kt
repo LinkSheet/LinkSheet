@@ -64,10 +64,10 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         }
     }
 
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME && lifecycleState.second != Lifecycle.Event.ON_START) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             fetch(false)
         }
     }

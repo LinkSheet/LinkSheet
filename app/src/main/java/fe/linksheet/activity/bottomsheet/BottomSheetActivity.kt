@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
 import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
@@ -47,7 +48,9 @@ import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 class BottomSheetActivity : ComponentActivity() {
     private val bottomSheetViewModel: BottomSheetViewModel by viewModels()
@@ -92,7 +95,7 @@ class BottomSheetActivity : ComponentActivity() {
                         ).show()
                     }
 
-                    launchApp(app, true)
+                    lifecycleScope.launch { launchApp(app, true) }
                 }
             }
         }
@@ -110,15 +113,22 @@ class BottomSheetActivity : ComponentActivity() {
                     }
                 }
 
+                val launchScope = rememberCoroutineScope()
+
                 BottomDrawer(drawerState = drawerState, sheetContent = {
                     val uri = intent.getUri()
                     if (bottomSheetViewModel.result != null && uri != null) {
                         if (bottomSheetViewModel.result?.filteredItem == null) {
-                            OpenWith(result = bottomSheetViewModel.result!!, uri)
+                            OpenWith(
+                                result = bottomSheetViewModel.result!!,
+                                uri = uri,
+                                launchScope = launchScope
+                            )
                         } else {
                             OpenWithPreferred(
                                 result = bottomSheetViewModel.result!!,
-                                uri
+                                uri = uri,
+                                launchScope = launchScope
                             )
                         }
                     }
@@ -135,7 +145,11 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun OpenWithPreferred(result: IntentResolverResult, uri: Uri) {
+    private fun OpenWithPreferred(
+        result: IntentResolverResult,
+        uri: Uri,
+        launchScope: CoroutineScope
+    ) {
         val filteredItem = result.filteredItem!!
 
         Row(
@@ -169,7 +183,7 @@ class BottomSheetActivity : ComponentActivity() {
             result = result,
             uri = uri,
             enabled = true,
-            onClick = { launchApp(filteredItem, it) })
+            onClick = { launchScope.launch { launchApp(filteredItem, it) } })
 
         Divider(color = MaterialTheme.colorScheme.tertiary, thickness = 0.5.dp)
 
@@ -190,12 +204,13 @@ class BottomSheetActivity : ComponentActivity() {
             AppList(
                 result = result,
                 selectedItem = -1,
-                onSelectedItemChange = { })
+                onSelectedItemChange = { }, launchScope = launchScope
+            )
         }
     }
 
     @Composable
-    private fun OpenWith(result: IntentResolverResult, uri: Uri) {
+    private fun OpenWith(result: IntentResolverResult, uri: Uri, launchScope: CoroutineScope) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
@@ -220,10 +235,13 @@ class BottomSheetActivity : ComponentActivity() {
             AppList(
                 result = result,
                 selectedItem = selectedItem,
-                onSelectedItemChange = { selectedItem = it })
+                onSelectedItemChange = { selectedItem = it }, launchScope = launchScope
+            )
 
             ButtonRow(result = result, uri = uri, selectedItem != -1) { always ->
-                launchApp(result.resolved[selectedItem], always)
+                launchScope.launch {
+                    launchApp(result.resolved[selectedItem], always)
+                }
             }
         }
     }
@@ -233,7 +251,8 @@ class BottomSheetActivity : ComponentActivity() {
     private fun AppList(
         result: IntentResolverResult,
         selectedItem: Int,
-        onSelectedItemChange: (Int) -> Unit
+        onSelectedItemChange: (Int) -> Unit,
+        launchScope: CoroutineScope
     ) {
         if (result.totalCount() > 0) {
             LazyColumn(
@@ -258,14 +277,20 @@ class BottomSheetActivity : ComponentActivity() {
                                 .combinedClickable(
                                     onClick = {
                                         if (bottomSheetViewModel.singleTap) {
-                                            launchApp(info)
+                                            launchScope.launch {
+                                                launchApp(info)
+                                            }
                                         } else {
-                                            if (selectedItem == index) launchApp(info)
+                                            if (selectedItem == index) launchScope.launch {
+                                                launchApp(info)
+                                            }
                                             else onSelectedItemChange(index)
                                         }
                                     },
                                     onDoubleClick = {
-                                        launchApp(info)
+                                        launchScope.launch {
+                                            launchApp(info)
+                                        }
                                     },
                                     onLongClick = {
                                         if (bottomSheetViewModel.singleTap) {
@@ -328,7 +353,7 @@ class BottomSheetActivity : ComponentActivity() {
                 }) {
                     Text(text = stringResource(id = R.string.copy))
                 }
-                
+
                 Spacer(modifier = Modifier.width(5.dp))
             }
 
@@ -386,11 +411,11 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
 
-    private fun launchApp(info: DisplayActivityInfo, always: Boolean = false) {
+    private suspend fun launchApp(info: DisplayActivityInfo, always: Boolean = false) {
         val intentFrom = info.intentFrom(intent.sourceIntent())
+        bottomSheetViewModel.persistSelectedIntentAsync(intentFrom, always).await()
+
         this.startActivity(intentFrom)
         this.finish()
-
-        bottomSheetViewModel.persistSelectedIntent(intentFrom, always)
     }
 }

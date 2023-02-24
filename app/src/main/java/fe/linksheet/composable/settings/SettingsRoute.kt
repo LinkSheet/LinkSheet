@@ -1,14 +1,12 @@
 package fe.linksheet.composable.settings
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
@@ -20,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fe.linksheet.R
 import fe.linksheet.appsWhichCanOpenLinks
+import fe.linksheet.composable.ClickableRow
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.preferredSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -40,8 +39,14 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
         enabled = !viewModel.checkDefaultBrowser(context)
     }
 
-    Column(modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp)) {
-        ClickableRow(onClick = { viewModel.openDefaultBrowserSettings(context) }, enabled = enabled) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(horizontal = 5.dp)) {
+        ClickableRow(
+            padding = 10.dp,
+            onClick = { viewModel.openDefaultBrowserSettings(context) },
+            enabled = enabled
+        ) {
             Column {
                 Text(
                     text = stringResource(id = R.string.set_as_browser),
@@ -57,7 +62,9 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        ClickableRow(onClick = { navController.navigate(preferredSettingsRoute) }) {
+        ClickableRow(
+            padding = 10.dp,
+            onClick = { navController.navigate(preferredSettingsRoute) }) {
             Column {
                 Text(
                     text = stringResource(id = R.string.preferred_apps),
@@ -73,7 +80,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        ClickableRow(onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
+        ClickableRow(padding = 10.dp, onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
             Column {
                 Text(
                     text = stringResource(id = R.string.apps_which_can_open_links),
@@ -91,23 +98,5 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
     }
 }
 
-@Composable
-fun ClickableRow(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    onClick: () -> Unit,
-    content: @Composable RowScope.() -> Unit
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(6.dp))
-            .clickable(onClick = onClick)
-            .padding(10.dp).let {
-                if (!enabled) it.alpha(0.3f) else it
-            }
-    ) {
-        content()
-    }
-}
+
 

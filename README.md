@@ -1,7 +1,5 @@
 # LinkSheet
 
-A Material3 replacement for [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
-
 <!-- ---------- Badges ---------- -->
 <div align="center">
 
@@ -22,7 +20,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 <!-- ---------- Description ---------- -->
 <div align="center">
 
-LinkSheet restores the url-app-chooser that was removed in Android 12.
+LinkSheet restores the Url-App-Chooser that was removed in Android 12.
 
 </div>
 
@@ -38,6 +36,12 @@ LinkSheet restores the url-app-chooser that was removed in Android 12.
 </div>
 
  </div>
+
+## Donations
+
+You are very welcome to send me Monero (and other currencies via sites like `exch.cx`
+or `fixedfloat.com`)
+to: `883iWQ5Mbq66cr9m3WiH19ZDXRhTTKjWkMWGCNJetgPMFebe1uo3LJP7FUetmxHQP1PoR1FJuzTnz6zrPq9jPMKnMkZ4tHk`
 
 ## Acknowledgements
 

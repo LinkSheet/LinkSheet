@@ -2,17 +2,14 @@ package fe.linksheet.composable.settings
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasomaniac.openwith.data.LinkSheetDatabase
@@ -20,6 +17,7 @@ import com.tasomaniac.openwith.preferred.PreferredResolver.resolve
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -28,6 +26,7 @@ import org.koin.core.component.inject
 
 class SettingsViewModel : ViewModel(), KoinComponent {
     private val database by inject<LinkSheetDatabase>()
+    private val preferenceRepository by inject<PreferenceRepository>()
 
     val preferredApps = mutableStateListOf<Pair<String, DisplayActivityInfo?>>()
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
@@ -98,6 +97,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     .toList()
             )
         }
+    }
+
+    fun onEnableCopyButton(it: Boolean) {
+        this.enableCopyButton = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.enableCopyButton, it)
     }
 
 //    companion object {

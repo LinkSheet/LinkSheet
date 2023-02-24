@@ -15,4 +15,7 @@
     <string name="apps_which_can_open_links_explainer_2">Lists all apps which may interfere with LinkSheet\'s behavior</string>
     <string name="no_preferred_apps_set_yet">No apps have been set as preferred yet.</string>
     <string name="search">Search</string>
+    <string name="copy">Copy url</string>
+    <string name="enable_copy_button">Enable copy button</string>
+    <string name="enable_copy_button_explainer">Shows a \"Copy url\" button in the bottomsheet</string>
 </resources>

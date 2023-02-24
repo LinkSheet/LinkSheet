@@ -18,4 +18,5 @@
     <string name="copy">Copy url</string>
     <string name="enable_copy_button">Enable copy button</string>
     <string name="enable_copy_button_explainer">Shows a \"Copy url\" button in the bottomsheet</string>
+    <string name="url_copied">URL has been copied to clipboard</string>
 </resources>

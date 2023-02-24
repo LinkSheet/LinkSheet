@@ -1,5 +1,7 @@
 package fe.linksheet.activity.bottomsheet
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +13,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
@@ -19,6 +20,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
@@ -27,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -102,11 +105,11 @@ class BottomSheetActivity : ComponentActivity() {
                 }
 
                 BottomDrawer(drawerState = drawerState, sheetContent = {
-                    if (bottomSheetViewModel.result != null) {
+                    if (bottomSheetViewModel.result != null && intent.dataString != null) {
                         if (bottomSheetViewModel.result?.filteredItem == null) {
-                            OpenWith(result = bottomSheetViewModel.result!!)
+                            OpenWith(result = bottomSheetViewModel.result!!, intent.dataString!!)
                         } else {
-                            OpenWithPreferred(result = bottomSheetViewModel.result!!)
+                            OpenWithPreferred(result = bottomSheetViewModel.result!!, intent.dataString!!)
                         }
                     }
                 })
@@ -115,7 +118,7 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun OpenWithPreferred(result: IntentResolverResult) {
+    private fun OpenWithPreferred(result: IntentResolverResult, url: String) {
         val filteredItem = result.filteredItem!!
 
         Row(
@@ -148,7 +151,7 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
-        ButtonRow(enabled = true, onClick = { launchApp(filteredItem, it) })
+        ButtonRow(url = url, enabled = true, onClick = { launchApp(filteredItem, it) })
 
         Divider(color = MaterialTheme.colorScheme.tertiary, thickness = 0.5.dp)
 
@@ -175,7 +178,7 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun OpenWith(result: IntentResolverResult) {
+    private fun OpenWith(result: IntentResolverResult, url: String) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
@@ -199,7 +202,7 @@ class BottomSheetActivity : ComponentActivity() {
                 selectedItem = selectedItem,
                 onSelectedItemChange = { selectedItem = it })
 
-            ButtonRow(selectedItem != -1) { always ->
+            ButtonRow(url = url,selectedItem != -1) { always ->
                 launchApp(result.resolved[selectedItem], always)
             }
         }
@@ -261,34 +264,51 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun ButtonRow(enabled: Boolean, onClick: (always: Boolean) -> Unit) {
+    private fun ButtonRow(url: String, enabled: Boolean, onClick: (always: Boolean) -> Unit) {
+        val clipboard = getSystemService(ClipboardManager::class.java)
+        val context = LocalContext.current
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
                 .padding(horizontal = 15.dp),
-            horizontalArrangement = Arrangement.End
         ) {
-            TextButton(
-                enabled = enabled,
-                onClick = { onClick(false) }) {
-                Text(
-                    text = stringResource(id = R.string.just_once),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold
-                )
+            if(bottomSheetViewModel.enableCopyButton){
+                OutlinedButton(onClick = {
+                    clipboard.setPrimaryClip(ClipData.newPlainText("URL", url))
+                    Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
+                }) {
+                    Text(text = stringResource(id = R.string.copy))
+                }
             }
 
-            Spacer(modifier = Modifier.width(5.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                TextButton(
+                    enabled = enabled,
+                    onClick = { onClick(false) }) {
+                    Text(
+                        text = stringResource(id = R.string.just_once),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
 
-            TextButton(
-                enabled = enabled,
-                onClick = { onClick(true) }) {
-                Text(
-                    text = stringResource(id = R.string.always),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold
-                )
+                Spacer(modifier = Modifier.width(5.dp))
+
+                TextButton(
+                    enabled = enabled,
+                    onClick = { onClick(true) }) {
+                    Text(
+                        text = stringResource(id = R.string.always),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
             }
         }
     }

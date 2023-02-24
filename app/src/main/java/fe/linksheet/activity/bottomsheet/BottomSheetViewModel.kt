@@ -12,6 +12,7 @@ import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
+import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -22,8 +23,10 @@ import org.koin.core.component.inject
 class BottomSheetViewModel : ViewModel(),
     KoinComponent {
     private val database by inject<LinkSheetDatabase>()
+    private val preferenceRepository by inject<PreferenceRepository>()
 
     var result by mutableStateOf<IntentResolverResult?>(null)
+    var enableCopyButton by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false)
 
     fun resolve(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {

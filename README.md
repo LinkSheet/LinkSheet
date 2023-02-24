@@ -30,11 +30,11 @@ LinkSheet restores the url-app-chooser that was removed in Android 12.
 <div align="center">
 
 <div style="display: flex;">
-  <img src="readme/screenshot1.png" width=18%>
-  <img src="readme/screenshot2.png" width=18%>
-  <img src="readme/screenshot3.png" width=18%>
-  <img src="readme/screenshot4.png" width=18%>
-  <img src="readme/screenshot5.png" width=18%>
+  <img src="readme/screenshot1.png" width=25%>
+  <img src="readme/screenshot2.png" width=25%>
+  <img src="readme/screenshot3.png" width=25%>
+  <img src="readme/screenshot4.png" width=25%>
+  <img src="readme/screenshot5.png" width=25%>
 </div>
 
  </div>

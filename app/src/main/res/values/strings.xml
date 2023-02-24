@@ -17,7 +17,7 @@
     <string name="search">Search</string>
     <string name="copy">Copy url</string>
     <string name="enable_copy_button">Enable copy button</string>
-    <string name="enable_copy_button_explainer">Shows a \"Copy url\" button in the bottomsheet</string>
+    <string name="enable_copy_button_explainer">Shows a \"Copy url\" button in the bottom sheet</string>
     <string name="url_copied">URL has been copied to clipboard</string>
     <string name="single_tap">Enable single tap</string>
     <string name="single_tap_explainer">Only require one tap instead of two to open apps; Long-press to select app</string>
@@ -34,7 +34,7 @@
     <string name="no_app_to_handle_link_found">No app to handle link found!</string>
     <string name="open_settings">Open settings</string>
     <string name="no_such_app_found">No such app found!</string>
-    <string name="enable_send_button">Enable send button</string>
-    <string name="enable_send_button_explainer">Show a button in the bottom sheet which allows you to share the url to other apps as if you selected it from a \"Share to\" menu</string>
-    <string name="send_to">Send to</string>
+    <string name="enable_send_button">Enable "Share to" button</string>
+    <string name="enable_send_button_explainer">Shows a button in the bottom sheet which allows you to share the url to other apps as if you selected it from a \"Share to\" menu</string>
+    <string name="send_to">Share to</string>
 </resources>

@@ -1,18 +1,15 @@
 package com.tasomaniac.openwith.preferred
 
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.resolver.IconLoader
+import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.net.URI
 
 object PreferredResolver : KoinComponent {
     private val database by inject<LinkSheetDatabase>()
@@ -33,11 +30,8 @@ object PreferredResolver : KoinComponent {
     }
 
     fun PreferredApp.resolve(context: Context): DisplayActivityInfo? {
-        val intent = Intent().setPackage(componentName.packageName)
-        Log.d("PreferredResolver", "Resolve intent: $intent")
-        val resolveInfo = context.packageManager.resolveActivity(intent, PackageManager.MATCH_ALL)
-        Log.d("PreferredResolver", "ResolveInfo: $resolveInfo")
-
-        return resolveInfo?.toDisplayActivityInfo(context)
+        return context.packageManager
+            .queryFirstIntentActivityByPackageNameOrNull(componentName.packageName)
+            ?.toDisplayActivityInfo(context)
     }
 }

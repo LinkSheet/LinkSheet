@@ -79,12 +79,12 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
             whichAppsCanHandleLinks.addAll(
-                context.packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES or PackageManager.GET_SERVICES)
+                context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
                     .asSequence()
                     .mapNotNull { packageInfo ->
-                        context.packageManager.queryIntentActivities(
-                            Intent().setPackage(packageInfo.packageName), PackageManager.MATCH_ALL
-                        ).firstOrNull() ?: return@mapNotNull null
+                        context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
+                            packageInfo.packageName
+                        )
                     }
                     .filter { resolveInfo ->
                         val state =

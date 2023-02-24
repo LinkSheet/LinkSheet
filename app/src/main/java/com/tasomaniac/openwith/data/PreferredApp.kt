@@ -19,4 +19,12 @@ data class PreferredApp(
 ) {
     val componentName: ComponentName
         @Ignore get() = ComponentName.unflattenFromString(component)!!
+
+    override fun equals(other: Any?): Boolean {
+        return (other as? PreferredApp)?.component == this.component
+    }
+
+    override fun hashCode(): Int {
+        return component.hashCode()
+    }
 }

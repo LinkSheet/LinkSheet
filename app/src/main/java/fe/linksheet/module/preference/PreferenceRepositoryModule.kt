@@ -28,7 +28,7 @@ class PreferenceRepository(context: Context) {
             "browser_mode", BrowserHandler.BrowserMode.AlwaysAsk
         )
         val selectedBrowser = Preference<String>("selected_browser", null)
-        val enableSendButton = Preference<Boolean>("enable_send_button", false)
+        val enableSendButton = Preference("enable_send_button", false)
 
         val all = listOf(
             enableCopyButton,

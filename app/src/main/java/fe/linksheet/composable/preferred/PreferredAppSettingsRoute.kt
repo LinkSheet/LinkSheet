@@ -142,10 +142,15 @@ fun PreferredAppSettingsRoute(
             color = MaterialTheme.colorScheme.onSurface
         )
 
+        Text(
+            text = stringResource(id = R.string.preferred_apps_explainer),
+            color = MaterialTheme.colorScheme.onSurface
+        )
+
         if (viewModel.preferredApps.isNotEmpty()) {
             Spacer(modifier = Modifier.height(10.dp))
             LazyColumn(content = {
-                viewModel.preferredApps.forEach { (app, hosts) ->
+                viewModel.preferredApps.toSortedMap().forEach { (app, hosts) ->
                     item(key = app.flatComponentName) {
                         ClickableRow(padding = 5.dp, onClick = {
                             openDialog = true

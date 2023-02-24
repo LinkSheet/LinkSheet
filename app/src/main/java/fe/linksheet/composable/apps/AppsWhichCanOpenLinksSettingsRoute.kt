@@ -99,7 +99,6 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
             Text(
                 text = stringResource(id = R.string.apps_which_can_open_links_explainer),
-                fontFamily = HkGroteskFontFamily,
                 color = MaterialTheme.colorScheme.onSurface
             )
 

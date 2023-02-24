@@ -17,7 +17,7 @@ data class DisplayActivityInfo(
     val activityInfo: ActivityInfo,
     val displayLabel: String,
     val extendedInfo: CharSequence? = null
-) : Parcelable {
+) : Parcelable, Comparable<DisplayActivityInfo> {
 
     @IgnoredOnParcel
     var displayIcon: Drawable? = null
@@ -45,6 +45,10 @@ data class DisplayActivityInfo(
         PreferredApp(host = host, component = componentName.flattenToString(), alwaysPreferred = alwaysPreferred)
 
     fun getBitmap(context: Context) = getBitmapFromImage(context, displayIcon!!).asImageBitmap()
+
+    override fun compareTo(other: DisplayActivityInfo): Int {
+        return this.displayLabel.compareTo(other.displayLabel)
+    }
 
     override fun equals(other: Any?): Boolean {
         return (other as? DisplayActivityInfo)?.componentName == componentName

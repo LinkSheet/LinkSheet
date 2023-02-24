@@ -33,4 +33,5 @@
     <string name="always_ask_explainer">Always list all browsers</string>
     <string name="no_app_to_handle_link_found">No app to handle link found!</string>
     <string name="open_settings">Open settings</string>
+    <string name="no_such_app_found">No such app found!</string>
 </resources>

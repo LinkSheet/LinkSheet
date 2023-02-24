@@ -8,7 +8,6 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
-import android.provider.Browser
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
@@ -75,9 +74,14 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch(Dispatchers.IO) {
             preferredApps.clear()
 
-            database.preferredAppDao().allPreferredApps().forEach {
+//            val browsers = BrowserResolver.resolve(context).map { it.packageName }
+
+            database.preferredAppDao().allPreferredApps().forEach { it ->
                 val displayActivityInfo = it.resolve(context)
-                if (displayActivityInfo != null) {
+
+                if (displayActivityInfo != null
+//                    && !browsers.contains(it.componentName.packageName)
+                ) {
                     preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(it.host)
                 }
             }

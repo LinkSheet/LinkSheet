@@ -2,6 +2,7 @@ package fe.linksheet.activity.bottomsheet
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -40,6 +41,7 @@ import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
+import fe.linksheet.activity.MainActivity
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.util.getBitmapFromImage
@@ -157,7 +159,11 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
-        ButtonRow(url = url, enabled = true, onClick = { launchApp(filteredItem, it) })
+        ButtonRow(
+            result = result,
+            url = url,
+            enabled = true,
+            onClick = { launchApp(filteredItem, it) })
 
         Divider(color = MaterialTheme.colorScheme.tertiary, thickness = 0.5.dp)
 
@@ -200,7 +206,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         Column(
             modifier = Modifier
-                .height(290.dp)
+                .heightIn(70.dp, 350.dp)
                 .nestedScroll(rememberNestedScrollInteropConnection())
         ) {
             AppList(
@@ -208,7 +214,7 @@ class BottomSheetActivity : ComponentActivity() {
                 selectedItem = selectedItem,
                 onSelectedItemChange = { selectedItem = it })
 
-            ButtonRow(url = url, selectedItem != -1) { always ->
+            ButtonRow(result = result, url = url, selectedItem != -1) { always ->
                 launchApp(result.resolved[selectedItem], always)
             }
         }
@@ -221,62 +227,81 @@ class BottomSheetActivity : ComponentActivity() {
         selectedItem: Int,
         onSelectedItemChange: (Int) -> Unit
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .padding(horizontal = 3.dp)
-                .height(240.dp),
-            content = {
-                itemsIndexed(items = result.resolved) { index, info ->
-                    Row(verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(
-                                RoundedCornerShape(6.dp)
-                            )
-                            .combinedClickable(
-                                onClick = {
-                                    if (bottomSheetViewModel.singleTap) {
+        if (result.totalCount() > 0) {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = 3.dp)
+                    .height((result.resolved.size * 50).dp),
+                content = {
+                    itemsIndexed(
+                        items = result.resolved,
+                        key = { _, item -> item.packageName }
+                    ) { index, info ->
+                        Row(verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .height(50.dp)
+                                .fillMaxWidth()
+                                .clip(
+                                    RoundedCornerShape(6.dp)
+                                )
+                                .combinedClickable(
+                                    onClick = {
+                                        if (bottomSheetViewModel.singleTap) {
+                                            launchApp(info)
+                                        } else {
+                                            if (selectedItem == index) launchApp(info)
+                                            else onSelectedItemChange(index)
+                                        }
+                                    },
+                                    onDoubleClick = {
                                         launchApp(info)
-                                    } else {
-                                        if (selectedItem == index) launchApp(info)
-                                        else onSelectedItemChange(index)
+                                    },
+                                    onLongClick = {
+                                        if (bottomSheetViewModel.singleTap) {
+                                            onSelectedItemChange(index)
+                                        }
                                     }
-                                },
-                                onDoubleClick = {
-                                    launchApp(info)
-                                },
-                                onLongClick = {
-                                    if (bottomSheetViewModel.singleTap) {
-                                        onSelectedItemChange(index)
-                                    }
-                                }
+                                )
+                                .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else androidx.compose.ui.graphics.Color.Transparent)
+                                .padding(10.dp)
+
+                        ) {
+                            Image(
+                                bitmap = info.getBitmap(this@BottomSheetActivity),
+                                contentDescription = info.displayLabel,
+                                modifier = Modifier.size(32.dp)
                             )
-                            .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else androidx.compose.ui.graphics.Color.Transparent)
-                            .padding(10.dp)
 
-                    ) {
-                        Image(
-                            bitmap = info.getBitmap(this@BottomSheetActivity),
-                            contentDescription = info.displayLabel,
-                            modifier = Modifier.size(32.dp)
-                        )
+                            Spacer(modifier = Modifier.width(5.dp))
 
-                        Spacer(modifier = Modifier.width(5.dp))
-
-                        Column {
-                            Text(text = info.displayLabel)
-                            if (result.showExtended) {
-                                Text(text = info.packageName)
+                            Column {
+                                Text(text = info.displayLabel)
+                                if (result.showExtended) {
+                                    Text(text = info.packageName)
+                                }
                             }
                         }
                     }
-                }
-            })
+                })
+        } else {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                Text(
+                    text = stringResource(id = R.string.no_app_to_handle_link_found)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+        }
     }
 
     @Composable
-    private fun ButtonRow(url: String, enabled: Boolean, onClick: (always: Boolean) -> Unit) {
-        val clipboard = getSystemService(ClipboardManager::class.java)
+    private fun ButtonRow(
+        result: IntentResolverResult,
+        url: String,
+        enabled: Boolean,
+        onClick: (always: Boolean) -> Unit
+    ) {
+        val clipboard = remember { getSystemService(ClipboardManager::class.java) }
         val context = LocalContext.current
 
         Row(
@@ -299,30 +324,45 @@ class BottomSheetActivity : ComponentActivity() {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                TextButton(
-                    enabled = enabled,
-                    onClick = { onClick(false) }) {
-                    Text(
-                        text = stringResource(id = R.string.just_once),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
+                if (result.totalCount() > 0) {
+                    TextButton(
+                        enabled = enabled,
+                        onClick = { onClick(false) }) {
+                        Text(
+                            text = stringResource(id = R.string.just_once),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
 
-                Spacer(modifier = Modifier.width(5.dp))
+                    Spacer(modifier = Modifier.width(5.dp))
 
-                TextButton(
-                    enabled = enabled,
-                    onClick = { onClick(true) }) {
-                    Text(
-                        text = stringResource(id = R.string.always),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    TextButton(
+                        enabled = enabled,
+                        onClick = { onClick(true) }) {
+                        Text(
+                            text = stringResource(id = R.string.always),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                } else {
+                    TextButton(
+                        enabled = true,
+                        onClick = {
+                            context.startActivity(Intent(context, MainActivity::class.java))
+                        }) {
+                        Text(
+                            text = stringResource(id = R.string.open_settings),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
             }
         }
     }
+
 
     private fun launchApp(info: DisplayActivityInfo, always: Boolean = false) {
         val intentFrom = info.intentFrom(intent.sourceIntent())

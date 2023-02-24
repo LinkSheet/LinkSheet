@@ -31,4 +31,6 @@
     <string name="none">None</string>
     <string name="none_explainer">Only list native apps, remove all browsers</string>
     <string name="always_ask_explainer">Always list all browsers</string>
+    <string name="no_app_to_handle_link_found">No app to handle link found!</string>
+    <string name="open_settings">Open settings</string>
 </resources>

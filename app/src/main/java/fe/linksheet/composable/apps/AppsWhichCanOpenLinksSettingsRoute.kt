@@ -2,6 +2,7 @@ package fe.linksheet.composable.apps
 
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,15 +20,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.extension.observeAsState
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -55,7 +59,13 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         refreshing = false
     }
 
-    LaunchedEffect(Unit, fetch)
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
+
+    LaunchedEffect(lifecycleState.first) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
+            fetch()
+        }
+    }
 
     val refreshScope = rememberCoroutineScope()
 
@@ -94,7 +104,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                 shape = RoundedCornerShape(size = 32.dp),
                 value = filter,
                 trailingIcon = {
-                    if(filter.isNotEmpty()){
+                    if (filter.isNotEmpty()) {
                         IconButton(onClick = {
                             filter = ""
                             viewModel.filterWhichAppsCanHandleLinksAsync(filter)

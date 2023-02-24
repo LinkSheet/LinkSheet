@@ -33,14 +33,14 @@ fun PreferredBrowserSettingsRoute(
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
 
     LaunchedEffect(Unit) {
         viewModel.loadBrowsers(context)
     }
 
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
-    LaunchedEffect(lifecycleState.value) {
-        if (lifecycleState.value == Lifecycle.Event.ON_RESUME) {
+    LaunchedEffect(lifecycleState.first) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME && lifecycleState.second != Lifecycle.Event.ON_START) {
             viewModel.loadBrowsers(context)
         }
     }
@@ -114,7 +114,11 @@ private fun BrowserRow(
     onClick: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    ClickableRow(padding = 2.dp, onClick = onClick, verticalAlignment = Alignment.CenterVertically) {
+    ClickableRow(
+        padding = 2.dp,
+        onClick = onClick,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         RadioButton(
             selected = selected,
             onClick = onClick

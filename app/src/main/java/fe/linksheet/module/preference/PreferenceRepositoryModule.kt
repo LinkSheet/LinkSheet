@@ -92,7 +92,6 @@ class PreferenceRepository(context: Context) {
         return this.preferences
             .getString(preference.key, preference.default?.let(persister) ?: "")
             .let {
-                Log.d("GetString", "$it")
                 if (it == null) null
                 else reader(it)
             }

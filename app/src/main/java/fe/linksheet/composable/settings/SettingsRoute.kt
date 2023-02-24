@@ -34,8 +34,8 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState()
-    LaunchedEffect(lifecycleState.value) {
-        if (lifecycleState.value == Lifecycle.Event.ON_RESUME) {
+    LaunchedEffect(lifecycleState.first) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             enabled = !viewModel.checkDefaultBrowser(context)
         }
     }

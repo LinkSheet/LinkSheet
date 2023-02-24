@@ -328,6 +328,8 @@ class BottomSheetActivity : ComponentActivity() {
                 }) {
                     Text(text = stringResource(id = R.string.copy))
                 }
+                
+                Spacer(modifier = Modifier.width(5.dp))
             }
 
             if (bottomSheetViewModel.enableSendButton) {

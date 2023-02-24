@@ -78,6 +78,7 @@ fun PreferredAppSettingsRoute(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        Spacer(modifier = Modifier.height(5.dp))
                         Image(
                             bitmap = displayActivityInfo!!.getBitmap(context),
                             contentDescription = displayActivityInfo!!.displayLabel,

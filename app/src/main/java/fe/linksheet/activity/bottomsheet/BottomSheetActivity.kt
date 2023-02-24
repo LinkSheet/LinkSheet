@@ -81,12 +81,15 @@ class BottomSheetActivity : ComponentActivity() {
             completed?.alwaysPreferred?.let { alwaysPreferred ->
                 if (alwaysPreferred) {
                     val app = completed.filteredItem ?: completed.resolved[0]
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@BottomSheetActivity,
+                            getString(R.string.opening_with_app, app.displayLabel),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
                     launchApp(app, true)
-//                    Toast.makeText(
-//                        this@BottomSheetActivity,
-//                        getString(R.string.opening_with_app, app.displayLabel),
-//                        Toast.LENGTH_SHORT
-//                    ).show()
                 }
             }
         }

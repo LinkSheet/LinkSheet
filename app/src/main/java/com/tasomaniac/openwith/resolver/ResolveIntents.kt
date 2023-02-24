@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.util.Log
+import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.linksheet.BuildConfig
@@ -41,9 +42,14 @@ object ResolveIntents {
 
         Log.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
-        if (sourceIntent.isHttp()) {
+        val browserMode = if (sourceIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, currentResolveList)
-        }
+        } else null
+
+        val singleBrowserOnlyResolvedItem =
+            browserMode != null && browserMode.first == BrowserHandler.BrowserMode.SelectedBrowser
+                    && currentResolveList.size == 1
+                    && currentResolveList.first().activityInfo.componentName() == browserMode.second?.activityInfo?.componentName()
 
         val (resolved, filteredItem, showExtended) = groupResolveList(
             context,
@@ -62,7 +68,8 @@ object ResolveIntents {
                 .apply { remove(filteredItem) } else resolved,
             filteredItem,
             showExtended,
-            alwaysPreferred
+            alwaysPreferred,
+            singleBrowserOnlyResolvedItem
         )
     }
 

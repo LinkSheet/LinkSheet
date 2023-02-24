@@ -44,7 +44,7 @@ object BrowserHandler : KoinComponent {
      * If the selected browser is not found, fallback to [BrowserMode.AlwaysAsk]
      *
      */
-    fun handleBrowsers(context: Context, currentResolveList: MutableList<ResolveInfo>) {
+    fun handleBrowsers(context: Context, currentResolveList: MutableList<ResolveInfo>): Pair<BrowserMode, ResolveInfo?> {
         val browsers = BrowserResolver.queryBrowsers(context)
         addAllBrowsers(browsers, currentResolveList)
 
@@ -52,7 +52,7 @@ object BrowserHandler : KoinComponent {
             PreferenceRepository.browserMode,
             BrowserMode.persister,
             BrowserMode.reader
-        )
+        )!!
         val selectedBrowser = preferenceRepository.getString(PreferenceRepository.selectedBrowser)
 
         when (mode) {
@@ -65,10 +65,14 @@ object BrowserHandler : KoinComponent {
                 if (found != null) {
                     removeBrowsers(browsers, currentResolveList)
                     currentResolveList.add(found)
+
+                    return mode to found
                 }
             }
             else -> {}
         }
+
+        return mode to null
     }
 
     private fun removeBrowsers(

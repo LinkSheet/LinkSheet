@@ -50,6 +50,7 @@ import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class BottomSheetActivity : ComponentActivity() {
@@ -81,58 +82,60 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
-        val result = bottomSheetViewModel.resolveAsync(this, intent)
-        result.invokeOnCompletion {
-            val completed = result.getCompleted()
-            completed?.alwaysPreferred?.let { alwaysPreferred ->
-                if (alwaysPreferred) {
-                    val app = completed.filteredItem ?: completed.resolved[0]
-                    runOnUiThread {
-                        Toast.makeText(
-                            this@BottomSheetActivity,
-                            getString(R.string.opening_with_app, app.displayLabel),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+        val deferred = lifecycleScope.async {
+            val completed = bottomSheetViewModel.resolveAsync(
+                this@BottomSheetActivity, intent
+            ).await()
 
-                    lifecycleScope.launch { launchApp(app, true) }
+            if (completed != null && completed.alwaysPreferred == true || completed!!.isSingleBrowserOnlyResolvedItem) {
+                val app = completed.filteredItem ?: completed.resolved[0]
+                runOnUiThread {
+                    Toast.makeText(
+                        this@BottomSheetActivity,
+                        getString(R.string.opening_with_app, app.displayLabel),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+
+                launchApp(app, true)
             }
         }
 
-        setContent {
-            AppTheme {
-                val drawerState = rememberModalBottomSheetState(
-                    initialValue = ModalBottomSheetValue.Expanded,
-                    skipHalfExpanded = false
-                )
+        deferred.invokeOnCompletion {
+            setContent {
+                AppTheme {
+                    val drawerState = rememberModalBottomSheetState(
+                        initialValue = ModalBottomSheetValue.Expanded,
+                        skipHalfExpanded = false
+                    )
 
-                LaunchedEffect(drawerState.currentValue) {
-                    if (drawerState.currentValue == ModalBottomSheetValue.Hidden) {
-                        this@BottomSheetActivity.finish()
-                    }
-                }
-
-                val launchScope = rememberCoroutineScope()
-
-                BottomDrawer(drawerState = drawerState, sheetContent = {
-                    val uri = intent.getUri()
-                    if (bottomSheetViewModel.result != null && uri != null) {
-                        if (bottomSheetViewModel.result?.filteredItem == null) {
-                            OpenWith(
-                                result = bottomSheetViewModel.result!!,
-                                uri = uri,
-                                launchScope = launchScope
-                            )
-                        } else {
-                            OpenWithPreferred(
-                                result = bottomSheetViewModel.result!!,
-                                uri = uri,
-                                launchScope = launchScope
-                            )
+                    LaunchedEffect(drawerState.currentValue) {
+                        if (drawerState.currentValue == ModalBottomSheetValue.Hidden) {
+                            this@BottomSheetActivity.finish()
                         }
                     }
-                })
+
+                    val launchScope = rememberCoroutineScope()
+
+                    BottomDrawer(drawerState = drawerState, sheetContent = {
+                        val uri = intent.getUri()
+                        if (bottomSheetViewModel.result != null && uri != null) {
+                            if (bottomSheetViewModel.result?.filteredItem == null) {
+                                OpenWith(
+                                    result = bottomSheetViewModel.result!!,
+                                    uri = uri,
+                                    launchScope = launchScope
+                                )
+                            } else {
+                                OpenWithPreferred(
+                                    result = bottomSheetViewModel.result!!,
+                                    uri = uri,
+                                    launchScope = launchScope
+                                )
+                            }
+                        }
+                    })
+                }
             }
         }
     }

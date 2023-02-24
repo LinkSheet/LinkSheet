@@ -347,18 +347,18 @@ class BottomSheetActivity : ComponentActivity() {
                 .padding(horizontal = 15.dp),
         ) {
             if (bottomSheetViewModel.enableCopyButton) {
-                OutlinedButton(onClick = {
+                OutlinedButton(contentPadding = PaddingValues(horizontal = 18.dp), onClick = {
                     clipboard.setPrimaryClip(ClipData.newPlainText("URL", uri.toString()))
                     Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
                 }) {
                     Text(text = stringResource(id = R.string.copy))
                 }
 
-                Spacer(modifier = Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(2.dp))
             }
 
             if (bottomSheetViewModel.enableSendButton) {
-                OutlinedButton(onClick = {
+                OutlinedButton(contentPadding = PaddingValues(horizontal = 18.dp), onClick = {
                     startActivity(Intent().buildSendTo(uri))
                     finish()
                 }) {
@@ -382,7 +382,7 @@ class BottomSheetActivity : ComponentActivity() {
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(5.dp))
+                    Spacer(modifier = Modifier.width(if (bottomSheetViewModel.enableCopyButton && bottomSheetViewModel.enableSendButton) 2.dp else 5.dp))
 
                     TextButton(
                         enabled = enabled,

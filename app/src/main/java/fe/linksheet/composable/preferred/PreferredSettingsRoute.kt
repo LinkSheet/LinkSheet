@@ -38,9 +38,11 @@ fun PreferredSettingsRoute(
 ) {
     val context = LocalContext.current
 
-    val manager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        context.getSystemService(DomainVerificationManager::class.java)
-    } else null
+    val manager = remember {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            context.getSystemService(DomainVerificationManager::class.java)
+        } else null
+    }
 
     LaunchedEffect(Unit) {
         viewModel.loadPreferredApps(context)
@@ -98,11 +100,16 @@ fun PreferredSettingsRoute(
                     LazyColumn(content = {
                         hostMap.forEach { (host, enabled) ->
                             item(key = host) {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically
+                                var state by remember { mutableStateOf(enabled) }
+
+                                ClickableRow(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    padding = 2.dp,
+                                    onClick = {
+                                        hostMap[host] = !state
+                                        state = !state
+                                    }
                                 ) {
-                                    var state by remember { mutableStateOf(enabled) }
                                     Checkbox(checked = state, onCheckedChange = {
                                         hostMap[host] = it
                                         state = it
@@ -152,9 +159,7 @@ fun PreferredSettingsRoute(
                                     hostMap[it] = hosts.contains(it)
                                 }
                             } else {
-                                hosts.forEach {
-                                    hostMap[it] = true
-                                }
+                                hosts.forEach { hostMap[it] = true }
                             }
 
                             displayActivityInfo = app

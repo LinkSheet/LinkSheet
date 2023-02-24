@@ -106,15 +106,12 @@ fun AppsWhichCanOpenLinks(
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(6.dp))
                             .clickable {
-                                viewModel.openOpenByDefaultSettings(context, info.packageName())
+                                viewModel.openOpenByDefaultSettings(context, info.packageName)
                             }
                             .padding(5.dp), verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                bitmap = getBitmapFromImage(
-                                    context,
-                                    info.displayIcon!!
-                                ).asImageBitmap(),
+                                bitmap = info.getBitmap(context),
                                 contentDescription = info.displayLabel,
                                 modifier = Modifier.size(42.dp)
                             )

@@ -256,10 +256,7 @@ class BottomSheetActivity : ComponentActivity() {
 
                     ) {
                         Image(
-                            bitmap = getBitmapFromImage(
-                                this@BottomSheetActivity,
-                                info.displayIcon!!
-                            ).asImageBitmap(),
+                            bitmap = info.getBitmap(this@BottomSheetActivity),
                             contentDescription = info.displayLabel,
                             modifier = Modifier.size(32.dp)
                         )
@@ -269,7 +266,7 @@ class BottomSheetActivity : ComponentActivity() {
                         Column {
                             Text(text = info.displayLabel)
                             if (result.showExtended) {
-                                Text(text = info.packageName())
+                                Text(text = info.packageName)
                             }
                         }
                     }

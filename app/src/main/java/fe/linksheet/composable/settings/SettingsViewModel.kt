@@ -8,17 +8,22 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasomaniac.openwith.data.LinkSheetDatabase
+import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.preferred.PreferredResolver.resolve
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
+import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.preference.PreferenceRepository
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -28,23 +33,43 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     private val database by inject<LinkSheetDatabase>()
     private val preferenceRepository by inject<PreferenceRepository>()
 
-    val preferredApps = mutableStateListOf<Pair<String, DisplayActivityInfo?>>()
+    val preferredApps = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
+
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
-    var enableCopyButton by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false)
-    var singleTap by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false)
+    var enableCopyButton by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
+    )
+    var singleTap by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
+    )
 
     fun loadPreferredApps(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferredApps.clear()
-            preferredApps.addAll(database.preferredAppDao().allPreferredApps().map {
-                it.host to it.resolve(context)
-            })
+
+            database.preferredAppDao().allPreferredApps().forEach {
+                val displayActivityInfo = it.resolve(context)
+                if (displayActivityInfo != null) {
+                    preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(it.host)
+                }
+            }
         }
     }
 
-    fun deletePreferredApp(host: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            preferredApps.removeIf { it.first == host }
+    fun insertPreferredAppAsync(preferredApp: PreferredApp): Deferred<Unit> {
+        return viewModelScope.async(Dispatchers.IO) {
+            database.preferredAppDao().insert(preferredApp)
+        }
+    }
+
+    fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>): Deferred<Unit> {
+        return viewModelScope.async(Dispatchers.IO) {
+            database.preferredAppDao().insert(preferredApps)
+        }
+    }
+
+    fun deletePreferredAppAsync(host: String): Deferred<Unit> {
+        return viewModelScope.async(Dispatchers.IO) {
             database.preferredAppDao().deleteHost(host)
         }
     }
@@ -94,7 +119,12 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     }
                     .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
                     .map { it.toDisplayActivityInfo(context) }
-                    .filter { if (filter != null) it.displayLabel.contains(filter, ignoreCase = true) else true }
+                    .filter {
+                        if (filter != null) it.displayLabel.contains(
+                            filter,
+                            ignoreCase = true
+                        ) else true
+                    }
                     .sortedBy { it.displayLabel }
                     .toList()
             )

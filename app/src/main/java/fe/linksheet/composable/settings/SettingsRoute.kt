@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import fe.linksheet.R
 import fe.linksheet.appsWhichCanOpenLinks
 import fe.linksheet.composable.ClickableRow
+import fe.linksheet.composable.SwitchRow
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.preferredSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily

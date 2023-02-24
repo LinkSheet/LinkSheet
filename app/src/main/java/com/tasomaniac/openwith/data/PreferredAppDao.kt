@@ -17,6 +17,9 @@ interface PreferredAppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(preferredApp: PreferredApp)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(preferredApps: List<PreferredApp>)
+
     @Query("DELETE FROM openwith WHERE host = :host")
     fun deleteHost(host: String)
 }

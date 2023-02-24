@@ -18,10 +18,12 @@ class PreferenceRepository(context: Context) {
     companion object {
         val enableCopyButton = Preference("enable_copy_button", false)
         val singleTap = Preference("single_tap", false)
+        val usageStatsSorting = Preference("usage_stats_sorting", false)
 
         val all = listOf(
             enableCopyButton,
-            singleTap
+            singleTap,
+            usageStatsSorting
         )
     }
 

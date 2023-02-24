@@ -23,4 +23,6 @@
     <string name="single_tap_explainer">Only require one tap instead of two to open apps; Long-press to select app</string>
     <string name="confirm">Confirm</string>
     <string name="clear">Clear</string>
+    <string name="usage_stats_sorting">Sort apps by usage</string>
+    <string name="usage_stats_sorting_explainer">Sorts apps by usage stats. Permission is requested on first toggle.</string>
 </resources>

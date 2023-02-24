@@ -180,10 +180,7 @@ object ResolveListGrouper {
     private val USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14)
 
     private fun usageStatsFrom(context: Context): Map<String?, UsageStats?>? {
-        val usageStatsManager = ContextCompat.getSystemService(
-            context,
-            UsageStatsManager::class.java
-        )
+        val usageStatsManager = context.getSystemService(UsageStatsManager::class.java)
 
         val sinceTime: Long = System.currentTimeMillis() - USAGE_STATS_PERIOD
         return usageStatsManager?.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis())

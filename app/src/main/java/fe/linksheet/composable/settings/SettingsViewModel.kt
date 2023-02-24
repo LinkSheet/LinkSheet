@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings
 
+import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,6 +11,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
+import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasomaniac.openwith.data.LinkSheetDatabase
@@ -37,6 +39,9 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
 
+    var usageStatsSorting by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
+    )
     var enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
@@ -138,6 +143,26 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     .toList()
             )
         }
+    }
+
+    fun onUsageStatsSorting(it: Boolean) {
+        this.usageStatsSorting = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.usageStatsSorting, it)
+    }
+
+    fun openUsageStatsSettings(context: Context) {
+        context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+    }
+
+    fun getUsageStatsAllowed(context: Context): Boolean {
+        val appOps = context.getSystemService<AppOpsManager>()
+        val mode = appOps!!.checkOpNoThrow(
+            AppOpsManager.OPSTR_GET_USAGE_STATS,
+            android.os.Process.myUid(),
+            context.packageName
+        )
+
+        return mode == AppOpsManager.MODE_ALLOWED
     }
 
     fun onEnableCopyButton(it: Boolean) {

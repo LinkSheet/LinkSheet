@@ -3,10 +3,8 @@ package fe.linksheet.composable.settings
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -46,7 +44,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             .fillMaxSize()
             .padding(horizontal = 5.dp)
     ) {
-        item {
+        item(key = "open_default_browser") {
             ClickableRow(
                 padding = 10.dp,
                 onClick = { viewModel.openDefaultBrowserSettings(context) },
@@ -68,7 +66,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item {
+        item(key = preferredSettingsRoute) {
             ClickableRow(
                 padding = 10.dp,
                 onClick = { navController.navigate(preferredSettingsRoute) }) {
@@ -88,7 +86,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item {
+        item(key = appsWhichCanOpenLinks) {
             ClickableRow(
                 padding = 10.dp,
                 onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
@@ -108,7 +106,22 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item {
+        item(key = "usage_stats") {
+            SwitchRow(
+                checked = viewModel.usageStatsSorting,
+                onChange = {
+                    if(!viewModel.getUsageStatsAllowed(context)){
+                        viewModel.openUsageStatsSettings(context)
+                    } else {
+                        viewModel.onUsageStatsSorting(it)
+                    }
+                },
+                headlineId = R.string.usage_stats_sorting,
+                subtitleId = R.string.usage_stats_sorting_explainer
+            )
+        }
+
+        item(key = "enable_copy_button") {
             SwitchRow(
                 checked = viewModel.enableCopyButton,
                 onChange = {
@@ -119,7 +132,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             )
         }
 
-        item {
+        item(key = "enable_single_tap") {
             SwitchRow(checked = viewModel.singleTap, onChange = {
                 viewModel.onSingleTap(it)
             }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)

@@ -1,4 +1,4 @@
-package fe.linksheet.module
+package fe.linksheet.module.database
 
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import org.koin.core.scope.get

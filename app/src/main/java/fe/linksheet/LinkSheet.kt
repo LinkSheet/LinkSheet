@@ -3,7 +3,8 @@ package fe.linksheet
 import android.app.Application
 import android.content.Context
 import com.google.android.material.color.DynamicColors
-import fe.linksheet.module.linkSheetDatabaseModule
+import fe.linksheet.module.database.linkSheetDatabaseModule
+import fe.linksheet.module.preference.preferenceRepositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -20,7 +21,7 @@ class LinkSheet : Application() {
         startKoin {
             androidLogger()
             androidContext(this@LinkSheet)
-            modules(linkSheetDatabaseModule)
+            modules(linkSheetDatabaseModule, preferenceRepositoryModule)
         }
     }
 }

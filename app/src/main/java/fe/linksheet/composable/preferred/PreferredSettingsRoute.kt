@@ -52,15 +52,18 @@ fun PreferredSettingsRoute(
 
     LaunchedEffect(openDialog) {
         if (!openDialog) {
-            runBlocking {
-                val tasks = hostMap.map { (host, enabled) ->
-                    if (enabled) viewModel.insertPreferredAppAsync(displayActivityInfo!!.toPreferredApp(host, true))
-                    else viewModel.deletePreferredAppAsync(host)
-                }
-
-                tasks.awaitAll()
-                viewModel.loadPreferredApps(context)
+            val tasks = hostMap.map { (host, enabled) ->
+                if (enabled) viewModel.insertPreferredAppAsync(
+                    displayActivityInfo!!.toPreferredApp(
+                        host,
+                        true
+                    )
+                )
+                else viewModel.deletePreferredAppAsync(host)
             }
+
+            tasks.awaitAll()
+            viewModel.loadPreferredApps(context)
         }
     }
 

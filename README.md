@@ -2,6 +2,8 @@
 
 A Material3 replacement for [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 
+<center><img src="readme/IzzyOnDroid.png" width="170"></center>
+
 ![](readme/screenshot.png)
 
 ## What does this do?

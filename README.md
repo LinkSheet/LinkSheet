@@ -41,9 +41,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12.
 
 ## Donations
 
-You are very welcome to send me Monero (and other currencies via sites like `exch.cx`
-or `fixedfloat.com`)
-to: `883iWQ5Mbq66cr9m3WiH19ZDXRhTTKjWkMWGCNJetgPMFebe1uo3LJP7FUetmxHQP1PoR1FJuzTnz6zrPq9jPMKnMkZ4tHk`
+<a href="https://coindrop.to/fexd" target="_blank"><img src="https://coindrop.to/embed-button.png" style="border-radius: 10px; height: 57px !important;width: 229px !important;" alt="Coindrop.to me"></img></a>
 
 ## Acknowledgements
 

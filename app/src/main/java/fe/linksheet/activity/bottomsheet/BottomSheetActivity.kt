@@ -77,7 +77,7 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
-        val result = bottomSheetViewModel.resolve(this, intent)
+        val result = bottomSheetViewModel.resolveAsync(this, intent)
         result.invokeOnCompletion {
             val completed = result.getCompleted()
             completed?.alwaysPreferred?.let { alwaysPreferred ->

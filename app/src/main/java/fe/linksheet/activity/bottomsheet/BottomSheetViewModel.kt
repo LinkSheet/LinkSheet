@@ -29,7 +29,7 @@ class BottomSheetViewModel : ViewModel(),
     var enableCopyButton by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false)
     var singleTap by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false)
 
-    fun resolve(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
+    fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
             result = ResolveIntents.resolve(context, intent)
 

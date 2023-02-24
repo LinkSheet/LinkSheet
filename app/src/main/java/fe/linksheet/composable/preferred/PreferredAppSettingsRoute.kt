@@ -146,7 +146,7 @@ fun PreferredAppSettingsRoute(
             Spacer(modifier = Modifier.height(10.dp))
             LazyColumn(content = {
                 viewModel.preferredApps.forEach { (app, hosts) ->
-                    item(key = app.packageName) {
+                    item(key = app.flatComponentName) {
                         ClickableRow(padding = 5.dp, onClick = {
                             openDialog = true
                             hostMap.clear()

@@ -239,7 +239,7 @@ class BottomSheetActivity : ComponentActivity() {
                 content = {
                     itemsIndexed(
                         items = result.resolved,
-                        key = { _, item -> item.packageName }
+                        key = { _, item -> item.flatComponentName }
                     ) { index, info ->
                         Row(verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier

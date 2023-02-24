@@ -79,7 +79,7 @@ fun PreferredBrowserSettingsRoute(
             }
 
             viewModel.browsers.forEach { app ->
-                item(key = app.packageName) {
+                item(key = app.flatComponentName) {
                     BrowserRow(
                         selected = viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.flatComponentName,
                         onClick = {

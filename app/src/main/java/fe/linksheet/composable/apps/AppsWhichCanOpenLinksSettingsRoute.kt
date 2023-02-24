@@ -139,7 +139,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                     if (!refreshing) {
                         items(
                             viewModel.whichAppsCanHandleLinksFiltered,
-                            key = { it.packageName }
+                            key = { it.flatComponentName }
                         ) { info ->
                             ClickableRow(
                                 padding = 5.dp,

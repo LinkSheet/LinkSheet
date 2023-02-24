@@ -67,7 +67,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item(key = preferredBrowserSettingsRoute){
+        item(key = preferredBrowserSettingsRoute) {
             ClickableRow(
                 padding = 10.dp,
                 onClick = { navController.navigate(preferredBrowserSettingsRoute) }) {
@@ -132,7 +132,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             SwitchRow(
                 checked = viewModel.usageStatsSorting,
                 onChange = {
-                    if(!viewModel.getUsageStatsAllowed(context)){
+                    if (!viewModel.getUsageStatsAllowed(context)) {
                         viewModel.openUsageStatsSettings(context)
                     } else {
                         viewModel.onUsageStatsSorting(it)
@@ -158,6 +158,12 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             SwitchRow(checked = viewModel.singleTap, onChange = {
                 viewModel.onSingleTap(it)
             }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)
+        }
+
+        item(key = "enable_send_intent") {
+            SwitchRow(checked = viewModel.enableSendButton, onChange = {
+                viewModel.onSendButton(it)
+            }, headlineId = R.string.enable_send_button, subtitleId = R.string.enable_send_button_explainer)
         }
     }
 }

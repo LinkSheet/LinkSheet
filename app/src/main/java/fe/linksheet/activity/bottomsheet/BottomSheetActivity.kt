@@ -42,10 +42,11 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
+import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.getUri
+import fe.linksheet.extension.sourceIntent
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
-import fe.linksheet.util.sourceIntent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class BottomSheetActivity : ComponentActivity() {
@@ -210,7 +211,10 @@ class BottomSheetActivity : ComponentActivity() {
 
         Column(
             modifier = Modifier
-                .heightIn((result.resolved.size * appListItemHeight.value).dp + buttonRowHeight, maxAppListButtonRowHeight)
+                .heightIn(
+                    (result.resolved.size * appListItemHeight.value).dp + buttonRowHeight,
+                    maxAppListButtonRowHeight
+                )
                 .nestedScroll(rememberNestedScrollInteropConnection())
         ) {
             AppList(
@@ -235,7 +239,10 @@ class BottomSheetActivity : ComponentActivity() {
             LazyColumn(
                 modifier = Modifier
                     .padding(horizontal = 3.dp)
-                    .heightIn((result.resolved.size * appListItemHeight.value).dp, maxAppListButtonRowHeight - buttonRowHeight),
+                    .heightIn(
+                        (result.resolved.size * appListItemHeight.value).dp,
+                        maxAppListButtonRowHeight - buttonRowHeight
+                    ),
                 content = {
                     itemsIndexed(
                         items = result.resolved,
@@ -320,6 +327,15 @@ class BottomSheetActivity : ComponentActivity() {
                     Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
                 }) {
                     Text(text = stringResource(id = R.string.copy))
+                }
+            }
+
+            if (bottomSheetViewModel.enableSendButton) {
+                OutlinedButton(onClick = {
+                    startActivity(Intent().buildSendTo(uri))
+                    finish()
+                }) {
+                    Text(text = stringResource(id = R.string.send_to))
                 }
             }
 

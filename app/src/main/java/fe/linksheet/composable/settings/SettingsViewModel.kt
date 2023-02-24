@@ -65,6 +65,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
     )
 
+    var enableSendButton by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableSendButton) ?: false
+    )
+
     fun loadPreferredApps(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferredApps.clear()
@@ -206,6 +210,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onSingleTap(it: Boolean) {
         this.singleTap = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.singleTap, it)
+    }
+
+    fun onSendButton(it: Boolean) {
+        this.enableSendButton = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.enableSendButton, it)
     }
 
 

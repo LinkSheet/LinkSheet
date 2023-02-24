@@ -125,6 +125,13 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
+    companion object {
+        val buttonRowHeight = 50.dp
+        val appListItemHeight = 50.dp
+        val preferredAppItemHeight = 60.dp
+        val maxAppListButtonRowHeight = 350.dp
+    }
+
     @Composable
     private fun OpenWithPreferred(result: IntentResolverResult, url: String) {
         val filteredItem = result.filteredItem!!
@@ -133,14 +140,11 @@ class BottomSheetActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 28.dp)
-                .height(60.dp),
+                .height(preferredAppItemHeight),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                bitmap = getBitmapFromImage(
-                    this@BottomSheetActivity,
-                    filteredItem.displayIcon!!
-                ).asImageBitmap(),
+                bitmap = filteredItem.getBitmap(this@BottomSheetActivity),
                 contentDescription = filteredItem.displayLabel,
                 modifier = Modifier.size(32.dp)
             )
@@ -206,7 +210,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         Column(
             modifier = Modifier
-                .heightIn(70.dp, 350.dp)
+                .heightIn((result.resolved.size * appListItemHeight.value).dp + buttonRowHeight, maxAppListButtonRowHeight)
                 .nestedScroll(rememberNestedScrollInteropConnection())
         ) {
             AppList(
@@ -231,7 +235,7 @@ class BottomSheetActivity : ComponentActivity() {
             LazyColumn(
                 modifier = Modifier
                     .padding(horizontal = 3.dp)
-                    .height((result.resolved.size * 50).dp),
+                    .heightIn((result.resolved.size * appListItemHeight.value).dp, maxAppListButtonRowHeight - buttonRowHeight),
                 content = {
                     itemsIndexed(
                         items = result.resolved,
@@ -239,7 +243,7 @@ class BottomSheetActivity : ComponentActivity() {
                     ) { index, info ->
                         Row(verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
-                                .height(50.dp)
+                                .height(appListItemHeight)
                                 .fillMaxWidth()
                                 .clip(
                                     RoundedCornerShape(6.dp)
@@ -307,7 +311,7 @@ class BottomSheetActivity : ComponentActivity() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp)
+                .height(buttonRowHeight)
                 .padding(horizontal = 15.dp),
         ) {
             if (bottomSheetViewModel.enableCopyButton) {
@@ -321,7 +325,7 @@ class BottomSheetActivity : ComponentActivity() {
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxSize(),
                 horizontalArrangement = Arrangement.End
             ) {
                 if (result.totalCount() > 0) {

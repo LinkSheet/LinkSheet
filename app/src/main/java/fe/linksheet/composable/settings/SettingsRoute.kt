@@ -154,16 +154,16 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             )
         }
 
-        item(key = "enable_single_tap") {
-            SwitchRow(checked = viewModel.singleTap, onChange = {
-                viewModel.onSingleTap(it)
-            }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)
-        }
-
         item(key = "enable_send_intent") {
             SwitchRow(checked = viewModel.enableSendButton, onChange = {
                 viewModel.onSendButton(it)
             }, headlineId = R.string.enable_send_button, subtitleId = R.string.enable_send_button_explainer)
+        }
+
+        item(key = "enable_single_tap") {
+            SwitchRow(checked = viewModel.singleTap, onChange = {
+                viewModel.onSingleTap(it)
+            }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)
         }
     }
 }

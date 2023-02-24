@@ -2,20 +2,42 @@
 
 A Material3 replacement for [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 
-<center><img src="readme/IzzyOnDroid.png" width="170"></center>
+<!-- ---------- Badges ---------- -->
+<div align="center">
 
-![](readme/screenshot.png)
+[![GitHub version (gradle versionName)](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/blob/master/app/build.gradle.kts)
+[![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 
-## What does this do?
+</div>
 
-This replaces the url-app-chooser that was removed in Android 12.
+<!-- ---------- Download ---------- -->
+<div align="center">
 
-For this app to work properly, you must disable "Open supported links" in "App Info" -> "Open by
-default" for every official app which has verified links you intend to use it for. To make this
-process easier, LinkSheet includes a menu which shows all applications which have "Open supported
-links" enabled, and allows the user to directly open the menu by clicking.
+[<img src="readme/IzzyOnDroid.png"
+alt="Get it on IzzySoft"
+height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
+</div>
 
-![](readme/screenshot2.png)
+
+<!-- ---------- Description ---------- -->
+<div align="center">
+
+LinkSheet restores the url-app-chooser that was removed in Android 12.
+
+</div>
+
+<!-- ---------- Screenshots ---------- -->
+<div align="center">
+
+<div style="display: flex;">
+  <img src="readme/screenshot1.png" width=30%>
+  <img src="readme/screenshot2.png" width=30%>
+  <img src="readme/screenshot3.png" width=30%>
+  <img src="readme/screenshot4.png" width=30%>
+  <img src="readme/screenshot5.png" width=30%>
+</div>
+
+ </div>
 
 ## Acknowledgements
 

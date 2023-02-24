@@ -155,7 +155,9 @@ fun PreferredAppSettingsRoute(
                                 manager.getAppHosts(app.packageName).forEach {
                                     hostMap[it] = hosts.contains(it)
                                 }
-                            } else {
+                            }
+
+                            if(manager == null || hostMap.isEmpty()){
                                 hosts.forEach { hostMap[it] = true }
                             }
 

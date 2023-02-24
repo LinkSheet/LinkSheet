@@ -3,11 +3,8 @@ package com.tasomaniac.openwith.resolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.pm.verify.domain.DomainVerificationManager
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Parcelable
-import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.asImageBitmap
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.extension.componentName
@@ -50,13 +47,7 @@ data class DisplayActivityInfo(
     fun getBitmap(context: Context) = getBitmapFromImage(context, displayIcon!!).asImageBitmap()
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
-        if (other !is DisplayActivityInfo) {
-            return false
-        }
-        return componentName == other.componentName
+        return (other as? DisplayActivityInfo)?.componentName == componentName
     }
 
     override fun hashCode(): Int = componentName.hashCode()

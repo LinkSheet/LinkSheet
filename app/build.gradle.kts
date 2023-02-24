@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "fe.linksheet"
-        minSdk = 26
+        minSdk = 25
         targetSdk = 33
         versionCode = 6
         versionName = "0.0.6"

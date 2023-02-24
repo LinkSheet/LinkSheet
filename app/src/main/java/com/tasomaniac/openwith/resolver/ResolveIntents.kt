@@ -9,14 +9,17 @@ import android.util.Log
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.linksheet.BuildConfig
+import fe.linksheet.extension.getUri
 import fe.linksheet.util.sourceIntent
 
 object ResolveIntents {
 
     fun resolve(context: Context, intent: Intent): IntentResolverResult {
-        Log.d("ResolveIntents", "Intent data: ${intent.data}")
+        val uri = intent.getUri()
 
-        val preferredApp = intent.data?.let {
+        Log.d("ResolveIntents", "Intent data: $uri")
+
+        val preferredApp = uri?.let {
             PreferredResolver.resolve(context, it)
         }
 

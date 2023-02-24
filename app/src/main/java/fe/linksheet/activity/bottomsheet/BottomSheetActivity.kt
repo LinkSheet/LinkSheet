@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
@@ -28,7 +29,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
@@ -42,9 +42,9 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
+import fe.linksheet.extension.getUri
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
-import fe.linksheet.util.getBitmapFromImage
 import fe.linksheet.util.sourceIntent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -110,13 +110,14 @@ class BottomSheetActivity : ComponentActivity() {
                 }
 
                 BottomDrawer(drawerState = drawerState, sheetContent = {
-                    if (bottomSheetViewModel.result != null && intent.dataString != null) {
+                    val uri = intent.getUri()
+                    if (bottomSheetViewModel.result != null && uri != null) {
                         if (bottomSheetViewModel.result?.filteredItem == null) {
-                            OpenWith(result = bottomSheetViewModel.result!!, intent.dataString!!)
+                            OpenWith(result = bottomSheetViewModel.result!!, uri)
                         } else {
                             OpenWithPreferred(
                                 result = bottomSheetViewModel.result!!,
-                                intent.dataString!!
+                                uri
                             )
                         }
                     }
@@ -133,7 +134,7 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun OpenWithPreferred(result: IntentResolverResult, url: String) {
+    private fun OpenWithPreferred(result: IntentResolverResult, uri: Uri) {
         val filteredItem = result.filteredItem!!
 
         Row(
@@ -165,7 +166,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         ButtonRow(
             result = result,
-            url = url,
+            uri = uri,
             enabled = true,
             onClick = { launchApp(filteredItem, it) })
 
@@ -190,11 +191,10 @@ class BottomSheetActivity : ComponentActivity() {
                 selectedItem = -1,
                 onSelectedItemChange = { })
         }
-
     }
 
     @Composable
-    private fun OpenWith(result: IntentResolverResult, url: String) {
+    private fun OpenWith(result: IntentResolverResult, uri: Uri) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
@@ -218,7 +218,7 @@ class BottomSheetActivity : ComponentActivity() {
                 selectedItem = selectedItem,
                 onSelectedItemChange = { selectedItem = it })
 
-            ButtonRow(result = result, url = url, selectedItem != -1) { always ->
+            ButtonRow(result = result, uri = uri, selectedItem != -1) { always ->
                 launchApp(result.resolved[selectedItem], always)
             }
         }
@@ -301,7 +301,7 @@ class BottomSheetActivity : ComponentActivity() {
     @Composable
     private fun ButtonRow(
         result: IntentResolverResult,
-        url: String,
+        uri: Uri,
         enabled: Boolean,
         onClick: (always: Boolean) -> Unit
     ) {
@@ -316,7 +316,7 @@ class BottomSheetActivity : ComponentActivity() {
         ) {
             if (bottomSheetViewModel.enableCopyButton) {
                 OutlinedButton(onClick = {
-                    clipboard.setPrimaryClip(ClipData.newPlainText("URL", url))
+                    clipboard.setPrimaryClip(ClipData.newPlainText("URL", uri.toString()))
                     Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
                 }) {
                     Text(text = stringResource(id = R.string.copy))

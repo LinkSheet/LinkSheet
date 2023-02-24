@@ -8,7 +8,6 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
@@ -36,6 +35,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val preferredApps = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
 
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
+    val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
+
     var enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
@@ -99,10 +100,24 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return resolveInfo?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
     }
 
+    fun filterWhichAppsCanHandleLinksAsync(filter: String): Deferred<Boolean> {
+        return viewModelScope.async(Dispatchers.IO) {
+            whichAppsCanHandleLinksFiltered.clear()
+            whichAppsCanHandleLinksFiltered.addAll(whichAppsCanHandleLinks.filter {
+                if (filter.isNotEmpty()) it.displayLabel.contains(
+                    filter,
+                    ignoreCase = true
+                ) else true
+            })
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
-    fun loadAppsWhichCanHandleLinks(context: Context, filter: String? = null) {
-        val manager = context.getSystemService(DomainVerificationManager::class.java)
-        viewModelScope.launch(Dispatchers.IO) {
+    fun loadAppsWhichCanHandleLinksAsync(
+        context: Context,
+        manager: DomainVerificationManager
+    ): Deferred<Boolean> {
+        return viewModelScope.async(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
             whichAppsCanHandleLinks.addAll(
                 context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
@@ -119,12 +134,6 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     }
                     .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
                     .map { it.toDisplayActivityInfo(context) }
-                    .filter {
-                        if (filter != null) it.displayLabel.contains(
-                            filter,
-                            ignoreCase = true
-                        ) else true
-                    }
                     .sortedBy { it.displayLabel }
                     .toList()
             )

@@ -2,7 +2,6 @@ package fe.linksheet.composable.preferred
 
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
@@ -28,11 +26,10 @@ import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PreferredSettingsRoute(
+fun PreferredAppSettingsRoute(
     navController: NavHostController,
     viewModel: SettingsViewModel = viewModel()
 ) {

@@ -16,11 +16,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fe.linksheet.R
-import fe.linksheet.appsWhichCanOpenLinks
+import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.SwitchRow
 import fe.linksheet.extension.observeAsState
-import fe.linksheet.preferredSettingsRoute
+import fe.linksheet.preferredAppsSettingsRoute
+import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @Composable
@@ -66,10 +67,31 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item(key = preferredSettingsRoute) {
+        item(key = preferredBrowserSettingsRoute){
             ClickableRow(
                 padding = 10.dp,
-                onClick = { navController.navigate(preferredSettingsRoute) }) {
+                onClick = { navController.navigate(preferredBrowserSettingsRoute) }) {
+                Column {
+                    Text(
+                        text = stringResource(id = R.string.preferred_browser),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = stringResource(id = R.string.preferred_browser_explainer),
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
+
+
+        item(key = preferredAppsSettingsRoute) {
+            ClickableRow(
+                padding = 10.dp,
+                onClick = { navController.navigate(preferredAppsSettingsRoute) }) {
                 Column {
                     Text(
                         text = stringResource(id = R.string.preferred_apps),
@@ -86,10 +108,10 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item(key = appsWhichCanOpenLinks) {
+        item(key = appsWhichCanOpenLinksSettingsRoute) {
             ClickableRow(
                 padding = 10.dp,
-                onClick = { navController.navigate(appsWhichCanOpenLinks) }) {
+                onClick = { navController.navigate(appsWhichCanOpenLinksSettingsRoute) }) {
                 Column {
                     Text(
                         text = stringResource(id = R.string.apps_which_can_open_links),

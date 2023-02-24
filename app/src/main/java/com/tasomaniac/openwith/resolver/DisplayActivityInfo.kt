@@ -33,6 +33,11 @@ data class DisplayActivityInfo(
         activityInfo.componentName()
     }
 
+    @IgnoredOnParcel
+    val flatComponentName by lazy {
+        componentName.flattenToString()
+    }
+
     fun intentFrom(sourceIntent: Intent): Intent {
         return Intent(sourceIntent)
             .setComponent(componentName)

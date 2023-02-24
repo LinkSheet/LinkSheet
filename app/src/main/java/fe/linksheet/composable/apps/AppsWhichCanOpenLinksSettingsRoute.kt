@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
-fun AppsWhichCanOpenLinks(
+fun AppsWhichCanOpenLinksSettingsRoute(
     navController: NavHostController,
     viewModel: SettingsViewModel = viewModel()
 ) {

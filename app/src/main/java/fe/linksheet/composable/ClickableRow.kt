@@ -32,6 +32,6 @@ fun ClickableRow(
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment
     ) {
-        content()
+        content(this)
     }
 }

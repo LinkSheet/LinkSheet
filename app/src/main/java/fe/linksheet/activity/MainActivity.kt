@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
@@ -15,13 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.appsWhichCanOpenLinks
-import fe.linksheet.composable.apps.AppsWhichCanOpenLinks
-import fe.linksheet.composable.preferred.PreferredSettingsRoute
+import fe.linksheet.composable.apps.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.composable.browser.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.SettingsRoute
-import fe.linksheet.preferredSettingsRoute
-import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
@@ -68,16 +66,20 @@ class MainActivity : ComponentActivity() {
                                     startDestination = settingsRoute,
                                 ) {
                                     composable(route = settingsRoute) {
-                                        SettingsRoute(navController)
+                                        SettingsRoute(navController = navController)
                                     }
 
-                                    composable(route = preferredSettingsRoute) {
-                                        PreferredSettingsRoute(navController)
+                                    composable(route = preferredBrowserSettingsRoute){
+                                        PreferredBrowserSettingsRoute(navController = navController)
+                                    }
+
+                                    composable(route = preferredAppsSettingsRoute) {
+                                        PreferredAppSettingsRoute(navController = navController)
                                     }
 
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                        composable(route = appsWhichCanOpenLinks) {
-                                            AppsWhichCanOpenLinks(navController)
+                                        composable(route = appsWhichCanOpenLinksSettingsRoute) {
+                                            AppsWhichCanOpenLinksSettingsRoute(navController = navController)
                                         }
                                     }
                                 }

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.util.Log
+import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.linksheet.BuildConfig
 import fe.linksheet.util.sourceIntent
@@ -27,7 +28,9 @@ object ResolveIntents {
         val sourceIntent = intent.sourceIntent()
         Log.d("ResolveIntents", "$sourceIntent")
 
-        val currentResolveList = context.packageManager.queryIntentActivities(sourceIntent, PackageManager.MATCH_ALL)
+        val currentResolveList = context.packageManager.queryIntentActivities(
+            sourceIntent, PackageManager.MATCH_ALL
+        )
 
         currentResolveList.removeAll {
             it.activityInfo.packageName == BuildConfig.APPLICATION_ID
@@ -35,9 +38,9 @@ object ResolveIntents {
 
         Log.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
-//        if (sourceIntent.isHttp()) {
-//            browserHandlerFactory.create(currentResolveList).handleBrowsers()
-//        }
+        if (sourceIntent.isHttp()) {
+            BrowserHandler.handleBrowsers(context, currentResolveList)
+        }
 
         val (resolved, filteredItem, showExtended) = groupResolveList(
             context,
@@ -68,6 +71,11 @@ object ResolveIntents {
     ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         return if (currentResolveList.isEmpty()) {
             Triple(emptyList(), null, false)
-        } else ResolveListGrouper.groupResolveList(context, currentResolveList, sourceIntent, lastChosenComponent)
+        } else ResolveListGrouper.groupResolveList(
+            context,
+            currentResolveList,
+            sourceIntent,
+            lastChosenComponent
+        )
     }
 }

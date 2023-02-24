@@ -2,6 +2,8 @@ package fe.linksheet.module.preference
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import com.tasomaniac.openwith.resolver.BrowserHandler
 import org.koin.dsl.module
 
 val preferenceRepositoryModule = module {
@@ -9,6 +11,9 @@ val preferenceRepositoryModule = module {
         PreferenceRepository(get())
     }
 }
+
+typealias StringPersister<T> = (T) -> String
+typealias StringReader<T> = (String) -> T?
 
 class PreferenceRepository(context: Context) {
     private val preferences by lazy {
@@ -19,11 +24,17 @@ class PreferenceRepository(context: Context) {
         val enableCopyButton = Preference("enable_copy_button", false)
         val singleTap = Preference("single_tap", false)
         val usageStatsSorting = Preference("usage_stats_sorting", false)
+        val browserMode = Preference<BrowserHandler.BrowserMode>(
+            "browser_mode", BrowserHandler.BrowserMode.AlwaysAsk
+        )
+        val selectedBrowser = Preference<String>("selected_browser", null)
 
         val all = listOf(
             enableCopyButton,
             singleTap,
-            usageStatsSorting
+            usageStatsSorting,
+            browserMode,
+            selectedBrowser
         )
     }
 
@@ -66,6 +77,25 @@ class PreferenceRepository(context: Context) {
 
     fun writeString(preference: Preference<String>, newState: String?) = editor {
         this.putString(preference.key, newState)
+    }
+
+    fun <T> writeString(preference: Preference<T>, newState: T, persister: StringPersister<T>) =
+        editor {
+            this.putString(preference.key, persister(newState))
+        }
+
+    fun <T> getString(
+        preference: Preference<T>,
+        persister: StringPersister<T>,
+        reader: StringReader<T>
+    ): T? {
+        return this.preferences
+            .getString(preference.key, preference.default?.let(persister) ?: "")
+            .let {
+                Log.d("GetString", "$it")
+                if (it == null) null
+                else reader(it)
+            }
     }
 
     fun clearAll() = editor {

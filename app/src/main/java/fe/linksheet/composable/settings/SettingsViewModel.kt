@@ -8,6 +8,7 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
+import android.provider.Browser
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
@@ -17,6 +18,8 @@ import androidx.lifecycle.viewModelScope
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.preferred.PreferredResolver.resolve
+import com.tasomaniac.openwith.resolver.BrowserHandler
+import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
@@ -35,6 +38,19 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     private val preferenceRepository by inject<PreferenceRepository>()
 
     val preferredApps = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
+
+    val browsers = mutableStateListOf<DisplayActivityInfo>()
+
+    var browserMode by mutableStateOf(
+        preferenceRepository.getString(
+            PreferenceRepository.browserMode,
+            BrowserHandler.BrowserMode.persister,
+            BrowserHandler.BrowserMode.reader
+        )
+    )
+
+    var selectedBrowser by mutableStateOf(preferenceRepository.getString(PreferenceRepository.selectedBrowser))
+
 
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
@@ -59,6 +75,13 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(it.host)
                 }
             }
+        }
+    }
+
+    fun loadBrowsers(context: Context) {
+        viewModelScope.launch(Dispatchers.IO) {
+            browsers.clear()
+            browsers.addAll(BrowserResolver.resolve(context))
         }
     }
 
@@ -145,6 +168,16 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    fun onBrowserMode(it: BrowserHandler.BrowserMode) {
+        this.browserMode = it
+        this.preferenceRepository.writeString(PreferenceRepository.browserMode, it, BrowserHandler.BrowserMode.persister)
+    }
+
+    fun onSelectedBrowser(it: String) {
+        this.selectedBrowser = it
+        this.preferenceRepository.writeString(PreferenceRepository.selectedBrowser, it)
+    }
+
     fun onUsageStatsSorting(it: Boolean) {
         this.usageStatsSorting = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.usageStatsSorting, it)
@@ -174,6 +207,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.singleTap = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.singleTap, it)
     }
+
+
 
 //    companion object {
 //        const val PRIVATE_FLAG_HAS_DOMAIN_URLS = (1 shl 4)

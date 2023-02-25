@@ -52,6 +52,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
+    var whichAppsCanHandleLinksLoading by mutableStateOf(false)
 
     var usageStatsSorting by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.usageStatsSorting) ?: false
@@ -178,7 +179,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     suspend fun loadAppsWhichCanHandleLinksAsync(
         context: Context,
         manager: DomainVerificationManager
-    ): Boolean {
+    ) {
+        whichAppsCanHandleLinksLoading = true
         return withContext(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
             whichAppsCanHandleLinks.addAll(
@@ -199,6 +201,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     .sortedBy { it.displayLabel }
                     .toList()
             )
+
+            whichAppsCanHandleLinksLoading = false
         }
     }
 

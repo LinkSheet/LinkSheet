@@ -169,7 +169,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    if (viewModel.whichAppsCanHandleLinks.isEmpty()) {
+                    if (viewModel.whichAppsCanHandleLinksLoading) {
                         CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                     } else {
                         Text(

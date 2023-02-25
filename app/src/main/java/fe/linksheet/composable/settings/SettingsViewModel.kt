@@ -117,6 +117,12 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    fun deletePreferredAppWhereComponentAsync(componentName: String): Deferred<Unit> {
+        return viewModelScope.async(Dispatchers.IO){
+            database.preferredAppDao().deleteByComponent(componentName)
+        }
+    }
+
     fun openDefaultBrowserSettings(context: Context) {
         context.startActivity(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
     }
@@ -183,6 +189,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     fun onBrowserMode(it: BrowserHandler.BrowserMode) {
+        if(this.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode != it && this.selectedBrowser != null){
+            deletePreferredAppWhereComponentAsync(this.selectedBrowser!!)
+        }
+
         this.browserMode = it
         this.preferenceRepository.writeString(
             PreferenceRepository.browserMode,

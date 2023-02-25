@@ -35,6 +35,7 @@ import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
@@ -316,7 +317,11 @@ class BottomSheetActivity : ComponentActivity() {
                             Column {
                                 Text(text = info.displayLabel)
                                 if (result.showExtended || bottomSheetViewModel.alwaysShowPackageName) {
-                                    Text(text = info.packageName)
+                                    Text(
+                                        text = info.packageName,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.tertiary
+                                    )
                                 }
                             }
                         }

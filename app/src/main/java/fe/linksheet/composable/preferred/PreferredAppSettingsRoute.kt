@@ -58,6 +58,7 @@ fun PreferredAppSettingsRoute(
     var openDialog by remember { mutableStateOf(false) }
     var buttonType by remember { mutableStateOf(ButtonType.Confirm) }
     val hostMap = remember { mutableStateMapOf<String, Boolean>() }
+    var hasAppHosts by remember { mutableStateOf(false) }
     var displayActivityInfo by remember { mutableStateOf<DisplayActivityInfo?>(null) }
 
     LaunchedEffect(openDialog) {
@@ -162,15 +163,17 @@ fun PreferredAppSettingsRoute(
                                 Text(text = stringResource(id = R.string.remove_all))
                             }
 
-                            Spacer(modifier = Modifier.width(5.dp))
+                            if(hasAppHosts){
+                                Spacer(modifier = Modifier.width(5.dp))
 
-                            OutlinedButton(
-                                contentPadding = PaddingValues(horizontal = 18.dp),
-                                onClick = {
-                                    openDialog = false
-                                    buttonType = ButtonType.AddAll
-                                }) {
-                                Text(text = stringResource(id = R.string.add_all))
+                                OutlinedButton(
+                                    contentPadding = PaddingValues(horizontal = 18.dp),
+                                    onClick = {
+                                        openDialog = false
+                                        buttonType = ButtonType.AddAll
+                                    }) {
+                                    Text(text = stringResource(id = R.string.add_all))
+                                }
                             }
                         }
 
@@ -225,7 +228,7 @@ fun PreferredAppSettingsRoute(
                             hostMap.clear()
 
                             if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                manager.getAppHosts(app.packageName).forEach {
+                                manager.getAppHosts(app.packageName).also { hasAppHosts = it.isNotEmpty() }.forEach {
                                     hostMap[it] = hosts.contains(it)
                                 }
                             }

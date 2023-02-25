@@ -70,6 +70,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.enableSendButton) ?: false
     )
 
+    var alwaysShowPackageName by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
+    )
+
     fun loadPreferredApps(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferredApps.clear()
@@ -180,7 +184,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     fun onBrowserMode(it: BrowserHandler.BrowserMode) {
         this.browserMode = it
-        this.preferenceRepository.writeString(PreferenceRepository.browserMode, it, BrowserHandler.BrowserMode.persister)
+        this.preferenceRepository.writeString(
+            PreferenceRepository.browserMode,
+            it,
+            BrowserHandler.BrowserMode.persister
+        )
     }
 
     fun onSelectedBrowser(it: String) {
@@ -224,6 +232,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.enableSendButton, it)
     }
 
+    fun onAlwaysShowButton(it: Boolean) {
+        this.alwaysShowPackageName = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.alwaysShowPackageName, it)
+    }
 
 
 //    companion object {

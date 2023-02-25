@@ -142,7 +142,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     companion object {
         val buttonRowHeight = 50.dp
-        val appListItemHeight = 50.dp
+        val appListItemHeight = 60.dp
         val preferredAppItemHeight = 60.dp
         val maxAppListButtonRowHeight = 350.dp
     }
@@ -315,7 +315,7 @@ class BottomSheetActivity : ComponentActivity() {
 
                             Column {
                                 Text(text = info.displayLabel)
-                                if (result.showExtended) {
+                                if (result.showExtended || bottomSheetViewModel.alwaysShowPackageName) {
                                     Text(text = info.packageName)
                                 }
                             }

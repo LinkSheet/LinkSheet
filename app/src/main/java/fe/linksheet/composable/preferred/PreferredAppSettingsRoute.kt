@@ -200,7 +200,13 @@ fun PreferredAppSettingsRoute(
                 }
             })
         } else {
-            Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+            Column(
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(0.3f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+            }
         }
     }
 }

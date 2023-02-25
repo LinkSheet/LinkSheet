@@ -31,8 +31,13 @@ class BottomSheetViewModel : ViewModel(),
     var singleTap by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
     )
+
     var enableSendButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableSendButton) ?: false
+    )
+
+    var alwaysShowPackageName by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
     )
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {

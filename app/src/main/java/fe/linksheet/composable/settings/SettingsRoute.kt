@@ -36,15 +36,16 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
         defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
     }
 
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
+    val lifecycleState =
+        LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
-            if(!viewModel.getUsageStatsAllowed(context)){
+            if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.onUsageStatsSorting(false)
             }
 
-            if(viewModel.wasTogglingUsageStatsSorting){
+            if (viewModel.wasTogglingUsageStatsSorting) {
                 viewModel.onUsageStatsSorting(true)
                 viewModel.wasTogglingUsageStatsSorting = false
             }
@@ -166,15 +167,31 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
         }
 
         item(key = "enable_send_intent") {
-            SwitchRow(checked = viewModel.enableSendButton, onChange = {
-                viewModel.onSendButton(it)
-            }, headlineId = R.string.enable_send_button, subtitleId = R.string.enable_send_button_explainer)
+            SwitchRow(
+                checked = viewModel.enableSendButton,
+                onChange = {
+                    viewModel.onSendButton(it)
+                },
+                headlineId = R.string.enable_send_button,
+                subtitleId = R.string.enable_send_button_explainer
+            )
         }
 
         item(key = "enable_single_tap") {
             SwitchRow(checked = viewModel.singleTap, onChange = {
                 viewModel.onSingleTap(it)
             }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)
+        }
+
+        item(key = "always_show_package_name") {
+            SwitchRow(
+                checked = viewModel.alwaysShowPackageName,
+                onChange = {
+                    viewModel.onAlwaysShowButton(it)
+                },
+                headlineId = R.string.always_show_package_name,
+                subtitleId = R.string.always_show_package_name_explainer
+            )
         }
     }
 }

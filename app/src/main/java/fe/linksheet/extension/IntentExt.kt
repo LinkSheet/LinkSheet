@@ -27,9 +27,9 @@ fun Intent.getUri(): Uri? {
 }
 
 fun Intent.buildSendTo(uri: Uri): Intent {
-    return this.apply {
+    return Intent.createChooser(this.apply {
         this.action = Intent.ACTION_SEND
         this.type = "text/plain"
         this.putExtra(Intent.EXTRA_TEXT, uri.toString())
-    }
+    }, null)
 }

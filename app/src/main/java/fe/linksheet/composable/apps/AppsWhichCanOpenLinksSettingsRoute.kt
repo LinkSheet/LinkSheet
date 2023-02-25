@@ -30,6 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
+import fe.linksheet.composable.Searchbar
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -55,8 +56,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
             refreshing = true
         }
 
-        viewModel.loadAppsWhichCanHandleLinksAsync(context, manager).await()
-        viewModel.filterWhichAppsCanHandleLinksAsync(filter).await()
+        viewModel.loadAppsWhichCanHandleLinksAsync(context, manager)
+        viewModel.filterWhichAppsCanHandleLinksAsync(filter)
 
         if (fetchRefresh) {
             delay(100)
@@ -64,7 +65,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         }
     }
 
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
+    val lifecycleState =
+        LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
@@ -104,32 +106,13 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                placeholder = { Text(text = stringResource(id = R.string.search)) },
-                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MaterialTheme.colorScheme.primary),
-                shape = RoundedCornerShape(size = 32.dp),
-                value = filter,
-                trailingIcon = {
-                    if (filter.isNotEmpty()) {
-                        IconButton(onClick = {
-                            filter = ""
-                            viewModel.filterWhichAppsCanHandleLinksAsync(filter)
-                        }) {
-                            Icon(
-                                imageVector = Icons.Default.Clear,
-                                contentDescription = stringResource(id = R.string.clear),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                },
-                onValueChange = { value ->
-                    filter = value
-                    viewModel.filterWhichAppsCanHandleLinksAsync(value)
-                }
-            )
+            Searchbar(filter = filter, onValueChange = {
+                filter = it
+                refreshScope.launch { viewModel.filterWhichAppsCanHandleLinksAsync(it) }
+            }, onClearClick = {
+                filter = ""
+                refreshScope.launch { viewModel.filterWhichAppsCanHandleLinksAsync(filter) }
+            })
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -164,7 +147,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                         color = MaterialTheme.colorScheme.onSurface
                                     )
 
-                                    if(viewModel.alwaysShowPackageName){
+                                    if (viewModel.alwaysShowPackageName) {
                                         Text(
                                             text = info.packageName,
                                             fontSize = 12.sp,
@@ -180,7 +163,9 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                 })
             } else {
                 Column(
-                    modifier = Modifier.fillMaxWidth().fillMaxHeight(0.3f),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.3f),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {

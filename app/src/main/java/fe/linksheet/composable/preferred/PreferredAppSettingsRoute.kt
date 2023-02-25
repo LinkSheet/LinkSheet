@@ -22,10 +22,12 @@ import androidx.navigation.NavHostController
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
+import fe.linksheet.composable.Searchbar
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,8 +43,12 @@ fun PreferredAppSettingsRoute(
         } else null
     }
 
+    var filter by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
+
     LaunchedEffect(Unit) {
         viewModel.loadPreferredApps(context)
+        viewModel.filterPreferredAppsAsync(filter)
     }
 
     var openDialog by remember { mutableStateOf(false) }
@@ -63,6 +69,7 @@ fun PreferredAppSettingsRoute(
 
             tasks.awaitAll()
             viewModel.loadPreferredApps(context)
+            viewModel.filterPreferredAppsAsync(filter)
         }
     }
 
@@ -134,6 +141,7 @@ fun PreferredAppSettingsRoute(
         }
     }
 
+
     Column(modifier = Modifier.padding(horizontal = 15.dp)) {
         Text(
             text = stringResource(id = R.string.preferred_apps),
@@ -148,10 +156,22 @@ fun PreferredAppSettingsRoute(
             color = MaterialTheme.colorScheme.onSurface
         )
 
-        if (viewModel.preferredApps.isNotEmpty()) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Searchbar(filter = filter, onValueChange = {
+            filter = it
+            coroutineScope.launch { viewModel.filterPreferredAppsAsync(it) }
+        }, onClearClick = {
+            filter = ""
+            coroutineScope.launch { viewModel.filterPreferredAppsAsync(filter) }
+        })
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        if (viewModel.preferredAppsFiltered.isNotEmpty()) {
             Spacer(modifier = Modifier.height(10.dp))
             LazyColumn(content = {
-                viewModel.preferredApps.toSortedMap().forEach { (app, hosts) ->
+                viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
                     item(key = app.flatComponentName) {
                         ClickableRow(padding = 5.dp, onClick = {
                             openDialog = true
@@ -163,7 +183,7 @@ fun PreferredAppSettingsRoute(
                                 }
                             }
 
-                            if(manager == null || hostMap.isEmpty()){
+                            if (manager == null || hostMap.isEmpty()) {
                                 hosts.forEach { hostMap[it] = true }
                             }
 
@@ -201,7 +221,9 @@ fun PreferredAppSettingsRoute(
             })
         } else {
             Column(
-                modifier = Modifier.fillMaxWidth().fillMaxHeight(0.3f),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.3f),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {

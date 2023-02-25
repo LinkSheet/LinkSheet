@@ -9,6 +9,7 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.core.content.getSystemService
@@ -24,10 +25,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.preference.PreferenceRepository
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -37,6 +35,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     private val preferenceRepository by inject<PreferenceRepository>()
 
     val preferredApps = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
+    val preferredAppsFiltered = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
 
     val browsers = mutableStateListOf<DisplayActivityInfo>()
 
@@ -78,19 +77,31 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
     )
 
-    fun loadPreferredApps(context: Context) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun filterPreferredAppsAsync(filter: String) {
+        return withContext(Dispatchers.IO) {
+            preferredAppsFiltered.clear()
+            preferredApps.forEach { (info, hosts) ->
+                Log.d("Filter", "${info.displayLabel} $filter")
+                if(filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)){
+                    preferredAppsFiltered[info] = hosts
+                }
+            }
+        }
+    }
+
+    suspend fun loadPreferredApps(context: Context) {
+        withContext(Dispatchers.IO) {
             preferredApps.clear()
 
 //            val browsers = BrowserResolver.resolve(context).map { it.packageName }
 
-            database.preferredAppDao().allPreferredApps().forEach { it ->
-                val displayActivityInfo = it.resolve(context)
+            database.preferredAppDao().allPreferredApps().forEach { app ->
+                val displayActivityInfo = app.resolve(context)
 
                 if (displayActivityInfo != null
 //                    && !browsers.contains(it.componentName.packageName)
                 ) {
-                    preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(it.host)
+                    preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(app.host)
                 }
             }
         }
@@ -152,8 +163,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return resolveInfo?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
     }
 
-    fun filterWhichAppsCanHandleLinksAsync(filter: String): Deferred<Boolean> {
-        return viewModelScope.async(Dispatchers.IO) {
+    suspend fun filterWhichAppsCanHandleLinksAsync(filter: String): Boolean {
+        return withContext(Dispatchers.IO) {
             whichAppsCanHandleLinksFiltered.clear()
             whichAppsCanHandleLinksFiltered.addAll(whichAppsCanHandleLinks.filter {
                 if (filter.isNotEmpty()) it.displayLabel.contains(
@@ -165,11 +176,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun loadAppsWhichCanHandleLinksAsync(
+    suspend fun loadAppsWhichCanHandleLinksAsync(
         context: Context,
         manager: DomainVerificationManager
-    ): Deferred<Boolean> {
-        return viewModelScope.async(Dispatchers.IO) {
+    ): Boolean {
+        return withContext(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
             whichAppsCanHandleLinks.addAll(
                 context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)

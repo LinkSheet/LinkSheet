@@ -30,6 +30,9 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
+enum class ButtonType {
+    Confirm, DeleteAll, AddAll
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,27 +57,35 @@ fun PreferredAppSettingsRoute(
     }
 
     var openDialog by remember { mutableStateOf(false) }
-    var removeAll by remember { mutableStateOf(false) }
+    var buttonType by remember { mutableStateOf(ButtonType.Confirm) }
     val hostMap = remember { mutableStateMapOf<String, Boolean>() }
     var displayActivityInfo by remember { mutableStateOf<DisplayActivityInfo?>(null) }
 
     LaunchedEffect(openDialog) {
         if (!openDialog) {
-            Log.d("Removeall", "$removeAll")
-            if (removeAll) {
-                removeAll = false
-                viewModel.deletePreferredAppAsync(displayActivityInfo!!.packageName)
-            } else {
-                hostMap.forEach { (host, enabled) ->
-                    if (enabled) viewModel.insertPreferredAppAsync(
-                        displayActivityInfo!!.toPreferredApp(
-                            host,
-                            true
-                        )
+            when (buttonType) {
+                ButtonType.DeleteAll -> {
+                    viewModel.deletePreferredAppWherePackageAsync(displayActivityInfo!!.packageName)
+                }
+                ButtonType.AddAll -> {
+                    viewModel.insertPreferredAppsAsync(
+                        hostMap.map { (host, _) -> displayActivityInfo!!.toPreferredApp(host, true) }
                     )
-                    else viewModel.deletePreferredAppAsync(host)
+                }
+                else -> {
+                    hostMap.forEach { (host, enabled) ->
+                        if (enabled) viewModel.insertPreferredAppAsync(
+                            displayActivityInfo!!.toPreferredApp(
+                                host,
+                                true
+                            )
+                        )
+                        else viewModel.deletePreferredAppAsync(host)
+                    }
                 }
             }
+
+            buttonType = ButtonType.Confirm
 
             viewModel.loadPreferredApps(context)
             viewModel.filterPreferredAppsAsync(filter)
@@ -138,11 +149,24 @@ fun PreferredAppSettingsRoute(
 
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Row {
-                            TextButton(onClick = {
-                                openDialog = false
-                                removeAll = true
-                            }) {
+                            OutlinedButton(
+                                contentPadding = PaddingValues(horizontal = 18.dp),
+                                onClick = {
+                                    openDialog = false
+                                    buttonType = ButtonType.DeleteAll
+                                }) {
                                 Text(text = stringResource(id = R.string.remove_all))
+                            }
+
+                            Spacer(modifier = Modifier.width(5.dp))
+
+                            OutlinedButton(
+                                contentPadding = PaddingValues(horizontal = 18.dp),
+                                onClick = {
+                                    openDialog = false
+                                    buttonType = ButtonType.AddAll
+                                }) {
+                                Text(text = stringResource(id = R.string.add_all))
                             }
                         }
 

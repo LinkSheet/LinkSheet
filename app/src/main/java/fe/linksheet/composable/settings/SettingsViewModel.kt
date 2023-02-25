@@ -120,8 +120,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>): Deferred<Unit> {
-        return viewModelScope.async(Dispatchers.IO) {
+   suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) {
+        return withContext(Dispatchers.IO) {
             database.preferredAppDao().insert(preferredApps)
         }
     }

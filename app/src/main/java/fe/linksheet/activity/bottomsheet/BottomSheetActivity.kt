@@ -3,6 +3,7 @@ package fe.linksheet.activity.bottomsheet
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -30,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
@@ -59,7 +61,6 @@ class BottomSheetActivity : ComponentActivity() {
 
     @OptIn(
         ExperimentalMaterialApi::class, ExperimentalMaterialApi::class,
-        ExperimentalCoroutinesApi::class
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +106,9 @@ class BottomSheetActivity : ComponentActivity() {
         deferred.invokeOnCompletion {
             setContent {
                 AppTheme {
+                    val configuration = LocalConfiguration.current
+                    val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
                     val drawerState = rememberModalBottomSheetState(
                         initialValue = ModalBottomSheetValue.Expanded,
                         skipHalfExpanded = false
@@ -117,25 +121,28 @@ class BottomSheetActivity : ComponentActivity() {
                     }
 
                     val launchScope = rememberCoroutineScope()
+                    val uri = remember { intent.getUri() }
 
-                    BottomDrawer(drawerState = drawerState, sheetContent = {
-                        val uri = intent.getUri()
-                        if (bottomSheetViewModel.result != null && uri != null) {
-                            if (bottomSheetViewModel.result?.filteredItem == null) {
-                                OpenWith(
-                                    result = bottomSheetViewModel.result!!,
-                                    uri = uri,
-                                    launchScope = launchScope
-                                )
-                            } else {
-                                OpenWithPreferred(
-                                    result = bottomSheetViewModel.result!!,
-                                    uri = uri,
-                                    launchScope = launchScope
-                                )
+                    BottomDrawer(
+                        modifier = if (landscape) Modifier.fillMaxWidth(0.55f).fillMaxHeight() else Modifier,
+                        drawerState = drawerState,
+                        sheetContent = {
+                            if (bottomSheetViewModel.result != null && uri != null) {
+                                if (bottomSheetViewModel.result?.filteredItem == null) {
+                                    OpenWith(
+                                        result = bottomSheetViewModel.result!!,
+                                        uri = uri,
+                                        launchScope = launchScope
+                                    )
+                                } else {
+                                    OpenWithPreferred(
+                                        result = bottomSheetViewModel.result!!,
+                                        uri = uri,
+                                        launchScope = launchScope
+                                    )
+                                }
                             }
-                        }
-                    })
+                        })
                 }
             }
         }

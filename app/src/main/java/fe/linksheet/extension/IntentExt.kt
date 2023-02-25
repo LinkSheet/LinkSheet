@@ -14,16 +14,16 @@ fun Intent.sourceIntent() = Intent(this).apply {
 //{ act=android.intent.action.VIEW dat=https://twitter.com/... flg=0x10800000 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity (has extras) }
 
 fun Intent.getUri(): Uri? {
-    var uri = data
-    if (uri == null) {
-        uri = Uri.parse(getCharSequenceExtra(Intent.EXTRA_TEXT).toString())
+    var data = dataString
+    if (data == null) {
+        data = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
     }
 
-    if (uri == null) {
-        uri = Uri.parse(getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString())
+    if (data == null) {
+        data = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
     }
 
-    return uri
+    return data?.let { Uri.parse(it.lowercase()) }
 }
 
 fun Intent.buildSendTo(uri: Uri): Intent {

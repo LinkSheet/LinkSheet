@@ -39,7 +39,7 @@
     <string name="send_to">Share to</string>
     <string name="preferred_apps_explainer">Preferred apps are the apps you set to \"Always\" open certain hosts</string>
     <string name="always_show_package_name">Always show package name</string>
-    <string name="always_show_package_name_explainer">Always show the package names in the bottom sheet instead of just the app names</string>
+    <string name="always_show_package_name_explainer">Always show the package names instead of just app names</string>
     <string name="disable_toasts">Disable toasts</string>
     <string name="disable_toasts_explainer">Never show any toast messages</string>
 </resources>

@@ -95,12 +95,22 @@ fun PreferredBrowserSettingsRoute(
 
                         Spacer(modifier = Modifier.width(10.dp))
 
-                        Text(
-                            text = app.displayLabel, fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold
-                        )
+                        Column {
+                            Text(
+                                text = app.displayLabel, fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontFamily = HkGroteskFontFamily,
+                                fontWeight = FontWeight.SemiBold
+                            )
+
+                            if(viewModel.alwaysShowPackageName){
+                                Text(
+                                    text = app.packageName,
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.tertiary
+                                )
+                            }
+                        }
                     }
                 }
             }

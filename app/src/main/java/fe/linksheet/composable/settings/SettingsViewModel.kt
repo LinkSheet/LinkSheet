@@ -81,7 +81,6 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return withContext(Dispatchers.IO) {
             preferredAppsFiltered.clear()
             preferredApps.forEach { (info, hosts) ->
-                Log.d("Filter", "${info.displayLabel} $filter")
                 if (filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)) {
                     preferredAppsFiltered[info] = hosts
                 }

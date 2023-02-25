@@ -270,7 +270,13 @@ fun PreferredAppSettingsRoute(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+                if (viewModel.preferredApps.isEmpty()) {
+                    Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+                } else {
+                    Text(
+                        text = stringResource(id = R.string.no_such_app_found),
+                    )
+                }
             }
         }
     }

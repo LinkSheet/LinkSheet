@@ -42,11 +42,10 @@ fun PreferredAppSettingsRoute(
 ) {
     val context = LocalContext.current
 
-    val manager = remember {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            context.getSystemService(DomainVerificationManager::class.java)
-        } else null
-    }
+    val manager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        remember { context.getSystemService(DomainVerificationManager::class.java) }
+    } else null
+
 
     var filter by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
@@ -69,7 +68,12 @@ fun PreferredAppSettingsRoute(
                 }
                 ButtonType.AddAll -> {
                     viewModel.insertPreferredAppsAsync(
-                        hostMap.map { (host, _) -> displayActivityInfo!!.toPreferredApp(host, true) }
+                        hostMap.map { (host, _) ->
+                            displayActivityInfo!!.toPreferredApp(
+                                host,
+                                true
+                            )
+                        }
                     )
                 }
                 else -> {

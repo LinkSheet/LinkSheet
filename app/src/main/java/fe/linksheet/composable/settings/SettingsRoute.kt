@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings
 
+import android.os.Build
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -120,22 +121,24 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
 
-        item(key = appsWhichCanOpenLinksSettingsRoute) {
-            ClickableRow(
-                padding = 10.dp,
-                onClick = { navController.navigate(appsWhichCanOpenLinksSettingsRoute) }) {
-                Column {
-                    Text(
-                        text = stringResource(id = R.string.apps_which_can_open_links),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = stringResource(id = R.string.apps_which_can_open_links_explainer_2),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            item(key = appsWhichCanOpenLinksSettingsRoute) {
+                ClickableRow(
+                    padding = 10.dp,
+                    onClick = { navController.navigate(appsWhichCanOpenLinksSettingsRoute) }) {
+                    Column {
+                        Text(
+                            text = stringResource(id = R.string.apps_which_can_open_links),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 18.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            text = stringResource(id = R.string.apps_which_can_open_links_explainer_2),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
                 }
             }
         }

@@ -38,6 +38,19 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12.
 </div>
 
  </div>
+ 
+## Features
+
+* Set preferred browser: Always list all browsers, only list native apps, always list selected browser 
+* Preferred app for host: Set app to always open for selected host
+* List apps which have verified links so you can easily disable them to allow LinkSheet to work
+* Include usage stats in sorting algorithm
+* Copy url button in bottom sheet which copies the current url to the clipboard
+* Share To button in bottom sheet which sends a "Share To" intent to other apps
+* Single tap: Only require a single tap in bottom sheet to open app
+* Always show package name: Shows package names all throughout the application
+* Disable toast: Disables all toast messages
+
 
 ## Donations
 

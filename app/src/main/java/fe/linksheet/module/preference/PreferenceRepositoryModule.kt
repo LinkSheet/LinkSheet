@@ -30,6 +30,7 @@ class PreferenceRepository(context: Context) {
         val selectedBrowser = Preference<String>("selected_browser", null)
         val enableSendButton = Preference("enable_send_button", false)
         val alwaysShowPackageName = Preference("always_show_package_name", false)
+        val disableToasts = Preference("disable_toasts", false)
 
         val all = listOf(
             enableCopyButton,
@@ -38,7 +39,8 @@ class PreferenceRepository(context: Context) {
             browserMode,
             selectedBrowser,
             enableSendButton,
-            alwaysShowPackageName
+            alwaysShowPackageName,
+            disableToasts
         )
     }
 

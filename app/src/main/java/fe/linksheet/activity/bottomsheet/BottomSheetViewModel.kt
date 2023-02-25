@@ -40,6 +40,10 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
     )
 
+    var disableToasts by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
+    )
+
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
             result = ResolveIntents.resolve(context, intent)

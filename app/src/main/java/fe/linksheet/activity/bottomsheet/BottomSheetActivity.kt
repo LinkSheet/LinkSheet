@@ -91,12 +91,14 @@ class BottomSheetActivity : ComponentActivity() {
 
             if (completed != null && completed.alwaysPreferred == true || completed!!.isSingleBrowserOnlyResolvedItem) {
                 val app = completed.filteredItem ?: completed.resolved[0]
-                runOnUiThread {
-                    Toast.makeText(
-                        this@BottomSheetActivity,
-                        getString(R.string.opening_with_app, app.displayLabel),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                if(!bottomSheetViewModel.disableToasts){
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@BottomSheetActivity,
+                            getString(R.string.opening_with_app, app.displayLabel),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
                 launchApp(app, true)
@@ -364,7 +366,9 @@ class BottomSheetActivity : ComponentActivity() {
             if (bottomSheetViewModel.enableCopyButton) {
                 OutlinedButton(contentPadding = PaddingValues(horizontal = 18.dp), onClick = {
                     clipboard.setPrimaryClip(ClipData.newPlainText("URL", uri.toString()))
-                    Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
+                    if(!bottomSheetViewModel.disableToasts){
+                        Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
+                    }
                 }) {
                     Text(text = stringResource(id = R.string.copy))
                 }

@@ -74,6 +74,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
     )
 
+    var disableToasts by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
+    )
+
     fun loadPreferredApps(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             preferredApps.clear()
@@ -247,6 +251,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.alwaysShowPackageName, it)
     }
 
+    fun onDisableToasts(it: Boolean) {
+        this.disableToasts = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.disableToasts, it)
+    }
 
 //    companion object {
 //        const val PRIVATE_FLAG_HAS_DOMAIN_URLS = (1 shl 4)

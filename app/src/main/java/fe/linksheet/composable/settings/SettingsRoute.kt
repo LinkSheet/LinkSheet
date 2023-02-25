@@ -193,6 +193,15 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                 subtitleId = R.string.always_show_package_name_explainer
             )
         }
+
+        item(key = "disable_toasts") {
+            SwitchRow(
+                checked = viewModel.disableToasts,
+                onChange = { viewModel.onDisableToasts(it) },
+                headlineId = R.string.disable_toasts,
+                subtitleId = R.string.disable_toasts_explainer
+            )
+        }
     }
 }
 

@@ -42,7 +42,7 @@ data class DisplayActivityInfo(
     }
 
     fun toPreferredApp(host: String, alwaysPreferred: Boolean) =
-        PreferredApp(host = host, component = componentName.flattenToString(), alwaysPreferred = alwaysPreferred)
+        PreferredApp(host = host, packageName = packageName, component = componentName.flattenToString(), alwaysPreferred = alwaysPreferred)
 
     fun getBitmap(context: Context) = getBitmapFromImage(context, displayIcon!!).asImageBitmap()
 

@@ -84,7 +84,7 @@ fun PreferredBrowserSettingsRoute(
                         selected = viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.flatComponentName,
                         onClick = {
                             viewModel.onBrowserMode(BrowserHandler.BrowserMode.SelectedBrowser)
-                            viewModel.onSelectedBrowser(app.flatComponentName)
+                            viewModel.onSelectedBrowser(app.packageName)
                         }
                     ) {
                         Image(

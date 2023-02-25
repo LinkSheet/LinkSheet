@@ -23,6 +23,6 @@ interface PreferredAppDao {
     @Query("DELETE FROM openwith WHERE host = :host")
     fun deleteHost(host: String)
 
-    @Query("DELETE FROM openwith WHERE component = :componentName")
-    fun deleteByComponent(componentName: String)
+    @Query("DELETE FROM openwith WHERE packageName = :packageName")
+    fun deleteByPackageName(packageName: String)
 }

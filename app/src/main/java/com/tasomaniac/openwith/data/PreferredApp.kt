@@ -14,6 +14,7 @@ import androidx.room.PrimaryKey
 data class PreferredApp(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") val id: Int = 0,
     val host: String,
+    val packageName: String? = null,
     val component: String,
     val alwaysPreferred: Boolean
 ) {

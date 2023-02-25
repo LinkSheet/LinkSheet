@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.tasomaniac.openwith.data.migrations.Migration1to2
 
-@Database(entities = [PreferredApp::class], version = 1, exportSchema = false)
+@Database(entities = [PreferredApp::class], version = 2, exportSchema = false)
 abstract class LinkSheetDatabase : RoomDatabase() {
 
     abstract fun preferredAppDao(): PreferredAppDao
@@ -15,6 +16,6 @@ abstract class LinkSheetDatabase : RoomDatabase() {
             context.applicationContext,
             LinkSheetDatabase::class.java,
             "linksheet"
-        ).build()
+        ).addMigrations(Migration1to2).build()
     }
 }

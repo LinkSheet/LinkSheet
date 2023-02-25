@@ -61,6 +61,7 @@ class BottomSheetViewModel : ViewModel(),
             intent.component?.let { component ->
                 val app = PreferredApp(
                     host = intent.data!!.host!!.lowercase(Locale.getDefault()),
+                    packageName = component.packageName,
                     component = component.flattenToString(),
                     alwaysPreferred = always
                 )

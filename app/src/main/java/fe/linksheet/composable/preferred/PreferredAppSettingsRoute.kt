@@ -2,6 +2,7 @@ package fe.linksheet.composable.preferred
 
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -29,6 +30,7 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PreferredAppSettingsRoute(
@@ -52,22 +54,28 @@ fun PreferredAppSettingsRoute(
     }
 
     var openDialog by remember { mutableStateOf(false) }
+    var removeAll by remember { mutableStateOf(false) }
     val hostMap = remember { mutableStateMapOf<String, Boolean>() }
     var displayActivityInfo by remember { mutableStateOf<DisplayActivityInfo?>(null) }
 
     LaunchedEffect(openDialog) {
         if (!openDialog) {
-            val tasks = hostMap.map { (host, enabled) ->
-                if (enabled) viewModel.insertPreferredAppAsync(
-                    displayActivityInfo!!.toPreferredApp(
-                        host,
-                        true
+            Log.d("Removeall", "$removeAll")
+            if (removeAll) {
+                removeAll = false
+                viewModel.deletePreferredAppAsync(displayActivityInfo!!.packageName)
+            } else {
+                hostMap.forEach { (host, enabled) ->
+                    if (enabled) viewModel.insertPreferredAppAsync(
+                        displayActivityInfo!!.toPreferredApp(
+                            host,
+                            true
+                        )
                     )
-                )
-                else viewModel.deletePreferredAppAsync(host)
+                    else viewModel.deletePreferredAppAsync(host)
+                }
             }
 
-            tasks.awaitAll()
             viewModel.loadPreferredApps(context)
             viewModel.filterPreferredAppsAsync(filter)
         }
@@ -128,12 +136,23 @@ fun PreferredAppSettingsRoute(
                         }
                     })
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        TextButton(onClick = { openDialog = false }) {
-                            Text(text = stringResource(id = R.string.confirm))
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Row {
+                            TextButton(onClick = {
+                                openDialog = false
+                                removeAll = true
+                            }) {
+                                Text(text = stringResource(id = R.string.remove_all))
+                            }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            TextButton(onClick = { openDialog = false }) {
+                                Text(text = stringResource(id = R.string.confirm))
+                            }
                         }
                     }
                 }

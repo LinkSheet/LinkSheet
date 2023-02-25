@@ -82,7 +82,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
             preferredAppsFiltered.clear()
             preferredApps.forEach { (info, hosts) ->
                 Log.d("Filter", "${info.displayLabel} $filter")
-                if(filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)){
+                if (filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)) {
                     preferredAppsFiltered[info] = hosts
                 }
             }
@@ -114,8 +114,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun insertPreferredAppAsync(preferredApp: PreferredApp): Deferred<Unit> {
-        return viewModelScope.async(Dispatchers.IO) {
+    suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) {
+        return withContext(Dispatchers.IO) {
             database.preferredAppDao().insert(preferredApp)
         }
     }
@@ -126,15 +126,15 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun deletePreferredAppAsync(host: String): Deferred<Unit> {
-        return viewModelScope.async(Dispatchers.IO) {
+    suspend fun deletePreferredAppAsync(host: String) {
+        return withContext(Dispatchers.IO) {
             database.preferredAppDao().deleteHost(host)
         }
     }
 
-    fun deletePreferredAppWhereComponentAsync(componentName: String): Deferred<Unit> {
-        return viewModelScope.async(Dispatchers.IO){
-            database.preferredAppDao().deleteByComponent(componentName)
+    suspend fun deletePreferredAppWherePackageAsync(packageName: String) {
+        return withContext(Dispatchers.IO) {
+            database.preferredAppDao().deleteByPackageName(packageName)
         }
     }
 
@@ -204,8 +204,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     fun onBrowserMode(it: BrowserHandler.BrowserMode) {
-        if(this.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode != it && this.selectedBrowser != null){
-            deletePreferredAppWhereComponentAsync(this.selectedBrowser!!)
+        if (this.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode != it && this.selectedBrowser != null) {
+            viewModelScope.launch(Dispatchers.IO){
+                deletePreferredAppWherePackageAsync(selectedBrowser!!)
+            }
         }
 
         this.browserMode = it

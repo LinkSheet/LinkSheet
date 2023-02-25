@@ -15,7 +15,7 @@ object PreferredResolver : KoinComponent {
     private val database by inject<LinkSheetDatabase>()
 
     fun resolve(context: Context, uri: Uri): PreferredDisplayActivityInfo? {
-        val host = uri.host
+        val host = uri.host?.lowercase()
         if (host.isNullOrEmpty()) return null
 
         Log.d("PreferredResolver", "Host: $host")

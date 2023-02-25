@@ -432,7 +432,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     private suspend fun launchApp(info: DisplayActivityInfo, always: Boolean = false) {
         val intentFrom = info.intentFrom(intent.sourceIntent())
-        bottomSheetViewModel.persistSelectedIntentAsync(intentFrom, always).await()
+        bottomSheetViewModel.persistSelectedIntentAsync(intentFrom, always)
 
         this.startActivity(intentFrom)
         this.finish()

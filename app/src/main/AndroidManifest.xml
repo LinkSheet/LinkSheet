@@ -36,7 +36,7 @@
                 android:launchMode="singleInstance"
                 android:theme="@style/Theme.Seal.Dialog">
 
-            <intent-filter android:autoVerify="true">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -44,6 +44,18 @@
 
                 <data android:scheme="https" />
                 <data android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_BROWSER" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <data android:mimeType="text/html" />
             </intent-filter>
 
             <intent-filter>

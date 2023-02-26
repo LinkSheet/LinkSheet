@@ -22,7 +22,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 <!-- ---------- Description ---------- -->
 <div align="center">
 
-LinkSheet restores the Url-App-Chooser that was removed in Android 12.
+LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
 
 </div>
 

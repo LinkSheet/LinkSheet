@@ -290,6 +290,9 @@ fun ItemDivider(@StringRes id: Int){
         fontWeight = FontWeight.SemiBold,
         color = MaterialTheme.colorScheme.primary,
     )
+
+    Spacer(modifier = Modifier.height(5.dp))
+
 }
 
 

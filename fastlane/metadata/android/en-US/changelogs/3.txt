@@ -1,0 +1,1 @@
+* Add menu to view apps with enabled "Open by default" links and edit them

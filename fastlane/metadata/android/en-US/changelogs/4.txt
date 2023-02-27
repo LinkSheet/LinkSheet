@@ -1,0 +1,4 @@
+* Fix package resolving
+* Filter apps by domain verified, sort by name in "Apps which can open links"
+* Add swipe refresh to "Apps which can open links"
+* Refresh "Set as browser" on app resume

@@ -1,0 +1,11 @@
+* Add search to "Apps which can open links"
+* Properly display system apps in "Apps which can open links"
+* Implement copy url button and settings toggle (#2)
+* Implement single tap and settings toggle (#3)
+* Display toast when opening app set to "Always"
+* Display dialog with list of verified hosts in "Preferred apps" when app is set to "Always" open any link on the list
+* Add preferred browser setting: Display no browsers, always display all browsers, select a browser to display
+* Display text when no app can handle link
+* Allow sorting by usage stats
+* Add "Send to" button and settings toggle which allows the user to share the url to other apps (as if they clicked on a "Share to" button in any other app)
+* Add app as target for "Share to" / "Send to" actions

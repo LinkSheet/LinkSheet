@@ -1,0 +1,8 @@
+* Add option to always show package names everywhere
+* Add mimeType = text/html intent filter to fix #7
+* Make bottomsheet look better in landscape mode
+* Delete preferred app when browser mode is changed back from selected to any other option
+* Add option to disable all toast messages
+* Add searchbar to "Preferred apps"
+* Fix url matching by ignoring case
+* Add option to add and remove all links in "Preferred apps" dialog

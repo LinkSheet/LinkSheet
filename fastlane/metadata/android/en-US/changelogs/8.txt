@@ -1,0 +1,6 @@
+* Add explainer to "Preferred apps"
+* Sort apps in "Preferred apps"
+* Update usage stats explainer
+* Decrease horizontal padding of "Copy" / "Share To" buttons to avoid "Always" overflowing
+* Add more space above icon in "Preferred apps" dialog
+* If single browser is selected as default in "Preferred browser", and no native app is present to handle link, automatically redirect without showing bottomsheet

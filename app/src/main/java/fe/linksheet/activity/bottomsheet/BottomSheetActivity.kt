@@ -16,6 +16,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -33,6 +36,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
@@ -121,6 +126,8 @@ class BottomSheetActivity : ComponentActivity() {
                     val launchScope = rememberCoroutineScope()
                     val uri = remember { intent.getUri() }
 
+
+
                     BottomDrawer(
                         modifier = if (landscape) Modifier
                             .fillMaxWidth(0.55f)
@@ -128,19 +135,33 @@ class BottomSheetActivity : ComponentActivity() {
                         drawerState = drawerState,
                         sheetContent = {
                             if (bottomSheetViewModel.result != null && uri != null) {
+                                val showPackage =
+                                    remember { bottomSheetViewModel.result!!.showExtended || bottomSheetViewModel.alwaysShowPackageName }
+
+                                val baseHeight = if (bottomSheetViewModel.gridLayout) {
+                                    val appsPerRow = LocalConfiguration.current.screenWidthDp / gridSize.value
+
+                                    (bottomSheetViewModel.result!!.resolved.size / appsPerRow
+                                            * if (showPackage) gridItemHeightPackage.value else gridItemHeight.value).dp
+                                } else (bottomSheetViewModel.result!!.resolved.size * appListItemHeight.value).dp
+
                                 if (bottomSheetViewModel.result?.filteredItem == null) {
                                     OpenWith(
                                         result = bottomSheetViewModel.result!!,
                                         uri = uri,
                                         launchScope = launchScope,
-                                        drawerState = drawerState
+                                        drawerState = drawerState,
+                                        baseHeight = baseHeight,
+                                        showPackage = showPackage
                                     )
                                 } else {
                                     OpenWithPreferred(
                                         result = bottomSheetViewModel.result!!,
                                         uri = uri,
                                         launchScope = launchScope,
-                                        drawerState = drawerState
+                                        drawerState = drawerState,
+                                        baseHeight = baseHeight,
+                                        showPackage = showPackage
                                     )
                                 }
                             }
@@ -152,9 +173,13 @@ class BottomSheetActivity : ComponentActivity() {
 
     companion object {
         val buttonRowHeight = 50.dp
-        val appListItemHeight = 60.dp
+        val appListItemHeight = 30.dp
         val preferredAppItemHeight = 60.dp
         val maxAppListButtonRowHeight = 350.dp
+
+        val gridSize = 80.dp
+        var gridItemHeightPackage = 70.dp
+        var gridItemHeight = 60.dp
     }
 
     @OptIn(ExperimentalMaterialApi::class)
@@ -163,7 +188,9 @@ class BottomSheetActivity : ComponentActivity() {
         result: IntentResolverResult,
         uri: Uri,
         launchScope: CoroutineScope,
-        drawerState: ModalBottomSheetState
+        drawerState: ModalBottomSheetState,
+        baseHeight: Dp,
+        showPackage: Boolean
     ) {
         val filteredItem = result.filteredItem!!
 
@@ -216,12 +243,20 @@ class BottomSheetActivity : ComponentActivity() {
         Spacer(modifier = Modifier.height(5.dp))
 
         Column(
-            modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection())
+            modifier = Modifier
+                .nestedScroll(rememberNestedScrollInteropConnection())
+                .heightIn(
+                    baseHeight,
+                    maxAppListButtonRowHeight - buttonRowHeight
+                )
         ) {
             AppList(
                 result = result,
                 selectedItem = -1,
-                onSelectedItemChange = { }, launchScope = launchScope
+                onSelectedItemChange = { },
+                launchScope = launchScope,
+                baseHeight = baseHeight,
+                showPackage = showPackage
             )
         }
     }
@@ -232,7 +267,9 @@ class BottomSheetActivity : ComponentActivity() {
         result: IntentResolverResult,
         uri: Uri,
         launchScope: CoroutineScope,
-        drawerState: ModalBottomSheetState
+        drawerState: ModalBottomSheetState,
+        baseHeight: Dp,
+        showPackage: Boolean
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -250,7 +287,7 @@ class BottomSheetActivity : ComponentActivity() {
         Column(
             modifier = Modifier
                 .heightIn(
-                    (result.resolved.size * appListItemHeight.value).dp + buttonRowHeight,
+                    baseHeight + buttonRowHeight,
                     maxAppListButtonRowHeight
                 )
                 .nestedScroll(rememberNestedScrollInteropConnection())
@@ -258,7 +295,9 @@ class BottomSheetActivity : ComponentActivity() {
             AppList(
                 result = result,
                 selectedItem = selectedItem,
-                onSelectedItemChange = { selectedItem = it }, launchScope = launchScope
+                onSelectedItemChange = { selectedItem = it }, launchScope = launchScope,
+                baseHeight = baseHeight,
+                showPackage = showPackage
             )
 
             ButtonRow(
@@ -281,77 +320,130 @@ class BottomSheetActivity : ComponentActivity() {
         result: IntentResolverResult,
         selectedItem: Int,
         onSelectedItemChange: (Int) -> Unit,
-        launchScope: CoroutineScope
+        launchScope: CoroutineScope,
+        baseHeight: Dp,
+        showPackage: Boolean
     ) {
         if (result.totalCount() > 0) {
-            LazyColumn(
-                modifier = Modifier
-                    .padding(horizontal = 3.dp)
-                    .heightIn(
-                        (result.resolved.size * appListItemHeight.value).dp,
-                        maxAppListButtonRowHeight - buttonRowHeight
-                    ),
-                content = {
-                    itemsIndexed(
-                        items = result.resolved,
-                        key = { _, item -> item.flatComponentName }
-                    ) { index, info ->
-                        Row(verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .height(appListItemHeight)
-                                .fillMaxWidth()
-                                .clip(
-                                    RoundedCornerShape(6.dp)
-                                )
-                                .combinedClickable(
-                                    onClick = {
-                                        if (bottomSheetViewModel.singleTap) {
-                                            launchScope.launch {
-                                                launchApp(info)
-                                            }
-                                        } else {
-                                            if (selectedItem == index) launchScope.launch {
-                                                launchApp(info)
-                                            }
-                                            else onSelectedItemChange(index)
-                                        }
-                                    },
-                                    onDoubleClick = {
-                                        launchScope.launch {
-                                            launchApp(info)
-                                        }
-                                    },
-                                    onLongClick = {
-                                        if (bottomSheetViewModel.singleTap) {
-                                            onSelectedItemChange(index)
-                                        }
+            val modifier: @Composable (index: Int, info: DisplayActivityInfo) -> Modifier =
+                @Composable { index, info ->
+                    Modifier
+                        .fillMaxWidth()
+                        .clip(
+                            RoundedCornerShape(6.dp)
+                        )
+                        .combinedClickable(
+                            onClick = {
+                                if (bottomSheetViewModel.singleTap) {
+                                    launchScope.launch {
+                                        launchApp(info)
                                     }
+                                } else {
+                                    if (selectedItem == index) launchScope.launch {
+                                        launchApp(info)
+                                    }
+                                    else onSelectedItemChange(index)
+                                }
+                            },
+                            onDoubleClick = {
+                                launchScope.launch {
+                                    launchApp(info)
+                                }
+                            },
+                            onLongClick = {
+                                if (bottomSheetViewModel.singleTap) {
+                                    onSelectedItemChange(index)
+                                }
+                            }
+                        )
+                        .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else androidx.compose.ui.graphics.Color.Transparent)
+                        .padding(10.dp)
+                }
+
+            if (bottomSheetViewModel.gridLayout) {
+                LazyVerticalGrid(columns = GridCells.Adaptive(gridSize),
+                    modifier = Modifier
+                        .padding(horizontal = 3.dp)
+                        .heightIn(
+                            baseHeight,
+                            maxAppListButtonRowHeight - buttonRowHeight
+                        ),
+                    content = {
+                        itemsIndexed(
+                            items = result.resolved,
+                            key = { _, item -> item.flatComponentName }
+                        ) { index, info ->
+                            Column(
+                                modifier = modifier(
+                                    index,
+                                    info
+                                ).height(if (showPackage) gridItemHeightPackage else gridItemHeight),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Image(
+                                    bitmap = info.getBitmap(this@BottomSheetActivity),
+                                    contentDescription = info.displayLabel,
+                                    modifier = Modifier.size(32.dp)
                                 )
-                                .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else androidx.compose.ui.graphics.Color.Transparent)
-                                .padding(10.dp)
 
-                        ) {
-                            Image(
-                                bitmap = info.getBitmap(this@BottomSheetActivity),
-                                contentDescription = info.displayLabel,
-                                modifier = Modifier.size(32.dp)
-                            )
+                                Spacer(modifier = Modifier.width(5.dp))
 
-                            Spacer(modifier = Modifier.width(5.dp))
-
-                            Column {
-                                Text(text = info.displayLabel)
-                                if (result.showExtended || bottomSheetViewModel.alwaysShowPackageName) {
+                                Text(
+                                    text = info.displayLabel,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                )
+                                if (showPackage) {
                                     Text(
                                         text = info.packageName,
                                         fontSize = 12.sp,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
                                         color = MaterialTheme.colorScheme.tertiary
                                     )
                                 }
                             }
                         }
-                    }
-                })
+                    })
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(horizontal = 3.dp)
+                        .heightIn(
+                            baseHeight,
+                            maxAppListButtonRowHeight - buttonRowHeight
+                        ),
+                    content = {
+                        itemsIndexed(
+                            items = result.resolved,
+                            key = { _, item -> item.flatComponentName }
+                        ) { index, info ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = modifier(index, info).height(appListItemHeight)
+                            ) {
+                                Image(
+                                    bitmap = info.getBitmap(this@BottomSheetActivity),
+                                    contentDescription = info.displayLabel,
+                                    modifier = Modifier.size(32.dp)
+                                )
+
+                                Spacer(modifier = Modifier.width(5.dp))
+
+                                Column {
+                                    Text(text = info.displayLabel)
+                                    if (showPackage) {
+                                        Text(
+                                            text = info.packageName,
+                                            fontSize = 12.sp,
+                                            color = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    })
+            }
         } else {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(

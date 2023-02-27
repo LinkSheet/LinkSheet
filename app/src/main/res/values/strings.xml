@@ -47,4 +47,6 @@
     <string name="hide_after_copying">Hide after copying</string>
     <string name="hide_after_copying_explainer">Hide bottom sheet after \"Copy url\" button has been pressed</string>
     <string name="back">Back</string>
+    <string name="display_grid_layout">Display grid layout</string>
+    <string name="display_grid_layout_explainer">Display a grid instead of a list in the bottom sheet</string>
 </resources>

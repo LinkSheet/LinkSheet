@@ -32,6 +32,7 @@ class PreferenceRepository(context: Context) {
         val enableSendButton = Preference("enable_send_button", false)
         val alwaysShowPackageName = Preference("always_show_package_name", false)
         val disableToasts = Preference("disable_toasts", false)
+        val gridLayout = Preference("grid_layout", false)
 
         val all = listOf(
             enableCopyButton,
@@ -41,7 +42,8 @@ class PreferenceRepository(context: Context) {
             selectedBrowser,
             enableSendButton,
             alwaysShowPackageName,
-            disableToasts
+            disableToasts,
+            gridLayout
         )
     }
 

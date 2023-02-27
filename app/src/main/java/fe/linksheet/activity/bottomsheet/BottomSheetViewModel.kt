@@ -53,6 +53,10 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
     )
 
+    var gridLayout by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
+    )
+
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
             result = ResolveIntents.resolve(context, intent)

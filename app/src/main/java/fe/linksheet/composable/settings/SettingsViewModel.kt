@@ -82,6 +82,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
     )
 
+    var gridLayout by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
+    )
+
+
     suspend fun filterPreferredAppsAsync(filter: String) {
         return withContext(Dispatchers.IO) {
             preferredAppsFiltered.clear()
@@ -279,6 +284,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onDisableToasts(it: Boolean) {
         this.disableToasts = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.disableToasts, it)
+    }
+
+    fun onGridLayout(it: Boolean) {
+        this.gridLayout = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.gridLayout, it)
     }
 
 //    companion object {

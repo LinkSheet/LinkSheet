@@ -230,6 +230,15 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                     subtitleId = R.string.disable_toasts_explainer
                 )
             }
+
+            item(key = "grid_layout"){
+                SwitchRow(
+                    checked = viewModel.gridLayout,
+                    onChange = { viewModel.onGridLayout(it) },
+                    headlineId = R.string.display_grid_layout,
+                    subtitleId = R.string.display_grid_layout_explainer
+                )
+            }
         }
     }
 

@@ -34,7 +34,7 @@
     <string name="no_app_to_handle_link_found">No app to handle link found!</string>
     <string name="open_settings">Open settings</string>
     <string name="no_such_app_found">No such app found!</string>
-    <string name="enable_send_button">Enable "Share to" button</string>
+    <string name="enable_send_button">Enable \"Share to\" button</string>
     <string name="enable_send_button_explainer">Shows a button in the bottom sheet which allows you to share the url to other apps as if you selected it from a \"Share to\" menu</string>
     <string name="send_to">Share to</string>
     <string name="preferred_apps_explainer">Preferred apps are the apps you set to \"Always\" open certain hosts</string>

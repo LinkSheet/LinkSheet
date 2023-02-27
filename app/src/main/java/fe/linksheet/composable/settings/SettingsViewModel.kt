@@ -168,6 +168,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://"))
         val resolveInfo =
             context.packageManager.resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        Log.d("Test", "${resolveInfo?.activityInfo?.packageName}")
 
         return resolveInfo?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
     }

@@ -4,14 +4,18 @@ import android.os.Build
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
@@ -37,7 +41,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
     var defaultBrowserEnabled by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
+        defaultBrowserEnabled = viewModel.checkDefaultBrowser(context)
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
@@ -45,7 +49,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
 
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            defaultBrowserEnabled = !viewModel.checkDefaultBrowser(context)
+            defaultBrowserEnabled = viewModel.checkDefaultBrowser(context)
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.onUsageStatsSorting(false)
             }
@@ -68,26 +72,45 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                 )
             }
         )
-    }){ paddings ->
+    }) { paddings ->
         LazyColumn(modifier = Modifier.padding(paddings), contentPadding = PaddingValues(5.dp)) {
             item(key = "open_default_browser") {
-                ClickableRow(
-                    padding = 10.dp,
-                    onClick = { viewModel.openDefaultBrowserSettings(context) },
-                    enabled = defaultBrowserEnabled
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = if (defaultBrowserEnabled) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.error),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp)
+                        .clickable {
+                            viewModel.openDefaultBrowserSettings(context)
+                        }
                 ) {
-                    Column {
-                        Text(
-                            text = stringResource(id = R.string.set_as_browser),
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 18.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(80.dp), verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Spacer(modifier = Modifier.width(10.dp))
+
+                        val color = if(defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
+                        Image(
+                            imageVector = if (defaultBrowserEnabled) Icons.Default.CheckCircle else Icons.Default.Error,
+                            contentDescription = if (defaultBrowserEnabled) "Checkmark" else "Error",
+                            colorFilter = if(defaultBrowserEnabled) ColorFilter.tint(color) else ColorFilter.tint(color)
                         )
-                        Text(
-                            text = stringResource(id = R.string.set_as_browser_explainer),
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
+
+                        Column(modifier = Modifier.padding(15.dp)) {
+                            Text(
+                                text = stringResource(id = if(defaultBrowserEnabled) R.string.browser_status else R.string.set_as_browser),
+                                fontFamily = HkGroteskFontFamily,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 18.sp,
+                                color = color
+                            )
+                            Text(
+                                text = stringResource(id = if(defaultBrowserEnabled) R.string.set_as_browser_done else R.string.set_as_browser_explainer),
+                                color = if(defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
+                            )
+                        }
                     }
                 }
             }
@@ -231,7 +254,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                 )
             }
 
-            item(key = "grid_layout"){
+            item(key = "grid_layout") {
                 SwitchRow(
                     checked = viewModel.gridLayout,
                     onChange = { viewModel.onGridLayout(it) },

@@ -4,14 +4,13 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -19,15 +18,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.junkfood.seal.ui.component.BackButton
+import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.Searchbar
@@ -38,11 +42,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalFoundationApi::class
+)
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppsWhichCanOpenLinksSettingsRoute(
     navController: NavHostController,
+    onBackPressed: () -> Unit,
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
@@ -84,41 +92,79 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         refreshScope.launch(block = { fetch(true) })
     })
 
-    Box(modifier = Modifier.pullRefresh(state)) {
-        PullRefreshIndicator(refreshing, state, Modifier.align(Alignment.TopCenter))
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 15.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.apps_which_can_open_links),
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.onSurface
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState(),
+        canScroll = { true }
+    )
+
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            LargeTopAppBar(
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
+                title = {
+                    Text(
+                        modifier = Modifier,
+                        text = stringResource(id = R.string.apps_which_can_open_links),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }, navigationIcon = {
+                    BackButton {
+                        onBackPressed()
+                    }
+                }, scrollBehavior = scrollBehavior
             )
+        }, content = { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .pullRefresh(state)
+            ) {
+                PullRefreshIndicator(
+                    refreshing = refreshing,
+                    state = state,
+                    modifier = Modifier.align(Alignment.TopCenter)
+                )
 
-            Text(
-                text = stringResource(id = R.string.apps_which_can_open_links_explainer),
-                color = MaterialTheme.colorScheme.onSurface
-            )
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(padding)
+                        .fillMaxHeight(),
+                    contentPadding = PaddingValues(horizontal = 15.dp)
+                ) {
+                    stickyHeader(key = "header") {
+                        Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                            PreferenceSubtitle(
+                                text = stringResource(R.string.apps_which_can_open_links_explainer),
+                                paddingStart = 0.dp
+                            )
 
-            Spacer(modifier = Modifier.height(10.dp))
+                            Spacer(modifier = Modifier.height(10.dp))
 
-            Searchbar(filter = filter, onValueChange = {
-                filter = it
-                refreshScope.launch { viewModel.filterWhichAppsCanHandleLinksAsync(it) }
-            }, onClearClick = {
-                filter = ""
-                refreshScope.launch { viewModel.filterWhichAppsCanHandleLinksAsync(filter) }
-            })
+                            Searchbar(filter = filter, onValueChange = {
+                                filter = it
+                                refreshScope.launch {
+                                    viewModel.filterWhichAppsCanHandleLinksAsync(
+                                        it
+                                    )
+                                }
+                            }, onClearClick = {
+                                filter = ""
+                                refreshScope.launch {
+                                    viewModel.filterWhichAppsCanHandleLinksAsync(
+                                        filter
+                                    )
+                                }
+                            })
 
-            Spacer(modifier = Modifier.height(10.dp))
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
+                    }
 
-            if (viewModel.whichAppsCanHandleLinksFiltered.isNotEmpty()) {
-                LazyColumn(modifier = Modifier.fillMaxSize(), content = {
-                    if (!refreshing) {
+                    if (viewModel.whichAppsCanHandleLinksFiltered.isNotEmpty() && !refreshing) {
                         items(
                             viewModel.whichAppsCanHandleLinksFiltered,
                             key = { it.flatComponentName }
@@ -159,25 +205,26 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                             Spacer(modifier = Modifier.height(10.dp))
                         }
-                    }
-                })
-            } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    if (viewModel.whichAppsCanHandleLinksLoading) {
-                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                     } else {
-                        Text(
-                            text = stringResource(id = R.string.no_such_app_found),
-                        )
+                        item {
+                            Column(
+                                modifier = Modifier
+                                    .fillParentMaxWidth()
+                                    .fillParentMaxHeight(0.4f),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                if (viewModel.whichAppsCanHandleLinksLoading) {
+                                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                                } else {
+                                    Text(
+                                        text = stringResource(id = R.string.no_such_app_found),
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
-    }
+        })
 }

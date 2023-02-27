@@ -3,7 +3,9 @@ package fe.linksheet.composable.preferred
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -12,6 +14,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.junkfood.seal.ui.component.BackButton
+import com.junkfood.seal.ui.component.PreferenceSubtitle
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
@@ -34,10 +40,11 @@ enum class ButtonType {
     Confirm, DeleteAll, AddAll
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PreferredAppSettingsRoute(
     navController: NavHostController,
+    onBackPressed: () -> Unit,
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
@@ -163,7 +170,7 @@ fun PreferredAppSettingsRoute(
                                 Text(text = stringResource(id = R.string.remove_all))
                             }
 
-                            if(hasAppHosts){
+                            if (hasAppHosts) {
                                 Spacer(modifier = Modifier.width(5.dp))
 
                                 OutlinedButton(
@@ -192,99 +199,125 @@ fun PreferredAppSettingsRoute(
     }
 
 
-    Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-        Text(
-            text = stringResource(id = R.string.preferred_apps),
-            fontFamily = HkGroteskFontFamily,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState(),
+        canScroll = { true }
+    )
 
-        Text(
-            text = stringResource(id = R.string.preferred_apps_explainer),
-            color = MaterialTheme.colorScheme.onSurface
-        )
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            LargeTopAppBar(
+                title = {
+                    Text(
+                        modifier = Modifier,
+                        text = stringResource(id = R.string.preferred_apps),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }, navigationIcon = {
+                    BackButton {
+                        onBackPressed()
+                    }
+                }, scrollBehavior = scrollBehavior
+            )
+        }, content = { padding ->
+            LazyColumn(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxHeight(),
+                contentPadding = PaddingValues(horizontal = 15.dp)
+            ) {
+                stickyHeader(key = "header") {
+                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                        PreferenceSubtitle(
+                            text = stringResource(R.string.preferred_apps_explainer),
+                            paddingStart = 0.dp
+                        )
 
-        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
-        Searchbar(filter = filter, onValueChange = {
-            filter = it
-            coroutineScope.launch { viewModel.filterPreferredAppsAsync(it) }
-        }, onClearClick = {
-            filter = ""
-            coroutineScope.launch { viewModel.filterPreferredAppsAsync(filter) }
-        })
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        if (viewModel.preferredAppsFiltered.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(10.dp))
-            LazyColumn(content = {
-                viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
-                    item(key = app.flatComponentName) {
-                        ClickableRow(padding = 5.dp, onClick = {
-                            openDialog = true
-                            hostMap.clear()
-
-                            if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                manager.getAppHosts(app.packageName).also { hasAppHosts = it.isNotEmpty() }.forEach {
-                                    hostMap[it] = hosts.contains(it)
-                                }
-                            }
-
-                            if (manager == null || hostMap.isEmpty()) {
-                                hosts.forEach { hostMap[it] = true }
-                            }
-
-                            displayActivityInfo = app
-                        }) {
-                            Row {
-                                Image(
-                                    bitmap = app.getBitmap(context),
-                                    contentDescription = app.displayLabel,
-                                    modifier = Modifier.size(42.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(10.dp))
-
-                                Column {
-                                    Text(
-                                        text = app.displayLabel, fontSize = 16.sp,
-                                        color = MaterialTheme.colorScheme.onSurface,
-                                        fontFamily = HkGroteskFontFamily,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-                                    Text(
-                                        text = hosts.joinToString(", "),
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
-                                        color = MaterialTheme.colorScheme.onSurface
-                                    )
-                                }
-                            }
-                        }
+                        Searchbar(filter = filter, onValueChange = {
+                            filter = it
+                            coroutineScope.launch { viewModel.filterPreferredAppsAsync(it) }
+                        }, onClearClick = {
+                            filter = ""
+                            coroutineScope.launch { viewModel.filterPreferredAppsAsync(filter) }
+                        })
 
                         Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
-            })
-        } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.3f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                if (viewModel.preferredApps.isEmpty()) {
-                    Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+
+                if (viewModel.preferredAppsFiltered.isNotEmpty()) {
+                    viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
+                        item(key = app.flatComponentName) {
+                            ClickableRow(padding = 5.dp, onClick = {
+                                openDialog = true
+                                hostMap.clear()
+
+                                if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                    manager.getAppHosts(app.packageName)
+                                        .also { hasAppHosts = it.isNotEmpty() }.forEach {
+                                            hostMap[it] = hosts.contains(it)
+                                        }
+                                }
+
+                                if (manager == null || hostMap.isEmpty()) {
+                                    hosts.forEach { hostMap[it] = true }
+                                }
+
+                                displayActivityInfo = app
+                            }) {
+                                Row {
+                                    Image(
+                                        bitmap = app.getBitmap(context),
+                                        contentDescription = app.displayLabel,
+                                        modifier = Modifier.size(42.dp)
+                                    )
+
+                                    Spacer(modifier = Modifier.width(10.dp))
+
+                                    Column {
+                                        Text(
+                                            text = app.displayLabel, fontSize = 16.sp,
+                                            color = MaterialTheme.colorScheme.onSurface,
+                                            fontFamily = HkGroteskFontFamily,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                        Text(
+                                            text = hosts.joinToString(", "),
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis,
+                                            color = MaterialTheme.colorScheme.onSurface
+                                        )
+                                    }
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
+                    }
                 } else {
-                    Text(
-                        text = stringResource(id = R.string.no_such_app_found),
-                    )
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillParentMaxWidth()
+                                .fillParentMaxHeight(0.4f),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            if (viewModel.preferredApps.isEmpty()) {
+                                Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+                            } else {
+                                Text(text = stringResource(id = R.string.no_such_app_found))
+                            }
+                        }
+                    }
                 }
             }
-        }
-    }
+        })
+
 }

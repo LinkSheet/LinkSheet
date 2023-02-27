@@ -52,6 +52,14 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * Disable toast: Disables all toast messages
 * Display apps in grid instead of list
 
+## Planned features
+
+* Resolve redirects (locally or via external service)
+* Remove tracking parameters
+* Bypass trackers with FastFoward(?)
+* Add history (#10)
+* Improve landscape mode
+
 ## Donations
 
 <a href="https://coindrop.to/fexd" target="_blank"><img src="https://coindrop.to/embed-button.png" style="border-radius: 10px; height: 57px !important;width: 229px !important;" alt="Coindrop.to me"></img></a>

@@ -50,7 +50,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * Single tap: Only require a single tap in bottom sheet to open app
 * Always show package name: Shows package names all throughout the application
 * Disable toast: Disables all toast messages
-
+* Display apps in grid instead of list
 
 ## Donations
 

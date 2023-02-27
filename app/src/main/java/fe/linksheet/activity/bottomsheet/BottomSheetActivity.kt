@@ -18,10 +18,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -52,7 +49,6 @@ import fe.linksheet.extension.sourceIntent
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -91,7 +87,7 @@ class BottomSheetActivity : ComponentActivity() {
 
             if (completed != null && completed.alwaysPreferred == true || completed!!.isSingleBrowserOnlyResolvedItem) {
                 val app = completed.filteredItem ?: completed.resolved[0]
-                if(!bottomSheetViewModel.disableToasts){
+                if (!bottomSheetViewModel.disableToasts) {
                     runOnUiThread {
                         Toast.makeText(
                             this@BottomSheetActivity,
@@ -126,7 +122,9 @@ class BottomSheetActivity : ComponentActivity() {
                     val uri = remember { intent.getUri() }
 
                     BottomDrawer(
-                        modifier = if (landscape) Modifier.fillMaxWidth(0.55f).fillMaxHeight() else Modifier,
+                        modifier = if (landscape) Modifier
+                            .fillMaxWidth(0.55f)
+                            .fillMaxHeight() else Modifier,
                         drawerState = drawerState,
                         sheetContent = {
                             if (bottomSheetViewModel.result != null && uri != null) {
@@ -134,13 +132,15 @@ class BottomSheetActivity : ComponentActivity() {
                                     OpenWith(
                                         result = bottomSheetViewModel.result!!,
                                         uri = uri,
-                                        launchScope = launchScope
+                                        launchScope = launchScope,
+                                        drawerState = drawerState
                                     )
                                 } else {
                                     OpenWithPreferred(
                                         result = bottomSheetViewModel.result!!,
                                         uri = uri,
-                                        launchScope = launchScope
+                                        launchScope = launchScope,
+                                        drawerState = drawerState
                                     )
                                 }
                             }
@@ -157,11 +157,13 @@ class BottomSheetActivity : ComponentActivity() {
         val maxAppListButtonRowHeight = 350.dp
     }
 
+    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun OpenWithPreferred(
         result: IntentResolverResult,
         uri: Uri,
-        launchScope: CoroutineScope
+        launchScope: CoroutineScope,
+        drawerState: ModalBottomSheetState
     ) {
         val filteredItem = result.filteredItem!!
 
@@ -196,7 +198,9 @@ class BottomSheetActivity : ComponentActivity() {
             result = result,
             uri = uri,
             enabled = true,
-            onClick = { launchScope.launch { launchApp(filteredItem, it) } })
+            onClick = { launchScope.launch { launchApp(filteredItem, it) } },
+            drawerState = drawerState
+        )
 
         Divider(color = MaterialTheme.colorScheme.tertiary, thickness = 0.5.dp)
 
@@ -222,8 +226,14 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    private fun OpenWith(result: IntentResolverResult, uri: Uri, launchScope: CoroutineScope) {
+    private fun OpenWith(
+        result: IntentResolverResult,
+        uri: Uri,
+        launchScope: CoroutineScope,
+        drawerState: ModalBottomSheetState
+    ) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
@@ -251,11 +261,17 @@ class BottomSheetActivity : ComponentActivity() {
                 onSelectedItemChange = { selectedItem = it }, launchScope = launchScope
             )
 
-            ButtonRow(result = result, uri = uri, selectedItem != -1) { always ->
-                launchScope.launch {
-                    launchApp(result.resolved[selectedItem], always)
-                }
-            }
+            ButtonRow(
+                result = result,
+                uri = uri,
+                enabled = selectedItem != -1,
+                onClick = { always ->
+                    launchScope.launch {
+                        launchApp(result.resolved[selectedItem], always)
+                    }
+                },
+                drawerState = drawerState
+            )
         }
     }
 
@@ -347,13 +363,16 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun ButtonRow(
         result: IntentResolverResult,
         uri: Uri,
         enabled: Boolean,
-        onClick: (always: Boolean) -> Unit
+        onClick: (always: Boolean) -> Unit,
+        drawerState: ModalBottomSheetState
     ) {
+        val coroutineScope = rememberCoroutineScope()
         val clipboard = remember { getSystemService(ClipboardManager::class.java) }
         val context = LocalContext.current
 
@@ -366,8 +385,12 @@ class BottomSheetActivity : ComponentActivity() {
             if (bottomSheetViewModel.enableCopyButton) {
                 OutlinedButton(contentPadding = PaddingValues(horizontal = 18.dp), onClick = {
                     clipboard.setPrimaryClip(ClipData.newPlainText("URL", uri.toString()))
-                    if(!bottomSheetViewModel.disableToasts){
+                    if (!bottomSheetViewModel.disableToasts) {
                         Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
+                    }
+
+                    if (bottomSheetViewModel.hideAfterCopying) {
+                        coroutineScope.launch { drawerState.hide() }
                     }
                 }) {
                     Text(text = stringResource(id = R.string.copy))

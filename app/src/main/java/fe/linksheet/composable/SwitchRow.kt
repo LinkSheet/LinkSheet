@@ -19,12 +19,13 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @Composable
 fun SwitchRow(
+    modifier: Modifier = Modifier,
     checked: Boolean,
     onChange: (Boolean) -> Unit,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int
 ) {
-    ClickableRow(padding = 10.dp, verticalAlignment = Alignment.CenterVertically, onClick = {
+    ClickableRow(modifier = modifier, padding = 10.dp, verticalAlignment = Alignment.CenterVertically, onClick = {
         onChange(!checked)
     }) {
         Column(modifier = Modifier.fillMaxWidth(0.7f)) {

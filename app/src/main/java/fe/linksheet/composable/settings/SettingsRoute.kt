@@ -2,6 +2,8 @@ package fe.linksheet.composable.settings
 
 import android.os.Build
 import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -28,6 +30,7 @@ import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = viewModel()) {
     val context = LocalContext.current
@@ -167,6 +170,19 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                 headlineId = R.string.enable_copy_button,
                 subtitleId = R.string.enable_copy_button_explainer
             )
+        }
+
+        if (viewModel.enableCopyButton) {
+            item(key = "hide_after_copying") {
+                SwitchRow(
+                    checked = viewModel.hideAfterCopying,
+                    onChange = {
+                        viewModel.onHideAfterCopying(it)
+                    },
+                    headlineId = R.string.hide_after_copying,
+                    subtitleId = R.string.hide_after_copying_explainer
+                )
+            }
         }
 
         item(key = "enable_send_intent") {

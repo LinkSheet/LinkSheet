@@ -62,6 +62,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     var enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
+    var hideAfterCopying by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.hideAfterCopying) ?: false
+    )
+
     var singleTap by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
     )
@@ -250,6 +254,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onEnableCopyButton(it: Boolean) {
         this.enableCopyButton = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.enableCopyButton, it)
+    }
+
+    fun onHideAfterCopying(it: Boolean){
+        this.hideAfterCopying = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.hideAfterCopying, it)
     }
 
     fun onSingleTap(it: Boolean) {

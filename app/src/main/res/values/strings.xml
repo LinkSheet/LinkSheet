@@ -44,4 +44,6 @@
     <string name="disable_toasts_explainer">Never show any toast messages</string>
     <string name="remove_all">Remove all</string>
     <string name="add_all">Add all</string>
+    <string name="hide_after_copying">Hide after copying</string>
+    <string name="hide_after_copying_explainer">Hide bottom sheet after \"Copy url\" button has been pressed</string>
 </resources>

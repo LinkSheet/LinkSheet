@@ -20,6 +20,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.lang.ref.PhantomReference
 import java.util.*
 
 class BottomSheetViewModel : ViewModel(),
@@ -31,6 +32,11 @@ class BottomSheetViewModel : ViewModel(),
     var enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
+
+    var hideAfterCopying by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.hideAfterCopying) ?: false
+    )
+
     var singleTap by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
     )

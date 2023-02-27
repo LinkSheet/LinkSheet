@@ -3,7 +3,7 @@
 <!-- ---------- Badges ---------- -->
 <div align="center">
 
-[![GitHub version (gradle versionName)](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/blob/master/app/build.gradle.kts)
+[![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 [![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)]()
 [![License](https://img.shields.io/github/license/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/blob/master/LICENSE)
@@ -22,7 +22,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 <!-- ---------- Description ---------- -->
 <div align="center">
 
-LinkSheet restores the Url-App-Chooser that was removed in Android 12.
+LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
 
 </div>
 

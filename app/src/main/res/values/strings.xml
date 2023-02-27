@@ -51,4 +51,6 @@
     <string name="display_grid_layout_explainer">Display a grid instead of a list in the bottom sheet</string>
     <string name="set_as_browser_done">App has been set as default browser!</string>
     <string name="browser_status">Browser status</string>
+    <string name="apps">Apps</string>
+    <string name="bottom_sheet">Bottom sheet</string>
 </resources>

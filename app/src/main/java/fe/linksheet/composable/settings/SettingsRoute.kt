@@ -2,6 +2,7 @@ package fe.linksheet.composable.settings
 
 import android.os.Build
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -91,28 +92,35 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                     ) {
                         Spacer(modifier = Modifier.width(10.dp))
 
-                        val color = if(defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
+                        val color =
+                            if (defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
                         Image(
                             imageVector = if (defaultBrowserEnabled) Icons.Default.CheckCircle else Icons.Default.Error,
                             contentDescription = if (defaultBrowserEnabled) "Checkmark" else "Error",
-                            colorFilter = if(defaultBrowserEnabled) ColorFilter.tint(color) else ColorFilter.tint(color)
+                            colorFilter = if (defaultBrowserEnabled) ColorFilter.tint(color) else ColorFilter.tint(
+                                color
+                            )
                         )
 
                         Column(modifier = Modifier.padding(15.dp)) {
                             Text(
-                                text = stringResource(id = if(defaultBrowserEnabled) R.string.browser_status else R.string.set_as_browser),
+                                text = stringResource(id = if (defaultBrowserEnabled) R.string.browser_status else R.string.set_as_browser),
                                 fontFamily = HkGroteskFontFamily,
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = 18.sp,
                                 color = color
                             )
                             Text(
-                                text = stringResource(id = if(defaultBrowserEnabled) R.string.set_as_browser_done else R.string.set_as_browser_explainer),
-                                color = if(defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
+                                text = stringResource(id = if (defaultBrowserEnabled) R.string.set_as_browser_done else R.string.set_as_browser_explainer),
+                                color = if (defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
                             )
                         }
                     }
                 }
+            }
+
+            item(key = "divider_apps") {
+                ItemDivider(id = R.string.apps)
             }
 
             item(key = preferredBrowserSettingsRoute) {
@@ -176,6 +184,10 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                         }
                     }
                 }
+            }
+
+            item(key = "divider_bottom_sheet") {
+                ItemDivider(id = R.string.bottom_sheet)
             }
 
             item(key = "usage_stats") {
@@ -267,5 +279,17 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
 
 }
 
+@Composable
+fun ItemDivider(@StringRes id: Int){
+    Spacer(modifier = Modifier.height(10.dp))
+
+    Text(
+        modifier = Modifier.padding(horizontal = 10.dp),
+        text = stringResource(id = id),
+        fontFamily = HkGroteskFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.primary,
+    )
+}
 
 

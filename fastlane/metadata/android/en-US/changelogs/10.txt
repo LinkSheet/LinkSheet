@@ -1,0 +1,8 @@
+* Fix crash on android 10
+* Fix loading indicator in "Apps which can open links"
+* Only display "add all" button for apps which have verified app links in "Preferred apps"
+* Display proper share sheet when "Share to" button is pressed
+* Add ability to hide bottom sheet after "Copy url" is pressed (#13)
+* Fix browser selection in "Preferred browser" (#12)
+* Update app design
+* Add ability to display grid instead of list in bottom sheet (#9)

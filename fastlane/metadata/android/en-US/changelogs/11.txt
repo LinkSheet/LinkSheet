@@ -1,0 +1,1 @@
+* Fix "lowercasing" of the whole url instead of just the host (#17)

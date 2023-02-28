@@ -2,6 +2,7 @@ package fe.linksheet.extension
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 
 fun Intent.sourceIntent() = Intent(this).apply {
     component = null
@@ -14,16 +15,24 @@ fun Intent.sourceIntent() = Intent(this).apply {
 //{ act=android.intent.action.VIEW dat=https://twitter.com/... flg=0x10800000 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity (has extras) }
 
 fun Intent.getUri(): Uri? {
-    var data = dataString
-    if (data == null) {
-        data = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
+    var uriData = dataString
+    if (uriData == null) {
+        uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
     }
 
-    if (data == null) {
-        data = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+    if (uriData == null) {
+        uriData = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
     }
 
-    return data?.let { Uri.parse(it.lowercase()) }
+    if (uriData != null) {
+        val uri = Uri.parse(uriData)
+        if(uri.host != null && uri.scheme != null){
+            val domain = "${uri.scheme}://${uri.host}"
+            return Uri.parse(domain.lowercase() + uriData.substring(domain.length))
+        }
+    }
+
+    return null
 }
 
 fun Intent.buildSendTo(uri: Uri): Intent {

@@ -12,19 +12,25 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
+
+import fe.linksheet.data.AppSelectionHistory;
 
 class ResolverComparator implements Comparator<ResolveInfo> {
 
     private final PackageManager packageManager;
     private final Map<String, UsageStats> usageStatsMap;
+    private final Map<String, AppSelectionHistory> historyMap;
     private final Collator collator;
     private final boolean isHttp;
 
     ResolverComparator(PackageManager packageManager,
                        Map<String, UsageStats> usageStatsMap,
+                       Map<String, AppSelectionHistory> historyMap,
                        Intent sourceIntent) {
         this.packageManager = packageManager;
         this.usageStatsMap = usageStatsMap;
+        this.historyMap = historyMap;
         this.collator = Collator.getInstance(Locale.getDefault());
         this.isHttp = IntentExtensionKt.isHttp(sourceIntent);
     }
@@ -40,6 +46,25 @@ class ResolverComparator implements Comparator<ResolveInfo> {
             final boolean rhsSpecific = isSpecificUriMatch(rhs.match);
             if (lhsSpecific != rhsSpecific) {
                 return lhsSpecific ? -1 : 1;
+            }
+        }
+
+        if(historyMap != null){
+            AppSelectionHistory left = historyMap.get(lhs.activityInfo.packageName);
+            AppSelectionHistory right = historyMap.get(rhs.activityInfo.packageName);
+
+            long leftCount = 0;
+            if(left != null){
+                leftCount = left.getLastUsed();
+            }
+
+            long rightCount = 0;
+            if(right != null){
+                rightCount = right.getLastUsed();
+            }
+
+            if (leftCount != rightCount) {
+                return Long.compare(rightCount, leftCount);
             }
         }
 

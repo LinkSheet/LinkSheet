@@ -10,6 +10,7 @@ import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.linksheet.BuildConfig
+import fe.linksheet.data.AppSelectionHistory
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 
@@ -21,10 +22,17 @@ object ResolveIntents {
         Log.d("ResolveIntents", "Intent data: $uri, intent: $intent")
 
         val preferredApp = uri?.let {
-            PreferredResolver.resolve(context, it)
+            PreferredResolver.resolve(context, it.host!!)
         }
 
         Log.d("ResolveIntents", "PreferredApp: $preferredApp")
+
+        val hostHistory = uri?.let {
+            PreferredResolver.resolveHostHistory(context, it.host!!)
+        } ?: emptyMap()
+
+
+        Log.d("ResolveIntents", "HostHistory: $hostHistory")
 
 
         val alwaysPreferred = preferredApp?.app?.alwaysPreferred
@@ -46,14 +54,14 @@ object ResolveIntents {
             BrowserHandler.handleBrowsers(context, currentResolveList)
         } else null
 
-        val singleBrowserOnlyResolvedItem =
-            browserMode != null && browserMode.first == BrowserHandler.BrowserMode.SelectedBrowser
-                    && currentResolveList.size == 1
-                    && currentResolveList.first().activityInfo.componentName() == browserMode.second?.activityInfo?.componentName()
+
+        val singleBrowserOnlyResolvedItem = browserMode?.first == BrowserHandler.BrowserMode.SelectedBrowser
+                && currentResolveList.singleOrNull()?.activityInfo?.componentName() == browserMode.second?.activityInfo?.componentName()
 
         val (resolved, filteredItem, showExtended) = groupResolveList(
             context,
             currentResolveList,
+            hostHistory,
             sourceIntent,
             preferredApp?.app?.componentName
         )
@@ -64,8 +72,7 @@ object ResolveIntents {
         )
 
         return IntentResolverResult(
-            if (filteredItem != null) resolved.toMutableList()
-                .apply { remove(filteredItem) } else resolved,
+            resolved,
             filteredItem,
             showExtended,
             alwaysPreferred,
@@ -76,14 +83,16 @@ object ResolveIntents {
     private fun groupResolveList(
         context: Context,
         currentResolveList: List<ResolveInfo>,
+        historyMap: Map<String, AppSelectionHistory>,
         sourceIntent: Intent,
         lastChosenComponent: ComponentName?
     ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         return if (currentResolveList.isEmpty()) {
             Triple(emptyList(), null, false)
-        } else ResolveListGrouper.groupResolveList(
+        } else ResolveListGrouper.resolveList(
             context,
             currentResolveList,
+            historyMap,
             sourceIntent,
             lastChosenComponent
         )

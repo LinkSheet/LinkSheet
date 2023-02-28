@@ -13,6 +13,7 @@ import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
+import fe.linksheet.data.AppSelectionHistory
 import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -69,8 +70,9 @@ class BottomSheetViewModel : ViewModel(),
         Log.d("PersistingSelectedIntent", "Component: ${intent.component}")
         return withContext(Dispatchers.IO) {
             intent.component?.let { component ->
+                val host = intent.data!!.host!!.lowercase(Locale.getDefault())
                 val app = PreferredApp(
-                    host = intent.data!!.host!!.lowercase(Locale.getDefault()),
+                    host = host,
                     packageName = component.packageName,
                     component = component.flattenToString(),
                     alwaysPreferred = always
@@ -78,6 +80,15 @@ class BottomSheetViewModel : ViewModel(),
 
                 Log.d("PersistingSelectedIntent", "Inserting $app")
                 database.preferredAppDao().insert(app)
+
+                val historyEntry = AppSelectionHistory(
+                    host = host,
+                    packageName = component.packageName,
+                    lastUsed = System.currentTimeMillis()
+                )
+
+                database.appSelectionHistoryDao().insert(historyEntry)
+                Log.d("PersistingSelectedIntent", "Inserting $historyEntry")
             }
         }
     }

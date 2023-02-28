@@ -173,7 +173,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     companion object {
         val buttonRowHeight = 50.dp
-        val appListItemHeight = 30.dp
+        val appListItemHeight = 40.dp
         val preferredAppItemHeight = 60.dp
         val maxAppListButtonRowHeight = 350.dp
 
@@ -218,6 +218,14 @@ class BottomSheetActivity : ComponentActivity() {
                     fontFamily = HkGroteskFontFamily,
                     fontWeight = FontWeight.SemiBold
                 )
+
+                if (showPackage) {
+                    Text(
+                        text = filteredItem.packageName,
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                }
             }
         }
 

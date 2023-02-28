@@ -37,8 +37,8 @@ fun PreferredBrowserSettingsRoute(
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
-    val lifecycleState =
-        LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle
+        .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(Unit) {
         viewModel.loadBrowsers(context)
@@ -56,7 +56,9 @@ fun PreferredBrowserSettingsRoute(
     )
 
     Scaffold(
-        modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             LargeTopAppBar(
                 title = {
@@ -73,7 +75,12 @@ fun PreferredBrowserSettingsRoute(
                 }, scrollBehavior = scrollBehavior
             )
         }, content = {
-            LazyColumn(modifier = Modifier.padding(it).fillMaxHeight(), contentPadding = PaddingValues(horizontal = 5.dp)) {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(it)
+                    .fillMaxHeight(),
+                contentPadding = PaddingValues(horizontal = 5.dp)
+            ) {
                 item(key = "explainer") {
                     PreferenceSubtitle(text = stringResource(R.string.preferred_browser_explainer))
                 }

@@ -94,7 +94,6 @@ object ResolveIntents {
             context,
             currentResolveList,
             historyMap,
-            sourceIntent,
             lastChosenComponent
         )
     }

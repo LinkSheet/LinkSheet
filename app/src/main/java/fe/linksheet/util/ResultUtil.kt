@@ -19,11 +19,8 @@ sealed class Results<out T>(val value: Any?) {
         fun loading() = Loading()
         fun failure(exception: Exception) = Failure(exception)
 
-        fun boolean(boolean: Boolean): Results<Boolean> {
+        fun booleanResult(boolean: Boolean): Results<Boolean> {
             return if(boolean) success(true) else error(false)
         }
-
-//        inline fun <T> failure(exception: Throwable): Result<T> =
-//            Result(createFailure(exception))
     }
 }

@@ -43,7 +43,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
 
     LaunchedEffect(Unit) {
         delay(200)
-        defaultBrowserEnabled = Results.boolean(viewModel.checkDefaultBrowser(context))
+        defaultBrowserEnabled = Results.booleanResult(viewModel.checkDefaultBrowser(context))
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
@@ -52,7 +52,7 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = Results.loading()
-            defaultBrowserEnabled = Results.boolean(viewModel.checkDefaultBrowser(context))
+            defaultBrowserEnabled = Results.booleanResult(viewModel.checkDefaultBrowser(context))
 
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.onUsageStatsSorting(false)

@@ -53,4 +53,5 @@
     <string name="browser_status">Browser status</string>
     <string name="apps">Apps</string>
     <string name="bottom_sheet">Bottom sheet</string>
+    <string name="settings">Settings</string>
 </resources>

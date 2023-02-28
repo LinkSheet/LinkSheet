@@ -1,6 +1,7 @@
 package fe.linksheet.composable.settings
 
 import android.app.AppOpsManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,7 +10,6 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.core.content.getSystemService
@@ -31,6 +31,11 @@ import org.koin.core.component.inject
 
 
 class SettingsViewModel : ViewModel(), KoinComponent {
+    companion object {
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://"))
+        val intentManageDefaultAppSettings = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+    }
+
     private val database by inject<LinkSheetDatabase>()
     private val preferenceRepository by inject<PreferenceRepository>()
 
@@ -49,8 +54,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     var selectedBrowser by mutableStateOf(preferenceRepository.getString(PreferenceRepository.selectedBrowser))
 
-
-    val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
+    private val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
     var whichAppsCanHandleLinksLoading by mutableStateOf(false)
 
@@ -148,9 +152,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     fun openDefaultBrowserSettings(context: Context) {
-        context.startActivity(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
+        context.startActivity(intentManageDefaultAppSettings)
     }
 
+    @Throws(ActivityNotFoundException::class)
     fun openOpenByDefaultSettings(context: Context, packageName: String): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val intent = Intent(
@@ -164,12 +169,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return false
     }
 
-    companion object {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://"))
-    }
-
     fun checkDefaultBrowser(context: Context) = context.packageManager
-        .resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        .resolveActivity(intentBrowser, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
 

@@ -23,6 +23,7 @@ import fe.linksheet.*
 import fe.linksheet.R
 import fe.linksheet.composable.apps.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.browser.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.ui.theme.AppTheme
@@ -46,8 +47,12 @@ class MainActivity : ComponentActivity() {
 
                             NavHost(
                                 navController = navController,
-                                startDestination = settingsRoute,
+                                startDestination = mainRoute,
                             ) {
+                                composable(route = mainRoute) {
+                                    MainRoute(navController = navController)
+                                }
+
                                 composable(route = settingsRoute) {
                                     SettingsRoute(navController = navController)
                                 }

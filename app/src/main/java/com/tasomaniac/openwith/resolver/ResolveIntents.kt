@@ -13,6 +13,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.data.AppSelectionHistory
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
+import fe.linksheet.resolver.ResolveListGrouper
 
 object ResolveIntents {
 

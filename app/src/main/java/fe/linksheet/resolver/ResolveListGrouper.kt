@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.resolver
+package fe.linksheet.resolver
 
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.data.AppSelectionHistory
 import fe.linksheet.extension.findIndexed
 import fe.linksheet.extension.toDisplayActivityInfo

@@ -1,9 +1,7 @@
 package fe.linksheet.composable.settings
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.StringRes
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -34,23 +32,28 @@ import fe.linksheet.extension.observeAsState
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.util.Results
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = viewModel()) {
     val context = LocalContext.current
-    var defaultBrowserEnabled by remember { mutableStateOf(false) }
+    var defaultBrowserEnabled: Results<Boolean> by remember { mutableStateOf(Results.loading()) }
 
     LaunchedEffect(Unit) {
-        defaultBrowserEnabled = viewModel.checkDefaultBrowser(context)
+        delay(200)
+        defaultBrowserEnabled = Results.boolean(viewModel.checkDefaultBrowser(context))
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
-        .observeAsState(Lifecycle.Event.ON_RESUME)
+        .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            defaultBrowserEnabled = viewModel.checkDefaultBrowser(context)
+            defaultBrowserEnabled = Results.loading()
+            defaultBrowserEnabled = Results.boolean(viewModel.checkDefaultBrowser(context))
+
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.onUsageStatsSorting(false)
             }
@@ -76,8 +79,12 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
     }) { paddings ->
         LazyColumn(modifier = Modifier.padding(paddings), contentPadding = PaddingValues(5.dp)) {
             item(key = "open_default_browser") {
+                val shouldUsePrimaryColor = defaultBrowserEnabled.isSuccess || defaultBrowserEnabled.isLoading
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = if (defaultBrowserEnabled) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.error),
+                    colors = CardDefaults.cardColors(
+                        containerColor =
+                        if (shouldUsePrimaryColor) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.error
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 10.dp)
@@ -90,34 +97,45 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
                             .fillMaxWidth()
                             .height(80.dp), verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Spacer(modifier = Modifier.width(10.dp))
+                        val color = if (shouldUsePrimaryColor) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
 
-                        val color =
-                            if (defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
-                        Image(
-                            imageVector = if (defaultBrowserEnabled) Icons.Default.CheckCircle else Icons.Default.Error,
-                            contentDescription = if (defaultBrowserEnabled) "Checkmark" else "Error",
-                            colorFilter = if (defaultBrowserEnabled) ColorFilter.tint(color) else ColorFilter.tint(
-                                color
+                        if (defaultBrowserEnabled.isLoading) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                CircularProgressIndicator(color = color)
+                            }
+                        } else {
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Image(
+                                imageVector = if (defaultBrowserEnabled.isSuccess) Icons.Default.CheckCircle else Icons.Default.Error,
+                                contentDescription = if (defaultBrowserEnabled.isSuccess) "Checkmark" else "Error",
+                                colorFilter = if (defaultBrowserEnabled.isSuccess) ColorFilter.tint(
+                                    color
+                                ) else ColorFilter.tint(
+                                    color
+                                )
                             )
-                        )
 
-                        Column(modifier = Modifier.padding(15.dp)) {
-                            Text(
-                                text = stringResource(id = if (defaultBrowserEnabled) R.string.browser_status else R.string.set_as_browser),
-                                fontFamily = HkGroteskFontFamily,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 18.sp,
-                                color = color
-                            )
-                            Text(
-                                text = stringResource(id = if (defaultBrowserEnabled) R.string.set_as_browser_done else R.string.set_as_browser_explainer),
-                                color = if (defaultBrowserEnabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
-                            )
+                            Column(modifier = Modifier.padding(15.dp)) {
+                                Text(
+                                    text = stringResource(id = if (defaultBrowserEnabled.isSuccess) R.string.browser_status else R.string.set_as_browser),
+                                    fontFamily = HkGroteskFontFamily,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 18.sp,
+                                    color = color
+                                )
+                                Text(
+                                    text = stringResource(id = if (defaultBrowserEnabled.isSuccess) R.string.set_as_browser_done else R.string.set_as_browser_explainer),
+                                    color = if (defaultBrowserEnabled.isSuccess) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError
+                                )
+                            }
                         }
                     }
                 }
             }
+
 
             item(key = "divider_apps") {
                 ItemDivider(id = R.string.apps)
@@ -276,11 +294,10 @@ fun SettingsRoute(navController: NavController, viewModel: SettingsViewModel = v
             }
         }
     }
-
 }
 
 @Composable
-fun ItemDivider(@StringRes id: Int){
+fun ItemDivider(@StringRes id: Int) {
     Spacer(modifier = Modifier.height(10.dp))
 
     Text(

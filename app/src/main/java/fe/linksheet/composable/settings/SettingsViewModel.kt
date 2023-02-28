@@ -129,7 +129,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-   suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) {
+    suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) {
         return withContext(Dispatchers.IO) {
             database.preferredAppDao().insert(preferredApps)
         }
@@ -164,14 +164,14 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return false
     }
 
-    fun checkDefaultBrowser(context: Context): Boolean {
+    companion object {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://"))
-        val resolveInfo =
-            context.packageManager.resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY)
-        Log.d("Test", "${resolveInfo?.activityInfo?.packageName}")
-
-        return resolveInfo?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
     }
+
+    fun checkDefaultBrowser(context: Context) = context.packageManager
+        .resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
+
 
     suspend fun filterWhichAppsCanHandleLinksAsync(filter: String): Boolean {
         return withContext(Dispatchers.IO) {
@@ -218,7 +218,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     fun onBrowserMode(it: BrowserHandler.BrowserMode) {
         if (this.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode != it && this.selectedBrowser != null) {
-            viewModelScope.launch(Dispatchers.IO){
+            viewModelScope.launch(Dispatchers.IO) {
                 deletePreferredAppWherePackageAsync(selectedBrowser!!)
             }
         }
@@ -262,7 +262,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.enableCopyButton, it)
     }
 
-    fun onHideAfterCopying(it: Boolean){
+    fun onHideAfterCopying(it: Boolean) {
         this.hideAfterCopying = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.hideAfterCopying, it)
     }

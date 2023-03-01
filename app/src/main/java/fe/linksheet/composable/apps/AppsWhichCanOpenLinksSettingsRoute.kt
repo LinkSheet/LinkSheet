@@ -20,6 +20,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -153,9 +154,13 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                         Text(text = stringResource(id = R.string.enabled))
                                     },
                                     trailingIcon = {
-                                        Image(imageVector = Icons.Default.Visibility, contentDescription = stringResource(
-                                            id = R.string.enabled
-                                        ))
+                                        Image(
+                                            imageVector = Icons.Default.Visibility,
+                                            contentDescription = stringResource(
+                                                id = R.string.enabled
+                                            ),
+                                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+                                        )
                                     }
                                 )
 
@@ -171,9 +176,13 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                         Text(text = stringResource(id = R.string.disabled))
                                     },
                                     trailingIcon = {
-                                        Image(imageVector = Icons.Default.VisibilityOff, contentDescription = stringResource(
-                                            id = R.string.disabled
-                                        ))
+                                        Image(
+                                            imageVector = Icons.Default.VisibilityOff,
+                                            contentDescription = stringResource(
+                                                id = R.string.disabled
+                                            ),
+                                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+                                        )
                                     }
                                 )
                             }

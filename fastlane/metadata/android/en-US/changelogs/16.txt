@@ -1,1 +1,1 @@
-* Fix acitivty-alias name
+* Fix activity-alias name

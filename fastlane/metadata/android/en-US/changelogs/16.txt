@@ -1,0 +1,1 @@
+* Fix acitivty-alias name

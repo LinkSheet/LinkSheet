@@ -5,29 +5,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.junkfood.seal.ui.common.animatedComposable
 import fe.linksheet.*
-import fe.linksheet.R
 import fe.linksheet.composable.apps.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.browser.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.ui.theme.AppTheme
-import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 class MainActivity : ComponentActivity() {
     @OptIn(
@@ -54,7 +47,8 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 composable(route = settingsRoute) {
-                                    SettingsRoute(navController = navController)
+                                    SettingsRoute(navController = navController,
+                                        onBackPressed = { navController.popBackStack() })
                                 }
 
                                 composable(route = preferredBrowserSettingsRoute) {

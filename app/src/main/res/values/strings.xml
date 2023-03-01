@@ -57,4 +57,5 @@
     <string name="selected_browser_explainer">This browser will automatically be opened if no native app can handle the clicked link</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
+    <string name="open_with_linksheet">Open with LinkSheet</string>
 </resources>

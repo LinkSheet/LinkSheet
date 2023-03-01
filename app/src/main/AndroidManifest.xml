@@ -2,26 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission
+            android:name="android.permission.QUERY_ALL_PACKAGES"
+            tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission
+            android:name="android.permission.PACKAGE_USAGE_STATS"
+            tools:ignore="ProtectedPermissions" />
 
     <application
             android:name=".LinkSheet"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:logo="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:logo="@mipmap/ic_launcher"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:targetApi="31">
         <activity
                 android:name=".activity.MainActivity"
-                android:exported="true"
                 android:configChanges="orientation"
+                android:exported="true"
+                android:label="@string/app_name"
                 android:launchMode="singleTask"
                 android:screenOrientation="unspecified"
-                android:label="@string/app_name"
                 android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,13 +35,14 @@
         </activity>
         <activity
                 android:name=".activity.bottomsheet.BottomSheetActivity"
-                android:exported="true"
                 android:excludeFromRecents="true"
+                android:exported="true"
                 android:launchMode="singleInstance"
                 android:theme="@style/Theme.Seal.Dialog">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.APP_BROWSER" />
@@ -57,13 +62,23 @@
 
                 <data android:mimeType="text/html" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity-alias
+                android:name=".activity.bottomsheet.BottomSheetActivity"
+                android:label="@string/open_with_linksheet"
+                android:targetActivity=".activity.bottomsheet.BottomSheetActivity"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

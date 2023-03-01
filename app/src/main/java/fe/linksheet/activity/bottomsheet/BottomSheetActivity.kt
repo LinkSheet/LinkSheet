@@ -90,8 +90,8 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            if (completed != null && completed.alwaysPreferred == true || completed!!.isSingleBrowserOnlyResolvedItem) {
-                val app = completed.filteredItem ?: completed.resolved[0]
+            if (completed != null && completed.alwaysPreferred == true && completed.filteredItem != null) {
+                val app = completed.filteredItem
                 if (!bottomSheetViewModel.disableToasts) {
                     runOnUiThread {
                         Toast.makeText(
@@ -139,7 +139,8 @@ class BottomSheetActivity : ComponentActivity() {
                                     remember { bottomSheetViewModel.result!!.showExtended || bottomSheetViewModel.alwaysShowPackageName }
 
                                 val baseHeight = if (bottomSheetViewModel.gridLayout) {
-                                    val appsPerRow = LocalConfiguration.current.screenWidthDp / gridSize.value
+                                    val appsPerRow =
+                                        LocalConfiguration.current.screenWidthDp / gridSize.value
 
                                     (bottomSheetViewModel.result!!.resolved.size / appsPerRow
                                             * if (showPackage) gridItemHeightPackage.value else gridItemHeight.value).dp

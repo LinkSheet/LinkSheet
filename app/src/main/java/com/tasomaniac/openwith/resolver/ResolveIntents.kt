@@ -13,6 +13,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.data.AppSelectionHistory
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
+import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.resolver.ResolveListGrouper
 
 object ResolveIntents {
@@ -32,7 +33,6 @@ object ResolveIntents {
             PreferredResolver.resolveHostHistory(context, it.host!!)
         } ?: emptyMap()
 
-
         Log.d("ResolveIntents", "HostHistory: $hostHistory")
 
 
@@ -51,13 +51,9 @@ object ResolveIntents {
 
         Log.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
-        val browserMode = if (sourceIntent.isHttp()) {
+        if (sourceIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, currentResolveList)
-        } else null
-
-
-        val singleBrowserOnlyResolvedItem = browserMode?.first == BrowserHandler.BrowserMode.SelectedBrowser
-                && currentResolveList.singleOrNull()?.activityInfo?.componentName() == browserMode.second?.activityInfo?.componentName()
+        }
 
         val (resolved, filteredItem, showExtended) = groupResolveList(
             context,
@@ -77,7 +73,6 @@ object ResolveIntents {
             filteredItem,
             showExtended,
             alwaysPreferred,
-            singleBrowserOnlyResolvedItem
         )
     }
 

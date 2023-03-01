@@ -59,7 +59,7 @@ object BrowserHandler : KoinComponent {
             is BrowserMode.None -> removeBrowsers(browsers, currentResolveList)
             is BrowserMode.SelectedBrowser -> {
                 val found = browsers.find {
-                    it.activityInfo.componentName().flattenToString() == selectedBrowser
+                    it.activityInfo.packageName == selectedBrowser
                 }
 
                 if (found != null) {

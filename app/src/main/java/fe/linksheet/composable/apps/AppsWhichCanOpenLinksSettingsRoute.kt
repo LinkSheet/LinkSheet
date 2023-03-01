@@ -2,7 +2,6 @@ package fe.linksheet.composable.apps
 
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -11,6 +10,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -26,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -141,6 +141,42 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                 text = stringResource(R.string.apps_which_can_open_links_explainer),
                                 paddingStart = 0.dp
                             )
+
+                            Row {
+                                FilterChip(
+                                    selected = viewModel.whichAppsCanHandleLinksEnabled,
+                                    onClick = {
+                                        viewModel.onWhichAppsCanHandleLinksEnabled(true)
+                                        refreshScope.launch { fetch(true) }
+                                    },
+                                    label = {
+                                        Text(text = stringResource(id = R.string.enabled))
+                                    },
+                                    trailingIcon = {
+                                        Image(imageVector = Icons.Default.Visibility, contentDescription = stringResource(
+                                            id = R.string.enabled
+                                        ))
+                                    }
+                                )
+
+                                Spacer(modifier = Modifier.width(5.dp))
+
+                                FilterChip(
+                                    selected = !viewModel.whichAppsCanHandleLinksEnabled,
+                                    onClick = {
+                                        viewModel.onWhichAppsCanHandleLinksEnabled(false)
+                                        refreshScope.launch { fetch(true) }
+                                    },
+                                    label = {
+                                        Text(text = stringResource(id = R.string.disabled))
+                                    },
+                                    trailingIcon = {
+                                        Image(imageVector = Icons.Default.VisibilityOff, contentDescription = stringResource(
+                                            id = R.string.disabled
+                                        ))
+                                    }
+                                )
+                            }
 
                             Spacer(modifier = Modifier.height(10.dp))
 

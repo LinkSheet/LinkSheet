@@ -56,6 +56,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     private val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
+    var whichAppsCanHandleLinksEnabled by mutableStateOf(true)
     var whichAppsCanHandleLinksLoading by mutableStateOf(false)
 
     var usageStatsSorting by mutableStateOf(
@@ -186,6 +187,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    fun onWhichAppsCanHandleLinksEnabled(it: Boolean){
+        this.whichAppsCanHandleLinksEnabled = it
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
     suspend fun loadAppsWhichCanHandleLinksAsync(
         context: Context,
@@ -203,9 +208,12 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                         )
                     }
                     .filter { resolveInfo ->
-                        val state =
-                            manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
-                        state != null && state.isLinkHandlingAllowed && state.hostToStateMap.isNotEmpty() && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
+                        val state = manager
+                            .getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
+                        state != null
+                                && (if(whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
+                                && state.hostToStateMap.isNotEmpty()
+                                && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
                     }
                     .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
                     .map { it.toDisplayActivityInfo(context) }

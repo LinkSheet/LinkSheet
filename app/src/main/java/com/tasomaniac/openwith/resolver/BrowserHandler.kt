@@ -56,7 +56,10 @@ object BrowserHandler : KoinComponent {
         val selectedBrowser = preferenceRepository.getString(PreferenceRepository.selectedBrowser)
 
         when (mode) {
-            is BrowserMode.None -> removeBrowsers(browsers, currentResolveList)
+            is BrowserMode.None -> {
+                removeBrowsers(browsers, currentResolveList)
+                return mode to null
+            }
             is BrowserMode.SelectedBrowser -> {
                 val found = browsers.find {
                     it.activityInfo.packageName == selectedBrowser

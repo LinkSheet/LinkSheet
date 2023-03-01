@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -49,7 +48,6 @@ import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
-import fe.linksheet.activity.MainActivity
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
@@ -93,7 +91,8 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            if (completed != null && ((completed.alwaysPreferred == true && completed.filteredItem != null) || completed.selectedBrowserIsSingleOption)) {
+            val isRegularPreferredApp = completed?.alwaysPreferred == true && completed.filteredItem != null
+            if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
                     runOnUiThread {
@@ -105,7 +104,7 @@ class BottomSheetActivity : ComponentActivity() {
                     }
                 }
 
-                launchApp(app, true)
+                launchApp(app, isRegularPreferredApp)
             }
         }
 

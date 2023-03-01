@@ -69,7 +69,7 @@
             </intent-filter>
         </activity>
         <activity-alias
-                android:name="Context menu action"
+                android:name=".activity.bottomsheet.BottomSheetActivityContextMenuAction"
                 android:label="@string/open_with_linksheet"
                 android:targetActivity=".activity.bottomsheet.BottomSheetActivity"
                 android:exported="true">

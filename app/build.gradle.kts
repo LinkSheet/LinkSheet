@@ -15,8 +15,8 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 25
         targetSdk = 33
-        versionCode = 15
-        versionName = "0.0.15-debug"
+        versionCode = 16
+        versionName = "0.0.16-debug"
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -33,6 +33,7 @@ object ResolveIntents {
             PreferredResolver.resolveHostHistory(context, it.host!!)
         } ?: emptyMap()
 
+
         Log.d("ResolveIntents", "HostHistory: $hostHistory")
 
 
@@ -51,9 +52,9 @@ object ResolveIntents {
 
         Log.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
-        if (sourceIntent.isHttp()) {
+        val browserMode = if (sourceIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, currentResolveList)
-        }
+        } else null
 
         val (resolved, filteredItem, showExtended) = groupResolveList(
             context,
@@ -63,9 +64,14 @@ object ResolveIntents {
             preferredApp?.app?.componentName
         )
 
+        val selectedBrowserIsSingleOption =
+            browserMode?.first == BrowserHandler.BrowserMode.SelectedBrowser
+                    && currentResolveList.singleOrNull()?.activityInfo?.componentName() == browserMode.second?.activityInfo?.componentName()
+
+
         Log.d(
             "ResolveIntents",
-            "Resolved: $resolved, filteredItem: $filteredItem, showExtended: $showExtended"
+            "Resolved: $resolved, filteredItem: $filteredItem, showExtended: $showExtended, selectedBrowserIsSingleOption: $selectedBrowserIsSingleOption"
         )
 
         return IntentResolverResult(
@@ -73,6 +79,7 @@ object ResolveIntents {
             filteredItem,
             showExtended,
             alwaysPreferred,
+            selectedBrowserIsSingleOption
         )
     }
 

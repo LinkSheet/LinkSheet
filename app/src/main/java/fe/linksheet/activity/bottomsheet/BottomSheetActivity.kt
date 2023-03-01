@@ -93,8 +93,8 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            if (completed != null && completed.alwaysPreferred == true && completed.filteredItem != null) {
-                val app = completed.filteredItem
+            if (completed != null && ((completed.alwaysPreferred == true && completed.filteredItem != null) || completed.selectedBrowserIsSingleOption)) {
+                val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
                     runOnUiThread {
                         Toast.makeText(

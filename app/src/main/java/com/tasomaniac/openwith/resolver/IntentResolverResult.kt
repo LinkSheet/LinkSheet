@@ -5,6 +5,7 @@ data class IntentResolverResult(
     val filteredItem: DisplayActivityInfo?,
     val showExtended: Boolean,
     val alwaysPreferred: Boolean?,
+    val selectedBrowserIsSingleOption: Boolean = false
 ) {
     val isEmpty get() = totalCount() == 0
 

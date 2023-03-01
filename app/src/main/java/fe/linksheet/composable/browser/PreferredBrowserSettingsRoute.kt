@@ -1,8 +1,10 @@
 package fe.linksheet.composable.browser
 
-import android.util.Log
 import androidx.annotation.StringRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -10,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -25,11 +28,14 @@ import com.junkfood.seal.ui.component.PreferenceSubtitle
 import com.tasomaniac.openwith.resolver.BrowserHandler
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
+import fe.linksheet.composable.Searchbar
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
+import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.HkGroteskFontFamily
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PreferredBrowserSettingsRoute(
     navController: NavHostController,
@@ -79,10 +85,17 @@ fun PreferredBrowserSettingsRoute(
                 modifier = Modifier
                     .padding(it)
                     .fillMaxHeight(),
-                contentPadding = PaddingValues(horizontal = 5.dp)
+                contentPadding = PaddingValues(horizontal = 15.dp)
             ) {
-                item(key = "explainer") {
-                    PreferenceSubtitle(text = stringResource(R.string.preferred_browser_explainer))
+                stickyHeader(key = "header") {
+                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                        PreferenceSubtitle(
+                            text = stringResource(R.string.preferred_browser_explainer),
+                            paddingStart = 0.dp
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
                 }
 
                 item(key = "none") {
@@ -90,7 +103,8 @@ fun PreferredBrowserSettingsRoute(
                         selected = viewModel.browserMode == BrowserHandler.BrowserMode.None,
                         onClick = {
                             viewModel.onBrowserMode(BrowserHandler.BrowserMode.None)
-                        }
+                        },
+                        onLongClick = null
                     ) {
                         Texts(headline = R.string.none, subtitle = R.string.none_explainer)
                     }
@@ -101,7 +115,8 @@ fun PreferredBrowserSettingsRoute(
                         selected = viewModel.browserMode == BrowserHandler.BrowserMode.AlwaysAsk,
                         onClick = {
                             viewModel.onBrowserMode(BrowserHandler.BrowserMode.AlwaysAsk)
-                        }
+                        },
+                        onLongClick = null
                     ) {
                         Texts(
                             headline = R.string.always_ask,
@@ -117,6 +132,9 @@ fun PreferredBrowserSettingsRoute(
                             onClick = {
                                 viewModel.onBrowserMode(BrowserHandler.BrowserMode.SelectedBrowser)
                                 viewModel.onSelectedBrowser(app.packageName)
+                            },
+                            onLongClick = {
+                                context.startPackageInfoActivity(app)
                             }
                         ) {
                             Image(
@@ -155,16 +173,22 @@ fun PreferredBrowserSettingsRoute(
 private fun BrowserRow(
     selected: Boolean,
     onClick: () -> Unit,
+    onLongClick: (() -> Unit)?,
     content: @Composable () -> Unit
 ) {
     ClickableRow(
-        padding = 2.dp,
+        paddingHorizontal = 0.dp,
+        paddingVertical = 5.dp,
         onClick = onClick,
-        verticalAlignment = Alignment.CenterVertically
+        onLongClick = onLongClick,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
     ) {
         RadioButton(
             selected = selected,
-            onClick = onClick
+            onClick = onClick,
+            modifier = Modifier
+//                .padding(0.dp).border(1.dp, Color.Blue)
         )
         Spacer(modifier = Modifier.width(5.dp))
         content()

@@ -1,0 +1,5 @@
+* Open app info when header is tapped in dialog of "Preferred apps"
+* If "Preferred browser" has been set to a selected browser, automatically open any link which has no native app in said browser (#18)
+* If "Preferred browser" has been set to none and if there is only one native app present to handle the link, automatically open it
+* Sort browsers by name in "Preferred browser"
+* Add explainers to "Preferred browser" setting

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -15,8 +13,8 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 25
         targetSdk = 33
-        versionCode = 16
-        versionName = "0.0.16-debug"
+        versionCode = 17
+        versionName = "0.0.17"
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -1,0 +1,31 @@
+From previous debug releases:
+
+* 0.0.12-debug
+
+    * Avoid flickering of browser card
+    * Hide settings behind settings icon
+    * Experimental: Implement history sorting (sorts by history, then by usage stats (if enabled), then by name)
+
+* 0.0.13-debug
+
+    * Fix: Only show selected browser when browser mode is set to single (#18)
+    * Open app info on long press in bottom sheet (#14)
+
+* 0.0.14-debug
+
+    * Open app info when header is tapped in dialog of "Preferred apps"
+    * If "Preferred browser" has been set to a selected browser, automatically open any link which has no native app in said browser (#18)
+    * If "Preferred browser" has been set to none and if there is only one native app present to handle the link, automatically open it
+    * Sort browsers by name in "Preferred browser"
+    * Add explainers to "Preferred browser" setting
+
+* 0.0.15-debug
+
+    * Fix crash when "Preferred browser" is opened
+    * Add filters for enabled and disabled app link handlers in "Apps which can open links"
+    * Include userInfo in url if available (#20)
+    * Add app to context menu of text selection
+
+* 0.0.16-debug
+
+    * Fix activity-alias name

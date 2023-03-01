@@ -124,6 +124,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch(Dispatchers.IO) {
             browsers.clear()
             browsers.addAll(BrowserResolver.resolve(context))
+            browsers.sortBy { it.displayLabel }
         }
     }
 

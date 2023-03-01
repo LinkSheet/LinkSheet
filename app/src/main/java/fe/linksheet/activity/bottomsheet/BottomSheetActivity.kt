@@ -53,6 +53,7 @@ import fe.linksheet.activity.MainActivity
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
+import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.CoroutineScope
@@ -363,7 +364,7 @@ class BottomSheetActivity : ComponentActivity() {
                                 if (bottomSheetViewModel.singleTap) {
                                     onSelectedItemChange(index)
                                 } else {
-                                    bottomSheetViewModel.startPackageInfoActivity(this@BottomSheetActivity, info)
+                                    this@BottomSheetActivity.startPackageInfoActivity(info)
                                 }
                             }
                         )

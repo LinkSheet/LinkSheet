@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -362,6 +363,10 @@ class BottomSheetActivity : ComponentActivity() {
                             onLongClick = {
                                 if (bottomSheetViewModel.singleTap) {
                                     onSelectedItemChange(index)
+                                } else {
+                                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        this.data = Uri.parse("package:${info.packageName}")
+                                    })
                                 }
                             }
                         )

@@ -26,9 +26,21 @@ fun Intent.getUri(): Uri? {
 
     if (uriData != null) {
         val uri = Uri.parse(uriData)
-        if(uri.host != null && uri.scheme != null){
-            val domain = "${uri.scheme}://${uri.host}"
-            return Uri.parse(domain.lowercase() + uriData.substring(domain.length))
+        if (uri.host != null && uri.scheme != null) {
+            val host = uri.host!!
+            val scheme = "${uri.scheme}://".lowercase()
+
+            val url = buildString {
+                append(scheme)
+                if (uri.userInfo != null) {
+                    append(uri.userInfo).append("@")
+                }
+
+                append(host.lowercase())
+                append(uriData.substring(uriData.indexOf(host) + host.length))
+            }
+
+            return Uri.parse(url)
         }
     }
 

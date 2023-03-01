@@ -96,7 +96,7 @@ fun MainRoute(
                         fontSize = 30.sp,
                     )
                 }
-                
+
                 Spacer(modifier = Modifier.height(5.dp))
             }
 
@@ -119,7 +119,7 @@ fun MainRoute(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(80.dp), verticalAlignment = Alignment.CenterVertically
+                            .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
                     ) {
                         val color =
                             if (shouldUsePrimaryColor) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError

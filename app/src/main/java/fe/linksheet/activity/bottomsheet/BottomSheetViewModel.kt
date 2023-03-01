@@ -2,18 +2,22 @@ package fe.linksheet.activity.bottomsheet
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
+import fe.linksheet.activity.MainActivity
 import fe.linksheet.data.AppSelectionHistory
+import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +25,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.lang.ref.PhantomReference
 import java.util.*
 
 class BottomSheetViewModel : ViewModel(),
@@ -64,6 +67,16 @@ class BottomSheetViewModel : ViewModel(),
 
             result
         }
+    }
+
+    fun startMainActivity(context: Context): Boolean {
+        return context.startActivityWithConfirmation(Intent(context, MainActivity::class.java))
+    }
+
+    fun startPackageInfoActivity(context: Context, info: DisplayActivityInfo): Boolean {
+        return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            this.data = Uri.parse("package:${info.packageName}")
+        })
     }
 
     suspend fun persistSelectedIntentAsync(intent: Intent, always: Boolean) {

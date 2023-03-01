@@ -32,6 +32,7 @@ import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.Searchbar
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getAppHosts
+import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -287,12 +288,21 @@ fun PreferredAppSettingsRoute(
                                             fontFamily = HkGroteskFontFamily,
                                             fontWeight = FontWeight.SemiBold
                                         )
+
                                         Text(
                                             text = hosts.joinToString(", "),
                                             maxLines = 1,
                                             overflow = TextOverflow.Ellipsis,
                                             color = MaterialTheme.colorScheme.onSurface
                                         )
+
+                                        if (viewModel.alwaysShowPackageName) {
+                                            Text(
+                                                text = app.packageName,
+                                                fontSize = 12.sp,
+                                                color = MaterialTheme.colorScheme.tertiary
+                                            )
+                                        }
                                     }
                                 }
                             }

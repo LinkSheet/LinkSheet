@@ -363,9 +363,7 @@ class BottomSheetActivity : ComponentActivity() {
                                 if (bottomSheetViewModel.singleTap) {
                                     onSelectedItemChange(index)
                                 } else {
-                                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                                        this.data = Uri.parse("package:${info.packageName}")
-                                    })
+                                    bottomSheetViewModel.startPackageInfoActivity(this@BottomSheetActivity, info)
                                 }
                             }
                         )
@@ -544,7 +542,7 @@ class BottomSheetActivity : ComponentActivity() {
                     TextButton(
                         enabled = true,
                         onClick = {
-                            context.startActivity(Intent(context, MainActivity::class.java))
+                            bottomSheetViewModel.startMainActivity(context)
                         }) {
                         Text(
                             text = stringResource(id = R.string.open_settings),

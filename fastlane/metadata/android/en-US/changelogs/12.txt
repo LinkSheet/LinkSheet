@@ -1,0 +1,3 @@
+* Avoid flickering of browser card
+* Hide settings behind settings icon
+* Experimental: Implement history sorting (sorts by history, then by usage stats (if enabled), then by name)

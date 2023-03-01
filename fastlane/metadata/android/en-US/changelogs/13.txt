@@ -1,0 +1,2 @@
+* Fix: Only show selected browser when browser mode is set to single (#18)
+* Open app info on long press in bottom sheet

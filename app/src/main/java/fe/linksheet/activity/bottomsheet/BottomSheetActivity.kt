@@ -31,6 +31,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -126,8 +127,6 @@ class BottomSheetActivity : ComponentActivity() {
 
                     val launchScope = rememberCoroutineScope()
                     val uri = remember { intent.getUri() }
-
-
 
                     BottomDrawer(
                         modifier = if (landscape) Modifier
@@ -370,7 +369,7 @@ class BottomSheetActivity : ComponentActivity() {
                                 }
                             }
                         )
-                        .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else androidx.compose.ui.graphics.Color.Transparent)
+                        .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
                         .padding(10.dp)
                 }
 

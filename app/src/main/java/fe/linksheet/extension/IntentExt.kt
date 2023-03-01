@@ -4,10 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 
-fun Intent.sourceIntent() = Intent(this).apply {
+fun Intent.sourceIntent(uri: Uri? = this.getUri()) = Intent(this).apply {
     component = null
     action = Intent.ACTION_VIEW
-    data = this.getUri()
+    data = uri
     flags = flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
 }
 
@@ -39,6 +39,8 @@ fun Intent.getUri(): Uri? {
                 append(host.lowercase())
                 append(uriData.substring(uriData.indexOf(host) + host.length))
             }
+
+            Log.d("Adjusted Url", url)
 
             return Uri.parse(url)
         }

@@ -1,0 +1,4 @@
+* Fix crash when "Preferred browser" is opened
+* Add filters for enabled and disabled app link handlers in "Apps which can open links"
+* Include userInfo in url if available (#20)
+* Add app to context menu of text selection

@@ -15,6 +15,8 @@ import fe.linksheet.resolver.ResolveListGrouper
 object ResolveIntents {
 
     fun resolve(context: Context, intent: Intent): IntentResolverResult {
+        Log.d("ResolveIntents", "Intent: $intent")
+
         val uri = intent.getUri()
 
         Log.d("ResolveIntents", "Intent data: $uri, intent: $intent")
@@ -35,7 +37,7 @@ object ResolveIntents {
 
         val alwaysPreferred = preferredApp?.app?.alwaysPreferred
 
-        val sourceIntent = intent.sourceIntent()
+        val sourceIntent = intent.sourceIntent(uri)
         Log.d("ResolveIntents", "$sourceIntent")
 
         val resolveListPreSort = context.packageManager.queryIntentActivities(

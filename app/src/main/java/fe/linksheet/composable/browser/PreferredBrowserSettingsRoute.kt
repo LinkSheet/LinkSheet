@@ -127,8 +127,10 @@ fun PreferredBrowserSettingsRoute(
 
                 viewModel.browsers.forEach { app ->
                     item(key = app.flatComponentName) {
+                        val selected =
+                            viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.packageName
                         BrowserRow(
-                            selected = viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.packageName,
+                            selected = selected,
                             onClick = {
                                 viewModel.onBrowserMode(BrowserHandler.BrowserMode.SelectedBrowser)
                                 viewModel.onSelectedBrowser(app.packageName)
@@ -147,11 +149,18 @@ fun PreferredBrowserSettingsRoute(
 
                             Column {
                                 Text(
-                                    text = app.displayLabel, fontSize = 16.sp,
+                                    text = app.displayLabel,
                                     color = MaterialTheme.colorScheme.onSurface,
                                     fontFamily = HkGroteskFontFamily,
                                     fontWeight = FontWeight.SemiBold
                                 )
+
+                                if (selected) {
+                                    Text(
+                                        text = stringResource(id = R.string.selected_browser_explainer),
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                    )
+                                }
 
                                 if (viewModel.alwaysShowPackageName) {
                                     Text(
@@ -202,7 +211,6 @@ private fun Texts(@StringRes headline: Int, @StringRes subtitle: Int) {
             text = stringResource(id = headline),
             fontFamily = HkGroteskFontFamily,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 16.sp,
             color = MaterialTheme.colorScheme.onSurface
         )
 

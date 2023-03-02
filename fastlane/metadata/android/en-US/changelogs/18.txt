@@ -1,0 +1,6 @@
+* Fix: Color of icons in "Apps which can open links" filters
+* Fix: Browser status not being queried correctly if apps such as UntrackMe are installed
+* Fix: Delete by host and package name instead of just by host
+* Fix: Always show button row in dialog, always add all hosts to dialog in "Preferred apps" (#22)
+* Sort hosts by name in dialog in "Preferred apps"
+* Fix: Preference change not properly applying (#23)

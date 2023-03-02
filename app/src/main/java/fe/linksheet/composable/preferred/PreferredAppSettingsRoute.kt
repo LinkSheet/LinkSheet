@@ -98,7 +98,7 @@ fun PreferredAppSettingsRoute(
                                 true
                             )
                         )
-                        else viewModel.deletePreferredAppAsync(host)
+                        else viewModel.deletePreferredAppAsync(host, displayActivityInfo!!.packageName)
                     }
                 }
             }

@@ -141,9 +141,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    suspend fun deletePreferredAppAsync(host: String) {
+    suspend fun deletePreferredAppAsync(host: String, packageName: String) {
+        Log.d("DeletePreferredApp", host)
         return withContext(Dispatchers.IO) {
-            database.preferredAppDao().deleteHost(host)
+            database.preferredAppDao().deleteByPackageNameAndHost(host, packageName)
         }
     }
 

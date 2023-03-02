@@ -22,6 +22,7 @@ import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.settings.apps.browser.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
+import fe.linksheet.composable.settings.links.LinksSettingsRoute
 import fe.linksheet.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -57,6 +58,11 @@ class MainActivity : ComponentActivity() {
 
                                 composable(route = bottomSheetSettingsRoute) {
                                     BottomSheetSettingsRoute(navController = navController,
+                                        onBackPressed = onBackPressed)
+                                }
+
+                                composable(route = linksSettingsRoute) {
+                                    LinksSettingsRoute(navController = navController,
                                         onBackPressed = onBackPressed)
                                 }
 

@@ -75,6 +75,15 @@ fun SettingsRoute(
                 )
             }
 
+            item(key = "links") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = linksSettingsRoute,
+                    headline = R.string.links,
+                    subtitle = R.string.links_explainer
+                )
+            }
+
             item(key = "about") {
                 SettingsItemRow(
                     navController = navController,

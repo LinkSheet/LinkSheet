@@ -1,32 +1,21 @@
 package fe.linksheet.composable.settings.bottomsheet
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.junkfood.seal.ui.component.BackButton
 import fe.linksheet.R
 import fe.linksheet.composable.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
-import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetSettingsRoute(
     navController: NavHostController,
@@ -34,11 +23,6 @@ fun BottomSheetSettingsRoute(
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
-
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-        rememberTopAppBarState(),
-        canScroll = { true }
-    )
 
     SettingsScaffold(R.string.bottom_sheet, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

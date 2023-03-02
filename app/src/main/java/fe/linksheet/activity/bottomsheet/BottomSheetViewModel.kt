@@ -62,6 +62,10 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
     )
 
+    var useClearUrls by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
+    )
+
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
             result = ResolveIntents.resolve(context, intent, this@BottomSheetViewModel)

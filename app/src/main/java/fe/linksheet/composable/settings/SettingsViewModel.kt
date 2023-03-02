@@ -95,6 +95,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
     )
 
+    var useClearUrls by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
+    )
+
 
     suspend fun filterPreferredAppsAsync(filter: String) {
         return withContext(Dispatchers.IO) {
@@ -304,6 +308,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onGridLayout(it: Boolean) {
         this.gridLayout = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.gridLayout, it)
+    }
+
+    fun onUseClearUrls(it: Boolean){
+        this.useClearUrls = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.useClearUrls, it)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {

@@ -14,11 +14,11 @@ import fe.linksheet.extension.sourceIntent
 import fe.linksheet.resolver.ResolveListGrouper
 
 object ResolveIntents {
-
     suspend fun resolve(context: Context, intent: Intent, viewModel: BottomSheetViewModel): IntentResolverResult {
         Log.d("ResolveIntents", "Intent: $intent")
 
-        val uri = intent.getUri()
+        val uri = intent.getUri(viewModel.useClearUrls)
+        Log.d("ResolveIntents", "UseClearUrls: ${viewModel.useClearUrls}")
 
         Log.d("ResolveIntents", "Intent data: $uri, intent: $intent")
 
@@ -39,7 +39,7 @@ object ResolveIntents {
         val alwaysPreferred = preferredApp?.app?.alwaysPreferred
 
         val sourceIntent = intent.sourceIntent(uri)
-        Log.d("ResolveIntents", "$sourceIntent")
+        Log.d("ResolveIntents", "${sourceIntent.dataString}")
 
         val resolveListPreSort = context.packageManager.queryIntentActivities(
             sourceIntent, PackageManager.MATCH_ALL
@@ -77,6 +77,7 @@ object ResolveIntents {
         )
 
         return IntentResolverResult(
+            uri,
             resolved,
             filteredItem,
             showExtended,

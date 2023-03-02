@@ -81,4 +81,8 @@
     <string name="paste">Paste</string>
     <string name="error">Error</string>
     <string name="checkmark">Checkmark</string>
+    <string name="links">Links</string>
+    <string name="links_explainer">Settings regarding link manipulation</string>
+    <string name="clear_urls">Use clear urls</string>
+    <string name="clear_urls_explainer">Use experimental ClearURL integration</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.tasomaniac.openwith.resolver
 
+import android.net.Uri
+
 data class IntentResolverResult(
+    val uri: Uri?,
     val resolved: List<DisplayActivityInfo>,
     val filteredItem: DisplayActivityInfo?,
     val showExtended: Boolean,

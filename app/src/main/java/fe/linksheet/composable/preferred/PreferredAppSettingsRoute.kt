@@ -143,7 +143,7 @@ fun PreferredAppSettingsRoute(
 
                     Box{
                         LazyColumn(modifier = Modifier.padding(bottom = 40.dp), content = {
-                            hostMap.forEach { (host, enabled) ->
+                            hostMap.toSortedMap().forEach { (host, enabled) ->
                                 item(key = host) {
                                     var state by remember { mutableStateOf(enabled) }
 

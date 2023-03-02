@@ -14,6 +14,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -93,7 +94,8 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            val isRegularPreferredApp = completed?.alwaysPreferred == true && completed.filteredItem != null
+            val isRegularPreferredApp =
+                completed?.alwaysPreferred == true && completed.filteredItem != null
             if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
@@ -129,11 +131,16 @@ class BottomSheetActivity : ComponentActivity() {
 
                     val launchScope = rememberCoroutineScope()
                     val uri = remember { intent.getUri() }
+                    val interactionSource = remember { MutableInteractionSource() }
 
                     BottomDrawer(
-                        modifier = if (landscape) Modifier
+                        modifier = (if (landscape) Modifier
                             .fillMaxWidth(0.55f)
-                            .fillMaxHeight() else Modifier,
+                            .fillMaxHeight() else Modifier)
+                            .clickable(
+                                interactionSource = interactionSource,
+                                indication = null
+                            ) {},
                         drawerState = drawerState,
                         sheetContent = {
                             if (bottomSheetViewModel.result != null && uri != null) {

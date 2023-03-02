@@ -59,13 +59,15 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class BottomSheetActivity : ComponentActivity() {
-    private val bottomSheetViewModel: BottomSheetViewModel by viewModels()
+    private lateinit var bottomSheetViewModel: BottomSheetViewModel
 
     @OptIn(
         ExperimentalMaterialApi::class, ExperimentalMaterialApi::class,
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        bottomSheetViewModel = viewModels<BottomSheetViewModel>().value
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->

@@ -11,13 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.material3.AlertDialog
-
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -35,11 +32,8 @@ import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.Searchbar
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getAppHosts
-import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.extension.startPackageInfoActivity
-import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 enum class ButtonType {
@@ -69,13 +63,14 @@ fun PreferredAppSettingsRoute(
     }
 
     var openDialog by remember { mutableStateOf(false) }
-    var buttonType by remember { mutableStateOf(ButtonType.Confirm) }
+    var buttonType by remember { mutableStateOf<ButtonType?>(null) }
     val hostMap = remember { mutableStateMapOf<String, Boolean>() }
     var hasAppHosts by remember { mutableStateOf(false) }
     var displayActivityInfo by remember { mutableStateOf<DisplayActivityInfo?>(null) }
 
     LaunchedEffect(openDialog) {
         if (!openDialog) {
+            Log.d("Closed dialog", "$displayActivityInfo")
             when (buttonType) {
                 ButtonType.DeleteAll -> {
                     viewModel.deletePreferredAppWherePackageAsync(displayActivityInfo!!.packageName)
@@ -90,7 +85,7 @@ fun PreferredAppSettingsRoute(
                         }
                     )
                 }
-                else -> {
+                ButtonType.Confirm -> {
                     hostMap.forEach { (host, enabled) ->
                         if (enabled) viewModel.insertPreferredAppAsync(
                             displayActivityInfo!!.toPreferredApp(
@@ -98,13 +93,16 @@ fun PreferredAppSettingsRoute(
                                 true
                             )
                         )
-                        else viewModel.deletePreferredAppAsync(host, displayActivityInfo!!.packageName)
+                        else viewModel.deletePreferredAppAsync(
+                            host,
+                            displayActivityInfo!!.packageName
+                        )
                     }
                 }
+                else -> {}
             }
 
-            buttonType = ButtonType.Confirm
-
+            buttonType = null
             viewModel.loadPreferredApps(context)
             viewModel.filterPreferredAppsAsync(filter)
         }
@@ -116,7 +114,7 @@ fun PreferredAppSettingsRoute(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(16.dp),
                 ) {
                     Column(
                         modifier = Modifier
@@ -143,63 +141,75 @@ fun PreferredAppSettingsRoute(
                         )
                     }
 
-                    LazyColumn(content = {
-                        hostMap.forEach { (host, enabled) ->
-                            item(key = host) {
-                                var state by remember { mutableStateOf(enabled) }
+                    Box{
+                        LazyColumn(modifier = Modifier.padding(bottom = 40.dp), content = {
+                            hostMap.forEach { (host, enabled) ->
+                                item(key = host) {
+                                    var state by remember { mutableStateOf(enabled) }
 
-                                ClickableRow(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    padding = 2.dp,
-                                    onClick = {
-                                        hostMap[host] = !state
-                                        state = !state
+                                    ClickableRow(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        padding = 2.dp,
+                                        onClick = {
+                                            hostMap[host] = !state
+                                            state = !state
+                                        }
+                                    ) {
+                                        Checkbox(checked = state, onCheckedChange = {
+                                            hostMap[host] = it
+                                            state = it
+                                        })
+
+                                        Spacer(modifier = Modifier.width(5.dp))
+
+                                        Text(text = host)
                                     }
-                                ) {
-                                    Checkbox(checked = state, onCheckedChange = {
-                                        hostMap[host] = it
-                                        state = it
-                                    })
-
-                                    Spacer(modifier = Modifier.width(5.dp))
-
-                                    Text(text = host)
                                 }
                             }
-                        }
-                    })
+                        })
 
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Row {
-                            OutlinedButton(
-                                contentPadding = PaddingValues(horizontal = 18.dp),
-                                onClick = {
-                                    openDialog = false
-                                    buttonType = ButtonType.DeleteAll
-                                }) {
-                                Text(text = stringResource(id = R.string.remove_all))
-                            }
-
-                            if (hasAppHosts) {
-                                Spacer(modifier = Modifier.width(5.dp))
-
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.BottomCenter)
+                                .height(40.dp)
+                        ) {
+                            Row(modifier = Modifier.height(40.dp)) {
                                 OutlinedButton(
                                     contentPadding = PaddingValues(horizontal = 18.dp),
                                     onClick = {
                                         openDialog = false
-                                        buttonType = ButtonType.AddAll
+                                        buttonType = ButtonType.DeleteAll
                                     }) {
-                                    Text(text = stringResource(id = R.string.add_all))
+                                    Text(text = stringResource(id = R.string.remove_all))
+                                }
+
+                                if (hasAppHosts) {
+                                    Spacer(modifier = Modifier.width(5.dp))
+
+                                    OutlinedButton(
+                                        contentPadding = PaddingValues(horizontal = 18.dp),
+                                        onClick = {
+                                            openDialog = false
+                                            buttonType = ButtonType.AddAll
+                                        }) {
+                                        Text(text = stringResource(id = R.string.add_all))
+                                    }
                                 }
                             }
-                        }
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            TextButton(onClick = { openDialog = false }) {
-                                Text(text = stringResource(id = R.string.confirm))
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(40.dp),
+                                horizontalArrangement = Arrangement.End
+                            ) {
+                                TextButton(onClick = {
+                                    openDialog = false
+                                    buttonType = ButtonType.Confirm
+                                }) {
+                                    Text(text = stringResource(id = R.string.confirm))
+                                }
                             }
                         }
                     }
@@ -269,16 +279,12 @@ fun PreferredAppSettingsRoute(
                                 hostMap.clear()
 
                                 if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                    manager.getAppHosts(app.packageName)
-                                        .also { hasAppHosts = it.isNotEmpty() }.forEach {
-                                            hostMap[it] = hosts.contains(it)
-                                        }
+                                    manager.getAppHosts(app.packageName).also { hasAppHosts = it.isNotEmpty() }.forEach {
+                                        hostMap[it] = hosts.contains(it)
+                                    }
                                 }
 
-                                if (manager == null || hostMap.isEmpty()) {
-                                    hosts.forEach { hostMap[it] = true }
-                                }
-
+                                hosts.forEach { hostMap[it] = true }
                                 displayActivityInfo = app
                             }) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {

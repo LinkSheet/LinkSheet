@@ -77,4 +77,8 @@
     <string name="github_explainer">Source code repository</string>
     <string name="donate">Donate</string>
     <string name="donate_explainer">Donate crypto to the author</string>
+    <string name="open_copied_link">Open copied link</string>
+    <string name="paste">Paste</string>
+    <string name="error">Error</string>
+    <string name="checkmark">Checkmark</string>
 </resources>

@@ -1,22 +1,17 @@
 package fe.linksheet.composable.main
 
-import androidx.compose.animation.AnimatedVisibility
+import android.content.ClipboardManager
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BadgedBox
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Subscriptions
-import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,6 +30,7 @@ import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
+import fe.linksheet.extension.openLink
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.util.Results
@@ -47,6 +43,7 @@ fun MainRoute(
 ) {
     val context = LocalContext.current
     var defaultBrowserEnabled: Results<Boolean> by remember { mutableStateOf(Results.loading(false)) }
+    val clipboard = remember { context.getSystemService(ClipboardManager::class.java) }
 
     LaunchedEffect(Unit) {
         delay(200)
@@ -135,7 +132,7 @@ fun MainRoute(
                             Spacer(modifier = Modifier.width(10.dp))
                             Image(
                                 imageVector = if (defaultBrowserEnabled.isSuccess) Icons.Default.CheckCircle else Icons.Default.Error,
-                                contentDescription = if (defaultBrowserEnabled.isSuccess) "Checkmark" else "Error",
+                                contentDescription = stringResource(id = if (defaultBrowserEnabled.isSuccess) R.string.checkmark else R.string.error),
                                 colorFilter = if (defaultBrowserEnabled.isSuccess) ColorFilter.tint(
                                     color
                                 ) else ColorFilter.tint(
@@ -159,7 +156,46 @@ fun MainRoute(
                         }
                     }
                 }
+
+                Spacer(modifier = Modifier.height(10.dp))
             }
+
+            if (clipboard.hasPrimaryClip()) {
+                val item = clipboard.primaryClip?.getItemAt(0)?.text
+
+                if (item != null && Patterns.WEB_URL.matcher(item).matches()) {
+                    item(key = "open_copied_link") {
+                        OutlinedCard(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                context.openLink(item.toString())
+                            }
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Spacer(modifier = Modifier.width(10.dp))
+
+                                Image(
+                                    imageVector = Icons.Default.ContentPaste,
+                                    contentDescription = stringResource(id = R.string.paste),
+                                )
+
+                                Column(modifier = Modifier.padding(15.dp)) {
+                                    Text(
+                                        text = stringResource(id = R.string.open_copied_link),
+                                        fontFamily = HkGroteskFontFamily,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = 18.sp,
+                                    )
+                                    Text(text = item.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

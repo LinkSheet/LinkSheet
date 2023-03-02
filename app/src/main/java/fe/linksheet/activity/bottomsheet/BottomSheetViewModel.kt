@@ -17,6 +17,7 @@ import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.data.AppSelectionHistory
+import fe.linksheet.data.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.Deferred
@@ -63,7 +64,7 @@ class BottomSheetViewModel : ViewModel(),
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
-            result = ResolveIntents.resolve(context, intent)
+            result = ResolveIntents.resolve(context, intent, this@BottomSheetViewModel)
 
             result
         }
@@ -103,6 +104,12 @@ class BottomSheetViewModel : ViewModel(),
                 database.appSelectionHistoryDao().insert(historyEntry)
                 Log.d("PersistingSelectedIntent", "Inserting $historyEntry")
             }
+        }
+    }
+
+    suspend fun getWhiteListedBrowsers(): List<WhitelistedBrowser> {
+        return withContext(Dispatchers.IO) {
+            database.whitelistedBrowsersDao().getWhitelistedBrowsers()
         }
     }
 }

@@ -23,6 +23,7 @@ import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
+import fe.linksheet.data.WhitelistedBrowser
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.preference.PreferenceRepository
@@ -59,6 +60,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
     var whichAppsCanHandleLinksEnabled by mutableStateOf(true)
     var whichAppsCanHandleLinksLoading by mutableStateOf(false)
+
+    val whitelistedBrowserMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
 
     var usageStatsSorting by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.usageStatsSorting) ?: false
@@ -189,7 +192,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun onWhichAppsCanHandleLinksEnabled(it: Boolean){
+    fun onWhichAppsCanHandleLinksEnabled(it: Boolean) {
         this.whichAppsCanHandleLinksEnabled = it
     }
 
@@ -301,6 +304,36 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onGridLayout(it: Boolean) {
         this.gridLayout = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.gridLayout, it)
+    }
+
+    suspend fun queryWhitelistedBrowsersAsync(context: Context) {
+        withContext(Dispatchers.IO) {
+            whitelistedBrowserMap.clear()
+            val whitelistedBrowsersList =
+                database.whitelistedBrowsersDao().getWhitelistedBrowsers().mapNotNull {
+                    context.packageManager.queryFirstIntentActivityByPackageNameOrNull(it.packageName)
+                        ?.toDisplayActivityInfo(context)
+                }
+
+            browsers.forEach { info ->
+                val isWhitelisted =
+                    whitelistedBrowsersList.find { it.packageName == info.packageName }
+                whitelistedBrowserMap[info] = isWhitelisted != null
+            }
+        }
+    }
+
+    suspend fun saveWhitelistedBrowsers() {
+        withContext(Dispatchers.IO) {
+            val dao =  database.whitelistedBrowsersDao()
+            whitelistedBrowserMap.forEach { (app, enabled) ->
+                if (enabled) {
+                    dao.insert(WhitelistedBrowser(packageName = app.packageName))
+                } else {
+                    dao.deleteByPackageName(app.packageName)
+                }
+            }
+        }
     }
 
 //    companion object {

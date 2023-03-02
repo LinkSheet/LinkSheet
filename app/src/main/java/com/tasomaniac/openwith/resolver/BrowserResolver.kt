@@ -14,7 +14,7 @@ object BrowserResolver {
         it.toDisplayActivityInfo(context)
     }
 
-    fun queryBrowsers(context: Context): List<ResolveInfo> {
+    fun queryBrowsers(context: Context): Set<ResolveInfo> {
         val browserIntent = Intent()
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
@@ -24,8 +24,6 @@ object BrowserResolver {
             context.packageManager.queryIntentActivities(browserIntent, PackageManager.MATCH_ALL)
         resolvedBrowsers.removeAll { it.activityInfo.packageName == BuildConfig.APPLICATION_ID }
 
-        return resolvedBrowsers.distinctBy {
-            it.activityInfo.packageName
-        }
+        return resolvedBrowsers.distinctBy { it.activityInfo.packageName }.toSet()
     }
 }

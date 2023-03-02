@@ -58,4 +58,8 @@
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="open_with_linksheet">Open with LinkSheet</string>
+    <string name="whitelisted">Whitelisted</string>
+    <string name="whitelisted_explainer">Only show whitelisted browsers</string>
+    <string name="save">Save</string>
+    <string name="whitelisted_browsers">Whitelisted browsers</string>
 </resources>

@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.pm.ResolveInfo
 import android.os.Build
 import android.util.Log
+import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isEqualTo
+import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.StringPersister
 import fe.linksheet.module.preference.StringReader
@@ -19,10 +21,11 @@ object BrowserHandler : KoinComponent {
         object None : BrowserMode("none")
         object AlwaysAsk : BrowserMode("always_ask")
         object SelectedBrowser : BrowserMode("browser")
+        object Whitelisted : BrowserMode("whitelisted")
 
         companion object {
             private val readerOptions by lazy {
-                listOf(None, AlwaysAsk, SelectedBrowser)
+                listOf(None, AlwaysAsk, SelectedBrowser, Whitelisted)
             }
 
             val reader: StringReader<BrowserMode> = { value ->
@@ -33,18 +36,11 @@ object BrowserHandler : KoinComponent {
         }
     }
 
-    /**
-     * First add all browsers into the list if the device is > [Build.VERSION_CODES.M]
-     *
-     * Then depending on the browser preference,
-     *
-     * - Remove all browsers
-     * - Only put the selected browser
-     *
-     * If the selected browser is not found, fallback to [BrowserMode.AlwaysAsk]
-     *
-     */
-    fun handleBrowsers(context: Context, currentResolveList: MutableList<ResolveInfo>): Pair<BrowserMode, ResolveInfo?> {
+    suspend fun handleBrowsers(
+        context: Context,
+        currentResolveList: MutableList<ResolveInfo>,
+        viewModel: BottomSheetViewModel,
+    ): Pair<BrowserMode, ResolveInfo?> {
         val browsers = BrowserResolver.queryBrowsers(context)
         addAllBrowsers(browsers, currentResolveList)
 
@@ -53,14 +49,16 @@ object BrowserHandler : KoinComponent {
             BrowserMode.persister,
             BrowserMode.reader
         )!!
-        val selectedBrowser = preferenceRepository.getString(PreferenceRepository.selectedBrowser)
 
         when (mode) {
             is BrowserMode.None -> {
                 removeBrowsers(browsers, currentResolveList)
                 return mode to null
             }
+
             is BrowserMode.SelectedBrowser -> {
+                val selectedBrowser =
+                    preferenceRepository.getString(PreferenceRepository.selectedBrowser)
                 val found = browsers.find {
                     it.activityInfo.packageName == selectedBrowser
                 }
@@ -72,6 +70,15 @@ object BrowserHandler : KoinComponent {
                     return mode to found
                 }
             }
+
+            is BrowserMode.Whitelisted -> {
+                val whitelistedBrowsers = viewModel.getWhiteListedBrowsers()
+
+                removeBrowsers(browsers, currentResolveList)
+                currentResolveList.addAll(whitelistedBrowsers.mapNotNull { whitelistedBrowser ->
+                    browsers.find { browser -> browser.activityInfo.packageName == whitelistedBrowser.packageName }
+                })
+            }
             else -> {}
         }
 
@@ -79,27 +86,23 @@ object BrowserHandler : KoinComponent {
     }
 
     private fun removeBrowsers(
-        browsers: List<ResolveInfo>,
+        browsers: Set<ResolveInfo>,
         currentResolveList: MutableList<ResolveInfo>
     ) {
         val toRemove = currentResolveList.filter { resolve ->
-            browsers.find { browser ->
-                resolve.activityInfo.isEqualTo(browser.activityInfo)
-            } != null
+            browsers.find { browser -> resolve.activityInfo.packageName == browser.activityInfo.packageName } != null
         }
         currentResolveList.removeAll(toRemove)
     }
 
     private fun addAllBrowsers(
-        browsers: List<ResolveInfo>,
+        browsers: Set<ResolveInfo>,
         currentResolveList: MutableList<ResolveInfo>
     ) {
-        val initialList = ArrayList(currentResolveList)
-
+        val initialList = currentResolveList.toSet()
         browsers.forEach { browser ->
-            val notFound = initialList.find {
-                it.activityInfo.isEqualTo(browser.activityInfo)
-            } == null
+            val notFound =
+                initialList.find { it.activityInfo.packageName == browser.activityInfo.packageName } == null
             if (notFound) {
                 currentResolveList.add(browser)
             }

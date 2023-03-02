@@ -8,13 +8,14 @@ import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.linksheet.BuildConfig
+import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.resolver.ResolveListGrouper
 
 object ResolveIntents {
 
-    fun resolve(context: Context, intent: Intent): IntentResolverResult {
+    suspend fun resolve(context: Context, intent: Intent, viewModel: BottomSheetViewModel): IntentResolverResult {
         Log.d("ResolveIntents", "Intent: $intent")
 
         val uri = intent.getUri()
@@ -51,7 +52,7 @@ object ResolveIntents {
         Log.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
         val browserMode = if (sourceIntent.isHttp()) {
-            BrowserHandler.handleBrowsers(context, resolveListPreSort)
+            BrowserHandler.handleBrowsers(context, resolveListPreSort, viewModel)
         } else null
 
 

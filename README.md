@@ -41,23 +41,22 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
  
 ## Features
 
-* Set preferred browser: Always list all browsers, only list native apps, always list selected browser 
+* Set preferred browser: Always list all browsers, only list native apps, always list selected browser, only list whitelisted browsers 
 * Preferred app for host: Set app to always open for selected host
 * List apps which have verified links so you can easily disable them to allow LinkSheet to work
-* Include usage stats in sorting algorithm
+* Include usage stats and "last app used history" in sorting algorithm
 * Copy url button in bottom sheet which copies the current url to the clipboard
 * Share To button in bottom sheet which sends a "Share To" intent to other apps
 * Single tap: Only require a single tap in bottom sheet to open app
 * Always show package name: Shows package names all throughout the application
 * Disable toast: Disables all toast messages
 * Display apps in grid instead of list
+* *Experimental*: [ClearURLs](https://github.com/ClearURLs/) integration (removes tracking parameters)
 
 ## Planned features
 
 * Resolve redirects (locally or via external service)
-* Remove tracking parameters
 * Bypass trackers with FastFoward(?)
-* Add history (#10)
 * Improve landscape mode
 
 ## Donations

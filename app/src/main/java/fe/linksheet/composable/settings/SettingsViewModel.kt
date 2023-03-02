@@ -10,6 +10,7 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.core.content.getSystemService
@@ -32,7 +33,7 @@ import org.koin.core.component.inject
 
 class SettingsViewModel : ViewModel(), KoinComponent {
     companion object {
-        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://"))
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://example.com"))
         val intentManageDefaultAppSettings = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
     }
 
@@ -211,7 +212,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                         val state = manager
                             .getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
                         state != null
-                                && (if(whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
+                                && (if (whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
                                 && state.hostToStateMap.isNotEmpty()
                                 && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
                     }

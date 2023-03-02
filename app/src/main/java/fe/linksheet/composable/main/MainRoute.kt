@@ -58,7 +58,7 @@ fun MainRoute(
 
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            defaultBrowserEnabled = Results.loading(false)
+            defaultBrowserEnabled = Results.loading(true)
             defaultBrowserEnabled = Results.booleanResult(viewModel.checkDefaultBrowser(context))
         }
     }

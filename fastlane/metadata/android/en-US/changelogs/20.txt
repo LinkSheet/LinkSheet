@@ -1,0 +1,21 @@
+From previous debug releases:
+
+* 0.0.18-debug
+
+    * Fix: Color of icons in "Apps which can open links" filters
+    * Fix: Browser status not being queried correctly if apps such as UntrackMe are installed
+    * Fix: Delete by host and package name instead of just by host
+    * Fix: Always show button row in dialog, always add all hosts to dialog in "Preferred apps" (#22)
+    * Sort hosts by name in dialog in "Preferred apps"
+    * Fix: Preference change not properly applying (#23)
+
+* 0.0.19-debug
+
+    * Add browser mode "whitelist" to "Preferred browsers" (#24)
+
+In this release:
+
+* Rework settings structure
+* Fix: Remove ripple effect when empty space is tapped in bottom sheet (#16)
+* Add "Open copied link" card in main screen when link is in clipboarad
+* Add experimental ClearURLs integration (clears trackers from links)

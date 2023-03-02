@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import fe.linksheet.data.AppSelectionHistory
+import fe.linksheet.data.entity.AppSelectionHistory
 import fe.linksheet.extension.findIndexed
 import fe.linksheet.extension.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit

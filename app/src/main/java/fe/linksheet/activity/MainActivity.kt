@@ -4,9 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -15,18 +13,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.*
-import fe.linksheet.composable.apps.AppsWhichCanOpenLinksSettingsRoute
-import fe.linksheet.composable.browser.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.main.MainRoute
-import fe.linksheet.composable.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.SettingsRoute
+import fe.linksheet.composable.settings.about.AboutSettingsRoute
+import fe.linksheet.composable.settings.about.CreditsSettingsRoute
+import fe.linksheet.composable.settings.apps.AppsSettingsRoute
+import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
+import fe.linksheet.composable.settings.apps.browser.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(
-        ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class,
-        ExperimentalAnimationApi::class
-    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,9 +44,30 @@ class MainActivity : ComponentActivity() {
                                     MainRoute(navController = navController)
                                 }
 
+                                val onBackPressed: () -> Unit = { navController.popBackStack() }
                                 composable(route = settingsRoute) {
                                     SettingsRoute(navController = navController,
-                                        onBackPressed = { navController.popBackStack() })
+                                        onBackPressed = onBackPressed)
+                                }
+
+                                composable(route = appsSettingsRoute) {
+                                    AppsSettingsRoute(navController = navController,
+                                        onBackPressed = onBackPressed)
+                                }
+
+                                composable(route = bottomSheetSettingsRoute) {
+                                    BottomSheetSettingsRoute(navController = navController,
+                                        onBackPressed = onBackPressed)
+                                }
+
+                                composable(route = aboutSettingsRoute) {
+                                    AboutSettingsRoute(navController = navController,
+                                        onBackPressed = onBackPressed)
+                                }
+
+                                composable(route = creditsSettingsRoute) {
+                                    CreditsSettingsRoute(navController = navController,
+                                        onBackPressed = onBackPressed)
                                 }
 
                                 composable(route = preferredBrowserSettingsRoute) {

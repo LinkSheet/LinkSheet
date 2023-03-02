@@ -62,4 +62,19 @@
     <string name="whitelisted_explainer">Only show whitelisted browsers</string>
     <string name="save">Save</string>
     <string name="whitelisted_browsers">Whitelisted browsers</string>
+    <string name="apps_explainer">Preferred browser, Preferred apps, Apps which can open links</string>
+    <string name="bottom_sheet_explainer">Sort by usage, enable copy button, enable share button etc.</string>
+    <string name="about">About</string>
+    <string name="about_explainer">About this app, licenses</string>
+    <string name="credits">Credits</string>
+    <string name="credits_explainer">Open source licensing</string>
+    <string name="version">Version</string>
+    <string name="open_link_with">OpenLinkWith</string>
+    <string name="license_apache_2">Apache License 2.0</string>
+    <string name="seal">Seal</string>
+    <string name="license_gpl_3">GNU General Public License v3.0</string>
+    <string name="github">Github</string>
+    <string name="github_explainer">Source code repository</string>
+    <string name="donate">Donate</string>
+    <string name="donate_explainer">Donate crypto to the author</string>
 </resources>

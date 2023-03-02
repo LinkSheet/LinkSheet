@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.core.content.ContextCompat
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 
 fun Context.startActivityWithConfirmation(intent: Intent): Boolean {
@@ -14,6 +15,10 @@ fun Context.startActivityWithConfirmation(intent: Intent): Boolean {
     } catch (e: ActivityNotFoundException) {
         false
     }
+}
+
+fun Context.openLink(link: String): Boolean {
+    return startActivityWithConfirmation(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
 }
 
 fun Context.startPackageInfoActivity(info: DisplayActivityInfo): Boolean {

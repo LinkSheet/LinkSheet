@@ -1,4 +1,4 @@
-package fe.linksheet.composable.preferred
+package fe.linksheet.composable.settings.apps.preferred
 
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
@@ -30,6 +30,7 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
 import fe.linksheet.composable.Searchbar
+import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.extension.startPackageInfoActivity
@@ -141,7 +142,7 @@ fun PreferredAppSettingsRoute(
                         )
                     }
 
-                    Box{
+                    Box {
                         LazyColumn(modifier = Modifier.padding(bottom = 40.dp), content = {
                             hostMap.toSortedMap().forEach { (host, enabled) ->
                                 item(key = host) {
@@ -218,131 +219,106 @@ fun PreferredAppSettingsRoute(
         }
     }
 
-
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-        rememberTopAppBarState(),
-        canScroll = { true }
-    )
-
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeTopAppBar(
-                title = {
-                    Text(
-                        modifier = Modifier,
-                        text = stringResource(id = R.string.preferred_apps),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold
+    SettingsScaffold(R.string.preferred_apps, onBackPressed = onBackPressed) { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxHeight(),
+            contentPadding = PaddingValues(horizontal = 15.dp)
+        ) {
+            stickyHeader(key = "header") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(
+                        text = stringResource(R.string.preferred_apps_explainer),
+                        paddingStart = 0.dp
                     )
-                }, navigationIcon = {
-                    BackButton {
-                        onBackPressed()
-                    }
-                }, scrollBehavior = scrollBehavior
-            )
-        }, content = { padding ->
-            LazyColumn(
-                modifier = Modifier
-                    .padding(padding)
-                    .fillMaxHeight(),
-                contentPadding = PaddingValues(horizontal = 15.dp)
-            ) {
-                stickyHeader(key = "header") {
-                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                        PreferenceSubtitle(
-                            text = stringResource(R.string.preferred_apps_explainer),
-                            paddingStart = 0.dp
-                        )
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                        Searchbar(filter = filter, onValueChange = {
-                            filter = it
-                            coroutineScope.launch { viewModel.filterPreferredAppsAsync(it) }
-                        }, onClearClick = {
-                            filter = ""
-                            coroutineScope.launch { viewModel.filterPreferredAppsAsync(filter) }
-                        })
+                    Searchbar(filter = filter, onValueChange = {
+                        filter = it
+                        coroutineScope.launch { viewModel.filterPreferredAppsAsync(it) }
+                    }, onClearClick = {
+                        filter = ""
+                        coroutineScope.launch { viewModel.filterPreferredAppsAsync(filter) }
+                    })
+
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+            }
+
+            if (viewModel.preferredAppsFiltered.isNotEmpty()) {
+                viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
+                    item(key = app.flatComponentName) {
+                        ClickableRow(padding = 5.dp, onClick = {
+                            openDialog = true
+                            hostMap.clear()
+
+                            if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                manager.getAppHosts(app.packageName)
+                                    .also { hasAppHosts = it.isNotEmpty() }.forEach {
+                                    hostMap[it] = hosts.contains(it)
+                                }
+                            }
+
+                            hosts.forEach { hostMap[it] = true }
+                            displayActivityInfo = app
+                        }) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Image(
+                                    bitmap = app.getBitmap(context),
+                                    contentDescription = app.displayLabel,
+                                    modifier = Modifier.size(42.dp)
+                                )
+
+                                Spacer(modifier = Modifier.width(10.dp))
+
+                                Column {
+                                    Text(
+                                        text = app.displayLabel, fontSize = 16.sp,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        fontFamily = HkGroteskFontFamily,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+
+                                    Text(
+                                        text = hosts.joinToString(", "),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+
+                                    if (viewModel.alwaysShowPackageName) {
+                                        Text(
+                                            text = app.packageName,
+                                            fontSize = 12.sp,
+                                            color = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    }
+                                }
+                            }
+                        }
 
                         Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
-
-                if (viewModel.preferredAppsFiltered.isNotEmpty()) {
-                    viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
-                        item(key = app.flatComponentName) {
-                            ClickableRow(padding = 5.dp, onClick = {
-                                openDialog = true
-                                hostMap.clear()
-
-                                if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                    manager.getAppHosts(app.packageName).also { hasAppHosts = it.isNotEmpty() }.forEach {
-                                        hostMap[it] = hosts.contains(it)
-                                    }
-                                }
-
-                                hosts.forEach { hostMap[it] = true }
-                                displayActivityInfo = app
-                            }) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Image(
-                                        bitmap = app.getBitmap(context),
-                                        contentDescription = app.displayLabel,
-                                        modifier = Modifier.size(42.dp)
-                                    )
-
-                                    Spacer(modifier = Modifier.width(10.dp))
-
-                                    Column {
-                                        Text(
-                                            text = app.displayLabel, fontSize = 16.sp,
-                                            color = MaterialTheme.colorScheme.onSurface,
-                                            fontFamily = HkGroteskFontFamily,
-                                            fontWeight = FontWeight.SemiBold
-                                        )
-
-                                        Text(
-                                            text = hosts.joinToString(", "),
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis,
-                                            color = MaterialTheme.colorScheme.onSurface
-                                        )
-
-                                        if (viewModel.alwaysShowPackageName) {
-                                            Text(
-                                                text = app.packageName,
-                                                fontSize = 12.sp,
-                                                color = MaterialTheme.colorScheme.tertiary
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                    }
-                } else {
-                    item {
-                        Column(
-                            modifier = Modifier
-                                .fillParentMaxWidth()
-                                .fillParentMaxHeight(0.4f),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            if (viewModel.preferredApps.isEmpty()) {
-                                Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
-                            } else {
-                                Text(text = stringResource(id = R.string.no_such_app_found))
-                            }
+            } else {
+                item {
+                    Column(
+                        modifier = Modifier
+                            .fillParentMaxWidth()
+                            .fillParentMaxHeight(0.4f),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        if (viewModel.preferredApps.isEmpty()) {
+                            Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
+                        } else {
+                            Text(text = stringResource(id = R.string.no_such_app_found))
                         }
                     }
                 }
             }
-        })
-
+        }
+    }
 }

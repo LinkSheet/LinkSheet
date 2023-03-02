@@ -1,4 +1,4 @@
-package fe.linksheet.composable.browser
+package fe.linksheet.composable.settings.apps.browser
 
 import android.content.Context
 import android.util.Log
@@ -27,6 +27,7 @@ import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.ClickableRow
+import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.extension.startPackageInfoActivity
@@ -102,7 +103,7 @@ fun PreferredBrowserSettingsRoute(
                                         }
                                     ) {
                                         Checkbox(checked = state, onCheckedChange = {
-                                          viewModel.whitelistedBrowserMap[browser] = it
+                                            viewModel.whitelistedBrowserMap[browser] = it
                                             state = it
                                         })
 
@@ -141,115 +142,96 @@ fun PreferredBrowserSettingsRoute(
         }
     }
 
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeTopAppBar(
-                title = {
-                    Text(
-                        modifier = Modifier,
-                        text = stringResource(id = R.string.preferred_browser),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold
+    SettingsScaffold(R.string.preferred_browser, onBackPressed = onBackPressed) { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxHeight(),
+            contentPadding = PaddingValues(horizontal = 15.dp)
+        ) {
+            stickyHeader(key = "header") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(
+                        text = stringResource(R.string.preferred_browser_explainer),
+                        paddingStart = 0.dp
                     )
-                }, navigationIcon = {
-                    BackButton {
-                        onBackPressed()
-                    }
-                }, scrollBehavior = scrollBehavior
-            )
-        }, content = {
-            LazyColumn(
-                modifier = Modifier
-                    .padding(it)
-                    .fillMaxHeight(),
-                contentPadding = PaddingValues(horizontal = 15.dp)
-            ) {
-                stickyHeader(key = "header") {
-                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                        PreferenceSubtitle(
-                            text = stringResource(R.string.preferred_browser_explainer),
-                            paddingStart = 0.dp
-                        )
 
-                        Spacer(modifier = Modifier.height(10.dp))
-                    }
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
+            }
 
-                item(key = "none") {
-                    BrowserRow(
-                        selected = viewModel.browserMode == BrowserHandler.BrowserMode.None,
-                        onClick = {
-                            viewModel.onBrowserMode(BrowserHandler.BrowserMode.None)
-                        },
-                        onLongClick = null
-                    ) {
-                        Texts(headline = R.string.none, subtitle = R.string.none_explainer)
-                    }
+            item(key = "none") {
+                BrowserRow(
+                    selected = viewModel.browserMode == BrowserHandler.BrowserMode.None,
+                    onClick = {
+                        viewModel.onBrowserMode(BrowserHandler.BrowserMode.None)
+                    },
+                    onLongClick = null
+                ) {
+                    Texts(headline = R.string.none, subtitle = R.string.none_explainer)
                 }
+            }
 
-                item(key = "always_ask") {
-                    BrowserRow(
-                        selected = viewModel.browserMode == BrowserHandler.BrowserMode.AlwaysAsk,
-                        onClick = {
-                            viewModel.onBrowserMode(BrowserHandler.BrowserMode.AlwaysAsk)
-                        },
-                        onLongClick = null
-                    ) {
-                        Texts(
-                            headline = R.string.always_ask,
-                            subtitle = R.string.always_ask_explainer
-                        )
-                    }
+            item(key = "always_ask") {
+                BrowserRow(
+                    selected = viewModel.browserMode == BrowserHandler.BrowserMode.AlwaysAsk,
+                    onClick = {
+                        viewModel.onBrowserMode(BrowserHandler.BrowserMode.AlwaysAsk)
+                    },
+                    onLongClick = null
+                ) {
+                    Texts(
+                        headline = R.string.always_ask,
+                        subtitle = R.string.always_ask_explainer
+                    )
                 }
+            }
 
-                item(key = "whitelisted") {
-                    BrowserRow(
-                        selected = viewModel.browserMode == BrowserHandler.BrowserMode.Whitelisted,
-                        onClick = {
-                            viewModel.onBrowserMode(BrowserHandler.BrowserMode.Whitelisted)
-                            coroutineScope.launch {
-                                viewModel.queryWhitelistedBrowsersAsync(context)
-                            }
-                            openDialog = true
-                        },
-                        onLongClick = null
-                    ) {
-                        Texts(
-                            headline = R.string.whitelisted,
-                            subtitle = R.string.whitelisted_explainer
-                        )
-                    }
-                }
-
-                viewModel.browsers.forEach { app ->
-                    item(key = app.flatComponentName) {
-                        val selected =
-                            viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.packageName
-                        BrowserRow(
-                            selected = selected,
-                            onClick = {
-                                viewModel.onBrowserMode(BrowserHandler.BrowserMode.SelectedBrowser)
-                                viewModel.onSelectedBrowser(app.packageName)
-                            },
-                            onLongClick = {
-                                context.startPackageInfoActivity(app)
-                            }
-                        ) {
-                            BrowserIconTextRow(
-                                context = context,
-                                app = app,
-                                selected = selected,
-                                showSelectedText = true,
-                                alwaysShowPackageName = viewModel.alwaysShowPackageName
-                            )
+            item(key = "whitelisted") {
+                BrowserRow(
+                    selected = viewModel.browserMode == BrowserHandler.BrowserMode.Whitelisted,
+                    onClick = {
+                        viewModel.onBrowserMode(BrowserHandler.BrowserMode.Whitelisted)
+                        coroutineScope.launch {
+                            viewModel.queryWhitelistedBrowsersAsync(context)
                         }
+                        openDialog = true
+                    },
+                    onLongClick = null
+                ) {
+                    Texts(
+                        headline = R.string.whitelisted,
+                        subtitle = R.string.whitelisted_explainer
+                    )
+                }
+            }
+
+            viewModel.browsers.forEach { app ->
+                item(key = app.flatComponentName) {
+                    val selected =
+                        viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.packageName
+                    BrowserRow(
+                        selected = selected,
+                        onClick = {
+                            viewModel.onBrowserMode(BrowserHandler.BrowserMode.SelectedBrowser)
+                            viewModel.onSelectedBrowser(app.packageName)
+                        },
+                        onLongClick = {
+                            context.startPackageInfoActivity(app)
+                        }
+                    ) {
+                        BrowserIconTextRow(
+                            context = context,
+                            app = app,
+                            selected = selected,
+                            showSelectedText = true,
+                            alwaysShowPackageName = viewModel.alwaysShowPackageName
+                        )
                     }
                 }
             }
-        })
+        }
+    }
 }
 
 @Composable

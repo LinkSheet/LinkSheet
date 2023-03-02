@@ -16,8 +16,8 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.linksheet.activity.MainActivity
-import fe.linksheet.data.AppSelectionHistory
-import fe.linksheet.data.WhitelistedBrowser
+import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.Deferred

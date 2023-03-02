@@ -1,9 +1,10 @@
-package fe.linksheet.data
+package fe.linksheet.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import fe.linksheet.data.entity.WhitelistedBrowser
 
 @Dao
 interface WhitelistedBrowsersDao {

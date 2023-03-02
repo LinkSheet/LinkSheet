@@ -6,10 +6,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.tasomaniac.openwith.data.migrations.Migration1to2
-import fe.linksheet.data.AppSelectionHistory
-import fe.linksheet.data.AppSelectionHistoryDao
-import fe.linksheet.data.WhitelistedBrowser
-import fe.linksheet.data.WhitelistedBrowsersDao
+import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.data.dao.AppSelectionHistoryDao
+import fe.linksheet.data.entity.WhitelistedBrowser
+import fe.linksheet.data.dao.WhitelistedBrowsersDao
 
 @Database(
     entities = [PreferredApp::class, AppSelectionHistory::class, WhitelistedBrowser::class],

@@ -1,13 +1,11 @@
 package com.tasomaniac.openwith.preferred
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import fe.linksheet.data.AppSelectionHistory
-import fe.linksheet.data.AppSelectionHistoryDao
+import fe.linksheet.data.entity.AppSelectionHistory
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import org.koin.core.component.KoinComponent

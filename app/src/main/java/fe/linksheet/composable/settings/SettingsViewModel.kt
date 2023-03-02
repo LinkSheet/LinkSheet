@@ -23,7 +23,7 @@ import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
-import fe.linksheet.data.WhitelistedBrowser
+import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.preference.PreferenceRepository
@@ -325,7 +325,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     suspend fun saveWhitelistedBrowsers() {
         withContext(Dispatchers.IO) {
-            val dao =  database.whitelistedBrowsersDao()
+            val dao = database.whitelistedBrowsersDao()
             whitelistedBrowserMap.forEach { (app, enabled) ->
                 if (enabled) {
                     dao.insert(WhitelistedBrowser(packageName = app.packageName))

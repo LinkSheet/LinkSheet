@@ -103,6 +103,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
     )
 
+    var useFastForwardRules by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.useFastForwardRules) ?: false
+    )
+
     var followRedirects by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
     )
@@ -342,6 +346,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onUseClearUrls(it: Boolean) {
         this.useClearUrls = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.useClearUrls, it)
+    }
+
+    fun onUseFastForwardRules(it: Boolean) {
+        this.useFastForwardRules = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.useFastForwardRules, it)
     }
 
     fun onFollowRedirects(it: Boolean) {

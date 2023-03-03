@@ -38,6 +38,7 @@ class PreferenceRepository(context: Context) {
         val disableToasts = Preference("disable_toasts", false)
         val gridLayout = Preference("grid_layout", false)
         val useClearUrls = Preference("use_clear_urls", false)
+        val useFastForwardRules = Preference("fast_forward_rules", false)
         val followRedirects = Preference("follow_redirects", false)
         val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
         val followOnlyKnownTrackers = Preference("follow_only_known_trackers", true)
@@ -55,6 +56,7 @@ class PreferenceRepository(context: Context) {
             disableToasts,
             gridLayout,
             useClearUrls,
+            useFastForwardRules,
             followRedirects,
             followRedirectsExternalService,
             followOnlyKnownTrackers,

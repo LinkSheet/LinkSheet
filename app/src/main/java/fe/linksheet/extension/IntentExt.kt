@@ -3,10 +3,15 @@ package fe.linksheet.extension
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.clearurlskt.loadClearUrlsJson
 import fe.clearurlskt.loadClearUrlsProviders
 import fe.clearurlskt.urlClear
+import fe.fastforwardkt.FastForwardRules
+import fe.fastforwardkt.getRuleRedirect
+import fe.fastforwardkt.loadFastForwardRuleJson
 import getBuiltInClearUrlsJson
+import getBuiltInFastForwardJson
 
 fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
     component = null
@@ -26,7 +31,7 @@ private val clearUrlProviders by lazy {
     )
 }
 
-fun Intent.getUri(clearUrl: Boolean = false): Uri? {
+fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri? {
     var uriData = dataString
     if (uriData == null) {
         uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
@@ -52,10 +57,19 @@ fun Intent.getUri(clearUrl: Boolean = false): Uri? {
                 append(uriData.substring(uriData.indexOf(host) + host.length))
             }
 
-            Log.d("Adjusted Url", url)
+            Log.d("Url Pre modification", url)
+
+            if (fastForward) {
+                getRuleRedirect(url, ResolveIntents.fastForwardRulesObject)?.let { url = it }
+            }
+
+            Log.d("Url Post FastForward", url)
+
             if (clearUrl) {
                 url = urlClear(url, debugPrint = false, clearUrlProviders)
             }
+
+            Log.d("Url Post ClearURL", url)
 
             return Uri.parse(url)
         }

@@ -53,6 +53,17 @@ fun LinksSettingsRoute(
                 )
             }
 
+            item(key = "fastforward_rules"){
+                SwitchRow(
+                    checked = viewModel.useFastForwardRules,
+                    onChange = {
+                        viewModel.onUseFastForwardRules(it)
+                    },
+                    headlineId = R.string.fastfoward_rules,
+                    subtitleId = R.string.fastfoward_rules_explainer
+                )
+            }
+
             item(key = "follow_redirects") {
                 SwitchRow(
                     checked = viewModel.followRedirects,

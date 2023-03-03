@@ -75,6 +75,10 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
     )
 
+    var useFastForwardRules by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.useFastForwardRules) ?: false
+    )
+
     val followRedirects by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
     )

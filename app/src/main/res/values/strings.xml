@@ -83,7 +83,7 @@
     <string name="checkmark">Checkmark</string>
     <string name="links">Links</string>
     <string name="links_explainer">Settings regarding link manipulation</string>
-    <string name="clear_urls">Use clear urls</string>
+    <string name="clear_urls">Use ClearURLs</string>
     <string name="clear_urls_explainer">Use experimental ClearURL integration (clears tracking parameters from urls)</string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet</string>
@@ -99,4 +99,6 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="amoled_black">Amoled Black</string>
+    <string name="fastfoward_rules">Use FastForward rules</string>
+    <string name="fastfoward_rules_explainer">Use experimental FastForward rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
 </resources>

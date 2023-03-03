@@ -19,7 +19,7 @@ import getBuiltInFastForwardJson
 
 object ResolveIntents {
     private val request = Request()
-    private val fastForwardRulesObject by lazy { loadFastForwardRuleJson(getBuiltInFastForwardJson()!!) }
+    val fastForwardRulesObject by lazy { loadFastForwardRuleJson(getBuiltInFastForwardJson()!!) }
 
     suspend fun resolve(
         context: Context,
@@ -28,7 +28,7 @@ object ResolveIntents {
     ): IntentResolverResult {
         Log.d("ResolveIntents", "Intent: $intent")
 
-        var uri = intent.getUri(viewModel.useClearUrls)
+        var uri = intent.getUri(viewModel.useClearUrls, viewModel.useFastForwardRules)
 
         if (viewModel.followRedirects && uri != null) {
             viewModel.followRedirects(uri, request, fastForwardRulesObject).getOrNull()?.let {
@@ -37,7 +37,6 @@ object ResolveIntents {
         }
 
         Log.d("ResolveIntents", "UseClearUrls: ${viewModel.useClearUrls}")
-
         Log.d("ResolveIntents", "Intent data: $uri, intent: $intent")
 
         val preferredApp = uri?.let {

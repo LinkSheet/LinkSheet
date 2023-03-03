@@ -29,21 +29,12 @@ fun SettingsRoute(
     viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
-    var defaultBrowserEnabled: Results<Boolean> by remember { mutableStateOf(Results.loading(false)) }
-
-    LaunchedEffect(Unit) {
-        delay(200)
-        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
-    }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            defaultBrowserEnabled = Results.loading(false)
-            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
-
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.onUsageStatsSorting(false)
             }

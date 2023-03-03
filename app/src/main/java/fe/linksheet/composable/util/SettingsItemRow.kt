@@ -42,7 +42,7 @@ fun SettingsItemRow(
                 text = headline,
                 fontFamily = HkGroteskFontFamily,
                 fontWeight = FontWeight.SemiBold,
-
+                fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(

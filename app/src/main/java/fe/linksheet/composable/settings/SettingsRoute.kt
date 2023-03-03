@@ -33,7 +33,7 @@ fun SettingsRoute(
 
     LaunchedEffect(Unit) {
         delay(200)
-        defaultBrowserEnabled = Results.booleanResult(viewModel.checkDefaultBrowser(context))
+        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
@@ -42,7 +42,7 @@ fun SettingsRoute(
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = Results.loading(false)
-            defaultBrowserEnabled = Results.booleanResult(viewModel.checkDefaultBrowser(context))
+            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
 
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.onUsageStatsSorting(false)

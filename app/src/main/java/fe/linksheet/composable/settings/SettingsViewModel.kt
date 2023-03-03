@@ -1,6 +1,7 @@
 package fe.linksheet.composable.settings
 
 import android.app.AppOpsManager
+import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -25,6 +26,7 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
+import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.preference.PreferenceRepository
 import kotlinx.coroutines.*
@@ -161,8 +163,13 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun openDefaultBrowserSettings(context: Context) {
-        context.startActivity(intentManageDefaultAppSettings)
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun getRequestRoleBrowserIntent(roleManager: RoleManager): Intent {
+        return roleManager.createRequestRoleIntent(RoleManager.ROLE_BROWSER)
+    }
+
+    fun openDefaultBrowserSettings(context: Context): Boolean {
+        return context.startActivityWithConfirmation(intentManageDefaultAppSettings)
     }
 
     @Throws(ActivityNotFoundException::class)

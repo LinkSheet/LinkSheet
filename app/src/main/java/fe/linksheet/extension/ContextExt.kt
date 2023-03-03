@@ -17,10 +17,6 @@ fun Context.startActivityWithConfirmation(intent: Intent): Boolean {
     }
 }
 
-fun Context.openLink(link: String): Boolean {
-    return startActivityWithConfirmation(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
-}
-
 fun Context.startPackageInfoActivity(info: DisplayActivityInfo): Boolean {
     return this.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
         this.data = Uri.parse("package:${info.packageName}")

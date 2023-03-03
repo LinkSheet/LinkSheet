@@ -5,6 +5,7 @@ import android.app.role.RoleManager
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.util.Patterns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,8 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,7 +36,6 @@ import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
-import fe.linksheet.extension.openLink
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.util.Results
@@ -49,8 +48,10 @@ fun MainRoute(
     navController: NavHostController, viewModel: SettingsViewModel = viewModel()
 ) {
     val context = LocalContext.current
+    val clipboardManager = LocalClipboardManager.current
+    val uriHandler = LocalUriHandler.current
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
-    val clipboard = remember { context.getSystemService(ClipboardManager::class.java) }
+    var sheetOpen by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(Unit) {
         delay(200)
@@ -64,6 +65,8 @@ fun MainRoute(
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = Results.loading()
             defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
+
+            sheetOpen = null
         }
     }
 
@@ -79,6 +82,7 @@ fun MainRoute(
             }
         })
     }) { padding ->
+
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
@@ -113,12 +117,15 @@ fun MainRoute(
                 )
             }
 
-            if (clipboard.hasPrimaryClip()) {
-                val item = clipboard.primaryClip?.getItemAt(0)?.text
+            // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
+            if (clipboardManager.hasText() || sheetOpen != null) {
+                val item = clipboardManager.getText()?.text
 
-                if (item != null && Patterns.WEB_URL.matcher(item).matches()) {
+                if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
                     item(key = "open_copied_link") {
-                        OpenCopiedLink(context = context, item = item)
+                        OpenCopiedLink(uriHandler = uriHandler, item = item ?: sheetOpen!!, sheetOpen = {
+                            sheetOpen = item
+                        })
                     }
                 }
             }
@@ -218,13 +225,14 @@ fun OpenDefaultBrowserCard(
 }
 
 @Composable
-fun OpenCopiedLink(context: Context, item: CharSequence) {
+fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) {
     OutlinedCard(modifier = Modifier
         .fillMaxWidth()
         .padding(horizontal = 10.dp)
         .clip(RoundedCornerShape(12.dp))
         .clickable {
-            context.openLink(item.toString())
+            sheetOpen()
+            uriHandler.openUri(item.toString())
         }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

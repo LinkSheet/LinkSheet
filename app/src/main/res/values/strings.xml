@@ -84,7 +84,7 @@
     <string name="links">Links</string>
     <string name="links_explainer">Settings regarding link manipulation</string>
     <string name="clear_urls">Use clear urls</string>
-    <string name="clear_urls_explainer">Use experimental ClearURL integration</string>
+    <string name="clear_urls_explainer">Use experimental ClearURL integration (clears tracking parameters from urls)</string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet</string>
     <string name="loading_link">Loading link...</string>

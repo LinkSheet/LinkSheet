@@ -4,14 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.tasomaniac.openwith.resolver.ResolveIntents
+import fe.clearurlskt.clearUrl
 import fe.clearurlskt.loadClearUrlsJson
 import fe.clearurlskt.loadClearUrlsProviders
-import fe.clearurlskt.urlClear
-import fe.fastforwardkt.FastForwardRules
 import fe.fastforwardkt.getRuleRedirect
-import fe.fastforwardkt.loadFastForwardRuleJson
 import getBuiltInClearUrlsJson
-import getBuiltInFastForwardJson
 
 fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
     component = null
@@ -66,7 +63,7 @@ fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri?
             Log.d("Url Post FastForward", url)
 
             if (clearUrl) {
-                url = urlClear(url, debugPrint = false, clearUrlProviders)
+                url = clearUrl(url,clearUrlProviders)
             }
 
             Log.d("Url Post ClearURL", url)

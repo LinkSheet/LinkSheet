@@ -378,8 +378,12 @@ class BottomSheetActivity : ComponentActivity() {
                                 }
                             },
                             onDoubleClick = {
-                                launchScope.launch {
-                                    launchApp(info, result.uri)
+                                if(!bottomSheetViewModel.singleTap){
+                                    launchScope.launch {
+                                        launchApp(info, result.uri)
+                                    }
+                                } else {
+                                    this@BottomSheetActivity.startPackageInfoActivity(info)
                                 }
                             },
                             onLongClick = {

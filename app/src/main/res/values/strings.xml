@@ -20,7 +20,7 @@
     <string name="enable_copy_button_explainer">Shows a \"Copy url\" button in the bottom sheet</string>
     <string name="url_copied">URL has been copied to clipboard</string>
     <string name="single_tap">Enable single tap</string>
-    <string name="single_tap_explainer">Only require one tap instead of two to open apps; Long-press to select app</string>
+    <string name="single_tap_explainer">Only require one tap instead of two to open apps; Long-press to select app, double click to open app info</string>
     <string name="confirm">Confirm</string>
     <string name="clear">Clear</string>
     <string name="usage_stats_sorting">Sort apps by usage</string>

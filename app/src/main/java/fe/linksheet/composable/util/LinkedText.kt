@@ -147,7 +147,7 @@ fun AnnotatedString.Builder.addLink(
     end: Int
 ) = addStringAnnotation(LinkTag, url, start, end)
 
-@OptIn(ExperimentalComposeApi::class, ExperimentalTextApi::class)
+@OptIn(ExperimentalTextApi::class)
 fun <R : Any> AnnotatedString.Builder.withLink(
     url: String,
     block: AnnotatedString.Builder.() -> R

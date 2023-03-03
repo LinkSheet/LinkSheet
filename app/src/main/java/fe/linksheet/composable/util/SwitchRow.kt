@@ -47,7 +47,7 @@ fun SwitchRow(
             fontSize = 16.sp,
             color = MaterialTheme.colorScheme.onSurface
         )
-    },
+    }
 ) {
     ClickableRow(
         modifier = modifier,

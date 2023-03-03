@@ -40,7 +40,14 @@ fun SwitchRow(
     checked: Boolean,
     onChange: (Boolean) -> Unit,
     headline: String,
-    subtitle: String
+    subtitle: String? = null,
+    subtitleBuilder: @Composable () -> Unit = {
+        Text(
+            text = subtitle ?: "",
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    },
 ) {
     ClickableRow(
         modifier = modifier,
@@ -57,11 +64,8 @@ fun SwitchRow(
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onSurface
             )
-            Text(
-                text = subtitle,
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+
+            subtitleBuilder()
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {

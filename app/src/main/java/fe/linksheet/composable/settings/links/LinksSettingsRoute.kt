@@ -53,7 +53,7 @@ fun LinksSettingsRoute(
                 )
             }
 
-            item(key = "fastforward_rules"){
+            item(key = "fastforward_rules") {
                 SwitchRow(
                     checked = viewModel.useFastForwardRules,
                     onChange = {
@@ -91,40 +91,15 @@ fun LinksSettingsRoute(
                         }
                     }
 
-
-                    ClickableRow(
-                        modifier = Modifier,
-                        padding = 10.dp,
-                        verticalAlignment = Alignment.CenterVertically,
-                        onClick = {
-                            viewModel.onFollowRedirectsExternalService(!viewModel.followRedirectsExternalService)
-                        }) {
-                        Column(modifier = Modifier.fillMaxWidth(0.8f)) {
-                            Text(
-                                text = stringResource(id = R.string.follow_redirects_external_service),
-                                fontFamily = HkGroteskFontFamily,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 18.sp,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-
-                            LinkedText(
-                                text = annotatedString,
-                                fontSize = 16.sp,
-                                onClick = { url -> uriHandler.openUri(url) }
-                            )
-                        }
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            Switch(
-                                checked = viewModel.followRedirectsExternalService,
-                                onCheckedChange = { viewModel.onFollowRedirectsExternalService(it) }
-                            )
-                        }
-                    }
+                    SwitchRow(checked = viewModel.followRedirectsExternalService, onChange = {
+                        viewModel.onFollowRedirectsExternalService(it)
+                    }, headline = stringResource(id = R.string.follow_redirects_external_service), subtitle = null, subtitleBuilder = {
+                        LinkedText(
+                            text = annotatedString,
+                            fontSize = 16.sp,
+                            onClick = { url -> uriHandler.openUri(url) }
+                        )
+                    })
                 }
             }
 

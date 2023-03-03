@@ -2,6 +2,7 @@ package fe.linksheet.composable.settings.about
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -17,6 +18,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.creditsSettingsRoute
 
 
@@ -41,7 +43,10 @@ fun AboutSettingsRoute(
                     navController = navController,
                     navigateTo = creditsSettingsRoute,
                     headline = R.string.credits,
-                    subtitle = R.string.credits_explainer
+                    subtitle = R.string.credits_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Link, description = R.string.credits)
+                    }
                 )
             }
 
@@ -51,16 +56,22 @@ fun AboutSettingsRoute(
                     subtitle = R.string.github_explainer,
                     onClick = {
                         uriHandler.openUri("https://github.com/1fexd/LinkSheet")
+                    },
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Home, description = R.string.github)
                     }
                 )
             }
 
-            item("donate"){
+            item("donate") {
                 SettingsItemRow(
                     headline = R.string.donate,
                     subtitle = R.string.donate_explainer,
                     onClick = {
                         uriHandler.openUri("https://coindrop.to/fexd")
+                    },
+                    image = {
+                        ColoredIcon(icon = Icons.Default.CurrencyBitcoin, description = R.string.donate)
                     }
                 )
             }
@@ -69,7 +80,10 @@ fun AboutSettingsRoute(
                 SettingsItemRow(
                     headline = stringResource(id = R.string.version),
                     subtitle = BuildConfig.VERSION_NAME,
-                    onClick = {}
+                    onClick = {},
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Info, description = R.string.version)
+                    }
                 )
             }
         }

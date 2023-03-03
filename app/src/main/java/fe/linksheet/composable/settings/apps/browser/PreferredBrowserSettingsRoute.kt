@@ -53,11 +53,6 @@ fun PreferredBrowserSettingsRoute(
         }
     }
 
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-        rememberTopAppBarState(),
-        canScroll = { true }
-    )
-
     val coroutineScope = rememberCoroutineScope()
 
     var openDialog by remember { mutableStateOf(false) }

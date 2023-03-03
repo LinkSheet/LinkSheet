@@ -1,8 +1,11 @@
 package fe.linksheet.composable.settings
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,10 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fe.linksheet.*
 import fe.linksheet.R
+import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -51,7 +54,10 @@ fun SettingsRoute(
                     navController = navController,
                     navigateTo = appsSettingsRoute,
                     headline = R.string.apps,
-                    subtitle = R.string.apps_explainer
+                    subtitle = R.string.apps_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Apps, description = R.string.apps)
+                    }
                 )
             }
 
@@ -60,7 +66,10 @@ fun SettingsRoute(
                     navController = navController,
                     navigateTo = bottomSheetSettingsRoute,
                     headline = R.string.bottom_sheet,
-                    subtitle = R.string.bottom_sheet_explainer
+                    subtitle = R.string.bottom_sheet_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.ArrowUpward, description = R.string.bottom_sheet)
+                    }
                 )
             }
 
@@ -69,7 +78,10 @@ fun SettingsRoute(
                     navController = navController,
                     navigateTo = linksSettingsRoute,
                     headline = R.string.links,
-                    subtitle = R.string.links_explainer
+                    subtitle = R.string.links_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Link, description = R.string.links)
+                    }
                 )
             }
 
@@ -78,7 +90,10 @@ fun SettingsRoute(
                     navController = navController,
                     navigateTo = themeSettingsRoute,
                     headline = R.string.theme,
-                    subtitle = R.string.theme_explainer
+                    subtitle = R.string.theme_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.DisplaySettings, description = R.string.theme)
+                    }
                 )
             }
 
@@ -87,7 +102,10 @@ fun SettingsRoute(
                     navController = navController,
                     navigateTo = aboutSettingsRoute,
                     headline = R.string.about,
-                    subtitle = R.string.about_explainer
+                    subtitle = R.string.about_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Info, description = R.string.about)
+                    }
                 )
             }
         }

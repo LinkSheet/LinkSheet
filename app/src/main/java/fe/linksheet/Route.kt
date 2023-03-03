@@ -6,6 +6,7 @@ const val appsSettingsRoute = "apps_settings_route"
 const val aboutSettingsRoute = "about_settings_route"
 const val creditsSettingsRoute = "credits_settings_route"
 
+const val themeSettingsRoute = "theme_settings_route"
 const val linksSettingsRoute = "link_settings_route"
 const val bottomSheetSettingsRoute = "bottom_sheet_settings_route"
 const val preferredBrowserSettingsRoute = "preferred_browser_settings_route"

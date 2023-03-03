@@ -109,7 +109,7 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
-        val showBottomSheet: @Composable () -> Unit = @Composable { AppTheme { BottomSheet() } }
+        val showBottomSheet: @Composable () -> Unit = @Composable { AppTheme(bottomSheetViewModel.theme) { BottomSheet() } }
 
         if (bottomSheetViewModel.followRedirects) {
             setContent { showBottomSheet() }

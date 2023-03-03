@@ -29,9 +29,11 @@ import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.lang.ref.PhantomReference
 
 
 class SettingsViewModel : ViewModel(), KoinComponent {
@@ -106,11 +108,20 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     )
 
     var followRedirectsExternalService by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService) ?: false
+        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService)
+            ?: false
     )
 
     var followOnlyKnownTrackers by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
+    )
+
+    var theme by mutableStateOf(
+        preferenceRepository.getInt(
+            PreferenceRepository.theme,
+            Theme.persister,
+            Theme.reader
+        ) ?: Theme.System
     )
 
     suspend fun filterPreferredAppsAsync(filter: String) {
@@ -328,24 +339,33 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.gridLayout, it)
     }
 
-    fun onUseClearUrls(it: Boolean){
+    fun onUseClearUrls(it: Boolean) {
         this.useClearUrls = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.useClearUrls, it)
     }
 
-    fun onFollowRedirects(it: Boolean){
+    fun onFollowRedirects(it: Boolean) {
         this.followRedirects = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirects, it)
     }
 
-    fun onFollowRedirectsExternalService(it: Boolean){
+    fun onFollowRedirectsExternalService(it: Boolean) {
         this.followRedirectsExternalService = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirectsExternalService, it)
+        this.preferenceRepository.writeBoolean(
+            PreferenceRepository.followRedirectsExternalService,
+            it
+        )
     }
 
-    fun onFollowOnlyKnownTrackers(it: Boolean){
+    fun onFollowOnlyKnownTrackers(it: Boolean) {
         this.followOnlyKnownTrackers = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.followOnlyKnownTrackers, it)
+    }
+
+    fun onThemeChange(it: Theme) {
+        Log.d("ThemeChange", "Current theme: $theme, new theme: $it")
+        this.theme = it
+        this.preferenceRepository.writeInt(PreferenceRepository.theme, it, Theme.persister)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {

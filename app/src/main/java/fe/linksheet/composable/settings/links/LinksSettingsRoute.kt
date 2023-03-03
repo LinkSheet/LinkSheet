@@ -7,34 +7,30 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.composable.ClickableRow
-import fe.linksheet.composable.LinkedText
-import fe.linksheet.composable.SwitchRow
+import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.LinkedText
+import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
-import fe.linksheet.composable.withLink
+import fe.linksheet.composable.util.withLink
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LinksSettingsRoute(
-    navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current

@@ -15,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,12 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.junkfood.seal.ui.component.BackButton
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
-import fe.linksheet.composable.ClickableRow
-import fe.linksheet.composable.Searchbar
+import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getAppHosts
@@ -44,9 +42,8 @@ enum class ButtonType {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PreferredAppSettingsRoute(
-    navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
 

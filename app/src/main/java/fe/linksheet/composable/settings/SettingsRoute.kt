@@ -16,17 +16,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.composable.SettingsItemRow
+import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.ui.theme.HkGroteskFontFamily
-import fe.linksheet.util.Results
-import kotlinx.coroutines.delay
 
 @Composable
 fun SettingsRoute(
     navController: NavController,
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
 
@@ -72,6 +70,15 @@ fun SettingsRoute(
                     navigateTo = linksSettingsRoute,
                     headline = R.string.links,
                     subtitle = R.string.links_explainer
+                )
+            }
+
+            item(key = "theme") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = themeSettingsRoute,
+                    headline = R.string.theme,
+                    subtitle = R.string.theme_explainer
                 )
             }
 

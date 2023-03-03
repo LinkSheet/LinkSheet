@@ -19,27 +19,22 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.junkfood.seal.ui.component.BackButton
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
-import fe.linksheet.composable.ClickableRow
-import fe.linksheet.composable.Searchbar
+import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
-import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -51,9 +46,8 @@ import kotlinx.coroutines.launch
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppsWhichCanOpenLinksSettingsRoute(
-    navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
     val manager = remember { context.getSystemService(DomainVerificationManager::class.java) }

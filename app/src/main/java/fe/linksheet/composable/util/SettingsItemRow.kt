@@ -1,4 +1,4 @@
-package fe.linksheet.composable
+package fe.linksheet.composable.util
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -10,8 +10,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import fe.linksheet.R
-import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @Composable
@@ -29,7 +27,7 @@ fun SettingsItemRow(
                 text = headline,
                 fontFamily = HkGroteskFontFamily,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp,
+
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(

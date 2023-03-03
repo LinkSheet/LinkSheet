@@ -1,7 +1,6 @@
 package fe.linksheet.composable.settings.apps.browser
 
 import android.content.Context
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -11,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
@@ -21,14 +19,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.junkfood.seal.ui.component.BackButton
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
-import fe.linksheet.composable.ClickableRow
+import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.composable.util.RadioButtonRow
+import fe.linksheet.composable.util.Texts
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -37,9 +36,8 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PreferredBrowserSettingsRoute(
-    navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel = viewModel()
+    viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
@@ -161,7 +159,7 @@ fun PreferredBrowserSettingsRoute(
             }
 
             item(key = "none") {
-                BrowserRow(
+                RadioButtonRow(
                     selected = viewModel.browserMode == BrowserHandler.BrowserMode.None,
                     onClick = {
                         viewModel.onBrowserMode(BrowserHandler.BrowserMode.None)
@@ -173,7 +171,7 @@ fun PreferredBrowserSettingsRoute(
             }
 
             item(key = "always_ask") {
-                BrowserRow(
+                RadioButtonRow(
                     selected = viewModel.browserMode == BrowserHandler.BrowserMode.AlwaysAsk,
                     onClick = {
                         viewModel.onBrowserMode(BrowserHandler.BrowserMode.AlwaysAsk)
@@ -188,7 +186,7 @@ fun PreferredBrowserSettingsRoute(
             }
 
             item(key = "whitelisted") {
-                BrowserRow(
+                RadioButtonRow(
                     selected = viewModel.browserMode == BrowserHandler.BrowserMode.Whitelisted,
                     onClick = {
                         viewModel.onBrowserMode(BrowserHandler.BrowserMode.Whitelisted)
@@ -210,7 +208,7 @@ fun PreferredBrowserSettingsRoute(
                 item(key = app.flatComponentName) {
                     val selected =
                         viewModel.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && viewModel.selectedBrowser == app.packageName
-                    BrowserRow(
+                    RadioButtonRow(
                         selected = selected,
                         onClick = {
                             viewModel.onBrowserMode(BrowserHandler.BrowserMode.SelectedBrowser)
@@ -275,43 +273,3 @@ private fun BrowserIconTextRow(
     }
 }
 
-
-@Composable
-private fun BrowserRow(
-    selected: Boolean,
-    onClick: () -> Unit,
-    onLongClick: (() -> Unit)?,
-    content: @Composable () -> Unit
-) {
-    ClickableRow(
-        paddingHorizontal = 0.dp,
-        paddingVertical = 5.dp,
-        onClick = onClick,
-        onLongClick = onLongClick,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
-    ) {
-        RadioButton(
-            selected = selected,
-            onClick = onClick,
-            modifier = Modifier
-//                .padding(0.dp).border(1.dp, Color.Blue)
-        )
-        Spacer(modifier = Modifier.width(5.dp))
-        content()
-    }
-}
-
-@Composable
-private fun Texts(@StringRes headline: Int, @StringRes subtitle: Int) {
-    Column {
-        Text(
-            text = stringResource(id = headline),
-            fontFamily = HkGroteskFontFamily,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-
-        Text(text = stringResource(id = subtitle))
-    }
-}

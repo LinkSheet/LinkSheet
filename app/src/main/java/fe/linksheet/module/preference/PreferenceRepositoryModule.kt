@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.tasomaniac.openwith.resolver.BrowserHandler
+import fe.linksheet.ui.theme.Theme
 import org.koin.dsl.module
 
 val preferenceRepositoryModule = module {
@@ -14,6 +15,9 @@ val preferenceRepositoryModule = module {
 
 typealias StringPersister<T> = (T) -> String
 typealias StringReader<T> = (String) -> T?
+
+typealias IntPersister<T> = (T) -> Int
+typealias IntReader<T> = (Int) -> T?
 
 class PreferenceRepository(context: Context) {
     private val preferences by lazy {
@@ -37,6 +41,7 @@ class PreferenceRepository(context: Context) {
         val followRedirects = Preference("follow_redirects", false)
         val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
         val followOnlyKnownTrackers = Preference("follow_only_known_trackers", true)
+        val theme = Preference("theme", Theme.System)
 
 
         val all = listOf(
@@ -52,7 +57,8 @@ class PreferenceRepository(context: Context) {
             useClearUrls,
             followRedirects,
             followRedirectsExternalService,
-            followOnlyKnownTrackers
+            followOnlyKnownTrackers,
+            theme
         )
     }
 
@@ -78,6 +84,24 @@ class PreferenceRepository(context: Context) {
 
     fun writeInt(preference: Preference<Int>, newState: Int) = editor {
         this.putInt(preference.key, newState)
+    }
+
+    fun <T> writeInt(preference: Preference<T>, newState: T, persister: IntPersister<T>) =
+        editor {
+            this.putInt(preference.key, persister(newState))
+        }
+
+    fun <T> getInt(
+        preference: Preference<T>,
+        persister: IntPersister<T>,
+        reader: IntReader<T>
+    ): T? {
+        return this.preferences
+            .getInt(preference.key, preference.default?.let(persister) ?: -1)
+            .let {
+                if (it == -1) null
+                else reader(it)
+            }
     }
 
     fun getLong(preference: Preference<Long>): Long? {

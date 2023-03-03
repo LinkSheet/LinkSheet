@@ -1,4 +1,4 @@
-package fe.linksheet.composable
+package fe.linksheet.composable.util
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape

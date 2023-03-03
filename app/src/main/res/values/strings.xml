@@ -93,4 +93,10 @@
     <string name="follow_redirects_external_service_explainer_privacy_policy">Privacy policy</string>
     <string name="follow_only_known_trackers">Follow only known tackers</string>
     <string name="follow_only_known_trackers_explainer">Only follow trackers/redirects for known hosts</string>
+    <string name="theme">Theme</string>
+    <string name="theme_explainer">Change the theme of the app</string>
+    <string name="system">System</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="amoled_black">Amoled Black</string>
 </resources>

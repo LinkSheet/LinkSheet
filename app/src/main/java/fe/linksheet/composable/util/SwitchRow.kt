@@ -1,4 +1,4 @@
-package fe.linksheet.composable
+package fe.linksheet.composable.util
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement

@@ -1,4 +1,4 @@
-package fe.linksheet.composable
+package fe.linksheet.composable.util
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.gestures.detectTapGestures

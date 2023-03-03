@@ -4,15 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
+import android.util.Log
 import android.view.Window
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import fe.linksheet.module.preference.IntPersister
+import fe.linksheet.module.preference.IntReader
 
 
 private val LightColors = lightColorScheme(
@@ -80,6 +84,8 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
+
 private tailrec fun Context.findWindow(): Window? =
     when (this) {
         is Activity -> window
@@ -88,35 +94,59 @@ private tailrec fun Context.findWindow(): Window? =
     }
 
 
+enum class Theme {
+    System, Light, Dark, AmoledBlack;
+
+    companion object {
+        val reader: IntReader<Theme> = { value ->
+            Theme.values().find { it.ordinal == value }
+        }
+
+        val persister: IntPersister<Theme> = { it.ordinal }
+    }
+}
+
+
 @Composable
 fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    isHighContrastModeEnabled: Boolean = false,
-    dynamicColor: Boolean = true,
+    theme: Theme,
+    systemDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    val context = LocalContext.current
+    val isAndroidSPlus = remember { Build.VERSION.SDK_INT >= Build.VERSION_CODES.S }
+
+    val colorScheme = when (theme) {
+        Theme.System -> {
+            when {
+                isAndroidSPlus -> if (systemDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+                systemDarkTheme -> DarkColors
+                else -> LightColors
+            }
         }
-        darkTheme -> DarkColors
-        else -> LightColors
-    }.run {
-        if (isHighContrastModeEnabled && darkTheme) copy(
-            surface = Color.Black,
-            background = Color.Black,
-        )
-        else this
+        Theme.Light -> {
+            if (isAndroidSPlus) dynamicLightColorScheme(context)
+            else LightColors
+        }
+        Theme.Dark -> {
+            if (isAndroidSPlus) dynamicDarkColorScheme(context)
+            else DarkColors
+        }
+        Theme.AmoledBlack -> {
+            if (isAndroidSPlus) dynamicDarkColorScheme(context).copy(surface = Color.Black, background = Color.Black)
+            else AmoledBlackColors
+        }
     }
-    val window = LocalView.current.context.findWindow()
+
     val view = LocalView.current
+    val window = view.context.findWindow()
 
+    val isDark = theme == Theme.Dark || theme == Theme.AmoledBlack || (theme == Theme.System && systemDarkTheme)
     window?.let {
-        WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = darkTheme
+        WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
     }
 
-    rememberSystemUiController(window).setSystemBarsColor(Color.Transparent, !darkTheme)
+    rememberSystemUiController(window).setSystemBarsColor(colorScheme.background, !isDark)
 
     MaterialTheme(
         colorScheme = colorScheme,

@@ -28,6 +28,7 @@ import fe.linksheet.data.entity.AppSelectionHistory
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -42,50 +43,53 @@ class BottomSheetViewModel : ViewModel(),
     private val preferenceRepository by inject<PreferenceRepository>()
 
     var result by mutableStateOf<IntentResolverResult?>(null)
-    var enableCopyButton by mutableStateOf(
+    val enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
 
-    var hideAfterCopying by mutableStateOf(
+    val hideAfterCopying by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.hideAfterCopying) ?: false
     )
 
-    var singleTap by mutableStateOf(
+    val singleTap by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
     )
 
-    var enableSendButton by mutableStateOf(
+    val enableSendButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableSendButton) ?: false
     )
 
-    var alwaysShowPackageName by mutableStateOf(
+    val alwaysShowPackageName by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
     )
 
-    var disableToasts by mutableStateOf(
+    val disableToasts by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
     )
 
-    var gridLayout by mutableStateOf(
+    val gridLayout by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
     )
 
-    var useClearUrls by mutableStateOf(
+    val useClearUrls by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
     )
 
-    var followRedirects by mutableStateOf(
+    val followRedirects by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
     )
 
-    var followRedirectsExternalService by mutableStateOf(
+    val followRedirectsExternalService by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService)
             ?: false
     )
 
-    var followOnlyKnownTrackers by mutableStateOf(
+    val followOnlyKnownTrackers by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
     )
+
+    val theme by mutableStateOf(preferenceRepository.getInt(PreferenceRepository.theme, Theme.persister, Theme.reader) ?: Theme.System)
+
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {

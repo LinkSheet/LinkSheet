@@ -34,6 +34,10 @@ class PreferenceRepository(context: Context) {
         val disableToasts = Preference("disable_toasts", false)
         val gridLayout = Preference("grid_layout", false)
         val useClearUrls = Preference("use_clear_urls", false)
+        val followRedirects = Preference("follow_redirects", false)
+        val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
+        val followOnlyKnownTrackers = Preference("follow_only_known_trackers", true)
+
 
         val all = listOf(
             enableCopyButton,
@@ -45,7 +49,10 @@ class PreferenceRepository(context: Context) {
             alwaysShowPackageName,
             disableToasts,
             gridLayout,
-            useClearUrls
+            useClearUrls,
+            followRedirects,
+            followRedirectsExternalService,
+            followOnlyKnownTrackers
         )
     }
 

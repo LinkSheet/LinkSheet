@@ -85,4 +85,12 @@
     <string name="links_explainer">Settings regarding link manipulation</string>
     <string name="clear_urls">Use clear urls</string>
     <string name="clear_urls_explainer">Use experimental ClearURL integration</string>
+    <string name="follow_redirects">Follow redirects</string>
+    <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet</string>
+    <string name="loading_link">Loading link...</string>
+    <string name="follow_redirects_external_service">Follow redirects via external service</string>
+    <string name="follow_redirects_external_service_explainer">Follow redirects using unshorten.me\'s API (ratelimits after 10 unique calls, will fallback to local resolving);</string>
+    <string name="follow_redirects_external_service_explainer_privacy_policy">Privacy policy</string>
+    <string name="follow_only_known_trackers">Follow only known tackers</string>
+    <string name="follow_only_known_trackers_explainer">Only follow trackers/redirects for known hosts</string>
 </resources>

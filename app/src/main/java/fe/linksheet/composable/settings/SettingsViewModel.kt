@@ -101,6 +101,17 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
     )
 
+    var followRedirects by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
+    )
+
+    var followRedirectsExternalService by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService) ?: false
+    )
+
+    var followOnlyKnownTrackers by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
+    )
 
     suspend fun filterPreferredAppsAsync(filter: String) {
         return withContext(Dispatchers.IO) {
@@ -320,6 +331,21 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onUseClearUrls(it: Boolean){
         this.useClearUrls = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.useClearUrls, it)
+    }
+
+    fun onFollowRedirects(it: Boolean){
+        this.followRedirects = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirects, it)
+    }
+
+    fun onFollowRedirectsExternalService(it: Boolean){
+        this.followRedirectsExternalService = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirectsExternalService, it)
+    }
+
+    fun onFollowOnlyKnownTrackers(it: Boolean){
+        this.followOnlyKnownTrackers = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.followOnlyKnownTrackers, it)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {

@@ -3,21 +3,39 @@ package com.tasomaniac.openwith.resolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.util.Log
 import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
+import fe.fastforwardkt.loadFastForwardRuleJson
+import fe.httpkt.Request
 import fe.linksheet.BuildConfig
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.resolver.ResolveListGrouper
+import getBuiltInFastForwardJson
 
 object ResolveIntents {
-    suspend fun resolve(context: Context, intent: Intent, viewModel: BottomSheetViewModel): IntentResolverResult {
+    private val request = Request()
+    private val fastForwardRulesObject by lazy { loadFastForwardRuleJson(getBuiltInFastForwardJson()!!) }
+
+    suspend fun resolve(
+        context: Context,
+        intent: Intent,
+        viewModel: BottomSheetViewModel
+    ): IntentResolverResult {
         Log.d("ResolveIntents", "Intent: $intent")
 
-        val uri = intent.getUri(viewModel.useClearUrls)
+        var uri = intent.getUri(viewModel.useClearUrls)
+
+        if (viewModel.followRedirects && uri != null) {
+            viewModel.followRedirects(uri, request, fastForwardRulesObject).getOrNull()?.let {
+                uri = Uri.parse(it)
+            }
+        }
+
         Log.d("ResolveIntents", "UseClearUrls: ${viewModel.useClearUrls}")
 
         Log.d("ResolveIntents", "Intent data: $uri, intent: $intent")

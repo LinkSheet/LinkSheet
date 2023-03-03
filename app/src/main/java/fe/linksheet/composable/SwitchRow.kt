@@ -25,19 +25,41 @@ fun SwitchRow(
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int
 ) {
-    ClickableRow(modifier = modifier, padding = 10.dp, verticalAlignment = Alignment.CenterVertically, onClick = {
-        onChange(!checked)
-    }) {
-        Column(modifier = Modifier.fillMaxWidth(0.7f)) {
+    SwitchRow(
+        modifier = modifier,
+        checked = checked,
+        onChange = onChange,
+        headline = stringResource(id = headlineId),
+        subtitle = stringResource(id = subtitleId)
+    )
+}
+
+@Composable
+fun SwitchRow(
+    modifier: Modifier = Modifier,
+    checked: Boolean,
+    onChange: (Boolean) -> Unit,
+    headline: String,
+    subtitle: String
+) {
+    ClickableRow(
+        modifier = modifier,
+        padding = 10.dp,
+        verticalAlignment = Alignment.CenterVertically,
+        onClick = {
+            onChange(!checked)
+        }) {
+        Column(modifier = Modifier.fillMaxWidth(0.8f)) {
             Text(
-                text = stringResource(id = headlineId),
+                text = headline,
                 fontFamily = HkGroteskFontFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = stringResource(id = subtitleId),
+                text = subtitle,
+                fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onSurface
             )
         }

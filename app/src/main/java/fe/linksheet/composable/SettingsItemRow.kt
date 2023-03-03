@@ -34,6 +34,7 @@ fun SettingsItemRow(
             )
             Text(
                 text = subtitle,
+                fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onSurface
             )
         }

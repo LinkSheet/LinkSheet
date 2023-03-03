@@ -3,10 +3,10 @@ package fe.linksheet.extension
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import getBuiltInJson
-import loadJson
-import loadProviders
-import urlClear
+import fe.clearurlskt.loadClearUrlsJson
+import fe.clearurlskt.loadClearUrlsProviders
+import fe.clearurlskt.urlClear
+import getBuiltInClearUrlsJson
 
 fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
     component = null
@@ -18,7 +18,13 @@ fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
 //{ act=android.intent.action.SEND typ=text/plain flg=0x10800001 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity clip={text/plain {T(59)}} (has extras) }
 //{ act=android.intent.action.VIEW dat=https://twitter.com/... flg=0x10800000 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity (has extras) }
 
-private val clearUrlProviders by lazy { loadProviders(loadJson(getBuiltInJson()!!)) }
+private val clearUrlProviders by lazy {
+    loadClearUrlsProviders(
+        loadClearUrlsJson(
+            getBuiltInClearUrlsJson()!!
+        )
+    )
+}
 
 fun Intent.getUri(clearUrl: Boolean = false): Uri? {
     var uriData = dataString
@@ -47,7 +53,7 @@ fun Intent.getUri(clearUrl: Boolean = false): Uri? {
             }
 
             Log.d("Adjusted Url", url)
-            if(clearUrl){
+            if (clearUrl) {
                 url = urlClear(url, debugPrint = false, clearUrlProviders)
             }
 

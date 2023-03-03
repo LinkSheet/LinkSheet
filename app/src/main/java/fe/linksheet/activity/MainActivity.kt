@@ -56,8 +56,7 @@ class MainActivity : ComponentActivity() {
                                 composable(route = settingsRoute) {
                                     SettingsRoute(
                                         navController = navController,
-                                        onBackPressed = onBackPressed,
-                                        viewModel = settingsViewModel
+                                        onBackPressed = onBackPressed
                                     )
                                 }
 

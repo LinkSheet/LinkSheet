@@ -5,13 +5,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.extension.observeAsState
 
 
 @Composable
@@ -20,6 +23,21 @@ fun BottomSheetSettingsRoute(
     viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
+    val lifecycleState = LocalLifecycleOwner.current.lifecycle
+        .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
+
+    LaunchedEffect(lifecycleState.first) {
+        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
+            if (!viewModel.getUsageStatsAllowed(context)) {
+                viewModel.onUsageStatsSorting(false)
+            }
+
+            if (viewModel.wasTogglingUsageStatsSorting) {
+                viewModel.onUsageStatsSorting(true)
+                viewModel.wasTogglingUsageStatsSorting = false
+            }
+        }
+    }
 
     SettingsScaffold(R.string.bottom_sheet, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

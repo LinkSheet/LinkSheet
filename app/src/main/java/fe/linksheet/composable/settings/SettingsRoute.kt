@@ -26,27 +26,8 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 @Composable
 fun SettingsRoute(
     navController: NavController,
-    onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel
+    onBackPressed: () -> Unit
 ) {
-    val context = LocalContext.current
-
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle
-        .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
-
-    LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            if (!viewModel.getUsageStatsAllowed(context)) {
-                viewModel.onUsageStatsSorting(false)
-            }
-
-            if (viewModel.wasTogglingUsageStatsSorting) {
-                viewModel.onUsageStatsSorting(true)
-                viewModel.wasTogglingUsageStatsSorting = false
-            }
-        }
-    }
-
     SettingsScaffold(R.string.settings, onBackPressed = onBackPressed) { padding ->
         LazyColumn(modifier = Modifier.padding(padding), contentPadding = PaddingValues(5.dp)) {
             item(key = "apps") {

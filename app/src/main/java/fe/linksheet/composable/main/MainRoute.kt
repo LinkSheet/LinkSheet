@@ -204,7 +204,7 @@ fun OpenDefaultBrowserCard(
                     )
                 )
 
-                Column(modifier = Modifier.padding(15.dp)) {
+                Column(modifier = Modifier.padding(10.dp)) {
                     Text(
                         text = stringResource(id = if (defaultBrowserEnabled.isSuccess) R.string.browser_status else R.string.set_as_browser),
                         fontFamily = HkGroteskFontFamily,
@@ -232,7 +232,7 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
         .clip(RoundedCornerShape(12.dp))
         .clickable {
             sheetOpen()
-            uriHandler.openUri(item.toString())
+            uriHandler.openUri(item)
         }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -243,7 +243,7 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
                 contentDescription = stringResource(id = R.string.paste),
             )
 
-            Column(modifier = Modifier.padding(15.dp)) {
+            Column(modifier = Modifier.padding(10.dp)) {
                 Text(
                     text = stringResource(id = R.string.open_copied_link),
                     fontFamily = HkGroteskFontFamily,

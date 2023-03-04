@@ -105,8 +105,7 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            val isRegularPreferredApp =
-                completed?.alwaysPreferred == true && completed.filteredItem != null
+            val isRegularPreferredApp = completed?.alwaysPreferred == true && completed.filteredItem != null
             if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
@@ -131,8 +130,11 @@ class BottomSheetActivity : ComponentActivity() {
             completed
         }
 
-        val showBottomSheet: @Composable (IntentResolverResult?) -> Unit =
-            @Composable { AppTheme(bottomSheetViewModel.theme) { BottomSheet(it) } }
+        val showBottomSheet: @Composable (IntentResolverResult?) -> Unit = @Composable { result ->
+            AppTheme(bottomSheetViewModel.theme) {
+                BottomSheet(result)
+            }
+        }
 
         if (bottomSheetViewModel.followRedirects) {
             setContent {
@@ -191,15 +193,11 @@ class BottomSheetActivity : ComponentActivity() {
             drawerState = drawerState,
             sheetContent = {
                 if (result?.uri != null) {
-                    val showPackage =
-                        remember { result.showExtended || bottomSheetViewModel.alwaysShowPackageName }
+                    val showPackage = remember { result.showExtended || bottomSheetViewModel.alwaysShowPackageName }
 
                     val baseHeight = if (bottomSheetViewModel.gridLayout) {
-                        val appsPerRow =
-                            LocalConfiguration.current.screenWidthDp / gridSize.value
-
-                        (result.resolved.size / appsPerRow
-                                * if (showPackage) gridItemHeightPackage.value else gridItemHeight.value).dp
+                        val appsPerRow = LocalConfiguration.current.screenWidthDp / gridSize.value
+                        (result.resolved.size / appsPerRow * if (showPackage) gridItemHeightPackage.value else gridItemHeight.value).dp
                     } else (result.resolved.size * appListItemHeight.value).dp
 
                     if (result.filteredItem == null) {

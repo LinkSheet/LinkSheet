@@ -196,7 +196,7 @@ class BottomSheetViewModel : ViewModel(),
 
         val followRedirect = followRedirectsImpl(uri, request, fastForwardRulesObject)
 
-        if (localCache && followRedirect.isSuccess) {
+        if (localCache && followRedirect.getOrNull()?.resolveType != FollowRedirectResolveType.NotResolved) {
             withContext(Dispatchers.IO) {
                 database.resolvedRedirectDao().insert(
                     ResolvedRedirect(

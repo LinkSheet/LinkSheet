@@ -103,4 +103,6 @@
     <string name="fastfoward_rules">Use FastForward rules</string>
     <string name="fastfoward_rules_explainer">Use experimental</string>
     <string name="fastfoward_rules_explainer_2">rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
+    <string name="follow_redirects_local_cache">Enable local redirect cache</string>
+    <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
 </resources>

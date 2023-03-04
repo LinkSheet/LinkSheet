@@ -111,6 +111,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
     )
 
+    var followRedirectsLocalCache by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsLocalCache) ?: false
+    )
+
     var followRedirectsExternalService by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService)
             ?: false
@@ -356,6 +360,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onFollowRedirects(it: Boolean) {
         this.followRedirects = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirects, it)
+    }
+
+    fun onFollowRedirectsLocalCache(it: Boolean){
+        this.followRedirectsLocalCache = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirectsLocalCache, it)
     }
 
     fun onFollowRedirectsExternalService(it: Boolean) {

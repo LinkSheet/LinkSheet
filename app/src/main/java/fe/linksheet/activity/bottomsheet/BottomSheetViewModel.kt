@@ -25,6 +25,7 @@ import fe.httpkt.Request
 import fe.httpkt.json.readToJson
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
@@ -83,6 +84,10 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
     )
 
+    val followRedirectsLocalCache by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsLocalCache) ?: false
+    )
+
     val followRedirectsExternalService by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService)
             ?: false
@@ -92,7 +97,13 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
     )
 
-    val theme by mutableStateOf(preferenceRepository.getInt(PreferenceRepository.theme, Theme.persister, Theme.reader) ?: Theme.System)
+    val theme by mutableStateOf(
+        preferenceRepository.getInt(
+            PreferenceRepository.theme,
+            Theme.persister,
+            Theme.reader
+        ) ?: Theme.System
+    )
 
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
@@ -146,34 +157,50 @@ class BottomSheetViewModel : ViewModel(),
         }
     }
 
-    fun followRedirects(
+    suspend fun followRedirects(
         uri: Uri,
         request: Request,
+        localCache: Boolean,
         fastForwardRulesObject: JsonObject
     ): Result<String> {
         Log.d("FollowRedirects", "Following redirects for $uri")
+        if (localCache) {
+            val redirect = withContext(Dispatchers.IO) {
+                database.resolvedRedirectDao().getResolvedRedirectForShortUrl(uri.toString())
+            }
 
-        if (!followOnlyKnownTrackers || isTracker(uri.toString(), fastForwardRulesObject)) {
+            if (redirect != null) {
+                Log.d("FollowRedirect", "From local cache: $redirect")
+                return Result.success(redirect.resolvedUrl)
+            }
+        }
+
+        var followUri = uri.toString()
+        if (!followOnlyKnownTrackers || isTracker(followUri, fastForwardRulesObject)) {
             if (followRedirectsExternalService) {
-                Log.d("FollowRedirects", "Using external service for $uri")
+                Log.d("FollowRedirects", "Using external service for $followUri")
 
-                val response = followRedirectsExternal(request, uri)
+                val response = followRedirectsExternal(request, followUri)
                 if (response.isSuccess) {
-                    return response
+                    followUri = response.getOrNull()!!
                 }
             }
 
-            return Result.success(followRedirectsLocal(request, uri))
+            followUri = followRedirectsLocal(request, followUri)
         }
 
-        return Result.success(uri.toString())
+        withContext(Dispatchers.IO) {
+            database.resolvedRedirectDao().insert(ResolvedRedirect(uri.toString(), followUri))
+        }
+
+        return Result.success(followUri)
     }
 
-    private fun followRedirectsLocal(request: Request, uri: Uri): String {
-        return request.head(uri.toString(), followRedirects = true).url.toString()
+    private fun followRedirectsLocal(request: Request, uri: String): String {
+        return request.head(uri, followRedirects = true).url.toString()
     }
 
-    private fun followRedirectsExternal(request: Request, uri: Uri): Result<String> {
+    private fun followRedirectsExternal(request: Request, uri: String): Result<String> {
         val con = request.get("https://unshorten.me/json/$uri")
         if (con.responseCode != 200) {
             return Result.failure(Exception("Failed to resolve API!"))

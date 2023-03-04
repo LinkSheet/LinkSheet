@@ -105,6 +105,19 @@ fun LinksSettingsRoute(
                 )
             }
 
+            if(viewModel.followRedirects){
+                item(key = "follow_redirects_local_cache") {
+                    SwitchRow(
+                        checked = viewModel.followRedirectsLocalCache,
+                        onChange = {
+                            viewModel.onFollowRedirectsLocalCache(it)
+                        },
+                        headlineId = R.string.follow_redirects_local_cache,
+                        subtitleId = R.string.follow_redirects_local_cache_explainer
+                    )
+                }
+            }
+
             if (viewModel.followRedirects) {
                 item(key = "follow_redirects_external_service") {
                     val annotatedString = buildAnnotatedString {

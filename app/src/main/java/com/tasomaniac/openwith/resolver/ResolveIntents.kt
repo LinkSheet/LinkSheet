@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
+import com.google.gson.JsonObject
 import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
@@ -19,7 +20,11 @@ import getBuiltInFastForwardJson
 
 object ResolveIntents {
     private val request = Request()
-    val fastForwardRulesObject by lazy { loadFastForwardRuleJson(getBuiltInFastForwardJson()!!) }
+    val fastForwardRulesObject: JsonObject by lazy {
+        loadFastForwardRuleJson(
+            getBuiltInFastForwardJson()!!
+        )
+    }
 
     suspend fun resolve(
         context: Context,
@@ -31,7 +36,12 @@ object ResolveIntents {
         var uri = intent.getUri(viewModel.useClearUrls, viewModel.useFastForwardRules)
 
         if (viewModel.followRedirects && uri != null) {
-            viewModel.followRedirects(uri, request, fastForwardRulesObject).getOrNull()?.let {
+            viewModel.followRedirects(
+                uri,
+                request,
+                viewModel.followRedirectsLocalCache,
+                fastForwardRulesObject
+            ).getOrNull()?.let {
                 uri = Uri.parse(it)
             }
         }

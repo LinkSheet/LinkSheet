@@ -40,6 +40,7 @@ class PreferenceRepository(context: Context) {
         val useClearUrls = Preference("use_clear_urls", false)
         val useFastForwardRules = Preference("fast_forward_rules", false)
         val followRedirects = Preference("follow_redirects", false)
+        val followRedirectsLocalCache = Preference("follow_redirects_local_cache", true)
         val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
         val followOnlyKnownTrackers = Preference("follow_only_known_trackers", true)
         val theme = Preference("theme", Theme.System)
@@ -58,6 +59,7 @@ class PreferenceRepository(context: Context) {
             useClearUrls,
             useFastForwardRules,
             followRedirects,
+            followRedirectsLocalCache,
             followRedirectsExternalService,
             followOnlyKnownTrackers,
             theme

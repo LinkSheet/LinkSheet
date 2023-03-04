@@ -243,14 +243,14 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
                 contentDescription = stringResource(id = R.string.paste),
             )
 
-            Column(modifier = Modifier.padding(10.dp)) {
+            Column(modifier = Modifier.padding(15.dp)) {
                 Text(
                     text = stringResource(id = R.string.open_copied_link),
                     fontFamily = HkGroteskFontFamily,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp,
                 )
-                Text(text = item.toString())
+                Text(text = item)
             }
         }
     }

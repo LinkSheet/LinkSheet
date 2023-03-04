@@ -59,7 +59,7 @@ fun LinkedText(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    color: Color = LocalContentColor.current.copy(LocalContentAlpha.current),
+    color: Color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
     style: TextStyle = LocalTextStyle.current,
     fontSize: TextUnit = TextUnit.Unspecified,
     softWrap: Boolean = true,

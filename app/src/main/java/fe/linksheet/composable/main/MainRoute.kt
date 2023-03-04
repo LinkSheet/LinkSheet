@@ -35,6 +35,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -238,11 +239,8 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(10.dp))
 
-            Image(
-                imageVector = Icons.Default.ContentPaste,
-                contentDescription = stringResource(id = R.string.paste),
-            )
-
+            ColoredIcon(icon = Icons.Default.ContentPaste, description = R.string.paste)
+            
             Column(modifier = Modifier.padding(15.dp)) {
                 Text(
                     text = stringResource(id = R.string.open_copied_link),

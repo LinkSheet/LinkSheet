@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -23,12 +24,14 @@ import fe.gson.extensions.int
 import fe.gson.extensions.string
 import fe.httpkt.Request
 import fe.httpkt.json.readToJson
+import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.data.entity.AppSelectionHistory
 import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.preference.StringReader
 import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -157,13 +160,24 @@ class BottomSheetViewModel : ViewModel(),
         }
     }
 
+    enum class FollowRedirectResolveType(@StringRes val stringId: Int) {
+        Cache(R.string.redirect_resolve_type_cache),
+        Remote(R.string.redirect_resolve_type_remote),
+        Local(R.string.redirect_resolve_type_local),
+        NotResolved(R.string.redirect_resolve_type_not_resolved);
+    }
+
+    data class FollowRedirect(
+        val resolvedUrl: String,
+        val resolveType: FollowRedirectResolveType
+    )
+
     suspend fun followRedirects(
         uri: Uri,
         request: Request,
         localCache: Boolean,
         fastForwardRulesObject: JsonObject
-    ): Result<String> {
-        Log.d("FollowRedirects", "Following redirects for $uri")
+    ): Result<FollowRedirect> {
         if (localCache) {
             val redirect = withContext(Dispatchers.IO) {
                 database.resolvedRedirectDao().getResolvedRedirectForShortUrl(uri.toString())
@@ -171,29 +185,63 @@ class BottomSheetViewModel : ViewModel(),
 
             if (redirect != null) {
                 Log.d("FollowRedirect", "From local cache: $redirect")
-                return Result.success(redirect.resolvedUrl)
+                return Result.success(
+                    FollowRedirect(
+                        redirect.resolvedUrl,
+                        FollowRedirectResolveType.Cache
+                    )
+                )
             }
         }
 
-        var followUri = uri.toString()
+        val followRedirect = followRedirectsImpl(uri, request, fastForwardRulesObject)
+
+        if (localCache && followRedirect.isSuccess) {
+            withContext(Dispatchers.IO) {
+                database.resolvedRedirectDao().insert(
+                    ResolvedRedirect(
+                        uri.toString(),
+                        followRedirect.getOrNull()?.resolvedUrl!!
+                    )
+                )
+            }
+        }
+
+        return followRedirect
+    }
+
+    private fun followRedirectsImpl(
+        uri: Uri,
+        request: Request,
+        fastForwardRulesObject: JsonObject
+    ): Result<FollowRedirect> {
+        Log.d("FollowRedirects", "Following redirects for $uri")
+
+        val followUri = uri.toString()
         if (!followOnlyKnownTrackers || isTracker(followUri, fastForwardRulesObject)) {
             if (followRedirectsExternalService) {
                 Log.d("FollowRedirects", "Using external service for $followUri")
 
                 val response = followRedirectsExternal(request, followUri)
                 if (response.isSuccess) {
-                    followUri = response.getOrNull()!!
+                    return Result.success(
+                        FollowRedirect(
+                            response.getOrNull()!!,
+                            FollowRedirectResolveType.Remote
+                        )
+                    )
                 }
             }
 
-            followUri = followRedirectsLocal(request, followUri)
+            return Result.success(
+                FollowRedirect(
+                    followRedirectsLocal(request, followUri),
+                    FollowRedirectResolveType.Local
+                )
+            )
         }
 
-        withContext(Dispatchers.IO) {
-            database.resolvedRedirectDao().insert(ResolvedRedirect(uri.toString(), followUri))
-        }
-
-        return Result.success(followUri)
+        return Result.success(FollowRedirect(followUri, FollowRedirectResolveType.NotResolved))
     }
 
     private fun followRedirectsLocal(request: Request, uri: String): String {

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -49,6 +50,7 @@ import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
+import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
@@ -56,12 +58,14 @@ import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class BottomSheetActivity : ComponentActivity() {
     private lateinit var bottomSheetViewModel: BottomSheetViewModel
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -86,6 +90,16 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
+        val makeResolveToast: (BottomSheetViewModel.FollowRedirectResolveType) -> Unit = { type ->
+            if (type != BottomSheetViewModel.FollowRedirectResolveType.NotResolved) {
+                Toast.makeText(
+                    this@BottomSheetActivity,
+                    getString(R.string.resolved_via, getString(type.stringId)),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         val deferred = lifecycleScope.async {
             val completed = bottomSheetViewModel.resolveAsync(
                 this@BottomSheetActivity, intent
@@ -96,6 +110,12 @@ class BottomSheetActivity : ComponentActivity() {
             if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
+                    if (completed.followRedirect?.resolveType != null) {
+                        runOnUiThread {
+                            makeResolveToast(completed.followRedirect.resolveType)
+                        }
+                    }
+
                     runOnUiThread {
                         Toast.makeText(
                             this@BottomSheetActivity,
@@ -107,15 +127,24 @@ class BottomSheetActivity : ComponentActivity() {
 
                 launchApp(app, completed.uri, isRegularPreferredApp)
             }
+
+            completed
         }
 
-        val showBottomSheet: @Composable () -> Unit = @Composable { AppTheme(bottomSheetViewModel.theme) { BottomSheet() } }
+        val showBottomSheet: @Composable (IntentResolverResult?) -> Unit =
+            @Composable { AppTheme(bottomSheetViewModel.theme) { BottomSheet(it) } }
 
         if (bottomSheetViewModel.followRedirects) {
-            setContent { showBottomSheet() }
+            setContent {
+                LaunchedEffect(bottomSheetViewModel.result) {
+                    bottomSheetViewModel.result?.followRedirect?.resolveType?.let(makeResolveToast)
+                }
+
+                showBottomSheet(bottomSheetViewModel.result)
+            }
         } else {
             deferred.invokeOnCompletion {
-                setContent { showBottomSheet() }
+                setContent { showBottomSheet(deferred.getCompleted()) }
             }
         }
     }
@@ -133,8 +162,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    private fun BottomSheet() {
-
+    private fun BottomSheet(result: IntentResolverResult?) {
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
@@ -162,21 +190,21 @@ class BottomSheetActivity : ComponentActivity() {
                 ) {},
             drawerState = drawerState,
             sheetContent = {
-                if (bottomSheetViewModel.result != null && bottomSheetViewModel.result?.uri != null) {
+                if (result?.uri != null) {
                     val showPackage =
-                        remember { bottomSheetViewModel.result!!.showExtended || bottomSheetViewModel.alwaysShowPackageName }
+                        remember { result.showExtended || bottomSheetViewModel.alwaysShowPackageName }
 
                     val baseHeight = if (bottomSheetViewModel.gridLayout) {
                         val appsPerRow =
                             LocalConfiguration.current.screenWidthDp / gridSize.value
 
-                        (bottomSheetViewModel.result!!.resolved.size / appsPerRow
+                        (result.resolved.size / appsPerRow
                                 * if (showPackage) gridItemHeightPackage.value else gridItemHeight.value).dp
-                    } else (bottomSheetViewModel.result!!.resolved.size * appListItemHeight.value).dp
+                    } else (result.resolved.size * appListItemHeight.value).dp
 
-                    if (bottomSheetViewModel.result?.filteredItem == null) {
+                    if (result.filteredItem == null) {
                         OpenWith(
-                            result = bottomSheetViewModel.result!!,
+                            result = result,
                             launchScope = launchScope,
                             drawerState = drawerState,
                             baseHeight = baseHeight,
@@ -184,7 +212,7 @@ class BottomSheetActivity : ComponentActivity() {
                         )
                     } else {
                         OpenWithPreferred(
-                            result = bottomSheetViewModel.result!!,
+                            result = result,
                             launchScope = launchScope,
                             drawerState = drawerState,
                             baseHeight = baseHeight,
@@ -378,7 +406,7 @@ class BottomSheetActivity : ComponentActivity() {
                                 }
                             },
                             onDoubleClick = {
-                                if(!bottomSheetViewModel.singleTap){
+                                if (!bottomSheetViewModel.singleTap) {
                                     launchScope.launch {
                                         launchApp(info, result.uri)
                                     }

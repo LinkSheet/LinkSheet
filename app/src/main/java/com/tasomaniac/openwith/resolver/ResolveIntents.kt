@@ -34,6 +34,7 @@ object ResolveIntents {
         Log.d("ResolveIntents", "Intent: $intent")
 
         var uri = intent.getUri(viewModel.useClearUrls, viewModel.useFastForwardRules)
+        var followRedirect: BottomSheetViewModel.FollowRedirect? = null
 
         if (viewModel.followRedirects && uri != null) {
             viewModel.followRedirects(
@@ -42,7 +43,8 @@ object ResolveIntents {
                 viewModel.followRedirectsLocalCache,
                 fastForwardRulesObject
             ).getOrNull()?.let {
-                uri = Uri.parse(it)
+                followRedirect = it
+                uri = Uri.parse(it.resolvedUrl)
             }
         }
 
@@ -109,7 +111,8 @@ object ResolveIntents {
             filteredItem,
             showExtended,
             alwaysPreferred,
-            selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp
+            selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
+            followRedirect
         )
     }
 }

@@ -53,12 +53,11 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * Always show package name: Shows package names all throughout the application
 * Disable toast: Disables all toast messages
 * Display apps in grid instead of list
+* Resolve redirects either locally or via API hosted @ supabase.com ([Privacy policy](supabase.com/privacy))
 * *Experimental*: [ClearURLs](https://github.com/ClearURLs/) integration (removes tracking parameters)
+* *Experimental* [FastFoward](https://github.com/FastForwardTeam/FastForward/) **rule** integration (extracts redirects from url parameters)
 
 ## Planned features
-
-* Resolve redirects (locally or via external service)
-* Bypass trackers with FastFoward(?)
 * Improve landscape mode
 
 ## Donations

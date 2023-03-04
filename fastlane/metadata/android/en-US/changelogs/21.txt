@@ -1,0 +1,8 @@
+* Show browser change dialog on Android 10+
+* Follow redirects either locally or via remote API hosted @ supabase.com
+* Fix: Copy link card flickering
+* Double click app in bottom sheet to open app info when SingleTap is enabled (#14)
+* Add theme settings including Amoled Black theme (#26)
+* Add icons to settings menus
+* Add FastForward rule redirections
+* Fix: Sort apps by usage toggle not updating

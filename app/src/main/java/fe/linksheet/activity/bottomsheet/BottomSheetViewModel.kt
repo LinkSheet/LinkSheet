@@ -172,7 +172,6 @@ class BottomSheetViewModel : ViewModel(),
 
     suspend fun followRedirects(
         uri: Uri,
-        request: Request,
         localCache: Boolean,
         fastForwardRulesObject: JsonObject
     ): Result<FollowRedirect> {

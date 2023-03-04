@@ -19,7 +19,6 @@ import fe.linksheet.resolver.ResolveListGrouper
 import getBuiltInFastForwardJson
 
 object ResolveIntents {
-    private val request = Request()
     val fastForwardRulesObject: JsonObject by lazy {
         loadFastForwardRuleJson(
             getBuiltInFastForwardJson()!!
@@ -39,7 +38,6 @@ object ResolveIntents {
         if (viewModel.followRedirects && uri != null) {
             viewModel.followRedirects(
                 uri,
-                request,
                 viewModel.followRedirectsLocalCache,
                 fastForwardRulesObject
             ).getOrNull()?.let {

@@ -119,6 +119,19 @@ fun LinksSettingsRoute(
             }
 
             if (viewModel.followRedirects) {
+                item(key = "follow_only_known_trackers") {
+                    SwitchRow(
+                        checked = viewModel.followOnlyKnownTrackers,
+                        onChange = {
+                            viewModel.onFollowOnlyKnownTrackers(it)
+                        },
+                        headlineId = R.string.follow_only_known_trackers,
+                        subtitleId = R.string.follow_only_known_trackers_explainer
+                    )
+                }
+            }
+
+            if (viewModel.followRedirects) {
                 item(key = "follow_redirects_external_service") {
                     val annotatedString = buildAnnotatedString {
                         append(stringResource(id = R.string.follow_redirects_external_service_explainer))
@@ -129,7 +142,7 @@ fun LinksSettingsRoute(
 
                         append(" ")
 
-                        withLink("https://unshorten.me/privacy-policy") {
+                        withLink("https://supabase.com/privacy") {
                             append(privacyPolicy)
                         }
                     }
@@ -143,19 +156,6 @@ fun LinksSettingsRoute(
                             onClick = { url -> uriHandler.openUri(url) }
                         )
                     })
-                }
-            }
-
-            if (viewModel.followRedirects) {
-                item(key = "follow_only_known_trackers") {
-                    SwitchRow(
-                        checked = viewModel.followOnlyKnownTrackers,
-                        onChange = {
-                            viewModel.onFollowOnlyKnownTrackers(it)
-                        },
-                        headlineId = R.string.follow_only_known_trackers,
-                        subtitleId = R.string.follow_only_known_trackers_explainer
-                    )
                 }
             }
         }

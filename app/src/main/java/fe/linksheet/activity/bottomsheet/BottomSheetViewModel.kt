@@ -18,9 +18,6 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.fastforwardkt.isTracker
-import fe.gson.extensions.array
-import fe.gson.extensions.bool
-import fe.gson.extensions.int
 import fe.gson.extensions.string
 import fe.httpkt.Request
 import fe.httpkt.json.readToJson
@@ -31,7 +28,7 @@ import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.preference.PreferenceRepository
-import fe.linksheet.module.preference.StringReader
+import fe.linksheet.module.redirectresolver.RedirectResolver
 import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -45,6 +42,7 @@ class BottomSheetViewModel : ViewModel(),
     KoinComponent {
     private val database by inject<LinkSheetDatabase>()
     private val preferenceRepository by inject<PreferenceRepository>()
+    private val redirectResolver by inject<RedirectResolver>()
 
     var result by mutableStateOf<IntentResolverResult?>(null)
     val enableCopyButton by mutableStateOf(
@@ -194,7 +192,7 @@ class BottomSheetViewModel : ViewModel(),
             }
         }
 
-        val followRedirect = followRedirectsImpl(uri, request, fastForwardRulesObject)
+        val followRedirect = followRedirectsImpl(uri, fastForwardRulesObject)
 
         if (localCache && followRedirect.getOrNull()?.resolveType != FollowRedirectResolveType.NotResolved) {
             withContext(Dispatchers.IO) {
@@ -212,7 +210,6 @@ class BottomSheetViewModel : ViewModel(),
 
     private fun followRedirectsImpl(
         uri: Uri,
-        request: Request,
         fastForwardRulesObject: JsonObject
     ): Result<FollowRedirect> {
         Log.d("FollowRedirects", "Following redirects for $uri")
@@ -222,7 +219,7 @@ class BottomSheetViewModel : ViewModel(),
             if (followRedirectsExternalService) {
                 Log.d("FollowRedirects", "Using external service for $followUri")
 
-                val response = followRedirectsExternal(request, followUri)
+                val response = followRedirectsExternal(followUri)
                 if (response.isSuccess) {
                     return Result.success(
                         FollowRedirect(
@@ -233,9 +230,10 @@ class BottomSheetViewModel : ViewModel(),
                 }
             }
 
+            Log.d("FollowRedirects", "Using local service for $followUri")
             return Result.success(
                 FollowRedirect(
-                    followRedirectsLocal(request, followUri),
+                    followRedirectsLocal(followUri),
                     FollowRedirectResolveType.Local
                 )
             )
@@ -244,21 +242,21 @@ class BottomSheetViewModel : ViewModel(),
         return Result.success(FollowRedirect(followUri, FollowRedirectResolveType.NotResolved))
     }
 
-    private fun followRedirectsLocal(request: Request, uri: String): String {
-        return request.head(uri, followRedirects = true).url.toString()
+    private fun followRedirectsLocal(uri: String): String {
+        return redirectResolver.resolveLocal(uri).url.toString()
     }
 
-    private fun followRedirectsExternal(request: Request, uri: String): Result<String> {
-        val con = request.get("https://unshorten.me/json/$uri")
+    private fun followRedirectsExternal(uri: String): Result<String> {
+        val con = redirectResolver.resolveRemote(uri)
         if (con.responseCode != 200) {
-            return Result.failure(Exception("Failed to resolve API!"))
+            return Result.failure(Exception("Something went wrong while resolving redirect"))
         }
 
         val obj = con.readToJson().asJsonObject
         Log.d("FollowRedirects", "Returned json $obj")
 
-        return if (obj.bool("success") == true) {
-            Result.success(obj.string("resolved_url")!!)
-        } else Result.failure(Exception("Ratelimited by API!"))
+        return obj.string("resolvedUrl")?.let {
+            Result.success(it)
+        } ?: Result.failure(Exception("Something went wrong while reading response"))
     }
 }

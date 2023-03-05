@@ -49,7 +49,6 @@ fun BottomDrawer(
                         tonalElevation = 6.dp,
                     ) {
                         Column {
-                            Spacer(modifier = Modifier.height(5.dp))
                             sheetContent()
                             Spacer(modifier = Modifier.height(28.dp))
                         }

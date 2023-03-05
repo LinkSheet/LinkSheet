@@ -247,47 +247,56 @@ class BottomSheetActivity : ComponentActivity() {
     ) {
         val filteredItem = result.filteredItem!!
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 28.dp)
-                .height(preferredAppItemHeight),
-            verticalAlignment = Alignment.CenterVertically
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                launchScope.launch { launchApp(filteredItem, result.uri, false) }
+            }
         ) {
-            Image(
-                bitmap = filteredItem.getBitmap(this@BottomSheetActivity),
-                contentDescription = filteredItem.displayLabel,
-                modifier = Modifier.size(32.dp)
-            )
+            Spacer(modifier = Modifier.height(5.dp))
 
-            Spacer(modifier = Modifier.width(5.dp))
-
-            Column {
-                Text(
-                    text = stringResource(
-                        id = R.string.open_with_app,
-                        filteredItem.displayLabel,
-                    ),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 28.dp)
+                    .height(preferredAppItemHeight),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    bitmap = filteredItem.getBitmap(this@BottomSheetActivity),
+                    contentDescription = filteredItem.displayLabel,
+                    modifier = Modifier.size(32.dp)
                 )
 
-                if (showPackage) {
+                Spacer(modifier = Modifier.width(5.dp))
+
+                Column {
                     Text(
-                        text = filteredItem.packageName,
-                        fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.tertiary
+                        text = stringResource(
+                            id = R.string.open_with_app,
+                            filteredItem.displayLabel,
+                        ),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
                     )
+
+                    if (showPackage) {
+                        Text(
+                            text = filteredItem.packageName,
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.tertiary
+                        )
+                    }
                 }
             }
-        }
 
-        ButtonRow(
-            result = result,
-            enabled = true,
-            onClick = { launchScope.launch { launchApp(filteredItem, result.uri, it) } },
-            drawerState = drawerState
-        )
+            ButtonRow(
+                result = result,
+                enabled = true,
+                onClick = { launchScope.launch { launchApp(filteredItem, result.uri, it) } },
+                drawerState = drawerState
+            )
+        }
 
         Divider(color = MaterialTheme.colorScheme.tertiary, thickness = 0.5.dp)
 
@@ -330,7 +339,7 @@ class BottomSheetActivity : ComponentActivity() {
         baseHeight: Dp,
         showPackage: Boolean
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         Text(
             text = stringResource(id = R.string.open_with),
@@ -575,6 +584,7 @@ class BottomSheetActivity : ComponentActivity() {
                         Text(
                             text = stringResource(id = R.string.just_once),
                             fontFamily = HkGroteskFontFamily,
+                            maxLines = 1,
                             fontWeight = FontWeight.SemiBold
                         )
                     }
@@ -587,6 +597,7 @@ class BottomSheetActivity : ComponentActivity() {
                         Text(
                             text = stringResource(id = R.string.always),
                             fontFamily = HkGroteskFontFamily,
+                            maxLines = 1,
                             fontWeight = FontWeight.SemiBold
                         )
                     }

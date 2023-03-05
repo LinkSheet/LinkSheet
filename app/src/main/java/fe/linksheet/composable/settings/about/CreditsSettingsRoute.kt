@@ -13,6 +13,8 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.openLinkWithGithub
+import fe.linksheet.sealGithub
 
 
 @Composable
@@ -34,7 +36,7 @@ fun CreditsSettingsRoute(
                     headline = R.string.open_link_with,
                     subtitle = R.string.license_apache_2,
                     onClick = {
-                        uriHandler.openUri("https://github.com/tasomaniac/OpenLinkWith")
+                        uriHandler.openUri(openLinkWithGithub)
                     })
             }
 
@@ -43,7 +45,7 @@ fun CreditsSettingsRoute(
                     headline = R.string.seal,
                     subtitle = R.string.license_gpl_3,
                     onClick = {
-                        uriHandler.openUri("https://github.com/JunkFood02/Seal")
+                        uriHandler.openUri(sealGithub)
                     }
                 )
             }

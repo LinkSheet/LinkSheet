@@ -2,14 +2,12 @@ package fe.linksheet.activity
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -26,7 +24,7 @@ import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.settings.apps.browser.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
-import fe.linksheet.composable.settings.links.LinksSettingsRoute
+import fe.linksheet.composable.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.ui.theme.AppTheme
 

@@ -138,8 +138,12 @@ class BottomSheetActivity : ComponentActivity() {
 
         if (bottomSheetViewModel.followRedirects) {
             setContent {
+                var hasShownToast by remember { mutableStateOf(false) }
                 LaunchedEffect(bottomSheetViewModel.result) {
-                    bottomSheetViewModel.result?.followRedirect?.resolveType?.let(makeResolveToast)
+                    if(!hasShownToast){
+                        bottomSheetViewModel.result?.followRedirect?.resolveType?.let(makeResolveToast)
+                        hasShownToast = true
+                    }
                 }
 
                 showBottomSheet(bottomSheetViewModel.result)

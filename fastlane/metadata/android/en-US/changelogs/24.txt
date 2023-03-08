@@ -1,0 +1,3 @@
+* Fix: Various bugs in libredirectkt (#29
+* Add LibRedirect enable switch for each service
+* Increase dropdown width

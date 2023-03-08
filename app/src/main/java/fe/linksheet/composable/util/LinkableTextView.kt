@@ -213,6 +213,8 @@ fun LinkableTextView(
     @StringRes id: Int,
     modifier: Modifier = Modifier,
     style: TextStyle = TextStyle.Default,
+    parentChecked: Boolean? = null,
+    parentClickListener: ((Boolean) -> Unit)? = null
 ) {
     val uriHandler = LocalUriHandler.current
 
@@ -223,6 +225,10 @@ fun LinkableTextView(
         onClick = { offset ->
             annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {
                 uriHandler.openUri(it.item.url)
+            } ?: run {
+                if (parentChecked != null && parentClickListener != null) {
+                    parentClickListener(!parentChecked)
+                }
             }
         },
         modifier = modifier,

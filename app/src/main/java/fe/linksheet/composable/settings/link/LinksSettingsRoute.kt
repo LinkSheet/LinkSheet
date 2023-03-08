@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -106,10 +107,16 @@ fun LinksSettingsRoute(
                             color = MaterialTheme.colorScheme.onSurface
                         )
 
-                        Text(
-                            text = stringResource(id = R.string.enable_libredirect_explainer),
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                        LinkableTextView(
+                            id = R.string.enable_libredirect_explainer,
+                            style = TextStyle.Default.copy(
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontSize = 16.sp,
+                            ),
+                            parentChecked = false,
+                            parentClickListener = {
+                                navController.navigate(libRedirectSettingsRoute)
+                            }
                         )
                     }
 

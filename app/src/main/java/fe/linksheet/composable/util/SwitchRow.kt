@@ -42,11 +42,7 @@ fun SwitchRow(
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable () -> Unit = {
-        Text(
-            text = subtitle ?: "",
-            fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        SubtitleText(subtitle = subtitle ?: "")
     }
 ) {
     ClickableRow(
@@ -56,16 +52,12 @@ fun SwitchRow(
         onClick = {
             onChange(!checked)
         }) {
-        Column(modifier = Modifier.fillMaxWidth(0.8f)) {
-            Text(
-                text = headline,
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+        Column(modifier = Modifier.fillMaxWidth(0.8f), verticalArrangement = Arrangement.Center) {
+            HeadlineText(headline = headline)
 
-            subtitleBuilder()
+            if (subtitle != null) {
+                subtitleBuilder()
+            }
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {

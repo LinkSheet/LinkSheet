@@ -12,15 +12,39 @@ import androidx.compose.ui.unit.sp
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @Composable
+fun HeadlineText(headline: String) {
+    Text(
+        text = headline,
+        fontFamily = HkGroteskFontFamily,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.onSurface
+    )
+}
+
+@Composable
+fun HeadlineText(@StringRes headline: Int) {
+    HeadlineText(headline = stringResource(id = headline))
+}
+
+@Composable
+fun SubtitleText(subtitle: String) {
+    Text(
+        text = subtitle,
+        fontSize = 16.sp,
+        color = MaterialTheme.colorScheme.onSurface
+    )
+}
+
+@Composable
+fun SubtitleText(@StringRes subtitle: Int) {
+    SubtitleText(subtitle = stringResource(id = subtitle))
+}
+
+@Composable
 fun Texts(headline: String, subtitle: String? = null) {
     Column(verticalArrangement = Arrangement.Center) {
-        Text(
-            text = headline,
-            fontFamily = HkGroteskFontFamily,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        HeadlineText(headline = headline)
 
         if (subtitle != null) {
             Text(text = subtitle, fontSize = 16.sp)

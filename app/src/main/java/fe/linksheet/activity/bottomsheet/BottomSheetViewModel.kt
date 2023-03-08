@@ -269,4 +269,10 @@ class BottomSheetViewModel : ViewModel(),
             database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
         }
     }
+
+    suspend fun loadLibRedirectState(serviceKey: String): Boolean? {
+        return withContext(Dispatchers.IO) {
+            database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
+        }
+    }
 }

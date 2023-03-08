@@ -52,7 +52,7 @@ object ResolveIntents {
         if (viewModel.enableLibRedirect) {
             val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
             Log.d("ResolveIntents", "LibRedirect $service")
-            if (service != null) {
+            if (service != null && viewModel.loadLibRedirectState(service.key) == true) {
                 val savedDefault = viewModel.getLibRedirectDefault(service.key)
                 val redirected = if (savedDefault != null) {
                     LibRedirect.redirect(

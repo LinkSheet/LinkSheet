@@ -1,6 +1,7 @@
 package fe.linksheet.composable.settings.link
 
 import android.util.Log
+import android.widget.Space
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,14 +11,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectFrontend
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.RadioButtonRow
+import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.launch
 
 
@@ -46,6 +52,7 @@ fun LibRedirectServiceSettingsRoute(
 
     LaunchedEffect(Unit) {
         viewModel.loadLibRedirectDefault(serviceKey)
+        viewModel.loadLibRedirectState(serviceKey)
     }
 
     LaunchedEffect(viewModel.libRedirectDefault) {
@@ -61,7 +68,6 @@ fun LibRedirectServiceSettingsRoute(
                 LibRedirect.getDefaultInstanceForFrontend(selectedFrontend?.key!!)?.firstOrNull()
         }
 
-
         instancesForSelectedFrontend.clear()
         builtinInstances.find { it.frontendKey == selectedFrontend?.key }?.let {
             instancesForSelectedFrontend.addAll(it.hosts)
@@ -76,7 +82,7 @@ fun LibRedirectServiceSettingsRoute(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 15.dp)
+            contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
             stickyHeader(key = "dropdown") {
                 Column(
@@ -84,60 +90,75 @@ fun LibRedirectServiceSettingsRoute(
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
-                    Text(text = stringResource(id = R.string.frontend))
-
+                    SwitchRow(
+                        checked = viewModel.libRedirectEnabled ?: false,
+                        onChange = {
+                            coroutineScope.launch {
+                                viewModel.updateLibRedirectState(serviceKey, it)
+                            }
+                            viewModel.libRedirectEnabled = it
+                        },
+                        headline = stringResource(id = R.string.enabled),
+                        subtitle = null
+                    )
+                    
                     Spacer(modifier = Modifier.height(5.dp))
 
-                    ExposedDropdownMenuBox(
-                        expanded = expanded,
-                        onExpandedChange = {
-                            expanded = !expanded
-                        }
-                    ) {
-                        TextField(
-                            value = selectedFrontend?.name ?: "Loading..",
-                            onValueChange = {
+                    Column(modifier = Modifier.padding(horizontal = 10.dp).fillMaxWidth()) {
+                        HeadlineText(headline = R.string.frontend)
 
-                            },
-                            readOnly = true,
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(
-                                    expanded = expanded
-                                )
-                            },
-                            modifier = Modifier.menuAnchor()
-                        )
+                        Spacer(modifier = Modifier.height(5.dp))
 
-                        ExposedDropdownMenu(
+                        ExposedDropdownMenuBox(
                             expanded = expanded,
-                            onDismissRequest = { expanded = false }
+                            onExpandedChange = {
+                                expanded = !expanded
+                            }
                         ) {
-                            service?.frontends?.forEach { frontend ->
-                                DropdownMenuItem(
-                                    text = { Text(text = frontend.name) },
-                                    onClick = {
-                                        selectedFrontend = frontend
-                                        instancesForSelectedFrontend.clear()
-                                        builtinInstances.find { it.frontendKey == frontend.key }
-                                            ?.let {
-                                                instancesForSelectedFrontend.addAll(it.hosts)
-                                            }
-                                        selectedInstance = LibRedirect.getDefaultInstanceForFrontend(
-                                            selectedFrontend?.key!!
-                                        )?.firstOrNull()
+                            TextField(
+                                value = selectedFrontend?.name ?: "Loading..",
+                                onValueChange = {},
+                                readOnly = true,
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(
+                                        expanded = expanded
+                                    )
+                                },
+                                modifier = Modifier.menuAnchor()
+                            )
 
-                                        expanded = false
-                                    }
-                                )
+                            ExposedDropdownMenu(
+                                expanded = expanded,
+                                onDismissRequest = { expanded = false }
+                            ) {
+                                service?.frontends?.forEach { frontend ->
+                                    DropdownMenuItem(
+                                        text = { Text(text = frontend.name) },
+                                        onClick = {
+                                            selectedFrontend = frontend
+                                            instancesForSelectedFrontend.clear()
+                                            builtinInstances.find { it.frontendKey == frontend.key }
+                                                ?.let {
+                                                    instancesForSelectedFrontend.addAll(it.hosts)
+                                                }
+                                            selectedInstance =
+                                                LibRedirect.getDefaultInstanceForFrontend(
+                                                    selectedFrontend?.key!!
+                                                )?.firstOrNull()
+
+                                            expanded = false
+                                        }
+                                    )
+                                }
                             }
                         }
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        HeadlineText(headline = R.string.instance)
+
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    Text(text = stringResource(id = R.string.instance))
-
-                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 

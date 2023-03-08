@@ -9,7 +9,7 @@ import fe.linksheet.data.entity.LibRedirectDefault
 @Dao
 interface LibRedirectDefaultDao {
     @Query("SELECT * FROM lib_redirect_default WHERE serviceKey = :serviceKey")
-    fun getLibRedirectDefaultByServiceKey(serviceKey: String): LibRedirectDefault
+    fun getLibRedirectDefaultByServiceKey(serviceKey: String): LibRedirectDefault?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(resolvedRedirect: LibRedirectDefault)

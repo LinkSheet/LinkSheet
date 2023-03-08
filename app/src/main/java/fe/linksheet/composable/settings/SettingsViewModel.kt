@@ -25,6 +25,7 @@ import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
 import fe.linksheet.data.entity.LibRedirectDefault
+import fe.linksheet.data.entity.LibRedirectServiceState
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.startActivityWithConfirmation
@@ -68,6 +69,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val whitelistedBrowserMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
 
     var libRedirectDefault by mutableStateOf<LibRedirectDefault?>(null)
+    var libRedirectEnabled by mutableStateOf<Boolean?>(null)
 
     var usageStatsSorting by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.usageStatsSorting) ?: false
@@ -441,6 +443,21 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         withContext(Dispatchers.IO) {
             libRedirectDefault =
                 database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
+        }
+    }
+
+    suspend fun loadLibRedirectState(serviceKey: String) {
+        withContext(Dispatchers.IO) {
+            libRedirectEnabled =
+                database.libRedirectServiceStateDao()
+                    .getLibRedirectServiceState(serviceKey)?.enabled
+        }
+    }
+
+    suspend fun updateLibRedirectState(serviceKey: String, boolean: Boolean) {
+        withContext(Dispatchers.IO) {
+            database.libRedirectServiceStateDao()
+                .insert(LibRedirectServiceState(serviceKey, boolean))
         }
     }
 

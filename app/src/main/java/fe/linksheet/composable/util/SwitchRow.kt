@@ -41,7 +41,7 @@ fun SwitchRow(
     onChange: (Boolean) -> Unit,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable () -> Unit = {
+    subtitleBuilder: @Composable (() -> Unit)? = {
         SubtitleText(subtitle = subtitle ?: "")
     }
 ) {
@@ -55,7 +55,7 @@ fun SwitchRow(
         Column(modifier = Modifier.fillMaxWidth(0.8f), verticalArrangement = Arrangement.Center) {
             HeadlineText(headline = headline)
 
-            if (subtitle != null) {
+            if (subtitleBuilder != null) {
                 subtitleBuilder()
             }
         }

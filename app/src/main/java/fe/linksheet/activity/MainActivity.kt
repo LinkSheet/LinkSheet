@@ -24,6 +24,8 @@ import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.settings.apps.browser.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
+import fe.linksheet.composable.settings.link.LibRedirectServiceSettingsRoute
+import fe.linksheet.composable.settings.link.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.ui.theme.AppTheme
@@ -75,8 +77,27 @@ class MainActivity : ComponentActivity() {
                                 composable(route = linksSettingsRoute) {
                                     LinksSettingsRoute(
                                         onBackPressed = onBackPressed,
+                                        navController = navController,
                                         viewModel = settingsViewModel
                                     )
+                                }
+
+                                composable(route = libRedirectSettingsRoute) {
+                                    LibRedirectSettingsRoute(
+                                        onBackPressed = onBackPressed,
+                                        navController = navController,
+                                        viewModel = settingsViewModel
+                                    )
+                                }
+
+                                composable(route = libRedirectServiceSettingsRoute) {
+                                    it.arguments?.getString("service")?.let { service ->
+                                        LibRedirectServiceSettingsRoute(
+                                            onBackPressed = onBackPressed,
+                                            serviceKey = service,
+                                            viewModel = settingsViewModel
+                                        )
+                                    }
                                 }
 
                                 composable(route = themeSettingsRoute) {

@@ -24,6 +24,7 @@ import fe.httpkt.json.readToJson
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.data.entity.LibRedirectDefault
 import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
@@ -79,6 +80,10 @@ class BottomSheetViewModel : ViewModel(),
 
     var useFastForwardRules by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.useFastForwardRules) ?: false
+    )
+
+    var enableLibRedirect by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableLibRedirect) ?: false
     )
 
     val followRedirects by mutableStateOf(
@@ -257,5 +262,11 @@ class BottomSheetViewModel : ViewModel(),
         return obj.string("resolvedUrl")?.let {
             Result.success(it)
         } ?: Result.failure(Exception("Something went wrong while reading response"))
+    }
+
+    suspend fun getLibRedirectDefault(serviceKey: String): LibRedirectDefault? {
+        return withContext(Dispatchers.IO) {
+            database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
+        }
     }
 }

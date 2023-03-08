@@ -10,7 +10,8 @@ import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.fastforwardkt.loadFastForwardRuleJson
-import fe.httpkt.Request
+import fe.libredirectkt.LibRedirect
+import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.BuildConfig
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.extension.getUri
@@ -24,6 +25,8 @@ object ResolveIntents {
             getBuiltInFastForwardJson()!!
         )
     }
+
+    private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
 
     suspend fun resolve(
         context: Context,
@@ -46,8 +49,34 @@ object ResolveIntents {
             }
         }
 
-        Log.d("ResolveIntents", "UseClearUrls: ${viewModel.useClearUrls}")
-        Log.d("ResolveIntents", "Intent data: $uri, intent: $intent")
+        if (viewModel.enableLibRedirect) {
+            val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
+            Log.d("ResolveIntents", "LibRedirect $service")
+            if (service != null) {
+                val savedDefault = viewModel.getLibRedirectDefault(service.key)
+                val redirected = if (savedDefault != null) {
+                    LibRedirect.redirect(
+                        uri.toString(),
+                        savedDefault.frontendKey,
+                        savedDefault.instanceUrl
+                    )
+                } else {
+                    val defaultInstance =
+                        LibRedirect.getDefaultInstanceForFrontend(service.defaultFrontend.key)
+                    LibRedirect.redirect(
+                        uri.toString(),
+                        service.defaultFrontend.key,
+                        defaultInstance?.first()!!
+                    )
+                }
+
+                Log.d("ResolveIntents", "LibRedirect $redirected")
+                if (redirected != null) {
+                    uri = Uri.parse(redirected)
+                }
+            }
+        }
+
 
         val preferredApp = uri?.let {
             PreferredResolver.resolve(context, it.host!!)

@@ -8,13 +8,11 @@ import android.text.style.*
 import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
@@ -223,10 +221,7 @@ fun LinkableTextView(
         text = annotatedString,
         style = style,
         onClick = { offset ->
-            annotatedString.getUrlAnnotations(
-                start = offset,
-                end = offset
-            ).firstOrNull()?.let {
+            annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {
                 uriHandler.openUri(it.item.url)
             }
         },

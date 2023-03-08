@@ -39,6 +39,7 @@ class PreferenceRepository(context: Context) {
         val gridLayout = Preference("grid_layout", false)
         val useClearUrls = Preference("use_clear_urls", false)
         val useFastForwardRules = Preference("fast_forward_rules", false)
+        val enableLibRedirect = Preference("enable_lib_redirect", false)
         val followRedirects = Preference("follow_redirects", false)
         val followRedirectsLocalCache = Preference("follow_redirects_local_cache", true)
         val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
@@ -58,6 +59,7 @@ class PreferenceRepository(context: Context) {
             gridLayout,
             useClearUrls,
             useFastForwardRules,
+            enableLibRedirect,
             followRedirects,
             followRedirectsLocalCache,
             followRedirectsExternalService,

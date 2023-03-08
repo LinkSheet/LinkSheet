@@ -15,7 +15,11 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScaffold(@StringRes headline: Int, onBackPressed: () -> Unit,  content: @Composable (PaddingValues) -> Unit) {
+fun SettingsScaffold(
+    headline: String,
+    onBackPressed: () -> Unit,
+    content: @Composable (PaddingValues) -> Unit
+) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
         rememberTopAppBarState(),
         canScroll = { true }
@@ -31,7 +35,7 @@ fun SettingsScaffold(@StringRes headline: Int, onBackPressed: () -> Unit,  conte
                 title = {
                     Text(
                         modifier = Modifier,
-                        text = stringResource(id = headline),
+                        text = headline,
                         fontFamily = HkGroteskFontFamily,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -42,5 +46,19 @@ fun SettingsScaffold(@StringRes headline: Int, onBackPressed: () -> Unit,  conte
                 }, scrollBehavior = scrollBehavior
             )
         }, content = { padding -> content(padding) }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SettingsScaffold(
+    @StringRes headline: Int,
+    onBackPressed: () -> Unit,
+    content: @Composable (PaddingValues) -> Unit
+) {
+    SettingsScaffold(
+        headline = stringResource(id = headline),
+        onBackPressed = onBackPressed,
+        content = content
     )
 }

@@ -24,6 +24,7 @@ import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
+import fe.linksheet.data.entity.LibRedirectDefault
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.startActivityWithConfirmation
@@ -33,7 +34,6 @@ import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.lang.ref.PhantomReference
 
 
 class SettingsViewModel : ViewModel(), KoinComponent {
@@ -66,6 +66,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     var whichAppsCanHandleLinksLoading by mutableStateOf(false)
 
     val whitelistedBrowserMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
+
+    var libRedirectDefault by mutableStateOf<LibRedirectDefault?>(null)
 
     var usageStatsSorting by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.usageStatsSorting) ?: false
@@ -105,6 +107,10 @@ class SettingsViewModel : ViewModel(), KoinComponent {
 
     var useFastForwardRules by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.useFastForwardRules) ?: false
+    )
+
+    var enableLibRedirect by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableLibRedirect) ?: false
     )
 
     var followRedirects by mutableStateOf(
@@ -362,7 +368,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirects, it)
     }
 
-    fun onFollowRedirectsLocalCache(it: Boolean){
+    fun onFollowRedirectsLocalCache(it: Boolean) {
         this.followRedirectsLocalCache = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirectsLocalCache, it)
     }
@@ -381,9 +387,13 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     fun onThemeChange(it: Theme) {
-        Log.d("ThemeChange", "Current theme: $theme, new theme: $it")
         this.theme = it
         this.preferenceRepository.writeInt(PreferenceRepository.theme, it, Theme.persister)
+    }
+
+    fun onEnableLibRedirect(it: Boolean) {
+        this.enableLibRedirect = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.enableLibRedirect, it)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {
@@ -413,6 +423,24 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                     dao.deleteByPackageName(app.packageName)
                 }
             }
+        }
+    }
+
+    suspend fun saveLibRedirectDefault(
+        serviceKey: String,
+        frontendKey: String,
+        instanceUrl: String
+    ) {
+        withContext(Dispatchers.IO) {
+            database.libRedirectDefaultDao()
+                .insert(LibRedirectDefault(serviceKey, frontendKey, instanceUrl))
+        }
+    }
+
+    suspend fun loadLibRedirectDefault(serviceKey: String) {
+        withContext(Dispatchers.IO) {
+            libRedirectDefault =
+                database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
         }
     }
 

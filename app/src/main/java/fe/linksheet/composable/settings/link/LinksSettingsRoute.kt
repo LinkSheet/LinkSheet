@@ -14,15 +14,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 
@@ -30,6 +31,7 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 @Composable
 fun LinksSettingsRoute(
     onBackPressed: () -> Unit,
+    navController: NavController,
     viewModel: SettingsViewModel
 ) {
     val context = LocalContext.current
@@ -80,56 +82,56 @@ fun LinksSettingsRoute(
                 )
             }
 
-//            item(key = "libredirect") {
-//                Row(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(end = 10.dp), verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth(0.8f)
-//                            .clip(RoundedCornerShape(6.dp))
-//                            .clickable {
-//
-//                            }
-//                            .padding(start = 10.dp)
-//
-//                    ) {
-//                        Text(
-//                            text = stringResource(id = R.string.enable_libredirect),
-//                            fontFamily = HkGroteskFontFamily,
-//                            fontWeight = FontWeight.SemiBold,
-//                            fontSize = 18.sp,
-//                            color = MaterialTheme.colorScheme.onSurface
-//                        )
-//
-//                        Text(
-//                            text = stringResource(id = R.string.enable_libredirect_explainer),
-//                            fontSize = 16.sp,
-//                            color = MaterialTheme.colorScheme.onSurface
-//                        )
-//                    }
-//
-//                    Divider(
-//                        modifier = Modifier
-//                            .height(32.dp)
-//                            .padding(horizontal = 8.dp)
-//                            .width(1f.dp)
-//                            .align(Alignment.CenterVertically),
-//                        color = MaterialTheme.colorScheme.tertiary
-//                    )
-//
-//                    Row(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        horizontalArrangement = Arrangement.End
-//                    ) {
-//                        Switch(checked = false, onCheckedChange = {
-//
-//                        })
-//                    }
-//                }
-//            }
+            item(key = "libredirect") {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 10.dp), verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth(0.8f)
+                            .clip(RoundedCornerShape(6.dp))
+                            .clickable {
+                                navController.navigate(libRedirectSettingsRoute)
+                            }
+                            .padding(start = 10.dp)
+
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.enable_libredirect),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 18.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+
+                        Text(
+                            text = stringResource(id = R.string.enable_libredirect_explainer),
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                    Divider(
+                        modifier = Modifier
+                            .height(32.dp)
+                            .padding(horizontal = 8.dp)
+                            .width(1f.dp)
+                            .align(Alignment.CenterVertically),
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Switch(checked = viewModel.enableLibRedirect, onCheckedChange = {
+                            viewModel.onEnableLibRedirect(it)
+                        })
+                    }
+                }
+            }
 
             item(key = "follow_redirects") {
                 SwitchRow(
@@ -172,9 +174,7 @@ fun LinksSettingsRoute(
                 item(key = "follow_redirects_external_service") {
                     SwitchRow(
                         checked = viewModel.followRedirectsExternalService,
-                        onChange = {
-                            viewModel.onFollowRedirectsExternalService(it)
-                        },
+                        onChange = { viewModel.onFollowRedirectsExternalService(it) },
                         headline = stringResource(id = R.string.follow_redirects_external_service),
                         subtitle = null,
                         subtitleBuilder = {

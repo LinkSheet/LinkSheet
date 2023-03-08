@@ -109,5 +109,9 @@
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="redirect_resolve_type_not_resolved">none</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental</string>
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental LibRedirect integration</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Frontend</string>
+    <string name="instance">Instance</string>
 </resources>

@@ -80,9 +80,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.1fexd:clearurlkt:0.0.9")
     implementation("com.github.1fexd:fastforwardkt:0.0.9")
+    implementation("com.github.1fexd:libredirectkt:0.0.6")
+
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.32")
-    implementation("com.gitlab.grrfe:GSONKtExtensions:2.1.2")
+    implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
 
 
     implementation("com.google.android.material:material:1.8.0")

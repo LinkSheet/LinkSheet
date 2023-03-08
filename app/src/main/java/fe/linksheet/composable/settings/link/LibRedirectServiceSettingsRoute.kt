@@ -124,7 +124,7 @@ fun LibRedirectServiceSettingsRoute(
                                         expanded = expanded
                                     )
                                 },
-                                modifier = Modifier.menuAnchor()
+                                modifier = Modifier.menuAnchor().fillMaxWidth()
                             )
 
                             ExposedDropdownMenu(

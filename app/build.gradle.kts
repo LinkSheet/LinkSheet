@@ -13,8 +13,8 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 25
         targetSdk = 33
-        versionCode = 24
-        versionName = "0.0.24-debug"
+        versionCode = 25
+        versionName = "0.0.25-debug"
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -79,7 +79,7 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.1fexd:clearurlkt:0.0.9")
-    implementation("com.github.1fexd:fastforwardkt:0.0.9")
+    implementation("com.github.1fexd:fastforwardkt:0.0.10")
     implementation("com.github.1fexd:libredirectkt:0.0.7")
 
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.32")

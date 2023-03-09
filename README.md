@@ -68,8 +68,3 @@ Code was taken from:
 
 * [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 * [Seal](https://github.com/JunkFood02/Seal)
-
-Re-implemented services:
-
-* [ClearURLs](https://github.com/ClearURLs) (via [clearurlkt](https://github.com/1fexd/clearurlkt))
-* [FastForward (rules only)](https://github.com/FastForwardTeam/FastForward) (via [fastforwardkt](https://github.com/1fexd/fastforwardkt))

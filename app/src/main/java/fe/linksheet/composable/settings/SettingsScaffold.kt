@@ -18,6 +18,8 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 fun SettingsScaffold(
     headline: String,
     onBackPressed: () -> Unit,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
     content: @Composable (PaddingValues) -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
@@ -45,7 +47,10 @@ fun SettingsScaffold(
                     }
                 }, scrollBehavior = scrollBehavior
             )
-        }, content = { padding -> content(padding) }
+        },
+        floatingActionButton = floatingActionButton,
+        floatingActionButtonPosition = floatingActionButtonPosition,
+        content = { padding -> content(padding) }
     )
 }
 
@@ -54,11 +59,15 @@ fun SettingsScaffold(
 fun SettingsScaffold(
     @StringRes headline: Int,
     onBackPressed: () -> Unit,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
     content: @Composable (PaddingValues) -> Unit
 ) {
     SettingsScaffold(
         headline = stringResource(id = headline),
         onBackPressed = onBackPressed,
+        floatingActionButton = floatingActionButton,
+        floatingActionButtonPosition = floatingActionButtonPosition,
         content = content
     )
 }

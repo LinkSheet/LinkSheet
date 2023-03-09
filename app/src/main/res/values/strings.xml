@@ -114,4 +114,5 @@
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
     <string name="instance">Instance</string>
+    <string name="add">Add</string>
 </resources>

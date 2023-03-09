@@ -49,6 +49,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val preferredApps = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
     val preferredAppsFiltered = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
 
+    val appsExceptPreferred = mutableStateListOf<DisplayActivityInfo>()
+
     val browsers = mutableStateListOf<DisplayActivityInfo>()
 
     var browserMode by mutableStateOf(
@@ -141,7 +143,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     )
 
     suspend fun filterPreferredAppsAsync(filter: String) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             preferredAppsFiltered.clear()
             preferredApps.forEach { (info, hosts) ->
                 if (filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)) {
@@ -169,34 +171,52 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun loadBrowsers(context: Context) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun loadAppsExceptPreferred(context: Context) {
+        withContext(Dispatchers.IO) {
+            val preferredAppsPackage = preferredApps.keys.map { it.packageName }
+
+            appsExceptPreferred.clear()
+            appsExceptPreferred.addAll(context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
+                .asSequence()
+                .mapNotNull { packageInfo -> context.packageManager.queryFirstIntentActivityByPackageNameOrNull(packageInfo.packageName) }
+                .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
+                .filter { it.activityInfo.packageName !in preferredAppsPackage }
+                .map { it.toDisplayActivityInfo(context) }
+                .sortedBy { it.displayLabel }
+                .toList())
+
+            Log.d("AppsExceptPreferred", "${appsExceptPreferred.toList()}")
+        }
+    }
+
+    suspend fun loadBrowsers(context: Context) {
+        withContext(Dispatchers.IO) {
             browsers.clear()
             browsers.addAll(BrowserResolver.resolve(context).sortedBy { it.displayLabel })
         }
     }
 
     suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             database.preferredAppDao().insert(preferredApp)
         }
     }
 
     suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             database.preferredAppDao().insert(preferredApps)
         }
     }
 
     suspend fun deletePreferredAppAsync(host: String, packageName: String) {
         Log.d("DeletePreferredApp", host)
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             database.preferredAppDao().deleteByPackageNameAndHost(host, packageName)
         }
     }
 
     suspend fun deletePreferredAppWherePackageAsync(packageName: String) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             database.preferredAppDao().deleteByPackageName(packageName)
         }
     }
@@ -229,8 +249,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
 
-    suspend fun filterWhichAppsCanHandleLinksAsync(filter: String): Boolean {
-        return withContext(Dispatchers.IO) {
+    suspend fun filterWhichAppsCanHandleLinksAsync(filter: String) {
+        withContext(Dispatchers.IO) {
             whichAppsCanHandleLinksFiltered.clear()
             whichAppsCanHandleLinksFiltered.addAll(whichAppsCanHandleLinks.filter {
                 if (filter.isNotEmpty()) it.displayLabel.contains(
@@ -251,7 +271,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         manager: DomainVerificationManager
     ) {
         whichAppsCanHandleLinksLoading = true
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
             whichAppsCanHandleLinks.addAll(
                 context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)

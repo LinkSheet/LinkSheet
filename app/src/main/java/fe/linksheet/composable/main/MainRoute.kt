@@ -2,10 +2,8 @@ package fe.linksheet.composable.main
 
 import android.app.Activity
 import android.app.role.RoleManager
-import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.util.Patterns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts

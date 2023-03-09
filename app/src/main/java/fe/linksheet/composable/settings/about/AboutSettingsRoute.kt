@@ -11,13 +11,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.creditsSettingsRoute
 

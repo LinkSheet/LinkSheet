@@ -10,6 +10,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,8 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
@@ -30,6 +30,8 @@ import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -58,16 +60,17 @@ fun PreferredAppSettingsRoute(
     LaunchedEffect(Unit) {
         viewModel.loadPreferredApps(context)
         viewModel.filterPreferredAppsAsync(filter)
+        viewModel.loadAppsExceptPreferred(context)
     }
 
-    var openDialog by remember { mutableStateOf(false) }
+    var openHostDialog by remember { mutableStateOf(false) }
     var buttonType by remember { mutableStateOf<ButtonType?>(null) }
     val hostMap = remember { mutableStateMapOf<String, Boolean>() }
     var hasAppHosts by remember { mutableStateOf(false) }
     var displayActivityInfo by remember { mutableStateOf<DisplayActivityInfo?>(null) }
 
-    LaunchedEffect(openDialog) {
-        if (!openDialog) {
+    LaunchedEffect(openHostDialog) {
+        if (!openHostDialog) {
             Log.d("Closed dialog", "$displayActivityInfo")
             when (buttonType) {
                 ButtonType.DeleteAll -> {
@@ -106,8 +109,8 @@ fun PreferredAppSettingsRoute(
         }
     }
 
-    if (openDialog) {
-        AlertDialog(onDismissRequest = { openDialog = false }) {
+    if (openHostDialog) {
+        AlertDialog(onDismissRequest = { openHostDialog = false }) {
             Surface(shape = MaterialTheme.shapes.large) {
                 Column(
                     modifier = Modifier
@@ -176,7 +179,7 @@ fun PreferredAppSettingsRoute(
                                 OutlinedButton(
                                     contentPadding = PaddingValues(horizontal = 18.dp),
                                     onClick = {
-                                        openDialog = false
+                                        openHostDialog = false
                                         buttonType = ButtonType.DeleteAll
                                     }) {
                                     Text(text = stringResource(id = R.string.remove_all))
@@ -188,7 +191,7 @@ fun PreferredAppSettingsRoute(
                                     OutlinedButton(
                                         contentPadding = PaddingValues(horizontal = 18.dp),
                                         onClick = {
-                                            openDialog = false
+                                            openHostDialog = false
                                             buttonType = ButtonType.AddAll
                                         }) {
                                         Text(text = stringResource(id = R.string.add_all))
@@ -203,7 +206,7 @@ fun PreferredAppSettingsRoute(
                                 horizontalArrangement = Arrangement.End
                             ) {
                                 TextButton(onClick = {
-                                    openDialog = false
+                                    openHostDialog = false
                                     buttonType = ButtonType.Confirm
                                 }) {
                                     Text(text = stringResource(id = R.string.confirm))
@@ -216,7 +219,51 @@ fun PreferredAppSettingsRoute(
         }
     }
 
-    SettingsScaffold(R.string.preferred_apps, onBackPressed = onBackPressed) { padding ->
+//    AlertDialog(onDismissRequest = { }) {
+//        Surface(shape = MaterialTheme.shapes.large) {
+//            LazyColumn(modifier = Modifier.padding(bottom = 40.dp), content = {
+//                Log.d("AppsExceptPreferred2", "${viewModel.appsExceptPreferred.toList()}")
+//                viewModel.appsExceptPreferred.forEach { (activityInfo) ->
+//                    item(key = activityInfo.packageName) {
+//                        ClickableRow(
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            padding = 2.dp,
+//                            onClick = {
+//                            }
+//                        ) {
+//                            Text(text = activityInfo.packageName)
+//                        }
+//                    }
+//                }
+//            })
+//
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(40.dp),
+//                horizontalArrangement = Arrangement.End
+//            ) {
+//                TextButton(onClick = {
+//                    openHostDialog = false
+//                    buttonType = ButtonType.Confirm
+//                }) {
+//                    Text(text = stringResource(id = R.string.confirm))
+//                }
+//
+//            }
+//        }
+//    }
+
+    SettingsScaffold(
+        R.string.preferred_apps,
+        onBackPressed = onBackPressed,
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+
+            }) {
+                ColoredIcon(icon = Icons.Default.Add, description = R.string.add)
+            }
+        }) { padding ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
@@ -248,14 +295,14 @@ fun PreferredAppSettingsRoute(
                 viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
                     item(key = app.flatComponentName) {
                         ClickableRow(padding = 5.dp, onClick = {
-                            openDialog = true
+                            openHostDialog = true
                             hostMap.clear()
 
                             if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                                 manager.getAppHosts(app.packageName)
                                     .also { hasAppHosts = it.isNotEmpty() }.forEach {
-                                    hostMap[it] = hosts.contains(it)
-                                }
+                                        hostMap[it] = hosts.contains(it)
+                                    }
                             }
 
                             hosts.forEach { hostMap[it] = true }
@@ -271,12 +318,7 @@ fun PreferredAppSettingsRoute(
                                 Spacer(modifier = Modifier.width(10.dp))
 
                                 Column {
-                                    Text(
-                                        text = app.displayLabel, fontSize = 16.sp,
-                                        color = MaterialTheme.colorScheme.onSurface,
-                                        fontFamily = HkGroteskFontFamily,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
+                                    HeadlineText(headline = app.displayLabel)
 
                                     Text(
                                         text = hosts.joinToString(", "),

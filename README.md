@@ -5,7 +5,7 @@
 
 [![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
-[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)]()
+[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
 [![License](https://img.shields.io/github/license/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/blob/master/LICENSE)
 
 </div>

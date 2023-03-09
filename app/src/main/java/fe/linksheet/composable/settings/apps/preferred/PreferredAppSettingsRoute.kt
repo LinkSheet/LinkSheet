@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,7 +61,9 @@ fun PreferredAppSettingsRoute(
     LaunchedEffect(Unit) {
         viewModel.loadPreferredApps(context)
         viewModel.filterPreferredAppsAsync(filter)
-        viewModel.loadAppsExceptPreferred(context)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            viewModel.loadAppsExceptPreferred(context, manager!!)
+        }
     }
 
     var openHostDialog by remember { mutableStateOf(false) }
@@ -143,7 +146,7 @@ fun PreferredAppSettingsRoute(
                     }
 
                     Box {
-                        LazyColumn(modifier = Modifier.padding(bottom = 40.dp), content = {
+                        LazyColumn(modifier = Modifier.padding(bottom = 50.dp), content = {
                             hostMap.toSortedMap().forEach { (host, enabled) ->
                                 item(key = host) {
                                     var state by remember { mutableStateOf(enabled) }
@@ -219,49 +222,101 @@ fun PreferredAppSettingsRoute(
         }
     }
 
-//    AlertDialog(onDismissRequest = { }) {
-//        Surface(shape = MaterialTheme.shapes.large) {
-//            LazyColumn(modifier = Modifier.padding(bottom = 40.dp), content = {
-//                Log.d("AppsExceptPreferred2", "${viewModel.appsExceptPreferred.toList()}")
-//                viewModel.appsExceptPreferred.forEach { (activityInfo) ->
-//                    item(key = activityInfo.packageName) {
-//                        ClickableRow(
-//                            verticalAlignment = Alignment.CenterVertically,
-//                            padding = 2.dp,
-//                            onClick = {
-//                            }
-//                        ) {
-//                            Text(text = activityInfo.packageName)
-//                        }
-//                    }
-//                }
-//            })
-//
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(40.dp),
-//                horizontalArrangement = Arrangement.End
-//            ) {
-//                TextButton(onClick = {
-//                    openHostDialog = false
-//                    buttonType = ButtonType.Confirm
-//                }) {
-//                    Text(text = stringResource(id = R.string.confirm))
-//                }
-//
-//            }
-//        }
-//    }
+    var openAppsDialog by remember { mutableStateOf(false) }
+
+    if (openAppsDialog) {
+        AlertDialog(onDismissRequest = { openAppsDialog = false }) {
+            Surface(shape = MaterialTheme.shapes.large) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(color = MaterialTheme.colorScheme.surface)
+                    ) {
+                        HeadlineText(headline = R.string.select_an_app)
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Box {
+                        LazyColumn(modifier = Modifier.padding(bottom = 50.dp), content = {
+                            viewModel.appsExceptPreferred.forEach { info ->
+                                item(key = info.packageName) {
+                                    ClickableRow(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        padding = 5.dp,
+                                        onClick = {
+                                            openAppsDialog = false
+                                            openHostDialog = true
+                                            hostMap.clear()
+
+                                            if (manager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                                manager.getAppHosts(info.packageName)
+                                                    .also { hasAppHosts = it.isNotEmpty() }
+                                                    .forEach {
+                                                        hostMap[it] = false
+                                                    }
+                                            }
+
+                                            displayActivityInfo = info
+
+                                        }
+                                    ) {
+                                        Image(
+                                            bitmap = info.getBitmap(context),
+                                            contentDescription = info.displayLabel,
+                                            modifier = Modifier.size(32.dp)
+                                        )
+
+                                        Spacer(modifier = Modifier.width(10.dp))
+
+                                        Column {
+                                            HeadlineText(headline = info.displayLabel)
+
+                                            if (viewModel.alwaysShowPackageName) {
+                                                Text(
+                                                    text = info.packageName,
+                                                    fontSize = 12.sp,
+                                                    color = MaterialTheme.colorScheme.tertiary
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.BottomCenter)
+                                .height(40.dp),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            TextButton(onClick = {
+                                openAppsDialog = false
+                            }) {
+                                Text(text = stringResource(id = R.string.close))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     SettingsScaffold(
         R.string.preferred_apps,
         onBackPressed = onBackPressed,
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-
-            }) {
-                ColoredIcon(icon = Icons.Default.Add, description = R.string.add)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                FloatingActionButton(onClick = {
+                    openAppsDialog = true
+                }) {
+                    ColoredIcon(icon = Icons.Default.Add, description = R.string.add)
+                }
             }
         }) { padding ->
         LazyColumn(

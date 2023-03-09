@@ -115,4 +115,6 @@
     <string name="frontend">Frontend</string>
     <string name="instance">Instance</string>
     <string name="add">Add</string>
+    <string name="select_an_app">Select an app</string>
+    <string name="close">Close</string>
 </resources>

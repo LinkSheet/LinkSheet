@@ -5,6 +5,7 @@ import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
@@ -171,21 +172,15 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    suspend fun loadAppsExceptPreferred(context: Context) {
+    @RequiresApi(Build.VERSION_CODES.S)
+    suspend fun loadAppsExceptPreferred(
+        context: Context, manager: DomainVerificationManager
+    ) {
         withContext(Dispatchers.IO) {
             val preferredAppsPackage = preferredApps.keys.map { it.packageName }
 
             appsExceptPreferred.clear()
-            appsExceptPreferred.addAll(context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
-                .asSequence()
-                .mapNotNull { packageInfo -> context.packageManager.queryFirstIntentActivityByPackageNameOrNull(packageInfo.packageName) }
-                .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
-                .filter { it.activityInfo.packageName !in preferredAppsPackage }
-                .map { it.toDisplayActivityInfo(context) }
-                .sortedBy { it.displayLabel }
-                .toList())
-
-            Log.d("AppsExceptPreferred", "${appsExceptPreferred.toList()}")
+            appsExceptPreferred.addAll(mapInstalledPackages(context, manager) { it.packageName !in preferredAppsPackage })
         }
     }
 
@@ -266,6 +261,33 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
+    fun mapInstalledPackages(
+        context: Context,
+        manager: DomainVerificationManager,
+        filter: (ActivityInfo) -> Boolean
+    ): List<DisplayActivityInfo> {
+        return context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
+            .asSequence()
+            .mapNotNull { packageInfo ->
+                context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
+                    packageInfo.packageName
+                )
+            }
+            .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID && filter(it.activityInfo) }
+            .filter { resolveInfo ->
+                val state =
+                    manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
+                state != null
+                        && (if (whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
+                        && state.hostToStateMap.isNotEmpty()
+                        && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
+            }
+            .map { it.toDisplayActivityInfo(context) }
+            .sortedBy { it.displayLabel }
+            .toList()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
     suspend fun loadAppsWhichCanHandleLinksAsync(
         context: Context,
         manager: DomainVerificationManager
@@ -273,27 +295,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         whichAppsCanHandleLinksLoading = true
         withContext(Dispatchers.IO) {
             whichAppsCanHandleLinks.clear()
-            whichAppsCanHandleLinks.addAll(
-                context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
-                    .asSequence()
-                    .mapNotNull { packageInfo ->
-                        context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
-                            packageInfo.packageName
-                        )
-                    }
-                    .filter { resolveInfo ->
-                        val state = manager
-                            .getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
-                        state != null
-                                && (if (whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
-                                && state.hostToStateMap.isNotEmpty()
-                                && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
-                    }
-                    .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID }
-                    .map { it.toDisplayActivityInfo(context) }
-                    .sortedBy { it.displayLabel }
-                    .toList()
-            )
+            whichAppsCanHandleLinks.addAll(mapInstalledPackages(context, manager) { true })
 
             whichAppsCanHandleLinksLoading = false
         }

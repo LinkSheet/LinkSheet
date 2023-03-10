@@ -5,7 +5,7 @@
 
 [![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
-[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)]()
+[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
 [![License](https://img.shields.io/github/license/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/blob/master/LICENSE)
 
 </div>
@@ -56,9 +56,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * Resolve redirects either locally or via API hosted @ supabase.com ([Supabase Privacy policy](https://supabase.com/privacy)), API itself does not log anything except timestamp
 * *Experimental:* [ClearURLs](https://github.com/ClearURLs) integration (removes tracking parameters) (report issues/bugs [here](https://github.com/1fexd/clearurlkt))
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
-
-## Planned features
-* Improve landscape mode
+* *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
 
 ## Donations
 
@@ -70,8 +68,3 @@ Code was taken from:
 
 * [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 * [Seal](https://github.com/JunkFood02/Seal)
-
-Re-implemented services:
-
-* [ClearURLs](https://github.com/ClearURLs) (via [clearurlkt](https://github.com/1fexd/clearurlkt))
-* [FastForward (rules only)](https://github.com/FastForwardTeam/FastForward) (via [fastforwardkt](https://github.com/1fexd/fastforwardkt))

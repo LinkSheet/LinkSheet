@@ -4,11 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.tasomaniac.openwith.resolver.ResolveIntents
+import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
-import fe.clearurlskt.loadClearUrlsJson
-import fe.clearurlskt.loadClearUrlsProviders
 import fe.fastforwardkt.getRuleRedirect
-import getBuiltInClearUrlsJson
 
 fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
     component = null
@@ -21,11 +19,7 @@ fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
 //{ act=android.intent.action.VIEW dat=https://twitter.com/... flg=0x10800000 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity (has extras) }
 
 private val clearUrlProviders by lazy {
-    loadClearUrlsProviders(
-        loadClearUrlsJson(
-            getBuiltInClearUrlsJson()!!
-        )
-    )
+    ClearURLLoader.loadBuiltInClearURLProviders()
 }
 
 fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri? {

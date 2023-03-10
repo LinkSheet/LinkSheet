@@ -5,11 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
-import com.google.gson.JsonObject
 import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
-import fe.fastforwardkt.loadFastForwardRuleJson
+import fe.fastforwardkt.FastForwardLoader
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.BuildConfig
@@ -17,13 +16,10 @@ import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.resolver.ResolveListGrouper
-import getBuiltInFastForwardJson
 
 object ResolveIntents {
-    val fastForwardRulesObject: JsonObject by lazy {
-        loadFastForwardRuleJson(
-            getBuiltInFastForwardJson()!!
-        )
+    val fastForwardRulesObject by lazy {
+        FastForwardLoader.loadBuiltInFastForwardRules()
     }
 
     private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }

@@ -111,7 +111,6 @@ class BottomSheetViewModel : ViewModel(),
         ) ?: Theme.System
     )
 
-
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
             result = ResolveIntents.resolve(context, intent, this@BottomSheetViewModel)

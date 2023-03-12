@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -50,13 +49,12 @@ import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
-import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.extension.buildSendTo
-import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -132,7 +130,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         val showBottomSheet: @Composable (IntentResolverResult?) -> Unit = @Composable { result ->
             AppTheme(bottomSheetViewModel.theme) {
-                BottomSheet(result)
+                BottomSheet(result, bottomSheetViewModel.theme == Theme.AmoledBlack)
             }
         }
 
@@ -168,7 +166,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    private fun BottomSheet(result: IntentResolverResult?) {
+    private fun BottomSheet(result: IntentResolverResult?, isBlackTheme: Boolean) {
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
@@ -194,6 +192,7 @@ class BottomSheetActivity : ComponentActivity() {
                     interactionSource = interactionSource,
                     indication = null
                 ) {},
+            isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             sheetContent = {
                 if (result?.uri != null) {

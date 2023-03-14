@@ -160,7 +160,7 @@ class BottomSheetActivity : ComponentActivity() {
         val maxAppListButtonRowHeight = 350.dp
 
         val gridSize = 80.dp
-        var gridItemHeightPackage = 70.dp
+        var gridItemHeightPackage = 80.dp
         var gridItemHeight = 60.dp
     }
 
@@ -469,12 +469,13 @@ class BottomSheetActivity : ComponentActivity() {
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis,
                                 )
+
                                 if (showPackage) {
                                     Text(
                                         text = info.packageName,
                                         fontSize = 12.sp,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
+                                        overflow = TextOverflow.Visible,
+                                        lineHeight = 12.sp,
                                         color = MaterialTheme.colorScheme.tertiary
                                     )
                                 }

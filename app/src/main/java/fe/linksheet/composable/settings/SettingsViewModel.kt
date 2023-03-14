@@ -187,7 +187,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     suspend fun loadBrowsers(context: Context) {
         withContext(Dispatchers.IO) {
             browsers.clear()
-            browsers.addAll(BrowserResolver.resolve(context).sortedBy { it.displayLabel })
+            browsers.addAll(BrowserResolver.resolve(context).sortedBy { it.displayLabel.lowercase() })
         }
     }
 
@@ -283,7 +283,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                         && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
             }
             .map { it.toDisplayActivityInfo(context) }
-            .sortedBy { it.displayLabel }
+            .sortedBy { it.displayLabel.lowercase() }
             .toList()
     }
 

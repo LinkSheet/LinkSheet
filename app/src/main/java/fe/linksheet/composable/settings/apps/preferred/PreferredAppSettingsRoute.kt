@@ -347,7 +347,8 @@ fun PreferredAppSettingsRoute(
             }
 
             if (viewModel.preferredAppsFiltered.isNotEmpty()) {
-                viewModel.preferredAppsFiltered.toSortedMap().forEach { (app, hosts) ->
+                viewModel.preferredAppsFiltered.keys.sortedBy { it.displayLabel.lowercase() }.forEach { app ->
+                    val hosts = viewModel.preferredAppsFiltered[app]!!
                     item(key = app.flatComponentName) {
                         ClickableRow(padding = 5.dp, onClick = {
                             openHostDialog = true

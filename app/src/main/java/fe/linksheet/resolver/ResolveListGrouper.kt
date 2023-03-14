@@ -41,7 +41,7 @@ object ResolveListGrouper {
             }
         }
 
-        comparator = comparator.thenBy { app -> app.displayLabel }
+        comparator = comparator.thenBy { app -> app.displayLabel.lowercase() }
 
         val displayLabels = mutableSetOf<String>()
         var showExtended = false

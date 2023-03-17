@@ -270,13 +270,12 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     ): List<DisplayActivityInfo> {
         return context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
             .asSequence()
-            .also { sequence -> sequence.forEach {
-                Log.d("Package", "$it")
-            }}
             .mapNotNull { packageInfo ->
                 context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
                     packageInfo.packageName
-                )
+                ).also {
+                    Log.d("InstalledPackage", "${packageInfo.packageName}: $it")
+                }
             }
             .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID && filter(it.activityInfo) }
             .filter { resolveInfo ->

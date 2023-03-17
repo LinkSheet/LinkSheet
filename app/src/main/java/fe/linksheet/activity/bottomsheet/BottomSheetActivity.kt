@@ -159,7 +159,7 @@ class BottomSheetActivity : ComponentActivity() {
         val preferredAppItemHeight = 60.dp
         val maxAppListButtonRowHeight = 350.dp
 
-        val gridSize = 80.dp
+        val gridSize = 120.dp
         var gridItemHeightPackage = 80.dp
         var gridItemHeight = 60.dp
     }

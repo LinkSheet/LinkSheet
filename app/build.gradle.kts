@@ -30,6 +30,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            resValue("string", "app_name", "LinkSheet Debug")
+        }
+
         release {
             isMinifyEnabled = true
         }

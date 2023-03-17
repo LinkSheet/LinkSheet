@@ -17,13 +17,16 @@ object ResolveListGrouper {
         context: Context,
         current: List<ResolveInfo>,
         historyMap: Map<String, AppSelectionHistory>?,
-        lastChosenComponent: ComponentName?
+        lastChosenComponent: ComponentName?,
+        returnFilteredItem: Boolean = true,
     ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         val grouped = current.toMutableList()
 
-        val filteredPair =
-            grouped.findIndexed { isLastChosenPosition(it.activityInfo, lastChosenComponent) }
-        val filteredItem = if (filteredPair != null) {
+        val filteredPair = grouped.findIndexed {
+            isLastChosenPosition(it.activityInfo, lastChosenComponent)
+        }
+
+        val filteredItem = if (filteredPair != null && returnFilteredItem) {
             grouped.removeAt(filteredPair.second)
             filteredPair.first.toDisplayActivityInfo(context)
         } else null

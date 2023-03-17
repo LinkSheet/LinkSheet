@@ -18,10 +18,7 @@ import fe.linksheet.extension.sourceIntent
 import fe.linksheet.resolver.ResolveListGrouper
 
 object ResolveIntents {
-    val fastForwardRulesObject by lazy {
-        FastForwardLoader.loadBuiltInFastForwardRules()
-    }
-
+    val fastForwardRulesObject by lazy { FastForwardLoader.loadBuiltInFastForwardRules() }
     private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
 
     suspend fun resolve(
@@ -112,7 +109,8 @@ object ResolveIntents {
             context,
             resolveListPreSort,
             hostHistory,
-            preferredApp?.app?.componentName
+            preferredApp?.app?.componentName,
+            !viewModel.dontShowFilteredItem
         )
 
         val selectedBrowserIsSingleOption =

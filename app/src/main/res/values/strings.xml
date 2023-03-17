@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">LinkSheet</string>
     <string name="open_with">Open with</string>
     <string name="just_once">Just once</string>
     <string name="always">Always</string>
@@ -117,4 +116,6 @@
     <string name="add">Add</string>
     <string name="select_an_app">Select an app</string>
     <string name="close">Close</string>
+    <string name="dont_show_filtered_item">Never show \"last picked app\" section</string>
+    <string name="dont_show_filtered_item_explainer">Will never show the top section which suggests the last used app for the clicked host</string>
 </resources>

@@ -143,6 +143,8 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         ) ?: Theme.System
     )
 
+    var dontShowFilteredItem by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false)
+
     suspend fun filterPreferredAppsAsync(filter: String) {
         withContext(Dispatchers.IO) {
             preferredAppsFiltered.clear()
@@ -268,6 +270,9 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     ): List<DisplayActivityInfo> {
         return context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
             .asSequence()
+            .also { sequence -> sequence.forEach {
+                Log.d("Package", "$it")
+            }}
             .mapNotNull { packageInfo ->
                 context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
                     packageInfo.packageName
@@ -418,6 +423,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onEnableLibRedirect(it: Boolean) {
         this.enableLibRedirect = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.enableLibRedirect, it)
+    }
+
+    fun onDontShowFilteredItem(it: Boolean){
+        this.dontShowFilteredItem = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.dontShowFilteredItem, it)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {

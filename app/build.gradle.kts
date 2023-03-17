@@ -38,6 +38,7 @@ android {
 
         release {
             isMinifyEnabled = true
+            resValue("string", "app_name", "LinkSheet")
         }
     }
 

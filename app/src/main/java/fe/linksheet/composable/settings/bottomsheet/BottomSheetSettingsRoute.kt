@@ -130,6 +130,15 @@ fun BottomSheetSettingsRoute(
                     subtitleId = R.string.display_grid_layout_explainer
                 )
             }
+
+            item(key = "dont_show_filtered_item"){
+                SwitchRow(
+                    checked = viewModel.dontShowFilteredItem,
+                    onChange = { viewModel.onDontShowFilteredItem(it) },
+                    headlineId = R.string.dont_show_filtered_item,
+                    subtitleId = R.string.dont_show_filtered_item_explainer
+                )
+            }
         }
     }
 }

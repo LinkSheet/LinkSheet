@@ -37,6 +37,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.lang.ref.PhantomReference
 import java.util.*
 
 class BottomSheetViewModel : ViewModel(),
@@ -110,6 +111,8 @@ class BottomSheetViewModel : ViewModel(),
             Theme.reader
         ) ?: Theme.System
     )
+
+    val dontShowFilteredItem by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false)
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {

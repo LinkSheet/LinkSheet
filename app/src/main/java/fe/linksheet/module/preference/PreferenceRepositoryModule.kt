@@ -45,7 +45,7 @@ class PreferenceRepository(context: Context) {
         val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
         val followOnlyKnownTrackers = Preference("follow_only_known_trackers", true)
         val theme = Preference("theme", Theme.System)
-
+        val dontShowFilteredItem = Preference("dont_show_filtered_item", false)
 
         val all = listOf(
             enableCopyButton,
@@ -64,7 +64,8 @@ class PreferenceRepository(context: Context) {
             followRedirectsLocalCache,
             followRedirectsExternalService,
             followOnlyKnownTrackers,
-            theme
+            theme,
+            dontShowFilteredItem
         )
     }
 

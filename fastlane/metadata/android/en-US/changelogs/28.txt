@@ -1,0 +1,5 @@
+* Fix: Show black bottom sheet if Amoled Black theme is enabled (#26)
+* Fix: Properly sort lowercase apps (#36)
+* Fix: Show full package name in grid mode (#37)
+* Use different package name in debug mode
+* Add option to never show last used app for host (#38)

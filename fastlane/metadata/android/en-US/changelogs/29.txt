@@ -1,0 +1,40 @@
+From previous debug releases:
+
+* 0.0.23-debug
+
+    * Fix: Display correct app name in screens like "Apps which can open links"
+    * Make the top of the bottom sheet clickable when preferred app is available (#30)
+    * Improve clickable links in texts
+    * Fix: Avoid showing toast twice
+    * Implement libredirectkt (no support for OSM, facil, send, yattee and freetube yet!) (#29)
+
+* 0.0.24-debug
+
+    * Fix: Various bugs in libredirectkt (#29)
+    * Add LibRedirect enable switch for each service
+    * Increase dropdown width
+
+* 0.0.25-debug
+
+    * Fix FastForward crashes
+
+* 0.0.26-debug
+
+    * Add ability to manually add apps to always open verified links on Android 12+ (#32)
+
+* 0.0.27-debug
+
+    * Bump clearurlkt to fix crash (#35)
+
+* 0.0.28-debug
+
+    * Fix: Show black bottom sheet if Amoled Black theme is enabled (#26)
+    * Fix: Properly sort lowercase apps (#36)
+    * Fix: Show full package name in grid mode (#37)
+    * Use different package name in debug mode
+    * Add option to never show last used app for host (#38)
+
+In this release:
+
+* Fix: Increase column size in grid view (#37)
+* Show apps which have user selected links in "Apps which can open links"

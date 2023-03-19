@@ -17,6 +17,8 @@ import fe.linksheet.composable.util.Texts
 import fe.linksheet.libRedirectServiceSettingsRoute
 
 
+val libRedirectBuiltInServices by lazy { LibRedirectLoader.loadBuiltInServices() }
+
 @Composable
 fun LibRedirectSettingsRoute(
     onBackPressed: () -> Unit,
@@ -30,7 +32,7 @@ fun LibRedirectSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            LibRedirectLoader.loadBuiltInServices().forEach {
+            libRedirectBuiltInServices.forEach {
                 item(key = it.key) {
                     ClickableRow(padding = 10.dp, onClick = {
                         navController.navigate(

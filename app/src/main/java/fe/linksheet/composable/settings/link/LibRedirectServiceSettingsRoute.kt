@@ -37,15 +37,14 @@ fun LibRedirectServiceSettingsRoute(
     val context = LocalContext.current
 
     val builtinInstances = remember { LibRedirectLoader.loadBuiltInInstances() }
-    val builtinServices = remember { LibRedirectLoader.loadBuiltInServices() }
 
-    val service = remember { builtinServices.find { it.key == serviceKey } }
+    val service = remember { libRedirectBuiltInServices.find { it.key == serviceKey } }
 
     var expanded by remember { mutableStateOf(false) }
     var selectedFrontend by remember { mutableStateOf<LibRedirectFrontend?>(null) }
     var selectedInstance by remember { mutableStateOf<String?>(null) }
 
-    var instancesForSelectedFrontend = remember { mutableStateListOf<String>() }
+    val instancesForSelectedFrontend = remember { mutableStateListOf<String>() }
 //    var selectedInstance = remember { mutableStateOf<String?>(null) }
 
     val coroutineScope = rememberCoroutineScope()
@@ -60,10 +59,10 @@ fun LibRedirectServiceSettingsRoute(
         Log.d("LibRedirect", "Default $default")
         if (default != null) {
             selectedFrontend =
-                builtinServices.find { it.key == serviceKey }?.frontends?.find { it.key == default.frontendKey }
+                libRedirectBuiltInServices.find { it.key == serviceKey }?.frontends?.find { it.key == default.frontendKey }
             selectedInstance = default.instanceUrl
         } else {
-            selectedFrontend = builtinServices.find { it.key == serviceKey }?.defaultFrontend
+            selectedFrontend = libRedirectBuiltInServices.find { it.key == serviceKey }?.defaultFrontend
             selectedInstance =
                 LibRedirect.getDefaultInstanceForFrontend(selectedFrontend?.key!!)?.firstOrNull()
         }

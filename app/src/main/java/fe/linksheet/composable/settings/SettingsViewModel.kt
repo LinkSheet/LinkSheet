@@ -143,7 +143,9 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         ) ?: Theme.System
     )
 
-    var dontShowFilteredItem by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false)
+    var dontShowFilteredItem by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false
+    )
 
     suspend fun filterPreferredAppsAsync(filter: String) {
         withContext(Dispatchers.IO) {
@@ -182,14 +184,19 @@ class SettingsViewModel : ViewModel(), KoinComponent {
             val preferredAppsPackage = preferredApps.keys.map { it.packageName }
 
             appsExceptPreferred.clear()
-            appsExceptPreferred.addAll(mapInstalledPackages(context, manager) { it.packageName !in preferredAppsPackage })
+            appsExceptPreferred.addAll(
+                mapInstalledPackages(
+                    context,
+                    manager
+                ) { it.packageName !in preferredAppsPackage })
         }
     }
 
     suspend fun loadBrowsers(context: Context) {
         withContext(Dispatchers.IO) {
             browsers.clear()
-            browsers.addAll(BrowserResolver.resolve(context).sortedBy { it.displayLabel.lowercase() })
+            browsers.addAll(
+                BrowserResolver.resolve(context).sortedBy { it.displayLabel.lowercase() })
         }
     }
 
@@ -284,7 +291,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                 state != null
                         && (if (whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
                         && state.hostToStateMap.isNotEmpty()
-                        && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
+                        && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED }
             }
             .map { it.toDisplayActivityInfo(context) }
             .sortedBy { it.displayLabel.lowercase() }
@@ -424,7 +431,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.enableLibRedirect, it)
     }
 
-    fun onDontShowFilteredItem(it: Boolean){
+    fun onDontShowFilteredItem(it: Boolean) {
         this.dontShowFilteredItem = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.dontShowFilteredItem, it)
     }

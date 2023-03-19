@@ -72,22 +72,22 @@ dependencies {
     kapt("androidx.room:room-compiler:2.5.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
     implementation("androidx.activity:activity-compose:1.6.1")
 
     implementation("androidx.compose.ui:ui:1.3.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
-    implementation("androidx.compose.material3:material3:1.1.0-alpha07")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha08")
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.compose.material:material-icons-extended:1.3.1")
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.29.1-alpha")
 
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.1fexd:clearurlkt:0.0.11")
     implementation("com.github.1fexd:fastforwardkt:0.0.11")
-    implementation("com.github.1fexd:libredirectkt:0.0.9")
+    implementation("com.github.1fexd:libredirectkt:0.0.10")
 
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.32")

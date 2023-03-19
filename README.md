@@ -68,3 +68,7 @@ Code was taken from:
 
 * [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 * [Seal](https://github.com/JunkFood02/Seal)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=1fexd/LinkSheet&type=Date)](https://star-history.com/#1fexd/LinkSheet&Date)

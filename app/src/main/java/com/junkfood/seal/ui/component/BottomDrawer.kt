@@ -1,6 +1,5 @@
 package com.junkfood.seal.ui.component
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,9 +48,10 @@ fun BottomDrawer(
             sheetContent = {
                 Surface(
                     color = MaterialTheme.colorScheme.surface,
-                    tonalElevation = if(isBlackTheme) 0.dp else 6.dp,
+                    tonalElevation = if (isBlackTheme) 0.dp else 6.dp,
+                    modifier = Modifier
                 ) {
-                    Column {
+                    Column(modifier = Modifier.navigationBarsPadding()) {
                         sheetContent()
                         Spacer(modifier = Modifier.height(28.dp))
                     }

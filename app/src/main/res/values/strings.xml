@@ -90,7 +90,7 @@
     <string name="follow_redirects_external_service">Follow redirects via external service</string>
     <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy)">Privacy policy</annotation>)</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Privacy policy</string>
-    <string name="follow_only_known_trackers">Follow only known tackers</string>
+    <string name="follow_only_known_trackers">Follow only known trackers</string>
     <string name="follow_only_known_trackers_explainer">Only attempt to follow redirects when the host is known to be a tracker/redirect</string>
     <string name="theme">Theme</string>
     <string name="theme_explainer">Change the theme of the app</string>

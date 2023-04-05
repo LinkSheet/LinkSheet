@@ -7,6 +7,7 @@ import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
+import timber.log.Timber
 
 fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
     component = null
@@ -48,19 +49,19 @@ fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri?
                 append(uriData.substring(uriData.indexOf(host) + host.length))
             }
 
-            Log.d("Url Pre modification", url)
+            Timber.d("Url Pre modification", url)
 
             if (fastForward) {
                 getRuleRedirect(url, ResolveIntents.fastForwardRulesObject)?.let { url = it }
             }
 
-            Log.d("Url Post FastForward", url)
+            Timber.d("Url Post FastForward", url)
 
             if (clearUrl) {
                 url = clearUrl(url,clearUrlProviders)
             }
 
-            Log.d("Url Post ClearURL", url)
+            Timber.d("Url Post ClearURL", url)
 
             return Uri.parse(url)
         }

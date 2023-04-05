@@ -37,6 +37,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 import java.lang.ref.PhantomReference
 import java.util.*
 
@@ -133,7 +134,7 @@ class BottomSheetViewModel : ViewModel(),
     }
 
     suspend fun persistSelectedIntentAsync(intent: Intent, always: Boolean) {
-        Log.d("PersistingSelectedIntent", "Component: ${intent.component}")
+        Timber.d("PersistingSelectedIntent", "Component: ${intent.component}")
         return withContext(Dispatchers.IO) {
             intent.component?.let { component ->
                 val host = intent.data!!.host!!.lowercase(Locale.getDefault())
@@ -144,7 +145,7 @@ class BottomSheetViewModel : ViewModel(),
                     alwaysPreferred = always
                 )
 
-                Log.d("PersistingSelectedIntent", "Inserting $app")
+                Timber.d("PersistingSelectedIntent", "Inserting $app")
                 database.preferredAppDao().insert(app)
 
                 val historyEntry = AppSelectionHistory(
@@ -154,7 +155,7 @@ class BottomSheetViewModel : ViewModel(),
                 )
 
                 database.appSelectionHistoryDao().insert(historyEntry)
-                Log.d("PersistingSelectedIntent", "Inserting $historyEntry")
+                Timber.d("PersistingSelectedIntent", "Inserting $historyEntry")
             }
         }
     }
@@ -188,7 +189,7 @@ class BottomSheetViewModel : ViewModel(),
             }
 
             if (redirect != null) {
-                Log.d("FollowRedirect", "From local cache: $redirect")
+                Timber.d("FollowRedirect", "From local cache: $redirect")
                 return Result.success(
                     FollowRedirect(
                         redirect.resolvedUrl,
@@ -218,12 +219,12 @@ class BottomSheetViewModel : ViewModel(),
         uri: Uri,
         fastForwardRulesObject: JsonObject
     ): Result<FollowRedirect> {
-        Log.d("FollowRedirects", "Following redirects for $uri")
+        Timber.d("FollowRedirects", "Following redirects for $uri")
 
         val followUri = uri.toString()
         if (!followOnlyKnownTrackers || isTracker(followUri, fastForwardRulesObject)) {
             if (followRedirectsExternalService) {
-                Log.d("FollowRedirects", "Using external service for $followUri")
+                Timber.d("FollowRedirects", "Using external service for $followUri")
 
                 val response = followRedirectsExternal(followUri)
                 if (response.isSuccess) {
@@ -236,7 +237,7 @@ class BottomSheetViewModel : ViewModel(),
                 }
             }
 
-            Log.d("FollowRedirects", "Using local service for $followUri")
+            Timber.d("FollowRedirects", "Using local service for $followUri")
             return Result.success(
                 FollowRedirect(
                     followRedirectsLocal(followUri),
@@ -259,7 +260,7 @@ class BottomSheetViewModel : ViewModel(),
         }
 
         val obj = con.readToJson().asJsonObject
-        Log.d("FollowRedirects", "Returned json $obj")
+        Timber.d("FollowRedirects", "Returned json $obj")
 
         return obj.string("resolvedUrl")?.let {
             Result.success(it)

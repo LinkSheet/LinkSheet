@@ -16,6 +16,7 @@ import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.resolver.ResolveListGrouper
+import timber.log.Timber
 
 object ResolveIntents {
     val fastForwardRulesObject by lazy { FastForwardLoader.loadBuiltInFastForwardRules() }
@@ -26,7 +27,7 @@ object ResolveIntents {
         intent: Intent,
         viewModel: BottomSheetViewModel
     ): IntentResolverResult {
-        Log.d("ResolveIntents", "Intent: $intent")
+        Timber.d("ResolveIntents", "Intent: $intent")
 
         var uri = intent.getUri(viewModel.useClearUrls, viewModel.useFastForwardRules)
         var followRedirect: BottomSheetViewModel.FollowRedirect? = null
@@ -44,7 +45,7 @@ object ResolveIntents {
 
         if (viewModel.enableLibRedirect) {
             val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
-            Log.d("ResolveIntents", "LibRedirect $service")
+            Timber.d("ResolveIntents", "LibRedirect $service")
             if (service != null && viewModel.loadLibRedirectState(service.key) == true) {
                 val savedDefault = viewModel.getLibRedirectDefault(service.key)
                 val redirected = if (savedDefault != null) {
@@ -63,7 +64,7 @@ object ResolveIntents {
                     )
                 }
 
-                Log.d("ResolveIntents", "LibRedirect $redirected")
+                Timber.d("ResolveIntents", "LibRedirect $redirected")
                 if (redirected != null) {
                     uri = Uri.parse(redirected)
                 }
@@ -75,20 +76,20 @@ object ResolveIntents {
             PreferredResolver.resolve(context, it.host!!)
         }
 
-        Log.d("ResolveIntents", "PreferredApp: $preferredApp")
+        Timber.d("ResolveIntents", "PreferredApp: $preferredApp")
 
         val hostHistory = uri?.let {
             PreferredResolver.resolveHostHistory(context, it.host!!)
         } ?: emptyMap()
 
 
-        Log.d("ResolveIntents", "HostHistory: $hostHistory")
+        Timber.d("ResolveIntents", "HostHistory: $hostHistory")
 
 
         val alwaysPreferred = preferredApp?.app?.alwaysPreferred
 
         val sourceIntent = intent.sourceIntent(uri)
-        Log.d("ResolveIntents", "${sourceIntent.dataString}")
+        Timber.d("ResolveIntents", "${sourceIntent.dataString}")
 
         val resolveListPreSort = context.packageManager.queryIntentActivities(
             sourceIntent, PackageManager.MATCH_ALL
@@ -98,7 +99,7 @@ object ResolveIntents {
             it.activityInfo.packageName == BuildConfig.APPLICATION_ID
         }
 
-        Log.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
+        Timber.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
         val browserMode = if (sourceIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, resolveListPreSort, viewModel)
@@ -121,7 +122,7 @@ object ResolveIntents {
             browserMode?.first == BrowserHandler.BrowserMode.None && resolveListPreSort.size == 1
 
 
-        Log.d(
+        Timber.d(
             "ResolveIntents",
             "Resolved: $resolved, filteredItem: $filteredItem, showExtended: $showExtended, selectedBrowserIsSingleOption: $selectedBrowserIsSingleOption"
         )

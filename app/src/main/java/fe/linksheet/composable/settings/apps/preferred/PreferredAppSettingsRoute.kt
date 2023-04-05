@@ -37,6 +37,7 @@ import fe.linksheet.extension.getAppHosts
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 enum class ButtonType {
     Confirm, DeleteAll, AddAll
@@ -74,7 +75,7 @@ fun PreferredAppSettingsRoute(
 
     LaunchedEffect(openHostDialog) {
         if (!openHostDialog) {
-            Log.d("Closed dialog", "$displayActivityInfo")
+            Timber.d("Closed dialog", "$displayActivityInfo")
             when (buttonType) {
                 ButtonType.DeleteAll -> {
                     viewModel.deletePreferredAppWherePackageAsync(displayActivityInfo!!.packageName)

@@ -6,6 +6,7 @@ import fe.httpkt.json.JsonBody
 import fe.linksheet.redirectResolverApiKey
 import fe.linksheet.redirectResolverApiUrl
 import org.koin.dsl.module
+import timber.log.Timber
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -30,7 +31,7 @@ class RedirectResolver(
 
     fun resolveLocal(url: String): HttpURLConnection {
         val con = request.head(url, followRedirects = true)
-        Log.d("ResolveLocal", "$con")
+        Timber.d("ResolveLocal", "$con")
         return if (con.responseCode in 400..499) {
             request.getFn(url, followRedirects = true, dataBuilder = {
                 headers {

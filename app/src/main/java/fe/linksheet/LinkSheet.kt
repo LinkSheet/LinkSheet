@@ -10,6 +10,7 @@ import fe.linksheet.module.request.requestModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
+import timber.log.Timber
 
 class LinkSheet : Application() {
     override fun attachBaseContext(base: Context) {
@@ -19,6 +20,10 @@ class LinkSheet : Application() {
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
 
         startKoin {
             androidLogger()

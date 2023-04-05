@@ -10,17 +10,18 @@ import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 
 object PreferredResolver : KoinComponent {
     private val database by inject<LinkSheetDatabase>()
 
     fun resolve(context: Context, host: String): PreferredDisplayActivityInfo? {
-        Log.d("PreferredResolver", "Host: $host")
+        Timber.d("PreferredResolver", "Host: $host")
 
         return database.preferredAppDao().preferredAppByHost(host)?.let { app ->
-            Log.d("PreferredResolver", "App: $app")
+            Timber.d("PreferredResolver", "App: $app")
             app.resolve(context)?.let {
-                Log.d("PreferredResolver", "DisplayActivityInfo: $it")
+                Timber.d("PreferredResolver", "DisplayActivityInfo: $it")
                 PreferredDisplayActivityInfo(app, it)
             }
         }

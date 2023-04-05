@@ -36,6 +36,7 @@ import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 
 
 class SettingsViewModel : ViewModel(), KoinComponent {
@@ -213,7 +214,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     suspend fun deletePreferredAppAsync(host: String, packageName: String) {
-        Log.d("DeletePreferredApp", host)
+        Timber.d("DeletePreferredApp", host)
         withContext(Dispatchers.IO) {
             database.preferredAppDao().deleteByPackageNameAndHost(host, packageName)
         }
@@ -281,7 +282,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                 context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
                     packageInfo.packageName
                 ).also {
-                    Log.d("InstalledPackage", "${packageInfo.packageName}: $it")
+                    Timber.d("InstalledPackage", "${packageInfo.packageName}: $it")
                 }
             }
             .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID && filter(it.activityInfo) }

@@ -25,6 +25,7 @@ import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -56,7 +57,7 @@ fun LibRedirectServiceSettingsRoute(
 
     LaunchedEffect(viewModel.libRedirectDefault) {
         val default = viewModel.libRedirectDefault
-        Log.d("LibRedirect", "Default $default")
+        Timber.d("LibRedirect", "Default $default")
         if (default != null) {
             selectedFrontend =
                 libRedirectBuiltInServices.find { it.key == serviceKey }?.frontends?.find { it.key == default.frontendKey }

@@ -85,9 +85,11 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.29.1-alpha")
 
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.github.1fexd:clearurlkt:0.0.13")
+    implementation("com.github.1fexd:clearurlkt:0.0.14")
     implementation("com.github.1fexd:fastforwardkt:0.0.11")
     implementation("com.github.1fexd:libredirectkt:0.0.11")
+
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.32")

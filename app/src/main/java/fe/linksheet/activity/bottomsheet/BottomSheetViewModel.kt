@@ -114,6 +114,7 @@ class BottomSheetViewModel : ViewModel(),
     )
 
     val dontShowFilteredItem by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false)
+    val useTextShareCopyButtons by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.useTextShareCopyButtons) ?: false)
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {

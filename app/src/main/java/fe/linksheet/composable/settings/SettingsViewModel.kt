@@ -148,6 +148,9 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false
     )
 
+    var useTextShareCopyButtons by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.useTextShareCopyButtons) ?: false)
+
+
     suspend fun filterPreferredAppsAsync(filter: String) {
         withContext(Dispatchers.IO) {
             preferredAppsFiltered.clear()
@@ -435,6 +438,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onDontShowFilteredItem(it: Boolean) {
         this.dontShowFilteredItem = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.dontShowFilteredItem, it)
+    }
+
+    fun onUseTextShareCopyButtons(it: Boolean){
+        this.useTextShareCopyButtons = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.useTextShareCopyButtons, it)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {

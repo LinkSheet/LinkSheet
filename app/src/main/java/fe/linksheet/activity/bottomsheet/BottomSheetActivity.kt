@@ -550,8 +550,10 @@ class BottomSheetActivity : ComponentActivity() {
                 .height(buttonRowHeight)
                 .padding(horizontal = 15.dp),
         ) {
+            val padding = PaddingValues(horizontal = 18.dp)
+
             if (bottomSheetViewModel.enableCopyButton) {
-                OutlinedButton(contentPadding = PaddingValues(horizontal = 18.dp), onClick = {
+                val copyOnClick: () -> Unit = {
                     clipboard.setPrimaryClip(ClipData.newPlainText("URL", result.uri.toString()))
                     if (!bottomSheetViewModel.disableToasts) {
                         Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
@@ -560,19 +562,35 @@ class BottomSheetActivity : ComponentActivity() {
                     if (bottomSheetViewModel.hideAfterCopying) {
                         coroutineScope.launch { drawerState.hide() }
                     }
-                }) {
+                }
+
+                val text: @Composable RowScope.() -> Unit = {
                     Text(text = stringResource(id = R.string.copy))
+                }
+
+                if(bottomSheetViewModel.useTextShareCopyButtons){
+                    TextButton(contentPadding = padding, onClick = copyOnClick, content = text)
+                } else {
+                    OutlinedButton(contentPadding = padding, onClick = copyOnClick, content = text)
                 }
 
                 Spacer(modifier = Modifier.width(2.dp))
             }
 
             if (bottomSheetViewModel.enableSendButton) {
-                OutlinedButton(contentPadding = PaddingValues(horizontal = 18.dp), onClick = {
+                val shareToOnClick: () -> Unit = {
                     startActivity(Intent().buildSendTo(result.uri))
                     finish()
-                }) {
+                }
+
+                val text: @Composable RowScope.() -> Unit = {
                     Text(text = stringResource(id = R.string.send_to))
+                }
+
+                if(bottomSheetViewModel.useTextShareCopyButtons){
+                    TextButton(contentPadding = padding, onClick = shareToOnClick, content = text)
+                } else {
+                    OutlinedButton(contentPadding = padding, onClick = shareToOnClick, content = text)
                 }
             }
 

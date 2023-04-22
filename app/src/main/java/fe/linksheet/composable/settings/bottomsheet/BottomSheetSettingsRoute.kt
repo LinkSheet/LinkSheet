@@ -96,6 +96,17 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
+            if(viewModel.enableCopyButton || viewModel.enableSendButton){
+                item(key = "use_text_share_copy_buttons") {
+                    SwitchRow(
+                        checked = viewModel.useTextShareCopyButtons,
+                        onChange = { viewModel.onUseTextShareCopyButtons(it) },
+                        headlineId = R.string.use_text_share_copy_buttons,
+                        subtitleId = R.string.use_text_share_copy_buttons_explainer
+                    )
+                }
+            }
+
             item(key = "enable_single_tap") {
                 SwitchRow(checked = viewModel.singleTap, onChange = {
                     viewModel.onSingleTap(it)
@@ -131,7 +142,7 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = "dont_show_filtered_item"){
+            item(key = "dont_show_filtered_item") {
                 SwitchRow(
                     checked = viewModel.dontShowFilteredItem,
                     onChange = { viewModel.onDontShowFilteredItem(it) },

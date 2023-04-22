@@ -86,9 +86,9 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.29.1-alpha")
 
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.github.1fexd:clearurlkt:0.0.14")
+    implementation("com.github.1fexd:clearurlkt:0.0.15")
     implementation("com.github.1fexd:fastforwardkt:0.0.11")
-    implementation("com.github.1fexd:libredirectkt:0.0.11")
+    implementation("com.github.1fexd:libredirectkt:0.0.12")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
 

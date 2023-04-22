@@ -31,7 +31,7 @@ class RedirectResolver(
 
     fun resolveLocal(url: String): HttpURLConnection {
         val con = request.head(url, followRedirects = true)
-        Timber.d("ResolveLocal", "$con")
+        Timber.tag("ResolveLocal").d("$con")
         return if (con.responseCode in 400..499) {
             request.getFn(url, followRedirects = true, dataBuilder = {
                 headers {

@@ -16,12 +16,12 @@ object PreferredResolver : KoinComponent {
     private val database by inject<LinkSheetDatabase>()
 
     fun resolve(context: Context, host: String): PreferredDisplayActivityInfo? {
-        Timber.d("PreferredResolver", "Host: $host")
+        Timber.tag("PreferredResolver").d("Host: $host")
 
         return database.preferredAppDao().preferredAppByHost(host)?.let { app ->
-            Timber.d("PreferredResolver", "App: $app")
+            Timber.tag("PreferredResolver").d("App: $app")
             app.resolve(context)?.let {
-                Timber.d("PreferredResolver", "DisplayActivityInfo: $it")
+                Timber.tag("PreferredResolver").d("DisplayActivityInfo: $it")
                 PreferredDisplayActivityInfo(app, it)
             }
         }

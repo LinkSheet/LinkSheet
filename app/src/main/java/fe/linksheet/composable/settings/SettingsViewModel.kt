@@ -217,7 +217,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
     suspend fun deletePreferredAppAsync(host: String, packageName: String) {
-        Timber.d("DeletePreferredApp", host)
+        Timber.tag("DeletePreferredApp").d(host)
         withContext(Dispatchers.IO) {
             database.preferredAppDao().deleteByPackageNameAndHost(host, packageName)
         }
@@ -285,7 +285,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
                 context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
                     packageInfo.packageName
                 ).also {
-                    Timber.d("InstalledPackage", "${packageInfo.packageName}: $it")
+                    Timber.tag("InstalledPackage").d("${packageInfo.packageName}: $it")
                 }
             }
             .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID && filter(it.activityInfo) }

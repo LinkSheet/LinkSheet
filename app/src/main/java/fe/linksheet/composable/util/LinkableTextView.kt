@@ -145,7 +145,7 @@ private fun spannableStringToAnnotatedString(
                             end = end
                         )
                         is BulletSpan -> {
-                            Timber.d("StringResources", "BulletSpan not supported yet")
+                            Timber.tag("StringResources").d("BulletSpan not supported yet")
                             addStyle(style = SpanStyle(), start = start, end = end)
                         }
                         is AbsoluteSizeSpan -> addStyle(

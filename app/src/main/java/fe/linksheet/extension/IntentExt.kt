@@ -50,19 +50,19 @@ fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri?
                 append(uriData.substring(uriData.indexOf(host) + host.length))
             }
 
-            Timber.d("Url Pre modification", url)
+            Timber.tag("Url Pre modification").d(url)
 
             if (fastForward) {
                 getRuleRedirect(url, ResolveIntents.fastForwardRulesObject)?.let { url = it }
             }
 
-            Timber.d("Url Post FastForward", url)
+            Timber.tag("Url Post FastForward").d(url)
 
             if (clearUrl) {
                 url = clearUrl(url,clearUrlProviders)
             }
 
-            Timber.d("Url Post ClearURL", url)
+            Timber.tag("Url Post ClearURL").d(url)
 
             return Uri.parse(url)
         }

@@ -57,7 +57,7 @@ fun LibRedirectServiceSettingsRoute(
 
     LaunchedEffect(viewModel.libRedirectDefault) {
         val default = viewModel.libRedirectDefault
-        Timber.d("LibRedirect", "Default $default")
+        Timber.tag("LibRedirect").d("Default $default")
         if (default != null) {
             selectedFrontend =
                 libRedirectBuiltInServices.find { it.key == serviceKey }?.frontends?.find { it.key == default.frontendKey }

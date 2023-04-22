@@ -75,7 +75,7 @@ fun PreferredAppSettingsRoute(
 
     LaunchedEffect(openHostDialog) {
         if (!openHostDialog) {
-            Timber.d("Closed dialog", "$displayActivityInfo")
+            Timber.tag("Closed dialog").d("$displayActivityInfo")
             when (buttonType) {
                 ButtonType.DeleteAll -> {
                     viewModel.deletePreferredAppWherePackageAsync(displayActivityInfo!!.packageName)

@@ -27,7 +27,7 @@ object ResolveIntents {
         intent: Intent,
         viewModel: BottomSheetViewModel
     ): IntentResolverResult {
-        Timber.d("ResolveIntents", "Intent: $intent")
+        Timber.tag("ResolveIntents").d("Intent: $intent")
 
         var uri = intent.getUri(viewModel.useClearUrls, viewModel.useFastForwardRules)
         var followRedirect: BottomSheetViewModel.FollowRedirect? = null
@@ -45,7 +45,7 @@ object ResolveIntents {
 
         if (viewModel.enableLibRedirect) {
             val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
-            Timber.d("ResolveIntents", "LibRedirect $service")
+            Timber.tag("ResolveIntents").d("LibRedirect $service")
             if (service != null && viewModel.loadLibRedirectState(service.key) == true) {
                 val savedDefault = viewModel.getLibRedirectDefault(service.key)
                 val redirected = if (savedDefault != null) {
@@ -64,7 +64,7 @@ object ResolveIntents {
                     )
                 }
 
-                Timber.d("ResolveIntents", "LibRedirect $redirected")
+                Timber.tag("ResolveIntents").d("LibRedirect $redirected")
                 if (redirected != null) {
                     uri = Uri.parse(redirected)
                 }
@@ -76,20 +76,20 @@ object ResolveIntents {
             PreferredResolver.resolve(context, it.host!!)
         }
 
-        Timber.d("ResolveIntents", "PreferredApp: $preferredApp")
+        Timber.tag("ResolveIntents").d("PreferredApp: $preferredApp")
 
         val hostHistory = uri?.let {
             PreferredResolver.resolveHostHistory(context, it.host!!)
         } ?: emptyMap()
 
 
-        Timber.d("ResolveIntents", "HostHistory: $hostHistory")
+        Timber.tag("ResolveIntents").d("HostHistory: $hostHistory")
 
 
         val alwaysPreferred = preferredApp?.app?.alwaysPreferred
 
         val sourceIntent = intent.sourceIntent(uri)
-        Timber.d("ResolveIntents", "${sourceIntent.dataString}")
+        Timber.tag("ResolveIntents").d("SourceIntent: $sourceIntent")
 
         val resolveListPreSort = context.packageManager.queryIntentActivities(
             sourceIntent, PackageManager.MATCH_ALL
@@ -99,7 +99,7 @@ object ResolveIntents {
             it.activityInfo.packageName == BuildConfig.APPLICATION_ID
         }
 
-        Timber.d("ResolveIntents", "PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
+        Timber.tag("ResolveIntents").d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
         val browserMode = if (sourceIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, resolveListPreSort, viewModel)
@@ -122,8 +122,7 @@ object ResolveIntents {
             browserMode?.first == BrowserHandler.BrowserMode.None && resolveListPreSort.size == 1
 
 
-        Timber.d(
-            "ResolveIntents",
+        Timber.tag("ResolveIntents").d(
             "Resolved: $resolved, filteredItem: $filteredItem, showExtended: $showExtended, selectedBrowserIsSingleOption: $selectedBrowserIsSingleOption"
         )
 

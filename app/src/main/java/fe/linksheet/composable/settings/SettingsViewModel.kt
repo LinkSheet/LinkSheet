@@ -149,7 +149,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     )
 
     var useTextShareCopyButtons by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.useTextShareCopyButtons) ?: false)
-
+    var previewUrl by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false)
 
     suspend fun filterPreferredAppsAsync(filter: String) {
         withContext(Dispatchers.IO) {
@@ -443,6 +443,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onUseTextShareCopyButtons(it: Boolean){
         this.useTextShareCopyButtons = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.useTextShareCopyButtons, it)
+    }
+
+    fun onPreviewUrl(it: Boolean){
+        this.previewUrl = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.previewUrl, it)
     }
 
     suspend fun queryWhitelistedBrowsersAsync(context: Context) {

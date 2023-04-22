@@ -96,7 +96,7 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            if(viewModel.enableCopyButton || viewModel.enableSendButton){
+            if (viewModel.enableCopyButton || viewModel.enableSendButton) {
                 item(key = "use_text_share_copy_buttons") {
                     SwitchRow(
                         checked = viewModel.useTextShareCopyButtons,
@@ -148,6 +148,15 @@ fun BottomSheetSettingsRoute(
                     onChange = { viewModel.onDontShowFilteredItem(it) },
                     headlineId = R.string.dont_show_filtered_item,
                     subtitleId = R.string.dont_show_filtered_item_explainer
+                )
+            }
+
+            item(key = "preview_url") {
+                SwitchRow(
+                    checked = viewModel.previewUrl,
+                    onChange = { viewModel.onPreviewUrl(it) },
+                    headlineId = R.string.preview_url,
+                    subtitleId = R.string.preview_url_explainer
                 )
             }
         }

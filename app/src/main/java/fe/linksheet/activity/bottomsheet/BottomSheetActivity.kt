@@ -103,7 +103,8 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            val isRegularPreferredApp = completed?.alwaysPreferred == true && completed.filteredItem != null
+            val isRegularPreferredApp =
+                completed?.alwaysPreferred == true && completed.filteredItem != null
             if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
@@ -138,8 +139,10 @@ class BottomSheetActivity : ComponentActivity() {
             setContent {
                 var hasShownToast by remember { mutableStateOf(false) }
                 LaunchedEffect(bottomSheetViewModel.result) {
-                    if(!hasShownToast){
-                        bottomSheetViewModel.result?.followRedirect?.resolveType?.let(makeResolveToast)
+                    if (!hasShownToast) {
+                        bottomSheetViewModel.result?.followRedirect?.resolveType?.let(
+                            makeResolveToast
+                        )
                         hasShownToast = true
                     }
                 }
@@ -196,7 +199,8 @@ class BottomSheetActivity : ComponentActivity() {
             drawerState = drawerState,
             sheetContent = {
                 if (result?.uri != null) {
-                    val showPackage = remember { result.showExtended || bottomSheetViewModel.alwaysShowPackageName }
+                    val showPackage =
+                        remember { result.showExtended || bottomSheetViewModel.alwaysShowPackageName }
 
                     val baseHeight = if (bottomSheetViewModel.gridLayout) {
                         val appsPerRow = LocalConfiguration.current.screenWidthDp / gridSize.value
@@ -209,7 +213,8 @@ class BottomSheetActivity : ComponentActivity() {
                             launchScope = launchScope,
                             drawerState = drawerState,
                             baseHeight = baseHeight,
-                            showPackage = showPackage
+                            showPackage = showPackage,
+                            previewUrl = bottomSheetViewModel.previewUrl
                         )
                     } else {
                         OpenWithPreferred(
@@ -217,7 +222,8 @@ class BottomSheetActivity : ComponentActivity() {
                             launchScope = launchScope,
                             drawerState = drawerState,
                             baseHeight = baseHeight,
-                            showPackage = showPackage
+                            showPackage = showPackage,
+                            previewUrl = bottomSheetViewModel.previewUrl
                         )
                     }
                 } else {
@@ -246,7 +252,8 @@ class BottomSheetActivity : ComponentActivity() {
         launchScope: CoroutineScope,
         drawerState: ModalBottomSheetState,
         baseHeight: Dp,
-        showPackage: Boolean
+        showPackage: Boolean,
+        previewUrl: Boolean
     ) {
         val filteredItem = result.filteredItem!!
 
@@ -262,7 +269,7 @@ class BottomSheetActivity : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 28.dp)
-                    .height(preferredAppItemHeight),
+                    .heightIn(min = preferredAppItemHeight),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
@@ -290,6 +297,11 @@ class BottomSheetActivity : ComponentActivity() {
                             color = MaterialTheme.colorScheme.tertiary
                         )
                     }
+
+                    if (previewUrl) {
+                        UrlPreview(uri = result.uri)
+                    }
+
                 }
             }
 
@@ -340,16 +352,22 @@ class BottomSheetActivity : ComponentActivity() {
         launchScope: CoroutineScope,
         drawerState: ModalBottomSheetState,
         baseHeight: Dp,
-        showPackage: Boolean
+        showPackage: Boolean,
+        previewUrl: Boolean,
     ) {
         Spacer(modifier = Modifier.height(15.dp))
 
-        Text(
-            text = stringResource(id = R.string.open_with),
-            fontFamily = HkGroteskFontFamily,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(horizontal = 28.dp)
-        )
+        Column(modifier = Modifier.padding(horizontal = 28.dp)) {
+            Text(
+                text = stringResource(id = R.string.open_with),
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold,
+            )
+
+            if (previewUrl) {
+                UrlPreview(uri = result.uri)
+            }
+        }
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -568,7 +586,7 @@ class BottomSheetActivity : ComponentActivity() {
                     Text(text = stringResource(id = R.string.copy))
                 }
 
-                if(bottomSheetViewModel.useTextShareCopyButtons){
+                if (bottomSheetViewModel.useTextShareCopyButtons) {
                     TextButton(contentPadding = padding, onClick = copyOnClick, content = text)
                 } else {
                     OutlinedButton(contentPadding = padding, onClick = copyOnClick, content = text)
@@ -587,10 +605,14 @@ class BottomSheetActivity : ComponentActivity() {
                     Text(text = stringResource(id = R.string.send_to))
                 }
 
-                if(bottomSheetViewModel.useTextShareCopyButtons){
+                if (bottomSheetViewModel.useTextShareCopyButtons) {
                     TextButton(contentPadding = padding, onClick = shareToOnClick, content = text)
                 } else {
-                    OutlinedButton(contentPadding = padding, onClick = shareToOnClick, content = text)
+                    OutlinedButton(
+                        contentPadding = padding,
+                        onClick = shareToOnClick,
+                        content = text
+                    )
                 }
             }
 
@@ -640,6 +662,15 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    private fun UrlPreview(uri: Uri?) {
+        Text(
+            text = uri.toString(),
+            fontSize = 12.sp,
+            lineHeight = 12.sp,
+            color = MaterialTheme.colorScheme.tertiary
+        )
+    }
 
     private suspend fun launchApp(info: DisplayActivityInfo, uri: Uri?, always: Boolean = false) {
         val intentFrom = info.intentFrom(intent.sourceIntent(uri))

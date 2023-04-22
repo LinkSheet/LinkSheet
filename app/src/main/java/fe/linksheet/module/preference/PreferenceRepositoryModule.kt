@@ -47,6 +47,7 @@ class PreferenceRepository(context: Context) {
         val theme = Preference("theme", Theme.System)
         val dontShowFilteredItem = Preference("dont_show_filtered_item", false)
         val useTextShareCopyButtons = Preference("use_text_share_copy_buttons", false)
+        val previewUrl = Preference("preview_url", false)
 
         val all = listOf(
             enableCopyButton,
@@ -67,7 +68,8 @@ class PreferenceRepository(context: Context) {
             followOnlyKnownTrackers,
             theme,
             dontShowFilteredItem,
-            useTextShareCopyButtons
+            useTextShareCopyButtons,
+            previewUrl
         )
     }
 

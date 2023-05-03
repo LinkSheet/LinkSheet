@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.util.Log
 import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
@@ -15,6 +14,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
+import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.resolver.ResolveListGrouper
 import timber.log.Timber
 
@@ -72,6 +72,10 @@ object ResolveIntents {
         }
 
 
+        val downloadable = if (viewModel.enableDownloader && uri != null) {
+            viewModel.checkIsDownloadable(uri!!)
+        } else Downloader.DownloadCheckResult.NonDownloadable
+
         val preferredApp = uri?.let {
             PreferredResolver.resolve(context, it.host!!)
         }
@@ -99,7 +103,8 @@ object ResolveIntents {
             it.activityInfo.packageName == BuildConfig.APPLICATION_ID
         }
 
-        Timber.tag("ResolveIntents").d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
+        Timber.tag("ResolveIntents")
+            .d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
         val browserMode = if (sourceIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, resolveListPreSort, viewModel)
@@ -133,7 +138,8 @@ object ResolveIntents {
             showExtended,
             alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
-            followRedirect
+            followRedirect,
+            downloadable
         )
     }
 }

@@ -48,6 +48,8 @@ class PreferenceRepository(context: Context) {
         val dontShowFilteredItem = Preference("dont_show_filtered_item", false)
         val useTextShareCopyButtons = Preference("use_text_share_copy_buttons", false)
         val previewUrl = Preference("preview_url", false)
+        val enableDownloader = Preference("enable_downloader", false)
+        val downloaderCheckUrlMimeType = Preference("downloaderCheckUrlMimeType", false)
 
         val all = listOf(
             enableCopyButton,
@@ -69,7 +71,9 @@ class PreferenceRepository(context: Context) {
             theme,
             dontShowFilteredItem,
             useTextShareCopyButtons,
-            previewUrl
+            previewUrl,
+            enableDownloader,
+            downloaderCheckUrlMimeType
         )
     }
 

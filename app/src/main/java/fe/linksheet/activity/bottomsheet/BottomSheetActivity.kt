@@ -1,9 +1,11 @@
 package fe.linksheet.activity.bottomsheet
 
+import android.app.DownloadManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -13,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -52,6 +55,7 @@ import fe.linksheet.R
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.extension.startPackageInfoActivity
+import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.ui.theme.Theme
@@ -59,6 +63,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlin.math.ceil
+
 
 class BottomSheetActivity : ComponentActivity() {
     private lateinit var bottomSheetViewModel: BottomSheetViewModel
@@ -103,8 +109,9 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            val isRegularPreferredApp =
-                completed?.alwaysPreferred == true && completed.filteredItem != null
+            val isRegularPreferredApp = completed?.alwaysPreferred == true
+                    && completed.filteredItem != null
+
             if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
                 if (!bottomSheetViewModel.disableToasts) {
@@ -135,7 +142,7 @@ class BottomSheetActivity : ComponentActivity() {
             }
         }
 
-        if (bottomSheetViewModel.followRedirects) {
+        if (bottomSheetViewModel.followRedirects || bottomSheetViewModel.enableDownloader) {
             setContent {
                 var hasShownToast by remember { mutableStateOf(false) }
                 LaunchedEffect(bottomSheetViewModel.result) {
@@ -143,6 +150,7 @@ class BottomSheetActivity : ComponentActivity() {
                         bottomSheetViewModel.result?.followRedirect?.resolveType?.let(
                             makeResolveToast
                         )
+
                         hasShownToast = true
                     }
                 }
@@ -157,14 +165,22 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     companion object {
+        val utilButtonWidth = 80.dp
+        val buttonPadding = 15.dp
+
         val buttonRowHeight = 50.dp
+
+        val appListItemPadding = 10.dp
         val appListItemHeight = 40.dp
         val preferredAppItemHeight = 60.dp
-        val maxAppListButtonRowHeight = 350.dp
+        val maxAppListButtonRowHeight = 300.dp + buttonRowHeight * 2
 
         val gridSize = 120.dp
         var gridItemHeightPackage = 80.dp
         var gridItemHeight = 60.dp
+
+        // token from androidx.compose.material.ModelBottomSheet
+        val maxModalBottomSheetWidth = 640.dp
     }
 
     @OptIn(ExperimentalMaterialApi::class)
@@ -186,26 +202,37 @@ class BottomSheetActivity : ComponentActivity() {
 
         val launchScope = rememberCoroutineScope()
         val interactionSource = remember { MutableInteractionSource() }
+        val modifier = if (landscape) {
+            Modifier
+                .fillMaxWidth(0.55f)
+                .fillMaxHeight()
+        } else Modifier
 
         BottomDrawer(
-            modifier = (if (landscape) Modifier
-                .fillMaxWidth(0.55f)
-                .fillMaxHeight() else Modifier)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {},
+            modifier = modifier.clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {},
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             sheetContent = {
                 if (result?.uri != null) {
-                    val showPackage =
-                        remember { result.showExtended || bottomSheetViewModel.alwaysShowPackageName }
+                    val showPackage = remember {
+                        result.showExtended || bottomSheetViewModel.alwaysShowPackageName
+                    }
 
-                    val baseHeight = if (bottomSheetViewModel.gridLayout) {
-                        val appsPerRow = LocalConfiguration.current.screenWidthDp / gridSize.value
-                        (result.resolved.size / appsPerRow * if (showPackage) gridItemHeightPackage.value else gridItemHeight.value).dp
-                    } else (result.resolved.size * appListItemHeight.value).dp
+                    val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
+                    else LocalConfiguration.current.screenHeightDp) / 3f
+
+                    val itemHeight = if (bottomSheetViewModel.gridLayout) {
+                        val gridItemHeight = if (showPackage) gridItemHeightPackage.value
+                        else gridItemHeight.value
+
+                        gridItemHeight
+                    } else appListItemHeight.value
+
+                    val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1)
+                            * itemHeight).dp
 
                     if (result.filteredItem == null) {
                         OpenWith(
@@ -326,14 +353,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        Column(
-            modifier = Modifier
-                .nestedScroll(rememberNestedScrollInteropConnection())
-                .heightIn(
-                    baseHeight,
-                    maxAppListButtonRowHeight - buttonRowHeight
-                )
-        ) {
+        Column(modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
             AppList(
                 result = result,
                 selectedItem = -1,
@@ -373,14 +393,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         var selectedItem by remember { mutableStateOf(-1) }
 
-        Column(
-            modifier = Modifier
-                .heightIn(
-                    baseHeight + buttonRowHeight,
-                    maxAppListButtonRowHeight
-                )
-                .nestedScroll(rememberNestedScrollInteropConnection())
-        ) {
+        Column(modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
             AppList(
                 result = result,
                 selectedItem = selectedItem,
@@ -412,134 +425,7 @@ class BottomSheetActivity : ComponentActivity() {
         baseHeight: Dp,
         showPackage: Boolean
     ) {
-        if (result.totalCount() > 0) {
-            val modifier: @Composable (index: Int, info: DisplayActivityInfo) -> Modifier =
-                @Composable { index, info ->
-                    Modifier
-                        .fillMaxWidth()
-                        .clip(
-                            RoundedCornerShape(6.dp)
-                        )
-                        .combinedClickable(
-                            onClick = {
-                                if (bottomSheetViewModel.singleTap) {
-                                    launchScope.launch {
-                                        launchApp(info, result.uri)
-                                    }
-                                } else {
-                                    if (selectedItem == index) launchScope.launch {
-                                        launchApp(info, result.uri)
-                                    }
-                                    else onSelectedItemChange(index)
-                                }
-                            },
-                            onDoubleClick = {
-                                if (!bottomSheetViewModel.singleTap) {
-                                    launchScope.launch {
-                                        launchApp(info, result.uri)
-                                    }
-                                } else {
-                                    this@BottomSheetActivity.startPackageInfoActivity(info)
-                                }
-                            },
-                            onLongClick = {
-                                if (bottomSheetViewModel.singleTap) {
-                                    onSelectedItemChange(index)
-                                } else {
-                                    this@BottomSheetActivity.startPackageInfoActivity(info)
-                                }
-                            }
-                        )
-                        .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
-                        .padding(10.dp)
-                }
-
-            if (bottomSheetViewModel.gridLayout) {
-                LazyVerticalGrid(columns = GridCells.Adaptive(gridSize),
-                    modifier = Modifier
-                        .padding(horizontal = 3.dp)
-                        .heightIn(
-                            baseHeight,
-                            maxAppListButtonRowHeight - buttonRowHeight
-                        ),
-                    content = {
-                        itemsIndexed(
-                            items = result.resolved,
-                            key = { _, item -> item.flatComponentName }
-                        ) { index, info ->
-                            Column(
-                                modifier = modifier(
-                                    index,
-                                    info
-                                ).height(if (showPackage) gridItemHeightPackage else gridItemHeight),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Image(
-                                    bitmap = info.getBitmap(this@BottomSheetActivity),
-                                    contentDescription = info.displayLabel,
-                                    modifier = Modifier.size(32.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(5.dp))
-
-                                Text(
-                                    text = info.displayLabel,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                )
-
-                                if (showPackage) {
-                                    Text(
-                                        text = info.packageName,
-                                        fontSize = 12.sp,
-                                        overflow = TextOverflow.Visible,
-                                        lineHeight = 12.sp,
-                                        color = MaterialTheme.colorScheme.tertiary
-                                    )
-                                }
-                            }
-                        }
-                    })
-            } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(horizontal = 3.dp)
-                        .heightIn(
-                            baseHeight,
-                            maxAppListButtonRowHeight - buttonRowHeight
-                        ),
-                    content = {
-                        itemsIndexed(
-                            items = result.resolved,
-                            key = { _, item -> item.flatComponentName }
-                        ) { index, info ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = modifier(index, info).height(appListItemHeight)
-                            ) {
-                                Image(
-                                    bitmap = info.getBitmap(this@BottomSheetActivity),
-                                    contentDescription = info.displayLabel,
-                                    modifier = Modifier.size(32.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(5.dp))
-
-                                Column {
-                                    Text(text = info.displayLabel)
-                                    if (showPackage) {
-                                        Text(
-                                            text = info.packageName,
-                                            fontSize = 12.sp,
-                                            color = MaterialTheme.colorScheme.tertiary
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    })
-            }
-        } else {
+        if (result.isEmpty) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(
                     text = stringResource(id = R.string.no_app_to_handle_link_found)
@@ -547,7 +433,127 @@ class BottomSheetActivity : ComponentActivity() {
             }
 
             Spacer(modifier = Modifier.height(10.dp))
+            return
         }
+
+        val modifier: AppListModifier = @Composable { index, info ->
+            Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(6.dp))
+                .combinedClickable(
+                    onClick = {
+                        if (bottomSheetViewModel.singleTap) {
+                            launchScope.launch {
+                                launchApp(info, result.uri)
+                            }
+                        } else {
+                            if (selectedItem == index) launchScope.launch {
+                                launchApp(info, result.uri)
+                            }
+                            else onSelectedItemChange(index)
+                        }
+                    },
+                    onDoubleClick = {
+                        if (!bottomSheetViewModel.singleTap) {
+                            launchScope.launch {
+                                launchApp(info, result.uri)
+                            }
+                        } else {
+                            this@BottomSheetActivity.startPackageInfoActivity(info)
+                        }
+                    },
+                    onLongClick = {
+                        if (bottomSheetViewModel.singleTap) {
+                            onSelectedItemChange(index)
+                        } else {
+                            this@BottomSheetActivity.startPackageInfoActivity(info)
+                        }
+                    }
+                )
+                .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
+                .padding(appListItemPadding)
+        }
+
+        if (bottomSheetViewModel.gridLayout) {
+            LazyVerticalGrid(columns = GridCells.Adaptive(gridSize),
+                modifier = Modifier
+                    .padding(horizontal = 3.dp)
+                    .height(baseHeight),
+                content = {
+                    itemsIndexed(
+                        items = result.resolved,
+                        key = { _, item -> item.flatComponentName }
+                    ) { index, info ->
+                        Column(
+                            modifier = modifier(
+                                index,
+                                info
+                            ).height(if (showPackage) gridItemHeightPackage else gridItemHeight),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(
+                                bitmap = info.getBitmap(this@BottomSheetActivity),
+                                contentDescription = info.displayLabel,
+                                modifier = Modifier.size(32.dp)
+                            )
+
+                            Spacer(modifier = Modifier.width(5.dp))
+
+                            Text(
+                                text = info.displayLabel,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                            )
+
+                            if (showPackage) {
+                                Text(
+                                    text = info.packageName,
+                                    fontSize = 12.sp,
+                                    overflow = TextOverflow.Visible,
+                                    lineHeight = 12.sp,
+                                    color = MaterialTheme.colorScheme.tertiary
+                                )
+                            }
+                        }
+                    }
+                })
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = 3.dp)
+                    .height(baseHeight),
+                content = {
+                    itemsIndexed(
+                        items = result.resolved,
+                        key = { _, item -> item.flatComponentName }) { index, info ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = modifier(index, info).height(appListItemHeight)
+                        ) {
+                            Image(
+                                bitmap = info.getBitmap(this@BottomSheetActivity),
+                                contentDescription = info.displayLabel,
+                                modifier = Modifier.size(32.dp)
+                            )
+
+                            Spacer(modifier = Modifier.width(5.dp))
+
+                            Column {
+                                Text(text = info.displayLabel)
+                                if (showPackage) {
+                                    Text(
+                                        text = info.packageName,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.tertiary
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            )
+        }
+
     }
 
     @OptIn(ExperimentalMaterialApi::class)
@@ -560,106 +566,183 @@ class BottomSheetActivity : ComponentActivity() {
     ) {
         val coroutineScope = rememberCoroutineScope()
         val clipboard = remember { getSystemService(ClipboardManager::class.java) }
+        val downloadManager = remember { getSystemService(DownloadManager::class.java) }
+
+
+        val context = LocalContext.current
+
+        val utilButtonWidthSum = utilButtonWidth * listOf(
+            bottomSheetViewModel.enableCopyButton,
+            bottomSheetViewModel.enableSendButton,
+            result.downloadable.isDownloadable()
+        ).count { it }
+
+        val configuration = LocalConfiguration.current
+        val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+        val widthHalf =
+            if (landscape) maxModalBottomSheetWidth else LocalConfiguration.current.screenWidthDp.dp
+
+        val useTwoRows = utilButtonWidthSum > widthHalf / 2
+        val padding = PaddingValues(horizontal = 10.dp)
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height((buttonRowHeight + if (useTwoRows) buttonRowHeight else 0.dp))
+        ) {
+            if (useTwoRows) {
+                OpenButtons(result, enabled, false, padding, onClick)
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(buttonRowHeight)
+                    .padding(horizontal = buttonPadding)
+            ) {
+
+                if (bottomSheetViewModel.enableCopyButton) {
+                    OutlinedOrTextButton(
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        contentPadding = padding,
+                        onClick = {
+                            clipboard.setPrimaryClip(
+                                ClipData.newPlainText(
+                                    "URL",
+                                    result.uri.toString()
+                                )
+                            )
+                            if (!bottomSheetViewModel.disableToasts) {
+                                Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+
+                            if (bottomSheetViewModel.hideAfterCopying) {
+                                coroutineScope.launch { drawerState.hide() }
+                            }
+                        },
+                        buttonText = R.string.copy
+                    )
+                }
+
+                if (bottomSheetViewModel.enableSendButton) {
+                    Spacer(modifier = Modifier.width(2.dp))
+                    OutlinedOrTextButton(
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        contentPadding = padding,
+                        onClick = {
+                            startActivity(Intent().buildSendTo(result.uri))
+                            finish()
+                        },
+                        buttonText = R.string.send_to
+                    )
+                }
+
+                if (result.downloadable.isDownloadable()) {
+                    Spacer(modifier = Modifier.width(2.dp))
+                    OutlinedOrTextButton(
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        contentPadding = padding,
+                        onClick = {
+                            startDownload(context.resources, downloadManager, result.uri,
+                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                            )
+                        },
+                        buttonText = R.string.download
+                    )
+                }
+
+                if (!useTwoRows) {
+                    OpenButtons(result, enabled, true, padding, onClick)
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun OpenButtons(
+        result: IntentResolverResult,
+        enabled: Boolean,
+        end: Boolean = false,
+        padding: PaddingValues,
+        onClick: (always: Boolean) -> Unit,
+    ) {
         val context = LocalContext.current
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(buttonRowHeight)
-                .padding(horizontal = 15.dp),
+                .let {
+                    if (end) it.padding(end = buttonPadding) else it.padding(start = buttonPadding)
+                },
+            horizontalArrangement = if (end) Arrangement.End else Arrangement.Start
         ) {
-            val padding = PaddingValues(horizontal = 18.dp)
-
-            if (bottomSheetViewModel.enableCopyButton) {
-                val copyOnClick: () -> Unit = {
-                    clipboard.setPrimaryClip(ClipData.newPlainText("URL", result.uri.toString()))
-                    if (!bottomSheetViewModel.disableToasts) {
-                        Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT).show()
-                    }
-
-                    if (bottomSheetViewModel.hideAfterCopying) {
-                        coroutineScope.launch { drawerState.hide() }
-                    }
+            if (result.totalCount() > 0) {
+                TextButton(
+                    enabled = enabled,
+                    contentPadding = padding,
+                    onClick = { onClick(false) }) {
+                    Text(
+                        text = stringResource(id = R.string.just_once),
+                        fontFamily = HkGroteskFontFamily,
+                        maxLines = 1,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
 
-                val text: @Composable RowScope.() -> Unit = {
-                    Text(text = stringResource(id = R.string.copy))
+                Spacer(
+                    modifier = Modifier.width(
+                        if (bottomSheetViewModel.enableCopyButton && bottomSheetViewModel.enableSendButton) 2.dp
+                        else 5.dp
+                    )
+                )
+
+                TextButton(
+                    enabled = enabled,
+                    contentPadding = padding,
+                    onClick = { onClick(true) }) {
+                    Text(
+                        text = stringResource(id = R.string.always),
+                        fontFamily = HkGroteskFontFamily,
+                        maxLines = 1,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
-
-                if (bottomSheetViewModel.useTextShareCopyButtons) {
-                    TextButton(contentPadding = padding, onClick = copyOnClick, content = text)
-                } else {
-                    OutlinedButton(contentPadding = padding, onClick = copyOnClick, content = text)
-                }
-
-                Spacer(modifier = Modifier.width(2.dp))
-            }
-
-            if (bottomSheetViewModel.enableSendButton) {
-                val shareToOnClick: () -> Unit = {
-                    startActivity(Intent().buildSendTo(result.uri))
-                    finish()
-                }
-
-                val text: @Composable RowScope.() -> Unit = {
-                    Text(text = stringResource(id = R.string.send_to))
-                }
-
-                if (bottomSheetViewModel.useTextShareCopyButtons) {
-                    TextButton(contentPadding = padding, onClick = shareToOnClick, content = text)
-                } else {
-                    OutlinedButton(
-                        contentPadding = padding,
-                        onClick = shareToOnClick,
-                        content = text
+            } else {
+                TextButton(
+                    contentPadding = padding,
+                    enabled = true,
+                    onClick = {
+                        bottomSheetViewModel.startMainActivity(context)
+                    }) {
+                    Text(
+                        text = stringResource(id = R.string.open_settings),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }
-
-            Row(
-                modifier = Modifier
-                    .fillMaxSize(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                if (result.totalCount() > 0) {
-                    TextButton(
-                        enabled = enabled,
-                        onClick = { onClick(false) }) {
-                        Text(
-                            text = stringResource(id = R.string.just_once),
-                            fontFamily = HkGroteskFontFamily,
-                            maxLines = 1,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(if (bottomSheetViewModel.enableCopyButton && bottomSheetViewModel.enableSendButton) 2.dp else 5.dp))
-
-                    TextButton(
-                        enabled = enabled,
-                        onClick = { onClick(true) }) {
-                        Text(
-                            text = stringResource(id = R.string.always),
-                            fontFamily = HkGroteskFontFamily,
-                            maxLines = 1,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                } else {
-                    TextButton(
-                        enabled = true,
-                        onClick = {
-                            bottomSheetViewModel.startMainActivity(context)
-                        }) {
-                        Text(
-                            text = stringResource(id = R.string.open_settings),
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
-            }
         }
+    }
+
+    @Composable
+    private fun OutlinedOrTextButton(
+        textButton: Boolean,
+        contentPadding: PaddingValues,
+        onClick: () -> Unit,
+        @StringRes buttonText: Int
+    ) {
+        if (textButton) TextButton(
+            contentPadding = contentPadding,
+            onClick = onClick,
+            content = { Text(text = stringResource(id = buttonText)) }
+        )
+        else OutlinedButton(
+            contentPadding = contentPadding,
+            onClick = onClick,
+            content = { Text(text = stringResource(id = buttonText)) })
     }
 
     @Composable
@@ -672,6 +755,15 @@ class BottomSheetActivity : ComponentActivity() {
         )
     }
 
+    private fun startDownload(
+        resources: Resources,
+        downloadManager: DownloadManager,
+        uri: Uri?,
+        downloadable: Downloader.DownloadCheckResult.Downloadable
+    ){
+        bottomSheetViewModel.startDownload(resources, downloadManager, uri, downloadable)
+    }
+
     private suspend fun launchApp(info: DisplayActivityInfo, uri: Uri?, always: Boolean = false) {
         val intentFrom = info.intentFrom(intent.sourceIntent(uri))
         bottomSheetViewModel.persistSelectedIntentAsync(intentFrom, always)
@@ -680,3 +772,5 @@ class BottomSheetActivity : ComponentActivity() {
         this.finish()
     }
 }
+
+typealias AppListModifier = @Composable (index: Int, info: DisplayActivityInfo) -> Modifier

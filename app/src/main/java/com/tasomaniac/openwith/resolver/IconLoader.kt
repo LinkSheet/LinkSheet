@@ -6,8 +6,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import androidx.core.content.getSystemService
 
 object IconLoader {
     fun loadFor(context: Context, activity: ActivityInfo): Drawable? {
@@ -33,7 +32,7 @@ object IconLoader {
         val res = context.packageManager.getResourcesForApplication(packageName)
         return res.getDrawableForDensity(
             resId,
-            context.getSystemService(ActivityManager::class.java).launcherLargeIconDensity,
+            context.getSystemService<ActivityManager>()!!.launcherLargeIconDensity,
             null
         )
     }

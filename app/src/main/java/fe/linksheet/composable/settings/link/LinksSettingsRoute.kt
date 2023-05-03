@@ -55,7 +55,7 @@ fun LinksSettingsRoute(
                     subtitleBuilder = {
                         LinkableTextView(
                             id = R.string.clear_urls_explainer,
-                            style = TextStyle.Default.copy(
+                            style = LocalTextStyle.current.copy(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 16.sp
                             )
@@ -74,7 +74,7 @@ fun LinksSettingsRoute(
                     subtitleBuilder = {
                         LinkableTextView(
                             id = R.string.fastfoward_rules_explainer,
-                            style = TextStyle.Default.copy(
+                            style = LocalTextStyle.current.copy(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 16.sp
                             )
@@ -109,7 +109,7 @@ fun LinksSettingsRoute(
 
                         LinkableTextView(
                             id = R.string.enable_libredirect_explainer,
-                            style = TextStyle.Default.copy(
+                            style = LocalTextStyle.current.copy(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 16.sp,
                             ),
@@ -187,12 +187,36 @@ fun LinksSettingsRoute(
                         subtitleBuilder = {
                             LinkableTextView(
                                 id = R.string.follow_redirects_external_service_explainer,
-                                style = TextStyle.Default.copy(
+                                style = LocalTextStyle.current.copy(
                                     color = MaterialTheme.colorScheme.onSurface,
                                     fontSize = 16.sp
                                 )
                             )
                         })
+                }
+            }
+
+            item(key = "enable_downloader") {
+                SwitchRow(
+                    checked = viewModel.enableDownloader,
+                    onChange = {
+                        viewModel.onEnableDownloader(it)
+                    },
+                    headlineId = R.string.enable_downloader,
+                    subtitleId = R.string.enable_downloader_explainer
+                )
+            }
+
+            if(viewModel.enableDownloader){
+                item(key = "downloader_url_mime_type") {
+                    SwitchRow(
+                        checked = viewModel.downloaderCheckUrlMimeType,
+                        onChange = {
+                            viewModel.onDownloaderCheckUrlMimeType(it)
+                        },
+                        headlineId = R.string.downloader_url_mime_type,
+                        subtitleId = R.string.downloader_url_mime_type_explainer
+                    )
                 }
             }
         }

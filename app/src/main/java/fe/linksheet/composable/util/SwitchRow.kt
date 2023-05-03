@@ -51,7 +51,8 @@ fun SwitchRow(
         verticalAlignment = Alignment.CenterVertically,
         onClick = {
             onChange(!checked)
-        }) {
+        }
+    ) {
         Column(modifier = Modifier.fillMaxWidth(0.8f), verticalArrangement = Arrangement.Center) {
             HeadlineText(headline = headline)
 

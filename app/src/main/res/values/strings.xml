@@ -83,7 +83,7 @@
     <string name="links">Links</string>
     <string name="links_explainer">Settings regarding link manipulation</string>
     <string name="clear_urls">Use ClearURLs</string>
-    <string name="clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from urls)</string>
+    <string name="clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet</string>
     <string name="loading_link">Loading link…</string>
@@ -118,8 +118,14 @@
     <string name="close">Close</string>
     <string name="dont_show_filtered_item">Never show \"last picked app\" section</string>
     <string name="dont_show_filtered_item_explainer">Will never show the top section which suggests the last used app for the clicked host</string>
-    <string name="use_text_share_copy_buttons">Use simple text buttons for \"Copy url\" and \"Share to\"</string>
-    <string name="use_text_share_copy_buttons_explainer">Replaces the \"Copy url\" and \"Share to\" outlined buttons with simple text buttons</string>
+    <string name="use_text_share_copy_buttons">Use simple text buttons for \"Copy url\", \"Share to\" and \"Download\"</string>
+    <string name="use_text_share_copy_buttons_explainer">Replaces the \"Copy url\", \"Share to\" and \"Download\" outlined buttons with simple text buttons</string>
     <string name="preview_url">Preview url</string>
     <string name="preview_url_explainer">Shows the clicked url (after it has been processed)</string>
+    <string name="download">Download</string>
+    <string name="linksheet_download">LinkSheet Download</string>
+    <string name="enable_downloader">Enable downloader</string>
+    <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This will send a request to the URL to determine the file content.</string>
+    <string name="downloader_url_mime_type">Use mime type from URL</string>
+    <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
 </resources>

@@ -1,6 +1,5 @@
 package fe.linksheet.module.redirectresolver
 
-import android.util.Log
 import fe.httpkt.Request
 import fe.httpkt.json.JsonBody
 import fe.linksheet.redirectResolverApiKey

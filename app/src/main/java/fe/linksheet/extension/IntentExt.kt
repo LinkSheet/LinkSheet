@@ -63,7 +63,6 @@ fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri?
             }
 
             Timber.tag("Url Post ClearURL").d(url)
-
             return Uri.parse(url)
         }
     }

@@ -53,7 +53,6 @@ fun BottomDrawer(
                 ) {
                     Column(modifier = Modifier.navigationBarsPadding()) {
                         sheetContent()
-                        Spacer(modifier = Modifier.height(28.dp))
                     }
                 }
             },

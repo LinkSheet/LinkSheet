@@ -136,6 +136,14 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
     )
 
+    var enableDownloader by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableDownloader) ?: false
+    )
+
+    var downloaderCheckUrlMimeType by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.downloaderCheckUrlMimeType) ?: false
+    )
+
     var theme by mutableStateOf(
         preferenceRepository.getInt(
             PreferenceRepository.theme,
@@ -423,6 +431,16 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun onFollowOnlyKnownTrackers(it: Boolean) {
         this.followOnlyKnownTrackers = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.followOnlyKnownTrackers, it)
+    }
+
+    fun onEnableDownloader(it: Boolean) {
+        this.enableDownloader = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.enableDownloader, it)
+    }
+
+    fun onDownloaderCheckUrlMimeType(it: Boolean) {
+        this.downloaderCheckUrlMimeType = it
+        this.preferenceRepository.writeBoolean(PreferenceRepository.downloaderCheckUrlMimeType, it)
     }
 
     fun onThemeChange(it: Theme) {

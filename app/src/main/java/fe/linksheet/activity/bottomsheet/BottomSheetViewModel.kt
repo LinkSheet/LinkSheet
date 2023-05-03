@@ -1,10 +1,12 @@
 package fe.linksheet.activity.bottomsheet
 
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
+import android.os.Environment
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +21,6 @@ import com.tasomaniac.openwith.resolver.IntentResolverResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.fastforwardkt.isTracker
 import fe.gson.extensions.string
-import fe.httpkt.Request
 import fe.httpkt.json.readToJson
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
@@ -28,6 +29,7 @@ import fe.linksheet.data.entity.LibRedirectDefault
 import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
+import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.redirectresolver.RedirectResolver
 import fe.linksheet.ui.theme.Theme
@@ -38,7 +40,9 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
-import java.lang.ref.PhantomReference
+import java.io.File
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 class BottomSheetViewModel : ViewModel(),
@@ -46,6 +50,7 @@ class BottomSheetViewModel : ViewModel(),
     private val database by inject<LinkSheetDatabase>()
     private val preferenceRepository by inject<PreferenceRepository>()
     private val redirectResolver by inject<RedirectResolver>()
+    private val downloader by inject<Downloader>()
 
     var result by mutableStateOf<IntentResolverResult?>(null)
     val enableCopyButton by mutableStateOf(
@@ -105,6 +110,14 @@ class BottomSheetViewModel : ViewModel(),
         preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
     )
 
+    var enableDownloader by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.enableDownloader) ?: false
+    )
+
+    var downloaderCheckUrlMimeType by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.downloaderCheckUrlMimeType) ?: false
+    )
+
     val theme by mutableStateOf(
         preferenceRepository.getInt(
             PreferenceRepository.theme,
@@ -113,9 +126,17 @@ class BottomSheetViewModel : ViewModel(),
         ) ?: Theme.System
     )
 
-    val dontShowFilteredItem by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false)
-    val useTextShareCopyButtons by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.useTextShareCopyButtons) ?: false)
-    val previewUrl by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false)
+    val dontShowFilteredItem by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false
+    )
+    val useTextShareCopyButtons by mutableStateOf(
+        preferenceRepository.getBoolean(
+            PreferenceRepository.useTextShareCopyButtons
+        ) ?: false
+    )
+    val previewUrl by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false
+    )
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
@@ -269,6 +290,17 @@ class BottomSheetViewModel : ViewModel(),
         } ?: Result.failure(Exception("Something went wrong while reading response"))
     }
 
+    fun checkIsDownloadable(uri: Uri): Downloader.DownloadCheckResult {
+        if (downloaderCheckUrlMimeType) {
+            downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
+                Timber.tag("CheckIsDownloadable").d("File ending check result $it")
+                if (it.isDownloadable()) return it
+            }
+        }
+
+        return downloader.isNonHtmlContentUri(uri.toString())
+    }
+
     suspend fun getLibRedirectDefault(serviceKey: String): LibRedirectDefault? {
         return withContext(Dispatchers.IO) {
             database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
@@ -279,5 +311,25 @@ class BottomSheetViewModel : ViewModel(),
         return withContext(Dispatchers.IO) {
             database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
         }
+    }
+
+    fun startDownload(
+        resources: Resources,
+        downloadManager: DownloadManager,
+        uri: Uri?,
+        downloadable: Downloader.DownloadCheckResult.Downloadable
+    ) {
+        val path =
+            "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
+        Timber.tag("startDownload").d(path)
+
+        val request = DownloadManager.Request(uri)
+            .setTitle(resources.getString(R.string.linksheet_download))
+            .setDestinationInExternalPublicDir(
+                Environment.DIRECTORY_DOWNLOADS,
+                path
+            )
+
+        downloadManager.enqueue(request)
     }
 }

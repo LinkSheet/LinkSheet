@@ -8,6 +8,7 @@ import android.text.style.*
 import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
@@ -213,7 +214,7 @@ private fun spannableStringToAnnotatedString(
 fun LinkableTextView(
     @StringRes id: Int,
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle.Default,
+    style: TextStyle = LocalTextStyle.current,
     parentChecked: Boolean? = null,
     parentClickListener: ((Boolean) -> Unit)? = null
 ) {

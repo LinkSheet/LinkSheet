@@ -2,6 +2,7 @@ package fe.linksheet.module.downloader
 
 import fe.httpkt.Request
 import fe.httpkt.util.findHeader
+import fe.linksheet.extension.substringNullable
 import fe.linksheet.module.request.requestModule
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -22,17 +23,15 @@ class Downloader(private val request: Request) {
     companion object {
         private const val contentTypeHeader = "Content-Type"
         private const val textHtml = "text/html"
+        private const val schemeSeparator = "://"
 
-        private val fileNameMap = URLConnection.getFileNameMap()
-        private val mimeTypes = MimeTypeLoader.loadBuiltInMimeTypes(
-            MimeTypeLoader.Mapping.MimeTypeToExtensions
-        ) as MimeTypeLoader.MimeTypeHolder.MimeTypeToExtensions
+        private val mappings = MimeTypeLoader.loadBuiltInMimeTypes()
     }
 
     sealed class DownloadCheckResult {
-        class Downloadable(private val fileName: String, private val fileType: String?) :
+        class Downloadable(private val fileName: String, private val extension: String?) :
             DownloadCheckResult() {
-            fun toFileName() = "$fileName$fileType"
+            fun toFileName() = "$fileName.$extension"
         }
 
         object NonDownloadable : DownloadCheckResult()
@@ -45,14 +44,22 @@ class Downloader(private val request: Request) {
         val query = url.indexOf("?").takeIf { it > -1 } ?: url.length
         val dot = url.lastIndexOf(".").takeIf { it > -1 } ?: url.length
 
-        return url.substring(url.lastIndexOf("/") + 1, min(query, dot))
+        return url.substringNullable(url.lastIndexOf("/") + 1, min(query, dot)) ?: url
     }
 
     fun checkIsNonHtmlFileEnding(url: String): DownloadCheckResult {
-        val extension = url.substring(url.lastIndexOf("."))
-        val mimeType = fileNameMap.getContentTypeFor(
-            "lol${extension}"
-        ) ?: return DownloadCheckResult.MimeTypeDetectionFailed
+        val scheme = url.indexOf(schemeSeparator).takeIf { it > -1 }
+            ?: return DownloadCheckResult.MimeTypeDetectionFailed
+
+        if (url.indexOf("/", scheme + schemeSeparator.length) == -1) {
+            // .com is a file extension for the mime type x-msdos-program
+            return DownloadCheckResult.MimeTypeDetectionFailed
+        }
+
+        val extension = url.substringNullable(url.lastIndexOf(".") + 1)
+            ?: return DownloadCheckResult.MimeTypeDetectionFailed
+        val mimeType = mappings.second.map[extension]
+            ?: return DownloadCheckResult.MimeTypeDetectionFailed
 
         return checkMimeType(mimeType, url, extension)
     }
@@ -63,7 +70,11 @@ class Downloader(private val request: Request) {
             contentType?.values?.firstOrNull() ?: return DownloadCheckResult.NonDownloadable
         val mimeType = firstContentType.split(";")[0]
 
-        return checkMimeType(mimeType, url, mimeTypes.map[mimeType]?.firstOrNull()?.let { ".$it" })
+        return checkMimeType(
+            mimeType,
+            url,
+            mappings.first.map[mimeType]?.firstOrNull()
+        )
     }
 
     private fun checkMimeType(
@@ -74,5 +85,21 @@ class Downloader(private val request: Request) {
         return if (mimeType != textHtml) {
             DownloadCheckResult.Downloadable(urlToFilename(url), extension)
         } else DownloadCheckResult.NonDownloadable
+    }
+}
+
+fun main() {
+    startKoin {
+        modules(requestModule, downloaderModule)
+    }
+
+    object : KoinComponent {
+        private val downloader by inject<Downloader>()
+
+        init {
+            println(downloader.checkIsNonHtmlFileEnding("https://test.com"))
+            println(downloader.checkIsNonHtmlFileEnding("https://test.com/"))
+            println(downloader.checkIsNonHtmlFileEnding("https://test.com/test.com"))
+        }
     }
 }

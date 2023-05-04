@@ -89,7 +89,7 @@ dependencies {
     implementation("com.github.1fexd:clearurlkt:0.0.16")
     implementation("com.github.1fexd:fastforwardkt:0.0.12")
     implementation("com.github.1fexd:libredirectkt:0.0.14")
-    implementation("com.github.1fexd:mimetypekt:0.0.2")
+    implementation("com.github.1fexd:mimetypekt:0.0.4")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
 

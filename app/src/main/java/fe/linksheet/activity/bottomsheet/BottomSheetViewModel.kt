@@ -41,8 +41,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
 import java.io.File
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 import java.util.*
 
 class BottomSheetViewModel : ViewModel(),
@@ -52,7 +50,7 @@ class BottomSheetViewModel : ViewModel(),
     private val redirectResolver by inject<RedirectResolver>()
     private val downloader by inject<Downloader>()
 
-    var result by mutableStateOf<IntentResolverResult?>(null)
+    var resolveResult by mutableStateOf<IntentResolverResult?>(null)
     val enableCopyButton by mutableStateOf(
         preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
     )
@@ -140,9 +138,9 @@ class BottomSheetViewModel : ViewModel(),
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
-            result = ResolveIntents.resolve(context, intent, this@BottomSheetViewModel)
+            resolveResult = ResolveIntents.resolve(context, intent, this@BottomSheetViewModel)
 
-            result
+            resolveResult
         }
     }
 

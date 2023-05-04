@@ -69,7 +69,6 @@ import kotlin.math.ceil
 class BottomSheetActivity : ComponentActivity() {
     private lateinit var bottomSheetViewModel: BottomSheetViewModel
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -109,8 +108,7 @@ class BottomSheetActivity : ComponentActivity() {
                 this@BottomSheetActivity, intent
             ).await()
 
-            val isRegularPreferredApp = completed?.alwaysPreferred == true
-                    && completed.filteredItem != null
+            val isRegularPreferredApp = completed?.isRegularPreferredApp() ?: false
 
             if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
                 val app = completed.filteredItem ?: completed.resolved[0]
@@ -132,8 +130,6 @@ class BottomSheetActivity : ComponentActivity() {
 
                 launchApp(app, completed.uri, isRegularPreferredApp)
             }
-
-            completed
         }
 
         val showBottomSheet: @Composable (IntentResolverResult?) -> Unit = @Composable { result ->
@@ -145,21 +141,20 @@ class BottomSheetActivity : ComponentActivity() {
         if (bottomSheetViewModel.followRedirects || bottomSheetViewModel.enableDownloader) {
             setContent {
                 var hasShownToast by remember { mutableStateOf(false) }
-                LaunchedEffect(bottomSheetViewModel.result) {
+                LaunchedEffect(bottomSheetViewModel.resolveResult) {
                     if (!hasShownToast) {
-                        bottomSheetViewModel.result?.followRedirect?.resolveType?.let(
+                        bottomSheetViewModel.resolveResult?.followRedirect?.resolveType?.let(
                             makeResolveToast
                         )
-
                         hasShownToast = true
                     }
                 }
 
-                showBottomSheet(bottomSheetViewModel.result)
+                showBottomSheet(bottomSheetViewModel.resolveResult)
             }
         } else {
             deferred.invokeOnCompletion {
-                setContent { showBottomSheet(deferred.getCompleted()) }
+                setContent { showBottomSheet(bottomSheetViewModel.resolveResult) }
             }
         }
     }
@@ -216,7 +211,7 @@ class BottomSheetActivity : ComponentActivity() {
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             sheetContent = {
-                if (result?.uri != null) {
+                if (result != null && !result.hasAutoLaunchApp()) {
                     val showPackage = remember {
                         result.showExtended || bottomSheetViewModel.alwaysShowPackageName
                     }
@@ -645,7 +640,8 @@ class BottomSheetActivity : ComponentActivity() {
                         textButton = bottomSheetViewModel.useTextShareCopyButtons,
                         contentPadding = padding,
                         onClick = {
-                            startDownload(context.resources, downloadManager, result.uri,
+                            startDownload(
+                                context.resources, downloadManager, result.uri,
                                 result.downloadable as Downloader.DownloadCheckResult.Downloadable
                             )
                         },
@@ -760,7 +756,7 @@ class BottomSheetActivity : ComponentActivity() {
         downloadManager: DownloadManager,
         uri: Uri?,
         downloadable: Downloader.DownloadCheckResult.Downloadable
-    ){
+    ) {
         bottomSheetViewModel.startDownload(resources, downloadManager, uri, downloadable)
     }
 

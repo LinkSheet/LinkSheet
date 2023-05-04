@@ -17,4 +17,8 @@ data class IntentResolverResult(
     val isEmpty get() = totalCount() == 0
 
     fun totalCount() = resolved.size + if (filteredItem != null) 1 else 0
+
+    fun hasAutoLaunchApp() = this.isRegularPreferredApp() || this.hasSingleMatchingOption
+
+    fun isRegularPreferredApp() = alwaysPreferred == true && filteredItem != null
 }

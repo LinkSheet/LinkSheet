@@ -1,0 +1,8 @@
+* Fix: Properly add padding to the bottom of the sheet (#43)
+* Fix: LibRedirect bug where the wrong url would show up (#29)
+* Fix: Privacy Policy Link (#48)
+* Fix: ClearURL redirection bug (#54)
+* Fix: Show native apps when link is opened from an app such as Youtube (#61)
+* Add option to use simple text buttons for "Copy url", "Share to" and "Download" (#60)
+* Add option to preview url in sheet (#68)
+* Implement download feature to directly download content from direct links (#57)

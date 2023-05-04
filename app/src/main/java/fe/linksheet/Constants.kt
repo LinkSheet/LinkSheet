@@ -1,5 +1,7 @@
 package fe.linksheet
 
+import fe.libredirectkt.LibRedirectLoader
+
 const val openLinkWithGithub = "https://github.com/tasomaniac/OpenLinkWith"
 const val sealGithub = "https://github.com/JunkFood02/Seal"
 

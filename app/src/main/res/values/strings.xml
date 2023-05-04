@@ -128,4 +128,5 @@
     <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This will send a request to the URL to determine the file content.</string>
     <string name="downloader_url_mime_type">Use mime type from URL</string>
     <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
+    <string name="random_instance">Random instance</string>
 </resources>

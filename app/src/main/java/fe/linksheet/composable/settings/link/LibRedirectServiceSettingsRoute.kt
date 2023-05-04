@@ -1,19 +1,16 @@
 package fe.linksheet.composable.settings.link
 
-import android.util.Log
-import android.widget.Space
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectFrontend
 import fe.libredirectkt.LibRedirectLoader
@@ -23,7 +20,6 @@ import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SwitchRow
-import fe.linksheet.ui.theme.HkGroteskFontFamily
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -63,7 +59,8 @@ fun LibRedirectServiceSettingsRoute(
                 libRedirectBuiltInServices.find { it.key == serviceKey }?.frontends?.find { it.key == default.frontendKey }
             selectedInstance = default.instanceUrl
         } else {
-            selectedFrontend = libRedirectBuiltInServices.find { it.key == serviceKey }?.defaultFrontend
+            selectedFrontend =
+                libRedirectBuiltInServices.find { it.key == serviceKey }?.defaultFrontend
             selectedInstance =
                 LibRedirect.getDefaultInstanceForFrontend(selectedFrontend?.key!!)?.firstOrNull()
         }
@@ -71,6 +68,16 @@ fun LibRedirectServiceSettingsRoute(
         instancesForSelectedFrontend.clear()
         builtinInstances.find { it.frontendKey == selectedFrontend?.key }?.let {
             instancesForSelectedFrontend.addAll(it.hosts)
+        }
+    }
+
+    val itemOnClick: (String) -> Unit = { instance ->
+        selectedInstance = instance
+
+        selectedFrontend?.key?.let { frontendKey ->
+            coroutineScope.launch {
+                viewModel.saveLibRedirectDefault(serviceKey, frontendKey, instance)
+            }
         }
     }
 
@@ -101,10 +108,14 @@ fun LibRedirectServiceSettingsRoute(
                         headline = stringResource(id = R.string.enabled),
                         subtitle = null
                     )
-                    
+
                     Spacer(modifier = Modifier.height(5.dp))
 
-                    Column(modifier = Modifier.padding(horizontal = 10.dp).fillMaxWidth()) {
+                    Column(
+                        modifier = Modifier
+                            .padding(horizontal = 10.dp)
+                            .fillMaxWidth()
+                    ) {
                         HeadlineText(headline = R.string.frontend)
 
                         Spacer(modifier = Modifier.height(5.dp))
@@ -124,7 +135,9 @@ fun LibRedirectServiceSettingsRoute(
                                         expanded = expanded
                                     )
                                 },
-                                modifier = Modifier.menuAnchor().fillMaxWidth()
+                                modifier = Modifier
+                                    .menuAnchor()
+                                    .fillMaxWidth()
                             )
 
                             ExposedDropdownMenu(
@@ -162,29 +175,41 @@ fun LibRedirectServiceSettingsRoute(
                 }
             }
 
+            item {
+                InstanceItem(
+                    text = stringResource(id = R.string.random_instance),
+                    instance = SettingsViewModel.libRedirectRandomInstanceKey,
+                    selectedInstance = selectedInstance,
+                    itemOnClick = itemOnClick
+                )
+            }
+
             instancesForSelectedFrontend.forEach { instance ->
                 item {
-                    RadioButtonRow(
-                        onClick = {
-                            selectedInstance = instance
-
-                            selectedFrontend?.key?.let { frontendKey ->
-                                coroutineScope.launch {
-                                    viewModel.saveLibRedirectDefault(
-                                        serviceKey,
-                                        frontendKey,
-                                        instance
-                                    )
-                                }
-                            }
-                        },
-                        onLongClick = null,
-                        selected = instance == selectedInstance
-                    ) {
-                        Text(text = instance)
-                    }
+                    InstanceItem(
+                        text = instance,
+                        instance = instance,
+                        selectedInstance = selectedInstance,
+                        itemOnClick = itemOnClick
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun InstanceItem(
+    text: String,
+    instance: String,
+    selectedInstance: String?,
+    itemOnClick: (String) -> Unit
+) {
+    RadioButtonRow(
+        onClick = { itemOnClick(instance) },
+        onLongClick = null,
+        selected = instance == selectedInstance
+    ) {
+        Text(text = text)
     }
 }

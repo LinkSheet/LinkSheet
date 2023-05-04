@@ -43,6 +43,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     companion object {
         val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://example.com"))
         val intentManageDefaultAppSettings = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+        const val libRedirectRandomInstanceKey = "RANDOM_INSTANCE"
     }
 
     private val database by inject<LinkSheetDatabase>()
@@ -156,8 +157,14 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false
     )
 
-    var useTextShareCopyButtons by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.useTextShareCopyButtons) ?: false)
-    var previewUrl by mutableStateOf(preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false)
+    var useTextShareCopyButtons by mutableStateOf(
+        preferenceRepository.getBoolean(
+            PreferenceRepository.useTextShareCopyButtons
+        ) ?: false
+    )
+    var previewUrl by mutableStateOf(
+        preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false
+    )
 
     suspend fun filterPreferredAppsAsync(filter: String) {
         withContext(Dispatchers.IO) {
@@ -458,12 +465,12 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         this.preferenceRepository.writeBoolean(PreferenceRepository.dontShowFilteredItem, it)
     }
 
-    fun onUseTextShareCopyButtons(it: Boolean){
+    fun onUseTextShareCopyButtons(it: Boolean) {
         this.useTextShareCopyButtons = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.useTextShareCopyButtons, it)
     }
 
-    fun onPreviewUrl(it: Boolean){
+    fun onPreviewUrl(it: Boolean) {
         this.previewUrl = it
         this.preferenceRepository.writeBoolean(PreferenceRepository.previewUrl, it)
     }

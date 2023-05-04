@@ -12,6 +12,7 @@ import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.BuildConfig
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
+import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.module.downloader.Downloader
@@ -21,6 +22,8 @@ import timber.log.Timber
 object ResolveIntents {
     val fastForwardRulesObject by lazy { FastForwardLoader.loadBuiltInFastForwardRules() }
     private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
+    private val libRedirectInstances by lazy { LibRedirectLoader.loadBuiltInInstances() }
+
 
     suspend fun resolve(
         context: Context,
@@ -49,10 +52,14 @@ object ResolveIntents {
             if (service != null && viewModel.loadLibRedirectState(service.key) == true) {
                 val savedDefault = viewModel.getLibRedirectDefault(service.key)
                 val redirected = if (savedDefault != null) {
+                   val instanceUrl = if (savedDefault.instanceUrl == SettingsViewModel.libRedirectRandomInstanceKey) {
+                       libRedirectInstances.find { it.frontendKey == savedDefault.frontendKey }?.hosts?.random() ?: savedDefault.instanceUrl
+                   } else savedDefault.instanceUrl
+
                     LibRedirect.redirect(
                         uri.toString(),
                         savedDefault.frontendKey,
-                        savedDefault.instanceUrl
+                        instanceUrl
                     )
                 } else {
                     val defaultInstance =

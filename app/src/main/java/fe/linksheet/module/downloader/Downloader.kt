@@ -76,18 +76,3 @@ class Downloader(private val request: Request) {
         } else DownloadCheckResult.NonDownloadable
     }
 }
-
-fun main() {
-    startKoin {
-        modules(requestModule, downloaderModule)
-    }
-
-    object : KoinComponent {
-        private val downloader by inject<Downloader>()
-
-        init {
-            println(downloader.isNonHtmlContentUri("https://pbs.twimg.com/media/FvIdhC2WcAg3yHx?format=jpg&name=small"))
-            println(downloader.checkIsNonHtmlFileEnding("https://nitter.net/pic/orig/media%2FFvIdhC2WcAg3yHx.jpg"))
-        }
-    }
-}

@@ -88,7 +88,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.1fexd:clearurlkt:0.0.16")
     implementation("com.github.1fexd:fastforwardkt:0.0.12")
-    implementation("com.github.1fexd:libredirectkt:0.0.13")
+    implementation("com.github.1fexd:libredirectkt:0.0.14")
     implementation("com.github.1fexd:mimetypekt:0.0.2")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
@@ -100,6 +100,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.8.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.29.1-alpha")
+    implementation ("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

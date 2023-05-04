@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings.link
 
+import android.os.Build
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,6 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
@@ -28,15 +32,16 @@ import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun LinksSettingsRoute(
     onBackPressed: () -> Unit,
     navController: NavController,
     viewModel: SettingsViewModel
 ) {
-    val context = LocalContext.current
-    val uriHandler = LocalUriHandler.current
+    val writeExternalStoragePermissionState = rememberPermissionState(
+        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
 
     SettingsScaffold(R.string.links, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -200,14 +205,16 @@ fun LinksSettingsRoute(
                 SwitchRow(
                     checked = viewModel.enableDownloader,
                     onChange = {
-                        viewModel.onEnableDownloader(it)
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !writeExternalStoragePermissionState.status.isGranted) {
+                            writeExternalStoragePermissionState.launchPermissionRequest()
+                        } else viewModel.onEnableDownloader(it)
                     },
                     headlineId = R.string.enable_downloader,
                     subtitleId = R.string.enable_downloader_explainer
                 )
             }
 
-            if(viewModel.enableDownloader){
+            if (viewModel.enableDownloader) {
                 item(key = "downloader_url_mime_type") {
                     SwitchRow(
                         checked = viewModel.downloaderCheckUrlMimeType,

@@ -468,7 +468,7 @@ class BottomSheetActivity : ComponentActivity() {
             LazyVerticalGrid(columns = GridCells.Adaptive(gridSize),
                 modifier = Modifier
                     .padding(horizontal = 3.dp)
-                    .height(baseHeight),
+                    .heightIn(0.dp, baseHeight),
                 content = {
                     itemsIndexed(
                         items = result.resolved,
@@ -511,7 +511,7 @@ class BottomSheetActivity : ComponentActivity() {
             LazyColumn(
                 modifier = Modifier
                     .padding(horizontal = 3.dp)
-                    .height(baseHeight),
+                    .heightIn(0.dp, baseHeight),
                 content = {
                     itemsIndexed(
                         items = result.resolved,

@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -53,6 +52,8 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IntentResolverResult
 import fe.linksheet.R
 import fe.linksheet.extension.buildSendTo
+import fe.linksheet.extension.runIf
+import fe.linksheet.extension.showToast
 import fe.linksheet.extension.sourceIntent
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.downloader.Downloader
@@ -60,7 +61,7 @@ import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.ui.theme.Theme
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
@@ -80,82 +81,75 @@ class BottomSheetActivity : ComponentActivity() {
             insets
         }
 
-        window.run {
-            setBackgroundDrawable(ColorDrawable(0))
-            setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT
-            )
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)
-            } else {
-                setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
+
+        window.setBackgroundDrawable(ColorDrawable(0))
+        window.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        } else WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+
+        window.setType(type)
+
+        val deferred = resolveAsync()
+
+        if (bottomSheetViewModel.showLoadingBottomSheet()) {
+            setContent {
+                LaunchedEffect(bottomSheetViewModel.resolveResult) {
+                    bottomSheetViewModel.resolveResult?.followRedirect?.resolveType?.let(
+                        ::makeResolveToast
+                    )
+                }
+
+                AppThemeBottomSheet(bottomSheetViewModel.resolveResult)
+            }
+        } else {
+            deferred.invokeOnCompletion {
+                setContent { AppThemeBottomSheet(bottomSheetViewModel.resolveResult) }
             }
         }
+    }
 
-        val makeResolveToast: (BottomSheetViewModel.FollowRedirectResolveType) -> Unit = { type ->
-            if (type != BottomSheetViewModel.FollowRedirectResolveType.NotResolved) {
-                Toast.makeText(
-                    this@BottomSheetActivity,
-                    getString(R.string.resolved_via, getString(type.stringId)),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-        val deferred = lifecycleScope.async {
+    private fun resolveAsync(): Deferred<Unit> {
+        return lifecycleScope.async {
             val completed = bottomSheetViewModel.resolveAsync(
                 this@BottomSheetActivity, intent
             ).await()
 
-            val isRegularPreferredApp = completed?.isRegularPreferredApp() ?: false
-
-            if (completed != null && (isRegularPreferredApp || completed.hasSingleMatchingOption)) {
-                val app = completed.filteredItem ?: completed.resolved[0]
+            if (completed != null && completed.hasAutoLaunchApp) {
                 if (!bottomSheetViewModel.disableToasts) {
-                    if (completed.followRedirect?.resolveType != null) {
-                        runOnUiThread {
-                            makeResolveToast(completed.followRedirect.resolveType)
-                        }
-                    }
+                    completed.followRedirect?.resolveType?.let { makeResolveToast(it, true) }
 
-                    runOnUiThread {
-                        Toast.makeText(
-                            this@BottomSheetActivity,
-                            getString(R.string.opening_with_app, app.displayLabel),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    showToast(
+                        getString(R.string.opening_with_app, completed.app.displayLabel),
+                        uiThread = true
+                    )
                 }
 
-                launchApp(app, completed.uri, isRegularPreferredApp)
+                launchApp(completed.app, completed.uri, completed.isRegularPreferredApp)
             }
         }
+    }
 
-        val showBottomSheet: @Composable (IntentResolverResult?) -> Unit = @Composable { result ->
-            AppTheme(bottomSheetViewModel.theme) {
-                BottomSheet(result, bottomSheetViewModel.theme == Theme.AmoledBlack)
-            }
+    @Composable
+    private fun AppThemeBottomSheet(result: IntentResolverResult?) {
+        AppTheme(bottomSheetViewModel.theme) {
+            BottomSheet(result, bottomSheetViewModel.theme == Theme.AmoledBlack)
         }
+    }
 
-        if (bottomSheetViewModel.followRedirects || bottomSheetViewModel.enableDownloader) {
-            setContent {
-                var hasShownToast by remember { mutableStateOf(false) }
-                LaunchedEffect(bottomSheetViewModel.resolveResult) {
-                    if (!hasShownToast) {
-                        bottomSheetViewModel.resolveResult?.followRedirect?.resolveType?.let(
-                            makeResolveToast
-                        )
-                        hasShownToast = true
-                    }
-                }
-
-                showBottomSheet(bottomSheetViewModel.resolveResult)
-            }
-        } else {
-            deferred.invokeOnCompletion {
-                setContent { showBottomSheet(bottomSheetViewModel.resolveResult) }
-            }
+    private fun makeResolveToast(
+        type: BottomSheetViewModel.FollowRedirectResolveType,
+        uiThread: Boolean = false
+    ) {
+        if (!type.isNotResolved()) {
+            showToast(
+                getString(R.string.resolved_via, getString(type.stringId)),
+                uiThread = uiThread
+            )
         }
     }
 
@@ -168,7 +162,6 @@ class BottomSheetActivity : ComponentActivity() {
         val appListItemPadding = 10.dp
         val appListItemHeight = 40.dp
         val preferredAppItemHeight = 60.dp
-        val maxAppListButtonRowHeight = 300.dp + buttonRowHeight * 2
 
         val gridSize = 120.dp
         var gridItemHeightPackage = 80.dp
@@ -197,21 +190,22 @@ class BottomSheetActivity : ComponentActivity() {
 
         val launchScope = rememberCoroutineScope()
         val interactionSource = remember { MutableInteractionSource() }
-        val modifier = if (landscape) {
-            Modifier
-                .fillMaxWidth(0.55f)
-                .fillMaxHeight()
-        } else Modifier
 
         BottomDrawer(
-            modifier = modifier.clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {},
+            modifier = Modifier
+                .runIf(landscape) {
+                    it
+                        .fillMaxWidth(0.55f)
+                        .fillMaxHeight()
+                }
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {},
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             sheetContent = {
-                if (result != null && !result.hasAutoLaunchApp()) {
+                if (result != null && !result.hasAutoLaunchApp) {
                     val showPackage = remember {
                         result.showExtended || bottomSheetViewModel.alwaysShowPackageName
                     }
@@ -226,8 +220,8 @@ class BottomSheetActivity : ComponentActivity() {
                         gridItemHeight
                     } else appListItemHeight.value
 
-                    val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1)
-                            * itemHeight).dp
+                    val baseHeight =
+                        ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
 
                     if (result.filteredItem == null) {
                         OpenWith(
@@ -392,7 +386,8 @@ class BottomSheetActivity : ComponentActivity() {
             AppList(
                 result = result,
                 selectedItem = selectedItem,
-                onSelectedItemChange = { selectedItem = it }, launchScope = launchScope,
+                onSelectedItemChange = { selectedItem = it },
+                launchScope = launchScope,
                 baseHeight = baseHeight,
                 showPackage = showPackage
             )
@@ -609,8 +604,7 @@ class BottomSheetActivity : ComponentActivity() {
                                 )
                             )
                             if (!bottomSheetViewModel.disableToasts) {
-                                Toast.makeText(context, R.string.url_copied, Toast.LENGTH_SHORT)
-                                    .show()
+                                showToast(R.string.url_copied)
                             }
 
                             if (bottomSheetViewModel.hideAfterCopying) {
@@ -660,7 +654,7 @@ class BottomSheetActivity : ComponentActivity() {
     private fun OpenButtons(
         result: IntentResolverResult,
         enabled: Boolean,
-        end: Boolean = false,
+        arrangeEnd: Boolean = false,
         padding: PaddingValues,
         onClick: (always: Boolean) -> Unit,
     ) {
@@ -670,12 +664,13 @@ class BottomSheetActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(buttonRowHeight)
-                .let {
-                    if (end) it.padding(end = buttonPadding) else it.padding(start = buttonPadding)
-                },
-            horizontalArrangement = if (end) Arrangement.End else Arrangement.Start
+                .runIf(arrangeEnd,
+                    { it.padding(end = buttonPadding) },
+                    { it.padding(start = buttonPadding) }
+                ),
+            horizontalArrangement = if (arrangeEnd) Arrangement.End else Arrangement.Start
         ) {
-            if (result.totalCount() > 0) {
+            if (!result.isEmpty) {
                 TextButton(
                     enabled = enabled,
                     contentPadding = padding,
@@ -688,12 +683,7 @@ class BottomSheetActivity : ComponentActivity() {
                     )
                 }
 
-                Spacer(
-                    modifier = Modifier.width(
-                        if (bottomSheetViewModel.enableCopyButton && bottomSheetViewModel.enableSendButton) 2.dp
-                        else 5.dp
-                    )
-                )
+                Spacer(modifier = Modifier.width(5.dp))
 
                 TextButton(
                     enabled = enabled,

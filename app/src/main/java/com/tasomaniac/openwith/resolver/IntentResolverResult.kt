@@ -9,16 +9,17 @@ data class IntentResolverResult(
     val resolved: List<DisplayActivityInfo>,
     val filteredItem: DisplayActivityInfo?,
     val showExtended: Boolean,
-    val alwaysPreferred: Boolean?,
-    val hasSingleMatchingOption: Boolean = false,
+    private val alwaysPreferred: Boolean?,
+    private val hasSingleMatchingOption: Boolean = false,
     val followRedirect: BottomSheetViewModel.FollowRedirect? = null,
     val downloadable: Downloader.DownloadCheckResult = Downloader.DownloadCheckResult.NonDownloadable,
 ) {
-    val isEmpty get() = totalCount() == 0
+    val totalCount = resolved.size + if (filteredItem != null) 1 else 0
+    val isEmpty = totalCount == 0
 
-    fun totalCount() = resolved.size + if (filteredItem != null) 1 else 0
+    val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
 
-    fun hasAutoLaunchApp() = this.isRegularPreferredApp() || this.hasSingleMatchingOption
+    val hasAutoLaunchApp = isRegularPreferredApp || hasSingleMatchingOption
 
-    fun isRegularPreferredApp() = alwaysPreferred == true && filteredItem != null
+    val app = filteredItem ?: resolved[0]
 }

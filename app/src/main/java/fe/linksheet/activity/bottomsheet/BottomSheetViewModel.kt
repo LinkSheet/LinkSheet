@@ -43,8 +43,8 @@ import timber.log.Timber
 import java.io.File
 import java.util.*
 
-class BottomSheetViewModel : ViewModel(),
-    KoinComponent {
+class BottomSheetViewModel : ViewModel(), KoinComponent {
+
     private val database by inject<LinkSheetDatabase>()
     private val preferenceRepository by inject<PreferenceRepository>()
     private val redirectResolver by inject<RedirectResolver>()
@@ -138,11 +138,13 @@ class BottomSheetViewModel : ViewModel(),
 
     fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
         return viewModelScope.async(Dispatchers.IO) {
-            resolveResult = ResolveIntents.resolve(context, intent, this@BottomSheetViewModel)
-
-            resolveResult
+            ResolveIntents.resolve(context, intent, this@BottomSheetViewModel).apply {
+                resolveResult = this
+            }
         }
     }
+
+    fun showLoadingBottomSheet() = followRedirects || enableDownloader
 
     fun startMainActivity(context: Context): Boolean {
         return context.startActivityWithConfirmation(Intent(context, MainActivity::class.java))
@@ -192,6 +194,8 @@ class BottomSheetViewModel : ViewModel(),
         Remote(R.string.redirect_resolve_type_remote),
         Local(R.string.redirect_resolve_type_local),
         NotResolved(R.string.redirect_resolve_type_not_resolved);
+
+        fun isNotResolved() = this == NotResolved
     }
 
     data class FollowRedirect(

@@ -13,8 +13,8 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 25
         targetSdk = 33
-        versionCode = 30
-        versionName = "0.0.30"
+        versionCode = 31
+        versionName = "0.0.31"
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -95,6 +95,7 @@ dependencies {
 
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.32")
+    implementation("com.gitlab.grrfe.httpkt:core-android:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
 
 

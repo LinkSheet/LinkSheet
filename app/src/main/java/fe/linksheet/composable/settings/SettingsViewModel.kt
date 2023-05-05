@@ -12,7 +12,6 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.core.content.getSystemService
@@ -256,10 +255,16 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     @Throws(ActivityNotFoundException::class)
     fun openOpenByDefaultSettings(context: Context, packageName: String): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val intent = Intent(
-                Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-                Uri.parse("package:$packageName")
-            )
+            val intent = if (Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
+                // S*msung moment lol 🤮 (https://stackoverflow.com/a/72365164)
+                Intent("android.settings.MANAGE_DOMAIN_URLS")
+            } else {
+                Intent(
+                    Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
+                    Uri.parse("package:$packageName")
+                )
+            }
+
             context.startActivity(intent)
             return true
         }

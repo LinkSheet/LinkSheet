@@ -19,7 +19,7 @@
     <string name="enable_copy_button_explainer">在底栏中显示“复制链接”按钮</string>
     <string name="url_copied">链接已复制到剪贴板</string>
     <string name="single_tap">启用单击</string>
-    <string name="single_tap_explainer">只需单击而非双击即可打开应用；长按选择应用，双击打开应用信息</string>
+    <string name="single_tap_explainer">仅需单击而非双击即可打开应用；长按选择应用，双击打开应用信息</string>
     <string name="confirm">确认</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">按使用情况对应用排序</string>

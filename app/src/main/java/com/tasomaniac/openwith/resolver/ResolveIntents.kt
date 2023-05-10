@@ -110,6 +110,8 @@ object ResolveIntents {
             it.activityInfo.packageName == BuildConfig.APPLICATION_ID
         }
 
+        Timber.tag("ResolveIntents").d("ResolveListPreSort: $resolveListPreSort")
+
         Timber.tag("ResolveIntents")
             .d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 

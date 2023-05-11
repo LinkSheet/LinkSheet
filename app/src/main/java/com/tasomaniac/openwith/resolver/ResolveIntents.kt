@@ -96,9 +96,6 @@ object ResolveIntents {
 
         Timber.tag("ResolveIntents").d("HostHistory: $hostHistory")
 
-
-        val alwaysPreferred = preferredApp?.app?.alwaysPreferred
-
         val sourceIntent = intent.sourceIntent(uri)
         Timber.tag("ResolveIntents").d("SourceIntent: $sourceIntent")
 
@@ -124,7 +121,7 @@ object ResolveIntents {
             context,
             resolveListPreSort,
             hostHistory,
-            preferredApp?.app?.componentName,
+            preferredApp?.app,
             !viewModel.dontShowFilteredItem
         )
 
@@ -145,7 +142,7 @@ object ResolveIntents {
             resolved,
             filteredItem,
             showExtended,
-            alwaysPreferred,
+            preferredApp?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
             followRedirect,
             downloadable

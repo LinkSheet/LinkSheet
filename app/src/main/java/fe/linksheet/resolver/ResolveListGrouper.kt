@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
+import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.data.entity.AppSelectionHistory
 import fe.linksheet.extension.findIndexed
@@ -17,16 +18,16 @@ object ResolveListGrouper {
         context: Context,
         current: List<ResolveInfo>,
         historyMap: Map<String, AppSelectionHistory>?,
-        lastChosenComponent: ComponentName?,
+        lastChosenPreferredApp: PreferredApp?,
         returnFilteredItem: Boolean = true,
     ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         val grouped = current.toMutableList()
 
         val filteredPair = grouped.findIndexed {
-            isLastChosenPosition(it.activityInfo, lastChosenComponent)
+            isLastChosenPosition(it.activityInfo, lastChosenPreferredApp?.componentName)
         }
 
-        val filteredItem = if (filteredPair != null && returnFilteredItem) {
+        val filteredItem = if (filteredPair != null && (returnFilteredItem || lastChosenPreferredApp?.alwaysPreferred == true)) {
             grouped.removeAt(filteredPair.second)
             filteredPair.first.toDisplayActivityInfo(context)
         } else null

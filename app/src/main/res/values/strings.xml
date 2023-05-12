@@ -129,4 +129,5 @@
     <string name="downloader_url_mime_type">Use mime type from URL</string>
     <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
     <string name="random_instance">Random instance</string>
+    <string name="app_name">LinkSheet</string>
 </resources>

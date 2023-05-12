@@ -327,6 +327,7 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
 
         val request = DownloadManager.Request(uri)
             .setTitle(resources.getString(R.string.linksheet_download))
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
                 path

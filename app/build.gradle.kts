@@ -55,7 +55,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.2"
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
 
     packaging {
@@ -69,6 +69,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
 
     implementation("androidx.room:room-runtime:2.5.1")
+    implementation("androidx.webkit:webkit:1.6.1")
     annotationProcessor("androidx.room:room-compiler:2.5.1")
     kapt("androidx.room:room-compiler:2.5.1")
 
@@ -76,11 +77,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.1")
 
-    implementation("androidx.compose.ui:ui:1.4.2")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.2")
+    implementation("androidx.compose.ui:ui:1.4.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
     implementation("androidx.compose.material3:material3:1.1.0-rc01")
-    implementation("androidx.compose.material:material:1.4.2")
-    implementation("androidx.compose.material:material-icons-extended:1.4.2")
+    implementation("androidx.compose.material:material:1.4.3")
+    implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.29.1-alpha")
@@ -99,14 +100,14 @@ dependencies {
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
 
 
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.29.1-alpha")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation ("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.2")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.2")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.2")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
 }

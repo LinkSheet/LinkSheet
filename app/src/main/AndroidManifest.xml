@@ -71,17 +71,26 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
         <activity-alias
                 android:name=".activity.bottomsheet.BottomSheetActivityContextMenuAction"
+                android:exported="true"
                 android:label="@string/open_with_linksheet"
-                android:targetActivity=".activity.bottomsheet.BottomSheetActivity"
-                android:exported="true">
+                android:targetActivity=".activity.bottomsheet.BottomSheetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity-alias>
+        <service
+                android:name=".customtabs.LinkSheetCustomTabsService"
+                android:exported="true"
+                tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="android.support.customtabs.action.CustomTabsService" />
+                <category android:name="androidx.browser.trusted.category.TrustedWebActivities" />
+            </intent-filter>
+        </service>
     </application>
-
 </manifest>

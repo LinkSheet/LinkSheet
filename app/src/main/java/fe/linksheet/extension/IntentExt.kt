@@ -9,10 +9,10 @@ import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
 import timber.log.Timber
 
-fun Intent.sourceIntent(uri: Uri?) = Intent().apply {
+fun Intent.sourceIntent(uri: Uri?) = Intent(this).apply {
     action = Intent.ACTION_VIEW
     data = uri
-    flags = this@sourceIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
+    flags = flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
 }
 
 //{ act=android.intent.action.SEND typ=text/plain flg=0x10800001 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity clip={text/plain {T(59)}} (has extras) }

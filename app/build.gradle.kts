@@ -82,6 +82,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.1.0-rc01")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
+    implementation("androidx.browser:browser:1.5.0")
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.29.1-alpha")
@@ -102,7 +103,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
-    implementation ("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
+    implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

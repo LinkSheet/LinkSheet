@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Bundle
+import androidx.browser.customtabs.CustomTabsIntent
 import com.tasomaniac.openwith.extension.componentName
 import com.tasomaniac.openwith.extension.isHttp
 import com.tasomaniac.openwith.preferred.PreferredResolver
@@ -14,7 +16,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getUri
-import fe.linksheet.extension.sourceIntent
+import fe.linksheet.extension.newIntent
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.resolver.ResolveListGrouper
 import timber.log.Timber
@@ -52,9 +54,11 @@ object ResolveIntents {
             if (service != null && viewModel.loadLibRedirectState(service.key) == true) {
                 val savedDefault = viewModel.getLibRedirectDefault(service.key)
                 val redirected = if (savedDefault != null) {
-                   val instanceUrl = if (savedDefault.instanceUrl == SettingsViewModel.libRedirectRandomInstanceKey) {
-                       libRedirectInstances.find { it.frontendKey == savedDefault.frontendKey }?.hosts?.random() ?: savedDefault.instanceUrl
-                   } else savedDefault.instanceUrl
+                    val instanceUrl =
+                        if (savedDefault.instanceUrl == SettingsViewModel.libRedirectRandomInstanceKey) {
+                            libRedirectInstances.find { it.frontendKey == savedDefault.frontendKey }?.hosts?.random()
+                                ?: savedDefault.instanceUrl
+                        } else savedDefault.instanceUrl
 
                     LibRedirect.redirect(
                         uri.toString(),
@@ -96,11 +100,21 @@ object ResolveIntents {
 
         Timber.tag("ResolveIntents").d("HostHistory: $hostHistory")
 
-        val sourceIntent = intent.sourceIntent(uri)
-        Timber.tag("ResolveIntents").d("SourceIntent: $sourceIntent")
+        Timber.tag("ResolveIntents").d("SourceIntent: $intent ${intent.extras}")
+
+        val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
+        val newIntent = intent.newIntent(uri, !isCustomTab)
+        if (isCustomTab) {
+            newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
+                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")
+                newIntent.removeExtra(key)
+            }
+        }
+
+        Timber.tag("ResolveIntents").d("NewIntent: $newIntent ${newIntent.extras}")
 
         val resolveListPreSort = context.packageManager.queryIntentActivities(
-            sourceIntent, PackageManager.MATCH_ALL
+            newIntent, PackageManager.MATCH_ALL
         )
 
         resolveListPreSort.removeAll {
@@ -112,10 +126,11 @@ object ResolveIntents {
         Timber.tag("ResolveIntents")
             .d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
-        val browserMode = if (sourceIntent.isHttp()) {
+        val browserMode = if (newIntent.isHttp()) {
             BrowserHandler.handleBrowsers(context, resolveListPreSort, viewModel)
         } else null
 
+        Timber.tag("ResolveIntents").d("BrowserMode: $browserMode")
 
         val (resolved, filteredItem, showExtended) = ResolveListGrouper.resolveList(
             context,

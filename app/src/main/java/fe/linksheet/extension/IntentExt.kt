@@ -2,17 +2,22 @@ package fe.linksheet.extension
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
 import timber.log.Timber
 
-fun Intent.sourceIntent(uri: Uri?) = Intent().apply {
+fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).apply {
     action = Intent.ACTION_VIEW
     data = uri
-    flags = this@sourceIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
+    flags = this@newIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
+    `package` = null
+    component = null
+
+    if (dropExtras) {
+        extras?.keySet()?.forEach { extras?.remove(it) }
+    }
 }
 
 //{ act=android.intent.action.SEND typ=text/plain flg=0x10800001 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity clip={text/plain {T(59)}} (has extras) }
@@ -57,7 +62,7 @@ fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri?
             Timber.tag("Url Post FastForward").d(url)
 
             if (clearUrl) {
-                url = clearUrl(url,clearUrlProviders)
+                url = clearUrl(url, clearUrlProviders)
             }
 
             Timber.tag("Url Post ClearURL").d(url)

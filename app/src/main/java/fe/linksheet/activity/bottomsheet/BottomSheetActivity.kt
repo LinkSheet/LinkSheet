@@ -54,7 +54,7 @@ import fe.linksheet.R
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.runIf
 import fe.linksheet.extension.showToast
-import fe.linksheet.extension.sourceIntent
+import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.ui.theme.AppTheme
@@ -751,7 +751,7 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     private suspend fun launchApp(info: DisplayActivityInfo, uri: Uri?, always: Boolean = false) {
-        val intentFrom = info.intentFrom(intent.sourceIntent(uri))
+        val intentFrom = info.intentFrom(intent.newIntent(uri))
         bottomSheetViewModel.persistSelectedIntentAsync(intentFrom, always)
 
         this.startActivity(intentFrom)

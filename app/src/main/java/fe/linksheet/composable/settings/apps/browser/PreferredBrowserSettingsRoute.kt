@@ -153,18 +153,6 @@ fun PreferredBrowserSettingsRoute(
                 }
             }
 
-            item(key = "none") {
-                RadioButtonRow(
-                    selected = viewModel.browserMode == BrowserHandler.BrowserMode.None,
-                    onClick = {
-                        viewModel.onBrowserMode(BrowserHandler.BrowserMode.None)
-                    },
-                    onLongClick = null
-                ) {
-                    Texts(headline = R.string.none, subtitle = R.string.none_explainer)
-                }
-            }
-
             item(key = "always_ask") {
                 RadioButtonRow(
                     selected = viewModel.browserMode == BrowserHandler.BrowserMode.AlwaysAsk,
@@ -177,6 +165,18 @@ fun PreferredBrowserSettingsRoute(
                         headline = R.string.always_ask,
                         subtitle = R.string.always_ask_explainer
                     )
+                }
+            }
+
+            item(key = "none") {
+                RadioButtonRow(
+                    selected = viewModel.browserMode == BrowserHandler.BrowserMode.None,
+                    onClick = {
+                        viewModel.onBrowserMode(BrowserHandler.BrowserMode.None)
+                    },
+                    onLongClick = null
+                ) {
+                    Texts(headline = R.string.none, subtitle = R.string.none_explainer)
                 }
             }
 

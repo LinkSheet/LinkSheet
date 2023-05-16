@@ -15,6 +15,7 @@ import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.observeAsState
+import fe.linksheet.module.preference.Preferences
 
 
 @Composable
@@ -29,11 +30,11 @@ fun BottomSheetSettingsRoute(
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             if (!viewModel.getUsageStatsAllowed(context)) {
-                viewModel.onUsageStatsSorting(false)
+                viewModel.updateState(viewModel.usageStatsSorting, false)
             }
 
             if (viewModel.wasTogglingUsageStatsSorting) {
-                viewModel.onUsageStatsSorting(true)
+                viewModel.updateState(viewModel.usageStatsSorting, true)
                 viewModel.wasTogglingUsageStatsSorting = false
             }
         }
@@ -48,12 +49,12 @@ fun BottomSheetSettingsRoute(
         ) {
             item(key = "usage_stats") {
                 SwitchRow(
-                    checked = viewModel.usageStatsSorting,
+                    checked = viewModel.usageStatsSorting.value,
                     onChange = {
                         if (!viewModel.getUsageStatsAllowed(context)) {
                             viewModel.openUsageStatsSettings(context)
                         } else {
-                            viewModel.onUsageStatsSorting(it)
+                            viewModel.updateState(viewModel.usageStatsSorting, it)
                         }
                     },
                     headlineId = R.string.usage_stats_sorting,
@@ -63,22 +64,18 @@ fun BottomSheetSettingsRoute(
 
             item(key = "enable_copy_button") {
                 SwitchRow(
-                    checked = viewModel.enableCopyButton,
-                    onChange = {
-                        viewModel.onEnableCopyButton(it)
-                    },
+                    state = viewModel.enableCopyButton,
+                    viewModel = viewModel,
                     headlineId = R.string.enable_copy_button,
                     subtitleId = R.string.enable_copy_button_explainer
                 )
             }
 
-            if (viewModel.enableCopyButton) {
+            if (viewModel.enableCopyButton.value) {
                 item(key = "hide_after_copying") {
                     SwitchRow(
-                        checked = viewModel.hideAfterCopying,
-                        onChange = {
-                            viewModel.onHideAfterCopying(it)
-                        },
+                        state = viewModel.hideAfterCopying,
+                        viewModel = viewModel,
                         headlineId = R.string.hide_after_copying,
                         subtitleId = R.string.hide_after_copying_explainer
                     )
@@ -87,20 +84,18 @@ fun BottomSheetSettingsRoute(
 
             item(key = "enable_send_intent") {
                 SwitchRow(
-                    checked = viewModel.enableSendButton,
-                    onChange = {
-                        viewModel.onSendButton(it)
-                    },
+                    state = viewModel.enableSendButton,
+                    viewModel = viewModel,
                     headlineId = R.string.enable_send_button,
                     subtitleId = R.string.enable_send_button_explainer
                 )
             }
 
-            if (viewModel.enableCopyButton || viewModel.enableSendButton) {
+            if (viewModel.enableCopyButton.value || viewModel.enableSendButton.value) {
                 item(key = "use_text_share_copy_buttons") {
                     SwitchRow(
-                        checked = viewModel.useTextShareCopyButtons,
-                        onChange = { viewModel.onUseTextShareCopyButtons(it) },
+                        state = viewModel.useTextShareCopyButtons,
+                        viewModel = viewModel,
                         headlineId = R.string.use_text_share_copy_buttons,
                         subtitleId = R.string.use_text_share_copy_buttons_explainer
                     )
@@ -108,17 +103,18 @@ fun BottomSheetSettingsRoute(
             }
 
             item(key = "enable_single_tap") {
-                SwitchRow(checked = viewModel.singleTap, onChange = {
-                    viewModel.onSingleTap(it)
-                }, headlineId = R.string.single_tap, subtitleId = R.string.single_tap_explainer)
+                SwitchRow(
+                    state = viewModel.singleTap,
+                    viewModel = viewModel,
+                    headlineId = R.string.single_tap,
+                    subtitleId = R.string.single_tap_explainer
+                )
             }
 
             item(key = "always_show_package_name") {
                 SwitchRow(
-                    checked = viewModel.alwaysShowPackageName,
-                    onChange = {
-                        viewModel.onAlwaysShowButton(it)
-                    },
+                    state = viewModel.alwaysShowPackageName,
+                    viewModel = viewModel,
                     headlineId = R.string.always_show_package_name,
                     subtitleId = R.string.always_show_package_name_explainer
                 )
@@ -126,8 +122,8 @@ fun BottomSheetSettingsRoute(
 
             item(key = "disable_toasts") {
                 SwitchRow(
-                    checked = viewModel.disableToasts,
-                    onChange = { viewModel.onDisableToasts(it) },
+                    state = viewModel.disableToasts,
+                    viewModel = viewModel,
                     headlineId = R.string.disable_toasts,
                     subtitleId = R.string.disable_toasts_explainer
                 )
@@ -135,8 +131,8 @@ fun BottomSheetSettingsRoute(
 
             item(key = "grid_layout") {
                 SwitchRow(
-                    checked = viewModel.gridLayout,
-                    onChange = { viewModel.onGridLayout(it) },
+                    state = viewModel.gridLayout,
+                    viewModel = viewModel,
                     headlineId = R.string.display_grid_layout,
                     subtitleId = R.string.display_grid_layout_explainer
                 )
@@ -144,8 +140,8 @@ fun BottomSheetSettingsRoute(
 
             item(key = "dont_show_filtered_item") {
                 SwitchRow(
-                    checked = viewModel.dontShowFilteredItem,
-                    onChange = { viewModel.onDontShowFilteredItem(it) },
+                    state = viewModel.dontShowFilteredItem,
+                    viewModel = viewModel,
                     headlineId = R.string.dont_show_filtered_item,
                     subtitleId = R.string.dont_show_filtered_item_explainer
                 )
@@ -153,8 +149,8 @@ fun BottomSheetSettingsRoute(
 
             item(key = "preview_url") {
                 SwitchRow(
-                    checked = viewModel.previewUrl,
-                    onChange = { viewModel.onPreviewUrl(it) },
+                    state = viewModel.previewUrl,
+                    viewModel = viewModel,
                     headlineId = R.string.preview_url,
                     subtitleId = R.string.preview_url_explainer
                 )

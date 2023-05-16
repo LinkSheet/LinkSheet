@@ -20,10 +20,12 @@ import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
+import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.settings.apps.browser.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
+import fe.linksheet.composable.settings.browser.mode.BrowserSettingsRoute
 import fe.linksheet.composable.settings.link.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
@@ -38,7 +40,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            AppTheme(theme = settingsViewModel.theme) {
+            AppTheme(theme = settingsViewModel.theme.value) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     Surface(color = MaterialTheme.colorScheme.surface) {
                         Column(modifier = Modifier.fillMaxSize()) {
@@ -62,6 +64,13 @@ class MainActivity : ComponentActivity() {
 
                                 composable(route = appsSettingsRoute) {
                                     AppsSettingsRoute(
+                                        navController = navController,
+                                        onBackPressed = onBackPressed
+                                    )
+                                }
+
+                                composable(route = browserSettingsRoute) {
+                                    BrowserSettingsRoute(
                                         navController = navController,
                                         onBackPressed = onBackPressed
                                     )
@@ -120,6 +129,13 @@ class MainActivity : ComponentActivity() {
 
                                 composable(route = preferredBrowserSettingsRoute) {
                                     PreferredBrowserSettingsRoute(
+                                        onBackPressed = onBackPressed,
+                                        viewModel = settingsViewModel
+                                    )
+                                }
+
+                                composable(route = inAppBrowserSettingsRoute) {
+                                    InAppBrowserSettingsRoute(
                                         onBackPressed = onBackPressed,
                                         viewModel = settingsViewModel
                                     )

@@ -61,7 +61,6 @@
     <string name="whitelisted_explainer">仅显示白名单浏览器</string>
     <string name="save">保存</string>
     <string name="whitelisted_browsers">白名单浏览器</string>
-    <string name="apps_explainer">首选浏览器，首选应用，能够打开链接的应用</string>
     <string name="bottom_sheet_explainer">按使用情况排序，启用复制按钮，启用分享按钮等。</string>
     <string name="about">关于</string>
     <string name="about_explainer">关于此应用，许可证</string>

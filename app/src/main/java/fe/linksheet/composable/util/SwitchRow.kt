@@ -5,17 +5,54 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.module.preference.BasePreference
+import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.preference.RepositoryState
+
+@Composable
+fun SwitchRow(
+    modifier: Modifier = Modifier,
+    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    viewModel: SettingsViewModel,
+    headline: String,
+    subtitle: String? = null,
+    subtitleBuilder: @Composable (() -> Unit)? = {
+        SubtitleText(subtitle = subtitle ?: "")
+    }
+) {
+    SwitchRow(
+        modifier = modifier,
+        checked = state.value,
+        onChange = { viewModel.updateState(state, it) },
+        headline = headline,
+        subtitle = subtitle,
+        subtitleBuilder = subtitleBuilder
+    )
+}
+
+@Composable
+fun SwitchRow(
+    modifier: Modifier = Modifier,
+    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    viewModel: SettingsViewModel,
+    @StringRes headlineId: Int,
+    @StringRes subtitleId: Int
+) {
+    SwitchRow(
+        modifier = modifier,
+        checked = state.value,
+        onChange = { viewModel.updateState(state, it) },
+        headlineId = headlineId,
+        subtitleId = subtitleId
+    )
+}
 
 @Composable
 fun SwitchRow(

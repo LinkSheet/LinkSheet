@@ -49,7 +49,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.resolver.IntentResolverResult
+import com.tasomaniac.openwith.resolver.BottomSheetResult
 import fe.linksheet.R
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.runIf
@@ -116,10 +116,10 @@ class BottomSheetActivity : ComponentActivity() {
     private fun resolveAsync(): Deferred<Unit> {
         return lifecycleScope.async {
             val completed = bottomSheetViewModel.resolveAsync(
-                this@BottomSheetActivity, intent
+                this@BottomSheetActivity, intent, referrer
             ).await()
 
-            if (completed != null && completed.hasAutoLaunchApp) {
+            if (completed.hasAutoLaunchApp) {
                 if (!bottomSheetViewModel.disableToasts) {
                     completed.followRedirect?.resolveType?.let { makeResolveToast(it, true) }
 
@@ -135,7 +135,7 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun AppThemeBottomSheet(result: IntentResolverResult?) {
+    private fun AppThemeBottomSheet(result: BottomSheetResult?) {
         AppTheme(bottomSheetViewModel.theme) {
             BottomSheet(result, bottomSheetViewModel.theme == Theme.AmoledBlack)
         }
@@ -173,7 +173,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    private fun BottomSheet(result: IntentResolverResult?, isBlackTheme: Boolean) {
+    private fun BottomSheet(result: BottomSheetResult?, isBlackTheme: Boolean) {
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
@@ -264,7 +264,7 @@ class BottomSheetActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun OpenWithPreferred(
-        result: IntentResolverResult,
+        result: BottomSheetResult,
         launchScope: CoroutineScope,
         drawerState: ModalBottomSheetState,
         baseHeight: Dp,
@@ -357,7 +357,7 @@ class BottomSheetActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun OpenWith(
-        result: IntentResolverResult,
+        result: BottomSheetResult,
         launchScope: CoroutineScope,
         drawerState: ModalBottomSheetState,
         baseHeight: Dp,
@@ -408,7 +408,7 @@ class BottomSheetActivity : ComponentActivity() {
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun AppList(
-        result: IntentResolverResult,
+        result: BottomSheetResult,
         selectedItem: Int,
         onSelectedItemChange: (Int) -> Unit,
         launchScope: CoroutineScope,
@@ -549,7 +549,7 @@ class BottomSheetActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun ButtonRow(
-        result: IntentResolverResult,
+        result: BottomSheetResult,
         enabled: Boolean,
         onClick: (always: Boolean) -> Unit,
         drawerState: ModalBottomSheetState
@@ -652,7 +652,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     @Composable
     private fun OpenButtons(
-        result: IntentResolverResult,
+        result: BottomSheetResult,
         enabled: Boolean,
         arrangeEnd: Boolean = false,
         padding: PaddingValues,

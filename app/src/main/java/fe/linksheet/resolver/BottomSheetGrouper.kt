@@ -13,8 +13,8 @@ import fe.linksheet.extension.findIndexed
 import fe.linksheet.extension.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
-object ResolveListGrouper {
-    fun resolveList(
+object BottomSheetGrouper {
+    fun group(
         context: Context,
         current: List<ResolveInfo>,
         historyMap: Map<String, AppSelectionHistory>?,

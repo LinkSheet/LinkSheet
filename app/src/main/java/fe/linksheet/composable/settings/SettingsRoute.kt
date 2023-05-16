@@ -37,6 +37,18 @@ fun SettingsRoute(
                 )
             }
 
+            item(key = "browser") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = browserSettingsRoute,
+                    headline = R.string.browser,
+                    subtitle = R.string.browser_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.OpenInBrowser, description = R.string.browser)
+                    }
+                )
+            }
+
             item(key = "bottom_sheet") {
                 SettingsItemRow(
                     navController = navController,

@@ -6,13 +6,13 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import fe.linksheet.data.dao.PackageEntityCreator
 
-@Entity(tableName = "whitelisted_browser", indices = [Index("packageName", unique = true)])
-data class WhitelistedBrowser(
+@Entity(tableName = "disable_in_app_browser_in_selected", indices = [Index("packageName", unique = true)])
+data class DisableInAppBrowserInSelected(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") val id: Int = 0,
     val packageName: String
 ) {
-    companion object Creator : PackageEntityCreator<WhitelistedBrowser> {
-        override fun createInstance(packageName: String) = WhitelistedBrowser(
+    companion object Creator : PackageEntityCreator<DisableInAppBrowserInSelected> {
+        override fun createInstance(packageName: String) = DisableInAppBrowserInSelected(
             packageName = packageName
         )
     }

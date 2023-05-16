@@ -3,8 +3,6 @@ package fe.linksheet.module.preference
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.tasomaniac.openwith.resolver.BrowserHandler
-import fe.linksheet.ui.theme.Theme
 import org.koin.dsl.module
 
 val preferenceRepositoryModule = module {
@@ -13,178 +11,144 @@ val preferenceRepositoryModule = module {
     }
 }
 
-typealias StringPersister<T> = (T) -> String
-typealias StringReader<T> = (String) -> T?
-
-typealias IntPersister<T> = (T) -> Int
-typealias IntReader<T> = (Int) -> T?
-
 class PreferenceRepository(context: Context) {
     private val preferences by lazy {
         context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
     }
 
-    companion object {
-        val enableCopyButton = Preference("enable_copy_button", false)
-        val hideAfterCopying = Preference("hide_after_copying", true)
-        val singleTap = Preference("single_tap", false)
-        val usageStatsSorting = Preference("usage_stats_sorting", false)
-        val browserMode = Preference<BrowserHandler.BrowserMode>(
-            "browser_mode", BrowserHandler.BrowserMode.AlwaysAsk
-        )
-        val selectedBrowser = Preference<String>("selected_browser", null)
-        val enableSendButton = Preference("enable_send_button", false)
-        val alwaysShowPackageName = Preference("always_show_package_name", false)
-        val disableToasts = Preference("disable_toasts", false)
-        val gridLayout = Preference("grid_layout", false)
-        val useClearUrls = Preference("use_clear_urls", false)
-        val useFastForwardRules = Preference("fast_forward_rules", false)
-        val enableLibRedirect = Preference("enable_lib_redirect", false)
-        val followRedirects = Preference("follow_redirects", false)
-        val followRedirectsLocalCache = Preference("follow_redirects_local_cache", true)
-        val followRedirectsExternalService = Preference("follow_redirects_external_service", false)
-        val followOnlyKnownTrackers = Preference("follow_only_known_trackers", true)
-        val theme = Preference("theme", Theme.System)
-        val dontShowFilteredItem = Preference("dont_show_filtered_item", false)
-        val useTextShareCopyButtons = Preference("use_text_share_copy_buttons", false)
-        val previewUrl = Preference("preview_url", false)
-        val enableDownloader = Preference("enable_downloader", false)
-        val downloaderCheckUrlMimeType = Preference("downloaderCheckUrlMimeType", false)
-
-        val all = listOf(
-            enableCopyButton,
-            singleTap,
-            usageStatsSorting,
-            browserMode,
-            selectedBrowser,
-            enableSendButton,
-            alwaysShowPackageName,
-            disableToasts,
-            gridLayout,
-            useClearUrls,
-            useFastForwardRules,
-            enableLibRedirect,
-            followRedirects,
-            followRedirectsLocalCache,
-            followRedirectsExternalService,
-            followOnlyKnownTrackers,
-            theme,
-            dontShowFilteredItem,
-            useTextShareCopyButtons,
-            previewUrl,
-            enableDownloader,
-            downloaderCheckUrlMimeType
-        )
-    }
-
-    data class Preference<T>(val key: String, val default: T?)
-
-    fun editor(edit: SharedPreferences.Editor.() -> Unit) {
+    private fun editor(edit: SharedPreferences.Editor.() -> Unit) =
         preferences.edit().apply(edit).apply()
+
+    /**
+     * String value operations
+     */
+    fun writeString(
+        preference: BasePreference.PreferenceNullable<String>,
+        newState: String?
+    ) = unsafeWriteString(preference.key, newState)
+
+    fun getString(preference: BasePreference.PreferenceNullable<String>) = unsafeGetString(
+        preference.key, preference.default
+    )
+
+    fun getStringState(preference: BasePreference.PreferenceNullable<String>) = getState(
+        preference, ::writeString, ::getString
+    )
+
+    /**
+     * Type to string value operations
+     */
+    @JvmName("writeMappedToString")
+    fun <T> write(
+        preference: BasePreference.MappedPreference<T, String>,
+        newState: T
+    ) = unsafeWriteString(preference.key, preference.persist(newState))
+
+    @JvmName("getMappedByString")
+    fun <T> get(
+        preference: BasePreference.MappedPreference<T, String>,
+    ) = getOrDefault(preference, ::unsafeGetString)
+
+    @JvmName("getMappedAsStateByString")
+    fun <T> getState(
+        preference: BasePreference.MappedPreference<T, String>,
+    ) = getState(preference, ::write, ::get)
+
+    /**
+     * Int value operations
+     */
+    fun writeInt(
+        preference: BasePreference.Preference<Int>,
+        newState: Int
+    ) = unsafeWriteInt(preference.key, newState)
+
+    fun getInt(preference: BasePreference.Preference<Int>) = unsafeGetInt(
+        preference.key, preference.default
+    )
+
+    fun getIntState(preference: BasePreference.Preference<Int>) = getState(
+        preference, ::writeInt, ::getInt
+    )
+
+    /**
+     * Type to int value operations
+     */
+    @JvmName("writeMappedToInt")
+    fun <T> write(
+        preference: BasePreference.MappedPreference<T, Int>,
+        newState: T
+    ) = unsafeWriteInt(preference.key, preference.persist(newState))
+
+    @JvmName("getMappedByInt")
+    fun <T> get(
+        preference: BasePreference.MappedPreference<T, Int>,
+    ) = getOrDefault(preference, ::unsafeGetInt)
+
+    @JvmName("getMappedAsStateByInt")
+    fun <T> getState(
+        preference: BasePreference.MappedPreference<T, Int>,
+    ) = getState(preference, ::write, ::get)
+
+    /**
+     * Boolean value operations
+     */
+    fun writeBoolean(
+        preference: BasePreference.Preference<Boolean>,
+        newState: Boolean
+    ) = unsafeWriteBoolean(preference.key, newState)
+
+    fun getBoolean(preference: BasePreference.Preference<Boolean>) = unsafeGetBoolean(
+        preference.key, preference.default
+    )
+
+    fun getBooleanState(preference: BasePreference.Preference<Boolean>) = getState(
+        preference, ::writeBoolean, ::getBoolean
+    )
+
+    /**
+     * Unsafe writes/reads (do not do check type of Property before writing, use with caution!)
+     */
+    private fun unsafeWriteString(key: String, newState: String?) = editor {
+        putString(key, newState)
     }
 
-    fun getBoolean(preference: Preference<Boolean>): Boolean? {
-        if (!this.preferences.contains(preference.key)) return preference.default
-        return this.preferences.getBoolean(preference.key, false)
+    private fun unsafeWriteInt(key: String, newState: Int) = editor {
+        putInt(key, newState)
     }
 
-    fun writeBoolean(preference: Preference<Boolean>, newState: Boolean) = editor {
-        this.putBoolean(preference.key, newState)
+    private fun unsafeWriteBoolean(key: String, newState: Boolean) = editor {
+        putBoolean(key, newState)
     }
 
-    fun getInt(preference: Preference<Int>): Int? {
-        if (!this.preferences.contains(preference.key)) return preference.default
-        return this.preferences.getInt(preference.key, -1)
+    private fun unsafeGetString(key: String, default: String?) = preferences.getString(
+        key, default
+    )
+
+    private fun unsafeGetInt(key: String, default: Int?) = preferences.getInt(
+        key, default!!
+    )
+
+    private fun unsafeGetBoolean(key: String, default: Boolean?) = preferences.getBoolean(
+        key, default!!
+    )
+
+
+    /**
+     * Utils
+     */
+    private fun <T, M> getOrDefault(
+        preference: BasePreference.MappedPreference<T, M>,
+        preferenceReader: KeyReader<M?>,
+    ): T {
+        val mappedValue = preferenceReader(preference.key, preference.defaultMapped)!!
+        return preference.read(mappedValue) ?: preference.default
     }
 
-    fun writeInt(preference: Preference<Int>, newState: Int) = editor {
-        this.putInt(preference.key, newState)
-    }
-
-    fun <T> writeInt(preference: Preference<T>, newState: T, persister: IntPersister<T>) =
-        editor {
-            this.putInt(preference.key, persister(newState))
-        }
-
-    fun <T> getInt(
-        preference: Preference<T>,
-        persister: IntPersister<T>,
-        reader: IntReader<T>
-    ): T? {
-        return this.preferences
-            .getInt(preference.key, preference.default?.let(persister) ?: -1)
-            .let {
-                if (it == -1) null
-                else reader(it)
-            }
-    }
-
-    fun getLong(preference: Preference<Long>): Long? {
-        if (!this.preferences.contains(preference.key)) return preference.default
-        return this.preferences.getLong(preference.key, -1L)
-    }
-
-    fun writeLong(preference: Preference<Long>, newState: Long) = editor {
-        this.putLong(preference.key, newState)
-    }
-
-    fun getString(preference: Preference<String>): String? {
-        return this.preferences.getString(preference.key, preference.default)
-    }
-
-    fun writeString(preference: Preference<String>, newState: String?) = editor {
-        this.putString(preference.key, newState)
-    }
-
-    fun <T> writeString(preference: Preference<T>, newState: T, persister: StringPersister<T>) =
-        editor {
-            this.putString(preference.key, persister(newState))
-        }
-
-    fun <T> getString(
-        preference: Preference<T>,
-        persister: StringPersister<T>,
-        reader: StringReader<T>
-    ): T? {
-        return this.preferences
-            .getString(preference.key, preference.default?.let(persister) ?: "")
-            .let {
-                if (it == null) null
-                else reader(it)
-            }
-    }
-
-    fun clearAll() = editor {
-        all.forEach {
-            this.remove(it.key)
-        }
-    }
+    private fun <T, NT, P : BasePreference<T, NT>> getState(
+        preference: P,
+        writer: (P, NT) -> Unit,
+        reader: (P) -> NT,
+    ) = RepositoryState(preference, writer, reader(preference))
 }
 
-fun SharedPreferences.Editor.writeBoolean(
-    preference: PreferenceRepository.Preference<Boolean>,
-    newState: Boolean
-) {
-    this.putBoolean(preference.key, newState)
-}
-
-fun SharedPreferences.Editor.writeInt(
-    preference: PreferenceRepository.Preference<Int>,
-    newState: Int
-) {
-    this.putInt(preference.key, newState)
-}
-
-fun SharedPreferences.Editor.writeLong(
-    preference: PreferenceRepository.Preference<Long>,
-    newState: Long
-) {
-    this.putLong(preference.key, newState)
-}
-
-fun SharedPreferences.Editor.writeString(
-    preference: PreferenceRepository.Preference<String>,
-    newState: String
-) {
-    this.putString(preference.key, newState)
-}
+typealias KeyReader<T> = (String, T) -> T

@@ -2,23 +2,22 @@ package com.tasomaniac.openwith.resolver
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
 import com.tasomaniac.openwith.extension.componentName
-import com.tasomaniac.openwith.extension.isHttp
+import com.tasomaniac.openwith.extension.isSchemeTypicallySupportedByBrowsers
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.fastforwardkt.FastForwardLoader
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
-import fe.linksheet.BuildConfig
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.getUri
 import fe.linksheet.extension.newIntent
+import fe.linksheet.extension.queryResolveInfosByIntent
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.resolver.ResolveListGrouper
+import fe.linksheet.resolver.InAppBrowserHandler
+import fe.linksheet.resolver.BottomSheetGrouper
 import timber.log.Timber
 
 object ResolveIntents {
@@ -26,12 +25,12 @@ object ResolveIntents {
     private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
     private val libRedirectInstances by lazy { LibRedirectLoader.loadBuiltInInstances() }
 
-
     suspend fun resolve(
         context: Context,
         intent: Intent,
+        referrer: Uri?,
         viewModel: BottomSheetViewModel
-    ): IntentResolverResult {
+    ): BottomSheetResult {
         Timber.tag("ResolveIntents").d("Intent: $intent")
 
         var uri = intent.getUri(viewModel.useClearUrls, viewModel.useFastForwardRules)
@@ -82,7 +81,6 @@ object ResolveIntents {
             }
         }
 
-
         val downloadable = if (viewModel.enableDownloader && uri != null) {
             viewModel.checkIsDownloadable(uri!!)
         } else Downloader.DownloadCheckResult.NonDownloadable
@@ -99,12 +97,13 @@ object ResolveIntents {
 
 
         Timber.tag("ResolveIntents").d("HostHistory: $hostHistory")
-
         Timber.tag("ResolveIntents").d("SourceIntent: $intent ${intent.extras}")
 
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
-        val newIntent = intent.newIntent(uri, !isCustomTab)
-        if (isCustomTab) {
+        val allowCustomTab = InAppBrowserHandler.shouldAllowCustomTab(referrer, viewModel)
+
+        val newIntent = intent.newIntent(uri, !isCustomTab || !allowCustomTab)
+        if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
                 Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")
                 newIntent.removeExtra(key)
@@ -113,48 +112,42 @@ object ResolveIntents {
 
         Timber.tag("ResolveIntents").d("NewIntent: $newIntent ${newIntent.extras}")
 
-        val resolveListPreSort = context.packageManager.queryIntentActivities(
-            newIntent, PackageManager.MATCH_ALL
-        )
+        val resolvedList = context.packageManager
+            .queryResolveInfosByIntent(newIntent, true)
+            .toMutableList()
 
-        resolveListPreSort.removeAll {
-            it.activityInfo.packageName == BuildConfig.APPLICATION_ID
-        }
-
-        Timber.tag("ResolveIntents").d("ResolveListPreSort: $resolveListPreSort")
+        Timber.tag("ResolveIntents").d("ResolveListPreSort: $resolvedList")
 
         Timber.tag("ResolveIntents")
             .d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
-        val browserMode = if (newIntent.isHttp()) {
-            BrowserHandler.handleBrowsers(context, resolveListPreSort, viewModel)
+        val browserMode = if (newIntent.isSchemeTypicallySupportedByBrowsers()) {
+            BrowserHandler.handleBrowsers(resolvedList, viewModel)
         } else null
 
         Timber.tag("ResolveIntents").d("BrowserMode: $browserMode")
 
-        val (resolved, filteredItem, showExtended) = ResolveListGrouper.resolveList(
+        val (grouped, filteredItem, showExtended) = BottomSheetGrouper.group(
             context,
-            resolveListPreSort,
+            resolvedList,
             hostHistory,
             preferredApp?.app,
             !viewModel.dontShowFilteredItem
         )
 
-        val selectedBrowserIsSingleOption =
-            browserMode?.first == BrowserHandler.BrowserMode.SelectedBrowser
-                    && resolveListPreSort.singleOrNull()?.activityInfo?.componentName() == browserMode.second?.activityInfo?.componentName()
+        val selectedBrowserIsSingleOption = browserMode?.first == BrowserHandler.BrowserMode.SelectedBrowser
+                && resolvedList.singleOrNull()?.activityInfo?.componentName() == browserMode.second?.activityInfo?.componentName()
 
-        val noBrowsersPresentOnlySingleApp =
-            browserMode?.first == BrowserHandler.BrowserMode.None && resolveListPreSort.size == 1
+        val noBrowsersPresentOnlySingleApp = browserMode?.first == BrowserHandler.BrowserMode.None && resolvedList.size == 1
 
 
         Timber.tag("ResolveIntents").d(
-            "Resolved: $resolved, filteredItem: $filteredItem, showExtended: $showExtended, selectedBrowserIsSingleOption: $selectedBrowserIsSingleOption"
+            "Grouped: $grouped, filteredItem: $filteredItem, showExtended: $showExtended, selectedBrowserIsSingleOption: $selectedBrowserIsSingleOption"
         )
 
-        return IntentResolverResult(
+        return BottomSheetResult(
             uri,
-            resolved,
+            grouped,
             filteredItem,
             showExtended,
             preferredApp?.app?.alwaysPreferred,

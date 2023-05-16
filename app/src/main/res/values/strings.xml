@@ -61,7 +61,7 @@
     <string name="whitelisted_explainer">Only show whitelisted browsers</string>
     <string name="save">Save</string>
     <string name="whitelisted_browsers">Whitelisted browsers</string>
-    <string name="apps_explainer">Preferred browser, Preferred apps, Apps which can open links</string>
+    <string name="apps_explainer">Preferred apps and Apps which can open links</string>
     <string name="bottom_sheet_explainer">Sort by usage, enable copy button, enable share button etc.</string>
     <string name="about">About</string>
     <string name="about_explainer">About this app, licenses</string>
@@ -130,4 +130,14 @@
     <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
     <string name="random_instance">Random instance</string>
     <string name="app_name">LinkSheet</string>
+    <string name="in_app_browser">In-App browser</string>
+    <string name="in_app_browser_explainer">Set In-App browser mode</string>
+    <string name="use_app_settings">Use app settings</string>
+    <string name="use_app_settings_explainer">Let app decide if the In-App browser should be used</string>
+    <string name="always_disable">Always disable</string>
+    <string name="always_disable_explainer">Always disable the In-App browser, regardless of what the app wants to use</string>
+    <string name="browser">Browser</string>
+    <string name="browser_explainer">Browser mode and In-App browser settings</string>
+    <string name="disable_in_selected">Disable in selected</string>
+    <string name="disable_in_selected_explainer">Disable In-App browser in selected apps, regardless of what the app wants to use</string>
 </resources>

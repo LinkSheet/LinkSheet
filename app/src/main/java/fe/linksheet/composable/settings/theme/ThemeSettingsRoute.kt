@@ -40,9 +40,9 @@ fun ThemeSettingsRoute(
             themes.forEach { holder ->
                 item(key = holder.key) {
                     RadioButtonRow(
-                        onClick = { viewModel.onThemeChange(holder.theme) },
-                        onLongClick = null,
-                        selected = viewModel.theme == holder.theme
+                        value = holder.theme,
+                        state = viewModel.theme,
+                        viewModel = viewModel
                     ) {
                         Texts(headline = holder.headline, subtitle = null)
                     }

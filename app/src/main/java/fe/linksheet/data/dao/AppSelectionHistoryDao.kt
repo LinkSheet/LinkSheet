@@ -8,8 +8,6 @@ import fe.linksheet.data.entity.AppSelectionHistory
 
 @Dao
 interface AppSelectionHistoryDao {
-
-
     @Query("SELECT * FROM app_selection_history WHERE host = :host")
     fun historyForHost(host: String): List<AppSelectionHistory>
 

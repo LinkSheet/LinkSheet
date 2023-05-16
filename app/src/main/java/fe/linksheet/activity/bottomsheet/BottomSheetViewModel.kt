@@ -17,7 +17,7 @@ import com.google.gson.JsonObject
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.resolver.IntentResolverResult
+import com.tasomaniac.openwith.resolver.BottomSheetResult
 import com.tasomaniac.openwith.resolver.ResolveIntents
 import fe.fastforwardkt.isTracker
 import fe.gson.extensions.string
@@ -25,15 +25,15 @@ import fe.httpkt.json.readToJson
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.data.entity.AppSelectionHistory
-import fe.linksheet.data.entity.LibRedirectDefault
+import fe.linksheet.data.entity.DisableInAppBrowserInSelected
 import fe.linksheet.data.entity.ResolvedRedirect
 import fe.linksheet.data.entity.WhitelistedBrowser
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.redirectresolver.RedirectResolver
-import fe.linksheet.ui.theme.Theme
-import kotlinx.coroutines.Deferred
+import fe.linksheet.util.contextIO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -41,7 +41,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
 import java.io.File
-import java.util.*
+import java.util.Locale
 
 class BottomSheetViewModel : ViewModel(), KoinComponent {
 
@@ -50,97 +50,35 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
     private val redirectResolver by inject<RedirectResolver>()
     private val downloader by inject<Downloader>()
 
-    var resolveResult by mutableStateOf<IntentResolverResult?>(null)
-    val enableCopyButton by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
-    )
+    var resolveResult by mutableStateOf<BottomSheetResult?>(null)
+    val enableCopyButton = preferenceRepository.getBoolean(Preferences.enableCopyButton)
+    val hideAfterCopying = preferenceRepository.getBoolean(Preferences.hideAfterCopying)
+    val singleTap = preferenceRepository.getBoolean(Preferences.singleTap)
+    val enableSendButton = preferenceRepository.getBoolean(Preferences.enableSendButton)
+    val alwaysShowPackageName = preferenceRepository.getBoolean(Preferences.alwaysShowPackageName)
+    val disableToasts = preferenceRepository.getBoolean(Preferences.disableToasts)
+    val gridLayout = preferenceRepository.getBoolean(Preferences.gridLayout)
+    val useClearUrls = preferenceRepository.getBoolean(Preferences.useClearUrls)
+    var useFastForwardRules = preferenceRepository.getBoolean(Preferences.useFastForwardRules)
+    var enableLibRedirect = preferenceRepository.getBoolean(Preferences.enableLibRedirect)
+    val followRedirects = preferenceRepository.getBoolean(Preferences.followRedirects)
+    val followRedirectsLocalCache = preferenceRepository.getBoolean(Preferences.followRedirectsLocalCache)
+    private val followRedirectsExternalService = preferenceRepository.getBoolean(Preferences.followRedirectsExternalService)
+    private val followOnlyKnownTrackers = preferenceRepository.getBoolean(Preferences.followOnlyKnownTrackers)
+    var enableDownloader = preferenceRepository.getBoolean(Preferences.enableDownloader)
+    private var downloaderCheckUrlMimeType = preferenceRepository.getBoolean(Preferences.downloaderCheckUrlMimeType)
+    val theme = preferenceRepository.get(Preferences.theme)
+    val dontShowFilteredItem = preferenceRepository.getBoolean(Preferences.dontShowFilteredItem)
+    val useTextShareCopyButtons = preferenceRepository.getBoolean(Preferences.useTextShareCopyButtons)
+    val previewUrl = preferenceRepository.getBoolean(Preferences.previewUrl)
 
-    val hideAfterCopying by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.hideAfterCopying) ?: false
-    )
-
-    val singleTap by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
-    )
-
-    val enableSendButton by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableSendButton) ?: false
-    )
-
-    val alwaysShowPackageName by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
-    )
-
-    val disableToasts by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
-    )
-
-    val gridLayout by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
-    )
-
-    val useClearUrls by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
-    )
-
-    var useFastForwardRules by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.useFastForwardRules) ?: false
-    )
-
-    var enableLibRedirect by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableLibRedirect) ?: false
-    )
-
-    val followRedirects by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
-    )
-
-    val followRedirectsLocalCache by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsLocalCache) ?: false
-    )
-
-    val followRedirectsExternalService by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService)
-            ?: false
-    )
-
-    val followOnlyKnownTrackers by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
-    )
-
-    var enableDownloader by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableDownloader) ?: false
-    )
-
-    var downloaderCheckUrlMimeType by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.downloaderCheckUrlMimeType) ?: false
-    )
-
-    val theme by mutableStateOf(
-        preferenceRepository.getInt(
-            PreferenceRepository.theme,
-            Theme.persister,
-            Theme.reader
-        ) ?: Theme.System
-    )
-
-    val dontShowFilteredItem by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false
-    )
-    val useTextShareCopyButtons by mutableStateOf(
-        preferenceRepository.getBoolean(
-            PreferenceRepository.useTextShareCopyButtons
-        ) ?: false
-    )
-    val previewUrl by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false
-    )
-
-    fun resolveAsync(context: Context, intent: Intent): Deferred<IntentResolverResult?> {
-        return viewModelScope.async(Dispatchers.IO) {
-            ResolveIntents.resolve(context, intent, this@BottomSheetViewModel).apply {
-                resolveResult = this
-            }
+    fun resolveAsync(
+        context: Context,
+        intent: Intent,
+        referrer: Uri?
+    ) = viewModelScope.async(Dispatchers.IO) {
+        ResolveIntents.resolve(context, intent, referrer, this@BottomSheetViewModel).apply {
+            resolveResult = this
         }
     }
 
@@ -158,7 +96,7 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
 
     suspend fun persistSelectedIntentAsync(intent: Intent, always: Boolean) {
         Timber.tag("PersistingSelectedIntent").d("Component: ${intent.component}")
-        return withContext(Dispatchers.IO) {
+        return contextIO {
             intent.component?.let { component ->
                 val host = intent.data!!.host!!.lowercase(Locale.getDefault())
                 val app = PreferredApp(
@@ -185,7 +123,13 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
 
     suspend fun getWhiteListedBrowsers(): List<WhitelistedBrowser> {
         return withContext(Dispatchers.IO) {
-            database.whitelistedBrowsersDao().getWhitelistedBrowsers()
+            database.whitelistedBrowsersDao().getAll()
+        }
+    }
+
+    suspend fun getDisableInAppBrowserInSelected(): List<DisableInAppBrowserInSelected> {
+        return withContext(Dispatchers.IO) {
+            database.disableInAppBrowserInSelectedDao().getAll()
         }
     }
 
@@ -209,7 +153,7 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
         fastForwardRulesObject: JsonObject
     ): Result<FollowRedirect> {
         if (localCache) {
-            val redirect = withContext(Dispatchers.IO) {
+            val redirect = contextIO {
                 database.resolvedRedirectDao().getResolvedRedirectForShortUrl(uri.toString())
             }
 
@@ -227,13 +171,11 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
         val followRedirect = followRedirectsImpl(uri, fastForwardRulesObject)
 
         if (localCache && followRedirect.getOrNull()?.resolveType != FollowRedirectResolveType.NotResolved) {
-            withContext(Dispatchers.IO) {
-                database.resolvedRedirectDao().insert(
-                    ResolvedRedirect(
-                        uri.toString(),
-                        followRedirect.getOrNull()?.resolvedUrl!!
-                    )
-                )
+            contextIO {
+                database.resolvedRedirectDao().insert(ResolvedRedirect(
+                    uri.toString(),
+                    followRedirect.getOrNull()?.resolvedUrl!!
+                ))
             }
         }
 
@@ -303,16 +245,12 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
         return downloader.isNonHtmlContentUri(uri.toString())
     }
 
-    suspend fun getLibRedirectDefault(serviceKey: String): LibRedirectDefault? {
-        return withContext(Dispatchers.IO) {
-            database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
-        }
+    suspend fun getLibRedirectDefault(serviceKey: String)= contextIO {
+        database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
     }
 
-    suspend fun loadLibRedirectState(serviceKey: String): Boolean? {
-        return withContext(Dispatchers.IO) {
-            database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
-        }
+    suspend fun loadLibRedirectState(serviceKey: String) = contextIO {
+        database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
     }
 
     fun startDownload(

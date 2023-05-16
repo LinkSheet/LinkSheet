@@ -5,18 +5,17 @@ import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationManager
-import android.content.pm.verify.domain.DomainVerificationUserState
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.preferred.PreferredResolver.resolve
@@ -24,14 +23,27 @@ import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
+import fe.linksheet.data.dao.PackageEntityDao
 import fe.linksheet.data.entity.LibRedirectDefault
 import fe.linksheet.data.entity.LibRedirectServiceState
-import fe.linksheet.data.entity.WhitelistedBrowser
-import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
+import fe.linksheet.extension.allBrowsersIntent
+import fe.linksheet.extension.filterIf
+import fe.linksheet.extension.filterNullable
+import fe.linksheet.extension.hasVerifiedDomains
+import fe.linksheet.extension.launchIO
+import fe.linksheet.extension.mapToSet
+import fe.linksheet.extension.queryAllResolveInfos
+import fe.linksheet.extension.resolveActivityCompat
+import fe.linksheet.extension.setup
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.RepositoryState
+import fe.linksheet.resolver.InAppBrowserHandler
 import fe.linksheet.ui.theme.Theme
+import fe.linksheet.util.contextIO
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -40,7 +52,6 @@ import timber.log.Timber
 
 class SettingsViewModel : ViewModel(), KoinComponent {
     companion object {
-        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse("http://example.com"))
         val intentManageDefaultAppSettings = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
         const val libRedirectRandomInstanceKey = "RANDOM_INSTANCE"
     }
@@ -54,16 +65,11 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     val appsExceptPreferred = mutableStateListOf<DisplayActivityInfo>()
 
     val browsers = mutableStateListOf<DisplayActivityInfo>()
+    val packages = mutableStateListOf<DisplayActivityInfo>()
 
-    var browserMode by mutableStateOf(
-        preferenceRepository.getString(
-            PreferenceRepository.browserMode,
-            BrowserHandler.BrowserMode.persister,
-            BrowserHandler.BrowserMode.reader
-        )
-    )
-
-    var selectedBrowser by mutableStateOf(preferenceRepository.getString(PreferenceRepository.selectedBrowser))
+    var browserMode = preferenceRepository.getState(Preferences.browserMode)
+    var selectedBrowser = preferenceRepository.getStringState(Preferences.selectedBrowser)
+    var inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserMode)
 
     private val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
     val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
@@ -71,176 +77,114 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     var whichAppsCanHandleLinksLoading by mutableStateOf(false)
 
     val whitelistedBrowserMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
+    val disableInAppBrowserInSelectedMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
 
     var libRedirectDefault by mutableStateOf<LibRedirectDefault?>(null)
     var libRedirectEnabled by mutableStateOf<Boolean?>(null)
 
-    var usageStatsSorting by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.usageStatsSorting) ?: false
-    )
+    var usageStatsSorting = preferenceRepository.getBooleanState(Preferences.usageStatsSorting)
+
     var wasTogglingUsageStatsSorting by mutableStateOf(false)
 
-    var enableCopyButton by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableCopyButton) ?: false
-    )
-    var hideAfterCopying by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.hideAfterCopying) ?: false
-    )
+    var enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
+    var hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
+    var singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
+    var enableSendButton = preferenceRepository.getBooleanState(Preferences.enableSendButton)
+    var alwaysShowPackageName =
+        preferenceRepository.getBooleanState(Preferences.alwaysShowPackageName)
+    var disableToasts = preferenceRepository.getBooleanState(Preferences.disableToasts)
+    var gridLayout = preferenceRepository.getBooleanState(Preferences.gridLayout)
+    var useClearUrls = preferenceRepository.getBooleanState(Preferences.useClearUrls)
+    var useFastForwardRules = preferenceRepository.getBooleanState(Preferences.useFastForwardRules)
+    var enableLibRedirect = preferenceRepository.getBooleanState(Preferences.enableLibRedirect)
+    var followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
+    var followRedirectsLocalCache =
+        preferenceRepository.getBooleanState(Preferences.followRedirectsLocalCache)
+    var followRedirectsExternalService =
+        preferenceRepository.getBooleanState(Preferences.followRedirectsExternalService)
+    var followOnlyKnownTrackers =
+        preferenceRepository.getBooleanState(Preferences.followOnlyKnownTrackers)
+    var enableDownloader = preferenceRepository.getBooleanState(Preferences.enableDownloader)
+    var downloaderCheckUrlMimeType =
+        preferenceRepository.getBooleanState(Preferences.downloaderCheckUrlMimeType)
 
-    var singleTap by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.singleTap) ?: false
-    )
 
-    var enableSendButton by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableSendButton) ?: false
-    )
+    var theme = preferenceRepository.getState(Preferences.theme)
+    var dontShowFilteredItem = preferenceRepository.getBooleanState(Preferences.dontShowFilteredItem)
+    var useTextShareCopyButtons = preferenceRepository.getBooleanState(Preferences.useTextShareCopyButtons)
+    var previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
 
-    var alwaysShowPackageName by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.alwaysShowPackageName) ?: false
-    )
 
-    var disableToasts by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.disableToasts) ?: false
-    )
-
-    var gridLayout by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.gridLayout) ?: false
-    )
-
-    var useClearUrls by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.useClearUrls) ?: false
-    )
-
-    var useFastForwardRules by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.useFastForwardRules) ?: false
-    )
-
-    var enableLibRedirect by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableLibRedirect) ?: false
-    )
-
-    var followRedirects by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirects) ?: false
-    )
-
-    var followRedirectsLocalCache by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsLocalCache) ?: false
-    )
-
-    var followRedirectsExternalService by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followRedirectsExternalService)
-            ?: false
-    )
-
-    var followOnlyKnownTrackers by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.followOnlyKnownTrackers) ?: false
-    )
-
-    var enableDownloader by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.enableDownloader) ?: false
-    )
-
-    var downloaderCheckUrlMimeType by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.downloaderCheckUrlMimeType) ?: false
-    )
-
-    var theme by mutableStateOf(
-        preferenceRepository.getInt(
-            PreferenceRepository.theme,
-            Theme.persister,
-            Theme.reader
-        ) ?: Theme.System
-    )
-
-    var dontShowFilteredItem by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.dontShowFilteredItem) ?: false
-    )
-
-    var useTextShareCopyButtons by mutableStateOf(
-        preferenceRepository.getBoolean(
-            PreferenceRepository.useTextShareCopyButtons
-        ) ?: false
-    )
-    var previewUrl by mutableStateOf(
-        preferenceRepository.getBoolean(PreferenceRepository.previewUrl) ?: false
-    )
-
-    suspend fun filterPreferredAppsAsync(filter: String) {
-        withContext(Dispatchers.IO) {
-            preferredAppsFiltered.clear()
-            preferredApps.forEach { (info, hosts) ->
-                if (filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)) {
-                    preferredAppsFiltered[info] = hosts
-                }
+    suspend fun filterPreferredAppsAsync(filter: String) = contextIO {
+        preferredAppsFiltered.clear()
+        preferredApps.forEach { (info, hosts) ->
+            if (filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)) {
+                preferredAppsFiltered[info] = hosts
             }
         }
     }
 
-    suspend fun loadPreferredApps(context: Context) {
-        withContext(Dispatchers.IO) {
-            preferredApps.clear()
+
+    suspend fun loadPreferredApps(context: Context) = contextIO {
+        preferredApps.clear()
 
 //            val browsers = BrowserResolver.resolve(context).map { it.packageName }
 
-            database.preferredAppDao().allPreferredApps().forEach { app ->
-                val displayActivityInfo = app.resolve(context)
+        database.preferredAppDao().allPreferredApps().forEach { app ->
+            val displayActivityInfo = app.resolve(context)
 
-                if (displayActivityInfo != null
+            if (displayActivityInfo != null
 //                    && !browsers.contains(it.componentName.packageName)
-                ) {
-                    preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(app.host)
-                }
+            ) {
+                preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(app.host)
             }
+
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
     suspend fun loadAppsExceptPreferred(
         context: Context, manager: DomainVerificationManager
-    ) {
-        withContext(Dispatchers.IO) {
-            val preferredAppsPackage = preferredApps.keys.map { it.packageName }
+    ) = contextIO {
+        val preferredAppsPackage = preferredApps.keys.mapToSet { it.packageName }
 
-            appsExceptPreferred.clear()
-            appsExceptPreferred.addAll(
-                mapInstalledPackages(
-                    context,
-                    manager
-                ) { it.packageName !in preferredAppsPackage })
-        }
+        appsExceptPreferred.setup(mapInstalledPackages(context, manager) {
+            it.activityInfo.packageName !in preferredAppsPackage
+        })
     }
 
-    suspend fun loadBrowsers(context: Context) {
-        withContext(Dispatchers.IO) {
-            browsers.clear()
-            browsers.addAll(
-                BrowserResolver.resolve(context).sortedBy { it.displayLabel.lowercase() })
-        }
+    suspend fun loadBrowsers() = contextIO {
+        browsers.setup(BrowserResolver.queryDisplayActivityInfoBrowsers(true))
     }
 
-    suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) {
-        withContext(Dispatchers.IO) {
-            database.preferredAppDao().insert(preferredApp)
-        }
+    suspend fun loadPackages(context: Context) = contextIO {
+        packages.setup(
+            context.packageManager
+                .queryAllResolveInfos(true)
+                .toDisplayActivityInfo(context, true)
+        )
+
+        Log.d("LoadPackages", "${packages.toList()}")
     }
 
-    suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) {
-        withContext(Dispatchers.IO) {
-            database.preferredAppDao().insert(preferredApps)
-        }
+
+    suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) = contextIO {
+        database.preferredAppDao().insert(preferredApp)
+    }
+
+    suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) = contextIO {
+        database.preferredAppDao().insert(preferredApps)
     }
 
     suspend fun deletePreferredAppAsync(host: String, packageName: String) {
         Timber.tag("DeletePreferredApp").d(host)
-        withContext(Dispatchers.IO) {
+        contextIO {
             database.preferredAppDao().deleteByPackageNameAndHost(host, packageName)
         }
     }
 
-    suspend fun deletePreferredAppWherePackageAsync(packageName: String) {
-        withContext(Dispatchers.IO) {
-            database.preferredAppDao().deleteByPackageName(packageName)
-        }
+    suspend fun deletePreferredAppWherePackageAsync(packageName: String) = contextIO {
+        database.preferredAppDao().deleteByPackageName(packageName)
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -272,21 +216,17 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return false
     }
 
+
     fun checkDefaultBrowser(context: Context) = context.packageManager
-        .resolveActivity(intentBrowser, PackageManager.MATCH_DEFAULT_ONLY)
+        .resolveActivityCompat(allBrowsersIntent, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
 
-    suspend fun filterWhichAppsCanHandleLinksAsync(filter: String) {
-        withContext(Dispatchers.IO) {
-            whichAppsCanHandleLinksFiltered.clear()
-            whichAppsCanHandleLinksFiltered.addAll(whichAppsCanHandleLinks.filter {
-                if (filter.isNotEmpty()) it.displayLabel.contains(
-                    filter,
-                    ignoreCase = true
-                ) else true
-            })
-        }
+    suspend fun filterWhichAppsCanHandleLinksAsync(filter: String) = contextIO {
+        whichAppsCanHandleLinksFiltered.clear()
+        whichAppsCanHandleLinksFiltered.addAll(whichAppsCanHandleLinks.filterIf(filter.isNotEmpty()) {
+            it.displayLabel.contains(filter, ignoreCase = true)
+        })
     }
 
     fun onWhichAppsCanHandleLinksEnabled(it: Boolean) {
@@ -297,68 +237,31 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     fun mapInstalledPackages(
         context: Context,
         manager: DomainVerificationManager,
-        filter: (ActivityInfo) -> Boolean
-    ): List<DisplayActivityInfo> {
-        return context.packageManager.getInstalledPackages(PackageManager.MATCH_ALL)
-            .asSequence()
-            .mapNotNull { packageInfo ->
-                context.packageManager.queryFirstIntentActivityByPackageNameOrNull(
-                    packageInfo.packageName
-                ).also {
-                    Timber.tag("InstalledPackage").d("${packageInfo.packageName}: $it")
-                }
-            }
-            .filter { it.activityInfo.packageName != BuildConfig.APPLICATION_ID && filter(it.activityInfo) }
-            .filter { resolveInfo ->
-                val state =
-                    manager.getDomainVerificationUserState(resolveInfo.activityInfo.packageName)
-                state != null
-                        && (if (whichAppsCanHandleLinksEnabled) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed)
-                        && state.hostToStateMap.isNotEmpty()
-                        && state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED }
-            }
-            .map { it.toDisplayActivityInfo(context) }
-            .sortedBy { it.displayLabel.lowercase() }
-            .toList()
-    }
+        filter: ((ResolveInfo) -> Boolean)? = null
+    ) = context.packageManager.queryAllResolveInfos(true)
+        .filterNullable(filter)
+        .filter { manager.hasVerifiedDomains(it, whichAppsCanHandleLinksEnabled) }
+        .toDisplayActivityInfo(context, true)
+
 
     @RequiresApi(Build.VERSION_CODES.S)
     suspend fun loadAppsWhichCanHandleLinksAsync(
         context: Context,
         manager: DomainVerificationManager
-    ) {
-        whichAppsCanHandleLinksLoading = true
-        withContext(Dispatchers.IO) {
-            whichAppsCanHandleLinks.clear()
-            whichAppsCanHandleLinks.addAll(mapInstalledPackages(context, manager) { true })
-
-            whichAppsCanHandleLinksLoading = false
-        }
+    ) = contextIO({ whichAppsCanHandleLinksLoading = it }) {
+        whichAppsCanHandleLinks.setup(mapInstalledPackages(context, manager) { true })
     }
 
-    fun onBrowserMode(it: BrowserHandler.BrowserMode) {
-        if (this.browserMode == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode != it && this.selectedBrowser != null) {
-            viewModelScope.launch(Dispatchers.IO) {
-                deletePreferredAppWherePackageAsync(selectedBrowser!!)
-            }
+    fun updateBrowserMode(mode: BrowserHandler.BrowserMode) {
+        if (this.browserMode.value == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode.value != mode && this.selectedBrowser.value != null) {
+            launchIO { deletePreferredAppWherePackageAsync(selectedBrowser.value!!) }
         }
 
-        this.browserMode = it
-        this.preferenceRepository.writeString(
-            PreferenceRepository.browserMode,
-            it,
-            BrowserHandler.BrowserMode.persister
-        )
+        this.browserMode.updateState(mode)
     }
 
-    fun onSelectedBrowser(it: String) {
-        this.selectedBrowser = it
-        this.preferenceRepository.writeString(PreferenceRepository.selectedBrowser, it)
-    }
-
-    fun onUsageStatsSorting(it: Boolean) {
-        this.usageStatsSorting = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.usageStatsSorting, it)
+    fun <T, NT, P : BasePreference<T, NT>> updateState(state: RepositoryState<T, NT, P>, newState: NT) {
+        state.updateState(newState)
     }
 
     fun openUsageStatsSettings(context: Context) {
@@ -377,136 +280,38 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return mode == AppOpsManager.MODE_ALLOWED
     }
 
-    fun onEnableCopyButton(it: Boolean) {
-        this.enableCopyButton = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.enableCopyButton, it)
-    }
+    suspend fun queryWhitelistedBrowsersAsync() = contextIO {
+        whitelistedBrowserMap.clear()
+        val whitelistedBrowsers = database.whitelistedBrowsersDao().getAll().mapToSet { it.packageName }
 
-    fun onHideAfterCopying(it: Boolean) {
-        this.hideAfterCopying = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.hideAfterCopying, it)
-    }
-
-    fun onSingleTap(it: Boolean) {
-        this.singleTap = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.singleTap, it)
-    }
-
-    fun onSendButton(it: Boolean) {
-        this.enableSendButton = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.enableSendButton, it)
-    }
-
-    fun onAlwaysShowButton(it: Boolean) {
-        this.alwaysShowPackageName = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.alwaysShowPackageName, it)
-    }
-
-    fun onDisableToasts(it: Boolean) {
-        this.disableToasts = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.disableToasts, it)
-    }
-
-    fun onGridLayout(it: Boolean) {
-        this.gridLayout = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.gridLayout, it)
-    }
-
-    fun onUseClearUrls(it: Boolean) {
-        this.useClearUrls = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.useClearUrls, it)
-    }
-
-    fun onUseFastForwardRules(it: Boolean) {
-        this.useFastForwardRules = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.useFastForwardRules, it)
-    }
-
-    fun onFollowRedirects(it: Boolean) {
-        this.followRedirects = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirects, it)
-    }
-
-    fun onFollowRedirectsLocalCache(it: Boolean) {
-        this.followRedirectsLocalCache = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.followRedirectsLocalCache, it)
-    }
-
-    fun onFollowRedirectsExternalService(it: Boolean) {
-        this.followRedirectsExternalService = it
-        this.preferenceRepository.writeBoolean(
-            PreferenceRepository.followRedirectsExternalService,
-            it
-        )
-    }
-
-    fun onFollowOnlyKnownTrackers(it: Boolean) {
-        this.followOnlyKnownTrackers = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.followOnlyKnownTrackers, it)
-    }
-
-    fun onEnableDownloader(it: Boolean) {
-        this.enableDownloader = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.enableDownloader, it)
-    }
-
-    fun onDownloaderCheckUrlMimeType(it: Boolean) {
-        this.downloaderCheckUrlMimeType = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.downloaderCheckUrlMimeType, it)
-    }
-
-    fun onThemeChange(it: Theme) {
-        this.theme = it
-        this.preferenceRepository.writeInt(PreferenceRepository.theme, it, Theme.persister)
-    }
-
-    fun onEnableLibRedirect(it: Boolean) {
-        this.enableLibRedirect = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.enableLibRedirect, it)
-    }
-
-    fun onDontShowFilteredItem(it: Boolean) {
-        this.dontShowFilteredItem = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.dontShowFilteredItem, it)
-    }
-
-    fun onUseTextShareCopyButtons(it: Boolean) {
-        this.useTextShareCopyButtons = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.useTextShareCopyButtons, it)
-    }
-
-    fun onPreviewUrl(it: Boolean) {
-        this.previewUrl = it
-        this.preferenceRepository.writeBoolean(PreferenceRepository.previewUrl, it)
-    }
-
-    suspend fun queryWhitelistedBrowsersAsync(context: Context) {
-        withContext(Dispatchers.IO) {
-            whitelistedBrowserMap.clear()
-            val whitelistedBrowsersList =
-                database.whitelistedBrowsersDao().getWhitelistedBrowsers().mapNotNull {
-                    context.packageManager.queryFirstIntentActivityByPackageNameOrNull(it.packageName)
-                        ?.toDisplayActivityInfo(context)
-                }
-
-            browsers.forEach { info ->
-                val isWhitelisted =
-                    whitelistedBrowsersList.find { it.packageName == info.packageName }
-                whitelistedBrowserMap[info] = isWhitelisted != null
-            }
+        browsers.forEach { info ->
+            whitelistedBrowserMap[info] = info.packageName in whitelistedBrowsers
         }
     }
 
-    suspend fun saveWhitelistedBrowsers() {
-        withContext(Dispatchers.IO) {
-            val dao = database.whitelistedBrowsersDao()
-            whitelistedBrowserMap.forEach { (app, enabled) ->
-                if (enabled) {
-                    dao.insert(WhitelistedBrowser(packageName = app.packageName))
-                } else {
-                    dao.deleteByPackageName(app.packageName)
-                }
-            }
+    suspend fun saveWhitelistedBrowsers() = contextIO {
+        val dao = database.whitelistedBrowsersDao()
+        whitelistedBrowserMap.forEach { (app, enabled) ->
+            dao.insertOrDelete(PackageEntityDao.Mode.fromBool(enabled), app.packageName)
+        }
+    }
+
+    suspend fun queryAppsForInAppBrowserDisableInSelected() = contextIO {
+        disableInAppBrowserInSelectedMap.clear()
+        val disableInAppBrowserInSelected = database.disableInAppBrowserInSelectedDao()
+            .getAll()
+            .mapToSet { it.packageName }
+
+        packages.forEach { info ->
+            disableInAppBrowserInSelectedMap[info] = info.packageName in disableInAppBrowserInSelected
+        }
+    }
+
+
+    suspend fun saveInAppBrowserDisableInSelected() = contextIO {
+        val dao = database.disableInAppBrowserInSelectedDao()
+        disableInAppBrowserInSelectedMap.forEach { (app, enabled) ->
+            dao.insertOrDelete(PackageEntityDao.Mode.fromBool(enabled), app.packageName)
         }
     }
 
@@ -514,33 +319,24 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         serviceKey: String,
         frontendKey: String,
         instanceUrl: String
-    ) {
-        withContext(Dispatchers.IO) {
-            database.libRedirectDefaultDao()
-                .insert(LibRedirectDefault(serviceKey, frontendKey, instanceUrl))
-        }
+    ) = contextIO {
+        database.libRedirectDefaultDao()
+            .insert(LibRedirectDefault(serviceKey, frontendKey, instanceUrl))
     }
 
-    suspend fun loadLibRedirectDefault(serviceKey: String) {
-        withContext(Dispatchers.IO) {
-            libRedirectDefault =
-                database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
-        }
+    suspend fun loadLibRedirectDefault(serviceKey: String) = contextIO {
+        libRedirectDefault =
+            database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
     }
 
-    suspend fun loadLibRedirectState(serviceKey: String) {
-        withContext(Dispatchers.IO) {
-            libRedirectEnabled =
-                database.libRedirectServiceStateDao()
-                    .getLibRedirectServiceState(serviceKey)?.enabled
-        }
+    suspend fun loadLibRedirectState(serviceKey: String) = contextIO {
+        libRedirectEnabled =
+            database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
     }
 
-    suspend fun updateLibRedirectState(serviceKey: String, boolean: Boolean) {
-        withContext(Dispatchers.IO) {
-            database.libRedirectServiceStateDao()
-                .insert(LibRedirectServiceState(serviceKey, boolean))
-        }
+    suspend fun updateLibRedirectState(serviceKey: String, boolean: Boolean) = contextIO {
+        database.libRedirectServiceStateDao()
+            .insert(LibRedirectServiceState(serviceKey, boolean))
     }
 
 //    companion object {

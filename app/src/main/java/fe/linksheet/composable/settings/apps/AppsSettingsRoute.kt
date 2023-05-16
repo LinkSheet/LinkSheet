@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.OpenInBrowser
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Verified
@@ -16,6 +17,7 @@ import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 
@@ -31,21 +33,6 @@ fun AppsSettingsRoute(
                 .padding(padding)
                 .fillMaxHeight(), contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(key = preferredBrowserSettingsRoute) {
-                SettingsItemRow(
-                    navController = navController,
-                    navigateTo = preferredBrowserSettingsRoute,
-                    headline = R.string.preferred_browser,
-                    subtitle = R.string.preferred_browser_explainer,
-                    image = {
-                        ColoredIcon(
-                            icon = Icons.Default.OpenInBrowser,
-                            description = R.string.preferred_browser
-                        )
-                    }
-                )
-            }
-
             item(key = preferredAppsSettingsRoute) {
                 SettingsItemRow(
                     navController = navController,

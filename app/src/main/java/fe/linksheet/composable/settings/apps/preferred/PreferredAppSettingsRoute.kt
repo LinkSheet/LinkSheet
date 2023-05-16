@@ -277,7 +277,7 @@ fun PreferredAppSettingsRoute(
                                         Column {
                                             HeadlineText(headline = info.displayLabel)
 
-                                            if (viewModel.alwaysShowPackageName) {
+                                            if (viewModel.alwaysShowPackageName.value) {
                                                 Text(
                                                     text = info.packageName,
                                                     fontSize = 12.sp,
@@ -384,7 +384,7 @@ fun PreferredAppSettingsRoute(
                                         color = MaterialTheme.colorScheme.onSurface
                                     )
 
-                                    if (viewModel.alwaysShowPackageName) {
+                                    if (viewModel.alwaysShowPackageName.value) {
                                         Text(
                                             text = app.packageName,
                                             fontSize = 12.sp,

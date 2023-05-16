@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
-import android.util.Log
 import android.view.Window
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
@@ -15,8 +18,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import fe.linksheet.module.preference.IntPersister
-import fe.linksheet.module.preference.IntReader
+import fe.linksheet.module.preference.EnumTypeMapper
+import fe.linksheet.module.preference.Persister
+import fe.linksheet.module.preference.Reader
+import fe.linksheet.module.preference.TypeMapper
 
 
 private val LightColors = lightColorScheme(
@@ -97,13 +102,7 @@ private tailrec fun Context.findWindow(): Window? =
 enum class Theme {
     System, Light, Dark, AmoledBlack;
 
-    companion object {
-        val reader: IntReader<Theme> = { value ->
-            Theme.values().find { it.ordinal == value }
-        }
-
-        val persister: IntPersister<Theme> = { it.ordinal }
-    }
+    companion object Companion : EnumTypeMapper<Theme>(Theme.values())
 }
 
 
@@ -119,21 +118,30 @@ fun AppTheme(
     val colorScheme = when (theme) {
         Theme.System -> {
             when {
-                isAndroidSPlus -> if (systemDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+                isAndroidSPlus -> if (systemDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
+                    context
+                )
+
                 systemDarkTheme -> DarkColors
                 else -> LightColors
             }
         }
+
         Theme.Light -> {
             if (isAndroidSPlus) dynamicLightColorScheme(context)
             else LightColors
         }
+
         Theme.Dark -> {
             if (isAndroidSPlus) dynamicDarkColorScheme(context)
             else DarkColors
         }
+
         Theme.AmoledBlack -> {
-            if (isAndroidSPlus) dynamicDarkColorScheme(context).copy(surface = Color.Black, background = Color.Black)
+            if (isAndroidSPlus) dynamicDarkColorScheme(context).copy(
+                surface = Color.Black,
+                background = Color.Black
+            )
             else AmoledBlackColors
         }
     }
@@ -141,7 +149,8 @@ fun AppTheme(
     val view = LocalView.current
     val window = view.context.findWindow()
 
-    val isDark = theme == Theme.Dark || theme == Theme.AmoledBlack || (theme == Theme.System && systemDarkTheme)
+    val isDark =
+        theme == Theme.Dark || theme == Theme.AmoledBlack || (theme == Theme.System && systemDarkTheme)
     window?.let {
         WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
     }

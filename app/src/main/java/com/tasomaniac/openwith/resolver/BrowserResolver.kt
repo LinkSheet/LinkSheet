@@ -1,29 +1,22 @@
 package com.tasomaniac.openwith.resolver
 
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.net.Uri
-import fe.linksheet.BuildConfig
+import fe.linksheet.extension.allBrowsersIntent
+import fe.linksheet.extension.queryResolveInfosByIntent
 import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.extension.toPackageKeyedMap
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-object BrowserResolver {
+object BrowserResolver : KoinComponent {
+    private val context by inject<Context>()
 
-    fun resolve(context: Context) = queryBrowsers(context).map {
-        it.toDisplayActivityInfo(context)
-    }
+    fun queryPackageKeyedBrowsers() = queryBrowsers().toPackageKeyedMap()
+    fun queryDisplayActivityInfoBrowsers(sorted: Boolean) = queryBrowsers()
+        .toDisplayActivityInfo(context, sorted)
 
-    fun queryBrowsers(context: Context): Set<ResolveInfo> {
-        val browserIntent = Intent()
-            .setAction(Intent.ACTION_VIEW)
-            .addCategory(Intent.CATEGORY_BROWSABLE)
-            .setData(Uri.parse("http:"))
-
-        val resolvedBrowsers =
-            context.packageManager.queryIntentActivities(browserIntent, PackageManager.MATCH_ALL)
-        resolvedBrowsers.removeAll { it.activityInfo.packageName == BuildConfig.APPLICATION_ID }
-
-        return resolvedBrowsers.distinctBy { it.activityInfo.packageName }.toSet()
-    }
+    fun queryBrowsers() = context.packageManager.queryResolveInfosByIntent(
+        allBrowsersIntent, true
+    )
 }

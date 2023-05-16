@@ -1,5 +1,6 @@
 package fe.linksheet.composable.util
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -8,6 +9,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.module.preference.BasePreference
+import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.preference.RepositoryState
+
+
+@Composable
+fun <T, M> RadioButtonRow(
+    value: T,
+    state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
+    viewModel: SettingsViewModel,
+    clickHook: (() -> Unit)? = null,
+    content: @Composable () -> Unit
+) {
+    val onClick: () -> Unit = {
+        viewModel.updateState(state, value)
+        clickHook?.invoke()
+    }
+    RadioButtonRow(onClick = onClick, onLongClick = null, selected = state.matches(value), content)
+}
 
 @Composable
 fun RadioButtonRow(

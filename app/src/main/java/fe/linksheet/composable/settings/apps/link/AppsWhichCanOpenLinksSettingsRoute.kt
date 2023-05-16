@@ -210,7 +210,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
 
-                                if (viewModel.alwaysShowPackageName) {
+                                if (viewModel.alwaysShowPackageName.value) {
                                     Text(
                                         text = info.packageName,
                                         fontSize = 12.sp,

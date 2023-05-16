@@ -4,7 +4,7 @@ import android.net.Uri
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.module.downloader.Downloader
 
-data class IntentResolverResult(
+data class BottomSheetResult(
     val uri: Uri?,
     val resolved: List<DisplayActivityInfo>,
     val filteredItem: DisplayActivityInfo?,

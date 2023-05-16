@@ -80,3 +80,8 @@ fun Intent.buildSendTo(uri: Uri?): Intent {
         this.putExtra(Intent.EXTRA_TEXT, uri?.toString())
     }, null)
 }
+
+val allBrowsersIntent = Intent()
+    .setAction(Intent.ACTION_VIEW)
+    .addCategory(Intent.CATEGORY_BROWSABLE)
+    .setData(Uri.fromParts("http", "",""))

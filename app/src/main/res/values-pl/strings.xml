@@ -41,7 +41,6 @@
     <string name="back">Cofnij</string>
     <string name="display_grid_layout">Wyświetl układ siatki</string>
     <string name="display_grid_layout_explainer">Wyświetlaj układ siatki zamiast listy w dolnym panelu</string>
-    <string name="license_apache_2"></string>
     <string name="browser_status">Status przeglądarki</string>
     <string name="apps">Aplikacje</string>
     <string name="bottom_sheet">Dolny panel</string>

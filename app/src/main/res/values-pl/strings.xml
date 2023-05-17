@@ -29,8 +29,8 @@
     <string name="no_app_to_handle_link_found">Nie znaleziono aplikacji do obsługi linku!</string>
     <string name="open_settings">Otwórz ustawienia</string>
     <string name="no_such_app_found">Nie znaleziono takiej aplikacji!</string>
-    <string name="enable_send_button">Przycisk „Udostępnij w”</string>
-    <string name="send_to">Udostępnij w</string>
+    <string name="enable_send_button">Włącz przycisk „Udostępnij”</string>
+    <string name="send_to">Udostępnij</string>
     <string name="preferred_apps_explainer">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
     <string name="always_show_package_name_explainer">Pokaż nazwy pakietów zamiast samych nazw aplikacji</string>
@@ -83,8 +83,8 @@
     <string name="dark">Ciemny</string>
     <string name="amoled_black">Czarny (Amoled)</string>
     <string name="fastfoward_rules">Użyj reguł FastForward</string>
-    <string name="use_text_share_copy_buttons">Użyj prostych przycisków tekstowych dla „Kopiuj link”, „Udostępnij w” i „Pobierz”</string>
-    <string name="use_text_share_copy_buttons_explainer">Zastępuje „Kopiuj link”, „Udostępnij w” i „Pobierz” prostymi przyciskami tekstowymi</string>
+    <string name="use_text_share_copy_buttons">Użyj prostych przycisków</string>
+    <string name="use_text_share_copy_buttons_explainer">Zastępuje „Kopiuj link”, „Udostępnij” i „Pobierz” prostymi przyciskami tekstowymi</string>
     <string name="preview_url">Podgląd linku</string>
     <string name="follow_redirects_local_cache">Włącz lokalną pamięć podręczną przekierowań</string>
     <string name="follow_redirects_local_cache_explainer">Lokalnie buforuj wyniki przekierowań</string>
@@ -118,7 +118,7 @@
     <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
     <string name="preferred_browser">Preferowana przeglądarka</string>
     <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki; jeśli obecna jest tylko jedna aplikacja natywna, zostanie ona automatycznie otwarta</string>
-    <string name="enable_send_button_explainer">Wyświetla przycisk w dolnym panelu, który umożliwia udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij w”</string>
+    <string name="enable_send_button_explainer">Wyświetla przycisk w dolnym panelu, który umożliwia udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Aplikacja jest domyślną przeglądarką!</string>
     <string name="bottom_sheet_explainer">Sortuj według użycia, włącz przycisk kopiowania, włącz przycisk udostępniania itp.</string>
     <string name="open_copied_link">Otwórz skopiowany link</string>
@@ -134,4 +134,11 @@
     <string name="enable_libredirect_explainer">Przekierowywanie linków do przyjaznych dla prywatności frontendów przy użyciu eksperymentalnej integracji <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="use_app_settings_explainer">Niech aplikacja zdecyduje, czy wewnętrzna przeglądarka powinna być używana</string>
     <string name="browser_explainer">Tryb przeglądarki i ustawienia wewnętrznej przeglądarki</string>
+    <string name="seal">Seal</string>
+    <string name="license_gpl_3">Licencja GNU General Public v3.0</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Frontend</string>
+    <string name="app_name">LinkSheet</string>
+    <string name="license_apache_2">Licencja Apache 2.0</string>
 </resources>

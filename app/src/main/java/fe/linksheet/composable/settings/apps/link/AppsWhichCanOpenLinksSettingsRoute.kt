@@ -1,8 +1,8 @@
 package fe.linksheet.composable.settings.apps.link
 
-import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,48 +20,48 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
-import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
-import fe.linksheet.extension.observeAsState
-import kotlinx.coroutines.CoroutineScope
+import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
+import fe.linksheet.composable.util.Searchbar
+import fe.linksheet.extension.CurrentActivity
+import fe.linksheet.extension.startActivityWithConfirmation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(
-    ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
     ExperimentalFoundationApi::class
 )
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppsWhichCanOpenLinksSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel
+    settingsViewModel: SettingsViewModel,
+    viewModel: AppsWhichCanOpenLinksViewModel = viewModel()
 ) {
-    val context = LocalContext.current
-    val manager = remember { context.getSystemService(DomainVerificationManager::class.java) }
+    val activity = LocalContext.CurrentActivity()
 
     var refreshing by remember { mutableStateOf(false) }
     var filter by remember { mutableStateOf("") }
+    val refreshScope = rememberCoroutineScope()
 
-    val fetch: suspend CoroutineScope.(Boolean) -> Unit = { fetchRefresh ->
+    val fetch: suspend (Boolean) -> Unit = { fetchRefresh ->
         if (fetchRefresh) {
             refreshing = true
         }
 
-        viewModel.loadAppsWhichCanHandleLinksAsync(context, manager)
-        viewModel.filterWhichAppsCanHandleLinksAsync(filter)
+        viewModel.loadAppsAsync().await()
+        viewModel.filterAppsAsync(filter).await()
 
         if (fetchRefresh) {
             delay(100)
@@ -69,26 +69,10 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         }
     }
 
-    val lifecycleState =
-        LocalLifecycleOwner.current.lifecycle.observeAsState(Lifecycle.Event.ON_RESUME)
+    LaunchedEffectOnFirstAndResume { fetch(false) }
 
-    LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            fetch(false)
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        fetch(false)
-    }
-
-    val refreshScope = rememberCoroutineScope()
-
-    val state = rememberPullRefreshState(refreshing, onRefresh = {
-        refreshScope.launch(block = { fetch(true) })
-    })
-
-
+    val fetchInScope: () -> Unit = { refreshScope.launch { fetch(true) } }
+    val state = rememberPullRefreshState(refreshing, onRefresh = fetchInScope)
 
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
         Box(
@@ -105,8 +89,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
             LazyColumn(
                 modifier = Modifier
                     .padding(padding)
-                    .fillMaxHeight(),
-                contentPadding = PaddingValues(horizontal = 15.dp)
+                    .fillMaxHeight(), contentPadding = PaddingValues(horizontal = 15.dp)
             ) {
                 stickyHeader(key = "header") {
                     Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
@@ -116,89 +99,58 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                         )
 
                         Row {
+                            val filterChipClickHandler: (Boolean) -> Unit = {
+                                viewModel.linkHandlingAllowed = it
+                                fetchInScope()
+                            }
+
                             FilterChip(
-                                selected = viewModel.whichAppsCanHandleLinksEnabled,
-                                onClick = {
-                                    viewModel.onWhichAppsCanHandleLinksEnabled(true)
-                                    refreshScope.launch { fetch(true) }
-                                },
-                                label = {
-                                    Text(text = stringResource(id = R.string.enabled))
-                                },
-                                trailingIcon = {
-                                    Image(
-                                        imageVector = Icons.Default.Visibility,
-                                        contentDescription = stringResource(
-                                            id = R.string.enabled
-                                        ),
-                                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-                                    )
-                                }
+                                value = true,
+                                state = viewModel.linkHandlingAllowed,
+                                onClick = filterChipClickHandler,
+                                label = R.string.enabled,
+                                icon = Icons.Default.Visibility
                             )
 
                             Spacer(modifier = Modifier.width(5.dp))
 
                             FilterChip(
-                                selected = !viewModel.whichAppsCanHandleLinksEnabled,
-                                onClick = {
-                                    viewModel.onWhichAppsCanHandleLinksEnabled(false)
-                                    refreshScope.launch { fetch(true) }
-                                },
-                                label = {
-                                    Text(text = stringResource(id = R.string.disabled))
-                                },
-                                trailingIcon = {
-                                    Image(
-                                        imageVector = Icons.Default.VisibilityOff,
-                                        contentDescription = stringResource(
-                                            id = R.string.disabled
-                                        ),
-                                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-                                    )
-                                }
+                                value = false,
+                                state = viewModel.linkHandlingAllowed,
+                                onClick = filterChipClickHandler,
+                                label = R.string.disabled,
+                                icon = Icons.Default.VisibilityOff
                             )
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        Searchbar(filter = filter, onValueChange = {
-                            filter = it
-                            refreshScope.launch {
-                                viewModel.filterWhichAppsCanHandleLinksAsync(
-                                    it
-                                )
-                            }
-                        }, onClearClick = {
-                            filter = ""
-                            refreshScope.launch {
-                                viewModel.filterWhichAppsCanHandleLinksAsync(
-                                    filter
-                                )
-                            }
-                        })
+                        Searchbar(
+                            filter = filter,
+                            onFilterChanged = {
+                                filter = it
+                                viewModel.filterAppsAsync(it)
+                            },
+                        )
 
                         Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
 
-                if (viewModel.whichAppsCanHandleLinksFiltered.isNotEmpty() && !refreshing) {
-                    items(
-                        viewModel.whichAppsCanHandleLinksFiltered,
-                        key = { it.flatComponentName }
-                    ) { info ->
+                if (viewModel.appsFiltered.isNotEmpty() && !refreshing) {
+                    items(items = viewModel.appsFiltered, key = { it.flatComponentName }) { info ->
                         ClickableRow(
                             padding = 5.dp,
                             onClick = {
-                                viewModel.openOpenByDefaultSettings(
-                                    context,
-                                    info.packageName
+                                activity.startActivityWithConfirmation(
+                                    viewModel.makeOpenByDefaultSettingsIntent(info)
                                 )
                             },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                bitmap = info.getBitmap(context),
-                                contentDescription = info.displayLabel,
+                                bitmap = info.iconBitmap,
+                                contentDescription = info.label,
                                 modifier = Modifier.size(42.dp)
                             )
 
@@ -206,11 +158,11 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                             Column {
                                 Text(
-                                    text = info.displayLabel, fontSize = 16.sp,
+                                    text = info.label, fontSize = 16.sp,
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
 
-                                if (viewModel.alwaysShowPackageName.value) {
+                                if (settingsViewModel.alwaysShowPackageName.value) {
                                     Text(
                                         text = info.packageName,
                                         fontSize = 12.sp,
@@ -231,12 +183,10 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
                         ) {
-                            if (viewModel.whichAppsCanHandleLinksLoading) {
+                            if (viewModel.loading.value) {
                                 CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                             } else {
-                                Text(
-                                    text = stringResource(id = R.string.no_such_app_found),
-                                )
+                                Text(text = stringResource(id = R.string.no_such_app_found))
                             }
                         }
                     }
@@ -244,4 +194,29 @@ fun AppsWhichCanOpenLinksSettingsRoute(
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun FilterChip(
+    value: Boolean,
+    state: Boolean,
+    onClick: (Boolean) -> Unit,
+    @StringRes label: Int,
+    icon: ImageVector,
+) {
+    FilterChip(
+        selected = state == value,
+        onClick = { onClick(value) },
+        label = {
+            Text(text = stringResource(id = label))
+        },
+        trailingIcon = {
+            Image(
+                imageVector = icon,
+                contentDescription = stringResource(id = label),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+            )
+        }
+    )
 }

@@ -32,7 +32,7 @@ fun PackageManager.queryAllResolveInfos(
 ): List<ResolveInfo> {
     return getInstalledPackagesCompat(PackageManager.MATCH_ALL).mapNotNull { packageInfo ->
         queryFirstIntentActivityByPackageNameOrNull(packageInfo.packageName).also {
-            Timber.tag("InstalledPackage").d("${packageInfo.packageName}: $it")
+//            Timber.tag("InstalledPackage").d("${packageInfo.packageName}: $it")
         }
     }.filter { filterRemoveSelfApp(removeSelfApp, it) }
 }

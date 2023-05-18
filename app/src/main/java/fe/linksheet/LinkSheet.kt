@@ -5,6 +5,7 @@ import android.content.Context
 import com.google.android.material.color.DynamicColors
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.database.linkSheetDatabaseModule
+import fe.linksheet.module.database.repository.preferredAppRepositoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.redirectresolver.redirectResolverModule
 import fe.linksheet.module.request.requestModule
@@ -31,6 +32,7 @@ class LinkSheet : Application() {
             androidContext(this@LinkSheet)
             modules(
                 linkSheetDatabaseModule,
+                preferredAppRepositoryModule,
                 preferenceRepositoryModule,
                 requestModule,
                 redirectResolverModule,

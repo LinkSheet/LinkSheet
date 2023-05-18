@@ -1,11 +1,16 @@
 package com.tasomaniac.openwith.data
 
 import android.content.ComponentName
+import android.content.Context
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.tasomaniac.openwith.preferred.PreferredDisplayActivityInfo
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
+import fe.linksheet.extension.toDisplayActivityInfo
 
 @Entity(
     tableName = "openwith",
@@ -18,8 +23,16 @@ data class PreferredApp(
     val component: String,
     val alwaysPreferred: Boolean
 ) {
-    val componentName: ComponentName
-        @Ignore get() = ComponentName.unflattenFromString(component)!!
+    @delegate:Ignore
+    val componentName by lazy { ComponentName.unflattenFromString(component)!! }
+
+    fun toDisplayActivityInfo(context: Context) = context.packageManager
+        .queryFirstIntentActivityByPackageNameOrNull(packageName!!)
+        ?.toDisplayActivityInfo(context)
+
+    fun toPreferredDisplayActivityInfo(context: Context) = toDisplayActivityInfo(context)?.let {
+        PreferredDisplayActivityInfo(this, it)
+    }
 
     override fun equals(other: Any?): Boolean {
         return (other as? PreferredApp)?.component == this.component

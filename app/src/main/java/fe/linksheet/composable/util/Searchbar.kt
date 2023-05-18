@@ -11,14 +11,29 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Searchbar(filter: String, onValueChange: (String) -> Unit, onClearClick: () -> Unit){
+fun Searchbar(
+    filter: String,
+    onFilterChanged: (String) -> Unit,
+) {
+    Searchbar(
+        filter = filter,
+        onValueChange = onFilterChanged,
+        onClearClick = { onFilterChanged("") }
+    )
+}
+
+@Composable
+fun Searchbar(
+    filter: String,
+    onValueChange: (String) -> Unit,
+    onClearClick: () -> Unit
+){
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         placeholder = { Text(text = stringResource(id = R.string.search)) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MaterialTheme.colorScheme.primary),
+        colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = MaterialTheme.colorScheme.primary),
         shape = RoundedCornerShape(size = 32.dp),
         value = filter,
         trailingIcon = {

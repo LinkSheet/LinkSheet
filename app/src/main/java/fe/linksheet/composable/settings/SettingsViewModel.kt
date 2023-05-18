@@ -1,14 +1,11 @@
 package fe.linksheet.composable.settings
 
+import android.app.Activity
 import android.app.AppOpsManager
 import android.app.role.RoleManager
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
-import android.content.pm.verify.domain.DomainVerificationManager
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
@@ -18,19 +15,15 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
-import com.tasomaniac.openwith.preferred.PreferredResolver.resolve
 import com.tasomaniac.openwith.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.BuildConfig
-import fe.linksheet.data.dao.PackageEntityDao
+import fe.linksheet.data.dao.base.PackageEntityDao
 import fe.linksheet.data.entity.LibRedirectDefault
 import fe.linksheet.data.entity.LibRedirectServiceState
 import fe.linksheet.extension.allBrowsersIntent
-import fe.linksheet.extension.filterIf
-import fe.linksheet.extension.filterNullable
-import fe.linksheet.extension.hasVerifiedDomains
-import fe.linksheet.extension.launchIO
+import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.extension.queryAllResolveInfos
 import fe.linksheet.extension.resolveActivityCompat
@@ -41,9 +34,6 @@ import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.preference.RepositoryState
-import fe.linksheet.resolver.InAppBrowserHandler
-import fe.linksheet.ui.theme.Theme
-import fe.linksheet.util.contextIO
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -59,10 +49,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     private val database by inject<LinkSheetDatabase>()
     private val preferenceRepository by inject<PreferenceRepository>()
 
-    val preferredApps = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
-    val preferredAppsFiltered = mutableStateMapOf<DisplayActivityInfo, MutableSet<String>>()
 
-    val appsExceptPreferred = mutableStateListOf<DisplayActivityInfo>()
 
     val browsers = mutableStateListOf<DisplayActivityInfo>()
     val packages = mutableStateListOf<DisplayActivityInfo>()
@@ -70,11 +57,6 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     var browserMode = preferenceRepository.getState(Preferences.browserMode)
     var selectedBrowser = preferenceRepository.getStringState(Preferences.selectedBrowser)
     var inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserMode)
-
-    private val whichAppsCanHandleLinks = mutableStateListOf<DisplayActivityInfo>()
-    val whichAppsCanHandleLinksFiltered = mutableStateListOf<DisplayActivityInfo>()
-    var whichAppsCanHandleLinksEnabled by mutableStateOf(true)
-    var whichAppsCanHandleLinksLoading by mutableStateOf(false)
 
     val whitelistedBrowserMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
     val disableInAppBrowserInSelectedMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
@@ -115,49 +97,13 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     var previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
 
 
-    suspend fun filterPreferredAppsAsync(filter: String) = contextIO {
-        preferredAppsFiltered.clear()
-        preferredApps.forEach { (info, hosts) ->
-            if (filter.isEmpty() || info.displayLabel.contains(filter, ignoreCase = true)) {
-                preferredAppsFiltered[info] = hosts
-            }
-        }
-    }
 
 
-    suspend fun loadPreferredApps(context: Context) = contextIO {
-        preferredApps.clear()
-
-//            val browsers = BrowserResolver.resolve(context).map { it.packageName }
-
-        database.preferredAppDao().allPreferredApps().forEach { app ->
-            val displayActivityInfo = app.resolve(context)
-
-            if (displayActivityInfo != null
-//                    && !browsers.contains(it.componentName.packageName)
-            ) {
-                preferredApps.getOrPut(displayActivityInfo) { mutableSetOf() }.add(app.host)
-            }
-
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    suspend fun loadAppsExceptPreferred(
-        context: Context, manager: DomainVerificationManager
-    ) = contextIO {
-        val preferredAppsPackage = preferredApps.keys.mapToSet { it.packageName }
-
-        appsExceptPreferred.setup(mapInstalledPackages(context, manager) {
-            it.activityInfo.packageName !in preferredAppsPackage
-        })
-    }
-
-    suspend fun loadBrowsers() = contextIO {
+    suspend fun loadBrowsers() = ioAsync {
         browsers.setup(BrowserResolver.queryDisplayActivityInfoBrowsers(true))
     }
 
-    suspend fun loadPackages(context: Context) = contextIO {
+    suspend fun loadPackages(context: Context) = ioAsync {
         packages.setup(
             context.packageManager
                 .queryAllResolveInfos(true)
@@ -168,22 +114,22 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
 
-    suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) = contextIO {
+    suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) = ioAsync {
         database.preferredAppDao().insert(preferredApp)
     }
 
-    suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) = contextIO {
+    suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) = ioAsync {
         database.preferredAppDao().insert(preferredApps)
     }
 
     suspend fun deletePreferredAppAsync(host: String, packageName: String) {
         Timber.tag("DeletePreferredApp").d(host)
-        contextIO {
-            database.preferredAppDao().deleteByPackageNameAndHost(host, packageName)
+        ioAsync {
+            database.preferredAppDao().deleteByHostAndPackageName(host, packageName)
         }
     }
 
-    suspend fun deletePreferredAppWherePackageAsync(packageName: String) = contextIO {
+    suspend fun deletePreferredAppWherePackageAsync(packageName: String) = ioAsync {
         database.preferredAppDao().deleteByPackageName(packageName)
     }
 
@@ -192,69 +138,18 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return roleManager.createRequestRoleIntent(RoleManager.ROLE_BROWSER)
     }
 
-    fun openDefaultBrowserSettings(context: Context): Boolean {
-        return context.startActivityWithConfirmation(intentManageDefaultAppSettings)
+    fun openDefaultBrowserSettings(activity: Activity): Boolean {
+        return activity.startActivityWithConfirmation(intentManageDefaultAppSettings)
     }
-
-    @Throws(ActivityNotFoundException::class)
-    fun openOpenByDefaultSettings(context: Context, packageName: String): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val intent = if (Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
-                // S*msung moment lol 🤮 (https://stackoverflow.com/a/72365164)
-                Intent("android.settings.MANAGE_DOMAIN_URLS")
-            } else {
-                Intent(
-                    Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-                    Uri.parse("package:$packageName")
-                )
-            }
-
-            context.startActivity(intent)
-            return true
-        }
-
-        return false
-    }
-
 
     fun checkDefaultBrowser(context: Context) = context.packageManager
         .resolveActivityCompat(allBrowsersIntent, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
 
-    suspend fun filterWhichAppsCanHandleLinksAsync(filter: String) = contextIO {
-        whichAppsCanHandleLinksFiltered.clear()
-        whichAppsCanHandleLinksFiltered.addAll(whichAppsCanHandleLinks.filterIf(filter.isNotEmpty()) {
-            it.displayLabel.contains(filter, ignoreCase = true)
-        })
-    }
-
-    fun onWhichAppsCanHandleLinksEnabled(it: Boolean) {
-        this.whichAppsCanHandleLinksEnabled = it
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    fun mapInstalledPackages(
-        context: Context,
-        manager: DomainVerificationManager,
-        filter: ((ResolveInfo) -> Boolean)? = null
-    ) = context.packageManager.queryAllResolveInfos(true)
-        .filterNullable(filter)
-        .filter { manager.hasVerifiedDomains(it, whichAppsCanHandleLinksEnabled) }
-        .toDisplayActivityInfo(context, true)
-
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    suspend fun loadAppsWhichCanHandleLinksAsync(
-        context: Context,
-        manager: DomainVerificationManager
-    ) = contextIO({ whichAppsCanHandleLinksLoading = it }) {
-        whichAppsCanHandleLinks.setup(mapInstalledPackages(context, manager) { true })
-    }
-
     fun updateBrowserMode(mode: BrowserHandler.BrowserMode) {
         if (this.browserMode.value == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode.value != mode && this.selectedBrowser.value != null) {
-            launchIO { deletePreferredAppWherePackageAsync(selectedBrowser.value!!) }
+            ioAsync { deletePreferredAppWherePackageAsync(selectedBrowser.value!!) }
         }
 
         this.browserMode.updateState(mode)
@@ -280,7 +175,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         return mode == AppOpsManager.MODE_ALLOWED
     }
 
-    suspend fun queryWhitelistedBrowsersAsync() = contextIO {
+    suspend fun queryWhitelistedBrowsersAsync() = ioAsync {
         whitelistedBrowserMap.clear()
         val whitelistedBrowsers = database.whitelistedBrowsersDao().getAll().mapToSet { it.packageName }
 
@@ -289,14 +184,14 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    suspend fun saveWhitelistedBrowsers() = contextIO {
+    suspend fun saveWhitelistedBrowsers() = ioAsync {
         val dao = database.whitelistedBrowsersDao()
         whitelistedBrowserMap.forEach { (app, enabled) ->
             dao.insertOrDelete(PackageEntityDao.Mode.fromBool(enabled), app.packageName)
         }
     }
 
-    suspend fun queryAppsForInAppBrowserDisableInSelected() = contextIO {
+    suspend fun queryAppsForInAppBrowserDisableInSelected() = ioAsync {
         disableInAppBrowserInSelectedMap.clear()
         val disableInAppBrowserInSelected = database.disableInAppBrowserInSelectedDao()
             .getAll()
@@ -308,7 +203,7 @@ class SettingsViewModel : ViewModel(), KoinComponent {
     }
 
 
-    suspend fun saveInAppBrowserDisableInSelected() = contextIO {
+    suspend fun saveInAppBrowserDisableInSelected() = ioAsync {
         val dao = database.disableInAppBrowserInSelectedDao()
         disableInAppBrowserInSelectedMap.forEach { (app, enabled) ->
             dao.insertOrDelete(PackageEntityDao.Mode.fromBool(enabled), app.packageName)
@@ -319,22 +214,22 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         serviceKey: String,
         frontendKey: String,
         instanceUrl: String
-    ) = contextIO {
+    ) = ioAsync {
         database.libRedirectDefaultDao()
             .insert(LibRedirectDefault(serviceKey, frontendKey, instanceUrl))
     }
 
-    suspend fun loadLibRedirectDefault(serviceKey: String) = contextIO {
+    suspend fun loadLibRedirectDefault(serviceKey: String) = ioAsync {
         libRedirectDefault =
-            database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
+            database.libRedirectDefaultDao().getByServiceKey(serviceKey)
     }
 
-    suspend fun loadLibRedirectState(serviceKey: String) = contextIO {
+    suspend fun loadLibRedirectState(serviceKey: String) = ioAsync {
         libRedirectEnabled =
-            database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
+            database.libRedirectServiceStateDao().getServiceState(serviceKey)?.enabled
     }
 
-    suspend fun updateLibRedirectState(serviceKey: String, boolean: Boolean) = contextIO {
+    suspend fun updateLibRedirectState(serviceKey: String, boolean: Boolean) = ioAsync {
         database.libRedirectServiceStateDao()
             .insert(LibRedirectServiceState(serviceKey, boolean))
     }

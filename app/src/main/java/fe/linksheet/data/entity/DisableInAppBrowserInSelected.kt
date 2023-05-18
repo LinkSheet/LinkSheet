@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import fe.linksheet.data.dao.PackageEntityCreator
+import fe.linksheet.data.dao.base.PackageEntityCreator
 
 @Entity(tableName = "disable_in_app_browser_in_selected", indices = [Index("packageName", unique = true)])
 data class DisableInAppBrowserInSelected(

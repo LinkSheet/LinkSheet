@@ -9,6 +9,8 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
 import fe.linksheet.composable.util.RadioButtonRow
+import fe.linksheet.composable.util.dialogHelper
+import fe.linksheet.extension.CurrentActivity
 import fe.linksheet.extension.startPackageInfoActivity
 import kotlinx.coroutines.launch
 
@@ -17,7 +19,7 @@ fun PreferredBrowserSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: SettingsViewModel
 ) {
-    val context = LocalContext.current
+    val activity = LocalContext.CurrentActivity()
 
     LaunchedEffectOnFirstAndResume {
         viewModel.loadBrowsers()
@@ -83,11 +85,11 @@ fun PreferredBrowserSettingsRoute(
                     viewModel.updateState(viewModel.selectedBrowser, app.packageName)
                 },
                 onLongClick = {
-                    context.startPackageInfoActivity(app)
+                    activity.startPackageInfoActivity(app)
                 }
             ) {
                 BrowserIconTextRow(
-                    context = context,
+                    context = activity,
                     app = app,
                     selected = selected,
                     showSelectedText = true,

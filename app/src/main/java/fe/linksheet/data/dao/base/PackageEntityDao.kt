@@ -1,16 +1,8 @@
-package fe.linksheet.data.dao
+package fe.linksheet.data.dao.base
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
-abstract class PackageEntityDao<T, C : PackageEntityCreator<T>>(private val creator: C) {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun insert(entity: T)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun insert(entities: List<T>)
-
+abstract class PackageEntityDao<T, C : PackageEntityCreator<T>>(private val creator: C) : BaseDao<T> {
     @Query("")
     abstract fun deleteByPackageName(packageName: String)
 
@@ -22,10 +14,14 @@ abstract class PackageEntityDao<T, C : PackageEntityCreator<T>>(private val crea
         }
     }
 
-    fun insertOrDelete(mode: Mode, packageName: String) {
+    suspend fun insertOrDelete(mode: Mode, packageName: String) {
         when (mode) {
             Mode.Insert -> insert(creator.createInstance(packageName))
             Mode.Delete -> deleteByPackageName(packageName)
         }
     }
+}
+
+interface PackageEntityCreator<T> {
+    fun createInstance(packageName: String): T
 }

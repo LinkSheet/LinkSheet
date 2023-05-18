@@ -27,8 +27,8 @@ fun BrowserIconTextRow(
     alwaysShowPackageName: Boolean
 ) {
     Image(
-        bitmap = app.getBitmap(context),
-        contentDescription = app.displayLabel,
+        bitmap = app.iconBitmap,
+        contentDescription = app.label,
         modifier = Modifier.size(32.dp)
     )
 
@@ -36,7 +36,7 @@ fun BrowserIconTextRow(
 
     Column {
         Text(
-            text = app.displayLabel,
+            text = app.label,
             color = MaterialTheme.colorScheme.onSurface,
             fontFamily = HkGroteskFontFamily,
             fontWeight = FontWeight.SemiBold

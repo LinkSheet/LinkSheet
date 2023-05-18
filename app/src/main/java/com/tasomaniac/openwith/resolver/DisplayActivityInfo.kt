@@ -1,38 +1,36 @@
 package com.tasomaniac.openwith.resolver
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.Drawable
 import android.os.Parcelable
-import androidx.compose.ui.graphics.asImageBitmap
 import com.tasomaniac.openwith.data.PreferredApp
-import com.tasomaniac.openwith.extension.componentName
-import fe.linksheet.util.getBitmapFromImage
+import fe.linksheet.extension.componentName
+import fe.linksheet.extension.toImageBitmap
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class DisplayActivityInfo(
     val activityInfo: ActivityInfo,
-    val displayLabel: String,
-    val extendedInfo: CharSequence? = null
-) : Parcelable, Comparable<DisplayActivityInfo> {
+    val label: String,
+    val extendedInfo: CharSequence? = null,
+    val icon: Drawable? = null
+) {
+    companion object {
+        val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }
+        private val valueAndLabelComparator = compareByDescending<Pair<DisplayActivityInfo, Boolean>> { (_, bool) ->
+            bool
+        }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
-    @IgnoredOnParcel
-    var displayIcon: Drawable? = null
-
-    @IgnoredOnParcel
-    val packageName: String = activityInfo.packageName
-
-    @IgnoredOnParcel
-    val componentName by lazy {
-        activityInfo.componentName()
+        fun Map<DisplayActivityInfo, Boolean>.sortByValueAndName() = this.toList().sortedWith(valueAndLabelComparator)
     }
 
-    @IgnoredOnParcel
-    val flatComponentName by lazy {
-        componentName.flattenToString()
+    val compareLabel = label.lowercase()
+    val packageName: String = activityInfo.packageName
+    val componentName by lazy { activityInfo.componentName() }
+    val flatComponentName by lazy { componentName.flattenToString() }
+    val iconBitmap by lazy {
+        icon!!.toImageBitmap()
     }
 
     fun intentFrom(sourceIntent: Intent): Intent {
@@ -41,14 +39,15 @@ data class DisplayActivityInfo(
             .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT or Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
     }
 
-    fun toPreferredApp(host: String, alwaysPreferred: Boolean) =
-        PreferredApp(host = host, packageName = packageName, component = componentName.flattenToString(), alwaysPreferred = alwaysPreferred)
-
-    fun getBitmap(context: Context) = getBitmapFromImage(context, displayIcon!!).asImageBitmap()
-
-    override fun compareTo(other: DisplayActivityInfo): Int {
-        return this.displayLabel.compareTo(other.displayLabel)
-    }
+    fun toPreferredApp(
+        host: String,
+        alwaysPreferred: Boolean
+    ) = PreferredApp(
+        host = host,
+        packageName = packageName,
+        component = componentName.flattenToString(),
+        alwaysPreferred = alwaysPreferred
+    )
 
     override fun equals(other: Any?): Boolean {
         return (other as? DisplayActivityInfo)?.componentName == componentName

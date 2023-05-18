@@ -1,5 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
+import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -33,7 +34,7 @@ import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.redirectresolver.RedirectResolver
-import fe.linksheet.util.contextIO
+import fe.linksheet.util.io
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -84,11 +85,11 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
 
     fun showLoadingBottomSheet() = followRedirects || enableDownloader
 
-    fun startMainActivity(context: Context): Boolean {
+    fun startMainActivity(context: Activity): Boolean {
         return context.startActivityWithConfirmation(Intent(context, MainActivity::class.java))
     }
 
-    fun startPackageInfoActivity(context: Context, info: DisplayActivityInfo): Boolean {
+    fun startPackageInfoActivity(context: Activity, info: DisplayActivityInfo): Boolean {
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             this.data = Uri.parse("package:${info.packageName}")
         })
@@ -96,7 +97,7 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
 
     suspend fun persistSelectedIntentAsync(intent: Intent, always: Boolean) {
         Timber.tag("PersistingSelectedIntent").d("Component: ${intent.component}")
-        return contextIO {
+        return io {
             intent.component?.let { component ->
                 val host = intent.data!!.host!!.lowercase(Locale.getDefault())
                 val app = PreferredApp(
@@ -153,8 +154,8 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
         fastForwardRulesObject: JsonObject
     ): Result<FollowRedirect> {
         if (localCache) {
-            val redirect = contextIO {
-                database.resolvedRedirectDao().getResolvedRedirectForShortUrl(uri.toString())
+            val redirect = io {
+                database.resolvedRedirectDao().getForShortUrl(uri.toString())
             }
 
             if (redirect != null) {
@@ -171,7 +172,7 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
         val followRedirect = followRedirectsImpl(uri, fastForwardRulesObject)
 
         if (localCache && followRedirect.getOrNull()?.resolveType != FollowRedirectResolveType.NotResolved) {
-            contextIO {
+            io {
                 database.resolvedRedirectDao().insert(ResolvedRedirect(
                     uri.toString(),
                     followRedirect.getOrNull()?.resolvedUrl!!
@@ -245,12 +246,12 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
         return downloader.isNonHtmlContentUri(uri.toString())
     }
 
-    suspend fun getLibRedirectDefault(serviceKey: String)= contextIO {
-        database.libRedirectDefaultDao().getLibRedirectDefaultByServiceKey(serviceKey)
+    suspend fun getLibRedirectDefault(serviceKey: String)= io {
+        database.libRedirectDefaultDao().getByServiceKey(serviceKey)
     }
 
-    suspend fun loadLibRedirectState(serviceKey: String) = contextIO {
-        database.libRedirectServiceStateDao().getLibRedirectServiceState(serviceKey)?.enabled
+    suspend fun loadLibRedirectState(serviceKey: String) = io {
+        database.libRedirectServiceStateDao().getServiceState(serviceKey)?.enabled
     }
 
     fun startDownload(

@@ -70,19 +70,23 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
 
     implementation("androidx.room:room-runtime:2.5.1")
-    implementation("androidx.webkit:webkit:1.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
     kapt("androidx.room:room-compiler:2.5.1")
 
-    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("androidx.webkit:webkit:1.6.1")
+
+
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.1")
 
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.material3:material3:1.1.0-rc01")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha01")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+
     implementation("androidx.browser:browser:1.5.0")
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")

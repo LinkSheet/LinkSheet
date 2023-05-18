@@ -1,5 +1,3 @@
-@file:Suppress("MaxLineLength")
-
 package com.tasomaniac.openwith.data.migrations
 
 import android.content.ComponentName

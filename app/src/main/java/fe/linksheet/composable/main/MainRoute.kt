@@ -2,7 +2,6 @@ package fe.linksheet.composable.main
 
 import android.app.Activity
 import android.app.role.RoleManager
-import android.content.Context
 import android.os.Build
 import android.util.Patterns
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -34,6 +33,7 @@ import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.extension.CurrentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -46,7 +46,7 @@ import kotlinx.coroutines.delay
 fun MainRoute(
     navController: NavHostController, viewModel: SettingsViewModel = viewModel()
 ) {
-    val context = LocalContext.current
+    val activity = LocalContext.CurrentActivity()
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
@@ -54,7 +54,7 @@ fun MainRoute(
 
     LaunchedEffect(Unit) {
         delay(200)
-        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
+        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(activity))
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
@@ -63,7 +63,7 @@ fun MainRoute(
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = Results.loading()
-            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(context))
+            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(activity))
 
             sheetOpen = null
         }
@@ -109,7 +109,7 @@ fun MainRoute(
 
             item(key = "open_default_browser") {
                 OpenDefaultBrowserCard(
-                    context = context,
+                    activity = activity,
                     defaultBrowserEnabled = defaultBrowserEnabled,
                     defaultBrowserChanged = { defaultBrowserEnabled = it },
                     viewModel = viewModel
@@ -135,7 +135,7 @@ fun MainRoute(
 
 @Composable
 fun OpenDefaultBrowserCard(
-    context: Context,
+    activity: Activity,
     defaultBrowserEnabled: Results<Unit>,
     defaultBrowserChanged: (Results<Unit>) -> Unit,
     viewModel: SettingsViewModel
@@ -153,7 +153,7 @@ fun OpenDefaultBrowserCard(
     } else null
 
     val roleManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        remember { context.getSystemService(RoleManager::class.java) }
+        remember { activity.getSystemService(RoleManager::class.java) }
     } else null
 
     val shouldUsePrimaryColor = defaultBrowserEnabled.isSuccess || defaultBrowserEnabled.isLoading
@@ -172,7 +172,7 @@ fun OpenDefaultBrowserCard(
                     val intent = viewModel.getRequestRoleBrowserIntent(roleManager!!)
                     browserLauncherAndroidQPlus!!.launch(intent)
                 } else {
-                    viewModel.openDefaultBrowserSettings(context)
+                    viewModel.openDefaultBrowserSettings(activity)
                 }
             }
     ) {

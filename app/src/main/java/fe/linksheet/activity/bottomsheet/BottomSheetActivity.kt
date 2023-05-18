@@ -51,6 +51,7 @@ import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.BottomSheetResult
 import fe.linksheet.R
+import fe.linksheet.extension.CurrentActivity
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.runIf
 import fe.linksheet.extension.showToast
@@ -124,7 +125,7 @@ class BottomSheetActivity : ComponentActivity() {
                     completed.followRedirect?.resolveType?.let { makeResolveToast(it, true) }
 
                     showToast(
-                        getString(R.string.opening_with_app, completed.app.displayLabel),
+                        getString(R.string.opening_with_app, completed.app.label),
                         uiThread = true
                     )
                 }
@@ -289,8 +290,8 @@ class BottomSheetActivity : ComponentActivity() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    bitmap = filteredItem.getBitmap(this@BottomSheetActivity),
-                    contentDescription = filteredItem.displayLabel,
+                    bitmap = filteredItem.iconBitmap,
+                    contentDescription = filteredItem.label,
                     modifier = Modifier.size(32.dp)
                 )
 
@@ -300,7 +301,7 @@ class BottomSheetActivity : ComponentActivity() {
                     Text(
                         text = stringResource(
                             id = R.string.open_with_app,
-                            filteredItem.displayLabel,
+                            filteredItem.label,
                         ),
                         fontFamily = HkGroteskFontFamily,
                         fontWeight = FontWeight.SemiBold
@@ -482,15 +483,15 @@ class BottomSheetActivity : ComponentActivity() {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Image(
-                                bitmap = info.getBitmap(this@BottomSheetActivity),
-                                contentDescription = info.displayLabel,
+                                bitmap = info.iconBitmap,
+                                contentDescription = info.label,
                                 modifier = Modifier.size(32.dp)
                             )
 
                             Spacer(modifier = Modifier.width(5.dp))
 
                             Text(
-                                text = info.displayLabel,
+                                text = info.label,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                             )
@@ -521,15 +522,15 @@ class BottomSheetActivity : ComponentActivity() {
                             modifier = modifier(index, info).height(appListItemHeight)
                         ) {
                             Image(
-                                bitmap = info.getBitmap(this@BottomSheetActivity),
-                                contentDescription = info.displayLabel,
+                                bitmap = info.iconBitmap,
+                                contentDescription = info.label,
                                 modifier = Modifier.size(32.dp)
                             )
 
                             Spacer(modifier = Modifier.width(5.dp))
 
                             Column {
-                                Text(text = info.displayLabel)
+                                Text(text = info.label)
                                 if (showPackage) {
                                     Text(
                                         text = info.packageName,
@@ -658,7 +659,7 @@ class BottomSheetActivity : ComponentActivity() {
         padding: PaddingValues,
         onClick: (always: Boolean) -> Unit,
     ) {
-        val context = LocalContext.current
+        val activity = LocalContext.CurrentActivity()
 
         Row(
             modifier = Modifier
@@ -701,7 +702,7 @@ class BottomSheetActivity : ComponentActivity() {
                     contentPadding = padding,
                     enabled = true,
                     onClick = {
-                        bottomSheetViewModel.startMainActivity(context)
+                        bottomSheetViewModel.startMainActivity(activity)
                     }) {
                     Text(
                         text = stringResource(id = R.string.open_settings),

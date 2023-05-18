@@ -45,14 +45,14 @@ object BottomSheetGrouper {
             }
         }
 
-        comparator = comparator.thenBy { app -> app.displayLabel.lowercase() }
+        comparator = comparator.thenBy { app -> app.label.lowercase() }
 
         val displayLabels = mutableSetOf<String>()
         var showExtended = false
 
         val returnGrouped = grouped.map { app ->
             app.toDisplayActivityInfo(context).also {
-                if (!displayLabels.add(it.displayLabel)) {
+                if (!displayLabels.add(it.label)) {
                     showExtended = true
                 }
             }

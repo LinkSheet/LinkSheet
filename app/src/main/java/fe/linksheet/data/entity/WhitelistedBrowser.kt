@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import fe.linksheet.data.dao.PackageEntityCreator
+import fe.linksheet.data.dao.base.PackageEntityCreator
 
 @Entity(tableName = "whitelisted_browser", indices = [Index("packageName", unique = true)])
 data class WhitelistedBrowser(

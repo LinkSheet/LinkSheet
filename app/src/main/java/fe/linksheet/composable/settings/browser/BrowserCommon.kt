@@ -38,16 +38,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.DynamicHeightDialog
+import fe.linksheet.composable.util.Dialog
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
-import fe.linksheet.extension.sortByValueAndName
 import fe.linksheet.module.preference.BasePreference
-import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.RepositoryState
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import timber.log.Timber
@@ -166,7 +165,7 @@ private fun BrowserCommonDialog(
 ) {
     val context = LocalContext.current
     if (open) {
-        DynamicHeightDialog(onDismissRequest = { close(false) }) {
+        Dialog(onDismissRequest = { close(false) }) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

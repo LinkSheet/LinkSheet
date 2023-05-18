@@ -4,20 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import com.tasomaniac.openwith.extension.componentName
-import com.tasomaniac.openwith.extension.isSchemeTypicallySupportedByBrowsers
 import com.tasomaniac.openwith.preferred.PreferredResolver
 import fe.fastforwardkt.FastForwardLoader
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.extension.componentName
 import fe.linksheet.extension.getUri
+import fe.linksheet.extension.isSchemeTypicallySupportedByBrowsers
 import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.queryResolveInfosByIntent
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.resolver.InAppBrowserHandler
 import fe.linksheet.resolver.BottomSheetGrouper
+import fe.linksheet.resolver.InAppBrowserHandler
 import timber.log.Timber
 
 object ResolveIntents {
@@ -92,7 +92,7 @@ object ResolveIntents {
         Timber.tag("ResolveIntents").d("PreferredApp: $preferredApp")
 
         val hostHistory = uri?.let {
-            PreferredResolver.resolveHostHistory(context, it.host!!)
+            PreferredResolver.resolveHostHistory(it.host!!)
         } ?: emptyMap()
 
 

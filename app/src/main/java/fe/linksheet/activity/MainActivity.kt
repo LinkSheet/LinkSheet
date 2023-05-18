@@ -143,7 +143,8 @@ class MainActivity : ComponentActivity() {
 
                                 composable(route = preferredAppsSettingsRoute) {
                                     PreferredAppSettingsRoute(
-                                        onBackPressed = onBackPressed, viewModel = settingsViewModel
+                                        onBackPressed = onBackPressed,
+                                        settingsViewModel = settingsViewModel
                                     )
                                 }
 
@@ -151,7 +152,7 @@ class MainActivity : ComponentActivity() {
                                     composable(route = appsWhichCanOpenLinksSettingsRoute) {
                                         AppsWhichCanOpenLinksSettingsRoute(
                                             onBackPressed = onBackPressed,
-                                            viewModel = settingsViewModel
+                                            settingsViewModel = settingsViewModel
                                         )
                                     }
                                 }

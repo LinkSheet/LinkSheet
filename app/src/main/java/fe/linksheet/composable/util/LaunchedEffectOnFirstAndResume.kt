@@ -5,19 +5,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import fe.linksheet.extension.observeAsState
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun LaunchedEffectOnFirstAndResume(run: suspend () -> Unit) {
+fun LaunchedEffectOnFirstAndResume(block: suspend CoroutineScope.() -> Unit) {
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 
     LaunchedEffect(Unit) {
-        run()
+        block()
     }
 
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
-            run()
+            block()
         }
     }
 }

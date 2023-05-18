@@ -1,6 +1,5 @@
 package fe.linksheet.module.preference
 
-import fe.linksheet.util.keyedMap
 import fe.linksheet.util.lazyKeyedMap
 
 typealias Reader<M, T> = (M) -> T?

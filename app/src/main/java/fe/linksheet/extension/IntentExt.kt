@@ -20,6 +20,8 @@ fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).appl
     }
 }
 
+fun Intent.isSchemeTypicallySupportedByBrowsers() = "http" == scheme || "https" == scheme
+
 //{ act=android.intent.action.SEND typ=text/plain flg=0x10800001 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity clip={text/plain {T(59)}} (has extras) }
 //{ act=android.intent.action.VIEW dat=https://twitter.com/... flg=0x10800000 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity (has extras) }
 

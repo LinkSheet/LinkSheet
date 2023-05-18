@@ -3,6 +3,7 @@ package fe.linksheet.composable.settings.theme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -21,14 +22,12 @@ fun ThemeSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: SettingsViewModel
 ) {
-    val themes = remember {
-        mutableStateListOf(
-            ThemeHolder(Theme.System, R.string.system),
-            ThemeHolder(Theme.Light, R.string.light),
-            ThemeHolder(Theme.Dark, R.string.dark),
-            ThemeHolder(Theme.AmoledBlack, R.string.amoled_black)
-        )
-    }
+    val themes = listOf(
+        ThemeHolder(Theme.System, R.string.system),
+        ThemeHolder(Theme.Light, R.string.light),
+        ThemeHolder(Theme.Dark, R.string.dark),
+        ThemeHolder(Theme.AmoledBlack, R.string.amoled_black)
+    )
 
     SettingsScaffold(R.string.theme, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -37,15 +36,13 @@ fun ThemeSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            themes.forEach { holder ->
-                item(key = holder.key) {
-                    RadioButtonRow(
-                        value = holder.theme,
-                        state = viewModel.theme,
-                        viewModel = viewModel
-                    ) {
-                        Texts(headline = holder.headline, subtitle = null)
-                    }
+            items(items = themes, key = { it.key }) { holder ->
+                RadioButtonRow(
+                    value = holder.theme,
+                    state = viewModel.theme,
+                    viewModel = viewModel
+                ) {
+                    Texts(headline = holder.headline, subtitle = null)
                 }
             }
         }

@@ -2,6 +2,7 @@ package fe.linksheet.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import fe.linksheet.data.dao.base.PackageEntityDao
 import fe.linksheet.data.entity.WhitelistedBrowser
 
 @Dao

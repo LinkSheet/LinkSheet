@@ -1,6 +1,7 @@
 package fe.linksheet.composable.settings.apps.link
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -25,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
@@ -33,8 +35,12 @@ import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
 import fe.linksheet.composable.util.Searchbar
+import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.CurrentActivity
+import fe.linksheet.extension.ioState
+import fe.linksheet.extension.listHelper
 import fe.linksheet.extension.startActivityWithConfirmation
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -51,17 +57,21 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 ) {
     val activity = LocalContext.CurrentActivity()
 
+    val apps by viewModel.appsFiltered.ioState()
+    val filter by viewModel.searchFilter.ioState()
+    val linkHandlingAllowed by viewModel.linkHandlingAllowed.ioState()
+
+    val listState = remember(apps?.size, filter, linkHandlingAllowed) {
+        listState(apps, filter)
+    }
+
     var refreshing by remember { mutableStateOf(false) }
-    var filter by remember { mutableStateOf("") }
     val refreshScope = rememberCoroutineScope()
 
     val fetch: suspend (Boolean) -> Unit = { fetchRefresh ->
         if (fetchRefresh) {
             refreshing = true
         }
-
-        viewModel.loadAppsAsync().await()
-        viewModel.filterAppsAsync(filter).await()
 
         if (fetchRefresh) {
             delay(100)
@@ -100,13 +110,12 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                         Row {
                             val filterChipClickHandler: (Boolean) -> Unit = {
-                                viewModel.linkHandlingAllowed = it
-                                fetchInScope()
+                                viewModel.linkHandlingAllowed.value = it
                             }
 
                             FilterChip(
                                 value = true,
-                                state = viewModel.linkHandlingAllowed,
+                                state = linkHandlingAllowed,
                                 onClick = filterChipClickHandler,
                                 label = R.string.enabled,
                                 icon = Icons.Default.Visibility
@@ -116,7 +125,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                             FilterChip(
                                 value = false,
-                                state = viewModel.linkHandlingAllowed,
+                                state = linkHandlingAllowed,
                                 onClick = filterChipClickHandler,
                                 label = R.string.disabled,
                                 icon = Icons.Default.VisibilityOff
@@ -125,71 +134,55 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        Searchbar(
-                            filter = filter,
-                            onFilterChanged = {
-                                filter = it
-                                viewModel.filterAppsAsync(it)
-                            },
-                        )
+                        Searchbar(filter = filter, onFilterChanged = {
+                            viewModel.searchFilter.value = it
+                        })
 
                         Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
 
-                if (viewModel.appsFiltered.isNotEmpty() && !refreshing) {
-                    items(items = viewModel.appsFiltered, key = { it.flatComponentName }) { info ->
-                        ClickableRow(
-                            padding = 5.dp,
-                            onClick = {
-                                activity.startActivityWithConfirmation(
-                                    viewModel.makeOpenByDefaultSettingsIntent(info)
-                                )
-                            },
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                bitmap = info.iconBitmap,
-                                contentDescription = info.label,
-                                modifier = Modifier.size(42.dp)
+                listHelper(
+                    noItems = R.string.no_apps_which_can_handle_links_found,
+                    notFound = R.string.no_such_app_found,
+                    listState = listState,
+                    list = apps,
+                    listKey = { it.flatComponentName },
+                ) { info ->
+                    ClickableRow(
+                        padding = 5.dp,
+                        onClick = {
+                            activity.startActivityWithConfirmation(
+                                viewModel.makeOpenByDefaultSettingsIntent(info)
+                            )
+                        },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            bitmap = info.iconBitmap,
+                            contentDescription = info.label,
+                            modifier = Modifier.size(42.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(10.dp))
+
+                        Column {
+                            Text(
+                                text = info.label, fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.onSurface
                             )
 
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
+                            if (settingsViewModel.alwaysShowPackageName.value) {
                                 Text(
-                                    text = info.label, fontSize = 16.sp,
-                                    color = MaterialTheme.colorScheme.onSurface
+                                    text = info.packageName,
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.tertiary
                                 )
-
-                                if (settingsViewModel.alwaysShowPackageName.value) {
-                                    Text(
-                                        text = info.packageName,
-                                        fontSize = 12.sp,
-                                        color = MaterialTheme.colorScheme.tertiary
-                                    )
-                                }
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(10.dp))
-                    }
-                } else {
-                    item {
-                        Column(
-                            modifier = Modifier
-                                .fillParentMaxWidth()
-                                .fillParentMaxHeight(0.4f),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            if (viewModel.loading.value) {
-                                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-                            } else {
-                                Text(text = stringResource(id = R.string.no_such_app_found))
                             }
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
         }

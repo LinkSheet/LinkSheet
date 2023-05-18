@@ -1,71 +1,52 @@
 package fe.linksheet.composable.settings.apps.preferred
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.junkfood.seal.ui.component.PreferenceSubtitle
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
-import fe.linksheet.composable.util.OnClose
 import fe.linksheet.composable.util.Searchbar
-import fe.linksheet.composable.util.dialogHelper
+import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.CurrentActivity
-import fe.linksheet.extension.items
-import fe.linksheet.extension.startPackageInfoActivity
-import fe.linksheet.extension.updateState
-import fe.linksheet.extension.updateStateFromResult
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.extension.ioState
+import fe.linksheet.extension.listHelper
 
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PreferredAppSettingsRoute(
     onBackPressed: () -> Unit,
@@ -74,12 +55,15 @@ fun PreferredAppSettingsRoute(
 ) {
     val activity = LocalContext.CurrentActivity()
 
-    val preferredApps by viewModel.preferredAppsFiltered.collectAsStateWithLifecycle(initialValue = mutableListOf())
-    val appsExceptPreferred = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-        viewModel.appsExceptPreferred.collectAsStateWithLifecycle(initialValue = mutableListOf())
-    else remember { mutableStateOf(listOf()) }
-
+    val preferredApps by viewModel.preferredAppsFiltered.ioState()
     val filter by viewModel.searchFilter.collectAsStateWithLifecycle()
+    val listState = remember(preferredApps?.size, filter) {
+        listState(preferredApps, filter)
+    }
+
+    val appsExceptPreferred = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        viewModel.appsExceptPreferred.ioState()
+    } else remember { mutableStateOf(listOf()) }
 
     val hostDialog = hostDialog(
         activity,
@@ -112,7 +96,10 @@ fun PreferredAppSettingsRoute(
         }
     )
 
-    SettingsScaffold(R.string.preferred_apps, onBackPressed = onBackPressed, floatingActionButton = {
+    SettingsScaffold(
+        R.string.preferred_apps,
+        onBackPressed = onBackPressed,
+        floatingActionButton = {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 FloatingActionButton(onClick = {
                     appsDialog.open()
@@ -145,59 +132,47 @@ fun PreferredAppSettingsRoute(
                 }
             }
 
-            if (preferredApps.isNotEmpty()) {
-                items(items = preferredApps, key = { it.first.flatComponentName }) { (app, hosts) ->
-                    ClickableRow(padding = 5.dp, onClick = {
-                        hostDialog.open(HostDialogState(app, hosts))
-                    }) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                bitmap = app.iconBitmap,
-                                contentDescription = app.label,
-                                modifier = Modifier.size(42.dp)
+            listHelper(
+                noItems = R.string.no_preferred_apps_set_yet,
+                notFound = R.string.no_such_app_found,
+                listState = listState,
+                list = preferredApps,
+                listKey = { it.first.flatComponentName },
+            ) { (app, hosts) ->
+                ClickableRow(padding = 5.dp, onClick = {
+                    hostDialog.open(HostDialogState(app, hosts))
+                }) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            bitmap = app.iconBitmap,
+                            contentDescription = app.label,
+                            modifier = Modifier.size(42.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(10.dp))
+
+                        Column {
+                            HeadlineText(headline = app.label)
+
+                            Text(
+                                text = hosts.joinToString(", "),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                color = MaterialTheme.colorScheme.onSurface
                             )
 
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
-                                HeadlineText(headline = app.label)
-
+                            if (settingsViewModel.alwaysShowPackageName.value) {
                                 Text(
-                                    text = hosts.joinToString(", "),
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    color = MaterialTheme.colorScheme.onSurface
+                                    text = app.packageName,
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.tertiary
                                 )
-
-                                if (settingsViewModel.alwaysShowPackageName.value) {
-                                    Text(
-                                        text = app.packageName,
-                                        fontSize = 12.sp,
-                                        color = MaterialTheme.colorScheme.tertiary
-                                    )
-                                }
                             }
                         }
                     }
+                }
 
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-            } else {
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillParentMaxWidth()
-                            .fillParentMaxHeight(0.4f),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        if (preferredApps.isEmpty()) {
-                            Text(text = stringResource(id = R.string.no_preferred_apps_set_yet))
-                        } else {
-                            Text(text = stringResource(id = R.string.no_such_app_found))
-                        }
-                    }
-                }
+                Spacer(modifier = Modifier.height(10.dp))
             }
         }
     }

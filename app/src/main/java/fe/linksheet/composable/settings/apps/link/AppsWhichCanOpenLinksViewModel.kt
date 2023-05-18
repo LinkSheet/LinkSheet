@@ -6,17 +6,21 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getDisplayActivityInfos
-import fe.linksheet.extension.ioAsync
+import fe.linksheet.extension.hasVerifiedDomains
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
@@ -27,20 +31,24 @@ class AppsWhichCanOpenLinksViewModel : ViewModel(), KoinComponent {
     @RequiresApi(Build.VERSION_CODES.S)
     private val domainVerificationManager = context.getSystemService<DomainVerificationManager>()!!
 
-    private val apps = mutableStateListOf<DisplayActivityInfo>()
-    val appsFiltered = mutableStateListOf<DisplayActivityInfo>()
-    var loading = mutableStateOf(false)
-        private set
-
-    var linkHandlingAllowed by mutableStateOf(true)
+    val linkHandlingAllowed = MutableStateFlow(true)
+    val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun loadAppsAsync() = ioAsync(loading, apps) {
-        domainVerificationManager.getDisplayActivityInfos(context, linkHandlingAllowed)
+    val apps = flow {
+        emit(domainVerificationManager.getDisplayActivityInfos(context))
+    }.combine(
+        linkHandlingAllowed
+    ) { apps, _ ->
+        apps.filter {
+            it.resolvedInfo.hasVerifiedDomains(domainVerificationManager, linkHandlingAllowed.value)
+        }
     }
 
-    fun filterAppsAsync(filter: String) = ioAsync(appsFiltered) {
-        apps.filterIf(filter.isNotEmpty()) { filter in it.compareLabel }
+    @RequiresApi(Build.VERSION_CODES.S)
+    val appsFiltered = apps.combine(searchFilter) { apps, filter ->
+        apps.filterIf(filter.isNotEmpty()) { it.compareLabel.contains(filter, ignoreCase = true) }
+            .toList()
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -55,7 +63,6 @@ class AppsWhichCanOpenLinksViewModel : ViewModel(), KoinComponent {
             )
         }
 
-        Timber.tag("Lel").d("$intent")
         return intent
     }
 }

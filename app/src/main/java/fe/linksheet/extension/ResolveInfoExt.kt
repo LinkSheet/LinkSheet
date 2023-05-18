@@ -12,7 +12,8 @@ import fe.linksheet.util.applyIf
 fun ResolveInfo.toDisplayActivityInfo(context: Context) = DisplayActivityInfo(
     activityInfo = activityInfo,
     label = loadLabel(context.packageManager).toString(),
-    icon = activityInfo.getIcon(context)
+    icon = activityInfo.getIcon(context),
+    resolvedInfo = this
 )
 
 fun Iterable<ResolveInfo>.toDisplayActivityInfo(

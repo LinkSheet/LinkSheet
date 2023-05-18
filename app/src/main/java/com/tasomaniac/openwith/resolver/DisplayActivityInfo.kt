@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.resolver
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import com.tasomaniac.openwith.data.PreferredApp
@@ -14,7 +15,8 @@ data class DisplayActivityInfo(
     val activityInfo: ActivityInfo,
     val label: String,
     val extendedInfo: CharSequence? = null,
-    val icon: Drawable? = null
+    val icon: Drawable? = null,
+    val resolvedInfo: ResolveInfo,
 ) {
     companion object {
         val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }

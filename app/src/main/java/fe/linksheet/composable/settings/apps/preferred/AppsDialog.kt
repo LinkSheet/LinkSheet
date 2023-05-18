@@ -38,7 +38,7 @@ data class AppsDialogCloseState(
 
 @Composable
 internal fun appsDialog(
-    appsExceptPreferred: State<List<DisplayActivityInfo>>,
+    appsExceptPreferred: State<List<DisplayActivityInfo>?>,
     alwaysShowPackageName: Boolean,
     onClose: OnClose<AppsDialogCloseState?> = {},
 ) = dialogHelper(
@@ -62,29 +62,31 @@ internal fun appsDialog(
         Spacer(modifier = Modifier.height(10.dp))
         Box {
             LazyColumn(modifier = Modifier.padding(bottom = 50.dp), content = {
-                items(items = state.value, key = { it.flatComponentName }) { info ->
-                    ClickableRow(
-                        verticalAlignment = Alignment.CenterVertically,
-                        padding = 5.dp,
-                        onClick = { close(AppsDialogCloseState(info)) }
-                    ) {
-                        Image(
-                            bitmap = info.iconBitmap,
-                            contentDescription = info.label,
-                            modifier = Modifier.size(32.dp)
-                        )
+                if(state.value != null){
+                    items(items = state.value!!, key = { it.flatComponentName }) { info ->
+                        ClickableRow(
+                            verticalAlignment = Alignment.CenterVertically,
+                            padding = 5.dp,
+                            onClick = { close(AppsDialogCloseState(info)) }
+                        ) {
+                            Image(
+                                bitmap = info.iconBitmap,
+                                contentDescription = info.label,
+                                modifier = Modifier.size(32.dp)
+                            )
 
-                        Spacer(modifier = Modifier.width(10.dp))
+                            Spacer(modifier = Modifier.width(10.dp))
 
-                        Column {
-                            HeadlineText(headline = info.label)
+                            Column {
+                                HeadlineText(headline = info.label)
 
-                            if (alwaysShowPackageName) {
-                                Text(
-                                    text = info.packageName,
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.tertiary
-                                )
+                                if (alwaysShowPackageName) {
+                                    Text(
+                                        text = info.packageName,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.tertiary
+                                    )
+                                }
                             }
                         }
                     }

@@ -1,8 +1,19 @@
 package fe.linksheet.extension
 
+import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import fe.linksheet.composable.util.ListState
 
 fun <K, V> LazyListScope.items(
     map: Map<K, V>,
@@ -12,5 +23,35 @@ fun <K, V> LazyListScope.items(
 ) = map.forEach { (k, v) ->
     item(key?.invoke(k), contentType?.invoke(k)) {
         content(k, v)
+    }
+}
+
+inline fun <T> LazyListScope.listHelper(
+    @StringRes noItems: Int,
+    @StringRes notFound: Int,
+    listState: ListState,
+    list: List<T>?,
+    noinline listKey: ((T) -> Any)? = null,
+    crossinline listItem: @Composable LazyItemScope.(item: T) -> Unit,
+) {
+    if (listState == ListState.Items) {
+        items(items = list!!, key = listKey, itemContent = listItem)
+    } else {
+        item {
+            Column(
+                modifier = Modifier
+                    .fillParentMaxWidth()
+                    .fillParentMaxHeight(0.4f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                when (listState) {
+                    ListState.Loading -> CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    ListState.NoItems -> Text(text = stringResource(id = noItems))
+                    ListState.NoResult -> Text(text = stringResource(id = notFound))
+                    else -> {}
+                }
+            }
+        }
     }
 }

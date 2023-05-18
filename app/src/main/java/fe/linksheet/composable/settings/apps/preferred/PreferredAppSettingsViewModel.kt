@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.extension.getDisplayActivityInfos
 import fe.linksheet.extension.groupBy
@@ -14,8 +15,10 @@ import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.database.repository.PreferredAppRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -36,10 +39,10 @@ class PreferredAppSettingsViewModel : ViewModel(), KoinComponent {
         ).toList().sortedBy { it.first.compareLabel }
     }
 
-    val preferredAppsFiltered = preferredApps.combine(searchFilter) { list, value ->
-        list.filter { (info, _) ->
-            value.isEmpty() || info.compareLabel.contains(value, ignoreCase = true)
-        }
+    val preferredAppsFiltered = preferredApps.combine(searchFilter) { apps, filter ->
+        apps.filterIf(filter.isNotEmpty()) { (info, _) ->
+            info.compareLabel.contains(filter, ignoreCase = true)
+        }.toList()
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

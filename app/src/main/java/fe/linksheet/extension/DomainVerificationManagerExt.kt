@@ -21,3 +21,8 @@ fun DomainVerificationManager.getDisplayActivityInfos(
     .filterIfFilterIsNotNull(filter)
     .filter { it.hasVerifiedDomains(this, linkHandlingAllowed) }
     .toDisplayActivityInfo(context, true)
+
+@RequiresApi(Build.VERSION_CODES.S)
+fun DomainVerificationManager.getDisplayActivityInfos(
+    context: Context
+) = context.packageManager.queryAllResolveInfos(true).toDisplayActivityInfo(context, true)

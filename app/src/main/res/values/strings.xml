@@ -140,4 +140,5 @@
     <string name="browser_explainer">Browser mode and In-App browser settings</string>
     <string name="disable_in_selected">Disable in selected</string>
     <string name="disable_in_selected_explainer">Disable In-App browser in selected apps, regardless of what the app wants to use</string>
+    <string name="no_apps_which_can_handle_links_found">No apps which can handle links have been found.</string>
 </resources>

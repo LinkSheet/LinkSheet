@@ -37,6 +37,8 @@ import fe.linksheet.module.redirectresolver.RedirectResolver
 import fe.linksheet.util.io
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -124,13 +126,13 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
 
     suspend fun getWhiteListedBrowsers(): List<WhitelistedBrowser> {
         return withContext(Dispatchers.IO) {
-            database.whitelistedBrowsersDao().getAll()
+            database.whitelistedBrowsersDao().getAll().first()
         }
     }
 
     suspend fun getDisableInAppBrowserInSelected(): List<DisableInAppBrowserInSelected> {
         return withContext(Dispatchers.IO) {
-            database.disableInAppBrowserInSelectedDao().getAll()
+            database.disableInAppBrowserInSelectedDao().getAll().first()
         }
     }
 

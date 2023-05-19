@@ -67,6 +67,7 @@ android {
 
 dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
 
     implementation("androidx.room:room-runtime:2.5.1")

@@ -1,32 +1,33 @@
-package fe.linksheet.composable.settings.apps.link
+package fe.linksheet.module.viewmodel
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getDisplayActivityInfos
 import fe.linksheet.extension.hasVerifiedDomains
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
 
-class AppsWhichCanOpenLinksViewModel : ViewModel(), KoinComponent {
-    private val context by inject<Context>()
+class AppsWhichCanOpenLinksViewModel(
+    val context: Application,
+    preferenceRepository: PreferenceRepository
+) : BaseViewModel(preferenceRepository) {
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val domainVerificationManager = context.getSystemService<DomainVerificationManager>()!!
@@ -35,9 +36,7 @@ class AppsWhichCanOpenLinksViewModel : ViewModel(), KoinComponent {
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    val apps = flow {
-        emit(domainVerificationManager.getDisplayActivityInfos(context))
-    }.combine(
+    val apps = flowOfLazy { domainVerificationManager.getDisplayActivityInfos(context) }.combine(
         linkHandlingAllowed
     ) { apps, _ ->
         apps.filter {

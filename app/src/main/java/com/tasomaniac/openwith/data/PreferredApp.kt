@@ -8,7 +8,6 @@ import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.tasomaniac.openwith.preferred.PreferredDisplayActivityInfo
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.toDisplayActivityInfo
 

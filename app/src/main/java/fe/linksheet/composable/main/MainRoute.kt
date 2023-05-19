@@ -33,20 +33,22 @@ import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.extension.CurrentActivity
+import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 import fe.linksheet.util.Results
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainRoute(
-    navController: NavHostController, viewModel: SettingsViewModel = viewModel()
+    navController: NavHostController,
+    viewModel: SettingsViewModel = koinViewModel()
 ) {
-    val activity = LocalContext.CurrentActivity()
+    val activity = LocalContext.currentActivity()
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
@@ -81,7 +83,6 @@ fun MainRoute(
             }
         })
     }) { padding ->
-
         LazyColumn(
             modifier = Modifier
                 .padding(padding)

@@ -11,13 +11,14 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.RepositoryState
+import fe.linksheet.module.viewmodel.BaseViewModel
 
 
 @Composable
 fun <T, M> RadioButtonRow(
     value: T,
     state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
-    viewModel: SettingsViewModel,
+    viewModel: BaseViewModel,
     clickHook: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {

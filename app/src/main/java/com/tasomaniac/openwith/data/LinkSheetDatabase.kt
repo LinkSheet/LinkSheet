@@ -39,12 +39,4 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
 
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
-
-    companion object {
-        fun getDatabase(context: Context) = Room.databaseBuilder(
-            context.applicationContext,
-            LinkSheetDatabase::class.java,
-            "linksheet"
-        ).addMigrations(Migration1to2).build()
-    }
 }

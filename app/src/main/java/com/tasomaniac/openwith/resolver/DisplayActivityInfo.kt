@@ -24,7 +24,7 @@ data class DisplayActivityInfo(
             bool
         }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
-        fun Map<DisplayActivityInfo, Boolean>.sortByValueAndName() = this.toList().sortedWith(valueAndLabelComparator)
+        fun List<Pair<DisplayActivityInfo, Boolean>>.sortByValueAndName() = sortedWith(valueAndLabelComparator)
     }
 
     val compareLabel = label.lowercase()

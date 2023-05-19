@@ -1,4 +1,4 @@
-package fe.linksheet.composable.settings.browser.mode
+package fe.linksheet.composable.settings.browser
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight

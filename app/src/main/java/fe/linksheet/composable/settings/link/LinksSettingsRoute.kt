@@ -21,11 +21,12 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.libRedirectSettingsRoute
+import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.ui.theme.HkGroteskFontFamily
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -33,7 +34,7 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 fun LinksSettingsRoute(
     onBackPressed: () -> Unit,
     navController: NavController,
-    viewModel: SettingsViewModel
+    viewModel: LinksSettingsViewModel = koinViewModel()
 ) {
     val writeExternalStoragePermissionState = rememberPermissionState(
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE

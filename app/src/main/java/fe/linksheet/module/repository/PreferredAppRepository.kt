@@ -1,15 +1,7 @@
-package fe.linksheet.module.database.repository
+package fe.linksheet.module.repository
 
-import com.tasomaniac.openwith.data.LinkSheetDatabase
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
-import org.koin.dsl.module
-
-val preferredAppRepositoryModule = module {
-    single {
-        PreferredAppRepository(get<LinkSheetDatabase>().preferredAppDao())
-    }
-}
 
 class PreferredAppRepository(val dao: PreferredAppDao) {
     fun getAllAlwaysPreferred() = dao.getAllAlwaysPreferred()

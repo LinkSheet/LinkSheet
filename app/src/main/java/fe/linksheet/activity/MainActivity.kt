@@ -22,23 +22,24 @@ import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.settings.browser.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
-import fe.linksheet.composable.settings.browser.mode.BrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.BrowserSettingsRoute
 import fe.linksheet.composable.settings.link.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.ui.theme.AppTheme
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
-    private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            val settingsViewModel = koinViewModel<SettingsViewModel>()
 
             AppTheme(theme = settingsViewModel.theme.value) {
                 Box(modifier = Modifier.fillMaxSize()) {
@@ -79,7 +80,6 @@ class MainActivity : ComponentActivity() {
                                 composable(route = bottomSheetSettingsRoute) {
                                     BottomSheetSettingsRoute(
                                         onBackPressed = onBackPressed,
-                                        viewModel = settingsViewModel
                                     )
                                 }
 
@@ -87,7 +87,6 @@ class MainActivity : ComponentActivity() {
                                     LinksSettingsRoute(
                                         onBackPressed = onBackPressed,
                                         navController = navController,
-                                        viewModel = settingsViewModel
                                     )
                                 }
 
@@ -95,7 +94,6 @@ class MainActivity : ComponentActivity() {
                                     LibRedirectSettingsRoute(
                                         onBackPressed = onBackPressed,
                                         navController = navController,
-                                        viewModel = settingsViewModel
                                     )
                                 }
 
@@ -130,14 +128,14 @@ class MainActivity : ComponentActivity() {
                                 composable(route = preferredBrowserSettingsRoute) {
                                     PreferredBrowserSettingsRoute(
                                         onBackPressed = onBackPressed,
-                                        viewModel = settingsViewModel
+                                        settingsViewModel = settingsViewModel
                                     )
                                 }
 
                                 composable(route = inAppBrowserSettingsRoute) {
                                     InAppBrowserSettingsRoute(
                                         onBackPressed = onBackPressed,
-                                        viewModel = settingsViewModel
+                                        settingsViewModel = settingsViewModel
                                     )
                                 }
 

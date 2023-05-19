@@ -1,7 +1,6 @@
 package fe.linksheet.composable.settings.apps.link
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -9,7 +8,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -26,8 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -36,13 +32,14 @@ import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
 import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.CurrentActivity
+import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
 import fe.linksheet.extension.startActivityWithConfirmation
-import kotlinx.coroutines.Dispatchers
+import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(
     ExperimentalMaterialApi::class,
@@ -53,9 +50,9 @@ import kotlinx.coroutines.launch
 fun AppsWhichCanOpenLinksSettingsRoute(
     onBackPressed: () -> Unit,
     settingsViewModel: SettingsViewModel,
-    viewModel: AppsWhichCanOpenLinksViewModel = viewModel()
+    viewModel: AppsWhichCanOpenLinksViewModel = koinViewModel()
 ) {
-    val activity = LocalContext.CurrentActivity()
+    val activity = LocalContext.currentActivity()
 
     val apps by viewModel.appsFiltered.ioState()
     val filter by viewModel.searchFilter.ioState()

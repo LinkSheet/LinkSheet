@@ -23,7 +23,6 @@ val libRedirectBuiltInServices by lazy { LibRedirectLoader.loadBuiltInServices()
 fun LibRedirectSettingsRoute(
     onBackPressed: () -> Unit,
     navController: NavController,
-    viewModel: SettingsViewModel,
 ) {
     SettingsScaffold(R.string.lib_redirect, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

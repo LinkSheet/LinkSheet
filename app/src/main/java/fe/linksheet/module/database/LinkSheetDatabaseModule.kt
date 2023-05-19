@@ -1,11 +1,13 @@
 package fe.linksheet.module.database
 
+import androidx.room.Room
 import com.tasomaniac.openwith.data.LinkSheetDatabase
-import org.koin.core.scope.get
+import com.tasomaniac.openwith.data.migrations.Migration1to2
 import org.koin.dsl.module
 
-val linkSheetDatabaseModule = module {
+val databaseModule = module {
     single {
-        LinkSheetDatabase.getDatabase(get())
+        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet")
+            .addMigrations(Migration1to2).build()
     }
 }

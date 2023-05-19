@@ -1,5 +1,6 @@
 package fe.linksheet.composable.util
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -131,10 +132,13 @@ private fun <T, R, S> Dialog(
     dynamicHeight: Boolean,
     content: @Composable (R?, OnClose<S?>) -> Unit,
 ) {
+    Log.d("Dialog", "Dialog Opened")
     var fetchedState by remember { mutableStateOf<R?>(null) }
 
     LaunchedEffect(Unit) {
+        Log.d("Dialog", "LaunchedEffect started (inputData=$inputData)")
         fetchedState = fetcher(inputData)
+        Log.d("Dialog", "LaunchedEffect done (fetchedState=$fetchedState)")
     }
 
     if (!awaitFetch || fetchedState != null) {

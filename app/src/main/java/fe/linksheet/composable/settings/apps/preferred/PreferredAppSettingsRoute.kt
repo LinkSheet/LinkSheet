@@ -31,7 +31,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -41,9 +40,11 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.CurrentActivity
+import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
+import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -51,9 +52,9 @@ import fe.linksheet.extension.listHelper
 fun PreferredAppSettingsRoute(
     onBackPressed: () -> Unit,
     settingsViewModel: SettingsViewModel,
-    viewModel: PreferredAppSettingsViewModel = viewModel()
+    viewModel: PreferredAppSettingsViewModel = koinViewModel()
 ) {
-    val activity = LocalContext.CurrentActivity()
+    val activity = LocalContext.currentActivity()
 
     val preferredApps by viewModel.preferredAppsFiltered.ioState()
     val filter by viewModel.searchFilter.collectAsStateWithLifecycle()
@@ -89,7 +90,7 @@ fun PreferredAppSettingsRoute(
     )
 
     val appsDialog = appsDialog(
-        appsExceptPreferred = appsExceptPreferred,
+        appsExceptPreferred = appsExceptPreferred.value,
         alwaysShowPackageName = settingsViewModel.alwaysShowPackageName.value,
         onClose = { closeState ->
             hostDialog.open(HostDialogState(closeState!!.displayActivityInfo))

@@ -34,12 +34,16 @@ import androidx.compose.ui.unit.sp
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.DialogColumn
+import fe.linksheet.composable.util.DialogContent
+import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.OnClose
 import fe.linksheet.composable.util.dialogHelper
 import fe.linksheet.extension.items
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.extension.updateState
 import fe.linksheet.extension.updateStateFromResult
+import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 data class HostDialogState(
@@ -71,11 +75,7 @@ internal fun hostDialog(
     ) { state, close ->
         val (displayActivityInfo, hasAppHosts, hostState) = state!!
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-        ) {
+        DialogColumn {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -101,34 +101,12 @@ internal fun hostDialog(
                 )
             }
 
-            Box {
-                LazyColumn(modifier = Modifier.padding(bottom = 50.dp), content = {
-                    items(map = hostState, key = { it }) { host, enabled ->
-                        val enabledState = remember { mutableStateOf(enabled) }
-                        val update: (Boolean) -> Unit = remember { { hostState[host] = it } }
+            DialogSpacer()
 
-                        ClickableRow(
-                            verticalAlignment = Alignment.CenterVertically,
-                            padding = 2.dp,
-                            onClick = enabledState.updateState(update)
-                        ) {
-                            Checkbox(
-                                checked = enabledState.value,
-                                onCheckedChange = enabledState.updateStateFromResult(update)
-                            )
-
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Text(text = host)
-                        }
-                    }
-                })
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomCenter)
-                        .height(40.dp)
-                ) {
+            DialogContent(
+                items = hostState,
+                key = { it },
+                bottomRow = {
                     Row(modifier = Modifier.height(40.dp)) {
                         OutlinedButton(
                             contentPadding = PaddingValues(horizontal = 18.dp),
@@ -183,7 +161,25 @@ internal fun hostDialog(
                             Text(text = stringResource(id = R.string.confirm))
                         }
                     }
+                },
+                content = { host, enabled ->
+                    val enabledState = remember { mutableStateOf(enabled) }
+                    val update: (Boolean) -> Unit = remember { { hostState[host] = it } }
+
+                    ClickableRow(
+                        verticalAlignment = Alignment.CenterVertically,
+                        padding = 2.dp,
+                        onClick = enabledState.updateState(update)
+                    ) {
+                        Checkbox(
+                            checked = enabledState.value,
+                            onCheckedChange = enabledState.updateStateFromResult(update)
+                        )
+
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(text = host)
+                    }
                 }
-            }
+            )
         }
     }

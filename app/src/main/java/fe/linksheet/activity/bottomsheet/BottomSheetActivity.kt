@@ -51,7 +51,7 @@ import com.junkfood.seal.ui.component.BottomDrawer
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.BottomSheetResult
 import fe.linksheet.R
-import fe.linksheet.extension.CurrentActivity
+import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.runIf
 import fe.linksheet.extension.showToast
@@ -659,7 +659,7 @@ class BottomSheetActivity : ComponentActivity() {
         padding: PaddingValues,
         onClick: (always: Boolean) -> Unit,
     ) {
-        val activity = LocalContext.CurrentActivity()
+        val activity = LocalContext.currentActivity()
 
         Row(
             modifier = Modifier

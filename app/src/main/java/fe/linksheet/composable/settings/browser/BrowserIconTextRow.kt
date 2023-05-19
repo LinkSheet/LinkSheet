@@ -20,7 +20,6 @@ import fe.linksheet.ui.theme.HkGroteskFontFamily
 
 @Composable
 fun BrowserIconTextRow(
-    context: Context,
     app: DisplayActivityInfo,
     selected: Boolean,
     showSelectedText: Boolean,

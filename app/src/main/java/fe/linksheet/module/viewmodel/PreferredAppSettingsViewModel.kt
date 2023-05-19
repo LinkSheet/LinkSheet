@@ -1,31 +1,30 @@
-package fe.linksheet.composable.settings.apps.preferred
+package fe.linksheet.module.viewmodel
 
-import android.content.Context
+import android.app.Application
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.extension.getDisplayActivityInfos
 import fe.linksheet.extension.groupBy
+import fe.linksheet.extension.hasVerifiedDomains
 import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.mapToSet
-import fe.linksheet.module.database.repository.PreferredAppRepository
-import kotlinx.coroutines.Dispatchers
+import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.repository.PreferredAppRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class PreferredAppSettingsViewModel : ViewModel(), KoinComponent {
-    private val context by inject<Context>()
-    private val repository by inject<PreferredAppRepository>()
+class PreferredAppSettingsViewModel(
+    val context: Application,
+    private val repository: PreferredAppRepository,
+    preferenceRepository: PreferenceRepository
+) : BaseViewModel(preferenceRepository) {
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val domainVerificationManager = context.getSystemService<DomainVerificationManager>()!!
@@ -46,10 +45,11 @@ class PreferredAppSettingsViewModel : ViewModel(), KoinComponent {
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    val appsExceptPreferred = preferredApps.map { app ->
-        val preferredAppsPackage = app.mapToSet { it.first.packageName }
-        domainVerificationManager.getDisplayActivityInfos(context, true) {
-            it.activityInfo.packageName !in preferredAppsPackage
+    val appsExceptPreferred = preferredApps.map { apps ->
+        val preferredAppsPackages = apps.mapToSet { it.first.packageName }
+        domainVerificationManager.getDisplayActivityInfos(context) {
+            it.hasVerifiedDomains(domainVerificationManager, true)
+                    && it.activityInfo.packageName !in preferredAppsPackages
         }
     }
 

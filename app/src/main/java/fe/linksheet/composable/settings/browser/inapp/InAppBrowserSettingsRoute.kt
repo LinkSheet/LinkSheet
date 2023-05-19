@@ -1,37 +1,71 @@
 package fe.linksheet.composable.settings.browser.inapp
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.remember
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
 import fe.linksheet.composable.settings.browser.BrowserCommonScaffold
+import fe.linksheet.composable.util.dialogHelper
+import fe.linksheet.module.viewmodel.InAppBrowserDisableInSelected
+import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import fe.linksheet.resolver.InAppBrowserHandler
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flowOn
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun InAppBrowserSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel
+    settingsViewModel: SettingsViewModel,
+    viewModel: InAppBrowserSettingsViewModel = koinViewModel()
 ) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
-
-    val (dialogOpen, dialogContentLoaded) = BrowserCommonDialog(
-        title = R.string.in_app_browser,
-        alwaysShowPackageName = viewModel.alwaysShowPackageName.value,
-        items = viewModel.disableInAppBrowserInSelectedMap,
-        updateActivityState = { activity, state ->
-            viewModel.disableInAppBrowserInSelectedMap[activity] = state
+    val dialog = dialogHelper<Unit, InAppBrowserDisableInSelected?, InAppBrowserDisableInSelected>(
+        fetch = {
+            viewModel.disableInAppBrowserInSelected
+                .flowOn(Dispatchers.IO)
+                .firstOrNull()
+                ?.toMutableMap()
         },
-        closeAndSave = {
-            coroutineScope.launch {
-                viewModel.saveInAppBrowserDisableInSelected()
-            }
-        }
-    )
+        onClose = { closeState ->
+            viewModel.saveInAppBrowserDisableInSelected(closeState!!)
+        },
+        awaitFetchBeforeOpen = false,
+        notifyCloseNoState = false,
+        dynamicHeight = true
+    ) { state, close ->
+        BrowserCommonDialog(
+            title = R.string.in_app_browser,
+            state = state,
+            alwaysShowPackageName = settingsViewModel.alwaysShowPackageName.value,
+            close = close
+        )
+    }
+
+    val rows = remember {
+        listOf(
+            BrowserCommonRadioButtonRowData(
+                InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
+                settingsViewModel.inAppBrowserMode,
+                R.string.use_app_settings,
+                R.string.use_app_settings_explainer
+            ),
+            BrowserCommonRadioButtonRowData(
+                InAppBrowserHandler.InAppBrowserMode.AlwaysDisableInAppBrowser,
+                settingsViewModel.inAppBrowserMode,
+                R.string.always_disable,
+                R.string.always_disable_explainer
+            ),
+            BrowserCommonRadioButtonRowData(
+                InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps,
+                settingsViewModel.inAppBrowserMode,
+                R.string.disable_in_selected,
+                R.string.disable_in_selected_explainer
+            ) { dialog.open(Unit) }
+        )
+    }
 
     BrowserCommonScaffold(
         headline = R.string.in_app_browser,
@@ -39,35 +73,7 @@ fun InAppBrowserSettingsRoute(
         onBackPressed = onBackPressed,
         viewModel = viewModel,
         rowKey = { it.value.value },
-        rows = listOf(
-            BrowserCommonRadioButtonRowData(
-                InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
-                viewModel.inAppBrowserMode,
-                R.string.use_app_settings,
-                R.string.use_app_settings_explainer
-            ),
-            BrowserCommonRadioButtonRowData(
-                InAppBrowserHandler.InAppBrowserMode.AlwaysDisableInAppBrowser,
-                viewModel.inAppBrowserMode,
-                R.string.always_disable,
-                R.string.always_disable_explainer
-            ),
-            BrowserCommonRadioButtonRowData(
-                InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps,
-                viewModel.inAppBrowserMode,
-                R.string.disable_in_selected,
-                R.string.disable_in_selected_explainer
-            ) {
-                coroutineScope.launch {
-                    viewModel.loadPackages(context)
-                    viewModel.queryAppsForInAppBrowserDisableInSelected()
-
-                    dialogContentLoaded.value = true
-                }
-
-                dialogOpen.value = true
-            }
-        )
+        rows = rows
     )
 }
 

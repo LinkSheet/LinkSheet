@@ -4,7 +4,7 @@ import androidx.room.Query
 
 abstract class PackageEntityDao<T, C : PackageEntityCreator<T>>(private val creator: C) : BaseDao<T> {
     @Query("")
-    abstract fun deleteByPackageName(packageName: String)
+    abstract suspend fun deleteByPackageName(packageName: String)
 
     enum class Mode(private val bool: Boolean) {
         Insert(true), Delete(false);

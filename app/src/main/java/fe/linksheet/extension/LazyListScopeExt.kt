@@ -16,13 +16,13 @@ import androidx.compose.ui.res.stringResource
 import fe.linksheet.composable.util.ListState
 
 fun <K, V> LazyListScope.items(
-    map: Map<K, V>,
+    items: Map<K, V>,
     key: ((K) -> Any)? = null,
-    contentType: ((K) -> Any)? = null,
-    content: @Composable LazyItemScope.(K, V) -> Unit
-) = map.forEach { (k, v) ->
-    item(key?.invoke(k), contentType?.invoke(k)) {
-        content(k, v)
+    contentType: (K) -> Any? = { null },
+    itemContent: @Composable LazyItemScope.(K, V) -> Unit
+) = items.forEach { (k, v) ->
+    item(key?.invoke(k), contentType.invoke(k)) {
+        itemContent(k, v)
     }
 }
 

@@ -21,7 +21,6 @@ import fe.linksheet.sealGithub
 fun CreditsSettingsRoute(
     onBackPressed: () -> Unit,
 ) {
-    val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
 
     SettingsScaffold(R.string.credits, onBackPressed = onBackPressed) { padding ->

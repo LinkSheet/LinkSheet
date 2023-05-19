@@ -16,7 +16,7 @@ fun ResolveInfo.toDisplayActivityInfo(context: Context) = DisplayActivityInfo(
     resolvedInfo = this
 )
 
-fun Iterable<ResolveInfo>.toDisplayActivityInfo(
+fun Iterable<ResolveInfo>.toDisplayActivityInfos(
     context: Context,
     sorted: Boolean = true
 ) = map { it.toDisplayActivityInfo(context) }.applyIf(sorted) {

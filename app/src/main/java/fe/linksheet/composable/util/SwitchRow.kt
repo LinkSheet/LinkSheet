@@ -15,12 +15,13 @@ import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.RepositoryState
+import fe.linksheet.module.viewmodel.BaseViewModel
 
 @Composable
 fun SwitchRow(
     modifier: Modifier = Modifier,
     state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
-    viewModel: SettingsViewModel,
+    viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable (() -> Unit)? = {
@@ -41,7 +42,7 @@ fun SwitchRow(
 fun SwitchRow(
     modifier: Modifier = Modifier,
     state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
-    viewModel: SettingsViewModel,
+    viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int
 ) {

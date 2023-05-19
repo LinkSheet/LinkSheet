@@ -8,22 +8,22 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun BottomSheetSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel
+    viewModel: BottomSheetSettingsViewModel = koinViewModel()
 ) {
-    val context = LocalContext.current
+    val context = LocalContext.currentActivity()
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 

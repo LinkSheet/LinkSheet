@@ -24,114 +24,40 @@ import fe.linksheet.data.entity.LibRedirectDefault
 import fe.linksheet.data.entity.LibRedirectServiceState
 import fe.linksheet.extension.allBrowsersIntent
 import fe.linksheet.extension.ioAsync
+import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.extension.queryAllResolveInfos
 import fe.linksheet.extension.resolveActivityCompat
 import fe.linksheet.extension.setup
 import fe.linksheet.extension.startActivityWithConfirmation
-import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.extension.toDisplayActivityInfos
 import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.preference.RepositoryState
+import fe.linksheet.module.viewmodel.BaseViewModel
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
 
 
-class SettingsViewModel : ViewModel(), KoinComponent {
+class SettingsViewModel(
+    val database: LinkSheetDatabase,
+    val preferenceRepository: PreferenceRepository
+) : BaseViewModel(preferenceRepository) {
     companion object {
         val intentManageDefaultAppSettings = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
         const val libRedirectRandomInstanceKey = "RANDOM_INSTANCE"
     }
 
-    private val database by inject<LinkSheetDatabase>()
-    private val preferenceRepository by inject<PreferenceRepository>()
-
-
-
-    val browsers = mutableStateListOf<DisplayActivityInfo>()
-    val packages = mutableStateListOf<DisplayActivityInfo>()
-
-    var browserMode = preferenceRepository.getState(Preferences.browserMode)
-    var selectedBrowser = preferenceRepository.getStringState(Preferences.selectedBrowser)
     var inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserMode)
-
-    val whitelistedBrowserMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
-    val disableInAppBrowserInSelectedMap = mutableStateMapOf<DisplayActivityInfo, Boolean>()
 
     var libRedirectDefault by mutableStateOf<LibRedirectDefault?>(null)
     var libRedirectEnabled by mutableStateOf<Boolean?>(null)
-
-    var usageStatsSorting = preferenceRepository.getBooleanState(Preferences.usageStatsSorting)
-
-    var wasTogglingUsageStatsSorting by mutableStateOf(false)
-
-    var enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
-    var hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
-    var singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
-    var enableSendButton = preferenceRepository.getBooleanState(Preferences.enableSendButton)
-    var alwaysShowPackageName =
-        preferenceRepository.getBooleanState(Preferences.alwaysShowPackageName)
-    var disableToasts = preferenceRepository.getBooleanState(Preferences.disableToasts)
-    var gridLayout = preferenceRepository.getBooleanState(Preferences.gridLayout)
-    var useClearUrls = preferenceRepository.getBooleanState(Preferences.useClearUrls)
-    var useFastForwardRules = preferenceRepository.getBooleanState(Preferences.useFastForwardRules)
-    var enableLibRedirect = preferenceRepository.getBooleanState(Preferences.enableLibRedirect)
-    var followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
-    var followRedirectsLocalCache =
-        preferenceRepository.getBooleanState(Preferences.followRedirectsLocalCache)
-    var followRedirectsExternalService =
-        preferenceRepository.getBooleanState(Preferences.followRedirectsExternalService)
-    var followOnlyKnownTrackers =
-        preferenceRepository.getBooleanState(Preferences.followOnlyKnownTrackers)
-    var enableDownloader = preferenceRepository.getBooleanState(Preferences.enableDownloader)
-    var downloaderCheckUrlMimeType =
-        preferenceRepository.getBooleanState(Preferences.downloaderCheckUrlMimeType)
-
-
     var theme = preferenceRepository.getState(Preferences.theme)
-    var dontShowFilteredItem = preferenceRepository.getBooleanState(Preferences.dontShowFilteredItem)
-    var useTextShareCopyButtons = preferenceRepository.getBooleanState(Preferences.useTextShareCopyButtons)
-    var previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
 
-
-
-
-    suspend fun loadBrowsers() = ioAsync {
-        browsers.setup(BrowserResolver.queryDisplayActivityInfoBrowsers(true))
-    }
-
-    suspend fun loadPackages(context: Context) = ioAsync {
-        packages.setup(
-            context.packageManager
-                .queryAllResolveInfos(true)
-                .toDisplayActivityInfo(context, true)
-        )
-
-        Log.d("LoadPackages", "${packages.toList()}")
-    }
-
-
-    suspend fun insertPreferredAppAsync(preferredApp: PreferredApp) = ioAsync {
-        database.preferredAppDao().insert(preferredApp)
-    }
-
-    suspend fun insertPreferredAppsAsync(preferredApps: List<PreferredApp>) = ioAsync {
-        database.preferredAppDao().insert(preferredApps)
-    }
-
-    suspend fun deletePreferredAppAsync(host: String, packageName: String) {
-        Timber.tag("DeletePreferredApp").d(host)
-        ioAsync {
-            database.preferredAppDao().deleteByHostAndPackageName(host, packageName)
-        }
-    }
-
-    suspend fun deletePreferredAppWherePackageAsync(packageName: String) = ioAsync {
-        database.preferredAppDao().deleteByPackageName(packageName)
-    }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     fun getRequestRoleBrowserIntent(roleManager: RoleManager): Intent {
@@ -146,69 +72,6 @@ class SettingsViewModel : ViewModel(), KoinComponent {
         .resolveActivityCompat(allBrowsersIntent, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
-
-    fun updateBrowserMode(mode: BrowserHandler.BrowserMode) {
-        if (this.browserMode.value == BrowserHandler.BrowserMode.SelectedBrowser && this.browserMode.value != mode && this.selectedBrowser.value != null) {
-            ioAsync { deletePreferredAppWherePackageAsync(selectedBrowser.value!!) }
-        }
-
-        this.browserMode.updateState(mode)
-    }
-
-    fun <T, NT, P : BasePreference<T, NT>> updateState(state: RepositoryState<T, NT, P>, newState: NT) {
-        state.updateState(newState)
-    }
-
-    fun openUsageStatsSettings(context: Context) {
-        context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
-        wasTogglingUsageStatsSorting = true
-    }
-
-    fun getUsageStatsAllowed(context: Context): Boolean {
-        val appOps = context.getSystemService<AppOpsManager>()
-        val mode = appOps!!.checkOpNoThrow(
-            AppOpsManager.OPSTR_GET_USAGE_STATS,
-            android.os.Process.myUid(),
-            context.packageName
-        )
-
-        return mode == AppOpsManager.MODE_ALLOWED
-    }
-
-    suspend fun queryWhitelistedBrowsersAsync() = ioAsync {
-        whitelistedBrowserMap.clear()
-        val whitelistedBrowsers = database.whitelistedBrowsersDao().getAll().mapToSet { it.packageName }
-
-        browsers.forEach { info ->
-            whitelistedBrowserMap[info] = info.packageName in whitelistedBrowsers
-        }
-    }
-
-    suspend fun saveWhitelistedBrowsers() = ioAsync {
-        val dao = database.whitelistedBrowsersDao()
-        whitelistedBrowserMap.forEach { (app, enabled) ->
-            dao.insertOrDelete(PackageEntityDao.Mode.fromBool(enabled), app.packageName)
-        }
-    }
-
-    suspend fun queryAppsForInAppBrowserDisableInSelected() = ioAsync {
-        disableInAppBrowserInSelectedMap.clear()
-        val disableInAppBrowserInSelected = database.disableInAppBrowserInSelectedDao()
-            .getAll()
-            .mapToSet { it.packageName }
-
-        packages.forEach { info ->
-            disableInAppBrowserInSelectedMap[info] = info.packageName in disableInAppBrowserInSelected
-        }
-    }
-
-
-    suspend fun saveInAppBrowserDisableInSelected() = ioAsync {
-        val dao = database.disableInAppBrowserInSelectedDao()
-        disableInAppBrowserInSelectedMap.forEach { (app, enabled) ->
-            dao.insertOrDelete(PackageEntityDao.Mode.fromBool(enabled), app.packageName)
-        }
-    }
 
     suspend fun saveLibRedirectDefault(
         serviceKey: String,

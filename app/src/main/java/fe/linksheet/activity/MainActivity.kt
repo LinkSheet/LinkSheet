@@ -4,8 +4,11 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -13,24 +16,39 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import fe.linksheet.*
+import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.appsSettingsRoute
+import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.bottomSheetSettingsRoute
+import fe.linksheet.browserSettingsRoute
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
-import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
-import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
+import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.settings.browser.BrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.link.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
+import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.inAppBrowserSettingsRoute
+import fe.linksheet.libRedirectServiceSettingsRoute
+import fe.linksheet.libRedirectSettingsRoute
+import fe.linksheet.linksSettingsRoute
+import fe.linksheet.mainRoute
+import fe.linksheet.preferredAppsSettingsRoute
+import fe.linksheet.preferredBrowserSettingsRoute
+import fe.linksheet.settingsRoute
+import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.theme.AppTheme
+import fe.linksheet.util.composable
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -97,14 +115,10 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
 
-                                composable(route = libRedirectServiceSettingsRoute) {
-                                    it.arguments?.getString("service")?.let { service ->
-                                        LibRedirectServiceSettingsRoute(
-                                            onBackPressed = onBackPressed,
-                                            serviceKey = service,
-                                            viewModel = settingsViewModel
-                                        )
-                                    }
+                                composable(route = libRedirectServiceSettingsRoute) { _, _ ->
+                                    LibRedirectServiceSettingsRoute(
+                                        onBackPressed = onBackPressed,
+                                    )
                                 }
 
                                 composable(route = themeSettingsRoute) {

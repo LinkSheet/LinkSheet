@@ -3,7 +3,7 @@ package fe.linksheet.module.repository
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
 
-class PreferredAppRepository(val dao: PreferredAppDao) {
+class PreferredAppRepository(private val dao: PreferredAppDao) {
     fun getAllAlwaysPreferred() = dao.getAllAlwaysPreferred()
 
     suspend fun deleteByPackageName(packageName: String) = dao.deleteByPackageName(packageName)

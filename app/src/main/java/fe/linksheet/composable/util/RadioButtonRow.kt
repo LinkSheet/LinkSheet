@@ -8,10 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.RepositoryState
-import fe.linksheet.module.viewmodel.BaseViewModel
+import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 
 @Composable

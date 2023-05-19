@@ -1,13 +1,20 @@
 package com.tasomaniac.openwith.data
 
-import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.tasomaniac.openwith.data.migrations.Migration1to2
-import fe.linksheet.data.dao.*
-import fe.linksheet.data.entity.*
+import fe.linksheet.data.dao.AppSelectionHistoryDao
+import fe.linksheet.data.dao.DisableInAppBrowserInSelectedDao
+import fe.linksheet.data.dao.LibRedirectDefaultDao
+import fe.linksheet.data.dao.LibRedirectServiceStateDao
+import fe.linksheet.data.dao.ResolvedRedirectDao
+import fe.linksheet.data.dao.WhitelistedBrowsersDao
+import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.data.entity.DisableInAppBrowserInSelected
+import fe.linksheet.data.entity.LibRedirectDefault
+import fe.linksheet.data.entity.LibRedirectServiceState
+import fe.linksheet.data.entity.ResolvedRedirect
+import fe.linksheet.data.entity.WhitelistedBrowser
 
 @Database(
     entities = [
@@ -27,16 +34,11 @@ import fe.linksheet.data.entity.*
     exportSchema = true
 )
 abstract class LinkSheetDatabase : RoomDatabase() {
-
     abstract fun preferredAppDao(): PreferredAppDao
-
     abstract fun appSelectionHistoryDao(): AppSelectionHistoryDao
-
     abstract fun whitelistedBrowsersDao(): WhitelistedBrowsersDao
     abstract fun disableInAppBrowserInSelectedDao(): DisableInAppBrowserInSelectedDao
     abstract fun resolvedRedirectDao(): ResolvedRedirectDao
-
     abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
-
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
 }

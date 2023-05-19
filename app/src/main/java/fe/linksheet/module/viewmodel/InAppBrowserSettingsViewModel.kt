@@ -1,7 +1,6 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.extension.ioLaunch
@@ -10,9 +9,9 @@ import fe.linksheet.extension.queryAllResolveInfos
 import fe.linksheet.extension.toDisplayActivityInfos
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
+import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 
 class InAppBrowserSettingsViewModel(

@@ -31,9 +31,7 @@ data class DisplayActivityInfo(
     val packageName: String = activityInfo.packageName
     val componentName by lazy { activityInfo.componentName() }
     val flatComponentName by lazy { componentName.flattenToString() }
-    val iconBitmap by lazy {
-        icon!!.toImageBitmap()
-    }
+    val iconBitmap by lazy { icon!!.toImageBitmap() }
 
     fun intentFrom(sourceIntent: Intent): Intent {
         return Intent(sourceIntent)

@@ -1,7 +1,6 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.net.Uri
@@ -9,19 +8,15 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import androidx.lifecycle.ViewModel
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getDisplayActivityInfos
 import fe.linksheet.extension.hasVerifiedDomains
 import fe.linksheet.module.preference.PreferenceRepository
+import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import timber.log.Timber
 
 class AppsWhichCanOpenLinksViewModel(
@@ -53,7 +48,7 @@ class AppsWhichCanOpenLinksViewModel(
     @RequiresApi(Build.VERSION_CODES.S)
     fun makeOpenByDefaultSettingsIntent(activityInfo: DisplayActivityInfo): Intent {
         val intent = if (Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
-            // S*msung moment lol 🤮 (https://stackoverflow.com/a/72365164)
+            // S*msung moment lol (https://stackoverflow.com/a/72365164)
             Intent("android.settings.MANAGE_DOMAIN_URLS")
         } else {
             Intent(

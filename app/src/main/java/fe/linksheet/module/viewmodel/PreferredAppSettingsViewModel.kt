@@ -16,6 +16,7 @@ import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
+import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map

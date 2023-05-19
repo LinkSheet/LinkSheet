@@ -249,11 +249,11 @@ class BottomSheetViewModel : ViewModel(), KoinComponent {
     }
 
     suspend fun getLibRedirectDefault(serviceKey: String)= io {
-        database.libRedirectDefaultDao().getByServiceKey(serviceKey)
+        database.libRedirectDefaultDao().getByServiceKey(serviceKey).firstOrNull()
     }
 
     suspend fun loadLibRedirectState(serviceKey: String) = io {
-        database.libRedirectServiceStateDao().getServiceState(serviceKey)?.enabled
+        database.libRedirectServiceStateDao().getServiceState(serviceKey).firstOrNull()?.enabled
     }
 
     fun startDownload(

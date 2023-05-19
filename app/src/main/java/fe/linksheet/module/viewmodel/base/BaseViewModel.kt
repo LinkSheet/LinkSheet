@@ -1,4 +1,4 @@
-package fe.linksheet.module.viewmodel
+package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.ViewModel
 import fe.linksheet.module.preference.BasePreference

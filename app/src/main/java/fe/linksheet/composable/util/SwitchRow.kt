@@ -11,11 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.module.preference.BasePreference
-import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.RepositoryState
-import fe.linksheet.module.viewmodel.BaseViewModel
+import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 @Composable
 fun SwitchRow(
@@ -24,9 +22,9 @@ fun SwitchRow(
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable (() -> Unit)? = {
-        SubtitleText(subtitle = subtitle ?: "")
-    }
+    subtitleBuilder: @Composable (() -> Unit)? = if(subtitle != null) {
+        { SubtitleText(subtitle = subtitle) }
+    } else null
 ) {
     SwitchRow(
         modifier = modifier,
@@ -79,24 +77,19 @@ fun SwitchRow(
     onChange: (Boolean) -> Unit,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable (() -> Unit)? = {
-        SubtitleText(subtitle = subtitle ?: "")
-    }
+    subtitleBuilder: @Composable (() -> Unit)? = if(subtitle != null) {
+        { SubtitleText(subtitle = subtitle) }
+    } else null
 ) {
     ClickableRow(
         modifier = modifier,
         padding = 10.dp,
         verticalAlignment = Alignment.CenterVertically,
-        onClick = {
-            onChange(!checked)
-        }
+        onClick = { onChange(!checked) }
     ) {
         Column(modifier = Modifier.fillMaxWidth(0.8f), verticalArrangement = Arrangement.Center) {
             HeadlineText(headline = headline)
-
-            if (subtitleBuilder != null) {
-                subtitleBuilder()
-            }
+            subtitleBuilder?.invoke()
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {

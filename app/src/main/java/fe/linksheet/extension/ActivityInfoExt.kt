@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.Drawable
-import com.tasomaniac.openwith.resolver.IconLoader
+import fe.linksheet.module.resolver.IconLoader
 
 fun ActivityInfo.componentName() = ComponentName(applicationInfo.packageName, name)
 

@@ -4,6 +4,7 @@ import fe.httpkt.Request
 import fe.httpkt.json.JsonBody
 import fe.linksheet.redirectResolverApiKey
 import fe.linksheet.redirectResolverApiUrl
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import timber.log.Timber
 import java.net.HttpURLConnection

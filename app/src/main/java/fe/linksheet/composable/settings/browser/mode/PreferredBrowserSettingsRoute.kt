@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.tasomaniac.openwith.resolver.BrowserHandler
+import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog

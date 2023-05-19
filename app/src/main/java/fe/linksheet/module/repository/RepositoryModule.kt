@@ -10,8 +10,10 @@ val repositoryModule = module {
 
     singleOf(::PreferredAppRepository)
     singleOf(::DisableInAppBrowserInSelectedRepository)
-    singleOf(::PreferredBrowserRepository)
+    singleOf(::WhitelistedBrowserRepository)
+    singleOf(::AppSelectionHistoryRepository)
     singleOf(::LibRedirectDefaultRepository)
     singleOf(::LibRedirectStateRepository)
+    singleOf(::ResolvedRedirectRepository)
 }
 

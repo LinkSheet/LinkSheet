@@ -13,4 +13,5 @@ val viewModelModule = module {
     viewModelOf(::LinksSettingsViewModel)
     viewModelOf(::LibRedirectServiceSettingsViewModel)
     viewModelOf(::SettingsViewModel)
+    viewModelOf(::BottomSheetViewModel)
 }

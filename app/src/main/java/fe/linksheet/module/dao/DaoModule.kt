@@ -12,4 +12,6 @@ val daoModule = module {
     single { get<LinkSheetDatabase>().whitelistedBrowsersDao() }
     single { get<LinkSheetDatabase>().libRedirectDefaultDao() }
     single { get<LinkSheetDatabase>().libRedirectServiceStateDao() }
+    single { get<LinkSheetDatabase>().resolvedRedirectDao() }
+    single { get<LinkSheetDatabase>().appSelectionHistoryDao() }
 }

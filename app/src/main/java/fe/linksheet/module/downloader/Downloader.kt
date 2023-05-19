@@ -10,13 +10,12 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import java.net.URLConnection
 import fe.mimetypekt.MimeTypeLoader
+import org.koin.core.module.dsl.singleOf
 import kotlin.math.min
 
 
 val downloaderModule = module {
-    single {
-        Downloader(get())
-    }
+    singleOf(::Downloader)
 }
 
 class Downloader(private val request: Request) {

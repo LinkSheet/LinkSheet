@@ -1,7 +1,7 @@
 package fe.linksheet.module.preference
 
-import com.tasomaniac.openwith.resolver.BrowserHandler
-import fe.linksheet.resolver.InAppBrowserHandler
+import fe.linksheet.module.resolver.BrowserHandler
+import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.theme.Theme
 
 object Preferences {

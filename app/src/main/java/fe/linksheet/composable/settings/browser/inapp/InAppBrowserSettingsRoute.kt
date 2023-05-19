@@ -10,7 +10,7 @@ import fe.linksheet.composable.settings.browser.BrowserCommonScaffold
 import fe.linksheet.composable.util.dialogHelper
 import fe.linksheet.module.viewmodel.InAppBrowserDisableInSelected
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
-import fe.linksheet.resolver.InAppBrowserHandler
+import fe.linksheet.module.resolver.InAppBrowserHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOn

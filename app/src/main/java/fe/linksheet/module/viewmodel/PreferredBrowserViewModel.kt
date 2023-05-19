@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import com.tasomaniac.openwith.resolver.BrowserHandler
+import fe.linksheet.module.resolver.BrowserHandler
 import com.tasomaniac.openwith.resolver.BrowserResolver
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo.Companion.sortByValueAndName
@@ -9,7 +9,7 @@ import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
-import fe.linksheet.module.repository.PreferredBrowserRepository
+import fe.linksheet.module.repository.WhitelistedBrowserRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.combine
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 
 class PreferredBrowserViewModel(
     val context: Application,
-    private val repository: PreferredBrowserRepository,
+    private val repository: WhitelistedBrowserRepository,
     preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     var browserMode = preferenceRepository.getState(Preferences.browserMode)

@@ -10,6 +10,7 @@ import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.redirectresolver.redirectResolverModule
 import fe.linksheet.module.repository.repositoryModule
 import fe.linksheet.module.request.requestModule
+import fe.linksheet.module.resolver.resolverModule
 import fe.linksheet.module.viewmodel.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -33,11 +34,12 @@ class LinkSheet : Application() {
             androidLogger()
             androidContext(this@LinkSheet)
             modules(
+                preferenceRepositoryModule,
                 databaseModule,
                 daoModule,
                 repositoryModule,
                 viewModelModule,
-                preferenceRepositoryModule,
+                resolverModule,
                 requestModule,
                 redirectResolverModule,
                 downloaderModule

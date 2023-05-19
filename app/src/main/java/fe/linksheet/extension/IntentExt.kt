@@ -2,7 +2,7 @@ package fe.linksheet.extension
 
 import android.content.Intent
 import android.net.Uri
-import com.tasomaniac.openwith.resolver.ResolveIntents
+import com.google.gson.JsonObject
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
@@ -29,7 +29,11 @@ private val clearUrlProviders by lazy {
     ClearURLLoader.loadBuiltInClearURLProviders()
 }
 
-fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri? {
+fun Intent.getUri(
+    clearUrl: Boolean = false,
+    fastForward: Boolean = false,
+    fastForwardRulesObject: JsonObject
+): Uri? {
     var uriData = dataString
     if (uriData == null) {
         uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
@@ -58,7 +62,7 @@ fun Intent.getUri(clearUrl: Boolean = false, fastForward: Boolean = false): Uri?
             Timber.tag("Url Pre modification").d(url)
 
             if (fastForward) {
-                getRuleRedirect(url, ResolveIntents.fastForwardRulesObject)?.let { url = it }
+                getRuleRedirect(url, fastForwardRulesObject)?.let { url = it }
             }
 
             Timber.tag("Url Post FastForward").d(url)
@@ -86,4 +90,4 @@ fun Intent.buildSendTo(uri: Uri?): Intent {
 val allBrowsersIntent = Intent()
     .setAction(Intent.ACTION_VIEW)
     .addCategory(Intent.CATEGORY_BROWSABLE)
-    .setData(Uri.fromParts("http", "",""))
+    .setData(Uri.fromParts("http", "", ""))

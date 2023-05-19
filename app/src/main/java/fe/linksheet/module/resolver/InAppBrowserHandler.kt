@@ -1,24 +1,21 @@
-package fe.linksheet.resolver
+package fe.linksheet.module.resolver
 
 import android.net.Uri
-import com.tasomaniac.openwith.resolver.BrowserHandler
-import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.preference.OptionTypeMapper
-import fe.linksheet.module.preference.Persister
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
-import fe.linksheet.module.preference.Reader
-import fe.linksheet.module.preference.TypeMapper
-import fe.linksheet.util.keyedMap
-import fe.linksheet.util.lazyKeyedMap
+import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
+import fe.linksheet.module.repository.WhitelistedBrowserRepository
+import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
 
-object InAppBrowserHandler : KoinComponent {
-    private val preferenceRepository by inject<PreferenceRepository>()
-
+class InAppBrowserHandler(
+    private val disableInAppBrowserInSelectedRepository: DisableInAppBrowserInSelectedRepository,
+) {
     sealed class InAppBrowserMode(val value: String) {
         object UseAppSettings : InAppBrowserMode("use_app_settings")
         object AlwaysDisableInAppBrowser : InAppBrowserMode("always_disable_in_app_browser")
@@ -30,15 +27,12 @@ object InAppBrowserHandler : KoinComponent {
         )
     }
 
-    suspend fun shouldAllowCustomTab(
-        referrer: Uri?,
-        viewModel: BottomSheetViewModel,
-    ): Boolean {
-        return when (preferenceRepository.get(Preferences.inAppBrowserMode)) {
+    suspend fun shouldAllowCustomTab(referrer: Uri?, inAppBrowserMode: InAppBrowserMode): Boolean {
+        return when (inAppBrowserMode) {
             InAppBrowserMode.AlwaysDisableInAppBrowser -> false
             InAppBrowserMode.UseAppSettings -> true
             InAppBrowserMode.DisableInSelectedApps -> {
-                val selectedApps = viewModel.getDisableInAppBrowserInSelected().mapToSet {
+                val selectedApps = disableInAppBrowserInSelectedRepository.getAll().first().mapToSet {
                     it.packageName
                 }
 

@@ -4,7 +4,7 @@ import fe.linksheet.data.dao.WhitelistedBrowsersDao
 import fe.linksheet.data.dao.base.PackageEntityDao
 
 
-class PreferredBrowserRepository(private val dao: WhitelistedBrowsersDao) {
+class WhitelistedBrowserRepository(private val dao: WhitelistedBrowsersDao) {
     fun getAll() = dao.getAll()
 
     suspend fun insertOrDelete(insert: Boolean, packageName: String) = dao.insertOrDelete(

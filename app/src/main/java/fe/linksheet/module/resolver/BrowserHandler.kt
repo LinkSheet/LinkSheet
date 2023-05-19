@@ -1,18 +1,18 @@
-package com.tasomaniac.openwith.resolver
+package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
-import fe.linksheet.activity.bottomsheet.BottomSheetViewModel
+import com.tasomaniac.openwith.resolver.BrowserResolver
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.extension.toPackageKeyedMap
 import fe.linksheet.module.preference.OptionTypeMapper
 import fe.linksheet.module.preference.PreferenceRepository
-import fe.linksheet.module.preference.Preferences
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import fe.linksheet.module.repository.WhitelistedBrowserRepository
+import kotlinx.coroutines.flow.first
 
-object BrowserHandler : KoinComponent {
-    private val preferenceRepository by inject<PreferenceRepository>()
-
+class BrowserHandler(
+    val preferenceRepository: PreferenceRepository,
+    private val whitelistedBrowsersRepository: WhitelistedBrowserRepository,
+) {
     sealed class BrowserMode(val value: String) {
         object None : BrowserMode("none")
         object AlwaysAsk : BrowserMode("always_ask")
@@ -25,38 +25,37 @@ object BrowserHandler : KoinComponent {
     }
 
     suspend fun handleBrowsers(
+        browserMode: BrowserMode,
+        selectedBrowser: String?,
         resolveList: MutableList<ResolveInfo>,
-        viewModel: BottomSheetViewModel,
     ): Pair<BrowserMode, ResolveInfo?> {
         val browsers = BrowserResolver.queryPackageKeyedBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
 
-        return when (val mode = preferenceRepository.get(Preferences.browserMode)) {
-            is BrowserMode.AlwaysAsk -> mode to null
+        return when (browserMode) {
+            is BrowserMode.AlwaysAsk -> browserMode to null
             is BrowserMode.None -> {
                 removeBrowsers(browsers, resolveList)
-                mode to null
+                browserMode to null
             }
 
             is BrowserMode.SelectedBrowser -> {
-                val selectedBrowser = preferenceRepository.getString(Preferences.selectedBrowser)
-
                 val browserResolveInfo = browsers[selectedBrowser]
                 if (browserResolveInfo != null) {
                     removeBrowsers(browsers, resolveList, setOf(selectedBrowser!!))
-                    mode to browserResolveInfo
+                    browserMode to browserResolveInfo
                 }
 
-                mode to null
+                browserMode to null
             }
 
             is BrowserMode.Whitelisted -> {
-                val whitelistedBrowsers = viewModel.getWhiteListedBrowsers().mapToSet {
+                val whitelistedBrowsers = whitelistedBrowsersRepository.getAll().first().mapToSet {
                     it.packageName
                 }
 
                 removeBrowsers(browsers, resolveList, whitelistedBrowsers)
-                mode to null
+                browserMode to null
             }
         }
     }

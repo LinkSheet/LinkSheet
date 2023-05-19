@@ -6,9 +6,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import fe.linksheet.data.dao.base.BaseDao
 import fe.linksheet.data.entity.ResolvedRedirect
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ResolvedRedirectDao : BaseDao<ResolvedRedirect> {
     @Query("SELECT * FROM resolved_redirect WHERE shortUrl = :shortUrl")
-    fun getForShortUrl(shortUrl: String): ResolvedRedirect?
+    fun getForShortUrl(shortUrl: String): Flow<ResolvedRedirect?>
 }

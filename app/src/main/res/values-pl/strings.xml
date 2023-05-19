@@ -141,4 +141,5 @@
     <string name="frontend">Frontend</string>
     <string name="app_name">LinkSheet</string>
     <string name="license_apache_2">Licencja Apache 2.0</string>
+    <string name="no_apps_which_can_handle_links_found">Nie znaleziono aplikacji obsługujących linki.</string>
 </resources>

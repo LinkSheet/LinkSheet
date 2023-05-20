@@ -4,6 +4,7 @@ import android.net.Uri
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.RedirectFollower
 
 data class BottomSheetResult(
     val uri: Uri?,
@@ -12,7 +13,7 @@ data class BottomSheetResult(
     val showExtended: Boolean,
     private val alwaysPreferred: Boolean?,
     private val hasSingleMatchingOption: Boolean = false,
-    val followRedirect: IntentResolver.FollowRedirect? = null,
+    val followRedirect: RedirectFollower.FollowRedirect? = null,
     val downloadable: Downloader.DownloadCheckResult = Downloader.DownloadCheckResult.NonDownloadable,
 ) {
     val totalCount = resolved.size + if (filteredItem != null) 1 else 0

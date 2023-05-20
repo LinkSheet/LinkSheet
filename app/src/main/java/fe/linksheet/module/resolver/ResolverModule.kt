@@ -7,4 +7,6 @@ val resolverModule = module {
     singleOf(::IntentResolver)
     singleOf(::BrowserHandler)
     singleOf(::InAppBrowserHandler)
+    singleOf(::RedirectFollower)
+    singleOf(::LibRedirectResolver)
 }

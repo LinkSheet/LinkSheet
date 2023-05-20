@@ -41,8 +41,8 @@ class LibRedirectServiceSettingsViewModel(
     val selectedFrontend = MutableStateFlow<LibRedirectFrontend?>(null)
     val selectedInstance = MutableStateFlow<String?>(null)
 
-    val enabled = stateRepository.getServiceState(serviceKey.value)
-        .combine(serviceKey) { serviceState, _ -> serviceState?.enabled ?: false }
+    val enabled = stateRepository.isEnabledFlow(serviceKey.value)
+        .combine(serviceKey) { serviceState, _ -> serviceState }
 
     private val defaultSelectedState = service.combine(default) { service, default ->
         val frontend = if (default != null) {

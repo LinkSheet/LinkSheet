@@ -12,7 +12,7 @@ interface PreferredAppDao : BaseDao<PreferredApp> {
     fun getAllAlwaysPreferred(): Flow<List<PreferredApp>>
 
     @Query("SELECT * FROM openwith WHERE host = :host")
-    suspend fun getByHost(host: String): PreferredApp?
+    fun getByHost(host: String): Flow<PreferredApp?>
 
     @Query("DELETE FROM openwith WHERE host = :host")
     suspend fun deleteByHost(host: String)

@@ -7,7 +7,7 @@ import fe.linksheet.module.dao.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
-import fe.linksheet.module.redirectresolver.redirectResolverModule
+import fe.linksheet.module.resolver.redirectResolverModule
 import fe.linksheet.module.repository.repositoryModule
 import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.resolverModule

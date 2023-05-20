@@ -83,6 +83,7 @@ import fe.linksheet.extension.showToast
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.RedirectFollower
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.ui.theme.AppTheme
 import fe.linksheet.ui.theme.HkGroteskFontFamily
@@ -122,7 +123,7 @@ class BottomSheetActivity : ComponentActivity() {
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
             setContent {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
-                    bottomSheetViewModel.resolveResult?.followRedirect?.resolveType?.let(
+                    bottomSheetViewModel.resolveResult?.followRedirect?.let(
                         ::makeResolveToast
                     )
                 }
@@ -142,7 +143,7 @@ class BottomSheetActivity : ComponentActivity() {
 
             if (completed.hasAutoLaunchApp) {
                 if (!bottomSheetViewModel.disableToasts) {
-                    completed.followRedirect?.resolveType?.let { makeResolveToast(it, true) }
+                    completed.followRedirect?.let { makeResolveToast(it, true) }
 
                     showToast(
                         getString(R.string.opening_with_app, completed.app.label),
@@ -170,10 +171,10 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     private fun makeResolveToast(
-        type: IntentResolver.FollowRedirectResolveType,
+        type: RedirectFollower.FollowRedirect,
         uiThread: Boolean = false
     ) {
-        if (!type.isNotResolved()) {
+        if (type !is RedirectFollower.FollowRedirect.NotResolved) {
             showToast(
                 getString(R.string.resolved_via, getString(type.stringId)),
                 uiThread = uiThread
@@ -256,7 +257,7 @@ class BottomSheetActivity : ComponentActivity() {
 
                     if (result.filteredItem == null) {
                         OpenWith(
-                            bottomSheetViewModel=bottomSheetViewModel,
+                            bottomSheetViewModel = bottomSheetViewModel,
                             drawerState = drawerState,
                             baseHeight = baseHeight,
                             showPackage = showPackage,
@@ -264,7 +265,7 @@ class BottomSheetActivity : ComponentActivity() {
                         )
                     } else {
                         OpenWithPreferred(
-                            bottomSheetViewModel=bottomSheetViewModel,
+                            bottomSheetViewModel = bottomSheetViewModel,
                             drawerState = drawerState,
                             baseHeight = baseHeight,
                             showPackage = showPackage,

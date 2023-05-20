@@ -11,6 +11,7 @@ import fe.linksheet.extension.getUri
 import fe.linksheet.extension.isSchemeTypicallySupportedByBrowsers
 import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.queryResolveInfosByIntent
+import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
@@ -42,6 +43,8 @@ class IntentResolver(
         Preferences.useFastForwardRules
     )
 
+    private var enableIgnoreLibRedirectButton =
+        preferenceRepository.getBoolean(Preferences.enableIgnoreLibRedirectButton)
     private var enableLibRedirect = preferenceRepository.getBoolean(Preferences.enableLibRedirect)
     private val followRedirects = preferenceRepository.getBoolean(Preferences.followRedirects)
 
@@ -74,6 +77,13 @@ class IntentResolver(
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         Timber.tag("ResolveIntents").d("Intent: $intent")
+        val ignoreLibRedirectExtra = intent.getBooleanExtra(
+            LibRedirectDefault.libRedirectIgnore, false
+        )
+
+        if (ignoreLibRedirectExtra) {
+            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
+        }
 
         var uri = intent.getUri(useClearUrls, useFastForwardRules, fastForwardRulesObject)
         if (uri == null) {
@@ -95,8 +105,12 @@ class IntentResolver(
             }
         }
 
-        if (enableLibRedirect && uri != null) {
-            uri = libRedirectResolver.resolve(uri!!)
+        var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
+        if (enableLibRedirect && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton)) {
+            libRedirectResult = libRedirectResolver.resolve(uri!!)
+            if (libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
+                uri = libRedirectResult.redirectedUri
+            }
         }
 
         val downloadable = if (enableDownloader && uri != null) {
@@ -137,7 +151,8 @@ class IntentResolver(
             .d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
 
         val browserMode = if (newIntent.isSchemeTypicallySupportedByBrowsers()) {
-            Timber.tag("ResolveIntent").d("unifiedPreferredBrowser=$unifiedPreferredBrowser, isCustomTab=$isCustomTab, allowCustomTab=$allowCustomTab")
+            Timber.tag("ResolveIntent")
+                .d("unifiedPreferredBrowser=$unifiedPreferredBrowser, isCustomTab=$isCustomTab, allowCustomTab=$allowCustomTab")
             val (mode, selected, repository) = if (!unifiedPreferredBrowser && isCustomTab && allowCustomTab) {
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)
@@ -177,6 +192,7 @@ class IntentResolver(
             preferredApp?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
             followRedirect,
+            libRedirectResult,
             downloadable
         )
     }

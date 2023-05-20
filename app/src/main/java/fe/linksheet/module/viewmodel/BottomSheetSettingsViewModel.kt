@@ -21,6 +21,7 @@ class BottomSheetSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
     private val appOpsManager = context.getSystemService<AppOpsManager>()!!
 
+    val enableIgnoreLibRedirectButton = preferenceRepository.getBooleanState(Preferences.enableIgnoreLibRedirectButton)
     var enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
     var hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
     var singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
@@ -34,6 +35,7 @@ class BottomSheetSettingsViewModel(
     var previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
 
     var usageStatsSorting = preferenceRepository.getBooleanState(Preferences.usageStatsSorting)
+
     var wasTogglingUsageStatsSorting by mutableStateOf(false)
 
     fun openUsageStatsSettings(activity: Activity) {

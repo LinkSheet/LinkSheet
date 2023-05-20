@@ -91,7 +91,16 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            if (viewModel.enableCopyButton.value || viewModel.enableSendButton.value) {
+            item(key = "enable_ignore_libredirect") {
+                SwitchRow(
+                    state = viewModel.enableIgnoreLibRedirectButton,
+                    viewModel = viewModel,
+                    headlineId = R.string.enable_ignore_libredirect_button,
+                    subtitleId = R.string.enable_ignore_libredirect_button_explainer
+                )
+            }
+
+            if (viewModel.enableCopyButton.value || viewModel.enableSendButton.value || viewModel.enableIgnoreLibRedirectButton.value) {
                 item(key = "use_text_share_copy_buttons") {
                     SwitchRow(
                         state = viewModel.useTextShareCopyButtons,

@@ -45,6 +45,9 @@ class BottomSheetViewModel(
     val hideAfterCopying = preferenceRepository.getBoolean(Preferences.hideAfterCopying)
     val singleTap = preferenceRepository.getBoolean(Preferences.singleTap)
     val enableSendButton = preferenceRepository.getBoolean(Preferences.enableSendButton)
+    val enableIgnoreLibRedirectButton = preferenceRepository.getBoolean(Preferences.enableIgnoreLibRedirectButton)
+
+
     val disableToasts = preferenceRepository.getBoolean(Preferences.disableToasts)
     val gridLayout = preferenceRepository.getBoolean(Preferences.gridLayout)
     private val followRedirects = preferenceRepository.getBoolean(Preferences.followRedirects)

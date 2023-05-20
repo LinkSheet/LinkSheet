@@ -2,10 +2,12 @@ package fe.linksheet.extension
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import com.google.gson.JsonObject
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
+import fe.linksheet.BuildConfig
 import timber.log.Timber
 
 fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).apply {
@@ -88,6 +90,13 @@ fun Intent.buildSendTo(uri: Uri?): Intent {
         this.type = "text/plain"
         this.putExtra(Intent.EXTRA_TEXT, uri?.toString())
     }, null)
+}
+
+fun Intent.selfIntent(uri: Uri?, extras: Bundle? = null) = this.apply {
+    action = Intent.ACTION_VIEW
+    data = uri
+    `package` = BuildConfig.APPLICATION_ID
+    extras?.let { putExtras(extras) }
 }
 
 val allBrowsersIntent = Intent()

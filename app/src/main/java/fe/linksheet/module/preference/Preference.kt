@@ -48,6 +48,8 @@ object Preferences {
     val previewUrl = booleanPreference("preview_url")
     val enableDownloader = booleanPreference("enable_downloader")
     val downloaderCheckUrlMimeType = booleanPreference("downloaderCheckUrlMimeType")
+
+    val enableIgnoreLibRedirectButton = booleanPreference("enable_ignore_lib_redirect_button")
 }
 
 sealed class BasePreference<T, NT>(val key: String, val default: NT) {

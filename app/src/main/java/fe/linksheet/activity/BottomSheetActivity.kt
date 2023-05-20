@@ -65,6 +65,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
@@ -74,9 +75,12 @@ import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.runIf
+import fe.linksheet.extension.selfIntent
 import fe.linksheet.extension.showToast
 import fe.linksheet.extension.startPackageInfoActivity
+import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.RedirectFollower
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -88,6 +92,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import kotlin.math.ceil
 
 class BottomSheetActivity : ComponentActivity() {
@@ -624,6 +629,7 @@ class BottomSheetActivity : ComponentActivity() {
         val utilButtonWidthSum = utilButtonWidth * listOf(
             bottomSheetViewModel.enableCopyButton,
             bottomSheetViewModel.enableSendButton,
+            bottomSheetViewModel.enableIgnoreLibRedirectButton,
             result.downloadable.isDownloadable()
         ).count { it }
 
@@ -701,6 +707,25 @@ class BottomSheetActivity : ComponentActivity() {
                             )
                         },
                         buttonText = R.string.download
+                    )
+                }
+
+                val libRedirectResult = bottomSheetViewModel.resolveResult!!.libRedirectResult
+                if (bottomSheetViewModel.enableIgnoreLibRedirectButton && libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
+                    Spacer(modifier = Modifier.width(2.dp))
+                    OutlinedOrTextButton(
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        contentPadding = padding,
+                        onClick = {
+                            finish()
+                            startActivity(
+                                Intent().selfIntent(
+                                    libRedirectResult.originalUri,
+                                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                                )
+                            )
+                        },
+                        buttonText = R.string.ignore_libredirect
                     )
                 }
 

@@ -16,7 +16,7 @@ class LibRedirectResolver(
     private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
     private val libRedirectInstances by lazy { LibRedirectLoader.loadBuiltInInstances() }
 
-    suspend fun resolve(uri: Uri): Uri? {
+    suspend fun resolve(uri: Uri): LibRedirectResult {
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
         Timber.tag("ResolveIntents").d("LibRedirect $service")
         if (service != null && stateRepository.isEnabled(service.key)) {
@@ -33,11 +33,16 @@ class LibRedirectResolver(
 
             Timber.tag("ResolveIntents").d("LibRedirect $redirected")
             if (redirected != null) {
-                return Uri.parse(redirected)
+                return LibRedirectResult.Redirected(uri, Uri.parse(redirected))
             }
         }
 
-        return uri
+        return LibRedirectResult.NotRedirected
+    }
+
+    sealed interface LibRedirectResult {
+        class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
+        object NotRedirected : LibRedirectResult
     }
 
     private fun getInstanceUrl(default: LibRedirectDefault): String {

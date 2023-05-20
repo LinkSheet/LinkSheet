@@ -753,7 +753,13 @@ class BottomSheetActivity : ComponentActivity() {
         if (textButton) TextButton(
             contentPadding = contentPadding,
             onClick = onClick,
-            content = { Text(text = stringResource(id = buttonText)) }
+            content = {
+                Text(
+                    text = stringResource(id = buttonText), fontFamily = HkGroteskFontFamily,
+                    maxLines = 1,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
         )
         else OutlinedButton(
             contentPadding = contentPadding,

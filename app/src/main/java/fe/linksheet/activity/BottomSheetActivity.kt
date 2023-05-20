@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -68,8 +69,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
-import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.R
+import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.newIntent
@@ -87,14 +88,16 @@ import fe.linksheet.ui.Theme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.ceil
 
 class BottomSheetActivity : ComponentActivity() {
-    private val bottomSheetViewModel by viewModel<BottomSheetViewModel>()
+    private lateinit var bottomSheetViewModel: BottomSheetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModelStore.clear()
+        bottomSheetViewModel = viewModels<BottomSheetViewModel>().value
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->
@@ -216,7 +219,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         LaunchedEffect(drawerState.currentValue) {
             if (drawerState.currentValue == androidx.compose.material.ModalBottomSheetValue.Hidden) {
-                finishAndDestroyViewModel()
+                finish()
             }
         }
 
@@ -245,7 +248,7 @@ class BottomSheetActivity : ComponentActivity() {
 //            androidx.compose.material3.rememberModalBottomSheetState(skipPartiallyExpanded = true)
 //        LaunchedEffect(Unit) { sheetState.show() }
 //
-//        val dismissDrawer = { finishAndDestroyViewModel() }
+//        val dismissDrawer = { finish() }
 //
 //        BottomDrawer(
 //            onDismissRequest = dismissDrawer,
@@ -679,7 +682,7 @@ class BottomSheetActivity : ComponentActivity() {
                         contentPadding = padding,
                         onClick = {
                             startActivity(Intent().buildSendTo(result.uri))
-                            finishAndDestroyViewModel()
+                            finish()
                         },
                         buttonText = R.string.send_to
                     )
@@ -826,13 +829,7 @@ class BottomSheetActivity : ComponentActivity() {
         bottomSheetViewModel.persistSelectedIntent(intentFrom, always)
 
         startActivity(intentFrom)
-        finishAndDestroyViewModel()
-    }
-
-    private fun finishAndDestroyViewModel() {
         finish()
-        // TODO: maybe we should use mutablestates in the viewmodel instead?
-        viewModelStore.clear()
     }
 }
 

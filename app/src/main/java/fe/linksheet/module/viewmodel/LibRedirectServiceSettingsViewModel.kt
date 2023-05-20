@@ -35,7 +35,7 @@ class LibRedirectServiceSettingsViewModel(
         LibRedirectLoader.loadBuiltInInstances()
     }
 
-    val default = defaultRepository.getByServiceKey(serviceKey)
+    val default = defaultRepository.getByServiceKeyFlow(serviceKey)
         .combine(serviceKey) { default, _ -> default }
 
     val selectedFrontend = MutableStateFlow<LibRedirectFrontend?>(null)
@@ -88,29 +88,4 @@ class LibRedirectServiceSettingsViewModel(
     ) = ioLaunch {
         defaultRepository.insert(LibRedirectDefault(serviceKey, frontendKey, instanceUrl))
     }
-
-
-//    val instance = if(default != null) default.instanceUrl else
-
-
-//    LaunchedEffect(viewModel.libRedirectDefault) {
-//        val default = viewModel.libRedirectDefault
-//        Timber.tag("LibRedirect").d("Default $default")
-//        if (default != null) {
-//            selectedFrontend =
-//                fe.linksheet.composable.settings.link.libRedirectBuiltInServices.find { it.key == serviceKey }?.frontends?.find { it.key == default.frontendKey }
-//            selectedInstance = default.instanceUrl
-//        } else {
-//            selectedFrontend =
-//                fe.linksheet.composable.settings.link.libRedirectBuiltInServices.find { it.key == serviceKey }?.defaultFrontend
-//            selectedInstance =
-//                LibRedirect.getDefaultInstanceForFrontend(selectedFrontend?.key!!)?.firstOrNull()
-//        }
-//
-//        instancesForSelectedFrontend.clear()
-//        builtinInstances.find { it.frontendKey == selectedFrontend?.key }?.let {
-//            instancesForSelectedFrontend.addAll(it.hosts)
-//        }
-//    }
-
 }

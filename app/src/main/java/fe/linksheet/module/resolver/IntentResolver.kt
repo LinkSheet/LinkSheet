@@ -19,6 +19,7 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
 import fe.linksheet.resolver.BottomSheetGrouper
+import kotlinx.coroutines.flow.first
 import timber.log.Timber
 
 class IntentResolver(
@@ -107,7 +108,7 @@ class IntentResolver(
 
         Timber.tag("ResolveIntents").d("PreferredApp: $preferredApp")
 
-        val hostHistory = appSelectionHistoryRepository.getHostHistory(uri)
+        val hostHistory = appSelectionHistoryRepository.getHostHistory(uri).first()
 
         Timber.tag("ResolveIntents").d("HostHistory: $hostHistory")
         Timber.tag("ResolveIntents").d("SourceIntent: $intent ${intent.extras}")
@@ -118,10 +119,10 @@ class IntentResolver(
 
         val newIntent = intent.newIntent(uri, !isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
-//            newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
-//                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")
-//                newIntent.removeExtra(key)
-//            }
+            newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
+                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")
+                newIntent.removeExtra(key)
+            }
         }
 
         Timber.tag("ResolveIntents").d("NewIntent: $newIntent ${newIntent.extras}")

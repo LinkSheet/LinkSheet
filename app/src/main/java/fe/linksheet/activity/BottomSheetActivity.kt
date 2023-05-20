@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -88,6 +87,7 @@ import fe.linksheet.ui.Theme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.ceil
 
 class BottomSheetActivity : ComponentActivity() {
@@ -97,7 +97,7 @@ class BottomSheetActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         viewModelStore.clear()
-        bottomSheetViewModel = viewModels<BottomSheetViewModel>().value
+        bottomSheetViewModel = viewModel<BottomSheetViewModel>().value
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->

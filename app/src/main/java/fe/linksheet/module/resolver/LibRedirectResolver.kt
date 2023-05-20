@@ -3,7 +3,6 @@ package fe.linksheet.module.resolver
 import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
@@ -21,7 +20,7 @@ class LibRedirectResolver(
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
         Timber.tag("ResolveIntents").d("LibRedirect $service")
         if (service != null && stateRepository.isEnabled(service.key)) {
-            val savedDefault = defaultRepository.getByServiceKey(service.key).firstOrNull()
+            val savedDefault = defaultRepository.getByServiceKeyFlow(service.key).firstOrNull()
             val (frontendKey, instanceUrl) = if (savedDefault != null) {
                 savedDefault.frontendKey to getInstanceUrl(savedDefault)
             } else {

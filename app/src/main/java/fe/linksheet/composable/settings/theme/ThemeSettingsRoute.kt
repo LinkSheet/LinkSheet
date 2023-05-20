@@ -14,7 +14,7 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
-import fe.linksheet.ui.theme.Theme
+import fe.linksheet.ui.Theme
 
 
 @Composable

@@ -12,3 +12,4 @@ build/
 app/release
 .ignored/
 debug/
+/androidx-compose-material3-pullrefresh/

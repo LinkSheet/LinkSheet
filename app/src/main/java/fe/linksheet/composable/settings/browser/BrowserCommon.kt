@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,12 +34,14 @@ import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
+import fe.linksheet.extension.associateWith
 import fe.linksheet.extension.updateState
 import fe.linksheet.extension.updateStateFromResult
 import fe.linksheet.module.preference.BasePreference
 import fe.linksheet.module.preference.RepositoryState
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.viewmodel.InAppBrowserDisableInSelected
+import fe.linksheet.extension.items
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -48,8 +50,11 @@ fun <T, M> BrowserCommonScaffold(
     @StringRes explainer: Int,
     onBackPressed: () -> Unit,
     viewModel: BaseViewModel,
-    rowKey: (BrowserCommonRadioButtonRowData<T, M>) -> String,
-    rows: List<BrowserCommonRadioButtonRowData<T, M>>,
+    values: List<T>,
+    state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>?,
+    rowKey: (T) -> String,
+    rows: List<BrowserCommonRadioButtonRowData>,
+    header: @Composable (ColumnScope.() -> Unit)? = null,
     content: (LazyListScope.() -> Unit)? = null,
 ) {
     SettingsScaffold(headline = headline, onBackPressed = onBackPressed) { padding ->
@@ -66,19 +71,25 @@ fun <T, M> BrowserCommonScaffold(
                         paddingStart = 0.dp
                     )
 
+                    header?.invoke(this)
+
+
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 
-            items(items = rows, key = { rowKey(it) }) { row ->
-                BrowserCommonRadioButtonRow(
-                    value = row.value,
-                    state = row.state,
-                    viewModel = viewModel,
-                    headline = row.headline,
-                    subtitle = row.subtitle,
-                    clickHook = row.clickHook
-                )
+            val map = values.associateWith(rows)
+            if (map != null && state != null) {
+                items(items = map, key = { rowKey(it) }) { value, row ->
+                    BrowserCommonRadioButtonRow(
+                        value = value,
+                        state = state,
+                        viewModel = viewModel,
+                        headline = row.headline,
+                        subtitle = row.subtitle,
+                        clickHook = row.clickHook
+                    )
+                }
             }
 
             content?.invoke(this)
@@ -86,9 +97,7 @@ fun <T, M> BrowserCommonScaffold(
     }
 }
 
-data class BrowserCommonRadioButtonRowData<T, M>(
-    val value: T,
-    val state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
+data class BrowserCommonRadioButtonRowData(
     @StringRes val headline: Int,
     @StringRes val subtitle: Int? = null,
     val clickHook: (() -> Unit)? = null

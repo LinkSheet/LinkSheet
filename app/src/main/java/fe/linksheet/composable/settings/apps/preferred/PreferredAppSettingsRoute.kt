@@ -51,7 +51,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PreferredAppSettingsRoute(
     onBackPressed: () -> Unit,
-    settingsViewModel: SettingsViewModel,
     viewModel: PreferredAppSettingsViewModel = koinViewModel()
 ) {
     val activity = LocalContext.currentActivity()
@@ -91,7 +90,7 @@ fun PreferredAppSettingsRoute(
 
     val appsDialog = appsDialog(
         appsExceptPreferred = appsExceptPreferred.value,
-        alwaysShowPackageName = settingsViewModel.alwaysShowPackageName.value,
+        alwaysShowPackageName = viewModel.alwaysShowPackageName.value,
         onClose = { closeState ->
             hostDialog.open(HostDialogState(closeState!!.displayActivityInfo))
         }
@@ -162,7 +161,7 @@ fun PreferredAppSettingsRoute(
                                 color = MaterialTheme.colorScheme.onSurface
                             )
 
-                            if (settingsViewModel.alwaysShowPackageName.value) {
+                            if (viewModel.alwaysShowPackageName.value) {
                                 Text(
                                     text = app.packageName,
                                     fontSize = 12.sp,

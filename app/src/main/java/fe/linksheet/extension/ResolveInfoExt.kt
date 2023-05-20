@@ -6,7 +6,7 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.applyIf
 
 fun ResolveInfo.toDisplayActivityInfo(context: Context) = DisplayActivityInfo(

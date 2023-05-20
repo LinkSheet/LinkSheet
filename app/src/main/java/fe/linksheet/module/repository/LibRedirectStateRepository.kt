@@ -1,7 +1,7 @@
 package fe.linksheet.module.repository
 
-import fe.linksheet.data.dao.LibRedirectServiceStateDao
-import fe.linksheet.data.entity.LibRedirectServiceState
+import fe.linksheet.module.database.dao.LibRedirectServiceStateDao
+import fe.linksheet.module.database.entity.LibRedirectServiceState
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 

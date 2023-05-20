@@ -1,17 +1,21 @@
 package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
-import com.tasomaniac.openwith.resolver.BrowserResolver
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.extension.toPackageKeyedMap
+import fe.linksheet.module.database.dao.base.PackageEntityCreator
+import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
+import fe.linksheet.module.database.entity.WhitelistedBrowser
 import fe.linksheet.module.preference.OptionTypeMapper
 import fe.linksheet.module.preference.PreferenceRepository
-import fe.linksheet.module.repository.WhitelistedBrowserRepository
+import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.repository.base.WhitelistedBrowsersRepository
 import kotlinx.coroutines.flow.first
+import timber.log.Timber
 
 class BrowserHandler(
     val preferenceRepository: PreferenceRepository,
-    private val whitelistedBrowsersRepository: WhitelistedBrowserRepository,
+    private val browserResolver: BrowserResolver,
 ) {
     sealed class BrowserMode(val value: String) {
         object None : BrowserMode("none")
@@ -24,13 +28,15 @@ class BrowserHandler(
         )
     }
 
-    suspend fun handleBrowsers(
+    suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> handleBrowsers(
         browserMode: BrowserMode,
         selectedBrowser: String?,
+        repository: WhitelistedBrowsersRepository<T, C, D>,
         resolveList: MutableList<ResolveInfo>,
     ): Pair<BrowserMode, ResolveInfo?> {
-        val browsers = BrowserResolver.queryPackageKeyedBrowsers()
+        val browsers = browserResolver.queryPackageKeyedBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
+        Timber.tag("BrowserHandler").d("Browsers=$browsers, selectedBrowser=$selectedBrowser, resolveList=$resolveList")
 
         return when (browserMode) {
             is BrowserMode.AlwaysAsk -> browserMode to null
@@ -41,20 +47,20 @@ class BrowserHandler(
 
             is BrowserMode.SelectedBrowser -> {
                 val browserResolveInfo = browsers[selectedBrowser]
+                Timber.tag("BrowserHandler").d("BrowserResolveInfo=$browserResolveInfo")
+
                 if (browserResolveInfo != null) {
                     removeBrowsers(browsers, resolveList, setOf(selectedBrowser!!))
-                    browserMode to browserResolveInfo
                 }
 
-                browserMode to null
+                browserMode to browserResolveInfo
             }
 
             is BrowserMode.Whitelisted -> {
-                val whitelistedBrowsers = whitelistedBrowsersRepository.getAll().first().mapToSet {
+                removeBrowsers(browsers, resolveList, repository.getAll().first().mapToSet {
                     it.packageName
-                }
+                })
 
-                removeBrowsers(browsers, resolveList, whitelistedBrowsers)
                 browserMode to null
             }
         }

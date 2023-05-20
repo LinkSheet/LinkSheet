@@ -2,24 +2,20 @@ package fe.linksheet.composable.settings.apps.link
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.*
+import androidx.compose.material3.pullrefresh.PullRefreshIndicator
+import androidx.compose.material3.pullrefresh.pullRefresh
+import androidx.compose.material3.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -27,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
 import fe.linksheet.composable.util.Searchbar
@@ -40,16 +35,15 @@ import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import fe.linksheet.composable.util.FilterChip
 
 @OptIn(
-    ExperimentalMaterialApi::class,
     ExperimentalFoundationApi::class
 )
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AppsWhichCanOpenLinksSettingsRoute(
     onBackPressed: () -> Unit,
-    settingsViewModel: SettingsViewModel,
     viewModel: AppsWhichCanOpenLinksViewModel = koinViewModel()
 ) {
     val activity = LocalContext.currentActivity()
@@ -112,7 +106,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                             FilterChip(
                                 value = true,
-                                state = linkHandlingAllowed,
+                                currentState = linkHandlingAllowed,
                                 onClick = filterChipClickHandler,
                                 label = R.string.enabled,
                                 icon = Icons.Default.Visibility
@@ -122,7 +116,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
                             FilterChip(
                                 value = false,
-                                state = linkHandlingAllowed,
+                                currentState = linkHandlingAllowed,
                                 onClick = filterChipClickHandler,
                                 label = R.string.disabled,
                                 icon = Icons.Default.VisibilityOff
@@ -169,7 +163,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                 color = MaterialTheme.colorScheme.onSurface
                             )
 
-                            if (settingsViewModel.alwaysShowPackageName.value) {
+                            if (viewModel.alwaysShowPackageName.value) {
                                 Text(
                                     text = info.packageName,
                                     fontSize = 12.sp,
@@ -186,27 +180,3 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun FilterChip(
-    value: Boolean,
-    state: Boolean,
-    onClick: (Boolean) -> Unit,
-    @StringRes label: Int,
-    icon: ImageVector,
-) {
-    FilterChip(
-        selected = state == value,
-        onClick = { onClick(value) },
-        label = {
-            Text(text = stringResource(id = label))
-        },
-        trailingIcon = {
-            Image(
-                imageVector = icon,
-                contentDescription = stringResource(id = label),
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-            )
-        }
-    )
-}

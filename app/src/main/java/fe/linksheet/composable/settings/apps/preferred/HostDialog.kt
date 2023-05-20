@@ -4,17 +4,14 @@ import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.DialogColumn
@@ -39,12 +36,11 @@ import fe.linksheet.composable.util.DialogContent
 import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.OnClose
 import fe.linksheet.composable.util.dialogHelper
-import fe.linksheet.extension.items
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.extension.updateState
 import fe.linksheet.extension.updateStateFromResult
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.HkGroteskFontFamily
 
 data class HostDialogState(
     val displayActivityInfo: DisplayActivityInfo,

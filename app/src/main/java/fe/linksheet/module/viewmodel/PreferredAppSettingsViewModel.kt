@@ -5,7 +5,7 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getAppHosts
 import fe.linksheet.extension.getDisplayActivityInfos

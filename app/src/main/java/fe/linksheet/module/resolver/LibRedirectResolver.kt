@@ -4,7 +4,7 @@ import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.composable.settings.SettingsViewModel
-import fe.linksheet.data.entity.LibRedirectDefault
+import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -42,7 +42,7 @@ class LibRedirectResolver(
     }
 
     private fun getInstanceUrl(default: LibRedirectDefault): String {
-        return if (default.instanceUrl == SettingsViewModel.libRedirectRandomInstanceKey) {
+        return if (default.instanceUrl == LibRedirectDefault.libRedirectRandomInstanceKey) {
             libRedirectInstances.find { it.frontendKey == default.frontendKey }
                 ?.hosts?.random() ?: default.instanceUrl
         } else default.instanceUrl

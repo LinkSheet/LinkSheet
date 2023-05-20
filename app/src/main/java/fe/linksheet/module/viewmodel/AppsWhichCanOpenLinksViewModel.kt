@@ -8,7 +8,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getDisplayActivityInfos
 import fe.linksheet.extension.hasVerifiedDomains

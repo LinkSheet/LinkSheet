@@ -47,7 +47,7 @@ import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.settingsRoute
 import fe.linksheet.themeSettingsRoute
-import fe.linksheet.ui.theme.AppTheme
+import fe.linksheet.ui.AppTheme
 import fe.linksheet.util.composable
 import org.koin.androidx.compose.koinViewModel
 
@@ -140,32 +140,20 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 composable(route = preferredBrowserSettingsRoute) {
-                                    PreferredBrowserSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                        settingsViewModel = settingsViewModel
-                                    )
+                                    PreferredBrowserSettingsRoute(onBackPressed = onBackPressed)
                                 }
 
                                 composable(route = inAppBrowserSettingsRoute) {
-                                    InAppBrowserSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                        settingsViewModel = settingsViewModel
-                                    )
+                                    InAppBrowserSettingsRoute(onBackPressed = onBackPressed)
                                 }
 
                                 composable(route = preferredAppsSettingsRoute) {
-                                    PreferredAppSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                        settingsViewModel = settingsViewModel
-                                    )
+                                    PreferredAppSettingsRoute(onBackPressed = onBackPressed)
                                 }
 
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                                     composable(route = appsWhichCanOpenLinksSettingsRoute) {
-                                        AppsWhichCanOpenLinksSettingsRoute(
-                                            onBackPressed = onBackPressed,
-                                            settingsViewModel = settingsViewModel
-                                        )
+                                        AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
                                     }
                                 }
                             }

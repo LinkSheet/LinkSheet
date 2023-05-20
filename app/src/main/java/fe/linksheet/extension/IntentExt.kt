@@ -16,7 +16,10 @@ fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).appl
     component = null
 
     if (dropExtras) {
-        extras?.keySet()?.forEach { extras?.remove(it) }
+        extras?.keySet()?.forEach {
+            Timber.tag("NewIntent").d("Dropping extra: $it")
+            extras?.remove(it)
+        }
     }
 }
 

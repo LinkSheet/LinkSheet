@@ -6,8 +6,8 @@ import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectFrontend
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.LibRedirectServiceRoute
-import fe.linksheet.data.entity.LibRedirectDefault
-import fe.linksheet.data.entity.LibRedirectServiceState
+import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.database.entity.LibRedirectServiceState
 import fe.linksheet.extension.ioLaunch
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository

@@ -1,7 +1,7 @@
 package fe.linksheet.module.repository
 
-import fe.linksheet.data.dao.DisableInAppBrowserInSelectedDao
-import fe.linksheet.data.dao.base.PackageEntityDao
+import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
+import fe.linksheet.module.database.dao.base.PackageEntityDao
 
 
 class DisableInAppBrowserInSelectedRepository(private val dao: DisableInAppBrowserInSelectedDao) {

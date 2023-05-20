@@ -11,12 +11,12 @@ import android.provider.Settings
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.tasomaniac.openwith.data.PreferredApp
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.resolver.BottomSheetResult
+import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
-import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.startActivityWithConfirmation
@@ -40,6 +40,7 @@ class BottomSheetViewModel(
     private val intentResolver: IntentResolver,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
+
     val enableCopyButton = preferenceRepository.getBoolean(Preferences.enableCopyButton)
     val hideAfterCopying = preferenceRepository.getBoolean(Preferences.hideAfterCopying)
     val singleTap = preferenceRepository.getBoolean(Preferences.singleTap)

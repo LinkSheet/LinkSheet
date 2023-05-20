@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.browser
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,9 +13,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.R
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun BrowserIconTextRow(

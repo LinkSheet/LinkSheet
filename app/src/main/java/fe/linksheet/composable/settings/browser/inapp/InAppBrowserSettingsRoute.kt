@@ -19,7 +19,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun InAppBrowserSettingsRoute(
     onBackPressed: () -> Unit,
-    settingsViewModel: SettingsViewModel,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel()
 ) {
     val dialog = dialogHelper<Unit, InAppBrowserDisableInSelected?, InAppBrowserDisableInSelected>(
@@ -37,9 +36,9 @@ fun InAppBrowserSettingsRoute(
         dynamicHeight = true
     ) { state, close ->
         BrowserCommonDialog(
-            title = R.string.in_app_browser,
+            title = R.string.disable_in_selected,
             state = state,
-            alwaysShowPackageName = settingsViewModel.alwaysShowPackageName.value,
+            alwaysShowPackageName = viewModel.alwaysShowPackageName.value,
             close = close
         )
     }
@@ -47,20 +46,14 @@ fun InAppBrowserSettingsRoute(
     val rows = remember {
         listOf(
             BrowserCommonRadioButtonRowData(
-                InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
-                settingsViewModel.inAppBrowserMode,
                 R.string.use_app_settings,
                 R.string.use_app_settings_explainer
             ),
             BrowserCommonRadioButtonRowData(
-                InAppBrowserHandler.InAppBrowserMode.AlwaysDisableInAppBrowser,
-                settingsViewModel.inAppBrowserMode,
                 R.string.always_disable,
                 R.string.always_disable_explainer
             ),
             BrowserCommonRadioButtonRowData(
-                InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps,
-                settingsViewModel.inAppBrowserMode,
                 R.string.disable_in_selected,
                 R.string.disable_in_selected_explainer
             ) { dialog.open(Unit) }
@@ -72,7 +65,13 @@ fun InAppBrowserSettingsRoute(
         explainer = R.string.in_app_browser_explainer,
         onBackPressed = onBackPressed,
         viewModel = viewModel,
-        rowKey = { it.value.value },
+        values = listOf(
+            InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
+            InAppBrowserHandler.InAppBrowserMode.AlwaysDisableInAppBrowser,
+            InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps
+        ),
+        state = viewModel.inAppBrowserMode,
+        rowKey = { it.value },
         rows = rows
     )
 }

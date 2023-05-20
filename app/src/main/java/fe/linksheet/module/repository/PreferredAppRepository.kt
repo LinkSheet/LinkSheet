@@ -1,8 +1,8 @@
 package fe.linksheet.module.repository
 
 import android.net.Uri
-import com.tasomaniac.openwith.data.PreferredApp
-import com.tasomaniac.openwith.data.PreferredAppDao
+import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.database.dao.PreferredAppDao
 import kotlinx.coroutines.flow.first
 
 class PreferredAppRepository(private val dao: PreferredAppDao) {

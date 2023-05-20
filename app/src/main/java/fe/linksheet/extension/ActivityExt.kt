@@ -1,13 +1,12 @@
 package fe.linksheet.extension
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo
 
 fun Activity.startActivityWithConfirmation(intent: Intent) = kotlin.runCatching {
     this.startActivity(intent)

@@ -38,10 +38,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
@@ -72,8 +68,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
-import com.junkfood.seal.ui.component.BottomDrawer
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.R
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.currentActivity
@@ -82,12 +77,13 @@ import fe.linksheet.extension.runIf
 import fe.linksheet.extension.showToast
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.RedirectFollower
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.ui.theme.AppTheme
-import fe.linksheet.ui.theme.HkGroteskFontFamily
-import fe.linksheet.ui.theme.Theme
+import fe.linksheet.resolver.BottomSheetResult
+import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.ui.AppTheme
+import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.ui.Theme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -200,7 +196,8 @@ class BottomSheetActivity : ComponentActivity() {
         val maxModalBottomSheetWidth = 640.dp
     }
 
-    @OptIn(ExperimentalMaterialApi::class)
+
+    @OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
     @Composable
     private fun BottomSheet(
         bottomSheetViewModel: BottomSheetViewModel,
@@ -210,19 +207,20 @@ class BottomSheetActivity : ComponentActivity() {
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val result = bottomSheetViewModel.resolveResult
 
-        val drawerState = rememberModalBottomSheetState(
-            initialValue = ModalBottomSheetValue.Expanded,
+        val coroutineScope = rememberCoroutineScope()
+
+        val drawerState = androidx.compose.material.rememberModalBottomSheetState(
+            initialValue = androidx.compose.material.ModalBottomSheetValue.Expanded,
             skipHalfExpanded = false
         )
 
         LaunchedEffect(drawerState.currentValue) {
-            if (drawerState.currentValue == ModalBottomSheetValue.Hidden) {
-                this@BottomSheetActivity.finish()
+            if (drawerState.currentValue == androidx.compose.material.ModalBottomSheetValue.Hidden) {
+                finishAndDestroyViewModel()
             }
         }
 
         val interactionSource = remember { MutableInteractionSource() }
-
         BottomDrawer(
             modifier = Modifier
                 .runIf(landscape) {
@@ -237,65 +235,100 @@ class BottomSheetActivity : ComponentActivity() {
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             sheetContent = {
-                if (result != null && !result.hasAutoLaunchApp) {
-                    val showPackage = remember {
-                        result.showExtended || bottomSheetViewModel.alwaysShowPackageName.value
-                    }
+                SheetContent(result = result, landscape = landscape, hideDrawer = {
+                    coroutineScope.launch { drawerState.hide() }
+                })
+            }
+        )
 
-                    val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
-                    else LocalConfiguration.current.screenHeightDp) / 3f
-
-                    val itemHeight = if (bottomSheetViewModel.gridLayout) {
-                        val gridItemHeight = if (showPackage) gridItemHeightPackage.value
-                        else gridItemHeight.value
-
-                        gridItemHeight
-                    } else appListItemHeight.value
-
-                    val baseHeight =
-                        ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
-
-                    if (result.filteredItem == null) {
-                        OpenWith(
-                            bottomSheetViewModel = bottomSheetViewModel,
-                            drawerState = drawerState,
-                            baseHeight = baseHeight,
-                            showPackage = showPackage,
-                            previewUrl = bottomSheetViewModel.previewUrl
-                        )
-                    } else {
-                        OpenWithPreferred(
-                            bottomSheetViewModel = bottomSheetViewModel,
-                            drawerState = drawerState,
-                            baseHeight = baseHeight,
-                            showPackage = showPackage,
-                            previewUrl = bottomSheetViewModel.previewUrl
-                        )
-                    }
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 10.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.loading_link),
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Spacer(modifier = Modifier.height(10.dp))
-                        CircularProgressIndicator()
-                    }
-                }
-            })
+//        val sheetState =
+//            androidx.compose.material3.rememberModalBottomSheetState(skipPartiallyExpanded = true)
+//        LaunchedEffect(Unit) { sheetState.show() }
+//
+//        val dismissDrawer = { finishAndDestroyViewModel() }
+//
+//        BottomDrawer(
+//            onDismissRequest = dismissDrawer,
+//            modifier = Modifier
+//                .runIf(landscape) {
+//                    it
+//                        .fillMaxWidth(0.55f)
+//                        .fillMaxHeight()
+//                },
+//            isBlackTheme = isBlackTheme,
+//            sheetState = sheetState
+//        ) {
+//            SheetContent(result = result, landscape = landscape, hideDrawer = {
+//                coroutineScope.launch { sheetState.hide() }.invokeOnCompletion {
+//                    dismissDrawer()
+//                }
+//            })
+//        }
     }
 
-    @OptIn(ExperimentalMaterialApi::class)
+    @Composable
+    private fun SheetContent(
+        result: BottomSheetResult?,
+        landscape: Boolean,
+        hideDrawer: () -> Unit
+    ) {
+        if (result != null && !result.hasAutoLaunchApp) {
+            val showPackage = remember {
+                result.showExtended || bottomSheetViewModel.alwaysShowPackageName.value
+            }
+
+            val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
+            else LocalConfiguration.current.screenHeightDp) / 3f
+
+            val itemHeight = if (bottomSheetViewModel.gridLayout) {
+                val gridItemHeight = if (showPackage) gridItemHeightPackage.value
+                else gridItemHeight.value
+
+                gridItemHeight
+            } else appListItemHeight.value
+
+            val baseHeight =
+                ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
+
+            if (result.filteredItem == null) {
+                OpenWith(
+                    bottomSheetViewModel = bottomSheetViewModel,
+                    hideDrawer = hideDrawer,
+                    baseHeight = baseHeight,
+                    showPackage = showPackage,
+                    previewUrl = bottomSheetViewModel.previewUrl
+                )
+            } else {
+                OpenWithPreferred(
+                    bottomSheetViewModel = bottomSheetViewModel,
+                    hideDrawer = hideDrawer,
+                    baseHeight = baseHeight,
+                    showPackage = showPackage,
+                    previewUrl = bottomSheetViewModel.previewUrl
+                )
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = R.string.loading_link),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                CircularProgressIndicator()
+            }
+        }
+    }
+
     @Composable
     private fun OpenWithPreferred(
         bottomSheetViewModel: BottomSheetViewModel,
-        drawerState: ModalBottomSheetState,
+        hideDrawer: () -> Unit,
         baseHeight: Dp,
         showPackage: Boolean,
         previewUrl: Boolean
@@ -354,7 +387,7 @@ class BottomSheetActivity : ComponentActivity() {
             ButtonRow(
                 bottomSheetViewModel = bottomSheetViewModel, enabled = true,
                 onClick = { launchApp(bottomSheetViewModel, filteredItem, result.uri, it) },
-                drawerState = drawerState
+                hideDrawer = hideDrawer
             )
         }
 
@@ -382,11 +415,10 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
-    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun OpenWith(
         bottomSheetViewModel: BottomSheetViewModel,
-        drawerState: ModalBottomSheetState,
+        hideDrawer: () -> Unit,
         baseHeight: Dp,
         showPackage: Boolean,
         previewUrl: Boolean,
@@ -429,7 +461,7 @@ class BottomSheetActivity : ComponentActivity() {
                         always
                     )
                 },
-                drawerState = drawerState
+                hideDrawer = hideDrawer
             )
         }
     }
@@ -573,18 +605,15 @@ class BottomSheetActivity : ComponentActivity() {
 
     }
 
-    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun ButtonRow(
         bottomSheetViewModel: BottomSheetViewModel,
         enabled: Boolean,
         onClick: (always: Boolean) -> Unit,
-        drawerState: ModalBottomSheetState
+        hideDrawer: () -> Unit
     ) {
-        val coroutineScope = rememberCoroutineScope()
         val clipboard = remember { getSystemService(ClipboardManager::class.java) }
         val downloadManager = remember { getSystemService(DownloadManager::class.java) }
-
 
         val context = LocalContext.current
         val result = bottomSheetViewModel.resolveResult!!
@@ -636,7 +665,7 @@ class BottomSheetActivity : ComponentActivity() {
                             }
 
                             if (bottomSheetViewModel.hideAfterCopying) {
-                                coroutineScope.launch { drawerState.hide() }
+                                hideDrawer()
                             }
                         },
                         buttonText = R.string.copy
@@ -650,7 +679,7 @@ class BottomSheetActivity : ComponentActivity() {
                         contentPadding = padding,
                         onClick = {
                             startActivity(Intent().buildSendTo(result.uri))
-                            finish()
+                            finishAndDestroyViewModel()
                         },
                         buttonText = R.string.send_to
                     )
@@ -796,8 +825,14 @@ class BottomSheetActivity : ComponentActivity() {
         val intentFrom = info.intentFrom(intent.newIntent(uri))
         bottomSheetViewModel.persistSelectedIntent(intentFrom, always)
 
-        this.startActivity(intentFrom)
-        this.finish()
+        startActivity(intentFrom)
+        finishAndDestroyViewModel()
+    }
+
+    private fun finishAndDestroyViewModel() {
+        finish()
+        // TODO: maybe we should use mutablestates in the viewmodel instead?
+        viewModelStore.clear()
     }
 }
 

@@ -6,9 +6,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import com.tasomaniac.openwith.data.PreferredApp
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import fe.linksheet.data.entity.AppSelectionHistory
+import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.extension.findIndexed
 import fe.linksheet.extension.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit

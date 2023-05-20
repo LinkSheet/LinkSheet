@@ -1,7 +1,7 @@
 package fe.linksheet.module.repository
 
-import fe.linksheet.data.dao.ResolvedRedirectDao
-import fe.linksheet.data.entity.ResolvedRedirect
+import fe.linksheet.module.database.dao.ResolvedRedirectDao
+import fe.linksheet.module.database.entity.ResolvedRedirect
 
 class ResolvedRedirectRepository(private val dao: ResolvedRedirectDao) {
     fun getForShortUrl(shortUrl: String) = dao.getForShortUrl(shortUrl)

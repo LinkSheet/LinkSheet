@@ -3,6 +3,8 @@ package fe.linksheet.composable.settings
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,8 +12,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import com.junkfood.seal.ui.component.BackButton
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+
+import fe.linksheet.R
+import fe.linksheet.ui.HkGroteskFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,8 +45,11 @@ fun SettingsScaffold(
                         fontWeight = FontWeight.SemiBold
                     )
                 }, navigationIcon = {
-                    BackButton {
-                        onBackPressed()
+                    IconButton(onClick = onBackPressed) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.back),
+                        )
                     }
                 }, scrollBehavior = scrollBehavior
             )
@@ -54,7 +60,6 @@ fun SettingsScaffold(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScaffold(
     @StringRes headline: Int,

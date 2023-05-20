@@ -1,0 +1,25 @@
+package fe.linksheet.module.database.dao
+
+import androidx.room.Dao
+import androidx.room.Query
+import fe.linksheet.module.database.dao.base.BaseDao
+import fe.linksheet.module.database.entity.PreferredApp
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface PreferredAppDao : BaseDao<PreferredApp> {
+    @Query("SELECT * FROM openwith WHERE alwaysPreferred = 1")
+    fun getAllAlwaysPreferred(): Flow<List<PreferredApp>>
+
+    @Query("SELECT * FROM openwith WHERE host = :host")
+    fun getByHost(host: String): Flow<PreferredApp?>
+
+    @Query("DELETE FROM openwith WHERE host = :host")
+    suspend fun deleteByHost(host: String)
+
+    @Query("DELETE FROM openwith WHERE host = :host AND packageName = :packageName")
+    suspend fun deleteByHostAndPackageName(host: String, packageName: String)
+
+    @Query("DELETE FROM openwith WHERE packageName = :packageName")
+    suspend fun deleteByPackageName(packageName: String)
+}

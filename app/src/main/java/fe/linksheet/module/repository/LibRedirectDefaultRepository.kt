@@ -1,8 +1,8 @@
 package fe.linksheet.module.repository
 
-import fe.linksheet.data.dao.LibRedirectDefaultDao
-import fe.linksheet.data.entity.LibRedirectDefault
-import fe.linksheet.data.entity.LibRedirectServiceState
+import fe.linksheet.module.database.dao.LibRedirectDefaultDao
+import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.database.entity.LibRedirectServiceState
 import kotlinx.coroutines.flow.MutableStateFlow
 
 

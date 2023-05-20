@@ -7,7 +7,7 @@ import fe.fastforwardkt.isTracker
 import fe.gson.extensions.string
 import fe.httpkt.json.readToJson
 import fe.linksheet.R
-import fe.linksheet.data.entity.ResolvedRedirect
+import fe.linksheet.module.database.entity.ResolvedRedirect
 import fe.linksheet.module.repository.ResolvedRedirectRepository
 import kotlinx.coroutines.flow.first
 import timber.log.Timber

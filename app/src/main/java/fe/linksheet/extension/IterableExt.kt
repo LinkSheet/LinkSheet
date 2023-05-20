@@ -1,7 +1,5 @@
 package fe.linksheet.extension
 
-import fe.linksheet.util.to
-
 
 inline fun <T> Iterable<T>.findIndexed(predicate: (T) -> Boolean) = firstOrNullIndexed(predicate)
 
@@ -10,8 +8,9 @@ inline fun <T> Iterable<T>.firstOrNullIndexed(predicate: (T) -> Boolean): Pair<T
     return null
 }
 
-fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int =
-    if (this is Collection<*>) this.size else default
+fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int = if (this is Collection<*>)
+    this.size
+else default
 
 inline fun <T, R> Iterable<T>.mapToSet(transform: (T) -> R) = mapTo(
     HashSet(collectionSizeOrDefault(10)), transform
@@ -42,7 +41,7 @@ inline fun <T, K, V> Iterable<T>.groupBy(
     keySelector: (T) -> K?,
     valueTransform: (T) -> V,
     defaultValue: () -> MutableCollection<V> = { HashSet() }
-): MutableMap<K, MutableCollection<V>> {
+): Map<K, MutableCollection<V>> {
     val destination = mutableMapOf<K, MutableCollection<V>>()
     for (element in this) {
         val key = keySelector(element)
@@ -51,5 +50,23 @@ inline fun <T, K, V> Iterable<T>.groupBy(
             destination.getOrPut(key, defaultValue).add(value)
         }
     }
-    return destination
+
+
+    return destination.toMap()
+}
+
+inline fun <T, K, V> Iterable<T>.toMapWithPredicate(
+    keySelector: (T) -> K,
+    valueSelector: (T) -> V,
+    predicate: (existing: V, value: V) -> Boolean
+): Map<K, V> {
+    val destination = mutableMapOf<K, V>()
+    for (element in this) {
+        val key = keySelector(element)
+        val value = valueSelector(element)
+
+        destination.putOrUpdateIf(key, { value }, predicate)
+    }
+
+    return destination.toMap()
 }

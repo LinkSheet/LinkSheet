@@ -3,7 +3,7 @@ package fe.linksheet
 import android.app.Application
 import android.content.Context
 import com.google.android.material.color.DynamicColors
-import fe.linksheet.module.dao.daoModule
+import fe.linksheet.module.database.dao.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.preference.preferenceRepositoryModule

@@ -76,7 +76,6 @@ dependencies {
 
     implementation("androidx.webkit:webkit:1.6.1")
 
-
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.1")
@@ -85,7 +84,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
     implementation("androidx.compose.material3:material3:1.2.0-alpha01")
     implementation("androidx.compose.material:material:1.4.3")
+
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
+
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
     implementation("androidx.browser:browser:1.5.0")
@@ -106,6 +107,7 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core-android:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
 
+    implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
 
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")

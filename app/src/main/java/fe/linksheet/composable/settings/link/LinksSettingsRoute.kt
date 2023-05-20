@@ -25,7 +25,7 @@ import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.compose.koinViewModel
 
 

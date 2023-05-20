@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun SettingsItemRow(

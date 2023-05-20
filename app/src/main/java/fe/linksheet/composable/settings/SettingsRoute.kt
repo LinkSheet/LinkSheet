@@ -16,7 +16,7 @@ import fe.linksheet.*
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun SettingsRoute(

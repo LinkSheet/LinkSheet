@@ -9,4 +9,5 @@ val resolverModule = module {
     singleOf(::InAppBrowserHandler)
     singleOf(::RedirectFollower)
     singleOf(::LibRedirectResolver)
+    singleOf(::BrowserResolver)
 }

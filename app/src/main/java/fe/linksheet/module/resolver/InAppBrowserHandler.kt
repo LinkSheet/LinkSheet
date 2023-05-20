@@ -1,16 +1,10 @@
 package fe.linksheet.module.resolver
 
 import android.net.Uri
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.preference.OptionTypeMapper
-import fe.linksheet.module.preference.PreferenceRepository
-import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
-import fe.linksheet.module.repository.WhitelistedBrowserRepository
 import kotlinx.coroutines.flow.first
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import timber.log.Timber
 
 class InAppBrowserHandler(

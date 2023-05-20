@@ -36,7 +36,7 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.settingsRoute
-import fe.linksheet.ui.theme.HkGroteskFontFamily
+import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.util.Results
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel

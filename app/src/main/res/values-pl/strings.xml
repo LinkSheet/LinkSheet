@@ -84,7 +84,7 @@
     <string name="amoled_black">Czarny (Amoled)</string>
     <string name="fastfoward_rules">Użyj reguł FastForward</string>
     <string name="use_text_share_copy_buttons">Użyj prostych przycisków</string>
-    <string name="use_text_share_copy_buttons_explainer">Zastępuje „Kopiuj link”, „Udostępnij” i „Pobierz” prostymi przyciskami tekstowymi</string>
+    <string name="use_text_share_copy_buttons_explainer">Zastępuje obrysowane przyciski „Kopiuj link”, „Udostępnij”, „Pobierz” i „Ignoruj LibRedirect” prostymi przyciskami tekstowymi</string>
     <string name="preview_url">Podgląd linku</string>
     <string name="follow_redirects_local_cache">Włącz lokalną pamięć podręczną przekierowań</string>
     <string name="follow_redirects_local_cache_explainer">Lokalnie buforuj wyniki przekierowań</string>
@@ -142,4 +142,11 @@
     <string name="app_name">LinkSheet</string>
     <string name="license_apache_2">Licencja Apache 2.0</string>
     <string name="no_apps_which_can_handle_links_found">Nie znaleziono aplikacji obsługujących linki.</string>
+    <string name="normal">Zwykła</string>
+    <string name="in_app">W aplikacji</string>
+    <string name="use_unified_preferred_browser">Użyj ujednoliconych ustawień</string>
+    <string name="libredirect_via">%s (przez %s)</string>
+    <string name="enable_ignore_libredirect_button">Włącz przycisk „Ignoruj LibRedirect”</string>
+    <string name="enable_ignore_libredirect_button_explainer">Jeśli link został przekierowany przez LibRedirect, w dolnym panelu zostanie wyświetlony przycisk otwierający oryginalny adres</string>
+    <string name="ignore_libredirect">Ignoruj LibRedirect</string>
 </resources>

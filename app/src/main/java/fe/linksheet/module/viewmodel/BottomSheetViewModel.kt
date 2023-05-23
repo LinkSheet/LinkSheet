@@ -3,6 +3,7 @@ package fe.linksheet.module.viewmodel
 import android.app.Activity
 import android.app.Application
 import android.app.DownloadManager
+import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
@@ -10,7 +11,9 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.core.content.getSystemService
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.resolver.BottomSheetResult
@@ -19,6 +22,7 @@ import fe.linksheet.activity.MainActivity
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.ioLaunch
+import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.PreferenceRepository
@@ -45,7 +49,8 @@ class BottomSheetViewModel(
     val hideAfterCopying = preferenceRepository.getBoolean(Preferences.hideAfterCopying)
     val singleTap = preferenceRepository.getBoolean(Preferences.singleTap)
     val enableSendButton = preferenceRepository.getBoolean(Preferences.enableSendButton)
-    val enableIgnoreLibRedirectButton = preferenceRepository.getBoolean(Preferences.enableIgnoreLibRedirectButton)
+    val enableIgnoreLibRedirectButton =
+        preferenceRepository.getBoolean(Preferences.enableIgnoreLibRedirectButton)
 
 
     val disableToasts = preferenceRepository.getBoolean(Preferences.disableToasts)
@@ -56,6 +61,9 @@ class BottomSheetViewModel(
     val useTextShareCopyButtons =
         preferenceRepository.getBoolean(Preferences.useTextShareCopyButtons)
     val previewUrl = preferenceRepository.getBoolean(Preferences.previewUrl)
+
+    val clipboardManager = context.getSystemService<ClipboardManager>()!!
+    val downloadManager = context.getSystemService<DownloadManager>()!!
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
         intentResolver.resolve(intent, referrer).apply {
@@ -75,7 +83,7 @@ class BottomSheetViewModel(
         })
     }
 
-    fun persistSelectedIntent(intent: Intent, always: Boolean) = ioLaunch {
+    suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
         Timber.tag("PersistingSelectedIntent").d("Component: ${intent.component}")
         intent.component?.let { component ->
             val host = intent.data!!.host!!.lowercase(Locale.getDefault())
@@ -102,7 +110,6 @@ class BottomSheetViewModel(
 
     fun startDownload(
         resources: Resources,
-        downloadManager: DownloadManager,
         uri: Uri?,
         downloadable: Downloader.DownloadCheckResult.Downloadable
     ) {
@@ -119,5 +126,16 @@ class BottomSheetViewModel(
             )
 
         downloadManager.enqueue(request)
+    }
+
+    fun launchApp(
+        info: DisplayActivityInfo,
+        intent: Intent,
+        uri: Uri?,
+        always: Boolean = false
+    ) = ioAsync {
+        info.intentFrom(intent.newIntent(uri)).also {
+            persistSelectedIntent(it, always)
+        }
     }
 }

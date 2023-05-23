@@ -92,7 +92,7 @@ fun Intent.buildSendTo(uri: Uri?): Intent {
     }, null)
 }
 
-fun Intent.selfIntent(uri: Uri?, extras: Bundle? = null) = this.apply {
+fun selfIntent(uri: Uri?, extras: Bundle? = null) = Intent().apply {
     action = Intent.ACTION_VIEW
     data = uri
     `package` = BuildConfig.APPLICATION_ID

@@ -1,15 +1,16 @@
 package fe.linksheet.composable.settings.theme
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel

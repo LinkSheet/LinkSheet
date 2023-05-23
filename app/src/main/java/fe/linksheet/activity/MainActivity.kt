@@ -1,16 +1,10 @@
 package fe.linksheet.activity
 
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -23,7 +17,6 @@ import fe.linksheet.bottomSheetSettingsRoute
 import fe.linksheet.browserSettingsRoute
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
-import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
@@ -48,9 +41,8 @@ import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.settingsRoute
 import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.AppHost
-import fe.linksheet.ui.AppTheme
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.composable
-import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -143,7 +135,7 @@ class MainActivity : ComponentActivity() {
                         PreferredAppSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if (AndroidVersion.AT_LEAST_API_31_S) {
                         composable(route = appsWhichCanOpenLinksSettingsRoute) {
                             AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
                         }

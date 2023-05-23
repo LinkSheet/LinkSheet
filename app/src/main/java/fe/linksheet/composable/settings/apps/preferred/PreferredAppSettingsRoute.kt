@@ -43,6 +43,7 @@ import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
+import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -60,7 +61,7 @@ fun PreferredAppSettingsRoute(
         listState(preferredApps, filter)
     }
 
-    val appsExceptPreferred = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    val appsExceptPreferred = if (AndroidVersion.AT_LEAST_API_31_S) {
         viewModel.appsExceptPreferred.ioState()
     } else remember { mutableStateOf(listOf()) }
 
@@ -99,7 +100,7 @@ fun PreferredAppSettingsRoute(
         R.string.preferred_apps,
         onBackPressed = onBackPressed,
         floatingActionButton = {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (AndroidVersion.AT_LEAST_API_31_S) {
                 FloatingActionButton(onClick = {
                     appsDialog.open()
                 }) {

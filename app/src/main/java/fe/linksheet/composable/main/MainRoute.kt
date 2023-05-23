@@ -30,12 +30,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
+import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Results
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
@@ -45,17 +46,18 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MainRoute(
     navController: NavHostController,
-    viewModel: SettingsViewModel = koinViewModel()
+    viewModel: MainViewModel = koinViewModel()
 ) {
     val activity = LocalContext.currentActivity()
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
+
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
     var sheetOpen by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(Unit) {
         delay(200)
-        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(activity))
+        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
     }
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
@@ -64,7 +66,7 @@ fun MainRoute(
     LaunchedEffect(lifecycleState.first) {
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = Results.loading()
-            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser(activity))
+            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 
             sheetOpen = null
         }
@@ -72,9 +74,7 @@ fun MainRoute(
 
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = {}, modifier = Modifier.padding(horizontal = 8.dp), navigationIcon = {
-            IconButton(onClick = {
-                navController.navigate(settingsRoute)
-            }) {
+            IconButton(onClick = { navController.navigate(settingsRoute) }) {
                 Icon(
                     imageVector = Icons.Default.Settings,
                     contentDescription = stringResource(id = R.string.settings)
@@ -122,9 +122,13 @@ fun MainRoute(
 
                 if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
                     item(key = "open_copied_link") {
-                        OpenCopiedLink(uriHandler = uriHandler, item = item ?: sheetOpen!!, sheetOpen = {
-                            sheetOpen = item
-                        })
+                        OpenCopiedLink(
+                            uriHandler = uriHandler,
+                            item = item ?: sheetOpen!!,
+                            sheetOpen = {
+                                sheetOpen = item
+                            }
+                        )
                     }
                 }
             }
@@ -138,9 +142,9 @@ fun OpenDefaultBrowserCard(
     activity: Activity,
     defaultBrowserEnabled: Results<Unit>,
     defaultBrowserChanged: (Results<Unit>) -> Unit,
-    viewModel: SettingsViewModel
+    viewModel: MainViewModel
 ) {
-    val browserLauncherAndroidQPlus = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    val browserLauncherAndroidQPlus = if (AndroidVersion.AT_LEAST_API_29_Q) {
         rememberLauncherForActivityResult(
             contract = ActivityResultContracts.StartActivityForResult(),
             onResult = {
@@ -150,10 +154,6 @@ fun OpenDefaultBrowserCard(
                 )
             }
         )
-    } else null
-
-    val roleManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        remember { activity.getSystemService(RoleManager::class.java) }
     } else null
 
     val shouldUsePrimaryColor = defaultBrowserEnabled.isSuccess || defaultBrowserEnabled.isLoading
@@ -168,8 +168,8 @@ fun OpenDefaultBrowserCard(
                     return@clickable
                 }
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !defaultBrowserEnabled.isSuccess) {
-                    val intent = viewModel.getRequestRoleBrowserIntent(roleManager!!)
+                if (AndroidVersion.AT_LEAST_API_29_Q && !defaultBrowserEnabled.isSuccess) {
+                    val intent = viewModel.getRequestRoleBrowserIntent()
                     browserLauncherAndroidQPlus!!.launch(intent)
                 } else {
                     viewModel.openDefaultBrowserSettings(activity)
@@ -238,7 +238,7 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
             Spacer(modifier = Modifier.width(10.dp))
 
             ColoredIcon(icon = Icons.Default.ContentPaste, description = R.string.paste)
-            
+
             Column(modifier = Modifier.padding(15.dp)) {
                 Text(
                     text = stringResource(id = R.string.open_copied_link),

@@ -24,6 +24,7 @@ import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import fe.linksheet.module.preference.EnumTypeMapper
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -114,14 +115,12 @@ fun AppTheme(
     content: @Composable () -> Unit
 ) {
     val theme = themeSettingsViewModel.theme.value
-
     val context = LocalContext.current
-    val isAndroidSPlus = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
     val colorScheme = when (theme) {
         Theme.System -> {
             when {
-                isAndroidSPlus -> if (systemDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
+                AndroidVersion.AT_LEAST_API_31_S -> if (systemDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
                     context
                 )
 
@@ -131,17 +130,17 @@ fun AppTheme(
         }
 
         Theme.Light -> {
-            if (isAndroidSPlus) dynamicLightColorScheme(context)
+            if (AndroidVersion.AT_LEAST_API_31_S) dynamicLightColorScheme(context)
             else LightColors
         }
 
         Theme.Dark -> {
-            if (isAndroidSPlus) dynamicDarkColorScheme(context)
+            if (AndroidVersion.AT_LEAST_API_31_S) dynamicDarkColorScheme(context)
             else DarkColors
         }
 
         Theme.AmoledBlack -> {
-            if (isAndroidSPlus) dynamicDarkColorScheme(context).copy(
+            if (AndroidVersion.AT_LEAST_API_31_S) dynamicDarkColorScheme(context).copy(
                 surface = Color.Black,
                 background = Color.Black
             )

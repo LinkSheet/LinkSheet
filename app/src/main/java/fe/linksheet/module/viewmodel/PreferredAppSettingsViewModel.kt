@@ -17,6 +17,7 @@ import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -59,7 +60,7 @@ class PreferredAppSettingsViewModel(
         hosts: MutableCollection<String>
     ) = ioAsync {
         val hostState = mutableMapOf<String, Boolean>()
-        val hasAppHosts = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        val hasAppHosts = if (AndroidVersion.AT_LEAST_API_31_S) {
             val appHosts = domainVerificationManager.getAppHosts(displayActivityInfo.packageName)
             appHosts.forEach { hostState[it] = it in hosts }
 

@@ -18,6 +18,7 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.preferredAppsSettingsRoute
+import fe.linksheet.util.AndroidVersion
 
 
 @Composable
@@ -46,7 +47,7 @@ fun AppsSettingsRoute(
                 )
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (AndroidVersion.AT_LEAST_API_31_S) {
                 item(key = appsWhichCanOpenLinksSettingsRoute) {
                     SettingsItemRow(
                         navController = navController,

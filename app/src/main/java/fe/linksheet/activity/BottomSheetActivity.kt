@@ -1,13 +1,9 @@
 package fe.linksheet.activity
 
-import android.app.DownloadManager
-import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -72,7 +68,6 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.currentActivity
-import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.runIf
 import fe.linksheet.extension.selfIntent
 import fe.linksheet.extension.setText
@@ -88,7 +83,9 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
+import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -115,7 +112,7 @@ class BottomSheetActivity : ComponentActivity() {
             WindowManager.LayoutParams.MATCH_PARENT
         )
 
-        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val type = if (AndroidVersion.AT_LEAST_API_26_O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
 
@@ -155,7 +152,6 @@ class BottomSheetActivity : ComponentActivity() {
                 }
 
                 launchApp(
-                    bottomSheetViewModel,
                     completed.app,
                     completed.uri,
                     completed.isRegularPreferredApp
@@ -346,7 +342,7 @@ class BottomSheetActivity : ComponentActivity() {
         Column(modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                launchApp(bottomSheetViewModel, filteredItem, result.uri, false)
+                launchApp(filteredItem, result.uri, false)
             }
         ) {
             Spacer(modifier = Modifier.height(5.dp))
@@ -393,7 +389,7 @@ class BottomSheetActivity : ComponentActivity() {
 
             ButtonRow(
                 bottomSheetViewModel = bottomSheetViewModel, enabled = true,
-                onClick = { launchApp(bottomSheetViewModel, filteredItem, result.uri, it) },
+                onClick = { launchApp(filteredItem, result.uri, it) },
                 hideDrawer = hideDrawer
             )
         }
@@ -462,7 +458,6 @@ class BottomSheetActivity : ComponentActivity() {
                 enabled = selectedItem != -1,
                 onClick = { always ->
                     launchApp(
-                        bottomSheetViewModel,
                         result.resolved[selectedItem],
                         result.uri,
                         always
@@ -501,10 +496,9 @@ class BottomSheetActivity : ComponentActivity() {
                 .combinedClickable(
                     onClick = {
                         if (bottomSheetViewModel.singleTap) {
-                            launchApp(bottomSheetViewModel, info, result.uri)
+                            launchApp(info, result.uri)
                         } else {
                             if (selectedItem == index) launchApp(
-                                bottomSheetViewModel,
                                 info,
                                 result.uri
                             )
@@ -513,7 +507,7 @@ class BottomSheetActivity : ComponentActivity() {
                     },
                     onDoubleClick = {
                         if (!bottomSheetViewModel.singleTap) {
-                            launchApp(bottomSheetViewModel, info, result.uri)
+                            launchApp(info, result.uri)
                         } else {
                             this@BottomSheetActivity.startPackageInfoActivity(info)
                         }
@@ -619,9 +613,6 @@ class BottomSheetActivity : ComponentActivity() {
         onClick: (always: Boolean) -> Unit,
         hideDrawer: () -> Unit
     ) {
-        val clipboardManager = remember { getSystemService(ClipboardManager::class.java) }
-        val downloadManager = remember { getSystemService(DownloadManager::class.java) }
-
         val context = LocalContext.current
         val result = bottomSheetViewModel.resolveResult!!
 
@@ -662,7 +653,10 @@ class BottomSheetActivity : ComponentActivity() {
                         textButton = bottomSheetViewModel.useTextShareCopyButtons,
                         contentPadding = padding,
                         onClick = {
-                            clipboardManager.setText("URL", result.uri.toString())
+                            bottomSheetViewModel.clipboardManager.setText(
+                                "URL",
+                                result.uri.toString()
+                            )
 
                             if (!bottomSheetViewModel.disableToasts) {
                                 showToast(R.string.url_copied)
@@ -695,9 +689,8 @@ class BottomSheetActivity : ComponentActivity() {
                         textButton = bottomSheetViewModel.useTextShareCopyButtons,
                         contentPadding = padding,
                         onClick = {
-                            startDownload(
-                                bottomSheetViewModel,
-                                context.resources, downloadManager, result.uri,
+                            bottomSheetViewModel.startDownload(
+                                resources, result.uri,
                                 result.downloadable as Downloader.DownloadCheckResult.Downloadable
                             )
                         },
@@ -714,7 +707,7 @@ class BottomSheetActivity : ComponentActivity() {
                         onClick = {
                             finish()
                             startActivity(
-                                Intent().selfIntent(
+                                selfIntent(
                                     libRedirectResult.originalUri,
                                     bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                                 )
@@ -829,27 +822,17 @@ class BottomSheetActivity : ComponentActivity() {
         )
     }
 
-    private fun startDownload(
-        bottomSheetViewModel: BottomSheetViewModel,
-        resources: Resources,
-        downloadManager: DownloadManager,
-        uri: Uri?,
-        downloadable: Downloader.DownloadCheckResult.Downloadable
-    ) {
-        bottomSheetViewModel.startDownload(resources, downloadManager, uri, downloadable)
-    }
-
-    private fun launchApp(
-        bottomSheetViewModel: BottomSheetViewModel,
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun launchApp(
         info: DisplayActivityInfo,
         uri: Uri?,
         always: Boolean = false
     ) {
-        val intentFrom = info.intentFrom(intent.newIntent(uri))
-        bottomSheetViewModel.persistSelectedIntent(intentFrom, always)
-
-        startActivity(intentFrom)
-        finish()
+        val deferred = bottomSheetViewModel.launchApp(info, intent, uri, always)
+        deferred.invokeOnCompletion {
+            startActivity(deferred.getCompleted())
+            finish()
+        }
     }
 }
 

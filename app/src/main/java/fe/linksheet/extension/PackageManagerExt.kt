@@ -1,10 +1,12 @@
 package fe.linksheet.extension
 
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Build
 import fe.linksheet.BuildConfig
+import fe.linksheet.util.AndroidVersion
 import timber.log.Timber
 
 fun PackageManager.queryFirstIntentActivityByPackageNameOrNull(packageName: String): ResolveInfo? {
@@ -31,25 +33,28 @@ fun PackageManager.queryAllResolveInfos(
     removeSelfApp: Boolean = false
 ): List<ResolveInfo> {
     return getInstalledPackagesCompat(PackageManager.MATCH_ALL).mapNotNull { packageInfo ->
-        queryFirstIntentActivityByPackageNameOrNull(packageInfo.packageName).also {
-//            Timber.tag("InstalledPackage").d("${packageInfo.packageName}: $it")
-        }
+        queryFirstIntentActivityByPackageNameOrNull(packageInfo.packageName)
     }.filter { filterRemoveSelfApp(removeSelfApp, it) }
 }
 
 
-fun PackageManager.getInstalledPackagesCompat(flags: Int) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
-    } else @Suppress("DEPRECATION") getInstalledPackages(flags)
+fun PackageManager.getInstalledPackagesCompat(
+    flags: Int
+): MutableList<PackageInfo> = if (AndroidVersion.AT_LEAST_API_33_T) {
+    getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
+} else @Suppress("DEPRECATION") getInstalledPackages(flags)
 
 
-fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-    } else @Suppress("DEPRECATION") queryIntentActivities(intent, flags)
+fun PackageManager.queryIntentActivitiesCompat(
+    intent: Intent,
+    flags: Int
+): MutableList<ResolveInfo> = if (AndroidVersion.AT_LEAST_API_33_T) {
+    queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
+} else @Suppress("DEPRECATION") queryIntentActivities(intent, flags)
 
-fun PackageManager.resolveActivityCompat(intent: Intent, flags: Int) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-    } else @Suppress("DEPRECATION") resolveActivity(intent, flags)
+fun PackageManager.resolveActivityCompat(
+    intent: Intent,
+    flags: Int
+) = if (AndroidVersion.AT_LEAST_API_33_T) {
+    resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
+} else @Suppress("DEPRECATION") resolveActivity(intent, flags)

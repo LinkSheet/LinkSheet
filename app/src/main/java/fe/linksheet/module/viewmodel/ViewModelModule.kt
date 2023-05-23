@@ -4,6 +4,7 @@ import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
+    viewModelOf(::MainViewModel)
     viewModelOf(::AppsWhichCanOpenLinksViewModel)
     viewModelOf(::PreferredAppSettingsViewModel)
     viewModelOf(::InAppBrowserSettingsViewModel)
@@ -12,7 +13,6 @@ val viewModelModule = module {
     viewModelOf(::LinksSettingsViewModel)
     viewModelOf(::LibRedirectSettingsViewModel)
     viewModelOf(::LibRedirectServiceSettingsViewModel)
-    viewModelOf(::SettingsViewModel)
     viewModelOf(::BottomSheetViewModel)
     viewModelOf(::ThemeSettingsViewModel)
 }

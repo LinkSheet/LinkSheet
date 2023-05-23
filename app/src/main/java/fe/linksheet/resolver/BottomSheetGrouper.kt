@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.extension.findIndexed
 import fe.linksheet.extension.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit
@@ -16,7 +15,7 @@ object BottomSheetGrouper {
     fun group(
         context: Context,
         current: List<ResolveInfo>,
-        historyMap: Map<String, AppSelectionHistory>?,
+        historyMap: Map<String, Long>?,
         lastChosenPreferredApp: PreferredApp?,
         returnFilteredItem: Boolean = true,
     ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
@@ -33,7 +32,7 @@ object BottomSheetGrouper {
 
         var comparator = if (historyMap != null) {
             compareByDescending<DisplayActivityInfo> { app ->
-                historyMap[app.activityInfo.packageName]?.lastUsed ?: -1L
+                historyMap[app.activityInfo.packageName] ?: -1L
             }
         } else Comparator { _, _ -> 0 }
 

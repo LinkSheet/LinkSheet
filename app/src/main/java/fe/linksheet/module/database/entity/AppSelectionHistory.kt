@@ -15,3 +15,5 @@ data class AppSelectionHistory(
     val packageName: String,
     val lastUsed: Long,
 )
+
+data class AppSelection(val packageName: String, val maxLastUsed: Long)

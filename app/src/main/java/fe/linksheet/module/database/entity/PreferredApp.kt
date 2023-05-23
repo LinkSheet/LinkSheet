@@ -9,7 +9,14 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import fe.linksheet.resolver.PreferredDisplayActivityInfo
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
+import fe.linksheet.extension.separated
 import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.module.log.HostProcessor
+import fe.linksheet.module.log.LogDumpable
+import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
+import fe.linksheet.module.log.LogHasher
+import fe.linksheet.module.log.PackageProcessor
+import java.lang.StringBuilder
 
 @Entity(
     tableName = "openwith",
@@ -21,7 +28,7 @@ data class PreferredApp(
     val packageName: String? = null,
     val component: String,
     val alwaysPreferred: Boolean
-) {
+) : LogDumpable {
     @delegate:Ignore
     val componentName by lazy { ComponentName.unflattenFromString(component)!! }
 
@@ -31,6 +38,29 @@ data class PreferredApp(
 
     fun toPreferredDisplayActivityInfo(context: Context) = toDisplayActivityInfo(context)?.let {
         PreferredDisplayActivityInfo(this, it)
+    }
+
+    override fun dump(
+        stringBuilder: StringBuilder,
+        hasher: LogHasher
+    ) = stringBuilder.separated(",") {
+        item {
+            hasher.hash(this, "host=", host, HostProcessor)
+        }
+        itemNotNull(packageName) {
+            hasher.hash(
+                this,
+                "pkg=",
+                packageName!!,
+                PackageProcessor
+            )
+        }
+        item {
+            dumpObject("cmp=", stringBuilder, hasher, componentName)
+        }
+        item {
+            append("alwaysPreferred=", alwaysPreferred)
+        }
     }
 
     override fun equals(other: Any?): Boolean {

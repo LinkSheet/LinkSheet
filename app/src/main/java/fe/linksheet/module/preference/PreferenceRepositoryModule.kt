@@ -2,13 +2,11 @@ package fe.linksheet.module.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val preferenceRepositoryModule = module {
-    single {
-        PreferenceRepository(get())
-    }
+    singleOf(::PreferenceRepository)
 }
 
 class PreferenceRepository(context: Context) {
@@ -30,6 +28,16 @@ class PreferenceRepository(context: Context) {
     fun getString(preference: BasePreference.PreferenceNullable<String>) = unsafeGetString(
         preference.key, preference.default
     )
+
+    fun getOrWriteInit(preference: BasePreference.InitPreference<String>): String {
+        val value = unsafeGetString(preference.key, null)
+        return if (value == null) {
+            val initial = preference.initial()
+            unsafeWriteString(preference.key, initial)
+
+            return initial
+        } else value
+    }
 
     fun getStringState(preference: BasePreference.PreferenceNullable<String>) = getState(
         preference, ::writeString, ::getString

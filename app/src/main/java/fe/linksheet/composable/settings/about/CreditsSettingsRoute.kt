@@ -4,15 +4,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.openLinkWithGithub
 import fe.linksheet.sealGithub
 

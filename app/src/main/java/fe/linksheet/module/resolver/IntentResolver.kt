@@ -2,9 +2,9 @@ package fe.linksheet.module.resolver
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import fe.linksheet.resolver.BottomSheetResult
 import fe.fastforwardkt.FastForwardLoader
 import fe.linksheet.extension.componentName
 import fe.linksheet.extension.getUri
@@ -13,6 +13,10 @@ import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.queryResolveInfosByIntent
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.PackageProcessor
+import fe.linksheet.module.log.toDumpable
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
@@ -20,11 +24,12 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
 import fe.linksheet.resolver.BottomSheetGrouper
-import kotlinx.coroutines.flow.first
+import fe.linksheet.resolver.BottomSheetResult
 import timber.log.Timber
 
 class IntentResolver(
     val context: Context,
+    loggerFactory: LoggerFactory,
     val preferenceRepository: PreferenceRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
@@ -36,6 +41,8 @@ class IntentResolver(
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver
 ) {
+    private val logger = loggerFactory.createLogger(IntentResolver::class)
+
     private val fastForwardRulesObject by lazy { FastForwardLoader.loadBuiltInFastForwardRules() }
 
     private val useClearUrls = preferenceRepository.getBoolean(Preferences.useClearUrls)
@@ -76,7 +83,8 @@ class IntentResolver(
         preferenceRepository.getBoolean(Preferences.unifiedPreferredBrowser)
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
-        Timber.tag("ResolveIntents").d("Intent: $intent")
+        logger.debug("Intent=%s", intent)
+
         val ignoreLibRedirectExtra = intent.getBooleanExtra(
             LibRedirectDefault.libRedirectIgnore, false
         )
@@ -87,7 +95,7 @@ class IntentResolver(
 
         var uri = intent.getUri(useClearUrls, useFastForwardRules, fastForwardRulesObject)
         if (uri == null) {
-            Timber.tag("ResolveIntents").d("Uri is null, something probably went very wrong")
+            logger.debug("Uri is null, something probably went very wrong")
         }
 
         var followRedirect: RedirectFollower.FollowRedirect? = null
@@ -117,71 +125,76 @@ class IntentResolver(
             checkIsDownloadable(uri!!)
         } else Downloader.DownloadCheckResult.NonDownloadable
 
-        val preferredApp =
-            preferredAppRepository.getByHost(uri)?.toPreferredDisplayActivityInfo(context)
+        val preferredApp = preferredAppRepository.getByHost(uri)
+            ?.toPreferredDisplayActivityInfo(context)
+        logger.debug("PreferredApp=%s", preferredApp)
 
-        Timber.tag("ResolveIntents").d("PreferredApp: $preferredApp")
+        val lastUsedApps = appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
 
-        val hostHistory = appSelectionHistoryRepository.getHostHistory(uri).first()
-
-        Timber.tag("ResolveIntents").d("HostHistory: $hostHistory")
-        Timber.tag("ResolveIntents").d("SourceIntent: $intent ${intent.extras}")
+        logger.debug(
+            "LastUsedApps=%s",
+            lastUsedApps?.toDumpable(
+                "packageName", "lastUsed",
+                { it },
+                { it.toString() },
+                PackageProcessor,
+                HashProcessor.NoOpProcessor
+            )
+        )
 
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
-        val allowCustomTab =
-            inAppBrowserHandler.shouldAllowCustomTab(referrer, inAppBrowserSettings)
+        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
+            referrer, inAppBrowserSettings
+        )
 
         val newIntent = intent.newIntent(uri, !isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
-                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")
+//                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")
                 newIntent.removeExtra(key)
             }
         }
 
-        Timber.tag("ResolveIntents").d("NewIntent: $newIntent ${newIntent.extras}")
+        logger.debug("NewIntent=%s", newIntent)
 
-        val resolvedList = context.packageManager
+        val resolvedList: MutableList<ResolveInfo> = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)
             .toMutableList()
 
-        Timber.tag("ResolveIntents").d("ResolveListPreSort: $resolvedList")
-
-        Timber.tag("ResolveIntents")
-            .d("PreferredApp ComponentName: ${preferredApp?.app?.componentName}")
+        logger.debug("ResolveList=%s", resolvedList)
 
         val browserMode = if (newIntent.isSchemeTypicallySupportedByBrowsers()) {
-            Timber.tag("ResolveIntent")
-                .d("unifiedPreferredBrowser=$unifiedPreferredBrowser, isCustomTab=$isCustomTab, allowCustomTab=$allowCustomTab")
             val (mode, selected, repository) = if (!unifiedPreferredBrowser && isCustomTab && allowCustomTab) {
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)
 
-            Timber.tag("ResolveIntents").d("Mode=$mode, selected=$selected, repository=$repository")
-
             browserHandler.handleBrowsers(mode, selected, repository, resolvedList)
         } else null
 
-        Timber.tag("ResolveIntents").d("BrowserMode: $browserMode")
+        logger.debug("BrowserMode=%s", browserMode)
 
         val (grouped, filteredItem, showExtended) = BottomSheetGrouper.group(
             context,
             resolvedList,
-            hostHistory,
+            lastUsedApps,
             preferredApp?.app,
             !dontShowFilteredItem
         )
 
         val selectedBrowserIsSingleOption =
-            browserMode?.first == BrowserHandler.BrowserMode.SelectedBrowser
-                    && resolvedList.singleOrNull()?.activityInfo?.componentName() == browserMode.second?.activityInfo?.componentName()
+            browserMode?.browserMode == BrowserHandler.BrowserMode.SelectedBrowser
+                    && resolvedList.singleOrNull()?.activityInfo?.componentName() == browserMode.resolveInfo?.activityInfo?.componentName()
 
         val noBrowsersPresentOnlySingleApp =
-            browserMode?.first == BrowserHandler.BrowserMode.None && resolvedList.size == 1
+            browserMode?.browserMode == BrowserHandler.BrowserMode.None && resolvedList.size == 1
 
-
-        Timber.tag("ResolveIntents").d(
-            "Grouped: $grouped, filteredItem: $filteredItem, showExtended: $showExtended, selectedBrowserIsSingleOption: $selectedBrowserIsSingleOption"
+        logger.debug(
+            "Grouped=%s, filteredItem=%s, showExtended=%s, selectedBrowserIsSingleOption=%s, noBrowsersPresentOnlySingleApp=%s",
+            grouped,
+            filteredItem,
+            showExtended,
+            selectedBrowserIsSingleOption,
+            noBrowsersPresentOnlySingleApp
         )
 
         return BottomSheetResult(
@@ -200,7 +213,7 @@ class IntentResolver(
     private fun checkIsDownloadable(uri: Uri): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
-                Timber.tag("CheckIsDownloadable").d("File ending check result $it")
+                logger.debug("File ending check result $it")
                 if (it.isDownloadable()) return it
             }
         }

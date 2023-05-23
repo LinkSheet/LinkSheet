@@ -1,4 +1,4 @@
-package fe.linksheet.composable.settings
+package fe.linksheet.module.viewmodel
 
 import android.app.Activity
 import android.app.role.RoleManager
@@ -21,14 +21,11 @@ import kotlinx.coroutines.*
 
 
 class SettingsViewModel(
-    val database: LinkSheetDatabase,
     val preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     companion object {
         val intentManageDefaultAppSettings = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
     }
-
-    var theme = preferenceRepository.getState(Preferences.theme)
 
     @RequiresApi(Build.VERSION_CODES.Q)
     fun getRequestRoleBrowserIntent(roleManager: RoleManager): Intent {

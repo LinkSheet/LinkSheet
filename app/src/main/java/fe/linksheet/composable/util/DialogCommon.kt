@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -71,19 +72,45 @@ fun DialogBox(
         }
         Spacer(modifier = Modifier.height(20.dp))
     } else {
-        Box {
-            LazyColumn(modifier = Modifier.padding(bottom = 40.dp)) {
+//        Column(Modifier.fillMaxSize()) {
+//            LazyColumn(Modifier.weight(1f)) {
+//                items(50) { i ->
+//                    Text("Row $i", Modifier.fillMaxWidth().padding(8.dp))
+//                }
+//            }
+//            Button(onClick = { println("hi") }) {
+//                Text("Hello")
+//            }
+//        }
+
+        Column(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(modifier = Modifier.weight(1f)) {
                 content()
             }
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
                     .height(40.dp),
                 horizontalArrangement = Arrangement.End,
                 content = bottomRow
             )
         }
+
+
+//        Box {
+//            LazyColumn(modifier = Modifier.padding(bottom = 40.dp)) {
+//                content()
+//            }
+//
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .align(Alignment.BottomCenter)
+//                    .height(40.dp),
+//                horizontalArrangement = Arrangement.End,
+//                content = bottomRow
+//            )
+//        }
     }
 }

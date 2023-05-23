@@ -1,7 +1,6 @@
 package fe.linksheet.activity
 
 import android.app.DownloadManager
-import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.Configuration
@@ -76,6 +75,7 @@ import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.runIf
 import fe.linksheet.extension.selfIntent
+import fe.linksheet.extension.setText
 import fe.linksheet.extension.showToast
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -92,7 +92,6 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import kotlin.math.ceil
 
 class BottomSheetActivity : ComponentActivity() {
@@ -169,7 +168,7 @@ class BottomSheetActivity : ComponentActivity() {
     private fun AppThemeBottomSheet(
         bottomSheetViewModel: BottomSheetViewModel,
     ) {
-        AppTheme(bottomSheetViewModel.theme) {
+        AppTheme {
             BottomSheet(bottomSheetViewModel)
         }
     }
@@ -620,7 +619,7 @@ class BottomSheetActivity : ComponentActivity() {
         onClick: (always: Boolean) -> Unit,
         hideDrawer: () -> Unit
     ) {
-        val clipboard = remember { getSystemService(ClipboardManager::class.java) }
+        val clipboardManager = remember { getSystemService(ClipboardManager::class.java) }
         val downloadManager = remember { getSystemService(DownloadManager::class.java) }
 
         val context = LocalContext.current
@@ -663,12 +662,8 @@ class BottomSheetActivity : ComponentActivity() {
                         textButton = bottomSheetViewModel.useTextShareCopyButtons,
                         contentPadding = padding,
                         onClick = {
-                            clipboard.setPrimaryClip(
-                                ClipData.newPlainText(
-                                    "URL",
-                                    result.uri.toString()
-                                )
-                            )
+                            clipboardManager.setText("URL", result.uri.toString())
+
                             if (!bottomSheetViewModel.disableToasts) {
                                 showToast(R.string.url_copied)
                             }

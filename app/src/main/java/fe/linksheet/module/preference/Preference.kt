@@ -1,5 +1,12 @@
 package fe.linksheet.module.preference
 
+import fe.linksheet.extension.toHex
+import fe.linksheet.module.log.loggerHmac
+import fe.linksheet.module.preference.BasePreference.MappedPreference.Companion.mappedPreference
+import fe.linksheet.module.preference.BasePreference.Preference.Companion.booleanPreference
+import fe.linksheet.module.preference.BasePreference.PreferenceNullable.Companion.stringPreference
+import fe.linksheet.module.preference.BasePreference.InitPreference.Companion.stringPreference
+import fe.linksheet.util.CryptoUtil
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
@@ -50,27 +57,65 @@ object Preferences {
     val downloaderCheckUrlMimeType = booleanPreference("downloaderCheckUrlMimeType")
 
     val enableIgnoreLibRedirectButton = booleanPreference("enable_ignore_lib_redirect_button")
-}
 
-sealed class BasePreference<T, NT>(val key: String, val default: NT) {
-    class PreferenceNullable<T>(key: String, default: T?) : BasePreference<T, T?>(key, default)
-
-    class Preference<T>(key: String, default: T) : BasePreference<T, T>(key, default)
-
-    class MappedPreference<T, M>(key: String, default: T, private val mapper: TypeMapper<T, M>) :
-        BasePreference<T, T>(key, default) {
-        val defaultMapped = persist(default)
-
-        fun read(mapped: M) = mapper.reader(mapped)
-        fun persist(value: T) = mapper.persister(value)
+    val logKey = stringPreference("log_key") {
+        CryptoUtil.getRandomBytes(loggerHmac.keySize).toHex()
     }
 }
 
-private fun stringPreference(key: String, default: String? = null) =
-    BasePreference.PreferenceNullable(key, default)
+sealed class BasePreference<T, NT> private constructor(val key: String, val default: NT) {
+    class PreferenceNullable<T> private constructor(
+        key: String,
+        default: T?
+    ) : BasePreference<T, T?>(key, default) {
+        companion object {
+            fun stringPreference(
+                key: String,
+                default: String? = null
+            ) = PreferenceNullable(key, default)
+        }
+    }
 
-private fun booleanPreference(key: String, default: Boolean = false) =
-    BasePreference.Preference(key, default)
+    class Preference<T> private constructor(
+        key: String,
+        default: T
+    ) : BasePreference<T, T>(key, default) {
+        companion object {
+            fun booleanPreference(
+                key: String,
+                default: Boolean = false
+            ) = BasePreference.Preference(key, default)
+        }
+    }
 
-private fun <T, M> mappedPreference(key: String, default: T, mapper: TypeMapper<T, M>) =
-    BasePreference.MappedPreference(key, default, mapper)
+    class MappedPreference<T, M> private constructor(
+        key: String, default: T, private val mapper: TypeMapper<T, M>
+    ) : BasePreference<T, T>(key, default) {
+        val defaultMapped = persist(default)
+        fun read(mapped: M) = mapper.reader(mapped)
+        fun persist(value: T) = mapper.persister(value)
+
+        companion object {
+            fun <T, M> mappedPreference(
+                key: String,
+                default: T,
+                mapper: TypeMapper<T, M>
+            ) = MappedPreference(key, default, mapper)
+        }
+    }
+
+    class InitPreference<T> private constructor(
+        key: String,
+        val initial: () -> T
+    ) : BasePreference<T, T?>(key, null) {
+        companion object {
+            fun <T> stringPreference(
+                key: String,
+                initial: () -> T
+            ) = InitPreference(key, initial)
+        }
+    }
+}
+
+
+

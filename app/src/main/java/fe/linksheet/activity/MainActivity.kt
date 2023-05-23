@@ -23,7 +23,7 @@ import fe.linksheet.bottomSheetSettingsRoute
 import fe.linksheet.browserSettingsRoute
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
-import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
@@ -47,6 +47,7 @@ import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.settingsRoute
 import fe.linksheet.themeSettingsRoute
+import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.util.composable
 import org.koin.androidx.compose.koinViewModel
@@ -57,106 +58,94 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            val settingsViewModel = koinViewModel<SettingsViewModel>()
 
-            AppTheme(theme = settingsViewModel.theme.value) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Surface(color = MaterialTheme.colorScheme.surface) {
-                        Column(modifier = Modifier.fillMaxSize()) {
-                            Spacer(modifier = Modifier.height(5.dp))
+            AppHost {
+                Spacer(modifier = Modifier.height(5.dp))
 
-                            NavHost(
-                                navController = navController,
-                                startDestination = mainRoute,
-                            ) {
-                                composable(route = mainRoute) {
-                                    MainRoute(navController = navController)
-                                }
+                NavHost(
+                    navController = navController,
+                    startDestination = mainRoute,
+                ) {
+                    composable(route = mainRoute) {
+                        MainRoute(navController = navController)
+                    }
 
-                                val onBackPressed: () -> Unit = { navController.popBackStack() }
-                                composable(route = settingsRoute) {
-                                    SettingsRoute(
-                                        navController = navController,
-                                        onBackPressed = onBackPressed
-                                    )
-                                }
+                    val onBackPressed: () -> Unit = { navController.popBackStack() }
+                    composable(route = settingsRoute) {
+                        SettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
 
-                                composable(route = appsSettingsRoute) {
-                                    AppsSettingsRoute(
-                                        navController = navController,
-                                        onBackPressed = onBackPressed
-                                    )
-                                }
+                    composable(route = appsSettingsRoute) {
+                        AppsSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
 
-                                composable(route = browserSettingsRoute) {
-                                    BrowserSettingsRoute(
-                                        navController = navController,
-                                        onBackPressed = onBackPressed
-                                    )
-                                }
+                    composable(route = browserSettingsRoute) {
+                        BrowserSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
 
-                                composable(route = bottomSheetSettingsRoute) {
-                                    BottomSheetSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                    )
-                                }
+                    composable(route = bottomSheetSettingsRoute) {
+                        BottomSheetSettingsRoute(
+                            onBackPressed = onBackPressed,
+                        )
+                    }
 
-                                composable(route = linksSettingsRoute) {
-                                    LinksSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                        navController = navController,
-                                    )
-                                }
+                    composable(route = linksSettingsRoute) {
+                        LinksSettingsRoute(
+                            onBackPressed = onBackPressed,
+                            navController = navController,
+                        )
+                    }
 
-                                composable(route = libRedirectSettingsRoute) {
-                                    LibRedirectSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                        navController = navController,
-                                    )
-                                }
+                    composable(route = libRedirectSettingsRoute) {
+                        LibRedirectSettingsRoute(
+                            onBackPressed = onBackPressed,
+                            navController = navController,
+                        )
+                    }
 
-                                composable(route = libRedirectServiceSettingsRoute) { _, _ ->
-                                    LibRedirectServiceSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                    )
-                                }
+                    composable(route = libRedirectServiceSettingsRoute) { _, _ ->
+                        LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
+                    }
 
-                                composable(route = themeSettingsRoute) {
-                                    ThemeSettingsRoute(
-                                        onBackPressed = onBackPressed,
-                                        viewModel = settingsViewModel
-                                    )
-                                }
+                    composable(route = themeSettingsRoute) {
+                        ThemeSettingsRoute(onBackPressed = onBackPressed)
+                    }
 
-                                composable(route = aboutSettingsRoute) {
-                                    AboutSettingsRoute(
-                                        navController = navController,
-                                        onBackPressed = onBackPressed
-                                    )
-                                }
+                    composable(route = aboutSettingsRoute) {
+                        AboutSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
 
-                                composable(route = creditsSettingsRoute) {
-                                    CreditsSettingsRoute(onBackPressed = onBackPressed)
-                                }
+                    composable(route = creditsSettingsRoute) {
+                        CreditsSettingsRoute(onBackPressed = onBackPressed)
+                    }
 
-                                composable(route = preferredBrowserSettingsRoute) {
-                                    PreferredBrowserSettingsRoute(onBackPressed = onBackPressed)
-                                }
+                    composable(route = preferredBrowserSettingsRoute) {
+                        PreferredBrowserSettingsRoute(onBackPressed = onBackPressed)
+                    }
 
-                                composable(route = inAppBrowserSettingsRoute) {
-                                    InAppBrowserSettingsRoute(onBackPressed = onBackPressed)
-                                }
+                    composable(route = inAppBrowserSettingsRoute) {
+                        InAppBrowserSettingsRoute(onBackPressed = onBackPressed)
+                    }
 
-                                composable(route = preferredAppsSettingsRoute) {
-                                    PreferredAppSettingsRoute(onBackPressed = onBackPressed)
-                                }
+                    composable(route = preferredAppsSettingsRoute) {
+                        PreferredAppSettingsRoute(onBackPressed = onBackPressed)
+                    }
 
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                    composable(route = appsWhichCanOpenLinksSettingsRoute) {
-                                        AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
-                                    }
-                                }
-                            }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        composable(route = appsWhichCanOpenLinksSettingsRoute) {
+                            AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
                         }
                     }
                 }

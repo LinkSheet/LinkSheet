@@ -16,6 +16,7 @@ import fe.linksheet.composable.settings.browser.BrowserCommonDialog
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
 import fe.linksheet.composable.settings.browser.BrowserCommonScaffold
 import fe.linksheet.composable.settings.browser.BrowserIconTextRow
+import fe.linksheet.composable.util.FilterChipValue
 import fe.linksheet.composable.util.FilterChips
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SwitchRow
@@ -107,16 +108,14 @@ fun PreferredBrowserSettingsRoute(
                 )
 
                 if (!viewModel.unifiedPreferredBrowser.value) {
-                    Row {
-                        FilterChips(
-                            currentState = type,
-                            onClick = { viewModel.type.value = it },
-                            values = listOf(
-                                PreferredBrowserViewModel.BrowserType.Normal to R.string.normal,
-                                PreferredBrowserViewModel.BrowserType.InApp to R.string.in_app
-                            )
+                    FilterChips(
+                        currentState = type,
+                        onClick = { viewModel.type.value = it },
+                        values = listOf(
+                            FilterChipValue(PreferredBrowserViewModel.BrowserType.Normal, R.string.normal),
+                            FilterChipValue(PreferredBrowserViewModel.BrowserType.InApp, R.string.in_app)
                         )
-                    }
+                    )
                 }
             }
         }

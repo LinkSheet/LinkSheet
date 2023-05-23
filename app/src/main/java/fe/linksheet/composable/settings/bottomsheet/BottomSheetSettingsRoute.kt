@@ -11,7 +11,6 @@ import androidx.lifecycle.Lifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel

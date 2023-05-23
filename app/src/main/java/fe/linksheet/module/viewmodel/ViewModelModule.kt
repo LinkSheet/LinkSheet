@@ -1,6 +1,5 @@
 package fe.linksheet.module.viewmodel
 
-import fe.linksheet.composable.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -15,4 +14,5 @@ val viewModelModule = module {
     viewModelOf(::LibRedirectServiceSettingsViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::BottomSheetViewModel)
+    viewModelOf(::ThemeSettingsViewModel)
 }

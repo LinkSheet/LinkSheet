@@ -4,23 +4,23 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
+import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.ui.Theme
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun ThemeSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: SettingsViewModel
+    viewModel: ThemeSettingsViewModel = koinViewModel()
 ) {
     val themes = listOf(
         ThemeHolder(Theme.System, R.string.system),

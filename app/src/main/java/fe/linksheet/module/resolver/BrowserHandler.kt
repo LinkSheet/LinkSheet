@@ -2,22 +2,27 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.mapToSet
+import fe.linksheet.extension.separated
 import fe.linksheet.extension.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.WhitelistedBrowser
+import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.LogDumpable
+import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
+import fe.linksheet.module.log.LogHasher
 import fe.linksheet.module.preference.OptionTypeMapper
 import fe.linksheet.module.preference.PreferenceRepository
-import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.repository.base.WhitelistedBrowsersRepository
 import kotlinx.coroutines.flow.first
 import timber.log.Timber
+import java.lang.StringBuilder
 
 class BrowserHandler(
     val preferenceRepository: PreferenceRepository,
     private val browserResolver: BrowserResolver,
 ) {
-    sealed class BrowserMode(val value: String) {
+    sealed class BrowserMode(val value: String) : LogDumpable {
         object None : BrowserMode("none")
         object AlwaysAsk : BrowserMode("always_ask")
         object SelectedBrowser : BrowserMode("browser")
@@ -26,6 +31,27 @@ class BrowserHandler(
         companion object Companion : OptionTypeMapper<BrowserMode, String>(
             { it.value }, { arrayOf(None, AlwaysAsk, SelectedBrowser, Whitelisted) }
         )
+
+        override fun dump(
+            stringBuilder: StringBuilder,
+            hasher: LogHasher
+        ) = hasher.hash(stringBuilder, value, HashProcessor.NoOpProcessor)
+
+    }
+
+    data class BrowserModeInfo(
+        val browserMode: BrowserMode,
+        val resolveInfo: ResolveInfo?
+    ) : LogDumpable {
+        override fun dump(
+            stringBuilder: StringBuilder,
+            hasher: LogHasher
+        ) = stringBuilder.separated(",") {
+            item { dumpObject("mode=", this, hasher, browserMode) }
+            itemNotNull(resolveInfo) {
+                dumpObject("resolveInfo=", this, hasher, resolveInfo)
+            }
+        }
     }
 
     suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> handleBrowsers(
@@ -33,16 +59,17 @@ class BrowserHandler(
         selectedBrowser: String?,
         repository: WhitelistedBrowsersRepository<T, C, D>,
         resolveList: MutableList<ResolveInfo>,
-    ): Pair<BrowserMode, ResolveInfo?> {
+    ): BrowserModeInfo {
         val browsers = browserResolver.queryPackageKeyedBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
-        Timber.tag("BrowserHandler").d("Browsers=$browsers, selectedBrowser=$selectedBrowser, resolveList=$resolveList")
+        Timber.tag("BrowserHandler")
+            .d("Browsers=$browsers, selectedBrowser=$selectedBrowser, resolveList=$resolveList")
 
         return when (browserMode) {
-            is BrowserMode.AlwaysAsk -> browserMode to null
+            is BrowserMode.AlwaysAsk -> BrowserModeInfo(browserMode, null)
             is BrowserMode.None -> {
                 removeBrowsers(browsers, resolveList)
-                browserMode to null
+                BrowserModeInfo(browserMode, null)
             }
 
             is BrowserMode.SelectedBrowser -> {
@@ -53,7 +80,7 @@ class BrowserHandler(
                     removeBrowsers(browsers, resolveList, setOf(selectedBrowser!!))
                 }
 
-                browserMode to browserResolveInfo
+                BrowserModeInfo(browserMode, browserResolveInfo)
             }
 
             is BrowserMode.Whitelisted -> {
@@ -61,7 +88,7 @@ class BrowserHandler(
                     it.packageName
                 })
 
-                browserMode to null
+                BrowserModeInfo(browserMode, null)
             }
         }
     }

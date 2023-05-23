@@ -3,7 +3,6 @@ package fe.linksheet.composable.settings.browser.inapp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import fe.linksheet.R
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
 import fe.linksheet.composable.settings.browser.BrowserCommonScaffold

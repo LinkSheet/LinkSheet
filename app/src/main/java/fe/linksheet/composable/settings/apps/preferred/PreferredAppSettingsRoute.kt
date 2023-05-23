@@ -34,7 +34,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.settings.SettingsViewModel
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText

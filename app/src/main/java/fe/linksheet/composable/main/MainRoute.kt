@@ -28,10 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.composable.settings.SettingsViewModel
+import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
@@ -119,6 +118,8 @@ fun MainRoute(
 
             // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
             if (clipboardManager.hasText() || sheetOpen != null) {
+
+
                 val item = clipboardManager.getText()?.text
 
                 if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
@@ -231,6 +232,8 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
         .padding(horizontal = 10.dp)
         .clip(RoundedCornerShape(12.dp))
         .clickable {
+            throw Exception("Lel")
+
             sheetOpen()
             uriHandler.openUri(item)
         }

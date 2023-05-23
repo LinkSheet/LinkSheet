@@ -1,25 +1,23 @@
 package fe.linksheet.composable.settings.apps
 
 import android.os.Build
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.filled.OpenInBrowser
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Verified
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
-import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.inAppBrowserSettingsRoute
+import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.preferredAppsSettingsRoute
-import fe.linksheet.preferredBrowserSettingsRoute
 
 
 @Composable

@@ -36,6 +36,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import fe.linksheet.composable.util.FilterChip
+import fe.linksheet.composable.util.FilterChipValue
+import fe.linksheet.composable.util.FilterChips
 
 @OptIn(
     ExperimentalFoundationApi::class
@@ -99,29 +101,20 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                             paddingStart = 0.dp
                         )
 
-                        Row {
-                            val filterChipClickHandler: (Boolean) -> Unit = {
+                        FilterChips(
+                            currentState = linkHandlingAllowed,
+                            onClick = {
                                 viewModel.linkHandlingAllowed.value = it
-                            }
-
-                            FilterChip(
-                                value = true,
-                                currentState = linkHandlingAllowed,
-                                onClick = filterChipClickHandler,
-                                label = R.string.enabled,
-                                icon = Icons.Default.Visibility
+                            },
+                            values = listOf(
+                                FilterChipValue(true, R.string.enabled, Icons.Default.Visibility),
+                                FilterChipValue(
+                                    false,
+                                    R.string.disabled,
+                                    Icons.Default.VisibilityOff
+                                )
                             )
-
-                            Spacer(modifier = Modifier.width(5.dp))
-
-                            FilterChip(
-                                value = false,
-                                currentState = linkHandlingAllowed,
-                                onClick = filterChipClickHandler,
-                                label = R.string.disabled,
-                                icon = Icons.Default.VisibilityOff
-                            )
-                        }
+                        )
 
                         Spacer(modifier = Modifier.height(10.dp))
 

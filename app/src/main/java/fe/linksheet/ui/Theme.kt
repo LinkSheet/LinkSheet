@@ -6,18 +6,25 @@ import android.content.ContextWrapper
 import android.os.Build
 import android.view.Window
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import fe.linksheet.module.preference.EnumTypeMapper
+import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 private val LightColors = lightColorScheme(
@@ -87,13 +94,11 @@ private val DarkColors = darkColorScheme(
 
 private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
 
-private tailrec fun Context.findWindow(): Window? =
-    when (this) {
-        is Activity -> window
-        is ContextWrapper -> baseContext.findWindow()
-        else -> null
-    }
-
+private tailrec fun Context.findWindow(): Window? = when (this) {
+    is Activity -> window
+    is ContextWrapper -> baseContext.findWindow()
+    else -> null
+}
 
 enum class Theme {
     System, Light, Dark, AmoledBlack;
@@ -104,10 +109,12 @@ enum class Theme {
 
 @Composable
 fun AppTheme(
-    theme: Theme,
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
+    themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
     content: @Composable () -> Unit
 ) {
+    val theme = themeSettingsViewModel.theme.value
+
     val context = LocalContext.current
     val isAndroidSPlus = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
@@ -145,8 +152,9 @@ fun AppTheme(
     val view = LocalView.current
     val window = view.context.findWindow()
 
-    val isDark =
-        theme == Theme.Dark || theme == Theme.AmoledBlack || (theme == Theme.System && systemDarkTheme)
+    val isDark = theme == Theme.Dark || theme == Theme.AmoledBlack
+            || (theme == Theme.System && systemDarkTheme)
+
     window?.let {
         WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
     }
@@ -158,4 +166,17 @@ fun AppTheme(
         typography = Typography,
         content = content
     )
+}
+
+@Composable
+fun AppHost(content: @Composable () -> Unit) {
+    AppTheme {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Surface(color = MaterialTheme.colorScheme.surface) {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    content()
+                }
+            }
+        }
+    }
 }

@@ -37,7 +37,6 @@ class LinkSheet : Application() {
                 PrintWriter(sw).use { exception.printStackTrace(it) }
             }
 
-
             val exceptionText = sw.toString()
 
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {

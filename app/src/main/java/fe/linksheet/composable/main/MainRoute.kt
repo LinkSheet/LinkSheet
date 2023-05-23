@@ -118,8 +118,6 @@ fun MainRoute(
 
             // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
             if (clipboardManager.hasText() || sheetOpen != null) {
-
-
                 val item = clipboardManager.getText()?.text
 
                 if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
@@ -232,8 +230,6 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
         .padding(horizontal = 10.dp)
         .clip(RoundedCornerShape(12.dp))
         .clickable {
-            throw Exception("Lel")
-
             sheetOpen()
             uriHandler.openUri(item)
         }

@@ -18,7 +18,7 @@
     <string name="confirm">Potwierdź</string>
     <string name="clear">Wyczyść</string>
     <string name="usage_stats_sorting_explainer">Zezwól aplikacji na dostęp do danych o użyciu przy pierwszym przełączeniu.</string>
-    <string name="usage_stats_sorting">Sortuj aplikacje wg. użycia</string>
+    <string name="usage_stats_sorting">Sortuj aplikacje według użycia</string>
     <string name="enable_copy_button_explainer">Wyświetla przycisk „Kopiuj link” w dolnym panelu</string>
     <string name="single_tap">Włącz pojedyncze dotknięcie</string>
     <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach, niezależnie od tego, czego aplikacja chce używać</string>
@@ -149,4 +149,6 @@
     <string name="enable_ignore_libredirect_button">Włącz przycisk „Ignoruj LibRedirect”</string>
     <string name="enable_ignore_libredirect_button_explainer">Jeśli link został przekierowany przez LibRedirect, w dolnym panelu zostanie wyświetlony przycisk otwierający oryginalny adres</string>
     <string name="ignore_libredirect">Ignoruj LibRedirect</string>
+    <string name="app_crashed">Wygląda na to, że LinkSheet uległ awarii, sprawdź poniższy błąd</string>
+    <string name="copy_exception">Kopiuj do schowka</string>
 </resources>

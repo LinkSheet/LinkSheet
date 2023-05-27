@@ -4,15 +4,13 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
-import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.extension.componentName
-import fe.linksheet.extension.separated
 import fe.linksheet.extension.toImageBitmap
+import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogHasher
-import fe.linksheet.util.stringbuilder.buildSeparatedString
-import java.lang.StringBuilder
+import fe.stringbuilder.util.commaSeparated
 
 data class DisplayActivityInfo(
     val activityInfo: ActivityInfo,
@@ -58,7 +56,7 @@ data class DisplayActivityInfo(
     override fun dump(
         stringBuilder: StringBuilder,
         hasher: LogHasher
-    ) = stringBuilder.separated(",") {
+    ) = stringBuilder.commaSeparated {
         item {
             hasher.hash(this, "activityInfo=", activityInfo, HashProcessor.ActivityInfoProcessor)
         }

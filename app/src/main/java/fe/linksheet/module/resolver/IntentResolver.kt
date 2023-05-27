@@ -17,7 +17,7 @@ import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.log.toDumpable
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository

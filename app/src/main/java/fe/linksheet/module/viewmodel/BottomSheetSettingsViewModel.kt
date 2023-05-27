@@ -10,8 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
+import fe.android.preference.helper.PreferenceRepository
+import fe.android.preference.helper.compose.getBooleanState
 import fe.linksheet.extension.startActivityWithConfirmation
-import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 

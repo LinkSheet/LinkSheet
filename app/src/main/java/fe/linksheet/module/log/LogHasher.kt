@@ -4,8 +4,8 @@ import android.content.ComponentName
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.appendHashed
-import fe.linksheet.extension.separated
-import fe.linksheet.extension.wrapped
+import fe.stringbuilder.util.curlyWrapped
+import fe.stringbuilder.util.slashSeparated
 import javax.crypto.Mac
 
 sealed interface LogHasher {
@@ -67,8 +67,8 @@ sealed interface HashProcessor<T> {
             stringBuilder: StringBuilder,
             input: ComponentName,
             mac: Mac
-        ) = stringBuilder.wrapped("{", "}") {
-            separated("/") {
+        ) = stringBuilder.curlyWrapped {
+            slashSeparated {
                 item { PackageProcessor.process(stringBuilder, input.packageName, mac) }
                 item { appendHashed(mac, input.className) }
             }

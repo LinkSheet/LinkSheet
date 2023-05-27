@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
+import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
@@ -35,13 +37,11 @@ import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.extension.associateWith
+import fe.linksheet.extension.items
 import fe.linksheet.extension.updateState
 import fe.linksheet.extension.updateStateFromResult
-import fe.linksheet.module.preference.BasePreference
-import fe.linksheet.module.preference.RepositoryState
-import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.viewmodel.InAppBrowserDisableInSelected
-import fe.linksheet.extension.items
+import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 
 @OptIn(ExperimentalFoundationApi::class)

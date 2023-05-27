@@ -3,7 +3,6 @@ package fe.linksheet.ui
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.os.Build
 import android.view.Window
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -22,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import fe.linksheet.module.preference.EnumTypeMapper
+import fe.android.preference.helper.EnumTypeMapper
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel

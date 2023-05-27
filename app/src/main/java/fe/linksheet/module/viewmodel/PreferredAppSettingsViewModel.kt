@@ -14,7 +14,7 @@ import fe.linksheet.extension.hasVerifiedDomains
 import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.mapToSet
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion

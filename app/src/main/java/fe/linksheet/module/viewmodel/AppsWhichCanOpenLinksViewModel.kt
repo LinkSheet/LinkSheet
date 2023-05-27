@@ -12,7 +12,7 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
 import fe.linksheet.extension.getDisplayActivityInfos
 import fe.linksheet.extension.hasVerifiedDomains
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow

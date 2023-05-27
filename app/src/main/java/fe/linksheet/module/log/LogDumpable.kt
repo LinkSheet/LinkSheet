@@ -4,9 +4,10 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.forEachElementIndex
-import fe.linksheet.extension.separated
-import fe.linksheet.extension.wrapped
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
+import fe.stringbuilder.util.commaSeparated
+import fe.stringbuilder.util.curlyWrapped
+import fe.stringbuilder.util.squareWrapped
 
 interface LogDumpable {
     fun dump(stringBuilder: StringBuilder, hasher: LogHasher): StringBuilder
@@ -29,7 +30,7 @@ interface LogDumpable {
             if (obj is LogDumpable) return obj.dump(stringBuilder, hasher)
 
             if (obj is List<*>) {
-                return stringBuilder.wrapped("[", "]") {
+                return stringBuilder.squareWrapped {
                     obj.forEachElementIndex { element, _, _, last ->
                         val result = dumpObject(this, hasher, element)
                         if (result != null && !last) {
@@ -62,7 +63,7 @@ object IntentDumpable : LogDumpableWrapper<Intent> {
         stringBuilder: StringBuilder,
         instance: Intent,
         hasher: LogHasher
-    ) = stringBuilder.separated(",") {
+    ) = stringBuilder.commaSeparated {
         item { append("act=", instance.action) }
         itemNotNull(instance.categories) {
             append("cat=", instance.categories)
@@ -107,10 +108,10 @@ data class MapDumpable<K, V, DK, DV>(
     override fun dump(
         stringBuilder: StringBuilder,
         hasher: LogHasher
-    ) = stringBuilder.separated(",") {
+    ) = stringBuilder.commaSeparated {
         map.forEach { (key, value) ->
             item {
-                wrapped("{", "}") {
+                curlyWrapped {
                     hasher.hash(this, "$keyName=", keySelector(key), keyProcessor)
                     append(",")
                     hasher.hash(this, "$valueName=", valueSelector(value), valueProcessor)

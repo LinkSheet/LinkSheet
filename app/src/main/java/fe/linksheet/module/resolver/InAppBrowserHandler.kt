@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver
 
 import android.net.Uri
+import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.extension.mapToSet
-import fe.linksheet.module.preference.OptionTypeMapper
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import kotlinx.coroutines.flow.first
 import timber.log.Timber

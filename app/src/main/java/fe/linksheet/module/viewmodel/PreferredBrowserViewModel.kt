@@ -2,7 +2,10 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import fe.linksheet.extension.ioLaunch
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
+import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getState
+import fe.android.preference.helper.compose.getStringState
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository

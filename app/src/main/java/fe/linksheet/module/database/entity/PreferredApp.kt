@@ -9,13 +9,13 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import fe.linksheet.resolver.PreferredDisplayActivityInfo
 import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
-import fe.linksheet.extension.separated
 import fe.linksheet.extension.toDisplayActivityInfo
 import fe.linksheet.module.log.HostProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.linksheet.module.log.LogHasher
 import fe.linksheet.module.log.PackageProcessor
+import fe.stringbuilder.util.commaSeparated
 import java.lang.StringBuilder
 
 @Entity(
@@ -43,7 +43,7 @@ data class PreferredApp(
     override fun dump(
         stringBuilder: StringBuilder,
         hasher: LogHasher
-    ) = stringBuilder.separated(",") {
+    ) = stringBuilder.commaSeparated {
         item {
             hasher.hash(this, "host=", host, HostProcessor)
         }

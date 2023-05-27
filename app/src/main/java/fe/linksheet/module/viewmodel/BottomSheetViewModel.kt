@@ -24,7 +24,9 @@ import fe.linksheet.extension.ioAsync
 import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
+import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getState
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository

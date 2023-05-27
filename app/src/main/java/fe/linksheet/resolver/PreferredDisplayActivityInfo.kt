@@ -1,11 +1,11 @@
 package fe.linksheet.resolver
 
-import fe.linksheet.extension.separated
-import fe.linksheet.extension.wrapped
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.linksheet.module.log.LogHasher
+import fe.stringbuilder.util.commaSeparated
+import fe.stringbuilder.util.curlyWrapped
 
 data class PreferredDisplayActivityInfo(
     val app: PreferredApp,
@@ -14,17 +14,17 @@ data class PreferredDisplayActivityInfo(
     override fun dump(
         stringBuilder: StringBuilder,
         hasher: LogHasher
-    ) = stringBuilder.separated(",") {
+    ) = stringBuilder.commaSeparated {
         item {
             append("preferredApp=")
-            wrapped("{", "}") {
+            curlyWrapped {
                 dumpObject(stringBuilder, hasher, app)
             }
         }
 
         item {
             append("displayActivityInfo=")
-            wrapped("{", "}") {
+            curlyWrapped {
                 dumpObject(stringBuilder, hasher, displayActivityInfo)
             }
         }

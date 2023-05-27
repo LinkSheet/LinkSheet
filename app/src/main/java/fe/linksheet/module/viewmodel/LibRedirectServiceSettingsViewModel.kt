@@ -9,7 +9,7 @@ import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.LibRedirectServiceState
 import fe.linksheet.extension.ioLaunch
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel

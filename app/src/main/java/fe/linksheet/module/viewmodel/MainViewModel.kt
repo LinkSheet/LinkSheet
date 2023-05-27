@@ -13,7 +13,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.extension.allBrowsersIntent
 import fe.linksheet.extension.resolveActivityCompat
 import fe.linksheet.extension.startActivityWithConfirmation
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class MainViewModel(

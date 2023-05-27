@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.linksheet.module.preference.BasePreference
-import fe.linksheet.module.preference.RepositoryState
+import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 @Composable

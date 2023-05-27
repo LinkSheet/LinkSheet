@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -38,22 +39,25 @@ fun Dialog(
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.runIf(dynamicHeight,
+            modifier = Modifier
+                .runIf(dynamicHeight,
                     runIf = {
-                        it.fillMaxHeight().clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                            onClick = onDismissRequest,
-                        )
+                        it
+                            .fillMaxHeight()
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = null,
+                                onClick = onDismissRequest,
+                            )
                     },
                     runElse = {
                         it.sizeIn(minWidth = DialogMinWidth, maxWidth = DialogMaxWidth)
                     }
-                ).then(Modifier.semantics {
+                )
+                .then(Modifier.semantics {
                     // androidx.compose.material3.AndroidAlertDialog.android.kt
-                    paneTitle = resources.getString(androidx.compose.material3.R.string.dialog)
-                }
-            ),
+                    paneTitle = resources.getString(androidx.compose.material3.R.string.m3c_dialog)
+                }),
             propagateMinConstraints = !dynamicHeight
         ) {
             Surface(shape = MaterialTheme.shapes.large) {

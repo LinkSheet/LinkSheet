@@ -1,8 +1,9 @@
 package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
+import fe.android.preference.helper.OptionTypeMapper
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.extension.mapToSet
-import fe.linksheet.extension.separated
 import fe.linksheet.extension.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
@@ -11,12 +12,9 @@ import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.preference.OptionTypeMapper
-import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.repository.base.WhitelistedBrowsersRepository
+import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first
-import timber.log.Timber
-import java.lang.StringBuilder
 
 class BrowserHandler(
     val preferenceRepository: PreferenceRepository,
@@ -46,7 +44,7 @@ class BrowserHandler(
         override fun dump(
             stringBuilder: StringBuilder,
             hasher: LogHasher
-        ) = stringBuilder.separated(",") {
+        ) = stringBuilder.commaSeparated {
             item { dumpObject("mode=", this, hasher, browserMode) }
             itemNotNull(resolveInfo) {
                 dumpObject("resolveInfo=", this, hasher, resolveInfo)

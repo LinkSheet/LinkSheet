@@ -3,7 +3,7 @@ package fe.linksheet.module.log
 import android.util.Log
 import fe.linksheet.extension.decodeHex
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.util.CryptoUtil
 import org.koin.dsl.module

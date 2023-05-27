@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.SavedStateHandle
-import fe.linksheet.module.preference.PreferenceRepository
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.util.RouteData
 import kotlin.reflect.KProperty1
 

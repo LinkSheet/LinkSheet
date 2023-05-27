@@ -13,7 +13,7 @@ class AppSelectionHistoryRepository(private val dao: AppSelectionHistoryDao) {
 
     suspend fun getLastUsedForHostGroupedByPackage(uri: Uri?) = uri?.host?.let { host ->
         dao.getLastUsedForHostGroupedByPackage(host).map { appSelections ->
-            appSelections?.associate { it.packageName to it.maxLastUsed }
+            appSelections.associate { it.packageName to it.maxLastUsed }
         }.first()
     }
 }

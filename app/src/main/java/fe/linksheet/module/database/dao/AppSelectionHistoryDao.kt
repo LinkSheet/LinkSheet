@@ -13,7 +13,7 @@ interface AppSelectionHistoryDao : BaseDao<AppSelectionHistory> {
     fun getByHost(host: String): Flow<List<AppSelectionHistory>>
 
     @Query("SELECT packageName, MAX(lastUsed) as maxLastUsed FROM app_selection_history WHERE host = :host GROUP BY packageName")
-    fun getLastUsedForHostGroupedByPackage(host: String): Flow<List<AppSelection>?>
+    fun getLastUsedForHostGroupedByPackage(host: String): Flow<List<AppSelection>>
 
     @Query("DELETE FROM app_selection_history WHERE host = :host")
     suspend fun deleteByHost(host: String)

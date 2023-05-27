@@ -72,45 +72,19 @@ fun DialogBox(
         }
         Spacer(modifier = Modifier.height(20.dp))
     } else {
-//        Column(Modifier.fillMaxSize()) {
-//            LazyColumn(Modifier.weight(1f)) {
-//                items(50) { i ->
-//                    Text("Row $i", Modifier.fillMaxWidth().padding(8.dp))
-//                }
-//            }
-//            Button(onClick = { println("hi") }) {
-//                Text("Hello")
-//            }
-//        }
-
-        Column(modifier = Modifier.fillMaxSize()) {
-            LazyColumn(modifier = Modifier.weight(1f)) {
+        Box {
+            LazyColumn(modifier = Modifier.padding(bottom = 40.dp)) {
                 content()
             }
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
                     .height(40.dp),
                 horizontalArrangement = Arrangement.End,
                 content = bottomRow
             )
         }
-
-
-//        Box {
-//            LazyColumn(modifier = Modifier.padding(bottom = 40.dp)) {
-//                content()
-//            }
-//
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .align(Alignment.BottomCenter)
-//                    .height(40.dp),
-//                horizontalArrangement = Arrangement.End,
-//                content = bottomRow
-//            )
-//        }
     }
 }

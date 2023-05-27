@@ -15,4 +15,5 @@ val viewModelModule = module {
     viewModelOf(::LibRedirectServiceSettingsViewModel)
     viewModelOf(::BottomSheetViewModel)
     viewModelOf(::ThemeSettingsViewModel)
+    viewModelOf(::FollowRedirectsSettingsViewModel)
 }

@@ -2,6 +2,7 @@ package fe.linksheet.module.log
 
 import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.forEachElementIndex
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
@@ -41,6 +42,7 @@ interface LogDumpable {
             }
 
             return when (obj) {
+                is ActivityInfo -> ActivityInfoDumpable.dump(stringBuilder, obj, hasher)
                 is Intent -> IntentDumpable.dump(stringBuilder, obj, hasher)
                 is ResolveInfo -> ResolveInfoDumpable.dump(stringBuilder, obj, hasher)
                 is ComponentName -> ComponentNameDumpable.dump(stringBuilder, obj, hasher)
@@ -58,6 +60,14 @@ interface LogDumpableWrapper<T> {
     ): StringBuilder
 }
 
+object ActivityInfoDumpable : LogDumpableWrapper<ActivityInfo> {
+    override fun dump(
+        stringBuilder: StringBuilder,
+        instance: ActivityInfo,
+        hasher: LogHasher
+    ) = hasher.hash(stringBuilder, instance, HashProcessor.ActivityInfoProcessor)
+}
+
 object IntentDumpable : LogDumpableWrapper<Intent> {
     override fun dump(
         stringBuilder: StringBuilder,
@@ -69,7 +79,7 @@ object IntentDumpable : LogDumpableWrapper<Intent> {
             append("cat=", instance.categories)
         }
         itemNotNull(instance.component) {
-            dumpObject("cmp=",this, hasher, instance.component!!)
+            dumpObject("cmp=", this, hasher, instance.component!!)
         }
         item {
             append("flags=", instance.flags)

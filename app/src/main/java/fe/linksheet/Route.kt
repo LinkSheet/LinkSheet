@@ -29,6 +29,8 @@ val libRedirectServiceSettingsRoute = route(
     route = LibRedirectServiceRoute
 )
 
+const val followRedirectsSettingsRoute = "follow_redirects_settings_route"
+
 const val bottomSheetSettingsRoute = "bottom_sheet_settings_route"
 const val preferredBrowserSettingsRoute = "preferred_browser_settings_route"
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"

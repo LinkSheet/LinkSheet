@@ -14,12 +14,6 @@ class LinksSettingsViewModel(
     var useFastForwardRules = preferenceRepository.getBooleanState(Preferences.useFastForwardRules)
     var enableLibRedirect = preferenceRepository.getBooleanState(Preferences.enableLibRedirect)
     var followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
-    var followRedirectsLocalCache =
-        preferenceRepository.getBooleanState(Preferences.followRedirectsLocalCache)
-    var followRedirectsExternalService =
-        preferenceRepository.getBooleanState(Preferences.followRedirectsExternalService)
-    var followOnlyKnownTrackers =
-        preferenceRepository.getBooleanState(Preferences.followOnlyKnownTrackers)
     var enableDownloader = preferenceRepository.getBooleanState(Preferences.enableDownloader)
     var downloaderCheckUrlMimeType =
         preferenceRepository.getBooleanState(Preferences.downloaderCheckUrlMimeType)

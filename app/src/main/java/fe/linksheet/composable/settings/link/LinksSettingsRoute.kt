@@ -21,8 +21,10 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -82,29 +84,11 @@ fun LinksSettingsRoute(
             }
 
             item(key = "libredirect") {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(end = 10.dp), verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .clip(RoundedCornerShape(6.dp))
-                            .clickable {
-                                navController.navigate(libRedirectSettingsRoute)
-                            }
-                            .padding(start = 10.dp)
-
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.enable_libredirect),
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 18.sp,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-
+                DividedSwitchRow(
+                    state = viewModel.enableLibRedirect,
+                    viewModel = viewModel,
+                    headline = stringResource(id = R.string.enable_libredirect),
+                    subtitleBuilder = {
                         LinkableTextView(
                             id = R.string.enable_libredirect_explainer,
                             style = LocalTextStyle.current.copy(
@@ -116,76 +100,23 @@ fun LinksSettingsRoute(
                                 navController.navigate(libRedirectSettingsRoute)
                             }
                         )
+                    },
+                    onClick = {
+                        navController.navigate(libRedirectSettingsRoute)
                     }
-
-                    Divider(
-                        modifier = Modifier
-                            .height(32.dp)
-                            .padding(horizontal = 8.dp)
-                            .width(1f.dp)
-                            .align(Alignment.CenterVertically),
-                        color = MaterialTheme.colorScheme.tertiary
-                    )
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        Switch(checked = viewModel.enableLibRedirect.value, onCheckedChange = {
-                            viewModel.updateState(viewModel.enableLibRedirect, it)
-                        })
-                    }
-                }
-            }
-
-            item(key = "follow_redirects") {
-                SwitchRow(
-                    state = viewModel.followRedirects,
-                    viewModel = viewModel,
-                    headlineId = R.string.follow_redirects,
-                    subtitleId = R.string.follow_redirects_explainer
                 )
             }
 
-            if (viewModel.followRedirects.value) {
-                item(key = "follow_redirects_local_cache") {
-                    SwitchRow(
-                        state = viewModel.followRedirectsLocalCache,
-                        viewModel = viewModel,
-                        headlineId = R.string.follow_redirects_local_cache,
-                        subtitleId = R.string.follow_redirects_local_cache_explainer
-                    )
-                }
-            }
-
-            if (viewModel.followRedirects.value) {
-                item(key = "follow_only_known_trackers") {
-                    SwitchRow(
-                        state = viewModel.followOnlyKnownTrackers,
-                        viewModel = viewModel,
-                        headlineId = R.string.follow_only_known_trackers,
-                        subtitleId = R.string.follow_only_known_trackers_explainer
-                    )
-                }
-            }
-
-            if (viewModel.followRedirects.value) {
-                item(key = "follow_redirects_external_service") {
-                    SwitchRow(
-                        state = viewModel.followRedirectsExternalService,
-                        viewModel = viewModel,
-                        headline = stringResource(id = R.string.follow_redirects_external_service),
-                        subtitle = null,
-                        subtitleBuilder = {
-                            LinkableTextView(
-                                id = R.string.follow_redirects_external_service_explainer,
-                                style = LocalTextStyle.current.copy(
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                    fontSize = 16.sp
-                                )
-                            )
-                        })
-                }
+            item(key = "follow_redirects") {
+                DividedSwitchRow(
+                    state = viewModel.followRedirects,
+                    viewModel = viewModel,
+                    headline = R.string.follow_redirects,
+                    subtitle = R.string.follow_redirects_explainer,
+                    onClick = {
+                        navController.navigate(followRedirectsSettingsRoute)
+                    }
+                )
             }
 
             item(key = "enable_downloader") {

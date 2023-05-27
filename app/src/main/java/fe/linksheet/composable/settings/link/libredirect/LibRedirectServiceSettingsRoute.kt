@@ -1,4 +1,4 @@
-package fe.linksheet.composable.settings.link
+package fe.linksheet.composable.settings.link.libredirect
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

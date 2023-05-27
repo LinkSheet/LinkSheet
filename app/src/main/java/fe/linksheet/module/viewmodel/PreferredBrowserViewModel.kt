@@ -1,17 +1,16 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import android.util.Log
-import fe.linksheet.module.resolver.BrowserHandler
-import fe.linksheet.module.resolver.BrowserResolver
-import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.extension.ioLaunch
 import fe.linksheet.module.preference.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.resolver.BrowserHandler
+import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,9 +53,9 @@ class PreferredBrowserViewModel(
 
     private fun getWhitelistedBrowsers(
         packages: Flow<HashSet<String>>
-    ) = browsers.combine(packages) { browsers, packages ->
+    ) = browsers.combine(packages) { browsers, pkgs ->
         browsers.map {
-            it to (it.packageName in packages)
+            it to (it.packageName in pkgs)
         }.sortByValueAndName().toMap()
     }
 
@@ -108,12 +107,8 @@ class PreferredBrowserViewModel(
         val state = browserModeState.first()
         val selected = selectedBrowserState.first()
 
-        Log.d("UpdateBrowserMode", "${state.value} ${selected.value}")
-
         updateState(state, BrowserHandler.BrowserMode.SelectedBrowser)
         updateState(selected, selectedBrowserPackage)
-
-        Log.d("UpdateBrowserMode", "${state.value} ${selected.value}")
     }
 }
 

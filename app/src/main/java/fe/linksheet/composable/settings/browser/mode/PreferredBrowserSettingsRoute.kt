@@ -2,14 +2,17 @@ package fe.linksheet.composable.settings.browser.mode
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.R
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog
@@ -112,8 +115,14 @@ fun PreferredBrowserSettingsRoute(
                         currentState = type,
                         onClick = { viewModel.type.value = it },
                         values = listOf(
-                            FilterChipValue(PreferredBrowserViewModel.BrowserType.Normal, R.string.normal),
-                            FilterChipValue(PreferredBrowserViewModel.BrowserType.InApp, R.string.in_app)
+                            FilterChipValue(
+                                PreferredBrowserViewModel.BrowserType.Normal,
+                                R.string.normal
+                            ),
+                            FilterChipValue(
+                                PreferredBrowserViewModel.BrowserType.InApp,
+                                R.string.in_app
+                            )
                         )
                     )
                 }
@@ -121,15 +130,17 @@ fun PreferredBrowserSettingsRoute(
         }
     ) {
         if (browsers == null || browserMode == null || selectedBrowser == null) {
-            item {
+            item(key = "loader") {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
         } else {
-            items(items = browsers!!, key = { it.flatComponentName }) { app ->
+            items(
+                items = browsers!!,
+                key = { it.flatComponentName },
+                contentType = { it.flatComponentName }
+            ) { app ->
                 val selected = browserMode!!.matches(BrowserHandler.BrowserMode.SelectedBrowser)
                         && selectedBrowser!!.matches(app.packageName)
-
-                Timber.tag("PreferredBrowserSettingsRoute").d("app=$app")
 
                 RadioButtonRow(
                     selected = selected,

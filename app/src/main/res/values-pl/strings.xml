@@ -117,7 +117,6 @@
     <string name="open_with">Otwórz w</string>
     <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
     <string name="preferred_browser">Preferowana przeglądarka</string>
-    <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki; jeśli obecna jest tylko jedna aplikacja natywna, zostanie ona automatycznie otwarta</string>
     <string name="enable_send_button_explainer">Wyświetla przycisk w dolnym panelu, który umożliwia udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Aplikacja jest domyślną przeglądarką!</string>
     <string name="bottom_sheet_explainer">Sortuj według użycia, włącz przycisk kopiowania, włącz przycisk udostępniania itp.</string>

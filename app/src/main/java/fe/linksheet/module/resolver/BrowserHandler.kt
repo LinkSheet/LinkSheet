@@ -60,10 +60,11 @@ class BrowserHandler(
         repository: WhitelistedBrowsersRepository<T, C, D>,
         resolveList: MutableList<ResolveInfo>,
     ): BrowserModeInfo {
+        // TODO: this should be refactored, passing a list of all applications which can handle the
+        //  intent (including browsers), then QUERYING ALL BROWSERS again just to remove them from
+        //  the list by comparing each element is just plain stupid, lol
         val browsers = browserResolver.queryPackageKeyedBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
-        Timber.tag("BrowserHandler")
-            .d("Browsers=$browsers, selectedBrowser=$selectedBrowser, resolveList=$resolveList")
 
         return when (browserMode) {
             is BrowserMode.AlwaysAsk -> BrowserModeInfo(browserMode, null)
@@ -74,7 +75,6 @@ class BrowserHandler(
 
             is BrowserMode.SelectedBrowser -> {
                 val browserResolveInfo = browsers[selectedBrowser]
-                Timber.tag("BrowserHandler").d("BrowserResolveInfo=$browserResolveInfo")
 
                 if (browserResolveInfo != null) {
                     removeBrowsers(browsers, resolveList, setOf(selectedBrowser!!))
@@ -98,8 +98,14 @@ class BrowserHandler(
         currentResolveList: MutableList<ResolveInfo>,
         exceptPackages: Set<String> = emptySet()
     ) {
-        currentResolveList.removeAll { resolve ->
-            resolve.activityInfo.packageName !in exceptPackages && browsers.containsKey(resolve.activityInfo.packageName)
+        if (exceptPackages.isNotEmpty() || currentResolveList.size > browsers.size) {
+            // if exceptPackages.size == 0 && currentResolveList > browsers means we are in BrowserMode.None,
+            // and have at least one native app which can handle the link (if currentResolveList is equal
+            // to browsers, no native app which means we should not remove the browsers since that would
+            // mean the user is presented with a bottom sheet which loads forever)
+            currentResolveList.removeAll { resolve ->
+                resolve.activityInfo.packageName !in exceptPackages && browsers.containsKey(resolve.activityInfo.packageName)
+            }
         }
     }
 

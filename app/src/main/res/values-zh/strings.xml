@@ -28,7 +28,6 @@
     <string name="preferred_browser_explainer">首选浏览器模式设置</string>
     <string name="always_ask">总是询问</string>
     <string name="none">无</string>
-    <string name="none_explainer">仅列出原生应用，移除所有浏览器；如果仅有一个原生应用存在将自动打开</string>
     <string name="always_ask_explainer">始终列出所有浏览器</string>
     <string name="no_app_to_handle_link_found">未找到处理链接的应用！</string>
     <string name="open_settings">打开设置</string>

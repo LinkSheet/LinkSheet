@@ -28,7 +28,6 @@
     <string name="preferred_browser_explainer">設定偏好瀏覽器模式</string>
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
-    <string name="none_explainer">僅列出本機應用程式，移除所有瀏覽器；如果只有一個本機應用程式存在，將自動開啟該應用程式</string>
     <string name="always_ask_explainer">始終列出所有瀏覽器</string>
     <string name="no_app_to_handle_link_found">找不到可處理連結的應用程式！</string>
     <string name="open_settings">開啟設定</string>

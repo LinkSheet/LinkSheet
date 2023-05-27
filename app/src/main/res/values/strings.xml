@@ -28,7 +28,7 @@
     <string name="preferred_browser_explainer">Set preferred browser mode</string>
     <string name="always_ask">Always ask</string>
     <string name="none">None</string>
-    <string name="none_explainer">Only list native apps, remove all browsers; If only a single native app is present, it will automatically be opened</string>
+    <string name="none_explainer">Only list native apps, remove all browsers. If only a single native app is present, it will automatically be opened. If no native app is present, all browsers are listed.</string>
     <string name="always_ask_explainer">Always list all browsers</string>
     <string name="no_app_to_handle_link_found">No app to handle link found!</string>
     <string name="open_settings">Open settings</string>

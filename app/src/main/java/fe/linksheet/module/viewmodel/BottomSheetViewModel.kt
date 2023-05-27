@@ -9,9 +9,9 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import fe.linksheet.module.database.entity.PreferredApp
@@ -21,7 +21,6 @@ import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.extension.ioAsync
-import fe.linksheet.extension.ioLaunch
 import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.startActivityWithConfirmation
 import fe.linksheet.module.downloader.Downloader
@@ -45,22 +44,24 @@ class BottomSheetViewModel(
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
-    val enableCopyButton = preferenceRepository.getBoolean(Preferences.enableCopyButton)
-    val hideAfterCopying = preferenceRepository.getBoolean(Preferences.hideAfterCopying)
-    val singleTap = preferenceRepository.getBoolean(Preferences.singleTap)
-    val enableSendButton = preferenceRepository.getBoolean(Preferences.enableSendButton)
-    val enableIgnoreLibRedirectButton =
-        preferenceRepository.getBoolean(Preferences.enableIgnoreLibRedirectButton)
+    val enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
+    val hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
+    val singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
+    val enableSendButton = preferenceRepository.getBooleanState(Preferences.enableSendButton)
+    val enableIgnoreLibRedirectButton = preferenceRepository.getBooleanState(
+        Preferences.enableIgnoreLibRedirectButton
+    )
 
-
-    val disableToasts = preferenceRepository.getBoolean(Preferences.disableToasts)
-    val gridLayout = preferenceRepository.getBoolean(Preferences.gridLayout)
-    private val followRedirects = preferenceRepository.getBoolean(Preferences.followRedirects)
-    private var enableDownloader = preferenceRepository.getBoolean(Preferences.enableDownloader)
-    val theme = preferenceRepository.get(Preferences.theme)
-    val useTextShareCopyButtons =
-        preferenceRepository.getBoolean(Preferences.useTextShareCopyButtons)
-    val previewUrl = preferenceRepository.getBoolean(Preferences.previewUrl)
+    val disableToasts = preferenceRepository.getBooleanState(Preferences.disableToasts)
+    val gridLayout = preferenceRepository.getBooleanState(Preferences.gridLayout)
+    private val followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
+    private var enableDownloader =
+        preferenceRepository.getBooleanState(Preferences.enableDownloader)
+    val theme = preferenceRepository.getState(Preferences.theme)
+    val useTextShareCopyButtons = preferenceRepository.getBooleanState(
+        Preferences.useTextShareCopyButtons
+    )
+    val previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
@@ -71,7 +72,7 @@ class BottomSheetViewModel(
         }
     }
 
-    fun showLoadingBottomSheet() = followRedirects || enableDownloader
+    fun showLoadingBottomSheet() = followRedirects.value || enableDownloader.value
 
     fun startMainActivity(context: Activity): Boolean {
         return context.startActivityWithConfirmation(Intent(context, MainActivity::class.java))

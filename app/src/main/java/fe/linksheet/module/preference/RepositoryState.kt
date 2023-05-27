@@ -7,9 +7,9 @@ import kotlin.reflect.KProperty
 class RepositoryState<T, NT, P : BasePreference<T, NT>>(
     private val preference: P,
     private val writer: (P, NT) -> Unit,
-    initialValue: NT,
+    reader: (P) -> NT,
 ) {
-    private val mutableState = mutableStateOf(initialValue)
+    private val mutableState = mutableStateOf(reader(preference))
     val value by mutableState
 
     fun matches(toMatch: NT) = value == toMatch

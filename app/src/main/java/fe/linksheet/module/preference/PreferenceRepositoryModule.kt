@@ -156,7 +156,7 @@ class PreferenceRepository(context: Context) {
         preference: P,
         writer: (P, NT) -> Unit,
         reader: (P) -> NT,
-    ) = RepositoryState(preference, writer, reader(preference))
+    ) = RepositoryState(preference, writer, reader)
 }
 
 typealias KeyReader<T> = (String, T) -> T

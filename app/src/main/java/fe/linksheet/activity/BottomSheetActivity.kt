@@ -92,13 +92,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.ceil
 
 class BottomSheetActivity : ComponentActivity() {
-    private lateinit var bottomSheetViewModel: BottomSheetViewModel
+    private val bottomSheetViewModel by viewModel<BottomSheetViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModelStore.clear()
-        bottomSheetViewModel = viewModel<BottomSheetViewModel>().value
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->
@@ -142,7 +139,7 @@ class BottomSheetActivity : ComponentActivity() {
             val completed = bottomSheetViewModel.resolveAsync(intent, referrer).await()
 
             if (completed.hasAutoLaunchApp) {
-                if (!bottomSheetViewModel.disableToasts) {
+                if (!bottomSheetViewModel.disableToasts.value) {
                     completed.followRedirect?.let { makeResolveToast(it, true) }
 
                     showToast(
@@ -205,7 +202,7 @@ class BottomSheetActivity : ComponentActivity() {
     private fun BottomSheet(
         bottomSheetViewModel: BottomSheetViewModel,
     ) {
-        val isBlackTheme = bottomSheetViewModel.theme == Theme.AmoledBlack
+        val isBlackTheme = bottomSheetViewModel.theme.value == Theme.AmoledBlack
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val result = bottomSheetViewModel.resolveResult
@@ -283,7 +280,7 @@ class BottomSheetActivity : ComponentActivity() {
             val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
             else LocalConfiguration.current.screenHeightDp) / 3f
 
-            val itemHeight = if (bottomSheetViewModel.gridLayout) {
+            val itemHeight = if (bottomSheetViewModel.gridLayout.value) {
                 val gridItemHeight = if (showPackage) gridItemHeightPackage.value
                 else gridItemHeight.value
 
@@ -299,7 +296,7 @@ class BottomSheetActivity : ComponentActivity() {
                     hideDrawer = hideDrawer,
                     baseHeight = baseHeight,
                     showPackage = showPackage,
-                    previewUrl = bottomSheetViewModel.previewUrl
+                    previewUrl = bottomSheetViewModel.previewUrl.value
                 )
             } else {
                 OpenWithPreferred(
@@ -307,7 +304,7 @@ class BottomSheetActivity : ComponentActivity() {
                     hideDrawer = hideDrawer,
                     baseHeight = baseHeight,
                     showPackage = showPackage,
-                    previewUrl = bottomSheetViewModel.previewUrl
+                    previewUrl = bottomSheetViewModel.previewUrl.value
                 )
             }
         } else {
@@ -495,7 +492,7 @@ class BottomSheetActivity : ComponentActivity() {
                 .clip(RoundedCornerShape(6.dp))
                 .combinedClickable(
                     onClick = {
-                        if (bottomSheetViewModel.singleTap) {
+                        if (bottomSheetViewModel.singleTap.value) {
                             launchApp(info, result.uri)
                         } else {
                             if (selectedItem == index) launchApp(
@@ -506,14 +503,14 @@ class BottomSheetActivity : ComponentActivity() {
                         }
                     },
                     onDoubleClick = {
-                        if (!bottomSheetViewModel.singleTap) {
+                        if (!bottomSheetViewModel.singleTap.value) {
                             launchApp(info, result.uri)
                         } else {
                             this@BottomSheetActivity.startPackageInfoActivity(info)
                         }
                     },
                     onLongClick = {
-                        if (bottomSheetViewModel.singleTap) {
+                        if (bottomSheetViewModel.singleTap.value) {
                             onSelectedItemChange(index)
                         } else {
                             this@BottomSheetActivity.startPackageInfoActivity(info)
@@ -524,7 +521,7 @@ class BottomSheetActivity : ComponentActivity() {
                 .padding(appListItemPadding)
         }
 
-        if (bottomSheetViewModel.gridLayout) {
+        if (bottomSheetViewModel.gridLayout.value) {
             LazyVerticalGrid(columns = GridCells.Adaptive(gridSize),
                 modifier = Modifier
                     .padding(horizontal = 3.dp)
@@ -617,9 +614,9 @@ class BottomSheetActivity : ComponentActivity() {
         val result = bottomSheetViewModel.resolveResult!!
 
         val utilButtonWidthSum = utilButtonWidth * listOf(
-            bottomSheetViewModel.enableCopyButton,
-            bottomSheetViewModel.enableSendButton,
-            bottomSheetViewModel.enableIgnoreLibRedirectButton,
+            bottomSheetViewModel.enableCopyButton.value,
+            bottomSheetViewModel.enableSendButton.value,
+            bottomSheetViewModel.enableIgnoreLibRedirectButton.value,
             result.downloadable.isDownloadable()
         ).count { it }
 
@@ -648,9 +645,9 @@ class BottomSheetActivity : ComponentActivity() {
                     .padding(horizontal = buttonPadding)
             ) {
 
-                if (bottomSheetViewModel.enableCopyButton) {
+                if (bottomSheetViewModel.enableCopyButton.value) {
                     OutlinedOrTextButton(
-                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
                         contentPadding = padding,
                         onClick = {
                             bottomSheetViewModel.clipboardManager.setText(
@@ -658,11 +655,11 @@ class BottomSheetActivity : ComponentActivity() {
                                 result.uri.toString()
                             )
 
-                            if (!bottomSheetViewModel.disableToasts) {
+                            if (!bottomSheetViewModel.disableToasts.value) {
                                 showToast(R.string.url_copied)
                             }
 
-                            if (bottomSheetViewModel.hideAfterCopying) {
+                            if (bottomSheetViewModel.hideAfterCopying.value) {
                                 hideDrawer()
                             }
                         },
@@ -670,10 +667,10 @@ class BottomSheetActivity : ComponentActivity() {
                     )
                 }
 
-                if (bottomSheetViewModel.enableSendButton) {
+                if (bottomSheetViewModel.enableSendButton.value) {
                     Spacer(modifier = Modifier.width(2.dp))
                     OutlinedOrTextButton(
-                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
                         contentPadding = padding,
                         onClick = {
                             startActivity(Intent().buildSendTo(result.uri))
@@ -686,7 +683,7 @@ class BottomSheetActivity : ComponentActivity() {
                 if (result.downloadable.isDownloadable()) {
                     Spacer(modifier = Modifier.width(2.dp))
                     OutlinedOrTextButton(
-                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
                         contentPadding = padding,
                         onClick = {
                             bottomSheetViewModel.startDownload(
@@ -699,10 +696,10 @@ class BottomSheetActivity : ComponentActivity() {
                 }
 
                 val libRedirectResult = bottomSheetViewModel.resolveResult!!.libRedirectResult
-                if (bottomSheetViewModel.enableIgnoreLibRedirectButton && libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
+                if (bottomSheetViewModel.enableIgnoreLibRedirectButton.value && libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
                     Spacer(modifier = Modifier.width(2.dp))
                     OutlinedOrTextButton(
-                        textButton = bottomSheetViewModel.useTextShareCopyButtons,
+                        textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
                         contentPadding = padding,
                         onClick = {
                             finish()

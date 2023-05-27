@@ -1,33 +1,27 @@
 package fe.linksheet.composable.settings.link
 
-import android.os.Build
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.settings.link.downloader.downloaderPermissionState
+import fe.linksheet.composable.settings.link.downloader.requestDownloadPermission
 import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -38,9 +32,7 @@ fun LinksSettingsRoute(
     navController: NavController,
     viewModel: LinksSettingsViewModel = koinViewModel()
 ) {
-    val writeExternalStoragePermissionState = rememberPermissionState(
-        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
+    val writeExternalStoragePermissionState = downloaderPermissionState()
 
     SettingsScaffold(R.string.links, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -120,27 +112,23 @@ fun LinksSettingsRoute(
             }
 
             item(key = "enable_downloader") {
-                SwitchRow(
-                    checked = viewModel.enableDownloader.value,
+                DividedSwitchRow(
+                    state = viewModel.enableDownloader,
+                    viewModel = viewModel,
+                    headline = R.string.enable_downloader,
+                    subtitle = R.string.enable_downloader_explainer,
                     onChange = {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !writeExternalStoragePermissionState.status.isGranted) {
-                            writeExternalStoragePermissionState.launchPermissionRequest()
-                        } else viewModel.updateState(viewModel.enableDownloader, it)
+                        requestDownloadPermission(
+                            writeExternalStoragePermissionState,
+                            viewModel,
+                            viewModel.enableDownloader,
+                            it
+                        )
                     },
-                    headlineId = R.string.enable_downloader,
-                    subtitleId = R.string.enable_downloader_explainer
+                    onClick = {
+                        navController.navigate(downloaderSettingsRoute)
+                    }
                 )
-            }
-
-            if (viewModel.enableDownloader.value) {
-                item(key = "downloader_url_mime_type") {
-                    SwitchRow(
-                        state = viewModel.downloaderCheckUrlMimeType,
-                        viewModel = viewModel,
-                        headlineId = R.string.downloader_url_mime_type,
-                        subtitleId = R.string.downloader_url_mime_type_explainer
-                    )
-                }
             }
         }
     }

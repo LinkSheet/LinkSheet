@@ -29,9 +29,11 @@ import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRou
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
+import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.libRedirectServiceSettingsRoute
@@ -113,6 +115,10 @@ class MainActivity : ComponentActivity() {
 
                     composable(route = libRedirectServiceSettingsRoute) { _, _ ->
                         LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    composable(route = downloaderSettingsRoute) {
+                        DownloaderSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     composable(route = themeSettingsRoute) {

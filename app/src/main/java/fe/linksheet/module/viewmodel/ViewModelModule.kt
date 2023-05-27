@@ -16,4 +16,5 @@ val viewModelModule = module {
     viewModelOf(::BottomSheetViewModel)
     viewModelOf(::ThemeSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
+    viewModelOf(::DownloaderSettingsViewModel)
 }

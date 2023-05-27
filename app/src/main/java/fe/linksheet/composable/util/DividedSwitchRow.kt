@@ -33,6 +33,7 @@ fun DividedSwitchRow(
     viewModel: BaseViewModel,
     @StringRes headline: Int,
     @StringRes subtitle: Int,
+    onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
     onClick: () -> Unit,
 ) {
     DividedSwitchRow(
@@ -40,6 +41,7 @@ fun DividedSwitchRow(
         viewModel = viewModel,
         headline = stringResource(id = headline),
         subtitle = stringResource(id = subtitle),
+        onChange = onChange,
         onClick = onClick
     )
 }
@@ -53,6 +55,7 @@ fun DividedSwitchRow(
     subtitleBuilder: @Composable (() -> Unit)? = if (subtitle != null) {
         { SubtitleText(subtitle = subtitle) }
     } else null,
+    onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
     onClick: () -> Unit,
 ) {
     Row(
@@ -95,9 +98,7 @@ fun DividedSwitchRow(
         ) {
             Switch(
                 checked = state.value,
-                onCheckedChange = {
-                    viewModel.updateState(state, it)
-                }
+                onCheckedChange = onChange
             )
         }
     }

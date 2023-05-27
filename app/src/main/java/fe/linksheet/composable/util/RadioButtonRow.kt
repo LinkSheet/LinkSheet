@@ -15,6 +15,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 @Composable
 fun <T, M> RadioButtonRow(
+    modifier: Modifier = Modifier,
     value: T,
     state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
     viewModel: BaseViewModel,
@@ -22,6 +23,7 @@ fun <T, M> RadioButtonRow(
     content: @Composable () -> Unit
 ) {
     RadioButtonRow(
+        modifier = modifier,
         onClick = {
             viewModel.updateState(state, value)
             clickHook?.invoke()
@@ -34,12 +36,14 @@ fun <T, M> RadioButtonRow(
 
 @Composable
 fun RadioButtonRow(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)?,
     selected: Boolean,
     content: @Composable () -> Unit
 ) {
     ClickableRow(
+        modifier = modifier,
         paddingHorizontal = 0.dp,
         paddingVertical = 5.dp,
         onClick = onClick,

@@ -26,7 +26,7 @@ interface LogDumpable {
             if (obj == null) return null
 
             if (obj is Boolean) return stringBuilder.append(obj)
-            if (obj is LogDumpable) obj.dump(stringBuilder, hasher)
+            if (obj is LogDumpable) return obj.dump(stringBuilder, hasher)
 
             if (obj is List<*>) {
                 return stringBuilder.wrapped("[", "]") {

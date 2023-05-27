@@ -42,6 +42,7 @@ import fe.linksheet.module.preference.RepositoryState
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.viewmodel.InAppBrowserDisableInSelected
 import fe.linksheet.extension.items
+import fe.linksheet.resolver.DisplayActivityInfo
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -55,7 +56,8 @@ fun <T, M> BrowserCommonScaffold(
     rowKey: (T) -> String,
     rows: List<BrowserCommonRadioButtonRowData>,
     header: @Composable (ColumnScope.() -> Unit)? = null,
-    content: (LazyListScope.() -> Unit)? = null,
+    browsers: List<DisplayActivityInfo>? = null,
+    content: (LazyListScope.(List<DisplayActivityInfo>?) -> Unit)? = null,
 ) {
     SettingsScaffold(headline = headline, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -92,7 +94,7 @@ fun <T, M> BrowserCommonScaffold(
                 }
             }
 
-            content?.invoke(this)
+            content?.invoke(this, browsers)
         }
     }
 }

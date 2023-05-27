@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
+import fe.android.preference.helper.PreferenceRepository
 import fe.fastforwardkt.FastForwardLoader
 import fe.linksheet.extension.componentName
 import fe.linksheet.extension.getUri
@@ -17,7 +18,6 @@ import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.log.toDumpable
-import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -25,7 +25,6 @@ import fe.linksheet.module.repository.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
-import timber.log.Timber
 
 class IntentResolver(
     val context: Context,

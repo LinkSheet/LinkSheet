@@ -44,7 +44,10 @@ fun SettingsRoute(
                     headline = R.string.browser,
                     subtitle = R.string.browser_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.OpenInBrowser, description = R.string.browser)
+                        ColoredIcon(
+                            icon = Icons.Default.OpenInBrowser,
+                            description = R.string.browser
+                        )
                     }
                 )
             }
@@ -56,7 +59,10 @@ fun SettingsRoute(
                     headline = R.string.bottom_sheet,
                     subtitle = R.string.bottom_sheet_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.ArrowUpward, description = R.string.bottom_sheet)
+                        ColoredIcon(
+                            icon = Icons.Default.ArrowUpward,
+                            description = R.string.bottom_sheet
+                        )
                     }
                 )
             }
@@ -80,7 +86,22 @@ fun SettingsRoute(
                     headline = R.string.theme,
                     subtitle = R.string.theme_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.DisplaySettings, description = R.string.theme)
+                        ColoredIcon(
+                            icon = Icons.Default.DisplaySettings,
+                            description = R.string.theme
+                        )
+                    }
+                )
+            }
+
+            item(key = "debug") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = debugSettingsRoute,
+                    headline = R.string.debug,
+                    subtitle = R.string.debug_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Adb, description = R.string.debug)
                     }
                 )
             }

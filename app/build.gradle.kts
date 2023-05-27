@@ -43,6 +43,8 @@ android {
     }
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -66,6 +68,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.lifecycle:lifecycle-process:2.6.1")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+
     implementation("io.insert-koin:koin-android:3.4.0")
     implementation("io.insert-koin:koin-androidx-compose:3.4.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")

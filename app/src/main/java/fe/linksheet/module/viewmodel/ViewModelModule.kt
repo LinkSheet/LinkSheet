@@ -17,4 +17,5 @@ val viewModelModule = module {
     viewModelOf(::ThemeSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
     viewModelOf(::DownloaderSettingsViewModel)
+    viewModelOf(::LogSettingsViewModel)
 }

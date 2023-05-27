@@ -26,6 +26,8 @@ import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.settings.browser.BrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.settings.debug.DebugSettingsRoute
+import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
@@ -33,12 +35,14 @@ import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.debugSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.linksSettingsRoute
+import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.preferredAppsSettingsRoute
@@ -123,6 +127,17 @@ class MainActivity : ComponentActivity() {
 
                     composable(route = themeSettingsRoute) {
                         ThemeSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    composable(route = debugSettingsRoute) {
+                        DebugSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    composable(route = logViewerSettingsRoute) {
+                        LogSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     composable(route = aboutSettingsRoute) {

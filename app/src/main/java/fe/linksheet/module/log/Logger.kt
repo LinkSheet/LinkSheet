@@ -1,12 +1,15 @@
 package fe.linksheet.module.log
 
+import android.app.Application
 import android.util.Log
+import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.decodeHex
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
-import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.util.CryptoUtil
 import org.koin.dsl.module
+import java.time.LocalDateTime
 import javax.crypto.Mac
 import kotlin.reflect.KClass
 
@@ -17,21 +20,29 @@ val loggerFactoryModule = module {
         val preferenceRepository = get<PreferenceRepository>()
         val logKey = preferenceRepository.getOrWriteInit(Preferences.logKey).decodeHex()
 
-        LoggerFactory(logKey)
+        val app = get<Application>()
+        Log.d("Lel", "$app")
+
+
+        LoggerFactory(app as LinkSheetApp, logKey)
     }
 }
 
-class LoggerFactory(private val logKey: ByteArray) {
+class LoggerFactory(private val context: LinkSheetApp, private val logKey: ByteArray) {
     private val mac by lazy {
         CryptoUtil.makeHmac(loggerHmac.algorithm, logKey)
     }
 
-    fun createLogger(prefix: KClass<*>) = Logger(prefix, mac)
-    fun createLogger(prefix: String) = Logger(prefix, mac)
+    fun createLogger(prefix: KClass<*>) = Logger(context, prefix, mac)
+    fun createLogger(prefix: String) = Logger(context, prefix, mac)
 }
 
-class Logger(private val prefix: String, mac: Mac) {
-    constructor(clazz: KClass<*>, mac: Mac) : this(clazz.simpleName!!, mac)
+class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String, mac: Mac) {
+    constructor(
+        context: LinkSheetApp,
+        clazz: KClass<*>,
+        mac: Mac
+    ) : this(context, clazz.simpleName!!, mac)
 
     private val logHasher = LogHasher.LogKeyHasher(mac)
 
@@ -69,6 +80,14 @@ class Logger(private val prefix: String, mac: Mac) {
 
     private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
         val (normal, redacted) = dump(msg, dumpable)
+        val now = LocalDateTime.now()
+        val logMsg = "$now $prefix: $normal"
+
+        kotlin.runCatching {
+            linkSheetApp.write(logMsg)
+        }.onFailure {
+            it.printStackTrace()
+        }
 
         type.print(prefix, normal)
     }

@@ -151,4 +151,9 @@
     <string name="app_crashed">Wygląda na to, że LinkSheet uległ awarii, sprawdź poniższy błąd</string>
     <string name="copy_exception">Kopiuj do schowka</string>
     <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki. Jeśli obecna jest tylko jedna aplikacja natywna, zostanie ona automatycznie otwarta. Jeśli nie ma aplikacji natywnej, wszystkie przeglądarki są wyświetlane na liście.</string>
+    <string name="debug_explainer">Wyświetl logi aplikacji</string>
+    <string name="logs">Logi</string>
+    <string name="logs_explainer">Wyświetl logi aplikacji</string>
+    <string name="app_log">Logi aplikacji</string>
+    <string name="debug">Debugowanie</string>
 </resources>

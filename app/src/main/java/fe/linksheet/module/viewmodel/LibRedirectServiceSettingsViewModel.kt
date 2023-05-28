@@ -13,9 +13,11 @@ import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
+import fe.linksheet.util.cleanHttpsScheme
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 
 class LibRedirectServiceSettingsViewModel(
     val context: Application,
@@ -24,12 +26,15 @@ class LibRedirectServiceSettingsViewModel(
     private val stateRepository: LibRedirectStateRepository,
     preferenceRepository: PreferenceRepository
 ) : SavedStateViewModel<LibRedirectServiceRoute>(savedStateHandle, preferenceRepository) {
-
     val serviceKey = MutableStateFlow(getSavedState(LibRedirectServiceRoute::serviceKey)!!)
 
     val service = flowOfLazy {
         LibRedirectLoader.loadBuiltInServices()
     }.combine(serviceKey) { services, key -> services.find { it.key == key } }
+
+    val frontends = service.map { service ->
+        service?.frontends?.filter { it.defaultInstance() != null } ?: emptyList()
+    }
 
     val builtinInstances = flowOfLazy {
         LibRedirectLoader.loadBuiltInInstances()
@@ -53,7 +58,7 @@ class LibRedirectServiceSettingsViewModel(
         SelectedState(frontend, instance)
     }
 
-    private fun LibRedirectFrontend.defaultInstance() = LibRedirect
+    fun LibRedirectFrontend.defaultInstance() = LibRedirect
         .getDefaultInstanceForFrontend(key)?.firstOrNull()
 
     data class SelectedState(val frontend: LibRedirectFrontend?, val instance: String?)
@@ -72,9 +77,10 @@ class LibRedirectServiceSettingsViewModel(
         selectedInstance.value = frontend.defaultInstance()
     }
 
-
     val instances = builtinInstances.combine(selectedFrontend) { instances, selected ->
-        instances.find { it.frontendKey == selected?.key }?.hosts
+        instances.find { it.frontendKey == selected?.key }?.hosts?.map { host ->
+            cleanHttpsScheme(host)
+        }?.sorted()
     }
 
     fun updateLibRedirectState(serviceKey: String, enabled: Boolean) = ioLaunch {

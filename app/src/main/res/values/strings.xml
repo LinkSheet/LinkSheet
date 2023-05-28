@@ -144,7 +144,7 @@
     <string name="normal">Normal</string>
     <string name="in_app">In-App</string>
     <string name="use_unified_preferred_browser">Use unified settings</string>
-    <string name="libredirect_via">%s (via %s)</string>
+    <string name="libredirect_via">Via %s</string>
     <string name="enable_ignore_libredirect_button">Enable \"Ignore LibRedirect\" button</string>
     <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the url has been redirected via LibRedirect, which opens the original url instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
@@ -155,4 +155,8 @@
     <string name="logs">Logs</string>
     <string name="logs_explainer">View app logs</string>
     <string name="app_log">App log</string>
+    <string name="options">Options</string>
+    <string name="services">Services</string>
+    <string name="no_libredirect_services">No LibRedirect services found!</string>
+    <string name="no_such_service_found">No such service found!</string>
 </resources>

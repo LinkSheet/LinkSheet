@@ -12,6 +12,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import fe.linksheet.extension.enabled
+import fe.linksheet.extension.runIf
 
 @Composable
 fun ClickableRow(
@@ -56,17 +58,17 @@ fun ClickableRow(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(6.dp))
-            .combinedClickable(
-                onClick = onClick,
-                onLongClick = onLongClick,
-                onDoubleClick = onDoubleClick
-            )
-            .padding(horizontal = paddingHorizontal, vertical = paddingVertical).let {
-                if (!enabled) it.alpha(0.3f) else it
-            },
+            .runIf(enabled) {
+                it.combinedClickable(
+                    onClick = onClick,
+                    onLongClick = onLongClick,
+                    onDoubleClick = onDoubleClick
+                )
+            }
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
+            .enabled(enabled),
         horizontalArrangement = horizontalArrangement,
-        verticalAlignment = verticalAlignment
-    ) {
-        content(this)
-    }
+        verticalAlignment = verticalAlignment,
+        content = content
+    )
 }

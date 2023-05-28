@@ -3,13 +3,32 @@ package fe.linksheet.composable.util
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import fe.linksheet.ui.HkGroteskFontFamily
+
+
+@Composable
+fun SettingSpacerText(@StringRes contentTitleId: Int) {
+    SettingSpacerText(contentTitle = stringResource(id = contentTitleId))
+}
+
+@Composable
+fun SettingSpacerText(contentTitle: String) {
+    Text(
+        text = contentTitle,
+        fontFamily = HkGroteskFontFamily,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.primary
+    )
+}
 
 @Composable
 fun HeadlineText(headline: String) {
@@ -28,9 +47,13 @@ fun HeadlineText(@StringRes headline: Int) {
 }
 
 @Composable
-fun SubtitleText(subtitle: String) {
+fun SubtitleText(
+    fontStyle: FontStyle? = null,
+    subtitle: String
+) {
     Text(
         text = subtitle,
+        fontStyle = fontStyle,
         fontSize = 16.sp,
         color = MaterialTheme.colorScheme.onSurface
     )
@@ -42,13 +65,19 @@ fun SubtitleText(@StringRes subtitle: Int) {
 }
 
 @Composable
-fun Texts(headline: String, subtitle: String? = null) {
+fun Texts(
+    headline: String,
+    subtitle: String? = null,
+    content: @Composable (ColumnScope.() -> Unit)? = null,
+) {
     Column(verticalArrangement = Arrangement.Center) {
         HeadlineText(headline = headline)
 
         if (subtitle != null) {
-            Text(text = subtitle, fontSize = 16.sp)
+            SubtitleText(subtitle = subtitle)
         }
+
+        content?.invoke(this)
     }
 }
 

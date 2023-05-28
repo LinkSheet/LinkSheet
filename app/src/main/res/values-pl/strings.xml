@@ -144,7 +144,6 @@
     <string name="normal">Zwykła</string>
     <string name="in_app">W aplikacji</string>
     <string name="use_unified_preferred_browser">Użyj ujednoliconych ustawień</string>
-    <string name="libredirect_via">%s (przez %s)</string>
     <string name="enable_ignore_libredirect_button">Włącz przycisk „Ignoruj LibRedirect”</string>
     <string name="enable_ignore_libredirect_button_explainer">Jeśli link został przekierowany przez LibRedirect, w dolnym panelu zostanie wyświetlony przycisk otwierający oryginalny adres</string>
     <string name="ignore_libredirect">Ignoruj LibRedirect</string>

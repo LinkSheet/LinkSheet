@@ -143,7 +143,6 @@
     <string name="normal">正常</string>
     <string name="in_app">應用程式內</string>
     <string name="use_unified_preferred_browser">使用統一設定</string>
-    <string name="libredirect_via">%s（透過 %s）</string>
     <string name="enable_ignore_libredirect_button">啟用「忽略 LibRedirect」按鈕</string>
     <string name="enable_ignore_libredirect_button_explainer">如果連結經由 LibRedirect 重新導向，將在底部表單中顯示一個按鈕，可打開原始連結</string>
     <string name="ignore_libredirect">忽略 LibRedirect</string>

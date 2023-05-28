@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.alpha
 
 typealias ChangeModifier = (Modifier) -> Modifier
 
@@ -22,3 +23,5 @@ fun Modifier.clickable(): Modifier = composed {
 
     clickable(interactionSource = interactionSource, indication = null) {}
 }
+
+fun Modifier.enabled(enabled: Boolean) = runIf(!enabled) { it.alpha(0.3f) }

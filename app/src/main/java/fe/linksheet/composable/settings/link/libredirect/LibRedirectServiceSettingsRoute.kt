@@ -15,23 +15,33 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.HeadlineText
+import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.RadioButtonRow
+import fe.linksheet.composable.util.SettingEnabledCardColumn
+import fe.linksheet.composable.util.SettingSpacerText
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.extension.enabled
 import fe.linksheet.extension.ioState
+import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -44,6 +54,8 @@ fun LibRedirectServiceSettingsRoute(
     viewModel: LibRedirectServiceSettingsViewModel = koinViewModel()
 ) {
     val service by viewModel.service.ioState()
+    val frontends by viewModel.frontends.ioState()
+
     val selectedFrontend by viewModel.selectedFrontend.ioState()
     val selectedInstance by viewModel.selectedInstance.ioState()
     val enabled by viewModel.enabled.ioState()
@@ -52,9 +64,11 @@ fun LibRedirectServiceSettingsRoute(
     var expanded by remember { mutableStateOf(false) }
 
     val itemOnClick: (String) -> Unit = { instance ->
-        val frontendKey = selectedFrontend?.key
-        if (frontendKey != null && service != null) {
-            viewModel.saveLibRedirectDefault(service!!.key, frontendKey, instance)
+        if (enabled!!) {
+            val frontendKey = selectedFrontend?.key
+            if (frontendKey != null && service != null) {
+                viewModel.saveLibRedirectDefault(service!!.key, frontendKey, instance)
+            }
         }
     }
 
@@ -70,52 +84,50 @@ fun LibRedirectServiceSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            stickyHeader(key = "dropdown") {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surface)
-                ) {
-                    if (selectedFrontend != null && selectedInstance != null && enabled != null) {
-                        SwitchRow(
-                            checked = enabled!!,
-                            onChange = { viewModel.updateLibRedirectState(service!!.key, it) },
-                            headline = stringResource(id = R.string.enabled),
-                            subtitle = null
-                        )
+            if (enabled != null) {
+                stickyHeader(key = "dropdown") {
 
-                        Spacer(modifier = Modifier.height(5.dp))
+                    SettingEnabledCardColumn(
+                        checked = enabled!!,
+                        onChange = { viewModel.updateLibRedirectState(service!!.key, it) },
+                        headline = stringResource(id = R.string.enabled),
+                        subtitle = null,
+                        contentTitle = stringResource(id = R.string.frontend)
+                    )
 
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    if (selectedFrontend != null && selectedInstance != null && frontends != null) {
                         Column(
                             modifier = Modifier
                                 .padding(horizontal = 10.dp)
                                 .fillMaxWidth()
+                                .background(MaterialTheme.colorScheme.surface)
                         ) {
-                            HeadlineText(headline = R.string.frontend)
-
-                            Spacer(modifier = Modifier.height(5.dp))
-
                             ExposedDropdownMenuBox(
                                 expanded = expanded,
-                                onExpandedChange = { expanded = !expanded }
+                                onExpandedChange = {
+                                    if (enabled!!) expanded = !expanded
+                                }
                             ) {
                                 TextField(
+                                    modifier = Modifier
+                                        .menuAnchor()
+                                        .fillMaxWidth()
+                                        .enabled(enabled!!),
                                     value = selectedFrontend!!.name,
                                     onValueChange = {},
                                     readOnly = true,
                                     trailingIcon = {
                                         ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                                    },
-                                    modifier = Modifier
-                                        .menuAnchor()
-                                        .fillMaxWidth()
+                                    }
                                 )
 
                                 ExposedDropdownMenu(
                                     expanded = expanded,
                                     onDismissRequest = { expanded = false }
                                 ) {
-                                    service?.frontends?.forEach { frontend ->
+                                    frontends?.forEach { frontend ->
                                         DropdownMenuItem(
                                             text = {
                                                 Text(text = frontend.name)
@@ -129,31 +141,33 @@ fun LibRedirectServiceSettingsRoute(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(5.dp))
-                            HeadlineText(headline = R.string.instance)
+                            Spacer(modifier = Modifier.height(10.dp))
+                            SettingSpacerText(contentTitleId = R.string.instance)
                             Spacer(modifier = Modifier.height(10.dp))
                         }
                     }
                 }
-            }
 
-            item {
-                InstanceItem(
-                    text = stringResource(id = R.string.random_instance),
-                    instance = LibRedirectDefault.libRedirectRandomInstanceKey,
-                    selectedInstance = selectedInstance,
-                    itemOnClick = itemOnClick
-                )
-            }
-
-            if (instances != null) {
-                items(items = instances!!, key = { it }) { instance ->
+                item(key = "random") {
                     InstanceItem(
-                        text = instance,
-                        instance = instance,
+                        enabled = enabled!!,
+                        text = stringResource(id = R.string.random_instance),
+                        instance = LibRedirectDefault.libRedirectRandomInstanceKey,
                         selectedInstance = selectedInstance,
                         itemOnClick = itemOnClick
                     )
+                }
+
+                if (instances != null) {
+                    items(items = instances!!, key = { it }) { instance ->
+                        InstanceItem(
+                            enabled = enabled!!,
+                            text = instance,
+                            instance = instance,
+                            selectedInstance = selectedInstance,
+                            itemOnClick = itemOnClick
+                        )
+                    }
                 }
             }
         }
@@ -162,12 +176,16 @@ fun LibRedirectServiceSettingsRoute(
 
 @Composable
 fun InstanceItem(
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     text: String,
     instance: String,
     selectedInstance: String?,
     itemOnClick: (String) -> Unit
 ) {
     RadioButtonRow(
+        modifier = modifier,
+        enabled = enabled,
         onClick = { itemOnClick(instance) },
         onLongClick = null,
         selected = instance == selectedInstance

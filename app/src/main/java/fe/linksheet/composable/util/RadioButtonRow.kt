@@ -19,24 +19,27 @@ fun <T, M> RadioButtonRow(
     value: T,
     state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
     viewModel: BaseViewModel,
+    enabled: Boolean = true,
     clickHook: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     RadioButtonRow(
         modifier = modifier,
+        enabled = enabled,
         onClick = {
             viewModel.updateState(state, value)
             clickHook?.invoke()
         },
         onLongClick = null,
         selected = state.matches(value),
-        content
+        content = content
     )
 }
 
 @Composable
 fun RadioButtonRow(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)?,
     selected: Boolean,
@@ -44,6 +47,7 @@ fun RadioButtonRow(
 ) {
     ClickableRow(
         modifier = modifier,
+        enabled = enabled,
         paddingHorizontal = 0.dp,
         paddingVertical = 5.dp,
         onClick = onClick,
@@ -52,6 +56,7 @@ fun RadioButtonRow(
         horizontalArrangement = Arrangement.Start
     ) {
         RadioButton(
+            enabled = enabled,
             selected = selected,
             onClick = onClick,
             modifier = Modifier

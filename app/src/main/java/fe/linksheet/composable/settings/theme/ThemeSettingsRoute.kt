@@ -43,7 +43,7 @@ fun ThemeSettingsRoute(
                     state = viewModel.theme,
                     viewModel = viewModel
                 ) {
-                    Texts(headline = holder.headline, subtitle = null)
+                    Texts(headlineId = holder.headline, subtitleId = null)
                 }
             }
         }

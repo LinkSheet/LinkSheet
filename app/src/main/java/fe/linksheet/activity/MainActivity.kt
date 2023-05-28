@@ -28,6 +28,7 @@ import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
+import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
@@ -42,9 +43,9 @@ import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.linksSettingsRoute
+import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
-import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.settingsRoute
@@ -137,7 +138,14 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(route = logViewerSettingsRoute) {
-                        LogSettingsRoute(onBackPressed = onBackPressed)
+                        LogSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    composable(route = logTextViewerSettingsRoute) { _, _ ->
+                        LogTextSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     composable(route = aboutSettingsRoute) {

@@ -4,6 +4,7 @@ enum class ListState {
     Loading, NoItems, NoResult, Items;
 }
 
+
 fun <T> listState(list: List<T>?, filter: String) = if (list == null) {
     ListState.Loading
 } else {

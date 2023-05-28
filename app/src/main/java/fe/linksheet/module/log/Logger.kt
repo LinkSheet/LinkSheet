@@ -1,41 +1,9 @@
 package fe.linksheet.module.log
 
-import android.app.Application
 import android.util.Log
-import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.extension.decodeHex
-import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.preference.Preferences
-import fe.linksheet.util.CryptoUtil
-import org.koin.dsl.module
-import java.time.LocalDateTime
 import javax.crypto.Mac
 import kotlin.reflect.KClass
-
-val loggerHmac = CryptoUtil.HmacSha("HmacSHA256", 64)
-
-val loggerFactoryModule = module {
-    single {
-        val preferenceRepository = get<PreferenceRepository>()
-        val logKey = preferenceRepository.getOrWriteInit(Preferences.logKey).decodeHex()
-
-        val app = get<Application>()
-        Log.d("Lel", "$app")
-
-
-        LoggerFactory(app as LinkSheetApp, logKey)
-    }
-}
-
-class LoggerFactory(private val context: LinkSheetApp, private val logKey: ByteArray) {
-    private val mac by lazy {
-        CryptoUtil.makeHmac(loggerHmac.algorithm, logKey)
-    }
-
-    fun createLogger(prefix: KClass<*>) = Logger(context, prefix, mac)
-    fun createLogger(prefix: String) = Logger(context, prefix, mac)
-}
 
 class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String, mac: Mac) {
     constructor(
@@ -45,15 +13,16 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
     ) : this(context, clazz.simpleName!!, mac)
 
     private val logHasher = LogHasher.LogKeyHasher(mac)
+    private val appLogger = AppLogger.getInstance()
 
-    enum class Type {
-        Verbose {
+    enum class Type(val str: String) {
+        Verbose("V") {
             override fun print(tag: String, msg: String): Int = Log.v(tag, msg)
         },
-        Info {
+        Info("I") {
             override fun print(tag: String, msg: String): Int = Log.i(tag, msg)
         },
-        Debug {
+        Debug("D") {
             override fun print(tag: String, msg: String): Int = Log.d(tag, msg)
         };
 
@@ -66,8 +35,8 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
         dumpable: Array<out Any?>
     ): String {
         val arguments = dumpable.mapIndexed { index, obj ->
-            dumpObject(StringBuilder(), hasher, obj)?.toString()
-                ?: "Argument @ index $index could not be dumped"
+            LogDumpable.dumpObject(StringBuilder(), hasher, obj)?.toString()
+                ?: "Argument @ index $index could not be dumped (obj=$obj)"
         }
 
         return msg.format(*arguments.toTypedArray())
@@ -80,15 +49,8 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
 
     private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
         val (normal, redacted) = dump(msg, dumpable)
-        val now = LocalDateTime.now()
-        val logMsg = "$now $prefix: $normal"
 
-        kotlin.runCatching {
-            linkSheetApp.write(logMsg)
-        }.onFailure {
-            it.printStackTrace()
-        }
-
+        appLogger.write(LogEntry(type.str, System.currentTimeMillis(), prefix, normal, redacted))
         type.print(prefix, normal)
     }
 

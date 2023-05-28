@@ -1,6 +1,7 @@
 package fe.linksheet.util
 
 import android.os.Bundle
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NamedNavArgument
@@ -19,7 +20,6 @@ fun <T : Any, A : Route.Arguments<T, U>, U> NavController.navigate(
     route: ArgumentRoute<T, A, U>,
     data: T
 ) = navigate(route.buildNavigation(data))
-
 
 
 fun <T : RouteData, A : Route.Arguments<T, U>, U : Route.Unbundled<T>> route(
@@ -77,7 +77,9 @@ abstract class Route<T : RouteData, A : Route.Arguments<T, U>, U : Route.Unbundl
         private val dataType = NavType.inferFromValueType(type)
 
         @Suppress("UNCHECKED_CAST")
-        fun <R> unbundle(bundle: Bundle) = dataType[bundle, property.name] as R
+        fun <R> unbundle(bundle: Bundle) = dataType[bundle, property.name].let {
+            (if (it == "null") null else it) as R
+        }
 
         fun toNavArgument() = navArgument(property.name) {
             type = dataType

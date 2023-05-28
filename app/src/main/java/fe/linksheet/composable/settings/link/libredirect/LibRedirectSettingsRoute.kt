@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -30,7 +28,6 @@ import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
 import fe.linksheet.libRedirectServiceSettingsRoute
-import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel
 import fe.linksheet.util.cleanHttpsScheme
@@ -78,7 +75,6 @@ fun LibRedirectSettingsRoute(
 
             listHelper(
                 noItems = R.string.no_libredirect_services,
-                notFound = R.string.no_such_service_found,
                 listState = listState,
                 list = services,
                 listKey = { it.service.key },

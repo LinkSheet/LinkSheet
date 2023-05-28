@@ -28,7 +28,7 @@ fun <K, V> LazyListScope.items(
 
 inline fun <T> LazyListScope.listHelper(
     @StringRes noItems: Int,
-    @StringRes notFound: Int,
+    @StringRes notFound: Int? = null,
     listState: ListState,
     list: List<T>?,
     noinline listKey: ((T) -> Any)? = null,
@@ -37,7 +37,7 @@ inline fun <T> LazyListScope.listHelper(
     if (listState == ListState.Items) {
         items(items = list!!, key = listKey, itemContent = listItem)
     } else {
-        item {
+        item(key = "loader") {
             Column(
                 modifier = Modifier
                     .fillParentMaxWidth()
@@ -45,10 +45,13 @@ inline fun <T> LazyListScope.listHelper(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
+                if (notFound != null && listState == ListState.NoResult) {
+                    Text(text = stringResource(id = notFound))
+                }
+
                 when (listState) {
                     ListState.Loading -> CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                     ListState.NoItems -> Text(text = stringResource(id = noItems))
-                    ListState.NoResult -> Text(text = stringResource(id = notFound))
                     else -> {}
                 }
             }

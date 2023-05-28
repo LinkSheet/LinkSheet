@@ -60,8 +60,8 @@ fun SubtitleText(
 }
 
 @Composable
-fun SubtitleText(@StringRes subtitle: Int) {
-    SubtitleText(subtitle = stringResource(id = subtitle))
+fun SubtitleText(@StringRes subtitleId: Int) {
+    SubtitleText(subtitle = stringResource(id = subtitleId))
 }
 
 @Composable
@@ -82,9 +82,9 @@ fun Texts(
 }
 
 @Composable
-fun Texts(@StringRes headline: Int, @StringRes subtitle: Int? = null) {
+fun Texts(@StringRes headlineId: Int, @StringRes subtitleId: Int? = null) {
     Texts(
-        headline = stringResource(id = headline),
-        subtitle = subtitle?.let { stringResource(id = it) }
+        headline = stringResource(id = headlineId),
+        subtitle = subtitleId?.let { stringResource(id = it) }
     )
 }

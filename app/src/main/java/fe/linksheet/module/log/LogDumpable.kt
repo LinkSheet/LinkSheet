@@ -25,7 +25,7 @@ interface LogDumpable {
         }
 
         fun dumpObject(stringBuilder: StringBuilder, hasher: LogHasher, obj: Any?): StringBuilder? {
-            if (obj == null) return null
+            if (obj == null) return stringBuilder
 
             if (obj is Boolean) return stringBuilder.append(obj)
             if (obj is LogDumpable) return obj.dump(stringBuilder, hasher)

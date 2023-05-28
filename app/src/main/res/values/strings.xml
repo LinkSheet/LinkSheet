@@ -158,5 +158,9 @@
     <string name="options">Options</string>
     <string name="services">Services</string>
     <string name="no_libredirect_services">No LibRedirect services found!</string>
-    <string name="no_such_service_found">No such service found!</string>
+    <string name="current_session">Current session</string>
+    <string name="log_files">Log files</string>
+    <string name="log_viewer">Log viewer</string>
+    <string name="log_viewer_timestamp">Viewing log from %s</string>
+    <string name="no_log_entries">This session does not contain any logs.</string>
 </resources>

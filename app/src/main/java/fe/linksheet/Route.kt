@@ -2,6 +2,8 @@ package fe.linksheet
 
 
 import fe.linksheet.util.Route1
+import fe.linksheet.util.Route2
+import fe.linksheet.util.Route3
 import fe.linksheet.util.RouteData
 import fe.linksheet.util.route
 
@@ -16,6 +18,23 @@ const val creditsSettingsRoute = "credits_settings_route"
 const val themeSettingsRoute = "theme_settings_route"
 const val debugSettingsRoute = "debug_settings_route"
 const val logViewerSettingsRoute = "log_viewer_settings_route"
+
+
+data class LogTextViewerRoute(
+    val timestamp: String,
+    val fileName: String?,
+) : RouteData {
+    companion object : Route2<LogTextViewerRoute, String, String?>(
+        Argument(LogTextViewerRoute::timestamp, ""),
+        Argument(LogTextViewerRoute::fileName, null),
+        { timestamp, fileName -> LogTextViewerRoute(timestamp, fileName) }
+    )
+}
+
+val logTextViewerSettingsRoute = route(
+    "log_text_viewer_settings_route",
+    route = LogTextViewerRoute
+)
 
 const val linksSettingsRoute = "link_settings_route"
 const val libRedirectSettingsRoute = "lib_redirect_settings_route"

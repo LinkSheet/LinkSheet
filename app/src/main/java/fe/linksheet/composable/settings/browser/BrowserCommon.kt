@@ -123,8 +123,8 @@ fun <T, M> BrowserCommonRadioButtonRow(
         clickHook = clickHook,
     ) {
         Texts(
-            headline = headline,
-            subtitle = subtitle
+            headlineId = headline,
+            subtitleId = subtitle
         )
     }
 }

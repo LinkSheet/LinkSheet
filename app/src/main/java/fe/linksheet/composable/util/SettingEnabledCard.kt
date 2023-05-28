@@ -87,7 +87,7 @@ fun SettingEnabledCardColumn(
 }
 
 @Composable
-private fun SettingEnabledCardColumnCommon(
+fun SettingEnabledCardColumnCommon(
     contentTitle: String? = null,
     content: @Composable () -> Unit,
 ) {

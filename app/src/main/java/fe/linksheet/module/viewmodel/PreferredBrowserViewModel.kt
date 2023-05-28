@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 
 class PreferredBrowserViewModel(
     val context: Application,
@@ -85,8 +84,8 @@ class PreferredBrowserViewModel(
 
     val whitelistedBrowsers = type.map {
         when (it) {
-            BrowserType.Normal -> whitelistedNormalBrowsers.also { Timber.tag("PreferrredBrowserViewModel").d("normal") }
-            BrowserType.InApp -> whitelistedInAppBrowsers.also { Timber.tag("PreferrredBrowserViewModel").d("inapp") }
+            BrowserType.Normal -> whitelistedNormalBrowsers
+            BrowserType.InApp -> whitelistedInAppBrowsers
         }
     }
 
@@ -99,7 +98,6 @@ class PreferredBrowserViewModel(
     ) = ioLaunch {
         val repo = repository.first()
         activityInfoState.forEach { (activityInfo, enabled) ->
-            Timber.tag("PreferrredBrowserViewModel").d("Repo=$repo, package=${activityInfo.packageName} enabled=$enabled")
             repo.insertOrDelete(enabled, activityInfo.packageName)
         }
     }

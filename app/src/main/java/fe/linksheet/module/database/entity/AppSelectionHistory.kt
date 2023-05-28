@@ -4,6 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import fe.linksheet.module.log.HostProcessor
+import fe.linksheet.module.log.LogDumpable
+import fe.linksheet.module.log.LogHasher
+import fe.linksheet.module.log.PackageProcessor
+import fe.stringbuilder.util.commaSeparated
+import fe.stringbuilder.util.curlyWrapped
 
 @Entity(
     tableName = "app_selection_history",
@@ -14,6 +20,17 @@ data class AppSelectionHistory(
     val host: String,
     val packageName: String,
     val lastUsed: Long,
-)
+) : LogDumpable {
+    override fun dump(
+        stringBuilder: StringBuilder,
+        hasher: LogHasher
+    ) = stringBuilder.curlyWrapped {
+        commaSeparated {
+            item { hasher.hash(stringBuilder, "host=", host, HostProcessor) }
+            item { hasher.hash(stringBuilder, "packageName=", packageName, PackageProcessor) }
+            item { append("lastUsed=", lastUsed) }
+        }
+    }
+}
 
 data class AppSelection(val packageName: String, val maxLastUsed: Long)

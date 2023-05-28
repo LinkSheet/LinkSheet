@@ -4,21 +4,26 @@ import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import kotlinx.coroutines.flow.firstOrNull
-import timber.log.Timber
 
 class LibRedirectResolver(
+    loggerFactory: LoggerFactory,
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
 ) {
+    private val logger = loggerFactory.createLogger(LibRedirectResolver::class)
+
     private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
     private val libRedirectInstances by lazy { LibRedirectLoader.loadBuiltInInstances() }
 
     suspend fun resolve(uri: Uri): LibRedirectResult {
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
-        Timber.tag("ResolveIntents").d("LibRedirect $service")
+        logger.debug("Service=%s", service)
+
         if (service != null && stateRepository.isEnabled(service.key)) {
             val savedDefault = defaultRepository.getByServiceKeyFlow(service.key).firstOrNull()
             val (frontendKey, instanceUrl) = if (savedDefault != null) {
@@ -30,8 +35,8 @@ class LibRedirectResolver(
             }
 
             val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
+            logger.debug("Redirected=%s", redirected, HashProcessor.StringProcessor)
 
-            Timber.tag("ResolveIntents").d("LibRedirect $redirected")
             if (redirected != null) {
                 return LibRedirectResult.Redirected(uri, Uri.parse(redirected))
             }

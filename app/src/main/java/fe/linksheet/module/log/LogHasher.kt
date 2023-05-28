@@ -3,6 +3,7 @@ package fe.linksheet.module.log
 import android.content.ComponentName
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
+import android.net.Uri
 import fe.linksheet.extension.appendHashed
 import fe.stringbuilder.util.curlyWrapped
 import fe.stringbuilder.util.slashSeparated
@@ -44,6 +45,7 @@ sealed interface LogHasher {
 
 typealias PackageProcessor = HashProcessor.StringProcessor
 typealias HostProcessor = HashProcessor.StringProcessor
+typealias UrlProcessor = HashProcessor.StringProcessor
 
 sealed interface HashProcessor<T> {
     object NoOpProcessor : HashProcessor<String> {
@@ -52,6 +54,14 @@ sealed interface HashProcessor<T> {
             input: String,
             mac: Mac
         ): StringBuilder = stringBuilder.append(input)
+    }
+
+    object UriProcessor : HashProcessor<Uri> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: Uri,
+            mac: Mac
+        ): StringBuilder = stringBuilder.appendHashed(mac, input.toString())
     }
 
     object StringProcessor : HashProcessor<String> {

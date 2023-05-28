@@ -42,14 +42,40 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
         return msg.format(*arguments.toTypedArray())
     }
 
+    private fun <T> dump(
+        msg: String,
+        hasher: LogHasher,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = msg.format(LogDumpable.dumpObject(StringBuilder(), hasher, param, hashProcessor).toString())
+
     private fun dump(
         msg: String,
         dumpable: Array<out Any?>
     ) = dump(msg, LogHasher.NoOpHasher, dumpable) to dump(msg, logHasher, dumpable)
 
+    private fun <T> dump(
+        msg: String,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = dump(msg, LogHasher.NoOpHasher, param, hashProcessor) to dump(
+        msg,
+        logHasher,
+        param,
+        hashProcessor
+    )
+
     private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
         val (normal, redacted) = dump(msg, dumpable)
+        log(type, normal, redacted, prefix)
+    }
 
+    private fun <T> log(type: Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
+        val (normal, redacted) = dump(msg, param, hashProcessor)
+        log(type, normal, redacted, prefix)
+    }
+
+    private fun log(type: Type, normal: String, redacted: String, prefix: String) {
         appLogger.write(LogEntry(type.str, System.currentTimeMillis(), prefix, normal, redacted))
         type.print(prefix, normal)
     }
@@ -57,4 +83,9 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
     fun verbose(msg: String, vararg dumpable: Any?) = log(Type.Verbose, msg, dumpable)
     fun info(msg: String, vararg dumpable: Any?) = log(Type.Info, msg, dumpable)
     fun debug(msg: String, vararg dumpable: Any?) = log(Type.Debug, msg, dumpable)
+    fun <T> debug(
+        msg: String,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = log(Type.Debug, msg, param, hashProcessor)
 }

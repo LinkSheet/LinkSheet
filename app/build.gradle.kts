@@ -100,8 +100,6 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.30.1")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    implementation("com.jakewharton.timber:timber:5.0.1")
-
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.32")
     implementation("com.gitlab.grrfe.httpkt:core-android:13.0.0-alpha.32")

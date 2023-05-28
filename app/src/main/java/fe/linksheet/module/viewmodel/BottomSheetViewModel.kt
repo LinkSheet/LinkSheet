@@ -9,41 +9,43 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
-import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.resolver.BottomSheetResult
-import fe.linksheet.R
-import fe.linksheet.activity.MainActivity
-import fe.linksheet.module.database.entity.AppSelectionHistory
-import fe.linksheet.extension.ioAsync
-import fe.linksheet.extension.newIntent
-import fe.linksheet.extension.startActivityWithConfirmation
-import fe.linksheet.module.downloader.Downloader
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState
+import fe.linksheet.R
+import fe.linksheet.activity.MainActivity
+import fe.linksheet.extension.IntentExt.newIntent
+import fe.linksheet.extension.ioAsync
+import fe.linksheet.extension.startActivityWithConfirmation
+import fe.linksheet.module.database.entity.AppSelectionHistory
+import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.resolver.BottomSheetResult
+import fe.linksheet.resolver.DisplayActivityInfo
 import org.koin.core.component.KoinComponent
-import timber.log.Timber
 import java.io.File
 import java.util.Locale
 
 class BottomSheetViewModel(
     val context: Application,
+    loggerFactory: LoggerFactory,
     val preferenceRepository: PreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
+    val logger = loggerFactory.createLogger(BottomSheetViewModel::class)
+
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
     val enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
@@ -87,7 +89,8 @@ class BottomSheetViewModel(
     }
 
     suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
-        Timber.tag("PersistingSelectedIntent").d("Component: ${intent.component}")
+        logger.debug("Component=%s", intent.component)
+
         intent.component?.let { component ->
             val host = intent.data!!.host!!.lowercase(Locale.getDefault())
             val app = PreferredApp(
@@ -97,7 +100,7 @@ class BottomSheetViewModel(
                 alwaysPreferred = always
             )
 
-            Timber.tag("PersistingSelectedIntent").d("Inserting $app")
+            logger.debug("Inserting=%s", app)
             preferredAppRepository.insert(app)
 
             val historyEntry = AppSelectionHistory(
@@ -107,7 +110,7 @@ class BottomSheetViewModel(
             )
 
             appSelectionHistoryRepository.insert(historyEntry)
-            Timber.tag("PersistingSelectedIntent").d("Inserting $historyEntry")
+            logger.debug("Inserting=%s", historyEntry)
         }
     }
 
@@ -116,9 +119,7 @@ class BottomSheetViewModel(
         uri: Uri?,
         downloadable: Downloader.DownloadCheckResult.Downloadable
     ) {
-        val path =
-            "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
-        Timber.tag("startDownload").d(path)
+        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
 
         val request = DownloadManager.Request(uri)
             .setTitle(resources.getString(R.string.linksheet_download))

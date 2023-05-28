@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
+import fe.libredirectkt.LibRedirectService
 import fe.linksheet.extension.forEachElementIndex
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.stringbuilder.util.commaSeparated
@@ -27,6 +28,7 @@ interface LogDumpable {
         fun dumpObject(stringBuilder: StringBuilder, hasher: LogHasher, obj: Any?): StringBuilder? {
             if (obj == null) return stringBuilder
 
+            if (obj is String) return stringBuilder.append(obj)
             if (obj is Boolean) return stringBuilder.append(obj)
             if (obj is LogDumpable) return obj.dump(stringBuilder, hasher)
 
@@ -46,9 +48,17 @@ interface LogDumpable {
                 is Intent -> IntentDumpable.dump(stringBuilder, obj, hasher)
                 is ResolveInfo -> ResolveInfoDumpable.dump(stringBuilder, obj, hasher)
                 is ComponentName -> ComponentNameDumpable.dump(stringBuilder, obj, hasher)
+                is LibRedirectService -> LibRedirectServiceDumpable.dump(stringBuilder, obj, hasher)
                 else -> null
             }
         }
+
+        fun <T> dumpObject(
+            stringBuilder: StringBuilder,
+            hasher: LogHasher,
+            obj: T,
+            hashProcessor: HashProcessor<T>
+        ) = hasher.hash(stringBuilder, obj, hashProcessor)
     }
 }
 
@@ -105,6 +115,15 @@ object ComponentNameDumpable : LogDumpableWrapper<ComponentName> {
         hasher: LogHasher
     ) = hasher.hash(stringBuilder, instance, HashProcessor.ComponentProcessor)
 }
+
+object LibRedirectServiceDumpable : LogDumpableWrapper<LibRedirectService> {
+    override fun dump(
+        stringBuilder: StringBuilder,
+        instance: LibRedirectService,
+        hasher: LogHasher
+    ) = hasher.hash(stringBuilder, instance.key, HashProcessor.NoOpProcessor)
+}
+
 
 data class MapDumpable<K, V, DK, DV>(
     val map: Map<K, V>,

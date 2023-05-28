@@ -8,14 +8,19 @@ import fe.gson.extensions.string
 import fe.httpkt.json.readToJson
 import fe.linksheet.R
 import fe.linksheet.module.database.entity.ResolvedRedirect
+import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.repository.ResolvedRedirectRepository
 import kotlinx.coroutines.flow.first
-import timber.log.Timber
 
 class RedirectFollower(
+    loggerFactory: LoggerFactory,
     private val redirectResolver: RedirectResolver,
     private val resolvedRedirectRepository: ResolvedRedirectRepository,
 ) {
+    private val logger = loggerFactory.createLogger(RedirectFollower::class)
+
     sealed class FollowRedirect(@StringRes val stringId: Int, val resolvedUrl: String) {
         class Cache(resolvedUrl: String) : FollowRedirect(
             R.string.redirect_resolve_type_cache, resolvedUrl
@@ -44,7 +49,7 @@ class RedirectFollower(
         if (localCache) {
             val redirect = resolvedRedirectRepository.getForShortUrl(uri.toString()).first()
             if (redirect != null) {
-                Timber.tag("FollowRedirect").d("From local cache: $redirect")
+                logger.debug("From local cache: %s", redirect)
 
                 return Result.success(FollowRedirect.Cache(redirect.resolvedUrl))
             }
@@ -72,12 +77,12 @@ class RedirectFollower(
         onlyKnownTrackers: Boolean,
         externalService: Boolean
     ): Result<FollowRedirect> {
-        Timber.tag("FollowRedirects").d("Following redirects for $uri")
+        logger.debug("Following redirects for %s", uri, HashProcessor.UriProcessor)
 
         val followUri = uri.toString()
         if (!onlyKnownTrackers || isTracker(followUri, fastForwardRulesObject)) {
             if (externalService) {
-                Timber.tag("FollowRedirects").d("Using external service for $followUri")
+                logger.debug("Using external service for %s", followUri, HashProcessor.StringProcessor)
 
                 val con = redirectResolver.resolveRemote(followUri)
                 if (con.responseCode != 200) {
@@ -85,14 +90,13 @@ class RedirectFollower(
                 }
 
                 val obj = con.readToJson().asJsonObject
-                Timber.tag("FollowRedirects").d("Returned json $obj")
 
                 return obj.string("resolvedUrl")?.let {
                     Result.success(FollowRedirect.Remote(it))
                 } ?: Result.failure(Exception("Something went wrong while reading response"))
             }
 
-            Timber.tag("FollowRedirects").d("Using local service for $followUri")
+            logger.debug("Using local service for %s", followUri, HashProcessor.StringProcessor)
             //TODO: error handling?
             val resolved = redirectResolver.resolveLocal(followUri).url.toString()
 

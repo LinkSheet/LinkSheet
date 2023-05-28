@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.core.text.HtmlCompat
-import timber.log.Timber
 
 const val URL_ANNOTATION_KEY = "url"
 
@@ -151,7 +150,6 @@ private fun spannableStringToAnnotatedString(
                         )
 
                         is BulletSpan -> {
-                            Timber.tag("StringResources").d("BulletSpan not supported yet")
                             addStyle(style = SpanStyle(), start = start, end = end)
                         }
 

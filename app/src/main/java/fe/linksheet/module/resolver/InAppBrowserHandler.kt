@@ -5,7 +5,6 @@ import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import kotlinx.coroutines.flow.first
-import timber.log.Timber
 
 class InAppBrowserHandler(
     private val disableInAppBrowserInSelectedRepository: DisableInAppBrowserInSelectedRepository,
@@ -34,8 +33,6 @@ class InAppBrowserHandler(
                 if (packageName != null) {
                     packageName in selectedApps
                 } else {
-                    Timber.tag("InAppBrowserHandler")
-                        .d("No referer found, falling back to allowing in app browsers")
                     true
                 }
             }

@@ -17,7 +17,6 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import timber.log.Timber
 
 class AppsWhichCanOpenLinksViewModel(
     val context: Application,
@@ -53,7 +52,7 @@ class AppsWhichCanOpenLinksViewModel(
         } else {
             Intent(
                 Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-                Uri.parse("package:${activityInfo.packageName}").also { Timber.d("$it") }
+                Uri.parse("package:${activityInfo.packageName}")
             )
         }
 

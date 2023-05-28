@@ -19,16 +19,11 @@ import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.redirectResolverModule
 import fe.linksheet.module.resolver.resolverModule
 import fe.linksheet.module.viewmodel.viewModelModule
-import fe.stringbuilder.util.buildSeparatedString
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
-import timber.log.Timber
-import java.io.BufferedWriter
-import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
 
@@ -65,10 +60,6 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
         }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
-
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
 
         startKoin {
             androidLogger()

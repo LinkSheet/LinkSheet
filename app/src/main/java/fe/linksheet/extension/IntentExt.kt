@@ -8,81 +8,92 @@ import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
 import fe.linksheet.BuildConfig
-import timber.log.Timber
+import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.UrlProcessor
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).apply {
-    action = Intent.ACTION_VIEW
-    data = uri
-    flags = this@newIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
-    `package` = null
-    component = null
+object IntentExt : KoinComponent {
+    private val loggerFactory by inject<LoggerFactory>()
+    private val logger = loggerFactory.createLogger(IntentExt::class)
 
-    if (dropExtras) {
-        extras?.keySet()?.forEach {
-            Timber.tag("NewIntent").d("Dropping extra: $it")
-            extras?.remove(it)
+    fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).apply {
+        action = Intent.ACTION_VIEW
+        data = uri
+        flags = this@newIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
+        `package` = null
+        component = null
+
+        if (dropExtras) {
+            extras?.keySet()?.forEach {
+                logger.debug("NewIntent: Dropping extra: %s", it)
+                extras?.remove(it)
+            }
         }
     }
-}
 
-fun Intent.isSchemeTypicallySupportedByBrowsers() = "http" == scheme || "https" == scheme
+    fun Intent.isSchemeTypicallySupportedByBrowsers() = "http" == scheme || "https" == scheme
 
 //{ act=android.intent.action.SEND typ=text/plain flg=0x10800001 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity clip={text/plain {T(59)}} (has extras) }
 //{ act=android.intent.action.VIEW dat=https://twitter.com/... flg=0x10800000 cmp=fe.linksheet/.activity.bottomsheet.BottomSheetActivity (has extras) }
 
-private val clearUrlProviders by lazy {
-    ClearURLLoader.loadBuiltInClearURLProviders()
-}
-
-fun Intent.getUri(
-    clearUrl: Boolean = false,
-    fastForward: Boolean = false,
-    fastForwardRulesObject: JsonObject
-): Uri? {
-    var uriData = dataString
-    if (uriData == null) {
-        uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
+    private val clearUrlProviders by lazy {
+        ClearURLLoader.loadBuiltInClearURLProviders()
     }
 
-    if (uriData == null) {
-        uriData = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
-    }
+    fun Intent.getUri(
+        clearUrl: Boolean = false,
+        fastForward: Boolean = false,
+        fastForwardRulesObject: JsonObject
+    ): Uri? {
+        var uriData = dataString
+        if (uriData == null) {
+            uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
+        }
 
-    if (uriData != null) {
-        val uri = Uri.parse(uriData)
-        if (uri.host != null && uri.scheme != null) {
-            val host = uri.host!!
-            val scheme = "${uri.scheme}://".lowercase()
+        if (uriData == null) {
+            uriData = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+        }
 
-            var url = buildString {
-                append(scheme)
-                if (uri.userInfo != null) {
-                    append(uri.userInfo).append("@")
+        if (uriData != null) {
+            val uri = Uri.parse(uriData)
+            if (uri.host != null && uri.scheme != null) {
+                val host = uri.host!!
+                val scheme = "${uri.scheme}://".lowercase()
+
+                var url = buildString {
+                    append(scheme)
+                    if (uri.userInfo != null) {
+                        append(uri.userInfo).append("@")
+                    }
+
+                    append(host.lowercase())
+                    append(uriData.substring(uriData.indexOf(host) + host.length))
                 }
 
-                append(host.lowercase())
-                append(uriData.substring(uriData.indexOf(host) + host.length))
+                logger.debug("GetUri: Pre modification=%s", url, UrlProcessor)
+
+                if (fastForward) {
+                    getRuleRedirect(url, fastForwardRulesObject)?.let { url = it }
+                }
+
+                logger.debug("GetUri: Post FastForward=%s", url, UrlProcessor)
+
+                if (clearUrl) {
+                    url = clearUrl(url, clearUrlProviders)
+                }
+
+                logger.debug("GetUri: Post ClearURL=%s", url, UrlProcessor)
+                return Uri.parse(url)
             }
-
-            Timber.tag("Url Pre modification").d(url)
-
-            if (fastForward) {
-                getRuleRedirect(url, fastForwardRulesObject)?.let { url = it }
-            }
-
-            Timber.tag("Url Post FastForward").d(url)
-
-            if (clearUrl) {
-                url = clearUrl(url, clearUrlProviders)
-            }
-
-            Timber.tag("Url Post ClearURL").d(url)
-            return Uri.parse(url)
         }
-    }
 
-    return null
+        return null
+    }
 }
+
+
 
 fun Intent.buildSendTo(uri: Uri?): Intent {
     return Intent.createChooser(this.apply {

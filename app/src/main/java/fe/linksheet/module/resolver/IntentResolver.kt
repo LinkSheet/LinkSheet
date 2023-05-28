@@ -7,10 +7,10 @@ import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import fe.android.preference.helper.PreferenceRepository
 import fe.fastforwardkt.FastForwardLoader
+import fe.linksheet.extension.IntentExt.getUri
+import fe.linksheet.extension.IntentExt.isSchemeTypicallySupportedByBrowsers
+import fe.linksheet.extension.IntentExt.newIntent
 import fe.linksheet.extension.componentName
-import fe.linksheet.extension.getUri
-import fe.linksheet.extension.isSchemeTypicallySupportedByBrowsers
-import fe.linksheet.extension.newIntent
 import fe.linksheet.extension.queryResolveInfosByIntent
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader

@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import fe.android.compose.route.util.navigate
 import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -31,7 +32,6 @@ import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel
 import fe.linksheet.util.cleanHttpsScheme
-import fe.linksheet.util.navigate
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)

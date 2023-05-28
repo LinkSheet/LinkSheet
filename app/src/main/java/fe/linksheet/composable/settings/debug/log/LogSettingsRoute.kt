@@ -8,16 +8,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import fe.android.compose.route.util.navigate
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -28,14 +25,11 @@ import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.localizedString
+import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
-import fe.linksheet.util.navigate
 import org.koin.androidx.compose.koinViewModel
-import fe.linksheet.extension.items
-import fe.linksheet.extension.unixMillisToLocalDateTime
-import fe.linksheet.ui.HkGroteskFontFamily
 
 
 @OptIn(ExperimentalFoundationApi::class)

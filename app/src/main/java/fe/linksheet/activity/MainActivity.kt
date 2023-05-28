@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import fe.android.compose.route.util.composable
 import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.appsSettingsRoute
 import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
@@ -29,10 +30,10 @@ import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRou
 import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
-import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
-import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
+import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
+import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.creditsSettingsRoute
@@ -52,7 +53,6 @@ import fe.linksheet.settingsRoute
 import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
-import fe.linksheet.util.composable
 
 class MainActivity : ComponentActivity() {
 

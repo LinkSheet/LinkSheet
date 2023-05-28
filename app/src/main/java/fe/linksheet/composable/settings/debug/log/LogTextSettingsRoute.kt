@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
@@ -78,77 +79,78 @@ fun LogTextSettingsRoute(
                     list = logEntries,
                     listKey = { it.hashCode() }
                 ) { (type, unixMillis, prefix, message) ->
-                    Card(
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 10.dp)
-                    ) {
-                        FlowRow(
+                    SelectionContainer {
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            shape = RoundedCornerShape(12.dp),
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(10.dp)
+                                .padding(horizontal = 10.dp)
                         ) {
-                            Row {
-                                Card(
-                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
-                                    shape = RoundedCornerShape(
-                                        topStart = 50.dp,
-                                        bottomStart = 50.dp,
-                                        topEnd = 0.dp,
-                                        bottomEnd = 0.dp
-                                    )
-                                ) {
-                                    Text(
-                                        modifier = Modifier.padding(
-                                            horizontal = 5.dp,
-                                            vertical = 2.dp
-                                        ),
-                                        text = type
-                                    )
+                            FlowRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                            ) {
+                                Row {
+                                    Card(
+                                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
+                                        shape = RoundedCornerShape(
+                                            topStart = 50.dp,
+                                            bottomStart = 50.dp,
+                                            topEnd = 0.dp,
+                                            bottomEnd = 0.dp
+                                        )
+                                    ) {
+                                        Text(
+                                            modifier = Modifier.padding(
+                                                horizontal = 5.dp,
+                                                vertical = 2.dp
+                                            ),
+                                            fontWeight = FontWeight.SemiBold,
+                                            text = type
+                                        )
+                                    }
+
+                                    Card(
+                                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.inversePrimary),
+                                        shape = RoundedCornerShape(
+                                            topStart = 0.dp,
+                                            bottomStart = 0.dp,
+                                            topEnd = 50.dp,
+                                            bottomEnd = 50.dp
+                                        )
+                                    ) {
+                                        Text(
+                                            modifier = Modifier.padding(
+                                                horizontal = 5.dp,
+                                                vertical = 2.dp
+                                            ), text = prefix
+                                        )
+                                    }
                                 }
 
-                                Card(
-                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.inversePrimary),
-                                    shape = RoundedCornerShape(
-                                        topStart = 0.dp,
-                                        bottomStart = 0.dp,
-                                        topEnd = 50.dp,
-                                        bottomEnd = 50.dp
-                                    )
-                                ) {
-                                    Text(
-                                        modifier = Modifier.padding(
-                                            horizontal = 5.dp,
-                                            vertical = 2.dp
-                                        ), text = prefix
-                                    )
-                                }
-                            }
+                                Spacer(modifier = Modifier.height(5.dp))
 
-                            Spacer(modifier = Modifier.height(5.dp))
-
-                            Row(modifier = Modifier.fillMaxWidth()) {
-                                SelectionContainer {
+                                Row(modifier = Modifier.fillMaxWidth()) {
                                     Text(
                                         text = message,
                                         fontFamily = FontFamily.Monospace
                                     )
                                 }
-                            }
 
-                            Spacer(modifier = Modifier.height(2.dp))
+                                Spacer(modifier = Modifier.height(2.dp))
 
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.End
-                            ) {
-                                Text(
-                                    text = unixMillis.unixMillisToLocalDateTime().localizedString(),
-                                    fontStyle = FontStyle.Italic,
-                                    fontSize = 12.sp
-                                )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End
+                                ) {
+                                    Text(
+                                        text = unixMillis.unixMillisToLocalDateTime().localizedString(),
+                                        fontStyle = FontStyle.Italic,
+                                        fontSize = 12.sp
+                                    )
+                                }
                             }
                         }
                     }

@@ -1,9 +1,8 @@
 package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.SavedStateHandle
+import fe.android.compose.route.util.RouteData
 import fe.android.preference.helper.PreferenceRepository
-import fe.linksheet.LogTextViewerRoute
-import fe.linksheet.util.RouteData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KProperty1
 

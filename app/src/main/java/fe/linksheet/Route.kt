@@ -1,11 +1,10 @@
 package fe.linksheet
 
 
-import fe.linksheet.util.Route1
-import fe.linksheet.util.Route2
-import fe.linksheet.util.Route3
-import fe.linksheet.util.RouteData
-import fe.linksheet.util.route
+import fe.android.compose.route.util.Route1
+import fe.android.compose.route.util.Route2
+import fe.android.compose.route.util.RouteData
+import fe.android.compose.route.util.route
 
 
 const val mainRoute = "main_route"
@@ -25,8 +24,8 @@ data class LogTextViewerRoute(
     val fileName: String?,
 ) : RouteData {
     companion object : Route2<LogTextViewerRoute, String, String?>(
-        Argument(LogTextViewerRoute::timestamp, ""),
-        Argument(LogTextViewerRoute::fileName, null),
+        Argument(LogTextViewerRoute::timestamp),
+        Argument(LogTextViewerRoute::fileName),
         { timestamp, fileName -> LogTextViewerRoute(timestamp, fileName) }
     )
 }
@@ -41,7 +40,7 @@ const val libRedirectSettingsRoute = "lib_redirect_settings_route"
 
 data class LibRedirectServiceRoute(val serviceKey: String) : RouteData {
     companion object : Route1<LibRedirectServiceRoute, String>(
-        Argument(LibRedirectServiceRoute::serviceKey, ""),
+        Argument(LibRedirectServiceRoute::serviceKey),
         { LibRedirectServiceRoute(it) }
     )
 }

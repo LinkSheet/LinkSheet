@@ -113,6 +113,7 @@ dependencies {
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd.android-pref-helper:android-pref-helper:0.0.7")
     implementation("com.github.1fexd.android-pref-helper:android-pref-helper-compose:0.0.7")
+    implementation("com.github.1fexd:compose-route-util:0.0.4")
 
     implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
 

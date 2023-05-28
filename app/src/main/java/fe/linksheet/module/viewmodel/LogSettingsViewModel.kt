@@ -2,6 +2,8 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.extension.localizedString
+import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
@@ -14,6 +16,8 @@ class LogSettingsViewModel(
     private val appLogger = AppLogger.getInstance()
 
     val files = flowOfLazy {
-        appLogger.getLogFiles()
+        appLogger.getLogFiles().associateWith { fileName ->
+            fileName.toLong().unixMillisToLocalDateTime().localizedString()
+        }
     }
 }

@@ -24,6 +24,7 @@ import fe.linksheet.composable.util.SettingEnabledCardColumnCommon
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.extension.ioState
+import fe.linksheet.extension.items
 import fe.linksheet.extension.localizedString
 import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.logTextViewerSettingsRoute
@@ -73,7 +74,7 @@ fun LogSettingsRoute(
             }
 
             if (files != null) {
-                items(items = files!!, key = { it }) { fileName ->
+                items(items = files!!, key = { it }) { fileName, timestamp ->
                     ClickableRow(
                         paddingHorizontal = 10.dp,
                         paddingVertical = 5.dp,
@@ -81,14 +82,14 @@ fun LogSettingsRoute(
                             navController.navigate(
                                 logTextViewerSettingsRoute,
                                 LogTextViewerRoute(
-                                    startupTime,
+                                    timestamp,
                                     fileName
                                 )
                             )
                         }
                     ) {
                         Texts(
-                            headline = fileName.toLong().unixMillisToLocalDateTime().localizedString(),
+                            headline = timestamp,
                             subtitle = fileName + AppLogger.fileExt
                         )
                     }

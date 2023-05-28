@@ -120,7 +120,9 @@ fun MainRoute(
             if (clipboardManager.hasText() || sheetOpen != null) {
                 val item = clipboardManager.getText()?.text
 
-                if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
+                if ((item != null && Patterns.WEB_URL.matcher(item)
+                        .matches()) || sheetOpen != null
+                ) {
                     item(key = "open_copied_link") {
                         OpenCopiedLink(
                             uriHandler = uriHandler,
@@ -159,10 +161,10 @@ fun OpenDefaultBrowserCard(
     val shouldUsePrimaryColor = defaultBrowserEnabled.isSuccess || defaultBrowserEnabled.isLoading
     Card(
         colors = CardDefaults.cardColors(containerColor = if (shouldUsePrimaryColor) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.error),
+        shape = RoundedCornerShape(12.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
-            .clip(RoundedCornerShape(12.dp))
             .clickable {
                 if (defaultBrowserEnabled.isLoading) {
                     return@clickable
@@ -225,14 +227,15 @@ fun OpenDefaultBrowserCard(
 
 @Composable
 fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) {
-    OutlinedCard(modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 10.dp)
-        .clip(RoundedCornerShape(12.dp))
-        .clickable {
-            sheetOpen()
-            uriHandler.openUri(item)
-        }
+    OutlinedCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp)
+            .clickable {
+                sheetOpen()
+                uriHandler.openUri(item)
+            },
+        shape = RoundedCornerShape(12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(10.dp))

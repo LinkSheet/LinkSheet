@@ -29,10 +29,9 @@ fun ClickableRow(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(6.dp))
-            .clickable(onClick = onClick)
-            .padding(padding).let {
-                if (!enabled) it.alpha(0.3f) else it
-            },
+            .runIf(enabled){ it.clickable(onClick = onClick) }
+            .padding(padding)
+            .enabled(enabled),
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment
     ) {

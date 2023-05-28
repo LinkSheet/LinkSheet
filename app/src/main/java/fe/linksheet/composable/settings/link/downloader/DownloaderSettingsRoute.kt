@@ -1,6 +1,7 @@
 package fe.linksheet.composable.settings.link.downloader
 
 import android.Manifest
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -24,7 +26,7 @@ import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
-@OptIn(ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalPermissionsApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun DownloaderSettingsRoute(
     onBackPressed: () -> Unit,
@@ -33,7 +35,7 @@ fun DownloaderSettingsRoute(
     val writeExternalStoragePermissionState = downloaderPermissionState()
 
     SettingsScaffold(
-        headline = stringResource(id = R.string.follow_redirects),
+        headline = stringResource(id = R.string.enable_downloader),
         onBackPressed = onBackPressed
     ) { padding ->
         LazyColumn(
@@ -42,8 +44,8 @@ fun DownloaderSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(key = "enable_downloader") {
-                SwitchRow(
+            stickyHeader(key = "enable_downloader") {
+                SettingEnabledCardColumn(
                     checked = viewModel.enableDownloader.value,
                     onChange = {
                         requestDownloadPermission(
@@ -53,8 +55,9 @@ fun DownloaderSettingsRoute(
                             it
                         )
                     },
-                    headlineId = R.string.enable_downloader,
-                    subtitleId = R.string.enable_downloader_explainer
+                    headline = stringResource(id = R.string.enable_downloader),
+                    subtitle = stringResource(id = R.string.enable_downloader_explainer),
+                    contentTitle = stringResource(id = R.string.options)
                 )
             }
 
@@ -62,6 +65,7 @@ fun DownloaderSettingsRoute(
                 SwitchRow(
                     state = viewModel.downloaderCheckUrlMimeType,
                     viewModel = viewModel,
+                    enabled = viewModel.enableDownloader.value,
                     headlineId = R.string.downloader_url_mime_type,
                     subtitleId = R.string.downloader_url_mime_type_explainer
                 )

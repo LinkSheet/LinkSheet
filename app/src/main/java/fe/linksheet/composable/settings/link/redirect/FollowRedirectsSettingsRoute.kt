@@ -75,6 +75,7 @@ fun FollowRedirectsSettingsRoute(
                 SwitchRow(
                     state = viewModel.followRedirectsLocalCache,
                     viewModel = viewModel,
+                    enabled = viewModel.followRedirects.value,
                     headlineId = R.string.follow_redirects_local_cache,
                     subtitleId = R.string.follow_redirects_local_cache_explainer
                 )
@@ -85,20 +86,22 @@ fun FollowRedirectsSettingsRoute(
                 SwitchRow(
                     state = viewModel.followOnlyKnownTrackers,
                     viewModel = viewModel,
+                    enabled = viewModel.followRedirects.value,
                     headlineId = R.string.follow_only_known_trackers,
                     subtitleId = R.string.follow_only_known_trackers_explainer
                 )
             }
 
-
             item(key = "follow_redirects_external_service") {
                 SwitchRow(
                     state = viewModel.followRedirectsExternalService,
                     viewModel = viewModel,
+                    enabled = viewModel.followRedirects.value,
                     headline = stringResource(id = R.string.follow_redirects_external_service),
-                    subtitleBuilder = {
+                    subtitleBuilder = { enabled ->
                         LinkableTextView(
                             id = R.string.follow_redirects_external_service_explainer,
+                            enabled = enabled,
                             style = LocalTextStyle.current.copy(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 16.sp

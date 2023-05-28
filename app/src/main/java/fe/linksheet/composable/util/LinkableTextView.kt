@@ -107,6 +107,7 @@ private fun spannableStringToAnnotatedString(
                                 start = start,
                                 end = end
                             )
+
                             Typeface.BOLD -> addStyle(
                                 style = SpanStyle(
                                     fontWeight = FontWeight.Bold,
@@ -115,6 +116,7 @@ private fun spannableStringToAnnotatedString(
                                 start = start,
                                 end = end
                             )
+
                             Typeface.ITALIC -> addStyle(
                                 style = SpanStyle(
                                     fontWeight = FontWeight.Normal,
@@ -123,6 +125,7 @@ private fun spannableStringToAnnotatedString(
                                 start = start,
                                 end = end
                             )
+
                             Typeface.BOLD_ITALIC -> addStyle(
                                 style = SpanStyle(
                                     fontWeight = FontWeight.Bold,
@@ -132,6 +135,7 @@ private fun spannableStringToAnnotatedString(
                                 end = end
                             )
                         }
+
                         is TypefaceSpan -> addStyle(
                             style = SpanStyle(
                                 fontFamily = when (it.family) {
@@ -145,45 +149,54 @@ private fun spannableStringToAnnotatedString(
                             start = start,
                             end = end
                         )
+
                         is BulletSpan -> {
                             Timber.tag("StringResources").d("BulletSpan not supported yet")
                             addStyle(style = SpanStyle(), start = start, end = end)
                         }
+
                         is AbsoluteSizeSpan -> addStyle(
                             style = SpanStyle(fontSize = if (it.dip) it.size.dp.toSp() else it.size.toSp()),
                             start = start,
                             end = end
                         )
+
                         is RelativeSizeSpan -> addStyle(
                             style = SpanStyle(fontSize = it.sizeChange.em),
                             start = start,
                             end = end
                         )
+
                         is StrikethroughSpan -> addStyle(
                             style = SpanStyle(textDecoration = TextDecoration.LineThrough),
                             start = start,
                             end = end
                         )
+
                         is UnderlineSpan -> addStyle(
                             style = SpanStyle(textDecoration = TextDecoration.Underline),
                             start = start,
                             end = end
                         )
+
                         is SuperscriptSpan -> addStyle(
                             style = SpanStyle(baselineShift = BaselineShift.Superscript),
                             start = start,
                             end = end
                         )
+
                         is SubscriptSpan -> addStyle(
                             style = SpanStyle(baselineShift = BaselineShift.Subscript),
                             start = start,
                             end = end
                         )
+
                         is ForegroundColorSpan -> addStyle(
                             style = SpanStyle(color = Color(it.foregroundColor)),
                             start = start,
                             end = end
                         )
+
                         is android.text.Annotation -> {
                             if (it.key == URL_ANNOTATION_KEY) {
                                 addStyle(
@@ -199,6 +212,7 @@ private fun spannableStringToAnnotatedString(
                                 )
                             }
                         }
+
                         else -> addStyle(style = SpanStyle(), start = start, end = end)
                     }
                 }
@@ -214,6 +228,7 @@ private fun spannableStringToAnnotatedString(
 fun LinkableTextView(
     @StringRes id: Int,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     style: TextStyle = LocalTextStyle.current,
     parentChecked: Boolean? = null,
     parentClickListener: ((Boolean) -> Unit)? = null
@@ -225,11 +240,13 @@ fun LinkableTextView(
         text = annotatedString,
         style = style,
         onClick = { offset ->
-            annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {
-                uriHandler.openUri(it.item.url)
-            } ?: run {
-                if (parentChecked != null && parentClickListener != null) {
-                    parentClickListener(!parentChecked)
+            if(enabled){
+                annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {
+                    uriHandler.openUri(it.item.url)
+                } ?: run {
+                    if (parentChecked != null && parentClickListener != null) {
+                        parentClickListener(!parentChecked)
+                    }
                 }
             }
         },

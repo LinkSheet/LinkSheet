@@ -18,16 +18,18 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 @Composable
 fun SwitchRow(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable (() -> Unit)? = if(subtitle != null) {
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
         { SubtitleText(subtitle = subtitle) }
     } else null
 ) {
     SwitchRow(
         modifier = modifier,
+        enabled = enabled,
         checked = state.value,
         onChange = { viewModel.updateState(state, it) },
         headline = headline,
@@ -39,6 +41,7 @@ fun SwitchRow(
 @Composable
 fun SwitchRow(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
     viewModel: BaseViewModel,
     @StringRes headlineId: Int,
@@ -46,6 +49,7 @@ fun SwitchRow(
 ) {
     SwitchRow(
         modifier = modifier,
+        enabled = enabled,
         checked = state.value,
         onChange = { viewModel.updateState(state, it) },
         headlineId = headlineId,
@@ -56,6 +60,7 @@ fun SwitchRow(
 @Composable
 fun SwitchRow(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     checked: Boolean,
     onChange: (Boolean) -> Unit,
     @StringRes headlineId: Int,
@@ -63,6 +68,7 @@ fun SwitchRow(
 ) {
     SwitchRow(
         modifier = modifier,
+        enabled = enabled,
         checked = checked,
         onChange = onChange,
         headline = stringResource(id = headlineId),
@@ -73,27 +79,29 @@ fun SwitchRow(
 @Composable
 fun SwitchRow(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     checked: Boolean,
     onChange: (Boolean) -> Unit,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable (() -> Unit)? = if(subtitle != null) {
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
         { SubtitleText(subtitle = subtitle) }
     } else null
 ) {
     ClickableRow(
         modifier = modifier,
+        enabled = enabled,
         padding = 10.dp,
         verticalAlignment = Alignment.CenterVertically,
         onClick = { onChange(!checked) }
     ) {
         Column(modifier = Modifier.fillMaxWidth(0.8f), verticalArrangement = Arrangement.Center) {
             HeadlineText(headline = headline)
-            subtitleBuilder?.invoke()
+            subtitleBuilder?.invoke(enabled)
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-            Switch(checked = checked, onCheckedChange = onChange)
+            Switch(enabled = enabled, checked = checked, onCheckedChange = onChange)
         }
     }
 }

@@ -64,17 +64,16 @@ fun <T, M> BrowserCommonScaffold(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 15.dp)
+            contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
             stickyHeader(key = "header") {
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                     PreferenceSubtitle(
                         text = stringResource(explainer),
-                        paddingStart = 0.dp
+                        paddingStart = 10.dp
                     )
 
                     header?.invoke(this)
-
 
                     Spacer(modifier = Modifier.height(10.dp))
                 }
@@ -84,6 +83,7 @@ fun <T, M> BrowserCommonScaffold(
             if (map != null && state != null) {
                 items(items = map, key = { rowKey(it) }) { value, row ->
                     BrowserCommonRadioButtonRow(
+                        modifier = Modifier.padding(horizontal = 10.dp),
                         value = value,
                         state = state,
                         viewModel = viewModel,
@@ -107,6 +107,7 @@ data class BrowserCommonRadioButtonRowData(
 
 @Composable
 fun <T, M> BrowserCommonRadioButtonRow(
+    modifier: Modifier = Modifier,
     value: T,
     state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
     viewModel: BaseViewModel,
@@ -115,6 +116,7 @@ fun <T, M> BrowserCommonRadioButtonRow(
     clickHook: (() -> Unit)? = null
 ) {
     RadioButtonRow(
+        modifier = modifier,
         value = value,
         state = state,
         viewModel = viewModel,

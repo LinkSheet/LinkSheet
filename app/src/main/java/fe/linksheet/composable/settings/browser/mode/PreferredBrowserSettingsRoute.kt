@@ -1,14 +1,17 @@
 package fe.linksheet.composable.settings.browser.mode
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
@@ -17,6 +20,7 @@ import fe.linksheet.composable.settings.browser.BrowserIconTextRow
 import fe.linksheet.composable.util.FilterChipValue
 import fe.linksheet.composable.util.FilterChips
 import fe.linksheet.composable.util.RadioButtonRow
+import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.util.dialogHelper
 import fe.linksheet.extension.currentActivity
@@ -98,13 +102,13 @@ fun PreferredBrowserSettingsRoute(
         rowKey = { it.value },
         rows = rows,
         header = {
-            Column {
-                SwitchRow(
-                    checked = viewModel.unifiedPreferredBrowser.value,
-                    onChange = { viewModel.updateState(viewModel.unifiedPreferredBrowser, it) },
-                    headline = stringResource(id = R.string.use_unified_preferred_browser),
-                )
+            SettingEnabledCardColumn(
+                checked = viewModel.unifiedPreferredBrowser.value,
+                onChange = { viewModel.updateState(viewModel.unifiedPreferredBrowser, it) },
+                headline = stringResource(id = R.string.use_unified_preferred_browser),
+            )
 
+            Column(modifier = Modifier.padding(horizontal = 10.dp)) {
                 if (!viewModel.unifiedPreferredBrowser.value) {
                     FilterChips(
                         currentState = type,

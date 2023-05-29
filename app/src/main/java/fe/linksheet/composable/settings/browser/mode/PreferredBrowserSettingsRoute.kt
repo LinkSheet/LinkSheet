@@ -143,6 +143,7 @@ fun PreferredBrowserSettingsRoute(
                         && selectedBrowser!!.matches(app.packageName)
 
                 RadioButtonRow(
+                    modifier = Modifier.padding(horizontal = 10.dp),
                     selected = selected,
                     onClick = { viewModel.updateSelectedBrowser(app.packageName) },
                     onLongClick = { activity.startPackageInfoActivity(app) }

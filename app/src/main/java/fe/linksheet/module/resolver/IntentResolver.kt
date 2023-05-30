@@ -6,6 +6,9 @@ import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import fe.android.preference.helper.PreferenceRepository
+import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getState
+import fe.android.preference.helper.compose.getStringState
 import fe.fastforwardkt.FastForwardLoader
 import fe.linksheet.extension.IntentExt.getUri
 import fe.linksheet.extension.IntentExt.isSchemeTypicallySupportedByBrowsers
@@ -44,42 +47,45 @@ class IntentResolver(
 
     private val fastForwardRulesObject by lazy { FastForwardLoader.loadBuiltInFastForwardRules() }
 
-    private val useClearUrls = preferenceRepository.getBoolean(Preferences.useClearUrls)
-    private var useFastForwardRules = preferenceRepository.getBoolean(
+    private val useClearUrls = preferenceRepository.getBooleanState(Preferences.useClearUrls)
+    private var useFastForwardRules = preferenceRepository.getBooleanState(
         Preferences.useFastForwardRules
     )
 
     private var enableIgnoreLibRedirectButton =
-        preferenceRepository.getBoolean(Preferences.enableIgnoreLibRedirectButton)
-    private var enableLibRedirect = preferenceRepository.getBoolean(Preferences.enableLibRedirect)
-    private val followRedirects = preferenceRepository.getBoolean(Preferences.followRedirects)
+        preferenceRepository.getBooleanState(Preferences.enableIgnoreLibRedirectButton)
+    private var enableLibRedirect =
+        preferenceRepository.getBooleanState(Preferences.enableLibRedirect)
+    private val followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
 
     private val followOnlyKnownTrackers =
-        preferenceRepository.getBoolean(Preferences.followOnlyKnownTrackers)
-    private val followRedirectsLocalCache = preferenceRepository.getBoolean(
+        preferenceRepository.getBooleanState(Preferences.followOnlyKnownTrackers)
+    private val followRedirectsLocalCache = preferenceRepository.getBooleanState(
         Preferences.followRedirectsLocalCache
     )
 
-    private var enableDownloader = preferenceRepository.getBoolean(Preferences.enableDownloader)
-    private var downloaderCheckUrlMimeType = preferenceRepository.getBoolean(
+    private var enableDownloader =
+        preferenceRepository.getBooleanState(Preferences.enableDownloader)
+    private var downloaderCheckUrlMimeType = preferenceRepository.getBooleanState(
         Preferences.downloaderCheckUrlMimeType
     )
 
-    val theme = preferenceRepository.get(Preferences.theme)
-    private val dontShowFilteredItem = preferenceRepository.getBoolean(
+    val theme = preferenceRepository.getState(Preferences.theme)
+    private val dontShowFilteredItem = preferenceRepository.getBooleanState(
         Preferences.dontShowFilteredItem
     )
 
-    private val inAppBrowserSettings = preferenceRepository.get(Preferences.inAppBrowserSettings)
+    private val inAppBrowserSettings =
+        preferenceRepository.getState(Preferences.inAppBrowserSettings)
 
-    private val browserMode = preferenceRepository.get(Preferences.browserMode)
-    private val selectedBrowser = preferenceRepository.getString(Preferences.selectedBrowser)
-    private val inAppBrowserMode = preferenceRepository.get(Preferences.inAppBrowserMode)
+    private val browserMode = preferenceRepository.getState(Preferences.browserMode)
+    private val selectedBrowser = preferenceRepository.getStringState(Preferences.selectedBrowser)
+    private val inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserMode)
     private val selectedInAppBrowser =
-        preferenceRepository.getString(Preferences.selectedInAppBrowser)
+        preferenceRepository.getStringState(Preferences.selectedInAppBrowser)
 
     private val unifiedPreferredBrowser =
-        preferenceRepository.getBoolean(Preferences.unifiedPreferredBrowser)
+        preferenceRepository.getBooleanState(Preferences.unifiedPreferredBrowser)
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         logger.debug("Intent=%s", intent)
@@ -92,20 +98,21 @@ class IntentResolver(
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        var uri = intent.getUri(useClearUrls, useFastForwardRules, fastForwardRulesObject)
+        var uri =
+            intent.getUri(useClearUrls.value, useFastForwardRules.value, fastForwardRulesObject)
         if (uri == null) {
             logger.debug("Uri is null, something probably went very wrong")
         }
 
         var followRedirect: RedirectFollower.FollowRedirect? = null
 
-        if (followRedirects && uri != null) {
+        if (followRedirects.value && uri != null) {
             redirectFollower.followRedirects(
                 uri,
-                followRedirectsLocalCache,
+                followRedirectsLocalCache.value,
                 fastForwardRulesObject,
-                followOnlyKnownTrackers,
-                followRedirectsLocalCache
+                followOnlyKnownTrackers.value,
+                followRedirectsLocalCache.value
             ).getOrNull()?.let {
                 followRedirect = it
                 uri = Uri.parse(it.resolvedUrl)
@@ -113,14 +120,14 @@ class IntentResolver(
         }
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
-        if (enableLibRedirect && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton)) {
+        if (enableLibRedirect.value && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton.value)) {
             libRedirectResult = libRedirectResolver.resolve(uri!!)
             if (libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
                 uri = libRedirectResult.redirectedUri
             }
         }
 
-        val downloadable = if (enableDownloader && uri != null) {
+        val downloadable = if (enableDownloader.value && uri != null) {
             checkIsDownloadable(uri!!)
         } else Downloader.DownloadCheckResult.NonDownloadable
 
@@ -143,7 +150,7 @@ class IntentResolver(
 
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
-            referrer, inAppBrowserSettings
+            referrer, inAppBrowserSettings.value
         )
 
         val newIntent = intent.newIntent(uri, !isCustomTab || !allowCustomTab)
@@ -163,11 +170,11 @@ class IntentResolver(
         logger.debug("ResolveList=%s", resolvedList)
 
         val browserMode = if (newIntent.isSchemeTypicallySupportedByBrowsers()) {
-            val (mode, selected, repository) = if (!unifiedPreferredBrowser && isCustomTab && allowCustomTab) {
+            val (mode, selected, repository) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)
 
-            browserHandler.handleBrowsers(mode, selected, repository, resolvedList)
+            browserHandler.handleBrowsers(mode.value, selected.value, repository, resolvedList)
         } else null
 
         logger.debug("BrowserMode=%s", browserMode)
@@ -177,7 +184,7 @@ class IntentResolver(
             resolvedList,
             lastUsedApps,
             preferredApp?.app,
-            !dontShowFilteredItem
+            !dontShowFilteredItem.value
         )
 
         val selectedBrowserIsSingleOption =
@@ -210,7 +217,7 @@ class IntentResolver(
     }
 
     private fun checkIsDownloadable(uri: Uri): Downloader.DownloadCheckResult {
-        if (downloaderCheckUrlMimeType) {
+        if (downloaderCheckUrlMimeType.value) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
                 logger.debug("File ending check result $it")
                 if (it.isDownloadable()) return it

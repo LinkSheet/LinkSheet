@@ -147,7 +147,7 @@
     <string name="enable_ignore_libredirect_button">Włącz przycisk „Ignoruj LibRedirect”</string>
     <string name="enable_ignore_libredirect_button_explainer">Jeśli link został przekierowany przez LibRedirect, w dolnym panelu zostanie wyświetlony przycisk otwierający oryginalny adres</string>
     <string name="ignore_libredirect">Ignoruj LibRedirect</string>
-    <string name="app_crashed">Wygląda na to, że LinkSheet uległ awarii, sprawdź poniższy błąd</string>
+    <string name="app_crashed">LinkSheet uległ awarii, sprawdź poniższy błąd</string>
     <string name="copy_exception">Kopiuj do schowka</string>
     <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki. Jeśli obecna jest tylko jedna aplikacja natywna, zostanie ona automatycznie otwarta. Jeśli nie ma aplikacji natywnej, wszystkie przeglądarki są wyświetlane na liście.</string>
     <string name="debug_explainer">Wyświetl logi aplikacji</string>
@@ -155,4 +155,17 @@
     <string name="logs_explainer">Wyświetl logi aplikacji</string>
     <string name="app_log">Logi aplikacji</string>
     <string name="debug">Debugowanie</string>
+    <string name="options">Opcje</string>
+    <string name="services">Usługi</string>
+    <string name="current_session">Bieżąca sesja</string>
+    <string name="log_files">Pliki logów</string>
+    <string name="log_viewer">Przeglądarka logów</string>
+    <string name="log_viewer_timestamp">Wyświetlanie logu z %s</string>
+    <string name="no_log_entries">Ta sesja nie zawiera żadnych dzienników.</string>
+    <string name="order_of_operation">Kolejność operacji</string>
+    <string name="info">Informacje</string>
+    <string name="fastforward">FastForward</string>
+    <string name="no_libredirect_services">Nie znaleziono usług LibRedirect!</string>
+    <string name="clear_urls">ClearURLs</string>
+    <string name="libredirect_via">Przez %s</string>
 </resources>

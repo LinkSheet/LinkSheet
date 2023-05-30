@@ -68,7 +68,7 @@
     <string name="checkmark">Znacznik wyboru</string>
     <string name="links">Linki</string>
     <string name="links_explainer">Ustawienia dotyczące manipulacją linkami</string>
-    <string name="clear_urls">Użyj ClearURLs</string>
+    <string name="use_clear_urls">Użyj ClearURLs</string>
     <string name="follow_redirects">Śledź przekierowania</string>
     <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu</string>
     <string name="loading_link">Wczytywanie linku…</string>
@@ -125,7 +125,7 @@
     <string name="hide_after_copying_explainer">Ukryj dolny panel po naciśnięciu przycisku „Kopiuj link”</string>
     <string name="selected_browser_explainer">Ta przeglądarka zostanie automatycznie otwarta, jeśli żadna natywna aplikacja nie będzie w stanie obsłużyć klikniętego linku</string>
     <string name="preview_url_explainer">Pokazuje kliknięty link (po jego przetworzeniu)</string>
-    <string name="clear_urls_explainer">Użyj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
+    <string name="use_clear_urls_explainer">Użyj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
     <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli adres URL zawiera bezpośredni link do pliku. Spowoduje to wysłanie żądania do adresu URL w celu określenia zawartości pliku.</string>
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
     <string name="fastfoward_rules_explainer">Użyj eksperymentalnej integracji reguły <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych hostów, wyodrębniając przekierowanie z linku)</string>

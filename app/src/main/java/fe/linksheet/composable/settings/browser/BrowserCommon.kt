@@ -137,7 +137,7 @@ fun BrowserCommonDialog(
     close: (InAppBrowserDisableInSelected?) -> Unit,
 ) {
     DialogColumn {
-        HeadlineText(headline = title)
+        HeadlineText(headlineId = title)
         DialogSpacer()
         DialogContent(
             items = state,

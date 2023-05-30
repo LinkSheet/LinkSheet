@@ -81,8 +81,8 @@
     <string name="checkmark">勾選符號</string>
     <string name="links">連結</string>
     <string name="links_explainer">連結操作相關設定</string>
-    <string name="clear_urls">使用 ClearURLs</string>
-    <string name="clear_urls_explainer">使用實驗性的<annotation url="https://github.com/ClearURLs">ClearURLs</annotation>整合（清除網址中的追蹤參數）</string>
+    <string name="use_clear_urls">使用 ClearURLs</string>
+    <string name="use_clear_urls_explainer">使用實驗性的<annotation url="https://github.com/ClearURLs">ClearURLs</annotation>整合（清除網址中的追蹤參數）</string>
     <string name="follow_redirects">跟隨重新導向</string>
     <string name="follow_redirects_explainer">在開啟底部工作表之前自動跟隨所有重新導向</string>
     <string name="loading_link">正在載入連結...</string>

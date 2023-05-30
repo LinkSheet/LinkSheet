@@ -82,8 +82,8 @@
     <string name="checkmark">Checkmark</string>
     <string name="links">Links</string>
     <string name="links_explainer">Settings regarding link manipulation</string>
-    <string name="clear_urls">Use ClearURLs</string>
-    <string name="clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
+    <string name="use_clear_urls">Use ClearURLs</string>
+    <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet</string>
     <string name="loading_link">Loading link…</string>
@@ -163,4 +163,8 @@
     <string name="log_viewer">Log viewer</string>
     <string name="log_viewer_timestamp">Viewing log from %s</string>
     <string name="no_log_entries">This session does not contain any logs.</string>
+    <string name="order_of_operation">Order of operation</string>
+    <string name="info">Info</string>
+    <string name="fastforward">FastForward</string>
+    <string name="clear_urls">ClearURLs</string>
 </resources>

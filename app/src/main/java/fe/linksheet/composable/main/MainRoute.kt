@@ -31,6 +31,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel

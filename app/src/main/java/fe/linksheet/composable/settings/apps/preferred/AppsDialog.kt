@@ -39,7 +39,7 @@ internal fun appsDialog(
     notifyCloseNoState = false
 ) { state, close ->
     DialogColumn {
-        HeadlineText(headline = R.string.select_an_app)
+        HeadlineText(headlineId = R.string.select_an_app)
         DialogSpacer()
         DialogContent(
             items = state,

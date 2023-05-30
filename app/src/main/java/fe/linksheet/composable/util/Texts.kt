@@ -42,8 +42,8 @@ fun HeadlineText(headline: String) {
 }
 
 @Composable
-fun HeadlineText(@StringRes headline: Int) {
-    HeadlineText(headline = stringResource(id = headline))
+fun HeadlineText(@StringRes headlineId: Int) {
+    HeadlineText(headline = stringResource(id = headlineId))
 }
 
 @Composable

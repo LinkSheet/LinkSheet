@@ -44,7 +44,7 @@ class BottomSheetViewModel(
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
-    val logger = loggerFactory.createLogger(BottomSheetViewModel::class)
+    private val logger = loggerFactory.createLogger(BottomSheetViewModel::class)
 
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 

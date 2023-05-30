@@ -5,5 +5,5 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val preferenceRepositoryModule = module {
-    singleOf(::PreferenceRepository)
+    single { PreferenceRepository(get()) }
 }

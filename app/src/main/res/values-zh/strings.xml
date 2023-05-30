@@ -80,8 +80,8 @@
     <string name="checkmark">复选标记</string>
     <string name="links">链接</string>
     <string name="links_explainer">链接处理相关设置</string>
-    <string name="clear_urls">使用 ClearURLs</string>
-    <string name="clear_urls_explainer">使用实验性 <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 集成（清除链接中的跟踪参数）</string>
+    <string name="use_clear_urls">使用 ClearURLs</string>
+    <string name="use_clear_urls_explainer">使用实验性 <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 集成（清除链接中的跟踪参数）</string>
     <string name="follow_redirects">跟踪重定向</string>
     <string name="follow_redirects_explainer">在打开底栏之前自动跟踪所有重定向</string>
     <string name="loading_link">加载链接中…</string>

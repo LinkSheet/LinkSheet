@@ -28,14 +28,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.android.compose.dialog.helper.OnClose
+import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.R
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogContent
 import fe.linksheet.composable.util.DialogSpacer
-import fe.linksheet.composable.util.OnClose
-import fe.linksheet.composable.util.dialogHelper
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.extension.updateState
 import fe.linksheet.extension.updateStateFromResult

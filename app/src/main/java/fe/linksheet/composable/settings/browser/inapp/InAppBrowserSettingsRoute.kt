@@ -2,14 +2,14 @@ package fe.linksheet.composable.settings.browser.inapp
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
 import fe.linksheet.composable.settings.browser.BrowserCommonScaffold
-import fe.linksheet.composable.util.dialogHelper
+import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.viewmodel.InAppBrowserDisableInSelected
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
-import fe.linksheet.module.resolver.InAppBrowserHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOn

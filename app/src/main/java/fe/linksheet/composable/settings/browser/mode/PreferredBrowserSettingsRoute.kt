@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.settings.browser.BrowserCommonDialog
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
@@ -21,8 +22,6 @@ import fe.linksheet.composable.util.FilterChipValue
 import fe.linksheet.composable.util.FilterChips
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
-import fe.linksheet.composable.util.SwitchRow
-import fe.linksheet.composable.util.dialogHelper
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.startPackageInfoActivity

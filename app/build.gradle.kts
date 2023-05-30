@@ -112,6 +112,7 @@ dependencies {
     implementation("com.github.1fexd.android-pref-helper:preference-helper:0.0.8")
     implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.8")
     implementation("com.github.1fexd:compose-route-util:0.0.8")
+    implementation("com.github.1fexd:compose-dialog-helper:0.0.1")
 
     implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
 

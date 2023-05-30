@@ -1,6 +1,7 @@
 package fe.linksheet
 
 
+import androidx.annotation.Keep
 import fe.android.compose.route.util.Route1
 import fe.android.compose.route.util.Route2
 import fe.android.compose.route.util.RouteData
@@ -19,6 +20,7 @@ const val debugSettingsRoute = "debug_settings_route"
 const val logViewerSettingsRoute = "log_viewer_settings_route"
 
 
+@Keep
 data class LogTextViewerRoute(
     val timestamp: String,
     val fileName: String?,
@@ -38,6 +40,7 @@ val logTextViewerSettingsRoute = route(
 const val linksSettingsRoute = "link_settings_route"
 const val libRedirectSettingsRoute = "lib_redirect_settings_route"
 
+@Keep
 data class LibRedirectServiceRoute(val serviceKey: String) : RouteData {
     companion object : Route1<LibRedirectServiceRoute, String>(
         Argument(LibRedirectServiceRoute::serviceKey),

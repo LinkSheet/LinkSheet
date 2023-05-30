@@ -690,6 +690,12 @@ class BottomSheetActivity : ComponentActivity() {
                                 resources, result.uri,
                                 result.downloadable as Downloader.DownloadCheckResult.Downloadable
                             )
+
+                            if (!bottomSheetViewModel.disableToasts.value) {
+                                showToast(R.string.download_started)
+                            }
+
+                            hideDrawer()
                         },
                         buttonText = R.string.download
                     )

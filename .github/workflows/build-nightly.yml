@@ -32,12 +32,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-        
 
-      - name: Checkout material3-pullrefresh compat
-        uses: actions/checkout@v3
-        with:
-          repository: omico/androidx-compose-material3-pullrefresh
-          path: ./androidx-compose-material3-pullrefresh
-
       - name: Decode Keystore File
         uses: timheuer/base64-to-file@v1
         id: android_keystore
@@ -46,7 +40,7 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
       - uses: gradle/gradle-build-action@v2
-      - run: gradle assembleNightly
+      - run: ./gradlew assembleNightly
         env:
           KEYSTORE_FILE_PATH: ${{ steps.android_keystore.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}

@@ -1,2 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="open_with_app">Отваряне с/ъс %s</string>
+    <string name="enable_send_button_explainer">Показва бутон в долното меню, който ви позволява да споделите адреса с други приложения, все едно сте го избрали от менюто за споделяне</string>
+    <string name="bottom_sheet_explainer">Сортиране, бутони и други</string>
+    <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
+    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, разположен в supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
+    <string name="download">Изтегляне</string>
+    <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
+    <string name="back">Назад</string>
+    <string name="links">Препратки</string>
+    <string name="version">Издание</string>
+    <string name="no_such_app_found">Не е намерено такова приложение!</string>
+    <string name="clear_urls">Използване на ClearURLs</string>
+    <string name="checkmark">Отметка</string>
+    <string name="donate_explainer">Дарете криптовалута на автора</string>
+    <string name="follow_redirects">Последване на пренасочвания</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="single_tap_explainer">Изисква се само едно докосване вместо две за отваряне на приложенията; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
+    <string name="license_apache_2">Лиценз Apache 2.0</string>
+    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Ще бъде направена заявка към адреса, за да бъде определен вида на файла.</string>
+    <string name="opening_with_app">Отваряне с/ъс %s</string>
+    <string name="preferred_apps">Предпочитани приложения</string>
+    <string name="open_with">Изберете приложение</string>
+    <string name="use_a_different_app">Изберете друго приложение</string>
+    <string name="apps_which_can_open_links">Приложения, които отварят препратки</string>
+    <string name="search">Търсене</string>
+    <string name="url_copied">Адресът е копиран в междинната памет</string>
+    <string name="single_tap">Единично докосване</string>
+    <string name="enable_copy_button">Бутон за копиране</string>
+    <string name="open_settings">Настройки</string>
+    <string name="enable_send_button">Бутон за споделяне</string>
+    <string name="send_to">Споделяне</string>
+    <string name="settings">Настройки</string>
+    <string name="enabled">Включено</string>
+    <string name="disabled">Изключено</string>
+    <string name="bottom_sheet">Долно меню</string>
+    <string name="apps">Приложения</string>
+    <string name="save">Запазване</string>
+    <string name="about">Относно</string>
+    <string name="credits">Заслуги</string>
+    <string name="credits_explainer">Лицензиране на софтуер с отворен код</string>
+    <string name="seal">Seal</string>
+    <string name="license_gpl_3">Общ публичен лиценз на GNU v3.0</string>
+    <string name="open_link_with">OpenLinkWith</string>
+    <string name="paste">Поставяне</string>
+    <string name="error">Грешка</string>
+    <string name="github">Гитхъб</string>
+    <string name="donate">Дарения</string>
+    <string name="links_explainer">Настройки за обработка на препратките</string>
+    <string name="follow_redirects_external_service_explainer_privacy_policy">Политика за поверителност</string>
+    <string name="loading_link">Зареждане на препратка…</string>
+    <string name="follow_redirects_external_service">Последване на пренасочванията от външна услуга</string>
+    <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ</string>
+    <string name="follow_redirects_local_cache_explainer">Запазва резултатите от пренасочванията</string>
+    <string name="redirect_resolve_type_local">местно откриване</string>
+    <string name="enable_downloader">Бутон за изтегляне</string>
+    <string name="downloader_url_mime_type_explainer">Проверява дали адресът завършва с файлово разширение (напр. „.jpg“); ако е така, се използва за изтегления файл.</string>
+    <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
+    <string name="just_once">Веднъж</string>
+    <string name="preferred_apps_settings">Настройки на предпочитаните приложения</string>
+    <string name="copy">Копиране на адреса</string>
+    <string name="confirm">Потвърждаване</string>
+    <string name="clear">Изчистване</string>
+    <string name="always">Винаги</string>
+    <string name="use_text_share_copy_buttons">Елементарни бутони в менюто</string>
+    <string name="use_text_share_copy_buttons_explainer">Замества бутоните за копиране, споделяне и изтегляне с текстови препратки</string>
+    <string name="apps_which_can_open_links_explainer_2">Списък на приложенията, които биха могли да попречат на работата на LinkSheet</string>
+    <string name="no_preferred_apps_set_yet">Все още не сте избрали предпочитани приложения.</string>
+    <string name="enable_copy_button_explainer">Показва бутон „Копиране на адреса“ в долното меню</string>
+    <string name="enable_libredirect">Използване на LibRedirect</string>
+    <string name="apps_which_can_open_links_explainer">Докоснете приложение и ще се отвори менюто „Отваряне по подразбиране“, откъдето можете да забраните автоматичното отваряне на препратки</string>
+    <string name="open_with_linksheet">Отваряне с LinkSheet</string>
+    <string name="about_explainer">За приложението, лицензи</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
+    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочването от препратката)</string>
+    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията</string>
+    <string name="redirect_resolve_type_cache">местна памет</string>
+    <string name="redirect_resolve_type_remote">отдалечен сървър</string>
+    <string name="redirect_resolve_type_not_resolved">липсва</string>
+</resources>

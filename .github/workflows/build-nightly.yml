@@ -46,7 +46,7 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
       - uses: gradle/gradle-build-action@v2
-      - run: gradle assembleRelease
+      - run: gradle assembleNightly
         env:
           KEYSTORE_FILE_PATH: ${{ steps.android_keystore.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}

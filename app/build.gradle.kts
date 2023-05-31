@@ -1,8 +1,12 @@
+import net.nemerosa.versioning.ReleaseInfo
+import net.nemerosa.versioning.SCMInfo
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
+    id("net.nemerosa.versioning") version "3.0.0"
 }
 
 android {
@@ -13,8 +17,11 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 25
         targetSdk = 33
-        versionCode = 31
-        versionName = "0.0.31"
+        versionCode = versioning.info.tag?.let {
+            val semver = versioning.info.versionNumber
+            semver.major * 10000 + semver.minor * 100 + semver.patch
+        } ?: (System.currentTimeMillis() / 1000).toInt()
+        versionName = versioning.info.tag ?: versioning.info.full
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -30,6 +37,7 @@ android {
     }
 
     buildTypes {
+
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
@@ -48,6 +56,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -65,6 +74,12 @@ android {
             excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
         }
     }
+}
+
+versioning {
+    releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ ->
+        ReleaseInfo("release", info.tag)
+    })
 }
 
 dependencies {

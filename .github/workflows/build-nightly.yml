@@ -52,5 +52,5 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: Upload APK
+          name: linksheet-nightly
           path: app/build/outputs/apk/nightly/linksheet-nightly.apk

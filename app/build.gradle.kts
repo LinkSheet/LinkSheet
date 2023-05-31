@@ -63,11 +63,9 @@ android {
             matchingFallbacks.add("release")
             signingConfig = signingConfigs.getByName("env")
 
-            setProperty("archivesBaseName", "linksheet")
-
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-nightly"
-            resValue("string", "app_name", "LinkSheet")
+            resValue("string", "app_name", "LinkSheet Nightly")
         }
     }
 

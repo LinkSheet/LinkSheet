@@ -168,4 +168,5 @@
     <string name="no_libredirect_services">Nie znaleziono usług LibRedirect!</string>
     <string name="clear_urls">ClearURLs</string>
     <string name="libredirect_via">Przez %s</string>
+    <string name="download_started">Rozpoczęto pobieranie</string>
 </resources>

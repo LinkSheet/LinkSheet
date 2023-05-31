@@ -21,6 +21,7 @@ android {
             val semver = versioning.info.versionNumber
             semver.major * 10000 + semver.minor * 100 + semver.patch
         } ?: (System.currentTimeMillis() / 1000).toInt()
+
         versionName = versioning.info.tag ?: versioning.info.full
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
@@ -36,8 +37,16 @@ android {
         }
     }
 
-    buildTypes {
+    signingConfigs {
+        create("env") {
+            storeFile = File(System.getenv("KEYSTORE_FILE_PATH") ?: "")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
+    }
 
+    buildTypes {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
@@ -46,6 +55,18 @@ android {
 
         release {
             isMinifyEnabled = true
+            resValue("string", "app_name", "LinkSheet")
+        }
+
+        register("nightly") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks.add("release")
+            signingConfig = signingConfigs.getByName("env")
+
+            setProperty("archivesBaseName", "linksheet")
+
+            applicationIdSuffix = ".nightly"
+            versionNameSuffix = "-nightly"
             resValue("string", "app_name", "LinkSheet")
         }
     }

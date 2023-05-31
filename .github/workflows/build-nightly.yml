@@ -1,4 +1,4 @@
-name: Build debug APK
+name: Build nightly APK
 
 on:
   workflow_dispatch:

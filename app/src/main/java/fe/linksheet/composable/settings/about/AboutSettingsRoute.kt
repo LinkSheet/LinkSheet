@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -14,13 +13,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.creditsSettingsRoute
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutSettingsRoute(
     navController: NavHostController,
@@ -69,7 +68,10 @@ fun AboutSettingsRoute(
                         uriHandler.openUri("https://coindrop.to/fexd")
                     },
                     image = {
-                        ColoredIcon(icon = Icons.Default.CurrencyBitcoin, description = R.string.donate)
+                        ColoredIcon(
+                            icon = Icons.Default.CurrencyBitcoin,
+                            description = R.string.donate
+                        )
                     }
                 )
             }
@@ -81,6 +83,9 @@ fun AboutSettingsRoute(
                     onClick = {},
                     image = {
                         ColoredIcon(icon = Icons.Default.Info, description = R.string.version)
+                    },
+                    content = {
+                        SubtitleText(subtitle = BuildConfig.VERSION_CODE.toString())
                     }
                 )
             }

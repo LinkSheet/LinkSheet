@@ -10,9 +10,9 @@ import fe.linksheet.R
 import fe.linksheet.module.database.entity.ResolvedRedirect
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.repository.ResolvedRedirectRepository
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import java.io.IOException
 
 class RedirectFollower(
     loggerFactory: LoggerFactory,
@@ -48,7 +48,7 @@ class RedirectFollower(
         connectTimeout: Int
     ): Result<FollowRedirect> {
         if (localCache) {
-            val redirect = resolvedRedirectRepository.getForShortUrl(uri.toString()).first()
+            val redirect = resolvedRedirectRepository.getForShortUrl(uri.toString()).firstOrNull()
             if (redirect != null) {
                 logger.debug("From local cache: %s", redirect)
 
@@ -64,7 +64,7 @@ class RedirectFollower(
             connectTimeout
         )
 
-        if (localCache && followRedirect.getOrNull() !is FollowRedirect.NotResolved) {
+        if (localCache && followRedirect.isSuccess && followRedirect.getOrNull() !is FollowRedirect.NotResolved) {
             resolvedRedirectRepository.insert(
                 ResolvedRedirect(uri.toString(), followRedirect.getOrNull()?.resolvedUrl!!)
             )
@@ -91,7 +91,12 @@ class RedirectFollower(
                     HashProcessor.StringProcessor
                 )
 
-                val con = redirectResolver.resolveRemote(followUri, connectTimeout)
+                val con = try {
+                    redirectResolver.resolveRemote(followUri, connectTimeout)
+                } catch (e: IOException) {
+                    return Result.failure(e)
+                }
+
                 if (con.responseCode != 200) {
                     return Result.failure(Exception("Something went wrong while resolving redirect"))
                 }
@@ -104,10 +109,16 @@ class RedirectFollower(
             }
 
             logger.debug("Using local service for %s", followUri, HashProcessor.StringProcessor)
-            //TODO: error handling?
-            val resolved = redirectResolver.resolveLocal(followUri, connectTimeout).url.toString()
 
-            return Result.success(FollowRedirect.Local(resolved))
+            return try {
+                val resolved = redirectResolver.resolveLocal(
+                    followUri, connectTimeout
+                ).url.toString()
+
+                Result.success(FollowRedirect.Local(resolved))
+            } catch (e: IOException) {
+                Result.failure(e)
+            }
         }
 
         return Result.success(FollowRedirect.NotResolved(followUri))

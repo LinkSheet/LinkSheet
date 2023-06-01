@@ -64,6 +64,10 @@ class IntentResolver(
     private val followRedirectsLocalCache = preferenceRepository.getBooleanState(
         Preferences.followRedirectsLocalCache
     )
+    private val followRedirectsExternalService = preferenceRepository.getBooleanState(
+        Preferences.followRedirectsExternalService
+    )
+
     private val followRedirectsTimeout = preferenceRepository.getIntState(
         Preferences.followRedirectsTimeout
     )
@@ -113,18 +117,20 @@ class IntentResolver(
             logger.debug("Uri is null, something probably went very wrong")
         }
 
-        var followRedirect: RedirectFollower.FollowRedirect? = null
+        var followRedirect: Result<RedirectFollower.FollowRedirect>? = null
 
         if (followRedirects.value && uri != null) {
-            redirectFollower.followRedirects(
+            val result = redirectFollower.followRedirects(
                 uri,
                 followRedirectsLocalCache.value,
                 fastForwardRulesObject,
                 followOnlyKnownTrackers.value,
-                followRedirectsLocalCache.value,
+                followRedirectsExternalService.value,
                 followRedirectsTimeout.value
-            ).getOrNull()?.let {
-                followRedirect = it
+            )
+
+            followRedirect = result
+            result.getOrNull()?.let {
                 uri = Uri.parse(it.resolvedUrl)
             }
         }

@@ -4,13 +4,13 @@ import fe.httpkt.Request
 import fe.httpkt.util.findHeader
 import fe.linksheet.extension.substringNullable
 import fe.linksheet.module.request.requestModule
+import fe.mimetypekt.MimeTypeLoader
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
-import java.net.URLConnection
-import fe.mimetypekt.MimeTypeLoader
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
+import java.io.IOException
 import kotlin.math.min
 
 
@@ -64,8 +64,12 @@ class Downloader(private val request: Request) {
     }
 
     fun isNonHtmlContentUri(url: String, connectTimeout: Int): DownloadCheckResult {
-        val contentType = request.head(url, connectTimeout = connectTimeout)
-            .findHeader(contentTypeHeader)
+        val contentType = try {
+            request.head(url, connectTimeout = connectTimeout)
+                .findHeader(contentTypeHeader)
+        } catch (e: IOException) {
+            return DownloadCheckResult.NonDownloadable
+        }
 
         val firstContentType =
             contentType?.values?.firstOrNull() ?: return DownloadCheckResult.NonDownloadable

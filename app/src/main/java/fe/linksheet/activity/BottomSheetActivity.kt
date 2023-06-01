@@ -42,7 +42,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -167,15 +167,20 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     private fun makeResolveToast(
-        type: RedirectFollower.FollowRedirect,
+        result: Result<RedirectFollower.FollowRedirect>,
         uiThread: Boolean = false
     ) {
-        if (type !is RedirectFollower.FollowRedirect.NotResolved) {
-            showToast(
-                getString(R.string.resolved_via, getString(type.stringId)),
-                uiThread = uiThread
-            )
-        }
+        result.getOrNull()?.let { type ->
+            if (type !is RedirectFollower.FollowRedirect.NotResolved) {
+                showToast(
+                    getString(R.string.resolved_via, getString(type.stringId)),
+                    uiThread = uiThread
+                )
+            }
+        } ?: showToast(
+            getString(R.string.follow_redirects_failed, result.exceptionOrNull()),
+            uiThread = uiThread
+        )
     }
 
     companion object {
@@ -287,8 +292,7 @@ class BottomSheetActivity : ComponentActivity() {
                 gridItemHeight
             } else appListItemHeight.value
 
-            val baseHeight =
-                ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
+            val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
 
             if (result.filteredItem == null) {
                 OpenWith(
@@ -319,6 +323,7 @@ class BottomSheetActivity : ComponentActivity() {
                     fontFamily = HkGroteskFontFamily,
                     fontWeight = FontWeight.SemiBold
                 )
+
                 Spacer(modifier = Modifier.height(10.dp))
                 CircularProgressIndicator()
             }
@@ -440,7 +445,7 @@ class BottomSheetActivity : ComponentActivity() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        var selectedItem by remember { mutableStateOf(-1) }
+        var selectedItem by remember { mutableIntStateOf(-1) }
         Column(modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
             AppList(
                 bottomSheetViewModel = bottomSheetViewModel,
@@ -600,7 +605,6 @@ class BottomSheetActivity : ComponentActivity() {
                 }
             )
         }
-
     }
 
     @Composable
@@ -831,7 +835,7 @@ class BottomSheetActivity : ComponentActivity() {
         uri: Uri?,
         always: Boolean = false
     ) {
-        val deferred = bottomSheetViewModel.launchApp(info, intent, uri, always)
+        val deferred = bottomSheetViewModel.launchAppAsync(info, intent, uri, always)
         deferred.invokeOnCompletion {
             startActivity(deferred.getCompleted())
             finish()

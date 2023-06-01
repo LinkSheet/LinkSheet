@@ -88,7 +88,7 @@ class BottomSheetViewModel(
         })
     }
 
-    suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
+    private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
         logger.debug("Component=%s", intent.component)
 
         intent.component?.let { component ->
@@ -132,7 +132,7 @@ class BottomSheetViewModel(
         downloadManager.enqueue(request)
     }
 
-    fun launchApp(
+    fun launchAppAsync(
         info: DisplayActivityInfo,
         intent: Intent,
         uri: Uri?,

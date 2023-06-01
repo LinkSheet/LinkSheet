@@ -75,7 +75,7 @@
     <string name="follow_redirects_external_service">Śledź przekierowania za pośrednictwem usługi zewnętrznej</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Polityka prywatności</string>
     <string name="follow_only_known_trackers">Podążaj tylko za znanymi trackerami</string>
-    <string name="follow_only_known_trackers_explainer">Próbuje śledzić przekierowania tylko wtedy, gdy host jest znany jako tracker/przekierowanie</string>
+    <string name="follow_only_known_trackers_explainer">Próbuje śledzić przekierowania tylko wtedy, gdy link jest znany jako tracker/przekierowanie</string>
     <string name="theme">Motyw</string>
     <string name="theme_explainer">Zmień motyw aplikacji</string>
     <string name="system">Systemowy</string>
@@ -98,7 +98,7 @@
     <string name="select_an_app">Wybierz aplikację</string>
     <string name="close">Zamknij</string>
     <string name="dont_show_filtered_item">Nigdy nie wyświetlaj sekcji ostatnio wybranej aplikacji</string>
-    <string name="dont_show_filtered_item_explainer">Nigdy nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego hosta</string>
+    <string name="dont_show_filtered_item_explainer">Nigdy nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
     <string name="set_as_browser_explainer">Dotknij, aby ustawić tę aplikację jako domyślną przeglądarkę</string>
     <string name="single_tap_explainer">Wystarczy jedno dotknięcie zamiast dwóch, aby otworzyć aplikację. Naciśnij i przytrzymaj, aby wybrać aplikację; kliknij dwukrotnie, aby otworzyć informacje o aplikacji</string>
     <string name="disable_toasts_explainer">Nigdy nie pokazuj wyskakujących wiadomości</string>
@@ -128,7 +128,7 @@
     <string name="use_clear_urls_explainer">Użyj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
     <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli adres URL zawiera bezpośredni link do pliku. Spowoduje to wysłanie żądania do adresu URL w celu określenia zawartości pliku.</string>
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
-    <string name="fastfoward_rules_explainer">Użyj eksperymentalnej integracji reguły <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych hostów, wyodrębniając przekierowanie z linku)</string>
+    <string name="fastfoward_rules_explainer">Użyj eksperymentalnej integracji reguły <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
     <string name="redirect_resolve_type_local">lokalny mechanizm rozwiązujący</string>
     <string name="enable_libredirect_explainer">Przekierowywanie linków do przyjaznych dla prywatności frontendów przy użyciu eksperymentalnej integracji <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="use_app_settings_explainer">Niech aplikacja zdecyduje, czy wewnętrzna przeglądarka powinna być używana</string>
@@ -161,11 +161,12 @@
     <string name="log_files">Pliki logów</string>
     <string name="log_viewer">Przeglądarka logów</string>
     <string name="log_viewer_timestamp">Wyświetlanie logu z %s</string>
-    <string name="no_log_entries">Ta sesja nie zawiera żadnych dzienników.</string>
+    <string name="no_log_entries">Ta sesja nie zawiera dzienników.</string>
     <string name="order_of_operation">Kolejność operacji</string>
     <string name="info">Informacje</string>
     <string name="fastforward">FastForward</string>
     <string name="no_libredirect_services">Nie znaleziono usług LibRedirect!</string>
     <string name="clear_urls">ClearURLs</string>
     <string name="libredirect_via">Przez %s</string>
+    <string name="download_started">Rozpoczęto pobieranie</string>
 </resources>

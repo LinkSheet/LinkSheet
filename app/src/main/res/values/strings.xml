@@ -168,4 +168,6 @@
     <string name="fastforward">FastForward</string>
     <string name="clear_urls">ClearURLs</string>
     <string name="download_started">Download started</string>
+    <string name="request_timeout">Request timeout</string>
+    <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
 </resources>

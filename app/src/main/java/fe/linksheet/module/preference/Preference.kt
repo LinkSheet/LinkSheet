@@ -4,6 +4,7 @@ import fe.android.preference.helper.BasePreference.MappedPreference.Companion.ma
 import fe.android.preference.helper.BasePreference.Preference.Companion.booleanPreference
 import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
 import fe.android.preference.helper.BasePreference.InitPreference.Companion.stringPreference
+import fe.android.preference.helper.BasePreference.Preference.Companion.intPreference
 import fe.linksheet.extension.toHex
 import fe.linksheet.module.log.loggerHmac
 import fe.linksheet.module.resolver.BrowserHandler
@@ -57,6 +58,9 @@ object Preferences {
     val downloaderCheckUrlMimeType = booleanPreference("downloaderCheckUrlMimeType")
 
     val enableIgnoreLibRedirectButton = booleanPreference("enable_ignore_lib_redirect_button")
+
+    val followRedirectsTimeout = intPreference("follow_redirects_timeout", 15)
+    val downloaderTimeout = intPreference("downloader_timeout", 15)
 
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHex()

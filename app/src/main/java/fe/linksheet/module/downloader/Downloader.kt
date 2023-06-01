@@ -63,8 +63,10 @@ class Downloader(private val request: Request) {
         return checkMimeType(mimeType, url, extension)
     }
 
-    fun isNonHtmlContentUri(url: String): DownloadCheckResult {
-        val contentType = request.head(url).findHeader(contentTypeHeader)
+    fun isNonHtmlContentUri(url: String, connectTimeout: Int): DownloadCheckResult {
+        val contentType = request.head(url, connectTimeout = connectTimeout)
+            .findHeader(contentTypeHeader)
+
         val firstContentType =
             contentType?.values?.firstOrNull() ?: return DownloadCheckResult.NonDownloadable
         val mimeType = firstContentType.split(";")[0]

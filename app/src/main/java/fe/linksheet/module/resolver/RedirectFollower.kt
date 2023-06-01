@@ -44,7 +44,8 @@ class RedirectFollower(
         localCache: Boolean,
         fastForwardRulesObject: JsonObject,
         onlyKnownTrackers: Boolean,
-        externalService: Boolean
+        externalService: Boolean,
+        connectTimeout: Int
     ): Result<FollowRedirect> {
         if (localCache) {
             val redirect = resolvedRedirectRepository.getForShortUrl(uri.toString()).first()
@@ -59,7 +60,8 @@ class RedirectFollower(
             uri,
             fastForwardRulesObject,
             onlyKnownTrackers,
-            externalService
+            externalService,
+            connectTimeout
         )
 
         if (localCache && followRedirect.getOrNull() !is FollowRedirect.NotResolved) {
@@ -75,16 +77,21 @@ class RedirectFollower(
         uri: Uri,
         fastForwardRulesObject: JsonObject,
         onlyKnownTrackers: Boolean,
-        externalService: Boolean
+        externalService: Boolean,
+        connectTimeout: Int
     ): Result<FollowRedirect> {
         logger.debug("Following redirects for %s", uri, HashProcessor.UriProcessor)
 
         val followUri = uri.toString()
         if (!onlyKnownTrackers || isTracker(followUri, fastForwardRulesObject)) {
             if (externalService) {
-                logger.debug("Using external service for %s", followUri, HashProcessor.StringProcessor)
+                logger.debug(
+                    "Using external service for %s",
+                    followUri,
+                    HashProcessor.StringProcessor
+                )
 
-                val con = redirectResolver.resolveRemote(followUri)
+                val con = redirectResolver.resolveRemote(followUri, connectTimeout)
                 if (con.responseCode != 200) {
                     return Result.failure(Exception("Something went wrong while resolving redirect"))
                 }
@@ -98,7 +105,7 @@ class RedirectFollower(
 
             logger.debug("Using local service for %s", followUri, HashProcessor.StringProcessor)
             //TODO: error handling?
-            val resolved = redirectResolver.resolveLocal(followUri).url.toString()
+            val resolved = redirectResolver.resolveLocal(followUri, connectTimeout).url.toString()
 
             return Result.success(FollowRedirect.Local(resolved))
         }

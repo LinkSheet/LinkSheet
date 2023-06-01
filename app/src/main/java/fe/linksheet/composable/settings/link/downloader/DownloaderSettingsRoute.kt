@@ -19,6 +19,7 @@ import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SettingEnabledCardColumn
+import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -68,6 +69,20 @@ fun DownloaderSettingsRoute(
                     enabled = viewModel.enableDownloader.value,
                     headlineId = R.string.downloader_url_mime_type,
                     subtitleId = R.string.downloader_url_mime_type_explainer
+                )
+            }
+
+            item(key = "downloader_timeout") {
+                SliderRow(
+                    value = viewModel.downloaderTimeout.value.toFloat(),
+                    onValueChange = {
+                        viewModel.updateState(viewModel.downloaderTimeout, it.toInt())
+                    },
+                    enabled = viewModel.enableDownloader.value,
+                    valueRange = 0f..30f,
+                    valueFormatter = { it.toInt().toString() },
+                    headlineId = R.string.request_timeout,
+                    subtitleId = R.string.request_timeout_explainer
                 )
             }
         }

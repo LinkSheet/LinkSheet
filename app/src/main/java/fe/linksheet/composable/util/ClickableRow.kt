@@ -16,27 +16,45 @@ import fe.linksheet.extension.enabled
 import fe.linksheet.extension.runIf
 
 @Composable
+fun NonClickableRow(
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    padding: Dp,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    verticalAlignment: Alignment.Vertical = Alignment.Top,
+    content: @Composable RowScope.() -> Unit
+) {
+    ClickableRow(
+        modifier = modifier,
+        enabled = enabled,
+        paddingHorizontal = padding,
+        paddingVertical = padding,
+        horizontalArrangement = horizontalArrangement,
+        verticalAlignment = verticalAlignment,
+        content = content
+    )
+}
+
+@Composable
 fun ClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     padding: Dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(6.dp))
-            .runIf(enabled){ it.clickable(onClick = onClick) }
-            .padding(padding)
-            .enabled(enabled),
+    ClickableRow(
+        modifier = modifier,
+        enabled = enabled,
+        paddingHorizontal = padding,
+        paddingVertical = padding,
         horizontalArrangement = horizontalArrangement,
-        verticalAlignment = verticalAlignment
-    ) {
-        content(this)
-    }
+        verticalAlignment = verticalAlignment,
+        onClick = onClick,
+        content = content
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -48,7 +66,7 @@ fun ClickableRow(
     paddingVertical: Dp = 5.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
@@ -57,9 +75,9 @@ fun ClickableRow(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(6.dp))
-            .runIf(enabled) {
+            .runIf(enabled && onClick != null) {
                 it.combinedClickable(
-                    onClick = onClick,
+                    onClick = onClick!!,
                     onLongClick = onLongClick,
                     onDoubleClick = onDoubleClick
                 )

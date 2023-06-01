@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
 import fe.fastforwardkt.FastForwardLoader
@@ -63,11 +64,17 @@ class IntentResolver(
     private val followRedirectsLocalCache = preferenceRepository.getBooleanState(
         Preferences.followRedirectsLocalCache
     )
+    private val followRedirectsTimeout = preferenceRepository.getIntState(
+        Preferences.followRedirectsTimeout
+    )
 
     private var enableDownloader =
         preferenceRepository.getBooleanState(Preferences.enableDownloader)
     private var downloaderCheckUrlMimeType = preferenceRepository.getBooleanState(
         Preferences.downloaderCheckUrlMimeType
+    )
+    private val downloaderTimeout = preferenceRepository.getIntState(
+        Preferences.downloaderTimeout
     )
 
     val theme = preferenceRepository.getState(Preferences.theme)
@@ -98,8 +105,10 @@ class IntentResolver(
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        var uri =
-            intent.getUri(useClearUrls.value, useFastForwardRules.value, fastForwardRulesObject)
+        var uri = intent.getUri(
+            useClearUrls.value, useFastForwardRules.value, fastForwardRulesObject
+        )
+
         if (uri == null) {
             logger.debug("Uri is null, something probably went very wrong")
         }
@@ -112,7 +121,8 @@ class IntentResolver(
                 followRedirectsLocalCache.value,
                 fastForwardRulesObject,
                 followOnlyKnownTrackers.value,
-                followRedirectsLocalCache.value
+                followRedirectsLocalCache.value,
+                followRedirectsTimeout.value
             ).getOrNull()?.let {
                 followRedirect = it
                 uri = Uri.parse(it.resolvedUrl)
@@ -128,7 +138,7 @@ class IntentResolver(
         }
 
         val downloadable = if (enableDownloader.value && uri != null) {
-            checkIsDownloadable(uri!!)
+            checkIsDownloadable(uri!!, downloaderTimeout.value)
         } else Downloader.DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)
@@ -216,7 +226,7 @@ class IntentResolver(
         )
     }
 
-    private fun checkIsDownloadable(uri: Uri): Downloader.DownloadCheckResult {
+    private fun checkIsDownloadable(uri: Uri, connectTimeout: Int): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType.value) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
                 logger.debug("File ending check result $it")
@@ -224,6 +234,6 @@ class IntentResolver(
             }
         }
 
-        return downloader.isNonHtmlContentUri(uri.toString())
+        return downloader.isNonHtmlContentUri(uri.toString(), connectTimeout)
     }
 }

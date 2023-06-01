@@ -123,15 +123,16 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
     implementation("androidx.compose.material3:material3:1.2.0-alpha02")
     implementation("androidx.compose.material:material:1.4.3")
-
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
+    implementation("androidx.compose.animation:animation:1.4.3")
+    implementation("androidx.navigation:navigation-compose:2.7.0-alpha01")
+
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
     implementation("androidx.browser:browser:1.5.0")
-    implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.30.1")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
     implementation("com.google.code.gson:gson:2.10.1")
 
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.34")
@@ -145,7 +146,7 @@ dependencies {
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd.android-pref-helper:preference-helper:0.0.11")
     implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.11")
-    implementation("com.github.1fexd:compose-route-util:0.0.8")
+    implementation("com.github.1fexd:compose-route-util:0.0.10")
     implementation("com.github.1fexd:compose-dialog-helper:0.0.1")
 
     implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")

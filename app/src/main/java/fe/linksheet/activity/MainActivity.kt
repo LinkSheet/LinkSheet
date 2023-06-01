@@ -3,14 +3,15 @@ package fe.linksheet.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import fe.android.compose.route.util.composable
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.junkfood.seal.ui.common.animatedComposable
+import fe.android.compose.route.util.argumentRouteComposable
 import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.appsSettingsRoute
 import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
@@ -60,138 +61,139 @@ import fe.linksheet.whitelistedBrowsersSettingsRoute
 
 class MainActivity : ComponentActivity() {
 
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
+            val navController = rememberAnimatedNavController()
 
             AppHost {
                 Spacer(modifier = Modifier.height(5.dp))
 
-                NavHost(
+                AnimatedNavHost(
                     navController = navController,
                     startDestination = mainRoute,
                 ) {
-                    composable(route = mainRoute) {
+                    animatedComposable(route = mainRoute) {
                         MainRoute(navController = navController)
                     }
 
                     val onBackPressed: () -> Unit = { navController.popBackStack() }
-                    composable(route = settingsRoute) {
+                    animatedComposable(route = settingsRoute) {
                         SettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = appsSettingsRoute) {
+                    animatedComposable(route = appsSettingsRoute) {
                         AppsSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = browserSettingsRoute) {
+                    animatedComposable(route = browserSettingsRoute) {
                         BrowserSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = bottomSheetSettingsRoute) {
+                    animatedComposable(route = bottomSheetSettingsRoute) {
                         BottomSheetSettingsRoute(
                             onBackPressed = onBackPressed,
                         )
                     }
 
-                    composable(route = linksSettingsRoute) {
+                    animatedComposable(route = linksSettingsRoute) {
                         LinksSettingsRoute(
                             onBackPressed = onBackPressed,
                             navController = navController,
                         )
                     }
 
-                    composable(route = followRedirectsSettingsRoute) {
+                    animatedComposable(route = followRedirectsSettingsRoute) {
                         FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    composable(route = libRedirectSettingsRoute) {
+                    animatedComposable(route = libRedirectSettingsRoute) {
                         LibRedirectSettingsRoute(
                             onBackPressed = onBackPressed,
                             navController = navController,
                         )
                     }
 
-                    composable(route = libRedirectServiceSettingsRoute) { _, _ ->
+                    argumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
                         LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    composable(route = downloaderSettingsRoute) {
+                    animatedComposable(route = downloaderSettingsRoute) {
                         DownloaderSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    composable(route = themeSettingsRoute) {
+                    animatedComposable(route = themeSettingsRoute) {
                         ThemeSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    composable(route = debugSettingsRoute) {
+                    animatedComposable(route = debugSettingsRoute) {
                         DebugSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = logViewerSettingsRoute) {
+                    animatedComposable(route = logViewerSettingsRoute) {
                         LogSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = logTextViewerSettingsRoute) { _, _ ->
+                    argumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
                         LogTextSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    composable(route = aboutSettingsRoute) {
+                    animatedComposable(route = aboutSettingsRoute) {
                         AboutSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = creditsSettingsRoute) {
+                    animatedComposable(route = creditsSettingsRoute) {
                         CreditsSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    composable(route = preferredBrowserSettingsRoute) {
+                    animatedComposable(route = preferredBrowserSettingsRoute) {
                         PreferredBrowserSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = whitelistedBrowsersSettingsRoute) {
+                    animatedComposable(route = whitelistedBrowsersSettingsRoute) {
                         WhitelistedBrowsersSettingsRoute(navController = navController)
                     }
 
-                    composable(route = inAppBrowserSettingsRoute) {
+                    animatedComposable(route = inAppBrowserSettingsRoute) {
                         InAppBrowserSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )
                     }
 
-                    composable(route = inAppBrowserSettingsDisableInSelectedRoute) {
+                    animatedComposable(route = inAppBrowserSettingsDisableInSelectedRoute) {
                         InAppBrowserSettingsDisableInSelectedRoute(navController = navController)
                     }
 
 
-                    composable(route = preferredAppsSettingsRoute) {
+                    animatedComposable(route = preferredAppsSettingsRoute) {
                         PreferredAppSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     if (AndroidVersion.AT_LEAST_API_31_S) {
-                        composable(route = appsWhichCanOpenLinksSettingsRoute) {
+                        animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
                             AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
                         }
                     }

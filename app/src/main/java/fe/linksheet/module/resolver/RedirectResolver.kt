@@ -39,24 +39,25 @@ class RedirectResolver(
     fun resolveRemote(url: String, connectTimeout: Int): HttpURLConnection {
         return request.post(
             apiUrl,
-            connectTimeout = connectTimeout,
+            connectTimeout = connectTimeout * 1000,
             body = JsonBody(mapOf("url" to url)),
             dataBuilder = {
                 this.headers {
                     "Authorization"("Bearer $token")
                 }
-            })
+            }
+        )
     }
 
     @Throws(IOException::class)
     fun resolveLocal(url: String, connectTimeout: Int): HttpURLConnection {
-        val con = request.head(url, followRedirects = true)
+        val con = request.head(url, connectTimeout = connectTimeout * 1000, followRedirects = true)
         logger.debug("ResolveLocal %s", url, HashProcessor.StringProcessor)
 
         return if (con.responseCode in 400..499) {
             request.get(
                 url,
-                connectTimeout = connectTimeout,
+                connectTimeout = connectTimeout * 1000,
                 followRedirects = true,
                 data = HttpData.of {
                     headers {

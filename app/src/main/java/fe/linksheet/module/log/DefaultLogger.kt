@@ -1,20 +1,10 @@
 package fe.linksheet.module.log
 
 import android.util.Log
-import fe.linksheet.LinkSheetApp
 import javax.crypto.Mac
 import kotlin.reflect.KClass
 
-class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String, mac: Mac) {
-    constructor(
-        context: LinkSheetApp,
-        clazz: KClass<*>,
-        mac: Mac
-    ) : this(context, clazz.simpleName!!, mac)
-
-    private val logHasher = LogHasher.LogKeyHasher(mac)
-    private val appLogger = AppLogger.getInstance()
-
+interface Logger {
     enum class Type(val str: String) {
         Verbose("V") {
             override fun print(tag: String, msg: String): Int = Log.v(tag, msg)
@@ -28,6 +18,36 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
 
         abstract fun print(tag: String, msg: String): Int
     }
+
+    fun verbose(msg: String, vararg dumpable: Any?)
+    fun info(msg: String, vararg dumpable: Any?)
+    fun debug(msg: String, vararg dumpable: Any?)
+    fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>)
+}
+
+class DebugLogger(private val prefix: String) : Logger {
+    override fun verbose(msg: String, vararg dumpable: Any?) {
+        Logger.Type.Verbose.print(prefix, msg.format(*dumpable))
+    }
+
+    override fun info(msg: String, vararg dumpable: Any?) {
+        Logger.Type.Info.print(prefix, msg.format(*dumpable))
+    }
+
+    override fun debug(msg: String, vararg dumpable: Any?) {
+        Logger.Type.Debug.print(prefix, msg.format(*dumpable))
+    }
+
+    override fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>) {
+        Logger.Type.Debug.print(prefix, msg.format(param))
+    }
+}
+
+class DefaultLogger(private val prefix: String, mac: Mac) : Logger {
+    constructor(clazz: KClass<*>, mac: Mac) : this(clazz.simpleName!!, mac)
+
+    private val logHasher = LogHasher.LogKeyHasher(mac)
+    private val appLogger = AppLogger.getInstance()
 
     private fun dump(
         msg: String,
@@ -65,27 +85,27 @@ class Logger(private val linkSheetApp: LinkSheetApp, private val prefix: String,
         hashProcessor
     )
 
-    private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
+    private fun log(type: Logger.Type, msg: String, dumpable: Array<out Any?>) {
         val (normal, redacted) = dump(msg, dumpable)
         log(type, normal, redacted, prefix)
     }
 
-    private fun <T> log(type: Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
+    private fun <T> log(type: Logger.Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
         val (normal, redacted) = dump(msg, param, hashProcessor)
         log(type, normal, redacted, prefix)
     }
 
-    private fun log(type: Type, normal: String, redacted: String, prefix: String) {
+    private fun log(type: Logger.Type, normal: String, redacted: String, prefix: String) {
         appLogger.write(LogEntry(type.str, System.currentTimeMillis(), prefix, normal, redacted))
         type.print(prefix, normal)
     }
 
-    fun verbose(msg: String, vararg dumpable: Any?) = log(Type.Verbose, msg, dumpable)
-    fun info(msg: String, vararg dumpable: Any?) = log(Type.Info, msg, dumpable)
-    fun debug(msg: String, vararg dumpable: Any?) = log(Type.Debug, msg, dumpable)
-    fun <T> debug(
+    override fun verbose(msg: String, vararg dumpable: Any?) = log(Logger.Type.Verbose, msg, dumpable)
+    override fun info(msg: String, vararg dumpable: Any?) = log(Logger.Type.Info, msg, dumpable)
+    override fun debug(msg: String, vararg dumpable: Any?) = log(Logger.Type.Debug, msg, dumpable)
+    override fun <T> debug(
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = log(Type.Debug, msg, param, hashProcessor)
+    ) = log(Logger.Type.Debug, msg, param, hashProcessor)
 }

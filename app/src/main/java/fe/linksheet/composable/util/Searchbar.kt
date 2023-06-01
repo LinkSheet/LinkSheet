@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
@@ -28,14 +30,24 @@ fun Searchbar(
     filter: String,
     onValueChange: (String) -> Unit,
     onClearClick: () -> Unit
-){
-    OutlinedTextField(
+) {
+    TextField(
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
         placeholder = { Text(text = stringResource(id = R.string.search)) },
-        colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = MaterialTheme.colorScheme.primary),
         shape = RoundedCornerShape(size = 32.dp),
         value = filter,
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = stringResource(id = R.string.search),
+            )
+        },
         trailingIcon = {
             if (filter.isNotEmpty()) {
                 IconButton(onClick = onClearClick) {

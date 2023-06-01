@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.android.compose.dialog.helper.dialogHelper
+import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.composable.settings.browser.BrowserCommonDialog
+import fe.linksheet.composable.settings.browser.BrowserCommonPackageSelectorData
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
 import fe.linksheet.composable.settings.browser.BrowserCommonScaffold
 import fe.linksheet.composable.settings.browser.BrowserIconTextRow
@@ -27,16 +27,14 @@ import fe.linksheet.extension.ioState
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.module.viewmodel.WhitelistedBrowsers
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.flowOn
+import fe.linksheet.whitelistedBrowsersSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PreferredBrowserSettingsRoute(
+    navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: PreferredBrowserViewModel = koinViewModel()
+    viewModel: PreferredBrowserViewModel = koinViewModel(),
 ) {
     val activity = LocalContext.currentActivity()
 
@@ -44,29 +42,6 @@ fun PreferredBrowserSettingsRoute(
     val type by viewModel.type.ioState()
     val browserMode by viewModel.browserModeState.ioState()
     val selectedBrowser by viewModel.selectedBrowserState.ioState()
-
-    val dialog = dialogHelper<Unit, WhitelistedBrowsers?, WhitelistedBrowsers>(
-        fetch = {
-            viewModel.whitelistedBrowsers
-                .flowOn(Dispatchers.IO)
-                .firstOrNull()
-                ?.firstOrNull()
-                ?.toMutableMap()
-        },
-        onClose = { closeState ->
-            viewModel.saveWhitelistedBrowsers(closeState!!)
-        },
-        awaitFetchBeforeOpen = false,
-        notifyCloseNoState = false,
-        dynamicHeight = true
-    ) { state, close ->
-        BrowserCommonDialog(
-            title = R.string.whitelisted_browsers,
-            state = state,
-            alwaysShowPackageName = viewModel.alwaysShowPackageName.value,
-            close = close
-        )
-    }
 
     val rows = remember {
         listOf(
@@ -77,17 +52,12 @@ fun PreferredBrowserSettingsRoute(
             BrowserCommonRadioButtonRowData(
                 R.string.none,
                 R.string.none_explainer
-            ),
-            BrowserCommonRadioButtonRowData(
-                R.string.whitelisted,
-                R.string.whitelisted_explainer
-            ) {
-                dialog.open(Unit)
-            }
+            )
         )
     }
 
     BrowserCommonScaffold(
+        navController = navController,
         headline = R.string.preferred_browser,
         explainer = R.string.preferred_browser_explainer,
         onBackPressed = onBackPressed,
@@ -95,7 +65,6 @@ fun PreferredBrowserSettingsRoute(
         values = listOf(
             BrowserHandler.BrowserMode.AlwaysAsk,
             BrowserHandler.BrowserMode.None,
-            BrowserHandler.BrowserMode.Whitelisted
         ),
         state = browserMode,
         rowKey = { it.value },
@@ -106,7 +75,6 @@ fun PreferredBrowserSettingsRoute(
                 onChange = { viewModel.updateState(viewModel.unifiedPreferredBrowser, it) },
                 headline = stringResource(id = R.string.use_unified_preferred_browser),
             )
-
             Column(modifier = Modifier.padding(horizontal = 10.dp)) {
                 if (!viewModel.unifiedPreferredBrowser.value) {
                     FilterChips(
@@ -127,6 +95,12 @@ fun PreferredBrowserSettingsRoute(
             }
         },
         browsers = browsers,
+        selectorData = BrowserCommonPackageSelectorData(
+            R.string.whitelisted,
+            R.string.whitelisted_explainer,
+            BrowserHandler.BrowserMode.Whitelisted,
+            whitelistedBrowsersSettingsRoute
+        )
     ) { browserState ->
         if (browserState == null || browserMode == null || selectedBrowser == null) {
             item(key = "loader") {
@@ -142,7 +116,6 @@ fun PreferredBrowserSettingsRoute(
                         && selectedBrowser!!.matches(app.packageName)
 
                 RadioButtonRow(
-                    modifier = Modifier.padding(horizontal = 10.dp),
                     selected = selected,
                     onClick = { viewModel.updateSelectedBrowser(app.packageName) },
                     onLongClick = { activity.startPackageInfoActivity(app) }

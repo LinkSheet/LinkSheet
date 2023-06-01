@@ -25,8 +25,10 @@ import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsR
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.settings.browser.BrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.settings.browser.mode.WhitelistedBrowsersSettingsRoute
 import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
@@ -40,6 +42,7 @@ import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.debugSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
+import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.libRedirectSettingsRoute
@@ -53,6 +56,7 @@ import fe.linksheet.settingsRoute
 import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.whitelistedBrowsersSettingsRoute
 
 class MainActivity : ComponentActivity() {
 
@@ -160,12 +164,27 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(route = preferredBrowserSettingsRoute) {
-                        PreferredBrowserSettingsRoute(onBackPressed = onBackPressed)
+                        PreferredBrowserSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    composable(route = whitelistedBrowsersSettingsRoute) {
+                        WhitelistedBrowsersSettingsRoute(navController = navController)
                     }
 
                     composable(route = inAppBrowserSettingsRoute) {
-                        InAppBrowserSettingsRoute(onBackPressed = onBackPressed)
+                        InAppBrowserSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
                     }
+
+                    composable(route = inAppBrowserSettingsDisableInSelectedRoute) {
+                        InAppBrowserSettingsDisableInSelectedRoute(navController = navController)
+                    }
+
 
                     composable(route = preferredAppsSettingsRoute) {
                         PreferredAppSettingsRoute(onBackPressed = onBackPressed)

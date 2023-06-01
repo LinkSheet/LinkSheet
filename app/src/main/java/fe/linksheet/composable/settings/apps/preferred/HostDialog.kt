@@ -163,8 +163,8 @@ internal fun hostDialog(
                     val update: (Boolean) -> Unit = remember { { hostState[host] = it } }
 
                     ClickableRow(
+                        paddingVertical = 5.dp,
                         verticalAlignment = Alignment.CenterVertically,
-                        padding = 2.dp,
                         onClick = enabledState.updateState(update)
                     ) {
                         Checkbox(
@@ -175,6 +175,8 @@ internal fun hostDialog(
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = host)
                     }
+
+                    Spacer(modifier = Modifier.height(5.dp))
                 }
             )
         }

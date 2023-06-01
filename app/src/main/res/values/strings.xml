@@ -171,4 +171,6 @@
     <string name="request_timeout">Request timeout</string>
     <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
     <string name="follow_redirects_failed">Follow redirects failed: %s</string>
+    <string name="no_browsers_found">No browsers found.</string>
+    <string name="no_apps_found">No apps found.</string>
 </resources>

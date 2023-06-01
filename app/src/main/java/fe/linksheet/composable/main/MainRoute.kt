@@ -1,8 +1,6 @@
 package fe.linksheet.composable.main
 
 import android.app.Activity
-import android.app.role.RoleManager
-import android.os.Build
 import android.util.Patterns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -31,7 +29,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -196,14 +193,10 @@ fun OpenDefaultBrowserCard(
                 }
             } else {
                 Spacer(modifier = Modifier.width(10.dp))
-                Image(
-                    imageVector = if (defaultBrowserEnabled.isSuccess) Icons.Default.CheckCircle else Icons.Default.Error,
-                    contentDescription = stringResource(id = if (defaultBrowserEnabled.isSuccess) R.string.checkmark else R.string.error),
-                    colorFilter = if (defaultBrowserEnabled.isSuccess) ColorFilter.tint(
-                        color
-                    ) else ColorFilter.tint(
-                        color
-                    )
+                ColoredIcon(
+                    icon = if (defaultBrowserEnabled.isSuccess) Icons.Default.CheckCircle else Icons.Default.Error,
+                    descriptionId = if (defaultBrowserEnabled.isSuccess) R.string.checkmark else R.string.error,
+                    color = color
                 )
 
                 Column(modifier = Modifier.padding(10.dp)) {
@@ -241,7 +234,7 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Spacer(modifier = Modifier.width(10.dp))
 
-            ColoredIcon(icon = Icons.Default.ContentPaste, description = R.string.paste)
+            ColoredIcon(icon = Icons.Default.ContentPaste, descriptionId = R.string.paste)
 
             Column(modifier = Modifier.padding(15.dp)) {
                 Text(

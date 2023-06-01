@@ -17,7 +17,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.extension.forEachElementIndex
 
-data class FilterChipValue<T>(val value: T, @StringRes val string: Int, val icon: ImageVector? = null)
+data class FilterChipValue<T>(
+    val value: T,
+    @StringRes val string: Int,
+    val icon: ImageVector? = null
+)
 
 @Composable
 fun <T> FilterChips(
@@ -59,11 +63,7 @@ fun <T> FilterChip(
         },
         trailingIcon = if (icon != null) {
             {
-                Image(
-                    imageVector = icon,
-                    contentDescription = stringResource(id = label),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-                )
+                ColoredIcon(icon = icon, descriptionId = label)
             }
         } else null
     )

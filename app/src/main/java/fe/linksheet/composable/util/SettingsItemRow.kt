@@ -21,7 +21,6 @@ fun SettingsItemRow(
     content: (@Composable ColumnScope.() -> Unit)? = null
 ) {
     ClickableRow(
-        padding = 10.dp,
         onClick = onClick,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -30,24 +29,20 @@ fun SettingsItemRow(
             Spacer(modifier = Modifier.width(15.dp))
         }
 
-        Column {
-            HeadlineText(headline = headline)
-            SubtitleText(subtitle = subtitle)
-            content?.invoke(this)
-        }
+        Texts(headline = headline, subtitle = subtitle, content = content)
     }
 }
 
 @Composable
 fun SettingsItemRow(
-    @StringRes headline: Int,
-    @StringRes subtitle: Int,
+    @StringRes headlineId: Int,
+    @StringRes subtitleId: Int,
     onClick: () -> Unit,
     image: @Composable (() -> Unit)? = null
 ) {
     SettingsItemRow(
-        headline = stringResource(id = headline),
-        subtitle = stringResource(id = subtitle),
+        headline = stringResource(id = headlineId),
+        subtitle = stringResource(id = subtitleId),
         onClick = onClick,
         image = image
     )
@@ -57,11 +52,16 @@ fun SettingsItemRow(
 fun SettingsItemRow(
     navController: NavController,
     navigateTo: String,
-    @StringRes headline: Int,
-    @StringRes subtitle: Int,
+    @StringRes headlineId: Int,
+    @StringRes subtitleId: Int,
     image: @Composable (() -> Unit)? = null
 ) {
-    SettingsItemRow(headline = headline, subtitle = subtitle, image = image, onClick = {
-        navController.navigate(navigateTo)
-    })
+    SettingsItemRow(
+        headlineId = headlineId,
+        subtitleId = subtitleId,
+        image = image,
+        onClick = {
+            navController.navigate(navigateTo)
+        }
+    )
 }

@@ -12,9 +12,12 @@ import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
+import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.util.flowOfLazy
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -22,12 +25,12 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class PreferredBrowserViewModel(
-    val context: Application,
+    context: Application,
     private val browserResolver: BrowserResolver,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     preferenceRepository: PreferenceRepository
-) : BaseViewModel(preferenceRepository) {
+) : BrowserCommonViewModel(context, preferenceRepository) {
 
     val type = MutableStateFlow(BrowserType.Normal)
 
@@ -49,8 +52,10 @@ class PreferredBrowserViewModel(
         browserResolver.queryDisplayActivityInfoBrowsers(true)
     }
 
-    private val whitelistedNormalBrowsers =
-        getWhitelistedBrowsers(whitelistedNormalBrowsersPackages)
+    private val whitelistedNormalBrowsers = getWhitelistedBrowsers(
+        whitelistedNormalBrowsersPackages
+    )
+
     private val whitelistedInAppBrowsers = getWhitelistedBrowsers(whitelistedInAppBrowsersPackages)
 
     private fun getWhitelistedBrowsers(
@@ -82,22 +87,20 @@ class PreferredBrowserViewModel(
         }
     }
 
-    val whitelistedBrowsers = type.map {
+    override fun items() = type.map {
         when (it) {
             BrowserType.Normal -> whitelistedNormalBrowsers
             BrowserType.InApp -> whitelistedInAppBrowsers
-        }
+        }.first()
     }
 
     enum class BrowserType {
         Normal, InApp
     }
 
-    fun saveWhitelistedBrowsers(
-        activityInfoState: WhitelistedBrowsers
-    ) = ioLaunch {
+    override fun save(selected: BrowserCommonSelected) = ioLaunch {
         val repo = repository.first()
-        activityInfoState.forEach { (activityInfo, enabled) ->
+        selected.forEach { (activityInfo, enabled) ->
             repo.insertOrDelete(enabled, activityInfo.packageName)
         }
     }
@@ -112,5 +115,3 @@ class PreferredBrowserViewModel(
         updateState(selected, selectedBrowserPackage)
     }
 }
-
-typealias WhitelistedBrowsers = MutableMap<DisplayActivityInfo, Boolean>

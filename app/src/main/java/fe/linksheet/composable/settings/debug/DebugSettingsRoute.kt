@@ -15,8 +15,6 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
-import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
@@ -35,10 +33,10 @@ fun DebugSettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = logViewerSettingsRoute,
-                    headline = R.string.logs,
-                    subtitle = R.string.logs_explainer,
+                    headlineId = R.string.logs,
+                    subtitleId = R.string.logs_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.List, description = R.string.logs)
+                        ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
                     }
                 )
             }

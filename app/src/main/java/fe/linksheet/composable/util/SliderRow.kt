@@ -118,7 +118,6 @@ fun SliderRow(
     NonClickableRow(
         modifier = modifier,
         enabled = enabled,
-        padding = 10.dp,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(verticalArrangement = Arrangement.Center) {

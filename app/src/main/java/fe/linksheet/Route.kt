@@ -12,6 +12,35 @@ const val mainRoute = "main_route"
 const val settingsRoute = "settings_route"
 const val appsSettingsRoute = "apps_settings_route"
 const val browserSettingsRoute = "browser_settings_route"
+
+const val inAppBrowserSettingsDisableInSelectedRoute = "inapp_browser_settings_route"
+const val whitelistedBrowsersSettingsRoute = "whitelisted_browsers_settings_route"
+
+//@Keep
+//data class InAppBrowserSettingsDisableInSelectedRoute(
+//
+//) : RouteData {
+//
+//}
+//
+//val inAppBrowserSettingsDisableInSelectedRoute = route(
+//    "inapp_browser_settings_route",
+//    route = InAppBrowserSettingsDisableInSelectedRoute
+//)
+
+@Keep
+//data class WhitelistedBrowserSettingsRoute(
+//
+//) : RouteData {
+//
+//}
+//
+//val whitelistedBrowserSettingsRoute = route(
+//    "whitelisted_browser_settings_route",
+//    route = WhitelistedBrowserSettingsRoute
+//)
+
+
 const val aboutSettingsRoute = "about_settings_route"
 const val creditsSettingsRoute = "credits_settings_route"
 

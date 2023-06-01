@@ -1,9 +1,6 @@
 package fe.linksheet.composable.settings.apps.preferred
 
-import android.os.Build
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -26,28 +23,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
-import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
+import fe.linksheet.extension.searchHeader
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PreferredAppSettingsRoute(
     onBackPressed: () -> Unit,
@@ -56,7 +49,7 @@ fun PreferredAppSettingsRoute(
     val activity = LocalContext.currentActivity()
 
     val preferredApps by viewModel.preferredAppsFiltered.ioState()
-    val filter by viewModel.searchFilter.collectAsStateWithLifecycle()
+    val filter by viewModel.searchFilter.ioState()
     val listState = remember(preferredApps?.size, filter) {
         listState(preferredApps, filter)
     }
@@ -104,7 +97,7 @@ fun PreferredAppSettingsRoute(
                 FloatingActionButton(onClick = {
                     appsDialog.open()
                 }) {
-                    ColoredIcon(icon = Icons.Default.Add, description = R.string.add)
+                    ColoredIcon(icon = Icons.Default.Add, descriptionId = R.string.add)
                 }
             }
         }
@@ -115,22 +108,11 @@ fun PreferredAppSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 15.dp)
         ) {
-            stickyHeader(key = "header") {
-                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                    PreferenceSubtitle(
-                        text = stringResource(R.string.preferred_apps_explainer),
-                        paddingStart = 0.dp
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Searchbar(filter = filter, onFilterChanged = {
-                        viewModel.searchFilter.value = it
-                    })
-
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-            }
+            searchHeader(
+                subtitleId = R.string.preferred_apps_explainer,
+                filter = filter,
+                searchFilter = viewModel.searchFilter
+            )
 
             listHelper(
                 noItems = R.string.no_preferred_apps_set_yet,
@@ -139,7 +121,7 @@ fun PreferredAppSettingsRoute(
                 list = preferredApps,
                 listKey = { it.first.flatComponentName },
             ) { (app, hosts) ->
-                ClickableRow(padding = 5.dp, onClick = {
+                ClickableRow(onClick = {
                     hostDialog.open(HostDialogState(app, hosts))
                 }) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -172,7 +154,7 @@ fun PreferredAppSettingsRoute(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(5.dp))
             }
         }
     }

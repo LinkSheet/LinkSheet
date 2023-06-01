@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.apps
 
-import android.os.Build
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -36,12 +35,12 @@ fun AppsSettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = preferredAppsSettingsRoute,
-                    headline = R.string.preferred_apps,
-                    subtitle = R.string.preferred_apps_settings,
+                    headlineId = R.string.preferred_apps,
+                    subtitleId = R.string.preferred_apps_settings,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.OpenInNew,
-                            description = R.string.preferred_apps
+                            descriptionId = R.string.preferred_apps
                         )
                     }
                 )
@@ -52,12 +51,12 @@ fun AppsSettingsRoute(
                     SettingsItemRow(
                         navController = navController,
                         navigateTo = appsWhichCanOpenLinksSettingsRoute,
-                        headline = R.string.apps_which_can_open_links,
-                        subtitle = R.string.apps_which_can_open_links_explainer_2,
+                        headlineId = R.string.apps_which_can_open_links,
+                        subtitleId = R.string.apps_which_can_open_links_explainer_2,
                         image = {
                             ColoredIcon(
                                 icon = Icons.Default.Verified,
-                                description = R.string.apps_which_can_open_links
+                                descriptionId = R.string.apps_which_can_open_links
                             )
                         }
                     )

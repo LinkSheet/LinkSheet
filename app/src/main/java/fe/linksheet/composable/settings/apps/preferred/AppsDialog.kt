@@ -3,6 +3,7 @@ package fe.linksheet.composable.settings.apps.preferred
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -52,7 +53,7 @@ internal fun appsDialog(
             content = { info ->
                 ClickableRow(
                     verticalAlignment = Alignment.CenterVertically,
-                    padding = 5.dp,
+                    paddingVertical = 5.dp,
                     onClick = { close(AppsDialogCloseState(info)) }
                 ) {
                     Image(
@@ -75,6 +76,8 @@ internal fun appsDialog(
                         }
                     }
                 }
+
+                Spacer(modifier = Modifier.height(5.dp))
             }
         )
     }

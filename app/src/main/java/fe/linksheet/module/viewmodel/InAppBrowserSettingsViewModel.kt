@@ -10,6 +10,8 @@ import fe.linksheet.extension.toDisplayActivityInfos
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
+import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.util.flowOfLazy
@@ -17,10 +19,10 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class InAppBrowserSettingsViewModel(
-    val context: Application,
+    context: Application,
     private val repository: DisableInAppBrowserInSelectedRepository,
     preferenceRepository: PreferenceRepository
-) : BaseViewModel(preferenceRepository) {
+) : BrowserCommonViewModel(context, preferenceRepository) {
     var inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserSettings)
 
     private val disableInAppBrowserInSelectedPackages = repository.getAll().map { list ->
@@ -31,20 +33,16 @@ class InAppBrowserSettingsViewModel(
         context.packageManager.queryAllResolveInfos(true).toDisplayActivityInfos(context, true)
     }
 
-    val disableInAppBrowserInSelected =
+    override fun items() =
         packages.combine(disableInAppBrowserInSelectedPackages) { packages, disableInAppBrowserInSelectedPackages ->
             packages.map {
                 it to (it.packageName in disableInAppBrowserInSelectedPackages)
             }.sortByValueAndName().toMap()
         }
 
-    fun saveInAppBrowserDisableInSelected(
-        activityInfoState: InAppBrowserDisableInSelected
-    ) = ioLaunch {
-        activityInfoState.forEach { (activityInfo, enabled) ->
+    override fun save(selected: BrowserCommonSelected) = ioLaunch {
+        selected.forEach { (activityInfo, enabled) ->
             repository.insertOrDelete(enabled, activityInfo.packageName)
         }
     }
 }
-
-typealias InAppBrowserDisableInSelected = MutableMap<DisplayActivityInfo, Boolean>

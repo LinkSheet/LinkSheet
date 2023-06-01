@@ -62,14 +62,14 @@ fun SettingsScaffold(
 
 @Composable
 fun SettingsScaffold(
-    @StringRes headline: Int,
+    @StringRes headlineId: Int,
     onBackPressed: () -> Unit,
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     content: @Composable (PaddingValues) -> Unit
 ) {
     SettingsScaffold(
-        headline = stringResource(id = headline),
+        headline = stringResource(id = headlineId),
         onBackPressed = onBackPressed,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,

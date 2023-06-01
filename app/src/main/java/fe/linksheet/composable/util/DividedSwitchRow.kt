@@ -58,48 +58,15 @@ fun DividedSwitchRow(
     onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
     onClick: () -> Unit,
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 10.dp),
-        verticalAlignment = Alignment.CenterVertically
+    DividedRow(
+        headline = headline,
+        subtitle = subtitle,
+        subtitleBuilder = subtitleBuilder,
+        onClick = onClick
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .clip(RoundedCornerShape(6.dp))
-                .clickable(onClick = onClick)
-                .padding(start = 10.dp)
-
-        ) {
-            Text(
-                text = headline,
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-
-            subtitleBuilder?.invoke()
-        }
-
-        Divider(
-            modifier = Modifier
-                .height(32.dp)
-                .padding(horizontal = 8.dp)
-                .width(1f.dp)
-                .align(Alignment.CenterVertically),
-            color = MaterialTheme.colorScheme.tertiary
+        Switch(
+            checked = state.value,
+            onCheckedChange = onChange
         )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Switch(
-                checked = state.value,
-                onCheckedChange = onChange
-            )
-        }
     }
 }

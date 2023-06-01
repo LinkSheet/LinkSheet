@@ -7,6 +7,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.compose.RepositoryState
@@ -40,6 +41,8 @@ fun <T, M> RadioButtonRow(
 fun RadioButtonRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    paddingHorizontal: Dp = 10.dp,
+    paddingVertical: Dp = 10.dp,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)?,
     selected: Boolean,
@@ -48,8 +51,8 @@ fun RadioButtonRow(
     ClickableRow(
         modifier = modifier,
         enabled = enabled,
-        paddingHorizontal = 0.dp,
-        paddingVertical = 5.dp,
+        paddingHorizontal = paddingHorizontal,
+        paddingVertical = paddingVertical,
         onClick = onClick,
         onLongClick = onLongClick,
         verticalAlignment = Alignment.CenterVertically,

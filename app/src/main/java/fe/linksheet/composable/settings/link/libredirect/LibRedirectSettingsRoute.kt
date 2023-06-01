@@ -80,7 +80,6 @@ fun LibRedirectSettingsRoute(
                 listKey = { it.service.key },
             ) { (service, enabled, instance) ->
                 ClickableRow(
-                    padding = 10.dp,
                     onClick = {
                         navController.navigate(
                             libRedirectServiceSettingsRoute,

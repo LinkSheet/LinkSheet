@@ -28,8 +28,8 @@ fun CreditsSettingsRoute(
         ) {
             item("openlinkwith") {
                 SettingsItemRow(
-                    headline = R.string.open_link_with,
-                    subtitle = R.string.license_apache_2,
+                    headlineId = R.string.open_link_with,
+                    subtitleId = R.string.license_apache_2,
                     onClick = {
                         uriHandler.openUri(openLinkWithGithub)
                     })
@@ -37,8 +37,8 @@ fun CreditsSettingsRoute(
 
             item("seal") {
                 SettingsItemRow(
-                    headline = R.string.seal,
-                    subtitle = R.string.license_gpl_3,
+                    headlineId = R.string.seal,
+                    subtitleId = R.string.license_gpl_3,
                     onClick = {
                         uriHandler.openUri(sealGithub)
                     }

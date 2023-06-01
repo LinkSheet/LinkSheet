@@ -29,10 +29,10 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = appsSettingsRoute,
-                    headline = R.string.apps,
-                    subtitle = R.string.apps_explainer,
+                    headlineId = R.string.apps,
+                    subtitleId = R.string.apps_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Apps, description = R.string.apps)
+                        ColoredIcon(icon = Icons.Default.Apps, descriptionId = R.string.apps)
                     }
                 )
             }
@@ -41,12 +41,12 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = browserSettingsRoute,
-                    headline = R.string.browser,
-                    subtitle = R.string.browser_explainer,
+                    headlineId = R.string.browser,
+                    subtitleId = R.string.browser_explainer,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.OpenInBrowser,
-                            description = R.string.browser
+                            descriptionId = R.string.browser
                         )
                     }
                 )
@@ -56,12 +56,12 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = bottomSheetSettingsRoute,
-                    headline = R.string.bottom_sheet,
-                    subtitle = R.string.bottom_sheet_explainer,
+                    headlineId = R.string.bottom_sheet,
+                    subtitleId = R.string.bottom_sheet_explainer,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.ArrowUpward,
-                            description = R.string.bottom_sheet
+                            descriptionId = R.string.bottom_sheet
                         )
                     }
                 )
@@ -71,10 +71,10 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = linksSettingsRoute,
-                    headline = R.string.links,
-                    subtitle = R.string.links_explainer,
+                    headlineId = R.string.links,
+                    subtitleId = R.string.links_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Link, description = R.string.links)
+                        ColoredIcon(icon = Icons.Default.Link, descriptionId = R.string.links)
                     }
                 )
             }
@@ -83,12 +83,12 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = themeSettingsRoute,
-                    headline = R.string.theme,
-                    subtitle = R.string.theme_explainer,
+                    headlineId = R.string.theme,
+                    subtitleId = R.string.theme_explainer,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.DisplaySettings,
-                            description = R.string.theme
+                            descriptionId = R.string.theme
                         )
                     }
                 )
@@ -98,10 +98,10 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = debugSettingsRoute,
-                    headline = R.string.debug,
-                    subtitle = R.string.debug_explainer,
+                    headlineId = R.string.debug,
+                    subtitleId = R.string.debug_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Adb, description = R.string.debug)
+                        ColoredIcon(icon = Icons.Default.Adb, descriptionId = R.string.debug)
                     }
                 )
             }
@@ -110,10 +110,10 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = aboutSettingsRoute,
-                    headline = R.string.about,
-                    subtitle = R.string.about_explainer,
+                    headlineId = R.string.about,
+                    subtitleId = R.string.about_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Info, description = R.string.about)
+                        ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.about)
                     }
                 )
             }

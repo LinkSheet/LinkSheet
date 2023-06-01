@@ -68,3 +68,22 @@ class RedirectResolver(
         } else con
     }
 }
+
+fun main() {
+    startKoin {
+        modules(requestModule)
+    }
+
+    object : KoinComponent {
+        val request by inject<Request>()
+
+        init {
+            val resolver = RedirectResolver("", "", request, DebugLogger("yeet"))
+            try {
+                resolver.resolveLocal("https://bit.ly/36Zs0KK", 15)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+}

@@ -51,7 +51,7 @@ fun <T> DialogContent(
 @Composable
 fun <K, V> DialogContent(
     items: Map<K, V>?,
-    key: ((K) -> Any)? = null,
+    key: (K) -> Any,
     bottomRow: @Composable RowScope.() -> Unit,
     content: @Composable LazyItemScope.(K, V) -> Unit
 ) {

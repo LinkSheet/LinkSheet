@@ -39,38 +39,38 @@ fun AboutSettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = creditsSettingsRoute,
-                    headline = R.string.credits,
-                    subtitle = R.string.credits_explainer,
+                    headlineId = R.string.credits,
+                    subtitleId = R.string.credits_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Link, description = R.string.credits)
+                        ColoredIcon(icon = Icons.Default.Link, descriptionId = R.string.credits)
                     }
                 )
             }
 
             item("github") {
                 SettingsItemRow(
-                    headline = R.string.github,
-                    subtitle = R.string.github_explainer,
+                    headlineId = R.string.github,
+                    subtitleId = R.string.github_explainer,
                     onClick = {
                         uriHandler.openUri("https://github.com/1fexd/LinkSheet")
                     },
                     image = {
-                        ColoredIcon(icon = Icons.Default.Home, description = R.string.github)
+                        ColoredIcon(icon = Icons.Default.Home, descriptionId = R.string.github)
                     }
                 )
             }
 
             item("donate") {
                 SettingsItemRow(
-                    headline = R.string.donate,
-                    subtitle = R.string.donate_explainer,
+                    headlineId = R.string.donate,
+                    subtitleId = R.string.donate_explainer,
                     onClick = {
                         uriHandler.openUri("https://coindrop.to/fexd")
                     },
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.CurrencyBitcoin,
-                            description = R.string.donate
+                            descriptionId = R.string.donate
                         )
                     }
                 )
@@ -82,7 +82,7 @@ fun AboutSettingsRoute(
                     subtitle = BuildConfig.VERSION_NAME,
                     onClick = {},
                     image = {
-                        ColoredIcon(icon = Icons.Default.Info, description = R.string.version)
+                        ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.version)
                     },
                     content = {
                         SubtitleText(subtitle = BuildConfig.VERSION_CODE.toString())

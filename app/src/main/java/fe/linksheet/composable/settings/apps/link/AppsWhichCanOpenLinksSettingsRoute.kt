@@ -134,7 +134,6 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                     listKey = { it.flatComponentName },
                 ) { info ->
                     ClickableRow(
-                        padding = 5.dp,
                         onClick = {
                             activity.startActivityWithConfirmation(
                                 viewModel.makeOpenByDefaultSettingsIntent(info)

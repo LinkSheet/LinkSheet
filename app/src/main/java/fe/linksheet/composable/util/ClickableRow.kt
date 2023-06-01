@@ -19,7 +19,8 @@ import fe.linksheet.extension.runIf
 fun NonClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    padding: Dp,
+    paddingHorizontal: Dp = 0.dp,
+    paddingVertical: Dp = 10.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     content: @Composable RowScope.() -> Unit
@@ -27,8 +28,8 @@ fun NonClickableRow(
     ClickableRow(
         modifier = modifier,
         enabled = enabled,
-        paddingHorizontal = padding,
-        paddingVertical = padding,
+        paddingHorizontal = paddingHorizontal,
+        paddingVertical = paddingVertical,
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment,
         content = content
@@ -39,7 +40,8 @@ fun NonClickableRow(
 fun ClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    padding: Dp,
+    paddingHorizontal: Dp = 10.dp,
+    paddingVertical: Dp = 10.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     onClick: (() -> Unit)? = null,
@@ -48,11 +50,13 @@ fun ClickableRow(
     ClickableRow(
         modifier = modifier,
         enabled = enabled,
-        paddingHorizontal = padding,
-        paddingVertical = padding,
+        paddingHorizontal = paddingHorizontal,
+        paddingVertical = paddingVertical,
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment,
         onClick = onClick,
+        onLongClick = null,
+        onDoubleClick = null,
         content = content
     )
 }
@@ -63,7 +67,7 @@ fun ClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     paddingHorizontal: Dp = 0.dp,
-    paddingVertical: Dp = 5.dp,
+    paddingVertical: Dp = 10.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     onClick: (() -> Unit)? = null,

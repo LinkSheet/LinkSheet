@@ -92,6 +92,8 @@ fun LinksSettingsRoute(
                             }
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(5.dp))
                 }
             }
 

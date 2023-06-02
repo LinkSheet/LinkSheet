@@ -146,7 +146,7 @@ dependencies {
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd.android-pref-helper:preference-helper:0.0.11")
     implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.11")
-    implementation("com.github.1fexd:compose-route-util:0.0.10")
+    implementation("com.github.1fexd:compose-route-util:0.0.12")
     implementation("com.github.1fexd:compose-dialog-helper:0.0.1")
 
     implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")

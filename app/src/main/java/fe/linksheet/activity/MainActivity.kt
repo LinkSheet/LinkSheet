@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.junkfood.seal.ui.common.animatedArgumentRouteComposable
 import com.junkfood.seal.ui.common.animatedComposable
-import fe.android.compose.route.util.argumentRouteComposable
 import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.appsSettingsRoute
 import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
@@ -124,7 +124,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    argumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
+                    animatedArgumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
                         LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
                     }
 
@@ -150,7 +150,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    argumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
+                    animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
                         LogTextSettingsRoute(onBackPressed = onBackPressed)
                     }
 

@@ -41,7 +41,7 @@
     <string name="always_ask_explainer">قم دائما بإدراج جميع المتصفحات</string>
     <string name="usage_stats_sorting">فرز التطبيقات حسب الاستخدام</string>
     <string name="no_such_app_found">لا يوجد مثل هذا التطبيق!</string>
-    <string name="none_explainer">قائمة التطبيقات الأصلية فقط ، وإزالة جميع المتصفحات ؛ في حالة وجود تطبيق أصلي واحد فقط ، سيتم فتحه تلقائيا</string>
+    <string name="none_explainer">قائمة التطبيقات الأصلية فقط ، وإزالة جميع المتصفحات. في حالة وجود تطبيق أصلي واحد فقط ، سيتم فتحه تلقائيا. في حالة عدم وجود تطبيق أصلي ، يتم عرض جميع المتصفحات.</string>
     <string name="no_app_to_handle_link_found">لم يتم العثور على تطبيق للتعامل مع الرابط!</string>
     <string name="open_settings">أفتح الإعدادات</string>
     <string name="preferred_apps_explainer">التطبيقات المفضلة هي التطبيقات التي قمت بتعيينها على \"دائمًا\" لفتح مضيفين معينين</string>
@@ -86,7 +86,7 @@
     <string name="clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
     <string name="checkmark">علامة الاختيار</string>
     <string name="links_explainer">الإعدادات المتعلقة بمعالجة الارتباط</string>
-    <string name="clear_urls">استخدام ClearURLs</string>
+    <string name="clear_urls">ClearURLs</string>
     <string name="system">النظام</string>
     <string name="light">مظيء</string>
     <string name="follow_redirects">اتبع عمليات إعادة التوجيه</string>
@@ -119,8 +119,8 @@
     <string name="close">اغلاق</string>
     <string name="dont_show_filtered_item">عدم إظهار مطلقا قسم \"آخر تطبيق تم اختياره\"</string>
     <string name="dont_show_filtered_item_explainer">لن يظهر أبدا القسم العلوي الذي يقترح آخر تطبيق مستخدم للمضيف الذي تم النقر عليه</string>
-    <string name="use_text_share_copy_buttons">استخدم أزرار النص البسيطة لـ \"نسخ عنوان url\" و \"مشاركة على\" و \"تنزيل\"</string>
-    <string name="use_text_share_copy_buttons_explainer">يستبدل الأزرار المحددة \"نسخ عنوان url\" و \"مشاركة على\" و \"تنزيل\" بأزرار نصية بسيطة</string>
+    <string name="use_text_share_copy_buttons">استخدم أزرار نصية بسيطة ل \"نسخ عنوان url\" و \"مشاركة إلى\" و \"تنزيل\" و \"تجاهل LibRedirect\"</string>
+    <string name="use_text_share_copy_buttons_explainer">يستبدل الأزرار الموضحة \"نسخ عنوان url\" و \"مشاركة إلى\" و \"تنزيل\" و \"تجاهل LibRedirect\" بأزرار نصية بسيطة</string>
     <string name="preview_url">معاينة عنوان الرابط</string>
     <string name="app_name">ورقة الروابط</string>
     <string name="preview_url_explainer">إظهار عنوان الرابط الذي تم النقر عليه (بعد معالجته)</string>
@@ -141,4 +141,46 @@
     <string name="lib_redirect">مكتبة اعادة التوجيه</string>
     <string name="lib_redirect_service">مكتبة إعادة التوجيه - %s</string>
     <string name="github">جيتهب</string>
+    <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
+    <string name="normal">عادي</string>
+    <string name="no_apps_which_can_handle_links_found">لم يتم العثور على تطبيقات يمكنها التعامل مع الروابط.</string>
+    <string name="in_app">داخل التطبيق</string>
+    <string name="use_unified_preferred_browser">استخدام الإعدادات الموحدة</string>
+    <string name="libredirect_via">عبر %s</string>
+    <string name="no_libredirect_services">لم يتم العثور على خدمات LibRedirect!</string>
+    <string name="enable_ignore_libredirect_button">تمكين زر \"تجاهل LibRedirect\"</string>
+    <string name="copy_exception">نسخ إلى الحافظة</string>
+    <string name="logs">السجلات</string>
+    <string name="fastforward">تسريع الى الامام</string>
+    <string name="enable_ignore_libredirect_button_explainer">يعرض زرا في الورقة السفلية إذا تمت إعادة توجيه عنوان url عبر LibRedirect، والذي يفتح عنوان url الأصلي بدلا من ذلك</string>
+    <string name="ignore_libredirect">تجاهل LibRedirect</string>
+    <string name="app_crashed">يبدو أن LinkSheet قد تعطل ، تحقق من الخطأ أدناه</string>
+    <string name="debug">تصحيح</string>
+    <string name="debug_explainer">عرض سجلات التطبيق</string>
+    <string name="logs_explainer">عرض سجلات التطبيق</string>
+    <string name="app_log">سجل التطبيق</string>
+    <string name="log_files">ملفات السجل</string>
+    <string name="services">الخدمات</string>
+    <string name="current_session">الجلسة الحالية</string>
+    <string name="no_log_entries">هذه الجلسة لا تحتوي على أي سجلات.</string>
+    <string name="download_started">بدأ التنزيل</string>
+    <string name="log_viewer">عارض السجل</string>
+    <string name="info">المعلومات</string>
+    <string name="log_viewer_timestamp">عرض السجل من %s</string>
+    <string name="order_of_operation">ترتيب العملية</string>
+    <string name="request_timeout">انتهت مهلة الطلب</string>
+    <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
+    <string name="no_apps_found">لم يتم العثور على تطبيقات.</string>
+    <string name="follow_redirects_failed">فشلت عمليات إعادة التوجيه التالية: %s</string>
+    <string name="no_browsers_found">لم يتم العثور على متصفحات.</string>
+    <string name="export_log">تصدير السجلات</string>
+    <string name="export">تصدير</string>
+    <string name="export_mode">وضع التصدير</string>
+    <string name="export_mode_redacted">منقحه</string>
+    <string name="export_mode_default">افتراضي (غير مستحسن ، قد تكون أسماء الحزم والمضيف مرئية)</string>
+    <string name="enable_request_private_browsing_button">تمكين زر \"طلب التصفح الخاص\"</string>
+    <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
+    <string name="request_private_browsing">طلب خاص</string>
+    <string name="use_clear_urls">استخدام ClearURLs</string>
+    <string name="options">الخيارات</string>
 </resources>

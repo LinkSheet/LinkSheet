@@ -50,4 +50,4 @@ body:
         - label: Yes
         - label: No
     validations:
-        required: true
+      required: true

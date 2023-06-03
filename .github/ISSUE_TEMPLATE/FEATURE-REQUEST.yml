@@ -1,15 +1,14 @@
-name: Bug Report
-description: Create a bug report
-labels: [ "bug" ]
+name: Feature request
+description: Request a new feature
+labels: [ "feature request" ]
 assignees:
   - 1fexd
 body:
   - type: textarea
     id: description
     attributes:
-      label: Bug description
-      description: Describe the bug you encountered (and the steps to reproduce it) and what you expected to happen instead.
-      placeholder: What happened?
+      label: Feature description
+      description: Describe the function you would like to see in LinkSheet in as much detail as possible. Also include why this feature is needed, who it benefits and (if applicable) what possible alternatives would be
     validations:
       required: true
   - type: input
@@ -17,14 +16,9 @@ body:
     attributes:
       label: Version
       description: Which LinkSheet version are you using (Settings -> About -> Version)?
-      placeholder: 0.0.31
+      placeholder: Google Pixel 7
     validations:
       required: true
-  - type: input
-    id: previous-version
-    attributes:
-      label: Previous version
-      description: Do you know of a previous LinkSheet version where this bug did not occur? If so, enter the version number, or leave blank
   - type: input
     id: device
     attributes:

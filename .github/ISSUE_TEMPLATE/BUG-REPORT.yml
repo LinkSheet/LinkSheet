@@ -24,12 +24,12 @@ body:
     id: previous-version
     attributes:
       label: Previous version
-      description: Do you know of a previous LinkSheet version where this bug did not occur? If so, enter the version number, or leave blank
+      description: Do you know of a previous LinkSheet version where this bug did not occur? If so, enter the version number, or else leave blank
   - type: input
     id: device
     attributes:
       label: Device
-      description: Which device are you using?
+      description: What device are you using?
       placeholder: Google Pixel 7
     validations:
       required: true
@@ -37,7 +37,7 @@ body:
     id: android-version
     attributes:
       label: Android version
-      description: What Android version is your device running?
+      description: Which Android version is your device running?
       placeholder: Android 13 (Stock)
     validations:
       required: true
@@ -46,13 +46,13 @@ body:
     attributes:
       label: Application log or crash log
       description: If you are using version 0.0.32 or higher, the application log can be copied in Settings -> Debug -> Logs (if the issue occurred on a previous app run, please choose the relevant log from the list, or else choose "Current session"). If the application crashed, copy the crashlog.
-  - type: checkboxes
+  - type: dropdown
     id: reproducible-nightly
     attributes:
       label: Reproducible on latest nightly build
       description: Is this issue reproducible on the [latest nightly build](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)?
       options:
-        - label: "Yes"
-        - label: "No"
+        - "Yes"
+        - "No"
     validations:
       required: true

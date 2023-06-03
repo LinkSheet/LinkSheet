@@ -222,7 +222,7 @@
     <string name="discord">ديسكورد</string>
     <string name="discord_explainer">الدردشة حول ورقة الروابط على ديسكورد</string>
     <string name="donate_card">التبرع بالبطاقة (عبر BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع.   \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
+    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع. \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
     <string name="dev">المطور</string>
     <string name="notifications">الإشعارات</string>
     <string name="notifications_explainer">تكوين الإشعارات المنبثقة</string>

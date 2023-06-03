@@ -83,7 +83,7 @@
     <string name="donate_explainer">تبرع بالعملات المشفرة للمؤلف</string>
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
-    <string name="clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
+    <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
     <string name="checkmark">علامة الاختيار</string>
     <string name="links_explainer">الإعدادات المتعلقة بمعالجة الارتباط</string>
     <string name="clear_urls">ClearURLs</string>

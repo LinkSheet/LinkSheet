@@ -1,0 +1,53 @@
+name: Bug Report
+description: Create a bug report
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - 1fexd
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: Describe the bug you encountered (and the steps to reproduce it) and what you expected to happen instead.
+      placeholder: What happened?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Which LinkSheet version are you using (Settings -> About -> Version)?
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: Which device are you using?
+      placeholder: Google Pixel 7
+    validations:
+      required: true
+  - type: input
+    id: android-version
+    attributes:
+      label: Android version
+      description: What Android version is your device running?
+      placeholder: Android 13 (Stock)
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Application log or crash log
+      description: If you are using version 0.0.32 or higher, the application log can be copied in Settings -> Debug -> Logs (if the issue occurred on a previous app run, please choose the relevant log from the list, or else choose "Current session"). If the application crashed, copy the crashlog.
+  - type: checkboxes
+    id: reproducible-nightly
+    attributes:
+      label: Reproducible on latest nightly build
+      description: Is this issue reproducible on the [latest nightly build](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)?
+      options:
+        - label: Yes
+        - label: No
+    validations:
+        required: true

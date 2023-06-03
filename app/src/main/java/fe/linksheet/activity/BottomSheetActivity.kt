@@ -56,6 +56,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -84,6 +85,7 @@ import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.PrivateBrowsingBrowser
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -195,7 +197,9 @@ class BottomSheetActivity : ComponentActivity() {
 
         val gridSize = 120.dp
         var gridItemHeightPackage = 80.dp
+//            + 50.dp
         var gridItemHeight = 60.dp
+//          + 50.dp
 
         // token from androidx.compose.material.ModelBottomSheet
         val maxModalBottomSheetWidth = 640.dp
@@ -385,12 +389,14 @@ class BottomSheetActivity : ComponentActivity() {
                     if (previewUrl) {
                         UrlPreview(uri = result.uri)
                     }
-
                 }
             }
 
             ButtonRow(
-                bottomSheetViewModel = bottomSheetViewModel, enabled = true,
+                bottomSheetViewModel = bottomSheetViewModel,
+                enabled = true,
+                app = filteredItem,
+                uri = result.uri,
                 onClick = { launchApp(filteredItem, result.uri, it) },
                 hideDrawer = hideDrawer
             )
@@ -401,10 +407,10 @@ class BottomSheetActivity : ComponentActivity() {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
+            modifier = Modifier.padding(horizontal = 28.dp),
             text = stringResource(id = R.string.use_a_different_app),
             fontFamily = HkGroteskFontFamily,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(horizontal = 28.dp)
         )
 
         Spacer(modifier = Modifier.height(5.dp))
@@ -458,6 +464,8 @@ class BottomSheetActivity : ComponentActivity() {
             ButtonRow(
                 bottomSheetViewModel = bottomSheetViewModel,
                 enabled = selectedItem != -1,
+                app = null,
+                uri = null,
                 onClick = { always ->
                     launchApp(
                         result.resolved[selectedItem],
@@ -566,6 +574,12 @@ class BottomSheetActivity : ComponentActivity() {
                                     color = MaterialTheme.colorScheme.tertiary
                                 )
                             }
+
+                            RequestPrivateBrowsingButton(
+                                bottomSheetViewModel = bottomSheetViewModel,
+                                app = info,
+                                uri = result.uri
+                            )
                         }
                     }
                 })
@@ -579,27 +593,35 @@ class BottomSheetActivity : ComponentActivity() {
                         items = result.resolved,
                         key = { _, item -> item.flatComponentName }) { index, info ->
                         Row(
+                            modifier = modifier(index, info).height(appListItemHeight),
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = modifier(index, info).height(appListItemHeight)
                         ) {
-                            Image(
-                                bitmap = info.iconBitmap,
-                                contentDescription = info.label,
-                                modifier = Modifier.size(32.dp)
-                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Image(
+                                    bitmap = info.iconBitmap,
+                                    contentDescription = info.label,
+                                    modifier = Modifier.size(32.dp)
+                                )
 
-                            Spacer(modifier = Modifier.width(5.dp))
+                                Spacer(modifier = Modifier.width(5.dp))
 
-                            Column {
-                                Text(text = info.label)
-                                if (showPackage) {
-                                    Text(
-                                        text = info.packageName,
-                                        fontSize = 12.sp,
-                                        color = MaterialTheme.colorScheme.tertiary
-                                    )
+                                Column {
+                                    Text(text = info.label)
+                                    if (showPackage) {
+                                        Text(
+                                            text = info.packageName,
+                                            fontSize = 12.sp,
+                                            color = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    }
                                 }
                             }
+
+                            RequestPrivateBrowsingButton(
+                                bottomSheetViewModel = bottomSheetViewModel,
+                                app = info,
+                                uri = result.uri
+                            )
                         }
                     }
                 }
@@ -608,13 +630,70 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     @Composable
+    private fun RequestPrivateBrowsingButton(
+        wrapInRow: Boolean = true,
+        bottomSheetViewModel: BottomSheetViewModel,
+        app: DisplayActivityInfo,
+        uri: Uri?
+    ) {
+        if (bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) {
+            val supportedBrowser = PrivateBrowsingBrowser.getSupportedBrowser(
+                app.packageName
+            )
+
+            if (supportedBrowser != null) {
+                if (wrapInRow) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Column {
+                            RequestPrivateBrowsingTextButton(
+                                app = app,
+                                uri = uri,
+                                supportedBrowser = supportedBrowser
+                            )
+                        }
+                    }
+                } else {
+                    RequestPrivateBrowsingTextButton(
+                        app = app,
+                        uri = uri,
+                        supportedBrowser = supportedBrowser
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun RequestPrivateBrowsingTextButton(
+        app: DisplayActivityInfo,
+        uri: Uri?,
+        supportedBrowser: PrivateBrowsingBrowser
+    ) {
+        TextButton(onClick = {
+            launchApp(app, uri, privateBrowsingBrowser = supportedBrowser)
+        }) {
+            Text(
+                text = stringResource(id = R.string.request_private_browsing),
+                textAlign = TextAlign.Center,
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+    }
+
+    @Composable
     private fun ButtonRow(
         bottomSheetViewModel: BottomSheetViewModel,
         enabled: Boolean,
+        app: DisplayActivityInfo?,
+        uri: Uri?,
         onClick: (always: Boolean) -> Unit,
         hideDrawer: () -> Unit
     ) {
-        val context = LocalContext.current
         val result = bottomSheetViewModel.resolveResult!!
 
         val utilButtonWidthSum = utilButtonWidth * listOf(
@@ -627,8 +706,9 @@ class BottomSheetActivity : ComponentActivity() {
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-        val widthHalf =
-            if (landscape) maxModalBottomSheetWidth else LocalConfiguration.current.screenWidthDp.dp
+        val widthHalf = if (landscape) {
+            maxModalBottomSheetWidth
+        } else LocalConfiguration.current.screenWidthDp.dp
 
         val useTwoRows = utilButtonWidthSum > widthHalf / 2
         val padding = PaddingValues(horizontal = 10.dp)
@@ -639,7 +719,15 @@ class BottomSheetActivity : ComponentActivity() {
                 .height((buttonRowHeight + if (useTwoRows) buttonRowHeight else 0.dp))
         ) {
             if (useTwoRows) {
-                OpenButtons(bottomSheetViewModel, enabled, false, padding, onClick)
+                OpenButtons(
+                    bottomSheetViewModel = bottomSheetViewModel,
+                    enabled = enabled,
+                    app = app,
+                    uri = uri,
+                    arrangeEnd = false,
+                    padding = padding,
+                    onClick = onClick
+                )
             }
 
             Row(
@@ -648,7 +736,6 @@ class BottomSheetActivity : ComponentActivity() {
                     .height(buttonRowHeight)
                     .padding(horizontal = buttonPadding)
             ) {
-
                 if (bottomSheetViewModel.enableCopyButton.value) {
                     OutlinedOrTextButton(
                         textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
@@ -724,8 +811,26 @@ class BottomSheetActivity : ComponentActivity() {
                     )
                 }
 
+                if (!useTwoRows && app != null) {
+                    Spacer(modifier = Modifier.width(2.dp))
+                    RequestPrivateBrowsingButton(
+                        wrapInRow = false,
+                        bottomSheetViewModel = bottomSheetViewModel,
+                        app = app,
+                        uri = uri
+                    )
+                }
+
                 if (!useTwoRows) {
-                    OpenButtons(bottomSheetViewModel, enabled, true, padding, onClick)
+                    OpenButtons(
+                        bottomSheetViewModel = bottomSheetViewModel,
+                        enabled = enabled,
+                        app = null,
+                        uri = null,
+                        arrangeEnd = true,
+                        padding = padding,
+                        onClick = onClick
+                    )
                 }
             }
         }
@@ -735,6 +840,8 @@ class BottomSheetActivity : ComponentActivity() {
     private fun OpenButtons(
         bottomSheetViewModel: BottomSheetViewModel,
         enabled: Boolean,
+        app: DisplayActivityInfo? = null,
+        uri: Uri?,
         arrangeEnd: Boolean = false,
         padding: PaddingValues,
         onClick: (always: Boolean) -> Unit,
@@ -746,36 +853,45 @@ class BottomSheetActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(buttonRowHeight)
-                .runIf(arrangeEnd,
-                    { it.padding(end = buttonPadding) },
-                    { it.padding(start = buttonPadding) }
-                ),
+                .padding(horizontal = buttonPadding),
             horizontalArrangement = if (arrangeEnd) Arrangement.End else Arrangement.Start
         ) {
             if (!result.isEmpty) {
-                TextButton(
-                    enabled = enabled,
-                    contentPadding = padding,
-                    onClick = { onClick(false) }) {
-                    Text(
-                        text = stringResource(id = R.string.just_once),
-                        fontFamily = HkGroteskFontFamily,
-                        maxLines = 1,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    TextButton(
+                        enabled = enabled,
+                        contentPadding = padding,
+                        onClick = { onClick(false) }
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.just_once),
+                            fontFamily = HkGroteskFontFamily,
+                            maxLines = 1,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(5.dp))
+
+                    TextButton(
+                        enabled = enabled,
+                        contentPadding = padding,
+                        onClick = { onClick(true) }
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.always),
+                            fontFamily = HkGroteskFontFamily,
+                            maxLines = 1,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
 
-                Spacer(modifier = Modifier.width(5.dp))
-
-                TextButton(
-                    enabled = enabled,
-                    contentPadding = padding,
-                    onClick = { onClick(true) }) {
-                    Text(
-                        text = stringResource(id = R.string.always),
-                        fontFamily = HkGroteskFontFamily,
-                        maxLines = 1,
-                        fontWeight = FontWeight.SemiBold
+                if (app != null) {
+                    RequestPrivateBrowsingButton(
+                        bottomSheetViewModel = bottomSheetViewModel,
+                        app = app,
+                        uri = uri
                     )
                 }
             } else {
@@ -833,9 +949,13 @@ class BottomSheetActivity : ComponentActivity() {
     fun launchApp(
         info: DisplayActivityInfo,
         uri: Uri?,
-        always: Boolean = false
+        always: Boolean = false,
+        privateBrowsingBrowser: PrivateBrowsingBrowser? = null
     ) {
-        val deferred = bottomSheetViewModel.launchAppAsync(info, intent, uri, always)
+        val deferred = bottomSheetViewModel.launchAppAsync(
+            info, intent, uri, always, privateBrowsingBrowser
+        )
+
         deferred.invokeOnCompletion {
             startActivity(deferred.getCompleted())
             finish()

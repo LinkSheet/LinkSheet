@@ -22,7 +22,8 @@ class BottomSheetSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
     private val appOpsManager = context.getSystemService<AppOpsManager>()!!
 
-    val enableIgnoreLibRedirectButton = preferenceRepository.getBooleanState(Preferences.enableIgnoreLibRedirectButton)
+    val enableIgnoreLibRedirectButton =
+        preferenceRepository.getBooleanState(Preferences.enableIgnoreLibRedirectButton)
     var enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
     var hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
     var singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
@@ -34,6 +35,9 @@ class BottomSheetSettingsViewModel(
     var dontShowFilteredItem =
         preferenceRepository.getBooleanState(Preferences.dontShowFilteredItem)
     var previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
+    var enableRequestPrivateBrowsingButton = preferenceRepository.getBooleanState(
+        Preferences.enableRequestPrivateBrowsingButton
+    )
 
     var usageStatsSorting = preferenceRepository.getBooleanState(Preferences.usageStatsSorting)
 

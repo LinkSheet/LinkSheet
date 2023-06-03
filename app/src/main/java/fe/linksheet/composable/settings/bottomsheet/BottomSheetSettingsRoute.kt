@@ -6,6 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import fe.linksheet.R
@@ -14,6 +15,7 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.extension.currentActivity
 import fe.linksheet.extension.observeAsState
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -161,6 +163,20 @@ fun BottomSheetSettingsRoute(
                     viewModel = viewModel,
                     headlineId = R.string.preview_url,
                     subtitleId = R.string.preview_url_explainer
+                )
+            }
+
+            item(key = "enable_request_private_browsing") {
+                SwitchRow(
+                    state = viewModel.enableRequestPrivateBrowsingButton,
+                    viewModel = viewModel,
+                    headline = stringResource(id = R.string.enable_request_private_browsing_button),
+                    subtitle = stringResource(
+                        id = R.string.enable_request_private_browsing_button_explainer,
+                        PrivateBrowsingBrowser.supportedBrowsers.joinToString(
+                            separator = ", ",
+                        ) { it.displayName }
+                    )
                 )
             }
         }

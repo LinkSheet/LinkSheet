@@ -62,6 +62,8 @@ object Preferences {
     val followRedirectsTimeout = intPreference("follow_redirects_timeout", 15)
     val downloaderTimeout = intPreference("downloader_timeout", 15)
 
+    val enableRequestPrivateBrowsingButton = booleanPreference("enable_request_private_browsing_button")
+
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHex()
     }

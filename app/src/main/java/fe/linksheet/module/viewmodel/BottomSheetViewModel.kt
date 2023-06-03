@@ -32,6 +32,7 @@ import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.Locale
@@ -66,6 +67,10 @@ class BottomSheetViewModel(
         Preferences.useTextShareCopyButtons
     )
     val previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
+
+    val enableRequestPrivateBrowsingButton = preferenceRepository.getBooleanState(
+        Preferences.enableRequestPrivateBrowsingButton
+    )
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
@@ -136,10 +141,17 @@ class BottomSheetViewModel(
         info: DisplayActivityInfo,
         intent: Intent,
         uri: Uri?,
-        always: Boolean = false
+        always: Boolean = false,
+        privateBrowsingBrowser: PrivateBrowsingBrowser? = null
     ) = ioAsync {
-        info.intentFrom(intent.newIntent(uri)).also {
-            persistSelectedIntent(it, always)
+        val newIntent =  info.intentFrom(intent.newIntent(uri)).let {
+            privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
+
+        if(privateBrowsingBrowser == null){
+            persistSelectedIntent(newIntent, always)
+        }
+
+        newIntent
     }
 }

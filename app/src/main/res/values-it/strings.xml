@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="just_once">Solo una volta</string>
+    <string name="open_with">Apri con</string>
+    <string name="always">Sempre</string>
+</resources>

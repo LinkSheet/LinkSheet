@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="open_with">打开方式</string>
     <string name="just_once">仅此一次</string>
@@ -127,4 +128,14 @@
     <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
     <string name="random_instance">随机实例</string>
+    <string name="in_app_browser">应用内置的浏览器</string>
+    <string name="always_disable">禁用</string>
+    <string name="always_disable_explainer">无论应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
+    <string name="use_app_settings">使用应用推荐的选择</string>
+    <string name="in_app_browser_explainer">应用内置浏览器模式设置</string>
+    <string name="use_app_settings_explainer">由应用决定用不用它内置的浏览器</string>
+    <string name="disable_in_selected_explainer">无论选中的应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
+    <string name="browser">浏览器</string>
+    <string name="browser_explainer">浏览器模式和应用内置浏览器设置</string>
+    <string name="disable_in_selected">不使用所选应用内置的浏览器</string>
 </resources>

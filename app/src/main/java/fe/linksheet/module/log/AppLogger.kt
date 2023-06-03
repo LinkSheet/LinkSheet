@@ -19,6 +19,8 @@ data class LogEntry(
     val message: String,
     val redactedMessage: String,
 ) {
+    val messagePrefix = "$unixMillis $type $prefix: "
+
     override fun toString() = buildSeparatedString(" ") {
         item { append(type) }
         item { append(unixMillis) }

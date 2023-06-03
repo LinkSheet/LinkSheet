@@ -6,13 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
+import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.extension.setText
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -105,13 +103,7 @@ class CrashHandlerActivity : ComponentActivity() {
                                 }
 
 
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(end = 15.dp)
-                                        .height(50.dp),
-                                    horizontalArrangement = Arrangement.End
-                                ) {
+                               BottomRow {
                                     TextButton(
                                         onClick = {
                                             clipboardManager.setText(

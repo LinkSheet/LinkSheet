@@ -173,4 +173,9 @@
     <string name="follow_redirects_failed">Follow redirects failed: %s</string>
     <string name="no_browsers_found">No browsers found.</string>
     <string name="no_apps_found">No apps found.</string>
+    <string name="export">Export</string>
+    <string name="export_log">Export log</string>
+    <string name="export_mode">Export mode</string>
+    <string name="export_mode_redacted">Redacted</string>
+    <string name="export_mode_default">Default (not recommended, package and host names may be visible)</string>
 </resources>

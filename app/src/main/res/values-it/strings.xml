@@ -145,4 +145,6 @@
     <string name="instance_not_available_anymore">L\'istanza non è più disponibile!</string>
     <string name="disable_in_selected_explainer">Disabilita il browser in-app nelle app selezionate, indipendentemente da ciò che l\'app desidera utilizzare</string>
     <string name="disable_in_selected">Disabilita per selezionati</string>
+    <string name="preferred_apps_settings"></string>
+    <string name="apps_which_can_open_links"></string>
 </resources>

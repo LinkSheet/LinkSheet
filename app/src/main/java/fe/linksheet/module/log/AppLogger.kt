@@ -2,6 +2,7 @@ package fe.linksheet.module.log
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.decodeToString
@@ -55,11 +56,13 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
     val startupTime: LocalDateTime = LocalDateTime.now()
     val logEntries = mutableListOf<LogEntry>()
 
-    fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles()
+    fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles().also { Log.d("AppLogger", "${it.contentToString()}") }
         ?.filter { it.length() > 0L }
         ?.sortedDescending()?.map { file ->
             file.name.substring(0, file.name.indexOf(fileExt))
         } ?: emptyList()
+
+    fun deleteLogFile(name: String) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt).delete()
 
     fun readLogFile(name: String) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt)
         .readLines()

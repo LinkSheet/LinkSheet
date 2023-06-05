@@ -159,7 +159,7 @@
     <string name="services">Services</string>
     <string name="no_libredirect_services">No LibRedirect services found!</string>
     <string name="current_session">Current session</string>
-    <string name="log_files">Log files</string>
+    <string name="log_files">Past log files</string>
     <string name="log_viewer">Log viewer</string>
     <string name="log_viewer_timestamp">Viewing log from %s</string>
     <string name="no_log_entries">This session does not contain any logs.</string>
@@ -185,4 +185,6 @@
     <string name="include_settings">Include settings (recommended)</string>
     <string name="include_fingerprint">Include device fingerprint (recommended)</string>
     <string name="log_privacy">To learn about log privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
+    <string name="delete">Delete</string>
+    <string name="no_logs_found">No past logs found!</string>
 </resources>

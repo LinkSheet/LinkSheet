@@ -169,7 +169,6 @@
     <string name="clear_urls">ClearURLs</string>
     <string name="libredirect_via">Przez %s</string>
     <string name="download_started">Rozpoczęto pobieranie</string>
-    <string name="export_mode_redacted">Zredagowany</string>
     <string name="request_timeout">Limit czasu żądania</string>
     <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
     <string name="follow_redirects_failed">Śledzenie przekierowań nie powiodło się: %s</string>
@@ -178,7 +177,6 @@
     <string name="export">Eksportuj</string>
     <string name="export_log">Eksportuj log</string>
     <string name="export_mode">Rodzaj eksportu</string>
-    <string name="export_mode_default">Domyślny (niezalecane, nazwy pakietów i hostów mogą być widoczne)</string>
     <string name="enable_request_private_browsing_button">Włącz przycisk „Tryb prywatny”</string>
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty link w trybie prywatnym. Obsługiwane przeglądarki: %s</string>
     <string name="request_private_browsing">Tryb prywatny</string>

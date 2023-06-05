@@ -1,6 +1,5 @@
 package fe.linksheet.activity
 
-import android.content.ClipboardManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,25 +28,29 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.getSystemService
 import com.junkfood.seal.ui.component.PreferenceSubtitle
+import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
-import fe.linksheet.extension.setText
+import fe.linksheet.composable.util.ExportLogDialog
+import fe.linksheet.lineSeparator
+import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.HkGroteskFontFamily
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CrashHandlerActivity : ComponentActivity() {
     companion object {
         const val extraCrashException = "EXTRA_CRASH_EXCEPTION_TEXT"
     }
 
+    private val viewModel by viewModel<CrashHandlerViewerViewModel>()
+
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val exception = intent?.getStringExtra(extraCrashException)
-        val clipboardManager = getSystemService<ClipboardManager>()!!
 
         setContent {
             AppHost {
@@ -55,6 +58,20 @@ class CrashHandlerActivity : ComponentActivity() {
                     rememberTopAppBarState(),
                     canScroll = { true }
                 )
+
+                val exportDialog = dialogHelper<Unit, String, Unit>(
+                    fetch = { exception!! },
+                    awaitFetchBeforeOpen = true,
+                    dynamicHeight = true
+                ) { state, close ->
+                    ExportLogDialog(
+                        logViewCommon = viewModel.logViewCommon,
+                        clipboardManager = viewModel.clipboardManager,
+                        close = close,
+                    ) { sb, _ ->
+                        sb.append(state!!, lineSeparator)
+                    }
+                }
 
                 Scaffold(
                     modifier = Modifier
@@ -102,17 +119,13 @@ class CrashHandlerActivity : ComponentActivity() {
                                     }
                                 }
 
-
-                               BottomRow {
+                                BottomRow {
                                     TextButton(
                                         onClick = {
-                                            clipboardManager.setText(
-                                                resources.getString(R.string.crash_log),
-                                                exception
-                                            )
+                                            exportDialog.open(Unit)
                                         }
                                     ) {
-                                        Text(text = stringResource(id = R.string.copy_exception))
+                                        Text(text = stringResource(id = R.string.export))
                                     }
                                 }
                             }

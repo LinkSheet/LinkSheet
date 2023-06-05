@@ -44,8 +44,20 @@ redacted version of the log. In the redacted version, personal identifiers like 
 hosts are hashed with `HmacSHA256` (a random key is generated when the app is launched for the first
 time). This approach ensures privacy while still allowing debugging.
 
-### ADB logcat
+### Other log content
+
+Additionally, the both logs will include the device fingerprint by default. This fingerprint contains the
+device brand, device
+name, Android version, Android build id, Android version incremental id, user type (e.g. user) and
+tags (e.g. release-keys). While this fingerprint may be considered personal data, it may be
+incredibly useful while debugging issues.
+
+Settings are also included in both logs by default since they may also help a lot while debugging
+issues. While they do not include any personal data (settings containing package names are obscured
+when the log is exported in redacted mode), exporting them can still be disabled.
+
+## ADB logcat
 
 ADB logcats of LinkSheet may include personal identifiable information like installed packages or
 visited hosts as well as preferences. Logcats should only be shared in rare cases where a full log
-is required to debug an issue. Logcats should not be published publically.
+is required to debug an issue. Logcats should not be published publicly.

@@ -7,16 +7,20 @@ import androidx.lifecycle.SavedStateHandle
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.module.log.AppLogger
+import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
+import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.flow.map
 
 class LogTextSettingsViewModel(
     context: Application,
     savedStateHandle: SavedStateHandle,
+    private val loggerFactory: LoggerFactory,
     val preferenceRepository: PreferenceRepository
 ) : SavedStateViewModel<LogTextViewerRoute>(savedStateHandle, preferenceRepository) {
     private val appLogger = AppLogger.getInstance()
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
+    val logViewCommon = LogViewCommon(preferenceRepository, loggerFactory)
 
     val timestamp = getSavedStateFlow(LogTextViewerRoute::timestamp)
     private val fileName = getSavedStateFlowNullable(LogTextViewerRoute::fileName)

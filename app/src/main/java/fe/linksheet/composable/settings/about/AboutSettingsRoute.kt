@@ -6,9 +6,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.BuildConfig
@@ -18,6 +20,9 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.donationLink
+import fe.linksheet.lineSeparator
+import fe.linksheet.linksheetGithub
 
 
 @Composable
@@ -25,8 +30,8 @@ fun AboutSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
-    val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
+    val clipboardManager = LocalClipboardManager.current
 
     SettingsScaffold(R.string.about, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -52,7 +57,7 @@ fun AboutSettingsRoute(
                     headlineId = R.string.github,
                     subtitleId = R.string.github_explainer,
                     onClick = {
-                        uriHandler.openUri("https://github.com/1fexd/LinkSheet")
+                        uriHandler.openUri(linksheetGithub)
                     },
                     image = {
                         ColoredIcon(icon = Icons.Default.Home, descriptionId = R.string.github)
@@ -65,7 +70,7 @@ fun AboutSettingsRoute(
                     headlineId = R.string.donate,
                     subtitleId = R.string.donate_explainer,
                     onClick = {
-                        uriHandler.openUri("https://coindrop.to/fexd")
+                        uriHandler.openUri(donationLink)
                     },
                     image = {
                         ColoredIcon(
@@ -80,7 +85,11 @@ fun AboutSettingsRoute(
                 SettingsItemRow(
                     headline = stringResource(id = R.string.version),
                     subtitle = BuildConfig.VERSION_NAME,
-                    onClick = {},
+                    onClick = {
+                        clipboardManager.setText(buildAnnotatedString {
+                            append(BuildConfig.VERSION_NAME, lineSeparator, BuildConfig.VERSION_CODE.toString())
+                        })
+                    },
                     image = {
                         ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.version)
                     },

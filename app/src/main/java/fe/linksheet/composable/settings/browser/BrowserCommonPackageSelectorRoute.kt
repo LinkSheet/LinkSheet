@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.CheckboxRow
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.mapState
 import fe.linksheet.extension.ioState
@@ -82,17 +83,11 @@ fun BrowserCommonPackageSelectorRoute(
                 val enabledState = remember { mutableStateOf(enabled) }
                 val update: (Boolean) -> Unit = remember { { state[app] = it } }
 
-                ClickableRow(
-                    verticalAlignment = Alignment.CenterVertically,
-                    onClick = enabledState.updateState(update)
+                CheckboxRow(
+                    checked = enabledState.value,
+                    onClick = enabledState.updateState(update),
+                    onCheckedChange = enabledState.updateStateFromResult(update)
                 ) {
-                    Checkbox(
-                        checked = enabledState.value,
-                        onCheckedChange = enabledState.updateStateFromResult(update)
-                    )
-
-                    Spacer(modifier = Modifier.width(5.dp))
-
                     BrowserIconTextRow(
                         app = app,
                         selected = enabled,

@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.debug.log
 
-import android.content.ClipboardManager
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,17 +18,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -47,19 +41,23 @@ import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow
+import fe.linksheet.composable.util.CheckboxRow
 import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogSpacer
+import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.HeadlineText
+import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.ListState
-import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
 import fe.linksheet.extension.localizedString
 import fe.linksheet.extension.setText
 import fe.linksheet.extension.unixMillisToLocalDateTime
+import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
+import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -75,11 +73,31 @@ fun LogTextSettingsRoute(
         listState(logEntries)
     }
 
+    val items = remember {
+        mapOf<Boolean, (LogEntry) -> String>(
+            true to { it.messagePrefix + it.redactedMessage },
+            false to { it.messagePrefix + it.message }
+        )
+    }
+
     val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
         fetch = { logEntries!! },
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
-    ) { state, close -> ExportDialog(state!!, close, viewModel.clipboardManager) }
+    ) { state, close ->
+        ExportLogDialog(
+            logViewCommon = viewModel.logViewCommon,
+            clipboardManager = viewModel.clipboardManager,
+            close = close,
+        ) { sb, redactLog ->
+            state!!.joinTo(
+                sb,
+                separator = lineSeparator,
+                postfix = lineSeparator,
+                transform = items[redactLog]!!
+            )
+        }
+    }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->
         Column(modifier = Modifier.fillMaxSize()) {
@@ -201,80 +219,3 @@ fun LogTextSettingsRoute(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ExportDialog(
-    logEntries: List<LogEntry>,
-    close: OnClose<Unit>,
-    clipboardManager: ClipboardManager
-) {
-    val context = LocalContext.current
-
-    var expanded by remember { mutableStateOf(false) }
-    val items = remember {
-        mapOf<Int, (LogEntry) -> String>(
-            R.string.export_mode_redacted to { it.messagePrefix + it.redactedMessage },
-            R.string.export_mode_default to { it.messagePrefix + it.message }
-        )
-    }
-
-    var selectedMode by remember { mutableIntStateOf(items.keys.first()) }
-
-    DialogColumn {
-        HeadlineText(headlineId = R.string.export_log)
-        DialogSpacer()
-        SubtitleText(subtitleId = R.string.export_mode)
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            }
-        ) {
-            TextField(
-                modifier = Modifier
-                    .menuAnchor()
-                    .fillMaxWidth(),
-                value = stringResource(id = selectedMode),
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                }
-            )
-
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                items.forEach { (textId, _) ->
-                    DropdownMenuItem(
-                        text = { Text(text = stringResource(id = textId)) },
-                        onClick = {
-                            selectedMode = textId
-                            expanded = false
-                        }
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        BottomRow {
-            TextButton(
-                onClick = {
-                    clipboardManager.setText(
-                        context.resources.getString(R.string.log),
-                        logEntries.joinToString(separator = "\n") { items[selectedMode]!!.invoke(it) }
-                    )
-                    close(Unit)
-                }
-            ) {
-                Text(text = stringResource(id = R.string.export))
-            }
-        }
-    }
-}

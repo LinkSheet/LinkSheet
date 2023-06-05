@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.linksheet.extension.runIf
 import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
@@ -57,7 +58,7 @@ fun DividedRow(
 @Composable
 fun DividedRow(
     modifier: Modifier = Modifier,
-    onLeftClick: () -> Unit,
+    onLeftClick: (() -> Unit)? = null,
     paddingHorizontal: Dp = 10.dp,
     paddingVertical: Dp = 10.dp,
     leftContent: @Composable ColumnScope.() -> Unit,
@@ -73,7 +74,7 @@ fun DividedRow(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .clip(RoundedCornerShape(6.dp))
-                .clickable(onClick = onLeftClick),
+                .runIf(onLeftClick != null) { it.clickable(onClick = onLeftClick!!) },
             content = leftContent
         )
 

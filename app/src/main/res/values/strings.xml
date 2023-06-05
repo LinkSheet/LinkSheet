@@ -149,7 +149,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the url has been redirected via LibRedirect, which opens the original url instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
     <string name="app_crashed">Looks like LinkSheet has crashed, checkout the error below</string>
-    <string name="copy_exception">Copy to clipboard</string>
+    <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="debug">Debug</string>
     <string name="debug_explainer">View app logs</string>
     <string name="logs">Logs</string>
@@ -159,7 +159,7 @@
     <string name="services">Services</string>
     <string name="no_libredirect_services">No LibRedirect services found!</string>
     <string name="current_session">Current session</string>
-    <string name="log_files">Log files</string>
+    <string name="log_files">Past log files</string>
     <string name="log_viewer">Log viewer</string>
     <string name="log_viewer_timestamp">Viewing log from %s</string>
     <string name="no_log_entries">This session does not contain any logs.</string>
@@ -176,11 +176,15 @@
     <string name="export">Export</string>
     <string name="export_log">Export log</string>
     <string name="export_mode">Export mode</string>
-    <string name="export_mode_redacted">Redacted</string>
-    <string name="export_mode_default">Default (not recommended, package and host names may be visible)</string>
     <string name="enable_request_private_browsing_button">Enable \"Request private browsing\" button</string>
     <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the clicked URL in private browsing mode. Supported browsers: %s</string>
     <string name="request_private_browsing">Request private</string>
     <string name="crash_log">Crash log</string>
     <string name="log">Log</string>
+    <string name="redact_log">Redact log (recommended, disabling this may leak package names and host names)</string>
+    <string name="include_settings">Include settings (recommended)</string>
+    <string name="include_fingerprint">Include device fingerprint (recommended)</string>
+    <string name="log_privacy">To learn about log privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
+    <string name="delete">Delete</string>
+    <string name="no_logs_found">No past logs found!</string>
 </resources>

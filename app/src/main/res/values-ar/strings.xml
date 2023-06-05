@@ -148,7 +148,7 @@
     <string name="libredirect_via">عبر %s</string>
     <string name="no_libredirect_services">لم يتم العثور على خدمات LibRedirect!</string>
     <string name="enable_ignore_libredirect_button">تمكين زر \"تجاهل LibRedirect\"</string>
-    <string name="copy_exception">نسخ إلى الحافظة</string>
+    <string name="copy_to_clipboard">نسخ إلى الحافظة</string>
     <string name="logs">السجلات</string>
     <string name="fastforward">تسريع الى الامام</string>
     <string name="enable_ignore_libredirect_button_explainer">يعرض زرا في الورقة السفلية إذا تمت إعادة توجيه عنوان url عبر LibRedirect، والذي يفتح عنوان url الأصلي بدلا من ذلك</string>
@@ -175,8 +175,6 @@
     <string name="export_log">تصدير السجلات</string>
     <string name="export">تصدير</string>
     <string name="export_mode">وضع التصدير</string>
-    <string name="export_mode_redacted">منقحه</string>
-    <string name="export_mode_default">افتراضي (غير مستحسن ، قد تكون أسماء الحزم والمضيف مرئية)</string>
     <string name="enable_request_private_browsing_button">تمكين زر \"طلب التصفح الخاص\"</string>
     <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
     <string name="request_private_browsing">طلب خاص</string>

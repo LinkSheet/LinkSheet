@@ -37,7 +37,7 @@ import fe.linksheet.resolver.DisplayActivityInfo
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun <T, M> BrowserCommonScaffold(
+fun <T : Any, M> BrowserCommonScaffold(
     navController: NavHostController,
     @StringRes headline: Int,
     @StringRes explainer: Int,
@@ -138,7 +138,7 @@ data class BrowserCommonRadioButtonRowData(
 )
 
 @Composable
-fun <T, M> BrowserCommonRadioButtonRow(
+fun <T : Any, M> BrowserCommonRadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
     state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
@@ -148,6 +148,7 @@ fun <T, M> BrowserCommonRadioButtonRow(
     clickHook: (() -> Unit)? = null
 ) {
     RadioButtonRow(
+        modifier = modifier,
         value = value,
         state = state,
         viewModel = viewModel,

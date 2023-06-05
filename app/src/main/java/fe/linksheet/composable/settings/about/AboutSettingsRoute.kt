@@ -6,9 +6,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.BuildConfig
@@ -25,8 +27,8 @@ fun AboutSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
-    val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
+    val clipboardManager = LocalClipboardManager.current
 
     SettingsScaffold(R.string.about, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -80,7 +82,13 @@ fun AboutSettingsRoute(
                 SettingsItemRow(
                     headline = stringResource(id = R.string.version),
                     subtitle = BuildConfig.VERSION_NAME,
-                    onClick = {},
+                    onClick = {
+                        clipboardManager.setText(buildAnnotatedString {
+                            append(BuildConfig.VERSION_NAME)
+                            append("\n")
+                            append(BuildConfig.VERSION_CODE.toString())
+                        })
+                    },
                     image = {
                         ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.version)
                     },

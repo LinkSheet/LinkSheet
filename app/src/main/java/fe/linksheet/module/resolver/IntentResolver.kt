@@ -220,6 +220,7 @@ class IntentResolver(
         )
 
         return BottomSheetResult(
+            newIntent,
             uri,
             grouped,
             filteredItem,

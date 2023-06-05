@@ -141,7 +141,6 @@
     <string name="lib_redirect">مكتبة اعادة التوجيه</string>
     <string name="lib_redirect_service">مكتبة إعادة التوجيه - %s</string>
     <string name="github">جيتهب</string>
-    <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
     <string name="normal">عادي</string>
     <string name="no_apps_which_can_handle_links_found">لم يتم العثور على تطبيقات يمكنها التعامل مع الروابط.</string>
     <string name="in_app">داخل التطبيق</string>

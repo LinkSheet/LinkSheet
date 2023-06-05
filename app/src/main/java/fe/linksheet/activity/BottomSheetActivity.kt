@@ -151,9 +151,9 @@ class BottomSheetActivity : ComponentActivity() {
                 }
 
                 launchApp(
+                    completed,
                     completed.app,
-                    completed.uri,
-                    completed.isRegularPreferredApp
+                    always = completed.isRegularPreferredApp
                 )
             }
         }
@@ -197,7 +197,8 @@ class BottomSheetActivity : ComponentActivity() {
 
         val gridSize = 120.dp
         var gridItemHeightPackage = 80.dp
-//            + 50.dp
+
+        //            + 50.dp
         var gridItemHeight = 60.dp
 //          + 50.dp
 
@@ -348,7 +349,7 @@ class BottomSheetActivity : ComponentActivity() {
         Column(modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                launchApp(filteredItem, result.uri, false)
+                launchApp(result, filteredItem, always = false)
             }
         ) {
             Spacer(modifier = Modifier.height(5.dp))
@@ -397,7 +398,7 @@ class BottomSheetActivity : ComponentActivity() {
                 enabled = true,
                 app = filteredItem,
                 uri = result.uri,
-                onClick = { launchApp(filteredItem, result.uri, it) },
+                onClick = { launchApp(result, filteredItem, always = it) },
                 hideDrawer = hideDrawer
             )
         }
@@ -468,8 +469,8 @@ class BottomSheetActivity : ComponentActivity() {
                 uri = null,
                 onClick = { always ->
                     launchApp(
+                        result,
                         result.resolved[selectedItem],
-                        result.uri,
                         always
                     )
                 },
@@ -506,18 +507,15 @@ class BottomSheetActivity : ComponentActivity() {
                 .combinedClickable(
                     onClick = {
                         if (bottomSheetViewModel.singleTap.value) {
-                            launchApp(info, result.uri)
+                            launchApp(result, info)
                         } else {
-                            if (selectedItem == index) launchApp(
-                                info,
-                                result.uri
-                            )
+                            if (selectedItem == index) launchApp(result, info)
                             else onSelectedItemChange(index)
                         }
                     },
                     onDoubleClick = {
                         if (!bottomSheetViewModel.singleTap.value) {
-                            launchApp(info, result.uri)
+                            launchApp(result, info)
                         } else {
                             this@BottomSheetActivity.startPackageInfoActivity(info)
                         }
@@ -578,7 +576,7 @@ class BottomSheetActivity : ComponentActivity() {
                             RequestPrivateBrowsingButton(
                                 bottomSheetViewModel = bottomSheetViewModel,
                                 app = info,
-                                uri = result.uri
+                                result = result
                             )
                         }
                     }
@@ -620,7 +618,7 @@ class BottomSheetActivity : ComponentActivity() {
                             RequestPrivateBrowsingButton(
                                 bottomSheetViewModel = bottomSheetViewModel,
                                 app = info,
-                                uri = result.uri
+                                result = result
                             )
                         }
                     }
@@ -634,7 +632,7 @@ class BottomSheetActivity : ComponentActivity() {
         wrapInRow: Boolean = true,
         bottomSheetViewModel: BottomSheetViewModel,
         app: DisplayActivityInfo,
-        uri: Uri?
+        result: BottomSheetResult
     ) {
         if (bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) {
             val supportedBrowser = PrivateBrowsingBrowser.getSupportedBrowser(
@@ -651,7 +649,7 @@ class BottomSheetActivity : ComponentActivity() {
                         Column {
                             RequestPrivateBrowsingTextButton(
                                 app = app,
-                                uri = uri,
+                                result = result,
                                 supportedBrowser = supportedBrowser
                             )
                         }
@@ -659,7 +657,7 @@ class BottomSheetActivity : ComponentActivity() {
                 } else {
                     RequestPrivateBrowsingTextButton(
                         app = app,
-                        uri = uri,
+                        result = result,
                         supportedBrowser = supportedBrowser
                     )
                 }
@@ -669,12 +667,12 @@ class BottomSheetActivity : ComponentActivity() {
 
     @Composable
     private fun RequestPrivateBrowsingTextButton(
+        result: BottomSheetResult,
         app: DisplayActivityInfo,
-        uri: Uri?,
         supportedBrowser: PrivateBrowsingBrowser
     ) {
         TextButton(onClick = {
-            launchApp(app, uri, privateBrowsingBrowser = supportedBrowser)
+            launchApp(result, info = app, privateBrowsingBrowser = supportedBrowser)
         }) {
             Text(
                 text = stringResource(id = R.string.request_private_browsing),
@@ -817,7 +815,7 @@ class BottomSheetActivity : ComponentActivity() {
                         wrapInRow = false,
                         bottomSheetViewModel = bottomSheetViewModel,
                         app = app,
-                        uri = uri
+                        result = result
                     )
                 }
 
@@ -891,7 +889,7 @@ class BottomSheetActivity : ComponentActivity() {
                     RequestPrivateBrowsingButton(
                         bottomSheetViewModel = bottomSheetViewModel,
                         app = app,
-                        uri = uri
+                        result = result,
                     )
                 }
             } else {
@@ -947,13 +945,13 @@ class BottomSheetActivity : ComponentActivity() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun launchApp(
+        result: BottomSheetResult,
         info: DisplayActivityInfo,
-        uri: Uri?,
         always: Boolean = false,
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null
     ) {
         val deferred = bottomSheetViewModel.launchAppAsync(
-            info, intent, uri, always, privateBrowsingBrowser
+            info, result.intent, always, privateBrowsingBrowser
         )
 
         deferred.invokeOnCompletion {

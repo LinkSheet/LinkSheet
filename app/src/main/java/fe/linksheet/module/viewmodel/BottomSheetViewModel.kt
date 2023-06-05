@@ -140,11 +140,10 @@ class BottomSheetViewModel(
     fun launchAppAsync(
         info: DisplayActivityInfo,
         intent: Intent,
-        uri: Uri?,
         always: Boolean = false,
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null
     ) = ioAsync {
-        val newIntent =  info.intentFrom(intent.newIntent(uri)).let {
+        val newIntent =  info.intentFrom(intent).let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 

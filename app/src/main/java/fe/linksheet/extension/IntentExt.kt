@@ -26,10 +26,7 @@ object IntentExt : KoinComponent {
         component = null
 
         if (dropExtras) {
-            extras?.keySet()?.forEach {
-                logger.debug("NewIntent: Dropping extra: %s", it)
-                extras?.remove(it)
-            }
+            replaceExtras(null)
         }
     }
 

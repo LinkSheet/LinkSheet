@@ -1,6 +1,8 @@
 package fe.linksheet.module.log
 
 import android.content.Context
+import android.os.Build
+import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.decodeToString
 import fe.linksheet.extension.encodeFromString
@@ -50,8 +52,20 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
         const val fileExt = ".log"
     }
 
-    val startupTime = LocalDateTime.now()
+    val startupTime: LocalDateTime = LocalDateTime.now()
     val logEntries = mutableListOf<LogEntry>()
+
+    init {
+        logEntries.add(
+            LogEntry(
+                "DeviceInfo",
+                System.currentTimeMillis(),
+                "D",
+                Build.FINGERPRINT,
+                Build.FINGERPRINT
+            )
+        )
+    }
 
     fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles()
         ?.filter { it.length() > 0L }

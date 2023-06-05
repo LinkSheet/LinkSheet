@@ -86,7 +86,7 @@
     <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
     <string name="checkmark">علامة الاختيار</string>
     <string name="links_explainer">الإعدادات المتعلقة بمعالجة الارتباط</string>
-    <string name="clear_urls">ClearURLs</string>
+    <string name="clear_urls">منظف عناوين URL</string>
     <string name="system">النظام</string>
     <string name="light">مظيء</string>
     <string name="follow_redirects">اتبع عمليات إعادة التوجيه</string>
@@ -182,4 +182,6 @@
     <string name="request_private_browsing">طلب خاص</string>
     <string name="use_clear_urls">استخدام ClearURLs</string>
     <string name="options">الخيارات</string>
+    <string name="crash_log">سجل الأعطال</string>
+    <string name="log">سجل</string>
 </resources>

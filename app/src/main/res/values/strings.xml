@@ -149,7 +149,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the url has been redirected via LibRedirect, which opens the original url instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
     <string name="app_crashed">Looks like LinkSheet has crashed, checkout the error below</string>
-    <string name="copy_exception">Copy to clipboard</string>
+    <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="debug">Debug</string>
     <string name="debug_explainer">View app logs</string>
     <string name="logs">Logs</string>

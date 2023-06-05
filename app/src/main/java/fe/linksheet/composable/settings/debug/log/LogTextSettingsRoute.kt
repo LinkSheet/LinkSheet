@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.debug.log
 
-import android.os.Build
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,10 +44,10 @@ import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.CheckboxRow
 import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogSpacer
+import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.ListState
-import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.listHelper
@@ -58,6 +57,7 @@ import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
+import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -73,11 +73,31 @@ fun LogTextSettingsRoute(
         listState(logEntries)
     }
 
+    val items = remember {
+        mapOf<Boolean, (LogEntry) -> String>(
+            true to { it.messagePrefix + it.redactedMessage },
+            false to { it.messagePrefix + it.message }
+        )
+    }
+
     val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
         fetch = { logEntries!! },
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
-    ) { state, close -> ExportDialog(viewModel, state!!, close) }
+    ) { state, close ->
+        ExportLogDialog(
+            logViewCommon = viewModel.logViewCommon,
+            clipboardManager = viewModel.clipboardManager,
+            close = close,
+        ) { sb, redactLog ->
+            state!!.joinTo(
+                sb,
+                separator = lineSeparator,
+                postfix = lineSeparator,
+                transform = items[redactLog]!!
+            )
+        }
+    }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->
         Column(modifier = Modifier.fillMaxSize()) {
@@ -199,99 +219,3 @@ fun LogTextSettingsRoute(
     }
 }
 
-@Composable
-fun ExportDialog(
-    viewModel: LogTextSettingsViewModel,
-    logEntries: List<LogEntry>,
-    close: OnClose<Unit>,
-) {
-    val context = LocalContext.current
-
-    val items = remember {
-        mapOf<Boolean, (LogEntry) -> String>(
-            true to { it.messagePrefix + it.redactedMessage },
-            false to { it.messagePrefix + it.message }
-        )
-    }
-
-    var redactLog by remember { mutableStateOf(true) }
-    var includeFingerprint by remember { mutableStateOf(true) }
-    var includeSettings by remember { mutableStateOf(true) }
-
-    DialogColumn {
-        HeadlineText(headlineId = R.string.export_log)
-        DialogSpacer()
-
-        CheckboxRow(
-            checked = redactLog,
-            onClick = { redactLog = !redactLog },
-            textId = R.string.redact_log
-        )
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        CheckboxRow(
-            checked = includeFingerprint,
-            onClick = { includeFingerprint = !includeFingerprint },
-            textId = R.string.include_fingerprint
-        )
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        CheckboxRow(
-            checked = includeSettings,
-            onClick = { includeSettings = !includeSettings },
-            textId = R.string.include_settings
-        )
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        LinkableTextView(
-            id = R.string.log_privacy,
-            style = LocalTextStyle.current.copy(
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 16.sp
-            )
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        BottomRow {
-            TextButton(
-                onClick = {
-                    viewModel.clipboardManager.setText(
-                        context.resources.getString(R.string.log),
-                        buildClipboardText(
-                            logEntries,
-                            items[redactLog]!!,
-                            includeFingerprint,
-                            includeSettings,
-                            viewModel.logPreferences()
-                        )
-                    )
-                    close(Unit)
-                }
-            ) {
-                Text(text = stringResource(id = R.string.export))
-            }
-        }
-    }
-}
-
-private fun buildClipboardText(
-    logEntries: List<LogEntry>,
-    entryMap: (LogEntry) -> String,
-    includeFingerprint: Boolean,
-    includePreferences: Boolean,
-    preferences: List<String>
-) = buildString {
-    logEntries.joinTo(this, separator = lineSeparator, postfix = lineSeparator, transform = entryMap)
-    if (includeFingerprint) {
-        append(lineSeparator, "device_fingerprint=", Build.FINGERPRINT)
-    }
-
-    if (includePreferences) {
-        append(lineSeparator, "preferences:")
-        preferences.joinTo(this, separator = lineSeparator, prefix = lineSeparator)
-    }
-}

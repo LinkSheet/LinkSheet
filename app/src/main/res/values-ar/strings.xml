@@ -148,7 +148,7 @@
     <string name="libredirect_via">عبر %s</string>
     <string name="no_libredirect_services">لم يتم العثور على خدمات LibRedirect!</string>
     <string name="enable_ignore_libredirect_button">تمكين زر \"تجاهل LibRedirect\"</string>
-    <string name="copy_exception">نسخ إلى الحافظة</string>
+    <string name="copy_to_clipboard">نسخ إلى الحافظة</string>
     <string name="logs">السجلات</string>
     <string name="fastforward">تسريع الى الامام</string>
     <string name="enable_ignore_libredirect_button_explainer">يعرض زرا في الورقة السفلية إذا تمت إعادة توجيه عنوان url عبر LibRedirect، والذي يفتح عنوان url الأصلي بدلا من ذلك</string>

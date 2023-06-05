@@ -19,4 +19,5 @@ val viewModelModule = module {
     viewModelOf(::DownloaderSettingsViewModel)
     viewModelOf(::LogSettingsViewModel)
     viewModelOf(::LogTextSettingsViewModel)
+    viewModelOf(::CrashHandlerViewerViewModel)
 }

@@ -34,6 +34,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -207,6 +208,8 @@ fun ExportDialog(
     close: OnClose<Unit>,
     clipboardManager: ClipboardManager
 ) {
+    val context = LocalContext.current
+
     var expanded by remember { mutableStateOf(false) }
     val items = remember {
         mapOf<Int, (LogEntry) -> String>(
@@ -264,7 +267,7 @@ fun ExportDialog(
             TextButton(
                 onClick = {
                     clipboardManager.setText(
-                        "Log",
+                        context.resources.getString(R.string.log),
                         logEntries.joinToString(separator = "\n") { items[selectedMode]!!.invoke(it) }
                     )
                     close(Unit)

@@ -181,4 +181,6 @@
     <string name="enable_request_private_browsing_button">Enable \"Request private browsing\" button</string>
     <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the clicked URL in private browsing mode. Supported browsers: %s</string>
     <string name="request_private_browsing">Request private</string>
+    <string name="crash_log">Crash log</string>
+    <string name="log">Log</string>
 </resources>

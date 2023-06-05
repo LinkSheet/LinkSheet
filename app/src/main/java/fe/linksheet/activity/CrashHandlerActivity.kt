@@ -107,7 +107,7 @@ class CrashHandlerActivity : ComponentActivity() {
                                     TextButton(
                                         onClick = {
                                             clipboardManager.setText(
-                                                "Crash log",
+                                                resources.getString(R.string.crash_log),
                                                 exception
                                             )
                                         }

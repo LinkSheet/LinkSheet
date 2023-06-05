@@ -20,7 +20,11 @@ interface Logger {
     }
 
     fun verbose(msg: String, vararg dumpable: Any?)
+    fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>)
+
     fun info(msg: String, vararg dumpable: Any?)
+    fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>)
+
     fun debug(msg: String, vararg dumpable: Any?)
     fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>)
 }
@@ -30,8 +34,16 @@ class DebugLogger(private val prefix: String) : Logger {
         Logger.Type.Verbose.print(prefix, msg.format(*dumpable))
     }
 
+    override fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>) {
+        Logger.Type.Verbose.print(prefix, msg.format(param))
+    }
+
     override fun info(msg: String, vararg dumpable: Any?) {
         Logger.Type.Info.print(prefix, msg.format(*dumpable))
+    }
+
+    override fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>) {
+        Logger.Type.Info.print(prefix, msg.format(param))
     }
 
     override fun debug(msg: String, vararg dumpable: Any?) {
@@ -43,10 +55,10 @@ class DebugLogger(private val prefix: String) : Logger {
     }
 }
 
-class DefaultLogger(private val prefix: String, mac: Mac) : Logger {
-    constructor(clazz: KClass<*>, mac: Mac) : this(clazz.simpleName!!, mac)
+class DefaultLogger(private val prefix: String, private val hasher: LogHasher.LogKeyHasher) :
+    Logger {
+    constructor(clazz: KClass<*>, hasher: LogHasher.LogKeyHasher) : this(clazz.simpleName!!, hasher)
 
-    private val logHasher = LogHasher.LogKeyHasher(mac)
     private val appLogger = AppLogger.getInstance()
 
     private fun dump(
@@ -72,7 +84,7 @@ class DefaultLogger(private val prefix: String, mac: Mac) : Logger {
     private fun dump(
         msg: String,
         dumpable: Array<out Any?>
-    ) = dump(msg, LogHasher.NoOpHasher, dumpable) to dump(msg, logHasher, dumpable)
+    ) = dump(msg, LogHasher.NoOpHasher, dumpable) to dump(msg, hasher, dumpable)
 
     private fun <T> dump(
         msg: String,
@@ -80,7 +92,7 @@ class DefaultLogger(private val prefix: String, mac: Mac) : Logger {
         hashProcessor: HashProcessor<T>
     ) = dump(msg, LogHasher.NoOpHasher, param, hashProcessor) to dump(
         msg,
-        logHasher,
+        hasher,
         param,
         hashProcessor
     )
@@ -100,8 +112,22 @@ class DefaultLogger(private val prefix: String, mac: Mac) : Logger {
         type.print(prefix, normal)
     }
 
-    override fun verbose(msg: String, vararg dumpable: Any?) = log(Logger.Type.Verbose, msg, dumpable)
+    override fun verbose(msg: String, vararg dumpable: Any?) =
+        log(Logger.Type.Verbose, msg, dumpable)
+
+    override fun <T> verbose(
+        msg: String,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = log(Logger.Type.Verbose, msg, param, hashProcessor)
+
     override fun info(msg: String, vararg dumpable: Any?) = log(Logger.Type.Info, msg, dumpable)
+    override fun <T> info(
+        msg: String,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = log(Logger.Type.Info, msg, param, hashProcessor)
+
     override fun debug(msg: String, vararg dumpable: Any?) = log(Logger.Type.Debug, msg, dumpable)
     override fun <T> debug(
         msg: String,

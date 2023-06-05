@@ -20,6 +20,9 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.donationLink
+import fe.linksheet.lineSeparator
+import fe.linksheet.linksheetGithub
 
 
 @Composable
@@ -54,7 +57,7 @@ fun AboutSettingsRoute(
                     headlineId = R.string.github,
                     subtitleId = R.string.github_explainer,
                     onClick = {
-                        uriHandler.openUri("https://github.com/1fexd/LinkSheet")
+                        uriHandler.openUri(linksheetGithub)
                     },
                     image = {
                         ColoredIcon(icon = Icons.Default.Home, descriptionId = R.string.github)
@@ -67,7 +70,7 @@ fun AboutSettingsRoute(
                     headlineId = R.string.donate,
                     subtitleId = R.string.donate_explainer,
                     onClick = {
-                        uriHandler.openUri("https://coindrop.to/fexd")
+                        uriHandler.openUri(donationLink)
                     },
                     image = {
                         ColoredIcon(
@@ -84,9 +87,7 @@ fun AboutSettingsRoute(
                     subtitle = BuildConfig.VERSION_NAME,
                     onClick = {
                         clipboardManager.setText(buildAnnotatedString {
-                            append(BuildConfig.VERSION_NAME)
-                            append("\n")
-                            append(BuildConfig.VERSION_CODE.toString())
+                            append(BuildConfig.VERSION_NAME, lineSeparator, BuildConfig.VERSION_CODE.toString())
                         })
                     },
                     image = {

@@ -55,18 +55,6 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
     val startupTime: LocalDateTime = LocalDateTime.now()
     val logEntries = mutableListOf<LogEntry>()
 
-    init {
-        logEntries.add(
-            LogEntry(
-                "DeviceInfo",
-                System.currentTimeMillis(),
-                "D",
-                Build.FINGERPRINT,
-                Build.FINGERPRINT
-            )
-        )
-    }
-
     fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles()
         ?.filter { it.length() > 0L }
         ?.sortedDescending()?.map { file ->

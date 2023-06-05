@@ -12,7 +12,7 @@ abstract class BaseViewModel(preferenceRepository: PreferenceRepository) : ViewM
         Preferences.alwaysShowPackageName
     )
 
-    fun <T, NT, P : BasePreference<T, NT>> updateState(
+    fun <T : Any, NT, P : BasePreference<T, NT>> updateState(
         state: RepositoryState<T, NT, P>,
         newState: NT
     ) = state.updateState(newState)

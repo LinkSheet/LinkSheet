@@ -42,7 +42,7 @@ exception messages do not contain any personal data and can safely be shared wit
 The internal log viewer (available from version `0.0.32` onwards) will default to exporting a
 redacted version of the log. In the redacted version, personal identifiers like package names or
 hosts are hashed with `HmacSHA256` (a random key is generated when the app is launched for the first
-time). This approach ensures privacy while still allowing debugging.
+time). This approach ensures privacy while still allowing debugging. 
 
 ### ADB logcat
 

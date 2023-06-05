@@ -5,7 +5,10 @@ import fe.android.preference.helper.BasePreference.Preference.Companion.booleanP
 import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
 import fe.android.preference.helper.BasePreference.InitPreference.Companion.stringPreference
 import fe.android.preference.helper.BasePreference.Preference.Companion.intPreference
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.extension.toHex
+import fe.linksheet.module.log.LogHasher
+import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.log.loggerHmac
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
@@ -17,6 +20,7 @@ object Preferences {
     val hideAfterCopying = booleanPreference("hide_after_copying")
     val singleTap = booleanPreference("single_tap")
     val usageStatsSorting = booleanPreference("usage_stats_sorting")
+
 
     val browserMode = mappedPreference(
         "browser_mode",
@@ -30,6 +34,7 @@ object Preferences {
         BrowserHandler.BrowserMode.AlwaysAsk,
         BrowserHandler.BrowserMode.Companion
     )
+
 
     val selectedInAppBrowser = stringPreference("selected_in_app_browser")
     val unifiedPreferredBrowser = booleanPreference("unified_preferred_browser", true)
@@ -62,10 +67,61 @@ object Preferences {
     val followRedirectsTimeout = intPreference("follow_redirects_timeout", 15)
     val downloaderTimeout = intPreference("downloader_timeout", 15)
 
-    val enableRequestPrivateBrowsingButton = booleanPreference("enable_request_private_browsing_button")
+    val enableRequestPrivateBrowsingButton =
+        booleanPreference("enable_request_private_browsing_button")
 
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHex()
+    }
+
+    private val preferencesLoggable = listOf(
+        enableCopyButton,
+        hideAfterCopying,
+        singleTap,
+        usageStatsSorting,
+        browserMode,
+        inAppBrowserMode,
+        unifiedPreferredBrowser,
+        inAppBrowserSettings,
+        enableSendButton,
+        alwaysShowPackageName,
+        disableToasts,
+        gridLayout,
+        useClearUrls,
+        useFastForwardRules,
+        enableLibRedirect,
+        followRedirects,
+        followRedirects,
+        followRedirectsLocalCache,
+        followRedirectsExternalService,
+        followOnlyKnownTrackers,
+        theme,
+        dontShowFilteredItem,
+        useTextShareCopyButtons,
+        previewUrl,
+        enableDownloader,
+        downloaderCheckUrlMimeType,
+        enableIgnoreLibRedirectButton,
+        followRedirectsTimeout,
+        downloaderTimeout,
+        enableRequestPrivateBrowsingButton
+    )
+    private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)
+
+    fun log(
+        repository: PreferenceRepository
+    ) = preferencesLoggable.map { "${it.key}=${repository.getAsString(it)}" }
+
+    fun logPackages(
+        logHasher: LogHasher,
+        repository: PreferenceRepository
+    ) = preferencesPackage.map {
+        val value = repository.getString(it)
+        if(value != null){
+            logHasher.hash(StringBuilder(), it.key, value, PackageProcessor).toString()
+        } else {
+            "${it.key}=null"
+        }
     }
 }
 

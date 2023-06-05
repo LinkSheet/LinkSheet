@@ -19,10 +19,10 @@ val loggerFactoryModule = module {
 }
 
 class LoggerFactory(private val logKey: ByteArray) {
-    private val mac by lazy {
-        CryptoUtil.makeHmac(loggerHmac.algorithm, logKey)
+    val logHasher by lazy {
+        LogHasher.LogKeyHasher(CryptoUtil.makeHmac(loggerHmac.algorithm, logKey))
     }
 
-    fun createLogger(prefix: KClass<*>) = DefaultLogger(prefix, mac)
-    fun createLogger(prefix: String) = DefaultLogger(prefix, mac)
+    fun createLogger(prefix: KClass<*>) = DefaultLogger(prefix, logHasher)
+    fun createLogger(prefix: String) = DefaultLogger(prefix, logHasher)
 }

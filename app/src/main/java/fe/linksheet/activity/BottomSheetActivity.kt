@@ -698,7 +698,8 @@ class BottomSheetActivity : ComponentActivity() {
             bottomSheetViewModel.enableCopyButton.value,
             bottomSheetViewModel.enableSendButton.value,
             bottomSheetViewModel.enableIgnoreLibRedirectButton.value,
-            result.downloadable.isDownloadable()
+            result.downloadable.isDownloadable(),
+            bottomSheetViewModel.enableRequestPrivateBrowsingButton.value
         ).count { it }
 
         val configuration = LocalConfiguration.current

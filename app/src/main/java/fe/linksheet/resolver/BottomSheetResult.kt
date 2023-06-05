@@ -1,11 +1,13 @@
 package fe.linksheet.resolver
 
+import android.content.Intent
 import android.net.Uri
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.RedirectFollower
 
 data class BottomSheetResult(
+    val intent: Intent,
     val uri: Uri?,
     val resolved: List<DisplayActivityInfo>,
     val filteredItem: DisplayActivityInfo?,

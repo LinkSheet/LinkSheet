@@ -158,7 +158,7 @@
     <string name="debug_explainer">عرض سجلات التطبيق</string>
     <string name="logs_explainer">عرض سجلات التطبيق</string>
     <string name="app_log">سجل التطبيق</string>
-    <string name="log_files">ملفات السجل</string>
+    <string name="log_files">ملفات السجل السابقة</string>
     <string name="services">الخدمات</string>
     <string name="current_session">الجلسة الحالية</string>
     <string name="no_log_entries">هذه الجلسة لا تحتوي على أي سجلات.</string>
@@ -182,4 +182,10 @@
     <string name="options">الخيارات</string>
     <string name="crash_log">سجل الأعطال</string>
     <string name="log">سجل</string>
+    <string name="redact_log">سجل التنقيح (مستحسن ، قد يؤدي تعطيل هذا إلى تسريب أسماء الحزم وأسماء المضيفين)</string>
+    <string name="include_settings">تضمين الإعدادات (موصى به)</string>
+    <string name="include_fingerprint">تضمين بصمة الجهاز (موصى به)</string>
+    <string name="log_privacy">للتعرف على خصوصية السجل، يمكنك زيارة هذا الرابط <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs"/>.</string>
+    <string name="delete">حذف</string>
+    <string name="no_logs_found">لم يتم العثور على سجلات سابقة!</string>
 </resources>

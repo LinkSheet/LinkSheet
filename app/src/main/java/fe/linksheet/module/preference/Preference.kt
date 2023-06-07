@@ -52,7 +52,7 @@ object Preferences {
     val useFastForwardRules = booleanPreference("fast_forward_rules")
     val enableLibRedirect = booleanPreference("enable_lib_redirect")
     val followRedirects = booleanPreference("follow_redirects")
-    val followRedirectsLocalCache = booleanPreference("follow_redirects_local_cache")
+    val followRedirectsLocalCache = booleanPreference("follow_redirects_local_cache", true)
     val followRedirectsExternalService = booleanPreference("follow_redirects_external_service")
     val followOnlyKnownTrackers = booleanPreference("follow_only_known_trackers")
     val theme = mappedPreference("theme", Theme.System, Theme.Companion)
@@ -68,7 +68,7 @@ object Preferences {
     val downloaderTimeout = intPreference("downloader_timeout", 15)
 
     val enableAmp2Html = booleanPreference("enable_amp2html")
-    val enableAmp2HtmlLocalCache = booleanPreference("enable_amp2html_local_cache")
+    val amp2HtmlLocalCache = booleanPreference("amp2html_local_cache", true)
     val amp2HtmlExternalService = booleanPreference("amp2html_external_service")
     val amp2HtmlTimeout = intPreference("amp2html_timeout", 15)
 
@@ -112,8 +112,9 @@ object Preferences {
         downloaderTimeout,
         enableRequestPrivateBrowsingButton,
         enableAmp2Html,
-        enableAmp2HtmlLocalCache,
-        amp2HtmlExternalService
+        amp2HtmlLocalCache,
+        amp2HtmlExternalService,
+        amp2HtmlTimeout
     )
 
     private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)

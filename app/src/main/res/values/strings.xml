@@ -193,4 +193,5 @@
     <string name="amp2html_local_cache_explainer">Cache the retrieved non-AMP versions of webpages locally</string>
     <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>
     <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
+    <string name="amp2html">Amp2Html</string>
 </resources>

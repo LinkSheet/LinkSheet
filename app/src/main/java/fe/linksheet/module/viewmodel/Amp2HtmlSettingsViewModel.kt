@@ -13,7 +13,7 @@ class Amp2HtmlSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
     var enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
     val enableAmp2HtmlLocalCache = preferenceRepository.getBooleanState(
-        Preferences.enableAmp2HtmlLocalCache
+        Preferences.amp2HtmlLocalCache
     )
 
     val amp2HtmlExternalService = preferenceRepository.getBooleanState(

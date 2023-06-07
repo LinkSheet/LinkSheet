@@ -1,12 +1,10 @@
-package fe.linksheet.module.database.entity
+package fe.linksheet.module.database.entity.whitelisted
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import fe.linksheet.module.database.dao.base.PackageEntity
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
-import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
 
 @Entity(tableName = "whitelisted_browser", indices = [Index("packageName", unique = true)])
 data class WhitelistedNormalBrowser(

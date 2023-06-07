@@ -8,22 +8,22 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
 import fe.linksheet.activity.CrashHandlerActivity
-import fe.linksheet.module.database.dao.daoModule
+import fe.linksheet.extension.printToString
+import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.loggerFactoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
-import fe.linksheet.module.repository.repositoryModule
+import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.request.requestModule
-import fe.linksheet.module.resolver.redirectResolverModule
-import fe.linksheet.module.resolver.resolverModule
-import fe.linksheet.module.viewmodel.viewModelModule
+import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
+import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
+import fe.linksheet.module.resolver.module.resolverModule
+import fe.linksheet.module.viewmodel.module.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
-import java.io.PrintWriter
-import java.io.StringWriter
 import kotlin.system.exitProcess
 
 
@@ -41,18 +41,10 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
 
         Thread.setDefaultUncaughtExceptionHandler { _, exception ->
-            exception.printStackTrace()
-
-            val sw = StringWriter().also { sw ->
-                PrintWriter(sw).use { exception.printStackTrace(it) }
-            }
-
-            val exceptionText = sw.toString()
-
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                putExtra(CrashHandlerActivity.extraCrashException, exceptionText)
+                putExtra(CrashHandlerActivity.extraCrashException, exception.printToString())
             }
 
             startActivity(crashIntent)
@@ -69,11 +61,12 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
                 loggerFactoryModule,
                 databaseModule,
                 daoModule,
+                redirectResolveRequestModule,
+                amp2HtmlResolveRequestModule,
+                resolverModule,
                 repositoryModule,
                 viewModelModule,
-                resolverModule,
                 requestModule,
-                redirectResolverModule,
                 downloaderModule
             )
         }

@@ -60,6 +60,7 @@ fun LinksSettingsRoute(
         R.string.fastforward to viewModel.useFastForwardRules,
         R.string.clear_urls to viewModel.useClearUrls,
         R.string.follow_redirects to viewModel.followRedirects,
+        R.string.amp2html to viewModel.enableAmp2Html,
         R.string.lib_redirect to viewModel.enableLibRedirect,
     )
 

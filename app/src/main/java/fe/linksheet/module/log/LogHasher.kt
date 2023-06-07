@@ -56,12 +56,20 @@ sealed interface HashProcessor<T> {
         ): StringBuilder = stringBuilder.append(input)
     }
 
+    object UrlProcessor : HashProcessor<String> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: String,
+            mac: Mac
+        ): StringBuilder = stringBuilder.appendHashed(mac, input)
+    }
+
     object UriProcessor : HashProcessor<Uri> {
         override fun process(
             stringBuilder: StringBuilder,
             input: Uri,
             mac: Mac
-        ): StringBuilder = stringBuilder.appendHashed(mac, input.toString())
+        ): StringBuilder = UrlProcessor.process(stringBuilder, input.toString(), mac)
     }
 
     object StringProcessor : HashProcessor<String> {

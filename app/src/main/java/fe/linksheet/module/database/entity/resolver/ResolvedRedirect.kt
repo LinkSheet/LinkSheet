@@ -1,4 +1,4 @@
-package fe.linksheet.module.database.entity
+package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
 import fe.linksheet.module.log.LogDumpable
@@ -11,7 +11,9 @@ import fe.stringbuilder.util.curlyWrapped
 data class ResolvedRedirect(
     val shortUrl: String,
     val resolvedUrl: String
-) : LogDumpable {
+) : ResolverEntity<ResolvedRedirect>(), LogDumpable {
+    override fun urlResolved() = resolvedUrl
+
     override fun dump(
         stringBuilder: StringBuilder,
         hasher: LogHasher

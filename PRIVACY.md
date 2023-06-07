@@ -15,7 +15,7 @@ afterwards).
 
 When "Follow redirects" and "Follow redirects via external service" are enabled, URLs are not
 resolved on device, but rather sent to
-a [Supabase edge-function](https://github.com/1fexd/supabase-redirect-edge-function/) which then
+a [Supabase edge-function](https://github.com/1fexd/linksheet-supabase-functions/) which then
 attempts to follow the redirects and returns the destination URL. The edge function itself does not
 log any request information (it only stores the timestamp, the initial URL and its destination URL),
 but [Supabase](https://supabase.com) may log request

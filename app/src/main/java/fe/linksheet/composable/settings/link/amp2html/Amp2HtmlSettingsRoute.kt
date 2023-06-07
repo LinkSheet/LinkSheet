@@ -60,9 +60,11 @@ fun Amp2HtmlSettingsRoute(
 
             item(key = "amp2html_external_service") {
                 SwitchRow(
+                    // TODO: edge function crashes (https://github.com/supabase/edge-runtime/issues/113)
                     state = viewModel.amp2HtmlExternalService,
                     viewModel = viewModel,
-                    enabled = viewModel.enableAmp2Html.value,
+//                    enabled = viewModel.enableAmp2Html.value,
+                    enabled = false,
                     headline = stringResource(id = R.string.amp2html_external_service),
                     subtitleBuilder = { enabled ->
                         LinkableTextView(

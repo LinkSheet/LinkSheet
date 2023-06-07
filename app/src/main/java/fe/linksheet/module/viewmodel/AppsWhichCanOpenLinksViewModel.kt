@@ -30,7 +30,7 @@ class AppsWhichCanOpenLinksViewModel(
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    val apps = flowOfLazy { domainVerificationManager.getDisplayActivityInfos(context) }.combine(
+    private val apps = flowOfLazy { domainVerificationManager.getDisplayActivityInfos(context) }.combine(
         linkHandlingAllowed
     ) { apps, _ ->
         apps.filter {
@@ -41,7 +41,7 @@ class AppsWhichCanOpenLinksViewModel(
     @RequiresApi(Build.VERSION_CODES.S)
     val appsFiltered = apps.combine(searchFilter) { apps, filter ->
         apps.filterIf(filter.isNotEmpty()) { it.compareLabel.contains(filter, ignoreCase = true) }
-            .toList()
+            .sortedWith(DisplayActivityInfo.labelComparator)
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

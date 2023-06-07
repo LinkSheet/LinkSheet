@@ -532,4 +532,6 @@
     <string name="settings_verified_link_handlers__text_handling_filter_disabled"></string>
     <string name="telemetry_configure_type"></string>
     <string name="telemetry_level_exhaustive_description"></string>
+    <string name="preferred_apps_settings"></string>
+    <string name="apps_which_can_open_links"></string>
 </resources>

@@ -276,7 +276,7 @@ class IntentResolver(
         return null to uri
     }
 
-    private fun checkIsDownloadable(uri: Uri, connectTimeout: Int): Downloader.DownloadCheckResult {
+    private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType.value) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
                 logger.debug("File ending check result $it")
@@ -284,6 +284,6 @@ class IntentResolver(
             }
         }
 
-        return downloader.isNonHtmlContentUri(uri.toString(), connectTimeout)
+        return downloader.isNonHtmlContentUri(uri.toString(), timeout)
     }
 }

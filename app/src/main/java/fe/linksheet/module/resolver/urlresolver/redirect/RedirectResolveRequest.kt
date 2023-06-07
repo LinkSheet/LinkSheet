@@ -30,14 +30,20 @@ class RedirectResolveRequest(
     logger: Logger
 ) : ResolveRequest(apiUrl, token, request, logger) {
     @Throws(IOException::class)
-    override fun resolveLocal(url: String, connectTimeout: Int): String {
-        val con = request.head(url, connectTimeout = connectTimeout * 1000, followRedirects = true)
+    override fun resolveLocal(url: String, timeout: Int): String {
+        val con = request.head(
+            url,
+            connectTimeout = timeout * 1000,
+            readTimeout = timeout * 1000,
+            followRedirects = true
+        )
         logger.debug("ResolveLocal %s", url, HashProcessor.StringProcessor)
 
         val response = if (con.responseCode in 400..499) {
             request.get(
                 url,
-                connectTimeout = connectTimeout * 1000,
+                connectTimeout = timeout * 1000,
+                readTimeout = timeout * 1000,
                 followRedirects = true,
                 data = HttpData.of {
                     headers {

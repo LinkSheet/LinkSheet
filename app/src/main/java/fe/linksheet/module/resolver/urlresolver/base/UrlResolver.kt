@@ -51,7 +51,7 @@ abstract class UrlResolver<T : ResolverEntity<T>>(
         uri: Uri,
         resolvePredicate: (String) -> Boolean,
         externalService: Boolean,
-        connectTimeout: Int
+        timeout: Int
     ): Result<ResolveType> {
         logger.debug("Following redirects for %s", uri, HashProcessor.UriProcessor)
 
@@ -65,7 +65,7 @@ abstract class UrlResolver<T : ResolverEntity<T>>(
                 )
 
                 val con = try {
-                    redirectResolver.resolveRemote(inputUri, connectTimeout)
+                    redirectResolver.resolveRemote(inputUri, timeout)
                 } catch (e: IOException) {
                     logger.debug(e)
                     return Result.failure(e)
@@ -89,7 +89,7 @@ abstract class UrlResolver<T : ResolverEntity<T>>(
             logger.debug("Using local service for %s", inputUri, HashProcessor.StringProcessor)
 
             try {
-                val resolved = redirectResolver.resolveLocal(inputUri, connectTimeout)
+                val resolved = redirectResolver.resolveLocal(inputUri, timeout)
                 if (resolved != null) {
                     return Result.success(ResolveType.Local(resolved))
                 }

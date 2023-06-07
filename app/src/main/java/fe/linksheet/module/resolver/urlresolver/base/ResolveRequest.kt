@@ -14,10 +14,11 @@ abstract class ResolveRequest(
     protected val logger: Logger
 ) {
     @Throws(IOException::class)
-    fun resolveRemote(url: String, connectTimeout: Int): HttpURLConnection {
+    fun resolveRemote(url: String, timeout: Int): HttpURLConnection {
         return request.post(
             apiUrl,
-            connectTimeout = connectTimeout * 1000,
+            connectTimeout = timeout * 1000,
+            readTimeout = timeout * 1000,
             body = JsonBody(mapOf("url" to url)),
             dataBuilder = {
                 this.headers {
@@ -28,5 +29,5 @@ abstract class ResolveRequest(
     }
 
     @Throws(IOException::class)
-    abstract fun resolveLocal(url: String, connectTimeout: Int): String?
+    abstract fun resolveLocal(url: String, timeout: Int): String?
 }

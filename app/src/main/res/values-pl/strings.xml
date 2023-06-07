@@ -21,7 +21,7 @@
     <string name="usage_stats_sorting">Sortuj aplikacje według użycia</string>
     <string name="enable_copy_button_explainer">Wyświetla przycisk „Kopiuj link” w dolnym panelu</string>
     <string name="single_tap">Włącz pojedyncze dotknięcie</string>
-    <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach, niezależnie od tego, czego aplikacja chce używać</string>
+    <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach, niezależnie od tego, jakiej aplikacja chce używać</string>
     <string name="preferred_browser_explainer">Ustaw domyślny tryb przeglądarki</string>
     <string name="always_ask">Zawsze pytaj</string>
     <string name="none">Żadna</string>
@@ -108,9 +108,9 @@
     <string name="downloader_url_mime_type_explainer">Sprawdza, czy adres URL kończy się rozszerzeniem pliku (np. \".jpg\"); jeśli tak, ten typ jest używany dla pobieranego pliku.</string>
     <string name="random_instance">Losowa instancja</string>
     <string name="use_app_settings">Użyj ustawień aplikacji</string>
-    <string name="always_disable">Zawsze wyłączone</string>
+    <string name="always_disable">Zawsze wyłączona</string>
     <string name="browser">Przeglądarka</string>
-    <string name="disable_in_selected">Wyłączone w wybranych</string>
+    <string name="disable_in_selected">Wyłączona w wybranych</string>
     <string name="in_app_browser">Wewnętrzna przeglądarka</string>
     <string name="in_app_browser_explainer">Ustaw tryb wewnętrznej przeglądarki</string>
     <string name="always_disable_explainer">Zawsze wyłączaj wewnętrzną przeglądarkę, niezależnie od tego, jakiej aplikacja chce używać</string>

@@ -158,7 +158,7 @@
     <string name="options">Opcje</string>
     <string name="services">Usługi</string>
     <string name="current_session">Bieżąca sesja</string>
-    <string name="log_files">Pliki logów</string>
+    <string name="log_files">Poprzednie logi</string>
     <string name="log_viewer">Przeglądarka logów</string>
     <string name="log_viewer_timestamp">Wyświetlanie logu z %s</string>
     <string name="no_log_entries">Ta sesja nie zawiera dzienników.</string>
@@ -180,4 +180,12 @@
     <string name="enable_request_private_browsing_button">Włącz przycisk „Tryb prywatny”</string>
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty link w trybie prywatnym. Obsługiwane przeglądarki: %s</string>
     <string name="request_private_browsing">Tryb prywatny</string>
+    <string name="crash_log">Log awarii</string>
+    <string name="log">Log</string>
+    <string name="redact_log">Redagowanie logu (zalecane, wyłączenie tej opcji może spowodować wyciek nazw pakietów i hostów)</string>
+    <string name="include_settings">Dołącz ustawienia (zalecane)</string>
+    <string name="include_fingerprint">Dołącz odcisk palca urządzenia (zalecane)</string>
+    <string name="delete">Usuń</string>
+    <string name="log_privacy">Aby dowiedzieć się więcej na temat prywatności logów, możesz odwiedzić ten <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
+    <string name="no_logs_found">Brak poprzednich logów!</string>
 </resources>

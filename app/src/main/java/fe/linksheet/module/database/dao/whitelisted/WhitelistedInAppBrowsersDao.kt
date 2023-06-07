@@ -1,10 +1,9 @@
-package fe.linksheet.module.database.dao
+package fe.linksheet.module.database.dao.whitelisted
 
 import androidx.room.Dao
 import androidx.room.Query
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
-import fe.linksheet.module.database.entity.WhitelistedInAppBrowser
-import fe.linksheet.module.database.entity.WhitelistedNormalBrowser
+import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import kotlinx.coroutines.flow.Flow
 
 @Dao

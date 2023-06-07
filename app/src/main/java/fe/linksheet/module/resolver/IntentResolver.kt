@@ -11,6 +11,7 @@ import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
 import fe.fastforwardkt.FastForwardLoader
+import fe.fastforwardkt.isTracker
 import fe.linksheet.extension.IntentExt.getUri
 import fe.linksheet.extension.IntentExt.isSchemeTypicallySupportedByBrowsers
 import fe.linksheet.extension.IntentExt.newIntent
@@ -25,8 +26,11 @@ import fe.linksheet.module.log.toDumpable
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.repository.WhitelistedInAppBrowsersRepository
-import fe.linksheet.module.repository.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.resolver.urlresolver.ResolveType
+import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
+import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 
@@ -39,7 +43,8 @@ class IntentResolver(
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     private val downloader: Downloader,
-    private val redirectFollower: RedirectFollower,
+    private val redirectResolver: RedirectUrlResolver,
+    private val amp2HtmlResolver: Amp2HtmlUrlResolver,
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver
@@ -98,6 +103,15 @@ class IntentResolver(
     private val unifiedPreferredBrowser =
         preferenceRepository.getBooleanState(Preferences.unifiedPreferredBrowser)
 
+    private val enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
+    private val amp2HtmlLocalCache = preferenceRepository.getBooleanState(
+        Preferences.amp2HtmlLocalCache
+    )
+
+    private val amp2HtmlExternalService =
+        preferenceRepository.getBooleanState(Preferences.amp2HtmlExternalService)
+    private val amp2HtmlTimeout = preferenceRepository.getIntState(Preferences.amp2HtmlTimeout)
+
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         logger.debug("Intent=%s", intent)
 
@@ -117,34 +131,47 @@ class IntentResolver(
             logger.debug("Uri is null, something probably went very wrong")
         }
 
-        var followRedirect: Result<RedirectFollower.FollowRedirect>? = null
-
-        if (followRedirects.value && uri != null) {
-            val result = redirectFollower.followRedirects(
-                uri,
+        val (followRedirectsResult, followRedirectsResultUri) = resolve(
+            followRedirects.value,
+            uri
+        ) {
+            redirectResolver.resolve(
+                it,
                 followRedirectsLocalCache.value,
-                fastForwardRulesObject,
-                followOnlyKnownTrackers.value,
+                { url -> !followOnlyKnownTrackers.value || isTracker(url, fastForwardRulesObject) },
                 followRedirectsExternalService.value,
                 followRedirectsTimeout.value
             )
+        }
 
-            followRedirect = result
-            result.getOrNull()?.let {
-                uri = Uri.parse(it.resolvedUrl)
-            }
+        if (followRedirectsResult != null) {
+            uri = followRedirectsResultUri
+        }
+
+        val (amp2HtmlResult, amp2HtmlResultUri) = resolve(enableAmp2Html.value, uri) {
+            amp2HtmlResolver.resolve(
+                it,
+                amp2HtmlLocalCache.value,
+                { true },
+                amp2HtmlExternalService.value,
+                amp2HtmlTimeout.value
+            )
+        }
+
+        if (amp2HtmlResult != null) {
+            uri = amp2HtmlResultUri
         }
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
         if (enableLibRedirect.value && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton.value)) {
-            libRedirectResult = libRedirectResolver.resolve(uri!!)
+            libRedirectResult = libRedirectResolver.resolve(uri)
             if (libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
                 uri = libRedirectResult.redirectedUri
             }
         }
 
         val downloadable = if (enableDownloader.value && uri != null) {
-            checkIsDownloadable(uri!!, downloaderTimeout.value)
+            checkIsDownloadable(uri, downloaderTimeout.value)
         } else Downloader.DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)
@@ -227,10 +254,26 @@ class IntentResolver(
             showExtended,
             preferredApp?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
-            followRedirect,
+            followRedirectsResult,
+            amp2HtmlResult,
             libRedirectResult,
             downloadable
         )
+    }
+
+    private suspend fun resolve(
+        enabled: Boolean,
+        uri: Uri?,
+        resolve: suspend (Uri) -> Result<ResolveType>
+    ): Pair<Result<ResolveType>?, Uri?> {
+        if (enabled && uri != null) {
+            val result = resolve(uri)
+            result.getOrNull()?.let {
+                return result to Uri.parse(it.url)
+            }
+        }
+
+        return null to uri
     }
 
     private fun checkIsDownloadable(uri: Uri, connectTimeout: Int): Downloader.DownloadCheckResult {

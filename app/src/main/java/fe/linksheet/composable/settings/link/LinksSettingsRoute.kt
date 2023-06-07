@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.linksheet.R
+import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.settings.link.downloader.requestDownloadPermission
@@ -59,6 +60,7 @@ fun LinksSettingsRoute(
         R.string.fastforward to viewModel.useFastForwardRules,
         R.string.clear_urls to viewModel.useClearUrls,
         R.string.follow_redirects to viewModel.followRedirects,
+        R.string.amp2html to viewModel.enableAmp2Html,
         R.string.lib_redirect to viewModel.enableLibRedirect,
     )
 
@@ -177,6 +179,18 @@ fun LinksSettingsRoute(
                     subtitle = R.string.follow_redirects_explainer,
                     onClick = {
                         navController.navigate(followRedirectsSettingsRoute)
+                    }
+                )
+            }
+
+            item(key = "amp2html") {
+                DividedSwitchRow(
+                    state = viewModel.enableAmp2Html,
+                    viewModel = viewModel,
+                    headline = R.string.enable_amp2html,
+                    subtitle = R.string.enable_amp2html_explainer,
+                    onClick = {
+                        navController.navigate(amp2HtmlSettingsRoute)
                     }
                 )
             }

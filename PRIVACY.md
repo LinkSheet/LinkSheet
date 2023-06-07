@@ -15,7 +15,7 @@ afterwards).
 
 When "Follow redirects" and "Follow redirects via external service" are enabled, URLs are not
 resolved on device, but rather sent to
-a [Supabase edge-function](https://github.com/1fexd/supabase-redirect-edge-function/) which then
+a [Supabase edge-function](https://github.com/1fexd/linksheet-supabase-functions/) which then
 attempts to follow the redirects and returns the destination URL. The edge function itself does not
 log any request information (it only stores the timestamp, the initial URL and its destination URL),
 but [Supabase](https://supabase.com) may log request
@@ -29,6 +29,14 @@ afterwards) and check if the `Content-Type` header of the response is not `text/
 
 Enabling "Use mime type from URL" will still send a request if no mime type could be read from the
 opened URL
+
+### Amp2Html
+
+When "Enable Amp2Html" is enabled, LinkSheet will send a `GET` request to the opened URL (again, a
+connection is always made, even if the user does not actually open the URL in any app afterwards) to
+attempt to obtain the non-AMP version of the page. If the page is not an AMP page, or if no non-AMP
+version could be found, the original URL will be opened when the user clicks an app in the bottom
+sheet.
 
 ## Logs
 
@@ -46,7 +54,10 @@ time). This approach ensures privacy while still allowing debugging.
 
 ### Other log content
 
-Additionally, the both logs will include the device fingerprint by default. This fingerprint contains the
+The log will contain the LinkSheet version.
+
+Additionally, the both logs will include the device fingerprint by default. This fingerprint
+contains the
 device brand, device
 name, Android version, Android build id, Android version incremental id, user type (e.g. user) and
 tags (e.g. release-keys). While this fingerprint may be considered personal data, it may be

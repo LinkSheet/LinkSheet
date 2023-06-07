@@ -4,7 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
-import fe.linksheet.module.resolver.RedirectFollower
+import fe.linksheet.module.resolver.urlresolver.ResolveType
 
 data class BottomSheetResult(
     val intent: Intent,
@@ -14,7 +14,8 @@ data class BottomSheetResult(
     val showExtended: Boolean,
     private val alwaysPreferred: Boolean?,
     private val hasSingleMatchingOption: Boolean = false,
-    val followRedirect: Result<RedirectFollower.FollowRedirect>? = null,
+    val followRedirect: Result<ResolveType>? = null,
+    val amp2HtmlResult: Result<ResolveType>? = null,
     val libRedirectResult: LibRedirectResolver.LibRedirectResult? = null,
     val downloadable: Downloader.DownloadCheckResult = Downloader.DownloadCheckResult.NonDownloadable,
 ) {

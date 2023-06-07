@@ -143,6 +143,7 @@ dependencies {
     implementation("com.github.1fexd:fastforwardkt:0.0.13")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
     implementation("com.github.1fexd:mimetypekt:0.0.4")
+    implementation("com.github.1fexd:amp2htmlkt:0.0.3")
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd.android-pref-helper:preference-helper:0.0.13")
     implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.13")
@@ -150,6 +151,8 @@ dependencies {
     implementation("com.github.1fexd:compose-dialog-helper:0.0.1")
 
     implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
+
+    implementation("org.jsoup:jsoup:1.16.1")
 
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")

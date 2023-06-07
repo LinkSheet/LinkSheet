@@ -1,7 +1,7 @@
 package fe.linksheet.module.log
 
 import android.util.Log
-import javax.crypto.Mac
+import fe.linksheet.extension.printToString
 import kotlin.reflect.KClass
 
 interface Logger {
@@ -21,12 +21,15 @@ interface Logger {
 
     fun verbose(msg: String, vararg dumpable: Any?)
     fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    fun verbose(throwable: Throwable)
 
     fun info(msg: String, vararg dumpable: Any?)
     fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    fun info(throwable: Throwable)
 
     fun debug(msg: String, vararg dumpable: Any?)
     fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    fun debug(throwable: Throwable)
 }
 
 class DebugLogger(private val prefix: String) : Logger {
@@ -38,6 +41,10 @@ class DebugLogger(private val prefix: String) : Logger {
         Logger.Type.Verbose.print(prefix, msg.format(param))
     }
 
+    override fun verbose(throwable: Throwable) {
+        Logger.Type.Verbose.print(prefix, throwable.printToString())
+    }
+
     override fun info(msg: String, vararg dumpable: Any?) {
         Logger.Type.Info.print(prefix, msg.format(*dumpable))
     }
@@ -46,12 +53,20 @@ class DebugLogger(private val prefix: String) : Logger {
         Logger.Type.Info.print(prefix, msg.format(param))
     }
 
+    override fun info(throwable: Throwable) {
+        Logger.Type.Info.print(prefix, throwable.printToString())
+    }
+
     override fun debug(msg: String, vararg dumpable: Any?) {
         Logger.Type.Debug.print(prefix, msg.format(*dumpable))
     }
 
     override fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>) {
         Logger.Type.Debug.print(prefix, msg.format(param))
+    }
+
+    override fun debug(throwable: Throwable) {
+        Logger.Type.Debug.print(prefix, throwable.printToString())
     }
 }
 
@@ -112,8 +127,16 @@ class DefaultLogger(private val prefix: String, private val hasher: LogHasher.Lo
         type.print(prefix, normal)
     }
 
-    override fun verbose(msg: String, vararg dumpable: Any?) =
-        log(Logger.Type.Verbose, msg, dumpable)
+    private fun log(
+        type: Logger.Type,
+        normalAndRedacted: String,
+        prefix: String
+    ) = log(type, normalAndRedacted, normalAndRedacted, prefix)
+
+    override fun verbose(
+        msg: String,
+        vararg dumpable: Any?
+    ) = log(Logger.Type.Verbose, msg, dumpable)
 
     override fun <T> verbose(
         msg: String,
@@ -121,17 +144,32 @@ class DefaultLogger(private val prefix: String, private val hasher: LogHasher.Lo
         hashProcessor: HashProcessor<T>
     ) = log(Logger.Type.Verbose, msg, param, hashProcessor)
 
+    override fun verbose(
+        throwable: Throwable
+    ) = log(Logger.Type.Verbose, throwable.printToString(), prefix)
+
+
     override fun info(msg: String, vararg dumpable: Any?) = log(Logger.Type.Info, msg, dumpable)
+
     override fun <T> info(
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
     ) = log(Logger.Type.Info, msg, param, hashProcessor)
 
+    override fun info(
+        throwable: Throwable
+    ) = log(Logger.Type.Info, throwable.printToString(), prefix)
+
     override fun debug(msg: String, vararg dumpable: Any?) = log(Logger.Type.Debug, msg, dumpable)
+
     override fun <T> debug(
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
     ) = log(Logger.Type.Debug, msg, param, hashProcessor)
+
+    override fun debug(
+        throwable: Throwable
+    ) = log(Logger.Type.Debug, throwable.printToString(), prefix)
 }

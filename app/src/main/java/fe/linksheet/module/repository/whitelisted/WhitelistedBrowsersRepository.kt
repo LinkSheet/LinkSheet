@@ -1,10 +1,10 @@
-package fe.linksheet.module.repository.base
+package fe.linksheet.module.repository.whitelisted
 
 import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.PackageEntityDao
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
-import fe.linksheet.module.database.entity.WhitelistedBrowser
+import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import kotlinx.coroutines.flow.map
 
 

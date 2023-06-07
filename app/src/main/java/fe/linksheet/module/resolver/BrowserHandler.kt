@@ -7,12 +7,12 @@ import fe.linksheet.extension.mapToSet
 import fe.linksheet.extension.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
-import fe.linksheet.module.database.entity.WhitelistedBrowser
+import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.repository.base.WhitelistedBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first
 

@@ -77,7 +77,7 @@ import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
-import fe.linksheet.module.resolver.RedirectFollower
+import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -122,9 +122,10 @@ class BottomSheetActivity : ComponentActivity() {
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
             setContent {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
-                    bottomSheetViewModel.resolveResult?.followRedirect?.let(
-                        ::makeResolveToast
-                    )
+                    if (!bottomSheetViewModel.disableToasts.value) {
+                        bottomSheetViewModel.resolveResult?.followRedirect?.let(::makeResolveToast)
+                        bottomSheetViewModel.resolveResult?.amp2HtmlResult?.let(::makeResolveToast)
+                    }
                 }
 
                 AppThemeBottomSheet(bottomSheetViewModel)
@@ -143,6 +144,7 @@ class BottomSheetActivity : ComponentActivity() {
             if (completed.hasAutoLaunchApp) {
                 if (!bottomSheetViewModel.disableToasts.value) {
                     completed.followRedirect?.let { makeResolveToast(it, true) }
+                    completed.amp2HtmlResult?.let { makeResolveToast(it, true) }
 
                     showToast(
                         getString(R.string.opening_with_app, completed.app.label),
@@ -169,11 +171,11 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     private fun makeResolveToast(
-        result: Result<RedirectFollower.FollowRedirect>,
+        result: Result<ResolveType>,
         uiThread: Boolean = false
     ) {
         result.getOrNull()?.let { type ->
-            if (type !is RedirectFollower.FollowRedirect.NotResolved) {
+            if (type !is ResolveType.NotResolved) {
                 showToast(
                     getString(R.string.resolved_via, getString(type.stringId)),
                     uiThread = uiThread

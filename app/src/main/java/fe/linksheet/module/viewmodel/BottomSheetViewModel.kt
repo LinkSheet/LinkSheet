@@ -60,8 +60,10 @@ class BottomSheetViewModel(
     val disableToasts = preferenceRepository.getBooleanState(Preferences.disableToasts)
     val gridLayout = preferenceRepository.getBooleanState(Preferences.gridLayout)
     private val followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
-    private var enableDownloader =
-        preferenceRepository.getBooleanState(Preferences.enableDownloader)
+    private var enableDownloader = preferenceRepository.getBooleanState(
+        Preferences.enableDownloader
+    )
+
     val theme = preferenceRepository.getState(Preferences.theme)
     val useTextShareCopyButtons = preferenceRepository.getBooleanState(
         Preferences.useTextShareCopyButtons
@@ -72,6 +74,8 @@ class BottomSheetViewModel(
         Preferences.enableRequestPrivateBrowsingButton
     )
 
+    val enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
+
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
 
@@ -81,7 +85,8 @@ class BottomSheetViewModel(
         }
     }
 
-    fun showLoadingBottomSheet() = followRedirects.value || enableDownloader.value
+    fun showLoadingBottomSheet() = followRedirects.value || enableAmp2Html.value
+            || enableDownloader.value
 
     fun startMainActivity(context: Activity): Boolean {
         return context.startActivityWithConfirmation(Intent(context, MainActivity::class.java))
@@ -124,7 +129,8 @@ class BottomSheetViewModel(
         uri: Uri?,
         downloadable: Downloader.DownloadCheckResult.Downloadable
     ) {
-        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
+        val path =
+            "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
 
         val request = DownloadManager.Request(uri)
             .setTitle(resources.getString(R.string.linksheet_download))
@@ -143,11 +149,11 @@ class BottomSheetViewModel(
         always: Boolean = false,
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null
     ) = ioAsync {
-        val newIntent =  info.intentFrom(intent).let {
+        val newIntent = info.intentFrom(intent).let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 
-        if(privateBrowsingBrowser == null){
+        if (privateBrowsingBrowser == null) {
             persistSelectedIntent(newIntent, always)
         }
 

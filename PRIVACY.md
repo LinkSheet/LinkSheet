@@ -46,6 +46,8 @@ time). This approach ensures privacy while still allowing debugging.
 
 ### Other log content
 
+The log will contain the LinkSheet version.
+
 Additionally, the both logs will include the device fingerprint by default. This fingerprint contains the
 device brand, device
 name, Android version, Android build id, Android version incremental id, user type (e.g. user) and

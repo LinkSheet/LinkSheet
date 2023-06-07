@@ -2,6 +2,7 @@ package fe.linksheet.module.viewmodel.util
 
 import android.os.Build
 import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.BuildConfig
 import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.log.LogHasher
@@ -27,6 +28,13 @@ class LogViewCommon(
         log: (StringBuilder) -> Unit
     ) = buildString {
         log(this)
+        append(
+            lineSeparator,
+            "linksheet_version=",
+            BuildConfig.VERSION_NAME,
+            ",code=" + BuildConfig.VERSION_CODE
+        )
+
         if (includeFingerprint) {
             append(lineSeparator, "device_fingerprint=", Build.FINGERPRINT)
         }

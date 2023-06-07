@@ -143,6 +143,7 @@ dependencies {
     implementation("com.github.1fexd:fastforwardkt:0.0.13")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
     implementation("com.github.1fexd:mimetypekt:0.0.4")
+    implementation("com.github.1fexd:amp2htmlkt:0.0.1")
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd.android-pref-helper:preference-helper:0.0.13")
     implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.13")

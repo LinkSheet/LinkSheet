@@ -67,6 +67,12 @@ object Preferences {
     val followRedirectsTimeout = intPreference("follow_redirects_timeout", 15)
     val downloaderTimeout = intPreference("downloader_timeout", 15)
 
+    val enableAmp2Html = booleanPreference("enable_amp2html")
+    val enableAmp2HtmlLocalCache = booleanPreference("enable_amp2html_local_cache")
+    val amp2HtmlExternalService = booleanPreference("amp2html_external_service")
+    val amp2HtmlTimeout = intPreference("amp2html_timeout", 15)
+
+
     val enableRequestPrivateBrowsingButton =
         booleanPreference("enable_request_private_browsing_button")
 
@@ -104,8 +110,12 @@ object Preferences {
         enableIgnoreLibRedirectButton,
         followRedirectsTimeout,
         downloaderTimeout,
-        enableRequestPrivateBrowsingButton
+        enableRequestPrivateBrowsingButton,
+        enableAmp2Html,
+        enableAmp2HtmlLocalCache,
+        amp2HtmlExternalService
     )
+
     private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)
 
     fun log(

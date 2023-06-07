@@ -3,18 +3,21 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getIntState
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
-class LinksSettingsViewModel(
+class Amp2HtmlSettingsViewModel(
     val context: Application,
     preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var useClearUrls = preferenceRepository.getBooleanState(Preferences.useClearUrls)
-    var useFastForwardRules = preferenceRepository.getBooleanState(Preferences.useFastForwardRules)
-    var enableLibRedirect = preferenceRepository.getBooleanState(Preferences.enableLibRedirect)
-    var followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
-    var enableDownloader = preferenceRepository.getBooleanState(Preferences.enableDownloader)
     var enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
+    val enableAmp2HtmlLocalCache = preferenceRepository.getBooleanState(
+        Preferences.enableAmp2HtmlLocalCache
+    )
 
+    val amp2HtmlExternalService = preferenceRepository.getBooleanState(
+        Preferences.amp2HtmlExternalService
+    )
+    val amp2HtmlTimeout = preferenceRepository.getIntState(Preferences.amp2HtmlTimeout)
 }

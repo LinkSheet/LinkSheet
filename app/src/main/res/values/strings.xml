@@ -187,4 +187,10 @@
     <string name="log_privacy">To learn about log privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
     <string name="delete">Delete</string>
     <string name="no_logs_found">No past logs found!</string>
+    <string name="enable_amp2html">Enable Amp2Html</string>
+    <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version</string>
+    <string name="amp2html_local_cache">Enable local Amp2Html cache</string>
+    <string name="amp2html_local_cache_explainer">Cache the retrieved non-AMP versions of webpages locally</string>
+    <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>
+    <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
 </resources>

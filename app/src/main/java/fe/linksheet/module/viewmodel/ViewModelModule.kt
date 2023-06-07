@@ -20,4 +20,5 @@ val viewModelModule = module {
     viewModelOf(::LogSettingsViewModel)
     viewModelOf(::LogTextSettingsViewModel)
     viewModelOf(::CrashHandlerViewerViewModel)
+    viewModelOf(::Amp2HtmlSettingsViewModel)
 }

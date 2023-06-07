@@ -13,6 +13,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.junkfood.seal.ui.common.animatedArgumentRouteComposable
 import com.junkfood.seal.ui.common.animatedComposable
 import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.appsSettingsRoute
 import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.bottomSheetSettingsRoute
@@ -34,6 +35,7 @@ import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
+import fe.linksheet.composable.settings.link.amp2html.Amp2HtmlSettingsRoute
 import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
@@ -131,6 +133,10 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = downloaderSettingsRoute) {
                         DownloaderSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    animatedComposable(route = amp2HtmlSettingsRoute) {
+                        Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     animatedComposable(route = themeSettingsRoute) {

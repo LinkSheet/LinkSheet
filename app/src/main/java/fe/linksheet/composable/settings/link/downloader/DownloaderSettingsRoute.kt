@@ -49,7 +49,7 @@ fun DownloaderSettingsRoute(
                 SettingEnabledCardColumn(
                     checked = viewModel.enableDownloader.value,
                     onChange = {
-                        requestDownloadPermission(
+                      requestDownloadPermission(
                             writeExternalStoragePermissionState,
                             viewModel,
                             viewModel.enableDownloader,

@@ -279,7 +279,7 @@ class IntentResolver(
     private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType.value) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
-                logger.debug("File ending check result $it")
+                logger.debug("File ending check result=%s", it)
                 if (it.isDownloadable()) return it
             }
         }

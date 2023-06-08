@@ -3,8 +3,14 @@ package fe.linksheet.module.downloader
 import fe.httpkt.Request
 import fe.httpkt.util.findHeader
 import fe.linksheet.extension.substringNullable
+import fe.linksheet.module.log.FileExtensionProcessor
+import fe.linksheet.module.log.FileNameProcessor
+import fe.linksheet.module.log.LogDumpable
+import fe.linksheet.module.log.LogHasher
 import fe.linksheet.module.request.requestModule
 import fe.mimetypekt.MimeTypeLoader
+import fe.stringbuilder.util.commaSeparated
+import fe.stringbuilder.util.curlyWrapped
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -27,14 +33,39 @@ class Downloader(private val request: Request) {
         private val mappings = MimeTypeLoader.loadBuiltInMimeTypes()
     }
 
-    sealed class DownloadCheckResult {
+    sealed class DownloadCheckResult : LogDumpable {
         class Downloadable(private val fileName: String, private val extension: String?) :
             DownloadCheckResult() {
             fun toFileName() = "$fileName.$extension"
+            override fun dump(
+                stringBuilder: StringBuilder,
+                hasher: LogHasher
+            ) = stringBuilder.curlyWrapped {
+                commaSeparated {
+                    item { append("type=downloadable") }
+                    item { hasher.hash(stringBuilder, "name=", fileName, FileNameProcessor) }
+                    item { hasher.hash(stringBuilder, "ext=", fileName, FileExtensionProcessor) }
+                }
+            }
         }
 
-        object NonDownloadable : DownloadCheckResult()
-        object MimeTypeDetectionFailed : DownloadCheckResult()
+        object NonDownloadable : DownloadCheckResult() {
+            override fun dump(
+                stringBuilder: StringBuilder,
+                hasher: LogHasher
+            ) = stringBuilder.curlyWrapped {
+                append("type=nondownloadable")
+            }
+        }
+
+        object MimeTypeDetectionFailed : DownloadCheckResult() {
+            override fun dump(
+                stringBuilder: StringBuilder,
+                hasher: LogHasher
+            ) = stringBuilder.curlyWrapped {
+                append("type=mimetypedetectionfailed")
+            }
+        }
 
         fun isDownloadable() = this is Downloadable
     }

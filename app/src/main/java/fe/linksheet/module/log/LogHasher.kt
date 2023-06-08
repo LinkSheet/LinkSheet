@@ -46,6 +46,8 @@ sealed interface LogHasher {
 typealias PackageProcessor = HashProcessor.StringProcessor
 typealias HostProcessor = HashProcessor.StringProcessor
 typealias UrlProcessor = HashProcessor.StringProcessor
+typealias FileNameProcessor = HashProcessor.StringProcessor
+typealias FileExtensionProcessor = HashProcessor.StringProcessor
 
 sealed interface HashProcessor<T> {
     object NoOpProcessor : HashProcessor<String> {
@@ -54,14 +56,6 @@ sealed interface HashProcessor<T> {
             input: String,
             mac: Mac
         ): StringBuilder = stringBuilder.append(input)
-    }
-
-    object UrlProcessor : HashProcessor<String> {
-        override fun process(
-            stringBuilder: StringBuilder,
-            input: String,
-            mac: Mac
-        ): StringBuilder = stringBuilder.appendHashed(mac, input)
     }
 
     object UriProcessor : HashProcessor<Uri> {

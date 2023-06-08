@@ -188,4 +188,11 @@
     <string name="log_privacy">للتعرف على خصوصية السجل، يمكنك زيارة هذا الرابط <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs"/>.</string>
     <string name="delete">حذف</string>
     <string name="no_logs_found">لم يتم العثور على سجلات سابقة!</string>
+    <string name="amp2html">Amp2Html</string>
+    <string name="amp2html_external_service">محاولة الحصول على إصدار صفحة غير AMP عبر خدمة خارجية</string>
+    <string name="enable_amp2html">تمكين Amp2Html</string>
+    <string name="enable_amp2html_explainer">يعيد توجيه صفحات AMP إلى إصدار الويب العادي</string>
+    <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
+    <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
+    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
 </resources>

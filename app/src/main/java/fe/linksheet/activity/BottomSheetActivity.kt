@@ -67,8 +67,10 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.extension.buildSendTo
 import fe.linksheet.extension.currentActivity
+import fe.linksheet.extension.nullClickable
 import fe.linksheet.extension.runIf
 import fe.linksheet.extension.selfIntent
 import fe.linksheet.extension.setText
@@ -240,10 +242,7 @@ class BottomSheetActivity : ComponentActivity() {
                         .fillMaxWidth(0.55f)
                         .fillMaxHeight()
                 }
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {},
+                .nullClickable(),
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             sheetContent = {
@@ -505,7 +504,7 @@ class BottomSheetActivity : ComponentActivity() {
         val modifier: AppListModifier = @Composable { index, info ->
             Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(6.dp))
+                .clip(defaultRoundedCornerShape)
                 .combinedClickable(
                     onClick = {
                         if (bottomSheetViewModel.singleTap.value) {

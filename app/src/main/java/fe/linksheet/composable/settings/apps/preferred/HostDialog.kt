@@ -36,6 +36,7 @@ import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogContent
 import fe.linksheet.composable.util.DialogSpacer
+import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.extension.startPackageInfoActivity
 import fe.linksheet.extension.updateState
 import fe.linksheet.extension.updateStateFromResult
@@ -75,7 +76,7 @@ internal fun hostDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(6.dp))
+                    .clip(defaultRoundedCornerShape)
                     .clickable {
                         activity.startPackageInfoActivity(displayActivityInfo)
                     },

@@ -18,10 +18,13 @@ inline fun Modifier.runIf(
     runElse: ChangeModifier
 ) = if (condition) this.let(runIf) else this.let(runElse)
 
-fun Modifier.clickable(): Modifier = composed {
+fun Modifier.nullClickable(): Modifier = composed {
     val interactionSource = remember { MutableInteractionSource() }
-
-    clickable(interactionSource = interactionSource, indication = null) {}
+    clickable(interactionSource = interactionSource, indication = null, onClick = {})
 }
+
+fun Modifier.clickable(
+    onClick: (() -> Unit)? = null
+) = this.runIf(onClick != null) { it.clickable(onClick = onClick!!) }
 
 fun Modifier.enabled(enabled: Boolean) = runIf(!enabled) { it.alpha(0.3f) }

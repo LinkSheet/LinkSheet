@@ -78,7 +78,7 @@ fun ClickableRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(6.dp))
+            .clip(defaultRoundedCornerShape)
             .runIf(enabled && onClick != null) {
                 it.combinedClickable(
                     onClick = onClick!!,

@@ -19,8 +19,8 @@ import fe.linksheet.extension.runIf
 fun NonClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    paddingHorizontal: Dp = 0.dp,
-    paddingVertical: Dp = 10.dp,
+    paddingHorizontal: Dp = defaultHorizontalPadding,
+    paddingVertical: Dp = defaultVerticalPadding,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     content: @Composable RowScope.() -> Unit
@@ -40,8 +40,8 @@ fun NonClickableRow(
 fun ClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    paddingHorizontal: Dp = 10.dp,
-    paddingVertical: Dp = 10.dp,
+    paddingHorizontal: Dp = defaultHorizontalPadding,
+    paddingVertical: Dp = defaultVerticalPadding,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     onClick: (() -> Unit)? = null,
@@ -66,8 +66,8 @@ fun ClickableRow(
 fun ClickableRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    paddingHorizontal: Dp = 0.dp,
-    paddingVertical: Dp = 10.dp,
+    paddingHorizontal: Dp = defaultHorizontalPadding,
+    paddingVertical: Dp = defaultVerticalPadding,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     onClick: (() -> Unit)? = null,

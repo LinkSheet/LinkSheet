@@ -41,8 +41,8 @@ fun <T : Any, M> RadioButtonRow(
 fun RadioButtonRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    paddingHorizontal: Dp = 10.dp,
-    paddingVertical: Dp = 10.dp,
+    paddingHorizontal: Dp = defaultHorizontalPadding,
+    paddingVertical: Dp = defaultVerticalPadding,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)?,
     selected: Boolean,

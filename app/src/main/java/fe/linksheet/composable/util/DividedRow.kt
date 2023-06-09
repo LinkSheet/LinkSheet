@@ -59,8 +59,8 @@ fun DividedRow(
 fun DividedRow(
     modifier: Modifier = Modifier,
     onLeftClick: (() -> Unit)? = null,
-    paddingHorizontal: Dp = 10.dp,
-    paddingVertical: Dp = 10.dp,
+    paddingHorizontal: Dp = defaultHorizontalPadding,
+    paddingVertical: Dp = defaultVerticalPadding,
     leftContent: @Composable ColumnScope.() -> Unit,
     rightContent: @Composable RowScope.() -> Unit
 ) {

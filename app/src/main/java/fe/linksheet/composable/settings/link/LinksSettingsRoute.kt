@@ -164,11 +164,10 @@ fun LinksSettingsRoute(
                                 navController.navigate(libRedirectSettingsRoute)
                             }
                         )
-                    },
-                    onClick = {
-                        navController.navigate(libRedirectSettingsRoute)
                     }
-                )
+                ) {
+                    navController.navigate(libRedirectSettingsRoute)
+                }
             }
 
             item(key = "follow_redirects") {

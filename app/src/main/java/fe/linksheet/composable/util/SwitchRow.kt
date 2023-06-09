@@ -22,9 +22,7 @@ fun SwitchRow(
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle)
 ) {
     SwitchRow(
         modifier = modifier,
@@ -83,9 +81,7 @@ fun SwitchRow(
     onChange: (Boolean) -> Unit,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle)
 ) {
     ClickableRow(
         modifier = modifier,

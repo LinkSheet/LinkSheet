@@ -48,9 +48,7 @@ fun SettingEnabledCardColumn(
     onChange: (Boolean) -> Unit,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null,
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle),
     contentTitle: String? = null,
 ) {
     SettingEnabledCardColumnCommon(contentTitle = contentTitle) {
@@ -70,9 +68,7 @@ fun SettingEnabledCardColumn(
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null,
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle),
     contentTitle: String,
 ) {
     SettingEnabledCardColumnCommon(contentTitle = contentTitle) {

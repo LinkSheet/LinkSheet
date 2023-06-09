@@ -46,6 +46,14 @@ fun HeadlineText(@StringRes headlineId: Int) {
     HeadlineText(headline = stringResource(id = headlineId))
 }
 
+fun buildSubtitle(subtitle: String?): @Composable (() -> Unit)? = if (subtitle != null) {
+    { SubtitleText(subtitle = subtitle) }
+} else null
+
+fun buildEnabledSubtitle(subtitle: String?): @Composable ((Boolean) -> Unit)? = if (subtitle != null) {
+    { SubtitleText(subtitle = subtitle) }
+} else null
+
 @Composable
 fun SubtitleText(
     fontStyle: FontStyle? = null,

@@ -29,9 +29,7 @@ fun SliderRow(
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle)
 ) {
     SliderRow(
         modifier = modifier,
@@ -111,9 +109,7 @@ fun SliderRow(
     valueFormatter: (Float) -> String = { it.toString() },
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle)
 ) {
     NonClickableRow(
         modifier = modifier,

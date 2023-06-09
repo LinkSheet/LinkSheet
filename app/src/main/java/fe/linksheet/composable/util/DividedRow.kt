@@ -23,9 +23,7 @@ import fe.linksheet.extension.clickable
 fun DividedRow(
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable (() -> Unit)? = if (subtitle != null) {
-        { SubtitleText(subtitle = subtitle) }
-    } else null,
+    subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle),
     onClick: () -> Unit,
     rightContent: @Composable RowScope.() -> Unit
 ) {

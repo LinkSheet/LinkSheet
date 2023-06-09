@@ -13,14 +13,16 @@ import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveType
 import kotlinx.coroutines.flow.firstOrNull
 import java.io.IOException
+import kotlin.reflect.KClass
 
 
-abstract class UrlResolver<T : ResolverEntity<T>>(
+abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     loggerFactory: LoggerFactory,
+    clazz: KClass<R>,
     private val redirectResolver: ResolveRequest,
     private val resolverRepository: ResolverRepository<T>,
 ) {
-    private val logger = loggerFactory.createLogger(UrlResolver::class)
+    private val logger = loggerFactory.createLogger(clazz)
 
     suspend fun resolve(
         uri: Uri,

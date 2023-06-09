@@ -9,4 +9,9 @@ class RedirectUrlResolver(
     loggerFactory: LoggerFactory,
     redirectResolver: RedirectResolveRequest,
     resolverRepository: ResolvedRedirectRepository,
-) : UrlResolver<ResolvedRedirect>(loggerFactory, redirectResolver, resolverRepository)
+) : UrlResolver<ResolvedRedirect, RedirectUrlResolver>(
+    loggerFactory,
+    RedirectUrlResolver::class,
+    redirectResolver,
+    resolverRepository
+)

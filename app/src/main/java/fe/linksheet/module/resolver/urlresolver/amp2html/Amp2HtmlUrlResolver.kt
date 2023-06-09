@@ -9,4 +9,9 @@ class Amp2HtmlUrlResolver(
     loggerFactory: LoggerFactory,
     redirectResolver: Amp2HtmlResolveRequest,
     resolverRepository: Amp2HtmlRepository,
-) : UrlResolver<Amp2HtmlMapping>(loggerFactory, redirectResolver, resolverRepository)
+) : UrlResolver<Amp2HtmlMapping, Amp2HtmlUrlResolver>(
+    loggerFactory,
+    Amp2HtmlUrlResolver::class,
+    redirectResolver,
+    resolverRepository
+)

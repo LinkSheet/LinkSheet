@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.compose
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi

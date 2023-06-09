@@ -1,13 +1,10 @@
 package fe.linksheet.module.resolver
 
 import android.app.Application
-import android.content.Context
-import fe.linksheet.extension.allBrowsersIntent
-import fe.linksheet.extension.queryResolveInfosByIntent
-import fe.linksheet.extension.toDisplayActivityInfos
-import fe.linksheet.extension.toPackageKeyedMap
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import fe.linksheet.extension.android.allBrowsersIntent
+import fe.linksheet.extension.android.queryResolveInfosByIntent
+import fe.linksheet.extension.android.toDisplayActivityInfos
+import fe.linksheet.extension.android.toPackageKeyedMap
 
 class BrowserResolver(val context: Application) {
     fun queryPackageKeyedBrowsers() = queryBrowsers().toPackageKeyedMap()

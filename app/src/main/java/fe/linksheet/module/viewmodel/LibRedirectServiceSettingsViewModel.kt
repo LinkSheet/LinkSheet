@@ -8,7 +8,7 @@ import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.LibRedirectServiceState
-import fe.linksheet.extension.ioLaunch
+import fe.linksheet.extension.android.ioLaunch
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository

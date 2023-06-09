@@ -32,10 +32,10 @@ import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.currentActivity
+import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.ioState
-import fe.linksheet.extension.listHelper
-import fe.linksheet.extension.searchHeader
+import fe.linksheet.extension.compose.listHelper
+import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel

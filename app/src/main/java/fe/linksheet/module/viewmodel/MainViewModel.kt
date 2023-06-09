@@ -10,9 +10,9 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.allBrowsersIntent
-import fe.linksheet.extension.resolveActivityCompat
-import fe.linksheet.extension.startActivityWithConfirmation
+import fe.linksheet.extension.android.allBrowsersIntent
+import fe.linksheet.extension.android.resolveActivityCompat
+import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 

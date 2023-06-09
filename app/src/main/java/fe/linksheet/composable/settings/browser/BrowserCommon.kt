@@ -31,7 +31,7 @@ import fe.linksheet.composable.util.DividedRow
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.extension.associateWith
-import fe.linksheet.extension.items
+import fe.linksheet.extension.compose.items
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 

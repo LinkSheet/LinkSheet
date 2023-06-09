@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -37,9 +36,9 @@ import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogContent
 import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import fe.linksheet.extension.startPackageInfoActivity
-import fe.linksheet.extension.updateState
-import fe.linksheet.extension.updateStateFromResult
+import fe.linksheet.extension.android.startPackageInfoActivity
+import fe.linksheet.extension.compose.updateState
+import fe.linksheet.extension.compose.updateStateFromResult
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
 

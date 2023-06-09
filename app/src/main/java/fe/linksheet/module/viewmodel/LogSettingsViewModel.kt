@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel
 
 import android.util.Log
 import fe.android.preference.helper.PreferenceRepository
-import fe.linksheet.extension.ioLaunch
+import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.extension.localizedString
 import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.module.log.AppLogger

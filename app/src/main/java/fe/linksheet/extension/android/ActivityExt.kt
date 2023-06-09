@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.android
 
 import android.app.Activity
 import android.content.Intent

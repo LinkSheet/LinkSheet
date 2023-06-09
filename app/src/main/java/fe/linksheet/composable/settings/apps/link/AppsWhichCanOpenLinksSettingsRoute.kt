@@ -27,15 +27,14 @@ import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
 import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.currentActivity
+import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.ioState
-import fe.linksheet.extension.listHelper
-import fe.linksheet.extension.startActivityWithConfirmation
+import fe.linksheet.extension.compose.listHelper
+import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import fe.linksheet.composable.util.FilterChip
 import fe.linksheet.composable.util.FilterChipValue
 import fe.linksheet.composable.util.FilterChips
 

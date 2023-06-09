@@ -12,11 +12,11 @@ import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
 import fe.fastforwardkt.FastForwardLoader
 import fe.fastforwardkt.isTracker
-import fe.linksheet.extension.IntentExt.getUri
-import fe.linksheet.extension.IntentExt.isSchemeTypicallySupportedByBrowsers
-import fe.linksheet.extension.IntentExt.newIntent
-import fe.linksheet.extension.componentName
-import fe.linksheet.extension.queryResolveInfosByIntent
+import fe.linksheet.extension.android.IntentExt.getUri
+import fe.linksheet.extension.android.IntentExt.isSchemeTypicallySupportedByBrowsers
+import fe.linksheet.extension.android.IntentExt.newIntent
+import fe.linksheet.extension.android.componentName
+import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor

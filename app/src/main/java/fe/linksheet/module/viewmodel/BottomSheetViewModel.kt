@@ -18,9 +18,8 @@ import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
-import fe.linksheet.extension.IntentExt.newIntent
-import fe.linksheet.extension.ioAsync
-import fe.linksheet.extension.startActivityWithConfirmation
+import fe.linksheet.extension.android.ioAsync
+import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader

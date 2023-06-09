@@ -18,17 +18,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -36,28 +32,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
-import fe.android.compose.dialog.helper.OnClose
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow
-import fe.linksheet.composable.util.CheckboxRow
-import fe.linksheet.composable.util.DialogColumn
-import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.ExportLogDialog
-import fe.linksheet.composable.util.HeadlineText
-import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
-import fe.linksheet.extension.listHelper
+import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.localizedString
-import fe.linksheet.extension.setText
 import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
-import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.androidx.compose.koinViewModel
 
 

@@ -7,12 +7,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
-import fe.linksheet.extension.getAppHosts
-import fe.linksheet.extension.getDisplayActivityInfos
+import fe.linksheet.extension.compose.getAppHosts
+import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.extension.groupBy
-import fe.linksheet.extension.hasVerifiedDomains
-import fe.linksheet.extension.ioAsync
-import fe.linksheet.extension.ioLaunch
+import fe.linksheet.extension.android.hasVerifiedDomains
+import fe.linksheet.extension.android.ioAsync
+import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.extension.mapToSet
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository

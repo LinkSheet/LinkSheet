@@ -4,7 +4,6 @@ import android.app.Activity
 import android.util.Patterns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,7 +18,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,8 +27,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.extension.currentActivity
-import fe.linksheet.extension.observeAsState
+import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily

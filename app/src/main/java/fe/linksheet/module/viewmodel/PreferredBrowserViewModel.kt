@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import fe.linksheet.extension.ioLaunch
+import fe.linksheet.extension.android.ioLaunch
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState

@@ -31,9 +31,8 @@ import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.mapState
 import fe.linksheet.extension.ioState
-import fe.linksheet.extension.items
 import fe.linksheet.extension.localizedString
-import fe.linksheet.extension.mapHelper
+import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.viewmodel.LogSettingsViewModel

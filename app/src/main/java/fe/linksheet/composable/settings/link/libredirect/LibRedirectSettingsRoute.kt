@@ -27,7 +27,7 @@ import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
-import fe.linksheet.extension.listHelper
+import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel

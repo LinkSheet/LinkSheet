@@ -8,7 +8,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.extension.findIndexed
-import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.extension.android.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
 object BottomSheetGrouper {

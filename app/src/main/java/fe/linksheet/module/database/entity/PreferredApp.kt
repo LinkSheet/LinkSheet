@@ -8,8 +8,8 @@ import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import fe.linksheet.resolver.PreferredDisplayActivityInfo
-import fe.linksheet.extension.queryFirstIntentActivityByPackageNameOrNull
-import fe.linksheet.extension.toDisplayActivityInfo
+import fe.linksheet.extension.android.queryFirstIntentActivityByPackageNameOrNull
+import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.module.log.HostProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject

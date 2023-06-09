@@ -12,8 +12,8 @@ import androidx.lifecycle.Lifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.extension.currentActivity
-import fe.linksheet.extension.observeAsState
+import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.androidx.compose.koinViewModel

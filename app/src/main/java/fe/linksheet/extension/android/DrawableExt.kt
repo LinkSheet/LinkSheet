@@ -1,9 +1,8 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.android
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 
 fun Drawable.toImageBitmap() = Bitmap.createBitmap(

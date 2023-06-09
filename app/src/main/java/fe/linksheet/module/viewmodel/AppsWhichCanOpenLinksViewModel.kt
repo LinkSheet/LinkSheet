@@ -10,8 +10,8 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.extension.filterIf
-import fe.linksheet.extension.getDisplayActivityInfos
-import fe.linksheet.extension.hasVerifiedDomains
+import fe.linksheet.extension.compose.getDisplayActivityInfos
+import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy

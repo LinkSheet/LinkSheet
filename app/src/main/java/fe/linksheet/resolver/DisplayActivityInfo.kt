@@ -4,8 +4,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
-import fe.linksheet.extension.componentName
-import fe.linksheet.extension.toImageBitmap
+import fe.linksheet.extension.android.componentName
+import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LogDumpable

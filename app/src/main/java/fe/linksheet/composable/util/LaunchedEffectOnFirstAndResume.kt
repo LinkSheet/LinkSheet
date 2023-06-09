@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
-import fe.linksheet.extension.observeAsState
+import fe.linksheet.extension.compose.observeAsState
 import kotlinx.coroutines.CoroutineScope
 
 @Composable

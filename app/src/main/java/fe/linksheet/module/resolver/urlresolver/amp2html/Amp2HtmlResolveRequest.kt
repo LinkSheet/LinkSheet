@@ -6,8 +6,8 @@ import fe.httpkt.Request
 import fe.httpkt.isHttpSuccess
 import fe.httpkt.util.getGZIPOrDefaultStream
 import fe.linksheet.extension.createLogger
-import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.supabaseApiKey
 import fe.linksheet.supabaseFunctionHost
@@ -36,7 +36,7 @@ class Amp2HtmlResolveRequest(
 
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String? {
-        logger.debug("ResolveLocal %s", url, HashProcessor.UrlProcessor)
+        logger.debug("ResolveLocal %s", url, UrlProcessor)
         val con = request.get(
             url,
             connectTimeout = timeout * 1000,

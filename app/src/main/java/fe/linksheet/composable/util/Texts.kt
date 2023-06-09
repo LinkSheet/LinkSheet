@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,9 +51,29 @@ fun buildSubtitle(subtitle: String?): @Composable (() -> Unit)? = if (subtitle !
     { SubtitleText(subtitle = subtitle) }
 } else null
 
-fun buildEnabledSubtitle(subtitle: String?): @Composable ((Boolean) -> Unit)? = if (subtitle != null) {
+fun buildEnabledSubtitle(
+    subtitle: String?
+): @Composable ((Boolean) -> Unit)? = if (subtitle != null) {
     { SubtitleText(subtitle = subtitle) }
 } else null
+
+fun linkableSubtitleBuilder(@StringRes id: Int): @Composable ((Boolean) -> Unit) {
+    return { enabled ->
+        LinkableSubtitleText(id = id, enabled = enabled)
+    }
+}
+
+@Composable
+fun LinkableSubtitleText(@StringRes id: Int, enabled: Boolean) {
+    LinkableTextView(
+        id = id,
+        enabled = enabled,
+        style = LocalTextStyle.current.copy(
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = 16.sp
+        )
+    )
+}
 
 @Composable
 fun SubtitleText(

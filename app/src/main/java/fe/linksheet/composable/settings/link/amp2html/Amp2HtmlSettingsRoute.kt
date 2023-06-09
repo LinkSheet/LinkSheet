@@ -18,6 +18,7 @@ import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.composable.util.linkableSubtitleBuilder
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -42,9 +43,9 @@ fun Amp2HtmlSettingsRoute(
                 SettingEnabledCardColumn(
                     state = viewModel.enableAmp2Html,
                     viewModel = viewModel,
-                    headlineId = R.string.enable_amp2html,
-                    subtitleId = R.string.enable_amp2html_explainer,
-                    contentTitleId = R.string.options
+                    headline = stringResource(id = R.string.enable_amp2html),
+                    subtitleBuilder = linkableSubtitleBuilder(id = R.string.enable_amp2html_explainer),
+                    contentTitle = stringResource(id = R.string.options)
                 )
             }
 

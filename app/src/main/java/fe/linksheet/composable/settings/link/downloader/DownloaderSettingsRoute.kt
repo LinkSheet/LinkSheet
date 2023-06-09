@@ -21,6 +21,7 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.composable.util.linkableSubtitleBuilder
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
@@ -57,7 +58,7 @@ fun DownloaderSettingsRoute(
                         )
                     },
                     headline = stringResource(id = R.string.enable_downloader),
-                    subtitle = stringResource(id = R.string.enable_downloader_explainer),
+                    subtitleBuilder = linkableSubtitleBuilder(id = R.string.enable_downloader_explainer),
                     contentTitle = stringResource(id = R.string.options)
                 )
             }

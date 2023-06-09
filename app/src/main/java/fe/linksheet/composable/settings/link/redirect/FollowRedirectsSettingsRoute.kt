@@ -18,6 +18,7 @@ import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.composable.util.linkableSubtitleBuilder
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -41,9 +42,10 @@ fun FollowRedirectsSettingsRoute(
             stickyHeader(key = "follow_redirects") {
                 SettingEnabledCardColumn(
                     state = viewModel.followRedirects,
-                    viewModel = viewModel, headlineId = R.string.follow_redirects,
-                    subtitleId = R.string.follow_redirects_explainer,
-                    contentTitleId = R.string.options
+                    viewModel = viewModel,
+                    headline = stringResource(id = R.string.follow_redirects),
+                    subtitleBuilder = linkableSubtitleBuilder(id = R.string.follow_redirects_explainer),
+                    contentTitle = stringResource(id = R.string.options)
                 )
             }
 

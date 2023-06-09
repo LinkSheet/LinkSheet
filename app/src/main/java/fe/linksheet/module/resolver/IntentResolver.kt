@@ -75,17 +75,14 @@ class IntentResolver(
         Preferences.followRedirectsExternalService
     )
 
-    private val followRedirectsTimeout = preferenceRepository.getIntState(
-        Preferences.followRedirectsTimeout
+    private val requestTimeout = preferenceRepository.getIntState(
+        Preferences.requestTimeout
     )
 
     private var enableDownloader =
         preferenceRepository.getBooleanState(Preferences.enableDownloader)
     private var downloaderCheckUrlMimeType = preferenceRepository.getBooleanState(
         Preferences.downloaderCheckUrlMimeType
-    )
-    private val downloaderTimeout = preferenceRepository.getIntState(
-        Preferences.downloaderTimeout
     )
 
     val theme = preferenceRepository.getState(Preferences.theme)
@@ -112,7 +109,6 @@ class IntentResolver(
 
     private val amp2HtmlExternalService =
         preferenceRepository.getBooleanState(Preferences.amp2HtmlExternalService)
-    private val amp2HtmlTimeout = preferenceRepository.getIntState(Preferences.amp2HtmlTimeout)
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         logger.debug("Intent=%s", intent)
@@ -143,7 +139,7 @@ class IntentResolver(
                 followRedirectsLocalCache.value,
                 { url -> !followOnlyKnownTrackers.value || isTracker(url, fastForwardRulesObject) },
                 followRedirectsExternalService.value,
-                followRedirectsTimeout.value
+                requestTimeout.value
             )
         }
 
@@ -157,7 +153,7 @@ class IntentResolver(
                 amp2HtmlLocalCache.value,
                 { true },
                 amp2HtmlExternalService.value,
-                amp2HtmlTimeout.value
+                requestTimeout.value
             )
         }
 
@@ -174,7 +170,7 @@ class IntentResolver(
         }
 
         val downloadable = if (enableDownloader.value && uri != null) {
-            checkIsDownloadable(uri, downloaderTimeout.value)
+            checkIsDownloadable(uri, requestTimeout.value)
         } else Downloader.DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)

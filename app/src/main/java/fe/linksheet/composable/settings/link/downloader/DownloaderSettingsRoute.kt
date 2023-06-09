@@ -74,9 +74,9 @@ fun DownloaderSettingsRoute(
 
             item(key = "downloader_timeout") {
                 SliderRow(
-                    value = viewModel.downloaderTimeout.value.toFloat(),
+                    value = viewModel.requestTimeout.value.toFloat(),
                     onValueChange = {
-                        viewModel.updateState(viewModel.downloaderTimeout, it.toInt())
+                        viewModel.updateState(viewModel.requestTimeout, it.toInt())
                     },
                     enabled = viewModel.enableDownloader.value,
                     valueRange = 0f..30f,

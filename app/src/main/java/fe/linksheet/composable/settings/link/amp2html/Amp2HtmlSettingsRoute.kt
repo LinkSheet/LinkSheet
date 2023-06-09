@@ -79,9 +79,9 @@ fun Amp2HtmlSettingsRoute(
 
             item(key = "amp2html_timeout") {
                 SliderRow(
-                    value = viewModel.amp2HtmlTimeout.value.toFloat(),
+                    value = viewModel.requestTimeout.value.toFloat(),
                     onValueChange = {
-                        viewModel.updateState(viewModel.amp2HtmlTimeout, it.toInt())
+                        viewModel.updateState(viewModel.requestTimeout, it.toInt())
                     },
                     enabled = viewModel.enableAmp2Html.value,
                     valueRange = 0f..30f,

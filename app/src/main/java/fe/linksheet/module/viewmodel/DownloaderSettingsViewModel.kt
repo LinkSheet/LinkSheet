@@ -15,6 +15,6 @@ class DownloaderSettingsViewModel(
     var downloaderCheckUrlMimeType = preferenceRepository.getBooleanState(
         Preferences.downloaderCheckUrlMimeType
     )
-    val downloaderTimeout = preferenceRepository.getIntState(Preferences.downloaderTimeout)
+    val requestTimeout = preferenceRepository.getIntState(Preferences.requestTimeout)
 
 }

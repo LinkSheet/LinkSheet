@@ -21,5 +21,5 @@ class FollowRedirectsSettingsViewModel(
     var followOnlyKnownTrackers = preferenceRepository.getBooleanState(
         Preferences.followOnlyKnownTrackers
     )
-    val followRedirectsTimeout = preferenceRepository.getIntState(Preferences.followRedirectsTimeout)
+    val followRedirectsTimeout = preferenceRepository.getIntState(Preferences.requestTimeout)
 }

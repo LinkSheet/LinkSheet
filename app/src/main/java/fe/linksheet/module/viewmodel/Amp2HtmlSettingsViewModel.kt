@@ -19,5 +19,5 @@ class Amp2HtmlSettingsViewModel(
     val amp2HtmlExternalService = preferenceRepository.getBooleanState(
         Preferences.amp2HtmlExternalService
     )
-    val amp2HtmlTimeout = preferenceRepository.getIntState(Preferences.amp2HtmlTimeout)
+    val requestTimeout = preferenceRepository.getIntState(Preferences.requestTimeout)
 }

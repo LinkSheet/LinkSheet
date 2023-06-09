@@ -8,6 +8,10 @@ import java.util.Locale
 
 fun LocalDateTime.localizedString(
     locale: Locale = Locale.getDefault()
-): String = format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-    .withZone(ZoneId.systemDefault())
-    .withLocale(locale))
+): String = format(
+    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+        .withZone(ZoneId.systemDefault())
+        .withLocale(locale)
+)
+
+fun LocalDateTime.toMillis() = atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()

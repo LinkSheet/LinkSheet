@@ -7,6 +7,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.decodeToString
 import fe.linksheet.extension.encodeFromString
+import fe.linksheet.extension.toMillis
 import fe.linksheet.util.SingletonHolder
 import fe.stringbuilder.util.buildSeparatedString
 import java.io.File
@@ -56,13 +57,22 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
     val startupTime: LocalDateTime = LocalDateTime.now()
     val logEntries = mutableListOf<LogEntry>()
 
-    fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles().also { Log.d("AppLogger", "${it.contentToString()}") }
+    fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles()
         ?.filter { it.length() > 0L }
         ?.sortedDescending()?.map { file ->
             file.name.substring(0, file.name.indexOf(fileExt))
         } ?: emptyList()
 
-    fun deleteLogFile(name: String) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt).delete()
+    fun deleteLogFile(
+        name: String
+    ) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt).delete()
+
+    fun deleteOldLogs() {
+        val startupMillis = startupTime.minusWeeks(2).toMillis()
+        getLogFiles().filter { it.toLong() < startupMillis }.forEach {
+            deleteLogFile(it)
+        }
+    }
 
     fun readLogFile(name: String) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt)
         .readLines()

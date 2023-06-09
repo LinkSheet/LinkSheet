@@ -39,6 +39,7 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
         super<Application>.onCreate()
 
         appLogger = AppLogger.createInstance(this)
+        appLogger.deleteOldLogs()
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
 
         Thread.setDefaultUncaughtExceptionHandler { _, exception ->
@@ -72,10 +73,6 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
                 downloaderModule
             )
         }
-    }
-
-    override fun onResume(owner: LifecycleOwner) {
-        super.onResume(owner)
     }
 
     override fun onStop(owner: LifecycleOwner) {

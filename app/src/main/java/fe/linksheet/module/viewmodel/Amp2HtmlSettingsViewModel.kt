@@ -15,7 +15,9 @@ class Amp2HtmlSettingsViewModel(
     val enableAmp2HtmlLocalCache = preferenceRepository.getBooleanState(
         Preferences.amp2HtmlLocalCache
     )
-
+    val amp2HtmlBuiltInCache = preferenceRepository.getBooleanState(
+        Preferences.amp2HtmlBuiltInCache
+    )
     val amp2HtmlExternalService = preferenceRepository.getBooleanState(
         Preferences.amp2HtmlExternalService
     )

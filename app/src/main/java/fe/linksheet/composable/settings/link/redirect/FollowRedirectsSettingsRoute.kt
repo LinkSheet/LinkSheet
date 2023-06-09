@@ -59,6 +59,16 @@ fun FollowRedirectsSettingsRoute(
                 )
             }
 
+            item(key = "follow_redirects_builtin_cache") {
+                SwitchRow(
+                    state = viewModel.followRedirectsBuiltInCache,
+                    viewModel = viewModel,
+                    enabled = viewModel.followRedirects.value,
+                    headlineId = R.string.follow_redirects_builtin_cache,
+                    subtitleId = R.string.follow_redirects_builtin_cache_explainer
+                )
+            }
+
 
             item(key = "follow_only_known_trackers") {
                 SwitchRow(

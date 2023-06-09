@@ -59,6 +59,16 @@ fun Amp2HtmlSettingsRoute(
                 )
             }
 
+            item(key = "enable_amp2html_builtin_cache") {
+                SwitchRow(
+                    state = viewModel.amp2HtmlBuiltInCache,
+                    viewModel = viewModel,
+                    enabled = viewModel.enableAmp2Html.value,
+                    headlineId = R.string.amp2html_builtin_cache,
+                    subtitleId = R.string.amp2html_builtin_cache_explainer
+                )
+            }
+
             item(key = "amp2html_external_service") {
                 SwitchRow(
                     state = viewModel.amp2HtmlExternalService,

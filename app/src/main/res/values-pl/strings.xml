@@ -89,7 +89,7 @@
     <string name="follow_redirects_local_cache">Włącz lokalną pamięć podręczną przekierowań</string>
     <string name="follow_redirects_local_cache_explainer">Lokalnie buforuj wyniki przekierowań</string>
     <string name="resolved_via">Rozwiązane przez %s</string>
-    <string name="redirect_resolve_type_cache">lokalną pamięć podręczną</string>
+    <string name="redirect_resolve_type_local_cache">lokalną pamięć podręczną</string>
     <string name="redirect_resolve_type_remote">zdalny serwer</string>
     <string name="redirect_resolve_type_not_resolved">nic</string>
     <string name="enable_libredirect">Włącz LibRedirect</string>

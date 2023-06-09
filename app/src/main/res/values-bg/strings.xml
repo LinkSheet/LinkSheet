@@ -76,7 +76,7 @@
     <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочването от препратката)</string>
     <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията</string>
-    <string name="redirect_resolve_type_cache">местна памет</string>
+    <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="redirect_resolve_type_not_resolved">липсва</string>
     <string name="usage_stats_sorting_explainer">Включване на статистиката за използване в . Разрешението се изисква при първото превключване.</string>

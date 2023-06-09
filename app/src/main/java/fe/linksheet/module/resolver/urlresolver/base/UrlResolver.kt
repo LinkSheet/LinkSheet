@@ -27,23 +27,32 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     suspend fun resolve(
         uri: Uri,
         localCache: Boolean,
+        builtInCache: Boolean,
         resolvePredicate: (String) -> Boolean,
         externalService: Boolean,
         connectTimeout: Int
     ): Result<ResolveType> {
+        val uriString = uri.toString()
         if (localCache) {
-            val redirect = resolverRepository.getForInputUrl(uri.toString()).firstOrNull()
-            if (redirect != null) {
-                logger.debug("From local cache: %s", redirect)
+            val resolvedUrl = resolverRepository.getForInputUrl(uriString).firstOrNull()
+            if (resolvedUrl != null) {
+                logger.debug("From local cache: %s", resolvedUrl)
+                return Result.success(ResolveType.LocalCache(resolvedUrl.urlResolved()))
+            }
+        }
 
-                return Result.success(ResolveType.Cache(redirect.urlResolved()))
+        if (builtInCache) {
+            val resolvedUrl = resolverRepository.getBuiltInCachedForUrl(uriString)
+            if (resolvedUrl != null) {
+                logger.debug("From built-in cache: %s", resolvedUrl)
+                return Result.success(ResolveType.BuiltInCache(resolvedUrl))
             }
         }
 
         val followRedirect = resolve(uri, resolvePredicate, externalService, connectTimeout)
 
         if (localCache && followRedirect.isSuccess && followRedirect.getOrNull() !is ResolveType.NotResolved) {
-            resolverRepository.insert(uri.toString(), followRedirect.getOrNull()?.url!!)
+            resolverRepository.insert(uriString, followRedirect.getOrNull()?.url!!)
         }
 
         return followRedirect

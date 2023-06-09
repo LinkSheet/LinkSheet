@@ -100,7 +100,7 @@
     <string name="theme">الموضوع</string>
     <string name="theme_explainer">تغيير موضوع التطبيق</string>
     <string name="dark">مظلم</string>
-    <string name="redirect_resolve_type_cache">ذاكرة التخزين المؤقت المحلية</string>
+    <string name="redirect_resolve_type_local_cache">ذاكرة التخزين المؤقت المحلية</string>
     <string name="redirect_resolve_type_remote">خادم بعيد</string>
     <string name="enable_libredirect">تمكين LibRedirect</string>
     <string name="amoled_black">أسود مظلم</string>

@@ -102,7 +102,7 @@
     <string name="follow_redirects_local_cache">启用本地重定向缓存</string>
     <string name="follow_redirects_local_cache_explainer">本地缓存重定向结果</string>
     <string name="resolved_via">通过 %s 解析</string>
-    <string name="redirect_resolve_type_cache">本地缓存</string>
+    <string name="redirect_resolve_type_local_cache">本地缓存</string>
     <string name="redirect_resolve_type_remote">远程服务器</string>
     <string name="redirect_resolve_type_local">本地解析器</string>
     <string name="redirect_resolve_type_not_resolved">无</string>

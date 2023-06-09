@@ -55,6 +55,7 @@ object Preferences {
     val followRedirectsLocalCache = booleanPreference("follow_redirects_local_cache", true)
     val followRedirectsExternalService = booleanPreference("follow_redirects_external_service")
     val followOnlyKnownTrackers = booleanPreference("follow_only_known_trackers")
+    val followRedirectsBuiltInCache = booleanPreference("follow_redirects_builtin_cache", true)
     val theme = mappedPreference("theme", Theme.System, Theme.Companion)
     val dontShowFilteredItem = booleanPreference("dont_show_filtered_item")
     val useTextShareCopyButtons = booleanPreference("use_text_share_copy_buttons")
@@ -69,7 +70,7 @@ object Preferences {
     val enableAmp2Html = booleanPreference("enable_amp2html")
     val amp2HtmlLocalCache = booleanPreference("amp2html_local_cache", true)
     val amp2HtmlExternalService = booleanPreference("amp2html_external_service")
-
+    val amp2HtmlBuiltInCache = booleanPreference("amp2html_builtin_cache", true)
 
     val enableRequestPrivateBrowsingButton =
         booleanPreference("enable_request_private_browsing_button")
@@ -111,6 +112,8 @@ object Preferences {
         enableAmp2Html,
         amp2HtmlLocalCache,
         amp2HtmlExternalService,
+        followRedirectsBuiltInCache,
+        amp2HtmlBuiltInCache
     )
 
     private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)
@@ -124,7 +127,7 @@ object Preferences {
         repository: PreferenceRepository
     ) = preferencesPackage.map {
         val value = repository.getString(it)
-        if(value != null){
+        if (value != null) {
             logHasher.hash(StringBuilder(), it.key, value, PackageProcessor).toString()
         } else {
             "${it.key}=null"

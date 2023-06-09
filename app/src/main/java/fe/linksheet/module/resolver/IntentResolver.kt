@@ -71,6 +71,9 @@ class IntentResolver(
     private val followRedirectsLocalCache = preferenceRepository.getBooleanState(
         Preferences.followRedirectsLocalCache
     )
+    private val followRedirectsBuiltInCache = preferenceRepository.getBooleanState(
+        Preferences.followRedirectsBuiltInCache
+    )
     private val followRedirectsExternalService = preferenceRepository.getBooleanState(
         Preferences.followRedirectsExternalService
     )
@@ -107,6 +110,11 @@ class IntentResolver(
         Preferences.amp2HtmlLocalCache
     )
 
+    private val amp2HtmlBuiltInCache = preferenceRepository.getBooleanState(
+        Preferences.amp2HtmlBuiltInCache
+    )
+
+
     private val amp2HtmlExternalService =
         preferenceRepository.getBooleanState(Preferences.amp2HtmlExternalService)
 
@@ -137,6 +145,7 @@ class IntentResolver(
             redirectResolver.resolve(
                 it,
                 followRedirectsLocalCache.value,
+                followRedirectsBuiltInCache.value,
                 { url -> !followOnlyKnownTrackers.value || isTracker(url, fastForwardRulesObject) },
                 followRedirectsExternalService.value,
                 requestTimeout.value
@@ -151,6 +160,7 @@ class IntentResolver(
             amp2HtmlResolver.resolve(
                 it,
                 amp2HtmlLocalCache.value,
+                amp2HtmlBuiltInCache.value,
                 { true },
                 amp2HtmlExternalService.value,
                 requestTimeout.value

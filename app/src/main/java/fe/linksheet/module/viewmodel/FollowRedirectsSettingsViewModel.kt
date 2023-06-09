@@ -15,6 +15,9 @@ class FollowRedirectsSettingsViewModel(
     var followRedirectsLocalCache = preferenceRepository.getBooleanState(
         Preferences.followRedirectsLocalCache
     )
+    val followRedirectsBuiltInCache = preferenceRepository.getBooleanState(
+        Preferences.followRedirectsBuiltInCache
+    )
     var followRedirectsExternalService = preferenceRepository.getBooleanState(
         Preferences.followRedirectsExternalService
     )

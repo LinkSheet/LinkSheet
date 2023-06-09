@@ -28,6 +28,7 @@ import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
@@ -42,6 +43,7 @@ class IntentResolver(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
+    private val urlResolverCache: CachedRequest,
     private val downloader: Downloader,
     private val redirectResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
@@ -114,6 +116,7 @@ class IntentResolver(
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         logger.debug("Intent=%s", intent)
+        urlResolverCache.clear()
 
         val ignoreLibRedirectExtra = intent.getBooleanExtra(
             LibRedirectDefault.libRedirectIgnore, false

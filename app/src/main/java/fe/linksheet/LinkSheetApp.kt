@@ -20,6 +20,7 @@ import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.resolver.module.resolverModule
+import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -61,6 +62,7 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
                 loggerFactoryModule,
                 databaseModule,
                 daoModule,
+                cachedRequestModule,
                 redirectResolveRequestModule,
                 amp2HtmlResolveRequestModule,
                 resolverModule,

@@ -1,6 +1,5 @@
 package fe.linksheet.module.downloader
 
-import fe.httpkt.Request
 import fe.httpkt.util.findHeader
 import fe.linksheet.extension.substringNullable
 import fe.linksheet.module.log.FileExtensionProcessor
@@ -8,6 +7,7 @@ import fe.linksheet.module.log.FileNameProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogHasher
 import fe.linksheet.module.request.requestModule
+import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.mimetypekt.MimeTypeLoader
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
@@ -24,7 +24,7 @@ val downloaderModule = module {
     singleOf(::Downloader)
 }
 
-class Downloader(private val request: Request) {
+class Downloader(private val cachedRequest: CachedRequest) {
     companion object {
         private const val contentTypeHeader = "Content-Type"
         private const val textHtml = "text/html"
@@ -54,7 +54,7 @@ class Downloader(private val request: Request) {
                 stringBuilder: StringBuilder,
                 hasher: LogHasher
             ) = stringBuilder.curlyWrapped {
-                append("type=nondownloadable")
+                append("type=non_downloadable")
             }
         }
 
@@ -63,7 +63,7 @@ class Downloader(private val request: Request) {
                 stringBuilder: StringBuilder,
                 hasher: LogHasher
             ) = stringBuilder.curlyWrapped {
-                append("type=mimetypedetectionfailed")
+                append("type=failed")
             }
         }
 
@@ -88,6 +88,7 @@ class Downloader(private val request: Request) {
 
         val extension = url.substringNullable(url.lastIndexOf(".") + 1)
             ?: return DownloadCheckResult.MimeTypeDetectionFailed
+
         val mimeType = mappings.second.map[extension]
             ?: return DownloadCheckResult.MimeTypeDetectionFailed
 
@@ -96,16 +97,15 @@ class Downloader(private val request: Request) {
 
     fun isNonHtmlContentUri(url: String, timeout: Int): DownloadCheckResult {
         val contentType = try {
-            request.head(url, connectTimeout = timeout * 1000, readTimeout = timeout * 1000)
-                .findHeader(contentTypeHeader)
+            cachedRequest.head(url, timeout, false).findHeader(contentTypeHeader)
         } catch (e: IOException) {
             return DownloadCheckResult.NonDownloadable
         }
 
-        val firstContentType =
-            contentType?.values?.firstOrNull() ?: return DownloadCheckResult.NonDownloadable
-        val mimeType = firstContentType.split(";")[0]
+        val firstContentType = contentType?.values?.firstOrNull()
+            ?: return DownloadCheckResult.NonDownloadable
 
+        val mimeType = firstContentType.split(";")[0]
         return checkMimeType(
             mimeType,
             url,

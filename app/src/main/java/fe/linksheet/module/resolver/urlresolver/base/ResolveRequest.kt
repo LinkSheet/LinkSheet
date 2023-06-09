@@ -10,7 +10,7 @@ import java.net.HttpURLConnection
 abstract class ResolveRequest(
     private val apiUrl: String,
     private val token: String,
-    protected val request: Request,
+    private val request: Request,
     protected val logger: Logger
 ) {
     @Throws(IOException::class)

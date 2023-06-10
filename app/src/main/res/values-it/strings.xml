@@ -116,4 +116,5 @@
     <string name="follow_redirects_external_service">Segui reindirizzamenti tramite servizio esterno</string>
     <string name="follow_redirects_external_service_explainer">Segui i reindirizzamenti utilizzando un\'API distribuita su supabase.com (<annotation url="https://supabase.com/privacy">Informativa sulla privacy</annotation>)</string>
     <string name="follow_only_known_trackers">Segui solo tracker noti</string>
+    <string name="amp2html">Amp2Html</string>
 </resources>

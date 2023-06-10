@@ -146,7 +146,7 @@ class IntentResolver(
                 it,
                 followRedirectsLocalCache.value,
                 followRedirectsBuiltInCache.value,
-                { url -> !followOnlyKnownTrackers.value || isTracker(url, fastForwardRulesObject) },
+                { url -> !followRedirectsExternalService.value && !followOnlyKnownTrackers.value || isTracker(url, fastForwardRulesObject) },
                 followRedirectsExternalService.value,
                 requestTimeout.value
             )
@@ -161,7 +161,7 @@ class IntentResolver(
                 it,
                 amp2HtmlLocalCache.value,
                 amp2HtmlBuiltInCache.value,
-                { url -> isTracker(url, fastForwardRulesObject) },
+                { true },
                 amp2HtmlExternalService.value,
                 requestTimeout.value
             )

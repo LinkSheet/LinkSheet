@@ -145,7 +145,7 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core-android:13.0.0-alpha.35")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
     implementation("com.github.1fexd:clearurlkt:0.0.18")
-    implementation("com.github.1fexd:fastforwardkt:0.0.13")
+    implementation("com.github.1fexd:fastforwardkt:0.0.14")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
     implementation("com.github.1fexd:mimetypekt:0.0.4")
     implementation("com.github.1fexd:amp2htmlkt:0.0.3")

@@ -96,7 +96,6 @@
     <string name="follow_redirects_external_service_explainer">متابعة عمليات إعادة التوجيه باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
     <string name="follow_only_known_trackers">اتبع فقط أدوات التتبع المعروفة</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">سياسة الخصوصية</string>
-    <string name="follow_only_known_trackers_explainer">حاول فقط متابعة عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف هو متعقب / إعادة توجيه</string>
     <string name="theme">الموضوع</string>
     <string name="theme_explainer">تغيير موضوع التطبيق</string>
     <string name="dark">مظلم</string>

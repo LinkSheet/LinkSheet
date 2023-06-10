@@ -195,4 +195,9 @@
     <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
     <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
     <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
+    <string name="amp2html_builtin_cache_explainer">استخدام ذاكرة التخزين المؤقت المدمجة (التي تستخدم تصدير قاعدة البيانات للخدمة الخارجية)</string>
+    <string name="follow_redirects_builtin_cache">استخدم ذاكرة التخزين المؤقت المدمجة لإعادة التوجيه</string>
+    <string name="follow_redirects_builtin_cache_explainer">استخدام ذاكرة التخزين المؤقت المدمجة (التي تستخدم تصدير قاعدة البيانات للخدمة الخارجية)</string>
+    <string name="redirect_resolve_type_builtin_cache">ذاكرة التخزين المؤقت المدمجة</string>
+    <string name="amp2html_builtin_cache">استخدام ذاكرة التخزين المؤقت المدمجة Amp2Html</string>
 </resources>

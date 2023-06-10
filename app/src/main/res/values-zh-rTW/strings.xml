@@ -90,7 +90,6 @@
     <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 上的 API 來跟隨重新導向（<annotation url="https://supabase.com/privacy">隱私政策</annotation>）</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">隱私政策</string>
     <string name="follow_only_known_trackers">僅跟隨已知追蹤器</string>
-    <string name="follow_only_known_trackers_explainer">只在主機已知為追蹤器/重新導向時嘗試跟隨重新導向</string>
     <string name="theme">主題</string>
     <string name="theme_explainer">更改應用程式的主題</string>
     <string name="system">系統</string>

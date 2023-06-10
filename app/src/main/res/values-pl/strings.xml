@@ -75,7 +75,6 @@
     <string name="follow_redirects_external_service">Śledź przekierowania za pośrednictwem usługi zewnętrznej</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Polityka prywatności</string>
     <string name="follow_only_known_trackers">Podążaj tylko za znanymi trackerami</string>
-    <string name="follow_only_known_trackers_explainer">Próbuje śledzić przekierowania tylko wtedy, gdy link jest znany jako tracker/przekierowanie</string>
     <string name="theme">Motyw</string>
     <string name="theme_explainer">Zmień motyw aplikacji</string>
     <string name="system">Systemowy</string>

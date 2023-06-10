@@ -69,12 +69,11 @@ fun FollowRedirectsSettingsRoute(
                 )
             }
 
-
             item(key = "follow_only_known_trackers") {
                 SwitchRow(
                     state = viewModel.followOnlyKnownTrackers,
                     viewModel = viewModel,
-                    enabled = viewModel.followRedirects.value,
+                    enabled = viewModel.followRedirects.value && !viewModel.followRedirectsExternalService.value,
                     headlineId = R.string.follow_only_known_trackers,
                     subtitleId = R.string.follow_only_known_trackers_explainer
                 )

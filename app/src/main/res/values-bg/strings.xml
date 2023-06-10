@@ -51,7 +51,6 @@
     <string name="follow_redirects_external_service_explainer_privacy_policy">Политика за поверителност</string>
     <string name="loading_link">Зареждане на препратка…</string>
     <string name="follow_redirects_external_service">Последване на пренасочванията от външна услуга</string>
-    <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ</string>
     <string name="follow_redirects_local_cache_explainer">Запазва резултатите от пренасочванията</string>
     <string name="redirect_resolve_type_local">местно откриване</string>
     <string name="enable_downloader">Бутон за изтегляне</string>

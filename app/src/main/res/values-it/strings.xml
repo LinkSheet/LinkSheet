@@ -99,7 +99,6 @@
     <string name="bottom_sheet_explainer">Ordina per utilizzo, abilita pulsante di copia, abilita pulsante di condivisione, ecc.</string>
     <string name="about">Informazioni</string>
     <string name="always_show_package_name_explainer">Mostra sempre i nomi dei pacchetti anziché solo i nomi delle app</string>
-    <string name="follow_only_known_trackers_explainer">Tenta di seguire i reindirizzamenti solo quando l\'host è noto per essere un tracker/reindirizzamento</string>
     <string name="follow_redirects_local_cache_explainer">Memorizza nella cache il risultato dei reindirizzamenti in locale</string>
     <string name="enable_downloader">Abilita download</string>
     <string name="downloader_url_mime_type_explainer">Controlla se l\'URL termina con un\'estensione di file (ad es. \".jpg\"); in caso affermativo, questo tipo viene utilizzato per il file scaricato.</string>

@@ -161,7 +161,7 @@ class IntentResolver(
                 it,
                 amp2HtmlLocalCache.value,
                 amp2HtmlBuiltInCache.value,
-                { true },
+                { url -> isTracker(url, fastForwardRulesObject) },
                 amp2HtmlExternalService.value,
                 requestTimeout.value
             )

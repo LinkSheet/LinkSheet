@@ -90,7 +90,6 @@
     <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 的 API 进行重定向（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">隐私政策</string>
     <string name="follow_only_known_trackers">仅跟踪已知跟踪器</string>
-    <string name="follow_only_known_trackers_explainer">仅当已知链接是跟踪器或重定向时才尝试跟踪重定向</string>
     <string name="theme">主题</string>
     <string name="theme_explainer">修改应用主题</string>
     <string name="system">系统</string>

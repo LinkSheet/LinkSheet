@@ -92,7 +92,7 @@
     <string name="follow_redirects">اتبع عمليات إعادة التوجيه</string>
     <string name="loading_link">جاري تحميل الرابط…</string>
     <string name="follow_redirects_external_service">متابعة عمليات إعادة التوجيه عبر الخدمة الخارجية</string>
-    <string name="follow_redirects_explainer">اتبع جميع عمليات إعادة التوجيه تلقائيا قبل فتح الورقة السفلية</string>
+    <string name="follow_redirects_explainer">اتبع جميع عمليات إعادة التوجيه تلقائيا قبل فتح الورقة السفلية. قد يكون لهذا <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects"> آثار متعلقة بالخصوصية </annotation></string>
     <string name="follow_redirects_external_service_explainer">متابعة عمليات إعادة التوجيه باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
     <string name="follow_only_known_trackers">اتبع فقط أدوات التتبع المعروفة</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">سياسة الخصوصية</string>
@@ -127,7 +127,7 @@
     <string name="download">تحميل</string>
     <string name="linksheet_download">تنزيل ورقة الرابط</string>
     <string name="enable_downloader">تمكين أداة التنزيل</string>
-    <string name="enable_downloader_explainer">أضف زر \"تنزيل\" إلى الورقة السفلية إذا كان عنوان URL يحتوي على رابط مباشر للملف. سيرسل هذا طلبًا إلى عنوان URL لتحديد محتوى الملف.</string>
+    <string name="enable_downloader_explainer">أضف زر \"تنزيل\" إلى الورقة السفلية إذا كان عنوان URL يحتوي على رابط مباشر للملف. قد يكون لهذا <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader"> آثار متعلقة بالخصوصية </annotation></string>
     <string name="downloader_url_mime_type">استخدام نوع mime من عنوان الرابط</string>
     <string name="in_app_browser">متصفح داخل التطبيق</string>
     <string name="downloader_url_mime_type_explainer">يتحقق مما إذا كان عنوان URL ينتهي بامتداد ملف (على سبيل المثال \".jpg\") ؛ إذا حدث ذلك ، استخدام هذا النوع للملف الذي تم تنزيله.</string>
@@ -191,7 +191,7 @@
     <string name="amp2html">Amp2Html</string>
     <string name="amp2html_external_service">محاولة الحصول على إصدار صفحة غير AMP عبر خدمة خارجية</string>
     <string name="enable_amp2html">تمكين Amp2Html</string>
-    <string name="enable_amp2html_explainer">يعيد توجيه صفحات AMP إلى إصدار الويب العادي</string>
+    <string name="enable_amp2html_explainer">لإعادة توجيه صفحات AMP إلى إصدار الويب العادي. قد يكون لهذا <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html"> آثار متعلقة بالخصوصية </annotation></string>
     <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
     <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
     <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>

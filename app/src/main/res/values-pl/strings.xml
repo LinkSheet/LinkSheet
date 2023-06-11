@@ -87,7 +87,6 @@
     <string name="preview_url">Podgląd linku</string>
     <string name="follow_redirects_local_cache">Włącz lokalny bufor przekierowań</string>
     <string name="follow_redirects_local_cache_explainer">Lokalnie buforuj wyniki przekierowań</string>
-    <string name="resolved_via">Rozwiązane przez %s</string>
     <string name="redirect_resolve_type_local_cache">lokalny bufor</string>
     <string name="redirect_resolve_type_remote">zdalny serwer</string>
     <string name="redirect_resolve_type_not_resolved">nic</string>

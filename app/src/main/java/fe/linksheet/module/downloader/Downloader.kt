@@ -6,14 +6,11 @@ import fe.linksheet.module.log.FileExtensionProcessor
 import fe.linksheet.module.log.FileNameProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.request.requestModule
+import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.mimetypekt.MimeTypes
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
-import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.io.IOException
@@ -24,7 +21,12 @@ val downloaderModule = module {
     singleOf(::Downloader)
 }
 
-class Downloader(private val cachedRequest: CachedRequest) {
+class Downloader(
+    private val cachedRequest: CachedRequest,
+    loggerFactory: LoggerFactory,
+) {
+    private val logger = loggerFactory.createLogger(Downloader::class)
+
     companion object {
         private const val contentTypeHeader = "Content-Type"
         private const val textHtml = "text/html"
@@ -74,7 +76,6 @@ class Downloader(private val cachedRequest: CachedRequest) {
 
     fun checkIsNonHtmlFileEnding(url: String): DownloadCheckResult {
         val (fileName, ext) = Extension.getFileNameFromUrl(URL(url))
-        println("$fileName $ext")
 
         if (fileName == null || ext == null) {
             return DownloadCheckResult.MimeTypeDetectionFailed
@@ -90,6 +91,7 @@ class Downloader(private val cachedRequest: CachedRequest) {
         val contentType = try {
             cachedRequest.head(url, timeout, false).findHeader(contentTypeHeader)
         } catch (e: IOException) {
+            logger.debug(e)
             return DownloadCheckResult.NonDownloadable
         }
 
@@ -113,20 +115,4 @@ class Downloader(private val cachedRequest: CachedRequest) {
     ) = if (mimeType != textHtml) {
         DownloadCheckResult.Downloadable(fileName, extension)
     } else DownloadCheckResult.NonDownloadable
-}
-
-fun main() {
-    startKoin {
-        modules(requestModule, downloaderModule)
-    }
-
-    object : KoinComponent {
-        private val downloader by inject<Downloader>()
-
-        init {
-            println(downloader.checkIsNonHtmlFileEnding("https://test.com"))
-            println(downloader.checkIsNonHtmlFileEnding("https://test.com/"))
-            println(downloader.checkIsNonHtmlFileEnding("https://test.com/test.com"))
-        }
-    }
 }

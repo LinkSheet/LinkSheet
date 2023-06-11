@@ -8,7 +8,7 @@ import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogHasher
 import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
-import fe.mimetypekt.MimeTypeLoader
+import fe.mimetypekt.MimeTypes
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import org.koin.core.component.KoinComponent
@@ -30,7 +30,8 @@ class Downloader(private val cachedRequest: CachedRequest) {
         private const val textHtml = "text/html"
         private const val schemeSeparator = "://"
 
-        private val mappings = MimeTypeLoader.loadBuiltInMimeTypes()
+        private val mimeTypeToExtension = MimeTypes.mimeTypeToExtensions
+        private val extensionToMimeType = MimeTypes.extensionToMimeType
     }
 
     sealed class DownloadCheckResult : LogDumpable {
@@ -89,7 +90,7 @@ class Downloader(private val cachedRequest: CachedRequest) {
         val extension = url.substringNullable(url.lastIndexOf(".") + 1)
             ?: return DownloadCheckResult.MimeTypeDetectionFailed
 
-        val mimeType = mappings.second.map[extension]
+        val mimeType = extensionToMimeType[extension]
             ?: return DownloadCheckResult.MimeTypeDetectionFailed
 
         return checkMimeType(mimeType, url, extension)
@@ -109,7 +110,7 @@ class Downloader(private val cachedRequest: CachedRequest) {
         return checkMimeType(
             mimeType,
             url,
-            mappings.first.map[mimeType]?.firstOrNull()
+            mimeTypeToExtension[mimeType]?.firstOrNull()
         )
     }
 

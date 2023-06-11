@@ -28,7 +28,7 @@ const val whitelistedBrowsersSettingsRoute = "whitelisted_browsers_settings_rout
 //    route = InAppBrowserSettingsDisableInSelectedRoute
 //)
 
-@Keep
+//@Keep
 //data class WhitelistedBrowserSettingsRoute(
 //
 //) : RouteData {

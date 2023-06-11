@@ -147,7 +147,7 @@ dependencies {
     implementation("com.github.1fexd:clearurlkt:0.0.18")
     implementation("com.github.1fexd:fastforwardkt:0.0.14")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
-    implementation("com.github.1fexd:mimetypekt:0.0.4")
+    implementation("com.github.1fexd:mimetypekt:0.0.5")
     implementation("com.github.1fexd:amp2htmlkt:0.0.3")
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd:cached-urls:0.0.3")

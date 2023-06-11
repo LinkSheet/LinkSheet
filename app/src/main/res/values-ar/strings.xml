@@ -4,7 +4,7 @@
     <string name="always">دائماً</string>
     <string name="open_with_app">فتح باستخدام %s</string>
     <string name="use_a_different_app">استخدام تطبيق مختلف</string>
-    <string name="opening_with_app">فتح باستخدام %s</string>
+    <string name="opening_with_app">الفتح باستخدام %s</string>
     <string name="enable_copy_button_explainer">يعرض زر \"نسخ عنوان الرابط\" في الورقة السفلية</string>
     <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات الاستخدام في خوارزمية الفرز. يتم طلب الإذن عند التفعيل الأول.</string>
     <string name="none">لاشيء</string>
@@ -199,4 +199,5 @@
     <string name="follow_redirects_builtin_cache_explainer">استخدام ذاكرة التخزين المؤقت المدمجة (التي تستخدم تصدير قاعدة البيانات للخدمة الخارجية)</string>
     <string name="redirect_resolve_type_builtin_cache">ذاكرة التخزين المؤقت المدمجة</string>
     <string name="amp2html_builtin_cache">استخدام ذاكرة التخزين المؤقت المدمجة Amp2Html</string>
+    <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
 </resources>

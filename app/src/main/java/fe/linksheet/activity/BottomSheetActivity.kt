@@ -124,8 +124,18 @@ class BottomSheetActivity : ComponentActivity() {
             setContent {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
                     if (!bottomSheetViewModel.disableToasts.value) {
-                        bottomSheetViewModel.resolveResult?.followRedirect?.let(::makeResolveToast)
-                        bottomSheetViewModel.resolveResult?.amp2HtmlResult?.let(::makeResolveToast)
+                        bottomSheetViewModel.resolveResult?.followRedirect?.let {
+                            makeResolveToast(
+                                it,
+                                R.string.follow_redirects,
+                            )
+                        }
+                        bottomSheetViewModel.resolveResult?.amp2HtmlResult?.let {
+                            makeResolveToast(
+                                it,
+                                R.string.amp2html,
+                            )
+                        }
                     }
                 }
 
@@ -144,8 +154,14 @@ class BottomSheetActivity : ComponentActivity() {
 
             if (completed.hasAutoLaunchApp) {
                 if (!bottomSheetViewModel.disableToasts.value) {
-                    completed.followRedirect?.let { makeResolveToast(it, true) }
-                    completed.amp2HtmlResult?.let { makeResolveToast(it, true) }
+                    completed.followRedirect?.let {
+                        makeResolveToast(
+                            it,
+                            R.string.follow_redirects,
+                            true
+                        )
+                    }
+                    completed.amp2HtmlResult?.let { makeResolveToast(it, R.string.amp2html, true) }
 
                     showToast(
                         getString(R.string.opening_with_app, completed.app.label),
@@ -173,17 +189,22 @@ class BottomSheetActivity : ComponentActivity() {
 
     private fun makeResolveToast(
         result: Result<ResolveType>,
+        @StringRes resolveTypeId: Int,
         uiThread: Boolean = false
     ) {
         result.getOrNull()?.let { type ->
             if (type !is ResolveType.NotResolved) {
                 showToast(
-                    getString(R.string.resolved_via, getString(type.stringId)),
+                    getString(
+                        R.string.resolved_via,
+                        getString(resolveTypeId),
+                        getString(type.stringId)
+                    ),
                     uiThread = uiThread
                 )
             }
         } ?: showToast(
-            getString(R.string.follow_redirects_failed, result.exceptionOrNull()),
+            getString(R.string.resolve_failed, getString(resolveTypeId), result.exceptionOrNull()),
             uiThread = uiThread
         )
     }
@@ -722,7 +743,6 @@ class BottomSheetActivity : ComponentActivity() {
                     bottomSheetViewModel = bottomSheetViewModel,
                     enabled = enabled,
                     app = app,
-                    uri = uri,
                     arrangeEnd = false,
                     padding = padding,
                     onClick = onClick
@@ -825,7 +845,6 @@ class BottomSheetActivity : ComponentActivity() {
                         bottomSheetViewModel = bottomSheetViewModel,
                         enabled = enabled,
                         app = null,
-                        uri = null,
                         arrangeEnd = true,
                         padding = padding,
                         onClick = onClick
@@ -840,7 +859,6 @@ class BottomSheetActivity : ComponentActivity() {
         bottomSheetViewModel: BottomSheetViewModel,
         enabled: Boolean,
         app: DisplayActivityInfo? = null,
-        uri: Uri?,
         arrangeEnd: Boolean = false,
         padding: PaddingValues,
         onClick: (always: Boolean) -> Unit,

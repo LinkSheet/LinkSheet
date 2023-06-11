@@ -13,7 +13,7 @@ import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.AppLogger
-import fe.linksheet.module.log.loggerFactoryModule
+import fe.linksheet.module.log.defaultLoggerFactoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.request.requestModule
@@ -60,7 +60,7 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
             androidContext(this@LinkSheetApp)
             modules(
                 preferenceRepositoryModule,
-                loggerFactoryModule,
+                defaultLoggerFactoryModule,
                 databaseModule,
                 daoModule,
                 cachedRequestModule,

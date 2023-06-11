@@ -102,7 +102,7 @@
     <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
     <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
-    <string name="resolved_via">Resolved via %s</string>
+    <string name="resolved_via">%s resolved via %s</string>
     <string name="redirect_resolve_type_local_cache">local cache</string>
     <string name="redirect_resolve_type_remote">remote server</string>
     <string name="redirect_resolve_type_local">local resolver</string>
@@ -170,7 +170,7 @@
     <string name="download_started">Download started</string>
     <string name="request_timeout">Request timeout</string>
     <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
-    <string name="follow_redirects_failed">Follow redirects failed: %s</string>
+    <string name="resolve_failed">%s failed: %s</string>
     <string name="no_browsers_found">No browsers found.</string>
     <string name="no_apps_found">No apps found.</string>
     <string name="export">Export</string>

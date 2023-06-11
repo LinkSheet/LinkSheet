@@ -140,14 +140,13 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.35")
-    implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.35")
-    implementation("com.gitlab.grrfe.httpkt:core-android:13.0.0-alpha.35")
+    implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.38")
+    implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.38")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
     implementation("com.github.1fexd:clearurlkt:0.0.18")
     implementation("com.github.1fexd:fastforwardkt:0.0.14")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
-    implementation("com.github.1fexd:mimetypekt:0.0.4")
+    implementation("com.github.1fexd:mimetypekt:0.0.5")
     implementation("com.github.1fexd:amp2htmlkt:0.0.3")
     implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
     implementation("com.github.1fexd:cached-urls:0.0.3")
@@ -164,10 +163,14 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
 
+    testImplementation("io.insert-koin:koin-test:3.4.0")
+    testImplementation("io.insert-koin:koin-android-test:3.4.0")
     testImplementation("junit:junit:4.13.2")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
 }

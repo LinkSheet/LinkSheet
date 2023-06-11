@@ -106,7 +106,6 @@
     <string name="fastfoward_rules">استخدم قواعد FastForward</string>
     <string name="fastfoward_rules_explainer">استخدم تكامل قاعدة <annotation url="https://github.com/FastForwardTeam/FastForward"> FastForward </annotation> التجريبي (لتجاوز عمليات إعادة التوجيه لبعض المضيفات عن طريق استخراج إعادة التوجيه من الرابط)</string>
     <string name="follow_redirects_local_cache">تمكين ذاكرة التخزين المؤقت المحلية لإعادة التوجيه</string>
-    <string name="resolved_via">تم الحل عبر %s</string>
     <string name="redirect_resolve_type_local">محلل محلي</string>
     <string name="follow_redirects_local_cache_explainer">تخزين نتيجة عمليات إعادة التوجيه مؤقتا محليا</string>
     <string name="redirect_resolve_type_not_resolved">لاشيء</string>
@@ -169,7 +168,6 @@
     <string name="request_timeout">انتهت مهلة الطلب</string>
     <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
     <string name="no_apps_found">لم يتم العثور على تطبيقات.</string>
-    <string name="follow_redirects_failed">فشلت عمليات إعادة التوجيه التالية: %s</string>
     <string name="no_browsers_found">لم يتم العثور على متصفحات.</string>
     <string name="export_log">تصدير السجلات</string>
     <string name="export">تصدير</string>

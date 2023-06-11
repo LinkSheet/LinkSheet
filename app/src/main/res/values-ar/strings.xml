@@ -198,4 +198,6 @@
     <string name="redirect_resolve_type_builtin_cache">ذاكرة التخزين المؤقت المدمجة</string>
     <string name="amp2html_builtin_cache">استخدام ذاكرة التخزين المؤقت المدمجة Amp2Html</string>
     <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
+    <string name="resolved_via">%s تم حلها عبر %s</string>
+    <string name="resolve_failed">%s فشل: %s</string>
 </resources>

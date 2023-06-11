@@ -743,7 +743,6 @@ class BottomSheetActivity : ComponentActivity() {
                     bottomSheetViewModel = bottomSheetViewModel,
                     enabled = enabled,
                     app = app,
-                    uri = uri,
                     arrangeEnd = false,
                     padding = padding,
                     onClick = onClick
@@ -846,7 +845,6 @@ class BottomSheetActivity : ComponentActivity() {
                         bottomSheetViewModel = bottomSheetViewModel,
                         enabled = enabled,
                         app = null,
-                        uri = null,
                         arrangeEnd = true,
                         padding = padding,
                         onClick = onClick
@@ -861,7 +859,6 @@ class BottomSheetActivity : ComponentActivity() {
         bottomSheetViewModel: BottomSheetViewModel,
         enabled: Boolean,
         app: DisplayActivityInfo? = null,
-        uri: Uri?,
         arrangeEnd: Boolean = false,
         padding: PaddingValues,
         onClick: (always: Boolean) -> Unit,

@@ -100,7 +100,6 @@
     <string name="fastfoward_rules_explainer">使用實驗性的 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 規則整合（通過從連結中提取重新導向來繞過某些主機的重新導向）</string>
     <string name="follow_redirects_local_cache">啟用本地重新導向快取</string>
     <string name="follow_redirects_local_cache_explainer">在本地緩存重新導向的結果</string>
-    <string name="resolved_via">通過 %s 解析</string>
     <string name="redirect_resolve_type_local_cache">本地快取</string>
     <string name="redirect_resolve_type_remote">遠程伺服器</string>
     <string name="redirect_resolve_type_local">本地解析器</string>

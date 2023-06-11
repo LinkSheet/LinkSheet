@@ -100,7 +100,6 @@
     <string name="fastfoward_rules_explainer">使用实验性 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 规则集成（通过从链接中提取重定向来绕过某些链接的重定向）</string>
     <string name="follow_redirects_local_cache">启用本地重定向缓存</string>
     <string name="follow_redirects_local_cache_explainer">本地缓存重定向结果</string>
-    <string name="resolved_via">通过 %s 解析</string>
     <string name="redirect_resolve_type_local_cache">本地缓存</string>
     <string name="redirect_resolve_type_remote">远程服务器</string>
     <string name="redirect_resolve_type_local">本地解析器</string>

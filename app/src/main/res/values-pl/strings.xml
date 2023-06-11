@@ -87,7 +87,6 @@
     <string name="preview_url">Podgląd linku</string>
     <string name="follow_redirects_local_cache">Włącz lokalną pamięć podręczną przekierowań</string>
     <string name="follow_redirects_local_cache_explainer">Lokalnie buforuj wyniki przekierowań</string>
-    <string name="resolved_via">Rozwiązane przez %s</string>
     <string name="redirect_resolve_type_local_cache">lokalną pamięć podręczną</string>
     <string name="redirect_resolve_type_remote">zdalny serwer</string>
     <string name="redirect_resolve_type_not_resolved">nic</string>
@@ -170,7 +169,6 @@
     <string name="download_started">Rozpoczęto pobieranie</string>
     <string name="request_timeout">Limit czasu żądania</string>
     <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
-    <string name="follow_redirects_failed">Śledzenie przekierowań nie powiodło się: %s</string>
     <string name="no_browsers_found">Nie znaleziono przeglądarek.</string>
     <string name="no_apps_found">Nie znaleziono aplikacji.</string>
     <string name="export">Eksportuj</string>

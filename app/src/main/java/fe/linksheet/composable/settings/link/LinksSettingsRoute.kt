@@ -2,7 +2,6 @@ package fe.linksheet.composable.settings.link
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -35,6 +34,7 @@ import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.settings.link.downloader.requestDownloadPermission
+import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.LinkableTextView
@@ -91,9 +91,9 @@ fun LinksSettingsRoute(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Spacer(modifier = Modifier.width(10.dp))
-                                Image(
-                                    imageVector = Icons.Default.Info,
-                                    contentDescription = stringResource(id = R.string.info)
+                                ColoredIcon(
+                                    icon = Icons.Default.Info,
+                                    descriptionId = R.string.info
                                 )
 
                                 Column(modifier = Modifier.padding(10.dp)) {

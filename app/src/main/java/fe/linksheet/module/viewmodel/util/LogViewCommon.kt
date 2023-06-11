@@ -4,21 +4,18 @@ import android.os.Build
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.BuildConfig
 import fe.linksheet.lineSeparator
-import fe.linksheet.module.log.LogEntry
-import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.Preferences
-import java.lang.StringBuilder
 
 
 class LogViewCommon(
     val preferenceRepository: PreferenceRepository,
-    private val loggerFactory: LoggerFactory
+    private val logger: Logger
 ) {
     private fun logPreferences(
         redact: Boolean
     ) = Preferences.log(preferenceRepository) + Preferences.logPackages(
-        if (redact) loggerFactory.logHasher else LogHasher.NoOpHasher, preferenceRepository
+        redact, logger, preferenceRepository
     )
 
     fun buildClipboardText(

@@ -15,12 +15,15 @@ import kotlinx.coroutines.flow.map
 class LogTextSettingsViewModel(
     context: Application,
     savedStateHandle: SavedStateHandle,
-    private val loggerFactory: LoggerFactory,
+    loggerFactory: LoggerFactory,
     val preferenceRepository: PreferenceRepository
 ) : SavedStateViewModel<LogTextViewerRoute>(savedStateHandle, preferenceRepository) {
     private val appLogger = AppLogger.getInstance()
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
-    val logViewCommon = LogViewCommon(preferenceRepository, loggerFactory)
+    val logViewCommon = LogViewCommon(
+        preferenceRepository,
+        loggerFactory.createLogger(LogTextSettingsViewModel::class)
+    )
 
     val timestamp = getSavedStateFlow(LogTextViewerRoute::timestamp)
     private val fileName = getSavedStateFlowNullable(LogTextViewerRoute::fileName)

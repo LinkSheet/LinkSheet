@@ -14,5 +14,5 @@ class CrashHandlerViewerViewModel(
     val preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
-    val logViewCommon = LogViewCommon(preferenceRepository, loggerFactory)
+    val logViewCommon = LogViewCommon(preferenceRepository, loggerFactory.createLogger(CrashHandlerViewerViewModel::class))
 }

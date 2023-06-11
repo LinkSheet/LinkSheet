@@ -4,7 +4,7 @@ import android.util.Log
 import fe.linksheet.extension.printToString
 import kotlin.reflect.KClass
 
-interface Logger {
+abstract class Logger(val hasher: LogHasher) {
     enum class Type(val str: String) {
         Verbose("V") {
             override fun print(tag: String, msg: String): Int = Log.v(tag, msg)
@@ -19,59 +19,75 @@ interface Logger {
         abstract fun print(tag: String, msg: String): Int
     }
 
-    fun verbose(msg: String, vararg dumpable: Any?)
-    fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>)
-    fun verbose(throwable: Throwable)
+    fun <T> dumpParameterToString(
+        redact: Boolean = false,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = dumpParameterToString(if (redact) hasher else LogHasher.NoOpHasher, param, hashProcessor)
 
-    fun info(msg: String, vararg dumpable: Any?)
-    fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>)
-    fun info(throwable: Throwable)
+    private fun <T> dumpParameterToString(
+        hasher: LogHasher,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) = LogDumpable.dumpObject(StringBuilder(), hasher, param, hashProcessor).toString()
 
-    fun debug(msg: String, vararg dumpable: Any?)
-    fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>)
-    fun debug(throwable: Throwable)
+    abstract fun verbose(msg: String, vararg dumpable: Any?)
+    abstract fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    abstract fun verbose(throwable: Throwable)
+
+    abstract fun info(msg: String, vararg dumpable: Any?)
+    abstract fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    abstract fun info(throwable: Throwable)
+
+    abstract fun debug(msg: String, vararg dumpable: Any?)
+    abstract fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    abstract fun debug(throwable: Throwable)
 }
 
-class DebugLogger(private val prefix: String) : Logger {
+class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
+    constructor(clazz: KClass<*>) : this(clazz.simpleName!!)
+
     override fun verbose(msg: String, vararg dumpable: Any?) {
-        Logger.Type.Verbose.print(prefix, msg.format(*dumpable))
+        Type.Verbose.print(prefix, msg.format(*dumpable))
     }
 
     override fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>) {
-        Logger.Type.Verbose.print(prefix, msg.format(param))
+        Type.Verbose.print(prefix, msg.format(param))
     }
 
     override fun verbose(throwable: Throwable) {
-        Logger.Type.Verbose.print(prefix, throwable.printToString())
+        Type.Verbose.print(prefix, throwable.printToString())
     }
 
     override fun info(msg: String, vararg dumpable: Any?) {
-        Logger.Type.Info.print(prefix, msg.format(*dumpable))
+        Type.Info.print(prefix, msg.format(*dumpable))
     }
 
     override fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>) {
-        Logger.Type.Info.print(prefix, msg.format(param))
+        Type.Info.print(prefix, msg.format(param))
     }
 
     override fun info(throwable: Throwable) {
-        Logger.Type.Info.print(prefix, throwable.printToString())
+        Type.Info.print(prefix, throwable.printToString())
     }
 
     override fun debug(msg: String, vararg dumpable: Any?) {
-        Logger.Type.Debug.print(prefix, msg.format(*dumpable))
+        Type.Debug.print(prefix, msg.format(*dumpable))
     }
 
     override fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>) {
-        Logger.Type.Debug.print(prefix, msg.format(param))
+        Type.Debug.print(prefix, msg.format(param))
     }
 
     override fun debug(throwable: Throwable) {
-        Logger.Type.Debug.print(prefix, throwable.printToString())
+        Type.Debug.print(prefix, throwable.printToString())
     }
 }
 
-class DefaultLogger(private val prefix: String, private val hasher: LogHasher.LogKeyHasher) :
-    Logger {
+class DefaultLogger(
+    private val prefix: String,
+    hasher: LogHasher.LogKeyHasher
+) : Logger(hasher) {
     constructor(clazz: KClass<*>, hasher: LogHasher.LogKeyHasher) : this(clazz.simpleName!!, hasher)
 
     private val appLogger = AppLogger.getInstance()
@@ -89,13 +105,6 @@ class DefaultLogger(private val prefix: String, private val hasher: LogHasher.Lo
         return msg.format(*arguments.toTypedArray())
     }
 
-    private fun <T> dump(
-        msg: String,
-        hasher: LogHasher,
-        param: T,
-        hashProcessor: HashProcessor<T>
-    ) = msg.format(LogDumpable.dumpObject(StringBuilder(), hasher, param, hashProcessor).toString())
-
     private fun dump(
         msg: String,
         dumpable: Array<out Any?>
@@ -105,30 +114,27 @@ class DefaultLogger(private val prefix: String, private val hasher: LogHasher.Lo
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = dump(msg, LogHasher.NoOpHasher, param, hashProcessor) to dump(
-        msg,
-        hasher,
-        param,
-        hashProcessor
-    )
+    ) = msg.format(dumpParameterToString(false, param, hashProcessor)) to
+            msg.format(dumpParameterToString(true, param, hashProcessor))
 
-    private fun log(type: Logger.Type, msg: String, dumpable: Array<out Any?>) {
+
+    private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
         val (normal, redacted) = dump(msg, dumpable)
         log(type, normal, redacted, prefix)
     }
 
-    private fun <T> log(type: Logger.Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
+    private fun <T> log(type: Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
         val (normal, redacted) = dump(msg, param, hashProcessor)
         log(type, normal, redacted, prefix)
     }
 
-    private fun log(type: Logger.Type, normal: String, redacted: String, prefix: String) {
+    private fun log(type: Type, normal: String, redacted: String, prefix: String) {
         appLogger.write(LogEntry(type.str, System.currentTimeMillis(), prefix, normal, redacted))
         type.print(prefix, normal)
     }
 
     private fun log(
-        type: Logger.Type,
+        type: Type,
         normalAndRedacted: String,
         prefix: String
     ) = log(type, normalAndRedacted, normalAndRedacted, prefix)
@@ -136,40 +142,40 @@ class DefaultLogger(private val prefix: String, private val hasher: LogHasher.Lo
     override fun verbose(
         msg: String,
         vararg dumpable: Any?
-    ) = log(Logger.Type.Verbose, msg, dumpable)
+    ) = log(Type.Verbose, msg, dumpable)
 
     override fun <T> verbose(
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = log(Logger.Type.Verbose, msg, param, hashProcessor)
+    ) = log(Type.Verbose, msg, param, hashProcessor)
 
     override fun verbose(
         throwable: Throwable
-    ) = log(Logger.Type.Verbose, throwable.printToString(), prefix)
+    ) = log(Type.Verbose, throwable.printToString(), prefix)
 
 
-    override fun info(msg: String, vararg dumpable: Any?) = log(Logger.Type.Info, msg, dumpable)
+    override fun info(msg: String, vararg dumpable: Any?) = log(Type.Info, msg, dumpable)
 
     override fun <T> info(
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = log(Logger.Type.Info, msg, param, hashProcessor)
+    ) = log(Type.Info, msg, param, hashProcessor)
 
     override fun info(
         throwable: Throwable
-    ) = log(Logger.Type.Info, throwable.printToString(), prefix)
+    ) = log(Type.Info, throwable.printToString(), prefix)
 
-    override fun debug(msg: String, vararg dumpable: Any?) = log(Logger.Type.Debug, msg, dumpable)
+    override fun debug(msg: String, vararg dumpable: Any?) = log(Type.Debug, msg, dumpable)
 
     override fun <T> debug(
         msg: String,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = log(Logger.Type.Debug, msg, param, hashProcessor)
+    ) = log(Type.Debug, msg, param, hashProcessor)
 
     override fun debug(
         throwable: Throwable
-    ) = log(Logger.Type.Debug, throwable.printToString(), prefix)
+    ) = log(Type.Debug, throwable.printToString(), prefix)
 }

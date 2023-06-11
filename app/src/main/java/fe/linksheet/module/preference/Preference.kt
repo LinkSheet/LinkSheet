@@ -1,13 +1,13 @@
 package fe.linksheet.module.preference
 
+import fe.android.preference.helper.BasePreference.InitPreference.Companion.stringPreference
 import fe.android.preference.helper.BasePreference.MappedPreference.Companion.mappedPreference
 import fe.android.preference.helper.BasePreference.Preference.Companion.booleanPreference
-import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
-import fe.android.preference.helper.BasePreference.InitPreference.Companion.stringPreference
 import fe.android.preference.helper.BasePreference.Preference.Companion.intPreference
+import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.extension.toHex
-import fe.linksheet.module.log.LogHasher
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.log.loggerHmac
 import fe.linksheet.module.resolver.BrowserHandler
@@ -123,14 +123,19 @@ object Preferences {
     ) = preferencesLoggable.map { "${it.key}=${repository.getAsString(it)}" }
 
     fun logPackages(
-        logHasher: LogHasher,
+        redact: Boolean,
+        logger: Logger,
         repository: PreferenceRepository
     ) = preferencesPackage.map {
-        val value = repository.getString(it)
-        if (value != null) {
-            logHasher.hash(StringBuilder(), it.key, value, PackageProcessor).toString()
-        } else {
-            "${it.key}=null"
+        buildString {
+            val value = repository.getString(it)
+            append(it.key)
+
+            if (value != null) {
+                append(logger.dumpParameterToString(redact, value, PackageProcessor))
+            } else {
+                append("null")
+            }
         }
     }
 }

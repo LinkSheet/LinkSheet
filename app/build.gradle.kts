@@ -140,9 +140,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.35")
-    implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.35")
-    implementation("com.gitlab.grrfe.httpkt:core-android:13.0.0-alpha.35")
+    implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.37")
+    implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.37")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
     implementation("com.github.1fexd:clearurlkt:0.0.18")
     implementation("com.github.1fexd:fastforwardkt:0.0.14")

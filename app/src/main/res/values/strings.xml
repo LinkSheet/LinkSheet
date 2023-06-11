@@ -194,9 +194,9 @@
     <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>
     <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="amp2html_builtin_cache">Use builtin Amp2Html cache</string>
+    <string name="amp2html_builtin_cache">Use built-in Amp2Html cache</string>
     <string name="amp2html_builtin_cache_explainer">Use built-in cache (which uses a database export of the external service)</string>
-    <string name="follow_redirects_builtin_cache">Use builtin redirect cache</string>
+    <string name="follow_redirects_builtin_cache">Use built-in redirect cache</string>
     <string name="follow_redirects_builtin_cache_explainer">Use built-in cache (which uses a database export of the external service)</string>
     <string name="redirect_resolve_type_builtin_cache">built-in cache</string>
 </resources>

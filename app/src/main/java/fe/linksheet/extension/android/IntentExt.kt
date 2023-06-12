@@ -41,7 +41,6 @@ object IntentExt : KoinComponent {
     fun Intent.getUri(
         clearUrl: Boolean = false,
         fastForward: Boolean = false,
-        fastForwardRulesObject: JsonObject
     ): Uri? {
         var uriData = dataString
         if (uriData == null) {
@@ -71,7 +70,7 @@ object IntentExt : KoinComponent {
                 logger.debug("GetUri: Pre modification=%s", url, UrlProcessor)
 
                 if (fastForward) {
-                    getRuleRedirect(url, fastForwardRulesObject)?.let { url = it }
+                    getRuleRedirect(url)?.let { url = it }
                 }
 
                 logger.debug("GetUri: Post FastForward=%s", url, UrlProcessor)

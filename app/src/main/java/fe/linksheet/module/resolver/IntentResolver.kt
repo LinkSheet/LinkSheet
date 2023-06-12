@@ -10,7 +10,6 @@ import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
-import fe.fastforwardkt.FastForwardLoader
 import fe.fastforwardkt.isTracker
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.IntentExt.isSchemeTypicallySupportedByBrowsers
@@ -52,8 +51,6 @@ class IntentResolver(
     private val libRedirectResolver: LibRedirectResolver
 ) {
     private val logger = loggerFactory.createLogger(IntentResolver::class)
-
-    private val fastForwardRulesObject by lazy { FastForwardLoader.loadBuiltInFastForwardRules() }
 
     private val useClearUrls = preferenceRepository.getBooleanState(Preferences.useClearUrls)
     private var useFastForwardRules = preferenceRepository.getBooleanState(
@@ -131,7 +128,7 @@ class IntentResolver(
         }
 
         var uri = intent.getUri(
-            useClearUrls.value, useFastForwardRules.value, fastForwardRulesObject
+            useClearUrls.value, useFastForwardRules.value
         )
 
         if (uri == null) {
@@ -146,7 +143,7 @@ class IntentResolver(
                 it,
                 followRedirectsLocalCache.value,
                 followRedirectsBuiltInCache.value,
-                { url -> (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || isTracker(url, fastForwardRulesObject) },
+                { url -> (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || isTracker(url) },
                 followRedirectsExternalService.value,
                 requestTimeout.value
             )

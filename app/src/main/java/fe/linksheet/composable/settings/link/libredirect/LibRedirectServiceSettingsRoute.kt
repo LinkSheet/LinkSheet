@@ -35,6 +35,7 @@ import fe.linksheet.extension.compose.enabled
 import fe.linksheet.extension.ioState
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
+import fe.linksheet.util.cleanHttpsScheme
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -153,7 +154,7 @@ fun LibRedirectServiceSettingsRoute(
                     items(items = instances!!, key = { it }) { instance ->
                         InstanceItem(
                             enabled = enabled!!,
-                            text = instance,
+                            text = cleanHttpsScheme(instance),
                             instance = instance,
                             selectedInstance = selectedInstance,
                             itemOnClick = itemOnClick

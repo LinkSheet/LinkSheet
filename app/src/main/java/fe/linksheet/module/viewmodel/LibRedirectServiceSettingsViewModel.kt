@@ -78,9 +78,7 @@ class LibRedirectServiceSettingsViewModel(
     }
 
     val instances = builtinInstances.combine(selectedFrontend) { instances, selected ->
-        instances.find { it.frontendKey == selected?.key }?.hosts?.map { host ->
-            cleanHttpsScheme(host)
-        }?.sorted()
+        instances.find { it.frontendKey == selected?.key }?.hosts?.sorted()
     }
 
     fun updateLibRedirectState(serviceKey: String, enabled: Boolean) = ioLaunch {

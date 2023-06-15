@@ -143,7 +143,7 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.38")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.38")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
-    implementation("com.github.1fexd:clearurlkt:0.0.18")
+    implementation("com.github.1fexd:clearurlkt:0.0.19")
     implementation("com.github.1fexd:fastforwardkt:0.0.15")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
     implementation("com.github.1fexd:mimetypekt:0.0.5")

@@ -9,23 +9,28 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.android.allBrowsersIntent
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.AndroidVersion
+
 
 class MainViewModel(
     val context: Application,
     val preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    private val roleManager = context.getSystemService<RoleManager>()!!
+    private val roleManager by lazy {
+        if (AndroidVersion.AT_LEAST_API_26_O) {
+            context.getSystemService<RoleManager>()
+        } else null
+    }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    fun getRequestRoleBrowserIntent() = roleManager.createRequestRoleIntent(
+    fun getRequestRoleBrowserIntent() = roleManager!!.createRequestRoleIntent(
         RoleManager.ROLE_BROWSER
     )
 

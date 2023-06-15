@@ -5,18 +5,18 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.extension.filterIf
-import fe.linksheet.extension.compose.getAppHosts
-import fe.linksheet.extension.compose.getDisplayActivityInfos
-import fe.linksheet.extension.groupBy
+import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.ioLaunch
+import fe.linksheet.extension.compose.getAppHosts
+import fe.linksheet.extension.compose.getDisplayActivityInfos
+import fe.linksheet.extension.filterIf
+import fe.linksheet.extension.groupBy
 import fe.linksheet.extension.mapToSet
-import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -28,8 +28,11 @@ class PreferredAppSettingsViewModel(
     preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private val domainVerificationManager = context.getSystemService<DomainVerificationManager>()!!
+    private val domainVerificationManager by lazy {
+        if (AndroidVersion.AT_LEAST_API_31_S) {
+            context.getSystemService<DomainVerificationManager>()
+        } else null
+    }
 
     val searchFilter = MutableStateFlow("")
 
@@ -49,8 +52,8 @@ class PreferredAppSettingsViewModel(
     @RequiresApi(Build.VERSION_CODES.S)
     val appsExceptPreferred = preferredApps.map { apps ->
         val preferredAppsPackages = apps.mapToSet { it.first.packageName }
-        domainVerificationManager.getDisplayActivityInfos(context) {
-            it.hasVerifiedDomains(domainVerificationManager, true)
+        domainVerificationManager!!.getDisplayActivityInfos(context) {
+            it.hasVerifiedDomains(domainVerificationManager!!, true)
                     && it.activityInfo.packageName !in preferredAppsPackages
         }
     }
@@ -61,7 +64,7 @@ class PreferredAppSettingsViewModel(
     ) = ioAsync {
         val hostState = mutableMapOf<String, Boolean>()
         val hasAppHosts = if (AndroidVersion.AT_LEAST_API_31_S) {
-            val appHosts = domainVerificationManager.getAppHosts(displayActivityInfo.packageName)
+            val appHosts = domainVerificationManager!!.getAppHosts(displayActivityInfo.packageName)
             appHosts.forEach { hostState[it] = it in hosts }
 
             appHosts.isNotEmpty()

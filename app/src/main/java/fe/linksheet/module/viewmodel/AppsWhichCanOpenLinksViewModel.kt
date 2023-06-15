@@ -14,6 +14,7 @@ import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -23,18 +24,21 @@ class AppsWhichCanOpenLinksViewModel(
     preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private val domainVerificationManager = context.getSystemService<DomainVerificationManager>()!!
+    private val domainVerificationManager by lazy {
+        if (AndroidVersion.AT_LEAST_API_31_S) {
+            context.getSystemService<DomainVerificationManager>()
+        } else null
+    }
 
     val linkHandlingAllowed = MutableStateFlow(true)
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private val apps = flowOfLazy { domainVerificationManager.getDisplayActivityInfos(context) }.combine(
+    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }.combine(
         linkHandlingAllowed
     ) { apps, _ ->
         apps.filter {
-            it.resolvedInfo.hasVerifiedDomains(domainVerificationManager, linkHandlingAllowed.value)
+            it.resolvedInfo.hasVerifiedDomains(domainVerificationManager!!, linkHandlingAllowed.value)
         }
     }
 

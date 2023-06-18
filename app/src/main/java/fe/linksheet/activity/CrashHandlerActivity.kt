@@ -33,24 +33,31 @@ import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
+import fe.linksheet.extension.injectLogger
 import fe.linksheet.lineSeparator
+import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class CrashHandlerActivity : ComponentActivity() {
+class CrashHandlerActivity : ComponentActivity(), KoinComponent {
     companion object {
         const val extraCrashException = "EXTRA_CRASH_EXCEPTION_TEXT"
     }
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
+    private val logger by injectLogger(CrashHandlerActivity::class)
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val exception = intent?.getStringExtra(extraCrashException)
+        val exception = intent?.getStringExtra(extraCrashException)!!
+        logger.print(Logger.Type.Debug, exception)
 
         setContent {
             AppHost {
@@ -60,7 +67,7 @@ class CrashHandlerActivity : ComponentActivity() {
                 )
 
                 val exportDialog = dialogHelper<Unit, String, Unit>(
-                    fetch = { exception!! },
+                    fetch = { exception },
                     awaitFetchBeforeOpen = true,
                     dynamicHeight = true
                 ) { state, close ->
@@ -90,43 +97,41 @@ class CrashHandlerActivity : ComponentActivity() {
                         )
                     },
                     content = { padding ->
-                        if (exception != null) {
-                            Column(modifier = Modifier.fillMaxSize()) {
-                                LazyColumn(
-                                    modifier = Modifier
-                                        .padding(padding)
-                                        .weight(1f),
-                                    contentPadding = PaddingValues(5.dp)
-                                ) {
-                                    stickyHeader(key = "header") {
-                                        Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                                            PreferenceSubtitle(
-                                                text = stringResource(id = R.string.app_crashed),
-                                            )
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .padding(padding)
+                                    .weight(1f),
+                                contentPadding = PaddingValues(5.dp)
+                            ) {
+                                stickyHeader(key = "header") {
+                                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                                        PreferenceSubtitle(
+                                            text = stringResource(id = R.string.app_crashed),
+                                        )
 
-                                            Spacer(modifier = Modifier.height(10.dp))
-                                        }
-                                    }
-
-
-                                    item("exception") {
-                                        SelectionContainer {
-                                            Text(
-                                                text = exception,
-                                                fontFamily = FontFamily.Monospace
-                                            )
-                                        }
+                                        Spacer(modifier = Modifier.height(10.dp))
                                     }
                                 }
 
-                                BottomRow {
-                                    TextButton(
-                                        onClick = {
-                                            exportDialog.open(Unit)
-                                        }
-                                    ) {
-                                        Text(text = stringResource(id = R.string.export))
+
+                                item("exception") {
+                                    SelectionContainer {
+                                        Text(
+                                            text = exception,
+                                            fontFamily = FontFamily.Monospace
+                                        )
                                     }
+                                }
+                            }
+
+                            BottomRow {
+                                TextButton(
+                                    onClick = {
+                                        exportDialog.open(Unit)
+                                    }
+                                ) {
+                                    Text(text = stringResource(id = R.string.export))
                                 }
                             }
                         }

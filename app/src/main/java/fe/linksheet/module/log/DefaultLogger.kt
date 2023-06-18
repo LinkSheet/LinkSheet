@@ -124,15 +124,15 @@ class DefaultLogger(
 
     private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
         val (normal, redacted) = dump(msg, dumpable)
-        log(type, normal, redacted, prefix)
+        log(type, normal, redacted)
     }
 
     private fun <T> log(type: Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
         val (normal, redacted) = dump(msg, param, hashProcessor)
-        log(type, normal, redacted, prefix)
+        log(type, normal, redacted)
     }
 
-    private fun log(type: Type, normal: String, redacted: String, prefix: String) {
+    private fun log(type: Type, normal: String, redacted: String) {
         appLogger.write(LogEntry(type.code, System.currentTimeMillis(), prefix, normal, redacted))
         print(type, normal)
     }
@@ -140,8 +140,7 @@ class DefaultLogger(
     private fun log(
         type: Type,
         normalAndRedacted: String,
-        prefix: String
-    ) = log(type, normalAndRedacted, normalAndRedacted, prefix)
+    ) = log(type, normalAndRedacted, normalAndRedacted)
 
     override fun verbose(
         msg: String,

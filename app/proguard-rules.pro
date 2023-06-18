@@ -22,3 +22,5 @@
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
 -dontwarn javax.annotation.WillClose
+
+-keep class fe.linksheet.**

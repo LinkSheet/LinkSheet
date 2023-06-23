@@ -126,11 +126,11 @@ dependencies {
 
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha02")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha03")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.compose.animation:animation:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.7.0-alpha01")
+    implementation("androidx.navigation:navigation-compose:2.7.0-beta01")
 
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
@@ -143,8 +143,8 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.38")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.38")
     implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
-    implementation("com.github.1fexd:clearurlkt:0.0.19")
-    implementation("com.github.1fexd:fastforwardkt:0.0.15")
+    implementation("com.github.1fexd:clearurlkt:0.0.21")
+    implementation("com.github.1fexd:fastforwardkt:0.0.16")
     implementation("com.github.1fexd:libredirectkt:0.0.16")
     implementation("com.github.1fexd:mimetypekt:0.0.5")
     implementation("com.github.1fexd:amp2htmlkt:0.0.3")

@@ -11,12 +11,12 @@ plugins {
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = 25
-        targetSdk = 33
+        targetSdk = 34
         versionCode = versioning.info.tag?.let {
             val semver = versioning.info.versionNumber
             semver.major * 10000 + semver.minor * 100 + semver.patch

@@ -199,4 +199,5 @@
     <string name="follow_redirects_builtin_cache">Use built-in redirect cache</string>
     <string name="follow_redirects_builtin_cache_explainer">Use built-in cache (which uses a database export of the external service)</string>
     <string name="redirect_resolve_type_builtin_cache">built-in cache</string>
+    <string name="request_timeout_explainer_disclaimer">Currently not available in grid mode</string>
 </resources>

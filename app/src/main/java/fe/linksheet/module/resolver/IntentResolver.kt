@@ -11,6 +11,7 @@ import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
 import fe.fastforwardkt.isTracker
+import fe.linksheet.R
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.IntentExt.isSchemeTypicallySupportedByBrowsers
 import fe.linksheet.extension.android.IntentExt.newIntent
@@ -30,6 +31,7 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepos
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
+import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
@@ -46,6 +48,7 @@ class IntentResolver(
     private val downloader: Downloader,
     private val redirectResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
+    private val allRemoteResolveRequest: AllRemoteResolveRequest,
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver

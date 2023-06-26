@@ -1,8 +1,18 @@
 package fe.linksheet.composable.settings.bottomsheet
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -10,8 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import fe.linksheet.R
-import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.SubtitleText
+import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -171,12 +182,27 @@ fun BottomSheetSettingsRoute(
                     state = viewModel.enableRequestPrivateBrowsingButton,
                     viewModel = viewModel,
                     headline = stringResource(id = R.string.enable_request_private_browsing_button),
-                    subtitle = stringResource(
-                        id = R.string.enable_request_private_browsing_button_explainer,
-                        PrivateBrowsingBrowser.supportedBrowsers.joinToString(
-                            separator = ", ",
-                        ) { it.displayName }
-                    )
+                    subtitleBuilder = { _ ->
+                        SubtitleText(subtitle = stringResource(
+                            id = R.string.enable_request_private_browsing_button_explainer,
+                            PrivateBrowsingBrowser.supportedBrowsers.joinToString(
+                                separator = ", ",
+                            ) { it.displayName }
+                        ))
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            shape = RoundedCornerShape(12.dp),
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.request_timeout_explainer_disclaimer),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.padding(all = 10.dp)
+                            )
+                        }
+                    }
                 )
             }
         }

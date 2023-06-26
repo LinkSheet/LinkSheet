@@ -174,7 +174,6 @@
     <string name="export_log">Eksportuj log</string>
     <string name="export_mode">Rodzaj eksportu</string>
     <string name="enable_request_private_browsing_button">Włącz przycisk „Tryb prywatny”</string>
-    <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty link w trybie prywatnym. Obsługiwane przeglądarki: %s</string>
     <string name="request_private_browsing">Tryb prywatny</string>
     <string name="crash_log">Log awarii</string>
     <string name="log">Log</string>

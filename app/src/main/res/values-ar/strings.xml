@@ -198,4 +198,7 @@
     <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
     <string name="resolved_via">%s تم حلها عبر %s</string>
     <string name="resolve_failed">%s فشل: %s</string>
+    <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات استخدام نظام Android في خوارزمية الفرز. يتم طلب الإذن عند التبديل الأول.</string>
+    <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
+    <string name="request_timeout_explainer_disclaimer">غير متوفر حاليا في وضع الشبكة</string>
 </resources>

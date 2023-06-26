@@ -172,7 +172,6 @@
     <string name="export">تصدير</string>
     <string name="export_mode">وضع التصدير</string>
     <string name="enable_request_private_browsing_button">تمكين زر \"طلب التصفح الخاص\"</string>
-    <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
     <string name="request_private_browsing">طلب خاص</string>
     <string name="use_clear_urls">استخدام ClearURLs</string>
     <string name="options">الخيارات</string>

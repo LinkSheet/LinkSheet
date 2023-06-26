@@ -115,6 +115,15 @@ class IntentResolver(
     private val amp2HtmlExternalService =
         preferenceRepository.getBooleanState(Preferences.amp2HtmlExternalService)
 
+
+    enum class Resolved(val key: String, val stringResId: Int) {
+        Amp2Html("amp2html", R.string.amp2html), Redirect("redirect", R.string.follow_redirects);
+
+        companion object {
+            fun getResolvedByKey(key: String) = values().find { it.key == key }
+        }
+    }
+
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         logger.debug("Intent=%s", intent)
         urlResolverCache.clear()
@@ -135,6 +144,32 @@ class IntentResolver(
             logger.debug("Uri is null, something probably went very wrong")
         }
 
+//        var followRedirectsResult: Result<ResolveType>
+        val resolved = mutableMapOf<Resolved, Result<ResolveType>?>()
+
+//
+//        if (followRedirects.value && followRedirectsExternalService.value && enableAmp2Html.value && amp2HtmlExternalService.value) {
+//            val uriString = uri.toString()
+//            val con = allRemoteResolveRequest.resolveRemote(uriString, requestTimeout.value)
+//            if (!isHttpSuccess(con.responseCode)) {
+//                logger.debug("Failed to resolve via external service (${con.responseCode}): ${con.readToString()}")
+//            }
+//
+//            val obj = con.readToJson().asJsonObject
+//            val url = obj.getAsJsonPrimitive("result").asString
+//
+//            val results = obj.getAsJsonObject("results")
+//            Resolved.values().forEach {
+//
+//
+//                val prim = results.getAsJsonPrimitive(it.key)
+//
+//
+//                resolved[it] = Result.success(
+//                    if (prim != null) ResolveType.NotResolved(url) else ResolveType.Remote(url)
+//                )
+//            }
+//        } else {
         val (followRedirectsResult, followRedirectsResultUri) = resolve(
             followRedirects.value,
             uri
@@ -143,12 +178,17 @@ class IntentResolver(
                 it,
                 followRedirectsLocalCache.value,
                 followRedirectsBuiltInCache.value,
-                { url -> (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || isTracker(url) },
+                { url ->
+                    (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || isTracker(
+                        url
+                    )
+                },
                 followRedirectsExternalService.value,
                 requestTimeout.value
             )
         }
 
+        resolved[Resolved.Redirect] = followRedirectsResult
         if (followRedirectsResult != null) {
             uri = followRedirectsResultUri
         }
@@ -164,9 +204,11 @@ class IntentResolver(
             )
         }
 
+        resolved[Resolved.Amp2Html] = amp2HtmlResult
         if (amp2HtmlResult != null) {
             uri = amp2HtmlResultUri
         }
+//        }
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
         if (enableLibRedirect.value && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton.value)) {
@@ -260,8 +302,7 @@ class IntentResolver(
             showExtended,
             preferredApp?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
-            followRedirectsResult,
-            amp2HtmlResult,
+            resolved,
             libRedirectResult,
             downloadable
         )

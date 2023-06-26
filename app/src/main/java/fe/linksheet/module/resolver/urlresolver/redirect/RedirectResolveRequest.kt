@@ -29,7 +29,7 @@ class RedirectResolveRequest(
     request: Request,
     private val urlResolverCache: CachedRequest,
     logger: Logger
-) : ResolveRequest(apiUrl, token, request, logger) {
+) : ResolveRequest(apiUrl, token, request, logger, "redirect") {
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String {
         val con = urlResolverCache.head(url, timeout, true)

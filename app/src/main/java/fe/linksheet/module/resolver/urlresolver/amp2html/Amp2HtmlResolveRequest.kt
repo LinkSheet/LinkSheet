@@ -33,7 +33,7 @@ class Amp2HtmlResolveRequest(
     request: Request,
     private val urlResolverCache: CachedRequest,
     logger: Logger
-) : ResolveRequest(apiUrl, token, request, logger) {
+) : ResolveRequest(apiUrl, token, request, logger, "amp2html") {
 
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String? {

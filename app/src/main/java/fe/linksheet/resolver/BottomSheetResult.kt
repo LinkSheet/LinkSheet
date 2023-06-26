@@ -3,6 +3,7 @@ package fe.linksheet.resolver
 import android.content.Intent
 import android.net.Uri
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.urlresolver.ResolveType
 
@@ -14,8 +15,7 @@ data class BottomSheetResult(
     val showExtended: Boolean,
     private val alwaysPreferred: Boolean?,
     private val hasSingleMatchingOption: Boolean = false,
-    val followRedirect: Result<ResolveType>? = null,
-    val amp2HtmlResult: Result<ResolveType>? = null,
+    val resolveResults: Map<IntentResolver.Resolved, Result<ResolveType>?>,
     val libRedirectResult: LibRedirectResolver.LibRedirectResult? = null,
     val downloadable: Downloader.DownloadCheckResult = Downloader.DownloadCheckResult.NonDownloadable,
 ) {

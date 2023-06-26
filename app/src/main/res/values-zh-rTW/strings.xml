@@ -23,7 +23,6 @@
     <string name="confirm">確認</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">按使用統計排序應用程式</string>
-    <string name="usage_stats_sorting_explainer">在排序演算法中包含使用統計資料。第一次切換時會要求權限。</string>
     <string name="preferred_browser">偏好瀏覽器</string>
     <string name="preferred_browser_explainer">設定偏好瀏覽器模式</string>
     <string name="always_ask">每次都詢問</string>

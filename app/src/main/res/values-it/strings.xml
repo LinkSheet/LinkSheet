@@ -33,7 +33,6 @@
     <string name="single_tap_explainer">Richiede solo un tocco invece di due per aprire le app; premi a lungo per selezionare l\'app, fai doppio clic per aprire le informazioni sull\'app</string>
     <string name="confirm">Conferma</string>
     <string name="usage_stats_sorting">Ordina app per utilizzo</string>
-    <string name="usage_stats_sorting_explainer">Includi le statistiche di utilizzo nell\'algoritmo di ordinamento. L\'autorizzazione è richiesta al primo passaggio.</string>
     <string name="donate_explainer">Dona criptovalute all\'autore</string>
     <string name="none_explainer">Elenca solo le app native, rimuovendo tutti i browser. Se è presente una sola app nativa, questa verrà aperta automaticamente. Se non è presente alcuna app nativa, vengono elencati tutti i browser.</string>
     <string name="error">Errore</string>

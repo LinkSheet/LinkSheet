@@ -24,7 +24,6 @@
     <string name="confirm">确认</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">按使用情况对应用排序</string>
-    <string name="usage_stats_sorting_explainer">在排序算法中包括使用情况统计信息。首次启用时需要申请权限。</string>
     <string name="preferred_browser">首选浏览器</string>
     <string name="preferred_browser_explainer">首选浏览器模式设置</string>
     <string name="always_ask">总是询问</string>

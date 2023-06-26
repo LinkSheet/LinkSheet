@@ -26,7 +26,6 @@
     <string name="single_tap_explainer">Nur einmaliges Tippen anstatt von doppeltem benötigt, um Apps zu öffnen; Lange drücken, um eine App auszuwählen, doppelt, um die App Info zu öffnen</string>
     <string name="confirm">Bestätigen</string>
     <string name="always_ask">Immer fragen</string>
-    <string name="usage_stats_sorting_explainer">Nutzungsstatistiken in den Sortieralgorithmus einbeziehen. Die Berechtigung wird beim ersten Einschalten angefordert.</string>
     <string name="preferred_browser">Bevorzugter Browser</string>
     <string name="preferred_browser_explainer">Bevorzugten Browsermodus einstellen</string>
     <string name="none_explainer">Nur native Apps auflisten, alle Browser entfernen. Wenn nur eine einzige native App vorhanden ist, wird diese automatisch geöffnet. Wenn keine native App vorhanden ist, werden alle Browser aufgelistet.</string>

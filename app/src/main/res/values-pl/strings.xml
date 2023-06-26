@@ -17,7 +17,6 @@
     <string name="url_copied">Link został skopiowany do schowka</string>
     <string name="confirm">Potwierdź</string>
     <string name="clear">Wyczyść</string>
-    <string name="usage_stats_sorting_explainer">Zezwól aplikacji na dostęp do danych o użyciu przy pierwszym przełączeniu.</string>
     <string name="usage_stats_sorting">Sortuj aplikacje według użycia</string>
     <string name="enable_copy_button_explainer">Wyświetla przycisk „Kopiuj link” w dolnym panelu</string>
     <string name="single_tap">Włącz pojedyncze dotknięcie</string>

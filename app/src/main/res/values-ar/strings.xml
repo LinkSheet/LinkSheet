@@ -6,7 +6,6 @@
     <string name="use_a_different_app">استخدام تطبيق مختلف</string>
     <string name="opening_with_app">الفتح باستخدام %s</string>
     <string name="enable_copy_button_explainer">يعرض زر \"نسخ عنوان الرابط\" في الورقة السفلية</string>
-    <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات الاستخدام في خوارزمية الفرز. يتم طلب الإذن عند التفعيل الأول.</string>
     <string name="none">لاشيء</string>
     <string name="add_all">إضافة الكل</string>
     <string name="hide_after_copying_explainer">إخفاء الورقة السفلية بعد الضغط على زر \"نسخ عنوان url\"</string>

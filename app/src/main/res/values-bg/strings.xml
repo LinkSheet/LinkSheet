@@ -78,5 +78,4 @@
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="redirect_resolve_type_not_resolved">липсва</string>
-    <string name="usage_stats_sorting_explainer">Включване на статистиката за използване в . Разрешението се изисква при първото превключване.</string>
 </resources>

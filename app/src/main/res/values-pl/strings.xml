@@ -198,4 +198,7 @@
     <string name="follow_only_known_trackers_explainer">Próbuj śledzić przekierowania tylko wtedy, gdy host jest znany jako tracker lub przekierowanie. Jeśli opcja „Śledź przekierowania przez usługę zewnętrzną” jest włączona, ta opcja będzie zawsze aktywna.</string>
     <string name="resolved_via">%s rozwiązano przez %s</string>
     <string name="resolve_failed">%s nie powiodło się: %s</string>
+    <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego. Obsługiwane przeglądarki: %s</string>
+    <string name="request_timeout_explainer_disclaimer">Obecnie niedostępne w trybie siatki</string>
+    <string name="usage_stats_sorting_explainer">Uwzględnij statystyki użycia systemu Android w algorytmie sortowania. Żądane jest uprawnienie przy pierwszym przełączeniu.</string>
 </resources>

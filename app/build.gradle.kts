@@ -1,5 +1,7 @@
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
+import groovy.lang.Closure
+import net.nemerosa.versioning.VersioningExtension
 
 plugins {
     id("com.android.application")
@@ -7,6 +9,26 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("net.nemerosa.versioning") version "3.0.0"
+}
+
+// Must be defined before the android block, or else it won't work
+versioning {
+    class KotlinClosure4<in T : Any?, in U : Any?, in V : Any?, in W : Any?, R : Any>(
+        val function: (T, U, V, W) -> R?,
+        owner: Any? = null,
+        thisObject: Any? = null
+    ) : Closure<R?>(owner, thisObject) {
+        @Suppress("unused")
+        fun doCall(t: T, u: U, v: V, w: W): R? = function(t, u, v, w)
+    }
+
+    releaseMode = KotlinClosure4<String?, String?, String?, VersioningExtension, String>({ _, _, currentTag, _ ->
+        currentTag
+    })
+
+    releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ ->
+        ReleaseInfo("release", info.tag)
+    })
 }
 
 android {
@@ -18,8 +40,7 @@ android {
         minSdk = 25
         targetSdk = 34
         versionCode = versioning.info.tag?.let {
-            val semver = versioning.info.versionNumber
-            semver.major * 10000 + semver.minor * 100 + semver.patch
+            versioning.info.versionNumber.versionCode
         } ?: (System.currentTimeMillis() / 1000).toInt()
 
         versionName = versioning.info.tag ?: versioning.info.full
@@ -100,11 +121,8 @@ android {
     }
 }
 
-versioning {
-    releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ ->
-        ReleaseInfo("release", info.tag)
-    })
-}
+//versioning.releases.add("master")
+
 
 dependencies {
     implementation("androidx.lifecycle:lifecycle-process:2.6.1")
@@ -170,7 +188,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    
+
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
 }

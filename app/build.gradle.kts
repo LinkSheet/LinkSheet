@@ -132,9 +132,9 @@ dependencies {
     implementation("io.insert-koin:koin-androidx-compose:3.4.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
 
-    implementation("androidx.room:room-runtime:2.5.1")
-    implementation("androidx.room:room-ktx:2.5.1")
-    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
 
     implementation("androidx.webkit:webkit:1.7.0")
 
@@ -148,7 +148,7 @@ dependencies {
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.compose.animation:animation:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.7.0-beta01")
+    implementation("androidx.navigation:navigation-compose:2.7.0-beta02")
 
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")

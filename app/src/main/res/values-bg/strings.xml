@@ -11,14 +11,14 @@
     <string name="links">Препратки</string>
     <string name="version">Издание</string>
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
-    <string name="clear_urls">Използване на ClearURLs</string>
+    <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
     <string name="donate_explainer">Дарете криптовалута на автора</string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Изисква се само едно докосване вместо две за отваряне на приложенията; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
     <string name="license_apache_2">Лиценз Apache 2.0</string>
-    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Ще бъде направена заявка към адреса, за да бъде определен вида на файла.</string>
+    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне с/ъс %s</string>
     <string name="preferred_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
@@ -74,8 +74,33 @@
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочването от препратката)</string>
-    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията</string>
+    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="redirect_resolve_type_not_resolved">липсва</string>
+    <string name="no_app_to_handle_link_found">Не е намерено приложение, което да обработи препратката!</string>
+    <string name="always_ask_explainer">Винаги показва всички браузъри</string>
+    <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ. Ако „Последване на пренасочванията от външна услуга“ е включено тук също е включено.</string>
+    <string name="usage_stats_sorting_explainer">При сортирането се взима предвид и системната статистика за използване на приложението. При първо включване ще бъде поискано право на достъп.</string>
+    <string name="set_as_browser">Задаване като браузър</string>
+    <string name="set_as_browser_explainer">За да направите приложението браузър по подразбиране докоснете тук</string>
+    <string name="preferred_browser">Предпочитан браузър</string>
+    <string name="preferred_browser_explainer">Задава режима за избор на приложение</string>
+    <string name="always_ask">Пита всеки път</string>
+    <string name="none">Приоритет на най-ползвания</string>
+    <string name="none_explainer">Използва само приложения, без браузъри. Ако има само едно приложение, то ще бъде използвано автоматично. Ако няма приложения, ще бъдат показани всички браузъри.</string>
+    <string name="always_show_package_name">Името на пакета е винаги видимо</string>
+    <string name="always_show_package_name_explainer">До името на приложението се показва и името на пакета</string>
+    <string name="disable_toasts">Изключване на плуващите съобщения</string>
+    <string name="disable_toasts_explainer">Никога не се показват плуващи съобщения</string>
+    <string name="remove_all">Премахване на всички</string>
+    <string name="add_all">Добавяне на всички</string>
+    <string name="hide_after_copying">Скриване след копиране</string>
+    <string name="hide_after_copying_explainer">Долното меню се скрива след докосване на „Копиране на адреса“</string>
+    <string name="set_as_browser_done">Приложението е зададено като подразбиран браузър!</string>
+    <string name="display_grid_layout">Разположение в решетка</string>
+    <string name="browser_status">Състояние</string>
+    <string name="whitelisted_explainer">Показват се само избраните браузъри</string>
+    <string name="whitelisted_browsers">Избрани браузъри</string>
+    <string name="whitelisted">Избрани</string>
 </resources>

@@ -98,9 +98,11 @@
     <string name="hide_after_copying">Скриване след копиране</string>
     <string name="hide_after_copying_explainer">Долното меню се скрива след докосване на „Копиране на адреса“</string>
     <string name="set_as_browser_done">Приложението е зададено като подразбиран браузър!</string>
-    <string name="display_grid_layout">Разположение в решетка</string>
+    <string name="display_grid_layout">Таблична подредба</string>
     <string name="browser_status">Състояние</string>
     <string name="whitelisted_explainer">Показват се само избраните браузъри</string>
     <string name="whitelisted_browsers">Избрани браузъри</string>
     <string name="whitelisted">Избрани</string>
+    <string name="display_grid_layout_explainer">Подрежда долното меню в редове и колони вместо списък</string>
+    <string name="preferred_apps_explainer">Предпочитаните приложения са тези, които сте настроили да отварят винаги определени адреси</string>
 </resources>

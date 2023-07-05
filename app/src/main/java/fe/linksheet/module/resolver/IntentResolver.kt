@@ -13,7 +13,6 @@ import fe.android.preference.helper.compose.getStringState
 import fe.fastforwardkt.isTracker
 import fe.linksheet.R
 import fe.linksheet.extension.android.IntentExt.getUri
-import fe.linksheet.extension.android.IntentExt.isSchemeTypicallySupportedByBrowsers
 import fe.linksheet.extension.android.IntentExt.newIntent
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.queryResolveInfosByIntent
@@ -263,7 +262,7 @@ class IntentResolver(
 
         logger.debug("ResolveList=%s", resolvedList)
 
-        val browserMode = if (newIntent.isSchemeTypicallySupportedByBrowsers()) {
+        val browserMode = if (BrowserResolver.isSchemeTypicallySupportedByBrowsers(newIntent)) {
             val (mode, selected, repository) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)

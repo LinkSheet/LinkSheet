@@ -9,6 +9,22 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
 
 class BrowserResolver(val context: Application) {
+    companion object {
+        private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
+        private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")
+
+        private val baseBrowserIntent = Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+
+        val httpBrowserIntent = Intent(baseBrowserIntent).setData(httpSchemeUri)
+        val httpsBrowserIntent = Intent(baseBrowserIntent).setData(httpsSchemeUri)
+
+        fun isSchemeTypicallySupportedByBrowsers(intent: Intent): Boolean {
+            return httpSchemeUri.scheme == intent.scheme || httpsSchemeUri.scheme == intent.scheme
+        }
+    }
+
     fun queryDisplayActivityInfoBrowsers(sorted: Boolean) = queryBrowsers()
         .toDisplayActivityInfos(context, sorted)
 
@@ -24,9 +40,4 @@ class BrowserResolver(val context: Application) {
     }
 }
 
-private val baseBrowserIntent = Intent()
-    .setAction(Intent.ACTION_VIEW)
-    .addCategory(Intent.CATEGORY_BROWSABLE)
 
-val httpBrowserIntent = baseBrowserIntent.setData(Uri.fromParts("http", "", ""))
-val httpsBrowserIntent = baseBrowserIntent.setData(Uri.fromParts("https", "", ""))

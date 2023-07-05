@@ -13,7 +13,7 @@ import fe.android.preference.helper.PreferenceRepository
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.module.resolver.httpBrowserIntent
+import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
 
@@ -39,6 +39,6 @@ class MainViewModel(
     ) = activity.startActivityWithConfirmation(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
 
     fun checkDefaultBrowser() = context.packageManager
-        .resolveActivityCompat(httpBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        .resolveActivityCompat(BrowserResolver.httpBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 }

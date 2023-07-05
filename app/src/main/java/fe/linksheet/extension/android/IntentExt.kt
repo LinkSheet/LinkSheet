@@ -104,8 +104,3 @@ fun selfIntent(uri: Uri?, extras: Bundle? = null) = Intent().apply {
     `package` = BuildConfig.APPLICATION_ID
     extras?.let { putExtras(extras) }
 }
-
-val allBrowsersIntent = Intent()
-    .setAction(Intent.ACTION_VIEW)
-    .addCategory(Intent.CATEGORY_BROWSABLE)
-    .setData(Uri.fromParts("http", "", ""))

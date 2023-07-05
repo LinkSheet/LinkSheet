@@ -7,7 +7,6 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
 import androidx.annotation.RequiresApi
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.applyIf
 
 fun ResolveInfo.toDisplayActivityInfo(context: Context) = DisplayActivityInfo(
     activityInfo = activityInfo,
@@ -19,8 +18,15 @@ fun ResolveInfo.toDisplayActivityInfo(context: Context) = DisplayActivityInfo(
 fun Iterable<ResolveInfo>.toDisplayActivityInfos(
     context: Context,
     sorted: Boolean = true
-) = map { it.toDisplayActivityInfo(context) }.applyIf(sorted) {
-    sortedWith(DisplayActivityInfo.labelComparator)
+): List<DisplayActivityInfo> {
+    return map { it.toDisplayActivityInfo(context) }.labelSorted(sorted)
+}
+
+fun Map<String, ResolveInfo>.toDisplayActivityInfos(
+    context: Context,
+    sorted: Boolean = true
+): List<DisplayActivityInfo> {
+    return map { (_, it) -> it.toDisplayActivityInfo(context) }.labelSorted(sorted)
 }
 
 fun Iterable<ResolveInfo>.toPackageKeyedMap() = associateBy { it.activityInfo.packageName }
@@ -30,7 +36,8 @@ fun ResolveInfo.hasVerifiedDomains(
     manager: DomainVerificationManager,
     linkHandlingAllowed: Boolean
 ) = manager.getDomainVerificationUserState(activityInfo.packageName)?.let { state ->
-    val linkHandling = if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
+    val linkHandling =
+        if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
     val hasAnyVerifiedOrSelected = state.hostToStateMap.any {
         it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED
     }

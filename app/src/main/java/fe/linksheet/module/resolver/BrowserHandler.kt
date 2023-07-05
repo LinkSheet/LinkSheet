@@ -61,7 +61,7 @@ class BrowserHandler(
         // TODO: this should be refactored, passing a list of all applications which can handle the
         //  intent (including browsers), then QUERYING ALL BROWSERS again just to remove them from
         //  the list by comparing each element is just plain stupid, lol
-        val browsers = browserResolver.queryPackageKeyedBrowsers()
+        val browsers = browserResolver.queryBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
 
         return when (browserMode) {

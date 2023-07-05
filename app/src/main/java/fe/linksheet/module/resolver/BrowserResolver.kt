@@ -1,17 +1,32 @@
 package fe.linksheet.module.resolver
 
 import android.app.Application
-import fe.linksheet.extension.android.allBrowsersIntent
+import android.content.Intent
+import android.content.pm.ResolveInfo
+import android.net.Uri
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
 
 class BrowserResolver(val context: Application) {
-    fun queryPackageKeyedBrowsers() = queryBrowsers().toPackageKeyedMap()
     fun queryDisplayActivityInfoBrowsers(sorted: Boolean) = queryBrowsers()
         .toDisplayActivityInfos(context, sorted)
 
-    fun queryBrowsers() = context.packageManager.queryResolveInfosByIntent(
-        allBrowsersIntent, true
-    )
+    fun queryBrowsers(): Map<String, ResolveInfo> {
+        // Some apps (looking at you Coinbase) declare their app as a browser (via CATEGORY_BROWSABLE and ACTION_VIEW) but ONLY for HTTPS schemes.
+        // Previously, LinkSheet assumed (rightfully so) that an app, which is declared as a BROWSER, could handle HTTP (along HTTPS).
+        // Since this appears to be NOT the case, we have to send two intent queries (one for HTTP and one for HTTPS), then de-dupe them using a map
+        return queryBrowsers(httpBrowserIntent) + queryBrowsers(httpsBrowserIntent)
+    }
+
+    private fun queryBrowsers(intent: Intent): Map<String, ResolveInfo> {
+        return context.packageManager.queryResolveInfosByIntent(intent, true).toPackageKeyedMap()
+    }
 }
+
+private val baseBrowserIntent = Intent()
+    .setAction(Intent.ACTION_VIEW)
+    .addCategory(Intent.CATEGORY_BROWSABLE)
+
+val httpBrowserIntent = baseBrowserIntent.setData(Uri.fromParts("http", "", ""))
+val httpsBrowserIntent = baseBrowserIntent.setData(Uri.fromParts("https", "", ""))

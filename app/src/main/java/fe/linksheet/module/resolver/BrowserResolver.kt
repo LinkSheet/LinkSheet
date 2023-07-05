@@ -14,8 +14,8 @@ class BrowserResolver(val context: Application) {
 
     fun queryBrowsers(): Map<String, ResolveInfo> {
         // Some apps (looking at you Coinbase) declare their app as a browser (via CATEGORY_BROWSABLE and ACTION_VIEW) but ONLY for HTTPS schemes.
-        // Previously, LinkSheet assumed (rightfully so) that an app, which is declared as a BROWSER, could handle HTTP (along HTTPS).
-        // Since this appears to be NOT the case, we have to send two intent queries (one for HTTP and one for HTTPS), then de-dupe them using a map
+        // Previously, LinkSheet assumed (rightfully so) that an app, which is declared as a BROWSER, could handle HTTP (alongside HTTPS and other schemes).
+        // Since this appears to NOT be the case, we have to send two intent queries (one for HTTP and one for HTTPS), then de-dupe them using a map
         return queryBrowsers(httpBrowserIntent) + queryBrowsers(httpsBrowserIntent)
     }
 

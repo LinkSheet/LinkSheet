@@ -1,7 +1,7 @@
 package fe.linksheet.module.downloader
 
+import fe.httpkt.ext.findHeader
 import fe.httpkt.util.Extension
-import fe.httpkt.util.findHeader
 import fe.linksheet.module.log.FileExtensionProcessor
 import fe.linksheet.module.log.FileNameProcessor
 import fe.linksheet.module.log.LogDumpable

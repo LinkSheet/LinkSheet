@@ -33,16 +33,14 @@ import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
-import fe.linksheet.extension.injectLogger
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class CrashHandlerActivity : ComponentActivity(), KoinComponent {
     companion object {

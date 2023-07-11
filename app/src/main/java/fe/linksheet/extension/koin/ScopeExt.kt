@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.koin
 
 import fe.linksheet.module.log.LoggerFactory
 import org.koin.core.parameter.ParametersDefinition

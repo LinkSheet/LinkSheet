@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.android.compose.route.util.navigate
+import fe.kotlin.extension.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -31,7 +32,6 @@ import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.mapState
 import fe.linksheet.extension.ioState
-import fe.linksheet.extension.localizedString
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.log.AppLogger
@@ -51,7 +51,7 @@ fun LogSettingsRoute(
         mapState(files)
     }
 
-    val startupTime = AppLogger.getInstance().startupTime.localizedString()
+    val startupTime = AppLogger.getInstance().startupTime.localizedString()!!
 
     SettingsScaffold(R.string.logs, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

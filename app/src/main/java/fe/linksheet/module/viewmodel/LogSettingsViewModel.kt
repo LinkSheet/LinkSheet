@@ -2,9 +2,9 @@ package fe.linksheet.module.viewmodel
 
 import android.util.Log
 import fe.android.preference.helper.PreferenceRepository
+import fe.kotlin.extension.asUnixMillisToLocalDateTime
+import fe.kotlin.extension.localizedString
 import fe.linksheet.extension.android.ioLaunch
-import fe.linksheet.extension.localizedString
-import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ class LogSettingsViewModel(
     val files = MutableStateFlow(emptyMap<String, String>())
 
     private fun getLogFiles() = appLogger.getLogFiles().associateWith {
-        it.toLong().unixMillisToLocalDateTime().localizedString()
+        it.toLong().asUnixMillisToLocalDateTime().localizedString()!!
     }
 
     init {

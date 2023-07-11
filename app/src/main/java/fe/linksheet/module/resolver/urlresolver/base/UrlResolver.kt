@@ -2,9 +2,9 @@ package fe.linksheet.module.resolver.urlresolver.base
 
 import android.net.Uri
 import fe.gson.extensions.string
+import fe.httpkt.ext.readToString
 import fe.httpkt.isHttpSuccess
 import fe.httpkt.json.readToJson
-import fe.httpkt.util.readToString
 import fe.linksheet.extension.failure
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.HashProcessor

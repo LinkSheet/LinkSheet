@@ -1,6 +1,6 @@
 package fe.linksheet.module.repository.whitelisted
 
-import fe.linksheet.extension.mapToSet
+import fe.kotlin.extension.mapToSet
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.PackageEntityDao
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao

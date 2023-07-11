@@ -8,12 +8,12 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.extension.filterIf
-import fe.linksheet.extension.compose.getDisplayActivityInfos
-import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.android.preference.helper.PreferenceRepository
+import fe.kotlin.extension.filterIf
+import fe.linksheet.extension.android.hasVerifiedDomains
+import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -11,11 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.linksheet.extension.forEachElementIndex
+import fe.kotlin.extension.forEachWithInfo
 
 data class FilterChipValue<T>(
     val value: T,
@@ -30,7 +29,7 @@ fun <T> FilterChips(
     values: List<FilterChipValue<T>>
 ) {
     Row {
-        values.forEachElementIndex { value, _, _, last ->
+        values.forEachWithInfo { value, _, _, last ->
             FilterChip(
                 value = value.value,
                 currentState = currentState,

@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.android.compose.dialog.helper.dialogHelper
+import fe.kotlin.extension.asUnixMillisToLocalDateTime
+import fe.kotlin.extension.localizedString
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow
@@ -41,8 +43,6 @@ import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.extension.localizedString
-import fe.linksheet.extension.unixMillisToLocalDateTime
 import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
@@ -178,8 +178,8 @@ fun LogTextSettingsRoute(
                                     horizontalArrangement = Arrangement.End
                                 ) {
                                     Text(
-                                        text = unixMillis.unixMillisToLocalDateTime()
-                                            .localizedString(),
+                                        text = unixMillis.asUnixMillisToLocalDateTime()
+                                            .localizedString()!!,
                                         fontStyle = FontStyle.Italic,
                                         fontSize = 12.sp
                                     )

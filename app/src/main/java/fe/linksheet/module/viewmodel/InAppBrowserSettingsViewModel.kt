@@ -3,8 +3,8 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getState
+import fe.kotlin.extension.mapToSet
 import fe.linksheet.extension.android.ioLaunch
-import fe.linksheet.extension.mapToSet
 import fe.linksheet.extension.android.queryAllResolveInfos
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.module.preference.Preferences

@@ -2,8 +2,7 @@ package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
 import fe.android.preference.helper.PreferenceRepository
-import fe.linksheet.extension.filterIf
-import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
+import fe.kotlin.extension.filterIf
 import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow

@@ -1,7 +1,7 @@
 package fe.linksheet.module.log
 
 import android.util.Log
-import fe.linksheet.extension.printToString
+import fe.kotlin.extension.asString
 import kotlin.reflect.KClass
 
 abstract class Logger(val hasher: LogHasher) {
@@ -52,7 +52,7 @@ class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
     }
 
     override fun verbose(throwable: Throwable) {
-        print(Type.Verbose, throwable.printToString())
+        print(Type.Verbose, throwable.asString())
     }
 
     override fun info(msg: String, vararg dumpable: Any?) {
@@ -64,7 +64,7 @@ class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
     }
 
     override fun info(throwable: Throwable) {
-        print(Type.Info, throwable.printToString())
+        print(Type.Info, throwable.asString())
     }
 
     override fun debug(msg: String, vararg dumpable: Any?) {
@@ -76,7 +76,7 @@ class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
     }
 
     override fun debug(throwable: Throwable) {
-        print(Type.Debug, throwable.printToString())
+        print(Type.Debug, throwable.asString())
     }
 }
 
@@ -155,7 +155,7 @@ class DefaultLogger(
 
     override fun verbose(
         throwable: Throwable
-    ) = log(Type.Verbose, throwable.printToString(), prefix)
+    ) = log(Type.Verbose, throwable.asString(), prefix)
 
 
     override fun info(msg: String, vararg dumpable: Any?) = log(Type.Info, msg, dumpable)
@@ -168,7 +168,7 @@ class DefaultLogger(
 
     override fun info(
         throwable: Throwable
-    ) = log(Type.Info, throwable.printToString(), prefix)
+    ) = log(Type.Info, throwable.asString(), prefix)
 
     override fun debug(msg: String, vararg dumpable: Any?) = log(Type.Debug, msg, dumpable)
 
@@ -180,5 +180,5 @@ class DefaultLogger(
 
     override fun debug(
         throwable: Throwable
-    ) = log(Type.Debug, throwable.printToString(), prefix)
+    ) = log(Type.Debug, throwable.asString(), prefix)
 }

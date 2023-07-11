@@ -4,8 +4,8 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
+import fe.kotlin.extension.forEachWithInfo
 import fe.libredirectkt.LibRedirectService
-import fe.linksheet.extension.forEachElementIndex
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
@@ -34,7 +34,7 @@ interface LogDumpable {
 
             if (obj is List<*>) {
                 return stringBuilder.squareWrapped {
-                    obj.forEachElementIndex { element, _, _, last ->
+                    obj.forEachWithInfo { element, _, _, last ->
                         val result = dumpObject(this, hasher, element)
                         if (result != null && !last) {
                             this.append(",")

@@ -71,7 +71,6 @@ import fe.linksheet.extension.android.buildSendTo
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
-import fe.linksheet.extension.android.selfIntent
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.android.startPackageInfoActivity
@@ -87,6 +86,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.PrivateBrowsingBrowser
+import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async

@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
 import fe.httpkt.Request
-import fe.linksheet.extension.createLogger
+import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.supabaseApiKey
 import fe.linksheet.supabaseFunctionHost

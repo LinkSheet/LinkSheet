@@ -2,9 +2,9 @@ package fe.linksheet.module.resolver.urlresolver.amp2html
 
 import fe.amp2htmlkt.Amp2Html
 import fe.httpkt.Request
+import fe.httpkt.ext.getGZIPOrDefaultStream
 import fe.httpkt.isHttpSuccess
-import fe.httpkt.util.getGZIPOrDefaultStream
-import fe.linksheet.extension.createLogger
+import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest

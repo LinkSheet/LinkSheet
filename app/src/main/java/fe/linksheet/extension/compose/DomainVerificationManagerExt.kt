@@ -5,7 +5,7 @@ import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
-import fe.linksheet.extension.filterIfFilterIsNotNull
+import fe.kotlin.extension.filterIfFilterIsNotNull
 import fe.linksheet.extension.android.queryAllResolveInfos
 import fe.linksheet.extension.android.toDisplayActivityInfos
 

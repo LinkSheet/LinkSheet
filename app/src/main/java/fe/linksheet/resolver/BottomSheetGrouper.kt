@@ -6,8 +6,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
+import fe.kotlin.extension.findOrNull
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.extension.findIndexed
 import fe.linksheet.extension.android.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
@@ -21,7 +21,7 @@ object BottomSheetGrouper {
     ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         val grouped = current.toMutableList()
 
-        val filteredPair = grouped.findIndexed {
+        val filteredPair = grouped.findOrNull {
             isLastChosenPosition(it.activityInfo, lastChosenPreferredApp?.componentName)
         }
 

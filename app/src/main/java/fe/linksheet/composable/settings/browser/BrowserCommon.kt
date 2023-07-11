@@ -30,7 +30,6 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.DividedRow
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.Texts
-import fe.linksheet.extension.associateWith
 import fe.linksheet.extension.compose.items
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -74,19 +73,18 @@ fun <T : Any, M> BrowserCommonScaffold(
 
 
             if (state != null) {
-                val map = values.associateWith(rows)
-                if (map != null) {
-                    items(items = map, key = { rowKey(it) }) { value, row ->
-                        BrowserCommonRadioButtonRow(
-                            value = value,
-                            state = state,
-                            viewModel = viewModel,
-                            headlineId = row.headline,
-                            subtitleId = row.subtitle,
-                            clickHook = row.clickHook
-                        )
-                    }
+                val map = values.zip(rows).toMap()
+                items(items = map, key = { rowKey(it) }) { value, row ->
+                    BrowserCommonRadioButtonRow(
+                        value = value,
+                        state = state,
+                        viewModel = viewModel,
+                        headlineId = row.headline,
+                        subtitleId = row.subtitle,
+                        clickHook = row.clickHook
+                    )
                 }
+
 
                 item(key = "selector") {
                     DividedRow(

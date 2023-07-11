@@ -7,8 +7,8 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
+import fe.kotlin.extension.asString
 import fe.linksheet.activity.CrashHandlerActivity
-import fe.linksheet.extension.printToString
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
@@ -47,7 +47,7 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                putExtra(CrashHandlerActivity.extraCrashException, exception.printToString())
+                putExtra(CrashHandlerActivity.extraCrashException, exception.asString())
             }
 
             startActivity(crashIntent)

@@ -6,7 +6,7 @@ import fe.android.preference.helper.BasePreference.Preference.Companion.booleanP
 import fe.android.preference.helper.BasePreference.Preference.Companion.intPreference
 import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
 import fe.android.preference.helper.PreferenceRepository
-import fe.linksheet.extension.toHex
+import fe.kotlin.extension.toHexString
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.log.loggerHmac
@@ -76,7 +76,7 @@ object Preferences {
         booleanPreference("enable_request_private_browsing_button")
 
     val logKey = stringPreference("log_key") {
-        CryptoUtil.getRandomBytes(loggerHmac.keySize).toHex()
+        CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
     }
 
     private val preferencesLoggable = listOf(

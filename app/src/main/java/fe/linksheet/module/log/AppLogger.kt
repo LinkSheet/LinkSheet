@@ -3,11 +3,11 @@ package fe.linksheet.module.log
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import fe.kotlin.extension.decodeToString
+import fe.kotlin.extension.encodeFromString
+import fe.kotlin.extension.toUnixMillis
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.extension.decodeToString
-import fe.linksheet.extension.encodeFromString
-import fe.linksheet.extension.toMillis
 import fe.linksheet.util.SingletonHolder
 import fe.stringbuilder.util.buildSeparatedString
 import java.io.File
@@ -68,7 +68,7 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
     ) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt).delete()
 
     fun deleteOldLogs() {
-        val startupMillis = startupTime.minusWeeks(2).toMillis()
+        val startupMillis = startupTime.minusWeeks(2).toUnixMillis()
         getLogFiles().filter { it.toLong() < startupMillis }.forEach {
             deleteLogFile(it)
         }

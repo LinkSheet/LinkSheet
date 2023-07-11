@@ -6,14 +6,14 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.android.preference.helper.PreferenceRepository
+import fe.kotlin.extension.filterIf
+import fe.kotlin.extension.groupBy
+import fe.kotlin.extension.mapToSet
 import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
-import fe.linksheet.extension.filterIf
-import fe.linksheet.extension.groupBy
-import fe.linksheet.extension.mapToSet
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo

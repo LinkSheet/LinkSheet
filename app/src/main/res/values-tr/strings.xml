@@ -1,2 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="single_tap">Tek dokunmayı etkinleştir</string>
+    <string name="single_tap_explainer">Uygulamaları açmak için iki yerine yalnızca bir dokunuş gerekir; Uygulamayı seçmek için uzun basın, uygulama bilgilerini açmak için çift tıklayın</string>
+    <string name="enable_send_button_explainer">Alt sayfada, url\'yi bir \"Şununla paylaş\" menüsünden seçmişsiniz gibi diğer uygulamalarla paylaşmanıza izin veren bir düğme gösterir</string>
+    <string name="usage_stats_sorting_explainer">Android sistem kullanım istatistiklerini sıralama algoritmasına dahil edin. İlk geçişte izin istenir.</string>
+    <string name="preferred_browser">Tercih edilen tarayıcı</string>
+    <string name="none">Hiçbiri</string>
+    <string name="none_explainer">Yalnızca yerel uygulamaları listeleyin, tüm tarayıcıları kaldırın. Yalnızca tek bir yerel uygulama varsa, otomatik olarak açılır. Yerel uygulama yoksa tüm tarayıcılar listelenir.</string>
+    <string name="enable_send_button">\"Paylaş\" düğmesini etkinleştirin</string>
+    <string name="preferred_apps_explainer">Tercih edilen uygulamalar, belirli ana bilgisayarları \"Her zaman\" açacak şekilde ayarladığınız uygulamalardır</string>
+    <string name="always_show_package_name_explainer">Yalnızca uygulama adları yerine her zaman paket adlarını göster</string>
+    <string name="just_once">Sadece bir kere</string>
+    <string name="always">Her zaman</string>
+    <string name="open_with_app">%s ile aç</string>
+    <string name="use_a_different_app">Farklı bir uygulama kullanın</string>
+    <string name="opening_with_app">%s ile açılıyor</string>
+    <string name="preferred_apps">Tercih edilen uygulamalar</string>
+    <string name="preferred_apps_settings">Tercih edilen uygulama ayarları</string>
+    <string name="set_as_browser">Tarayıcı olarak ayarla</string>
+    <string name="apps_which_can_open_links">Bağlantıları açabilen uygulamalar</string>
+    <string name="no_preferred_apps_set_yet">Henüz hiçbir uygulama tercih edilen olarak ayarlanmadı.</string>
+    <string name="search">Arama</string>
+    <string name="copy">Url\'yi kopyala</string>
+    <string name="enable_copy_button">Kopyalamayı etkinleştir düğmesi</string>
+    <string name="url_copied">URL panoya kopyalandı</string>
+    <string name="confirm">Onayla</string>
+    <string name="clear">Temizle</string>
+    <string name="usage_stats_sorting">Uygulamaları kullanıma göre sırala</string>
+    <string name="always_ask">Her zaman sor</string>
+    <string name="always_ask_explainer">Her zaman tüm tarayıcıları listele</string>
+    <string name="no_app_to_handle_link_found">Bağlantıyı işlemek için uygulama bulunamadı!</string>
+    <string name="open_settings">Ayarları aç</string>
+    <string name="no_such_app_found">Böyle bir uygulama bulunamadı!</string>
+    <string name="send_to">Şununla paylaş</string>
+    <string name="always_show_package_name">Paket adını her zaman göster</string>
+    <string name="open_with">Bununla aç</string>
+    <string name="enable_copy_button_explainer">Alt sayfada bir \"URL\'yi kopyala\" düğmesini gösterir</string>
+    <string name="preferred_browser_explainer">Tercih edilen tarayıcı modunu ayarla</string>
+    <string name="set_as_browser_explainer">Bu uygulamayı varsayılan tarayıcı yapmak için buraya dokunun</string>
+    <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>
+    <string name="apps_which_can_open_links_explainer_2">LinkSheet\'in davranışına müdahale edebilecek tüm uygulamaları listeler</string>
+</resources>

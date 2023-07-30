@@ -47,7 +47,7 @@ class LibRedirectResolver(
 
     sealed interface LibRedirectResult {
         class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
-        object NotRedirected : LibRedirectResult
+        data object NotRedirected : LibRedirectResult
     }
 
     private fun getInstanceUrl(default: LibRedirectDefault): String {

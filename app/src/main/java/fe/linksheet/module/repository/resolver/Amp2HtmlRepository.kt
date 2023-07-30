@@ -10,7 +10,7 @@ class Amp2HtmlRepository(
 ) : ResolverRepository<Amp2HtmlMapping>(dao, "canonicalUrl") {
 
     private val amp2HtmlCache by lazy {
-        getResolvedUrlMap(CachedUrlsLoader.loadCachedUrlsJson(CachedUrlsResource.getBuiltInAmp2HtmlUrlsJson()!!))
+        getResolvedUrlMap(CachedUrlsLoader.loadCachedUrlsJson(CachedUrlsResource.getBuiltInAmp2HtmlUrlsJson()!!)!!)
     }
 
     override fun getBuiltInCachedForUrl(inputUrl: String) = amp2HtmlCache[inputUrl]

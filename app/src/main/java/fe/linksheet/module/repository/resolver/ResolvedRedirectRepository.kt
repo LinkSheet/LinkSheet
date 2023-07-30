@@ -10,7 +10,7 @@ class ResolvedRedirectRepository(
 ) : ResolverRepository<ResolvedRedirect>(dao, "resolvedUrl") {
 
     private val redirectCacheObject by lazy {
-        getResolvedUrlMap(CachedUrlsLoader.loadCachedUrlsJson(CachedUrlsResource.getBuiltInResolvedUrlsJson()!!))
+        getResolvedUrlMap(CachedUrlsLoader.loadCachedUrlsJson(CachedUrlsResource.getBuiltInResolvedUrlsJson()!!)!!)
     }
 
     override fun getBuiltInCachedForUrl(inputUrl: String) = redirectCacheObject[inputUrl]

@@ -56,7 +56,7 @@ class PreferredBrowserViewModel(
     private val whitelistedInAppBrowsers = getWhitelistedBrowsers(whitelistedInAppBrowsersPackages)
 
     private fun getWhitelistedBrowsers(
-        packages: Flow<HashSet<String>>
+        packages: Flow<MutableSet<String>>
     ) = browsers.combine(packages) { browsers, pkgs ->
         browsers.map {
             it to (it.packageName in pkgs)

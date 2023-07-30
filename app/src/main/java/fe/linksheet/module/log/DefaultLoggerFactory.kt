@@ -1,7 +1,7 @@
 package fe.linksheet.module.log
 
 import fe.android.preference.helper.PreferenceRepository
-import fe.kotlin.extension.decodeFromHex
+import fe.kotlin.extension.decodeHex
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.util.CryptoUtil
 import org.koin.dsl.module
@@ -12,7 +12,7 @@ val loggerHmac = CryptoUtil.HmacSha("HmacSHA256", 64)
 val defaultLoggerFactoryModule = module {
     single<LoggerFactory> {
         val preferenceRepository = get<PreferenceRepository>()
-        val logKey = preferenceRepository.getOrWriteInit(Preferences.logKey).decodeFromHex()
+        val logKey = preferenceRepository.getOrWriteInit(Preferences.logKey).decodeHex()
 
         DefaultLoggerFactory(logKey)
     }

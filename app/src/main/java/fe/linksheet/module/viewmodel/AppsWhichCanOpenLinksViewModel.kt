@@ -34,9 +34,7 @@ class AppsWhichCanOpenLinksViewModel(
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }.combine(
-        linkHandlingAllowed
-    ) { apps, _ ->
+    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }.combine(linkHandlingAllowed) { apps, _ ->
         apps.filter {
             it.resolvedInfo.hasVerifiedDomains(domainVerificationManager!!, linkHandlingAllowed.value)
         }

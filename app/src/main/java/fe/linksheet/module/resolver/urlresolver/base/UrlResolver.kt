@@ -1,7 +1,9 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
 import android.net.Uri
-import fe.gson.extensions.string
+import fe.gson.extension.json.element.string
+import fe.gson.extension.json.`object`.asString
+import fe.gson.extension.json.`object`.asStringOrNull
 import fe.httpkt.ext.readToString
 import fe.httpkt.isHttpSuccess
 import fe.httpkt.json.readToJson
@@ -90,7 +92,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
                 val obj = con.readToJson().asJsonObject
                 val remoteResolveUrlField = resolverRepository.remoteResolveUrlField
 
-                return obj.string(remoteResolveUrlField)?.let {
+                return obj.asStringOrNull(remoteResolveUrlField)?.let {
                     Result.success(ResolveType.Remote(it))
                 } ?: failure(
                     "Something went wrong while reading the response (attempted to get '$remoteResolveUrlField' on $obj)"

@@ -1,18 +1,14 @@
 package fe.linksheet.module.log
 
 import android.content.Context
-import android.os.Build
-import android.util.Log
-import fe.kotlin.extension.decodeToString
-import fe.kotlin.extension.encodeFromString
+import fe.kotlin.extension.decodeBase64
+import fe.kotlin.extension.encodeBase64
 import fe.kotlin.extension.toUnixMillis
-import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.util.SingletonHolder
 import fe.stringbuilder.util.buildSeparatedString
 import java.io.File
 import java.time.LocalDateTime
-import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
@@ -29,8 +25,8 @@ data class LogEntry(
         item { append(type) }
         item { append(unixMillis) }
         item { append(prefix) }
-        item { append(Base64.encodeFromString(message)) }
-        item { append(Base64.encodeFromString(redactedMessage)) }
+        item { append(message.encodeBase64()) }
+        item { append(redactedMessage.encodeBase64()) }
     }
 
     companion object {
@@ -41,8 +37,8 @@ data class LogEntry(
                 type,
                 unixMillis.toLong(),
                 prefix,
-                Base64.decodeToString(message),
-                Base64.decodeToString(redactedMessage)
+                message.decodeBase64(),
+                redactedMessage.decodeBase64()
             )
         }
     }

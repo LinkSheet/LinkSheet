@@ -1,0 +1,7 @@
+.DS_Store
+/.gradle
+/.idea
+/build
+/gradle/wrapper/*
+/gradlew*
+/local.properties

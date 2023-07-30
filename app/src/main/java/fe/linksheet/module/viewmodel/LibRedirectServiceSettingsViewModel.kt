@@ -10,14 +10,15 @@ import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.LibRedirectServiceState
 import fe.linksheet.extension.android.ioLaunch
 import fe.android.preference.helper.PreferenceRepository
+import fe.libredirectkt.LibRedirectInstance
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
-import fe.linksheet.util.cleanHttpsScheme
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toCollection
 
 class LibRedirectServiceSettingsViewModel(
     val context: Application,
@@ -32,12 +33,12 @@ class LibRedirectServiceSettingsViewModel(
         LibRedirectLoader.loadBuiltInServices()
     }.combine(serviceKey) { services, key -> services.find { it.key == key } }
 
-    val frontends = service.map { service ->
-        service?.frontends?.filter { it.defaultInstance() != null } ?: emptyList()
+    private val builtinInstances = flowOfLazy {
+        LibRedirectLoader.loadBuiltInInstances()
     }
 
-    val builtinInstances = flowOfLazy {
-        LibRedirectLoader.loadBuiltInInstances()
+    val frontends = service.combine(builtinInstances) { service, instances ->
+        service?.frontends?.filter { it.defaultInstance(instances) != null } ?: emptyList()
     }
 
     val default = defaultRepository.getByServiceKeyFlow(serviceKey)
@@ -45,6 +46,10 @@ class LibRedirectServiceSettingsViewModel(
 
     val selectedFrontend = MutableStateFlow<LibRedirectFrontend?>(null)
     val selectedInstance = MutableStateFlow<String?>(null)
+
+    val instancesForSelected = builtinInstances.combine(selectedFrontend) { instances, selected ->
+        instances.find { it.frontendKey == selected?.key }?.hosts?.sorted()
+    }
 
     val enabled = stateRepository.isEnabledFlow(serviceKey.value)
         .combine(serviceKey) { serviceState, _ -> serviceState }
@@ -54,12 +59,18 @@ class LibRedirectServiceSettingsViewModel(
             service?.frontends?.find { it.key == default.frontendKey }
         } else service?.defaultFrontend
 
-        val instance = default?.instanceUrl ?: frontend?.defaultInstance()
+        frontend to default
+    }.combine(builtinInstances) { pair, instances ->
+        val (frontend, default) = pair
+        val instance = default?.instanceUrl ?: frontend?.defaultInstance(instances)
         SelectedState(frontend, instance)
     }
 
-    fun LibRedirectFrontend.defaultInstance() = LibRedirect
-        .getDefaultInstanceForFrontend(key)?.firstOrNull()
+    private lateinit var instances: List<LibRedirectInstance>
+
+    private fun LibRedirectFrontend.defaultInstance(instances: List<LibRedirectInstance>) =
+        LibRedirect
+            .getDefaultInstanceForFrontend(key, instances)
 
     data class SelectedState(val frontend: LibRedirectFrontend?, val instance: String?)
 
@@ -69,16 +80,16 @@ class LibRedirectServiceSettingsViewModel(
                 selectedFrontend.value = it.frontend
                 selectedInstance.value = it.instance
             }
+
+            builtinInstances.collectLatest {
+                instances = it
+            }
         }
     }
 
     fun updateSelectedFrontend(frontend: LibRedirectFrontend) {
         selectedFrontend.value = frontend
-        selectedInstance.value = frontend.defaultInstance()
-    }
-
-    val instances = builtinInstances.combine(selectedFrontend) { instances, selected ->
-        instances.find { it.frontendKey == selected?.key }?.hosts?.sorted()
+        selectedInstance.value = frontend.defaultInstance(instances)
     }
 
     fun updateLibRedirectState(serviceKey: String, enabled: Boolean) = ioLaunch {

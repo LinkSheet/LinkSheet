@@ -24,3 +24,4 @@
 -dontwarn javax.annotation.WillClose
 
 -keep class fe.linksheet.**
+-dontwarn fe.gson.extensions.JsonElementExtKt

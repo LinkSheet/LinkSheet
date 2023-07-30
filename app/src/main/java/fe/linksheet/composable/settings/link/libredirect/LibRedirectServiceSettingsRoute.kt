@@ -51,7 +51,7 @@ fun LibRedirectServiceSettingsRoute(
     val selectedFrontend by viewModel.selectedFrontend.ioState()
     val selectedInstance by viewModel.selectedInstance.ioState()
     val enabled by viewModel.enabled.ioState()
-    val instances by viewModel.instances.ioState()
+    val instances by viewModel.instancesForSelected.ioState()
 
     var expanded by remember { mutableStateOf(false) }
 

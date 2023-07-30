@@ -30,8 +30,8 @@ class LibRedirectResolver(
                 savedDefault.frontendKey to getInstanceUrl(savedDefault)
             } else {
                 service.defaultFrontend.key to LibRedirect.getDefaultInstanceForFrontend(
-                    service.defaultFrontend.key
-                )?.firstOrNull()!!
+                    service.defaultFrontend.key, libRedirectInstances
+                )!!
             }
 
             val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)

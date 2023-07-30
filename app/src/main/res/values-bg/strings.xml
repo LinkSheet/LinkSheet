@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="open_with_app">Отваряне с/ъс %s</string>
-    <string name="enable_send_button_explainer">Показва бутон в долното меню, който ви позволява да споделите адреса с други приложения, все едно сте го избрали от менюто за споделяне</string>
+    <string name="enable_send_button_explainer">Добавя в долното меню бутон, който дава възможност да споделите адреса с други приложения, все едно сте го избрали от менюто за споделяне</string>
     <string name="bottom_sheet_explainer">Сортиране, бутони и други</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
     <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, разположен в supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
@@ -16,14 +16,14 @@
     <string name="donate_explainer">Дарете криптовалута на автора</string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
-    <string name="single_tap_explainer">Изисква се само едно докосване вместо две за отваряне на приложенията; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
+    <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
     <string name="license_apache_2">Лиценз Apache 2.0</string>
-    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
+    <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне с/ъс %s</string>
     <string name="preferred_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
     <string name="use_a_different_app">Изберете друго приложение</string>
-    <string name="apps_which_can_open_links">Приложения, които отварят препратки</string>
+    <string name="apps_which_can_open_links">Приложения, отварящи препратки</string>
     <string name="search">Търсене</string>
     <string name="url_copied">Адресът е копиран в междинната памет</string>
     <string name="single_tap">Единично докосване</string>
@@ -58,15 +58,15 @@
     <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
     <string name="just_once">Веднъж</string>
     <string name="preferred_apps_settings">Настройки на предпочитаните приложения</string>
-    <string name="copy">Копиране на адреса</string>
+    <string name="copy">Копиране</string>
     <string name="confirm">Потвърждаване</string>
     <string name="clear">Изчистване</string>
     <string name="always">Винаги</string>
     <string name="use_text_share_copy_buttons">Елементарни бутони в менюто</string>
     <string name="use_text_share_copy_buttons_explainer">Замества бутоните за копиране, споделяне и изтегляне с текстови препратки</string>
     <string name="apps_which_can_open_links_explainer_2">Списък на приложенията, които биха могли да попречат на работата на LinkSheet</string>
-    <string name="no_preferred_apps_set_yet">Все още не сте избрали предпочитани приложения.</string>
-    <string name="enable_copy_button_explainer">Показва бутон „Копиране на адреса“ в долното меню</string>
+    <string name="no_preferred_apps_set_yet">Не сте избрали предпочитани приложения.</string>
+    <string name="enable_copy_button_explainer">Добавя в долното меню бутон, който копира адреса</string>
     <string name="enable_libredirect">Използване на LibRedirect</string>
     <string name="apps_which_can_open_links_explainer">Докоснете приложение и ще се отвори менюто „Отваряне по подразбиране“, откъдето можете да забраните автоматичното отваряне на препратки</string>
     <string name="open_with_linksheet">Отваряне с LinkSheet</string>
@@ -86,17 +86,17 @@
     <string name="set_as_browser_explainer">За да направите приложението браузър по подразбиране докоснете тук</string>
     <string name="preferred_browser">Предпочитан браузър</string>
     <string name="preferred_browser_explainer">Задава режима за избор на приложение</string>
-    <string name="always_ask">Пита всеки път</string>
+    <string name="always_ask">Всеки път да пита</string>
     <string name="none">Приоритет на най-ползвания</string>
-    <string name="none_explainer">Използва само приложения, без браузъри. Ако има само едно приложение, то ще бъде използвано автоматично. Ако няма приложения, ще бъдат показани всички браузъри.</string>
+    <string name="none_explainer">Използват се само приложения, не и браузъри. Ако има само едно приложение, то ще бъде използвано автоматично. Ако няма приложения, ще бъдат показани всички браузъри.</string>
     <string name="always_show_package_name">Името на пакета е винаги видимо</string>
-    <string name="always_show_package_name_explainer">До името на приложението се показва и името на пакета</string>
+    <string name="always_show_package_name_explainer">До името на приложението се показва и името на пакета. Важи за цялото приложение.</string>
     <string name="disable_toasts">Изключване на плуващите съобщения</string>
     <string name="disable_toasts_explainer">Никога не се показват плуващи съобщения</string>
     <string name="remove_all">Премахване на всички</string>
     <string name="add_all">Добавяне на всички</string>
     <string name="hide_after_copying">Скриване след копиране</string>
-    <string name="hide_after_copying_explainer">Долното меню се скрива след докосване на „Копиране на адреса“</string>
+    <string name="hide_after_copying_explainer">Долното меню се скрива след докосване на бутона за копиране</string>
     <string name="set_as_browser_done">Приложението е зададено като подразбиран браузър!</string>
     <string name="display_grid_layout">Таблична подредба</string>
     <string name="browser_status">Състояние</string>
@@ -104,6 +104,42 @@
     <string name="whitelisted_browsers">Избрани браузъри</string>
     <string name="whitelisted">Избрани</string>
     <string name="display_grid_layout_explainer">Подрежда долното меню в редове и колони вместо списък</string>
-    <string name="preferred_apps_explainer">Предпочитаните приложения са тези, които сте настроили да отварят винаги определени адреси</string>
+    <string name="preferred_apps_explainer">Предпочитаните приложения са тези, които сте настроили винаги да отварят определени адреси</string>
     <string name="no_apps_which_can_handle_links_found">Не са намерени приложения, които да обработят препратките!</string>
+    <string name="use_clear_urls">Използване на ClearURLs</string>
+    <string name="in_app">Вграден</string>
+    <string name="normal">Обикновен</string>
+    <string name="use_unified_preferred_browser">Използване на общи настройки</string>
+    <string name="enable_ignore_libredirect_button">Бутон за пренебрегване на LibRedirect</string>
+    <string name="options">Настройки</string>
+    <string name="enable_request_private_browsing_button_explainer">Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим. Поддържани браузъри: %s</string>
+    <string name="request_private_browsing">Поверителен</string>
+    <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
+    <string name="selected_browser_explainer">Този браузър ще бъде отварян автоматично ако липсва приложение, което да обработи посетената препратка</string>
+    <string name="apps_explainer">Предпочитани приложения и такива, отварящи препратки</string>
+    <string name="github_explainer">Хранилище на изходния код</string>
+    <string name="open_copied_link">Посещаване на копираната препратка</string>
+    <string name="follow_only_known_trackers">Последване на известни проследявания</string>
+    <string name="theme">Тема</string>
+    <string name="theme_explainer">Променя темата на приложението</string>
+    <string name="system">Като системната</string>
+    <string name="light">Светла</string>
+    <string name="dark">Тъмна</string>
+    <string name="amoled_black">Черна за AMOLED</string>
+    <string name="fastfoward_rules">Използване на правила на FastForward</string>
+    <string name="resolved_via">%s получено от %s</string>
+    <string name="instance">Екземпляр</string>
+    <string name="add">Добавяне</string>
+    <string name="in_app_browser">Вграден в приложението браузър</string>
+    <string name="use_app_settings_explainer">Всяко приложение решава дали да използва вградения си браузър</string>
+    <string name="in_app_browser_explainer">Задава режима на вградения браузър</string>
+    <string name="always_disable_explainer">Вграденият браузър не се използва без значение от настройката на приложението</string>
+    <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва без значение от настройката на приложението</string>
+    <string name="browser_explainer">Режим на браузъра и настройки на вградения в приложенията браузър</string>
+    <string name="always_show_package_name_disclaimer">Този превключвател ще бъде преместен на друго място в бъдещо издание.</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">Добавянето на много бутони в долното меню в момента може да доведе до отрязване/липсващи бутони.</string>
+    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
+    <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
+    <string name="use_unified_preferred_browser_explainer">Когато е отметнато настройките по-долу се прилагат както за обикновената, така и за обработка на препратки в приложението. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
+    <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
 </resources>

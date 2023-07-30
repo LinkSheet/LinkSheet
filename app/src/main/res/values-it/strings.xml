@@ -115,4 +115,29 @@
     <string name="follow_redirects_external_service_explainer">Segui i reindirizzamenti utilizzando un\'API distribuita su supabase.com (<annotation url="https://supabase.com/privacy">Informativa sulla privacy</annotation>)</string>
     <string name="follow_only_known_trackers">Segui solo tracker noti</string>
     <string name="amp2html">Amp2Html</string>
+    <string name="apps_explainer">App preferite e app che possono aprire link</string>
+    <string name="loading_link">Caricamento link…</string>
+    <string name="resolved_via">%s risolto tramite %s</string>
+    <string name="redirect_resolve_type_remote">server remoto</string>
+    <string name="redirect_resolve_type_local">risolutore locale</string>
+    <string name="redirect_resolve_type_not_resolved">nessuno</string>
+    <string name="normal">Normale</string>
+    <string name="ignore_libredirect">Ignora LibRedirect</string>
+    <string name="app_crashed">Sembra che LinkSheet si sia arrestato in modo anomalo, controlla l\'errore di seguito</string>
+    <string name="options">Opzioni</string>
+    <string name="no_apps_found">Nessuna app trovata.</string>
+    <string name="usage_stats_sorting_explainer">Includi le statistiche di utilizzo nell\'algoritmo di ordinamento. L\'autorizzazione è richiesta alla prima attivazione.</string>
+    <string name="follow_only_known_trackers_explainer">Tenta di seguire i reindirizzamenti solo quando l\'host è noto per essere un tracker/reindirizzamento. Sarà sempre abilitato se \"Segui reindirizzamenti tramite servizio esterno\" è abilitato.</string>
+    <string name="copy_to_clipboard">Copia negli appunti</string>
+    <string name="log">Log</string>
+    <string name="redact_log">Censura log (raccomandato, disabilitarlo potrebbe far trapelare i nomi dei pacchetti e degli host)</string>
+    <string name="include_settings">Includi impostazioni (consigliato)</string>
+    <string name="log_privacy">Per informazioni sulla privacy dei log, puoi visitare questo <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
+    <string name="delete">Elimina</string>
+    <string name="enable_amp2html_explainer">Reindirizza le pagine AMP alla loro normale versione web. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">implicazioni relative alla privacy</annotation></string>
+    <string name="redirect_resolve_type_local_cache">cache locale</string>
+    <string name="services">Servizi</string>
+    <string name="current_session">Sessione in corso</string>
+    <string name="enable_amp2html">Abilita Amp2Html</string>
+    <string name="request_timeout_explainer_disclaimer">Attualmente non disponibile in modalità griglia</string>
 </resources>

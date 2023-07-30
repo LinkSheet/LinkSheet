@@ -203,4 +203,5 @@
     <string name="disclaimer_bottom_sheet_many_buttons">Enabling a lot of buttons in the bottom sheet currently may lead to cut off/glitching buttons.</string>
     <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
     <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
+    <string name="instance_not_available_anymore">Instance is not available anymore!</string>
 </resources>

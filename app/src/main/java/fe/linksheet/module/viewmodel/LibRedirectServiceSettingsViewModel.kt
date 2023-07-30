@@ -16,6 +16,7 @@ import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.toCollection
@@ -81,15 +82,18 @@ class LibRedirectServiceSettingsViewModel(
                 selectedInstance.value = it.instance
             }
 
-            builtinInstances.collectLatest {
+            builtinInstances.collect {
                 instances = it
             }
         }
     }
 
     fun updateSelectedFrontend(frontend: LibRedirectFrontend) {
-        selectedFrontend.value = frontend
-        selectedInstance.value = frontend.defaultInstance(instances)
+        if(this::instances.isInitialized){
+            selectedFrontend.value = frontend
+            selectedInstance.value = frontend.defaultInstance(instances)
+        }
+
     }
 
     fun updateLibRedirectState(serviceKey: String, enabled: Boolean) = ioLaunch {

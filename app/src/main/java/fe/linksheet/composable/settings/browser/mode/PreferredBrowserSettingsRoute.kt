@@ -74,6 +74,7 @@ fun PreferredBrowserSettingsRoute(
                 checked = viewModel.unifiedPreferredBrowser.value,
                 onChange = { viewModel.updateState(viewModel.unifiedPreferredBrowser, it) },
                 headline = stringResource(id = R.string.use_unified_preferred_browser),
+                subtitle = stringResource(id = R.string.use_unified_preferred_browser_explainer)
             )
             Column(modifier = Modifier.padding(horizontal = 10.dp)) {
                 if (!viewModel.unifiedPreferredBrowser.value) {

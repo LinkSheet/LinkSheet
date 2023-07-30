@@ -107,8 +107,23 @@ fun BottomSheetSettingsRoute(
                 SwitchRow(
                     state = viewModel.enableIgnoreLibRedirectButton,
                     viewModel = viewModel,
-                    headlineId = R.string.enable_ignore_libredirect_button,
-                    subtitleId = R.string.enable_ignore_libredirect_button_explainer
+                    headline = stringResource(id = R.string.enable_ignore_libredirect_button),
+                    subtitleBuilder = { _ ->
+                        SubtitleText(subtitle = stringResource(id = R.string.enable_ignore_libredirect_button_explainer))
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            shape = RoundedCornerShape(12.dp),
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.disclaimer_bottom_sheet_many_buttons),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.padding(all = 10.dp)
+                            )
+                        }
+                    }
                 )
             }
 
@@ -136,8 +151,23 @@ fun BottomSheetSettingsRoute(
                 SwitchRow(
                     state = viewModel.alwaysShowPackageName,
                     viewModel = viewModel,
-                    headlineId = R.string.always_show_package_name,
-                    subtitleId = R.string.always_show_package_name_explainer
+                    headline = stringResource(id = R.string.always_show_package_name),
+                    subtitleBuilder = { _ ->
+                        SubtitleText(subtitle = stringResource(id = R.string.always_show_package_name_explainer))
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            shape = RoundedCornerShape(12.dp),
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.always_show_package_name_disclaimer),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.padding(all = 10.dp)
+                            )
+                        }
+                    }
                 )
             }
 

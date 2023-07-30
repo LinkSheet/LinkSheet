@@ -38,7 +38,7 @@
     <string name="send_to">Share to</string>
     <string name="preferred_apps_explainer">Preferred apps are the apps you set to \"Always\" open certain hosts</string>
     <string name="always_show_package_name">Always show package name</string>
-    <string name="always_show_package_name_explainer">Always show the package names instead of just app names</string>
+    <string name="always_show_package_name_explainer">Always show the package names instead of just app names. This applies to the whole app.</string>
     <string name="disable_toasts">Disable toasts</string>
     <string name="disable_toasts_explainer">Never show any toast messages</string>
     <string name="remove_all">Remove all</string>
@@ -200,4 +200,7 @@
     <string name="follow_redirects_builtin_cache_explainer">Use built-in cache (which uses a database export of the external service)</string>
     <string name="redirect_resolve_type_builtin_cache">built-in cache</string>
     <string name="request_timeout_explainer_disclaimer">Currently not available in grid mode</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">Enabling a lot of buttons in the bottom sheet currently may lead to cut off/glitching buttons.</string>
+    <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
+    <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
 </resources>

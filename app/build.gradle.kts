@@ -158,7 +158,7 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.47")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.47")
     implementation("com.gitlab.grrfe:gson-ext:8.0.4")
-    implementation("com.gitlab.grrfe:kotlin-ext:0.0.19")
+    implementation("com.gitlab.grrfe:kotlin-ext:0.0.20")
     implementation("com.github.1fexd:clearurlkt:0.0.22")
     implementation("com.github.1fexd:fastforwardkt:0.0.18")
     implementation("com.github.1fexd:libredirectkt:0.0.16")

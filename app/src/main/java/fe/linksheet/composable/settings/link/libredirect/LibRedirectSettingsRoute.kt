@@ -96,7 +96,7 @@ fun LibRedirectSettingsRoute(
                                 fontStyle = FontStyle.Italic,
                                 subtitle = stringResource(
                                     id = R.string.libredirect_via,
-                                    instanceUrl(instance = instance!!)
+                                    instanceUrl(instance = instance ?: stringResource(id = R.string.instance_not_available_anymore) )
                                 )
                             )
                         }

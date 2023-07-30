@@ -129,7 +129,7 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.0")
+    ksp("androidx.room:room-compiler:2.5.2")
 
     implementation("androidx.webkit:webkit:1.7.0")
 
@@ -156,6 +156,8 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.47")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.47")
     implementation("com.gitlab.grrfe:gson-ext:8.0.4")
+    // compat, should be removed in the future (when all dependencies are updated to use gson-ext)
+    implementation("com.gitlab.grrfe:GSONKtExtensions:2.4.0")
     implementation("com.gitlab.grrfe:kotlin-ext:0.0.20")
     implementation("com.github.1fexd:clearurlkt:0.0.22")
     implementation("com.github.1fexd:fastforwardkt:0.0.18")

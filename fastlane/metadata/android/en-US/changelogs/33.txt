@@ -1,0 +1,8 @@
+* Fix: Many crashes and bugs (see Github for list)
+* LinkSheet is now able to handle In-App links (#53)
+* Added crash handler and logger with privacy focused export options
+* The user may now request to open a link in private browsing (Firefox & derivatives only)
+* Allow user to opt-in to automatically resolve AMP links (#58)
+* Integrations have been updated to match latest upstream behavior
+* Many new translations/languages
+* And lots of refactoring, and UI changes/tweaks

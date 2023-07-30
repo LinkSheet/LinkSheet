@@ -127,7 +127,7 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.4.0")
     implementation("io.insert-koin:koin-androidx-compose:3.4.0")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
 
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
@@ -141,11 +141,11 @@ dependencies {
 
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha03")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha04")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.compose.animation:animation:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.7.0-beta02")
+    implementation("androidx.navigation:navigation-compose:2.7.0-rc01")
 
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
@@ -179,7 +179,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
 
-    testImplementation("io.insert-koin:koin-test:3.4.0")
+    testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")
     testImplementation("junit:junit:4.13.2")
 

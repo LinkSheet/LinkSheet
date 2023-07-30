@@ -6,7 +6,7 @@
     <string name="use_a_different_app">استخدام تطبيق مختلف</string>
     <string name="opening_with_app">الفتح باستخدام %s</string>
     <string name="enable_copy_button_explainer">يعرض زر \"نسخ عنوان الرابط\" في الورقة السفلية</string>
-    <string name="none">لاشيء</string>
+    <string name="none">بدون</string>
     <string name="add_all">إضافة الكل</string>
     <string name="hide_after_copying_explainer">إخفاء الورقة السفلية بعد الضغط على زر \"نسخ عنوان url\"</string>
     <string name="open_with">فتح بواسطة</string>
@@ -50,7 +50,7 @@
     <string name="display_grid_layout_explainer">عرض شبكة بدلا من قائمة في الورقة السفلية</string>
     <string name="enabled">ممكن</string>
     <string name="disabled">معطل</string>
-    <string name="always_show_package_name_explainer">إظهار أسماء الحزم دائما بدلا من أسماء التطبيقات فقط</string>
+    <string name="always_show_package_name_explainer">اعرض دائما أسماء الحزم بدلا من أسماء التطبيقات فقط. هذا ينطبق على التطبيق بأكمله.</string>
     <string name="whitelisted_browsers">المتصفحات المدرجة في القائمة البيضاء</string>
     <string name="disable_toasts">تعطيل الإشعار المنبثق</string>
     <string name="disable_toasts_explainer">لا تظهر أبدا أي رسائل منبثقة</string>
@@ -201,4 +201,7 @@
     <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات استخدام نظام Android في خوارزمية الفرز. يتم طلب الإذن عند التبديل الأول.</string>
     <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
     <string name="request_timeout_explainer_disclaimer">غير متوفر حاليا في وضع الشبكة</string>
+    <string name="always_show_package_name_disclaimer">سيتم نقل هذا المفتاح إلى موقع مختلف في إصدار مستقبلي.</string>
+    <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">قد يؤدي تمكين الكثير من الأزرار في الورقة السفلية حاليا إلى قطع / خلل في الأزرار.</string>
 </resources>

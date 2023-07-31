@@ -32,7 +32,7 @@
     <string name="send_to">Udostępnij</string>
     <string name="preferred_apps_explainer">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
-    <string name="always_show_package_name_explainer">Pokaż nazwy pakietów zamiast samych nazw aplikacji</string>
+    <string name="always_show_package_name_explainer">Zawsze wyświetlaj nazwy pakietów zamiast nazw aplikacji. Dotyczy to całej aplikacji.</string>
     <string name="disable_toasts">Wyłącz powiadomienie toast</string>
     <string name="remove_all">Usuń wszystkie</string>
     <string name="add_all">Dodaj wszystkie</string>
@@ -201,4 +201,8 @@
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego. Obsługiwane przeglądarki: %s</string>
     <string name="request_timeout_explainer_disclaimer">Obecnie niedostępne w trybie siatki</string>
     <string name="usage_stats_sorting_explainer">Uwzględnij statystyki użycia systemu Android w algorytmie sortowania. Żądane jest uprawnienie przy pierwszym przełączeniu.</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">Włączenie wielu przycisków w dolnym panelu może obecnie prowadzić do ich ucinania lub glitchowania.</string>
+    <string name="always_show_package_name_disclaimer">Ten przełącznik zostanie przeniesiony do innej lokalizacji w przyszłej wersji.</string>
+    <string name="use_unified_preferred_browser_explainer">Włączenie tej opcji powoduje zastosowanie poniższych ustawień zarówno do obsługi linków w trybie normalnym, jak i w aplikacji. Użyj poniższych przycisków, aby przełączać się między trybem normalnym a trybem w aplikacji, gdy funkcja ta jest wyłączona.</string>
+    <string name="instance_not_available_anymore">Instancja nie jest już dostępna!</string>
 </resources>

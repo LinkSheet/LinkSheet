@@ -204,4 +204,5 @@
     <string name="always_show_package_name_disclaimer">سيتم نقل هذا المفتاح إلى موقع مختلف في إصدار مستقبلي.</string>
     <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">قد يؤدي تمكين الكثير من الأزرار في الورقة السفلية حاليا إلى قطع / خلل في الأزرار.</string>
+    <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
 </resources>

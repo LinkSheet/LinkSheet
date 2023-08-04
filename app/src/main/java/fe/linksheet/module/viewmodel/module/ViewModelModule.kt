@@ -14,6 +14,7 @@ import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.module.viewmodel.ShizukuViewModel
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
@@ -38,4 +39,5 @@ val viewModelModule = module {
     viewModelOf(::LogTextSettingsViewModel)
     viewModelOf(::CrashHandlerViewerViewModel)
     viewModelOf(::Amp2HtmlSettingsViewModel)
+    viewModelOf(::ShizukuViewModel)
 }

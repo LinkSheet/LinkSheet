@@ -106,6 +106,7 @@ android {
 
     buildFeatures {
         compose = true
+        aidl = true
     }
 
     composeOptions {
@@ -177,6 +178,10 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
+
+    implementation("dev.rikka.shizuku:api:13.1.4")
+    implementation("dev.rikka.shizuku:provider:13.1.4")
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
 
     testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")

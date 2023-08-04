@@ -3,11 +3,9 @@ package fe.linksheet.extension.android
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.google.gson.JsonObject
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
-import fe.linksheet.BuildConfig
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.log.UrlProcessor
 import org.koin.core.component.KoinComponent
@@ -22,7 +20,7 @@ fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).appl
     component = null
 
     if (dropExtras) {
-        replaceExtras(null)
+        replaceExtras(null as? Bundle?)
     }
 }
 

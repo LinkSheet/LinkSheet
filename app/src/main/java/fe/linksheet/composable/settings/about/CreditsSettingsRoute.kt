@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.mastodonRedirectGithub
 import fe.linksheet.openLinkWithGithub
 import fe.linksheet.sealGithub
 
@@ -41,6 +42,16 @@ fun CreditsSettingsRoute(
                     subtitleId = R.string.license_gpl_3,
                     onClick = {
                         uriHandler.openUri(sealGithub)
+                    }
+                )
+            }
+
+            item("mastodon_redirect") {
+                SettingsItemRow(
+                    headlineId = R.string.mastodon_redirect,
+                    subtitleId = R.string.license_mit,
+                    onClick = {
+                        uriHandler.openUri(mastodonRedirectGithub)
                     }
                 )
             }

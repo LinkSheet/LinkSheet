@@ -204,4 +204,13 @@
     <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
     <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
+    <string name="advanced">Advanced</string>
+    <string name="advanced_explainer">Enable advanced features (Shizuku integration, etc.)</string>
+    <string name="shizuku">Shizuku integration</string>
+    <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
+    <string name="enable_shizuku">Enable Shizuku</string>
+    <string name="enable_shizuku_explainer">Enabling this will allow LinkSheet to use Shizuku to interact with system APIs directly. This can be used, for example, to automatically disable all linkhandlers.</string>
+    <string name="shizuku_explainer_short">Interact with system APIs directly</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="license_mit">MIT License</string>
 </resources>

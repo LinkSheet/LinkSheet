@@ -33,12 +33,12 @@ versioning {
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = 25
-        targetSdk = 34
+        targetSdk = 33
         versionCode = versioning.info.tag?.let {
             versioning.info.versionNumber.versionCode
         } ?: (System.currentTimeMillis() / 1000).toInt()
@@ -106,6 +106,7 @@ android {
 
     buildFeatures {
         compose = true
+        aidl = true
     }
 
     composeOptions {
@@ -139,11 +140,11 @@ dependencies {
 
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha04")
+    implementation("androidx.compose.material3:material3:1.1.1")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.compose.animation:animation:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.7.0-rc01")
+    implementation("androidx.navigation:navigation-compose:2.6.0")
 
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
@@ -177,6 +178,10 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
+
+    implementation("dev.rikka.shizuku:api:13.1.4")
+    implementation("dev.rikka.shizuku:provider:13.1.4")
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
 
     testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")

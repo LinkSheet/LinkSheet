@@ -13,6 +13,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.junkfood.seal.ui.common.animatedArgumentRouteComposable
 import com.junkfood.seal.ui.common.animatedComposable
 import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.advancedSettingsRoute
 import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.appsSettingsRoute
 import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
@@ -22,6 +23,8 @@ import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
+import fe.linksheet.composable.settings.advanced.AdvancedSettingsRoute
+import fe.linksheet.composable.settings.advanced.ShizukuSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
@@ -56,6 +59,7 @@ import fe.linksheet.mainRoute
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.settingsRoute
+import fe.linksheet.shizukuSettingsRoute
 import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
@@ -141,6 +145,20 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = themeSettingsRoute) {
                         ThemeSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    animatedComposable(route = advancedSettingsRoute) {
+                        AdvancedSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    animatedComposable(route = shizukuSettingsRoute) {
+                        ShizukuSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
                     }
 
                     animatedComposable(route = debugSettingsRoute) {

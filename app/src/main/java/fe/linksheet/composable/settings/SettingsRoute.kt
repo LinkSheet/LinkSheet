@@ -94,6 +94,18 @@ fun SettingsRoute(
                 )
             }
 
+            item(key = "advanced") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = advancedSettingsRoute,
+                    headlineId = R.string.advanced,
+                    subtitleId = R.string.advanced_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Adb, descriptionId = R.string.advanced)
+                    }
+                )
+            }
+
             item(key = "debug") {
                 SettingsItemRow(
                     navController = navController,
@@ -101,7 +113,7 @@ fun SettingsRoute(
                     headlineId = R.string.debug,
                     subtitleId = R.string.debug_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Adb, descriptionId = R.string.debug)
+                        ColoredIcon(icon = Icons.Default.BugReport, descriptionId = R.string.debug)
                     }
                 )
             }

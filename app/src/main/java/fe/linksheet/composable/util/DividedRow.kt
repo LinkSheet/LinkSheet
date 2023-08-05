@@ -1,5 +1,6 @@
 package fe.linksheet.composable.util
 
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -18,12 +19,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import fe.linksheet.extension.compose.clickable
+import fe.linksheet.extension.compose.enabled
+import fe.linksheet.extension.compose.runIf
 
 @Composable
 fun DividedRow(
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle),
+    enabled: Boolean = true,
     onClick: () -> Unit,
     rightContent: @Composable RowScope.() -> Unit
 ) {
@@ -33,6 +37,27 @@ fun DividedRow(
             HeadlineText(headline = headline)
             subtitleBuilder?.invoke()
         },
+        enabled = enabled,
+        rightContent = rightContent
+    )
+}
+
+@Composable
+fun DividedRow(
+    headline: String,
+    subtitle: String? = null,
+    subtitleBuilder: @Composable ((Boolean) -> Unit)? = buildEnabledSubtitle(subtitle),
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+    rightContent: @Composable RowScope.() -> Unit
+) {
+    DividedRow(
+        onLeftClick = onClick,
+        leftContent = {
+            HeadlineText(headline = headline)
+            subtitleBuilder?.invoke(enabled)
+        },
+        enabled = enabled,
         rightContent = rightContent
     )
 }
@@ -41,6 +66,7 @@ fun DividedRow(
 @Composable
 fun DividedRow(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onLeftClick: (() -> Unit)? = null,
     paddingHorizontal: Dp = defaultHorizontalPadding,
     paddingVertical: Dp = defaultVerticalPadding,
@@ -50,14 +76,17 @@ fun DividedRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = paddingHorizontal, vertical = paddingVertical),
+            .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
+            .enabled(enabled),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .clip(defaultRoundedCornerShape)
-                .clickable(onLeftClick),
+                .runIf(enabled && onLeftClick != null) {
+                    it.clickable(onLeftClick)
+                },
             content = leftContent
         )
 

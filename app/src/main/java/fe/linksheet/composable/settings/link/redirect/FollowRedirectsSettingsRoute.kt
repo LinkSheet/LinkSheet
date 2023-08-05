@@ -12,8 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.android.compose.dialog.helper.dialogHelper
+import fe.fastforwardkt.FastForwardRules
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SliderRow
@@ -29,6 +32,14 @@ fun FollowRedirectsSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: FollowRedirectsSettingsViewModel = koinViewModel()
 ) {
+    val followRedirectsKnownTrackers = dialogHelper<Unit, List<String>, Unit>(
+        fetch = { FastForwardRules.rules["tracker"]?.map { it.toString() } ?: emptyList() },
+        awaitFetchBeforeOpen = true,
+        dynamicHeight = true
+    ) { trackers, close ->
+        FollowRedirectsKnownTrackersDialog(trackers!!, close)
+    }
+
     SettingsScaffold(
         headline = stringResource(id = R.string.follow_redirects),
         onBackPressed = onBackPressed
@@ -70,13 +81,36 @@ fun FollowRedirectsSettingsRoute(
             }
 
             item(key = "follow_only_known_trackers") {
-                SwitchRow(
+                DividedSwitchRow(
                     state = viewModel.followOnlyKnownTrackers,
                     viewModel = viewModel,
                     enabled = viewModel.followRedirects.value && !viewModel.followRedirectsExternalService.value,
-                    headlineId = R.string.follow_only_known_trackers,
-                    subtitleId = R.string.follow_only_known_trackers_explainer
-                )
+                    headline = stringResource(id = R.string.follow_only_known_trackers),
+                    subtitleBuilder = { enabled ->
+                        LinkableTextView(
+                            id = R.string.follow_only_known_trackers_explainer,
+                            style = LocalTextStyle.current.copy(
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontSize = 16.sp,
+                            ),
+                            enabled = enabled,
+                            parentChecked = false,
+                            parentClickListener = {
+                                followRedirectsKnownTrackers.open(Unit)
+                            }
+                        )
+                    }
+                ) {
+                    followRedirectsKnownTrackers.open(Unit)
+                }
+
+//                SwitchRow(
+//                    state = viewModel.followOnlyKnownTrackers,
+//                    viewModel = viewModel,
+//                    enabled = viewModel.followRedirects.value && !viewModel.followRedirectsExternalService.value,
+//                    headlineId = R.string.follow_only_known_trackers,
+//                    subtitleId = R.string.follow_only_known_trackers_explainer
+//                )
             }
 
             item(key = "follow_redirects_external_service") {

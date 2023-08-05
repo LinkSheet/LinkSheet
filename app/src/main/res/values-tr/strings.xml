@@ -9,7 +9,7 @@
     <string name="none_explainer">Yalnızca yerel uygulamaları listeleyin, tüm tarayıcıları kaldırın. Yalnızca tek bir yerel uygulama varsa, otomatik olarak açılır. Yerel uygulama yoksa tüm tarayıcılar listelenir.</string>
     <string name="enable_send_button">\"Paylaş\" düğmesini etkinleştirin</string>
     <string name="preferred_apps_explainer">Tercih edilen uygulamalar, belirli ana bilgisayarları \"Her zaman\" açacak şekilde ayarladığınız uygulamalardır</string>
-    <string name="always_show_package_name_explainer">Yalnızca uygulama adları yerine her zaman paket adlarını göster</string>
+    <string name="always_show_package_name_explainer">Yalnızca uygulama adları yerine her zaman paket adlarını göster. Bu tüm uygulama için geçerlidir.</string>
     <string name="just_once">Sadece bir kere</string>
     <string name="always">Her zaman</string>
     <string name="open_with_app">%s ile aç</string>
@@ -78,7 +78,7 @@
     <string name="loading_link">Bağlantı yükleniyor…</string>
     <string name="display_grid_layout_explainer">Alt sayfada bir liste yerine bir ızgara görüntüleyin</string>
     <string name="browser_status">Tarayıcı durumu</string>
-    <string name="set_as_browser_done">Uygulama, varsayılan tarayıcı olarak ayarlandı!</string>
+    <string name="set_as_browser_done">Uygulama varsayılan tarayıcı olarak ayarlandı!</string>
     <string name="settings">Ayarlar</string>
     <string name="selected_browser_explainer">Hiçbir yerel uygulama tıklanan bağlantıyı işleyemezse bu tarayıcı otomatik olarak açılır</string>
     <string name="bottom_sheet_explainer">Kullanıma göre sırala, kopyala düğmesini etkinleştir, paylaş düğmesini etkinleştir vb.</string>
@@ -88,4 +88,119 @@
     <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullanın (URL\'lerden izleme parametrelerini temizler)</string>
     <string name="links_explainer">Bağlantı manipülasyonu ile ilgili ayarlar</string>
     <string name="follow_redirects_explainer">Alt sayfayı açmadan önce tüm yönlendirmeleri otomatik olarak takip edin. Bunun <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">gizlilikle ilgili sonuçları</annotation> olabilir</string>
+    <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>
+    <string name="follow_redirects_external_service_explainer_privacy_policy">Gizlilik politikası</string>
+    <string name="follow_only_known_trackers">Yalnızca bilinen izleyicileri takip et</string>
+    <string name="theme">Tema</string>
+    <string name="light">Açık</string>
+    <string name="dark">Koyu</string>
+    <string name="amoled_black">Amoled Siyah</string>
+    <string name="fastfoward_rules">FastForward kurallarını kullan</string>
+    <string name="theme_explainer">Uygulamanın temasını değiştirin</string>
+    <string name="system">Sistem</string>
+    <string name="fastfoward_rules_explainer">Deneysel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> kural entegrasyonunu kullanın (bağlantıdan yönlendirmeyi çıkararak bazı ana bilgisayarların yönlendirmelerini atlatın)</string>
+    <string name="follow_redirects_local_cache">Yerel yönlendirme önbelleğini etkinleştir</string>
+    <string name="follow_redirects_local_cache_explainer">Yönlendirmelerin sonucunu yerel olarak önbelleğe al</string>
+    <string name="resolved_via">%s %s aracılığıyla çözüldü</string>
+    <string name="redirect_resolve_type_remote">uzak sunucu</string>
+    <string name="redirect_resolve_type_local">yerel çözücü</string>
+    <string name="redirect_resolve_type_not_resolved">yok</string>
+    <string name="enable_libredirect">LibRedirect\'i etkinleştir</string>
+    <string name="enable_libredirect_explainer">Deneysel <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Önyüz</string>
+    <string name="instance">Oluşum</string>
+    <string name="add">Ekle</string>
+    <string name="select_an_app">Bir uygulama seçin</string>
+    <string name="dont_show_filtered_item">\"Son seçilen uygulama\" bölümünü asla gösterme</string>
+    <string name="dont_show_filtered_item_explainer">Tıklanan sunucunun son kullanılan uygulamasını gösteren üst bölümü asla göstermez</string>
+    <string name="use_text_share_copy_buttons">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" için basit metin düğmeleri kullan</string>
+    <string name="preview_url">URL\'yi önizle</string>
+    <string name="download">İndir</string>
+    <string name="enable_downloader">İndiriciyi etkinleştir</string>
+    <string name="downloader_url_mime_type">URL\'den mime türünü kullan</string>
+    <string name="random_instance">Rastgele oluşum</string>
+    <string name="app_name">LinkSheet</string>
+    <string name="always_disable_explainer">Uygulamanın ne kullanmak istediğine bakmaksızın uygulama içi tarayıcıyı her zaman devre dışı bırakılır</string>
+    <string name="browser">Tarayıcı</string>
+    <string name="browser_explainer">Tarayıcı modu ve uygulama içi tarayıcı ayarları</string>
+    <string name="disable_in_selected_explainer">Uygulamanın ne kullanmak istediğinden bağımsız olarak seçilen uygulamalarda uygulama içi tarayıcıyı devre dışı bırakır</string>
+    <string name="use_unified_preferred_browser">Birleştirilmiş ayarları kullan</string>
+    <string name="libredirect_via">%s aracılığıyla</string>
+    <string name="ignore_libredirect">LibRedirect\'i yoksay</string>
+    <string name="copy_to_clipboard">Panoya kopyala</string>
+    <string name="debug_explainer">Uygulama günlüklerini görüntüle</string>
+    <string name="app_log">Uygulama günlüğü</string>
+    <string name="options">Seçenekler</string>
+    <string name="services">Hizmetler</string>
+    <string name="no_libredirect_services">LibRedirect hizmeti bulunamadı!</string>
+    <string name="current_session">Mevcut oturum</string>
+    <string name="log_files">Geçmiş günlük dosyaları</string>
+    <string name="log_viewer">Günlük görüntüleyici</string>
+    <string name="log_viewer_timestamp">%s\'den günlük görüntüleniyor</string>
+    <string name="no_log_entries">Bu oturum herhangi bir günlük içermiyor.</string>
+    <string name="order_of_operation">Operasyon sırası</string>
+    <string name="info">Bilgi</string>
+    <string name="fastforward">FastForward</string>
+    <string name="clear_urls">ClearURLs</string>
+    <string name="download_started">İndirme başladı</string>
+    <string name="request_timeout">İstek zaman aşımı</string>
+    <string name="resolve_failed">%s başarısız oldu: %s</string>
+    <string name="request_timeout_explainer">LinkSheet\'in bir bağlantının kurulması için kaç saniye bekleyeceğini belirler. Bunu 0 yapmak zaman aşımını devre dışı bırakır, ancak bu önerilmez.</string>
+    <string name="no_browsers_found">Tarayıcı bulunamadı.</string>
+    <string name="export">Dışa aktar</string>
+    <string name="export_mode">Dışa aktarma modu</string>
+    <string name="enable_request_private_browsing_button">\"Gizli gezinme iste\" düğmesini etkinleştir</string>
+    <string name="crash_log">Çökme günlüğü</string>
+    <string name="log">Günlük</string>
+    <string name="include_settings">Ayarları dahil et (önerilir)</string>
+    <string name="include_fingerprint">Cihaz parmak izini dahil et (önerilir)</string>
+    <string name="delete">Sil</string>
+    <string name="no_logs_found">Geçmiş kayıt bulunamadı!</string>
+    <string name="enable_amp2html">Amp2Html\'i etkinleştir</string>
+    <string name="amp2html_local_cache">Yerel Amp2Html önbelleğini etkinleştir</string>
+    <string name="amp2html_local_cache_explainer">Web sayfalarının alınan AMP olmayan sürümlerini yerel olarak önbelleğe alır</string>
+    <string name="amp2html">Amp2Html</string>
+    <string name="amp2html_builtin_cache">Yerleşik Amp2Html önbelleğini kullan</string>
+    <string name="amp2html_builtin_cache_explainer">Yerleşik önbelleği kullanır (harici hizmetin veritabanı dışa aktarımını kullanır)</string>
+    <string name="follow_redirects_builtin_cache">Yerleşik yönlendirme önbelleğini kullan</string>
+    <string name="follow_redirects_builtin_cache_explainer">Dahili önbelleği kullan (harici hizmetin veritabanı dışa aktarımını kullanır)</string>
+    <string name="redirect_resolve_type_builtin_cache">dahili önbellek</string>
+    <string name="request_timeout_explainer_disclaimer">Şu anda ızgara modunda kullanılamıyor</string>
+    <string name="use_unified_preferred_browser_explainer">Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın.</string>
+    <string name="always_show_package_name_disclaimer">Bu anahtar gelecekteki bir sürümde farklı bir konuma taşınacaktır.</string>
+    <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
+    <string name="in_app_browser_explainer">Uygulama içi tarayıcı modunu ayarla</string>
+    <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulama karar versin</string>
+    <string name="close">Kapat</string>
+    <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API kullanarak yönlendirmeleri takip edin (<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
+    <string name="redirect_resolve_type_local_cache">yerel önbellek</string>
+    <string name="use_text_share_copy_buttons_explainer">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" başlıklı düğmeleri basit metin düğmeleriyle değiştirir</string>
+    <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
+    <string name="use_app_settings">Uygulama ayarlarını kullan</string>
+    <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri olabilir</annotation></string>
+    <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
+    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekler. Bunun <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri olabilir</annotation></string>
+    <string name="in_app_browser">Uygulama içi tarayıcı</string>
+    <string name="always_disable">Her zaman devre dışı bırak</string>
+    <string name="disable_in_selected">Seçildiğinde devre dışı bırak</string>
+    <string name="no_apps_which_can_handle_links_found">Bağlantıları işleyebilen hiçbir uygulama bulunamadı.</string>
+    <string name="normal">Normal</string>
+    <string name="enable_ignore_libredirect_button">\"LibRedirect\'i yoksay\" düğmesini etkinleştir</string>
+    <string name="in_app">Uygulama içi</string>
+    <string name="enable_ignore_libredirect_button_explainer">URL LibRedirect aracılığıyla yeniden yönlendirilmişse, alt sayfada bunun yerine orijinal URL\'yi açan bir düğme gösterir</string>
+    <string name="app_crashed">LinkSheet çökmüş görünüyor, aşağıdaki hataya göz atın</string>
+    <string name="logs_explainer">Uygulama günlüklerini görüntüle</string>
+    <string name="debug">Hata ayıklama</string>
+    <string name="logs">Günlükler</string>
+    <string name="follow_only_known_trackers_explainer">Yönlendirmeleri yalnızca sunucunun bir izleyici/yönlendirici olduğu bilindiğinde takip etmeye çalışın. \"Harici hizmet aracılığıyla yönlendirmeleri takip et\" etkinleştirilmişse, bu her zaman etkin olacaktır.</string>
+    <string name="no_apps_found">Uygulama bulunamadı.</string>
+    <string name="enable_request_private_browsing_button_explainer">Tarayıcıların yanında, tıklanan URL\'yi gizli gezinme modunda açan bir düğme görüntüler. Desteklenen tarayıcılar: %s</string>
+    <string name="redact_log">Günlüğü yeniden düzenle (önerilir, bunu devre dışı bırakmak paket adlarını ve sunucu adlarını sızdırabilir)</string>
+    <string name="export_log">Günlüğü dışa aktar</string>
+    <string name="log_privacy">Günlük kaydı gizliliği hakkında bilgi edinmek için bu <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">bağlantıyı</annotation> ziyaret edebilirsiniz.</string>
+    <string name="amp2html_external_service">AMP olmayan sayfa sürümünü harici hizmet aracılığıyla edinme girişimi</string>
+    <string name="amp2html_external_service_explainer">supabase.com adresinde bulunan bir API kullanarak AMP olmayan sayfa sürümü elde etme girişimi (<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">Şu anda alt sayfadaki çok sayıda düğmenin etkinleştirilmesi, düğmelerin kesilmesine/aksamasına neden olabilir.</string>
 </resources>

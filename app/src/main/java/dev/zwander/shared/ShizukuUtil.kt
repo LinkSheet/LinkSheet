@@ -2,6 +2,7 @@ package dev.zwander.shared
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -10,14 +11,14 @@ import androidx.compose.runtime.remember
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 
-object ShizukuPermissionUtils {
+object ShizukuUtil {
     @Composable
     fun rememberHasShizukuPermissionAsState(): State<Boolean> {
         val hasPermission = remember {
             mutableStateOf(Shizuku.pingBinder() && Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED)
         }
 
-        DisposableEffect(null) {
+        DisposableEffect(Unit) {
             val listener = Shizuku.OnRequestPermissionResultListener { _, grantResult ->
                 hasPermission.value = grantResult == PackageManager.PERMISSION_GRANTED
             }
@@ -36,12 +37,17 @@ object ShizukuPermissionUtils {
         return Shizuku.pingBinder()
     }
 
-    fun Context.isShizukuInstalled(): Boolean {
-        return kotlin.runCatching {
-            packageManager.getPackageInfo(
-                ShizukuProvider.MANAGER_APPLICATION_ID,
-                0
-            )
+    fun isShizukuInstalled(context: Context): Boolean {
+        return runCatching {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                context.packageManager.getPackageInfo(
+                    ShizukuProvider.MANAGER_APPLICATION_ID,
+                    PackageManager.PackageInfoFlags.of(0L)
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                context.packageManager.getPackageInfo(ShizukuProvider.MANAGER_APPLICATION_ID, 0)
+            }
         }.getOrNull() != null
     }
 }

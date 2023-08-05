@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings.apps.link
 
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -21,6 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.junkfood.seal.ui.component.PreferenceSubtitle
+import dev.zwander.shared.ShizukuUtil
+import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
@@ -34,9 +37,14 @@ import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.ioState
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
+import fe.linksheet.resolver.DisplayActivityInfo
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import rikka.shizuku.Shizuku
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 @OptIn(
@@ -58,8 +66,15 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         listState(apps, filter)
     }
 
+    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
+    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
+
     var refreshing by remember { mutableStateOf(false) }
-    val refreshScope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
+
+    val shizukuPermission by rememberHasShizukuPermissionAsState()
+
+    val shizukuMode = shizukuInstalled && shizukuRunning && shizukuPermission
 
     val fetch: suspend (Boolean) -> Unit = { fetchRefresh ->
         if (fetchRefresh) {
@@ -77,9 +92,21 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     LaunchedEffectOnFirstAndResume { fetch(false) }
 
     val fetchInScope: () -> Unit = {
-        refreshScope.launch { fetch(true) }
+        scope.launch { fetch(true) }
     }
     val state = rememberPullRefreshState(refreshing, onRefresh = fetchInScope)
+
+    fun postCommand(packageName: String) {
+        viewModel.app.postShizukuCommand {
+            disableLinkHandling(packageName, !linkHandlingAllowed)
+        }
+
+        fetchInScope()
+    }
+
+    fun openDefaultSettings(info: DisplayActivityInfo) {
+        activity.startActivityWithConfirmation(viewModel.makeOpenByDefaultSettingsIntent(info))
+    }
 
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
         Box(
@@ -101,24 +128,45 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                 stickyHeader(key = "header") {
                     Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                         PreferenceSubtitle(
-                            text = stringResource(R.string.apps_which_can_open_links_explainer),
+                            text = stringResource(
+                                if (shizukuMode) R.string.apps_which_can_open_links_shizuku_explainer
+                                else R.string.apps_which_can_open_links_explainer
+                            ),
                             paddingStart = 0.dp
                         )
 
-                        FilterChips(
-                            currentState = linkHandlingAllowed,
-                            onClick = {
-                                viewModel.linkHandlingAllowed.value = it
-                            },
-                            values = listOf(
-                                FilterChipValue(true, R.string.enabled, Icons.Default.Visibility),
-                                FilterChipValue(
-                                    false,
-                                    R.string.disabled,
-                                    Icons.Default.VisibilityOff
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            FilterChips(
+                                currentState = linkHandlingAllowed,
+                                onClick = {
+                                    viewModel.linkHandlingAllowed.value = it
+                                },
+                                values = listOf(
+                                    FilterChipValue(
+                                        true,
+                                        R.string.enabled,
+                                        Icons.Default.Visibility
+                                    ),
+                                    FilterChipValue(
+                                        false,
+                                        R.string.disabled,
+                                        Icons.Default.VisibilityOff
+                                    )
                                 )
                             )
-                        )
+
+                            if (shizukuMode) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End
+                                ) {
+                                    TextButton(onClick = { postCommand("all") }) {
+                                        Text(text = stringResource(id = if (linkHandlingAllowed) R.string.disable_all else R.string.enable_all))
+                                    }
+                                }
+                            }
+                        }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
@@ -139,15 +187,11 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                 ) { info ->
                     ClickableRow(
                         onClick = {
-                            activity.startActivityWithConfirmation(
-                                viewModel.makeOpenByDefaultSettingsIntent(info)
-                            )
-
-//                            viewModel.app.postShizukuCommand {
-//                                disableLinkHandling(info.packageName, !linkHandlingAllowed)
-//                            }
-//
-//                            fetchInScope()
+                            if (shizukuMode) postCommand(info.packageName)
+                            else openDefaultSettings(info)
+                        },
+                        onLongClick = {
+                            if (shizukuMode) openDefaultSettings(info)
                         },
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -181,4 +225,5 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         }
     }
 }
+
 

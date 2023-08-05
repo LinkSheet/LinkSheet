@@ -8,7 +8,7 @@
     <string name="preferred_apps">Preferred apps</string>
     <string name="preferred_apps_settings">Preferred apps settings</string>
     <string name="set_as_browser">Set as browser</string>
-    <string name="set_as_browser_explainer">Tap here to make this app the default browser</string>
+    <string name="set_as_browser_explainer">Tap here to make LinkSheet the default browser</string>
     <string name="apps_which_can_open_links">Apps which can open links</string>
     <string name="apps_which_can_open_links_explainer">Tap an app to open the \"Open by default\" menu which allows you to disable automatic link opening</string>
     <string name="apps_which_can_open_links_explainer_2">Lists all apps which may interfere with LinkSheet\'s behavior</string>
@@ -48,7 +48,7 @@
     <string name="back">Back</string>
     <string name="display_grid_layout">Display grid layout</string>
     <string name="display_grid_layout_explainer">Display a grid instead of a list in the bottom sheet</string>
-    <string name="set_as_browser_done">App has been set as default browser!</string>
+    <string name="set_as_browser_done">LinkSheet has been set as default browser!</string>
     <string name="browser_status">Browser status</string>
     <string name="apps">Apps</string>
     <string name="bottom_sheet">Bottom sheet</string>
@@ -213,4 +213,12 @@
     <string name="shizuku_explainer_short">Interact with system APIs directly</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="license_mit">MIT License</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Shizuku mode activated, tap an app to toggle its automatic link handling capabilities. Long tap an app to open its \"Open by default\" settings menu.</string>
+    <string name="enable_all">Enable all</string>
+    <string name="disable_all">Disable all</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku integration has been successfully enabled!</string>
+    <string name="shizuku_not_running_explainer">Shizuku is not running. Tap here to open Shizuku, then follow the instructions to start it</string>
+    <string name="shizuku_integration_no_permission_explainer">Tap here to request Shizuku permission</string>
+    <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku is recommended. Tap here to install it</string>
+    <string name="shizuku_integration">Shizuku integration</string>
 </resources>

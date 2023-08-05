@@ -169,7 +169,7 @@ dependencies {
     implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.13")
     implementation("com.github.1fexd:compose-route-util:0.0.12")
     implementation("com.github.1fexd:compose-dialog-helper:0.0.1")
-
+    implementation("com.gitlab.grrfe:process-launcher:0.0.1")
 
     implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
 
@@ -182,6 +182,8 @@ dependencies {
     implementation("dev.rikka.shizuku:api:13.1.4")
     implementation("dev.rikka.shizuku:provider:13.1.4")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
+    implementation("dev.rikka.tools.refine:runtime:4.3.0")
+    compileOnly("dev.rikka.hidden:stub:4.2.0")
 
     testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")

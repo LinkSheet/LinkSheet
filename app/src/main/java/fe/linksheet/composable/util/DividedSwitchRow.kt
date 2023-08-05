@@ -35,9 +35,35 @@ fun DividedSwitchRow(
 fun DividedSwitchRow(
     state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
     viewModel: BaseViewModel,
+    enabled: Boolean = true,
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable() (() -> Unit)? = buildSubtitle(subtitle),
+    subtitleBuilder: @Composable ((Boolean) -> Unit)? = buildEnabledSubtitle(subtitle),
+    onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
+    onClick: () -> Unit,
+) {
+    DividedRow(
+        headline = headline,
+        subtitle = subtitle,
+        subtitleBuilder = subtitleBuilder,
+        enabled = enabled,
+        onClick = onClick
+    ) {
+        Switch(
+            enabled = enabled,
+            checked = state.value,
+            onCheckedChange = onChange
+        )
+    }
+}
+
+@Composable
+fun DividedSwitchRow(
+    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    viewModel: BaseViewModel,
+    headline: String,
+    subtitle: String? = null,
+    subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle),
     onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
     onClick: () -> Unit,
 ) {

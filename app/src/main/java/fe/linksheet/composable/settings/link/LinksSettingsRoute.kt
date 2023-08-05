@@ -152,7 +152,7 @@ fun LinksSettingsRoute(
                     state = viewModel.enableLibRedirect,
                     viewModel = viewModel,
                     headline = stringResource(id = R.string.enable_libredirect),
-                    subtitleBuilder = {
+                    subtitleBuilder = { _ ->
                         LinkableTextView(
                             id = R.string.enable_libredirect_explainer,
                             style = LocalTextStyle.current.copy(

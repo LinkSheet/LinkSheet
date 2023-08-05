@@ -208,7 +208,7 @@
     <string name="advanced_explainer">Enable advanced features (Shizuku integration, etc.)</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
-    <string name="enable_shizuku">Enable Shizuku</string>
+    <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
     <string name="enable_shizuku_explainer">Enabling this will allow LinkSheet to use Shizuku to interact with system APIs directly. This can be used, for example, to automatically disable all linkhandlers.</string>
     <string name="shizuku_explainer_short">Interact with system APIs directly</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -222,4 +222,9 @@
     <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku is recommended. Tap here to install it</string>
     <string name="shizuku_integration">Shizuku integration</string>
     <string name="known_trackers">Known trackers</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="get_started">Get started</string>
+    <string name="next">Next</string>
+    <string name="feature_flags">Feature flags</string>
+    <string name="feature_flags_explainer">Enable or disable experimental features</string>
 </resources>

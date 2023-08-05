@@ -48,6 +48,7 @@ const val themeSettingsRoute = "theme_settings_route"
 
 const val advancedSettingsRoute = "advanced_settings_route"
 const val shizukuSettingsRoute = "shizuku_settings_route"
+const val featureFlagSettingsRoute = "feature_flag_settings_route"
 
 const val debugSettingsRoute = "debug_settings_route"
 const val logViewerSettingsRoute = "log_viewer_settings_route"

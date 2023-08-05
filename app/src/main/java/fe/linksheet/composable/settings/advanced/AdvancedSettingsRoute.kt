@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cable
+import androidx.compose.material.icons.filled.Flag
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,6 +15,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.shizukuSettingsRoute
 
 @Composable
@@ -28,14 +30,26 @@ fun AdvancedSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(key = "shizuku") {
+//            item(key = "shizuku") {
+//                SettingsItemRow(
+//                    navController = navController,
+//                    navigateTo = shizukuSettingsRoute,
+//                    headlineId = R.string.shizuku,
+//                    subtitleId = R.string.shizuku_explainer,
+//                    image = {
+//                        ColoredIcon(icon = Icons.Default.Cable, descriptionId = R.string.advanced)
+//                    }
+//                )
+//            }
+
+            item(key = "feature_flags") {
                 SettingsItemRow(
                     navController = navController,
-                    navigateTo = shizukuSettingsRoute,
-                    headlineId = R.string.shizuku,
-                    subtitleId = R.string.shizuku_explainer,
+                    navigateTo = featureFlagSettingsRoute,
+                    headlineId = R.string.feature_flags,
+                    subtitleId = R.string.feature_flags_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Cable, descriptionId = R.string.advanced)
+                        ColoredIcon(icon = Icons.Default.Flag, descriptionId = R.string.feature_flags)
                     }
                 )
             }

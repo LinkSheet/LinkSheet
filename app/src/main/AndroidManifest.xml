@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
-            android:name="android.permission.QUERY_ALL_PACKAGES"
-            tools:ignore="QueryAllPackagesPermission" />
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
     <uses-permission
-            android:name="android.permission.PACKAGE_USAGE_STATS"
-            tools:ignore="ProtectedPermissions" />
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
-            android:name=".LinkSheetApp"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:logo="@mipmap/ic_launcher"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:targetApi="31">
+        android:name=".LinkSheetApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:logo="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.OnboardingActivity"
+            android:exported="true"
+            android:label="@string/title_activity_onboarding"
+            android:theme="@style/AppTheme" />
+
         <provider
             android:name="rikka.shizuku.ShizukuProvider"
             android:authorities="${applicationId}.shizuku"
@@ -29,13 +35,14 @@
             android:exported="true"
             android:multiprocess="false"
             android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+
         <activity
-                android:name=".activity.MainActivity"
-                android:configChanges="orientation"
-                android:exported="true"
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation"
+            android:exported="true"
             android:launchMode="singleTask"
-                android:screenOrientation="unspecified"
-                android:theme="@style/AppTheme">
+            android:screenOrientation="unspecified"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,16 +55,13 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="unspecified"
-            android:theme="@style/AppTheme">
-        </activity>
-
+            android:theme="@style/AppTheme" />
         <activity
-                android:name=".activity.BottomSheetActivity"
-                android:excludeFromRecents="true"
-                android:exported="true"
-                android:launchMode="singleInstance"
-                android:theme="@style/Theme.Seal.Dialog">
-
+            android:name=".activity.BottomSheetActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Seal.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -77,35 +81,41 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-
                 <data android:mimeType="text/html" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
 
         <activity-alias
-                android:name=".activity.bottomsheet.BottomSheetActivityContextMenuAction"
-                android:exported="true"
-                android:label="@string/open_with_linksheet"
-                android:targetActivity=".activity.BottomSheetActivity">
+            android:name=".activity.bottomsheet.BottomSheetActivityContextMenuAction"
+            android:exported="true"
+            android:label="@string/open_with_linksheet"
+            android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity-alias>
+
         <service
-                android:name=".customtabs.LinkSheetCustomTabsService"
-                android:exported="true"
-                tools:ignore="ExportedService">
+            android:name=".customtabs.LinkSheetCustomTabsService"
+            android:exported="true"
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="android.support.customtabs.action.CustomTabsService" />
+
                 <category android:name="androidx.browser.trusted.category.TrustedWebActivities" />
             </intent-filter>
         </service>
     </application>
+
 </manifest>

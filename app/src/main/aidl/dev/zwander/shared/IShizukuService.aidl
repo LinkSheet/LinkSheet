@@ -4,5 +4,5 @@ import dev.zwander.shared.data.VerifyResult;
 
 interface IShizukuService {
     void destroy() = 16777114;
-    VerifyResult verifyLinks(int sdk, String packageName) = 1;
+    int disableLinkHandling(String packageName, boolean enabled) = 1;
 }

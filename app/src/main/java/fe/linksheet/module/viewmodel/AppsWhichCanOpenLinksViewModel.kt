@@ -1,6 +1,5 @@
 package fe.linksheet.module.viewmodel
 
-import android.app.Application
 import android.content.Intent
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.net.Uri
@@ -10,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.android.preference.helper.PreferenceRepository
 import fe.kotlin.extension.filterIf
+import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -20,25 +20,34 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 
 class AppsWhichCanOpenLinksViewModel(
-    val context: Application,
+    val app: LinkSheetApp,
     preferenceRepository: PreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
 
     private val domainVerificationManager by lazy {
         if (AndroidVersion.AT_LEAST_API_31_S) {
-            context.getSystemService<DomainVerificationManager>()
+            app.getSystemService<DomainVerificationManager>()
         } else null
     }
 
+    val refreshing = MutableStateFlow(false)
     val linkHandlingAllowed = MutableStateFlow(true)
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }.combine(linkHandlingAllowed) { apps, _ ->
-        apps.filter {
-            it.resolvedInfo.hasVerifiedDomains(domainVerificationManager!!, linkHandlingAllowed.value)
+    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(app) }
+        .combine(refreshing) { apps, _ ->
+            refreshing.value = false
+            apps
         }
-    }
+        .combine(linkHandlingAllowed) { apps, _ ->
+            apps.filter {
+                it.resolvedInfo.hasVerifiedDomains(
+                    domainVerificationManager!!,
+                    linkHandlingAllowed.value
+                )
+            }
+        }
 
     @RequiresApi(Build.VERSION_CODES.S)
     val appsFiltered = apps.combine(searchFilter) { apps, filter ->

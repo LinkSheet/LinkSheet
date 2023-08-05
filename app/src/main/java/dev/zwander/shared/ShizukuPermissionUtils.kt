@@ -12,7 +12,7 @@ import rikka.shizuku.ShizukuProvider
 
 object ShizukuPermissionUtils {
     @Composable
-    fun rememberHasPermissionAsState(): State<Boolean> {
+    fun rememberHasShizukuPermissionAsState(): State<Boolean> {
         val hasPermission = remember {
             mutableStateOf(Shizuku.pingBinder() && Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED)
         }

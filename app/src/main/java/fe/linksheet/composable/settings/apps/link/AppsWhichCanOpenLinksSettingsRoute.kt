@@ -24,19 +24,20 @@ import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.FilterChipValue
+import fe.linksheet.composable.util.FilterChips
 import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
 import fe.linksheet.composable.util.Searchbar
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.ioState
-import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.extension.compose.listHelper
+import fe.linksheet.extension.ioState
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import fe.linksheet.composable.util.FilterChipValue
-import fe.linksheet.composable.util.FilterChips
+
 
 @OptIn(
     ExperimentalFoundationApi::class
@@ -65,6 +66,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
             refreshing = true
         }
 
+        viewModel.refreshing.value = true
+
         if (fetchRefresh) {
             delay(100)
             refreshing = false
@@ -73,7 +76,9 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
     LaunchedEffectOnFirstAndResume { fetch(false) }
 
-    val fetchInScope: () -> Unit = { refreshScope.launch { fetch(true) } }
+    val fetchInScope: () -> Unit = {
+        refreshScope.launch { fetch(true) }
+    }
     val state = rememberPullRefreshState(refreshing, onRefresh = fetchInScope)
 
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
@@ -137,6 +142,12 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                             activity.startActivityWithConfirmation(
                                 viewModel.makeOpenByDefaultSettingsIntent(info)
                             )
+
+//                            viewModel.app.postShizukuCommand {
+//                                disableLinkHandling(info.packageName, !linkHandlingAllowed)
+//                            }
+//
+//                            fetchInScope()
                         },
                         verticalAlignment = Alignment.CenterVertically
                     ) {

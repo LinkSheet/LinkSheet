@@ -395,4 +395,6 @@
     <string name="app_browsers_subtitle">Предпочитани приложения и такива, отварящи препратки</string>
     <string name="onboarding_0_title">Добре дошли
 \nпри LinkSheet</string>
+    <string name="start_setup"></string>
+    <string name="onboarding_setup"></string>
 </resources>

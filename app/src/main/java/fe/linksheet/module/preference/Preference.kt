@@ -79,6 +79,8 @@ object Preferences {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
     }
 
+    val featureFlagShizuku = booleanPreference("feature_flag_shizuku")
+
     private val preferencesLoggable = listOf(
         enableCopyButton,
         hideAfterCopying,
@@ -113,7 +115,8 @@ object Preferences {
         amp2HtmlLocalCache,
         amp2HtmlExternalService,
         followRedirectsBuiltInCache,
-        amp2HtmlBuiltInCache
+        amp2HtmlBuiltInCache,
+        featureFlagShizuku
     )
 
     private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)

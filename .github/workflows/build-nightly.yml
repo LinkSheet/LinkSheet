@@ -25,6 +25,9 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+        run: |
+          rm -f $ANDROID_SDK_ROOT/platforms/android-33/android.jar
+          wget -c https://raw.githubusercontent.com/Reginer/aosp-android-jar/main/android-33/android.jar -O "$ANDROID_SDK_ROOT/platforms/android-33/android.jar"
 
       - uses: actions/cache@v2
         with:

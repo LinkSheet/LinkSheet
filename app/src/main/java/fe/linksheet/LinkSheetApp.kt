@@ -3,7 +3,6 @@ package fe.linksheet
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -16,6 +15,7 @@ import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.defaultLoggerFactoryModule
+import fe.linksheet.module.preference.featureFlagRepositoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.request.requestModule
@@ -73,6 +73,7 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             modules(
                 preferenceRepositoryModule,
+                featureFlagRepositoryModule,
                 defaultLoggerFactoryModule,
                 databaseModule,
                 daoModule,

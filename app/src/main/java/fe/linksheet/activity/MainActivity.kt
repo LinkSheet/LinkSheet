@@ -24,6 +24,7 @@ import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.advanced.AdvancedSettingsRoute
+import fe.linksheet.composable.settings.advanced.FeatureFlagSettingsRoute
 import fe.linksheet.composable.settings.advanced.ShizukuSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
@@ -47,6 +48,7 @@ import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.debugSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
+import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.inAppBrowserSettingsRoute
@@ -156,6 +158,13 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = shizukuSettingsRoute) {
                         ShizukuSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    animatedComposable(route = featureFlagSettingsRoute) {
+                        FeatureFlagSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )

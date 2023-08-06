@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item format="float" name="m3_sys_motion_easing_emphasized_accelerate_control_x1" type="dimen">0.3</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_accelerate_control_x2" type="dimen">0.8</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_accelerate_control_y1" type="dimen">0</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_accelerate_control_y2" type="dimen">0.2</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_decelerate_control_x1" type="dimen">0.1</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_decelerate_control_x2" type="dimen">0.1</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_decelerate_control_y1" type="dimen">0.7</item>
+    <item format="float" name="m3_sys_motion_easing_emphasized_decelerate_control_y2" type="dimen">1</item>
+</resources>

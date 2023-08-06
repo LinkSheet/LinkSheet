@@ -131,16 +131,19 @@ fun MainRoute(
                 )
             }
 
-            item(key = "shizuku_card") {
-                ShizukuCard(
-                    activity = activity,
-                    uriHandler = uriHandler,
-                    shizukuInstalled = shizukuInstalled,
-                    shizukuRunning =shizukuRunning,
+            if (viewModel.featureFlagShizuku.value) {
+                item(key = "shizuku_card") {
+                    ShizukuCard(
+                        activity = activity,
+                        uriHandler = uriHandler,
+                        shizukuInstalled = shizukuInstalled,
+                        shizukuRunning = shizukuRunning,
 
-                    viewModel = viewModel
-                )
+                        viewModel = viewModel
+                    )
+                }
             }
+
 
             // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
             if (clipboardManager.hasText() || sheetOpen != null) {

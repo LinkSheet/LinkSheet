@@ -122,6 +122,9 @@ android {
 
 dependencies {
     implementation("androidx.lifecycle:lifecycle-process:2.6.1")
+    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("androidx.compose.ui:ui-graphics")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
     implementation("io.insert-koin:koin-android:3.4.0")

@@ -8,14 +8,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BottomRow(modifier: Modifier = Modifier, content: @Composable RowScope.() -> Unit) {
+fun BottomRow(
+    modifier: Modifier = Modifier,
+    paddingEnd: Dp = 15.dp,
+    content: @Composable RowScope.() -> Unit
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(end = 15.dp)
+            .padding(end = paddingEnd)
             .height(50.dp),
         horizontalArrangement = Arrangement.End,
         content = content

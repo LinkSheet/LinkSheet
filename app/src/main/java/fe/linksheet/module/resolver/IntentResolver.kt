@@ -128,6 +128,7 @@ class IntentResolver(
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
         logger.debug("Intent=%s", intent)
+        val x = intent
         urlResolverCache.clear()
 
         val ignoreLibRedirectExtra = intent.getBooleanExtra(

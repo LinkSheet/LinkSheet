@@ -96,7 +96,7 @@
     <string name="close">Zamknij</string>
     <string name="dont_show_filtered_item">Nigdy nie wyświetlaj sekcji ostatnio wybranej aplikacji</string>
     <string name="dont_show_filtered_item_explainer">Nigdy nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
-    <string name="set_as_browser_explainer">Dotknij, aby ustawić tę aplikację jako domyślną przeglądarkę</string>
+    <string name="set_as_browser_explainer">Dotknij, aby ustawić LinkSheet jako domyślną przeglądarkę</string>
     <string name="single_tap_explainer">Wystarczy jedno dotknięcie zamiast dwóch, aby otworzyć aplikację. Naciśnij i przytrzymaj, aby wybrać aplikację; kliknij dwukrotnie, aby otworzyć informacje o aplikacji</string>
     <string name="disable_toasts_explainer">Nigdy nie pokazuj wyskakujących wiadomości</string>
     <string name="linksheet_download">Pobieranie LinkSheet</string>
@@ -115,7 +115,7 @@
     <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
     <string name="preferred_browser">Preferowana przeglądarka</string>
     <string name="enable_send_button_explainer">Wyświetla przycisk w dolnym panelu, który umożliwia udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
-    <string name="set_as_browser_done">Aplikacja jest domyślną przeglądarką!</string>
+    <string name="set_as_browser_done">Ustawiono LinkSheet jako domyślną przeglądarkę!</string>
     <string name="bottom_sheet_explainer">Sortuj według użycia, włącz przycisk kopiowania, włącz przycisk udostępniania itp.</string>
     <string name="open_copied_link">Otwórz skopiowany link</string>
     <string name="open_with_app">Otwórz w %s</string>
@@ -205,4 +205,22 @@
     <string name="always_show_package_name_disclaimer">Ten przełącznik zostanie przeniesiony do innej lokalizacji w przyszłej wersji.</string>
     <string name="use_unified_preferred_browser_explainer">Włączenie tej opcji powoduje zastosowanie poniższych ustawień zarówno do obsługi linków w trybie normalnym, jak i w aplikacji. Użyj poniższych przycisków, aby przełączać się między trybem normalnym a trybem w aplikacji, gdy funkcja ta jest wyłączona.</string>
     <string name="instance_not_available_anymore">Instancja nie jest już dostępna!</string>
+    <string name="shizuku_explainer_short">Bezpośrednia interakcja z API systemu</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Po włączeniu trybu Shizuku stuknij aplikację, aby przełączyć funkcję automatycznej obsługi linków. Długie przytrzymanie aplikacji otwiera menu ustawień „Otwórz domyślnie”.</string>
+    <string name="shizuku_not_running_explainer">Shizuku nie jest uruchomiony. Dotknij tutaj, aby go otworzyć, a następnie postępuj zgodnie z instrukcjami</string>
+    <string name="shizuku_integration_not_setup_explainer">Shizuku nie jest niezbędny do działania LinkSheet, ale jest zalecany. Kliknij tutaj, aby zainstalować</string>
+    <string name="shizuku">Integracja Shizuku</string>
+    <string name="enable_shizuku_explainer">Włączenie tej opcji pozwoli na użycie Shizuku do bezpośredniej interakcji z systemowymi API. Można to wykorzystać na przykład do automatycznego wyłączenia wszystkich mechanizmów obsługi linków.</string>
+    <string name="enable_all">Włącz wszystko</string>
+    <string name="disable_all">Wyłącz wszystko</string>
+    <string name="shizuku_integration_enabled_explainer">Integracja z Shizuku została włączona!</string>
+    <string name="shizuku_integration_no_permission_explainer">Kliknij tutaj, aby poprosić Shizuku o uprawnienie</string>
+    <string name="shizuku_integration">Integracja Shizuku</string>
+    <string name="known_trackers">Znane trackery</string>
+    <string name="advanced">Zaawansowane</string>
+    <string name="advanced_explainer">Włącz zaawansowane funkcje (integracja z Shizuku itp.)</string>
+    <string name="shizuku_explainer">Shizuku umożliwia bezpośrednią interakcję z systemowymi API</string>
+    <string name="enable_shizuku">Włącz Shizuku</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="license_mit">Licencja MIT</string>
 </resources>

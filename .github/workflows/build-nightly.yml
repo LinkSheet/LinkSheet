@@ -27,7 +27,7 @@ jobs:
         uses: android-actions/setup-android@v2
 
       - name: Setup Android modded android.jar
-        uses: 1fexd/setup-modded-android-jar@0.0.2
+        uses: 1fexd/setup-modded-android-jar@0.0.3
         env:
           ANDROID_SDK_VERSION: 33
 

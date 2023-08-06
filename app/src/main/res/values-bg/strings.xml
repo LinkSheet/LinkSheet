@@ -144,4 +144,15 @@
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
     <string name="frontend">Интерфейс</string>
     <string name="close">Затваряне</string>
+    <string name="dont_show_filtered_item">Да не се отделят последно избраните приложения</string>
+    <string name="select_an_app">Избиране на приложение</string>
+    <string name="dont_show_filtered_item_explainer">Не предлага последно използваното приложение най-отгоре в списъка</string>
+    <string name="preview_url">Преглед на адреса</string>
+    <string name="preview_url_explainer">Показва посетената препратка (след обработката)</string>
+    <string name="linksheet_download">Изтегляне на LinkSheet</string>
+    <string name="app_name">LinkSheet</string>
+    <string name="random_instance">Произволен екземпляр</string>
+    <string name="always_disable">Винаги изключен</string>
+    <string name="use_app_settings">Настройки от приложението</string>
+    <string name="browser">Браузър</string>
 </resources>

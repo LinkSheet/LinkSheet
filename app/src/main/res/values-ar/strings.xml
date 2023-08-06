@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="set_as_browser_explainer">انقر هنا لجعل هذا التطبيق المتصفح الافتراضي</string>
+    <string name="set_as_browser_explainer">انقر هنا لجعل ورقة الروابط المتصفح الافتراضي</string>
     <string name="always">دائماً</string>
     <string name="open_with_app">فتح باستخدام %s</string>
     <string name="use_a_different_app">استخدام تطبيق مختلف</string>
@@ -55,7 +55,7 @@
     <string name="disable_toasts">تعطيل الإشعار المنبثق</string>
     <string name="disable_toasts_explainer">لا تظهر أبدا أي رسائل منبثقة</string>
     <string name="back">رجوع</string>
-    <string name="set_as_browser_done">تم تعيين التطبيق كمتصفح افتراضي!</string>
+    <string name="set_as_browser_done">تم تعيين ورقة الروابط كمتصفح افتراضي!</string>
     <string name="browser_status">حالة المتصفح</string>
     <string name="apps">تطبيقات</string>
     <string name="bottom_sheet">الورقة السفلية</string>
@@ -205,4 +205,22 @@
     <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">قد يؤدي تمكين الكثير من الأزرار في الورقة السفلية حاليا إلى قطع / خلل في الأزرار.</string>
     <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
+    <string name="shizuku">دمج شيزوكو</string>
+    <string name="enable_shizuku">تمكين شيزوكو</string>
+    <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
+    <string name="advanced">متقدم</string>
+    <string name="advanced_explainer">تمكين المميزات المتقدمة(دمج شيزوكو,الخ.)</string>
+    <string name="shizuku_explainer">شيزوكو يسمح لورقة الروابط بالتفاعل مباشرة مع واجهة روابط النظام</string>
+    <string name="enable_shizuku_explainer">مفعل سيسمح هذا لورقة اللروابط باستخدام شيزوكو للتفاعل مع واجهات برمجة تطبيقات النظام مباشرة. يمكن استخدام هذا ، على سبيل المثال ، لتعطيل كافة معالجات الروابط تلقائيًا.</string>
+    <string name="mastodon_redirect">إعادة توجيه Mastodon</string>
+    <string name="license_mit">ترخيص MIT</string>
+    <string name="shizuku_integration">دمج شيزوكو</string>
+    <string name="known_trackers">المتعقبون المعروفون</string>
+    <string name="shizuku_integration_no_permission_explainer">انقر هنا لطلب إذن شيزوكو</string>
+    <string name="shizuku_integration_not_setup_explainer">في حين أنه ليس ضروريًا تمامًا لعمل ورقة الروابط ، يوصى باستخدام شيزوكو. اضغط هنا لتثبيته</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">تم تنشيط وضع شيزوكو ، انقر فوق أحد التطبيقات لتبديل إمكانيات التعامل مع الارتباط التلقائي. انقر مطولاً على أحد التطبيقات لفتح قائمة الإعدادات \"الفتح افتراضيًا\".</string>
+    <string name="enable_all">تمكين الكل</string>
+    <string name="disable_all">تعطيل الكل</string>
+    <string name="shizuku_integration_enabled_explainer">تم تمكين تكامل شيزوكو بنجاح!</string>
+    <string name="shizuku_not_running_explainer">شيزوكو لا يعمل. انقر هنا لفتح شيزوكو ، ثم اتبع التعليمات لبدء تشغيله</string>
 </resources>

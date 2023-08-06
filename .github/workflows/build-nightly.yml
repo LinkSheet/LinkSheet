@@ -23,10 +23,11 @@ jobs:
           distribution: "zulu"
           cache: gradle
 
-      - name: Setup Android SDK Tools (Modded android.jar)
-        uses: 1fexd/setup-android-sdk-tools-modded-android-jar@3.3.0
-        with:
-          android-sdk-version: 33
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Setup Android modded android.jar
+        uses: 1fexd/setup-modded-android-jar@0.0.2
         env:
           ANDROID_SDK_VERSION: 33
 

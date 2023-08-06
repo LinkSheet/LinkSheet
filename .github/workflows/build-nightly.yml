@@ -25,6 +25,8 @@ jobs:
 
       - name: Setup Android SDK Tools (Modded android.jar)
         uses: 1fexd/setup-android-sdk-tools-modded-android-jar@3.3.0
+        with:
+          android-sdk-version: 33
         env:
           ANDROID_SDK_VERSION: 33
 

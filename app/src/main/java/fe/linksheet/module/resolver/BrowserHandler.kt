@@ -64,6 +64,10 @@ class BrowserHandler(
         val browsers = browserResolver.queryBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
 
+        resolveList.removeIf {
+            it.activityInfo.packageName == "fe.linksheet.compat.debug"
+        }
+
         return when (browserMode) {
             is BrowserMode.AlwaysAsk -> BrowserModeInfo(browserMode, null)
             is BrowserMode.None -> {

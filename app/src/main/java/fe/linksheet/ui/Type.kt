@@ -15,6 +15,15 @@ val HkGroteskFontFamily = FontFamily(
     Font(R.font.hkgroteskbold, FontWeight.Bold)
 )
 
+val PoppinsFontFamily = FontFamily(
+    Font(R.font.poppinslight, FontWeight.Thin),
+    Font(R.font.poppinslight, FontWeight.Light),
+    Font(R.font.poppinsregular, FontWeight.Normal),
+    Font(R.font.poppinsmedium, FontWeight.Medium),
+    Font(R.font.poppinssemibold, FontWeight.SemiBold),
+    Font(R.font.poppinsbold, FontWeight.Bold)
+)
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(

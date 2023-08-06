@@ -19,8 +19,10 @@ import fe.linksheet.ui.HkGroteskFontFamily
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScaffold(
+    modifier: Modifier = Modifier,
     headline: String,
     onBackPressed: () -> Unit,
+    enableBackButton: Boolean = true,
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     content: @Composable (PaddingValues) -> Unit
@@ -31,7 +33,7 @@ fun SettingsScaffold(
     )
 
     Scaffold(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -45,11 +47,13 @@ fun SettingsScaffold(
                         fontWeight = FontWeight.SemiBold
                     )
                 }, navigationIcon = {
-                    IconButton(onClick = onBackPressed) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = stringResource(R.string.back),
-                        )
+                    if(enableBackButton){
+                        IconButton(onClick = onBackPressed) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = stringResource(R.string.back),
+                            )
+                        }
                     }
                 }, scrollBehavior = scrollBehavior
             )
@@ -64,13 +68,17 @@ fun SettingsScaffold(
 fun SettingsScaffold(
     @StringRes headlineId: Int,
     onBackPressed: () -> Unit,
+    enableBackButton: Boolean = true,
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
+    modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit
 ) {
     SettingsScaffold(
+        modifier,
         headline = stringResource(id = headlineId),
         onBackPressed = onBackPressed,
+        enableBackButton = enableBackButton,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         content = content

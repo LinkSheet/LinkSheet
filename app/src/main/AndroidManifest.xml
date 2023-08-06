@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".activity.OnboardingActivity"
+            android:name=".activity.onboarding.OnboardingActivity"
             android:exported="true"
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme" />
@@ -82,6 +82,20 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:mimeType="text/html" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="youtube.com" />
+                <data android:host="www.youtube.com" />
+                <data android:host="m.youtube.com" />
+                <data android:host="youtu.be" />
+                <data android:pathPattern=".*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />

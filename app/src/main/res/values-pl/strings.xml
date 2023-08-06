@@ -218,7 +218,7 @@
     <string name="shizuku_integration">Integracja Shizuku</string>
     <string name="known_trackers">Znane trackery</string>
     <string name="advanced">Zaawansowane</string>
-    <string name="advanced_explainer">Włącz zaawansowane funkcje (integracja z Shizuku itp.)</string>
+    <string name="advanced_explainer">Zaawansowane funkcje, takie jak flagi funkcji</string>
     <string name="shizuku_explainer">Shizuku umożliwia bezpośrednią interakcję z systemowymi API</string>
     <string name="enable_shizuku">Włącz (eksperymentalną) integrację Shizuku</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -228,4 +228,20 @@
     <string name="feature_flags_explainer">Włącz lub wyłącz funkcje eksperymentalne</string>
     <string name="feature_flags">Flagi funkcji</string>
     <string name="next">Dalej</string>
+    <string name="welcome_to_linksheet_explainer_2">Aby LinkSheet mógł działać, musi być ustawiony jako domyślna przeglądarka internetowa. Dzięki temu będzie mógł przechwytywać kliknięcia linków. Nie martw się, LinkSheet ma wiele opcji dostosowywania, więc zwiększy twój komfort użytkowania.</string>
+    <string name="background_image">Obraz tła</string>
+    <string name="onboarding1_headline">Witaj w</string>
+    <string name="set_as_default_browser">Ustaw jako domyślną przeglądarkę</string>
+    <string name="onboarding0_highlight">wolność wyboru</string>
+    <string name="onboarding0_headline">Czas przywrócić</string>
+    <string name="onboarding2_highlight">twoim</string>
+    <string name="onboarding2_headline">Wiele ustawień,
+\nktóre uczynią LinkSheet</string>
+    <string name="onboarding3_headline">Uzyskaj precyzyjną
+\nkontrolę nad</string>
+    <string name="onboarding3_highlight">wszystkim</string>
+    <string name="onboarding5_headline">Miłośnik\?
+\nLinkSheet ma Cię</string>
+    <string name="onboarding5_highlight">w swej garści</string>
+    <string name="welcome_to_linksheet_explainer">LinkSheet „przywraca” „url-app-chooser”, który został usunięty w Androidzie 12. Użytkownik za jego pomocą mógł wybrać przez jaką aplikację zostanie otworzony link.</string>
 </resources>

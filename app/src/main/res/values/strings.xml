@@ -205,7 +205,7 @@
     <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Enable advanced features (Shizuku integration, etc.)</string>
+    <string name="advanced_explainer">Avanced features like feature flags</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>

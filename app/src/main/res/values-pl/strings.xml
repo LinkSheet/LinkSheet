@@ -220,7 +220,12 @@
     <string name="advanced">Zaawansowane</string>
     <string name="advanced_explainer">Włącz zaawansowane funkcje (integracja z Shizuku itp.)</string>
     <string name="shizuku_explainer">Shizuku umożliwia bezpośrednią interakcję z systemowymi API</string>
-    <string name="enable_shizuku">Włącz Shizuku</string>
+    <string name="enable_shizuku">Włącz (eksperymentalną) integrację Shizuku</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="license_mit">Licencja MIT</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="get_started">Rozpocznij</string>
+    <string name="feature_flags_explainer">Włącz lub wyłącz funkcje eksperymentalne</string>
+    <string name="feature_flags">Flagi funkcji</string>
+    <string name="next">Dalej</string>
 </resources>

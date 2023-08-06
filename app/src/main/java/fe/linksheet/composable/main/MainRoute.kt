@@ -303,18 +303,6 @@ fun ShizukuCard(
             .padding(horizontal = 10.dp)
             .clickable {
                 when (status) {
-                    ShizukuStatus.NotRunning -> {
-                        activity.startActivity(
-                            Intent(Intent.ACTION_VIEW)
-                                .setComponent(
-                                    ComponentName(
-                                        "moe.shizuku.privileged.api",
-                                        "moe.shizuku.manager.MainActivity"
-                                    )
-                                )
-                        )
-                    }
-
                     ShizukuStatus.NoPermission -> {
                         scope.launch(Dispatchers.IO) {
                             val granted = suspendCoroutine { cont ->
@@ -347,7 +335,17 @@ fun ShizukuCard(
                         uriHandler.openUri(shizukuDownload)
                     }
 
-                    else -> {}
+                    else -> {
+                        activity.startActivity(
+                            Intent(Intent.ACTION_VIEW)
+                                .setComponent(
+                                    ComponentName(
+                                        "moe.shizuku.privileged.api",
+                                        "moe.shizuku.manager.MainActivity"
+                                    )
+                                )
+                        )
+                    }
                 }
             }
     ) {

@@ -303,7 +303,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Заповядайте в нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение. 
+    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение. \u0020
 \nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
     <plurals name="hours">
         <item quantity="one">%s час</item>
@@ -372,8 +372,8 @@
     <string name="opening_with_app_toast_explainer">Показва плуващо известие при отваряне на стандартно за даден домейн приложение</string>
     <string name="disclaimer_libredirect_unstable">В допълнение към изпитателната природа на тази възможност интеграцията с LibRedirect се счита за много нестабилна и може да не работи изобщо.</string>
     <string name="enable_new_bottom_sheet">Включване на новото долно меню</string>
-    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща. 
-\n 
+    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща. \u0020
+\n \u0020
 \nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове.</string>
     <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
     <string name="new_bottomsheet">Ново долно меню</string>
@@ -392,4 +392,6 @@
     <string name="app_browsers_subtitle">Предпочитани приложения и такива, отварящи препратки</string>
     <string name="onboarding_0_title">Добре дошли
 \nпри LinkSheet</string>
+    <string name="start_setup"></string>
+    <string name="onboarding_setup"></string>
 </resources>

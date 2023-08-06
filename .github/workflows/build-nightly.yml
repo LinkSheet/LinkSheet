@@ -24,7 +24,7 @@ jobs:
           cache: gradle
 
       - name: Setup Android SDK Tools (Modded android.jar)
-        uses: 1fexd/setup-android-sdk-tools-modded-android-jar@3.2.0
+        uses: 1fexd/setup-android-sdk-tools-modded-android-jar@3.3.0
         env:
           ANDROID_SDK_VERSION: 33
 

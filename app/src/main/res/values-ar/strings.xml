@@ -172,7 +172,7 @@
     <string name="export">تصدير</string>
     <string name="export_mode">وضع التصدير</string>
     <string name="enable_request_private_browsing_button">تمكين زر \"طلب التصفح الخاص\"</string>
-    <string name="request_private_browsing">طلب خاص</string>
+    <string name="request_private_browsing">خاص</string>
     <string name="use_clear_urls">استخدام ClearURLs</string>
     <string name="options">الخيارات</string>
     <string name="crash_log">سجل الأعطال</string>
@@ -206,10 +206,10 @@
     <string name="disclaimer_bottom_sheet_many_buttons">قد يؤدي تمكين الكثير من الأزرار في الورقة السفلية حاليا إلى قطع / خلل في الأزرار.</string>
     <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
     <string name="shizuku">دمج شيزوكو</string>
-    <string name="enable_shizuku">تمكين شيزوكو</string>
+    <string name="enable_shizuku">تفعيل تكامل شيزوكو (التجريبي)</string>
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
     <string name="advanced">متقدم</string>
-    <string name="advanced_explainer">تمكين المميزات المتقدمة(دمج شيزوكو,الخ.)</string>
+    <string name="advanced_explainer">الميزات المتقدمة مثل أعلام الميزات</string>
     <string name="shizuku_explainer">شيزوكو يسمح لورقة الروابط بالتفاعل مباشرة مع واجهة روابط النظام</string>
     <string name="enable_shizuku_explainer">مفعل سيسمح هذا لورقة اللروابط باستخدام شيزوكو للتفاعل مع واجهات برمجة تطبيقات النظام مباشرة. يمكن استخدام هذا ، على سبيل المثال ، لتعطيل كافة معالجات الروابط تلقائيًا.</string>
     <string name="mastodon_redirect">إعادة توجيه Mastodon</string>
@@ -223,4 +223,25 @@
     <string name="disable_all">تعطيل الكل</string>
     <string name="shizuku_integration_enabled_explainer">تم تمكين تكامل شيزوكو بنجاح!</string>
     <string name="shizuku_not_running_explainer">شيزوكو لا يعمل. انقر هنا لفتح شيزوكو ، ثم اتبع التعليمات لبدء تشغيله</string>
+    <string name="get_started">لنبدأ</string>
+    <string name="next">التالي</string>
+    <string name="feature_flags">الاعلام المميزة</string>
+    <string name="feature_flags_explainer">تمكين أو تعطيل الميزات التجريبية</string>
+    <string name="title_activity_onboarding">نشاط اعلى السفينة</string>
+    <string name="onboarding1_headline">مرحبًا بك في</string>
+    <string name="background_image">صورة الخلفية</string>
+    <string name="onboarding2_headline">الكثير من الإعدادات
+\nلجعل ورقة الروابط</string>
+    <string name="welcome_to_linksheet_explainer">يستعيد ورقة الروابط \"url-app-chooser\" الذي يظهر عندما ينقر المستخدم على رابط لإصدارات اندرويد &lt;12 كان لديه عدة تطبيقات مثبتة يمكنها التعامل مع الرابط.</string>
+    <string name="welcome_to_linksheet_explainer_2">لكي تعمل ورقة الروابط ، يجب تعيينها كمتصفح الأنظمة ، حتى تتمكن من اعتراض نقرات الارتباط. لا تقلق ، تحتوي ورقة الروابط على الكثير من خيارات التخصيص ، لذا لن يحد ذلك من تجربتك ، بل سيعززها.</string>
+    <string name="set_as_default_browser">تم تعيينه كالمتصفح الافتراضي</string>
+    <string name="onboarding0_headline">حان الوقت لإستعادة</string>
+    <string name="onboarding0_highlight">حرية الاختيار</string>
+    <string name="onboarding3_headline">أحصل على 
+\nتحكم متكامل</string>
+    <string name="onboarding3_highlight">لكل شيء</string>
+    <string name="onboarding2_highlight">لك</string>
+    <string name="onboarding5_headline">متحمس؟
+\nورقة الروابط</string>
+    <string name="onboarding5_highlight">ستساعدك</string>
 </resources>

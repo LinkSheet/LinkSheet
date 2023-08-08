@@ -68,6 +68,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.extension.android.buildSendTo
+import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
@@ -100,23 +101,7 @@ class BottomSheetActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->
-            v.setPadding(0, 0, 0, 0)
-            insets
-        }
-
-        window.setBackgroundDrawable(ColorDrawable(0))
-        window.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT
-        )
-
-        val type = if (AndroidVersion.AT_LEAST_API_26_O) {
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        } else WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-
-        window.setType(type)
+        initPadding()
 
         val deferred = resolveAsync(bottomSheetViewModel)
 

@@ -240,4 +240,12 @@
     <string name="onboarding3_highlight">everything</string>
     <string name="onboarding5_headline">Enthusiast?\nLinkSheet has you</string>
     <string name="onboarding5_highlight">covered</string>
+    <string name="disable_link_handling">Disable link handling</string>
+    <string name="onboarding4_headline">Toggle off linkhandling to make LinkSheet</string>
+    <string name="onboarding4_highlight">work</string>
+    <string name="onboarding4_paragraph_1">In Android 12, Google introduced Verified App Links. Apps can now cryptographically verify ownership of domains. When a link to such a domain is tapped, and the corresponding app is installed, it will automatically open by default, skipping the choice that was previously given to the user entirely.</string>
+    <string name="onboarding4_paragraph_2">This is highly annoying, as sometimes, you don\'t want to open a link in its app, but rather in a browser (for example, to bookmark it).\n\nAhh, classic Google, crippling their own products without a simple way to restore the old behavior\n\n Anyway, they left a small \"loophole\": Link-handling can be disabled on a per-app basis. You may assume that this would bring back to old app chooser, but of course (thanks Google!), that\'s not the case, as now, the link will always open in your default browser. That\'s why LinkSheet was created.</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="launch_onboaring">Launch onboarding</string>
+    <string name="launch_onboaring_explainer">Test the onboarding flow</string>
 </resources>

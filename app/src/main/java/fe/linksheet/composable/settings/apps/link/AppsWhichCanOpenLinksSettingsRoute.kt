@@ -54,7 +54,8 @@ import kotlin.coroutines.suspendCoroutine
 @Composable
 fun AppsWhichCanOpenLinksSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: AppsWhichCanOpenLinksViewModel = koinViewModel()
+    viewModel: AppsWhichCanOpenLinksViewModel = koinViewModel(),
+    enableBackButton: Boolean = true,
 ) {
     val activity = LocalContext.currentActivity()
 
@@ -108,7 +109,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         activity.startActivityWithConfirmation(viewModel.makeOpenByDefaultSettingsIntent(info))
     }
 
-    SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
+    SettingsScaffold(R.string.apps_which_can_open_links, enableBackButton = enableBackButton, onBackPressed = onBackPressed) { padding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()

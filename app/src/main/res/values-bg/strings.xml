@@ -228,4 +228,20 @@
     <string name="amp2html_builtin_cache_explainer">Използва вградената временна памет</string>
     <string name="follow_redirects_builtin_cache">Вградена временна памет за пренасочване</string>
     <string name="resolve_failed">%s е неуспешно: %s</string>
+    <string name="background_image">Фоново изображение</string>
+    <string name="onboarding1_headline">Добре дошли при</string>
+    <string name="set_as_default_browser">Задаване като подразбиран браузър</string>
+    <string name="onboarding0_headline">Време е да си върнете</string>
+    <string name="onboarding0_highlight">свободата на избор</string>
+    <string name="onboarding2_headline">Множество настройки,
+\nще направят LinkSheet</string>
+    <string name="onboarding3_headline">Имате фин
+\nконтрол върху</string>
+    <string name="onboarding3_highlight">всичко</string>
+    <string name="onboarding5_headline">Ентусиаст\?
+\nLinkSheet ви пази</string>
+    <string name="welcome_to_linksheet_explainer">LinkSheet възстановява приложението за избор, което се показваше когато потребителя докоснеше препратка в Андроид &lt;12 и има повече от приложение, което да я отвори.</string>
+    <string name="onboarding2_highlight">по ваш вкус</string>
+    <string name="onboarding5_highlight">гърба</string>
+    <string name="welcome_to_linksheet_explainer_2">За да работи приложението LinkSheet, трябва да бъде зададено като браузър на системата, за да може да прехваща отваряните препратки. Не се притеснявайте, LinkSheet разполага с много възможности за настройка, така че това няма да ограничи, а по-скоро ще подобри вашето изживяване.</string>
 </resources>

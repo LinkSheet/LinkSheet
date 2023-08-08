@@ -49,8 +49,7 @@ fun OnboardingScaffold(
             .paint(
                 painter = painterResource(drawable),
                 contentScale = ContentScale.Crop
-            )
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+            ),
         containerColor = Color.Transparent,
         contentColor = Color.Transparent,
         topBar = {

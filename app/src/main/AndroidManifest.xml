@@ -27,6 +27,12 @@
             android:exported="true"
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.onboarding.AppsWhichCanHandleLinksOnboardingActivity"
+            android:exported="true"
+            android:label="@string/title_activity_onboarding"
+            android:theme="@style/AppTheme" />
+
 
         <provider
             android:name="rikka.shizuku.ShizukuProvider"

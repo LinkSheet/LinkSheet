@@ -1,6 +1,5 @@
 package fe.linksheet.activity.onboarding
 
-import android.app.Activity
 import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
@@ -12,23 +11,32 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
 import fe.linksheet.R
-import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.composable.util.ExtendedFabIconRight
 import fe.linksheet.util.AndroidVersion
-import fe.linksheet.util.Results
 import kotlinx.coroutines.Job
-import fe.linksheet.activity.onboarding.ActionOnboardingScreen as ActionOnboardingScreen1
 
 
 abstract class OnboardingScreen(
@@ -63,6 +71,18 @@ abstract class ActionOnboardingScreen<T>(
     abstract fun fabTapped(context: Context, obj: Any?, next: () -> Job)
 }
 
+abstract class RawOnboardingScreen(
+    @StringRes nextButton: Int,
+    textAlign: TextAlign,
+    @StringRes headline: Int,
+    @StringRes highlight: Int,
+) : OnboardingScreen(R.drawable.gradient, textAlign, nextButton, headline, highlight) {
+    @Composable
+    abstract fun Render(next: () -> Job)
+
+    abstract fun fabTapped(context: Context, obj: Any?, next: () -> Job)
+}
+
 data object Onboarding0Screen : ImageOnboardingScreen(
     R.drawable.onboarding0_notext,
     TextAlign.Start,
@@ -72,7 +92,7 @@ data object Onboarding0Screen : ImageOnboardingScreen(
 )
 
 data object Onboarding1Screen :
-    ActionOnboardingScreen1<ManagedActivityResultLauncher<Intent, ActivityResult>?>(
+    ActionOnboardingScreen<ManagedActivityResultLauncher<Intent, ActivityResult>?>(
         R.string.set_as_default_browser,
         TextAlign.Start,
         R.string.onboarding1_headline,
@@ -132,22 +152,129 @@ data object Onboarding2Screen : ImageOnboardingScreen(
 data object Onboarding3Screen : ImageOnboardingScreen(
     R.drawable.onboarding3_notext,
     TextAlign.Start,
-    R.string.get_started,
+    R.string.next,
     R.string.onboarding3_headline,
     R.string.onboarding3_highlight
 )
 
-data object Onboarding4Screen : ImageOnboardingScreen(
-    R.drawable.onboarding4_notext,
+data object Onboarding4Screen : ActionOnboardingScreen<Unit>(
+    R.string.disable_link_handling,
     TextAlign.Start,
+    R.string.onboarding4_headline,
+    R.string.onboarding4_highlight
+) {
+    override fun content(scope: LazyListScope) {
+        scope.item(key = "text") {
+            Text(
+                text = buildAnnotatedString {
+                    append(text = stringResource(id = R.string.onboarding4_paragraph_1))
+                    append(text = "\n")
+                    append(text = stringResource(id = R.string.onboarding4_paragraph_2))
+                },
+                fontSize = 15.sp,
+                color = Color.Black,
+            )
+        }
+
+        scope.item(key = "padding-bottom") {
+            Spacer(modifier = Modifier.height(100.dp))
+        }
+    }
+
+    @Composable
+    override fun composeSetup(next: () -> Job) {
+
+    }
+
+    override fun fabTapped(context: Context, obj: Any?, next: () -> Job) {
+
+    }
+}
+
+data object Onboarding5Screen : ActionOnboardingScreen<Unit>(
+    R.string.disable_link_handling,
+    TextAlign.Start,
+    R.string.onboarding4_headline,
+    R.string.onboarding4_highlight
+) {
+    override fun content(scope: LazyListScope) {
+        scope.item(key = "text") {
+            Text(
+                text = buildAnnotatedString {
+                    append(text = stringResource(id = R.string.onboarding4_paragraph_1))
+                    append(text = "\n")
+                    append(text = stringResource(id = R.string.onboarding4_paragraph_2))
+                },
+                fontSize = 15.sp,
+                color = Color.Black,
+            )
+        }
+
+        scope.item(key = "padding-bottom") {
+            Spacer(modifier = Modifier.height(100.dp))
+        }
+    }
+
+    @Composable
+    override fun composeSetup(next: () -> Job) {
+
+    }
+
+    override fun fabTapped(context: Context, obj: Any?, next: () -> Job) {
+        next()
+    }
+}
+
+data object Onboarding6Screen : RawOnboardingScreen(
+    R.string.disable_link_handling,
+    TextAlign.Start,
+    R.string.onboarding4_headline,
+    R.string.onboarding4_highlight
+) {
+    @Composable
+    override fun Render(next: () -> Job) {
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Box {
+            if (AndroidVersion.AT_LEAST_API_31_S) {
+                AppsWhichCanOpenLinksSettingsRoute(onBackPressed = {
+
+                })
+            }
+
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(top = 10.dp, bottom = 10.dp)
+                    .navigationBarsPadding()
+            ) {
+                ExtendedFabIconRight(
+                    text = R.string.next,
+                    icon = Icons.Filled.ArrowForward,
+                    contentDescription = R.string.next,
+                    onClick = {
+
+                    }
+                )
+            }
+        }
+    }
+
+    override fun fabTapped(context: Context, obj: Any?, next: () -> Job) {
+    }
+}
+
+data object Onboarding7Screen : ImageOnboardingScreen(
+    R.drawable.onboarding4_notext,
+    TextAlign.End,
     R.string.get_started,
     null,
     null
 )
 
-data object Onboarding5Screen : ImageOnboardingScreen(
+data object Onboarding8Screen : ImageOnboardingScreen(
     R.drawable.onboarding5_notext,
-    TextAlign.End,
+    TextAlign.Start,
     R.string.get_started,
     R.string.onboarding5_headline,
     R.string.onboarding5_highlight

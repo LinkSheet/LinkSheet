@@ -244,4 +244,16 @@
 \nLinkSheet ma Cię</string>
     <string name="onboarding5_highlight">w swej garści</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „przywraca” „url-app-chooser”, który został usunięty w Androidzie 12. Użytkownik za jego pomocą mógł wybrać przez jaką aplikację zostanie otworzony link.</string>
+    <string name="disable_link_handling">Wyłącz obsługę linków</string>
+    <string name="onboarding4_headline">Wyłącz obsługę linków, aby LinkSheet</string>
+    <string name="onboarding4_highlight">działał</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="onboarding4_paragraph_1">W Androidzie 12 Google wprowadziło zweryfikowane linki aplikacji. Aplikacje mogą teraz kryptograficznie weryfikować własność domen. Po kliknięciu linku takiej domeny i zainstalowaniu odpowiedniej aplikacji, zostanie ona automatycznie otwarta, pomijając wybór, który wcześniej był pozostawiony użytkownikowi.</string>
+    <string name="onboarding4_paragraph_2">Jest to bardzo irytujące, ponieważ czasami nie chcesz otwierać linku w aplikacji, ale w przeglądarce (np. w celu dodania go do zakładek).
+\n
+\nEch, klasyczne Google, okaleczające własne produkty bez prostego sposobu na przywrócenie poprzedniego działania
+\n
+\nW każdym razie pozostawili małą \"lukę\": Obsługa linków może być wyłączona dla poszczególnych aplikacji. Można założyć, że przywróciłoby to starą funkcję wyboru aplikacji, ale oczywiście (dzięki Google!) tak nie jest, ponieważ teraz link zawsze otworzy się w domyślnej przeglądarce. Właśnie dlatego powstał LinkSheet.</string>
+    <string name="launch_onboaring">Uruchom wprowadzenie</string>
+    <string name="launch_onboaring_explainer">Przetestuj proces wprowadzania</string>
 </resources>

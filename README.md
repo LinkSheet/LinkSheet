@@ -34,7 +34,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 <div align="center">
 
 <div style="display: flex;">
-  <img src="readme/screenshots.png">
+  <img src="readme/screenshots.webp">
 </div>
 
  </div>

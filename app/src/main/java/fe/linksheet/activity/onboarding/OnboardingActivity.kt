@@ -1,7 +1,9 @@
 package fe.linksheet.activity.onboarding
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.sysprop.CryptoProperties.state
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -25,14 +27,17 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,6 +51,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import fe.linksheet.R
+import fe.linksheet.activity.MainActivity
+import fe.linksheet.composable.util.ExtendedFabIconLeft
 import fe.linksheet.composable.util.ExtendedFabIconRight
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
@@ -83,56 +90,69 @@ class OnboardingActivity : ComponentActivity() {
                 val pagerState = rememberPagerState(pageCount = { onboardingScreens.size })
                 val coroutineScope = rememberCoroutineScope()
 
+                val back = {
+                    coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 1) }
+                }
 
                 val next = {
                     coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
                 }
 
-                val onboardingScreen = remember(pagerState) {
+//
+                val onboardingScreen by remember(pagerState) {
                     derivedStateOf { onboardingScreens[pagerState.currentPage] }
                 }
 
                 var composeState by remember { mutableStateOf<Any?>(null) }
 
-                if (onboardingScreen.value is ActionOnboardingScreen<*>) {
+                if (onboardingScreen is ActionOnboardingScreen<*>) {
                     composeState =
-                        (onboardingScreen.value as ActionOnboardingScreen<*>).composeSetup(next)
+                        (onboardingScreen as ActionOnboardingScreen<*>).composeSetup(
+                            back,
+                            next
+                        )
                 }
 
-                Log.d("Recompose", "${onboardingScreen.value}")
-                if (onboardingScreen.value is RawOnboardingScreen) {
-                    (onboardingScreen.value as RawOnboardingScreen).Render(next)
-                } else {
-                    Box {
-                        HorizontalPager(
-                            state = pagerState,
-                            userScrollEnabled = false
-                        ) { page ->
+                Box {
+                    HorizontalPager(
+                        state = pagerState,
+                        userScrollEnabled = false
+                    ) { page ->
+                        if (onboardingScreen is RawOnboardingScreen) {
+                            (onboardingScreen as RawOnboardingScreen).Render(back, next)
+                        } else {
                             OnboardingScaffold(
-                                headline = onboardingScreen.value.headline?.let { stringResource(id = it) },
-                                highlighted = onboardingScreen.value.highlight?.let {
+                                headline = onboardingScreen.headline?.let { stringResource(id = it) },
+                                highlighted = onboardingScreen.highlight?.let {
                                     stringResource(
                                         id = it
                                     )
                                 },
-                                drawable = onboardingScreen.value.backgroundImage,
-                                textAlign = onboardingScreen.value.textAlign,
+                                drawable = onboardingScreen.backgroundImage,
+                                textAlign = onboardingScreen.textAlign,
+                                drawBackButton = pagerState.currentPage > 0,
+                                onBackPressed = {
+                                    back()
+                                }
                             ) { padding ->
-                                if (onboardingScreen.value is ActionOnboardingScreen<*>) {
+                                if (onboardingScreen is ActionOnboardingScreen<*>) {
                                     LazyColumn(
                                         modifier = Modifier
                                             .padding(padding)
                                             .fillMaxHeight(),
                                         contentPadding = PaddingValues(horizontal = 15.dp)
                                     ) {
-                                        (onboardingScreen.value as? ActionOnboardingScreen<*>)?.content(
+                                        (onboardingScreen as? ActionOnboardingScreen<*>)?.content(
                                             this
                                         )
                                     }
                                 }
                             }
                         }
+                    }
 
+
+                    if (onboardingScreen !is RawOnboardingScreen) {
                         Row(
                             modifier = Modifier
                                 .height(30.dp)
@@ -142,8 +162,9 @@ class OnboardingActivity : ComponentActivity() {
                             horizontalArrangement = Arrangement.Center
                         ) {
                             repeat(pagerState.pageCount) { iteration ->
-                                val color = if (pagerState.currentPage == iteration) Color.DarkGray
-                                else MaterialTheme.colorScheme.primaryContainer
+                                val color =
+                                    if (pagerState.currentPage == iteration) Color.DarkGray
+                                    else MaterialTheme.colorScheme.primaryContainer
 
                                 Box(
                                     modifier = Modifier
@@ -171,6 +192,25 @@ class OnboardingActivity : ComponentActivity() {
                                     )
                                 )
                         ) {
+//                            if(pagerState.currentPage > 0){
+//                                Column(
+//                                    modifier = Modifier
+//                                        .align(Alignment.BottomStart)
+//                                        .padding(top = 10.dp, bottom = 10.dp)
+//                                        .navigationBarsPadding()
+//                                ) {
+//                                    ExtendedFabIconLeft(
+//                                        text = R.string.back,
+//                                        icon = Icons.Filled.ArrowBack,
+//                                        contentDescription = R.string.back,
+//                                        onClick = {
+//                                            back()
+//                                        }
+//                                    )
+//                                }
+//                            }
+
+
                             Column(
                                 modifier = Modifier
                                     .align(Alignment.BottomEnd)
@@ -178,20 +218,26 @@ class OnboardingActivity : ComponentActivity() {
                                     .navigationBarsPadding()
                             ) {
                                 ExtendedFabIconRight(
-                                    text = onboardingScreen.value.nextButton,
+                                    text = onboardingScreen.nextButton,
                                     icon = Icons.Filled.ArrowForward,
                                     contentDescription = R.string.next,
                                     onClick = {
-                                        Log.d(
-                                            "OnboardingScreen",
-                                            "$onboardingScreen ${onboardingScreen is ActionOnboardingScreen<*>}"
-                                        )
-                                        if (onboardingScreen.value is ActionOnboardingScreen<*>) (onboardingScreen.value as ActionOnboardingScreen<*>).fabTapped(
-                                            context,
-                                            composeState,
-                                            next
-                                        )
-                                        else next()
+                                        if (pagerState.currentPage == onboardingScreens.size - 1) {
+                                            context.startActivity(
+                                                Intent(
+                                                    context,
+                                                    MainActivity::class.java
+                                                )
+                                            )
+                                        } else {
+                                            if (onboardingScreen is ActionOnboardingScreen<*>) (onboardingScreen as ActionOnboardingScreen<*>).fabTapped(
+                                                context,
+                                                composeState,
+                                                back,
+                                                next
+                                            )
+                                            else next()
+                                        }
                                     }
                                 )
                             }
@@ -212,6 +258,5 @@ val onboardingScreens = listOf(
     Onboarding4Screen,
     Onboarding5Screen,
     Onboarding6Screen,
-    Onboarding7Screen,
-    Onboarding8Screen
+    Onboarding7Screen
 )

@@ -4,8 +4,12 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -17,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
+import fe.linksheet.R
 import fe.linksheet.ui.PoppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,6 +38,8 @@ fun OnboardingScaffold(
     modifier: Modifier = Modifier,
     headline: String?,
     highlighted: String?,
+    drawBackButton: Boolean,
+    onBackPressed: () -> Unit,
     @DrawableRes drawable: Int,
     textAlign: TextAlign = TextAlign.Start,
     floatingActionButton: @Composable () -> Unit = {},
@@ -78,7 +86,16 @@ fun OnboardingScaffold(
                 },
                 containerColor = Color.Transparent,
                 titleHorizontalArrangement = if (textAlign == TextAlign.Start) Arrangement.Start else Arrangement.End,
-                navigationIcon = {},
+                navigationIcon = {
+                    if (drawBackButton) {
+                        IconButton(onClick = onBackPressed) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = stringResource(R.string.back),
+                            )
+                        }
+                    }
+                },
                 scrollBehavior = scrollBehavior
             )
         },

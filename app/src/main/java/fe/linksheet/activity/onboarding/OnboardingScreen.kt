@@ -74,8 +74,8 @@ abstract class ActionOnboardingScreen<T>(
 abstract class RawOnboardingScreen(
     @StringRes nextButton: Int,
     textAlign: TextAlign,
-    @StringRes headline: Int,
-    @StringRes highlight: Int,
+    @StringRes headline: Int?,
+    @StringRes highlight: Int?,
 ) : OnboardingScreen(R.drawable.gradient, textAlign, nextButton, headline, highlight) {
     @Composable
     abstract fun Render(back: () -> Job, next: () -> Job)
@@ -195,8 +195,8 @@ data object Onboarding4Screen : ActionOnboardingScreen<Unit>(
 data object Onboarding5Screen : RawOnboardingScreen(
     R.string.disable_link_handling,
     TextAlign.Start,
-    R.string.onboarding4_headline,
-    R.string.onboarding4_highlight
+    null,
+    null
 ) {
     @Composable
     override fun Render(back: () -> Job, next: () -> Job) {

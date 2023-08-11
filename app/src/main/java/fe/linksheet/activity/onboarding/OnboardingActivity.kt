@@ -3,8 +3,6 @@ package fe.linksheet.activity.onboarding
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.sysprop.CryptoProperties.state
-import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,17 +25,14 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -52,7 +47,6 @@ import androidx.core.view.WindowCompat
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
-import fe.linksheet.composable.util.ExtendedFabIconLeft
 import fe.linksheet.composable.util.ExtendedFabIconRight
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion

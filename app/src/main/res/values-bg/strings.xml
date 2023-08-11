@@ -238,10 +238,9 @@
     <string name="onboarding3_headline">Имате фин
 \nконтрол върху</string>
     <string name="onboarding3_highlight">всичко</string>
-    <string name="onboarding5_headline">Ентусиаст\?
+    <string name="onboarding4_headline">Ентусиаст\?
 \nLinkSheet ви пази</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet възстановява приложението за избор, което се показваше когато потребителя докоснеше препратка в Андроид &lt;12 и има повече от приложение, което да я отвори.</string>
     <string name="onboarding2_highlight">по ваш вкус</string>
-    <string name="onboarding5_highlight">гърба</string>
     <string name="welcome_to_linksheet_explainer_2">За да работи приложението LinkSheet, трябва да бъде зададено като браузър на системата, за да може да прехваща отваряните препратки. Не се притеснявайте, LinkSheet разполага с много възможности за настройка, така че това няма да ограничи, а по-скоро ще подобри вашето изживяване.</string>
 </resources>

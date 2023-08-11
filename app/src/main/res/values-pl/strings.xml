@@ -240,9 +240,9 @@
     <string name="onboarding3_headline">Uzyskaj precyzyjną
 \nkontrolę nad</string>
     <string name="onboarding3_highlight">wszystkim</string>
-    <string name="onboarding5_headline">Miłośnik\?
+    <string name="onboarding7_headline">Miłośnik\?
 \nLinkSheet ma Cię</string>
-    <string name="onboarding5_highlight">w swej garści</string>
+    <string name="onboarding7_highlight">w swej garści</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „przywraca” „url-app-chooser”, który został usunięty w Androidzie 12. Użytkownik za jego pomocą mógł wybrać przez jaką aplikację zostanie otworzony link.</string>
     <string name="disable_link_handling">Wyłącz obsługę linków</string>
     <string name="onboarding4_headline">Wyłącz obsługę linków, aby LinkSheet</string>

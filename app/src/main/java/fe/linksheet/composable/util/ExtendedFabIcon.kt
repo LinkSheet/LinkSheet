@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -79,10 +80,11 @@ fun ExtendedFabIconLeft(
             Icon(
                 imageVector = icon,
                 contentDescription = stringResource(id = contentDescription),
+                tint = MaterialTheme.colorScheme.onPrimaryContainer
             )
 
             Row(Modifier.clearAndSetSemantics {}) {
-                Text(text = stringResource(id = text))
+                Text(text = stringResource(id = text), color = MaterialTheme.colorScheme.onPrimaryContainer)
                 Spacer(Modifier.width(12.dp))
             }
         }

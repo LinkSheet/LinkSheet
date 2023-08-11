@@ -238,8 +238,8 @@
     <string name="onboarding2_highlight">yours</string>
     <string name="onboarding3_headline">Get fine grained\ncontrol over</string>
     <string name="onboarding3_highlight">everything</string>
-    <string name="onboarding5_headline">Enthusiast?\nLinkSheet has you</string>
-    <string name="onboarding5_highlight">covered</string>
+    <string name="onboarding7_headline">Enthusiast?\nLinkSheet has you</string>
+    <string name="onboarding7_highlight">covered</string>
     <string name="disable_link_handling">Disable link handling</string>
     <string name="onboarding4_headline">Toggle off linkhandling to make LinkSheet</string>
     <string name="onboarding4_highlight">work</string>
@@ -248,4 +248,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="launch_onboaring">Launch onboarding</string>
     <string name="launch_onboaring_explainer">Test the onboarding flow</string>
+    <string name="done">Done</string>
+    <string name="onboarding6_headline">Set your</string>
+    <string name="onboarding6_highlight">preferences</string>
+    <string name="finish">Finish</string>
 </resources>

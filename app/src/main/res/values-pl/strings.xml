@@ -260,4 +260,11 @@
     <string name="onboarding6_headline">Ustaw</string>
     <string name="onboarding6_highlight">preferencje</string>
     <string name="finish">Zakończ</string>
+    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
+    <string name="pretend_to_be_app">Przechwytuj żądania aplikacji natywnych</string>
+    <string name="pretend_to_be_app_explainer_2">Niektóre aplikacje, takie jak Google Chrome, szukają natywnej aplikacji do obsługi, np. YouTube po kliknięciu linku w wynikach wyszukiwania. LinkSheetCompat udaje taką natywną aplikację dla obsługiwanych hostów, a następnie przekazuje żądanie do LinkSheet.</string>
+    <string name="configure">Konfiguruj</string>
+    <string name="configure_explainer">Kliknij tutaj, aby skonfigurować LinkSheetCompat</string>
+    <string name="pretend_to_be_app_explainer">Udawaj natywną aplikację dla obsługiwanych domen dzięki LinkSheetCompat</string>
+    <string name="compat_installed">LinkSheetCompat jest już zainstalowany</string>
 </resources>

@@ -260,4 +260,11 @@
     <string name="onboarding6_highlight">التفضيلات</string>
     <string name="finish">انتهى</string>
     <string name="onboarding6_headline">جهز</string>
+    <string name="pretend_to_be_app_explainer_2">بعض التطبيقات مثل Google Chrome يبحث بشكل صريح عن تطبيق محلي للتعامل معه ، على سبيل المثال ، رابط Youtube عند النقر عليه في نتائج البحث. يتظاهر LinkSheetCompat بأنه تطبيق أصلي للمضيفين المدعومين ثم يعيد توجيه الطلب إلى ورقة الروابط.</string>
+    <string name="title_activity_domain_spoof">نشاط تمويه النطاق</string>
+    <string name="pretend_to_be_app">اعتراض طلبات التطبيق المحلية</string>
+    <string name="pretend_to_be_app_explainer">تظاهر بأنك تطبيق أصلي للمجالات المدعومة باستخدام LinkSheetCompat</string>
+    <string name="compat_installed">تم تثبيت LinkSheetCompat بالفعل</string>
+    <string name="configure">إعداد</string>
+    <string name="configure_explainer">انقر هنا لإعداد LinkSheetCompat</string>
 </resources>

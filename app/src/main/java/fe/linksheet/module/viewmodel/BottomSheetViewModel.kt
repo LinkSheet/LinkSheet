@@ -98,7 +98,7 @@ class BottomSheetViewModel(
     }
 
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
-        logger.debug("Component=%s", intent.component)
+        logger.debug("Component=${intent.component}")
 
         intent.component?.let { component ->
             val host = intent.data!!.host!!.lowercase(Locale.getDefault())
@@ -109,7 +109,7 @@ class BottomSheetViewModel(
                 alwaysPreferred = always
             )
 
-            logger.debug("Inserting=%s", app)
+            logger.debug("Inserting=$app")
             preferredAppRepository.insert(app)
 
             val historyEntry = AppSelectionHistory(
@@ -119,7 +119,7 @@ class BottomSheetViewModel(
             )
 
             appSelectionHistoryRepository.insert(historyEntry)
-            logger.debug("Inserting=%s", historyEntry)
+            logger.debug("Inserting=$historyEntry")
         }
     }
 

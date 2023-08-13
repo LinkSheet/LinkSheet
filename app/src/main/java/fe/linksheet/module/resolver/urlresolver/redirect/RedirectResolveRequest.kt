@@ -33,7 +33,7 @@ class RedirectResolveRequest(
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String {
         val con = urlResolverCache.head(url, timeout, true)
-        logger.debug("ResolveLocal %s", url, HashProcessor.StringProcessor)
+        logger.debug({"ResolveLocal $it"}, url, HashProcessor.StringProcessor)
 
         val response = if (con.responseCode in 400..499) {
             urlResolverCache.get(url, timeout, true)

@@ -18,6 +18,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.flowOfLazy
+import fe.linksheet.util.getAppOpenByDefaultIntent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 
@@ -62,16 +63,6 @@ class AppsWhichCanOpenLinksViewModel(
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun makeOpenByDefaultSettingsIntent(activityInfo: DisplayActivityInfo): Intent {
-        val intent = if (Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
-            // S*msung moment lol (https://stackoverflow.com/a/72365164)
-            Intent("android.settings.MANAGE_DOMAIN_URLS")
-        } else {
-            Intent(
-                Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-                Uri.parse("package:${activityInfo.packageName}")
-            )
-        }
-
-        return intent
+        return getAppOpenByDefaultIntent(activityInfo.packageName)
     }
 }

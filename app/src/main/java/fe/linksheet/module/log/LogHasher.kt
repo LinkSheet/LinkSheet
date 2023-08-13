@@ -50,7 +50,7 @@ typealias FileNameProcessor = HashProcessor.StringProcessor
 typealias FileExtensionProcessor = HashProcessor.StringProcessor
 
 sealed interface HashProcessor<T> {
-    object NoOpProcessor : HashProcessor<String> {
+    data object NoOpProcessor : HashProcessor<String> {
         override fun process(
             stringBuilder: StringBuilder,
             input: String,
@@ -58,7 +58,7 @@ sealed interface HashProcessor<T> {
         ): StringBuilder = stringBuilder.append(input)
     }
 
-    object UriProcessor : HashProcessor<Uri> {
+    data object UriProcessor : HashProcessor<Uri> {
         override fun process(
             stringBuilder: StringBuilder,
             input: Uri,
@@ -66,15 +66,15 @@ sealed interface HashProcessor<T> {
         ): StringBuilder = UrlProcessor.process(stringBuilder, input.toString(), mac)
     }
 
-    object StringProcessor : HashProcessor<String> {
+    data object StringProcessor : HashProcessor<String?> {
         override fun process(
             stringBuilder: StringBuilder,
-            input: String,
+            input: String?,
             mac: Mac
         ): StringBuilder = stringBuilder.appendHashed(mac, input)
     }
 
-    object ComponentProcessor : HashProcessor<ComponentName> {
+    data object ComponentProcessor : HashProcessor<ComponentName> {
         override fun process(
             stringBuilder: StringBuilder,
             input: ComponentName,
@@ -87,7 +87,7 @@ sealed interface HashProcessor<T> {
         }
     }
 
-    object ActivityInfoProcessor : HashProcessor<ActivityInfo> {
+    data object ActivityInfoProcessor : HashProcessor<ActivityInfo> {
         override fun process(
             stringBuilder: StringBuilder,
             input: ActivityInfo,
@@ -95,7 +95,7 @@ sealed interface HashProcessor<T> {
         ): StringBuilder = stringBuilder.appendHashed(mac, input.name)
     }
 
-    object ResolveInfoProcessor : HashProcessor<ResolveInfo> {
+    data object ResolveInfoProcessor : HashProcessor<ResolveInfo> {
         override fun process(
             stringBuilder: StringBuilder,
             input: ResolveInfo,
@@ -110,6 +110,20 @@ sealed interface HashProcessor<T> {
             else if (input.serviceInfo != null) input.serviceInfo.packageName
             else if (input.providerInfo != null) input.providerInfo.packageName
             else null
+    }
+
+    data object ResolveInfoListProcessor : HashProcessor<List<ResolveInfo>> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: List<ResolveInfo>,
+            mac: Mac
+        ): StringBuilder {
+            input.forEach {
+                ResolveInfoProcessor.process(stringBuilder, it, mac)
+            }
+
+            return stringBuilder
+        }
     }
 
     fun process(stringBuilder: StringBuilder, input: T, mac: Mac): StringBuilder

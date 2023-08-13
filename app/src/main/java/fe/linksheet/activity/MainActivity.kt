@@ -27,6 +27,7 @@ import fe.linksheet.composable.settings.advanced.AdvancedSettingsRoute
 import fe.linksheet.composable.settings.advanced.FeatureFlagSettingsRoute
 import fe.linksheet.composable.settings.advanced.ShizukuSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
+import fe.linksheet.composable.settings.apps.PretendToBeAppSettingsRoute
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
@@ -60,6 +61,7 @@ import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
+import fe.linksheet.pretendToBeApp
 import fe.linksheet.settingsRoute
 import fe.linksheet.shizukuSettingsRoute
 import fe.linksheet.themeSettingsRoute
@@ -229,6 +231,10 @@ class MainActivity : ComponentActivity() {
                     if (AndroidVersion.AT_LEAST_API_31_S) {
                         animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
                             AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
+                        }
+
+                        animatedComposable(route = pretendToBeApp) {
+                            PretendToBeAppSettingsRoute(onBackPressed = onBackPressed)
                         }
                     }
                 }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 abstract interface ResolverDao<T : ResolverEntity<T>> : BaseDao<T> {
     @Query("")
-    abstract fun getForInputUrl(inputUrl: String): Flow<T?>
+    abstract fun getForInputUrl(inputUrl: String): T?
 }

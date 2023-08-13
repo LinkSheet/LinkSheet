@@ -11,9 +11,11 @@ import fe.linksheet.extension.failure
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveType
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.singleOrNull
 import java.io.IOException
 import kotlin.reflect.KClass
 
@@ -36,9 +38,9 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     ): Result<ResolveType> {
         val uriString = uri.toString()
         if (localCache) {
-            val resolvedUrl = resolverRepository.getForInputUrl(uriString).firstOrNull()
+            val resolvedUrl = resolverRepository.getForInputUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug("From local cache: %s", resolvedUrl)
+                logger.debug({ "From local cache=$it" }, resolvedUrl.urlResolved(), UrlProcessor)
                 return Result.success(ResolveType.LocalCache(resolvedUrl.urlResolved()))
             }
         }
@@ -46,7 +48,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         if (builtInCache) {
             val resolvedUrl = resolverRepository.getBuiltInCachedForUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug("From built-in cache: %s", resolvedUrl)
+                logger.debug({ "From built-in cache=$it" }, resolvedUrl, UrlProcessor)
                 return Result.success(ResolveType.BuiltInCache(resolvedUrl))
             }
         }
@@ -66,13 +68,13 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         externalService: Boolean,
         timeout: Int
     ): Result<ResolveType> {
-        logger.debug("Following redirects for %s", uri, HashProcessor.UriProcessor)
+        logger.debug({ "Following redirects for $it" }, uri, HashProcessor.UriProcessor)
 
         val inputUri = uri.toString()
         if (resolvePredicate(inputUri)) {
             if (externalService) {
                 logger.debug(
-                    "Using external service for %s",
+                    { "Using external service for $it" },
                     inputUri,
                     HashProcessor.StringProcessor
                 )
@@ -99,7 +101,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
                 )
             }
 
-            logger.debug("Using local service for %s", inputUri, HashProcessor.StringProcessor)
+            logger.debug({ "Using local service for $it" }, inputUri, HashProcessor.StringProcessor)
 
             try {
                 val resolved = redirectResolver.resolveLocal(inputUri, timeout)

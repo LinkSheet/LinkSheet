@@ -5,6 +5,7 @@ const val sealGithub = "https://github.com/JunkFood02/Seal"
 const val mastodonRedirectGithub = "https://github.com/zacharee/MastodonRedirect"
 const val linksheetGithub = "https://github.com/1fexd/LinkSheet"
 const val donationLink = "https://coindrop.to/fexd"
+const val linkSheetCompatGithubReleases = "https://github.com/1fexd/LinkSheetCompat/releases"
 
 const val shizukuDownload = "https://shizuku.rikka.app/download"
 

@@ -15,25 +15,33 @@ abstract class Logger(val hasher: LogHasher) {
         redact: Boolean = false,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = dumpParameterToString(if (redact) hasher else LogHasher.NoOpHasher, param, hashProcessor)
+    ): String {
+        return dumpParameterToString(
+            if (redact) hasher else LogHasher.NoOpHasher,
+            param,
+            hashProcessor
+        )
+    }
 
     private fun <T> dumpParameterToString(
         hasher: LogHasher,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = LogDumpable.dumpObject(StringBuilder(), hasher, param, hashProcessor).toString()
+    ): String {
+        return LogDumpable.dumpObject(StringBuilder(), hasher, param, hashProcessor).toString()
+            .replace("%", "%%")
+    }
 
-    abstract fun verbose(msg: String, vararg dumpable: Any?)
-    abstract fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    abstract fun <T> verbose(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>)
     abstract fun verbose(throwable: Throwable)
-
-    abstract fun info(msg: String, vararg dumpable: Any?)
-    abstract fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    abstract fun verbose(msg: String)
+    abstract fun <T> info(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>)
     abstract fun info(throwable: Throwable)
+    abstract fun info(msg: String)
 
-    abstract fun debug(msg: String, vararg dumpable: Any?)
-    abstract fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>)
+    abstract fun <T> debug(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>)
     abstract fun debug(throwable: Throwable)
+    abstract fun debug(msg: String)
 }
 
 class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
@@ -43,40 +51,40 @@ class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
         println("${type.code} $prefix: $msg")
     }
 
-    override fun verbose(msg: String, vararg dumpable: Any?) {
-        print(Type.Verbose, msg.format(*dumpable))
-    }
-
-    override fun <T> verbose(msg: String, param: T, hashProcessor: HashProcessor<T>) {
-        print(Type.Verbose, msg.format(param))
+    override fun <T> verbose(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>) {
+        print(Type.Verbose, msg(param.toString()))
     }
 
     override fun verbose(throwable: Throwable) {
         print(Type.Verbose, throwable.asString())
     }
 
-    override fun info(msg: String, vararg dumpable: Any?) {
-        print(Type.Info, msg.format(*dumpable))
+    override fun verbose(msg: String) {
+        print(Type.Verbose, msg)
     }
 
-    override fun <T> info(msg: String, param: T, hashProcessor: HashProcessor<T>) {
-        print(Type.Info, msg.format(param))
+    override fun <T> info(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>) {
+        print(Type.Info, msg(param.toString()))
     }
 
     override fun info(throwable: Throwable) {
         print(Type.Info, throwable.asString())
     }
 
-    override fun debug(msg: String, vararg dumpable: Any?) {
-        print(Type.Debug, msg.format(*dumpable))
+    override fun info(msg: String) {
+        print(Type.Info, msg)
     }
 
-    override fun <T> debug(msg: String, param: T, hashProcessor: HashProcessor<T>) {
-        print(Type.Debug, msg.format(param))
+    override fun <T> debug(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>) {
+        print(Type.Debug, msg(param.toString()))
     }
 
     override fun debug(throwable: Throwable) {
         print(Type.Debug, throwable.asString())
+    }
+
+    override fun debug(msg: String) {
+        print(Type.Debug, msg)
     }
 }
 
@@ -96,38 +104,36 @@ class DefaultLogger(
         }
     }
 
-    private fun dump(
-        msg: String,
+    private fun <T> dump(
+        msg: (String) -> String,
+        param: T,
         hasher: LogHasher,
-        dumpable: Array<out Any?>
     ): String {
-        val arguments = dumpable.mapIndexed { index, obj ->
-            LogDumpable.dumpObject(StringBuilder(), hasher, obj)?.toString()
-                ?: "Argument @ index $index could not be dumped (obj=$obj)"
-        }
+//        val arguments = dumpable.mapIndexed { index, obj ->
+        val argument = LogDumpable.dumpObject(StringBuilder(), hasher, param)?.toString()
+            ?: "$param could not be dumped"
+//                ?: "Argument @ index $index could not be dumped (obj=$obj)"
+//        }
 
-        return msg.format(*arguments.toTypedArray())
+        return msg(argument)
+//        return msg.format(*arguments.toTypedArray())
     }
-
-    private fun dump(
-        msg: String,
-        dumpable: Array<out Any?>
-    ) = dump(msg, LogHasher.NoOpHasher, dumpable) to dump(msg, hasher, dumpable)
 
     private fun <T> dump(
-        msg: String,
+        msg: (String) -> String,
         param: T,
         hashProcessor: HashProcessor<T>
-    ) = msg.format(dumpParameterToString(false, param, hashProcessor)) to
-            msg.format(dumpParameterToString(true, param, hashProcessor))
-
-
-    private fun log(type: Type, msg: String, dumpable: Array<out Any?>) {
-        val (normal, redacted) = dump(msg, dumpable)
-        log(type, normal, redacted)
+    ): Pair<String, String> {
+        return msg(dumpParameterToString(false, param, hashProcessor)) to
+                msg(dumpParameterToString(true, param, hashProcessor))
     }
 
-    private fun <T> log(type: Type, msg: String, param: T, hashProcessor: HashProcessor<T>) {
+    private fun <T> log(
+        type: Type,
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>
+    ) {
         val (normal, redacted) = dump(msg, param, hashProcessor)
         log(type, normal, redacted)
     }
@@ -142,13 +148,9 @@ class DefaultLogger(
         normalAndRedacted: String,
     ) = log(type, normalAndRedacted, normalAndRedacted)
 
-    override fun verbose(
-        msg: String,
-        vararg dumpable: Any?
-    ) = log(Type.Verbose, msg, dumpable)
 
     override fun <T> verbose(
-        msg: String,
+        msg: (String) -> String,
         param: T,
         hashProcessor: HashProcessor<T>
     ) = log(Type.Verbose, msg, param, hashProcessor)
@@ -157,11 +159,13 @@ class DefaultLogger(
         throwable: Throwable
     ) = log(Type.Verbose, throwable.asString(), prefix)
 
+    override fun verbose(msg: String) {
+        log(Type.Verbose, msg)
+    }
 
-    override fun info(msg: String, vararg dumpable: Any?) = log(Type.Info, msg, dumpable)
 
     override fun <T> info(
-        msg: String,
+        msg: (String) -> String,
         param: T,
         hashProcessor: HashProcessor<T>
     ) = log(Type.Info, msg, param, hashProcessor)
@@ -170,10 +174,12 @@ class DefaultLogger(
         throwable: Throwable
     ) = log(Type.Info, throwable.asString(), prefix)
 
-    override fun debug(msg: String, vararg dumpable: Any?) = log(Type.Debug, msg, dumpable)
+    override fun info(msg: String) {
+        log(Type.Info, msg)
+    }
 
     override fun <T> debug(
-        msg: String,
+        msg: (String) -> String,
         param: T,
         hashProcessor: HashProcessor<T>
     ) = log(Type.Debug, msg, param, hashProcessor)
@@ -181,4 +187,8 @@ class DefaultLogger(
     override fun debug(
         throwable: Throwable
     ) = log(Type.Debug, throwable.asString(), prefix)
+
+    override fun debug(msg: String) {
+        log(Type.Debug, msg)
+    }
 }

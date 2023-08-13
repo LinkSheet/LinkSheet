@@ -37,7 +37,7 @@ class Amp2HtmlResolveRequest(
 
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String? {
-        logger.debug("ResolveLocal %s", url, UrlProcessor)
+        logger.debug({ "ResolveLocal=$it" }, url, UrlProcessor)
         val con = urlResolverCache.get(url, timeout, false)
 
         if (!isHttpSuccess(con.responseCode)) {

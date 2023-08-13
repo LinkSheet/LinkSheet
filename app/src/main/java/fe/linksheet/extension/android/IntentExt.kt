@@ -3,6 +3,7 @@ package fe.linksheet.extension.android
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
 import fe.fastforwardkt.getRuleRedirect
@@ -59,22 +60,30 @@ object IntentExt : KoinComponent {
         }
 
         if (uriData != null) {
-            val uri = Uri.parse(uriData)
-            if (uri.host != null && uri.scheme != null) {
+            val uri = runCatching { Uri.parse(uriData) }.getOrNull()
+            if (uri?.host != null && uri.scheme != null) {
                 var url = uri.toString()
 
-                logger.debug("GetUri: Pre modification=%s", url, UrlProcessor)
-                if (fastForward) {
-                    getRuleRedirect(url)?.let { url = it }
+                logger.debug({ "GetUri: Pre modification=$it" }, url, UrlProcessor)
+
+                runCatching {
+                    if (fastForward) {
+                        getRuleRedirect(url)?.let { url = it }
+                    }
                 }
 
-                logger.debug("GetUri: Post FastForward=%s", url, UrlProcessor)
-                if (clearUrl) {
-                    url = clearUrl(url, clearUrlProviders)
+
+                logger.debug({ "GetUri: Post FastForward=$it" }, url, UrlProcessor)
+                runCatching {
+                    if (clearUrl) {
+                        url = clearUrl(url, clearUrlProviders)
+                    }
                 }
 
-                logger.debug("GetUri: Post ClearURL=%s", url, UrlProcessor)
-                return Uri.parse(url)
+                logger.debug({ "GetUri: Post ClearURL=$it" }, url, UrlProcessor)
+                return runCatching {
+                    Uri.parse(url)
+                }.getOrNull()
             }
         }
 

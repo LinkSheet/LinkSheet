@@ -22,7 +22,7 @@ class LibRedirectResolver(
 
     suspend fun resolve(uri: Uri): LibRedirectResult {
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
-        logger.debug("Service=%s", service)
+        logger.debug("Service=$service")
 
         if (service != null && stateRepository.isEnabled(service.key)) {
             val savedDefault = defaultRepository.getByServiceKeyFlow(service.key).firstOrNull()
@@ -35,7 +35,7 @@ class LibRedirectResolver(
             }
 
             val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
-            logger.debug("Redirected=%s", redirected, HashProcessor.StringProcessor)
+            logger.debug({ "Redirected=$it" }, redirected, HashProcessor.StringProcessor)
 
             if (redirected != null) {
                 return LibRedirectResult.Redirected(uri, Uri.parse(redirected))

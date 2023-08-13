@@ -127,8 +127,8 @@ class IntentResolver(
     }
 
     suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
-        logger.debug("Intent=%s", intent)
-        val x = intent
+//        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
+//        val x = intent
         urlResolverCache.clear()
 
         val ignoreLibRedirectExtra = intent.getBooleanExtra(
@@ -225,20 +225,20 @@ class IntentResolver(
 
         val preferredApp = preferredAppRepository.getByHost(uri)
             ?.toPreferredDisplayActivityInfo(context)
-        logger.debug("PreferredApp=%s", preferredApp)
+//        logger.debug({"PreferredApp=$it"}, preferredApp, HashProcessor)
 
         val lastUsedApps = appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
 
-        logger.debug(
-            "LastUsedApps=%s",
-            lastUsedApps?.toDumpable(
-                "packageName", "lastUsed",
-                { it },
-                { it.toString() },
-                PackageProcessor,
-                HashProcessor.NoOpProcessor
-            )
-        )
+//        logger.debug(
+//            {"LastUsedApps=$it"},
+//            lastUsedApps?.toDumpable(
+//                "packageName", "lastUsed",
+//                { it },
+//                { it.toString() },
+//                PackageProcessor,
+//                HashProcessor.NoOpProcessor
+//            )
+//        )
 
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
@@ -253,13 +253,13 @@ class IntentResolver(
             }
         }
 
-        logger.debug("NewIntent=%s", newIntent)
+        logger.debug("NewIntent=$newIntent", )
 
         val resolvedList: MutableList<ResolveInfo> = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)
             .toMutableList()
 
-        logger.debug("ResolveList=%s", resolvedList)
+        logger.debug({"ResolveList=$it"}, resolvedList, HashProcessor.ResolveInfoListProcessor)
 
         val browserMode = if (BrowserResolver.isSchemeTypicallySupportedByBrowsers(newIntent)) {
             val (mode, selected, repository) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
@@ -269,7 +269,7 @@ class IntentResolver(
             browserHandler.handleBrowsers(mode.value, selected.value, repository, resolvedList)
         } else null
 
-        logger.debug("BrowserMode=%s", browserMode)
+        logger.debug("BrowserMode=$browserMode")
 
         val (grouped, filteredItem, showExtended) = BottomSheetGrouper.group(
             context,
@@ -286,14 +286,14 @@ class IntentResolver(
         val noBrowsersPresentOnlySingleApp =
             browserMode?.browserMode == BrowserHandler.BrowserMode.None && resolvedList.size == 1
 
-        logger.debug(
-            "Grouped=%s, filteredItem=%s, showExtended=%s, selectedBrowserIsSingleOption=%s, noBrowsersPresentOnlySingleApp=%s",
-            grouped,
-            filteredItem,
-            showExtended,
-            selectedBrowserIsSingleOption,
-            noBrowsersPresentOnlySingleApp
-        )
+//        logger.debug(
+//            "Grouped=%s, filteredItem=%s, showExtended=%s, selectedBrowserIsSingleOption=%s, noBrowsersPresentOnlySingleApp=%s",
+//            grouped,
+//            filteredItem,
+//            showExtended,
+//            selectedBrowserIsSingleOption,
+//            noBrowsersPresentOnlySingleApp
+//        )
 
         return BottomSheetResult(
             newIntent,
@@ -327,7 +327,7 @@ class IntentResolver(
     private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType.value) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
-                logger.debug("File ending check result=%s", it)
+                logger.debug("File ending check result=$it")
                 if (it.isDownloadable()) return it
             }
         }

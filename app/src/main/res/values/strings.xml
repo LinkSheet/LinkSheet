@@ -252,4 +252,11 @@
     <string name="onboarding6_headline">Set your</string>
     <string name="onboarding6_highlight">preferences</string>
     <string name="finish">Finish</string>
+    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
+    <string name="pretend_to_be_app">Intercept native app requests</string>
+    <string name="pretend_to_be_app_explainer">Pretend to be a native app for supported domains with LinkSheetCompat</string>
+    <string name="pretend_to_be_app_explainer_2">Some apps like Google Chrome explicitly search for a native app to handle, for example, a Youtube link when it is tapped in the search results. LinkSheetCompat pretends to be such a native app for supported hosts and then forwards the request to LinkSheet.</string>
+    <string name="compat_installed">LinkSheetCompat is already installed</string>
+    <string name="configure">Configure</string>
+    <string name="configure_explainer">Tap here to configure LinkSheetCompat</string>
 </resources>

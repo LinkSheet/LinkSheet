@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.OpenInNew
+import androidx.compose.material.icons.filled.PublishedWithChanges
 import androidx.compose.material.icons.filled.Verified
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,6 +18,7 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.preferredAppsSettingsRoute
+import fe.linksheet.pretendToBeApp
 import fe.linksheet.util.AndroidVersion
 
 
@@ -57,6 +59,21 @@ fun AppsSettingsRoute(
                             ColoredIcon(
                                 icon = Icons.Default.Verified,
                                 descriptionId = R.string.apps_which_can_open_links
+                            )
+                        }
+                    )
+                }
+
+                item(key = pretendToBeApp) {
+                    SettingsItemRow(
+                        navController = navController,
+                        navigateTo = pretendToBeApp,
+                        headlineId = R.string.pretend_to_be_app,
+                        subtitleId = R.string.pretend_to_be_app_explainer,
+                        image = {
+                            ColoredIcon(
+                                icon = Icons.Default.PublishedWithChanges,
+                                descriptionId = R.string.pretend_to_be_app
                             )
                         }
                     )

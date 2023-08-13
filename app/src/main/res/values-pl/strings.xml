@@ -256,4 +256,8 @@
 \nW każdym razie pozostawili małą \"lukę\": Obsługa linków może być wyłączona dla poszczególnych aplikacji. Można założyć, że przywróciłoby to starą funkcję wyboru aplikacji, ale oczywiście (dzięki Google!) tak nie jest, ponieważ teraz link zawsze otworzy się w domyślnej przeglądarce. Właśnie dlatego powstał LinkSheet.</string>
     <string name="launch_onboaring">Uruchom wprowadzenie</string>
     <string name="launch_onboaring_explainer">Przetestuj proces wprowadzania</string>
+    <string name="done">Gotowe</string>
+    <string name="onboarding6_headline">Ustaw</string>
+    <string name="onboarding6_highlight">preferencje</string>
+    <string name="finish">Zakończ</string>
 </resources>

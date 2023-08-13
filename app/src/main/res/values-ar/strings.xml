@@ -250,4 +250,14 @@
 \n
 \n على أي حال ، فقد تركوا \"ثغرة\" صغيرة: يمكن تعطيل التعامل مع الروابط على أساس كل تطبيق. قد تفترض أن هذا سيعيدك إلى منتقي التطبيق القديم ، ولكن بالطبع (بفضل Google!) ، ليس هذا هو الحال ، كما هو الحال الآن ، سيتم فتح الرابط دائمًا في متصفحك الافتراضي. لهذا السبب تم إنشاء ورقة الروابط.</string>
     <string name="onboarding4_highlight">العمل</string>
+    <string name="launch_onboaring">تشغيل onboarding</string>
+    <string name="launch_onboaring_explainer">اختبار نشاط onboarding</string>
+    <string name="onboarding4_headline">قم بإيقاف تشغيل معالجة الارتباط لإنشاء ورقة الروابط</string>
+    <string name="onboarding7_headline">متحمس؟
+\nورقة الروابط</string>
+    <string name="onboarding7_highlight">ستساعدك</string>
+    <string name="done">إنتهى</string>
+    <string name="onboarding6_highlight">التفضيلات</string>
+    <string name="finish">انتهى</string>
+    <string name="onboarding6_headline">جهز</string>
 </resources>

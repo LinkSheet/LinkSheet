@@ -48,11 +48,15 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.composable.util.ExtendedFabIconRight
+import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingActivity : ComponentActivity() {
+    private val onboardingViewModel by viewModel<MainViewModel>()
+
     @OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -217,6 +221,7 @@ class OnboardingActivity : ComponentActivity() {
                                     contentDescription = R.string.next,
                                     onClick = {
                                         if (pagerState.currentPage == onboardingScreens.size - 1) {
+                                            onboardingViewModel.firstRun.updateState(false)
                                             context.startActivity(
                                                 Intent(
                                                     context,

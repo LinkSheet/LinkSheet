@@ -27,6 +27,7 @@ class MainViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val featureFlagShizuku = featureFlagRepository.getBooleanState(Preferences.featureFlagShizuku)
+    val firstRun = preferenceRepository.getBooleanState(Preferences.firstRun)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

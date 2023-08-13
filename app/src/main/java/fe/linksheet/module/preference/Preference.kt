@@ -79,6 +79,8 @@ object Preferences {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
     }
 
+    val firstRun = booleanPreference("first_run", true)
+
     val featureFlagShizuku = booleanPreference("feature_flag_shizuku")
 
     private val preferencesLoggable = listOf(
@@ -116,7 +118,8 @@ object Preferences {
         amp2HtmlExternalService,
         followRedirectsBuiltInCache,
         amp2HtmlBuiltInCache,
-        featureFlagShizuku
+        featureFlagShizuku,
+        firstRun
     )
 
     private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)

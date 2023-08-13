@@ -1,5 +1,6 @@
 package fe.linksheet.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +13,9 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.junkfood.seal.ui.common.animatedArgumentRouteComposable
 import com.junkfood.seal.ui.common.animatedComposable
+import fe.linksheet.BuildConfig
 import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.advancedSettingsRoute
 import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.appsSettingsRoute
@@ -59,6 +62,8 @@ import fe.linksheet.linksSettingsRoute
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
+import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.pretendToBeApp
@@ -68,12 +73,19 @@ import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.whitelistedBrowsersSettingsRoute
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+    private val mainViewModel by viewModel<MainViewModel>()
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (mainViewModel.firstRun.value && BuildConfig.BUILD_TYPE == "release") {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+        }
 
         setContent {
             val navController = rememberAnimatedNavController()

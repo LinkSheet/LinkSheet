@@ -43,9 +43,7 @@ fun BottomSheetSettingsRoute(
         if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.updateState(viewModel.usageStatsSorting, false)
-            }
-
-            if (viewModel.wasTogglingUsageStatsSorting) {
+            } else if (viewModel.wasTogglingUsageStatsSorting) {
                 viewModel.updateState(viewModel.usageStatsSorting, true)
                 viewModel.wasTogglingUsageStatsSorting = false
             }

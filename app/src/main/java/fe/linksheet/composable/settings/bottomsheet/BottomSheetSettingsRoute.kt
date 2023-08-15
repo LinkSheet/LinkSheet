@@ -145,30 +145,6 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = "always_show_package_name") {
-                SwitchRow(
-                    state = viewModel.alwaysShowPackageName,
-                    viewModel = viewModel,
-                    headline = stringResource(id = R.string.always_show_package_name),
-                    subtitleBuilder = { _ ->
-                        SubtitleText(subtitle = stringResource(id = R.string.always_show_package_name_explainer))
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.always_show_package_name_disclaimer),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
-                        }
-                    }
-                )
-            }
-
             item(key = "disable_toasts") {
                 SwitchRow(
                     state = viewModel.disableToasts,

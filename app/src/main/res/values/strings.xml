@@ -259,4 +259,8 @@
     <string name="compat_installed">LinkSheetCompat is already installed</string>
     <string name="configure">Configure</string>
     <string name="configure_explainer">Tap here to configure LinkSheetCompat</string>
+    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity
+    </string>
+    <string name="general">General</string>
+    <string name="general_settings_explainer">Settings concerning the whole app</string>
 </resources>

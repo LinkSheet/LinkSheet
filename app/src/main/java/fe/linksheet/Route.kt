@@ -92,6 +92,7 @@ const val downloaderSettingsRoute = "downloader_settings_route"
 const val amp2HtmlSettingsRoute = "amp2html_settings_route"
 
 
+const val generalSettingsRoute = "general_settings_route"
 const val bottomSheetSettingsRoute = "bottom_sheet_settings_route"
 const val preferredBrowserSettingsRoute = "preferred_browser_settings_route"
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"

@@ -17,8 +17,9 @@ import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
+import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.qualifier.named
@@ -44,4 +45,5 @@ val viewModelModule = module {
     viewModelOf(::Amp2HtmlSettingsViewModel)
     viewModel { FeatureFlagViewModel(get(), get(named("feature_flags"))) }
     viewModelOf(::PretendToBeAppSettingsViewModel)
+    viewModelOf(::GeneralSettingsViewModel)
 }

@@ -52,6 +52,21 @@ fun SettingsRoute(
                 )
             }
 
+            item(key = "general") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = generalSettingsRoute,
+                    headlineId = R.string.general,
+                    subtitleId = R.string.general_settings_explainer,
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.Settings,
+                            descriptionId = R.string.general
+                        )
+                    }
+                )
+            }
+
             item(key = "bottom_sheet") {
                 SettingsItemRow(
                     navController = navController,

@@ -48,6 +48,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.composable.util.ExtendedFabIconRight
+import fe.linksheet.extension.android.initPadding
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
@@ -61,23 +62,7 @@ class OnboardingActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->
-            v.setPadding(0, 0, 0, 0)
-            insets
-        }
-
-        window.setBackgroundDrawable(ColorDrawable(0))
-        window.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT
-        )
-
-        val type = if (AndroidVersion.AT_LEAST_API_26_O) {
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        } else WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-
-        window.setType(type)
+        initPadding()
 
         setContent {
             val navController = rememberAnimatedNavController()

@@ -22,13 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
         <activity
             android:name=".activity.onboarding.OnboardingActivity"
-            android:exported="true"
-            android:label="@string/title_activity_onboarding"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.onboarding.AppsWhichCanHandleLinksOnboardingActivity"
             android:exported="true"
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme" />

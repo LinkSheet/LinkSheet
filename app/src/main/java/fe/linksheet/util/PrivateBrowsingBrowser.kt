@@ -1,21 +1,15 @@
 package fe.linksheet.util
 
 import android.content.Intent
+import fe.linksheet.module.resolver.BrowserResolver
 
 sealed class PrivateBrowsingBrowser(val displayName: String, vararg val packageName: String) {
-    object Firefox : PrivateBrowsingBrowser(
-        "Firefox",
-        "org.mozilla.fennec_fdroid",
-        "us.spotco.fennec_dos",
-        "io.github.forkmaintainers.iceraven",
-        "org.mozilla.fenix.debug",
-        "org.mozilla.fenix",
-        "org.mozilla.firefox_beta",
-        "org.mozilla.firefox"
+    data object Firefox : PrivateBrowsingBrowser(
+        "Firefox", *BrowserResolver.KnownBrowsers.Gecko.packageNames
     ) {
         private const val extra = "private_browsing_mode"
 
-        override fun requestPrivateBrowsing(intent: Intent) = intent.putExtra(extra, true)
+        override fun requestPrivateBrowsing(intent: Intent): Intent = intent.putExtra(extra, true)
     }
 
     abstract fun requestPrivateBrowsing(intent: Intent): Intent

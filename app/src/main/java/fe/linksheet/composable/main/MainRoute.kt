@@ -15,8 +15,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.WarningAmber
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -131,6 +133,10 @@ fun MainRoute(
                 )
             }
 
+            item(key = "spacer_1") {
+                Spacer(modifier = Modifier.height(10.dp))
+            }
+
             if (viewModel.featureFlagShizuku.value) {
                 item(key = "shizuku_card") {
                     ShizukuCard(
@@ -142,8 +148,20 @@ fun MainRoute(
                         viewModel = viewModel
                     )
                 }
+
+                item(key = "spacer_2") {
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
             }
 
+
+            item(key = "browser_card") {
+                BrowserCard(viewModel = viewModel)
+            }
+
+            item(key = "spacer_3") {
+                Spacer(modifier = Modifier.height(10.dp))
+            }
 
             // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
             if (clipboardManager.hasText() || sheetOpen != null) {
@@ -246,8 +264,6 @@ fun OpenDefaultBrowserCard(
             }
         }
     }
-
-    Spacer(modifier = Modifier.height(10.dp))
 }
 
 enum class ShizukuStatus(val headline: Int, val subtitle: Int, val usePrimaryColor: Boolean) {
@@ -379,8 +395,47 @@ fun ShizukuCard(
             }
         }
     }
+}
 
-    Spacer(modifier = Modifier.height(10.dp))
+
+@Composable
+fun BrowserCard(viewModel: MainViewModel) {
+    val browserStatus = viewModel.hasBrowser()
+
+    Card(
+        colors = CardDefaults.cardColors(containerColor = browserStatus.containerColor()),
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(modifier = Modifier.width(10.dp))
+            ColoredIcon(
+                icon = browserStatus.icon,
+                descriptionId = browserStatus.iconDescription,
+                color = browserStatus.color()
+            )
+
+            Column(modifier = Modifier.padding(10.dp)) {
+                Text(
+                    text = stringResource(id = browserStatus.headline),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    color = browserStatus.color()
+                )
+                Text(
+                    text = stringResource(id = browserStatus.subtitle),
+                    color = browserStatus.color()
+                )
+            }
+        }
+    }
 }
 
 @Composable

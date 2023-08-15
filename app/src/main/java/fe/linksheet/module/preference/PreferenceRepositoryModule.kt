@@ -1,8 +1,7 @@
 package fe.linksheet.module.preference
 
 import fe.android.preference.helper.PreferenceRepository
-import org.koin.core.module.dsl.singleOf
-import org.koin.core.qualifier.named
+import fe.linksheet.module.viewmodel.FeatureFlagViewModel
 import org.koin.dsl.module
 
 val preferenceRepositoryModule = module {
@@ -10,5 +9,5 @@ val preferenceRepositoryModule = module {
 }
 
 val featureFlagRepositoryModule = module {
-    single(named("feature_flags")) { PreferenceRepository(get(), "feature_flags") }
+    single(FeatureFlagViewModel.featureFlagNamed) { PreferenceRepository(get(), FeatureFlagViewModel.featureFlagName) }
 }

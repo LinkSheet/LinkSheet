@@ -22,12 +22,11 @@ import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { MainViewModel(get(), get(), get(named("feature_flags"))) }
-    viewModel { AppsWhichCanOpenLinksViewModel(get(), get(), get(named("feature_flags"))) }
+    viewModel { MainViewModel(get(), get(), get(), get(FeatureFlagViewModel.featureFlagNamed)) }
+    viewModel { AppsWhichCanOpenLinksViewModel(get(), get(), get(FeatureFlagViewModel.featureFlagNamed)) }
     viewModelOf(::PreferredAppSettingsViewModel)
     viewModelOf(::InAppBrowserSettingsViewModel)
     viewModelOf(::PreferredBrowserViewModel)
@@ -43,7 +42,7 @@ val viewModelModule = module {
     viewModelOf(::LogTextSettingsViewModel)
     viewModelOf(::CrashHandlerViewerViewModel)
     viewModelOf(::Amp2HtmlSettingsViewModel)
-    viewModel { FeatureFlagViewModel(get(), get(named("feature_flags"))) }
+    viewModel { FeatureFlagViewModel(get(), get(FeatureFlagViewModel.featureFlagNamed)) }
     viewModelOf(::PretendToBeAppSettingsViewModel)
     viewModelOf(::GeneralSettingsViewModel)
 }

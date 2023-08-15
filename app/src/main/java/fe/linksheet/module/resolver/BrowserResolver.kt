@@ -9,6 +9,39 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
 
 class BrowserResolver(val context: Application) {
+    enum class KnownBrowsers(vararg val packageNames: String) {
+        Gecko(
+            "org.mozilla.fennec_fdroid",
+            "us.spotco.fennec_dos",
+            "io.github.forkmaintainers.iceraven",
+            "org.mozilla.fenix.debug",
+            "org.mozilla.fenix",
+            "org.mozilla.firefox_beta",
+            "org.mozilla.firefox"
+        ),
+        Chromium(
+            "com.android.chrome",
+            "com.chrome.canary",
+            "com.chrome.beta",
+            "com.chrome.dev",
+            "com.sec.android.app.sbrowser",
+            "com.opera.browser",
+            "com.opera.browser.beta",
+            "com.opera.cryptobrowser",
+            "com.opera.gx",
+            "com.brave.browser",
+            "com.microsoft.emmx",
+            "com.UCMobile.intl"
+        ),
+        Other("com.opera.mini.native", "com.opera.mini.native.beta");
+
+        companion object {
+            fun isKnownBrowser(packageName: String): KnownBrowsers? {
+                return values().firstOrNull { packageName in it.packageNames }
+            }
+        }
+    }
+
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
         private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")

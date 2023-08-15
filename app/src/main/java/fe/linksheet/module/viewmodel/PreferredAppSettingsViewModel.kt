@@ -9,7 +9,6 @@ import fe.android.preference.helper.PreferenceRepository
 import fe.kotlin.extension.filterIf
 import fe.kotlin.extension.groupByIgnoreNullKeys
 import fe.kotlin.extension.mapToSet
-import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.extension.compose.getAppHosts
@@ -53,8 +52,7 @@ class PreferredAppSettingsViewModel(
     val appsExceptPreferred = preferredApps.map { apps ->
         val preferredAppsPackages = apps.mapToSet { it.first.packageName }
         domainVerificationManager!!.getDisplayActivityInfos(context) {
-            it.hasVerifiedDomains(domainVerificationManager!!, true)
-                    && it.activityInfo.packageName !in preferredAppsPackages
+            it.activityInfo.packageName !in preferredAppsPackages
         }
     }
 

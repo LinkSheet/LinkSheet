@@ -193,6 +193,8 @@ dependencies {
     implementation("dev.rikka.tools.refine:runtime:4.3.0")
     compileOnly("dev.rikka.hidden:stub:4.2.0")
 
+    implementation(project(":interconnect"))
+
     testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")
     testImplementation("junit:junit:4.13.2")

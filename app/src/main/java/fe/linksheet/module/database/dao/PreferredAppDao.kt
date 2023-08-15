@@ -14,6 +14,9 @@ interface PreferredAppDao : BaseDao<PreferredApp> {
     @Query("SELECT * FROM openwith WHERE host = :host")
     fun getByHost(host: String): Flow<PreferredApp?>
 
+    @Query("SELECT * FROM openwith WHERE packageName = :packageName")
+    fun getByPackageName(packageName: String): Flow<List<PreferredApp>>
+
     @Query("DELETE FROM openwith WHERE host = :host")
     suspend fun deleteByHost(host: String)
 

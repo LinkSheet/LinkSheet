@@ -263,4 +263,6 @@
     </string>
     <string name="general">General</string>
     <string name="general_settings_explainer">Settings concerning the whole app</string>
+    <string name="no_handlers_found">No browser or native app found!</string>
+    <string name="no_handlers_found_explainer">LinkSheet can not open this link.</string>
 </resources>

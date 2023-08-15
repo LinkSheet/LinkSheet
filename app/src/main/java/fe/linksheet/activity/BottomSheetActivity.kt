@@ -2,10 +2,8 @@ package fe.linksheet.activity
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
@@ -61,20 +59,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.extension.android.buildSendTo
 import fe.linksheet.extension.android.initPadding
-import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.compose.nullClickable
-import fe.linksheet.extension.compose.runIf
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.android.startPackageInfoActivity
+import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.extension.compose.nullClickable
+import fe.linksheet.extension.compose.runIf
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
@@ -85,7 +81,6 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
-import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.PrivateBrowsingBrowser
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
@@ -109,7 +104,7 @@ class BottomSheetActivity : ComponentActivity() {
             setContent {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
                     if (!bottomSheetViewModel.disableToasts.value) {
-                        bottomSheetViewModel.resolveResult?.resolveResults?.forEach { (resolveType, result) ->
+                        (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
                             if (result != null) makeResolveToast(result, resolveType.stringResId)
                         }
                     }
@@ -128,7 +123,7 @@ class BottomSheetActivity : ComponentActivity() {
         return lifecycleScope.async {
             val completed = bottomSheetViewModel.resolveAsync(intent, referrer).await()
 
-            if (completed.hasAutoLaunchApp) {
+            if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
                 if (!bottomSheetViewModel.disableToasts.value) {
                     completed.resolveResults.forEach { (resolveType, result) ->
                         if (result != null) makeResolveToast(result, resolveType.stringResId, true)
@@ -274,7 +269,7 @@ class BottomSheetActivity : ComponentActivity() {
         landscape: Boolean,
         hideDrawer: () -> Unit
     ) {
-        if (result != null && !result.hasAutoLaunchApp) {
+        if (result != null && result is BottomSheetResult.BottomSheetSuccessResult && !result.hasAutoLaunchApp) {
             val showPackage = remember {
                 result.showExtended || bottomSheetViewModel.alwaysShowPackageName.value
             }
@@ -309,23 +304,96 @@ class BottomSheetActivity : ComponentActivity() {
                 )
             }
         } else {
+            val hasNoHandlers = result is BottomSheetResult.BottomSheetNoHandlersFound
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = stringResource(id = R.string.loading_link),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold
-                )
+                if (hasNoHandlers) {
+                    Text(
+                        text = stringResource(id = R.string.no_handlers_found),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
 
-                Spacer(modifier = Modifier.height(10.dp))
-                CircularProgressIndicator()
+                    Text(
+                        text = stringResource(id = R.string.no_handlers_found_explainer),
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                } else {
+                    Text(
+                        text = stringResource(id = R.string.loading_link),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+
+                if (!hasNoHandlers) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    CircularProgressIndicator()
+                }
+            }
+
+            if (hasNoHandlers) {
+                val padding = PaddingValues(horizontal = 10.dp)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = buttonRowHeight)
+                        .padding(buttonPadding)
+                ) {
+                    CopyButton(result, hideDrawer, padding)
+                    Spacer(modifier = Modifier.width(2.dp))
+                    ShareToButton(result, padding)
+                }
             }
         }
     }
+
+    @Composable
+    private fun CopyButton(
+        result: BottomSheetResult?,
+        hideDrawer: () -> Unit,
+        padding: PaddingValues,
+    ) {
+        OutlinedOrTextButton(
+            textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
+            contentPadding = padding,
+            onClick = {
+                bottomSheetViewModel.clipboardManager.setText(
+                    "URL",
+                    result?.uri.toString()
+                )
+
+                if (!bottomSheetViewModel.disableToasts.value) {
+                    showToast(R.string.url_copied)
+                }
+
+                if (bottomSheetViewModel.hideAfterCopying.value) {
+                    hideDrawer()
+                }
+            },
+            buttonText = R.string.copy
+        )
+    }
+
+    @Composable
+    private fun ShareToButton(result: BottomSheetResult?, padding: PaddingValues) {
+        OutlinedOrTextButton(
+            textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
+            contentPadding = padding,
+            onClick = {
+                startActivity(Intent().buildSendTo(result?.uri))
+                finish()
+            },
+            buttonText = R.string.send_to
+        )
+    }
+
 
     @Composable
     private fun OpenWithPreferred(
@@ -336,6 +404,8 @@ class BottomSheetActivity : ComponentActivity() {
         previewUrl: Boolean
     ) {
         val result = bottomSheetViewModel.resolveResult!!
+        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
+
         val filteredItem = result.filteredItem!!
 
         Column(modifier = Modifier
@@ -428,6 +498,8 @@ class BottomSheetActivity : ComponentActivity() {
         previewUrl: Boolean,
     ) {
         val result = bottomSheetViewModel.resolveResult!!
+        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
+
         Spacer(modifier = Modifier.height(15.dp))
 
         Column(modifier = Modifier.padding(horizontal = 28.dp)) {
@@ -481,8 +553,14 @@ class BottomSheetActivity : ComponentActivity() {
         showPackage: Boolean
     ) {
         val result = bottomSheetViewModel.resolveResult!!
+        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
+
+
         if (result.isEmpty) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 Text(
                     text = stringResource(id = R.string.no_app_to_handle_link_found)
                 )
@@ -624,7 +702,7 @@ class BottomSheetActivity : ComponentActivity() {
         wrapInRow: Boolean = true,
         bottomSheetViewModel: BottomSheetViewModel,
         app: DisplayActivityInfo,
-        result: BottomSheetResult
+        result: BottomSheetResult.BottomSheetSuccessResult
     ) {
         if (bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) {
             val supportedBrowser = PrivateBrowsingBrowser.getSupportedBrowser(
@@ -659,7 +737,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     @Composable
     private fun RequestPrivateBrowsingTextButton(
-        result: BottomSheetResult,
+        result: BottomSheetResult.BottomSheetSuccessResult,
         app: DisplayActivityInfo,
         supportedBrowser: PrivateBrowsingBrowser
     ) {
@@ -685,6 +763,7 @@ class BottomSheetActivity : ComponentActivity() {
         hideDrawer: () -> Unit
     ) {
         val result = bottomSheetViewModel.resolveResult!!
+        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
 
         val utilButtonWidthSum = utilButtonWidth * listOf(
             bottomSheetViewModel.enableCopyButton.value,
@@ -727,38 +806,12 @@ class BottomSheetActivity : ComponentActivity() {
                     .padding(horizontal = buttonPadding)
             ) {
                 if (bottomSheetViewModel.enableCopyButton.value) {
-                    OutlinedOrTextButton(
-                        textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
-                        contentPadding = padding,
-                        onClick = {
-                            bottomSheetViewModel.clipboardManager.setText(
-                                "URL",
-                                result.uri.toString()
-                            )
-
-                            if (!bottomSheetViewModel.disableToasts.value) {
-                                showToast(R.string.url_copied)
-                            }
-
-                            if (bottomSheetViewModel.hideAfterCopying.value) {
-                                hideDrawer()
-                            }
-                        },
-                        buttonText = R.string.copy
-                    )
+                    CopyButton(result, hideDrawer, padding)
                 }
 
                 if (bottomSheetViewModel.enableSendButton.value) {
                     Spacer(modifier = Modifier.width(2.dp))
-                    OutlinedOrTextButton(
-                        textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
-                        contentPadding = padding,
-                        onClick = {
-                            startActivity(Intent().buildSendTo(result.uri))
-                            finish()
-                        },
-                        buttonText = R.string.send_to
-                    )
+                    ShareToButton(result, padding)
                 }
 
                 if (result.downloadable.isDownloadable()) {
@@ -782,7 +835,7 @@ class BottomSheetActivity : ComponentActivity() {
                     )
                 }
 
-                val libRedirectResult = bottomSheetViewModel.resolveResult!!.libRedirectResult
+                val libRedirectResult = result.libRedirectResult
                 if (bottomSheetViewModel.enableIgnoreLibRedirectButton.value && libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
                     Spacer(modifier = Modifier.width(2.dp))
                     OutlinedOrTextButton(
@@ -836,6 +889,7 @@ class BottomSheetActivity : ComponentActivity() {
     ) {
         val activity = LocalContext.currentActivity()
         val result = bottomSheetViewModel.resolveResult!!
+        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
 
         Row(
             modifier = Modifier
@@ -911,7 +965,8 @@ class BottomSheetActivity : ComponentActivity() {
             onClick = onClick,
             content = {
                 Text(
-                    text = stringResource(id = buttonText), fontFamily = HkGroteskFontFamily,
+                    text = stringResource(id = buttonText),
+                    fontFamily = HkGroteskFontFamily,
                     maxLines = 1,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -935,7 +990,7 @@ class BottomSheetActivity : ComponentActivity() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun launchApp(
-        result: BottomSheetResult,
+        result: BottomSheetResult.BottomSheetSuccessResult,
         info: DisplayActivityInfo,
         always: Boolean = false,
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null

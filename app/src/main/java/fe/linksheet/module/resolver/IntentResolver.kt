@@ -20,8 +20,6 @@ import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.log.PackageProcessor
-import fe.linksheet.module.log.toDumpable
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -253,13 +251,17 @@ class IntentResolver(
             }
         }
 
-        logger.debug("NewIntent=$newIntent", )
+        logger.debug("NewIntent=$newIntent")
 
         val resolvedList: MutableList<ResolveInfo> = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)
             .toMutableList()
 
-        logger.debug({"ResolveList=$it"}, resolvedList, HashProcessor.ResolveInfoListProcessor)
+        logger.debug({ "ResolveList=$it" }, resolvedList, HashProcessor.ResolveInfoListProcessor)
+
+        if (resolvedList.isEmpty()) {
+            return BottomSheetResult.BottomSheetNoHandlersFound(uri)
+        }
 
         val browserMode = if (BrowserResolver.isSchemeTypicallySupportedByBrowsers(newIntent)) {
             val (mode, selected, repository) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
@@ -295,7 +297,7 @@ class IntentResolver(
 //            noBrowsersPresentOnlySingleApp
 //        )
 
-        return BottomSheetResult(
+        return BottomSheetResult.BottomSheetSuccessResult(
             newIntent,
             uri,
             grouped,

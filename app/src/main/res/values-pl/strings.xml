@@ -203,14 +203,14 @@
     <string name="usage_stats_sorting_explainer">Uwzględnij statystyki użycia systemu Android w algorytmie sortowania. Żądane jest uprawnienie przy pierwszym przełączeniu.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Włączenie wielu przycisków w dolnym panelu może obecnie prowadzić do ich ucinania lub glitchowania.</string>
     <string name="always_show_package_name_disclaimer">Ten przełącznik zostanie przeniesiony do innej lokalizacji w przyszłej wersji.</string>
-    <string name="use_unified_preferred_browser_explainer">Włączenie tej opcji powoduje zastosowanie poniższych ustawień zarówno do obsługi linków w trybie normalnym, jak i w aplikacji. Użyj poniższych przycisków, aby przełączać się między trybem normalnym a trybem w aplikacji, gdy funkcja ta jest wyłączona.</string>
+    <string name="use_unified_preferred_browser_explainer">Po włączeniu zostaną zastosowane poniższe ustawienia do obsługi linków w trybach normalnym i w aplikacji. Jeśli opcja jest wyłączona, używaj poniższych przycisków, aby przełączać między tymi trybami.</string>
     <string name="instance_not_available_anymore">Instancja nie jest już dostępna!</string>
     <string name="shizuku_explainer_short">Bezpośrednia interakcja z API systemu</string>
-    <string name="apps_which_can_open_links_shizuku_explainer">Po włączeniu trybu Shizuku stuknij aplikację, aby przełączyć funkcję automatycznej obsługi linków. Długie przytrzymanie aplikacji otwiera menu ustawień „Otwórz domyślnie”.</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Tryb Shizuku aktywny, dotknij aplikację, aby przełączyć jej funkcję automatycznej obsługi linków. Przytrzymaj długo, aby otworzyć jej ustawienia „Otwieraj domyślnie”.</string>
     <string name="shizuku_not_running_explainer">Shizuku nie jest uruchomiony. Dotknij tutaj, aby go otworzyć, a następnie postępuj zgodnie z instrukcjami</string>
     <string name="shizuku_integration_not_setup_explainer">Shizuku nie jest niezbędny do działania LinkSheet, ale jest zalecany. Kliknij tutaj, aby zainstalować</string>
     <string name="shizuku">Integracja Shizuku</string>
-    <string name="enable_shizuku_explainer">Włączenie tej opcji pozwoli na użycie Shizuku do bezpośredniej interakcji z systemowymi API. Można to wykorzystać na przykład do automatycznego wyłączenia wszystkich mechanizmów obsługi linków.</string>
+    <string name="enable_shizuku_explainer">Włącz, aby użyć Shizuku do automatycznego wyłączenia wszystkich mechanizmów obsługi linków.</string>
     <string name="enable_all">Włącz wszystko</string>
     <string name="disable_all">Wyłącz wszystko</string>
     <string name="shizuku_integration_enabled_explainer">Integracja z Shizuku została włączona!</string>
@@ -235,12 +235,12 @@
     <string name="onboarding0_highlight">wolność wyboru</string>
     <string name="onboarding0_headline">Czas przywrócić</string>
     <string name="onboarding2_highlight">twoim</string>
-    <string name="onboarding2_headline">Wiele ustawień,
+    <string name="onboarding2_headline">Zawiera wiele ustawień,
 \nktóre uczynią LinkSheet</string>
     <string name="onboarding3_headline">Uzyskaj precyzyjną
 \nkontrolę nad</string>
     <string name="onboarding3_highlight">wszystkim</string>
-    <string name="onboarding7_headline">Miłośnik\?
+    <string name="onboarding7_headline">Entuzjasta\?
 \nLinkSheet ma Cię</string>
     <string name="onboarding7_highlight">w swej garści</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „przywraca” „url-app-chooser”, który został usunięty w Androidzie 12. Użytkownik za jego pomocą mógł wybrać przez jaką aplikację zostanie otworzony link.</string>
@@ -257,8 +257,8 @@
     <string name="launch_onboaring">Uruchom wprowadzenie</string>
     <string name="launch_onboaring_explainer">Przetestuj proces wprowadzania</string>
     <string name="done">Gotowe</string>
-    <string name="onboarding6_headline">Ustaw</string>
-    <string name="onboarding6_highlight">preferencje</string>
+    <string name="onboarding6_headline">Ustaw wszystko</string>
+    <string name="onboarding6_highlight">po swojemu</string>
     <string name="finish">Zakończ</string>
     <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
     <string name="pretend_to_be_app">Przechwytuj żądania aplikacji natywnych</string>
@@ -274,8 +274,8 @@
     <string name="general_settings_explainer">Ustawienia dotyczące całej aplikacji</string>
     <string name="no_handlers_found">Nie znaleziono przeglądarki ani aplikacji natywnej!</string>
     <string name="no_handlers_found_explainer">LinkSheet nie może otworzyć tego linku.</string>
-    <string name="at_least_one_known_browser_installed">Zainstalowana co najmniej jedna przeglądarka</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet wykrył co najmniej jedną aplikację, która jest rzeczywistą przeglądarką.</string>
+    <string name="at_least_one_known_browser_installed">Wykryto przeglądarkę</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet wykrył co najmniej jedną przeglądarkę internetową.</string>
     <string name="at_least_one_unknown_browser_installer">Co najmniej (nieznana) jedna zainstalowana przeglądarka</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet wykrył co najmniej jedną aplikację podającą się za przeglądarkę. Lista LinkSheet może nie być kompletna. Jeśli uważasz, że jest to błąd, prześlij zgłoszenie na Github.</string>
     <string name="no_browser_installed">Brak zainstalowanej przeglądarki</string>

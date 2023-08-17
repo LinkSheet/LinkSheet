@@ -7,18 +7,12 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 
 object VerifiedDomainUtil {
-    private val whitelist = setOf(
-        "dev.zwander.mastodonredirect",
-        "dev.zwander.lemmyredirect"
-    )
-
     @RequiresApi(Build.VERSION_CODES.S)
     fun ResolveInfo.hasVerifiedDomains(
         manager: DomainVerificationManager,
         linkHandlingAllowed: Boolean,
     ): Boolean {
         val packageName = activityInfo.packageName
-        if (packageName in whitelist) return true
 
         return manager.getDomainVerificationUserState(packageName)?.let { state ->
             val linkHandling =
@@ -29,5 +23,14 @@ object VerifiedDomainUtil {
 
             linkHandling && hasAnyVerifiedOrSelected
         } ?: false
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    fun ResolveInfo.canHandleDomains(
+        manager: DomainVerificationManager,
+    ): Boolean {
+        val packageName = activityInfo.packageName
+
+        return manager.getDomainVerificationUserState(packageName)?.hostToStateMap?.isNotEmpty() == true
     }
 }

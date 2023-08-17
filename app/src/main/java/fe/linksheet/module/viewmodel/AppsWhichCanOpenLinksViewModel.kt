@@ -2,21 +2,19 @@ package fe.linksheet.module.viewmodel
 
 import android.content.Intent
 import android.content.pm.verify.domain.DomainVerificationManager
-import android.net.Uri
 import android.os.Build
-import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
 import fe.kotlin.extension.filterIf
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.extension.android.hasVerifiedDomains
 import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.VerifiedDomainUtil.hasVerifiedDomains
 import fe.linksheet.util.flowOfLazy
 import fe.linksheet.util.getAppOpenByDefaultIntent
 import kotlinx.coroutines.flow.MutableStateFlow

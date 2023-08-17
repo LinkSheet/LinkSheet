@@ -17,6 +17,7 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.VerifiedDomainUtil.hasVerifiedDomains
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -38,7 +39,7 @@ class PreferredAppSettingsViewModel(
     private val preferredApps = repository.getAllAlwaysPreferred().map { app ->
         app.groupByWithCacheAndNoNullKeys(
             keySelector = { it.toDisplayActivityInfo(context) },
-            cacheKeySelector = { it.packageName },
+            cacheKeySelector = { it },
             valueTransform = { it.host }
         ).toList()
     }
@@ -53,7 +54,10 @@ class PreferredAppSettingsViewModel(
     val appsExceptPreferred = preferredApps.map { apps ->
         val preferredAppsPackages = apps.mapToSet { it.first.packageName }
         domainVerificationManager!!.getDisplayActivityInfos(context) {
-            it.activityInfo.packageName !in preferredAppsPackages
+            it.hasVerifiedDomains(
+                domainVerificationManager!!,
+                true
+            ) && it.activityInfo.packageName !in preferredAppsPackages
         }.sortedWith(DisplayActivityInfo.labelComparator)
     }
 

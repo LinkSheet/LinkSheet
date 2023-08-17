@@ -15,10 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material.icons.filled.WarningAmber
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,19 +27,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.shizukuDownload
 import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.ui.Typography
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Results
 import kotlinx.coroutines.Dispatchers
@@ -251,9 +248,7 @@ fun OpenDefaultBrowserCard(
                 Column(modifier = Modifier.padding(10.dp)) {
                     Text(
                         text = stringResource(id = if (defaultBrowserEnabled.isSuccess) R.string.browser_status else R.string.set_as_browser),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 18.sp,
+                        style = Typography.titleLarge,
                         color = color
                     )
                     Text(
@@ -383,9 +378,7 @@ fun ShizukuCard(
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
                     text = stringResource(id = status.headline),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp,
+                    style = Typography.titleLarge,
                     color = color
                 )
                 Text(
@@ -424,9 +417,7 @@ fun BrowserCard(viewModel: MainViewModel) {
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
                     text = stringResource(id = browserStatus.headline),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp,
+                    style = Typography.titleLarge,
                     color = browserStatus.color()
                 )
                 Text(
@@ -458,9 +449,7 @@ fun OpenCopiedLink(uriHandler: UriHandler, item: String, sheetOpen: () -> Unit) 
             Column(modifier = Modifier.padding(15.dp)) {
                 Text(
                     text = stringResource(id = R.string.open_copied_link),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp,
+                    style = Typography.titleLarge,
                 )
                 Text(text = item)
             }

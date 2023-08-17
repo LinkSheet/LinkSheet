@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.ui.Typography
 
 
 @Composable
@@ -35,9 +36,7 @@ fun SettingSpacerText(contentTitle: String) {
 fun HeadlineText(headline: String) {
     Text(
         text = headline,
-        fontFamily = HkGroteskFontFamily,
-        fontSize = 18.sp,
-        fontWeight = FontWeight.SemiBold,
+        style = Typography.titleLarge,
         color = MaterialTheme.colorScheme.onSurface
     )
 }

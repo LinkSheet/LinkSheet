@@ -53,7 +53,7 @@ class PreferredAppSettingsViewModel(
         val preferredAppsPackages = apps.mapToSet { it.first.packageName }
         domainVerificationManager!!.getDisplayActivityInfos(context) {
             it.activityInfo.packageName !in preferredAppsPackages
-        }
+        }.sortedWith(DisplayActivityInfo.labelComparator)
     }
 
     fun getHostStateAsync(

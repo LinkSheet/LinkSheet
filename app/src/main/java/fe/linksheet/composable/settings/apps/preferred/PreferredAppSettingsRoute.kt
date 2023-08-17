@@ -82,7 +82,7 @@ fun PreferredAppSettingsRoute(
     )
 
     val appsDialog = appsDialog(
-        appsExceptPreferred = appsExceptPreferred.value?.sortedBy { it.compareLabel },
+        appsExceptPreferred = appsExceptPreferred.value,
         alwaysShowPackageName = viewModel.alwaysShowPackageName.value,
         onClose = { closeState ->
             hostDialog.open(HostDialogState(closeState!!.displayActivityInfo))

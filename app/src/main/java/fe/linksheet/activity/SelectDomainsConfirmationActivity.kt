@@ -26,6 +26,7 @@ import fe.linksheet.composable.util.DialogContent
 import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.SubtitleText
+import fe.linksheet.extension.android.getApplicationInfoCompat
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.interconnect.StringParceledListSlice
 import fe.linksheet.module.database.entity.PreferredApp
@@ -83,20 +84,16 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
 
         initPadding()
 
-        val appLabel = try {
-            @Suppress("DEPRECATION")
-            packageManager.getApplicationInfo(callingPackage, 0)
-                .loadLabel(packageManager)
-        } catch (e: PackageManager.NameNotFoundException) {
-            callingPackage
-        }
+        val appLabel = packageManager.getApplicationInfoCompat(callingPackage, 0)
+            ?.loadLabel(packageManager) ?: callingPackage
 
         setContent {
             val scope = rememberCoroutineScope()
 
             AppTheme {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
                 ) {
                     val dialog = dialogHelper(
                         state = domains,

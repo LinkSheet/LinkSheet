@@ -15,6 +15,7 @@ import kotlin.coroutines.suspendCoroutine
  */
 object LinkSheet {
     const val PACKAGE_NAME = "fe.linksheet"
+    const val NIGHTLY_PACKAGE = "$PACKAGE_NAME.nightly"
     const val DEBUG_PACKAGE = "$PACKAGE_NAME.debug"
 
     const val INTERCONNECT_COMPONENT = "fe.linksheet.InterconnectService"
@@ -28,12 +29,12 @@ object LinkSheet {
 
     /**
      * Get the installed package name, if any.
-     * If LinkSheet release and debug are both installed,
-     * this will return the release package name.
+     * If multiple LinkSheet versions are installed (release/nightly/debug), this will return
+     * release > nightly > debug
      * If LinkSheet is not installed, this returns null.
      */
     fun Context.getInstalledPackageName(): String? {
-        val pkgs = listOf(PACKAGE_NAME, DEBUG_PACKAGE)
+        val pkgs = listOf(PACKAGE_NAME, NIGHTLY_PACKAGE, DEBUG_PACKAGE)
 
         return pkgs.firstOrNull {
             try {
@@ -47,11 +48,7 @@ object LinkSheet {
     }
 
     fun Context.supportsInterconnect(): Boolean {
-        val installedPackage = getInstalledPackageName()
-
-        if (installedPackage == null) {
-            return false
-        }
+        val installedPackage = getInstalledPackageName() ?: return false
 
         return try {
             @Suppress("DEPRECATION")
@@ -73,9 +70,10 @@ object LinkSheet {
             throw IllegalStateException("LinkSheet is not installed!")
         }
 
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.`package` = getInstalledPackageName()
-        intent.component = ComponentName(intent.`package`!!, INTERCONNECT_COMPONENT)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            `package` = getInstalledPackageName()
+            component = ComponentName(`package`!!, INTERCONNECT_COMPONENT)
+        }
 
         val connection = object : LinkSheetServiceConnection() {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -88,15 +86,8 @@ object LinkSheet {
             }
         }
 
-        ContextCompat.startForegroundService(
-            this,
-            intent,
-        )
-        bindService(
-            intent,
-            connection,
-            Context.BIND_AUTO_CREATE,
-        )
+        ContextCompat.startForegroundService(this, intent,)
+        bindService(intent, connection, Context.BIND_AUTO_CREATE,)
     }
 
     /**

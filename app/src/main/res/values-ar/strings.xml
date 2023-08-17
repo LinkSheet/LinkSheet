@@ -267,4 +267,17 @@
     <string name="compat_installed">تم تثبيت LinkSheetCompat بالفعل</string>
     <string name="configure">إعداد</string>
     <string name="configure_explainer">انقر هنا لإعداد LinkSheetCompat</string>
+    <string name="title_activity_cross_profile_request_handler">نشاط متلقي طلب الملف الشخصي</string>
+    <string name="general">عام</string>
+    <string name="general_settings_explainer">الإعدادات المتعلقة بالتطبيق بأكمله</string>
+    <string name="no_handlers_found">لا يوجد متصفح أو تطبيق محلي!</string>
+    <string name="success">تم بنجاح</string>
+    <string name="warning">تحذير</string>
+    <string name="no_handlers_found_explainer">ورقة الروابط لا يمكنها فتح هذا الرابط.</string>
+    <string name="at_least_one_known_browser_installed">متصفح واحد على الأقل مثبت</string>
+    <string name="at_least_one_known_browser_installed_explainer">اكتشفت ورقة الروابط تطبيقًا واحدًا على الأقل معروفًا أنه متصفح فعلي.</string>
+    <string name="at_least_one_unknown_browser_installer">تم تثبيت متصفح واحد (غير معروف) على الأقل</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">اكتشفت ورقة الروابط تطبيقًا واحدًا على الأقل يدعي أنه متصفح. قد لا تكون قائمة ورقة الروابط كاملة. إذا كنت تعتقد أن هذا خطأ ، فأرسل مشكلة على چيتهب.</string>
+    <string name="no_browser_installed">لايوجد متصفح مثبت</string>
+    <string name="no_browser_installed_explainer">تعذر على ورقة الروابط اكتشاف تطبيق واحد على الأقل يدعي أنه مستعرض. للحصول على أفضل تجربة ، قم بتثبيت متصفح.</string>
 </resources>

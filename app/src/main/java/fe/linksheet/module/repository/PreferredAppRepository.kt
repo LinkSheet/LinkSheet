@@ -19,4 +19,6 @@ class PreferredAppRepository(private val dao: PreferredAppDao) {
 
     suspend fun insert(preferredApp: PreferredApp) = dao.insert(preferredApp)
     suspend fun insert(items: List<PreferredApp>) = dao.insert(items)
+
+    suspend fun getByPackageName(packageName: String) = dao.getByPackageName(packageName).first()
 }

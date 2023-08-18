@@ -10,6 +10,9 @@ import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
+import fe.clearurlskt.ClearURLLoader
+import fe.clearurlskt.clearUrl
+import fe.fastforwardkt.getRuleRedirect
 import fe.fastforwardkt.isTracker
 import fe.linksheet.R
 import fe.linksheet.extension.android.IntentExt.getUri
@@ -20,6 +23,7 @@ import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -116,6 +120,10 @@ class IntentResolver(
         preferenceRepository.getBooleanState(Preferences.amp2HtmlExternalService)
 
 
+    private val clearUrlProviders by lazy {
+        ClearURLLoader.loadBuiltInClearURLProviders()
+    }
+
     enum class Resolved(val key: String, val stringResId: Int) {
         Amp2Html("amp2html", R.string.amp2html), Redirect("redirect", R.string.follow_redirects);
 
@@ -137,7 +145,7 @@ class IntentResolver(
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        var uri = intent.getUri(useClearUrls.value, useFastForwardRules.value)
+        var uri = modifyUri(intent.getUri(), useClearUrls.value, useFastForwardRules.value)
 
         if (uri == null) {
             logger.debug("Uri is null, something probably went very wrong")
@@ -207,6 +215,8 @@ class IntentResolver(
         if (amp2HtmlResult != null) {
             uri = amp2HtmlResultUri
         }
+
+        uri = modifyUri(uri, useClearUrls.value, useFastForwardRules.value)
 //        }
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
@@ -335,5 +345,38 @@ class IntentResolver(
         }
 
         return downloader.isNonHtmlContentUri(uri.toString(), timeout)
+    }
+
+    fun modifyUri(
+        uri: Uri?,
+        clearUrl: Boolean = false,
+        fastForward: Boolean = false,
+    ): Uri? {
+        if (uri?.host != null && uri.scheme != null) {
+            var url = uri.toString()
+
+            logger.debug({ "GetUri: Pre modification=$it" }, url, UrlProcessor)
+
+            runCatching {
+                if (fastForward) {
+                    getRuleRedirect(url)?.let { url = it }
+                }
+            }
+
+
+            logger.debug({ "GetUri: Post FastForward=$it" }, url, UrlProcessor)
+            runCatching {
+                if (clearUrl) {
+                    url = clearUrl(url, clearUrlProviders)
+                }
+            }
+
+            logger.debug({ "GetUri: Post ClearURL=$it" }, url, UrlProcessor)
+            return runCatching {
+                Uri.parse(url)
+            }.getOrNull()
+        }
+
+        return null
     }
 }

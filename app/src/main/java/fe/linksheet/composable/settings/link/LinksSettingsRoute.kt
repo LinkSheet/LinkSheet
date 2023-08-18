@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings.link
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -29,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -47,6 +50,13 @@ import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
+class Operation(
+    @StringRes val id: Int,
+    vararg val values: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>
+) {
+    fun isEnabled() = values.all { it.value }
+}
+
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun LinksSettingsRoute(
@@ -56,12 +66,14 @@ fun LinksSettingsRoute(
 ) {
     val writeExternalStoragePermissionState = downloaderPermissionState()
 
-    val operations = mapOf(
-        R.string.fastforward to viewModel.useFastForwardRules,
-        R.string.clear_urls to viewModel.useClearUrls,
-        R.string.follow_redirects to viewModel.followRedirects,
-        R.string.amp2html to viewModel.enableAmp2Html,
-        R.string.lib_redirect to viewModel.enableLibRedirect,
+    val operations = listOf(
+        Operation(R.string.fastforward, viewModel.useFastForwardRules),
+        Operation(R.string.clear_urls, viewModel.useClearUrls),
+        Operation(R.string.follow_redirects, viewModel.followRedirects),
+        Operation(R.string.fastforward, viewModel.useFastForwardRules, viewModel.followRedirects),
+        Operation(R.string.clear_urls, viewModel.useClearUrls, viewModel.followRedirects),
+        Operation(R.string.amp2html, viewModel.enableAmp2Html),
+        Operation(R.string.lib_redirect, viewModel.enableLibRedirect),
     )
 
     SettingsScaffold(R.string.links, onBackPressed = onBackPressed) { padding ->
@@ -72,7 +84,7 @@ fun LinksSettingsRoute(
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
             stickyHeader(key = "header") {
-                AnimatedVisibility(visible = operations.any { it.value.value }) {
+                AnimatedVisibility(visible = operations.any { it.isEnabled() }) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -99,9 +111,9 @@ fun LinksSettingsRoute(
                                 Column(modifier = Modifier.padding(10.dp)) {
                                     HeadlineText(headlineId = R.string.order_of_operation)
 
-                                    operations.forEach { (stringId, enabled) ->
-                                        AnimatedVisibility(visible = enabled.value) {
-                                            SubtitleText(subtitleId = stringId)
+                                    operations.forEach { operation ->
+                                        AnimatedVisibility(visible = operation.isEnabled()) {
+                                            SubtitleText(subtitleId = operation.id)
                                         }
                                     }
                                 }

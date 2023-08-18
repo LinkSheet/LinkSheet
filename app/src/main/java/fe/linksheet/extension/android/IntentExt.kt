@@ -3,12 +3,7 @@ package fe.linksheet.extension.android
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import fe.clearurlskt.ClearURLLoader
-import fe.clearurlskt.clearUrl
-import fe.fastforwardkt.getRuleRedirect
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.log.UrlProcessor
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -42,51 +37,12 @@ object IntentExt : KoinComponent {
     private val loggerFactory by inject<LoggerFactory>()
     private val logger = loggerFactory.createLogger(IntentExt::class)
 
-    private val clearUrlProviders by lazy {
-        ClearURLLoader.loadBuiltInClearURLProviders()
-    }
 
-    fun Intent.getUri(
-        clearUrl: Boolean = false,
-        fastForward: Boolean = false,
-    ): Uri? {
+    fun Intent.getUri(): Uri? {
         var uriData = dataString
-        if (uriData == null) {
-            uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
-        }
-
-        if (uriData == null) {
-            uriData = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
-        }
-
-        if (uriData != null) {
-            val uri = runCatching { Uri.parse(uriData) }.getOrNull()
-            if (uri?.host != null && uri.scheme != null) {
-                var url = uri.toString()
-
-                logger.debug({ "GetUri: Pre modification=$it" }, url, UrlProcessor)
-
-                runCatching {
-                    if (fastForward) {
-                        getRuleRedirect(url)?.let { url = it }
-                    }
-                }
-
-
-                logger.debug({ "GetUri: Post FastForward=$it" }, url, UrlProcessor)
-                runCatching {
-                    if (clearUrl) {
-                        url = clearUrl(url, clearUrlProviders)
-                    }
-                }
-
-                logger.debug({ "GetUri: Post ClearURL=$it" }, url, UrlProcessor)
-                return runCatching {
-                    Uri.parse(url)
-                }.getOrNull()
-            }
-        }
-
+        if (uriData == null) uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
+        if (uriData == null) uriData = getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+        if (uriData != null) return runCatching { Uri.parse(uriData) }.getOrNull()
         return null
     }
 }

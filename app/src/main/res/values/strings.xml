@@ -277,4 +277,6 @@
     <string name="no">No</string>
     <string name="domain_selection_confirmation_title">Select Domains?</string>
     <string name="domain_selection_confirmation_subtitle">Are you sure you want to set %s as the preferred application for the following domains?</string>
+    <string name="button_settings">Buttons</string>
+    <string name="misc_settings">Miscellaneous</string>
 </resources>

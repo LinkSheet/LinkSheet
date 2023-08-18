@@ -137,7 +137,7 @@ fun PreferredAppSettingsRoute(
                             HeadlineText(headline = app.label)
 
                             Text(
-                                text = hosts.joinToString(", "),
+                                text = hosts.joinToString(", ", limit = 20),
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                                 color = MaterialTheme.colorScheme.onSurface

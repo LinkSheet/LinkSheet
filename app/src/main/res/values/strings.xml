@@ -273,4 +273,8 @@
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet has detected at least one app claiming to be a browser. LinkSheet\'s list may not be complete. If you think this is an error, submit an issue on Github.</string>
     <string name="no_browser_installed">No browser installed</string>
     <string name="no_browser_installed_explainer">LinkSheet was unable to detect at least one application claiming to be a browser. For the best experience, install a browser.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="domain_selection_confirmation_title">Select Domains?</string>
+    <string name="domain_selection_confirmation_subtitle">Are you sure you want to set %s as the preferred application for the following domains?</string>
 </resources>

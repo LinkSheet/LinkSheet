@@ -165,7 +165,7 @@ dependencies {
     implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.54")
     implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.54")
     implementation("com.gitlab.grrfe:gson-ext:8.1.2")
-    implementation("com.gitlab.grrfe:kotlin-ext:0.0.20")
+    implementation("com.gitlab.grrfe:kotlin-ext:0.0.23")
     implementation("com.github.1fexd:clearurlkt:0.0.23")
     implementation("com.github.1fexd:fastforwardkt:0.0.18")
     implementation("com.github.1fexd:libredirectkt:0.0.18")
@@ -192,6 +192,8 @@ dependencies {
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
     implementation("dev.rikka.tools.refine:runtime:4.3.0")
     compileOnly("dev.rikka.hidden:stub:4.2.0")
+
+    implementation(project(":interconnect"))
 
     testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")

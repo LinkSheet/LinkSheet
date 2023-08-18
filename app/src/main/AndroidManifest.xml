@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
@@ -22,7 +24,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
-
         <activity
             android:name=".activity.onboarding.OnboardingActivity"
             android:exported="true"
@@ -57,6 +58,14 @@
             android:launchMode="singleTask"
             android:screenOrientation="unspecified"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.SelectDomainsConfirmationActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:screenOrientation="unspecified"
+            android:theme="@style/Theme.Seal.Dialog"
+            />
         <activity
             android:name=".activity.BottomSheetActivity"
             android:excludeFromRecents="true"
@@ -115,6 +124,17 @@
                 <action android:name="android.support.customtabs.action.CustomTabsService" />
 
                 <category android:name="androidx.browser.trusted.category.TrustedWebActivities" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".InterconnectService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
     </application>

@@ -1,6 +1,7 @@
 package fe.linksheet.extension.android
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -56,3 +57,14 @@ fun PackageManager.resolveActivityCompat(
 ) = if (AndroidVersion.AT_LEAST_API_33_T) {
     resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
 } else @Suppress("DEPRECATION") resolveActivity(intent, flags)
+
+fun PackageManager.getApplicationInfoCompat(packageName: String, flags: Int): ApplicationInfo? {
+    return runCatching {
+        if (AndroidVersion.AT_LEAST_API_33_T) {
+            getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(flags.toLong()))
+        } else {
+            @Suppress("DEPRECATION")
+            getApplicationInfo(packageName, flags)
+        }
+    }.getOrNull()
+}

@@ -280,4 +280,8 @@
     <string name="at_least_one_unknown_browser_installer_explainer">اكتشفت ورقة الروابط تطبيقًا واحدًا على الأقل يدعي أنه متصفح. قد لا تكون قائمة ورقة الروابط كاملة. إذا كنت تعتقد أن هذا خطأ ، فأرسل مشكلة على چيتهب.</string>
     <string name="no_browser_installed">لايوجد متصفح مثبت</string>
     <string name="no_browser_installed_explainer">تعذر على ورقة الروابط اكتشاف تطبيق واحد على الأقل يدعي أنه مستعرض. للحصول على أفضل تجربة ، قم بتثبيت متصفح.</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="domain_selection_confirmation_title">حدد المجالات؟</string>
+    <string name="domain_selection_confirmation_subtitle">هل تريد بالتأكيد تعيين %s باعتباره التطبيق المفضل للمجالات التالية؟</string>
 </resources>

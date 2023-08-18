@@ -28,7 +28,6 @@ class BottomSheetSettingsViewModel(
     var hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
     var singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
     var enableSendButton = preferenceRepository.getBooleanState(Preferences.enableSendButton)
-    var disableToasts = preferenceRepository.getBooleanState(Preferences.disableToasts)
     var gridLayout = preferenceRepository.getBooleanState(Preferences.gridLayout)
     var useTextShareCopyButtons =
         preferenceRepository.getBooleanState(Preferences.useTextShareCopyButtons)

@@ -145,15 +145,6 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = "disable_toasts") {
-                SwitchRow(
-                    state = viewModel.disableToasts,
-                    viewModel = viewModel,
-                    headlineId = R.string.disable_toasts,
-                    subtitleId = R.string.disable_toasts_explainer
-                )
-            }
-
             item(key = "grid_layout") {
                 SwitchRow(
                     state = viewModel.gridLayout,

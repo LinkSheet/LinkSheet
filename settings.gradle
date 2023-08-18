@@ -29,3 +29,4 @@ includeBuild("androidx-compose-material3-pullrefresh") {
 
 rootProject.name = "LinkSheet"
 include ":app"
+include ':interconnect'

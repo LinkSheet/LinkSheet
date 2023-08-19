@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 fun PreferenceSubtitle(
     modifier: Modifier = Modifier,
     text: String,
-    paddingStart: Dp = 15.dp,
+    paddingStart: Dp = 10.dp,
     color: Color = MaterialTheme.colorScheme.primary,
 ) {
     Text(

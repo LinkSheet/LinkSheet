@@ -53,6 +53,15 @@ fun GeneralSettingsRoute(
                     subtitle = stringResource(id = R.string.always_show_package_name_explainer)
                 )
             }
+
+            item(key = "disable_toasts") {
+                SwitchRow(
+                    state = viewModel.disableToasts,
+                    viewModel = viewModel,
+                    headlineId = R.string.disable_toasts,
+                    subtitleId = R.string.disable_toasts_explainer
+                )
+            }
         }
     }
 }

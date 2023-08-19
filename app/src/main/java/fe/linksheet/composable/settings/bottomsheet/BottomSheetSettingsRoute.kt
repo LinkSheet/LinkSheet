@@ -1,5 +1,8 @@
 package fe.linksheet.composable.settings.bottomsheet
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -19,6 +22,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import com.junkfood.seal.ui.component.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SubtitleText
@@ -30,6 +34,7 @@ import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.androidx.compose.koinViewModel
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BottomSheetSettingsRoute(
     onBackPressed: () -> Unit,
@@ -57,19 +62,10 @@ fun BottomSheetSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(key = "usage_stats") {
-                SwitchRow(
-                    checked = viewModel.usageStatsSorting.value,
-                    onChange = {
-                        if (!viewModel.getUsageStatsAllowed(context)) {
-                            viewModel.openUsageStatsSettings(context)
-                        } else {
-                            viewModel.updateState(viewModel.usageStatsSorting, it)
-                        }
-                    },
-                    headlineId = R.string.usage_stats_sorting,
-                    subtitleId = R.string.usage_stats_sorting_explainer
-                )
+            stickyHeader(key = "button") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(text = stringResource(R.string.button_settings))
+                }
             }
 
             item(key = "enable_copy_button") {
@@ -125,6 +121,35 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
+            item(key = "enable_request_private_browsing") {
+                SwitchRow(
+                    state = viewModel.enableRequestPrivateBrowsingButton,
+                    viewModel = viewModel,
+                    headline = stringResource(id = R.string.enable_request_private_browsing_button),
+                    subtitleBuilder = { _ ->
+                        SubtitleText(subtitle = stringResource(
+                            id = R.string.enable_request_private_browsing_button_explainer,
+                            PrivateBrowsingBrowser.supportedBrowsers.joinToString(
+                                separator = ", ",
+                            ) { it.displayName }
+                        ))
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            shape = RoundedCornerShape(12.dp),
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.request_timeout_explainer_disclaimer),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.padding(all = 10.dp)
+                            )
+                        }
+                    }
+                )
+            }
+
             if (viewModel.enableCopyButton.value || viewModel.enableSendButton.value || viewModel.enableIgnoreLibRedirectButton.value) {
                 item(key = "use_text_share_copy_buttons") {
                     SwitchRow(
@@ -136,21 +161,33 @@ fun BottomSheetSettingsRoute(
                 }
             }
 
+            stickyHeader(key = "misc") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(text = stringResource(R.string.misc_settings))
+                }
+            }
+
+            item(key = "usage_stats") {
+                SwitchRow(
+                    checked = viewModel.usageStatsSorting.value,
+                    onChange = {
+                        if (!viewModel.getUsageStatsAllowed(context)) {
+                            viewModel.openUsageStatsSettings(context)
+                        } else {
+                            viewModel.updateState(viewModel.usageStatsSorting, it)
+                        }
+                    },
+                    headlineId = R.string.usage_stats_sorting,
+                    subtitleId = R.string.usage_stats_sorting_explainer
+                )
+            }
+
             item(key = "enable_single_tap") {
                 SwitchRow(
                     state = viewModel.singleTap,
                     viewModel = viewModel,
                     headlineId = R.string.single_tap,
                     subtitleId = R.string.single_tap_explainer
-                )
-            }
-
-            item(key = "disable_toasts") {
-                SwitchRow(
-                    state = viewModel.disableToasts,
-                    viewModel = viewModel,
-                    headlineId = R.string.disable_toasts,
-                    subtitleId = R.string.disable_toasts_explainer
                 )
             }
 
@@ -178,35 +215,6 @@ fun BottomSheetSettingsRoute(
                     viewModel = viewModel,
                     headlineId = R.string.preview_url,
                     subtitleId = R.string.preview_url_explainer
-                )
-            }
-
-            item(key = "enable_request_private_browsing") {
-                SwitchRow(
-                    state = viewModel.enableRequestPrivateBrowsingButton,
-                    viewModel = viewModel,
-                    headline = stringResource(id = R.string.enable_request_private_browsing_button),
-                    subtitleBuilder = { _ ->
-                        SubtitleText(subtitle = stringResource(
-                            id = R.string.enable_request_private_browsing_button_explainer,
-                            PrivateBrowsingBrowser.supportedBrowsers.joinToString(
-                                separator = ", ",
-                            ) { it.displayName }
-                        ))
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.request_timeout_explainer_disclaimer),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
-                        }
-                    }
                 )
             }
         }

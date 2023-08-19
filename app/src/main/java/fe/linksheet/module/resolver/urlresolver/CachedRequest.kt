@@ -2,6 +2,7 @@ package fe.linksheet.module.resolver.urlresolver
 
 import fe.httpkt.Request
 import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.UrlProcessor
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.net.HttpURLConnection
@@ -23,12 +24,16 @@ class CachedRequest(private val request: Request, loggerFactory: LoggerFactory) 
     ): HttpURLConnection {
         val value = get(url)
         return if (value == null) {
-            logger.debug("No cached response found for $type $url, sending request..")
+            logger.debug(
+                { "No cached response found for $type $it, sending request.." },
+                url,
+                UrlProcessor
+            )
             val answer = defaultValue()
             put(url, answer)
             answer
         } else {
-            logger.debug("Cached response found for $type $url!")
+            logger.debug({ "Cached response found for $type $it!" }, url, UrlProcessor)
             value
         }
     }

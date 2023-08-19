@@ -280,4 +280,8 @@
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet wykrył co najmniej jedną aplikację podającą się za przeglądarkę. Lista LinkSheet może nie być kompletna. Jeśli uważasz, że jest to błąd, prześlij zgłoszenie na Github.</string>
     <string name="no_browser_installed">Brak zainstalowanej przeglądarki</string>
     <string name="no_browser_installed_explainer">LinkSheet nie był w stanie wykryć przeglądarki. Aby uzyskać najlepsze wrażenia, zainstaluj ją.</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="domain_selection_confirmation_title">Wybrać domeny\?</string>
+    <string name="domain_selection_confirmation_subtitle">Czy na pewno chcesz ustawić %s jako preferowaną aplikację dla następujących domen\?</string>
 </resources>

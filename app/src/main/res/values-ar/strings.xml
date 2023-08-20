@@ -284,4 +284,6 @@
     <string name="no">لا</string>
     <string name="domain_selection_confirmation_title">حدد المجالات؟</string>
     <string name="domain_selection_confirmation_subtitle">هل تريد بالتأكيد تعيين %s باعتباره التطبيق المفضل للمجالات التالية؟</string>
+    <string name="button_settings">الأزرار</string>
+    <string name="misc_settings">متنوعة</string>
 </resources>

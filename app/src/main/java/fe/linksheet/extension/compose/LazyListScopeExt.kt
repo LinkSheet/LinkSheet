@@ -18,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.junkfood.seal.ui.component.PreferenceSubtitle
+import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.Searchbar
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,7 +44,7 @@ fun LazyListScope.searchHeader(
         Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
             PreferenceSubtitle(
                 text = stringResource(subtitleId),
-                paddingStart = 0.dp
+                paddingHorizontal = 0.dp
             )
 
             Spacer(modifier = Modifier.height(10.dp))

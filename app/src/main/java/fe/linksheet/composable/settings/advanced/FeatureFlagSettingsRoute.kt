@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.junkfood.seal.ui.component.PreferenceSubtitle
+import fe.linksheet.composable.util.PreferenceSubtitle
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -51,7 +51,7 @@ fun FeatureFlagSettingsRoute(
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                     PreferenceSubtitle(
                         text = stringResource(id = R.string.feature_flags_explainer),
-                        paddingStart = 10.dp
+                        paddingHorizontal = 10.dp
                     )
                 }
             }

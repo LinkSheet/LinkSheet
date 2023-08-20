@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.junkfood.seal.ui.component.PreferenceSubtitle
+import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
@@ -63,7 +63,7 @@ fun PretendToBeAppSettingsRoute(
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                     PreferenceSubtitle(
                         text = stringResource(id = R.string.pretend_to_be_app_explainer_2),
-                        paddingStart = 10.dp
+                        paddingHorizontal = 0.dp
                     )
                 }
 

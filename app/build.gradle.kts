@@ -93,6 +93,22 @@ android {
         }
     }
 
+    flavorDimensions += listOf("type")
+
+    productFlavors {
+        create("foss") {
+            dimension = "type"
+        }
+
+        create("pro") {
+            dimension = "type"
+
+            applicationIdSuffix = ".pro"
+            versionName = "-pro"
+            resValue("string", "app_name", "LinkSheet Pro")
+        }
+    }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
 

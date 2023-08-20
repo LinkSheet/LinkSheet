@@ -7,6 +7,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
+import fe.android.preference.helper.PreferenceRepository
 import fe.kotlin.extension.asString
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
@@ -15,6 +16,7 @@ import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.defaultLoggerFactoryModule
+import fe.linksheet.module.preference.Preferences
 import fe.linksheet.module.preference.featureFlagRepositoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.repository.module.repositoryModule
@@ -28,6 +30,8 @@ import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.shizuku.ShizukuCommand
 import fe.linksheet.shizuku.ShizukuHandler
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.Timer
+import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -37,6 +41,7 @@ import kotlin.system.exitProcess
 class LinkSheetApp : Application(), DefaultLifecycleObserver {
     private lateinit var appLogger: AppLogger
     private lateinit var shizukuHandler: ShizukuHandler<LinkSheetApp>
+    private lateinit var timer: Timer
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -44,6 +49,7 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
 
     override fun onCreate() {
         super<Application>.onCreate()
+        timer = Timer.startTimer()
 
         if (AndroidVersion.AT_LEAST_API_28_P) {
             HiddenApiBypass.addHiddenApiExemptions("")
@@ -96,6 +102,15 @@ class LinkSheetApp : Application(), DefaultLifecycleObserver {
 
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
+
+        kotlin.runCatching {
+            val preferenceRepository = get<PreferenceRepository>()
+            val currentUseTime = preferenceRepository.getLong(Preferences.useTimeMs)
+            val usedFor = timer.stop()
+
+            preferenceRepository.writeLong(Preferences.useTimeMs, currentUseTime + usedFor)
+        }
+
         appLogger.writeLog()
     }
 }

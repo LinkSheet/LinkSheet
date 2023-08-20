@@ -22,13 +22,14 @@ import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
+import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.preference.Preferences
-import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
+import java.time.Duration
 
 
 class MainViewModel(
@@ -40,11 +41,25 @@ class MainViewModel(
 
     val featureFlagShizuku = featureFlagRepository.getBooleanState(Preferences.featureFlagShizuku)
     val firstRun = preferenceRepository.getBooleanState(Preferences.firstRun)
+    val useTimeMs = preferenceRepository.getLong(Preferences.useTimeMs)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {
             context.getSystemService<RoleManager>()
         } else null
+    }
+
+    fun formatUseTime(): Pair<Int?, Int?>? {
+        val duration = Duration.ofMillis(useTimeMs)
+        val minutes = duration.toMinutesPart()
+        if (minutes < donationBannerAfterMinutes) return null
+
+        val hours = duration.toHoursPart()
+        if (hours > 0) {
+            return hours to null
+        }
+
+        return null to minutes
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)

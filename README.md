@@ -66,16 +66,19 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
 
+## License
+
+* LinkSheet, excluding all `strings.xml` and `plural.xml` files, is licensed under the [FXL](LICENSE)
+* All `strings.xml` and `plural.xml` files are licensed under [GPL-3.0](LICENSE_STRINGS)
+
 ## Donations
 
 Want to donate in another way (SEPA/Paypal, another crypto)? Send a mail to `grrfe[at]420blaze.it`
 
 ## Acknowledgements
 
-Code was taken from:
-
-* [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
-* [Seal](https://github.com/JunkFood02/Seal)
+* App was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
+* [Seal](https://github.com/JunkFood02/Seal) has been a reference to learn from
 
 ## Star History
 

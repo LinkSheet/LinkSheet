@@ -22,7 +22,8 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import com.junkfood.seal.ui.component.PreferenceSubtitle
+import androidx.navigation.NavHostController
+import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SubtitleText

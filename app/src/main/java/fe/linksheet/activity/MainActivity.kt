@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.junkfood.seal.ui.common.animatedArgumentRouteComposable
-import com.junkfood.seal.ui.common.animatedComposable
+import fe.linksheet.composable.util.animatedArgumentRouteComposable
+import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.BuildConfig
 import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.activity.onboarding.OnboardingActivity

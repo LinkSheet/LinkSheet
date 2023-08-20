@@ -143,6 +143,9 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(project(mapOf("path" to ":config")))
+    implementation(project(mapOf("path" to ":config")))
+    implementation(project(mapOf("path" to ":config")))
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
@@ -210,6 +213,7 @@ dependencies {
     compileOnly("dev.rikka.hidden:stub:4.2.0")
 
     implementation(project(":interconnect"))
+    implementation(project(":config"))
 
     testImplementation("io.insert-koin:koin-test:3.4.1")
     testImplementation("io.insert-koin:koin-android-test:3.4.0")

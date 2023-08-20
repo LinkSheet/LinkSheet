@@ -32,11 +32,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
+import fe.android.compose.dialog.helper.dialogHelper
+import fe.fastforwardkt.FastForwardRules
 import fe.linksheet.R
+import fe.linksheet.composable.settings.link.redirect.FollowRedirectsKnownTrackersDialog
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.DialogColumn
+import fe.linksheet.composable.util.DialogContent
+import fe.linksheet.composable.util.DialogSpacer
+import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
+import fe.linksheet.extension.compose.clickable
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -206,12 +214,52 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
         pluralStringResource(id = R.plurals.hours, hours, hours)
     } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
 
+    val donateDialog = dialogHelper<Unit, Unit, Unit>(
+        fetch = {},
+        awaitFetchBeforeOpen = true,
+        dynamicHeight = true
+    ) { _, close ->
+        DialogColumn {
+            HeadlineText(headlineId = R.string.donation_instructions)
+            DialogSpacer()
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            
+
+//            DialogContent(
+//                items = trackers,
+//                key = { it },
+//                bottomRow = {
+//                    Row(
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .height(40.dp),
+//                        horizontalArrangement = Arrangement.End
+//                    ) {
+//                        TextButton(onClick = {
+//                            close(Unit)
+//                        }) {
+//                            Text(text = stringResource(id = R.string.close))
+//                        }
+//                    }
+//                },
+//                content = { tracker ->
+//                    Text(text = tracker)
+//                }
+//            )
+        }
+    }
+
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         shape = RoundedCornerShape(12.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
+            .clickable {
+                donateDialog.open(Unit)
+            }
     ) {
         Row(
             modifier = Modifier

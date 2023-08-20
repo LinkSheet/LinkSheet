@@ -38,7 +38,7 @@ import org.lsposed.hiddenapibypass.HiddenApiBypass
 import kotlin.system.exitProcess
 
 
-class LinkSheetApp : Application(), DefaultLifecycleObserver {
+open class LinkSheetApp : Application(), DefaultLifecycleObserver {
     private lateinit var appLogger: AppLogger
     private lateinit var shizukuHandler: ShizukuHandler<LinkSheetApp>
     private lateinit var timer: Timer

@@ -62,7 +62,7 @@ fun <T : Any, M> BrowserCommonScaffold(
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                     PreferenceSubtitle(
                         text = stringResource(explainer),
-                        paddingStart = 10.dp
+                        paddingHorizontal = 10.dp
                     )
 
                     header?.invoke(this)

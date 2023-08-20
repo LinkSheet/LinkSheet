@@ -23,6 +23,8 @@ android {
                 "proguard-rules.pro"
             )
         }
+        create("nightly") {
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

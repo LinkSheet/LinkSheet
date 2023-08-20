@@ -21,6 +21,7 @@ import androidx.core.content.getSystemService
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
 import fe.linksheet.BuildConfig
+import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
@@ -50,6 +51,8 @@ class MainViewModel(
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {
+        if(!LinkSheetAppConfig.showDonationBanner()) return null
+
         val duration = Duration.ofMillis(useTimeMs)
         val minutes = duration.toMinutesPart()
         if (minutes < donationBannerAfterMinutes) return null

@@ -132,7 +132,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                 if (shizukuMode && viewModel.featureFlagShizuku.value) R.string.apps_which_can_open_links_shizuku_explainer
                                 else R.string.apps_which_can_open_links_explainer
                             ),
-                            paddingStart = 0.dp
+                            paddingHorizontal = 0.dp
                         )
 
                         Row(verticalAlignment = Alignment.CenterVertically) {

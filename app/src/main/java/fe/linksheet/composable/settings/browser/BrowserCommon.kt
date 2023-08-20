@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.junkfood.seal.ui.component.PreferenceSubtitle
+import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R

@@ -40,7 +40,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
  </div>
 
 <div align="center">
-    <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+    <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="border-radius:20px; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
     <a href="https://coindrop.to/fexd" target="_blank"><img src="https://coindrop.to/embed-button.png" alt="Coindrop.to me" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 </div>
 
@@ -60,6 +60,11 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * *Experimental:* [ClearURLs](https://github.com/ClearURLs) integration (removes tracking parameters) (report issues/bugs [here](https://github.com/1fexd/clearurlkt))
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
+
+## License
+
+* LinkSheet, excluding all `strings.xml` files, is licensed under the [FXL](LICENSE)
+* All `strings.xml` files are licensed under [GPL-3.0](LICENSE_STRINGS)
 
 ## Donations
 

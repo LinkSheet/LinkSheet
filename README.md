@@ -10,7 +10,6 @@
 [![Build status](https://img.shields.io/github/actions/workflow/status/1fexd/LinkSheet/build-nightly.yml)](https://github.com/1fexd/LinkSheet/actions/workflows/build-nightly.yml)
 [![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
 [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)
-[![License](https://img.shields.io/github/license/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/blob/master/LICENSE)
 
 </div>
 

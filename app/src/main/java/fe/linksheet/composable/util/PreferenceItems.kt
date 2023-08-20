@@ -1,4 +1,4 @@
-package com.junkfood.seal.ui.component
+package fe.linksheet.composable.util
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,14 +14,17 @@ import androidx.compose.ui.unit.dp
 fun PreferenceSubtitle(
     modifier: Modifier = Modifier,
     text: String,
-    paddingStart: Dp = 10.dp,
+    paddingHorizontal: Dp = 10.dp,
     color: Color = MaterialTheme.colorScheme.primary,
 ) {
     Text(
+        modifier = modifier.fillMaxWidth().padding(
+                start = paddingHorizontal,
+                top = 24.dp,
+                bottom = 12.dp,
+                end = paddingHorizontal
+        ),
         text = text,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(start = paddingStart, top = 24.dp, bottom = 12.dp, end = 15.dp),
         color = color,
         style = MaterialTheme.typography.labelLarge
     )

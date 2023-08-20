@@ -259,8 +259,7 @@
     <string name="compat_installed">LinkSheetCompat is already installed</string>
     <string name="configure">Configure</string>
     <string name="configure_explainer">Tap here to configure LinkSheetCompat</string>
-    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity
-    </string>
+    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="general">General</string>
     <string name="general_settings_explainer">Settings concerning the whole app</string>
     <string name="no_handlers_found">No browser or native app found!</string>
@@ -279,4 +278,7 @@
     <string name="domain_selection_confirmation_subtitle">Are you sure you want to set %s as the preferred application for the following domains?</string>
     <string name="button_settings">Buttons</string>
     <string name="misc_settings">Miscellaneous</string>
+    <string name="donate_card_headline">Donate to support LinkSheet</string>
+    <string name="donate_card_subtitle">Hey there! You have already used LinkSheet for %s! To put that into perspective, the development took more than <b>%s hours</b> over the course of %s months. If you like LinkSheet, consider leaving a star on Github and/or donating.</string>
+    <string name="donate_card_subtitle_2">Tap to learn more.</string>
 </resources>

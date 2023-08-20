@@ -63,8 +63,8 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 
 ## License
 
-* LinkSheet, excluding all `strings.xml` files, is licensed under the [FXL](LICENSE)
-* All `strings.xml` files are licensed under [GPL-3.0](LICENSE_STRINGS)
+* LinkSheet, excluding all `strings.xml` and `plural.xml` files, is licensed under the [FXL](LICENSE)
+* All `strings.xml` and `plural.xml` files are licensed under [GPL-3.0](LICENSE_STRINGS)
 
 ## Donations
 
@@ -72,10 +72,8 @@ Want to donate in another way (SEPA/Paypal, another crypto)? Send a mail to `grr
 
 ## Acknowledgements
 
-Code was taken from:
-
-* [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
-* [Seal](https://github.com/JunkFood02/Seal)
+* App was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
+* [Seal](https://github.com/JunkFood02/Seal) has been a reference to learn from
 
 ## Star History
 

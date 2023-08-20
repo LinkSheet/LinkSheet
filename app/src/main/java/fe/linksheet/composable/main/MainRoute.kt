@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.*
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -32,6 +34,9 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.annotatedStringResource
+import fe.linksheet.developmentTimeHours
+import fe.linksheet.developmentTimeMonths
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -65,6 +70,7 @@ fun MainRoute(
 
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
     var sheetOpen by remember { mutableStateOf<String?>(null) }
+    val useTime = viewModel.formatUseTime()
 
     LaunchedEffect(Unit) {
         delay(200)
@@ -119,6 +125,16 @@ fun MainRoute(
                 }
 
                 Spacer(modifier = Modifier.height(5.dp))
+            }
+
+            if (useTime != null) {
+                item(key = "donate") {
+                    DonateCard(viewModel = viewModel, useTime = useTime)
+                }
+
+                item(key = "spacer_0") {
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
             }
 
             item(key = "open_default_browser") {
@@ -179,6 +195,58 @@ fun MainRoute(
                 }
             }
 
+        }
+    }
+}
+
+@Composable
+fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
+    val (hours, minutes) = useTime
+    val timeString = if (hours != null) {
+        pluralStringResource(id = R.plurals.hours, hours, hours)
+    } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
+
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(modifier = Modifier.width(10.dp))
+            ColoredIcon(
+                icon = Icons.Default.Info,
+                descriptionId = R.string.donate,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+
+            Column(modifier = Modifier.padding(10.dp)) {
+                Text(
+                    text = stringResource(id = R.string.donate_card_headline),
+                    style = Typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Text(
+                    text = annotatedStringResource(
+                        id = R.string.donate_card_subtitle,
+                        timeString,
+                        developmentTimeHours,
+                        developmentTimeMonths
+                    ),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = annotatedStringResource(id = R.string.donate_card_subtitle_2),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
         }
     }
 }

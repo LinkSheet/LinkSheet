@@ -4,6 +4,7 @@ import fe.android.preference.helper.BasePreference.InitPreference.Companion.stri
 import fe.android.preference.helper.BasePreference.MappedPreference.Companion.mappedPreference
 import fe.android.preference.helper.BasePreference.Preference.Companion.booleanPreference
 import fe.android.preference.helper.BasePreference.Preference.Companion.intPreference
+import fe.android.preference.helper.BasePreference.Preference.Companion.longPreference
 import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
 import fe.android.preference.helper.PreferenceRepository
 import fe.kotlin.extension.toHexString
@@ -72,8 +73,10 @@ object Preferences {
     val amp2HtmlExternalService = booleanPreference("amp2html_external_service")
     val amp2HtmlBuiltInCache = booleanPreference("amp2html_builtin_cache", true)
 
-    val enableRequestPrivateBrowsingButton =
-        booleanPreference("enable_request_private_browsing_button")
+    val enableRequestPrivateBrowsingButton = booleanPreference(
+        "enable_request_private_browsing_button"
+    )
+    val useTimeMs = longPreference("use_time", 305000)
 
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
@@ -119,7 +122,8 @@ object Preferences {
         followRedirectsBuiltInCache,
         amp2HtmlBuiltInCache,
         featureFlagShizuku,
-        firstRun
+        firstRun,
+        useTimeMs
     )
 
     private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)

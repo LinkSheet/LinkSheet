@@ -286,4 +286,11 @@
     <string name="domain_selection_confirmation_subtitle">هل تريد بالتأكيد تعيين %s باعتباره التطبيق المفضل للمجالات التالية؟</string>
     <string name="button_settings">الأزرار</string>
     <string name="misc_settings">متنوعة</string>
+    <string name="donate_card_subtitle_2">اضغط هنا لعرض تعليمات التبرع وإزالة هذه الرسالة.</string>
+    <string name="donate_card_headline">التبرع لدعم ورقة الروابط</string>
+    <string name="donate_card_subtitle">مرحبًا يا من هناك! لقد استخدمت بالفعل ورقة الرابط لـ %s! لوضع ذلك في منظورنا ، استغرق التطوير أكثر من <b>%s ساعات</b>على مدى %s اشهر. إذا كنت تحب ورقة الروابط ، ففكر في ترك نجمة على جيتهب/أو التبرع.</string>
+    <string name="donation_instructions">تعليمات التبرع</string>
+    <string name="open_link_with_subtitle_2">كانت ورقة الرابط مبنية على فتح بواسطة</string>
+    <string name="seal_subtitle_2">لقد كان SEAL مصدرا رائعًا للتعلم منه فيما يتعلق بـ Jetpack</string>
+    <string name="mastodon_redirect_subtitle_2">تم استخدام رمز مصدر Maston Redirect كمرجع لتكامل Shizuku</string>
 </resources>

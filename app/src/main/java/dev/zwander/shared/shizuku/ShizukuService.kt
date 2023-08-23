@@ -18,8 +18,12 @@ class ShizukuService : IShizukuService.Stub {
     override fun disableLinkHandling(packageName: String, enabled: Boolean): Int {
         try {
             return if (AndroidVersion.AT_LEAST_API_31_S) {
-                launchProcess("pm", "set-app-links-allowed",
-                    "--user", UserHandle.myUserId().toString(),
+                launchProcess(
+                    "pm", "set-app-links-allowed",
+                    "--user",
+                    UserHandle::class.java
+                        .getMethod("myUserId")
+                        .invoke(null)!!.toString(),
                     "--package", packageName,
                     enabled.toString()
                 ).waitFor()

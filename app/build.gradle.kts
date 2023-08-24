@@ -126,8 +126,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-//        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
+        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
     }
 
     packaging {
@@ -148,7 +147,7 @@ dependencies {
     implementation(AndroidX.compose.animation)
     implementation(AndroidX.navigation.compose)
 
-    implementation(project(":interconnect"))
+    implementation(libs.linkSheetInterConnect)
     implementation(project(":config"))
 
     implementation(AndroidX.lifecycle.process)

@@ -18,9 +18,11 @@ gradle = { id = "gradle", version = "8.1.0" }
 
 kotlin = "1.9.0"
 koin = "3.4.3"
+linkSheetInterConnect = "1.0.5"
 
 [libraries]
 
+linkSheetInterConnect = { module = "com.github.1fexd:LinkSheetInterConnect", version.ref = "linkSheetInterConnect" }
 stub = "dev.rikka.hidden:stub:_"
 
 kotlin-parcelize-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-runtime", version.ref = "kotlin" }

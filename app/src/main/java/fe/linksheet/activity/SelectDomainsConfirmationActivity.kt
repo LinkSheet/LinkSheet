@@ -1,8 +1,8 @@
 package fe.linksheet.activity
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -46,7 +46,7 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
         fun start(
             context: Context,
             callingPackage: String,
-            callingComponent: String,
+            callingComponent: ComponentName,
             domains: StringParceledListSlice
         ) {
             val intent = Intent(context, SelectDomainsConfirmationActivity::class.java)
@@ -69,7 +69,11 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
 
         if (intent?.action != ACTION_CONFIRM) return
 
-        val callingComponent = intent.getStringExtra(EXTRA_CALLING_COMPONENT)
+        val callingComponent = IntentCompat.getParcelableExtra(
+            intent,
+            EXTRA_CALLING_COMPONENT,
+            ComponentName::class.java,
+        )
         val callingPackage = intent.getStringExtra(EXTRA_CALLING_PACKAGE)
         val domains = IntentCompat.getParcelableExtra(
             intent,
@@ -104,7 +108,7 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
                                         PreferredApp(
                                             host = it,
                                             packageName = callingPackage,
-                                            component = callingComponent,
+                                            component = callingComponent.flattenToString(),
                                             alwaysPreferred = true,
                                         )
                                     })

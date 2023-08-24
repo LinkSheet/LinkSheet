@@ -77,7 +77,7 @@ class InterconnectService : Service() {
 
     private fun verifyCaller(passedPackage: String) {
         val callingPackages = packageManager.getPackagesForUid(Binder.getCallingUid())
-        if (!callingPackages.contains(passedPackage)) {
+        if (callingPackages?.contains(passedPackage) != true) {
             throw IllegalAccessException("Calling package is not $passedPackage!")
         }
     }

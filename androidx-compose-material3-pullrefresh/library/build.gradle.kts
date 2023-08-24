@@ -22,14 +22,14 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = properties["project.compose.compiler.version"] as String
+        kotlinCompilerExtensionVersion = "1.5.1"
 //        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
     }
 }
 
 dependencies {
-    compileOnly(platform("androidx.compose:compose-bom:${properties["project.compose.bom.version"]}"))
-    compileOnly("androidx.compose.foundation:foundation")
-    compileOnly("androidx.compose.material3:material3")
-    compileOnly("androidx.compose.ui:ui")
+    compileOnly(platform(AndroidX.compose.bom))
+    compileOnly(AndroidX.compose.foundation)
+    compileOnly(AndroidX.compose.material3)
+    compileOnly(AndroidX.compose.ui)
 }

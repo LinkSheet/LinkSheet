@@ -248,4 +248,37 @@
     <string name="onboarding7_headline">Ентусиаст\?
 \nLinkSheet</string>
     <string name="onboarding7_highlight">също</string>
+    <string name="done">Готово</string>
+    <string name="onboarding6_headline">Задайте</string>
+    <string name="onboarding6_highlight">настройки</string>
+    <string name="finish">Край</string>
+    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
+    <string name="pretend_to_be_app">Прехващане на заявки от приложения</string>
+    <string name="configure">Настройки</string>
+    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
+    <string name="general">Общи</string>
+    <string name="general_settings_explainer">Настройки, касаещи цялото приложение</string>
+    <string name="compat_installed">LinkSheetCompat вече е инсталирано</string>
+    <string name="configure_explainer">Докоснете за настройване на LinkSheetCompat</string>
+    <string name="no_handlers_found_explainer">LinkSheet не може да отвори тази препратка.</string>
+    <string name="no_handlers_found">Не е намерен браузър или приложение!</string>
+    <string name="warning">Предупреждение</string>
+    <string name="no_browser_installed">Не е инсталиран браузър</string>
+    <string name="no_browser_installed_explainer">LinkSheet не намира приложение, което да претендира да е браузър. За най-добри разултати инсталирайте браузър.</string>
+    <string name="at_least_one_unknown_browser_installer">Най-малко един (неизвестен) браузър е инсталиран</string>
+    <string name="at_least_one_known_browser_installed">Най-малко един браузър е инсталиран</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet намери най-малко едно приложение, което е браузър.</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet намери най-малко едно приложение, което да претендира да е браузър. Списъкът на LinkSheet може да е непълен. Ако смятате това за грешка съобщете в Гитхъб.</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="domain_selection_confirmation_title">Избиране на домейни\?</string>
+    <string name="domain_selection_confirmation_subtitle">Сигурни ли сте, че желаете да зададете приложението %s да отваря следните домейни\?</string>
+    <string name="misc_settings">Разни</string>
+    <string name="button_settings">Бутони</string>
+    <string name="donate_card_headline">Дарения в подкрепа на LinkSheet</string>
+    <string name="donate_card_subtitle_2">Докоснете за инструкции за даряване и скриване на съобщението.</string>
+    <string name="donation_instructions">Инструкции за даряване</string>
+    <string name="open_link_with_subtitle_2">Първоначално, LinkSheet беше на основата на OpenWith</string>
+    <string name="seal_subtitle_2">Seal беше страхотен източник на знания за Jetpack Compose</string>
+    <string name="mastodon_redirect_subtitle_2">Изходният код на Maston Redirect беше използван за справка за интеграцията с Shizuku</string>
 </resources>

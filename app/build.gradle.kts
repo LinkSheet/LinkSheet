@@ -33,12 +33,12 @@ versioning {
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = 25
-        targetSdk = 33
+        targetSdk = 34
         versionCode = versioning.info.tag?.let {
             versioning.info.versionNumber.versionCode
         } ?: (System.currentTimeMillis() / 1000).toInt()
@@ -116,8 +116,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
     }
 
     buildFeatures {
@@ -127,6 +129,7 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
+//        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
     }
 
     packaging {

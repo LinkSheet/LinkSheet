@@ -6,15 +6,13 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal {
-            content {
-                includeGroupByRegex("com.gradle.*")
-            }
-        }
+        gradlePluginPortal()
+
         plugins {
-            id("com.android.library") version extra["project.android.gradle.plugin.version"] as String
-            id("com.gradle.enterprise") version extra["project.gradle.enterprise.plugin.version"] as String
-            kotlin("android") version extra["project.kotlin.version"] as String
+            id("com.android.library") version "8.1.0"
+            id("com.gradle.enterprise") version "3.13.2"
+            kotlin("android") version "1.9.0"
+            id("de.fayard.refreshVersions") version "0.60.0"
         }
     }
 }
@@ -29,6 +27,7 @@ dependencyResolutionManagement {
 
 plugins {
     id("com.gradle.enterprise") apply false
+    id("de.fayard.refreshVersions")
 }
 
 if (gradle.parent == null) {

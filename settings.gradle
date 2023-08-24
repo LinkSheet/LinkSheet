@@ -7,6 +7,14 @@ pluginManagement {
             url = uri("https://jitpack.io")
         }
     }
+
+    plugins {
+        id("de.fayard.refreshVersions") version "0.60.0"
+    }
+}
+
+plugins {
+    id("de.fayard.refreshVersions")
 }
 
 dependencyResolutionManagement {

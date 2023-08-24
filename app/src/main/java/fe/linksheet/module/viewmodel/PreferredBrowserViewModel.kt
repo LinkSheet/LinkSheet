@@ -2,11 +2,12 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import fe.linksheet.extension.android.ioLaunch
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserHandler
@@ -26,20 +27,20 @@ class PreferredBrowserViewModel(
     private val browserResolver: BrowserResolver,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    preferenceRepository: PreferenceRepository
+    preferenceRepository: AppPreferenceRepository
 ) : BrowserCommonViewModel(context, preferenceRepository) {
 
     val type = MutableStateFlow(BrowserType.Normal)
 
     val unifiedPreferredBrowser =
-        preferenceRepository.getBooleanState(Preferences.unifiedPreferredBrowser)
+        preferenceRepository.getBooleanState(AppPreferences.unifiedPreferredBrowser)
 
-    private var browserMode = preferenceRepository.getState(Preferences.browserMode)
-    private var selectedBrowser = preferenceRepository.getStringState(Preferences.selectedBrowser)
+    private var browserMode = preferenceRepository.getState(AppPreferences.browserMode)
+    private var selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
 
-    private var inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserMode)
+    private var inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
     private var selectedInAppBrowser = preferenceRepository.getStringState(
-        Preferences.selectedInAppBrowser
+        AppPreferences.selectedInAppBrowser
     )
 
     private val whitelistedNormalBrowsersPackages = normalBrowsersRepository.getPackageSet()

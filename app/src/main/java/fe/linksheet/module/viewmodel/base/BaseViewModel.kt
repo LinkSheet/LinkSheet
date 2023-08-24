@@ -2,14 +2,15 @@ package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.ViewModel
 import fe.android.preference.helper.BasePreference
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.RepositoryState
 import fe.android.preference.helper.compose.getBooleanState
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
 
-abstract class BaseViewModel(preferenceRepository: PreferenceRepository) : ViewModel() {
+abstract class BaseViewModel(preferenceRepository: AppPreferenceRepository) : ViewModel() {
     var alwaysShowPackageName = preferenceRepository.getBooleanState(
-        Preferences.alwaysShowPackageName
+        AppPreferences.alwaysShowPackageName
     )
 
     fun <T : Any, NT, P : BasePreference<T, NT>> updateState(

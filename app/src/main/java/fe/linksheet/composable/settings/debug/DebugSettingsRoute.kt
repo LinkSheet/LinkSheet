@@ -14,6 +14,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.loadDumpedPreferences
 import fe.linksheet.logViewerSettingsRoute
 
 
@@ -35,6 +36,18 @@ fun DebugSettingsRoute(
                     navigateTo = logViewerSettingsRoute,
                     headlineId = R.string.logs,
                     subtitleId = R.string.logs_explainer,
+                    image = {
+                        ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
+                    }
+                )
+            }
+
+            item(key = "load_dumped_preferences") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = loadDumpedPreferences,
+                    headlineId = R.string.import_dumped_preference,
+                    subtitleId = R.string.import_dumped_preference_explainer,
                     image = {
                         ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
                     }

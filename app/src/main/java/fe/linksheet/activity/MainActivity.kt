@@ -43,6 +43,7 @@ import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.WhitelistedBrowsersSettingsRoute
 import fe.linksheet.composable.settings.debug.DebugSettingsRoute
+import fe.linksheet.composable.settings.debug.loadpreferences.LoadDumpedPreferences
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
 import fe.linksheet.composable.settings.general.GeneralSettingsRoute
@@ -64,6 +65,7 @@ import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.linksSettingsRoute
+import fe.linksheet.loadDumpedPreferences
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
@@ -201,6 +203,12 @@ class MainActivity : ComponentActivity() {
                     animatedComposable(route = logViewerSettingsRoute) {
                         LogSettingsRoute(
                             navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    animatedComposable(route = loadDumpedPreferences) {
+                        LoadDumpedPreferences(
                             onBackPressed = onBackPressed
                         )
                     }

@@ -5,7 +5,8 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.kotlin.extension.filterIf
 import fe.kotlin.extension.groupByWithCacheAndNoNullKeys
 import fe.kotlin.extension.mapToSet
@@ -25,7 +26,7 @@ import kotlinx.coroutines.flow.map
 class PreferredAppSettingsViewModel(
     val context: Application,
     private val repository: PreferredAppRepository,
-    preferenceRepository: PreferenceRepository
+    preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
 
     private val domainVerificationManager by lazy {

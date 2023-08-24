@@ -1,3 +1,4 @@
+import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
@@ -33,12 +34,12 @@ versioning {
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = 25
-        targetSdk = 33
+        targetSdk = 34
         versionCode = versioning.info.tag?.let {
             versioning.info.versionNumber.versionCode
         } ?: (System.currentTimeMillis() / 1000).toInt()
@@ -111,13 +112,12 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
     }
 
     buildFeatures {
@@ -127,6 +127,7 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
+//        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
     }
 
     packaging {
@@ -137,92 +138,88 @@ android {
 }
 
 dependencies {
-    implementation("androidx.lifecycle:lifecycle-process:2.6.1")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation(project(mapOf("path" to ":config")))
-    implementation(project(mapOf("path" to ":config")))
-    implementation(project(mapOf("path" to ":config")))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
-
-    implementation("io.insert-koin:koin-android:3.4.0")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.0")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
-
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
-
-    implementation("androidx.webkit:webkit:1.7.0")
-
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.material3:material3:1.1.1")
-    implementation("androidx.compose.material:material:1.4.3")
-    implementation("androidx.compose.material:material-icons-extended:1.4.3")
-    implementation("androidx.compose.animation:animation:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.6.0")
-//    implementation("com.google.android.enterprise.connectedapps:connectedapps:1.1.2")
-
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
-
-    implementation("androidx.browser:browser:1.5.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.3-beta")
-    implementation("com.google.code.gson:gson:2.10.1")
-
-    implementation("com.gitlab.grrfe.httpkt:core:13.0.0-alpha.54")
-    implementation("com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.54")
-    implementation("com.gitlab.grrfe:gson-ext:8.1.2")
-    implementation("com.gitlab.grrfe:kotlin-ext:0.0.23")
-    implementation("com.github.1fexd:clearurlkt:0.0.23")
-    implementation("com.github.1fexd:fastforwardkt:0.0.18")
-    implementation("com.github.1fexd:libredirectkt:0.0.18")
-    implementation("com.github.1fexd:mimetypekt:0.0.6")
-    implementation("com.github.1fexd:amp2htmlkt:0.0.4")
-    implementation("com.github.1fexd:stringbuilder-util-kt:1.0.1")
-    implementation("com.github.1fexd:cached-urls:0.0.4")
-    implementation("com.github.1fexd.android-pref-helper:preference-helper:0.0.13")
-    implementation("com.github.1fexd.android-pref-helper:preference-helper-compose:0.0.13")
-    implementation("com.github.1fexd:compose-route-util:0.0.12")
-    implementation("com.github.1fexd:compose-dialog-helper:0.0.1")
-    implementation("com.gitlab.grrfe:process-launcher:0.0.1")
-
-    implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
-
-    implementation("org.jsoup:jsoup:1.16.1")
-
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
-    implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
-
-    implementation("dev.rikka.shizuku:api:13.1.4")
-    implementation("dev.rikka.shizuku:provider:13.1.4")
-    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
-    implementation("dev.rikka.tools.refine:runtime:4.3.0")
-    compileOnly("dev.rikka.hidden:stub:4.2.0")
+    implementation(platform(AndroidX.compose.bom))
+    implementation(AndroidX.compose.ui.graphics)
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(AndroidX.compose.material3)
+    implementation(AndroidX.compose.material)
+    implementation(AndroidX.compose.material.icons.extended)
+    implementation(AndroidX.compose.animation)
+    implementation(AndroidX.navigation.compose)
 
     implementation(project(":interconnect"))
     implementation(project(":config"))
 
-    testImplementation("io.insert-koin:koin-test:3.4.1")
-    testImplementation("io.insert-koin:koin-android-test:3.4.0")
-    testImplementation("junit:junit:4.13.2")
+    implementation(AndroidX.lifecycle.process)
+    androidTestImplementation(platform(AndroidX.compose.bom))
+    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    implementation(Koin.android)
+    implementation(Koin.compose)
+    implementation(libs.kotlin.reflect)
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
+    implementation(AndroidX.room.runtime)
+    implementation(AndroidX.room.ktx)
+    ksp(AndroidX.room.compiler)
+
+    implementation(AndroidX.webkit)
+
+    implementation(AndroidX.core.ktx)
+    implementation(AndroidX.lifecycle.runtime.ktx)
+    implementation(AndroidX.activity.compose)
+
+
+//    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
+
+    implementation(AndroidX.lifecycle.runtime.compose)
+
+    implementation(AndroidX.browser)
+    implementation(AndroidX.lifecycle.viewModelCompose)
+    implementation(Google.accompanist.navigationAnimation)
+    implementation(libs.gson)
+
+    implementation(libs.com.gitlab.grrfe.httpkt.core)
+    implementation(libs.ext.gson)
+    implementation(libs.gson.ext)
+    implementation(libs.kotlin.ext)
+    implementation(libs.clearurlkt)
+    implementation(libs.fastforwardkt)
+    implementation(libs.libredirectkt)
+    implementation(libs.mimetypekt)
+    implementation(libs.amp2htmlkt)
+    implementation(libs.stringbuilder.util.kt)
+    implementation(libs.cached.urls)
+    implementation(libs.preference.helper)
+    implementation(libs.preference.helper.compose)
+    implementation(libs.compose.route.util)
+    implementation(libs.compose.dialog.helper)
+    implementation(libs.process.launcher)
+
+    implementation(libs.lux.androidx.compose.material3.pullrefresh)
+
+    implementation(libs.jsoup)
+
+    implementation(Google.android.material)
+    implementation(Google.accompanist.systemUiController)
+    implementation(Google.accompanist.permissions)
+
+    implementation(libs.api)
+    implementation(libs.provider)
+    implementation(libs.hiddenapibypass)
+    implementation(libs.dev.rikka.tools.refine.runtime)
+    compileOnly(libs.stub)
+
+
+
+    testImplementation(Koin.test)
+    testImplementation(libs.koin.android.test)
+    testImplementation(Testing.junit4)
+
+    androidTestImplementation(AndroidX.test.ext.junit)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+
+    debugImplementation(AndroidX.compose.ui.tooling)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 }

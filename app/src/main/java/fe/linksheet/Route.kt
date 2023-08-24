@@ -52,7 +52,7 @@ const val featureFlagSettingsRoute = "feature_flag_settings_route"
 
 const val debugSettingsRoute = "debug_settings_route"
 const val logViewerSettingsRoute = "log_viewer_settings_route"
-
+const val loadDumpedPreferences = "log_dumped_reference_settings_route"
 
 @Keep
 data class LogTextViewerRoute(

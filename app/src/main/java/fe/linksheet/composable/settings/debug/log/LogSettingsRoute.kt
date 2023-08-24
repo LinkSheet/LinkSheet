@@ -51,7 +51,7 @@ fun LogSettingsRoute(
         mapState(files)
     }
 
-    val startupTime = AppLogger.getInstance().startupTime.localizedString()!!
+    val startupTime = AppLogger.getInstance().startupTime.localizedString()
 
     SettingsScaffold(R.string.logs, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

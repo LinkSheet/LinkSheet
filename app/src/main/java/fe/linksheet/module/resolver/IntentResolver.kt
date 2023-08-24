@@ -5,7 +5,8 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
@@ -24,7 +25,7 @@ import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.log.UrlProcessor
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -40,7 +41,7 @@ import fe.linksheet.resolver.BottomSheetResult
 class IntentResolver(
     val context: Context,
     loggerFactory: LoggerFactory,
-    val preferenceRepository: PreferenceRepository,
+    val preferenceRepository: AppPreferenceRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
@@ -56,68 +57,68 @@ class IntentResolver(
 ) {
     private val logger = loggerFactory.createLogger(IntentResolver::class)
 
-    private val useClearUrls = preferenceRepository.getBooleanState(Preferences.useClearUrls)
+    private val useClearUrls = preferenceRepository.getBooleanState(AppPreferences.useClearUrls)
     private var useFastForwardRules = preferenceRepository.getBooleanState(
-        Preferences.useFastForwardRules
+        AppPreferences.useFastForwardRules
     )
 
     private var enableIgnoreLibRedirectButton =
-        preferenceRepository.getBooleanState(Preferences.enableIgnoreLibRedirectButton)
+        preferenceRepository.getBooleanState(AppPreferences.enableIgnoreLibRedirectButton)
     private var enableLibRedirect =
-        preferenceRepository.getBooleanState(Preferences.enableLibRedirect)
-    private val followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
+        preferenceRepository.getBooleanState(AppPreferences.enableLibRedirect)
+    private val followRedirects = preferenceRepository.getBooleanState(AppPreferences.followRedirects)
 
     private val followOnlyKnownTrackers =
-        preferenceRepository.getBooleanState(Preferences.followOnlyKnownTrackers)
+        preferenceRepository.getBooleanState(AppPreferences.followOnlyKnownTrackers)
     private val followRedirectsLocalCache = preferenceRepository.getBooleanState(
-        Preferences.followRedirectsLocalCache
+        AppPreferences.followRedirectsLocalCache
     )
     private val followRedirectsBuiltInCache = preferenceRepository.getBooleanState(
-        Preferences.followRedirectsBuiltInCache
+        AppPreferences.followRedirectsBuiltInCache
     )
     private val followRedirectsExternalService = preferenceRepository.getBooleanState(
-        Preferences.followRedirectsExternalService
+        AppPreferences.followRedirectsExternalService
     )
 
     private val requestTimeout = preferenceRepository.getIntState(
-        Preferences.requestTimeout
+        AppPreferences.requestTimeout
     )
 
     private var enableDownloader =
-        preferenceRepository.getBooleanState(Preferences.enableDownloader)
+        preferenceRepository.getBooleanState(AppPreferences.enableDownloader)
     private var downloaderCheckUrlMimeType = preferenceRepository.getBooleanState(
-        Preferences.downloaderCheckUrlMimeType
+        AppPreferences.downloaderCheckUrlMimeType
     )
 
-    val theme = preferenceRepository.getState(Preferences.theme)
+    val theme = preferenceRepository.getState(AppPreferences.theme)
     private val dontShowFilteredItem = preferenceRepository.getBooleanState(
-        Preferences.dontShowFilteredItem
+        AppPreferences.dontShowFilteredItem
     )
 
     private val inAppBrowserSettings =
-        preferenceRepository.getState(Preferences.inAppBrowserSettings)
+        preferenceRepository.getState(AppPreferences.inAppBrowserSettings)
 
-    private val browserMode = preferenceRepository.getState(Preferences.browserMode)
-    private val selectedBrowser = preferenceRepository.getStringState(Preferences.selectedBrowser)
-    private val inAppBrowserMode = preferenceRepository.getState(Preferences.inAppBrowserMode)
+    private val browserMode = preferenceRepository.getState(AppPreferences.browserMode)
+    private val selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
+    private val inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
     private val selectedInAppBrowser =
-        preferenceRepository.getStringState(Preferences.selectedInAppBrowser)
+        preferenceRepository.getStringState(AppPreferences.selectedInAppBrowser)
 
     private val unifiedPreferredBrowser =
-        preferenceRepository.getBooleanState(Preferences.unifiedPreferredBrowser)
+        preferenceRepository.getBooleanState(AppPreferences.unifiedPreferredBrowser)
 
-    private val enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
+    private val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
     private val amp2HtmlLocalCache = preferenceRepository.getBooleanState(
-        Preferences.amp2HtmlLocalCache
+        AppPreferences.amp2HtmlLocalCache
     )
 
     private val amp2HtmlBuiltInCache = preferenceRepository.getBooleanState(
-        Preferences.amp2HtmlBuiltInCache
+        AppPreferences.amp2HtmlBuiltInCache
     )
 
 
     private val amp2HtmlExternalService =
-        preferenceRepository.getBooleanState(Preferences.amp2HtmlExternalService)
+        preferenceRepository.getBooleanState(AppPreferences.amp2HtmlExternalService)
 
 
     private val clearUrlProviders by lazy {
@@ -261,7 +262,7 @@ class IntentResolver(
             }
         }
 
-        logger.debug("NewIntent=$newIntent")
+//        logger.debug("NewIntent=$newIntent")
 
         val resolvedList: MutableList<ResolveInfo> = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)

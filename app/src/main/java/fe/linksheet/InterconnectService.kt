@@ -57,7 +57,7 @@ class InterconnectService : Service() {
                 verifyCaller(packageName)
 
                 SelectDomainsConfirmationActivity.start(
-                    this@InterconnectService, packageName, componentName.className, domains,
+                    this@InterconnectService, packageName, componentName, domains,
                 )
             }
         }

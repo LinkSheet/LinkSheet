@@ -18,7 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.getBooleanState
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig
@@ -26,7 +27,9 @@ import fe.linksheet.R
 import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.FeatureFlagRepository
+import fe.linksheet.module.preference.FeatureFlags
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
@@ -35,14 +38,14 @@ import java.time.Duration
 
 class MainViewModel(
     val context: Application,
-    val preferenceRepository: PreferenceRepository,
+    val preferenceRepository: AppPreferenceRepository,
     val browserResolver: BrowserResolver,
-    featureFlagRepository: PreferenceRepository,
+    featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val featureFlagShizuku = featureFlagRepository.getBooleanState(Preferences.featureFlagShizuku)
-    val firstRun = preferenceRepository.getBooleanState(Preferences.firstRun)
-    val useTimeMs = preferenceRepository.getLong(Preferences.useTimeMs)
+    val featureFlagShizuku = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagShizuku)
+    val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
+    val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

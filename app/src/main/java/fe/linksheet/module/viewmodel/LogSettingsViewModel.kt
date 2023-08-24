@@ -1,7 +1,8 @@
 package fe.linksheet.module.viewmodel
 
 import android.util.Log
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.kotlin.extension.asUnixMillisToLocalDateTime
 import fe.kotlin.extension.localizedString
 import fe.linksheet.extension.android.ioLaunch
@@ -10,7 +11,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class LogSettingsViewModel(
-    val preferenceRepository: PreferenceRepository
+    val preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
 
     private val appLogger = AppLogger.getInstance()

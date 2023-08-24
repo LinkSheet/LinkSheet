@@ -7,14 +7,15 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.getAppOpenByDefaultIntent
 
 class PretendToBeAppSettingsViewModel(
     val context: Application,
-    preferenceRepository: PreferenceRepository
+    preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     companion object {
         val linksheetCompatPackage = "fe.linksheet.compat"

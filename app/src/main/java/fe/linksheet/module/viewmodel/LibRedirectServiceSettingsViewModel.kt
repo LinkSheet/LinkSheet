@@ -9,7 +9,8 @@ import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.LibRedirectServiceState
 import fe.linksheet.extension.android.ioLaunch
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.libredirectkt.LibRedirectInstance
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
@@ -26,7 +27,7 @@ class LibRedirectServiceSettingsViewModel(
     savedStateHandle: SavedStateHandle,
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
-    preferenceRepository: PreferenceRepository
+    preferenceRepository: AppPreferenceRepository
 ) : SavedStateViewModel<LibRedirectServiceRoute>(savedStateHandle, preferenceRepository) {
     val serviceKey = MutableStateFlow(getSavedState(LibRedirectServiceRoute::serviceKey)!!)
 

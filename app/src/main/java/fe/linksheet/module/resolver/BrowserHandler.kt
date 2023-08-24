@@ -2,7 +2,8 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 import fe.android.preference.helper.OptionTypeMapper
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.kotlin.extension.mapToSet
 import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
@@ -17,7 +18,7 @@ import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first
 
 class BrowserHandler(
-    val preferenceRepository: PreferenceRepository,
+    val preferenceRepository: AppPreferenceRepository,
     private val browserResolver: BrowserResolver,
 ) {
     sealed class BrowserMode(val value: String) : LogDumpable {

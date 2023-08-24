@@ -4,7 +4,8 @@ import android.app.Application
 import android.content.ClipboardManager
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.LoggerFactory
@@ -16,7 +17,7 @@ class LogTextSettingsViewModel(
     context: Application,
     savedStateHandle: SavedStateHandle,
     loggerFactory: LoggerFactory,
-    val preferenceRepository: PreferenceRepository
+    val preferenceRepository: AppPreferenceRepository
 ) : SavedStateViewModel<LogTextViewerRoute>(savedStateHandle, preferenceRepository) {
     private val appLogger = AppLogger.getInstance()
     val clipboardManager = context.getSystemService<ClipboardManager>()!!

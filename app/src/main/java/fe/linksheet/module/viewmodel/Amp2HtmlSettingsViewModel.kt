@@ -1,25 +1,26 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class Amp2HtmlSettingsViewModel(
     val context: Application,
-    preferenceRepository: PreferenceRepository
+    preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
+    var enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
     val enableAmp2HtmlLocalCache = preferenceRepository.getBooleanState(
-        Preferences.amp2HtmlLocalCache
+        AppPreferences.amp2HtmlLocalCache
     )
     val amp2HtmlBuiltInCache = preferenceRepository.getBooleanState(
-        Preferences.amp2HtmlBuiltInCache
+        AppPreferences.amp2HtmlBuiltInCache
     )
     val amp2HtmlExternalService = preferenceRepository.getBooleanState(
-        Preferences.amp2HtmlExternalService
+        AppPreferences.amp2HtmlExternalService
     )
-    val requestTimeout = preferenceRepository.getIntState(Preferences.requestTimeout)
+    val requestTimeout = preferenceRepository.getIntState(AppPreferences.requestTimeout)
 }

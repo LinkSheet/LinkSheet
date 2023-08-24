@@ -15,7 +15,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 
 @Composable
-fun <T : Any, M> RadioButtonRow(
+fun <T : Any, M : Any> RadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
     state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,

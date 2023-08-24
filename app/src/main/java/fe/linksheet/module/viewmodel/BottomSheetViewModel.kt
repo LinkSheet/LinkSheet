@@ -13,7 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState
 import fe.linksheet.R
@@ -24,7 +25,7 @@ import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolver
@@ -39,7 +40,7 @@ import java.util.Locale
 class BottomSheetViewModel(
     val context: Application,
     loggerFactory: LoggerFactory,
-    val preferenceRepository: PreferenceRepository,
+    val preferenceRepository: AppPreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
@@ -48,32 +49,32 @@ class BottomSheetViewModel(
 
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
-    val enableCopyButton = preferenceRepository.getBooleanState(Preferences.enableCopyButton)
-    val hideAfterCopying = preferenceRepository.getBooleanState(Preferences.hideAfterCopying)
-    val singleTap = preferenceRepository.getBooleanState(Preferences.singleTap)
-    val enableSendButton = preferenceRepository.getBooleanState(Preferences.enableSendButton)
+    val enableCopyButton = preferenceRepository.getBooleanState(AppPreferences.enableCopyButton)
+    val hideAfterCopying = preferenceRepository.getBooleanState(AppPreferences.hideAfterCopying)
+    val singleTap = preferenceRepository.getBooleanState(AppPreferences.singleTap)
+    val enableSendButton = preferenceRepository.getBooleanState(AppPreferences.enableSendButton)
     val enableIgnoreLibRedirectButton = preferenceRepository.getBooleanState(
-        Preferences.enableIgnoreLibRedirectButton
+        AppPreferences.enableIgnoreLibRedirectButton
     )
 
-    val disableToasts = preferenceRepository.getBooleanState(Preferences.disableToasts)
-    val gridLayout = preferenceRepository.getBooleanState(Preferences.gridLayout)
-    private val followRedirects = preferenceRepository.getBooleanState(Preferences.followRedirects)
+    val disableToasts = preferenceRepository.getBooleanState(AppPreferences.disableToasts)
+    val gridLayout = preferenceRepository.getBooleanState(AppPreferences.gridLayout)
+    private val followRedirects = preferenceRepository.getBooleanState(AppPreferences.followRedirects)
     private var enableDownloader = preferenceRepository.getBooleanState(
-        Preferences.enableDownloader
+        AppPreferences.enableDownloader
     )
 
-    val theme = preferenceRepository.getState(Preferences.theme)
+    val theme = preferenceRepository.getState(AppPreferences.theme)
     val useTextShareCopyButtons = preferenceRepository.getBooleanState(
-        Preferences.useTextShareCopyButtons
+        AppPreferences.useTextShareCopyButtons
     )
-    val previewUrl = preferenceRepository.getBooleanState(Preferences.previewUrl)
+    val previewUrl = preferenceRepository.getBooleanState(AppPreferences.previewUrl)
 
     val enableRequestPrivateBrowsingButton = preferenceRepository.getBooleanState(
-        Preferences.enableRequestPrivateBrowsingButton
+        AppPreferences.enableRequestPrivateBrowsingButton
     )
 
-    val enableAmp2Html = preferenceRepository.getBooleanState(Preferences.enableAmp2Html)
+    val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!

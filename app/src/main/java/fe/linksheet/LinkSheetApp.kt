@@ -7,7 +7,6 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
-import fe.android.preference.helper.PreferenceRepository
 import fe.kotlin.extension.asString
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
@@ -16,7 +15,8 @@ import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.defaultLoggerFactoryModule
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.featureFlagRepositoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.repository.module.repositoryModule
@@ -104,11 +104,11 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
         super.onStop(owner)
 
         kotlin.runCatching {
-            val preferenceRepository = get<PreferenceRepository>()
-            val currentUseTime = preferenceRepository.getLong(Preferences.useTimeMs)
+            val preferenceRepository = get<AppPreferenceRepository>()
+            val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
             val usedFor = timer.stop()
 
-            preferenceRepository.writeLong(Preferences.useTimeMs, currentUseTime + usedFor)
+            preferenceRepository.writeLong(AppPreferences.useTimeMs, currentUseTime + usedFor)
         }
 
         appLogger.writeLog()

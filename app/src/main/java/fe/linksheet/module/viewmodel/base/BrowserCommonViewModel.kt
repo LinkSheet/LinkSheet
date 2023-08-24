@@ -1,7 +1,8 @@
 package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.kotlin.extension.filterIf
 import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Job
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.combine
 
 abstract class BrowserCommonViewModel(
     val context: Application,
-    preferenceRepository: PreferenceRepository
+    preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     val searchFilter = MutableStateFlow("")
 

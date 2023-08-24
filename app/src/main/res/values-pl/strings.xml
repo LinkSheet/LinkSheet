@@ -284,4 +284,13 @@
     <string name="no">Nie</string>
     <string name="domain_selection_confirmation_title">Wybrać domeny\?</string>
     <string name="domain_selection_confirmation_subtitle">Czy na pewno chcesz ustawić %s jako preferowaną aplikację dla następujących domen\?</string>
+    <string name="donate_card_subtitle_2">Naciśnij, aby wyświetlić instrukcje dotyczące darowizny i usunąć ten komunikat.</string>
+    <string name="button_settings">Przyciski</string>
+    <string name="misc_settings">Różne</string>
+    <string name="donate_card_headline">Przekaż darowiznę, by wesprzeć LinkSheet</string>
+    <string name="donate_card_subtitle">Hej! Używasz LinkSheet już %s! Dla porównania, jego stworzenie zajęło ponad <b>%s godzin</b> w ciągu %s miesięcy. Jeśli podoba Ci się ta aplikacja, to rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.</string>
+    <string name="donation_instructions">Instrukcje dotyczące darowizny</string>
+    <string name="open_link_with_subtitle_2">LinkSheet był początkowo oparty na OpenWith</string>
+    <string name="seal_subtitle_2">Seal jest świetnym źródłem wiedzy na temat Jetpack Compose</string>
+    <string name="mastodon_redirect_subtitle_2">Kod źródłowy Maston Redirect został użyty jako odniesienie dla interakcji Shizuku</string>
 </resources>

@@ -179,7 +179,7 @@ fun LogTextSettingsRoute(
                                 ) {
                                     Text(
                                         text = unixMillis.asUnixMillisToLocalDateTime()
-                                            .localizedString()!!,
+                                            .localizedString(),
                                         fontStyle = FontStyle.Italic,
                                         fontSize = 12.sp
                                     )

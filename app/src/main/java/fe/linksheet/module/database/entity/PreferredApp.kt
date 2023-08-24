@@ -30,7 +30,10 @@ data class PreferredApp(
     val alwaysPreferred: Boolean
 ) : LogDumpable {
     @delegate:Ignore
-    val componentName by lazy { ComponentName.unflattenFromString(component)!! }
+    val componentName by lazy {
+        ComponentName.unflattenFromString(component) ?:
+        ComponentName.unflattenFromString("$packageName/$component")
+    }
 
     fun toDisplayActivityInfo(context: Context) = context.packageManager
         .queryFirstIntentActivityByPackageNameOrNull(packageName!!)

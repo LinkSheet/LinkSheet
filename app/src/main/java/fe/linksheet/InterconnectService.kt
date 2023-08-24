@@ -57,7 +57,7 @@ class InterconnectService : Service() {
                 verifyCaller(packageName)
 
                 SelectDomainsConfirmationActivity.start(
-                    this@InterconnectService, packageName, componentName.className, domains,
+                    this@InterconnectService, packageName, componentName, domains,
                 )
             }
         }
@@ -77,7 +77,7 @@ class InterconnectService : Service() {
 
     private fun verifyCaller(passedPackage: String) {
         val callingPackages = packageManager.getPackagesForUid(Binder.getCallingUid())
-        if (!callingPackages.contains(passedPackage)) {
+        if (callingPackages?.contains(passedPackage) != true) {
             throw IllegalAccessException("Calling package is not $passedPackage!")
         }
     }

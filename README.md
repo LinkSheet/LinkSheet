@@ -82,3 +82,7 @@ Want to donate in another way (SEPA/Paypal, another crypto)? Send a mail to `grr
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=1fexd/LinkSheet&type=Date)](https://star-history.com/#1fexd/LinkSheet&Date)
+
+## Building Instructions
+
+To make this project successfully build, you need to replace your `android.jar` with one from [here](https://github.com/1fexd/aosp-android-jar-mirror). Currently, LinkSheet uses the SDK level `33`. 

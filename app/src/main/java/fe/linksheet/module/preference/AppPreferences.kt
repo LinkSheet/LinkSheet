@@ -1,12 +1,7 @@
 package fe.linksheet.module.preference
 
-import fe.android.preference.helper.BasePreference.InitPreference.Companion.stringPreference
-import fe.android.preference.helper.BasePreference.MappedPreference.Companion.mappedPreference
-import fe.android.preference.helper.BasePreference.Preference.Companion.booleanPreference
-import fe.android.preference.helper.BasePreference.Preference.Companion.intPreference
-import fe.android.preference.helper.BasePreference.Preference.Companion.longPreference
-import fe.android.preference.helper.BasePreference.PreferenceNullable.Companion.stringPreference
-import fe.android.preference.helper.PreferenceRepository
+
+import fe.android.preference.helper.Preferences
 import fe.kotlin.extension.toHexString
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.PackageProcessor
@@ -16,12 +11,11 @@ import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
 
-object Preferences {
+object AppPreferences : Preferences() {
     val enableCopyButton = booleanPreference("enable_copy_button")
     val hideAfterCopying = booleanPreference("hide_after_copying")
     val singleTap = booleanPreference("single_tap")
     val usageStatsSorting = booleanPreference("usage_stats_sorting")
-
 
     val browserMode = mappedPreference(
         "browser_mode",
@@ -35,7 +29,6 @@ object Preferences {
         BrowserHandler.BrowserMode.AlwaysAsk,
         BrowserHandler.BrowserMode.Companion
     )
-
 
     val selectedInAppBrowser = stringPreference("selected_in_app_browser")
     val unifiedPreferredBrowser = booleanPreference("unified_preferred_browser", true)
@@ -84,59 +77,20 @@ object Preferences {
 
     val firstRun = booleanPreference("first_run", true)
 
-    val featureFlagShizuku = booleanPreference("feature_flag_shizuku")
+    val loggablePreferences by lazy {
+        all.toMutableMap().apply {
+            packagePreferences.forEach { remove(it.key) }
+        }.map { (_, pkg) -> pkg }
+    }
 
-    private val preferencesLoggable = listOf(
-        enableCopyButton,
-        hideAfterCopying,
-        singleTap,
-        usageStatsSorting,
-        browserMode,
-        inAppBrowserMode,
-        unifiedPreferredBrowser,
-        inAppBrowserSettings,
-        enableSendButton,
-        alwaysShowPackageName,
-        disableToasts,
-        gridLayout,
-        useClearUrls,
-        useFastForwardRules,
-        enableLibRedirect,
-        followRedirects,
-        followRedirects,
-        followRedirectsLocalCache,
-        followRedirectsExternalService,
-        followOnlyKnownTrackers,
-        theme,
-        dontShowFilteredItem,
-        useTextShareCopyButtons,
-        previewUrl,
-        enableDownloader,
-        downloaderCheckUrlMimeType,
-        enableIgnoreLibRedirectButton,
-        requestTimeout,
-        enableRequestPrivateBrowsingButton,
-        enableAmp2Html,
-        amp2HtmlLocalCache,
-        amp2HtmlExternalService,
-        followRedirectsBuiltInCache,
-        amp2HtmlBuiltInCache,
-        featureFlagShizuku,
-        firstRun,
-        useTimeMs
-    )
+    private val packagePreferences = listOf(selectedBrowser, selectedInAppBrowser)
 
-    private val preferencesPackage = listOf(selectedBrowser, selectedInAppBrowser)
-
-    fun log(
-        repository: PreferenceRepository
-    ) = preferencesLoggable.map { "${it.key}=${repository.getAsString(it)}" }
 
     fun logPackages(
         redact: Boolean,
         logger: Logger,
-        repository: PreferenceRepository
-    ) = preferencesPackage.map {
+        repository: AppPreferenceRepository
+    ) = packagePreferences.map {
         buildString {
             val value = repository.getString(it)
             append(it.key)

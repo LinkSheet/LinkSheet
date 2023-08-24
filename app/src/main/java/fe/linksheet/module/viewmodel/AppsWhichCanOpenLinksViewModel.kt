@@ -5,12 +5,15 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.android.preference.helper.compose.getBooleanState
 import fe.kotlin.extension.filterIf
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.compose.getDisplayActivityInfos
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.FeatureFlagRepository
+import fe.linksheet.module.preference.FeatureFlags
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
@@ -22,11 +25,11 @@ import kotlinx.coroutines.flow.combine
 
 class AppsWhichCanOpenLinksViewModel(
     val app: LinkSheetApp,
-    preferenceRepository: PreferenceRepository,
-    featureFlagRepository: PreferenceRepository,
+    preferenceRepository: AppPreferenceRepository,
+    featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val featureFlagShizuku = featureFlagRepository.getBooleanState(Preferences.featureFlagShizuku)
+    val featureFlagShizuku = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagShizuku)
 
     private val domainVerificationManager by lazy {
         if (AndroidVersion.AT_LEAST_API_31_S) {

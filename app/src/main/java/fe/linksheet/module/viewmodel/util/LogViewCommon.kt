@@ -1,22 +1,23 @@
 package fe.linksheet.module.viewmodel.util
 
 import android.os.Build
-import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.module.preference.AppPreferenceRepository
+
 import fe.linksheet.BuildConfig
 import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.preference.Preferences
+import fe.linksheet.module.preference.AppPreferences
 
 
 class LogViewCommon(
-    val preferenceRepository: PreferenceRepository,
+    val preferenceRepository: AppPreferenceRepository,
     private val logger: Logger
 ) {
-    private fun logPreferences(
-        redact: Boolean
-    ) = Preferences.log(preferenceRepository) + Preferences.logPackages(
-        redact, logger, preferenceRepository
-    )
+    private fun logPreferences(redact: Boolean): List<String?> {
+        return AppPreferences.loggablePreferences.map {
+            preferenceRepository.getAnyAsString(it)
+        } + AppPreferences.logPackages(redact, logger, preferenceRepository)
+    }
 
     fun buildClipboardText(
         includeFingerprint: Boolean,

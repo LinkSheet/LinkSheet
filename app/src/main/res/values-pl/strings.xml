@@ -293,4 +293,7 @@
     <string name="open_link_with_subtitle_2">LinkSheet był początkowo oparty na OpenWith</string>
     <string name="seal_subtitle_2">Seal jest świetnym źródłem wiedzy na temat Jetpack Compose</string>
     <string name="mastodon_redirect_subtitle_2">Kod źródłowy Maston Redirect został użyty jako odniesienie dla interakcji Shizuku</string>
+    <string name="import_dumped_preference">Przywróć kopię preferencji</string>
+    <string name="import_dumped_preference_explainer">Narzędzie do importowania preferencji zawartych w plikach logów - prawdopodobnie nieprzydatne dla przeciętnego użytkownika</string>
+    <string name="import_and_override">Importuj i nadpisz</string>
 </resources>

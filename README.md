@@ -72,7 +72,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 
 ## Donations
 
-Want to donate in another way (SEPA/Paypal, another crypto)? Send a mail to `grrfe[at]420blaze.it`
+Want to donate in another way (Bank Transfer/Paypal etc., another crypto)? Send a mail to `grrfe[at]420blaze.it`
 
 ## Acknowledgements
 

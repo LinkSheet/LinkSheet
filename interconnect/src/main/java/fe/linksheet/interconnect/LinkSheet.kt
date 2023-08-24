@@ -62,8 +62,8 @@ object LinkSheet {
     /**
      * A convenience function for binding the interconnect service.
      *
-     * If both release and debug versions of LinkSheet are installed,
-     * this will bind to the release package.
+     * If multiple LinkSheet versions are installed (release/nightly/debug), this will bind to
+     * release > nightly > debug
      */
     fun Context.bindService(onBound: (LinkSheetServiceConnection) -> Unit) {
         if (!isLinkSheetInstalled()) {
@@ -93,8 +93,8 @@ object LinkSheet {
     /**
      * A convenience function for binding the interconnect service.
      *
-     * If both release and debug versions of LinkSheet are installed,
-     * this will bind to the release package.
+     * If multiple LinkSheet versions are installed (release/nightly/debug), this will bind to
+     * release > nightly > debug
      */
     suspend fun Context.bindService(): LinkSheetServiceConnection {
         return suspendCoroutine { continuation ->

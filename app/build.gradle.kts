@@ -1,4 +1,3 @@
-import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
@@ -148,7 +147,6 @@ dependencies {
     implementation(AndroidX.compose.animation)
     implementation(AndroidX.navigation.compose)
 
-    implementation(project(":interconnect"))
     implementation(project(":config"))
 
     implementation(AndroidX.lifecycle.process)
@@ -210,7 +208,7 @@ dependencies {
     implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
-
+    implementation(libs.linksheet.interconnect)
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)

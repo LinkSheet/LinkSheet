@@ -1,4 +1,0 @@
-install:
-  - ./gradlew :interconnect:publishToMavenLocal
-jdk:
-  - openjdk17

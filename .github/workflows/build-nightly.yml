@@ -58,4 +58,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: linksheet-nightly
-          path: app/build/outputs/apk/nightly/*.apk
+          path: app/build/outputs/apk/foss/nightly/*.apk

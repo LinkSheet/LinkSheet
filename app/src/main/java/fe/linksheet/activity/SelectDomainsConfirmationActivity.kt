@@ -6,15 +6,23 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.IntentCompat
@@ -62,7 +70,7 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
         }
     }
 
-    private val repository: PreferredAppRepository by inject()
+    private val preferredAppRepository: PreferredAppRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,24 +102,38 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
         setContent {
             val scope = rememberCoroutineScope()
 
+            var loading by remember {
+                mutableStateOf(false)
+            }
+
             AppTheme {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center,
                 ) {
+                    AnimatedVisibility(visible = loading) {
+                        CircularProgressIndicator()
+                    }
+
                     val dialog = dialogHelper(
                         state = domains,
                         onClose = { confirmed ->
                             scope.launch(Dispatchers.IO) {
                                 if (confirmed == true) {
-                                    repository.insert(domains.map {
+                                    loading = true
+
+                                    preferredAppRepository.insert(domains.map {
                                         PreferredApp(
                                             host = it,
                                             packageName = callingPackage,
                                             component = callingComponent.flattenToString(),
                                             alwaysPreferred = true,
+                                            setByInterconnect = true,
                                         )
                                     })
+
+                                    loading = false
                                 }
 
                                 finish()

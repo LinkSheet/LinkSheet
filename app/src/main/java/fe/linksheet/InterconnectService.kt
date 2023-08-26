@@ -12,13 +12,19 @@ import androidx.core.app.ServiceCompat
 import androidx.core.graphics.drawable.IconCompat
 import fe.linksheet.activity.SelectDomainsConfirmationActivity
 import fe.linksheet.interconnect.ILinkSheetService
+import fe.linksheet.interconnect.ISelectedDomainsCallback
 import fe.linksheet.interconnect.StringParceledListSlice
 import fe.linksheet.module.repository.PreferredAppRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
 
-class InterconnectService : Service() {
-    private val repository: PreferredAppRepository by inject()
+class InterconnectService : Service(), CoroutineScope by MainScope() {
+    private val preferredAppRepository: PreferredAppRepository by inject()
 
     override fun onCreate() {
         val nm = NotificationManagerCompat.from(this)
@@ -44,8 +50,21 @@ class InterconnectService : Service() {
             override fun getSelectedDomains(packageName: String): StringParceledListSlice {
                 verifyCaller(packageName)
 
-                return runBlocking {
-                    StringParceledListSlice(repository.getByPackageName(packageName).map { it.host })
+                return runBlocking(Dispatchers.IO) {
+                    try {
+                        this@InterconnectService.getSelectedDomains(packageName)
+                    } catch (e: Exception) {
+                        cancel(e.message!!, e)
+                        throw e
+                    }
+                }
+            }
+
+            override fun getSelectedDomainsAsync(packageName: String, callback: ISelectedDomainsCallback) {
+                verifyCaller(packageName)
+
+                launch(Dispatchers.IO) {
+                    callback.onSelectedDomainsRetrieved(this@InterconnectService.getSelectedDomains(packageName))
                 }
             }
 
@@ -71,6 +90,7 @@ class InterconnectService : Service() {
 
     override fun onDestroy() {
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+        cancel()
 
         super.onDestroy()
     }
@@ -80,5 +100,17 @@ class InterconnectService : Service() {
         if (callingPackages?.contains(passedPackage) != true) {
             throw IllegalAccessException("Calling package is not $passedPackage!")
         }
+    }
+
+    private suspend fun getSelectedDomains(packageName: String): StringParceledListSlice {
+        return StringParceledListSlice(
+            preferredAppRepository.getByPackageName(packageName).mapNotNull { preferredApp ->
+                if (preferredApp.setByInterconnect) {
+                    preferredApp.host
+                } else {
+                    null
+                }
+            }
+        )
     }
 }

@@ -315,6 +315,7 @@ class IntentResolver(
             filteredItem,
             showExtended,
             preferredApp?.app?.alwaysPreferred,
+            preferredApp?.app?.setByInterconnect,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
             resolved,
             libRedirectResult,

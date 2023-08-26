@@ -996,7 +996,8 @@ class BottomSheetActivity : ComponentActivity() {
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null
     ) {
         val deferred = bottomSheetViewModel.launchAppAsync(
-            info, result.intent, always, privateBrowsingBrowser
+            info, result.intent, always, privateBrowsingBrowser,
+            result.setByInterconnect == true,
         )
 
         deferred.invokeOnCompletion {

@@ -27,7 +27,9 @@ data class PreferredApp(
     val host: String,
     val packageName: String? = null,
     val component: String,
-    val alwaysPreferred: Boolean
+    val alwaysPreferred: Boolean,
+    @ColumnInfo(defaultValue = "false")
+    val setByInterconnect: Boolean = false,
 ) : LogDumpable {
     @delegate:Ignore
     val componentName by lazy {

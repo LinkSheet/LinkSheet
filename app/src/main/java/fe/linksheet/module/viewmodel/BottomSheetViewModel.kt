@@ -98,7 +98,7 @@ class BottomSheetViewModel(
         })
     }
 
-    private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
+    private suspend fun persistSelectedIntent(intent: Intent, always: Boolean, setByInterconnect: Boolean) {
         logger.debug("Component=${intent.component}")
 
         intent.component?.let { component ->
@@ -107,7 +107,8 @@ class BottomSheetViewModel(
                 host = host,
                 packageName = component.packageName,
                 component = component.flattenToString(),
-                alwaysPreferred = always
+                alwaysPreferred = always,
+                setByInterconnect = setByInterconnect,
             )
 
             logger.debug("Inserting=$app")
@@ -147,14 +148,15 @@ class BottomSheetViewModel(
         info: DisplayActivityInfo,
         intent: Intent,
         always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null
+        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
+        setByInterconnect: Boolean = false,
     ) = ioAsync {
         val newIntent = info.intentFrom(intent).let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 
         if (privateBrowsingBrowser == null) {
-            persistSelectedIntent(newIntent, always)
+            persistSelectedIntent(newIntent, always, setByInterconnect)
         }
 
         newIntent

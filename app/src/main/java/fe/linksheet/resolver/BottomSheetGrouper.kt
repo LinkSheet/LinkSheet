@@ -25,10 +25,20 @@ object BottomSheetGrouper {
             isLastChosenPosition(it.activityInfo, lastChosenPreferredApp?.componentName)
         }
 
+        val filteredPairs = grouped.mapIndexedNotNull { index, resolveInfo ->
+            (resolveInfo to index).takeIf { resolveInfo.activityInfo.packageName == lastChosenPreferredApp?.componentName?.packageName }
+        }
+
         val filteredItem = if (filteredPair != null && (returnFilteredItem || lastChosenPreferredApp?.alwaysPreferred == true)) {
             grouped.removeAt(filteredPair.second)
             filteredPair.first.toDisplayActivityInfo(context)
-        } else null
+        } else if (filteredPairs.size == 1 && (returnFilteredItem || lastChosenPreferredApp?.alwaysPreferred == true)) {
+            val first = filteredPairs.first()
+            first.second.let { grouped.removeAt(it) }
+            first.first.toDisplayActivityInfo(context)
+        } else {
+            null
+        }
 
         var comparator = if (historyMap != null) {
             compareByDescending<DisplayActivityInfo> { app ->
@@ -63,7 +73,8 @@ object BottomSheetGrouper {
     private fun isLastChosenPosition(
         activityInfo: ActivityInfo,
         lastChosenComponent: ComponentName?
-    ) = lastChosenComponent != null && lastChosenComponent.packageName == activityInfo.packageName && lastChosenComponent.className == activityInfo.name
+    ) = lastChosenComponent != null && lastChosenComponent.packageName == activityInfo.packageName &&
+            lastChosenComponent.className == activityInfo.name
 
 
     private val usageStatsPeriod = TimeUnit.DAYS.toMillis(14)

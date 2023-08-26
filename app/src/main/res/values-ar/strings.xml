@@ -293,4 +293,7 @@
     <string name="open_link_with_subtitle_2">كانت ورقة الرابط مبنية على فتح بواسطة</string>
     <string name="seal_subtitle_2">لقد كان SEAL مصدرا رائعًا للتعلم منه فيما يتعلق بـ Jetpack</string>
     <string name="mastodon_redirect_subtitle_2">تم استخدام رمز مصدر Maston Redirect كمرجع لتكامل Shizuku</string>
+    <string name="import_and_override">استيراد وتجاوز</string>
+    <string name="import_dumped_preference">استيراد التفضيلات الملقاة</string>
+    <string name="import_dumped_preference_explainer">أداة استيراد التفضيلات الموجودة في ملفات السجلات - ربما لا تكون مفيدة للمستخدم العادي</string>
 </resources>

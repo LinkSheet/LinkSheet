@@ -84,3 +84,5 @@ symbol-processing = "com.google.devtools.ksp:symbol-processing:_"
 symbol-processing-api = "com.google.devtools.ksp:symbol-processing-api:_"
 
 symbol-processing-cmdline = "com.google.devtools.ksp:symbol-processing-cmdline:_"
+
+linksheet-interconnect = "com.github.1fexd:LinkSheetInterConnect:_"

@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.graphics.drawable.IconCompat
 import fe.linksheet.activity.SelectDomainsConfirmationActivity
+import fe.linksheet.interconnect.IDomainSelectionResultCallback
 import fe.linksheet.interconnect.ILinkSheetService
 import fe.linksheet.interconnect.ISelectedDomainsCallback
 import fe.linksheet.interconnect.StringParceledListSlice
@@ -77,6 +78,20 @@ class InterconnectService : Service(), CoroutineScope by MainScope() {
 
                 SelectDomainsConfirmationActivity.start(
                     this@InterconnectService, packageName, componentName, domains,
+                )
+            }
+
+            override fun selectDomainsWithCallback(
+                packageName: String,
+                domains: StringParceledListSlice,
+                componentName: ComponentName,
+                callback: IDomainSelectionResultCallback,
+            ) {
+                verifyCaller(packageName)
+
+                SelectDomainsConfirmationActivity.start(
+                    this@InterconnectService, packageName, componentName, domains,
+                    callback,
                 )
             }
         }

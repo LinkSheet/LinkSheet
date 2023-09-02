@@ -9,7 +9,7 @@ pluginManagement {
         gradlePluginPortal()
 
         plugins {
-            id("com.android.library") version "8.1.0"
+            id("com.android.library") version "8.1.1"
             id("com.gradle.enterprise") version "3.13.2"
             kotlin("android") version "1.9.0"
             id("de.fayard.refreshVersions") version "0.60.0"

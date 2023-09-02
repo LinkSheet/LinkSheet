@@ -1,12 +1,9 @@
 package fe.linksheet.activity.onboarding
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,31 +39,25 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.composable.util.ExtendedFabIconRight
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
-import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingActivity : ComponentActivity() {
     private val onboardingViewModel by viewModel<MainViewModel>()
 
-    @OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class)
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initPadding()
 
         setContent {
-            val navController = rememberAnimatedNavController()
-
             AppHost {
                 val context = LocalContext.current
 

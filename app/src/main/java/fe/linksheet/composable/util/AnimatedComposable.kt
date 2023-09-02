@@ -7,7 +7,6 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -18,11 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
-import com.google.accompanist.navigation.animation.composable
 import fe.android.compose.route.util.ArgumentRoute
 import fe.android.compose.route.util.Route
 import fe.android.compose.route.util.RouteData
-import com.google.accompanist.navigation.animation.composable as animatedComposable
+import androidx.navigation.compose.composable as navigationComposable
 
 val easing = Easing { f ->
     PathInterpolator(Path().apply {
@@ -58,12 +56,11 @@ val popExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> E
     slideOutHorizontally(exitTween, slidePositiveOffset) + fadeOut(fadeTween)
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 fun <T : RouteData, A : Route.Arguments<T, U>, U> NavGraphBuilder.animatedArgumentRouteComposable(
     route: ArgumentRoute<T, A, U>,
     content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, T) -> Unit
 ) {
-    animatedComposable(
+    navigationComposable(
         route.route,
         route.navArguments,
         route.navDeepLinks,
@@ -79,11 +76,10 @@ fun <T : RouteData, A : Route.Arguments<T, U>, U> NavGraphBuilder.animatedArgume
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.animatedComposable(
     route: String,
     content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit
-) = composable(
+) = navigationComposable(
     route,
     enterTransition = enterTransition,
     exitTransition = exitTransition,

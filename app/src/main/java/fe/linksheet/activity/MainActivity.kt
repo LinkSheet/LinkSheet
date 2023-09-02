@@ -1,21 +1,15 @@
 package fe.linksheet.activity
 
 import android.content.Intent
-import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.core.content.getSystemService
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import fe.linksheet.composable.util.animatedArgumentRouteComposable
-import fe.linksheet.composable.util.animatedComposable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import fe.linksheet.BuildConfig
 import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.activity.onboarding.OnboardingActivity
@@ -54,6 +48,8 @@ import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSetti
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
+import fe.linksheet.composable.util.animatedArgumentRouteComposable
+import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.debugSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
@@ -69,7 +65,6 @@ import fe.linksheet.loadDumpedPreferences
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
@@ -85,7 +80,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : ComponentActivity() {
     private val mainViewModel by viewModel<MainViewModel>()
 
-    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -95,12 +89,12 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            val navController = rememberAnimatedNavController()
+            val navController = rememberNavController()
 
             AppHost {
                 Spacer(modifier = Modifier.height(5.dp))
 
-                AnimatedNavHost(
+                NavHost(
                     navController = navController,
                     startDestination = mainRoute,
                 ) {

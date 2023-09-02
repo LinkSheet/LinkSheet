@@ -175,7 +175,6 @@ dependencies {
 
     implementation(AndroidX.browser)
     implementation(AndroidX.lifecycle.viewModelCompose)
-    implementation(Google.accompanist.navigationAnimation)
     implementation(libs.gson)
 
     implementation(libs.com.gitlab.grrfe.httpkt.core)

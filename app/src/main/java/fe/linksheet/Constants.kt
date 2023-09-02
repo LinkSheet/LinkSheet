@@ -1,7 +1,6 @@
 package fe.linksheet
 
 const val openLinkWithGithub = "https://github.com/tasomaniac/OpenLinkWith"
-const val sealGithub = "https://github.com/JunkFood02/Seal"
 const val mastodonRedirectGithub = "https://github.com/zacharee/MastodonRedirect"
 const val linksheetGithub = "https://github.com/1fexd/LinkSheet"
 const val donationLink = "https://coindrop.to/fexd"

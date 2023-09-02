@@ -13,7 +13,6 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.mastodonRedirectGithub
 import fe.linksheet.openLinkWithGithub
-import fe.linksheet.sealGithub
 
 
 @Composable
@@ -38,19 +37,6 @@ fun CreditsSettingsRoute(
                     },
                     content = {
                         SubtitleText(subtitle = stringResource(id = R.string.open_link_with_subtitle_2))
-                    }
-                )
-            }
-
-            item("seal") {
-                SettingsItemRow(
-                    headline = stringResource(id = R.string.seal),
-                    subtitle = stringResource(id = R.string.license_gpl_3),
-                    onClick = {
-                        uriHandler.openUri(sealGithub)
-                    },
-                    content = {
-                        SubtitleText(subtitle = stringResource(id = R.string.seal_subtitle_2))
                     }
                 )
             }

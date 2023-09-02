@@ -23,9 +23,10 @@ versioning {
         fun doCall(t: T, u: U, v: V, w: W): R? = function(t, u, v, w)
     }
 
-    releaseMode = KotlinClosure4<String?, String?, String?, VersioningExtension, String>({ _, _, currentTag, _ ->
-        currentTag
-    })
+    releaseMode =
+        KotlinClosure4<String?, String?, String?, VersioningExtension, String>({ _, _, currentTag, _ ->
+            currentTag
+        })
 
     releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ ->
         ReleaseInfo("release", info.tag)
@@ -40,12 +41,30 @@ android {
         applicationId = "fe.linksheet"
         minSdk = 25
         targetSdk = 34
+
+        val now = System.currentTimeMillis()
         versionCode = versioning.info.tag?.let {
             versioning.info.versionNumber.versionCode
-        } ?: (System.currentTimeMillis() / 1000).toInt()
+        } ?: (now / 1000).toInt()
 
         versionName = versioning.info.tag ?: versioning.info.full
         setProperty("archivesBaseName", "LinkSheet-$versionName")
+
+        val supportedLocales = arrayOf(
+            "en", "ar", "bg", "bn", "de", "it", "pl", "ru", "tr", "zh", "zh-rTW"
+        )
+
+        resourceConfigurations.addAll(supportedLocales)
+
+        buildConfigField("String[]", "SUPPORTED_LOCALES", buildString {
+            append("{").append(supportedLocales.joinToString(",") { "\"$it\"" }).append("}")
+        })
+
+        buildConfigField("long", "BUILT_AT", "$now")
+        buildConfigField(
+            "String",
+            "GITHUB_WORKFLOW_RUN_ID",
+            System.getenv("GITHUB_WORKFLOW_RUN_ID")?.let { "\"$it\"" } ?: "null")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -92,6 +111,16 @@ android {
             versionNameSuffix = "-nightly"
             resValue("string", "app_name", "LinkSheet Nightly")
         }
+
+        register("releaseDebug") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks.add("release")
+            signingConfig = buildTypes.getByName("debug").signingConfig
+
+            applicationIdSuffix = ".release_debug"
+            versionNameSuffix = "-release_debug"
+            resValue("string", "app_name", "LinkSheet Release Debug")
+        }
     }
 
     flavorDimensions += listOf("type")
@@ -99,13 +128,14 @@ android {
     productFlavors {
         create("foss") {
             dimension = "type"
+            versionNameSuffix = "-foss"
         }
 
         create("pro") {
             dimension = "type"
 
             applicationIdSuffix = ".pro"
-            versionName = "-pro"
+            versionNameSuffix = "-pro"
             resValue("string", "app_name", "LinkSheet Pro")
         }
     }
@@ -123,6 +153,7 @@ android {
     buildFeatures {
         compose = true
         aidl = true
+        buildConfig = true
     }
 
     composeOptions {

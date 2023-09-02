@@ -10,9 +10,14 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.kotlin.extension.asUnixMillisToLocalDateTime
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -21,17 +26,19 @@ import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.donationLink
+import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
-
 
 @Composable
 fun AboutSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
+    val activitiy = LocalContext.currentActivity()
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
+    val buildDate = BuildConfig.BUILT_AT.asUnixMillisToLocalDateTime().toString()
 
     SettingsScaffold(R.string.about, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -82,22 +89,65 @@ fun AboutSettingsRoute(
             }
 
             item("version") {
+                val versionName = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.version_name),
+                    BuildConfig.VERSION_NAME
+                )
+
+                val builtAt = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.built_at),
+                    buildDate
+                )
+
+                val workflow = if (BuildConfig.GITHUB_WORKFLOW_RUN_ID != null) {
+                    buildNameValueAnnotatedString(
+                        stringResource(id = R.string.github_workflow_run_id),
+                        BuildConfig.GITHUB_WORKFLOW_RUN_ID
+                    )
+                } else null
+
                 SettingsItemRow(
                     headline = stringResource(id = R.string.version),
-                    subtitle = BuildConfig.VERSION_NAME,
+                    subtitle = versionName,
                     onClick = {
                         clipboardManager.setText(buildAnnotatedString {
-                            append(BuildConfig.VERSION_NAME, lineSeparator, BuildConfig.VERSION_CODE.toString())
+                            append(
+                                activitiy.getText(R.string.linksheet_version_info_header),
+                                lineSeparator,
+                                versionName,
+                                lineSeparator,
+                                builtAt
+                            )
+
+                            if (workflow != null) {
+                                append(lineSeparator, workflow)
+                            }
                         })
                     },
                     image = {
                         ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.version)
                     },
                     content = {
-                        SubtitleText(subtitle = BuildConfig.VERSION_CODE.toString())
+                        SubtitleText(subtitle = builtAt)
+
+                        if (workflow != null) {
+                            SubtitleText(
+                                subtitle = workflow
+                            )
+                        }
                     }
                 )
             }
         }
+    }
+}
+
+private fun buildNameValueAnnotatedString(name: String, value: String): AnnotatedString {
+    return buildAnnotatedString {
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+            append(name)
+        }
+
+        append(" ", value)
     }
 }

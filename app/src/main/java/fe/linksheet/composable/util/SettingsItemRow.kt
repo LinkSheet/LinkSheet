@@ -1,7 +1,6 @@
 package fe.linksheet.composable.util
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -14,8 +13,8 @@ import androidx.navigation.NavController
 
 @Composable
 fun SettingsItemRow(
-    headline: String,
-    subtitle: String,
+    headline: CharSequence,
+    subtitle: CharSequence,
     onClick: () -> Unit,
     image: @Composable (() -> Unit)? = null,
     content: (@Composable ColumnScope.() -> Unit)? = null

@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -33,12 +34,20 @@ fun SettingSpacerText(contentTitle: String) {
 }
 
 @Composable
-fun HeadlineText(headline: String) {
-    Text(
-        text = headline,
-        style = Typography.titleLarge,
-        color = MaterialTheme.colorScheme.onSurface
-    )
+fun HeadlineText(headline: CharSequence) {
+    if (headline is AnnotatedString) {
+        Text(
+            text = headline,
+            style = Typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    } else if (headline is String) {
+        Text(
+            text = headline,
+            style = Typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
 }
 
 @Composable
@@ -77,14 +86,23 @@ fun LinkableSubtitleText(@StringRes id: Int, enabled: Boolean) {
 @Composable
 fun SubtitleText(
     fontStyle: FontStyle? = null,
-    subtitle: String
+    subtitle: CharSequence
 ) {
-    Text(
-        text = subtitle,
-        fontStyle = fontStyle,
-        fontSize = 16.sp,
-        color = MaterialTheme.colorScheme.onSurface
-    )
+    if (subtitle is AnnotatedString) {
+        Text(
+            text = subtitle,
+            fontStyle = fontStyle,
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    } else if (subtitle is String) {
+        Text(
+            text = subtitle,
+            fontStyle = fontStyle,
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
 }
 
 @Composable
@@ -94,8 +112,8 @@ fun SubtitleText(@StringRes subtitleId: Int) {
 
 @Composable
 fun Texts(
-    headline: String,
-    subtitle: String? = null,
+    headline: CharSequence,
+    subtitle: CharSequence? = null,
     content: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
     Column(verticalArrangement = Arrangement.Center) {

@@ -50,6 +50,7 @@ jobs:
       - uses: gradle/gradle-build-action@v2
       - run: ./gradlew assembleFossNightly
         env:
+          GITHUB_WORKFLOW_RUN_ID: ${{ github.run_id }}
           KEYSTORE_FILE_PATH: ${{ steps.android_keystore.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}

@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.IntentCompat
+import androidx.core.os.bundleOf
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
@@ -36,6 +37,7 @@ import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.extension.android.getApplicationInfoCompat
 import fe.linksheet.extension.android.initPadding
+import fe.linksheet.interconnect.IDomainSelectionResultCallback
 import fe.linksheet.interconnect.StringParceledListSlice
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
@@ -52,12 +54,14 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
         const val EXTRA_CALLING_COMPONENT = "calling_component"
         const val EXTRA_CALLING_PACKAGE = "calling_package"
         const val EXTRA_DOMAINS = "domains"
+        const val EXTRA_CALLBACK = "callback"
 
         fun start(
             context: Context,
             callingPackage: String,
             callingComponent: ComponentName,
-            domains: StringParceledListSlice
+            domains: StringParceledListSlice,
+            callback: IDomainSelectionResultCallback? = null,
         ) {
             val intent = Intent(context, SelectDomainsConfirmationActivity::class.java)
 
@@ -65,6 +69,7 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
             intent.putExtra(EXTRA_CALLING_PACKAGE, callingPackage)
             intent.putExtra(EXTRA_DOMAINS, domains)
             intent.putExtra(EXTRA_CALLING_COMPONENT, callingComponent)
+            intent.putExtra(EXTRA_CALLBACK, bundleOf(EXTRA_CALLBACK to callback?.asBinder()))
             intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -91,6 +96,9 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
             EXTRA_DOMAINS,
             StringParceledListSlice::class.java
         )?.list
+        val callback = intent.getBundleExtra(EXTRA_CALLBACK)
+            ?.getBinder(EXTRA_CALLBACK)
+            ?.let { IDomainSelectionResultCallback.Stub.asInterface(it) }
 
         if (callingPackage == null || domains == null || callingComponent == null) {
             finish()
@@ -119,6 +127,7 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
                         CircularProgressIndicator()
                     }
 
+                    // TODO: Allow for user to deselect specific requested domains.
                     val dialog = dialogHelper(
                         state = domains,
                         onClose = { confirmed ->
@@ -152,6 +161,12 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
                                     appSelectionHistoryRepository.insert(history)
 
                                     loading = false
+                                }
+
+                                if (confirmed == true) {
+                                    callback?.onDomainSelectionConfirmed()
+                                } else {
+                                    callback?.onDomainSelectionCancelled()
                                 }
 
                                 finish()

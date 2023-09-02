@@ -18,7 +18,7 @@ gradle = { id = "gradle", version = "8.1.0" }
 
 kotlin = "1.9.0"
 koin = "3.4.3"
-linkSheetInterConnect = "1.0.5"
+linkSheetInterConnect = "2.0.1-test"
 
 [libraries]
 

@@ -296,4 +296,8 @@
     <string name="import_and_override">استيراد وتجاوز</string>
     <string name="import_dumped_preference">استيراد التفضيلات الملقاة</string>
     <string name="import_dumped_preference_explainer">أداة استيراد التفضيلات الموجودة في ملفات السجلات - ربما لا تكون مفيدة للمستخدم العادي</string>
+    <string name="version_name">المعرف:</string>
+    <string name="built_at">مبني على:</string>
+    <string name="github_workflow_run_id">بناء سير العمل:</string>
+    <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
 </resources>

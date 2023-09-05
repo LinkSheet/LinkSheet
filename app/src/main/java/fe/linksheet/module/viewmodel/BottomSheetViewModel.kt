@@ -21,6 +21,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
@@ -149,10 +150,13 @@ class BottomSheetViewModel(
         always: Boolean = false,
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
         persist: Boolean = true,
+        referrer: Uri? = null,
     ) = ioAsync {
         val newIntent = info.intentFrom(intent).let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
+
+        newIntent.putExtra(LinkSheetConnector.EXTRA_REFERRER, referrer)
 
         if (persist && privateBrowsingBrowser == null) {
             persistSelectedIntent(newIntent, always)

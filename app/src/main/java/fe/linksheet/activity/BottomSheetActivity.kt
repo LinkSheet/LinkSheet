@@ -999,7 +999,7 @@ class BottomSheetActivity : ComponentActivity() {
     ) {
         val deferred = bottomSheetViewModel.launchAppAsync(
             info, result.intent, always, privateBrowsingBrowser,
-            persist,
+            persist, referrer,
         )
 
         deferred.invokeOnCompletion {

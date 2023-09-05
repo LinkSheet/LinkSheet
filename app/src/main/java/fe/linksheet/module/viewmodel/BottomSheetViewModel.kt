@@ -147,13 +147,14 @@ class BottomSheetViewModel(
         info: DisplayActivityInfo,
         intent: Intent,
         always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null
+        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
+        persist: Boolean = true,
     ) = ioAsync {
         val newIntent = info.intentFrom(intent).let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 
-        if (privateBrowsingBrowser == null) {
+        if (persist && privateBrowsingBrowser == null) {
             persistSelectedIntent(newIntent, always)
         }
 

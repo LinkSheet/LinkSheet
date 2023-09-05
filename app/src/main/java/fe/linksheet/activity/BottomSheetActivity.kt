@@ -138,7 +138,8 @@ class BottomSheetActivity : ComponentActivity() {
                 launchApp(
                     completed,
                     completed.app,
-                    always = completed.isRegularPreferredApp
+                    always = completed.isRegularPreferredApp,
+                    persist = false,
                 )
             }
         }
@@ -993,10 +994,12 @@ class BottomSheetActivity : ComponentActivity() {
         result: BottomSheetResult.BottomSheetSuccessResult,
         info: DisplayActivityInfo,
         always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null
+        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
+        persist: Boolean = true,
     ) {
         val deferred = bottomSheetViewModel.launchAppAsync(
-            info, result.intent, always, privateBrowsingBrowser
+            info, result.intent, always, privateBrowsingBrowser,
+            persist,
         )
 
         deferred.invokeOnCompletion {

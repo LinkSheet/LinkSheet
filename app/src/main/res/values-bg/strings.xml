@@ -281,4 +281,13 @@
     <string name="open_link_with_subtitle_2">Първоначално, LinkSheet беше на основата на OpenWith</string>
     <string name="seal_subtitle_2">Seal беше страхотен източник на знания за Jetpack Compose</string>
     <string name="mastodon_redirect_subtitle_2">Изходният код на Maston Redirect беше използван за справка за интеграцията с Shizuku</string>
+    <string name="import_dumped_preference">Внасяне на настройки от дневника</string>
+    <string name="import_and_override">Внасяне и заменяне</string>
+    <string name="success">Готово</string>
+    <string name="built_at">Време на компилиране:</string>
+    <string name="linksheet_version_info_header">Информация за изданието:</string>
+    <string name="import_dumped_preference_explainer">Внасяне на настройките, съдържащи се в дневника - вероятно е безполезно за потребители</string>
+    <string name="github_workflow_run_id">Идентификатор на компилацията:</string>
+    <string name="donate_card_subtitle">Здравейте! Използвате LinkSheet вече %s! За сравнение, времето за разработване на приложението е повече от <b>%s часа</b> в продължение на %s месеца. Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.</string>
+    <string name="version_name">Идентификатор:</string>
 </resources>

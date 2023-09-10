@@ -21,6 +21,7 @@ import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
+import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
@@ -48,4 +49,5 @@ val viewModelModule = module {
     viewModelOf(::PretendToBeAppSettingsViewModel)
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::LoadDumpedPreferencesViewModel)
+    viewModelOf(::PrivacySettingsViewModel)
 }

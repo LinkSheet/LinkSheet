@@ -71,6 +71,8 @@ object AppPreferences : Preferences() {
     )
     val useTimeMs = longPreference("use_time", 0)
 
+    val includeReferrer =  booleanPreference("include_referer", true)
+
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
     }

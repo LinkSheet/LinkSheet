@@ -76,6 +76,7 @@ class BottomSheetViewModel(
     )
 
     val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
+    val includeReferrer = preferenceRepository.getBooleanState(AppPreferences.includeReferrer)
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
@@ -156,7 +157,9 @@ class BottomSheetViewModel(
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 
-        newIntent.putExtra(LinkSheetConnector.EXTRA_REFERRER, referrer)
+        if (includeReferrer.value) {
+            newIntent.putExtra(LinkSheetConnector.EXTRA_REFERRER, referrer)
+        }
 
         if (persist && privateBrowsingBrowser == null) {
             persistSelectedIntent(newIntent, always)

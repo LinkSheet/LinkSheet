@@ -47,6 +47,7 @@ import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
+import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
@@ -69,6 +70,7 @@ import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.pretendToBeApp
+import fe.linksheet.privacySettingsRoute
 import fe.linksheet.settingsRoute
 import fe.linksheet.shizukuSettingsRoute
 import fe.linksheet.themeSettingsRoute
@@ -126,6 +128,10 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = generalSettingsRoute) {
                         GeneralSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    animatedComposable(route = privacySettingsRoute) {
+                        PrivacySettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     animatedComposable(route = bottomSheetSettingsRoute) {

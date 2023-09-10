@@ -67,6 +67,21 @@ fun SettingsRoute(
                 )
             }
 
+            item(key = "privacy") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = privacySettingsRoute,
+                    headlineId = R.string.privacy,
+                    subtitleId = R.string.privacy_settings_explainer,
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.PrivacyTip,
+                            descriptionId = R.string.privacy
+                        )
+                    }
+                )
+            }
+
             item(key = "bottom_sheet") {
                 SettingsItemRow(
                     navController = navController,

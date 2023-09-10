@@ -67,7 +67,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 
 ## Note
 
-This is a hobby project, and since I have many of those, I sometimes choose to ignore issues or postpone working on them as I am either not motivated or don't have any time (since I also have a job). LinkSheet is feature-complete for my use-case, so everything I add/change is because someone requested it. I have made less than 2€ from donations and there is no incentive other than providing a solid app for this project. Please take that into consideration before opening an issue. If you would like to **really** see a feature or bug fixed ASAP, send me an email and we can talk about a small donation in exchange for the immediate start of development. 
+This is a hobby project, and since I have many of those, I sometimes choose to ignore issues or postpone working on them as I am either not motivated or don't have any time (since I also have a job). LinkSheet is feature-complete for my use-case, so everything I add/change is because someone requested it. I have made less than 2€ from donations and there is no incentive other than providing a solid app for this project. Please take that into consideration before opening an issue. If you would **really** like a new feature added or a bug fixed, send me an email and we can talk about a small donation in exchange for the immediate start of development. 
 
 ## License
 

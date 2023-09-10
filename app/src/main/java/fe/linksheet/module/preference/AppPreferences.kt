@@ -69,7 +69,7 @@ object AppPreferences : Preferences() {
     val enableRequestPrivateBrowsingButton = booleanPreference(
         "enable_request_private_browsing_button"
     )
-    val useTimeMs = longPreference("use_time", 305000)
+    val useTimeMs = longPreference("use_time", 0)
 
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()

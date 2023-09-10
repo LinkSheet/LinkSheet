@@ -2,6 +2,7 @@ import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
+import net.nemerosa.versioning.VersionInfo
 import net.nemerosa.versioning.VersioningExtension
 
 plugins {
@@ -43,11 +44,13 @@ android {
         targetSdk = 34
 
         val now = System.currentTimeMillis()
-        versionCode = versioning.info.tag?.let {
-            versioning.info.versionNumber.versionCode
+        val versionInfo = providers.exec { versioning.info }.result.get() as VersionInfo
+
+        versionCode = versionInfo.tag?.let {
+            versionInfo.versionNumber.versionCode
         } ?: (now / 1000).toInt()
 
-        versionName = versioning.info.tag ?: versioning.info.full
+        versionName = versionInfo.tag ?: versionInfo.full
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         val supportedLocales = arrayOf(

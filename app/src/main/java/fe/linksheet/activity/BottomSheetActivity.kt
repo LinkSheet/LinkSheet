@@ -71,6 +71,7 @@ import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
+import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
@@ -999,11 +1000,24 @@ class BottomSheetActivity : ComponentActivity() {
     ) {
         val deferred = bottomSheetViewModel.launchAppAsync(
             info, result.intent, always, privateBrowsingBrowser,
-            persist, referrer,
+            persist,
         )
 
         deferred.invokeOnCompletion {
-            startActivity(deferred.getCompleted())
+            val showAsReferrer = bottomSheetViewModel.showAsReferrer.value
+            val intent = deferred.getCompleted()
+
+            intent.putExtra(
+                LinkSheetConnector.EXTRA_REFERRER,
+                if (showAsReferrer) Uri.parse("android-app://${packageName}") else referrer,
+            )
+
+            if (!showAsReferrer) {
+                intent.putExtra(Intent.EXTRA_REFERRER, referrer)
+            }
+
+            startActivity(intent)
+
             finish()
         }
     }

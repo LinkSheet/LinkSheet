@@ -300,4 +300,8 @@
     <string name="built_at">Zbudowano:</string>
     <string name="github_workflow_run_id">Kompilacja workflow:</string>
     <string name="linksheet_version_info_header">Informacje o wersji LinkSheet:</string>
+    <string name="privacy_settings_explainer">Ustawienia takie jak uwzględnienie odsyłacza</string>
+    <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
+    <string name="show_linksheet_referrer_explainer">Po uruchomieniu aplikacja może sprawdzić, która aplikacja ją uruchomiła lub \"wskazała\". Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, wskazując, że aplikacja, która uruchomiła LinkSheet, jest tą, która uruchomiła cel. Włącz tę opcję, aby ponownie dodać LinkSheet jako odsyłacz dla otwieranych aplikacji.</string>
+    <string name="privacy">Prywatność</string>
 </resources>

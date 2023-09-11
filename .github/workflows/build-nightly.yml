@@ -60,3 +60,15 @@ jobs:
         with:
           name: linksheet-nightly
           path: app/build/outputs/apk/foss/nightly/*.apk
+
+      - name: Get file name
+        id: get_file_name
+        shell: bash
+        run: echo "FILE_NAME=$(basename app/build/outputs/apk/foss/nightly/*.apk .apk)" >> "$GITHUB_OUTPUT"
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          repository: https://github.com/1fexd/LinkSheetNightly
+          token: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
+          files: app/build/outputs/apk/foss/nightly/*.apk
+          name: ${{ steps.get_file_name.outputs.FILE_NAME }}

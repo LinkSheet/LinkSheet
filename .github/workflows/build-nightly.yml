@@ -71,4 +71,5 @@ jobs:
           repository: https://github.com/1fexd/LinkSheetNightly
           token: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           files: app/build/outputs/apk/foss/nightly/*.apk
+          tag_name: ${{ steps.get_file_name.outputs.FILE_NAME }}
           name: ${{ steps.get_file_name.outputs.FILE_NAME }}

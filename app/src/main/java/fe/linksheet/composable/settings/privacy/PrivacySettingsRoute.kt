@@ -29,10 +29,10 @@ fun PrivacySettingsRoute(
         ) {
             item(key = "include_referrer") {
                 SwitchRow(
-                    state = viewModel.includeReferrer,
+                    state = viewModel.showAsReferrer,
                     viewModel = viewModel,
-                    headline = stringResource(id = R.string.include_referrer),
-                    subtitle = stringResource(id = R.string.include_referrer_explainer)
+                    headline = stringResource(id = R.string.show_linksheet_referrer),
+                    subtitle = stringResource(id = R.string.show_linksheet_referrer_explainer)
                 )
             }
         }

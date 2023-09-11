@@ -293,7 +293,7 @@
     <string name="github_workflow_run_id">Build workflow:</string>
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
     <string name="privacy">Privacy</string>
-    <string name="include_referrer">Include referrer</string>
-    <string name="include_referrer_explainer">When this setting is enabled, LinkSheet will allow the app that is launched to know LinkSheet was used. Even if this setting is enabled, launched apps will explicitly have to check if LinkSheet was used.</string>
+    <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
+    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the one that launched the target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
     <string name="privacy_settings_explainer">Settings like referrer inclusion</string>
 </resources>

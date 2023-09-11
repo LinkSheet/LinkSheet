@@ -71,7 +71,7 @@ object AppPreferences : Preferences() {
     )
     val useTimeMs = longPreference("use_time", 0)
 
-    val includeReferrer =  booleanPreference("include_referer", true)
+    val showLinkSheetAsReferrer =  booleanPreference("show_as_referrer", false)
 
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()

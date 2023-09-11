@@ -2,7 +2,6 @@ import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
-import net.nemerosa.versioning.VersionInfo
 import net.nemerosa.versioning.VersioningExtension
 
 plugins {
@@ -44,7 +43,7 @@ android {
         targetSdk = 34
 
         val now = System.currentTimeMillis()
-        val versionInfo = providers.exec { versioning.info }.result.get() as VersionInfo
+        val versionInfo = providers.provider { versioning.info }.get()
 
         versionCode = versionInfo.tag?.let {
             versionInfo.versionNumber.versionCode

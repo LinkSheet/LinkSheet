@@ -300,4 +300,8 @@
     <string name="built_at">مبني على:</string>
     <string name="github_workflow_run_id">بناء سير العمل:</string>
     <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
+    <string name="include_referrer">يشمل المراجع</string>
+    <string name="privacy_settings_explainer">إعدادات مثل تضمين المراجع</string>
+    <string name="include_referrer_explainer">عند تمكين هذا الإعداد، ستسمح ورقة الروابط للتطبيق الذي يتم تشغيله بمعرفة أنه تم استخدام ورقة الروابط. حتى إذا تم تمكين هذا الإعداد، سيتعين على التطبيقات التي تم تشغيلها التحقق بشكل صريح من استخدام ورقة الروابط.</string>
+    <string name="privacy">الخصوصية</string>
 </resources>

@@ -64,9 +64,9 @@ jobs:
         shell: bash
         run: |
           echo "FILE_NAME=$(basename app/build/outputs/apk/foss/nightly/*.apk .apk)" >> "$GITHUB_OUTPUT"
-          echo "LATEST_STABLE_RELEASE=$(gh release list | grep "Latest" | awk '{ print $1 }')" >> "$GITHUB_OUTPUT"
+          echo "LATEST_STABLE_RELEASE=$(gh release list | grep 'Latest' | awk '{ print $1 }')" >> "$GITHUB_OUTPUT"
 
-      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes "Latest successful LinkSheet nightly build. May be broken and/or unstable.\nView the difference to the last stable release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)"
+      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes "View the difference to the last stable release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)"
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}

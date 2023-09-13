@@ -290,4 +290,7 @@
     <string name="github_workflow_run_id">Идентификатор на компилацията:</string>
     <string name="donate_card_subtitle">Здравейте! Използвате LinkSheet вече %s! За сравнение, времето за разработване на приложението е повече от <b>%s часа</b> в продължение на %s месеца. Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.</string>
     <string name="version_name">Идентификатор:</string>
+    <string name="privacy_settings_explainer">Настройки като попълване на изпращач</string>
+    <string name="show_linksheet_referrer">Попълване на LinkSheet като изпращач</string>
+    <string name="privacy">Поверителност</string>
 </resources>

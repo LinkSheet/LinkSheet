@@ -24,10 +24,10 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
-#      - name: Setup Android modded android.jar
-#        uses: 1fexd/setup-modded-android-jar@0.0.3
-#        env:
-#          ANDROID_SDK_VERSION: 33
+      #      - name: Setup Android modded android.jar
+      #        uses: 1fexd/setup-modded-android-jar@0.0.3
+      #        env:
+      #          ANDROID_SDK_VERSION: 33
 
       - uses: actions/cache@v2
         with:
@@ -66,7 +66,17 @@ jobs:
           echo "FILE_NAME=$(basename app/build/outputs/apk/foss/nightly/*.apk .apk)" >> "$GITHUB_OUTPUT"
           echo "LATEST_STABLE_RELEASE=$(gh release list | grep 'Latest' | awk '{ print $1 }')" >> "$GITHUB_OUTPUT"
 
-      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes "View the difference to the last stable release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)"
+      - name: Release note
+        id: release_note
+        run: |
+          echo "RELEASE_NOTE<<EOF" >> $GITHUB_OUTPUT
+          * "View the difference to the last nightly release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LAST_COMMITS_SHA...$GITHUB_SHA)" >> $GITHUB_OUTPUT
+          * "View the difference to the last stable release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        env:
+          LAST_COMMITS_SHA: ${{ github.event.before }}
+
+      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}

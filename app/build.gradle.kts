@@ -49,7 +49,7 @@ android {
             versionInfo.versionNumber.versionCode
         } ?: (now / 1000).toInt()
 
-        versionName = versionInfo.tag ?: versionInfo.full
+        versionName = versionInfo.tag ?: "$now-${versionInfo.full}"
         setProperty("archivesBaseName", "LinkSheet-$versionName")
 
         val supportedLocales = arrayOf(

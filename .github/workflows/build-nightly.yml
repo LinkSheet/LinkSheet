@@ -66,10 +66,8 @@ jobs:
         shell: bash
         run: echo "FILE_NAME=$(basename app/build/outputs/apk/foss/nightly/*.apk .apk)" >> "$GITHUB_OUTPUT"
 
-      - uses: softprops/action-gh-release@v1
-        with:
-          repository: https://github.com/1fexd/LinkSheetNightly
-          token: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
-          files: app/build/outputs/apk/foss/nightly/*.apk
-          tag_name: ${{ steps.get_file_name.outputs.FILE_NAME }}
-          name: ${{ steps.get_file_name.outputs.FILE_NAME }}
+      - run: gh release create ${{ steps.get_file_name.outputs.FILE_NAME }} app/build/outputs/apk/foss/nightly/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: LinkSheetNightly

@@ -302,4 +302,6 @@
     <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
     <string name="privacy_settings_explainer">إعدادات مثل تضمين المراجع</string>
     <string name="privacy">الخصوصية</string>
+    <string name="show_linksheet_referrer">إظهار مرجع ورقة الروابط</string>
+    <string name="show_linksheet_referrer_explainer">عند تشغيل تطبيق ما، يمكنه التحقق لمعرفة التطبيق الذي تم تشغيله أو \"إحالته\". افتراضيًا، عندما يقوم تطبيق ورقة الروابط بتشغيل تطبيق ما، فإنه يخفي نفسه، قائلاً إن التطبيق الذي قام بتشغيل ورقة الروابط هو الذي قام بتشغيل الهدف. قم بتمكين هذا لإعادة إدراج ورقة الروابط كمرجع للتطبيقات التي يفتحها.</string>
 </resources>

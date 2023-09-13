@@ -39,7 +39,7 @@ versioning {
 }
 
 val appName = "LinkSheet"
-val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
 
 fun VariantDimension.buildStringConfigField(name: String, value: String? = null){
     buildConfigField("String", name, encodeString(value))

@@ -8,7 +8,7 @@ import androidx.core.content.getSystemService
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.kotlin.extension.filterIf
-import fe.kotlin.extension.groupByWithCacheAndNoNullKeys
+import fe.kotlin.extension.groupByNoNullKeys
 import fe.kotlin.extension.mapToSet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.ioLaunch
@@ -38,7 +38,7 @@ class PreferredAppSettingsViewModel(
     val searchFilter = MutableStateFlow("")
 
     private val preferredApps = repository.getAllAlwaysPreferred().map { app ->
-        app.groupByWithCacheAndNoNullKeys(
+        app.groupByNoNullKeys(
             keySelector = { it.toDisplayActivityInfo(context) },
             cacheKeySelector = { it },
             valueTransform = { it.host }

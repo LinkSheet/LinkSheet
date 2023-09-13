@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.android.compose.dialog.helper.dialogHelper
-import fe.kotlin.extension.asUnixMillisToLocalDateTime
 import fe.kotlin.extension.localizedString
+import fe.kotlin.extension.unixMillis
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow
@@ -178,7 +178,7 @@ fun LogTextSettingsRoute(
                                     horizontalArrangement = Arrangement.End
                                 ) {
                                     Text(
-                                        text = unixMillis.asUnixMillisToLocalDateTime()
+                                        text = unixMillis.unixMillis.value
                                             .localizedString(),
                                         fontStyle = FontStyle.Italic,
                                         fontSize = 12.sp

@@ -37,7 +37,7 @@ data class PreferredApp(
 
     fun toDisplayActivityInfo(context: Context) = context.packageManager
         .queryFirstIntentActivityByPackageNameOrNull(packageName!!)
-        ?.toDisplayActivityInfo(context)
+        ?.toDisplayActivityInfo(context)!!
 
     fun toPreferredDisplayActivityInfo(context: Context) = toDisplayActivityInfo(context)?.let {
         PreferredDisplayActivityInfo(this, it)

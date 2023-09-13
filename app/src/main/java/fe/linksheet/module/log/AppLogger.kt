@@ -1,8 +1,8 @@
 package fe.linksheet.module.log
 
 import android.content.Context
-import fe.kotlin.extension.decodeBase64
-import fe.kotlin.extension.encodeBase64
+import fe.kotlin.extension.decodeBase64Throw
+import fe.kotlin.extension.encodeBase64Throw
 import fe.kotlin.extension.toUnixMillis
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.util.SingletonHolder
@@ -25,8 +25,8 @@ data class LogEntry(
         item { append(type) }
         item { append(unixMillis) }
         item { append(prefix) }
-        item { append(message.encodeBase64()) }
-        item { append(redactedMessage.encodeBase64()) }
+        item { append(message.encodeBase64Throw()) }
+        item { append(redactedMessage.encodeBase64Throw()) }
     }
 
     companion object {
@@ -37,8 +37,8 @@ data class LogEntry(
                 type,
                 unixMillis.toLong(),
                 prefix,
-                message.decodeBase64(),
-                redactedMessage.decodeBase64()
+                message.decodeBase64Throw(),
+                redactedMessage.decodeBase64Throw()
             )
         }
     }

@@ -18,7 +18,7 @@ abstract class BrowserCommonViewModel(
 
     val items by lazy {
         items().combine(searchFilter) { items, filter ->
-            items.filterIf(filter.isNotEmpty()) { (info, _) ->
+            items.filterIf(condition = filter.isNotEmpty()) { (info, _) ->
                 info.compareLabel.contains(filter, ignoreCase = true)
             }
         }

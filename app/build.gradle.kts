@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.VariantDimension
 import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
@@ -40,6 +41,14 @@ versioning {
 val appName = "LinkSheet"
 val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
 
+fun VariantDimension.buildStringConfigField(name: String, value: String? = null){
+    buildConfigField("String", name, encodeString(value))
+}
+
+fun encodeString(value: String? = null): String {
+    return if(value == null) "null" else "\"${value}\""
+}
+
 android {
     namespace = "fe.linksheet"
     compileSdk = 34
@@ -71,16 +80,13 @@ android {
         resourceConfigurations.addAll(supportedLocales)
 
         buildConfigField("String[]", "SUPPORTED_LOCALES", buildString {
-            append("{").append(supportedLocales.joinToString(",") { "\"$it\"" }).append("}")
+            append("{").append(supportedLocales.joinToString(",") { encodeString(it) }).append("}")
         })
 
         buildConfigField("long", "BUILT_AT", "$now")
-        buildConfigField("String", "COMMIT", versionInfo.commit)
-        buildConfigField("String", "BRANCH", versionInfo.branch)
-        buildConfigField(
-            "String",
-            "GITHUB_WORKFLOW_RUN_ID",
-            System.getenv("GITHUB_WORKFLOW_RUN_ID")?.let { "\"$it\"" } ?: "null")
+        buildStringConfigField("COMMIT", versionInfo.commit)
+        buildStringConfigField("BRANCH", versionInfo.branch)
+        buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

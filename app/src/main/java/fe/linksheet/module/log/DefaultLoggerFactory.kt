@@ -1,6 +1,6 @@
 package fe.linksheet.module.log
 
-import fe.kotlin.extension.decodeHex
+import fe.kotlin.extension.decodeHexOrThrow
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.util.CryptoUtil
@@ -12,7 +12,7 @@ val loggerHmac = CryptoUtil.HmacSha("HmacSHA256", 64)
 val defaultLoggerFactoryModule = module {
     single<LoggerFactory> {
         val preferenceRepository = get<AppPreferenceRepository>()
-        val logKey = preferenceRepository.getOrWriteInit(AppPreferences.logKey).decodeHex()
+        val logKey = preferenceRepository.getOrWriteInit(AppPreferences.logKey).decodeHexOrThrow()
 
         DefaultLoggerFactory(logKey)
     }

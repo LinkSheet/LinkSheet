@@ -289,8 +289,8 @@
     <string name="import_dumped_preference_explainer">Importer for preferences contained in logs files - probably not useful the average user</string>
     <string name="import_and_override">Import and override</string>
     <string name="version_name">Identifier:</string>
-    <string name="built_at">Built at:</string>
-    <string name="github_workflow_run_id">Build workflow:</string>
+    <string name="built_at">Built at (UTC):</string>
+    <string name="github_workflow_run_id">Build workflow ID:</string>
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>

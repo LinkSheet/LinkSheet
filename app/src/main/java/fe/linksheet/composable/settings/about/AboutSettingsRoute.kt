@@ -17,7 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.kotlin.extension.asUnixMillisToLocalDateTime
+import fe.kotlin.extension.unixMillisAtUtc
+import fe.kotlin.util.ISO8601DateTimeFormatOption
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -29,6 +30,7 @@ import fe.linksheet.donationLink
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
+import fe.linksheet.workflowIdPath
 
 @Composable
 fun AboutSettingsRoute(
@@ -38,7 +40,8 @@ fun AboutSettingsRoute(
     val activitiy = LocalContext.currentActivity()
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
-    val buildDate = BuildConfig.BUILT_AT.asUnixMillisToLocalDateTime().toString()
+    val buildDate =
+        BuildConfig.BUILT_AT.unixMillisAtUtc.value.format(ISO8601DateTimeFormatOption.default)
 
     SettingsScaffold(R.string.about, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

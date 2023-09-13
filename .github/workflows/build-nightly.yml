@@ -61,13 +61,16 @@ jobs:
           name: linksheet-nightly
           path: app/build/outputs/apk/foss/nightly/*.apk
 
-      - name: Get file name
-        id: get_file_name
+      - name: Get info
+        id: get_info
         shell: bash
-        run: echo "FILE_NAME=$(basename app/build/outputs/apk/foss/nightly/*.apk .apk)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "FILE_NAME=$(basename app/build/outputs/apk/foss/nightly/*.apk .apk)" >> "$GITHUB_OUTPUT"
+          echo "LATEST_STABLE_RELEASE=$(gh release list | grep "Latest" | awk '{ print $1 }')" >> "$GITHUB_OUTPUT"
 
-      - run: gh release create ${{ steps.get_file_name.outputs.FILE_NAME }} app/build/outputs/apk/foss/nightly/*.apk
+      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes "Latest successful LinkSheet nightly build. May be broken and/or unstable.\nView the difference to the last stable release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)"
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
-          OWNER: ${{ github.repository_owner }}
-          REPO: LinkSheetNightly
+          NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
+          NIGHTLY_TAG: ${{ steps.get_info.outputs.FILE_NAME }}
+          LATEST_STABLE_RELEASE: ${{ steps.get_info.outputs.LATEST_STABLE_RELEASE }}

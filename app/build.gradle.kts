@@ -3,6 +3,10 @@ import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
 import net.nemerosa.versioning.VersioningExtension
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 plugins {
     id("com.android.application")
@@ -33,6 +37,9 @@ versioning {
     })
 }
 
+val appName = "LinkSheet"
+val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+
 android {
     namespace = "fe.linksheet"
     compileSdk = 34
@@ -43,14 +50,19 @@ android {
         targetSdk = 34
 
         val now = System.currentTimeMillis()
+        val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
         val versionInfo = providers.provider { versioning.info }.get()
 
         versionCode = versionInfo.tag?.let {
             versionInfo.versionNumber.versionCode
         } ?: (now / 1000).toInt()
 
-        versionName = versionInfo.tag ?: "$now-${versionInfo.full}"
-        setProperty("archivesBaseName", "LinkSheet-$versionName")
+        versionName = versionInfo.tag ?: versionInfo.full
+        val archivesBaseName = if(versionInfo.tag != null){
+           "$appName-$versionName"
+        } else "$appName-${dtf.format(localDateTime)}-$versionName"
+
+        setProperty("archivesBaseName", archivesBaseName)
 
         val supportedLocales = arrayOf(
             "en", "ar", "bg", "bn", "de", "it", "pl", "ru", "tr", "zh", "zh-rTW"
@@ -63,6 +75,8 @@ android {
         })
 
         buildConfigField("long", "BUILT_AT", "$now")
+        buildConfigField("String", "COMMIT", versionInfo.commit)
+        buildConfigField("String", "BRANCH", versionInfo.branch)
         buildConfigField(
             "String",
             "GITHUB_WORKFLOW_RUN_ID",
@@ -91,7 +105,7 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
-            resValue("string", "app_name", "LinkSheet Debug")
+            resValue("string", "app_name", "$appName Debug")
         }
 
         release {
@@ -101,7 +115,7 @@ android {
                 "proguard-rules.pro"
             )
 
-            resValue("string", "app_name", "LinkSheet")
+            resValue("string", "app_name", appName)
         }
 
         register("nightly") {
@@ -111,7 +125,7 @@ android {
 
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-nightly"
-            resValue("string", "app_name", "LinkSheet Nightly")
+            resValue("string", "app_name", "$appName Nightly")
         }
 
         register("releaseDebug") {
@@ -121,7 +135,7 @@ android {
 
             applicationIdSuffix = ".release_debug"
             versionNameSuffix = "-release_debug"
-            resValue("string", "app_name", "LinkSheet Release Debug")
+            resValue("string", "app_name", "$appName Release Debug")
         }
     }
 
@@ -130,7 +144,6 @@ android {
     productFlavors {
         create("foss") {
             dimension = "type"
-            versionNameSuffix = "-foss"
         }
 
         create("pro") {
@@ -138,7 +151,7 @@ android {
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
-            resValue("string", "app_name", "LinkSheet Pro")
+            resValue("string", "app_name", "$appName Pro")
         }
     }
 

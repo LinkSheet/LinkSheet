@@ -70,15 +70,16 @@ jobs:
         id: release_note
         run: |
           echo "RELEASE_NOTE<<EOF" >> $GITHUB_OUTPUT
-          * "View the difference to the last nightly release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LAST_COMMITS_SHA...$GITHUB_SHA)" >> $GITHUB_OUTPUT
-          * "View the difference to the last stable release [here](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)" >> $GITHUB_OUTPUT
+          * "View the difference to the last nightly release: [$LAST_COMMITS_SHA...$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/compare/$LAST_COMMITS_SHA...$GITHUB_SHA)" >> $GITHUB_OUTPUT
+          * "View the difference to the last stable release [$LATEST_STABLE_RELEASE...$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
         env:
           LAST_COMMITS_SHA: ${{ github.event.before }}
+          LATEST_STABLE_RELEASE: ${{ steps.get_info.outputs.LATEST_STABLE_RELEASE }}
 
-      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes
+      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes $RELEASE_NOTE
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
           NIGHTLY_TAG: ${{ steps.get_info.outputs.FILE_NAME }}
-          LATEST_STABLE_RELEASE: ${{ steps.get_info.outputs.LATEST_STABLE_RELEASE }}
+          RELEASE_NOTE: ${{ steps.release_note.outputs.RELEASE_NOTE }}

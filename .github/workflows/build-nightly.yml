@@ -69,7 +69,7 @@ jobs:
         uses: 1fexd/gh-create-release-notes@0.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          stable-repo: ${{ vars.GITHUB_REPOSITORY }}
+          stable-repo: $GITHUB_REPOSITORY
           nightly-repo: ${{ vars.NIGHTLY_REPO_URL }}
           last-commit-sha: ${{ github.event.before }}
           commit-sha: ${{ github.sha }}

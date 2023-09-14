@@ -5,7 +5,8 @@
 
 [![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
-[![Nightly](https://img.shields.io/badge/nightly-download-brightgreen)](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-brightgreen)](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+[![Nightly Repository (for Obtainium)](https://img.shields.io/badge/nightly-repository-brightgreen)](https://github.com/1fexd/LinkSheetNightly)
 
 [![Build status](https://img.shields.io/github/actions/workflow/status/1fexd/LinkSheet/build-nightly.yml)](https://github.com/1fexd/LinkSheet/actions/workflows/build-nightly.yml)
 [![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
@@ -64,6 +65,10 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * *Experimental:* [ClearURLs](https://github.com/ClearURLs) integration (removes tracking parameters) (report issues/bugs [here](https://github.com/1fexd/clearurlkt))
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
+
+## Nightly builds
+
+Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred). The latest nightly version can always be downloaded via [nightly.link](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip), but if you are using something like [Obtainium](https://github.com/ImranR98/Obtainium), there also is a [LinkSheetNightly](https://github.com/1fexd/LinkSheetNightly) repository where nightly builds are released as Github releases.
 
 ## Note
 

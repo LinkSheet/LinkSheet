@@ -69,10 +69,11 @@ jobs:
       - name: Release note
         id: release_note
         run: |
-          echo "RELEASE_NOTE<<EOF" >> $GITHUB_OUTPUT
-          echo "* View the difference to the last nightly release: [$LAST_COMMITS_SHA...$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/compare/$LAST_COMMITS_SHA...$GITHUB_SHA)" >> $GITHUB_OUTPUT
-          echo "* View the difference to the last stable release [$LATEST_STABLE_RELEASE...$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          RELEASE_NOTE="* View the difference to the last nightly release: [$LAST_COMMITS_SHA...$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/compare/$LAST_COMMITS_SHA...$GITHUB_SHA)\n
+                        * View the difference to the last stable release [$LATEST_STABLE_RELEASE...$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/compare/$LATEST_STABLE_RELEASE...$GITHUB_SHA)" 
+          
+          echo RELEASE_NOTE >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV<
         env:
           LAST_COMMITS_SHA: ${{ github.event.before }}
           LATEST_STABLE_RELEASE: ${{ steps.get_info.outputs.LATEST_STABLE_RELEASE }}
@@ -82,4 +83,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
           NIGHTLY_TAG: ${{ steps.get_info.outputs.FILE_NAME }}
-          RELEASE_NOTE: ${{ steps.release_note.outputs.RELEASE_NOTE }}
+          RELEASE_NOTE: ${{ env.ONE_LINE_TEXT_ENV_VAR }}

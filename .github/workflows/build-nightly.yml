@@ -81,7 +81,7 @@ jobs:
           LAST_COMMITS_SHA: ${{ github.event.before }}
           LATEST_STABLE_RELEASE: ${{ steps.get_info.outputs.LATEST_STABLE_RELEASE }}
 
-      - run: gh release create -R $NIGHTLY_REPO $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes $RELEASE_NOTE
+      - run: gh release create -R "$NIGHTLY_REPO" $NIGHTLY_TAG app/build/outputs/apk/foss/nightly/*.apk --latest --notes "$RELEASE_NOTE"
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}

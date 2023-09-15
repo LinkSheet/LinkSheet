@@ -284,7 +284,7 @@
     <string name="import_dumped_preference">Внасяне на настройки от дневника</string>
     <string name="import_and_override">Внасяне и заменяне</string>
     <string name="success">Готово</string>
-    <string name="built_at">Време на компилиране:</string>
+    <string name="built_at">Време на компилиране (UTC):</string>
     <string name="linksheet_version_info_header">Информация за изданието:</string>
     <string name="import_dumped_preference_explainer">Внасяне на настройките, съдържащи се в дневника - вероятно е безполезно за потребители</string>
     <string name="github_workflow_run_id">Идентификатор на компилацията:</string>

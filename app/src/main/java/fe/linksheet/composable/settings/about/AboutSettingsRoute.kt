@@ -26,11 +26,10 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.creditsSettingsRoute
-import fe.linksheet.donationLink
+import fe.linksheet.donationCrypto
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
-import fe.linksheet.workflowIdPath
 
 @Composable
 fun AboutSettingsRoute(
@@ -80,7 +79,7 @@ fun AboutSettingsRoute(
                     headlineId = R.string.donate,
                     subtitleId = R.string.donate_explainer,
                     onClick = {
-                        uriHandler.openUri(donationLink)
+                        uriHandler.openUri(donationCrypto)
                     },
                     image = {
                         ColoredIcon(

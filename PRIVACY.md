@@ -4,7 +4,7 @@ LinkSheet does not track the user in any way. LinkSheet always uses common brows
 includes device information when sending web-requests, but due to the nature of the internet, your
 public IP address is not hidden.
 
-## Features
+## Features connecting to the internet locally
 
 ### Follow redirects
 
@@ -13,13 +13,13 @@ showing the app chooser by sending a `HEAD` request to the opened URL (which mea
 the website is always made, regardless of whether the user actually opens the URL in any app
 afterwards).
 
-When "Follow redirects" and "Follow redirects via external service" are enabled, URLs are not
-resolved on device, but rather sent to
-a [Supabase edge-function](https://github.com/1fexd/linksheet-supabase-functions/) which then
-attempts to follow the redirects and returns the destination URL. The edge function itself does not
-log any request information (it only stores the timestamp, the initial URL and its destination URL),
-but [Supabase](https://supabase.com) may log request
-information ([Privacy Policy](https://supabase.com/privacy))
+### Amp2Html
+
+When "Enable Amp2Html" is enabled, LinkSheet will send a `GET` request to the opened URL (again, a
+connection is always made, even if the user does not actually open the URL in any app afterwards) to
+attempt to obtain the non-AMP version of the page. If the page is not an AMP page, or if no non-AMP
+version could be found, the original URL will be opened when the user clicks an app in the bottom
+sheet.
 
 ### Downloader
 
@@ -30,13 +30,21 @@ afterwards) and check if the `Content-Type` header of the response is not `text/
 Enabling "Use mime type from URL" will still send a request if no mime type could be read from the
 opened URL
 
-### Amp2Html
+## External services
 
-When "Enable Amp2Html" is enabled, LinkSheet will send a `GET` request to the opened URL (again, a
-connection is always made, even if the user does not actually open the URL in any app afterwards) to
-attempt to obtain the non-AMP version of the page. If the page is not an AMP page, or if no non-AMP
-version could be found, the original URL will be opened when the user clicks an app in the bottom
-sheet.
+Both "Follow redirects" and "Amp2Html" are also available as external services, meaning that,
+when the corresponding option is enabled ("Follow redirects via external service" and
+"Attempt to obtain non-AMP page version via external service" respectively),
+a [Supabase edge-function](https://github.com/1fexd/linksheet-supabase-functions/) is used to follow
+redirects or convert an AMP page to the normal HTML page. The functions only cache the timestamp,
+input and output link.
+
+When "Follow redirects" and "Follow redirects via external service" are enabled, only
+links [known to be trackers (checkout the *.txt files)](https://github.com/1fexd/fastforward-ext/releases/latest)
+will be sent to the edge function.
+
+If "Enable Amp2Html" and "Attempt to obtain non-AMP page version via external service", ALL links
+are sent to the edge function.
 
 ## Logs
 

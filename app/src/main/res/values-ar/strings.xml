@@ -297,8 +297,8 @@
     <string name="import_dumped_preference">استيراد التفضيلات الملقاة</string>
     <string name="import_dumped_preference_explainer">أداة استيراد التفضيلات الموجودة في ملفات السجلات - ربما لا تكون مفيدة للمستخدم العادي</string>
     <string name="version_name">المعرف:</string>
-    <string name="built_at">مبني على:</string>
-    <string name="github_workflow_run_id">بناء سير العمل:</string>
+    <string name="built_at">بنيت في (التوقيت العالمي المنسق):</string>
+    <string name="github_workflow_run_id">معرف بناء سير العمل:</string>
     <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
     <string name="privacy_settings_explainer">إعدادات مثل تضمين المراجع</string>
     <string name="privacy">الخصوصية</string>

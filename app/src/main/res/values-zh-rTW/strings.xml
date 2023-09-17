@@ -491,4 +491,8 @@
     <string name="version_name"></string>
     <string name="built_at"></string>
     <string name="enable_amp2html_explainer"></string>
+    <string name="built_by_error"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="advanced_explainer"></string>
+    <string name="download_started_toast"></string>
 </resources>

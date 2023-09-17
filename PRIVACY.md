@@ -37,7 +37,8 @@ when the corresponding option is enabled ("Follow redirects via external service
 "Attempt to obtain non-AMP page version via external service" respectively),
 a [Supabase edge-function](https://github.com/1fexd/linksheet-supabase-functions/) is used to follow
 redirects or convert an AMP page to the normal HTML page. The functions only cache the timestamp,
-input and output link.
+input and output link. The cache will periodically be exported from the database directly into LinkSheet,
+so common links can easily be resolved locally.
 
 When "Follow redirects" and "Follow redirects via external service" are enabled, only
 links [known to be trackers (checkout the *.txt files)](https://github.com/1fexd/fastforward-ext/releases/latest)

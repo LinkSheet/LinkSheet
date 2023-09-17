@@ -605,4 +605,9 @@
     <string name="export_import_settings_explainer"></string>
     <string name="settings__title_select_apps"></string>
     <string name="settings__title_filter_apps"></string>
+    <string name="import_dumped_preference_explainer"></string>
+    <string name="built_by_error"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="advanced_explainer"></string>
+    <string name="download_started_toast"></string>
 </resources>

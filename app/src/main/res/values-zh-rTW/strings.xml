@@ -521,4 +521,9 @@
     <string name="settings_verified_link_handlers__text_disabled"></string>
     <string name="settings_verified_link_handlers__text_handling_filter_all"></string>
     <string name="telemetry_level_standard_description"></string>
+    <string name="built_by_error"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="download_started_toast"></string>
+    <string name="advanced_explainer"></string>
+    <string name="import_dumped_preference_explainer"></string>
 </resources>

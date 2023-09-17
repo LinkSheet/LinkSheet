@@ -482,4 +482,8 @@
     <string name="settings_main_news__text_ui_overhaul"></string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure"></string>
     <string name="settings_shortcuts__title_default_browser"></string>
+    <string name="built_by_error"></string>
+    <string name="advanced_explainer"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
 </resources>

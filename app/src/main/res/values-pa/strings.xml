@@ -2,8 +2,8 @@
 <resources>
     <string name="hide_after_copying_explainer">\"ਕਾਪੀ URL\" ਬਟਨ ਦਬਾਏ ਜਾਣ ਤੋਂ ਬਾਅਦ ਹੇਠਲੀ ਸ਼ੀਟ ਨੂੰ ਲੁਕਾਓ</string>
     <string name="import_dumped_preference">ਡੰਪ ਕੀਤੀਆਂ ਤਰਜੀਹਾਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ</string>
-    <string name="domain_selection_confirmation_subtitle">ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ \'ਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਡੋਮੇਨਾਂ ਲਈ %s ਨੂੰ ਤਰਜੀਹੀ ਐਪਲੀਕੇਸ਼ਨ ਵਜੋਂ ਸੈੱਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ\?</string>
-    <string name="onboarding7_headline">ਉਤਸ਼ਾਹ ਨਾਲ ਭਰੇ ਹੋਏ\?
+    <string name="domain_selection_confirmation_subtitle">ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ \'ਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਡੋਮੇਨਾਂ ਲਈ %s ਨੂੰ ਤਰਜੀਹੀ ਐਪਲੀਕੇਸ਼ਨ ਵਜੋਂ ਸੈੱਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="onboarding7_headline">ਉਤਸ਼ਾਹ ਨਾਲ ਭਰੇ ਹੋਏ?
 \nਲਿੰਕਸ਼ੀਟ ਤੁਹਾਡੇ ਕੋਲ ਹੈ</string>
     <string name="enable_send_button">\"ਸਾਂਝਾ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="default_apps_subtitle">ਤਰਜੀਹੀ ਐਪਸ ਉਹ ਐਪਸ ਹਨ ਜੋ ਤੁਸੀਂ ਕੁਝ ਖਾਸ ਹੋਸਟਾਂ ਨੂੰ \"ਹਮੇਸ਼ਾਂ\" ਖੋਲ੍ਹਣ ਲਈ ਸੈੱਟ ਕਰਦੇ ਹੋ</string>
@@ -42,7 +42,7 @@
     <string name="no_preferred_apps_set_yet">ਅਜੇ ਤੱਕ ਕੋਈ ਵੀ ਐਪ ਤਰਜੀਹੀ ਤੌਰ \'ਤੇ ਸੈੱਟ ਨਹੀਂ ਕੀਤੀ ਗਈ ਹੈ।</string>
     <string name="disable_all">ਸਭ ਨੂੰ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="always_show_package_name_explainer">ਸਿਰਫ਼ ਐਪ ਨਾਮਾਂ ਦੀ ਬਜਾਏ ਹਮੇਸ਼ਾਂ ਪੈਕੇਜ ਨਾਮ ਵਿਖਾਓ। ਇਹ ਪੂਰੀ ਐਪ \'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ।</string>
-    <string name="domain_selection_confirmation_title">ਡੋਮੇਨ ਚੁਣੋ\?</string>
+    <string name="domain_selection_confirmation_title">ਡੋਮੇਨ ਚੁਣੋ?</string>
     <string name="log_files">ਪਿਛਲੀਆਂ ਲੌਗ ਫਾਈਲਾਂ</string>
     <string name="open_link_with_subtitle_2">ਲਿੰਕਸ਼ੀਟ ਸ਼ੁਰੂ ਵਿੱਚ OpenLinkWith \'ਤੇ ਅਧਾਰਤ ਸੀ</string>
     <string name="use_text_share_copy_buttons">\"ਕਾਪੀ URL\", \"ਇਸ ਨਾਲ ਸਾਂਝਾ ਕਰੋ\", \"ਡਾਊਨਲੋਡ ਕਰੋ\" ਅਤੇ \"LibRedirect ਨੂੰ ਅਣਡਿੱਠ ਕਰੋ\" ਲਈ ਸਧਾਰਨ ਟੈਕਸਟ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
@@ -303,7 +303,7 @@
     <string name="discord">ਡਿਸਕੌਰਡ</string>
     <string name="discord_explainer">ਸਾਡੇ ਡਿਸਕੌਰਡ ਸਰਵਰ \'ਤੇ ਗੱਲਬਾਤ ਕਰੋ!</string>
     <string name="donate_card">ਕਾਰਡ ਨਾਲ ਦਾਨ ਕਰੋ (BuyMeACoffee ਰਾਹੀਂ)</string>
-    <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।
+    <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ। 
 \n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ।</string>
     <plurals name="hours">
         <item quantity="one">%s ਘੰਟਾ</item>
@@ -375,8 +375,8 @@
     <string name="fastforward_version">ਫਾਸਟ ਫਾਰਵਰਡ ਨਿਯਮ</string>
     <string name="url_copied_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਉਪਭੋਗਤਾ ਦੁਆਰਾ ਇੱਕ URL ਕਾਪੀ ਕੀਤਾ ਜਾਂਦਾ ਹੈ</string>
     <string name="enable_new_bottom_sheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ।
-\n
+    <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ। 
+\n 
 \nਤੁਸੀਂ ਸੈਟਿੰਗਾਂ -&gt; ਰਾਹੀਂ ਪੁਰਾਣੀ ਥੱਲੇ ਵਾਲੀ ਸ਼ੀਟ \'ਤੇ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ। ਉੱਨਤ -&gt; ਫੀਚਰ ਫਲੈਗ।</string>
     <string name="enable_new_bottom_sheet_explainer">ਪੁਰਾਣੀ ਸ਼ੀਟ ਦੀ ਬਜਾਏ ਸੁਧਾਰੀ ਹੋਈ ਹੇਠਲੀ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="new_bottomsheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ</string>

@@ -99,7 +99,7 @@
     <string name="configure">ਕੌਨਫਿਗਰ ਕਰੋ</string>
     <string name="show_linksheet_referrer">ਲਿੰਕਸ਼ੀਟ ਰੈਫਰਰ ਦਿਖਾਓ</string>
     <string name="url_copied">URL ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
-    <string name="title_activity_onboarding">ਆਨਬੋਰਡਿੰਗ ਸਰਗਰਮੀ</string>
+    <string name="title_activity_onboarding">ਆਨਬੋਰਡਿੰਗ ਐਕਟੀਵਿਟੀ</string>
     <string name="copy">URL ਕਾਪੀ ਕਰੋ</string>
     <string name="resolve_failed">%s ਅਸਫਲ: %s</string>
     <string name="none">ਕੋਈ ਵੀ ਨਹੀਂ</string>
@@ -264,7 +264,7 @@
     <string name="follow_redirects_external_service">ਬਾਹਰੀ ਸੇਵਾ ਦੁਆਰਾ ਰੀਡਾਇਰੈਕਟਸ ਦਾ ਪਾਲਣ ਕਰੋ</string>
     <string name="general_settings_explainer">ਪੂਰੀ ਐਪ ਨਾਲ ਸੰਬੰਧਿਤ ਸੈਟਿੰਗਾਂ</string>
     <string name="settings">ਸੈਟਿੰਗਾਂ</string>
-    <string name="title_activity_main">ਮੁੱਖ ਸਰਗਰਮੀ</string>
+    <string name="title_activity_main">ਮੁੱਖ ਐਕਟੀਵਿਟੀ</string>
     <string name="in_app">ਇਨ-ਐਪ</string>
     <string name="preferred_browser_explainer">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
     <string name="crash_log">ਕਰੈਸ਼ ਲੌਗ</string>
@@ -293,7 +293,7 @@
     <string name="enable_request_private_browsing_button_explainer">ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਅੱਗੇ ਇੱਕ ਬਟਨ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦਾ ਹੈ ਜੋ ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਮੋਡ ਵਿੱਚ ਕਲਿੱਕ ਕੀਤੇ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ। ਸਮਰਥਿਤ ਬ੍ਰਾਊਜ਼ਰ: %s</string>
     <string name="pretend_to_be_app">ਨੇਟਿਵ ਐਪ ਬੇਨਤੀਆਂ ਨੂੰ ਇੰਟਰਸੈਪਟ ਕਰੋ</string>
     <string name="shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
-    <string name="dont_show_filtered_item_explainer">ਕਦੇ ਵੀ ਟੌਟ ਸੈਕਸ਼ਨ ਨੂੰ ਨਹੀਂ ਵਿਖਾਏਗਾ ਜੋ ਕਲਿੱਕ ਕੀਤੇ ਹੋਸਟ ਲਈ ਆਖਰੀ ਵਰਤੇ ਐਪ ਦਾ ਸੁਝਾਅ ਦਿੰਦਾ ਹੈ</string>
+    <string name="dont_show_filtered_item_explainer">ਕਦੇ ਵੀ ਟੌਪ ਸੈਕਸ਼ਨ ਨੂੰ ਨਹੀਂ ਵਿਖਾਏਗਾ ਜੋ ਕਲਿੱਕ ਕੀਤੇ ਹੋਸਟ ਲਈ ਆਖਰੀ ਵਰਤੇ ਐਪ ਦਾ ਸੁਝਾਅ ਦਿੰਦਾ ਹੈ</string>
     <string name="enable_copy_button">ਕਾਪੀ ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="version_name">ਪਛਾਣਕਰਤਾ:</string>
     <string name="configure_explainer">LinkSheetCompat ਨੂੰ ਕੌਨਫਿਗਰ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
@@ -303,5 +303,5 @@
     <string name="mastodon_redirect">ਮਾਸਟੋਡੋਨ ਰੀਡਾਇਰੈਕਟ</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku ਮੋਡ ਨੂੰ ਸਰਗਰਮ ਕੀਤਾ ਗਿਆ ਹੈ, ਇੱਕ ਐਪ ਨੂੰ ਇਸਦੇ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਸਮਰੱਥਾਵਾਂ ਨੂੰ ਟੌਗਲ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ। ਇੱਕ ਐਪ ਦੇ \"ਡਿਫ਼ਾਲਟ ਰੂਪ ਵਿੱਚ ਖੋਲ੍ਹੋ\" ਸੈਟਿੰਗ ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਟੈਪ ਕਰੋ।</string>
     <string name="credits">ਕ੍ਰੈਡਿਟਸ</string>
-    <string name="done">ਹੋ ਗਿਆ</string>
+    <string name="done">ਮੁਕੰਮਲ</string>
 </resources>

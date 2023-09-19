@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="open_with">Open with</string>
     <string name="just_once">Just once</string>
@@ -14,9 +15,9 @@
     <string name="apps_which_can_open_links_explainer_2">Lists all apps which may interfere with LinkSheet\'s behavior</string>
     <string name="no_preferred_apps_set_yet">No apps have been set as preferred yet.</string>
     <string name="search">Search</string>
-    <string name="copy">Copy url</string>
+    <string name="copy">Copy URL</string>
     <string name="enable_copy_button">Enable copy button</string>
-    <string name="enable_copy_button_explainer">Shows a \"Copy url\" button in the bottom sheet</string>
+    <string name="enable_copy_button_explainer">Shows a \"Copy URL\" button in the bottom sheet</string>
     <string name="url_copied">URL has been copied to clipboard</string>
     <string name="single_tap">Enable single tap</string>
     <string name="single_tap_explainer">Only require one tap instead of two to open apps; Long-press to select app, double click to open app info</string>
@@ -34,7 +35,7 @@
     <string name="open_settings">Open settings</string>
     <string name="no_such_app_found">No such app found!</string>
     <string name="enable_send_button">Enable \"Share to\" button</string>
-    <string name="enable_send_button_explainer">Shows a button in the bottom sheet which allows you to share the url to other apps as if you selected it from a \"Share to\" menu</string>
+    <string name="enable_send_button_explainer">Shows a button in the bottom sheet which allows you to share the URL to other apps as if you selected it from a \"Share to\" menu</string>
     <string name="send_to">Share to</string>
     <string name="preferred_apps_explainer">Preferred apps are the apps you set to \"Always\" open certain hosts</string>
     <string name="always_show_package_name">Always show package name</string>
@@ -44,7 +45,7 @@
     <string name="remove_all">Remove all</string>
     <string name="add_all">Add all</string>
     <string name="hide_after_copying">Hide after copying</string>
-    <string name="hide_after_copying_explainer">Hide bottom sheet after \"Copy url\" button has been pressed</string>
+    <string name="hide_after_copying_explainer">Hide bottom sheet after \"Copy URL\" button has been pressed</string>
     <string name="back">Back</string>
     <string name="display_grid_layout">Display grid layout</string>
     <string name="display_grid_layout_explainer">Display a grid instead of a list in the bottom sheet</string>
@@ -118,10 +119,10 @@
     <string name="close">Close</string>
     <string name="dont_show_filtered_item">Never show \"last picked app\" section</string>
     <string name="dont_show_filtered_item_explainer">Will never show the top section which suggests the last used app for the clicked host</string>
-    <string name="use_text_share_copy_buttons">Use simple text buttons for \"Copy url\", \"Share to\", \"Download\" and \"Ignore LibRedirect\"</string>
-    <string name="use_text_share_copy_buttons_explainer">Replaces the \"Copy url\", \"Share to\", \"Download\" and \"Ignore LibRedirect\" outlined buttons with simple text buttons</string>
-    <string name="preview_url">Preview url</string>
-    <string name="preview_url_explainer">Shows the clicked url (after it has been processed)</string>
+    <string name="use_text_share_copy_buttons">Use simple text buttons for \"Copy URL\", \"Share to\", \"Download\" and \"Ignore LibRedirect\"</string>
+    <string name="use_text_share_copy_buttons_explainer">Replaces the \"Copy URL\", \"Share to\", \"Download\" and \"Ignore LibRedirect\" outlined buttons with simple text buttons</string>
+    <string name="preview_url">Preview URL</string>
+    <string name="preview_url_explainer">Shows the clicked URL (after it has been processed)</string>
     <string name="download">Download</string>
     <string name="linksheet_download">LinkSheet Download</string>
     <string name="enable_downloader">Enable downloader</string>
@@ -146,7 +147,7 @@
     <string name="use_unified_preferred_browser">Use unified settings</string>
     <string name="libredirect_via">Via %s</string>
     <string name="enable_ignore_libredirect_button">Enable \"Ignore LibRedirect\" button</string>
-    <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the url has been redirected via LibRedirect, which opens the original url instead</string>
+    <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the URL has been redirected via LibRedirect, which opens the original URL instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
     <string name="app_crashed">Looks like LinkSheet has crashed, checkout the error below</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -205,7 +206,7 @@
     <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Avanced features like feature flags</string>
+    <string name="advanced_explainer">Advanced features like feature flags</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
@@ -286,7 +287,7 @@
     <string name="seal_subtitle_2">Seal has been a great resource to learn from regarding Jetpack Compose</string>
     <string name="mastodon_redirect_subtitle_2">Maston Redirect\'s source code was used as a reference for Shizuku interaction</string>
     <string name="import_dumped_preference">Import dumped preferences</string>
-    <string name="import_dumped_preference_explainer">Importer for preferences contained in logs files - probably not useful the average user</string>
+    <string name="import_dumped_preference_explainer">Importer for preferences contained in logs files - probably not useful for the average user</string>
     <string name="import_and_override">Import and override</string>
     <string name="version_name">Identifier:</string>
     <string name="built_at">Built at (UTC):</string>

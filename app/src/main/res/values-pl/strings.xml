@@ -297,7 +297,7 @@
     <string name="import_dumped_preference_explainer">Narzędzie do importowania preferencji zawartych w plikach logów - prawdopodobnie nieprzydatne dla przeciętnego użytkownika</string>
     <string name="import_and_override">Importuj i nadpisz</string>
     <string name="version_name">Identyfikator:</string>
-    <string name="built_at">Zbudowano o (UTC):</string>
+    <string name="built_at">Zbudowano (UTC):</string>
     <string name="github_workflow_run_id">ID kompilacji workflow:</string>
     <string name="linksheet_version_info_header">Informacje o wersji LinkSheet:</string>
     <string name="privacy_settings_explainer">Ustawienia takie jak uwzględnienie odsyłacza</string>

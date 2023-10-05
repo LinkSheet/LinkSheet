@@ -34,7 +34,7 @@
     <string name="apps_which_can_open_links">التطبيقات التي يمكنها فتح الروابط</string>
     <string name="apps_which_can_open_links_explainer">انقر على أحد التطبيقات لفتح قائمة \"الفتح افتراضيًا\" التي تسمح لك بتعطيل فتح الرابط تلقائيًا</string>
     <string name="no_preferred_apps_set_yet">لم يتم تعيين أي تطبيقات على أنها مفضلة حتى الآن.</string>
-    <string name="copy">إنسخ الرابط</string>
+    <string name="copy">نسخ الرابط</string>
     <string name="enable_copy_button">تمكين زر النسخ</string>
     <string name="single_tap_explainer">تتطلب نقرة واحدة فقط بدلا من نقرتين لفتح التطبيقات ؛ اضغط لفترة طويلة لتحديد التطبيق ، وانقر نقرا مزدوجا لفتح معلومات التطبيق</string>
     <string name="always_ask_explainer">قم دائما بإدراج جميع المتصفحات</string>
@@ -297,8 +297,8 @@
     <string name="import_dumped_preference">استيراد التفضيلات الملقاة</string>
     <string name="import_dumped_preference_explainer">أداة استيراد التفضيلات الموجودة في ملفات السجلات - ربما لا تكون مفيدة للمستخدم العادي</string>
     <string name="version_name">المعرف:</string>
-    <string name="built_at">مبني على:</string>
-    <string name="github_workflow_run_id">بناء سير العمل:</string>
+    <string name="built_at">بنيت في (التوقيت العالمي المنسق):</string>
+    <string name="github_workflow_run_id">معرف بناء سير العمل:</string>
     <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
     <string name="privacy_settings_explainer">إعدادات مثل تضمين المراجع</string>
     <string name="privacy">الخصوصية</string>

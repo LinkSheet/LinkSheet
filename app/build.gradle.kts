@@ -41,12 +41,12 @@ versioning {
 val appName = "LinkSheet"
 val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
 
-fun VariantDimension.buildStringConfigField(name: String, value: String? = null){
+fun VariantDimension.buildStringConfigField(name: String, value: String? = null) {
     buildConfigField("String", name, encodeString(value))
 }
 
 fun encodeString(value: String? = null): String {
-    return if(value == null) "null" else "\"${value}\""
+    return if (value == null) "null" else "\"${value}\""
 }
 
 android {
@@ -67,8 +67,8 @@ android {
         } ?: (now / 1000).toInt()
 
         versionName = versionInfo.tag ?: versionInfo.full
-        val archivesBaseName = if(versionInfo.tag != null){
-           "$appName-$versionName"
+        val archivesBaseName = if (versionInfo.tag != null) {
+            "$appName-$versionName"
         } else "$appName-${dtf.format(localDateTime)}-$versionName"
 
         setProperty("archivesBaseName", archivesBaseName)

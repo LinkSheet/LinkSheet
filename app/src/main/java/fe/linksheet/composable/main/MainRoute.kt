@@ -33,18 +33,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.android.compose.dialog.helper.dialogHelper
-import fe.fastforwardkt.FastForwardRules
+import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.composable.settings.link.redirect.FollowRedirectsKnownTrackersDialog
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.DialogColumn
-import fe.linksheet.composable.util.DialogContent
 import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
-import fe.linksheet.extension.compose.clickable
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -123,13 +120,19 @@ fun MainRoute(
                         .padding(horizontal = 12.dp)
                         .padding(top = 12.dp, bottom = 3.dp)
                 ) {
-                    Text(
-                        modifier = Modifier,
-                        text = stringResource(R.string.app_name),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 30.sp,
-                    )
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            modifier = Modifier,
+                            text = stringResource(R.string.app_name),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 30.sp,
+                        )
+
+                        if(!LinkSheetAppConfig.showDonationBanner()){
+                            Text(text = stringResource(id = R.string.thanks_for_donating))
+                        }
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(5.dp))
@@ -225,7 +228,6 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            
 
 //            DialogContent(
 //                items = trackers,

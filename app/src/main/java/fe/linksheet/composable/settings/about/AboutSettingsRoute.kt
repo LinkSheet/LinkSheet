@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import fe.kotlin.extension.unixMillisAtUtc
 import fe.kotlin.util.ISO8601DateTimeFormatOption
 import fe.linksheet.BuildConfig
+import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
@@ -36,7 +37,7 @@ fun AboutSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
-    val activitiy = LocalContext.currentActivity()
+    val activity = LocalContext.currentActivity()
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
     val buildDate =
@@ -74,20 +75,22 @@ fun AboutSettingsRoute(
                 )
             }
 
-            item("donate") {
-                SettingsItemRow(
-                    headlineId = R.string.donate,
-                    subtitleId = R.string.donate_explainer,
-                    onClick = {
-                        uriHandler.openUri(donationCrypto)
-                    },
-                    image = {
-                        ColoredIcon(
-                            icon = Icons.Default.CurrencyBitcoin,
-                            descriptionId = R.string.donate
-                        )
-                    }
-                )
+            if(LinkSheetAppConfig.showDonationBanner()){
+                item("donate") {
+                    SettingsItemRow(
+                        headlineId = R.string.donate,
+                        subtitleId = R.string.donate_explainer,
+                        onClick = {
+                            uriHandler.openUri(donationCrypto)
+                        },
+                        image = {
+                            ColoredIcon(
+                                icon = Icons.Default.CurrencyBitcoin,
+                                descriptionId = R.string.donate
+                            )
+                        }
+                    )
+                }
             }
 
             item("version") {
@@ -114,7 +117,7 @@ fun AboutSettingsRoute(
                     onClick = {
                         clipboardManager.setText(buildAnnotatedString {
                             append(
-                                activitiy.getText(R.string.linksheet_version_info_header),
+                                activity.getText(R.string.linksheet_version_info_header),
                                 lineSeparator,
                                 versionName,
                                 lineSeparator,

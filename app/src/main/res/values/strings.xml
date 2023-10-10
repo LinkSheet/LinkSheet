@@ -76,7 +76,7 @@
     <string name="github">Github</string>
     <string name="github_explainer">Source code repository</string>
     <string name="donate">Donate</string>
-    <string name="donate_explainer">Donate crypto to the author</string>
+    <string name="donate_explainer">Donate to the author</string>
     <string name="open_copied_link">Open copied link</string>
     <string name="paste">Paste</string>
     <string name="error">Error</string>
@@ -297,4 +297,5 @@
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
     <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the one that launched the target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
     <string name="privacy_settings_explainer">Settings like referrer inclusion</string>
+    <string name="thanks_for_donating">Thank you for donating!</string>
 </resources>

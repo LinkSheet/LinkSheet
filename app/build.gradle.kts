@@ -111,6 +111,7 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
+
             resValue("string", "app_name", "$appName Debug")
         }
 
@@ -120,8 +121,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            resValue("string", "app_name", appName)
         }
 
         register("nightly") {
@@ -131,6 +130,7 @@ android {
 
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-nightly"
+
             resValue("string", "app_name", "$appName Nightly")
         }
 
@@ -157,7 +157,6 @@ android {
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
-            resValue("string", "app_name", "$appName Pro")
         }
     }
 

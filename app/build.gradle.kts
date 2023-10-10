@@ -74,7 +74,7 @@ android {
         setProperty("archivesBaseName", archivesBaseName)
 
         val supportedLocales = arrayOf(
-            "en", "ar", "bg", "bn", "de", "it", "pl", "ru", "tr", "zh", "zh-rTW"
+            "en", "es", "ar", "bg", "bn", "de", "it", "pl", "ru", "tr", "zh", "zh-rTW"
         )
 
         resourceConfigurations.addAll(supportedLocales)

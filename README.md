@@ -66,6 +66,12 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
 
+## Donations / LinkSheet Pro
+
+All donations of 5€+ are eligible for LinkSheet Pro. Currently, the only benefit Pro provides is hiding the donation banner within the app. In the future, I may implement some Pro-only features, but these will be new features. Existing features will not be paywalled.
+
+Want to donate in another way (Bank Transfer/Paypal etc., or another crypto)? Send a mail to `grrfe[at]420blaze.it`
+
 ## Nightly builds
 
 Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred). The latest nightly version can always be downloaded via [nightly.link](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip), but if you are using something like [Obtainium](https://github.com/ImranR98/Obtainium), there also is a [LinkSheetNightly](https://github.com/1fexd/LinkSheetNightly) repository where nightly builds are released as Github releases.
@@ -80,10 +86,6 @@ This is a hobby project, and since I have many of those, I sometimes choose to i
 
 * LinkSheet, excluding all `strings.xml` and `plural.xml` files, is licensed under the [FXL](LICENSE)
 * All `strings.xml` and `plural.xml` files are licensed under [GPL-3.0](LICENSE_STRINGS)
-
-## Donations
-
-Want to donate in another way (Bank Transfer/Paypal etc., another crypto)? Send a mail to `grrfe[at]420blaze.it`
 
 ## Acknowledgements
 

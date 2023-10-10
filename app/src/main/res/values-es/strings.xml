@@ -280,8 +280,7 @@
     <string name="start_setup">Continuar</string>
     <string name="start_setup_explainer">La funcionalidad de LinkSheet requiere una configuración personalizada de Android. La siguiente configuración le guiará a través del proceso de varios pasos.</string>
     <string name="onboarding_setup">Configurar LinkSheet</string>
-    <string name="onboarding_0_title">Bienvenid@ a
-\nLinkSheet</string>
+    <string name="onboarding_0_title">Bienvenid@ a \nLinkSheet</string>
     <string name="onboarding_0_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
     <string name="launch_onboarding_new">Lanzar la nueva integración</string>
     <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>

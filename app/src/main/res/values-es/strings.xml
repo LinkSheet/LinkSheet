@@ -28,7 +28,7 @@
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
     <string name="preview_url_explainer">Muestra el enlace seleccionado (después de que ha sido procesado)</string>
     <string name="theme_explainer">Cambiar el tema de la aplicación</string>
-    <string name="logs">Registro</string>
+    <string name="logs">Registros</string>
     <string name="no_apps_which_can_handle_links_found">No se han encontrado aplicaciones que puedan abrir enlaces.</string>
     <string name="bottom_sheet">Menú</string>
     <string name="known_trackers">Rastreadores conocidos</string>
@@ -124,7 +124,7 @@
     <string name="frontend">Interfaz</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="finish">Termina</string>
-    <string name="donate_explainer">Donar criptomonedas al autor</string>
+    <string name="donate_explainer">Donar crypto al autor</string>
     <string name="advanced">Avanzado</string>
     <string name="built_at">Construido en (UTC):</string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
@@ -304,4 +304,5 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku activado, toque una aplicación para alternar sus capacidades de manejo automático de enlaces. Toque prolongadamente una aplicación para abrir su menú de configuración \"Abrir de forma predeterminada\".</string>
     <string name="credits">Créditos</string>
     <string name="done">Hecho</string>
+    <string name="thanks_for_donating">¡Gracias por donar!</string>
 </resources>

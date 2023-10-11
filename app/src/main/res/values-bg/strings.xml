@@ -13,7 +13,7 @@
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
-    <string name="donate_explainer">Дарете криптовалута на автора</string>
+    <string name="donate_explainer">Дарение</string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
@@ -304,4 +304,5 @@
     <string name="show_linksheet_referrer_explainer">Когато дадено приложения се отваря, то може да провери кое друго приложение го е отворило или го \"изпраща\". По подразбиране, когато LinkSheet отваря приложение, не се обявява като \"изпращач\", а указва приложението, което е стартирало LinkSheet. Ако е отметнато LinkSheet ще се обявава като \"изпращач\" на приложенията, които отваря.</string>
     <string name="onboarding4_paragraph_1">В Android 12 Google въведе проверени връзки към приложенията (Verified App Links). Така приложенията могат криптографски да проверяват собствеността на домейните. Когато докоснете връзка към такъв домейн и е инсталирано съответното приложение, то ще се отваря автоматично по подразбиране, като се прескача изцяло изборът, който преди това се предоставяше на потребителя.</string>
     <string name="launch_onboaring_explainer">Проверка на екрана за обучение</string>
+    <string name="thanks_for_donating">Благодаря за дарението!</string>
 </resources>

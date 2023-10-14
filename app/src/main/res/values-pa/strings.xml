@@ -124,7 +124,7 @@
     <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
     <string name="finish">ਸਮਾਪਤ</string>
-    <string name="donate_explainer">ਲੇਖਕ ਨੂੰ ਕ੍ਰਿਪਟੋ ਦਾਨ ਕਰੋ</string>
+    <string name="donate_explainer">ਲੇਖਕ ਨੂੰ ਆਰਥਿਕ ਮੱਦਦ ਦਿਓ</string>
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
@@ -205,7 +205,7 @@
     <string name="github_workflow_run_id">ਬਿਲਡ ਵਰਕਫਲੋ ਆਈਡੀ:</string>
     <string name="resolved_via">%s ਨੂੰ %s ਰਾਹੀਂ ਰਿਜ਼ੌਲਵ ਕੀਤਾ</string>
     <string name="instance_not_available_anymore">ਇੰਸਟੈਂਸ ਹੁਣ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!</string>
-    <string name="onboarding2_highlight">ਤੁਹਾਡਾ</string>
+    <string name="onboarding2_highlight">ਤੁਹਾਡਾ ਆਪਣਾ</string>
     <string name="onboarding4_highlight">ਕੰਮ</string>
     <string name="amp2html_builtin_cache_explainer">ਬਿਲਟ-ਇਨ ਕੈਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਜੋ ਕਿ ਬਾਹਰੀ ਸੇਵਾ ਦੇ ਡੇਟਾਬੇਸ ਨਿਰਯਾਤ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ)</string>
     <string name="open_with_linksheet">ਲਿੰਕਸ਼ੀਟ ਨਾਲ ਖੋਲ੍ਹੋ</string>
@@ -244,7 +244,7 @@
     <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
     <string name="request_timeout">ਰਿਕਵੈਸਟ ਟਾਈਮਆਊਟ</string>
     <string name="apps_which_can_open_links_explainer_2">ਉਹਨਾਂ ਸਾਰੀਆਂ ਐਪਾਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰਦਾ ਹੈ ਜੋ ਲਿੰਕਸ਼ੀਟ ਦੇ ਵਿਹਾਰ ਵਿੱਚ ਦਖਲ ਦੇ ਸਕਦੀਆਂ ਹਨ</string>
-    <string name="onboarding4_paragraph_1">ਐਂਡਰਾਇਡ 12 ਵਿੱਚ, ਗੂਗਲ ਨੇ ਵੈਰੀਫਾਈਡ ਐਪ ਲਿੰਕਸ ਪੇਸ਼ ਕੀਤੇ। ਐਪਸ ਹੁਣ ਡੋਮੇਨਾਂ ਦੀ ਮਲਕੀਅਤ ਦੀ ਕ੍ਰਿਪਟੋਗ੍ਰਾਫੀ ਤੌਰ \'ਤੇ ਪੁਸ਼ਟੀ ਕਰ ਸਕਦੇ ਹਨ। ਜਦੋਂ ਅਜਿਹੇ ਡੋਮੇਨ ਲਈ ਇੱਕ ਲਿੰਕ ਟੈਪ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਅਤੇ ਸੰਬੰਧਿਤ ਐਪ ਨੂੰ ਸਥਾਪਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਇਹੜਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ, ਉਸ ਵਿਕਲਪ ਨੂੰ ਛੱਡ ਕੇ ਜੋ ਪਹਿਲਾਂ ਉਪਭੋਗਤਾ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਦਿੱਤੀ ਗਈ ਸੀ।</string>
+    <string name="onboarding4_paragraph_1">ਐਂਡਰਾਇਡ 12 ਵਿੱਚ, ਗੂਗਲ ਨੇ ਵੈਰੀਫਾਈਡ ਐਪ ਲਿੰਕਸ ਪੇਸ਼ ਕੀਤੇ। ਐਪਸ ਹੁਣ ਡੋਮੇਨਾਂ ਦੀ ਮਲਕੀਅਤ ਦੀ ਕ੍ਰਿਪਟੋਗ੍ਰਾਫੀ ਤੌਰ \'ਤੇ ਪੁਸ਼ਟੀ ਕਰ ਸਕਦੇ ਹਨ। ਜਦੋਂ ਅਜਿਹੇ ਡੋਮੇਨ ਲਈ ਇੱਕ ਲਿੰਕ ਟੈਪ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਅਤੇ ਸੰਬੰਧਿਤ ਐਪ ਨੂੰ ਸਥਾਪਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਇਹ ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ, ਜੋ ਕਿ ਪਹਿਲਾਂ ਉਪਭੋਗਤਾ ਨੂੰ ਪੂਰਨ ਤੌਰ ਤੇ ਦਿੱਤਾ ਗਿਆ ਸੀ, ਉਸ ਵਿਕਲਪ ਨੂੰ ਛੱਡ ਦਿੱਤਾ ਗਿਆ।</string>
     <string name="set_as_browser_explainer">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਬਣਾਉਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="current_session">ਮੌਜੂਦਾ ਸੈਸ਼ਨ</string>
     <string name="compat_installed">LinkSheetCompat ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹੈ</string>
@@ -303,4 +303,5 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku ਮੋਡ ਨੂੰ ਸਰਗਰਮ ਕੀਤਾ ਗਿਆ ਹੈ, ਇੱਕ ਐਪ ਨੂੰ ਇਸਦੇ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਸਮਰੱਥਾਵਾਂ ਨੂੰ ਟੌਗਲ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ। ਇੱਕ ਐਪ ਦੇ \"ਡਿਫ਼ਾਲਟ ਰੂਪ ਵਿੱਚ ਖੋਲ੍ਹੋ\" ਸੈਟਿੰਗ ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਟੈਪ ਕਰੋ।</string>
     <string name="credits">ਕ੍ਰੈਡਿਟਸ</string>
     <string name="done">ਮੁਕੰਮਲ</string>
+    <string name="thanks_for_donating">ਆਰਥਿਕ ਮੱਦਦ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!</string>
 </resources>

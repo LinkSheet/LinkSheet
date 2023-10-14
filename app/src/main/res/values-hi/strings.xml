@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="onboarding7_headline">उत्साही\?
+\nलिंकशीट आपके पास है</string>
+    <string name="open_copied_link">कॉपी किया गया लिंक खोलें</string>
+    <string name="pretend_to_be_app_explainer_2">Google Chrome जैसे कुछ ऐप्स स्पष्ट रूप से प्रबंधित करने के लिए एक मूल ऐप की खोज करते हैं, उदाहरण के लिए, खोज परिणामों में टैप किए जाने पर एक यूट्यूब लिंक। LinkSheetCompat समर्थित होस्ट के लिए एक ऐसा मूल ऐप होने का दिखावा करता है और फिर अनुरोध को LinkSheet पर फारवर्ड करता है।</string>
+    <string name="onboarding0_highlight">चयन की आज़ादी</string>
+    <string name="onboarding4_paragraph_2">यह अत्यधिक कष्टदायक है, क्योंकि कभी-कभी, आप किसी लिंक को उसके ऐप में नहीं, बल्कि ब्राउज़र में खोलना चाहते हैं (उदाहरण के लिए, कुछ बुकमार्क करने के लिए)।
+\n
+\nआह, क्लासिक गूगल, पुराने व्यवहार को बहाल करने के सरल तरीके के बिना अपने स्वयं के उत्पादों को पंगु बना रहा है
+\n
+\n वैसे भी, उन्होंने एक छोटी सी \"ख़ामी\" छोड़ दी: लिंक-हैंडलिंग को प्रति-ऐप के आधार पर अक्षम किया जा सकता है। आप मान सकते हैं कि यह पुराने ऐप चयनकर्ता को वापस लाएगा, लेकिन निश्चित रूप से (गूगल को धन्यवाद!), ऐसा नहीं है, क्योंकि अब, लिंक हमेशा आपके डिफ़ॉल्ट ब्राउज़र में खुलेगा। इसीलिए LinkSheet बनाई गई।</string>
+    <string name="onboarding0_headline">लिंक हैंडलिंग वापस लेने का समय</string>
+    <string name="title_activity_onboarding">ऑनबोर्डिंग ऐक्टिवटी</string>
+    <string name="onboarding7_highlight">कवर किये हुए</string>
+    <string name="onboarding6_highlight">प्राथमिकताएं</string>
+    <string name="onboarding6_headline">अपनी सेट करें</string>
+    <string name="finish">समाप्त</string>
+    <string name="donate_explainer">लेखक को आर्थिक दान दें</string>
+    <string name="launch_onboaring">ऑनबोर्डिंग लॉन्च करें</string>
+    <string name="onboarding1_headline">आपका स्वागत है</string>
+    <string name="onboarding4_headline">लिंकशीट बनाने के लिए लिंकहैंडलिंग को टॉगल करें</string>
+    <string name="onboarding3_headline">शानदार बनें
+\nनियंत्रण पाएं</string>
+    <string name="paste">पेस्ट करें</string>
+    <string name="thanks_for_donating">आर्थिक मदद के लिए धन्यवाद!</string>
+    <string name="onboarding3_highlight">सब कुछ</string>
+    <string name="onboarding2_highlight">आपका अपना</string>
+    <string name="onboarding4_highlight">काम</string>
+    <string name="pretend_to_be_app_explainer">LinkSheetCompat के साथ समर्थित डोमेन के लिए एक मूल ऐप होने का दिखावा करें</string>
+    <string name="error">त्रुटि</string>
+    <string name="onboarding4_paragraph_1">एंड्रॉइड 12 में, गूगल ने सत्यापित ऐप लिंक पेश किए। ऐप्स अब डोमेन के स्वामित्व को क्रिप्टोग्राफ़िक रूप से सत्यापित कर सकते हैं। जब ऐसे डोमेन के लिंक को टैप किया जाता है, और संबंधित ऐप इंस्टॉल किया जाता है, तो यह स्वचालित रूप से डिफ़ॉल्ट रूप से खुल जाएगा, जो कि पहले उपयोगकर्ता को पूर्ण रूप से दिया गया था, वह विकल्प छोड़ दिया गया।</string>
+    <string name="compat_installed">LinkSheetCompat पहले से इंस्टॉल है</string>
+    <string name="launch_onboaring_explainer">ऑनबोर्डिंग प्रवाह का परीक्षण करें</string>
+    <string name="title_activity_main">मुख्य एक्टिविटी</string>
+    <string name="onboarding2_headline">बहुत सारी सेटिंग्स
+\nलिंकशीट बनाने के लिए</string>
+    <string name="done">मुकम्मल</string>
+</resources>

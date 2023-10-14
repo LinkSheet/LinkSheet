@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="onboarding7_headline">उत्साही\?
+    <string name="onboarding7_headline">उत्साही?
 \nलिंकशीट आपके पास है</string>
     <string name="open_copied_link">कॉपी किया गया लिंक खोलें</string>
     <string name="pretend_to_be_app_explainer_2">Google Chrome जैसे कुछ ऐप्स स्पष्ट रूप से प्रबंधित करने के लिए एक मूल ऐप की खोज करते हैं, उदाहरण के लिए, खोज परिणामों में टैप किए जाने पर एक यूट्यूब लिंक। LinkSheetCompat समर्थित होस्ट के लिए एक ऐसा मूल ऐप होने का दिखावा करता है और फिर अनुरोध को LinkSheet पर फारवर्ड करता है।</string>

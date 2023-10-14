@@ -80,7 +80,7 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 This is a hobby project, and since I have many of those, I sometimes choose to ignore issues or postpone working on them as I am either not motivated or don't have any time (since I also have a job). LinkSheet is feature-complete for my use-case, so everything I add/change is because someone requested it. I have made less than 2€ from donations and there is no incentive other than providing a solid app for this project. Please take that into consideration before opening an issue. If you would **really** like a new feature added or a bug fixed, send me an email and we can talk about a small donation in exchange for the immediate start of development. 
 
-⚠️ Development is a bit stale at the moment, as I am busy with other things and/or don't have that much motivation. If you encounter bugs or issues, try using the latest nightly build, it might have already been fixed there.
+⚠️ Development is a bit stale at the moment, as I am busy with other things and/or don't have that much motivation. If you encounter bugs or issues, try using the latest nightly build, it may have already been fixed there.
 
 ## License
 

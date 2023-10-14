@@ -80,3 +80,11 @@ jobs:
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
           NIGHTLY_TAG: ${{ steps.get_file_name.outputs.FILE_NAME }}
           RELEASE_NOTE: ${{ steps.release_note.outputs.releaseNote }}
+
+      - name: Trigger a remote workflow
+        uses: 1fexd/gh-trigger-remote-action@0.0.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: 1fexd
+          REPO: LinkSheetPro
+          EVENT_TYPE: rebuild-nightly

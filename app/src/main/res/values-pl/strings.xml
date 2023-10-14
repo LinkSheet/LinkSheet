@@ -60,7 +60,7 @@
     <string name="open_link_with">OpenLinkWith</string>
     <string name="github">GitHub</string>
     <string name="github_explainer">Repozytorium kodu źródłowego</string>
-    <string name="donate">Wesprzyj</string>
+    <string name="donate_crypto">Wesprzyj</string>
     <string name="donate_explainer">Wesprzyj twórcę</string>
     <string name="paste">Wklej</string>
     <string name="error">Błąd</string>
@@ -288,7 +288,6 @@
     <string name="button_settings">Przyciski</string>
     <string name="misc_settings">Różne</string>
     <string name="donate_card_headline">Przekaż darowiznę, by wesprzeć LinkSheet</string>
-    <string name="donate_card_subtitle">Hej! Używasz LinkSheet już %s! Dla porównania, jego stworzenie zajęło ponad <b>%s godzin</b> w ciągu %s miesięcy. Jeśli podoba Ci się ta aplikacja, to rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.</string>
     <string name="donation_instructions">Instrukcje dotyczące darowizny</string>
     <string name="open_link_with_subtitle_2">LinkSheet był początkowo oparty na OpenWith</string>
     <string name="seal_subtitle_2">Seal jest świetnym źródłem wiedzy na temat Jetpack Compose</string>

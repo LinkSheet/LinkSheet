@@ -17,7 +17,7 @@
     <string name="no_app_to_handle_link_found">Nessuna app per gestire il link trovato!</string>
     <string name="version">Versione</string>
     <string name="open_link_with">OpenLinkWith</string>
-    <string name="donate">Dona</string>
+    <string name="donate_crypto">Dona</string>
     <string name="theme">Tema</string>
     <string name="fastforward">FastForward</string>
     <string name="preferred_apps">App preferite</string>

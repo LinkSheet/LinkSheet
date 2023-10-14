@@ -11,7 +11,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
@@ -32,16 +34,16 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
-import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.DialogColumn
-import fe.linksheet.composable.util.DialogSpacer
-import fe.linksheet.composable.util.HeadlineText
+import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
+import fe.linksheet.discordInvite
+import fe.linksheet.donationBuyMeACoffee
+import fe.linksheet.donationCrypto
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -129,7 +131,7 @@ fun MainRoute(
                             fontSize = 30.sp,
                         )
 
-                        if(!LinkSheetAppConfig.showDonationBanner()){
+                        if (!LinkSheetAppConfig.showDonationBanner()) {
                             Text(text = stringResource(id = R.string.thanks_for_donating))
                         }
                     }
@@ -147,6 +149,8 @@ fun MainRoute(
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
+
+
 
             item(key = "open_default_browser") {
                 OpenDefaultBrowserCard(
@@ -206,52 +210,83 @@ fun MainRoute(
                 }
             }
 
+            if (viewModel.showDiscordBanner.value) {
+                item(key = "discord") {
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp)
+                            .clickable {
+
+                            }
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 80.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Spacer(modifier = Modifier.width(10.dp))
+                            ColoredIcon(
+                                icon = Icons.Default.Chat,
+                                descriptionId = R.string.discord,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+
+                            Column(modifier = Modifier.padding(10.dp)) {
+                                Text(
+                                    text = stringResource(id = R.string.discord),
+                                    style = Typography.titleLarge,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                                Text(
+                                    text = stringResource(id = R.string.discord_explainer),
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+
+                                Spacer(modifier = Modifier.height(10.dp))
+
+                            }
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 5.dp, horizontal = 10.dp),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            TextButton(onClick = {
+                                viewModel.updateState(viewModel.showDiscordBanner, false)
+                            }) {
+                                Text(text = stringResource(id = R.string.dismiss))
+                            }
+
+                            Button(onClick = { uriHandler.openUri(discordInvite) }) {
+                                Text(text = stringResource(id = R.string.join))
+                            }
+                        }
+                    }
+                }
+
+                item(key = "spacer_0_0") {
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+            }
+
         }
     }
 }
 
 @Composable
 fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
+    val uriHandler = LocalUriHandler.current
+
     val (hours, minutes) = useTime
     val timeString = if (hours != null) {
         pluralStringResource(id = R.plurals.hours, hours, hours)
     } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
-
-    val donateDialog = dialogHelper<Unit, Unit, Unit>(
-        fetch = {},
-        awaitFetchBeforeOpen = true,
-        dynamicHeight = true
-    ) { _, close ->
-        DialogColumn {
-            HeadlineText(headlineId = R.string.donation_instructions)
-            DialogSpacer()
-
-            Spacer(modifier = Modifier.height(5.dp))
-
-
-//            DialogContent(
-//                items = trackers,
-//                key = { it },
-//                bottomRow = {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .height(40.dp),
-//                        horizontalArrangement = Arrangement.End
-//                    ) {
-//                        TextButton(onClick = {
-//                            close(Unit)
-//                        }) {
-//                            Text(text = stringResource(id = R.string.close))
-//                        }
-//                    }
-//                },
-//                content = { tracker ->
-//                    Text(text = tracker)
-//                }
-//            )
-        }
-    }
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -259,9 +294,6 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
-            .clickable {
-                donateDialog.open(Unit)
-            }
     ) {
         Row(
             modifier = Modifier
@@ -271,7 +303,7 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
             Spacer(modifier = Modifier.width(10.dp))
             ColoredIcon(
                 icon = Icons.Default.Info,
-                descriptionId = R.string.donate,
+                descriptionId = R.string.donate_crypto,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
 
@@ -281,21 +313,39 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
                     style = Typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-                Text(
-                    text = annotatedStringResource(
-                        id = R.string.donate_card_subtitle,
-                        timeString,
-                        developmentTimeHours,
-                        developmentTimeMonths
-                    ),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+
+                SelectionContainer {
+                    LinkableTextView(
+                        annotatedString = annotatedStringResource(
+                            id = R.string.donate_card_subtitle,
+                            timeString,
+                            developmentTimeHours,
+                            developmentTimeMonths
+                        ),
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = annotatedStringResource(id = R.string.donate_card_subtitle_2),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    Button(onClick = {
+                        uriHandler.openUri(donationCrypto)
+                    }) {
+                        Text(
+                            text = stringResource(id = R.string.donate_crypto),
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    Button(onClick = {
+                        uriHandler.openUri(donationBuyMeACoffee)
+                    }) {
+                        Text(
+                            text = stringResource(id = R.string.donate_card),
+                        )
+                    }
+                }
+
             }
         }
     }

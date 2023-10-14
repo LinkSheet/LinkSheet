@@ -255,7 +255,7 @@
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
     <string name="enable_amp2html_explainer">Redirige las páginas AMP a su versión web normal. Esto puede tener <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
-    <string name="donate">Donar</string>
+    <string name="donate_crypto">Donar</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Reemplaza los botones delineados \"Copiar enlace\", \"Compartir\", \"Descargar\" e \"Ignorar LibRedirect\" con botones de texto simples</string>
     <string name="follow_redirects_builtin_cache_explainer">Usar la caché integrado (que utiliza una exportación de base de datos del servicio externo)</string>
@@ -288,7 +288,6 @@
     <string name="apps_which_can_open_links">Aplicaciones que pueden abrir enlaces</string>
     <string name="add">Añadir</string>
     <string name="follow_redirects_local_cache">Activar la caché de redirección local</string>
-    <string name="donate_card_subtitle">¡Hola! ¡Ya has usado LinkSheet para %s! Para poner esto en perspectiva, el desarrollo tomó más de <b>%s horas</b> en el transcurso de %s meses. Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.</string>
     <string name="privacy">Privacidad</string>
     <string name="enable_request_private_browsing_button_explainer">Muestra un botón junto a los navegadores que abre el enlace que te tocó en modo de navegación privada. Navegadores compatibles: %s</string>
     <string name="pretend_to_be_app">Interceptar solicitudes de aplicaciones nativas</string>

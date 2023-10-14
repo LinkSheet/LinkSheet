@@ -221,7 +221,7 @@ private fun spannableStringToAnnotatedString(
     }
 }
 
-@OptIn(ExperimentalTextApi::class)
+
 @Composable
 fun LinkableTextView(
     @StringRes id: Int,
@@ -231,14 +231,32 @@ fun LinkableTextView(
     parentChecked: Boolean? = null,
     parentClickListener: ((Boolean) -> Unit)? = null
 ) {
-    val uriHandler = LocalUriHandler.current
+    LinkableTextView(
+        annotatedString = annotatedStringResource(id),
+        modifier,
+        enabled,
+        style,
+        parentChecked,
+        parentClickListener
+    )
+}
 
-    val annotatedString = annotatedStringResource(id)
+@OptIn(ExperimentalTextApi::class)
+@Composable
+fun LinkableTextView(
+    annotatedString: AnnotatedString,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    style: TextStyle = LocalTextStyle.current,
+    parentChecked: Boolean? = null,
+    parentClickListener: ((Boolean) -> Unit)? = null
+) {
+    val uriHandler = LocalUriHandler.current
     ClickableText(
         text = annotatedString,
         style = style,
         onClick = { offset ->
-            if(enabled){
+            if (enabled) {
                 annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {
                     uriHandler.openUri(it.item.url)
                 } ?: run {

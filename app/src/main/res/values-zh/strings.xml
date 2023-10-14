@@ -72,7 +72,7 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">源代码仓库</string>
-    <string name="donate">捐赠</string>
+    <string name="donate_crypto">捐赠</string>
     <string name="donate_explainer">向作者捐赠加密货币</string>
     <string name="open_copied_link">打开复制的链接</string>
     <string name="paste">粘贴</string>

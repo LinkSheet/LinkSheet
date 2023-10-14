@@ -67,7 +67,7 @@
     <string name="seal">Seal</string>
     <string name="license_gpl_3">GNU Genel Kamu Lisansı v3.0</string>
     <string name="github">Github</string>
-    <string name="donate">Bağış</string>
+    <string name="donate_crypto">Bağış</string>
     <string name="donate_explainer">Yapımcıya kripto bağışlayın</string>
     <string name="paste">Yapıştır</string>
     <string name="error">Hata</string>

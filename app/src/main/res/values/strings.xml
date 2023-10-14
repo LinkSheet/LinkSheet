@@ -75,8 +75,7 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">Source code repository</string>
-    <string name="donate">Donate</string>
-    <string name="donate_explainer">Donate to the author</string>
+    <string name="donate_explainer">Donate to the author with Credit- or Debitcard</string>
     <string name="open_copied_link">Open copied link</string>
     <string name="paste">Paste</string>
     <string name="error">Error</string>
@@ -280,8 +279,7 @@
     <string name="button_settings">Buttons</string>
     <string name="misc_settings">Miscellaneous</string>
     <string name="donate_card_headline">Donate to support LinkSheet</string>
-    <string name="donate_card_subtitle">Hey there! You have already used LinkSheet for %s! To put that into perspective, the development took more than <b>%s hours</b> over the course of %s months. If you like LinkSheet, consider leaving a star on Github and/or donating.</string>
-    <string name="donate_card_subtitle_2">Tap to show donation instructions and remove this message.</string>
+    <string name="donate_card_subtitle">Hey there! You have already used LinkSheet for %s! To put that into perspective, the development took more than <b>%s hours</b> over the course of %s months. If you like LinkSheet, consider leaving a star on Github and/or donating.\nIf you donate via crypto, to claim LinkSheet Pro, donate 5€ or more and send proof of payment to <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="donation_instructions">Donation instructions</string>
     <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenWith</string>
     <string name="seal_subtitle_2">Seal has been a great resource to learn from regarding Jetpack Compose</string>
@@ -298,4 +296,12 @@
     <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the one that launched the target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
     <string name="privacy_settings_explainer">Settings like referrer inclusion</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
+    <string name="discord">Discord</string>
+    <string name="discord_explainer">Come chat on our Discord server! Chat with the users and devs of LinkSheet about its future and other endeavours!</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="join">Join</string>
+    <string name="donate_card_subtitle_2">Donate crypto</string>
+    <string name="donate_crypto">Via crypto</string>
+    <string name="donate_card">By card</string>
+    <string name="donate_explainer_crypto">To claim LinkSheet Pro, donate 5€ or more and send proof of payment to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
 </resources>

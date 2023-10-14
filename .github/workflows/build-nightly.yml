@@ -87,4 +87,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           owner: 1fexd
           repo: LinkSheetPro
-          event_type: rebuild-nightly
+          event-type: rebuild-nightly

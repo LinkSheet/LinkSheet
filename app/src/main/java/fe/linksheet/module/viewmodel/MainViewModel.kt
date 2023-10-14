@@ -55,19 +55,18 @@ class MainViewModel(
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {
-        return 2 to 1
-//        if(!LinkSheetAppConfig.showDonationBanner()) return null
-//
-//        val duration = Duration.ofMillis(useTimeMs)
-//        val minutes = duration.toMinutesPart()
-//        if (minutes < donationBannerAfterMinutes) return null
-//
-//        val hours = duration.toHoursPart()
-//        if (hours > 0) {
-//            return hours to null
-//        }
-//
-//        return null to minutes
+        if(!LinkSheetAppConfig.showDonationBanner()) return null
+
+        val duration = Duration.ofMillis(useTimeMs)
+        val minutes = duration.toMinutesPart()
+        if (minutes < donationBannerAfterMinutes) return null
+
+        val hours = duration.toHoursPart()
+        if (hours > 0) {
+            return hours to null
+        }
+
+        return null to minutes
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)

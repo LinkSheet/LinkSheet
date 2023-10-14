@@ -84,7 +84,7 @@ jobs:
       - name: Trigger a remote workflow
         uses: 1fexd/gh-trigger-remote-action@0.0.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: 1fexd
-          REPO: LinkSheetPro
-          EVENT_TYPE: rebuild-nightly
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          owner: 1fexd
+          repo: LinkSheetPro
+          event_type: rebuild-nightly

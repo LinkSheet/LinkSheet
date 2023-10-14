@@ -38,7 +38,7 @@ versioning {
     })
 }
 
-val appName = "LinkSheet"
+var appName = "LinkSheet"
 val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
 
 fun VariantDimension.buildStringConfigField(name: String, value: String? = null) {
@@ -107,6 +107,19 @@ android {
         }
     }
 
+    productFlavors {
+        create("foss") {
+            dimension = "type"
+        }
+
+        create("pro") {
+            dimension = "type"
+
+            applicationIdSuffix = ".pro"
+            versionNameSuffix = "-pro"
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -147,18 +160,7 @@ android {
 
     flavorDimensions += listOf("type")
 
-    productFlavors {
-        create("foss") {
-            dimension = "type"
-        }
 
-        create("pro") {
-            dimension = "type"
-
-            applicationIdSuffix = ".pro"
-            versionNameSuffix = "-pro"
-        }
-    }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

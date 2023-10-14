@@ -46,6 +46,7 @@ class MainViewModel(
     val featureFlagShizuku = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagShizuku)
     val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
     val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
+    val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {
@@ -54,18 +55,19 @@ class MainViewModel(
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {
-        if(!LinkSheetAppConfig.showDonationBanner()) return null
-
-        val duration = Duration.ofMillis(useTimeMs)
-        val minutes = duration.toMinutesPart()
-        if (minutes < donationBannerAfterMinutes) return null
-
-        val hours = duration.toHoursPart()
-        if (hours > 0) {
-            return hours to null
-        }
-
-        return null to minutes
+        return 2 to 1
+//        if(!LinkSheetAppConfig.showDonationBanner()) return null
+//
+//        val duration = Duration.ofMillis(useTimeMs)
+//        val minutes = duration.toMinutesPart()
+//        if (minutes < donationBannerAfterMinutes) return null
+//
+//        val hours = duration.toHoursPart()
+//        if (hours > 0) {
+//            return hours to null
+//        }
+//
+//        return null to minutes
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)

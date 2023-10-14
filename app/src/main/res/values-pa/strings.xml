@@ -255,7 +255,7 @@
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ਨੇ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ। ਹੋ ਸਕਦਾ ਲਿੰਕਸ਼ੀਟ ਦੀ ਸੂਚੀ ਪੂਰੀ ਨਾਂ ਹੋਵੇ। ਜੇ ਤੁਸੀਂ ਸੋਚਦੇ ਹੋ ਕਿ ਇਹ ਇੱਕ ਗਲਤੀ ਹੈ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਇੱਕ ਮੁੱਦਾ ਦਰਜ ਕਰੋ।</string>
     <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="none_explainer">ਸਿਰਫ਼ ਮੂਲ ਐਪਾਂ ਦੀ ਸੂਚੀ ਬਣਾਓ, ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਹਟਾਓ। ਜੇਕਰ ਸਿਰਫ਼ ਇੱਕ ਹੀ ਮੂਲ ਐਪ ਮੌਜੂਦ ਹੈ, ਤਾਂ ਇਹ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ। ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਸੂਚੀਬੱਧ ਹਨ।</string>
-    <string name="donate">ਦਾਨ ਕਰੋ</string>
+    <string name="donate_crypto">ਦਾਨ ਕਰੋ</string>
     <string name="seal">ਸੀਲ</string>
     <string name="use_text_share_copy_buttons_explainer">ਸਧਾਰਨ ਟੈਕਸਟ ਬਟਨਾਂ ਨਾਲ \"ਕਾਪੀ URL\", \"ਇਸ ਨਾਲ ਸਾਂਝਾ ਕਰੋ\", \"ਡਾਊਨਲੋਡ ਕਰੋ\" ਅਤੇ \" LibRedirect ਅਣਡਿੱਠ ਕਰੋ\" ਬਟਨਾਂ ਨੂੰ ਬਦਲਦਾ ਹੈ</string>
     <string name="follow_redirects_builtin_cache_explainer">ਬਿਲਟ-ਇਨ ਕੈਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਜੋ ਕਿ ਬਾਹਰੀ ਸੇਵਾ ਦੇ ਡੇਟਾਬੇਸ ਨਿਰਯਾਤ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ)</string>
@@ -288,7 +288,6 @@
     <string name="apps_which_can_open_links">ਐਪਾਂ ਜੋ ਲਿੰਕ ਖੋਲ੍ਹ ਸਕਦੀਆਂ ਹਨ</string>
     <string name="add">ਜੋੜ੍ਹੋ</string>
     <string name="follow_redirects_local_cache">ਸਥਾਨਕ ਰੀਡਾਇਰੈਕਟ ਕੈਸ਼ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="donate_card_subtitle">ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ! ਤੁਸੀਂ %s ਲਈ ਪਹਿਲਾਂ ਹੀ ਲਿੰਕਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰ ਚੁੱਕੇ ਹੋ! ਇਸ ਨੂੰ ਦ੍ਰਿਸ਼ਟੀਕੋਣ ਵਿੱਚ ਰੱਖਣ ਲਈ, %s ਮਹੀਨਿਆਂ ਦੇ ਦੌਰਾਨ ਵਿਕਾਸ ਵਿੱਚ <b>%s ਘੰਟੇ</b> ਤੋਂ ਵੱਧ ਸਮਾਂ ਲੱਗਿਆ। ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।</string>
     <string name="privacy">ਗੋਪਨੀਯਤਾ</string>
     <string name="enable_request_private_browsing_button_explainer">ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਅੱਗੇ ਇੱਕ ਬਟਨ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦਾ ਹੈ ਜੋ ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਮੋਡ ਵਿੱਚ ਕਲਿੱਕ ਕੀਤੇ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ। ਸਮਰਥਿਤ ਬ੍ਰਾਊਜ਼ਰ: %s</string>
     <string name="pretend_to_be_app">ਨੇਟਿਵ ਐਪ ਬੇਨਤੀਆਂ ਨੂੰ ਇੰਟਰਸੈਪਟ ਕਰੋ</string>

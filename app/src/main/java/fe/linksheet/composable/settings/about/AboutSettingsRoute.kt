@@ -26,7 +26,10 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
+import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.discordInvite
+import fe.linksheet.donationBuyMeACoffee
 import fe.linksheet.donationCrypto
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
@@ -75,18 +78,47 @@ fun AboutSettingsRoute(
                 )
             }
 
-            if(LinkSheetAppConfig.showDonationBanner()){
+            item("discord") {
+                SettingsItemRow(
+                    headlineId = R.string.discord,
+                    subtitleId = R.string.discord_explainer,
+                    onClick = {
+                        uriHandler.openUri(discordInvite)
+                    },
+                    image = {
+                        ColoredIcon(icon = Icons.Default.Chat, descriptionId = R.string.discord)
+                    }
+                )
+            }
+
+            if (LinkSheetAppConfig.showDonationBanner()) {
                 item("donate") {
                     SettingsItemRow(
-                        headlineId = R.string.donate,
-                        subtitleId = R.string.donate_explainer,
+                        headline = stringResource(id = R.string.donate_crypto),
+                        subtitle = annotatedStringResource(id = R.string.donate_explainer_crypto),
                         onClick = {
                             uriHandler.openUri(donationCrypto)
                         },
                         image = {
                             ColoredIcon(
                                 icon = Icons.Default.CurrencyBitcoin,
-                                descriptionId = R.string.donate
+                                descriptionId = R.string.donate_crypto
+                            )
+                        }
+                    )
+                }
+
+                item("donate-1") {
+                    SettingsItemRow(
+                        headlineId = R.string.donate_card,
+                        subtitleId = R.string.donate_explainer,
+                        onClick = {
+                            uriHandler.openUri(donationBuyMeACoffee)
+                        },
+                        image = {
+                            ColoredIcon(
+                                icon = Icons.Default.CurrencyExchange,
+                                descriptionId = R.string.donate_crypto
                             )
                         }
                     )

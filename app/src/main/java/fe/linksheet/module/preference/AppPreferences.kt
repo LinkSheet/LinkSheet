@@ -78,6 +78,7 @@ object AppPreferences : Preferences() {
     }
 
     val firstRun = booleanPreference("first_run", true)
+    val showDiscordBanner = booleanPreference("show_discord_banner", true)
 
     val loggablePreferences by lazy {
         all.toMutableMap().apply {

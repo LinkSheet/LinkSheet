@@ -84,7 +84,7 @@ jobs:
       - name: Trigger a remote workflow
         uses: 1fexd/gh-trigger-remote-action@0.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NIGHTLY_PRO_REPO_ACESS_TOKEN }}
           OWNER: 1fexd
           REPO: LinkSheetPro
           EVENT_TYPE: rebuild-nightly

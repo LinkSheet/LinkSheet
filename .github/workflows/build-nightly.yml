@@ -89,6 +89,8 @@ jobs:
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
           NIGHTLY_TAG: ${{ steps.get_file_name.outputs.FILE_NAME }}
           RELEASE_NOTE: ${{ steps.release_note.outputs.releaseNote }}
+          BUILD_FLAVOR: ${{ env.BUILD_FLAVOR }}
+          BUILD_TYPE: ${{ env.BUILD_TYPE }}
 
       - name: Trigger a remote workflow
         uses: 1fexd/gh-trigger-remote-action@0.0.1

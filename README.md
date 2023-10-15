@@ -68,9 +68,15 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 
 ## Donations / LinkSheet Pro
 
-All donations of 5€+ are eligible for LinkSheet Pro. Currently, the only benefit Pro provides is hiding the donation banner within the app. In the future, I may implement some Pro-only features, but these will be new features. Existing features will not be paywalled.
+All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨. 
 
-Want to donate in another way (Bank Transfer/Paypal etc., or another crypto)? Send a mail to `1fexd[at]420blaze.it`. Also, if I haven't contacted you after a few days to give you access to Pro builds, please don't hesitate to send me an email to the afore mentioned email address
+* **Currently, the only benefit LinkSheet Pro provides is hiding the donation banner within the app.**
+
+* In the future, I may implement some Pro-only features, but these will be new features. Existing features will not be paywalled.
+
+If you would like to donate in another way (SEPA Bank Transfer/Paypal, or in another cryptocurrency), send a mail to `1fexd[at]420blaze.it` and we will figure something out. 
+
+**Also, if I haven't contacted you after a few days to give you access to Pro builds, please don't hesitate to send me an email (again, to `1fexd[at]420blaze.it`)**
 
 ## Nightly builds
 

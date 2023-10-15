@@ -60,8 +60,8 @@
     <string name="open_link_with">OpenLinkWith</string>
     <string name="github">GitHub</string>
     <string name="github_explainer">Repozytorium kodu źródłowego</string>
-    <string name="donate_crypto">Wesprzyj</string>
-    <string name="donate_explainer">Wesprzyj twórcę</string>
+    <string name="donate_crypto">Poprzez kryptowalutę</string>
+    <string name="donate_explainer">Przekaż darowiznę autorowi za pomocą karty kredytowej lub debetowej</string>
     <string name="paste">Wklej</string>
     <string name="error">Błąd</string>
     <string name="checkmark">Znacznik wyboru</string>
@@ -309,7 +309,7 @@
     <string name="join">Dołącz</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Dołącz do naszego Discorda! Porozmawiaj z użytkownikami i twórcami LinkSheet o jego przyszłości i innych przedsięwzięciach!</string>
-    <string name="donate_card">Karta</string>
+    <string name="donate_card">Za pomocą karty</string>
     <string name="donate_card_subtitle">Hej! Używasz LinkSheet już %s! Dla porównania, jego stworzenie zajęło ponad <b>%s godzin</b> w ciągu %s miesięcy. Jeśli podoba Ci się ta aplikacja, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.
 \nJeśli przekazałeś(-aś) darowiznę poprzez krypto, aby otrzymać LinkSheet Pro, przekaż 5 € lub więcej i wyślij dowód wpłaty na adres <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
 </resources>

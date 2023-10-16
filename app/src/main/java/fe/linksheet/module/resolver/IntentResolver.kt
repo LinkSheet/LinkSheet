@@ -24,7 +24,6 @@ import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -356,7 +355,7 @@ class IntentResolver(
         if (uri?.host != null && uri.scheme != null) {
             var url = uri.toString()
 
-            logger.debug({ "GetUri: Pre modification=$it" }, url, UrlProcessor)
+            logger.debug({ "GetUri: Pre modification=$it" }, url, HashProcessor.UrlProcessor)
 
             runCatching {
                 if (fastForward) {
@@ -365,14 +364,14 @@ class IntentResolver(
             }
 
 
-            logger.debug({ "GetUri: Post FastForward=$it" }, url, UrlProcessor)
+            logger.debug({ "GetUri: Post FastForward=$it" }, url, HashProcessor.UrlProcessor)
             runCatching {
                 if (clearUrl) {
                     url = clearUrl(url, clearUrlProviders)
                 }
             }
 
-            logger.debug({ "GetUri: Post ClearURL=$it" }, url, UrlProcessor)
+            logger.debug({ "GetUri: Post ClearURL=$it" }, url, HashProcessor.UrlProcessor)
             return runCatching {
                 Uri.parse(url)
             }.getOrNull()

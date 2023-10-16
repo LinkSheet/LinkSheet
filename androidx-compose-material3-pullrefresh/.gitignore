@@ -1,5 +1,8 @@
 .DS_Store
-/.gradle
+/.gradle/
 /.idea
-/build
+/build/
 /local.properties
+library/.gradle/
+library/build/
+.run

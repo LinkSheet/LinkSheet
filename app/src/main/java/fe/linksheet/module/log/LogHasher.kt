@@ -68,12 +68,7 @@ sealed interface HashProcessor<T> {
             stringBuilder: StringBuilder,
             input: Uri,
             mac: Mac
-        ): StringBuilder = stringBuilder.append(
-            buildHashedUriString(
-                input.toString(),
-                mac
-            )
-        )
+        ): StringBuilder = stringBuilder.append(buildHashedUriString(input.toString(), mac))
     }
 
     data object UrlProcessor : HashProcessor<String> {
@@ -81,12 +76,7 @@ sealed interface HashProcessor<T> {
             stringBuilder: StringBuilder,
             input: String,
             mac: Mac
-        ): StringBuilder = stringBuilder.append(
-            buildHashedUriString(
-                input,
-                mac
-            )
-        )
+        ): StringBuilder = stringBuilder.append(buildHashedUriString(input, mac))
     }
 
     data object StringProcessor : HashProcessor<String?> {

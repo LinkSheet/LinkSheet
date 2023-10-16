@@ -8,6 +8,7 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontStyle
@@ -18,13 +19,14 @@ import fe.linksheet.ui.Typography
 
 
 @Composable
-fun SettingSpacerText(@StringRes contentTitleId: Int) {
+fun SettingSpacerText(modifier: Modifier = Modifier, @StringRes contentTitleId: Int) {
     SettingSpacerText(contentTitle = stringResource(id = contentTitleId))
 }
 
 @Composable
-fun SettingSpacerText(contentTitle: String) {
+fun SettingSpacerText(modifier: Modifier = Modifier, contentTitle: String) {
     Text(
+        modifier = modifier,
         text = contentTitle,
         fontFamily = HkGroteskFontFamily,
         fontSize = 16.sp,
@@ -34,15 +36,17 @@ fun SettingSpacerText(contentTitle: String) {
 }
 
 @Composable
-fun HeadlineText(headline: CharSequence) {
+fun HeadlineText(modifier: Modifier = Modifier, headline: CharSequence) {
     if (headline is AnnotatedString) {
         Text(
+            modifier = modifier,
             text = headline,
             style = Typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
     } else if (headline is String) {
         Text(
+            modifier = modifier,
             text = headline,
             style = Typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
@@ -51,18 +55,20 @@ fun HeadlineText(headline: CharSequence) {
 }
 
 @Composable
-fun HeadlineText(@StringRes headlineId: Int) {
-    HeadlineText(headline = stringResource(id = headlineId))
+fun HeadlineText(modifier: Modifier = Modifier, @StringRes headlineId: Int) {
+    HeadlineText(modifier, headline = stringResource(id = headlineId))
 }
 
-fun buildSubtitle(subtitle: String?): @Composable (() -> Unit)? = if (subtitle != null) {
-    { SubtitleText(subtitle = subtitle) }
-} else null
+fun buildSubtitle(modifier: Modifier = Modifier, subtitle: String?): @Composable (() -> Unit)? =
+    if (subtitle != null) {
+        { SubtitleText(modifier = modifier, subtitle = subtitle) }
+    } else null
 
 fun buildEnabledSubtitle(
+    modifier: Modifier = Modifier,
     subtitle: String?
 ): @Composable ((Boolean) -> Unit)? = if (subtitle != null) {
-    { SubtitleText(subtitle = subtitle) }
+    { SubtitleText(modifier = modifier, subtitle = subtitle) }
 } else null
 
 fun linkableSubtitleBuilder(@StringRes id: Int): @Composable ((Boolean) -> Unit) {
@@ -72,8 +78,9 @@ fun linkableSubtitleBuilder(@StringRes id: Int): @Composable ((Boolean) -> Unit)
 }
 
 @Composable
-fun LinkableSubtitleText(@StringRes id: Int, enabled: Boolean) {
+fun LinkableSubtitleText(modifier: Modifier = Modifier, @StringRes id: Int, enabled: Boolean) {
     LinkableTextView(
+        modifier = modifier,
         id = id,
         enabled = enabled,
         style = LocalTextStyle.current.copy(
@@ -85,11 +92,13 @@ fun LinkableSubtitleText(@StringRes id: Int, enabled: Boolean) {
 
 @Composable
 fun SubtitleText(
+    modifier: Modifier = Modifier,
     fontStyle: FontStyle? = null,
     subtitle: CharSequence
 ) {
     if (subtitle is AnnotatedString) {
         Text(
+            modifier = modifier,
             text = subtitle,
             fontStyle = fontStyle,
             fontSize = 16.sp,
@@ -97,6 +106,7 @@ fun SubtitleText(
         )
     } else if (subtitle is String) {
         Text(
+            modifier = modifier,
             text = subtitle,
             fontStyle = fontStyle,
             fontSize = 16.sp,
@@ -106,12 +116,13 @@ fun SubtitleText(
 }
 
 @Composable
-fun SubtitleText(@StringRes subtitleId: Int) {
-    SubtitleText(subtitle = stringResource(id = subtitleId))
+fun SubtitleText(modifier: Modifier = Modifier, @StringRes subtitleId: Int) {
+    SubtitleText(modifier = modifier, subtitle = stringResource(id = subtitleId))
 }
 
 @Composable
 fun Texts(
+    modifier: Modifier = Modifier,
     headline: CharSequence,
     subtitle: CharSequence? = null,
     content: @Composable (ColumnScope.() -> Unit)? = null,
@@ -120,7 +131,7 @@ fun Texts(
         HeadlineText(headline = headline)
 
         if (subtitle != null) {
-            SubtitleText(subtitle = subtitle)
+            SubtitleText(modifier = modifier, subtitle = subtitle)
         }
 
         content?.invoke(this)
@@ -128,8 +139,13 @@ fun Texts(
 }
 
 @Composable
-fun Texts(@StringRes headlineId: Int, @StringRes subtitleId: Int? = null) {
+fun Texts(
+    modifier: Modifier = Modifier,
+    @StringRes headlineId: Int,
+    @StringRes subtitleId: Int? = null
+) {
     Texts(
+        modifier = modifier,
         headline = stringResource(id = headlineId),
         subtitle = subtitleId?.let { stringResource(id = it) }
     )

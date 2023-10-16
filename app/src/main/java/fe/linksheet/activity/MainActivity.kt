@@ -23,6 +23,7 @@ import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
+import fe.linksheet.composable.settings.about.DonateSettingsRoute
 import fe.linksheet.composable.settings.advanced.AdvancedSettingsRoute
 import fe.linksheet.composable.settings.advanced.FeatureFlagSettingsRoute
 import fe.linksheet.composable.settings.advanced.ShizukuSettingsRoute
@@ -53,6 +54,7 @@ import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.debugSettingsRoute
+import fe.linksheet.donateSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
@@ -135,7 +137,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     animatedComposable(route = bottomSheetSettingsRoute) {
-                        BottomSheetSettingsRoute(onBackPressed = onBackPressed,)
+                        BottomSheetSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     animatedComposable(route = linksSettingsRoute) {
@@ -220,6 +222,12 @@ class MainActivity : ComponentActivity() {
                     animatedComposable(route = aboutSettingsRoute) {
                         AboutSettingsRoute(
                             navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    animatedComposable(route = donateSettingsRoute) {
+                        DonateSettingsRoute(
                             onBackPressed = onBackPressed
                         )
                     }

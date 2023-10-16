@@ -29,6 +29,7 @@ import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.discordInvite
+import fe.linksheet.donateSettingsRoute
 import fe.linksheet.donationBuyMeACoffee
 import fe.linksheet.donationCrypto
 import fe.linksheet.extension.compose.currentActivity
@@ -94,31 +95,15 @@ fun AboutSettingsRoute(
             if (LinkSheetAppConfig.showDonationBanner()) {
                 item("donate") {
                     SettingsItemRow(
-                        headline = stringResource(id = R.string.donate_crypto),
-                        subtitle = annotatedStringResource(id = R.string.donate_explainer_crypto),
+                        headline = stringResource(id = R.string.donate),
+                        subtitle = annotatedStringResource(id = R.string.donate_explainer),
                         onClick = {
-                            uriHandler.openUri(donationCrypto)
+                            navController.navigate(donateSettingsRoute)
                         },
                         image = {
                             ColoredIcon(
-                                icon = Icons.Default.CurrencyBitcoin,
-                                descriptionId = R.string.donate_crypto
-                            )
-                        }
-                    )
-                }
-
-                item("donate-1") {
-                    SettingsItemRow(
-                        headlineId = R.string.donate_card,
-                        subtitleId = R.string.donate_explainer,
-                        onClick = {
-                            uriHandler.openUri(donationBuyMeACoffee)
-                        },
-                        image = {
-                            ColoredIcon(
-                                icon = Icons.Default.CurrencyExchange,
-                                descriptionId = R.string.donate_crypto
+                                icon = Icons.Default.Euro,
+                                descriptionId = R.string.donate
                             )
                         }
                     )

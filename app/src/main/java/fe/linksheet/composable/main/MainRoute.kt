@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,16 +37,20 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
+import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
 import fe.linksheet.discordInvite
+import fe.linksheet.donateSettingsRoute
 import fe.linksheet.donationBuyMeACoffee
 import fe.linksheet.donationCrypto
+import fe.linksheet.extension.androidx.navigate
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
+import fe.linksheet.mainRoute
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.shizukuDownload
@@ -154,7 +159,11 @@ fun MainRoute(
 
             if (useTime != null && showOtherBanners) {
                 item(key = "donate") {
-                    DonateCard(viewModel = viewModel, useTime = useTime)
+                    DonateCard(
+                        navController = navController,
+                        viewModel = viewModel,
+                        useTime = useTime
+                    )
                 }
 
                 item(key = "spacer_0") {
@@ -292,13 +301,18 @@ fun MainRoute(
 }
 
 @Composable
-fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
-    val uriHandler = LocalUriHandler.current
-
+fun DonateCard(
+    navController: NavHostController,
+    viewModel: MainViewModel,
+    useTime: Pair<Int?, Int?>
+) {
     val (hours, minutes) = useTime
     val timeString = if (hours != null) {
         pluralStringResource(id = R.plurals.hours, hours, hours)
     } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
+
+    val devTimeHoursString = pluralStringResource(id = R.plurals.hours, count = developmentTimeHours, developmentTimeHours)
+    val devTimeMonthString = pluralStringResource(id = R.plurals.months, count = developmentTimeMonths, developmentTimeMonths)
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -313,11 +327,6 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
                 .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(10.dp))
-            ColoredIcon(
-                icon = Icons.Default.Info,
-                descriptionId = R.string.donate_crypto,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
 
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
@@ -327,37 +336,31 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
                 )
 
                 SelectionContainer {
-                    LinkableTextView(
-                        annotatedString = annotatedStringResource(
+                    Text(
+                        text = annotatedStringResource(
                             id = R.string.donate_card_subtitle,
                             timeString,
+                            devTimeHoursString,
+                            devTimeMonthString,
                             developmentTimeHours,
                             developmentTimeMonths
                         ),
-                        style = LocalTextStyle.current.copy(
-                            color = MaterialTheme.colorScheme.onSurface,
-                            fontSize = 16.sp
-                        )
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                     Button(onClick = {
-                        uriHandler.openUri(donationCrypto)
-                    }) {
-                        Text(
-                            text = stringResource(id = R.string.donate_crypto),
+                        navController.navigate(
+                            mainRoute,
+                            settingsRoute,
+                            aboutSettingsRoute,
+                            donateSettingsRoute
                         )
-                    }
-
-                    Spacer(modifier = Modifier.width(10.dp))
-
-                    Button(onClick = {
-                        uriHandler.openUri(donationBuyMeACoffee)
                     }) {
                         Text(
-                            text = stringResource(id = R.string.donate_card),
+                            text = stringResource(id = R.string.donate_learn_more),
                         )
                     }
                 }

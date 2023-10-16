@@ -43,6 +43,7 @@ const val whitelistedBrowsersSettingsRoute = "whitelisted_browsers_settings_rout
 
 const val aboutSettingsRoute = "about_settings_route"
 const val creditsSettingsRoute = "credits_settings_route"
+const val donateSettingsRoute = "donate_settings_route"
 
 const val themeSettingsRoute = "theme_settings_route"
 

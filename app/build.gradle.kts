@@ -196,6 +196,7 @@ dependencies {
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
     implementation(AndroidX.compose.material)
+    implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.compose.animation)
     implementation(AndroidX.navigation.compose)

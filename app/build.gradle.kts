@@ -110,6 +110,7 @@ android {
     productFlavors {
         create("foss") {
             dimension = "type"
+            buildStringConfigField("FLAVOR", "Foss")
         }
 
         create("pro") {
@@ -117,6 +118,7 @@ android {
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
+            buildStringConfigField("FLAVOR", "Pro")
         }
     }
 
@@ -132,7 +134,7 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
 
@@ -196,6 +198,7 @@ dependencies {
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
     implementation(AndroidX.compose.material)
+    implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.compose.animation)
     implementation(AndroidX.navigation.compose)
@@ -247,12 +250,14 @@ dependencies {
     implementation(libs.compose.dialog.helper)
     implementation(libs.process.launcher)
 
-    implementation(libs.lux.androidx.compose.material3.pullrefresh)
-
+    implementation("me.omico.compose:compose-material3-pullrefresh")
     implementation(libs.jsoup)
 
     implementation(Google.android.material)
-    implementation(Google.accompanist.systemUiController)
+    // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
+    //FIXME: See the example PR in the migration guide here:
+    // https://google.github.io/accompanist/systemuicontroller/
+    implementation("com.google.accompanist:accompanist-systemuicontroller:_")
     implementation(Google.accompanist.permissions)
 
     implementation(libs.api)

@@ -13,11 +13,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
@@ -36,16 +36,17 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
+import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
 import fe.linksheet.discordInvite
-import fe.linksheet.donationBuyMeACoffee
-import fe.linksheet.donationCrypto
+import fe.linksheet.donateSettingsRoute
+import fe.linksheet.extension.androidx.navigate
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
+import fe.linksheet.mainRoute
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.shizukuDownload
@@ -79,10 +80,22 @@ fun MainRoute(
     var sheetOpen by remember { mutableStateOf<String?>(null) }
     val useTime = viewModel.formatUseTime()
 
+    val browserStatus by remember {
+        mutableStateOf(viewModel.hasBrowser())
+    }
+
+
     LaunchedEffect(Unit) {
         delay(200)
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
     }
+
+    val showOtherBanners by remember {
+        derivedStateOf {
+            defaultBrowserEnabled.isSuccess && MainViewModel.BrowserStatus.hasBrowser(browserStatus)
+        }
+    }
+
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
@@ -140,9 +153,13 @@ fun MainRoute(
                 Spacer(modifier = Modifier.height(5.dp))
             }
 
-            if (useTime != null) {
+            if (useTime != null && showOtherBanners) {
                 item(key = "donate") {
-                    DonateCard(viewModel = viewModel, useTime = useTime)
+                    DonateCard(
+                        navController = navController,
+                        viewModel = viewModel,
+                        useTime = useTime
+                    )
                 }
 
                 item(key = "spacer_0") {
@@ -150,7 +167,10 @@ fun MainRoute(
                 }
             }
 
-
+            item {
+                Text(modifier = Modifier.padding(horizontal = 10.dp), text = stringResource(id = R.string.app_setup))
+                Spacer(modifier = Modifier.height(10.dp))
+            }
 
             item(key = "open_default_browser") {
                 OpenDefaultBrowserCard(
@@ -184,7 +204,7 @@ fun MainRoute(
 
 
             item(key = "browser_card") {
-                BrowserCard(viewModel = viewModel)
+                BrowserCard(browserStatus = browserStatus)
             }
 
             item(key = "spacer_3") {
@@ -210,7 +230,12 @@ fun MainRoute(
                 }
             }
 
-            if (viewModel.showDiscordBanner.value) {
+            if (viewModel.showDiscordBanner.value && showOtherBanners) {
+                item {
+                    Text(modifier = Modifier.padding(horizontal = 10.dp), text = stringResource(id = R.string.other))
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+
                 item(key = "discord") {
                     Card(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -218,9 +243,6 @@ fun MainRoute(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 10.dp)
-                            .clickable {
-
-                            }
                     ) {
                         Row(
                             modifier = Modifier
@@ -230,7 +252,7 @@ fun MainRoute(
                         ) {
                             Spacer(modifier = Modifier.width(10.dp))
                             ColoredIcon(
-                                icon = Icons.Default.Chat,
+                                icon = Icons.AutoMirrored.Filled.Chat,
                                 descriptionId = R.string.discord,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -245,9 +267,6 @@ fun MainRoute(
                                     text = stringResource(id = R.string.discord_explainer),
                                     color = MaterialTheme.colorScheme.onPrimaryContainer
                                 )
-
-                                Spacer(modifier = Modifier.height(10.dp))
-
                             }
                         }
 
@@ -280,13 +299,26 @@ fun MainRoute(
 }
 
 @Composable
-fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
-    val uriHandler = LocalUriHandler.current
-
+fun DonateCard(
+    navController: NavHostController,
+    viewModel: MainViewModel,
+    useTime: Pair<Int?, Int?>
+) {
     val (hours, minutes) = useTime
     val timeString = if (hours != null) {
         pluralStringResource(id = R.plurals.hours, hours, hours)
     } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
+
+    val devTimeHoursString = pluralStringResource(
+        id = R.plurals.hours,
+        count = developmentTimeHours,
+        developmentTimeHours
+    )
+    val devTimeMonthString = pluralStringResource(
+        id = R.plurals.months,
+        count = developmentTimeMonths,
+        developmentTimeMonths
+    )
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -301,11 +333,6 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
                 .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(10.dp))
-            ColoredIcon(
-                icon = Icons.Default.Info,
-                descriptionId = R.string.donate_crypto,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
 
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
@@ -315,33 +342,31 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
                 )
 
                 SelectionContainer {
-                    LinkableTextView(
-                        annotatedString = annotatedStringResource(
+                    Text(
+                        text = annotatedStringResource(
                             id = R.string.donate_card_subtitle,
                             timeString,
+                            devTimeHoursString,
+                            devTimeMonthString,
                             developmentTimeHours,
                             developmentTimeMonths
                         ),
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                     Button(onClick = {
-                        uriHandler.openUri(donationCrypto)
-                    }) {
-                        Text(
-                            text = stringResource(id = R.string.donate_crypto),
+                        navController.navigate(
+                            mainRoute,
+                            settingsRoute,
+                            aboutSettingsRoute,
+                            donateSettingsRoute
                         )
-                    }
-
-                    Spacer(modifier = Modifier.width(10.dp))
-
-                    Button(onClick = {
-                        uriHandler.openUri(donationBuyMeACoffee)
                     }) {
                         Text(
-                            text = stringResource(id = R.string.donate_card),
+                            text = stringResource(id = R.string.donate_learn_more),
                         )
                     }
                 }
@@ -560,9 +585,7 @@ fun ShizukuCard(
 
 
 @Composable
-fun BrowserCard(viewModel: MainViewModel) {
-    val browserStatus = viewModel.hasBrowser()
-
+fun BrowserCard(browserStatus: MainViewModel.BrowserStatus) {
     Card(
         colors = CardDefaults.cardColors(containerColor = browserStatus.containerColor()),
         shape = RoundedCornerShape(12.dp),

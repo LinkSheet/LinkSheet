@@ -10,6 +10,7 @@ import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
+import java.util.UUID
 
 object AppPreferences : Preferences() {
     val enableCopyButton = booleanPreference("enable_copy_button")

@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 fun SettingsItemRow(
     headline: CharSequence,
     subtitle: CharSequence,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
     image: @Composable (() -> Unit)? = null,
     content: (@Composable ColumnScope.() -> Unit)? = null
 ) {
@@ -36,7 +36,7 @@ fun SettingsItemRow(
 fun SettingsItemRow(
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
     image: @Composable (() -> Unit)? = null
 ) {
     SettingsItemRow(

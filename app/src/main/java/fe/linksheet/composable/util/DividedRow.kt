@@ -26,7 +26,7 @@ import fe.linksheet.extension.compose.runIf
 fun DividedRow(
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle),
+    subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle = subtitle),
     enabled: Boolean = true,
     onClick: () -> Unit,
     rightContent: @Composable RowScope.() -> Unit
@@ -46,7 +46,7 @@ fun DividedRow(
 fun DividedRow(
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((Boolean) -> Unit)? = buildEnabledSubtitle(subtitle),
+    subtitleBuilder: @Composable ((Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle),
     enabled: Boolean = true,
     onClick: () -> Unit,
     rightContent: @Composable RowScope.() -> Unit

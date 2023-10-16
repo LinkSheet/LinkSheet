@@ -75,7 +75,7 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">Source code repository</string>
-    <string name="donate_explainer">Donate to the author with Credit- or Debitcard</string>
+    <string name="donate_explainer">If you would like to donate and claim <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">Open copied link</string>
     <string name="paste">Paste</string>
     <string name="error">Error</string>
@@ -229,7 +229,7 @@
     <string name="feature_flags_explainer">Enable or disable experimental features</string>
     <string name="background_image">Background image</string>
     <string name="onboarding1_headline">Welcome to</string>
-    <string name="welcome_to_linksheet_explainer"><![CDATA[LinkSheet \"restores\" the \"url-app-chooser\" that appeared when the user tapped a link on Android <12 and had multiple apps installed which could handle the link.]]></string>
+    <string name="welcome_to_linksheet_explainer">LinkSheet \"restores\" the \"url-app-chooser\" that appeared when the user tapped a link on Android &lt;12 and had multiple apps installed which could handle the link</string>
     <string name="welcome_to_linksheet_explainer_2">In order for LinkSheet to operate, it needs to be set as the systems browser, so it can intercept link clicks. Don\'t worry, LinkSheet has plenty of customizability options, so this will not limit, but rather enhance your experience.</string>
     <string name="set_as_default_browser">Set as default browser</string>
     <string name="onboarding0_headline">Time to take back</string>
@@ -279,21 +279,21 @@
     <string name="button_settings">Buttons</string>
     <string name="misc_settings">Miscellaneous</string>
     <string name="donate_card_headline">Donate to support LinkSheet</string>
-    <string name="donate_card_subtitle">Hey there! You have already used LinkSheet for %s! To put that into perspective, the development took more than <b>%s hours</b> over the course of %s months. If you like LinkSheet, consider leaving a star on Github and/or donating.\nIf you donate via crypto, to claim LinkSheet Pro, donate 5€ or more and send proof of payment to <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_card_subtitle">Hey there! You have already used LinkSheet for %s! To put that into perspective, the development took more than <b>%s</b> over the course of <b>%s</b>. If you like LinkSheet, consider leaving a star on Github and/or donating.\nDonators who donate more than <b>5€</b> are eligible for <b>LinkSheet Pro</b>, which will have exclusive features.</string>
     <string name="donation_instructions">Donation instructions</string>
     <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenWith</string>
     <string name="seal_subtitle_2">Seal has been a great resource to learn from regarding Jetpack Compose</string>
-    <string name="mastodon_redirect_subtitle_2">Maston Redirect\'s source code was used as a reference for Shizuku interaction</string>
+    <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'s source code was used as a reference for Shizuku interaction</string>
     <string name="import_dumped_preference">Import dumped preferences</string>
     <string name="import_dumped_preference_explainer">Importer for preferences contained in logs files - probably not useful for the average user</string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name">Identifier:</string>
+    <string name="version_name">Full identifier:</string>
     <string name="built_at">Built at (UTC):</string>
     <string name="github_workflow_run_id">Build workflow ID:</string>
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
-    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the one that launched the target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
+    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the t launched the target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
     <string name="privacy_settings_explainer">Settings like referrer inclusion</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
     <string name="discord">Discord</string>
@@ -301,7 +301,22 @@
     <string name="dismiss">Dismiss</string>
     <string name="join">Join</string>
     <string name="donate_card_subtitle_2">Donate crypto</string>
-    <string name="donate_crypto">Via crypto</string>
-    <string name="donate_card">By card</string>
-    <string name="donate_explainer_crypto">To claim LinkSheet Pro, donate 5€ or more and send proof of payment to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_crypto">Donate via crypto</string>
+    <string name="donate_card">Donate with card (via BuyMeACoffee)</string>
+    <string name="donate_explainer_crypto">When donating with crypto, to claim <b>LinkSheet Pro</b>, send proof of payment to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_learn_more">Learn more</string>
+    <string name="donate">Donate</string>
+    <string name="linksheet_donation_explainer">LinkSheet is the result of more than <b>%s</b> of work over the span of more than <b>%s</b>. If you would like to show some appreciation for my work please donate.</string>
+    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main screen of the app, but in the future, there will be <b>Pro exclusive features.</b></string>
+    <string name="built_by">Built and signed by</string>
+    <string name="built_by_error">This build was not signed by 1fexd. This does not necessarily mean anything bad since anyone can fork the source code and build their app, but they may do so with malicious intent.</string>
+    <string name="manual_build">Manually built and signed by 1fexd</string>
+    <string name="github_pipeline_build">Built and signed by the Github workflow</string>
+    <string name="flavor">Flavor: </string>
+    <string name="commit">Commit:</string>
+    <string name="branch">Branch:</string>
+    <string name="type">Type:</string>
+    <string name="donate_other">If you would like to donate in another way (SEPA Transfer, PayPal, other crypotocurrency, etc.), also send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="app_setup">App setup</string>
+    <string name="other">Other</string>
 </resources>

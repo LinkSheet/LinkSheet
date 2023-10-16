@@ -8,4 +8,8 @@
         <item quantity="one">%s hour</item>
         <item quantity="other">%s hours</item>
     </plurals>
+    <plurals name="months">
+        <item quantity="one">%s month</item>
+        <item quantity="other">%s months</item>
+    </plurals>
 </resources>

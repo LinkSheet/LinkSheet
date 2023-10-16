@@ -2,9 +2,9 @@
 
 [plugins]
 
-com-android-application = { id = "com.android.application", version = "8.0.0" }
+com-android-application = { id = "com.android.application", version = "8.1.2" }
 
-com-android-library = { id = "com.android.library", version = "8.0.0" }
+com-android-library = { id = "com.android.library", version = "8.1.2" }
 
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
@@ -12,12 +12,15 @@ net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.0.0" }
 
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.0-1.0.13" }
 
-gradle = { id = "gradle", version = "8.0.0" }
+gradle = { id = "gradle", version = "8.1.1" }
 
 [versions]
 
-kotlin = "1.9.0"
-koin = "3.4.3"
+kotlin = "1.9.10"
+##  ⬆ = "1.9.20-Beta"
+##  ⬆ = "1.9.20-Beta2"
+##  ⬆ = "1.9.20-RC"
+koin = "3.5.0"
 linkSheetInterConnect = "2.3.2"
 
 [libraries]
@@ -62,8 +65,6 @@ compose-route-util = "com.github.1fexd:compose-route-util:_"
 compose-dialog-helper = "com.github.1fexd:compose-dialog-helper:_"
 
 process-launcher = "com.gitlab.grrfe:process-launcher:_"
-
-lux-androidx-compose-material3-pullrefresh = { module = "me.omico.lux:lux-androidx-compose-material3-pullrefresh" }
 
 jsoup = "org.jsoup:jsoup:_"
 

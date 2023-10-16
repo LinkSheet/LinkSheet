@@ -287,7 +287,7 @@
     <string name="import_dumped_preference">Import dumped preferences</string>
     <string name="import_dumped_preference_explainer">Importer for preferences contained in logs files - probably not useful for the average user</string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name">Identifier:</string>
+    <string name="version_name">Full identifier:</string>
     <string name="built_at">Built at (UTC):</string>
     <string name="github_workflow_run_id">Build workflow ID:</string>
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
@@ -308,5 +308,13 @@
     <string name="donate">Donate</string>
     <string name="linksheet_donation_explainer">LinkSheet is the result of more than <b>%s</b> of work over the span of more than <b>%s</b>. If you would like to show some appreciation for my work please donate.</string>
     <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main screen of the app, but in the future, there will be <b>Pro exclusive features.</b></string>
+    <string name="built_by">Built and signed by</string>
+    <string name="built_by_error">This build was not signed by 1fexd. This does not necessarily mean anything bad since anyone can fork the source code and build their app, but they may do so with malicious intent.</string>
+    <string name="manual_build">Manually built and signed by 1fexd</string>
+    <string name="github_pipeline_build">Built and signed by the Github workflow</string>
+    <string name="flavor">Flavor: </string>
+    <string name="commit">Commit:</string>
+    <string name="branch">Branch:</string>
+    <string name="type">Type:</string>
     <string name="donate_other">If you would like to donate in another way (SEPA Transfer, PayPal, other crypotocurrency, etc.), also send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
 </resources>

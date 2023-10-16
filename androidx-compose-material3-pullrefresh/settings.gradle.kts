@@ -3,42 +3,12 @@
 rootProject.name = "androidx-compose-material3-pullrefresh"
 
 pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-
-        plugins {
-            id("com.android.library") version "8.1.1"
-            id("com.gradle.enterprise") version "3.13.2"
-            kotlin("android") version "1.9.0"
-            id("de.fayard.refreshVersions") version "0.60.0"
-        }
-    }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+    includeBuild("example/build-logic/initialization")
 }
 
 plugins {
-    id("com.gradle.enterprise") apply false
-    id("de.fayard.refreshVersions")
+    id("root")
 }
 
-if (gradle.parent == null) {
-    apply(plugin = "com.gradle.enterprise")
-    gradleEnterprise {
-        buildScan {
-            termsOfServiceUrl = "https://gradle.com/terms-of-service"
-            termsOfServiceAgree = "yes"
-            publishAlwaysIf(!gradle.startParameter.isOffline)
-        }
-    }
-}
-
-include("library")
+includeBuild("example")
+includeBuild("library")

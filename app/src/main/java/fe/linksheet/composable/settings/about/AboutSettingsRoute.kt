@@ -1,9 +1,11 @@
 package fe.linksheet.composable.settings.about
 
+import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -35,6 +37,9 @@ import fe.linksheet.donationCrypto
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
+import fe.linksheet.officialSigningKeys
+import fe.linksheet.util.CryptoUtil
+import java.util.Locale
 
 @Composable
 fun AboutSettingsRoute(
@@ -110,15 +115,61 @@ fun AboutSettingsRoute(
                 }
             }
 
+            if (!BuildConfig.DEBUG) {
+                item("signedby") {
+                    val sig = activity.packageManager.getPackageInfo(
+                        activity.packageName,
+                        PackageManager.GET_SIGNATURES
+                    ).signatures[0]
+
+                    val certFingerprint =
+                        CryptoUtil.sha256Hex(sig.toByteArray()).uppercase(Locale.getDefault())
+                    val subtitle =
+                        officialSigningKeys[certFingerprint]?.stringRes ?: R.string.built_by_error
+
+                    SettingsItemRow(
+                        headlineId = R.string.built_by,
+                        subtitleId = subtitle,
+                        image = {
+                            ColoredIcon(
+                                icon = if (subtitle == R.string.built_by_error) Icons.Default.Warning else Icons.Default.Build,
+                                descriptionId = R.string.built_by,
+                                color = if (subtitle == R.string.built_by_error) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    )
+                }
+            }
+
             item("version") {
-                val versionName = buildNameValueAnnotatedString(
+                val builtAt = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.built_at),
+                    buildDate
+                )
+
+                val commit = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.commit),
+                    BuildConfig.COMMIT.substring(0, 7)
+                )
+
+                val branch = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.branch),
+                    BuildConfig.BRANCH
+                )
+
+                val fullVersionName = buildNameValueAnnotatedString(
                     stringResource(id = R.string.version_name),
                     BuildConfig.VERSION_NAME
                 )
 
-                val builtAt = buildNameValueAnnotatedString(
-                    stringResource(id = R.string.built_at),
-                    buildDate
+                val flavor = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.flavor),
+                    BuildConfig.FLAVOR
+                )
+
+                val type = buildNameValueAnnotatedString(
+                    stringResource(id = R.string.type),
+                    BuildConfig.BUILD_TYPE
                 )
 
                 val workflow = if (BuildConfig.GITHUB_WORKFLOW_RUN_ID != null) {
@@ -130,15 +181,22 @@ fun AboutSettingsRoute(
 
                 SettingsItemRow(
                     headline = stringResource(id = R.string.version),
-                    subtitle = versionName,
+                    subtitle = builtAt,
                     onClick = {
                         clipboardManager.setText(buildAnnotatedString {
                             append(
                                 activity.getText(R.string.linksheet_version_info_header),
+                                builtAt,
                                 lineSeparator,
-                                versionName,
+                                flavor,
                                 lineSeparator,
-                                builtAt
+                                type,
+                                lineSeparator,
+                                commit,
+                                lineSeparator,
+                                branch,
+                                lineSeparator,
+                                fullVersionName
                             )
 
                             if (workflow != null) {
@@ -150,7 +208,11 @@ fun AboutSettingsRoute(
                         ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.version)
                     },
                     content = {
-                        SubtitleText(subtitle = builtAt)
+                        SubtitleText(subtitle = flavor)
+                        SubtitleText(subtitle = type)
+                        SubtitleText(subtitle = commit)
+                        SubtitleText(subtitle = branch)
+                        SubtitleText(subtitle = fullVersionName)
 
                         if (workflow != null) {
                             SubtitleText(

@@ -1,0 +1,70 @@
+versions:
+  androidx:
+    activity: "1.7.2"
+    compose:
+      bom: "2023.10.00"
+      compiler: "1.5.3"
+  consensus: "0.4.0"
+  gradle: "8.3"
+  kotlin: "1.9.10"
+  material: "1.9.0"
+  plugins:
+    android: "8.1.2"
+    gradle.enterprise: "3.15"
+    spotless: "6.22.0"
+
+repositories:
+  omico:
+  google:
+  mavenCentral:
+  gradlePluginPortal:
+
+plugins:
+  google:
+    com.android.application: ${versions.plugins.android}
+  gradlePluginPortal:
+    com.diffplug.spotless: ${versions.plugins.spotless}
+    com.gradle.enterprise: ${versions.plugins.gradle.enterprise}
+    org.jetbrains.kotlin.android: ${versions.kotlin}
+  omico:
+    me.omico.consensus.api: ${versions.consensus}
+    me.omico.consensus.git: ${versions.consensus}
+    me.omico.consensus.publishing: ${versions.consensus}
+    me.omico.consensus.spotless: ${versions.consensus}
+
+dependencies:
+  google:
+    androidx.activity:
+      activity-compose:
+        alias: androidx.activity.compose
+        version: ${versions.androidx.activity}
+    androidx.compose:
+      compose-bom:
+        alias: androidx.compose.bom
+        version: ${versions.androidx.compose.bom}
+        bom: true
+    androidx.compose.foundation:
+      foundation:
+        alias: androidx.compose.foundation
+        noSpecificVersion: true
+    androidx.compose.material:
+      material:
+        alias: androidx.compose.material
+        noSpecificVersion: true
+    androidx.compose.material3:
+      material3:
+        alias: androidx.compose.material3
+        noSpecificVersion: true
+    androidx.compose.ui:
+      ui:
+        alias: androidx.compose.ui
+        noSpecificVersion: true
+    com.google.android.material:
+      material:
+        alias: material
+        version: ${versions.material}
+  omico:
+    me.omico.consensus:
+      consensus-dsl:
+        alias: me.omico.consensus.dsl
+        version: ${versions.consensus}

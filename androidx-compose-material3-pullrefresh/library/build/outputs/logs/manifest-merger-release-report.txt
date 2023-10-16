@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml:2:13-83
+INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml:2:13-83
+	package
+		INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml
+	xmlns:android
+		ADDED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml:2:23-81
+uses-sdk
+INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml reason: use-sdk injection requested
+INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml
+INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml
+	android:targetSdkVersion
+		INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml
+	android:minSdkVersion
+		INJECTED from /home/felix/Programmieren/Projekte/LinkSheet/androidx-compose-material3-pullrefresh/library/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest497040414805444410.xml

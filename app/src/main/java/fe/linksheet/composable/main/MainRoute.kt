@@ -79,10 +79,22 @@ fun MainRoute(
     var sheetOpen by remember { mutableStateOf<String?>(null) }
     val useTime = viewModel.formatUseTime()
 
+    val browserStatus by remember {
+        mutableStateOf(viewModel.hasBrowser())
+    }
+
+
     LaunchedEffect(Unit) {
         delay(200)
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
     }
+
+    val showOtherBanners by remember {
+        derivedStateOf {
+            defaultBrowserEnabled.isSuccess && MainViewModel.BrowserStatus.hasBrowser(browserStatus)
+        }
+    }
+
 
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
@@ -140,7 +152,7 @@ fun MainRoute(
                 Spacer(modifier = Modifier.height(5.dp))
             }
 
-            if (useTime != null) {
+            if (useTime != null && showOtherBanners) {
                 item(key = "donate") {
                     DonateCard(viewModel = viewModel, useTime = useTime)
                 }
@@ -184,7 +196,7 @@ fun MainRoute(
 
 
             item(key = "browser_card") {
-                BrowserCard(viewModel = viewModel)
+                BrowserCard(browserStatus = browserStatus)
             }
 
             item(key = "spacer_3") {
@@ -210,7 +222,7 @@ fun MainRoute(
                 }
             }
 
-            if (viewModel.showDiscordBanner.value) {
+            if (viewModel.showDiscordBanner.value && showOtherBanners) {
                 item(key = "discord") {
                     Card(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -322,6 +334,10 @@ fun DonateCard(viewModel: MainViewModel, useTime: Pair<Int?, Int?>) {
                             developmentTimeHours,
                             developmentTimeMonths
                         ),
+                        style = LocalTextStyle.current.copy(
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = 16.sp
+                        )
                     )
                 }
 
@@ -560,9 +576,7 @@ fun ShizukuCard(
 
 
 @Composable
-fun BrowserCard(viewModel: MainViewModel) {
-    val browserStatus = viewModel.hasBrowser()
-
+fun BrowserCard(browserStatus: MainViewModel.BrowserStatus) {
     Card(
         colors = CardDefaults.cardColors(containerColor = browserStatus.containerColor()),
         shape = RoundedCornerShape(12.dp),

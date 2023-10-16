@@ -229,7 +229,7 @@
     <string name="feature_flags_explainer">Enable or disable experimental features</string>
     <string name="background_image">Background image</string>
     <string name="onboarding1_headline">Welcome to</string>
-    <string name="welcome_to_linksheet_explainer"><![CDATA[LinkSheet \"restores\" the \"url-app-chooser\" that appeared when the user tapped a link on Android <12 and had multiple apps installed which could handle the link.]]></string>
+    <string name="welcome_to_linksheet_explainer">LinkSheet \"restores\" the \"url-app-chooser\" that appeared when the user tapped a link on Android &lt;12 and had multiple apps installed which could handle the link</string>
     <string name="welcome_to_linksheet_explainer_2">In order for LinkSheet to operate, it needs to be set as the systems browser, so it can intercept link clicks. Don\'t worry, LinkSheet has plenty of customizability options, so this will not limit, but rather enhance your experience.</string>
     <string name="set_as_default_browser">Set as default browser</string>
     <string name="onboarding0_headline">Time to take back</string>
@@ -283,7 +283,7 @@
     <string name="donation_instructions">Donation instructions</string>
     <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenWith</string>
     <string name="seal_subtitle_2">Seal has been a great resource to learn from regarding Jetpack Compose</string>
-    <string name="mastodon_redirect_subtitle_2">Maston Redirect\'s source code was used as a reference for Shizuku interaction</string>
+    <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'s source code was used as a reference for Shizuku interaction</string>
     <string name="import_dumped_preference">Import dumped preferences</string>
     <string name="import_dumped_preference_explainer">Importer for preferences contained in logs files - probably not useful for the average user</string>
     <string name="import_and_override">Import and override</string>

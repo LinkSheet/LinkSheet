@@ -55,7 +55,7 @@ class MainViewModel(
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {
-        if(!LinkSheetAppConfig.showDonationBanner()) return null
+        if (!LinkSheetAppConfig.showDonationBanner()) return null
 
         val duration = Duration.ofMillis(useTimeMs)
         val minutes = duration.toMinutesPart()
@@ -115,6 +115,12 @@ class MainViewModel(
             Icons.Default.Error,
             R.string.error
         );
+
+        companion object {
+            fun hasBrowser(browserStatus: BrowserStatus): Boolean {
+                return browserStatus == Unknown || browserStatus == Known
+            }
+        }
     }
 
     fun hasBrowser(): BrowserStatus {

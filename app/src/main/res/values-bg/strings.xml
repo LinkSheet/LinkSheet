@@ -13,7 +13,7 @@
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
-    <string name="donate_explainer">Дарение</string>
+    <string name="donate_explainer">Дарете на автора с банкова карта</string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
@@ -276,7 +276,7 @@
     <string name="misc_settings">Разни</string>
     <string name="button_settings">Бутони</string>
     <string name="donate_card_headline">Дарения в подкрепа на LinkSheet</string>
-    <string name="donate_card_subtitle_2">Докоснете за инструкции за даряване и скриване на съобщението.</string>
+    <string name="donate_card_subtitle_2">Даряване на криптовалута</string>
     <string name="donation_instructions">Инструкции за даряване</string>
     <string name="open_link_with_subtitle_2">Първоначално, LinkSheet беше на основата на OpenWith</string>
     <string name="seal_subtitle_2">Seal беше страхотен източник на знания за Jetpack Compose</string>
@@ -304,4 +304,12 @@
     <string name="onboarding4_paragraph_1">В Android 12 Google въведе проверени връзки към приложенията (Verified App Links). Така приложенията могат криптографски да проверяват собствеността на домейните. Когато докоснете връзка към такъв домейн и е инсталирано съответното приложение, то ще се отваря автоматично по подразбиране, като се прескача изцяло изборът, който преди това се предоставяше на потребителя.</string>
     <string name="launch_onboaring_explainer">Проверка на екрана за обучение</string>
     <string name="thanks_for_donating">Благодаря за дарението!</string>
+    <string name="dismiss">Затваряне</string>
+    <string name="donate_explainer_crypto">За да получите LinkSheet Pro, дарете €5 или повече и изпратете доказателство за плащането на <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="join">Присъединяване</string>
+    <string name="discord">Discord</string>
+    <string name="discord_explainer">Заповядайте на нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
+    <string name="donate_card">С карта</string>
+    <string name="donate_card_subtitle">Здравейте! Използвате LinkSheet вече %s! За сравнение, времето за разработване на приложението е повече от <b>%s часа</b> в продължение на %s месеца. Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
+\nАко сте дарили криптовалута, за да получите LinkSheet Pro, дарете €5 или повече и изпратете доказателство за плащането на <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
 </resources>

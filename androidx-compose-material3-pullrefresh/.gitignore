@@ -3,3 +3,6 @@
 /.idea
 /build
 /local.properties
+library/.gradle
+library/build
+.run

@@ -29,6 +29,7 @@ import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.linkSheetCompatGithubReleases
@@ -74,11 +75,7 @@ fun PretendToBeAppSettingsRoute(
                     },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Image(
-                        imageVector = Icons.Default.Download,
-                        contentDescription = stringResource(id = R.string.download),
-                    )
-
+                    ColoredIcon(icon = Icons.Default.Download, descriptionId = R.string.download)
                     Spacer(modifier = Modifier.width(10.dp))
 
                     Column {
@@ -99,10 +96,7 @@ fun PretendToBeAppSettingsRoute(
                     onClick = { activity.startActivity(viewModel.configureCompatIntent()) },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Image(
-                        imageVector = Icons.Default.Tune,
-                        contentDescription = stringResource(id = R.string.configure),
-                    )
+                    ColoredIcon(icon = Icons.Default.Tune, descriptionId = R.string.configure)
 
                     Spacer(modifier = Modifier.width(10.dp))
 

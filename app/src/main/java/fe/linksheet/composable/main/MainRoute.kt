@@ -13,11 +13,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
@@ -28,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,14 +38,11 @@ import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
 import fe.linksheet.discordInvite
 import fe.linksheet.donateSettingsRoute
-import fe.linksheet.donationBuyMeACoffee
-import fe.linksheet.donationCrypto
 import fe.linksheet.extension.androidx.navigate
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.observeAsState
@@ -171,7 +167,10 @@ fun MainRoute(
                 }
             }
 
-
+            item {
+                Text(modifier = Modifier.padding(horizontal = 10.dp), text = stringResource(id = R.string.app_setup))
+                Spacer(modifier = Modifier.height(10.dp))
+            }
 
             item(key = "open_default_browser") {
                 OpenDefaultBrowserCard(
@@ -232,6 +231,11 @@ fun MainRoute(
             }
 
             if (viewModel.showDiscordBanner.value && showOtherBanners) {
+                item {
+                    Text(modifier = Modifier.padding(horizontal = 10.dp), text = stringResource(id = R.string.other))
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+
                 item(key = "discord") {
                     Card(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -239,9 +243,6 @@ fun MainRoute(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 10.dp)
-                            .clickable {
-
-                            }
                     ) {
                         Row(
                             modifier = Modifier
@@ -251,7 +252,7 @@ fun MainRoute(
                         ) {
                             Spacer(modifier = Modifier.width(10.dp))
                             ColoredIcon(
-                                icon = Icons.Default.Chat,
+                                icon = Icons.AutoMirrored.Filled.Chat,
                                 descriptionId = R.string.discord,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -266,9 +267,6 @@ fun MainRoute(
                                     text = stringResource(id = R.string.discord_explainer),
                                     color = MaterialTheme.colorScheme.onPrimaryContainer
                                 )
-
-                                Spacer(modifier = Modifier.height(10.dp))
-
                             }
                         }
 
@@ -311,8 +309,16 @@ fun DonateCard(
         pluralStringResource(id = R.plurals.hours, hours, hours)
     } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
 
-    val devTimeHoursString = pluralStringResource(id = R.plurals.hours, count = developmentTimeHours, developmentTimeHours)
-    val devTimeMonthString = pluralStringResource(id = R.plurals.months, count = developmentTimeMonths, developmentTimeMonths)
+    val devTimeHoursString = pluralStringResource(
+        id = R.plurals.hours,
+        count = developmentTimeHours,
+        developmentTimeHours
+    )
+    val devTimeMonthString = pluralStringResource(
+        id = R.plurals.months,
+        count = developmentTimeMonths,
+        developmentTimeMonths
+    )
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),

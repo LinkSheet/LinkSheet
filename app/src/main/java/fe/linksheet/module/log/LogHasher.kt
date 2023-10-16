@@ -7,6 +7,11 @@ import android.net.Uri
 import fe.linksheet.extension.appendHashed
 import fe.stringbuilder.util.curlyWrapped
 import fe.stringbuilder.util.slashSeparated
+import fe.uribuilder.ParsedUri
+import fe.uribuilder.UriParser
+import org.apache.hc.core5.net.InetAddressUtils
+import org.apache.hc.core5.net.PercentCodec
+import org.apache.hc.core5.util.TextUtils
 import javax.crypto.Mac
 
 sealed interface LogHasher {
@@ -45,7 +50,6 @@ sealed interface LogHasher {
 
 typealias PackageProcessor = HashProcessor.StringProcessor
 typealias HostProcessor = HashProcessor.StringProcessor
-typealias UrlProcessor = HashProcessor.StringProcessor
 typealias FileNameProcessor = HashProcessor.StringProcessor
 typealias FileExtensionProcessor = HashProcessor.StringProcessor
 
@@ -59,11 +63,30 @@ sealed interface HashProcessor<T> {
     }
 
     data object UriProcessor : HashProcessor<Uri> {
+
         override fun process(
             stringBuilder: StringBuilder,
             input: Uri,
             mac: Mac
-        ): StringBuilder = UrlProcessor.process(stringBuilder, input.toString(), mac)
+        ): StringBuilder = stringBuilder.append(
+            buildHashedUriString(
+                input.toString(),
+                mac
+            )
+        )
+    }
+
+    data object UrlProcessor : HashProcessor<String> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: String,
+            mac: Mac
+        ): StringBuilder = stringBuilder.append(
+            buildHashedUriString(
+                input,
+                mac
+            )
+        )
     }
 
     data object StringProcessor : HashProcessor<String?> {

@@ -1,9 +1,9 @@
 package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
+import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.log.UrlProcessor
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 
@@ -19,8 +19,10 @@ data class ResolvedRedirect(
         hasher: LogHasher
     ) = stringBuilder.curlyWrapped {
         commaSeparated {
-            item { hasher.hash(stringBuilder, "shortUrl=", shortUrl, UrlProcessor) }
-            item { hasher.hash(stringBuilder, "resolvedUrl=", resolvedUrl, UrlProcessor) }
+            item { hasher.hash(stringBuilder, "shortUrl=", shortUrl, HashProcessor.UrlProcessor) }
+            item { hasher.hash(stringBuilder, "resolvedUrl=", resolvedUrl,
+                HashProcessor.UrlProcessor
+            ) }
         }
     }
 }

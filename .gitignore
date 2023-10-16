@@ -12,3 +12,8 @@ build/
 app/release
 .ignored/
 /debug/
+androidx-compose-material3-pullrefresh/.gradle
+androidx-compose-material3-pullrefresh/.run
+androidx-compose-material3-pullrefresh/build
+androidx-compose-material3-pullrefresh/library/build
+androidx-compose-material3-pullrefresh/library/.gradle

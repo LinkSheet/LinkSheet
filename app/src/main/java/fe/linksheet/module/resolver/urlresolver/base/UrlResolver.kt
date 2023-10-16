@@ -1,8 +1,6 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
 import android.net.Uri
-import fe.gson.extension.json.element.string
-import fe.gson.extension.json.`object`.asString
 import fe.gson.extension.json.`object`.asStringOrNull
 import fe.httpkt.ext.readToString
 import fe.httpkt.isHttpSuccess
@@ -11,11 +9,8 @@ import fe.linksheet.extension.failure
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveType
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.singleOrNull
 import java.io.IOException
 import kotlin.reflect.KClass
 
@@ -40,7 +35,9 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         if (localCache) {
             val resolvedUrl = resolverRepository.getForInputUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug({ "From local cache=$it" }, resolvedUrl.urlResolved(), UrlProcessor)
+                logger.debug({ "From local cache=$it" }, resolvedUrl.urlResolved(),
+                    HashProcessor.UrlProcessor
+                )
                 return Result.success(ResolveType.LocalCache(resolvedUrl.urlResolved()))
             }
         }
@@ -48,7 +45,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         if (builtInCache) {
             val resolvedUrl = resolverRepository.getBuiltInCachedForUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug({ "From built-in cache=$it" }, resolvedUrl, UrlProcessor)
+                logger.debug({ "From built-in cache=$it" }, resolvedUrl, HashProcessor.UrlProcessor)
                 return Result.success(ResolveType.BuiltInCache(resolvedUrl))
             }
         }

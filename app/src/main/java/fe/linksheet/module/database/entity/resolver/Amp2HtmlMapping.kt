@@ -1,9 +1,9 @@
 package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
+import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.log.UrlProcessor
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 
@@ -20,8 +20,10 @@ data class Amp2HtmlMapping(
         hasher: LogHasher
     ) = stringBuilder.curlyWrapped {
         commaSeparated {
-            item { hasher.hash(stringBuilder, "ampUrl=", ampUrl, UrlProcessor) }
-            item { hasher.hash(stringBuilder, "canonicalUrl=", canonicalUrl, UrlProcessor) }
+            item { hasher.hash(stringBuilder, "ampUrl=", ampUrl, HashProcessor.UrlProcessor) }
+            item { hasher.hash(stringBuilder, "canonicalUrl=", canonicalUrl,
+                HashProcessor.UrlProcessor
+            ) }
         }
     }
 }

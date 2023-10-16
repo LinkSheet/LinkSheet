@@ -5,8 +5,8 @@ import fe.httpkt.Request
 import fe.httpkt.ext.getGZIPOrDefaultStream
 import fe.httpkt.isHttpSuccess
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.UrlProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.supabaseApiKey
@@ -37,7 +37,7 @@ class Amp2HtmlResolveRequest(
 
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String? {
-        logger.debug({ "ResolveLocal=$it" }, url, UrlProcessor)
+        logger.debug({ "ResolveLocal=$it" }, url, HashProcessor.UrlProcessor)
         val con = urlResolverCache.get(url, timeout, false)
 
         if (!isHttpSuccess(con.responseCode)) {

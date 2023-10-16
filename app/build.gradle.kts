@@ -205,6 +205,7 @@ dependencies {
 
     implementation(libs.linkSheetInterConnect)
     implementation(project(":config"))
+    implementation(libs.uriparser)
 
     implementation(AndroidX.lifecycle.process)
     androidTestImplementation(platform(AndroidX.compose.bom))
@@ -250,14 +251,14 @@ dependencies {
     implementation(libs.compose.dialog.helper)
     implementation(libs.process.launcher)
 
-    implementation("me.omico.compose:compose-material3-pullrefresh")
+    implementation(libs.compose.material3.pullrefresh)
     implementation(libs.jsoup)
 
     implementation(Google.android.material)
     // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
     //FIXME: See the example PR in the migration guide here:
     // https://google.github.io/accompanist/systemuicontroller/
-    implementation("com.google.accompanist:accompanist-systemuicontroller:_")
+    implementation(libs.accompanist.systemuicontroller)
     implementation(Google.accompanist.permissions)
 
     implementation(libs.api)

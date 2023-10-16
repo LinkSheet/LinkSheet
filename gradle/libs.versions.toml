@@ -6,22 +6,22 @@ com-android-application = { id = "com.android.application", version = "8.1.2" }
 
 com-android-library = { id = "com.android.library", version = "8.1.2" }
 
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.10" }
 
 net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.0.0" }
 
-com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.0-1.0.13" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.10-1.0.13" }
 
 gradle = { id = "gradle", version = "8.1.1" }
 
 [versions]
 
 kotlin = "1.9.10"
-##  ⬆ = "1.9.20-Beta"
-##  ⬆ = "1.9.20-Beta2"
-##  ⬆ = "1.9.20-RC"
-koin = "3.5.0"
+
+koin = "3.4.3"
 linkSheetInterConnect = "2.3.2"
+
+google-accompanist = "0.33.2-alpha"
 
 [libraries]
 
@@ -87,3 +87,11 @@ symbol-processing-api = "com.google.devtools.ksp:symbol-processing-api:_"
 symbol-processing-cmdline = "com.google.devtools.ksp:symbol-processing-cmdline:_"
 
 linksheet-interconnect = "com.github.1fexd:LinkSheetInterConnect:_"
+
+linksheetinterconnect = "com.github.1fexd:LinkSheetInterConnect:_"
+
+uriparser = "com.github.1fexd:uriparser:_"
+
+compose-material3-pullrefresh = { module = "me.omico.compose:compose-material3-pullrefresh" }
+
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "google-accompanist" }

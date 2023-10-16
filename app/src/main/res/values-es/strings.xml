@@ -124,7 +124,7 @@
     <string name="frontend">Interfaz</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="finish">Termina</string>
-    <string name="donate_explainer">Donar crypto al autor</string>
+    <string name="donate_explainer">Donar al creador con tarjeta de crédito o débito</string>
     <string name="advanced">Avanzado</string>
     <string name="built_at">Construido en (UTC):</string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
@@ -166,7 +166,7 @@
     <string name="use_unified_preferred_browser">Usar ajustes indefinidos</string>
     <string name="instance">Instancia</string>
     <string name="always_ask_explainer">Mostrar siempre todos los navegadores</string>
-    <string name="donate_card_subtitle_2">Toca para mostrar las instrucciones de donación y eliminar este mensaje.</string>
+    <string name="donate_card_subtitle_2">Donar crypto</string>
     <string name="enable_downloader">Activar descargador</string>
     <string name="amp2html_builtin_cache">Usar la caché Amp2Html integrado</string>
     <string name="paste">Pegar</string>
@@ -304,4 +304,12 @@
     <string name="credits">Créditos</string>
     <string name="done">Hecho</string>
     <string name="thanks_for_donating">¡Gracias por donar!</string>
+    <string name="dismiss">Descartar</string>
+    <string name="donate_explainer_crypto">Para reclamar LinkSheet Pro, done 5 € o más y envíe el comprobante de pago a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="join">Unirme</string>
+    <string name="discord">Discord</string>
+    <string name="discord_explainer">¡Ven a chatear en nuestro servidor de Discord! ¡Chatea con los usuarios y desarrolladores de LinkSheet sobre su futuro y otros proyectos!</string>
+    <string name="donate_card">Con tarjeta</string>
+    <string name="donate_card_subtitle">¡Hola! ¡Ya has usado LinkSheet para %s! Para poner esto en perspectiva, el desarrollo tomó más de <b>%s horas</b> en el transcurso de %s meses. Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
+\nSi dona mediante criptografía, para reclamar LinkSheet Pro, done 5 € o más y envíe el comprobante de pago a <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
 </resources>

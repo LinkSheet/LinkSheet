@@ -79,7 +79,7 @@
     <string name="open_copied_link">افتح الرابط المنسوخ</string>
     <string name="seal">ختم</string>
     <string name="github_explainer">مستودع التعليمات البرمجية</string>
-    <string name="donate_explainer">تبرع للمؤلف</string>
+    <string name="donate_explainer">تبرع للمؤلف باستخدام بطاقة الائتمان أو الخصم</string>
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
     <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
@@ -286,7 +286,7 @@
     <string name="domain_selection_confirmation_subtitle">هل تريد بالتأكيد تعيين %s باعتباره التطبيق المفضل للمجالات التالية؟</string>
     <string name="button_settings">الأزرار</string>
     <string name="misc_settings">متنوعة</string>
-    <string name="donate_card_subtitle_2">اضغط هنا لعرض تعليمات التبرع وإزالة هذه الرسالة.</string>
+    <string name="donate_card_subtitle_2">تبرع بالعملات المشفرة</string>
     <string name="donate_card_headline">التبرع لدعم ورقة الروابط</string>
     <string name="donation_instructions">تعليمات التبرع</string>
     <string name="open_link_with_subtitle_2">كانت ورقة الرابط مبنية على فتح بواسطة</string>
@@ -304,4 +304,12 @@
     <string name="show_linksheet_referrer">إظهار مرجع ورقة الروابط</string>
     <string name="show_linksheet_referrer_explainer">عند تشغيل تطبيق ما، يمكنه التحقق لمعرفة التطبيق الذي تم تشغيله أو \"إحالته\". افتراضيًا، عندما يقوم تطبيق ورقة الروابط بتشغيل تطبيق ما، فإنه يخفي نفسه، قائلاً إن التطبيق الذي قام بتشغيل ورقة الروابط هو الذي قام بتشغيل الهدف. قم بتمكين هذا لإعادة إدراج ورقة الروابط كمرجع للتطبيقات التي يفتحها.</string>
     <string name="thanks_for_donating">شكراً على التبرع!</string>
+    <string name="dismiss">تجاهل</string>
+    <string name="donate_explainer_crypto">للمطالبة بـ النسخة المدفوعة لورقة الروابط، تبرع بمبلغ 5 يورو أو أكثر وأرسل إثبات الدفع إلى <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="join">انضمام</string>
+    <string name="discord">ديسكورد</string>
+    <string name="discord_explainer">تعال للدردشة على خادم ديسكورد الخاص بنا! قم بالدردشة مع مستخدمي ومطوري ورقة الروابط حول مستقبله ومساعيه الأخرى!</string>
+    <string name="donate_card">بالبطاقة</string>
+    <string name="donate_card_subtitle">مرحبًا يا من هناك! لقد قمت بالفعل باستخدام ورقة الروابط لـ %s! لوضع ذلك في الاعتبار، استغرق التطوير أكثر من <b>%s ساعة</b> على مدار %s شهرًا. إذا كنت تحب ورقة الروابط، فكر في ترك نجمة على Github و/أو التبرع.
+\nإذا تبرعت عبر العملات المشفرة، للمطالبة بالنسخة المدفوعة لورقة الروابط، تبرع بمبلغ 5 يورو أو أكثر وأرسل إثبات الدفع إلى <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
 </resources>

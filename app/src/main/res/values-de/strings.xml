@@ -33,4 +33,27 @@
     <string name="none">Keiner</string>
     <string name="no_such_app_found">Keine solche App gefunden!</string>
     <string name="open_settings">Einstellungen öffnen</string>
+    <string name="save">Speichern</string>
+    <string name="apps">Apps</string>
+    <string name="enabled">Aktiviert</string>
+    <string name="github">Github</string>
+    <string name="hide_after_copying">Nach dem Kopieren ausblenden</string>
+    <string name="follow_redirects">Weiterleitungen folgen</string>
+    <string name="light">Hell</string>
+    <string name="back">Zurück</string>
+    <string name="version">Version</string>
+    <string name="remove_all">Alle entfernen</string>
+    <string name="paste">Einfügen</string>
+    <string name="about">Über</string>
+    <string name="add_all">Alle hinzufügen</string>
+    <string name="follow_redirects_external_service_explainer_privacy_policy">Datenschutzbestimmungen</string>
+    <string name="open_with_linksheet">Mit LinkSheet öffnen</string>
+    <string name="links">Links</string>
+    <string name="dark">Dunkel</string>
+    <string name="disabled">Deaktiviert</string>
+    <string name="always_show_package_name">Paketname immer anzeigen</string>
+    <string name="error">Fehler</string>
+    <string name="settings">Einstellungen</string>
+    <string name="system">System</string>
+    <string name="credits">Danksagungen</string>
 </resources>

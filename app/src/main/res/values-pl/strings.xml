@@ -327,4 +327,22 @@
     <string name="built_by">Kompilacja</string>
     <string name="donate">Wsparcie</string>
     <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd. Nie musi to oznaczać niczego złego, ponieważ każdy może rozwidlić kod źródłowy i zbudować swoją aplikację, ale może to zrobić w złym zamiarze.</string>
+    <plurals name="hours">
+        <item quantity="one">%s godzinę</item>
+        <item quantity="few">%s godziny</item>
+        <item quantity="many">%s godzin</item>
+        <item quantity="other">%s godzin</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">%s minutę</item>
+        <item quantity="few">%s minuty</item>
+        <item quantity="many">%s minut</item>
+        <item quantity="other">%s minut</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">%s miesiąca</item>
+        <item quantity="few">%s miesięcy</item>
+        <item quantity="many">%s miesięcy</item>
+        <item quantity="other">%s miesięcy</item>
+    </plurals>
 </resources>

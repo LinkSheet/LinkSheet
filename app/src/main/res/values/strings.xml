@@ -291,7 +291,7 @@
     <string name="button_settings">Buttons</string>
     <string name="misc_settings">Miscellaneous</string>
     <string name="donate_card_headline">Donate to support LinkSheet</string>
-    <string name="donate_card_subtitle">Hey there! You have already used LinkSheet for %s! To put that into perspective, the development took more than <b>%s</b> over the course of <b>%s</b>. If you like LinkSheet, consider leaving a star on Github and/or donating.\nDonators who donate more than <b>5€</b> are eligible for <b>LinkSheet Pro</b>, which will have exclusive features.</string>
+    <string name="donate_card_subtitle"> If you like LinkSheet, consider leaving a star on Github and/or donating.\nDonators who donate more than <b>5€</b> are eligible for <b>LinkSheet Pro</b>, which will have exclusive features.</string>
     <string name="donation_instructions">Donation instructions</string>
     <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenWith</string>
     <string name="seal_subtitle_2">Seal has been a great resource to learn from regarding Jetpack Compose</string>

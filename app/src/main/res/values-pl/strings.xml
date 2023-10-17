@@ -310,8 +310,8 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Dołącz do naszego Discorda! Porozmawiaj z użytkownikami i twórcami LinkSheet o jego przyszłości i innych przedsięwzięciach!</string>
     <string name="donate_card">Wesprzyj używając karty (przez BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Hej! Używasz LinkSheet już %s! Dla porównania, jego stworzenie zajęło ponad <b>%s</b> w ciągu <b>%s</b>. Jeśli podoba Ci się ta aplikacja, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.
-\nWspierający, którzy przekazali <b>5 €</b> lub więcej mogą otrzymać <b>LinkSheet Pro</b>, który zawiera ekskluzywne funkcje.</string>
+    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.
+\nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje.</string>
     <string name="branch">Gałąź:</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="commit">Zatwierdzenie:</string>

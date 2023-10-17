@@ -17,7 +17,9 @@ class BrowserResolver(val context: Application) {
             "org.mozilla.fenix.debug",
             "org.mozilla.fenix",
             "org.mozilla.firefox_beta",
-            "org.mozilla.firefox"
+            "org.mozilla.firefox",
+            "org.torproject.torbrowser",
+            "org.torproject.torbrowser_alpha"
         ),
         Chromium(
             "com.android.chrome",
@@ -30,8 +32,16 @@ class BrowserResolver(val context: Application) {
             "com.opera.cryptobrowser",
             "com.opera.gx",
             "com.brave.browser",
+            "com.brave.browser_beta",
+            "com.brave.browser_nightly",
             "com.microsoft.emmx",
-            "com.UCMobile.intl"
+            "com.UCMobile.intl",
+            "com.kiwibrowser.browser",
+            "com.kiwibrowser.browser.dev",
+            "com.vivaldi.browser",
+            "com.vivaldi.browser.snapshot",
+            "org.cromite.cromite",
+            "us.spotco.mulch"
         ),
         Other("com.opera.mini.native", "com.opera.mini.native.beta");
 

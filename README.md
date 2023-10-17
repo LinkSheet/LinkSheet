@@ -32,12 +32,12 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 
 <!-- ---------- Screenshots ---------- -->
 <div align="center">
-
-<div style="display: flex;">
-  <img src="readme/screenshots.webp">
-</div>
-
+  <div style="display: flex;">
+    <img src="readme/screenshots.webp">
+  </div>
  </div>
+
+## Donations
 
 <div align="center">
     <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img
@@ -47,6 +47,12 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
     <a href="https://coindrop.to/fexd" target="_blank">
         <img src="https://coindrop.to/embed-button.png" alt="Coindrop.to me" style="border-radius: 10px; !important; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" />
     </a>
+</div>
+
+## Join our Discord
+
+<div align="center">
+  <a href="https://discord.gg/GVNphPrQPf"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
 </div>
 
 ## Features

@@ -16,7 +16,7 @@
     <string name="onboarding6_highlight">प्राथमिकताएं</string>
     <string name="onboarding6_headline">अपनी सेट करें</string>
     <string name="finish">समाप्त</string>
-    <string name="donate_explainer">लेखक को आर्थिक दान दें</string>
+    <string name="donate_explainer">लेखक को क्रेडिट या डेबिट कार्ड से दान करें</string>
     <string name="launch_onboaring">ऑनबोर्डिंग लॉन्च करें</string>
     <string name="onboarding1_headline">आपका स्वागत है</string>
     <string name="onboarding4_headline">लिंकशीट बनाने के लिए लिंकहैंडलिंग को टॉगल करें</string>
@@ -36,4 +36,14 @@
     <string name="onboarding2_headline">बहुत सारी सेटिंग्स
 \nलिंकशीट बनाने के लिए</string>
     <string name="done">मुकम्मल</string>
+    <string name="dismiss">ख़ारिज करें</string>
+    <string name="privacy_settings_explainer">रेफ़रर समावेशन जैसी सेटिंग्स</string>
+    <string name="donate_explainer_crypto">लिंकशीट प्रो को लेने के लिए, 5€ या अधिक का दान करें और भुगतान का प्रमाण <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> पर भेजें</string>
+    <string name="join">जुड़ें</string>
+    <string name="discord">डिस्कॉर्ड</string>
+    <string name="discord_explainer">आइए हमारे डिस्कॉर्ड सर्वर पर चैट करें! इसके भविष्य और अन्य प्रयासों के बारे में लिंकशीट के उपयोगकर्ताओं और डेवलपर्स से बातचीत करें!</string>
+    <string name="donate_card_subtitle_2">क्रिप्टो दान करें</string>
+    <string name="donate_crypto">क्रिप्टो के माध्यम से</string>
+    <string name="show_linksheet_referrer_explainer">जब कोई ऐप लॉन्च किया जाता है, तो यह यह देखने के लिए जांच कर सकता है कि कौन सा ऐप लॉन्च हुआ है, या उसे \"रेफ़र\" किया गया है। डिफ़ॉल्ट रूप से, जब लिंकशीट एक ऐप लॉन्च करता है, तो यह खुद को छुपाता है, यह कहते हुए कि लिंकशीट लॉन्च करने वाला ऐप वही है जिसने लक्ष्य लॉन्च किया है। लिंकशीट को खुलने वाले ऐप्स के लिए रेफ़रलकर्ता के रूप में पुनः सम्मिलित करने के लिए इसे सक्षम करें।</string>
+    <string name="donate_card">कार्ड द्वारा</string>
 </resources>

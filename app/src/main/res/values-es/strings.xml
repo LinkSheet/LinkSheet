@@ -124,7 +124,7 @@
     <string name="frontend">Interfaz</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="finish">Termina</string>
-    <string name="donate_explainer">Donar al creador con tarjeta de crédito o débito</string>
+    <string name="donate_explainer">Si desea donar o anunciar <b>LinkSheet Pro</b></string>
     <string name="advanced">Avanzado</string>
     <string name="built_at">Construido en (UTC):</string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
@@ -233,7 +233,7 @@
     <string name="disabled">Desactivado</string>
     <string name="enable_request_private_browsing_button">Activar botón \"Navegación privada\"</string>
     <string name="redact_log">Redactar registro (recomendado; deshabilitarlo puede filtrar nombres de paquetes y nombres de dominio)</string>
-    <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede verificar qué aplicación se inició o la \"refirió\". De forma predeterminada, cuando LinkSheet inicia una aplicación, se oculta y dice que la aplicación que inició LinkSheet es la que inició el objetivo. Habilite esto para reinsertar LinkSheet como referencia para las aplicaciones que abre.</string>
+    <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede comprobar qué la aplicación se inició o la \"refirió\". Por defecto, cuando LinkSheet inicia una aplicación, se oculta, diciendo que la aplicación que inició LinkSheet es la que lanzó el objetivo. Habilite esta opción para reinsertar LinkSheet como referente de las aplicaciones que abre.</string>
     <string name="always_show_package_name_disclaimer">Este interruptor se moverá a una ubicación diferente en una versión futura.</string>
     <string name="search">Buscar</string>
     <string name="at_least_one_unknown_browser_installer">Existe, al menos, un navedador (desconocido) instalado</string>
@@ -251,11 +251,11 @@
     <string name="launch_onboaring_explainer">Prueba el flujo de incorporación</string>
     <string name="always_disable_explainer">Desactivar siempre el Navegador en aplicación, a pesar de que la aplicación quiera usarlo</string>
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
-    <string name="mastodon_redirect_subtitle_2">El código fuente de Maston Redirect se utilizó como referencia para la interacción con Shizuku</string>
+    <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
     <string name="enable_amp2html_explainer">Redirige las páginas AMP a su versión web normal. Esto puede tener <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
-    <string name="donate_crypto">Donar</string>
+    <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Reemplaza los botones delineados \"Copiar enlace\", \"Compartir\", \"Descargar\" e \"Ignorar LibRedirect\" con botones de texto simples</string>
     <string name="follow_redirects_builtin_cache_explainer">Usar la caché integrado (que utiliza una exportación de base de datos del servicio externo)</string>
@@ -282,7 +282,7 @@
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="follow_redirects_builtin_cache">Utilice la caché de redireccionamiento incorporada</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku</string>
-    <string name="welcome_to_linksheet_explainer">LinkSheet \"restaura\" el \"selector de aplicaciones de enlaces\" que aparecía cuando el usuario tocaba un enlace en Android &lt;12 y tenía varias aplicaciones instaladas que podían manejar el enlace.</string>
+    <string name="welcome_to_linksheet_explainer">LinkSheet \"restaura\" el \"url-app-chooser\" que aparecía cuando el usuario tocaba en un enlace en un Android anterior al 12 y tenía varias aplicaciones instaladas que podían manejar el enlace.</string>
     <string name="system">Sistema</string>
     <string name="no_log_entries">La sesión no contiene ningún registro.</string>
     <string name="apps_which_can_open_links">Aplicaciones que pueden abrir enlaces</string>
@@ -294,7 +294,7 @@
     <string name="shizuku">Integración con Shizuku</string>
     <string name="dont_show_filtered_item_explainer">Nunca mostrará la sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
     <string name="enable_copy_button">Activar botón para copiar</string>
-    <string name="version_name">Identificador:</string>
+    <string name="version_name">Identificador completo:</string>
     <string name="configure_explainer">Toca aquí para configurar LinkSheetCompat</string>
     <string name="feature_flags">Características experimentales</string>
     <string name="onboarding2_headline">Cientos de ajustes
@@ -305,11 +305,26 @@
     <string name="done">Hecho</string>
     <string name="thanks_for_donating">¡Gracias por donar!</string>
     <string name="dismiss">Descartar</string>
-    <string name="donate_explainer_crypto">Para reclamar LinkSheet Pro, done 5 € o más y envíe el comprobante de pago a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_explainer_crypto">Al donar con criptomonedas, para obtener <b>LinkSheet Pro</b>, envía el comprobante de pago a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="join">Unirme</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">¡Ven a chatear en nuestro servidor de Discord! ¡Chatea con los usuarios y desarrolladores de LinkSheet sobre su futuro y otros proyectos!</string>
-    <string name="donate_card">Con tarjeta</string>
-    <string name="donate_card_subtitle">¡Hola! ¡Ya has usado LinkSheet para %s! Para poner esto en perspectiva, el desarrollo tomó más de <b>%s horas</b> en el transcurso de %s meses. Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
-\nSi dona mediante criptografía, para reclamar LinkSheet Pro, done 5 € o más y envíe el comprobante de pago a <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
+    <string name="donate_card_subtitle">¡Hola! ¡Ya ha utilizado LinkSheet para %s! Para ponerlo en perspectiva, el desarrollo llevó más de <b>%s</b> a lo largo de <b>%s</b>. Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
+\nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas.</string>
+    <string name="branch">Rama:</string>
+    <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
+    <string name="commit">Consolidar:</string>
+    <string name="donate_learn_more">Más información</string>
+    <string name="donate_other">Si desea donar de otra forma (transferencia SEPA, PayPal, otra criptomoneda, etc.), envíe también un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="type">Tipo:</string>
+    <string name="flavor">Flavor:</string>
+    <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> te permite acceder a <b>LinkSheet Pro</b>, que, actualmente solo oculta el banner de donación en la pantalla principal de la aplicación, pero en el futuro, habrá <b>características exclusivas para la versión Pro.</b></string>
+    <string name="github_pipeline_build">Desarrollado y firmado para el flujo de trabajo de Github</string>
+    <string name="other">Otros</string>
+    <string name="app_setup">Configuración de la aplicación</string>
+    <string name="linksheet_donation_explainer">LinkSheet es el resultado de más de <b>%s</b> de trabajo a lo largo de más de <b>%s</b>. Si desea mostrar su agradecimiento por mi trabajo, haga una donación.</string>
+    <string name="built_by">Desarrollado y firmado por</string>
+    <string name="donate">Donar</string>
+    <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd. Esto no significa necesariamente nada malo, ya que cualquiera puede bifurcar el código fuente y compilar su aplicación, pero puede hacerlo con malas intenciones.</string>
 </resources>

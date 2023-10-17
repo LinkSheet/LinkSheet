@@ -12,14 +12,14 @@
     <string name="apps_which_can_open_links_explainer_2">Lista wszystkich aplikacji, które mogą kolidować z działaniem LinkSheet</string>
     <string name="no_preferred_apps_set_yet">Nie ustawiono jeszcze aplikacji jako preferowanych.</string>
     <string name="search">Szukaj</string>
-    <string name="enable_copy_button">Przycisk kopiowania</string>
+    <string name="enable_copy_button">Przycisk „Kopiuj link”</string>
     <string name="copy">Skopiuj link</string>
     <string name="url_copied">Link został skopiowany do schowka</string>
     <string name="confirm">Potwierdź</string>
     <string name="clear">Wyczyść</string>
     <string name="usage_stats_sorting">Sortuj aplikacje według użycia</string>
-    <string name="enable_copy_button_explainer">Wyświetla przycisk „Kopiuj link” w dolnym panelu</string>
-    <string name="single_tap">Włącz pojedyncze dotknięcie</string>
+    <string name="enable_copy_button_explainer">Wyświetla przycisk umożliwiający kopiowanie linku</string>
+    <string name="single_tap">Pojedyncze dotknięcie</string>
     <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach, niezależnie od tego, jakiej aplikacja chce używać</string>
     <string name="preferred_browser_explainer">Ustaw domyślny tryb przeglądarki</string>
     <string name="always_ask">Zawsze pytaj</string>
@@ -28,7 +28,7 @@
     <string name="no_app_to_handle_link_found">Nie znaleziono aplikacji do obsługi linku!</string>
     <string name="open_settings">Otwórz ustawienia</string>
     <string name="no_such_app_found">Nie znaleziono takiej aplikacji!</string>
-    <string name="enable_send_button">Włącz przycisk „Udostępnij”</string>
+    <string name="enable_send_button">Przycisk „Udostępnij”</string>
     <string name="send_to">Udostępnij</string>
     <string name="preferred_apps_explainer">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
@@ -38,8 +38,8 @@
     <string name="add_all">Dodaj wszystkie</string>
     <string name="hide_after_copying">Ukryj po skopiowaniu</string>
     <string name="back">Cofnij</string>
-    <string name="display_grid_layout">Wyświetl układ siatki</string>
-    <string name="display_grid_layout_explainer">Wyświetlaj układ siatki zamiast listy w dolnym panelu</string>
+    <string name="display_grid_layout">Układ siatki</string>
+    <string name="display_grid_layout_explainer">Pokazuj układ siatki zamiast listy</string>
     <string name="browser_status">Status przeglądarki</string>
     <string name="apps">Aplikacje</string>
     <string name="bottom_sheet">Dolny panel</string>
@@ -97,7 +97,7 @@
     <string name="dont_show_filtered_item">Nigdy nie wyświetlaj sekcji ostatnio wybranej aplikacji</string>
     <string name="dont_show_filtered_item_explainer">Nigdy nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
     <string name="set_as_browser_explainer">Dotknij, aby ustawić LinkSheet jako domyślną przeglądarkę</string>
-    <string name="single_tap_explainer">Wystarczy jedno dotknięcie zamiast dwóch, aby otworzyć aplikację. Naciśnij i przytrzymaj, aby wybrać aplikację; kliknij dwukrotnie, aby otworzyć informacje o aplikacji</string>
+    <string name="single_tap_explainer">Umożliwia otwieranie aplikacji tylko jednym dotknięciem; długie przytrzymanie wybierze aplikację, podwójne dotknięcie otworzy informacje o aplikacji</string>
     <string name="disable_toasts_explainer">Nigdy nie pokazuj wyskakujących wiadomości</string>
     <string name="linksheet_download">Pobieranie LinkSheet</string>
     <string name="enable_downloader">Włącz program do pobierania</string>
@@ -114,7 +114,7 @@
     <string name="open_with">Otwórz w</string>
     <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
     <string name="preferred_browser">Preferowana przeglądarka</string>
-    <string name="enable_send_button_explainer">Wyświetla przycisk w dolnym panelu, który umożliwia udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
+    <string name="enable_send_button_explainer">Wyświetla przycisk umożliwiający udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Ustawiono LinkSheet jako domyślną przeglądarkę!</string>
     <string name="bottom_sheet_explainer">Sortuj według użycia, włącz przycisk kopiowania, włącz przycisk udostępniania itp.</string>
     <string name="open_copied_link">Otwórz skopiowany link</string>
@@ -141,12 +141,12 @@
     <string name="normal">Zwykła</string>
     <string name="in_app">W aplikacji</string>
     <string name="use_unified_preferred_browser">Użyj ujednoliconych ustawień</string>
-    <string name="enable_ignore_libredirect_button">Włącz przycisk „Ignoruj LibRedirect”</string>
-    <string name="enable_ignore_libredirect_button_explainer">Jeśli link został przekierowany przez LibRedirect, w dolnym panelu zostanie wyświetlony przycisk otwierający oryginalny adres</string>
+    <string name="enable_ignore_libredirect_button">Przycisk „Ignoruj LibRedirect”</string>
+    <string name="enable_ignore_libredirect_button_explainer">Wyświetla przycisk, jeśli link został przekierowany przez LibRedirect, który zamiast tego otwiera oryginalny link</string>
     <string name="ignore_libredirect">Ignoruj LibRedirect</string>
     <string name="app_crashed">LinkSheet uległ awarii, sprawdź poniższy błąd</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
-    <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki. Jeśli obecna jest tylko jedna aplikacja natywna, zostanie ona automatycznie otwarta. Jeśli nie ma aplikacji natywnej, wszystkie przeglądarki są wyświetlane na liście.</string>
+    <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki. Jeśli obecna jest tylko jedna aplikacja natywna, zostanie automatycznie otwarta. Jeśli nie ma takiej aplikacji, wszystkie przeglądarki są wyświetlane na liście.</string>
     <string name="debug_explainer">Wyświetl logi aplikacji</string>
     <string name="logs">Logi</string>
     <string name="logs_explainer">Wyświetl logi aplikacji</string>
@@ -173,7 +173,7 @@
     <string name="export">Eksportuj</string>
     <string name="export_log">Eksportuj log</string>
     <string name="export_mode">Rodzaj eksportu</string>
-    <string name="enable_request_private_browsing_button">Włącz przycisk „Tryb prywatny”</string>
+    <string name="enable_request_private_browsing_button">Przycisk „Tryb prywatny”</string>
     <string name="request_private_browsing">Tryb prywatny</string>
     <string name="crash_log">Log awarii</string>
     <string name="log">Log</string>
@@ -318,13 +318,13 @@
     <string name="donate_learn_more">Czytaj więcej</string>
     <string name="donate_other">Jeśli chcesz przekazać darowiznę w inny sposób (przelew SEPA, PayPal, inna kryptowaluta itp.), wyślij wiadomość e-mail na adres <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="type">Typ:</string>
-    <string name="flavor">Flavor:</string>
+    <string name="flavor">Wariant:</string>
     <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5 €</b> umożliwia dostęp do <b>LinkSheet Pro</b>, który obecnie ukrywa tylko baner darowizny na głównym ekranie aplikacji, ale w przyszłości pojawią się <b>wyjątkowe funkcje Pro.</b></string>
     <string name="github_pipeline_build">Zbudowana i podpisana przez przepływ pracy Github</string>
     <string name="other">Inne</string>
     <string name="app_setup">Konfiguracja aplikacji</string>
     <string name="linksheet_donation_explainer">LinkSheet jest wynikiem ponad <b>%s</b> pracy na przestrzeni ponad <b>%s</b>. Jeśli chcesz okazać wdzięczność za moją pracę, przekaż darowiznę.</string>
-    <string name="built_by">Zbudowano i podpisano przez</string>
+    <string name="built_by">Kompilacja</string>
     <string name="donate">Wsparcie</string>
     <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd. Nie musi to oznaczać niczego złego, ponieważ każdy może rozwidlić kod źródłowy i zbudować swoją aplikację, ale może to zrobić w złym zamiarze.</string>
 </resources>

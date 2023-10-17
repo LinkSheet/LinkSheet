@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <plurals name="minutes">
+        <item quantity="one">%s minute</item>
+        <item quantity="other">%s minutes</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">%s hour</item>
+        <item quantity="other">%s hours</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">%s month</item>
+        <item quantity="other">%s months</item>
+    </plurals>
     <string name="open_with">Open with</string>
     <string name="just_once">Just once</string>
     <string name="always">Always</string>

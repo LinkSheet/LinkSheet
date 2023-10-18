@@ -312,4 +312,27 @@
     <string name="donate_card">С карта</string>
     <string name="donate_card_subtitle">Здравейте! Използвате LinkSheet вече %s! За сравнение, времето за разработване на приложението е повече от <b>%s часа</b> в продължение на %s месеца. Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
 \nАко сте дарили криптовалута, за да получите LinkSheet Pro, дарете €5 или повече и изпратете доказателство за плащането на <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <plurals name="hours">
+        <item quantity="one">%s час</item>
+        <item quantity="other">%s часа</item>
+    </plurals>
+    <string name="branch">Разклонение:</string>
+    <string name="manual_build">Ръчно компилирано и подписано от 1fexd</string>
+    <string name="commit">Идентификатор:</string>
+    <string name="donate_learn_more">Научете повече</string>
+    <string name="type">Вид:</string>
+    <string name="flavor">Вариант:</string>
+    <string name="github_pipeline_build">Компилирано и подписано от работен процес на Гитхъб</string>
+    <string name="other">Друго</string>
+    <string name="app_setup">Настройка на приложението</string>
+    <plurals name="minutes">
+        <item quantity="one">%s минута</item>
+        <item quantity="other">%s минути</item>
+    </plurals>
+    <string name="built_by">Компилирано и подписано от</string>
+    <string name="donate">Дарете</string>
+    <plurals name="months">
+        <item quantity="one">%s месец</item>
+        <item quantity="other">%s месеца</item>
+    </plurals>
 </resources>

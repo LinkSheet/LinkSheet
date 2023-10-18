@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import fe.kotlin.extension.forEachWithInfo
 import fe.libredirectkt.LibRedirectService
+import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
@@ -114,6 +115,30 @@ object ComponentNameDumpable : LogDumpableWrapper<ComponentName> {
         instance: ComponentName,
         hasher: LogHasher
     ) = hasher.hash(stringBuilder, instance, HashProcessor.ComponentProcessor)
+}
+object PreferredAppDumpable : LogDumpableWrapper<PreferredApp> {
+    override fun dump(
+        stringBuilder: StringBuilder,
+        instance: PreferredApp,
+        hasher: LogHasher
+    ) = stringBuilder.commaSeparated {
+        item {
+            hasher.hash(this, "host=", instance.host, HashProcessor.UrlProcessor)
+        }
+
+        itemNotNull(instance.packageName) {
+            hasher.hash(this, "pkg=", instance.packageName!!, PackageProcessor)
+        }
+
+        item {
+            hasher.hash(
+                this,
+                "componentName=",
+                instance.componentName!!,
+                HashProcessor.ComponentProcessor
+            )
+        }
+    }
 }
 
 object LibRedirectServiceDumpable : LogDumpableWrapper<LibRedirectService> {

@@ -1,9 +1,11 @@
 package fe.linksheet.module.log
 
 import android.content.Context
+import com.google.gson.JsonObject
+import fe.gson.dsl.jsonObject
 import fe.kotlin.extension.decodeBase64Throw
 import fe.kotlin.extension.encodeBase64Throw
-import fe.kotlin.extension.toUnixMillis
+import fe.kotlin.extension.unixMillis
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.util.SingletonHolder
 import fe.stringbuilder.util.buildSeparatedString
@@ -27,6 +29,19 @@ data class LogEntry(
         item { append(prefix) }
         item { append(message.encodeBase64Throw()) }
         item { append(redactedMessage.encodeBase64Throw()) }
+    }
+
+    fun toJson(redact: Boolean): JsonObject {
+        return jsonObject {
+            "type" += type
+            "time" += unixMillis.unixMillis.value
+            "prefix" += prefix
+            if (redact) {
+                "redactedMessage" += redactedMessage
+            } else {
+                "message" += message
+            }
+        }
     }
 
     companion object {
@@ -64,7 +79,7 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
     ) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt).delete()
 
     fun deleteOldLogs() {
-        val startupMillis = startupTime.minusWeeks(2).toUnixMillis()
+        val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
         getLogFiles().filter { it.toLong() < startupMillis }.forEach {
             deleteLogFile(it)
         }

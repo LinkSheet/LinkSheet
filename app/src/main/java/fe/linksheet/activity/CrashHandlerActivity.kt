@@ -73,9 +73,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                         logViewCommon = viewModel.logViewCommon,
                         clipboardManager = viewModel.clipboardManager,
                         close = close,
-                    ) { sb, _ ->
-                        sb.append(state!!, lineSeparator)
-                    }
+                    )
                 }
 
                 Scaffold(

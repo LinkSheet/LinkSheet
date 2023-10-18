@@ -42,17 +42,17 @@ fun DebugSettingsRoute(
                 )
             }
 
-            item(key = "load_dumped_preferences") {
-                SettingsItemRow(
-                    navController = navController,
-                    navigateTo = loadDumpedPreferences,
-                    headlineId = R.string.import_dumped_preference,
-                    subtitleId = R.string.import_dumped_preference_explainer,
-                    image = {
-                        ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
-                    }
-                )
-            }
+//            item(key = "load_dumped_preferences") {
+//                SettingsItemRow(
+//                    navController = navController,
+//                    navigateTo = loadDumpedPreferences,
+//                    headlineId = R.string.import_dumped_preference,
+//                    subtitleId = R.string.import_dumped_preference_explainer,
+//                    image = {
+//                        ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
+//                    }
+//                )
+//            }
         }
     }
 }

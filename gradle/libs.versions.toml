@@ -17,8 +17,11 @@ gradle = { id = "gradle", version = "8.1.1" }
 [versions]
 
 kotlin = "1.9.10"
+##  ⬆ = "1.9.20-Beta"
+##  ⬆ = "1.9.20-Beta2"
+##  ⬆ = "1.9.20-RC"
 
-koin = "3.4.3"
+koin = "3.5.0"
 linkSheetInterConnect = "2.3.2"
 
 google-accompanist = "0.33.2-alpha"

@@ -21,11 +21,12 @@ import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -60,7 +61,8 @@ class BottomSheetViewModel(
 
     val disableToasts = preferenceRepository.getBooleanState(AppPreferences.disableToasts)
     val gridLayout = preferenceRepository.getBooleanState(AppPreferences.gridLayout)
-    private val followRedirects = preferenceRepository.getBooleanState(AppPreferences.followRedirects)
+    private val followRedirects =
+        preferenceRepository.getBooleanState(AppPreferences.followRedirects)
     private var enableDownloader = preferenceRepository.getBooleanState(
         AppPreferences.enableDownloader
     )
@@ -76,7 +78,8 @@ class BottomSheetViewModel(
     )
 
     val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
-    val showAsReferrer = preferenceRepository.getBooleanState(AppPreferences.showLinkSheetAsReferrer)
+    val showAsReferrer =
+        preferenceRepository.getBooleanState(AppPreferences.showLinkSheetAsReferrer)
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
@@ -101,7 +104,14 @@ class BottomSheetViewModel(
     }
 
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
-        logger.debug("Component=${intent.component}")
+        if (intent.component != null) {
+            logger.debug(
+                { "Component=${it}" },
+                intent.component!!,
+                HashProcessor.ComponentProcessor
+            )
+
+        }
 
         intent.component?.let { component ->
             val host = intent.data!!.host!!.lowercase(Locale.getDefault())
@@ -112,7 +122,8 @@ class BottomSheetViewModel(
                 alwaysPreferred = always
             )
 
-            logger.debug("Inserting=$app")
+            logger.debug({ "Inserting $it" }, app, HashProcessor.PreferenceAppHashProcessor)
+
             preferredAppRepository.insert(app)
 
             val historyEntry = AppSelectionHistory(
@@ -121,8 +132,12 @@ class BottomSheetViewModel(
                 lastUsed = System.currentTimeMillis()
             )
 
+            logger.debug(
+                { "Inserting=$it" },
+                historyEntry,
+                HashProcessor.AppSelectionHistoryHashProcessor
+            )
             appSelectionHistoryRepository.insert(historyEntry)
-            logger.debug("Inserting=$historyEntry")
         }
     }
 

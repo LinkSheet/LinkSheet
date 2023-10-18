@@ -20,17 +20,18 @@ import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
 import fe.linksheet.R
 import fe.linksheet.extension.android.setText
+import fe.linksheet.module.log.LogEntry
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.viewmodel.util.LogViewCommon
+import java.lang.StringBuilder
 
 @Composable
 fun ExportLogDialog(
     logViewCommon: LogViewCommon,
     clipboardManager: ClipboardManager,
     close: OnClose<Unit>,
-    log: (StringBuilder, Boolean) -> Unit
 ) {
     val context = LocalContext.current
-
 
     var redactLog by remember { mutableStateOf(true) }
     var includeFingerprint by remember { mutableStateOf(true) }
@@ -83,7 +84,7 @@ fun ExportLogDialog(
                             includeFingerprint,
                             includePreferences,
                             redactLog,
-                        ) { log(it, redactLog) }
+                        )
                     )
                     close(Unit)
                 }

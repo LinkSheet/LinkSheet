@@ -163,7 +163,6 @@ class DefaultLogger(
         log(Type.Verbose, msg)
     }
 
-
     override fun <T> info(
         msg: (String) -> String,
         param: T,
@@ -177,7 +176,6 @@ class DefaultLogger(
     override fun info(msg: String) {
         log(Type.Info, msg)
     }
-
     override fun <T> debug(
         msg: (String) -> String,
         param: T,

@@ -72,7 +72,7 @@ object AppPreferences : Preferences() {
     )
     val useTimeMs = longPreference("use_time", 0)
 
-    val showLinkSheetAsReferrer =  booleanPreference("show_as_referrer", false)
+    val showLinkSheetAsReferrer = booleanPreference("show_as_referrer", false)
 
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
@@ -94,17 +94,11 @@ object AppPreferences : Preferences() {
         redact: Boolean,
         logger: Logger,
         repository: AppPreferenceRepository
-    ) = packagePreferences.map {
-        buildString {
-            val value = repository.getString(it)
-            append(it.key)
-
-            if (value != null) {
-                append(logger.dumpParameterToString(redact, value, PackageProcessor))
-            } else {
-                append("null")
-            }
-        }
+    ): Map<String, String?> = packagePreferences.associate {
+        val value = repository.getString(it)
+        it.key to if (value != null) {
+            logger.dumpParameterToString(redact, value, PackageProcessor)
+        } else null
     }
 }
 

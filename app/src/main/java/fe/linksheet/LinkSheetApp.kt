@@ -13,6 +13,8 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
+import fe.gson.globalGsonModule
+import fe.httpkt.json.defaultGson
 import fe.kotlin.extension.asString
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
@@ -84,6 +86,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             modules(
+                globalGsonModule,
                 preferenceRepositoryModule,
                 featureFlagRepositoryModule,
                 defaultLoggerFactoryModule,

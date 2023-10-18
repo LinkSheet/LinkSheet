@@ -4,18 +4,21 @@ import android.content.ComponentName
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable
 import fe.linksheet.extension.appendHashed
+import fe.linksheet.module.database.entity.AppSelectionHistory
+import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.preference.AppPreferences
+import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import fe.stringbuilder.util.slashSeparated
-import fe.uribuilder.ParsedUri
-import fe.uribuilder.UriParser
-import org.apache.hc.core5.net.InetAddressUtils
 import org.apache.hc.core5.net.PercentCodec
 import org.apache.hc.core5.util.TextUtils
 import javax.crypto.Mac
 
 sealed interface LogHasher {
-    object NoOpHasher : LogHasher {
+    data object NoOpHasher : LogHasher {
         override fun <T> hash(
             stringBuilder: StringBuilder,
             input: T,
@@ -30,6 +33,7 @@ sealed interface LogHasher {
             hashProcessor: HashProcessor<T>
         ) = hashProcessor.process(stringBuilder, input, hmac)
     }
+
 
     fun <T> hash(
         stringBuilder: StringBuilder,
@@ -96,6 +100,46 @@ sealed interface HashProcessor<T> {
             slashSeparated {
                 item { PackageProcessor.process(stringBuilder, input.packageName, mac) }
                 item { appendHashed(mac, input.className) }
+            }
+        }
+    }
+
+    data object PreferenceAppHashProcessor : HashProcessor<PreferredApp> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: PreferredApp,
+            mac: Mac
+        ) = stringBuilder.commaSeparated {
+            item {
+                append("host=")
+                UrlProcessor.process(stringBuilder, input.host, mac)
+            }
+            itemNotNull(input.packageName) {
+                append("pkg=")
+                PackageProcessor.process(this, input.packageName!!, mac)
+            }
+            item {
+                ComponentProcessor.process(stringBuilder, input.componentName!!, mac)
+            }
+            item {
+                append("alwaysPreferred=", input.alwaysPreferred)
+            }
+        }
+    }
+
+    data object AppSelectionHistoryHashProcessor : HashProcessor<AppSelectionHistory> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: AppSelectionHistory,
+            mac: Mac
+        ) = stringBuilder.commaSeparated {
+            item {
+                append("host=")
+                UrlProcessor.process(stringBuilder, input.host, mac)
+            }
+
+            item {
+                append("lastUsed=", input.lastUsed)
             }
         }
     }

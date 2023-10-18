@@ -61,13 +61,6 @@ fun LogTextSettingsRoute(
         listState(logEntries)
     }
 
-    val items = remember {
-        mapOf<Boolean, (LogEntry) -> String>(
-            true to { it.messagePrefix + it.redactedMessage },
-            false to { it.messagePrefix + it.message }
-        )
-    }
-
     val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
         fetch = { logEntries!! },
         awaitFetchBeforeOpen = true,
@@ -77,14 +70,20 @@ fun LogTextSettingsRoute(
             logViewCommon = viewModel.logViewCommon,
             clipboardManager = viewModel.clipboardManager,
             close = close,
-        ) { sb, redactLog ->
-            state!!.joinTo(
-                sb,
-                separator = lineSeparator,
-                postfix = lineSeparator,
-                transform = items[redactLog]!!
-            )
-        }
+        )
+//        ExportLogDialog(
+//            logViewCommon = viewModel.logViewCommon,
+//            clipboardManager = viewModel.clipboardManager,
+//            close = close,
+//            entryList = state ?: emptyList(),
+//        ) { sb, redactLog ->
+//            state!!.joinTo(
+//                sb,
+//                separator = lineSeparator,
+//                postfix = lineSeparator,
+//                transform = items[redactLog]!!
+//            )
+//        }
     }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->

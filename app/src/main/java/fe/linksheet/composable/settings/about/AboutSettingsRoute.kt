@@ -50,7 +50,7 @@ fun AboutSettingsRoute(
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
     val buildDate =
-        BuildConfig.BUILT_AT.unixMillisAtUtc.value.format(ISO8601DateTimeFormatOption.default)
+        BuildConfig.BUILT_AT.unixMillisAtUtc.value.format(ISO8601DateTimeFormatOption.DefaultFormat)
 
     SettingsScaffold(R.string.about, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

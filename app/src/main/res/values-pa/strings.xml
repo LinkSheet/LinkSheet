@@ -324,7 +324,7 @@
     <string name="type">ਕਿਸਮ:</string>
     <string name="flavor">ਵੰਨਗੀ:</string>
     <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ ਨੂੰ ਲੁਕਾਉਂਦਾ ਹੈ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਉੱਥੇ <b>ਪ੍ਰੋ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ</b> ਹੋਣਗੀਆਂ</string>
-    <string name="github_pipeline_build">ਗਿਥਬ ਵਰਕਫਲੋ ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
+    <string name="github_pipeline_build">ਗਿਟਹੱਬ ਵਰਕਫਲੋ ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
     <string name="other">ਹੋਰ</string>
     <string name="app_setup">ਐਪ ਸੈੱਟਅੱਪ</string>
     <plurals name="minutes">

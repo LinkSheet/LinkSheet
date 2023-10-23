@@ -107,6 +107,8 @@ android {
         }
     }
 
+    flavorDimensions += listOf("type")
+
     productFlavors {
         create("foss") {
             dimension = "type"
@@ -159,10 +161,6 @@ android {
             resValue("string", "app_name", "$appName Release Debug")
         }
     }
-
-    flavorDimensions += listOf("type")
-
-
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

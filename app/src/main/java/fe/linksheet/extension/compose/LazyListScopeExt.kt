@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
@@ -22,6 +23,19 @@ import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.Searchbar
 import kotlinx.coroutines.flow.MutableStateFlow
+
+fun LazyListScope.spacer(height: Int = 10, itemKey: Any?) {
+    item(key = itemKey) {
+        Spacer(modifier = Modifier.height(height.dp))
+    }
+}
+
+fun LazyListScope.header(@StringRes header: Int, itemKey: Any?, height: Int = 10) {
+    item(key = itemKey) {
+        Text(modifier = Modifier.padding(horizontal = 10.dp), text = stringResource(id = header))
+        Spacer(modifier = Modifier.height(height.dp))
+    }
+}
 
 inline fun <K, V> LazyListScope.items(
     items: Map<K, V>,

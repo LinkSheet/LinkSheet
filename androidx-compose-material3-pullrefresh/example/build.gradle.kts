@@ -1,1 +1,0 @@
-description = "An example project"

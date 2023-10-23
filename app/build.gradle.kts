@@ -251,7 +251,6 @@ dependencies {
     implementation(libs.compose.dialog.helper)
     implementation(libs.process.launcher)
 
-    implementation(libs.compose.material3.pullrefresh)
     implementation(libs.jsoup)
 
     implementation(Google.android.material)

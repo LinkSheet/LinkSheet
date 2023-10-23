@@ -29,12 +29,6 @@ dependencyResolutionManagement {
     }
 }
 
-includeBuild("androidx-compose-material3-pullrefresh/library") {
-    dependencySubstitution {
-        substitute(module("me.omico.compose:compose-material3-pullrefresh")).using(project(":"))
-    }
-}
-
 rootProject.name = "LinkSheet"
 
 include ":app"

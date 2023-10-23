@@ -22,5 +22,6 @@
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
 -dontwarn javax.annotation.WillClose
+-dontwarn fe.gson.util.JsonIOUtil
 
 -keep class fe.linksheet.**

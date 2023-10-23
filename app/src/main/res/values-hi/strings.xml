@@ -16,7 +16,7 @@
     <string name="onboarding6_highlight">प्राथमिकताएं</string>
     <string name="onboarding6_headline">अपनी सेट करें</string>
     <string name="finish">समाप्त</string>
-    <string name="donate_explainer">लेखक को क्रेडिट या डेबिट कार्ड से दान करें</string>
+    <string name="donate_explainer">यदि आप दान करना और <b>लिंकशीट प्रो</b> को लेना चाहते हैं</string>
     <string name="launch_onboaring">ऑनबोर्डिंग लॉन्च करें</string>
     <string name="onboarding1_headline">आपका स्वागत है</string>
     <string name="onboarding4_headline">लिंकशीट बनाने के लिए लिंकहैंडलिंग को टॉगल करें</string>
@@ -38,12 +38,38 @@
     <string name="done">मुकम्मल</string>
     <string name="dismiss">ख़ारिज करें</string>
     <string name="privacy_settings_explainer">रेफ़रर समावेशन जैसी सेटिंग्स</string>
-    <string name="donate_explainer_crypto">लिंकशीट प्रो को लेने के लिए, 5€ या अधिक का दान करें और भुगतान का प्रमाण <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> पर भेजें</string>
+    <string name="donate_explainer_crypto">क्रिप्टो के साथ दान करते समय, <b>LinkSheet Pro</b> का दावा करने के लिए, भुगतान का प्रमाण <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> पर भेजें</string>
     <string name="join">जुड़ें</string>
     <string name="discord">डिस्कॉर्ड</string>
     <string name="discord_explainer">आइए हमारे डिस्कॉर्ड सर्वर पर चैट करें! इसके भविष्य और अन्य प्रयासों के बारे में लिंकशीट के उपयोगकर्ताओं और डेवलपर्स से बातचीत करें!</string>
     <string name="donate_card_subtitle_2">क्रिप्टो दान करें</string>
-    <string name="donate_crypto">क्रिप्टो के माध्यम से</string>
+    <string name="donate_crypto">क्रिप्टो के माध्यम से दान करें</string>
     <string name="show_linksheet_referrer_explainer">जब कोई ऐप लॉन्च किया जाता है, तो यह यह देखने के लिए जांच कर सकता है कि कौन सा ऐप लॉन्च हुआ है, या उसे \"रेफ़र\" किया गया है। डिफ़ॉल्ट रूप से, जब लिंकशीट एक ऐप लॉन्च करता है, तो यह खुद को छुपाता है, यह कहते हुए कि लिंकशीट लॉन्च करने वाला ऐप वही है जिसने लक्ष्य लॉन्च किया है। लिंकशीट को खुलने वाले ऐप्स के लिए रेफ़रलकर्ता के रूप में पुनः सम्मिलित करने के लिए इसे सक्षम करें।</string>
-    <string name="donate_card">कार्ड द्वारा</string>
+    <string name="donate_card">कार्ड से दान करें (BuyMeACoffee के माध्यम से)</string>
+    <plurals name="hours">
+        <item quantity="one">%s घंटा</item>
+        <item quantity="other">%s घंटे</item>
+    </plurals>
+    <string name="branch">ब्रांच:</string>
+    <string name="logs">लॉग्स</string>
+    <string name="manual_build">1fexd द्वारा मैन्युअल रूप से निर्मित और हस्ताक्षरित</string>
+    <string name="commit">कमिट:</string>
+    <string name="donate_other">यदि आप किसी अन्य तरीके से दान करना चाहते हैं (SEPA ट्रांसफर, PayPal, अन्य क्रिप्टोकरंसी, आदि), तो <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> पर एक ईमेल भी भेजें</string>
+    <string name="type">प्रकार:</string>
+    <string name="flavor">फ्लेवर:</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> से अधिक का दान आपको <b>लिंकशीट प्रो</b> तक पहुंच की अनुमति देता है, जो वर्तमान में केवल ऐप की मुख्य स्क्रीन पर दान बैनर को छुपाता है, लेकिन भविष्य में, <b>प्रो एक्सक्लूसिव फीचर्स</b> होंगे</string>
+    <string name="github_pipeline_build">गिटहब वर्कफ़्लो द्वारा निर्मित और हस्ताक्षरित</string>
+    <string name="other">अन्य</string>
+    <string name="app_setup">ऐप सेटअप</string>
+    <plurals name="minutes">
+        <item quantity="one">%s मिनट</item>
+        <item quantity="other">%s मिनट</item>
+    </plurals>
+    <string name="linksheet_donation_explainer">लिंकशीट <b>%s</b> से अधिक कार्यों का परिणाम है जो <b>%s</b> से अधिक अवधि में किए गए। यदि आप मेरे काम की कुछ सराहना करना चाहते हैं तो कृपया दान करें।</string>
+    <string name="built_by">द्वारा निर्मित एवं हस्ताक्षरित</string>
+    <string name="built_by_error">इस बिल्ड पर 1fexd द्वारा हस्ताक्षर नहीं किया गया था। इसका मतलब जरूरी नहीं कि कुछ बुरा हो क्योंकि कोई भी स्रोत कोड को फोर्क कर सकता है और अपना ऐप बना सकता है, लेकिन वे दुर्भावनापूर्ण इरादे से ऐसा कर सकते हैं।</string>
+    <plurals name="months">
+        <item quantity="one">%s महीना</item>
+        <item quantity="other">%s महीने</item>
+    </plurals>
 </resources>

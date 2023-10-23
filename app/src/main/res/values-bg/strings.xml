@@ -13,7 +13,7 @@
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
-    <string name="donate_explainer">Дарете на автора с банкова карта</string>
+    <string name="donate_explainer">Ако желаете да направите дарение и да получите <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
@@ -46,7 +46,7 @@
     <string name="paste">Поставяне</string>
     <string name="error">Грешка</string>
     <string name="github">Гитхъб</string>
-    <string name="donate_crypto">Дарения</string>
+    <string name="donate_crypto">Дарение на криптовалута</string>
     <string name="links_explainer">Настройки за обработка на препратките</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Политика за поверителност</string>
     <string name="loading_link">Зареждане на препратка…</string>
@@ -239,7 +239,7 @@
 \nконтрол върху</string>
     <string name="onboarding3_highlight">всичко</string>
     <string name="onboarding4_headline">Изключете обработката на препратки,</string>
-    <string name="welcome_to_linksheet_explainer">LinkSheet възстановява приложението за избор, което се показваше когато потребителя докоснеше препратка в Андроид &lt;12 и има повече от приложение, което да я отвори.</string>
+    <string name="welcome_to_linksheet_explainer">LinkSheet възстановява приложението за избор, което се показваше когато потребителя докоснеше препратка в Андроид &lt;12 и има повече от приложение, което да я отвори</string>
     <string name="onboarding2_highlight">по ваш вкус</string>
     <string name="welcome_to_linksheet_explainer_2">За да работи приложението LinkSheet, трябва да бъде зададено като браузър на системата, за да може да прехваща отваряните препратки. Не се притеснявайте, LinkSheet разполага с много възможности за настройка, така че това няма да ограничи, а по-скоро ще подобри вашето изживяване.</string>
     <string name="title_activity_main">MainActivity</string>
@@ -280,7 +280,7 @@
     <string name="donation_instructions">Инструкции за даряване</string>
     <string name="open_link_with_subtitle_2">Първоначално, LinkSheet беше на основата на OpenWith</string>
     <string name="seal_subtitle_2">Seal беше страхотен източник на знания за Jetpack Compose</string>
-    <string name="mastodon_redirect_subtitle_2">Изходният код на Maston Redirect беше използван за справка за интеграцията с Shizuku</string>
+    <string name="mastodon_redirect_subtitle_2">Изходният код на Mastodon Redirect е използван за справка за интеграцията с Shizuku</string>
     <string name="import_dumped_preference">Внасяне на настройки от дневника</string>
     <string name="import_and_override">Внасяне и заменяне</string>
     <string name="success">Готово</string>
@@ -305,11 +305,38 @@
     <string name="launch_onboaring_explainer">Проверка на екрана за обучение</string>
     <string name="thanks_for_donating">Благодаря за дарението!</string>
     <string name="dismiss">Затваряне</string>
-    <string name="donate_explainer_crypto">За да получите LinkSheet Pro, дарете €5 или повече и изпратете доказателство за плащането на <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_explainer_crypto">Ако сте дарили криптовалута, за да получите <b>LinkSheet Pro</b> изпратете доказателство за плащането на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="join">Присъединяване</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Заповядайте на нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
-    <string name="donate_card">С карта</string>
-    <string name="donate_card_subtitle">Здравейте! Използвате LinkSheet вече %s! За сравнение, времето за разработване на приложението е повече от <b>%s часа</b> в продължение на %s месеца. Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
-\nАко сте дарили криптовалута, за да получите LinkSheet Pro, дарете €5 или повече и изпратете доказателство за плащането на <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
+    <string name="donate_card_subtitle"> Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
+\nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
+    <plurals name="hours">
+        <item quantity="one">%s час</item>
+        <item quantity="other">%s часа</item>
+    </plurals>
+    <string name="branch">Разклонение:</string>
+    <string name="manual_build">Ръчно компилирано и подписано от 1fexd</string>
+    <string name="commit">Идентификатор:</string>
+    <string name="donate_learn_more">Научете повече</string>
+    <string name="type">Вид:</string>
+    <string name="flavor">Вариант:</string>
+    <string name="github_pipeline_build">Компилирано и подписано от работен процес на Гитхъб</string>
+    <string name="other">Друго</string>
+    <string name="app_setup">Настройка на приложението</string>
+    <plurals name="minutes">
+        <item quantity="one">%s минута</item>
+        <item quantity="other">%s минути</item>
+    </plurals>
+    <string name="built_by">Компилирано и подписано от</string>
+    <string name="donate">Дарете</string>
+    <plurals name="months">
+        <item quantity="one">%s месец</item>
+        <item quantity="other">%s месеца</item>
+    </plurals>
+    <string name="donate_other">Ако желаете да дарите по друг начин (SEPA, PayPal, друг вид криптовалута и др.) изпратете писмо на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>€5</b> ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което, в момента, само скрива напомнянето за даряване от основния екран, но в бъдеще ще предлага <b>възможности достъпни само там</b>.</string>
+    <string name="linksheet_donation_explainer">LinkSheet е резултат на повече от <b>%s</b> работа, в продължение на повече от <b>%s</b>. Ако оценявате труда ми, направете дарение.</string>
+    <string name="built_by_error">Приложението не е подписано от 1fexd. Това не е непременно нещо лошо, защото всеки може да вземе изходния код и да компилира приложението, но някой може да го направи с цел вреда.</string>
 </resources>

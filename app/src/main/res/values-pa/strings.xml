@@ -28,7 +28,7 @@
     <string name="copy_to_clipboard">ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ</string>
     <string name="preview_url_explainer">ਕਲਿਕ ਕੀਤੇ URL ਨੂੰ ਵਿਖਾਉਂਦਾ ਹੈ (ਪ੍ਰੋਸੈਸ ਹੋਣ ਤੋਂ ਬਾਅਦ)</string>
     <string name="theme_explainer">ਐਪ ਦਾ ਥੀਮ ਬਦਲੋ</string>
-    <string name="logs">ਲੌਗ</string>
+    <string name="logs">ਲੌਗਸ</string>
     <string name="no_apps_which_can_handle_links_found">ਕੋਈ ਐਪਸ ਨਹੀਂ ਮਿਲੀਆਂ ਜੋ ਲਿੰਕਾਂ ਨੂੰ ਸੰਭਾਲ ਸਕਦੀਆਂ ਹਨ।</string>
     <string name="bottom_sheet">ਹੇਠਲੀ ਸ਼ੀਟ</string>
     <string name="known_trackers">ਜਾਣੇ-ਪਛਾਣੇ ਟਰੈਕਰ</string>
@@ -124,7 +124,7 @@
     <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
     <string name="finish">ਸਮਾਪਤ</string>
-    <string name="donate_explainer">ਲੇਖਕ ਨੂੰ ਕ੍ਰੈਡਿਟ ਜਾਂ ਡੈਬਿਟ ਕਾਰਡ ਨਾਲ ਦਾਨ ਦਿਓ</string>
+    <string name="donate_explainer">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ <b>LinkSheet Pro</b> ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
@@ -251,11 +251,11 @@
     <string name="launch_onboaring_explainer">ਔਨਬੋਰਡਿੰਗ ਪ੍ਰਵਾਹ ਟੈਸਟ ਕਰੋ</string>
     <string name="always_disable_explainer">ਐਪ-ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਹਮੇਸ਼ਾਂ ਡਿਸੇਬਲ ਰੱਖੋ, ਚਾਹੇ ਐਪ ਜੋ ਵੀ ਵਰਤਣਾ ਚਾਹੁੰਦਾ ਹੈ</string>
     <string name="enable_ignore_libredirect_button_explainer">ਜੇਕਰ URL ਨੂੰ LibRedirect ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟ ਕੀਤਾ ਗਿਆ ਹੈ, ਤਾਂ ਹੇਠਲੇ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ, ਜੋ ਇਸਦੀ ਬਜਾਏ ਅਸਲੀ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ</string>
-    <string name="mastodon_redirect_subtitle_2">ਮੈਸਟੋਨ ਰੀਡਾਇਰੈਕਟ ਦੇ ਸਰੋਤ ਕੋਡ ਨੂੰ ਸ਼ਿਜ਼ੂਕੁ ਇੰਟਰੈਕਸ਼ਨ ਲਈ ਇੱਕ ਸੰਦਰਭ ਵਜੋਂ ਵਰਤਿਆ ਗਿਆ ਸੀ</string>
+    <string name="mastodon_redirect_subtitle_2">ਮੈਸਟਾਡੋਨ ਰੀਡਾਇਰੈਕਟ ਦੇ ਸਰੋਤ ਕੋਡ ਨੂੰ ਸ਼ਿਜ਼ੂਕੁ ਇੰਟਰੈਕਸ਼ਨ ਲਈ ਇੱਕ ਸੰਦਰਭ ਵਜੋਂ ਵਰਤਿਆ ਗਿਆ ਸੀ</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ਨੇ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ। ਹੋ ਸਕਦਾ ਲਿੰਕਸ਼ੀਟ ਦੀ ਸੂਚੀ ਪੂਰੀ ਨਾਂ ਹੋਵੇ। ਜੇ ਤੁਸੀਂ ਸੋਚਦੇ ਹੋ ਕਿ ਇਹ ਇੱਕ ਗਲਤੀ ਹੈ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਇੱਕ ਮੁੱਦਾ ਦਰਜ ਕਰੋ।</string>
     <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="none_explainer">ਸਿਰਫ਼ ਮੂਲ ਐਪਾਂ ਦੀ ਸੂਚੀ ਬਣਾਓ, ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਹਟਾਓ। ਜੇਕਰ ਸਿਰਫ਼ ਇੱਕ ਹੀ ਮੂਲ ਐਪ ਮੌਜੂਦ ਹੈ, ਤਾਂ ਇਹ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ। ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਸੂਚੀਬੱਧ ਹਨ।</string>
-    <string name="donate_crypto">ਦਾਨ ਕਰੋ</string>
+    <string name="donate_crypto">ਕ੍ਰਿਪਟੋ ਦੁਆਰਾ ਦਾਨ ਕਰੋ</string>
     <string name="seal">ਸੀਲ</string>
     <string name="use_text_share_copy_buttons_explainer">ਸਧਾਰਨ ਟੈਕਸਟ ਬਟਨਾਂ ਨਾਲ \"ਕਾਪੀ URL\", \"ਇਸ ਨਾਲ ਸਾਂਝਾ ਕਰੋ\", \"ਡਾਊਨਲੋਡ ਕਰੋ\" ਅਤੇ \" LibRedirect ਅਣਡਿੱਠ ਕਰੋ\" ਬਟਨਾਂ ਨੂੰ ਬਦਲਦਾ ਹੈ</string>
     <string name="follow_redirects_builtin_cache_explainer">ਬਿਲਟ-ਇਨ ਕੈਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਜੋ ਕਿ ਬਾਹਰੀ ਸੇਵਾ ਦੇ ਡੇਟਾਬੇਸ ਨਿਰਯਾਤ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ)</string>
@@ -282,7 +282,7 @@
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="follow_redirects_builtin_cache">ਬਿਲਟ-ਇਨ ਰੀਡਾਇਰੈਕਟ ਕੈਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
-    <string name="welcome_to_linksheet_explainer">ਲਿੰਕਸ਼ੀਟ \"ਯੂਆਰਐਲ-ਐਪ-ਚੋਣਕਾਰ\" ਨੂੰ \"ਰੀਸਟੋਰ\" ਕਰਦੀ ਹੈ ਜੋ ਉਦੋਂ ਪ੍ਰਗਟ ਹੁੰਦੀ ਹੈ ਜਦੋਂ ਉਪਭੋਗਤਾ ਨੇ ਐਂਡਰੌਇਡ &lt;12 \'ਤੇ ਇੱਕ ਲਿੰਕ ਨੂੰ ਟੈਪ ਕੀਤਾ ਸੀ ਅਤੇ ਉਸ ਵਿੱਚ ਕਈ ਐਪਸ ਸਥਾਪਤ ਸਨ ਜੋ ਲਿੰਕ ਨੂੰ ਸੰਭਾਲ ਸਕਦੀਆਂ ਸਨ।</string>
+    <string name="welcome_to_linksheet_explainer">ਲਿੰਕਸ਼ੀਟ \"ਯੂਆਰਐਲ-ਐਪ-ਚੋਣਕਾਰ\" ਨੂੰ \"ਰੀਸਟੋਰ\" ਕਰਦੀ ਹੈ ਜੋ ਉਦੋਂ ਪ੍ਰਗਟ ਹੁੰਦੀ ਹੈ ਜਦੋਂ ਉਪਭੋਗਤਾ ਨੇ ਐਂਡਰੌਇਡ &lt;12 \'ਤੇ ਇੱਕ ਲਿੰਕ ਨੂੰ ਟੈਪ ਕੀਤਾ ਸੀ ਅਤੇ ਉਸ ਵਿੱਚ ਕਈ ਐਪਸ ਸਥਾਪਤ ਸਨ ਜੋ ਲਿੰਕ ਨੂੰ ਸੰਭਾਲ ਸਕਦੀਆਂ ਸਨ</string>
     <string name="system">ਸਿਸਟਮ</string>
     <string name="no_log_entries">ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਕੋਈ ਲੌਗ ਨਹੀਂ ਹਨ।</string>
     <string name="apps_which_can_open_links">ਐਪਾਂ ਜੋ ਲਿੰਕ ਖੋਲ੍ਹ ਸਕਦੀਆਂ ਹਨ</string>
@@ -294,7 +294,7 @@
     <string name="shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="dont_show_filtered_item_explainer">ਕਦੇ ਵੀ ਟੌਪ ਸੈਕਸ਼ਨ ਨੂੰ ਨਹੀਂ ਵਿਖਾਏਗਾ ਜੋ ਕਲਿੱਕ ਕੀਤੇ ਹੋਸਟ ਲਈ ਆਖਰੀ ਵਰਤੇ ਐਪ ਦਾ ਸੁਝਾਅ ਦਿੰਦਾ ਹੈ</string>
     <string name="enable_copy_button">ਕਾਪੀ ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="version_name">ਪਛਾਣਕਰਤਾ:</string>
+    <string name="version_name">ਪੂਰਾ ਪਛਾਣਕਰਤਾ:</string>
     <string name="configure_explainer">LinkSheetCompat ਨੂੰ ਕੌਨਫਿਗਰ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="feature_flags">ਫੀਚਰ ਫਲੈਗ</string>
     <string name="onboarding2_headline">ਬਹੁਤ ਸਾਰੀਆਂ ਸੈਟਿੰਗਾਂ
@@ -305,11 +305,38 @@
     <string name="done">ਮੁਕੰਮਲ</string>
     <string name="thanks_for_donating">ਆਰਥਿਕ ਮੱਦਦ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!</string>
     <string name="dismiss">ਖ਼ਾਰਿਜ ਕਰੋ</string>
-    <string name="donate_explainer_crypto">LinkSheet Pro ਲੈਣ ਲਈ, 5€ ਜਾਂ ਵੱਧ ਦਾਨ ਕਰੋ ਅਤੇ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> ਨੂੰ ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ ਭੇਜੋ</string>
+    <string name="donate_explainer_crypto">ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਸਮੇਂ, <b>LinkSheet Pro</b> ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ, ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਭੇਜੋ</string>
     <string name="join">ਜੁੜੋ</string>
     <string name="discord">ਡਿਸਕੌਰਡ</string>
     <string name="discord_explainer">ਸਾਡੇ ਡਿਸਕੌਰਡ ਸਰਵਰ \'ਤੇ ਗੱਲਬਾਤ ਕਰੋ! LinkSheet ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਅਤੇ devs ਨਾਲ ਇਸਦੇ ਭਵਿੱਖ ਅਤੇ ਹੋਰ ਯਤਨਾਂ ਬਾਰੇ ਗੱਲਬਾਤ ਕਰੋ!</string>
-    <string name="donate_card">ਕਾਰਡ ਦੁਆਰਾ</string>
-    <string name="donate_card_subtitle">ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ! ਤੁਸੀਂ %s ਲਈ ਪਹਿਲਾਂ ਹੀ ਲਿੰਕਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰ ਚੁੱਕੇ ਹੋ! ਇਸ ਨੂੰ ਦ੍ਰਿਸ਼ਟੀਕੋਣ ਵਿੱਚ ਰੱਖਣ ਲਈ, %s ਮਹੀਨਿਆਂ ਦੇ ਦੌਰਾਨ ਵਿਕਾਸ ਵਿੱਚ <b>%s ਘੰਟੇ</b> ਤੋਂ ਵੱਧ ਸਮਾਂ ਲੱਗੇ। ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਥਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।
-\nਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਰਾਹੀਂ ਦਾਨ ਕਰਦੇ ਹੋ, ਤਾਂ ਲਿੰਕਸ਼ੀਟ ਪ੍ਰੋ ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ, 5€ ਜਾਂ ਵੱਧ ਦਾਨ ਕਰੋ ਅਤੇ ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਭੇਜੋ।</string>
+    <string name="donate_card">ਕਾਰਡ ਨਾਲ ਦਾਨ ਕਰੋ (BuyMeACoffee ਰਾਹੀਂ)</string>
+    <string name="donate_card_subtitle"> ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।
+\n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ।</string>
+    <plurals name="hours">
+        <item quantity="one">%s ਘੰਟਾ</item>
+        <item quantity="other">%s ਘੰਟੇ</item>
+    </plurals>
+    <string name="branch">ਬ੍ਰਾਂਚ:</string>
+    <string name="manual_build">1fexd ਦੁਆਰਾ ਮੈਨੁਅਲ ਰੂਪ \'ਚ ਨਿਰਮਤ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
+    <string name="commit">ਕਮਿੱਟ:</string>
+    <string name="donate_learn_more">ਜਿਆਦਾ ਜਾਣੋ</string>
+    <string name="donate_other">ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਤਰੀਕੇ ਨਾਲ ਦਾਨ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ (SEPA ਟ੍ਰਾਂਸਫਰ, ਪੇਪਾਲ, ਹੋਰ ਕ੍ਰਿਪੋਟੋਕਰੰਸੀ, ਆਦਿ), ਤਾਂ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਵੀ ਇੱਕ ਈਮੇਲ ਭੇਜੋ</string>
+    <string name="type">ਕਿਸਮ:</string>
+    <string name="flavor">ਵੰਨਗੀ:</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ ਨੂੰ ਲੁਕਾਉਂਦਾ ਹੈ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਉੱਥੇ <b>ਪ੍ਰੋ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ</b> ਹੋਣਗੀਆਂ</string>
+    <string name="github_pipeline_build">ਗਿਥਬ ਵਰਕਫਲੋ ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
+    <string name="other">ਹੋਰ</string>
+    <string name="app_setup">ਐਪ ਸੈੱਟਅੱਪ</string>
+    <plurals name="minutes">
+        <item quantity="one">%s ਮਿੰਟ</item>
+        <item quantity="other">%s ਮਿੰਟ</item>
+    </plurals>
+    <string name="linksheet_donation_explainer">ਲਿੰਕਸ਼ੀਟ <b>%s</b> ਤੋਂ ਵੱਧ ਕੰਮ ਦਾ ਨਤੀਜਾ ਹੈ ਜੋ <b>%s</b> ਤੋਂ ਵੱਧ ਦੀ ਮਿਆਦ ਵਿੱਚ ਕੀਤਾ ਗਿਆ। ਜੇ ਤੁਸੀਂ ਮੇਰੇ ਕੰਮ ਲਈ ਕੁਝ ਪ੍ਰਸ਼ੰਸਾ ਦਿਖਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਦਾਨ ਕਰੋ।</string>
+    <string name="built_by">ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਸਾਈਨ ਕੀਤਾ</string>
+    <string name="donate">ਦਾਨ ਕਰੋ</string>
+    <string name="built_by_error">ਇਹ ਬਿਲਡ 1fexd ਦੁਆਰਾ ਹਸਤਾਖਰਿਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਸੀ। ਇਹ ਜ਼ਰੂਰੀ ਤੌਰ \'ਤੇ ਕੁਝ ਵੀ ਮਾੜਾ ਨਹੀਂ ਹੈ ਕਿਉਂਕਿ ਕੋਈ ਵੀ ਸਰੋਤ ਕੋਡ ਨੂੰ ਫੋਰਕ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ ਆਪਣੀ ਐਪ ਬਣਾ ਸਕਦਾ ਹੈ, ਪਰ ਉਹ ਗਲਤ ਇਰਾਦੇ ਨਾਲ ਅਜਿਹਾ ਕਰ ਸਕਦੇ ਹਨ।</string>
+    <plurals name="months">
+        <item quantity="one">%s ਮਹੀਨਾ</item>
+        <item quantity="other">%s ਮਹੀਨੇ</item>
+    </plurals>
 </resources>

@@ -52,7 +52,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 ## Join our Discord
 
 <div align="center">
-  <a href="https://discord.gg/GVNphPrQPf"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
+  <a href="https://discord.gg/XndZet2pWF"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
 </div>
 
 ## Features

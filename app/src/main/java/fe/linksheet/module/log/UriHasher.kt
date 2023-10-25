@@ -1,5 +1,6 @@
 package fe.linksheet.module.log
 
+import fe.kotlin.extension.forEachWithInfo
 import fe.linksheet.extension.appendHashed
 import fe.linksheet.extension.appendHashedTrim
 import fe.uribuilder.ParsedUri
@@ -36,7 +37,11 @@ fun buildHashedUriString(uriString: String, mac: Mac): String {
 
 private fun StringBuilder.parse(uri: ParsedUri, mac: Mac) {
     val authoritySpecified: Boolean = if (uri.encodedAuthority != null) {
-        append("//").appendHashedTrim(mac, 6, uri.encodedAuthority)
+        append("//")
+        uri.encodedAuthority!!.split(".").forEachWithInfo { element, _, _, last ->
+            appendHashedTrim(mac, 6, element)
+            if (!last) append(".")
+        }
         true
     } else if (uri.host != null) {
         append("//")

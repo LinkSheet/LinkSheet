@@ -10,7 +10,6 @@ import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
-import java.util.UUID
 
 object AppPreferences : Preferences() {
     val enableCopyButton = booleanPreference("enable_copy_button")
@@ -23,6 +22,8 @@ object AppPreferences : Preferences() {
         BrowserHandler.BrowserMode.AlwaysAsk,
         BrowserHandler.BrowserMode.Companion
     )
+
+    @SensitivePreference
     val selectedBrowser = stringPreference("selected_browser")
 
     val inAppBrowserMode = mappedPreference(
@@ -31,6 +32,7 @@ object AppPreferences : Preferences() {
         BrowserHandler.BrowserMode.Companion
     )
 
+    @SensitivePreference
     val selectedInAppBrowser = stringPreference("selected_in_app_browser")
     val unifiedPreferredBrowser = booleanPreference("unified_preferred_browser", true)
 
@@ -70,10 +72,13 @@ object AppPreferences : Preferences() {
     val enableRequestPrivateBrowsingButton = booleanPreference(
         "enable_request_private_browsing_button"
     )
+
+    @SensitivePreference
     val useTimeMs = longPreference("use_time", 0)
 
     val showLinkSheetAsReferrer = booleanPreference("show_as_referrer", false)
 
+    @SensitivePreference
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
     }
@@ -83,22 +88,27 @@ object AppPreferences : Preferences() {
 
     val loggablePreferences by lazy {
         all.toMutableMap().apply {
-            packagePreferences.forEach { remove(it.key) }
+            sensitivePreferences.forEach { remove(it.key) }
         }.map { (_, pkg) -> pkg }
     }
 
-    private val packagePreferences = listOf(selectedBrowser, selectedInAppBrowser)
+    private val sensitivePreferences = listOf(
+        useTimeMs, logKey,
+    )
 
+    private val sensitivePackagePreferences = listOf(
+        selectedBrowser, selectedInAppBrowser
+    )
 
     fun logPackages(
         redact: Boolean,
         logger: Logger,
         repository: AppPreferenceRepository
-    ): Map<String, String?> = packagePreferences.associate {
+    ): Map<String, String?> = sensitivePackagePreferences.associate {
         val value = repository.getString(it)
         it.key to if (value != null) {
             logger.dumpParameterToString(redact, value, PackageProcessor)
-        } else null
+        } else "<null>"
     }
 }
 

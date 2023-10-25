@@ -43,7 +43,6 @@ import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.ioState
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.lineSeparator
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -69,21 +68,9 @@ fun LogTextSettingsRoute(
         ExportLogDialog(
             logViewCommon = viewModel.logViewCommon,
             clipboardManager = viewModel.clipboardManager,
+            logEntries = state!!,
             close = close,
         )
-//        ExportLogDialog(
-//            logViewCommon = viewModel.logViewCommon,
-//            clipboardManager = viewModel.clipboardManager,
-//            close = close,
-//            entryList = state ?: emptyList(),
-//        ) { sb, redactLog ->
-//            state!!.joinTo(
-//                sb,
-//                separator = lineSeparator,
-//                postfix = lineSeparator,
-//                transform = items[redactLog]!!
-//            )
-//        }
     }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->

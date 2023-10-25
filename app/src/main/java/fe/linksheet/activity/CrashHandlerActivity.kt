@@ -34,7 +34,8 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.lineSeparator
+import fe.linksheet.module.log.AppLogger
+import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
@@ -64,8 +65,8 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                     canScroll = { true }
                 )
 
-                val exportDialog = dialogHelper<Unit, String, Unit>(
-                    fetch = { exception },
+                val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
+                    fetch = { AppLogger.getInstance().logEntries },
                     awaitFetchBeforeOpen = true,
                     dynamicHeight = true
                 ) { state, close ->
@@ -73,6 +74,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                         logViewCommon = viewModel.logViewCommon,
                         clipboardManager = viewModel.clipboardManager,
                         close = close,
+                        logEntries = state!!
                     )
                 }
 

@@ -86,11 +86,11 @@
     <string name="apps_explainer">Aplicaciones predeterminadas y Aplicaciones que pueden abrir enlaces</string>
     <string name="enabled">Activado</string>
     <string name="redirect_resolve_type_not_resolved">ninguno</string>
-    <string name="onboarding4_paragraph_2">"Esto es muy molesto, ya que a veces no quieres abrir un enlace en su aplicación, sino en un navegador (por ejemplo, para marcarlo como favorito).
+    <string name="onboarding4_paragraph_2">Esto es muy molesto, ya que a veces no quieres abrir un enlace en su aplicación, sino en un navegador (por ejemplo, para marcarlo como favorito).
 \n
-\nAhh, el clásico Google, estropeando sus propios productos sin una forma sencilla de restaurar el comportamiento anterior.
+\nAhh, clásico de Google, paralizar sus propios productos sin una forma sencilla de restaurar el comportamiento anterior.
 \n
-\n  De todos modos, dejaron una pequeña \"laguna\": el manejo de enlaces se puede desactivar por aplicación. Puede suponer que esto le devolverá al antiguo selector de aplicaciones, pero por supuesto (¡gracias Google!), ese no es el caso, ya que ahora el enlace siempre se abrirá en su navegador predeterminado. Por eso se creó LinkSheet."</string>
+\n De todas formas, han dejado un pequeño \"resquicio\": La gestión de enlaces se puede desactivar para cada aplicación. Puedes suponer que esto devolvería el antiguo selector de aplicaciones, pero por supuesto (¡gracias Google!), no es el caso, ya que ahora, el enlace siempre se abrirá en tu navegador por defecto. Por eso se creó LinkSheet.</string>
     <string name="log_viewer_timestamp">Mostrando el registro de %s</string>
     <string name="success">Éxito</string>
     <string name="onboarding0_headline">Hora de recuperar</string>

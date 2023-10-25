@@ -103,6 +103,7 @@ This is a hobby project, and since I have many of those, I sometimes choose to i
 
 * First of all, thank you to everyone who has contributed translations to this project via [Weblate](https://hosted.weblate.org/projects/linksheet/)
 * Secondly, please acknowledge that all translations (e.g. everything that is not english) is maintained by the community. I do not check these translations currently, so if there are mistakes or intentional errors please open an issue or correct them yourself!
+* Thirdly, special shout-out to @Daviteusz, this man updates the polish translations like daily or something, you're something else man, thank you very much!
 
 
 ## Acknowledgements

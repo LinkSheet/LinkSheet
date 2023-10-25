@@ -25,3 +25,4 @@
 -dontwarn fe.gson.util.JsonIOUtil
 
 -keep class fe.linksheet.**
+-keep class fe.gson.**

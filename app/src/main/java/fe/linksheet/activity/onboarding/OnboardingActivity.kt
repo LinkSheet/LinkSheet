@@ -22,6 +22,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.derivedStateOf
@@ -72,7 +73,6 @@ class OnboardingActivity : ComponentActivity() {
                     coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
                 }
 
-//
                 val onboardingScreen by remember(pagerState) {
                     derivedStateOf { onboardingScreens[pagerState.currentPage] }
                 }
@@ -193,7 +193,7 @@ class OnboardingActivity : ComponentActivity() {
                             ) {
                                 ExtendedFabIconRight(
                                     text = onboardingScreen.nextButton,
-                                    icon = Icons.Filled.ArrowForward,
+                                    icon = Icons.AutoMirrored.Filled.ArrowForward,
                                     contentDescription = R.string.next,
                                     onClick = {
                                         if (pagerState.currentPage == onboardingScreens.size - 1) {

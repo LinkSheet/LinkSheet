@@ -27,6 +27,10 @@
         android:localeConfig="@xml/locales_config"
         tools:targetApi="31">
         <activity
+            android:name=".activity.onboarding2.OnboardingActivity2"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".activity.onboarding.OnboardingActivity"
             android:exported="true"
             android:label="@string/title_activity_onboarding"

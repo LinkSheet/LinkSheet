@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
+import fe.linksheet.extension.compose.angledGradientBackground
 import fe.linksheet.ui.PoppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,10 +56,12 @@ fun OnboardingScaffold(
     Scaffold(
         modifier = modifier
             .fillMaxSize()
-            .paint(
-                painter = painterResource(drawable),
-                contentScale = ContentScale.Crop
-            ),
+//            .angledGradientBackground(listOf(Color(0xFFF8F8F8), Color(0xFFECEBE9)), -135.0f)
+//            .paint(
+//                painter = painterResource(drawable),
+//                contentScale = ContentScale.Crop
+//            )
+            ,
         containerColor = Color.Transparent,
         contentColor = Color.Transparent,
         topBar = {
@@ -90,7 +94,7 @@ fun OnboardingScaffold(
                     if (drawBackButton) {
                         IconButton(onClick = onBackPressed) {
                             Icon(
-                                imageVector = Icons.Default.ArrowBack,
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = stringResource(R.string.back),
                             )
                         }

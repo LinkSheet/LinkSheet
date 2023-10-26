@@ -16,10 +16,7 @@ gradle = { id = "gradle", version = "8.1.1" }
 
 [versions]
 
-kotlin = "1.9.10"
-##  ⬆ = "1.9.20-Beta"
-##  ⬆ = "1.9.20-Beta2"
-##  ⬆ = "1.9.20-RC"
+kotlin = "1.9.20-RC2"
 
 koin = "3.5.0"
 linkSheetInterConnect = "2.3.2"

@@ -41,9 +41,17 @@ class BrowserResolver(val context: Application) {
             "com.vivaldi.browser",
             "com.vivaldi.browser.snapshot",
             "org.cromite.cromite",
-            "us.spotco.mulch"
+            "us.spotco.mulch",
+            "org.chromium.thorium",
+            "com.sec.android.app.sbrowser",
+            "com.sec.android.app.sbrowser.beta"
         ),
-        Other("com.opera.mini.native", "com.opera.mini.native.beta");
+        Other(
+            "com.opera.mini.native",
+            "com.opera.mini.native.beta",
+            "com.stoutner.privacybrowser.standard",
+            "com.duckduckgo.mobile.android"
+        );
 
         companion object {
             fun isKnownBrowser(packageName: String): KnownBrowsers? {

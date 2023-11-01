@@ -3,6 +3,7 @@ import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
+import net.nemerosa.versioning.VersionInfo
 import net.nemerosa.versioning.VersioningExtension
 import java.time.Instant
 import java.time.LocalDateTime
@@ -60,7 +61,10 @@ android {
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-        val versionInfo = providers.provider { versioning.info }.get()
+        var versionInfo = VersionInfo("git")
+        providers.exec {
+            versionInfo = versioning.info
+        }
 
         versionCode = versionInfo.tag?.let {
             versionInfo.versionNumber.versionCode

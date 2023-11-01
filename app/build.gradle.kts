@@ -3,7 +3,6 @@ import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import groovy.lang.Closure
-import net.nemerosa.versioning.VersionInfo
 import net.nemerosa.versioning.VersioningExtension
 import java.time.Instant
 import java.time.LocalDateTime
@@ -61,23 +60,18 @@ android {
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
+        val versionInfo = providers.provider { versioning.info }.get()
 
-        providers.exec {
-            val versionInfo = versioning.info
-            versionCode = versionInfo.tag?.let {
-                versionInfo.versionNumber.versionCode
-            } ?: (now / 1000).toInt()
-            versionName = versionInfo.tag ?: versionInfo.full
+        versionCode = versionInfo.tag?.let {
+            versionInfo.versionNumber.versionCode
+        } ?: (now / 1000).toInt()
 
-            val archivesBaseName = if (versionInfo.tag != null) {
-                "$appName-$versionName"
-            } else "$appName-${dtf.format(localDateTime)}-$versionName"
+        versionName = versionInfo.tag ?: versionInfo.full
+        val archivesBaseName = if (versionInfo.tag != null) {
+            "$appName-$versionName"
+        } else "$appName-${dtf.format(localDateTime)}-$versionName"
 
-            setProperty("archivesBaseName", archivesBaseName)
-
-            buildStringConfigField("COMMIT", versionInfo.commit)
-            buildStringConfigField("BRANCH", versionInfo.branch)
-        }
+        setProperty("archivesBaseName", archivesBaseName)
 
         val supportedLocales = arrayOf(
             "en", "es", "ar", "bg", "bn", "de", "it", "pl", "ru", "tr", "zh", "zh-rTW"
@@ -90,7 +84,8 @@ android {
         })
 
         buildConfigField("long", "BUILT_AT", "$now")
-
+        buildStringConfigField("COMMIT", versionInfo.commit)
+        buildStringConfigField("BRANCH", versionInfo.branch)
         buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

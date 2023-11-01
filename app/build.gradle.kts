@@ -61,21 +61,23 @@ android {
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-        var versionInfo = VersionInfo("git")
+
         providers.exec {
-            versionInfo = versioning.info
+            val versionInfo = versioning.info
+            versionCode = versionInfo.tag?.let {
+                versionInfo.versionNumber.versionCode
+            } ?: (now / 1000).toInt()
+            versionName = versionInfo.tag ?: versionInfo.full
+
+            val archivesBaseName = if (versionInfo.tag != null) {
+                "$appName-$versionName"
+            } else "$appName-${dtf.format(localDateTime)}-$versionName"
+
+            setProperty("archivesBaseName", archivesBaseName)
+
+            buildStringConfigField("COMMIT", versionInfo.commit)
+            buildStringConfigField("BRANCH", versionInfo.branch)
         }
-
-        versionCode = versionInfo.tag?.let {
-            versionInfo.versionNumber.versionCode
-        } ?: (now / 1000).toInt()
-
-        versionName = versionInfo.tag ?: versionInfo.full
-        val archivesBaseName = if (versionInfo.tag != null) {
-            "$appName-$versionName"
-        } else "$appName-${dtf.format(localDateTime)}-$versionName"
-
-        setProperty("archivesBaseName", archivesBaseName)
 
         val supportedLocales = arrayOf(
             "en", "es", "ar", "bg", "bn", "de", "it", "pl", "ru", "tr", "zh", "zh-rTW"
@@ -88,8 +90,7 @@ android {
         })
 
         buildConfigField("long", "BUILT_AT", "$now")
-        buildStringConfigField("COMMIT", versionInfo.commit)
-        buildStringConfigField("BRANCH", versionInfo.branch)
+
         buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

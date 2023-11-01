@@ -119,7 +119,7 @@
         </activity-alias>
 
         <service
-            android:name=".customtabs.LinkSheetCustomTabsService"
+            android:name=".customtab.LinkSheetCustomTabsService"
             android:exported="true"
             tools:ignore="ExportedService">
             <intent-filter>

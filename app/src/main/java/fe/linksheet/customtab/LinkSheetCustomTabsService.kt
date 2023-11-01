@@ -1,4 +1,4 @@
-package fe.linksheet.customtabs
+package fe.linksheet.customtab
 
 import android.net.Uri
 import android.os.Bundle

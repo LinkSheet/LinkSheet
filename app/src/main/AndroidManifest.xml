@@ -30,11 +30,6 @@
             android:name=".activity.onboarding.OnboardingActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.onboarding.OnboardingActivity"
-            android:exported="true"
-            android:label="@string/title_activity_onboarding"
-            android:theme="@style/AppTheme" />
 
         <provider
             android:name="rikka.shizuku.ShizukuProvider"

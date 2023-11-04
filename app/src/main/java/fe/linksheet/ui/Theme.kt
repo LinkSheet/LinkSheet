@@ -25,6 +25,7 @@ import fe.android.preference.helper.EnumTypeMapper
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinContext
 
 
 private val LightColors = lightColorScheme(
@@ -177,11 +178,13 @@ fun AppTheme(
 
 @Composable
 fun AppHost(content: @Composable () -> Unit) {
-    AppTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Surface(color = MaterialTheme.colorScheme.surface) {
-                Column(modifier = Modifier.fillMaxSize()) {
-                    content()
+    KoinContext {
+        AppTheme {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Surface(color = MaterialTheme.colorScheme.surface) {
+                    Column(modifier = Modifier.fillMaxSize()) {
+                        content()
+                    }
                 }
             }
         }

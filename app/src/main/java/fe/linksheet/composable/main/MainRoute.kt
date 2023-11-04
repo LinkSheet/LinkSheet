@@ -186,6 +186,8 @@ fun MainRoute(
                                 sheetOpen = item
                             }
                         )
+
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }

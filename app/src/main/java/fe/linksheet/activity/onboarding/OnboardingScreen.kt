@@ -83,7 +83,7 @@ abstract class RawOnboardingScreen(
 }
 
 data object Onboarding0Screen : ImageOnboardingScreen(
-    R.drawable.onboarding0_notext,
+    R.drawable.onboarding0_notext_resized,
     TextAlign.Start,
     R.string.get_started,
     R.string.onboarding0_headline,
@@ -144,7 +144,7 @@ data object Onboarding1Screen :
 }
 
 data object Onboarding2Screen : ImageOnboardingScreen(
-    R.drawable.onboarding2_notext,
+    R.drawable.onboarding2_notext_resized,
     TextAlign.End,
     R.string.next,
     R.string.onboarding2_headline,
@@ -152,7 +152,7 @@ data object Onboarding2Screen : ImageOnboardingScreen(
 )
 
 data object Onboarding3Screen : ImageOnboardingScreen(
-    R.drawable.onboarding3_notext,
+    R.drawable.onboarding3_notext_resized,
     TextAlign.Start,
     R.string.next,
     R.string.onboarding3_headline,
@@ -228,7 +228,7 @@ data object Onboarding5Screen : RawOnboardingScreen(
 }
 
 data object Onboarding6Screen : ImageOnboardingScreen(
-    R.drawable.onboarding6_notext,
+    R.drawable.onboarding6_notext_resized,
     TextAlign.End,
     R.string.next,
     R.string.onboarding6_headline,
@@ -236,7 +236,7 @@ data object Onboarding6Screen : ImageOnboardingScreen(
 )
 
 data object Onboarding7Screen : ImageOnboardingScreen(
-    R.drawable.onboarding7_notext,
+    R.drawable.onboarding7_notext_resized,
     TextAlign.Start,
     R.string.finish,
     R.string.onboarding7_headline,

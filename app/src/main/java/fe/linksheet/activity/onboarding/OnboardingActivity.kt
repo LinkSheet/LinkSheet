@@ -141,7 +141,10 @@ class OnboardingActivity : ComponentActivity() {
                         .fillMaxSize()
                         .angledGradientBackground(
 //                            listOf(Color.Red, Color.Blue),
-                            listOf(Color(0xFF0C0404), Color(0xFF1B0F0F)),
+                            if (isLightTheme) listOf(
+                                Color(0xFFF8F8F8),
+                                Color(0xFFECEBE9)
+                            ) else listOf(Color(0xFF0C0404), Color(0xFF1B0F0F)),
                             -135f
                         ),
 //                        .angledGradientBackground(
@@ -158,13 +161,19 @@ class OnboardingActivity : ComponentActivity() {
                                 if (headline != null && highlighted != null) {
                                     Text(
                                         text = buildAnnotatedString {
-                                            withStyle(style = SpanStyle(color = Color(0xFF2B7AE2))) {
+                                            withStyle(style = SpanStyle(color = if(isLightTheme) Color(0xFF2B7AE2) else Color(
+                                                0xFF6A9EE2
+                                            )
+                                            )) {
                                                 append(stringResource(id = headline!!))
                                             }
 
                                             append("\n")
 
-                                            withStyle(style = SpanStyle(color = Color(0xFF150E56))) {
+                                            withStyle(style = SpanStyle(color =  if(isLightTheme) Color(0xFF150E56) else Color(
+                                                0xFF483BC2
+                                            )
+                                            )) {
                                                 append(stringResource(id = highlighted!!))
                                             }
                                         },
@@ -219,7 +228,10 @@ class OnboardingActivity : ComponentActivity() {
                                         .fillMaxHeight(),
                                     contentPadding = PaddingValues(horizontal = 15.dp)
                                 ) {
-                                    (onboardingScreen as? ActionOnboardingScreen<*>)?.content(this,  isLightTheme)
+                                    (onboardingScreen as? ActionOnboardingScreen<*>)?.content(
+                                        this,
+                                        isLightTheme
+                                    )
                                 }
                             }
                         }
@@ -228,11 +240,12 @@ class OnboardingActivity : ComponentActivity() {
                             modifier = Modifier
                                 .align(Alignment.BottomCenter)
                                 .fillMaxWidth()
+                                .navigationBarsPadding()
                         ) {
                             if (onboardingScreen !is RawOnboardingScreen) {
                                 Row(
                                     modifier = Modifier
-                                        .height(30.dp)
+                                        .height(15.dp)
                                         .fillMaxWidth()
                                         .zIndex(2f)
                                         .align(Alignment.BottomCenter),
@@ -272,7 +285,6 @@ class OnboardingActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .align(Alignment.BottomEnd)
                                             .padding(top = 10.dp, bottom = 10.dp)
-                                            .navigationBarsPadding()
                                     ) {
                                         ExtendedFabIconRight(
                                             text = onboardingScreen.nextButton,

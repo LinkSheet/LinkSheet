@@ -151,7 +151,7 @@ class OnboardingActivity : ComponentActivity() {
                     topBar = {
                         LargeTopAppBar(
                             modifier = Modifier,
-                            containerColor = Color.Transparent,
+//                            containerColor = Color.Transparent,
                             title = {
                                 if (headline != null && highlighted != null) {
                                     Text(

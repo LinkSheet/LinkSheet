@@ -92,6 +92,8 @@ class OnboardingActivity : ComponentActivity() {
 
         setContent {
             AppHost {
+                val isLightTheme = onboardingViewModel.theme.value.IsLightTheme()
+
                 val pagerState = rememberPagerState(pageCount = {
                     onboardingScreens.size
                 })
@@ -138,8 +140,8 @@ class OnboardingActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                         .angledGradientBackground(
-                            listOf(Color.Red, Color.Blue),
-//                            listOf(Color(0xFF0C0404), Color(0xFF1B0F0F)),
+//                            listOf(Color.Red, Color.Blue),
+                            listOf(Color(0xFF0C0404), Color(0xFF1B0F0F)),
                             -135f
                         ),
 //                        .angledGradientBackground(
@@ -151,7 +153,7 @@ class OnboardingActivity : ComponentActivity() {
                     topBar = {
                         LargeTopAppBar(
                             modifier = Modifier,
-//                            containerColor = Color.Transparent,
+                            containerColor = Color.Transparent,
                             title = {
                                 if (headline != null && highlighted != null) {
                                     Text(
@@ -195,10 +197,14 @@ class OnboardingActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .paint(
-                                painter = painterResource(onboardingScreen.backgroundImage),
-                                contentScale = ContentScale.Crop
+                            .then(
+                                if (onboardingScreen.backgroundImage == null) Modifier
+                                else Modifier.paint(
+                                    painter = painterResource(onboardingScreen.backgroundImage!!),
+                                    contentScale = ContentScale.Crop
+                                )
                             )
+
                     ) {
                         HorizontalPager(
                             state = pagerState,
@@ -213,9 +219,7 @@ class OnboardingActivity : ComponentActivity() {
                                         .fillMaxHeight(),
                                     contentPadding = PaddingValues(horizontal = 15.dp)
                                 ) {
-                                    (onboardingScreen as? ActionOnboardingScreen<*>)?.content(
-                                        this
-                                    )
+                                    (onboardingScreen as? ActionOnboardingScreen<*>)?.content(this,  isLightTheme)
                                 }
                             }
                         }

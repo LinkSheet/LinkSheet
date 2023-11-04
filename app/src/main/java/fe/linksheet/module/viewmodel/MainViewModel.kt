@@ -21,6 +21,7 @@ import androidx.core.content.getSystemService
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getState
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
@@ -47,6 +48,7 @@ class MainViewModel(
     val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
     val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)
+    var theme = preferenceRepository.getState(AppPreferences.theme)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

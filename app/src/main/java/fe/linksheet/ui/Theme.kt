@@ -103,6 +103,13 @@ private tailrec fun Context.findWindow(): Window? = when (this) {
 enum class Theme {
     System, Light, Dark, AmoledBlack;
 
+    @Composable
+    fun IsLightTheme(systemDarkTheme: Boolean = isSystemInDarkTheme()): Boolean {
+        if(this == Light) return true
+        if(this == System) return !systemDarkTheme
+        return false
+    }
+
     companion object Companion : EnumTypeMapper<Theme>(Theme.values())
 }
 
@@ -119,7 +126,9 @@ fun AppTheme(
     val colorScheme = when (theme) {
         Theme.System -> {
             when {
-                AndroidVersion.AT_LEAST_API_31_S -> if (systemDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
+                AndroidVersion.AT_LEAST_API_31_S -> if (systemDarkTheme) dynamicDarkColorScheme(
+                    context
+                ) else dynamicLightColorScheme(
                     context
                 )
 

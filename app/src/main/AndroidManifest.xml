@@ -29,7 +29,6 @@
         <activity
             android:name=".activity.onboarding.OnboardingActivity"
             android:exported="true"
-            android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme" />
 
         <provider

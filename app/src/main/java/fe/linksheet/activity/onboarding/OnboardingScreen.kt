@@ -35,12 +35,13 @@ import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.util.ExtendedFabIconRight
+import fe.linksheet.ui.Theme
 import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.Job
 
 
 abstract class OnboardingScreen(
-    @DrawableRes val backgroundImage: Int,
+    @DrawableRes val backgroundImage: Int?,
     val textAlign: TextAlign,
     @StringRes val nextButton: Int,
     @StringRes val headline: Int?,
@@ -48,7 +49,7 @@ abstract class OnboardingScreen(
 )
 
 abstract class ImageOnboardingScreen(
-    @DrawableRes backgroundImage: Int,
+    @DrawableRes backgroundImage: Int?,
     textAlign: TextAlign,
     @StringRes nextButton: Int,
     @StringRes headline: Int?,
@@ -62,8 +63,8 @@ abstract class ActionOnboardingScreen<T>(
     textAlign: TextAlign,
     @StringRes headline: Int,
     @StringRes highlight: Int,
-) : OnboardingScreen(R.drawable.gradient, textAlign, nextButton, headline, highlight) {
-    abstract fun content(scope: LazyListScope)
+) : OnboardingScreen(null, textAlign, nextButton, headline, highlight) {
+    abstract fun content(scope: LazyListScope, lightTheme: Boolean)
 
     @Composable
     abstract fun composeSetup(back: () -> Job, next: () -> Job): T
@@ -76,7 +77,7 @@ abstract class RawOnboardingScreen(
     textAlign: TextAlign,
     @StringRes headline: Int?,
     @StringRes highlight: Int?,
-) : OnboardingScreen(R.drawable.gradient, textAlign, nextButton, headline, highlight) {
+) : OnboardingScreen(null, textAlign, nextButton, headline, highlight) {
     @Composable
     abstract fun Render(back: () -> Job, next: () -> Job)
 }
@@ -96,7 +97,7 @@ data object Onboarding1Screen :
         R.string.onboarding1_headline,
         R.string.app_name
     ) {
-    override fun content(scope: LazyListScope) {
+    override fun content(scope: LazyListScope, lightTheme: Boolean) {
         scope.item(key = "text") {
             Text(
                 text = buildAnnotatedString {
@@ -105,7 +106,7 @@ data object Onboarding1Screen :
                     append(text = stringResource(id = R.string.welcome_to_linksheet_explainer_2))
                 },
                 fontSize = 15.sp,
-                color = Color.Black,
+                color = if (lightTheme) Color.Black else Color.White,
             )
         }
     }
@@ -164,7 +165,7 @@ data object Onboarding4Screen : ActionOnboardingScreen<Unit>(
     R.string.onboarding4_headline,
     R.string.onboarding4_highlight
 ) {
-    override fun content(scope: LazyListScope) {
+    override fun content(scope: LazyListScope, lightTheme: Boolean) {
         scope.item(key = "text") {
             Text(
                 text = buildAnnotatedString {
@@ -173,7 +174,7 @@ data object Onboarding4Screen : ActionOnboardingScreen<Unit>(
                     append(text = stringResource(id = R.string.onboarding4_paragraph_2))
                 },
                 fontSize = 15.sp,
-                color = Color.Black,
+                color = if (lightTheme) Color.Black else Color.White
             )
         }
 

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cable
 import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.runtime.Composable
@@ -20,7 +19,6 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.featureFlagSettingsRoute
-import fe.linksheet.shizukuSettingsRoute
 
 @Composable
 fun AdvancedSettingsRoute(

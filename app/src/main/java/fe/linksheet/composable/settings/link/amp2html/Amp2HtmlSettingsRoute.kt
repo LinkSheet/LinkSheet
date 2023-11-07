@@ -92,17 +92,19 @@ fun Amp2HtmlSettingsRoute(
                             )
                         )
 
-                        Spacer(modifier = Modifier.height(5.dp))
+                        if (!LinkSheetAppConfig.isPro()) {
+                            Spacer(modifier = Modifier.height(5.dp))
 
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.pro_feature),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
+                            Card(
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                shape = RoundedCornerShape(12.dp),
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.pro_feature),
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.padding(all = 10.dp)
+                                )
+                            }
                         }
                     }
                 )

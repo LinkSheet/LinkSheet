@@ -8,11 +8,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -136,17 +136,19 @@ fun FollowRedirectsSettingsRoute(
                             )
                         )
 
-                        Spacer(modifier = Modifier.height(5.dp))
+                        if (!LinkSheetAppConfig.isPro()) {
+                            Spacer(modifier = Modifier.height(5.dp))
 
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.pro_feature),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
+                            Card(
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                shape = RoundedCornerShape(12.dp),
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.pro_feature),
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.padding(all = 10.dp)
+                                )
+                            }
                         }
                     }
                 )

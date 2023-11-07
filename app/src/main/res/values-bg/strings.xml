@@ -336,7 +336,6 @@
         <item quantity="other">%s месеца</item>
     </plurals>
     <string name="donate_other">Ако желаете да дарите по друг начин (SEPA, PayPal, друг вид криптовалута и др.) изпратете писмо на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
-    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>€5</b> ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което, в момента, само скрива напомнянето за даряване от основния екран, но в бъдеще ще предлага <b>възможности достъпни само там</b>.</string>
     <string name="linksheet_donation_explainer">LinkSheet е резултат на повече от <b>%s</b> работа, в продължение на повече от <b>%s</b>. Ако оценявате труда ми, направете дарение.</string>
     <string name="built_by_error">Приложението не е подписано от 1fexd. Това не е непременно нещо лошо, защото всеки може да вземе изходния код и да компилира приложението, но някой може да го направи с цел вреда.</string>
 </resources>

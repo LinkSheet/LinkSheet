@@ -132,7 +132,7 @@ class IntentResolver(
         }
     }
 
-    suspend fun resolve(intent: Intent, referrer: Uri?): BottomSheetResult {
+    suspend fun resolveIfEnabled(intent: Intent, referrer: Uri?): BottomSheetResult {
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
 //        val x = intent
         urlResolverCache.clear()
@@ -177,7 +177,7 @@ class IntentResolver(
 //                )
 //            }
 //        } else {
-        val (followRedirectsResult, followRedirectsResultUri) = resolve(
+        val (followRedirectsResult, followRedirectsResultUri) = resolveIfEnabled(
             followRedirects.value,
             uri
         ) {
@@ -200,7 +200,7 @@ class IntentResolver(
             uri = followRedirectsResultUri
         }
 
-        val (amp2HtmlResult, amp2HtmlResultUri) = resolve(enableAmp2Html.value, uri) {
+        val (amp2HtmlResult, amp2HtmlResultUri) = resolveIfEnabled(enableAmp2Html.value, uri) {
             amp2HtmlResolver.resolve(
                 it,
                 amp2HtmlLocalCache.value,
@@ -321,7 +321,7 @@ class IntentResolver(
         )
     }
 
-    private suspend fun resolve(
+    private suspend fun resolveIfEnabled(
         enabled: Boolean,
         uri: Uri?,
         resolve: suspend (Uri) -> Result<ResolveType>

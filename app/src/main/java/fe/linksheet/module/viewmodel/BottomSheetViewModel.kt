@@ -26,7 +26,6 @@ import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
-import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -85,7 +84,7 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
-        intentResolver.resolve(intent, referrer).apply {
+        intentResolver.resolveIfEnabled(intent, referrer).apply {
             resolveResult = this
         }
     }

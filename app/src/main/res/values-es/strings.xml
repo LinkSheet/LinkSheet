@@ -342,4 +342,5 @@
         <item quantity="many">%s meses</item>
         <item quantity="other">%s meses</item>
     </plurals>
+    <string name="pro_feature">¡Esta es una función de LinkSheet Pro!</string>
 </resources>

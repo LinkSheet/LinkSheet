@@ -1,17 +1,16 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
 import fe.httpkt.Request
+import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.Logger
-import fe.linksheet.supabaseApiKey
-import fe.linksheet.supabaseFunctionHost
 import org.koin.dsl.module
 
 val allRemoteResolveRequest = module {
     single {
         AllRemoteResolveRequest(
-            "$supabaseFunctionHost/all",
-            supabaseApiKey,
+            "${LinkSheetAppConfig.supabaseHost()}/all",
+            LinkSheetAppConfig.supabaseApiKey(),
             get(), createLogger<AllRemoteResolveRequest>()
         )
     }

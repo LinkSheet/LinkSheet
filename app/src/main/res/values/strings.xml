@@ -331,4 +331,5 @@
     <string name="donate_other">If you would like to donate in another way (SEPA Transfer, PayPal, other crypotocurrency, etc.), also send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="app_setup">App setup</string>
     <string name="other">Other</string>
+    <string name="pro_feature">This is a LinkSheet Pro feature!</string>
 </resources>

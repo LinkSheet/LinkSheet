@@ -4,13 +4,12 @@ import fe.amp2htmlkt.Amp2Html
 import fe.httpkt.Request
 import fe.httpkt.ext.getGZIPOrDefaultStream
 import fe.httpkt.isHttpSuccess
+import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
-import fe.linksheet.supabaseApiKey
-import fe.linksheet.supabaseFunctionHost
 import org.koin.dsl.module
 import java.io.IOException
 import java.net.URL
@@ -18,8 +17,8 @@ import java.net.URL
 val amp2HtmlResolveRequestModule = module {
     single {
         Amp2HtmlResolveRequest(
-            "$supabaseFunctionHost/amp2html",
-            supabaseApiKey,
+            "${LinkSheetAppConfig.supabaseHost()}/amp2html",
+            LinkSheetAppConfig.supabaseApiKey(),
             get(),
             get(),
             createLogger<Amp2HtmlResolveRequest>()

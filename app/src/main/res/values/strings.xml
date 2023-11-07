@@ -331,4 +331,16 @@
     <string name="donate_other">If you would like to donate in another way (SEPA Transfer, PayPal, other crypotocurrency, etc.), also send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="app_setup">App setup</string>
     <string name="other">Other</string>
+    <string name="export_import_settings">Export or import settings</string>
+    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
+    <string name="export_explainer">Export your current app settings to a file</string>
+    <string name="import_headline">Import</string>
+    <string name="import_explainer">Import a previous export from a file</string>
+    <string name="export_settings">Export settings</string>
+    <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
+    <string name="include_history">Include history (include your link click history)</string>
+    <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
+    <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
+    <string name="export_to_file">Export to file</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
 </resources>

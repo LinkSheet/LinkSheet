@@ -305,7 +305,7 @@
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
-    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the t launched the target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
+    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" to it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the launched target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
     <string name="privacy_settings_explainer">Settings like referrer inclusion</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
     <string name="discord">Discord</string>
@@ -331,6 +331,7 @@
     <string name="donate_other">If you would like to donate in another way (SEPA Transfer, PayPal, other crypotocurrency, etc.), also send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="app_setup">App setup</string>
     <string name="other">Other</string>
+    <string name="pro_feature">This is a LinkSheet Pro feature!</string>
     <string name="export_import_settings">Export or import settings</string>
     <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
     <string name="export_explainer">Export your current app settings to a file</string>

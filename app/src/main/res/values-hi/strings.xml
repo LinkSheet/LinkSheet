@@ -71,4 +71,5 @@
         <item quantity="one">%s महीना</item>
         <item quantity="other">%s महीने</item>
     </plurals>
+    <string name="pro_feature">यह लिंकशीट परो फ़ीचर है!</string>
 </resources>

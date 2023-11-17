@@ -67,18 +67,16 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * Always show package name: Shows package names all throughout the application
 * Disable toast: Disables all toast messages
 * Display apps in grid instead of list
-* Resolve redirects either locally or via API hosted @ supabase.com ([Supabase Privacy policy](https://supabase.com/privacy)), API itself does not log anything except timestamp
+* **Pro:** Resolve redirects either locally or via API hosted @ supabase.com ([Supabase Privacy policy](https://supabase.com/privacy)), API itself does not log anything except timestamp
 * *Experimental:* [ClearURLs](https://github.com/ClearURLs) integration (removes tracking parameters) (report issues/bugs [here](https://github.com/1fexd/clearurlkt))
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
 
 ## Donations / LinkSheet Pro
 
-All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨. 
+All donations of 4€+ (Crypto), or 5€+ (for all other means of payment) are eligible for ✨ LinkSheet Pro ✨. 
 
-* **Currently, the only benefit LinkSheet Pro provides is hiding the donation banner within the app.**
-
-* In the future, I may implement some Pro-only features, but these will be new features. Existing features will not be paywalled.
+* Some of these Pro-only features which are planned in the future may require a monthly subscription of some sort. Your initial donation will count towards that, so for example, if there is a feature that is 1€ / month, and you donated 5€, you get the first 5 months of that service for free.
 
 If you would like to donate in another way (SEPA Bank Transfer/Paypal, or in another cryptocurrency), send a mail to `1fexd[at]420blaze.it` and we will figure something out. 
 
@@ -89,8 +87,6 @@ If you would like to donate in another way (SEPA Bank Transfer/Paypal, or in ano
 Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred). The latest nightly version can always be downloaded via [nightly.link](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip), but if you are using something like [Obtainium](https://github.com/ImranR98/Obtainium), there also is a [LinkSheetNightly](https://github.com/1fexd/LinkSheetNightly) repository where nightly builds are released as Github releases.
 
 ## Note
-
-This is a hobby project, and since I have many of those, I sometimes choose to ignore issues or postpone working on them as I am either not motivated or don't have any time (since I also have a job). LinkSheet is feature-complete for my use-case, so everything I add/change is because someone requested it. I have made less than ~2€~ (actually it has been more like 17€ now, thank you very much) from donations and there is no incentive other than providing a solid app for this project. Please take that into consideration before opening an issue. If you would **really** like a new feature added or a bug fixed, send me an email and we can talk about a small donation in exchange for the immediate start of development. 
 
 ⚠️ Development is a bit stale at the moment, as I am busy with other things and/or don't have that much motivation. If you encounter bugs or issues, try using the latest nightly build, it may have already been fixed there.
 

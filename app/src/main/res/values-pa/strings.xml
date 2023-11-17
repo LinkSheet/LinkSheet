@@ -338,4 +338,5 @@
         <item quantity="one">%s ਮਹੀਨਾ</item>
         <item quantity="other">%s ਮਹੀਨੇ</item>
     </plurals>
+    <string name="pro_feature">ਇਹ ਲਿੰਕਸ਼ੀਟ ਪਰੋ ਫ਼ੀਚਰ ਹੈ!</string>
 </resources>

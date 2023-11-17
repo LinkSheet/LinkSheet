@@ -186,6 +186,7 @@ fun AboutSettingsRoute(
                         clipboardManager.setText(buildAnnotatedString {
                             append(
                                 activity.getText(R.string.linksheet_version_info_header),
+                                lineSeparator,
                                 builtAt,
                                 lineSeparator,
                                 flavor,

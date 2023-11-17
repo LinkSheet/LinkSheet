@@ -341,4 +341,5 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku режим је активиран, додирните апликацију да бисте укључили њене могућности аутоматског руковања линком. Дуго додирните апликацију да бисте отворили њен мени са подешавањима „Отвори подразумевано“.</string>
     <string name="credits">Кредити</string>
     <string name="done">Готово</string>
+    <string name="pro_feature">Ово је LinkSheet Pro функција!</string>
 </resources>

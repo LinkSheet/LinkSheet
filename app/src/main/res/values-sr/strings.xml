@@ -145,7 +145,6 @@
     <string name="advanced">Напредно</string>
     <string name="built_at">Направљено (UTC):</string>
     <string name="shizuku_explainer_short">Директно комуницирајте са системским API-јима</string>
-    <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> вам омогућава приступ за <b>LinkSheet Pro</b>, који тренутно сакрива само банер за донације на главном екрану апликације, али у будућности ће бити <b>Pro ексклузивне функције.</b></string>
     <string name="back">Назад</string>
     <string name="clear_urls">ClearURLs</string>
     <string name="linksheet_download">LinkSheet преузимање</string>

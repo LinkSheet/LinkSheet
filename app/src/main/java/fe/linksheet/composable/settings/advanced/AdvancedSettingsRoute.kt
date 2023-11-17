@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.ImportExport
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,6 +19,7 @@ import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
 
 @Composable
@@ -56,6 +58,21 @@ fun AdvancedSettingsRoute(
                         ColoredIcon(
                             icon = Icons.Default.Flag,
                             descriptionId = R.string.feature_flags
+                        )
+                    }
+                )
+            }
+
+            item(key = "export_import_settings"){
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = exportImportSettingsRoute,
+                    headlineId = R.string.export_import_settings,
+                    subtitleId = R.string.export_import_settings_explainer,
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.ImportExport,
+                            descriptionId = R.string.export_import_settings
                         )
                     }
                 )

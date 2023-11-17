@@ -7,6 +7,7 @@ import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
+import fe.linksheet.module.viewmodel.ExportSettingsViewmodel
 import fe.linksheet.module.viewmodel.FeatureFlagViewModel
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
@@ -50,4 +51,5 @@ val viewModelModule = module {
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::LoadDumpedPreferencesViewModel)
     viewModelOf(::PrivacySettingsViewModel)
+    viewModelOf(::ExportSettingsViewmodel)
 }

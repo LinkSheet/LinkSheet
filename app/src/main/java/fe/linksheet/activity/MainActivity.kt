@@ -25,6 +25,7 @@ import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.about.DonateSettingsRoute
 import fe.linksheet.composable.settings.advanced.AdvancedSettingsRoute
+import fe.linksheet.composable.settings.advanced.ExportImportSettingsRoute
 import fe.linksheet.composable.settings.advanced.FeatureFlagSettingsRoute
 import fe.linksheet.composable.settings.advanced.ShizukuSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
@@ -56,6 +57,7 @@ import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.debugSettingsRoute
 import fe.linksheet.donateSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
+import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.generalSettingsRoute
@@ -68,6 +70,7 @@ import fe.linksheet.loadDumpedPreferences
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
+import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
@@ -190,6 +193,13 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = featureFlagSettingsRoute) {
                         FeatureFlagSettingsRoute(
+                            navController = navController,
+                            onBackPressed = onBackPressed
+                        )
+                    }
+
+                    animatedComposable(route = exportImportSettingsRoute){
+                        ExportImportSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
                         )

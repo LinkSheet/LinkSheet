@@ -217,7 +217,7 @@
     <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Advanced features like feature flags</string>
+    <string name="advanced_explainer">Advanced settings like feature flags and export/import</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
@@ -319,7 +319,7 @@
     <string name="donate_learn_more">Learn more</string>
     <string name="donate">Donate</string>
     <string name="linksheet_donation_explainer">LinkSheet is the result of more than <b>%s</b> of work over the span of more than <b>%s</b>. If you would like to show some appreciation for my work please donate.</string>
-    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main screen of the app, but in the future, there will be <b>Pro exclusive features.</b></string>
+    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> (<b>4€</b> if you donate with crypto!) allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main screen of the app, but in the future, there will be <b>Pro exclusive features.</b></string>
     <string name="built_by">Built and signed by</string>
     <string name="built_by_error">This build was not signed by 1fexd. This does not necessarily mean anything bad since anyone can fork the source code and build their app, but they may do so with malicious intent.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
@@ -332,4 +332,19 @@
     <string name="app_setup">App setup</string>
     <string name="other">Other</string>
     <string name="pro_feature">This is a LinkSheet Pro feature!</string>
+    <string name="export_import_settings">Export or import settings</string>
+    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
+    <string name="export_explainer">Export your current app settings to a file</string>
+    <string name="import_headline">Import</string>
+    <string name="import_explainer">Import a previous export from a file</string>
+    <string name="export_settings">Export settings</string>
+    <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
+    <string name="include_history">Include history (your link click and app history)</string>
+    <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
+    <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
+    <string name="export_to_file">Export to file</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="import_settings">Import settings</string>
+    <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
+    <string name="confirm_import">Confirm</string>
 </resources>

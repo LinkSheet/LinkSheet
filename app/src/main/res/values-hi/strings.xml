@@ -57,7 +57,6 @@
     <string name="donate_other">यदि आप किसी अन्य तरीके से दान करना चाहते हैं (SEPA ट्रांसफर, PayPal, अन्य क्रिप्टोकरंसी, आदि), तो <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> पर एक ईमेल भी भेजें</string>
     <string name="type">प्रकार:</string>
     <string name="flavor">फ्लेवर:</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b> से अधिक का दान आपको <b>लिंकशीट प्रो</b> तक पहुंच की अनुमति देता है, जो वर्तमान में केवल ऐप की मुख्य स्क्रीन पर दान बैनर को छुपाता है, लेकिन भविष्य में, <b>प्रो एक्सक्लूसिव फीचर्स</b> होंगे</string>
     <string name="github_pipeline_build">गिटहब वर्कफ़्लो द्वारा निर्मित और हस्ताक्षरित</string>
     <string name="other">अन्य</string>
     <string name="app_setup">ऐप सेटअप</string>

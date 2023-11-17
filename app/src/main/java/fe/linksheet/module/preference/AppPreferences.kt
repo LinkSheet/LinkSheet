@@ -1,7 +1,10 @@
 package fe.linksheet.module.preference
 
 
+import com.google.gson.JsonArray
 import fe.android.preference.helper.Preferences
+import fe.gson.dsl.jsonArray
+import fe.gson.dsl.jsonObject
 import fe.kotlin.extension.toHexString
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.PackageProcessor
@@ -86,13 +89,7 @@ object AppPreferences : Preferences() {
     val firstRun = booleanPreference("first_run", true)
     val showDiscordBanner = booleanPreference("show_discord_banner", true)
 
-    val loggablePreferences by lazy {
-        all.toMutableMap().apply {
-            sensitivePreferences.forEach { remove(it.key) }
-        }.map { (_, pkg) -> pkg }
-    }
-
-    private val sensitivePreferences = listOf(
+    val sensitivePreferences = listOf(
         useTimeMs, logKey,
     )
 
@@ -109,6 +106,17 @@ object AppPreferences : Preferences() {
         it.key to if (value != null) {
             logger.dumpParameterToString(redact, value, PackageProcessor)
         } else "<null>"
+    }
+
+    fun toJsonArray(preferenceToDumpedValue: Map<String, String?>): JsonArray {
+        return jsonArray {
+            preferenceToDumpedValue.forEach { (key, value) ->
+                +jsonObject {
+                    "name" += key
+                    "value" += value
+                }
+            }
+        }
     }
 }
 

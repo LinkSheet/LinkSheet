@@ -21,10 +21,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.gson.Gson
 import fe.android.compose.dialog.helper.OnClose
+import fe.gson.dsl.jsonArray
+import fe.gson.dsl.jsonObject
+import fe.gson.globalGsonModule
 import fe.linksheet.R
 import fe.linksheet.extension.android.setText
 import fe.linksheet.module.log.LogEntry
+import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.util.Results
 import java.io.FileOutputStream
@@ -32,28 +38,39 @@ import java.time.LocalDateTime
 
 @Composable
 fun ExportSettingsDialog(
+    preferenceRepository: AppPreferenceRepository,
     close: OnClose<Unit>,
 ) {
+    val historyFlag = false
+
     val context = LocalContext.current
     val contentResolver = context.contentResolver
+
+    var includeLogHashKey by remember { mutableStateOf(false) }
+    var includeHistory by remember { mutableStateOf(false) }
 
     val fileSelectedLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = {
             if (it.resultCode == Activity.RESULT_OK) {
+                val preferences = preferenceRepository.dumpPreferences(
+                    if (!includeLogHashKey) listOf(AppPreferences.logKey) else listOf()
+                )
+
+                val fileContent = jsonObject {
+                    "preferences" += AppPreferences.toJsonArray(preferences)
+                }
+
                 it.data?.data?.let { uri ->
                     contentResolver.openFileDescriptor(uri, "w")?.use { pfd ->
                         FileOutputStream(pfd.fileDescriptor).bufferedWriter().use { fos ->
-                            fos.write("{}")
+                            fos.write(preferenceRepository.gson.toJson(fileContent))
                         }
                     }
                 }
             }
         }
     )
-
-    var includeLogHashKey by remember { mutableStateOf(false) }
-    var includeHistory by remember { mutableStateOf(false) }
 
     DialogColumn {
         HeadlineText(headlineId = R.string.export_settings)
@@ -67,13 +84,15 @@ fun ExportSettingsDialog(
             textId = R.string.include_log_hash_key
         )
 
-        Spacer(modifier = Modifier.height(5.dp))
+        if (historyFlag) {
+            Spacer(modifier = Modifier.height(5.dp))
 
-        CheckboxRow(
-            checked = includeHistory,
-            onClick = { includeHistory = !includeHistory },
-            textId = R.string.include_history
-        )
+            CheckboxRow(
+                checked = includeHistory,
+                onClick = { includeHistory = !includeHistory },
+                textId = R.string.include_history
+            )
+        }
 
         Spacer(modifier = Modifier.height(5.dp))
 
@@ -91,16 +110,15 @@ fun ExportSettingsDialog(
             TextButton(
                 onClick = {
                     fileSelectedLauncher.launch(
-                        Intent(Intent.ACTION_CREATE_DOCUMENT
-                        ).addCategory(Intent.CATEGORY_OPENABLE)
+                        Intent(Intent.ACTION_CREATE_DOCUMENT)
+                            .addCategory(Intent.CATEGORY_OPENABLE)
                             .putExtra(
-                            Intent.EXTRA_TITLE,
-                            context.getString(R.string.export_file_name, LocalDateTime.now())
-                        ).apply {
-
-                            type = "application/json"
-
-                        })
+                                Intent.EXTRA_TITLE,
+                                context.getString(R.string.export_file_name, LocalDateTime.now())
+                            ).apply {
+                                type = "application/json"
+                            }
+                    )
                 }
             ) {
                 Text(text = stringResource(id = R.string.export_to_file))

@@ -70,6 +70,7 @@ import fe.linksheet.loadDumpedPreferences
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
+import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute

@@ -338,7 +338,7 @@
     <string name="import_explainer">Import a previous export from a file</string>
     <string name="export_settings">Export settings</string>
     <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
-    <string name="include_history">Include history (include your link click history)</string>
+    <string name="include_history">Include history (your link click and app history)</string>
     <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
     <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
     <string name="export_to_file">Export to file</string>

@@ -17,9 +17,11 @@ class LogViewCommon(
     private val logger: Logger
 ) {
     private fun logPreferences(redact: Boolean): Map<String, String?> {
-        return AppPreferences.loggablePreferences.associate {
-            it.key to preferenceRepository.getAnyAsString(it)
-        } + AppPreferences.logPackages(redact, logger, preferenceRepository)
+        return preferenceRepository.dumpPreferences(AppPreferences.sensitivePreferences) + AppPreferences.logPackages(
+            redact,
+            logger,
+            preferenceRepository
+        )
     }
 
     fun buildClipboardText(
@@ -51,15 +53,9 @@ class LogViewCommon(
                 "workflow_id" += BuildConfig.GITHUB_WORKFLOW_RUN_ID
             }
 
+
             if (includePreferences) {
-                "preferences" += jsonArray {
-                    logPreferences(redactLog).forEach { (key, value) ->
-                        +jsonObject {
-                            "name" += key
-                            "value" += value
-                        }
-                    }
-                }
+                "preferences" += AppPreferences.toJsonArray(logPreferences(redactLog))
             }
 
             "log" += logEntries.map { it.toJson(redactLog) }

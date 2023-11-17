@@ -39,9 +39,8 @@ data class PreferredApp(
         .queryFirstIntentActivityByPackageNameOrNull(packageName!!)
         ?.toDisplayActivityInfo(context)!!
 
-    fun toPreferredDisplayActivityInfo(context: Context) = toDisplayActivityInfo(context)?.let {
-        PreferredDisplayActivityInfo(this, it)
-    }
+    fun toPreferredDisplayActivityInfo(context: Context) =
+        PreferredDisplayActivityInfo(this, toDisplayActivityInfo(context))
 
     override fun dump(
         stringBuilder: StringBuilder,

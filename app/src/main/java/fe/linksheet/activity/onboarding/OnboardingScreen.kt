@@ -35,13 +35,13 @@ import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.util.ExtendedFabIconRight
-import fe.linksheet.ui.Theme
 import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.Job
 
 
 abstract class OnboardingScreen(
-    @DrawableRes val backgroundImage: Int?,
+    @DrawableRes val lightBackgroundImage: Int?,
+    @DrawableRes val darkBackgroundImage: Int?,
     val textAlign: TextAlign,
     @StringRes val nextButton: Int,
     @StringRes val headline: Int?,
@@ -49,13 +49,14 @@ abstract class OnboardingScreen(
 )
 
 abstract class ImageOnboardingScreen(
-    @DrawableRes backgroundImage: Int?,
+    @DrawableRes lightBackgroundImage: Int?,
+    @DrawableRes darkBackgroundImage: Int?,
     textAlign: TextAlign,
     @StringRes nextButton: Int,
     @StringRes headline: Int?,
     @StringRes highlight: Int?,
 ) : OnboardingScreen(
-    backgroundImage, textAlign, nextButton, headline, highlight
+    lightBackgroundImage, darkBackgroundImage,textAlign, nextButton, headline, highlight
 )
 
 abstract class ActionOnboardingScreen<T>(
@@ -63,7 +64,7 @@ abstract class ActionOnboardingScreen<T>(
     textAlign: TextAlign,
     @StringRes headline: Int,
     @StringRes highlight: Int,
-) : OnboardingScreen(null, textAlign, nextButton, headline, highlight) {
+) : OnboardingScreen(null,null, textAlign, nextButton, headline, highlight) {
     abstract fun content(scope: LazyListScope, lightTheme: Boolean)
 
     @Composable
@@ -77,13 +78,14 @@ abstract class RawOnboardingScreen(
     textAlign: TextAlign,
     @StringRes headline: Int?,
     @StringRes highlight: Int?,
-) : OnboardingScreen(null, textAlign, nextButton, headline, highlight) {
+) : OnboardingScreen(null,null, textAlign, nextButton, headline, highlight) {
     @Composable
     abstract fun Render(back: () -> Job, next: () -> Job)
 }
 
 data object Onboarding0Screen : ImageOnboardingScreen(
     R.drawable.onboarding0_notext_resized,
+    R.drawable.onboarding0_notext_dark_resized,
     TextAlign.Start,
     R.string.get_started,
     R.string.onboarding0_headline,
@@ -145,6 +147,7 @@ data object Onboarding1Screen :
 
 data object Onboarding2Screen : ImageOnboardingScreen(
     R.drawable.onboarding2_notext_resized,
+    R.drawable.onboarding2_notext_dark_resized,
     TextAlign.End,
     R.string.next,
     R.string.onboarding2_headline,
@@ -153,6 +156,7 @@ data object Onboarding2Screen : ImageOnboardingScreen(
 
 data object Onboarding3Screen : ImageOnboardingScreen(
     R.drawable.onboarding3_notext_resized,
+    R.drawable.onboarding3_notext_dark_resized,
     TextAlign.Start,
     R.string.next,
     R.string.onboarding3_headline,
@@ -229,6 +233,7 @@ data object Onboarding5Screen : RawOnboardingScreen(
 
 data object Onboarding6Screen : ImageOnboardingScreen(
     R.drawable.onboarding6_notext_resized,
+    R.drawable.onboarding6_notext_dark_resized,
     TextAlign.End,
     R.string.next,
     R.string.onboarding6_headline,
@@ -237,6 +242,7 @@ data object Onboarding6Screen : ImageOnboardingScreen(
 
 data object Onboarding7Screen : ImageOnboardingScreen(
     R.drawable.onboarding7_notext_resized,
+    R.drawable.onboarding7_notext_dark_resized,
     TextAlign.Start,
     R.string.finish,
     R.string.onboarding7_headline,

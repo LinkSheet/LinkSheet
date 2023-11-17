@@ -144,7 +144,7 @@ class OnboardingActivity : ComponentActivity() {
                             if (isLightTheme) listOf(
                                 Color(0xFFF8F8F8),
                                 Color(0xFFECEBE9)
-                            ) else listOf(Color(0xFF0C0404), Color(0xFF1B0F0F)),
+                            ) else listOf(Color(0xFF220C0C), Color(0xFF382D2D)),
                             -135f
                         ),
 //                        .angledGradientBackground(
@@ -207,9 +207,9 @@ class OnboardingActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .then(
-                                if (onboardingScreen.backgroundImage == null) Modifier
+                                if (onboardingScreen.lightBackgroundImage == null) Modifier
                                 else Modifier.paint(
-                                    painter = painterResource(onboardingScreen.backgroundImage!!),
+                                    painter = painterResource(if(isLightTheme) onboardingScreen.lightBackgroundImage!! else onboardingScreen.darkBackgroundImage!!),
                                     contentScale = ContentScale.Crop
                                 )
                             )

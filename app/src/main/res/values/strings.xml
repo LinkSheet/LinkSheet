@@ -217,7 +217,7 @@
     <string name="always_show_package_name_disclaimer">This switch will be moved to a different location in a future release.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Advanced features like feature flags</string>
+    <string name="advanced_explainer">Advanced settings like feature flags and export/import</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
@@ -344,4 +344,7 @@
     <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
     <string name="export_to_file">Export to file</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="import_settings">Import settings</string>
+    <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
+    <string name="confirm_import">Confirm</string>
 </resources>

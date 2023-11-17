@@ -1,6 +1,7 @@
 package fe.linksheet.module.preference
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.google.gson.Gson
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.PreferenceRepository
@@ -15,7 +16,8 @@ val preferenceRepositoryModule = module {
 
 class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepository(context) {
 
-    private val followRedirectsExternalService = getBooleanState(AppPreferences.followRedirectsExternalService)
+    private val followRedirectsExternalService =
+        getBooleanState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = getBooleanState(AppPreferences.amp2HtmlExternalService)
 
     init {
@@ -31,6 +33,19 @@ class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepo
             excludePreferences.forEach { remove(it.key) }
         }.map { (_, pkg) -> pkg }.associate { preference ->
             preference.key to getAnyAsString(preference)
+        }
+    }
+
+    fun importPreferences(
+        importPreferences: Map<String, String>,
+        editor: SharedPreferences.Editor?
+    ) {
+        val preferences = AppPreferences.all.toMutableMap()
+        importPreferences.forEach { (name, value) ->
+            val preference = preferences[name]
+            if (preference != null) {
+                setStringValueToPreference(preference, value, editor)
+            }
         }
     }
 }

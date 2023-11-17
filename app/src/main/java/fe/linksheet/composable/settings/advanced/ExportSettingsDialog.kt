@@ -1,7 +1,6 @@
-package fe.linksheet.composable.util
+package fe.linksheet.composable.settings.advanced
 
 import android.app.Activity
-import android.content.ClipboardManager
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,25 +20,23 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.gson.Gson
 import fe.android.compose.dialog.helper.OnClose
-import fe.gson.dsl.jsonArray
 import fe.gson.dsl.jsonObject
-import fe.gson.globalGsonModule
 import fe.linksheet.R
-import fe.linksheet.extension.android.setText
-import fe.linksheet.module.log.LogEntry
+import fe.linksheet.composable.util.BottomRow
+import fe.linksheet.composable.util.CheckboxRow
+import fe.linksheet.composable.util.DialogColumn
+import fe.linksheet.composable.util.DialogSpacer
+import fe.linksheet.composable.util.HeadlineText
+import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.viewmodel.util.LogViewCommon
-import fe.linksheet.util.Results
 import java.io.FileOutputStream
 import java.time.LocalDateTime
 
 @Composable
 fun ExportSettingsDialog(
     preferenceRepository: AppPreferenceRepository,
-    close: OnClose<Unit>,
 ) {
     val historyFlag = false
 

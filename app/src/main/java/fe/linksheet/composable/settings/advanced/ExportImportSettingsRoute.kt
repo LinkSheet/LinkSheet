@@ -1,5 +1,10 @@
 package fe.linksheet.composable.settings.advanced
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -15,7 +20,6 @@ import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.ExportSettingsDialog
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.module.viewmodel.ExportSettingsViewmodel
 import org.koin.androidx.compose.koinViewModel
@@ -28,20 +32,43 @@ fun ExportImportSettingsRoute(
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val contentResolver = context.contentResolver
 
-    val importFlag = false
+    val importFlag = true
 
 //    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
 //    var shizukuRunning by remember { mutableStateOf(isShizukuRunning()) }
 
     val exportDialog = dialogHelper<Unit, Unit, Unit>(
-        fetch = { Unit },
+        fetch = { },
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-        ExportSettingsDialog(preferenceRepository = viewModel.preferenceRepository, close = close)
+        ExportSettingsDialog(preferenceRepository = viewModel.preferenceRepository)
     }
 
+    val confirmImportDialog = dialogHelper<Uri, Uri, Unit>(
+        fetch = { it },
+        awaitFetchBeforeOpen = true,
+        dynamicHeight = true
+    ) { state, close ->
+        ImportSettingsDialog(
+            uri = state,
+            close = close,
+            preferenceRepository = viewModel.preferenceRepository
+        )
+    }
+
+    val importFileLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let {
+                    confirmImportDialog.open(it)
+                }
+            }
+        }
+    )
 
     SettingsScaffold(R.string.export_import_settings, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -75,7 +102,11 @@ fun ExportImportSettingsRoute(
             if (importFlag) {
                 item(key = "import") {
                     ClickableRow(
-                        onClick = { },
+                        onClick = {
+                            importFileLauncher.launch(Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(
+                                Intent.CATEGORY_OPENABLE
+                            ).apply { type = "application/json" })
+                        },
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Texts(
@@ -88,3 +119,4 @@ fun ExportImportSettingsRoute(
         }
     }
 }
+

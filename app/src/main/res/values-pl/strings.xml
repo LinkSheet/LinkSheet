@@ -265,7 +265,7 @@
     <string name="pretend_to_be_app_explainer_2">Niektóre aplikacje, takie jak Google Chrome, szukają natywnej aplikacji do obsługi, np. YouTube po kliknięciu linku w wynikach wyszukiwania. LinkSheetCompat udaje taką natywną aplikację dla obsługiwanych hostów, a następnie przekazuje żądanie do LinkSheet.</string>
     <string name="configure">Konfiguruj</string>
     <string name="configure_explainer">Kliknij tutaj, aby skonfigurować LinkSheetCompat</string>
-    <string name="pretend_to_be_app_explainer">Udawaj natywną aplikację dla obsługiwanych domen dzięki LinkSheetCompat</string>
+    <string name="pretend_to_be_app_explainer">Udawaj natywną aplikację dla obsługiwanych domen za pomocą LinkSheetCompat</string>
     <string name="compat_installed">LinkSheetCompat jest już zainstalowany</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="general">Ogólne</string>
@@ -345,4 +345,5 @@
         <item quantity="many">%s miesięcy</item>
         <item quantity="other">%s miesięcy</item>
     </plurals>
+    <string name="pro_feature">Funkcja dostępna w LinkSheet Pro!</string>
 </resources>

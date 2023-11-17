@@ -14,6 +14,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import fe.android.compose.dialog.helper.OnClose
+import fe.android.preference.helper.compose.getState
 import fe.gson.extension.json.`object`.asArray
 import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.R
@@ -63,10 +64,18 @@ fun ImportSettingsDialog(
                                     name to value
                                 }.toMap()
 
+
+                                val importedPreferences = mutableListOf<String>()
                                 preferenceRepository.editor {
-                                    preferenceRepository.importPreferences(importMap, this)
+                                    importedPreferences.addAll(
+                                        preferenceRepository.importPreferences(
+                                            importMap,
+                                            this
+                                        )
+                                    )
                                 }
 
+                                preferenceRepository.forceRefreshCachedState(importedPreferences)
                                 close(Unit)
                             }
                         }

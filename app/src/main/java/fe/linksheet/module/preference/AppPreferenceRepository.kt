@@ -6,6 +6,8 @@ import com.google.gson.Gson
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getCachedState
+import fe.android.preference.helper.compose.getState
 import fe.linksheet.LinkSheetAppConfig
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -39,13 +41,16 @@ class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepo
     fun importPreferences(
         importPreferences: Map<String, String>,
         editor: SharedPreferences.Editor?
-    ) {
+    ): List<String> {
         val preferences = AppPreferences.all.toMutableMap()
-        importPreferences.forEach { (name, value) ->
-            val preference = preferences[name]
-            if (preference != null) {
-                setStringValueToPreference(preference, value, editor)
-            }
+        return importPreferences.mapNotNull { (name, value) ->
+            val preference = preferences[name] ?: return@mapNotNull null
+            setStringValueToPreference(preference, value, editor)
+            name
         }
+    }
+
+    fun forceRefreshCachedState(keys: List<String>) {
+        keys.forEach { getCachedState(it)?.forceRefresh() }
     }
 }

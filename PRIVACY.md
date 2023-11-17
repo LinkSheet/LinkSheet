@@ -81,3 +81,7 @@ when the log is exported in redacted mode), exporting them can still be disabled
 ADB logcats of LinkSheet may include personal identifiable information like installed packages or
 visited hosts as well as preferences. Logcats should only be shared in rare cases where a full log
 is required to debug an issue. Logcats should not be published publicly.
+
+## Exports
+
+// TODO: Exports

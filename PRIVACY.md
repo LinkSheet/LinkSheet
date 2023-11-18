@@ -84,4 +84,4 @@ is required to debug an issue. Logcats should not be published publicly.
 
 ## Exports
 
-// TODO: Exports
+When exporting LinkSheet settings, you can select to export the log key. Please make sure not to share exports containing log keys with other people as the key may be sensitive information.

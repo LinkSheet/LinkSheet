@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hide_after_copying_explainer">Сакријте доњи лист након што се додирне дугме „Копирај URL“</string>
-    <string name="import_dumped_preference">Увези бачене преференце</string>
+    <string name="import_dumped_preference">Увоз бачених преференца</string>
     <string name="domain_selection_confirmation_subtitle">Желите ли заиста да подесите %s као преферирану апликацију за следеће домене\?</string>
     <string name="dismiss">Одбаци</string>
     <string name="onboarding7_headline">Ентузијаста\?
@@ -86,7 +86,7 @@
     <string name="onboarding0_highlight">слобода избора</string>
     <string name="redirect_resolve_type_local_cache">локални кеш</string>
     <string name="use_unified_preferred_browser_explainer">Омогућавање овога ће применити доленаведена подешавања и на нормално и на руковање линковима у апликацији. Користите дугмад испод да бисте се пребацивали између нормалног и режима у апликацији када је онемогућено.</string>
-    <string name="advanced_explainer">Напредне функције као што су експерименталне функције</string>
+    <string name="advanced_explainer">Напредна подешавања као што су експерименталне функције и извоз/увоз</string>
     <string name="discord">Discord</string>
     <string name="donate_other">Ако желите да донирате на други начин (SEPA трансфер, PayPal, друге криптовалуте итд.), такође пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="background_image">Позадинска слика</string>
@@ -95,7 +95,7 @@
     <string name="info">Информације</string>
     <string name="normal">Нормално</string>
     <string name="clear">Очисти</string>
-    <string name="import_and_override">Увези и препиши</string>
+    <string name="import_and_override">Увоз и преписивање</string>
     <string name="apps_which_can_open_links_explainer">Додирните апликацију да бисте отворили мени „Отвори подразумевано“ који вам омогућава да онемогућите аутоматско отварање линка</string>
     <string name="apps_explainer">Префериране апликације и апликације које могу да отварају линкове</string>
     <string name="enabled">Омогућено</string>
@@ -119,7 +119,7 @@
     <string name="resolve_failed">%s је неуспешно: %s</string>
     <string name="none">Ниједно</string>
     <string name="onboarding7_highlight">покрива</string>
-    <string name="export">Извези</string>
+    <string name="export">Извоз</string>
     <string name="hide_after_copying">Сакриј након копирања</string>
     <string name="follow_redirects">Прати преусмеравања</string>
     <string name="redirect_resolve_type_local">локални решавач</string>
@@ -128,7 +128,7 @@
     <string name="no_browsers_found">Није пронађен ниједан прегледач.</string>
     <string name="whitelisted_browsers">Прегледачи на белој листи</string>
     <string name="amoled_black">AMOLED црна</string>
-    <string name="export_log">Извези евиденцију</string>
+    <string name="export_log">Извоз евиденције</string>
     <string name="type">Тип:</string>
     <string name="bottom_sheet_explainer">Сортирајте према употреби, омогућите дугме за копирање, омогући дугме за дељење итд.</string>
     <string name="onboarding6_highlight">преференце</string>
@@ -342,4 +342,20 @@
     <string name="credits">Кредити</string>
     <string name="done">Готово</string>
     <string name="pro_feature">Ово је LinkSheet Pro функција!</string>
+    <string name="export_to_file">Извоз у фајл</string>
+    <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> ( <b>4€</b> ако донирате криптовалутом!) омогућава вам приступ <b>LinkSheet Pro-у</b>, који тренутно сакрива само банер донације на главном екрану апликације, али у будућности ће постојати <b>Pro ексклузивне карактеристике.</b></string>
+    <string name="import_settings">Увоз подешавања</string>
+    <string name="export_import_settings">Извоз или увоз подешавања</string>
+    <string name="import_headline">Увоз</string>
+    <string name="export_include_recommendation">Препоручујемо вам да укључите следећа подешавања само ако не планирате да свој извоз делите с неким другим!</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="confirm_import">Потврди</string>
+    <string name="include_log_hash_key">Укључи хеш кључ eвиденције (кључ који се користи за редиговање ваших евиденција)</string>
+    <string name="import_explainer">Увезите претходни извоз из фајла</string>
+    <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports"> линк</annotation>.</string>
+    <string name="export_import_settings_explainer">Извезите тренутна подешавања или увезите претходна подешавања</string>
+    <string name="include_history">Укључи историју (ваш клик на линк и историју апликације)</string>
+    <string name="export_settings">Извоз подешавања</string>
+    <string name="export_explainer">Извезите тренутна подешавања апликације у фајл</string>
+    <string name="import_settings_override_preferences">Ово ће заменити сва постојећа подешавања. Наставити?</string>
 </resources>

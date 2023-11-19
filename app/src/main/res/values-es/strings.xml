@@ -74,7 +74,7 @@
     <string name="onboarding0_highlight">la libertad de escoger</string>
     <string name="redirect_resolve_type_local_cache">caché local</string>
     <string name="use_unified_preferred_browser_explainer">Al habilitar esto, se aplican las configuraciones siguientes tanto al manejo de enlaces normal como en la aplicación. Utilice los botones a continuación para cambiar entre el modo Normal y el modo En aplicación cuando esté deshabilitado.</string>
-    <string name="advanced_explainer">Funciones avanzadas como funciones experimentales</string>
+    <string name="advanced_explainer">Ajustes avanzados como indicadores de funciones y exportación/importación</string>
     <string name="background_image">Imagen de fondo</string>
     <string name="amp2html_local_cache_explainer">Almacenar localmente en caché las versiones recuperadas de páginas web que no sean AMP</string>
     <string name="no">No</string>
@@ -233,7 +233,7 @@
     <string name="disabled">Desactivado</string>
     <string name="enable_request_private_browsing_button">Activar botón \"Navegación privada\"</string>
     <string name="redact_log">Redactar registro (recomendado; deshabilitarlo puede filtrar nombres de paquetes y nombres de dominio)</string>
-    <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede comprobar qué la aplicación se inició o la \"refirió\". Por defecto, cuando LinkSheet inicia una aplicación, se oculta, diciendo que la aplicación que inició LinkSheet es la que lanzó el objetivo. Habilite esta opción para reinsertar LinkSheet como referente de las aplicaciones que abre.</string>
+    <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede verificar qué aplicación se inició o \"refirió\" a ella. De forma predeterminada, cuando LinkSheet inicia una aplicación, se oculta y dice que la aplicación que inició LinkSheet es el objetivo iniciado. Habilite esto para reinsertar LinkSheet como referencia para las aplicaciones que abre.</string>
     <string name="always_show_package_name_disclaimer">Este interruptor se moverá a una ubicación diferente en una versión futura.</string>
     <string name="search">Buscar</string>
     <string name="at_least_one_unknown_browser_installer">Existe, al menos, un navedador (desconocido) instalado</string>
@@ -342,4 +342,20 @@
         <item quantity="other">%s meses</item>
     </plurals>
     <string name="pro_feature">¡Esta es una función de LinkSheet Pro!</string>
+    <string name="export_to_file">Exportar a un archivo</string>
+    <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> (¡<b>4€</b> si donas con cripto!) te permite acceder a <b>LinkSheet Pro</b>, que, actualmente solo oculta el banner de donación en la pantalla principal de la aplicación, pero en el futuro, habrá <b>características exclusivas.</b></string>
+    <string name="import_settings">Importar los ajustes</string>
+    <string name="export_import_settings">Exportar o importar los ajustes</string>
+    <string name="import_headline">Importar</string>
+    <string name="export_include_recommendation">¡Le recomendamos que active la siguiente configuración sólo si no planea compartir su exportación con otra persona!</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="confirm_import">Confirmar</string>
+    <string name="include_log_hash_key">Incluya la clave hash del registro (la clave utilizada para redactar sus registros)</string>
+    <string name="import_explainer">Importar una exportación anterior desde un archivo</string>
+    <string name="export_privacy">Para obtener más información sobre la privacidad de las exportaciones, puede visitar este <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">enlace</annotation>.</string>
+    <string name="export_import_settings_explainer">Exporta tus ajustes actuales o importa una exportación de los ajustes anteriores</string>
+    <string name="include_history">Incluir el historial (tu historial de clics en enlaces y aplicaciones)</string>
+    <string name="export_settings">Ajustes de la exportación</string>
+    <string name="export_explainer">Exportar la configuración actual de la aplicación a un archivo</string>
+    <string name="import_settings_override_preferences">Esto anulará todas las preferencias existentes. ¿Continuar?</string>
 </resources>

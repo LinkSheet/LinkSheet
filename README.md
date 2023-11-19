@@ -72,7 +72,7 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
 
 <ul>
-  <li><strong>Pro:</strong> Resolve redirects either locally or via API hosted @ supabase.com ([Supabase Privacy policy](https://supabase.com/privacy)), API itself does not log anything except timestamp</li>
+  <li><strong>Pro:</strong> Resolve redirects either locally or via API hosted @ supabase.com (<a href="https://supabase.com/privacy">Supabase Privacy policy</a>), API itself does not log anything except timestamp</li>
   <li><strong>Pro:</strong> Priority support - your feature requests and/or bug fixes will be prioritized</li>
   <li><strong>Pro:</strong> Sustain LinkSheet's development - a small donation keeps me motivated to work on the app - thank you!</li>
 </ul>

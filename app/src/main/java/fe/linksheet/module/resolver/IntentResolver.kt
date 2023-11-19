@@ -5,8 +5,6 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import fe.linksheet.module.preference.AppPreferenceRepository
-
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
@@ -24,6 +22,7 @@ import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -309,6 +308,7 @@ class IntentResolver(
 
         return BottomSheetResult.BottomSheetSuccessResult(
             newIntent,
+            referrer,
             uri,
             grouped,
             filteredItem,
@@ -347,7 +347,7 @@ class IntentResolver(
         return downloader.isNonHtmlContentUri(uri.toString(), timeout)
     }
 
-    fun modifyUri(
+    private fun modifyUri(
         uri: Uri?,
         clearUrl: Boolean = false,
         fastForward: Boolean = false,

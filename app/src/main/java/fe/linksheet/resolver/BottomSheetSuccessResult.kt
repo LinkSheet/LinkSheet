@@ -12,21 +12,22 @@ sealed class BottomSheetResult(val uri: Uri?) {
     class BottomSheetSuccessResult(
         val intent: Intent,
         uri: Uri?,
+        referrer: Uri?,
         val resolved: List<DisplayActivityInfo>,
         val filteredItem: DisplayActivityInfo?,
         val showExtended: Boolean,
-        private val alwaysPreferred: Boolean?,
-        private val hasSingleMatchingOption: Boolean = false,
+        alwaysPreferred: Boolean?,
+        hasSingleMatchingOption: Boolean = false,
         val resolveResults: Map<IntentResolver.Resolved, Result<ResolveType>?>,
         val libRedirectResult: LibRedirectResolver.LibRedirectResult? = null,
         val downloadable: Downloader.DownloadCheckResult = Downloader.DownloadCheckResult.NonDownloadable,
     ) : BottomSheetResult(uri) {
-        val totalCount = resolved.size + if (filteredItem != null) 1 else 0
+        private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
         val isEmpty = totalCount == 0
 
         val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
 
-        val hasAutoLaunchApp = isRegularPreferredApp || hasSingleMatchingOption
+        val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption) && referrer == null
 
         val app = filteredItem ?: resolved[0]
     }

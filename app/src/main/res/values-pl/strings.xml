@@ -170,7 +170,7 @@
     <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
     <string name="no_browsers_found">Nie znaleziono przeglądarek.</string>
     <string name="no_apps_found">Nie znaleziono aplikacji.</string>
-    <string name="export">Eksportuj</string>
+    <string name="export">Kopia zapasowa</string>
     <string name="export_log">Eksportuj log</string>
     <string name="export_mode">Rodzaj eksportu</string>
     <string name="enable_request_private_browsing_button">Przycisk „Tryb prywatny”</string>
@@ -218,7 +218,7 @@
     <string name="shizuku_integration">Integracja Shizuku</string>
     <string name="known_trackers">Znane trackery</string>
     <string name="advanced">Zaawansowane</string>
-    <string name="advanced_explainer">Zaawansowane opcje, takie jak flagi funkcji i import/eksport</string>
+    <string name="advanced_explainer">Opcje, takie jak flagi funkcji i import/eksport</string>
     <string name="shizuku_explainer">Shizuku umożliwia bezpośrednią interakcję z systemowymi API</string>
     <string name="enable_shizuku">Włącz (eksperymentalną) integrację Shizuku</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -347,18 +347,18 @@
     <string name="pro_feature">Funkcja dostępna w LinkSheet Pro!</string>
     <string name="export_to_file">Eksportuj do pliku</string>
     <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5 €</b> (<b>4 €</b> w przypadku dotacji kryptowalutami!) umożliwia uzyskanie dostępu do <b>LinkSheet Pro</b>, który obecnie jedynie ukrywa baner dotacyjny na głównym ekranie aplikacji, ale w przyszłości pojawią się <b>funkcje dostępne wyłącznie w wersji Pro.</b></string>
-    <string name="import_settings">Importuj ustawienia</string>
-    <string name="export_import_settings">Importuj lub eksportuj ustawienia</string>
-    <string name="import_headline">Importuj</string>
+    <string name="import_settings">Przywracanie ustawień</string>
+    <string name="export_import_settings">Kopia zapasowa i przywracanie</string>
+    <string name="import_headline">Przywróć z kopii zapasowej</string>
     <string name="export_include_recommendation">Zalecamy włączenie poniższych ustawień tylko wtedy, gdy nie planujesz udostępniać eksportu komuś innemu!</string>
     <string name="export_file_name">linksheet_kopia_ustawień_%s.json</string>
     <string name="confirm_import">Potwierdzam</string>
     <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>
-    <string name="import_explainer">Zaimportuj wcześniejszy plik eksportu z pliku</string>
+    <string name="import_explainer">Przywróć ustawienia z pliku</string>
     <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
-    <string name="export_import_settings_explainer">Eksportuj bieżące ustawienia lub zaimportuj wcześniejszy plik eksportu ustawień</string>
+    <string name="export_import_settings_explainer">Wykonaj kopię ustawień lub przywróć je z pliku</string>
     <string name="include_history">Uwzględnij historię (kliknięć linków i aplikacji)</string>
     <string name="export_settings">Eksportuj ustawienia</string>
-    <string name="export_explainer">Eksportuj bieżące ustawienia aplikacji do pliku</string>
+    <string name="export_explainer">Zapisz bieżące ustawienia aplikacji do pliku</string>
     <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
 </resources>

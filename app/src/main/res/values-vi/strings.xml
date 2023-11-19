@@ -217,4 +217,17 @@
     <string name="onboarding2_headline">Rất nhiều thiết đặt
 \nđể tạo LinkSheet</string>
     <string name="credits">Ghi công</string>
+    <string name="copy_to_clipboard">Sao chép vào clipboard</string>
+    <string name="log_privacy">Để tìm hiểu về quyền riêng tư của nhật ký, bạn có thể truy cập vào <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">liên kết</annotation> này.</string>
+    <string name="pretend_to_be_app_explainer_2">Một số ứng dụng như Google Chrome tìm kiếm ứng dụng gốc một cách rõ ràng để xử lý, chẳng hạn như liên kết Youtube khi ứng dụng đó được nhấn vào kết quả tìm kiếm. LinkSheetCompat giả vờ là một ứng dụng gốc dành cho các máy chủ được hỗ trợ và sau đó chuyển tiếp yêu cầu tới LinkSheet.</string>
+    <string name="configure">Cấu hình</string>
+    <string name="onboarding6_highlight">sở thích</string>
+    <string name="onboarding6_headline">Đặt thành của bạn</string>
+    <string name="debug">Gỡ lỗi</string>
+    <string name="confirm_import">Xác nhận</string>
+    <string name="general">Tổng quan</string>
+    <string name="compat_installed">LinkSheetCompat đã được cài đặt</string>
+    <string name="debug_explainer">Xem nhật ký ứng dụng</string>
+    <string name="configure_explainer">Nhấn vào đây để định cấu hình LinkSheetCompat</string>
+    <string name="done">Xong</string>
 </resources>

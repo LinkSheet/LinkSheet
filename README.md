@@ -67,28 +67,26 @@ LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor 
 * Always show package name: Shows package names all throughout the application
 * Disable toast: Disables all toast messages
 * Display apps in grid instead of list
-* **Pro:** Resolve redirects either locally or via API hosted @ supabase.com ([Supabase Privacy policy](https://supabase.com/privacy)), API itself does not log anything except timestamp
 * *Experimental:* [ClearURLs](https://github.com/ClearURLs) integration (removes tracking parameters) (report issues/bugs [here](https://github.com/1fexd/clearurlkt))
 * *Experimental:* [FastFoward](https://github.com/FastForwardTeam/FastForward) **rule** integration (extracts redirects from url parameters) (report issues/bugs [here](https://github.com/1fexd/fastforwardkt))
 * *Experimental:* [LibRedirect](https://github.com/libredirect/libredirect) integration (redirects to non-proprietary frontends) (report issues/bugs [here](https://github.com/1fexd/libredirectkt))
 
+* **Pro:** Resolve redirects either locally or via API hosted @ supabase.com ([Supabase Privacy policy](https://supabase.com/privacy)), API itself does not log anything except timestamp
+* **Pro:** Priority support - your feature requests and/or bug fixes will be prioritized
+* **Pro:** Sustain LinkSheet's development - a small donation keeps me motivated to work on the app - thank you!
+
 ## Donations / LinkSheet Pro
 
-All donations of 4€+ (Crypto), or 5€+ (for all other means of payment) are eligible for ✨ LinkSheet Pro ✨. 
+All donations of
 
-* Some of these Pro-only features which are planned in the future may require a monthly subscription of some sort. Your initial donation will count towards that, so for example, if there is a feature that is 1€ / month, and you donated 5€, you get the first 5 months of that service for free.
+* 4€+ (Crypto) or
+* 5€+ (all other means of payment)
 
-If you would like to donate in another way (SEPA Bank Transfer/Paypal, or in another cryptocurrency), send a mail to `1fexd[at]420blaze.it` and we will figure something out. 
-
-**Also, if I haven't contacted you after a few days to give you access to Pro builds, please don't hesitate to send me an email (again, to `1fexd[at]420blaze.it`)**
+are eligible for ✨ LinkSheet Pro ✨ - donate via the links above
 
 ## Nightly builds
 
 Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred). The latest nightly version can always be downloaded via [nightly.link](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip), but if you are using something like [Obtainium](https://github.com/ImranR98/Obtainium), there also is a [LinkSheetNightly](https://github.com/1fexd/LinkSheetNightly) repository where nightly builds are released as Github releases.
-
-## Note
-
-⚠️ Development is a bit stale at the moment, as I am busy with other things and/or don't have that much motivation. If you encounter bugs or issues, try using the latest nightly build, it may have already been fixed there.
 
 ## License
 
@@ -99,8 +97,7 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 * First of all, thank you to everyone who has contributed translations to this project via [Weblate](https://hosted.weblate.org/projects/linksheet/)
 * Secondly, please acknowledge that all translations (e.g. everything that is not english) is maintained by the community. I do not check these translations currently, so if there are mistakes or intentional errors please open an issue or correct them yourself!
-* Thirdly, special shout-out to [@Daviteusz](https://github.com/Daviteusz), this man updates the polish translations like daily or something, you're something else man, thank you very much!
-
+* Thirdly, special shout-out to [@Daviteusz](https://github.com/Daviteusz) for providing translation updates incredibly fast.
 
 ## Acknowledgements
 

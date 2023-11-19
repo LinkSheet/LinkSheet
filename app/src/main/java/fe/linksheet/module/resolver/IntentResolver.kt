@@ -18,6 +18,7 @@ import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
+import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
@@ -306,10 +307,16 @@ class IntentResolver(
 //            noBrowsersPresentOnlySingleApp
 //        )
 
+//        val host = referrer?.host
+//        val scheme = referrer?.scheme
+//
+//        val linkSheetReferrer = intent.hasExtra(LinkSheetConnector.EXTRA_REFERRER)
+//        val intentReferrer = intent.hasExtra(Intent.EXTRA_REFERRER)
+
         return BottomSheetResult.BottomSheetSuccessResult(
             newIntent,
-            referrer,
             uri,
+            referrer,
             grouped,
             filteredItem,
             showExtended,

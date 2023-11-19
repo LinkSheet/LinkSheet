@@ -25,11 +25,14 @@ sealed class BottomSheetResult(val uri: Uri?) {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
         val isEmpty = totalCount == 0
 
-        private val referringPackageName = if (referrer?.scheme == "android-app") referrer.host else null
+        private val referringPackageName =
+            if (referrer?.scheme == "android-app") referrer.host else null
 
         val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
         val app = filteredItem ?: resolved[0]
-        val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption) && app.packageName != referringPackageName
+
+        val hasAutoLaunchApp =
+            (isRegularPreferredApp || hasSingleMatchingOption) && (referringPackageName == null || app.packageName != referringPackageName)
     }
 
     class BottomSheetNoHandlersFound(uri: Uri?) : BottomSheetResult(uri)

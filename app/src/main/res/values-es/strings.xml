@@ -318,7 +318,7 @@
     <string name="donate_learn_more">Más información</string>
     <string name="donate_other">Si desea donar de otra forma (transferencia SEPA, PayPal, otra criptomoneda, etc.), envíe también un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="type">Tipo:</string>
-    <string name="flavor">Flavor:</string>
+    <string name="flavor">Sabor:</string>
     <string name="github_pipeline_build">Desarrollado y firmado para el flujo de trabajo de Github</string>
     <string name="other">Otros</string>
     <string name="app_setup">Configuración de la aplicación</string>

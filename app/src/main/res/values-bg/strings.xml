@@ -339,4 +339,15 @@
     <string name="linksheet_donation_explainer">LinkSheet е резултат на повече от <b>%s</b> работа, в продължение на повече от <b>%s</b>. Ако оценявате труда ми, направете дарение.</string>
     <string name="built_by_error">Приложението не е подписано от 1fexd. Това не е непременно нещо лошо, защото всеки може да вземе изходния код и да компилира приложението, но някой може да го направи с цел вреда.</string>
     <string name="pro_feature">Това е възможност на LinkSheet Pro!</string>
+    <string name="export_to_file">Изнасяне във файл</string>
+    <string name="import_settings">Внасяне на настройки</string>
+    <string name="export_import_settings">Изнасяне и внасяне на настройки</string>
+    <string name="import_headline">Внасяне</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="confirm_import">Потвърждаване</string>
+    <string name="import_explainer">Внася вече изнесен файл с настройки</string>
+    <string name="export_import_settings_explainer">Изнася текущите или внася вече изнесени настройки</string>
+    <string name="export_settings">Изнасяне на настройки</string>
+    <string name="export_explainer">Изнася текущите настройки във файл</string>
+    <string name="import_settings_override_preferences">Ще бъдат презаписани текущите настройки. Потвърждавате ли?</string>
 </resources>

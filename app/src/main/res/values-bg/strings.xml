@@ -221,7 +221,7 @@
     <string name="shizuku_integration">Интеграция с Shizuku</string>
     <string name="known_trackers">Известни проследявания</string>
     <string name="advanced">Разширени</string>
-    <string name="advanced_explainer">Разширени функционалности като флагове</string>
+    <string name="advanced_explainer">Разширени настройки като флагове и внасяне/изнасяне</string>
     <string name="shizuku_explainer_short">Директно взаимодейства със системните ППИ</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="license_mit">Лиценз на МТИ</string>
@@ -300,7 +300,7 @@
 \nТака или иначе, оставили са „вратичка“: обработката на връзките може да бъде изключена за всяко приложение поотделно. Може да предположите, че това ще върне стария избор на приложения, но, разбира се (благодаря, Google!), случаят не е такъв. Сега връзката винаги ще се отваря в мрежовия четец по подразбиране. Ето защо беше създаден LinkSheet.</string>
     <string name="launch_onboaring">Обучение</string>
     <string name="pretend_to_be_app_explainer">Ще се престори на регистрираното приложение на поддържаните домейни чрез LinkSheetCompat</string>
-    <string name="show_linksheet_referrer_explainer">Когато дадено приложения се отваря, то може да провери кое друго приложение го е отворило или го \"изпраща\". По подразбиране, когато LinkSheet отваря приложение, не се обявява като \"изпращач\", а указва приложението, което е стартирало LinkSheet. Ако е отметнато LinkSheet ще се обявава като \"изпращач\" на приложенията, които отваря.</string>
+    <string name="show_linksheet_referrer_explainer">Когато дадено приложения се отваря, то може да провери кое друго приложение го е отворило или го „изпраща“. По подразбиране, когато LinkSheet отваря приложение, не се обявява като „изпращач“, а указва приложението, което е стартирало LinkSheet. Ако е отметнато LinkSheet ще се обявава като „изпращач“ на приложенията, които отваря.</string>
     <string name="onboarding4_paragraph_1">В Android 12 Google въведе проверени връзки към приложенията (Verified App Links). Така приложенията могат криптографски да проверяват собствеността на домейните. Когато докоснете връзка към такъв домейн и е инсталирано съответното приложение, то ще се отваря автоматично по подразбиране, като се прескача изцяло изборът, който преди това се предоставяше на потребителя.</string>
     <string name="launch_onboaring_explainer">Проверка на екрана за обучение</string>
     <string name="thanks_for_donating">Благодаря за дарението!</string>
@@ -350,4 +350,9 @@
     <string name="export_settings">Изнасяне на настройки</string>
     <string name="export_explainer">Изнася текущите настройки във файл</string>
     <string name="import_settings_override_preferences">Ще бъдат презаписани текущите настройки. Потвърждавате ли?</string>
+    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b>(или еквивалента на <b>4€</b> в криптовалута!) ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което, в момента, само скрива напомнянето за даряване от основния екран, но в бъдеще ще предлага <b>възможности достъпни само там</b>.</string>
+    <string name="export_include_recommendation">Препоръчваме ви да не включвате тези настройки ако смятате да споделяте изнесеното с други хора!</string>
+    <string name="include_log_hash_key">Включително ключа за дневника</string>
+    <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
+    <string name="include_history">Включително историята (препратки и приложения)</string>
 </resources>

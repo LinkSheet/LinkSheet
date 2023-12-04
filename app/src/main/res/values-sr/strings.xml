@@ -28,12 +28,12 @@
     <string name="browser_explainer">Режим прегледача и подешавања прегледача у апликацији</string>
     <string name="save">Сачувај</string>
     <string name="enable_amp2html">Омогући Amp2Html</string>
-    <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (брише параметре праћења са URL-ова)</string>
+    <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
     <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено.</string>
     <string name="branch">Грана:</string>
     <string name="always_disable">Увек онемогући</string>
     <string name="copy_to_clipboard">Копирај у привремену меморију</string>
-    <string name="preview_url_explainer">Приказује URL на који је кликнуто (након што је обрађен)</string>
+    <string name="preview_url_explainer">Приказује URL адресу на коју је кликнуто (након што је обрађена)</string>
     <string name="theme_explainer">Промените тему апликације</string>
     <string name="logs">Евиденције</string>
     <string name="no_apps_which_can_handle_links_found">Није пронађена ниједна апликација која може да рукује линковима.</string>
@@ -57,7 +57,7 @@
     <string name="enable_shizuku">Омогући (експерименталну) Shizuku интеграцију</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
-    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL садржи директан линк до фајла. Ово може да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation></string>
+    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation></string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
@@ -113,7 +113,7 @@
     <string name="github">GitHub</string>
     <string name="configure">Конфигуриши</string>
     <string name="show_linksheet_referrer">Прикажи LinkSheet упућивача</string>
-    <string name="url_copied">URL је копиран у привремену меморију</string>
+    <string name="url_copied">URL адреса је копирана у привремену меморију</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="copy">Копирај URL</string>
     <string name="resolve_failed">%s је неуспешно: %s</string>
@@ -159,7 +159,7 @@
     <string name="disable_in_selected_explainer">Онемогућите прегледач у апликацији у изабраним апликацијама, без обзира на то шта апликација жели да користи</string>
     <string name="fastfoward_rules">Користи FastForward правила</string>
     <string name="version">Верзија</string>
-    <string name="preview_url">Преглед URL-а</string>
+    <string name="preview_url">Преглед URL адресе</string>
     <string name="usage_stats_sorting_explainer">Укључите статистику коришћења Android система у алгоритам за сортирање. Дозвола се тражи при првом укључивању.</string>
     <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
     <string name="github_explainer">Репозиторијум изворног кода</string>
@@ -169,7 +169,7 @@
     <string name="debug">Отклањање грешака</string>
     <string name="onboarding1_headline">Добро дошли у</string>
     <string name="enable_copy_button_explainer">Приказује дугме „Копирај URL“ у доњем листу</string>
-    <string name="downloader_url_mime_type_explainer">Проверава да ли се URL завршава екстензијом фајла (нпр. „.jpg“); Ако је тако, овај тип се користи за преузети фајл.</string>
+    <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. „.jpg“); Ако је тако, овај тип се користи за преузети фајл.</string>
     <string name="onboarding4_headline">Искључите руковање линком да бисте направили LinkSheet</string>
     <string name="other">Остало</string>
     <string name="open_settings">Отвори подешавања</string>
@@ -237,7 +237,7 @@
     <string name="preferred_browser">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали</string>
-    <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила(заобилажење преусмеравања неких хостова издвајањем преусмеравања из везе)</string>
+    <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
     <string name="donation_instructions">Упутства за донацију</string>
     <string name="disable_toasts_explainer">Никада не приказуј искачуће поруке</string>
     <string name="set_as_browser">Подеси као прегледач</string>
@@ -312,7 +312,7 @@
     <string name="donate_card">Донирање картицом (путем BuyMeACoffee)</string>
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
     <string name="disable_link_handling">Онемогући руковање линком</string>
-    <string name="downloader_url_mime_type">Користите тип пантомиме из URL-а</string>
+    <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
     <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> интеграцију</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>

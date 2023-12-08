@@ -58,6 +58,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.takeOrElse
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
@@ -188,11 +189,13 @@ class BottomSheetActivity : ComponentActivity() {
         val preferredAppItemHeight = 60.dp
 
         val gridSize = 120.dp
-        var gridItemHeightPackage = 80.dp
+        val gridItemHeightPackageText = 20.dp
+        val gridItemHeightPrivateButton = 40.dp
 
         //            + 50.dp
         var gridItemHeight = 60.dp
 //          + 50.dp
+
 
         // token from androidx.compose.material.ModelBottomSheet
         val maxModalBottomSheetWidth = 640.dp
@@ -276,12 +279,13 @@ class BottomSheetActivity : ComponentActivity() {
                 result.showExtended || bottomSheetViewModel.alwaysShowPackageName.value
             }
 
+
             val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
             else LocalConfiguration.current.screenHeightDp) / 3f
 
             val itemHeight = if (bottomSheetViewModel.gridLayout.value) {
-                val gridItemHeight = if (showPackage) gridItemHeightPackage.value
-                else gridItemHeight.value
+                val gridItemHeight =
+                    gridItemHeight.value + if (showPackage) gridItemHeightPackageText.value else 0.0f + gridItemHeightPrivateButton.value
 
                 gridItemHeight
             } else appListItemHeight.value
@@ -545,6 +549,12 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
+    fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
+        if (!bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) return null
+        return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
+    }
+
+
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun AppList(
@@ -556,7 +566,6 @@ class BottomSheetActivity : ComponentActivity() {
     ) {
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-
 
         if (result.isEmpty) {
             Row(
@@ -614,13 +623,20 @@ class BottomSheetActivity : ComponentActivity() {
                         items = result.resolved,
                         key = { _, item -> item.flatComponentName }
                     ) { index, info ->
+                        val privateBrowser = shouldShowRequestPrivate(info)
+
                         Column(
                             modifier = modifier(
                                 index,
                                 info
-                            ).height(if (showPackage) gridItemHeightPackage else gridItemHeight),
+                            ).height(
+                                gridItemHeight
+                                        + if (showPackage) gridItemHeightPackageText else 0.dp
+                                        + if (privateBrowser != null) gridItemHeightPrivateButton else 0.dp
+                            ),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
+
                             Image(
                                 bitmap = info.iconBitmap,
                                 contentDescription = info.label,
@@ -645,11 +661,14 @@ class BottomSheetActivity : ComponentActivity() {
                                 )
                             }
 
-                            RequestPrivateBrowsingButton(
-                                bottomSheetViewModel = bottomSheetViewModel,
-                                app = info,
-                                result = result
-                            )
+                            if (privateBrowser != null) {
+                                RequestPrivateBrowsingButton(
+                                    wrapInRow = false,
+                                    supportedBrowser = privateBrowser,
+                                    app = info,
+                                    result = result
+                                )
+                            }
                         }
                     }
                 })
@@ -662,6 +681,9 @@ class BottomSheetActivity : ComponentActivity() {
                     itemsIndexed(
                         items = result.resolved,
                         key = { _, item -> item.flatComponentName }) { index, info ->
+
+                        val shouldShowRequestPrivate = shouldShowRequestPrivate(info)
+
                         Row(
                             modifier = modifier(index, info).height(appListItemHeight),
                             verticalAlignment = Alignment.CenterVertically,
@@ -687,11 +709,13 @@ class BottomSheetActivity : ComponentActivity() {
                                 }
                             }
 
-                            RequestPrivateBrowsingButton(
-                                bottomSheetViewModel = bottomSheetViewModel,
-                                app = info,
-                                result = result
-                            )
+                            if (shouldShowRequestPrivate != null) {
+                                RequestPrivateBrowsingButton(
+                                    supportedBrowser = shouldShowRequestPrivate,
+                                    app = info,
+                                    result = result
+                                )
+                            }
                         }
                     }
                 }
@@ -702,31 +726,17 @@ class BottomSheetActivity : ComponentActivity() {
     @Composable
     private fun RequestPrivateBrowsingButton(
         wrapInRow: Boolean = true,
-        bottomSheetViewModel: BottomSheetViewModel,
+        supportedBrowser: PrivateBrowsingBrowser,
         app: DisplayActivityInfo,
         result: BottomSheetResult.BottomSheetSuccessResult
     ) {
-        if (bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) {
-            val supportedBrowser = PrivateBrowsingBrowser.getSupportedBrowser(
-                app.packageName
-            )
-
-            if (supportedBrowser != null) {
-                if (wrapInRow) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        Column {
-                            RequestPrivateBrowsingTextButton(
-                                app = app,
-                                result = result,
-                                supportedBrowser = supportedBrowser
-                            )
-                        }
-                    }
-                } else {
+        if (wrapInRow) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                Column {
                     RequestPrivateBrowsingTextButton(
                         app = app,
                         result = result,
@@ -734,6 +744,12 @@ class BottomSheetActivity : ComponentActivity() {
                     )
                 }
             }
+        } else {
+            RequestPrivateBrowsingTextButton(
+                app = app,
+                result = result,
+                supportedBrowser = supportedBrowser
+            )
         }
     }
 
@@ -856,15 +872,19 @@ class BottomSheetActivity : ComponentActivity() {
                     )
                 }
 
-                if (!useTwoRows && app != null) {
-                    Spacer(modifier = Modifier.width(2.dp))
-                    RequestPrivateBrowsingButton(
-                        wrapInRow = false,
-                        bottomSheetViewModel = bottomSheetViewModel,
-                        app = app,
-                        result = result
-                    )
+                if (app != null) {
+                    val privateBrowser = shouldShowRequestPrivate(app)
+                    if (!useTwoRows && privateBrowser != null) {
+                        Spacer(modifier = Modifier.width(2.dp))
+                        RequestPrivateBrowsingButton(
+                            wrapInRow = false,
+                            supportedBrowser = privateBrowser,
+                            app = app,
+                            result = result
+                        )
+                    }
                 }
+
 
                 if (!useTwoRows) {
                     OpenButtons(
@@ -932,11 +952,14 @@ class BottomSheetActivity : ComponentActivity() {
                 }
 
                 if (app != null) {
-                    RequestPrivateBrowsingButton(
-                        bottomSheetViewModel = bottomSheetViewModel,
-                        app = app,
-                        result = result,
-                    )
+                    val privateBrowser = shouldShowRequestPrivate(app)
+                    if (privateBrowser != null) {
+                        RequestPrivateBrowsingButton(
+                            supportedBrowser = privateBrowser,
+                            app = app,
+                            result = result,
+                        )
+                    }
                 }
             } else {
                 TextButton(

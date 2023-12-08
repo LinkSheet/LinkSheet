@@ -127,27 +127,12 @@ fun BottomSheetSettingsRoute(
                     state = viewModel.enableRequestPrivateBrowsingButton,
                     viewModel = viewModel,
                     headline = stringResource(id = R.string.enable_request_private_browsing_button),
-                    subtitleBuilder = { _ ->
-                        SubtitleText(subtitle = stringResource(
-                            id = R.string.enable_request_private_browsing_button_explainer,
-                            PrivateBrowsingBrowser.supportedBrowsers.joinToString(
-                                separator = ", ",
-                            ) { it.displayName }
-                        ))
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.request_timeout_explainer_disclaimer),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
-                        }
-                    }
+                    subtitle = stringResource(
+                        id = R.string.enable_request_private_browsing_button_explainer,
+                        PrivateBrowsingBrowser.supportedBrowsers.joinToString(
+                            separator = ", ",
+                        ) { it.displayName }
+                    )
                 )
             }
 

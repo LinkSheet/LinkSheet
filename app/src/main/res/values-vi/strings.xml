@@ -157,7 +157,6 @@
     <string name="dark">Tối</string>
     <string name="disable_toasts_explainer">Không bao giờ hiển thị bất kỳ tin nhắn thông báo ngắn nào</string>
     <string name="set_as_browser">Đặt làm trình duyệt</string>
-    <string name="request_timeout_explainer_disclaimer">Hiện không có sẵn ở chế độ lưới</string>
     <string name="whitelisted">Đã liệt vào Danh sách trắng</string>
     <plurals name="minutes">
         <item quantity="other">%s phút</item>

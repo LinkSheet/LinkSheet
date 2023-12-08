@@ -241,7 +241,6 @@
     <string name="donation_instructions">Упутства за донацију</string>
     <string name="disable_toasts_explainer">Никада не приказуј искачуће поруке</string>
     <string name="set_as_browser">Подеси као прегледач</string>
-    <string name="request_timeout_explainer_disclaimer">Тренутно није доступно у мрежном режиму</string>
     <string name="whitelisted">Бела листа</string>
     <plurals name="minutes">
         <item quantity="one">%s минут</item>

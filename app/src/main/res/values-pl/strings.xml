@@ -199,7 +199,6 @@
     <string name="resolved_via">%s rozwiązano przez %s</string>
     <string name="resolve_failed">%s nie powiodło się: %s</string>
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego. Obsługiwane przeglądarki: %s</string>
-    <string name="request_timeout_explainer_disclaimer">Obecnie niedostępne w trybie siatki</string>
     <string name="usage_stats_sorting_explainer">Uwzględnij statystyki użycia systemu Android w algorytmie sortowania. Żądane jest uprawnienie przy pierwszym przełączeniu.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Włączenie wielu przycisków w dolnym panelu może obecnie prowadzić do ich ucinania lub glitchowania.</string>
     <string name="always_show_package_name_disclaimer">Ten przełącznik zostanie przeniesiony do innej lokalizacji w przyszłej wersji.</string>

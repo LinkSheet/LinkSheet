@@ -167,7 +167,6 @@
     <string name="follow_redirects_builtin_cache">Yerleşik yönlendirme önbelleğini kullan</string>
     <string name="follow_redirects_builtin_cache_explainer">Dahili önbelleği kullan (harici hizmetin veritabanı dışa aktarımını kullanır)</string>
     <string name="redirect_resolve_type_builtin_cache">dahili önbellek</string>
-    <string name="request_timeout_explainer_disclaimer">Şu anda ızgara modunda kullanılamıyor</string>
     <string name="use_unified_preferred_browser_explainer">Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın.</string>
     <string name="always_show_package_name_disclaimer">Bu anahtar gelecekteki bir sürümde farklı bir konuma taşınacaktır.</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>

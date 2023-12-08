@@ -200,7 +200,6 @@
     <string name="resolve_failed">%s فشل: %s</string>
     <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات استخدام نظام Android في خوارزمية الفرز. يتم طلب الإذن عند التبديل الأول.</string>
     <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
-    <string name="request_timeout_explainer_disclaimer">غير متوفر حاليا في وضع الشبكة</string>
     <string name="always_show_package_name_disclaimer">سيتم نقل هذا المفتاح إلى موقع مختلف في إصدار مستقبلي.</string>
     <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">قد يؤدي تمكين الكثير من الأزرار في الورقة السفلية حاليا إلى قطع / خلل في الأزرار.</string>

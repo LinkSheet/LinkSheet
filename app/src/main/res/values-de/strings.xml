@@ -274,7 +274,6 @@
     <string name="shizuku_integration_not_setup_explainer">Shizuku ist zwar nicht unbedingt notwendig, um LinkSheet zu nutzen, wird aber empfohlen. Tippen Sie hier, um es zu installieren</string>
     <string name="fastfoward_rules_explainer">Experimentelle Integration von <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation>-Regeln verwenden (umgeht Weiterleitungen einiger Hosts durch Extraktion der Weiterleitung aus dem Link)</string>
     <string name="donation_instructions">Anleitung zum Spenden</string>
-    <string name="request_timeout_explainer_disclaimer">Derzeit nicht im Gittermodus verfügbar</string>
     <string name="whitelisted">Auf der Whitelist</string>
     <string name="log">Protokoll</string>
     <string name="loading_link">Link lädt…</string>

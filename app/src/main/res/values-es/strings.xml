@@ -219,7 +219,6 @@
     <string name="donation_instructions">Instrucciones de donación</string>
     <string name="disable_toasts_explainer">No mostrar nunca notificaciones emergentes</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
-    <string name="request_timeout_explainer_disclaimer">Actualmente no disponible en modo cuadrícula</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>
     <string name="loading_link">Cargando enlace…</string>

@@ -210,7 +210,6 @@
     <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>.</string>
     <string name="delete">Премахване</string>
     <string name="no_logs_found">Не са намерени предишни дневници!</string>
-    <string name="request_timeout_explainer_disclaimer">В момента не е налично в таблична подредба</string>
     <string name="enable_amp2html">Amp2Html</string>
     <string name="amp2html_local_cache">Местна временна памет за Amp2Html</string>
     <string name="amp2html">Amp2Html</string>

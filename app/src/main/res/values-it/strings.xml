@@ -139,7 +139,6 @@
     <string name="services">Servizi</string>
     <string name="current_session">Sessione in corso</string>
     <string name="enable_amp2html">Abilita Amp2Html</string>
-    <string name="request_timeout_explainer_disclaimer">Attualmente non disponibile in modalità griglia</string>
     <string name="enable_copy_button_explainer">Mostra un pulsante \"Copia URL\" nel foglio inferiore</string>
     <string name="clear">Pulisci</string>
     <string name="open_settings">Apri impostazioni</string>

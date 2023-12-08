@@ -219,7 +219,6 @@
     <string name="donation_instructions">ਦਾਨ ਸਬੰਧੀ ਨਿਰਦੇਸ਼</string>
     <string name="disable_toasts_explainer">ਕਦੇ ਵੀ ਕੋਈ ਟੋਸਟ ਸੁਨੇਹੇ ਨਾ ਦਿਖਾਓ</string>
     <string name="set_as_browser">ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
-    <string name="request_timeout_explainer_disclaimer">ਵਰਤਮਾਨ ਵਿੱਚ ਗਰਿੱਡ ਮੋਡ ਵਿੱਚ ਉਪਲਬਧ ਨਹੀਂ ਹੈ</string>
     <string name="whitelisted">ਵ੍ਹਾਈਟਲਿਸਟਡ</string>
     <string name="log">ਲੌਗ</string>
     <string name="loading_link">ਲਿੰਕ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>

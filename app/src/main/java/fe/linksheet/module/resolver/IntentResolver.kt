@@ -281,7 +281,7 @@ class IntentResolver(
             browserHandler.handleBrowsers(mode.value, selected.value, repository, resolvedList)
         } else null
 
-        logger.debug("BrowserMode=$browserMode")
+        logger.debug("BrowserMode: $browserMode")
 
         val (grouped, filteredItem, showExtended) = BottomSheetGrouper.group(
             context,

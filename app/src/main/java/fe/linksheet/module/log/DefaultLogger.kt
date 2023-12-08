@@ -9,7 +9,7 @@ abstract class Logger(val prefix: String, val hasher: LogHasher) {
         Verbose("V"), Info("I"), Debug("D")
     }
 
-    protected fun mergePrefix(subPrefix: String?) = prefix + subPrefix?.let { "/$it" }
+    protected fun mergeSubPrefix(msg: String, subPrefix: String?) = (subPrefix?.let { "[$it] " } ?: "") + msg
 
     abstract fun print(type: Type, msg: String, subPrefix: String? = null)
 
@@ -68,7 +68,7 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     constructor(clazz: KClass<*>) : this(clazz.simpleName!!)
 
     override fun print(type: Type, msg: String, subPrefix: String?) {
-        println("${type.code} ${mergePrefix(subPrefix)}: $msg")
+        println("${type.code} ${mergeSubPrefix(msg, subPrefix)}: $msg")
     }
 
     override fun <T> verbose(
@@ -132,11 +132,11 @@ class DefaultLogger(
     private val appLogger = AppLogger.getInstance()
 
     override fun print(type: Type, msg: String, subPrefix: String?) {
-        val mergedPrefix = mergePrefix(subPrefix)
+        val mergedMessage = mergeSubPrefix(msg, subPrefix)
         when (type) {
-            Type.Verbose -> Log.v(mergedPrefix, msg)
-            Type.Info -> Log.i(mergedPrefix, msg)
-            Type.Debug -> Log.d(mergedPrefix, msg)
+            Type.Verbose -> Log.v(prefix, mergedMessage)
+            Type.Info -> Log.i(prefix, mergedMessage)
+            Type.Debug -> Log.d(prefix, mergedMessage)
         }
     }
 
@@ -176,7 +176,7 @@ class DefaultLogger(
     }
 
     private fun log(type: Type, normal: String, redacted: String, subPrefix: String?) {
-        appLogger.write(LogEntry(type.code, System.currentTimeMillis(), prefix, normal, redacted))
+        appLogger.write(LogEntry(type.code, System.currentTimeMillis(), prefix + (subPrefix?.let { "/$it" } ?: ""), normal, redacted))
         print(type, normal, subPrefix)
     }
 
@@ -197,7 +197,7 @@ class DefaultLogger(
     override fun verbose(
         throwable: Throwable,
         subPrefix: String?
-    ) = log(Type.Verbose, throwable.asString(), prefix)
+    ) = log(Type.Verbose, throwable.asString(), subPrefix)
 
     override fun verbose(msg: String, subPrefix: String?) {
         log(Type.Verbose, msg, subPrefix)
@@ -213,7 +213,7 @@ class DefaultLogger(
     override fun info(
         throwable: Throwable,
         subPrefix: String?
-    ) = log(Type.Info, throwable.asString(), prefix)
+    ) = log(Type.Info, throwable.asString(), subPrefix)
 
     override fun info(msg: String, subPrefix: String?) {
         log(Type.Info, msg, subPrefix)
@@ -229,7 +229,7 @@ class DefaultLogger(
     override fun debug(
         throwable: Throwable,
         subPrefix: String?
-    ) = log(Type.Debug, throwable.asString(), prefix)
+    ) = log(Type.Debug, throwable.asString(), subPrefix)
 
     override fun debug(msg: String, subPrefix: String?) {
         log(Type.Debug, msg, subPrefix)

@@ -233,7 +233,7 @@
     <string name="disabled">Desactivado</string>
     <string name="enable_request_private_browsing_button">Activar botón \"Navegación privada\"</string>
     <string name="redact_log">Redactar registro (recomendado; deshabilitarlo puede filtrar nombres de paquetes y nombres de dominio)</string>
-    <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede verificar qué aplicación se inició o \"refirió\" a ella. De forma predeterminada, cuando LinkSheet inicia una aplicación, se oculta y dice que la aplicación que inició LinkSheet es el objetivo iniciado. Habilite esto para reinsertar LinkSheet como referencia para las aplicaciones que abre.</string>
+    <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede comprobar qué aplicación se ha iniciado o \"referido\" a ella. De forma predeterminada, cuando LinkSheet lanza una aplicación, se oculta, diciendo que la aplicación que lanzó LinkSheet es el que la inició. Habilite esta opción para reinsertar LinkSheet como referencia para las aplicaciones que abre.</string>
     <string name="always_show_package_name_disclaimer">Este interruptor se moverá a una ubicación diferente en una versión futura.</string>
     <string name="search">Buscar</string>
     <string name="at_least_one_unknown_browser_installer">Existe, al menos, un navedador (desconocido) instalado</string>
@@ -318,7 +318,7 @@
     <string name="donate_learn_more">Más información</string>
     <string name="donate_other">Si desea donar de otra forma (transferencia SEPA, PayPal, otra criptomoneda, etc.), envíe también un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="type">Tipo:</string>
-    <string name="flavor">Flavor:</string>
+    <string name="flavor">Sabor:</string>
     <string name="github_pipeline_build">Desarrollado y firmado para el flujo de trabajo de Github</string>
     <string name="other">Otros</string>
     <string name="app_setup">Configuración de la aplicación</string>

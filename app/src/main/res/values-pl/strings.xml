@@ -68,7 +68,7 @@
     <string name="links">Linki</string>
     <string name="links_explainer">Ustawienia dotyczące manipulacją linkami</string>
     <string name="use_clear_urls">Użyj ClearURLs</string>
-    <string name="follow_redirects">Śledź przekierowania</string>
+    <string name="follow_redirects">Śledzenie przekierowań</string>
     <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu. Może to mieć <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">negatywny wpływ na prywatność</annotation></string>
     <string name="loading_link">Wczytywanie linku…</string>
     <string name="follow_redirects_external_service">Śledź przekierowania przez usługę zewnętrzną</string>
@@ -348,13 +348,13 @@
     <string name="export_to_file">Eksportuj do pliku</string>
     <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5 €</b> (<b>4 €</b> w przypadku dotacji kryptowalutami!) umożliwia uzyskanie dostępu do <b>LinkSheet Pro</b>, który obecnie jedynie ukrywa baner dotacyjny na głównym ekranie aplikacji, ale w przyszłości pojawią się <b>funkcje dostępne wyłącznie w wersji Pro.</b></string>
     <string name="import_settings">Przywracanie ustawień</string>
-    <string name="export_import_settings">Kopia zapasowa i przywracanie</string>
+    <string name="export_import_settings">Kopia ustawień</string>
     <string name="import_headline">Przywróć z kopii zapasowej</string>
     <string name="export_include_recommendation">Zalecamy włączenie poniższych ustawień tylko wtedy, gdy nie planujesz udostępniać eksportu komuś innemu!</string>
     <string name="export_file_name">linksheet_kopia_ustawień_%s.json</string>
     <string name="confirm_import">Potwierdzam</string>
     <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>
-    <string name="import_explainer">Przywróć ustawienia z pliku</string>
+    <string name="import_explainer">Importuj ustawienia z pliku</string>
     <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
     <string name="export_import_settings_explainer">Wykonaj kopię ustawień lub przywróć je z pliku</string>
     <string name="include_history">Uwzględnij historię (kliknięć linków i aplikacji)</string>

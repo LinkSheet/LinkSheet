@@ -120,8 +120,8 @@ class IntentResolver(
         preferenceRepository.getBooleanState(AppPreferences.amp2HtmlExternalService)
 
 
-    private val clearUrlProviders by lazy {
-        ClearURLLoader.loadBuiltInClearURLProviders()
+    companion object {
+        private val clearUrlProviders = ClearURLLoader.loadBuiltInClearURLProviders()
     }
 
     enum class Resolved(val key: String, val stringResId: Int) {
@@ -376,12 +376,10 @@ class IntentResolver(
                 if (clearUrl) {
                     url = clearUrl(url, clearUrlProviders)
                 }
-            }
+            }.onFailure { logger.debug(it) }
 
             logger.debug({ "GetUri: Post ClearURL=$it" }, url, HashProcessor.UrlProcessor)
-            return runCatching {
-                Uri.parse(url)
-            }.getOrNull()
+            return runCatching { Uri.parse(url) }.getOrNull()
         }
 
         return null

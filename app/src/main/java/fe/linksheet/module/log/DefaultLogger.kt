@@ -4,12 +4,14 @@ import android.util.Log
 import fe.kotlin.extension.asString
 import kotlin.reflect.KClass
 
-abstract class Logger(val hasher: LogHasher) {
+abstract class Logger(val prefix: String, val hasher: LogHasher) {
     enum class Type(val code: String) {
         Verbose("V"), Info("I"), Debug("D")
     }
 
-    abstract fun print(type: Type, msg: String)
+    protected fun mergePrefix(subPrefix: String?) = prefix + subPrefix?.let { "/$it" }
+
+    abstract fun print(type: Type, msg: String, subPrefix: String? = null)
 
     fun <T> dumpParameterToString(
         redact: Boolean = false,
@@ -32,75 +34,109 @@ abstract class Logger(val hasher: LogHasher) {
             .replace("%", "%%")
     }
 
-    abstract fun <T> verbose(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>)
-    abstract fun verbose(throwable: Throwable)
-    abstract fun verbose(msg: String)
-    abstract fun <T> info(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>)
-    abstract fun info(throwable: Throwable)
-    abstract fun info(msg: String)
+    abstract fun <T> verbose(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String? = null
+    )
 
-    abstract fun <T> debug(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>)
-    abstract fun debug(throwable: Throwable)
-    abstract fun debug(msg: String)
+    abstract fun verbose(throwable: Throwable, subPrefix: String? = null)
+    abstract fun verbose(msg: String, subPrefix: String? = null)
+    abstract fun <T> info(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String? = null
+    )
+
+    abstract fun info(throwable: Throwable, subPrefix: String? = null)
+    abstract fun info(msg: String, subPrefix: String? = null)
+
+    abstract fun <T> debug(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String? = null
+    )
+
+    abstract fun debug(throwable: Throwable, subPrefix: String? = null)
+    abstract fun debug(msg: String, subPrefix: String? = null)
 }
 
-class DebugLogger(private val prefix: String) : Logger(LogHasher.NoOpHasher) {
+class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     constructor(clazz: KClass<*>) : this(clazz.simpleName!!)
 
-    override fun print(type: Type, msg: String) {
-        println("${type.code} $prefix: $msg")
+    override fun print(type: Type, msg: String, subPrefix: String?) {
+        println("${type.code} ${mergePrefix(subPrefix)}: $msg")
     }
 
-    override fun <T> verbose(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>) {
-        print(Type.Verbose, msg(param.toString()))
+    override fun <T> verbose(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) {
+        print(Type.Verbose, msg(param.toString()), subPrefix)
     }
 
-    override fun verbose(throwable: Throwable) {
-        print(Type.Verbose, throwable.asString())
+    override fun verbose(throwable: Throwable, subPrefix: String?) {
+        print(Type.Verbose, throwable.asString(), subPrefix)
     }
 
-    override fun verbose(msg: String) {
-        print(Type.Verbose, msg)
+    override fun verbose(msg: String, subPrefix: String?) {
+        print(Type.Verbose, msg, subPrefix)
     }
 
-    override fun <T> info(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>) {
-        print(Type.Info, msg(param.toString()))
+    override fun <T> info(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) {
+        print(Type.Info, msg(param.toString()), subPrefix)
     }
 
-    override fun info(throwable: Throwable) {
-        print(Type.Info, throwable.asString())
+    override fun info(throwable: Throwable, subPrefix: String?) {
+        print(Type.Info, throwable.asString(), subPrefix)
     }
 
-    override fun info(msg: String) {
-        print(Type.Info, msg)
+    override fun info(msg: String, subPrefix: String?) {
+        print(Type.Info, msg, subPrefix)
     }
 
-    override fun <T> debug(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>) {
-        print(Type.Debug, msg(param.toString()))
+    override fun <T> debug(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) {
+        print(Type.Debug, msg(param.toString()), subPrefix)
     }
 
-    override fun debug(throwable: Throwable) {
-        print(Type.Debug, throwable.asString())
+    override fun debug(throwable: Throwable, subPrefix: String?) {
+        print(Type.Debug, throwable.asString(), subPrefix)
     }
 
-    override fun debug(msg: String) {
-        print(Type.Debug, msg)
+    override fun debug(msg: String, subPrefix: String?) {
+        print(Type.Debug, msg, subPrefix)
     }
 }
 
 class DefaultLogger(
-    private val prefix: String,
+    prefix: String,
     hasher: LogHasher.LogKeyHasher
-) : Logger(hasher) {
+) : Logger(prefix, hasher) {
     constructor(clazz: KClass<*>, hasher: LogHasher.LogKeyHasher) : this(clazz.simpleName!!, hasher)
 
     private val appLogger = AppLogger.getInstance()
 
-    override fun print(type: Type, msg: String) {
+    override fun print(type: Type, msg: String, subPrefix: String?) {
+        val mergedPrefix = mergePrefix(subPrefix)
         when (type) {
-            Type.Verbose -> Log.v(prefix, msg)
-            Type.Info -> Log.i(prefix, msg)
-            Type.Debug -> Log.d(prefix, msg)
+            Type.Verbose -> Log.v(mergedPrefix, msg)
+            Type.Info -> Log.i(mergedPrefix, msg)
+            Type.Debug -> Log.d(mergedPrefix, msg)
         }
     }
 
@@ -132,61 +168,70 @@ class DefaultLogger(
         type: Type,
         msg: (String) -> String,
         param: T,
-        hashProcessor: HashProcessor<T>
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?,
     ) {
         val (normal, redacted) = dump(msg, param, hashProcessor)
-        log(type, normal, redacted)
+        log(type, normal, redacted, subPrefix)
     }
 
-    private fun log(type: Type, normal: String, redacted: String) {
+    private fun log(type: Type, normal: String, redacted: String, subPrefix: String?) {
         appLogger.write(LogEntry(type.code, System.currentTimeMillis(), prefix, normal, redacted))
-        print(type, normal)
+        print(type, normal, subPrefix)
     }
 
     private fun log(
         type: Type,
         normalAndRedacted: String,
-    ) = log(type, normalAndRedacted, normalAndRedacted)
+        subPrefix: String?
+    ) = log(type, normalAndRedacted, normalAndRedacted, subPrefix)
 
 
     override fun <T> verbose(
         msg: (String) -> String,
         param: T,
-        hashProcessor: HashProcessor<T>
-    ) = log(Type.Verbose, msg, param, hashProcessor)
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) = log(Type.Verbose, msg, param, hashProcessor, subPrefix)
 
     override fun verbose(
-        throwable: Throwable
+        throwable: Throwable,
+        subPrefix: String?
     ) = log(Type.Verbose, throwable.asString(), prefix)
 
-    override fun verbose(msg: String) {
-        log(Type.Verbose, msg)
+    override fun verbose(msg: String, subPrefix: String?) {
+        log(Type.Verbose, msg, subPrefix)
     }
 
     override fun <T> info(
         msg: (String) -> String,
         param: T,
-        hashProcessor: HashProcessor<T>
-    ) = log(Type.Info, msg, param, hashProcessor)
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) = log(Type.Info, msg, param, hashProcessor, subPrefix)
 
     override fun info(
-        throwable: Throwable
+        throwable: Throwable,
+        subPrefix: String?
     ) = log(Type.Info, throwable.asString(), prefix)
 
-    override fun info(msg: String) {
-        log(Type.Info, msg)
+    override fun info(msg: String, subPrefix: String?) {
+        log(Type.Info, msg, subPrefix)
     }
+
     override fun <T> debug(
         msg: (String) -> String,
         param: T,
-        hashProcessor: HashProcessor<T>
-    ) = log(Type.Debug, msg, param, hashProcessor)
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) = log(Type.Debug, msg, param, hashProcessor, subPrefix)
 
     override fun debug(
-        throwable: Throwable
+        throwable: Throwable,
+        subPrefix: String?
     ) = log(Type.Debug, throwable.asString(), prefix)
 
-    override fun debug(msg: String) {
-        log(Type.Debug, msg)
+    override fun debug(msg: String, subPrefix: String?) {
+        log(Type.Debug, msg, subPrefix)
     }
 }

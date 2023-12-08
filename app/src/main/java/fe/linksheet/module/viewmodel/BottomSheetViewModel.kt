@@ -105,11 +105,10 @@ class BottomSheetViewModel(
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
         if (intent.component != null) {
             logger.debug(
-                { "Component=${it}" },
+                { "Component $it" },
                 intent.component!!,
                 HashProcessor.ComponentProcessor
             )
-
         }
 
         intent.component?.let { component ->
@@ -121,7 +120,7 @@ class BottomSheetViewModel(
                 alwaysPreferred = always
             )
 
-            logger.debug({ "Inserting $it" }, app, HashProcessor.PreferenceAppHashProcessor)
+            logger.debug({ "Inserting $it" }, app, HashProcessor.PreferenceAppHashProcessor, "AppPreferencePersister")
 
             preferredAppRepository.insert(app)
 
@@ -132,9 +131,10 @@ class BottomSheetViewModel(
             )
 
             logger.debug(
-                { "Inserting=$it" },
+                { "Inserting $it" },
                 historyEntry,
-                HashProcessor.AppSelectionHistoryHashProcessor
+                HashProcessor.AppSelectionHistoryHashProcessor,
+                "HistoryEntryPersister"
             )
             appSelectionHistoryRepository.insert(historyEntry)
         }

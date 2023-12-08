@@ -45,7 +45,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         if (builtInCache) {
             val resolvedUrl = resolverRepository.getBuiltInCachedForUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug({ "From built-in cache=$it" }, resolvedUrl, HashProcessor.UrlProcessor)
+                logger.debug({ "From built-in cache: $it" }, resolvedUrl, HashProcessor.UrlProcessor)
                 return Result.success(ResolveType.BuiltInCache(resolvedUrl))
             }
         }

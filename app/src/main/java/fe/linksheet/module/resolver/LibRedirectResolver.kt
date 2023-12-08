@@ -17,12 +17,14 @@ class LibRedirectResolver(
 ) {
     private val logger = loggerFactory.createLogger(LibRedirectResolver::class)
 
-    private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
-    private val libRedirectInstances by lazy { LibRedirectLoader.loadBuiltInInstances() }
+    companion object{
+        private val libRedirectServices = LibRedirectLoader.loadBuiltInServices()
+        private val libRedirectInstances= LibRedirectLoader.loadBuiltInInstances()
+    }
 
     suspend fun resolve(uri: Uri): LibRedirectResult {
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
-        logger.debug("Service=$service")
+        logger.debug("Using service: $service")
 
         if (service != null && stateRepository.isEnabled(service.key)) {
             val savedDefault = defaultRepository.getByServiceKeyFlow(service.key).firstOrNull()
@@ -35,7 +37,7 @@ class LibRedirectResolver(
             }
 
             val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
-            logger.debug({ "Redirected=$it" }, redirected, HashProcessor.StringProcessor)
+            logger.debug({ "Redirected to: $it" }, redirected, HashProcessor.StringProcessor)
 
             if (redirected != null) {
                 return LibRedirectResult.Redirected(uri, Uri.parse(redirected))

@@ -267,7 +267,7 @@ class IntentResolver(
             .queryResolveInfosByIntent(newIntent, true)
             .toMutableList()
 
-        logger.debug({ "ResolveList=$it" }, resolvedList, HashProcessor.ResolveInfoListProcessor)
+        logger.debug({ it }, resolvedList, HashProcessor.ResolveInfoListProcessor, "ResolveList")
 
         if (resolvedList.isEmpty()) {
             return BottomSheetResult.BottomSheetNoHandlersFound(uri)
@@ -362,23 +362,22 @@ class IntentResolver(
         if (uri?.host != null && uri.scheme != null) {
             var url = uri.toString()
 
-            logger.debug({ "GetUri: Pre modification=$it" }, url, HashProcessor.UrlProcessor)
+            logger.debug({ "Input: $it" }, url, HashProcessor.UrlProcessor, "ModifyUri")
 
             runCatching {
                 if (fastForward) {
                     getRuleRedirect(url)?.let { url = it }
                 }
-            }
+            }.onFailure { logger.debug(it, "FastForward") }
 
-
-            logger.debug({ "GetUri: Post FastForward=$it" }, url, HashProcessor.UrlProcessor)
+            logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "FastForward")
             runCatching {
                 if (clearUrl) {
                     url = clearUrl(url, clearUrlProviders)
                 }
-            }.onFailure { logger.debug(it) }
+            }.onFailure { logger.debug(it, "ClearUrls") }
 
-            logger.debug({ "GetUri: Post ClearURL=$it" }, url, HashProcessor.UrlProcessor)
+            logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "ClearURLs")
             return runCatching { Uri.parse(url) }.getOrNull()
         }
 

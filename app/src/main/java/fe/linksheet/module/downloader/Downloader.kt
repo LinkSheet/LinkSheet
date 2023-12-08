@@ -53,7 +53,7 @@ class Downloader(
             }
         }
 
-        object NonDownloadable : DownloadCheckResult() {
+        data object NonDownloadable : DownloadCheckResult() {
             override fun dump(
                 stringBuilder: StringBuilder,
                 hasher: LogHasher
@@ -62,7 +62,7 @@ class Downloader(
             }
         }
 
-        object MimeTypeDetectionFailed : DownloadCheckResult() {
+        data object MimeTypeDetectionFailed : DownloadCheckResult() {
             override fun dump(
                 stringBuilder: StringBuilder,
                 hasher: LogHasher

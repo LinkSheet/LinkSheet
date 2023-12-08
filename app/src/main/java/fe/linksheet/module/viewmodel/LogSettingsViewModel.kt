@@ -26,7 +26,7 @@ class LogSettingsViewModel(
     }
 
     fun deleteFileAsync(name: String) = ioLaunch {
-        if (appLogger.deleteLogFile(name).also { Log.d("DeleteFile", "$it") }) {
+        if (appLogger.deleteLogFile(name)) {
             files.emit(getLogFiles())
         }
     }

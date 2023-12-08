@@ -346,4 +346,5 @@
     <string name="import_settings">Import settings</string>
     <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
     <string name="confirm_import">Confirm</string>
+    <string name="last_rule_update">Last rule update from upstream (UTC): %s</string>
 </resources>

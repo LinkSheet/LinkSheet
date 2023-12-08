@@ -265,4 +265,100 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Активирован режим Shizuku, коснитесь приложения, чтобы переключить его возможности автоматической обработки ссылок. Нажмите и удерживайте приложение, чтобы открыть меню настроек «Открыть по умолчанию».</string>
     <string name="credits">О программе</string>
+    <string name="import_dumped_preference">Импортировать сброшенные настройки</string>
+    <string name="domain_selection_confirmation_subtitle">Вы уверены, что хотите установить %s в качестве предпочтительного приложения для следующих доменов?</string>
+    <string name="dismiss">Отклонить</string>
+    <string name="no_browser_installed">Браузер не установлен</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet обнаружил по крайней мере одно приложение, которое является настоящим браузером.</string>
+    <string name="branch">Branch:</string>
+    <string name="export_to_file">Экспортировать в файл</string>
+    <string name="domain_selection_confirmation_title">Выбрать домены?</string>
+    <string name="manual_build">Создано вручную и подписано 1fexd</string>
+    <string name="open_link_with_subtitle_2">LinkSheet изначально был основан на OpenWith</string>
+    <string name="warning">Предупреждение</string>
+    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
+    <string name="misc_settings">Разное</string>
+    <string name="commit">Commit:</string>
+    <string name="donate_learn_more">Узнать больше</string>
+    <string name="pretend_to_be_app_explainer_2">Некоторые приложения, например Google Chrome, явно ищут нативное приложение для обработки, например, ссылки Youtube при ее нажатии в результатах поиска. LinkSheetCompat притворяется таким родным приложением для поддерживаемых хостов, а затем пересылает запрос в LinkSheet.</string>
+    <string name="privacy_settings_explainer">Настройки, такие как включение реферера</string>
+    <string name="donate_explainer_crypto">Делая пожертвование в криптовалюте, чтобы получить <b>LinkSheet Pro</b>, отправьте подтверждение оплаты на адрес <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="no_handlers_found_explainer">LinkSheet не может открыть эту ссылку.</string>
+    <string name="join">Присоединиться</string>
+    <string name="discord">Discord</string>
+    <string name="donate_other">Если вы хотите сделать пожертвование другим способом (перевод SEPA, PayPal, другая криптовалюта и т. д.), отправьте электронное письмо по адресу <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="no">Нет</string>
+    <string name="import_and_override">Импортировать и переопределить</string>
+    <string name="onboarding4_paragraph_2">Это очень раздражает, поскольку иногда вы хотите открыть ссылку не в приложении, а в браузере (например, чтобы добавить ее в закладки).
+\n
+\nАх, классический Google, калечащий свои собственные продукты без простого способа восстановить старое поведение.
+\n
+\n В любом случае, они оставили небольшую \"лазейку\": Обработка ссылок может быть отключена в каждом конкретном приложении. Вы можете предположить, что это вернет старый выбор приложений, но, конечно же (спасибо Google!), это не так, поскольку теперь ссылка всегда будет открываться в браузере по умолчанию. Именно для этого и был создан LinkSheet.</string>
+    <string name="success">Успех</string>
+    <string name="discord_explainer">Заходите в наш чат в Discord сервере! Общайтесь с пользователями и разработчиками LinkSheet о его будущем и других начинаниях!</string>
+    <string name="configure">Конфигурация</string>
+    <string name="show_linksheet_referrer">Показать реферер LinkSheet</string>
+    <string name="type">Type:</string>
+    <string name="onboarding6_highlight">предпочтения</string>
+    <string name="onboarding6_headline">Установите свои</string>
+    <string name="yes">Да</string>
+    <string name="finish">Закончить</string>
+    <string name="flavor">Flavor:</string>
+    <string name="built_at">Построено в (UTC):</string>
+    <string name="linksheet_donation_explainer_2">Пожертвование на сумму более <b>5€</b> (<b>4€</b>, если вы делаете пожертвование в криптовалюте!) открывает вам доступ к <b>LinkSheet Pro</b>, который в настоящее время только скрывает баннер пожертвования на главном экране приложения, но в будущем появятся <b>эксклюзивные Pro функции.</b></string>
+    <string name="github_pipeline_build">Создан и подписан рабочим процессом Github</string>
+    <string name="import_settings">Импортировать настройки</string>
+    <string name="launch_onboaring">Запустить процесс адаптации</string>
+    <string name="other">Другое</string>
+    <string name="export_import_settings">Экспорт или импорт настроек</string>
+    <string name="import_headline">Импорт</string>
+    <string name="button_settings">Кнопки</string>
+    <string name="donate_card_subtitle_2">Пожертвовать криптовалюту</string>
+    <string name="linksheet_version_info_header">Информация о версии LinkSheet:</string>
+    <string name="export_include_recommendation">Мы рекомендуем вам включить следующие настройки, только если вы не планируете делиться экспортированными данными с кем-то ещё!</string>
+    <string name="no_handlers_found">Ни браузер, ни нативное приложение не найдены!</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="thanks_for_donating">Спасибо за пожертвование!</string>
+    <string name="app_setup">Настройка приложения</string>
+    <string name="confirm_import">Подтвердить</string>
+    <string name="seal_subtitle_2">Seal был отличным ресурсом для изучения Jetpack Compose</string>
+    <string name="include_log_hash_key">Включите хэш-ключ журнала (ключ, используемый для редактирования ваших журналов)</string>
+    <string name="import_dumped_preference_explainer">Импортер настроек, содержащихся в файлах логов - вероятно, бесполезен для обычного пользователя</string>
+    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
+    <string name="import_explainer">Импортировать предыдущий экспорт из файла</string>
+    <string name="github_workflow_run_id">Идентификатор рабочего процесса сборки:</string>
+    <string name="export_privacy">Чтобы узнать о конфиденциальности экспорта, перейдите по этой <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">ссылке</annotation>.</string>
+    <string name="donate_crypto">Пожертвовать через криптовалюту</string>
+    <string name="export_import_settings_explainer">Экспортируйте текущие настройки или импортируйте предыдущие настройки</string>
+    <string name="donation_instructions">Инструкции по пожертвованию</string>
+    <string name="donate_card_headline">Пожертвовать на поддержку LinkSheet</string>
+    <string name="general">Общее</string>
+    <string name="pretend_to_be_app_explainer">Притворитесь собственным приложением для поддерживаемых доменов с помощью LinkSheetCompat</string>
+    <string name="linksheet_donation_explainer">LinkSheet является результатом более чем <b>%s</b> работы за период более <b>%s</b>. Если вы хотите выразить благодарность за мою работу, сделайте пожертвование.</string>
+    <string name="show_linksheet_referrer_explainer">При запуске приложения LinkSheet может проверить, какое приложение было запущено, или \"ссылается\" на него. По умолчанию, когда LinkSheet запускает приложение, он скрывает себя, говоря, что приложение, запустившее LinkSheet, является целью запуска. Включите эту опцию, чтобы LinkSheet снова стал реферером для приложений, которые он открывает.</string>
+    <string name="at_least_one_unknown_browser_installer">Установлен как минимум(неизвестно) один браузер</string>
+    <string name="built_by">Создано и подписано</string>
+    <string name="compat_installed">LinkSheetCompat уже установлен</string>
+    <string name="launch_onboaring_explainer">Протестировать процесс адаптации</string>
+    <string name="mastodon_redirect_subtitle_2">Исходный код Mastodon Redirect использовался в качестве образца для взаимодействия с Shizuku</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet обнаружил как минимум одно приложение, выдающее себя за браузер. Список LinkSheet может быть неполным. Если вы считаете, что это ошибка, отправьте сообщение о проблеме на Github.</string>
+    <string name="donate">Пожертвовать</string>
+    <string name="include_history">Включить историю (ваши нажатия по ссылке и историю приложений)</string>
+    <string name="pro_feature">Это функция LinkSheet Pro!</string>
+    <string name="general_settings_explainer">Настройки, касающиеся всего приложения</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="built_by_error">Эта сборка не была подписана 1fexd. Это не обязательно означает что-то плохое, поскольку любой может разветвить исходный код и создать свое приложение, но он может сделать это со злым умыслом.</string>
+    <string name="no_browser_installed_explainer">LinkSheet не удалось обнаружить хотя бы одно приложение, выдающее себя за браузер. Для удобства установите браузер.</string>
+    <string name="donate_card">Пожертвуйте картой (через BuyMeACoffee)</string>
+    <string name="export_settings">Настройки экспорта</string>
+    <string name="export_explainer">Экспортируйте текущие настройки приложения в файл</string>
+    <string name="at_least_one_known_browser_installed">Установлен как минимум один браузер</string>
+    <string name="donate_card_subtitle"> Если вам нравится LinkSheet, подумайте о том, чтобы оставить звезду на Github и/или сделать пожертвование.
+\nЛюди, которые пожертвовавшие более <b>5€</b>, имеют право на <b>LinkSheet Pro</b>, который будет обладать эксклюзивными функциями.</string>
+    <string name="privacy">Конфиденциальность</string>
+    <string name="import_settings_override_preferences">Это отменит все существующие настройки. Продолжить?</string>
+    <string name="pretend_to_be_app">Перехват запросов собственных приложений</string>
+    <string name="version_name">Полный идентификатор:</string>
+    <string name="configure_explainer">Нажмите здесь, чтобы настроить LinkSheetCompat</string>
+    <string name="done">Готово</string>
 </resources>

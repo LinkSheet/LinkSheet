@@ -189,7 +189,7 @@ class BottomSheetActivity : ComponentActivity() {
         val preferredAppItemHeight = 60.dp
 
         val gridSize = 120.dp
-        val gridItemHeightPackageText = 20.dp
+        val gridItemHeightPackageText = 30.dp
         val gridItemHeightPrivateButton = 40.dp
 
         //            + 50.dp
@@ -549,7 +549,7 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
-    fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
+    private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
         if (!bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) return null
         return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
     }
@@ -703,6 +703,7 @@ class BottomSheetActivity : ComponentActivity() {
                                         Text(
                                             text = info.packageName,
                                             fontSize = 12.sp,
+                                            lineHeight = 12.sp,
                                             color = MaterialTheme.colorScheme.tertiary
                                         )
                                     }

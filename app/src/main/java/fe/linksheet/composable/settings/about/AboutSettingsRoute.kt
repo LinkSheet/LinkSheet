@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings.about
 
+import ClearURLsMetadata
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -141,7 +142,7 @@ fun AboutSettingsRoute(
                 }
             }
 
-            item("version") {
+            item("linksheet_version") {
                 val builtAt = buildNameValueAnnotatedString(
                     stringResource(id = R.string.built_at),
                     buildDate
@@ -206,7 +207,7 @@ fun AboutSettingsRoute(
                         })
                     },
                     image = {
-                        ColoredIcon(icon = Icons.Default.Info, descriptionId = R.string.version)
+                        ColoredIcon(icon = Icons.Default.Link, descriptionId = R.string.version)
                     },
                     content = {
                         SubtitleText(subtitle = flavor)
@@ -220,6 +221,42 @@ fun AboutSettingsRoute(
                                 subtitle = workflow
                             )
                         }
+                    }
+                )
+            }
+
+            item("clearurlskt_version") {
+                SettingsItemRow(
+                    headline = stringResource(id = R.string.clear_urls_version),
+                    subtitle = buildNameValueAnnotatedString(
+                        stringResource(id = R.string.last_rule_update),
+                        ClearURLsMetadata.fetchedAt.unixMillisAtUtc.format(
+                            ISO8601DateTimeFormatOption.DefaultFormat
+                        )
+                    ),
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.ClearAll,
+                            descriptionId = R.string.clear_urls_version
+                        )
+                    }
+                )
+            }
+
+            item("fastforward_version"){
+                SettingsItemRow(
+                    headline = stringResource(id = R.string.clear_urls_version),
+                    subtitle = buildNameValueAnnotatedString(
+                        stringResource(id = R.string.last_rule_update),
+                        ClearURLsMetadata.fetchedAt.unixMillisAtUtc.format(
+                            ISO8601DateTimeFormatOption.DefaultFormat
+                        )
+                    ),
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.Bolt,
+                            descriptionId = R.string.clear_urls_version
+                        )
                     }
                 )
             }

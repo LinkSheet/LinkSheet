@@ -80,7 +80,7 @@
     <string name="about_explainer">About this app, licenses</string>
     <string name="credits">Credits</string>
     <string name="credits_explainer">Open source licensing</string>
-    <string name="version">Version</string>
+    <string name="version">LinkSheet Version</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="license_apache_2">Apache License 2.0</string>
     <string name="seal">Seal</string>
@@ -346,5 +346,6 @@
     <string name="import_settings">Import settings</string>
     <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
     <string name="confirm_import">Confirm</string>
-    <string name="last_rule_update">Last rule update from upstream (UTC): %s</string>
+    <string name="last_rule_update">Last rule update from upstream (UTC):</string>
+    <string name="clear_urls_version">ClearURLs rule version</string>
 </resources>

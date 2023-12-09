@@ -2,11 +2,17 @@ package fe.linksheet.composable.settings.about
 
 import ClearURLsMetadata
 import android.content.pm.PackageManager
+import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -20,38 +26,45 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.unixMillisAtUtc
 import fe.kotlin.util.ISO8601DateTimeFormatOption
 import fe.linksheet.BuildConfig
+import fe.linksheet.BuildType
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.discordInvite
 import fe.linksheet.donateSettingsRoute
-import fe.linksheet.donationBuyMeACoffee
-import fe.linksheet.donationCrypto
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
+import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.officialSigningKeys
 import fe.linksheet.util.CryptoUtil
+import org.koin.androidx.compose.koinViewModel
 import java.util.Locale
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AboutSettingsRoute(
     navController: NavHostController,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    viewModel: AboutSettingsViewModel = koinViewModel()
 ) {
     val activity = LocalContext.currentActivity()
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
     val buildDate =
         BuildConfig.BUILT_AT.unixMillisAtUtc.value.format(ISO8601DateTimeFormatOption.DefaultFormat)
+
+    var devClicks by remember { mutableIntStateOf(0) }
 
     SettingsScaffold(R.string.about, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -60,6 +73,12 @@ fun AboutSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
+            stickyHeader(key = "misc") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(text = stringResource(R.string.misc_settings))
+                }
+            }
+
             item(creditsSettingsRoute) {
                 SettingsItemRow(
                     navController = navController,
@@ -98,6 +117,12 @@ fun AboutSettingsRoute(
                 )
             }
 
+            stickyHeader(key = "donation") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(text = stringResource(R.string.donation))
+                }
+            }
+
             if (LinkSheetAppConfig.showDonationBanner()) {
                 item("donate") {
                     SettingsItemRow(
@@ -116,26 +141,33 @@ fun AboutSettingsRoute(
                 }
             }
 
+            stickyHeader(key = "version") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(text = stringResource(R.string.just_version))
+                }
+            }
+
             if (!BuildConfig.DEBUG) {
                 item("signedby") {
-                    val sig = activity.packageManager.getPackageInfo(
+                    val signature = activity.packageManager.getPackageInfo(
                         activity.packageName,
                         PackageManager.GET_SIGNATURES
                     ).signatures[0]
 
                     val certFingerprint =
-                        CryptoUtil.sha256Hex(sig.toByteArray()).uppercase(Locale.getDefault())
-                    val subtitle =
-                        officialSigningKeys[certFingerprint]?.stringRes ?: R.string.built_by_error
+                        CryptoUtil.sha256Hex(signature.toByteArray()).uppercase(Locale.getDefault())
+                    val buildType =
+                        officialSigningKeys.getOrDefault(certFingerprint, BuildType.Unofficial)
+                    val isUnofficial = buildType == BuildType.Unofficial
 
                     SettingsItemRow(
                         headlineId = R.string.built_by,
-                        subtitleId = subtitle,
+                        subtitleId = buildType.stringRes,
                         image = {
                             ColoredIcon(
-                                icon = if (subtitle == R.string.built_by_error) Icons.Default.Warning else Icons.Default.Build,
+                                icon = if (isUnofficial) Icons.Default.Warning else Icons.Default.Build,
                                 descriptionId = R.string.built_by,
-                                color = if (subtitle == R.string.built_by_error) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                                color = if (isUnofficial) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
                             )
                         }
                     )
@@ -184,27 +216,12 @@ fun AboutSettingsRoute(
                     headline = stringResource(id = R.string.version),
                     subtitle = builtAt,
                     onClick = {
-                        clipboardManager.setText(buildAnnotatedString {
-                            append(
-                                activity.getText(R.string.linksheet_version_info_header),
-                                lineSeparator,
-                                builtAt,
-                                lineSeparator,
-                                flavor,
-                                lineSeparator,
-                                type,
-                                lineSeparator,
-                                commit,
-                                lineSeparator,
-                                branch,
-                                lineSeparator,
-                                fullVersionName
-                            )
+                        if (devClicks == 7) {
+                            viewModel.devModeEnabled.updateState(true)
+                            Toast.makeText(activity, R.string.dev_mode_enabled, Toast.LENGTH_SHORT).show()
+                        }
 
-                            if (workflow != null) {
-                                append(lineSeparator, workflow)
-                            }
-                        })
+                        devClicks++
                     },
                     image = {
                         ColoredIcon(icon = Icons.Default.Link, descriptionId = R.string.version)
@@ -223,6 +240,34 @@ fun AboutSettingsRoute(
                         }
                     }
                 )
+
+               Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                   TextButton(onClick = {
+                       clipboardManager.setText(buildAnnotatedString {
+                           append(
+                               activity.getText(R.string.linksheet_version_info_header),
+                               lineSeparator,
+                               builtAt,
+                               lineSeparator,
+                               flavor,
+                               lineSeparator,
+                               type,
+                               lineSeparator,
+                               commit,
+                               lineSeparator,
+                               branch,
+                               lineSeparator,
+                               fullVersionName
+                           )
+
+                           if (workflow != null) {
+                               append(lineSeparator, workflow)
+                           }
+                       })
+                   }) {
+                       Text(text = stringResource(id = R.string.copy_version_information))
+                   }
+               }
             }
 
             item("clearurlskt_version") {
@@ -243,12 +288,12 @@ fun AboutSettingsRoute(
                 )
             }
 
-            item("fastforward_version"){
+            item("fastforward_version") {
                 SettingsItemRow(
                     headline = stringResource(id = R.string.clear_urls_version),
                     subtitle = buildNameValueAnnotatedString(
                         stringResource(id = R.string.last_rule_update),
-                        ClearURLsMetadata.fetchedAt.unixMillisAtUtc.format(
+                        FastForwardRules.fetchedAt.unixMillisAtUtc.format(
                             ISO8601DateTimeFormatOption.DefaultFormat
                         )
                     ),

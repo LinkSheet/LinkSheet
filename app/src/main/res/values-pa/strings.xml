@@ -100,7 +100,7 @@
     <string name="show_linksheet_referrer">ਲਿੰਕਸ਼ੀਟ ਰੈਫਰਰ ਦਿਖਾਓ</string>
     <string name="url_copied">URL ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
     <string name="title_activity_onboarding">ਆਨਬੋਰਡਿੰਗ ਐਕਟੀਵਿਟੀ</string>
-    <string name="copy">URL ਕਾਪੀ ਕਰੋ</string>
+    <string name="copy_url">URL ਕਾਪੀ ਕਰੋ</string>
     <string name="resolve_failed">%s ਅਸਫਲ: %s</string>
     <string name="none">ਕੋਈ ਵੀ ਨਹੀਂ</string>
     <string name="onboarding7_highlight">ਕਵਰ ਕੀਤਾ</string>

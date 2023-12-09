@@ -143,16 +143,6 @@ fun LinksSettingsRoute(
                                 fontSize = 16.sp
                             )
                         )
-                        
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Text(
-                            text = stringResource(
-                                id = R.string.last_rule_update,
-                                ClearURLsMetadata.fetchedAt.unixMillisAtUtc.format(ISO8601DateTimeFormatOption.DefaultFormat)
-                            ),
-                            fontSize = 12.sp
-                        )
                     }
                 )
             }
@@ -169,16 +159,6 @@ fun LinksSettingsRoute(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 16.sp
                             )
-                        )
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Text(
-                            text = stringResource(
-                                id = R.string.last_rule_update,
-                                FastForwardRules.fetchedAt.unixMillisAtUtc.format(ISO8601DateTimeFormatOption.DefaultFormat)
-                            ),
-                            fontSize = 12.sp
                         )
                     }
                 )

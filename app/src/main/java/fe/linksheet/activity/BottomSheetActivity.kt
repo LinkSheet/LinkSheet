@@ -58,7 +58,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.unit.takeOrElse
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
@@ -383,7 +382,7 @@ class BottomSheetActivity : ComponentActivity() {
                     hideDrawer()
                 }
             },
-            buttonText = R.string.copy
+            buttonText = R.string.copy_url
         )
     }
 

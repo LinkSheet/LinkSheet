@@ -115,7 +115,7 @@
     <string name="show_linksheet_referrer">Прикажи LinkSheet упућивача</string>
     <string name="url_copied">URL адреса је копирана у привремену меморију</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
-    <string name="copy">Копирај URL</string>
+    <string name="copy_url">Копирај URL</string>
     <string name="resolve_failed">%s је неуспешно: %s</string>
     <string name="none">Ниједно</string>
     <string name="onboarding7_highlight">покрива</string>

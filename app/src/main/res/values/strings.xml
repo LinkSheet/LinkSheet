@@ -27,7 +27,7 @@
     <string name="apps_which_can_open_links_explainer_2">Lists all apps which may interfere with LinkSheet\'s behavior</string>
     <string name="no_preferred_apps_set_yet">No apps have been set as preferred yet.</string>
     <string name="search">Search</string>
-    <string name="copy">Copy URL</string>
+    <string name="copy_url">Copy URL</string>
     <string name="enable_copy_button">Enable copy button</string>
     <string name="enable_copy_button_explainer">Shows a \"Copy URL\" button in the bottom sheet</string>
     <string name="url_copied">URL has been copied to clipboard</string>
@@ -320,7 +320,7 @@
     <string name="linksheet_donation_explainer">LinkSheet is the result of more than <b>%s</b> of work over the span of more than <b>%s</b>. If you would like to show some appreciation for my work please donate.</string>
     <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> (<b>4€</b> if you donate with crypto!) allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main screen of the app, but in the future, there will be <b>Pro exclusive features.</b></string>
     <string name="built_by">Built and signed by</string>
-    <string name="built_by_error">This build was not signed by 1fexd. This does not necessarily mean anything bad since anyone can fork the source code and build their app, but they may do so with malicious intent.</string>
+    <string name="built_by_error">This build was neither signed by 1fexd or the Github workflow. This does not necessarily mean anything bad, since anyone can fork the source code and build their app, but they may do so with malicious intent.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
     <string name="github_pipeline_build">Built and signed by the Github workflow</string>
     <string name="flavor">Flavor: </string>
@@ -348,4 +348,8 @@
     <string name="confirm_import">Confirm</string>
     <string name="last_rule_update">Last rule update from upstream (UTC):</string>
     <string name="clear_urls_version">ClearURLs rule version</string>
+    <string name="dev_mode_enabled">Congratulations, you have enabled dev-mode. Just be cautious.</string>
+    <string name="copy_version_information">Copy version information</string>
+    <string name="donation">Donation</string>
+    <string name="just_version">Version</string>
 </resources>

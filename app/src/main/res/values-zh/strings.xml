@@ -15,7 +15,7 @@
     <string name="apps_which_can_open_links_explainer_2">列出所有可能干扰 LinkSheet 行为的应用</string>
     <string name="no_preferred_apps_set_yet">尚未将任何应用设置为首选。</string>
     <string name="search">搜索</string>
-    <string name="copy">复制链接</string>
+    <string name="copy_url">复制链接</string>
     <string name="enable_copy_button">启用复制按钮</string>
     <string name="enable_copy_button_explainer">在底栏中显示“复制链接”按钮</string>
     <string name="url_copied">链接已复制到剪贴板</string>

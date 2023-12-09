@@ -84,7 +84,7 @@
     <string name="github">Github</string>
     <string name="url_copied">URL был скопирован в буфер обмена</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
-    <string name="copy">Скопировать URL</string>
+    <string name="copy_url">Скопировать URL</string>
     <string name="resolve_failed">%s не удалось: %s</string>
     <string name="none">Ничего</string>
     <string name="onboarding7_highlight">покрытый</string>

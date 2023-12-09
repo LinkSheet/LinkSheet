@@ -80,6 +80,7 @@ object AppPreferences : Preferences() {
     val useTimeMs = longPreference("use_time", 0)
 
     val showLinkSheetAsReferrer = booleanPreference("show_as_referrer", false)
+    val devModeEnabled = booleanPreference("dev_mode_enabled", false)
 
     @SensitivePreference
     val logKey = stringPreference("log_key") {

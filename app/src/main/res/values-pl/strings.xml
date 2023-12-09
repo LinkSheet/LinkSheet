@@ -13,7 +13,7 @@
     <string name="no_preferred_apps_set_yet">Nie ustawiono jeszcze aplikacji jako preferowanych.</string>
     <string name="search">Szukaj</string>
     <string name="enable_copy_button">Przycisk „Kopiuj link”</string>
-    <string name="copy">Skopiuj link</string>
+    <string name="copy_url">Skopiuj link</string>
     <string name="url_copied">Link został skopiowany do schowka</string>
     <string name="confirm">Potwierdź</string>
     <string name="clear">Wyczyść</string>

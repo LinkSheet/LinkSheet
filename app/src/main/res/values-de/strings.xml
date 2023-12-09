@@ -16,7 +16,7 @@
     <string name="apps_which_can_open_links_explainer_2">Listet alle Apps auf, die das Verhalten von LinkSheet beeinträchtigen können</string>
     <string name="apps_which_can_open_links_explainer">Tippe auf eine App, um das Menü „Standardmäßig öffnen“ zu öffnen, mit dem du das automatische Öffnen von Links deaktivieren kannst</string>
     <string name="no_preferred_apps_set_yet">Bisher wurden noch keine Apps als bevorzugt eingestellt.</string>
-    <string name="copy">URL kopieren</string>
+    <string name="copy_url">URL kopieren</string>
     <string name="search">Suche</string>
     <string name="enable_copy_button">Schaltfläche „Kopieren“ aktivieren</string>
     <string name="url_copied">URL wurde in die Zwischenablage kopiert</string>

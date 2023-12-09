@@ -100,7 +100,7 @@
     <string name="show_linksheet_referrer">Mostrar referencias de LinkSheet</string>
     <string name="url_copied">Enlace copiado al portapapeles</string>
     <string name="title_activity_onboarding">ActividadDeIncorporación</string>
-    <string name="copy">Copiar enlace</string>
+    <string name="copy_url">Copiar enlace</string>
     <string name="resolve_failed">%s fallido: %s</string>
     <string name="none">Ninguno</string>
     <string name="onboarding7_highlight">cubierto</string>

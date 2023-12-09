@@ -21,7 +21,8 @@ const val developmentTimeMonths = 6
 
 enum class BuildType(@StringRes val stringRes: Int) {
     Manual(R.string.manual_build),
-    GithubPipeline(R.string.github_pipeline_build)
+    GithubPipeline(R.string.github_pipeline_build),
+    Unofficial(R.string.built_by_error)
 }
 
 val officialSigningKeys = mapOf(

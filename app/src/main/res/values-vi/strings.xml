@@ -68,7 +68,7 @@
     <string name="onboarding0_headline">Đã đến lúc lấy lại</string>
     <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
     <string name="url_copied">URL đã được sao chép vào clipboard</string>
-    <string name="copy">Sao chép URL</string>
+    <string name="copy_url">Sao chép URL</string>
     <string name="resolve_failed">%s thất bại: %s</string>
     <string name="none">Không có</string>
     <string name="export">Xuất</string>

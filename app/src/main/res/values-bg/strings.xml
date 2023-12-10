@@ -354,4 +354,5 @@
     <string name="include_log_hash_key">Включително ключа за дневника</string>
     <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
     <string name="include_history">Включително историята (препратки и приложения)</string>
+    <string name="last_rule_update">Последно обновяване на правилата (UTC): %s</string>
 </resources>

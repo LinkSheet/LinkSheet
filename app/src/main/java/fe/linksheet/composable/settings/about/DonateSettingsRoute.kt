@@ -1,22 +1,26 @@
 package fe.linksheet.composable.settings.about
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -26,32 +30,14 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import fe.kotlin.extension.unixMillisAtUtc
-import fe.kotlin.util.ISO8601DateTimeFormatOption
-import fe.linksheet.BuildConfig
-import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.LinkableSubtitleText
-import fe.linksheet.composable.util.SettingsItemRow
-import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.annotatedStringResource
-import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
-import fe.linksheet.discordInvite
-import fe.linksheet.donateSettingsRoute
 import fe.linksheet.donationBuyMeACoffee
 import fe.linksheet.donationCrypto
-import fe.linksheet.extension.androidx.navigate
-import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.lineSeparator
-import fe.linksheet.linksheetGithub
-import fe.linksheet.mainRoute
-import fe.linksheet.settingsRoute
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

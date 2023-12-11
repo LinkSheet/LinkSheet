@@ -31,6 +31,7 @@ import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Typography
+import fe.linksheet.util.AppSignature
 import fe.linksheet.util.Results
 import fe.linksheet.util.lazyItemKeyCreator
 import kotlinx.coroutines.delay
@@ -128,6 +129,13 @@ fun MainRoute(
                 Spacer(modifier = Modifier.height(5.dp))
             }
 
+            if (AppSignature.checkSignature(activity) == AppSignature.BuildType.Unofficial) {
+                item(itemKeyCreator.next()) {
+                    UnofficialBuild()
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+            }
+
             if (useTime != null && showOtherBanners) {
                 header(header = R.string.donate, itemKey = itemKeyCreator.next())
 
@@ -177,7 +185,9 @@ fun MainRoute(
             if (clipboardManager.hasText() || sheetOpen != null) {
                 val item = clipboardManager.getText()?.text
 
-                if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
+                if ((item != null && Patterns.WEB_URL.matcher(item)
+                        .matches()) || sheetOpen != null
+                ) {
                     item(key = itemKeyCreator.next()) {
                         OpenCopiedLink(
                             uriHandler = uriHandler,

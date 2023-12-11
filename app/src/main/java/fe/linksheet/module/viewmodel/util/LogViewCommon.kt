@@ -1,10 +1,9 @@
 package fe.linksheet.module.viewmodel.util
 
 import android.os.Build
-import fe.gson.dsl.jsonArray
 import fe.gson.dsl.jsonObject
-import fe.kotlin.extension.unixMillisAtUtc
-import fe.kotlin.util.ISO8601DateTimeFormatOption
+import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.log.Logger
@@ -41,8 +40,8 @@ class LogViewCommon(
 
             "android_version" += Build.VERSION.RELEASE
             "full_identifier" += BuildConfig.VERSION_NAME
-            "built_at" += BuildConfig.BUILT_AT.unixMillisAtUtc.value.format(
-                ISO8601DateTimeFormatOption.DefaultFormat
+            "built_at" += BuildConfig.BUILT_AT.unixMillisUtc.format(
+                ISO8601DateTimeFormatter.DefaultFormat
             )
             "commit" += BuildConfig.COMMIT.substring(0, 7)
             "branch" += BuildConfig.BRANCH

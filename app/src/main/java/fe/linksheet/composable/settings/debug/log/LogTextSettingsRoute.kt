@@ -35,6 +35,7 @@ import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.kotlin.extension.localizedString
 import fe.kotlin.extension.unixMillis
+import fe.kotlin.extension.unixMillisUtc
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow
@@ -164,7 +165,7 @@ fun LogTextSettingsRoute(
                                     horizontalArrangement = Arrangement.End
                                 ) {
                                     Text(
-                                        text = unixMillis.unixMillis.value
+                                        text = unixMillis.unixMillisUtc.value
                                             .localizedString(),
                                         fontStyle = FontStyle.Italic,
                                         fontSize = 12.sp

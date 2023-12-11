@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Euro
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
@@ -68,45 +72,56 @@ fun DonateCard(
                 .fillMaxWidth()
                 .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
         ) {
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Column(modifier = Modifier.padding(10.dp)) {
-                Text(
-                    text = stringResource(id = R.string.donate_card_headline),
-                    style = Typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
+            ) {
+                Spacer(modifier = Modifier.width(10.dp))
+                ColoredIcon(
+                    icon = Icons.Default.Euro,
+                    descriptionId = R.string.donate,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
-                SelectionContainer {
+                Column(modifier = Modifier.padding(10.dp)) {
                     Text(
-                        text = annotatedStringResource(
-                            id = R.string.donate_card_subtitle,
-                            timeString,
-                            devTimeHoursString,
-                            devTimeMonthString,
-                            developmentTimeHours,
-                            developmentTimeMonths
-                        ),
-                        color = MaterialTheme.colorScheme.onSurface
+                        text = stringResource(id = R.string.donate_card_headline),
+                        style = Typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
-                }
 
-                Spacer(modifier = Modifier.height(10.dp))
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    Button(onClick = {
-                        navController.navigate(
-                            mainRoute,
-                            settingsRoute,
-                            aboutSettingsRoute,
-                            donateSettingsRoute
-                        )
-                    }) {
+                    SelectionContainer {
                         Text(
-                            text = stringResource(id = R.string.donate_learn_more),
+                            text = annotatedStringResource(
+                                id = R.string.donate_card_subtitle,
+                                timeString,
+                                devTimeHoursString,
+                                devTimeMonthString,
+                                developmentTimeHours,
+                                developmentTimeMonths
+                            ),
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                }
 
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                        Button(onClick = {
+                            navController.navigate(
+                                mainRoute,
+                                settingsRoute,
+                                aboutSettingsRoute,
+                                donateSettingsRoute
+                            )
+                        }) {
+                            Text(
+                                text = stringResource(id = R.string.donate_learn_more),
+                            )
+                        }
+                    }
+
+                }
             }
         }
     }

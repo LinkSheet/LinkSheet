@@ -6,19 +6,19 @@ com-android-application = { id = "com.android.application", version = "8.1.2" }
 
 com-android-library = { id = "com.android.library", version = "8.1.2" }
 
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.10" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.21" }
 
 net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.0.0" }
 
-com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.10-1.0.13" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.21" }
 
 gradle = { id = "gradle", version = "8.1.1" }
 
 [versions]
 
-kotlin = "1.9.10"
+kotlin = "1.9.21"
 
-koin = "3.5.0"
+koin ="3.5.2-RC1"
 linkSheetInterConnect = "2.3.2"
 
 google-accompanist = "0.33.2-alpha"

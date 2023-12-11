@@ -1,19 +1,34 @@
 package fe.linksheet.composable.settings.about
 
 import ClearURLsMetadata
-import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.filled.ClearAll
+import androidx.compose.material.icons.filled.Euro
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -27,10 +42,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.fastforwardkt.FastForwardRules
-import fe.kotlin.extension.unixMillisAtUtc
-import fe.kotlin.util.ISO8601DateTimeFormatOption
+import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
-import fe.linksheet.BuildType
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -46,10 +60,8 @@ import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.officialSigningKeys
-import fe.linksheet.util.CryptoUtil
+import fe.linksheet.util.AppSignature
 import org.koin.androidx.compose.koinViewModel
-import java.util.Locale
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -62,7 +74,7 @@ fun AboutSettingsRoute(
     val uriHandler = LocalUriHandler.current
     val clipboardManager = LocalClipboardManager.current
     val buildDate =
-        BuildConfig.BUILT_AT.unixMillisAtUtc.value.format(ISO8601DateTimeFormatOption.DefaultFormat)
+        BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
 
     var devClicks by remember { mutableIntStateOf(0) }
 
@@ -149,16 +161,8 @@ fun AboutSettingsRoute(
 
             if (!BuildConfig.DEBUG) {
                 item("signedby") {
-                    val signature = activity.packageManager.getPackageInfo(
-                        activity.packageName,
-                        PackageManager.GET_SIGNATURES
-                    ).signatures[0]
-
-                    val certFingerprint =
-                        CryptoUtil.sha256Hex(signature.toByteArray()).uppercase(Locale.getDefault())
-                    val buildType =
-                        officialSigningKeys.getOrDefault(certFingerprint, BuildType.Unofficial)
-                    val isUnofficial = buildType == BuildType.Unofficial
+                    val buildType =  AppSignature.checkSignature(activity)
+                    val isUnofficial = buildType == AppSignature.BuildType.Unofficial
 
                     SettingsItemRow(
                         headlineId = R.string.built_by,
@@ -275,8 +279,8 @@ fun AboutSettingsRoute(
                     headline = stringResource(id = R.string.clear_urls_version),
                     subtitle = buildNameValueAnnotatedString(
                         stringResource(id = R.string.last_rule_update),
-                        ClearURLsMetadata.fetchedAt.unixMillisAtUtc.format(
-                            ISO8601DateTimeFormatOption.DefaultFormat
+                        ClearURLsMetadata.fetchedAt.unixMillisUtc.format(
+                            ISO8601DateTimeFormatter.DefaultFormat
                         )
                     ),
                     image = {
@@ -290,11 +294,11 @@ fun AboutSettingsRoute(
 
             item("fastforward_version") {
                 SettingsItemRow(
-                    headline = stringResource(id = R.string.clear_urls_version),
+                    headline = stringResource(id = R.string.fastforward_version),
                     subtitle = buildNameValueAnnotatedString(
                         stringResource(id = R.string.last_rule_update),
-                        FastForwardRules.fetchedAt.unixMillisAtUtc.format(
-                            ISO8601DateTimeFormatOption.DefaultFormat
+                        FastForwardRules.fetchedAt.unixMillisUtc.format(
+                            ISO8601DateTimeFormatter.DefaultFormat
                         )
                     ),
                     image = {

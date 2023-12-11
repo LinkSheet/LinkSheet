@@ -6,6 +6,7 @@ import fe.gson.dsl.jsonObject
 import fe.kotlin.extension.decodeBase64Throw
 import fe.kotlin.extension.encodeBase64Throw
 import fe.kotlin.extension.unixMillis
+import fe.kotlin.extension.unixMillisUtc
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.util.SingletonHolder
 import fe.stringbuilder.util.buildSeparatedString
@@ -34,7 +35,7 @@ data class LogEntry(
     fun toJson(redact: Boolean): JsonObject {
         return jsonObject {
             "type" += type
-            "time" += unixMillis.unixMillis.value
+            "time" += unixMillis.unixMillisUtc.value
             "prefix" += prefix
             if (redact) {
                 "redactedMessage" += redactedMessage

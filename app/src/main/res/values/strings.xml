@@ -320,7 +320,7 @@
     <string name="linksheet_donation_explainer">LinkSheet is the result of more than <b>%s</b> of work over the span of more than <b>%s</b>. If you would like to show some appreciation for my work please donate.</string>
     <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> (<b>4€</b> if you donate with crypto!) allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main screen of the app, but in the future, there will be <b>Pro exclusive features.</b></string>
     <string name="built_by">Built and signed by</string>
-    <string name="built_by_error">This build was neither signed by 1fexd or the Github workflow. This does not necessarily mean anything bad, since anyone can fork the source code and build their app, but they may do so with malicious intent.</string>
+    <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow. This does not necessarily mean anything bad, since anyone can fork the source code and build their own LinkSheet versionn, but they may do so with malicious intent.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
     <string name="github_pipeline_build">Built and signed by the Github workflow</string>
     <string name="flavor">Flavor: </string>
@@ -352,4 +352,7 @@
     <string name="copy_version_information">Copy version information</string>
     <string name="donation">Donation</string>
     <string name="just_version">Version</string>
+    <string name="fastforward_version" />
+    <string name="running_unofficial_build">Unofficial build</string>
+    <string name="debug_build">Debug build</string>
 </resources>

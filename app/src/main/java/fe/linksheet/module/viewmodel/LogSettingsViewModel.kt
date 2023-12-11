@@ -5,6 +5,7 @@ import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.kotlin.extension.localizedString
 import fe.kotlin.extension.unixMillis
+import fe.kotlin.extension.unixMillisUtc
 import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -18,7 +19,7 @@ class LogSettingsViewModel(
     val files = MutableStateFlow(emptyMap<String, String>())
 
     private fun getLogFiles() = appLogger.getLogFiles().associateWith {
-        it.toLong().unixMillis.value.localizedString()
+        it.toLong().unixMillisUtc.value.localizedString()
     }
 
     init {

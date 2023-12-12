@@ -188,7 +188,6 @@
     <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
     <string name="disable_all_toasts_explainer">Никогда не показывать тост сообщения</string>
     <string name="set_as_browser">Установить как браузер</string>
-    <string name="request_timeout_explainer_disclaimer">В настоящее время недоступно в режиме сетки</string>
     <string name="whitelisted">В белом списке</string>
     <plurals name="minutes">
         <item quantity="one">%s минута</item>

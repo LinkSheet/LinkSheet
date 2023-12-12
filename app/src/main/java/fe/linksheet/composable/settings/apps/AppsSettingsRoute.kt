@@ -17,15 +17,18 @@ import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.module.viewmodel.FeatureFlagViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.pretendToBeAppRoute
 import fe.linksheet.util.AndroidVersion
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun AppsSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit,
+    featureFlagViewModel: FeatureFlagViewModel = koinViewModel(),
 ) {
     SettingsScaffold(R.string.apps, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
@@ -64,19 +67,22 @@ fun AppsSettingsRoute(
                     )
                 }
 
-                item(key = pretendToBeAppRoute) {
-                    SettingsItemRow(
-                        navController = navController,
-                        navigateTo = pretendToBeAppRoute,
-                        headlineId = R.string.pretend_to_be_app,
-                        subtitleId = R.string.pretend_to_be_app_explainer,
-                        image = {
-                            ColoredIcon(
-                                icon = Icons.Default.PublishedWithChanges,
-                                descriptionId = R.string.pretend_to_be_app
-                            )
-                        }
-                    )
+
+                if (featureFlagViewModel.featureFlagLinkSheetCompat.value) {
+                    item(key = pretendToBeAppRoute) {
+                        SettingsItemRow(
+                            navController = navController,
+                            navigateTo = pretendToBeAppRoute,
+                            headlineId = R.string.pretend_to_be_app,
+                            subtitleId = R.string.pretend_to_be_app_explainer,
+                            image = {
+                                ColoredIcon(
+                                    icon = Icons.Default.PublishedWithChanges,
+                                    descriptionId = R.string.pretend_to_be_app
+                                )
+                            }
+                        )
+                    }
                 }
             }
         }

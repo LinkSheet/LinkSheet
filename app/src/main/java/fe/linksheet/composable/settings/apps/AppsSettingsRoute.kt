@@ -18,7 +18,7 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.preferredAppsSettingsRoute
-import fe.linksheet.pretendToBeApp
+import fe.linksheet.pretendToBeAppRoute
 import fe.linksheet.util.AndroidVersion
 
 
@@ -64,10 +64,10 @@ fun AppsSettingsRoute(
                     )
                 }
 
-                item(key = pretendToBeApp) {
+                item(key = pretendToBeAppRoute) {
                     SettingsItemRow(
                         navController = navController,
-                        navigateTo = pretendToBeApp,
+                        navigateTo = pretendToBeAppRoute,
                         headlineId = R.string.pretend_to_be_app,
                         subtitleId = R.string.pretend_to_be_app_explainer,
                         image = {

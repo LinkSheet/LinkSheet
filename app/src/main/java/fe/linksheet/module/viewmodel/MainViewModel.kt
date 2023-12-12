@@ -49,6 +49,7 @@ class MainViewModel(
     val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)
     var theme = preferenceRepository.getState(AppPreferences.theme)
+    val devModeEnabled = preferenceRepository.getBooleanState(AppPreferences.devModeEnabled)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

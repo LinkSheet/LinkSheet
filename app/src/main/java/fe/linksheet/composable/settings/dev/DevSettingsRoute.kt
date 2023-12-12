@@ -1,4 +1,4 @@
-package fe.linksheet.composable.settings.debug
+package fe.linksheet.composable.settings.dev
 
 import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,32 +24,35 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun DebugSettingsRoute(
-    navController: NavHostController,
+fun DevSettingsRoute(
+//    navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: DebugSettingsViewModel = koinViewModel()
+//    viewModel: DebugSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
 
-    SettingsScaffold(R.string.debug, onBackPressed = onBackPressed) { padding ->
+    SettingsScaffold(R.string.dev, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(key = "logs") {
+            item(key = "launch_onboarding") {
                 SettingsItemRow(
-                    navController = navController,
-                    navigateTo = logViewerSettingsRoute,
-                    headlineId = R.string.logs,
-                    subtitleId = R.string.logs_explainer,
+                    headlineId = R.string.launch_onboaring,
+                    subtitleId = R.string.launch_onboaring_explainer,
                     image = {
-                        ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
+                        ColoredIcon(
+                            icon = Icons.Default.DeveloperMode,
+                            descriptionId = R.string.launch_onboaring
+                        )
+                    },
+                    onClick = {
+                        context.startActivity(Intent(context, OnboardingActivity::class.java))
                     }
                 )
             }
-
 
 
 

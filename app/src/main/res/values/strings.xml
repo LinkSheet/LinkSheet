@@ -355,4 +355,6 @@
     <string name="fastforward_version" />
     <string name="running_unofficial_build">Unofficial build</string>
     <string name="debug_build">Debug build</string>
+    <string name="dev">Developer</string>
+    <string name="dev_explainer">Developer settings</string>
 </resources>

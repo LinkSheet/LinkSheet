@@ -42,6 +42,7 @@ import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.loadpreferences.LoadDumpedPreferences
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
+import fe.linksheet.composable.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.settings.general.GeneralSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.settings.link.amp2html.Amp2HtmlSettingsRoute
@@ -55,6 +56,7 @@ import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.debugSettingsRoute
+import fe.linksheet.devModeRoute
 import fe.linksheet.donateSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.exportImportSettingsRoute
@@ -70,11 +72,10 @@ import fe.linksheet.loadDumpedPreferences
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
-import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
-import fe.linksheet.pretendToBeApp
+import fe.linksheet.pretendToBeAppRoute
 import fe.linksheet.privacySettingsRoute
 import fe.linksheet.settingsRoute
 import fe.linksheet.shizukuSettingsRoute
@@ -198,7 +199,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    animatedComposable(route = exportImportSettingsRoute){
+                    animatedComposable(route = exportImportSettingsRoute) {
                         ExportImportSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
@@ -268,7 +269,6 @@ class MainActivity : ComponentActivity() {
                         InAppBrowserSettingsDisableInSelectedRoute(navController = navController)
                     }
 
-
                     animatedComposable(route = preferredAppsSettingsRoute) {
                         PreferredAppSettingsRoute(onBackPressed = onBackPressed)
                     }
@@ -278,8 +278,14 @@ class MainActivity : ComponentActivity() {
                             AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
                         }
 
-                        animatedComposable(route = pretendToBeApp) {
+                        animatedComposable(route = pretendToBeAppRoute) {
                             PretendToBeAppSettingsRoute(onBackPressed = onBackPressed)
+                        }
+                    }
+
+                    if (mainViewModel.devModeEnabled.value) {
+                        animatedComposable(route = devModeRoute) {
+                            DevSettingsRoute(onBackPressed = onBackPressed)
                         }
                     }
                 }

@@ -16,12 +16,15 @@ import fe.linksheet.*
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SettingsRoute(
     navController: NavController,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    viewModel: SettingsViewModel = koinViewModel()
 ) {
     SettingsScaffold(R.string.settings, onBackPressed = onBackPressed) { padding ->
         LazyColumn(modifier = Modifier.padding(padding), contentPadding = PaddingValues(5.dp)) {
@@ -147,6 +150,24 @@ fun SettingsRoute(
                     }
                 )
             }
+
+            if (viewModel.devModeEnabled.value) {
+                item(key = "dev") {
+                    SettingsItemRow(
+                        navController = navController,
+                        navigateTo = devModeRoute,
+                        headlineId = R.string.dev,
+                        subtitleId = R.string.dev_explainer,
+                        image = {
+                            ColoredIcon(
+                                icon = Icons.Default.DeveloperMode,
+                                descriptionId = R.string.debug
+                            )
+                        }
+                    )
+                }
+            }
+
 
             item(key = "about") {
                 SettingsItemRow(

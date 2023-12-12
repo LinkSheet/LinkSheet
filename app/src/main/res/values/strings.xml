@@ -372,4 +372,6 @@
     <string name="cached_urls_version">Built-in Cached URLs</string>
     <string name="last_updated">Last updated (UTC):</string>
     <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
+    <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and, when installed, is able to intercept requests to certain native apps.</string>
 </resources>

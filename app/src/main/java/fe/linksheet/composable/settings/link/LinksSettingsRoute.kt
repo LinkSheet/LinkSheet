@@ -42,6 +42,7 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.LinkableTextView
+import fe.linksheet.composable.util.RowInfoCard
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.downloaderSettingsRoute
@@ -180,16 +181,7 @@ fun LinksSettingsRoute(
 
                         Spacer(modifier = Modifier.height(5.dp))
 
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.disclaimer_libredirect_unstable),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
-                        }
+                        RowInfoCard(text = R.string.disclaimer_libredirect_unstable)
                     }
                 ) {
                     navController.navigate(libRedirectSettingsRoute)

@@ -26,6 +26,7 @@ import androidx.navigation.NavHostController
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.RowInfoCard
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.extension.compose.currentActivity
@@ -108,16 +109,7 @@ fun BottomSheetSettingsRoute(
 
                         Spacer(modifier = Modifier.height(5.dp))
 
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.disclaimer_bottom_sheet_many_buttons),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(all = 10.dp)
-                            )
-                        }
+                        RowInfoCard(text = R.string.disclaimer_bottom_sheet_many_buttons)
                     }
                 )
             }

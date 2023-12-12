@@ -25,6 +25,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.LinkableTextView
+import fe.linksheet.composable.util.RowInfoCard
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
@@ -138,17 +139,7 @@ fun FollowRedirectsSettingsRoute(
 
                         if (!LinkSheetAppConfig.isPro()) {
                             Spacer(modifier = Modifier.height(5.dp))
-
-                            Card(
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                                shape = RoundedCornerShape(12.dp),
-                            ) {
-                                Text(
-                                    text = stringResource(id = R.string.pro_feature),
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    modifier = Modifier.padding(all = 10.dp)
-                                )
-                            }
+                            RowInfoCard(text = R.string.pro_feature)
                         }
                     }
                 )

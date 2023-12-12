@@ -352,7 +352,7 @@
     <string name="copy_version_information">Copy version information</string>
     <string name="donation">Donation</string>
     <string name="just_version">Version</string>
-    <string name="fastforward_version" />
+    <string name="fastforward_version">FastForward rule version</string>
     <string name="running_unofficial_build">Unofficial build</string>
     <string name="debug_build">Debug build</string>
     <string name="dev">Developer</string>

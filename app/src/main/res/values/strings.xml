@@ -363,8 +363,8 @@
     <string name="url_copied_toast_explainer">Show a toast when an URL is copied by the user</string>
     <string name="download_started_toast">Download startet toast</string>
     <string name="download_started_toast_explainer">Show a toast when a download has been started</string>
-    <string name="opening_with_app_toast">SHow aa toast when an app launched automatically</string>
-    <string name="opening_with_app_toast_explainer">Shows a toat when an app that has been set as default for a domain is launched</string>
+    <string name="opening_with_app_toast">Show a toast when an app launched automatically</string>
+    <string name="opening_with_app_toast_explainer">Show a toast when an app that has been set as default for a domain is launched</string>
     <string name="resolve_via_toast">Show a toast when an URL is resolved</string>
     <string name="resolve_via_toast_explainer">Show a toast when a URL is resolved via an external service</string>
     <string name="resolve_via_failed_toast">Show a toast when a resolve fails</string>

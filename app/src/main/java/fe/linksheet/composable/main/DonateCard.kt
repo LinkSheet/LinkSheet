@@ -106,14 +106,12 @@ fun DonateCard(
                     }
 
                     Spacer(modifier = Modifier.height(10.dp))
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
                         Button(onClick = {
-                            navController.navigate(
-                                mainRoute,
-                                settingsRoute,
-                                aboutSettingsRoute,
-                                donateSettingsRoute
-                            )
+                            navController.navigate(donateSettingsRoute)
                         }) {
                             Text(
                                 text = stringResource(id = R.string.donate_learn_more),

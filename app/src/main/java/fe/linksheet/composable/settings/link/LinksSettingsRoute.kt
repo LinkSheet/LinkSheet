@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
@@ -176,6 +177,19 @@ fun LinksSettingsRoute(
                                 navController.navigate(libRedirectSettingsRoute)
                             }
                         )
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            shape = RoundedCornerShape(12.dp),
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.disclaimer_libredirect_unstable),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.padding(all = 10.dp)
+                            )
+                        }
                     }
                 ) {
                     navController.navigate(libRedirectSettingsRoute)

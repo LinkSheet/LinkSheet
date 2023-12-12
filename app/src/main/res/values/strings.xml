@@ -220,7 +220,7 @@
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
-    <string name="enable_shizuku_explainer">Enabling this will allow LinkSheet to use Shizuku to interact with system APIs directly. This can be used, for example, to automatically disable all linkhandlers.</string>
+    <string name="enable_shizuku_explainer">Enabling this will allow LinkSheet to use Shizuku to interact with system APIs directly. This can be used, for example, to automatically disable all link-handlers. A new option will show up on the main app screen.</string>
     <string name="shizuku_explainer_short">Interact with system APIs directly</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="license_mit">MIT License</string>
@@ -374,4 +374,5 @@
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
     <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and, when installed, is able to intercept requests to certain native apps.</string>
+    <string name="disclaimer_libredirect_unstable">In additional to being an experimental feature, LibRedirect is currently considered very unstable and may not work at all.</string>
 </resources>

@@ -1,7 +1,10 @@
 package fe.linksheet.composable.settings.about
 
+import CachedUrlsMetadata
 import ClearURLsMetadata
+import LibRedirectMetadata
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +24,7 @@ import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Euro
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +35,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -276,61 +281,56 @@ fun AboutSettingsRoute(
                 }
             }
 
-            item("clearurlskt_version") {
-                SettingsItemRow(
-                    headline = stringResource(id = R.string.clear_urls_version),
-                    subtitle = buildNameValueAnnotatedString(
-                        stringResource(id = R.string.last_rule_update),
-                        ClearURLsMetadata.fetchedAt.unixMillisUtc.format(
-                            ISO8601DateTimeFormatter.DefaultFormat
-                        )
-                    ),
-                    image = {
-                        ColoredIcon(
-                            icon = Icons.Default.ClearAll,
-                            descriptionId = R.string.clear_urls_version
-                        )
-                    }
+            item("clearurls_version") {
+                LibraryLastUpdatedRow(
+                    R.string.clear_urls_version,
+                    ClearURLsMetadata.fetchedAt,
+                    Icons.Default.ClearAll
                 )
             }
 
             item("fastforward_version") {
-                SettingsItemRow(
-                    headline = stringResource(id = R.string.fastforward_version),
-                    subtitle = buildNameValueAnnotatedString(
-                        stringResource(id = R.string.last_rule_update),
-                        FastForwardRules.fetchedAt.unixMillisUtc.format(
-                            ISO8601DateTimeFormatter.DefaultFormat
-                        )
-                    ),
-                    image = {
-                        ColoredIcon(
-                            icon = Icons.Default.Bolt,
-                            descriptionId = R.string.fastforward_version
-                        )
-                    }
+                LibraryLastUpdatedRow(
+                    R.string.fastforward_version,
+                    FastForwardRules.fetchedAt,
+                    Icons.Default.Bolt
                 )
             }
 
             item("cached_urls") {
-                SettingsItemRow(
-                    headline = stringResource(id = R.string.cached_urls_version),
-                    subtitle = buildNameValueAnnotatedString(
-                        stringResource(id = R.string.last_updated),
-                        FastForwardRules.fetchedAt.unixMillisUtc.format(
-                            ISO8601DateTimeFormatter.DefaultFormat
-                        )
-                    ),
-                    image = {
-                        ColoredIcon(
-                            icon = Icons.Default.Cached,
-                            descriptionId = R.string.cached_urls_version
-                        )
-                    }
+                LibraryLastUpdatedRow(
+                    R.string.cached_urls_version,
+                    CachedUrlsMetadata.fetchedAt,
+                    Icons.Default.Cached
+                )
+            }
+
+            item("libredirect") {
+                LibraryLastUpdatedRow(
+                    R.string.libredirect_version,
+                    LibRedirectMetadata.fetchedAt,
+                    Icons.Default.Security
                 )
             }
         }
     }
+}
+
+@Composable
+private fun LibraryLastUpdatedRow(@StringRes headline: Int, fetchedAt: Long, icon: ImageVector) {
+    SettingsItemRow(
+        headline = stringResource(id = headline),
+        subtitle = buildNameValueAnnotatedString(
+            stringResource(id = R.string.last_updated),
+            fetchedAt.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+        ),
+        image = {
+            ColoredIcon(
+                icon = icon,
+                descriptionId = headline
+            )
+        }
+    )
 }
 
 private fun buildNameValueAnnotatedString(name: String, value: String): AnnotatedString {

@@ -371,4 +371,5 @@
     <string name="resolve_via_failed_toast_explainer">Show a toast when an URL fails to resolve via an external service</string>
     <string name="cached_urls_version">Built-in Cached URLs</string>
     <string name="last_updated">Last updated (UTC):</string>
+    <string name="libredirect_version">LibRedirect</string>
 </resources>

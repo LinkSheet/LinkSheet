@@ -77,6 +77,7 @@ fun AboutSettingsRoute(
     val clipboardManager = LocalClipboardManager.current
     val buildDate =
         BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+    val buildType = AppSignature.checkSignature(activity)
 
     var devClicks by remember { mutableIntStateOf(0) }
 
@@ -161,9 +162,8 @@ fun AboutSettingsRoute(
                 }
             }
 
-            if (!BuildConfig.DEBUG) {
-                item("signedby") {
-                    val buildType = AppSignature.checkSignature(activity)
+            if (buildType != AppSignature.BuildType.Debug) {
+                item("build_type") {
                     val isUnofficial = buildType == AppSignature.BuildType.Unofficial
 
                     SettingsItemRow(
@@ -173,7 +173,7 @@ fun AboutSettingsRoute(
                             ColoredIcon(
                                 icon = if (isUnofficial) Icons.Default.Warning else Icons.Default.Build,
                                 descriptionId = R.string.built_by,
-                                color = if (isUnofficial) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                                color = if (isUnofficial) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
                             )
                         }
                     )

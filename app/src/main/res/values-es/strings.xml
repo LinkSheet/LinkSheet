@@ -357,4 +357,5 @@
     <string name="export_settings">Ajustes de la exportación</string>
     <string name="export_explainer">Exportar la configuración actual de la aplicación a un archivo</string>
     <string name="import_settings_override_preferences">Esto anulará todas las preferencias existentes. ¿Continuar?</string>
+    <string name="last_rule_update">Última actualización de la regla desde el upstream (UTC): %s</string>
 </resources>

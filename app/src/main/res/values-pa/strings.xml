@@ -18,7 +18,7 @@
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet ਨੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ ਜੋ ਇੱਕ ਅਸਲ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ।</string>
     <string name="disclaimer_bottom_sheet_many_buttons">ਵਰਤਮਾਨ ਵਿੱਚ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਬਹੁਤ ਸਾਰੇ ਬਟਨਾਂ ਨੂੰ ਇਨੇਬਲ ਕਰਨ ਨਾਲ ਕੱਟੇ ਹੋਏ/ਗਲਿੱਚ ਕਰਦੇ ਬਟਨ ਵਿਖ ਸਕਦੇ ਹਨ।</string>
     <string name="opening_with_app">%s ਨਾਲ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ</string>
-    <string name="enable_shizuku_explainer">ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰਨ ਲਈ Shizuku ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦੇਵੇਗੀ। ਇਸਦੀ ਵਰਤੋਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ, ਉਦਾਹਰਨ ਲਈ, ਸਾਰੇ ਲਿੰਕਹੈਂਡਲਰਾਂ ਨੂੰ ਆਪਣੇ ਆਪ ਅਯੋਗ ਕਰਨ ਲਈ।</string>
+    <string name="enable_shizuku_explainer">ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰਨ ਲਈ Shizuku ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦੇਵੇਗੀ। ਇਸਦੀ ਵਰਤੋਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ, ਉਦਾਹਰਨ ਲਈ, ਸਾਰੇ ਲਿੰਕਹੈਂਡਲਰਾਂ ਨੂੰ ਆਪਣੇ ਆਪ ਅਯੋਗ ਕਰਨ ਲਈ। ਇੱਕ ਨਵਾਂ ਵਿਕਲਪ ਮੁੱਖ ਐਪ ਸਕ੍ਰੀਨ \'ਤੇ ਦਿਖਾਈ ਦੇਵੇਗਾ।</string>
     <string name="browser_explainer">ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਅਤੇ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਸੈਟਿੰਗਾਂ</string>
     <string name="save">ਸਾਂਭੋ</string>
     <string name="enable_amp2html">Amp2Html ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
@@ -74,7 +74,7 @@
     <string name="onboarding0_highlight">ਚੋਣ ਦੀ ਆਜ਼ਾਦੀ</string>
     <string name="redirect_resolve_type_local_cache">ਸਥਾਨਕ ਕੈਸ਼</string>
     <string name="use_unified_preferred_browser_explainer">ਇਸਨੂੰ ਇਨੇਬਲ ਕਰਨਾ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਦੋਵਾਂ \'ਤੇ ਲਾਗੂ ਕਰਦਾ ਹੈ। ਡਿਸੇਬਲ ਹੋਣ \'ਤੇ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਮੋਡ ਵਿਚਕਾਰ ਸਵਿਚ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।</string>
-    <string name="advanced_explainer">ਉੱਨਤ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਜਿਵੇਂ ਫੀਚਰ ਫਲੈਗ</string>
+    <string name="advanced_explainer">ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਜਿਵੇਂ ਵਿਸ਼ੇਸ਼ਤਾ ਫਲੈਗ ਅਤੇ ਨਿਰਯਾਤ/ਆਯਾਤ</string>
     <string name="background_image">ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ</string>
     <string name="amp2html_local_cache_explainer">ਵੈੱਬਪੰਨਿਆਂ ਦੇ ਮੁੜ ਪ੍ਰਾਪਤ ਕੀਤੇ ਗੈਰ-AMP ਸੰਸਕਰਣਾਂ ਨੂੰ ਸਥਾਨਕ ਤੌਰ \'ਤੇ ਕੈਸ਼ ਕਰੋ</string>
     <string name="no">ਨਹੀਂ</string>
@@ -140,7 +140,7 @@
     <string name="just_once">ਇਸ ਵਾਰ</string>
     <string name="disable_in_selected_explainer">ਚੁਣੀਆਂ ਗਈਆਂ ਐਪਾਂ ਵਿੱਚ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਡਿਸੇਬਲ ਕਰੋ, ਚਾਹੇ ਐਪ ਜੋ ਵੀ ਵਰਤਣਾ ਚਾਹੁੰਦਾ ਹੈ</string>
     <string name="fastfoward_rules">ਫਾਸਟ ਫਾਰਵਰਡ ਨਿਯਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="version">ਸੰਸਕਰਣ</string>
+    <string name="version">ਲਿੰਕਸ਼ੀਟ ਸੰਸਕਰਣ</string>
     <string name="preview_url">URL ਦੀ ਝਲਕ</string>
     <string name="usage_stats_sorting_explainer">ਕ੍ਰਮਬੱਧ ਕਰਨ ਵਾਲੇ ਐਲਗੋਰਿਦਮ ਵਿੱਚ ਐਂਡਰਾਇਡ ਸਿਸਟਮ ਵਰਤੋਂ ਦੇ ਅੰਕੜੇ ਸ਼ਾਮਿਲ ਕਰੋ। ਪਹਿਲੀ ਟੌਗਲ \'ਤੇ ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
     <string name="amp2html_external_service_explainer">supabase.com (<annotation url="https://supabase.com/privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
@@ -332,10 +332,21 @@
     <string name="linksheet_donation_explainer">ਲਿੰਕਸ਼ੀਟ <b>%s</b> ਤੋਂ ਵੱਧ ਕੰਮ ਦਾ ਨਤੀਜਾ ਹੈ ਜੋ <b>%s</b> ਤੋਂ ਵੱਧ ਦੀ ਮਿਆਦ ਵਿੱਚ ਕੀਤਾ ਗਿਆ। ਜੇ ਤੁਸੀਂ ਮੇਰੇ ਕੰਮ ਲਈ ਕੁਝ ਪ੍ਰਸ਼ੰਸਾ ਦਿਖਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਦਾਨ ਕਰੋ।</string>
     <string name="built_by">ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਸਾਈਨ ਕੀਤਾ</string>
     <string name="donate">ਦਾਨ ਕਰੋ</string>
-    <string name="built_by_error">ਇਹ ਬਿਲਡ 1fexd ਦੁਆਰਾ ਹਸਤਾਖਰਿਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਸੀ। ਇਹ ਜ਼ਰੂਰੀ ਤੌਰ \'ਤੇ ਕੁਝ ਵੀ ਮਾੜਾ ਨਹੀਂ ਹੈ ਕਿਉਂਕਿ ਕੋਈ ਵੀ ਸਰੋਤ ਕੋਡ ਨੂੰ ਫੋਰਕ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ ਆਪਣੀ ਐਪ ਬਣਾ ਸਕਦਾ ਹੈ, ਪਰ ਉਹ ਗਲਤ ਇਰਾਦੇ ਨਾਲ ਅਜਿਹਾ ਕਰ ਸਕਦੇ ਹਨ।</string>
+    <string name="built_by_error">ਇਹ ਬਿਲਡ \'ਤੇ ਨਾ ਤਾਂ 1fexd ਅਤੇ ਨਾ ਹੀ Github ਵਰਕਫਲੋ ਦੁਆਰਾ ਹਸਤਾਖਰ ਕੀਤੇ ਗਏ ਸਨ। ਇਹ ਜ਼ਰੂਰੀ ਤੌਰ \'ਤੇ ਕੁਝ ਵੀ ਮਾੜਾ ਨਹੀਂ ਹੈ ਕਿਉਂਕਿ ਕੋਈ ਵੀ ਸਰੋਤ ਕੋਡ ਨੂੰ ਫੋਰਕ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ ਆਪਣਾ ਲਿੰਕਸ਼ੀਟ ਸੰਸਕਰਣ ਬਣਾ ਸਕਦਾ ਹੈ, ਪਰ ਉਹਨਾਂ ਦੁਆਰਾ ਗਲਤ ਇਰਾਦੇ ਨਾਲ ਅਜਿਹਾ ਕਰਨਾ ਸੰਭਵ ਹੋ ਸਕਦਾ ਹੈ।</string>
     <plurals name="months">
         <item quantity="one">%s ਮਹੀਨਾ</item>
         <item quantity="other">%s ਮਹੀਨੇ</item>
     </plurals>
     <string name="pro_feature">ਇਹ ਲਿੰਕਸ਼ੀਟ ਪਰੋ ਫ਼ੀਚਰ ਹੈ!</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ (<b>4€</b> ਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਹੋ!) ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਸਿਰਫ਼ ਲੁਕਾਉਂਦਾ ਹੈ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਇੱਥੇ <b>ਪ੍ਰੋ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ</b> ਹੋਣਗੀਆਂ।</string>
+    <string name="export_import_settings">ਐਕਸਪੋਰਟ ਜਾਂ ਇੰਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
+    <string name="import_headline">ਇੰਪੋਰਟ ਕਰੋ</string>
+    <string name="export_include_recommendation">ਅਸੀਂ ਸਿਫ਼ਾਰਿਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਨਿਮਨਲਿਖਤ ਸੈਟਿੰਗਾਂ ਨੂੰ ਤਾਂ ਹੀ ਚਾਲੂ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਨਾਲ ਆਪਣੇ ਐਕਸਪੋਰਟ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਦੀ ਯੋਜਨਾ ਨਹੀਂ ਬਣਾਉਂਦੇ ਹੋ!</string>
+    <string name="include_log_hash_key">ਲੌਗ ਹੈਸ਼ ਕੁੰਜੀ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡੇ ਲੌਗਸ ਨੂੰ ਸੋਧਣ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਕੁੰਜੀ)</string>
+    <string name="import_explainer">ਇੱਕ ਫ਼ਾਈਲ ਤੋਂ ਇੱਕ ਪਹਿਲਾਂ ਐਕਸਪੋਰਟ ਕੀਤਾ ਇੰਪੋਰਟ ਕਰੋ</string>
+    <string name="export_privacy">ਨਿਰਯਾਤ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
+    <string name="export_import_settings_explainer">ਆਪਣੀਆਂ ਮੌਜੂਦਾ ਸੈਟਿੰਗਾਂ ਨੂੰ ਐਕਸਪੋਰਟ ਕਰੋ ਜਾਂ ਪਿਛਲੀਆਂ ਐਕਸਪੋਰਟ ਕੀਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ</string>
+    <string name="include_history">ਇਤਿਹਾਸ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡਾ ਲਿੰਕ ਕਲਿੱਕ ਅਤੇ ਐਪ ਇਤਿਹਾਸ)</string>
+    <string name="export_settings">ਐਕਸਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
+    <string name="export_explainer">ਆਪਣੀਆਂ ਮੌਜੂਦਾ ਐਪ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੱਕ ਫਾਈਲ ਵਿੱਚ ਐਕਸਪੋਰਟ ਕਰੋ</string>
 </resources>

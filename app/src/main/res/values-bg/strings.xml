@@ -91,8 +91,8 @@
     <string name="none_explainer">Използват се само приложения, не и браузъри. Ако има само едно приложение, то ще бъде използвано автоматично. Ако няма приложения, ще бъдат показани всички браузъри.</string>
     <string name="always_show_package_name">Името на пакета е винаги видимо</string>
     <string name="always_show_package_name_explainer">До името на приложението се показва и името на пакета. Важи за цялото приложение.</string>
-    <string name="disable_toasts">Изключване на плуващите съобщения</string>
-    <string name="disable_toasts_explainer">Никога не се показват плуващи съобщения</string>
+    <string name="disable_all_toasts">Изключване на плуващите съобщения</string>
+    <string name="disable_all_toasts_explainer">Никога не се показват плуващи съобщения</string>
     <string name="remove_all">Премахване на всички</string>
     <string name="add_all">Добавяне на всички</string>
     <string name="hide_after_copying">Скриване след копиране</string>

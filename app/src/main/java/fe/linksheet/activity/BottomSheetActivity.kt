@@ -83,6 +83,7 @@ import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.PrivateBrowsingBrowser
+import fe.linksheet.util.runIf
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -104,11 +105,15 @@ class BottomSheetActivity : ComponentActivity() {
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
             setContent {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
-                    if (!bottomSheetViewModel.disableToasts.value) {
-                        (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
-                            if (result != null) makeResolveToast(result, resolveType.stringResId)
-                        }
+                    (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
+                        if (result != null) makeResolveToast(
+                            bottomSheetViewModel.resolveViaToast.value,
+                            bottomSheetViewModel.resolveViaFailedToast.value,
+                            result,
+                            resolveType.stringResId
+                        )
                     }
+
                 }
 
                 AppThemeBottomSheet(bottomSheetViewModel)
@@ -125,11 +130,17 @@ class BottomSheetActivity : ComponentActivity() {
             val completed = bottomSheetViewModel.resolveAsync(intent, referrer).await()
 
             if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
-                if (!bottomSheetViewModel.disableToasts.value) {
-                    completed.resolveResults.forEach { (resolveType, result) ->
-                        if (result != null) makeResolveToast(result, resolveType.stringResId, true)
-                    }
+                completed.resolveResults.forEach { (resolveType, result) ->
+                    if (result != null) makeResolveToast(
+                        bottomSheetViewModel.resolveViaToast.value,
+                        bottomSheetViewModel.resolveViaFailedToast.value,
+                        result,
+                        resolveType.stringResId,
+                        true
+                    )
+                }
 
+                if (bottomSheetViewModel.openingWithAppToast.value) {
                     showToast(
                         getString(R.string.opening_with_app, completed.app.label),
                         uiThread = true
@@ -156,12 +167,14 @@ class BottomSheetActivity : ComponentActivity() {
     }
 
     private fun makeResolveToast(
+        showResolveViaToast: Boolean,
+        showResolveFailedToast: Boolean,
         result: Result<ResolveType>,
         @StringRes resolveTypeId: Int,
         uiThread: Boolean = false
     ) {
         result.getOrNull()?.let { type ->
-            if (type !is ResolveType.NotResolved) {
+            if (type !is ResolveType.NotResolved && showResolveViaToast) {
                 showToast(
                     getString(
                         R.string.resolved_via,
@@ -171,10 +184,16 @@ class BottomSheetActivity : ComponentActivity() {
                     uiThread = uiThread
                 )
             }
-        } ?: showToast(
-            getString(R.string.resolve_failed, getString(resolveTypeId), result.exceptionOrNull()),
-            uiThread = uiThread
-        )
+        } ?: runIf(showResolveFailedToast) {
+            showToast(
+                getString(
+                    R.string.resolve_failed,
+                    getString(resolveTypeId),
+                    result.exceptionOrNull()
+                ),
+                uiThread = uiThread
+            )
+        }
     }
 
     companion object {
@@ -374,7 +393,7 @@ class BottomSheetActivity : ComponentActivity() {
                     result?.uri.toString()
                 )
 
-                if (!bottomSheetViewModel.disableToasts.value) {
+                if (!bottomSheetViewModel.urlCopiedToast.value) {
                     showToast(R.string.url_copied)
                 }
 
@@ -843,7 +862,7 @@ class BottomSheetActivity : ComponentActivity() {
                                 result.downloadable as Downloader.DownloadCheckResult.Downloadable
                             )
 
-                            if (!bottomSheetViewModel.disableToasts.value) {
+                            if (!bottomSheetViewModel.downloadStartedToast.value) {
                                 showToast(R.string.download_started)
                             }
 

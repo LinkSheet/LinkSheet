@@ -56,6 +56,7 @@ import fe.linksheet.composable.util.annotatedStringResource
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.discordInvite
 import fe.linksheet.donateSettingsRoute
+import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.lineSeparator
 import fe.linksheet.linksheetGithub
@@ -220,9 +221,9 @@ fun AboutSettingsRoute(
                     headline = stringResource(id = R.string.version),
                     subtitle = builtAt,
                     onClick = {
-                        if (devClicks == 7) {
+                        if (devClicks == 7 && !viewModel.devModeEnabled.value) {
                             viewModel.devModeEnabled.updateState(true)
-                            Toast.makeText(activity, R.string.dev_mode_enabled, Toast.LENGTH_SHORT).show()
+                            activity.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
                         }
 
                         devClicks++

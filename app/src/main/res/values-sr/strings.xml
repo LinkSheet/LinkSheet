@@ -207,7 +207,7 @@
     <string name="options">Опције</string>
     <string name="services">Услуге</string>
     <string name="about_explainer">О овој апликацији, лиценце</string>
-    <string name="disable_toasts">Онемогући искачуће поруке</string>
+    <string name="disable_all_toasts">Онемогући искачуће поруке</string>
     <string name="export_mode">Режим извоза</string>
     <string name="app_log">Евиденција апликације</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
@@ -239,7 +239,7 @@
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали</string>
     <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
     <string name="donation_instructions">Упутства за донацију</string>
-    <string name="disable_toasts_explainer">Никада не приказуј искачуће поруке</string>
+    <string name="disable_all_toasts_explainer">Никада не приказуј искачуће поруке</string>
     <string name="set_as_browser">Подеси као прегледач</string>
     <string name="whitelisted">Бела листа</string>
     <plurals name="minutes">

@@ -33,7 +33,7 @@
     <string name="preferred_apps_explainer">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
     <string name="always_show_package_name_explainer">Zawsze wyświetlaj nazwy pakietów zamiast nazw aplikacji. Dotyczy to całej aplikacji.</string>
-    <string name="disable_toasts">Wyłącz powiadomienie toast</string>
+    <string name="disable_all_toasts">Wyłącz powiadomienie toast</string>
     <string name="remove_all">Usuń wszystkie</string>
     <string name="add_all">Dodaj wszystkie</string>
     <string name="hide_after_copying">Ukryj po skopiowaniu</string>
@@ -98,7 +98,7 @@
     <string name="dont_show_filtered_item_explainer">Nigdy nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
     <string name="set_as_browser_explainer">Dotknij, aby ustawić LinkSheet jako domyślną przeglądarkę</string>
     <string name="single_tap_explainer">Umożliwia otwieranie aplikacji tylko jednym dotknięciem; długie przytrzymanie wybierze aplikację, podwójne dotknięcie otworzy informacje o aplikacji</string>
-    <string name="disable_toasts_explainer">Nigdy nie pokazuj wyskakujących wiadomości</string>
+    <string name="disable_all_toasts_explainer">Nigdy nie pokazuj wyskakujących wiadomości</string>
     <string name="linksheet_download">Pobieranie LinkSheet</string>
     <string name="enable_downloader">Włącz program do pobierania</string>
     <string name="downloader_url_mime_type">Użyj typu MIME z adresu URL</string>

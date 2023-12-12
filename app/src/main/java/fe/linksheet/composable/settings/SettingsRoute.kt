@@ -70,6 +70,21 @@ fun SettingsRoute(
                 )
             }
 
+            item(key = "notification"){
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = notificationSettingsRoute,
+                    headlineId = R.string.notifications,
+                    subtitleId = R.string.notifications_explainer,
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.Notifications,
+                            descriptionId = R.string.privacy
+                        )
+                    }
+                )
+            }
+
             item(key = "privacy") {
                 SettingsItemRow(
                     navController = navController,

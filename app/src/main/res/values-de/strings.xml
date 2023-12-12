@@ -97,10 +97,10 @@
     <string name="random_instance">Zufällige Instanz</string>
     <string name="options">Optionen</string>
     <string name="services">Dienste</string>
-    <string name="disable_toasts">Toast-Meldungen deaktivieren</string>
+    <string name="disable_all_toasts">Toast-Meldungen deaktivieren</string>
     <string name="app_log">Anwendungsprotokoll</string>
     <string name="in_app_browser">In-App-Browser</string>
-    <string name="disable_toasts_explainer">Niemals Toast-Meldungen anzeigen</string>
+    <string name="disable_all_toasts_explainer">Niemals Toast-Meldungen anzeigen</string>
     <plurals name="minutes">
         <item quantity="one">%s Minute</item>
         <item quantity="other">%s Minuten</item>

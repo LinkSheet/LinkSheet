@@ -37,8 +37,8 @@
     <string name="preferred_apps_explainer">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">始終顯示套件名稱</string>
     <string name="always_show_package_name_explainer">始終顯示套件名稱而不僅僅是應用程式名稱</string>
-    <string name="disable_toasts">停用浮動訊息</string>
-    <string name="disable_toasts_explainer">從不顯示任何浮動訊息</string>
+    <string name="disable_all_toasts">停用浮動訊息</string>
+    <string name="disable_all_toasts_explainer">從不顯示任何浮動訊息</string>
     <string name="remove_all">全部移除</string>
     <string name="add_all">全部新增</string>
     <string name="hide_after_copying">複製後隱藏</string>

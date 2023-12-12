@@ -40,8 +40,8 @@
     <string name="set_as_browser_explainer">Bu uygulamayı varsayılan tarayıcı yapmak için buraya dokunun</string>
     <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>
     <string name="apps_which_can_open_links_explainer_2">LinkSheet\'in davranışına müdahale edebilecek tüm uygulamaları listeler</string>
-    <string name="disable_toasts">Tostları devre dışı bırak</string>
-    <string name="disable_toasts_explainer">Tost mesajlarını asla gösterme</string>
+    <string name="disable_all_toasts">Tostları devre dışı bırak</string>
+    <string name="disable_all_toasts_explainer">Tost mesajlarını asla gösterme</string>
     <string name="remove_all">Hepsini kaldır</string>
     <string name="back">Geri</string>
     <string name="hide_after_copying_explainer">\"URL\'yi kopyala\" düğmesine basıldıktan sonra alt sayfayı gizle</string>

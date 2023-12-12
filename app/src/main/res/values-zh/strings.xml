@@ -38,8 +38,8 @@
     <string name="preferred_apps_explainer">首选应用是您设置为“始终”打开某些链接的应用</string>
     <string name="always_show_package_name">始终显示包名</string>
     <string name="always_show_package_name_explainer">始终显示包名而非仅是应用名称</string>
-    <string name="disable_toasts">禁用提示栏</string>
-    <string name="disable_toasts_explainer">从不显示任何提示栏消息</string>
+    <string name="disable_all_toasts">禁用提示栏</string>
+    <string name="disable_all_toasts_explainer">从不显示任何提示栏消息</string>
     <string name="remove_all">移除所有</string>
     <string name="add_all">添加所有</string>
     <string name="hide_after_copying">复制后隐藏</string>

@@ -186,7 +186,7 @@
     <string name="options">Opciones</string>
     <string name="services">Servicios</string>
     <string name="about_explainer">Acerca de esta aplicación, licencias</string>
-    <string name="disable_toasts">Desactivar notificaciones emergentes</string>
+    <string name="disable_all_toasts">Desactivar notificaciones emergentes</string>
     <string name="export_mode">Exportar modo</string>
     <string name="app_log">Registro de la aplicación</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
@@ -217,7 +217,7 @@
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo</string>
     <string name="fastfoward_rules_explainer">Usar la integración de reglas experimentales <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (evita las redirecciones de algunos dominios extrayendo la redirección del enlace)</string>
     <string name="donation_instructions">Instrucciones de donación</string>
-    <string name="disable_toasts_explainer">No mostrar nunca notificaciones emergentes</string>
+    <string name="disable_all_toasts_explainer">No mostrar nunca notificaciones emergentes</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>

@@ -46,7 +46,12 @@ object AppPreferences : Preferences() {
     )
     val enableSendButton = booleanPreference("enable_send_button")
     val alwaysShowPackageName = booleanPreference("always_show_package_name")
-    val disableToasts = booleanPreference("disable_toasts")
+    val urlCopiedToast = booleanPreference("url_copied_toast", true)
+    val downloadStartedToast = booleanPreference("download_started_toast", true)
+    val openingWithAppToast = booleanPreference("opening_with_app_toast", true)
+    val resolveViaToast = booleanPreference("resolve_via_toast", true)
+    val resolveViaFailedToast = booleanPreference("resolve_via_failed_toast", true)
+
     val gridLayout = booleanPreference("grid_layout")
     val useClearUrls = booleanPreference("use_clear_urls")
     val useFastForwardRules = booleanPreference("fast_forward_rules")

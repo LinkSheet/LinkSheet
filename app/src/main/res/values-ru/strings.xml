@@ -160,7 +160,7 @@
     <string name="options">Опции</string>
     <string name="services">Сервисы</string>
     <string name="about_explainer">Об этом приложении, лицензии</string>
-    <string name="disable_toasts">Отключить тост сообщения</string>
+    <string name="disable_all_toasts">Отключить тост сообщения</string>
     <string name="export_mode">Режим экспорта</string>
     <string name="app_log">Лог приложения</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
@@ -186,7 +186,7 @@
     <string name="dark">Тёмная</string>
     <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
     <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
-    <string name="disable_toasts_explainer">Никогда не показывать тост сообщения</string>
+    <string name="disable_all_toasts_explainer">Никогда не показывать тост сообщения</string>
     <string name="set_as_browser">Установить как браузер</string>
     <string name="request_timeout_explainer_disclaimer">В настоящее время недоступно в режиме сетки</string>
     <string name="whitelisted">В белом списке</string>

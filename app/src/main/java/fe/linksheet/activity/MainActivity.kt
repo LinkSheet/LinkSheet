@@ -2,6 +2,7 @@ package fe.linksheet.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Spacer
@@ -50,6 +51,7 @@ import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
 import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
 import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
+import fe.linksheet.composable.settings.notification.NotificationSettingsRoute
 import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
@@ -73,6 +75,7 @@ import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.mainRoute
 import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.notificationSettingsRoute
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
 import fe.linksheet.pretendToBeAppRoute
@@ -134,6 +137,10 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = generalSettingsRoute) {
                         GeneralSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    animatedComposable(route = notificationSettingsRoute){
+                        NotificationSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     animatedComposable(route = privacySettingsRoute) {

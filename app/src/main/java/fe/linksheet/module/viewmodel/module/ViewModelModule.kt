@@ -26,7 +26,9 @@ import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.module.viewmodel.DebugSettingsViewModel
+import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import fe.linksheet.module.viewmodel.SettingsViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -58,4 +60,5 @@ val viewModelModule = module {
     viewModelOf(::AboutSettingsViewModel)
     viewModelOf(::DebugSettingsViewModel)
     viewModelOf(::SettingsViewModel)
+    viewModelOf(::NotificationSettingsViewModel)
 }

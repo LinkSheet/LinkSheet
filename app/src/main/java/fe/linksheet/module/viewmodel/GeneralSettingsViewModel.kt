@@ -11,6 +11,5 @@ class GeneralSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var disableToasts = preferenceRepository.getBooleanState(AppPreferences.disableToasts)
 
 }

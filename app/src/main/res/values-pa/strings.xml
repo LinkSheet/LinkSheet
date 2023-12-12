@@ -186,7 +186,7 @@
     <string name="options">ਵਿਕਲਪ</string>
     <string name="services">ਸੇਵਾਵਾਂ</string>
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
-    <string name="disable_toasts">ਟੋਸਟਸ ਨੂੰ ਅਸਮਰੱਥ ਕਰੋ</string>
+    <string name="disable_all_toasts">ਟੋਸਟਸ ਨੂੰ ਅਸਮਰੱਥ ਕਰੋ</string>
     <string name="export_mode">ਐਕਸਪੋਰਟ ਮੋਡ</string>
     <string name="app_log">ਐਪ ਲੌਗ</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
@@ -217,7 +217,7 @@
     <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ)</string>
     <string name="donation_instructions">ਦਾਨ ਸਬੰਧੀ ਨਿਰਦੇਸ਼</string>
-    <string name="disable_toasts_explainer">ਕਦੇ ਵੀ ਕੋਈ ਟੋਸਟ ਸੁਨੇਹੇ ਨਾ ਦਿਖਾਓ</string>
+    <string name="disable_all_toasts_explainer">ਕਦੇ ਵੀ ਕੋਈ ਟੋਸਟ ਸੁਨੇਹੇ ਨਾ ਦਿਖਾਓ</string>
     <string name="set_as_browser">ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="whitelisted">ਵ੍ਹਾਈਟਲਿਸਟਡ</string>
     <string name="log">ਲੌਗ</string>

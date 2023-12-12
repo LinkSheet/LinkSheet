@@ -133,7 +133,7 @@
     <string name="options">Tùy chọn</string>
     <string name="services">Dịch vụ</string>
     <string name="about_explainer">Giới thiệu về ứng dụng này, giấy phép</string>
-    <string name="disable_toasts">Tắt thông báo ngắn</string>
+    <string name="disable_all_toasts">Tắt thông báo ngắn</string>
     <string name="export_mode">Chế độ xuất</string>
     <string name="app_log">Nhật ký ứng dụng</string>
     <string name="seal_subtitle_2">Seal là một nguồn tài nguyên tuyệt vời để học hỏi về Jetpack Compose</string>
@@ -155,7 +155,7 @@
     <string name="links">Liên kết</string>
     <string name="preferred_browser">Trình duyệt ưu tiên</string>
     <string name="dark">Tối</string>
-    <string name="disable_toasts_explainer">Không bao giờ hiển thị bất kỳ tin nhắn thông báo ngắn nào</string>
+    <string name="disable_all_toasts_explainer">Không bao giờ hiển thị bất kỳ tin nhắn thông báo ngắn nào</string>
     <string name="set_as_browser">Đặt làm trình duyệt</string>
     <string name="whitelisted">Đã liệt vào Danh sách trắng</string>
     <plurals name="minutes">

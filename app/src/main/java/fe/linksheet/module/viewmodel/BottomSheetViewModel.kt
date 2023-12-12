@@ -58,13 +58,19 @@ class BottomSheetViewModel(
         AppPreferences.enableIgnoreLibRedirectButton
     )
 
-    val disableToasts = preferenceRepository.getBooleanState(AppPreferences.disableToasts)
+    val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)
+    val downloadStartedToast = preferenceRepository.getBooleanState(AppPreferences.downloadStartedToast)
+
     val gridLayout = preferenceRepository.getBooleanState(AppPreferences.gridLayout)
     private val followRedirects =
         preferenceRepository.getBooleanState(AppPreferences.followRedirects)
     private var enableDownloader = preferenceRepository.getBooleanState(
         AppPreferences.enableDownloader
     )
+
+    val openingWithAppToast = preferenceRepository.getBooleanState(AppPreferences.openingWithAppToast)
+    val resolveViaToast = preferenceRepository.getBooleanState(AppPreferences.resolveViaToast)
+    val resolveViaFailedToast = preferenceRepository.getBooleanState(AppPreferences.resolveViaFailedToast)
 
     val theme = preferenceRepository.getState(AppPreferences.theme)
     val useTextShareCopyButtons = preferenceRepository.getBooleanState(

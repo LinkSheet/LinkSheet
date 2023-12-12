@@ -158,7 +158,7 @@
     <string name="github_pipeline_build">Направљено и потписано од стране GitHub радног тока</string>
     <string name="disable_in_selected_explainer">Онемогућите прегледач у апликацији у изабраним апликацијама, без обзира на то шта апликација жели да користи</string>
     <string name="fastfoward_rules">Користи FastForward правила</string>
-    <string name="version">Верзија</string>
+    <string name="version">LinkSheet верзија</string>
     <string name="preview_url">Преглед URL адресе</string>
     <string name="usage_stats_sorting_explainer">Укључите статистику коришћења Android система у алгоритам за сортирање. Дозвола се тражи при првом укључивању.</string>
     <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
@@ -296,7 +296,7 @@
     <string name="in_app">У апликацији</string>
     <string name="preferred_browser_explainer">Подесите режим преферираног прегледача</string>
     <string name="crash_log">Евиденција отказивања</string>
-    <string name="built_by_error">Ову верзију није потписао 1fexd. Ово не мора да значи ништа лоше, јер свако може да рачва изворни кôд и направи своју апликацију, али то може учинити са злонамерном намером.</string>
+    <string name="built_by_error">Ову верзију није потписао 1fexd ни GitHub радни ток. Ово не мора да значи ништа лоше, јер свако може да рачва изворни кôд и направи своју верзију LinkSheet апликације, али то може учинити са злонамерном намером.</string>
     <string name="single_tap">Омогући један додир</string>
     <string name="set_as_default_browser">Подеси као подразумевани прегледач</string>
     <string name="follow_only_known_trackers">Прати само познате програме за праћење</string>
@@ -357,4 +357,29 @@
     <string name="export_settings">Извоз подешавања</string>
     <string name="export_explainer">Извезите тренутна подешавања апликације у фајл</string>
     <string name="import_settings_override_preferences">Ово ће заменити сва постојећа подешавања. Наставити?</string>
+    <string name="resolve_via_failed_toast">Прикажи искачућу поруку при неуспешном разрешењу</string>
+    <string name="last_updated">Последњи пут ажурирано (UTC):</string>
+    <string name="resolve_via_failed_toast_explainer">Приказивање искачуће поруке када се URL адреса неуспешно разреши преко спољне услуге</string>
+    <string name="dev_explainer">Програмерска подешавања</string>
+    <string name="opening_with_app_toast">Прикажи искачућу поруку при аутоматском покретању апликације</string>
+    <string name="download_started_toast_explainer">Приказивање искачуће поруке када се започне преузимање</string>
+    <string name="url_copied_toast">Искачућа порука о копираној URL адреси</string>
+    <string name="dev_mode_enabled">Честитамо, омогућили сте режим за програмере. Само будите опрезни.</string>
+    <string name="clear_urls_version">ClearURLs правила</string>
+    <string name="last_rule_update">Последње ажурирање правила узводно (UTC):</string>
+    <string name="resolve_via_toast">Приказивање искачуће поруке при разрешењу URL адресе</string>
+    <string name="cached_urls_version">Уграђене кеширане URL адресе</string>
+    <string name="download_started_toast">Искачућа порука о започетом преузимању</string>
+    <string name="notifications">Обавештења</string>
+    <string name="just_version">Верзија</string>
+    <string name="resolve_via_toast_explainer">Приказивање искачуће поруке када се URL адреса разреши преко спољне услуге</string>
+    <string name="copy_version_information">Копирај информацију о верзији</string>
+    <string name="dev">Програмер</string>
+    <string name="debug_build">Издање за отклањање грешака</string>
+    <string name="opening_with_app_toast_explainer">Приказивање искачуће поруке када се покрене апликација која је постављена као подразумевана за домен</string>
+    <string name="donation">Донација</string>
+    <string name="notifications_explainer">Конфигуришите искачуће поруке</string>
+    <string name="running_unofficial_build">Незванично издање</string>
+    <string name="fastforward_version">FastForward правила</string>
+    <string name="url_copied_toast_explainer">Приказивање искачуће поруке када корисник копира URL адресу</string>
 </resources>

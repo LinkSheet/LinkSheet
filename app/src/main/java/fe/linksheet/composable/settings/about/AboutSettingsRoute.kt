@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Cached
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Euro
@@ -162,7 +163,7 @@ fun AboutSettingsRoute(
 
             if (!BuildConfig.DEBUG) {
                 item("signedby") {
-                    val buildType =  AppSignature.checkSignature(activity)
+                    val buildType = AppSignature.checkSignature(activity)
                     val isUnofficial = buildType == AppSignature.BuildType.Unofficial
 
                     SettingsItemRow(
@@ -246,33 +247,33 @@ fun AboutSettingsRoute(
                     }
                 )
 
-               Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                   TextButton(onClick = {
-                       clipboardManager.setText(buildAnnotatedString {
-                           append(
-                               activity.getText(R.string.linksheet_version_info_header),
-                               lineSeparator,
-                               builtAt,
-                               lineSeparator,
-                               flavor,
-                               lineSeparator,
-                               type,
-                               lineSeparator,
-                               commit,
-                               lineSeparator,
-                               branch,
-                               lineSeparator,
-                               fullVersionName
-                           )
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    TextButton(onClick = {
+                        clipboardManager.setText(buildAnnotatedString {
+                            append(
+                                activity.getText(R.string.linksheet_version_info_header),
+                                lineSeparator,
+                                builtAt,
+                                lineSeparator,
+                                flavor,
+                                lineSeparator,
+                                type,
+                                lineSeparator,
+                                commit,
+                                lineSeparator,
+                                branch,
+                                lineSeparator,
+                                fullVersionName
+                            )
 
-                           if (workflow != null) {
-                               append(lineSeparator, workflow)
-                           }
-                       })
-                   }) {
-                       Text(text = stringResource(id = R.string.copy_version_information))
-                   }
-               }
+                            if (workflow != null) {
+                                append(lineSeparator, workflow)
+                            }
+                        })
+                    }) {
+                        Text(text = stringResource(id = R.string.copy_version_information))
+                    }
+                }
             }
 
             item("clearurlskt_version") {
@@ -305,7 +306,25 @@ fun AboutSettingsRoute(
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.Bolt,
-                            descriptionId = R.string.clear_urls_version
+                            descriptionId = R.string.fastforward_version
+                        )
+                    }
+                )
+            }
+
+            item("cached_urls") {
+                SettingsItemRow(
+                    headline = stringResource(id = R.string.cached_urls_version),
+                    subtitle = buildNameValueAnnotatedString(
+                        stringResource(id = R.string.last_updated),
+                        FastForwardRules.fetchedAt.unixMillisUtc.format(
+                            ISO8601DateTimeFormatter.DefaultFormat
+                        )
+                    ),
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.Cached,
+                            descriptionId = R.string.cached_urls_version
                         )
                     }
                 )

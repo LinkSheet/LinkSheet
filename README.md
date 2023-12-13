@@ -1,5 +1,3 @@
-# LinkSheet
-
 <!-- ---------- Mascot ---------- -->
 <div align="center">
   <div style="display: flex;">

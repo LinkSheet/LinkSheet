@@ -7,6 +7,13 @@
 
 <br />
 
+<!-- ---------- Description ---------- -->
+<div align="center">
+
+LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
+
+</div>
+
 
 <!-- ---------- Badges ---------- -->
 <div align="center">
@@ -31,12 +38,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 </div>
 
 
-<!-- ---------- Description ---------- -->
-<div align="center">
 
-LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
-
-</div>
 
 <!-- ---------- Screenshots ---------- -->
 <div align="center">

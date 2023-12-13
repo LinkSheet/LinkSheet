@@ -1,5 +1,13 @@
 # LinkSheet
 
+<!-- ---------- Mascot ---------- -->
+<div align="center">
+  <div style="display: flex;">
+    <img src="readme/mascot.png">
+  </div>
+ </div>
+
+
 <!-- ---------- Badges ---------- -->
 <div align="center">
 

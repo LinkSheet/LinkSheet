@@ -1,23 +1,34 @@
 <!-- ---------- Mascot ---------- -->
 <div align="center">
   <div style="display: flex;">
-    <img src="readme/mascot.png">
+    <img src="readme/mascot.webp">
   </div>
  </div>
 
 <br />
 
+<!-- ---------- Description ---------- -->
+<div align="center">
+
+LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
+
+</div>
+
 
 <!-- ---------- Badges ---------- -->
 <div align="center">
 
+New "official" releases are rarely built, but the app is still rapidly being developed, therefore we recommend using the [nightly builds](#nightly-builds).
+
 [![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
-[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-brightgreen)](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
-[![Nightly Repository (for Obtainium)](https://img.shields.io/badge/nightly-repository-brightgreen)](https://github.com/1fexd/LinkSheetNightly)
+
+[![Latest Github nightly release](https://img.shields.io/github/v/release/1fexd/LinkSheetNightly?label=nightly%20github&color=orange)](https://github.com/1fexd/LinkSheetNightly/releases/latest)
+[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
 
 [![Build status](https://img.shields.io/github/actions/workflow/status/1fexd/LinkSheet/build-nightly.yml)](https://github.com/1fexd/LinkSheet/actions/workflows/build-nightly.yml)
 [![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
+[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheetNightly/total?color=orange)](https://github.com/1fexd/LinkSheetNightly/releases)
 [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)
 
 </div>
@@ -31,12 +42,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 </div>
 
 
-<!-- ---------- Description ---------- -->
-<div align="center">
 
-LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
-
-</div>
 
 <!-- ---------- Screenshots ---------- -->
 <div align="center">

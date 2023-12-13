@@ -3,9 +3,11 @@
 <!-- ---------- Mascot ---------- -->
 <div align="center">
   <div style="display: flex;">
-    <img src="readme/mascot.png">
+    <img src="readme/mascot.png" height="250">
   </div>
  </div>
+
+<br />
 
 
 <!-- ---------- Badges ---------- -->

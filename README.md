@@ -1,7 +1,7 @@
 <!-- ---------- Mascot ---------- -->
 <div align="center">
   <div style="display: flex;">
-    <img src="readme/mascot.png" height="250">
+    <img src="readme/mascot.png">
   </div>
  </div>
 

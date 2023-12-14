@@ -506,4 +506,6 @@
     <string name="export_log_dialog__title_include_fingerprint"></string>
     <string name="onboarding_0_subtitle"></string>
     <string name="resolve_event__running_libredirect"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
 </resources>

@@ -524,4 +524,6 @@
     <string name="resolve_embeds"></string>
     <string name="resolve_event__download_check"></string>
     <string name="theme_enable_material_you_explainer"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
 </resources>

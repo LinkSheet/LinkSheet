@@ -500,4 +500,6 @@
         <item quantity="other"></item>
     </plurals>
     <string name="apps_which_can_open_links"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
 </resources>

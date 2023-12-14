@@ -98,3 +98,5 @@
 -keepclassmembers,allowobfuscation,allowoptimization class <1> {
   <init>();
 }
+
+-dontwarn fe.uribuilder.ParsedUri

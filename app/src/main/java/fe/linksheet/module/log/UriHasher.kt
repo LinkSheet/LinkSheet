@@ -1,9 +1,10 @@
 package fe.linksheet.module.log
 
+import fe.kotlin.extension.asString
 import fe.kotlin.extension.forEachWithInfo
 import fe.linksheet.extension.appendHashed
 import fe.linksheet.extension.appendHashedTrim
-import fe.uribuilder.ParsedUri
+import fe.uribuilder.UriParseResult
 import fe.uribuilder.UriParser
 import org.apache.hc.core5.net.InetAddressUtils
 import org.apache.hc.core5.net.PercentCodec
@@ -11,15 +12,19 @@ import org.apache.hc.core5.util.TextUtils
 import javax.crypto.Mac
 
 fun buildHashedUriString(uriString: String, mac: Mac): String {
-    var uri = UriParser.parseUri(uriString)
+    var result = UriParser.parseUri(uriString)
+    if (result is UriParseResult.ParserFailure) {
+        return "Something went very wrong. Parsing this url failed: ${result.exception.asString()}"
+    }
 
+    val uri = result as UriParseResult.ParsedUri
     return buildString {
         if (uri.scheme != null) {
             append(uri.scheme).append(":")
         }
 
         if (uri.encodedSchemeSpecificPart != null) {
-            uri = UriParser.parseUri(uri.encodedSchemeSpecificPart!!)
+            result = UriParser.parseUri(uri.encodedSchemeSpecificPart!!)
         }
 
         if (uri.encodedFragment != null) {
@@ -35,7 +40,7 @@ fun buildHashedUriString(uriString: String, mac: Mac): String {
     }
 }
 
-private fun StringBuilder.parse(uri: ParsedUri, mac: Mac) {
+private fun StringBuilder.parse(uri: UriParseResult.ParsedUri, mac: Mac) {
     val authoritySpecified: Boolean = if (uri.encodedAuthority != null) {
         append("//")
         uri.encodedAuthority!!.split(".").forEachWithInfo { element, _, _, last ->

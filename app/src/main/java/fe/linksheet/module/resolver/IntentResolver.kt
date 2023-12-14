@@ -371,6 +371,7 @@ class IntentResolver(
             }.onFailure { logger.debug(it, "FastForward") }
 
             logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "FastForward")
+
             runCatching {
                 if (clearUrl) {
                     url = clearUrl(url, clearUrlProviders)

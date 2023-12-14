@@ -541,4 +541,6 @@
     <string name="telemetry_level_disabled_description"></string>
     <string name="telemetry_level_minimal_description"></string>
     <string name="analytics"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="download_started_toast"></string>
 </resources>

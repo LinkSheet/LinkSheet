@@ -491,4 +491,6 @@
     <string name="settings_app_config__title_configure_app_behavior"></string>
     <string name="preferred_apps_settings"></string>
     <string name="apps_which_can_open_links"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
 </resources>

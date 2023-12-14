@@ -514,4 +514,6 @@
     <string name="settings_main_setup_success__button_link_handlers"></string>
     <string name="settings_app_config_rules__text_custom_rules"></string>
     <string name="generic__text_url"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="download_started_toast"></string>
 </resources>

@@ -637,4 +637,6 @@
     <string name="share"></string>
     <string name="resolve_embeds_explainer"></string>
     <string name="resolve_embeds"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
 </resources>

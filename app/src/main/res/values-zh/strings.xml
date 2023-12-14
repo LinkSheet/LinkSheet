@@ -607,4 +607,8 @@
     <string name="telemetry_configure_title"></string>
     <string name="analytics"></string>
     <string name="telemetry_configure_type"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="built_by_error"></string>
+    <string name="import_dumped_preference_explainer"></string>
 </resources>

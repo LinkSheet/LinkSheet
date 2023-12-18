@@ -72,4 +72,42 @@
         <item quantity="other">%s महीने</item>
     </plurals>
     <string name="pro_feature">यह लिंकशीट परो फ़ीचर है!</string>
+    <string name="resolve_via_failed_toast">संकल्प विफल होने पर टोस्ट दिखाएँ</string>
+    <string name="last_updated">अंतिम अपडेट की (यूटीसी):</string>
+    <string name="export_to_file">फ़ाइल में निर्यात करें</string>
+    <string name="resolve_via_failed_toast_explainer">जब कोई URL किसी बाहरी सेवा के माध्यम से हल करने में विफल रहता है तो एक टोस्ट दिखाएं</string>
+    <string name="dev_explainer">डेवलपर सेटिंग्स</string>
+    <string name="opening_with_app_toast">जब कोई ऐप स्वचालित रूप से लॉन्च हो तो एक टोस्ट दिखाएं</string>
+    <string name="download_started_toast_explainer">डाउनलोड शुरू होने पर एक टोस्ट दिखाएँ</string>
+    <string name="url_copied_toast">URL कॉपी किया गया टोस्ट</string>
+    <string name="dev_mode_enabled">बधाई हो, आपने डेव-मोड सक्षम कर दिया है। जरा सावधान रहें।</string>
+    <string name="clear_urls_version">ClearURLs नियम</string>
+    <string name="last_rule_update">अपस्ट्रीम से अंतिम नियम अपडेट (UTC):</string>
+    <string name="import_settings">सेटिंग्स इंपोर्ट करें</string>
+    <string name="resolve_via_toast">किसी URL का समाधान हो जाने पर एक टोस्ट दिखाएँ</string>
+    <string name="cached_urls_version">बैल्ट-इन कैश्ड URL</string>
+    <string name="download_started_toast">डाउनलोड प्रारंभ टोस्ट</string>
+    <string name="notifications">नोटीफिकेशन</string>
+    <string name="just_version">संस्करण</string>
+    <string name="export_include_recommendation">हम अनुशंसा करते हैं कि आप निम्नलिखित सेटिंग्स तभी चालू करें जब आप अपना निर्यात किसी और के साथ साझा करने की योजना नहीं बनाते हैं!</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="resolve_via_toast_explainer">जब किसी URL का समाधान किसी बाहरी सेवा के माध्यम से किया जाता है तो एक टोस्ट दिखाएं</string>
+    <string name="confirm_import">पुष्टि करें</string>
+    <string name="copy_version_information">संस्करण जानकारी कॉपी करें</string>
+    <string name="dev">डेवलपर</string>
+    <string name="include_log_hash_key">लॉग हैश कुंजी शामिल करें (आपके लॉग को संशोधित करने के लिए उपयोग की जाने वाली कुंजी)</string>
+    <string name="export_privacy">निर्यात गोपनीयता के बारे में जानने के लिए, आप इस <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> पर जा सकते हैं।</string>
+    <string name="debug_build">डीबग बिल्ड</string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">प्रयोगात्मक लिंकशीट कॉम्पैट मेनू सक्षम करें</string>
+    <string name="include_history">इतिहास शामिल करें (आपका लिंक क्लिक और ऐप इतिहास)</string>
+    <string name="enable_linksheet_compat_explainer">मेनू उप-मेनू \"ऐप्स\" में पाया जा सकता है और इंस्टॉल होने पर, कुछ मूल ऐप्स के अनुरोधों को रोकने में सक्षम होता है।</string>
+    <string name="opening_with_app_toast_explainer">किसी डोमेन के लिए डिफ़ॉल्ट के रूप में सेट किया गया ऐप लॉन्च होने पर एक टोस्ट दिखाएं</string>
+    <string name="donation">दान</string>
+    <string name="export_settings">सेटिंग्स एक्सपोर्ट करें</string>
+    <string name="notifications_explainer">टोस्ट नोटीफिकेशन कॉन्फ़िगर करें</string>
+    <string name="running_unofficial_build">अनौपचारिक बिल्ड</string>
+    <string name="import_settings_override_preferences">यह सभी मौजूदा प्राथमिकताओं को ओवरराइड कर देगा। जारी रखना है?</string>
+    <string name="fastforward_version">फास्टफॉरवर्ड नियम</string>
+    <string name="url_copied_toast_explainer">जब उपयोगकर्ता द्वारा कोई यूआरएल कॉपी किया जाता है तो एक टोस्ट दिखाएं</string>
 </resources>

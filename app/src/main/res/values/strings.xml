@@ -361,7 +361,7 @@
     <string name="notifications_explainer">Configure toast notifications</string>
     <string name="url_copied_toast">URL copied toast</string>
     <string name="url_copied_toast_explainer">Show a toast when an URL is copied by the user</string>
-    <string name="download_started_toast">Download startet toast</string>
+    <string name="download_started_toast">Download started toast</string>
     <string name="download_started_toast_explainer">Show a toast when a download has been started</string>
     <string name="opening_with_app_toast">Show a toast when an app launched automatically</string>
     <string name="opening_with_app_toast_explainer">Show a toast when an app that has been set as default for a domain is launched</string>
@@ -373,6 +373,6 @@
     <string name="last_updated">Last updated (UTC):</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
-    <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and, when installed, is able to intercept requests to certain native apps.</string>
+    <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed, is able to intercept requests to certain native apps.</string>
     <string name="disclaimer_libredirect_unstable">In additional to being an experimental feature, LibRedirect is currently considered very unstable and may not work at all.</string>
 </resources>

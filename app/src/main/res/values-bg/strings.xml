@@ -9,7 +9,7 @@
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
     <string name="back">Назад</string>
     <string name="links">Препратки</string>
-    <string name="version">Издание</string>
+    <string name="version">Издание на LinkSheet</string>
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
@@ -58,7 +58,7 @@
     <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
     <string name="just_once">Веднъж</string>
     <string name="preferred_apps_settings">Настройки на предпочитаните приложения</string>
-    <string name="copy_url">Копиране на URL</string>
+    <string name="copy_url">Копиране</string>
     <string name="confirm">Потвърждаване</string>
     <string name="clear">Изчистване</string>
     <string name="always">Винаги</string>
@@ -81,7 +81,7 @@
     <string name="no_app_to_handle_link_found">Не е намерено приложение, което да обработи препратката!</string>
     <string name="always_ask_explainer">Винаги показва всички браузъри</string>
     <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ. Ако „Последване на пренасочванията от външна услуга“ е включено тук също е включено.</string>
-    <string name="usage_stats_sorting_explainer">При сортирането се взима предвид и системната статистика за използване на приложението. При първо включване ще бъде поискано право на достъп.</string>
+    <string name="usage_stats_sorting_explainer">При сортирането се взима предвид и системната статистика за използване на приложенията. При първо включване ще бъде поискано право на достъп.</string>
     <string name="set_as_browser">Задаване като браузър</string>
     <string name="set_as_browser_explainer">За да направите LinkSheet браузър по подразбиране докоснете</string>
     <string name="preferred_browser">Предпочитан браузър</string>
@@ -121,7 +121,7 @@
     <string name="open_copied_link">Посещаване на копираната препратка</string>
     <string name="follow_only_known_trackers">Последване на известни проследявания</string>
     <string name="theme">Тема</string>
-    <string name="theme_explainer">Променя темата на приложението</string>
+    <string name="theme_explainer">Променя темата</string>
     <string name="system">Като системната</string>
     <string name="light">Светла</string>
     <string name="dark">Тъмна</string>
@@ -171,7 +171,7 @@
     <string name="follow_redirects_builtin_cache_explainer">Използва вградената временна памет</string>
     <string name="enable_shizuku">Интеграция (експериментална) с Shizuku</string>
     <string name="redirect_resolve_type_builtin_cache">вградена временна памет</string>
-    <string name="enable_shizuku_explainer">Ако е отметнато дава възможност на LinkSheet да използва Shizuku за директно взаимодействие с системните ППИ. Може да бъде използвано, например, за автоматично изключване на всички обработчици на препратки.</string>
+    <string name="enable_shizuku_explainer">Ако е отметнато дава възможност на LinkSheet да използва Shizuku за директно взаимодействие с системните ППИ. Може да бъде използвано, например, за автоматично изключване на всички обработчици на препратки. В главния екран ще се покаже нова настройка.</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Включен е режим на „Shizuku“, докосване на приложение, за превключване на автоматичната обработка на препратки. Задържане за отваряне на „Отваряне по подразбиране“на приложението.</string>
     <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите</string>
     <string name="shizuku_integration_not_setup_explainer">Въпреки че не е строго необходимо за работата на LinkSheet, препоръчваме използването на Shizuku. За да го инсталирате, докоснете</string>
@@ -180,7 +180,7 @@
     <string name="ignore_libredirect">Пренебрегване на LibRedirect</string>
     <string name="app_crashed">Изглежда, че LinkSheet се е сринал. Проверете грешката по-долу</string>
     <string name="debug">Отстраняване на грешки</string>
-    <string name="debug_explainer">Преглед на дневника на приложението</string>
+    <string name="debug_explainer">Преглед на дневника</string>
     <string name="logs">Дневници</string>
     <string name="logs_explainer">Преглед на дневника на приложението</string>
     <string name="app_log">Дневник на приложението</string>
@@ -264,10 +264,10 @@
     <string name="warning">Предупреждение</string>
     <string name="no_browser_installed">Не е инсталиран браузър</string>
     <string name="no_browser_installed_explainer">LinkSheet не намира приложение, което да претендира да е браузър. За най-добри разултати инсталирайте браузър.</string>
-    <string name="at_least_one_unknown_browser_installer">Най-малко един (неизвестен) браузър е инсталиран</string>
-    <string name="at_least_one_known_browser_installed">Най-малко един браузър е инсталиран</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet намери най-малко едно приложение, което е браузър.</string>
-    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet намери най-малко едно приложение, което да претендира да е браузър. Списъкът на LinkSheet може да е непълен. Ако смятате това за грешка съобщете в Гитхъб.</string>
+    <string name="at_least_one_unknown_browser_installer">Има инсталиран най-малко един (неизвестен) браузър</string>
+    <string name="at_least_one_known_browser_installed">Има инсталиран най-малко един браузър</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet намира най-малко едно приложение, което е браузър.</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet намира най-малко едно приложение, което да претендира ча е браузър. Списъкът на LinkSheet може да е непълен. Ако смятате това за грешка съобщете в Гитхъб.</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="domain_selection_confirmation_title">Избиране на домейни\?</string>
@@ -307,7 +307,7 @@
     <string name="donate_explainer_crypto">Ако сте дарили криптовалута, за да получите <b>LinkSheet Pro</b> изпратете доказателство за плащането на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="join">Присъединяване</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">Заповядайте на нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
+    <string name="discord_explainer">Заповядайте в нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
     <string name="donate_card_subtitle"> Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
 \nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
@@ -336,7 +336,7 @@
     </plurals>
     <string name="donate_other">Ако желаете да дарите по друг начин (SEPA, PayPal, друг вид криптовалута и др.) изпратете писмо на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="linksheet_donation_explainer">LinkSheet е резултат на повече от <b>%s</b> работа, в продължение на повече от <b>%s</b>. Ако оценявате труда ми, направете дарение.</string>
-    <string name="built_by_error">Приложението не е подписано от 1fexd. Това не е непременно нещо лошо, защото всеки може да вземе изходния код и да компилира приложението, но някой може да го направи с цел вреда.</string>
+    <string name="built_by_error">Приложението не е подписано нито от 1fexd, нито от работен процес на Гитхъб. Това не е непременно нещо лошо, защото всеки може да използва изходния код за да компилира свое издание на LinkSheet, но някой може да го направи с цел да навреди.</string>
     <string name="pro_feature">Това е възможност на LinkSheet Pro!</string>
     <string name="export_to_file">Изнасяне във файл</string>
     <string name="import_settings">Внасяне на настройки</string>
@@ -354,5 +354,22 @@
     <string name="include_log_hash_key">Включително ключа за дневника</string>
     <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
     <string name="include_history">Включително историята (препратки и приложения)</string>
-    <string name="last_rule_update">Последно обновяване на правилата (UTC): %s</string>
+    <string name="last_rule_update">Последно обновяване на правилата (UTC):</string>
+    <string name="dev_explainer">Настройки за разработка</string>
+    <string name="opening_with_app_toast">Показва тост при автоматично отваряне на приложение</string>
+    <string name="download_started_toast_explainer">Показва тост при започнало изтегляне</string>
+    <string name="url_copied_toast">Тост за копиран адрес</string>
+    <string name="dev_mode_enabled">Поздравления, отключихте режима на разработчик. Бъдете внимателни.</string>
+    <string name="clear_urls_version">Правила на ClearURLs</string>
+    <string name="download_started_toast">Тост за започнато изтегляне</string>
+    <string name="notifications">Известия</string>
+    <string name="just_version">Издание</string>
+    <string name="copy_version_information">Копиране на информацията за изданието</string>
+    <string name="dev">Разработчик</string>
+    <string name="debug_build">Издание за отстраняване на дефекти</string>
+    <string name="donation">Даряване</string>
+    <string name="notifications_explainer">Настройка на известията от вида „тост“</string>
+    <string name="running_unofficial_build">Неофициално издание</string>
+    <string name="fastforward_version">Правила на FastForward</string>
+    <string name="url_copied_toast_explainer">Показва тост при копиран от потребителя адрес</string>
 </resources>

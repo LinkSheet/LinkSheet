@@ -24,7 +24,7 @@
     <string name="at_least_one_known_browser_installed_explainer">LinkSheetје открио најмање једну апликацију за коју се зна да је стварни прегледач.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Омогућавање великог броја дугмади на доњем листу тренутно може довести до одсецања/квара дугмади.</string>
     <string name="opening_with_app">Отварање помоћу %s</string>
-    <string name="enable_shizuku_explainer">Омогућавање овога ће дозволити LinkSheet-у да користи Shizuku за директну интеракцију са системским API-јима. Ово се може користити, на пример, да се аутоматски онемогуће сви руковаоци линкова.</string>
+    <string name="enable_shizuku_explainer">Омогућавање овога ће дозволити LinkSheet-у да користи Shizuku за директну интеракцију са системским API-јима. Ово се може користити, на пример, да се аутоматски онемогуће сви руковаоци линкова. Нова опција ће се појавити на главном екрану апликације.</string>
     <string name="browser_explainer">Режим прегледача и подешавања прегледача у апликацији</string>
     <string name="save">Сачувај</string>
     <string name="enable_amp2html">Омогући Amp2Html</string>
@@ -382,4 +382,8 @@
     <string name="running_unofficial_build">Незванично издање</string>
     <string name="fastforward_version">FastForward правила</string>
     <string name="url_copied_toast_explainer">Приказивање искачуће поруке када корисник копира URL адресу</string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">Омогући експериментални LinkSheet Compat мени</string>
+    <string name="enable_linksheet_compat_explainer">Мени се може наћи у подменију „Апликације“ и када је инсталиран, може да пресреће захтеве одређеним изворним апликацијама.</string>
+    <string name="disclaimer_libredirect_unstable">Поред тога што је експериментална функција, LibRedirect се тренутно сматра веома нестабилним и можда уопште неће радити.</string>
 </resources>

@@ -18,7 +18,7 @@
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet ha detectado al menos una aplicación que se sabe que es un navegador real.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Actualmente, habilitar muchos botones en la hoja inferior puede provocar que los botones se corten o fallen.</string>
     <string name="opening_with_app">Abriendo con %s</string>
-    <string name="enable_shizuku_explainer">Habilitar esto permitirá que LinkSheet use Shizuku para interactuar directamente con las API del sistema. Esto se puede utilizar, por ejemplo, para desactivar automáticamente todos los controladores de enlaces.</string>
+    <string name="enable_shizuku_explainer">Habilitar esta opción permitirá a LinkSheet utilizar Shizuku para interactuar con las APIs del sistema directamente. Esto se puede utilizar, por ejemplo, para desactivar automáticamente todos los link-handlers. Aparecerá una nueva opción en la pantalla principal de la aplicación.</string>
     <string name="browser_explainer">Configuración del modo navegador y del modo Navegador en aplicación</string>
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
@@ -140,7 +140,7 @@
     <string name="just_once">Solo una vez</string>
     <string name="disable_in_selected_explainer">Desactivar el Navegador en aplicación en las aplicaciones seleccionadas, a pesar de que la aplicación quiera usarlo</string>
     <string name="fastfoward_rules">Usar reglas de FastForward</string>
-    <string name="version">Versión</string>
+    <string name="version">Versión de LinkSheet</string>
     <string name="preview_url">Previsualizar enlace</string>
     <string name="usage_stats_sorting_explainer">Incluya estadísticas de uso del sistema Android en el algoritmo de clasificación. Se solicitará permiso en el primer cambio.</string>
     <string name="amp2html_external_service_explainer">Intentar obtener una versión de la página que no sea AMP utilizando una API implementada en supabase.com (<annotation url="https://supabase.com/privacy">política de privacidad</annotation>)</string>
@@ -324,7 +324,7 @@
     <string name="linksheet_donation_explainer">LinkSheet es el resultado de más de <b>%s</b> de trabajo a lo largo de más de <b>%s</b>. Si desea mostrar su agradecimiento por mi trabajo, haga una donación.</string>
     <string name="built_by">Desarrollado y firmado por</string>
     <string name="donate">Donar</string>
-    <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd. Esto no significa necesariamente nada malo, ya que cualquiera puede bifurcar el código fuente y compilar su aplicación, pero puede hacerlo con malas intenciones.</string>
+    <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github. Esto no significa necesariamente nada malo, ya que cualquiera puede bifurcar el código fuente y construir su propia versión de LinkSheet, pero puede hacerlo con malas intenciones.</string>
     <plurals name="hours">
         <item quantity="one">%s hora</item>
         <item quantity="many">%s horas</item>
@@ -357,5 +357,17 @@
     <string name="export_settings">Ajustes de la exportación</string>
     <string name="export_explainer">Exportar la configuración actual de la aplicación a un archivo</string>
     <string name="import_settings_override_preferences">Esto anulará todas las preferencias existentes. ¿Continuar?</string>
-    <string name="last_rule_update">Última actualización de la regla desde el upstream (UTC): %s</string>
+    <string name="last_rule_update">Última actualización de la regla desde el upstream (UTC):</string>
+    <string name="dev_explainer">Configuración del desarrollador</string>
+    <string name="dev_mode_enabled">Enhorabuena, has activado el modo Dev. Sólo ten cuidado.</string>
+    <string name="clear_urls_version">Reglas ClearURLs</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="just_version">Versión</string>
+    <string name="copy_version_information">Copiar información sobre la versión</string>
+    <string name="dev">Desarrollador</string>
+    <string name="debug_build">Compilación de depuración</string>
+    <string name="donation">Donación</string>
+    <string name="notifications_explainer">Configurar las notificaciones</string>
+    <string name="running_unofficial_build">Versión no oficial</string>
+    <string name="fastforward_version">Normas FastForward</string>
 </resources>

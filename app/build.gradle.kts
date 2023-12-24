@@ -257,7 +257,7 @@ dependencies {
     // https://google.github.io/accompanist/systemuicontroller/
     implementation(libs.accompanist.systemuicontroller)
     implementation(Google.accompanist.permissions)
-
+    implementation(libs.material3)
     implementation(libs.api)
     implementation(libs.provider)
     implementation(libs.hiddenapibypass)

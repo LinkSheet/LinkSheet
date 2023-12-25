@@ -1,6 +1,7 @@
 package fe.linksheet.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
@@ -8,14 +9,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,24 +38,25 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -63,10 +69,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -74,7 +80,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.bundleOf
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import fe.kotlin.util.runIf
 import fe.linksheet.R
@@ -89,7 +95,6 @@ import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
 import fe.linksheet.interconnect.LinkSheetConnector
-import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.urlresolver.ResolveType
@@ -100,7 +105,6 @@ import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.PrivateBrowsingBrowser
-import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -117,9 +121,14 @@ class BottomSheetActivity : ComponentActivity() {
         initPadding()
 
         val deferred = resolveAsync(bottomSheetViewModel)
-
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
             setContent {
+                val window = (LocalContext.current as Activity).window
+                window.statusBarColor = colorScheme.primary.toArgb()
+                WindowCompat.getInsetsController(
+                    window,
+                    LocalView.current
+                ).isAppearanceLightStatusBars = isSystemInDarkTheme()
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
                     (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
                         if (result != null) makeResolveToast(
@@ -266,30 +275,6 @@ class BottomSheetActivity : ComponentActivity() {
                     coroutineScope.launch { drawerState.hide() }
                 })
             })
-
-//        val sheetState =
-//            androidx.compose.material3.rememberModalBottomSheetState(skipPartiallyExpanded = true)
-//        LaunchedEffect(Unit) { sheetState.show() }
-//
-//        val dismissDrawer = { finish() }
-//
-//        BottomDrawer(
-//            onDismissRequest = dismissDrawer,
-//            modifier = Modifier
-//                .runIf(landscape) {
-//                    it
-//                        .fillMaxWidth(0.55f)
-//                        .fillMaxHeight()
-//                },
-//            isBlackTheme = isBlackTheme,
-//            sheetState = sheetState
-//        ) {
-//            SheetContent(result = result, landscape = landscape, hideDrawer = {
-//                coroutineScope.launch { sheetState.hide() }.invokeOnCompletion {
-//                    dismissDrawer()
-//                }
-//            })
-//        }
     }
 
     @Composable
@@ -374,9 +359,9 @@ class BottomSheetActivity : ComponentActivity() {
                         .heightIn(min = buttonRowHeight)
                         .padding(buttonPadding)
                 ) {
-                    CopyButton(result, hideDrawer, padding)
+                    CopyButton(result, hideDrawer)
                     Spacer(modifier = Modifier.width(2.dp))
-                    ShareToButton(result, padding)
+                    ShareToButton(result)
                 }
             }
         }
@@ -387,10 +372,10 @@ class BottomSheetActivity : ComponentActivity() {
     private fun CopyButton(
         result: BottomSheetResult?,
         hideDrawer: () -> Unit,
-        padding: PaddingValues,
+        modifier: Modifier = Modifier
     ) {
-        Card(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        Button(
+            modifier = modifier,
             onClick = {
                 bottomSheetViewModel.clipboardManager.setText(
                     "URL", result?.uri.toString()
@@ -405,41 +390,26 @@ class BottomSheetActivity : ComponentActivity() {
                 }
             },
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { }) {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.ContentCopy,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(10.dp)
-                            .size(24.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(5.dp))
-                Text(
-                    text = stringResource(id = R.string.copy_url),
-                    fontFamily = HkGroteskFontFamily,
-                    maxLines = 1,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
+            androidx.compose.material3.Icon(
+                imageVector = Icons.Default.ContentCopy, contentDescription = null
+            )
+            Spacer(modifier = Modifier.width(5.dp))
+            Text(
+                text = stringResource(id = R.string.copy_url),
+                fontFamily = HkGroteskFontFamily,
+                maxLines = 1,
+                fontWeight = FontWeight.SemiBold
+            )
         }
     }
 
     @Composable
-    private fun ShareToButton(result: BottomSheetResult?, padding: PaddingValues) {
-        Button(
-            contentPadding = padding,
+    private fun ShareToButton(result: BottomSheetResult?, modifier: Modifier = Modifier) {
+        Button(modifier = modifier,
             onClick = {
                 startActivity(Intent().buildSendTo(result?.uri))
                 finish()
-            },
+            }
         ) {
             androidx.compose.material3.Icon(
                 imageVector = Icons.Default.Share, contentDescription = null
@@ -512,7 +482,7 @@ class BottomSheetActivity : ComponentActivity() {
                 }
             }
 
-            ButtonColumn(
+            ButtonRow(
                 bottomSheetViewModel = bottomSheetViewModel,
                 enabled = true,
                 app = filteredItem,
@@ -535,7 +505,8 @@ class BottomSheetActivity : ComponentActivity() {
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        Column(modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
+        TODO()
+        /*Column(modifier = Modifier.nestedScroll(rememberNestedScrollInteropConnection())) {
             AppList(
                 bottomSheetViewModel = bottomSheetViewModel,
                 selectedItem = -1,
@@ -543,9 +514,10 @@ class BottomSheetActivity : ComponentActivity() {
                 baseHeight = baseHeight,
                 showPackage = showPackage
             )
-        }
+        }*/
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     private fun OpenWith(
@@ -555,64 +527,8 @@ class BottomSheetActivity : ComponentActivity() {
         showPackage: Boolean,
         previewUrl: Boolean,
     ) {
-        var selectedItem by remember { mutableIntStateOf(-1) }
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-        Scaffold {
-            Column(modifier = Modifier.wrapContentHeight()) {
-                Text(
-                    text = stringResource(id = R.string.open_with),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(start = 10.dp)
-                )
-
-                if (previewUrl) {
-                    UrlPreview(uri = result.uri)
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-                AppList(
-                    bottomSheetViewModel = bottomSheetViewModel,
-                    selectedItem = selectedItem,
-                    onSelectedItemChange = { selectedItem = it },
-                    baseHeight = baseHeight,
-                    showPackage = showPackage
-                )
-                ButtonColumn(
-                    bottomSheetViewModel = bottomSheetViewModel,
-                    enabled = selectedItem != -1,
-                    app = null,
-                    uri = null,
-                    onClick = { always ->
-                        launchApp(
-                            result, result.resolved[selectedItem], always
-                        )
-                    },
-                    hideDrawer = hideDrawer
-                )
-            }
-        }
-    }
-
-    private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
-        if (!bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) return null
-        return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
-    }
-
-
-    @OptIn(ExperimentalFoundationApi::class)
-    @Composable
-    private fun AppList(
-        bottomSheetViewModel: BottomSheetViewModel,
-        selectedItem: Int,
-        onSelectedItemChange: (Int) -> Unit,
-        baseHeight: Dp,
-        showPackage: Boolean
-    ) {
-        val result = bottomSheetViewModel.resolveResult!!
-        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-
         if (result.isEmpty) {
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
@@ -625,7 +541,7 @@ class BottomSheetActivity : ComponentActivity() {
             Spacer(modifier = Modifier.height(10.dp))
             return
         }
-
+        var selectedItem by remember { mutableIntStateOf(-1) }
         val modifier: AppListModifier = @Composable { index, info ->
             Modifier
                 .fillMaxWidth()
@@ -635,7 +551,7 @@ class BottomSheetActivity : ComponentActivity() {
                         launchApp(result, info)
                     } else {
                         if (selectedItem == index) launchApp(result, info)
-                        else onSelectedItemChange(index)
+                        else selectedItem = index
                     }
                 }, onDoubleClick = {
                     if (!bottomSheetViewModel.singleTap.value) {
@@ -645,7 +561,7 @@ class BottomSheetActivity : ComponentActivity() {
                     }
                 }, onLongClick = {
                     if (bottomSheetViewModel.singleTap.value) {
-                        onSelectedItemChange(index)
+                        selectedItem = index
                     } else {
                         this@BottomSheetActivity.startPackageInfoActivity(info)
                     }
@@ -653,15 +569,98 @@ class BottomSheetActivity : ComponentActivity() {
                 .background(if (selectedItem == index) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
                 .padding(appListItemPadding)
         }
+        if (!bottomSheetViewModel.gridLayout.value) {
+            LazyColumn(modifier = Modifier.fillMaxWidth()) {
 
-        if (bottomSheetViewModel.gridLayout.value) {
+                item(key = R.string.open_with) {
+                    Text(
+                        text = stringResource(id = R.string.open_with),
+                        fontFamily = HkGroteskFontFamily,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.padding(start = 10.dp)
+                    )
+                }
+                item(key = "previewUrl") {
+                    if (previewUrl) {
+                        UrlPreview(uri = result.uri)
+                    }
+                }
+                item { Spacer(modifier = Modifier.height(10.dp)) }
+
+
+                // App List Function:
+                itemsIndexed(items = result.resolved,
+                    key = { _, item -> item.flatComponentName }) { index, info ->
+
+                    val shouldShowRequestPrivate = shouldShowRequestPrivate(info)
+
+                    Row(
+                        modifier = modifier(index, info).height(appListItemHeight),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Image(
+                                bitmap = info.iconBitmap,
+                                contentDescription = info.label,
+                                modifier = Modifier.size(32.dp)
+                            )
+
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Column {
+                                Text(text = info.label)
+                                if (showPackage) {
+                                    Text(
+                                        text = info.packageName,
+                                        fontSize = 12.sp,
+                                        lineHeight = 12.sp
+                                    )
+                                }
+                            }
+                        }
+
+                        if (shouldShowRequestPrivate != null) {
+                            RequestPrivateBrowsingButton(
+                                supportedBrowser = shouldShowRequestPrivate,
+                                app = info,
+                                result = result
+                            )
+                        }
+                    }
+                }
+                item {
+                    ButtonRow(
+                        bottomSheetViewModel = bottomSheetViewModel,
+                        enabled = selectedItem != -1,
+                        app = null,
+                        uri = null,
+                        onClick = { always ->
+                            launchApp(
+                                result, result.resolved[selectedItem], always
+                            )
+                        },
+                        hideDrawer = hideDrawer
+                    )
+                }
+            }
+        } else {
+            Text(
+                text = stringResource(id = R.string.open_with),
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(start = 10.dp)
+            )
+            if (previewUrl) {
+                UrlPreview(uri = result.uri)
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+
             LazyVerticalGrid(columns = GridCells.Adaptive(gridSize),
                 modifier = Modifier
                     .padding(horizontal = 3.dp)
                     .heightIn(0.dp, baseHeight),
                 content = {
-                    itemsIndexed(
-                        items = result.resolved,
+                    itemsIndexed(items = result.resolved,
                         key = { _, item -> item.flatComponentName }) { index, info ->
                         val privateBrowser = shouldShowRequestPrivate(info)
 
@@ -708,50 +707,24 @@ class BottomSheetActivity : ComponentActivity() {
                         }
                     }
                 })
-        } else {
-            LazyColumn(modifier = Modifier.heightIn(0.dp, baseHeight), content = {
-                itemsIndexed(
-                    items = result.resolved,
-                    key = { _, item -> item.flatComponentName }) { index, info ->
-
-                    val shouldShowRequestPrivate = shouldShowRequestPrivate(info)
-
-                    Row(
-                        modifier = modifier(index, info).height(appListItemHeight),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                bitmap = info.iconBitmap,
-                                contentDescription = info.label,
-                                modifier = Modifier.size(32.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
-                                Text(text = info.label)
-                                if (showPackage) {
-                                    Text(
-                                        text = info.packageName,
-                                        fontSize = 12.sp,
-                                        lineHeight = 12.sp
-                                    )
-                                }
-                            }
-                        }
-
-                        if (shouldShowRequestPrivate != null) {
-                            RequestPrivateBrowsingButton(
-                                supportedBrowser = shouldShowRequestPrivate,
-                                app = info,
-                                result = result
-                            )
-                        }
-                    }
-                }
-            })
+            ButtonRow(
+                bottomSheetViewModel = bottomSheetViewModel,
+                enabled = selectedItem != -1,
+                app = null,
+                uri = null,
+                onClick = { always ->
+                    launchApp(
+                        result, result.resolved[selectedItem], always
+                    )
+                },
+                hideDrawer = hideDrawer
+            )
         }
+    }
+
+    private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
+        if (!bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) return null
+        return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
     }
 
     @Composable
@@ -798,8 +771,9 @@ class BottomSheetActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Composable
-    private fun ButtonColumn(
+    private fun ButtonRow(
         bottomSheetViewModel: BottomSheetViewModel,
         enabled: Boolean,
         app: DisplayActivityInfo?,
@@ -827,15 +801,62 @@ class BottomSheetActivity : ComponentActivity() {
 
         val useTwoRows = utilButtonWidthSum > widthHalf / 2
         val padding = PaddingValues(horizontal = 10.dp)
+        Row(modifier = Modifier.fillMaxWidth()) {
+            if (bottomSheetViewModel.enableCopyButton.value) {
+                CopyButton(
+                    modifier = Modifier
+                        .fillMaxWidth(if (bottomSheetViewModel.enableSendButton.value) 0.5f else 1f)
+                        .padding(start = 10.dp, end = 10.dp),
+                    result = result,
+                    hideDrawer = hideDrawer
+                )
+            }
+            if (bottomSheetViewModel.enableSendButton.value) {
+                ShareToButton(
+                    result = result,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = if (bottomSheetViewModel.enableCopyButton.value) 0.dp else 10.dp,
+                            end = 10.dp
+                        )
+                )
+            }
+        }
+        if (result.downloadable.isDownloadable() || true) {
+            Spacer(modifier = Modifier.height(5.dp))
+            Button(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, end = 10.dp), onClick = {
+                bottomSheetViewModel.startDownload(
+                    resources,
+                    result.uri,
+                    result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                )
 
+                if (!bottomSheetViewModel.downloadStartedToast.value) {
+                    showToast(R.string.download_started)
+                }
+
+                hideDrawer()
+            }) {
+                androidx.compose.material3.Icon(
+                    imageVector = Icons.Default.Download,
+                    contentDescription = null
+                )
+                Spacer(modifier = Modifier.width(5.dp))
+                Text(
+                    text = stringResource(id = R.string.download),
+                    fontFamily = HkGroteskFontFamily,
+                    maxLines = 1,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+        }
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
             if (useTwoRows) {
-                HorizontalDivider(
-                    modifier = Modifier.padding(start = 25.dp, end = 25.dp),
-                    color = MaterialTheme.colorScheme.outline.copy(0.25f)
-                )
                 OpenButtons(
                     bottomSheetViewModel = bottomSheetViewModel,
                     enabled = enabled,
@@ -845,60 +866,20 @@ class BottomSheetActivity : ComponentActivity() {
                     onClick = onClick
                 )
             }
-            HorizontalDivider(
-                modifier = Modifier.padding(start = 25.dp, end = 25.dp),
-                color = MaterialTheme.colorScheme.outline.copy(0.25f)
-            )
-            if (bottomSheetViewModel.enableCopyButton.value) {
-                CopyButton(result, hideDrawer, padding)
-            }
-
-            if (bottomSheetViewModel.enableSendButton.value) {
-                Spacer(modifier = Modifier.width(2.dp))
-                ShareToButton(result, padding)
-            }
-
-            if (result.downloadable.isDownloadable()) {
-                Spacer(modifier = Modifier.width(2.dp))
-                Button(contentPadding = padding, onClick = {
-                    bottomSheetViewModel.startDownload(
-                        resources,
-                        result.uri,
-                        result.downloadable as Downloader.DownloadCheckResult.Downloadable
-                    )
-
-                    if (!bottomSheetViewModel.downloadStartedToast.value) {
-                        showToast(R.string.download_started)
-                    }
-
-                    hideDrawer()
-                }) {
-                    androidx.compose.material3.Icon(
-                        imageVector = Icons.Default.Download, contentDescription = null
-                    )
-                    Spacer(modifier = Modifier.width(5.dp))
-                    Text(
-                        text = stringResource(id = R.string.download),
-                        fontFamily = HkGroteskFontFamily,
-                        maxLines = 1,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-            }
             val libRedirectResult = result.libRedirectResult
-            if (bottomSheetViewModel.enableIgnoreLibRedirectButton.value && libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
+            if (bottomSheetViewModel.enableIgnoreLibRedirectButton.value && libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected || true) {
                 Spacer(modifier = Modifier.width(2.dp))
                 OutlinedOrTextButton(
                     textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
                     contentPadding = padding,
                     onClick = {
                         finish()
-                        startActivity(
+                        /*startActivity(
                             selfIntent(
                                 libRedirectResult.originalUri,
                                 bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                             )
-                        )
+                        )*/
                     },
                     buttonText = R.string.ignore_libredirect
                 )
@@ -946,7 +927,15 @@ class BottomSheetActivity : ComponentActivity() {
 
         if (!result.isEmpty) {
             Column(modifier = Modifier.wrapContentHeight()) {
-                Spacer(modifier = Modifier.height(10.dp))
+                HorizontalDivider(
+                    modifier = Modifier.padding(
+                        start = 25.dp,
+                        end = 25.dp,
+                        top = 5.dp,
+                        bottom = 5.dp
+                    ),
+                    color = MaterialTheme.colorScheme.outline.copy(0.25f)
+                )
                 Button(
                     enabled = enabled,
                     contentPadding = padding,
@@ -1033,12 +1022,44 @@ class BottomSheetActivity : ComponentActivity() {
 
     @Composable
     private fun UrlPreview(uri: Uri?) {
-        Text(
-            text = uri.toString(),
-            fontSize = 12.sp,
-            lineHeight = 12.sp,
-            modifier = Modifier.padding(start = 10.dp)
-        )
+        Card(
+            border = BorderStroke(
+                1.dp,
+                contentColorFor(LocalContentColor.current)
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 15.dp, end = 15.dp, top = 15.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(
+                        top = 10.dp, bottom = 10.dp
+                    ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    androidx.compose.material3.Icon(
+                        imageVector = Icons.Outlined.Link,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(
+                                start = 10.dp, end = 10.dp
+                            )
+                    )
+                }
+                Text(
+                    text = uri.toString(),
+                    fontSize = 12.sp,
+                    lineHeight = 12.sp,
+                    modifier = Modifier.padding(start = 10.dp)
+                )
+            }
+        }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

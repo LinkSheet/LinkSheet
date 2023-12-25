@@ -37,5 +37,6 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:color">@android:color/transparent</item>
     </style>
 </resources>

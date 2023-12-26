@@ -1,5 +1,6 @@
 package fe.linksheet.composable.util
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -12,7 +13,6 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
 //@OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +68,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun BottomDrawer(
     modifier: Modifier = Modifier,
-    isBlackTheme: Boolean = false,
+    isBlackTheme: Boolean = isSystemInDarkTheme(),
     drawerState: SheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true
     ),
@@ -76,7 +76,7 @@ fun BottomDrawer(
     content: @Composable () -> Unit = {},
 ) {
     val coroutineScope = rememberCoroutineScope()
-    ModalBottomSheet(containerColor = MaterialTheme.colorScheme.surface,onDismissRequest = {
+    ModalBottomSheet(containerColor = MaterialTheme.colorScheme.surface, onDismissRequest = {
         coroutineScope.launch {
             drawerState.hide()
         }

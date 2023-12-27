@@ -702,8 +702,6 @@ class BottomSheetActivity : ComponentActivity() {
             // App List Function:
             itemsIndexed(items = result.resolved,
                 key = { _, item -> item.flatComponentName }) { index, info ->
-                val privateBrowser = shouldShowRequestPrivate(info)
-                bottomSheetViewModel.privateBrowser.value = privateBrowser
                 Row(
                     modifier = modifier(index, info).wrapContentHeight(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -941,8 +939,6 @@ class BottomSheetActivity : ComponentActivity() {
                 }
                 itemsIndexed(items = result.resolved,
                     key = { _, item -> item.flatComponentName }) { index, info ->
-                    val privateBrowser = shouldShowRequestPrivate(info)
-                    bottomSheetViewModel.privateBrowser.value = privateBrowser
                     Column(
                         modifier = modifier(
                             index, info

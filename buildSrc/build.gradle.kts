@@ -5,3 +5,7 @@ plugins {
 repositories {
     gradlePluginPortal()
 }
+
+kotlin {
+    jvmToolchain(17)
+}

@@ -2,7 +2,6 @@ import com.android.build.api.dsl.VariantDimension
 import de.fayard.refreshVersions.core.versionFor
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
-import groovy.lang.Closure
 import net.nemerosa.versioning.VersioningExtension
 import java.time.Instant
 import java.time.LocalDateTime
@@ -19,19 +18,9 @@ plugins {
 
 // Must be defined before the android block, or else it won't work
 versioning {
-    class KotlinClosure4<in T : Any?, in U : Any?, in V : Any?, in W : Any?, R : Any>(
-        val function: (T, U, V, W) -> R?,
-        owner: Any? = null,
-        thisObject: Any? = null
-    ) : Closure<R?>(owner, thisObject) {
-        @Suppress("unused")
-        fun doCall(t: T, u: U, v: V, w: W): R? = function(t, u, v, w)
-    }
-
-    releaseMode =
-        KotlinClosure4<String?, String?, String?, VersioningExtension, String>({ _, _, currentTag, _ ->
-            currentTag
-        })
+    releaseMode = KotlinClosure4<String?, String?, String?, VersioningExtension, String>({ _, _, currentTag, _ ->
+        currentTag
+    })
 
     releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ ->
         ReleaseInfo("release", info.tag)

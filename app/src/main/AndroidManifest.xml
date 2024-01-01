@@ -72,6 +72,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Seal.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

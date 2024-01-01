@@ -1,8 +1,12 @@
 package fe.linksheet.extension.compose
 
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import dev.zwander.shared.ShizukuUtil
+import fe.linksheet.util.Results
+import kotlinx.coroutines.CoroutineScope
 
 // https://stackoverflow.com/a/69061897
 data class LifecycleState(val lastState: Lifecycle.Event, val state: Lifecycle.Event)
@@ -32,4 +36,20 @@ fun Lifecycle.observeAsState(ignoreFirst: Lifecycle.Event? = Lifecycle.Event.ON_
     }
 
     return LifecycleState(state, lastState)
+}
+
+@Composable
+fun Lifecycle.onStateChange(
+    fireOnFirst: Boolean = false,
+    state: Lifecycle.Event? = Lifecycle.Event.ON_RESUME,
+    block: suspend CoroutineScope.() -> Unit
+) {
+    if (fireOnFirst) {
+        LaunchedEffect(Unit) { block() }
+    }
+
+    val lifecycleState = observeAsState()
+    LaunchedEffect(lifecycleState.state) {
+        if (lifecycleState.state == state) block()
+    }
 }

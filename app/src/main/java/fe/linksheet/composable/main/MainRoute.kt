@@ -1,8 +1,11 @@
 package fe.linksheet.composable.main
 
 import android.util.Patterns
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -12,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -22,17 +26,14 @@ import fe.linksheet.R
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.header
 import fe.linksheet.extension.compose.observeAsState
+import fe.linksheet.extension.compose.onStateChange
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.util.AppSignature
 import fe.linksheet.util.Results
-import fe.linksheet.util.lazyItemKeyCreator
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
-
-
-val itemKeyCreator = lazyItemKeyCreator()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,20 +64,14 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
         }
     }
 
+    LocalLifecycleOwner.current.lifecycle.onStateChange {
+        defaultBrowserEnabled = Results.loading()
+        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 
-    val lifecycleState = LocalLifecycleOwner.current.lifecycle
-        .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
+        shizukuInstalled = ShizukuUtil.isShizukuInstalled(activity)
+        shizukuRunning = ShizukuUtil.isShizukuRunning()
 
-    LaunchedEffect(lifecycleState.state) {
-        if (lifecycleState.state == Lifecycle.Event.ON_RESUME) {
-            defaultBrowserEnabled = Results.loading()
-            defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
-
-            shizukuInstalled = ShizukuUtil.isShizukuInstalled(activity)
-            shizukuRunning = ShizukuUtil.isShizukuRunning()
-
-            sheetOpen = null
-        }
+        sheetOpen = null
     }
 
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
@@ -95,7 +90,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 .fillMaxSize(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(itemKeyCreator.next()) {
+            item {
                 Row(
                     modifier = Modifier
                         .clip(MaterialTheme.shapes.extraLarge)
@@ -121,55 +116,39 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
             }
 
             if (AppSignature.checkSignature(activity) == AppSignature.BuildType.Unofficial) {
-                item(itemKeyCreator.next()) {
+                cardItem {
                     UnofficialBuild()
-                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 
             if (useTime != null && showOtherBanners) {
-                header(header = R.string.donate, itemKey = itemKeyCreator.next())
-
-                item(itemKeyCreator.next()) {
-                    DonateCard(
-                        navController = navController,
-                        useTime = useTime
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
+                cardItem(header = R.string.donate) {
+                    DonateCard(navController = navController, useTime = useTime)
                 }
             }
 
-            header(header = R.string.app_setup, itemKey = itemKeyCreator.next())
-
-            item(key = itemKeyCreator.next()) {
+            cardItem(header = R.string.app_setup) {
                 OpenDefaultBrowserCard(
                     activity = activity,
                     defaultBrowserEnabled = defaultBrowserEnabled,
                     defaultBrowserChanged = { defaultBrowserEnabled = it },
                     viewModel = viewModel
                 )
-
-                Spacer(modifier = Modifier.height(10.dp))
             }
 
             if (viewModel.featureFlagShizuku.value) {
-                item(key = itemKeyCreator.next()) {
+                cardItem {
                     ShizukuCard(
                         activity = activity,
                         uriHandler = uriHandler,
                         shizukuInstalled = shizukuInstalled,
                         shizukuRunning = shizukuRunning
                     )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
                 }
             }
 
-            item(key = itemKeyCreator.next()) {
+            cardItem {
                 BrowserCard(browserStatus = browserStatus)
-                Spacer(modifier = Modifier.height(10.dp))
             }
 
             // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
@@ -177,16 +156,10 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 val item = clipboardManager.getText()?.text
 
                 if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
-                    item(key = itemKeyCreator.next()) {
-                        OpenCopiedLink(
-                            uriHandler = uriHandler,
-                            item = item ?: sheetOpen!!,
-                            sheetOpen = {
-                                sheetOpen = item
-                            }
-                        )
-
-                        Spacer(modifier = Modifier.height(10.dp))
+                    cardItem {
+                        OpenCopiedLink(uriHandler = uriHandler, item = item ?: sheetOpen!!, sheetOpen = {
+                            sheetOpen = item
+                        })
                     }
                 }
             }
@@ -196,23 +169,36 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 val newBottomSheet = viewModel.showNewBottomSheetBanner.value
 
                 if (discord || newBottomSheet) {
-                    header(header = R.string.other, itemKey = itemKeyCreator.next())
+                    header(header = R.string.other)
                 }
 
                 if (discord) {
-                    item(key = itemKeyCreator.next()) {
+                    cardItem {
                         DiscordCard(viewModel = viewModel, uriHandler = uriHandler)
-                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
 
-                if(newBottomSheet){
-                    item(key = itemKeyCreator.next()) {
+                if (newBottomSheet) {
+                    cardItem {
                         NewBottomSheetCard(viewModel = viewModel)
-                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }
         }
+    }
+}
+
+fun LazyListScope.cardItem(
+    @StringRes header: Int? = null,
+    height: Dp = 10.dp,
+    content: @Composable LazyItemScope.() -> Unit
+) {
+    if (header != null) {
+        header(header = header)
+    }
+
+    item {
+        content(this)
+        Spacer(modifier = Modifier.height(height))
     }
 }

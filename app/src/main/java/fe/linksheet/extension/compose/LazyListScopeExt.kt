@@ -24,13 +24,13 @@ import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.Searchbar
 import kotlinx.coroutines.flow.MutableStateFlow
 
-fun LazyListScope.spacer(height: Int = 10, itemKey: Any?) {
+fun LazyListScope.spacer(height: Int = 10, itemKey: Any? = null) {
     item(key = itemKey) {
         Spacer(modifier = Modifier.height(height.dp))
     }
 }
 
-fun LazyListScope.header(@StringRes header: Int, itemKey: Any?, height: Int = 10) {
+fun LazyListScope.header(@StringRes header: Int, itemKey: Any? = null, height: Int = 10) {
     item(key = itemKey) {
         Text(modifier = Modifier.padding(horizontal = 10.dp), text = stringResource(id = header))
         Spacer(modifier = Modifier.height(height.dp))

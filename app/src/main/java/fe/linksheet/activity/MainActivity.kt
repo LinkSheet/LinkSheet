@@ -99,6 +99,7 @@ class MainActivity : ComponentActivity() {
             finish()
         }
 
+
         setContent {
             val navController = rememberNavController()
 
@@ -182,7 +183,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     animatedComposable(route = themeSettingsRoute) {
-                        ThemeSettingsRoute(onBackPressed = onBackPressed)
+                        ThemeSettingsRoute(navController = navController)
                     }
 
                     animatedComposable(route = advancedSettingsRoute) {

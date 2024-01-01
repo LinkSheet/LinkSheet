@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.apps.link
 
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -10,42 +9,37 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.linksheet.composable.util.PreferenceSubtitle
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.FilterChipValue
-import fe.linksheet.composable.util.FilterChips
-import fe.linksheet.composable.util.LaunchedEffectOnFirstAndResume
-import fe.linksheet.composable.util.Searchbar
-import fe.linksheet.composable.util.listState
+import fe.linksheet.composable.util.*
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
+import fe.linksheet.extension.compose.onStateChange
 import fe.linksheet.extension.ioState
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import rikka.shizuku.Shizuku
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 @OptIn(
@@ -67,8 +61,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         listState(apps, filter)
     }
 
-    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
-    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
+    val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
+    val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
     var refreshing by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -90,11 +84,14 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         }
     }
 
-    LaunchedEffectOnFirstAndResume { fetch(false) }
+    LocalLifecycleOwner.current.lifecycle.onStateChange(fireOnFirst = true) {
+        fetch(false)
+    }
 
     val fetchInScope: () -> Unit = {
         scope.launch { fetch(true) }
     }
+
     val state = rememberPullRefreshState(refreshing, onRefresh = fetchInScope)
 
     fun postCommand(packageName: String) {

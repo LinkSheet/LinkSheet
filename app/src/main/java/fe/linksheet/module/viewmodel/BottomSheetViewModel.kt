@@ -9,6 +9,7 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -57,6 +58,9 @@ class BottomSheetViewModel(
     val enableIgnoreLibRedirectButton = preferenceRepository.getBooleanState(
         AppPreferences.enableIgnoreLibRedirectButton
     )
+
+    val privateBrowser: MutableState<PrivateBrowsingBrowser.Firefox?> = mutableStateOf(null)
+    val appInfo: MutableState<DisplayActivityInfo?> = mutableStateOf(null)
 
     val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)
     val downloadStartedToast = preferenceRepository.getBooleanState(AppPreferences.downloadStartedToast)

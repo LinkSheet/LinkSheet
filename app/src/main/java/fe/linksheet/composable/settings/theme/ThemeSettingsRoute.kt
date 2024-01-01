@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.RadioButtonRow
@@ -19,10 +20,11 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun ThemeSettingsRoute(
-    onBackPressed: () -> Unit,
-    viewModel: ThemeSettingsViewModel = koinViewModel()
-) {
+fun ThemeSettingsRoute(navController: NavController, viewModel: ThemeSettingsViewModel = koinViewModel()) {
+    val onBackPressed: () -> Unit = {
+        navController.popBackStack()
+    }
+
     val themes = listOf(
         ThemeHolder(Theme.System, R.string.system),
         ThemeHolder(Theme.Light, R.string.light),

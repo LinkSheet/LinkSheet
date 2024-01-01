@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.MappedPreference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
@@ -18,7 +18,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 fun <T : Any, M : Any> RadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
-    state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
+    state: RepositoryState<T, T, MappedPreference<T, M>>,
     viewModel: BaseViewModel,
     enabled: Boolean = true,
     clickHook: (() -> Unit)? = null,

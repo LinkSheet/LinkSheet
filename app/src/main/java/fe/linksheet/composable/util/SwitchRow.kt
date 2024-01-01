@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
@@ -18,7 +19,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 fun SwitchRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
@@ -39,7 +40,7 @@ fun SwitchRow(
 fun SwitchRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int

@@ -15,4 +15,5 @@ class FeatureFlagViewModel(
 
     val featureFlagShizuku = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagShizuku)
     val featureFlagLinkSheetCompat = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagLinkSheetCompat)
+    val featureFlagNewBottomSheet = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagNewBottomSheet)
 }

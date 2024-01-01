@@ -6,8 +6,6 @@ import com.google.gson.Gson
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
-import fe.android.preference.helper.compose.getCachedState
-import fe.android.preference.helper.compose.getState
 import fe.linksheet.LinkSheetAppConfig
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -18,8 +16,7 @@ val preferenceRepositoryModule = module {
 
 class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepository(context) {
 
-    private val followRedirectsExternalService =
-        getBooleanState(AppPreferences.followRedirectsExternalService)
+    private val followRedirectsExternalService = getBooleanState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = getBooleanState(AppPreferences.amp2HtmlExternalService)
 
     init {
@@ -51,6 +48,6 @@ class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepo
     }
 
     fun forceRefreshCachedState(keys: List<String>) {
-        keys.forEach { getCachedState(it)?.forceRefresh() }
+//        keys.forEach { getCachedState(it)?.forceRefresh() }
     }
 }

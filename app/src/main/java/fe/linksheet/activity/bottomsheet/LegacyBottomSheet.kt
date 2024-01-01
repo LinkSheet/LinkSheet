@@ -1,48 +1,21 @@
-package fe.linksheet.activity
+package fe.linksheet.activity.bottomsheet
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.net.Uri
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,16 +32,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import fe.kotlin.util.runIf
 import fe.linksheet.R
+import fe.linksheet.activity.AppListModifier
+import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.composable.util.LegacyBottomDrawer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import fe.linksheet.extension.android.buildSendTo
-import fe.linksheet.extension.android.initPadding
-import fe.linksheet.extension.android.setText
-import fe.linksheet.extension.android.showToast
-import fe.linksheet.extension.android.startPackageInfoActivity
+import fe.linksheet.extension.android.*
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
@@ -89,19 +61,16 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.ceil
 
-class LegacyBottomSheetActivity : ComponentActivity() {
-    private val bottomSheetViewModel by viewModel<BottomSheetViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+class LegacyBottomSheet(
+    bottomSheetActivity: BottomSheetActivity,
+    bottomSheetViewModel: BottomSheetViewModel,
+) : BottomSheet(bottomSheetActivity, bottomSheetViewModel) {
+    override fun show() {
         initPadding()
 
         val deferred = resolveAsync(bottomSheetViewModel)
-
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
             setContent {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
@@ -616,14 +585,14 @@ class LegacyBottomSheetActivity : ComponentActivity() {
                         if (!bottomSheetViewModel.singleTap.value) {
                             launchApp(result, info)
                         } else {
-                            this@LegacyBottomSheetActivity.startPackageInfoActivity(info)
+                            startPackageInfoActivity(info)
                         }
                     },
                     onLongClick = {
                         if (bottomSheetViewModel.singleTap.value) {
                             onSelectedItemChange(index)
                         } else {
-                            this@LegacyBottomSheetActivity.startPackageInfoActivity(info)
+                            startPackageInfoActivity(info)
                         }
                     }
                 )
@@ -1064,4 +1033,3 @@ class LegacyBottomSheetActivity : ComponentActivity() {
         }
     }
 }
-

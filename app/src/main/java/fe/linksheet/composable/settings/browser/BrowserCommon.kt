@@ -3,13 +3,7 @@ package fe.linksheet.composable.settings.browser
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
@@ -21,15 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.linksheet.composable.util.PreferenceSubtitle
-import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.MappedPreference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.DividedRow
-import fe.linksheet.composable.util.RadioButtonRow
-import fe.linksheet.composable.util.Texts
+import fe.linksheet.composable.util.*
 import fe.linksheet.extension.compose.items
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -43,7 +33,7 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
     onBackPressed: () -> Unit,
     viewModel: BaseViewModel,
     values: List<T>,
-    state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>?,
+    state: RepositoryState<T, T, MappedPreference<T, M>>?,
     rowKey: (T) -> String,
     rows: List<BrowserCommonRadioButtonRowData>,
     header: @Composable (ColumnScope.() -> Unit)? = null,
@@ -139,7 +129,7 @@ data class BrowserCommonRadioButtonRowData(
 fun <T : Any, M : Any> BrowserCommonRadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
-    state: RepositoryState<T, T, BasePreference.MappedPreference<T, M>>,
+    state: RepositoryState<T, T, MappedPreference<T, M>>,
     viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int? = null,

@@ -10,30 +10,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material.icons.filled.NewReleases
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.discordInvite
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.Typography
 
 @Composable
-fun DiscordCard(
-    viewModel: MainViewModel,
-    uriHandler: UriHandler
-) {
+fun NewBottomSheetCard(viewModel: MainViewModel, ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         shape = RoundedCornerShape(12.dp),
@@ -49,38 +43,35 @@ fun DiscordCard(
         ) {
             Spacer(modifier = Modifier.width(10.dp))
             ColoredIcon(
-                icon = Icons.AutoMirrored.Filled.Chat,
+                icon = Icons.Filled.NewReleases,
                 descriptionId = R.string.discord,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
 
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
-                    text = stringResource(id = R.string.discord),
+                    text = stringResource(id = R.string.new_bottomsheet),
                     style = Typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-                Text(
-                    text = stringResource(id = R.string.discord_explainer),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                LinkableTextView(
+                    id = R.string.new_bottomsheet_explainer,
+                    style = LocalTextStyle.current.copy(
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        fontSize = 16.sp
+                    )
                 )
             }
         }
 
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 5.dp, horizontal = 10.dp),
+            modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp, horizontal = 10.dp),
             horizontalArrangement = Arrangement.End
         ) {
             TextButton(onClick = {
                 viewModel.updateState(viewModel.showNewBottomSheetBanner, false)
             }) {
                 Text(text = stringResource(id = R.string.dismiss))
-            }
-
-            Button(onClick = { uriHandler.openUri(discordInvite) }) {
-                Text(text = stringResource(id = R.string.join))
             }
         }
     }

@@ -40,12 +40,12 @@ fun encodeString(value: String? = null): String {
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 34
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
         applicationId = "fe.linksheet"
-        minSdk = 25
-        targetSdk = 34
+        minSdk = Version.MIN_SDK
+        targetSdk = Version.COMPILE_SDK
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
@@ -157,7 +157,7 @@ android {
 
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(Version.JVM)
     }
 
     buildFeatures {

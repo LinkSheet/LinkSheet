@@ -94,6 +94,7 @@ object AppPreferences : Preferences() {
 
     val firstRun = booleanPreference("first_run", true)
     val showDiscordBanner = booleanPreference("show_discord_banner", true)
+    val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner", true)
 
     val sensitivePreferences = listOf(
         useTimeMs, logKey,

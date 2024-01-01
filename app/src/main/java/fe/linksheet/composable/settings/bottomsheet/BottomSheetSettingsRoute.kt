@@ -46,8 +46,8 @@ fun BottomSheetSettingsRoute(
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 
-    LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
+    LaunchedEffect(lifecycleState.state) {
+        if (lifecycleState.state == Lifecycle.Event.ON_RESUME) {
             if (!viewModel.getUsageStatsAllowed(context)) {
                 viewModel.updateState(viewModel.usageStatsSorting, false)
             } else if (viewModel.wasTogglingUsageStatsSorting) {

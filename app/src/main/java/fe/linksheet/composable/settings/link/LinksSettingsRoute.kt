@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.amp2HtmlSettingsRoute
@@ -54,7 +55,7 @@ import org.koin.androidx.compose.koinViewModel
 
 class Operation(
     @StringRes val id: Int,
-    vararg val values: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>
+    vararg val values: RepositoryState<Boolean, Boolean, Preference<Boolean>>
 ) {
     fun isEnabled() = values.all { it.value }
 }

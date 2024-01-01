@@ -190,7 +190,7 @@
     <string name="export_mode">Export mode</string>
     <string name="enable_request_private_browsing_button">Enable \"Request private browsing\" button</string>
     <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the clicked URL in private browsing mode. Supported browsers: %s</string>
-    <string name="request_private_browsing">Open in Incognito Mode</string>
+    <string name="request_private_browsing">Private</string>
     <string name="crash_log">Crash log</string>
     <string name="log">Log</string>
     <string name="redact_log">Redact log (recommended, disabling this may leak package names and host names)</string>
@@ -375,4 +375,8 @@
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
     <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed, is able to intercept requests to certain native apps.</string>
     <string name="disclaimer_libredirect_unstable">In additional to being an experimental feature, LibRedirect is currently considered very unstable and may not work at all.</string>
+    <string name="enable_new_bottom_sheet">Enable new bottom sheet</string>
+    <string name="enable_new_bottom_sheet_explainer">Use the reworked bottom sheet instead of the old one</string>
+    <string name="new_bottomsheet">New bottomsheet</string>
+    <string name="new_bottomsheet_explainer">This version of LinkSheet features a new bottom sheet thanks to <annotation url="https://github.com/sakethpathike">@sakethpathike</annotation>! Please provide feedback on Discord, Github or via email.\n\nYou can revert to the old bottom sheet via Settings -> Advanced -> Feature flags.</string>
 </resources>

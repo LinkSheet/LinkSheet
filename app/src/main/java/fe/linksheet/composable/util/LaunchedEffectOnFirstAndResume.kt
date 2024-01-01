@@ -16,8 +16,8 @@ fun LaunchedEffectOnFirstAndResume(block: suspend CoroutineScope.() -> Unit) {
         block()
     }
 
-    LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
+    LaunchedEffect(lifecycleState.state) {
+        if (lifecycleState.state == Lifecycle.Event.ON_RESUME) {
             block()
         }
     }

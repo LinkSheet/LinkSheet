@@ -3,13 +3,10 @@ package fe.linksheet.composable.main
 import android.util.Patterns
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.*
@@ -22,15 +19,12 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.discordInvite
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.header
 import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.ui.Typography
 import fe.linksheet.util.AppSignature
 import fe.linksheet.util.Results
 import fe.linksheet.util.lazyItemKeyCreator
@@ -42,10 +36,7 @@ val itemKeyCreator = lazyItemKeyCreator()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainRoute(
-    navController: NavHostController,
-    viewModel: MainViewModel = koinViewModel()
-) {
+fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
     val activity = LocalContext.currentActivity()
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
@@ -76,8 +67,8 @@ fun MainRoute(
     val lifecycleState = LocalLifecycleOwner.current.lifecycle
         .observeAsState(ignoreFirst = Lifecycle.Event.ON_RESUME)
 
-    LaunchedEffect(lifecycleState.first) {
-        if (lifecycleState.first == Lifecycle.Event.ON_RESUME) {
+    LaunchedEffect(lifecycleState.state) {
+        if (lifecycleState.state == Lifecycle.Event.ON_RESUME) {
             defaultBrowserEnabled = Results.loading()
             defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 
@@ -185,9 +176,7 @@ fun MainRoute(
             if (clipboardManager.hasText() || sheetOpen != null) {
                 val item = clipboardManager.getText()?.text
 
-                if ((item != null && Patterns.WEB_URL.matcher(item)
-                        .matches()) || sheetOpen != null
-                ) {
+                if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
                     item(key = itemKeyCreator.next()) {
                         OpenCopiedLink(
                             uriHandler = uriHandler,
@@ -202,12 +191,26 @@ fun MainRoute(
                 }
             }
 
-            if (viewModel.showDiscordBanner.value && showOtherBanners) {
-                header(header = R.string.other, itemKey = itemKeyCreator.next())
+            if (showOtherBanners) {
+                val discord = viewModel.showDiscordBanner.value
+                val newBottomSheet = viewModel.showNewBottomSheetBanner.value
 
-                item(key = itemKeyCreator.next()) {
-                    DiscordCard(viewModel = viewModel, uriHandler = uriHandler)
-                    Spacer(modifier = Modifier.height(10.dp))
+                if (discord || newBottomSheet) {
+                    header(header = R.string.other, itemKey = itemKeyCreator.next())
+                }
+
+                if (discord) {
+                    item(key = itemKeyCreator.next()) {
+                        DiscordCard(viewModel = viewModel, uriHandler = uriHandler)
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
+                }
+
+                if(newBottomSheet){
+                    item(key = itemKeyCreator.next()) {
+                        NewBottomSheetCard(viewModel = viewModel)
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
                 }
             }
         }

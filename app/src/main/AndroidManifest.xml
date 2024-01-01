@@ -68,7 +68,7 @@
             android:theme="@style/Theme.Seal.Dialog"
             />
         <activity
-            android:name=".activity.LegacyBottomSheetActivity"
+            android:name=".activity.BottomSheetActivity"
             android:excludeFromRecents="true"
             android:exported="true"
             android:launchMode="singleInstance"
@@ -108,7 +108,7 @@
             android:name=".activity.bottomsheet.BottomSheetActivityContextMenuAction"
             android:exported="true"
             android:label="@string/open_with_linksheet"
-            android:targetActivity=".activity.LegacyBottomSheetActivity">
+            android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
 

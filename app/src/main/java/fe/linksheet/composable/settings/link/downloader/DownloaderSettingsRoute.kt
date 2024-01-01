@@ -15,6 +15,7 @@ import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -100,7 +101,7 @@ fun downloaderPermissionState() = rememberPermissionState(
 fun requestDownloadPermission(
     permissionState: PermissionState,
     viewModel: BaseViewModel,
-    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     newState: Boolean
 ) {
     if (!AndroidVersion.AT_LEAST_API_29_Q && !permissionState.status.isGranted) {

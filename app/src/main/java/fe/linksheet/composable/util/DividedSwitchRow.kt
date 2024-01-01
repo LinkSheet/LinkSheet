@@ -8,13 +8,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.RepositoryState
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun DividedSwitchRow(
-    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     viewModel: BaseViewModel,
     @StringRes headline: Int,
     @StringRes subtitle: Int,
@@ -33,7 +34,7 @@ fun DividedSwitchRow(
 
 @Composable
 fun DividedSwitchRow(
-    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     viewModel: BaseViewModel,
     enabled: Boolean = true,
     headline: String,
@@ -59,7 +60,7 @@ fun DividedSwitchRow(
 
 @Composable
 fun DividedSwitchRow(
-    state: RepositoryState<Boolean, Boolean, BasePreference.Preference<Boolean>>,
+    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,

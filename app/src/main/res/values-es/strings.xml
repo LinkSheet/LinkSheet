@@ -370,4 +370,5 @@
     <string name="notifications_explainer">Configurar las notificaciones</string>
     <string name="running_unofficial_build">Versión no oficial</string>
     <string name="fastforward_version">Normas FastForward</string>
+    <string name="url_copied_toast_explainer">Muestra una notificación flotante cuando el usuario copia la dirección</string>
 </resources>

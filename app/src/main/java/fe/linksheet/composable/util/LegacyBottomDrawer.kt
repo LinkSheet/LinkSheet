@@ -64,7 +64,7 @@ import kotlinx.coroutines.launch
 //  the bottomsheet does not change the color of the system navbar for some reason
 @OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
 @Composable
-fun BottomDrawer(
+fun LegacyBottomDrawer(
     modifier: Modifier = Modifier,
     isBlackTheme: Boolean = false,
     drawerState: androidx.compose.material.ModalBottomSheetState = androidx.compose.material.rememberModalBottomSheetState(
@@ -82,6 +82,8 @@ fun BottomDrawer(
             },
         contentAlignment = Alignment.BottomCenter
     ) {
+        val boxWithConstraintsScope = this
+
         androidx.compose.material.ModalBottomSheetLayout(
             modifier = modifier,
             sheetShape = RoundedCornerShape(

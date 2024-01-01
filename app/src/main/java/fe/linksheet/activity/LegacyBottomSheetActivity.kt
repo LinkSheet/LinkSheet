@@ -62,7 +62,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.kotlin.util.runIf
 import fe.linksheet.R
-import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.composable.util.LegacyBottomDrawer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.extension.android.buildSendTo
 import fe.linksheet.extension.android.initPadding
@@ -92,7 +92,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.ceil
 
-class BottomSheetActivity : ComponentActivity() {
+class LegacyBottomSheetActivity : ComponentActivity() {
     private val bottomSheetViewModel by viewModel<BottomSheetViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -244,7 +244,7 @@ class BottomSheetActivity : ComponentActivity() {
         }
 
         val interactionSource = remember { MutableInteractionSource() }
-        BottomDrawer(
+        LegacyBottomDrawer(
             modifier = Modifier
                 .runIf(landscape) {
                     it
@@ -616,14 +616,14 @@ class BottomSheetActivity : ComponentActivity() {
                         if (!bottomSheetViewModel.singleTap.value) {
                             launchApp(result, info)
                         } else {
-                            this@BottomSheetActivity.startPackageInfoActivity(info)
+                            this@LegacyBottomSheetActivity.startPackageInfoActivity(info)
                         }
                     },
                     onLongClick = {
                         if (bottomSheetViewModel.singleTap.value) {
                             onSelectedItemChange(index)
                         } else {
-                            this@BottomSheetActivity.startPackageInfoActivity(info)
+                            this@LegacyBottomSheetActivity.startPackageInfoActivity(info)
                         }
                     }
                 )
@@ -1065,4 +1065,3 @@ class BottomSheetActivity : ComponentActivity() {
     }
 }
 
-typealias AppListModifier = @Composable (index: Int, info: DisplayActivityInfo) -> Modifier

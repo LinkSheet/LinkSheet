@@ -110,4 +110,45 @@
     <string name="import_settings_override_preferences">यह सभी मौजूदा प्राथमिकताओं को ओवरराइड कर देगा। जारी रखना है?</string>
     <string name="fastforward_version">फास्टफॉरवर्ड नियम</string>
     <string name="url_copied_toast_explainer">जब उपयोगकर्ता द्वारा कोई यूआरएल कॉपी किया जाता है तो एक टोस्ट दिखाएं</string>
+    <string name="import_dumped_preference">डंप की गई प्राथमिकताएं आयात करें</string>
+    <string name="domain_selection_confirmation_subtitle">क्या आप वाकई निम्नलिखित डोमेन के लिए %s को पसंदीदा एप्लिकेशन के रूप में सेट करना चाहते हैं?</string>
+    <string name="no_browser_installed">कोई ब्राउज़र स्थापित नहीं है</string>
+    <string name="domain_selection_confirmation_title">डोमेन चुनें?</string>
+    <string name="open_link_with_subtitle_2">लिंकशीट प्रारंभ में OpenWith पर आधारित थी</string>
+    <string name="misc_settings">मिश्रित</string>
+    <string name="donate_learn_more">और अधिक जानें</string>
+    <string name="no">नहीं</string>
+    <string name="import_and_override">आयात करें और ओवरराइड करें</string>
+    <string name="show_linksheet_referrer">लिंकशीट रेफ़रलकर्ता दिखाएँ</string>
+    <string name="yes">हां</string>
+    <string name="enable_new_bottom_sheet">नई निचली शीट सक्षम करें</string>
+    <string name="built_at">(UTC) पर निर्मित:</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> से अधिक का दान (<b>4€</b> यदि आप क्रिप्टो के साथ दान करते हैं!) आपको <b>लिंकशीट प्रो</b> तक पहुंच की अनुमति देता है, जो वर्तमान में केवल छिपा हुआ है ऐप की मुख्य स्क्रीन पर दान बैनर, लेकिन भविष्य में, <b>प्रो एक्सक्लूसिव फीचर्स</b> होंगे।</string>
+    <string name="export_import_settings">निर्यात या आयात सेटिंग्स</string>
+    <string name="import_headline">आयात करें</string>
+    <string name="button_settings">बटन</string>
+    <string name="linksheet_version_info_header">लिंकशीट संस्करण जानकारी:</string>
+    <string name="seal_subtitle_2">जेटपैक कंपोज़ के संबंध में सीखने के लिए सील एक बेहतरीन संसाधन रहा है</string>
+    <string name="import_dumped_preference_explainer">प्राथमिकताओं के लिए इंपोर्टर लॉग फ़ाइलों में मौजूद है - संभवतः औसत उपयोगकर्ता के लिए उपयोगी नहीं है</string>
+    <string name="import_explainer">फ़ाइल से पिछला निर्यात आयात करें</string>
+    <string name="github_workflow_run_id">बिल्ड वर्कफ़्लो आईडी:</string>
+    <string name="export_import_settings_explainer">अपनी वर्तमान सेटिंग्स निर्यात करें या पिछली निर्यात की हूई सेटिंग्स आयात करें</string>
+    <string name="donation_instructions">दान निर्देश</string>
+    <string name="new_bottomsheet_explainer">लिंकशीट के इस संस्करण में <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> की बदौलत एक नई निचली शीट मौजूद है! कृपया Discord, Github या ईमेल के माध्यम से प्रतिक्रिया प्रदान करें।
+\n
+\nआप सेटिंग्स के माध्यम से पुरानी निचली शीट पर वापस लौट सकते हैं -&gt; एडवांस्ड -&gt; फ़ीचर फ्लैग्स।</string>
+    <string name="donate_card_headline">लिंकशीट का समर्थन करने के लिए दान करें</string>
+    <string name="at_least_one_unknown_browser_installer">कम से कम (अज्ञात) एक ब्राउज़र स्थापित है</string>
+    <string name="mastodon_redirect_subtitle_2">मास्टोडन रीडायरेक्ट के स्रोत कोड का उपयोग शिज़ुकु इंटरैक्शन के संदर्भ के रूप में किया गया था</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">लिंकशीट ने ब्राउज़र होने का दावा करने वाले कम से कम एक ऐप का पता लगाया है। लिंकशीट की सूची पूरी नहीं हो सकती है. यदि आपको लगता है कि यह एक त्रुटि है, तो Github पर एक समस्या सबमिट करें।</string>
+    <string name="donate">दान करें</string>
+    <string name="enable_new_bottom_sheet_explainer">पुरानी शीट के बजाय दोबारा तैयार की गई निचली शीट का उपयोग करें</string>
+    <string name="disclaimer_libredirect_unstable">प्रायोगिक सुविधा होने के अलावा, LibRedirect को वर्तमान में बहुत अस्थिर माना जाता है और यह बिल्कुल भी काम नहीं कर सकता है।</string>
+    <string name="no_browser_installed_explainer">लिंकशीट ब्राउज़र होने का दावा करने वाले कम से कम एक एप्लिकेशन का पता लगाने में असमर्थ रही। सर्वोत्तम अनुभव के लिए, एक ब्राउज़र इंस्टॉल करें।</string>
+    <string name="export_explainer">अपनी वर्तमान ऐप सेटिंग को एक फ़ाइल में निर्यात करें</string>
+    <string name="donate_card_subtitle"> यदि आपको लिंकशीट पसंद है, तो GitHub पर एक स्टार छोड़ने और/या दान करने पर विचार करें।
+\n<b>5€</b> से अधिक दान करने वाले दानकर्ता <b>लिंकशीट प्रो</b> के लिए पात्र हैं, जिसमें विशिष्ट सुविधाएं होंगी।</string>
+    <string name="privacy">गोपनीयता</string>
+    <string name="new_bottomsheet">नई निचली शीट</string>
+    <string name="version_name">पूर्ण आईडेंटिफायर:</string>
 </resources>

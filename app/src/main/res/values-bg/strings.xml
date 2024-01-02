@@ -383,4 +383,10 @@
     <string name="enable_linksheet_compat_explainer">Менюто можете данамерите в подменю „Приложения“ и ако е инсталирано може да прехваща заявки към определени присъщи приложения.</string>
     <string name="opening_with_app_toast_explainer">Показва плуващо известие при отваряне на стандартно за даден домейн приложение</string>
     <string name="disclaimer_libredirect_unstable">В допълнение към изпитателната природа на тази възможност интеграцията с LibRedirect се счита за много нестабилна и може да не работи изобщо.</string>
+    <string name="enable_new_bottom_sheet">Включване на новото долно меню</string>
+    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща.
+\n
+\nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове.</string>
+    <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
+    <string name="new_bottomsheet">Ново долно меню</string>
 </resources>

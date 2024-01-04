@@ -386,4 +386,10 @@
     <string name="enable_linksheet_compat">Омогући експериментални LinkSheet Compat мени</string>
     <string name="enable_linksheet_compat_explainer">Мени се може наћи у подменију „Апликације“ и када је инсталиран, може да пресреће захтеве одређеним изворним апликацијама.</string>
     <string name="disclaimer_libredirect_unstable">Поред тога што је експериментална функција, LibRedirect се тренутно сматра веома нестабилним и можда уопште неће радити.</string>
+    <string name="enable_new_bottom_sheet">Омогући нови доњи лист</string>
+    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла.
+\n
+\nМожете се вратити на стари доњи лист путем Подешавања -&gt; Напредно -&gt; Експерименталне функције.</string>
+    <string name="enable_new_bottom_sheet_explainer">Користите прерађени доњи лист уместо старог</string>
+    <string name="new_bottomsheet">Нови доњи лист</string>
 </resources>

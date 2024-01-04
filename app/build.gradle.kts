@@ -1,5 +1,9 @@
 import com.android.build.api.dsl.VariantDimension
 import de.fayard.refreshVersions.core.versionFor
+import fe.buildsrc.KotlinClosure4
+import fe.buildsrc.Version
+import fe.buildsrc.extension.getOrSystemEnv
+import fe.buildsrc.extension.readPropertiesOrNull
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
 import net.nemerosa.versioning.VersioningExtension

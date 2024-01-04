@@ -1,3 +1,5 @@
+package fe.buildsrc
+
 import groovy.lang.Closure
 
 class KotlinClosure4<in T : Any?, in U : Any?, in V : Any?, in W : Any?, R : Any>(

@@ -1,3 +1,5 @@
+package fe.buildsrc.extension
+
 import java.util.*
 
 fun Properties?.getOrSystemEnv(key: String, default: String? = null): String? {

@@ -88,23 +88,25 @@ android {
     }
 
     signingConfigs {
-        create("env") {
-            storeFile = File(System.getenv("KEYSTORE_FILE_PATH") ?: "")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+        register("env") {
+            val properties = rootProject.file(".ignored/keystore.properties").readPropertiesOrNull()
+
+            storeFile = rootProject.file(properties.getOrSystemEnv("KEYSTORE_FILE_PATH", "")!!)
+            storePassword = properties.getOrSystemEnv("KEYSTORE_PASSWORD")
+            keyAlias = properties.getOrSystemEnv("KEY_ALIAS")
+            keyPassword = properties.getOrSystemEnv("KEY_PASSWORD")
         }
     }
 
     flavorDimensions += listOf("type")
 
     productFlavors {
-        create("foss") {
+        register("foss") {
             dimension = "type"
             buildStringConfigField("FLAVOR", "Foss")
         }
 
-        create("pro") {
+        register("pro") {
             dimension = "type"
 
             applicationIdSuffix = ".pro"
@@ -133,6 +135,8 @@ android {
             initWith(buildTypes.getByName("release"))
             matchingFallbacks.add("release")
             signingConfig = signingConfigs.getByName("env")
+//            signingConfig = signingConfigs.named("env")
+
 
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-nightly"

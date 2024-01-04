@@ -338,7 +338,7 @@
         <item quantity="other">%s ਮਹੀਨੇ</item>
     </plurals>
     <string name="pro_feature">ਇਹ ਲਿੰਕਸ਼ੀਟ ਪਰੋ ਫ਼ੀਚਰ ਹੈ!</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ (<b>4€</b> ਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਹੋ!) ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਸਿਰਫ਼ ਲੁਕਾਉਂਦਾ ਹੈ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਇੱਥੇ <b>ਪ੍ਰੋ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ</b> ਹੋਣਗੀਆਂ।</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ (<b>4€</b> ਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਹੋ!) ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਸਿਰਫ਼ ਲੁਕਾਉਂਦਾ ਹੈ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਇੱਥੇ <b>ਪ੍ਰੋ ਐਕਸਕਲੂਸਿਵ ਫੀਚਰਸ</b>ਹੋਣਗੇ।</string>
     <string name="export_import_settings">ਐਕਸਪੋਰਟ ਜਾਂ ਇੰਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
     <string name="import_headline">ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="export_include_recommendation">ਅਸੀਂ ਸਿਫ਼ਾਰਿਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਨਿਮਨਲਿਖਤ ਸੈਟਿੰਗਾਂ ਨੂੰ ਤਾਂ ਹੀ ਚਾਲੂ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਨਾਲ ਆਪਣੇ ਐਕਸਪੋਰਟ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਦੀ ਯੋਜਨਾ ਨਹੀਂ ਬਣਾਉਂਦੇ ਹੋ!</string>
@@ -383,4 +383,10 @@
     <string name="import_settings_override_preferences">ਇਹ ਸਾਰੀਆਂ ਮੌਜੂਦਾ ਤਰਜੀਹਾਂ ਨੂੰ ਓਵਰਰਾਈਡ ਕਰ ਦੇਵੇਗਾ। ਜਾਰੀ ਰੱਖਣਾ ਹੈ?</string>
     <string name="fastforward_version">ਫਾਸਟ ਫਾਰਵਰਡ ਨਿਯਮ</string>
     <string name="url_copied_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਉਪਭੋਗਤਾ ਦੁਆਰਾ ਇੱਕ URL ਕਾਪੀ ਕੀਤਾ ਜਾਂਦਾ ਹੈ</string>
+    <string name="enable_new_bottom_sheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਇਨੇਬਲ ਕਰੋ</string>
+    <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ।
+\n
+\nਤੁਸੀਂ ਸੈਟਿੰਗਾਂ -&gt; ਰਾਹੀਂ ਪੁਰਾਣੀ ਥੱਲੇ ਵਾਲੀ ਸ਼ੀਟ \'ਤੇ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ। ਉੱਨਤ -&gt; ਫੀਚਰ ਫਲੈਗ।</string>
+    <string name="enable_new_bottom_sheet_explainer">ਪੁਰਾਣੀ ਸ਼ੀਟ ਦੀ ਬਜਾਏ ਸੁਧਾਰੀ ਹੋਈ ਹੇਠਲੀ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
+    <string name="new_bottomsheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ</string>
 </resources>

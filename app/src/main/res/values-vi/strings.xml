@@ -229,4 +229,7 @@
     <string name="debug_explainer">Xem nhật ký ứng dụng</string>
     <string name="configure_explainer">Nhấn vào đây để định cấu hình LinkSheetCompat</string>
     <string name="done">Xong</string>
+    <string name="no_browser_installed">Chưa cài đặt trình duyệt</string>
+    <string name="at_least_one_unknown_browser_installer">Ít nhất (không xác định) một trình duyệt được cài đặt</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet đã phát hiện ít nhất một ứng dụng tự xưng là trình duyệt. Danh sách của LinkSheet có thể chưa đầy đủ. Nếu bạn cho rằng đây là lỗi, hãy gửi vấn đề trên Github.</string>
 </resources>

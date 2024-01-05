@@ -139,8 +139,6 @@ android {
             initWith(buildTypes.getByName("release"))
             matchingFallbacks.add("release")
             signingConfig = signingConfigs.getByName("env")
-//            signingConfig = signingConfigs.named("env")
-
 
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-nightly"
@@ -157,12 +155,19 @@ android {
             versionNameSuffix = "-release_debug"
             resValue("string", "app_name", "$appName Release Debug")
         }
+
+        register("migrate") {
+            initWith(buildTypes.getByName("release"))
+            matchingFallbacks.add("release")
+            signingConfig = signingConfigs.getByName("env")
+
+            resValue("string", "app_name", "$appName Migrate")
+        }
     }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
-
 
     kotlin {
         jvmToolchain(Version.JVM)

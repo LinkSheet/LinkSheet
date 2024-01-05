@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="open_with">開啟方式</string>
     <string name="just_once">僅此一次</string>
@@ -8,7 +9,7 @@
     <string name="preferred_apps">偏好應用程式</string>
     <string name="preferred_apps_settings">偏好應用程式設定</string>
     <string name="set_as_browser">設定為瀏覽器</string>
-    <string name="set_as_browser_explainer">點擊此處以將此應用程式設為預設瀏覽器</string>
+    <string name="set_as_browser_explainer">點擊此處以將LinkSheet設為預設瀏覽器</string>
     <string name="apps_which_can_open_links">可開啟連結的應用程式</string>
     <string name="apps_which_can_open_links_explainer">點擊應用程式以打開「預設開啟方式」選單，允許您停用自動連結開啟功能</string>
     <string name="apps_which_can_open_links_explainer_2">列出可能影響 LinkSheet 行為的所有應用程式</string>
@@ -36,7 +37,7 @@
     <string name="send_to">分享</string>
     <string name="preferred_apps_explainer">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">始終顯示套件名稱</string>
-    <string name="always_show_package_name_explainer">始終顯示套件名稱而不僅僅是應用程式名稱</string>
+    <string name="always_show_package_name_explainer">始終顯示套件名稱而不僅僅是應用程式名稱。這適用於整個應用程式。</string>
     <string name="disable_all_toasts">停用浮動訊息</string>
     <string name="disable_all_toasts_explainer">從不顯示任何浮動訊息</string>
     <string name="remove_all">全部移除</string>
@@ -46,7 +47,7 @@
     <string name="back">返回</string>
     <string name="display_grid_layout">顯示網格佈局</string>
     <string name="display_grid_layout_explainer">在底部工作表中顯示網格而不是清單</string>
-    <string name="set_as_browser_done">應用程式已設定為預設瀏覽器！</string>
+    <string name="set_as_browser_done">LinkSheet已設定為預設瀏覽器！</string>
     <string name="browser_status">瀏覽器狀態</string>
     <string name="apps">應用程式</string>
     <string name="bottom_sheet">底部工作表</string>
@@ -65,7 +66,7 @@
     <string name="about_explainer">關於此應用程式、授權</string>
     <string name="credits">鳴謝</string>
     <string name="credits_explainer">開源授權</string>
-    <string name="version">版本</string>
+    <string name="version">LinkSheet版本</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="license_apache_2">Apache License 2.0</string>
     <string name="seal">Seal</string>
@@ -73,7 +74,7 @@
     <string name="github">Github</string>
     <string name="github_explainer">原始碼存放庫</string>
     <string name="donate_crypto">捐贈</string>
-    <string name="donate_explainer">以加密貨幣捐贈給作者</string>
+    <string name="donate_explainer">如果你想捐贈並獲取<b>LinkSheet Pro</b></string>
     <string name="open_copied_link">開啟已複製的連結</string>
     <string name="paste">貼上</string>
     <string name="error">錯誤</string>
@@ -143,4 +144,16 @@
     <string name="enable_ignore_libredirect_button">啟用「忽略 LibRedirect」按鈕</string>
     <string name="enable_ignore_libredirect_button_explainer">如果連結經由 LibRedirect 重新導向，將在底部表單中顯示一個按鈕，可打開原始連結</string>
     <string name="ignore_libredirect">忽略 LibRedirect</string>
+    <plurals name="hours">
+        <item quantity="other">%s小時</item>
+    </plurals>
+    <string name="follow_only_known_trackers_explainer">僅在知道主機是追蹤器/重定向時才嘗試遵循重定向。 如果啟用“透過外部服務追蹤重定向”，則該功能將始終啟用</string>
+    <string name="usage_stats_sorting_explainer">在排序演算法中包含 Android 系統使用統計資料。 第一次切換時需要請求權限。</string>
+    <plurals name="minutes">
+        <item quantity="other">%s分鐘</item>
+    </plurals>
+    <string name="none_explainer">僅列出本地應用程序，刪除所有瀏覽器。 如果僅存在一個本地應用程序，將會自動開啟。 如果不存在本地應用程序，則會列出所有瀏覽器。</string>
+    <plurals name="months">
+        <item quantity="other">%s月</item>
+    </plurals>
 </resources>

@@ -389,4 +389,10 @@
     <string name="running_unofficial_build">Nieoficjalna kompilacja</string>
     <string name="fastforward_version">Reguły FastForward</string>
     <string name="url_copied_toast_explainer">Pokaż toast, gdy link zostanie skopiowany</string>
+    <string name="enable_new_bottom_sheet">Nowy dolny panel</string>
+    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail.
+\n
+\nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji.</string>
+    <string name="enable_new_bottom_sheet_explainer">Zastąp dolny panel nową przeprojektowaną wersją</string>
+    <string name="new_bottomsheet">Nowy dolny panel</string>
 </resources>

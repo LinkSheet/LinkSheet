@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.PreferenceRepository
+import fe.android.preference.helper.compose.closeGlobalStateCache
 import fe.android.preference.helper.compose.getBooleanState
+import fe.android.preference.helper.compose.getGlobalCachedState
 import fe.linksheet.LinkSheetAppConfig
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -48,6 +50,6 @@ class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepo
     }
 
     fun forceRefreshCachedState(keys: List<String>) {
-//        keys.forEach { getCachedState(it)?.forceRefresh() }
+        keys.forEach { getGlobalCachedState(it)?.forceRefresh() }
     }
 }

@@ -3,18 +3,11 @@ package fe.linksheet
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
-
-import android.content.pm.Signature
-import android.os.Trace
-import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
 import fe.gson.globalGsonModule
-import fe.httpkt.json.defaultGson
 import fe.kotlin.extension.asString
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext

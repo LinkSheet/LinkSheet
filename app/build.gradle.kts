@@ -95,7 +95,7 @@ android {
         register("env") {
             val properties = rootProject.file(".ignored/keystore.properties").readPropertiesOrNull()
 
-            storeFile = rootProject.file(properties.getOrSystemEnv("KEYSTORE_FILE_PATH", "")!!)
+            storeFile = properties.getOrSystemEnv("KEYSTORE_FILE_PATH")?.let { rootProject.file(it) }
             storePassword = properties.getOrSystemEnv("KEYSTORE_PASSWORD")
             keyAlias = properties.getOrSystemEnv("KEY_ALIAS")
             keyPassword = properties.getOrSystemEnv("KEY_PASSWORD")

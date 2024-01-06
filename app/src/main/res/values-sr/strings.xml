@@ -392,4 +392,5 @@
 \nМожете се вратити на стари доњи лист путем Подешавања -&gt; Напредно -&gt; Експерименталне функције.</string>
     <string name="enable_new_bottom_sheet_explainer">Користите прерађени доњи лист уместо старог</string>
     <string name="new_bottomsheet">Нови доњи лист</string>
+    <string name="shizuku_manager_start_failed">Покретање Shizuku Manager-а није успело, покрените га ручно!</string>
 </resources>

@@ -9,14 +9,23 @@ import dev.zwander.shared.IShizukuService
 import dev.zwander.shared.shizuku.ShizukuService
 import fe.linksheet.BuildConfig
 import rikka.shizuku.Shizuku
+import java.util.LinkedList
+import java.util.Queue
 
 typealias ShizukuCommand = IShizukuService.() -> Unit
 
 class ShizukuHandler<T : Application>(
     val app: T,
 ) : ServiceConnection, Shizuku.OnRequestPermissionResultListener {
-    private val queuedShizukuCommands = mutableListOf<ShizukuCommand>()
+    private val queuedCommands: Queue<ShizukuCommand> = LinkedList()
     private var userService: IShizukuService? = null
+
+    private val serviceArgs = Shizuku.UserServiceArgs(ComponentName(app, ShizukuService::class.java))
+        .version(BuildConfig.VERSION_CODE + (if (BuildConfig.DEBUG) 9999 else 0))
+        .processNameSuffix("shizuku")
+        .debuggable(BuildConfig.DEBUG)
+        .daemon(false)
+        .tag("${app.packageName}_shizuku")
 
     init {
         Shizuku.addBinderReceivedListenerSticky {
@@ -27,7 +36,7 @@ class ShizukuHandler<T : Application>(
 
     fun postShizukuCommand(command: ShizukuCommand) {
         if (userService != null) command(userService!!)
-        else queuedShizukuCommands.add(command)
+        else queuedCommands.add(command)
     }
 
     override fun onRequestPermissionResult(requestCode: Int, grantResult: Int) {
@@ -37,25 +46,19 @@ class ShizukuHandler<T : Application>(
         }
     }
 
-    override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+    override fun onServiceConnected(name: ComponentName, service: IBinder) {
         userService = IShizukuService.Stub.asInterface(service)
-        if (userService != null) {
-            queuedShizukuCommands.forEach { it(userService!!) }
-            queuedShizukuCommands.clear()
+        while (queuedCommands.isNotEmpty() && userService != null) {
+            queuedCommands.poll()?.invoke(userService!!)
         }
     }
 
-    override fun onServiceDisconnected(name: ComponentName?) {
+    override fun onServiceDisconnected(name: ComponentName) {
         userService = null
     }
 
-    private val serviceArgs by lazy {
-        Shizuku.UserServiceArgs(ComponentName(app, ShizukuService::class.java))
-            .version(BuildConfig.VERSION_CODE + (if (BuildConfig.DEBUG) 9999 else 0))
-            .processNameSuffix("shizuku")
-            .debuggable(BuildConfig.DEBUG)
-            .daemon(false)
-            .tag("${app.packageName}_shizuku")
+    override fun onBindingDied(name: ComponentName) {
+        userService = null
     }
 
     private fun rebindUserService() {

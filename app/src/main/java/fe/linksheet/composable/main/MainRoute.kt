@@ -1,6 +1,6 @@
 package fe.linksheet.composable.main
 
-import android.util.Patterns
+import android.net.Uri
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,20 +12,21 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.*
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.header
-import fe.linksheet.extension.compose.observeAsState
 import fe.linksheet.extension.compose.onStateChange
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
@@ -46,7 +47,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
     var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
-    var sheetOpen by remember { mutableStateOf<String?>(null) }
+    var sheetOpen by remember { mutableStateOf<Uri?>(null) }
     val useTime = viewModel.formatUseTime()
 
     val browserStatus by remember {
@@ -153,12 +154,12 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
 
             // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
             if (clipboardManager.hasText() || sheetOpen != null) {
-                val item = clipboardManager.getText()?.text
-
-                if ((item != null && Patterns.WEB_URL.matcher(item).matches()) || sheetOpen != null) {
+                val item = clipboardManager.getText()?.text ?: return@LazyColumn
+                val uri = kotlin.runCatching { Uri.parse(item) }.getOrNull()
+                if (uri?.scheme != null || sheetOpen != null) {
                     cardItem {
-                        OpenCopiedLink(uriHandler = uriHandler, item = item ?: sheetOpen!!, sheetOpen = {
-                            sheetOpen = item
+                        OpenCopiedLink(uri = uri ?: sheetOpen!!, sheetOpen = {
+                            sheetOpen = uri
                         })
                     }
                 }

@@ -1,3 +1,5 @@
+@file:Suppress("KotlinRedundantDiagnosticSuppress")
+
 package fe.linksheet.extension.android
 
 import android.content.Intent
@@ -41,7 +43,7 @@ fun PackageManager.getInstalledPackagesCompat(
     flags: Int
 ): MutableList<PackageInfo> = if (AndroidVersion.AT_LEAST_API_33_T) {
     getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
-} else @Suppress("DEPRECATION") getInstalledPackages(flags)
+} else getInstalledPackages(flags)
 
 
 fun PackageManager.queryIntentActivitiesCompat(
@@ -49,21 +51,20 @@ fun PackageManager.queryIntentActivitiesCompat(
     flags: Int
 ): MutableList<ResolveInfo> = if (AndroidVersion.AT_LEAST_API_33_T) {
     queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-} else @Suppress("DEPRECATION") queryIntentActivities(intent, flags)
+} else queryIntentActivities(intent, flags)
 
 fun PackageManager.resolveActivityCompat(
     intent: Intent,
     flags: Int
 ) = if (AndroidVersion.AT_LEAST_API_33_T) {
     resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-} else @Suppress("DEPRECATION") resolveActivity(intent, flags)
+} else resolveActivity(intent, flags)
 
 fun PackageManager.getApplicationInfoCompat(packageName: String, flags: Int): ApplicationInfo? {
     return runCatching {
         if (AndroidVersion.AT_LEAST_API_33_T) {
             getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(flags.toLong()))
         } else {
-            @Suppress("DEPRECATION")
             getApplicationInfo(packageName, flags)
         }
     }.getOrNull()

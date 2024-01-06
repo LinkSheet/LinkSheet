@@ -1,5 +1,6 @@
 package dev.zwander.shared
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -8,10 +9,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import fe.linksheet.extension.android.getApplicationInfoCompat
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 
 object ShizukuUtil {
+    val MANAGER_COMPONENT = ComponentName(ShizukuProvider.MANAGER_APPLICATION_ID, "moe.shizuku.manager.MainActivity")
+
     @Composable
     fun rememberHasShizukuPermissionAsState(): State<Boolean> {
         val hasPermission = remember {
@@ -38,16 +42,6 @@ object ShizukuUtil {
     }
 
     fun isShizukuInstalled(context: Context): Boolean {
-        return runCatching {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                context.packageManager.getPackageInfo(
-                    ShizukuProvider.MANAGER_APPLICATION_ID,
-                    PackageManager.PackageInfoFlags.of(0L)
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                context.packageManager.getPackageInfo(ShizukuProvider.MANAGER_APPLICATION_ID, 0)
-            }
-        }.getOrNull() != null
+        return context.packageManager.getApplicationInfoCompat(ShizukuProvider.MANAGER_APPLICATION_ID, 0) != null
     }
 }

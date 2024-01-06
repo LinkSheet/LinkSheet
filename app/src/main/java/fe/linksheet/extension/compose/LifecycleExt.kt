@@ -1,11 +1,9 @@
 package fe.linksheet.extension.compose
 
+import android.util.Log
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import dev.zwander.shared.ShizukuUtil
-import fe.linksheet.util.Results
 import kotlinx.coroutines.CoroutineScope
 
 // https://stackoverflow.com/a/69061897
@@ -41,7 +39,7 @@ fun Lifecycle.observeAsState(ignoreFirst: Lifecycle.Event? = Lifecycle.Event.ON_
 @Composable
 fun Lifecycle.onStateChange(
     fireOnFirst: Boolean = false,
-    state: Lifecycle.Event? = Lifecycle.Event.ON_RESUME,
+    state: Set<Lifecycle.Event?> = setOf(Lifecycle.Event.ON_RESUME),
     block: suspend CoroutineScope.() -> Unit
 ) {
     if (fireOnFirst) {
@@ -50,6 +48,6 @@ fun Lifecycle.onStateChange(
 
     val lifecycleState = observeAsState()
     LaunchedEffect(lifecycleState.state) {
-        if (lifecycleState.state == state) block()
+        if (lifecycleState.state in state) block()
     }
 }

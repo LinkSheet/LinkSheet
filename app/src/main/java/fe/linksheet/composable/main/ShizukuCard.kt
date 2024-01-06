@@ -1,9 +1,9 @@
 package fe.linksheet.composable.main
 
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,12 +25,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.shizukuDownload
 import fe.linksheet.ui.Typography
 import kotlinx.coroutines.Dispatchers
@@ -40,23 +42,11 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
-enum class ShizukuStatus(val headline: Int, val subtitle: Int, val usePrimaryColor: Boolean) {
-    Enabled(
-        R.string.shizuku_integration,
-        R.string.shizuku_integration_enabled_explainer,
-        true
-    ),
-    NotRunning(R.string.shizuku_integration, R.string.shizuku_not_running_explainer, false),
-    NoPermission(
-        R.string.shizuku_integration,
-        R.string.shizuku_integration_no_permission_explainer,
-        false
-    ),
-    NotInstalled(
-        R.string.shizuku_integration,
-        R.string.shizuku_integration_not_setup_explainer,
-        false
-    );
+enum class ShizukuStatus(val subtitle: Int, val usePrimaryColor: Boolean) {
+    Enabled(R.string.shizuku_integration_enabled_explainer, true),
+    NotRunning(R.string.shizuku_not_running_explainer, false),
+    NoPermission(R.string.shizuku_integration_no_permission_explainer, false),
+    NotInstalled(R.string.shizuku_integration_not_setup_explainer, false);
 
     companion object {
         fun findStatus(installed: Boolean, running: Boolean, permission: Boolean): ShizukuStatus {
@@ -76,6 +66,7 @@ fun ShizukuCard(
     shizukuInstalled: Boolean,
     shizukuRunning: Boolean,
 ) {
+    val context = LocalContext.current
     val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
 
     var status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
@@ -106,6 +97,7 @@ fun ShizukuCard(
                                         cont.resume(grantResult == PackageManager.PERMISSION_GRANTED)
                                     }
                                 }
+
                                 Shizuku.addRequestPermissionResultListener(listener)
                                 Shizuku.requestPermission(100)
                             }
@@ -125,15 +117,13 @@ fun ShizukuCard(
                     }
 
                     else -> {
-                        activity.startActivity(
-                            Intent(Intent.ACTION_VIEW)
-                                .setComponent(
-                                    ComponentName(
-                                        "moe.shizuku.privileged.api",
-                                        "moe.shizuku.manager.MainActivity"
-                                    )
-                                )
-                        )
+                        val success = activity.startActivityWithConfirmation(Intent(Intent.ACTION_VIEW).apply {
+                            component = ShizukuUtil.MANAGER_COMPONENT
+                        })
+
+                        if (!success) {
+                            Toast.makeText(context, R.string.shizuku_manager_start_failed, Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
@@ -155,7 +145,7 @@ fun ShizukuCard(
 
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
-                    text = stringResource(id = status.headline),
+                    text = stringResource(id = R.string.shizuku_integration),
                     style = Typography.titleLarge,
                     color = color
                 )

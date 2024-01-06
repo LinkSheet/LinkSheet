@@ -379,4 +379,5 @@
     <string name="enable_new_bottom_sheet_explainer">Use the reworked bottom sheet instead of the old one</string>
     <string name="new_bottomsheet">New bottomsheet</string>
     <string name="new_bottomsheet_explainer">This version of LinkSheet features a new bottom sheet thanks to <annotation url="https://github.com/sakethpathike">@sakethpathike</annotation>! Please provide feedback on Discord, Github or via email.\n\nYou can revert to the old bottom sheet via Settings -> Advanced -> Feature flags.</string>
+    <string name="shizuku_manager_start_failed">Failed to start Shizuku Manager, please start it manually!</string>
 </resources>

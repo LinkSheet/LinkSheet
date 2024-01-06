@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
@@ -65,7 +66,9 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
         }
     }
 
-    LocalLifecycleOwner.current.lifecycle.onStateChange {
+    LocalLifecycleOwner.current.lifecycle.onStateChange(
+        state = setOf(Lifecycle.Event.ON_RESUME, Lifecycle.Event.ON_START)
+    ) {
         defaultBrowserEnabled = Results.loading()
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 

@@ -63,6 +63,7 @@ import fe.linksheet.extension.compose.LargeTopAppBar
 import fe.linksheet.composable.util.ExtendedFabIconRight
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.angledGradientBackground
+import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.PoppinsFontFamily
@@ -90,7 +91,7 @@ class OnboardingActivity : ComponentActivity() {
 
         initPadding()
 
-        setContent {
+        setContentWithKoin {
             AppHost {
                 val isLightTheme = onboardingViewModel.theme.value.IsLightTheme()
 

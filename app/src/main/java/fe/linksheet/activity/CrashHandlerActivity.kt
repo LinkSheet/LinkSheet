@@ -33,6 +33,7 @@ import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
+import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.LogEntry
@@ -58,7 +59,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
         val exception = intent?.getStringExtra(extraCrashException)!!
         logger.print(Logger.Type.Debug, exception)
 
-        setContent {
+        setContentWithKoin {
             AppHost {
                 val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
                     rememberTopAppBarState(),

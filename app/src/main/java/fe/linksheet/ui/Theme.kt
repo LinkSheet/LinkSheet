@@ -24,8 +24,10 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import fe.android.preference.helper.EnumTypeMapper
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.AndroidVersion
+import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.KoinContext
+import org.koin.core.annotation.KoinExperimentalAPI
 
 
 private val LightColors = lightColorScheme(
@@ -106,8 +108,8 @@ enum class Theme {
 
     @Composable
     fun IsLightTheme(systemDarkTheme: Boolean = isSystemInDarkTheme()): Boolean {
-        if(this == Light) return true
-        if(this == System) return !systemDarkTheme
+        if (this == Light) return true
+        if (this == System) return !systemDarkTheme
         return false
     }
 
@@ -178,13 +180,11 @@ fun AppTheme(
 
 @Composable
 fun AppHost(content: @Composable () -> Unit) {
-    KoinContext {
-        AppTheme {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Surface(color = MaterialTheme.colorScheme.surface) {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        content()
-                    }
+    AppTheme {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Surface(color = MaterialTheme.colorScheme.surface) {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    content()
                 }
             }
         }

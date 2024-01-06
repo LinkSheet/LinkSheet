@@ -62,6 +62,7 @@ import fe.linksheet.devModeRoute
 import fe.linksheet.donateSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.exportImportSettingsRoute
+import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
 import fe.linksheet.generalSettingsRoute
@@ -99,8 +100,7 @@ class MainActivity : ComponentActivity() {
             finish()
         }
 
-
-        setContent {
+        setContentWithKoin {
             val navController = rememberNavController()
 
             AppHost {

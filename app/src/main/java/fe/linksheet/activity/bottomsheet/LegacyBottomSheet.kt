@@ -72,7 +72,7 @@ class LegacyBottomSheet(
 
         val deferred = resolveAsync(bottomSheetViewModel)
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
-            setContent {
+            setContentWithKoin {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
                     (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
                         if (result != null) makeResolveToast(
@@ -89,7 +89,7 @@ class LegacyBottomSheet(
             }
         } else {
             deferred.invokeOnCompletion {
-                setContent { AppThemeBottomSheet(bottomSheetViewModel) }
+                setContentWithKoin { AppThemeBottomSheet(bottomSheetViewModel) }
             }
         }
     }

@@ -100,3 +100,5 @@
 }
 
 -dontwarn fe.uribuilder.ParsedUri
+
+-printmapping mapping.txt

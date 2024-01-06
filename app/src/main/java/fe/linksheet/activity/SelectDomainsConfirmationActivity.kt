@@ -37,6 +37,7 @@ import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.extension.android.getApplicationInfoCompat
 import fe.linksheet.extension.android.initPadding
+import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.interconnect.IDomainSelectionResultCallback
 import fe.linksheet.interconnect.StringParceledListSlice
 import fe.linksheet.module.database.entity.AppSelectionHistory
@@ -110,7 +111,7 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
         val appLabel = packageManager.getApplicationInfoCompat(callingPackage, 0)
             ?.loadLabel(packageManager) ?: callingPackage
 
-        setContent {
+        setContentWithKoin {
             val scope = rememberCoroutineScope()
 
             var loading by remember {

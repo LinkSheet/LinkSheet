@@ -2,6 +2,7 @@ package fe.linksheet.extension.koin
 
 import android.app.Application
 import android.content.Context
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.KoinApplication
 import org.koin.core.annotation.KoinInternalApi
 import org.koin.core.logger.Level

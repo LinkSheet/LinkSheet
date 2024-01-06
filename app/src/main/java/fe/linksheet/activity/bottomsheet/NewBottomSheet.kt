@@ -96,7 +96,7 @@ class NewBottomSheet(
     override fun show() {
         val deferred = resolveAsync(bottomSheetViewModel)
         if (bottomSheetViewModel.showLoadingBottomSheet()) {
-            setContent {
+            setContentWithKoin {
                 LaunchedEffect(bottomSheetViewModel.resolveResult) {
                     (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
                         if (result != null) makeResolveToast(
@@ -113,7 +113,7 @@ class NewBottomSheet(
             }
         } else {
             deferred.invokeOnCompletion {
-                setContent { AppThemeBottomSheet(bottomSheetViewModel) }
+                setContentWithKoin { AppThemeBottomSheet(bottomSheetViewModel) }
             }
         }
     }

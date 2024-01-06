@@ -10,6 +10,7 @@ import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.android.startPackageInfoActivity
+import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 
@@ -29,8 +30,8 @@ abstract class BottomSheet(
         bottomSheetActivity.initPadding()
     }
 
-    protected fun setContent(content: @Composable () -> Unit) {
-        bottomSheetActivity.setContent(content = content)
+    protected fun setContentWithKoin(content: @Composable () -> Unit) {
+        bottomSheetActivity.setContentWithKoin(content = content)
     }
 
     protected fun showToast(@StringRes textId: Int, uiThread: Boolean = false) {

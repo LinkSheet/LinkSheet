@@ -23,7 +23,7 @@ import fe.linksheet.composable.util.FilterChips
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
@@ -38,10 +38,10 @@ fun PreferredBrowserSettingsRoute(
 ) {
     val activity = LocalContext.currentActivity()
 
-    val browsers by viewModel.browsers.ioState()
-    val type by viewModel.type.ioState()
-    val browserMode by viewModel.browserModeState.ioState()
-    val selectedBrowser by viewModel.selectedBrowserState.ioState()
+    val browsers by viewModel.browsers.collectOnIO()
+    val type by viewModel.type.collectOnIO()
+    val browserMode by viewModel.browserModeState.collectOnIO()
+    val selectedBrowser by viewModel.selectedBrowserState.collectOnIO()
 
     val rows = remember {
         listOf(

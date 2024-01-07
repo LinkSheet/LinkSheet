@@ -31,7 +31,7 @@ import fe.linksheet.composable.util.SettingEnabledCardColumnCommon
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.mapState
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.log.AppLogger
@@ -46,7 +46,7 @@ fun LogSettingsRoute(
     navController: NavHostController,
     viewModel: LogSettingsViewModel = koinViewModel()
 ) {
-    val files by viewModel.files.ioState()
+    val files by viewModel.files.collectOnIO()
     val mapState = remember(files) {
         mapState(files)
     }

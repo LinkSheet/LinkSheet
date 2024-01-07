@@ -20,7 +20,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.CheckboxRow
 import fe.linksheet.composable.util.mapState
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.extension.compose.updateState
@@ -36,8 +36,8 @@ fun BrowserCommonPackageSelectorRoute(
     navController: NavHostController,
     viewModel: BrowserCommonViewModel,
 ) {
-    val items by viewModel.items.ioState()
-    val filter by viewModel.searchFilter.ioState()
+    val items by viewModel.items.collectOnIO()
+    val filter by viewModel.searchFilter.collectOnIO()
     val mapState = remember(items?.size, filter) {
         mapState(items, filter)
     }

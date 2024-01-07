@@ -34,7 +34,7 @@ import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import org.koin.androidx.compose.koinViewModel
@@ -51,9 +51,9 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 ) {
     val activity = LocalContext.currentActivity()
 
-    val apps by viewModel.appsFiltered.ioState()
-    val filter by viewModel.searchFilter.ioState()
-    val linkHandlingAllowed by viewModel.linkHandlingAllowed.ioState()
+    val apps by viewModel.appsFiltered.collectOnIO()
+    val filter by viewModel.searchFilter.collectOnIO()
+    val linkHandlingAllowed by viewModel.linkHandlingAllowed.collectOnIO()
 
     val listState = remember(apps?.size, filter, linkHandlingAllowed) {
         listState(apps, filter)

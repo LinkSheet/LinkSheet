@@ -32,7 +32,7 @@ import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SettingSpacerText
 import fe.linksheet.extension.compose.enabled
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
 import fe.linksheet.util.cleanHttpsScheme
@@ -45,13 +45,13 @@ fun LibRedirectServiceSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: LibRedirectServiceSettingsViewModel = koinViewModel()
 ) {
-    val service by viewModel.service.ioState()
-    val frontends by viewModel.frontends.ioState()
+    val service by viewModel.service.collectOnIO()
+    val frontends by viewModel.frontends.collectOnIO()
 
-    val selectedFrontend by viewModel.selectedFrontend.ioState()
-    val selectedInstance by viewModel.selectedInstance.ioState()
-    val enabled by viewModel.enabled.ioState()
-    val instances by viewModel.instancesForSelected.ioState()
+    val selectedFrontend by viewModel.selectedFrontend.collectOnIO()
+    val selectedInstance by viewModel.selectedInstance.collectOnIO()
+    val enabled by viewModel.enabled.collectOnIO()
+    val instances by viewModel.instancesForSelected.collectOnIO()
 
     var expanded by remember { mutableStateOf(false) }
 

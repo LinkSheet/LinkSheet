@@ -33,7 +33,7 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
@@ -48,14 +48,14 @@ fun PreferredAppSettingsRoute(
 ) {
     val activity = LocalContext.currentActivity()
 
-    val preferredApps by viewModel.preferredAppsFiltered.ioState()
-    val filter by viewModel.searchFilter.ioState()
+    val preferredApps by viewModel.preferredAppsFiltered.collectOnIO()
+    val filter by viewModel.searchFilter.collectOnIO()
     val listState = remember(preferredApps?.size, filter) {
         listState(preferredApps, filter)
     }
 
     val appsExceptPreferred = if (AndroidVersion.AT_LEAST_API_31_S) {
-        viewModel.appsExceptPreferred.ioState()
+        viewModel.appsExceptPreferred.collectOnIO()
     } else remember { mutableStateOf(listOf()) }
 
     val hostDialog = hostDialog(

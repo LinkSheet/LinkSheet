@@ -33,12 +33,10 @@ import fe.linksheet.composable.util.*
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.extension.compose.onStateChange
+import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.ioState
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -64,42 +62,23 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
     val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
-    var refreshing by remember { mutableStateOf(false) }
-    val scope = rememberCoroutineScope()
-
+    val refreshing by viewModel.refreshing.collectAsState()
     val shizukuPermission by rememberHasShizukuPermissionAsState()
 
     val shizukuMode = shizukuInstalled && shizukuRunning && shizukuPermission
 
-    val fetch: suspend (Boolean) -> Unit = { fetchRefresh ->
-        if (fetchRefresh) {
-            refreshing = true
-        }
-
-        viewModel.refreshing.value = true
-
-        if (fetchRefresh) {
-            delay(100)
-            refreshing = false
-        }
+    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(invokeOnCall = true) {
+        viewModel.refresh()
     }
 
-    LocalLifecycleOwner.current.lifecycle.onStateChange(fireOnFirst = true) {
-        fetch(false)
-    }
-
-    val fetchInScope: () -> Unit = {
-        scope.launch { fetch(true) }
-    }
-
-    val state = rememberPullRefreshState(refreshing, onRefresh = fetchInScope)
+    val state = rememberPullRefreshState(refreshing, onRefresh = viewModel::refresh)
 
     fun postCommand(packageName: String) {
         viewModel.app.postShizukuCommand {
             disableLinkHandling(packageName, !linkHandlingAllowed)
         }
 
-        fetchInScope()
+        viewModel.refresh()
     }
 
     fun openDefaultSettings(info: DisplayActivityInfo) {

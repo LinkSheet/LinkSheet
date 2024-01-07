@@ -21,14 +21,13 @@ import fe.linksheet.ui.Typography
 
 
 @Composable
-fun OpenCopiedLink(uri: Uri, sheetOpen: () -> Unit) {
+fun OpenCopiedLink(uri: Uri) {
     val context = LocalContext.current
     OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
             .clickable {
-                sheetOpen()
                 context.startActivity(Intent(Intent.ACTION_VIEW, uri))
             },
         shape = RoundedCornerShape(12.dp)

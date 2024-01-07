@@ -23,7 +23,7 @@ import fe.linksheet.composable.util.RowInfoCard
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.compose.onStateChange
+import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.androidx.compose.koinViewModel
@@ -36,7 +36,7 @@ fun BottomSheetSettingsRoute(
     viewModel: BottomSheetSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.currentActivity()
-    LocalLifecycleOwner.current.lifecycle.onStateChange {
+    LocalLifecycleOwner.current.lifecycle.ObserveStateChange {
         if (!viewModel.getUsageStatsAllowed(context)) {
             viewModel.updateState(viewModel.usageStatsSorting, false)
         } else if (viewModel.wasTogglingUsageStatsSorting) {

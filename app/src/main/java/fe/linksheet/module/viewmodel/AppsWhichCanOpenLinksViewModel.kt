@@ -62,6 +62,10 @@ class AppsWhichCanOpenLinksViewModel(
             .sortedWith(DisplayActivityInfo.labelComparator)
     }
 
+    fun refresh() {
+        refreshing.value = true
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
     fun makeOpenByDefaultSettingsIntent(activityInfo: DisplayActivityInfo): Intent {
         return getAppOpenByDefaultIntent(activityInfo.packageName)

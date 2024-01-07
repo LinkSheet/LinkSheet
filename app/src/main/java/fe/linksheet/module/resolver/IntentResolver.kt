@@ -36,6 +36,7 @@ import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
+import fe.linksheet.util.UriUtil
 
 class IntentResolver(
     val context: Context,
@@ -273,7 +274,7 @@ class IntentResolver(
             return BottomSheetResult.BottomSheetNoHandlersFound(uri)
         }
 
-        val browserMode = if (BrowserResolver.isSchemeTypicallySupportedByBrowsers(newIntent)) {
+        val browserMode = if (UriUtil.hasWebScheme(newIntent)) {
             val (mode, selected, repository) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)

@@ -12,10 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -26,14 +23,16 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
+import fe.linksheet.extension.compose.ObserveStateChange
+import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.header
-import fe.linksheet.extension.compose.onStateChange
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.util.AppSignature
 import fe.linksheet.util.Results
+import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
@@ -48,12 +47,10 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
     var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
-    var sheetOpen by remember { mutableStateOf<Uri?>(null) }
     val useTime = viewModel.formatUseTime()
 
-    val browserStatus by remember {
-        mutableStateOf(viewModel.hasBrowser())
-    }
+    var clipboardUri by remember { mutableStateOf(getClipboardUrl(clipboardManager)) }
+    val browserStatus by remember { mutableStateOf(viewModel.hasBrowser()) }
 
     LaunchedEffect(Unit) {
         delay(200)
@@ -66,16 +63,18 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
         }
     }
 
-    LocalLifecycleOwner.current.lifecycle.onStateChange(
-        state = setOf(Lifecycle.Event.ON_RESUME, Lifecycle.Event.ON_START)
+    LocalWindowInfo.current.OnFocused {
+        clipboardUri = getClipboardUrl(clipboardManager)
+    }
+
+    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(
+        observeEvents = setOf(Lifecycle.Event.ON_RESUME, Lifecycle.Event.ON_START)
     ) {
         defaultBrowserEnabled = Results.loading()
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 
         shizukuInstalled = ShizukuUtil.isShizukuInstalled(activity)
         shizukuRunning = ShizukuUtil.isShizukuRunning()
-
-        sheetOpen = null
     }
 
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
@@ -155,16 +154,9 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 BrowserCard(browserStatus = browserStatus)
             }
 
-            // sheetOpen is used to avoid the card flickering since clipboardManager.hasText() returns null once the activity looses focus
-            if (clipboardManager.hasText() || sheetOpen != null) {
-                val item = clipboardManager.getText()?.text ?: return@LazyColumn
-                val uri = kotlin.runCatching { Uri.parse(item) }.getOrNull()
-                if (uri?.scheme != null || sheetOpen != null) {
-                    cardItem {
-                        OpenCopiedLink(uri = uri ?: sheetOpen!!, sheetOpen = {
-                            sheetOpen = uri
-                        })
-                    }
+            if (clipboardUri != null) {
+                cardItem {
+                    OpenCopiedLink(uri = clipboardUri!!)
                 }
             }
 
@@ -192,7 +184,11 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
     }
 }
 
-fun LazyListScope.cardItem(
+private fun getClipboardUrl(clipboardManager: ClipboardManager): Uri? {
+    return clipboardManager.getText()?.text?.let { text -> UriUtil.parseWebUri(text) }
+}
+
+private fun LazyListScope.cardItem(
     @StringRes header: Int? = null,
     height: Dp = 10.dp,
     content: @Composable LazyItemScope.() -> Unit

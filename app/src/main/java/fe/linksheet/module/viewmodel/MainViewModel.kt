@@ -18,8 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
-import fe.linksheet.module.preference.AppPreferenceRepository
-
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState
 import fe.linksheet.BuildConfig
@@ -28,6 +26,7 @@ import fe.linksheet.R
 import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.FeatureFlagRepository
 import fe.linksheet.module.preference.FeatureFlags

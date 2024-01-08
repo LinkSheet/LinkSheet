@@ -26,4 +26,17 @@
     <string name="open_with_app">%sで開く</string>
     <string name="opening_with_app">%sで開きます</string>
     <string name="preferred_apps_settings">優先アプリの設定</string>
+    <string name="apps_which_can_open_links">リンクを開くことができるアプリ</string>
+    <string name="apps_which_can_open_links_explainer_2">LinkSheetの動作を妨げる可能性があるアプリを全てリストします</string>
+    <string name="no_preferred_apps_set_yet">まだ優先として設定されているアプリはありません。</string>
+    <string name="search">検索</string>
+    <string name="copy_url">URLをコピー</string>
+    <string name="enable_copy_button">コピーボタンを有効</string>
+    <string name="single_tap_explainer">アプリを開くのに必要なタップは２回ではなく１回だけです。 長押ししてアプリを選択し、ダブルクリックしてアプリ情報を開きます</string>
+    <string name="confirm">確認</string>
+    <string name="clear">消去</string>
+    <string name="apps_which_can_open_links_explainer">アプリをタップして「デフォルトで開く」メニューを開き、リンクの自動オープンを無効に出来ます</string>
+    <string name="enable_copy_button_explainer">下部に「URLをコピー」ボタンを表示します</string>
+    <string name="url_copied">URLがクリップボードにコピーされました</string>
+    <string name="single_tap">シングルタップを有効</string>
 </resources>

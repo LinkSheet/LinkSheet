@@ -44,7 +44,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 data class HostDialogState(
     val displayActivityInfo: DisplayActivityInfo,
-    val hosts: MutableCollection<String> = mutableSetOf()
+    val hosts: Collection<String> = mutableSetOf()
 )
 
 data class HostDialogCloseState(

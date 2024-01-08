@@ -6,7 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import fe.kotlin.extension.findWithIndexOrNull
+import fe.kotlin.extension.iterable.findWithIndexOrNull
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.extension.android.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit

@@ -6,6 +6,7 @@ com-android-application = { id = "com.android.application", version = "8.1.2" }
 
 com-android-library = { id = "com.android.library", version = "8.1.2" }
 
+# Compose 1.5.7 requires Kotlin 1.9.21
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.21" }
 
 net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.0.0" }
@@ -17,6 +18,7 @@ gradle = { id = "gradle", version = "8.1.1" }
 [versions]
 
 kotlin = "1.9.21"
+##  ⬆ = "1.9.22"
 ##  ⬆ = "2.0.0-Beta1"
 ##  ⬆ = "2.0.0-Beta2"
 

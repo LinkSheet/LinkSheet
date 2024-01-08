@@ -1,9 +1,8 @@
 package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
+import fe.kotlin.extension.map.filterIf
 import fe.linksheet.module.preference.AppPreferenceRepository
-
-import fe.kotlin.extension.filterIf
 import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow

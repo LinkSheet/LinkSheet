@@ -1,6 +1,5 @@
 package fe.linksheet
 
-import androidx.annotation.StringRes
 import fe.linksheet.util.AppSignature
 
 const val openLinkWithGithub = "https://github.com/tasomaniac/OpenLinkWith"

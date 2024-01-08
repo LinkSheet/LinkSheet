@@ -9,16 +9,13 @@ import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
 import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
+import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
-import fe.clearurlskt.clearUrl
-import fe.fastforwardkt.getRuleRedirect
-import fe.fastforwardkt.isTracker
 import fe.linksheet.R
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
-import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.HashProcessor
@@ -37,6 +34,7 @@ import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
+import fe.fastforwardkt.*
 
 class IntentResolver(
     val context: Context,
@@ -187,7 +185,7 @@ class IntentResolver(
                 followRedirectsLocalCache.value,
                 followRedirectsBuiltInCache.value,
                 { url ->
-                    (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || isTracker(
+                    (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || FastForward.isTracker(
                         url
                     )
                 },
@@ -367,7 +365,9 @@ class IntentResolver(
 
             runCatching {
                 if (fastForward) {
-                    getRuleRedirect(url)?.let { url = it }
+//                    FastForwardRules.
+
+                    FastForward.getRuleRedirect(url)?.let { url = it }
                 }
             }.onFailure { logger.debug(it, "FastForward") }
 
@@ -375,7 +375,7 @@ class IntentResolver(
 
             runCatching {
                 if (clearUrl) {
-                    url = clearUrl(url, clearUrlProviders)
+                    url = ClearURL.clearUrl(url, clearUrlProviders)
                 }
             }.onFailure { logger.debug(it, "ClearUrls") }
 

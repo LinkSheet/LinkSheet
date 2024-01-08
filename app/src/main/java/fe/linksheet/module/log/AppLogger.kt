@@ -3,10 +3,10 @@ package fe.linksheet.module.log
 import android.content.Context
 import com.google.gson.JsonObject
 import fe.gson.dsl.jsonObject
-import fe.kotlin.extension.decodeBase64Throw
-import fe.kotlin.extension.encodeBase64Throw
-import fe.kotlin.extension.unixMillis
-import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.extension.primitive.unixMillisUtc
+import fe.kotlin.extension.string.decodeBase64Throw
+import fe.kotlin.extension.string.encodeBase64Throw
+import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.util.SingletonHolder
 import fe.stringbuilder.util.buildSeparatedString

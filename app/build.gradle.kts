@@ -190,6 +190,16 @@ android {
     }
 }
 
+//gradle.taskGraph.whenReady {
+//    allTasks.filter { it.hasProperty("duplicatesStrategy") }.forEach {
+//        it.setProperty("duplicatesStrategy", "EXCLUDE")
+//    }
+//}
+
+//tasks.getByName("classes") {
+//    duplic
+//}
+
 dependencies {
     implementation(platform(AndroidX.compose.bom))
     implementation(AndroidX.compose.ui.graphics)

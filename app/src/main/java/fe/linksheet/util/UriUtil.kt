@@ -3,7 +3,7 @@ package fe.linksheet.util
 import android.content.Intent
 import android.net.Uri
 import android.util.Patterns
-import fe.kotlin.extension.mapToSet
+import fe.kotlin.extension.iterable.mapToSet
 
 object UriUtil {
     private val webSchemeIntents: Set<Intent> = setOf("http", "https").mapToSet {

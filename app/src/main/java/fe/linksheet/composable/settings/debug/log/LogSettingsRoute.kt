@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.android.compose.route.util.navigate
-import fe.kotlin.extension.localizedString
+import fe.kotlin.extension.time.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold

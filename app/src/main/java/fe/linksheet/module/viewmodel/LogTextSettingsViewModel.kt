@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.ClipboardManager
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import fe.kotlin.extension.unixMillis
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.linksheet.LogTextViewerRoute
@@ -13,7 +12,6 @@ import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.flow.map
-import java.time.LocalDateTime
 
 class LogTextSettingsViewModel(
     context: Application,

@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.android.compose.dialog.helper.dialogHelper
-import fe.kotlin.extension.localizedString
-import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.extension.primitive.unixMillisUtc
+import fe.kotlin.extension.time.localizedString
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow

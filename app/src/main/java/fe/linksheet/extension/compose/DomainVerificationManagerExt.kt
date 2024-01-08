@@ -5,7 +5,7 @@ import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
-import fe.kotlin.extension.filterIfPredicateIsNotNull
+import fe.kotlin.extension.iterable.filterIfPredicateIsNotNull
 import fe.kotlin.`typealias`.KtPredicate
 import fe.linksheet.extension.android.queryAllResolveInfos
 import fe.linksheet.extension.android.toDisplayActivityInfos

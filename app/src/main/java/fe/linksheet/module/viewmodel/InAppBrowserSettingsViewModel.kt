@@ -4,7 +4,7 @@ import android.app.Application
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.android.preference.helper.compose.getState
-import fe.kotlin.extension.mapToSet
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.extension.android.queryAllResolveInfos
 import fe.linksheet.extension.android.toDisplayActivityInfos

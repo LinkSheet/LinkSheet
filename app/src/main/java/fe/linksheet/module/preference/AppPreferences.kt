@@ -5,7 +5,6 @@ import com.google.gson.JsonArray
 import fe.android.preference.helper.Preferences
 import fe.gson.dsl.jsonArray
 import fe.gson.dsl.jsonObject
-import fe.kotlin.extension.toHexString
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.PackageProcessor
 import fe.linksheet.module.log.loggerHmac
@@ -87,6 +86,7 @@ object AppPreferences : Preferences() {
     val showLinkSheetAsReferrer = booleanPreference("show_as_referrer", false)
     val devModeEnabled = booleanPreference("dev_mode_enabled", false)
 
+    @OptIn(ExperimentalStdlibApi::class)
     @SensitivePreference
     val logKey = stringPreference("log_key") {
         CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()

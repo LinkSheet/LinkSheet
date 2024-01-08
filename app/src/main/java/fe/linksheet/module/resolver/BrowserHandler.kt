@@ -2,9 +2,9 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 import fe.android.preference.helper.OptionTypeMapper
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.preference.AppPreferenceRepository
 
-import fe.kotlin.extension.mapToSet
 import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao

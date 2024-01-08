@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import fe.kotlin.extension.forEachWithInfo
+import fe.kotlin.extension.iterable.forEachWithInfo
 import fe.libredirectkt.LibRedirectService
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject

@@ -5,15 +5,14 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.linksheet.module.preference.AppPreferenceRepository
-
-import fe.kotlin.extension.filterIf
-import fe.kotlin.extension.groupByNoNullKeys
-import fe.kotlin.extension.mapToSet
+import fe.kotlin.extension.iterable.filterIf
+import fe.kotlin.extension.iterable.groupByNoNullKeys
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
+import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -61,7 +60,7 @@ class PreferredAppSettingsViewModel(
 
     fun getHostStateAsync(
         displayActivityInfo: DisplayActivityInfo,
-        hosts: MutableCollection<String>
+        hosts: Collection<String>
     ) = ioAsync {
         val hostState = mutableMapOf<String, Boolean>()
         val hasAppHosts = if (AndroidVersion.AT_LEAST_API_31_S) {

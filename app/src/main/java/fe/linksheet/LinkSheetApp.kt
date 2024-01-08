@@ -105,7 +105,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
 
-        kotlin.runCatching {
+        runCatching {
             val preferenceRepository = get<AppPreferenceRepository>()
             val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
             val usedFor = timer.stop()

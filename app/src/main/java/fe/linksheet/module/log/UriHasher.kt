@@ -1,7 +1,7 @@
 package fe.linksheet.module.log
 
 import fe.kotlin.extension.asString
-import fe.kotlin.extension.forEachWithInfo
+import fe.kotlin.extension.iterable.forEachWithInfo
 import fe.linksheet.extension.appendHashed
 import fe.linksheet.extension.appendHashedTrim
 import fe.uribuilder.UriParseResult
@@ -118,7 +118,7 @@ private fun StringBuilder.parse(uri: UriParseResult.ParsedUri, mac: Mac) {
         append("?")
 
         val query = buildString {
-            uri.formatQuery(this, uri.queryParams, uri.charset, false)
+            uri.formatQuery(this, uri.queryParams, uri.charset)
         }
 
         query.split("&").forEach {

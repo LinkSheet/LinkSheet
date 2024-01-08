@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver
 
 import android.net.Uri
 import fe.android.preference.helper.OptionTypeMapper
-import fe.kotlin.extension.mapToSet
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import kotlinx.coroutines.flow.first
 

@@ -33,16 +33,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.android.compose.dialog.helper.dialogHelper
-import fe.kotlin.extension.localizedString
-import fe.kotlin.extension.unixMillis
-import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.extension.primitive.unixMillisUtc
+import fe.kotlin.extension.time.localizedString
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.module.log.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
@@ -55,8 +54,8 @@ fun LogTextSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: LogTextSettingsViewModel = koinViewModel(),
 ) {
-    val timestamp by viewModel.timestamp.ioState()
-    val logEntries by viewModel.logEntries.ioState()
+    val timestamp by viewModel.timestamp.collectOnIO()
+    val logEntries by viewModel.logEntries.collectOnIO()
     val listState = remember(logEntries?.size) {
         listState(logEntries)
     }

@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.android.compose.route.util.navigate
-import fe.kotlin.extension.localizedString
+import fe.kotlin.extension.time.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
@@ -31,7 +31,7 @@ import fe.linksheet.composable.util.SettingEnabledCardColumnCommon
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.mapState
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.log.AppLogger
@@ -46,7 +46,7 @@ fun LogSettingsRoute(
     navController: NavHostController,
     viewModel: LogSettingsViewModel = koinViewModel()
 ) {
-    val files by viewModel.files.ioState()
+    val files by viewModel.files.collectOnIO()
     val mapState = remember(files) {
         mapState(files)
     }

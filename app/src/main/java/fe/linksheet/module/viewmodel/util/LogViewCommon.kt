@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel.util
 
 import android.os.Build
 import fe.gson.dsl.jsonObject
-import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.module.log.LogEntry

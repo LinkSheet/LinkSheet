@@ -48,7 +48,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.fastforwardkt.FastForwardRules
-import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig

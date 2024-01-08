@@ -1,21 +1,15 @@
 package fe.linksheet.composable.settings.browser.inapp
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.settings.browser.BrowserCommonPackageSelectorData
-import fe.linksheet.composable.settings.browser.BrowserCommonPackageSelectorRoute
 import fe.linksheet.composable.settings.browser.BrowserCommonRadioButtonRowData
 import fe.linksheet.composable.settings.browser.BrowserCommonScaffold
-import fe.linksheet.extension.ioState
 import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
-import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
-import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.whitelistedBrowsersSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

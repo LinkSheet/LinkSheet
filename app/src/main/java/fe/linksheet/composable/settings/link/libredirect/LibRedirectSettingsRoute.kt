@@ -26,7 +26,7 @@ import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.ioState
+import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -41,7 +41,7 @@ fun LibRedirectSettingsRoute(
     navController: NavController,
     viewModel: LibRedirectSettingsViewModel = koinViewModel()
 ) {
-    val services by viewModel.services.ioState()
+    val services by viewModel.services.collectOnIO()
 
     val listState = remember(services?.size) {
         listState(services)

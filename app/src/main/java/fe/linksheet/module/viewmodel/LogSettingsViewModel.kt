@@ -1,13 +1,10 @@
 package fe.linksheet.module.viewmodel
 
-import android.util.Log
-import fe.linksheet.module.preference.AppPreferenceRepository
-
-import fe.kotlin.extension.localizedString
-import fe.kotlin.extension.unixMillis
-import fe.kotlin.extension.unixMillisUtc
+import fe.kotlin.extension.primitive.unixMillisUtc
+import fe.kotlin.extension.time.localizedString
 import fe.linksheet.extension.android.ioLaunch
 import fe.linksheet.module.log.AppLogger
+import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 

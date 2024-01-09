@@ -87,7 +87,7 @@ fun LogSettingsRoute(
                 noItems = R.string.no_logs_found,
                 mapState = mapState,
                 map = files,
-                listKey = { it },
+                listKey = { files[it]!! },
             ) { fileName, timestamp ->
                 DividedRow(
                     paddingHorizontal = 10.dp,

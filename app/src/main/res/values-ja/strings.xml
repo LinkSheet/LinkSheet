@@ -39,4 +39,19 @@
     <string name="enable_copy_button_explainer">下部に「URLをコピー」ボタンを表示します</string>
     <string name="url_copied">URLがクリップボードにコピーされました</string>
     <string name="single_tap">シングルタップを有効</string>
+    <string name="usage_stats_sorting">用途別にアプリを並べ替え</string>
+    <string name="usage_stats_sorting_explainer">Androidシステムの使用状況を並べ替えアルゴリズムに含めます。 最初の切り替え時に許可が要求されます。</string>
+    <string name="preferred_browser">優先ブラウザ</string>
+    <string name="preferred_browser_explainer">優先ブラウザモードを設定</string>
+    <string name="always_ask">常に聞く</string>
+    <string name="none">無し</string>
+    <string name="none_explainer">ネイティブアプリのみをリストし、全てのブラウザを削除します。 ネイティブアプリが１つだけ存在する場合、それが自動的に開きます。 ネイティブアプリが存在しない場合は、全てのブラウザがリストされます。</string>
+    <string name="always_ask_explainer">常に全てのブラウザをリスト</string>
+    <string name="no_app_to_handle_link_found">リンクを処理するアプリが見つかりません！</string>
+    <string name="open_settings">設定を開く</string>
+    <string name="no_such_app_found">そのようなアプリは見つかりませんでした！</string>
+    <string name="enable_send_button">「共有先」ボタンを有効</string>
+    <string name="enable_send_button_explainer">下のシートにボタンが表示され、「共有先」メニューから他のアプリにURLを共有出来ます</string>
+    <string name="send_to">共有先</string>
+    <string name="preferred_apps_explainer">優先アプリは、特定のホストを「常に」開くように設定したアプリです</string>
 </resources>

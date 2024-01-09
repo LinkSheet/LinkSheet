@@ -4,11 +4,12 @@ import android.net.Uri
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.dao.PreferredAppDao
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 
 class PreferredAppRepository(private val dao: PreferredAppDao) {
     fun getAllAlwaysPreferred() = dao.getAllAlwaysPreferred()
 
-    suspend fun getByHost(uri: Uri?) = uri?.let { dao.getByHost(it.host!!).first() }
+    suspend fun getByHost(uri: Uri?) = uri?.let { dao.getByHost(it.host!!).firstOrNull() }
 
     suspend fun deleteByPackageName(packageName: String) = dao.deleteByPackageName(packageName)
 

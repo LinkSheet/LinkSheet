@@ -527,4 +527,6 @@
     <string name="telemetry_configure_type"></string>
     <string name="telemetry_configure_title"></string>
     <string name="telemetry_dialog_title"></string>
+    <string name="apps_which_can_open_links"></string>
+    <string name="preferred_apps_settings"></string>
 </resources>

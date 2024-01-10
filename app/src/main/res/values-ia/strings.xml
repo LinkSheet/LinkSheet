@@ -527,4 +527,6 @@
     <string name="external"></string>
     <string name="onboarding_5_subtitle"></string>
     <string name="share"></string>
+    <string name="apps_which_can_open_links"></string>
+    <string name="preferred_apps_settings"></string>
 </resources>

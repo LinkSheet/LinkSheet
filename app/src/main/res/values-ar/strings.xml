@@ -66,7 +66,7 @@
     <string name="about_explainer">حول هذا التطبيق ، التراخيص</string>
     <string name="whitelisted">مدرج في القائمة البيضاء</string>
     <string name="apps_explainer">التطبيقات المفضلة والتطبيقات التي يمكنها فتح الروابط</string>
-    <string name="version">الإصدار</string>
+    <string name="version">إصدار ورقة الروابط</string>
     <string name="error">خطأ</string>
     <string name="bottom_sheet_explainer">الفرز حسب الاستخدام ، وتمكين زر النسخ ، وتمكين زر المشاركة وما إلى ذلك.</string>
     <string name="about">حول التطبيق</string>
@@ -75,11 +75,11 @@
     <string name="credits_explainer">ترخيص مفتوح المصدر</string>
     <string name="license_gpl_3">رخصة جنو العمومية v3.0</string>
     <string name="use_app_settings_explainer">السماح للتطبيق بتحديد ما إذا كان يجب استخدام المتصفح داخل التطبيق أم لا</string>
-    <string name="donate_crypto">تبرّع</string>
+    <string name="donate_crypto">تبرّع عبر العملات الرقمية</string>
     <string name="open_copied_link">افتح الرابط المنسوخ</string>
     <string name="seal">ختم</string>
     <string name="github_explainer">مستودع التعليمات البرمجية</string>
-    <string name="donate_explainer">تبرع للمؤلف باستخدام بطاقة الائتمان أو الخصم</string>
+    <string name="donate_explainer">إذا كنت ترغب في التبرع والمطالبة بـ <b>LinkSheet Pro</b></string>
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
     <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
@@ -208,9 +208,9 @@
     <string name="enable_shizuku">تفعيل تكامل شيزوكو (التجريبي)</string>
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
     <string name="advanced">متقدم</string>
-    <string name="advanced_explainer">الميزات المتقدمة مثل أعلام الميزات</string>
+    <string name="advanced_explainer">الإعدادات المتقدمة مثل علامات الميزات والتصدير/الاستيراد</string>
     <string name="shizuku_explainer">شيزوكو يسمح لورقة الروابط بالتفاعل مباشرة مع واجهة روابط النظام</string>
-    <string name="enable_shizuku_explainer">مفعل سيسمح هذا لورقة اللروابط باستخدام شيزوكو للتفاعل مع واجهات برمجة تطبيقات النظام مباشرة. يمكن استخدام هذا ، على سبيل المثال ، لتعطيل كافة معالجات الروابط تلقائيًا.</string>
+    <string name="enable_shizuku_explainer">سيؤدي تمكين هذا إلى السماح لـ LinkSheet باستخدام Shizuku للتفاعل مع واجهات برمجة تطبيقات النظام مباشرةً. يمكن استخدام هذا، على سبيل المثال، لتعطيل كافة معالجات الارتباط تلقائيًا. سيظهر خيار جديد على شاشة التطبيق الرئيسية.</string>
     <string name="mastodon_redirect">إعادة توجيه Mastodon</string>
     <string name="license_mit">ترخيص MIT</string>
     <string name="shizuku_integration">دمج شيزوكو</string>
@@ -231,7 +231,7 @@
     <string name="background_image">صورة الخلفية</string>
     <string name="onboarding2_headline">الكثير من الإعدادات
 \nلجعل ورقة الروابط</string>
-    <string name="welcome_to_linksheet_explainer">يستعيد ورقة الروابط \"url-app-chooser\" الذي يظهر عندما ينقر المستخدم على رابط لإصدارات اندرويد &lt;12 كان لديه عدة تطبيقات مثبتة يمكنها التعامل مع الرابط.</string>
+    <string name="welcome_to_linksheet_explainer">يستعيد ورقة الروابط \"url-app-chooser\" الذي يظهر عندما ينقر المستخدم على رابط لإصدارات اندرويد &lt;12 كان لديه عدة تطبيقات مثبتة يمكنها التعامل مع الرابط</string>
     <string name="welcome_to_linksheet_explainer_2">لكي تعمل ورقة الروابط ، يجب تعيينها كمتصفح الأنظمة ، حتى تتمكن من اعتراض نقرات الارتباط. لا تقلق ، تحتوي ورقة الروابط على الكثير من خيارات التخصيص ، لذا لن يحد ذلك من تجربتك ، بل سيعززها.</string>
     <string name="set_as_default_browser">تم تعيينه كالمتصفح الافتراضي</string>
     <string name="onboarding0_headline">حان الوقت لإستعادة</string>
@@ -294,7 +294,7 @@
     <string name="import_and_override">استيراد وتجاوز</string>
     <string name="import_dumped_preference">استيراد التفضيلات الملقاة</string>
     <string name="import_dumped_preference_explainer">أداة استيراد التفضيلات الموجودة في ملفات السجلات - ربما لا تكون مفيدة للمستخدم العادي</string>
-    <string name="version_name">المعرف:</string>
+    <string name="version_name">المعرف الكامل:</string>
     <string name="built_at">بنيت في (التوقيت العالمي المنسق):</string>
     <string name="github_workflow_run_id">معرف بناء سير العمل:</string>
     <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
@@ -304,11 +304,102 @@
     <string name="show_linksheet_referrer_explainer">عند تشغيل تطبيق ما، يمكنه التحقق لمعرفة التطبيق الذي تم تشغيله أو \"إحالته\". افتراضيًا، عندما يقوم تطبيق ورقة الروابط بتشغيل تطبيق ما، فإنه يخفي نفسه، قائلاً إن التطبيق الذي قام بتشغيل ورقة الروابط هو الذي قام بتشغيل الهدف. قم بتمكين هذا لإعادة إدراج ورقة الروابط كمرجع للتطبيقات التي يفتحها.</string>
     <string name="thanks_for_donating">شكراً على التبرع!</string>
     <string name="dismiss">تجاهل</string>
-    <string name="donate_explainer_crypto">للمطالبة بـ النسخة المدفوعة لورقة الروابط، تبرع بمبلغ 5 يورو أو أكثر وأرسل إثبات الدفع إلى <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_explainer_crypto">عند التبرع بالعملات المشفرة، للمطالبة بـ <b>LinkSheet Pro</b>، أرسل إثبات الدفع إلى <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="join">انضمام</string>
     <string name="discord">ديسكورد</string>
     <string name="discord_explainer">تعال للدردشة على خادم ديسكورد الخاص بنا! قم بالدردشة مع مستخدمي ومطوري ورقة الروابط حول مستقبله ومساعيه الأخرى!</string>
-    <string name="donate_card">بالبطاقة</string>
-    <string name="donate_card_subtitle">مرحبًا يا من هناك! لقد قمت بالفعل باستخدام ورقة الروابط لـ %s! لوضع ذلك في الاعتبار، استغرق التطوير أكثر من <b>%s ساعة</b> على مدار %s شهرًا. إذا كنت تحب ورقة الروابط، فكر في ترك نجمة على Github و/أو التبرع.
-\nإذا تبرعت عبر العملات المشفرة، للمطالبة بالنسخة المدفوعة لورقة الروابط، تبرع بمبلغ 5 يورو أو أكثر وأرسل إثبات الدفع إلى <annotation url="mailto://1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_card">التبرع بالبطاقة (عبر BuyMeACoffee)</string>
+    <string name="donate_card_subtitle"> إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع.
+\nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
+    <string name="copy_version_information">نسخ معلومات الإصدار</string>
+    <string name="dev">المطور</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="notifications_explainer">تكوين الإشعارات المنبثقة</string>
+    <string name="url_copied_toast">اخطار العنوان المنسوخ</string>
+    <string name="download_started_toast">بدأ التنزيل نخب</string>
+    <string name="download_started_toast_explainer">أظهر نخبًا عند بدء التنزيل</string>
+    <string name="resolve_via_toast">أظهر نخبًا عند حل عنوان URL</string>
+    <string name="resolve_via_toast_explainer">أظهر نخبًا عندما يتم حل عنوان URL عبر خدمة خارجية</string>
+    <string name="resolve_via_failed_toast">أظهر نخبًا عند فشل الحل</string>
+    <string name="fastforward_version">قواعد التقديم السريع</string>
+    <string name="opening_with_app_toast">إظهار نخب عند تشغيل التطبيق تلقائيًا</string>
+    <string name="clear_urls_version">تنظيف قواعد الروابط</string>
+    <string name="cached_urls_version">عناوين URL المخزنة مؤقتًا المضمنة</string>
+    <string name="last_updated">آخر تحديث (UTC):</string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">تمكين القائمة التجريبية لورقة الروابط المضغوطة</string>
+    <string name="built_by">تم البناء والتوقيع من قبل</string>
+    <string name="linksheet_donation_explainer">تعد ورقة الروابط نتيجة لأكثر من <b>%s</b> من العمل على مدى أكثر من <b>%s</b>. إذا كنت ترغب في إظهار بعض التقدير لعملي، فيرجى التبرع.</string>
+    <string name="type">النوع:</string>
+    <string name="app_setup">إعداد التطبيق</string>
+    <string name="other">أخرى</string>
+    <string name="enable_new_bottom_sheet">تمكين الورقة السفلية الجديدة</string>
+    <string name="enable_new_bottom_sheet_explainer">استخدم الورقة السفلية المعاد صياغتها بدلاً من الورقة القديمة</string>
+    <string name="new_bottomsheet">ورقة سفلية جديدة</string>
+    <string name="donate_learn_more">التعرف على المزيد</string>
+    <string name="donate">تبرَّع</string>
+    <string name="commit">الالتزام:</string>
+    <string name="branch">الفرع:</string>
+    <string name="github_pipeline_build">تم إنشاؤه وتوقيعه بواسطة سير عمل Github</string>
+    <string name="flavor">النكهة:</string>
+    <plurals name="minutes">
+        <item quantity="zero">%s دقيقة</item>
+        <item quantity="one">%s دقيقة</item>
+        <item quantity="two">%s دقيقتان</item>
+        <item quantity="few">%s دقيقة</item>
+        <item quantity="many">%s دقائق</item>
+        <item quantity="other">%s دقيقة</item>
+    </plurals>
+    <string name="shizuku_manager_start_failed">فشل في بدء مدير شيزوكو، من فضلك بدء تشغيله يدويا!</string>
+    <string name="built_by_error">لم يتم التوقيع على هذا الإصدار بواسطة 1fexd ولا سير عمل Github. هذا لا يعني بالضرورة أي شيء سيئ، حيث يمكن لأي شخص إجراء تفرع للكود المصدري وإنشاء إصدار LinkSheet الخاص به، لكنه قد يفعل ذلك بنية خبيثة.</string>
+    <string name="donate_other">إذا كنت ترغب في التبرع بطريقة أخرى (تحويل SEPA، أو PayPal، أو أي عملة مشفرة أخرى، وما إلى ذلك)، فأرسل أيضًا بريدًا إلكترونيًا إلى <annotation url="mailto:1 fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="debug_build">بناء تطوير</string>
+    <string name="dev_mode_enabled">تهانينا، لقد قمت بتمكين وضع التطوير. فقط كن حذرا.</string>
+    <string name="opening_with_app_toast_explainer">قم بإظهار نخب عند تشغيل التطبيق الذي تم تعيينه كإعداد افتراضي للمجال</string>
+    <string name="resolve_via_failed_toast_explainer">أظهر نخبًا عندما يفشل حل عنوان URL عبر خدمة خارجية</string>
+    <string name="donation">التبرع</string>
+    <string name="dev_explainer">إعدادات المطور</string>
+    <string name="url_copied_toast_explainer">إظهار نخب عندما يقوم المستخدم بنسخ عنوان URL</string>
+    <string name="just_version">الإصدار</string>
+    <string name="enable_linksheet_compat_explainer">يمكن العثور على القائمة في القائمة الفرعية \"التطبيقات\"، وعند تثبيتها، تكون قادرا على اعتراض الطلبات لبعض التطبيقات المحلية.</string>
+    <string name="running_unofficial_build">بناء غير الرسمي</string>
+    <string name="disclaimer_libredirect_unstable">بالإضافة إلى كونها ميزة تجريبية، تعتبر LibRedirect حاليًا غير مستقرة جدًا وقد لا تعمل على الإطلاق.</string>
+    <string name="new_bottomsheet_explainer">يتميز هذا الإصدار من ورقة الروابط بورقة سفلية جديدة بفضل <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! يرجى تقديم تعليقات على Discord أو Github أو عبر البريد الإلكتروني.
+\n
+\nيمكنك العودة إلى الصفحة السفلية القديمة عبر الإعدادات -&gt; متقدم -&gt; أعلام مميزة.</string>
+    <plurals name="hours">
+        <item quantity="zero">%s ساعة</item>
+        <item quantity="one">%s ساعة</item>
+        <item quantity="two">%s ساعات</item>
+        <item quantity="few">%s ساعة</item>
+        <item quantity="many">%s ساعات</item>
+        <item quantity="other">%s ساعة</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="zero">%s شهر</item>
+        <item quantity="one">%s شهر</item>
+        <item quantity="two">%s شهران</item>
+        <item quantity="few">%s شهر</item>
+        <item quantity="many">%s اشهر</item>
+        <item quantity="other">%s شهر</item>
+    </plurals>
+    <string name="export_import_settings">إعدادات التصدير أو الاستيراد</string>
+    <string name="export_import_settings_explainer">تصدير إعداداتك الحالية أو استيراد تصدير الإعدادات السابقة</string>
+    <string name="export_explainer">يصدّر اعدادات تطبيقك الحالي إلى ملف</string>
+    <string name="import_headline">استيراد</string>
+    <string name="linksheet_donation_explainer_2">إن التبرع بأكثر من <b>5€</b> (<b>4€</b> إذا تبرعت بالعملات المشفرة!) يسمح لك بالوصول إلى <b>LinkSheet Pro</b>، والذي يخفي حاليًا فقط شعار التبرع على الشاشة الرئيسية للتطبيق، ولكن في المستقبل، سيكون هناك <b>ميزات حصرية احترافية.</b></string>
+    <string name="import_explainer">استيراد تصدير سابق من ملف</string>
+    <string name="export_settings">إعدادات التصدير</string>
+    <string name="include_log_hash_key">قم بتضمين مفتاح تجزئة السجل (المفتاح المستخدم لتنقيح سجلاتك)</string>
+    <string name="include_history">تضمين السجل (النقر على الرابط وسجل التطبيق)</string>
+    <string name="export_to_file">تصدير الى ملف</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="import_settings">إعدادات الاستيراد</string>
+    <string name="import_settings_override_preferences">سيؤدي هذا إلى تجاوز كافة التفضيلات الموجودة. استمرار؟</string>
+    <string name="confirm_import">تاكيد</string>
+    <string name="manual_build">تم إنشاؤه يدويًا وتوقيعه بواسطة 1fexd</string>
+    <string name="pro_feature">هذه من مميزات ورقة الروابط الإصدار المدفوع!</string>
+    <string name="export_include_recommendation">نوصي بتمكين الإعدادات التالية فقط إذا كنت لا تخطط لمشاركة تصديرك مع شخص آخر!</string>
+    <string name="export_privacy">للتعرف على خصوصية التصدير، يمكنك زيارة هذا <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">الرابط</annotation>.</string>
+    <string name="last_rule_update">آخر تحديث للقاعدة من المنبع (UTC):</string>
 </resources>

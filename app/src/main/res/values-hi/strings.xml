@@ -151,4 +151,5 @@
     <string name="privacy">गोपनीयता</string>
     <string name="new_bottomsheet">नई निचली शीट</string>
     <string name="version_name">पूर्ण आईडेंटिफायर:</string>
+    <string name="shizuku_manager_start_failed">Shizuku प्रबंधक प्रारंभ करने में विफल, कृपया इसे मैन्युअल रूप से प्रारंभ करें!</string>
 </resources>

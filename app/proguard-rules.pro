@@ -102,3 +102,4 @@
 -dontwarn fe.uribuilder.ParsedUri
 
 -printmapping mapping.txt
+-printusage usage.txt

@@ -23,15 +23,9 @@ import fe.kotlin.extension.time.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.DividedRow
-import fe.linksheet.composable.util.HeadlineText
-import fe.linksheet.composable.util.SettingEnabledCardColumnCommon
-import fe.linksheet.composable.util.SubtitleText
-import fe.linksheet.composable.util.Texts
-import fe.linksheet.composable.util.mapState
+import fe.linksheet.composable.util.*
 import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.log.AppLogger
@@ -48,7 +42,7 @@ fun LogSettingsRoute(
 ) {
     val files by viewModel.files.collectOnIO()
     val mapState = remember(files) {
-        mapState(files)
+        listState(files)
     }
 
     val startupTime = AppLogger.getInstance().startupTime.localizedString()
@@ -83,12 +77,12 @@ fun LogSettingsRoute(
                 }
             }
 
-            mapHelper(
+            listHelper(
                 noItems = R.string.no_logs_found,
-                mapState = mapState,
-                map = files,
-                listKey = { files[it]!! },
-            ) { fileName, timestamp ->
+                listState = mapState,
+                list = files,
+                listKey = { it.millis },
+            ) {
                 DividedRow(
                     paddingHorizontal = 10.dp,
                     paddingVertical = 5.dp,
@@ -100,21 +94,21 @@ fun LogSettingsRoute(
                                 navController.navigate(
                                     logTextViewerSettingsRoute,
                                     LogTextViewerRoute(
-                                        timestamp,
-                                        fileName
+                                        it.localizedTime,
+                                        it.file.name
                                     )
                                 )
                             }
                         ) {
                             Texts(
-                                headline = timestamp,
-                                subtitle = fileName + AppLogger.fileExt
+                                headline = it.localizedTime,
+                                subtitle = it.file.name
                             )
                         }
                     },
                     rightContent = {
                         IconButton(onClick = {
-                            viewModel.deleteFileAsync(fileName)
+                            viewModel.deleteFileAsync(it)
                         }) {
                             ColoredIcon(
                                 icon = Icons.Default.Delete,

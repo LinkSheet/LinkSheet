@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
 import fe.linksheet.R
 import fe.linksheet.extension.android.setText
-import fe.linksheet.module.log.LogEntry
+import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 
 @Composable
@@ -35,6 +35,7 @@ fun ExportLogDialog(
     var redactLog by remember { mutableStateOf(true) }
     var includeFingerprint by remember { mutableStateOf(true) }
     var includePreferences by remember { mutableStateOf(true) }
+    var includeThrowable by remember { mutableStateOf(false) }
 
     DialogColumn {
         HeadlineText(headlineId = R.string.export_log)
@@ -47,6 +48,17 @@ fun ExportLogDialog(
         )
 
         Spacer(modifier = Modifier.height(5.dp))
+
+        if (logEntries.any { it is LogEntry.FatalEntry }) {
+            CheckboxRow(
+                checked = includeThrowable,
+                onClick = { includeThrowable = !includeThrowable },
+                textId = R.string.include_throwable
+            )
+
+            Spacer(modifier = Modifier.height(5.dp))
+        }
+
 
         CheckboxRow(
             checked = includeFingerprint,
@@ -83,6 +95,7 @@ fun ExportLogDialog(
                             includeFingerprint,
                             includePreferences,
                             redactLog,
+                            includeThrowable,
                             logEntries
                         )
                     )

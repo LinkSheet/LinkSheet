@@ -43,7 +43,7 @@ import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.module.log.LogEntry
+import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -96,7 +96,7 @@ fun LogTextSettingsRoute(
                     listState = listState,
                     list = logEntries,
                     listKey = { it.hashCode() }
-                ) { (type, unixMillis, prefix, message) ->
+                ) {  logEntry ->
                     SelectionContainer {
                         Card(
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -126,7 +126,7 @@ fun LogTextSettingsRoute(
                                                 vertical = 2.dp
                                             ),
                                             fontWeight = FontWeight.SemiBold,
-                                            text = type
+                                            text = logEntry.type
                                         )
                                     }
 
@@ -143,7 +143,7 @@ fun LogTextSettingsRoute(
                                             modifier = Modifier.padding(
                                                 horizontal = 5.dp,
                                                 vertical = 2.dp
-                                            ), text = prefix
+                                            ), text = logEntry.prefix ?: stringResource(id = R.string.app_name)
                                         )
                                     }
                                 }
@@ -152,7 +152,7 @@ fun LogTextSettingsRoute(
 
                                 Row(modifier = Modifier.fillMaxWidth()) {
                                     Text(
-                                        text = message,
+                                        text =  logEntry.message,
                                         fontFamily = FontFamily.Monospace
                                     )
                                 }
@@ -164,7 +164,7 @@ fun LogTextSettingsRoute(
                                     horizontalArrangement = Arrangement.End
                                 ) {
                                     Text(
-                                        text = unixMillis.unixMillisUtc.value
+                                        text = logEntry.unixMillis.unixMillisUtc.value
                                             .localizedString(),
                                         fontStyle = FontStyle.Italic,
                                         fontSize = 12.sp

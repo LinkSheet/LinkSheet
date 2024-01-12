@@ -4,10 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import fe.linksheet.module.log.HostProcessor
-import fe.linksheet.module.log.LogDumpable
-import fe.linksheet.module.log.LogHasher
-import fe.linksheet.module.log.PackageProcessor
+import fe.linksheet.module.log.hasher.HostProcessor
+import fe.linksheet.module.log.hasher.LogDumpable
+import fe.linksheet.module.log.hasher.LogHasher
+import fe.linksheet.module.log.hasher.PackageProcessor
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 

@@ -7,7 +7,7 @@ import fe.httpkt.isHttpSuccess
 import fe.httpkt.json.readToJson
 import fe.linksheet.extension.failure
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
-import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveType

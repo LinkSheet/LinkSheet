@@ -2,7 +2,6 @@ package fe.linksheet.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -36,8 +35,7 @@ import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.AppLogger
-import fe.linksheet.module.log.LogEntry
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -46,7 +44,7 @@ import org.koin.core.component.KoinComponent
 
 class CrashHandlerActivity : ComponentActivity(), KoinComponent {
     companion object {
-        const val extraCrashException = "EXTRA_CRASH_EXCEPTION_TEXT"
+        const val EXTRA_CRASH_EXCEPTION = "EXTRA_CRASH_EXCEPTION_TEXT"
     }
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
@@ -56,8 +54,8 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val exception = intent?.getStringExtra(extraCrashException)!!
-        logger.print(Logger.Type.Debug, exception)
+        val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
+        logger.logFatal(throwableString)
 
         setContentWithKoin {
             AppHost {
@@ -117,7 +115,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                                 item("exception") {
                                     SelectionContainer {
                                         Text(
-                                            text = exception,
+                                            text = throwableString,
                                             fontFamily = FontFamily.Monospace
                                         )
                                     }

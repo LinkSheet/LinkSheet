@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver.urlresolver
 
 import fe.httpkt.Request
-import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module

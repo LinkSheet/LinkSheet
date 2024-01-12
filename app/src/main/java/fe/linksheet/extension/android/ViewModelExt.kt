@@ -44,6 +44,6 @@ inline fun <T> ViewModel.ioAsync(
     loading.value = false
 }
 
-inline fun <T> ViewModel.ioLaunch(
+inline fun <T> ViewModel.launchIO(
     crossinline block: suspend CoroutineScope.() -> T
 ) = viewModelScope.launch(Dispatchers.IO) { block(this) }

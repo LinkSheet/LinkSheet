@@ -15,6 +15,7 @@ import fe.linksheet.module.log.LogDumpable
 import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
 import fe.linksheet.module.log.LogHasher
 import fe.linksheet.module.log.PackageProcessor
+import fe.linksheet.resolver.DisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated
 import java.lang.StringBuilder
 
@@ -31,16 +32,19 @@ data class PreferredApp(
 ) : LogDumpable {
     @delegate:Ignore
     val componentName by lazy {
-        ComponentName.unflattenFromString(component) ?:
-        ComponentName.unflattenFromString("$packageName/$component")
+        ComponentName.unflattenFromString(component) ?: ComponentName.unflattenFromString("$packageName/$component")
     }
 
-    fun toDisplayActivityInfo(context: Context) = context.packageManager
-        .queryFirstIntentActivityByPackageNameOrNull(packageName!!)
-        ?.toDisplayActivityInfo(context)!!
+    fun toDisplayActivityInfo(context: Context): DisplayActivityInfo? {
+        return context.packageManager.queryFirstIntentActivityByPackageNameOrNull(packageName!!)
+            ?.toDisplayActivityInfo(context)
+    }
 
-    fun toPreferredDisplayActivityInfo(context: Context) =
-        PreferredDisplayActivityInfo(this, toDisplayActivityInfo(context))
+    fun toPreferredDisplayActivityInfo(context: Context): PreferredDisplayActivityInfo? {
+        return toDisplayActivityInfo(context)?.let { info ->
+            PreferredDisplayActivityInfo(this, info)
+        }
+    }
 
     override fun dump(
         stringBuilder: StringBuilder,
@@ -53,7 +57,7 @@ data class PreferredApp(
             hasher.hash(
                 this,
                 "pkg=",
-                packageName!!,
+                packageName,
                 PackageProcessor
             )
         }

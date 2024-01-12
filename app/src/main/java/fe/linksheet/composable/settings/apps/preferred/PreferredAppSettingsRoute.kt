@@ -28,13 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.HeadlineText
-import fe.linksheet.composable.util.listState
+import fe.linksheet.composable.util.*
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.collectOnIO
-import fe.linksheet.extension.compose.listHelper
+import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.util.AndroidVersion
@@ -50,8 +47,8 @@ fun PreferredAppSettingsRoute(
 
     val preferredApps by viewModel.preferredAppsFiltered.collectOnIO()
     val filter by viewModel.searchFilter.collectOnIO()
-    val listState = remember(preferredApps?.size, filter) {
-        listState(preferredApps, filter)
+    val mapState = remember(preferredApps?.size, filter) {
+        mapState(preferredApps, filter)
     }
 
     val appsExceptPreferred = if (AndroidVersion.AT_LEAST_API_31_S) {
@@ -114,13 +111,13 @@ fun PreferredAppSettingsRoute(
                 searchFilter = viewModel.searchFilter
             )
 
-            listHelper(
+            mapHelper(
                 noItems = R.string.no_preferred_apps_set_yet,
                 notFound = R.string.no_such_app_found,
-                listState = listState,
-                list = preferredApps,
-                listKey = { it.first.flatComponentName },
-            ) { (app, hosts) ->
+                mapState = mapState,
+                map = preferredApps,
+                listKey = { it.flatComponentName },
+            ) { app, hosts ->
                 ClickableRow(onClick = {
                     hostDialog.open(HostDialogState(app, hosts))
                 }) {

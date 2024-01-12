@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getIntState
@@ -35,6 +36,8 @@ import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import fe.fastforwardkt.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class IntentResolver(
     val context: Context,
@@ -231,7 +234,13 @@ class IntentResolver(
         } else Downloader.DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)
-            ?.toPreferredDisplayActivityInfo(context)
+        val preferredDisplayActivityInfo = preferredApp?.toPreferredDisplayActivityInfo(context)
+        if (preferredApp != null && preferredDisplayActivityInfo == null) {
+            withContext(Dispatchers.IO) {
+                preferredAppRepository.deleteByPackageName(preferredApp.packageName!!)
+            }
+        }
+
 //        logger.debug({"PreferredApp=$it"}, preferredApp, HashProcessor)
 
         val lastUsedApps = appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
@@ -286,7 +295,7 @@ class IntentResolver(
             context,
             resolvedList,
             lastUsedApps,
-            preferredApp?.app,
+            preferredDisplayActivityInfo?.app,
             !dontShowFilteredItem.value
         )
 
@@ -319,7 +328,7 @@ class IntentResolver(
             grouped,
             filteredItem,
             showExtended,
-            preferredApp?.app?.alwaysPreferred,
+            preferredDisplayActivityInfo?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
             resolved,
             libRedirectResult,

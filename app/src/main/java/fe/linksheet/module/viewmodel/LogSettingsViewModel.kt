@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel
 
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
-import fe.linksheet.extension.android.ioLaunch
+import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -20,10 +20,10 @@ class LogSettingsViewModel(
     }
 
     init {
-        ioLaunch { files.emit(getLogFiles()) }
+        launchIO { files.emit(getLogFiles()) }
     }
 
-    fun deleteFileAsync(name: String) = ioLaunch {
+    fun deleteFileAsync(name: String) = launchIO {
         if (appLogger.deleteLogFile(name)) {
             files.emit(getLogFiles())
         }

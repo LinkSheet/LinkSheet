@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import fe.linksheet.extension.android.ioLaunch
+import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.android.preference.helper.compose.getBooleanState
@@ -96,7 +96,7 @@ class PreferredBrowserViewModel(
         Normal, InApp
     }
 
-    override fun save(selected: BrowserCommonSelected) = ioLaunch {
+    override fun save(selected: BrowserCommonSelected) = launchIO {
         val repo = repository.first()
         selected.forEach { (activityInfo, enabled) ->
             repo.insertOrDelete(enabled, activityInfo.packageName)
@@ -105,7 +105,7 @@ class PreferredBrowserViewModel(
 
     fun updateSelectedBrowser(
         selectedBrowserPackage: String,
-    ) = ioLaunch {
+    ) = launchIO {
         val state = browserModeState.first()
         val selected = selectedBrowserState.first()
 

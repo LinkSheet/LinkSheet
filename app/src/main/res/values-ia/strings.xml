@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="apps_which_can_open_links">Applicationes que pote aperir ligamines</string>
+    <string name="enable_copy_button_explainer">Monstra un button de \"Copiar ligamine\" a basse</string>
+    <string name="preferred_browser_explainer">Seliger le modo de navigator predefinite</string>
+    <string name="always_ask_explainer">Monstrar sempre tote le navigatores</string>
+    <string name="preferred_apps">Applicationes predeterminate</string>
+    <string name="set_as_browser">Seliger como navigator</string>
+    <string name="set_as_browser_explainer">Tocca hic pro facer LinkSheet le navigator predefinite</string>
+    <string name="search">Cercar</string>
+    <string name="copy_url">Copiar ligamine</string>
+    <string name="enable_copy_button">Activar button pro copiar</string>
+    <string name="url_copied">Ligamine copiate al area de transferentia</string>
+    <string name="confirm">Confirmar</string>
+    <string name="clear">Rader</string>
+    <string name="preferred_browser">Navigador predeterminate</string>
+    <string name="preferred_apps_settings">Parametros de applicationes predeterminate</string>
+</resources>

@@ -1,8 +1,6 @@
 package fe.linksheet.module.viewmodel
 
-import fe.kotlin.extension.primitive.unixMillisUtc
-import fe.kotlin.extension.time.localizedString
-import fe.linksheet.extension.android.ioLaunch
+import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -13,18 +11,16 @@ class LogSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     private val appLogger = AppLogger.getInstance()
-    val files = MutableStateFlow(emptyMap<String, String>())
+    val files = MutableStateFlow(emptyList<AppLogger.LogFile>())
 
-    private fun getLogFiles() = appLogger.getLogFiles().associateWith {
-        it.toLong().unixMillisUtc.value.localizedString()
-    }
+    private fun getLogFiles() = appLogger.getLogFiles()
 
     init {
-        ioLaunch { files.emit(getLogFiles()) }
+        launchIO { files.emit(getLogFiles()) }
     }
 
-    fun deleteFileAsync(name: String) = ioLaunch {
-        if (appLogger.deleteLogFile(name)) {
+    fun deleteFileAsync(logFile: AppLogger.LogFile) = launchIO {
+        if (appLogger.deleteLogFile(logFile)) {
             files.emit(getLogFiles())
         }
     }

@@ -25,7 +25,7 @@ import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository

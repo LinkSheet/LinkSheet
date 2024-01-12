@@ -1,4 +1,4 @@
-package fe.linksheet.module.log
+package fe.linksheet.module.log.hasher
 
 import android.content.ComponentName
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.content.pm.ResolveInfo
 import fe.kotlin.extension.iterable.forEachWithInfo
 import fe.libredirectkt.LibRedirectService
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.log.LogDumpable.Companion.dumpObject
+import fe.linksheet.module.log.hasher.LogDumpable.Companion.dumpObject
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import fe.stringbuilder.util.squareWrapped

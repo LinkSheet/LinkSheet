@@ -1,20 +1,15 @@
-package fe.linksheet.module.log
+package fe.linksheet.module.log.hasher
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import android.net.Uri
-import android.os.Parcel
-import android.os.Parcelable
 import fe.linksheet.extension.appendHashed
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.preference.AppPreferences
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import fe.stringbuilder.util.slashSeparated
-import org.apache.hc.core5.net.PercentCodec
-import org.apache.hc.core5.util.TextUtils
 import javax.crypto.Mac
 
 sealed interface LogHasher {
@@ -98,7 +93,7 @@ sealed interface HashProcessor<T> {
             mac: Mac
         ) = stringBuilder.curlyWrapped {
             slashSeparated {
-                item { PackageProcessor.process(stringBuilder, input.packageName, mac) }
+                item { StringProcessor.process(stringBuilder, input.packageName, mac) }
                 item { appendHashed(mac, input.className) }
             }
         }
@@ -116,7 +111,7 @@ sealed interface HashProcessor<T> {
             }
             itemNotNull(input.packageName) {
                 append("pkg=")
-                PackageProcessor.process(this, input.packageName!!, mac)
+                StringProcessor.process(this, input.packageName!!, mac)
             }
             item {
                 ComponentProcessor.process(stringBuilder, input.componentName!!, mac)
@@ -159,7 +154,7 @@ sealed interface HashProcessor<T> {
             mac: Mac
         ) = stringBuilder.apply {
             val packageName = packageName(input)
-            PackageProcessor.process(this, packageName!!, mac)
+            StringProcessor.process(this, packageName!!, mac)
         }
 
         private fun packageName(input: ResolveInfo) =

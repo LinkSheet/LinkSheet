@@ -2,10 +2,10 @@ package fe.linksheet.module.downloader
 
 import fe.httpkt.ext.findHeader
 import fe.httpkt.util.Extension
-import fe.linksheet.module.log.FileExtensionProcessor
-import fe.linksheet.module.log.FileNameProcessor
-import fe.linksheet.module.log.LogDumpable
-import fe.linksheet.module.log.LogHasher
+import fe.linksheet.module.log.hasher.FileExtensionProcessor
+import fe.linksheet.module.log.hasher.FileNameProcessor
+import fe.linksheet.module.log.hasher.LogDumpable
+import fe.linksheet.module.log.hasher.LogHasher
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.mimetypekt.MimeTypes

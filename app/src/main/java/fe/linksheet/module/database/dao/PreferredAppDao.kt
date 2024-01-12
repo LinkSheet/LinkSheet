@@ -25,4 +25,7 @@ interface PreferredAppDao : BaseDao<PreferredApp> {
 
     @Query("DELETE FROM openwith WHERE packageName = :packageName")
     suspend fun deleteByPackageName(packageName: String)
+
+    @Query("DELETE FROM openwith WHERE packageName IN (:packageNames)")
+    suspend fun deleteByPackageName(packageNames: Set<String>)
 }

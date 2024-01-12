@@ -8,7 +8,7 @@ import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.LibRedirectServiceState
-import fe.linksheet.extension.android.ioLaunch
+import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.libredirectkt.LibRedirectInstance
@@ -17,10 +17,7 @@ import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.toCollection
 
 class LibRedirectServiceSettingsViewModel(
     val context: Application,
@@ -77,7 +74,7 @@ class LibRedirectServiceSettingsViewModel(
     data class SelectedState(val frontend: LibRedirectFrontend?, val instance: String?)
 
     init {
-        ioLaunch {
+        launchIO {
             defaultSelectedState.collect {
                 selectedFrontend.value = it.frontend
                 selectedInstance.value = it.instance
@@ -97,7 +94,7 @@ class LibRedirectServiceSettingsViewModel(
 
     }
 
-    fun updateLibRedirectState(serviceKey: String, enabled: Boolean) = ioLaunch {
+    fun updateLibRedirectState(serviceKey: String, enabled: Boolean) = launchIO {
         stateRepository.insert(LibRedirectServiceState(serviceKey, enabled))
     }
 
@@ -105,7 +102,7 @@ class LibRedirectServiceSettingsViewModel(
         serviceKey: String,
         frontendKey: String,
         instanceUrl: String
-    ) = ioLaunch {
+    ) = launchIO {
         defaultRepository.insert(LibRedirectDefault(serviceKey, frontendKey, instanceUrl))
     }
 }

@@ -2,16 +2,29 @@ package fe.linksheet.module.log
 
 import android.util.Log
 import fe.kotlin.extension.asString
+import fe.linksheet.module.log.entry.LogEntry
+import fe.linksheet.module.log.hasher.HashProcessor
+import fe.linksheet.module.log.hasher.LogDumpable
+import fe.linksheet.module.log.hasher.LogHasher
 import kotlin.reflect.KClass
 
 abstract class Logger(val prefix: String, val hasher: LogHasher) {
+    protected val appLogger = AppLogger.getInstance()
+
     enum class Type(val code: String) {
         Verbose("V"), Info("I"), Debug("D")
     }
 
     protected fun mergeSubPrefix(msg: String, subPrefix: String?) = (subPrefix?.let { "[$it] " } ?: "") + msg
 
-    abstract fun print(type: Type, msg: String, subPrefix: String? = null)
+    protected abstract fun print(type: Type, msg: String, subPrefix: String? = null)
+
+    fun logFatal(stacktrace: String): String {
+        Log.wtf("Crash", stacktrace)
+
+        appLogger.write(LogEntry.FatalEntry(System.currentTimeMillis(), stacktrace))
+        return stacktrace
+    }
 
     fun <T> dumpParameterToString(
         redact: Boolean = false,
@@ -129,8 +142,6 @@ class DefaultLogger(
 ) : Logger(prefix, hasher) {
     constructor(clazz: KClass<*>, hasher: LogHasher.LogKeyHasher) : this(clazz.simpleName!!, hasher)
 
-    private val appLogger = AppLogger.getInstance()
-
     override fun print(type: Type, msg: String, subPrefix: String?) {
         val mergedMessage = mergeSubPrefix(msg, subPrefix)
         when (type) {
@@ -176,7 +187,13 @@ class DefaultLogger(
     }
 
     private fun log(type: Type, normal: String, redacted: String, subPrefix: String?) {
-        appLogger.write(LogEntry(type.code, System.currentTimeMillis(), prefix + (subPrefix?.let { "/$it" } ?: ""), normal, redacted))
+        appLogger.write(
+            LogEntry.DefaultLogEntry(
+                type.code,
+                System.currentTimeMillis(),
+                prefix + (subPrefix?.let { "/$it" } ?: ""),
+                normal,
+                redacted))
         print(type, normal, subPrefix)
     }
 

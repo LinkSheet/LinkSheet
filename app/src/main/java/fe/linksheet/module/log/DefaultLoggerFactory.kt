@@ -1,6 +1,7 @@
 package fe.linksheet.module.log
 
 import fe.kotlin.extension.string.decodeHexOrThrow
+import fe.linksheet.module.log.hasher.LogHasher
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.util.CryptoUtil

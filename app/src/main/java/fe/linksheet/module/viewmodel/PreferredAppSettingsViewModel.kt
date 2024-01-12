@@ -3,24 +3,28 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.kotlin.extension.iterable.filterIf
+import androidx.lifecycle.viewModelScope
 import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.kotlin.extension.iterable.mapToSet
+import fe.kotlin.extension.map.filterIf
+import fe.linksheet.extension.ProduceSideEffect
 import fe.linksheet.extension.android.ioAsync
-import fe.linksheet.extension.android.ioLaunch
+import fe.linksheet.extension.android.launchIO
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
+import fe.linksheet.extension.mapProducingSideEffect
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.VerifiedDomainUtil.canHandleDomains
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 
 class PreferredAppSettingsViewModel(
     val context: Application,
@@ -36,23 +40,31 @@ class PreferredAppSettingsViewModel(
 
     val searchFilter = MutableStateFlow("")
 
-    private val preferredApps = repository.getAllAlwaysPreferred().map { app ->
-        app.groupByNoNullKeys(
-            keySelector = { it.toDisplayActivityInfo(context) },
-            cacheKeySelector = { it },
-            valueTransform = { it.host }
-        ).toList()
-    }
+    private val preferredApps = repository.getAllAlwaysPreferred().mapProducingSideEffect(
+        transform = { app, sideEffect: ProduceSideEffect<String> ->
+            Log.d("Transforming", "$app")
+
+            app.groupByNoNullKeys(
+                keySelector = { it.toDisplayActivityInfo(context) },
+                nullKeyHandler = { sideEffect(it.packageName!!) },
+                cacheIndexSelector = { it },
+                valueTransform = { it.host }
+            )
+        },
+        handleSideEffects = {
+            withContext(Dispatchers.IO) { repository.deleteByPackageNames(it.toSet()) }
+        }
+    ).shareIn(viewModelScope, started = SharingStarted.Lazily, replay = 1)
 
     val preferredAppsFiltered = preferredApps.combine(searchFilter) { apps, filter ->
-        apps.filterIf(filter.isNotEmpty()) { (info, _) ->
+        apps.filterIf(condition = filter.isNotEmpty()) { (info, _) ->
             info.compareLabel.contains(filter, ignoreCase = true)
-        }.toList()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
     val appsExceptPreferred = preferredApps.map { apps ->
-        val preferredAppsPackages = apps.mapToSet { it.first.packageName }
+        val preferredAppsPackages = apps.keys.mapToSet { it.packageName }
         domainVerificationManager!!.getDisplayActivityInfos(context) {
             it.canHandleDomains(domainVerificationManager!!) && it.activityInfo.packageName !in preferredAppsPackages
         }.sortedWith(DisplayActivityInfo.labelComparator)
@@ -83,7 +95,7 @@ class PreferredAppSettingsViewModel(
     fun updateHostState(
         displayActivityInfo: DisplayActivityInfo,
         hostState: MutableMap<String, Boolean>
-    ) = ioLaunch {
+    ) = launchIO {
         hostState.forEach { (host, enabled) ->
             if (enabled) repository.insert(
                 displayActivityInfo.toPreferredApp(host, true)
@@ -92,14 +104,14 @@ class PreferredAppSettingsViewModel(
         }
     }
 
-    fun deletePreferredAppWherePackage(displayActivityInfo: DisplayActivityInfo) = ioLaunch {
+    fun deletePreferredAppWherePackage(displayActivityInfo: DisplayActivityInfo) = launchIO {
         repository.deleteByPackageName(displayActivityInfo.packageName)
     }
 
     fun insertHostState(
         displayActivityInfo: DisplayActivityInfo,
         hostState: MutableMap<String, Boolean>
-    ) = ioLaunch {
+    ) = launchIO {
         repository.insert(hostState.map { (host, _) ->
             displayActivityInfo.toPreferredApp(host, true)
         })

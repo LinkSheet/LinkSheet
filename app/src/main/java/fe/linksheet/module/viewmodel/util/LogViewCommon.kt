@@ -5,7 +5,7 @@ import fe.gson.dsl.jsonObject
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
-import fe.linksheet.module.log.LogEntry
+import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
@@ -27,6 +27,7 @@ class LogViewCommon(
         includeFingerprint: Boolean,
         includePreferences: Boolean,
         redactLog: Boolean,
+        includeThrowable: Boolean,
         logEntries: List<LogEntry>,
     ): String {
         return preferenceRepository.gson.toJson(jsonObject {
@@ -57,7 +58,7 @@ class LogViewCommon(
                 "preferences" += AppPreferences.toJsonArray(logPreferences(redactLog))
             }
 
-            "log" += logEntries.map { it.toJson(redactLog) }
+            "log" += logEntries.map { it.toCopyLogJson(redactLog, includeThrowable) }
         })
     }
 }

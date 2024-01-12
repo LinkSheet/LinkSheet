@@ -1,100 +1,73 @@
 package fe.linksheet.module.log
 
 import android.content.Context
-import com.google.gson.JsonObject
-import fe.gson.dsl.jsonObject
+import fe.gson.extension.io.fromJsonOrNull
+import fe.gson.extension.io.toJson
 import fe.kotlin.extension.primitive.unixMillisUtc
-import fe.kotlin.extension.string.decodeBase64Throw
-import fe.kotlin.extension.string.encodeBase64Throw
+import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.LinkSheetApp
+import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.util.SingletonHolder
-import fe.stringbuilder.util.buildSeparatedString
 import java.io.File
 import java.time.LocalDateTime
-import kotlin.io.encoding.ExperimentalEncodingApi
 
-@OptIn(ExperimentalEncodingApi::class)
-data class LogEntry(
-    val type: String,
-    val unixMillis: Long,
-    val prefix: String,
-    val message: String,
-    val redactedMessage: String,
-) {
-    val messagePrefix = "$unixMillis $type $prefix: "
 
-    override fun toString() = buildSeparatedString(" ") {
-        item { append(type) }
-        item { append(unixMillis) }
-        item { append(prefix) }
-        item { append(message.encodeBase64Throw()) }
-        item { append(redactedMessage.encodeBase64Throw()) }
+class AppLogger private constructor(app: LinkSheetApp) {
+    companion object : SingletonHolder<AppLogger, LinkSheetApp>(::AppLogger) {
+        const val LOG_DIR = "logs"
+        const val FILE_EXT = ".log"
+        const val FILE_EXT_V2 = ".json"
     }
 
-    fun toJson(redact: Boolean): JsonObject {
-        return jsonObject {
-            "type" += type
-            "time" += unixMillis.unixMillisUtc.value
-            "prefix" += prefix
-            if (redact) {
-                "redactedMessage" += redactedMessage
-            } else {
-                "message" += message
+    data class LogFile(val file: File, val millis: Long) {
+        val localizedTime by lazy {
+            millis.unixMillisUtc.value.localizedString()
+        }
+
+        companion object {
+            fun new(logDir: File): LogFile {
+                val millis = System.currentTimeMillis()
+                return LogFile(File(logDir, "$millis$FILE_EXT_V2"), millis)
             }
         }
-    }
-
-    companion object {
-        fun fromLogFileLine(line: String): LogEntry {
-            val (type, unixMillis, prefix, message, redactedMessage) = line.split(" ")
-
-            return LogEntry(
-                type,
-                unixMillis.toLong(),
-                prefix,
-                message.decodeBase64Throw(),
-                redactedMessage.decodeBase64Throw()
-            )
-        }
-    }
-}
-
-class AppLogger private constructor(private val app: LinkSheetApp) {
-    companion object : SingletonHolder<AppLogger, LinkSheetApp>(::AppLogger) {
-        const val logDir = "logs"
-        const val fileExt = ".log"
     }
 
     val startupTime: LocalDateTime = LocalDateTime.now()
     val logEntries = mutableListOf<LogEntry>()
 
-    fun getLogFiles() = app.getDir(logDir, Context.MODE_PRIVATE).listFiles()
-        ?.filter { it.length() > 0L }
-        ?.sortedDescending()?.map { file ->
-            file.name.substring(0, file.name.indexOf(fileExt))
-        } ?: emptyList()
+    private val logDir = app.getDir(LOG_DIR, Context.MODE_PRIVATE)
 
-    fun deleteLogFile(
-        name: String
-    ) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt).delete()
+    fun getLogFiles(): List<LogFile> {
+        return logDir.listFiles()
+            ?.filter { it.length() > 0L }
+            ?.sortedDescending()
+            ?.mapNotNull {
+                val millis = it.nameWithoutExtension.substringBefore(".").toLongOrNull() ?: return@mapNotNull null
+                LogFile(it, millis)
+            } ?: emptyList()
+    }
+
+    fun deleteLogFile(logFile: LogFile): Boolean {
+        return logFile.file.delete()
+    }
 
     fun deleteOldLogs() {
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
-        getLogFiles().filter { it.toLong() < startupMillis }.forEach {
-            deleteLogFile(it)
-        }
+        getLogFiles().filter { it.millis < startupMillis }.forEach { deleteLogFile(it) }
     }
 
-    fun readLogFile(name: String) = File(app.getDir(logDir, Context.MODE_PRIVATE), name + fileExt)
-        .readLines()
-        .filter { it.isNotEmpty() }
-        .map { line -> LogEntry.fromLogFileLine(line) }
+    fun readLogFile(name: String): List<LogEntry> {
+        val logFile = File(logDir, name)
 
-    private fun newWriter() = File(
-        app.getDir(logDir, Context.MODE_PRIVATE),
-        "${System.currentTimeMillis()}$fileExt"
-    ).bufferedWriter()
+        if (logFile.extension == FILE_EXT) {
+            return logFile
+                .readLines().filter { it.isNotEmpty() }
+                .mapNotNull { LogEntry.fromLogFileLine(it) }
+        }
+
+        return logFile.fromJsonOrNull<List<LogEntry>>() ?: emptyList()
+    }
 
     fun write(entry: LogEntry) {
         logEntries.add(entry)
@@ -102,12 +75,7 @@ class AppLogger private constructor(private val app: LinkSheetApp) {
 
     fun writeLog() {
         if (logEntries.isNotEmpty()) {
-            newWriter().use { logWriter ->
-                logEntries.forEach {
-                    logWriter.write(it.toString())
-                    logWriter.newLine()
-                }
-            }
+            LogFile.new(logDir).file.toJson(logEntries)
         }
     }
 }

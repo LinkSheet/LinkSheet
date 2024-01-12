@@ -6,7 +6,7 @@ import fe.android.preference.helper.Preferences
 import fe.gson.dsl.jsonArray
 import fe.gson.dsl.jsonObject
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.PackageProcessor
+import fe.linksheet.module.log.hasher.PackageProcessor
 import fe.linksheet.module.log.loggerHmac
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler

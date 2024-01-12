@@ -18,7 +18,7 @@ import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.log.HashProcessor
+import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
@@ -35,6 +35,8 @@ import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import fe.fastforwardkt.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class IntentResolver(
     val context: Context,
@@ -231,7 +233,13 @@ class IntentResolver(
         } else Downloader.DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)
-            ?.toPreferredDisplayActivityInfo(context)
+        val preferredDisplayActivityInfo = preferredApp?.toPreferredDisplayActivityInfo(context)
+        if (preferredApp != null && preferredDisplayActivityInfo == null) {
+            withContext(Dispatchers.IO) {
+                preferredAppRepository.deleteByPackageName(preferredApp.packageName!!)
+            }
+        }
+
 //        logger.debug({"PreferredApp=$it"}, preferredApp, HashProcessor)
 
         val lastUsedApps = appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
@@ -286,7 +294,7 @@ class IntentResolver(
             context,
             resolvedList,
             lastUsedApps,
-            preferredApp?.app,
+            preferredDisplayActivityInfo?.app,
             !dontShowFilteredItem.value
         )
 
@@ -319,7 +327,7 @@ class IntentResolver(
             grouped,
             filteredItem,
             showExtended,
-            preferredApp?.app?.alwaysPreferred,
+            preferredDisplayActivityInfo?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
             resolved,
             libRedirectResult,

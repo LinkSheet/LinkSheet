@@ -371,4 +371,7 @@
     <string name="running_unofficial_build">Versión no oficial</string>
     <string name="fastforward_version">Normas FastForward</string>
     <string name="url_copied_toast_explainer">Muestra una notificación flotante cuando el usuario copia la dirección</string>
+    <string name="url_copied_toast">Dirección URL copiada del toast</string>
+    <string name="download_started_toast">Descarga toast iniciada</string>
+    <string name="download_started_toast_explainer">Mostrar un toast cuando se ha iniciado una descarga</string>
 </resources>

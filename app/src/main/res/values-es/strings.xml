@@ -374,4 +374,24 @@
     <string name="url_copied_toast">Dirección URL copiada del toast</string>
     <string name="download_started_toast">Descarga toast iniciada</string>
     <string name="download_started_toast_explainer">Mostrar un toast cuando se ha iniciado una descarga</string>
+    <string name="opening_with_app_toast">Mostrar un mensaje emergente cuando una aplicación se inicia automáticamente</string>
+    <string name="opening_with_app_toast_explainer">Mostrar un mensaje emergente cuando se inicia una aplicación configurada como predeterminada para un dominio</string>
+    <string name="resolve_via_toast">Mostrar un mensaje emergente al resolver una URL</string>
+    <string name="resolve_via_failed_toast">Mostrar un mensaje emergente sobre resolución fallida</string>
+    <string name="resolve_via_failed_toast_explainer">Mostrar un mensaje emergente cuando una URL no se resuelve correctamente a través de un servicio externo</string>
+    <string name="cached_urls_version">URL en caché incorporadas</string>
+    <string name="last_updated">Última actualización (UTC):</string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">Activar el menú experimental LinkSheet Compat</string>
+    <string name="enable_linksheet_compat_explainer">El menú se encuentra en el submenú \"Aplicaciones\" y, una vez instalado, es capaz de interceptar las peticiones a determinadas aplicaciones nativas.</string>
+    <string name="disclaimer_libredirect_unstable">Además de ser una característica experimental, LibRedirect se considera actualmente muy inestable y puede no funcionar en absoluto.</string>
+    <string name="enable_new_bottom_sheet">Habilitar nuevo pie de página</string>
+    <string name="enable_new_bottom_sheet_explainer">Reemplace el panel inferior con la nueva versión rediseñada</string>
+    <string name="new_bottomsheet">Nuevo menú inferior</string>
+    <string name="shizuku_manager_start_failed">¡No se ha podido iniciar Shizuku Manager, por favor, inícielo manualmente!</string>
+    <string name="include_throwable">Incluir registros de colisiones (recomendado, pero no se puede redactar)</string>
+    <string name="resolve_via_toast_explainer">Mostrar un mensaje emergente cuando una URL se resuelve a través de un servicio externo</string>
+    <string name="new_bottomsheet_explainer">¡Esta versión de LinkSheet incluye una nueva hoja inferior gracias a <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Por favor, proporcione retroalimentación en Discord, Github o por correo electrónico.
+\n
+\nPuede volver a la antigua hoja inferior a través de Configuración -&gt; Avanzado -&gt; Banderas de características.</string>
 </resources>

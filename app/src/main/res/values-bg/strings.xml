@@ -389,4 +389,6 @@
 \nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове.</string>
     <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
     <string name="new_bottomsheet">Ново долно меню</string>
+    <string name="shizuku_manager_start_failed">Грешка при стартиране на управлението на Шизуку. Отворете го ръчно!</string>
+    <string name="include_throwable">Включително и дневника на срива (препоръчително, но не може да бъде цензуриран)</string>
 </resources>

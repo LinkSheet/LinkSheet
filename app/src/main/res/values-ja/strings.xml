@@ -125,7 +125,6 @@
     <string name="onboarding6_highlight">環境設定</string>
     <string name="finish">終了</string>
     <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
-    <string name="configure"></string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="general">一般</string>
     <string name="success">成功</string>

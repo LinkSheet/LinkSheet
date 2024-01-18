@@ -140,4 +140,25 @@
     <string name="donate">寄付</string>
     <string name="flavor">フレーバー：</string>
     <string name="commit">コミット：</string>
+    <string name="confirm_import">確認</string>
+    <string name="bottom_sheet">ボトムシート</string>
+    <string name="whitelisted_browsers">ホワイトリストに登録されているブラウザ</string>
+    <string name="version">LinkSheetバージョン</string>
+    <string name="follow_redirects">リダイレクトを許可する</string>
+    <string name="loading_link">リンクを読み込んでいます…</string>
+    <string name="follow_redirects_external_service_explainer_privacy_policy">プライバシーポリシー</string>
+    <string name="amoled_black">Amoledブラック</string>
+    <string name="redirect_resolve_type_local_cache">ローカルキャッシュ</string>
+    <string name="redirect_resolve_type_remote">リモートサーバー</string>
+    <string name="configure">構成設定</string>
+    <string name="branch">ブランチ：</string>
+    <string name="type">タイプ：</string>
+    <string name="other">その他</string>
+    <string name="import_headline">インポート</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="donation">寄付</string>
+    <string name="just_version">バージョン</string>
+    <string name="dev">開発者</string>
+    <string name="notifications">通知</string>
+    <string name="libredirect_version">LibRedirect</string>
 </resources>

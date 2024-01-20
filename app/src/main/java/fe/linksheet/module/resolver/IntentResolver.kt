@@ -11,7 +11,6 @@ import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
 import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
-import fe.linksheet.R
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
@@ -27,7 +26,6 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
-import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
@@ -35,8 +33,8 @@ import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import fe.fastforwardkt.*
+import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class IntentResolver(
@@ -126,15 +124,8 @@ class IntentResolver(
         private val clearUrlProviders = ClearURLLoader.loadBuiltInClearURLProviders()
     }
 
-    enum class Resolved(val key: String, val stringResId: Int) {
-        Amp2Html("amp2html", R.string.amp2html), Redirect("redirect", R.string.follow_redirects);
 
-        companion object {
-            fun getResolvedByKey(key: String) = entries.find { it.key == key }
-        }
-    }
-
-    suspend fun resolveIfEnabled(intent: Intent, referrer: Uri?): BottomSheetResult {
+    suspend fun resolveIfEnabled(intent: Intent, referrer: Uri?, canAccessInternet: Boolean): BottomSheetResult {
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
 //        val x = intent
         urlResolverCache.clear()
@@ -154,8 +145,7 @@ class IntentResolver(
         }
 
 //        var followRedirectsResult: Result<ResolveType>
-        val resolved = mutableMapOf<Resolved, Result<ResolveType>?>()
-
+        val resolveModuleStatus = ResolveModuleStatus()
 //
 //        if (followRedirects.value && followRedirectsExternalService.value && enableAmp2Html.value && amp2HtmlExternalService.value) {
 //            val uriString = uri.toString()
@@ -179,47 +169,37 @@ class IntentResolver(
 //                )
 //            }
 //        } else {
-        val (followRedirectsResult, followRedirectsResultUri) = resolveIfEnabled(
-            followRedirects.value,
-            uri
-        ) {
+        uri = resolveModuleStatus.resolveIfEnabled(followRedirects.value, ResolveModule.Redirect, uri) { uriToResolve ->
+            val externalService = followRedirectsExternalService.value
+
+            val resolvePredicate: ResolvePredicate = { uri ->
+                (!externalService && !followOnlyKnownTrackers.value) || FastForward.isTracker(uri.toString())
+            }
+
             redirectResolver.resolve(
-                it,
+                uriToResolve,
                 followRedirectsLocalCache.value,
                 followRedirectsBuiltInCache.value,
-                { url ->
-                    (!followRedirectsExternalService.value && !followOnlyKnownTrackers.value) || FastForward.isTracker(
-                        url
-                    )
-                },
-                followRedirectsExternalService.value,
-                requestTimeout.value
+                resolvePredicate,
+                externalService,
+                requestTimeout.value,
+                canAccessInternet
             )
         }
 
-        resolved[Resolved.Redirect] = followRedirectsResult
-        if (followRedirectsResult != null) {
-            uri = followRedirectsResultUri
-        }
-
-        val (amp2HtmlResult, amp2HtmlResultUri) = resolveIfEnabled(enableAmp2Html.value, uri) {
+        uri = resolveModuleStatus.resolveIfEnabled(enableAmp2Html.value, ResolveModule.Amp2Html, uri) { uriToResolve ->
             amp2HtmlResolver.resolve(
-                it,
+                uriToResolve,
                 amp2HtmlLocalCache.value,
                 amp2HtmlBuiltInCache.value,
-                { true },
+                null,
                 amp2HtmlExternalService.value,
-                requestTimeout.value
+                requestTimeout.value,
+                canAccessInternet
             )
-        }
-
-        resolved[Resolved.Amp2Html] = amp2HtmlResult
-        if (amp2HtmlResult != null) {
-            uri = amp2HtmlResultUri
         }
 
         uri = modifyUri(uri, useClearUrls.value, useFastForwardRules.value)
-//        }
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
         if (enableLibRedirect.value && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton.value)) {
@@ -335,26 +315,26 @@ class IntentResolver(
             showExtended,
             preferredDisplayActivityInfo?.app?.alwaysPreferred,
             selectedBrowserIsSingleOption || noBrowsersPresentOnlySingleApp,
-            resolved,
+            resolveModuleStatus,
             libRedirectResult,
             downloadable
         )
     }
 
-    private suspend fun resolveIfEnabled(
-        enabled: Boolean,
-        uri: Uri?,
-        resolve: suspend (Uri) -> Result<ResolveType>
-    ): Pair<Result<ResolveType>?, Uri?> {
-        if (enabled && uri != null) {
-            val result = resolve(uri)
-            result.getOrNull()?.let {
-                return result to Uri.parse(it.url)
-            }
-        }
-
-        return null to uri
-    }
+//    private suspend fun resolveIfEnabled(
+//        enabled: Boolean,
+//        uri: Uri?,
+//        resolve: suspend (Uri) -> Result<ResolveResultType>?
+//    ): Pair<Result<ResolveResultType>?, Uri?> {
+//        if (enabled && uri != null) {
+//            val resolveResult = resolve(uri)
+//
+//            // resolveResult == null means that no "resolving" occurred (e.g. setting followOnlyTrackers is enabled)
+//            return resolveResult to resolveResult?.getOrNull().getUrlOrDefault(uri)
+//        }
+//
+//        return null to uri
+//    }
 
     private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType.value) {

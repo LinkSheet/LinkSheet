@@ -381,4 +381,9 @@
     <string name="new_bottomsheet_explainer">This version of LinkSheet features a new bottom sheet thanks to <annotation url="https://github.com/sakethpathike">@sakethpathike</annotation>! Please provide feedback on Discord, Github or via email.\n\nYou can revert to the old bottom sheet via Settings -> Advanced -> Feature flags.</string>
     <string name="shizuku_manager_start_failed">Failed to start Shizuku Manager, please start it manually!</string>
     <string name="include_throwable">Include crash logs (recommended, but can not be redacted)</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="amp2html_short">Amp2Html</string>
+    <string name="follow_redirects_short">Redirects</string>
+    <string name="online_services">Online services</string>
+    <string name="unknown_host">%s is either blocked or does not exist</string>
 </resources>

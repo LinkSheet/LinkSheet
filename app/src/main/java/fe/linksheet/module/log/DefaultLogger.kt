@@ -12,7 +12,7 @@ abstract class Logger(val prefix: String, val hasher: LogHasher) {
     protected val appLogger = AppLogger.getInstance()
 
     enum class Type(val code: String) {
-        Verbose("V"), Info("I"), Debug("D")
+        Verbose("V"), Info("I"), Debug("D"), Error("E")
     }
 
     protected fun mergeSubPrefix(msg: String, subPrefix: String?) = (subPrefix?.let { "[$it] " } ?: "") + msg
@@ -75,6 +75,16 @@ abstract class Logger(val prefix: String, val hasher: LogHasher) {
 
     abstract fun debug(throwable: Throwable, subPrefix: String? = null)
     abstract fun debug(msg: String, subPrefix: String? = null)
+
+    abstract fun <T> error(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String? = null
+    )
+
+    abstract fun error(throwable: Throwable, subPrefix: String? = null)
+    abstract fun error(msg: String, subPrefix: String? = null)
 }
 
 class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
@@ -134,6 +144,23 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     override fun debug(msg: String, subPrefix: String?) {
         print(Type.Debug, msg, subPrefix)
     }
+
+    override fun <T> error(
+        msg: (String) -> String,
+        param: T,
+        hashProcessor: HashProcessor<T>,
+        subPrefix: String?
+    ) {
+        print(Type.Error, msg(param.toString()), subPrefix)
+    }
+
+    override fun error(throwable: Throwable, subPrefix: String?) {
+        print(Type.Error, throwable.asString(), subPrefix)
+    }
+
+    override fun error(msg: String, subPrefix: String?) {
+        print(Type.Error, msg, subPrefix)
+    }
 }
 
 class DefaultLogger(
@@ -148,6 +175,7 @@ class DefaultLogger(
             Type.Verbose -> Log.v(prefix, mergedMessage)
             Type.Info -> Log.i(prefix, mergedMessage)
             Type.Debug -> Log.d(prefix, mergedMessage)
+            Type.Error -> Log.e(prefix, mergedMessage)
         }
     }
 
@@ -250,5 +278,17 @@ class DefaultLogger(
 
     override fun debug(msg: String, subPrefix: String?) {
         log(Type.Debug, msg, subPrefix)
+    }
+
+    override fun <T> error(msg: (String) -> String, param: T, hashProcessor: HashProcessor<T>, subPrefix: String?) {
+        return log(Type.Error, msg, param, hashProcessor, subPrefix)
+    }
+
+    override fun error(throwable: Throwable, subPrefix: String?) {
+        log(Type.Error, throwable.asString(), subPrefix)
+    }
+
+    override fun error(msg: String, subPrefix: String?) {
+        log(Type.Error, msg, subPrefix)
     }
 }

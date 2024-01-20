@@ -6,6 +6,7 @@ import android.app.DownloadManager
 import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.Resources
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
@@ -20,6 +21,7 @@ import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getState
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
+import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.database.entity.AppSelectionHistory
@@ -31,12 +33,16 @@ import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.ResolveModule
+import fe.linksheet.module.resolver.ResolveModuleStatus
+import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.core.component.KoinComponent
 import java.io.File
+import java.net.UnknownHostException
 import java.util.Locale
 
 class BottomSheetViewModel(
@@ -92,9 +98,16 @@ class BottomSheetViewModel(
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
+    private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
-        intentResolver.resolveIfEnabled(intent, referrer).apply {
+        val canAccessInternet = kotlin.runCatching {
+            connectivityManager.canAccessInternet()
+        }.onFailure {
+            it.printStackTrace()
+        }.getOrDefault(true)
+
+        intentResolver.resolveIfEnabled(intent, referrer, canAccessInternet).apply {
             resolveResult = this
         }
     }
@@ -110,6 +123,35 @@ class BottomSheetViewModel(
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             this.data = Uri.parse("package:${info.packageName}")
         })
+    }
+
+    fun getResolveToastTexts(resolveModuleStatus: ResolveModuleStatus): List<String> {
+        return resolveModuleStatus.globalFailure?.getString(context)?.let {
+            listOf(resolveFailureString(context.getString(R.string.online_services), it))
+
+        } ?: resolveModuleStatus.resolved.mapNotNull {
+            getResolveToastText(it.key, it.value)
+        }
+    }
+
+    private fun getResolveToastText(resolveModule: ResolveModule, result: Result<ResolveResultType>?): String? {
+        if (result == null) return null
+        val resolveResult = result.getOrNull()
+
+        val moduleName = resolveModule.getString(context)
+        if (resolveResult is ResolveResultType.Resolved && resolveViaToast.value) {
+            return context.getString(R.string.resolved_via, moduleName, resolveResult.getString(context))
+        }
+
+        if (resolveResult == null && resolveViaFailedToast.value) {
+            return resolveFailureString(moduleName, result.exceptionOrNull())
+        }
+
+        return null
+    }
+
+    private fun resolveFailureString(name: String, error: Any?): String {
+        return context.getString(R.string.resolve_failed, name, error)
     }
 
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {

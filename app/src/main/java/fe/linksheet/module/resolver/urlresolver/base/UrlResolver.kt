@@ -6,14 +6,17 @@ import fe.httpkt.ext.readToString
 import fe.httpkt.isHttpSuccess
 import fe.httpkt.json.readToJson
 import fe.linksheet.extension.failure
+import fe.linksheet.extension.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.repository.resolver.ResolverRepository
-import fe.linksheet.module.resolver.urlresolver.ResolveType
+import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import java.io.IOException
 import kotlin.reflect.KClass
 
+
+typealias ResolvePredicate = (Uri) -> Boolean
 
 abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     loggerFactory: LoggerFactory,
@@ -27,50 +30,56 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         uri: Uri,
         localCache: Boolean,
         builtInCache: Boolean,
-        resolvePredicate: (String) -> Boolean,
+        resolvePredicate: ResolvePredicate? = null,
         externalService: Boolean,
-        connectTimeout: Int
-    ): Result<ResolveType> {
+        connectTimeout: Int,
+        canAccessInternet: Boolean
+    ): Result<ResolveResultType>? {
         val uriString = uri.toString()
         if (localCache) {
             val resolvedUrl = resolverRepository.getForInputUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug({ "From local cache=$it" }, resolvedUrl.urlResolved(),
-                    HashProcessor.UrlProcessor
-                )
-                return Result.success(ResolveType.LocalCache(resolvedUrl.urlResolved()))
+                logger.error({ "From local cache=$it" }, resolvedUrl.urlResolved(), HashProcessor.UrlProcessor)
+                return ResolveResultType.Resolved.LocalCache(resolvedUrl.urlResolved()).wrap()
             }
         }
 
         if (builtInCache) {
             val resolvedUrl = resolverRepository.getBuiltInCachedForUrl(uriString)
             if (resolvedUrl != null) {
-                logger.debug({ "From built-in cache: $it" }, resolvedUrl, HashProcessor.UrlProcessor)
-                return Result.success(ResolveType.BuiltInCache(resolvedUrl))
+                logger.error({ "From built-in cache: $it" }, resolvedUrl, HashProcessor.UrlProcessor)
+                return ResolveResultType.Resolved.BuiltInCache(resolvedUrl).wrap()
             }
         }
 
-        val followRedirect = resolve(uri, resolvePredicate, externalService, connectTimeout)
-
-        if (localCache && followRedirect.isSuccess && followRedirect.getOrNull() !is ResolveType.NotResolved) {
-            resolverRepository.insert(uriString, followRedirect.getOrNull()?.url!!)
+        if (!canAccessInternet) {
+            return ResolveResultType.NoInternetConnection.wrap()
         }
 
-        return followRedirect
+        val resolveResult = resolve(uri, resolvePredicate, externalService, connectTimeout)
+
+        if (localCache) {
+            val url = resolveResult?.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
+            if (url != null) {
+                resolverRepository.insert(uriString, url)
+            }
+        }
+
+        return resolveResult
     }
 
     private fun resolve(
         uri: Uri,
-        resolvePredicate: (String) -> Boolean,
+        resolvePredicate: ResolvePredicate? = null,
         externalService: Boolean,
-        timeout: Int
-    ): Result<ResolveType> {
-        logger.debug({ "Following redirects for $it" }, uri, HashProcessor.UriProcessor)
+        timeout: Int,
+    ): Result<ResolveResultType>? {
+        logger.error({ "Following redirects for $it" }, uri, HashProcessor.UriProcessor)
 
         val inputUri = uri.toString()
-        if (resolvePredicate(inputUri)) {
+        if (resolvePredicate == null || resolvePredicate(uri)) {
             if (externalService) {
-                logger.debug(
+                logger.error(
                     { "Using external service for $it" },
                     inputUri,
                     HashProcessor.StringProcessor
@@ -79,38 +88,41 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
                 val con = try {
                     redirectResolver.resolveRemote(inputUri, timeout)
                 } catch (e: IOException) {
-                    logger.debug(e)
+                    logger.error(e)
                     return Result.failure(e)
                 }
 
                 if (!isHttpSuccess(con.responseCode)) {
-                    logger.debug("Failed to resolve via external service (${con.responseCode}): ${con.readToString()}")
-                    return failure("Something went wrong while resolving redirect (response code ${con.responseCode})")
+                    logger.error("Failed to resolve via external service (${con.responseCode}): ${con.readToString()}")
+                    return Result.failure("Something went wrong while resolving redirect (${con.responseCode})")
                 }
 
                 val obj = con.readToJson().asJsonObject
                 val remoteResolveUrlField = resolverRepository.remoteResolveUrlField
 
-                return obj.asStringOrNull(remoteResolveUrlField)?.let {
-                    Result.success(ResolveType.Remote(it))
-                } ?: failure(
-                    "Something went wrong while reading the response (attempted to get '$remoteResolveUrlField' on $obj)"
-                )
+                val resolvedUrl = obj.asStringOrNull(remoteResolveUrlField)
+
+                return if (resolvedUrl != null) {
+                    ResolveResultType.Resolved.Remote(resolvedUrl).wrap()
+                } else {
+                    logger.error("Failed to read resolve response (attempted to get '$remoteResolveUrlField' on $obj)")
+                    Result.failure("Something went wrong while reading the response (attempted to get '$remoteResolveUrlField' on $obj)")
+                }
             }
 
-            logger.debug({ "Using local service for $it" }, inputUri, HashProcessor.StringProcessor)
+            logger.error({ "Using local service for $it" }, inputUri, HashProcessor.StringProcessor)
 
             try {
                 val resolved = redirectResolver.resolveLocal(inputUri, timeout)
                 if (resolved != null) {
-                    return Result.success(ResolveType.Local(resolved))
+                    return ResolveResultType.Resolved.Local(resolved).wrap()
                 }
             } catch (e: IOException) {
-                logger.debug(e)
+                logger.error(e)
                 return Result.failure(e)
             }
         }
 
-        return Result.success(ResolveType.NotResolved(inputUri))
+        return null
     }
 }

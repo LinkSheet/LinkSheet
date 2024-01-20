@@ -7,7 +7,6 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.lifecycleScope
-import fe.kotlin.util.runIf
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.extension.android.initPadding
@@ -15,7 +14,6 @@ import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.interconnect.LinkSheetConnector
-import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -30,7 +28,7 @@ abstract class BottomSheet(
     protected val initPadding: Boolean = false
 ) {
     fun launch() {
-        if(initPadding){
+        if (initPadding) {
             activity.initPadding()
         }
 
@@ -38,15 +36,9 @@ abstract class BottomSheet(
         if (viewModel.showLoadingBottomSheet()) {
             activity.setContentWithKoin {
                 LaunchedEffect(viewModel.resolveResult) {
-                    (viewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
-                        if (result != null) makeResolveToast(
-                            viewModel.resolveViaToast.value,
-                            viewModel.resolveViaFailedToast.value,
-                            result,
-                            resolveType.stringResId
-                        )
+                    (viewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.let {
+                        showResolveToasts(it)
                     }
-
                 }
 
                 ShowSheet(viewModel)
@@ -58,26 +50,21 @@ abstract class BottomSheet(
         }
     }
 
+    private fun showResolveToasts(result: BottomSheetResult.BottomSheetSuccessResult, uiThread: Boolean = false) {
+        viewModel.getResolveToastTexts(result.resolveModuleStatus).forEach {
+            activity.showToast(it, uiThread = uiThread)
+        }
+    }
+
     private fun resolveAsync(viewModel: BottomSheetViewModel): Deferred<Unit> {
         return activity.lifecycleScope.async {
             val completed = viewModel.resolveAsync(intent, activity.referrer).await()
 
             if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
-                completed.resolveResults.forEach { (resolveType, result) ->
-                    if (result != null) makeResolveToast(
-                        viewModel.resolveViaToast.value,
-                        viewModel.resolveViaFailedToast.value,
-                        result,
-                        resolveType.stringResId,
-                        true
-                    )
-                }
+                showResolveToasts(completed, uiThread = true)
 
                 if (viewModel.openingWithAppToast.value) {
-                    activity.showToast(
-                        getString(R.string.opening_with_app, completed.app.label),
-                        uiThread = true
-                    )
+                    activity.showToast(getString(R.string.opening_with_app, completed.app.label), uiThread = true)
                 }
 
                 launchApp(
@@ -90,29 +77,6 @@ abstract class BottomSheet(
         }
     }
 
-    private fun makeResolveToast(
-        showResolveViaToast: Boolean,
-        showResolveFailedToast: Boolean,
-        result: Result<ResolveType>,
-        @StringRes resolveTypeId: Int,
-        uiThread: Boolean = false
-    ) {
-        result.getOrNull()?.let { type ->
-            if (type !is ResolveType.NotResolved && showResolveViaToast) {
-                activity.showToast(
-                    getString(
-                        R.string.resolved_via, getString(resolveTypeId), getString(type.stringId)
-                    ), uiThread = uiThread
-                )
-            }
-        } ?: runIf(showResolveFailedToast) {
-            activity.showToast(
-                getString(
-                    R.string.resolve_failed, getString(resolveTypeId), result.exceptionOrNull()
-                ), uiThread = uiThread
-            )
-        }
-    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun launchApp(

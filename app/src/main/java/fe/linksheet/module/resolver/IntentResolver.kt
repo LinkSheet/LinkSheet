@@ -141,7 +141,7 @@ class IntentResolver(
         var uri = modifyUri(intent.getUri(), useClearUrls.value, useFastForwardRules.value)
 
         if (uri == null) {
-            logger.debug("Uri is null, something probably went very wrong")
+            logger.error("Uri is null, something probably went very wrong")
         }
 
 //        var followRedirectsResult: Result<ResolveType>
@@ -321,21 +321,6 @@ class IntentResolver(
         )
     }
 
-//    private suspend fun resolveIfEnabled(
-//        enabled: Boolean,
-//        uri: Uri?,
-//        resolve: suspend (Uri) -> Result<ResolveResultType>?
-//    ): Pair<Result<ResolveResultType>?, Uri?> {
-//        if (enabled && uri != null) {
-//            val resolveResult = resolve(uri)
-//
-//            // resolveResult == null means that no "resolving" occurred (e.g. setting followOnlyTrackers is enabled)
-//            return resolveResult to resolveResult?.getOrNull().getUrlOrDefault(uri)
-//        }
-//
-//        return null to uri
-//    }
-
     private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
         if (downloaderCheckUrlMimeType.value) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
@@ -359,8 +344,6 @@ class IntentResolver(
 
             runCatching {
                 if (fastForward) {
-//                    FastForwardRules.
-
                     FastForward.getRuleRedirect(url)?.let { url = it }
                 }
             }.onFailure { logger.debug(it, "FastForward") }

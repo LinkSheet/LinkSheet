@@ -260,6 +260,12 @@ dependencies {
     implementation(libs.compose.dialog.helper)
     implementation(libs.process.launcher)
 
+    "proImplementation"(platform(libs.bom))
+    "proImplementation"(libs.storage.kt)
+    "proImplementation"(libs.compose.auth.ui)
+    "proImplementation"(libs.gotrue.kt)
+    "proImplementation"(Ktor.client.android)
+
     implementation(libs.jsoup)
 
     implementation(Google.android.material)

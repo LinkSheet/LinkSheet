@@ -36,6 +36,7 @@ import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import fe.fastforwardkt.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class IntentResolver(
@@ -129,7 +130,7 @@ class IntentResolver(
         Amp2Html("amp2html", R.string.amp2html), Redirect("redirect", R.string.follow_redirects);
 
         companion object {
-            fun getResolvedByKey(key: String) = values().find { it.key == key }
+            fun getResolvedByKey(key: String) = entries.find { it.key == key }
         }
     }
 
@@ -281,7 +282,12 @@ class IntentResolver(
         }
 
         val browserMode = if (UriUtil.hasWebScheme(newIntent)) {
-            val (mode, selected, repository) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
+            val (
+                mode,
+                selected,
+                repository
+            ) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
+
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)
 

@@ -2,9 +2,7 @@ package fe.linksheet.activity.bottomsheet
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.net.Uri
-import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -32,9 +30,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.lifecycleScope
-import fe.kotlin.util.runIf
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
@@ -44,11 +39,9 @@ import fe.linksheet.extension.android.*
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
-import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
-import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -57,111 +50,18 @@ import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.PrivateBrowsingBrowser
 import fe.linksheet.util.selfIntent
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
 
 class LegacyBottomSheet(
-    bottomSheetActivity: BottomSheetActivity,
-    bottomSheetViewModel: BottomSheetViewModel,
-) : BottomSheet(bottomSheetActivity, bottomSheetViewModel) {
-    override fun show() {
-        initPadding()
-
-        val deferred = resolveAsync(bottomSheetViewModel)
-        if (bottomSheetViewModel.showLoadingBottomSheet()) {
-            setContentWithKoin {
-                LaunchedEffect(bottomSheetViewModel.resolveResult) {
-                    (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
-                        if (result != null) makeResolveToast(
-                            bottomSheetViewModel.resolveViaToast.value,
-                            bottomSheetViewModel.resolveViaFailedToast.value,
-                            result,
-                            resolveType.stringResId
-                        )
-                    }
-
-                }
-
-                AppThemeBottomSheet(bottomSheetViewModel)
-            }
-        } else {
-            deferred.invokeOnCompletion {
-                setContentWithKoin { AppThemeBottomSheet(bottomSheetViewModel) }
-            }
-        }
-    }
-
-    private fun resolveAsync(bottomSheetViewModel: BottomSheetViewModel): Deferred<Unit> {
-        return lifecycleScope.async {
-            val completed = bottomSheetViewModel.resolveAsync(intent, referrer).await()
-
-            if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
-                completed.resolveResults.forEach { (resolveType, result) ->
-                    if (result != null) makeResolveToast(
-                        bottomSheetViewModel.resolveViaToast.value,
-                        bottomSheetViewModel.resolveViaFailedToast.value,
-                        result,
-                        resolveType.stringResId,
-                        true
-                    )
-                }
-
-                if (bottomSheetViewModel.openingWithAppToast.value) {
-                    showToast(
-                        getString(R.string.opening_with_app, completed.app.label),
-                        uiThread = true
-                    )
-                }
-
-                launchApp(
-                    completed,
-                    completed.app,
-                    always = completed.isRegularPreferredApp,
-                    persist = false,
-                )
-            }
-        }
-    }
+    activity: BottomSheetActivity,
+    viewModel: BottomSheetViewModel,
+) : BottomSheet(activity, viewModel, initPadding = true) {
 
     @Composable
-    private fun AppThemeBottomSheet(
-        bottomSheetViewModel: BottomSheetViewModel,
-    ) {
+    override fun ShowSheet(bottomSheetViewModel: BottomSheetViewModel) {
         AppTheme {
             BottomSheet(bottomSheetViewModel)
-        }
-    }
-
-    private fun makeResolveToast(
-        showResolveViaToast: Boolean,
-        showResolveFailedToast: Boolean,
-        result: Result<ResolveType>,
-        @StringRes resolveTypeId: Int,
-        uiThread: Boolean = false
-    ) {
-        result.getOrNull()?.let { type ->
-            if (type !is ResolveType.NotResolved && showResolveViaToast) {
-                showToast(
-                    getString(
-                        R.string.resolved_via,
-                        getString(resolveTypeId),
-                        getString(type.stringId)
-                    ),
-                    uiThread = uiThread
-                )
-            }
-        } ?: runIf(showResolveFailedToast) {
-            showToast(
-                getString(
-                    R.string.resolve_failed,
-                    getString(resolveTypeId),
-                    result.exceptionOrNull()
-                ),
-                uiThread = uiThread
-            )
         }
     }
 
@@ -263,14 +163,14 @@ class LegacyBottomSheet(
     ) {
         if (result != null && result is BottomSheetResult.BottomSheetSuccessResult && !result.hasAutoLaunchApp) {
             val showPackage = remember {
-                result.showExtended || bottomSheetViewModel.alwaysShowPackageName.value
+                result.showExtended || viewModel.alwaysShowPackageName.value
             }
 
 
             val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
             else LocalConfiguration.current.screenHeightDp) / 3f
 
-            val itemHeight = if (bottomSheetViewModel.gridLayout.value) {
+            val itemHeight = if (viewModel.gridLayout.value) {
                 val gridItemHeight =
                     gridItemHeight.value + if (showPackage) gridItemHeightPackageText.value else 0.0f + gridItemHeightPrivateButton.value
 
@@ -281,19 +181,19 @@ class LegacyBottomSheet(
 
             if (result.filteredItem == null) {
                 OpenWith(
-                    bottomSheetViewModel = bottomSheetViewModel,
+                    bottomSheetViewModel = viewModel,
                     hideDrawer = hideDrawer,
                     baseHeight = baseHeight,
                     showPackage = showPackage,
-                    previewUrl = bottomSheetViewModel.previewUrl.value
+                    previewUrl = viewModel.previewUrl.value
                 )
             } else {
                 OpenWithPreferred(
-                    bottomSheetViewModel = bottomSheetViewModel,
+                    bottomSheetViewModel = viewModel,
                     hideDrawer = hideDrawer,
                     baseHeight = baseHeight,
                     showPackage = showPackage,
-                    previewUrl = bottomSheetViewModel.previewUrl.value
+                    previewUrl = viewModel.previewUrl.value
                 )
             }
         } else {
@@ -354,19 +254,19 @@ class LegacyBottomSheet(
         padding: PaddingValues,
     ) {
         OutlinedOrTextButton(
-            textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
+            textButton = viewModel.useTextShareCopyButtons.value,
             contentPadding = padding,
             onClick = {
-                bottomSheetViewModel.clipboardManager.setText(
+                viewModel.clipboardManager.setText(
                     "URL",
                     result?.uri.toString()
                 )
 
-                if (!bottomSheetViewModel.urlCopiedToast.value) {
+                if (!viewModel.urlCopiedToast.value) {
                     showToast(R.string.url_copied)
                 }
 
-                if (bottomSheetViewModel.hideAfterCopying.value) {
+                if (viewModel.hideAfterCopying.value) {
                     hideDrawer()
                 }
             },
@@ -377,7 +277,7 @@ class LegacyBottomSheet(
     @Composable
     private fun ShareToButton(result: BottomSheetResult?, padding: PaddingValues) {
         OutlinedOrTextButton(
-            textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
+            textButton = viewModel.useTextShareCopyButtons.value,
             contentPadding = padding,
             onClick = {
                 startActivity(Intent().buildSendTo(result?.uri))
@@ -537,7 +437,7 @@ class LegacyBottomSheet(
     }
 
     private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
-        if (!bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) return null
+        if (!viewModel.enableRequestPrivateBrowsingButton.value) return null
         return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
     }
 
@@ -999,37 +899,5 @@ class LegacyBottomSheet(
             lineHeight = 12.sp,
             color = MaterialTheme.colorScheme.tertiary
         )
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun launchApp(
-        result: BottomSheetResult.BottomSheetSuccessResult,
-        info: DisplayActivityInfo,
-        always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
-        persist: Boolean = true,
-    ) {
-        val deferred = bottomSheetViewModel.launchAppAsync(
-            info, result.intent, always, privateBrowsingBrowser,
-            persist,
-        )
-
-        deferred.invokeOnCompletion {
-            val showAsReferrer = bottomSheetViewModel.showAsReferrer.value
-            val intent = deferred.getCompleted()
-
-            intent.putExtra(
-                LinkSheetConnector.EXTRA_REFERRER,
-                if (showAsReferrer) Uri.parse("android-app://${packageName}") else referrer,
-            )
-
-            if (!showAsReferrer) {
-                intent.putExtra(Intent.EXTRA_REFERRER, referrer)
-            }
-
-            startActivity(intent)
-
-            finish()
-        }
     }
 }

@@ -3,14 +3,12 @@ package fe.linksheet.activity.bottomsheet
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.net.Uri
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -22,19 +20,7 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.contentColorFor
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -57,8 +43,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
-import androidx.lifecycle.LifecycleCoroutineScope
-import fe.kotlin.util.runIf
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
@@ -69,11 +53,9 @@ import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
-import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
-import fe.linksheet.module.resolver.urlresolver.ResolveType
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -82,103 +64,18 @@ import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.PrivateBrowsingBrowser
 import fe.linksheet.util.selfIntent
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
 
-
 class NewBottomSheet(
-    bottomSheetActivity: BottomSheetActivity,
-    bottomSheetViewModel: BottomSheetViewModel
-) : BottomSheet(bottomSheetActivity, bottomSheetViewModel) {
-    override fun show() {
-        val deferred = resolveAsync(bottomSheetViewModel)
-        if (bottomSheetViewModel.showLoadingBottomSheet()) {
-            setContentWithKoin {
-                LaunchedEffect(bottomSheetViewModel.resolveResult) {
-                    (bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.resolveResults?.forEach { (resolveType, result) ->
-                        if (result != null) makeResolveToast(
-                            bottomSheetViewModel.resolveViaToast.value,
-                            bottomSheetViewModel.resolveViaFailedToast.value,
-                            result,
-                            resolveType.stringResId
-                        )
-                    }
-
-                }
-
-                AppThemeBottomSheet(bottomSheetViewModel)
-            }
-        } else {
-            deferred.invokeOnCompletion {
-                setContentWithKoin { AppThemeBottomSheet(bottomSheetViewModel) }
-            }
-        }
-    }
-
-    private fun resolveAsync(bottomSheetViewModel: BottomSheetViewModel): Deferred<Unit> {
-        return lifecycleScope.async {
-            val completed = bottomSheetViewModel.resolveAsync(intent, referrer).await()
-
-            if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
-                completed.resolveResults.forEach { (resolveType, result) ->
-                    if (result != null) makeResolveToast(
-                        bottomSheetViewModel.resolveViaToast.value,
-                        bottomSheetViewModel.resolveViaFailedToast.value,
-                        result,
-                        resolveType.stringResId,
-                        true
-                    )
-                }
-
-                if (bottomSheetViewModel.openingWithAppToast.value) {
-                    showToast(
-                        getString(R.string.opening_with_app, completed.app.label), uiThread = true
-                    )
-                }
-
-                launchApp(
-                    completed,
-                    completed.app,
-                    always = completed.isRegularPreferredApp,
-                    persist = false,
-                )
-            }
-        }
-    }
-
+    activity: BottomSheetActivity,
+    viewModel: BottomSheetViewModel
+) : BottomSheet(activity, viewModel) {
+    
     @Composable
-    private fun AppThemeBottomSheet(
-        bottomSheetViewModel: BottomSheetViewModel,
-    ) {
+    override fun ShowSheet(bottomSheetViewModel: BottomSheetViewModel) {
         AppTheme {
             BottomSheet(bottomSheetViewModel)
-        }
-    }
-
-    private fun makeResolveToast(
-        showResolveViaToast: Boolean,
-        showResolveFailedToast: Boolean,
-        result: Result<ResolveType>,
-        @StringRes resolveTypeId: Int,
-        uiThread: Boolean = false
-    ) {
-        result.getOrNull()?.let { type ->
-            if (type !is ResolveType.NotResolved && showResolveViaToast) {
-                showToast(
-                    getString(
-                        R.string.resolved_via, getString(resolveTypeId), getString(type.stringId)
-                    ), uiThread = uiThread
-                )
-            }
-        } ?: runIf(showResolveFailedToast) {
-            showToast(
-                getString(
-                    R.string.resolve_failed, getString(resolveTypeId), result.exceptionOrNull()
-                ), uiThread = uiThread
-            )
         }
     }
 
@@ -251,14 +148,14 @@ class NewBottomSheet(
     ) {
         if (result != null && result is BottomSheetResult.BottomSheetSuccessResult && !result.hasAutoLaunchApp) {
             val showPackage = remember {
-                result.showExtended || bottomSheetViewModel.alwaysShowPackageName.value
+                result.showExtended || viewModel.alwaysShowPackageName.value
             }
 
 
             val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
             else LocalConfiguration.current.screenHeightDp) / 3f
 
-            val itemHeight = if (bottomSheetViewModel.gridLayout.value) {
+            val itemHeight = if (viewModel.gridLayout.value) {
                 val gridItemHeight = gridItemHeight.value + if (showPackage) 10f else 0.0f
 
                 gridItemHeight
@@ -268,17 +165,17 @@ class NewBottomSheet(
 
             if (result.filteredItem == null) {
                 OpenWith(
-                    bottomSheetViewModel = bottomSheetViewModel,
+                    bottomSheetViewModel = viewModel,
                     hideDrawer = hideDrawer,
                     showPackage = showPackage,
-                    previewUrl = bottomSheetViewModel.previewUrl.value
+                    previewUrl = viewModel.previewUrl.value
                 )
             } else {
                 OpenWithPreferred(
-                    bottomSheetViewModel = bottomSheetViewModel,
+                    bottomSheetViewModel = viewModel,
                     hideDrawer = hideDrawer,
                     showPackage = showPackage,
-                    previewUrl = bottomSheetViewModel.previewUrl.value
+                    previewUrl = viewModel.previewUrl.value
                 )
             }
         } else {
@@ -327,12 +224,12 @@ class NewBottomSheet(
                     CopyButton(
                         result,
                         hideDrawer,
-                        isTextBasedButton = bottomSheetViewModel.useTextShareCopyButtons.value
+                        isTextBasedButton = viewModel.useTextShareCopyButtons.value
                     )
                     Spacer(modifier = Modifier.width(2.dp))
                     ShareToButton(
                         result,
-                        isTextBasedButton = bottomSheetViewModel.useTextShareCopyButtons.value
+                        isTextBasedButton = viewModel.useTextShareCopyButtons.value
                     )
                 }
             }
@@ -351,15 +248,15 @@ class NewBottomSheet(
             ElevatedButton(
                 modifier = modifier,
                 onClick = {
-                    bottomSheetViewModel.clipboardManager.setText(
+                    viewModel.clipboardManager.setText(
                         "URL", result?.uri.toString()
                     )
 
-                    if (!bottomSheetViewModel.urlCopiedToast.value) {
+                    if (!viewModel.urlCopiedToast.value) {
                         showToast(R.string.url_copied)
                     }
 
-                    if (bottomSheetViewModel.hideAfterCopying.value) {
+                    if (viewModel.hideAfterCopying.value) {
                         hideDrawer()
                     }
                 },
@@ -379,15 +276,15 @@ class NewBottomSheet(
             TextButton(
                 modifier = modifier,
                 onClick = {
-                    bottomSheetViewModel.clipboardManager.setText(
+                    viewModel.clipboardManager.setText(
                         "URL", result?.uri.toString()
                     )
 
-                    if (!bottomSheetViewModel.urlCopiedToast.value) {
+                    if (!viewModel.urlCopiedToast.value) {
                         showToast(R.string.url_copied)
                     }
 
-                    if (bottomSheetViewModel.hideAfterCopying.value) {
+                    if (viewModel.hideAfterCopying.value) {
                         hideDrawer()
                     }
                 },
@@ -1085,7 +982,7 @@ class NewBottomSheet(
     }
 
     private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
-        if (!bottomSheetViewModel.enableRequestPrivateBrowsingButton.value) return null
+        if (!viewModel.enableRequestPrivateBrowsingButton.value) return null
         return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
     }
 
@@ -1383,38 +1280,6 @@ class NewBottomSheet(
                     modifier = Modifier.padding(start = 10.dp, end = 10.dp)
                 )
             }
-        }
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun launchApp(
-        result: BottomSheetResult.BottomSheetSuccessResult,
-        info: DisplayActivityInfo,
-        always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
-        persist: Boolean = true,
-    ) {
-        val deferred = bottomSheetViewModel.launchAppAsync(
-            info, result.intent, always, privateBrowsingBrowser,
-            persist,
-        )
-
-        deferred.invokeOnCompletion {
-            val showAsReferrer = bottomSheetViewModel.showAsReferrer.value
-            val intent = deferred.getCompleted()
-
-            intent.putExtra(
-                LinkSheetConnector.EXTRA_REFERRER,
-                if (showAsReferrer) Uri.parse("android-app://${packageName}") else referrer,
-            )
-
-            if (!showAsReferrer) {
-                intent.putExtra(Intent.EXTRA_REFERRER, referrer)
-            }
-
-            startActivity(intent)
-
-            finish()
         }
     }
 }

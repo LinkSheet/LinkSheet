@@ -2,9 +2,6 @@ package fe.linksheet.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.lifecycle.lifecycleScope
-import fe.linksheet.activity.bottomsheet.BottomSheet
 import fe.linksheet.activity.bottomsheet.LegacyBottomSheet
 import fe.linksheet.activity.bottomsheet.NewBottomSheet
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
@@ -24,6 +21,6 @@ class BottomSheetActivity : ComponentActivity() {
             LegacyBottomSheet(this, bottomSheetViewModel)
         }
 
-        bottomSheet.show()
+        bottomSheet.launch()
     }
 }

@@ -1,11 +1,8 @@
 package fe.linksheet.module.preference
 
 import android.content.Context
-import android.content.SharedPreferences
-import com.google.gson.Gson
 import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.PreferenceRepository
-import fe.android.preference.helper.compose.closeGlobalStateCache
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getGlobalCachedState
 import fe.linksheet.LinkSheetAppConfig
@@ -16,7 +13,7 @@ val preferenceRepositoryModule = module {
     singleOf(::AppPreferenceRepository)
 }
 
-class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepository(context) {
+class AppPreferenceRepository(val context: Context) : PreferenceRepository(context) {
 
     private val followRedirectsExternalService = getBooleanState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = getBooleanState(AppPreferences.amp2HtmlExternalService)
@@ -29,27 +26,34 @@ class AppPreferenceRepository(context: Context, val gson: Gson) : PreferenceRepo
         }
     }
 
+    fun importPreferences(preferencesToImport: Map<String, String>) {
+        val preferences = AppPreferences.all
+
+        val mappedPreferences = preferencesToImport.mapNotNull {
+            val preference = preferences[it.key] ?: return@mapNotNull null
+            preference to it.value
+        }
+
+        editor {
+            mappedPreferences.forEach { (preference, newValue) ->
+                setStringValueToPreference(preference, newValue, this)
+            }
+        }
+
+        // Refresh must be delayed to until after the editor has been closed
+        mappedPreferences.forEach {
+            //  Forces refresh by reading new value from the preference file; In the future, maybe this should be updated
+            //  newValue to the RepositoryState instance directly, but that would required converting the
+            //  string value to the appropriate state type
+            getGlobalCachedState(it.first.key)?.forceRefresh()
+        }
+    }
+
     fun dumpPreferences(excludePreferences: List<BasePreference<*, *>>): Map<String, String?> {
         return AppPreferences.all.toMutableMap().apply {
             excludePreferences.forEach { remove(it.key) }
         }.map { (_, pkg) -> pkg }.associate { preference ->
             preference.key to getAnyAsString(preference)
         }
-    }
-
-    fun importPreferences(
-        importPreferences: Map<String, String>,
-        editor: SharedPreferences.Editor?
-    ): List<String> {
-        val preferences = AppPreferences.all.toMutableMap()
-        return importPreferences.mapNotNull { (name, value) ->
-            val preference = preferences[name] ?: return@mapNotNull null
-            setStringValueToPreference(preference, value, editor)
-            name
-        }
-    }
-
-    fun forceRefreshCachedState(keys: List<String>) {
-        keys.forEach { getGlobalCachedState(it)?.forceRefresh() }
     }
 }

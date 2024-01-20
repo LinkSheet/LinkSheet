@@ -21,14 +21,14 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.Texts
-import fe.linksheet.module.viewmodel.ExportSettingsViewmodel
+import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExportImportSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: ExportSettingsViewmodel = koinViewModel(),
+    viewModel: ExportSettingsViewModel = koinViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -44,7 +44,7 @@ fun ExportImportSettingsRoute(
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-        ExportSettingsDialog(preferenceRepository = viewModel.preferenceRepository)
+        ExportSettingsDialog(viewModel = viewModel)
     }
 
     val confirmImportDialog = dialogHelper<Uri, Uri, Unit>(
@@ -55,7 +55,7 @@ fun ExportImportSettingsRoute(
         ImportSettingsDialog(
             uri = state,
             close = close,
-            preferenceRepository = viewModel.preferenceRepository
+            viewModel = viewModel
         )
     }
 

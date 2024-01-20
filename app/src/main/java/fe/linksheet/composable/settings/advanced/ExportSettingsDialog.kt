@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.android.compose.dialog.helper.OnClose
 import fe.gson.dsl.jsonObject
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
@@ -29,15 +28,13 @@ import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.LinkableTextView
-import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 import java.io.FileOutputStream
 import java.time.LocalDateTime
 
 @Composable
-fun ExportSettingsDialog(
-    preferenceRepository: AppPreferenceRepository,
-) {
+fun ExportSettingsDialog(viewModel: ExportSettingsViewModel) {
     val historyFlag = false
 
     val context = LocalContext.current
@@ -50,21 +47,7 @@ fun ExportSettingsDialog(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = {
             if (it.resultCode == Activity.RESULT_OK) {
-                val preferences = preferenceRepository.dumpPreferences(
-                    if (!includeLogHashKey) listOf(AppPreferences.logKey) else listOf()
-                )
-
-                val fileContent = jsonObject {
-                    "preferences" += AppPreferences.toJsonArray(preferences)
-                }
-
-                it.data?.data?.let { uri ->
-                    contentResolver.openFileDescriptor(uri, "w")?.use { pfd ->
-                        FileOutputStream(pfd.fileDescriptor).bufferedWriter().use { fos ->
-                            fos.write(preferenceRepository.gson.toJson(fileContent))
-                        }
-                    }
-                }
+                it.data?.data?.let { uri -> viewModel.exportPreferences(uri, includeLogHashKey) }
             }
         }
     )

@@ -1,6 +1,7 @@
 package fe.linksheet.module.viewmodel.util
 
 import android.os.Build
+import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
@@ -13,6 +14,7 @@ import fe.linksheet.module.preference.AppPreferences
 
 class LogViewCommon(
     val preferenceRepository: AppPreferenceRepository,
+    val gson: Gson,
     private val logger: Logger
 ) {
     private fun logPreferences(redact: Boolean): Map<String, String?> {
@@ -30,7 +32,7 @@ class LogViewCommon(
         includeThrowable: Boolean,
         logEntries: List<LogEntry>,
     ): String {
-        return preferenceRepository.gson.toJson(jsonObject {
+        return gson.toJson(jsonObject {
             if (includeFingerprint) {
                 "device_fingerprint" += jsonObject {
                     "fingerprint" += Build.FINGERPRINT

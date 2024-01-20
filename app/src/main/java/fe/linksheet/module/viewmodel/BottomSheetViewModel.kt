@@ -10,11 +10,13 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
+import androidx.lifecycle.SavedStateHandle
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.android.preference.helper.compose.getBooleanState
@@ -52,6 +54,7 @@ class BottomSheetViewModel(
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
+    val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger = loggerFactory.createLogger(BottomSheetViewModel::class)
 
@@ -99,6 +102,8 @@ class BottomSheetViewModel(
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
+
+
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
         val canAccessInternet = kotlin.runCatching {

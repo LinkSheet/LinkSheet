@@ -47,9 +47,8 @@ object IntentExt : KoinComponent {
     }
 }
 
-
-fun Intent.buildSendTo(uri: Uri?): Intent {
-    return Intent.createChooser(this.apply {
+fun shareUri(uri: Uri?): Intent {
+    return Intent.createChooser(Intent().apply {
         this.action = Intent.ACTION_SEND
         this.type = "text/plain"
         this.putExtra(Intent.EXTRA_TEXT, uri?.toString())

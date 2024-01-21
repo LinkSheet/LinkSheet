@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
                         GeneralSettingsRoute(onBackPressed = onBackPressed)
                     }
 
-                    animatedComposable(route = notificationSettingsRoute){
+                    animatedComposable(route = notificationSettingsRoute) {
                         NotificationSettingsRoute(onBackPressed = onBackPressed)
                     }
 
@@ -291,10 +291,8 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    if (mainViewModel.devModeEnabled.value) {
-                        animatedComposable(route = devModeRoute) {
-                            DevSettingsRoute(onBackPressed = onBackPressed)
-                        }
+                    animatedComposable(route = devModeRoute) {
+                        DevSettingsRoute(onBackPressed = onBackPressed)
                     }
                 }
             }

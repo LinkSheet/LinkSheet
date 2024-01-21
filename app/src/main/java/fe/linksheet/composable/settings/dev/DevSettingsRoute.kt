@@ -7,19 +7,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeveloperMode
-import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
-import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.module.viewmodel.DebugSettingsViewModel
+import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -27,7 +25,7 @@ import org.koin.androidx.compose.koinViewModel
 fun DevSettingsRoute(
 //    navController: NavHostController,
     onBackPressed: () -> Unit,
-//    viewModel: DebugSettingsViewModel = koinViewModel()
+    viewModel: DevSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
 
@@ -54,19 +52,14 @@ fun DevSettingsRoute(
                 )
             }
 
-
-
-//            item(key = "load_dumped_preferences") {
-//                SettingsItemRow(
-//                    navController = navController,
-//                    navigateTo = loadDumpedPreferences,
-//                    headlineId = R.string.import_dumped_preference,
-//                    subtitleId = R.string.import_dumped_preference_explainer,
-//                    image = {
-//                        ColoredIcon(icon = Icons.Default.List, descriptionId = R.string.logs)
-//                    }
-//                )
-//            }
+            item(key = "dev_bottomsheet") {
+                SwitchRow(
+                    state = viewModel.useDevBottomSheet,
+                    viewModel = viewModel,
+                    headlineId = R.string.enable_dev_bottom_sheet,
+                    subtitleId = R.string.enable_dev_bottom_sheet_explainer
+                )
+            }
         }
     }
 }

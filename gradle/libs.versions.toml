@@ -61,9 +61,9 @@ stringbuilder-util-kt = "com.github.1fexd:stringbuilder-util-kt:_"
 
 cached-urls = "com.github.1fexd:cached-urls:_"
 
-preference-helper = "com.github.1fexd.android-pref-helper:preference-helper:_"
+preference-helper = "com.github.1fexd.android-pref-helper:core:_"
 
-preference-helper-compose = "com.github.1fexd.android-pref-helper:preference-helper-compose:_"
+preference-helper-compose = "com.github.1fexd.android-pref-helper:compose:_"
 
 compose-route-util = "com.github.1fexd:compose-route-util:_"
 

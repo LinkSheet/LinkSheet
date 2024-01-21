@@ -280,7 +280,7 @@ class LegacyBottomSheet(
             textButton = viewModel.useTextShareCopyButtons.value,
             contentPadding = padding,
             onClick = {
-                startActivity(Intent().buildSendTo(result?.uri))
+                startActivity(shareUri(result?.uri))
                 finish()
             },
             buttonText = R.string.send_to

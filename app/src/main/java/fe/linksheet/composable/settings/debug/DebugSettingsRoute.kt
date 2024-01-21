@@ -1,12 +1,10 @@
 package fe.linksheet.composable.settings.debug
 
-import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,12 +12,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.module.viewmodel.DebugSettingsViewModel
+import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -27,7 +24,7 @@ import org.koin.androidx.compose.koinViewModel
 fun DebugSettingsRoute(
     navController: NavHostController,
     onBackPressed: () -> Unit,
-    viewModel: DebugSettingsViewModel = koinViewModel()
+    viewModel: DevSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
 

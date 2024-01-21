@@ -1,7 +1,7 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.annotation.SuppressLint
-import android.content.Intent
+import android.content.ClipboardManager
 import android.content.res.Configuration
 import android.net.Uri
 import androidx.annotation.StringRes
@@ -16,20 +16,12 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,9 +32,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
+import fe.android.preference.helper.compose.StatePreference
+import fe.android.preference.helper.compose.mock.MockRepositoryState
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
@@ -67,7 +63,7 @@ import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
 
-class NewBottomSheet(
+class DevBottomSheet(
     activity: BottomSheetActivity,
     viewModel: BottomSheetViewModel
 ) : BottomSheet(activity, viewModel) {
@@ -398,7 +394,7 @@ class NewBottomSheet(
         }
     }
 
-    @OptIn(ExperimentalFoundationApi::class)
+    @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
     @Composable
     private fun BtmSheetNonGridUI(
         bottomSheetViewModel: BottomSheetViewModel,
@@ -433,7 +429,7 @@ class NewBottomSheet(
         val modifier: AppListModifier = @Composable { index, info ->
             Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+                .padding(start = 15.dp, end = 15.dp)
                 .clip(defaultRoundedCornerShape)
                 .combinedClickable(onClick = {
                     bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
@@ -462,60 +458,99 @@ class NewBottomSheet(
                     }
                 })
                 .background(
-                    if (selectedItem == index) androidx.compose.material3.LocalContentColor.current.copy(
-                        0.1f
-                    ) else Color.Transparent
+                    if (selectedItem == index) LocalContentColor.current.copy(0.1f)
+                    else Color.Transparent
                 )
                 .padding(appListItemPadding)
         }
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            item(key = "previewUrl") {
-                if (previewUrl) {
-                    UrlPreview(uri = result.uri)
+            if (previewUrl && result.uri != null) {
+                item(key = "previewUrl") {
+                    UrlBar(
+                        uri = result.uri,
+                        clipboardManager = viewModel.clipboardManager,
+                        urlCopiedToast = viewModel.urlCopiedToast,
+                        hideAfterCopying = viewModel.hideAfterCopying,
+                        showToast = {
+                            showToast(it)
+                        },
+                        hideDrawer = hideDrawer,
+                        shareUri = {
+                            startActivity(shareUri(result.uri))
+                            finish()
+                        }
+                    )
                 }
             }
+
             if (forPreferred) {
                 val filteredItem = result.filteredItem!!
                 item {
-                    Column(modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            launchApp(result, filteredItem, always = false)
-                        }) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 10.dp, end = 10.dp)
+                            .clip(defaultRoundedCornerShape)
+                            .clickable {
+                                launchApp(result, filteredItem, always = false)
+                            }
+                    ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = 15.dp, end = 15.dp)
+                                .padding(start = 5.dp, end = 5.dp)
                                 .heightIn(min = preferredAppItemHeight),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                bitmap = filteredItem.iconBitmap,
-                                contentDescription = filteredItem.label,
-                                modifier = Modifier.size(32.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
-                                Text(
-                                    text = stringResource(
-                                        id = R.string.open_with_app,
-                                        filteredItem.label,
-                                    ),
-                                    fontFamily = HkGroteskFontFamily,
-                                    fontWeight = FontWeight.SemiBold
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Image(
+                                    bitmap = filteredItem.iconBitmap,
+                                    contentDescription = filteredItem.label,
+                                    modifier = Modifier.size(32.dp)
                                 )
 
-                                if (showPackage) {
+                                Spacer(modifier = Modifier.width(10.dp))
+
+                                Column {
                                     Text(
-                                        text = filteredItem.packageName, fontSize = 12.sp
+                                        text = stringResource(
+                                            id = R.string.open_with_app,
+                                            filteredItem.label,
+                                        ),
+                                        fontFamily = HkGroteskFontFamily,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+
+                                    if (showPackage) {
+                                        Text(
+                                            text = filteredItem.packageName, fontSize = 12.sp
+                                        )
+                                    }
+                                }
+                            }
+
+                            CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                                FilledTonalIconButton(onClick = {
+
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Shield,
+                                        contentDescription = stringResource(id = R.string.request_private_browsing)
                                     )
                                 }
                             }
                         }
                     }
                 }
+                item {
+                    Spacer(modifier = Modifier.width(10.dp))
+                }
+
                 item {
                     ButtonColumn(
                         bottomSheetViewModel = bottomSheetViewModel,
@@ -525,15 +560,18 @@ class NewBottomSheet(
                         hideDrawer = hideDrawer
                     )
                 }
+//                item {
+//                    HorizontalDivider(
+//                        modifier = Modifier.padding(
+//                            start = 25.dp, end = 25.dp, top = 5.dp, bottom = 5.dp
+//                        ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
+//                    )
+//                }
                 item {
                     HorizontalDivider(
-                        modifier = Modifier.padding(
-                            start = 25.dp, end = 25.dp, top = 5.dp, bottom = 5.dp
-                        ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
+                        modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp),
+                        color = MaterialTheme.colorScheme.outline.copy(0.25f)
                     )
-                }
-                item {
-                    Spacer(modifier = Modifier.height(5.dp))
                 }
                 item {
                     Text(
@@ -566,13 +604,13 @@ class NewBottomSheet(
                 items = result.resolved,
                 key = { _, item -> item.flatComponentName }) { index, info ->
                 Column {
-                    if (shouldShowRequestPrivate(info) != null && index != 0) {
-                        HorizontalDivider(
-                            modifier = Modifier.padding(
-                                start = 25.dp, end = 25.dp
-                            ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
-                        )
-                    }
+//                    if (shouldShowRequestPrivate(info) != null && index != 0) {
+//                        HorizontalDivider(
+//                            modifier = Modifier.padding(
+//                                start = 25.dp, end = 25.dp
+//                            ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
+//                        )
+//                    }
                     Row(
                         modifier = modifier(index, info).wrapContentHeight(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -611,38 +649,38 @@ class NewBottomSheet(
                             }
                         }
                     }
-                    if (shouldShowRequestPrivate(info) != null) {
-                        ElevatedButton(
-                            onClick = {
-                                launchApp(
-                                    result,
-                                    info = info,
-                                    privateBrowsingBrowser = shouldShowRequestPrivate(info)
-                                )
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp, end = 20.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Shield,
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Text(
-                                text = stringResource(id = R.string.request_private_browsing),
-                                textAlign = TextAlign.Center,
-                                fontFamily = HkGroteskFontFamily,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                        HorizontalDivider(
-                            modifier = Modifier.padding(
-                                start = 25.dp, end = 25.dp, top = 10.dp
-                            ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
-                        )
-                    }
+//                    if (shouldShowRequestPrivate(info) != null) {
+//                        ElevatedButton(
+//                            onClick = {
+//                                launchApp(
+//                                    result,
+//                                    info = info,
+//                                    privateBrowsingBrowser = shouldShowRequestPrivate(info)
+//                                )
+//                            },
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .padding(start = 20.dp, end = 20.dp)
+//                        ) {
+//                            Icon(
+//                                imageVector = Icons.Default.Shield,
+//                                contentDescription = null,
+//                                modifier = Modifier.size(20.dp)
+//                            )
+//                            Spacer(modifier = Modifier.width(5.dp))
+//                            Text(
+//                                text = stringResource(id = R.string.request_private_browsing),
+//                                textAlign = TextAlign.Center,
+//                                fontFamily = HkGroteskFontFamily,
+//                                fontWeight = FontWeight.SemiBold
+//                            )
+//                        }
+//                        HorizontalDivider(
+//                            modifier = Modifier.padding(
+//                                start = 25.dp, end = 25.dp, top = 10.dp
+//                            ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
+//                        )
+//                    }
                 }
             }
             if (!forPreferred) {
@@ -727,7 +765,7 @@ class NewBottomSheet(
                     }
                 })
                 .background(
-                    if (selectedItem == index) androidx.compose.material3.LocalContentColor.current.copy(
+                    if (selectedItem == index) LocalContentColor.current.copy(
                         0.1f
                     ) else Color.Transparent
                 )
@@ -749,8 +787,21 @@ class NewBottomSheet(
                 .animateContentSize(),
             content = {
                 item(key = "previewUrl", span = { GridItemSpan(maxCurrentLineSpan) }) {
-                    if (previewUrl) {
-                        UrlPreview(uri = result.uri)
+                    if (previewUrl && result.uri != null) {
+                        UrlBar(
+                            uri = result.uri,
+                            clipboardManager = viewModel.clipboardManager,
+                            urlCopiedToast = viewModel.urlCopiedToast,
+                            hideAfterCopying = viewModel.hideAfterCopying,
+                            showToast = {
+                                showToast(it)
+                            },
+                            hideDrawer = hideDrawer,
+                            shareUri = {
+                                startActivity(shareUri(result.uri))
+                                finish()
+                            }
+                        )
                     }
                 }
                 if (doesSelectedBrowserSupportsIncognitoLaunch.value) {
@@ -1017,28 +1068,28 @@ class NewBottomSheet(
         val padding = PaddingValues(horizontal = 10.dp)
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(modifier = Modifier.fillMaxWidth()) {
-                if (bottomSheetViewModel.enableCopyButton.value) {
-                    CopyButton(
-                        modifier = Modifier
-                            .fillMaxWidth(if (bottomSheetViewModel.enableSendButton.value) 0.5f else 1f)
-                            .padding(start = 15.dp, end = 15.dp),
-                        result = result,
-                        hideDrawer = hideDrawer,
-                        isTextBasedButton = bottomSheetViewModel.useTextShareCopyButtons.value
-                    )
-                }
-                if (bottomSheetViewModel.enableSendButton.value) {
-                    ShareToButton(
-                        result = result,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = if (bottomSheetViewModel.enableCopyButton.value) 0.dp else 15.dp,
-                                end = 15.dp
-                            ),
-                        isTextBasedButton = bottomSheetViewModel.useTextShareCopyButtons.value
-                    )
-                }
+//                if (bottomSheetViewModel.enableCopyButton.value && !bottomSheetViewModel.previewUrl()) {
+//                    CopyButton(
+//                        modifier = Modifier
+//                            .fillMaxWidth(if (bottomSheetViewModel.enableSendButton.value) 0.5f else 1f)
+//                            .padding(start = 15.dp, end = 15.dp),
+//                        result = result,
+//                        hideDrawer = hideDrawer,
+//                        isTextBasedButton = bottomSheetViewModel.useTextShareCopyButtons.value
+//                    )
+//                }
+//                if (bottomSheetViewModel.enableSendButton.value) {
+//                    ShareToButton(
+//                        result = result,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(
+//                                start = if (bottomSheetViewModel.enableCopyButton.value) 0.dp else 15.dp,
+//                                end = 15.dp
+//                            ),
+//                        isTextBasedButton = bottomSheetViewModel.useTextShareCopyButtons.value
+//                    )
+//                }
             }
             if (result.downloadable.isDownloadable()) {
                 Spacer(modifier = Modifier.height(5.dp))
@@ -1149,38 +1200,38 @@ class NewBottomSheet(
                     .wrapContentHeight()
                     .animateContentSize()
             ) {
-                HorizontalDivider(
-                    modifier = Modifier.padding(
-                        start = 25.dp, end = 25.dp, top = 5.dp, bottom = 5.dp
-                    ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
-                )
-                if (bottomSheetViewModel.privateBrowser.value != null) {
-                    Button(
-                        enabled = enabled, onClick = {
-                            bottomSheetViewModel.appInfo.value?.let {
-                                launchApp(
-                                    result,
-                                    info = it,
-                                    privateBrowsingBrowser = bottomSheetViewModel.privateBrowser.value
-                                )
-                            }
-                        }, modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 15.dp, end = 15.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Shield, contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(
-                            text = stringResource(id = R.string.request_private_browsing),
-                            textAlign = TextAlign.Center,
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
+//                HorizontalDivider(
+//                    modifier = Modifier.padding(
+//                        start = 25.dp, end = 25.dp, top = 5.dp, bottom = 5.dp
+//                    ), color = MaterialTheme.colorScheme.outline.copy(0.25f)
+//                )
+//                if (bottomSheetViewModel.privateBrowser.value != null) {
+//                    Button(
+//                        enabled = enabled, onClick = {
+//                            bottomSheetViewModel.appInfo.value?.let {
+//                                launchApp(
+//                                    result,
+//                                    info = it,
+//                                    privateBrowsingBrowser = bottomSheetViewModel.privateBrowser.value
+//                                )
+//                            }
+//                        }, modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(start = 15.dp, end = 15.dp)
+//                    ) {
+//                        Icon(
+//                            imageVector = Icons.Default.Shield, contentDescription = null,
+//                            modifier = Modifier.size(20.dp)
+//                        )
+//                        Spacer(modifier = Modifier.width(5.dp))
+//                        Text(
+//                            text = stringResource(id = R.string.request_private_browsing),
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = HkGroteskFontFamily,
+//                            fontWeight = FontWeight.SemiBold
+//                        )
+//                    }
+//                }
                 Button(
                     enabled = enabled,
                     onClick = { onClick(false) },
@@ -1245,41 +1296,91 @@ class NewBottomSheet(
             content = { Text(text = stringResource(id = buttonText)) })
     }
 
-    @Composable
-    private fun UrlPreview(uri: Uri?) {
-        Card(
-            border = BorderStroke(
-                1.dp, contentColorFor(LocalContentColor.current)
-            ), modifier = Modifier
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun UrlBar(
+    uri: Uri,
+    clipboardManager: ClipboardManager,
+    urlCopiedToast: StatePreference<Boolean>,
+    hideAfterCopying: StatePreference<Boolean>,
+    showToast: (Int) -> Unit,
+    hideDrawer: () -> Unit,
+    shareUri: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 15.dp, end = 15.dp)
+    ) {
+        Row(
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 15.dp, end = 15.dp)
+                .height(60.dp)
+                .padding(start = 10.dp, end = 5.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(
-                        top = 10.dp, bottom = 10.dp
-                    ), verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    contentAlignment = Alignment.CenterStart
+            Text(
+                modifier = Modifier.weight(1f),
+                text = uri.toString(),
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
+                fontSize = 12.sp,
+                lineHeight = 12.sp
+            )
+
+            Spacer(modifier = Modifier.width(10.dp))
+
+            CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                IconButton(
+                    onClick = {
+                        clipboardManager.setText("URL", uri.toString())
+
+                        if (urlCopiedToast()) {
+                            showToast(R.string.url_copied)
+                        }
+
+                        if (hideAfterCopying()) {
+                            hideDrawer()
+                        }
+                    }
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.Link,
-                        contentDescription = null,
-                        modifier = Modifier.padding(
-                            start = 10.dp, end = 10.dp
-                        )
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = stringResource(id = R.string.copy_url)
                     )
                 }
-                Text(
-                    text = uri.toString(),
-                    fontSize = 12.sp,
-                    lineHeight = 12.sp,
-                    modifier = Modifier.padding(start = 10.dp, end = 10.dp)
-                )
+
+                IconButton(onClick = shareUri) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = stringResource(id = R.string.copy_url)
+                    )
+                }
             }
         }
     }
+
+    HorizontalDivider(
+        modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp),
+        color = MaterialTheme.colorScheme.outline.copy(0.25f)
+    )
+}
+
+@Preview(name = "UrlPreview", showBackground = true)
+@Composable
+private fun UrlBarPreview() {
+    val clipboardManager = LocalContext.current.getSystemService<ClipboardManager>()!!
+
+    UrlBar(
+        uri = Uri.parse("https://developer.android.com/jetpack/compose/text/configure-layout"),
+        clipboardManager = clipboardManager,
+        urlCopiedToast = MockRepositoryState.preference(true),
+        hideAfterCopying = MockRepositoryState.preference(true),
+        showToast = {},
+        hideDrawer = {},
+        shareUri = {}
+    )
 }

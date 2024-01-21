@@ -7,9 +7,10 @@ import fe.android.preference.helper.compose.getBooleanState
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
-class DebugSettingsViewModel(
+class DevSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     var devModeEnabled = preferenceRepository.getBooleanState(AppPreferences.devModeEnabled)
+    val useDevBottomSheet = preferenceRepository.getBooleanState(AppPreferences.useDevBottomSheet)
 }

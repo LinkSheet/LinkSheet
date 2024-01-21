@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 
+@Deprecated("Use Icon instead", replaceWith = ReplaceWith("Icon"))
 @Composable
 fun ColoredIcon(
     icon: ImageVector,

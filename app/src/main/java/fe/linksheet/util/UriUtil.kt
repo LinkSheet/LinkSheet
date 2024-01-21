@@ -6,11 +6,15 @@ import android.util.Patterns
 import fe.kotlin.extension.iterable.mapToSet
 
 object UriUtil {
-    private val webSchemeIntents: Set<Intent> = setOf("http", "https").mapToSet {
+    private val protocols = setOf("http", "https")
+    private val webSchemeIntents: Set<Intent> = protocols.mapToSet {
         Intent(Intent.ACTION_VIEW, Uri.fromParts(it, "", "")).addCategory(Intent.CATEGORY_BROWSABLE)
     }
 
     fun parseWebUri(url: String): Uri? {
+        val isWeb = protocols.any { url.startsWith(it) }
+        if (!isWeb) return null
+
         return if (Patterns.WEB_URL.matcher(url).matches()) {
             runCatching { Uri.parse(url) }.getOrNull()
         } else null

@@ -108,3 +108,7 @@ storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }
 compose-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui" }
 
 gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt" }
+
+com-github-1fexd-android-pref-helper-core = "com.github.1fexd.android-pref-helper:core:_"
+
+compose = "com.github.1fexd.android-pref-helper:compose:_"

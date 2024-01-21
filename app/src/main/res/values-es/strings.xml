@@ -309,7 +309,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">¡Ven a chatear en nuestro servidor de Discord! ¡Chatea con los usuarios y desarrolladores de LinkSheet sobre su futuro y otros proyectos!</string>
     <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
-    <string name="donate_card_subtitle"> Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
+    <string name="donate_card_subtitle"> Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación. 
 \nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas.</string>
     <string name="branch">Rama:</string>
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
@@ -391,8 +391,8 @@
     <string name="shizuku_manager_start_failed">¡No se ha podido iniciar Shizuku Manager, por favor, inícielo manualmente!</string>
     <string name="include_throwable">Incluir registros de colisiones (recomendado, pero no se puede redactar)</string>
     <string name="resolve_via_toast_explainer">Mostrar un mensaje emergente cuando una URL se resuelve a través de un servicio externo</string>
-    <string name="new_bottomsheet_explainer">¡Esta versión de LinkSheet incluye una nueva hoja inferior gracias a <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Por favor, proporcione retroalimentación en Discord, Github o por correo electrónico.
-\n
+    <string name="new_bottomsheet_explainer">¡Esta versión de LinkSheet incluye una nueva hoja inferior gracias a <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Por favor, proporcione retroalimentación en Discord, Github o por correo electrónico. 
+\n 
 \nPuede volver a la antigua hoja inferior a través de Configuración -&gt; Avanzado -&gt; Banderas de características.</string>
     <string name="follow_redirects_short">Redirecciona</string>
     <string name="online_services">Servicios por Internet</string>

@@ -80,13 +80,15 @@ fun DonateSettingsRoute(
                                     id = R.string.linksheet_donation_explainer,
                                     developmentHours,
                                     developmentMonths
-                                )
+                                ),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
 
                             Text(
                                 text = annotatedStringResource(
                                     id = R.string.linksheet_donation_explainer_2
-                                )
+                                ),
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
 
                             Spacer(modifier = Modifier.height(10.dp))

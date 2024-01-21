@@ -323,7 +323,7 @@
     <string name="apps_which_can_open_links">Апликације које могу отварати линкове</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
-    <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате.
+    <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. 
 \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
     <string name="privacy">Приватност</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања. Подржани прегледачи: %s</string>
@@ -387,8 +387,8 @@
     <string name="enable_linksheet_compat_explainer">Мени се може наћи у подменију „Апликације“ и када је инсталиран, може да пресреће захтеве одређеним изворним апликацијама.</string>
     <string name="disclaimer_libredirect_unstable">Поред тога што је експериментална функција, LibRedirect се тренутно сматра веома нестабилним и можда уопште неће радити.</string>
     <string name="enable_new_bottom_sheet">Омогући нови доњи лист</string>
-    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла.
-\n
+    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла. 
+\n 
 \nМожете се вратити на стари доњи лист путем Подешавања -&gt; Напредно -&gt; Експерименталне функције.</string>
     <string name="enable_new_bottom_sheet_explainer">Користите прерађени доњи лист уместо старог</string>
     <string name="new_bottomsheet">Нови доњи лист</string>

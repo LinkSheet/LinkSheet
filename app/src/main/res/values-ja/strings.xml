@@ -19,8 +19,8 @@
     <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセスできるようになります。現在は非表示のみとなっています。 アプリのメイン画面に寄付バナーが表示されますが、 将来的には<b>プロ専用の機能</b>が追加される予定です</string>
     <string name="welcome_to_linksheet_explainer_2">LinkSheetを動作させるには、LinkSheet をシステムブラウザとして設定し、リンクのクリックを遮断できるようにする必要があります。ご心配なく、LinkSheetにはカスタマイズ可能なオプションが豊富に用意されているため、エクスペリエンスが制限されるのではなく、むしろ強化されます。</string>
     <string name="built_by_error">このビルドは1fexdによってもGithub workflowによっても署名されていません。 誰でもソースコードをフォークして自分のLinkSheetバージョンを構築出来るため、必ずしも悪いことを意味するわけではありませんが、悪意を持ってそうする可能性があります。</string>
-    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。
-\n
+    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。 
+\n 
 \n設定 -&gt; 上級 -&gt; 機能フラグにて古いボトムシートに戻すことができます。</string>
     <string name="always">常に</string>
     <string name="open_with_app">%sで開く</string>

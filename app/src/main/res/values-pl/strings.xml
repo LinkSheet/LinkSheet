@@ -358,7 +358,7 @@
     <string name="export_import_settings_explainer">Wykonaj kopię ustawień lub przywróć je z pliku</string>
     <string name="include_history">Uwzględnij historię (kliknięć linków i aplikacji)</string>
     <string name="export_settings">Eksportuj ustawienia</string>
-    <string name="export_explainer">Zapisz bieżące ustawienia aplikacji do pliku</string>
+    <string name="export_explainer">Zapisz bieżące ustawienia do pliku</string>
     <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
     <string name="resolve_via_failed_toast">Toast: Rozwiązanie nie powiodło się</string>
     <string name="last_updated">Ostatnia aktualizacja (UTC):</string>
@@ -395,4 +395,11 @@
 \nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji.</string>
     <string name="enable_new_bottom_sheet_explainer">Zastąp dolny panel nową przeprojektowaną wersją</string>
     <string name="new_bottomsheet">Nowy dolny panel</string>
+    <string name="amp2html_short">amp2html</string>
+    <string name="follow_redirects_short">Przekierowania</string>
+    <string name="unknown_host">%s - zablokowano lub nie istnieje</string>
+    <string name="no_internet_connection">Brak internetu</string>
+    <string name="online_services">Usługi online</string>
+    <string name="shizuku_manager_start_failed">Nie udało się uruchomić menedżera Shizuku. Uruchom go ręcznie!</string>
+    <string name="include_throwable">Dołącz logi awarii (zalecane, ale nie można ich zredagować)</string>
 </resources>

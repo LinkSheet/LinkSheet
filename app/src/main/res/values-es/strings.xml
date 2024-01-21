@@ -394,4 +394,9 @@
     <string name="new_bottomsheet_explainer">¡Esta versión de LinkSheet incluye una nueva hoja inferior gracias a <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Por favor, proporcione retroalimentación en Discord, Github o por correo electrónico.
 \n
 \nPuede volver a la antigua hoja inferior a través de Configuración -&gt; Avanzado -&gt; Banderas de características.</string>
+    <string name="follow_redirects_short">Redirecciona</string>
+    <string name="online_services">Servicios por Internet</string>
+    <string name="unknown_host">%s está bloqueada o no existe</string>
+    <string name="no_internet_connection">Sin conexión a Internet</string>
+    <string name="amp2html_short">Amp2Html</string>
 </resources>

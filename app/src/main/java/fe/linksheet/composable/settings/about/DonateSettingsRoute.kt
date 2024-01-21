@@ -125,7 +125,6 @@ fun DonateSettingsRoute(
                                 enabled = true
                             )
                         }
-
                     }
                 }
             }

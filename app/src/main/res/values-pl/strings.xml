@@ -309,7 +309,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Dołącz do naszego Discorda! Porozmawiaj z użytkownikami i twórcami LinkSheet o jego przyszłości i innych przedsięwzięciach!</string>
     <string name="donate_card">Wesprzyj używając karty (przez BuyMeACoffee)</string>
-    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.
+    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. 
 \nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje.</string>
     <string name="branch">Gałąź:</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
@@ -390,8 +390,8 @@
     <string name="fastforward_version">Reguły FastForward</string>
     <string name="url_copied_toast_explainer">Pokaż toast, gdy link zostanie skopiowany</string>
     <string name="enable_new_bottom_sheet">Nowy dolny panel</string>
-    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail.
-\n
+    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail. 
+\n 
 \nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji.</string>
     <string name="enable_new_bottom_sheet_explainer">Zastąp dolny panel nową przeprojektowaną wersją</string>
     <string name="new_bottomsheet">Nowy dolny panel</string>

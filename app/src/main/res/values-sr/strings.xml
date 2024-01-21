@@ -544,4 +544,7 @@
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Онемогућено</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Све</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled">Онемогућени руковаоци</string>
+    <string name="settings_notifications__divider_toasts"></string>
+    <string name="declutter_url" translatable="false"></string>
+    <string name="declutter_url_explainer" translatable="false"></string>
 </resources>

@@ -61,7 +61,7 @@
     <string name="github">GitHub</string>
     <string name="github_explainer">Repozytorium kodu źródłowego</string>
     <string name="donate_crypto">Wesprzyj poprzez krypto</string>
-    <string name="donate_explainer">Jeśli chcesz przekazać darowiznę i odebrać <b>LinkSheet Pro</b></string>
+    <string name="donate_explainer">Jeśli chcesz przekazać darowiznę i odebrać <b>LinkSheet Pro</b> \u0020</string>
     <string name="paste">Wklej</string>
     <string name="error">Błąd</string>
     <string name="checkmark">Znacznik wyboru</string>

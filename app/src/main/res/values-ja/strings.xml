@@ -161,4 +161,15 @@
     <string name="dev">開発者</string>
     <string name="notifications">通知</string>
     <string name="libredirect_version">LibRedirect</string>
+    <string name="selected_browser_explainer">クリックされたリンクがネイティブアプリで処理できない場合、このブラウザは自動的に開きます</string>
+    <string name="open_with_linksheet">LinkSheetで開く</string>
+    <string name="whitelisted_explainer">ホワイトリストに登録されたブラウザのみを表示</string>
+    <string name="apps_explainer">優先アプリとリンクを開くことができるアプリ</string>
+    <string name="bottom_sheet_explainer">用途別に並べ替えたり、コピーボタンを有効にしたり、共有ボタンを有効にしたり出来ます。</string>
+    <string name="about_explainer">このアプリとライセンスについて</string>
+    <string name="credits_explainer">オープンソースライセンス</string>
+    <string name="license_apache_2">Apache License 2.0</string>
+    <string name="license_gpl_3">GNU General Public License v3.0</string>
+    <string name="github_explainer">ソースコードリポジトリ</string>
+    <string name="open_copied_link">コピーしたリンクを開く</string>
 </resources>

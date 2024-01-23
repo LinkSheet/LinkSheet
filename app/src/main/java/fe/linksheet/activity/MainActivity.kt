@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.BuildConfig
 import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.activity.onboarding.NewOnboardingActivity
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.advancedSettingsRoute
 import fe.linksheet.amp2HtmlSettingsRoute
@@ -95,10 +96,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (mainViewModel.firstRun.value && BuildConfig.BUILD_TYPE == "release") {
-            startActivity(Intent(this, OnboardingActivity::class.java))
-            finish()
-        }
+//        if (mainViewModel.firstRun.value && BuildConfig.BUILD_TYPE == "release") {
+//            startActivity(Intent(this, OnboardingActivity::class.java))
+//            finish()
+//        }
+
+//        startActivity(Intent(this, NewOnboardingActivity::class.java))
+//        finish()
 
         setContentWithKoin {
             val navController = rememberNavController()

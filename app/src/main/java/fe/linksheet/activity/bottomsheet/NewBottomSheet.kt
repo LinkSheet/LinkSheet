@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -790,7 +791,9 @@ class NewBottomSheet(
                                         fontWeight = FontWeight.SemiBold
                                     )
                                     if (showPackage) {
+//                                        val focusRequester = remember { FocusRequester() }
                                         Text(
+                                            modifier = Modifier.basicMarquee(),
                                             text = bottomSheetViewModel.appInfo.value!!.packageName,
                                             fontSize = 12.sp
                                         )
@@ -955,6 +958,7 @@ class NewBottomSheet(
 
                         if (showPackage) {
                             Text(
+                                modifier = Modifier.basicMarquee(),
                                 text = info.packageName,
                                 fontSize = 12.sp,
                                 overflow = TextOverflow.Ellipsis,

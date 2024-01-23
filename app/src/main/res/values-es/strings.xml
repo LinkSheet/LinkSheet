@@ -402,4 +402,10 @@
     <string name="enable_dev_bottom_sheet">Habilitar hoja inferior de desarrollo</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet_explainer">Habilite la última versión de la hoja inferior que está actualmente en desarrollo</string>
+    <string name="start_setup">Continuar</string>
+    <string name="start_setup_explainer">La funcionalidad de LinkSheet requiere una configuración personalizada de Android. La siguiente configuración le guiará a través del proceso de varios pasos.</string>
+    <string name="onboarding_setup">Configurar LinkSheet</string>
+    <string name="welcome_to">Bienvenid@ a
+\n%s</string>
+    <string name="onboarding_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
 </resources>

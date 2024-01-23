@@ -542,7 +542,11 @@
     <string name="unknown_host">%s is either blocked or does not exist</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet">Enable dev bottomsheet</string>
-    <string name="enable_dev_bottom_sheet_explainer">Enable the latest bottomsheet version which is currently in
-        development
+    <string name="enable_dev_bottom_sheet_explainer">Enable the latest bottomsheet version which is currently in development</string>
+    <string name="welcome_to">Welcome to\n%s</string>
+    <string name="onboarding_subtitle">Choose to always get prompted when opening a link, set default browsers, and much more
     </string>
+    <string name="start_setup">Continue</string>
+    <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following setup will guide you through the multi-step process.</string>
+    <string name="onboarding_setup">Set up LinkSheet</string>
 </resources>

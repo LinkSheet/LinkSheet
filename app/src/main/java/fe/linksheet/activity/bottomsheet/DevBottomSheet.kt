@@ -101,9 +101,7 @@ class DevBottomSheet(
 
     @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
     @Composable
-    private fun BottomSheet(
-        bottomSheetViewModel: BottomSheetViewModel,
-    ) {
+    private fun BottomSheet(bottomSheetViewModel: BottomSheetViewModel, ) {
         val isBlackTheme = bottomSheetViewModel.theme.value == Theme.AmoledBlack
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -131,6 +129,7 @@ class DevBottomSheet(
             .nullClickable(),
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
+            shape = ShapeDefaults.Large,
             sheetContent = {
                 SheetContent(result = result, landscape = landscape, hideDrawer = {
                     coroutineScope.launch { drawerState.hide() }

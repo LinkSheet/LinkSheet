@@ -79,6 +79,8 @@ fun DiscordCard(
                 Text(text = stringResource(id = R.string.dismiss))
             }
 
+            Spacer(modifier = Modifier.width(5.dp))
+
             Button(onClick = { uriHandler.openUri(discordInvite) }) {
                 Text(text = stringResource(id = R.string.join))
             }

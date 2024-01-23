@@ -22,7 +22,7 @@
     <string name="browser_explainer">ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਅਤੇ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਸੈਟਿੰਗਾਂ</string>
     <string name="save">ਸਾਂਭੋ</string>
     <string name="enable_amp2html">Amp2Html ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ)</string>
+    <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/ClearURLs">ClearURLs \u0020</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ) \u0020</string>
     <string name="follow_only_known_trackers_explainer">ਸਿਰਫ਼ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜਦੋਂ ਹੋਸਟ ਨੂੰ ਟਰੈਕਰ/ਰੀਡਾਇਰੈਕਟ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ। ਜੇਕਰ \"ਬਾਹਰੀ ਸੇਵਾ ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟਸ ਦਾ ਪਾਲਣ ਕਰੋ\" ਇਨੇਬਲ ਹੈ, ਤਾਂ ਇਹ ਹਮੇਸ਼ਾਂ ਚਾਲੂ ਰਹੇਗਾ।</string>
     <string name="always_disable">ਹਮੇਸ਼ਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="copy_to_clipboard">ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ</string>
@@ -124,7 +124,7 @@
     <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
     <string name="finish">ਸਮਾਪਤ</string>
-    <string name="donate_explainer">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ <b>LinkSheet Pro</b> ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
+    <string name="donate_explainer">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ \u0020<b>LinkSheet Pro</b> \u0020ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ \u0020</string>
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
@@ -390,4 +390,13 @@
     <string name="enable_new_bottom_sheet_explainer">ਪੁਰਾਣੀ ਸ਼ੀਟ ਦੀ ਬਜਾਏ ਸੁਧਾਰੀ ਹੋਈ ਹੇਠਲੀ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="new_bottomsheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ</string>
     <string name="shizuku_manager_start_failed">Shizuku ਮੈਨੇਜਰ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਅਸਫਲ, ਕਿਰਪਾ ਕਰਕੇ ਇਸਨੂੰ ਹੱਥੀਂ ਸ਼ੁਰੂ ਕਰੋ!</string>
+    <string name="title_activity_main2">ਮੁੱਖ ਗਤੀਵਿਧੀ 2</string>
+    <string name="enable_dev_bottom_sheet">ਡਿਵੈਲਪਰ ਲਈ ਹੇਠਲੀ ਪੱਟੀ ਚਾਲੂ ਕਰੋ</string>
+    <string name="enable_dev_bottom_sheet_explainer">ਨਵੀਨਤਮ ਹੇਠਲੀ ਪੱਟੀ ਸੰਸਕਰਣ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ ਜੋ ਇਸ ਸਮੇਂ ਡਿਵੈਲਪਮੈਂਟ ਵਿੱਚ ਹੈ</string>
+    <string name="no_internet_connection">ਕੋਈ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਨਹੀਂ</string>
+    <string name="amp2html_short">Amp ਤੋਂ Html</string>
+    <string name="follow_redirects_short">ਰੀਡਾਇਰੈਕਟ</string>
+    <string name="online_services">ਆਨਲਾਈਨ ਸੇਵਾਵਾਂ</string>
+    <string name="unknown_host">%s ਜਾਂ ਤਾਂ ਬਲੌਕ ਹੈ ਜਾਂ ਮੌਜੂਦ ਨਹੀਂ ਹੈ</string>
+    <string name="include_throwable">ਕ੍ਰੈਸ਼ ਲੌਗ ਸ਼ਾਮਿਲ ਕਰੋ (ਸਿਫ਼ਾਰਸ਼ੀ, ਪਰ ਸੋਧਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ)</string>
 </resources>

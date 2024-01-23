@@ -172,4 +172,12 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github_explainer">ソースコードリポジトリ</string>
     <string name="open_copied_link">コピーしたリンクを開く</string>
+    <string name="links_explainer">リンク操作に関する設定</string>
+    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url="https://github.com/ClearURLs">ClearURLs \u0020</annotation> 統合（URL から追跡パラメータをクリア） \u0020</string>
+    <string name="follow_redirects_external_service">外部サービス経由でリダイレクトを追跡</string>
+    <string name="follow_only_known_trackers">既知のトラッカーのみをフォロー</string>
+    <string name="follow_only_known_trackers_explainer">ホストがトラッカー/リダイレクトであることがわかっている場合にのみ、リダイレクトを追跡しようとします。 「外部サービス経由のリダイレクトに従う」が有効になっている場合、これは常に有効になります。</string>
+    <string name="theme_explainer">アプリのテーマを変更</string>
+    <string name="fastfoward_rules">FastForwardルールを使用する</string>
+    <string name="follow_redirects_local_cache">ローカルリダイレクトキャッシュを有効</string>
 </resources>

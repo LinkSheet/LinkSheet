@@ -19,8 +19,8 @@
     <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセスできるようになります。現在は非表示のみとなっています。 アプリのメイン画面に寄付バナーが表示されますが、 将来的には<b>プロ専用の機能</b>が追加される予定です</string>
     <string name="welcome_to_linksheet_explainer_2">LinkSheetを動作させるには、LinkSheet をシステムブラウザとして設定し、リンクのクリックを遮断できるようにする必要があります。ご心配なく、LinkSheetにはカスタマイズ可能なオプションが豊富に用意されているため、エクスペリエンスが制限されるのではなく、むしろ強化されます。</string>
     <string name="built_by_error">このビルドは1fexdによってもGithub workflowによっても署名されていません。 誰でもソースコードをフォークして自分のLinkSheetバージョンを構築出来るため、必ずしも悪いことを意味するわけではありませんが、悪意を持ってそうする可能性があります。</string>
-    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。
-\n
+    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。 
+\n 
 \n設定 -&gt; 上級 -&gt; 機能フラグにて古いボトムシートに戻すことができます。</string>
     <string name="always">常に</string>
     <string name="open_with_app">%sで開く</string>
@@ -161,4 +161,15 @@
     <string name="dev">開発者</string>
     <string name="notifications">通知</string>
     <string name="libredirect_version">LibRedirect</string>
+    <string name="selected_browser_explainer">クリックされたリンクがネイティブアプリで処理できない場合、このブラウザは自動的に開きます</string>
+    <string name="open_with_linksheet">LinkSheetで開く</string>
+    <string name="whitelisted_explainer">ホワイトリストに登録されたブラウザのみを表示</string>
+    <string name="apps_explainer">優先アプリとリンクを開くことができるアプリ</string>
+    <string name="bottom_sheet_explainer">用途別に並べ替えたり、コピーボタンを有効にしたり、共有ボタンを有効にしたり出来ます。</string>
+    <string name="about_explainer">このアプリとライセンスについて</string>
+    <string name="credits_explainer">オープンソースライセンス</string>
+    <string name="license_apache_2">Apache License 2.0</string>
+    <string name="license_gpl_3">GNU General Public License v3.0</string>
+    <string name="github_explainer">ソースコードリポジトリ</string>
+    <string name="open_copied_link">コピーしたリンクを開く</string>
 </resources>

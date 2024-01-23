@@ -124,9 +124,9 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 }
             }
 
-            if (useTime != null && showOtherBanners) {
+            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
                 cardItem(header = R.string.donate) {
-                    DonateCard(navController = navController, useTime = useTime)
+                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
                 }
             }
 

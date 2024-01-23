@@ -234,6 +234,8 @@ dependencies {
     implementation(AndroidX.lifecycle.runtime.ktx)
     implementation(AndroidX.activity.compose)
 
+    implementation(libs.compose.mock)
+
     implementation(COIL)
     implementation(COIL.compose)
 //    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")

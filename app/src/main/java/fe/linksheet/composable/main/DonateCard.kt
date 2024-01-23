@@ -14,11 +14,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Euro
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,22 +22,18 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.aboutSettingsRoute
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.annotatedStringResource
-import fe.linksheet.developmentTimeHours
-import fe.linksheet.developmentTimeMonths
-import fe.linksheet.donateSettingsRoute
 import fe.linksheet.extension.androidx.navigate
-import fe.linksheet.mainRoute
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.settingsRoute
 import fe.linksheet.ui.Typography
 
 @Composable
 fun DonateCard(
     navController: NavHostController,
+    viewModel: MainViewModel,
     useTime: Pair<Int?, Int?>
 ) {
     val (hours, minutes) = useTime
@@ -107,18 +99,23 @@ fun DonateCard(
 
                     Spacer(modifier = Modifier.height(10.dp))
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 5.dp, horizontal = 10.dp),
+                        horizontalArrangement = Arrangement.End,
                     ) {
-                        Button(onClick = {
-                            navController.navigate(donateSettingsRoute)
-                        }) {
+                        TextButton(onClick = { viewModel.donateCardDismissed(true) }) {
+                            Text(text = stringResource(id = R.string.dismiss))
+                        }
+
+                        Spacer(modifier = Modifier.width(5.dp))
+
+                        Button(onClick = { navController.navigate(donateSettingsRoute) }) {
                             Text(
                                 text = stringResource(id = R.string.donate_learn_more),
                             )
                         }
                     }
-
                 }
             }
         }

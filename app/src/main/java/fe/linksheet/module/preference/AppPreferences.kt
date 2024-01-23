@@ -97,6 +97,7 @@ object AppPreferences : Preferences() {
     val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner", true)
 
     val useDevBottomSheet = booleanPreference("use_dev_bottom_sheet", false)
+    val donateCardDismissed = booleanPreference("donate_card_dismissed", false)
 
     val sensitivePreferences = listOf(
         useTimeMs, logKey,

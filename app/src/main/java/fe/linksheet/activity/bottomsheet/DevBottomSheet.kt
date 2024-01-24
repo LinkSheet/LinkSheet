@@ -7,11 +7,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -19,14 +16,13 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.dev.ButtonColumn
 import fe.linksheet.activity.bottomsheet.dev.UrlBar
 import fe.linksheet.activity.bottomsheet.dev.failure.FailureSheetColumn
+import fe.linksheet.activity.bottomsheet.dev.list.BrowserColumn
 import fe.linksheet.activity.bottomsheet.dev.preferred.PreferredAppColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
@@ -35,6 +31,7 @@ import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
 import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -246,6 +243,7 @@ class DevBottomSheet(
     ) {
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
+
         if (result.isEmpty) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(text = stringResource(id = R.string.no_app_to_handle_link_found))
@@ -255,14 +253,6 @@ class DevBottomSheet(
             return
         }
 
-        if (hasPreferredApp) {
-            val filteredItem = result.filteredItem!!
-            LaunchedEffect(key1 = filteredItem) {
-                bottomSheetViewModel.appInfo.value = filteredItem
-                bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(filteredItem)
-            }
-        }
-
         var selectedItem by remember { mutableIntStateOf(-1) }
         val modifier: AppListModifier = @Composable { index, info ->
             Modifier
@@ -270,8 +260,8 @@ class DevBottomSheet(
                 .padding(start = 15.dp, end = 15.dp)
                 .clip(defaultRoundedCornerShape)
                 .combinedClickable(onClick = {
-                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
-                    bottomSheetViewModel.appInfo.value = info
+//                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
+//                    bottomSheetViewModel.appInfo.value = info
                     if (hasPreferredApp) {
                         launchApp(result, info)
                     } else {
@@ -304,12 +294,7 @@ class DevBottomSheet(
 
         val ignoreLibRedirectClick: (LibRedirectResolver.LibRedirectResult.Redirected) -> Unit = {
             finish()
-            startActivity(
-                selfIntent(
-                    it.originalUri,
-                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
-                )
-            )
+            startActivity(selfIntent(it.originalUri, bundleOf(LibRedirectDefault.libRedirectIgnore to true)))
         }
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
@@ -317,117 +302,123 @@ class DevBottomSheet(
                 item(key = "previewUrl") {
                     UrlBar(
                         uri = result.uri,
-                        clipboardManager = viewModel.clipboardManager,
-                        urlCopiedToast = viewModel.urlCopiedToast,
-                        hideAfterCopying = viewModel.hideAfterCopying,
-                        showToast = { showToast(it) },
-                        hideDrawer = hideDrawer,
+                        downloadable = result.downloadable.isDownloadable(),
+                        copyUri = {
+                            viewModel.clipboardManager.setText("URL", result.uri.toString())
+
+                            if (bottomSheetViewModel.urlCopiedToast()) {
+                                showToast(R.string.url_copied)
+                            }
+
+                            if (bottomSheetViewModel.hideAfterCopying()) {
+                                hideDrawer()
+                            }
+                        },
                         shareUri = {
                             startActivity(shareUri(result.uri))
                             finish()
+                        },
+                        downloadUri = {
+                            bottomSheetViewModel.startDownload(
+                                resources, result.uri,
+                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                            )
+
+                            if (!bottomSheetViewModel.downloadStartedToast()) {
+                                showToast(R.string.download_started)
+                            }
+
+                            hideDrawer()
                         }
                     )
                 }
             }
 
-            if (hasPreferredApp) {
-                item {
+            item {
+                if (hasPreferredApp) {
+                    val privateBrowser = isPrivateBrowser(result.filteredItem!!)
+                    val ignoreLibRedirect = if(viewModel.enableIgnoreLibRedirectButton()){
+                        result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
+                    } else null
+
                     PreferredAppColumn(
-                        result = result,
+                        appInfo = result.filteredItem,
+                        privateBrowser = privateBrowser,
+                        preferred = true,
                         bottomSheetViewModel = bottomSheetViewModel,
                         showPackage = showPackage,
-                        resources = resources,
-                        showToast = { showToast(it) },
-                        ignoreLibRedirectClick = ignoreLibRedirectClick,
-                        hideDrawer = hideDrawer,
-                        launchApp = { result, item, always -> launchApp(result, item, always) }
+                        launchApp = { item, always, private ->
+                            launchApp(result, item, always, if (private) privateBrowser else null)
+                        },
+                        libRedirectResult = ignoreLibRedirect,
+                        ignoreLibRedirectClick = ignoreLibRedirectClick
                     )
-                }
-            } else {
-                item(key = R.string.open_with) {
+                } else {
                     Text(
                         text = stringResource(id = R.string.open_with),
                         fontFamily = HkGroteskFontFamily,
                         fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(
-                            start = 15.dp, top = if (previewUrl) 10.dp else 0.dp
-                        )
+                        modifier = Modifier.padding(start = 15.dp)
                     )
-                }
 
-                item {
-                    Spacer(modifier = Modifier.height(5.dp))
-                }
-            }
-
-            // App List Function:
-            itemsIndexed(
-                items = result.resolved,
-                key = { _, item -> item.flatComponentName }) { index, info ->
-                Column {
-                    Row(
-                        modifier = modifier(index, info).wrapContentHeight(),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                bitmap = info.iconBitmap,
-                                contentDescription = info.label,
-                                modifier = Modifier.size(32.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
-                                Text(text = info.label)
-                                if (showPackage) {
-                                    Text(
-                                        text = info.packageName,
-                                        fontSize = 12.sp,
-                                        lineHeight = 12.sp
-                                    )
-                                }
-                            }
-
-                            Box(
-                                modifier = Modifier.fillMaxWidth(),
-                                contentAlignment = Alignment.CenterEnd
-                            ) {
-                                if (selectedItem == index && !hasPreferredApp) {
-                                    Icon(
-                                        imageVector = Icons.Default.CheckCircle,
-                                        contentDescription = null,
-                                        modifier = Modifier.align(Alignment.CenterEnd)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!hasPreferredApp) {
-                item {
                     Spacer(modifier = Modifier.height(10.dp))
-
-                    ButtonColumn(
-                        bottomSheetViewModel = bottomSheetViewModel,
-                        enabled = selectedItem != -1,
-                        resources = resources,
-                        onClick = { always -> launchApp(result, result.resolved[selectedItem], always) },
-                        hideDrawer = hideDrawer,
-                        showToast = { showToast(it) },
-                        ignoreLibRedirectClick = ignoreLibRedirectClick
-                    )
                 }
+            }
+
+            itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
+                val privateBrowser = isPrivateBrowser(info)
+                val ignoreLibRedirect = if(viewModel.enableIgnoreLibRedirectButton()){
+                    result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
+                } else null
+
+                BrowserColumn(
+                    appInfo = info,
+                    preferred = false,
+                    privateBrowser = privateBrowser,
+                    showPackage = showPackage,
+                    launchApp = { item, always, private ->
+                        launchApp(result, item, always, if (private) privateBrowser else null)
+                    },
+                    libRedirectResult = ignoreLibRedirect,
+                    ignoreLibRedirectClick = ignoreLibRedirectClick
+                )
+
+                // TODO: Selector?
+
+//                Box(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                contentAlignment = Alignment.CenterEnd
+//                            ) {
+//                                if (selectedItem == index && !hasPreferredApp) {
+//                                    Icon(
+//                                        imageVector = Icons.Default.CheckCircle,
+//                                        contentDescription = null,
+//                                        modifier = Modifier.align(Alignment.CenterEnd)
+//                                    )
+//                                }
+//                            }
+
+
+//            if (!hasPreferredApp) {
+//                item {
+//                    Spacer(modifier = Modifier.height(10.dp))
+//
+//                    ButtonColumn(
+//                        bottomSheetViewModel = bottomSheetViewModel,
+//                        enabled = selectedItem != -1,
+//                        resources = resources,
+//                        onClick = { always -> launchApp(result, result.resolved[selectedItem], always) },
+//                        hideDrawer = hideDrawer,
+//                        showToast = { showToast(it) },
+//                        ignoreLibRedirectClick = ignoreLibRedirectClick
+//                    )
+//                }
             }
         }
     }
 
-    private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
-        if (!viewModel.enableRequestPrivateBrowsingButton.value) return null
+    private fun isPrivateBrowser(info: DisplayActivityInfo): PrivateBrowsingBrowser? {
+        if (!viewModel.enableRequestPrivateBrowsingButton()) return null
         return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
     }
-
-
 }

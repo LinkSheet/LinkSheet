@@ -68,7 +68,7 @@ class BottomSheetViewModel(
         AppPreferences.enableIgnoreLibRedirectButton
     )
 
-    val privateBrowser: MutableState<PrivateBrowsingBrowser.Firefox?> = mutableStateOf(null)
+    val privateBrowser: MutableState<PrivateBrowsingBrowser?> = mutableStateOf(null)
     val appInfo: MutableState<DisplayActivityInfo?> = mutableStateOf(null)
 
     val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)

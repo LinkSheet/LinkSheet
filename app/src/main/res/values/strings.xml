@@ -549,4 +549,6 @@
     <string name="start_setup">Continue</string>
     <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following setup will guide you through the multi-step process.</string>
     <string name="onboarding_setup">Set up LinkSheet</string>
+    <string name="launch_onboarding_new">Launch new onboarding</string>
+    <string name="launch_onboarding__now_explainer">Test the new onboarding flow</string>
 </resources>

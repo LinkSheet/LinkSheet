@@ -7,11 +7,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeveloperMode
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
+import fe.linksheet.activity.onboarding.NewOnboardingActivity
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
@@ -48,6 +52,23 @@ fun DevSettingsRoute(
                     },
                     onClick = {
                         context.startActivity(Intent(context, OnboardingActivity::class.java))
+                    }
+                )
+            }
+
+            item(key = "launch_onboarding_new") {
+                SettingsItemRow(
+                    headlineId = R.string.launch_onboarding_new,
+                    subtitleId = R.string.launch_onboarding__now_explainer,
+                    image = {
+                        Icon(
+                            imageVector = Icons.Default.DeveloperMode,
+                            tint = MaterialTheme.colorScheme.onSurface,
+                            contentDescription = stringResource(id = R.string.launch_onboaring)
+                        )
+                    },
+                    onClick = {
+                        context.startActivity(Intent(context, NewOnboardingActivity::class.java))
                     }
                 )
             }

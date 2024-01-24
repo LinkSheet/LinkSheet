@@ -118,7 +118,6 @@ fun ButtonColumn(
         if (useTwoRows) {
             OpenButtons(
                 bottomSheetViewModel = bottomSheetViewModel,
-                enabled = enabled,
                 onClick = onClick
             )
         }
@@ -135,7 +134,6 @@ fun ButtonColumn(
         if (!useTwoRows && bottomSheetViewModel.appInfo.value != null) {
             OpenButtons(
                 bottomSheetViewModel = bottomSheetViewModel,
-                enabled = enabled,
                 onClick = onClick
             )
         }

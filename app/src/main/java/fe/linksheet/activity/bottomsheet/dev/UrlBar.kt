@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -27,12 +28,10 @@ import fe.linksheet.extension.android.setText
 @Composable
 fun UrlBar(
     uri: Uri,
-    clipboardManager: ClipboardManager,
-    urlCopiedToast: StatePreference<Boolean>,
-    hideAfterCopying: StatePreference<Boolean>,
-    showToast: (Int) -> Unit,
-    hideDrawer: () -> Unit,
-    shareUri: () -> Unit
+    downloadable: Boolean,
+    copyUri: () -> Unit,
+    shareUri: () -> Unit,
+    downloadUri: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -46,6 +45,7 @@ fun UrlBar(
                 .padding(start = 10.dp, end = 5.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+
             Text(
                 modifier = Modifier.weight(1f),
                 text = uri.toString(),
@@ -58,19 +58,16 @@ fun UrlBar(
             Spacer(modifier = Modifier.width(10.dp))
 
             CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                IconButton(
-                    onClick = {
-                        clipboardManager.setText("URL", uri.toString())
-
-                        if (urlCopiedToast()) {
-                            showToast(R.string.url_copied)
-                        }
-
-                        if (hideAfterCopying()) {
-                            hideDrawer()
-                        }
+                if (downloadable) {
+                    IconButton(onClick = downloadUri) {
+                        Icon(
+                            imageVector = Icons.Default.Download,
+                            contentDescription = stringResource(id = R.string.download)
+                        )
                     }
-                ) {
+                }
+
+                IconButton(onClick = copyUri) {
                     Icon(
                         imageVector = Icons.Default.ContentCopy,
                         contentDescription = stringResource(id = R.string.copy_url)
@@ -99,13 +96,13 @@ fun UrlBar(
 private fun UrlBarPreview() {
     val clipboardManager = LocalContext.current.getSystemService<ClipboardManager>()!!
 
-    UrlBar(
-        uri = Uri.parse("https://developer.android.com/jetpack/compose/text/configure-layout"),
-        clipboardManager = clipboardManager,
-        urlCopiedToast = MockRepositoryState.preference(true),
-        hideAfterCopying = MockRepositoryState.preference(true),
-        showToast = {},
-        hideDrawer = {},
-        shareUri = {}
-    )
+//    UrlBar(
+//        uri = Uri.parse("https://developer.android.com/jetpack/compose/text/configure-layout"),
+//        clipboardManager = clipboardManager,
+//        urlCopiedToast = MockRepositoryState.preference(true),
+//        hideAfterCopying = MockRepositoryState.preference(true),
+//        showToast = {},
+//        hideDrawer = {},
+//        shareUri = {}
+//    )
 }

@@ -3,6 +3,7 @@ package fe.linksheet.activity.bottomsheet.dev
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,8 +20,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 @Composable
 fun OpenButtons(
     bottomSheetViewModel: BottomSheetViewModel,
-    enabled: Boolean,
-    onClick: (always: Boolean) -> Unit
+    onClick: (Boolean) -> Unit
 ) {
     val activity = LocalContext.currentActivity()
     val result = bottomSheetViewModel.resolveResult!!
@@ -28,16 +28,15 @@ fun OpenButtons(
 
     if (!result.isEmpty) {
         Row(modifier = Modifier.wrapContentHeight().padding(start = 15.dp, end = 15.dp)) {
-            OpenButton(enabled = enabled, textId = R.string.just_once, onClick = { onClick(false) })
+            OpenButton(outlined = true, textId = R.string.just_once, onClick = { onClick(false) })
             Spacer(modifier = Modifier.width(5.dp))
-            OpenButton(enabled = enabled, textId = R.string.always, onClick = { onClick(true) })
+            OpenButton(outlined = false, textId = R.string.always, onClick = { onClick(true) })
         }
     } else {
+        // TODO: Move out of Composable
         ElevatedOrTextButton(
-            onClick = {
-                bottomSheetViewModel.startMainActivity(activity)
-            },
-            textButton = bottomSheetViewModel.useTextShareCopyButtons.value,
+            onClick = { bottomSheetViewModel.startMainActivity(activity) },
+            textButton = bottomSheetViewModel.useTextShareCopyButtons(),
             buttonText = R.string.open_settings
         )
     }
@@ -45,22 +44,25 @@ fun OpenButtons(
 
 @Composable
 private fun RowScope.OpenButton(
-    enabled: Boolean,
     @StringRes textId: Int,
+    outlined: Boolean,
     onClick: () -> Unit
-){
-    Button(
-        enabled = enabled,
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .weight(0.5f)
-    ) {
+) {
+    val modifier = Modifier
+        .fillMaxWidth()
+        .weight(0.5f)
+    val content: @Composable RowScope.() -> Unit = {
         Text(
             text = stringResource(id = textId),
             fontFamily = HkGroteskFontFamily,
             maxLines = 1,
             fontWeight = FontWeight.SemiBold
         )
+    }
+
+    if (outlined) {
+        OutlinedButton(modifier = modifier, onClick = onClick, content = content)
+    } else {
+        Button(modifier = modifier, onClick = onClick, content = content)
     }
 }

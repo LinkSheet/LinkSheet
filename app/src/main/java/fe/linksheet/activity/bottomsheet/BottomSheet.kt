@@ -105,7 +105,6 @@ abstract class BottomSheet(
             }
 
             startActivity(intent)
-
             finish()
         }
     }

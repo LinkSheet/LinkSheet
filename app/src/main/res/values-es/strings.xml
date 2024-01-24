@@ -408,4 +408,6 @@
     <string name="welcome_to">Bienvenid@ a
 \n%s</string>
     <string name="onboarding_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
+    <string name="launch_onboarding_new">Lanzar la nueva integración</string>
+    <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>
 </resources>

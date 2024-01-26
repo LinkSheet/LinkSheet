@@ -551,4 +551,24 @@
     <string name="onboarding_setup">Set up LinkSheet</string>
     <string name="launch_onboarding_new">Launch new onboarding</string>
     <string name="launch_onboarding__now_explainer">Test the new onboarding flow</string>
+    <string name="onboarding_1_title">Set LinkSheet as default browser</string>
+    <string name="onboarding_1_subtitle">LinkSheet needs to be set as default browser to handle tapped links</string>
+    <string name="onboarding_1_card_title">Default browser</string>
+    <string name="onboarding_1_button">Set as default browser</string>
+    <string name="onboarding_1_card_explainer">LinkSheet can not function without being the default browser.</string>
+    <string name="onboarding_2_title">Do you want to use Shizuku?</string>
+    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may improve your experience
+    </string>
+    <string name="onboarding_2_card_explainer">Shizuku allows LinkSheet to disable the default link handling behavior
+        off all apps at once, instead of having to manually disable them for each app individually.
+    </string>
+    <string name="onboarding_2_button">Request Shizuku permission</string>
+    <string name="onboarding_1_skip_button">Skip</string>
+    <string name="onboarding_3_subtitle">Link handlers need to be disabled so LinkSheet can intercept them</string>
+    <string name="onboarding_3_title">Disable default link handlers</string>
+    <string name="onboarding_3_card_explainer">Google introduced verified app links in Android 12, which allows apps to
+        cryptographically proof ownership of domains. This behavior must be manually disabled for LinkSheet to intercept
+        tapped links.
+    </string>
+    <string name="onboarding_3_card_title">Link handlers</string>
 </resources>

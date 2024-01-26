@@ -235,7 +235,7 @@
     <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede comprobar qué aplicación se ha iniciado o \"referido\" a ella. De forma predeterminada, cuando LinkSheet lanza una aplicación, se oculta, diciendo que la aplicación que lanzó LinkSheet es el que la inició. Habilite esta opción para reinsertar LinkSheet como referencia para las aplicaciones que abre.</string>
     <string name="always_show_package_name_disclaimer">Este interruptor se moverá a una ubicación diferente en una versión futura.</string>
     <string name="search">Buscar</string>
-    <string name="at_least_one_unknown_browser_installer">Existe, al menos, un navedador (desconocido) instalado</string>
+    <string name="at_least_one_unknown_browser_installer">Al menos un navegador (desconocido) instalado</string>
     <string name="welcome_to_linksheet_explainer_2">Para que LinkSheet funcione, debe configurarse como el navegador del sistema, de modo que pueda interceptar los clics en los enlaces. No se preocupe, LinkSheet tiene muchas opciones de personalización, por lo que esto no limitará sino que mejorará su experiencia.</string>
     <string name="always_show_package_name">Mostrar siempre el nombre del paquete</string>
     <string name="no_libredirect_services">¡No se han encontrado servicios de LibRedirect!</string>
@@ -402,4 +402,12 @@
     <string name="enable_dev_bottom_sheet">Habilitar hoja inferior de desarrollo</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet_explainer">Habilite la última versión de la hoja inferior que está actualmente en desarrollo</string>
+    <string name="start_setup">Continuar</string>
+    <string name="start_setup_explainer">La funcionalidad de LinkSheet requiere una configuración personalizada de Android. La siguiente configuración le guiará a través del proceso de varios pasos.</string>
+    <string name="onboarding_setup">Configurar LinkSheet</string>
+    <string name="welcome_to">Bienvenid@ a
+\n%s</string>
+    <string name="onboarding_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
+    <string name="launch_onboarding_new">Lanzar la nueva integración</string>
+    <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>
 </resources>

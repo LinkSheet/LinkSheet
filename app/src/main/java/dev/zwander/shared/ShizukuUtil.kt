@@ -1,17 +1,27 @@
 package dev.zwander.shared
 
+import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import fe.linksheet.R
 import fe.linksheet.extension.android.getApplicationInfoCompat
+import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.shizuku.ShizukuStatus
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 object ShizukuUtil {
     val MANAGER_COMPONENT = ComponentName(ShizukuProvider.MANAGER_APPLICATION_ID, "moe.shizuku.manager.MainActivity")
@@ -43,5 +53,29 @@ object ShizukuUtil {
 
     fun isShizukuInstalled(context: Context): Boolean {
         return context.packageManager.getApplicationInfoCompat(ShizukuProvider.MANAGER_APPLICATION_ID, 0) != null
+    }
+
+    suspend fun requestPermission(): Boolean {
+        return suspendCoroutine { cont ->
+            val listener = object : Shizuku.OnRequestPermissionResultListener {
+                override fun onRequestPermissionResult(requestCode: Int, grantResult: Int) {
+                    Shizuku.removeRequestPermissionResultListener(this)
+                    cont.resume(grantResult == PackageManager.PERMISSION_GRANTED)
+                }
+            }
+
+            Shizuku.addRequestPermissionResultListener(listener)
+            Shizuku.requestPermission(100)
+        }
+    }
+
+    fun startManager(activity: Activity) {
+        val success = activity.startActivityWithConfirmation(Intent(Intent.ACTION_VIEW).apply {
+            component = MANAGER_COMPONENT
+        })
+
+        if (!success) {
+            Toast.makeText(activity, R.string.shizuku_manager_start_failed, Toast.LENGTH_LONG).show()
+        }
     }
 }

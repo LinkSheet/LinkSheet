@@ -1,4 +1,4 @@
-package fe.linksheet.activity.onboarding
+package fe.linksheet.activity.onboarding._new
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,12 +21,11 @@ fun Screen0(padding: PaddingValues, onNextClick: () -> Unit) {
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
-                .fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 30.dp)
+                .fillMaxHeight(), contentPadding = PaddingValues(horizontal = 30.dp)
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.onboarding_subtitle),
+                    text = stringResource(id = R.string.onboarding_0_subtitle),
                     overflow = TextOverflow.Visible,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 16.sp,
@@ -36,40 +35,12 @@ fun Screen0(padding: PaddingValues, onNextClick: () -> Unit) {
             }
         }
 
-//        Box(
-//            modifier = Modifier
-//                .align(Alignment.TopCenter)
-//                .fillMaxWidth()
-////                                .height(700.dp)
-////                .zIndex(-1f)
-////                                .border(1.dp, Color.Red)
-////                                .height(500.dp)
-//        ) {
-//            Row(modifier = Modifier
-//                .fillMaxWidth()
-//                .height(500.dp), horizontalArrangement = Arrangement.Center) {
-////                                AsyncImage(
-//////                                    modifier = Modifier.border(2.dp, Color.Blue),
-////                                    model = R.drawable.onboarding0_notext,
-////                                    alignment = Alignment.Center,
-////                                    contentDescription = null,
-////                                )
-//            }
-//        }
-
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .navigationBarsPadding()
-        ) {
+        Box(modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .fillMaxWidth()
+            .navigationBarsPadding()) {
             Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
-//                                elevation = CardDefaults.cardElevation(defaultElevation = ),
-//                                    .wrapContentHeight()
-//                                    .wrapContentHeight(),
-//                                    .height(100.dp),
+                modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant
@@ -81,15 +52,10 @@ fun Screen0(padding: PaddingValues, onNextClick: () -> Unit) {
                     bottomEnd = 0.dp
                 )
             ) {
-                Column(
-                    modifier = Modifier
-//                                        .wrapContentHeight()
-                        .padding(all = 25.dp)
-                ) {
+                Column(modifier = Modifier.padding(all = 25.dp)) {
                     Text(
                         text = stringResource(id = R.string.onboarding_setup),
                         overflow = TextOverflow.Visible,
-//                                        color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 20.sp,
                         fontFamily = HkGroteskFontFamily,
                         fontWeight = FontWeight.Bold
@@ -102,9 +68,7 @@ fun Screen0(padding: PaddingValues, onNextClick: () -> Unit) {
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Button(
-                        modifier = Modifier
-                            .height(50.dp),
-//                                            .fillMaxWidth(),
+                        modifier = Modifier.height(50.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                         onClick = onNextClick
                     ) {

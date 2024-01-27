@@ -69,6 +69,8 @@ fun Lifecycle.observeFocusAsState(ignoreFirstEvent: Lifecycle.Event? = Lifecycle
 }
 
 
+val focusGainedEvents = setOf(Lifecycle.Event.ON_RESUME, Lifecycle.Event.ON_START)
+
 @Composable
 fun Lifecycle.ObserveStateChange(
     invokeOnCall: Boolean = false,

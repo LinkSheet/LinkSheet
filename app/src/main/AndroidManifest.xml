@@ -31,7 +31,7 @@
             android:theme="@style/AppTheme"
             tools:targetApi="tiramisu">
         <activity
-                android:name=".activity.onboarding.NewOnboardingActivity"
+                android:name=".activity.onboarding._new.NewOnboardingActivity"
                 android:exported="false"
                 android:theme="@style/AppTheme"/>
         <activity

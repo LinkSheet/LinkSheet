@@ -1,14 +1,5 @@
-package fe.linksheet.activity.onboarding
+package fe.linksheet.activity.onboarding._new
 
-import android.app.role.RoleManager
-import android.content.Intent
-import android.os.Build
-import android.provider.Settings
-import android.util.Log
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,27 +7,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.util.AndroidVersion
 
 @Composable
-fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {
-    val context = LocalContext.current
-    val launcher = if (AndroidVersion.AT_LEAST_API_29_Q) {
-        rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.StartActivityForResult(),
-            onResult = { onNextClick() }
-        )
-    } else null
-
+fun Screen5(padding: PaddingValues, onNextClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
             modifier = Modifier
@@ -46,7 +26,7 @@ fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.onboarding_1_subtitle),
+                    text = stringResource(id = R.string.onboarding_5_subtitle),
                     overflow = TextOverflow.Visible,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 16.sp,
@@ -77,7 +57,7 @@ fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {
             ) {
                 Column(modifier = Modifier.padding(all = 25.dp)) {
                     Text(
-                        text = stringResource(id = R.string.onboarding_1_card_title),
+                        text = stringResource(id = R.string.onboarding_5_card_title),
                         overflow = TextOverflow.Visible,
                         fontSize = 20.sp,
                         fontFamily = HkGroteskFontFamily,
@@ -85,32 +65,16 @@ fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))
-                    Text(text = stringResource(id = R.string.onboarding_1_card_explainer))
+                    Text(text = stringResource(id = R.string.onboarding_5_card_explainer))
                     Spacer(modifier = Modifier.height(10.dp))
-
 
                     Button(
                         modifier = Modifier.height(50.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                        onClick = {
-                            if (AndroidVersion.AT_LEAST_API_29_Q) {
-                                val roleManager = context.getSystemService<RoleManager>()
-
-//                                val casted = (obj as ManagedActivityResultLauncher<Intent, ActivityResult>)
-
-//                                Log.d("OnboardingScreen", "FabTapped $roleManager $casted")
-//                                runCatching {
-                                launcher!!.launch(roleManager!!.createRequestRoleIntent(RoleManager.ROLE_BROWSER))
-//                                }.onFailure { it.printStackTrace() }
-                            } else {
-                                context.startActivity(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
-                            }
-                        }
+                        onClick = onNextClick
                     ) {
-                        Text(text = stringResource(id = R.string.onboarding_1_button))
+                        Text(text = stringResource(id = R.string.onboarding_5_button))
                     }
-
-
                 }
             }
         }

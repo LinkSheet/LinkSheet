@@ -1,43 +1,57 @@
-package fe.linksheet.activity.onboarding
+package fe.linksheet.activity.onboarding._new
 
-import android.app.role.RoleManager
-import android.content.Intent
-import android.os.Build
-import android.provider.Settings
-import android.util.Log
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.getSystemService
+import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
+import fe.linksheet.extension.compose.ObserveStateChange
+import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.extension.compose.focusGainedEvents
+import fe.linksheet.shizuku.ShizukuStatus
+import fe.linksheet.shizukuDownload
 import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.util.AndroidVersion
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+private val statusMap = mapOf(
+    ShizukuStatus.Enabled to R.string.onboarding_2_shizuku_enabled,
+    ShizukuStatus.NotRunning to R.string.onboarding_2_start_shizuku,
+    ShizukuStatus.NoPermission to R.string.onboarding_2_request_shizuku_permission,
+    ShizukuStatus.NotInstalled to R.string.onboarding_2_install_shizuku,
+)
 
 @Composable
 fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
-    val context = LocalContext.current
-    val launcher = if (AndroidVersion.AT_LEAST_API_29_Q) {
-        rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.StartActivityForResult(),
-            onResult = {
+    val activity = LocalContext.currentActivity()
+    val uriHandler = LocalUriHandler.current
 
-            }
-        )
-    } else null
+    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
+    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
+
+    val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
+
+    var status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
+    val statusStringId = statusMap[status]!!
+
+    val scope = rememberCoroutineScope()
+
+    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
+        shizukuInstalled = ShizukuUtil.isShizukuInstalled(activity)
+        shizukuRunning = ShizukuUtil.isShizukuRunning()
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
@@ -79,7 +93,7 @@ fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
             ) {
                 Column(modifier = Modifier.padding(all = 25.dp)) {
                     Text(
-                        text = stringResource(id = R.string.onboarding_1_card_title),
+                        text = stringResource(id = R.string.onboarding_2_card_title),
                         overflow = TextOverflow.Visible,
                         fontSize = 20.sp,
                         fontFamily = HkGroteskFontFamily,
@@ -96,25 +110,25 @@ fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
                             modifier = Modifier.height(50.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                             onClick = {
-//                            if (AndroidVersion.AT_LEAST_API_29_Q) {
-//                                val roleManager = context.getSystemService<RoleManager>()
-//
-////                                val casted = (obj as ManagedActivityResultLauncher<Intent, ActivityResult>)
-//
-////                                Log.d("OnboardingScreen", "FabTapped $roleManager $casted")
-////                                runCatching {
-//                                launcher!!.launch(roleManager!!.createRequestRoleIntent(RoleManager.ROLE_BROWSER))
-////                                }.onFailure { it.printStackTrace() }
-//                            } else {
-//                                context.startActivity(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
-//                            }
+                                when (status) {
+                                    ShizukuStatus.NoPermission -> scope.launch(Dispatchers.IO) {
+                                        if (ShizukuUtil.requestPermission()) {
+                                            status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
+                                        }
+                                    }
+
+                                    ShizukuStatus.NotInstalled -> uriHandler.openUri(shizukuDownload)
+                                    ShizukuStatus.NotRunning -> ShizukuUtil.startManager(activity)
+                                    ShizukuStatus.Enabled -> onNextClick()
+                                }
+
                             }
                         ) {
-                            Text(text = stringResource(id = R.string.onboarding_2_button))
+                            Text(text = stringResource(id = statusStringId))
                         }
 
-                        TextButton(onClick = { /*TODO*/ }) {
-                            Text(text = stringResource(id = R.string.onboarding_1_skip_button))
+                        TextButton(onClick = onNextClick) {
+                            Text(text = stringResource(id = R.string.onboarding_2_skip_button))
                         }
                     }
                 }

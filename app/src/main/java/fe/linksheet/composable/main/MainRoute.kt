@@ -23,10 +23,7 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.compose.OnFocused
-import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.compose.header
+import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -67,9 +64,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
         clipboardUri = getClipboardUrl(clipboardManager)
     }
 
-    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(
-        observeEvents = setOf(Lifecycle.Event.ON_RESUME, Lifecycle.Event.ON_START)
-    ) {
+    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
         defaultBrowserEnabled = Results.loading()
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 

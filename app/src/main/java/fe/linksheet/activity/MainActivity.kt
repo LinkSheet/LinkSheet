@@ -2,9 +2,7 @@ package fe.linksheet.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
@@ -13,8 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.BuildConfig
 import fe.linksheet.aboutSettingsRoute
-import fe.linksheet.activity.onboarding.NewOnboardingActivity
-import fe.linksheet.activity.onboarding.OnboardingActivity
+import fe.linksheet.activity.onboarding._new.NewOnboardingActivity
 import fe.linksheet.advancedSettingsRoute
 import fe.linksheet.amp2HtmlSettingsRoute
 import fe.linksheet.appsSettingsRoute
@@ -101,8 +98,11 @@ class MainActivity : ComponentActivity() {
 //            finish()
 //        }
 
-//        startActivity(Intent(this, NewOnboardingActivity::class.java))
-//        finish()
+
+//        if (BuildConfig.BUILD_TYPE == "debug") {
+//            startActivity(Intent(this, NewOnboardingActivity::class.java))
+//            finish()
+//        }
 
         setContentWithKoin {
             val navController = rememberNavController()

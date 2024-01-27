@@ -543,8 +543,8 @@
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet">Enable dev bottomsheet</string>
     <string name="enable_dev_bottom_sheet_explainer">Enable the latest bottomsheet version which is currently in development</string>
-    <string name="welcome_to">Welcome to\n%s</string>
-    <string name="onboarding_subtitle">Choose to always get prompted when opening a link, set default browsers, and much more
+    <string name="onboarding_0_title">Welcome to\nLinkSheet</string>
+    <string name="onboarding_0_subtitle">Choose to always get prompted when opening a link, set default browsers, and much more
     </string>
     <string name="start_setup">Continue</string>
     <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following setup will guide you through the multi-step process.</string>
@@ -557,13 +557,14 @@
     <string name="onboarding_1_button">Set as default browser</string>
     <string name="onboarding_1_card_explainer">LinkSheet can not function without being the default browser.</string>
     <string name="onboarding_2_title">Do you want to use Shizuku?</string>
-    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may improve your experience
+    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may significantly improve your experience
     </string>
     <string name="onboarding_2_card_explainer">Shizuku allows LinkSheet to disable the default link handling behavior
-        off all apps at once, instead of having to manually disable them for each app individually.
+        off all apps at once, instead of having to manually disable them for each app individually (which is the next step).
     </string>
-    <string name="onboarding_2_button">Request Shizuku permission</string>
-    <string name="onboarding_1_skip_button">Skip</string>
+    <string name="onboarding_2_request_shizuku_permission">Request permission</string>
+    <string name="onboarding_2_install_shizuku">Install Shizuku</string>
+    <string name="onboarding_2_skip_button">Skip</string>
     <string name="onboarding_3_subtitle">Link handlers need to be disabled so LinkSheet can intercept them</string>
     <string name="onboarding_3_title">Disable default link handlers</string>
     <string name="onboarding_3_card_explainer">Google introduced verified app links in Android 12, which allows apps to
@@ -571,4 +572,20 @@
         tapped links.
     </string>
     <string name="onboarding_3_card_title">Link handlers</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="onboarding_2_start_shizuku">Start Shizuku</string>
+    <string name="onboarding_2_shizuku_enabled">Next</string>
+    <string name="onboarding_3_button">Disable link handlers</string>
+    <string name="onboarding_4_button">Next</string>
+    <string name="onboarding_4_card_title">Disable link handlers</string>
+    <string name="onboarding_4_card_explainer">Disable link handling for all domains that should be handled by
+        LinkSheet.
+    </string>
+    <string name="onboarding_5_subtitle">LinkSheet has successfully been enabled</string>
+    <string name="onboarding_5_title">All set!</string>
+    <string name="onboarding_5_card_title">Setup</string>
+    <string name="onboarding_5_card_explainer">Basic configuration required for LinkSheet to function has been done -
+        head to the settings to explore what else it has to offer!
+    </string>
+    <string name="onboarding_5_button">Finish</string>
 </resources>

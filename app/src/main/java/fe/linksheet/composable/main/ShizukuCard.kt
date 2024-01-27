@@ -33,6 +33,7 @@ import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload
 import fe.linksheet.ui.Typography
 import kotlinx.coroutines.Dispatchers
@@ -42,22 +43,12 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
-enum class ShizukuStatus(val subtitle: Int, val usePrimaryColor: Boolean) {
-    Enabled(R.string.shizuku_integration_enabled_explainer, true),
-    NotRunning(R.string.shizuku_not_running_explainer, false),
-    NoPermission(R.string.shizuku_integration_no_permission_explainer, false),
-    NotInstalled(R.string.shizuku_integration_not_setup_explainer, false);
-
-    companion object {
-        fun findStatus(installed: Boolean, running: Boolean, permission: Boolean): ShizukuStatus {
-            if (installed && running && permission) return Enabled
-            if (!installed) return NotInstalled
-            if (!running) return NotRunning
-
-            return NoPermission
-        }
-    }
-}
+private val statusMap = mapOf(
+    ShizukuStatus.Enabled to R.string.shizuku_integration_enabled_explainer,
+    ShizukuStatus.NotRunning to R.string.shizuku_not_running_explainer,
+    ShizukuStatus.NoPermission to R.string.shizuku_integration_no_permission_explainer,
+    ShizukuStatus.NotInstalled to R.string.shizuku_integration_not_setup_explainer,
+)
 
 @Composable
 fun ShizukuCard(
@@ -66,15 +57,16 @@ fun ShizukuCard(
     shizukuInstalled: Boolean,
     shizukuRunning: Boolean,
 ) {
-    val context = LocalContext.current
     val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
 
     var status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
+    val statusStringId = statusMap[status]!!
+
     val scope = rememberCoroutineScope()
 
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = if (status.usePrimaryColor) MaterialTheme.colorScheme.primaryContainer
+            containerColor = if (status == ShizukuStatus.Enabled) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.tertiaryContainer
         ),
         shape = RoundedCornerShape(12.dp),
@@ -83,48 +75,14 @@ fun ShizukuCard(
             .padding(horizontal = 10.dp)
             .clickable {
                 when (status) {
-                    ShizukuStatus.NoPermission -> {
-                        scope.launch(Dispatchers.IO) {
-                            val granted = suspendCoroutine { cont ->
-                                val listener = object : Shizuku.OnRequestPermissionResultListener {
-                                    override fun onRequestPermissionResult(
-                                        requestCode: Int,
-                                        grantResult: Int
-                                    ) {
-                                        Shizuku.removeRequestPermissionResultListener(
-                                            this
-                                        )
-                                        cont.resume(grantResult == PackageManager.PERMISSION_GRANTED)
-                                    }
-                                }
-
-                                Shizuku.addRequestPermissionResultListener(listener)
-                                Shizuku.requestPermission(100)
-                            }
-
-                            if (granted) {
-                                status = ShizukuStatus.findStatus(
-                                    shizukuInstalled,
-                                    shizukuRunning,
-                                    shizukuPermission
-                                )
-                            }
+                    ShizukuStatus.NoPermission -> scope.launch(Dispatchers.IO) {
+                        if (ShizukuUtil.requestPermission()) {
+                            status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
                         }
                     }
 
-                    ShizukuStatus.NotInstalled -> {
-                        uriHandler.openUri(shizukuDownload)
-                    }
-
-                    else -> {
-                        val success = activity.startActivityWithConfirmation(Intent(Intent.ACTION_VIEW).apply {
-                            component = ShizukuUtil.MANAGER_COMPONENT
-                        })
-
-                        if (!success) {
-                            Toast.makeText(context, R.string.shizuku_manager_start_failed, Toast.LENGTH_LONG).show()
-                        }
-                    }
+                    ShizukuStatus.NotInstalled -> uriHandler.openUri(shizukuDownload)
+                    else -> ShizukuUtil.startManager(activity)
                 }
             }
     ) {
@@ -133,7 +91,7 @@ fun ShizukuCard(
                 .fillMaxWidth()
                 .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
         ) {
-            val color = if (status.usePrimaryColor) MaterialTheme.colorScheme.onSurface
+            val color = if (status == ShizukuStatus.Enabled) MaterialTheme.colorScheme.onSurface
             else MaterialTheme.colorScheme.onTertiaryContainer
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -150,7 +108,7 @@ fun ShizukuCard(
                     color = color
                 )
                 Text(
-                    text = stringResource(id = status.subtitle),
+                    text = stringResource(id = statusStringId),
                     color = color
                 )
             }

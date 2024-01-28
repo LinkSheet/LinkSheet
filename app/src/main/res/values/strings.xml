@@ -406,7 +406,7 @@
         exclusive features.
     </string>
     <string name="donation_instructions">Donation instructions</string>
-    <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenWith</string>
+    <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenLinkWith</string>
     <string name="seal_subtitle_2">Seal has been a great resource to learn from regarding Jetpack Compose</string>
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'s source code was used as a reference for Shizuku
         interaction

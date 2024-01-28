@@ -271,7 +271,7 @@
     <string name="feature_flags_explainer">Bật hoặc tắt các tính năng thử nghiệm</string>
     <string name="welcome_to_linksheet_explainer_2">Để LinkSheet hoạt động, nó cần được đặt làm trình duyệt hệ thống, vì vậy nó có thể chặn các nhấp chuột liên kết. Đừng lo lắng, LinkSheet có rất nhiều tùy chọn tùy chỉnh, vì vậy điều này sẽ không giới hạn, mà là nâng cao trải nghiệm của bạn.</string>
     <string name="disable_link_handling">Tắt xử lý liên kết</string>
-    <string name="open_link_with_subtitle_2">LinkSheet ban đầu dựa trên OpenWith</string>
+    <string name="open_link_with_subtitle_2">LinkSheet ban đầu dựa trên OpenLinkWith</string>
     <string name="donate_card">Quyên góp bằng thẻ (qua BuyMeACoffee)</string>
     <string name="donate_explainer_crypto">Khi quyên góp bằng tiền điện tử, để nhận <b>LinkSheet Pro</b>, hãy gửi bằng chứng thanh toán đến <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="onboarding4_paragraph_2">Điều này rất khó chịu, vì đôi khi, bạn không muốn mở một liên kết trong ứng dụng của nó, mà là trong một trình duyệt (ví dụ: để đánh dấu trang).

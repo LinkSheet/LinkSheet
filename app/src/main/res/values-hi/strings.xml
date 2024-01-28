@@ -114,7 +114,7 @@
     <string name="domain_selection_confirmation_subtitle">क्या आप वाकई निम्नलिखित डोमेन के लिए %s को पसंदीदा एप्लिकेशन के रूप में सेट करना चाहते हैं?</string>
     <string name="no_browser_installed">कोई ब्राउज़र स्थापित नहीं है</string>
     <string name="domain_selection_confirmation_title">डोमेन चुनें?</string>
-    <string name="open_link_with_subtitle_2">लिंकशीट प्रारंभ में OpenWith पर आधारित थी</string>
+    <string name="open_link_with_subtitle_2">लिंकशीट प्रारंभ में OpenLinkWith पर आधारित थी</string>
     <string name="misc_settings">मिश्रित</string>
     <string name="donate_learn_more">और अधिक जानें</string>
     <string name="no">नहीं</string>
@@ -134,8 +134,8 @@
     <string name="github_workflow_run_id">बिल्ड वर्कफ़्लो आईडी:</string>
     <string name="export_import_settings_explainer">अपनी वर्तमान सेटिंग्स निर्यात करें या पिछली निर्यात की हूई सेटिंग्स आयात करें</string>
     <string name="donation_instructions">दान निर्देश</string>
-    <string name="new_bottomsheet_explainer">लिंकशीट के इस संस्करण में <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> की बदौलत एक नई निचली शीट मौजूद है! कृपया Discord, Github या ईमेल के माध्यम से प्रतिक्रिया प्रदान करें। 
-\n 
+    <string name="new_bottomsheet_explainer">लिंकशीट के इस संस्करण में <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> की बदौलत एक नई निचली शीट मौजूद है! कृपया Discord, Github या ईमेल के माध्यम से प्रतिक्रिया प्रदान करें।
+\n
 \nआप सेटिंग्स के माध्यम से पुरानी निचली शीट पर वापस लौट सकते हैं -&gt; एडवांस्ड -&gt; फ़ीचर फ्लैग्स।</string>
     <string name="donate_card_headline">लिंकशीट का समर्थन करने के लिए दान करें</string>
     <string name="at_least_one_unknown_browser_installer">कम से कम (अज्ञात) एक ब्राउज़र स्थापित है</string>
@@ -146,7 +146,7 @@
     <string name="disclaimer_libredirect_unstable">प्रायोगिक सुविधा होने के अलावा, LibRedirect को वर्तमान में बहुत अस्थिर माना जाता है और यह बिल्कुल भी काम नहीं कर सकता है।</string>
     <string name="no_browser_installed_explainer">लिंकशीट ब्राउज़र होने का दावा करने वाले कम से कम एक एप्लिकेशन का पता लगाने में असमर्थ रही। सर्वोत्तम अनुभव के लिए, एक ब्राउज़र इंस्टॉल करें।</string>
     <string name="export_explainer">अपनी वर्तमान ऐप सेटिंग को एक फ़ाइल में निर्यात करें</string>
-    <string name="donate_card_subtitle"> यदि आपको लिंकशीट पसंद है, तो GitHub पर एक स्टार छोड़ने और/या दान करने पर विचार करें। 
+    <string name="donate_card_subtitle"> यदि आपको लिंकशीट पसंद है, तो GitHub पर एक स्टार छोड़ने और/या दान करने पर विचार करें।
 \n<b>5€</b> से अधिक दान करने वाले दानकर्ता <b>लिंकशीट प्रो</b> के लिए पात्र हैं, जिसमें विशिष्ट सुविधाएं होंगी।</string>
     <string name="privacy">गोपनीयता</string>
     <string name="new_bottomsheet">नई निचली शीट</string>

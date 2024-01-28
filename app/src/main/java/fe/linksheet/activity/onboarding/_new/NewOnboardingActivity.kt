@@ -9,11 +9,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -22,16 +19,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
-import fe.linksheet.activity.onboarding.*
-import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
-import fe.linksheet.composable.util.ExtendedFabIconRight
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.PoppinsFontFamily
 import fe.linksheet.ui.Typography
-import fe.linksheet.util.AndroidVersion
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,58 +48,26 @@ class NewOnboardingActivity : ComponentActivity() {
 
         setContentWithKoin {
             AppHost {
-                val isLightTheme = onboardingViewModel.theme.value.IsLightTheme()
-
                 val pagerState = rememberPagerState(pageCount = { appBarTitles.size })
-
-                val coroutineScope = rememberCoroutineScope()
+                val scope = rememberCoroutineScope()
 
                 val back = {
-                    coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 1) }
+                    scope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 1) }
                     Unit
                 }
 
                 val next = {
-                    coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                    scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
                     Unit
                 }
 
-                val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-                    rememberTopAppBarState(),
-                    canScroll = { true }
-                )
-
                 val main = Intent(this, MainActivity::class.java)
-
-
 
                 if (pagerState.currentPage == 4) {
                     Screen4(
-                        onBackPressed = { coroutineScope.launch { pagerState.scrollToPage(3) } },
-                        onNextClick = { coroutineScope.launch { pagerState.scrollToPage(5) } },
+                        onBackClick = { scope.launch { pagerState.scrollToPage(3) } },
+                        onNextClick = { scope.launch { pagerState.scrollToPage(5) } },
                     )
-//                    if (AndroidVersion.AT_LEAST_API_31_S) {
-//                        Column {
-//                            AppsWhichCanOpenLinksSettingsRoute(onBackPressed = {
-//
-//                            })
-//
-//                            Column(
-//                                modifier = Modifier
-////                                    .align(Alignment.BottomStart)
-//                                    .padding(vertical = 10.dp, horizontal = 25.dp)
-//                                    .navigationBarsPadding()
-//                            ) {
-//                                Button(
-//                                    modifier = Modifier.height(50.dp),
-//                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-//                                    onClick = next
-//                                ) {
-//                                    Text(text = stringResource(id = R.string.onboarding_4_button))
-//                                }
-//                            }
-//                        }
-//                    }
                 } else {
                     Scaffold(topBar = {
                         fe.linksheet.extension.compose.LargeTopAppBar(

@@ -399,8 +399,4 @@
     <string name="unknown_host">Хостът %s е или блокиран или не съществува</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="online_services">Отдалечени услуги</string>
-    <string name="welcome_to">Добре дошли при
-\n%s</string>
-    <string name="start_setup">Продължаване</string>
-    <string name="onboarding_setup">Настройка на LinkSheet</string>
 </resources>

@@ -113,7 +113,7 @@ enum class Theme {
         return false
     }
 
-    companion object Companion : EnumTypeMapper<Theme>(Theme.values())
+    companion object Companion : EnumTypeMapper<Theme>(entries.toTypedArray())
 }
 
 

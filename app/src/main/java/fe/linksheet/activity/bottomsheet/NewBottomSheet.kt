@@ -116,14 +116,18 @@ class NewBottomSheet(
 
         val coroutineScope = rememberCoroutineScope()
 
-        val drawerState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        val drawerState = rememberModalBottomSheetState()
         LaunchedEffect(key1 = Unit) {
             drawerState.expand()
         }
-        LaunchedEffect(drawerState.currentValue) {
-            if (drawerState.currentValue == SheetValue.Hidden) {
-                finish()
-            }
+//        LaunchedEffect(drawerState.currentValue) {
+//            if (drawerState.currentValue == SheetValue.Hidden) {
+//                finish()
+//            }
+//        }
+
+        val hide: () -> Unit = {
+            coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
         val interactionSource = remember { MutableInteractionSource() }
@@ -136,10 +140,9 @@ class NewBottomSheet(
             .nullClickable(),
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
+            hide = hide,
             sheetContent = {
-                SheetContent(result = result, landscape = landscape, hideDrawer = {
-                    coroutineScope.launch { drawerState.hide() }
-                })
+                SheetContent(result = result, landscape = landscape, hideDrawer = hide)
             })
     }
 

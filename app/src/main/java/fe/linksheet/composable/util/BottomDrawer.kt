@@ -1,15 +1,14 @@
 package fe.linksheet.composable.util
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 //@OptIn(ExperimentalMaterial3Api::class)
@@ -59,28 +58,60 @@ import kotlinx.coroutines.launch
 //    }
 //}
 
-// TODO: This should be replaced with the material3 version above, but somehow in the new version
-//  the bottomsheet does not change the color of the system navbar for some reason
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomDrawer(
     modifier: Modifier = Modifier,
     isBlackTheme: Boolean = isSystemInDarkTheme(),
-    drawerState: SheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = true
-    ),
+    drawerState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
+    hide: (() -> Unit)? = null,
     sheetContent: @Composable ColumnScope.() -> Unit = {},
     content: @Composable () -> Unit = {},
 ) {
     val coroutineScope = rememberCoroutineScope()
-    ModalBottomSheet(containerColor = MaterialTheme.colorScheme.surface, shape = shape, onDismissRequest = {
-        coroutineScope.launch {
-            drawerState.hide()
+
+    ModalBottomSheet(
+        containerColor = MaterialTheme.colorScheme.surface,
+        shape = shape,
+        scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
+        sheetState = drawerState,
+        windowInsets = WindowInsets.statusBars,
+        onDismissRequest = hide ?: {
+            coroutineScope.launch { drawerState.hide() }
+            Unit
         }
-    }) {
+    ) {
+//        Spacer(
+//            modifier = Modifier
+////                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+//                .fillMaxWidth()
+//                .height(
+//
+//                    WindowInsets.statusBars
+//                        .asPaddingValues()
+//                        .calculateTopPadding()
+//
+//                )
+//        )
+
         Column(modifier = Modifier.navigationBarsPadding()) {
             sheetContent()
+//            Spacer(modifier = Modifier.height(28.dp))
         }
+
+        // Place bottom padding manually so color is not overridden
+//        Spacer(
+//            modifier = Modifier
+//                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+//                .fillMaxWidth()
+//                .height(
+//
+//                        WindowInsets.navigationBars
+//                            .asPaddingValues()
+//                            .calculateBottomPadding()
+//
+//                )
+//        )
     }
 }

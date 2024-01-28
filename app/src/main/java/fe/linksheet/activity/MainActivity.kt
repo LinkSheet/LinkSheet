@@ -60,6 +60,7 @@ import fe.linksheet.devModeRoute
 import fe.linksheet.donateSettingsRoute
 import fe.linksheet.downloaderSettingsRoute
 import fe.linksheet.exportImportSettingsRoute
+import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.followRedirectsSettingsRoute
@@ -104,12 +105,12 @@ class MainActivity : ComponentActivity() {
 //            finish()
 //        }
 
+        initPadding()
+
         setContentWithKoin {
             val navController = rememberNavController()
 
             AppHost {
-                Spacer(modifier = Modifier.height(5.dp))
-
                 NavHost(
                     navController = navController,
                     startDestination = mainRoute,

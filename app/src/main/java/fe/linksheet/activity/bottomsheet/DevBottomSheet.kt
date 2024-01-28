@@ -7,6 +7,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -47,7 +48,7 @@ import kotlin.math.ceil
 class DevBottomSheet(
     activity: BottomSheetActivity,
     viewModel: BottomSheetViewModel
-) : BottomSheet(activity, viewModel) {
+) : BottomSheet(activity, viewModel, initPadding = true) {
 
     @Composable
     override fun ShowSheet(bottomSheetViewModel: BottomSheetViewModel) {
@@ -90,14 +91,19 @@ class DevBottomSheet(
 
         val coroutineScope = rememberCoroutineScope()
 
-        val drawerState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-        LaunchedEffect(key1 = Unit) {
+        val drawerState = rememberModalBottomSheetState()
+        LaunchedEffect(Unit) {
             drawerState.expand()
         }
-        LaunchedEffect(drawerState.currentValue) {
-            if (drawerState.currentValue == SheetValue.Hidden) {
-                finish()
-            }
+
+//        LaunchedEffect(drawerState.currentValue) {
+//            if (drawerState.currentValue == SheetValue.Hidden) {
+//                finish()
+//            }
+//        }
+
+        val hide: () -> Unit = {
+            coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
         val interactionSource = remember { MutableInteractionSource() }
@@ -110,19 +116,24 @@ class DevBottomSheet(
             .nullClickable(),
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
-            shape = ShapeDefaults.Large,
+            shape = RoundedCornerShape(
+                topStart = 16.0.dp,
+                topEnd = 16.0.dp,
+                bottomEnd = 0.0.dp,
+                bottomStart = 0.0.dp
+            ),
+            hide = hide,
             sheetContent = {
-                SheetContent(result = result, landscape = landscape, hideDrawer = {
-                    coroutineScope.launch { drawerState.hide() }
-                })
-            })
+                SheetContent(result = result, landscape = landscape, hideDrawer = hide)
+            }
+        )
     }
 
     @Composable
     private fun SheetContent(result: BottomSheetResult?, landscape: Boolean, hideDrawer: () -> Unit) {
         if (result != null && result is BottomSheetResult.BottomSheetSuccessResult && !result.hasAutoLaunchApp) {
             val showPackage = remember {
-                result.showExtended || viewModel.alwaysShowPackageName.value
+                result.showExtended || viewModel.alwaysShowPackageName()
             }
 
             val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
@@ -337,7 +348,7 @@ class DevBottomSheet(
             item {
                 if (hasPreferredApp) {
                     val privateBrowser = isPrivateBrowser(result.filteredItem!!)
-                    val ignoreLibRedirect = if(viewModel.enableIgnoreLibRedirectButton()){
+                    val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
                         result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
                     } else null
 
@@ -367,7 +378,7 @@ class DevBottomSheet(
 
             itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
                 val privateBrowser = isPrivateBrowser(info)
-                val ignoreLibRedirect = if(viewModel.enableIgnoreLibRedirectButton()){
+                val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
                     result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
                 } else null
 

@@ -24,15 +24,15 @@ import fe.linksheet.ui.Typography
 fun OpenCopiedLink(uri: Uri) {
     val context = LocalContext.current
     OutlinedCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp)
-            .clickable {
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.clickable {
                 context.startActivity(Intent(Intent.ACTION_VIEW, uri))
             },
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Spacer(modifier = Modifier.width(10.dp))
 
             ColoredIcon(icon = Icons.Default.ContentPaste, descriptionId = R.string.paste)

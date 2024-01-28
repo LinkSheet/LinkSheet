@@ -54,27 +54,28 @@ fun OpenDefaultBrowserCard(
     val shouldUsePrimaryColor = defaultBrowserEnabled.isSuccess || defaultBrowserEnabled.isLoading
     Card(
         colors = CardDefaults.cardColors(containerColor = if (shouldUsePrimaryColor) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.error),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
-            .clickable {
-                if (defaultBrowserEnabled.isLoading) {
-                    return@clickable
-                }
 
-                if (AndroidVersion.AT_LEAST_API_29_Q && !defaultBrowserEnabled.isSuccess) {
-                    val intent = viewModel.getRequestRoleBrowserIntent()
-                    browserLauncherAndroidQPlus!!.launch(intent)
-                } else {
-                    viewModel.openDefaultBrowserSettings(activity)
-                }
-            }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
+                .heightIn(min = 80.dp)
+                .clickable {
+                    if (defaultBrowserEnabled.isLoading) {
+                        return@clickable
+                    }
+
+                    if (AndroidVersion.AT_LEAST_API_29_Q && !defaultBrowserEnabled.isSuccess) {
+                        val intent = viewModel.getRequestRoleBrowserIntent()
+                        browserLauncherAndroidQPlus!!.launch(intent)
+                    } else {
+                        viewModel.openDefaultBrowserSettings(activity)
+                    }
+                }, verticalAlignment = Alignment.CenterVertically
         ) {
             val color =
                 if (shouldUsePrimaryColor) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onError

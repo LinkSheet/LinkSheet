@@ -69,27 +69,25 @@ fun ShizukuCard(
             containerColor = if (status == ShizukuStatus.Enabled) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.tertiaryContainer
         ),
-        shape = RoundedCornerShape(12.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp)
-            .clickable {
-                when (status) {
-                    ShizukuStatus.NoPermission -> scope.launch(Dispatchers.IO) {
-                        if (ShizukuUtil.requestPermission()) {
-                            status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
-                        }
-                    }
-
-                    ShizukuStatus.NotInstalled -> uriHandler.openUri(shizukuDownload)
-                    else -> ShizukuUtil.startManager(activity)
-                }
-            }
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 80.dp), verticalAlignment = Alignment.CenterVertically
+                .heightIn(min = 80.dp)
+                .clickable {
+                    when (status) {
+                        ShizukuStatus.NoPermission -> scope.launch(Dispatchers.IO) {
+                            if (ShizukuUtil.requestPermission()) {
+                                status = ShizukuStatus.findStatus(shizukuInstalled, shizukuRunning, shizukuPermission)
+                            }
+                        }
+
+                        ShizukuStatus.NotInstalled -> uriHandler.openUri(shizukuDownload)
+                        else -> ShizukuUtil.startManager(activity)
+                    }
+                }, verticalAlignment = Alignment.CenterVertically
         ) {
             val color = if (status == ShizukuStatus.Enabled) MaterialTheme.colorScheme.onSurface
             else MaterialTheme.colorScheme.onTertiaryContainer

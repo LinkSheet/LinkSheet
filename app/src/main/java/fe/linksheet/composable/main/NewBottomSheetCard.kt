@@ -30,7 +30,7 @@ import fe.linksheet.ui.Typography
 fun NewBottomSheetCard(viewModel: MainViewModel, ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)

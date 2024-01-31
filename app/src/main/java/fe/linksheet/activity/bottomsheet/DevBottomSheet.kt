@@ -308,74 +308,73 @@ class DevBottomSheet(
             startActivity(selfIntent(it.originalUri, bundleOf(LibRedirectDefault.libRedirectIgnore to true)))
         }
 
+        // TODO: Add "Once" and "Always" to non-pref UI, re-add grid, long/double tap options/single tap, limit height?
+        //      "Loading Link" show progress / downloader fails
+
+        if (previewUrl && result.uri != null) {
+            UrlBar(
+                uri = result.uri,
+                downloadable = result.downloadable.isDownloadable(),
+                copyUri = {
+                    viewModel.clipboardManager.setText("URL", result.uri.toString())
+
+                    if (bottomSheetViewModel.urlCopiedToast()) {
+                        showToast(R.string.url_copied)
+                    }
+
+                    if (bottomSheetViewModel.hideAfterCopying()) {
+                        hideDrawer()
+                    }
+                },
+                shareUri = {
+                    startActivity(shareUri(result.uri))
+                    finish()
+                },
+                downloadUri = {
+                    bottomSheetViewModel.startDownload(
+                        resources, result.uri,
+                        result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                    )
+
+                    if (!bottomSheetViewModel.downloadStartedToast()) {
+                        showToast(R.string.download_started)
+                    }
+
+                    hideDrawer()
+                }
+            )
+        }
+
+        if (hasPreferredApp) {
+            val privateBrowser = isPrivateBrowser(result.filteredItem!!)
+            val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
+                result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
+            } else null
+
+            PreferredAppColumn(
+                appInfo = result.filteredItem,
+                privateBrowser = privateBrowser,
+                preferred = true,
+                bottomSheetViewModel = bottomSheetViewModel,
+                showPackage = showPackage,
+                launchApp = { item, always, private ->
+                    launchApp(result, item, always, if (private) privateBrowser else null)
+                },
+                libRedirectResult = ignoreLibRedirect,
+                ignoreLibRedirectClick = ignoreLibRedirectClick
+            )
+        } else {
+            Text(
+                text = stringResource(id = R.string.open_with),
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(start = 15.dp)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            if (previewUrl && result.uri != null) {
-                item(key = "previewUrl") {
-                    UrlBar(
-                        uri = result.uri,
-                        downloadable = result.downloadable.isDownloadable(),
-                        copyUri = {
-                            viewModel.clipboardManager.setText("URL", result.uri.toString())
-
-                            if (bottomSheetViewModel.urlCopiedToast()) {
-                                showToast(R.string.url_copied)
-                            }
-
-                            if (bottomSheetViewModel.hideAfterCopying()) {
-                                hideDrawer()
-                            }
-                        },
-                        shareUri = {
-                            startActivity(shareUri(result.uri))
-                            finish()
-                        },
-                        downloadUri = {
-                            bottomSheetViewModel.startDownload(
-                                resources, result.uri,
-                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
-                            )
-
-                            if (!bottomSheetViewModel.downloadStartedToast()) {
-                                showToast(R.string.download_started)
-                            }
-
-                            hideDrawer()
-                        }
-                    )
-                }
-            }
-
-            item {
-                if (hasPreferredApp) {
-                    val privateBrowser = isPrivateBrowser(result.filteredItem!!)
-                    val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
-                        result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
-                    } else null
-
-                    PreferredAppColumn(
-                        appInfo = result.filteredItem,
-                        privateBrowser = privateBrowser,
-                        preferred = true,
-                        bottomSheetViewModel = bottomSheetViewModel,
-                        showPackage = showPackage,
-                        launchApp = { item, always, private ->
-                            launchApp(result, item, always, if (private) privateBrowser else null)
-                        },
-                        libRedirectResult = ignoreLibRedirect,
-                        ignoreLibRedirectClick = ignoreLibRedirectClick
-                    )
-                } else {
-                    Text(
-                        text = stringResource(id = R.string.open_with),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(start = 15.dp)
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-            }
-
             itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
                 val privateBrowser = isPrivateBrowser(info)
                 val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {

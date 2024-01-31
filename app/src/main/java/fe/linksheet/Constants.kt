@@ -16,8 +16,8 @@ const val linkSheetCompatGithubReleases = "https://github.com/1fexd/LinkSheetCom
 const val shizukuDownload = "https://shizuku.rikka.app/download"
 
 const val donationBannerAfterMinutes = 10
-const val developmentTimeHours = 250
-const val developmentTimeMonths = 6
+const val developmentTimeHours = 370
+const val developmentTimeMonths = 11
 
 val officialSigningKeys = mapOf(
     "C2A8B18C328DFB39C896491757ED11C145D3ACCA43212FA3DE362433C416AAA9" to AppSignature.BuildType.Manual,

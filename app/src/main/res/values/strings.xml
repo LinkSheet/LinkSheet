@@ -542,12 +542,17 @@
     <string name="unknown_host">%s is either blocked or does not exist</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet">Enable dev bottomsheet</string>
-    <string name="enable_dev_bottom_sheet_explainer">Enable the latest bottomsheet version which is currently in development</string>
+    <string name="enable_dev_bottom_sheet_explainer">Enable the latest bottomsheet version which is currently in
+        development
+    </string>
     <string name="onboarding_0_title">Welcome to\nLinkSheet</string>
-    <string name="onboarding_0_subtitle">Choose to always get prompted when opening a link, set default browsers, and much more
+    <string name="onboarding_0_subtitle">Choose to always get prompted when opening a link, set default browsers, and
+        much more
     </string>
     <string name="start_setup">Continue</string>
-    <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following setup will guide you through the multi-step process.</string>
+    <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following
+        setup will guide you through the multi-step process.
+    </string>
     <string name="onboarding_setup">Set up LinkSheet</string>
     <string name="launch_onboarding_new">Launch new onboarding</string>
     <string name="launch_onboarding__now_explainer">Test the new onboarding flow</string>
@@ -557,10 +562,12 @@
     <string name="onboarding_1_button">Set as default browser</string>
     <string name="onboarding_1_card_explainer">LinkSheet can not function without being the default browser.</string>
     <string name="onboarding_2_title">Do you want to use Shizuku?</string>
-    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may significantly improve your experience
+    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may significantly improve your
+        experience
     </string>
     <string name="onboarding_2_card_explainer">Shizuku allows LinkSheet to disable the default link handling behavior
-        off all apps at once, instead of having to manually disable them for each app individually (which is the next step).
+        off all apps at once, instead of having to manually disable them for each app individually (which is the next
+        step).
     </string>
     <string name="onboarding_2_request_shizuku_permission">Request permission</string>
     <string name="onboarding_2_install_shizuku">Install Shizuku</string>
@@ -588,4 +595,20 @@
         head to the settings to explore what else it has to offer!
     </string>
     <string name="onboarding_5_button">Finish</string>
+    <string name="experiment">Experiment</string>
+    <string name="new_dev_bottom_sheet_explainer">This nightly build features an all-new bottom sheet currently in
+        development, which is not feature complete yet.\nTap here to learn more, report missing features, or revert to
+        the old version.
+    </string>
+    <string name="new_dev_bottom_sheet">Bottom sheet</string>
+    <string name="new_dev_bottom_sheet_feature_explainer">The new in-dev bottom sheet is not feature complete yet.
+        Notably, the following functionality is still missing: Grid mode is unfinished, single-tap mode / long and
+        double taps, \"Once\" / \"Always\" buttons are missing if no preferred app has been set for a host.\nPlease
+        report missing features either on <annotation url="https://github.com/1fexd/LinkSheet/issues/308">
+            Github</annotation>,
+        <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, or via <annotation
+                url="mailto:1fexd@420blaze.it">Email</annotation>, since I plan to remove the old version once the new
+        one is feature-complete.
+    </string>
+    <string name="information">Information</string>
 </resources>

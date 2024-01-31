@@ -73,14 +73,14 @@ fun DevSettingsRoute(
                 )
             }
 
-            item(key = "dev_bottomsheet") {
-                SwitchRow(
-                    state = viewModel.useDevBottomSheet,
-                    viewModel = viewModel,
-                    headlineId = R.string.enable_dev_bottom_sheet,
-                    subtitleId = R.string.enable_dev_bottom_sheet_explainer
-                )
-            }
+//            item(key = "dev_bottomsheet") {
+//                SwitchRow(
+//                    state = viewModel.useDevBottomSheet,
+//                    viewModel = viewModel,
+//                    headlineId = R.string.enable_dev_bottom_sheet,
+//                    subtitleId = R.string.enable_dev_bottom_sheet_explainer
+//                )
+//            }
         }
     }
 }

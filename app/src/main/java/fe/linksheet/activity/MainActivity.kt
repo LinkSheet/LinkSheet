@@ -9,15 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import fe.linksheet.BuildConfig
-import fe.linksheet.aboutSettingsRoute
+import fe.linksheet.*
 import fe.linksheet.activity.onboarding._new.NewOnboardingActivity
-import fe.linksheet.advancedSettingsRoute
-import fe.linksheet.amp2HtmlSettingsRoute
-import fe.linksheet.appsSettingsRoute
-import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
-import fe.linksheet.bottomSheetSettingsRoute
-import fe.linksheet.browserSettingsRoute
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
@@ -41,6 +34,7 @@ import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.loadpreferences.LoadDumpedPreferences
 import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
 import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
+import fe.linksheet.composable.settings.dev.DevBottomSheetSettingsRoute
 import fe.linksheet.composable.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.settings.general.GeneralSettingsRoute
 import fe.linksheet.composable.settings.link.LinksSettingsRoute
@@ -54,38 +48,11 @@ import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.creditsSettingsRoute
-import fe.linksheet.debugSettingsRoute
-import fe.linksheet.devModeRoute
-import fe.linksheet.donateSettingsRoute
-import fe.linksheet.downloaderSettingsRoute
-import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
-import fe.linksheet.featureFlagSettingsRoute
-import fe.linksheet.followRedirectsSettingsRoute
-import fe.linksheet.generalSettingsRoute
-import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
-import fe.linksheet.inAppBrowserSettingsRoute
-import fe.linksheet.libRedirectServiceSettingsRoute
-import fe.linksheet.libRedirectSettingsRoute
-import fe.linksheet.linksSettingsRoute
-import fe.linksheet.loadDumpedPreferences
-import fe.linksheet.logTextViewerSettingsRoute
-import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.mainRoute
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.notificationSettingsRoute
-import fe.linksheet.preferredAppsSettingsRoute
-import fe.linksheet.preferredBrowserSettingsRoute
-import fe.linksheet.pretendToBeAppRoute
-import fe.linksheet.privacySettingsRoute
-import fe.linksheet.settingsRoute
-import fe.linksheet.shizukuSettingsRoute
-import fe.linksheet.themeSettingsRoute
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
-import fe.linksheet.whitelistedBrowsersSettingsRoute
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -298,6 +265,10 @@ class MainActivity : ComponentActivity() {
 
                     animatedComposable(route = devModeRoute) {
                         DevSettingsRoute(onBackPressed = onBackPressed)
+                    }
+
+                    animatedComposable(route = devBottomSheetExperimentRoute) {
+                        DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)
                     }
                 }
             }

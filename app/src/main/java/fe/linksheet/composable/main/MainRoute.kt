@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
@@ -113,6 +112,12 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 Spacer(modifier = Modifier.height(5.dp))
             }
 
+            if (viewModel.devBottomSheetExperimentCard()) {
+                cardItem(header = R.string.experiment) {
+                    DevBottomSheetExperimentCard(navController = navController)
+                }
+            }
+
             if (AppSignature.checkSignature(activity) == AppSignature.BuildType.Unofficial) {
                 cardItem {
                     UnofficialBuild()
@@ -157,21 +162,14 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
 
             if (showOtherBanners) {
                 val discord = viewModel.showDiscordBanner.value
-                val newBottomSheet = viewModel.showNewBottomSheetBanner.value
 
-                if (discord || newBottomSheet) {
+                if (discord) {
                     header(header = R.string.other)
                 }
 
                 if (discord) {
                     cardItem {
                         DiscordCard(viewModel = viewModel, uriHandler = uriHandler)
-                    }
-                }
-
-                if (newBottomSheet) {
-                    cardItem {
-                        NewBottomSheetCard(viewModel = viewModel)
                     }
                 }
             }

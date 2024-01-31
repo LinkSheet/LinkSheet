@@ -26,7 +26,7 @@ import fe.linksheet.util.PrivateBrowsingBrowser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BrowserColumn(
+fun ListBrowserColumn(
     appInfo: DisplayActivityInfo,
     preferred: Boolean,
     privateBrowser: PrivateBrowsingBrowser?,

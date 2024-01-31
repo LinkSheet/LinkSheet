@@ -1,6 +1,5 @@
 package fe.linksheet.activity.bottomsheet.dev.preferred
 
-import android.content.res.Resources
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -9,9 +8,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.dev.ButtonColumn
 import fe.linksheet.activity.bottomsheet.dev.OpenButtons
-import fe.linksheet.activity.bottomsheet.dev.list.BrowserColumn
+import fe.linksheet.activity.bottomsheet.dev.list.ListBrowserColumn
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -31,7 +29,7 @@ fun PreferredAppColumn(
     ignoreLibRedirectClick: ((LibRedirectResolver.LibRedirectResult.Redirected) -> Unit)? = null,
 ) {
     Column {
-        BrowserColumn(
+        ListBrowserColumn(
             appInfo = appInfo,
             preferred = preferred,
             privateBrowser = privateBrowser,

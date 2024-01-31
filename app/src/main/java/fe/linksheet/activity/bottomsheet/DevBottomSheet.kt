@@ -1,29 +1,35 @@
 package fe.linksheet.activity.bottomsheet
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.dev.UrlBar
 import fe.linksheet.activity.bottomsheet.dev.failure.FailureSheetColumn
-import fe.linksheet.activity.bottomsheet.dev.list.BrowserColumn
+import fe.linksheet.activity.bottomsheet.dev.grid.GridBrowserButton
+import fe.linksheet.activity.bottomsheet.dev.list.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.dev.preferred.PreferredAppColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.composable.util.defaultRoundedCornerShape
@@ -147,21 +153,28 @@ class DevBottomSheet(
 
             val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
 
-            if (result.filteredItem == null) {
-                OpenWith(
-                    bottomSheetViewModel = viewModel,
-                    hideDrawer = hideDrawer,
-                    showPackage = showPackage,
-                    previewUrl = viewModel.previewUrl.value
-                )
-            } else {
-                OpenWithPreferred(
-                    bottomSheetViewModel = viewModel,
-                    hideDrawer = hideDrawer,
-                    showPackage = showPackage,
-                    previewUrl = viewModel.previewUrl.value
-                )
-            }
+            BottomSheetApps(
+                bottomSheetViewModel = viewModel,
+                hideDrawer = hideDrawer,
+                showPackage = showPackage,
+                previewUrl = viewModel.previewUrl(),
+                hasPreferredApp = result.filteredItem != null
+            )
+//            if (result.filteredItem == null) {
+//                OpenWith(
+//                    bottomSheetViewModel = viewModel,
+//                    hideDrawer = hideDrawer,
+//                    showPackage = showPackage,
+//                    previewUrl = viewModel.previewUrl()
+//                )
+//            } else {
+//                OpenWithPreferred(
+//                    bottomSheetViewModel = viewModel,
+//                    hideDrawer = hideDrawer,
+//                    showPackage = showPackage,
+//                    previewUrl = viewModel.previewUrl()
+//                )
+//            }
         } else {
             FailureSheetColumn(
                 result = result,
@@ -175,11 +188,11 @@ class DevBottomSheet(
                         "URL", result?.uri.toString()
                     )
 
-                    if (!viewModel.urlCopiedToast.value) {
+                    if (!viewModel.urlCopiedToast()) {
                         showToast(R.string.url_copied)
                     }
 
-                    if (viewModel.hideAfterCopying.value) {
+                    if (viewModel.hideAfterCopying()) {
                         hideDrawer()
                     }
                 }
@@ -187,65 +200,9 @@ class DevBottomSheet(
         }
     }
 
-
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
-    private fun OpenWithPreferred(
-        bottomSheetViewModel: BottomSheetViewModel,
-        hideDrawer: () -> Unit,
-        showPackage: Boolean,
-        previewUrl: Boolean
-    ) {
-        if (bottomSheetViewModel.gridLayout.value) {
-//            BtmSheetGridUI(
-//                bottomSheetViewModel = bottomSheetViewModel,
-//                hideDrawer = hideDrawer,
-//                showPackage = showPackage,
-//                previewUrl = previewUrl,
-//                forPreferred = true
-//            )
-        } else {
-            BtmSheetNonGridUI(
-                bottomSheetViewModel = bottomSheetViewModel,
-                hideDrawer = hideDrawer,
-                showPackage = showPackage,
-                previewUrl = previewUrl,
-                hasPreferredApp = true
-            )
-        }
-    }
-
-    @OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @Composable
-    private fun OpenWith(
-        bottomSheetViewModel: BottomSheetViewModel,
-        hideDrawer: () -> Unit,
-        showPackage: Boolean,
-        previewUrl: Boolean,
-    ) {
-        if (bottomSheetViewModel.gridLayout.value) {
-//            BtmSheetGridUI(
-//                bottomSheetViewModel = bottomSheetViewModel,
-//                hideDrawer = hideDrawer,
-//                showPackage = showPackage,
-//                previewUrl = previewUrl,
-//                forPreferred = false
-//            )
-        } else {
-            BtmSheetNonGridUI(
-                bottomSheetViewModel = bottomSheetViewModel,
-                hideDrawer = hideDrawer,
-                showPackage = showPackage,
-                previewUrl = previewUrl,
-                hasPreferredApp = false
-            )
-        }
-    }
-
-    @OptIn(ExperimentalFoundationApi::class)
-    @Composable
-    private fun BtmSheetNonGridUI(
+    private fun BottomSheetApps(
         bottomSheetViewModel: BottomSheetViewModel,
         hideDrawer: () -> Unit,
         showPackage: Boolean,
@@ -374,6 +331,71 @@ class DevBottomSheet(
             Spacer(modifier = Modifier.height(10.dp))
         }
 
+        if (bottomSheetViewModel.gridLayout()) {
+            Grid(result = result, showPackage = showPackage, ignoreLibRedirectClick = ignoreLibRedirectClick)
+        } else {
+            List(result = result, showPackage = showPackage, ignoreLibRedirectClick = ignoreLibRedirectClick)
+        }
+    }
+
+    @Composable
+    private fun Grid(
+        result: BottomSheetResult.BottomSheetSuccessResult,
+        showPackage: Boolean,
+        ignoreLibRedirectClick: (LibRedirectResolver.LibRedirectResult.Redirected) -> Unit
+    ) {
+        LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
+            itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
+                val privateBrowser = isPrivateBrowser(info)
+                val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
+                    result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
+                } else null
+
+                GridBrowserButton(
+                    appInfo = info,
+                    privateBrowser = privateBrowser,
+                    showPackage = showPackage,
+                    launchApp = { item, always, private ->
+                        launchApp(result, item, always, if (private) privateBrowser else null)
+                    },
+                    libRedirectResult = ignoreLibRedirect,
+                    ignoreLibRedirectClick = ignoreLibRedirectClick
+                )
+
+//                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+//                    Image(
+//                        bitmap = info.iconBitmap,
+//                        contentDescription = info.label,
+//                        modifier = Modifier.size(32.dp)
+//                    )
+//
+//                    Text(
+//                        text = info.label,
+//                        maxLines = 1,
+//                        overflow = TextOverflow.Ellipsis,
+//                        fontSize = 14.sp,
+//                        modifier = Modifier.padding(top = 3.dp)
+//                    )
+//
+//                    if (showPackage) {
+//                        Text(
+//                            text = info.packageName,
+//                            fontSize = 12.sp,
+//                            overflow = TextOverflow.Ellipsis,
+//                            maxLines = 1
+//                        )
+//                    }
+//                }
+            }
+        }
+    }
+
+    @Composable
+    private fun List(
+        result: BottomSheetResult.BottomSheetSuccessResult,
+        showPackage: Boolean,
+        ignoreLibRedirectClick: (LibRedirectResolver.LibRedirectResult.Redirected) -> Unit
+    ) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
                 val privateBrowser = isPrivateBrowser(info)
@@ -381,7 +403,7 @@ class DevBottomSheet(
                     result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
                 } else null
 
-                BrowserColumn(
+                ListBrowserColumn(
                     appInfo = info,
                     preferred = false,
                     privateBrowser = privateBrowser,

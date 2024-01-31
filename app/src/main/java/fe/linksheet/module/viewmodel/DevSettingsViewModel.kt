@@ -13,4 +13,5 @@ class DevSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
     var devModeEnabled = preferenceRepository.getBooleanState(AppPreferences.devModeEnabled)
     val useDevBottomSheet = preferenceRepository.getBooleanState(AppPreferences.useDevBottomSheet)
+    val devBottomSheetExperiment = preferenceRepository.getBooleanState(AppPreferences.devBottomSheetExperiment)
 }

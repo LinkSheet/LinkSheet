@@ -23,10 +23,8 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val bottomSheet = if (devSettingsViewModel.devModeEnabled() && devSettingsViewModel.useDevBottomSheet()) {
+        val bottomSheet = if (devSettingsViewModel.devBottomSheetExperiment()) {
             DevBottomSheet(this, bottomSheetViewModel)
-        } else if (featureFlagViewModel.featureFlagNewBottomSheet.value) {
-            NewBottomSheet(this, bottomSheetViewModel)
         } else {
             LegacyBottomSheet(this, bottomSheetViewModel)
         }

@@ -94,10 +94,14 @@ object AppPreferences : Preferences() {
 
     val firstRun = booleanPreference("first_run", true)
     val showDiscordBanner = booleanPreference("show_discord_banner", true)
-    val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner", true)
+    val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner", false)
+
+    val devBottomSheetExperimentCard = booleanPreference("show_dev_bottom_sheet_experiment_card", true)
 
     val useDevBottomSheet = booleanPreference("use_dev_bottom_sheet", false)
     val donateCardDismissed = booleanPreference("donate_card_dismissed", false)
+
+    val devBottomSheetExperiment = booleanPreference("dev_bottom_sheet_experiment", true)
 
     val sensitivePreferences = listOf(
         useTimeMs, logKey,

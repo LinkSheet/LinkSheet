@@ -51,6 +51,7 @@ class MainViewModel(
     val donateCardDismissed = preferenceRepository.getBooleanState(AppPreferences.donateCardDismissed)
     var theme = preferenceRepository.getState(AppPreferences.theme)
     val devModeEnabled = preferenceRepository.getBooleanState(AppPreferences.devModeEnabled)
+    val devBottomSheetExperimentCard = preferenceRepository.getBooleanState(AppPreferences.devBottomSheetExperimentCard)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

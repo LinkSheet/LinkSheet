@@ -36,9 +36,12 @@ import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.collectOnIO
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
+import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import org.koin.androidx.compose.koinViewModel
 
+
+private const val allPackages = "all"
 
 @OptIn(
     ExperimentalFoundationApi::class, ExperimentalMaterialApi::class
@@ -76,6 +79,9 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     fun postCommand(packageName: String) {
         viewModel.app.postShizukuCommand {
             disableLinkHandling(packageName, !linkHandlingAllowed)
+            if (packageName == allPackages) {
+                disableLinkHandling(PretendToBeAppSettingsViewModel.linksheetCompatPackage, true)
+            }
         }
 
         viewModel.refresh()
@@ -138,7 +144,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.End
                                 ) {
-                                    TextButton(onClick = { postCommand("all") }) {
+                                    TextButton(onClick = { postCommand(allPackages) }) {
                                         Text(text = stringResource(id = if (linkHandlingAllowed) R.string.disable_all else R.string.enable_all))
                                     }
                                 }

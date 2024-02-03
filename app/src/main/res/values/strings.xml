@@ -19,10 +19,10 @@
     <string name="use_a_different_app">Use a different app</string>
     <string name="opening_with_app">Opening with %s</string>
     <string name="preferred_apps">Preferred apps</string>
-    <string name="preferred_apps_settings">Preferred apps settings</string>
+    <string name="preferred_apps_settings">Set preferred apps for hosts they support</string>
     <string name="set_as_browser">Set as browser</string>
     <string name="set_as_browser_explainer">Tap here to make LinkSheet the default browser</string>
-    <string name="apps_which_can_open_links">Apps which can open links</string>
+    <string name="apps_which_can_open_links">Verified link handlers</string>
     <string name="apps_which_can_open_links_explainer">Tap an app to open the \"Open by default\" menu which allows you
         to disable automatic link opening
     </string>
@@ -90,7 +90,7 @@
     <string name="whitelisted_explainer">Only show whitelisted browsers</string>
     <string name="save">Save</string>
     <string name="whitelisted_browsers">Whitelisted browsers</string>
-    <string name="apps_explainer">Preferred apps and Apps which can open links</string>
+    <string name="apps_explainer">Preferred apps and verified link handlers</string>
     <string name="bottom_sheet_explainer">Sort by usage, enable copy button, enable share button etc.</string>
     <string name="about">About</string>
     <string name="about_explainer">About this app, licenses</string>

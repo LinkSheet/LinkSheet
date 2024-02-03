@@ -83,7 +83,6 @@
     <string name="clear">ਸਾਫ ਕਰੋ</string>
     <string name="import_and_override">ਇੰਪੋਰਟ ਕਰੋ ਅਤੇ ਓਵਰਰਾਈਡ ਕਰੋ</string>
     <string name="apps_which_can_open_links_explainer">\"ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਖੋਲ੍ਹੋ\" ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਕ ਐਪ \'ਤੇ ਟੈਪ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਹਾਨੂੰ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਮਿਲਦੀ ਹੈ</string>
-    <string name="apps_explainer">ਤਰਜੀਹੀ ਐਪਸ ਅਤੇ ਐਪਸ ਜੋ ਲਿੰਕ ਖੋਲ੍ਹ ਸਕਦੇ ਹਨ</string>
     <string name="enabled">ਇਨੇਬਲ ਕੀਤੇ</string>
     <string name="redirect_resolve_type_not_resolved">ਕੋਈ ਨਹੀਂ</string>
     <string name="onboarding4_paragraph_2">ਇਹ ਬਹੁਤ ਤੰਗ ਕਰਨ ਵਾਲਾ ਹੈ, ਜਿਵੇਂ ਕਿ ਕਈ ਵਾਰ, ਤੁਸੀਂ ਇਸਦੇ ਐਪ ਵਿੱਚ ਇੱਕ ਲਿੰਕ ਨਹੀਂ ਖੋਲ੍ਹਣਾ ਚਾਹੁੰਦੇ ਹੋ, ਸਗੋਂ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ (ਉਦਾਹਰਨ ਲਈ, ਇਸਨੂੰ ਬੁੱਕਮਾਰਕ ਕਰਨ ਲਈ)।
@@ -146,7 +145,6 @@
     <string name="amp2html_external_service_explainer">supabase.com (<annotation url="https://supabase.com/privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="github_explainer">ਸਰੋਤ ਕੋਡ ਰਿਪੌਜ਼ਟਰੀ</string>
     <string name="launch_onboaring">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
-    <string name="preferred_apps_settings">ਤਰਜੀਹੀ ਐਪਸ ਸੈਟਿੰਗਾਂ</string>
     <string name="shizuku_integration">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="debug">ਡੀਬੱਗ</string>
     <string name="onboarding1_headline">ਸਵਾਗਤ ਹੈ</string>
@@ -284,7 +282,6 @@
     <string name="welcome_to_linksheet_explainer">ਲਿੰਕਸ਼ੀਟ \"ਯੂਆਰਐਲ-ਐਪ-ਚੋਣਕਾਰ\" ਨੂੰ \"ਰੀਸਟੋਰ\" ਕਰਦੀ ਹੈ ਜੋ ਉਦੋਂ ਪ੍ਰਗਟ ਹੁੰਦੀ ਹੈ ਜਦੋਂ ਉਪਭੋਗਤਾ ਨੇ ਐਂਡਰੌਇਡ &lt;12 \'ਤੇ ਇੱਕ ਲਿੰਕ ਨੂੰ ਟੈਪ ਕੀਤਾ ਸੀ ਅਤੇ ਉਸ ਵਿੱਚ ਕਈ ਐਪਸ ਸਥਾਪਤ ਸਨ ਜੋ ਲਿੰਕ ਨੂੰ ਸੰਭਾਲ ਸਕਦੀਆਂ ਸਨ</string>
     <string name="system">ਸਿਸਟਮ</string>
     <string name="no_log_entries">ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਕੋਈ ਲੌਗ ਨਹੀਂ ਹਨ।</string>
-    <string name="apps_which_can_open_links">ਐਪਾਂ ਜੋ ਲਿੰਕ ਖੋਲ੍ਹ ਸਕਦੀਆਂ ਹਨ</string>
     <string name="add">ਜੋੜ੍ਹੋ</string>
     <string name="follow_redirects_local_cache">ਸਥਾਨਕ ਰੀਡਾਇਰੈਕਟ ਕੈਸ਼ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="privacy">ਗੋਪਨੀਯਤਾ</string>

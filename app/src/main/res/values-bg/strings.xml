@@ -23,7 +23,6 @@
     <string name="preferred_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
     <string name="use_a_different_app">Изберете друго приложение</string>
-    <string name="apps_which_can_open_links">Приложения, отварящи препратки</string>
     <string name="search">Търсене</string>
     <string name="url_copied">Адресът е копиран в междинната памет</string>
     <string name="single_tap">Единично докосване</string>
@@ -57,7 +56,6 @@
     <string name="downloader_url_mime_type_explainer">Проверява дали адресът завършва с файлово разширение (напр. „.jpg“); ако е така, се използва за изтегления файл.</string>
     <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
     <string name="just_once">Веднъж</string>
-    <string name="preferred_apps_settings">Настройки на предпочитаните приложения</string>
     <string name="copy_url">Копиране</string>
     <string name="confirm">Потвърждаване</string>
     <string name="clear">Изчистване</string>
@@ -116,7 +114,6 @@
     <string name="request_private_browsing">Поверителен</string>
     <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
     <string name="selected_browser_explainer">Този браузър ще бъде отварян автоматично ако липсва приложение, което да обработи посетената препратка</string>
-    <string name="apps_explainer">Предпочитани приложения и такива, отварящи препратки</string>
     <string name="github_explainer">Хранилище на изходния код</string>
     <string name="open_copied_link">Посещаване на копираната препратка</string>
     <string name="follow_only_known_trackers">Последване на известни проследявания</string>
@@ -309,7 +306,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Заповядайте в нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение. 
+    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
 \nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности. \u0020</string>
     <plurals name="hours">
         <item quantity="one">%s час</item>
@@ -384,8 +381,8 @@
     <string name="opening_with_app_toast_explainer">Показва плуващо известие при отваряне на стандартно за даден домейн приложение</string>
     <string name="disclaimer_libredirect_unstable">В допълнение към изпитателната природа на тази възможност интеграцията с LibRedirect се счита за много нестабилна и може да не работи изобщо.</string>
     <string name="enable_new_bottom_sheet">Включване на новото долно меню</string>
-    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща. 
-\n 
+    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща.
+\n
 \nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове. \u0020</string>
     <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
     <string name="new_bottomsheet">Ново долно меню</string>

@@ -97,7 +97,6 @@
     <string name="clear">Очисти</string>
     <string name="import_and_override">Увоз и преписивање</string>
     <string name="apps_which_can_open_links_explainer">Додирните апликацију да бисте отворили мени „Отвори подразумевано“ који вам омогућава да онемогућите аутоматско отварање линка</string>
-    <string name="apps_explainer">Префериране апликације и апликације које могу да отварају линкове</string>
     <string name="enabled">Омогућено</string>
     <string name="redirect_resolve_type_not_resolved">ниједно</string>
     <string name="onboarding4_paragraph_2">Ово је веома неугодно, јер понекад не желите да отворите линк у њеној апликацији, већ у прегледачу (на пример, да га обележите).
@@ -164,7 +163,6 @@
     <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
     <string name="github_explainer">Репозиторијум изворног кода</string>
     <string name="launch_onboaring">Покрени започињање</string>
-    <string name="preferred_apps_settings">Подешавања преферираних апликација</string>
     <string name="shizuku_integration">Shizuku интеграција</string>
     <string name="debug">Отклањање грешака</string>
     <string name="onboarding1_headline">Добро дошли у</string>
@@ -320,7 +318,6 @@
     <string name="welcome_to_linksheet_explainer">LinkSheet „враћа“ „url-app-chooser“ који се појавио када је корисник додирнуо линк на Android верзији &lt;12 и имао је инсталираних више апликација које су могле да рукују линком</string>
     <string name="system">Системски</string>
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
-    <string name="apps_which_can_open_links">Апликације које могу отварати линкове</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
     <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате.

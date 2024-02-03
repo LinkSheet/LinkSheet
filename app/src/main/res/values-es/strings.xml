@@ -83,7 +83,6 @@
     <string name="clear">Borrar</string>
     <string name="import_and_override">Importar e invalidar</string>
     <string name="apps_which_can_open_links_explainer">Toca una aplicación para abrir el menú \"Abrir de forma predeterminada\" que te permite desactivar la apertura automática de enlaces</string>
-    <string name="apps_explainer">Aplicaciones predeterminadas y Aplicaciones que pueden abrir enlaces</string>
     <string name="enabled">Activado</string>
     <string name="redirect_resolve_type_not_resolved">ninguno</string>
     <string name="onboarding4_paragraph_2">Esto es muy molesto, ya que a veces no quieres abrir un enlace en su aplicación, sino en un navegador (por ejemplo, para marcarlo como favorito).
@@ -146,7 +145,6 @@
     <string name="amp2html_external_service_explainer">Intento de obtener una versión de página no AMP mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>). \u0020</string>
     <string name="github_explainer">Repositorio de código fuente</string>
     <string name="launch_onboaring">Iniciar la incorporación</string>
-    <string name="preferred_apps_settings">Ajustes de aplicaciones predeterminadas</string>
     <string name="shizuku_integration">Integración con Shizuku</string>
     <string name="debug">Depurar</string>
     <string name="onboarding1_headline">Bienvenido a</string>
@@ -284,7 +282,6 @@
     <string name="welcome_to_linksheet_explainer">LinkSheet \"restaura\" el \"url-app-chooser\" que aparecía cuando el usuario tocaba en un enlace en un Android anterior al 12 y tenía varias aplicaciones instaladas que podían manejar el enlace</string>
     <string name="system">Sistema</string>
     <string name="no_log_entries">La sesión no contiene ningún registro.</string>
-    <string name="apps_which_can_open_links">Aplicaciones que pueden abrir enlaces</string>
     <string name="add">Añadir</string>
     <string name="follow_redirects_local_cache">Activar la caché de redirección local</string>
     <string name="privacy">Privacidad</string>

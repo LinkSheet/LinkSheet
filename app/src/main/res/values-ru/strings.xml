@@ -75,7 +75,6 @@
     <string name="normal">Нормально</string>
     <string name="clear">Очистить</string>
     <string name="apps_which_can_open_links_explainer">Коснитесь приложения, чтобы открыть меню «Открыть по умолчанию», которое позволяет отключить автоматическое открытие ссылки</string>
-    <string name="apps_explainer">Предпочитаемые приложения и приложения, которые могут открывать ссылки</string>
     <string name="enabled">Включено</string>
     <string name="redirect_resolve_type_not_resolved">ничего</string>
     <string name="log_viewer_timestamp">Просмотр лога от %s</string>
@@ -124,7 +123,6 @@
     <string name="usage_stats_sorting_explainer">Включите статистику использования системы Android в алгоритм сортировки. Разрешение запрашивается при первом переключении.</string>
     <string name="amp2html_external_service_explainer">Попытка получить версию страницы, отличающееся от AMP, с помощью API, развернутого на сайте supabase.com (<annotation url="https://supabase.com/privacy">Политика конфиденциальности</annotation>)</string>
     <string name="github_explainer">Репозиторий исходного кода</string>
-    <string name="preferred_apps_settings">Настройки предпочитаемых приложений</string>
     <string name="shizuku_integration">Интеграция Shizuku</string>
     <string name="debug">Дебаг</string>
     <string name="onboarding1_headline">Добро пожаловать в</string>
@@ -251,7 +249,6 @@
     <string name="welcome_to_linksheet_explainer">LinkSheet «восстанавливает» средство выбора URL-приложения, которое появляется, когда пользователь нажимает ссылку на Android &lt;12 и у него установлено несколько приложений, которые могут обрабатывать ссылку</string>
     <string name="system">Системная</string>
     <string name="no_log_entries">Эта сессия не содержит логов.</string>
-    <string name="apps_which_can_open_links">Приложения, которые могут открывать ссылки</string>
     <string name="add">Добавить</string>
     <string name="follow_redirects_local_cache">Включить локальный кэш перенаправления</string>
     <string name="enable_request_private_browsing_button_explainer">Отображение кнопки рядом с браузерами, которая открывает выбранный URL-адрес в режиме приватного просмотра. Поддерживаемые браузеры: %s</string>

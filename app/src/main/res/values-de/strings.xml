@@ -6,11 +6,9 @@
     <string name="preferred_apps">Bevorzugte Apps</string>
     <string name="open_with">Öffnen mit</string>
     <string name="set_as_browser">Als Browser festlegen</string>
-    <string name="apps_which_can_open_links">Apps, die Links öffnen können</string>
     <string name="open_with_app">Öffnen mit %s</string>
     <string name="use_a_different_app">Eine andere App verwenden</string>
     <string name="opening_with_app">Wird mit %s geöffnet</string>
-    <string name="preferred_apps_settings">Einstellungen für bevorzugte Apps</string>
     <string name="enable_copy_button_explainer">Zeigt eine Schaltfläche „URL kopieren“ an</string>
     <string name="set_as_browser_explainer">Hier tippen, um LinkSheet als Standardbrowser festzulegen</string>
     <string name="apps_which_can_open_links_explainer_2">Listet alle Apps auf, die das Verhalten von LinkSheet beeinträchtigen können</string>
@@ -184,7 +182,6 @@
     <string name="amp2html_local_cache_explainer">Abgerufene Nicht-AMP-Versionen von Webseiten lokal zwischenspeichern</string>
     <string name="no">Nein</string>
     <string name="import_and_override">Importieren und überschreiben</string>
-    <string name="apps_explainer">Bevorzugte Apps und Apps, die Links öffnen können</string>
     <string name="redirect_resolve_type_not_resolved">keiner</string>
     <string name="onboarding4_paragraph_2">Dies ist sehr ärgerlich, denn manchmal möchte man einen Link nicht in der Link öffnen, sondern in einem Browser (z.B., um ein Lesezeichen zu setzen).
 \n

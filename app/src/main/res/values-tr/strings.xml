@@ -16,9 +16,7 @@
     <string name="use_a_different_app">Farklı bir uygulama kullanın</string>
     <string name="opening_with_app">%s ile açılıyor</string>
     <string name="preferred_apps">Tercih edilen uygulamalar</string>
-    <string name="preferred_apps_settings">Tercih edilen uygulama ayarları</string>
     <string name="set_as_browser">Tarayıcı olarak ayarla</string>
-    <string name="apps_which_can_open_links">Bağlantıları açabilen uygulamalar</string>
     <string name="no_preferred_apps_set_yet">Henüz hiçbir uygulama tercih edilen olarak ayarlanmadı.</string>
     <string name="search">Arama</string>
     <string name="copy_url">Url\'yi kopyala</string>
@@ -57,7 +55,6 @@
     <string name="whitelisted_explainer">Yalnızca beyaz listedeki tarayıcıları göster</string>
     <string name="save">Kaydet</string>
     <string name="whitelisted_browsers">Beyaz listeye alınmış tarayıcılar</string>
-    <string name="apps_explainer">Tercih edilen uygulamalar ve bağlantıları açabilen uygulamalar</string>
     <string name="about">Hakkında</string>
     <string name="about_explainer">Bu uygulama hakkında, lisanslar</string>
     <string name="credits">Krediler</string>

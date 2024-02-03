@@ -19,14 +19,12 @@
     <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセスできるようになります。現在は非表示のみとなっています。 アプリのメイン画面に寄付バナーが表示されますが、 将来的には<b>プロ専用の機能</b>が追加される予定です</string>
     <string name="welcome_to_linksheet_explainer_2">LinkSheetを動作させるには、LinkSheet をシステムブラウザとして設定し、リンクのクリックを遮断できるようにする必要があります。ご心配なく、LinkSheetにはカスタマイズ可能なオプションが豊富に用意されているため、エクスペリエンスが制限されるのではなく、むしろ強化されます。</string>
     <string name="built_by_error">このビルドは1fexdによってもGithub workflowによっても署名されていません。 誰でもソースコードをフォークして自分のLinkSheetバージョンを構築出来るため、必ずしも悪いことを意味するわけではありませんが、悪意を持ってそうする可能性があります。</string>
-    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。 
-\n 
+    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。
+\n
 \n設定 -&gt; 上級 -&gt; 機能フラグにて古いボトムシートに戻すことができます。</string>
     <string name="always">常に</string>
     <string name="open_with_app">%sで開く</string>
     <string name="opening_with_app">%sで開きます</string>
-    <string name="preferred_apps_settings">優先アプリの設定</string>
-    <string name="apps_which_can_open_links">リンクを開くことができるアプリ</string>
     <string name="apps_which_can_open_links_explainer_2">LinkSheetの動作を妨げる可能性があるアプリを全てリストします</string>
     <string name="no_preferred_apps_set_yet">まだ優先として設定されているアプリはありません。</string>
     <string name="search">検索</string>
@@ -164,7 +162,6 @@
     <string name="selected_browser_explainer">クリックされたリンクがネイティブアプリで処理できない場合、このブラウザは自動的に開きます</string>
     <string name="open_with_linksheet">LinkSheetで開く</string>
     <string name="whitelisted_explainer">ホワイトリストに登録されたブラウザのみを表示</string>
-    <string name="apps_explainer">優先アプリとリンクを開くことができるアプリ</string>
     <string name="bottom_sheet_explainer">用途別に並べ替えたり、コピーボタンを有効にしたり、共有ボタンを有効にしたり出来ます。</string>
     <string name="about_explainer">このアプリとライセンスについて</string>
     <string name="credits_explainer">オープンソースライセンス</string>

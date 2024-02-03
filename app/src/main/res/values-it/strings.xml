@@ -4,7 +4,6 @@
     <string name="open_with">Apri con</string>
     <string name="always">Sempre</string>
     <string name="open_with_app">Apri con %s</string>
-    <string name="apps_which_can_open_links">App che possono aprire link</string>
     <string name="search">Cerca</string>
     <string name="enable_copy_button">Abilita pulsante di copia</string>
     <string name="url_copied">L\'URL è stato copiato negli appunti</string>
@@ -23,7 +22,6 @@
     <string name="preferred_apps">App preferite</string>
     <string name="use_a_different_app">Usa un\'altra app</string>
     <string name="opening_with_app">Apertura con %s</string>
-    <string name="preferred_apps_settings">Impostazioni delle app preferite</string>
     <string name="set_as_browser">Imposta come browser</string>
     <string name="set_as_browser_explainer">Tocca qui per impostare questa app come browser predefinito</string>
     <string name="apps_which_can_open_links_explainer">Tocca un\'app per aprire il menu \"Apri per impostazione predefinita\" che ti consente di disabilitare l\'apertura automatica del link</string>
@@ -115,7 +113,6 @@
     <string name="follow_redirects_external_service_explainer">Segui i reindirizzamenti utilizzando un\'API distribuita su supabase.com (<annotation url="https://supabase.com/privacy">Informativa sulla privacy</annotation>)</string>
     <string name="follow_only_known_trackers">Segui solo tracker noti</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="apps_explainer">App preferite e app che possono aprire link</string>
     <string name="loading_link">Caricamento link…</string>
     <string name="resolved_via">%s risolto tramite %s</string>
     <string name="redirect_resolve_type_remote">server remoto</string>

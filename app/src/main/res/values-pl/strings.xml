@@ -6,9 +6,7 @@
     <string name="use_a_different_app">Użyj innej aplikacji</string>
     <string name="opening_with_app">Otwieranie w %s</string>
     <string name="preferred_apps">Preferowane aplikacje</string>
-    <string name="preferred_apps_settings">Ustawienia preferowanych aplikacji</string>
     <string name="set_as_browser">Ustaw jako przeglądarkę</string>
-    <string name="apps_which_can_open_links">Aplikacje otwierające linki</string>
     <string name="apps_which_can_open_links_explainer_2">Lista wszystkich aplikacji, które mogą kolidować z działaniem LinkSheet</string>
     <string name="no_preferred_apps_set_yet">Nie ustawiono jeszcze aplikacji jako preferowanych.</string>
     <string name="search">Szukaj</string>
@@ -51,7 +49,6 @@
     <string name="whitelisted_explainer">Wyświetlaj tylko przeglądarki z białej listy</string>
     <string name="save">Zapisz</string>
     <string name="whitelisted_browsers">Przeglądarki na białej liście</string>
-    <string name="apps_explainer">Preferowane aplikacje i te, które mogą otwierać linki</string>
     <string name="about">O aplikacji</string>
     <string name="about_explainer">Informacje o tej aplikacji i licencjach</string>
     <string name="credits">Uznanie</string>

@@ -7,10 +7,8 @@
     <string name="use_a_different_app">使用其他應用程式</string>
     <string name="opening_with_app">正在使用%s打開</string>
     <string name="preferred_apps">偏好應用程式</string>
-    <string name="preferred_apps_settings">偏好應用程式設定</string>
     <string name="set_as_browser">設定為瀏覽器</string>
     <string name="set_as_browser_explainer">點擊此處以將LinkSheet設為預設瀏覽器</string>
-    <string name="apps_which_can_open_links">可開啟連結的應用程式</string>
     <string name="apps_which_can_open_links_explainer">點擊應用程式以打開「預設開啟方式」選單，允許您停用自動連結開啟功能</string>
     <string name="apps_which_can_open_links_explainer_2">列出可能影響 LinkSheet 行為的所有應用程式</string>
     <string name="no_preferred_apps_set_yet">尚未設定偏好應用程式。</string>
@@ -60,7 +58,6 @@
     <string name="whitelisted_explainer">僅顯示白名單中的瀏覽器</string>
     <string name="save">儲存</string>
     <string name="whitelisted_browsers">白名單瀏覽器</string>
-    <string name="apps_explainer">偏好應用程式和可開啟連結的應用程式</string>
     <string name="bottom_sheet_explainer">按使用情況排序、啟用複製按鈕、啟用分享按鈕等等</string>
     <string name="about">關於</string>
     <string name="about_explainer">關於此應用程式、授權</string>

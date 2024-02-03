@@ -61,7 +61,6 @@
     <string name="clear">Dọn dẹp</string>
     <string name="import_and_override">Nhập và ghi đè</string>
     <string name="apps_which_can_open_links_explainer">Nhấn vào một ứng dụng để mở menu \"Mở theo mặc định\" cho phép bạn tắt tính năng mở liên kết tự động</string>
-    <string name="apps_explainer">Ứng dụng ưu tiên và Ứng dụng có thể mở liên kết</string>
     <string name="enabled">Đã bật</string>
     <string name="redirect_resolve_type_not_resolved">không</string>
     <string name="log_viewer_timestamp">Đang xem nhật ký từ %s</string>
@@ -102,7 +101,6 @@
     <string name="preview_url">URL xem trước</string>
     <string name="usage_stats_sorting_explainer">Bao gồm số liệu thống kê sử dụng hệ thống Android trong thuật toán sắp xếp. Quyền được yêu cầu trong lần chuyển đổi đầu tiên.</string>
     <string name="github_explainer">Kho lưu trữ mã nguồn</string>
-    <string name="preferred_apps_settings">Cài đặt ứng dụng ưu tiên</string>
     <string name="onboarding1_headline">Chào mừng bạn đến</string>
     <string name="enable_copy_button_explainer">Hiển thị nút \"Sao chép URL\" ở trang dưới cùng</string>
     <string name="downloader_url_mime_type_explainer">Kiểm tra xem URL có kết thúc bằng phần mở rộng tệp hay không (ví dụ: \".jpg\"); Nếu có, loại này được sử dụng cho tệp tải xuống.</string>
@@ -204,7 +202,6 @@
     <string name="welcome_to_linksheet_explainer">LinkSheet \"khôi phục\" \"bộ chọn-url-ứng dụng\" xuất hiện khi người dùng nhấn vào một liên kết trên Android &lt;12 và đã cài đặt nhiều ứng dụng có thể xử lý liên kết</string>
     <string name="system">Hệ thống</string>
     <string name="no_log_entries">Phiên này không chứa bất kỳ nhật ký nào.</string>
-    <string name="apps_which_can_open_links">Ứng dụng có thể mở liên kết</string>
     <string name="add">Thêm</string>
     <string name="follow_redirects_local_cache">Bật bộ đệm chuyển hướng cục bộ</string>
     <string name="privacy">Riêng tư</string>

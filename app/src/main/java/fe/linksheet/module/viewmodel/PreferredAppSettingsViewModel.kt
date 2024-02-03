@@ -42,8 +42,6 @@ class PreferredAppSettingsViewModel(
 
     private val preferredApps = repository.getAllAlwaysPreferred().mapProducingSideEffect(
         transform = { app, sideEffect: ProduceSideEffect<String> ->
-            Log.d("Transforming", "$app")
-
             app.groupByNoNullKeys(
                 keySelector = { it.toDisplayActivityInfo(context) },
                 nullKeyHandler = { sideEffect(it.packageName!!) },

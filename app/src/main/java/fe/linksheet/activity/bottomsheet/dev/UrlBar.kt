@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.FastForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -19,19 +21,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.compose.StatePreference
-import fe.android.preference.helper.compose.mock.MockRepositoryState
 import fe.linksheet.R
-import fe.linksheet.extension.android.setText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UrlBar(
     uri: Uri,
     downloadable: Boolean,
+    libRedirected: Boolean,
     copyUri: () -> Unit,
     shareUri: () -> Unit,
-    downloadUri: () -> Unit
+    downloadUri: () -> Unit,
+    ignoreLibRedirect: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -63,6 +64,15 @@ fun UrlBar(
                         Icon(
                             imageVector = Icons.Default.Download,
                             contentDescription = stringResource(id = R.string.download)
+                        )
+                    }
+                }
+
+                if (libRedirected) {
+                    IconButton(onClick = ignoreLibRedirect) {
+                        Icon(
+                            imageVector = Icons.Outlined.FastForward,
+                            contentDescription = stringResource(id = R.string.request_private_browsing)
                         )
                     }
                 }

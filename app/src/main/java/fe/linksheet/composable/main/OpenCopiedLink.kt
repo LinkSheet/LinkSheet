@@ -28,7 +28,7 @@ fun OpenCopiedLink(uri: Uri) {
         shape = RoundedCornerShape(16.dp)
     ) {
         Row(
-            modifier = Modifier.clickable {
+            modifier = Modifier.fillMaxWidth().clickable {
                 context.startActivity(Intent(Intent.ACTION_VIEW, uri))
             },
             verticalAlignment = Alignment.CenterVertically

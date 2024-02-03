@@ -32,8 +32,6 @@ fun ListBrowserColumn(
     privateBrowser: PrivateBrowsingBrowser?,
     showPackage: Boolean,
     launchApp: (DisplayActivityInfo, Boolean, Boolean) -> Unit,
-    libRedirectResult: LibRedirectResolver.LibRedirectResult.Redirected? = null,
-    ignoreLibRedirectClick: ((LibRedirectResolver.LibRedirectResult.Redirected) -> Unit)? = null,
 ) {
     Column(
         modifier = Modifier
@@ -46,6 +44,7 @@ fun ListBrowserColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 5.dp, end = 5.dp)
+                // TODO: Do we still need to use a constant here?
                 .heightIn(min = DevBottomSheet.preferredAppItemHeight),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -84,22 +83,12 @@ fun ListBrowserColumn(
                 }
             }
 
-            CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                if (privateBrowser != null) {
+            if (privateBrowser != null) {
+                CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                    // TODO: Checkout if we should reduce this button's size
                     FilledTonalIconButton(onClick = { launchApp(appInfo, false, true) }) {
                         Icon(
                             imageVector = Icons.Outlined.Shield,
-                            contentDescription = stringResource(id = R.string.request_private_browsing)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.width(5.dp))
-
-                if(ignoreLibRedirectClick != null && libRedirectResult != null){
-                    FilledTonalIconButton(onClick = { ignoreLibRedirectClick(libRedirectResult) }) {
-                        Icon(
-                            imageVector = Icons.Outlined.FastForward,
                             contentDescription = stringResource(id = R.string.request_private_browsing)
                         )
                     }

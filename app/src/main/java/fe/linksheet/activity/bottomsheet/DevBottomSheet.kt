@@ -19,9 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
@@ -112,12 +110,11 @@ class DevBottomSheet(
             coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
-        val interactionSource = remember { MutableInteractionSource() }
+        // TODO: Fix misalignment in landscape mode
+
         BottomDrawer(modifier = Modifier
             .runIf(landscape) {
-                it
-                    .fillMaxWidth(0.55f)
-                    .fillMaxHeight()
+                it.fillMaxWidth(0.55f).fillMaxHeight()
             }
             .nullClickable(),
             isBlackTheme = isBlackTheme,
@@ -160,21 +157,6 @@ class DevBottomSheet(
                 previewUrl = viewModel.previewUrl(),
                 hasPreferredApp = result.filteredItem != null
             )
-//            if (result.filteredItem == null) {
-//                OpenWith(
-//                    bottomSheetViewModel = viewModel,
-//                    hideDrawer = hideDrawer,
-//                    showPackage = showPackage,
-//                    previewUrl = viewModel.previewUrl()
-//                )
-//            } else {
-//                OpenWithPreferred(
-//                    bottomSheetViewModel = viewModel,
-//                    hideDrawer = hideDrawer,
-//                    showPackage = showPackage,
-//                    previewUrl = viewModel.previewUrl()
-//                )
-//            }
         } else {
             FailureSheetColumn(
                 result = result,
@@ -260,18 +242,14 @@ class DevBottomSheet(
                 .padding(appListItemPadding)
         }
 
-        val ignoreLibRedirectClick: (LibRedirectResolver.LibRedirectResult.Redirected) -> Unit = {
-            finish()
-            startActivity(selfIntent(it.originalUri, bundleOf(LibRedirectDefault.libRedirectIgnore to true)))
-        }
-
-        // TODO: Add "Once" and "Always" to non-pref UI, re-add grid, long/double tap options/single tap, limit height?
+        // TODO: Add "Once" and "Always" to non-pref UI, long/double tap options/single tap, limit height?
         //      "Loading Link" show progress / downloader fails
 
         if (previewUrl && result.uri != null) {
             UrlBar(
                 uri = result.uri,
                 downloadable = result.downloadable.isDownloadable(),
+                libRedirected = result.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText("URL", result.uri.toString())
 
@@ -298,15 +276,23 @@ class DevBottomSheet(
                     }
 
                     hideDrawer()
+                },
+                ignoreLibRedirect = {
+                    val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+
+                    finish()
+                    startActivity(
+                        selfIntent(
+                            redirected.originalUri,
+                            bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                        )
+                    )
                 }
             )
         }
 
         if (hasPreferredApp) {
             val privateBrowser = isPrivateBrowser(result.filteredItem!!)
-            val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
-                result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
-            } else null
 
             PreferredAppColumn(
                 appInfo = result.filteredItem,
@@ -316,76 +302,57 @@ class DevBottomSheet(
                 showPackage = showPackage,
                 launchApp = { item, always, private ->
                     launchApp(result, item, always, if (private) privateBrowser else null)
-                },
-                libRedirectResult = ignoreLibRedirect,
-                ignoreLibRedirectClick = ignoreLibRedirectClick
+                }
             )
         } else {
-            Text(
-                text = stringResource(id = R.string.open_with),
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(start = 15.dp)
-            )
+            Row(modifier = Modifier.padding(horizontal = 15.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(id = R.string.open_with),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold,
+                )
+            }
 
             Spacer(modifier = Modifier.height(10.dp))
         }
 
         if (bottomSheetViewModel.gridLayout()) {
-            Grid(result = result, showPackage = showPackage, ignoreLibRedirectClick = ignoreLibRedirectClick)
+            Grid(result = result, showPackage = showPackage)
         } else {
-            List(result = result, showPackage = showPackage, ignoreLibRedirectClick = ignoreLibRedirectClick)
+            List(result = result, showPackage = showPackage)
+        }
+    }
+
+    data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: PrivateBrowsingBrowser? = null) {
+        override fun toString(): String {
+            return info.flatComponentName + (privateBrowsingBrowser?.hashCode() ?: -1)
         }
     }
 
     @Composable
-    private fun Grid(
-        result: BottomSheetResult.BottomSheetSuccessResult,
-        showPackage: Boolean,
-        ignoreLibRedirectClick: (LibRedirectResolver.LibRedirectResult.Redirected) -> Unit
-    ) {
-        LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
-            itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
-                val privateBrowser = isPrivateBrowser(info)
-                val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
-                    result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
-                } else null
+    private fun Grid(result: BottomSheetResult.BottomSheetSuccessResult, showPackage: Boolean) {
+        val items = mutableListOf<GridItem>()
 
+        for (info in result.resolved) {
+            items.add(GridItem(info))
+
+            val privateBrowser = isPrivateBrowser(info)
+            if (privateBrowser != null) {
+                items.add(GridItem(info, privateBrowser))
+            }
+        }
+
+        LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
+            itemsIndexed(items = items, key = { _, item -> item.toString() }) { _, (info, privateBrowser) ->
                 GridBrowserButton(
                     appInfo = info,
                     privateBrowser = privateBrowser,
                     showPackage = showPackage,
-                    launchApp = { item, always, private ->
-                        launchApp(result, item, always, if (private) privateBrowser else null)
-                    },
-                    libRedirectResult = ignoreLibRedirect,
-                    ignoreLibRedirectClick = ignoreLibRedirectClick
+                    launchApp = { item, always ->
+                        launchApp(result, item, always, privateBrowser)
+                    }
                 )
-
-//                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                    Image(
-//                        bitmap = info.iconBitmap,
-//                        contentDescription = info.label,
-//                        modifier = Modifier.size(32.dp)
-//                    )
-//
-//                    Text(
-//                        text = info.label,
-//                        maxLines = 1,
-//                        overflow = TextOverflow.Ellipsis,
-//                        fontSize = 14.sp,
-//                        modifier = Modifier.padding(top = 3.dp)
-//                    )
-//
-//                    if (showPackage) {
-//                        Text(
-//                            text = info.packageName,
-//                            fontSize = 12.sp,
-//                            overflow = TextOverflow.Ellipsis,
-//                            maxLines = 1
-//                        )
-//                    }
-//                }
             }
         }
     }
@@ -394,14 +361,10 @@ class DevBottomSheet(
     private fun List(
         result: BottomSheetResult.BottomSheetSuccessResult,
         showPackage: Boolean,
-        ignoreLibRedirectClick: (LibRedirectResolver.LibRedirectResult.Redirected) -> Unit
     ) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
                 val privateBrowser = isPrivateBrowser(info)
-                val ignoreLibRedirect = if (viewModel.enableIgnoreLibRedirectButton()) {
-                    result.libRedirectResult as? LibRedirectResolver.LibRedirectResult.Redirected
-                } else null
 
                 ListBrowserColumn(
                     appInfo = info,
@@ -410,9 +373,7 @@ class DevBottomSheet(
                     showPackage = showPackage,
                     launchApp = { item, always, private ->
                         launchApp(result, item, always, if (private) privateBrowser else null)
-                    },
-                    libRedirectResult = ignoreLibRedirect,
-                    ignoreLibRedirectClick = ignoreLibRedirectClick
+                    }
                 )
 
                 // TODO: Selector?

@@ -25,8 +25,6 @@ fun PreferredAppColumn(
     bottomSheetViewModel: BottomSheetViewModel,
     showPackage: Boolean,
     launchApp: (DisplayActivityInfo, Boolean, Boolean) -> Unit,
-    libRedirectResult: LibRedirectResolver.LibRedirectResult.Redirected? = null,
-    ignoreLibRedirectClick: ((LibRedirectResolver.LibRedirectResult.Redirected) -> Unit)? = null,
 ) {
     Column {
         ListBrowserColumn(
@@ -35,8 +33,6 @@ fun PreferredAppColumn(
             privateBrowser = privateBrowser,
             showPackage = showPackage,
             launchApp = launchApp,
-            libRedirectResult = libRedirectResult,
-            ignoreLibRedirectClick = ignoreLibRedirectClick
         )
 
         Spacer(modifier = Modifier.height(5.dp))
@@ -55,6 +51,8 @@ fun PreferredAppColumn(
 //            ignoreLibRedirectClick = ignoreLibRedirectClick,
 //            showToast = showToast
 //        )
+
+        // TODO: Not sure if this divider should be kept
 
         HorizontalDivider(
             modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 10.dp),

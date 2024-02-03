@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -23,8 +22,6 @@ import fe.linksheet.composable.util.mapState
 import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
-import fe.linksheet.extension.compose.updateState
-import fe.linksheet.extension.compose.updateStateFromResult
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 
@@ -36,18 +33,18 @@ fun BrowserCommonPackageSelectorRoute(
     navController: NavHostController,
     viewModel: BrowserCommonViewModel,
 ) {
-    val items by viewModel.items.collectOnIO()
+    val items by viewModel.filteredItems.collectOnIO()
     val filter by viewModel.searchFilter.collectOnIO()
     val mapState = remember(items?.size, filter) {
         mapState(items, filter)
     }
 
-    val state = remember {
+    val newState = remember {
         mutableStateMapOf<DisplayActivityInfo, Boolean>()
     }
 
     val backHandler: () -> Unit = {
-        viewModel.save(state)
+        viewModel.save(newState)
         navController.popBackStack()
     }
 
@@ -75,20 +72,16 @@ fun BrowserCommonPackageSelectorRoute(
                 mapState = mapState,
                 map = items,
                 listKey = { it.flatComponentName },
-            ) { app, enabled ->
-                val enabledState = remember { mutableStateOf(enabled) }
-                val update: (Boolean) -> Unit = remember { { state[app] = it } }
-
+            ) { app, storedState ->
                 CheckboxRow(
-                    checked = enabledState.value,
-                    onClick = enabledState.updateState(update),
-                    onCheckedChange = enabledState.updateStateFromResult(update)
+                    checked = newState[app] ?: storedState,
+                    onCheckedChange = { newState[app] = it }
                 ) {
                     BrowserIconTextRow(
                         app = app,
-                        selected = enabled,
+                        selected = storedState,
                         showSelectedText = false,
-                        alwaysShowPackageName = viewModel.alwaysShowPackageName.value
+                        alwaysShowPackageName = viewModel.alwaysShowPackageName()
                     )
                 }
 

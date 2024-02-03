@@ -15,6 +15,28 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CheckboxRow(
     checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    content: @Composable RowScope.() -> Unit
+){
+    ClickableRow(
+        verticalAlignment = Alignment.CenterVertically,
+        onClick = { onCheckedChange(!checked) }
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
+
+        Spacer(modifier = Modifier.width(5.dp))
+        content(this)
+    }
+}
+
+
+@Deprecated("No need to pass two click handlers")
+@Composable
+fun CheckboxRow(
+    checked: Boolean,
     onClick: () -> Unit,
     onCheckedChange: (Boolean) -> Unit,
     content: @Composable RowScope.() -> Unit

@@ -1,6 +1,7 @@
 package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import fe.kotlin.extension.map.filterIf
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -15,7 +16,7 @@ abstract class BrowserCommonViewModel(
 ) : BaseViewModel(preferenceRepository) {
     val searchFilter = MutableStateFlow("")
 
-    val items by lazy {
+    val filteredItems by lazy {
         items().combine(searchFilter) { items, filter ->
             items.filterIf(condition = filter.isNotEmpty()) { (info, _) ->
                 info.compareLabel.contains(filter, ignoreCase = true)

@@ -47,7 +47,7 @@ fun SettingsScaffold(
                         fontWeight = FontWeight.SemiBold
                     )
                 }, navigationIcon = {
-                    if(enableBackButton){
+                    if (enableBackButton) {
                         IconButton(onClick = onBackPressed) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
@@ -75,7 +75,7 @@ fun SettingsScaffold(
     content: @Composable (PaddingValues) -> Unit
 ) {
     SettingsScaffold(
-        modifier,
+        modifier = modifier,
         headline = stringResource(id = headlineId),
         onBackPressed = onBackPressed,
         enableBackButton = enableBackButton,

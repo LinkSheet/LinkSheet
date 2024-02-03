@@ -2,6 +2,7 @@ package fe.linksheet.composable.settings.debug.log
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -25,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -74,11 +76,9 @@ fun LogTextSettingsRoute(
     }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().padding(padding)) {
             LazyColumn(
-                modifier = Modifier
-                    .padding(padding)
-                    .weight(1f),
+                modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(5.dp)
             ) {
                 stickyHeader(key = "header") {

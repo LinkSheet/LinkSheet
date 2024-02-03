@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.RocketLaunch
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -90,7 +91,7 @@ fun OpenDefaultBrowserCard(
             } else {
                 Spacer(modifier = Modifier.width(10.dp))
                 ColoredIcon(
-                    icon = if (defaultBrowserEnabled.isSuccess) Icons.Default.CheckCircle else Icons.Default.Error,
+                    icon = if (defaultBrowserEnabled.isSuccess) Icons.Default.RocketLaunch else Icons.Default.Error,
                     descriptionId = if (defaultBrowserEnabled.isSuccess) R.string.checkmark else R.string.error,
                     color = color
                 )

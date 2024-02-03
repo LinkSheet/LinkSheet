@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.CrueltyFree
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -94,7 +95,7 @@ fun ShizukuCard(
 
             Spacer(modifier = Modifier.width(10.dp))
             ColoredIcon(
-                icon = if (status == ShizukuStatus.Enabled) Icons.Default.CheckCircle else Icons.Default.Warning,
+                icon = if (status == ShizukuStatus.Enabled) Icons.Default.CrueltyFree else Icons.Default.Warning,
                 descriptionId = if (status == ShizukuStatus.Enabled) R.string.checkmark else R.string.error,
                 color = color
             )

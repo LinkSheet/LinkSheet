@@ -12,6 +12,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -101,7 +102,7 @@ class MainViewModel(
             R.string.at_least_one_known_browser_installed_explainer,
             { MaterialTheme.colorScheme.primaryContainer },
             { MaterialTheme.colorScheme.onSurface },
-            Icons.Default.CheckCircle,
+            Icons.Default.Public,
             R.string.success
         ),
         Unknown(

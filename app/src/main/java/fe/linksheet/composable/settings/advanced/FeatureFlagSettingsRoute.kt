@@ -56,14 +56,14 @@ fun FeatureFlagSettingsRoute(
                 }
             }
 
-            item(key = "enable_shizuku_feature_flag") {
-                SwitchRow(
-                    state = viewModel.featureFlagShizuku,
-                    viewModel = viewModel,
-                    headlineId = R.string.enable_shizuku,
-                    subtitleId = R.string.enable_shizuku_explainer
-                )
-            }
+//            item(key = "enable_shizuku_feature_flag") {
+//                SwitchRow(
+//                    state = viewModel.featureFlagShizuku,
+//                    viewModel = viewModel,
+//                    headlineId = R.string.enable_shizuku,
+//                    subtitleId = R.string.enable_shizuku_explainer
+//                )
+//            }
 
             item(key = "enable_linksheet_compat_menu") {
                 SwitchRow(

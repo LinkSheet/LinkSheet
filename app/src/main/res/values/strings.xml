@@ -309,11 +309,11 @@
     <string name="disable_all">Disable all</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku integration has been successfully enabled!</string>
     <string name="shizuku_not_running_explainer">Shizuku is not running. Tap here to open Shizuku, then follow the
-        instructions to start it
+        instructions to start it.
     </string>
-    <string name="shizuku_integration_no_permission_explainer">Tap here to request Shizuku permission</string>
+    <string name="shizuku_integration_no_permission_explainer">Tap here to request Shizuku permission.</string>
     <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku
-        is recommended. Tap here to install it
+        is recommended. Tap here to install it.
     </string>
     <string name="shizuku_integration">Shizuku integration</string>
     <string name="known_trackers">Known trackers</string>

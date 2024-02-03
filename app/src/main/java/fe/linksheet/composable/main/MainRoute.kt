@@ -139,15 +139,13 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 )
             }
 
-            if (viewModel.featureFlagShizuku.value) {
-                cardItem {
-                    ShizukuCard(
-                        activity = activity,
-                        uriHandler = uriHandler,
-                        shizukuInstalled = shizukuInstalled,
-                        shizukuRunning = shizukuRunning
-                    )
-                }
+            cardItem {
+                ShizukuCard(
+                    activity = activity,
+                    uriHandler = uriHandler,
+                    shizukuInstalled = shizukuInstalled,
+                    shizukuRunning = shizukuRunning
+                )
             }
 
             cardItem {

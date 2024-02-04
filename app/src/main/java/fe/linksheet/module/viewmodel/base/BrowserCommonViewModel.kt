@@ -16,6 +16,7 @@ abstract class BrowserCommonViewModel(
 ) : BaseViewModel(preferenceRepository) {
     val searchFilter = MutableStateFlow("")
 
+    // TODO: This needs to be refactored
     val filteredItems by lazy {
         items().combine(searchFilter) { items, filter ->
             items.filterIf(condition = filter.isNotEmpty()) { (info, _) ->

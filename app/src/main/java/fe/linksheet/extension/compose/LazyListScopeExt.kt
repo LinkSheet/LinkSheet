@@ -80,8 +80,8 @@ inline fun <T> LazyListScope.listHelper(
     noinline listKey: (T) -> Any,
     crossinline listItem: @Composable LazyItemScope.(T) -> Unit,
 ) {
-    if (listState == ListState.Items) {
-        items(items = list!!, key = listKey, itemContent = listItem)
+    if (listState == ListState.Items && list != null) {
+        items(items = list, key = listKey, itemContent = listItem)
     } else {
         loader(noItems, notFound, listState)
     }

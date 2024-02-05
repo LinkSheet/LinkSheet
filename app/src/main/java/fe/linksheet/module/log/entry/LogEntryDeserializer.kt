@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import fe.gson.extension.json.element.`object`
 import fe.gson.extension.json.`object`.asLong
+import fe.gson.extension.json.`object`.asLongOrNull
 import fe.gson.extension.json.`object`.asString
 import fe.gson.extension.json.`object`.asStringOrNull
 import java.lang.reflect.Type
@@ -14,12 +15,14 @@ object LogEntryDeserializer : JsonDeserializer<LogEntry> {
         return runCatching {
             val obj = element.`object`()
 
-            val type = obj.asString("type")
-            val time = obj.asLong("unixMillis")
-            val message = obj.asString("message")
-            val prefix = obj.asStringOrNull("prefix") ?: return LogEntry.FatalEntry(time, message)
+            // Fallback to minified field names present in some builds where entries where not exempt from minification
+            val type = obj.asStringOrNull("type") ?: obj.asString("a")
+            val time = obj.asLongOrNull("unixMillis") ?: obj.asLong("b")
+            val message = obj.asStringOrNull("message") ?: obj.asString("c")
+            val prefix = (obj.asStringOrNull("prefix") ?: obj.asStringOrNull("d"))
+                ?: return LogEntry.FatalEntry(time, message)
 
-            val redactedMessage = obj.asString("redactedMessage")
+            val redactedMessage = obj.asStringOrNull("redactedMessage") ?: obj.asString("e")
             return LogEntry.DefaultLogEntry(type, time, prefix, message, redactedMessage)
         }.getOrNull()
     }

@@ -72,6 +72,8 @@ class MainActivity : ComponentActivity() {
 //            finish()
 //        }
 
+//        throw Exception("lulke")
+
         initPadding()
 
         setContentWithKoin {

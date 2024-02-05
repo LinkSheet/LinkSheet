@@ -1,5 +1,6 @@
 package fe.linksheet.module.log.entry
 
+import androidx.annotation.Keep
 import com.google.gson.JsonObject
 import fe.gson.dsl.jsonObject
 import fe.kotlin.extension.primitive.unixMillisUtc
@@ -9,6 +10,7 @@ import fe.stringbuilder.util.buildSeparatedString
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
+@Keep
 sealed class LogEntry(
     val type: String,
     val unixMillis: Long,
@@ -61,6 +63,7 @@ sealed class LogEntry(
         }
     }
 
+    @Keep
     class DefaultLogEntry(
         type: String,
         unixMillis: Long,
@@ -69,6 +72,7 @@ sealed class LogEntry(
         redactedMessage: String,
     ) : LogEntry(type, unixMillis, prefix, message, redactedMessage)
 
+    @Keep
     class FatalEntry(
         unixMillis: Long,
         message: String,

@@ -16,8 +16,8 @@ import java.time.LocalDateTime
 class AppLogger private constructor(app: LinkSheetApp) {
     companion object : SingletonHolder<AppLogger, LinkSheetApp>(::AppLogger) {
         const val LOG_DIR = "logs"
-        const val FILE_EXT = ".log"
-        const val FILE_EXT_V2 = ".json"
+        const val FILE_EXT = "log"
+        const val FILE_EXT_V2 = "json"
     }
 
     data class LogFile(val file: File, val millis: Long) {
@@ -28,7 +28,7 @@ class AppLogger private constructor(app: LinkSheetApp) {
         companion object {
             fun new(logDir: File): LogFile {
                 val millis = System.currentTimeMillis()
-                return LogFile(File(logDir, "$millis$FILE_EXT_V2"), millis)
+                return LogFile(File(logDir, "$millis.$FILE_EXT_V2"), millis)
             }
         }
     }

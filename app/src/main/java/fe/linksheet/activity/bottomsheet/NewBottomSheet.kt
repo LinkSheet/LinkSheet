@@ -413,7 +413,7 @@ class NewBottomSheet(
     ) {
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-        if (result.isEmpty) {
+        if (result.isEmpty()) {
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
             ) {
@@ -681,7 +681,7 @@ class NewBottomSheet(
     ) {
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-        if (result.isEmpty) {
+        if (result.isEmpty()) {
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
             ) {
@@ -1150,7 +1150,7 @@ class NewBottomSheet(
         val activity = LocalContext.currentActivity()
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-        if (!result.isEmpty) {
+        if (!result.isEmpty()) {
             Column(
                 modifier = Modifier
                     .wrapContentHeight()

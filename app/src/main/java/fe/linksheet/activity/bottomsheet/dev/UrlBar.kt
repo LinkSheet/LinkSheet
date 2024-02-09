@@ -31,8 +31,8 @@ fun UrlBar(
     libRedirected: Boolean,
     copyUri: () -> Unit,
     shareUri: () -> Unit,
-    downloadUri: () -> Unit,
-    ignoreLibRedirect: () -> Unit
+    downloadUri: (() -> Unit)? = null,
+    ignoreLibRedirect: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier
@@ -60,7 +60,7 @@ fun UrlBar(
 
             CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                 if (downloadable) {
-                    IconButton(onClick = downloadUri) {
+                    IconButton(onClick = downloadUri!!) {
                         Icon(
                             imageVector = Icons.Default.Download,
                             contentDescription = stringResource(id = R.string.download)
@@ -69,7 +69,7 @@ fun UrlBar(
                 }
 
                 if (libRedirected) {
-                    IconButton(onClick = ignoreLibRedirect) {
+                    IconButton(onClick = ignoreLibRedirect!!) {
                         Icon(
                             imageVector = Icons.Outlined.FastForward,
                             contentDescription = stringResource(id = R.string.request_private_browsing)

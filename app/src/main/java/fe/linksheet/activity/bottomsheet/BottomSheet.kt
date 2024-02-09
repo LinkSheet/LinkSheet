@@ -80,7 +80,7 @@ abstract class BottomSheet(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun launchApp(
-        result: BottomSheetResult.BottomSheetSuccessResult,
+        result: BottomSheetResult.SuccessResult,
         info: DisplayActivityInfo,
         always: Boolean = false,
         privateBrowsingBrowser: PrivateBrowsingBrowser? = null,

@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
 //            finish()
 //        }
 
-//        throw Exception("lulke")
+//        Intent.ACTION_WEB_SEARCH
 
         initPadding()
 

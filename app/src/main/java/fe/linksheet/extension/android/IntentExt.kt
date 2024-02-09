@@ -8,16 +8,21 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-fun Intent.newIntent(uri: Uri?, dropExtras: Boolean = false) = Intent(this).apply {
-    action = Intent.ACTION_VIEW
-    data = uri
-    flags = this@newIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
-    `package` = null
-    component = null
+fun Intent.newIntent(action: String, uri: Uri?, dropExtras: Boolean = false): Intent {
+    val intent = Intent(this)
+
+    intent.action = action
+    intent.data = uri
+    intent.flags = this@newIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
+    intent.`package` = null
+    intent.component = null
+
 
     if (dropExtras) {
         replaceExtras(null as? Bundle?)
     }
+
+    return intent
 }
 
 fun Intent.getUri(): String? {

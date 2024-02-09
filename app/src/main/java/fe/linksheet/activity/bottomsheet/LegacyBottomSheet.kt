@@ -454,7 +454,7 @@ class LegacyBottomSheet(
         val result = bottomSheetViewModel.resolveResult!!
         if (result !is BottomSheetResult.BottomSheetSuccessResult) return
 
-        if (result.isEmpty) {
+        if (result.isEmpty()) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
@@ -808,7 +808,7 @@ class LegacyBottomSheet(
                 .padding(horizontal = buttonPadding),
             horizontalArrangement = if (arrangeEnd) Arrangement.End else Arrangement.Start
         ) {
-            if (!result.isEmpty) {
+            if (!result.isEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     TextButton(
                         enabled = enabled,

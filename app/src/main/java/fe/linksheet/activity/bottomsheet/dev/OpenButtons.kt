@@ -26,7 +26,7 @@ fun OpenButtons(
     val result = bottomSheetViewModel.resolveResult!!
     if (result !is BottomSheetResult.BottomSheetSuccessResult) return
 
-    if (!result.isEmpty) {
+    if (!result.isEmpty()) {
         Row(modifier = Modifier.wrapContentHeight().padding(start = 15.dp, end = 15.dp)) {
             OpenButton(outlined = true, textId = R.string.just_once, onClick = { onClick(false) })
             Spacer(modifier = Modifier.width(5.dp))

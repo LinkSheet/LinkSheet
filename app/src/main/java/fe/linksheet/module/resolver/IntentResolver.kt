@@ -1,5 +1,6 @@
 package fe.linksheet.module.resolver
 
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -33,6 +34,7 @@ import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import fe.fastforwardkt.*
+import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -129,6 +131,25 @@ class IntentResolver(
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
 //        val x = intent
         urlResolverCache.clear()
+
+        if (intent.action == Intent.ACTION_WEB_SEARCH) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            if (query != null) {
+                val newIntent = intent
+                    .newIntent(Intent.ACTION_WEB_SEARCH, null, true)
+                    .putExtra(SearchManager.QUERY, query)
+
+                val resolvedList = context.packageManager
+                    .queryResolveInfosByIntent(newIntent, true)
+                    .toDisplayActivityInfos(context, true)
+
+                return BottomSheetResult.BottomSheetWebSearchResult(
+                    query,
+                    newIntent,
+                    resolvedList
+                )
+            }
+        }
 
         val ignoreLibRedirectExtra = intent.getBooleanExtra(
             LibRedirectDefault.libRedirectIgnore, false
@@ -241,7 +262,7 @@ class IntentResolver(
             referrer, inAppBrowserSettings.value
         )
 
-        val newIntent = intent.newIntent(uri, !isCustomTab || !allowCustomTab)
+        val newIntent = intent.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
 //                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")

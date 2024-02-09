@@ -114,7 +114,9 @@ class DevBottomSheet(
 
         BottomDrawer(modifier = Modifier
             .runIf(landscape) {
-                it.fillMaxWidth(0.55f).fillMaxHeight()
+                it
+                    .fillMaxWidth(0.55f)
+                    .fillMaxHeight()
             }
             .nullClickable(),
             isBlackTheme = isBlackTheme,
@@ -134,9 +136,13 @@ class DevBottomSheet(
 
     @Composable
     private fun SheetContent(result: BottomSheetResult?, landscape: Boolean, hideDrawer: () -> Unit) {
-        if (result != null && result is BottomSheetResult.BottomSheetSuccessResult && !result.hasAutoLaunchApp) {
+        val uriSuccessResult = result as? BottomSheetResult.BottomSheetSuccessResult
+        val canShowApps = uriSuccessResult != null && !result.hasAutoLaunchApp
+                || result is BottomSheetResult.BottomSheetWebSearchResult
+
+        if (canShowApps) {
             val showPackage = remember {
-                result.showExtended || viewModel.alwaysShowPackageName()
+                uriSuccessResult?.showExtended == true || viewModel.alwaysShowPackageName()
             }
 
             val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
@@ -152,10 +158,11 @@ class DevBottomSheet(
 
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
+                result = result as BottomSheetResult.SuccessResult,
                 hideDrawer = hideDrawer,
                 showPackage = showPackage,
                 previewUrl = viewModel.previewUrl(),
-                hasPreferredApp = result.filteredItem != null
+                hasPreferredApp = uriSuccessResult?.filteredItem != null
             )
         } else {
             FailureSheetColumn(
@@ -185,16 +192,17 @@ class DevBottomSheet(
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun BottomSheetApps(
+        // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
+        result: BottomSheetResult.SuccessResult,
         hideDrawer: () -> Unit,
         showPackage: Boolean,
         previewUrl: Boolean,
         hasPreferredApp: Boolean
     ) {
-        val result = bottomSheetViewModel.resolveResult!!
-        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
+//        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
 
-        if (result.isEmpty) {
+        if (result.isEmpty()) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(text = stringResource(id = R.string.no_app_to_handle_link_found))
             }
@@ -204,52 +212,54 @@ class DevBottomSheet(
         }
 
         var selectedItem by remember { mutableIntStateOf(-1) }
-        val modifier: AppListModifier = @Composable { index, info ->
-            Modifier
-                .fillMaxWidth()
-                .padding(start = 15.dp, end = 15.dp)
-                .clip(defaultRoundedCornerShape)
-                .combinedClickable(onClick = {
-//                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
-//                    bottomSheetViewModel.appInfo.value = info
-                    if (hasPreferredApp) {
-                        launchApp(result, info)
-                    } else {
-                        if (bottomSheetViewModel.singleTap.value) {
-                            launchApp(result, info)
-                        } else {
-                            if (selectedItem == index) launchApp(result, info)
-                            else selectedItem = index
-                        }
-                    }
-                }, onDoubleClick = {
-                    if (!bottomSheetViewModel.singleTap.value) {
-                        launchApp(result, info)
-                    } else {
-                        startPackageInfoActivity(info)
-                    }
-                }, onLongClick = {
-                    if (bottomSheetViewModel.singleTap.value) {
-                        selectedItem = index
-                    } else {
-                        startPackageInfoActivity(info)
-                    }
-                })
-                .background(
-                    if (selectedItem == index) LocalContentColor.current.copy(0.1f)
-                    else Color.Transparent
-                )
-                .padding(appListItemPadding)
-        }
+//        val modifier: AppListModifier = @Composable { index, info ->
+//            Modifier
+//                .fillMaxWidth()
+//                .padding(start = 15.dp, end = 15.dp)
+//                .clip(defaultRoundedCornerShape)
+//                .combinedClickable(onClick = {
+////                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
+////                    bottomSheetViewModel.appInfo.value = info
+//                    if (hasPreferredApp) {
+//                        launchApp(result, info)
+//                    } else {
+//                        if (bottomSheetViewModel.singleTap.value) {
+//                            launchApp(result, info)
+//                        } else {
+//                            if (selectedItem == index) launchApp(result, info)
+//                            else selectedItem = index
+//                        }
+//                    }
+//                }, onDoubleClick = {
+//                    if (!bottomSheetViewModel.singleTap.value) {
+//                        launchApp(result, info)
+//                    } else {
+//                        startPackageInfoActivity(info)
+//                    }
+//                }, onLongClick = {
+//                    if (bottomSheetViewModel.singleTap.value) {
+//                        selectedItem = index
+//                    } else {
+//                        startPackageInfoActivity(info)
+//                    }
+//                })
+//                .background(
+//                    if (selectedItem == index) LocalContentColor.current.copy(0.1f)
+//                    else Color.Transparent
+//                )
+//                .padding(appListItemPadding)
+//        }
 
         // TODO: Add "Once" and "Always" to non-pref UI, long/double tap options/single tap, limit height?
         //      "Loading Link" show progress / downloader fails
 
         if (previewUrl && result.uri != null) {
+            val uriSuccess = result as? BottomSheetResult.BottomSheetSuccessResult
+
             UrlBar(
                 uri = result.uri,
-                downloadable = result.downloadable.isDownloadable(),
-                libRedirected = result.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
+                downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
+                libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText("URL", result.uri.toString())
 
@@ -265,34 +275,38 @@ class DevBottomSheet(
                     startActivity(shareUri(result.uri))
                     finish()
                 },
-                downloadUri = {
-                    bottomSheetViewModel.startDownload(
-                        resources, result.uri,
-                        result.downloadable as Downloader.DownloadCheckResult.Downloadable
-                    )
-
-                    if (!bottomSheetViewModel.downloadStartedToast()) {
-                        showToast(R.string.download_started)
-                    }
-
-                    hideDrawer()
-                },
-                ignoreLibRedirect = {
-                    val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
-
-                    finish()
-                    startActivity(
-                        selfIntent(
-                            redirected.originalUri,
-                            bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
+                    {
+                        bottomSheetViewModel.startDownload(
+                            resources, result.uri,
+                            result.downloadable as Downloader.DownloadCheckResult.Downloadable
                         )
-                    )
-                }
+
+                        if (!bottomSheetViewModel.downloadStartedToast()) {
+                            showToast(R.string.download_started)
+                        }
+
+                        hideDrawer()
+                    }
+                } else null,
+                ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
+                    {
+                        val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+
+                        finish()
+                        startActivity(
+                            selfIntent(
+                                redirected.originalUri,
+                                bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                            )
+                        )
+                    }
+                }else null
             )
         }
 
-        if (hasPreferredApp) {
-            val privateBrowser = isPrivateBrowser(result.filteredItem!!)
+        if (hasPreferredApp && result is BottomSheetResult.BottomSheetSuccessResult) {
+            val privateBrowser = isPrivateBrowser(result.uri != null, result.filteredItem!!)
 
             PreferredAppColumn(
                 appInfo = result.filteredItem,
@@ -331,13 +345,13 @@ class DevBottomSheet(
     }
 
     @Composable
-    private fun Grid(result: BottomSheetResult.BottomSheetSuccessResult, showPackage: Boolean) {
+    private fun Grid(result: BottomSheetResult.SuccessResult, showPackage: Boolean) {
         val items = mutableListOf<GridItem>()
 
         for (info in result.resolved) {
             items.add(GridItem(info))
 
-            val privateBrowser = isPrivateBrowser(info)
+            val privateBrowser = isPrivateBrowser(result.uri != null, info)
             if (privateBrowser != null) {
                 items.add(GridItem(info, privateBrowser))
             }
@@ -359,12 +373,12 @@ class DevBottomSheet(
 
     @Composable
     private fun List(
-        result: BottomSheetResult.BottomSheetSuccessResult,
+        result: BottomSheetResult.SuccessResult,
         showPackage: Boolean,
     ) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
-                val privateBrowser = isPrivateBrowser(info)
+                val privateBrowser = isPrivateBrowser(result.uri != null, info)
 
                 ListBrowserColumn(
                     appInfo = info,
@@ -410,8 +424,8 @@ class DevBottomSheet(
         }
     }
 
-    private fun isPrivateBrowser(info: DisplayActivityInfo): PrivateBrowsingBrowser? {
-        if (!viewModel.enableRequestPrivateBrowsingButton()) return null
+    private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): PrivateBrowsingBrowser? {
+        if (!viewModel.enableRequestPrivateBrowsingButton() || !hasUri) return null
         return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
     }
 }

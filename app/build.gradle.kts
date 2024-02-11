@@ -240,6 +240,8 @@ dependencies {
     implementation(COIL.compose)
 //    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
 
+    implementation(libs.embed.resolve)
+
     implementation(AndroidX.lifecycle.runtime.compose)
 
     implementation(AndroidX.browser)

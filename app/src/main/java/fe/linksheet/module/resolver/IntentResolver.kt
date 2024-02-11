@@ -12,6 +12,8 @@ import fe.android.preference.helper.compose.getState
 import fe.android.preference.helper.compose.getStringState
 import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
+import fe.embed.resolve.EmbedResolver
+import fe.embed.resolve.config.ConfigType
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
@@ -117,9 +119,10 @@ class IntentResolver(
         AppPreferences.amp2HtmlBuiltInCache
     )
 
-
     private val amp2HtmlExternalService =
         preferenceRepository.getBooleanState(AppPreferences.amp2HtmlExternalService)
+
+    private val resolveEmbeds = preferenceRepository.getBooleanState(AppPreferences.resolveEmbeds)
 
 
     companion object {
@@ -159,7 +162,7 @@ class IntentResolver(
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        var uri = modifyUri(intent.getUri(), useClearUrls.value, useFastForwardRules.value)
+        var uri = modifyUri(intent.getUri(), resolveEmbeds(), useClearUrls.value, useFastForwardRules.value)
 
         if (uri == null) {
             logger.error("Uri is null, something probably went very wrong")
@@ -220,7 +223,7 @@ class IntentResolver(
             )
         }
 
-        uri = modifyUri(uri, useClearUrls.value, useFastForwardRules.value)
+        uri = modifyUri(uri, resolveEmbeds(), useClearUrls.value, useFastForwardRules.value)
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
         if (enableLibRedirect.value && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton.value)) {
@@ -355,6 +358,7 @@ class IntentResolver(
 
     private fun modifyUri(
         uri: Uri?,
+        resolveEmbeds: Boolean = false,
         clearUrl: Boolean = false,
         fastForward: Boolean = false,
     ): Uri? {
@@ -363,19 +367,27 @@ class IntentResolver(
 
             logger.debug({ "Input: $it" }, url, HashProcessor.UrlProcessor, "ModifyUri")
 
-            runCatching {
-                if (fastForward) {
+            if (resolveEmbeds) {
+                runCatching {
+                    EmbedResolver.resolve(url, ConfigType.Bundled())?.let { url = it }
+                }.onFailure { logger.error(it, "EmbedResolver") }
+            }
+
+            logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "EmbedResolver")
+
+            if (fastForward) {
+                runCatching {
                     FastForward.getRuleRedirect(url)?.let { url = it }
-                }
-            }.onFailure { logger.debug(it, "FastForward") }
+                }.onFailure { logger.error(it, "FastForward") }
+            }
 
             logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "FastForward")
 
-            runCatching {
-                if (clearUrl) {
+            if (clearUrl) {
+                runCatching {
                     url = ClearURL.clearUrl(url, clearUrlProviders)
-                }
-            }.onFailure { logger.debug(it, "ClearUrls") }
+                }.onFailure { logger.error(it, "ClearUrls") }
+            }
 
             logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "ClearURLs")
             return runCatching { Uri.parse(url) }.getOrNull()

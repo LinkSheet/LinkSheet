@@ -232,6 +232,15 @@ fun LinksSettingsRoute(
                     }
                 )
             }
+
+            item(key = "resolve_embeds") {
+                SwitchRow(
+                    state = viewModel.resolveEmbeds,
+                    viewModel = viewModel,
+                    headline = stringResource(id = R.string.resolve_embeds),
+                    subtitle = stringResource(id = R.string.resolve_embeds_explainer)
+                )
+            }
         }
     }
 }

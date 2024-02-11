@@ -611,4 +611,6 @@
         one is feature-complete.
     </string>
     <string name="information">Information</string>
+    <string name="resolve_embeds">Resolve embeds</string>
+    <string name="resolve_embeds_explainer">Resolve embed mirrors like fxtwitter.com to the real host</string>
 </resources>

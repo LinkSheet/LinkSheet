@@ -102,6 +102,8 @@ object AppPreferences : Preferences() {
     val donateCardDismissed = booleanPreference("donate_card_dismissed", false)
 
     val devBottomSheetExperiment = booleanPreference("dev_bottom_sheet_experiment", true)
+    val resolveEmbeds = booleanPreference("resolve_embeds", false)
+
 
     val sensitivePreferences = listOf(
         useTimeMs, logKey,

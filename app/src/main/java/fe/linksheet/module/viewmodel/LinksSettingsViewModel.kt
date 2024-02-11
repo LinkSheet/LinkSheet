@@ -17,5 +17,5 @@ class LinksSettingsViewModel(
     var followRedirects = preferenceRepository.getBooleanState(AppPreferences.followRedirects)
     var enableDownloader = preferenceRepository.getBooleanState(AppPreferences.enableDownloader)
     var enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
-
+    val resolveEmbeds  = preferenceRepository.getBooleanState(AppPreferences.resolveEmbeds)
 }

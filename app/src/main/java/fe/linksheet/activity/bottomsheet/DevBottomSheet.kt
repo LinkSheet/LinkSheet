@@ -24,6 +24,7 @@ import androidx.core.os.bundleOf
 import fe.linksheet.R
 import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
+import fe.linksheet.activity.bottomsheet.dev.OpenButtons
 import fe.linksheet.activity.bottomsheet.dev.UrlBar
 import fe.linksheet.activity.bottomsheet.dev.failure.FailureSheetColumn
 import fe.linksheet.activity.bottomsheet.dev.grid.GridBrowserButton
@@ -96,29 +97,13 @@ class DevBottomSheet(
         val coroutineScope = rememberCoroutineScope()
 
         val drawerState = rememberModalBottomSheetState()
-        LaunchedEffect(Unit) {
-            drawerState.expand()
-        }
-
-//        LaunchedEffect(drawerState.currentValue) {
-//            if (drawerState.currentValue == SheetValue.Hidden) {
-//                finish()
-//            }
-//        }
 
         val hide: () -> Unit = {
             coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
-        // TODO: Fix misalignment in landscape mode
-
-        BottomDrawer(modifier = Modifier
-            .runIf(landscape) {
-                it
-                    .fillMaxWidth(0.55f)
-                    .fillMaxHeight()
-            }
-            .nullClickable(),
+        BottomDrawer(
+            landscape = landscape,
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             shape = RoundedCornerShape(
@@ -129,13 +114,17 @@ class DevBottomSheet(
             ),
             hide = hide,
             sheetContent = {
-                SheetContent(result = result, landscape = landscape, hideDrawer = hide)
+                SheetContent(result = result, hideDrawer = hide)
             }
         )
+
+        LaunchedEffect(Unit) {
+            drawerState.expand()
+        }
     }
 
     @Composable
-    private fun SheetContent(result: BottomSheetResult?, landscape: Boolean, hideDrawer: () -> Unit) {
+    private fun SheetContent(result: BottomSheetResult?, hideDrawer: () -> Unit) {
         val uriSuccessResult = result as? BottomSheetResult.BottomSheetSuccessResult
         val canShowApps = uriSuccessResult != null && !result.hasAutoLaunchApp
                 || result is BottomSheetResult.BottomSheetWebSearchResult
@@ -145,16 +134,16 @@ class DevBottomSheet(
                 uriSuccessResult?.showExtended == true || viewModel.alwaysShowPackageName()
             }
 
-            val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
-            else LocalConfiguration.current.screenHeightDp) / 3f
+//            val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
+//            else LocalConfiguration.current.screenHeightDp) / 3f
+//
+//            val itemHeight = if (viewModel.gridLayout.value) {
+//                val gridItemHeight = gridItemHeight.value + if (showPackage) 10f else 0.0f
+//
+//                gridItemHeight
+//            } else appListItemHeight.value
 
-            val itemHeight = if (viewModel.gridLayout.value) {
-                val gridItemHeight = gridItemHeight.value + if (showPackage) 10f else 0.0f
-
-                gridItemHeight
-            } else appListItemHeight.value
-
-            val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
+//            val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
 
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
@@ -301,7 +290,7 @@ class DevBottomSheet(
                             )
                         )
                     }
-                }else null
+                } else null
             )
         }
 
@@ -336,6 +325,13 @@ class DevBottomSheet(
         } else {
             List(result = result, showPackage = showPackage)
         }
+
+//        OpenButtons(
+//            bottomSheetViewModel = bottomSheetViewModel,
+//            onClick = {
+////                launchApp(appInfo, it, false)
+//            },
+//        )
     }
 
     data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: PrivateBrowsingBrowser? = null) {

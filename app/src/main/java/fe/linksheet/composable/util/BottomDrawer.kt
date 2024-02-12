@@ -62,6 +62,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun BottomDrawer(
     modifier: Modifier = Modifier,
+    landscape: Boolean = false,
     isBlackTheme: Boolean = isSystemInDarkTheme(),
     drawerState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
@@ -72,11 +73,12 @@ fun BottomDrawer(
     val coroutineScope = rememberCoroutineScope()
 
     ModalBottomSheet(
+        modifier = modifier,
         containerColor = MaterialTheme.colorScheme.surface,
         shape = shape,
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = drawerState,
-        windowInsets = WindowInsets.statusBars,
+        windowInsets = if(landscape) WindowInsets.systemBars else WindowInsets.statusBars,
         onDismissRequest = hide ?: {
             coroutineScope.launch { drawerState.hide() }
             Unit
@@ -95,7 +97,7 @@ fun BottomDrawer(
 //                )
 //        )
 
-        Column(modifier = Modifier.navigationBarsPadding()) {
+        Column(modifier = if(!landscape) Modifier.navigationBarsPadding() else Modifier) {
             sheetContent()
 //            Spacer(modifier = Modifier.height(28.dp))
         }

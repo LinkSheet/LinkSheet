@@ -399,4 +399,5 @@
     <string name="online_services">Usługi online</string>
     <string name="shizuku_manager_start_failed">Nie udało się uruchomić menedżera Shizuku. Uruchom go ręcznie!</string>
     <string name="include_throwable">Dołącz logi awarii (zalecane, ale nie można ich zredagować)</string>
+    <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla obsługiwanych hostów</string>
 </resources>

@@ -170,8 +170,8 @@
     <string name="redirect_resolve_type_builtin_cache">вградена временна памет</string>
     <string name="enable_shizuku_explainer">Ако е отметнато дава възможност на LinkSheet да използва Shizuku за директно взаимодействие с системните ППИ. Може да бъде използвано, например, за автоматично изключване на всички обработчици на препратки. В главния екран ще се покаже нова настройка.</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Включен е режим на „Shizuku“, докосване на приложение, за превключване на автоматичната обработка на препратки. Задържане за отваряне на „Отваряне по подразбиране“на приложението.</string>
-    <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите</string>
-    <string name="shizuku_integration_not_setup_explainer">Въпреки че не е строго необходимо за работата на LinkSheet, препоръчваме използването на Shizuku. За да го инсталирате, докоснете</string>
+    <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите.</string>
+    <string name="shizuku_integration_not_setup_explainer">Въпреки че не е строго необходимо за работата на LinkSheet, препоръчваме използването на Shizuku. За да го инсталирате, докоснете.</string>
     <string name="next">Напред</string>
     <string name="feature_flags">Флагове</string>
     <string name="ignore_libredirect">Пренебрегване на LibRedirect</string>
@@ -213,7 +213,7 @@
     <string name="enable_all">Включване на всички</string>
     <string name="disable_all">Изключване на всички</string>
     <string name="shizuku_integration_enabled_explainer">Интеграцията с Shizuku е включена!</string>
-    <string name="shizuku_integration_no_permission_explainer">За да поискате разрешение за Shizuku докоснете</string>
+    <string name="shizuku_integration_no_permission_explainer">За да поискате разрешение за Shizuku докоснете.</string>
     <string name="shizuku_integration">Интеграция с Shizuku</string>
     <string name="known_trackers">Известни проследявания</string>
     <string name="advanced">Разширени</string>
@@ -274,7 +274,7 @@
     <string name="donate_card_headline">Дарения в подкрепа на LinkSheet</string>
     <string name="donate_card_subtitle_2">Даряване на криптовалута</string>
     <string name="donation_instructions">Инструкции за даряване</string>
-    <string name="open_link_with_subtitle_2">Първоначално, LinkSheet беше на основата на OpenWith</string>
+    <string name="open_link_with_subtitle_2">Първоначално, LinkSheet беше на основата на OpenLinkWith</string>
     <string name="seal_subtitle_2">Seal беше страхотен източник на знания за Jetpack Compose</string>
     <string name="mastodon_redirect_subtitle_2">Изходният код на Mastodon Redirect е използван за справка за интеграцията с Shizuku</string>
     <string name="import_dumped_preference">Внасяне на настройки от дневника</string>
@@ -326,7 +326,7 @@
         <item quantity="other">%s минути</item>
     </plurals>
     <string name="built_by">Компилирано и подписано от</string>
-    <string name="donate">Дарете</string>
+    <string name="donate">Дарение</string>
     <plurals name="months">
         <item quantity="one">%s месец</item>
         <item quantity="other">%s месеца</item>
@@ -396,4 +396,9 @@
     <string name="unknown_host">Хостът %s е или блокиран или не съществува</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="online_services">Отдалечени услуги</string>
+    <string name="preferred_apps_settings">Настройки на предпочитаните приложения за адресите, които поддържат</string>
+    <string name="apps_which_can_open_links">Приложения, отварящи препратки</string>
+    <string name="apps_explainer">Предпочитани приложения и такива, отварящи препратки</string>
+    <string name="onboarding_0_title">Добре дошли
+\nпри LinkSheet</string>
 </resources>

@@ -19,7 +19,7 @@ fun Intent.newIntent(action: String, uri: Uri?, dropExtras: Boolean = false): In
 
 
     if (dropExtras) {
-        replaceExtras(null as? Bundle?)
+        intent.replaceExtras(null as? Bundle?)
     }
 
     return intent

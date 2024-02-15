@@ -183,6 +183,15 @@ fun BottomSheetSettingsRoute(
                     subtitleId = R.string.preview_url_explainer
                 )
             }
+
+            item(key = "hide_choice_buttons") {
+                SwitchRow(
+                    state = viewModel.hideBottomSheetChoiceButtons,
+                    viewModel = viewModel,
+                    headlineId = R.string.hide_bottom_sheet_choice_buttons,
+                    subtitleId = R.string.hide_bottom_sheet_choice_buttons_explainer
+                )
+            }
         }
     }
 }

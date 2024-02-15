@@ -613,4 +613,8 @@
     <string name="information">Information</string>
     <string name="resolve_embeds">Resolve embeds</string>
     <string name="resolve_embeds_explainer">Resolve embed mirrors like fxtwitter.com to the real host</string>
+    <string name="hide_bottom_sheet_choice_buttons">Hide choice buttons</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Hide the \"Once\" and \"Always\" buttons in the
+        bottom sheet
+    </string>
 </resources>

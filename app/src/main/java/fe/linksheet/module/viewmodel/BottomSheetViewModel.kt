@@ -98,6 +98,8 @@ class BottomSheetViewModel(
     val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
     val showAsReferrer =
         preferenceRepository.getBooleanState(AppPreferences.showLinkSheetAsReferrer)
+    val hideBottomSheetChoiceButtons = preferenceRepository.getBooleanState(AppPreferences.hideBottomSheetChoiceButtons)
+
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!

@@ -1,8 +1,8 @@
 package fe.linksheet.activity.bottomsheet.dev.list
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FastForward
 import androidx.compose.material.icons.outlined.Shield
@@ -12,33 +12,72 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.DevBottomSheet
+import fe.linksheet.activity.bottomsheet.dev.LaunchApp
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.util.PrivateBrowsingBrowser
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ListBrowserColumn(
     appInfo: DisplayActivityInfo,
+    selected: Boolean?,
+    onClick: () -> Unit,
     preferred: Boolean,
     privateBrowser: PrivateBrowsingBrowser?,
     showPackage: Boolean,
-    launchApp: (DisplayActivityInfo, Boolean, Boolean) -> Unit,
+    launchApp: LaunchApp,
 ) {
+    //                .combinedClickable(onClick = {
+////                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
+////                    bottomSheetViewModel.appInfo.value = info
+//                    if (hasPreferredApp) {
+//                        launchApp(result, info)
+//                    } else {
+//                        if (bottomSheetViewModel.singleTap.value) {
+//                            launchApp(result, info)
+//                        } else {
+//                            if (selectedItem == index) launchApp(result, info)
+//                            else selectedItem = index
+//                        }
+//                    }
+//                }, onDoubleClick = {
+//                    if (!bottomSheetViewModel.singleTap.value) {
+//                        launchApp(result, info)
+//                    } else {
+//                        startPackageInfoActivity(info)
+//                    }
+//                }, onLongClick = {
+//                    if (bottomSheetViewModel.singleTap.value) {
+//                        selectedItem = index
+//                    } else {
+//                        startPackageInfoActivity(info)
+//                    }
+//                })
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp)
             .clip(defaultRoundedCornerShape)
-            .clickable { launchApp(appInfo, false, false) }
+            .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
+            .combinedClickable(onClick = onClick, onDoubleClick = {
+                launchApp(appInfo, false, false)
+            })
+//            .clickable(onClick = onClick)
+//            .clickable {
+//                launchApp(appInfo, false, false)
+//            }
     ) {
         Row(
             modifier = Modifier

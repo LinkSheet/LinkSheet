@@ -1,8 +1,7 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.content.res.Configuration
-import androidx.compose.foundation.*
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -10,19 +9,20 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import fe.linksheet.R
-import fe.linksheet.activity.AppListModifier
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.dev.OpenButtons
 import fe.linksheet.activity.bottomsheet.dev.UrlBar
@@ -31,11 +31,9 @@ import fe.linksheet.activity.bottomsheet.dev.grid.GridBrowserButton
 import fe.linksheet.activity.bottomsheet.dev.list.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.dev.preferred.PreferredAppColumn
 import fe.linksheet.composable.util.BottomDrawer
-import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
-import fe.linksheet.extension.compose.nullClickable
-import fe.linksheet.extension.compose.runIf
+import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
@@ -48,7 +46,6 @@ import fe.linksheet.ui.Theme
 import fe.linksheet.util.PrivateBrowsingBrowser
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.launch
-import kotlin.math.ceil
 
 class DevBottomSheet(
     activity: BottomSheetActivity,
@@ -114,7 +111,13 @@ class DevBottomSheet(
             ),
             hide = hide,
             sheetContent = {
-                SheetContent(result = result, hideDrawer = hide)
+                SheetContent(
+                    result = result,
+                    isExpanded = drawerState.currentValue == SheetValue.Expanded,
+                    hideDrawer = hide,
+                    requestExpand = {
+                        coroutineScope.launch { drawerState.expand() }
+                    })
             }
         )
 
@@ -124,7 +127,12 @@ class DevBottomSheet(
     }
 
     @Composable
-    private fun SheetContent(result: BottomSheetResult?, hideDrawer: () -> Unit) {
+    private fun SheetContent(
+        result: BottomSheetResult?,
+        isExpanded: Boolean,
+        hideDrawer: () -> Unit,
+        requestExpand: () -> Unit
+    ) {
         val uriSuccessResult = result as? BottomSheetResult.BottomSheetSuccessResult
         val canShowApps = uriSuccessResult != null && !result.hasAutoLaunchApp
                 || result is BottomSheetResult.BottomSheetWebSearchResult
@@ -148,10 +156,13 @@ class DevBottomSheet(
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
                 result = result as BottomSheetResult.SuccessResult,
+                isExpanded = isExpanded,
+                requestExpand = requestExpand,
                 hideDrawer = hideDrawer,
                 showPackage = showPackage,
                 previewUrl = viewModel.previewUrl(),
-                hasPreferredApp = uriSuccessResult?.filteredItem != null
+                hasPreferredApp = uriSuccessResult?.filteredItem != null,
+                hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
             )
         } else {
             FailureSheetColumn(
@@ -184,13 +195,14 @@ class DevBottomSheet(
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: BottomSheetResult.SuccessResult,
+        isExpanded: Boolean,
+        requestExpand: () -> Unit,
         hideDrawer: () -> Unit,
         showPackage: Boolean,
         previewUrl: Boolean,
-        hasPreferredApp: Boolean
+        hasPreferredApp: Boolean,
+        hideBottomSheetChoiceButtons: Boolean
     ) {
-//        if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-
         if (result.isEmpty()) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(text = stringResource(id = R.string.no_app_to_handle_link_found))
@@ -199,45 +211,6 @@ class DevBottomSheet(
             Spacer(modifier = Modifier.height(10.dp))
             return
         }
-
-        var selectedItem by remember { mutableIntStateOf(-1) }
-//        val modifier: AppListModifier = @Composable { index, info ->
-//            Modifier
-//                .fillMaxWidth()
-//                .padding(start = 15.dp, end = 15.dp)
-//                .clip(defaultRoundedCornerShape)
-//                .combinedClickable(onClick = {
-////                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
-////                    bottomSheetViewModel.appInfo.value = info
-//                    if (hasPreferredApp) {
-//                        launchApp(result, info)
-//                    } else {
-//                        if (bottomSheetViewModel.singleTap.value) {
-//                            launchApp(result, info)
-//                        } else {
-//                            if (selectedItem == index) launchApp(result, info)
-//                            else selectedItem = index
-//                        }
-//                    }
-//                }, onDoubleClick = {
-//                    if (!bottomSheetViewModel.singleTap.value) {
-//                        launchApp(result, info)
-//                    } else {
-//                        startPackageInfoActivity(info)
-//                    }
-//                }, onLongClick = {
-//                    if (bottomSheetViewModel.singleTap.value) {
-//                        selectedItem = index
-//                    } else {
-//                        startPackageInfoActivity(info)
-//                    }
-//                })
-//                .background(
-//                    if (selectedItem == index) LocalContentColor.current.copy(0.1f)
-//                    else Color.Transparent
-//                )
-//                .padding(appListItemPadding)
-//        }
 
         // TODO: Add "Once" and "Always" to non-pref UI, long/double tap options/single tap, limit height?
         //      "Loading Link" show progress / downloader fails
@@ -303,6 +276,7 @@ class DevBottomSheet(
                 preferred = true,
                 bottomSheetViewModel = bottomSheetViewModel,
                 showPackage = showPackage,
+                hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                 launchApp = { item, always, private ->
                     launchApp(result, item, always, if (private) privateBrowser else null)
                 }
@@ -323,7 +297,13 @@ class DevBottomSheet(
         if (bottomSheetViewModel.gridLayout()) {
             Grid(result = result, showPackage = showPackage)
         } else {
-            List(result = result, showPackage = showPackage)
+            List(
+                result = result,
+                hasPreferredApp = hasPreferredApp,
+                isExpanded = isExpanded,
+                requestExpand = requestExpand,
+                showPackage = showPackage
+            )
         }
 
 //        OpenButtons(
@@ -370,52 +350,66 @@ class DevBottomSheet(
     @Composable
     private fun List(
         result: BottomSheetResult.SuccessResult,
+        hasPreferredApp: Boolean,
+        isExpanded: Boolean,
+        requestExpand: () -> Unit,
         showPackage: Boolean,
     ) {
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { _, info ->
-                val privateBrowser = isPrivateBrowser(result.uri != null, info)
+        val activity = LocalContext.currentActivity()
+        var selected by remember { mutableIntStateOf(-1) }
 
-                ListBrowserColumn(
-                    appInfo = info,
-                    preferred = false,
-                    privateBrowser = privateBrowser,
-                    showPackage = showPackage,
-                    launchApp = { item, always, private ->
-                        launchApp(result, item, always, if (private) privateBrowser else null)
-                    }
+        Column {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1.0f)
+            ) {
+                itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
+                    val privateBrowser = isPrivateBrowser(result.uri != null, info)
+
+                    ListBrowserColumn(
+                        appInfo = info,
+                        selected = if (!hasPreferredApp) index == selected else null,
+                        onClick = {
+                            selected = if (selected != index) index else -1
+                            if (selected != -1 && !isExpanded) {
+                                requestExpand()
+                            }
+                        },
+                        preferred = false,
+                        privateBrowser = privateBrowser,
+                        showPackage = showPackage,
+                        launchApp = { item, always, private ->
+                            launchApp(result, item, always, if (private) privateBrowser else null)
+                        }
+                    )
+
+                    // TODO: Selector?
+//                    Box(
+//                        modifier = Modifier.fillMaxWidth(),
+//                        contentAlignment = Alignment.CenterEnd
+//                    ) {
+//                        if (selectedItem == index && !hasPreferredApp) {
+//                            Icon(
+//                                imageVector = Icons.Default.CheckCircle,
+//                                contentDescription = null,
+//                                modifier = Modifier.align(Alignment.CenterEnd)
+//                            )
+//                        }
+//                    }
+                }
+            }
+
+            if (!hasPreferredApp) {
+                Spacer(modifier = Modifier.height(5.dp))
+
+                OpenButtons(
+                    result = result,
+                    enabled = selected != -1,
+                    useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
+                    openSettings = { viewModel.startMainActivity(activity) },
+                    choiceClick = { always -> launchApp(result, result.resolved[selected], always) },
                 )
-
-                // TODO: Selector?
-
-//                Box(
-//                                modifier = Modifier.fillMaxWidth(),
-//                                contentAlignment = Alignment.CenterEnd
-//                            ) {
-//                                if (selectedItem == index && !hasPreferredApp) {
-//                                    Icon(
-//                                        imageVector = Icons.Default.CheckCircle,
-//                                        contentDescription = null,
-//                                        modifier = Modifier.align(Alignment.CenterEnd)
-//                                    )
-//                                }
-//                            }
-
-
-//            if (!hasPreferredApp) {
-//                item {
-//                    Spacer(modifier = Modifier.height(10.dp))
-//
-//                    ButtonColumn(
-//                        bottomSheetViewModel = bottomSheetViewModel,
-//                        enabled = selectedItem != -1,
-//                        resources = resources,
-//                        onClick = { always -> launchApp(result, result.resolved[selectedItem], always) },
-//                        hideDrawer = hideDrawer,
-//                        showToast = { showToast(it) },
-//                        ignoreLibRedirectClick = ignoreLibRedirectClick
-//                    )
-//                }
             }
         }
     }

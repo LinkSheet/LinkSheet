@@ -40,6 +40,8 @@ class BottomSheetSettingsViewModel(
     )
 
     var usageStatsSorting = preferenceRepository.getBooleanState(AppPreferences.usageStatsSorting)
+    val hideBottomSheetChoiceButtons = preferenceRepository.getBooleanState(AppPreferences.hideBottomSheetChoiceButtons)
+
 
     var wasTogglingUsageStatsSorting by mutableStateOf(false)
 

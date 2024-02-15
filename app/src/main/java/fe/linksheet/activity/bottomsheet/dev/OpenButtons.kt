@@ -19,24 +19,31 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun OpenButtons(
-    bottomSheetViewModel: BottomSheetViewModel,
-    onClick: (Boolean) -> Unit
+    result: BottomSheetResult.SuccessResult,
+    enabled: Boolean = true,
+    useTextShareCopyButtons: Boolean,
+    openSettings: () -> Unit,
+    choiceClick: (Boolean) -> Unit
 ) {
-    val activity = LocalContext.currentActivity()
-    val result = bottomSheetViewModel.resolveResult!!
-    if (result !is BottomSheetResult.BottomSheetSuccessResult) return
-
     if (!result.isEmpty()) {
-        Row(modifier = Modifier.wrapContentHeight().padding(start = 15.dp, end = 15.dp)) {
-            OpenButton(outlined = true, textId = R.string.just_once, onClick = { onClick(false) })
+        Row(
+            modifier = Modifier
+                .wrapContentHeight()
+                .padding(start = 15.dp, end = 15.dp)
+        ) {
+            OpenButton(
+                outlined = true,
+                enabled = enabled,
+                textId = R.string.just_once,
+                onClick = { choiceClick(false) })
             Spacer(modifier = Modifier.width(5.dp))
-            OpenButton(outlined = false, textId = R.string.always, onClick = { onClick(true) })
+            OpenButton(outlined = false, enabled = enabled, textId = R.string.always, onClick = { choiceClick(true) })
         }
     } else {
         // TODO: Move out of Composable
         ElevatedOrTextButton(
-            onClick = { bottomSheetViewModel.startMainActivity(activity) },
-            textButton = bottomSheetViewModel.useTextShareCopyButtons(),
+            onClick = openSettings,
+            textButton = useTextShareCopyButtons,
             buttonText = R.string.open_settings
         )
     }
@@ -46,6 +53,7 @@ fun OpenButtons(
 private fun RowScope.OpenButton(
     @StringRes textId: Int,
     outlined: Boolean,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     val modifier = Modifier
@@ -61,8 +69,8 @@ private fun RowScope.OpenButton(
     }
 
     if (outlined) {
-        OutlinedButton(modifier = modifier, onClick = onClick, content = content)
+        OutlinedButton(modifier = modifier, enabled = enabled, onClick = onClick, content = content)
     } else {
-        Button(modifier = modifier, onClick = onClick, content = content)
+        Button(modifier = modifier, enabled = enabled, onClick = onClick, content = content)
     }
 }

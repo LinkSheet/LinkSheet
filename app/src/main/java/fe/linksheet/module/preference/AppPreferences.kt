@@ -83,8 +83,8 @@ object AppPreferences : Preferences() {
     @SensitivePreference
     val useTimeMs = longPreference("use_time", 0)
 
-    val showLinkSheetAsReferrer = booleanPreference("show_as_referrer", false)
-    val devModeEnabled = booleanPreference("dev_mode_enabled", false)
+    val showLinkSheetAsReferrer = booleanPreference("show_as_referrer")
+    val devModeEnabled = booleanPreference("dev_mode_enabled")
 
     @OptIn(ExperimentalStdlibApi::class)
     @SensitivePreference
@@ -94,15 +94,16 @@ object AppPreferences : Preferences() {
 
     val firstRun = booleanPreference("first_run", true)
     val showDiscordBanner = booleanPreference("show_discord_banner", true)
-    val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner", false)
+    val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner")
 
     val devBottomSheetExperimentCard = booleanPreference("show_dev_bottom_sheet_experiment_card", true)
 
-    val useDevBottomSheet = booleanPreference("use_dev_bottom_sheet", false)
-    val donateCardDismissed = booleanPreference("donate_card_dismissed", false)
+    val useDevBottomSheet = booleanPreference("use_dev_bottom_sheet")
+    val donateCardDismissed = booleanPreference("donate_card_dismissed")
 
     val devBottomSheetExperiment = booleanPreference("dev_bottom_sheet_experiment", true)
-    val resolveEmbeds = booleanPreference("resolve_embeds", false)
+    val resolveEmbeds = booleanPreference("resolve_embeds")
+    val hideBottomSheetChoiceButtons = booleanPreference("hide_bottom_sheet_choice_buttons")
 
 
     val sensitivePreferences = listOf(

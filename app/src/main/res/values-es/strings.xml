@@ -407,4 +407,20 @@
     <string name="onboarding_0_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
     <string name="launch_onboarding_new">Lanzar la nueva integración</string>
     <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>
+    <string name="apps_explainer">Aplicaciones preferidas y gestores de enlaces verificados</string>
+    <string name="onboarding_1_card_title">Navegador predeterminado</string>
+    <string name="onboarding_1_title">Establecer LinkSheet como navegador por defecto</string>
+    <string name="onboarding_1_subtitle">LinkSheet debe configurarse como navegador predeterminado para gestionar los enlaces pulsados.</string>
+    <string name="onboarding_2_subtitle">Si tienes muchas aplicaciones instaladas, Shizuku puede mejorar significativamente tu experiencia</string>
+    <string name="onboarding_2_card_explainer">Shizuku permite a LinkSheet desactivar el comportamiento predeterminado de gestión de enlaces de todas las aplicaciones a la vez, en lugar de tener que desactivarlos manualmente para cada aplicación individualmente (que es el siguiente paso).</string>
+    <string name="onboarding_3_subtitle">Los gestores de enlaces deben desactivarse para que LinkSheet pueda interceptarlos</string>
+    <string name="onboarding_2_request_shizuku_permission">Solicitar permiso</string>
+    <string name="onboarding_2_install_shizuku">Instalar Shizuku</string>
+    <string name="onboarding_2_skip_button">Omitir</string>
+    <string name="preferred_apps_settings">Establecer aplicaciones preferidas para los hosts que admiten</string>
+    <string name="apps_which_can_open_links">Gestores de enlaces verificados</string>
+    <string name="onboarding_1_button">Establecer como navegador predeterminado</string>
+    <string name="onboarding_1_card_explainer">LinkSheet no funciona sin ser predeterminado.</string>
+    <string name="onboarding_2_title">¿Quieres usar Shizuku?</string>
+    <string name="onboarding_3_title">Desactivar los gestores de enlaces predeterminados</string>
 </resources>

@@ -59,4 +59,9 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
 
         bottomSheet.launch()
     }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
 }

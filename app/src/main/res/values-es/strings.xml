@@ -189,7 +189,7 @@
     <string name="app_log">Registro de la aplicación</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="seal_subtitle_2">Seal ha sido un gran recurso del que aprender sobre Jetpack Compose</string>
-    <string name="shizuku_not_running_explainer">Shizuku no está funcionando. Toque aquí para abrir Shizuku, luego siga las instrucciones para iniciarlo</string>
+    <string name="shizuku_not_running_explainer">Shizuku no se está ejecutando. Pulse aquí para abrir Shizuku y siga las instrucciones para iniciarlo.</string>
     <string name="browser_status">Estado del navegador</string>
     <string name="no_such_app_found">¡No se encontró la aplicación!</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Política de privacidad</string>
@@ -212,7 +212,7 @@
     <string name="follow_redirects_explainer">Seguir automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad </annotation> \u0020</string>
     <string name="preferred_browser">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
-    <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo</string>
+    <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
     <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace). \u0020</string>
     <string name="donation_instructions">Instrucciones de donación</string>
     <string name="disable_all_toasts_explainer">No mostrar nunca notificaciones emergentes</string>
@@ -278,7 +278,7 @@
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="follow_redirects_builtin_cache">Utilice la caché de redireccionamiento incorporada</string>
-    <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku</string>
+    <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet \"restaura\" el \"url-app-chooser\" que aparecía cuando el usuario tocaba en un enlace en un Android anterior al 12 y tenía varias aplicaciones instaladas que podían manejar el enlace</string>
     <string name="system">Sistema</string>
     <string name="no_log_entries">La sesión no contiene ningún registro.</string>
@@ -423,4 +423,19 @@
     <string name="onboarding_1_card_explainer">LinkSheet no funciona sin ser predeterminado.</string>
     <string name="onboarding_2_title">¿Quieres usar Shizuku?</string>
     <string name="onboarding_3_title">Desactivar los gestores de enlaces predeterminados</string>
+    <string name="onboarding_5_card_title">Configurar</string>
+    <string name="onboarding_5_button">Finalizar</string>
+    <string name="onboarding_5_subtitle">LinkSheet se ha activado correctamente</string>
+    <string name="onboarding_3_card_explainer">Google introdujo los enlaces de aplicaciones verificados en Android 12, lo que permite a las aplicaciones demostrar criptográficamente la propiedad de los dominios. Este comportamiento debe desactivarse manualmente para que LinkSheet intercepte los enlaces pulsados.</string>
+    <string name="onboarding_3_card_title">Gestores de enlaces</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="onboarding_2_start_shizuku">Iniciar Shizuku</string>
+    <string name="onboarding_2_shizuku_enabled">Siguiente</string>
+    <string name="onboarding_3_button">Desactivar gestores de enlaces</string>
+    <string name="onboarding_4_button">Siguiente</string>
+    <string name="onboarding_4_card_title">Desactivar gestores de enlaces</string>
+    <string name="onboarding_4_card_explainer">Desactiva el manejo de enlaces para todos los dominios que deberían ser manejados por LinkSheet.</string>
+    <string name="onboarding_5_title">¡Todo listo!</string>
+    <string name="onboarding_5_card_explainer">¡Ya se ha realizado la configuración básica necesaria para que LinkSheet funcione. Vaya a la configuración para ver qué más puede ofrecerle!</string>
+    <string name="experiment">Experimento</string>
 </resources>

@@ -42,7 +42,7 @@ class AppPreferenceRepository(val context: Context) : PreferenceRepository(conte
 
         // Refresh must be delayed to until after the editor has been closed
         mappedPreferences.forEach {
-            //  Forces refresh by reading new value from the preference file; In the future, maybe this should be updated
+            //  Forces refresh by reading new value from the preference file; In the future, maybe this should be update
             //  newValue to the RepositoryState instance directly, but that would required converting the
             //  string value to the appropriate state type
             getGlobalCachedState(it.first.key)?.forceRefresh()

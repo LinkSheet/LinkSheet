@@ -22,10 +22,10 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.DevBottomSheet
 import fe.linksheet.activity.bottomsheet.dev.LaunchApp
 import fe.linksheet.composable.util.defaultRoundedCornerShape
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.util.PrivateBrowsingBrowser
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -34,7 +34,7 @@ fun ListBrowserColumn(
     selected: Boolean?,
     onClick: () -> Unit,
     preferred: Boolean,
-    privateBrowser: PrivateBrowsingBrowser?,
+    privateBrowser: KnownBrowser?,
     showPackage: Boolean,
     launchApp: LaunchApp,
 ) {

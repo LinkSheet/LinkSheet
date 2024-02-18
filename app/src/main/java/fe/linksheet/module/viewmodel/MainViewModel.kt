@@ -32,6 +32,7 @@ import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.FeatureFlagRepository
 import fe.linksheet.module.preference.FeatureFlags
 import fe.linksheet.module.resolver.BrowserResolver
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
 import java.time.Duration
@@ -131,7 +132,7 @@ class MainViewModel(
     fun hasBrowser(): BrowserStatus {
         val browsers = browserResolver.queryBrowsers()
         if (browsers.isEmpty()) return BrowserStatus.None
-        if (browsers.any { BrowserResolver.KnownBrowsers.isKnownBrowser(it.key) != null }) return BrowserStatus.Known
+        if (browsers.any { KnownBrowser.isKnownBrowser(it.key) != null }) return BrowserStatus.Known
         return BrowserStatus.Unknown
     }
 }

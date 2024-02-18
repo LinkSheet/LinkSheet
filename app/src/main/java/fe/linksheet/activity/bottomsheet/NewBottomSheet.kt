@@ -1,7 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import androidx.annotation.StringRes
@@ -33,7 +32,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -56,6 +54,7 @@ import fe.linksheet.extension.compose.nullClickable
 import fe.linksheet.extension.compose.runIf
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -63,7 +62,6 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
-import fe.linksheet.util.PrivateBrowsingBrowser
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
@@ -988,9 +986,9 @@ class NewBottomSheet(
             })
     }
 
-    private fun shouldShowRequestPrivate(info: DisplayActivityInfo): PrivateBrowsingBrowser.Firefox? {
+    private fun shouldShowRequestPrivate(info: DisplayActivityInfo): KnownBrowser? {
         if (!viewModel.enableRequestPrivateBrowsingButton.value) return null
-        return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
+        return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
     @OptIn(ExperimentalLayoutApi::class)

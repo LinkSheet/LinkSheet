@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.util.defaultRoundedCornerShape
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.PrivateBrowsingBrowser
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -28,7 +28,7 @@ fun GridBrowserButton(
     appInfo: DisplayActivityInfo,
     selected: Boolean?,
     onClick: () -> Unit,
-    privateBrowser: PrivateBrowsingBrowser?,
+    privateBrowser: KnownBrowser?,
     showPackage: Boolean,
     launchApp: (DisplayActivityInfo, Boolean) -> Unit,
 ) {

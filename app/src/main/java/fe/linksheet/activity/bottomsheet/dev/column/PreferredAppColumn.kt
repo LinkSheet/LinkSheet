@@ -17,17 +17,17 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.dev.LaunchApp
 import fe.linksheet.activity.bottomsheet.dev.button.ChoiceButtons
 import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.util.PrivateBrowsingBrowser
 
 
 @Composable
 fun PreferredAppColumn(
     appInfo: DisplayActivityInfo,
-    privateBrowser: PrivateBrowsingBrowser?,
+    privateBrowser: KnownBrowser?,
     preferred: Boolean,
     // TODO: Refactor bottomsheet away
     bottomSheetViewModel: BottomSheetViewModel,

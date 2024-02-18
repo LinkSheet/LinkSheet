@@ -35,13 +35,13 @@ import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveModule
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.net.UnknownHostException
@@ -68,7 +68,7 @@ class BottomSheetViewModel(
         AppPreferences.enableIgnoreLibRedirectButton
     )
 
-    val privateBrowser: MutableState<PrivateBrowsingBrowser?> = mutableStateOf(null)
+    val privateBrowser: MutableState<KnownBrowser?> = mutableStateOf(null)
     val appInfo: MutableState<DisplayActivityInfo?> = mutableStateOf(null)
 
     val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)
@@ -222,7 +222,7 @@ class BottomSheetViewModel(
         info: DisplayActivityInfo,
         intent: Intent,
         always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
+        privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ) = ioAsync {
         val newIntent = info.intentFrom(intent).let {

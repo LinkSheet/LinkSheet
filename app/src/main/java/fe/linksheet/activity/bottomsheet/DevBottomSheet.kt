@@ -35,6 +35,7 @@ import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -42,7 +43,6 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
-import fe.linksheet.util.PrivateBrowsingBrowser
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.launch
 
@@ -283,7 +283,7 @@ class DevBottomSheet(
         }
     }
 
-    data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: PrivateBrowsingBrowser? = null) {
+    data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
         override fun toString(): String {
             return info.flatComponentName + (privateBrowsingBrowser?.hashCode() ?: -1)
         }
@@ -410,8 +410,8 @@ class DevBottomSheet(
         )
     }
 
-    private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): PrivateBrowsingBrowser? {
+    private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {
         if (!viewModel.enableRequestPrivateBrowsingButton() || !hasUri) return null
-        return PrivateBrowsingBrowser.getSupportedBrowser(info.packageName)
+        return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 }

@@ -24,8 +24,8 @@ import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.ObserveStateChange
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.util.PrivateBrowsingBrowser
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -92,7 +92,7 @@ fun BottomSheetSettingsRoute(
                     state = viewModel.enableIgnoreLibRedirectButton,
                     viewModel = viewModel,
                     headlineId = R.string.enable_ignore_libredirect_button,
-                    subtitleId= R.string.enable_ignore_libredirect_button_explainer
+                    subtitleId = R.string.enable_ignore_libredirect_button_explainer
                 )
             }
 
@@ -103,7 +103,7 @@ fun BottomSheetSettingsRoute(
                     headline = stringResource(id = R.string.enable_request_private_browsing_button),
                     subtitle = stringResource(
                         id = R.string.enable_request_private_browsing_button_explainer,
-                        PrivateBrowsingBrowser.supportedBrowsers.joinToString(
+                        KnownBrowser.browsers.filter { it.privateBrowser }.joinToString(
                             separator = ", ",
                         ) { it.displayName }
                     )

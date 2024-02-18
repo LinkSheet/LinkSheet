@@ -9,60 +9,6 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
 
 class BrowserResolver(val context: Application) {
-    enum class KnownBrowsers(vararg packageNames: String) {
-        Gecko(
-            "org.mozilla.fennec_fdroid",
-            "us.spotco.fennec_dos",
-            "io.github.forkmaintainers.iceraven",
-            "org.mozilla.fenix.debug",
-            "org.mozilla.fenix",
-            "org.mozilla.firefox_beta",
-            "org.mozilla.firefox",
-            "org.torproject.torbrowser",
-            "org.torproject.torbrowser_alpha"
-        ),
-        Chromium(
-            "com.android.chrome",
-            "com.chrome.canary",
-            "com.chrome.beta",
-            "com.chrome.dev",
-            "com.sec.android.app.sbrowser",
-            "com.opera.browser",
-            "com.opera.browser.beta",
-            "com.opera.cryptobrowser",
-            "com.opera.gx",
-            "com.brave.browser",
-            "com.brave.browser_beta",
-            "com.brave.browser_nightly",
-            "com.microsoft.emmx",
-            "com.ucmobile.intl",
-            "com.kiwibrowser.browser",
-            "com.kiwibrowser.browser.dev",
-            "com.vivaldi.browser",
-            "com.vivaldi.browser.snapshot",
-            "org.cromite.cromite",
-            "us.spotco.mulch",
-            "org.chromium.thorium",
-            "com.sec.android.app.sbrowser",
-            "com.sec.android.app.sbrowser.beta"
-        ),
-        Other(
-            "com.opera.mini.native",
-            "com.opera.mini.native.beta",
-            "com.stoutner.privacybrowser.standard",
-            "com.duckduckgo.mobile.android"
-        );
-
-        val packageNames = setOf(*packageNames)
-
-        companion object {
-            fun isKnownBrowser(packageName: String): KnownBrowsers? {
-                val pkg = packageName.lowercase()
-                return entries.firstOrNull { pkg in it.packageNames }
-            }
-        }
-    }
-
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
         private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")

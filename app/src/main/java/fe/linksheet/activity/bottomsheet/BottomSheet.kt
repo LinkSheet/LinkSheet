@@ -14,10 +14,10 @@ import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.interconnect.LinkSheetConnector
+import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.PrivateBrowsingBrowser
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -83,7 +83,7 @@ abstract class BottomSheet(
         result: BottomSheetResult.SuccessResult,
         info: DisplayActivityInfo,
         always: Boolean = false,
-        privateBrowsingBrowser: PrivateBrowsingBrowser? = null,
+        privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ) {
         val deferred = viewModel.launchAppAsync(

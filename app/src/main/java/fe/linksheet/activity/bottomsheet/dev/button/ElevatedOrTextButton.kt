@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev
+package fe.linksheet.activity.bottomsheet.dev.button
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth

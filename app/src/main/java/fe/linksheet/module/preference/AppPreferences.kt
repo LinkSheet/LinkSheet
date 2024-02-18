@@ -62,8 +62,10 @@ object AppPreferences : Preferences() {
     val followRedirectsBuiltInCache = booleanPreference("follow_redirects_builtin_cache", true)
     val theme = mappedPreference("theme", Theme.System, Theme.Companion)
     val dontShowFilteredItem = booleanPreference("dont_show_filtered_item")
+
+    @Deprecated("No longer used")
     val useTextShareCopyButtons = booleanPreference("use_text_share_copy_buttons")
-    val previewUrl = booleanPreference("preview_url")
+    val previewUrl = booleanPreference("preview_url", true)
     val enableDownloader = booleanPreference("enable_downloader")
     val downloaderCheckUrlMimeType = booleanPreference("downloaderCheckUrlMimeType")
 

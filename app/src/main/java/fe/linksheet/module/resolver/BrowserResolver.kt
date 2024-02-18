@@ -9,7 +9,7 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
 
 class BrowserResolver(val context: Application) {
-    enum class KnownBrowsers(vararg val packageNames: String) {
+    enum class KnownBrowsers(vararg packageNames: String) {
         Gecko(
             "org.mozilla.fennec_fdroid",
             "us.spotco.fennec_dos",
@@ -35,7 +35,7 @@ class BrowserResolver(val context: Application) {
             "com.brave.browser_beta",
             "com.brave.browser_nightly",
             "com.microsoft.emmx",
-            "com.UCMobile.intl",
+            "com.ucmobile.intl",
             "com.kiwibrowser.browser",
             "com.kiwibrowser.browser.dev",
             "com.vivaldi.browser",
@@ -53,9 +53,12 @@ class BrowserResolver(val context: Application) {
             "com.duckduckgo.mobile.android"
         );
 
+        val packageNames = setOf(*packageNames)
+
         companion object {
             fun isKnownBrowser(packageName: String): KnownBrowsers? {
-                return values().firstOrNull { packageName in it.packageNames }
+                val pkg = packageName.lowercase()
+                return entries.firstOrNull { pkg in it.packageNames }
             }
         }
     }

@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev.preferred
+package fe.linksheet.activity.bottomsheet.dev.column
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,8 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.dev.LaunchApp
-import fe.linksheet.activity.bottomsheet.dev.OpenButtons
-import fe.linksheet.activity.bottomsheet.dev.list.ListBrowserColumn
+import fe.linksheet.activity.bottomsheet.dev.button.ChoiceButtons
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -53,7 +52,7 @@ fun PreferredAppColumn(
 
         val result = bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult
         if (!hideBottomSheetChoiceButtons && result != null) {
-            OpenButtons(
+            ChoiceButtons(
                 result = result,
                 useTextShareCopyButtons = bottomSheetViewModel.useTextShareCopyButtons(),
                 openSettings = { bottomSheetViewModel.startMainActivity(activity) },

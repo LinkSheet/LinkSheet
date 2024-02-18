@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev.grid
+package fe.linksheet.activity.bottomsheet.dev.column
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*

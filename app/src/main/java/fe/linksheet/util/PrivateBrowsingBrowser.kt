@@ -7,9 +7,9 @@ sealed class PrivateBrowsingBrowser(val displayName: String, vararg val packageN
     data object Firefox : PrivateBrowsingBrowser(
         "Firefox", *BrowserResolver.KnownBrowsers.Gecko.packageNames
     ) {
-        private const val extra = "private_browsing_mode"
+        private const val EXTRA = "private_browsing_mode"
 
-        override fun requestPrivateBrowsing(intent: Intent): Intent = intent.putExtra(extra, true)
+        override fun requestPrivateBrowsing(intent: Intent): Intent = intent.putExtra(EXTRA, true)
     }
 
     abstract fun requestPrivateBrowsing(intent: Intent): Intent

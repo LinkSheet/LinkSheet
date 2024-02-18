@@ -58,47 +58,41 @@ fun BottomSheetSettingsRoute(
                 }
             }
 
-            item(key = "enable_copy_button") {
+//            item(key = "enable_copy_button") {
+//                SwitchRow(
+//                    state = viewModel.enableCopyButton,
+//                    viewModel = viewModel,
+//                    headlineId = R.string.enable_copy_button,
+//                    subtitleId = R.string.enable_copy_button_explainer
+//                )
+//            }
+
+//            if (viewModel.enableCopyButton.value) {
+            item(key = "hide_after_copying") {
                 SwitchRow(
-                    state = viewModel.enableCopyButton,
+                    state = viewModel.hideAfterCopying,
                     viewModel = viewModel,
-                    headlineId = R.string.enable_copy_button,
-                    subtitleId = R.string.enable_copy_button_explainer
+                    headlineId = R.string.hide_after_copying,
+                    subtitleId = R.string.hide_after_copying_explainer
                 )
             }
+//            }
 
-            if (viewModel.enableCopyButton.value) {
-                item(key = "hide_after_copying") {
-                    SwitchRow(
-                        state = viewModel.hideAfterCopying,
-                        viewModel = viewModel,
-                        headlineId = R.string.hide_after_copying,
-                        subtitleId = R.string.hide_after_copying_explainer
-                    )
-                }
-            }
-
-            item(key = "enable_send_intent") {
-                SwitchRow(
-                    state = viewModel.enableSendButton,
-                    viewModel = viewModel,
-                    headlineId = R.string.enable_send_button,
-                    subtitleId = R.string.enable_send_button_explainer
-                )
-            }
+//            item(key = "enable_send_intent") {
+//                SwitchRow(
+//                    state = viewModel.enableSendButton,
+//                    viewModel = viewModel,
+//                    headlineId = R.string.enable_send_button,
+//                    subtitleId = R.string.enable_send_button_explainer
+//                )
+//            }
 
             item(key = "enable_ignore_libredirect") {
                 SwitchRow(
                     state = viewModel.enableIgnoreLibRedirectButton,
                     viewModel = viewModel,
-                    headline = stringResource(id = R.string.enable_ignore_libredirect_button),
-                    subtitleBuilder = { _ ->
-                        SubtitleText(subtitle = stringResource(id = R.string.enable_ignore_libredirect_button_explainer))
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        RowInfoCard(text = R.string.disclaimer_bottom_sheet_many_buttons)
-                    }
+                    headlineId = R.string.enable_ignore_libredirect_button,
+                    subtitleId= R.string.enable_ignore_libredirect_button_explainer
                 )
             }
 
@@ -116,17 +110,6 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            if (viewModel.enableCopyButton.value || viewModel.enableSendButton.value || viewModel.enableIgnoreLibRedirectButton.value) {
-                item(key = "use_text_share_copy_buttons") {
-                    SwitchRow(
-                        state = viewModel.useTextShareCopyButtons,
-                        viewModel = viewModel,
-                        headlineId = R.string.use_text_share_copy_buttons,
-                        subtitleId = R.string.use_text_share_copy_buttons_explainer
-                    )
-                }
-            }
-
             stickyHeader(key = "misc") {
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                     PreferenceSubtitle(text = stringResource(R.string.misc_settings))
@@ -140,7 +123,7 @@ fun BottomSheetSettingsRoute(
                         if (!viewModel.getUsageStatsAllowed(context)) {
                             viewModel.openUsageStatsSettings(context)
                         } else {
-                            viewModel.updateState(viewModel.usageStatsSorting, it)
+                            viewModel.usageStatsSorting(it)
                         }
                     },
                     headlineId = R.string.usage_stats_sorting,
@@ -148,14 +131,14 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = "enable_single_tap") {
-                SwitchRow(
-                    state = viewModel.singleTap,
-                    viewModel = viewModel,
-                    headlineId = R.string.single_tap,
-                    subtitleId = R.string.single_tap_explainer
-                )
-            }
+//            item(key = "enable_single_tap") {
+//                SwitchRow(
+//                    state = viewModel.singleTap,
+//                    viewModel = viewModel,
+//                    headlineId = R.string.single_tap,
+//                    subtitleId = R.string.single_tap_explainer
+//                )
+//            }
 
             item(key = "grid_layout") {
                 SwitchRow(

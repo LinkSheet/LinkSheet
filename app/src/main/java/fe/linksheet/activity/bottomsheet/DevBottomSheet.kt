@@ -1,7 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.content.res.Configuration
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -24,12 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.dev.OpenButtons
+import fe.linksheet.activity.bottomsheet.dev.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.dev.UrlBar
 import fe.linksheet.activity.bottomsheet.dev.failure.FailureSheetColumn
-import fe.linksheet.activity.bottomsheet.dev.grid.GridBrowserButton
-import fe.linksheet.activity.bottomsheet.dev.list.ListBrowserColumn
-import fe.linksheet.activity.bottomsheet.dev.preferred.PreferredAppColumn
+import fe.linksheet.activity.bottomsheet.dev.column.GridBrowserButton
+import fe.linksheet.activity.bottomsheet.dev.column.ListBrowserColumn
+import fe.linksheet.activity.bottomsheet.dev.column.PreferredAppColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
@@ -402,7 +401,7 @@ class DevBottomSheet(
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        OpenButtons(
+        ChoiceButtons(
             result = result,
             enabled = selected != -1,
             useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),

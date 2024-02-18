@@ -44,7 +44,6 @@ class MainViewModel(
     featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val featureFlagShizuku = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagShizuku)
     val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
     val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)

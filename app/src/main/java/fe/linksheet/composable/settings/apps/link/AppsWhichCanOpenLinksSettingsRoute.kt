@@ -112,7 +112,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                     Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                         PreferenceSubtitle(
                             text = stringResource(
-                                if (shizukuMode && viewModel.featureFlagShizuku.value) R.string.apps_which_can_open_links_shizuku_explainer
+                                if (shizukuMode) R.string.apps_which_can_open_links_shizuku_explainer
                                 else R.string.apps_which_can_open_links_explainer
                             ),
                             paddingHorizontal = 0.dp
@@ -138,7 +138,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                                 )
                             )
 
-                            if (shizukuMode && viewModel.featureFlagShizuku.value) {
+                            if (shizukuMode) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier.fillMaxWidth(),

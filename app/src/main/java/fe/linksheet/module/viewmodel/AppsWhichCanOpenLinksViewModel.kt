@@ -24,10 +24,7 @@ import kotlinx.coroutines.flow.combine
 class AppsWhichCanOpenLinksViewModel(
     val app: LinkSheetApp,
     preferenceRepository: AppPreferenceRepository,
-    featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel(preferenceRepository) {
-
-    val featureFlagShizuku = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagShizuku)
 
     private val domainVerificationManager by lazy {
         if (AndroidVersion.AT_LEAST_API_31_S) {

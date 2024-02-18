@@ -21,11 +21,9 @@ import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 @Composable
 fun ImportSettingsDialog(
     uri: Uri?,
-    close: OnClose<Unit?>,
+    close: OnClose<Unit>,
     viewModel: ExportSettingsViewModel,
 ) {
-    val context = LocalContext.current
-
     DialogColumn {
         HeadlineText(headlineId = R.string.import_settings)
         DialogSpacer()

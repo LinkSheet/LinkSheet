@@ -182,10 +182,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     animatedComposable(route = exportImportSettingsRoute) {
-                        ExportImportSettingsRoute(
-                            navController = navController,
-                            onBackPressed = onBackPressed
-                        )
+                        ExportImportSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     animatedComposable(route = debugSettingsRoute) {
@@ -203,9 +200,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     animatedComposable(route = loadDumpedPreferences) {
-                        LoadDumpedPreferences(
-                            onBackPressed = onBackPressed
-                        )
+                        LoadDumpedPreferences(onBackPressed = onBackPressed)
                     }
 
                     animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->

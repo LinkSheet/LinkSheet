@@ -73,8 +73,8 @@
     <string name="hide_after_copying">Hide after copying</string>
     <string name="hide_after_copying_explainer">Hide bottom sheet after \"Copy URL\" button has been pressed</string>
     <string name="back">Back</string>
-    <string name="display_grid_layout">Display grid layout</string>
-    <string name="display_grid_layout_explainer">Display a grid instead of a list in the bottom sheet</string>
+    <string name="display_grid_layout">Grid layout</string>
+    <string name="display_grid_layout_explainer">Show a grid instead of a list in the bottom sheet</string>
     <string name="set_as_browser_done">LinkSheet has been set as default browser!</string>
     <string name="browser_status">Browser status</string>
     <string name="apps">Apps</string>
@@ -617,4 +617,6 @@
     <string name="hide_bottom_sheet_choice_buttons_explainer">Hide the \"Once\" and \"Always\" buttons in the
         bottom sheet
     </string>
+    <string name="base_config">Base configuration</string>
+    <string name="urlbar_settings">Urlbar</string>
 </resources>

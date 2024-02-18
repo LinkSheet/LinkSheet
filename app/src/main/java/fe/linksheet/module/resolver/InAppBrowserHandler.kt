@@ -10,9 +10,9 @@ class InAppBrowserHandler(
     private val disableInAppBrowserInSelectedRepository: DisableInAppBrowserInSelectedRepository,
 ) {
     sealed class InAppBrowserMode(val value: String) {
-        object UseAppSettings : InAppBrowserMode("use_app_settings")
-        object AlwaysDisableInAppBrowser : InAppBrowserMode("always_disable_in_app_browser")
-        object DisableInSelectedApps : InAppBrowserMode("disable_in_selected_apps")
+        data object UseAppSettings : InAppBrowserMode("use_app_settings")
+        data object AlwaysDisableInAppBrowser : InAppBrowserMode("always_disable_in_app_browser")
+        data object DisableInSelectedApps : InAppBrowserMode("disable_in_selected_apps")
 
         companion object Companion : OptionTypeMapper<InAppBrowserMode, String>(
             { it.value },

@@ -1,5 +1,6 @@
 package fe.linksheet.composable.settings.bottomsheet
 
+import android.app.Application
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,18 +16,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.RowInfoCard
-import fe.linksheet.composable.util.SubtitleText
-import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.composable.util.*
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.ObserveStateChange
+import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.LocalKoinApplication
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -47,72 +49,21 @@ fun BottomSheetSettingsRoute(
 
     SettingsScaffold(R.string.bottom_sheet, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxHeight(),
+            modifier = Modifier.padding(padding).fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            stickyHeader(key = "button") {
+            stickyHeader(key = "base_config") {
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                    PreferenceSubtitle(text = stringResource(R.string.button_settings))
-                }
-            }
+                    PreferenceSubtitle(text = stringResource(R.string.base_config))
 
-//            item(key = "enable_copy_button") {
-//                SwitchRow(
-//                    state = viewModel.enableCopyButton,
-//                    viewModel = viewModel,
-//                    headlineId = R.string.enable_copy_button,
-//                    subtitleId = R.string.enable_copy_button_explainer
-//                )
-//            }
-
-//            if (viewModel.enableCopyButton.value) {
-            item(key = "hide_after_copying") {
-                SwitchRow(
-                    state = viewModel.hideAfterCopying,
-                    viewModel = viewModel,
-                    headlineId = R.string.hide_after_copying,
-                    subtitleId = R.string.hide_after_copying_explainer
-                )
-            }
-//            }
-
-//            item(key = "enable_send_intent") {
-//                SwitchRow(
-//                    state = viewModel.enableSendButton,
-//                    viewModel = viewModel,
-//                    headlineId = R.string.enable_send_button,
-//                    subtitleId = R.string.enable_send_button_explainer
-//                )
-//            }
-
-            item(key = "enable_ignore_libredirect") {
-                SwitchRow(
-                    state = viewModel.enableIgnoreLibRedirectButton,
-                    viewModel = viewModel,
-                    headlineId = R.string.enable_ignore_libredirect_button,
-                    subtitleId = R.string.enable_ignore_libredirect_button_explainer
-                )
-            }
-
-            item(key = "enable_request_private_browsing") {
-                SwitchRow(
-                    state = viewModel.enableRequestPrivateBrowsingButton,
-                    viewModel = viewModel,
-                    headline = stringResource(id = R.string.enable_request_private_browsing_button),
-                    subtitle = stringResource(
-                        id = R.string.enable_request_private_browsing_button_explainer,
-                        KnownBrowser.browsers.filter { it.privateBrowser }.joinToString(
-                            separator = ", ",
-                        ) { it.displayName }
+                    SettingEnabledCardColumn(
+                        checked = viewModel.gridLayout(),
+                        onChange = { viewModel.gridLayout(it) },
+                        headline = stringResource(id = R.string.display_grid_layout),
+                        subtitle = stringResource(id = R.string.display_grid_layout_explainer)
                     )
-                )
-            }
 
-            stickyHeader(key = "misc") {
-                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                    PreferenceSubtitle(text = stringResource(R.string.misc_settings))
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 
@@ -131,21 +82,17 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-//            item(key = "enable_single_tap") {
-//                SwitchRow(
-//                    state = viewModel.singleTap,
-//                    viewModel = viewModel,
-//                    headlineId = R.string.single_tap,
-//                    subtitleId = R.string.single_tap_explainer
-//                )
-//            }
-
-            item(key = "grid_layout") {
+            item(key = "enable_request_private_browsing") {
                 SwitchRow(
-                    state = viewModel.gridLayout,
+                    state = viewModel.enableRequestPrivateBrowsingButton,
                     viewModel = viewModel,
-                    headlineId = R.string.display_grid_layout,
-                    subtitleId = R.string.display_grid_layout_explainer
+                    headline = stringResource(id = R.string.enable_request_private_browsing_button),
+                    subtitle = stringResource(
+                        id = R.string.enable_request_private_browsing_button_explainer,
+                        KnownBrowser.browsers.filter { it.privateBrowser }.joinToString(
+                            separator = ", ",
+                        ) { it.displayName }
+                    )
                 )
             }
 
@@ -158,6 +105,21 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
+            item(key = "hide_choice_buttons") {
+                SwitchRow(
+                    state = viewModel.hideBottomSheetChoiceButtons,
+                    viewModel = viewModel,
+                    headlineId = R.string.hide_bottom_sheet_choice_buttons,
+                    subtitleId = R.string.hide_bottom_sheet_choice_buttons_explainer
+                )
+            }
+
+            stickyHeader(key = "urlbar") {
+                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    PreferenceSubtitle(text = stringResource(R.string.urlbar_settings))
+                }
+            }
+
             item(key = "preview_url") {
                 SwitchRow(
                     state = viewModel.previewUrl,
@@ -167,14 +129,37 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = "hide_choice_buttons") {
-                SwitchRow(
-                    state = viewModel.hideBottomSheetChoiceButtons,
-                    viewModel = viewModel,
-                    headlineId = R.string.hide_bottom_sheet_choice_buttons,
-                    subtitleId = R.string.hide_bottom_sheet_choice_buttons_explainer
-                )
+            if(viewModel.previewUrl()){
+                item(key = "hide_after_copying") {
+                    SwitchRow(
+                        state = viewModel.hideAfterCopying,
+                        viewModel = viewModel,
+                        headlineId = R.string.hide_after_copying,
+                        subtitleId = R.string.hide_after_copying_explainer
+                    )
+                }
+
+                item(key = "enable_ignore_libredirect") {
+                    SwitchRow(
+                        state = viewModel.enableIgnoreLibRedirectButton,
+                        viewModel = viewModel,
+                        headlineId = R.string.enable_ignore_libredirect_button,
+                        subtitleId = R.string.enable_ignore_libredirect_button_explainer
+                    )
+                }
             }
         }
     }
 }
+
+//@Preview(name = "BottomSheetSettingsRoutePreview", showBackground = true)
+//@Composable
+//private fun BottomSheetSettingsRoutePreview() {
+//    val context = LocalContext.current
+//
+//
+//    val pref = AppPreferenceRepository(context)
+//    val viewModel = BottomSheetSettingsViewModel(context as Application, pref)
+//
+////    BottomSheetSettingsRoute(onBackPressed = {}, viewModel)
+//}

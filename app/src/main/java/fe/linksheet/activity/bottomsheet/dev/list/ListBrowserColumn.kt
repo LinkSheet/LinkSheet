@@ -38,33 +38,6 @@ fun ListBrowserColumn(
     showPackage: Boolean,
     launchApp: LaunchApp,
 ) {
-    //                .combinedClickable(onClick = {
-////                    bottomSheetViewModel.privateBrowser.value = shouldShowRequestPrivate(info)
-////                    bottomSheetViewModel.appInfo.value = info
-//                    if (hasPreferredApp) {
-//                        launchApp(result, info)
-//                    } else {
-//                        if (bottomSheetViewModel.singleTap.value) {
-//                            launchApp(result, info)
-//                        } else {
-//                            if (selectedItem == index) launchApp(result, info)
-//                            else selectedItem = index
-//                        }
-//                    }
-//                }, onDoubleClick = {
-//                    if (!bottomSheetViewModel.singleTap.value) {
-//                        launchApp(result, info)
-//                    } else {
-//                        startPackageInfoActivity(info)
-//                    }
-//                }, onLongClick = {
-//                    if (bottomSheetViewModel.singleTap.value) {
-//                        selectedItem = index
-//                    } else {
-//                        startPackageInfoActivity(info)
-//                    }
-//                })
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,10 +47,6 @@ fun ListBrowserColumn(
             .combinedClickable(onClick = onClick, onDoubleClick = {
                 launchApp(appInfo, false, false)
             })
-//            .clickable(onClick = onClick)
-//            .clickable {
-//                launchApp(appInfo, false, false)
-//            }
     ) {
         Row(
             modifier = Modifier

@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,8 @@ import fe.linksheet.util.PrivateBrowsingBrowser
 @Composable
 fun GridBrowserButton(
     appInfo: DisplayActivityInfo,
+    selected: Boolean?,
+    onClick: () -> Unit,
     privateBrowser: PrivateBrowsingBrowser?,
     showPackage: Boolean,
     launchApp: (DisplayActivityInfo, Boolean) -> Unit,
@@ -35,7 +38,8 @@ fun GridBrowserButton(
             .heightIn(min = 85.dp)
             .padding(start = 7.dp, top = 7.dp, end = 7.dp, bottom = 0.dp)
             .clip(defaultRoundedCornerShape)
-            .clickable { launchApp(appInfo, false) }
+            .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
+            .combinedClickable(onClick = onClick, onDoubleClick = { launchApp(appInfo, false) })
             .padding(all = 3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

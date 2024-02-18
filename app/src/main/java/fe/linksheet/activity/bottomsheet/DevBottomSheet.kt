@@ -60,28 +60,10 @@ class DevBottomSheet(
     }
 
     companion object {
-        val utilButtonWidth = 80.dp
         val buttonPadding = 15.dp
-
         val buttonRowHeight = 50.dp
-
-        val appListItemPadding = 10.dp
-        val appListItemHeight = 40.dp
         val preferredAppItemHeight = 60.dp
-
-        val gridSize = 120.dp
-        val gridItemHeightPackageText = 30.dp
-        val gridItemHeightPrivateButton = 40.dp
-
-        //            + 50.dp
-        var gridItemHeight = 60.dp
-//          + 50.dp
-
-
-        // token from androidx.compose.material.ModelBottomSheet
-        val maxModalBottomSheetWidth = 640.dp
     }
-
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -117,7 +99,8 @@ class DevBottomSheet(
                     hideDrawer = hide,
                     requestExpand = {
                         coroutineScope.launch { drawerState.expand() }
-                    })
+                    }
+                )
             }
         )
 
@@ -141,17 +124,6 @@ class DevBottomSheet(
             val showPackage = remember {
                 uriSuccessResult?.showExtended == true || viewModel.alwaysShowPackageName()
             }
-
-//            val maxHeight = (if (landscape) LocalConfiguration.current.screenWidthDp
-//            else LocalConfiguration.current.screenHeightDp) / 3f
-//
-//            val itemHeight = if (viewModel.gridLayout.value) {
-//                val gridItemHeight = gridItemHeight.value + if (showPackage) 10f else 0.0f
-//
-//                gridItemHeight
-//            } else appListItemHeight.value
-
-//            val baseHeight = ((ceil((maxHeight / itemHeight).toDouble()) - 1) * itemHeight).dp
 
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
@@ -189,7 +161,6 @@ class DevBottomSheet(
         }
     }
 
-    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun BottomSheetApps(
         // TODO: Refactor this away
@@ -295,7 +266,13 @@ class DevBottomSheet(
         }
 
         if (bottomSheetViewModel.gridLayout()) {
-            Grid(result = result, showPackage = showPackage)
+            Grid(
+                result = result,
+                hasPreferredApp = hasPreferredApp,
+                isExpanded = isExpanded,
+                requestExpand = requestExpand,
+                showPackage = showPackage
+            )
         } else {
             List(
                 result = result,
@@ -305,13 +282,6 @@ class DevBottomSheet(
                 showPackage = showPackage
             )
         }
-
-//        OpenButtons(
-//            bottomSheetViewModel = bottomSheetViewModel,
-//            onClick = {
-////                launchApp(appInfo, it, false)
-//            },
-//        )
     }
 
     data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: PrivateBrowsingBrowser? = null) {
@@ -321,7 +291,13 @@ class DevBottomSheet(
     }
 
     @Composable
-    private fun Grid(result: BottomSheetResult.SuccessResult, showPackage: Boolean) {
+    private fun Grid(
+        result: BottomSheetResult.SuccessResult,
+        hasPreferredApp: Boolean,
+        isExpanded: Boolean,
+        requestExpand: () -> Unit,
+        showPackage: Boolean,
+    ) {
         val items = mutableListOf<GridItem>()
 
         for (info in result.resolved) {
@@ -333,16 +309,31 @@ class DevBottomSheet(
             }
         }
 
-        LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
-            itemsIndexed(items = items, key = { _, item -> item.toString() }) { _, (info, privateBrowser) ->
-                GridBrowserButton(
-                    appInfo = info,
-                    privateBrowser = privateBrowser,
-                    showPackage = showPackage,
-                    launchApp = { item, always ->
-                        launchApp(result, item, always, privateBrowser)
-                    }
-                )
+        var selected by remember { mutableIntStateOf(-1) }
+
+        Column {
+            LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
+                itemsIndexed(items = items, key = { _, item -> item.toString() }) { index, (info, privateBrowser) ->
+                    GridBrowserButton(
+                        appInfo = info,
+                        selected = if (!hasPreferredApp) index == selected else null,
+                        onClick = {
+                            selected = if (selected != index) index else -1
+                            if (selected != -1 && !isExpanded) {
+                                requestExpand()
+                            }
+                        },
+                        privateBrowser = privateBrowser,
+                        showPackage = showPackage,
+                        launchApp = { item, always ->
+                            launchApp(result, item, always, privateBrowser)
+                        }
+                    )
+                }
+            }
+
+            if (!hasPreferredApp) {
+                NoPreferredAppChoiceButtons(result = result, selected = selected)
             }
         }
     }
@@ -355,7 +346,6 @@ class DevBottomSheet(
         requestExpand: () -> Unit,
         showPackage: Boolean,
     ) {
-        val activity = LocalContext.currentActivity()
         var selected by remember { mutableIntStateOf(-1) }
 
         Column {
@@ -401,17 +391,24 @@ class DevBottomSheet(
             }
 
             if (!hasPreferredApp) {
-                Spacer(modifier = Modifier.height(5.dp))
-
-                OpenButtons(
-                    result = result,
-                    enabled = selected != -1,
-                    useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
-                    openSettings = { viewModel.startMainActivity(activity) },
-                    choiceClick = { always -> launchApp(result, result.resolved[selected], always) },
-                )
+                NoPreferredAppChoiceButtons(result = result, selected = selected)
             }
         }
+    }
+
+    @Composable
+    private fun NoPreferredAppChoiceButtons(result: BottomSheetResult.SuccessResult, selected: Int) {
+        val activity = LocalContext.currentActivity()
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        OpenButtons(
+            result = result,
+            enabled = selected != -1,
+            useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
+            openSettings = { viewModel.startMainActivity(activity) },
+            choiceClick = { always -> launchApp(result, result.resolved[selected], always) },
+        )
     }
 
     private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): PrivateBrowsingBrowser? {

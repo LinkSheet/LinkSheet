@@ -31,6 +31,7 @@ import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.util.linkableSubtitleBuilder
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
+import fe.linksheet.util.Darknet
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -119,6 +120,19 @@ fun FollowRedirectsSettingsRoute(
 //                    headlineId = R.string.follow_only_known_trackers,
 //                    subtitleId = R.string.follow_only_known_trackers_explainer
 //                )
+            }
+
+            item(key = "follow_redirects_allow_darknets") {
+                SwitchRow(
+                    state = viewModel.followRedirectsAllowsDarknets,
+                    viewModel = viewModel,
+                    enabled = viewModel.followRedirects(),
+                    headline = stringResource(id = R.string.allow_darknets),
+                    subtitle = stringResource(
+                        id = R.string.follow_redirects_allow_darknets_explainer,
+                        Darknet.entries.joinToString(separator = ", ") { it.displayName }
+                    )
+                )
             }
 
             item(key = "follow_redirects_external_service") {

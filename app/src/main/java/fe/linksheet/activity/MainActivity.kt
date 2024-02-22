@@ -1,16 +1,10 @@
 package fe.linksheet.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.*
-import fe.linksheet.activity.onboarding._new.NewOnboardingActivity
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute

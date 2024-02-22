@@ -7,12 +7,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,6 +24,7 @@ import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.util.linkableSubtitleBuilder
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
+import fe.linksheet.util.Darknet
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -74,6 +71,19 @@ fun Amp2HtmlSettingsRoute(
                     enabled = viewModel.enableAmp2Html.value,
                     headlineId = R.string.amp2html_builtin_cache,
                     subtitleId = R.string.amp2html_builtin_cache_explainer
+                )
+            }
+
+            item(key = "amp2html_allow_darknets") {
+                SwitchRow(
+                    state = viewModel.amp2HtmlAllowDarknets,
+                    viewModel = viewModel,
+                    enabled = viewModel.enableAmp2Html(),
+                    headline = stringResource(id = R.string.allow_darknets),
+                    subtitle = stringResource(
+                        id = R.string.amp2html_allow_darknets_explainer,
+                        Darknet.entries.joinToString(separator = ", ") { it.displayName }
+                    )
                 )
             }
 

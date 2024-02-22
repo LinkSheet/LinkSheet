@@ -1,4 +1,4 @@
-package fe.linksheet.composable.settings.advanced
+package fe.linksheet.composable.settings.advanced.exportimport
 
 import android.app.Activity
 import android.content.Intent
@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.gson.dsl.jsonObject
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.CheckboxRow
@@ -28,9 +27,7 @@ import fe.linksheet.composable.util.DialogColumn
 import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.LinkableTextView
-import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
-import java.io.FileOutputStream
 import java.time.LocalDateTime
 
 @Composable

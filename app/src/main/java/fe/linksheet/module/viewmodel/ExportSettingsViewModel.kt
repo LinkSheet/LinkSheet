@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.permission.PermissionBoundPreference
 
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.ImportExportService
@@ -16,14 +17,13 @@ class ExportSettingsViewModel(
     val gson: Gson
 ) : BaseViewModel(preferenceRepository) {
     private val importExportService = ImportExportService(context)
-    fun importPreferences(uri: Uri): String? {
+    fun importPreferences(uri: Uri): Result<List<PermissionBoundPreference>> {
         val result = importExportService.importPreferencesFromUri(uri)
         if (result.isFailure) {
-            return result.exceptionOrNull()!!.message
+            return Result.failure(result.exceptionOrNull()!!)
         }
 
-        preferenceRepository.importPreferences(result.getOrNull()!!)
-        return null
+        return Result.success(preferenceRepository.importPreferences(result.getOrNull()!!))
     }
 
     fun exportPreferences(uri: Uri, includeLogHashKey: Boolean) {

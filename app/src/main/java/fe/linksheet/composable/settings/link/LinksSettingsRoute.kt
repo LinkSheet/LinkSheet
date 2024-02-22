@@ -179,10 +179,6 @@ fun LinksSettingsRoute(
                                 navController.navigate(libRedirectSettingsRoute)
                             }
                         )
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        RowInfoCard(text = R.string.disclaimer_libredirect_unstable)
                     }
                 ) {
                     navController.navigate(libRedirectSettingsRoute)

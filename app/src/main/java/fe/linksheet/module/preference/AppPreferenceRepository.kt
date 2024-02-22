@@ -6,6 +6,8 @@ import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.getBooleanState
 import fe.android.preference.helper.compose.getGlobalCachedState
 import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.module.preference.permission.PermissionBoundPreference
+import fe.linksheet.module.preference.permission.UsageStatsPermission
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -18,15 +20,19 @@ class AppPreferenceRepository(val context: Context) : PreferenceRepository(conte
     private val followRedirectsExternalService = getBooleanState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = getBooleanState(AppPreferences.amp2HtmlExternalService)
 
+    private val preferencesRequiringPermission by lazy {
+        mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
+    }
+
     init {
         // Ensure backwards compatibility as this feature was previously included in non-pro versions
         if (!LinkSheetAppConfig.isPro()) {
-            followRedirectsExternalService.updateState(false)
-            amp2HtmlExternalService.updateState(false)
+            followRedirectsExternalService(false)
+            amp2HtmlExternalService(false)
         }
     }
 
-    fun importPreferences(preferencesToImport: Map<String, String>) {
+    fun importPreferences(preferencesToImport: Map<String, String>): List<PermissionBoundPreference> {
         val preferences = AppPreferences.all
 
         val mappedPreferences = preferencesToImport.mapNotNull {
@@ -41,11 +47,14 @@ class AppPreferenceRepository(val context: Context) : PreferenceRepository(conte
         }
 
         // Refresh must be delayed to until after the editor has been closed
-        mappedPreferences.forEach {
-            //  Forces refresh by reading new value from the preference file; In the future, maybe this should be update
-            //  newValue to the RepositoryState instance directly, but that would required converting the
-            //  string value to the appropriate state type
-            getGlobalCachedState(it.first.key)?.forceRefresh()
+        return mappedPreferences.mapNotNull { (preference) ->
+            // Forces refresh by reading new value from the preference file; In the future, maybe this should be update
+            // newValue to the RepositoryState instance directly, but that would required converting the
+            // string value to the appropriate state type
+            getGlobalCachedState(preference.key)?.forceRefresh()
+
+            val requiredPermission = preferencesRequiringPermission[preference]
+            if (requiredPermission?.check() == false) requiredPermission else null
         }
     }
 

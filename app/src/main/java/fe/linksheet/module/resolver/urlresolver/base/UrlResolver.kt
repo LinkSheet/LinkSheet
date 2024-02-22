@@ -12,6 +12,7 @@ import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
+import fe.linksheet.util.Darknet
 import java.io.IOException
 import kotlin.reflect.KClass
 
@@ -33,13 +34,25 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         resolvePredicate: ResolvePredicate? = null,
         externalService: Boolean,
         connectTimeout: Int,
-        canAccessInternet: Boolean
+        canAccessInternet: Boolean,
+        allowDarknets: Boolean,
     ): Result<ResolveResultType>? {
+        val darknet = Darknet.getOrNull(uri)
+
+        if (!allowDarknets && darknet != null) {
+            logger.info(
+                { "$it is a darknet url, but darknets are not allowed, skipping" },
+                uri,
+                HashProcessor.UriProcessor
+            )
+            return null
+        }
+
         val uriString = uri.toString()
         if (localCache) {
             val resolvedUrl = resolverRepository.getForInputUrl(uriString)
             if (resolvedUrl != null) {
-                logger.error({ "From local cache=$it" }, resolvedUrl.urlResolved(), HashProcessor.UrlProcessor)
+                logger.error({ "From local cache: $it" }, resolvedUrl.urlResolved(), HashProcessor.UrlProcessor)
                 return ResolveResultType.Resolved.LocalCache(resolvedUrl.urlResolved()).wrap()
             }
         }
@@ -56,7 +69,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
             return ResolveResultType.NoInternetConnection.wrap()
         }
 
-        val resolveResult = resolve(uri, resolvePredicate, externalService, connectTimeout)
+        val resolveResult = resolve(uri, resolvePredicate, externalService, darknet, connectTimeout)
 
         if (localCache) {
             val url = resolveResult?.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
@@ -72,6 +85,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         uri: Uri,
         resolvePredicate: ResolvePredicate? = null,
         externalService: Boolean,
+        darknet: Darknet?,
         timeout: Int,
     ): Result<ResolveResultType>? {
         logger.error({ "Following redirects for $it" }, uri, HashProcessor.UriProcessor)
@@ -79,10 +93,19 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         val inputUri = uri.toString()
         if (resolvePredicate == null || resolvePredicate(uri)) {
             if (externalService) {
-                logger.error(
+                if (darknet != null) {
+                    logger.info(
+                        { "$it is a darknet url, but external services are enabled, skipping" },
+                        uri,
+                        HashProcessor.UriProcessor
+                    )
+                    return null
+                }
+
+                logger.info(
                     { "Using external service for $it" },
-                    inputUri,
-                    HashProcessor.StringProcessor
+                    uri,
+                    HashProcessor.UriProcessor
                 )
 
                 val con = try {

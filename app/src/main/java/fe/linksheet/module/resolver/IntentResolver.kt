@@ -162,7 +162,7 @@ class IntentResolver(
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        var uri = modifyUri(intent.getUri(), resolveEmbeds(), useClearUrls.value, useFastForwardRules.value)
+        var uri = modifyUri(intent.getUri(), resolveEmbeds(), useClearUrls(), useFastForwardRules())
 
         if (uri == null) {
             logger.error("Uri is null, something probably went very wrong")
@@ -171,9 +171,9 @@ class IntentResolver(
 //        var followRedirectsResult: Result<ResolveType>
         val resolveModuleStatus = ResolveModuleStatus()
 //
-//        if (followRedirects.value && followRedirectsExternalService.value && enableAmp2Html.value && amp2HtmlExternalService.value) {
+//        if (followRedirects() && followRedirectsExternalService() && enableAmp2Html() && amp2HtmlExternalService()) {
 //            val uriString = uri.toString()
-//            val con = allRemoteResolveRequest.resolveRemote(uriString, requestTimeout.value)
+//            val con = allRemoteResolveRequest.resolveRemote(uriString, requestTimeout())
 //            if (!isHttpSuccess(con.responseCode)) {
 //                logger.debug("Failed to resolve via external service (${con.responseCode}): ${con.readToString()}")
 //            }
@@ -182,7 +182,7 @@ class IntentResolver(
 //            val url = obj.getAsJsonPrimitive("result").asString
 //
 //            val results = obj.getAsJsonObject("results")
-//            Resolved.values().forEach {
+//            Resolved()s().forEach {
 //
 //
 //                val prim = results.getAsJsonPrimitive(it.key)
@@ -193,48 +193,48 @@ class IntentResolver(
 //                )
 //            }
 //        } else {
-        uri = resolveModuleStatus.resolveIfEnabled(followRedirects.value, ResolveModule.Redirect, uri) { uriToResolve ->
-            val externalService = followRedirectsExternalService.value
+        uri = resolveModuleStatus.resolveIfEnabled(followRedirects(), ResolveModule.Redirect, uri) { uriToResolve ->
+            val externalService = followRedirectsExternalService()
 
             val resolvePredicate: ResolvePredicate = { uri ->
-                (!externalService && !followOnlyKnownTrackers.value) || FastForward.isTracker(uri.toString())
+                (!externalService && !followOnlyKnownTrackers()) || FastForward.isTracker(uri.toString())
             }
 
             redirectResolver.resolve(
                 uriToResolve,
-                followRedirectsLocalCache.value,
-                followRedirectsBuiltInCache.value,
+                followRedirectsLocalCache(),
+                followRedirectsBuiltInCache(),
                 resolvePredicate,
                 externalService,
-                requestTimeout.value,
+                requestTimeout(),
                 canAccessInternet
             )
         }
 
-        uri = resolveModuleStatus.resolveIfEnabled(enableAmp2Html.value, ResolveModule.Amp2Html, uri) { uriToResolve ->
+        uri = resolveModuleStatus.resolveIfEnabled(enableAmp2Html(), ResolveModule.Amp2Html, uri) { uriToResolve ->
             amp2HtmlResolver.resolve(
                 uriToResolve,
-                amp2HtmlLocalCache.value,
-                amp2HtmlBuiltInCache.value,
+                amp2HtmlLocalCache(),
+                amp2HtmlBuiltInCache(),
                 null,
-                amp2HtmlExternalService.value,
-                requestTimeout.value,
+                amp2HtmlExternalService(),
+                requestTimeout(),
                 canAccessInternet
             )
         }
 
-        uri = modifyUri(uri, resolveEmbeds(), useClearUrls.value, useFastForwardRules.value)
+        uri = modifyUri(uri, resolveEmbeds(), useClearUrls(), useFastForwardRules())
 
         var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
-        if (enableLibRedirect.value && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton.value)) {
+        if (enableLibRedirect() && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton())) {
             libRedirectResult = libRedirectResolver.resolve(uri)
             if (libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
                 uri = libRedirectResult.redirectedUri
             }
         }
 
-        val downloadable = if (enableDownloader.value && uri != null) {
-            checkIsDownloadable(uri, requestTimeout.value)
+        val downloadable = if (enableDownloader() && uri != null) {
+            checkIsDownloadable(uri, requestTimeout())
         } else Downloader.DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)
@@ -262,7 +262,7 @@ class IntentResolver(
 
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
-            referrer, inAppBrowserSettings.value
+            referrer, inAppBrowserSettings()
         )
 
         val newIntent = intent.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
@@ -290,12 +290,12 @@ class IntentResolver(
                 mode,
                 selected,
                 repository
-            ) = if (!unifiedPreferredBrowser.value && isCustomTab && allowCustomTab) {
+            ) = if (!unifiedPreferredBrowser() && isCustomTab && allowCustomTab) {
 
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)
 
-            browserHandler.handleBrowsers(mode.value, selected.value, repository, resolvedList)
+            browserHandler.handleBrowsers(mode(), selected(), repository, resolvedList)
         } else null
 
         logger.debug("BrowserMode: $browserMode")
@@ -305,7 +305,7 @@ class IntentResolver(
             resolvedList,
             lastUsedApps,
             preferredDisplayActivityInfo?.app,
-            !dontShowFilteredItem.value
+            !dontShowFilteredItem()
         )
 
         val selectedBrowserIsSingleOption =
@@ -346,7 +346,7 @@ class IntentResolver(
     }
 
     private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
-        if (downloaderCheckUrlMimeType.value) {
+        if (downloaderCheckUrlMimeType()) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
                 logger.debug("File ending check result=$it")
                 if (it.isDownloadable()) return it

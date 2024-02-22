@@ -1,11 +1,7 @@
 package fe.linksheet.module.viewmodel
 
-import android.app.Activity
 import android.app.AppOpsManager
 import android.app.Application
-import android.content.Context
-import android.content.Intent
-import android.provider.Settings
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -13,8 +9,8 @@ import androidx.core.content.getSystemService
 import fe.linksheet.module.preference.AppPreferenceRepository
 
 import fe.android.preference.helper.compose.getBooleanState
-import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class BottomSheetSettingsViewModel(
@@ -42,21 +38,7 @@ class BottomSheetSettingsViewModel(
     var usageStatsSorting = preferenceRepository.getBooleanState(AppPreferences.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.getBooleanState(AppPreferences.hideBottomSheetChoiceButtons)
 
+    val usageStatsPermission = UsageStatsPermission(context)
 
     var wasTogglingUsageStatsSorting by mutableStateOf(false)
-
-    fun openUsageStatsSettings(activity: Activity) {
-        activity.startActivityWithConfirmation(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
-        wasTogglingUsageStatsSorting = true
-    }
-
-    fun getUsageStatsAllowed(context: Context): Boolean {
-        val mode = appOpsManager.checkOpNoThrow(
-            AppOpsManager.OPSTR_GET_USAGE_STATS,
-            android.os.Process.myUid(),
-            context.packageName
-        )
-
-        return mode == AppOpsManager.MODE_ALLOWED
-    }
 }

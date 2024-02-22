@@ -22,7 +22,7 @@ object AppPreferences : Preferences() {
     val browserMode = mappedPreference(
         "browser_mode",
         BrowserHandler.BrowserMode.AlwaysAsk,
-        BrowserHandler.BrowserMode.Companion
+        BrowserHandler.BrowserMode
     )
 
     @SensitivePreference
@@ -31,7 +31,7 @@ object AppPreferences : Preferences() {
     val inAppBrowserMode = mappedPreference(
         "in_app_browser_mode",
         BrowserHandler.BrowserMode.AlwaysAsk,
-        BrowserHandler.BrowserMode.Companion
+        BrowserHandler.BrowserMode
     )
 
     @SensitivePreference
@@ -41,7 +41,7 @@ object AppPreferences : Preferences() {
     val inAppBrowserSettings = mappedPreference(
         "in_app_browser_setting",
         InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
-        InAppBrowserHandler.InAppBrowserMode.Companion
+        InAppBrowserHandler.InAppBrowserMode
     )
     val enableSendButton = booleanPreference("enable_send_button")
     val alwaysShowPackageName = booleanPreference("always_show_package_name")
@@ -60,7 +60,7 @@ object AppPreferences : Preferences() {
     val followRedirectsExternalService = booleanPreference("follow_redirects_external_service")
     val followOnlyKnownTrackers = booleanPreference("follow_only_known_trackers")
     val followRedirectsBuiltInCache = booleanPreference("follow_redirects_builtin_cache", true)
-    val theme = mappedPreference("theme", Theme.System, Theme.Companion)
+    val theme = mappedPreference("theme", Theme.System, Theme)
     val dontShowFilteredItem = booleanPreference("dont_show_filtered_item")
 
     @Deprecated("No longer used")

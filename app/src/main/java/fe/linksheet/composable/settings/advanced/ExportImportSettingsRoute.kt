@@ -7,27 +7,21 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Flag
-import androidx.compose.material.icons.filled.Tune
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.settings.advanced.exportimport.ExportSettingsDialog
+import fe.linksheet.composable.settings.advanced.exportimport.ImportPermissionRequiredDialog
+import fe.linksheet.composable.settings.advanced.exportimport.ImportSettingsDialog
 import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.Texts
-import fe.linksheet.featureFlagSettingsRoute
+import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -36,6 +30,8 @@ fun ExportImportSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: ExportSettingsViewModel = koinViewModel(),
 ) {
+    val activity = LocalContext.currentActivity()
+
     val exportDialog = dialogHelper<Unit, Unit, Unit>(
         fetch = { },
         awaitFetchBeforeOpen = true,
@@ -44,16 +40,26 @@ fun ExportImportSettingsRoute(
         ExportSettingsDialog(viewModel = viewModel)
     }
 
-    val confirmImportDialog = dialogHelper<Uri, Uri, Unit>(
+    val requestPermissionDialog =
+        dialogHelper<List<PermissionBoundPreference>, List<PermissionBoundPreference>, Unit>(
+            fetch = { it },
+            awaitFetchBeforeOpen = true,
+            dynamicHeight = true
+        ) { state, close ->
+            ImportPermissionRequiredDialog(activity = activity, permissions = state, close = close)
+        }
+
+    val confirmImportDialog = dialogHelper<Uri, Uri, Result<List<PermissionBoundPreference>>>(
         fetch = { it },
+//        onClose = { result ->
+//            if (result!!.isSuccess) {
+//                requestPermissionDialog.open(result.getOrNull()!!)
+//            }
+//        },
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-        ImportSettingsDialog(
-            uri = state,
-            close = close,
-            viewModel = viewModel
-        )
+        ImportSettingsDialog(uri = state, close = close, viewModel = viewModel)
     }
 
     val importFileLauncher = rememberLauncherForActivityResult(

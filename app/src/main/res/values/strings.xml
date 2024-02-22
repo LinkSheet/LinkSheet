@@ -619,4 +619,9 @@
     </string>
     <string name="base_config">Base configuration</string>
     <string name="urlbar_settings">Urlbar</string>
+    <string name="permission_required">Permission required</string>
+    <string name="permission_required_explainer">Some imported preferences require permissions that are currently not
+        given to LinkSheet. Tap below to request them.öh
+        möhöh  999
+    </string>
 </resources>

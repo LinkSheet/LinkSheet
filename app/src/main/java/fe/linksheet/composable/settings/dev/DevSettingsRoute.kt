@@ -40,21 +40,21 @@ fun DevSettingsRoute(
                 .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 5.dp)
         ) {
-            item(key = "launch_onboarding") {
-                SettingsItemRow(
-                    headlineId = R.string.launch_onboaring,
-                    subtitleId = R.string.launch_onboaring_explainer,
-                    image = {
-                        ColoredIcon(
-                            icon = Icons.Default.DeveloperMode,
-                            descriptionId = R.string.launch_onboaring
-                        )
-                    },
-                    onClick = {
-                        context.startActivity(Intent(context, OnboardingActivity::class.java))
-                    }
-                )
-            }
+//            item(key = "launch_onboarding") {
+//                SettingsItemRow(
+//                    headlineId = R.string.launch_onboaring,
+//                    subtitleId = R.string.launch_onboaring_explainer,
+//                    image = {
+//                        ColoredIcon(
+//                            icon = Icons.Default.DeveloperMode,
+//                            descriptionId = R.string.launch_onboaring
+//                        )
+//                    },
+//                    onClick = {
+//                        context.startActivity(Intent(context, OnboardingActivity::class.java))
+//                    }
+//                )
+//            }
 
             item(key = "launch_onboarding_new") {
                 SettingsItemRow(

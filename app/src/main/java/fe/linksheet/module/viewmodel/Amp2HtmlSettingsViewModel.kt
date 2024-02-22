@@ -22,5 +22,8 @@ class Amp2HtmlSettingsViewModel(
     val amp2HtmlExternalService = preferenceRepository.getBooleanState(
         AppPreferences.amp2HtmlExternalService
     )
+    val amp2HtmlAllowDarknets = preferenceRepository.getBooleanState(
+        AppPreferences.amp2HtmlAllowDarknets
+    )
     val requestTimeout = preferenceRepository.getIntState(AppPreferences.requestTimeout)
 }

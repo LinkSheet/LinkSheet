@@ -624,4 +624,7 @@
         given to LinkSheet. Tap below to request them.öh
         möhöh  999
     </string>
+    <string name="allow_darknets">Allow darknets</string>
+    <string name="amp2html_allow_darknets_explainer">Allow running Amp2Html for darknets (supported: %s)</string>
+    <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)</string>
 </resources>

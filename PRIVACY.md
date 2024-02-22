@@ -13,13 +13,17 @@ showing the app chooser by sending a `HEAD` request to the opened URL (which mea
 the website is always made, regardless of whether the user actually opens the URL in any app
 afterwards).
 
+Redirects will only be followed for darknet urls (.i2p, .onion) if the corresponding option "Allow darknets" is enabled.
+
 ### Amp2Html
 
 When "Enable Amp2Html" is enabled, LinkSheet will send a `GET` request to the opened URL (again, a
 connection is always made, even if the user does not actually open the URL in any app afterwards) to
 attempt to obtain the non-AMP version of the page. If the page is not an AMP page, or if no non-AMP
 version could be found, the original URL will be opened when the user clicks an app in the bottom
-sheet.
+sheet. 
+
+Amp2Html will only run on darknet urls (.i2p, .onion) if the corresponding option "Allow darknets" is enabled.
 
 ### Downloader
 
@@ -46,6 +50,8 @@ will be sent to the edge function.
 
 If "Enable Amp2Html" and "Attempt to obtain non-AMP page version via external service", ALL links
 are sent to the edge function.
+
+Darknet links (.i2p, .onion) are NEVER sent to this external service.
 
 ## Logs
 

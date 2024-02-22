@@ -83,6 +83,9 @@ class IntentResolver(
         AppPreferences.followRedirectsExternalService
     )
 
+    private val followRedirectsAllowDarknets =
+        preferenceRepository.getBooleanState(AppPreferences.followRedirectsAllowDarknets)
+
     private val requestTimeout = preferenceRepository.getIntState(
         AppPreferences.requestTimeout
     )
@@ -121,6 +124,8 @@ class IntentResolver(
 
     private val amp2HtmlExternalService =
         preferenceRepository.getBooleanState(AppPreferences.amp2HtmlExternalService)
+    private val amp2HtmlAllowDarknets =
+        preferenceRepository.getBooleanState(AppPreferences.amp2HtmlAllowDarknets)
 
     private val resolveEmbeds = preferenceRepository.getBooleanState(AppPreferences.resolveEmbeds)
 
@@ -207,7 +212,8 @@ class IntentResolver(
                 resolvePredicate,
                 externalService,
                 requestTimeout(),
-                canAccessInternet
+                canAccessInternet,
+                followRedirectsAllowDarknets()
             )
         }
 
@@ -219,7 +225,8 @@ class IntentResolver(
                 null,
                 amp2HtmlExternalService(),
                 requestTimeout(),
-                canAccessInternet
+                canAccessInternet,
+                amp2HtmlAllowDarknets(),
             )
         }
 

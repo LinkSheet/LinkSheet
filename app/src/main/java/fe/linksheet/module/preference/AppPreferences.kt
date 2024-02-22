@@ -55,11 +55,15 @@ object AppPreferences : Preferences() {
     val useClearUrls = booleanPreference("use_clear_urls")
     val useFastForwardRules = booleanPreference("fast_forward_rules")
     val enableLibRedirect = booleanPreference("enable_lib_redirect")
+
     val followRedirects = booleanPreference("follow_redirects")
     val followRedirectsLocalCache = booleanPreference("follow_redirects_local_cache", true)
     val followRedirectsExternalService = booleanPreference("follow_redirects_external_service")
     val followOnlyKnownTrackers = booleanPreference("follow_only_known_trackers")
     val followRedirectsBuiltInCache = booleanPreference("follow_redirects_builtin_cache", true)
+    val followRedirectsAllowDarknets = booleanPreference("follow_redirects_allow_darknets", false)
+
+
     val theme = mappedPreference("theme", Theme.System, Theme)
     val dontShowFilteredItem = booleanPreference("dont_show_filtered_item")
 
@@ -77,6 +81,7 @@ object AppPreferences : Preferences() {
     val amp2HtmlLocalCache = booleanPreference("amp2html_local_cache", true)
     val amp2HtmlExternalService = booleanPreference("amp2html_external_service")
     val amp2HtmlBuiltInCache = booleanPreference("amp2html_builtin_cache", true)
+    val amp2HtmlAllowDarknets = booleanPreference("amp2html_allow_darknets", false)
 
     val enableRequestPrivateBrowsingButton = booleanPreference(
         "enable_request_private_browsing_button"

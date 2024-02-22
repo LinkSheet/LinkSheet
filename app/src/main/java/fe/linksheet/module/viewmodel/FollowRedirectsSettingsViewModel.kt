@@ -25,5 +25,7 @@ class FollowRedirectsSettingsViewModel(
     var followOnlyKnownTrackers = preferenceRepository.getBooleanState(
         AppPreferences.followOnlyKnownTrackers
     )
+    val followRedirectsAllowsDarknets = preferenceRepository.getBooleanState(AppPreferences.followRedirectsAllowDarknets)
+
     val followRedirectsTimeout = preferenceRepository.getIntState(AppPreferences.requestTimeout)
 }

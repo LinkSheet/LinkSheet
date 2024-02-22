@@ -22,8 +22,6 @@ import org.koin.core.component.KoinComponent
 
 class BottomSheetActivity : ComponentActivity(), KoinComponent {
     private val bottomSheetViewModel by viewModel<BottomSheetViewModel>()
-    private val featureFlagViewModel by viewModel<FeatureFlagViewModel>()
-    private val devSettingsViewModel by viewModel<DevSettingsViewModel>()
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {

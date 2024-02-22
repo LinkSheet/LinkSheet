@@ -600,8 +600,7 @@
     <string name="new_dev_bottom_sheet">Bottom sheet</string>
     <string name="new_dev_bottom_sheet_feature_explainer">The new bottom sheet is nearing feature completion.
         Notably, tap customization is not yet available and will be implemented at a later date.\nPlease
-        report bugs either on <annotation url="https://github.com/1fexd/LinkSheet/issues/308">
-            Github</annotation>,
+        report bugs either on <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>,
         <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, or via <annotation
                 url="mailto:1fexd@420blaze.it">Email</annotation>.
     </string>

@@ -51,13 +51,13 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
 //        }
 
 
-        val bottomSheet = if (devSettingsViewModel.devBottomSheetExperiment()) {
-            DevBottomSheet(this, bottomSheetViewModel)
-        } else {
-            LegacyBottomSheet(this, bottomSheetViewModel)
-        }
+//        val bottomSheet = if (devSettingsViewModel.devBottomSheetExperiment()) {
+//            DevBottomSheet(this, bottomSheetViewModel)
+//        } else {
+//            LegacyBottomSheet(this, bottomSheetViewModel)
+//        }
 
-        bottomSheet.launch()
+        DevBottomSheet(this, bottomSheetViewModel).launch()
     }
 
     override fun onStop() {

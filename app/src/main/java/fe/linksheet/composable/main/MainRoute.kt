@@ -113,7 +113,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
             }
 
             if (viewModel.devBottomSheetExperimentCard()) {
-                cardItem(header = R.string.experiment) {
+                cardItem {
                     DevBottomSheetExperimentCard(navController = navController)
                 }
             }

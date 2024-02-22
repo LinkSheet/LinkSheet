@@ -33,52 +33,42 @@ fun DevBottomSheetSettingsRoute(
     val context = LocalContext.current
 
     SettingsScaffold(R.string.new_dev_bottom_sheet, onBackPressed = onBackPressed) { padding ->
-        LazyColumn(
+//        LazyColumn(
+//            modifier = Modifier
+//                .padding(padding)
+//                .fillMaxHeight(),
+//            contentPadding = PaddingValues(horizontal = 5.dp)
+//        ) {
+//            item(key = "dev_bottomsheet") {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+            shape = RoundedCornerShape(16.dp),
             modifier = Modifier
                 .padding(padding)
-                .fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 5.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp)
         ) {
-            item(key = "dev_bottomsheet") {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 10.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(min = 80.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column(modifier = Modifier.padding(10.dp)) {
-                            Text(
-                                text = stringResource(id = R.string.information),
-                                style = Typography.titleLarge,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 80.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.padding(10.dp)) {
+                    Text(
+                        text = stringResource(id = R.string.information),
+                        style = Typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
 
-                            LinkableTextView(
-                                id = R.string.new_dev_bottom_sheet_feature_explainer,
-                                style = LocalTextStyle.current.copy(
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    fontSize = 16.sp
-                                )
-                            )
-                        }
-                    }
+                    LinkableTextView(
+                        id = R.string.new_dev_bottom_sheet_feature_explainer,
+                        style = LocalTextStyle.current.copy(
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            fontSize = 16.sp
+                        )
+                    )
                 }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                SwitchRow(
-                    state = viewModel.devBottomSheetExperiment,
-                    viewModel = viewModel,
-                    headlineId = R.string.enable_dev_bottom_sheet,
-                    subtitleId = R.string.enable_dev_bottom_sheet_explainer
-                )
             }
         }
     }

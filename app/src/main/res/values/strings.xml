@@ -596,19 +596,14 @@
     </string>
     <string name="onboarding_5_button">Finish</string>
     <string name="experiment">Experiment</string>
-    <string name="new_dev_bottom_sheet_explainer">This nightly build features an all-new bottom sheet currently in
-        development, which is not feature complete yet.\nTap here to learn more, report missing features, or revert to
-        the old version.
-    </string>
+    <string name="new_dev_bottom_sheet_explainer">Don\'t like the new bottom sheet? Tap to report issues.</string>
     <string name="new_dev_bottom_sheet">Bottom sheet</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">The new in-dev bottom sheet is not feature complete yet.
-        Notably, the following functionality is still missing: Grid mode is unfinished, single-tap mode / long and
-        double taps, \"Once\" / \"Always\" buttons are missing if no preferred app has been set for a host.\nPlease
-        report missing features either on <annotation url="https://github.com/1fexd/LinkSheet/issues/308">
+    <string name="new_dev_bottom_sheet_feature_explainer">The new bottom sheet is nearing feature completion.
+        Notably, tap customization is not yet available and will be implemented at a later date.\nPlease
+        report bugs either on <annotation url="https://github.com/1fexd/LinkSheet/issues/308">
             Github</annotation>,
         <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, or via <annotation
-                url="mailto:1fexd@420blaze.it">Email</annotation>, since I plan to remove the old version once the new
-        one is feature-complete.
+                url="mailto:1fexd@420blaze.it">Email</annotation>.
     </string>
     <string name="information">Information</string>
     <string name="resolve_embeds">Resolve embeds</string>

@@ -60,16 +60,7 @@ class BottomSheetViewModel(
 
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
-    val enableCopyButton = preferenceRepository.getBooleanState(AppPreferences.enableCopyButton)
     val hideAfterCopying = preferenceRepository.getBooleanState(AppPreferences.hideAfterCopying)
-    val singleTap = preferenceRepository.getBooleanState(AppPreferences.singleTap)
-    val enableSendButton = preferenceRepository.getBooleanState(AppPreferences.enableSendButton)
-    val enableIgnoreLibRedirectButton = preferenceRepository.getBooleanState(
-        AppPreferences.enableIgnoreLibRedirectButton
-    )
-
-    val privateBrowser: MutableState<KnownBrowser?> = mutableStateOf(null)
-    val appInfo: MutableState<DisplayActivityInfo?> = mutableStateOf(null)
 
     val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)
     val downloadStartedToast = preferenceRepository.getBooleanState(AppPreferences.downloadStartedToast)

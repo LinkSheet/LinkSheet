@@ -14,5 +14,4 @@ class FeatureFlagViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val featureFlagLinkSheetCompat = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagLinkSheetCompat)
-    val featureFlagNewBottomSheet = featureFlagRepository.getBooleanState(FeatureFlags.featureFlagNewBottomSheet)
 }

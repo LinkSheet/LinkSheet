@@ -17,17 +17,11 @@ class BottomSheetSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    private val appOpsManager = context.getSystemService<AppOpsManager>()!!
 
     val enableIgnoreLibRedirectButton =
         preferenceRepository.getBooleanState(AppPreferences.enableIgnoreLibRedirectButton)
-    var enableCopyButton = preferenceRepository.getBooleanState(AppPreferences.enableCopyButton)
     var hideAfterCopying = preferenceRepository.getBooleanState(AppPreferences.hideAfterCopying)
-    var singleTap = preferenceRepository.getBooleanState(AppPreferences.singleTap)
-    var enableSendButton = preferenceRepository.getBooleanState(AppPreferences.enableSendButton)
     var gridLayout = preferenceRepository.getBooleanState(AppPreferences.gridLayout)
-    var useTextShareCopyButtons =
-        preferenceRepository.getBooleanState(AppPreferences.useTextShareCopyButtons)
     var dontShowFilteredItem =
         preferenceRepository.getBooleanState(AppPreferences.dontShowFilteredItem)
     var previewUrl = preferenceRepository.getBooleanState(AppPreferences.previewUrl)

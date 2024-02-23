@@ -48,10 +48,8 @@ class MainViewModel(
     val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
     val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)
-    val showNewBottomSheetBanner = preferenceRepository.getBooleanState(AppPreferences.showNewBottomSheetBanner)
     val donateCardDismissed = preferenceRepository.getBooleanState(AppPreferences.donateCardDismissed)
     var theme = preferenceRepository.getState(AppPreferences.theme)
-    val devModeEnabled = preferenceRepository.getBooleanState(AppPreferences.devModeEnabled)
     val devBottomSheetExperimentCard = preferenceRepository.getBooleanState(AppPreferences.devBottomSheetExperimentCard)
 
     private val roleManager by lazy {

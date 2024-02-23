@@ -58,7 +58,7 @@ class AppPreferenceRepository(val context: Context) : PreferenceRepository(conte
         }
     }
 
-    fun dumpPreferences(excludePreferences: List<BasePreference<*, *>>): Map<String, String?> {
+    fun dumpPreferences(excludePreferences: Iterable<BasePreference<*, *>>): Map<String, String?> {
         return AppPreferences.all.toMutableMap().apply {
             excludePreferences.forEach { remove(it.key) }
         }.map { (_, pkg) -> pkg }.associate { preference ->

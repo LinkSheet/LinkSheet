@@ -54,6 +54,8 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
 
     override fun onCreate() {
         super<Application>.onCreate()
+        AppPreferences.checkDeprecated()
+
         GlobalGsonContext.configure {
             ExtendedTypeAdapter.Default.register(this)
             registerTypeAdapter(LogEntry::class.java, LogEntryDeserializer)

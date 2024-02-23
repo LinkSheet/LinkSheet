@@ -12,11 +12,10 @@ import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
+import kotlin.system.exitProcess
 
 object AppPreferences : Preferences() {
-    val enableCopyButton = booleanPreference("enable_copy_button")
     val hideAfterCopying = booleanPreference("hide_after_copying")
-    val singleTap = booleanPreference("single_tap")
     val usageStatsSorting = booleanPreference("usage_stats_sorting")
 
     val browserMode = mappedPreference(
@@ -43,7 +42,6 @@ object AppPreferences : Preferences() {
         InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
         InAppBrowserHandler.InAppBrowserMode
     )
-    val enableSendButton = booleanPreference("enable_send_button")
     val alwaysShowPackageName = booleanPreference("always_show_package_name")
     val urlCopiedToast = booleanPreference("url_copied_toast", true)
     val downloadStartedToast = booleanPreference("download_started_toast", true)
@@ -101,7 +99,6 @@ object AppPreferences : Preferences() {
 
     val firstRun = booleanPreference("first_run", true)
     val showDiscordBanner = booleanPreference("show_discord_banner", true)
-    val showNewBottomSheetBanner = booleanPreference("show_new_bottom_sheet_banner")
 
     val devBottomSheetExperimentCard = booleanPreference("show_dev_bottom_sheet_experiment_card", true)
 
@@ -113,24 +110,35 @@ object AppPreferences : Preferences() {
     val hideBottomSheetChoiceButtons = booleanPreference("hide_bottom_sheet_choice_buttons")
 
 
-    val sensitivePreferences = listOf(
+    val sensitivePreferences = setOf(
         useTimeMs, logKey,
     )
 
-    private val sensitivePackagePreferences = listOf(
+    private val sensitivePackagePreferences = setOf(
         selectedBrowser, selectedInAppBrowser
     )
 
-    fun logPackages(
-        redact: Boolean,
-        logger: Logger,
-        repository: AppPreferenceRepository
-    ): Map<String, String?> = sensitivePackagePreferences.associate {
-        val value = repository.getString(it)
-        it.key to if (value != null) {
-            logger.dumpParameterToString(redact, value, PackageProcessor)
-        } else "<null>"
+    private val deprecatedPreferenceKeys = setOf(
+        "enable_copy_button",
+        "single_tap",
+        "enable_send_button",
+        "show_new_bottom_sheet_banner"
+    )
+
+    fun checkDeprecated() {
+        val inUse = deprecatedPreferenceKeys.filter { it in all.keys }
+        if (inUse.isNotEmpty()) {
+            throw Exception("Deprecated key(s) ${inUse.joinToString(", ") { "'$it'" }} must not be re-used!")
+        }
     }
+
+    fun logPackages(redact: Boolean, logger: Logger, repository: AppPreferenceRepository): Map<String, String?> =
+        sensitivePackagePreferences.associate {
+            val value = repository.getString(it)
+            it.key to if (value != null) {
+                logger.dumpParameterToString(redact, value, PackageProcessor)
+            } else "<null>"
+        }
 
     fun toJsonArray(preferenceToDumpedValue: Map<String, String?>): JsonArray {
         return jsonArray {

@@ -91,7 +91,7 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     constructor(clazz: KClass<*>) : this(clazz.simpleName!!)
 
     override fun print(type: Type, msg: String, subPrefix: String?) {
-        println("${type.code} ${mergeSubPrefix(msg, subPrefix)}: $msg")
+        print(type, "${mergeSubPrefix(msg, subPrefix)}: $msg")
     }
 
     override fun <T> verbose(

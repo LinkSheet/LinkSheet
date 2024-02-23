@@ -291,6 +291,7 @@ dependencies {
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)
     testImplementation(Testing.junit4)
+    testImplementation(kotlin("test"))
 
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.espresso.core)

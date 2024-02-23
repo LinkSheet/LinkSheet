@@ -113,8 +113,8 @@ fun PreferredBrowserSettingsRoute(
                 key = { it.flatComponentName },
                 contentType = { it.flatComponentName }
             ) { app ->
-                val selected = browserMode!!.matches(BrowserHandler.BrowserMode.SelectedBrowser)
-                        && selectedBrowser!!.matches(app.packageName)
+                val selected = (browserMode!!)() == BrowserHandler.BrowserMode.SelectedBrowser
+                        && (selectedBrowser!!)() == app.packageName
 
                 RadioButtonRow(
                     selected = selected,

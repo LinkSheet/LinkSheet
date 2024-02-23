@@ -1,4 +1,4 @@
-package fe.linksheet.activity.onboarding._new
+package fe.linksheet.activity.onboarding
 
 import android.app.role.RoleManager
 import android.content.Intent

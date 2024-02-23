@@ -15,12 +15,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.activity.onboarding._new.NewOnboardingActivity
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
-import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -68,7 +65,7 @@ fun DevSettingsRoute(
                         )
                     },
                     onClick = {
-                        context.startActivity(Intent(context, NewOnboardingActivity::class.java))
+                        context.startActivity(Intent(context, OnboardingActivity::class.java))
                     }
                 )
             }

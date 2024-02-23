@@ -1,4 +1,4 @@
-package fe.linksheet.activity.onboarding._new
+package fe.linksheet.activity.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

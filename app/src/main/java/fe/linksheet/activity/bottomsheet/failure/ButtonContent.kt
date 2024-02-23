@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev.failure
+package fe.linksheet.activity.bottomsheet.failure
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Spacer

@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev.failure
+package fe.linksheet.activity.bottomsheet.failure
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -15,7 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.DevBottomSheet
+import fe.linksheet.activity.bottomsheet.BottomSheetActivity.Companion.buttonPadding
+import fe.linksheet.activity.bottomsheet.BottomSheetActivity.Companion.buttonRowHeight
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.ui.HkGroteskFontFamily
 
@@ -64,8 +65,8 @@ fun FailureSheetColumn(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = DevBottomSheet.buttonRowHeight)
-                .padding(DevBottomSheet.buttonPadding)
+                .heightIn(min = buttonRowHeight)
+                .padding(buttonPadding)
         ) {
             TextOrElevatedButton(
                 isTextBasedButton = useTextShareCopyButtons,

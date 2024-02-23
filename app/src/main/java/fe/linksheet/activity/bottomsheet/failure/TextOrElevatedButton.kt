@@ -1,29 +1,27 @@
-package fe.linksheet.activity.bottomsheet.dev.failure
+package fe.linksheet.activity.bottomsheet.failure
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
+import androidx.annotation.StringRes
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import fe.linksheet.R
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
-private fun CopyButton(
+fun TextOrElevatedButton(
     modifier: Modifier = Modifier,
     isTextBasedButton: Boolean,
+    imageVector: ImageVector,
+    @StringRes text: Int,
     onClick: () -> Unit
 ) {
     if (!isTextBasedButton) {
         ElevatedButton(modifier = modifier, onClick = onClick) {
-            ButtonContent(imageVector = Icons.Default.ContentCopy, text = R.string.copy_url)
+            ButtonContent(imageVector = imageVector, text = text)
         }
     } else {
         TextButton(modifier = modifier, onClick = onClick) {
-            ButtonContent(imageVector = Icons.Default.ContentCopy, text = R.string.copy_url)
+            ButtonContent(imageVector = imageVector, text = text)
         }
     }
 }
-
-
-

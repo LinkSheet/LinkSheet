@@ -1,6 +1,11 @@
 package fe.linksheet.activity.bottomsheet
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
+import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -21,18 +26,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
+import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
-import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.dev.button.ChoiceButtons
-import fe.linksheet.activity.bottomsheet.dev.UrlBar
-import fe.linksheet.activity.bottomsheet.dev.failure.FailureSheetColumn
-import fe.linksheet.activity.bottomsheet.dev.column.GridBrowserButton
-import fe.linksheet.activity.bottomsheet.dev.column.ListBrowserColumn
-import fe.linksheet.activity.bottomsheet.dev.column.PreferredAppColumn
+import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
+import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
+import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
+import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
+import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
-import fe.linksheet.extension.android.setText
-import fe.linksheet.extension.android.shareUri
+import fe.linksheet.extension.android.*
 import fe.linksheet.extension.compose.currentActivity
+import fe.linksheet.extension.compose.setContentWithKoin
+import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.KnownBrowser
@@ -44,25 +49,73 @@ import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.selfIntent
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
 
-class DevBottomSheet(
-    activity: BottomSheetActivity,
-    viewModel: BottomSheetViewModel
-) : BottomSheet(activity, viewModel, initPadding = true) {
+class BottomSheetActivity : ComponentActivity(), KoinComponent {
+    private val viewModel by viewModel<BottomSheetViewModel>()
 
-    @Composable
-    override fun ShowSheet(bottomSheetViewModel: BottomSheetViewModel) {
-        AppTheme {
-            BottomSheet(bottomSheetViewModel)
+    companion object {
+        val preferredAppItemHeight = 60.dp
+        val buttonPadding = 15.dp
+        val buttonRowHeight = 50.dp
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//        Log.d("CrossProfile", "test")
+//        if (AndroidVersion.AT_LEAST_API_28_P) {
+//            val crossProfileApps = getSystemService<CrossProfileApps>()!!
+//            Log.d("CrossProfile", "$crossProfileApps ${crossProfileApps.targetUserProfiles.size}")
+//
+//            val targetUserProfile = crossProfileApps.targetUserProfiles.firstOrNull()
+//            if (targetUserProfile != null) {
+//                Log.d("CrossProfile", "$targetUserProfile")
+//
+//                val comp = ComponentName(componentName.packageName, MainActivity::class.java.name)
+//
+////                crossProfileApps.startMainActivity(comp, targetUserProfile)
+////                crossProfileApps.startActivity(comp, targetUserProfile, null)
+//
+////                crossProfileApps.canInteractAcrossProfiles()
+////                if (AndroidVersion.AT_LEAST_API_30_R) {
+////                    startActivity(crossProfileApps.createRequestInteractAcrossProfilesIntent())
+////                }
+//            }
+//        }
+
+        initPadding()
+
+        val deferred = resolveAsync(viewModel)
+        if (viewModel.showLoadingBottomSheet()) {
+            setContentWithKoin {
+                LaunchedEffect(viewModel.resolveResult) {
+                    (viewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.let {
+                        showResolveToasts(it)
+                    }
+                }
+
+                AppTheme {
+                    BottomSheet(viewModel)
+                }
+            }
+        } else {
+            deferred.invokeOnCompletion {
+                setContentWithKoin {
+                    AppTheme {
+                        BottomSheet(viewModel)
+                    }
+                }
+            }
         }
     }
 
-    companion object {
-        val buttonPadding = 15.dp
-        val buttonRowHeight = 50.dp
-        val preferredAppItemHeight = 60.dp
-    }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -413,5 +466,68 @@ class DevBottomSheet(
     private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {
         if (!viewModel.enableRequestPrivateBrowsingButton() || !hasUri) return null
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
+    }
+
+    private fun resolveAsync(viewModel: BottomSheetViewModel): Deferred<Unit> {
+        return lifecycleScope.async {
+            val completed = viewModel.resolveAsync(intent, referrer).await()
+
+            if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
+                showResolveToasts(completed, uiThread = true)
+
+                if (viewModel.openingWithAppToast.value) {
+                    showToast(getString(R.string.opening_with_app, completed.app.label), uiThread = true)
+                }
+
+                launchApp(
+                    completed,
+                    completed.app,
+                    always = completed.isRegularPreferredApp,
+                    persist = false,
+                )
+            }
+        }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun launchApp(
+        result: BottomSheetResult.SuccessResult,
+        info: DisplayActivityInfo,
+        always: Boolean = false,
+        privateBrowsingBrowser: KnownBrowser? = null,
+        persist: Boolean = true,
+    ) {
+        val deferred = viewModel.launchAppAsync(
+            info, result.intent, always, privateBrowsingBrowser,
+            persist,
+        )
+
+        deferred.invokeOnCompletion {
+            val showAsReferrer = viewModel.showAsReferrer.value
+            val intent = deferred.getCompleted()
+
+            intent.putExtra(
+                LinkSheetConnector.EXTRA_REFERRER,
+                if (showAsReferrer) Uri.parse("android-app://${packageName}") else referrer,
+            )
+
+            if (!showAsReferrer) {
+                intent.putExtra(Intent.EXTRA_REFERRER, referrer)
+            }
+
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun showResolveToasts(result: BottomSheetResult.BottomSheetSuccessResult, uiThread: Boolean = false) {
+        viewModel.getResolveToastTexts(result.resolveModuleStatus).forEach {
+            showToast(it, uiThread = uiThread)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
     }
 }

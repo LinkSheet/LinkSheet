@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev
+package fe.linksheet.activity.bottomsheet
 
 import android.content.ClipboardManager
 import android.net.Uri

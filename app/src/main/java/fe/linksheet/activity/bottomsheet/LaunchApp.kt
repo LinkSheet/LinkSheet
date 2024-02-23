@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.dev
+package fe.linksheet.activity.bottomsheet
 
 import fe.linksheet.resolver.DisplayActivityInfo
 

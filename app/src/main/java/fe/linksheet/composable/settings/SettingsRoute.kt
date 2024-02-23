@@ -166,7 +166,7 @@ fun SettingsRoute(
                 )
             }
 
-            if (viewModel.devModeEnabled.value) {
+            if (viewModel.devModeEnabled()) {
                 item(key = "dev") {
                     SettingsItemRow(
                         navController = navController,

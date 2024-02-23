@@ -68,7 +68,7 @@ fun AppsSettingsRoute(
                 }
 
 
-                if (featureFlagViewModel.featureFlagLinkSheetCompat.value) {
+                if (featureFlagViewModel.featureFlagLinkSheetCompat()) {
                     item(key = pretendToBeAppRoute) {
                         SettingsItemRow(
                             navController = navController,

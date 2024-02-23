@@ -27,7 +27,6 @@ fun SliderRow(
     valueRangeStep: Float = 1f,
     valueFormatter: (Float) -> String = { it.toString() },
     state: RepositoryState<Number, Number, Preference<Number>>,
-    viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle)
@@ -38,9 +37,7 @@ fun SliderRow(
         value = value,
         valueRange = valueRange,
         valueRangeStep = valueRangeStep,
-        onValueChange = {
-            viewModel.updateState(state, it)
-        },
+        onValueChange = { state(it) },
         valueFormatter = valueFormatter,
         headline = headline,
         subtitle = subtitle,
@@ -56,7 +53,6 @@ fun SliderRow(
     valueRangeStep: Float = 1f,
     valueFormatter: (Float) -> String = { it.toString() },
     state: RepositoryState<Number, Number, Preference<Number>>,
-    viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int
 ) {
@@ -65,9 +61,7 @@ fun SliderRow(
         value = value,
         valueRange = valueRange,
         valueRangeStep = valueRangeStep,
-        onValueChange = {
-            viewModel.updateState(state, it)
-        },
+        onValueChange = { state(it) },
         valueFormatter = valueFormatter,
         headlineId = headlineId,
         subtitleId = subtitleId

@@ -35,7 +35,6 @@ fun NotificationSettingsRoute(
             item(key = "url_copied") {
                 SwitchRow(
                     state = viewModel.urlCopiedToast,
-                    viewModel = viewModel,
                     headlineId = R.string.url_copied_toast,
                     subtitleId = R.string.url_copied_toast_explainer
                 )
@@ -44,7 +43,6 @@ fun NotificationSettingsRoute(
             item(key = "download_started") {
                 SwitchRow(
                     state = viewModel.downloadStartedToast,
-                    viewModel = viewModel,
                     headlineId = R.string.download_started_toast,
                     subtitleId = R.string.download_started_toast_explainer
                 )
@@ -53,7 +51,6 @@ fun NotificationSettingsRoute(
             item(key = "opening_with_app") {
                 SwitchRow(
                     state = viewModel.openingWithAppToast,
-                    viewModel = viewModel,
                     headlineId = R.string.opening_with_app_toast,
                     subtitleId = R.string.opening_with_app_toast_explainer
                 )
@@ -63,7 +60,6 @@ fun NotificationSettingsRoute(
             item(key = "resolve_via") {
                 SwitchRow(
                     state = viewModel.resolveViaToast,
-                    viewModel = viewModel,
                     headlineId = R.string.resolve_via_toast,
                     subtitleId = R.string.resolve_via_toast_explainer
                 )
@@ -72,7 +68,6 @@ fun NotificationSettingsRoute(
             item(key = "resolve_via_failed") {
                 SwitchRow(
                     state = viewModel.resolveViaFailedToast,
-                    viewModel = viewModel,
                     headlineId = R.string.resolve_via_failed_toast,
                     subtitleId = R.string.resolve_via_failed_toast_explainer
                 )

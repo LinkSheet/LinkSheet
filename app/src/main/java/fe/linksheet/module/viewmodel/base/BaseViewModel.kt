@@ -34,9 +34,4 @@ abstract class BaseViewModel(
 //
 //        return onBack
 //    }
-
-    @Deprecated(message = "Use state.invoke(newState) instead", replaceWith = ReplaceWith("state(newState)"))
-    fun <T : Any, NT, P : BasePreference<T, NT>> updateState(state: RepositoryState<T, NT, P>, newState: NT) {
-        state.updateState(newState)
-    }
 }

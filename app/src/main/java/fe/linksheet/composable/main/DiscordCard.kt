@@ -73,9 +73,7 @@ fun DiscordCard(
                 .padding(vertical = 5.dp, horizontal = 10.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            TextButton(onClick = {
-                viewModel.updateState(viewModel.showDiscordBanner, false)
-            }) {
+            TextButton(onClick = { viewModel.showDiscordBanner(false) }) {
                 Text(text = stringResource(id = R.string.dismiss))
             }
 

@@ -20,7 +20,6 @@ fun SwitchRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
-    viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle)
@@ -28,8 +27,8 @@ fun SwitchRow(
     SwitchRow(
         modifier = modifier,
         enabled = enabled,
-        checked = state.value,
-        onChange = { viewModel.updateState(state, it) },
+        checked = state(),
+        onChange = { state(it) },
         headline = headline,
         subtitle = subtitle,
         subtitleBuilder = subtitleBuilder
@@ -41,15 +40,14 @@ fun SwitchRow(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
-    viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int
 ) {
     SwitchRow(
         modifier = modifier,
         enabled = enabled,
-        checked = state.value,
-        onChange = { viewModel.updateState(state, it) },
+        checked = state(),
+        onChange = { state(it) },
         headlineId = headlineId,
         subtitleId = subtitleId
     )

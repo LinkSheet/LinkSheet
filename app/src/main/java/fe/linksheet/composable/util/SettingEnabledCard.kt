@@ -69,7 +69,6 @@ fun SettingEnabledCardColumn(
     SettingEnabledCardColumnCommon(contentTitle = contentTitle) {
         SwitchRow(
             state = state,
-            viewModel = viewModel,
             headline = headline,
             subtitle = subtitle,
             subtitleBuilder = subtitleBuilder,

@@ -227,8 +227,8 @@ fun AboutSettingsRoute(
                     headline = stringResource(id = R.string.version),
                     subtitle = builtAt,
                     onClick = {
-                        if (devClicks == 7 && !viewModel.devModeEnabled.value) {
-                            viewModel.devModeEnabled.updateState(true)
+                        if (devClicks == 7 && !viewModel.devModeEnabled()) {
+                            viewModel.devModeEnabled(true)
                             activity.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
                         }
 

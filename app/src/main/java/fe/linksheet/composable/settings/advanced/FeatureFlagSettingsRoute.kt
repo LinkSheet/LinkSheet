@@ -68,7 +68,6 @@ fun FeatureFlagSettingsRoute(
             item(key = "enable_linksheet_compat_menu") {
                 SwitchRow(
                     state = viewModel.featureFlagLinkSheetCompat,
-                    viewModel = viewModel,
                     headlineId = R.string.enable_linksheet_compat,
                     subtitleId = R.string.enable_linksheet_compat_explainer
                 )

@@ -78,13 +78,9 @@ fun PreferredAppSettingsRoute(
         }
     )
 
-    val appsDialog = appsDialog(
-        appsExceptPreferred = appsExceptPreferred.value,
-        alwaysShowPackageName = viewModel.alwaysShowPackageName.value,
-        onClose = { closeState ->
+    val appsDialog = appsDialog(appsExceptPreferred = appsExceptPreferred.value, alwaysShowPackageName = viewModel.alwaysShowPackageName(), onClose = { closeState ->
             hostDialog.open(HostDialogState(closeState!!.displayActivityInfo))
-        }
-    )
+        })
 
     SettingsScaffold(
         R.string.preferred_apps,
@@ -140,7 +136,7 @@ fun PreferredAppSettingsRoute(
                                 color = MaterialTheme.colorScheme.onSurface
                             )
 
-                            if (viewModel.alwaysShowPackageName.value) {
+                            if (viewModel.alwaysShowPackageName()) {
                                 Text(
                                     text = app.packageName,
                                     fontSize = 12.sp,

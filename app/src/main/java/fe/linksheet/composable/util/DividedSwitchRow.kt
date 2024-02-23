@@ -16,15 +16,13 @@ import fe.linksheet.ui.HkGroteskFontFamily
 @Composable
 fun DividedSwitchRow(
     state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
-    viewModel: BaseViewModel,
     @StringRes headline: Int,
     @StringRes subtitle: Int,
-    onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
+    onChange: (Boolean) -> Unit = { state(it) },
     onClick: () -> Unit,
 ) {
     DividedSwitchRow(
         state = state,
-        viewModel = viewModel,
         headline = stringResource(id = headline),
         subtitle = stringResource(id = subtitle),
         onChange = onChange,
@@ -35,12 +33,11 @@ fun DividedSwitchRow(
 @Composable
 fun DividedSwitchRow(
     state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
-    viewModel: BaseViewModel,
     enabled: Boolean = true,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable ((Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle),
-    onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
+    onChange: (Boolean) -> Unit = { state(it) },
     onClick: () -> Unit,
 ) {
     DividedRow(
@@ -61,11 +58,10 @@ fun DividedSwitchRow(
 @Composable
 fun DividedSwitchRow(
     state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
-    viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle = subtitle),
-    onChange: (Boolean) -> Unit = { viewModel.updateState(state, it) },
+    onChange: (Boolean) -> Unit = { state(it) },
     onClick: () -> Unit,
 ) {
     DividedRow(

@@ -34,7 +34,6 @@ fun GeneralSettingsRoute(
             item(key = "always_show_package_name") {
                 SwitchRow(
                     state = viewModel.alwaysShowPackageName,
-                    viewModel = viewModel,
                     headline = stringResource(id = R.string.always_show_package_name),
                     subtitle = stringResource(id = R.string.always_show_package_name_explainer)
                 )

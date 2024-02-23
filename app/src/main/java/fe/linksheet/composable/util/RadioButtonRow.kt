@@ -28,11 +28,11 @@ fun <T : Any, M : Any> RadioButtonRow(
         modifier = modifier,
         enabled = enabled,
         onClick = {
-            viewModel.updateState(state, value)
+            state(value)
             clickHook?.invoke()
         },
         onLongClick = null,
-        selected = state.matches(value),
+        selected = state() == value,
         content = content
     )
 }

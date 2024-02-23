@@ -80,7 +80,6 @@ fun BottomSheetSettingsRoute(
             item(key = "enable_request_private_browsing") {
                 SwitchRow(
                     state = viewModel.enableRequestPrivateBrowsingButton,
-                    viewModel = viewModel,
                     headline = stringResource(id = R.string.enable_request_private_browsing_button),
                     subtitle = stringResource(
                         id = R.string.enable_request_private_browsing_button_explainer,
@@ -94,7 +93,6 @@ fun BottomSheetSettingsRoute(
             item(key = "dont_show_filtered_item") {
                 SwitchRow(
                     state = viewModel.dontShowFilteredItem,
-                    viewModel = viewModel,
                     headlineId = R.string.dont_show_filtered_item,
                     subtitleId = R.string.dont_show_filtered_item_explainer
                 )
@@ -103,7 +101,6 @@ fun BottomSheetSettingsRoute(
             item(key = "hide_choice_buttons") {
                 SwitchRow(
                     state = viewModel.hideBottomSheetChoiceButtons,
-                    viewModel = viewModel,
                     headlineId = R.string.hide_bottom_sheet_choice_buttons,
                     subtitleId = R.string.hide_bottom_sheet_choice_buttons_explainer
                 )
@@ -118,7 +115,6 @@ fun BottomSheetSettingsRoute(
             item(key = "preview_url") {
                 SwitchRow(
                     state = viewModel.previewUrl,
-                    viewModel = viewModel,
                     headlineId = R.string.preview_url,
                     subtitleId = R.string.preview_url_explainer
                 )
@@ -128,7 +124,6 @@ fun BottomSheetSettingsRoute(
                 item(key = "hide_after_copying") {
                     SwitchRow(
                         state = viewModel.hideAfterCopying,
-                        viewModel = viewModel,
                         headlineId = R.string.hide_after_copying,
                         subtitleId = R.string.hide_after_copying_explainer
                     )
@@ -137,7 +132,6 @@ fun BottomSheetSettingsRoute(
                 item(key = "enable_ignore_libredirect") {
                     SwitchRow(
                         state = viewModel.enableIgnoreLibRedirectButton,
-                        viewModel = viewModel,
                         headlineId = R.string.enable_ignore_libredirect_button,
                         subtitleId = R.string.enable_ignore_libredirect_button_explainer
                     )

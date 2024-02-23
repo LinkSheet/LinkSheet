@@ -159,7 +159,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
             }
 
             if (showOtherBanners) {
-                val discord = viewModel.showDiscordBanner.value
+                val discord = viewModel.showDiscordBanner()
 
                 if (discord) {
                     header(header = R.string.other)

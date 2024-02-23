@@ -103,13 +103,11 @@ class PreferredBrowserViewModel(
         }
     }
 
-    fun updateSelectedBrowser(
-        selectedBrowserPackage: String,
-    ) = launchIO {
+    fun updateSelectedBrowser(selectedBrowserPackage: String) = launchIO {
         val state = browserModeState.first()
         val selected = selectedBrowserState.first()
 
-        updateState(state, BrowserHandler.BrowserMode.SelectedBrowser)
-        updateState(selected, selectedBrowserPackage)
+        state(BrowserHandler.BrowserMode.SelectedBrowser)
+        selected(selectedBrowserPackage)
     }
 }

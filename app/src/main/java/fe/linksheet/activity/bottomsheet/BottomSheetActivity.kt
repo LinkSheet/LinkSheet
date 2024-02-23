@@ -475,7 +475,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
             if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
                 showResolveToasts(completed, uiThread = true)
 
-                if (viewModel.openingWithAppToast.value) {
+                if (viewModel.openingWithAppToast()) {
                     showToast(getString(R.string.opening_with_app, completed.app.label), uiThread = true)
                 }
 
@@ -503,7 +503,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
         )
 
         deferred.invokeOnCompletion {
-            val showAsReferrer = viewModel.showAsReferrer.value
+            val showAsReferrer = viewModel.showAsReferrer()
             val intent = deferred.getCompleted()
 
             intent.putExtra(

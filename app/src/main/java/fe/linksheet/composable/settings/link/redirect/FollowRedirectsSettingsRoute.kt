@@ -37,10 +37,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FollowRedirectsSettingsRoute(
-    onBackPressed: () -> Unit,
-    viewModel: FollowRedirectsSettingsViewModel = koinViewModel()
-) {
+fun FollowRedirectsSettingsRoute(onBackPressed: () -> Unit, viewModel: FollowRedirectsSettingsViewModel = koinViewModel()) {
     val followRedirectsKnownTrackers = dialogHelper<Unit, List<String>, Unit>(
         fetch = { FastForwardRules.rules["tracker"]?.map { it.toString() } ?: emptyList() },
         awaitFetchBeforeOpen = true,
@@ -72,8 +69,7 @@ fun FollowRedirectsSettingsRoute(
             item(key = "follow_redirects_local_cache") {
                 SwitchRow(
                     state = viewModel.followRedirectsLocalCache,
-                    viewModel = viewModel,
-                    enabled = viewModel.followRedirects.value,
+                    enabled = viewModel.followRedirects(),
                     headlineId = R.string.follow_redirects_local_cache,
                     subtitleId = R.string.follow_redirects_local_cache_explainer
                 )
@@ -82,8 +78,7 @@ fun FollowRedirectsSettingsRoute(
             item(key = "follow_redirects_builtin_cache") {
                 SwitchRow(
                     state = viewModel.followRedirectsBuiltInCache,
-                    viewModel = viewModel,
-                    enabled = viewModel.followRedirects.value,
+                    enabled = viewModel.followRedirects(),
                     headlineId = R.string.follow_redirects_builtin_cache,
                     subtitleId = R.string.follow_redirects_builtin_cache_explainer
                 )
@@ -92,8 +87,7 @@ fun FollowRedirectsSettingsRoute(
             item(key = "follow_only_known_trackers") {
                 DividedSwitchRow(
                     state = viewModel.followOnlyKnownTrackers,
-                    viewModel = viewModel,
-                    enabled = viewModel.followRedirects.value && !viewModel.followRedirectsExternalService.value,
+                    enabled = viewModel.followRedirects() && !viewModel.followRedirectsExternalService(),
                     headline = stringResource(id = R.string.follow_only_known_trackers),
                     subtitleBuilder = { enabled ->
                         LinkableTextView(
@@ -125,7 +119,6 @@ fun FollowRedirectsSettingsRoute(
             item(key = "follow_redirects_allow_darknets") {
                 SwitchRow(
                     state = viewModel.followRedirectsAllowsDarknets,
-                    viewModel = viewModel,
                     enabled = viewModel.followRedirects(),
                     headline = stringResource(id = R.string.allow_darknets),
                     subtitle = stringResource(
@@ -138,8 +131,7 @@ fun FollowRedirectsSettingsRoute(
             item(key = "follow_redirects_external_service") {
                 SwitchRow(
                     state = viewModel.followRedirectsExternalService,
-                    viewModel = viewModel,
-                    enabled = viewModel.followRedirects.value && LinkSheetAppConfig.isPro(),
+                    enabled = viewModel.followRedirects() && LinkSheetAppConfig.isPro(),
                     headline = stringResource(id = R.string.follow_redirects_external_service),
                     subtitleBuilder = { enabled ->
                         LinkableTextView(
@@ -161,11 +153,9 @@ fun FollowRedirectsSettingsRoute(
 
             item(key = "follow_redirects_timeout") {
                 SliderRow(
-                    value = viewModel.followRedirectsTimeout.value.toFloat(),
-                    onValueChange = {
-                        viewModel.updateState(viewModel.followRedirectsTimeout, it.toInt())
-                    },
-                    enabled = viewModel.followRedirects.value,
+                    value = viewModel.followRedirectsTimeout().toFloat(),
+                    onValueChange = { viewModel.followRedirectsTimeout(it.toInt()) },
+                    enabled = viewModel.followRedirects(),
                     valueRange = 0f..30f,
                     valueFormatter = { it.toInt().toString() },
                     headlineId = R.string.request_timeout,

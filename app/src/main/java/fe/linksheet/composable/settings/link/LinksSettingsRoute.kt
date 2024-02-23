@@ -57,7 +57,7 @@ class Operation(
     @StringRes val id: Int,
     vararg val values: RepositoryState<Boolean, Boolean, Preference<Boolean>>
 ) {
-    fun isEnabled() = values.all { it.value }
+    fun isEnabled() = values.all { it() }
 }
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalFoundationApi::class)
@@ -131,7 +131,6 @@ fun LinksSettingsRoute(
             item(key = "clear_urls") {
                 SwitchRow(
                     state = viewModel.useClearUrls,
-                    viewModel = viewModel,
                     headline = stringResource(id = R.string.use_clear_urls),
                     subtitleBuilder = {
                         LinkableTextView(
@@ -148,7 +147,6 @@ fun LinksSettingsRoute(
             item(key = "fastforward_rules") {
                 SwitchRow(
                     state = viewModel.useFastForwardRules,
-                    viewModel = viewModel,
                     headline = stringResource(id = R.string.fastfoward_rules),
                     subtitleBuilder = {
                         LinkableTextView(
@@ -165,7 +163,6 @@ fun LinksSettingsRoute(
             item(key = "libredirect") {
                 DividedSwitchRow(
                     state = viewModel.enableLibRedirect,
-                    viewModel = viewModel,
                     headline = stringResource(id = R.string.enable_libredirect),
                     subtitleBuilder = { _ ->
                         LinkableTextView(
@@ -188,7 +185,6 @@ fun LinksSettingsRoute(
             item(key = "follow_redirects") {
                 DividedSwitchRow(
                     state = viewModel.followRedirects,
-                    viewModel = viewModel,
                     headline = R.string.follow_redirects,
                     subtitle = R.string.follow_redirects_explainer,
                     onClick = {
@@ -200,7 +196,6 @@ fun LinksSettingsRoute(
             item(key = "amp2html") {
                 DividedSwitchRow(
                     state = viewModel.enableAmp2Html,
-                    viewModel = viewModel,
                     headline = R.string.enable_amp2html,
                     subtitle = R.string.enable_amp2html_explainer,
                     onClick = {
@@ -212,13 +207,11 @@ fun LinksSettingsRoute(
             item(key = "enable_downloader") {
                 DividedSwitchRow(
                     state = viewModel.enableDownloader,
-                    viewModel = viewModel,
                     headline = R.string.enable_downloader,
                     subtitle = R.string.enable_downloader_explainer,
                     onChange = {
                         requestDownloadPermission(
                             writeExternalStoragePermissionState,
-                            viewModel,
                             viewModel.enableDownloader,
                             it
                         )
@@ -232,7 +225,6 @@ fun LinksSettingsRoute(
             item(key = "resolve_embeds") {
                 SwitchRow(
                     state = viewModel.resolveEmbeds,
-                    viewModel = viewModel,
                     headline = stringResource(id = R.string.resolve_embeds),
                     subtitle = stringResource(id = R.string.resolve_embeds_explainer)
                 )

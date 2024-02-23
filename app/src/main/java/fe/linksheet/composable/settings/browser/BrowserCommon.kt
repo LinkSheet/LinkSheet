@@ -80,9 +80,7 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
                     DividedRow(
                         paddingHorizontal = 0.dp,
                         paddingVertical = 0.dp,
-                        onLeftClick = {
-                            viewModel.updateState(state, selectorData.value)
-                        },
+                        onLeftClick = { state(selectorData.value) },
                         leftContent = {
                             BrowserCommonRadioButtonRow(
                                 value = selectorData.value,

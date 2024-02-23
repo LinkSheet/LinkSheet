@@ -49,11 +49,10 @@ fun DownloaderSettingsRoute(
         ) {
             stickyHeader(key = "enable_downloader") {
                 SettingEnabledCardColumn(
-                    checked = viewModel.enableDownloader.value,
+                    checked = viewModel.enableDownloader(),
                     onChange = {
                       requestDownloadPermission(
                             writeExternalStoragePermissionState,
-                            viewModel,
                             viewModel.enableDownloader,
                             it
                         )
@@ -67,8 +66,7 @@ fun DownloaderSettingsRoute(
             item(key = "downloader_url_mime_type") {
                 SwitchRow(
                     state = viewModel.downloaderCheckUrlMimeType,
-                    viewModel = viewModel,
-                    enabled = viewModel.enableDownloader.value,
+                    enabled = viewModel.enableDownloader(),
                     headlineId = R.string.downloader_url_mime_type,
                     subtitleId = R.string.downloader_url_mime_type_explainer
                 )
@@ -76,11 +74,9 @@ fun DownloaderSettingsRoute(
 
             item(key = "downloader_timeout") {
                 SliderRow(
-                    value = viewModel.requestTimeout.value.toFloat(),
-                    onValueChange = {
-                        viewModel.updateState(viewModel.requestTimeout, it.toInt())
-                    },
-                    enabled = viewModel.enableDownloader.value,
+                    value = viewModel.requestTimeout().toFloat(),
+                    onValueChange = { viewModel.requestTimeout(it.toInt()) },
+                    enabled = viewModel.enableDownloader(),
                     valueRange = 0f..30f,
                     valueFormatter = { it.toInt().toString() },
                     headlineId = R.string.request_timeout,
@@ -100,11 +96,10 @@ fun downloaderPermissionState() = rememberPermissionState(
 @OptIn(ExperimentalPermissionsApi::class)
 fun requestDownloadPermission(
     permissionState: PermissionState,
-    viewModel: BaseViewModel,
     state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
     newState: Boolean
 ) {
     if (!AndroidVersion.AT_LEAST_API_29_Q && !permissionState.status.isGranted) {
         permissionState.launchPermissionRequest()
-    } else viewModel.updateState(state, newState)
+    } else state(newState)
 }

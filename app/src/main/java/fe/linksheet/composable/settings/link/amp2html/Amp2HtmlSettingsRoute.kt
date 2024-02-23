@@ -57,8 +57,7 @@ fun Amp2HtmlSettingsRoute(
             item(key = "enable_amp2html_local_cache") {
                 SwitchRow(
                     state = viewModel.enableAmp2HtmlLocalCache,
-                    viewModel = viewModel,
-                    enabled = viewModel.enableAmp2Html.value,
+                    enabled = viewModel.enableAmp2Html(),
                     headlineId = R.string.amp2html_local_cache,
                     subtitleId = R.string.amp2html_local_cache_explainer
                 )
@@ -67,8 +66,7 @@ fun Amp2HtmlSettingsRoute(
             item(key = "enable_amp2html_builtin_cache") {
                 SwitchRow(
                     state = viewModel.amp2HtmlBuiltInCache,
-                    viewModel = viewModel,
-                    enabled = viewModel.enableAmp2Html.value,
+                    enabled = viewModel.enableAmp2Html(),
                     headlineId = R.string.amp2html_builtin_cache,
                     subtitleId = R.string.amp2html_builtin_cache_explainer
                 )
@@ -77,7 +75,6 @@ fun Amp2HtmlSettingsRoute(
             item(key = "amp2html_allow_darknets") {
                 SwitchRow(
                     state = viewModel.amp2HtmlAllowDarknets,
-                    viewModel = viewModel,
                     enabled = viewModel.enableAmp2Html(),
                     headline = stringResource(id = R.string.allow_darknets),
                     subtitle = stringResource(
@@ -90,8 +87,7 @@ fun Amp2HtmlSettingsRoute(
             item(key = "amp2html_external_service") {
                 SwitchRow(
                     state = viewModel.amp2HtmlExternalService,
-                    viewModel = viewModel,
-                    enabled = viewModel.enableAmp2Html.value && LinkSheetAppConfig.isPro(),
+                    enabled = viewModel.enableAmp2Html() && LinkSheetAppConfig.isPro(),
                     headline = stringResource(id = R.string.amp2html_external_service),
                     subtitleBuilder = { enabled ->
                         LinkableTextView(
@@ -113,11 +109,9 @@ fun Amp2HtmlSettingsRoute(
 
             item(key = "amp2html_timeout") {
                 SliderRow(
-                    value = viewModel.requestTimeout.value.toFloat(),
-                    onValueChange = {
-                        viewModel.updateState(viewModel.requestTimeout, it.toInt())
-                    },
-                    enabled = viewModel.enableAmp2Html.value,
+                    value = viewModel.requestTimeout().toFloat(),
+                    onValueChange = { viewModel.requestTimeout(it.toInt()) },
+                    enabled = viewModel.enableAmp2Html(),
                     valueRange = 0f..30f,
                     valueFormatter = { it.toInt().toString() },
                     headlineId = R.string.request_timeout,

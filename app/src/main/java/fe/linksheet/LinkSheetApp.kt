@@ -112,7 +112,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             )
         }
 
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out
             val analyticsClient = koinApp.koin.get<AnalyticsClient>()
             val preferenceRepository = koinApp.koin.get<AppPreferenceRepository>()

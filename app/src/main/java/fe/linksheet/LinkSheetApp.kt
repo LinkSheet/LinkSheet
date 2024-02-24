@@ -13,12 +13,15 @@ import fe.gson.globalGsonModule
 import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
+import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.analyticsModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.AppLogger
-import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.log.defaultLoggerFactoryModule
+import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.log.entry.LogEntryDeserializer
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
@@ -54,24 +57,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
 
     override fun onCreate() {
         super<Application>.onCreate()
-        AppPreferences.checkDeprecated()
-
-        GlobalGsonContext.configure {
-            ExtendedTypeAdapter.Default.register(this)
-            registerTypeAdapter(LogEntry::class.java, LogEntryDeserializer)
-        }
-
         timer = Timer.startTimer()
-
-        if (AndroidVersion.AT_LEAST_API_28_P) {
-            HiddenApiBypass.addHiddenApiExemptions("")
-        }
-
-        shizukuHandler = ShizukuHandler(this)
-
-        appLogger = AppLogger.createInstance(this)
-        appLogger.deleteOldLogs()
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -84,9 +70,26 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             exitProcess(2)
         }
 
+        AppPreferences.checkDeprecated()
+
+        GlobalGsonContext.configure {
+            ExtendedTypeAdapter.Default.register(this)
+            registerTypeAdapter(LogEntry::class.java, LogEntryDeserializer)
+        }
+
+        if (AndroidVersion.AT_LEAST_API_28_P) {
+            HiddenApiBypass.addHiddenApiExemptions("")
+        }
+
+        shizukuHandler = ShizukuHandler(this)
+
+        appLogger = AppLogger.createInstance(this)
+        appLogger.deleteOldLogs()
+
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         DynamicColors.applyToActivitiesIfAvailable(this)
 
-        startKoin {
+        val koinApp = startKoin {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             modules(
@@ -104,9 +107,25 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
                 repositoryModule,
                 viewModelModule,
                 requestModule,
-                downloaderModule
+                downloaderModule,
+                analyticsModule
             )
         }
+
+        if (!BuildConfig.DEBUG) {
+            // TODO: Remove once user is given the choice to opt in/out
+            val analyticsClient = koinApp.koin.get<AnalyticsClient>()
+            val preferenceRepository = koinApp.koin.get<AppPreferenceRepository>()
+
+            val lastVersion = preferenceRepository.getInt(AppPreferences.lastVersion)
+            analyticsClient.track(createAppStartEvent(lastVersion))
+        }
+    }
+
+    private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent? {
+        return if (lastVersion == -1) AnalyticsEvent.FirstStart
+        else if (BuildConfig.VERSION_CODE > lastVersion) AnalyticsEvent.AppUpdated(lastVersion)
+        else null
     }
 
     fun postShizukuCommand(command: ShizukuCommand) {
@@ -122,6 +141,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             val usedFor = timer.stop()
 
             preferenceRepository.writeLong(AppPreferences.useTimeMs, currentUseTime + usedFor)
+            preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
         }
 
         appLogger.writeLog()

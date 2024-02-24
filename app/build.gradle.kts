@@ -72,6 +72,8 @@ android {
 
         resourceConfigurations.addAll(supportedLocales)
 
+        val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
+
         buildConfigField("String[]", "SUPPORTED_LOCALES", buildString {
             append("{").append(supportedLocales.joinToString(",") { encodeString(it) }).append("}")
         })
@@ -80,6 +82,8 @@ android {
         buildStringConfigField("COMMIT", versionInfo.commit)
         buildStringConfigField("BRANCH", versionInfo.branch)
         buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
+        buildStringConfigField("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
+        buildConfigField("boolean", "ANALYTICS_SUPPORTED", localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED", "true")!!)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -286,6 +290,7 @@ dependencies {
     implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
+    implementation(libs.aptabase.kotlin)
 
 
     testImplementation(Koin.test)

@@ -5,6 +5,7 @@ import com.google.gson.JsonArray
 import fe.android.preference.helper.Preferences
 import fe.gson.dsl.jsonArray
 import fe.gson.dsl.jsonObject
+import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.hasher.PackageProcessor
 import fe.linksheet.module.log.loggerHmac
@@ -12,7 +13,7 @@ import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
-import kotlin.system.exitProcess
+import java.util.UUID
 
 object AppPreferences : Preferences() {
     val hideAfterCopying = booleanPreference("hide_after_copying")
@@ -108,6 +109,13 @@ object AppPreferences : Preferences() {
     val devBottomSheetExperiment = booleanPreference("dev_bottom_sheet_experiment", true)
     val resolveEmbeds = booleanPreference("resolve_embeds")
     val hideBottomSheetChoiceButtons = booleanPreference("hide_bottom_sheet_choice_buttons")
+
+    val telemetryIdentity = stringPreference("telemetry_identity") {
+        UUID.randomUUID().toString()
+    }
+
+    val telemetryLevel = mappedPreference("telemetry_level", TelemetryLevel.Basic, TelemetryLevel)
+    val lastVersion = intPreference("last_version", -1)
 
 
     val sensitivePreferences = setOf(

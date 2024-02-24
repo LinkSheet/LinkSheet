@@ -92,6 +92,7 @@ fun ExportLogDialog(
                     clipboardManager.setText(
                         context.resources.getString(R.string.log),
                         logViewCommon.buildClipboardText(
+                            context,
                             includeFingerprint,
                             includePreferences,
                             redactLog,

@@ -63,6 +63,7 @@ abstract class AnalyticsClient(
             val telemetryIdentity = initialLevel.buildIdentity(context, identity)
             setup(context)
 
+            // TODO: Can events be batched?
             eventSender = coroutineScope.launch(Dispatchers.IO) {
                 while (!eventQueue.isClosedForReceive) {
                     val event = eventQueue.receive()
@@ -83,6 +84,7 @@ abstract class AnalyticsClient(
         init(context, newLevel)
     }
 
+    // TODO: Handle remaining events in channel when app is stopped/destroyed
     fun enqueue(event: AnalyticsEvent?) {
         // Always enqueue, event if not enabled, so events can be sent if user decides to allow analytics
         if (event != null) {

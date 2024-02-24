@@ -282,9 +282,6 @@ dependencies {
     implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
-    implementation(libs.aptabase.kotlin)
-
-
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)
     testImplementation(Testing.junit4)

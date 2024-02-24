@@ -8,8 +8,7 @@
 <!-- ---------- Description ---------- -->
 <div align="">
 
-LinkSheet restores the Url-App-Chooser that was removed in Android 12+ in favor
-of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks).
+LinkSheet restores the app chooser when tapping links which was removed in Android 12 (in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks)).
 
 </div>
 
@@ -17,8 +16,7 @@ of [verified app links](https://developer.android.com/training/app-links/verify-
 <!-- ---------- Badges ---------- -->
 <div align="">
 
-New "official" releases are rarely built, but the app is still rapidly being developed, therefore we recommend using
-the [nightly builds](#nightly-builds).
+⚠️ For the time being, please use the [nightly builds](#nightly-builds).
 
 [![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)

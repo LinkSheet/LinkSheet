@@ -9,7 +9,7 @@ import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.android.getCurrentLocale
 
-object AppInformation {
+object AppInfo {
     val appInfo by lazyJsonObject {
         "full_identifier" += BuildConfig.VERSION_NAME
         "built_at" += BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)

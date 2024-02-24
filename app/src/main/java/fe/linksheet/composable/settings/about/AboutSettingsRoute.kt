@@ -167,9 +167,9 @@ fun AboutSettingsRoute(
                 }
             }
 
-            if (buildType != AppSignature.BuildType.Debug) {
+            if (buildType != AppSignature.SignatureBuildType.Debug) {
                 item("build_type") {
-                    val isUnofficial = buildType == AppSignature.BuildType.Unofficial
+                    val isUnofficial = buildType == AppSignature.SignatureBuildType.Unofficial
 
                     SettingsItemRow(
                         headlineId = R.string.built_by,

@@ -8,7 +8,7 @@ import fe.linksheet.module.log.entry.LogEntry
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.util.AppInformation
+import fe.linksheet.util.AppInfo
 
 
 class LogViewCommon(
@@ -37,12 +37,12 @@ class LogViewCommon(
     ): String {
         val (fingerprint, preferences, redact, throwable) = settings
         return gson.toJson(jsonObject {
-            "device_basics" += AppInformation.getDeviceBasics(context)
+            "device_basics" += AppInfo.getDeviceBasics(context)
             if (fingerprint) {
-                "device_info" += (AppInformation.deviceInfo + AppInformation.androidFingerprint)
+                "device_info" += (AppInfo.deviceInfo + AppInfo.androidFingerprint)
             }
 
-            "app_info" += AppInformation.appInfo
+            "app_info" += AppInfo.appInfo
             if (preferences) {
                 "preferences" += AppPreferences.toJsonArray(logPreferences(redact))
             }

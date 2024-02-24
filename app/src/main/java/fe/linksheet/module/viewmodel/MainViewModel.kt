@@ -10,7 +10,6 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Warning
@@ -27,10 +26,10 @@ import fe.linksheet.R
 import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.FeatureFlagRepository
-import fe.linksheet.module.preference.FeatureFlags
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -43,6 +42,7 @@ class MainViewModel(
     val preferenceRepository: AppPreferenceRepository,
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
+    val analyticsClient: AnalyticsClient
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)

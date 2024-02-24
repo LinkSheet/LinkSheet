@@ -1,13 +1,23 @@
 package fe.linksheet.module.analytics
 
 import android.content.Context
+import androidx.lifecycle.LifecycleCoroutineScope
 import fe.android.preference.helper.compose.getState
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.module.analytics.aptabase.AptabaseAnalyticsClient
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.time.delay
 import org.koin.dsl.module
+import java.time.Duration
 import kotlin.properties.Delegates
 
 val analyticsModule = module {
@@ -18,6 +28,7 @@ val analyticsModule = module {
 
         AptabaseAnalyticsClient(
             BuildConfig.ANALYTICS_SUPPORTED,
+            get(),
             identity,
             level,
             createLogger<AptabaseAnalyticsClient>(),
@@ -28,42 +39,58 @@ val analyticsModule = module {
 
 abstract class AnalyticsClient(
     private val supported: Boolean,
-    private val identity: String,
-    private val level: TelemetryLevel,
+    private val coroutineScope: LifecycleCoroutineScope,
+    protected val identity: String,
+    private val initialLevel: TelemetryLevel,
+    private val timeout: Duration = Duration.ofSeconds(10),
     val logger: Logger
 ) {
-    private lateinit var telemetryIdentity: TelemetryIdentity
+    private lateinit var currentLevel: TelemetryLevel
+    private var eventSender: Job? = null
     private var enabled by Delegates.notNull<Boolean>()
+
+    private val eventQueue = Channel<AnalyticsEvent>(capacity = UNLIMITED)
 
     protected open fun checkImplEnabled() = true
 
-    protected abstract fun setup(context: Context)
+    protected open fun setup(context: Context) {}
 
-    protected abstract fun handle(name: String, properties: Map<String, Any>)
+    protected abstract fun send(name: String, properties: Map<String, Any>): Boolean
 
-    internal fun init(context: Context): AnalyticsClient {
+    @OptIn(DelicateCoroutinesApi::class)
+    internal fun init(context: Context, level: TelemetryLevel = initialLevel): AnalyticsClient {
         val implEnabled = supported && this.checkImplEnabled()
         enabled = implEnabled && level != TelemetryLevel.Disabled
+        currentLevel = level
 
         if (enabled) {
-            telemetryIdentity = level.buildIdentity(context, identity)
+            val telemetryIdentity = initialLevel.buildIdentity(context, identity)
             setup(context)
+
+            eventSender = coroutineScope.launch(Dispatchers.IO) {
+                while (!eventQueue.isClosedForReceive) {
+                    val event = eventQueue.receive()
+                    logger.debug("Sending event ${event.name}..")
+
+                    send(event.name, telemetryIdentity.createEvent(event))
+                    delay(timeout)
+                }
+            }
+        } else {
+            eventSender?.cancel()
         }
 
         return this
     }
 
-    fun track(event: AnalyticsEvent?): Boolean {
-        if (enabled && event != null) {
-            handle(event.name, telemetryIdentity.createEvent(event))
-            return true
-        }
-
-        return false
+    fun updateLevel(context: Context, newLevel: TelemetryLevel) {
+        init(context, newLevel)
     }
 
-    fun updateLevel(newLevel: TelemetryLevel) {
-        enabled = if (newLevel == TelemetryLevel.Disabled) false
-        else supported && this.checkImplEnabled()
+    fun enqueue(event: AnalyticsEvent?) {
+        // Always enqueue, event if not enabled, so events can be sent if user decides to allow analytics
+        if (event != null) {
+            coroutineScope.launch { eventQueue.trySend(event) }
+        }
     }
 }

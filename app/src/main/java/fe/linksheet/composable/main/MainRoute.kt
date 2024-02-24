@@ -118,7 +118,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 }
             }
 
-            if (AppSignature.checkSignature(activity) == AppSignature.BuildType.Unofficial) {
+            if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
                 cardItem {
                     UnofficialBuild()
                 }

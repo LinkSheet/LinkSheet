@@ -19,6 +19,7 @@ import fe.linksheet.module.analytics.analyticsModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
+import fe.linksheet.module.lifecycle.processLifecycleCoroutineModule
 import fe.linksheet.module.log.AppLogger
 import fe.linksheet.module.log.defaultLoggerFactoryModule
 import fe.linksheet.module.log.entry.LogEntry
@@ -93,6 +94,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             modules(
+                processLifecycleCoroutineModule,
                 globalGsonModule,
                 preferenceRepositoryModule,
                 featureFlagRepositoryModule,
@@ -118,9 +120,10 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             val preferenceRepository = koinApp.koin.get<AppPreferenceRepository>()
 
             val lastVersion = preferenceRepository.getInt(AppPreferences.lastVersion)
-            analyticsClient.track(createAppStartEvent(lastVersion))
+            analyticsClient.enqueue(createAppStartEvent(lastVersion))
         }
     }
+
 
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent? {
         return if (lastVersion == -1) AnalyticsEvent.FirstStart

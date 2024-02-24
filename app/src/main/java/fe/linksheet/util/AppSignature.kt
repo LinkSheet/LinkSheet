@@ -9,17 +9,17 @@ import fe.linksheet.officialSigningKeys
 import java.util.Locale
 
 object AppSignature {
-    private lateinit var buildType: BuildType
+    private lateinit var buildType: SignatureBuildType
 
-    enum class BuildType(@StringRes val stringRes: Int) {
+    enum class SignatureBuildType(@StringRes val stringRes: Int) {
         Manual(R.string.manual_build),
         GithubPipeline(R.string.github_pipeline_build),
         Unofficial(R.string.built_by_error),
         Debug(R.string.debug_build)
     }
 
-    fun checkSignature(context: Context): BuildType {
-        if (BuildConfig.DEBUG) return BuildType.Debug
+    fun checkSignature(context: Context): SignatureBuildType {
+        if (BuildConfig.DEBUG) return SignatureBuildType.Debug
         if (this::buildType.isInitialized) return buildType
 
         val signature = context.packageManager.getPackageInfo(
@@ -32,7 +32,7 @@ object AppSignature {
         ).uppercase(
             Locale.getDefault()
         )
-        return officialSigningKeys.getOrDefault(certFingerprint, BuildType.Unofficial).also {
+        return officialSigningKeys.getOrDefault(certFingerprint, SignatureBuildType.Unofficial).also {
             buildType = it
         }
     }

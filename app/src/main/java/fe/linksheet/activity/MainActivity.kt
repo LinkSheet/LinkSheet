@@ -1,6 +1,7 @@
 package fe.linksheet.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -44,6 +45,7 @@ import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
+import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
@@ -72,6 +74,12 @@ class MainActivity : ComponentActivity() {
 
         setContentWithKoin {
             val navController = rememberNavController()
+            if (BuildConfig.DEBUG) {
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    Log.d("Analytics", "Enqueuing nav event to ${destination.route}")
+                    mainViewModel.analyticsClient.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
+                }
+            }
 
             AppHost {
                 NavHost(

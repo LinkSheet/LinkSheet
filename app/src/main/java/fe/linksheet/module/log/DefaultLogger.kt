@@ -104,7 +104,7 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     }
 
     override fun verbose(throwable: Throwable, subPrefix: String?) {
-        print(Type.Verbose, throwable.asString(), subPrefix)
+        print(Type.Verbose, Log.getStackTraceString(throwable), subPrefix)
     }
 
     override fun verbose(msg: String, subPrefix: String?) {
@@ -121,7 +121,7 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     }
 
     override fun info(throwable: Throwable, subPrefix: String?) {
-        print(Type.Info, throwable.asString(), subPrefix)
+        print(Type.Info, Log.getStackTraceString(throwable), subPrefix)
     }
 
     override fun info(msg: String, subPrefix: String?) {
@@ -138,7 +138,7 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     }
 
     override fun debug(throwable: Throwable, subPrefix: String?) {
-        print(Type.Debug, throwable.asString(), subPrefix)
+        print(Type.Debug, Log.getStackTraceString(throwable), subPrefix)
     }
 
     override fun debug(msg: String, subPrefix: String?) {
@@ -155,7 +155,7 @@ class DebugLogger(prefix: String) : Logger(prefix, LogHasher.NoOpHasher) {
     }
 
     override fun error(throwable: Throwable, subPrefix: String?) {
-        print(Type.Error, throwable.asString(), subPrefix)
+        print(Type.Error, Log.getStackTraceString(throwable), subPrefix)
     }
 
     override fun error(msg: String, subPrefix: String?) {
@@ -242,7 +242,7 @@ class DefaultLogger(
     override fun verbose(
         throwable: Throwable,
         subPrefix: String?
-    ) = log(Type.Verbose, throwable.asString(), subPrefix)
+    ) = log(Type.Verbose, Log.getStackTraceString(throwable), subPrefix)
 
     override fun verbose(msg: String, subPrefix: String?) {
         log(Type.Verbose, msg, subPrefix)
@@ -258,7 +258,7 @@ class DefaultLogger(
     override fun info(
         throwable: Throwable,
         subPrefix: String?
-    ) = log(Type.Info, throwable.asString(), subPrefix)
+    ) = log(Type.Info, Log.getStackTraceString(throwable), subPrefix)
 
     override fun info(msg: String, subPrefix: String?) {
         log(Type.Info, msg, subPrefix)
@@ -274,7 +274,7 @@ class DefaultLogger(
     override fun debug(
         throwable: Throwable,
         subPrefix: String?
-    ) = log(Type.Debug, throwable.asString(), subPrefix)
+    ) = log(Type.Debug, Log.getStackTraceString(throwable), subPrefix)
 
     override fun debug(msg: String, subPrefix: String?) {
         log(Type.Debug, msg, subPrefix)
@@ -285,7 +285,7 @@ class DefaultLogger(
     }
 
     override fun error(throwable: Throwable, subPrefix: String?) {
-        log(Type.Error, throwable.asString(), subPrefix)
+        log(Type.Error, Log.getStackTraceString(throwable), subPrefix)
     }
 
     override fun error(msg: String, subPrefix: String?) {

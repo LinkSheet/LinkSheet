@@ -3,7 +3,7 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import fe.linksheet.module.preference.AppPreferenceRepository
 
-import fe.android.preference.helper.compose.getBooleanState
+
 import fe.libredirectkt.LibRedirectInstance
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService

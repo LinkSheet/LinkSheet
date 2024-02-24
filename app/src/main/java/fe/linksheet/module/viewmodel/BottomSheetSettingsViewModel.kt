@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import fe.linksheet.module.preference.AppPreferenceRepository
 
-import fe.android.preference.helper.compose.getBooleanState
+
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.module.viewmodel.base.BaseViewModel

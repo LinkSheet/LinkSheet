@@ -1,5 +1,6 @@
 package fe.linksheet.module.viewmodel
 
+
 import android.app.Activity
 import android.app.Application
 import android.app.DownloadManager
@@ -10,17 +11,11 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
-import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import fe.linksheet.module.preference.AppPreferenceRepository
-
-import fe.android.preference.helper.compose.getBooleanState
-import fe.android.preference.helper.compose.getState
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
 import fe.linksheet.extension.android.canAccessInternet
@@ -29,8 +24,9 @@ import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.log.hasher.HashProcessor
 import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.hasher.HashProcessor
+import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -44,8 +40,7 @@ import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import org.koin.core.component.KoinComponent
 import java.io.File
-import java.net.UnknownHostException
-import java.util.Locale
+import java.util.*
 
 class BottomSheetViewModel(
     val context: Application,
@@ -96,6 +91,10 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
+
+//    init {
+//        state.keys()
+//    }
 
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {

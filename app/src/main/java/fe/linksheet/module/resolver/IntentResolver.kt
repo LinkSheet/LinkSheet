@@ -6,10 +6,6 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import fe.android.preference.helper.compose.getBooleanState
-import fe.android.preference.helper.compose.getIntState
-import fe.android.preference.helper.compose.getState
-import fe.android.preference.helper.compose.getStringState
 import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver

@@ -8,12 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import fe.android.preference.helper.compose.getBooleanState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

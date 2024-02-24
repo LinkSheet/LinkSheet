@@ -2,7 +2,6 @@ package fe.linksheet.module.analytics
 
 import android.content.Context
 import androidx.lifecycle.LifecycleCoroutineScope
-import fe.android.preference.helper.compose.getState
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient

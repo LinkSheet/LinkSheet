@@ -2,9 +2,7 @@ package fe.linksheet.module.preference
 
 import android.content.Context
 import fe.android.preference.helper.BasePreference
-import fe.android.preference.helper.PreferenceRepository
-import fe.android.preference.helper.compose.getBooleanState
-import fe.android.preference.helper.compose.getGlobalCachedState
+import fe.android.preference.helper.compose.ComposePreferenceRepository
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
@@ -15,7 +13,7 @@ val preferenceRepositoryModule = module {
     singleOf(::AppPreferenceRepository)
 }
 
-class AppPreferenceRepository(val context: Context) : PreferenceRepository(context) {
+class AppPreferenceRepository(val context: Context) : ComposePreferenceRepository(context) {
 
     private val followRedirectsExternalService = getBooleanState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = getBooleanState(AppPreferences.amp2HtmlExternalService)
@@ -51,7 +49,7 @@ class AppPreferenceRepository(val context: Context) : PreferenceRepository(conte
             // Forces refresh by reading new value from the preference file; In the future, maybe this should be update
             // newValue to the RepositoryState instance directly, but that would required converting the
             // string value to the appropriate state type
-            getGlobalCachedState(preference.key)?.forceRefresh()
+            stateCache.get(preference.key)?.forceRefresh()
 
             val requiredPermission = preferencesRequiringPermission[preference]
             if (requiredPermission?.check() == false) requiredPermission else null

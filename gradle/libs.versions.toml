@@ -22,7 +22,7 @@ kotlin = "1.9.22"
 ##  ⬆ = "2.0.0-Beta3"
 ##  ⬆ = "2.0.0-Beta4"
 
-koin = "3.6.0-wasm-alpha2"
+koin = "3.5.3"
 
 linkSheetInterConnect = "2.3.2"
 

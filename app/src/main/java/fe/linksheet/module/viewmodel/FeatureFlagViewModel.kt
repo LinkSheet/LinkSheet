@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import fe.android.preference.helper.compose.getBooleanState
+
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.FeatureFlagRepository
 import fe.linksheet.module.preference.FeatureFlags

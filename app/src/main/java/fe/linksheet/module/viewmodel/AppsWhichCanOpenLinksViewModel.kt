@@ -5,7 +5,7 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.preference.helper.compose.getBooleanState
+
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.compose.getDisplayActivityInfos

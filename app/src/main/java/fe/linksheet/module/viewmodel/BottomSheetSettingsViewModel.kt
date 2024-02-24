@@ -1,14 +1,11 @@
 package fe.linksheet.module.viewmodel
 
-import android.app.AppOpsManager
+
 import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.content.getSystemService
 import fe.linksheet.module.preference.AppPreferenceRepository
-
-
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.module.viewmodel.base.BaseViewModel

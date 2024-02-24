@@ -159,6 +159,9 @@ android {
 
             applicationIdSuffix = ".release_debug"
             versionNameSuffix = "-release_debug"
+
+            isDebuggable = true
+
             resValue("string", "app_name", "$appName Release Debug")
         }
 

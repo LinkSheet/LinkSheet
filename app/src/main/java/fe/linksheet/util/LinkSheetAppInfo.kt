@@ -5,6 +5,7 @@ import android.os.Build
 import com.google.gson.JsonObject
 import fe.gson.dsl.JsonObjectDslInit
 import fe.gson.dsl.jsonObject
+import fe.gson.dsl.lazyJsonObject
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
@@ -27,7 +28,6 @@ object LinkSheetAppInfo {
     val deviceInfo by lazyJsonObject {
         "manufacturer" += Build.MANUFACTURER
         "model" += Build.MODEL
-
     }
 
     val androidFingerprint by lazyJsonObject {
@@ -38,8 +38,4 @@ object LinkSheetAppInfo {
         "android_version" += Build.VERSION.RELEASE
         "locale" += context.getCurrentLocale().toLanguageTag()
     }
-}
-
-private fun lazyJsonObject(init: JsonObjectDslInit): Lazy<JsonObject> {
-    return lazy { jsonObject(init = init) }
 }

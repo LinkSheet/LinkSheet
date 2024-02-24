@@ -26,9 +26,7 @@ versioning {
         currentTag
     })
 
-    releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ ->
-        ReleaseInfo("release", info.tag)
-    })
+    releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ -> ReleaseInfo("release", info.tag) })
 }
 
 var appName = "LinkSheet"
@@ -83,7 +81,11 @@ android {
         buildStringConfigField("BRANCH", versionInfo.branch)
         buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
         buildStringConfigField("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
-        buildConfigField("boolean", "ANALYTICS_SUPPORTED", localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED", "true")!!)
+        buildConfigField(
+            "boolean",
+            "ANALYTICS_SUPPORTED",
+            localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED", "true")!!
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -193,16 +195,6 @@ android {
         }
     }
 }
-
-//gradle.taskGraph.whenReady {
-//    allTasks.filter { it.hasProperty("duplicatesStrategy") }.forEach {
-//        it.setProperty("duplicatesStrategy", "EXCLUDE")
-//    }
-//}
-
-//tasks.getByName("classes") {
-//    duplic
-//}
 
 dependencies {
     implementation(platform(AndroidX.compose.bom))

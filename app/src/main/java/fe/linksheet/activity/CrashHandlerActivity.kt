@@ -22,13 +22,14 @@ import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.module.log.AppLogger
-import fe.linksheet.module.log.entry.LogEntry
+import fe.linksheet.module.log.file.FileAppLogger
+import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class CrashHandlerActivity : ComponentActivity(), KoinComponent {
     companion object {
@@ -37,6 +38,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
     private val logger by injectLogger(CrashHandlerActivity::class)
+    private val fileAppLogger by inject<FileAppLogger>()
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +55,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                 )
 
                 val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
-                    fetch = { AppLogger.getInstance().logEntries },
+                    fetch = { fileAppLogger.logEntries },
                     awaitFetchBeforeOpen = true,
                     dynamicHeight = true
                 ) { state, close ->

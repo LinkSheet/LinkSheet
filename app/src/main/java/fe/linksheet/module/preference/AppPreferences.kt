@@ -6,14 +6,14 @@ import fe.android.preference.helper.Preferences
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.hasher.PackageProcessor
-import fe.linksheet.module.log.loggerHmac
+import fe.linksheet.module.log.factory.LoggerFactory
+import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.impl.hasher.PackageProcessor
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
-import java.util.UUID
+import java.util.*
 
 object AppPreferences : Preferences() {
     val hideAfterCopying = booleanPreference("hide_after_copying")
@@ -95,7 +95,7 @@ object AppPreferences : Preferences() {
     @OptIn(ExperimentalStdlibApi::class)
     @SensitivePreference
     val logKey = stringPreference("log_key") {
-        CryptoUtil.getRandomBytes(loggerHmac.keySize).toHexString()
+        CryptoUtil.getRandomBytes(LoggerFactory.hmac.keySize).toHexString()
     }
 
     val firstRun = booleanPreference("first_run", true)

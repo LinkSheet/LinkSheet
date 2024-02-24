@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
 import fe.linksheet.R
 import fe.linksheet.extension.android.setText
-import fe.linksheet.module.log.entry.LogEntry
+import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 
 @Composable

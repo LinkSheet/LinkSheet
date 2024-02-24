@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver.urlresolver
 
 import fe.httpkt.Request
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.factory.LoggerFactory
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.net.HttpURLConnection

@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver.urlresolver.base
 
 import fe.httpkt.Request
 import fe.httpkt.json.JsonBody
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.impl.Logger
 import java.io.IOException
 import java.net.HttpURLConnection
 

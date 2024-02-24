@@ -1,6 +1,6 @@
 package fe.linksheet.extension.koin
 
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.factory.LoggerFactory
 import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.Qualifier
 import org.koin.core.scope.Scope

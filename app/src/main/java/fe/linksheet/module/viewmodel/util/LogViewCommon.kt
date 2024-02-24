@@ -4,8 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.gson.extension.json.`object`.plus
-import fe.linksheet.module.log.entry.LogEntry
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.file.entry.LogEntry
+import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.util.AppInfo

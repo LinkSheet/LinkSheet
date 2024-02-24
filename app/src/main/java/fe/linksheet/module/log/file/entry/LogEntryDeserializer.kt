@@ -1,4 +1,4 @@
-package fe.linksheet.module.log.entry
+package fe.linksheet.module.log.file.entry
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer

@@ -6,8 +6,8 @@ import fe.httpkt.ext.getGZIPOrDefaultStream
 import fe.httpkt.isHttpSuccess
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import org.koin.dsl.module

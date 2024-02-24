@@ -45,7 +45,7 @@ import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.module.log.entry.LogEntry
+import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

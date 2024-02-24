@@ -7,9 +7,9 @@ import android.graphics.drawable.Drawable
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.hasher.LogDumpable
-import fe.linksheet.module.log.hasher.LogHasher
+import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.impl.hasher.LogDumpable
+import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.stringbuilder.util.commaSeparated
 
 typealias DisplayActivityInfoStatus = Pair<DisplayActivityInfo, Boolean>

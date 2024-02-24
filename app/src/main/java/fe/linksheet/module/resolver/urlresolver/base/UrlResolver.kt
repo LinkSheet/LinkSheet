@@ -8,8 +8,8 @@ import fe.httpkt.json.readToJson
 import fe.linksheet.extension.failure
 import fe.linksheet.extension.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.factory.LoggerFactory
+import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.Darknet

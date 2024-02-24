@@ -3,7 +3,7 @@ package fe.linksheet.module.resolver.urlresolver.base
 import fe.httpkt.Request
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.impl.Logger
 import org.koin.dsl.module
 
 val allRemoteResolveRequest = module {

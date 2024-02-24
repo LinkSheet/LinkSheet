@@ -1,4 +1,4 @@
-package fe.linksheet.module.log
+package fe.linksheet.module.log.file
 
 import android.content.Context
 import fe.gson.extension.io.fromJsonOrNull
@@ -7,14 +7,20 @@ import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.module.log.entry.LogEntry
+import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.util.SingletonHolder
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 import java.io.File
 import java.time.LocalDateTime
 
+val fileAppLoggerModule = module {
+    singleOf(::FileAppLogger)
+}
 
-class AppLogger private constructor(app: LinkSheetApp) {
-    companion object : SingletonHolder<AppLogger, LinkSheetApp>(::AppLogger) {
+
+class FileAppLogger(app: LinkSheetApp) {
+    companion object {
         const val LOG_DIR = "logs"
         const val FILE_EXT = "log"
         const val FILE_EXT_V2 = "json"

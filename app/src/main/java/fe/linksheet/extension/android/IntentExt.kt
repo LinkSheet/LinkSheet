@@ -3,7 +3,7 @@ package fe.linksheet.extension.android
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.factory.LoggerFactory
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

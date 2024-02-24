@@ -1,4 +1,4 @@
-package fe.linksheet.module.log.entry
+package fe.linksheet.module.log.file.entry
 
 import androidx.annotation.Keep
 import com.google.gson.JsonObject

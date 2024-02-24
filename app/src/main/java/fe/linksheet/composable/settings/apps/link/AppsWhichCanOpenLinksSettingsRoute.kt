@@ -77,7 +77,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val state = rememberPullRefreshState(refreshing, onRefresh = viewModel::refresh)
 
     fun postCommand(packageName: String) {
-        viewModel.app.postShizukuCommand {
+        viewModel.postShizukuCommand {
             disableLinkHandling(packageName, !linkHandlingAllowed)
             if (packageName == allPackages) {
                 disableLinkHandling(PretendToBeAppSettingsViewModel.linksheetCompatPackage, true)

@@ -8,13 +8,11 @@ import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
 import fe.kotlin.extension.primitive.unixMillisAtZone
-import fe.kotlin.extension.primitive.unixMillisUtc
-import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.android.getCurrentLocale
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.util.BuildType
 import java.time.format.DateTimeFormatter
 

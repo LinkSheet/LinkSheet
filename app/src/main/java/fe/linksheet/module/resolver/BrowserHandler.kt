@@ -9,10 +9,10 @@ import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.hasher.LogDumpable
-import fe.linksheet.module.log.hasher.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.log.hasher.LogHasher
+import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.impl.hasher.LogDumpable
+import fe.linksheet.module.log.impl.hasher.LogDumpable.Companion.dumpObject
+import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first

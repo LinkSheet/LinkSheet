@@ -16,8 +16,8 @@ import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.factory.LoggerFactory
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.repository.AppSelectionHistoryRepository

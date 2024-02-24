@@ -1,4 +1,4 @@
-package fe.linksheet.shizuku
+package fe.linksheet.module.shizuku
 
 enum class ShizukuStatus {
     Enabled, NotRunning, NoPermission, NotInstalled;

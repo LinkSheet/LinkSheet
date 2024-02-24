@@ -1,10 +1,8 @@
 package fe.linksheet.extension.koin
 
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.factory.LoggerFactory
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import org.koin.core.parameter.ParametersDefinition
-import org.koin.core.qualifier.Qualifier
 import org.koin.mp.KoinPlatformTools
 import kotlin.reflect.KClass
 

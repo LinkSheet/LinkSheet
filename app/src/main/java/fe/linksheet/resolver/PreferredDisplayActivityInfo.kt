@@ -1,9 +1,9 @@
 package fe.linksheet.resolver
 
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.log.hasher.LogDumpable
-import fe.linksheet.module.log.hasher.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.log.hasher.LogHasher
+import fe.linksheet.module.log.impl.hasher.LogDumpable
+import fe.linksheet.module.log.impl.hasher.LogDumpable.Companion.dumpObject
+import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 

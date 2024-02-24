@@ -1,9 +1,9 @@
 package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
-import fe.linksheet.module.log.hasher.HashProcessor
-import fe.linksheet.module.log.hasher.LogDumpable
-import fe.linksheet.module.log.hasher.LogHasher
+import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.impl.hasher.LogDumpable
+import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 

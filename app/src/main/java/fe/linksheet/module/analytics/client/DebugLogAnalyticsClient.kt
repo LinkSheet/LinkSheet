@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.impl.Logger
 import org.koin.dsl.module
 
 class DebugLogAnalyticsClient(
@@ -15,10 +15,12 @@ class DebugLogAnalyticsClient(
     logger: Logger,
 ) : AnalyticsClient(true, coroutineScope, identity, level, logger = logger) {
     companion object {
-        val debugLogAnalyticsModule = module {
+        val module = module {
             single<AnalyticsClient> {
-                DebugLogAnalyticsClient(coroutineScope = get(), logger = createLogger<DebugLogAnalyticsClient>())
-                    .init(get())
+                DebugLogAnalyticsClient(
+                    coroutineScope = get(),
+                    logger = createLogger<DebugLogAnalyticsClient>()
+                ).init(get())
             }
         }
     }

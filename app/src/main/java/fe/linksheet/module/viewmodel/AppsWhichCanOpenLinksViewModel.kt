@@ -1,5 +1,6 @@
 package fe.linksheet.module.viewmodel
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
@@ -12,6 +13,8 @@ import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.FeatureFlagRepository
 import fe.linksheet.module.preference.FeatureFlags
+import fe.linksheet.module.shizuku.ShizukuCommand
+import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.AndroidVersion
@@ -22,13 +25,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 
 class AppsWhichCanOpenLinksViewModel(
-    val app: LinkSheetApp,
+    context: Context,
+    private val shizukuHandler: ShizukuHandler,
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
     private val domainVerificationManager by lazy {
         if (AndroidVersion.AT_LEAST_API_31_S) {
-            app.getSystemService<DomainVerificationManager>()
+            context.getSystemService<DomainVerificationManager>()
         } else null
     }
 
@@ -37,7 +41,7 @@ class AppsWhichCanOpenLinksViewModel(
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(app) }
+    private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }
         .combine(refreshing) { apps, _ ->
             refreshing.value = false
             apps
@@ -64,5 +68,9 @@ class AppsWhichCanOpenLinksViewModel(
     @RequiresApi(Build.VERSION_CODES.S)
     fun makeOpenByDefaultSettingsIntent(activityInfo: DisplayActivityInfo): Intent {
         return getAppOpenByDefaultIntent(activityInfo.packageName)
+    }
+
+    fun postShizukuCommand(command: ShizukuCommand) {
+        shizukuHandler.postShizukuCommand(command)
     }
 }

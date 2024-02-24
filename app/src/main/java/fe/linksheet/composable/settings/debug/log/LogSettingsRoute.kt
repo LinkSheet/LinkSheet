@@ -1,11 +1,7 @@
 package fe.linksheet.composable.settings.debug.log
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -26,9 +22,8 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.logTextViewerSettingsRoute
-import fe.linksheet.module.log.AppLogger
+import fe.linksheet.module.log.file.FileAppLogger
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -45,7 +40,7 @@ fun LogSettingsRoute(
         listState(files)
     }
 
-    val startupTime = AppLogger.getInstance().startupTime.localizedString()
+    val startupTime = viewModel.fileAppLogger.startupTime.localizedString()
 
     SettingsScaffold(R.string.logs, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

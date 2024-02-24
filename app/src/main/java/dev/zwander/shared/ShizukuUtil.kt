@@ -15,7 +15,7 @@ import androidx.compose.runtime.remember
 import fe.linksheet.R
 import fe.linksheet.extension.android.getApplicationInfoCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.shizuku.ShizukuStatus
+import fe.linksheet.module.shizuku.ShizukuStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import rikka.shizuku.Shizuku

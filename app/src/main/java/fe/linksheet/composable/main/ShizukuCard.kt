@@ -34,7 +34,7 @@ import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.shizuku.ShizukuStatus
+import fe.linksheet.module.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload
 import fe.linksheet.ui.Typography
 import kotlinx.coroutines.Dispatchers

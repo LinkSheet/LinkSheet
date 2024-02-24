@@ -10,11 +10,11 @@ import androidx.room.PrimaryKey
 import fe.linksheet.resolver.PreferredDisplayActivityInfo
 import fe.linksheet.extension.android.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.android.toDisplayActivityInfo
-import fe.linksheet.module.log.hasher.HostProcessor
-import fe.linksheet.module.log.hasher.LogDumpable
-import fe.linksheet.module.log.hasher.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.log.hasher.LogHasher
-import fe.linksheet.module.log.hasher.PackageProcessor
+import fe.linksheet.module.log.impl.hasher.HostProcessor
+import fe.linksheet.module.log.impl.hasher.LogDumpable
+import fe.linksheet.module.log.impl.hasher.LogDumpable.Companion.dumpObject
+import fe.linksheet.module.log.impl.hasher.LogHasher
+import fe.linksheet.module.log.impl.hasher.PackageProcessor
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated
 import java.lang.StringBuilder

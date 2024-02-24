@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
-import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import kotlinx.coroutines.*

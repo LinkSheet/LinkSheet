@@ -6,7 +6,7 @@ import androidx.core.content.getSystemService
 import com.google.gson.Gson
 import fe.linksheet.module.preference.AppPreferenceRepository
 
-import fe.linksheet.module.log.LoggerFactory
+import fe.linksheet.module.log.factory.LoggerFactory
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 

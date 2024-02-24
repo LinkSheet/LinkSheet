@@ -21,10 +21,11 @@ import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.lifecycle.processLifecycleCoroutineModule
-import fe.linksheet.module.log.AppLogger
-import fe.linksheet.module.log.defaultLoggerFactoryModule
-import fe.linksheet.module.log.entry.LogEntry
-import fe.linksheet.module.log.entry.LogEntryDeserializer
+import fe.linksheet.module.log.file.FileAppLogger
+import fe.linksheet.module.log.factory.defaultLoggerFactoryModule
+import fe.linksheet.module.log.file.entry.LogEntry
+import fe.linksheet.module.log.file.entry.LogEntryDeserializer
+import fe.linksheet.module.log.file.fileAppLoggerModule
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.featureFlagRepositoryModule
@@ -37,8 +38,9 @@ import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
-import fe.linksheet.shizuku.ShizukuCommand
-import fe.linksheet.shizuku.ShizukuHandler
+import fe.linksheet.module.shizuku.ShizukuCommand
+import fe.linksheet.module.shizuku.ShizukuHandler
+import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Timer
 import org.koin.android.ext.android.get
@@ -49,8 +51,6 @@ import kotlin.system.exitProcess
 
 
 open class LinkSheetApp : Application(), DefaultLifecycleObserver {
-    private lateinit var appLogger: AppLogger
-    private lateinit var shizukuHandler: ShizukuHandler<LinkSheetApp>
     private lateinit var timer: Timer
 
     override fun attachBaseContext(base: Context) {
@@ -83,19 +83,16 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
-        shizukuHandler = ShizukuHandler(this)
-
-        appLogger = AppLogger.createInstance(this)
-        appLogger.deleteOldLogs()
-
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         DynamicColors.applyToActivitiesIfAvailable(this)
 
-        val koinApp = startKoin {
+        val koinApplication = startKoin {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             modules(
                 processLifecycleCoroutineModule,
+                fileAppLoggerModule,
+                shizukuHandlerModule,
                 globalGsonModule,
                 preferenceRepositoryModule,
                 featureFlagRepositoryModule,
@@ -111,14 +108,16 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
                 viewModelModule,
                 requestModule,
                 downloaderModule,
-                if(BuildConfig.DEBUG) analyticsModule else DebugLogAnalyticsClient.debugLogAnalyticsModule
+                if (BuildConfig.DEBUG) analyticsModule else DebugLogAnalyticsClient.module
             )
         }
 
+        koinApplication.koin.get<FileAppLogger>().deleteOldLogs()
+
         if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out
-            val analyticsClient = koinApp.koin.get<AnalyticsClient>()
-            val preferenceRepository = koinApp.koin.get<AppPreferenceRepository>()
+            val analyticsClient = koinApplication.koin.get<AnalyticsClient>()
+            val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()
 
             val lastVersion = preferenceRepository.getInt(AppPreferences.lastVersion)
             analyticsClient.enqueue(createAppStartEvent(lastVersion))
@@ -132,10 +131,6 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
         else null
     }
 
-    fun postShizukuCommand(command: ShizukuCommand) {
-        shizukuHandler.postShizukuCommand(command)
-    }
-
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
 
@@ -144,6 +139,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
 //            analyticsClient.shutdown()
 
             val preferenceRepository = get<AppPreferenceRepository>()
+
             val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
             val usedFor = timer.stop()
 
@@ -151,6 +147,6 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
         }
 
-        appLogger.writeLog()
+        get<FileAppLogger>().writeLog()
     }
 }

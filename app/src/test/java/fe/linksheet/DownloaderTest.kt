@@ -2,7 +2,7 @@ package fe.linksheet
 
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.log.DebugLoggerFactory
+import fe.linksheet.module.log.factory.DebugLoggerFactory
 import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import org.junit.Test

@@ -1,4 +1,4 @@
-package fe.linksheet.module.log.hasher
+package fe.linksheet.module.log.impl.hasher
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo

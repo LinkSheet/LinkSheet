@@ -321,6 +321,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
             Grid(
                 result = result,
                 hasPreferredApp = hasPreferredApp,
+                hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
                 showPackage = showPackage
@@ -329,6 +330,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
             List(
                 result = result,
                 hasPreferredApp = hasPreferredApp,
+                hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
                 showPackage = showPackage
@@ -342,10 +344,12 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
         }
     }
 
+    // TODO: Grid and List are pretty similar, refactor maybe?
     @Composable
     private fun Grid(
         result: BottomSheetResult.SuccessResult,
         hasPreferredApp: Boolean,
+        hideChoiceButtons: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         showPackage: Boolean,
@@ -384,7 +388,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
                 }
             }
 
-            if (!hasPreferredApp) {
+            if (!hasPreferredApp && !hideChoiceButtons) {
                 NoPreferredAppChoiceButtons(result = result, selected = selected)
             }
         }
@@ -394,6 +398,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
     private fun List(
         result: BottomSheetResult.SuccessResult,
         hasPreferredApp: Boolean,
+        hideChoiceButtons: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         showPackage: Boolean,
@@ -442,7 +447,7 @@ class BottomSheetActivity : ComponentActivity(), KoinComponent {
                 }
             }
 
-            if (!hasPreferredApp) {
+            if (!hasPreferredApp && !hideChoiceButtons) {
                 NoPreferredAppChoiceButtons(result = result, selected = selected)
             }
         }

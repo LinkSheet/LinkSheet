@@ -14,7 +14,7 @@ class InAppBrowserHandler(
         data object AlwaysDisableInAppBrowser : InAppBrowserMode("always_disable_in_app_browser")
         data object DisableInSelectedApps : InAppBrowserMode("disable_in_selected_apps")
 
-        companion object Companion : OptionTypeMapper<InAppBrowserMode, String>(
+        companion object : OptionTypeMapper<InAppBrowserMode, String>(
             { it.value },
             { arrayOf(UseAppSettings, AlwaysDisableInAppBrowser, DisableInSelectedApps) }
         )

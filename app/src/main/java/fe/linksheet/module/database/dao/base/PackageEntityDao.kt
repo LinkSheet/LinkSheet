@@ -12,7 +12,7 @@ abstract class PackageEntityDao<T : PackageEntity<T>, C : PackageEntityCreator<T
         Insert(true), Delete(false);
 
         companion object {
-            fun fromBool(bool: Boolean) = Mode.values().find { it.bool == bool }!!
+            fun fromBool(bool: Boolean) = entries.find { it.bool == bool }!!
         }
     }
 

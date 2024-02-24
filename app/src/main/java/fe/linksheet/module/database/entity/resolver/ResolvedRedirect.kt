@@ -14,15 +14,10 @@ data class ResolvedRedirect(
 ) : ResolverEntity<ResolvedRedirect>(), LogDumpable {
     override fun urlResolved() = resolvedUrl
 
-    override fun dump(
-        stringBuilder: StringBuilder,
-        hasher: LogHasher
-    ) = stringBuilder.curlyWrapped {
+    override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
         commaSeparated {
             item { hasher.hash(stringBuilder, "shortUrl=", shortUrl, HashProcessor.UrlProcessor) }
-            item { hasher.hash(stringBuilder, "resolvedUrl=", resolvedUrl,
-                HashProcessor.UrlProcessor
-            ) }
+            item { hasher.hash(stringBuilder, "resolvedUrl=", resolvedUrl, HashProcessor.UrlProcessor) }
         }
     }
 }

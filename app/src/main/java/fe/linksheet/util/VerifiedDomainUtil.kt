@@ -8,15 +8,11 @@ import androidx.annotation.RequiresApi
 
 object VerifiedDomainUtil {
     @RequiresApi(Build.VERSION_CODES.S)
-    fun ResolveInfo.hasVerifiedDomains(
-        manager: DomainVerificationManager,
-        linkHandlingAllowed: Boolean,
-    ): Boolean {
+    fun ResolveInfo.hasVerifiedDomains(manager: DomainVerificationManager, linkHandlingAllowed: Boolean): Boolean {
         val packageName = activityInfo.packageName
 
         return manager.getDomainVerificationUserState(packageName)?.let { state ->
-            val linkHandling =
-                if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
+            val linkHandling = if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
             val hasAnyVerifiedOrSelected = state.hostToStateMap.any {
                 it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED
             }
@@ -26,11 +22,7 @@ object VerifiedDomainUtil {
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun ResolveInfo.canHandleDomains(
-        manager: DomainVerificationManager,
-    ): Boolean {
-        val packageName = activityInfo.packageName
-
-        return manager.getDomainVerificationUserState(packageName)?.hostToStateMap?.isNotEmpty() == true
+    fun ResolveInfo.canHandleDomains(manager: DomainVerificationManager): Boolean {
+        return manager.getDomainVerificationUserState(activityInfo.packageName)?.hostToStateMap?.isNotEmpty() == true
     }
 }

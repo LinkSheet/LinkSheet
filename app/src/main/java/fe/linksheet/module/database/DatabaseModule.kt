@@ -26,9 +26,8 @@ import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import org.koin.dsl.module
 
 val databaseModule = module {
-    single {
-        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet")
-            .addMigrations(Migration1to2).build()
+    single<LinkSheetDatabase> {
+        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet").addMigrations(Migration1to2).build()
     }
 }
 

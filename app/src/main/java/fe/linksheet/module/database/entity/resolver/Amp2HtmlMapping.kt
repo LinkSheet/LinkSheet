@@ -15,15 +15,14 @@ data class Amp2HtmlMapping(
 
     override fun urlResolved() = canonicalUrl
 
-    override fun dump(
-        stringBuilder: StringBuilder,
-        hasher: LogHasher
-    ) = stringBuilder.curlyWrapped {
+    override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
         commaSeparated {
-            item { hasher.hash(stringBuilder, "ampUrl=", ampUrl, HashProcessor.UrlProcessor) }
-            item { hasher.hash(stringBuilder, "canonicalUrl=", canonicalUrl,
-                HashProcessor.UrlProcessor
-            ) }
+            item {
+                hasher.hash(stringBuilder, "ampUrl=", ampUrl, HashProcessor.UrlProcessor)
+            }
+            item {
+                hasher.hash(stringBuilder, "canonicalUrl=", canonicalUrl, HashProcessor.UrlProcessor)
+            }
         }
     }
 }

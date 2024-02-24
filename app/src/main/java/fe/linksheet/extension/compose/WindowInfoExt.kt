@@ -10,9 +10,7 @@ private fun WindowInfo.flowOfIsWindowFocused(): Flow<Boolean> {
 
 private suspend inline fun <T> Flow<T>.collect(set: Set<T>?, crossinline handle: (T) -> Unit) {
     collect {
-        if (set == null || it in set) {
-            handle(it)
-        }
+        if (set == null || it in set) handle(it)
     }
 }
 

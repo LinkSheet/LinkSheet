@@ -21,10 +21,7 @@ val filterRemoveSelfApp: (Boolean, ResolveInfo) -> Boolean = { removeSelfApp, re
     !removeSelfApp || resolveInfo.activityInfo.packageName != BuildConfig.APPLICATION_ID
 }
 
-fun PackageManager.queryResolveInfosByIntent(
-    intent: Intent,
-    removeSelfApp: Boolean = false
-): List<ResolveInfo> {
+fun PackageManager.queryResolveInfosByIntent(intent: Intent, removeSelfApp: Boolean = false): List<ResolveInfo> {
     return queryIntentActivitiesCompat(intent, PackageManager.MATCH_ALL).filter {
         filterRemoveSelfApp(removeSelfApp, it)
     }
@@ -39,33 +36,28 @@ fun PackageManager.queryAllResolveInfos(
 }
 
 
-fun PackageManager.getInstalledPackagesCompat(
-    flags: Int
-): MutableList<PackageInfo> = if (AndroidVersion.AT_LEAST_API_33_T) {
-    getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
-} else getInstalledPackages(flags)
+fun PackageManager.getInstalledPackagesCompat(flags: Int): MutableList<PackageInfo> {
+    return if (AndroidVersion.AT_LEAST_API_33_T) {
+        getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
+    } else getInstalledPackages(flags)
+}
 
+fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int): MutableList<ResolveInfo> {
+    return if (AndroidVersion.AT_LEAST_API_33_T) {
+        queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
+    } else queryIntentActivities(intent, flags)
+}
 
-fun PackageManager.queryIntentActivitiesCompat(
-    intent: Intent,
-    flags: Int
-): MutableList<ResolveInfo> = if (AndroidVersion.AT_LEAST_API_33_T) {
-    queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-} else queryIntentActivities(intent, flags)
-
-fun PackageManager.resolveActivityCompat(
-    intent: Intent,
-    flags: Int
-) = if (AndroidVersion.AT_LEAST_API_33_T) {
-    resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-} else resolveActivity(intent, flags)
+fun PackageManager.resolveActivityCompat(intent: Intent, flags: Int): ResolveInfo? {
+    return if (AndroidVersion.AT_LEAST_API_33_T) {
+        resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
+    } else resolveActivity(intent, flags)
+}
 
 fun PackageManager.getApplicationInfoCompat(packageName: String, flags: Int): ApplicationInfo? {
     return runCatching {
         if (AndroidVersion.AT_LEAST_API_33_T) {
             getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(flags.toLong()))
-        } else {
-            getApplicationInfo(packageName, flags)
-        }
+        } else getApplicationInfo(packageName, flags)
     }.getOrNull()
 }

@@ -22,30 +22,22 @@ class BrowserHandler(
     private val browserResolver: BrowserResolver,
 ) {
     sealed class BrowserMode(val value: String) : LogDumpable {
-        object None : BrowserMode("none")
-        object AlwaysAsk : BrowserMode("always_ask")
-        object SelectedBrowser : BrowserMode("browser")
-        object Whitelisted : BrowserMode("whitelisted")
+        data object None : BrowserMode("none")
+        data object AlwaysAsk : BrowserMode("always_ask")
+        data object SelectedBrowser : BrowserMode("browser")
+        data object Whitelisted : BrowserMode("whitelisted")
 
-        companion object Companion : OptionTypeMapper<BrowserMode, String>(
+        companion object : OptionTypeMapper<BrowserMode, String>(
             { it.value }, { arrayOf(None, AlwaysAsk, SelectedBrowser, Whitelisted) }
         )
 
-        override fun dump(
-            stringBuilder: StringBuilder,
-            hasher: LogHasher
-        ) = hasher.hash(stringBuilder, value, HashProcessor.NoOpProcessor)
-
+        override fun dump(stringBuilder: StringBuilder, hasher: LogHasher): StringBuilder {
+            return hasher.hash(stringBuilder, value, HashProcessor.NoOpProcessor)
+        }
     }
 
-    data class BrowserModeInfo(
-        val browserMode: BrowserMode,
-        val resolveInfo: ResolveInfo?
-    ) : LogDumpable {
-        override fun dump(
-            stringBuilder: StringBuilder,
-            hasher: LogHasher
-        ) = stringBuilder.commaSeparated {
+    data class BrowserModeInfo(val browserMode: BrowserMode, val resolveInfo: ResolveInfo?) : LogDumpable {
+        override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.commaSeparated {
             item { dumpObject("mode=", this, hasher, browserMode) }
             itemNotNull(resolveInfo) {
                 dumpObject("resolveInfo=", this, hasher, resolveInfo)
@@ -117,8 +109,8 @@ class BrowserHandler(
         currentResolveList: MutableList<ResolveInfo>
     ) {
         val resolvedInfos = currentResolveList.toPackageKeyedMap()
-        browsers.forEach { (`package`, resolveInfo) ->
-            if (!resolvedInfos.containsKey(`package`)) {
+        browsers.forEach { (pkg, resolveInfo) ->
+            if (!resolvedInfos.containsKey(pkg)) {
                 currentResolveList.add(resolveInfo)
             }
         }

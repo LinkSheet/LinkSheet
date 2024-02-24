@@ -33,18 +33,12 @@ class CachedRequest(private val request: Request, loggerFactory: LoggerFactory) 
             put(url, answer)
             answer
         } else {
-            logger.debug({ "Cached response found for $type $it!" }, url,
-                HashProcessor.UrlProcessor
-            )
+            logger.debug({ "Cached response found for $type $it!" }, url, HashProcessor.UrlProcessor)
             value
         }
     }
 
-    fun head(
-        url: String,
-        timeout: Int,
-        followRedirects: Boolean
-    ) = headCache.getOrPut("HEAD", url) {
+    fun head(url: String, timeout: Int, followRedirects: Boolean) = headCache.getOrPut("HEAD", url) {
         request.head(
             url,
             connectTimeout = timeout * 1000,
@@ -58,11 +52,7 @@ class CachedRequest(private val request: Request, loggerFactory: LoggerFactory) 
         getCache.clear()
     }
 
-    fun get(
-        url: String,
-        timeout: Int,
-        followRedirects: Boolean
-    ) = getCache.getOrPut("GET", url) {
+    fun get(url: String, timeout: Int, followRedirects: Boolean) = getCache.getOrPut("GET", url) {
         request.get(
             url,
             connectTimeout = timeout * 1000,

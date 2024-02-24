@@ -1,12 +1,11 @@
 package fe.linksheet.module.database.migrations
 
 import android.content.ComponentName
-import android.util.Log
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 object Migration1to2 : Migration(1, 2) {
-    override fun migrate(database: SupportSQLiteDatabase) = database.run {
+    override fun migrate(db: SupportSQLiteDatabase) = db.run {
         execSQL("ALTER TABLE openwith ADD packageName VARCHAR")
 
         val cursor = query("SELECT * FROM openwith")

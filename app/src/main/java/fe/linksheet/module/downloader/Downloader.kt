@@ -21,30 +21,22 @@ val downloaderModule = module {
     singleOf(::Downloader)
 }
 
-class Downloader(
-    private val cachedRequest: CachedRequest,
-    loggerFactory: LoggerFactory,
-) {
+class Downloader(private val cachedRequest: CachedRequest, loggerFactory: LoggerFactory) {
     private val logger = loggerFactory.createLogger(Downloader::class)
 
     companion object {
-        private const val contentTypeHeader = "Content-Type"
-        private const val textHtml = "text/html"
+        private const val CONTENT_TYPE_HEADER = "Content-Type"
+        private const val HTML_MIME_TYPE = "text/html"
 
         private val mimeTypeToExtension = MimeTypes.mimeTypeToExtensions
         private val extensionToMimeType = MimeTypes.extensionToMimeType
     }
 
     sealed class DownloadCheckResult : LogDumpable {
-        class Downloadable(
-            private val fileName: String,
-            private val extension: String?
-        ) : DownloadCheckResult() {
+        class Downloadable(private val fileName: String, private val extension: String?) : DownloadCheckResult() {
             fun toFileName() = "$fileName.$extension"
-            override fun dump(
-                stringBuilder: StringBuilder,
-                hasher: LogHasher
-            ) = stringBuilder.curlyWrapped {
+
+            override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
                 commaSeparated {
                     item { append("type=downloadable") }
                     item { hasher.hash(stringBuilder, "name=", fileName, FileNameProcessor) }
@@ -54,19 +46,13 @@ class Downloader(
         }
 
         data object NonDownloadable : DownloadCheckResult() {
-            override fun dump(
-                stringBuilder: StringBuilder,
-                hasher: LogHasher
-            ) = stringBuilder.curlyWrapped {
+            override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
                 append("type=non_downloadable")
             }
         }
 
         data object MimeTypeDetectionFailed : DownloadCheckResult() {
-            override fun dump(
-                stringBuilder: StringBuilder,
-                hasher: LogHasher
-            ) = stringBuilder.curlyWrapped {
+            override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
                 append("type=failed")
             }
         }
@@ -89,9 +75,9 @@ class Downloader(
 
     fun isNonHtmlContentUri(url: String, timeout: Int): DownloadCheckResult {
         val contentType = try {
-            cachedRequest.head(url, timeout, false).findHeader(contentTypeHeader)
+            cachedRequest.head(url, timeout, false).findHeader(CONTENT_TYPE_HEADER)
         } catch (e: IOException) {
-            logger.debug(e)
+            logger.error(e)
             return DownloadCheckResult.NonDownloadable
         }
 
@@ -108,11 +94,8 @@ class Downloader(
         )
     }
 
-    private fun checkMimeType(
-        mimeType: String,
-        fileName: String,
-        extension: String?
-    ) = if (mimeType != textHtml) {
-        DownloadCheckResult.Downloadable(fileName, extension)
-    } else DownloadCheckResult.NonDownloadable
+    private fun checkMimeType(mimeType: String, fileName: String, extension: String?): DownloadCheckResult {
+        return if (mimeType != HTML_MIME_TYPE) DownloadCheckResult.Downloadable(fileName, extension)
+        else DownloadCheckResult.NonDownloadable
+    }
 }

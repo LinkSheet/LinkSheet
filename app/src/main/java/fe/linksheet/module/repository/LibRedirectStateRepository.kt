@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.map
 
 
 class LibRedirectStateRepository(private val dao: LibRedirectServiceStateDao) {
-    fun getServiceState(serviceKey: String) = dao.getServiceState(serviceKey)
+    private fun getServiceState(serviceKey: String) = dao.getServiceState(serviceKey)
     fun isEnabledFlow(serviceKey: String) = getServiceState(serviceKey).map { it?.enabled ?: false }
     suspend fun isEnabled(serviceKey: String) = isEnabledFlow(serviceKey).first()
 

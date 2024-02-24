@@ -21,9 +21,7 @@ class AppLogger private constructor(app: LinkSheetApp) {
     }
 
     data class LogFile(val file: File, val millis: Long) {
-        val localizedTime by lazy {
-            millis.unixMillisUtc.value.localizedString()
-        }
+        val localizedTime by lazy { millis.unixMillisUtc.value.localizedString() }
 
         companion object {
             fun new(logDir: File): LogFile {

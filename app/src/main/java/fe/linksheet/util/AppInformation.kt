@@ -2,8 +2,6 @@ package fe.linksheet.util
 
 import android.content.Context
 import android.os.Build
-import com.google.gson.JsonObject
-import fe.gson.dsl.JsonObjectDslInit
 import fe.gson.dsl.jsonObject
 import fe.gson.dsl.lazyJsonObject
 import fe.kotlin.extension.primitive.unixMillisUtc
@@ -11,7 +9,7 @@ import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.android.getCurrentLocale
 
-object LinkSheetAppInfo {
+object AppInformation {
     val appInfo by lazyJsonObject {
         "full_identifier" += BuildConfig.VERSION_NAME
         "built_at" += BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)

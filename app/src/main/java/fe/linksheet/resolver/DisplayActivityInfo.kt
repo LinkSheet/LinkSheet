@@ -12,6 +12,8 @@ import fe.linksheet.module.log.hasher.LogDumpable
 import fe.linksheet.module.log.hasher.LogHasher
 import fe.stringbuilder.util.commaSeparated
 
+typealias DisplayActivityInfoStatus = Pair<DisplayActivityInfo, Boolean>
+
 data class DisplayActivityInfo(
     val activityInfo: ActivityInfo,
     val label: String,
@@ -21,14 +23,11 @@ data class DisplayActivityInfo(
 ) : LogDumpable {
     companion object {
         val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }
-        private val valueAndLabelComparator =
-            compareByDescending<Pair<DisplayActivityInfo, Boolean>> { (_, bool) ->
-                bool
-            }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
+        private val valueAndLabelComparator = compareByDescending<DisplayActivityInfoStatus> { (_, status) ->
+            status
+        }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
-        fun List<Pair<DisplayActivityInfo, Boolean>>.sortByValueAndName() = sortedWith(
-            valueAndLabelComparator
-        )
+        fun List<DisplayActivityInfoStatus>.sortByValueAndName() = sortedWith(valueAndLabelComparator)
     }
 
     val compareLabel = label.lowercase()
@@ -43,20 +42,16 @@ data class DisplayActivityInfo(
             .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT or Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
     }
 
-    fun toPreferredApp(
-        host: String,
-        alwaysPreferred: Boolean
-    ) = PreferredApp(
-        host = host,
-        packageName = packageName,
-        component = componentName.flattenToString(),
-        alwaysPreferred = alwaysPreferred
-    )
+    fun toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {
+        return PreferredApp(
+            host = host,
+            packageName = packageName,
+            component = flatComponentName,
+            alwaysPreferred = alwaysPreferred
+        )
+    }
 
-    override fun dump(
-        stringBuilder: StringBuilder,
-        hasher: LogHasher
-    ) = stringBuilder.commaSeparated {
+    override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.commaSeparated {
         item {
             hasher.hash(this, "activityInfo=", activityInfo, HashProcessor.ActivityInfoProcessor)
         }
@@ -64,12 +59,7 @@ data class DisplayActivityInfo(
             hasher.hash(this, "label=", label, HashProcessor.StringProcessor)
         }
         itemNotNull(extendedInfo) {
-            hasher.hash(
-                this,
-                "extendedInfo=",
-                extendedInfo.toString(),
-                HashProcessor.StringProcessor
-            )
+            hasher.hash(this, "extendedInfo=", extendedInfo.toString(), HashProcessor.StringProcessor)
         }
         item {
             hasher.hash(this, "resolveInfo=", resolvedInfo, HashProcessor.ResolveInfoProcessor)

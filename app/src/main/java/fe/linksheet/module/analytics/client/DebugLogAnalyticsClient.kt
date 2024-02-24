@@ -1,11 +1,11 @@
-package fe.linksheet.module.analytics
+package fe.linksheet.module.analytics.client
 
 import android.content.Context
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.log.Logger
-import kotlinx.coroutines.CoroutineScope
 import org.koin.dsl.module
 
 class DebugLogAnalyticsClient(

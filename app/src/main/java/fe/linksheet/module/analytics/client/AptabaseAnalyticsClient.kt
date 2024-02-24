@@ -1,4 +1,4 @@
-package fe.linksheet.module.analytics.aptabase
+package fe.linksheet.module.analytics.client
 
 import android.content.Context
 import android.os.Build

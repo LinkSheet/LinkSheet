@@ -16,6 +16,7 @@ import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.analyticsModule
+import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
@@ -110,7 +111,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
                 viewModelModule,
                 requestModule,
                 downloaderModule,
-                analyticsModule
+                if(BuildConfig.DEBUG) analyticsModule else DebugLogAnalyticsClient.debugLogAnalyticsModule
             )
         }
 
@@ -139,6 +140,9 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
         super.onStop(owner)
 
         runCatching {
+//            val analyticsClient = get<AnalyticsClient>()
+//            analyticsClient.shutdown()
+
             val preferenceRepository = get<AppPreferenceRepository>()
             val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
             val usedFor = timer.stop()

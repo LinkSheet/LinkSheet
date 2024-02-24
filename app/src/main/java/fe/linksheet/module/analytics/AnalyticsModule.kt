@@ -5,16 +5,13 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import fe.android.preference.helper.compose.getState
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.analytics.aptabase.AptabaseAnalyticsClient
+import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.time.delay
 import org.koin.dsl.module
 import java.time.Duration
@@ -92,5 +89,9 @@ abstract class AnalyticsClient(
         if (event != null) {
             coroutineScope.launch { eventQueue.trySend(event) }
         }
+    }
+
+    fun shutdown() {
+        eventSender?.cancel()
     }
 }

@@ -27,7 +27,7 @@ class ExportSettingsViewModel(
     }
 
     fun exportPreferences(uri: Uri, includeLogHashKey: Boolean) {
-        val preferences = preferenceRepository.dumpPreferences(
+        val preferences = preferenceRepository.exportPreferences(
             if (!includeLogHashKey) listOf(AppPreferences.logKey) else listOf()
         )
 

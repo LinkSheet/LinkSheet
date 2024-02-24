@@ -89,16 +89,10 @@ fun ExportLogDialog(
         BottomRow {
             TextButton(
                 onClick = {
+                    val settings = LogViewCommon.ExportSettings(includeFingerprint, includePreferences, redactLog, includeThrowable)
                     clipboardManager.setText(
                         context.resources.getString(R.string.log),
-                        logViewCommon.buildClipboardText(
-                            context,
-                            includeFingerprint,
-                            includePreferences,
-                            redactLog,
-                            includeThrowable,
-                            logEntries
-                        )
+                        logViewCommon.buildClipboardText(context, settings, logEntries)
                     )
                     close(Unit)
                 }

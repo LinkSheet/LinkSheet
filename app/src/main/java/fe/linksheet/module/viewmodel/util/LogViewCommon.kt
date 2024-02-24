@@ -17,35 +17,37 @@ class LogViewCommon(
     private val logger: Logger
 ) {
     private fun logPreferences(redact: Boolean): Map<String, String?> {
-        return preferenceRepository.dumpPreferences(AppPreferences.sensitivePreferences) + AppPreferences.logPackages(
-            redact,
-            logger,
-            preferenceRepository
-        )
+        val preferences = preferenceRepository.exportPreferences(AppPreferences.sensitivePreferences)
+        val packages = AppPreferences.logPackages(redact, logger, preferenceRepository)
+
+        return preferences + packages
     }
+
+    data class ExportSettings(
+        val fingerprint: Boolean,
+        val preferences: Boolean,
+        val redact: Boolean,
+        val throwable: Boolean
+    )
 
     fun buildClipboardText(
         context: Context,
-        includeFingerprint: Boolean,
-        includePreferences: Boolean,
-        redactLog: Boolean,
-        includeThrowable: Boolean,
+        settings: ExportSettings,
         logEntries: List<LogEntry>,
     ): String {
+        val (fingerprint, preferences, redact, throwable) = settings
         return gson.toJson(jsonObject {
             "device_basics" += LinkSheetAppInfo.getDeviceBasics(context)
-
-            if (includeFingerprint) {
+            if (fingerprint) {
                 "device_info" += (LinkSheetAppInfo.deviceInfo + LinkSheetAppInfo.androidFingerprint)
             }
 
             "app_info" += LinkSheetAppInfo.appInfo
-
-            if (includePreferences) {
-                "preferences" += AppPreferences.toJsonArray(logPreferences(redactLog))
+            if (preferences) {
+                "preferences" += AppPreferences.toJsonArray(logPreferences(redact))
             }
 
-            "log" += logEntries.map { it.toCopyLogJson(redactLog, includeThrowable) }
+            "log" += logEntries.map { it.toCopyLogJson(redact, throwable) }
         })
     }
 }

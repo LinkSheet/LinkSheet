@@ -3,8 +3,8 @@ package fe.linksheet.module.preference
 
 import com.google.gson.JsonArray
 import fe.android.preference.helper.Preferences
-import fe.gson.dsl.jsonArray
 import fe.gson.dsl.jsonObject
+import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.hasher.PackageProcessor
@@ -140,23 +140,24 @@ object AppPreferences : Preferences() {
         }
     }
 
-    fun logPackages(redact: Boolean, logger: Logger, repository: AppPreferenceRepository): Map<String, String?> =
-        sensitivePackagePreferences.associate {
-            val value = repository.getString(it)
-            it.key to if (value != null) {
-                logger.dumpParameterToString(redact, value, PackageProcessor)
-            } else "<null>"
-        }
+    fun logPackages(redact: Boolean, logger: Logger, repository: AppPreferenceRepository): Map<String, String?> {
+        return sensitivePackagePreferences.associate { pref ->
+            val value = repository.getString(pref)
+            val strValue = value?.let { logger.dumpParameterToString(redact, it, PackageProcessor) } ?: "<null>"
 
-    fun toJsonArray(preferenceToDumpedValue: Map<String, String?>): JsonArray {
-        return jsonArray {
-            preferenceToDumpedValue.forEach { (key, value) ->
-                +jsonObject {
-                    "name" += key
-                    "value" += value
-                }
+            pref.key to strValue
+        }
+    }
+
+    fun toJsonArray(preferences: Map<String, String?>): JsonArray {
+        val objs = preferences.map { (key, value) ->
+            jsonObject {
+                "name" += key
+                "value" += value
             }
         }
+
+        return jsonArrayItems(objs)
     }
 }
 

@@ -32,7 +32,7 @@
     <string name="no_apps_which_can_handle_links_found">No se han encontrado aplicaciones que puedan abrir enlaces.</string>
     <string name="bottom_sheet">Menú</string>
     <string name="known_trackers">Rastreadores conocidos</string>
-    <string name="display_grid_layout">Diseño de cuadrícula de visualización</string>
+    <string name="display_grid_layout">Disposición en cuadrícula</string>
     <string name="usage_stats_sorting">Ordenar aplicaciones por uso</string>
     <string name="log_viewer">Visor del registro</string>
     <string name="open_with_app">Abrir con %s</string>
@@ -65,7 +65,7 @@
     <string name="dont_show_filtered_item">No mostrar nunca la sección \"última aplicación seleccionada\"</string>
     <string name="follow_redirects_local_cache_explainer">Almacenar en la caché el resultado de las redirecciones locales</string>
     <string name="use_app_settings_explainer">Dejar que la aplicación decida si el Navegador en aplicación debería ser usado</string>
-    <string name="display_grid_layout_explainer">Mostrar una cuadrícula en lugar de una lista en menú inferior</string>
+    <string name="display_grid_layout_explainer">Mostrar una cuadrícula en lugar de una lista en la hoja inferior</string>
     <string name="apps">Aplicaciones</string>
     <string name="no_apps_found">No se han encontrado aplicaciones.</string>
     <string name="amp2html">Amp2Html</string>
@@ -438,4 +438,20 @@
     <string name="onboarding_5_title">¡Todo listo!</string>
     <string name="onboarding_5_card_explainer">¡Ya se ha realizado la configuración básica necesaria para que LinkSheet funcione. Vaya a la configuración para ver qué más puede ofrecerle!</string>
     <string name="experiment">Experimento</string>
+    <string name="base_config">Configuración básica</string>
+    <string name="hide_bottom_sheet_choice_buttons">Ocultar botones de selección</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Ocultar los botones \"Una vez\" y \"Siempre\" en la hoja inferior</string>
+    <string name="permission_required">Permiso necesario</string>
+    <string name="permission_required_explainer">Algunas preferencias importadas requieren permisos que actualmente no están concedidos a LinkSheet. Pulse a continuación para solicitarlos.öh möhöh 999</string>
+    <string name="allow_darknets">Permitir Darknet</string>
+    <string name="amp2html_allow_darknets_explainer">Permitir la ejecución de Amp2Html para darknets (soportado: %s)</string>
+    <string name="follow_redirects_allow_darknets_explainer">Permitir las siguientes redirecciones para darknets (compatible: %s)</string>
+    <string name="urlbar_settings">Barra de direcciones</string>
+    <string name="new_dev_bottom_sheet_explainer">¿No te gusta la nueva hoja inferior? Pulse para informar de los problemas.</string>
+    <string name="new_dev_bottom_sheet">Hoja inferior</string>
+    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante.
+\nPor favor, informe de errores en <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, o a través de <annotation url="mailto:1fexd@420blaze.it">Correo electrónico</annotation>. \u0020</string>
+    <string name="information">Información</string>
+    <string name="resolve_embeds">Resolver incorporaciones</string>
+    <string name="resolve_embeds_explainer">Resolver espejos integrados como fxtwitter.com en el host real</string>
 </resources>

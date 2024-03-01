@@ -77,7 +77,7 @@
     <string name="preferred_apps_settings">Előnyben részesített alkalmazások beállítása az általuk támogatott hostokhoz</string>
     <string name="set_as_browser">Beállítás böngészőként</string>
     <string name="set_as_browser_explainer">Koppintson ide a LinkSheet alapértelmezett böngészővé tételéhez</string>
-    <string name="apps_which_can_open_links">Ellenőrzött link kezelők</string>
+    <string name="apps_which_can_open_links">Ellenőrzött linkkezelők</string>
     <string name="usage_stats_sorting">Alkalmazások rendezése használat szerint</string>
     <string name="apps_which_can_open_links_explainer_2">Az összes olyan alkalmazás, amely zavarhatja a LinkSheet működését</string>
     <string name="search">Keresés</string>
@@ -89,7 +89,7 @@
     <string name="always_ask_explainer">Mindig listázza ki az összes böngészőt</string>
     <string name="no_app_to_handle_link_found">Nem található alkalmazás a link kezelésére!</string>
     <string name="open_settings">Beállítások megnyitása</string>
-    <string name="apps_explainer">Előnyben részesített alkalmazások és ellenőrzött link kezelők</string>
+    <string name="apps_explainer">Előnyben részesített alkalmazások és ellenőrzött linkkezelők</string>
     <string name="bottom_sheet_explainer">Rendezés használat szerint, másolás gomb engedélyezése, megosztás gomb engedélyezése stb.</string>
     <string name="about">Névjegy</string>
     <string name="always_show_package_name_explainer">Mindig a csomagok neveit jelenítse meg az alkalmazások nevei helyett. Ez az egész alkalmazásra vonatkozik.</string>
@@ -232,4 +232,101 @@
     <string name="amp2html_external_service">Kísérlet a nem AMP-oldalverzió beszerzésére külső szolgáltatáson keresztül</string>
     <string name="follow_redirects_builtin_cache">Beépített átirányítási gyorsítótár használata</string>
     <string name="enable_amp2html_explainer">Átirányítja az AMP oldalakat a normál webes verzióra. Ennek lehetnek <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">adatvédelemre vonatkozó következményei</annotation>. \u0020</string>
+    <string name="onboarding6_headline">Állítsa be</string>
+    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
+    <string name="seal_subtitle_2">Seal nagyszerű forrás volt a tanuláshoz a Jetpack Compose kapcsán</string>
+    <string name="mastodon_redirect_subtitle_2">A Mastodon Redirect forráskódja referenciaként volt használva a Shizuku interakcióhoz</string>
+    <string name="version_name">Teljes azonosító:</string>
+    <string name="pretend_to_be_app_explainer">Színlelje, hogy egy natív alkalmazás a támogatott domainek számára a LinkSheetCompat segítségével</string>
+    <string name="warning">Figyelmeztetés</string>
+    <string name="at_least_one_known_browser_installed">Legalább egy böngésző telepítve van</string>
+    <string name="discord">Discord</string>
+    <string name="seal">Seal</string>
+    <string name="donate_crypto">Kriptón keresztüli adományozás</string>
+    <string name="donate_card">Adományozás kártyával (a BuyMeACoffee-n keresztül)</string>
+    <string name="amp2html_external_service_explainer">Kísérlet nem-AMP oldalváltozat beszerzésére a supabase.com webhelyen telepített API segítségével (<annotation url="https://supabase.com/privacy">Adatvédelmi irányelvek</annotation>) \u0020</string>
+    <string name="always_show_package_name_disclaimer">Ez a kapcsoló egy későbbi kiadásban más helyre kerül.</string>
+    <string name="onboarding6_highlight">a preferenciáit</string>
+    <string name="finish">Befejez</string>
+    <string name="pretend_to_be_app">Natív alkalmazások kéréseinek elfogása</string>
+    <string name="dismiss">Elvetés</string>
+    <string name="join">Csatlakozás</string>
+    <string name="donate_card_subtitle_2">Kriptó adományozása</string>
+    <string name="donate_learn_more">Tudj meg többet</string>
+    <string name="donate">Támogatás</string>
+    <string name="linksheet_donation_explainer_2">Több mint <b>5 €</b> (<b>4 €</b>, ha kriptóval adományoz!) adományával hozzáférhet a <b>LinkSheet Pro</b>-hoz, amely jelenleg csak elrejti az adományozási szalaghirdetés az alkalmazás főképernyőjén, de a jövőben több <b>Pro exkluzív funkciók</b> lesznek. \u0020</string>
+    <string name="built_by">Built és aláírva általa:</string>
+    <string name="enable_new_bottom_sheet">Új alulról előbukkanó panel engedélyezése</string>
+    <string name="enable_new_bottom_sheet_explainer">Használja az átdolgozott előbukkanó panelt a régi helyett</string>
+    <string name="new_bottomsheet">Új előbukkanó panel</string>
+    <string name="done">Kész</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Shizuku mód aktiválva, koppintson egy alkalmazásra az automatikus linkkezelési képességek bekapcsolásához. Érintsen meg hosszan egy alkalmazást az \"Alapértelmezés szerinti megnyitás\" beállítási menü megnyitásához.</string>
+    <string name="onboarding4_paragraph_1">Az Android 12-ben a Google bevezette az Ellenőrzött alkalmazáslinkeket. Az alkalmazások mostantól kriptográfiai módon ellenőrizhetik a domainek tulajdonjogát. Ha egy ilyen domainre mutató linkre koppintunk, és a megfelelő alkalmazás telepítve van, akkor az alapértelmezés szerint automatikusan megnyílik, teljesen kihagyva a korábban a felhasználónak adott választási lehetőséget.</string>
+    <string name="shizuku_integration_enabled_explainer">A Shizuku integráció sikeresen engedélyezve!</string>
+    <string name="shizuku_integration_not_setup_explainer">Bár nem feltétlenül szükséges a LinkSheet működéséhez, a Shizuku használata ajánlott. A telepítéshez koppints ide.</string>
+    <string name="known_trackers">Ismert nyomkövetők</string>
+    <string name="onboarding1_headline">Üdvözöljük a(z)</string>
+    <string name="welcome_to_linksheet_explainer">A LinkSheet \"visszaállítja\" az \"url-app-chooser\"-t, amely akkor jelent meg, amikor a felhasználó rákattintott egy linkre Android 12 előtti rendszeren, és több olyan alkalmazás volt telepítve, amely képes volt kezelni a linket</string>
+    <string name="welcome_to_linksheet_explainer_2">Ahhoz, hogy a LinkSheet működhessen, a rendszer böngészőjének kell lennie, hogy a linkekre való kattintásokat el tudja fogni. Ne aggódjon, a LinkSheet rengeteg testreszabhatósági lehetőséggel rendelkezik, így ez nem korlátozza, hanem inkább fokozza a felhasználói élményt.</string>
+    <string name="onboarding0_headline">Ideje visszavenni</string>
+    <string name="onboarding0_highlight">Választási szabadság</string>
+    <string name="onboarding2_headline">Rengeteg beállítás
+\nhogy a LinkSheet</string>
+    <string name="onboarding2_highlight">a tiéd legyen</string>
+    <string name="onboarding3_highlight">minden felett</string>
+    <string name="onboarding3_headline">Get fine grained
+\nvedd át az irányítást</string>
+    <string name="onboarding7_highlight">fedezi Önt</string>
+    <string name="onboarding7_headline">Lelkes?
+\nA LinkSheet</string>
+    <string name="disable_link_handling">Linkkezelés letiltása</string>
+    <string name="onboarding4_headline">Kapcsolja ki a linkkezelést, hogy a LinkSheet</string>
+    <string name="onboarding4_highlight">működjön</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="launch_onboaring">Onboarding elindítása</string>
+    <string name="launch_onboaring_explainer">Tesztelje az onboarding folyamatot</string>
+    <string name="compat_installed">A LinkSheetCompat már telepítve van</string>
+    <string name="configure">Beállítás</string>
+    <string name="configure_explainer">Koppintson ide a LinkSheetCompat konfigurálásához</string>
+    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
+    <string name="general">Általános</string>
+    <string name="general_settings_explainer">Az egész alkalmazást érintő beállítások</string>
+    <string name="no_handlers_found">Nem találtunk böngészőt vagy natív alkalmazást!</string>
+    <string name="no_handlers_found_explainer">A LinkSheet nem tudja megnyitni ezt a linket.</string>
+    <string name="success">Siker</string>
+    <string name="at_least_one_known_browser_installed_explainer">A LinkSheet legalább egy olyan alkalmazást észlelt, amelyről ismert, hogy tényleges böngésző.</string>
+    <string name="at_least_one_unknown_browser_installer">Legalább egy (ismeretlen) böngésző telepítve van</string>
+    <string name="no_browser_installed">Nincs böngésző telepítve</string>
+    <string name="no_browser_installed_explainer">A LinkSheet egy magát böngészőnek kiadó alkalmazást sem tudott felismerni. A legjobb élmény érdekében telepítsen böngészőt.</string>
+    <string name="yes">Igen</string>
+    <string name="no">Nem</string>
+    <string name="domain_selection_confirmation_title">Domainek kiválasztása?</string>
+    <string name="domain_selection_confirmation_subtitle">Biztos, hogy ezt szeretné beállítani a következő domainek előnybe részesített alkalmazásaként: %s ?</string>
+    <string name="button_settings">Gombok</string>
+    <string name="misc_settings">Vegyes</string>
+    <string name="donate_card_headline">Adományozzon a LinkSheet támogatására</string>
+    <string name="donation_instructions">Adományozási útmutató</string>
+    <string name="open_link_with_subtitle_2">A LinkSheet eredetileg az OpenLinkWith-en alapult</string>
+    <string name="import_and_override">Importálás és felülírás</string>
+    <string name="built_at">Built ekkor (UTC):</string>
+    <string name="github_workflow_run_id">Build munkafolyamat ID:</string>
+    <string name="linksheet_version_info_header">LinkSheet verzió információ:</string>
+    <string name="privacy">Adatvédelem</string>
+    <string name="show_linksheet_referrer">LinkSheet hivatkozó megjelenítése</string>
+    <string name="show_linksheet_referrer_explainer">Egy alkalmazás indításakor ellenőrizheti, hogy melyik alkalmazás indult, vagy \"hivatkozott\" rá. Alapértelmezés szerint, amikor a LinkSheet elindít egy alkalmazást, elrejti magát, mondván, hogy a LinkSheet-et elindító alkalmazás az elindított célpont. Engedélyezze ezt, hogy a LinkSheet újra hivatkozónak tekintse az általa megnyitott alkalmazásokat.</string>
+    <string name="thanks_for_donating">Köszönjük az adományozást!</string>
+    <string name="use_unified_preferred_browser_explainer">Ennek engedélyezése az alábbi beállításokat alkalmazza mind a normál, mind az alkalmazáson belüli linkkezelésre. Az alábbi gombok segítségével válthat a normál és az alkalmazáson belüli mód között, ha az le van tiltva.</string>
+    <string name="onboarding4_paragraph_2">Ez rendkívül bosszantó, mivel néha nem az alkalmazásban, hanem a böngészőben szeretnénk megnyitni egy linket (például könyvjelzőként).
+\n
+\nKlasszikus Google, megnyomorítja a saját termékeit anélkül, hogy egyszerű módon visszaállítaná a régi viselkedést.
+\n
+\n Mindenesetre hagytak egy \"kiskaput\": A linkkezelés alkalmazásonként kikapcsolható. Feltételezhetjük, hogy ez visszahozza a régi alkalmazásválasztót, de természetesen (köszönjük Google!), nem ez a helyzet, mivel mostantól a link mindig az alapértelmezett böngészőben fog megnyílni. Ezért jött létre a LinkSheet.</string>
+    <string name="pretend_to_be_app_explainer_2">Egyes alkalmazások, például a Google Chrome kifejezetten egy natív alkalmazást keresnek, hogy például egy Youtube-linket kezeljenek, amikor a keresési eredményekben rákattintanak. A LinkSheetCompat úgy tesz, mintha egy ilyen natív alkalmazás lenne a támogatott hostok esetében, majd továbbítja a kérést a LinkSheet-nek.</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">A LinkSheet legalább egy olyan alkalmazást észlelt, amely böngészőnek adja ki magát. A LinkSheet listája nem biztos, hogy teljes. Ha úgy gondolja, hogy ez így hibás, küldjön egy jelentést a Githubon.</string>
+    <string name="donate_card_subtitle">Ha tetszik a LinkSheet, fontolja meg, hogy csillagot hagy a Githubon és/vagy adományoz.
+\nAzok az adományozók, akik több mint <b>5 eurót</b> adományoznak, jogosultak a <b>LinkSheet Pro</b> szolgáltatásra, amely exkluzív funkciókkal rendelkezik. \u0020</string>
+    <string name="import_dumped_preference_explainer">Importáló a naplófájlokban található beállításokhoz - valószínűleg nem hasznos az átlagfelhasználó számára</string>
+    <string name="discord_explainer">Gyere és csevegj a Discord szerverünkön! Csevegj a más felhasználókkal és a LinkSheet fejlesztőivel az alkalmazás jövőjéről és egyéb törekvésekről!</string>
+    <string name="donate_explainer_crypto">Ha kriptovalutával adományozol, a <b>LinkSheet Pro</b> igényléséhez küldd el a fizetési igazolást a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> címre. \u0020</string>
+    <string name="linksheet_donation_explainer">A LinkSheet több mint <b>%s</b> munka eredménye több mint <b>%s</b> alatt. Ha szeretné kifejezni megbecsülését a munkámért, kérem adományozzon. \u0020</string>
 </resources>

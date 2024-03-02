@@ -404,4 +404,20 @@
     <string name="start_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੀ ਕਾਰਜਕੁਸ਼ਲਤਾ ਲਈ ਕਸਟਮ ਐਂਡਰਾਇਡ ਸੰਰਚਨਾ ਦੀ ਲੋੜ ਹੈ। ਨਿਮਨਲਿਖਤ ਸੈੱਟਅੱਪ ਤੁਹਾਨੂੰ ਬਹੁ-ਪੜਾਵੀ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇਗਾ।</string>
     <string name="apps_which_can_open_links">ਪ੍ਰਮਾਣਿਤ ਲਿੰਕ ਹੈਂਡਲਰ</string>
     <string name="apps_explainer">ਤਰਜੀਹੀ ਐਪਸ ਅਤੇ ਪ੍ਰਮਾਣਿਤ ਲਿੰਕ ਹੈਂਡਲਰ</string>
+    <string name="onboarding_1_title">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
+    <string name="onboarding_1_subtitle">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਟੈਪ ਕੀਤੇ ਲਿੰਕਾਂ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ</string>
+    <string name="onboarding_1_card_title">ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ</string>
+    <string name="onboarding_1_button">ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
+    <string name="onboarding_1_card_explainer">ਲਿੰਕਸ਼ੀਟ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਤੋਂ ਬਿਨਾਂ ਕੰਮ ਨਹੀਂ ਕਰ ਸਕਦਾ।</string>
+    <string name="onboarding_2_title">ਕੀ ਤੁਸੀਂ ਸ਼ਿਜ਼ੂਕੁ ਨੂੰ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="onboarding_2_card_explainer">ਸ਼ਿਜ਼ੂਕੁ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਹਰੇਕ ਐਪ ਲਈ ਵਿਅਕਤੀਗਤ ਤੌਰ \'ਤੇ ਉਹਨਾਂ ਨੂੰ ਹੱਥੀਂ ਅਯੋਗ ਕਰਨ ਦੀ ਬਜਾਏ, ਸਾਰੇ ਐਪਸ ਨੂੰ ਇੱਕ ਵਾਰ ਵਿੱਚ ਡਿਫੌਲਟ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਵਿਵਹਾਰ ਨੂੰ ਅਯੋਗ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ (ਜੋ ਕਿ ਅਗਲਾ ਕਦਮ ਹੈ)।</string>
+    <string name="onboarding_3_subtitle">ਲਿੰਕ ਹੈਂਡਲਰ ਨੂੰ ਅਯੋਗ ਬਣਾਉਣ ਦੀ ਲੋੜ ਹੈ ਤਾਂ ਕਿ ਲਿੰਕਸ਼ੀਟ ਉਹਨਾਂ ਨੂੰ ਇੰਟਰਸੈਪਟ ਕਰ ਸਕੇ</string>
+    <string name="onboarding_3_title">ਡਿਫ਼ਾਲਟ ਲਿੰਕ ਹੈਂਡਲਰ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਓ</string>
+    <string name="onboarding_3_card_explainer">ਗੂਗਲ ਨੇ ਐਂਡਰੌਇਡ 12 ਵਿੱਚ ਵੈਰੀਫਾਈਡ ਐਪ ਲਿੰਕਸ ਪੇਸ਼ ਕੀਤੇ, ਜੋ ਐਪਸ ਨੂੰ ਡੋਮੇਨਾਂ ਦੀ ਕ੍ਰਿਪਟੋਗ੍ਰਾਫਿਕ ਤੌਰ \'ਤੇ ਮਾਲਕੀ ਦਾ ਸਬੂਤ ਦੇਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ। ਇਸ ਵਿਵਹਾਰ ਨੂੰ ਲਿੰਕਸ਼ੀਟ ਲਈ ਟੈਪ ਕੀਤੇ ਲਿੰਕਾਂ ਨੂੰ ਰੋਕਣ ਲਈ ਹੱਥੀਂ ਅਯੋਗ ਬਣਾਇਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ।</string>
+    <string name="onboarding_2_subtitle">ਜੇਕਰ ਤੁਹਾਡੇ ਕੋਲ ਬਹੁਤ ਸਾਰੀਆਂ ਐਪਾਂ ਸਥਾਪਤ ਹਨ, ਤਾਂ ਸ਼ਿਜ਼ੂਕੁ ਤੁਹਾਡੇ ਅਨੁਭਵ ਵਿੱਚ ਮਹੱਤਵਪੂਰਨ ਸੁਧਾਰ ਕਰ ਸਕਦਾ ਹੈ</string>
+    <string name="onboarding_2_request_shizuku_permission">ਇਜਾਜ਼ਤ ਲਈ ਬੇਨਤੀ ਕਰੋ</string>
+    <string name="onboarding_2_install_shizuku">ਸ਼ਿਜ਼ੁਕੂ ਇੰਸਟਾਲ ਕਰੋ</string>
+    <string name="onboarding_2_skip_button">ਛੱਡੋ</string>
+    <string name="onboarding_3_card_title">ਲਿੰਕ ਹੈਂਡਲਰ</string>
+    <string name="onboarding_setup">ਲਿੰਕਸ਼ੀਟ ਸੈੱਟਅੱਪ ਕਰੋ</string>
 </resources>

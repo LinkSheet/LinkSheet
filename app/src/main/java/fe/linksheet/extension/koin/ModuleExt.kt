@@ -63,6 +63,19 @@ inline fun <reified T : Service> Module.service(
     }
 }
 
+inline fun <reified T : Service, reified P : Any> Module.service(
+    qualifier: Qualifier? = null,
+    noinline definition: DefinitionParam1<T, P>
+): KoinDefinition<T> {
+    return single(qualifier, true) { params ->
+        val scope = ExtendedScope(this, T::class)
+        val service = definition(scope, params, get<P>())
+
+        scope.applicationContext.manageService(service)
+        service
+    }
+}
+
 inline fun <reified T : Service, reified P : Any, reified P2 : Any> Module.service(
     qualifier: Qualifier? = null,
     noinline definition: DefinitionParam2<T, P, P2>

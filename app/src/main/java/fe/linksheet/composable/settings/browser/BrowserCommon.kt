@@ -15,8 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.android.preference.helper.MappedPreference
-import fe.android.preference.helper.compose.RepositoryState
+import fe.android.preference.helper.compose.StateMappedPreference
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
@@ -33,7 +32,7 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
     onBackPressed: () -> Unit,
     viewModel: BaseViewModel,
     values: List<T>,
-    state: RepositoryState<T, T, MappedPreference<T, M>>?,
+    state: StateMappedPreference<T, M>?,
     rowKey: (T) -> String,
     rows: List<BrowserCommonRadioButtonRowData>,
     header: @Composable (ColumnScope.() -> Unit)? = null,
@@ -127,7 +126,7 @@ data class BrowserCommonRadioButtonRowData(
 fun <T : Any, M : Any> BrowserCommonRadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
-    state: RepositoryState<T, T, MappedPreference<T, M>>,
+    state: StateMappedPreference<T, M>,
     viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int? = null,

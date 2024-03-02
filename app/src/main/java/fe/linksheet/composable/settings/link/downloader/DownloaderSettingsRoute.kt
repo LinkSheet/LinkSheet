@@ -14,9 +14,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
-import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.RepositoryState
+import fe.android.preference.helper.compose.StatePreference
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SettingEnabledCardColumn
@@ -24,7 +23,6 @@ import fe.linksheet.composable.util.SliderRow
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.composable.util.linkableSubtitleBuilder
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
-import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
@@ -96,7 +94,7 @@ fun downloaderPermissionState() = rememberPermissionState(
 @OptIn(ExperimentalPermissionsApi::class)
 fun requestDownloadPermission(
     permissionState: PermissionState,
-    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
+    state: StatePreference<Boolean>,
     newState: Boolean
 ) {
     if (!AndroidVersion.AT_LEAST_API_29_Q && !permissionState.status.isGranted) {

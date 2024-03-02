@@ -1,17 +1,11 @@
 package fe.linksheet.module.preference
 
 import android.content.Context
-import fe.android.preference.helper.BasePreference
+import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.ComposePreferenceRepository
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
-
-val preferenceRepositoryModule = module {
-    singleOf(::AppPreferenceRepository)
-}
 
 class AppPreferenceRepository(val context: Context) : ComposePreferenceRepository(context) {
 
@@ -56,7 +50,7 @@ class AppPreferenceRepository(val context: Context) : ComposePreferenceRepositor
         }
     }
 
-    fun exportPreferences(exclude: Iterable<BasePreference<*, *>>): Map<String, String?> {
+    fun exportPreferences(exclude: Iterable<Preference<*, *>>): Map<String, String?> {
         val preferences = AppPreferences.all.toMutableMap()
         exclude.forEach {
             preferences.remove(it.key)

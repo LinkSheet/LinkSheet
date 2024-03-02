@@ -30,6 +30,7 @@ import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.FeatureFlagRepository
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -46,6 +47,8 @@ class MainViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
+
+    @OptIn(SensitivePreference::class)
     val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)
     val donateCardDismissed = preferenceRepository.getBooleanState(AppPreferences.donateCardDismissed)

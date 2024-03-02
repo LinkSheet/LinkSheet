@@ -7,6 +7,7 @@ import fe.linksheet.module.preference.AppPreferenceRepository
 
 
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserHandler
@@ -35,9 +36,13 @@ class PreferredBrowserViewModel(
         preferenceRepository.getBooleanState(AppPreferences.unifiedPreferredBrowser)
 
     private var browserMode = preferenceRepository.getState(AppPreferences.browserMode)
+
+    @OptIn(SensitivePreference::class)
     private var selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
 
     private var inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
+
+    @OptIn(SensitivePreference::class)
     private var selectedInAppBrowser = preferenceRepository.getStringState(
         AppPreferences.selectedInAppBrowser
     )

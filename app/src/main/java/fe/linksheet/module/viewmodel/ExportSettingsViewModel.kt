@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -26,6 +27,7 @@ class ExportSettingsViewModel(
         return Result.success(preferenceRepository.importPreferences(result.getOrNull()!!))
     }
 
+    @OptIn(SensitivePreference::class)
     fun exportPreferences(uri: Uri, includeLogHashKey: Boolean) {
         val preferences = preferenceRepository.exportPreferences(
             if (!includeLogHashKey) listOf(AppPreferences.logKey) else listOf()

@@ -1,8 +1,8 @@
 package fe.linksheet.module.preference
 
-import fe.android.preference.helper.Preferences
+import fe.android.preference.helper.PreferenceDefinition
 
-object FeatureFlags : Preferences() {
+object FeatureFlags : PreferenceDefinition() {
 
     val featureFlagLinkSheetCompat = booleanPreference("feature_flag_linksheet_compat")
     val featureFlagNewBottomSheet = booleanPreference("feature_flag_new_bottom_sheet", true)

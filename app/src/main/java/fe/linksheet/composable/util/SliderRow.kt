@@ -13,10 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.RepositoryState
-import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.android.preference.helper.compose.StatePreference
+
 
 @Composable
 fun SliderRow(
@@ -26,7 +25,7 @@ fun SliderRow(
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     valueRangeStep: Float = 1f,
     valueFormatter: (Float) -> String = { it.toString() },
-    state: RepositoryState<Number, Number, Preference<Number>>,
+    state: StatePreference<Number>,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle)
@@ -52,7 +51,7 @@ fun SliderRow(
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     valueRangeStep: Float = 1f,
     valueFormatter: (Float) -> String = { it.toString() },
-    state: RepositoryState<Number, Number, Preference<Number>>,
+    state: StatePreference<Number>,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int
 ) {

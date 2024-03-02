@@ -28,7 +28,6 @@ import fe.linksheet.module.log.file.fileAppLoggerModule
 import fe.linksheet.module.network.networkStateModule
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.featureFlagRepositoryModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.request.requestModule
@@ -38,6 +37,7 @@ import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
+import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Timer
@@ -49,7 +49,6 @@ import kotlin.system.exitProcess
 
 open class LinkSheetApp : Application() {
     private lateinit var lifecycleObserver: AppLifecycleObserver
-
     private lateinit var timer: Timer
 
     override fun attachBaseContext(base: Context) {
@@ -75,8 +74,6 @@ open class LinkSheetApp : Application() {
             exitProcess(2)
         }
 
-        AppPreferences.checkDeprecated()
-
         GlobalGsonContext.configure {
             ExtendedTypeAdapter.Default.register(this)
             registerTypeAdapter(LogEntry::class.java, LogEntryDeserializer)
@@ -98,7 +95,6 @@ open class LinkSheetApp : Application() {
                 shizukuHandlerModule,
                 globalGsonModule,
                 preferenceRepositoryModule,
-                featureFlagRepositoryModule,
                 defaultLoggerFactoryModule,
                 databaseModule,
                 daoModule,
@@ -111,7 +107,8 @@ open class LinkSheetApp : Application() {
                 viewModelModule,
                 requestModule,
                 downloaderModule,
-                if (BuildConfig.DEBUG) analyticsModule else DebugLogAnalyticsClient.module
+                if (BuildConfig.DEBUG) analyticsModule else DebugLogAnalyticsClient.module,
+                statisticsModule
             )
         }
 

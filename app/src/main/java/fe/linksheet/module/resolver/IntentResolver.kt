@@ -33,6 +33,7 @@ import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import fe.fastforwardkt.*
 import fe.linksheet.extension.android.toDisplayActivityInfos
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -101,8 +102,10 @@ class IntentResolver(
         preferenceRepository.getState(AppPreferences.inAppBrowserSettings)
 
     private val browserMode = preferenceRepository.getState(AppPreferences.browserMode)
+    @OptIn(SensitivePreference::class)
     private val selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
     private val inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
+    @OptIn(SensitivePreference::class)
     private val selectedInAppBrowser =
         preferenceRepository.getStringState(AppPreferences.selectedInAppBrowser)
 

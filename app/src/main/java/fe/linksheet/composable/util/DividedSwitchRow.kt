@@ -4,18 +4,12 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import fe.android.preference.helper.BasePreference
-import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.RepositoryState
-import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.android.preference.helper.compose.StatePreference
+
 
 @Composable
 fun DividedSwitchRow(
-    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
+    state: StatePreference<Boolean>,
     @StringRes headline: Int,
     @StringRes subtitle: Int,
     onChange: (Boolean) -> Unit = { state(it) },
@@ -32,7 +26,7 @@ fun DividedSwitchRow(
 
 @Composable
 fun DividedSwitchRow(
-    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
+    state: StatePreference<Boolean>,
     enabled: Boolean = true,
     headline: String,
     subtitle: String? = null,
@@ -57,7 +51,7 @@ fun DividedSwitchRow(
 
 @Composable
 fun DividedSwitchRow(
-    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
+    state: StatePreference<Boolean>,
     headline: String,
     subtitle: String? = null,
     subtitleBuilder: @Composable (() -> Unit)? = buildSubtitle(subtitle = subtitle),

@@ -15,14 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.android.preference.helper.BasePreference
 import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.RepositoryState
+import fe.android.preference.helper.compose.StatePreference
+
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 @Composable
 fun SettingEnabledCardColumn(
-    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
+    state: StatePreference<Boolean>,
     viewModel: BaseViewModel,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int,
@@ -59,7 +59,7 @@ fun SettingEnabledCardColumn(
 
 @Composable
 fun SettingEnabledCardColumn(
-    state: RepositoryState<Boolean, Boolean, Preference<Boolean>>,
+    state: StatePreference<Boolean>,
     viewModel: BaseViewModel,
     headline: String,
     subtitle: String? = null,

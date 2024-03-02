@@ -2,7 +2,7 @@ package fe.linksheet.module.preference
 
 
 import com.google.gson.JsonArray
-import fe.android.preference.helper.Preferences
+import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.analytics.TelemetryLevel
@@ -15,7 +15,14 @@ import fe.linksheet.ui.Theme
 import fe.linksheet.util.CryptoUtil
 import java.util.*
 
-object AppPreferences : Preferences() {
+object AppPreferences : PreferenceDefinition(
+    mutableSetOf(
+        "enable_copy_button",
+        "single_tap",
+        "enable_send_button",
+        "show_new_bottom_sheet_banner"
+    )
+) {
     val hideAfterCopying = booleanPreference("hide_after_copying")
     val usageStatsSorting = booleanPreference("usage_stats_sorting")
 
@@ -118,28 +125,17 @@ object AppPreferences : Preferences() {
     val lastVersion = intPreference("last_version", -1)
 
 
+    @SensitivePreference
     val sensitivePreferences = setOf(
         useTimeMs, logKey,
     )
 
+    @SensitivePreference
     private val sensitivePackagePreferences = setOf(
         selectedBrowser, selectedInAppBrowser
     )
 
-    private val deprecatedPreferenceKeys = setOf(
-        "enable_copy_button",
-        "single_tap",
-        "enable_send_button",
-        "show_new_bottom_sheet_banner"
-    )
-
-    fun checkDeprecated() {
-        val inUse = deprecatedPreferenceKeys.filter { it in all.keys }
-        if (inUse.isNotEmpty()) {
-            throw Exception("Deprecated key(s) ${inUse.joinToString(", ") { "'$it'" }} must not be re-used!")
-        }
-    }
-
+    @OptIn(SensitivePreference::class)
     fun logPackages(redact: Boolean, logger: Logger, repository: AppPreferenceRepository): Map<String, String?> {
         return sensitivePackagePreferences.associate { pref ->
             val value = repository.getString(pref)

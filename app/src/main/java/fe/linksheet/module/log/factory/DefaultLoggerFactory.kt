@@ -10,13 +10,16 @@ import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.util.CryptoUtil
 import org.koin.dsl.module
 import kotlin.reflect.KClass
 
 
+
 val defaultLoggerFactoryModule = module {
     single<LoggerFactory, AppPreferenceRepository, FileAppLogger> { _, preferences, fileAppLogger ->
+        @OptIn(SensitivePreference::class)
         val logKey = preferences.getOrWriteInit(AppPreferences.logKey).decodeHexOrThrow()
 
         DefaultLoggerFactory(logKey, fileAppLogger)

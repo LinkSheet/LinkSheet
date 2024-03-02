@@ -8,6 +8,7 @@ import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.util.AppInfo
 
 
@@ -16,6 +17,7 @@ class LogViewCommon(
     val gson: Gson,
     private val logger: Logger
 ) {
+    @OptIn(SensitivePreference::class)
     private fun logPreferences(redact: Boolean): Map<String, String?> {
         val preferences = preferenceRepository.exportPreferences(AppPreferences.sensitivePreferences)
         val packages = AppPreferences.logPackages(redact, logger, preferenceRepository)

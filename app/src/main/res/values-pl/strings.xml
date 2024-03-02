@@ -233,7 +233,7 @@
     <string name="onboarding3_headline">Uzyskaj precyzyjną
 \nkontrolę nad</string>
     <string name="onboarding3_highlight">wszystkim</string>
-    <string name="onboarding7_headline">Entuzjasta\?
+    <string name="onboarding7_headline">Entuzjasta?
 \nLinkSheet ma Cię</string>
     <string name="onboarding7_highlight">w swej garści</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „przywraca” „url-app-chooser”, który został usunięty w Androidzie 12. Użytkownik za jego pomocą mógł wybrać przez jaką aplikację zostanie otworzony link</string>
@@ -275,8 +275,8 @@
     <string name="no_browser_installed_explainer">LinkSheet nie był w stanie wykryć przeglądarki. Aby uzyskać najlepsze wrażenia, zainstaluj ją.</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
-    <string name="domain_selection_confirmation_title">Wybrać domeny\?</string>
-    <string name="domain_selection_confirmation_subtitle">Czy na pewno chcesz ustawić %s jako preferowaną aplikację dla następujących domen\?</string>
+    <string name="domain_selection_confirmation_title">Wybrać domeny?</string>
+    <string name="domain_selection_confirmation_subtitle">Czy na pewno chcesz ustawić %s jako preferowaną aplikację dla następujących domen?</string>
     <string name="donate_card_subtitle_2">Przekaż kryptowalutę</string>
     <string name="button_settings">Przyciski</string>
     <string name="misc_settings">Różne</string>

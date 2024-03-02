@@ -1,14 +1,22 @@
 package fe.linksheet.module.analytics
 
 import android.content.Context
+import android.os.Build
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.BuildConfig
+import fe.linksheet.extension.android.getCurrentLocale
+import fe.linksheet.extension.koin.service
 import fe.linksheet.extension.koin.single
 import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
+import fe.linksheet.module.analytics.client.EnvironmentInfo
+import fe.linksheet.module.lifecycle.AppLifecycleObserver
+import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.network.NetworkState
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.util.BuildType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
@@ -19,15 +27,15 @@ import kotlin.math.pow
 import kotlin.properties.Delegates
 
 val analyticsModule = module {
-    single<AnalyticsClient, LifecycleCoroutineScope, AppPreferenceRepository, NetworkState> { _, lifecycleScope, preferences, networkState ->
+    service<AnalyticsClient, AppPreferenceRepository, NetworkState> { _, preferences, networkState ->
         val identity = preferences.getOrWriteInit(AppPreferences.telemetryIdentity)
         val level by preferences.getState(AppPreferences.telemetryLevel)
 
         AptabaseAnalyticsClient(
             BuildConfig.ANALYTICS_SUPPORTED,
-            lifecycleScope,
-            identity,
-            level,
+            applicationLifecycle.coroutineScope,
+            EnvironmentInfo.create(applicationContext),
+            level.buildIdentity(applicationContext, identity),
             networkState,
             singletonLogger,
             BuildConfig.APTABASE_API_KEY
@@ -38,11 +46,11 @@ val analyticsModule = module {
 abstract class AnalyticsClient(
     private val supported: Boolean,
     private val coroutineScope: LifecycleCoroutineScope,
-    protected val identity: String,
-    private val initialLevel: TelemetryLevel,
+    protected val identity: TelemetryIdentity,
     private val networkState: NetworkState,
     val logger: Logger
-) {
+) : Service {
+
     private lateinit var currentLevel: TelemetryLevel
     private var eventSender: Job? = null
     private var enabled by Delegates.notNull<Boolean>()
@@ -66,25 +74,31 @@ abstract class AnalyticsClient(
     @Throws(IOException::class)
     protected abstract fun send(telemetryIdentity: TelemetryIdentity, events: List<AnalyticsEvent>): Boolean
 
+    override fun boot(lifecycle: Lifecycle) {
+//        val implEnabled = supported && this.checkImplEnabled()
+//        enabled = implEnabled && level != TelemetryLevel.Disabled
+//        currentLevel = level
+//
+//        if (enabled) {
+//            val telemetryIdentity = initialLevel.buildIdentity(context, identity)
+//            setup(context)
+//
+//
+//        } else {
+//            eventSender?.cancel()
+//        }
 
-    internal fun start(context: Context, level: TelemetryLevel = initialLevel): AnalyticsClient {
-        val implEnabled = supported && this.checkImplEnabled()
-        enabled = implEnabled && level != TelemetryLevel.Disabled
-        currentLevel = level
-
-        if (enabled) {
-            val telemetryIdentity = initialLevel.buildIdentity(context, identity)
-            setup(context)
-
-            eventSender = coroutineScope.launch(Dispatchers.IO) {
-                sendEvents(telemetryIdentity)
-            }
-        } else {
-            eventSender?.cancel()
+        eventSender = coroutineScope.launch(Dispatchers.IO) {
+            sendEvents(identity)
         }
 
-        return this
+//        return this
     }
+
+    override fun shutdown(lifecycle: Lifecycle) {
+        eventSender?.cancel()
+    }
+
 
     @OptIn(DelicateCoroutinesApi::class)
     private suspend fun sendEvents(telemetryIdentity: TelemetryIdentity) {
@@ -134,6 +148,7 @@ abstract class AnalyticsClient(
                 }
             }.onFailure {
                 it.printStackTrace()
+                // TODO: Better exception logging
                 logger.error(it, "AnalyticSender")
             }
 
@@ -143,9 +158,9 @@ abstract class AnalyticsClient(
         return false
     }
 
-    fun updateLevel(context: Context, newLevel: TelemetryLevel) {
-        start(context, newLevel)
-    }
+//    fun updateLevel(context: Context, newLevel: TelemetryLevel) {
+//        start(context, newLevel)
+//    }
 
     // TODO: Handle remaining events in channel when app is stopped/destroyed
     fun enqueue(event: AnalyticsEvent?) {
@@ -153,9 +168,5 @@ abstract class AnalyticsClient(
         if (event != null) {
             coroutineScope.launch { eventQueue.trySend(event) }
         }
-    }
-
-    fun shutdown() {
-        eventSender?.cancel()
     }
 }

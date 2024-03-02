@@ -1,48 +1,50 @@
 package fe.linksheet.module.network
 
-import android.content.Context
 import android.net.ConnectivityManager
 import androidx.core.content.getSystemService
-import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.coroutineScope
+import fe.linksheet.extension.koin.service
+import fe.linksheet.module.lifecycle.Service
 import kotlinx.coroutines.flow.*
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 
 val networkStateModule = module {
-    singleOf(::NetworkState)
+    service<NetworkState> { NetworkState(applicationContext.getSystemService()!!) }
 }
 
-class NetworkState(val context: Context, coroutineScope: LifecycleCoroutineScope) {
-    private val connectivityManager: ConnectivityManager = context.getSystemService()!!
-    private val currentNetwork = MutableStateFlow(CurrentNetwork.Default)
+class NetworkState(private val connectivityManager: ConnectivityManager) : Service {
 
+    private val currentNetwork = MutableStateFlow(CurrentNetwork.Default)
     private val networkCallback = NetworkCallback(currentNetwork)
 
-    val isNetworkConnectedFlow: StateFlow<Boolean> = currentNetwork
-        .map { it.isConnected() }
-        .stateIn(
-            scope = coroutineScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = currentNetwork.value.isConnected()
-        )
+    lateinit var isNetworkConnectedFlow: StateFlow<Boolean>
 
     val isNetworkConnected: Boolean
         get() = isNetworkConnectedFlow.value
 
-    fun registerListener() {
+
+    override fun boot(lifecycle: Lifecycle) {
         if (currentNetwork.value.isListening) return
+
+        isNetworkConnectedFlow = currentNetwork.map { it.isConnected() }.stateIn(
+            scope = lifecycle.coroutineScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = currentNetwork.value.isConnected()
+        )
 
         currentNetwork.update { CurrentNetwork.Default.copy(isListening = true) }
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
 
-    fun unregisterListener() {
+    override fun shutdown(lifecycle: Lifecycle) {
         if (!currentNetwork.value.isListening) return
 
         currentNetwork.update { CurrentNetwork.Default.copy(isListening = false) }
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
+
 
     suspend fun awaitNetworkConnection(): Boolean {
         return if (isNetworkConnected) isNetworkConnected

@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
 import fe.gson.GlobalGsonContext
@@ -13,6 +11,7 @@ import fe.gson.globalGsonModule
 import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
+import fe.linksheet.extension.koin.applicationLifecycle
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.analyticsModule
@@ -20,12 +19,13 @@ import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.lifecycle.processLifecycleCoroutineModule
-import fe.linksheet.module.log.file.FileAppLogger
+import fe.linksheet.module.lifecycle.AppLifecycleObserver
+import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.factory.defaultLoggerFactoryModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.log.file.fileAppLoggerModule
+import fe.linksheet.module.network.networkStateModule
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.featureFlagRepositoryModule
@@ -37,20 +37,19 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestM
 import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
-import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
+import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
-import fe.linksheet.module.network.NetworkState
 import fe.linksheet.util.Timer
-import fe.linksheet.module.network.networkStateModule
-import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import kotlin.system.exitProcess
 
 
-open class LinkSheetApp : Application(), DefaultLifecycleObserver {
+open class LinkSheetApp : Application() {
+    private lateinit var lifecycleObserver: AppLifecycleObserver
+
     private lateinit var timer: Timer
 
     override fun attachBaseContext(base: Context) {
@@ -58,7 +57,11 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
     }
 
     override fun onCreate() {
-        super<Application>.onCreate()
+        super.onCreate()
+
+        lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
+        lifecycleObserver.attach()
+
         timer = Timer.startTimer()
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
@@ -83,14 +86,13 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         DynamicColors.applyToActivitiesIfAvailable(this)
 
         val koinApplication = startKoin {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
+            applicationLifecycle(lifecycleObserver)
             modules(
-                processLifecycleCoroutineModule,
                 networkStateModule,
                 fileAppLoggerModule,
                 shizukuHandlerModule,
@@ -113,10 +115,15 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             )
         }
 
-        get<NetworkState>().registerListener()
-        get<AnalyticsClient>().start(get())
+        lifecycleObserver.bootServices()
 
-        get<FileAppLogger>().deleteOldLogs()
+//        val lifecycleBoundServices = listOf()
+
+
+//        get<NetworkState>().registerListener()
+//        get<AnalyticsClient>().start(get())
+
+//
 
         if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out
@@ -128,6 +135,9 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
         }
     }
 
+    fun manageService(service: Service) {
+        lifecycleObserver.manageService(service)
+    }
 
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {
         return if (lastVersion == -1) AnalyticsEvent.FirstStart
@@ -135,24 +145,25 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
         else AnalyticsEvent.AppStarted(BuildConfig.VERSION_CODE)
     }
 
-    override fun onStop(owner: LifecycleOwner) {
-        super.onStop(owner)
 
-        runCatching {
-//            val analyticsClient = get<AnalyticsClient>()
-//            analyticsClient.shutdown()
-
-            val preferenceRepository = get<AppPreferenceRepository>()
-
-            val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
-            val usedFor = timer.stop()
-
-            preferenceRepository.writeLong(AppPreferences.useTimeMs, currentUseTime + usedFor)
-            preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
-        }
-
-        get<AnalyticsClient>().shutdown()
-        get<NetworkState>().unregisterListener()
-        get<FileAppLogger>().writeLog()
-    }
+//    override fun onStop(owner: LifecycleOwner) {
+//        super.onStop(owner)
+//
+//        runCatching {
+////            val analyticsClient = get<AnalyticsClient>()
+////            analyticsClient.shutdown()
+//
+//            val preferenceRepository = get<AppPreferenceRepository>()
+//
+//            val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
+//            val usedFor = timer.stop()
+//
+//            preferenceRepository.writeLong(AppPreferences.useTimeMs, currentUseTime + usedFor)
+//            preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
+//        }
+//
+//        get<AnalyticsClient>().shutdown()
+//        get<NetworkState>().unregisterListener()
+//        get<FileAppLogger>().writeLog()
+//    }
 }

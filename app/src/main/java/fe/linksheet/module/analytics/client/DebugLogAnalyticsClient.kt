@@ -14,17 +14,17 @@ import org.koin.dsl.module
 
 class DebugLogAnalyticsClient(
     coroutineScope: LifecycleCoroutineScope,
-    identity: String = "Debug-Log",
-    level: TelemetryLevel = TelemetryLevel.Basic,
+    identity: TelemetryIdentity,
     networkState: NetworkState,
     logger: Logger,
-) : AnalyticsClient(true, coroutineScope, identity, level, networkState, logger = logger) {
+) : AnalyticsClient(true, coroutineScope, identity, networkState, logger = logger) {
     companion object {
         val module = module {
-            single<AnalyticsClient, LifecycleCoroutineScope, NetworkState> { _, lifecycleCoroutineScope, networkState ->
+            single<AnalyticsClient, NetworkState> { _, networkState ->
                 DebugLogAnalyticsClient(
-                    coroutineScope = lifecycleCoroutineScope,
+                    coroutineScope = applicationLifecycle.coroutineScope,
                     networkState = networkState,
+                    identity = TelemetryLevel.Basic.buildIdentity(applicationContext, "Debug"),
                     logger = singletonLogger
                 )
             }

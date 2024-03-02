@@ -23,14 +23,15 @@ import java.time.format.DateTimeFormatter
 class AptabaseAnalyticsClient(
     enabled: Boolean,
     coroutineScope: LifecycleCoroutineScope,
-    identity: String,
-    level: TelemetryLevel,
+    private val environmentInfo: EnvironmentInfo,
+    identity: TelemetryIdentity,
     networkState: NetworkState,
     logger: Logger,
     private val apiKey: String?,
-) : AnalyticsClient(enabled, coroutineScope, identity, level, networkState, logger = logger) {
+) : AnalyticsClient(enabled, coroutineScope, identity, networkState, logger = logger) {
+
     companion object {
-        private const val SDK_VERSION = "aptabase-kotlin@0.0.8"
+        const val SDK_VERSION = "aptabase-kotlin@0.0.8"
 
         val HOSTS = mapOf(
             "US" to "https://us.aptabase.com",
@@ -43,7 +44,6 @@ class AptabaseAnalyticsClient(
     }
 
     private val baseUrl: String
-    private lateinit var environmentInfo: EnvironmentInfo
 
     init {
         val parts = apiKey?.split("-").takeIf { it?.size == 3 }
@@ -51,24 +51,10 @@ class AptabaseAnalyticsClient(
         baseUrl = HOSTS[region] ?: throw Exception("The Aptabase App Key $apiKey is invalid!")
     }
 
-    override fun setup(context: Context) {
-        environmentInfo = EnvironmentInfo(
-            BuildConfig.DEBUG,
-            "Android",
-            Build.VERSION.RELEASE ?: "",
-            context.getCurrentLocale().language,
-            if (BuildType.current == BuildType.Release) BuildConfig.VERSION_NAME
-            else BuildConfig.COMMIT.substring(0, 6),
-            BuildConfig.VERSION_CODE.toString(),
-            Build.MODEL,
-            SDK_VERSION
-        )
-    }
-
     private fun buildEvent(telemetryIdentity: TelemetryIdentity, event: AnalyticsEvent): AptabaseEvent {
         val timestamp = event.unixMillis.unixMillisAtZone().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val properties = telemetryIdentity.createEvent(event)
-        return AptabaseEvent(timestamp, identity, event.name, environmentInfo, properties)
+        return AptabaseEvent(timestamp, "TODO", event.name, environmentInfo, properties)
     }
 
     @Throws(IOException::class)
@@ -90,7 +76,7 @@ class AptabaseAnalyticsClient(
     }
 }
 
-private data class EnvironmentInfo(
+data class EnvironmentInfo(
     var isDebug: Boolean,
     var osName: String,
     var osVersion: String,
@@ -99,7 +85,23 @@ private data class EnvironmentInfo(
     var appBuildNumber: String,
     var deviceModel: String,
     val sdkVersion: String
-)
+) {
+    companion object {
+        fun create(context: Context): EnvironmentInfo {
+            return EnvironmentInfo(
+                BuildConfig.DEBUG,
+                "Android",
+                Build.VERSION.RELEASE ?: "",
+                context.getCurrentLocale().language,
+                if (BuildType.current == BuildType.Release) BuildConfig.VERSION_NAME
+                else BuildConfig.COMMIT.substring(0, 6),
+                BuildConfig.VERSION_CODE.toString(),
+                Build.MODEL,
+                AptabaseAnalyticsClient.SDK_VERSION
+            )
+        }
+    }
+}
 
 
 private data class AptabaseEvent(

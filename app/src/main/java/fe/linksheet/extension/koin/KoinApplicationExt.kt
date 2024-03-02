@@ -2,7 +2,7 @@ package fe.linksheet.extension.koin
 
 import android.app.Application
 import android.content.Context
-import org.koin.android.ext.koin.androidContext
+import fe.linksheet.module.lifecycle.AppLifecycleObserver
 import org.koin.core.KoinApplication
 import org.koin.core.annotation.KoinInternalApi
 import org.koin.core.logger.Level
@@ -20,4 +20,8 @@ inline fun <reified T> KoinApplication.androidApplicationContext(application: Ap
     }))
 
     return this
+}
+
+fun KoinApplication.applicationLifecycle(lifecycleObserver: AppLifecycleObserver) {
+    koin.loadModules(listOf(module { single<AppLifecycleObserver> { lifecycleObserver } }))
 }

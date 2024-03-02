@@ -3,6 +3,7 @@ package fe.linksheet.module.request
 import fe.httpkt.Request
 import org.koin.dsl.module
 
+// TODO: Do we actually need this as a DI singleton?
 val requestModule = module {
     single {
         Request {

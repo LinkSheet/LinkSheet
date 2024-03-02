@@ -5,9 +5,9 @@ import fe.httpkt.Request
 import fe.httpkt.ext.getGZIPOrDefaultStream
 import fe.httpkt.isHttpSuccess
 import fe.linksheet.LinkSheetAppConfig
-import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.extension.koin.single
 import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import org.koin.dsl.module
@@ -15,13 +15,13 @@ import java.io.IOException
 import java.net.URL
 
 val amp2HtmlResolveRequestModule = module {
-    single {
+    single<Amp2HtmlResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
         Amp2HtmlResolveRequest(
             "${LinkSheetAppConfig.supabaseHost()}/amp2html",
             LinkSheetAppConfig.supabaseApiKey(),
-            get(),
-            get(),
-            createLogger<Amp2HtmlResolveRequest>()
+            request,
+            cachedRequest,
+            singletonLogger
         )
     }
 }

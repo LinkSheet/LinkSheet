@@ -11,9 +11,13 @@ import fe.kotlin.extension.primitive.unixMillisAtZone
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.android.getCurrentLocale
 import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.network.NetworkState
 import fe.linksheet.util.BuildType
+import java.io.IOException
 import java.time.format.DateTimeFormatter
 
 class AptabaseAnalyticsClient(
@@ -21,9 +25,10 @@ class AptabaseAnalyticsClient(
     coroutineScope: LifecycleCoroutineScope,
     identity: String,
     level: TelemetryLevel,
+    networkState: NetworkState,
     logger: Logger,
     private val apiKey: String?,
-) : AnalyticsClient(enabled, coroutineScope, identity, level, logger = logger) {
+) : AnalyticsClient(enabled, coroutineScope, identity, level, networkState, logger = logger) {
     companion object {
         private const val SDK_VERSION = "aptabase-kotlin@0.0.8"
 
@@ -37,15 +42,13 @@ class AptabaseAnalyticsClient(
         apiKey?.let { addHeaderImpl("App-Key", apiKey) }
     }
 
-    private val apiUrl: String
+    private val baseUrl: String
     private lateinit var environmentInfo: EnvironmentInfo
 
     init {
         val parts = apiKey?.split("-").takeIf { it?.size == 3 }
         val region = parts?.get(1)
-        val baseUrl = HOSTS[region] ?: throw Exception("The Aptabase App Key $apiKey is invalid!")
-
-        apiUrl = "$baseUrl/api/v0/event"
+        baseUrl = HOSTS[region] ?: throw Exception("The Aptabase App Key $apiKey is invalid!")
     }
 
     override fun setup(context: Context) {
@@ -62,13 +65,26 @@ class AptabaseAnalyticsClient(
         )
     }
 
-    override fun send(name: String, properties: Map<String, Any>): Boolean {
-        val now = System.currentTimeMillis()
-        val timestamp = now.unixMillisAtZone().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    private fun buildEvent(telemetryIdentity: TelemetryIdentity, event: AnalyticsEvent): AptabaseEvent {
+        val timestamp = event.unixMillis.unixMillisAtZone().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val properties = telemetryIdentity.createEvent(event)
+        return AptabaseEvent(timestamp, identity, event.name, environmentInfo, properties)
+    }
 
-        val event = AptabaseEvent(timestamp, identity, name, environmentInfo, properties)
-        val con = request.post(apiUrl, body = JsonBody(event))
-        logger.info("Handled event $name: ${con.responseCode} (${con.readToString()})")
+    @Throws(IOException::class)
+    override fun send(telemetryIdentity: TelemetryIdentity, event: AnalyticsEvent): Boolean {
+        val aptabaseEvent = buildEvent(telemetryIdentity, event)
+        val con = request.post("$baseUrl/api/v0/event", body = JsonBody(aptabaseEvent))
+        logger.info("Handled event ${event.name}: ${con.responseCode} (${con.readToString()})")
+
+        return con.isHttpSuccess()
+    }
+
+    @Throws(IOException::class)
+    override fun send(telemetryIdentity: TelemetryIdentity, events: List<AnalyticsEvent>): Boolean {
+        val aptabaseEvents = events.map { buildEvent(telemetryIdentity, it) }
+        val con = request.post("$baseUrl/api/v0/events", body = JsonBody(aptabaseEvents))
+        logger.info("Handled events ${events.joinToString(separator = ",") { it.name }}: ${con.responseCode} (${con.readToString()})")
 
         return con.isHttpSuccess()
     }

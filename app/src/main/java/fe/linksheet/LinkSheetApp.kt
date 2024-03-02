@@ -38,11 +38,11 @@ import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
-import fe.linksheet.module.shizuku.ShizukuCommand
-import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.module.network.NetworkState
 import fe.linksheet.util.Timer
+import fe.linksheet.module.network.networkStateModule
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -91,6 +91,7 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             modules(
                 processLifecycleCoroutineModule,
+                networkStateModule,
                 fileAppLoggerModule,
                 shizukuHandlerModule,
                 globalGsonModule,
@@ -112,7 +113,10 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             )
         }
 
-        koinApplication.koin.get<FileAppLogger>().deleteOldLogs()
+        get<NetworkState>().registerListener()
+        get<AnalyticsClient>().start(get())
+
+        get<FileAppLogger>().deleteOldLogs()
 
         if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out
@@ -125,10 +129,10 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
     }
 
 
-    private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent? {
+    private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {
         return if (lastVersion == -1) AnalyticsEvent.FirstStart
         else if (BuildConfig.VERSION_CODE > lastVersion) AnalyticsEvent.AppUpdated(lastVersion)
-        else null
+        else AnalyticsEvent.AppStarted(BuildConfig.VERSION_CODE)
     }
 
     override fun onStop(owner: LifecycleOwner) {
@@ -147,6 +151,8 @@ open class LinkSheetApp : Application(), DefaultLifecycleObserver {
             preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
         }
 
+        get<AnalyticsClient>().shutdown()
+        get<NetworkState>().unregisterListener()
         get<FileAppLogger>().writeLog()
     }
 }

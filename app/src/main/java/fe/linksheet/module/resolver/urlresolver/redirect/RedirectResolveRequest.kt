@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver.urlresolver.redirect
 
 import fe.httpkt.Request
 import fe.linksheet.LinkSheetAppConfig
-import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.extension.koin.single
 import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
@@ -11,13 +11,11 @@ import org.koin.dsl.module
 import java.io.IOException
 
 val redirectResolveRequestModule = module {
-    single {
+    single<RedirectResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
         RedirectResolveRequest(
             "${LinkSheetAppConfig.supabaseHost()}/redirector",
             LinkSheetAppConfig.supabaseApiKey(),
-            get(),
-            get(),
-            createLogger<RedirectUrlResolver>()
+            request, cachedRequest, singletonLogger
         )
     }
 }

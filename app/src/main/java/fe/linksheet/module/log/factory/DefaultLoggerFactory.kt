@@ -1,11 +1,13 @@
 package fe.linksheet.module.log.factory
 
 import fe.kotlin.extension.string.decodeHexOrThrow
+import fe.linksheet.extension.koin.factory
+import fe.linksheet.extension.koin.single
 import fe.linksheet.module.log.file.FileAppLogger
-import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.linksheet.module.log.impl.DebugLogger
 import fe.linksheet.module.log.impl.DefaultLogger
 import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.impl.hasher.LogHasher
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.util.CryptoUtil
@@ -14,11 +16,14 @@ import kotlin.reflect.KClass
 
 
 val defaultLoggerFactoryModule = module {
-    single<LoggerFactory> {
-        val preferenceRepository = get<AppPreferenceRepository>()
-        val logKey = preferenceRepository.getOrWriteInit(AppPreferences.logKey).decodeHexOrThrow()
+    single<LoggerFactory, AppPreferenceRepository, FileAppLogger> { _, preferences, fileAppLogger ->
+        val logKey = preferences.getOrWriteInit(AppPreferences.logKey).decodeHexOrThrow()
 
-        DefaultLoggerFactory(logKey, get())
+        DefaultLoggerFactory(logKey, fileAppLogger)
+    }
+
+    factory<Logger, LoggerFactory> { params, factory ->
+        factory.createLogger(params.get<KClass<*>>())
     }
 }
 
@@ -36,7 +41,7 @@ class DebugLoggerFactory(private val fileAppLogger: FileAppLogger) : LoggerFacto
     override fun createLogger(prefix: String) = DebugLogger(prefix, fileAppLogger)
 
     companion object {
-        val module = module { single<LoggerFactory> { DebugLoggerFactory(get()) } }
+        val module = module { single<LoggerFactory, FileAppLogger> { _, fileAppLogger -> DebugLoggerFactory(fileAppLogger) } }
     }
 }
 

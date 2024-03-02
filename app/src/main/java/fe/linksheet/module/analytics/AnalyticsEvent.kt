@@ -9,9 +9,15 @@ sealed class AnalyticsEvent(val name: String, obj: JsonObject = JsonObject()) {
         key to (element.stringOrNull() ?: element.toString())
     }.toMap()
 
+    val unixMillis = System.currentTimeMillis()
+
     data object FirstStart : AnalyticsEvent("first_run")
     class AppUpdated(lastVersion: Int) : AnalyticsEvent("app_updated", jsonObject {
         "last_version" += lastVersion.toString()
+    })
+
+    class AppStarted(version: Int) : AnalyticsEvent("app_started", jsonObject {
+        "app_started" += version.toString()
     })
 
     class Navigate(destination: String) : AnalyticsEvent("navigate", jsonObject {

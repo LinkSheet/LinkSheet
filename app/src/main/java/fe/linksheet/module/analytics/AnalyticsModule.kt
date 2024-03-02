@@ -3,33 +3,35 @@ package fe.linksheet.module.analytics
 import android.content.Context
 import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.extension.koin.single
 import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
 import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.network.NetworkState
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
-import kotlinx.coroutines.time.delay
 import org.koin.dsl.module
-import java.time.Duration
+import java.io.IOException
+import java.util.*
+import kotlin.math.pow
 import kotlin.properties.Delegates
 
 val analyticsModule = module {
-    single<AnalyticsClient> {
-        val preferenceRepository = get<AppPreferenceRepository>()
-        val identity = preferenceRepository.getOrWriteInit(AppPreferences.telemetryIdentity)
-        val level = preferenceRepository.getState(AppPreferences.telemetryLevel).value
+    single<AnalyticsClient, LifecycleCoroutineScope, AppPreferenceRepository, NetworkState> { _, lifecycleScope, preferences, networkState ->
+        val identity = preferences.getOrWriteInit(AppPreferences.telemetryIdentity)
+        val level by preferences.getState(AppPreferences.telemetryLevel)
 
         AptabaseAnalyticsClient(
             BuildConfig.ANALYTICS_SUPPORTED,
-            get(),
+            lifecycleScope,
             identity,
             level,
-            createLogger<AptabaseAnalyticsClient>(),
+            networkState,
+            singletonLogger,
             BuildConfig.APTABASE_API_KEY
-        ).init(get())
+        )
     }
 }
 
@@ -38,7 +40,7 @@ abstract class AnalyticsClient(
     private val coroutineScope: LifecycleCoroutineScope,
     protected val identity: String,
     private val initialLevel: TelemetryLevel,
-    private val timeout: Duration = Duration.ofSeconds(10),
+    private val networkState: NetworkState,
     val logger: Logger
 ) {
     private lateinit var currentLevel: TelemetryLevel
@@ -47,14 +49,25 @@ abstract class AnalyticsClient(
 
     private val eventQueue = Channel<AnalyticsEvent>(capacity = UNLIMITED)
 
+    companion object {
+        const val BATCH_EVENTS = 5
+        const val BATCHING_TIMEOUT_MILLIS = 15 * 1000L
+        const val SEND_TRIES = 5
+        val TRY_DELAY: (Int) -> Long = { attemptNum -> 10 * 1000L * 2.0.pow(attemptNum).toLong() }
+    }
+
     protected open fun checkImplEnabled() = true
 
     protected open fun setup(context: Context) {}
 
-    protected abstract fun send(name: String, properties: Map<String, Any>): Boolean
+    @Throws(IOException::class)
+    protected abstract fun send(telemetryIdentity: TelemetryIdentity, event: AnalyticsEvent): Boolean
 
-    @OptIn(DelicateCoroutinesApi::class)
-    internal fun init(context: Context, level: TelemetryLevel = initialLevel): AnalyticsClient {
+    @Throws(IOException::class)
+    protected abstract fun send(telemetryIdentity: TelemetryIdentity, events: List<AnalyticsEvent>): Boolean
+
+
+    internal fun start(context: Context, level: TelemetryLevel = initialLevel): AnalyticsClient {
         val implEnabled = supported && this.checkImplEnabled()
         enabled = implEnabled && level != TelemetryLevel.Disabled
         currentLevel = level
@@ -63,15 +76,8 @@ abstract class AnalyticsClient(
             val telemetryIdentity = initialLevel.buildIdentity(context, identity)
             setup(context)
 
-            // TODO: Can events be batched?
             eventSender = coroutineScope.launch(Dispatchers.IO) {
-                while (!eventQueue.isClosedForReceive) {
-                    val event = eventQueue.receive()
-                    logger.debug("Sending event ${event.name}..")
-
-                    send(event.name, telemetryIdentity.createEvent(event))
-                    delay(timeout)
-                }
+                sendEvents(telemetryIdentity)
             }
         } else {
             eventSender?.cancel()
@@ -80,8 +86,65 @@ abstract class AnalyticsClient(
         return this
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
+    private suspend fun sendEvents(telemetryIdentity: TelemetryIdentity) {
+        var lastSend = -1L
+
+        while (!eventQueue.isClosedForReceive) {
+            val batchedEvents = LinkedList<AnalyticsEvent>()
+
+            val firstEvent = eventQueue.receive()
+            batchedEvents.add(firstEvent)
+
+            val timeout = withTimeoutOrNull(BATCHING_TIMEOUT_MILLIS) {
+                repeat(BATCH_EVENTS - 1) {
+                    val additionalEvent = eventQueue.receive()
+                    batchedEvents.add(additionalEvent)
+                }
+            }
+
+            val timeoutExceeded = timeout == null
+            if (!timeoutExceeded && lastSend != -1L) {
+                val diff = System.currentTimeMillis() - lastSend
+                val waitMillis = BATCHING_TIMEOUT_MILLIS - diff
+                if (waitMillis > 0) {
+                    delay(waitMillis)
+                }
+            }
+
+            logger.debug("Sending events (${batchedEvents.size}, timeout: $timeoutExceeded)")
+            trySend(telemetryIdentity, batchedEvents)
+
+            lastSend = System.currentTimeMillis()
+        }
+    }
+
+    private suspend fun trySend(telemetryIdentity: TelemetryIdentity, events: List<AnalyticsEvent>): Boolean {
+        logger.debug("Awaiting internet access..")
+        networkState.awaitNetworkConnection()
+        logger.debug("Internet connection available")
+
+        for (i in 0 until SEND_TRIES) {
+            logger.debug("Trying to send events (try: ${i + 1})")
+            runCatching {
+                val success = send(telemetryIdentity, events)
+                logger.debug("Send result: $success")
+                if (success) {
+                    return true
+                }
+            }.onFailure {
+                it.printStackTrace()
+                logger.error(it, "AnalyticSender")
+            }
+
+            delay(TRY_DELAY(i))
+        }
+
+        return false
+    }
+
     fun updateLevel(context: Context, newLevel: TelemetryLevel) {
-        init(context, newLevel)
+        start(context, newLevel)
     }
 
     // TODO: Handle remaining events in channel when app is stopped/destroyed

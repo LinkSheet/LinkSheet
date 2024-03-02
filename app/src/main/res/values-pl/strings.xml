@@ -280,8 +280,7 @@
     <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla linków, które obsługują</string>
     <string name="apps_which_can_open_links">Aplikacje otwierające linki</string>
     <string name="app_browsers_subtitle">Preferowane aplikacje i obsługa zweryfikowanych linków</string>
-    <string name="onboarding_0_title">Witaj w
-\nLinkSheet</string>
+    <string name="onboarding_0_title">Witaj w \nLinkSheet</string>
     <string name="onboarding_0_subtitle">Wybierz, aby zawsze otrzymywać monit podczas otwierania linku, ustaw domyślne przeglądarki i wiele więcej</string>
     <string name="onboarding_2_card_explainer">Shizuku umożliwia LinkSheet wyłączenie domyślnego zachowania obsługi linków we wszystkich aplikacjach jednocześnie, zamiast ręcznego wyłączania tego dla każdej aplikacji z osobna (co jest następnym krokiem).</string>
     <string name="onboarding_3_card_explainer">Google wprowadził zweryfikowane linki aplikacji w Androidzie 12, co pozwala aplikacjom na kryptograficzne potwierdzanie własności domen. To zachowanie musi być ręcznie wyłączone, aby LinkSheet mógł przechwytywać kliknięte linki.</string>
@@ -327,7 +326,7 @@
     <string name="resolve_embeds">Rozwiąż osadzenia</string>
     <string name="resolve_embeds_explainer">Rozwiązuj lustra osadzeń, takie jak fxtwitter.com, aby prowadziły do rzeczywistego hosta</string>
     <string name="tap_customization">Personalizacja dotknięć</string>
-    <string name="telemetry_dialog_text_2">Metryki użycia obejmują losowy, możliwy do zresetowania przez użytkownika identyfikator związany z instalacją, a także wersję Androida i są przechowywane w <annotation url="https://aptabase.com">Aptabase (UE)</annotation>. Wrażliwe dane, takie jak zainstalowane aplikacje i kliknięte linki, <b>nigdy</b> nie będą zbierane. Aby dowiedzieć się więcej, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">tutaj</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Metryki użycia obejmują losowy, możliwy do zresetowania przez użytkownika identyfikator związany z instalacją, a także wersję Androida i są przechowywane w <annotation url="https://aptabase.com">Aptabase (UE)</annotation>. Wrażliwe dane, takie jak zainstalowane aplikacje i kliknięte linki, <b>nigdy</b> nie będą zbierane. Aby dowiedzieć się więcej, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">tutaj</annotation>.</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Włączone</string>
     <string name="switch_profile">Włącz przełączanie profili</string>
     <string name="something_went_wrong">Coś poszło nie tak, proszę spróbuj ponownie.</string>

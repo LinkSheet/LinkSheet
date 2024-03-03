@@ -3,7 +3,7 @@ package fe.linksheet.extension.android
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import fe.linksheet.module.log.factory.LoggerFactory
+import fe.linksheet.extension.koin.injectLogger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -39,10 +39,6 @@ fun Intent.getUri(): String? {
 }
 
 object IntentExt : KoinComponent {
-    private val loggerFactory by inject<LoggerFactory>()
-    private val logger = loggerFactory.createLogger(IntentExt::class)
-
-
     fun Intent.getUri(): Uri? {
         var uriData = dataString
         if (uriData == null) uriData = getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()

@@ -12,7 +12,7 @@ val allRemoteResolveRequest = module {
         AllRemoteResolveRequest(
             "${LinkSheetAppConfig.supabaseHost()}/all",
             LinkSheetAppConfig.supabaseApiKey(),
-            request, singletonLogger
+            request, serviceLogger
         )
     }
 }

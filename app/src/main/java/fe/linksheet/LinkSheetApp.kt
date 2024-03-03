@@ -21,10 +21,11 @@ import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.lifecycle.Service
-import fe.linksheet.module.log.factory.defaultLoggerFactoryModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.log.file.fileAppLoggerModule
+import fe.linksheet.module.log.impl.defaultLoggerModule
+import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.network.networkStateModule
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
@@ -95,7 +96,8 @@ open class LinkSheetApp : Application() {
                 shizukuHandlerModule,
                 globalGsonModule,
                 preferenceRepositoryModule,
-                defaultLoggerFactoryModule,
+                redactorModule,
+                defaultLoggerModule,
                 databaseModule,
                 daoModule,
                 cachedRequestModule,
@@ -113,14 +115,6 @@ open class LinkSheetApp : Application() {
         }
 
         lifecycleObserver.bootServices()
-
-//        val lifecycleBoundServices = listOf()
-
-
-//        get<NetworkState>().registerListener()
-//        get<AnalyticsClient>().start(get())
-
-//
 
         if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out

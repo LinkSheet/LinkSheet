@@ -37,7 +37,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
     }
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
-    private val logger by injectLogger(CrashHandlerActivity::class)
+    private val logger by injectLogger<CrashHandlerActivity>()
     private val fileAppLogger by inject<FileAppLogger>()
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -45,7 +45,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
 
         val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
-        logger.logFatal(throwableString)
+        logger.fatal(throwableString)
 
         setContentWithKoin {
             AppHost {

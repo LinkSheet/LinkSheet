@@ -1,85 +1,74 @@
 package fe.linksheet.module.log.impl
 
-import android.util.Log
+import fe.linksheet.extension.koin.factory
 import fe.linksheet.module.log.file.FileAppLogger
-import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogHasher
+import fe.linksheet.module.log.impl.internal.DefaultLoggerDelegate
+import fe.linksheet.module.log.impl.internal.LoggerDelegate
+import fe.linksheet.module.log.impl.internal.ProduceMessage
+import fe.linksheet.module.redactor.Redactor
+import org.koin.dsl.module
+import kotlin.reflect.KClass
 
-abstract class Logger(val prefix: String, val hasher: LogHasher, val fileAppLogger: FileAppLogger) {
-    enum class Type(val code: String) {
-        Verbose("V"), Info("I"), Debug("D"), Error("E")
+val defaultLoggerModule = module {
+    factory<Logger, Redactor, FileAppLogger> { params, redactor, fileAppLogger ->
+        val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, fileAppLogger)
+        Logger(delegate)
     }
-
-    protected fun mergeSubPrefix(msg: String, subPrefix: String?) = (subPrefix?.let { "[$it] " } ?: "") + msg
-
-    protected abstract fun print(type: Type, msg: String, subPrefix: String? = null)
-
-    fun logFatal(stacktrace: String): String {
-        Log.wtf("Crash", stacktrace)
-
-        fileAppLogger.write(LogEntry.FatalEntry(System.currentTimeMillis(), stacktrace))
-        return stacktrace
-    }
-
-    fun <T> dumpParameterToString(
-        redact: Boolean = false,
-        param: T,
-        hashProcessor: HashProcessor<T>
-    ): String {
-        return dumpParameterToString(
-            if (redact) hasher else LogHasher.NoOpHasher,
-            param,
-            hashProcessor
-        )
-    }
-
-    private fun <T> dumpParameterToString(
-        hasher: LogHasher,
-        param: T,
-        hashProcessor: HashProcessor<T>
-    ): String {
-        return LogDumpable.dumpObject(StringBuilder(), hasher, param, hashProcessor).toString()
-            .replace("%", "%%")
-    }
-
-    abstract fun <T> verbose(
-        msg: (String) -> String,
-        param: T,
-        hashProcessor: HashProcessor<T>,
-        subPrefix: String? = null
-    )
-
-    abstract fun verbose(throwable: Throwable, subPrefix: String? = null)
-    abstract fun verbose(msg: String, subPrefix: String? = null)
-    abstract fun <T> info(
-        msg: (String) -> String,
-        param: T,
-        hashProcessor: HashProcessor<T>,
-        subPrefix: String? = null
-    )
-
-    abstract fun info(throwable: Throwable, subPrefix: String? = null)
-    abstract fun info(msg: String, subPrefix: String? = null)
-
-    abstract fun <T> debug(
-        msg: (String) -> String,
-        param: T,
-        hashProcessor: HashProcessor<T>,
-        subPrefix: String? = null
-    )
-
-    abstract fun debug(throwable: Throwable, subPrefix: String? = null)
-    abstract fun debug(msg: String, subPrefix: String? = null)
-
-    abstract fun <T> error(
-        msg: (String) -> String,
-        param: T,
-        hashProcessor: HashProcessor<T>,
-        subPrefix: String? = null
-    )
-
-    abstract fun error(throwable: Throwable, subPrefix: String? = null)
-    abstract fun error(msg: String, subPrefix: String? = null)
 }
+
+class Logger(private val delegate: LoggerDelegate) {
+    fun fatal(stacktrace: String) {
+        delegate.fatal(stacktrace)
+    }
+
+    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, subPrefix)
+    }
+
+    fun verbose(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Verbose, msg, throwable, subPrefix)
+    }
+
+    fun verbose(throwable: Throwable, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Verbose, throwable = throwable, subPrefix = subPrefix)
+    }
+
+    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Info, param, processor, msg, subPrefix)
+    }
+
+    fun info(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Info, msg, throwable, subPrefix)
+    }
+
+    fun info(throwable: Throwable, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Info, throwable = throwable, subPrefix = subPrefix)
+    }
+
+    fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
+
+    }
+
+    fun debug(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Debug, msg, throwable, subPrefix)
+    }
+
+    fun debug(throwable: Throwable, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Debug, throwable = throwable, subPrefix = subPrefix)
+    }
+
+    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Error, param, processor, msg, subPrefix)
+    }
+
+    fun error(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Error, msg, throwable, subPrefix)
+    }
+
+    fun error(throwable: Throwable, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Error, throwable = throwable, subPrefix = subPrefix)
+    }
+}
+

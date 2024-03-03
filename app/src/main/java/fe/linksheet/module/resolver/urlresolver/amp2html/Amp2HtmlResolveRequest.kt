@@ -21,7 +21,7 @@ val amp2HtmlResolveRequestModule = module {
             LinkSheetAppConfig.supabaseApiKey(),
             request,
             cachedRequest,
-            singletonLogger
+            serviceLogger
         )
     }
 }
@@ -36,7 +36,7 @@ class Amp2HtmlResolveRequest(
 
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String? {
-        logger.debug({ "ResolveLocal=$it" }, url, HashProcessor.UrlProcessor)
+        logger.debug(url, HashProcessor.UrlProcessor, { "ResolveLocal=$it" })
         val con = urlResolverCache.get(url, timeout, false)
 
         if (!isHttpSuccess(con.responseCode)) {

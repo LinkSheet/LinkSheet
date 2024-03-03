@@ -21,10 +21,10 @@ import fe.linksheet.activity.MainActivity
 import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.log.factory.LoggerFactory
 import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
@@ -44,14 +44,13 @@ import java.util.*
 
 class BottomSheetViewModel(
     val context: Application,
-    loggerFactory: LoggerFactory,
     val preferenceRepository: AppPreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
-    private val logger = loggerFactory.createLogger(BottomSheetViewModel::class)
+    private val logger by injectLogger<BottomSheetViewModel>()
 
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
@@ -153,11 +152,7 @@ class BottomSheetViewModel(
 
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
         if (intent.component != null) {
-            logger.debug(
-                { "Component $it" },
-                intent.component!!,
-                HashProcessor.ComponentProcessor
-            )
+            logger.debug(intent.component!!, HashProcessor.ComponentProcessor, { "Component $it" })
         }
 
         intent.component?.let { component ->
@@ -169,7 +164,7 @@ class BottomSheetViewModel(
                 alwaysPreferred = always
             )
 
-            logger.debug({ "Inserting $it" }, app, HashProcessor.PreferenceAppHashProcessor, "AppPreferencePersister")
+            logger.debug(app, HashProcessor.PreferenceAppHashProcessor, { "Inserting $it" }, "AppPreferencePersister")
 
             preferredAppRepository.insert(app)
 
@@ -180,9 +175,9 @@ class BottomSheetViewModel(
             )
 
             logger.debug(
-                { "Inserting $it" },
                 historyEntry,
                 HashProcessor.AppSelectionHistoryHashProcessor,
+                { "Inserting $it" },
                 "HistoryEntryPersister"
             )
             appSelectionHistoryRepository.insert(historyEntry)

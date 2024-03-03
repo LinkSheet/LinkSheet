@@ -10,16 +10,19 @@ import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
+import fe.fastforwardkt.*
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
+import fe.linksheet.extension.android.toDisplayActivityInfos
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.factory.LoggerFactory
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -27,20 +30,17 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepos
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
+import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
-import fe.fastforwardkt.*
-import fe.linksheet.extension.android.toDisplayActivityInfos
-import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinComponent
 
 class IntentResolver(
     val context: Context,
-    loggerFactory: LoggerFactory,
     val preferenceRepository: AppPreferenceRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
@@ -54,8 +54,8 @@ class IntentResolver(
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver
-) {
-    private val logger = loggerFactory.createLogger(IntentResolver::class)
+) : KoinComponent {
+    private val logger by injectLogger<IntentResolver>()
 
     private val useClearUrls = preferenceRepository.getBooleanState(AppPreferences.useClearUrls)
     private var useFastForwardRules = preferenceRepository.getBooleanState(
@@ -102,9 +102,11 @@ class IntentResolver(
         preferenceRepository.getState(AppPreferences.inAppBrowserSettings)
 
     private val browserMode = preferenceRepository.getState(AppPreferences.browserMode)
+
     @OptIn(SensitivePreference::class)
     private val selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
     private val inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
+
     @OptIn(SensitivePreference::class)
     private val selectedInAppBrowser =
         preferenceRepository.getStringState(AppPreferences.selectedInAppBrowser)
@@ -285,7 +287,7 @@ class IntentResolver(
             .queryResolveInfosByIntent(newIntent, true)
             .toMutableList()
 
-        logger.debug({ it }, resolvedList, HashProcessor.ResolveInfoListProcessor, "ResolveList")
+        logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
 
         if (resolvedList.isEmpty()) {
             return BottomSheetResult.BottomSheetNoHandlersFound(uri)
@@ -371,31 +373,31 @@ class IntentResolver(
         if (uri?.host != null && uri.scheme != null) {
             var url = uri.toString()
 
-            logger.debug({ "Input: $it" }, url, HashProcessor.UrlProcessor, "ModifyUri")
+            logger.debug(url, HashProcessor.UrlProcessor, { "Input: $it" }, "ModifyUri")
 
             if (resolveEmbeds) {
                 runCatching {
                     EmbedResolver.resolve(url, ConfigType.Bundled())?.let { url = it }
-                }.onFailure { logger.error(it, "EmbedResolver") }
+                }.onFailure { logger.error(throwable = it, subPrefix = "EmbedResolver") }
             }
 
-            logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "EmbedResolver")
+            logger.debug(url, HashProcessor.UrlProcessor, { "Output: $it" }, "EmbedResolver")
 
             if (fastForward) {
                 runCatching {
                     FastForward.getRuleRedirect(url)?.let { url = it }
-                }.onFailure { logger.error(it, "FastForward") }
+                }.onFailure { logger.error(throwable = it, subPrefix = "FastForward") }
             }
 
-            logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "FastForward")
+            logger.debug(url, HashProcessor.UrlProcessor, { "Output: $it" }, "FastForward")
 
             if (clearUrl) {
                 runCatching {
                     url = ClearURL.clearUrl(url, clearUrlProviders)
-                }.onFailure { logger.error(it, "ClearUrls") }
+                }.onFailure { logger.error(throwable = it, subPrefix = "ClearUrls") }
             }
 
-            logger.debug({ "Output: $it" }, url, HashProcessor.UrlProcessor, "ClearURLs")
+            logger.debug(url, HashProcessor.UrlProcessor, { "Output: $it" }, "ClearURLs")
             return runCatching { Uri.parse(url) }.getOrNull()
         }
 

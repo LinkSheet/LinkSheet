@@ -3,8 +3,8 @@ package fe.linksheet.module.resolver.urlresolver.redirect
 import fe.httpkt.Request
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
-import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import org.koin.dsl.module
@@ -15,7 +15,7 @@ val redirectResolveRequestModule = module {
         RedirectResolveRequest(
             "${LinkSheetAppConfig.supabaseHost()}/redirector",
             LinkSheetAppConfig.supabaseApiKey(),
-            request, cachedRequest, singletonLogger
+            request, cachedRequest, serviceLogger
         )
     }
 }
@@ -30,7 +30,7 @@ class RedirectResolveRequest(
     @Throws(IOException::class)
     override fun resolveLocal(url: String, timeout: Int): String {
         val con = urlResolverCache.head(url, timeout, true)
-        logger.debug({ "ResolveLocal $it" }, url, HashProcessor.StringProcessor)
+        logger.debug(url, HashProcessor.StringProcessor, { "ResolveLocal $it" })
 
         val response = if (con.responseCode in 400..499) {
             urlResolverCache.get(url, timeout, true)

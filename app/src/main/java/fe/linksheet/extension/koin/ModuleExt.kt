@@ -95,3 +95,10 @@ inline fun <reified T : Any, reified P : Any> Module.factory(
 ): KoinDefinition<T> {
     return factory(qualifier) { params -> definition(ExtendedScope(this, T::class), params, get<P>()) }
 }
+
+inline fun <reified T : Any, reified P : Any, reified P2 : Any> Module.factory(
+    qualifier: Qualifier? = null,
+    noinline definition: DefinitionParam2<T, P, P2>
+): KoinDefinition<T> {
+    return factory(qualifier) { params -> definition(ExtendedScope(this, T::class), params, get<P>(), get<P2>()) }
+}

@@ -3,23 +3,23 @@ package fe.linksheet.module.resolver
 import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.factory.LoggerFactory
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import kotlinx.coroutines.flow.firstOrNull
+import org.koin.core.component.KoinComponent
 
 class LibRedirectResolver(
-    loggerFactory: LoggerFactory,
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
-) {
-    private val logger = loggerFactory.createLogger(LibRedirectResolver::class)
+) : KoinComponent {
+    private val logger by injectLogger<LibRedirectResolver>()
 
-    companion object{
+    companion object {
         private val libRedirectServices = LibRedirectLoader.loadBuiltInServices()
-        private val libRedirectInstances= LibRedirectLoader.loadBuiltInInstances()
+        private val libRedirectInstances = LibRedirectLoader.loadBuiltInInstances()
     }
 
     suspend fun resolve(uri: Uri): LibRedirectResult {
@@ -37,7 +37,7 @@ class LibRedirectResolver(
             }
 
             val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
-            logger.debug({ "Redirected to: $it" }, redirected, HashProcessor.StringProcessor)
+            logger.debug(redirected, HashProcessor.StringProcessor, { "Redirected to: $it" })
 
             if (redirected != null) {
                 return LibRedirectResult.Redirected(uri, Uri.parse(redirected))

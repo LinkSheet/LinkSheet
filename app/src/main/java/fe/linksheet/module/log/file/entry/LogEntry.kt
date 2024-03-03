@@ -66,15 +66,15 @@ sealed class LogEntry(
     @Keep
     class DefaultLogEntry(
         type: String,
-        unixMillis: Long,
+        unixMillis: Long = System.currentTimeMillis(),
         prefix: String,
         message: String,
-        redactedMessage: String,
+        redactedMessage: String? = null,
     ) : LogEntry(type, unixMillis, prefix, message, redactedMessage)
 
     @Keep
     class FatalEntry(
-        unixMillis: Long,
+        unixMillis: Long = System.currentTimeMillis(),
         message: String,
     ) : LogEntry("Crash", unixMillis, message = message)
 }

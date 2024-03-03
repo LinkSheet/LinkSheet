@@ -1,8 +1,9 @@
 package fe.linksheet.module.resolver.urlresolver
 
 import fe.httpkt.Request
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.factory.LoggerFactory
+import org.koin.core.component.KoinComponent
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.net.HttpURLConnection
@@ -11,8 +12,8 @@ val cachedRequestModule = module {
     singleOf(::CachedRequest)
 }
 
-class CachedRequest(private val request: Request, loggerFactory: LoggerFactory) {
-    private val logger = loggerFactory.createLogger(CachedRequest::class)
+class CachedRequest(private val request: Request) : KoinComponent {
+    private val logger by injectLogger<CachedRequest>()
 
     private val headCache = mutableMapOf<String, HttpURLConnection>()
     private val getCache = mutableMapOf<String, HttpURLConnection>()
@@ -24,16 +25,14 @@ class CachedRequest(private val request: Request, loggerFactory: LoggerFactory) 
     ): HttpURLConnection {
         val value = get(url)
         return if (value == null) {
-            logger.debug(
-                { "No cached response found for $type $it, sending request.." },
-                url,
-                HashProcessor.UrlProcessor
+            logger.debug(url, HashProcessor.UrlProcessor,
+                { "No cached response found for $type $it, sending request.." }
             )
             val answer = defaultValue()
             put(url, answer)
             answer
         } else {
-            logger.debug({ "Cached response found for $type $it!" }, url, HashProcessor.UrlProcessor)
+            logger.debug(url, HashProcessor.UrlProcessor, { "Cached response found for $type $it!" })
             value
         }
     }

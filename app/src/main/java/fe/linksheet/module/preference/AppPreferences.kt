@@ -6,9 +6,9 @@ import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.log.factory.LoggerFactory
-import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.log.impl.hasher.PackageProcessor
+import fe.linksheet.module.redactor.DefaultRedactor
+import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
@@ -102,7 +102,7 @@ object AppPreferences : PreferenceDefinition(
     @OptIn(ExperimentalStdlibApi::class)
     @SensitivePreference
     val logKey = stringPreference("log_key") {
-        CryptoUtil.getRandomBytes(LoggerFactory.hmac.keySize).toHexString()
+        CryptoUtil.getRandomBytes(Redactor.HMAC.keySize).toHexString()
     }
 
     val firstRun = booleanPreference("first_run", true)
@@ -136,10 +136,10 @@ object AppPreferences : PreferenceDefinition(
     )
 
     @OptIn(SensitivePreference::class)
-    fun logPackages(redact: Boolean, logger: Logger, repository: AppPreferenceRepository): Map<String, String?> {
+    fun logPackages(redact: Boolean, redactor: Redactor, repository: AppPreferenceRepository): Map<String, String?> {
         return sensitivePackagePreferences.associate { pref ->
             val value = repository.getString(pref)
-            val strValue = value?.let { logger.dumpParameterToString(redact, it, PackageProcessor) } ?: "<null>"
+            val strValue = value?.let { redactor.process(redact, it, PackageProcessor) } ?: "<null>"
 
             pref.key to strValue
         }

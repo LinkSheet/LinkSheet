@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.gson.extension.json.`object`.plus
 import fe.linksheet.module.log.file.entry.LogEntry
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
@@ -15,12 +15,12 @@ import fe.linksheet.util.AppInfo
 class LogViewCommon(
     val preferenceRepository: AppPreferenceRepository,
     val gson: Gson,
-    private val logger: Logger
+    private val redactor: Redactor
 ) {
     @OptIn(SensitivePreference::class)
     private fun logPreferences(redact: Boolean): Map<String, String?> {
         val preferences = preferenceRepository.exportPreferences(AppPreferences.sensitivePreferences)
-        val packages = AppPreferences.logPackages(redact, logger, preferenceRepository)
+        val packages = AppPreferences.logPackages(redact, redactor, preferenceRepository)
 
         return preferences + packages
     }

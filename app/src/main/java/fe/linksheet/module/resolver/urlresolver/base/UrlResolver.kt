@@ -6,13 +6,14 @@ import fe.httpkt.ext.readToString
 import fe.httpkt.isHttpSuccess
 import fe.httpkt.json.readToJson
 import fe.linksheet.extension.failure
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
-import fe.linksheet.module.log.factory.LoggerFactory
 import fe.linksheet.module.log.impl.hasher.HashProcessor
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.Darknet
+import org.koin.core.component.KoinComponent
 import java.io.IOException
 import kotlin.reflect.KClass
 
@@ -20,12 +21,11 @@ import kotlin.reflect.KClass
 typealias ResolvePredicate = (Uri) -> Boolean
 
 abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
-    loggerFactory: LoggerFactory,
     clazz: KClass<R>,
     private val redirectResolver: ResolveRequest,
     private val resolverRepository: ResolverRepository<T>,
-) {
-    private val logger = loggerFactory.createLogger(clazz)
+) : KoinComponent {
+    private val logger by injectLogger(clazz)
 
     suspend fun resolve(
         uri: Uri,
@@ -40,10 +40,8 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         val darknet = Darknet.getOrNull(uri)
 
         if (!allowDarknets && darknet != null) {
-            logger.info(
-                { "$it is a darknet url, but darknets are not allowed, skipping" },
-                uri,
-                HashProcessor.UriProcessor
+            logger.info(uri, HashProcessor.UriProcessor,
+                { "$it is a darknet url, but darknets are not allowed, skipping" }
             )
             return null
         }
@@ -52,7 +50,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         if (localCache) {
             val resolvedUrl = resolverRepository.getForInputUrl(uriString)
             if (resolvedUrl != null) {
-                logger.error({ "From local cache: $it" }, resolvedUrl.urlResolved(), HashProcessor.UrlProcessor)
+                logger.error(resolvedUrl.urlResolved(), HashProcessor.UrlProcessor, { "From local cache: $it" })
                 return ResolveResultType.Resolved.LocalCache(resolvedUrl.urlResolved()).wrap()
             }
         }
@@ -60,7 +58,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         if (builtInCache) {
             val resolvedUrl = resolverRepository.getBuiltInCachedForUrl(uriString)
             if (resolvedUrl != null) {
-                logger.error({ "From built-in cache: $it" }, resolvedUrl, HashProcessor.UrlProcessor)
+                logger.error(resolvedUrl, HashProcessor.UrlProcessor, { "From built-in cache: $it" })
                 return ResolveResultType.Resolved.BuiltInCache(resolvedUrl).wrap()
             }
         }
@@ -88,24 +86,21 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         darknet: Darknet?,
         timeout: Int,
     ): Result<ResolveResultType>? {
-        logger.error({ "Following redirects for $it" }, uri, HashProcessor.UriProcessor)
+        logger.error(uri, HashProcessor.UriProcessor, { "Following redirects for $it" })
 
         val inputUri = uri.toString()
         if (resolvePredicate == null || resolvePredicate(uri)) {
             if (externalService) {
                 if (darknet != null) {
-                    logger.info(
-                        { "$it is a darknet url, but external services are enabled, skipping" },
-                        uri,
-                        HashProcessor.UriProcessor
+                    logger.info(uri, HashProcessor.UriProcessor,
+                        { "$it is a darknet url, but external services are enabled, skipping" }
                     )
                     return null
                 }
 
                 logger.info(
-                    { "Using external service for $it" },
-                    uri,
-                    HashProcessor.UriProcessor
+                    uri, HashProcessor.UriProcessor,
+                    { "Using external service for $it" }
                 )
 
                 val con = try {
@@ -133,7 +128,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
                 }
             }
 
-            logger.error({ "Using local service for $it" }, inputUri, HashProcessor.StringProcessor)
+            logger.error(inputUri, HashProcessor.StringProcessor, { "Using local service for $it" })
 
             try {
                 val resolved = redirectResolver.resolveLocal(inputUri, timeout)

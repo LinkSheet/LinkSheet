@@ -1,22 +1,17 @@
 package fe.linksheet.module.analytics
 
 import android.content.Context
-import android.os.Build
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.android.getCurrentLocale
 import fe.linksheet.extension.koin.service
-import fe.linksheet.extension.koin.single
 import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
 import fe.linksheet.module.analytics.client.EnvironmentInfo
-import fe.linksheet.module.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.network.NetworkState
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.util.BuildType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
@@ -37,7 +32,7 @@ val analyticsModule = module {
             EnvironmentInfo.create(applicationContext),
             level.buildIdentity(applicationContext, identity),
             networkState,
-            singletonLogger,
+            serviceLogger,
             BuildConfig.APTABASE_API_KEY
         )
     }
@@ -149,7 +144,7 @@ abstract class AnalyticsClient(
             }.onFailure {
                 it.printStackTrace()
                 // TODO: Better exception logging
-                logger.error(it, "AnalyticSender")
+                logger.error("Failed to send event", it)
             }
 
             delay(TRY_DELAY(i))

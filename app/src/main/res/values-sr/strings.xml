@@ -39,7 +39,7 @@
     <string name="no_apps_which_can_handle_links_found">Није пронађена ниједна апликација која може да рукује линковима.</string>
     <string name="bottom_sheet">Доњи лист</string>
     <string name="known_trackers">Познати програми за праћење</string>
-    <string name="display_grid_layout">Прикажи распоред мреже</string>
+    <string name="display_grid_layout">Распоред мреже</string>
     <string name="usage_stats_sorting">Сортирај апликације по употреби</string>
     <string name="log_viewer">Прегледник евиденције</string>
     <string name="open_with_app">Отвори помоћу %s</string>
@@ -210,7 +210,7 @@
     <string name="app_log">Евиденција апликације</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="seal_subtitle_2">Seal је био одличан ресурс за учење у вези са Jetpack Compose</string>
-    <string name="shizuku_not_running_explainer">Shizuku није покренут. Додирните овде да бисте отворили Shizuku, а затим пратите упутства да бисте га покренули</string>
+    <string name="shizuku_not_running_explainer">Shizuku није покренут. Додирните овде да бисте отворили Shizuku, а затим пратите упутства да бисте га покренули.</string>
     <string name="browser_status">Статус прегледача</string>
     <string name="no_such_app_found">Није пронађена таква апликација!</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Политика приватности</string>
@@ -234,7 +234,7 @@
     <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово може имати <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
     <string name="preferred_browser">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
-    <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали</string>
+    <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
     <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
     <string name="donation_instructions">Упутства за донацију</string>
     <string name="disable_all_toasts_explainer">Никада не приказуј искачуће поруке</string>
@@ -314,7 +314,7 @@
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="follow_redirects_builtin_cache">Користи уграђени кеш преусмеравања</string>
-    <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу</string>
+    <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „враћа“ „url-app-chooser“ који се појавио када је корисник додирнуо линк на Android верзији &lt;12 и имао је инсталираних више апликација које су могле да рукују линком</string>
     <string name="system">Системски</string>
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
@@ -391,4 +391,67 @@
     <string name="new_bottomsheet">Нови доњи лист</string>
     <string name="shizuku_manager_start_failed">Покретање Shizuku Manager-а није успело, покрените га ручно!</string>
     <string name="include_throwable">Укључи евиденције о отказивању (препоручено, али се не може редиговати)</string>
+    <string name="no_internet_connection">Нема интернет везе</string>
+    <string name="amp2html_short">Amp2Html</string>
+    <string name="online_services">Онлајн услуге</string>
+    <string name="follow_redirects_short">Преусмеравања</string>
+    <string name="unknown_host">%s је или блокиран или не постоји</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="preferred_apps_settings">Подесите префериране апликације за хостове које подржавају</string>
+    <string name="start_setup">Настави</string>
+    <string name="onboarding_setup">Подеси LinkSheet</string>
+    <string name="enable_dev_bottom_sheet">Омогући програмерски доњи лист</string>
+    <string name="launch_onboarding__now_explainer">Тестирајте нови ток укључивања</string>
+    <string name="hide_bottom_sheet_choice_buttons">Сакриј дугмад за избор</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Сакријте дугмад „Једном“ и „Увек“ на доњем листу</string>
+    <string name="base_config">Основна конфигурација</string>
+    <string name="urlbar_settings">Url трака</string>
+    <string name="onboarding_1_title">Подесите LinkSheet као подразумевани прегледач</string>
+    <string name="onboarding_1_subtitle">LinkSheet треба да се подеси као подразумевани прегледач за руковање додирнутим линковима</string>
+    <string name="onboarding_1_card_title">Подразумевани прегледач</string>
+    <string name="start_setup_explainer">Функционалност LinkSheet-а захтева прилагођену Android конфигурацију. Следеће подешавање ће вас водити кроз процес у више корака.</string>
+    <string name="launch_onboarding_new">Покрени ново укључивање</string>
+    <string name="onboarding_5_card_explainer">Основна конфигурација потребна да би LinkSheet функционисао је завршена - идите у подешавања да бисте истражили шта још може да понуди!</string>
+    <string name="enable_dev_bottom_sheet_explainer">Омогућите најновију верзију доњег листа која је тренутно у развоју</string>
+    <string name="onboarding_2_title">Желите ли да користите Shizuku?</string>
+    <string name="onboarding_1_button">Подеси као подразумевани прегледач</string>
+    <string name="onboarding_1_card_explainer">LinkSheet не може да функционише ако није подразумевани прегледач.</string>
+    <string name="onboarding_2_subtitle">Ако имате инсталирано много апликација, Shizuku може значајно побољшати ваше искуство</string>
+    <string name="onboarding_2_card_explainer">Shizuku омогућава LinkSheet-у да онемогући подразумевано понашање руковања линковима за све апликације одједном, уместо да их мора ручно онемогућити за сваку апликацију појединачно (што је следећи корак).</string>
+    <string name="onboarding_0_title">Добро дошли у
+\nLinkSheet</string>
+    <string name="onboarding_3_card_explainer">Google је увео верификоване линкове за апликације уз ажурирање на Android 12, што омогућава апликацијама да криптографски доказују власништво над доменима. Ово понашање мора бити ручно онемогућено да би LinkSheet пресрео додирнуте линкове.</string>
+    <string name="onboarding_2_request_shizuku_permission">Затражи дозволу</string>
+    <string name="permission_required">Потребна је дозвола</string>
+    <string name="permission_required_explainer">Нека увезена подешавања захтевају дозволе које тренутно нису дате LinkSheet-у. Додирните испод да бисте их затражили.</string>
+    <string name="allow_darknets">Дозволи darknets</string>
+    <string name="amp2html_allow_darknets_explainer">Дозволи покретање Amp2Html-а за darknets (подржано: %s)</string>
+    <string name="follow_redirects_allow_darknets_explainer">Дозволи следећа преусмеравања за darknets (подржано: %s)</string>
+    <string name="apps_which_can_open_links">Верификовани руковаоци линкова</string>
+    <string name="apps_explainer">Префериране апликације и верификовани руковаоци линкова</string>
+    <string name="onboarding_0_subtitle">Изаберите да увек добијате упит када отварате линк, подесите подразумеване прегледаче и још много тога</string>
+    <string name="onboarding_2_install_shizuku">Инсталирај Shizuku</string>
+    <string name="onboarding_2_skip_button">Прескочи</string>
+    <string name="onboarding_3_subtitle">Руковаоци линкова морају бити онемогућени да би их LinkSheet могао пресрести</string>
+    <string name="onboarding_3_title">Онемогући подразумеване руковаоце линковима</string>
+    <string name="onboarding_3_card_title">Руковаоци линковима</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="onboarding_5_subtitle">LinkSheet је успешно омогућен</string>
+    <string name="onboarding_2_start_shizuku">Покрени Shizuku</string>
+    <string name="onboarding_2_shizuku_enabled">Следеће</string>
+    <string name="onboarding_3_button">Онемогући руковаоце линковима</string>
+    <string name="onboarding_4_button">Следеће</string>
+    <string name="onboarding_4_card_title">Онемогући руковаоце линковима</string>
+    <string name="onboarding_4_card_explainer">Онемогућите руковање линковима за све домене којима би требало да управља LinkSheet.</string>
+    <string name="onboarding_5_title">Све је подешено!</string>
+    <string name="onboarding_5_card_title">Конфигурација</string>
+    <string name="onboarding_5_button">Заврши</string>
+    <string name="experiment">Експеримент</string>
+    <string name="new_dev_bottom_sheet_explainer">Не свиђа вам се нови доњи лист? Додирните да бисте пријавили проблеме.</string>
+    <string name="new_dev_bottom_sheet">Доњи лист</string>
+    <string name="new_dev_bottom_sheet_feature_explainer">Нови доњи лист се ближи завршетку функције. \u0020 Посебно, прилагођавање додира још није доступно и биће примењено касније.
+\nПријавите грешке на <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub-у</annotation>, \u0020<annotation url="https://discord.gg/XndZet2pWF">Discord-у</annotation>, или путем <annotation url="mailto:1fexd@420blaze.it">имејла</annotation>. \u0020</string>
+    <string name="information">Информације</string>
+    <string name="resolve_embeds">Разреши уградње</string>
+    <string name="resolve_embeds_explainer">Решите урађење замене као што је fxtwitter.com на прави хост</string>
 </resources>

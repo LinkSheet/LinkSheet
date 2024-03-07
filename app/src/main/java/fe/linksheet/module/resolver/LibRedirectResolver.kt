@@ -5,7 +5,7 @@ import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
-import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import kotlinx.coroutines.flow.firstOrNull

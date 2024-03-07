@@ -1,9 +1,9 @@
 package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
-import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogHasher
+import fe.linksheet.module.redactor.HashProcessor
+import fe.linksheet.module.redactor.Redactable
+import fe.linksheet.module.redactor.Redactor
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 
@@ -11,13 +11,15 @@ import fe.stringbuilder.util.curlyWrapped
 data class ResolvedRedirect(
     val shortUrl: String,
     val resolvedUrl: String
-) : ResolverEntity<ResolvedRedirect>(), LogDumpable {
+) : ResolverEntity<ResolvedRedirect>(), Redactable<ResolvedRedirect> {
     override fun urlResolved() = resolvedUrl
 
-    override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
-        commaSeparated {
-            item { hasher.hash(stringBuilder, "shortUrl=", shortUrl, HashProcessor.UrlProcessor) }
-            item { hasher.hash(stringBuilder, "resolvedUrl=", resolvedUrl, HashProcessor.UrlProcessor) }
+    override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+        return builder.curlyWrapped {
+            commaSeparated {
+                item { redactor.process(builder, shortUrl, HashProcessor.UrlProcessor, "shortUrl=") }
+                item { redactor.process(builder, resolvedUrl, HashProcessor.UrlProcessor, "resolvedUrl=") }
+            }
         }
     }
 }

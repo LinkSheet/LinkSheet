@@ -14,7 +14,7 @@ import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.log.impl.Logger
-import fe.linksheet.module.network.NetworkState
+import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.util.BuildType
 import java.io.IOException
 import java.time.format.DateTimeFormatter
@@ -24,7 +24,7 @@ class AptabaseAnalyticsClient(
     coroutineScope: LifecycleCoroutineScope,
     private val environmentInfo: EnvironmentInfo,
     identity: TelemetryIdentity,
-    networkState: NetworkState,
+    networkState: NetworkStateService,
     logger: Logger,
     private val apiKey: String?,
 ) : AnalyticsClient(enabled, coroutineScope, identity, networkState, logger = logger) {

@@ -7,9 +7,10 @@ import android.graphics.drawable.Drawable
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogHasher
+import fe.linksheet.module.redactor.ProtectMap
+import fe.linksheet.module.redactor.Redactable
+import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.module.redactor.SensitiveString
 import fe.stringbuilder.util.commaSeparated
 
 typealias DisplayActivityInfoStatus = Pair<DisplayActivityInfo, Boolean>
@@ -20,7 +21,7 @@ data class DisplayActivityInfo(
     val extendedInfo: CharSequence? = null,
     val icon: Drawable? = null,
     val resolvedInfo: ResolveInfo,
-) : LogDumpable {
+) : Redactable<DisplayActivityInfo> {
     companion object {
         val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }
         private val valueAndLabelComparator = compareByDescending<DisplayActivityInfoStatus> { (_, status) ->
@@ -51,18 +52,20 @@ data class DisplayActivityInfo(
         )
     }
 
-    override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.commaSeparated {
-        item {
-            hasher.hash(this, "activityInfo=", activityInfo, HashProcessor.ActivityInfoProcessor)
-        }
-        item {
-            hasher.hash(this, "label=", label, HashProcessor.StringProcessor)
-        }
-        itemNotNull(extendedInfo) {
-            hasher.hash(this, "extendedInfo=", extendedInfo.toString(), HashProcessor.StringProcessor)
-        }
-        item {
-            hasher.hash(this, "resolveInfo=", resolvedInfo, HashProcessor.ResolveInfoProcessor)
+    override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+        return builder.commaSeparated {
+//            item {
+//                redactor.process(this, activityInfo, HashProcessor.ActivityInfoProcessor, "activityInfo=")
+//            }
+//            item {
+//                redactor.process(this, label, HashProcessor.StringProcessor, "label=")
+//            }
+//            itemNotNull(extendedInfo) {
+//                redactor.process(this, extendedInfo.toString(), HashProcessor.StringProcessor, "extendedInfo=")
+//            }
+//            item {
+//                redactor.process(this, resolvedInfo, HashProcessor.ResolveInfoProcessor, "resolveInfo=")
+//            }
         }
     }
 

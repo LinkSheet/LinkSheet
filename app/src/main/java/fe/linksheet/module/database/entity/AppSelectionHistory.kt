@@ -4,10 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import fe.linksheet.module.log.impl.hasher.HostProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogHasher
-import fe.linksheet.module.log.impl.hasher.PackageProcessor
+import fe.linksheet.module.redactor.*
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 
@@ -20,15 +17,15 @@ data class AppSelectionHistory(
     val host: String,
     val packageName: String,
     val lastUsed: Long,
-) : LogDumpable {
-    override fun dump(
-        stringBuilder: StringBuilder,
-        hasher: LogHasher
-    ) = stringBuilder.curlyWrapped {
+) : Redactable<AppSelectionHistory> {
+    override fun process(
+        builder: StringBuilder,
+        redactor: Redactor
+    ) = builder.curlyWrapped {
         commaSeparated {
-            item { hasher.hash(stringBuilder, "host=", host, HostProcessor) }
-            item { hasher.hash(stringBuilder, "packageName=", packageName, PackageProcessor) }
-            item { append("lastUsed=", lastUsed) }
+            item { redactor.process(builder, host, HostProcessor, "host=") }
+            item { redactor.process(builder, packageName, PackageProcessor, "packageName=") }
+            item { append("lastcUsed=", lastUsed) }
         }
     }
 }

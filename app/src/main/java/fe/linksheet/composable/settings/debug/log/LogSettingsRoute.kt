@@ -23,7 +23,6 @@ import fe.linksheet.composable.util.*
 import fe.linksheet.extension.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.logTextViewerSettingsRoute
-import fe.linksheet.module.log.file.FileAppLogger
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

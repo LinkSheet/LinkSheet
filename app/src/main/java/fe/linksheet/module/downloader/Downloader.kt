@@ -4,10 +4,7 @@ import fe.httpkt.ext.findHeader
 import fe.httpkt.util.Extension
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.impl.Logger
-import fe.linksheet.module.log.impl.hasher.FileExtensionProcessor
-import fe.linksheet.module.log.impl.hasher.FileNameProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogHasher
+import fe.linksheet.module.redactor.*
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.mimetypekt.MimeTypes
 import fe.stringbuilder.util.commaSeparated
@@ -33,28 +30,34 @@ class Downloader(private val cachedRequest: CachedRequest, private val logger: L
         private val extensionToMimeType = MimeTypes.extensionToMimeType
     }
 
-    sealed class DownloadCheckResult : LogDumpable {
+    sealed class DownloadCheckResult : Redactable<DownloadCheckResult> {
         class Downloadable(private val fileName: String, private val extension: String?) : DownloadCheckResult() {
             fun toFileName() = "$fileName.$extension"
 
-            override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
-                commaSeparated {
-                    item { append("type=downloadable") }
-                    item { hasher.hash(stringBuilder, "name=", fileName, FileNameProcessor) }
-                    item { hasher.hash(stringBuilder, "ext=", fileName, FileExtensionProcessor) }
+            override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+                return builder.curlyWrapped {
+                    commaSeparated {
+                        item { append("type=downloadable") }
+//                        item { redactor.process(builder, fileName, FileNameProcessor, "name=") }
+//                        item { redactor.process(builder, extension, FileExtensionProcessor, "ext=") }
+                    }
                 }
             }
         }
 
         data object NonDownloadable : DownloadCheckResult() {
-            override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
-                append("type=non_downloadable")
+            override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+                return builder.curlyWrapped {
+                    append("type=non_downloadable")
+                }
             }
         }
 
         data object MimeTypeDetectionFailed : DownloadCheckResult() {
-            override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.curlyWrapped {
-                append("type=failed")
+            override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+                return builder.curlyWrapped {
+                    append("type=failed")
+                }
             }
         }
 

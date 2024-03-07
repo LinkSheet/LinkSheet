@@ -7,26 +7,23 @@ import fe.gson.extension.io.toJson
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
-import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.file.entry.LogEntry
-import fe.linksheet.util.SingletonHolder
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.io.File
 import java.time.LocalDateTime
 
-val fileAppLoggerModule = module {
-    service<FileAppLogger> {
-        val logDir = FileAppLogger.getLogDir(applicationContext)
-        FileAppLogger(logDir)
+val logFileServiceModule = module {
+    service<LogFileService> {
+        val logDir = LogFileService.getLogDir(applicationContext)
+        LogFileService(logDir)
     }
 }
 
-class FileAppLogger(private val logDir: File) : Service {
+class LogFileService(private val logDir: File) : Service {
     companion object {
-        const val LOG_DIR = "logs"
+        private const val LOG_DIR = "logs"
         const val FILE_EXT = "log"
         const val FILE_EXT_V2 = "json"
 
@@ -79,12 +76,12 @@ class FileAppLogger(private val logDir: File) : Service {
         logEntries.add(entry)
     }
 
-    override fun boot(lifecycle: Lifecycle) {
+    override fun start(lifecycle: Lifecycle) {
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
         getLogFiles().filter { it.millis < startupMillis }.forEach { deleteLogFile(it) }
     }
 
-    override fun shutdown(lifecycle: Lifecycle) {
+    override fun stop(lifecycle: Lifecycle) {
         if (logEntries.isNotEmpty()) {
             LogFile.new(logDir).file.toJson(logEntries)
         }

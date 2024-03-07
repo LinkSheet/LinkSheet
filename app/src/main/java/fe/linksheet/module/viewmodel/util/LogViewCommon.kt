@@ -20,7 +20,7 @@ class LogViewCommon(
     @OptIn(SensitivePreference::class)
     private fun logPreferences(redact: Boolean): Map<String, String?> {
         val preferences = preferenceRepository.exportPreferences(AppPreferences.sensitivePreferences)
-        val packages = AppPreferences.logPackages(redact, redactor, preferenceRepository)
+        val packages = AppPreferences.logPackages(if (redact) redactor else Redactor.NoOp, preferenceRepository)
 
         return preferences + packages
     }

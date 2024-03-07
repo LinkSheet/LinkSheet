@@ -9,7 +9,7 @@ import fe.linksheet.extension.failure
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
-import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.Darknet

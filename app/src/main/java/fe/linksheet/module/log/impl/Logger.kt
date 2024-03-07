@@ -1,8 +1,8 @@
 package fe.linksheet.module.log.impl
 
 import fe.linksheet.extension.koin.factory
-import fe.linksheet.module.log.file.FileAppLogger
-import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.log.impl.internal.DefaultLoggerDelegate
 import fe.linksheet.module.log.impl.internal.LoggerDelegate
 import fe.linksheet.module.log.impl.internal.ProduceMessage
@@ -11,8 +11,8 @@ import org.koin.dsl.module
 import kotlin.reflect.KClass
 
 val defaultLoggerModule = module {
-    factory<Logger, Redactor, FileAppLogger> { params, redactor, fileAppLogger ->
-        val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, fileAppLogger)
+    factory<Logger, Redactor, LogFileService> { params, redactor, logFileService ->
+        val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, logFileService)
         Logger(delegate)
     }
 }
@@ -48,7 +48,6 @@ class Logger(private val delegate: LoggerDelegate) {
 
     fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
-
     }
 
     fun debug(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {

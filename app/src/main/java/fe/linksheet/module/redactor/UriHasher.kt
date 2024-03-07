@@ -1,4 +1,4 @@
-package fe.linksheet.module.log.impl.hasher
+package fe.linksheet.module.redactor
 
 import fe.kotlin.extension.asString
 import fe.kotlin.extension.iterable.forEachWithInfo

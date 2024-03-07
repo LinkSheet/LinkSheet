@@ -9,7 +9,7 @@ import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
 import fe.linksheet.module.analytics.client.EnvironmentInfo
 import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.impl.Logger
-import fe.linksheet.module.network.NetworkState
+import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import kotlinx.coroutines.*
@@ -22,7 +22,7 @@ import kotlin.math.pow
 import kotlin.properties.Delegates
 
 val analyticsModule = module {
-    service<AnalyticsClient, AppPreferenceRepository, NetworkState> { _, preferences, networkState ->
+    service<AnalyticsClient, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
         val identity = preferences.getOrWriteInit(AppPreferences.telemetryIdentity)
         val level by preferences.getState(AppPreferences.telemetryLevel)
 
@@ -42,7 +42,7 @@ abstract class AnalyticsClient(
     private val supported: Boolean,
     private val coroutineScope: LifecycleCoroutineScope,
     protected val identity: TelemetryIdentity,
-    private val networkState: NetworkState,
+    private val networkState: NetworkStateService,
     val logger: Logger
 ) : Service {
 
@@ -69,7 +69,7 @@ abstract class AnalyticsClient(
     @Throws(IOException::class)
     protected abstract fun send(telemetryIdentity: TelemetryIdentity, events: List<AnalyticsEvent>): Boolean
 
-    override fun boot(lifecycle: Lifecycle) {
+    override fun start(lifecycle: Lifecycle) {
 //        val implEnabled = supported && this.checkImplEnabled()
 //        enabled = implEnabled && level != TelemetryLevel.Disabled
 //        currentLevel = level
@@ -90,7 +90,7 @@ abstract class AnalyticsClient(
 //        return this
     }
 
-    override fun shutdown(lifecycle: Lifecycle) {
+    override fun stop(lifecycle: Lifecycle) {
         eventSender?.cancel()
     }
 

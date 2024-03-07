@@ -9,10 +9,8 @@ import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
-import fe.linksheet.module.log.impl.hasher.HashProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.log.impl.hasher.LogHasher
+import fe.linksheet.module.redactor.*
+import fe.linksheet.module.redactor.Package
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first
@@ -21,7 +19,7 @@ class BrowserHandler(
     val preferenceRepository: AppPreferenceRepository,
     private val browserResolver: BrowserResolver,
 ) {
-    sealed class BrowserMode(val value: String) : LogDumpable {
+    sealed class BrowserMode(val value: String)  {
         data object None : BrowserMode("none")
         data object AlwaysAsk : BrowserMode("always_ask")
         data object SelectedBrowser : BrowserMode("browser")
@@ -30,17 +28,17 @@ class BrowserHandler(
         companion object : OptionTypeMapper<BrowserMode, String>(
             { it.value }, { arrayOf(None, AlwaysAsk, SelectedBrowser, Whitelisted) }
         )
-
-        override fun dump(stringBuilder: StringBuilder, hasher: LogHasher): StringBuilder {
-            return hasher.hash(stringBuilder, value, HashProcessor.NoOpProcessor)
-        }
     }
 
-    data class BrowserModeInfo(val browserMode: BrowserMode, val resolveInfo: ResolveInfo?) : LogDumpable {
-        override fun dump(stringBuilder: StringBuilder, hasher: LogHasher) = stringBuilder.commaSeparated {
-            item { dumpObject("mode=", this, hasher, browserMode) }
-            itemNotNull(resolveInfo) {
-                dumpObject("resolveInfo=", this, hasher, resolveInfo)
+    data class BrowserModeInfo(val browserMode: BrowserMode, val resolveInfo: ResolveInfo?) : Redactable<BrowserModeInfo> {
+        override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+            return builder.commaSeparated {
+//                item {
+//                    append("mode=").append(browserMode)
+//                }
+//                itemNotNull(resolveInfo) {
+//                    redactor.process(this, resolveInfo, HashProcessor.ResolveInfoProcessor, "resolveInfo=")
+//                }
             }
         }
     }

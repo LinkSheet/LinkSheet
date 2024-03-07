@@ -2,22 +2,14 @@ package fe.linksheet.module.database.entity
 
 import android.content.ComponentName
 import android.content.Context
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.Index
-import androidx.room.PrimaryKey
-import fe.linksheet.resolver.PreferredDisplayActivityInfo
+import androidx.room.*
 import fe.linksheet.extension.android.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.android.toDisplayActivityInfo
-import fe.linksheet.module.log.impl.hasher.HostProcessor
-import fe.linksheet.module.log.impl.hasher.LogDumpable
-import fe.linksheet.module.log.impl.hasher.LogDumpable.Companion.dumpObject
-import fe.linksheet.module.log.impl.hasher.LogHasher
-import fe.linksheet.module.log.impl.hasher.PackageProcessor
+import fe.linksheet.module.redactor.*
 import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.resolver.PreferredDisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated
-import java.lang.StringBuilder
+import java.lang.Package
 
 @Entity(
     tableName = "openwith",
@@ -29,7 +21,7 @@ data class PreferredApp(
     val packageName: String? = null,
     val component: String,
     val alwaysPreferred: Boolean
-) : LogDumpable {
+) : Redactable<PreferredApp> {
     @delegate:Ignore
     val componentName by lazy {
         ComponentName.unflattenFromString(component) ?: ComponentName.unflattenFromString("$packageName/$component")
@@ -46,27 +38,19 @@ data class PreferredApp(
         }
     }
 
-    override fun dump(
-        stringBuilder: StringBuilder,
-        hasher: LogHasher
-    ) = stringBuilder.commaSeparated {
-        item {
-            hasher.hash(this, "host=", host, HostProcessor)
-        }
-        itemNotNull(packageName) {
-            hasher.hash(
-                this,
-                "pkg=",
-                packageName,
-                PackageProcessor
-            )
-        }
-        item {
-            dumpObject("cmp=", stringBuilder, hasher, componentName)
-        }
-        item {
-            append("alwaysPreferred=", alwaysPreferred)
-        }
+    override fun process(builder: StringBuilder, redactor: Redactor) = builder.commaSeparated {
+//        item {
+//            redactor.process(this, host, HostProcessor, "host=")
+//        }
+//        itemNotNull(packageName) {
+//            redactor.process(this, packageName, PackageProcessor, "pkg=")
+//        }
+//        item {
+//            redactor.process(this, componentName, HashProcessor.ComponentProcessor, "cmp=")
+//        }
+//        item {
+//            append("alwaysPreferred=", alwaysPreferred)
+//        }
     }
 
     override fun equals(other: Any?): Boolean {

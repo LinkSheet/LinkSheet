@@ -23,10 +23,10 @@ import fe.linksheet.module.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
-import fe.linksheet.module.log.file.fileAppLoggerModule
+import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.log.impl.defaultLoggerModule
 import fe.linksheet.module.redactor.redactorModule
-import fe.linksheet.module.network.networkStateModule
+import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
@@ -91,8 +91,8 @@ open class LinkSheetApp : Application() {
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
             modules(
-                networkStateModule,
-                fileAppLoggerModule,
+                networkStateServiceModule,
+                logFileServiceModule,
                 shizukuHandlerModule,
                 globalGsonModule,
                 preferenceRepositoryModule,
@@ -127,7 +127,7 @@ open class LinkSheetApp : Application() {
     }
 
     fun manageService(service: Service) {
-        lifecycleObserver.manageService(service)
+        lifecycleObserver.register(service)
     }
 
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {

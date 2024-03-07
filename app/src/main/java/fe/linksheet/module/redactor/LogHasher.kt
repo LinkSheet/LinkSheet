@@ -1,7 +1,8 @@
-package fe.linksheet.module.log.impl.hasher
+package fe.linksheet.module.redactor
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo
+import android.content.pm.ComponentInfo
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import fe.linksheet.extension.appendHashed
@@ -153,15 +154,17 @@ sealed interface HashProcessor<T> {
             input: ResolveInfo,
             mac: Mac
         ) = stringBuilder.apply {
-            val packageName = packageName(input)
-            StringProcessor.process(this, packageName!!, mac)
+            val packageName = input.getComponentInfo()?.packageName
+            PackageProcessor.process(this, packageName ?: "", mac)
         }
 
-        private fun packageName(input: ResolveInfo) =
-            if (input.activityInfo != null) input.activityInfo.packageName
-            else if (input.serviceInfo != null) input.serviceInfo.packageName
-            else if (input.providerInfo != null) input.providerInfo.packageName
-            else null
+        private fun ResolveInfo.getComponentInfo(): ComponentInfo? {
+            if (activityInfo != null) return activityInfo
+            if (serviceInfo != null) return serviceInfo
+            if (providerInfo != null) return providerInfo
+
+            return null
+        }
     }
 
     data object ResolveInfoListProcessor : HashProcessor<List<ResolveInfo>> {

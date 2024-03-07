@@ -19,7 +19,7 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference

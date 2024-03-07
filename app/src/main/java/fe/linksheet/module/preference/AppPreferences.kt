@@ -6,13 +6,11 @@ import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.log.impl.hasher.PackageProcessor
-import fe.linksheet.module.redactor.DefaultRedactor
+import fe.linksheet.module.redactor.PackageProcessor
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
-import fe.linksheet.util.CryptoUtil
 import java.util.*
 
 object AppPreferences : PreferenceDefinition(
@@ -99,10 +97,9 @@ object AppPreferences : PreferenceDefinition(
     val showLinkSheetAsReferrer = booleanPreference("show_as_referrer")
     val devModeEnabled = booleanPreference("dev_mode_enabled")
 
-    @OptIn(ExperimentalStdlibApi::class)
     @SensitivePreference
     val logKey = stringPreference("log_key") {
-        CryptoUtil.getRandomBytes(Redactor.HMAC.keySize).toHexString()
+        Redactor.createHmacKey()
     }
 
     val firstRun = booleanPreference("first_run", true)
@@ -136,10 +133,10 @@ object AppPreferences : PreferenceDefinition(
     )
 
     @OptIn(SensitivePreference::class)
-    fun logPackages(redact: Boolean, redactor: Redactor, repository: AppPreferenceRepository): Map<String, String?> {
+    fun logPackages(redactor: Redactor, repository: AppPreferenceRepository): Map<String, String?> {
         return sensitivePackagePreferences.associate { pref ->
             val value = repository.getString(pref)
-            val strValue = value?.let { redactor.process(redact, it, PackageProcessor) } ?: "<null>"
+            val strValue = value?.let { redactor.processToString(it, PackageProcessor) } ?: "<null>"
 
             pref.key to strValue
         }

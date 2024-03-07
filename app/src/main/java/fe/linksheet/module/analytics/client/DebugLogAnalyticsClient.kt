@@ -9,18 +9,18 @@ import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.log.impl.Logger
-import fe.linksheet.module.network.NetworkState
+import fe.linksheet.module.network.NetworkStateService
 import org.koin.dsl.module
 
 class DebugLogAnalyticsClient(
     coroutineScope: LifecycleCoroutineScope,
     identity: TelemetryIdentity,
-    networkState: NetworkState,
+    networkState: NetworkStateService,
     logger: Logger,
 ) : AnalyticsClient(true, coroutineScope, identity, networkState, logger = logger) {
     companion object {
         val module = module {
-            single<AnalyticsClient, NetworkState> { _, networkState ->
+            single<AnalyticsClient, NetworkStateService> { _, networkState ->
                 DebugLogAnalyticsClient(
                     coroutineScope = applicationLifecycle.coroutineScope,
                     networkState = networkState,

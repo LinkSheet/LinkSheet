@@ -11,7 +11,7 @@ class AppLifecycleObserver(
     private val services = mutableListOf<Service>()
     val coroutineScope = lifecycleObserver.lifecycleScope
 
-    fun manageService(service: Service) {
+    fun register(service: Service) {
         services.add(service)
     }
 
@@ -21,7 +21,7 @@ class AppLifecycleObserver(
 
     fun bootServices() {
         Log.d("AppLifecycle", "Booting ${services.size} services")
-        services.forEach { it.boot(lifecycleObserver.lifecycle) }
+        services.forEach { it.start(lifecycleObserver.lifecycle) }
     }
 
 //    override fun onCreate(owner: LifecycleOwner) {
@@ -31,6 +31,6 @@ class AppLifecycleObserver(
 
     override fun onStop(owner: LifecycleOwner) {
         Log.d("AppLifecycle", "Shutting down ${services.size} services")
-        services.forEach { it.shutdown(owner.lifecycle) }
+        services.forEach { it.stop(owner.lifecycle) }
     }
 }

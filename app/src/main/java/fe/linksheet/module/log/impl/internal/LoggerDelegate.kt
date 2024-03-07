@@ -1,9 +1,9 @@
 package fe.linksheet.module.log.impl.internal
 
 import android.util.Log
-import fe.linksheet.module.log.file.FileAppLogger
+import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.log.file.entry.LogEntry
-import fe.linksheet.module.log.impl.hasher.HashProcessor
+import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactor
 
 typealias ProduceMessage = (String) -> String
@@ -11,7 +11,7 @@ typealias ProduceMessage = (String) -> String
 abstract class LoggerDelegate(
     private val prefix: String,
     val redactor: Redactor,
-    private val fileAppLogger: FileAppLogger
+    private val fileAppLogger: LogFileService
 ) {
     enum class Level(val code: String) {
         Verbose("V"), Info("I"), Debug("D"), Error("E")

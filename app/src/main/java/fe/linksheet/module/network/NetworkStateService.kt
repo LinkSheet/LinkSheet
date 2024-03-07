@@ -10,22 +10,22 @@ import kotlinx.coroutines.flow.*
 import org.koin.dsl.module
 
 
-val networkStateModule = module {
-    service<NetworkState> { NetworkState(applicationContext.getSystemService()!!) }
+val networkStateServiceModule = module {
+    service<NetworkStateService> { NetworkStateService(applicationContext.getSystemService()!!) }
 }
 
-class NetworkState(private val connectivityManager: ConnectivityManager) : Service {
+class NetworkStateService(private val connectivityManager: ConnectivityManager) : Service {
 
     private val currentNetwork = MutableStateFlow(CurrentNetwork.Default)
     private val networkCallback = NetworkCallback(currentNetwork)
 
-    lateinit var isNetworkConnectedFlow: StateFlow<Boolean>
+    private lateinit var isNetworkConnectedFlow: StateFlow<Boolean>
 
     val isNetworkConnected: Boolean
         get() = isNetworkConnectedFlow.value
 
 
-    override fun boot(lifecycle: Lifecycle) {
+    override fun start(lifecycle: Lifecycle) {
         if (currentNetwork.value.isListening) return
 
         isNetworkConnectedFlow = currentNetwork.map { it.isConnected() }.stateIn(
@@ -38,7 +38,7 @@ class NetworkState(private val connectivityManager: ConnectivityManager) : Servi
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
 
-    override fun shutdown(lifecycle: Lifecycle) {
+    override fun stop(lifecycle: Lifecycle) {
         if (!currentNetwork.value.isListening) return
 
         currentNetwork.update { CurrentNetwork.Default.copy(isListening = false) }

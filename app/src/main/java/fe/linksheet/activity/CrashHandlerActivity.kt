@@ -22,7 +22,7 @@ import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.module.log.file.FileAppLogger
+import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppHost
@@ -38,7 +38,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
     private val logger by injectLogger<CrashHandlerActivity>()
-    private val fileAppLogger by inject<FileAppLogger>()
+    private val fileAppLogger by inject<LogFileService>()
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {

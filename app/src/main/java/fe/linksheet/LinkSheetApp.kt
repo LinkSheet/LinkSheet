@@ -121,7 +121,7 @@ open class LinkSheetApp : Application() {
             val analyticsClient = koinApplication.koin.get<AnalyticsClient>()
             val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()
 
-            val lastVersion = preferenceRepository.getInt(AppPreferences.lastVersion)
+            val lastVersion = preferenceRepository.get(AppPreferences.lastVersion)
             analyticsClient.enqueue(createAppStartEvent(lastVersion))
         }
     }

@@ -23,8 +23,8 @@ import kotlin.properties.Delegates
 
 val analyticsModule = module {
     service<AnalyticsClient, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
-        val identity = preferences.getOrWriteInit(AppPreferences.telemetryIdentity)
-        val level by preferences.getState(AppPreferences.telemetryLevel)
+        val identity = preferences.getOrPutInit(AppPreferences.telemetryIdentity)
+        val level by preferences.asState(AppPreferences.telemetryLevel)
 
         AptabaseAnalyticsClient(
             BuildConfig.ANALYTICS_SUPPORTED,
@@ -56,7 +56,7 @@ abstract class AnalyticsClient(
         const val BATCH_EVENTS = 5
         const val BATCHING_TIMEOUT_MILLIS = 15 * 1000L
         const val SEND_TRIES = 5
-        val TRY_DELAY: (Int) -> Long = { attemptNum -> 10 * 1000L * 2.0.pow(attemptNum).toLong() }
+        val TRY_DELAY: (Int) -> Long = { attemptNo -> 10 * 1000L * 2.0.pow(attemptNo).toLong() }
     }
 
     protected open fun checkImplEnabled() = true
@@ -134,7 +134,7 @@ abstract class AnalyticsClient(
         logger.debug("Internet connection available")
 
         for (i in 0 until SEND_TRIES) {
-            logger.debug("Trying to send events (try: ${i + 1})")
+            logger.debug("Trying to send events (attemptNo: ${i + 1})")
             runCatching {
                 val success = send(telemetryIdentity, events)
                 logger.debug("Send result: $success")

@@ -13,5 +13,5 @@ class OnboardingViewModel(
     val preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
+    val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
 }

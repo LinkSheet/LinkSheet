@@ -21,7 +21,7 @@ class LoadDumpedPreferencesViewModel(
             splitted[0] to splitted[1]
         }
 
-        preferenceRepository.editor {
+        preferenceRepository.edit {
             lines.forEach { (key, value) ->
                 val preference = AppPreferences.all[key]
                 if (preference != null) {
@@ -29,7 +29,6 @@ class LoadDumpedPreferencesViewModel(
                         preferenceRepository.setStringValueToPreference(
                             preference,
                             value,
-                            this@editor
                         )
                     } catch (e: Exception) {
                         Log.d("Import", "Failed to import $key")

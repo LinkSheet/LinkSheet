@@ -2,15 +2,15 @@ package fe.linksheet.module.preference
 
 import android.content.Context
 import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.ComposePreferenceRepository
+import fe.android.preference.helper.compose.StatePreferenceRepository
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 
-class AppPreferenceRepository(val context: Context) : ComposePreferenceRepository(context) {
+class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(context) {
 
-    private val followRedirectsExternalService = getBooleanState(AppPreferences.followRedirectsExternalService)
-    private val amp2HtmlExternalService = getBooleanState(AppPreferences.amp2HtmlExternalService)
+    private val followRedirectsExternalService = asState(AppPreferences.followRedirectsExternalService)
+    private val amp2HtmlExternalService = asState(AppPreferences.amp2HtmlExternalService)
 
     private val preferencesRequiringPermission by lazy {
         mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
@@ -32,9 +32,9 @@ class AppPreferenceRepository(val context: Context) : ComposePreferenceRepositor
             preference to it.value
         }
 
-        editor {
+        edit {
             mappedPreferences.forEach { (preference, newValue) ->
-                setStringValueToPreference(preference, newValue, this)
+                setStringValueToPreference(preference, newValue)
             }
         }
 

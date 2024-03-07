@@ -54,36 +54,36 @@ class BottomSheetViewModel(
 
     var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
-    val hideAfterCopying = preferenceRepository.getBooleanState(AppPreferences.hideAfterCopying)
+    val hideAfterCopying = preferenceRepository.asState(AppPreferences.hideAfterCopying)
 
-    val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)
-    val downloadStartedToast = preferenceRepository.getBooleanState(AppPreferences.downloadStartedToast)
+    val urlCopiedToast = preferenceRepository.asState(AppPreferences.urlCopiedToast)
+    val downloadStartedToast = preferenceRepository.asState(AppPreferences.downloadStartedToast)
 
-    val gridLayout = preferenceRepository.getBooleanState(AppPreferences.gridLayout)
+    val gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
     private val followRedirects =
-        preferenceRepository.getBooleanState(AppPreferences.followRedirects)
-    private var enableDownloader = preferenceRepository.getBooleanState(
+        preferenceRepository.asState(AppPreferences.followRedirects)
+    private var enableDownloader = preferenceRepository.asState(
         AppPreferences.enableDownloader
     )
 
-    val openingWithAppToast = preferenceRepository.getBooleanState(AppPreferences.openingWithAppToast)
-    val resolveViaToast = preferenceRepository.getBooleanState(AppPreferences.resolveViaToast)
-    val resolveViaFailedToast = preferenceRepository.getBooleanState(AppPreferences.resolveViaFailedToast)
+    val openingWithAppToast = preferenceRepository.asState(AppPreferences.openingWithAppToast)
+    val resolveViaToast = preferenceRepository.asState(AppPreferences.resolveViaToast)
+    val resolveViaFailedToast = preferenceRepository.asState(AppPreferences.resolveViaFailedToast)
 
-    val theme = preferenceRepository.getState(AppPreferences.theme)
-    val useTextShareCopyButtons = preferenceRepository.getBooleanState(
+    val theme = preferenceRepository.asState(AppPreferences.theme)
+    val useTextShareCopyButtons = preferenceRepository.asState(
         AppPreferences.useTextShareCopyButtons
     )
-    val previewUrl = preferenceRepository.getBooleanState(AppPreferences.previewUrl)
+    val previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
 
-    val enableRequestPrivateBrowsingButton = preferenceRepository.getBooleanState(
+    val enableRequestPrivateBrowsingButton = preferenceRepository.asState(
         AppPreferences.enableRequestPrivateBrowsingButton
     )
 
-    val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
+    val enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
     val showAsReferrer =
-        preferenceRepository.getBooleanState(AppPreferences.showLinkSheetAsReferrer)
-    val hideBottomSheetChoiceButtons = preferenceRepository.getBooleanState(AppPreferences.hideBottomSheetChoiceButtons)
+        preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
+    val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
 
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!

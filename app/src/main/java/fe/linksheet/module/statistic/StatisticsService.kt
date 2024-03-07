@@ -20,12 +20,12 @@ class StatisticsService(val preferenceRepository: AppPreferenceRepository) : Ser
 
     @OptIn(SensitivePreference::class)
     override fun stop(lifecycle: Lifecycle) {
-        val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
+        val currentUseTime = preferenceRepository.get(AppPreferences.useTimeMs)
         val usedFor = System.currentTimeMillis() - start
 
-        preferenceRepository.editor {
-            preferenceRepository.writeLong(AppPreferences.useTimeMs, currentUseTime + usedFor)
-            preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
+        preferenceRepository.edit {
+            put(AppPreferences.useTimeMs, currentUseTime + usedFor)
+            put(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
         }
     }
 }

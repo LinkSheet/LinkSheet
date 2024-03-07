@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val redactorModule = module {
     single<Redactor, AppPreferenceRepository> { _, preferences ->
         @OptIn(SensitivePreference::class)
-        val logKey = preferences.getOrWriteInit(AppPreferences.logKey).decodeHexOrThrow()
+        val logKey = preferences.getOrPutInit(AppPreferences.logKey).decodeHexOrThrow()
 
         DefaultRedactor(logKey)
     }

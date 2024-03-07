@@ -22,7 +22,7 @@ class InAppBrowserSettingsViewModel(
     private val repository: DisableInAppBrowserInSelectedRepository,
     preferenceRepository: AppPreferenceRepository
 ) : BrowserCommonViewModel(context, preferenceRepository) {
-    var inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserSettings)
+    var inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserSettings)
 
     private val disableInAppBrowserInSelectedPackages = repository.getAll().map { list ->
         list.mapToSet { it.packageName }

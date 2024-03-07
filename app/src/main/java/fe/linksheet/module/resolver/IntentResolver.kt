@@ -57,78 +57,78 @@ class IntentResolver(
 ) : KoinComponent {
     private val logger by injectLogger<IntentResolver>()
 
-    private val useClearUrls = preferenceRepository.getBooleanState(AppPreferences.useClearUrls)
-    private var useFastForwardRules = preferenceRepository.getBooleanState(
+    private val useClearUrls = preferenceRepository.asState(AppPreferences.useClearUrls)
+    private var useFastForwardRules = preferenceRepository.asState(
         AppPreferences.useFastForwardRules
     )
 
     private var enableIgnoreLibRedirectButton =
-        preferenceRepository.getBooleanState(AppPreferences.enableIgnoreLibRedirectButton)
+        preferenceRepository.asState(AppPreferences.enableIgnoreLibRedirectButton)
     private var enableLibRedirect =
-        preferenceRepository.getBooleanState(AppPreferences.enableLibRedirect)
-    private val followRedirects = preferenceRepository.getBooleanState(AppPreferences.followRedirects)
+        preferenceRepository.asState(AppPreferences.enableLibRedirect)
+    private val followRedirects = preferenceRepository.asState(AppPreferences.followRedirects)
 
     private val followOnlyKnownTrackers =
-        preferenceRepository.getBooleanState(AppPreferences.followOnlyKnownTrackers)
-    private val followRedirectsLocalCache = preferenceRepository.getBooleanState(
+        preferenceRepository.asState(AppPreferences.followOnlyKnownTrackers)
+    private val followRedirectsLocalCache = preferenceRepository.asState(
         AppPreferences.followRedirectsLocalCache
     )
-    private val followRedirectsBuiltInCache = preferenceRepository.getBooleanState(
+    private val followRedirectsBuiltInCache = preferenceRepository.asState(
         AppPreferences.followRedirectsBuiltInCache
     )
-    private val followRedirectsExternalService = preferenceRepository.getBooleanState(
+    private val followRedirectsExternalService = preferenceRepository.asState(
         AppPreferences.followRedirectsExternalService
     )
 
     private val followRedirectsAllowDarknets =
-        preferenceRepository.getBooleanState(AppPreferences.followRedirectsAllowDarknets)
+        preferenceRepository.asState(AppPreferences.followRedirectsAllowDarknets)
 
-    private val requestTimeout = preferenceRepository.getIntState(
+    private val requestTimeout = preferenceRepository.asState(
         AppPreferences.requestTimeout
     )
 
     private var enableDownloader =
-        preferenceRepository.getBooleanState(AppPreferences.enableDownloader)
-    private var downloaderCheckUrlMimeType = preferenceRepository.getBooleanState(
+        preferenceRepository.asState(AppPreferences.enableDownloader)
+    private var downloaderCheckUrlMimeType = preferenceRepository.asState(
         AppPreferences.downloaderCheckUrlMimeType
     )
 
-    val theme = preferenceRepository.getState(AppPreferences.theme)
-    private val dontShowFilteredItem = preferenceRepository.getBooleanState(
+    val theme = preferenceRepository.asState(AppPreferences.theme)
+    private val dontShowFilteredItem = preferenceRepository.asState(
         AppPreferences.dontShowFilteredItem
     )
 
     private val inAppBrowserSettings =
-        preferenceRepository.getState(AppPreferences.inAppBrowserSettings)
+        preferenceRepository.asState(AppPreferences.inAppBrowserSettings)
 
-    private val browserMode = preferenceRepository.getState(AppPreferences.browserMode)
+    private val browserMode = preferenceRepository.asState(AppPreferences.browserMode)
 
     @OptIn(SensitivePreference::class)
-    private val selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
-    private val inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
+    private val selectedBrowser = preferenceRepository.asState(AppPreferences.selectedBrowser)
+    private val inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserMode)
 
     @OptIn(SensitivePreference::class)
     private val selectedInAppBrowser =
-        preferenceRepository.getStringState(AppPreferences.selectedInAppBrowser)
+        preferenceRepository.asState(AppPreferences.selectedInAppBrowser)
 
     private val unifiedPreferredBrowser =
-        preferenceRepository.getBooleanState(AppPreferences.unifiedPreferredBrowser)
+        preferenceRepository.asState(AppPreferences.unifiedPreferredBrowser)
 
-    private val enableAmp2Html = preferenceRepository.getBooleanState(AppPreferences.enableAmp2Html)
-    private val amp2HtmlLocalCache = preferenceRepository.getBooleanState(
+    private val enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
+    private val amp2HtmlLocalCache = preferenceRepository.asState(
         AppPreferences.amp2HtmlLocalCache
     )
 
-    private val amp2HtmlBuiltInCache = preferenceRepository.getBooleanState(
+    private val amp2HtmlBuiltInCache = preferenceRepository.asState(
         AppPreferences.amp2HtmlBuiltInCache
     )
 
     private val amp2HtmlExternalService =
-        preferenceRepository.getBooleanState(AppPreferences.amp2HtmlExternalService)
+        preferenceRepository.asState(AppPreferences.amp2HtmlExternalService)
     private val amp2HtmlAllowDarknets =
-        preferenceRepository.getBooleanState(AppPreferences.amp2HtmlAllowDarknets)
+        preferenceRepository.asState(AppPreferences.amp2HtmlAllowDarknets)
 
-    private val resolveEmbeds = preferenceRepository.getBooleanState(AppPreferences.resolveEmbeds)
+    private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
 
     companion object {

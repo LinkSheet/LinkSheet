@@ -12,20 +12,20 @@ class FollowRedirectsSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var followRedirects = preferenceRepository.getBooleanState(AppPreferences.followRedirects)
-    var followRedirectsLocalCache = preferenceRepository.getBooleanState(
+    var followRedirects = preferenceRepository.asState(AppPreferences.followRedirects)
+    var followRedirectsLocalCache = preferenceRepository.asState(
         AppPreferences.followRedirectsLocalCache
     )
-    val followRedirectsBuiltInCache = preferenceRepository.getBooleanState(
+    val followRedirectsBuiltInCache = preferenceRepository.asState(
         AppPreferences.followRedirectsBuiltInCache
     )
-    var followRedirectsExternalService = preferenceRepository.getBooleanState(
+    var followRedirectsExternalService = preferenceRepository.asState(
         AppPreferences.followRedirectsExternalService
     )
-    var followOnlyKnownTrackers = preferenceRepository.getBooleanState(
+    var followOnlyKnownTrackers = preferenceRepository.asState(
         AppPreferences.followOnlyKnownTrackers
     )
-    val followRedirectsAllowsDarknets = preferenceRepository.getBooleanState(AppPreferences.followRedirectsAllowDarknets)
+    val followRedirectsAllowsDarknets = preferenceRepository.asState(AppPreferences.followRedirectsAllowDarknets)
 
-    val followRedirectsTimeout = preferenceRepository.getIntState(AppPreferences.requestTimeout)
+    val followRedirectsTimeout = preferenceRepository.asState(AppPreferences.requestTimeout)
 }

@@ -11,5 +11,5 @@ class PrivacySettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var showAsReferrer = preferenceRepository.getBooleanState(AppPreferences.showLinkSheetAsReferrer)
+    var showAsReferrer = preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
 }

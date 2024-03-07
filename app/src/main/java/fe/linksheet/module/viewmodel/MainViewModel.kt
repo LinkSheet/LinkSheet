@@ -46,14 +46,14 @@ class MainViewModel(
     val analyticsClient: AnalyticsClient
 ) : BaseViewModel(preferenceRepository) {
 
-    val firstRun = preferenceRepository.getBooleanState(AppPreferences.firstRun)
+    val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
 
     @OptIn(SensitivePreference::class)
-    val useTimeMs = preferenceRepository.getLong(AppPreferences.useTimeMs)
-    val showDiscordBanner = preferenceRepository.getBooleanState(AppPreferences.showDiscordBanner)
-    val donateCardDismissed = preferenceRepository.getBooleanState(AppPreferences.donateCardDismissed)
-    var theme = preferenceRepository.getState(AppPreferences.theme)
-    val devBottomSheetExperimentCard = preferenceRepository.getBooleanState(AppPreferences.devBottomSheetExperimentCard)
+    val useTimeMs = preferenceRepository.get(AppPreferences.useTimeMs)
+    val showDiscordBanner = preferenceRepository.asState(AppPreferences.showDiscordBanner)
+    val donateCardDismissed = preferenceRepository.asState(AppPreferences.donateCardDismissed)
+    var theme = preferenceRepository.asState(AppPreferences.theme)
+    val devBottomSheetExperimentCard = preferenceRepository.asState(AppPreferences.devBottomSheetExperimentCard)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

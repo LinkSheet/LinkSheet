@@ -9,7 +9,7 @@ abstract class BaseViewModel(
     preferenceRepository: AppPreferenceRepository,
 //  protected val stateCache: StateCache = StateCache()
 ) : ViewModel() {
-    var alwaysShowPackageName = preferenceRepository.getBooleanState(AppPreferences.alwaysShowPackageName)
+    var alwaysShowPackageName = preferenceRepository.asState(AppPreferences.alwaysShowPackageName)
 
     init {
 //        Log.d("ViewModel", getTag())

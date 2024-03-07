@@ -26,7 +26,7 @@ class LibRedirectSettingsViewModel(
         }.thenBy { (service) -> service.name }
     }
 
-    var enableLibRedirect = preferenceRepository.getBooleanState(AppPreferences.enableLibRedirect)
+    var enableLibRedirect = preferenceRepository.asState(AppPreferences.enableLibRedirect)
 
     private val builtInServices = flowOfLazy { LibRedirectLoader.loadBuiltInServices() }
     private val builtinInstances = flowOfLazy {

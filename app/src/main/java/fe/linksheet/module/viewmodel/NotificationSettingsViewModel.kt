@@ -11,10 +11,10 @@ class NotificationSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    val urlCopiedToast = preferenceRepository.getBooleanState(AppPreferences.urlCopiedToast)
-    val downloadStartedToast = preferenceRepository.getBooleanState(AppPreferences.downloadStartedToast)
-    val openingWithAppToast = preferenceRepository.getBooleanState(AppPreferences.openingWithAppToast)
-    val resolveViaToast = preferenceRepository.getBooleanState(AppPreferences.resolveViaToast)
-    val resolveViaFailedToast = preferenceRepository.getBooleanState(AppPreferences.resolveViaFailedToast)
+    val urlCopiedToast = preferenceRepository.asState(AppPreferences.urlCopiedToast)
+    val downloadStartedToast = preferenceRepository.asState(AppPreferences.downloadStartedToast)
+    val openingWithAppToast = preferenceRepository.asState(AppPreferences.openingWithAppToast)
+    val resolveViaToast = preferenceRepository.asState(AppPreferences.resolveViaToast)
+    val resolveViaFailedToast = preferenceRepository.asState(AppPreferences.resolveViaFailedToast)
 
 }

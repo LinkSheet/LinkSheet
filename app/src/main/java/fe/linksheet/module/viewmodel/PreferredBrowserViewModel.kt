@@ -33,17 +33,17 @@ class PreferredBrowserViewModel(
     val type = MutableStateFlow(BrowserType.Normal)
 
     val unifiedPreferredBrowser =
-        preferenceRepository.getBooleanState(AppPreferences.unifiedPreferredBrowser)
+        preferenceRepository.asState(AppPreferences.unifiedPreferredBrowser)
 
-    private var browserMode = preferenceRepository.getState(AppPreferences.browserMode)
-
-    @OptIn(SensitivePreference::class)
-    private var selectedBrowser = preferenceRepository.getStringState(AppPreferences.selectedBrowser)
-
-    private var inAppBrowserMode = preferenceRepository.getState(AppPreferences.inAppBrowserMode)
+    private var browserMode = preferenceRepository.asState(AppPreferences.browserMode)
 
     @OptIn(SensitivePreference::class)
-    private var selectedInAppBrowser = preferenceRepository.getStringState(
+    private var selectedBrowser = preferenceRepository.asState(AppPreferences.selectedBrowser)
+
+    private var inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserMode)
+
+    @OptIn(SensitivePreference::class)
+    private var selectedInAppBrowser = preferenceRepository.asState(
         AppPreferences.selectedInAppBrowser
     )
 

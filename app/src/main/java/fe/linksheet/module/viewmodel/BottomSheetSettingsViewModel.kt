@@ -16,18 +16,18 @@ class BottomSheetSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val enableIgnoreLibRedirectButton =
-        preferenceRepository.getBooleanState(AppPreferences.enableIgnoreLibRedirectButton)
-    var hideAfterCopying = preferenceRepository.getBooleanState(AppPreferences.hideAfterCopying)
-    var gridLayout = preferenceRepository.getBooleanState(AppPreferences.gridLayout)
+        preferenceRepository.asState(AppPreferences.enableIgnoreLibRedirectButton)
+    var hideAfterCopying = preferenceRepository.asState(AppPreferences.hideAfterCopying)
+    var gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
     var dontShowFilteredItem =
-        preferenceRepository.getBooleanState(AppPreferences.dontShowFilteredItem)
-    var previewUrl = preferenceRepository.getBooleanState(AppPreferences.previewUrl)
-    var enableRequestPrivateBrowsingButton = preferenceRepository.getBooleanState(
+        preferenceRepository.asState(AppPreferences.dontShowFilteredItem)
+    var previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
+    var enableRequestPrivateBrowsingButton = preferenceRepository.asState(
         AppPreferences.enableRequestPrivateBrowsingButton
     )
 
-    var usageStatsSorting = preferenceRepository.getBooleanState(AppPreferences.usageStatsSorting)
-    val hideBottomSheetChoiceButtons = preferenceRepository.getBooleanState(AppPreferences.hideBottomSheetChoiceButtons)
+    var usageStatsSorting = preferenceRepository.asState(AppPreferences.usageStatsSorting)
+    val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
 
     val usageStatsPermission = UsageStatsPermission(context)
 

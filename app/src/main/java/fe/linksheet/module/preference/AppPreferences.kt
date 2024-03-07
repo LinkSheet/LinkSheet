@@ -14,12 +14,10 @@ import fe.linksheet.ui.Theme
 import java.util.*
 
 object AppPreferences : PreferenceDefinition(
-    mutableSetOf(
-        "enable_copy_button",
-        "single_tap",
-        "enable_send_button",
-        "show_new_bottom_sheet_banner"
-    )
+    "enable_copy_button",
+    "single_tap",
+    "enable_send_button",
+    "show_new_bottom_sheet_banner"
 ) {
     val hideAfterCopying = booleanPreference("hide_after_copying")
     val usageStatsSorting = booleanPreference("usage_stats_sorting")
@@ -122,6 +120,10 @@ object AppPreferences : PreferenceDefinition(
     val lastVersion = intPreference("last_version", -1)
 
 
+    init {
+        finalize()
+    }
+
     @SensitivePreference
     val sensitivePreferences = setOf(
         useTimeMs, logKey,
@@ -135,7 +137,7 @@ object AppPreferences : PreferenceDefinition(
     @OptIn(SensitivePreference::class)
     fun logPackages(redactor: Redactor, repository: AppPreferenceRepository): Map<String, String?> {
         return sensitivePackagePreferences.associate { pref ->
-            val value = repository.getString(pref)
+            val value = repository.get(pref)
             val strValue = value?.let { redactor.processToString(it, PackageProcessor) } ?: "<null>"
 
             pref.key to strValue

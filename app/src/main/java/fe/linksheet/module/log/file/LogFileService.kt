@@ -69,7 +69,7 @@ class LogFileService(private val logDir: File) : Service {
                 .mapNotNull { LogEntry.fromLogFileLine(it) }
         }
 
-        return logFile.fromJsonOrNull<List<LogEntry>>() ?: emptyList()
+        return logFile.fromJsonOrNull<List<LogEntry?>>()?.filterNotNull() ?: emptyList()
     }
 
     fun write(entry: LogEntry) {

@@ -22,7 +22,8 @@ object LogEntryDeserializer : JsonDeserializer<LogEntry> {
             val prefix = (obj.asStringOrNull("prefix") ?: obj.asStringOrNull("d"))
                 ?: return LogEntry.FatalEntry(time, message)
 
-            val redactedMessage = obj.asStringOrNull("redactedMessage") ?: obj.asString("e")
+            // Some builds did not correctly generate/save the redactedMessage, fall back to normal message in these cases
+            val redactedMessage = obj.asStringOrNull("redactedMessage") ?: obj.asStringOrNull("e") ?: message
             return LogEntry.DefaultLogEntry(type, time, prefix, message, redactedMessage)
         }.getOrNull()
     }

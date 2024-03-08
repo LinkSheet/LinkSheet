@@ -8,8 +8,8 @@ import androidx.annotation.RequiresApi
 
 @RequiresApi(Build.VERSION_CODES.S)
 fun getAppOpenByDefaultIntent(packageName: String): Intent {
-    return if (Build.MANUFACTURER.equals("samsung", ignoreCase = true)) {
-        // S*msung moment lol (https://stackoverflow.com/a/72365164)
+    return if (Build.MANUFACTURER.equals("samsung", ignoreCase = true) && Build.VERSION.SDK_INT == Build.VERSION_CODES.S) {
+        // Intent is broken on Samsung A12 (https://stackoverflow.com/a/72365164)
         Intent("android.settings.MANAGE_DOMAIN_URLS")
     } else {
         Intent(

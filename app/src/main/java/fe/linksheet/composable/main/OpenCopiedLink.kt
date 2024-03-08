@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.BottomSheetActivity
+import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.ui.Typography
 

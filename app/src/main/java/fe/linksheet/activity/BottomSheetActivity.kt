@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.UrlBar
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
 import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
@@ -56,8 +57,10 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
+// Must not be moved or renamed since LinkSheetCompat hardcodes the package/name
 class BottomSheetActivity : ComponentActivity(), KoinComponent {
     private val viewModel by viewModel<BottomSheetViewModel>()
+
 
     companion object {
         val preferredAppItemHeight = 60.dp

@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.BottomSheetActivity.Companion.buttonPadding
-import fe.linksheet.activity.bottomsheet.BottomSheetActivity.Companion.buttonRowHeight
+import fe.linksheet.activity.BottomSheetActivity.Companion.buttonPadding
+import fe.linksheet.activity.BottomSheetActivity.Companion.buttonRowHeight
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.ui.HkGroteskFontFamily
 

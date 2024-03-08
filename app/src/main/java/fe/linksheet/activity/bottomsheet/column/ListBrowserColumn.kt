@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.BottomSheetActivity.Companion.preferredAppItemHeight
+import fe.linksheet.activity.BottomSheetActivity.Companion.preferredAppItemHeight
 import fe.linksheet.activity.bottomsheet.LaunchApp
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.module.resolver.KnownBrowser

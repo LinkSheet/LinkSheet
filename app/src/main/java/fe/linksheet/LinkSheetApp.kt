@@ -40,7 +40,6 @@ import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
-import fe.linksheet.util.Timer
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -49,15 +48,12 @@ import kotlin.system.exitProcess
 
 class LinkSheetApp : Application() {
     private lateinit var lifecycleObserver: AppLifecycleObserver
-    private lateinit var timer: Timer
 
     override fun onCreate() {
         super.onCreate()
 
         lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
         lifecycleObserver.attach()
-
-        timer = Timer.startTimer()
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -126,26 +122,4 @@ class LinkSheetApp : Application() {
         else if (BuildConfig.VERSION_CODE > lastVersion) AnalyticsEvent.AppUpdated(lastVersion)
         else AnalyticsEvent.AppStarted(BuildConfig.VERSION_CODE)
     }
-
-
-//    override fun onStop(owner: LifecycleOwner) {
-//        super.onStop(owner)
-//
-//        runCatching {
-////            val analyticsClient = get<AnalyticsClient>()
-////            analyticsClient.shutdown()
-//
-//            val preferenceRepository = get<AppPreferenceRepository>()
-//
-//            val currentUseTime = preferenceRepository.getLong(AppPreferences.useTimeMs)
-//            val usedFor = timer.stop()
-//
-//            preferenceRepository.writeLong(AppPreferences.useTimeMs, currentUseTime + usedFor)
-//            preferenceRepository.writeInt(AppPreferences.lastVersion, BuildConfig.VERSION_CODE)
-//        }
-//
-//        get<AnalyticsClient>().shutdown()
-//        get<NetworkState>().unregisterListener()
-//        get<FileAppLogger>().writeLog()
-//    }
 }

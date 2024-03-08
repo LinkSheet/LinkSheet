@@ -121,10 +121,6 @@ class LinkSheetApp : Application() {
         }
     }
 
-    fun register(service: Service) {
-        lifecycleObserver.register(service)
-    }
-
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {
         return if (lastVersion == -1) AnalyticsEvent.FirstStart
         else if (BuildConfig.VERSION_CODE > lastVersion) AnalyticsEvent.AppUpdated(lastVersion)

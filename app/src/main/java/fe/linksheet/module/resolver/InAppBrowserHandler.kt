@@ -18,6 +18,10 @@ class InAppBrowserHandler(
             { it.value },
             { arrayOf(UseAppSettings, AlwaysDisableInAppBrowser, DisableInSelectedApps) }
         )
+
+        override fun toString(): String {
+            return value
+        }
     }
 
     suspend fun shouldAllowCustomTab(referrer: Uri?, inAppBrowserMode: InAppBrowserMode): Boolean {

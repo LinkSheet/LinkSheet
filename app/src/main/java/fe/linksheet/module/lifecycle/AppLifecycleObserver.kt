@@ -19,8 +19,8 @@ class AppLifecycleObserver(
         lifecycleObserver.lifecycle.addObserver(this)
     }
 
-    fun bootServices() {
-        Log.d("AppLifecycle", "Booting ${services.size} services")
+    fun start() {
+        Log.d("AppLifecycle", "Starting ${services.size} services")
         services.forEach { it.start(lifecycleObserver.lifecycle) }
     }
 

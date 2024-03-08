@@ -1,7 +1,6 @@
 package fe.linksheet
 
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -48,13 +47,9 @@ import org.lsposed.hiddenapibypass.HiddenApiBypass
 import kotlin.system.exitProcess
 
 
-open class LinkSheetApp : Application() {
+class LinkSheetApp : Application() {
     private lateinit var lifecycleObserver: AppLifecycleObserver
     private lateinit var timer: Timer
-
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -114,7 +109,7 @@ open class LinkSheetApp : Application() {
             )
         }
 
-        lifecycleObserver.bootServices()
+        lifecycleObserver.start()
 
         if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out
@@ -126,7 +121,7 @@ open class LinkSheetApp : Application() {
         }
     }
 
-    fun manageService(service: Service) {
+    fun register(service: Service) {
         lifecycleObserver.register(service)
     }
 

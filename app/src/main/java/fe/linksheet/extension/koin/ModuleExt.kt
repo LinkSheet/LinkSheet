@@ -58,7 +58,7 @@ inline fun <reified T : Service> Module.service(
         val scope = ExtendedScope(this, T::class)
         val service = definition(scope, params)
 
-        scope.applicationContext.manageService(service)
+        scope.applicationContext.register(service)
         service
     }
 }
@@ -71,7 +71,7 @@ inline fun <reified T : Service, reified P : Any> Module.service(
         val scope = ExtendedScope(this, T::class)
         val service = definition(scope, params, get<P>())
 
-        scope.applicationContext.manageService(service)
+        scope.applicationContext.register(service)
         service
     }
 }
@@ -84,7 +84,7 @@ inline fun <reified T : Service, reified P : Any, reified P2 : Any> Module.servi
         val scope = ExtendedScope(this, T::class)
         val service = definition(scope, params, get<P>(), get<P2>())
 
-        scope.applicationContext.manageService(service)
+        scope.applicationContext.register(service)
         service
     }
 }

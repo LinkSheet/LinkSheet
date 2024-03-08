@@ -19,105 +19,106 @@ object AppPreferences : PreferenceDefinition(
     "enable_send_button",
     "show_new_bottom_sheet_banner"
 ) {
-    val hideAfterCopying = booleanPreference("hide_after_copying")
-    val usageStatsSorting = booleanPreference("usage_stats_sorting")
+    val hideAfterCopying = boolean("hide_after_copying")
+    val usageStatsSorting = boolean("usage_stats_sorting")
 
-    val browserMode = mappedPreference(
+    val browserMode = mapped(
         "browser_mode",
         BrowserHandler.BrowserMode.AlwaysAsk,
         BrowserHandler.BrowserMode
     )
 
     @SensitivePreference
-    val selectedBrowser = stringPreference("selected_browser")
+    val selectedBrowser = string("selected_browser")
 
-    val inAppBrowserMode = mappedPreference(
+    val inAppBrowserMode = mapped(
         "in_app_browser_mode",
         BrowserHandler.BrowserMode.AlwaysAsk,
         BrowserHandler.BrowserMode
     )
 
     @SensitivePreference
-    val selectedInAppBrowser = stringPreference("selected_in_app_browser")
-    val unifiedPreferredBrowser = booleanPreference("unified_preferred_browser", true)
+    val selectedInAppBrowser = string("selected_in_app_browser")
+    val unifiedPreferredBrowser = boolean("unified_preferred_browser", true)
 
-    val inAppBrowserSettings = mappedPreference(
+    val inAppBrowserSettings = mapped(
         "in_app_browser_setting",
         InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
         InAppBrowserHandler.InAppBrowserMode
     )
-    val alwaysShowPackageName = booleanPreference("always_show_package_name")
-    val urlCopiedToast = booleanPreference("url_copied_toast", true)
-    val downloadStartedToast = booleanPreference("download_started_toast", true)
-    val openingWithAppToast = booleanPreference("opening_with_app_toast", true)
-    val resolveViaToast = booleanPreference("resolve_via_toast", true)
-    val resolveViaFailedToast = booleanPreference("resolve_via_failed_toast", true)
+    val alwaysShowPackageName = boolean("always_show_package_name")
+    val urlCopiedToast = boolean("url_copied_toast", true)
+    val downloadStartedToast = boolean("download_started_toast", true)
+    val openingWithAppToast = boolean("opening_with_app_toast", true)
+    val resolveViaToast = boolean("resolve_via_toast", true)
+    val resolveViaFailedToast = boolean("resolve_via_failed_toast", true)
 
-    val gridLayout = booleanPreference("grid_layout")
-    val useClearUrls = booleanPreference("use_clear_urls")
-    val useFastForwardRules = booleanPreference("fast_forward_rules")
-    val enableLibRedirect = booleanPreference("enable_lib_redirect")
+    val gridLayout = boolean("grid_layout")
+    val useClearUrls = boolean("use_clear_urls")
+    val useFastForwardRules = boolean("fast_forward_rules")
+    val enableLibRedirect = boolean("enable_lib_redirect")
 
-    val followRedirects = booleanPreference("follow_redirects")
-    val followRedirectsLocalCache = booleanPreference("follow_redirects_local_cache", true)
-    val followRedirectsExternalService = booleanPreference("follow_redirects_external_service")
-    val followOnlyKnownTrackers = booleanPreference("follow_only_known_trackers")
-    val followRedirectsBuiltInCache = booleanPreference("follow_redirects_builtin_cache", true)
-    val followRedirectsAllowDarknets = booleanPreference("follow_redirects_allow_darknets", false)
+    val followRedirects = boolean("follow_redirects")
+    val followRedirectsLocalCache = boolean("follow_redirects_local_cache", true)
+    val followRedirectsExternalService = boolean("follow_redirects_external_service")
+    val followOnlyKnownTrackers = boolean("follow_only_known_trackers")
+    val followRedirectsBuiltInCache = boolean("follow_redirects_builtin_cache", true)
+    val followRedirectsAllowDarknets = boolean("follow_redirects_allow_darknets", false)
 
 
-    val theme = mappedPreference("theme", Theme.System, Theme)
-    val dontShowFilteredItem = booleanPreference("dont_show_filtered_item")
+    val theme = mapped("theme", Theme.System, Theme)
+    val dontShowFilteredItem = boolean("dont_show_filtered_item")
 
-    @Deprecated("No longer used")
-    val useTextShareCopyButtons = booleanPreference("use_text_share_copy_buttons")
-    val previewUrl = booleanPreference("preview_url", true)
-    val enableDownloader = booleanPreference("enable_downloader")
-    val downloaderCheckUrlMimeType = booleanPreference("downloaderCheckUrlMimeType")
+    val useTextShareCopyButtons = boolean("use_text_share_copy_buttons")
+    val previewUrl = boolean("preview_url", true)
+    val enableDownloader = boolean("enable_downloader")
+    val downloaderCheckUrlMimeType = boolean("downloaderCheckUrlMimeType")
 
-    val enableIgnoreLibRedirectButton = booleanPreference("enable_ignore_lib_redirect_button")
+    val enableIgnoreLibRedirectButton = boolean("enable_ignore_lib_redirect_button")
 
-    val requestTimeout = intPreference("follow_redirects_timeout", 15)
+    val requestTimeout = int("follow_redirects_timeout", 15)
 
-    val enableAmp2Html = booleanPreference("enable_amp2html")
-    val amp2HtmlLocalCache = booleanPreference("amp2html_local_cache", true)
-    val amp2HtmlExternalService = booleanPreference("amp2html_external_service")
-    val amp2HtmlBuiltInCache = booleanPreference("amp2html_builtin_cache", true)
-    val amp2HtmlAllowDarknets = booleanPreference("amp2html_allow_darknets", false)
+    val enableAmp2Html = boolean("enable_amp2html")
+    val amp2HtmlLocalCache = boolean("amp2html_local_cache", true)
+    val amp2HtmlExternalService = boolean("amp2html_external_service")
+    val amp2HtmlBuiltInCache = boolean("amp2html_builtin_cache", true)
+    val amp2HtmlAllowDarknets = boolean("amp2html_allow_darknets", false)
 
-    val enableRequestPrivateBrowsingButton = booleanPreference(
+    val enableRequestPrivateBrowsingButton = boolean(
         "enable_request_private_browsing_button"
     )
 
     @SensitivePreference
-    val useTimeMs = longPreference("use_time", 0)
+    val useTimeMs = long("use_time", 0)
 
-    val showLinkSheetAsReferrer = booleanPreference("show_as_referrer")
-    val devModeEnabled = booleanPreference("dev_mode_enabled")
+    val showLinkSheetAsReferrer = boolean("show_as_referrer")
+    val devModeEnabled = boolean("dev_mode_enabled")
 
     @SensitivePreference
-    val logKey = stringPreference("log_key") {
+    val logKey = string("log_key") {
         Redactor.createHmacKey()
     }
 
-    val firstRun = booleanPreference("first_run", true)
-    val showDiscordBanner = booleanPreference("show_discord_banner", true)
+    val firstRun = boolean("first_run", true)
+    val showDiscordBanner = boolean("show_discord_banner", true)
 
-    val devBottomSheetExperimentCard = booleanPreference("show_dev_bottom_sheet_experiment_card", true)
+    val devBottomSheetExperimentCard = boolean("show_dev_bottom_sheet_experiment_card", true)
 
-    val useDevBottomSheet = booleanPreference("use_dev_bottom_sheet")
-    val donateCardDismissed = booleanPreference("donate_card_dismissed")
+    val useDevBottomSheet = boolean("use_dev_bottom_sheet")
+    val donateCardDismissed = boolean("donate_card_dismissed")
 
-    val devBottomSheetExperiment = booleanPreference("dev_bottom_sheet_experiment", true)
-    val resolveEmbeds = booleanPreference("resolve_embeds")
-    val hideBottomSheetChoiceButtons = booleanPreference("hide_bottom_sheet_choice_buttons")
+    val devBottomSheetExperiment = boolean("dev_bottom_sheet_experiment", true)
+    val resolveEmbeds = boolean("resolve_embeds")
+    val hideBottomSheetChoiceButtons = boolean("hide_bottom_sheet_choice_buttons")
 
-    val telemetryIdentity = stringPreference("telemetry_identity") {
+    @SensitivePreference
+    val telemetryIdentity = string("telemetry_identity") {
         UUID.randomUUID().toString()
     }
 
-    val telemetryLevel = mappedPreference("telemetry_level", TelemetryLevel.Basic, TelemetryLevel)
-    val lastVersion = intPreference("last_version", -1)
+    @SensitivePreference
+    val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Basic, TelemetryLevel)
+    val lastVersion = int("last_version", -1)
 
 
     init {
@@ -126,7 +127,7 @@ object AppPreferences : PreferenceDefinition(
 
     @SensitivePreference
     val sensitivePreferences = setOf(
-        useTimeMs, logKey,
+        useTimeMs, logKey, telemetryIdentity, telemetryLevel
     )
 
     @SensitivePreference

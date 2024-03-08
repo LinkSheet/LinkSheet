@@ -1,6 +1,9 @@
 package fe.linksheet.activity.bottomsheet.column
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
@@ -16,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.activity.BottomSheetActivity.Companion.preferredAppItemHeight
+import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
 import fe.linksheet.activity.bottomsheet.LaunchApp
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.module.resolver.KnownBrowser

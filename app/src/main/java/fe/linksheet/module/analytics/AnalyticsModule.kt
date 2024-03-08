@@ -12,6 +12,7 @@ import fe.linksheet.module.log.impl.Logger
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.SensitivePreference
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
@@ -21,6 +22,7 @@ import java.util.*
 import kotlin.math.pow
 import kotlin.properties.Delegates
 
+@OptIn(SensitivePreference::class)
 val analyticsModule = module {
     service<AnalyticsClient, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
         val identity = preferences.getOrPutInit(AppPreferences.telemetryIdentity)

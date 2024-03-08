@@ -28,6 +28,10 @@ class BrowserHandler(
         companion object : OptionTypeMapper<BrowserMode, String>(
             { it.value }, { arrayOf(None, AlwaysAsk, SelectedBrowser, Whitelisted) }
         )
+
+        override fun toString(): String {
+            return value
+        }
     }
 
     data class BrowserModeInfo(val browserMode: BrowserMode, val resolveInfo: ResolveInfo?) : Redactable<BrowserModeInfo> {

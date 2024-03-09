@@ -5,9 +5,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
-import fe.gson.GlobalGsonContext
+import fe.gson.context.GlobalGsonContext
 import fe.gson.globalGsonModule
-import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.extension.koin.applicationLifecycle
@@ -19,10 +18,10 @@ import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.lifecycle.AppLifecycleObserver
-import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
+import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
@@ -66,7 +65,6 @@ class LinkSheetApp : Application() {
         }
 
         GlobalGsonContext.configure {
-            ExtendedTypeAdapter.Default.register(this)
             registerTypeAdapter(LogEntry::class.java, LogEntryDeserializer)
         }
 

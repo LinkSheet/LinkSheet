@@ -8,7 +8,7 @@ import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
 import org.koin.dsl.module
 

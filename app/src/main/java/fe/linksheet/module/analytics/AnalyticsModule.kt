@@ -8,7 +8,7 @@ import fe.linksheet.extension.koin.service
 import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
 import fe.linksheet.module.analytics.client.EnvironmentInfo
 import fe.linksheet.module.lifecycle.Service
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences

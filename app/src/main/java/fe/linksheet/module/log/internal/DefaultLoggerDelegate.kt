@@ -1,4 +1,4 @@
-package fe.linksheet.module.log.impl.internal
+package fe.linksheet.module.log.internal
 
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.redactor.HashProcessor
@@ -8,17 +8,13 @@ import kotlin.reflect.KClass
 class DefaultLoggerDelegate(
     prefix: String,
     redactor: Redactor,
-    fileAppLogger: LogFileService
-) : LoggerDelegate(prefix, redactor, fileAppLogger) {
+    logStorageService: LogFileService
+) : LoggerDelegate(prefix, redactor, logStorageService) {
     constructor(
         clazz: KClass<*>,
         redactor: Redactor,
-        fileAppLogger: LogFileService
-    ) : this(clazz.simpleName!!, redactor, fileAppLogger)
-
-//    override fun <T> redactParameter(msg: ProduceMessage, param: T, processor: HashProcessor<T>): Pair<String, String> {
-//        TODO("Not yet implemented")
-//    }
+        logStorageService: LogFileService
+    ) : this(clazz.simpleName!!, redactor, logStorageService)
 
     override fun <T> redactParameter(msg: ProduceMessage, param: T, processor: HashProcessor<T>): Pair<String, String> {
         val plain = Redactor.NoOp.processToString(param, processor)

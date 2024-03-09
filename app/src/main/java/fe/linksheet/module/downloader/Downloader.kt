@@ -3,7 +3,7 @@ package fe.linksheet.module.downloader
 import fe.httpkt.ext.findHeader
 import fe.httpkt.util.Extension
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.*
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.mimetypekt.MimeTypes

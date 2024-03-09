@@ -1,11 +1,11 @@
-package fe.linksheet.module.log.impl
+package fe.linksheet.module.log
 
 import fe.linksheet.extension.koin.factory
 import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.log.internal.DefaultLoggerDelegate
+import fe.linksheet.module.log.internal.LoggerDelegate
+import fe.linksheet.module.log.internal.ProduceMessage
 import fe.linksheet.module.redactor.HashProcessor
-import fe.linksheet.module.log.impl.internal.DefaultLoggerDelegate
-import fe.linksheet.module.log.impl.internal.LoggerDelegate
-import fe.linksheet.module.log.impl.internal.ProduceMessage
 import fe.linksheet.module.redactor.Redactor
 import org.koin.dsl.module
 import kotlin.reflect.KClass

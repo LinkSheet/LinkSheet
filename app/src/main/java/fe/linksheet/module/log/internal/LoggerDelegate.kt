@@ -1,4 +1,4 @@
-package fe.linksheet.module.log.impl.internal
+package fe.linksheet.module.log.internal
 
 import android.util.Log
 import fe.linksheet.module.log.file.LogFileService

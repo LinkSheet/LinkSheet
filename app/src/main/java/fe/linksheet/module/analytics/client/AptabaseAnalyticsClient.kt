@@ -13,7 +13,7 @@ import fe.linksheet.extension.android.getCurrentLocale
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryIdentity
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.util.BuildType
 import java.io.IOException

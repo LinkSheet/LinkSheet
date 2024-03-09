@@ -6,7 +6,7 @@ import fe.httpkt.ext.getGZIPOrDefaultStream
 import fe.httpkt.isHttpSuccess
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest

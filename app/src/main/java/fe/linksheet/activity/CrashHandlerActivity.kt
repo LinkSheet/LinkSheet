@@ -38,7 +38,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
     private val logger by injectLogger<CrashHandlerActivity>()
-    private val fileAppLogger by inject<LogFileService>()
+    private val logFileService by inject<LogFileService>()
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +55,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                 )
 
                 val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
-                    fetch = { fileAppLogger.logEntries },
+                    fetch = { logFileService.logEntries },
                     awaitFetchBeforeOpen = true,
                     dynamicHeight = true
                 ) { state, close ->

@@ -1,6 +1,6 @@
 package fe.linksheet.extension.koin
 
-import fe.linksheet.module.log.impl.Logger
+import fe.linksheet.module.log.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.parameter.parametersOf
@@ -14,6 +14,8 @@ fun KoinComponent.injectLogger(
     return inject<Logger>(mode = mode, parameters = { parametersOf(clazz) })
 }
 
-inline fun <reified T> KoinComponent.injectLogger(mode: LazyThreadSafetyMode = KoinPlatformTools.defaultLazyMode()): Lazy<Logger> {
+inline fun <reified T> KoinComponent.injectLogger(
+    mode: LazyThreadSafetyMode = KoinPlatformTools.defaultLazyMode()
+): Lazy<Logger> {
     return injectLogger(T::class, mode)
 }

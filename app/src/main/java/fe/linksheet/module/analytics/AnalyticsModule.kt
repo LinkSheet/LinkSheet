@@ -34,7 +34,7 @@ val analyticsModule = module {
             EnvironmentInfo.create(applicationContext),
             level.buildIdentity(applicationContext, identity),
             networkState,
-            serviceLogger,
+            logger,
             BuildConfig.APTABASE_API_KEY
         )
     }

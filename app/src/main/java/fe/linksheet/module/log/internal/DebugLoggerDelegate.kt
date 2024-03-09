@@ -28,10 +28,8 @@ class DebugLoggerDelegate(
         }
     }
 
-    override fun <T> redactParameter(msg: ProduceMessage, param: T, processor: HashProcessor<T>): Pair<String, String> {
+    override fun <T> redactParameter(param: T, processor: HashProcessor<T>): RedactedParameter {
         val plain = Redactor.NoOp.processToString(param, processor)
-        val msgStr = msg(plain)
-
-        return msgStr to msgStr
+        return RedactedParameter(plain, plain)
     }
 }

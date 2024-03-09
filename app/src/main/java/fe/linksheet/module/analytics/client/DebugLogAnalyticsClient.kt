@@ -25,7 +25,7 @@ class DebugLogAnalyticsClient(
                     coroutineScope = applicationLifecycle.coroutineScope,
                     networkState = networkState,
                     identity = TelemetryLevel.Basic.buildIdentity(applicationContext, "Debug"),
-                    logger = serviceLogger
+                    logger = logger
                 )
             }
         }

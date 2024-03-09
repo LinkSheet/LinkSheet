@@ -1,6 +1,7 @@
 package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
@@ -11,8 +12,10 @@ import fe.stringbuilder.util.curlyWrapped
 data class ResolvedRedirect(
     val shortUrl: String,
     val resolvedUrl: String
-) : ResolverEntity<ResolvedRedirect>(), Redactable<ResolvedRedirect> {
-    override fun urlResolved() = resolvedUrl
+) : ResolverEntity<ResolvedRedirect>, Redactable<ResolvedRedirect> {
+    @Ignore
+    override val url: String = resolvedUrl
+
 
     override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
         return builder.curlyWrapped {

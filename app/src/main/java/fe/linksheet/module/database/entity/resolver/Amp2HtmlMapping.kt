@@ -1,6 +1,7 @@
 package fe.linksheet.module.database.entity.resolver
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import fe.linksheet.module.redactor.*
 import fe.stringbuilder.util.*
 
@@ -8,9 +9,9 @@ import fe.stringbuilder.util.*
 data class Amp2HtmlMapping(
     val ampUrl: String,
     val canonicalUrl: String
-) : ResolverEntity<Amp2HtmlMapping>(), Redactable<Amp2HtmlMapping> {
-
-    override fun urlResolved() = canonicalUrl
+) : ResolverEntity<Amp2HtmlMapping>, Redactable<Amp2HtmlMapping> {
+    @Ignore
+    override val url: String = canonicalUrl
 
     override fun buildString(builder: ProtectedStringBuilder) {
         builder.wrapped(Bracket.Curly) {

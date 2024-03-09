@@ -14,7 +14,7 @@ sealed interface ResolveResultType {
 
     data object NoInternetConnection : ResolveResultType
 
-    fun wrap(): Result<ResolveResultType> {
+    fun success(): Result<ResolveResultType> {
         return Result.success(this)
     }
 }

@@ -9,7 +9,9 @@ import fe.linksheet.extension.koin.single
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
+import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
+import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
 import org.koin.dsl.module
 import java.io.IOException
 import java.net.URL
@@ -21,7 +23,6 @@ val amp2HtmlResolveRequestModule = module {
             LinkSheetAppConfig.supabaseApiKey(),
             request,
             cachedRequest,
-            serviceLogger
         )
     }
 }
@@ -31,21 +32,24 @@ class Amp2HtmlResolveRequest(
     token: String,
     request: Request,
     private val urlResolverCache: CachedRequest,
-    logger: Logger
-) : ResolveRequest(apiUrl, token, request, logger, "amp2html") {
+) : ResolveRequest(apiUrl, token, request, "amp2html") {
 
-    @Throws(IOException::class)
-    override fun resolveLocal(url: String, timeout: Int): String? {
-        logger.debug(url, HashProcessor.UrlProcessor, { "ResolveLocal=$it" })
-        val con = urlResolverCache.get(url, timeout, false)
-
-        if (!isHttpSuccess(con.responseCode)) {
-            logger.debug("Response code ${con.responseCode} does not indicate success")
-            return null
+    override fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
+        val result = try {
+            urlResolverCache.get(url, timeout, false)
+        } catch (e: IOException) {
+            return Result.failure(e)
         }
 
-        return con.getGZIPOrDefaultStream().use {
-            Amp2Html.getNonAmpLink(it, URL(url).host)
+        if (!isHttpSuccess(result.responseCode)) {
+            return Result.failure(ResolveRequestException(result.responseCode))
         }
+
+        val nonAmpLink = result.getGZIPOrDefaultStream().use { Amp2Html.getNonAmpLink(it, URL(url).host) }
+        if (nonAmpLink != null) {
+            return Result.success(ResolveResultType.Resolved.Local(nonAmpLink))
+        }
+
+        return Result.failure(ResolveRequestException())
     }
 }

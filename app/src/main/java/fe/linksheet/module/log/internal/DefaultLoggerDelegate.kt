@@ -16,10 +16,10 @@ class DefaultLoggerDelegate(
         logStorageService: LogFileService
     ) : this(clazz.simpleName!!, redactor, logStorageService)
 
-    override fun <T> redactParameter(msg: ProduceMessage, param: T, processor: HashProcessor<T>): Pair<String, String> {
+    override fun <T> redactParameter(param: T, processor: HashProcessor<T>): RedactedParameter {
         val plain = Redactor.NoOp.processToString(param, processor)
         val redacted = redactor.processToString(param, processor)
 
-        return msg(plain) to msg(redacted)
+        return RedactedParameter(plain, redacted)
     }
 }

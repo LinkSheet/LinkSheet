@@ -31,7 +31,7 @@ import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel
-import fe.linksheet.util.cleanHttpsScheme
+import fe.linksheet.util.HostUtil
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -89,7 +89,7 @@ fun LibRedirectSettingsRoute(
                 ) {
                     Texts(
                         headline = service.name,
-                        subtitle = cleanHttpsScheme(service.url),
+                        subtitle = HostUtil. cleanHttpsScheme(service.url),
                     ) {
                         if (enabled) {
                             SubtitleText(

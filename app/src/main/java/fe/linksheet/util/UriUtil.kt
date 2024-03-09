@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Patterns
 import fe.kotlin.extension.iterable.mapToSet
+import inet.ipaddr.HostName
 
 object UriUtil {
     private val protocols = setOf("http", "https")

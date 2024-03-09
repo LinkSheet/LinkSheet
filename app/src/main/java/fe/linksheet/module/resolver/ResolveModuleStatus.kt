@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.annotation.StringRes
 import fe.linksheet.R
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
+import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
 import fe.linksheet.util.StringResHolder
 import java.net.UnknownHostException
 
@@ -25,24 +26,26 @@ class ResolveModuleStatus {
         enabled: Boolean,
         resolveModule: ResolveModule,
         uri: Uri?,
-        resolve: suspend (Uri) -> Result<ResolveResultType>?
+        resolve: suspend (Uri) -> Result<ResolveResultType>?,
     ): Uri? {
         if (enabled && uri != null && globalFailure == null) {
             val resolveResult = resolve(uri)
             _resolved[resolveModule] = resolveResult
 
-            if (resolveResult?.exceptionOrNull() is UnknownHostException) {
+            val exception = resolveResult?.exceptionOrNull()
+            if (exception is UnknownHostException) {
                 globalFailure = GlobalFailure.UnknownHost(uri.host!!)
                 return uri
             }
 
             val resultType = resolveResult?.getOrNull()
-            if (resultType is ResolveResultType.Resolved) {
-                return Uri.parse(resultType.url)
-            }
-
             if (resultType is ResolveResultType.NoInternetConnection) {
                 globalFailure = GlobalFailure.NoInternet
+                return uri
+            }
+
+            if (resultType is ResolveResultType.Resolved) {
+                return Uri.parse(resultType.url)
             }
         }
 

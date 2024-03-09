@@ -40,11 +40,11 @@ abstract class LoggerDelegate(
         )
     }
 
-    protected abstract fun <T> redactParameter(
-        msg: ProduceMessage,
-        param: T,
-        processor: HashProcessor<T>
-    ): Pair<String, String>
+    protected abstract fun <T> redactParameter(param: T, processor: HashProcessor<T>): RedactedParameter
+
+    data class RedactionContext<T>(val param: T, val processor: HashProcessor<T>)
+
+    private val redactionCache = mutableMapOf<RedactionContext<*>, RedactedParameter>()
 
     private fun print(level: Level, logcat: Logcat, fileLogEntry: FileLogEntry, subPrefix: String? = null) {
         printLogcat(level, logcat, subPrefix)
@@ -54,9 +54,21 @@ abstract class LoggerDelegate(
     data class Logcat(val msg: String? = null, val throwable: Throwable? = null)
     data class FileLogEntry(val plain: String, val redacted: String? = null)
 
+    data class RedactedParameter(private val plain: String, private val redacted: String) {
+        internal fun produce(msg: ProduceMessage) = msg(plain) to msg(redacted)
+    }
+
+    fun <T> createContext(param: T, processor: HashProcessor<T>): RedactedParameter {
+        return redactionCache.getOrPut(RedactionContext(param, processor)) { redactParameter(param, processor) }
+    }
+
     fun <T> log(level: Level, param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
-        val (plainMsg, redactedMsg) = redactParameter(msg, param, processor)
-        print(level, Logcat(plainMsg), FileLogEntry(plainMsg, redactedMsg), subPrefix)
+        log(level, createContext(param, processor), msg, subPrefix)
+    }
+
+    fun log(level: Level, context: RedactedParameter, msg: ProduceMessage, subPrefix: String? = null) {
+        val (plain, redacted) = context.produce(msg)
+        print(level, Logcat(plain), FileLogEntry(plain, redacted), subPrefix)
     }
 
     fun log(level: Level, msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {

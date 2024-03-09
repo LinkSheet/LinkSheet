@@ -22,6 +22,21 @@ class Logger(private val delegate: LoggerDelegate) {
         delegate.fatal(stacktrace)
     }
 
+    fun <T> createContext(param: T, processor: HashProcessor<T>): LoggerDelegate.RedactedParameter {
+        return delegate.createContext(param, processor)
+    }
+
+    /**
+     * Verbose facades
+     */
+    fun verbose(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Verbose, param, msg, null)
+    }
+
+    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, null)
+    }
+
     fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, subPrefix)
     }
@@ -32,6 +47,17 @@ class Logger(private val delegate: LoggerDelegate) {
 
     fun verbose(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Verbose, throwable = throwable, subPrefix = subPrefix)
+    }
+
+    /**
+     * Info facades
+     */
+    fun info(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Info, param, msg, null)
+    }
+
+    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Info, param, processor, msg, null)
     }
 
     fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
@@ -46,6 +72,17 @@ class Logger(private val delegate: LoggerDelegate) {
         delegate.log(LoggerDelegate.Level.Info, throwable = throwable, subPrefix = subPrefix)
     }
 
+    /**
+     * Debug facades
+     */
+    fun debug(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Debug, param, msg, null)
+    }
+
+    fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, null)
+    }
+
     fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
     }
@@ -56,6 +93,17 @@ class Logger(private val delegate: LoggerDelegate) {
 
     fun debug(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Debug, throwable = throwable, subPrefix = subPrefix)
+    }
+
+    /**
+     * Error facades
+     */
+    fun error(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Error, param, msg, null)
+    }
+
+    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
+        delegate.log(LoggerDelegate.Level.Error, param, processor, msg)
     }
 
     fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {

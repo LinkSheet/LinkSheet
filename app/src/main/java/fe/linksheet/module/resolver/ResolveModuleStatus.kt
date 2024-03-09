@@ -14,13 +14,11 @@ class ResolveModuleStatus {
     var globalFailure: GlobalFailure? = null
         private set
 
-    sealed class GlobalFailure(@StringRes val stringResId: Int, private vararg val args: Any) : StringResHolder {
+    sealed class GlobalFailure(@StringRes override val id: Int, vararg arg: Any) : StringResHolder {
         data object NoInternet : GlobalFailure(R.string.no_internet_connection)
         class UnknownHost(val host: String) : GlobalFailure(R.string.unknown_host, host)
 
-        override fun stringResId() = stringResId
-
-        override fun args() = args
+        override val args = arrayOf(*arg)
     }
 
     suspend fun resolveIfEnabled(

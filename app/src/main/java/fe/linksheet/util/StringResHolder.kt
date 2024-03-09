@@ -1,15 +1,16 @@
 package fe.linksheet.util
 
 import android.content.Context
+import androidx.annotation.StringRes
 
 interface StringResHolder {
-    fun stringResId(): Int
+    @get:StringRes
+    val id: Int
 
-    fun args(): Array<out Any> {
-        return emptyArray()
-    }
+    val args: Array<Any>
+        get() = emptyArray()
 
     fun getString(context: Context): String {
-        return context.getString(stringResId(), *args())
+        return context.getString(id, *args)
     }
 }

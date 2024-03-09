@@ -114,6 +114,10 @@ enum class Theme {
     }
 
     companion object Companion : EnumTypeMapper<Theme>(entries.toTypedArray())
+
+    override fun toString(): String {
+        return ordinal.toString()
+    }
 }
 
 

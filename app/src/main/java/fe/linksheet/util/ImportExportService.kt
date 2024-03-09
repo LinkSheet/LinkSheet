@@ -28,7 +28,6 @@ class ImportExportService(val context: Context) {
             openDescriptor(uri, "r").bufferedReader().use { JsonParser.parseReader(it) }
         }
 
-
         if (parseResult.isFailure) {
             return Result.failure(parseResult.exceptionOrNull()!!)
         }

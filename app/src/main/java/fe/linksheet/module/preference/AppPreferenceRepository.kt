@@ -4,10 +4,13 @@ import android.content.Context
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.StatePreferenceRepository
 import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
+import org.koin.core.component.KoinComponent
 
-class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(context) {
+class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(context), KoinComponent {
+    private val logger by injectLogger<AppPreferenceRepository>()
 
     private val followRedirectsExternalService = asState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = asState(AppPreferences.amp2HtmlExternalService)
@@ -34,7 +37,9 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
 
         edit {
             mappedPreferences.forEach { (preference, newValue) ->
-                setStringValueToPreference(preference, newValue)
+                runCatching {
+                    setStringValueToPreference(preference, newValue)
+                }.onFailure { logger.error("Failed to import preference '${preference.key}'", it) }
             }
         }
 

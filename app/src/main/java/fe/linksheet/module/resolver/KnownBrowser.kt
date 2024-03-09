@@ -15,8 +15,17 @@ sealed class KnownBrowser(
         "org.mozilla.fenix",
         "org.mozilla.firefox_beta",
         "org.mozilla.firefox",
+        "org.mozilla.fennec_aurora",
+        "org.mozilla.fennec",
+        "org.mozilla.rocket",
+        "org.mozilla.focus",
+        "org.mozilla.focus.debug",
+        "org.mozilla.focus.nightly",
+        "org.mozilla.focus.beta",
         "org.torproject.torbrowser",
-        "org.torproject.torbrowser_alpha"
+        "org.torproject.torbrowser_alpha",
+        "org.mozilla.reference.browser",
+        "info.guardianproject.orfox"
     ) {
         private const val EXTRA = "private_browsing_mode"
         override fun requestPrivateBrowsing(intent: Intent): Intent = intent.putExtra(EXTRA, true)
@@ -39,6 +48,7 @@ sealed class KnownBrowser(
         "com.brave.browser_nightly",
         "com.microsoft.emmx",
         "com.ucmobile.intl",
+        "com.uc.browser.en",
         "com.kiwibrowser.browser",
         "com.kiwibrowser.browser.dev",
         "com.vivaldi.browser",
@@ -47,7 +57,9 @@ sealed class KnownBrowser(
         "us.spotco.mulch",
         "org.chromium.thorium",
         "com.sec.android.app.sbrowser",
-        "com.sec.android.app.sbrowser.beta"
+        "com.sec.android.app.sbrowser.beta",
+        "com.google.android.apps.chrome",
+        "org.chromium.chrome"
     ) {
         override fun requestPrivateBrowsing(intent: Intent) = null
     }
@@ -55,10 +67,12 @@ sealed class KnownBrowser(
     data object Other : KnownBrowser(
         "Other",
         false,
+        "com.opera.browser",
+        "com.opera.browser.beta",
         "com.opera.mini.native",
         "com.opera.mini.native.beta",
         "com.stoutner.privacybrowser.standard",
-        "com.duckduckgo.mobile.android"
+        "com.duckduckgo.mobile.android",
     ) {
         override fun requestPrivateBrowsing(intent: Intent) = null
     }

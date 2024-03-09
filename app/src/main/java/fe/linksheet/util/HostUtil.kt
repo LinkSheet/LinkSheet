@@ -10,12 +10,12 @@ object HostUtil {
     private val mDnsTlds = setOf(".local", ".test", ".example", ".invalid", ".localhost")
     private val localhost = setOf("localhost", "127.0.0.1", "0.0.0.0")
 
-    private const val httpsScheme = "https://"
+    private const val HTTPS_SCHEME = "https://"
 
     // TODO: Does not look very robust
     fun cleanHttpsScheme(host: String): String {
-        val hostWithoutScheme = if (host.indexOf(httpsScheme) != -1) {
-            host.substring(httpsScheme.length)
+        val hostWithoutScheme = if (host.indexOf(HTTPS_SCHEME) != -1) {
+            host.substring(HTTPS_SCHEME.length)
         } else host
 
         return if (hostWithoutScheme.endsWith("/")) hostWithoutScheme.substring(

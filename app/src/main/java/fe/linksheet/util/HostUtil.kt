@@ -1,14 +1,24 @@
 package fe.linksheet.util
 
 import android.net.Uri
+import fe.linksheet.util.compat.CompatUriHost
+import fe.linksheet.util.compat.compatHost
 import inet.ipaddr.HostName
-
-
 
 
 object HostUtil {
     private val mDnsTlds = setOf(".local", ".test", ".example", ".invalid", ".localhost")
-    private val localhost = setOf("localhost", "127.0.0.1", "0.0.0.0")
+    private val local = setOf(
+        "127.0.0.1",
+        "localhost",
+        "[::1]",
+        "::1",
+        "0000:0000:0000:0000:0000:0000:0000:0001",
+        "0.0.0.0",
+        "[::]",
+        "[::]",
+        "0000:0000:0000:0000:0000:0000:0000:0000"
+    )
 
     private const val HTTPS_SCHEME = "https://"
 
@@ -25,28 +35,28 @@ object HostUtil {
     }
 
     fun isAccessiblePublicly(uri: Uri): Boolean? {
-        return isAccessiblePublicly(uri.host)
+        return isAccessiblePublicly(uri.compatHost)
     }
 
-    fun isAccessiblePublicly(hostStr: String?): Boolean? {
-        if (hostStr.isNullOrEmpty()) return false
-        if (hostStr in localhost) return false
+    fun isAccessiblePublicly(compatUriHost: CompatUriHost?): Boolean {
+        if (compatUriHost == null || compatUriHost.value.isEmpty()) return false
+        if (compatUriHost.value in local) return false
 
-        val idx = hostStr.lastIndexOf(".")
+        val idx = compatUriHost.value.lastIndexOf(".")
         if (idx == 0) return false
 
         if (idx > 0) {
-            val tld = hostStr.substring(idx)
+            val tld = compatUriHost.value.substring(idx)
             if (tld in mDnsTlds) return false
         }
 
-        val host = HostName(hostStr)
+        val host = HostName(compatUriHost.value)
         val address = try {
             host.asAddress()
         } catch (e: Exception) {
-            return null
+            null
         }
 
-        return !(address.isLocal || address.isLoopback)
+        return !(address?.isLocal == true || address?.isLoopback == true)
     }
 }

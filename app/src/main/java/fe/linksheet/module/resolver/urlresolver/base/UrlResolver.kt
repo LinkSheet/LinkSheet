@@ -10,7 +10,8 @@ import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.Darknet
 import fe.linksheet.util.HostUtil
-import fe.linksheet.util.UriUtil
+import fe.linksheet.util.compat.CompatUriHost
+import fe.linksheet.util.compat.compatHost
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
 
@@ -67,7 +68,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
             return ResolveResultType.NoInternetConnection.success()
         }
 
-        val resolveResult = resolve(uriString, uriLogContext, externalService, uri.host, darknet, connectTimeout)
+        val resolveResult = resolve(uriString, uriLogContext, externalService, uri.compatHost, darknet, connectTimeout)
 
         if (localCache) {
             val url = resolveResult.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
@@ -81,7 +82,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
 
     private fun canResolveExternally(
         logContext: LoggerDelegate.RedactedParameter,
-        host: String?,
+        host: CompatUriHost?,
         darknet: Darknet?,
     ): Boolean {
         if (darknet != null) {
@@ -101,7 +102,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         uriString: String,
         logContext: LoggerDelegate.RedactedParameter,
         externalService: Boolean,
-        host: String?,
+        host: CompatUriHost?,
         darknet: Darknet?,
         timeout: Int,
     ): Result<ResolveResultType> {

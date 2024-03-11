@@ -2,7 +2,7 @@ package fe.linksheet
 
 import android.net.Uri
 import fe.linksheet.util.HostUtil
-import fe.linksheet.util.compat.compatHost
+import android.net.compatHost
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner

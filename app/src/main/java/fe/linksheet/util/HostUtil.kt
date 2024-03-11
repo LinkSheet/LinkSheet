@@ -1,8 +1,8 @@
 package fe.linksheet.util
 
+import android.net.CompatUriHost
 import android.net.Uri
-import fe.linksheet.util.compat.CompatUriHost
-import fe.linksheet.util.compat.compatHost
+import android.net.compatHost
 import inet.ipaddr.HostName
 
 
@@ -34,7 +34,7 @@ object HostUtil {
         ) else hostWithoutScheme
     }
 
-    fun isAccessiblePublicly(uri: Uri): Boolean? {
+    fun isAccessiblePublicly(uri: Uri): Boolean {
         return isAccessiblePublicly(uri.compatHost)
     }
 

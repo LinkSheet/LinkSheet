@@ -1,6 +1,8 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
+import android.net.CompatUriHost
 import android.net.Uri
+import android.net.compatHost
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
@@ -10,8 +12,6 @@ import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.Darknet
 import fe.linksheet.util.HostUtil
-import fe.linksheet.util.compat.CompatUriHost
-import fe.linksheet.util.compat.compatHost
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
 

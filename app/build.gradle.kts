@@ -197,6 +197,9 @@ android {
             excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
         }
     }
+
+    val main by sourceSets
+    main.java.srcDir("src/main/compat")
 }
 
 dependencies {

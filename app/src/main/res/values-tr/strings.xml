@@ -320,8 +320,7 @@
     <string name="built_by_error">Bu derleme, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="notifications_explainer">URL kopyalandı, İndirme başladı</string>
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
-    <string name="onboarding_0_title">LinkSheet\'e
-\nhoş geldiniz</string>
+    <string name="onboarding_0_title">LinkSheet\'e \nhoş geldiniz</string>
     <string name="onboarding_2_card_explainer">Shizuku, LinkSheet\'in (bir sonraki adım olan) bütün uygulamaların varsayılan bağlantı açma davranışını tek tek kapatmak yerine, tek seferde kapatmasına izin verir.</string>
     <string name="onboarding_0_subtitle">Bir bağlantıyı açarken her zaman seçim yapmayı isteyin, varsayılan tarayıcılar ayarlayın, ve çok daha fazlası</string>
     <string name="onboarding_5_subtitle">LinkSheet başarıyla etkinleştirildi</string>

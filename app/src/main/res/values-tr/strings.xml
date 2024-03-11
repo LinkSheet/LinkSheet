@@ -434,8 +434,8 @@
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
     <string name="enable_new_bottom_sheet_explainer">Eski alt sayfa yerine yeniden tasarlanmış olanı kullan</string>
     <string name="new_bottomsheet">Yeni alt sayfa</string>
-    <string name="new_bottomsheet_explainer">LinkSheet\'in bu sürümü, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> sayesinde yeni bir alt sayfa barındırır. Lütfen Discord, GitHub veya email aracılığıyla geri bildirim gönderin.
-\n
+    <string name="new_bottomsheet_explainer">LinkSheet\'in bu sürümü, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> sayesinde yeni bir alt sayfa barındırır. Lütfen Discord, GitHub veya email aracılığıyla geri bildirim gönderin. 
+\n 
 \nAyarlar -&gt; Gelişmiş -&gt; Özellik işaretlerinden eski alt sayfaya dönebilirsiniz.</string>
     <string name="onboarding_0_title">LinkSheet\'e
 \nhoş geldiniz</string>

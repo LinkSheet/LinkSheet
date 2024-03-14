@@ -15,7 +15,7 @@ import fe.linksheet.util.ImportExportService
 class ExportSettingsViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
-    val gson: Gson
+    val gson: Gson,
 ) : BaseViewModel(preferenceRepository) {
     private val importExportService = ImportExportService(context)
     fun importPreferences(uri: Uri): Result<List<PermissionBoundPreference>> {
@@ -29,9 +29,12 @@ class ExportSettingsViewModel(
 
     @OptIn(SensitivePreference::class)
     fun exportPreferences(uri: Uri, includeLogHashKey: Boolean) {
-        val preferences = preferenceRepository.exportPreferences(
-            if (!includeLogHashKey) listOf(AppPreferences.logKey) else listOf()
-        )
+        val set = AppPreferences.sensitivePreferences.toMutableSet()
+        if (includeLogHashKey) {
+            set.remove(AppPreferences.logKey)
+        }
+
+        val preferences = preferenceRepository.exportPreferences(set)
 
         val fileContent = jsonObject {
             "preferences" += AppPreferences.toJsonArray(preferences)

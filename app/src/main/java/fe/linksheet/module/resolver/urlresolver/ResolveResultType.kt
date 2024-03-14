@@ -12,6 +12,8 @@ sealed interface ResolveResultType {
         class Local(url: String) : Resolved(R.string.redirect_resolve_type_local, url)
     }
 
+    data object NothingToResolve : ResolveResultType
+
     data object NoInternetConnection : ResolveResultType
 
     fun success(): Result<ResolveResultType> {

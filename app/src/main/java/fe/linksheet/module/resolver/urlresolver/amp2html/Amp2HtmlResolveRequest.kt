@@ -50,6 +50,6 @@ class Amp2HtmlResolveRequest(
             return Result.success(ResolveResultType.Resolved.Local(nonAmpLink))
         }
 
-        return Result.failure(ResolveRequestException())
+        return Result.success(ResolveResultType.NothingToResolve)
     }
 }

@@ -90,7 +90,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
             return false
         }
 
-        if (HostUtil.isAccessiblePublicly(host) == false) {
+        if (!HostUtil.isAccessiblePublicly(host)) {
             logger.info(logContext) { "$it is not publicly accessible, falling back to local resolving" }
             return false
         }

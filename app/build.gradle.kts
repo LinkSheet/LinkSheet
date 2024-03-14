@@ -245,6 +245,8 @@ dependencies {
     implementation(libs.ipaddress)
 //    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
 
+    implementation(libs.signifykt)
+    implementation(libs.com.gitlab.grrfe.bundled.dependencies.gson.ext)
     implementation(libs.embed.resolve)
 
     implementation(AndroidX.lifecycle.runtime.compose)
@@ -297,16 +299,12 @@ dependencies {
 
 
 
-    testImplementation("org.robolectric:robolectric:4.11.1")
-//    testImplementation( "junit:junit:" + rootProject.junitVersion;)
-    testImplementation("org.mockito:mockito-core:5.11.0")
+    testImplementation(Testing.robolectric)
+    testImplementation(Testing.mockito.core)
 
-    androidTestImplementation(libs.junit)
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.espresso.core)
-    androidTestImplementation(AndroidX.test.ext.junit)
-    androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.test.ext.truth)
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.compose.ui.testJunit4)

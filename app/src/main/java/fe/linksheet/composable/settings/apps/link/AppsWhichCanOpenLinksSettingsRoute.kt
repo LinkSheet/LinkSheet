@@ -9,14 +9,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -119,6 +119,16 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                         )
 
                         Row(verticalAlignment = Alignment.CenterVertically) {
+//                            IconButton(onClick = { /*TODO*/ }) {
+//                                Icon(
+//                                    imageVector = Icons.Default.Settings,
+//                                    contentDescription = stringResource(id = R.string.verified_link_handlers_open_settings_page),
+//                                    tint = MaterialTheme.colorScheme.primary
+//                                )
+//                            }
+//
+//                            Spacer(modifier = Modifier.width(5.dp))
+
                             FilterChips(
                                 currentState = linkHandlingAllowed,
                                 onClick = {

@@ -8,9 +8,8 @@ import android.net.Uri
 import fe.linksheet.extension.appendHashed
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.stringbuilder.util.commaSeparated
-import fe.stringbuilder.util.curlyWrapped
-import fe.stringbuilder.util.slashSeparated
+import fe.linksheet.resolver.DisplayActivityInfo
+import fe.stringbuilder.util.*
 import javax.crypto.Mac
 
 sealed interface LogHasher {
@@ -18,7 +17,7 @@ sealed interface LogHasher {
         override fun <T> hash(
             stringBuilder: StringBuilder,
             input: T,
-            hashProcessor: HashProcessor<T>
+            hashProcessor: HashProcessor<T>,
         ): StringBuilder = stringBuilder.append(input)
     }
 
@@ -26,7 +25,7 @@ sealed interface LogHasher {
         override fun <T> hash(
             stringBuilder: StringBuilder,
             input: T,
-            hashProcessor: HashProcessor<T>
+            hashProcessor: HashProcessor<T>,
         ) = hashProcessor.process(stringBuilder, input, hmac)
     }
 
@@ -34,14 +33,14 @@ sealed interface LogHasher {
     fun <T> hash(
         stringBuilder: StringBuilder,
         input: T,
-        hashProcessor: HashProcessor<T>
+        hashProcessor: HashProcessor<T>,
     ): StringBuilder
 
     fun <T> hash(
         stringBuilder: StringBuilder,
         prefix: String,
         input: T,
-        hashProcessor: HashProcessor<T>
+        hashProcessor: HashProcessor<T>,
     ) = stringBuilder.apply {
         append(prefix)
         hash(this, input, hashProcessor)
@@ -58,7 +57,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: String,
-            mac: Mac
+            mac: Mac,
         ): StringBuilder = stringBuilder.append(input)
     }
 
@@ -67,7 +66,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: Uri,
-            mac: Mac
+            mac: Mac,
         ): StringBuilder = stringBuilder.append(buildHashedUriString(input.toString(), mac))
     }
 
@@ -75,7 +74,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: String,
-            mac: Mac
+            mac: Mac,
         ): StringBuilder = stringBuilder.append(buildHashedUriString(input, mac))
     }
 
@@ -83,7 +82,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: String?,
-            mac: Mac
+            mac: Mac,
         ): StringBuilder = stringBuilder.appendHashed(mac, input)
     }
 
@@ -91,7 +90,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: ComponentName,
-            mac: Mac
+            mac: Mac,
         ) = stringBuilder.curlyWrapped {
             slashSeparated {
                 item { StringProcessor.process(stringBuilder, input.packageName, mac) }
@@ -104,7 +103,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: PreferredApp,
-            mac: Mac
+            mac: Mac,
         ) = stringBuilder.commaSeparated {
             item {
                 append("host=")
@@ -127,7 +126,7 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: AppSelectionHistory,
-            mac: Mac
+            mac: Mac,
         ) = stringBuilder.commaSeparated {
             item {
                 append("host=")
@@ -144,15 +143,58 @@ sealed interface HashProcessor<T> {
         override fun process(
             stringBuilder: StringBuilder,
             input: ActivityInfo,
-            mac: Mac
+            mac: Mac,
         ): StringBuilder = stringBuilder.appendHashed(mac, input.name)
+    }
+
+    data object ActivityInfoListProcessor : HashProcessor<List<ActivityInfo>> {
+        override fun process(stringBuilder: StringBuilder, input: List<ActivityInfo>, mac: Mac): StringBuilder {
+            return stringBuilder.wrapped(Bracket.Curly) {
+                separated(Separator.Comma) {
+                    input.forEach {
+                        item { ActivityInfoProcessor.process(stringBuilder, it, mac) }
+                    }
+                }
+            }
+        }
+    }
+
+    data object DisplayActivityInfoProcessor : HashProcessor<DisplayActivityInfo> {
+        override fun process(stringBuilder: StringBuilder, input: DisplayActivityInfo, mac: Mac): StringBuilder {
+            return stringBuilder.wrapped(Bracket.Curly) {
+                separated(Separator.Comma) {
+                    item("activityInfo=") { ActivityInfoProcessor.process(stringBuilder, input.activityInfo, mac) }
+                    item("label=") { StringProcessor.process(stringBuilder, input.label, mac) }
+                    itemNotNull(input.extendedInfo != null, "extendedInfo=") {
+                        StringProcessor.process(
+                            stringBuilder,
+                            input.extendedInfo.toString(),
+                            mac
+                        )
+                    }
+                    item("resolveInfo=") { ResolveInfoProcessor.process(stringBuilder, input.resolvedInfo, mac) }
+                }
+            }
+        }
+    }
+
+    data object DisplayActivityInfoListProcessor : HashProcessor<List<DisplayActivityInfo>> {
+        override fun process(stringBuilder: StringBuilder, input: List<DisplayActivityInfo>, mac: Mac): StringBuilder {
+            return stringBuilder.wrapped(Bracket.Square) {
+                separated(Separator.Comma) {
+                    input.forEach {
+                        item { DisplayActivityInfoProcessor.process(stringBuilder, it, mac) }
+                    }
+                }
+            }
+        }
     }
 
     data object ResolveInfoProcessor : HashProcessor<ResolveInfo> {
         override fun process(
             stringBuilder: StringBuilder,
             input: ResolveInfo,
-            mac: Mac
+            mac: Mac,
         ) = stringBuilder.apply {
             val packageName = input.getComponentInfo()?.packageName
             PackageProcessor.process(this, packageName ?: "", mac)
@@ -168,16 +210,14 @@ sealed interface HashProcessor<T> {
     }
 
     data object ResolveInfoListProcessor : HashProcessor<List<ResolveInfo>> {
-        override fun process(
-            stringBuilder: StringBuilder,
-            input: List<ResolveInfo>,
-            mac: Mac
-        ): StringBuilder {
-            input.forEach {
-                ResolveInfoProcessor.process(stringBuilder, it, mac)
+        override fun process(stringBuilder: StringBuilder, input: List<ResolveInfo>, mac: Mac): StringBuilder {
+            return stringBuilder.wrapped(Bracket.Square) {
+                separated(Separator.Comma) {
+                    input.forEach {
+                        item { ResolveInfoProcessor.process(stringBuilder, it, mac) }
+                    }
+                }
             }
-
-            return stringBuilder
         }
     }
 

@@ -10,7 +10,7 @@ import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
-import fe.fastforwardkt.*
+import fe.fastforwardkt.FastForward
 import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
@@ -19,10 +19,10 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
+import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -53,7 +53,7 @@ class IntentResolver(
     private val allRemoteResolveRequest: AllRemoteResolveRequest,
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
-    private val libRedirectResolver: LibRedirectResolver
+    private val libRedirectResolver: LibRedirectResolver,
 ) : KoinComponent {
     private val logger by injectLogger<IntentResolver>()
 
@@ -132,7 +132,8 @@ class IntentResolver(
 
 
     companion object {
-        private val clearUrlProviders = ClearURLLoader.loadBuiltInClearURLProviders()
+        private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }
+        private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
     }
 
 
@@ -172,6 +173,7 @@ class IntentResolver(
 
         if (uri == null) {
             logger.error("Uri is null, something probably went very wrong")
+            return BottomSheetResult.BottomSheetNoDataPassed
         }
 
 //        var followRedirectsResult: Result<ResolveType>
@@ -255,18 +257,9 @@ class IntentResolver(
 
 //        logger.debug({"PreferredApp=$it"}, preferredApp, HashProcessor)
 
-        val lastUsedApps = appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
-
-//        logger.debug(
-//            {"LastUsedApps=$it"},
-//            lastUsedApps?.toDumpable(
-//                "packageName", "lastUsed",
-//                { it },
-//                { it.toString() },
-//                PackageProcessor,
-//                HashProcessor.NoOpProcessor
-//            )
-//        )
+        val lastUsedApps = withContext(Dispatchers.IO) {
+            appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
+        }
 
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
@@ -280,8 +273,6 @@ class IntentResolver(
                 newIntent.removeExtra(key)
             }
         }
-
-//        logger.debug("NewIntent=$newIntent")
 
         val resolvedList: MutableList<ResolveInfo> = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)
@@ -297,7 +288,7 @@ class IntentResolver(
             val (
                 mode,
                 selected,
-                repository
+                repository,
             ) = if (!unifiedPreferredBrowser() && isCustomTab && allowCustomTab) {
 
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
@@ -306,7 +297,6 @@ class IntentResolver(
             browserHandler.handleBrowsers(mode(), selected(), repository, resolvedList)
         } else null
 
-        logger.debug("BrowserMode: $browserMode")
 
         val (grouped, filteredItem, showExtended) = BottomSheetGrouper.group(
             context,
@@ -323,20 +313,10 @@ class IntentResolver(
         val noBrowsersPresentOnlySingleApp =
             browserMode?.browserMode == BrowserHandler.BrowserMode.None && resolvedList.size == 1
 
-//        logger.debug(
-//            "Grouped=%s, filteredItem=%s, showExtended=%s, selectedBrowserIsSingleOption=%s, noBrowsersPresentOnlySingleApp=%s",
-//            grouped,
-//            filteredItem,
-//            showExtended,
-//            selectedBrowserIsSingleOption,
-//            noBrowsersPresentOnlySingleApp
-//        )
+        logger.debug("BrowserMode: $browserMode, IsSingleOption: $selectedBrowserIsSingleOption, OnlySingleApp: $noBrowsersPresentOnlySingleApp")
 
-//        val host = referrer?.host
-//        val scheme = referrer?.scheme
-//
-//        val linkSheetReferrer = intent.hasExtra(LinkSheetConnector.EXTRA_REFERRER)
-//        val intentReferrer = intent.hasExtra(Intent.EXTRA_REFERRER)
+        logger.debug(grouped, HashProcessor.DisplayActivityInfoListProcessor, { it }, "Grouped")
+        logger.debug(filteredItem, HashProcessor.DisplayActivityInfoProcessor, { it }, "FilteredItem")
 
         return BottomSheetResult.BottomSheetSuccessResult(
             newIntent,
@@ -377,7 +357,7 @@ class IntentResolver(
 
             if (resolveEmbeds) {
                 runCatching {
-                    EmbedResolver.resolve(url, ConfigType.Bundled())?.let { url = it }
+                    EmbedResolver.resolve(url, embedResolverBundled)?.let { url = it }
                 }.onFailure { logger.error(throwable = it, subPrefix = "EmbedResolver") }
             }
 

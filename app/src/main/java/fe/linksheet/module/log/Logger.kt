@@ -83,8 +83,12 @@ class Logger(private val delegate: LoggerDelegate) {
         delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, null)
     }
 
-    fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
-        delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
+    fun <T> debug(param: T?, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        if (param != null) {
+            delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
+        } else {
+            delegate.log(LoggerDelegate.Level.Debug, msg("<null>"), subPrefix = subPrefix)
+        }
     }
 
     fun debug(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {

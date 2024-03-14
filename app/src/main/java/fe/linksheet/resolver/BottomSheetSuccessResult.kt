@@ -45,6 +45,8 @@ sealed class BottomSheetResult(val uri: Uri?) {
 
     class BottomSheetNoHandlersFound(uri: Uri?) : BottomSheetResult(uri)
 
+    data object BottomSheetNoDataPassed : BottomSheetResult(null)
+
     class BottomSheetWebSearchResult(val query: String, intent: Intent, resolved: List<DisplayActivityInfo>) :
         SuccessResult(null, intent, resolved) {
         override fun isEmpty(): Boolean {

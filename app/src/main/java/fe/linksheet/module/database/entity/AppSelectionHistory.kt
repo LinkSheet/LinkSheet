@@ -25,7 +25,7 @@ data class AppSelectionHistory(
         commaSeparated {
             item { redactor.process(builder, host, HostProcessor, "host=") }
             item { redactor.process(builder, packageName, PackageProcessor, "packageName=") }
-            item { append("lastcUsed=", lastUsed) }
+            item { append("lastUsed=", lastUsed) }
         }
     }
 }

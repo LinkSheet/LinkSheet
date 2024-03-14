@@ -11,9 +11,17 @@ class AppSelectionHistoryRepository(private val dao: AppSelectionHistoryDao) {
     suspend fun insert(appSelectionHistory: AppSelectionHistory) = dao.insert(appSelectionHistory)
     suspend fun insert(appSelectionHistories: List<AppSelectionHistory>) = dao.insert(appSelectionHistories)
 
-    suspend fun getLastUsedForHostGroupedByPackage(uri: Uri?) = uri?.host?.let { host ->
-        dao.getLastUsedForHostGroupedByPackage(host).map { appSelections ->
-            appSelections.associate { it.packageName to it.maxLastUsed }
-        }.firstOrNull()
+    suspend fun getLastUsedForHostGroupedByPackage(uri: Uri?): Map<String, Long>? {
+        val host = uri?.host
+        if (host != null) {
+            val flow = dao.getLastUsedForHostGroupedByPackage(host)
+            val appSelections = flow.firstOrNull()
+            if (appSelections != null) {
+                return appSelections.associate { it.packageName to it.maxLastUsed }
+            }
+        }
+
+
+        return null
     }
 }

@@ -19,9 +19,7 @@ import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.SensitivePreference
+import fe.linksheet.module.preference.*
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -37,11 +35,13 @@ import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import me.saket.unfurl.Unfurler
 import org.koin.core.component.KoinComponent
 
 class IntentResolver(
     val context: Context,
     val preferenceRepository: AppPreferenceRepository,
+    val featureFlagRepository: FeatureFlagRepository ,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
@@ -130,12 +130,13 @@ class IntentResolver(
 
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
+    private val previewUrl = featureFlagRepository.asState(FeatureFlags.featureFlagUrlPreview)
 
     companion object {
         private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
+        private val unfurler by lazy { Unfurler() }
     }
-
 
     suspend fun resolveIfEnabled(intent: Intent, referrer: Uri?, canAccessInternet: Boolean): BottomSheetResult {
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
@@ -318,9 +319,14 @@ class IntentResolver(
         logger.debug(grouped, HashProcessor.DisplayActivityInfoListProcessor, { it }, "Grouped")
         logger.debug(filteredItem, HashProcessor.DisplayActivityInfoProcessor, { it }, "FilteredItem")
 
+        val unfurlResult = if (uri != null && previewUrl()) {
+            unfurler.unfurl(uri.toString())
+        } else null
+
         return BottomSheetResult.BottomSheetSuccessResult(
             newIntent,
             uri,
+            unfurlResult,
             referrer,
             grouped,
             filteredItem,

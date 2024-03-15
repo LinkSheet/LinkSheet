@@ -1,41 +1,51 @@
 package fe.linksheet.resolver
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import android.graphics.drawable.Drawable
+import android.os.Parcel
+import androidx.compose.ui.graphics.ImageBitmap
 import fe.linksheet.extension.android.componentName
+import fe.linksheet.extension.android.getIcon
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.redactor.ProtectMap
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.module.redactor.SensitiveString
 import fe.stringbuilder.util.commaSeparated
 
 typealias DisplayActivityInfoStatus = Pair<DisplayActivityInfo, Boolean>
 
 data class DisplayActivityInfo(
-    val activityInfo: ActivityInfo,
-    val label: String,
-    val extendedInfo: CharSequence? = null,
-    val icon: Drawable? = null,
     val resolvedInfo: ResolveInfo,
+    val label: String,
 ) : Redactable<DisplayActivityInfo> {
-    companion object {
+    companion object  {
         val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }
         private val valueAndLabelComparator = compareByDescending<DisplayActivityInfoStatus> { (_, status) ->
             status
         }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
         fun List<DisplayActivityInfoStatus>.sortByValueAndName() = sortedWith(valueAndLabelComparator)
+
     }
+
+    private val activityInfo = resolvedInfo.activityInfo
 
     val compareLabel = label.lowercase()
     val packageName: String = activityInfo.packageName
     val componentName by lazy { activityInfo.componentName() }
     val flatComponentName by lazy { componentName.flattenToString() }
-    val iconBitmap by lazy { icon!!.toImageBitmap() }
+
+    private var icon: ImageBitmap? = null
+
+    fun getIcon(context: Context): ImageBitmap {
+        if (icon == null) {
+            icon = activityInfo.getIcon(context)!!.toImageBitmap()
+        }
+
+        return icon!!
+    }
 
     fun intentFrom(sourceIntent: Intent): Intent {
         return Intent(sourceIntent)

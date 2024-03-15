@@ -91,6 +91,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         activity.startActivityWithConfirmation(viewModel.makeOpenByDefaultSettingsIntent(info))
     }
 
+    val context = LocalContext.current
+
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
         Box(
             modifier = Modifier
@@ -189,7 +191,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            bitmap = info.iconBitmap,
+                            bitmap = info.getIcon(context),
                             contentDescription = info.label,
                             modifier = Modifier.size(42.dp)
                         )

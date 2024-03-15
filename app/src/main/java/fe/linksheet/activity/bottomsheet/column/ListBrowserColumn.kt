@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,6 +38,8 @@ fun ListBrowserColumn(
     showPackage: Boolean,
     launchApp: LaunchApp,
 ) {
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -62,7 +65,7 @@ fun ListBrowserColumn(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    bitmap = appInfo.iconBitmap,
+                    bitmap = appInfo.getIcon(context),
                     contentDescription = appInfo.label,
                     modifier = Modifier.size(32.dp)
                 )

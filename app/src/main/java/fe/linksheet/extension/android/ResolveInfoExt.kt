@@ -5,10 +5,8 @@ import android.content.pm.ResolveInfo
 import fe.linksheet.resolver.DisplayActivityInfo
 
 fun ResolveInfo.toDisplayActivityInfo(context: Context) = DisplayActivityInfo(
-    activityInfo = activityInfo,
+    resolvedInfo = this,
     label = loadLabel(context.packageManager).toString(),
-    icon = activityInfo.getIcon(context),
-    resolvedInfo = this
 )
 
 fun Iterable<ResolveInfo>.toDisplayActivityInfos(

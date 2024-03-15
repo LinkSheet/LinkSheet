@@ -38,6 +38,8 @@ import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.HttpUrlTypeAdapter
+import fe.linksheet.util.UriTypeAdapter
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -66,6 +68,8 @@ class LinkSheetApp : Application() {
 
         GlobalGsonContext.configure {
             registerTypeAdapter(LogEntry::class.java, LogEntryDeserializer)
+            UriTypeAdapter.register(this)
+            HttpUrlTypeAdapter.register(this)
         }
 
         if (AndroidVersion.AT_LEAST_API_28_P) {

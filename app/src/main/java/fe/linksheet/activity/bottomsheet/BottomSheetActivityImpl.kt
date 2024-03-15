@@ -62,6 +62,7 @@ import org.koin.core.component.KoinComponent
 
 abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
     private val viewModel by viewModel<BottomSheetViewModel>()
+
     companion object {
         val preferredAppItemHeight = 60.dp
         val buttonPadding = 15.dp
@@ -169,7 +170,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         result: BottomSheetResult?,
         isExpanded: Boolean,
         hideDrawer: () -> Unit,
-        requestExpand: () -> Unit
+        requestExpand: () -> Unit,
     ) {
         val uriSuccessResult = result as? BottomSheetResult.BottomSheetSuccessResult
         val canShowApps = uriSuccessResult != null && !result.hasAutoLaunchApp
@@ -227,7 +228,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         showPackage: Boolean,
         previewUrl: Boolean,
         hasPreferredApp: Boolean,
-        hideBottomSheetChoiceButtons: Boolean
+        hideBottomSheetChoiceButtons: Boolean,
     ) {
         if (result.isEmpty()) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
@@ -246,6 +247,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
             UrlBar(
                 uri = result.uri,
+                unfurlResult = uriSuccess?.unfurlResult,
                 downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
                 libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
                 copyUri = {
@@ -291,6 +293,9 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     }
                 } else null
             )
+
+
+//            Image(painter = , contentDescription = )
         }
 
         if (hasPreferredApp && result is BottomSheetResult.BottomSheetSuccessResult) {

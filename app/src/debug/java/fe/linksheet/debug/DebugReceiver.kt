@@ -6,10 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import com.google.gson.Gson
+import fe.android.preference.helper.PreferenceDefinition
+import fe.android.preference.helper.PreferenceRepository
+import fe.android.preference.helper.compose.StatePreferenceRepository
 import fe.gson.dsl.jsonObject
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.extension.android.queryAllResolveInfos
+import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.FeatureFlagRepository
+import fe.linksheet.module.preference.FeatureFlags
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +32,8 @@ class DebugReceiver : BroadcastReceiver(), KoinComponent {
     companion object {
         private const val COPY_URL_BROADCAST = "fe.linksheet.debug.COPY_URL"
         private const val RESOLVE_URL_BROADCAST = "fe.linksheet.debug.RESOLVE_URL"
+        private const val UPDATE_PREFERENCE_BROADCAST = "fe.linksheet.debug.UPDATE_PREFERENCE_BROADCAST"
+        private const val UPDATE_FEATURE_FLAG_BROADCAST = "fe.linksheet.debug.UPDATE_FEATURE_FLAG_BROADCAST"
     }
 
     @OptIn(ExperimentalEncodingApi::class)
@@ -42,34 +49,34 @@ class DebugReceiver : BroadcastReceiver(), KoinComponent {
             return
         }
 
-        if (intent.action == RESOLVE_URL_BROADCAST) {
-            val viewModel = BottomSheetViewModel(get(), get(), get(), get(), get(), SavedStateHandle())
-            val url = intent.extras?.getString("url")
-            val gson = get<Gson>()
+        if (intent.action == UPDATE_PREFERENCE_BROADCAST) {
+            updatePreference(intent, get<AppPreferenceRepository>(), AppPreferences)
+            return
+        }
 
+        if (intent.action == UPDATE_FEATURE_FLAG_BROADCAST) {
+            updatePreference(intent, get<FeatureFlagRepository>(), FeatureFlags)
+            return
+        }
+
+
+        if (intent.action == RESOLVE_URL_BROADCAST) {
+            val viewModel = BottomSheetViewModel(get(), get(), get(), get(), get(), get(), SavedStateHandle())
+            val url = intent.extras?.getString("url")
 
             val uri = Uri.parse(url)
             val resolveIntent = Intent(Intent.ACTION_VIEW, uri)
-//            val unfurler = Unfurler().unfurl()
 
-//            BottomSheetResult.BottomSheetSuccessResult(resolveIntent, uri, )
             val clipboardManager = context.getSystemService<ClipboardManager>()!!
 
             coroutineScope.launch(Dispatchers.IO) {
                 val result = viewModel.resolveAsync(resolveIntent, null).await()
                 if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                    val item = context.packageManager.queryAllResolveInfos().associate {
-                        it.activityInfo.packageName to Pair(
-                            it,
-                            it.loadLabel(context.packageManager).toString()
-                        )
-                    }
-
-//                    val ctx = GlobalGsonContext
-//
-//                    GlobalGsonContext.configure {
-//                        UriTypeAdapter.register(this)
-//                        HttpUrlTypeAdapter.register(this)
+//                    val item = context.packageManager.queryAllResolveInfos().associate {
+//                        it.activityInfo.packageName to Pair(
+//                            it,
+//                            it.loadLabel(context.packageManager).toString()
+//                        )
 //                    }
 
                     val obj = jsonObject {
@@ -98,13 +105,19 @@ class DebugReceiver : BroadcastReceiver(), KoinComponent {
 
             return
         }
-
-//            context.startActivity(Intent(context, BottomSheetActivity::class.java).apply {
-//                this.action = Intent.ACTION_VIEW
-//                this.data = Uri.parse(url)
-//                this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            })
-
     }
 
+    private fun updatePreference(intent: Intent, repository: PreferenceRepository, definition: PreferenceDefinition) {
+        val key = intent.extras?.getString("key")
+        val value = intent.extras?.getString("value")
+
+        val pref = definition.all[key]
+
+        if (key != null && value != null && pref != null) {
+            repository.setStringValueToPreference(pref, value)
+            if (repository is StatePreferenceRepository) {
+                repository.stateCache.get(key)?.forceRefresh()
+            }
+        }
+    }
 }

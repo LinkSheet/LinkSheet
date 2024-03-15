@@ -43,12 +43,14 @@ import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
+import fe.linksheet.debug.DebugIntentHandler
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.BuildType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -57,11 +59,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
 //        if (mainViewModel.firstRun.value && BuildConfig.BUILD_TYPE == "release") {
 //            startActivity(Intent(this, OnboardingActivity::class.java))
 //            finish()
-//        }
-
+//
 
 //        if (BuildConfig.BUILD_TYPE == "debug") {
 //            startActivity(Intent(this, NewOnboardingActivity::class.java))
@@ -71,7 +73,14 @@ class MainActivity : ComponentActivity() {
 //        Intent.ACTION_WEB_SEARCH
 
         initPadding()
+        setContentWithKoin()
 
+        if (intent != null && BuildConfig.DEBUG && BuildType.current == BuildType.Debug) {
+            DebugIntentHandler.onCreateMainActivity(intent)
+        }
+    }
+
+    private fun setContentWithKoin() {
         setContentWithKoin {
             val navController = rememberNavController()
             if (BuildConfig.DEBUG) {

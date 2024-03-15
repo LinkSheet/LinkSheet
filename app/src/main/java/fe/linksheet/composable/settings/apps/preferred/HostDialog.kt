@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -71,6 +72,7 @@ internal fun hostDialog(
     ) { state, close ->
         val (displayActivityInfo, hasAppHosts, hostState) = state!!
 
+        val context = LocalContext.current
         DialogColumn {
             Column(
                 modifier = Modifier
@@ -83,7 +85,7 @@ internal fun hostDialog(
             ) {
                 Spacer(modifier = Modifier.height(5.dp))
                 Image(
-                    bitmap = displayActivityInfo.iconBitmap,
+                    bitmap = displayActivityInfo.getIcon(context),
                     contentDescription = displayActivityInfo.label,
                     modifier = Modifier.size(42.dp)
                 )

@@ -82,6 +82,8 @@ fun PreferredAppSettingsRoute(
             hostDialog.open(HostDialogState(closeState!!.displayActivityInfo))
         })
 
+    val context = LocalContext.current
+
     SettingsScaffold(
         R.string.preferred_apps,
         onBackPressed = onBackPressed,
@@ -119,7 +121,7 @@ fun PreferredAppSettingsRoute(
                 }) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
-                            bitmap = app.iconBitmap,
+                            bitmap = app.getIcon(context),
                             contentDescription = app.label,
                             modifier = Modifier.size(42.dp)
                         )

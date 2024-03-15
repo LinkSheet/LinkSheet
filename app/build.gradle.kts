@@ -272,6 +272,9 @@ dependencies {
     implementation(libs.compose.dialog.helper)
     implementation(libs.process.launcher)
 
+    implementation(libs.unfurl)
+    implementation(libs.unfurl.social)
+
     "proImplementation"(platform(libs.bom))
     "proImplementation"(libs.storage.kt)
     "proImplementation"(libs.compose.auth.ui)

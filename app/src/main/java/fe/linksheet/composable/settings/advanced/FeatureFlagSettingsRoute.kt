@@ -73,14 +73,13 @@ fun FeatureFlagSettingsRoute(
                 )
             }
 
-//            item(key = "enable_new_bottom_sheet") {
-//                SwitchRow(
-//                    state = viewModel.featureFlagNewBottomSheet,
-//                    viewModel = viewModel,
-//                    headlineId = R.string.enable_new_bottom_sheet,
-//                    subtitleId = R.string.enable_new_bottom_sheet_explainer
-//                )
-//            }
+            item(key = "enable_preview") {
+                SwitchRow(
+                    state = viewModel.featureFlagUrlPreview,
+                    headlineId = R.string.enable_experimental_url_preview,
+                    subtitleId = R.string.enable_experimental_url_preview_explainer
+                )
+            }
         }
     }
 }

@@ -163,16 +163,9 @@ sealed interface HashProcessor<T> {
         override fun process(stringBuilder: StringBuilder, input: DisplayActivityInfo, mac: Mac): StringBuilder {
             return stringBuilder.wrapped(Bracket.Curly) {
                 separated(Separator.Comma) {
-                    item("activityInfo=") { ActivityInfoProcessor.process(stringBuilder, input.activityInfo, mac) }
-                    item("label=") { StringProcessor.process(stringBuilder, input.label, mac) }
-                    itemNotNull(input.extendedInfo != null, "extendedInfo=") {
-                        StringProcessor.process(
-                            stringBuilder,
-                            input.extendedInfo.toString(),
-                            mac
-                        )
-                    }
                     item("resolveInfo=") { ResolveInfoProcessor.process(stringBuilder, input.resolvedInfo, mac) }
+//                    item("activityInfo=") { ActivityInfoProcessor.process(stringBuilder, input.activityInfo, mac) }
+                    item("label=") { StringProcessor.process(stringBuilder, input.label, mac) }
                 }
             }
         }

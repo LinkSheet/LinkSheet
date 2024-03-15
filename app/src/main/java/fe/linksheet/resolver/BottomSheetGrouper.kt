@@ -42,7 +42,7 @@ object BottomSheetGrouper {
 
         var comparator = if (historyMap != null) {
             compareByDescending<DisplayActivityInfo> { app ->
-                historyMap[app.activityInfo.packageName] ?: -1L
+                historyMap[app.packageName] ?: -1L
             }
         } else Comparator { _, _ -> 0 }
 

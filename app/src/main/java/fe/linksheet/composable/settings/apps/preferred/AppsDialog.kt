@@ -12,6 +12,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,6 +40,8 @@ internal fun appsDialog(
     onClose = onClose,
     notifyCloseNoState = false
 ) { state, close ->
+    val context = LocalContext.current
+
     DialogColumn {
         HeadlineText(headlineId = R.string.select_an_app)
         DialogSpacer()
@@ -57,7 +60,7 @@ internal fun appsDialog(
                     onClick = { close(AppsDialogCloseState(info)) }
                 ) {
                     Image(
-                        bitmap = info.iconBitmap,
+                        bitmap = info.getIcon(context),
                         contentDescription = info.label,
                         modifier = Modifier.size(32.dp)
                     )

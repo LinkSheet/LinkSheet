@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,8 @@ fun GridBrowserButton(
     showPackage: Boolean,
     launchApp: (DisplayActivityInfo, Boolean) -> Unit,
 ) {
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +52,7 @@ fun GridBrowserButton(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(32.dp),
-                bitmap = appInfo.iconBitmap,
+                bitmap = appInfo.getIcon(context),
                 contentDescription = appInfo.label
             )
 

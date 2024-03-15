@@ -1,11 +1,11 @@
 package fe.linksheet.resolver
 
 import android.content.Intent
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.ResolveModuleStatus
+import me.saket.unfurl.UnfurlResult
 
 
 sealed class BottomSheetResult(val uri: Uri?) {
@@ -17,6 +17,7 @@ sealed class BottomSheetResult(val uri: Uri?) {
     class BottomSheetSuccessResult(
         intent: Intent,
         uri: Uri?,
+        val unfurlResult: UnfurlResult?,
         referrer: Uri?,
         resolved: List<DisplayActivityInfo>,
         val filteredItem: DisplayActivityInfo?,

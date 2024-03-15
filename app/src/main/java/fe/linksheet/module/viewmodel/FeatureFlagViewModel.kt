@@ -14,4 +14,5 @@ class FeatureFlagViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val featureFlagLinkSheetCompat = featureFlagRepository.asState(FeatureFlags.featureFlagLinkSheetCompat)
+    val featureFlagUrlPreview = featureFlagRepository.asState(FeatureFlags.featureFlagUrlPreview)
 }

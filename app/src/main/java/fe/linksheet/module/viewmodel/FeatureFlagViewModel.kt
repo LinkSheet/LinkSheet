@@ -13,6 +13,7 @@ class FeatureFlagViewModel(
     featureFlagRepository: FeatureFlagRepository
 ) : BaseViewModel(preferenceRepository) {
 
-    val featureFlagLinkSheetCompat = featureFlagRepository.asState(FeatureFlags.featureFlagLinkSheetCompat)
-    val featureFlagUrlPreview = featureFlagRepository.asState(FeatureFlags.featureFlagUrlPreview)
+    val linkSheetCompat = featureFlagRepository.asState(FeatureFlags.linkSheetCompat)
+    val urlPreview = featureFlagRepository.asState(FeatureFlags.urlPreview)
+    val declutterUrl = featureFlagRepository.asState(FeatureFlags.declutterUrl)
 }

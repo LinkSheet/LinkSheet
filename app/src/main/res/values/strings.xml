@@ -627,4 +627,8 @@
         provided by the website
     </string>
     <string name="share">Share link</string>
+    <string name="declutter_url">Declutter the url in the bottom sheet</string>
+    <string name="declutter_url_explainer">Declutter the url in the bottom sheet by removing the scheme (if https) and
+        the \"www\" subdomain if present
+    </string>
 </resources>

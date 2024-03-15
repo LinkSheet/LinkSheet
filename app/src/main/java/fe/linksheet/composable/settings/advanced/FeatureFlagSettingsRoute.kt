@@ -67,7 +67,7 @@ fun FeatureFlagSettingsRoute(
 
             item(key = "enable_linksheet_compat_menu") {
                 SwitchRow(
-                    state = viewModel.featureFlagLinkSheetCompat,
+                    state = viewModel.linkSheetCompat,
                     headlineId = R.string.enable_linksheet_compat,
                     subtitleId = R.string.enable_linksheet_compat_explainer
                 )
@@ -75,9 +75,17 @@ fun FeatureFlagSettingsRoute(
 
             item(key = "enable_preview") {
                 SwitchRow(
-                    state = viewModel.featureFlagUrlPreview,
+                    state = viewModel.urlPreview,
                     headlineId = R.string.enable_experimental_url_preview,
                     subtitleId = R.string.enable_experimental_url_preview_explainer
+                )
+            }
+
+            item(key = "declutter_url") {
+                SwitchRow(
+                    state = viewModel.declutterUrl,
+                    headlineId = R.string.declutter_url,
+                    subtitleId = R.string.declutter_url_explainer
                 )
             }
         }

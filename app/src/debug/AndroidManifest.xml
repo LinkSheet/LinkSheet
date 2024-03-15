@@ -6,6 +6,8 @@
             <intent-filter>
                 <action android:name="fe.linksheet.debug.COPY_URL" />
                 <action android:name="fe.linksheet.debug.RESOLVE_URL" />
+                <action android:name="fe.linksheet.debug.UPDATE_PREFERENCE_BROADCAST" />
+                <action android:name="fe.linksheet.debug.UPDATE_FEATURE_FLAG_BROADCAST" />
             </intent-filter>
         </receiver>
     </application>

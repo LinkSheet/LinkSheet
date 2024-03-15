@@ -28,6 +28,8 @@ import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.FeatureFlagRepository
+import fe.linksheet.module.preference.FeatureFlags
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolver
@@ -45,6 +47,7 @@ import java.util.*
 class BottomSheetViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
+    featureFlagRepository: FeatureFlagRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
@@ -91,10 +94,7 @@ class BottomSheetViewModel(
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
 
-//    init {
-//        state.keys()
-//    }
-
+    val declutterUrl = featureFlagRepository.asState(FeatureFlags.declutterUrl)
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
         val canAccessInternet = kotlin.runCatching {

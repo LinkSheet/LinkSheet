@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Patterns
 import fe.kotlin.extension.iterable.mapToSet
-import inet.ipaddr.HostName
 
 object UriUtil {
     private val protocols = setOf("http", "https")
@@ -26,5 +25,21 @@ object UriUtil {
      */
     fun hasWebScheme(intent: Intent): Boolean {
         return webSchemeIntents.any { it.scheme == intent.scheme }
+    }
+
+    private const val HTTPS_PREFIX = "https://"
+    private const val WWW_PREFIX = "www."
+
+    fun declutter(uri: Uri): String {
+        var str = uri.toString()
+        if (str.startsWith(HTTPS_PREFIX)) {
+            str = str.substring(HTTPS_PREFIX.length)
+        }
+
+        if (str.startsWith(WWW_PREFIX)) {
+            str = str.substring(WWW_PREFIX.length)
+        }
+
+        return str
     }
 }

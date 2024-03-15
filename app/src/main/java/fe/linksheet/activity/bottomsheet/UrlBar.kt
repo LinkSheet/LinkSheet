@@ -2,11 +2,14 @@ package fe.linksheet.activity.bottomsheet
 
 import android.content.ClipboardManager
 import android.net.Uri
-import android.util.Log
+import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
@@ -17,6 +20,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -36,7 +41,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun UrlBar(
-    uri: Uri,
+    uri: String,
     unfurlResult: UnfurlResult?,
     downloadable: Boolean,
     libRedirected: Boolean,
@@ -45,17 +50,13 @@ fun UrlBar(
     downloadUri: (() -> Unit)? = null,
     ignoreLibRedirect: (() -> Unit)? = null,
 ) {
-//    Log.d("Preview", "$unfurlResult")
-    unfurlResult?.let { preview ->
-        val thumbnailUrl = preview.thumbnail.toString()
-        val faviconUrl = preview.favicon.toString()
+    var showFullUrl by remember { mutableStateOf(false) }
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 15.dp, end = 15.dp)
+    Column(modifier = Modifier.fillMaxWidth().padding(start = 15.dp, end = 15.dp)) {
+        unfurlResult?.let { preview ->
+            val thumbnailUrl = preview.thumbnail.toString()
+            val faviconUrl = preview.favicon.toString()
 
-        ) {
             AsyncImage(
                 model = thumbnailUrl,
                 contentDescription = "",
@@ -90,86 +91,94 @@ fun UrlBar(
                 }
             }
 
-
-
-//            if (preview.description != null) {
-//                Text(text = preview.description!!)
-//            }
+            Spacer(modifier = Modifier.height(10.dp))
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
-    }
-
-    var showFullUrl by remember { mutableStateOf(false) }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 15.dp, end = 15.dp)
-            .clip(CardDefaults.shape)
-            .combinedClickable(onClick = {}, onLongClick = {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+            modifier = Modifier.fillMaxWidth().clip(CardDefaults.shape).combinedClickable(onClick = {}, onLongClick = {
                 showFullUrl = !showFullUrl
-            })
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .animateContentSize()
-                .runIf(!showFullUrl) { it.height(60.dp) }
-                .padding(start = 10.dp, end = 5.dp, top = 10.dp, bottom = 10.dp),
-            verticalAlignment = Alignment.CenterVertically
+            }),
         ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .animateContentSize()
+                    .runIf(!showFullUrl) { it.height(60.dp) }
+                    .padding(start = 10.dp, end = 5.dp, top = 10.dp, bottom = 10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = uri,
+                    maxLines = if (showFullUrl) Int.MAX_VALUE else 3,
+                    overflow = TextOverflow.Ellipsis,
+                    fontSize = 14.sp,
+                    lineHeight = 14.sp
+                )
 
-            Text(
-                modifier = Modifier.weight(1f),
-                text = uri.toString(),
-                maxLines = if (showFullUrl) Int.MAX_VALUE else 3,
-                overflow = TextOverflow.Ellipsis,
-                fontSize = 13.sp,
-                lineHeight = 13.sp
-            )
+                Spacer(modifier = Modifier.width(5.dp))
 
-            Spacer(modifier = Modifier.width(10.dp))
+                CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                    if (libRedirected) {
+                        IconButton(onClick = ignoreLibRedirect!!) {
+                            Icon(
+                                imageVector = Icons.Outlined.FastForward,
+                                contentDescription = stringResource(id = R.string.request_private_browsing)
+                            )
+                        }
+                    }
 
-            CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                if (downloadable) {
-                    IconButton(onClick = downloadUri!!) {
+                    IconButton(onClick = copyUri) {
                         Icon(
-                            imageVector = Icons.Default.Download,
-                            contentDescription = stringResource(id = R.string.download)
+                            imageVector = Icons.Default.ContentCopy,
+                            contentDescription = stringResource(id = R.string.copy_url)
                         )
                     }
-                }
-
-                if (libRedirected) {
-                    IconButton(onClick = ignoreLibRedirect!!) {
-                        Icon(
-                            imageVector = Icons.Outlined.FastForward,
-                            contentDescription = stringResource(id = R.string.request_private_browsing)
-                        )
-                    }
-                }
-
-                IconButton(onClick = copyUri) {
-                    Icon(
-                        imageVector = Icons.Default.ContentCopy,
-                        contentDescription = stringResource(id = R.string.copy_url)
-                    )
-                }
-
-                IconButton(onClick = shareUri) {
-                    Icon(
-                        imageVector = Icons.Default.Share,
-                        contentDescription = stringResource(id = R.string.copy_url)
-                    )
                 }
             }
         }
-    }
 
-    HorizontalDivider(
-        modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp),
-        color = MaterialTheme.colorScheme.outline.copy(0.25f)
+        Spacer(modifier = Modifier.height(5.dp))
+
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            item {
+                UrlActionButton(text = R.string.share, icon = Icons.Filled.Share, onClick = shareUri)
+            }
+
+            item {
+                if (downloadable) {
+                    UrlActionButton(text = R.string.download, icon = Icons.Filled.Download, onClick = downloadUri!!)
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(0.25f))
+
+        Spacer(modifier = Modifier.height(10.dp))
+    }
+}
+
+@Composable
+private fun UrlActionButton(@StringRes text: Int, icon: ImageVector, onClick: () -> Unit) {
+    ElevatedAssistChip(
+        onClick = onClick,
+        elevation = AssistChipDefaults.assistChipElevation(),
+        shape = CircleShape,
+        leadingIcon = {
+            Icon(
+                modifier = Modifier.size(18.dp),
+                imageVector = icon,
+                tint = Color.Unspecified,
+                contentDescription = stringResource(id = text)
+            )
+        },
+        label = { Text(text = stringResource(id = text), fontSize = 12.sp) }
     )
 }
 
@@ -181,13 +190,13 @@ private fun UrlBarPreview() {
 
     val unfurled = UnfurlResult(
         url = uri.toHttpUrlOrNull()!!,
-        title ="Grim Salvo x Savage Ga\$p - why do i still care?",
+        title = "Grim Salvo x Savage Ga\$p - why do i still care?",
         description = "\"why do i still care?\"Prod. ³³marrowEdit by Zetsuboū絶望 (re:zero)Follow Savage Ga\$phttps://open.spotify.com/artist/0x7qiZJaal6j8qS7yCydFk?si=LAmKfXDwSc-V0BZoD...",
         favicon = "https://www.youtube.com/s/desktop/4feff1e2/img/favicon.ico".toHttpUrlOrNull(),
         thumbnail = "https://i.ytimg.com/vi/evIpx9Onc2c/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gOCgyMA8=&rs=AOn4CLB2ThnXsKlWHuEznGduSc7di30S-w".toHttpUrlOrNull()
     )
     UrlBar(
-        uri = Uri.parse(uri),
+        uri = uri,
         unfurlResult = unfurled,
         downloadable = false,
         libRedirected = false,

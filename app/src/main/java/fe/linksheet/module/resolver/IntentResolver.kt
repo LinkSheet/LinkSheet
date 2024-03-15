@@ -130,7 +130,7 @@ class IntentResolver(
 
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
-    private val previewUrl = featureFlagRepository.asState(FeatureFlags.featureFlagUrlPreview)
+    private val previewUrl = featureFlagRepository.asState(FeatureFlags.urlPreview)
 
     companion object {
         private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }

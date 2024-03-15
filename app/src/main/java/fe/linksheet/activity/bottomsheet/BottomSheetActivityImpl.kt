@@ -51,6 +51,7 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
+import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -184,6 +185,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
                 result = result as BottomSheetResult.SuccessResult,
+                declutterUrl = viewModel.declutterUrl(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
                 hideDrawer = hideDrawer,
@@ -222,6 +224,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: BottomSheetResult.SuccessResult,
+        declutterUrl: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         hideDrawer: () -> Unit,
@@ -244,9 +247,12 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
         if (previewUrl && result.uri != null) {
             val uriSuccess = result as? BottomSheetResult.BottomSheetSuccessResult
+            val uriString = if (declutterUrl) {
+                UriUtil.declutter(result.uri)
+            } else result.uri.toString()
 
             UrlBar(
-                uri = result.uri,
+                uri = uriString,
                 unfurlResult = uriSuccess?.unfurlResult,
                 downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
                 libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,

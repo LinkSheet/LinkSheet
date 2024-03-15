@@ -454,4 +454,5 @@
     <string name="information">Информације</string>
     <string name="resolve_embeds">Разреши уградње</string>
     <string name="resolve_embeds_explainer">Решите урађење замене као што је fxtwitter.com на прави хост</string>
+    <string name="verified_link_handlers_open_settings_page">Отвори страницу подешавања</string>
 </resources>

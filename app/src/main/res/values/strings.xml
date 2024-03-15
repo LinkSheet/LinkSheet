@@ -626,4 +626,5 @@
     <string name="enable_experimental_url_preview_explainer">Displays a preview of the website in the bottom sheet if
         provided by the website
     </string>
+    <string name="share">Share link</string>
 </resources>

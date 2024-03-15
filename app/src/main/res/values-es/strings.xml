@@ -455,4 +455,5 @@
     <string name="resolve_embeds">Resolver incorporaciones</string>
     <string name="resolve_embeds_explainer">Resolver espejos integrados como fxtwitter.com en el host real</string>
     <string name="verified_link_handlers_open_settings_page">Abrir la página de configuración</string>
+    <string name="share">Compartir el enlace</string>
 </resources>

@@ -6,17 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import fe.android.preference.helper.PreferenceDefinition
-import fe.android.preference.helper.PreferenceRepository
-import fe.android.preference.helper.compose.StatePreferenceRepository
 import fe.gson.dsl.jsonObject
-import fe.linksheet.LinkSheetApp
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.FeatureFlagRepository
-import fe.linksheet.module.preference.FeatureFlags
+import fe.linksheet.debug.command.DebugCommand
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
+import fe.linksheet.util.BuildType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,20 +20,21 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 
-class DebugReceiver : BroadcastReceiver(), KoinComponent {
+class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     companion object {
         private const val COPY_URL_BROADCAST = "fe.linksheet.debug.COPY_URL"
         private const val RESOLVE_URL_BROADCAST = "fe.linksheet.debug.RESOLVE_URL"
-        private const val UPDATE_PREFERENCE_BROADCAST = "fe.linksheet.debug.UPDATE_PREFERENCE_BROADCAST"
-        private const val UPDATE_FEATURE_FLAG_BROADCAST = "fe.linksheet.debug.UPDATE_FEATURE_FLAG_BROADCAST"
+        const val UPDATE_PREF_BROADCAST = "fe.linksheet.debug.UPDATE_PREF"
     }
 
     @OptIn(ExperimentalEncodingApi::class)
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("DebugReceiver", "$context $intent")
-        val app = get<LinkSheetApp>()
+        if (BuildType.current?.debuggingAllowed != true) return
+
+        val handled = DebugCommand.tryHandle(context, intent)
+        if (handled) return
 
         if (intent.action == COPY_URL_BROADCAST) {
             val clipboardManager = context.getSystemService<ClipboardManager>()!!
@@ -48,17 +43,6 @@ class DebugReceiver : BroadcastReceiver(), KoinComponent {
 
             return
         }
-
-        if (intent.action == UPDATE_PREFERENCE_BROADCAST) {
-            updatePreference(intent, get<AppPreferenceRepository>(), AppPreferences)
-            return
-        }
-
-        if (intent.action == UPDATE_FEATURE_FLAG_BROADCAST) {
-            updatePreference(intent, get<FeatureFlagRepository>(), FeatureFlags)
-            return
-        }
-
 
         if (intent.action == RESOLVE_URL_BROADCAST) {
             val viewModel = BottomSheetViewModel(get(), get(), get(), get(), get(), get(), SavedStateHandle())
@@ -107,17 +91,5 @@ class DebugReceiver : BroadcastReceiver(), KoinComponent {
         }
     }
 
-    private fun updatePreference(intent: Intent, repository: PreferenceRepository, definition: PreferenceDefinition) {
-        val key = intent.extras?.getString("key")
-        val value = intent.extras?.getString("value")
 
-        val pref = definition.all[key]
-
-        if (key != null && value != null && pref != null) {
-            repository.setStringValueToPreference(pref, value)
-            if (repository is StatePreferenceRepository) {
-                repository.stateCache.get(key)?.forceRefresh()
-            }
-        }
-    }
 }

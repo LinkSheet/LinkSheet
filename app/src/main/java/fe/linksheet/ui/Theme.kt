@@ -97,7 +97,7 @@ private val DarkColors = darkColorScheme(
 
 private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
 
-private tailrec fun Context.findWindow(): Window? = when (this) {
+tailrec fun Context.findWindow(): Window? = when (this) {
     is Activity -> window
     is ContextWrapper -> baseContext.findWindow()
     else -> null

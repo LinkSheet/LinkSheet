@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.color.DynamicColors
 import fe.gson.context.GlobalGsonContext
 import fe.gson.globalGsonModule
@@ -47,13 +48,18 @@ import kotlin.system.exitProcess
 
 
 class LinkSheetApp : Application() {
+    var activityEventListener: ((Any) -> Unit)? = null
+        private set
     private lateinit var lifecycleObserver: AppLifecycleObserver
+
 
     override fun onCreate() {
         super.onCreate()
 
         lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
         lifecycleObserver.attach()
+
+        LocalBroadcastManager.getInstance(this)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -122,5 +128,9 @@ class LinkSheetApp : Application() {
         return if (lastVersion == -1) AnalyticsEvent.FirstStart
         else if (BuildConfig.VERSION_CODE > lastVersion) AnalyticsEvent.AppUpdated(lastVersion)
         else AnalyticsEvent.AppStarted(BuildConfig.VERSION_CODE)
+    }
+
+    fun setActivityEventListener(listener: ((Any) -> Unit)?) {
+        activityEventListener = listener
     }
 }

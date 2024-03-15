@@ -24,6 +24,11 @@ class AppLifecycleObserver(
         services.forEach { it.start(lifecycleObserver.lifecycle) }
     }
 
+    override fun onCreate(owner: LifecycleOwner) {
+//        super.onCreate(owner)
+        Log.d("Test", "$owner")
+    }
+
 //    override fun onCreate(owner: LifecycleOwner) {
 //        Log.d("AppLifecycle", "Shutting down ${services.size} services")
 //        services.forEach { it.boot(owner.lifecycle) }
@@ -32,5 +37,7 @@ class AppLifecycleObserver(
     override fun onStop(owner: LifecycleOwner) {
         Log.d("AppLifecycle", "Shutting down ${services.size} services")
         services.forEach { it.stop(owner.lifecycle) }
+
+        lifecycleObserver.lifecycle.removeObserver(this)
     }
 }

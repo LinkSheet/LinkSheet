@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.google.android.material.snackbar.Snackbar
 import fe.linksheet.*
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
@@ -49,12 +50,25 @@ import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
+import fe.linksheet.ui.findWindow
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     private val mainViewModel by viewModel<MainViewModel>()
+    private val app by inject<LinkSheetApp>()
+
+
+
+//    override fun onAttachedToWindow() {
+//        super.onAttachedToWindow()
+//    }
+//
+//    override fun onDetachedFromWindow() {
+//        super.onDetachedFromWindow()
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +85,16 @@ class MainActivity : ComponentActivity() {
 //        }
 
 //        Intent.ACTION_WEB_SEARCH
-
         initPadding()
         setContentWithKoin()
 
         if (intent != null && BuildConfig.DEBUG && BuildType.current == BuildType.Debug) {
             DebugIntentHandler.onCreateMainActivity(intent)
         }
+    }
+
+    override fun onDestroy() {
+        app.setActivityEventListener(null)
     }
 
     private fun setContentWithKoin() {
@@ -87,6 +104,10 @@ class MainActivity : ComponentActivity() {
                 navController.addOnDestinationChangedListener { _, destination, _ ->
                     Log.d("Analytics", "Enqueuing nav event to ${destination.route}")
                     mainViewModel.analyticsClient.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
+                }
+
+                app.setActivityEventListener {
+//                    Snackbar.make(window.decorView, it.toString(), Snackbar.LENGTH_SHORT).show()
                 }
             }
 

@@ -6,6 +6,4 @@ object DebugIntentHandler {
     fun onCreateMainActivity(intent: Intent) {
 
     }
-
-
 }

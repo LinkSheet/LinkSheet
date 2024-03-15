@@ -121,5 +121,22 @@ class Logger(private val delegate: LoggerDelegate) {
     fun error(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Error, throwable = throwable, subPrefix = subPrefix)
     }
+
+    inline fun <T, R, C : MutableCollection<in R>> mapNoException(iterable: Iterable<T>, destination: C, transform: (T) -> R): C {
+        for (item in iterable) {
+            try {
+                destination.add(transform(item))
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+
+        return destination
+    }
+
+    inline operator fun <R> invoke(`return`: R, fn: (Logger) -> Unit): R {
+        fn(this)
+        return `return`
+    }
 }
 

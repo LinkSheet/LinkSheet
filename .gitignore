@@ -4,4 +4,3 @@ local.properties
 build
 app/release
 .ignored
-debug

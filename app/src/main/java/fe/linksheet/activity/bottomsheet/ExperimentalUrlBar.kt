@@ -36,6 +36,8 @@ import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
+import coil.size.Dimension
+import coil.size.Scale
 import fe.linksheet.R
 import fe.linksheet.extension.compose.runIf
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -55,6 +57,7 @@ fun ExperimentalUrlBar(
     ignoreLibRedirect: (() -> Unit)? = null,
 ) {
     var showFullUrl by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -70,139 +73,85 @@ fun ExperimentalUrlBar(
                     showFullUrl = !showFullUrl
                 }),
         ) {
-            if(unfurlResult != null){
-                val thumbnailUrl = unfurlResult.thumbnail?.toString()
-                val faviconUrl = unfurlResult.favicon?.toString()
+            Column(modifier = Modifier.fillMaxWidth()) {
+                val thumbnailUrl = unfurlResult?.thumbnail?.toString()
+                val faviconUrl = unfurlResult?.favicon?.toString()
 
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    if (thumbnailUrl != null) {
-                        SubcomposeAsyncImage(
-                            modifier = Modifier
-                                .heightIn(min = 0.dp, max = 200.dp)
-                                .clip(CardDefaults.shape),
-                            contentScale = ContentScale.FillWidth,
-                            model = thumbnailUrl,
-                            contentDescription = ""
-                        ) {
+                if (thumbnailUrl != null) {
+//                    var thumbnail by remember { mutableStateOf(true) }
+
+//                    if (thumbnail) {
+//                        AsyncImage(
+//                            model = ImageRequest.Builder(context).data(thumbnailUrl)
+//                                .size(height = Dimension(200), width = Dimension.Undefined)
+//                                .scale(Scale.FIT).build(),
+//                            onError = {
+//                                thumbnail = false
+//                            },
+//                            contentDescription = "",
+//                            modifier = Modifier.clip(CardDefaults.shape).border(1.dp, Color.Red),
+//                            contentScale = ContentScale.FillWidth
+//                        )
+//                    }
+
+
+                    SubcomposeAsyncImage(
+                        model = ImageRequest.Builder(context).data(thumbnailUrl)
+//                            .size(height = Dimension(200.dp.value.toInt()), width = Dimension.Undefined)
+//                            .scale(Scale.FIT)
+                            .build(),
+                         contentScale = ContentScale.FillWidth,
+                        contentDescription = ""
+                    ) {
+                        val state = painter.state
+                        if (state is AsyncImagePainter.State.Success) {
+                            SubcomposeAsyncImageContent(modifier = Modifier.heightIn(max = 200.dp)
+                                .clip(CardDefaults.shape))
+                        }
+                    }
+                }
+
+                Row(
+                    modifier = Modifier.padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    if (faviconUrl != null) {
+//                        AsyncImage(
+//                            model = ImageRequest.Builder(context).data(faviconUrl).size(16).build(),
+//                            contentDescription = "",
+//                            modifier = Modifier.border(1.dp, Color.Green),
+//                        )
+
+                        SubcomposeAsyncImage(model = faviconUrl, contentDescription = "") {
                             val state = painter.state
                             if (state is AsyncImagePainter.State.Success) {
-                                SubcomposeAsyncImageContent()
-                            }
-                        }
-
-
-                        Spacer(modifier = Modifier.height(5.dp))
-                    }
-
-                    if (unfurlResult.title != null) {
-                        Row(
-                            modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            AsyncImage(
-                                model = faviconUrl,
-                                contentDescription = "",
-                                contentScale = ContentScale.FillHeight,
-                                modifier = Modifier.size(16.dp),
-                            )
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column {
-                                Text(
-                                    text = unfurlResult.title!!,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    fontFamily = HkGroteskFontFamily,
-                                    fontWeight = FontWeight.SemiBold
-                                )
-
-                                Text(
-//                                modifier = Modifier.weight(1f),
-                                    text = uri,
-                                    maxLines = if (showFullUrl) Int.MAX_VALUE else 3,
-                                    overflow = TextOverflow.Ellipsis,
-                                    fontSize = 14.sp,
-                                    lineHeight = 14.sp
+                                SubcomposeAsyncImageContent(
+                                    modifier = Modifier.size(16.dp),
+                                    contentScale = ContentScale.FillHeight
                                 )
                             }
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-            }
-
-
-
-
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .animateContentSize()
-////                    .runIf(!showFullUrl) { it.height(60.dp) }
-//                    .padding(start = 10.dp, end = 5.dp, top = 10.dp, bottom = 10.dp),
-//                verticalAlignment = Alignment.CenterVertically
-//            ) {
-//
-////
-////                unfurlResult?.let { preview ->
-////
-////
-////
-////
-////
-////                }
-//            }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-            if (unfurlResult?.title == null) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .animateContentSize()
-                        .runIf(!showFullUrl) { it.height(60.dp) }
-                        .padding(start = 10.dp, end = 5.dp, top = 10.dp, bottom = 10.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = Modifier.weight(1f),
-                        text = uri,
-                        maxLines = if (showFullUrl) Int.MAX_VALUE else 3,
-                        overflow = TextOverflow.Ellipsis,
-                        fontSize = 14.sp,
-                        lineHeight = 14.sp
-                    )
-
-                    Spacer(modifier = Modifier.width(5.dp))
-
-                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                        if (libRedirected) {
-                            IconButton(onClick = ignoreLibRedirect!!) {
-                                Icon(
-                                    imageVector = Icons.Outlined.FastForward,
-                                    contentDescription = stringResource(id = R.string.request_private_browsing)
-                                )
-                            }
-                        }
-
-                        IconButton(onClick = copyUri) {
-                            Icon(
-                                imageVector = Icons.Default.ContentCopy,
-                                contentDescription = stringResource(id = R.string.copy_url)
+                    Column(verticalArrangement = Arrangement.Center) {
+                        if (unfurlResult?.title != null) {
+                            Text(
+                                text = unfurlResult.title!!,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                fontFamily = HkGroteskFontFamily,
+                                fontWeight = FontWeight.SemiBold
                             )
                         }
+
+                        Text(
+                            text = uri,
+                            maxLines = if (showFullUrl) Int.MAX_VALUE else 3,
+                            overflow = TextOverflow.Ellipsis,
+                            fontSize = 14.sp,
+                            lineHeight = 14.sp
+                        )
                     }
                 }
             }
@@ -257,13 +206,7 @@ private fun UrlBarPreview() {
     val clipboardManager = LocalContext.current.getSystemService<ClipboardManager>()!!
     val uri = "https://www.youtube.com/watch?v=evIpx9Onc2c"
 
-    val unfurled = UnfurlResult(
-        url = uri.toHttpUrlOrNull()!!,
-        title = "Grim Salvo x Savage Ga\$p - why do i still care?",
-        description = "\"why do i still care?\"Prod. ³³marrowEdit by Zetsuboū絶望 (re:zero)Follow Savage Ga\$phttps://open.spotify.com/artist/0x7qiZJaal6j8qS7yCydFk?si=LAmKfXDwSc-V0BZoD...",
-        favicon = "https://www.youtube.com/s/desktop/4feff1e2/img/favicon.ico".toHttpUrlOrNull(),
-        thumbnail = "https://i.ytimg.com/vi/evIpx9Onc2c/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gOCgyMA8=&rs=AOn4CLB2ThnXsKlWHuEznGduSc7di30S-w".toHttpUrlOrNull()
-    )
+
 //    UrlBar(
 //        uri = uri,
 //        unfurlResult = unfurled,

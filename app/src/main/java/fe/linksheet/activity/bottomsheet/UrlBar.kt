@@ -174,11 +174,11 @@ private fun UrlActionButton(@StringRes text: Int, icon: ImageVector, onClick: ()
             Icon(
                 modifier = Modifier.size(18.dp),
                 imageVector = icon,
-                tint = Color.Unspecified,
+                tint = MaterialTheme.colorScheme.onSurface,
                 contentDescription = stringResource(id = text)
             )
         },
-        label = { Text(text = stringResource(id = text), fontSize = 12.sp) }
+        label = { Text(text = stringResource(id = text), fontSize = 13.sp) }
     )
 }
 

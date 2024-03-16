@@ -9,13 +9,16 @@ import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.util.AppInfo
 
 
 class LogViewCommon(
     val preferenceRepository: AppPreferenceRepository,
+    val experimentRepository: ExperimentRepository,
     val gson: Gson,
-    private val redactor: Redactor
+    private val redactor: Redactor,
 ) {
     @OptIn(SensitivePreference::class)
     private fun logPreferences(redact: Boolean): Map<String, String?> {
@@ -29,7 +32,7 @@ class LogViewCommon(
         val fingerprint: Boolean,
         val preferences: Boolean,
         val redact: Boolean,
-        val throwable: Boolean
+        val throwable: Boolean,
     )
 
     fun buildClipboardText(
@@ -45,6 +48,8 @@ class LogViewCommon(
             }
 
             "app_info" += AppInfo.appInfo
+            "active_experiments" += Experiments.getActive(experimentRepository)
+
             if (preferences) {
                 "preferences" += AppPreferences.toJsonArray(logPreferences(redact))
             }

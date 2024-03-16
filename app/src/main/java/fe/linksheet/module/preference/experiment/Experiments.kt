@@ -3,6 +3,7 @@ package fe.linksheet.module.preference.experiment
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.compose.StatePreference
+import fe.android.preference.helper.compose.mock.MockRepositoryState
 
 object Experiments : PreferenceDefinition() {
     val experiments: List<Experiment>
@@ -14,6 +15,7 @@ object Experiments : PreferenceDefinition() {
     val allowCustomShareExtras = boolean("experiment_share_allow_custom_share_extras")
     val checkAllExtras = boolean("experiment_share_check_all_extras")
 
+    // TODO: Enforce type
     init {
         experiments = listOf(
             Experiment("enhanced_url_bar", experimentalUrlBar, urlPreview, declutterUrl),
@@ -21,6 +23,16 @@ object Experiments : PreferenceDefinition() {
         )
 
         finalize()
+    }
+
+    fun getActive(repository: ExperimentRepository): List<String> {
+        val active = mutableListOf<String>()
+
+        for ((key, pref) in all) {
+            if (pref is Preference.Boolean && repository.get(pref)) active.add(key)
+        }
+
+        return active
     }
 }
 

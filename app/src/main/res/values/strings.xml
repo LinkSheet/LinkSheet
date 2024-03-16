@@ -622,10 +622,6 @@
     <string name="amp2html_allow_darknets_explainer">Allow running Amp2Html for darknets (supported: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)</string>
     <string name="verified_link_handlers_open_settings_page">Open settings page</string>
-    <string name="enable_experimental_url_preview" translatable="false">Enable experimental url preview in bottom sheet</string>
-    <string name="enable_experimental_url_preview_explainer" translatable="false">Displays a preview of the website in the bottom sheet if
-        provided by the website
-    </string>
     <string name="share">Share link</string>
     <string name="declutter_url" translatable="false">Declutter the url in the bottom sheet</string>
     <string name="declutter_url_explainer" translatable="false">Declutter the url in the bottom sheet by removing the scheme (if https) and

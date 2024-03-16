@@ -94,8 +94,6 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
-
-    val declutterUrl = featureFlagRepository.asState(FeatureFlags.declutterUrl)
     val experimentalUrlBar = featureFlagRepository.asState(FeatureFlags.experimentalUrlBar)
 
 

@@ -26,14 +26,6 @@ private val experiments = mapOf(
     FeatureFlags.linkSheetCompat.key to Pair(
         R.string.enable_linksheet_compat,
         R.string.enable_linksheet_compat_explainer
-    ),
-    FeatureFlags.urlPreview.key to Pair(
-        R.string.enable_experimental_url_preview,
-        R.string.enable_experimental_url_preview_explainer
-    ),
-    FeatureFlags.declutterUrl.key to Pair(
-        R.string.declutter_url,
-        R.string.declutter_url_explainer
     )
 )
 

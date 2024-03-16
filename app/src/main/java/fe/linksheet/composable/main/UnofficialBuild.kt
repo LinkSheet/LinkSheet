@@ -26,7 +26,7 @@ import fe.linksheet.ui.Typography
 @Composable
 fun UnofficialBuild() {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()

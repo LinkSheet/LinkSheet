@@ -1,6 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
+import fe.android.preference.helper.Preference
 
 import fe.linksheet.module.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.FeatureFlagRepository
@@ -14,6 +15,8 @@ class FeatureFlagViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val linkSheetCompat = featureFlagRepository.asState(FeatureFlags.linkSheetCompat)
-    val urlPreview = featureFlagRepository.asState(FeatureFlags.urlPreview)
-    val declutterUrl = featureFlagRepository.asState(FeatureFlags.declutterUrl)
+
+    val flags = FeatureFlags.all.filter { it.value.clazz == Boolean::class }.map {
+        it.key to featureFlagRepository.asState(it.value as Preference.Boolean)
+    }.toMap()
 }

@@ -1,6 +1,5 @@
 package fe.linksheet.composable.main
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,17 +20,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.devBottomSheetExperimentRoute
-import fe.linksheet.donateSettingsRoute
 import fe.linksheet.extension.compose.clickable
-import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.ui.Typography
 
 @Composable
-fun DevBottomSheetExperimentCard(navController: NavHostController) {
+fun NightlyExperimentsCard(navController: NavHostController) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHighest),
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()
@@ -41,43 +38,26 @@ fun DevBottomSheetExperimentCard(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 80.dp)
-                .clickable {
-                    navController.navigate(devBottomSheetExperimentRoute)
-                },
+                .clickable { navController.navigate(featureFlagSettingsRoute) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(10.dp))
-            ColoredIcon(
-                icon = Icons.Filled.NewReleases,
-                descriptionId = R.string.discord,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+            Icon(
+                imageVector = Icons.Filled.NewReleases,
+                contentDescription = stringResource(id = R.string.nightly_experiments_card),
             )
 
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
-                    text = stringResource(id = R.string.new_bottomsheet),
+                    text = stringResource(id = R.string.nightly_experiments_card),
                     style = Typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
 
                 Text(
-                    text = stringResource(id = R.string.new_dev_bottom_sheet_explainer),
-                    style = LocalTextStyle.current.copy(
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        fontSize = 16.sp
-                    )
+                    text = stringResource(id = R.string.nightly_experiments_card_explainer),
+                    fontSize = 16.sp
                 )
             }
         }
-//        Row(
-//            modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp, horizontal = 10.dp),
-//            horizontalArrangement = Arrangement.End
-//        ) {
-//            TextButton(onClick = {
-//                viewModel.updateState(viewModel.showNewBottomSheetBanner, false)
-//            }) {
-//                Text(text = stringResource(id = R.string.dismiss))
-//            }
-//        }
     }
 }

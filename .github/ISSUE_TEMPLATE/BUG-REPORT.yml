@@ -16,7 +16,7 @@ body:
     id: experiments
     attributes:
       options:
-        - label: "I have disabled all experiments"
+        - label: I have disabled all experiments
           required: true
   - type: input
     id: version

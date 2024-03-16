@@ -12,6 +12,13 @@ body:
       placeholder: What happened?
     validations:
       required: true
+  - type: checkboxes
+    id: experiments
+    attributes:
+      label: Experiments
+      options:
+        - label: I have disabled all experiments
+          required: true
   - type: input
     id: version
     attributes:

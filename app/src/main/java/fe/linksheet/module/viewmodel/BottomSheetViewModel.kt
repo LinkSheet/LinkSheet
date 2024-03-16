@@ -95,6 +95,8 @@ class BottomSheetViewModel(
 
 
     val declutterUrl = featureFlagRepository.asState(FeatureFlags.declutterUrl)
+    val experimentalUrlBar = featureFlagRepository.asState(FeatureFlags.experimentalUrlBar)
+
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
         val canAccessInternet = kotlin.runCatching {

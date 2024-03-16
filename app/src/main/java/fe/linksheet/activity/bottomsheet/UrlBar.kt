@@ -52,23 +52,28 @@ fun UrlBar(
 ) {
     var showFullUrl by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.fillMaxWidth().padding(start = 15.dp, end = 15.dp)) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(start = 15.dp, end = 15.dp)
+    ) {
         unfurlResult?.let { preview ->
-            val thumbnailUrl = preview.thumbnail.toString()
-            val faviconUrl = preview.favicon.toString()
+            val thumbnailUrl = preview.thumbnail?.toString()
+            val faviconUrl = preview.favicon?.toString()
 
-            AsyncImage(
-                model = thumbnailUrl,
-                contentDescription = "",
-                contentScale = ContentScale.FillWidth,
+            if (thumbnailUrl != null) {
+                AsyncImage(
+                    model = thumbnailUrl,
+                    contentDescription = "",
+                    contentScale = ContentScale.FillWidth,
 //                    placeholder = painterResource(R.drawable.placeholder),
 //                    contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .heightIn(max = 200.dp)
-                    .clip(CardDefaults.shape)
-            )
+                    modifier = Modifier
+                        .heightIn(max = 200.dp)
+                        .clip(CardDefaults.shape)
+                )
 
-            Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(5.dp))
+            }
 
             if (preview.title != null) {
                 Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -96,9 +101,12 @@ fun UrlBar(
 
         Card(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-            modifier = Modifier.fillMaxWidth().clip(CardDefaults.shape).combinedClickable(onClick = {}, onLongClick = {
-                showFullUrl = !showFullUrl
-            }),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(CardDefaults.shape)
+                .combinedClickable(onClick = {}, onLongClick = {
+                    showFullUrl = !showFullUrl
+                }),
         ) {
             Row(
                 modifier = Modifier

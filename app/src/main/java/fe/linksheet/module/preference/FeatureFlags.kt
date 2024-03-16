@@ -8,11 +8,11 @@ object FeatureFlags : PreferenceDefinition("feature_flag_new_bottom_sheet", "fea
 
     val experimentalUrlBar = boolean("experiment_url_bar")
     val urlPreview = boolean("experiment_url_bar_preview")
+    val declutterUrl = boolean("experiment_url_bar_declutter_url")
 
     val parseShareText = boolean("experiment_share_parse_text", true)
     val allowCustomShareExtras = boolean("experiment_share_allow_custom_share_extras")
     val checkAllExtras = boolean("experiment_share_check_all_extras")
-
 
     init {
         finalize()

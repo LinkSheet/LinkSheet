@@ -1,5 +1,6 @@
 package fe.linksheet.activity
 
+import android.app.admin.DevicePolicyManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -58,7 +59,6 @@ class MainActivity : ComponentActivity() {
     private val app by inject<LinkSheetApp>()
 
 
-
 //    override fun onAttachedToWindow() {
 //        super.onAttachedToWindow()
 //    }
@@ -70,6 +70,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+//        DevicePolicyManager()
 
 //        if (mainViewModel.firstRun.value && BuildConfig.BUILD_TYPE == "release") {
 //            startActivity(Intent(this, OnboardingActivity::class.java))
@@ -85,9 +87,7 @@ class MainActivity : ComponentActivity() {
         initPadding()
         setContentWithKoin()
 
-        if (intent != null && BuildConfig.DEBUG && BuildType.current == BuildType.Debug) {
-            DebugIntentHandler.onCreateMainActivity(intent)
-        }
+
     }
 
     override fun onDestroy() {
@@ -98,6 +98,15 @@ class MainActivity : ComponentActivity() {
     private fun setContentWithKoin() {
         setContentWithKoin {
             val navController = rememberNavController()
+            if (intent != null && BuildConfig.DEBUG && BuildType.current == BuildType.Debug) {
+//                DebugIntentHandler.onCreateMainActivity(intent)
+
+                val navigateTo = intent.extras?.getString("navigate_to")
+                if (navigateTo != null) {
+                    navController.navigate(navigateTo)
+                }
+            }
+
             if (BuildConfig.DEBUG) {
                 navController.addOnDestinationChangedListener { _, destination, _ ->
                     Log.d("Analytics", "Enqueuing nav event to ${destination.route}")
@@ -105,6 +114,11 @@ class MainActivity : ComponentActivity() {
                 }
 
                 app.setActivityEventListener {
+                    navController.navigate(it.toString())
+//                    if(it.toString() != null){
+//
+//                    }
+
 //                    Snackbar.make(window.decorView, it.toString(), Snackbar.LENGTH_SHORT).show()
                 }
             }

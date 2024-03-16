@@ -4,6 +4,5 @@ import android.content.Intent
 
 object DebugIntentHandler {
     fun onCreateMainActivity(intent: Intent) {
-
     }
 }

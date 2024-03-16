@@ -7,6 +7,7 @@
                 <action android:name="fe.linksheet.debug.COPY_URL" />
                 <action android:name="fe.linksheet.debug.RESOLVE_URL" />
                 <action android:name="fe.linksheet.debug.UPDATE_PREF" />
+                <action android:name="fe.linksheet.debug.NAVIGATE" />
             </intent-filter>
         </receiver>
     </application>

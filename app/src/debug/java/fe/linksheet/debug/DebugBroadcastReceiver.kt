@@ -27,6 +27,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
         private const val COPY_URL_BROADCAST = "fe.linksheet.debug.COPY_URL"
         private const val RESOLVE_URL_BROADCAST = "fe.linksheet.debug.RESOLVE_URL"
         const val UPDATE_PREF_BROADCAST = "fe.linksheet.debug.UPDATE_PREF"
+        const val NAVIGATE_BROADCAST = "fe.linksheet.debug.NAVIGATE"
     }
 
     @OptIn(ExperimentalEncodingApi::class)

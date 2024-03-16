@@ -1,10 +1,13 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.annotation.SuppressLint
+import android.app.admin.DevicePolicyManager
 import android.content.Intent
+import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
@@ -51,6 +55,7 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Theme
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
@@ -74,26 +79,31 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        Log.d("CrossProfile", "test")
-//        if (AndroidVersion.AT_LEAST_API_28_P) {
-//            val crossProfileApps = getSystemService<CrossProfileApps>()!!
-//            Log.d("CrossProfile", "$crossProfileApps ${crossProfileApps.targetUserProfiles.size}")
-//
-//            val targetUserProfile = crossProfileApps.targetUserProfiles.firstOrNull()
-//            if (targetUserProfile != null) {
-//                Log.d("CrossProfile", "$targetUserProfile")
-//
+//        val dpm = getsystemservice<devicepolicymanager>()
+//        dpm.addcrossprofileintentfilter()
+
+//        intent.createchooser()
+
+//        log.d("crossprofile", "test")
+        if (AndroidVersion.AT_LEAST_API_28_P) {
+            val crossProfileApps = getSystemService<CrossProfileApps>()!!
+            Log.d("CrossProfile", "$crossProfileApps ${crossProfileApps.targetUserProfiles.size}")
+
+            val targetUserProfile = crossProfileApps.targetUserProfiles.firstOrNull()
+            if (targetUserProfile != null) {
+                Log.d("CrossProfile", "$targetUserProfile")
+
 //                val comp = ComponentName(componentName.packageName, MainActivity::class.java.name)
-//
-////                crossProfileApps.startMainActivity(comp, targetUserProfile)
-////                crossProfileApps.startActivity(comp, targetUserProfile, null)
-//
-////                crossProfileApps.canInteractAcrossProfiles()
-////                if (AndroidVersion.AT_LEAST_API_30_R) {
-////                    startActivity(crossProfileApps.createRequestInteractAcrossProfilesIntent())
-////                }
-//            }
-//        }
+
+//                crossProfileApps.startMainActivity(comp, targetUserProfile)
+//                crossProfileApps.startActivity(comp, targetUserProfile, null)
+
+//                crossProfileApps.canInteractAcrossProfiles()
+                if (AndroidVersion.AT_LEAST_API_30_R) {
+                    startActivity(crossProfileApps.createRequestInteractAcrossProfilesIntent())
+                }
+            }
+        }
 
         initPadding()
 

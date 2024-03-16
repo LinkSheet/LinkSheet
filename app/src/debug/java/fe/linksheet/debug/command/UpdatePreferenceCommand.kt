@@ -14,13 +14,16 @@ import fe.linksheet.LinkSheetApp
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import org.koin.core.component.get
 
 
-object UpdatePreferenceCommand :
-    DebugCommand(DebugBroadcastReceiver.UPDATE_PREF_BROADCAST, UpdatePreferenceCommand::class) {
+object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
+    DebugBroadcastReceiver.UPDATE_PREF_BROADCAST, UpdatePreferenceCommand::class
+) {
 
     override fun handle(context: Context, intent: Intent) {
         val extras = requireNotNull(intent.extras) { "Extras must not be null" }
@@ -63,7 +66,8 @@ object UpdatePreferenceCommand :
     private val repositories by lazy {
         val repositories = setOf(
             Repository(AppPreferences, get<AppPreferenceRepository>()),
-            Repository(FeatureFlags, get<FeatureFlagRepository>())
+            Repository(FeatureFlags, get<FeatureFlagRepository>()),
+            Repository(Experiments, get<ExperimentRepository>())
         )
 
         val merged = mutableMapOf<String, Repository>()

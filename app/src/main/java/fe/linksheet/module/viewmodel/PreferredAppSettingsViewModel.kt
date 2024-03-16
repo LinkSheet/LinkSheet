@@ -14,7 +14,7 @@ import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
-import fe.linksheet.extension.kotlin.mapProducingSideEffect
+import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -39,7 +39,7 @@ class PreferredAppSettingsViewModel(
 
     val searchFilter = MutableStateFlow("")
 
-    private val preferredApps = repository.getAllAlwaysPreferred().mapProducingSideEffect(
+    private val preferredApps = repository.getAllAlwaysPreferred().mapProducingSideEffects(
         transform = { app, sideEffect: ProduceSideEffect<String> ->
             app.groupByNoNullKeys(
                 keySelector = { it.toDisplayActivityInfo(context) },

@@ -110,6 +110,6 @@ fun LibRedirectSettingsRoute(
 @Composable
 private fun instanceUrl(
     instance: String
-) = if (instance == LibRedirectDefault.libRedirectRandomInstanceKey) stringResource(
+) = if (instance == LibRedirectDefault.randomInstance) stringResource(
     id = R.string.random_instance
 ) else instance

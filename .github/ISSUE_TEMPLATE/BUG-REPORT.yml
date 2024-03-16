@@ -15,9 +15,8 @@ body:
   - type: checkboxes
     id: experiments
     attributes:
-      label: I have disabled all experiments
       options:
-        - label: Yes
+        - label: "I have disabled all experiments"
           required: true
   - type: input
     id: version

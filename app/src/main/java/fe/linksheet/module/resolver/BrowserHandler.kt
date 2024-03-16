@@ -11,6 +11,7 @@ import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.redactor.*
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
+import fe.linksheet.util.LinkSheetCompat
 import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first
 
@@ -18,7 +19,7 @@ class BrowserHandler(
     val preferenceRepository: AppPreferenceRepository,
     private val browserResolver: BrowserResolver,
 ) {
-    sealed class BrowserMode(val value: String)  {
+    sealed class BrowserMode(val value: String) {
         data object None : BrowserMode("none")
         data object AlwaysAsk : BrowserMode("always_ask")
         data object SelectedBrowser : BrowserMode("browser")
@@ -33,7 +34,8 @@ class BrowserHandler(
         }
     }
 
-    data class BrowserModeInfo(val browserMode: BrowserMode, val resolveInfo: ResolveInfo?) : Redactable<BrowserModeInfo> {
+    data class BrowserModeInfo(val browserMode: BrowserMode, val resolveInfo: ResolveInfo?) :
+        Redactable<BrowserModeInfo> {
         override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
             return builder.commaSeparated {
 //                item {
@@ -58,9 +60,7 @@ class BrowserHandler(
         val browsers = browserResolver.queryBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
 
-        resolveList.removeIf {
-            it.activityInfo.packageName == "fe.linksheet.compat.debug"
-        }
+        resolveList.removeIf { LinkSheetCompat.isCompat(it) }
 
         return when (browserMode) {
             is BrowserMode.AlwaysAsk -> BrowserModeInfo(browserMode, null)
@@ -92,7 +92,7 @@ class BrowserHandler(
     private fun removeBrowsers(
         browsers: Map<String, ResolveInfo>,
         currentResolveList: MutableList<ResolveInfo>,
-        exceptPackages: Set<String> = emptySet()
+        exceptPackages: Set<String> = emptySet(),
     ) {
         if (exceptPackages.isNotEmpty() || currentResolveList.size > browsers.size) {
             // if exceptPackages.size == 0 && currentResolveList > browsers means we are in BrowserMode.None,
@@ -107,7 +107,7 @@ class BrowserHandler(
 
     private fun addAllBrowsersToResolveList(
         browsers: Map<String, ResolveInfo>,
-        currentResolveList: MutableList<ResolveInfo>
+        currentResolveList: MutableList<ResolveInfo>,
     ) {
         val resolvedInfos = currentResolveList.toPackageKeyedMap()
         browsers.forEach { (pkg, resolveInfo) ->

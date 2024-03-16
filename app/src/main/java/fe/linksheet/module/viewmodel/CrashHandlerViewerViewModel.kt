@@ -4,7 +4,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import androidx.core.content.getSystemService
 import com.google.gson.Gson
-import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.viewmodel.base.BaseViewModel

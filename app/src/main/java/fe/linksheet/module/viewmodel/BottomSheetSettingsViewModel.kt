@@ -5,8 +5,8 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 

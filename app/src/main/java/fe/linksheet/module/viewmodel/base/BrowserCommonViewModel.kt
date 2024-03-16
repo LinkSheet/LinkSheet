@@ -1,9 +1,8 @@
 package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
-import androidx.compose.runtime.snapshots.SnapshotStateMap
 import fe.kotlin.extension.map.filterIf
-import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow

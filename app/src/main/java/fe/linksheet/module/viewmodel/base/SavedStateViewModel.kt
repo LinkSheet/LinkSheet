@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.SavedStateHandle
 import fe.android.compose.route.util.RouteData
-import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KProperty1

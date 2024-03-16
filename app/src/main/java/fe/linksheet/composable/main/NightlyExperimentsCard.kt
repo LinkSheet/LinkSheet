@@ -1,12 +1,6 @@
 package fe.linksheet.composable.main
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NewReleases
@@ -19,8 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.devBottomSheetExperimentRoute
+import fe.linksheet.experimentSettingsRoute
 import fe.linksheet.extension.compose.clickable
 import fe.linksheet.featureFlagSettingsRoute
 import fe.linksheet.ui.Typography
@@ -38,7 +31,7 @@ fun NightlyExperimentsCard(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 80.dp)
-                .clickable { navController.navigate(featureFlagSettingsRoute) },
+                .clickable { navController.navigate(experimentSettingsRoute) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(10.dp))

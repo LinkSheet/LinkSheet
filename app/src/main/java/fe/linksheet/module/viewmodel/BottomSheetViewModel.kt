@@ -26,10 +26,12 @@ import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.redactor.HashProcessor
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.FeatureFlagRepository
-import fe.linksheet.module.preference.FeatureFlags
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
+import fe.linksheet.module.preference.flags.FeatureFlagRepository
+import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolver
@@ -49,6 +51,7 @@ class BottomSheetViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
     featureFlagRepository: FeatureFlagRepository,
+    experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
@@ -94,8 +97,8 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
-    val experimentalUrlBar = featureFlagRepository.asState(FeatureFlags.experimentalUrlBar)
-    val declutterUrl = featureFlagRepository.asState(FeatureFlags.declutterUrl)
+    val experimentalUrlBar = experimentRepository.asState(Experiments.experimentalUrlBar)
+    val declutterUrl = experimentRepository.asState(Experiments.declutterUrl)
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
         val canAccessInternet = kotlin.runCatching {

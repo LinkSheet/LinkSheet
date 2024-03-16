@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.browser.customtabs.CustomTabsIntent
 import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
@@ -19,6 +21,12 @@ import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.*
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
+import fe.linksheet.module.preference.flags.FeatureFlagRepository
+import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -42,7 +50,8 @@ import org.koin.core.component.KoinComponent
 class IntentResolver(
     val context: Context,
     val preferenceRepository: AppPreferenceRepository,
-    val featureFlagRepository: FeatureFlagRepository,
+    featureFlagRepository: FeatureFlagRepository,
+    experimentRepository: ExperimentRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
@@ -131,10 +140,11 @@ class IntentResolver(
 
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
-    private val previewUrl = featureFlagRepository.asState(FeatureFlags.urlPreview)
+    private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
     private val parseShareText = featureFlagRepository.asState(FeatureFlags.parseShareText)
-    private val allowCustomShareExtras = featureFlagRepository.asState(FeatureFlags.allowCustomShareExtras)
-    private val checkAllExtras = featureFlagRepository.asState(FeatureFlags.checkAllExtras)
+    private val allowCustomShareExtras = experimentRepository.asState(Experiments.allowCustomShareExtras)
+    private val checkAllExtras = experimentRepository.asState(Experiments.checkAllExtras)
+
 
     companion object {
         private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }

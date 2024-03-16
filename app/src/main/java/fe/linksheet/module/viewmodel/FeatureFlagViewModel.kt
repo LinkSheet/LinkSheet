@@ -1,22 +1,33 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import fe.android.preference.helper.Preference
-
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.FeatureFlagRepository
-import fe.linksheet.module.preference.FeatureFlags
+import fe.android.preference.helper.compose.StatePreference
+import fe.linksheet.R
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.flags.FeatureFlagRepository
+import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class FeatureFlagViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository,
-    featureFlagRepository: FeatureFlagRepository
+    featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel(preferenceRepository) {
 
+    // TODO: Cleanup
     val linkSheetCompat = featureFlagRepository.asState(FeatureFlags.linkSheetCompat)
 
-    val flags = FeatureFlags.all.filter { it.value.clazz == Boolean::class }.map {
-        it.key to featureFlagRepository.asState(it.value as Preference.Boolean)
-    }.toMap()
+    val flags = setOf(
+        Flag.Full(
+            featureFlagRepository.asState(FeatureFlags.linkSheetCompat),
+            R.string.enable_linksheet_compat,
+            R.string.enable_linksheet_compat_explainer
+        ),
+        Flag.Simple(featureFlagRepository.asState(FeatureFlags.parseShareText), "Parse shared text if no url is found")
+    )
+}
+
+sealed class Flag(val pref: StatePreference<Boolean>) {
+    class Full(pref: StatePreference<Boolean>, val headlineId: Int, val subtitleId: Int) : Flag(pref)
+    class Simple(pref: StatePreference<Boolean>, val text: String) : Flag(pref)
 }

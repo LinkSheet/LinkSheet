@@ -2,8 +2,8 @@ package fe.linksheet.module.redactor
 
 import fe.kotlin.extension.string.decodeHexOrThrow
 import fe.linksheet.extension.koin.single
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.util.CryptoUtil
 import org.koin.dsl.module

@@ -242,6 +242,7 @@ dependencies {
     implementation(COIL)
     implementation(COIL.compose)
 
+    runtimeOnly(AndroidX.compose.material.icons.extended)
     implementation(libs.ipaddress)
 //    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
 

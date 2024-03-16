@@ -4,8 +4,8 @@ import androidx.lifecycle.Lifecycle
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.lifecycle.Service
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
 import org.koin.dsl.module
 

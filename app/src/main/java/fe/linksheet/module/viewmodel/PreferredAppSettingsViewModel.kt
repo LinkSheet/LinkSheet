@@ -3,7 +3,6 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
@@ -16,7 +15,7 @@ import fe.linksheet.extension.android.launchIO
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.extension.mapProducingSideEffect
-import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo

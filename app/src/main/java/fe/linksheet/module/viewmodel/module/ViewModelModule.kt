@@ -28,6 +28,7 @@ import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import fe.linksheet.module.viewmodel.SettingsViewModel
+import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -62,6 +63,7 @@ val viewModelModule = module {
     viewModelOf(::DevSettingsViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::NotificationSettingsViewModel)
+    viewModelOf(::ExperimentsViewModel)
 
     singleOf(::LogViewCommon)
 }

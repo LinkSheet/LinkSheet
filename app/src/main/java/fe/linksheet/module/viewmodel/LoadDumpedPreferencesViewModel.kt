@@ -2,9 +2,8 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import android.util.Log
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 

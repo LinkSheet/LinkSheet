@@ -45,7 +45,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
         }
 
         if (intent.action == RESOLVE_URL_BROADCAST) {
-            val viewModel = BottomSheetViewModel(get(), get(), get(), get(), get(), get(), SavedStateHandle())
+            val viewModel = BottomSheetViewModel(get(), get(), get(), get(), get(), get(), get(), SavedStateHandle())
             val url = intent.extras?.getString("url")
 
             val uri = Uri.parse(url)

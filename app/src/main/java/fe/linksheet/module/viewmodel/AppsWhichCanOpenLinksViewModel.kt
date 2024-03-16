@@ -8,11 +8,8 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 
 import fe.kotlin.extension.iterable.filterIf
-import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.compose.getDisplayActivityInfos
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.FeatureFlagRepository
-import fe.linksheet.module.preference.FeatureFlags
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel

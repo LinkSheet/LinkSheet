@@ -27,9 +27,9 @@ import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsClient
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.FeatureFlagRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser

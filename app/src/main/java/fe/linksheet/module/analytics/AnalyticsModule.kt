@@ -10,8 +10,8 @@ import fe.linksheet.module.analytics.client.EnvironmentInfo
 import fe.linksheet.module.lifecycle.Service
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel

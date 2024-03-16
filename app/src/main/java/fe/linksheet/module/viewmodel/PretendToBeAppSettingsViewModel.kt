@@ -7,7 +7,7 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion

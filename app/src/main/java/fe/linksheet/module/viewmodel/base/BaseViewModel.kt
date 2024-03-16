@@ -2,8 +2,8 @@ package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.ViewModel
 
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 
 abstract class BaseViewModel(
     preferenceRepository: AppPreferenceRepository,

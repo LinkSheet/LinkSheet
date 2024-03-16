@@ -1,4 +1,4 @@
-package fe.linksheet.module.preference
+package fe.linksheet.module.preference.app
 
 
 import com.google.gson.JsonArray
@@ -6,6 +6,7 @@ import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.analytics.TelemetryLevel
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.redactor.PackageProcessor
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.BrowserHandler

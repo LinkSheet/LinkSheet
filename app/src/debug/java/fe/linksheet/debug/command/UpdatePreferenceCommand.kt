@@ -12,10 +12,10 @@ import fe.kotlin.extension.iterable.onEachFailure
 import fe.kotlin.extension.iterable.toSuccess
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.debug.DebugBroadcastReceiver
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
-import fe.linksheet.module.preference.FeatureFlagRepository
-import fe.linksheet.module.preference.FeatureFlags
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.flags.FeatureFlagRepository
+import fe.linksheet.module.preference.flags.FeatureFlags
 import org.koin.core.component.get
 
 

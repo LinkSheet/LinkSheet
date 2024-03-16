@@ -6,8 +6,8 @@ import fe.gson.dsl.jsonObject
 import fe.gson.extension.json.`object`.plus
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.module.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.AppPreferences
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.util.AppInfo
 

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.ImportExport
@@ -19,6 +20,7 @@ import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.experimentSettingsRoute
 import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
 
@@ -58,6 +60,21 @@ fun AdvancedSettingsRoute(
                         ColoredIcon(
                             icon = Icons.Default.Flag,
                             descriptionId = R.string.feature_flags
+                        )
+                    }
+                )
+            }
+
+            item(key = "experiments") {
+                SettingsItemRow(
+                    navController = navController,
+                    navigateTo = experimentSettingsRoute,
+                    headlineId = R.string.experiments,
+                    subtitleId = R.string.experiments_explainer,
+                    image = {
+                        ColoredIcon(
+                            icon = Icons.Default.Android,
+                            descriptionId = R.string.experiments
                         )
                     }
                 )

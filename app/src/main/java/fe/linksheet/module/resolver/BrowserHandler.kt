@@ -3,14 +3,13 @@ package fe.linksheet.module.resolver
 import android.content.pm.ResolveInfo
 import fe.android.preference.helper.OptionTypeMapper
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.module.preference.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.redactor.*
-import fe.linksheet.module.redactor.Package
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first

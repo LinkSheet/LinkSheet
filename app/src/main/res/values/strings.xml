@@ -320,7 +320,7 @@
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="get_started">Get started</string>
     <string name="next">Next</string>
-    <string name="feature_flags">Experiments</string>
+    <string name="feature_flags">Feature flags</string>
     <string name="feature_flags_explainer">Enable or disable experimental features</string>
     <string name="background_image">Background image</string>
     <string name="onboarding1_headline">Welcome to</string>
@@ -628,5 +628,12 @@
         the \"www\" subdomain if present
     </string>
     <string name="nightly_experiments_card">Nightly experiments</string>
-    <string name="nightly_experiments_card_explainer">Tap here to try currently available experiments.</string>
+    <string name="nightly_experiments_card_explainer">Tap to check out experiments / features currently in development</string>
+    <string name="experiments">Experiments</string>
+    <string name="experiments_explainer">Try features currently in development</string>
+    <string name="reset">Reset</string>
+    <string name="experiments_explainer_2">The following features / experiments are under active development and may not
+        work at all. Please do not report bugs regarding these on Github. If you want to provide feedback, do so on
+        Discord.
+    </string>
 </resources>

@@ -1,4 +1,4 @@
-package fe.linksheet.module.preference
+package fe.linksheet.module.preference.app
 
 import android.content.Context
 import fe.android.preference.helper.Preference

@@ -8,7 +8,9 @@ body:
     id: description
     attributes:
       label: Bug description
-      description: Describe the bug you encountered (and the steps to reproduce it) and what you expected to happen instead.
+      description: |
+        Describe the bug you encountered (and the steps to reproduce it) and what you expected to happen instead. 
+        Please provide feedback regarding experiments on [Discord](https://discord.gg/XndZet2pWF) instead of here.
       placeholder: What happened?
     validations:
       required: true
@@ -29,7 +31,7 @@ body:
     id: device
     attributes:
       label: Device
-      description: What device are you using?
+      description: Which device are you using?
       placeholder: Google Pixel 7
     validations:
       required: true

@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.kotlin
 
 fun <T> MutableList<T>.setup(elements: Iterable<T>) {
     this.clear()

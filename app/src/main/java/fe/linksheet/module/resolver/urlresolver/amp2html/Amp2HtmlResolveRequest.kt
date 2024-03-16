@@ -3,11 +3,10 @@ package fe.linksheet.module.resolver.urlresolver.amp2html
 import fe.amp2htmlkt.Amp2Html
 import fe.httpkt.Request
 import fe.httpkt.ext.getGZIPOrDefaultStream
-import fe.httpkt.isHttpSuccess
+import fe.httpkt.ext.isHttpSuccess
 import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.extension.java.isHtml
 import fe.linksheet.extension.koin.single
-import fe.linksheet.module.log.Logger
-import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
@@ -41,8 +40,12 @@ class Amp2HtmlResolveRequest(
             return Result.failure(e)
         }
 
-        if (!isHttpSuccess(result.responseCode)) {
+        if (!result.isHttpSuccess()) {
             return Result.failure(ResolveRequestException(result.responseCode))
+        }
+
+        if (!result.isHtml()) {
+            return Result.success(ResolveResultType.NothingToResolve)
         }
 
         val nonAmpLink = result.getGZIPOrDefaultStream().use { Amp2Html.getNonAmpLink(it, URL(url).host) }

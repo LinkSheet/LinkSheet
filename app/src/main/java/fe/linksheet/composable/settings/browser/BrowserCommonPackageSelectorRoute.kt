@@ -19,7 +19,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.CheckboxRow
 import fe.linksheet.composable.util.mapState
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel

@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.kotlin
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

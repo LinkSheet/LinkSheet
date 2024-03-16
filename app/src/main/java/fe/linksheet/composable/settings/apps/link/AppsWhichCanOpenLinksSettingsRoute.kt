@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -34,7 +32,7 @@ import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo

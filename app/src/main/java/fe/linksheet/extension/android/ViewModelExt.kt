@@ -3,7 +3,7 @@ package fe.linksheet.extension.android
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fe.linksheet.extension.setup
+import fe.linksheet.extension.kotlin.setup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

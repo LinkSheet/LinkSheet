@@ -5,7 +5,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ComponentInfo
 import android.content.pm.ResolveInfo
 import android.net.Uri
-import fe.linksheet.extension.appendHashed
+import fe.linksheet.extension.kotlin.appendHashed
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.resolver.DisplayActivityInfo

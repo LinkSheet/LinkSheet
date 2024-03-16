@@ -30,7 +30,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel

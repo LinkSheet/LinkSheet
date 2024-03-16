@@ -152,7 +152,8 @@ class BottomSheetViewModel(
     }
 
     private fun resolveFailureString(name: String, error: Any?): String {
-        return context.getString(R.string.resolve_failed, name, error)
+        val str = if (error is Throwable) "${error::class.java.simpleName}(${error.message})" else error.toString()
+        return context.getString(R.string.resolve_failed, name, str)
     }
 
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {

@@ -1,5 +1,6 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.kotlin
 
+import fe.linksheet.extension.java.hash
 import javax.crypto.Mac
 
 fun StringBuilder.appendHashed(mac: Mac, string: String?): StringBuilder = append(string?.let { mac.hash(it) })

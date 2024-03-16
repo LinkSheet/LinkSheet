@@ -1,6 +1,6 @@
 package fe.linksheet.module.redactor
 
-import fe.linksheet.extension.hash
+import fe.linksheet.extension.java.hash
 import fe.stringbuilder.util.*
 import java.io.IOException
 import javax.crypto.Mac

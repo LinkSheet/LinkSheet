@@ -32,7 +32,7 @@ import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SettingSpacerText
 import fe.linksheet.extension.compose.enabled
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
 import fe.linksheet.util.HostUtil

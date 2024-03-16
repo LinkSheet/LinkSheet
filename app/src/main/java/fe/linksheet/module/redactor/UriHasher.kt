@@ -2,8 +2,8 @@ package fe.linksheet.module.redactor
 
 import fe.kotlin.extension.asString
 import fe.kotlin.extension.iterable.forEachWithInfo
-import fe.linksheet.extension.appendHashed
-import fe.linksheet.extension.appendHashedTrim
+import fe.linksheet.extension.kotlin.appendHashed
+import fe.linksheet.extension.kotlin.appendHashedTrim
 import fe.uribuilder.UriParseResult
 import fe.uribuilder.UriParser
 import org.apache.hc.core5.net.InetAddressUtils

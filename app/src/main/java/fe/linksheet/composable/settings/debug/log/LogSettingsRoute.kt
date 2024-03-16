@@ -20,7 +20,7 @@ import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.logTextViewerSettingsRoute
 import fe.linksheet.module.viewmodel.LogSettingsViewModel

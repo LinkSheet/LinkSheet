@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.kotlin
 
 
 fun <T> Result.Companion.failure(msg: String? = null): Result<T> {

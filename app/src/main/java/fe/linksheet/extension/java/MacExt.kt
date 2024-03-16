@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.java
 
 import javax.crypto.Mac
 

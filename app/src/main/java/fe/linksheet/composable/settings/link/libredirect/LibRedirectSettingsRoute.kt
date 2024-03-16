@@ -26,7 +26,7 @@ import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.Texts
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.libRedirectServiceSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault

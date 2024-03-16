@@ -2,7 +2,6 @@ package fe.linksheet.composable.settings.debug.log
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -26,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -43,7 +41,7 @@ import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.collectOnIO
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel

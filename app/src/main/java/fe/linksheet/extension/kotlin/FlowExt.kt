@@ -1,4 +1,4 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.kotlin
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable

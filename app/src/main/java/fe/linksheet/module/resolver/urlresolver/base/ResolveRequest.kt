@@ -10,7 +10,7 @@ import fe.linksheet.module.log.Logger
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import java.io.IOException
 
-class ResolveRequestException(val statusCode: Int? = null) : Exception()
+class ResolveRequestException(statusCode: Int? = null) : Exception("$statusCode")
 
 abstract class ResolveRequest(
     apiUrl: String,

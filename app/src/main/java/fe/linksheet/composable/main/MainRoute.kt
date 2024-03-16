@@ -27,6 +27,7 @@ import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.util.AppSignature
+import fe.linksheet.util.BuildType
 import fe.linksheet.util.Results
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.delay
@@ -112,9 +113,9 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
                 Spacer(modifier = Modifier.height(5.dp))
             }
 
-            if (viewModel.devBottomSheetExperimentCard()) {
+            if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
                 cardItem {
-                    DevBottomSheetExperimentCard(navController = navController)
+                    NightlyExperimentsCard(navController = navController)
                 }
             }
 

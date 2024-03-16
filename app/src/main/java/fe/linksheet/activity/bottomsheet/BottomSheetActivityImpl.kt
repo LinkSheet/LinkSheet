@@ -186,6 +186,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 bottomSheetViewModel = viewModel,
                 result = result as BottomSheetResult.SuccessResult,
                 declutterUrl = viewModel.declutterUrl(),
+                experimentalUrlBar = viewModel.experimentalUrlBar(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
                 hideDrawer = hideDrawer,
@@ -224,6 +225,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: BottomSheetResult.SuccessResult,
+        experimentalUrlBar: Boolean,
         declutterUrl: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
@@ -247,61 +249,108 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
         if (previewUrl && result.uri != null) {
             val uriSuccess = result as? BottomSheetResult.BottomSheetSuccessResult
-            val uriString = if (declutterUrl) {
-                UriUtil.declutter(result.uri)
-            } else result.uri.toString()
+            if(experimentalUrlBar){
+                val uriString = if (declutterUrl) {
+                    UriUtil.declutter(result.uri)
+                } else result.uri.toString()
 
-            UrlBar(
-                uri = uriString,
-                unfurlResult = uriSuccess?.unfurlResult,
-                downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
-                libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
-                copyUri = {
-                    viewModel.clipboardManager.setText("URL", result.uri.toString())
+                ExperimentalUrlBar(
+                    uri = uriString,
+                    unfurlResult = uriSuccess?.unfurlResult,
+                    downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
+                    libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
+                    copyUri = {
+                        viewModel.clipboardManager.setText("URL", result.uri.toString())
 
-                    if (bottomSheetViewModel.urlCopiedToast()) {
-                        showToast(R.string.url_copied)
-                    }
-
-                    if (bottomSheetViewModel.hideAfterCopying()) {
-                        hideDrawer()
-                    }
-                },
-                shareUri = {
-                    startActivity(shareUri(result.uri))
-                    finish()
-                },
-                downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                    {
-                        bottomSheetViewModel.startDownload(
-                            resources, result.uri,
-                            result.downloadable as Downloader.DownloadCheckResult.Downloadable
-                        )
-
-                        if (!bottomSheetViewModel.downloadStartedToast()) {
-                            showToast(R.string.download_started)
+                        if (bottomSheetViewModel.urlCopiedToast()) {
+                            showToast(R.string.url_copied)
                         }
 
-                        hideDrawer()
-                    }
-                } else null,
-                ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                    {
-                        val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
-
+                        if (bottomSheetViewModel.hideAfterCopying()) {
+                            hideDrawer()
+                        }
+                    },
+                    shareUri = {
+                        startActivity(shareUri(result.uri))
                         finish()
-                        startActivity(
-                            selfIntent(
-                                redirected.originalUri,
-                                bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                    },
+                    downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
+                        {
+                            bottomSheetViewModel.startDownload(
+                                resources, result.uri,
+                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
                             )
-                        )
-                    }
-                } else null
-            )
 
+                            if (!bottomSheetViewModel.downloadStartedToast()) {
+                                showToast(R.string.download_started)
+                            }
 
-//            Image(painter = , contentDescription = )
+                            hideDrawer()
+                        }
+                    } else null,
+                    ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
+                        {
+                            val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+
+                            finish()
+                            startActivity(
+                                selfIntent(
+                                    redirected.originalUri,
+                                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                                )
+                            )
+                        }
+                    } else null
+                )
+            } else {
+                UrlBar(
+                    uri = result.uri,
+                    downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
+                    libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
+                    copyUri = {
+                        viewModel.clipboardManager.setText("URL", result.uri.toString())
+
+                        if (bottomSheetViewModel.urlCopiedToast()) {
+                            showToast(R.string.url_copied)
+                        }
+
+                        if (bottomSheetViewModel.hideAfterCopying()) {
+                            hideDrawer()
+                        }
+                    },
+                    shareUri = {
+                        startActivity(shareUri(result.uri))
+                        finish()
+                    },
+                    downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
+                        {
+                            bottomSheetViewModel.startDownload(
+                                resources, result.uri,
+                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                            )
+
+                            if (!bottomSheetViewModel.downloadStartedToast()) {
+                                showToast(R.string.download_started)
+                            }
+
+                            hideDrawer()
+                        }
+                    } else null,
+                    ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
+                        {
+                            val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+
+                            finish()
+                            startActivity(
+                                selfIntent(
+                                    redirected.originalUri,
+                                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                                )
+                            )
+                        }
+                    } else null
+                )
+            }
         }
 
         if (hasPreferredApp && result is BottomSheetResult.BottomSheetSuccessResult) {

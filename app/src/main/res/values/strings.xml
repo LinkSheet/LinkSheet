@@ -291,7 +291,7 @@
     </string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Advanced settings like feature flags and export/import</string>
+    <string name="advanced_explainer">Advanced settings like experiments and export/import</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
@@ -320,7 +320,7 @@
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="get_started">Get started</string>
     <string name="next">Next</string>
-    <string name="feature_flags">Feature flags</string>
+    <string name="feature_flags">Experiments</string>
     <string name="feature_flags_explainer">Enable or disable experimental features</string>
     <string name="background_image">Background image</string>
     <string name="onboarding1_headline">Welcome to</string>
@@ -631,4 +631,6 @@
     <string name="declutter_url_explainer" translatable="false">Declutter the url in the bottom sheet by removing the scheme (if https) and
         the \"www\" subdomain if present
     </string>
+    <string name="nightly_experiments_card">Nightly experiments</string>
+    <string name="nightly_experiments_card_explainer">Tap here to try currently available experiments.</string>
 </resources>

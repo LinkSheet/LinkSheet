@@ -17,7 +17,8 @@ object AppPreferences : PreferenceDefinition(
     "enable_copy_button",
     "single_tap",
     "enable_send_button",
-    "show_new_bottom_sheet_banner"
+    "show_new_bottom_sheet_banner",
+    "show_dev_bottom_sheet_experiment_card"
 ) {
     val hideAfterCopying = boolean("hide_after_copying")
     val usageStatsSorting = boolean("usage_stats_sorting")
@@ -101,8 +102,6 @@ object AppPreferences : PreferenceDefinition(
 
     val firstRun = boolean("first_run", true)
     val showDiscordBanner = boolean("show_discord_banner", true)
-
-    val devBottomSheetExperimentCard = boolean("show_dev_bottom_sheet_experiment_card", true)
 
     val useDevBottomSheet = boolean("use_dev_bottom_sheet")
     val donateCardDismissed = boolean("donate_card_dismissed")

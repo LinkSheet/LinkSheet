@@ -53,7 +53,6 @@ class MainViewModel(
     val showDiscordBanner = preferenceRepository.asState(AppPreferences.showDiscordBanner)
     val donateCardDismissed = preferenceRepository.asState(AppPreferences.donateCardDismissed)
     var theme = preferenceRepository.asState(AppPreferences.theme)
-    val devBottomSheetExperimentCard = preferenceRepository.asState(AppPreferences.devBottomSheetExperimentCard)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

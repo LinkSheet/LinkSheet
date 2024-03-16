@@ -3,7 +3,9 @@ package fe.linksheet.util
 import android.content.Intent
 import android.net.Uri
 import android.util.Patterns
+import android.webkit.URLUtil
 import fe.kotlin.extension.iterable.mapToSet
+import mozilla.components.support.ktx.util.URLStringUtils
 
 object UriUtil {
     private val protocols = setOf("http", "https")
@@ -11,35 +13,31 @@ object UriUtil {
         Intent(Intent.ACTION_VIEW, Uri.fromParts(it, "", "")).addCategory(Intent.CATEGORY_BROWSABLE)
     }
 
-    fun parseWebUri(url: String): Uri? {
-        val isWeb = protocols.any { url.startsWith(it) }
-        if (!isWeb) return null
+    fun parseWebUriStrict(url: String): Uri? {
+        if (!isWebStrict(url)) return null
 
         return if (Patterns.WEB_URL.matcher(url).matches()) {
             runCatching { Uri.parse(url) }.getOrNull()
         } else null
     }
 
+    fun isWebStrict(url: String, allowInsecure: Boolean = true): Boolean {
+        return (URLUtil.isHttpUrl(url) && allowInsecure) || URLUtil.isHttpsUrl(url)
+    }
+
     /**
      * Does not support "rtsp" and "ftp"
      */
+    @Deprecated(message = "Method needs refactoring")
     fun hasWebScheme(intent: Intent): Boolean {
         return webSchemeIntents.any { it.scheme == intent.scheme }
     }
 
-    private const val HTTPS_PREFIX = "https://"
-    private const val WWW_PREFIX = "www."
-
     fun declutter(uri: Uri): String {
-        var str = uri.toString()
-        if (str.startsWith(HTTPS_PREFIX)) {
-            str = str.substring(HTTPS_PREFIX.length)
+        val str = uri.toString()
+        if (isWebStrict(str, allowInsecure = false)) {
+            return URLStringUtils.toDisplayUrl(str).toString()
         }
-
-        if (str.startsWith(WWW_PREFIX)) {
-            str = str.substring(WWW_PREFIX.length)
-        }
-
         return str
     }
 }

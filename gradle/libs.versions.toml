@@ -148,3 +148,5 @@ com-gitlab-grrfe-gson-ext = "com.gitlab.grrfe:gson-ext:_"
 unfurl = "me.saket.unfurl:unfurl:_"
 
 unfurl-social = "me.saket.unfurl:unfurl-social:_"
+
+support-utils = "org.mozilla.components:support-utils:_"

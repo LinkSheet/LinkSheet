@@ -177,7 +177,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinV
 }
 
 private fun getClipboardUrl(clipboardManager: ClipboardManager): Uri? {
-    return clipboardManager.getText()?.text?.let { text -> UriUtil.parseWebUri(text) }
+    return clipboardManager.getText()?.text?.let { text -> UriUtil.parseWebUriStrict(text) }
 }
 
 private fun LazyListScope.cardItem(

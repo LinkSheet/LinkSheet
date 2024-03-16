@@ -44,9 +44,7 @@ sealed class BottomSheetResult(val uri: Uri?) {
         }
     }
 
-    class BottomSheetNoHandlersFound(uri: Uri?) : BottomSheetResult(uri)
-
-    data object BottomSheetNoDataPassed : BottomSheetResult(null)
+    class BottomSheetNoHandlersFound(uri: Uri? = null) : BottomSheetResult(uri)
 
     class BottomSheetWebSearchResult(val query: String, intent: Intent, resolved: List<DisplayActivityInfo>) :
         SuccessResult(null, intent, resolved) {

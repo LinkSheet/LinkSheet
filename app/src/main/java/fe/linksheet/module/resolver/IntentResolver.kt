@@ -11,7 +11,6 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
-import fe.linksheet.extension.android.IntentExt.getUri
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
@@ -32,16 +31,18 @@ import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
+import fe.linksheet.util.IntentParser
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.saket.unfurl.Unfurler
+import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 
 class IntentResolver(
     val context: Context,
     val preferenceRepository: AppPreferenceRepository,
-    val featureFlagRepository: FeatureFlagRepository ,
+    val featureFlagRepository: FeatureFlagRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
@@ -131,6 +132,9 @@ class IntentResolver(
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = featureFlagRepository.asState(FeatureFlags.urlPreview)
+    private val parseShareText = featureFlagRepository.asState(FeatureFlags.parseShareText)
+    private val allowCustomShareExtras = featureFlagRepository.asState(FeatureFlags.allowCustomShareExtras)
+    private val checkAllExtras = featureFlagRepository.asState(FeatureFlags.checkAllExtras)
 
     companion object {
         private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }
@@ -138,27 +142,33 @@ class IntentResolver(
         private val unfurler by lazy { Unfurler() }
     }
 
-    suspend fun resolveIfEnabled(intent: Intent, referrer: Uri?, canAccessInternet: Boolean): BottomSheetResult {
+    suspend fun resolveIfEnabled(intent: SafeIntent, referrer: Uri?, canAccessInternet: Boolean): BottomSheetResult {
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
 //        val x = intent
         urlResolverCache.clear()
 
+        var startUri: Uri? = null
         if (intent.action == Intent.ACTION_WEB_SEARCH) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
+            val query = IntentParser.parseSearchIntent(intent)
             if (query != null) {
-                val newIntent = intent
-                    .newIntent(Intent.ACTION_WEB_SEARCH, null, true)
-                    .putExtra(SearchManager.QUERY, query)
+                val uri = IntentParser.tryParse(query)
+                if (uri == null) {
+                    val newIntent = intent.unsafe
+                        .newIntent(Intent.ACTION_WEB_SEARCH, null, true)
+                        .putExtra(SearchManager.QUERY, query)
 
-                val resolvedList = context.packageManager
-                    .queryResolveInfosByIntent(newIntent, true)
-                    .toDisplayActivityInfos(context, true)
+                    val resolvedList = context.packageManager
+                        .queryResolveInfosByIntent(newIntent, true)
+                        .toDisplayActivityInfos(context, true)
 
-                return BottomSheetResult.BottomSheetWebSearchResult(
-                    query,
-                    newIntent,
-                    resolvedList
-                )
+                    return BottomSheetResult.BottomSheetWebSearchResult(
+                        query,
+                        newIntent,
+                        resolvedList
+                    )
+                } else {
+                    startUri = uri
+                }
             }
         }
 
@@ -170,11 +180,27 @@ class IntentResolver(
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        var uri = modifyUri(intent.getUri(), resolveEmbeds(), useClearUrls(), useFastForwardRules())
+        if (intent.action == Intent.ACTION_SEND) {
+            startUri = IntentParser.parseSendAction(
+                intent,
+                allowCustomExtras = allowCustomShareExtras(),
+                tryParseAllExtras = checkAllExtras(),
+                parseText = parseShareText()
+            )
+        } else if (intent.action == Intent.ACTION_VIEW) {
+            startUri = IntentParser.parseViewAction(intent)
+        }
+
+        if (startUri == null) {
+            logger.error("Failed to parse intent ${intent.action}")
+            return BottomSheetResult.BottomSheetNoHandlersFound()
+        }
+
+        var uri = modifyUri(startUri, resolveEmbeds(), useClearUrls(), useFastForwardRules())
 
         if (uri == null) {
             logger.error("Uri is null, something probably went very wrong")
-            return BottomSheetResult.BottomSheetNoDataPassed
+            return BottomSheetResult.BottomSheetNoHandlersFound()
         }
 
 //        var followRedirectsResult: Result<ResolveType>
@@ -267,7 +293,7 @@ class IntentResolver(
             referrer, inAppBrowserSettings()
         )
 
-        val newIntent = intent.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
+        val newIntent = intent.unsafe.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
 //                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")

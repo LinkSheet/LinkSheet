@@ -40,6 +40,7 @@ import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
+import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*
@@ -102,10 +103,11 @@ class BottomSheetViewModel(
         val canAccessInternet = kotlin.runCatching {
             connectivityManager.canAccessInternet()
         }.onFailure {
+            logger.error(it)
             it.printStackTrace()
         }.getOrDefault(true)
 
-        intentResolver.resolveIfEnabled(intent, referrer, canAccessInternet).apply {
+        intentResolver.resolveIfEnabled(intent.toSafeIntent(), referrer, canAccessInternet).apply {
             resolveResult = this
         }
     }
@@ -189,7 +191,7 @@ class BottomSheetViewModel(
     fun startDownload(
         resources: Resources,
         uri: Uri?,
-        downloadable: Downloader.DownloadCheckResult.Downloadable
+        downloadable: Downloader.DownloadCheckResult.Downloadable,
     ) {
         val path =
             "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"

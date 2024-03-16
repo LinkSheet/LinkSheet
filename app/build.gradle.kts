@@ -296,6 +296,8 @@ dependencies {
     implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
+    implementation (libs.support.utils)
+
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)
     testImplementation(kotlin("test"))

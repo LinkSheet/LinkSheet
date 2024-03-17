@@ -15,11 +15,15 @@ object Experiments : PreferenceDefinition() {
     val allowCustomShareExtras = boolean("experiment_share_allow_custom_share_extras")
     val checkAllExtras = boolean("experiment_share_check_all_extras")
 
+    val newQueryManager = boolean("experiment_new_query_manager")
+
+
     // TODO: Enforce type
     init {
         experiments = listOf(
             Experiment("enhanced_url_bar", experimentalUrlBar, urlPreview, declutterUrl),
-            Experiment("share_to", allowCustomShareExtras, checkAllExtras)
+            Experiment("share_to", allowCustomShareExtras, checkAllExtras),
+            Experiment("new_query_manager", newQueryManager)
         )
 
         finalize()

@@ -199,7 +199,10 @@ android {
     }
 
     val main by sourceSets
-    main.java.srcDir("src/main/compat")
+    for (it in setOf("compat", "experiment")) {
+        main.java.srcDir("src/main/$it")
+    }
+
 }
 
 dependencies {

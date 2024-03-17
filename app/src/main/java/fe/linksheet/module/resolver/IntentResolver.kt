@@ -37,8 +37,10 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
+import fe.linksheet.query.PackageQueryManager
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.IntentParser
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.Dispatchers
@@ -144,6 +146,8 @@ class IntentResolver(
     private val parseShareText = featureFlagRepository.asState(FeatureFlags.parseShareText)
     private val allowCustomShareExtras = experimentRepository.asState(Experiments.allowCustomShareExtras)
     private val checkAllExtras = experimentRepository.asState(Experiments.checkAllExtras)
+
+    private val newQueryManager = experimentRepository.asState(Experiments.newQueryManager)
 
 
     companion object {
@@ -311,9 +315,11 @@ class IntentResolver(
             }
         }
 
-        val resolvedList: MutableList<ResolveInfo> = context.packageManager
-            .queryResolveInfosByIntent(newIntent, true)
-            .toMutableList()
+        val resolvedList: MutableList<ResolveInfo> = if (newQueryManager() && AndroidVersion.AT_LEAST_API_31_S) {
+            PackageQueryManager.findHandlers(context, uri!!).toMutableList()
+        } else {
+            context.packageManager.queryResolveInfosByIntent(newIntent, true).toMutableList()
+        }
 
         logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
 

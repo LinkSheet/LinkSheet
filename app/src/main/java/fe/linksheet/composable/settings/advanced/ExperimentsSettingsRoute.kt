@@ -52,7 +52,7 @@ fun ExperimentsSettingsRoute(
                 }
             }
 
-            Experiments.experiments.forEach { experiment ->
+            Experiments.experiments.filter {  viewModel.isVisible(it) } .forEach { experiment ->
                 stickyHeader {
                     PreferenceSubtitle(text = "Experiment ${experiment.name}", paddingHorizontal = 10.dp)
                 }

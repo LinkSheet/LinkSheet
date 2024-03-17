@@ -3,7 +3,6 @@ package fe.linksheet.module.preference.experiment
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.compose.StatePreference
-import fe.android.preference.helper.compose.mock.MockRepositoryState
 
 object Experiments : PreferenceDefinition() {
     val experiments: List<Experiment>
@@ -21,9 +20,9 @@ object Experiments : PreferenceDefinition() {
     // TODO: Enforce type
     init {
         experiments = listOf(
-            Experiment("enhanced_url_bar", experimentalUrlBar, urlPreview, declutterUrl),
-            Experiment("share_to", allowCustomShareExtras, checkAllExtras),
-            Experiment("new_query_manager", newQueryManager)
+            Experiment("enhanced_url_bar", hidden = false, experimentalUrlBar, urlPreview, declutterUrl),
+            Experiment("share_to", hidden = false, allowCustomShareExtras, checkAllExtras),
+            Experiment("new_query_manager", true, newQueryManager)
         )
 
         finalize()
@@ -40,11 +39,15 @@ object Experiments : PreferenceDefinition() {
     }
 }
 
-class Experiment(val name: String, vararg val preferences: Preference.Boolean) {
+class Experiment(val name: String, val hidden: Boolean = false, vararg val preferences: Preference.Boolean) {
     val defaultValues: Map<String, Boolean> by lazy { preferences.associate { it.key to it.default } }
 
     fun asState(repository: ExperimentRepository): Map<String, StatePreference<Boolean>> {
         return preferences.associate { preference -> preference.key to repository.asState(preference) }
+    }
+
+    fun isVisible(repository: ExperimentRepository): Boolean {
+        return !hidden || repository.hasExperiment(defaultValues.keys)
     }
 }
 

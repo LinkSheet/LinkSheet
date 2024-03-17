@@ -375,7 +375,7 @@
     <string name="follow_redirects_allow_darknets_explainer">Darknetler için aşağıdaki yönlendirmelere izin ver (desteklenen: %s)</string>
     <string name="urlbar_settings">Url-bar</string>
     <string name="include_throwable">Çökme günlüklerini dahil et (önerilir, fakat özel bilgiler gizlenemez)</string>
-    <string name="advanced_explainer">Özellik işaretleri ve içe/dışa aktarma gibi gelişmiş ayarlar</string>
+    <string name="advanced_explainer">Deneyler ve içe/dışa aktarma gibi gelişmiş ayarlar</string>
     <string name="shizuku_explainer">Shizuku, LinkSheet\'in direkt olarak sistem APIlerini kullanmasına izin verir</string>
     <string name="enable_shizuku">(Deneysel) Shizuku entegrasyonunu etkinleştir</string>
     <string name="enable_all">Tümünü etkinleştir</string>
@@ -449,4 +449,12 @@
     <string name="onboarding_0_subtitle">Bir bağlantıyı açarken her zaman seçim yapmayı isteyin, varsayılan tarayıcılar ayarlayın, ve çok daha fazlası</string>
     <string name="onboarding_5_subtitle">LinkSheet başarıyla etkinleştirildi</string>
     <string name="onboarding_5_button">Bitir</string>
+    <string name="nightly_experiments_card">Gecelik deneyler</string>
+    <string name="experiments_explainer_2">Aşağıdaki özellikler / deneyler henüz geliştirme aşamasındadır ve hiç çalışmayabilir. Lütfen bunlarla ilgili hataları Github\'da bildirmeyin. Geri bildirim sağlamak istiyorsanız, bunu Discord\'da yapın.</string>
+    <string name="nightly_experiments_card_explainer">Şu anda geliştirilmekte olan deneylere/özelliklere göz atmak için dokunun</string>
+    <string name="experiments">Deneyler</string>
+    <string name="experiments_explainer">Geliştirilmekte olan özellikleri deneyin</string>
+    <string name="reset">Sıfırla</string>
+    <string name="share">Bağlantı paylaş</string>
+    <string name="verified_link_handlers_open_settings_page">Ayarlar sayfasını aç</string>
 </resources>

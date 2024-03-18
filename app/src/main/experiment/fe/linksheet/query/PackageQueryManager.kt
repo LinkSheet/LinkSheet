@@ -12,6 +12,7 @@ import androidx.core.content.getSystemService
 import fe.linksheet.util.AndroidVersion
 
 object PackageQueryManager {
+
     @RequiresApi(Build.VERSION_CODES.S)
     fun findHandlers(context: Context, uri: Uri): List<ResolveInfo> {
         val dvm = context.getSystemService<DomainVerificationManager>()!!
@@ -21,10 +22,13 @@ object PackageQueryManager {
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
 
         val result = context.packageManager.queryIntentActivitiesCompat(mainIntent, PackageManager.MATCH_ALL)
+        return result.filter { it.canHandle(dvm, host) }
+    }
 
-        return result.filter { dvm.getDomainVerificationUserState(it.activityInfo.packageName)
-                ?.hostToStateMap?.containsKey(host) == true
-        }
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun ResolveInfo.canHandle(dvm: DomainVerificationManager, host: String): Boolean {
+        // TODO: Does this work for wildcard subdomains? (*.example.org?)
+        return dvm.getDomainVerificationUserState(activityInfo.packageName)?.hostToStateMap?.containsKey(host) == true
     }
 
     private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int): MutableList<ResolveInfo> {

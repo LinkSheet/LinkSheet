@@ -8,7 +8,9 @@ import fe.kotlin.extension.iterable.mapToSet
 import mozilla.components.support.ktx.util.URLStringUtils
 
 object UriUtil {
-    private val protocols = setOf("http", "https")
+    const val HTTP = "http"
+
+    private val protocols = setOf(HTTP, "https")
     private val webSchemeIntents: Set<Intent> = protocols.mapToSet {
         Intent(Intent.ACTION_VIEW, Uri.fromParts(it, "", "")).addCategory(Intent.CATEGORY_BROWSABLE)
     }

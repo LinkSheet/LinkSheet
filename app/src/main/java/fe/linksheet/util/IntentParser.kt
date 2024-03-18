@@ -72,8 +72,13 @@ object IntentParser {
         }
 
         if (parseText && text != null) {
-            val url = WebURLFinder(text.toString()).bestWebURL()
+            var url = WebURLFinder(text.toString()).bestWebURL()
             if (url != null) {
+                if(!url.contains(":")) {
+                    // This URL does not have a scheme, default to http://
+                    url = "${UriUtil.HTTP}://$url"
+                }
+
                 tryParse(url)?.let { return it }
             }
         }

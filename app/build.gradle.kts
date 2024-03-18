@@ -301,6 +301,7 @@ dependencies {
     compileOnly(libs.stub)
 
     implementation (libs.support.utils)
+    implementation (libs.lib.publicsuffixlist)
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)

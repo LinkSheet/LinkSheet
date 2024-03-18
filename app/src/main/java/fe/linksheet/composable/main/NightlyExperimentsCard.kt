@@ -31,7 +31,7 @@ fun NightlyExperimentsCard(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 80.dp)
-                .clickable { navController.navigate(experimentSettingsRoute) },
+                .clickable { navController.navigate(experimentSettingsRoute.route) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(10.dp))

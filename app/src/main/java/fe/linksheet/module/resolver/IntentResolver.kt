@@ -151,6 +151,7 @@ class IntentResolver(
 
 
     companion object {
+        // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
         private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
         private val unfurler by lazy { Unfurler() }

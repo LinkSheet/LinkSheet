@@ -51,13 +51,22 @@ const val themeSettingsRoute = "theme_settings_route"
 const val advancedSettingsRoute = "advanced_settings_route"
 const val shizukuSettingsRoute = "shizuku_settings_route"
 const val featureFlagSettingsRoute = "feature_flag_settings_route"
-const val experimentSettingsRoute = "experiment_settings_route"
 
 const val exportImportSettingsRoute = "export_import_settings_route"
 
 const val debugSettingsRoute = "debug_settings_route"
 const val logViewerSettingsRoute = "log_viewer_settings_route"
 const val loadDumpedPreferences = "log_dumped_reference_settings_route"
+
+@Keep
+data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
+    companion object : Route1<ExperimentSettingsRouteArg, String?>(
+        Argument(ExperimentSettingsRouteArg::experiment),
+        { experiment -> ExperimentSettingsRouteArg(experiment) }
+    )
+}
+
+val experimentSettingsRoute = route("experiment_settings_route", route = ExperimentSettingsRouteArg)
 
 @Keep
 data class LogTextViewerRoute(

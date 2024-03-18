@@ -150,3 +150,5 @@ unfurl = "me.saket.unfurl:unfurl:_"
 unfurl-social = "me.saket.unfurl:unfurl-social:_"
 
 support-utils = "org.mozilla.components:support-utils:_"
+
+lib-publicsuffixlist = "org.mozilla.components:lib-publicsuffixlist:_"

@@ -1,12 +1,14 @@
 package fe.linksheet.activity
 
 import android.app.admin.DevicePolicyManager
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.google.android.material.snackbar.Snackbar
+import fe.android.compose.route.util.navigate
 import fe.linksheet.*
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
@@ -53,6 +55,7 @@ import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.exp
 
 class MainActivity : ComponentActivity() {
     private val mainViewModel by viewModel<MainViewModel>()
@@ -93,6 +96,15 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         app.setActivityEventListener(null)
+    }
+
+    private fun handleIntent(uri: String, navigate: (String) -> Unit) {
+        val experiment = "linksheet://experiment/"
+
+        if (uri.startsWith(experiment) && uri.length > experiment.length) {
+            val name = uri.substring(experiment.length)
+            navigate(name)
+        }
     }
 
     private fun setContentWithKoin() {
@@ -225,7 +237,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    animatedComposable(route = experimentSettingsRoute) {
+                    animatedArgumentRouteComposable(route = experimentSettingsRoute) { _, _ ->
                         ExperimentsSettingsRoute(
                             navController = navController,
                             onBackPressed = onBackPressed
@@ -318,6 +330,15 @@ class MainActivity : ComponentActivity() {
                     animatedComposable(route = devBottomSheetExperimentRoute) {
                         DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)
                     }
+                }
+            }
+
+            if (intent != null && intent.action == Intent.ACTION_VIEW && intent.dataString != null) {
+                handleIntent(intent.dataString!!) {
+                    navController.navigate(
+                        experimentSettingsRoute,
+                        ExperimentSettingsRouteArg(it)
+                    )
                 }
             }
         }

@@ -68,7 +68,7 @@ fun AdvancedSettingsRoute(
             item(key = "experiments") {
                 SettingsItemRow(
                     navController = navController,
-                    navigateTo = experimentSettingsRoute,
+                    navigateTo = experimentSettingsRoute.route,
                     headlineId = R.string.experiments,
                     subtitleId = R.string.experiments_explainer,
                     image = {

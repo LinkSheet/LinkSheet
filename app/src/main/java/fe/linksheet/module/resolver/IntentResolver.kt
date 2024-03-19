@@ -324,10 +324,6 @@ class IntentResolver(
 
         logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
 
-        if (resolvedList.isEmpty()) {
-            return BottomSheetResult.BottomSheetNoHandlersFound(uri)
-        }
-
         val browserMode = if (UriUtil.hasWebScheme(newIntent)) {
             val (
                 mode,
@@ -341,6 +337,9 @@ class IntentResolver(
             browserHandler.handleBrowsers(mode(), selected(), repository, resolvedList)
         } else null
 
+        if (resolvedList.isEmpty()) {
+            return BottomSheetResult.BottomSheetNoHandlersFound(uri)
+        }
 
         val (grouped, filteredItem, showExtended) = BottomSheetGrouper.group(
             context,

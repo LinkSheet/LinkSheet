@@ -103,7 +103,14 @@ class LibRedirectServiceSettingsViewModel(
     }
 
     fun updateFrontend(default: LibRedirectDefault, frontendKey: String): Job {
-        return launchIO { defaultRepository.insert(default.copy(frontendKey = frontendKey)) }
+        return launchIO {
+            defaultRepository.insert(
+                default.copy(
+                    frontendKey = frontendKey,
+                    instanceUrl = frontends[frontendKey]!!.defaultInstance
+                )
+            )
+        }
     }
 
     fun updateState(enabled: Boolean): Job {

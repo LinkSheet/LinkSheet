@@ -437,9 +437,9 @@
     <string name="donate_card_subtitle_2">Donate crypto</string>
     <string name="donate_crypto">Donate via crypto</string>
     <string name="donate_card">Donate with card (via BuyMeACoffee)</string>
-    <string name="donate_explainer_crypto">When donating with crypto, to claim <b>LinkSheet Pro</b>, send proof of
-        payment to
-        <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>
+    <string name="donate_explainer_crypto">When donating with crypto, send proof of
+        payment to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>
+        to claim <b>LinkSheet Pro</b>.
     </string>
     <string name="donate_learn_more">Learn more</string>
     <string name="donate">Donate</string>
@@ -462,7 +462,7 @@
     <string name="branch">Branch:</string>
     <string name="type">Type:</string>
     <string name="donate_other">If you would like to donate in another way (SEPA Transfer, PayPal, other
-        crypotocurrency, etc.), also send an email to
+        crypotocurrency, etc.), please also send an email to
         <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>
     </string>
     <string name="app_setup">App setup</string>
@@ -565,7 +565,7 @@
         experience
     </string>
     <string name="onboarding_2_card_explainer">Shizuku allows LinkSheet to disable the default link handling behavior
-        off all apps at once, instead of having to manually disable them for each app individually (which is the next
+        of all apps at once, instead of having to manually disable them for each app individually (which is the next
         step).
     </string>
     <string name="onboarding_2_request_shizuku_permission">Request permission</string>

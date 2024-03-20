@@ -2,7 +2,6 @@ package fe.linksheet.debug.command
 
 import android.content.Context
 import android.content.Intent
-import android.os.Debug
 import fe.linksheet.extension.koin.injectLogger
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
@@ -13,7 +12,13 @@ abstract class DebugCommand<T : DebugCommand<T>>(val action: String, command: KC
     abstract fun handle(context: Context, intent: Intent)
 
     companion object {
-        private val commands = setOf(UpdatePreferenceCommand, NavigateToRouteCommand, ResetHistoryPreferredAppCommand, DumpPreferencesCommand).associateBy { it.action }
+        private val commands = setOf(
+            UpdatePreferenceCommand,
+            NavigateToRouteCommand,
+            ResetHistoryPreferredAppCommand,
+            DumpPreferencesCommand,
+            ViewUrlCommand
+        ).associateBy { it.action }
 
         fun tryHandle(context: Context, intent: Intent): Boolean {
             val command = commands[intent.action] ?: return false

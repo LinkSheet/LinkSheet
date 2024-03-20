@@ -30,6 +30,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
         const val NAVIGATE_BROADCAST = "fe.linksheet.debug.NAVIGATE"
         const val RESET_HISTORY_PREFERRED_APP_BROADCAST = "fe.linksheet.debug.RESET_HISTORY_PREFERRED_APP_BROADCAST"
         const val DUMP_PREFERENCES_BROADCAST = "fe.linksheet.debug.DUMP_PREFERENCES_BROADCAST"
+        const val VIEW_URL_BROADCAST = "fe.linksheet.debug.VIEW_URL_BROADCAST"
     }
 
     @OptIn(ExperimentalEncodingApi::class)

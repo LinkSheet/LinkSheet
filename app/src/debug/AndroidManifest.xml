@@ -10,6 +10,7 @@
                 <action android:name="fe.linksheet.debug.NAVIGATE" />
                 <action android:name="fe.linksheet.debug.RESET_HISTORY_PREFERRED_APP_BROADCAST" />
                 <action android:name="fe.linksheet.debug.DUMP_PREFERENCES_BROADCAST" />
+                <action android:name="fe.linksheet.debug.VIEW_URL_BROADCAST" />
             </intent-filter>
         </receiver>
     </application>

@@ -17,13 +17,13 @@ class FeatureFlagViewModel(
     // TODO: Cleanup
     val linkSheetCompat = featureFlagRepository.asState(FeatureFlags.linkSheetCompat)
 
-    val flags = setOf(
+    val flags = setOf<Flag>(
         Flag.Full(
             featureFlagRepository.asState(FeatureFlags.linkSheetCompat),
             R.string.enable_linksheet_compat,
             R.string.enable_linksheet_compat_explainer
         ),
-        Flag.Simple(featureFlagRepository.asState(FeatureFlags.parseShareText), "Parse shared text if no url is found")
+        Flag.Full(featureFlagRepository.asState(FeatureFlags.parseShareText), R.string.parse_shared_text_intent, R.string.parse_shared_text_intent_explainer)
     )
 }
 

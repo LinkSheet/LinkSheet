@@ -12,7 +12,6 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.outlined.FastForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -33,7 +32,11 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import fe.linksheet.R
+import fe.linksheet.extension.compose.runIf
 import fe.linksheet.ui.HkGroteskFontFamily
+import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
+import io.github.fornewid.placeholder.material3.placeholder
+import io.github.fornewid.placeholder.material3.shimmer
 import me.saket.unfurl.UnfurlResult
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -86,12 +89,16 @@ fun ExperimentalUrlBar(
 //                        )
 //                    }
 
+//                    AsyncImage(model = , contentDescription = , imageLoader = )
+
 
                     SubcomposeAsyncImage(
                         model = ImageRequest.Builder(context).data(thumbnailUrl)
 //                            .size(height = Dimension(200.dp.value.toInt()), width = Dimension.Undefined)
 //                            .scale(Scale.FIT)
                             .build(),
+
+                        alignment = Alignment.Center,
                         contentScale = ContentScale.FillWidth,
                         contentDescription = ""
                     ) {
@@ -102,12 +109,24 @@ fun ExperimentalUrlBar(
                                     .heightIn(max = 200.dp)
                                     .clip(CardDefaults.shape)
                             )
+                        } else if (state is AsyncImagePainter.State.Empty || state is AsyncImagePainter.State.Loading) {
+                            Spacer(
+                                modifier = Modifier
+                                    .requiredHeight(200.dp)
+                                    .clip(CardDefaults.shape)
+                                    .placeholder(
+                                        visible = true,
+                                        highlight = PlaceholderHighlight.shimmer(),
+                                    )
+                            )
                         }
                     }
                 }
 
                 Row(
-                    modifier = Modifier.padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
+                    modifier = Modifier
+                        .runIf(!showFullUrl && unfurlResult == null) { it.height(60.dp) }
+                        .padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
@@ -118,7 +137,7 @@ fun ExperimentalUrlBar(
 //                            modifier = Modifier.border(1.dp, Color.Green),
 //                        )
 
-                        SubcomposeAsyncImage(model = faviconUrl, contentDescription = "") {
+                        SubcomposeAsyncImage(modifier = Modifier.size(16.dp), model = faviconUrl, contentDescription = "") {
                             val state = painter.state
                             if (state is AsyncImagePainter.State.Success) {
                                 SubcomposeAsyncImageContent(
@@ -173,7 +192,11 @@ fun ExperimentalUrlBar(
 
             if (libRedirected) {
                 item {
-                    UrlActionButton(text = R.string.ignore_libredirect, icon = Icons.Filled.FastForward, onClick = ignoreLibRedirect!!)
+                    UrlActionButton(
+                        text = R.string.ignore_libredirect,
+                        icon = Icons.Filled.FastForward,
+                        onClick = ignoreLibRedirect!!
+                    )
                 }
             }
         }

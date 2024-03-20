@@ -247,8 +247,9 @@ dependencies {
 
     runtimeOnly(AndroidX.compose.material.icons.extended)
     implementation(libs.ipaddress)
+    implementation ("io.github.fornewid:placeholder-material3:1.1.2")
 //    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
-
+    implementation("com.github.skydoves:flexible-bottomsheet-material3:0.1.2")
     implementation(libs.signifykt)
     implementation(libs.com.gitlab.grrfe.bundled.dependencies.gson.ext)
     implementation(libs.embed.resolve)

@@ -70,20 +70,6 @@ fun PreferredAppColumn(
 //            showToast = showToast
 //        )
 
-        // TODO: Not sure if this divider should be kept
 
-        HorizontalDivider(
-            modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 10.dp),
-            color = MaterialTheme.colorScheme.outline.copy(0.25f)
-        )
-
-        Text(
-            modifier = Modifier.padding(start = 15.dp),
-            text = stringResource(id = R.string.use_a_different_app),
-            fontFamily = HkGroteskFontFamily,
-            fontWeight = FontWeight.SemiBold,
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
     }
 }

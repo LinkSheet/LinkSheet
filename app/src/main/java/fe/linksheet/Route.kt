@@ -2,10 +2,8 @@ package fe.linksheet
 
 
 import androidx.annotation.Keep
-import fe.android.compose.route.util.Route1
-import fe.android.compose.route.util.Route2
-import fe.android.compose.route.util.RouteData
-import fe.android.compose.route.util.route
+import androidx.navigation.navDeepLink
+import fe.android.compose.route.util.*
 
 
 const val mainRoute = "main_route"
@@ -66,7 +64,14 @@ data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
     )
 }
 
-val experimentSettingsRoute = route("experiment_settings_route", route = ExperimentSettingsRouteArg)
+val experimentSettingsRoute = ArgumentRoute(
+    "experiment_settings_route",
+    { it -> it.joinToString(separator = "/") { it } },
+    ExperimentSettingsRouteArg.arguments,
+    ExperimentSettingsRouteArg.createInstance,
+    listOf(navDeepLink { uriPattern = "linksheet://experiment/{experiment}" })
+)
+
 
 @Keep
 data class LogTextViewerRoute(

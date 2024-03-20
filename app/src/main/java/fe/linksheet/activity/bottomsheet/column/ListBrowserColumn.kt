@@ -1,9 +1,6 @@
 package fe.linksheet.activity.bottomsheet.column
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
@@ -30,6 +27,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ListBrowserColumn(
+    modifier: Modifier = Modifier,
     appInfo: DisplayActivityInfo,
     selected: Boolean?,
     onClick: () -> Unit,
@@ -41,7 +39,7 @@ fun ListBrowserColumn(
     val context = LocalContext.current
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp)
             .clip(defaultRoundedCornerShape)

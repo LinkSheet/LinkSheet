@@ -447,9 +447,8 @@
         more than <b>%s</b>. If you would like to show some appreciation for my work please donate.
     </string>
     <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> (<b>4€</b> if you donate with
-        crypto!) allows you access to <b>LinkSheet Pro</b>, which, currently only hides the donation banner on the main
-        screen of the app, but in the future, there will be
-        <b>Pro exclusive features.</b>
+        crypto!) allows you access to <b>LinkSheet Pro</b>, which includes <b>Pro exclusive features</b> such as:
+        hiding the donation banner, following redirects externally, obtaining non-AMP pages externally and more to come!
     </string>
     <string name="built_by">Built and signed by</string>
     <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow. This does not

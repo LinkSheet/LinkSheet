@@ -636,4 +636,8 @@
         work at all. Please do not report bugs regarding these on Github. If you want to provide feedback, do so on
         Discord.
     </string>
+    <string name="parse_shared_text_intent">Parse shared text if no url is found</string>
+    <string name="parse_shared_text_intent_explainer">When the share action is invoked from an app which shares text
+        containing an url, attempt to find (and use) the first url in the text instead of failing
+    </string>
 </resources>

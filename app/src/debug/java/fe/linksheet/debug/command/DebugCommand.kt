@@ -13,7 +13,7 @@ abstract class DebugCommand<T : DebugCommand<T>>(val action: String, command: KC
     abstract fun handle(context: Context, intent: Intent)
 
     companion object {
-        private val commands = setOf(UpdatePreferenceCommand, NavigateToRouteCommand).associateBy { it.action }
+        private val commands = setOf(UpdatePreferenceCommand, NavigateToRouteCommand, ResetHistoryPreferredAppCommand, DumpPreferencesCommand).associateBy { it.action }
 
         fun tryHandle(context: Context, intent: Intent): Boolean {
             val command = commands[intent.action] ?: return false

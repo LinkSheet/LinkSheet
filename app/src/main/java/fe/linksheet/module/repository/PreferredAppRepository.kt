@@ -17,8 +17,12 @@ class PreferredAppRepository(private val dao: PreferredAppDao) {
 
     suspend fun deleteByHostAndPackageName(
         host: String,
-        packageName: String
+        packageName: String,
     ) = dao.deleteByHostAndPackageName(host, packageName)
+
+    suspend fun deleteByHost(host: String) {
+        dao.deleteByHost(host)
+    }
 
     suspend fun insert(preferredApp: PreferredApp) = dao.insert(preferredApp)
     suspend fun insert(items: List<PreferredApp>) = dao.insert(items)

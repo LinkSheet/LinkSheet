@@ -6,20 +6,21 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -27,6 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
+import com.skydoves.flexible.core.FlexibleSheetSize
+import com.skydoves.flexible.core.FlexibleSheetValue
+import com.skydoves.flexible.core.rememberFlexibleBottomSheetState
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
@@ -34,6 +38,7 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.composable.util.defaultVerticalPadding
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
@@ -112,10 +117,21 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         val coroutineScope = rememberCoroutineScope()
 
         val drawerState = rememberModalBottomSheetState()
+//        val drawerState = rememberFlexibleBottomSheetState(
+//            flexibleSheetSize = FlexibleSheetSize(
+//                fullyExpanded = 0.9f,
+//                intermediatelyExpanded = 0.5f,
+//                slightlyExpanded = 0.15f,
+//            ),
+//            isModal = true,
+//            skipSlightlyExpanded = false,
+//        )
 
         val hide: () -> Unit = {
             coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
+
+
 
         BottomDrawer(
             landscape = landscape,
@@ -129,14 +145,21 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             ),
             hide = hide,
             sheetContent = {
+//                val scope: ColumnScope = this@BottomDrawer
+//                defaultVerticalPadding
+//                Column(modifier = Modifier.weight(1.0f, fill = false)) {
                 SheetContent(
                     result = result,
+//                    isExpanded = drawerState.currentValue == FlexibleSheetValue.SlightlyExpanded,
                     isExpanded = drawerState.currentValue == SheetValue.Expanded,
                     hideDrawer = hide,
                     requestExpand = {
                         coroutineScope.launch { drawerState.expand() }
                     }
                 )
+
+
+//                }
             }
         )
 
@@ -228,7 +251,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
         if (previewUrl && result.uri != null) {
             val uriSuccess = result as? BottomSheetResult.BottomSheetSuccessResult
-            if(experimentalUrlBar){
+            if (experimentalUrlBar) {
                 val uriString = if (declutterUrl) {
                     UriUtil.declutter(result.uri)
                 } else result.uri.toString()
@@ -269,7 +292,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     } else null,
                     ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
                         {
-                            val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+                            val redirected =
+                                result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
 
                             finish()
                             startActivity(
@@ -317,7 +341,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     } else null,
                     ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
                         {
-                            val redirected = result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+                            val redirected =
+                                result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
 
                             finish()
                             startActivity(
@@ -346,6 +371,23 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     launchApp(result, item, always, if (private) privateBrowser else null)
                 }
             )
+
+            // TODO: Not sure if this divider should be kept
+            if (result.resolved.isNotEmpty()) {
+                HorizontalDivider(
+                    modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 10.dp),
+                    color = MaterialTheme.colorScheme.outline.copy(0.25f)
+                )
+
+                Text(
+                    modifier = Modifier.padding(start = 15.dp),
+                    text = stringResource(id = R.string.use_a_different_app),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold,
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+            }
         } else {
             Row(modifier = Modifier.padding(horizontal = 15.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(
@@ -359,24 +401,26 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             Spacer(modifier = Modifier.height(10.dp))
         }
 
-        if (bottomSheetViewModel.gridLayout()) {
-            Grid(
-                result = result,
-                hasPreferredApp = hasPreferredApp,
-                hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
-                isExpanded = isExpanded,
-                requestExpand = requestExpand,
-                showPackage = showPackage
-            )
-        } else {
-            List(
-                result = result,
-                hasPreferredApp = hasPreferredApp,
-                hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
-                isExpanded = isExpanded,
-                requestExpand = requestExpand,
-                showPackage = showPackage
-            )
+        if (result.resolved.isNotEmpty()) {
+            if (bottomSheetViewModel.gridLayout()) {
+                Grid(
+                    result = result,
+                    hasPreferredApp = hasPreferredApp,
+                    hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
+                    isExpanded = isExpanded,
+                    requestExpand = requestExpand,
+                    showPackage = showPackage
+                )
+            } else {
+                List(
+                    result = result,
+                    hasPreferredApp = hasPreferredApp,
+                    hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
+                    isExpanded = isExpanded,
+                    requestExpand = requestExpand,
+                    showPackage = showPackage
+                )
+            }
         }
     }
 
@@ -446,12 +490,24 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         showPackage: Boolean,
     ) {
         var selected by remember { mutableIntStateOf(-1) }
+//        val sheetScope = this@List
+//
+        val listState = rememberLazyListState()
+//        listState.layoutInfo.viewportSize
+//        Local
 
-        Column {
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+
+//                .border(1.dp, Color.Cyan)
+        ) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1.0f)
+                    .weight(1.0f, fill = false),
+//                    .border(1.dp, Color.Blue),
+                state = listState
             ) {
                 itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
@@ -488,9 +544,28 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 //                    }
                 }
             }
+//        AlertDialog(onDismissRequest = { /*TODO*/ }, confirmButton = { /*TODO*/ })
 
             if (!hasPreferredApp && !hideChoiceButtons) {
-                NoPreferredAppChoiceButtons(result = result, selected = selected)
+//                Box(
+//                    modifier = Modifier
+//                        .align(Alignment.BottomCenter)
+//                        .fillMaxWidth()
+//                        .navigationBarsPadding()
+//                ) {
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+//                        .wrapContentHeight()
+//                        .weight(0.1f)
+
+//                    .padding(padding)
+//                        .padding(bottom = 40.dp)
+//                        .border(1.dp, Color.Magenta)
+                ) {
+                    NoPreferredAppChoiceButtons(result = result, selected = selected)
+                }
             }
         }
     }

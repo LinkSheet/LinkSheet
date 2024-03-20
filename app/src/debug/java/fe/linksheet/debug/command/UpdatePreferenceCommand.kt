@@ -30,12 +30,10 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
         val keys = requireNotNull(extras.keySet().takeIf { it.isNotEmpty() }) { "Extras must not be empty" }
 
         val successfulUpdates = keys.mapCatching { it to update(extras, it) }.onEachFailure { logger.error(it) }.toSuccess().toMap()
-        val app = get<LinkSheetApp>()
 
         for ((key, value) in successfulUpdates) {
             val msg = "Preference '$key' set to '$value'"
             logger.info(msg)
-            app.activityEventListener?.invoke(msg)
 
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }

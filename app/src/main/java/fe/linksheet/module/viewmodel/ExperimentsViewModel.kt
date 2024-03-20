@@ -16,17 +16,16 @@ class ExperimentsViewModel(
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
 ) : SavedStateViewModel<ExperimentSettingsRouteArg>(savedStateHandle, preferenceRepository) {
+    val visibleExperiments = Experiments.experiments.filter { isVisible(it) }
 
-    private val experiment = getSavedStateFlowNullable(ExperimentSettingsRouteArg::experiment)
-
-
-    val states = mutableMapOf<String, StatePreference<Boolean>>()
-
-    init {
-        for (experiment in Experiments.experiments) {
-            states.putAll(experiment.asState(experimentRepository))
+    val stateMap = mutableMapOf<String, StatePreference<Boolean>>().apply {
+        for (experiment in visibleExperiments) {
+            putAll(experiment.asState(experimentRepository))
         }
     }
+
+    val experiment = getSavedStateFlowNullable(ExperimentSettingsRouteArg::experiment)
+
 
     fun isVisible(experiment: Experiment): Boolean {
         // Stub this for now
@@ -34,9 +33,9 @@ class ExperimentsViewModel(
     }
 
     fun resetAll() {
-        for (experiment in Experiments.experiments) {
+        for (experiment in visibleExperiments) {
             for ((key, def) in experiment.defaultValues) {
-                states[key]!!.invoke(def)
+                stateMap[key]!!.invoke(def)
             }
         }
     }

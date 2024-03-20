@@ -1,14 +1,13 @@
 package fe.linksheet.activity
 
-import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.DisposableEffect
+import androidx.core.util.Consumer
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.google.android.material.snackbar.Snackbar
-import fe.android.compose.route.util.navigate
 import fe.linksheet.*
 import fe.linksheet.composable.main.MainRoute
 import fe.linksheet.composable.settings.SettingsRoute
@@ -44,18 +43,15 @@ import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.debug.DebugIntentHandler
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppHost
-import fe.linksheet.ui.findWindow
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.exp
 
 class MainActivity : ComponentActivity() {
     private val mainViewModel by viewModel<MainViewModel>()
@@ -110,6 +106,14 @@ class MainActivity : ComponentActivity() {
     private fun setContentWithKoin() {
         setContentWithKoin {
             val navController = rememberNavController()
+            DisposableEffect(navController) {
+                val consumer = Consumer<Intent> { navController.handleDeepLink(it) }
+                this@MainActivity.addOnNewIntentListener(consumer)
+                onDispose {
+                    this@MainActivity.removeOnNewIntentListener(consumer)
+                }
+            }
+
             if (intent != null && BuildConfig.DEBUG && BuildType.current == BuildType.Debug) {
 //                DebugIntentHandler.onCreateMainActivity(intent)
 
@@ -333,14 +337,14 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            if (intent != null && intent.action == Intent.ACTION_VIEW && intent.dataString != null) {
-                handleIntent(intent.dataString!!) {
-                    navController.navigate(
-                        experimentSettingsRoute,
-                        ExperimentSettingsRouteArg(it)
-                    )
-                }
-            }
+//            if (intent != null && intent.action == Intent.ACTION_VIEW && intent.dataString != null) {
+//                handleIntent(intent.dataString!!) {
+//                    navController.navigate(
+//                        experimentSettingsRoute,
+//                        ExperimentSettingsRouteArg(it)
+//                    )
+//                }
+//            }
         }
     }
 }

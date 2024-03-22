@@ -1,6 +1,11 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.content.ClipboardManager
+import android.content.ComponentName
+import android.content.Intent
+import android.content.pm.CrossProfileApps
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
@@ -17,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -32,6 +38,8 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import fe.linksheet.R
+import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.runIf
 import fe.linksheet.ui.HkGroteskFontFamily
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
@@ -44,15 +52,22 @@ import me.saket.unfurl.UnfurlResult
 fun ExperimentalUrlBar(
     uri: String,
     unfurlResult: UnfurlResult?,
+    canSwitchProfile: Boolean,
+    profileSwitchText: String? = null,
+    profileSwitchDrawable: Drawable? = null,
     downloadable: Boolean,
     libRedirected: Boolean,
     copyUri: () -> Unit,
     shareUri: () -> Unit,
+    switchProfile: () -> Unit,
     downloadUri: (() -> Unit)? = null,
     ignoreLibRedirect: (() -> Unit)? = null,
 ) {
     var showFullUrl by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val activity = LocalContext.currentActivity()
+
+    val crossProfileApps = context.getSystemService<CrossProfileApps>()!!
 
     Column(
         modifier = Modifier
@@ -137,7 +152,11 @@ fun ExperimentalUrlBar(
 //                            modifier = Modifier.border(1.dp, Color.Green),
 //                        )
 
-                        SubcomposeAsyncImage(modifier = Modifier.size(16.dp), model = faviconUrl, contentDescription = "") {
+                        SubcomposeAsyncImage(
+                            modifier = Modifier.size(16.dp),
+                            model = faviconUrl,
+                            contentDescription = ""
+                        ) {
                             val state = painter.state
                             if (state is AsyncImagePainter.State.Success) {
                                 SubcomposeAsyncImageContent(
@@ -184,6 +203,16 @@ fun ExperimentalUrlBar(
                 UrlActionButton(text = R.string.share, icon = Icons.Filled.Share, onClick = shareUri)
             }
 
+            if (canSwitchProfile) {
+                item {
+                    UrlActionButton(
+                        text = profileSwitchText!!,
+                        icon = profileSwitchDrawable!!.toImageBitmap(),
+                        onClick = switchProfile
+                    )
+                }
+            }
+
             if (downloadable) {
                 item {
                     UrlActionButton(text = R.string.download, icon = Icons.Filled.Download, onClick = downloadUri!!)
@@ -207,6 +236,24 @@ fun ExperimentalUrlBar(
 
         Spacer(modifier = Modifier.height(10.dp))
     }
+}
+
+@Composable
+private fun UrlActionButton(text: String, icon: ImageBitmap, onClick: () -> Unit) {
+    ElevatedAssistChip(
+        onClick = onClick,
+        elevation = AssistChipDefaults.assistChipElevation(),
+        shape = CircleShape,
+        leadingIcon = {
+            Icon(
+                modifier = Modifier.size(18.dp),
+                bitmap = icon,
+                tint = MaterialTheme.colorScheme.onSurface,
+                contentDescription = text
+            )
+        },
+        label = { Text(text = text, fontSize = 13.sp) }
+    )
 }
 
 @Composable

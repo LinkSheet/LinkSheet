@@ -98,6 +98,7 @@ class BottomSheetViewModel(
 
     val experimentalUrlBar = experimentRepository.asState(Experiments.experimentalUrlBar)
     val declutterUrl = experimentRepository.asState(Experiments.declutterUrl)
+    val switchProfile = experimentRepository.asState(Experiments.switchProfile)
 
     val newQueryManager = experimentRepository.asState(Experiments.newQueryManager)
 

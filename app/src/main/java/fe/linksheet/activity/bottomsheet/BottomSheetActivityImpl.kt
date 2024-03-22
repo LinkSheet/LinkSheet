@@ -2,12 +2,11 @@ package fe.linksheet.activity.bottomsheet
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,17 +19,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
-import com.skydoves.flexible.core.FlexibleSheetSize
-import com.skydoves.flexible.core.FlexibleSheetValue
-import com.skydoves.flexible.core.rememberFlexibleBottomSheetState
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
@@ -38,7 +34,6 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
-import fe.linksheet.composable.util.defaultVerticalPadding
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
@@ -189,6 +184,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 result = result as BottomSheetResult.SuccessResult,
                 declutterUrl = viewModel.declutterUrl(),
                 experimentalUrlBar = viewModel.experimentalUrlBar(),
+                enableSwitchProfile = viewModel.switchProfile(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
                 hideDrawer = hideDrawer,
@@ -229,6 +225,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         result: BottomSheetResult.SuccessResult,
         experimentalUrlBar: Boolean,
         declutterUrl: Boolean,
+        enableSwitchProfile: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         hideDrawer: () -> Unit,
@@ -256,8 +253,33 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     UriUtil.declutter(result.uri)
                 } else result.uri.toString()
 
+                val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile) {
+                    val crossProfileApps = getSystemService<CrossProfileApps>()!!
+                    val canSwitch =
+                        crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.targetUserProfiles.isNotEmpty()
+                    val target = crossProfileApps.targetUserProfiles.firstOrNull()
+
+                    Triple(crossProfileApps, canSwitch, target)
+                } else Triple(null, false, null)
+
                 ExperimentalUrlBar(
                     uri = uriString,
+                    canSwitchProfile = canSwitch,
+                    profileSwitchText = if (canSwitch) crossProfileApps!!.getProfileSwitchingLabel(target!!)
+                        .toString() else null,
+                    profileSwitchDrawable = if (canSwitch) crossProfileApps!!.getProfileSwitchingIconDrawable(target!!) else null,
+                    switchProfile = {
+                        val switchIntent =
+                            Intent(result.intent).setComponent(this@BottomSheetActivityImpl.componentName)
+
+                        crossProfileApps!!.startActivity(
+                            switchIntent,
+                            target!!,
+                            this@BottomSheetActivityImpl
+                        )
+
+                        finish()
+                    },
                     unfurlResult = uriSuccess?.unfurlResult,
                     downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
                     libRedirected = uriSuccess?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,

@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.*
 import fe.linksheet.composable.main.MainRoute
-import ui_overhaul.fe.linksheet.composable.main.NewMainRoute
+import fe.linksheet.experiment.ui.overhaul.composable.main.NewMainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute

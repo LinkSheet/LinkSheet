@@ -1,4 +1,4 @@
-package ui_overhaul.fe.linksheet.composable.main
+package fe.linksheet.experiment.ui.overhaul.composable.main
 
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable

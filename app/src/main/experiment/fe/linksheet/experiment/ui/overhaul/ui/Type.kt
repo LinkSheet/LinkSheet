@@ -1,4 +1,4 @@
-package ui_overhaul.fe.linksheet.ui
+package fe.linksheet.experiment.ui.overhaul.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontWeight

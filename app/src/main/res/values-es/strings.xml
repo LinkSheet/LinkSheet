@@ -301,7 +301,7 @@
     <string name="done">Hecho</string>
     <string name="thanks_for_donating">¡Gracias por donar!</string>
     <string name="dismiss">Descartar</string>
-    <string name="donate_explainer_crypto">Al donar con cripto, para reclamar <b>LinkSheet Pro</b>, envía el comprobante de pago a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
+    <string name="donate_explainer_crypto">Al donar con criptomonedas, envíe el comprobante de pago a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> para reclamar <b>LinkSheet Pro</b>. \u0020</string>
     <string name="join">Unirme</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">¡Ven a chatear en nuestro servidor de Discord! ¡Chatea con los usuarios y desarrolladores de LinkSheet sobre su futuro y otros proyectos!</string>
@@ -312,7 +312,7 @@
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
     <string name="commit">Consolidar:</string>
     <string name="donate_learn_more">Más información</string>
-    <string name="donate_other">Si desea donar de otra forma (transferencia SEPA, PayPal, otra criptomoneda, etc.), envíe también un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
+    <string name="donate_other">Si desea donar de otra forma (transferencia SEPA, PayPal, otra criptomoneda, etc.) por favor, envíe también un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
     <string name="type">Tipo:</string>
     <string name="flavor">Sabor:</string>
     <string name="github_pipeline_build">Desarrollado y firmado para el flujo de trabajo de Github</string>
@@ -339,7 +339,7 @@
     </plurals>
     <string name="pro_feature">¡Esta es una función de LinkSheet Pro!</string>
     <string name="export_to_file">Exportar a un archivo</string>
-    <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> (¡<b>4€</b> si donas con cripto!) te permite acceder a <b>LinkSheet Pro</b>, que, actualmente solo oculta el banner de donación en la pantalla principal de la app, pero en el futuro, habrá <b>características exclusivas Pro.</b> \u0020</string>
+    <string name="linksheet_donation_explainer_2">¡Una donación de más de <b>5€</b> (¡<b>4€</b> si donas con criptomonedas!) te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>funciones exclusivas de Pro</b> como: ocultar el banner de donación, seguir redireccionamientos externamente, obtener páginas que no son AMP y mucho más por venir! \u0020</string>
     <string name="import_settings">Importar los ajustes</string>
     <string name="export_import_settings">Exportar o importar los ajustes</string>
     <string name="import_headline">Importar</string>
@@ -412,7 +412,7 @@
     <string name="onboarding_1_title">Establecer LinkSheet como navegador por defecto</string>
     <string name="onboarding_1_subtitle">LinkSheet debe configurarse como navegador predeterminado para gestionar los enlaces pulsados.</string>
     <string name="onboarding_2_subtitle">Si tienes muchas aplicaciones instaladas, Shizuku puede mejorar significativamente tu experiencia</string>
-    <string name="onboarding_2_card_explainer">Shizuku permite a LinkSheet desactivar el comportamiento predeterminado de gestión de enlaces de todas las aplicaciones a la vez, en lugar de tener que desactivarlos manualmente para cada aplicación individualmente (que es el siguiente paso).</string>
+    <string name="onboarding_2_card_explainer">Shizuku permite que LinkSheet deshabilite el comportamiento de manejo de enlaces predeterminado de todas las aplicaciones a la vez, en lugar de tener que deshabilitarlos manualmente para cada aplicación individualmente (que es el siguiente paso).</string>
     <string name="onboarding_3_subtitle">Los gestores de enlaces deben desactivarse para que LinkSheet pueda interceptarlos</string>
     <string name="onboarding_2_request_shizuku_permission">Solicitar permiso</string>
     <string name="onboarding_2_install_shizuku">Instalar Shizuku</string>
@@ -462,4 +462,5 @@
     <string name="reset">Restablecer</string>
     <string name="nightly_experiments_card_explainer">Pulse para ver los experimentos y funciones en desarrollo</string>
     <string name="experiments_explainer_2">Las siguientes características / experimentos están en desarrollo activo y pueden no funcionar en absoluto. Por favor, no informes de errores en Github. Si quieres dar tu opinión, hazlo en Discord.</string>
+    <string name="parse_shared_text_intent">Analizar el texto compartido si no se encuentra ninguna URL</string>
 </resources>

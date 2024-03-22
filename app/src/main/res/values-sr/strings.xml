@@ -74,7 +74,7 @@
     <string name="privacy_settings_explainer">Подешавања попут укључивања упућивача</string>
     <string name="dont_show_filtered_item">Никада не приказуј одељак „последња изабрана апликација“</string>
     <string name="follow_redirects_local_cache_explainer">Кеширајте резултат преусмеравања локално</string>
-    <string name="donate_explainer_crypto">Када донирате помоћу криптовалуте, да бисте преузели <b>LinkSheet Pro</b>, пошаљите доказ о уплати на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_explainer_crypto">Када донирате помоћу криптовалуте, пошаљите доказ о \u0020уплати на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020да бисте преузели <b>LinkSheet Pro</b>. \u0020</string>
     <string name="use_app_settings_explainer">Нека апликација одлучи да ли треба да се користи прегледач у апликацији</string>
     <string name="display_grid_layout_explainer">Прикажите мрежу уместо листе у доњем листу</string>
     <string name="apps">Апликације</string>
@@ -86,9 +86,9 @@
     <string name="onboarding0_highlight">слобода избора</string>
     <string name="redirect_resolve_type_local_cache">локални кеш</string>
     <string name="use_unified_preferred_browser_explainer">Омогућавање овога ће применити доленаведена подешавања и на нормално и на руковање линковима у апликацији. Користите дугмад испод да бисте се пребацивали између нормалног и режима у апликацији када је онемогућено.</string>
-    <string name="advanced_explainer">Напредна подешавања као што су експерименталне функције и извоз/увоз</string>
+    <string name="advanced_explainer">Напредна подешавања као што су експерименти и извоз/увоз</string>
     <string name="discord">Discord</string>
-    <string name="donate_other">Ако желите да донирате на други начин (SEPA трансфер, PayPal, друге криптовалуте итд.), такође пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_other">Ако желите да донирате на други начин (SEPA трансфер, PayPal, друге криптовалуте итд.), такође пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020</string>
     <string name="background_image">Позадинска слика</string>
     <string name="amp2html_local_cache_explainer">Локално кеширајте преузете не-AMP верзије веб-страница</string>
     <string name="no">Не</string>
@@ -339,7 +339,7 @@
     <string name="done">Готово</string>
     <string name="pro_feature">Ово је LinkSheet Pro функција!</string>
     <string name="export_to_file">Извоз у фајл</string>
-    <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> ( <b>4€</b> ако донирате криптовалутом!) омогућава вам приступ <b>LinkSheet Pro-у</b>, који тренутно сакрива само банер донације на главном екрану апликације, али у будућности ће постојати <b>Pro ексклузивне карактеристике.</b></string>
+    <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> (<b>4€</b>, ако донирате помоћу криптовалуте!) омогућава вам приступ за <b>LinkSheet Pro</b>, што укључује <b>ексклузивне Pro функције</b> као што су: \u0020скривање банера за донације, праћење спољних преусмеравања, екстерно добијање страница које нису AMP и још много тога! \u0020</string>
     <string name="import_settings">Увоз подешавања</string>
     <string name="export_import_settings">Извоз или увоз подешавања</string>
     <string name="import_headline">Увоз</string>
@@ -455,4 +455,13 @@
     <string name="resolve_embeds">Разреши уградње</string>
     <string name="resolve_embeds_explainer">Решите урађење замене као што је fxtwitter.com на прави хост</string>
     <string name="verified_link_handlers_open_settings_page">Отвори страницу подешавања</string>
+    <string name="parse_shared_text_intent">Рашчланите дељени текст ако URL адреса није пронађена</string>
+    <string name="parse_shared_text_intent_explainer">Када се радња дељења покрене из апликације која дели текст који садржи URL адресу, покушајте пронаћи (и користити) прву URL адресу у тексту, уместо неуспеха</string>
+    <string name="experiments">Експерименти</string>
+    <string name="experiments_explainer_2">Следеће функције / експерименти су у активном развоју и можда уопште неће радити. Молимо, не пријављујете грешке у вези са њима на GitHub. Ако желите да дате повратне информације, урадите то на Discord-у.</string>
+    <string name="nightly_experiments_card">Бета експерименти</string>
+    <string name="nightly_experiments_card_explainer">Додирните да бисте проверили експерименте / функције које су тренутно у развоју</string>
+    <string name="experiments_explainer">Испробајте функције које су тренутно у развоју</string>
+    <string name="reset">Ресет</string>
+    <string name="share">Дели линк</string>
 </resources>

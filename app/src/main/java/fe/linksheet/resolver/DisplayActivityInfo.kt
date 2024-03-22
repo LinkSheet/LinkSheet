@@ -47,12 +47,6 @@ data class DisplayActivityInfo(
         return icon!!
     }
 
-    fun intentFrom(sourceIntent: Intent): Intent {
-        return Intent(sourceIntent)
-            .setComponent(componentName)
-            .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT or Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
-    }
-
     fun toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {
         return PreferredApp(
             host = host,

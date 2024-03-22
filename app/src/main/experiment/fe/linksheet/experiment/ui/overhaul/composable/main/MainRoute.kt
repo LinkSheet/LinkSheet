@@ -1,4 +1,4 @@
-package ui_overhaul.fe.linksheet.composable.main
+package fe.linksheet.experiment.ui.overhaul.composable.main
 
 import android.net.Uri
 import androidx.annotation.StringRes

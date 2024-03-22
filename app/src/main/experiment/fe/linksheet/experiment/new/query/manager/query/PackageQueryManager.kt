@@ -1,4 +1,4 @@
-package new_query_manager.fe.linksheet.query
+package fe.linksheet.experiment.new.query.manager.query
 
 import android.content.Context
 import android.content.Intent

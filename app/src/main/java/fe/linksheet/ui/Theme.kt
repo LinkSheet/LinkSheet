@@ -20,7 +20,7 @@ import fe.android.preference.helper.EnumTypeMapper
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
-import ui_overhaul.fe.linksheet.ui.NewTypography
+import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 
 
 private val LightColors = lightColorScheme(

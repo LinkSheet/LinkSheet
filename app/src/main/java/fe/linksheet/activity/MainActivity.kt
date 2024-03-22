@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.*
 import fe.linksheet.composable.main.MainRoute
+import ui_overhaul.fe.linksheet.composable.main.NewMainRoute
 import fe.linksheet.composable.settings.SettingsRoute
 import fe.linksheet.composable.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.settings.about.CreditsSettingsRoute
@@ -145,7 +146,11 @@ class MainActivity : ComponentActivity() {
                     startDestination = mainRoute,
                 ) {
                     animatedComposable(route = mainRoute) {
-                        MainRoute(navController = navController)
+                        if (mainViewModel.uiOverhaul()) {
+                            NewMainRoute(navController = navController)
+                        } else {
+                            MainRoute(navController = navController)
+                        }
                     }
 
                     val onBackPressed: () -> Unit = { navController.popBackStack() }

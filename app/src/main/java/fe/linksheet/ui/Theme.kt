@@ -8,12 +8,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,10 +19,8 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import fe.android.preference.helper.EnumTypeMapper
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.AndroidVersion
-import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.KoinContext
-import org.koin.core.annotation.KoinExperimentalAPI
+import ui_overhaul.fe.linksheet.ui.NewTypography
 
 
 private val LightColors = lightColorScheme(
@@ -125,7 +118,7 @@ enum class Theme {
 fun AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val theme = themeSettingsViewModel.theme.value
     val context = LocalContext.current
@@ -177,6 +170,15 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        typography = if(themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
+        content = content
+    )
+}
+
+@Composable
+fun PreviewTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = LightColors,
         typography = Typography,
         content = content
     )

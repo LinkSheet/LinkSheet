@@ -31,6 +31,8 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.SensitivePreference
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -41,6 +43,7 @@ import java.time.Duration
 class MainViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
+    val experimentRepository: ExperimentRepository,
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
     val analyticsClient: AnalyticsClient
@@ -53,6 +56,7 @@ class MainViewModel(
     val showDiscordBanner = preferenceRepository.asState(AppPreferences.showDiscordBanner)
     val donateCardDismissed = preferenceRepository.asState(AppPreferences.donateCardDismissed)
     var theme = preferenceRepository.asState(AppPreferences.theme)
+    val uiOverhaul = experimentRepository.asState(Experiments.uiOverhaul)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

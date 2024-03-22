@@ -37,7 +37,7 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
-import fe.linksheet.query.PackageQueryManager
+import new_query_manager.fe.linksheet.query.PackageQueryManager
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.AndroidVersion

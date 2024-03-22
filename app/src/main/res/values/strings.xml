@@ -451,10 +451,7 @@
         hiding the donation banner, following redirects externally, obtaining non-AMP pages externally and more to come!
     </string>
     <string name="built_by">Built and signed by</string>
-    <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow. This does not
-        necessarily mean anything bad, since anyone can fork the source code and build their own LinkSheet version, but
-        they may do so with malicious intent.
-    </string>
+    <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
     <string name="github_pipeline_build">Built and signed by the Github workflow</string>
     <string name="flavor">Flavor:</string>
@@ -627,7 +624,7 @@
         the \"www\" subdomain if present
     </string>
     <string name="nightly_experiments_card">Nightly experiments</string>
-    <string name="nightly_experiments_card_explainer">Tap to check out experiments / features currently in development</string>
+    <string name="nightly_experiments_card_explainer">Tap to check out features currently in development</string>
     <string name="experiments">Experiments</string>
     <string name="experiments_explainer">Try features currently in development</string>
     <string name="reset">Reset</string>

@@ -321,7 +321,7 @@
     <string name="linksheet_donation_explainer">LinkSheet es el resultado de más de <b>%s</b> de trabajo a lo largo de más de <b>%s</b>. Si desea mostrar su agradecimiento por mi trabajo, haga una donación. \u0020</string>
     <string name="built_by">Desarrollado y firmado por</string>
     <string name="donate">Donar</string>
-    <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github. Esto no significa necesariamente nada malo, ya que cualquiera puede bifurcar el código fuente y construir su propia versión de LinkSheet, pero puede hacerlo con malas intenciones.</string>
+    <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github.</string>
     <plurals name="hours">
         <item quantity="one">%s hora</item>
         <item quantity="many">%s horas</item>
@@ -460,7 +460,8 @@
     <string name="experiments">Experimentos</string>
     <string name="experiments_explainer">Pruebe las funciones actualmente en desarrollo</string>
     <string name="reset">Restablecer</string>
-    <string name="nightly_experiments_card_explainer">Pulse para ver los experimentos y funciones en desarrollo</string>
+    <string name="nightly_experiments_card_explainer">Pulse para ver las funciones en desarrollo</string>
     <string name="experiments_explainer_2">Las siguientes características / experimentos están en desarrollo activo y pueden no funcionar en absoluto. Por favor, no informes de errores en Github. Si quieres dar tu opinión, hazlo en Discord.</string>
     <string name="parse_shared_text_intent">Analizar el texto compartido si no se encuentra ninguna URL</string>
+    <string name="parse_shared_text_intent_explainer">Cuando se inicia una acción de compartir desde una aplicación que comparte texto que contiene una URL, intente encontrar (y usar) la primera URL en el texto, en lugar de dar un error</string>
 </resources>

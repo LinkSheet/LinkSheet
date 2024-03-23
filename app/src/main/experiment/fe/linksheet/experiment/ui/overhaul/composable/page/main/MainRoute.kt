@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.ui.overhaul.composable.main
+package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import android.net.Uri
 import androidx.annotation.StringRes
@@ -20,10 +20,12 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
+import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppSignature
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.Results
@@ -34,7 +36,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
-    val activity = LocalContext.currentActivity()
+    val activity = LocalActivity.current
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
 
@@ -107,13 +109,19 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
-                cardItem {
+                item(
+                    key = R.string.nightly_experiments_card,
+                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                ) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
 
             if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
-                cardItem {
+                item(
+                    key = R.string.running_unofficial_build,
+                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutAlert
+                ) {
                     UnofficialBuild()
                 }
             }
@@ -124,32 +132,44 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 //                }
 //            }
 
-//            cardItem(header = R.string.app_setup) {
-//                OpenDefaultBrowserCard(
-//                    activity = activity,
-//                    defaultBrowserEnabled = defaultBrowserEnabled,
-//                    defaultBrowserChanged = { defaultBrowserEnabled = it },
-//                    viewModel = viewModel
-//                )
-//            }
+            item(
+                key = R.string.browser_status,
+                contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+            ) {
+                OpenDefaultBrowserCard(
+                    activity = activity,
+                    defaultBrowserEnabled = defaultBrowserEnabled,
+                    defaultBrowserChanged = { defaultBrowserEnabled = it },
+                    viewModel = viewModel
+                )
+            }
 
-//            cardItem {
-//                ShizukuCard(
-//                    activity = activity,
-//                    uriHandler = uriHandler,
-//                    shizukuInstalled = shizukuInstalled,
-//                    shizukuRunning = shizukuRunning
-//                )
-//            }
+            item(
+                key = R.string.shizuku_integration,
+                contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+            ) {
+                ShizukuCard(
+                    activity = activity,
+                    uriHandler = uriHandler,
+                    shizukuInstalled = shizukuInstalled,
+                    shizukuRunning = shizukuRunning
+                )
+            }
 
             if (browserStatus != MainViewModel.BrowserStatus.Known) {
-                cardItem {
+                item(
+                    key = R.string.browser_status,
+                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                ) {
                     BrowserCard(browserStatus = browserStatus)
                 }
             }
 
             if (clipboardUri != null) {
-                cardItem {
+                item(
+                    key = R.string.open_copied_link,
+                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                ) {
                     OpenCopiedLink(uri = clipboardUri!!)
                 }
             }

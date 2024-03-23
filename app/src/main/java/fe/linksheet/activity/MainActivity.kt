@@ -43,8 +43,8 @@ import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.experiment.ui.overhaul.composable.main.NewMainRoute
-import fe.linksheet.experiment.ui.overhaul.composable.settings.advanced.NewExperimentsSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.module.analytics.AnalyticsEvent
@@ -224,7 +224,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     animatedComposable(route = themeSettingsRoute) {
-                        ThemeSettingsRoute(navController = navController)
+                        ThemeSettingsRoute(onBackPressed = onBackPressed)
                     }
 
                     animatedComposable(route = advancedSettingsRoute) {
@@ -251,7 +251,6 @@ class MainActivity : ComponentActivity() {
                     animatedArgumentRouteComposable(route = experimentSettingsRoute) { _, _ ->
                         if (mainViewModel.uiOverhaul()) {
                             NewExperimentsSettingsRoute(
-                                navController = navController,
                                 onBackPressed = onBackPressed
                             )
                         } else {

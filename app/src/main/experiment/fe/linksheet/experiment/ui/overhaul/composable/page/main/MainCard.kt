@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.ui.overhaul.composable.main
+package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background

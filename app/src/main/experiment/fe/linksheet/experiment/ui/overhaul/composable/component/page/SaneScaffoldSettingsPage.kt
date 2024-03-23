@@ -1,10 +1,8 @@
-package fe.linksheet.composable.settings
+package fe.linksheet.experiment.ui.overhaul.composable.component.page
 
-import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,21 +10,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-
 import fe.linksheet.R
 import fe.linksheet.ui.HkGroteskFontFamily
 
-@Deprecated(message = "Use SaneScaffoldSettingsPage instead")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScaffold(
+fun SaneScaffoldSettingsPage(
     modifier: Modifier = Modifier,
     headline: String,
     onBackPressed: () -> Unit,
     enableBackButton: Boolean = true,
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
-    content: @Composable (PaddingValues) -> Unit
+    content: SaneLazyListScope.() -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
         rememberTopAppBarState(),
@@ -47,42 +43,22 @@ fun SettingsScaffold(
                         fontFamily = HkGroteskFontFamily,
                         fontWeight = FontWeight.SemiBold
                     )
-                }, navigationIcon = {
+                },
+                navigationIcon = {
                     if (enableBackButton) {
                         IconButton(onClick = onBackPressed) {
                             Icon(
-                                imageVector = Icons.Default.ArrowBack,
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = stringResource(R.string.back),
                             )
                         }
                     }
-                }, scrollBehavior = scrollBehavior
+                },
+                scrollBehavior = scrollBehavior
             )
         },
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
-        content = { padding -> content(padding) }
-    )
-}
-
-@Deprecated(message = "Use SaneScaffoldSettingsPage instead")
-@Composable
-fun SettingsScaffold(
-    @StringRes headlineId: Int,
-    onBackPressed: () -> Unit,
-    enableBackButton: Boolean = true,
-    floatingActionButton: @Composable () -> Unit = {},
-    floatingActionButtonPosition: FabPosition = FabPosition.End,
-    modifier: Modifier = Modifier,
-    content: @Composable (PaddingValues) -> Unit
-) {
-    SettingsScaffold(
-        modifier = modifier,
-        headline = stringResource(id = headlineId),
-        onBackPressed = onBackPressed,
-        enableBackButton = enableBackButton,
-        floatingActionButton = floatingActionButton,
-        floatingActionButtonPosition = floatingActionButtonPosition,
-        content = content
+        content = { padding -> SaneLazyColumnPageLayout(padding = padding, content = content) }
     )
 }

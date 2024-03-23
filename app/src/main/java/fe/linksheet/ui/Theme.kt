@@ -10,10 +10,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.*
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import fe.android.preference.helper.EnumTypeMapper
@@ -90,9 +91,9 @@ private val DarkColors = darkColorScheme(
 
 //private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
 
-tailrec fun Context.findWindow(): Window? = when (this) {
-    is Activity -> window
-    is ContextWrapper -> baseContext.findWindow()
+tailrec fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
     else -> null
 }
 
@@ -123,7 +124,8 @@ sealed interface ThemeNew {
             materialYou: Boolean,
             amoled: Boolean,
         ): Pair<ColorScheme, Boolean> {
-            val colorScheme = if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicLightColorScheme(context) else LightColors
+            val colorScheme =
+                if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicLightColorScheme(context) else LightColors
             return colorScheme to false
         }
     }
@@ -135,7 +137,8 @@ sealed interface ThemeNew {
             materialYou: Boolean,
             amoled: Boolean,
         ): Pair<ColorScheme, Boolean> {
-            val scheme = if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicDarkColorScheme(context) else DarkColors
+            val scheme =
+                if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicDarkColorScheme(context) else DarkColors
 
             val colorScheme = if (amoled) scheme.copy(surface = Color.Black, background = Color.Black)
             else scheme
@@ -168,6 +171,8 @@ enum class Theme {
     }
 }
 
+val LocalActivity = staticCompositionLocalOf<Activity> { error("CompositionLocal LocalActivity not present") }
+
 @Composable
 fun AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
@@ -190,7 +195,8 @@ fun AppTheme(
     val isDark = pair.second
 
     val view = LocalView.current
-    val window = view.context.findWindow()
+    val activity = view.context.findActivity()
+    val window = activity?.window
 
     window?.let {
         WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
@@ -198,11 +204,13 @@ fun AppTheme(
 
     rememberSystemUiController(window).setSystemBarsColor(colorScheme.background, !isDark)
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = if (themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
-        content = content
-    )
+    CompositionLocalProvider(LocalActivity provides activity!!) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = if (themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
+            content = content
+        )
+    }
 }
 
 @Composable

@@ -1,10 +1,19 @@
 package fe.linksheet.experiment.ui.overhaul.ui
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import fe.linksheet.R
 import fe.linksheet.ui.HkGroteskFontFamily
 
+//
+//val GoogleSansText = FontFamily(
+//    Font(R.font.google_sans_text_regular),
+//    Font(R.font.google_sans_text_medium, FontWeight.Medium),
+//    Font(R.font.google_sans_text_bold, FontWeight.Bold),
+//)
 
 val NewDefaultTypography = Typography()
 

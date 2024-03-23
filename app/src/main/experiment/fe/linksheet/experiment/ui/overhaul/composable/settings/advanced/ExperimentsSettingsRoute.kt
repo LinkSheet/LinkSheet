@@ -88,7 +88,7 @@ fun NewExperimentsSettingsRoute(
                         else MiddleShape
 
                         val itemPadding = if (first) PaddingValues(bottom = 1.dp)
-                        else if (last) PaddingValues(top = 1.dp, bottom = if(!experimentLast) 12.dp else 0.dp)
+                        else if (last) PaddingValues(top = 1.dp)
                         else PaddingValues(vertical = 2.dp)
 
                         ListItem(

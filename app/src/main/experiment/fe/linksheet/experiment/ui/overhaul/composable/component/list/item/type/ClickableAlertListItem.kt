@@ -1,7 +1,9 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.MaterialTheme
@@ -18,6 +20,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun ClickableAlertListItem(
+    modifier: Modifier = Modifier.height(IntrinsicSize.Min),
     enabled: Boolean = true,
     onClick: () -> Unit,
     role: Role? = Role.Button,
@@ -28,6 +31,7 @@ fun ClickableAlertListItem(
     @StringRes supportingContentTextId: Int,
 ) {
     ClickableAlertListItem(
+        modifier = modifier,
         enabled = enabled,
         onClick = onClick,
         role = role,
@@ -41,6 +45,7 @@ fun ClickableAlertListItem(
 
 @Composable
 fun ClickableAlertListItem(
+    modifier: Modifier = Modifier.height(IntrinsicSize.Min),
     enabled: Boolean = true,
     onClick: () -> Unit,
     role: Role? = Role.Button,
@@ -51,6 +56,7 @@ fun ClickableAlertListItem(
     supportingContentText: String,
 ) {
     ClickableShapeListItem(
+        modifier = modifier,
         enabled = enabled,
         onClick = onClick,
         role = role,

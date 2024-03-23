@@ -2,11 +2,14 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.ClickableAlertListItem

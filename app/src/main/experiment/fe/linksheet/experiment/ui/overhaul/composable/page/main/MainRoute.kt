@@ -2,8 +2,8 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import android.net.Uri
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
@@ -21,7 +21,11 @@ import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.extension.compose.*
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLazyColumnPageLayout
+import fe.linksheet.extension.compose.ObserveStateChange
+import fe.linksheet.extension.compose.OnFocused
+import fe.linksheet.extension.compose.focusGainedEvents
+import fe.linksheet.extension.compose.header
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -30,7 +34,6 @@ import fe.linksheet.util.AppSignature
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.Results
 import fe.linksheet.util.UriUtil
-import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +53,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     val browserStatus by remember { mutableStateOf(viewModel.hasBrowser()) }
 
     LaunchedEffect(Unit) {
-        delay(200)
+//        delay(200)
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
     }
 
@@ -85,33 +88,27 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
         )
     }) { padding ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 12.dp)
-        ) {
+        SaneLazyColumnPageLayout(padding = padding, verticalArrangement = Arrangement.spacedBy(6.dp)) {
             item {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        modifier = Modifier,
-                        text = stringResource(R.string.app_name),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 30.sp,
-                    )
+//                Column(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    modifier = Modifier,
+                    text = stringResource(R.string.app_name),
+                    fontFamily = HkGroteskFontFamily,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 30.sp,
+                )
 
-                    if (!LinkSheetAppConfig.showDonationBanner()) {
-                        Text(text = stringResource(id = R.string.thanks_for_donating))
-                    }
+                if (!LinkSheetAppConfig.showDonationBanner()) {
+                    Text(text = stringResource(id = R.string.thanks_for_donating))
                 }
+//                }
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
                 item(
                     key = R.string.nightly_experiments_card,
-                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                    contentType = ContentTypeDefaults.ClickableAlert
                 ) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
@@ -120,7 +117,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
                 item(
                     key = R.string.running_unofficial_build,
-                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutAlert
+                    contentType = ContentTypeDefaults.Alert
                 ) {
                     UnofficialBuild()
                 }
@@ -134,7 +131,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             item(
                 key = R.string.browser_status,
-                contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                contentType = ContentTypeDefaults.ClickableAlert
             ) {
                 OpenDefaultBrowserCard(
                     activity = activity,
@@ -146,7 +143,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             item(
                 key = R.string.shizuku_integration,
-                contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                contentType = ContentTypeDefaults.ClickableAlert
             ) {
                 ShizukuCard(
                     activity = activity,
@@ -159,7 +156,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             if (browserStatus != MainViewModel.BrowserStatus.Known) {
                 item(
                     key = R.string.browser_status,
-                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                    contentType = ContentTypeDefaults.ClickableAlert
                 ) {
                     BrowserCard(browserStatus = browserStatus)
                 }
@@ -168,7 +165,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             if (clipboardUri != null) {
                 item(
                     key = R.string.open_copied_link,
-                    contentType = ContentTypeDefaults.SaneLazyColumnLayoutClickableAlert
+                    contentType = ContentTypeDefaults.ClickableAlert
                 ) {
                     OpenCopiedLink(uri = clipboardUri!!)
                 }

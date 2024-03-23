@@ -1,6 +1,7 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.page
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,25 +27,25 @@ data class GroupItem(
 ) {
     companion object {
         val top = GroupItem(
-            ContentTypeDefaults.SaneLazyColumnLayoutGroupTop,
+            ContentTypeDefaults.TopGroupItem,
             SaneLazyColumnPageDefaults.groupSpacingTop,
             ShapeListItemDefaults.TopShape
         )
 
         val middle = GroupItem(
-            ContentTypeDefaults.SaneLazyColumnLayoutGroupMiddle,
+            ContentTypeDefaults.MiddleGroupItem,
             SaneLazyColumnPageDefaults.groupSpacingMiddle,
             ShapeListItemDefaults.MiddleShape
         )
 
         val bottom = GroupItem(
-            ContentTypeDefaults.SaneLazyColumnLayoutGroupBottom,
+            ContentTypeDefaults.BottomGroupItem,
             SaneLazyColumnPageDefaults.groupSpacingBottom,
             ShapeListItemDefaults.BottomShape
         )
 
         val single = GroupItem(
-            ContentTypeDefaults.SaneLazyColumnLayoutGroupSingle,
+            ContentTypeDefaults.SingleGroupItem,
             shape = ShapeListItemDefaults.SingleShape
         )
     }
@@ -71,16 +72,14 @@ object SaneLazyColumnPageDefaults {
 fun SaneLazyColumnPageLayout(
     padding: PaddingValues,
     contentPadding: PaddingValues = SaneLazyColumnPageDefaults.contentPadding,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: SaneLazyListScope.() -> Unit,
 ) {
     LazyColumn(
-        modifier = Modifier
-            .padding(padding)
-            .fillMaxSize(),
+        modifier = Modifier.padding(padding).fillMaxSize(),
         contentPadding = contentPadding,
-        content = {
-            content(SaneLazyListScopeImpl(this))
-        }
+        verticalArrangement = verticalArrangement,
+        content = { content(SaneLazyListScopeImpl(this)) }
     )
 }
 
@@ -164,13 +163,13 @@ fun TextDivider(text: String) {
 @Stable
 data class SaneLazyListScopeImpl(val lazyListScope: LazyListScope) : SaneLazyListScope, LazyListScope by lazyListScope {
     override fun divider(stringRes: Int, key: Any) {
-        item(key = key, contentType = ContentTypeDefaults.SaneLazyColumnLayoutDivider) {
+        item(key = key, contentType = ContentTypeDefaults.Divider) {
             TextDivider(text = stringResource(id = stringRes))
         }
     }
 
     override fun divider(key: Any, text: String) {
-        item(key = key, contentType = ContentTypeDefaults.SaneLazyColumnLayoutDivider) {
+        item(key = key, contentType = ContentTypeDefaults.Divider) {
             TextDivider(text = text)
         }
     }

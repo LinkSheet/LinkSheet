@@ -1,7 +1,9 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +21,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun AlertListItem(
+    modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
     colors: ListItemColors = ShapeListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.primaryContainer),
     imageVector: ImageVector,
     @StringRes headlineContentTextId: Int,
@@ -26,6 +29,7 @@ fun AlertListItem(
     @StringRes supportingContentTextId: Int,
 ) {
     ShapeListItem(
+        modifier = modifier,
         colors = colors,
         leadingContent = {
             Icon(

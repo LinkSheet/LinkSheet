@@ -26,25 +26,25 @@ data class GroupItem(
     val shape: Shape,
 ) {
     companion object {
-        val top = GroupItem(
+        val Top = GroupItem(
             ContentTypeDefaults.TopGroupItem,
-            SaneLazyColumnPageDefaults.groupSpacingTop,
+            SaneLazyColumnPageDefaults.GroupSpacingTop,
             ShapeListItemDefaults.TopShape
         )
 
-        val middle = GroupItem(
+        val Middle = GroupItem(
             ContentTypeDefaults.MiddleGroupItem,
-            SaneLazyColumnPageDefaults.groupSpacingMiddle,
+            SaneLazyColumnPageDefaults.GroupSpacingMiddle,
             ShapeListItemDefaults.MiddleShape
         )
 
-        val bottom = GroupItem(
+        val Bottom = GroupItem(
             ContentTypeDefaults.BottomGroupItem,
-            SaneLazyColumnPageDefaults.groupSpacingBottom,
+            SaneLazyColumnPageDefaults.GroupSpacingBottom,
             ShapeListItemDefaults.BottomShape
         )
 
-        val single = GroupItem(
+        val Single = GroupItem(
             ContentTypeDefaults.SingleGroupItem,
             shape = ShapeListItemDefaults.SingleShape
         )
@@ -52,18 +52,18 @@ data class GroupItem(
 }
 
 object SaneLazyColumnPageDefaults {
-    val verticalSpacing = 12.dp
-    val contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = verticalSpacing)
+    val VerticalSpacing = 12.dp
+    val ContentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = VerticalSpacing, bottom = 6.dp)
 
-    val textDividerPadding = PaddingValues(
+    val TextDividerPadding = PaddingValues(
         start = 16.dp,
-        top = verticalSpacing,
-        bottom = verticalSpacing
+        top = VerticalSpacing,
+        bottom = VerticalSpacing
     )
 
-    val groupSpacingTop = PaddingValues(bottom = 1.dp)
-    val groupSpacingMiddle = PaddingValues(vertical = 1.dp)
-    val groupSpacingBottom = PaddingValues(top = 1.dp)
+    val GroupSpacingTop = PaddingValues(bottom = 1.dp)
+    val GroupSpacingMiddle = PaddingValues(vertical = 1.dp)
+    val GroupSpacingBottom = PaddingValues(top = 1.dp)
 
 
 }
@@ -71,12 +71,14 @@ object SaneLazyColumnPageDefaults {
 @Composable
 fun SaneLazyColumnPageLayout(
     padding: PaddingValues,
-    contentPadding: PaddingValues = SaneLazyColumnPageDefaults.contentPadding,
+    contentPadding: PaddingValues = SaneLazyColumnPageDefaults.ContentPadding,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: SaneLazyListScope.() -> Unit,
 ) {
     LazyColumn(
-        modifier = Modifier.padding(padding).fillMaxSize(),
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxSize(),
         contentPadding = contentPadding,
         verticalArrangement = verticalArrangement,
         content = { content(SaneLazyListScopeImpl(this)) }
@@ -98,6 +100,11 @@ interface SaneLazyColumnGroupScope {
         values: Array<T>,
         content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
     )
+
+    fun <K : Any, T : GroupValueProvider<K>, V> items(
+        values: Map<T, V>,
+        content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
+    )
 }
 
 @Stable
@@ -109,12 +116,12 @@ data class SaneLazyColumnGroupScopeImpl(
     private var counter = 0
 
     private fun currentItem(): GroupItem {
-        if (size == 1) return GroupItem.single
+        if (size == 1) return GroupItem.Single
 
         return when (counter) {
-            0 -> GroupItem.top
-            size - 1 -> GroupItem.bottom
-            else -> GroupItem.middle
+            0 -> GroupItem.Top
+            size - 1 -> GroupItem.Bottom
+            else -> GroupItem.Middle
         }
     }
 
@@ -145,15 +152,32 @@ data class SaneLazyColumnGroupScopeImpl(
             counter++
         }
     }
+
+    override fun <K : Any, T : GroupValueProvider<K>, V> items(
+        map: Map<T, V>,
+        content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
+    ) {
+        require(counter < size) { "Group has ${counter + 1} items, but only supports $size" }
+        require(counter + map.size <= size) { "Group has ${counter + 1}/$size items, can't fit an additional ${map.size}" }
+
+        for ((valueProvider, value) in map) {
+            val groupItem = currentItem()
+            item(key = valueProvider.key, contentType = groupItem) {
+                content(valueProvider, value, groupItem.padding, groupItem.shape)
+            }
+
+            counter++
+        }
+    }
 }
 
 @DslMarker
 annotation class SaneLazyListScopeDslMarker
 
 @Composable
-fun TextDivider(text: String) {
+fun TextDivider(text: String, padding: PaddingValues = SaneLazyColumnPageDefaults.TextDividerPadding) {
     Text(
-        modifier = Modifier.padding(SaneLazyColumnPageDefaults.textDividerPadding),
+        modifier = Modifier.padding(padding),
         text = text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.titleSmall

@@ -7,5 +7,5 @@ import androidx.compose.runtime.ReadOnlyComposable
 
 @ReadOnlyComposable
 @Composable
-@Deprecated(message = "Use LocalActivity.current instead", replaceWith = ReplaceWith("LocalActivity.current"))
+@Deprecated(message = "Use LocalActivity.current instead", replaceWith = ReplaceWith("LocalActivity.current", "fe.linksheet.ui.LocalActivity"))
 fun <T> CompositionLocal<T>.currentActivity() = current as Activity

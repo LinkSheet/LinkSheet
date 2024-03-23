@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.TrailingRadioButtonListItem
 
 
 @Composable
@@ -21,7 +21,7 @@ fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
     @StringRes headlineContentTextId: Int,
     @StringRes supportingContentTextId: Int? = null,
 ) {
-    RadioButtonListItem(
+    TrailingRadioButtonListItem(
         enabled = enabled,
         shape = shape,
         padding = padding,

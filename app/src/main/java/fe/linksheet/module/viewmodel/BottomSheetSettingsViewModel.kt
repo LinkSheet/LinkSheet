@@ -29,6 +29,10 @@ class BottomSheetSettingsViewModel(
     var usageStatsSorting = preferenceRepository.asState(AppPreferences.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
 
+    val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
+    val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
+    val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)
+
     val usageStatsPermission = UsageStatsPermission(context)
 
     var wasTogglingUsageStatsSorting by mutableStateOf(false)

@@ -29,6 +29,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
+import fe.linksheet.activity.bottomsheet.column.ClickType
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
 import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
@@ -389,9 +390,12 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 bottomSheetViewModel = bottomSheetViewModel,
                 showPackage = showPackage,
                 hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
-                launchApp = { item, always, private ->
-                    launchApp(result, item, always, if (private) privateBrowser else null)
-                }
+                onClick = { type ->
+
+                },
+//                launchApp = { item, always, private ->
+//                    launchApp(result, item, always, if (private) privateBrowser else null)
+//                }
             )
 
             // TODO: Not sure if this divider should be kept
@@ -434,8 +438,15 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     showPackage = showPackage
                 )
             } else {
+//                val configs = mapOf(
+//                    ClickType.Single to bottomSheetViewModel.tapConfigSingle(),
+//                    ClickType.Double to bottomSheetViewModel.tapConfigDouble(),
+//                    ClickType.Long to bottomSheetViewModel.tapConfigLong()
+//                )
+
                 List(
                     result = result,
+//                    clickConfigs = configs,
                     hasPreferredApp = hasPreferredApp,
                     hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
                     isExpanded = isExpanded,
@@ -510,6 +521,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         showPackage: Boolean,
+//        clickConfigs: Map<ClickType, TapConfig>,
     ) {
         var selected by remember { mutableIntStateOf(-1) }
 //        val sheetScope = this@List
@@ -517,6 +529,10 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         val listState = rememberLazyListState()
 //        listState.layoutInfo.viewportSize
 //        Local
+//        val impl = mapOf(
+//            TapConfig.None to {},
+//            TapConfig.OpenApp to
+//        )
 
         Column(
             modifier = Modifier
@@ -537,18 +553,24 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     ListBrowserColumn(
                         appInfo = info,
                         selected = if (!hasPreferredApp) index == selected else null,
-                        onClick = {
-                            selected = if (selected != index) index else -1
-                            if (selected != -1 && !isExpanded) {
-                                requestExpand()
+                        onClick = { type ->
+                            if (type == ClickType.Double) {
+                                launchApp(result, info, false, null)
+                            } else if (type == ClickType.Single) {
+                                selected = if (selected != index) index else -1
+                                if (selected != -1 && !isExpanded) {
+                                    requestExpand()
+                                }
+                            } else if (type == ClickType.Private) {
+                                launchApp(result, info, false, privateBrowser)
                             }
                         },
                         preferred = false,
                         privateBrowser = privateBrowser,
                         showPackage = showPackage,
-                        launchApp = { item, always, private ->
-                            launchApp(result, item, always, if (private) privateBrowser else null)
-                        }
+//                        launchApp = { item, always, private ->
+//                            launchApp(result, item, always, if (private) privateBrowser else null)
+//                        }
                     )
 
                     // TODO: Selector?
@@ -603,7 +625,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             enabled = selected != -1,
             useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
             openSettings = { viewModel.startMainActivity(activity) },
-            choiceClick = { always -> launchApp(result, result.resolved[selected], always) },
+            choiceClick = { type -> launchApp(result, result.resolved[selected], type == ClickType.Always) },
         )
     }
 

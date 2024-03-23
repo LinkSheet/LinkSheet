@@ -42,6 +42,7 @@ import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.runIf
 import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.ui.LocalActivity
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.material3.placeholder
 import io.github.fornewid.placeholder.material3.shimmer
@@ -65,7 +66,7 @@ fun ExperimentalUrlBar(
 ) {
     var showFullUrl by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val activity = LocalContext.currentActivity()
+    val activity = LocalActivity.current
 
     val crossProfileApps = context.getSystemService<CrossProfileApps>()!!
 

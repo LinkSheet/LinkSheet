@@ -247,7 +247,10 @@ dependencies {
 
     runtimeOnly(AndroidX.compose.material.icons.extended)
     implementation(libs.ipaddress)
-    implementation ("io.github.fornewid:placeholder-material3:1.1.2")
+    implementation("io.github.fornewid:placeholder-material3:1.1.2")
+    implementation("androidx.compose.material:material-icons-extended:1.7.0-alpha03")
+
+
 //    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
     implementation("com.github.skydoves:flexible-bottomsheet-material3:0.1.2")
     implementation(libs.signifykt)
@@ -301,13 +304,13 @@ dependencies {
     implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
-    implementation (libs.support.utils)
-    implementation (libs.lib.publicsuffixlist)
+    implementation(libs.support.utils)
+    implementation(libs.lib.publicsuffixlist)
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)
 
-    debugImplementation ("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
 
     testImplementation(Testing.robolectric)
     testImplementation(Testing.mockito.core)

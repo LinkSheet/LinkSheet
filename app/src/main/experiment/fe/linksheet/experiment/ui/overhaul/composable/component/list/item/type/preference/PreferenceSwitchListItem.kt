@@ -15,19 +15,37 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.S
 fun PreferenceSwitchListItem(
     enabled: Boolean = true,
     preference: MutablePreferenceState<Boolean, Boolean, Preference.Default<Boolean>>,
-    checked: Boolean = preference(),
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = PaddingValues(),
     @StringRes headlineContentTextId: Int,
     @StringRes supportingContentTextId: Int? = null,
 ) {
+    PreferenceSwitchListItem(
+        enabled = enabled,
+        preference = preference,
+        shape = shape,
+        padding = padding,
+        headlineContentText = stringResource(id = headlineContentTextId),
+        supportingContentText = supportingContentTextId?.let { stringResource(id = it) }
+    )
+}
+
+@Composable
+fun PreferenceSwitchListItem(
+    enabled: Boolean = true,
+    preference: MutablePreferenceState<Boolean, Boolean, Preference.Default<Boolean>>,
+    shape: Shape = ShapeListItemDefaults.SingleShape,
+    padding: PaddingValues = PaddingValues(),
+    headlineContentText: String,
+    supportingContentText: String? = null,
+) {
     SwitchListItem(
         enabled = enabled,
         shape = shape,
         padding = padding,
-        checked = preference() == checked,
+        checked = preference(),
         onCheckedChange = { preference(it) },
-        headlineContentText = stringResource(id = headlineContentTextId),
-        supportingContentText = supportingContentTextId?.let { stringResource(id = it) }
+        headlineContentText = headlineContentText,
+        supportingContentText = supportingContentText
     )
 }

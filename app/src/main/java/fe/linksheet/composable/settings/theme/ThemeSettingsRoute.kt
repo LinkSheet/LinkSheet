@@ -5,9 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
+import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceRadioButtonListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
@@ -34,13 +33,11 @@ data class ThemeSettingsData(val theme: Theme, @StringRes val textId: Int) : Gro
 fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewModel = koinViewModel()) {
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.theme), onBackPressed = onBackPressed) {
         if (AndroidVersion.AT_LEAST_API_31_S) {
-            item(key = R.string.theme_enable_material_you, contentType = "single") {
-                SwitchListItem(
-                    shape = ShapeListItemDefaults.SingleShape,
-                    checked = viewModel.themeMaterialYou(),
-                    onCheckedChange = { viewModel.themeMaterialYou(it) },
-                    headlineContentText = stringResource(id = R.string.theme_enable_material_you),
-                    supportingContentText = stringResource(id = R.string.theme_enable_material_you_explainer)
+            item(key = R.string.theme_enable_material_you, contentType = ContentTypeDefaults.SingleGroupItem) {
+                PreferenceSwitchListItem(
+                    preference = viewModel.themeMaterialYou,
+                    headlineContentTextId = R.string.theme_enable_material_you,
+                    supportingContentTextId = R.string.theme_enable_material_you_explainer
                 )
             }
 

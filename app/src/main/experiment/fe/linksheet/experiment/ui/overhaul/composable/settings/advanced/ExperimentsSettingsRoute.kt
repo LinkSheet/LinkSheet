@@ -1,6 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.composable.settings.advanced
 
-import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -9,25 +8,24 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Restore
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.android.compose.dialog.helper.dialogHelper
-import fe.android.preference.helper.compose.StatePreference
 import fe.kotlin.extension.iterable.forEachWithInfo
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.*
+import fe.linksheet.experiment.ui.overhaul.ui.GoogleSansText
 import fe.linksheet.extension.compose.clickable
-import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
+import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.compose.koinViewModel
-import java.time.LocalDateTime
-import kotlin.math.exp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -57,22 +55,38 @@ fun NewExperimentsSettingsRoute(
 //            verticalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 12.dp)
         ) {
-//            stickyHeader(key = "header") {
-//                Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-//                    PreferenceSubtitle(
-//                        text = stringResource(id = R.string.experiments_explainer_2),
-//                        paddingHorizontal = 10.dp
-//                    )
-//                }
-//            }
+            item(key = "header", contentType = "header") {
+                ListItem(
+                    modifier = Modifier.clip(SingleShape),
+                    colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        leadingIconColor = contentColorFor(MaterialTheme.colorScheme.primaryContainer),
+                        headlineColor = contentColorFor(MaterialTheme.colorScheme.primaryContainer),
+                        supportingColor = contentColorFor(MaterialTheme.colorScheme.primaryContainer)
+                    ),
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Default.Warning,
+                            contentDescription = stringResource(id = R.string.warning),
+                        )
+                    },
+                    headlineContent = {
+                        Text(
+                            text = stringResource(id = R.string.experiments_explainer_2),
+                            fontFamily = HkGroteskFontFamily,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    },
+                    supportingContent = {
+                        Text(text = stringResource(id = R.string.experiments_explainer_3))
+                    }
+                )
+            }
 
             viewModel.visibleExperiments.forEachWithInfo { experiment, _, _, experimentLast ->
-//                stickyHeader {
-//                    PreferenceSubtitle(text = "Experiment ${experiment.name}", paddingHorizontal = 10.dp)
-//                }
-                item {
+                item(key = experiment.name, contentType = "exp-title") {
                     Text(
-                        modifier = Modifier.padding(start = 16.dp, bottom = 12.dp),
+                        modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp),
                         text = "Experiment ${experiment.name}",
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.titleSmall
@@ -80,7 +94,7 @@ fun NewExperimentsSettingsRoute(
                 }
 
                 experiment.preferences.forEachWithInfo { pref, index, first, last ->
-                    item {
+                    item(key = pref.key, contentType = "pref-$first-$last") {
                         val state = viewModel.stateMap[pref.key]!!
                         val shape = if (first && last) SingleShape
                         else if (first) TopShape
@@ -88,39 +102,30 @@ fun NewExperimentsSettingsRoute(
                         else MiddleShape
 
                         val itemPadding = if (first) PaddingValues(bottom = 1.dp)
-                        else if (last) PaddingValues(top = 1.dp, bottom = if(!experimentLast) 12.dp else 0.dp)
+                        else if (last) PaddingValues(top = 1.dp)
                         else PaddingValues(vertical = 2.dp)
 
                         ListItem(
                             modifier = Modifier
                                 .clip(shape)
                                 .padding(itemPadding)
-                                .background(
-                                    color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
-                                )
-                                .clickable(onClick = {
-                                    state(!state())
-                                }
-                                ),
-                            colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerHighest),
+                                .clickable(onClick = { state(!state()) }),
+                            colors = ListItemDefaults.colors(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                headlineColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerHigh),
+                                supportingColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerHigh)
+                            ),
                             headlineContent = {
-                                Text(text = pref.key.replace("experiment_", ""))
+                                Text(
+                                    text = pref.key.replace("experiment_", ""),
+                                    overflow = TextOverflow.Ellipsis,
+                                    maxLines = 1
+                                )
                             },
                             trailingContent = {
                                 Switch(checked = state(), onCheckedChange = { state(it) })
                             }
                         )
-//
-//                        SwitchRow(
-//                            state = viewModel.stateMap[pref.key]!!,
-//                            headline = pref.key.replace("experiment_", "")
-//                        )
-                    }
-                }
-
-                if (!experimentLast) {
-                    item {
-                        Spacer(modifier = Modifier.height(12.dp))
                     }
                 }
             }

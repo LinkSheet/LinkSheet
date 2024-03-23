@@ -306,9 +306,8 @@ dependencies {
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)
-    testImplementation(kotlin("test"))
 
-
+    debugImplementation ("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
 
     testImplementation(Testing.robolectric)
     testImplementation(Testing.mockito.core)
@@ -318,7 +317,6 @@ dependencies {
     androidTestImplementation(AndroidX.test.espresso.core)
     androidTestImplementation(AndroidX.test.ext.truth)
     androidTestImplementation(AndroidX.test.runner)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestUtil(AndroidX.test.orchestrator)
 
     debugImplementation(AndroidX.compose.ui.tooling)

@@ -1,10 +1,7 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
 import fe.linksheet.extension.compose.enabled
 
 
@@ -58,6 +56,7 @@ object ShapeListItemDefaults {
 
 @Composable
 fun ClickableShapeListItem(
+    modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
     enabled: Boolean = true,
     onClick: () -> Unit,
     role: Role? = null,
@@ -75,7 +74,7 @@ fun ClickableShapeListItem(
             .clip(shape)
             .clickable(enabled = enabled, role = role, onClick = onClick)
             .enabled(enabled)
-            .height(IntrinsicSize.Min)
+            .then(modifier)
             .padding(padding),
         colors = colors,
         overlineContent = overlineContent,
@@ -88,6 +87,7 @@ fun ClickableShapeListItem(
 
 @Composable
 fun ShapeListItem(
+    modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = PaddingValues(),
     colors: ListItemColors = ShapeListItemDefaults.colors(),
@@ -98,10 +98,7 @@ fun ShapeListItem(
     trailingContent: OptionalContent = null,
 ) {
     ListItem(
-        modifier = Modifier
-            .clip(shape)
-            .height(IntrinsicSize.Min)
-            .padding(padding),
+        modifier = Modifier.clip(shape).then(modifier).padding(padding),
         colors = colors,
         overlineContent = overlineContent,
         headlineContent = headlineContent,

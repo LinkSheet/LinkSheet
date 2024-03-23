@@ -1,6 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced
 
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.filled.Warning
@@ -9,19 +8,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.AlertListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
-import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -41,8 +36,9 @@ fun NewExperimentsSettingsRoute(
             }
         }
     ) {
-        item(key = R.string.warning, contentType = ContentTypeDefaults.SaneLazyColumnLayoutAlert) {
+        item(key = R.string.warning, contentType = ContentTypeDefaults.Alert) {
             AlertListItem(
+                colors = ShapeListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.errorContainer),
                 imageVector = Icons.Default.Warning,
                 contentDescriptionTextId = R.string.warning,
                 headlineContentTextId = R.string.experiments_explainer_2,

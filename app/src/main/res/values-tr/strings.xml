@@ -432,7 +432,7 @@
     <string name="no_browser_installed_explainer">LinkSheet, tarayıcı olduğunu iddia eden herhangi bir uygulama bulamadı. En iyi deneyim için, bir tarayıcı yükleyin.</string>
     <string name="linksheet_donation_explainer_2"><b>5€</b>\'dan fazla (crypto ile bağış yaparsanız <b>4€</b>) bir bağış, bağış afişini gizleme, harici yönlendirmeleri takip etme, AMP olmayan sayfaları edinme (ve gelecekte daha fazlası) gibi <b>Pro özel özellikleri</b>ni barındıran <b>LinkSheet Pro</b>\'ya erişmenizi sağlar. \u0020</string>
     <string name="show_linksheet_referrer_explainer">Bir uygulama başlatıldığında, hangi uygulamanın başlattığını veya yönlendirdiğini kontrol edebilir. LinkSheet bir uygulama başlattığında, varsayılan olarak kendini gizler ve LinkSheet\'i başlatan uygulamayı gösterir. LinkSheet\'i, açtığı uygulamalar için yönlendiren olarak göstermek için bunu etkinleştirin.</string>
-    <string name="built_by_error">Bu yapı, 1fexd veya GitHub iş akışı tarafından imzalanmadı. Bu mutlaka kötü bir şey olduğu anlamına gelmez, çünkü herkes kaynak kodunu çatallayıp kendi LinkSheet sürümünü oluşturabilir, fakat bunu kötü niyetli de yapabilirler.</string>
+    <string name="built_by_error">Bu yapı, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="commit">İşleme:</string>
     <string name="branch">Dal:</string>
     <string name="donate_other">Eğer başka bir yolla (SEPA Transfer, PayPal, başka bir kripto para, vb.) bağış yapmak istiyorsanız, lütfen \u0020<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020adresine bir email gönderin \u0020</string>
@@ -451,7 +451,7 @@
     <string name="onboarding_5_button">Bitir</string>
     <string name="nightly_experiments_card">Gecelik deneyler</string>
     <string name="experiments_explainer_2">Aşağıdaki özellikler / deneyler henüz geliştirme aşamasındadır ve hiç çalışmayabilir. Lütfen bunlarla ilgili hataları Github\'da bildirmeyin. Geri bildirim sağlamak istiyorsanız, bunu Discord\'da yapın.</string>
-    <string name="nightly_experiments_card_explainer">Şu anda geliştirilmekte olan deneylere/özelliklere göz atmak için dokunun</string>
+    <string name="nightly_experiments_card_explainer">Şu anda geliştirilmekte olan özelliklere göz atmak için dokunun</string>
     <string name="experiments">Deneyler</string>
     <string name="experiments_explainer">Geliştirilmekte olan özellikleri deneyin</string>
     <string name="reset">Sıfırla</string>

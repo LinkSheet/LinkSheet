@@ -1,9 +1,7 @@
 package fe.linksheet.experiment.ui.overhaul.composable.settings.advanced
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -103,13 +101,14 @@ fun NewExperimentsSettingsRoute(
 
                         val itemPadding = if (first) PaddingValues(bottom = 1.dp)
                         else if (last) PaddingValues(top = 1.dp)
-                        else PaddingValues(vertical = 2.dp)
+                        else PaddingValues(vertical = 1.dp)
 
                         ListItem(
                             modifier = Modifier
                                 .clip(shape)
                                 .padding(itemPadding)
-                                .clickable(onClick = { state(!state()) }),
+                                .clickable(onClick = { state(!state()) })
+                                .height(IntrinsicSize.Min),
                             colors = ListItemDefaults.colors(
                                 containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                                 headlineColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerHigh),
@@ -123,7 +122,11 @@ fun NewExperimentsSettingsRoute(
                                 )
                             },
                             trailingContent = {
-                                Switch(checked = state(), onCheckedChange = { state(it) })
+                                Switch(
+                                    modifier = Modifier.fillMaxHeight(),
+                                    checked = state(),
+                                    onCheckedChange = { state(it) }
+                                )
                             }
                         )
                     }
@@ -133,9 +136,9 @@ fun NewExperimentsSettingsRoute(
     }
 }
 
-val SingleShape = RoundedCornerShape(24.dp)
+val SingleShape = RoundedCornerShape(20.dp)
 
-val TopShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
+val TopShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
 val MiddleShape = RoundedCornerShape(4.dp)
-val BottomShape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomEnd = 24.dp, bottomStart = 24.dp)
+val BottomShape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomEnd = 20.dp, bottomStart = 20.dp)
 

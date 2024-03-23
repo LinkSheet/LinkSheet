@@ -7,6 +7,7 @@ import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
+import fe.linksheet.ui.Theme
 import org.koin.core.component.KoinComponent
 
 class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(context), KoinComponent {
@@ -14,6 +15,10 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
 
     private val followRedirectsExternalService = asState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = asState(AppPreferences.amp2HtmlExternalService)
+
+    private val theme = asState(AppPreferences.theme)
+    private val themeAmoled = asState(AppPreferences.themeAmoled)
+
 
     private val preferencesRequiringPermission by lazy {
         mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
@@ -24,6 +29,12 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
         if (!LinkSheetAppConfig.isPro()) {
             followRedirectsExternalService(false)
             amp2HtmlExternalService(false)
+        }
+
+        // Migrate away from AmoledBlack
+        if (theme() == Theme.AmoledBlack) {
+            themeAmoled(true)
+            theme(Theme.Dark)
         }
     }
 

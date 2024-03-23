@@ -135,7 +135,7 @@
     </string>
     <string name="theme">Theme</string>
     <string name="theme_explainer">Change the theme of the app</string>
-    <string name="system">System</string>
+    <string name="system">Follow system</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="amoled_black">Amoled Black</string>
@@ -636,4 +636,9 @@
     <string name="experiments_explainer_3">Experiments are under active development and may not work correctly, or at all. Please do not report bugs on Github. If you want to
         provide feedback, do so on Discord.
     </string>
+    <string name="theme_enable_material_you">Dynamic color</string>
+    <string name="theme_enable_amoled">Pure black</string>
+    <string name="theme_mode">Theme mode</string>
+    <string name="theme_enable_amoled_explainer">Use pure black theme if dark mode is enabled</string>
+    <string name="theme_enable_material_you_explainer">Use Android 12+\'s Material You device theme</string>
 </resources>

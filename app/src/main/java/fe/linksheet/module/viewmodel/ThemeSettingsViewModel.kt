@@ -13,5 +13,8 @@ class ThemeSettingsViewModel(
     experimentRepository: ExperimentRepository,
 ) : BaseViewModel(preferenceRepository) {
     var theme = preferenceRepository.asState(AppPreferences.theme)
+    val themeMaterialYou = preferenceRepository.asState(AppPreferences.themeMaterialYou)
+    var themeAmoled = preferenceRepository.asState(AppPreferences.themeAmoled)
+
     val uiOverhaul = experimentRepository.asState(Experiments.uiOverhaul)
 }

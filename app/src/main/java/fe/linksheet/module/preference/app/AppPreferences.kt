@@ -120,6 +120,8 @@ object AppPreferences : PreferenceDefinition(
     val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Basic, TelemetryLevel)
     val lastVersion = int("last_version", -1)
 
+    val themeMaterialYou = boolean("theme_material_you", true)
+    val themeAmoled = boolean("theme_amoled_enabled")
 
     init {
         finalize()

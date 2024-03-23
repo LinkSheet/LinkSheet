@@ -17,10 +17,10 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import fe.android.preference.helper.EnumTypeMapper
+import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
-import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 
 
 private val LightColors = lightColorScheme(
@@ -88,7 +88,7 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
-private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
+//private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
 
 tailrec fun Context.findWindow(): Window? = when (this) {
     is Activity -> window
@@ -96,14 +96,69 @@ tailrec fun Context.findWindow(): Window? = when (this) {
     else -> null
 }
 
-enum class Theme {
-    System, Light, Dark, AmoledBlack;
+sealed interface ThemeNew {
+    fun getColorScheme(
+        context: Context,
+        systemDarkTheme: Boolean,
+        materialYou: Boolean,
+        amoled: Boolean,
+    ): Pair<ColorScheme, Boolean>
 
-    @Composable
-    fun IsLightTheme(systemDarkTheme: Boolean = isSystemInDarkTheme()): Boolean {
-        if (this == Light) return true
-        if (this == System) return !systemDarkTheme
-        return false
+    data object System : ThemeNew {
+        override fun getColorScheme(
+            context: Context,
+            systemDarkTheme: Boolean,
+            materialYou: Boolean,
+            amoled: Boolean,
+        ): Pair<ColorScheme, Boolean> {
+            val theme = if (systemDarkTheme) Dark else Light
+            return theme.getColorScheme(context, systemDarkTheme, materialYou, amoled)
+        }
+    }
+
+    data object Light : ThemeNew {
+        override fun getColorScheme(
+            context: Context,
+            systemDarkTheme: Boolean,
+            materialYou: Boolean,
+            amoled: Boolean,
+        ): Pair<ColorScheme, Boolean> {
+            val colorScheme = if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicLightColorScheme(context) else LightColors
+            return colorScheme to false
+        }
+    }
+
+    data object Dark : ThemeNew {
+        override fun getColorScheme(
+            context: Context,
+            systemDarkTheme: Boolean,
+            materialYou: Boolean,
+            amoled: Boolean,
+        ): Pair<ColorScheme, Boolean> {
+            val scheme = if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicDarkColorScheme(context) else DarkColors
+
+            val colorScheme = if (amoled) scheme.copy(surface = Color.Black, background = Color.Black)
+            else scheme
+
+            return colorScheme to true
+        }
+    }
+}
+
+enum class Theme {
+    System,
+    Light,
+    Dark,
+
+    @Deprecated(message = "Use the new property")
+    AmoledBlack;
+
+    fun resolve(): ThemeNew {
+        return when (this) {
+            System -> ThemeNew.System
+            Light -> ThemeNew.Light
+            Dark, AmoledBlack -> ThemeNew.Dark
+        }
     }
 
     companion object Companion : EnumTypeMapper<Theme>(entries.toTypedArray())
@@ -113,54 +168,29 @@ enum class Theme {
     }
 }
 
-
 @Composable
 fun AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
     content: @Composable () -> Unit,
 ) {
-    val theme = themeSettingsViewModel.theme.value
     val context = LocalContext.current
 
-    val colorScheme = when (theme) {
-        Theme.System -> {
-            when {
-                AndroidVersion.AT_LEAST_API_31_S -> if (systemDarkTheme) dynamicDarkColorScheme(
-                    context
-                ) else dynamicLightColorScheme(
-                    context
-                )
+    val themeNew = themeSettingsViewModel.theme().resolve()
 
-                systemDarkTheme -> DarkColors
-                else -> LightColors
-            }
-        }
+    // Do not destructure, Compose can't observe destructured vals
+    val pair = themeNew.getColorScheme(
+        context,
+        systemDarkTheme,
+        themeSettingsViewModel.themeMaterialYou(),
+        themeSettingsViewModel.themeAmoled()
+    )
 
-        Theme.Light -> {
-            if (AndroidVersion.AT_LEAST_API_31_S) dynamicLightColorScheme(context)
-            else LightColors
-        }
-
-        Theme.Dark -> {
-            if (AndroidVersion.AT_LEAST_API_31_S) dynamicDarkColorScheme(context)
-            else DarkColors
-        }
-
-        Theme.AmoledBlack -> {
-            if (AndroidVersion.AT_LEAST_API_31_S) dynamicDarkColorScheme(context).copy(
-                surface = Color.Black,
-                background = Color.Black
-            )
-            else AmoledBlackColors
-        }
-    }
+    val colorScheme = pair.first
+    val isDark = pair.second
 
     val view = LocalView.current
     val window = view.context.findWindow()
-
-    val isDark = theme == Theme.Dark || theme == Theme.AmoledBlack
-            || (theme == Theme.System && systemDarkTheme)
 
     window?.let {
         WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
@@ -170,7 +200,7 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = if(themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
+        typography = if (themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
         content = content
     )
 }

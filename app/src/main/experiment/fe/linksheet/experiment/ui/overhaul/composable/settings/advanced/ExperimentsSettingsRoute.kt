@@ -1,8 +1,9 @@
 package fe.linksheet.experiment.ui.overhaul.composable.settings.advanced
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,7 +22,6 @@ import androidx.navigation.NavHostController
 import fe.kotlin.extension.iterable.forEachWithInfo
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.experiment.ui.overhaul.ui.GoogleSansText
 import fe.linksheet.extension.compose.clickable
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily

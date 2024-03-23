@@ -33,7 +33,7 @@ fun PreferredAppColumn(
     bottomSheetViewModel: BottomSheetViewModel,
     showPackage: Boolean,
     hideBottomSheetChoiceButtons: Boolean,
-    launchApp: LaunchApp,
+    onClick: (ClickType) -> Unit
 ) {
     val activity = LocalContext.currentActivity()
 
@@ -41,11 +41,11 @@ fun PreferredAppColumn(
         ListBrowserColumn(
             appInfo = appInfo,
             selected = false,
-            onClick = {},
+            onClick = onClick,
             preferred = preferred,
             privateBrowser = privateBrowser,
             showPackage = showPackage,
-            launchApp = launchApp,
+//            launchApp = launchApp,
         )
 
         Spacer(modifier = Modifier.height(5.dp))
@@ -56,7 +56,7 @@ fun PreferredAppColumn(
                 result = result,
                 useTextShareCopyButtons = bottomSheetViewModel.useTextShareCopyButtons(),
                 openSettings = { bottomSheetViewModel.startMainActivity(activity) },
-                choiceClick = { launchApp(appInfo, it, false) },
+                choiceClick = onClick,
             )
         }
 

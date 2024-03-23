@@ -24,17 +24,21 @@ import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
 
+enum class ClickType {
+    Single, Double, Long, Private, Once, Always
+}
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ListBrowserColumn(
     modifier: Modifier = Modifier,
     appInfo: DisplayActivityInfo,
     selected: Boolean?,
-    onClick: () -> Unit,
+    onClick: (ClickType) -> Unit,
     preferred: Boolean,
     privateBrowser: KnownBrowser?,
     showPackage: Boolean,
-    launchApp: LaunchApp,
+//    launchApp: LaunchApp,
 ) {
     val context = LocalContext.current
 
@@ -44,9 +48,15 @@ fun ListBrowserColumn(
             .padding(start = 10.dp, end = 10.dp)
             .clip(defaultRoundedCornerShape)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
-            .combinedClickable(onClick = onClick, onDoubleClick = {
-                launchApp(appInfo, false, false)
-            })
+            .combinedClickable(
+                onClick = { onClick(ClickType.Single) },
+                onDoubleClick = { onClick(ClickType.Double) },
+                onLongClick = { onClick(ClickType.Long) }
+            )
+//            .combinedClickable(onClick = onClick, onDoubleClick = {
+//                launchApp(appInfo, false, false)
+//            }
+
     ) {
         Row(
             modifier = Modifier
@@ -94,7 +104,7 @@ fun ListBrowserColumn(
             if (privateBrowser != null) {
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                     // TODO: Checkout if we should reduce this button's size
-                    FilledTonalIconButton(onClick = { launchApp(appInfo, false, true) }) {
+                    FilledTonalIconButton(onClick = { onClick(ClickType.Private) }) {
                         Icon(
                             imageVector = Icons.Outlined.Shield,
                             contentDescription = stringResource(id = R.string.request_private_browsing)

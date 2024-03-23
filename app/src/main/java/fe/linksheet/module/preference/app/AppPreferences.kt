@@ -5,6 +5,7 @@ import com.google.gson.JsonArray
 import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
+import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.redactor.PackageProcessor
@@ -122,6 +123,10 @@ object AppPreferences : PreferenceDefinition(
 
     val themeMaterialYou = boolean("theme_material_you", true)
     val themeAmoled = boolean("theme_amoled_enabled")
+
+    val tapConfigSingle = mapped("tap_config_single", TapConfig.SelectItem, TapConfig)
+    val tapConfigDouble = mapped("tap_config_double", TapConfig.OpenApp, TapConfig)
+    val tapConfigLong = mapped("tap_config_long", TapConfig.OpenSettings, TapConfig)
 
     init {
         finalize()

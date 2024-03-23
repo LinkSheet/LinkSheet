@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.column.ClickType
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.ui.HkGroteskFontFamily
 
@@ -20,7 +21,7 @@ fun ChoiceButtons(
     enabled: Boolean = true,
     useTextShareCopyButtons: Boolean,
     openSettings: () -> Unit,
-    choiceClick: (Boolean) -> Unit
+    choiceClick: (ClickType) -> Unit
 ) {
     if (!result.isEmpty()) {
         Row(
@@ -32,9 +33,9 @@ fun ChoiceButtons(
                 outlined = true,
                 enabled = enabled,
                 textId = R.string.just_once,
-                onClick = { choiceClick(false) })
+                onClick = { choiceClick(ClickType.Once) })
             Spacer(modifier = Modifier.width(5.dp))
-            OpenButton(outlined = false, enabled = enabled, textId = R.string.always, onClick = { choiceClick(true) })
+            OpenButton(outlined = false, enabled = enabled, textId = R.string.always, onClick = { choiceClick(ClickType.Always) })
         }
     } else {
         // TODO: Move out of Composable

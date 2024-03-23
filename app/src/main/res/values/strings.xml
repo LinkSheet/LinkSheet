@@ -607,7 +607,7 @@
     <string name="hide_bottom_sheet_choice_buttons_explainer">Hide the \"Once\" and \"Always\" buttons in the
         bottom sheet
     </string>
-    <string name="base_config">Base configuration</string>
+    <string name="base_config">Additional configuration</string>
     <string name="urlbar_settings">Url-bar</string>
     <string name="permission_required">Permission required</string>
     <string name="permission_required_explainer">Some imported preferences require permissions that are currently not
@@ -641,4 +641,18 @@
     <string name="theme_mode">Theme mode</string>
     <string name="theme_enable_amoled_explainer">Use pure black theme if dark mode is enabled</string>
     <string name="theme_enable_material_you_explainer">Use Android 12+\'s Material You device theme</string>
+    <string name="tap_customization">Tap customization</string>
+    <string name="tap_customization_single_tap">Single tap</string>
+    <string name="tap_customization_double_tap">Double tap</string>
+    <string name="tap_customization_long_tap">Long tap</string>
+    <string name="no_action">No action</string>
+    <string name="open_app">Open app</string>
+    <string name="select_app">Select app</string>
+    <string name="open_app_settings_page">Open app\'s settings page</string>
+    <string name="tap_customization_dialog_title">Configure %s</string>
+    <string name="tap_customization_dialog_title_single_tap">single tap</string>
+    <string name="tap_customization_dialog_title_double_tap">double tap</string>
+    <string name="tap_customization_dialog_title_long_tap">long tap</string>
+    <string name="tap_customization_dialog_text">Choose the action that should be performed</string>
+    <string name="cancel">Cancel</string>
 </resources>

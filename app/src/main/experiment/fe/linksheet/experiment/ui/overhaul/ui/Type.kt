@@ -28,11 +28,15 @@ val NewTypography = Typography(
     titleLarge = NewDefaultTypography.titleLarge.copy(
         fontFamily = HkGroteskFontFamily,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 18.sp,
-        lineHeight = 25.sp
+//        fontSize = 18.sp,
+//        lineHeight = 25.sp
     ),
-    titleMedium = NewDefaultTypography.titleMedium.copy(
-        fontSize = 18.sp,
+//    titleMedium = NewDefaultTypography.titleMedium.copy(
+//        fontSize = 18.sp,
+//        fontFamily = HkGroteskFontFamily,
+//        fontWeight = FontWeight.SemiBold
+//    ),
+    headlineMedium = NewDefaultTypography.headlineMedium.copy(
         fontFamily = HkGroteskFontFamily,
         fontWeight = FontWeight.SemiBold
     ),

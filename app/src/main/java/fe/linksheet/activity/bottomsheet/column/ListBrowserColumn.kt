@@ -1,5 +1,6 @@
 package fe.linksheet.activity.bottomsheet.column
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -18,15 +19,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
-import fe.linksheet.activity.bottomsheet.LaunchApp
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
 
-enum class ClickType {
-    Single, Double, Long, Private, Once, Always
+//enum class ClickType {
+//    Single, Double, Long, Private, Once, Always
+//}
+
+sealed interface ClickType {
+    data object Single : ClickType
+    data object Double : ClickType
+    data object Long : ClickType
 }
+
+sealed interface ClickModifier {
+    data class Private(val browser: KnownBrowser) : ClickModifier
+    data object Always : ClickModifier
+    data object None : ClickModifier
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -34,7 +47,7 @@ fun ListBrowserColumn(
     modifier: Modifier = Modifier,
     appInfo: DisplayActivityInfo,
     selected: Boolean?,
-    onClick: (ClickType) -> Unit,
+    onClick: (ClickType, ClickModifier) -> Unit,
     preferred: Boolean,
     privateBrowser: KnownBrowser?,
     showPackage: Boolean,
@@ -49,14 +62,10 @@ fun ListBrowserColumn(
             .clip(defaultRoundedCornerShape)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
             .combinedClickable(
-                onClick = { onClick(ClickType.Single) },
-                onDoubleClick = { onClick(ClickType.Double) },
-                onLongClick = { onClick(ClickType.Long) }
+                onClick = { onClick(ClickType.Single, ClickModifier.None) },
+                onDoubleClick = { onClick(ClickType.Double, ClickModifier.None) },
+                onLongClick = { onClick(ClickType.Long, ClickModifier.None) }
             )
-//            .combinedClickable(onClick = onClick, onDoubleClick = {
-//                launchApp(appInfo, false, false)
-//            }
-
     ) {
         Row(
             modifier = Modifier
@@ -104,7 +113,7 @@ fun ListBrowserColumn(
             if (privateBrowser != null) {
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                     // TODO: Checkout if we should reduce this button's size
-                    FilledTonalIconButton(onClick = { onClick(ClickType.Private) }) {
+                    FilledTonalIconButton(onClick = { onClick(ClickType.Single, ClickModifier.Private(privateBrowser)) }) {
                         Icon(
                             imageVector = Icons.Outlined.Shield,
                             contentDescription = stringResource(id = R.string.request_private_browsing)

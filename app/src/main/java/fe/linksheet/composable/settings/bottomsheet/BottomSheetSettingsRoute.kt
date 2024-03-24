@@ -4,10 +4,12 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import fe.android.compose.dialog.helper.stateful.StatefulDialog
+import fe.android.compose.dialog.helper.stateful.StatefulDialogState
 import fe.android.compose.dialog.helper.stateful.rememberStatefulDialog
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
@@ -62,7 +64,9 @@ fun BottomSheetSettingsRoute(
     }
 
     // TODO: Pass data to onClose handler along result
-    val tapConfigDialog = rememberStatefulDialog<TapType, Pair<TapType, TapConfig>>()
+
+    val tapConfigDialog = remember { StatefulDialogState<TapType, Pair<TapType, TapConfig>>(null) }
+//    val tapConfigDialog = rememberStatefulDialog<TapType, Pair<TapType, TapConfig>>()
     StatefulDialog(
         state = tapConfigDialog,
         onClose = { (type, newConfig) -> tapTypePreferences[type]!!(newConfig) }

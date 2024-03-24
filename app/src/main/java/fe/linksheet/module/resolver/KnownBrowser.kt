@@ -59,7 +59,8 @@ sealed class KnownBrowser(
         "com.sec.android.app.sbrowser",
         "com.sec.android.app.sbrowser.beta",
         "com.google.android.apps.chrome",
-        "org.chromium.chrome"
+        "org.chromium.chrome",
+        "app.vanadium.browser"
     ) {
         override fun requestPrivateBrowsing(intent: Intent) = null
     }

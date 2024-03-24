@@ -655,4 +655,6 @@
     <string name="tap_customization_dialog_title_long_tap">long tap</string>
     <string name="tap_customization_dialog_text">Choose the action that should be performed</string>
     <string name="cancel">Cancel</string>
+    <string name="expand_on_app_select">Expand when an app is selected</string>
+    <string name="expand_on_app_select_explainer">Automatically expand the bottom sheet when an app is selected</string>
 </resources>

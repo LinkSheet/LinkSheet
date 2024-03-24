@@ -151,7 +151,7 @@ fun BottomSheetSettingsRoute(
 
         divider(stringRes = R.string.tap_customization)
 
-        group(size = 3) {
+        group(size = 4) {
             items(values = tapTypePreferences) { type, pref, padding, shape ->
                 ClickableShapeListItem(
                     shape = shape,
@@ -162,6 +162,16 @@ fun BottomSheetSettingsRoute(
                     supportingContent = {
                         Text(text = stringResource(id = pref().id))
                     }
+                )
+            }
+
+            item(key = R.string.expand_on_app_select) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    preference = viewModel.expandOnAppSelect,
+                    headlineContentTextId = R.string.expand_on_app_select,
+                    supportingContentTextId = R.string.expand_on_app_select_explainer
                 )
             }
         }

@@ -133,6 +133,8 @@ object AppPreferences : PreferenceDefinition(
     val tapConfigDouble = mapped("tap_config_double", TapConfig.OpenApp, TapConfig)
     val tapConfigLong = mapped("tap_config_long", TapConfig.OpenSettings, TapConfig)
 
+    val expandOnAppSelect = boolean("expand_on_app_select", true)
+
     init {
         finalize()
     }

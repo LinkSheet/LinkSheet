@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -53,7 +52,6 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.LocalActivity
-import fe.linksheet.ui.Theme
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
@@ -269,11 +267,15 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 ExperimentalUrlBar(
                     uri = uriString,
                     canSwitchProfile = canSwitch,
-                    profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(target!!)
+                    profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(
+                        target!!
+                    )
                         .toString() else null,
-                    profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(target!!) else null,
+                    profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(
+                        target!!
+                    ) else null,
                     switchProfile = {
-                        if(AndroidVersion.AT_LEAST_API_30_R){
+                        if (AndroidVersion.AT_LEAST_API_30_R) {
                             val switchIntent =
                                 Intent(result.intent).setComponent(this@BottomSheetActivityImpl.componentName)
 
@@ -521,7 +523,11 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         val activity = LocalActivity.current
 
         Column(modifier = Modifier.wrapContentHeight()) {
-            LazyColumn(modifier = Modifier.fillMaxWidth().weight(1.0f, fill = false)) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1.0f, fill = false)
+            ) {
                 itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
 

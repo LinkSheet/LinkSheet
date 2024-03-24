@@ -103,7 +103,6 @@ class IntentResolver(
         AppPreferences.downloaderCheckUrlMimeType
     )
 
-    val theme = preferenceRepository.asState(AppPreferences.theme)
     private val dontShowFilteredItem = preferenceRepository.asState(
         AppPreferences.dontShowFilteredItem
     )

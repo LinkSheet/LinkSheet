@@ -7,7 +7,6 @@ import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
-import fe.linksheet.ui.Theme
 import org.koin.core.component.KoinComponent
 
 class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(context), KoinComponent {
@@ -16,17 +15,9 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
     private val followRedirectsExternalService = asState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = asState(AppPreferences.amp2HtmlExternalService)
 
-    private val themeV2 = asState(AppPreferences.themeV2)
-    private val theme = asState(AppPreferences.theme)
-    private val themeAmoled = asState(AppPreferences.themeAmoled)
-
-
     private val preferencesRequiringPermission by lazy {
         mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
     }
-
-    // Hack around repo until we have a contains() api
-    private val prefs = context.getSharedPreferences(context.packageName + "_preferences", Context.MODE_PRIVATE)
 
     init {
         // Ensure backwards compatibility as this feature was previously included in non-pro versions
@@ -35,14 +26,7 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
             amp2HtmlExternalService(false)
         }
 
-        if(AppPreferences.themeV2.key !in prefs) {
-            // Migrate away from AmoledBlack
-            if (theme() == Theme.AmoledBlack) {
-                themeAmoled(true)
-            }
-
-            themeV2(theme().toV2())
-        }
+        AppPreferences.migrate(this)
     }
 
     fun importPreferences(preferencesToImport: Map<String, String>): List<PermissionBoundPreference> {
@@ -61,9 +45,11 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
             }
         }
 
+        AppPreferences.migrate(this)
+
         // Refresh must be delayed to until after the editor has been closed
         return mappedPreferences.mapNotNull { (preference) ->
-            // Forces refresh by reading new value from the preference file; In the future, maybe this should be update
+            // Forces refresh by reading new value from the preference file; In the future, maybe this should be updating
             // newValue to the RepositoryState instance directly, but that would required converting the
             // string value to the appropriate state type
             stateCache.get(preference.key)?.forceRefresh()

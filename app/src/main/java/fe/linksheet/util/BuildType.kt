@@ -5,7 +5,7 @@ import fe.linksheet.BuildConfig
 enum class BuildType {
     Debug, Nightly, ReleaseDebug, Release;
 
-    val debuggingAllowed by lazy { this == Debug && BuildConfig.DEBUG }
+    val allowDebug by lazy { this == Debug && BuildConfig.DEBUG }
 
     companion object {
         val current by lazy {

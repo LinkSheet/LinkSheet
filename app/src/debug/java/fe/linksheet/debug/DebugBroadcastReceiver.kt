@@ -35,7 +35,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
 
     @OptIn(ExperimentalEncodingApi::class)
     override fun onReceive(context: Context, intent: Intent) {
-        if (BuildType.current?.debuggingAllowed != true) return
+        if (BuildType.current?.allowDebug != true) return
 
         val handled = DebugCommand.tryHandle(context, intent)
         if (handled) return

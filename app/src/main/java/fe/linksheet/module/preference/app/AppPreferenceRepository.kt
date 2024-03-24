@@ -25,6 +25,9 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
         mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
     }
 
+    // Hack around repo until we have a contains() api
+    private val prefs = context.getSharedPreferences(context.packageName + "_preferences", Context.MODE_PRIVATE)
+
     init {
         // Ensure backwards compatibility as this feature was previously included in non-pro versions
         if (!LinkSheetAppConfig.isPro()) {
@@ -32,12 +35,14 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
             amp2HtmlExternalService(false)
         }
 
-        // Migrate away from AmoledBlack
-        if (theme() == Theme.AmoledBlack) {
-            themeAmoled(true)
-        }
+        if(AppPreferences.themeV2.key !in prefs) {
+            // Migrate away from AmoledBlack
+            if (theme() == Theme.AmoledBlack) {
+                themeAmoled(true)
+            }
 
-        themeV2(theme().toV2())
+            themeV2(theme().toV2())
+        }
     }
 
     fun importPreferences(preferencesToImport: Map<String, String>): List<PermissionBoundPreference> {

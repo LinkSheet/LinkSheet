@@ -94,7 +94,7 @@
     <string name="amoled_black">Amoled Siyah</string>
     <string name="fastfoward_rules">FastForward kurallarını kullan</string>
     <string name="theme_explainer">Uygulamanın temasını değiştirin</string>
-    <string name="system">Sistem</string>
+    <string name="system">Sistemi takip et</string>
     <string name="fastfoward_rules_explainer">Deneysel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward \u0020</annotation> kural entegrasyonunu kullanın (bağlantıdan yönlendirmeyi çıkararak bazı ana bilgisayarların yönlendirmelerini atlatın) \u0020</string>
     <string name="follow_redirects_local_cache">Yerel yönlendirme önbelleğini etkinleştir</string>
     <string name="follow_redirects_local_cache_explainer">Yönlendirmelerin sonucunu yerel olarak önbelleğe al</string>
@@ -450,7 +450,7 @@
     <string name="onboarding_5_subtitle">LinkSheet başarıyla etkinleştirildi</string>
     <string name="onboarding_5_button">Bitir</string>
     <string name="nightly_experiments_card">Gecelik deneyler</string>
-    <string name="experiments_explainer_2">Aşağıdaki özellikler / deneyler henüz geliştirme aşamasındadır ve hiç çalışmayabilir. Lütfen bunlarla ilgili hataları Github\'da bildirmeyin. Geri bildirim sağlamak istiyorsanız, bunu Discord\'da yapın.</string>
+    <string name="experiments_explainer_2">Aktif olarak üzerinde çalışılan özellikler</string>
     <string name="nightly_experiments_card_explainer">Şu anda geliştirilmekte olan özelliklere göz atmak için dokunun</string>
     <string name="experiments">Deneyler</string>
     <string name="experiments_explainer">Geliştirilmekte olan özellikleri deneyin</string>
@@ -459,4 +459,10 @@
     <string name="verified_link_handlers_open_settings_page">Ayarlar sayfasını aç</string>
     <string name="parse_shared_text_intent">URL bulunamazsa paylaşılan metni ayrıştır</string>
     <string name="parse_shared_text_intent_explainer">URL içeren bir metin paylaşıldığında, başarısız olmak yerine metindeki ilk URL\'yi bulmaya (ve kullanmaya) çalış</string>
+    <string name="theme_enable_material_you">Dinamik renk</string>
+    <string name="theme_enable_amoled_explainer">Koyu mod etkinken kapkara temasını kullan</string>
+    <string name="experiments_explainer_3">Deneyler aktif olarak geliştirilme aşamasındadır ve düzgün/tamamen çalışmayabilir. Hataları GitHub\'da bildirmeyin. Eğer geri bildirim sağlamak istiyorsanız, Discord\'da yapın.</string>
+    <string name="theme_enable_amoled">Kapkara</string>
+    <string name="theme_mode">Tema modu</string>
+    <string name="theme_enable_material_you_explainer">Android 12+\'nin Material You cihaz temasını kullan</string>
 </resources>

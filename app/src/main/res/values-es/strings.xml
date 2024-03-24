@@ -484,4 +484,6 @@
     <string name="tap_customization_dialog_title_single_tap">una sola pulsación</string>
     <string name="tap_customization_dialog_text">Elija la acción que debe realizarse</string>
     <string name="cancel">Cancelar</string>
+    <string name="expand_on_app_select_explainer">Expandir automáticamente la hoja inferior cuando se selecciona una aplicación</string>
+    <string name="expand_on_app_select">Expandir cuando se selecciona una aplicación</string>
 </resources>

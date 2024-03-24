@@ -280,7 +280,7 @@
     <string name="follow_redirects_builtin_cache">Utilice la caché de redireccionamiento incorporada</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet \"restaura\" el \"url-app-chooser\" que aparecía cuando el usuario tocaba en un enlace en un Android anterior al 12 y tenía varias aplicaciones instaladas que podían manejar el enlace</string>
-    <string name="system">Sistema</string>
+    <string name="system">Seguir el sistema</string>
     <string name="no_log_entries">La sesión no contiene ningún registro.</string>
     <string name="add">Añadir</string>
     <string name="follow_redirects_local_cache">Activar la caché de redirección local</string>
@@ -438,7 +438,7 @@
     <string name="onboarding_5_title">¡Todo listo!</string>
     <string name="onboarding_5_card_explainer">¡Ya se ha realizado la configuración básica necesaria para que LinkSheet funcione. Vaya a la configuración para ver qué más puede ofrecerle!</string>
     <string name="experiment">Experimento</string>
-    <string name="base_config">Configuración básica</string>
+    <string name="base_config">Configuración adicional</string>
     <string name="hide_bottom_sheet_choice_buttons">Ocultar botones de selección</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Ocultar los botones \"Una vez\" y \"Siempre\" en la hoja inferior</string>
     <string name="permission_required">Permiso necesario</string>
@@ -464,4 +464,24 @@
     <string name="experiments_explainer_2">Desarrollo activo</string>
     <string name="parse_shared_text_intent">Analizar el texto compartido si no se encuentra ninguna URL</string>
     <string name="parse_shared_text_intent_explainer">Cuando se inicia una acción de compartir desde una aplicación que comparte texto que contiene una URL, intente encontrar (y usar) la primera URL en el texto, en lugar de dar un error</string>
+    <string name="experiments_explainer_3">Los experimentos están en desarrollo activo y pueden no funcionar correctamente, o no funcionar en absoluto. Por favor, no informes de errores en Github. Si quieres dar tu opinión, hazlo en Discord.</string>
+    <string name="tap_customization_double_tap">Pulsación doble</string>
+    <string name="tap_customization">Personalización de las pulsaciones</string>
+    <string name="no_action">Sin acción</string>
+    <string name="select_app">Seleccionar la aplicación</string>
+    <string name="open_app_settings_page">Abrir los ajustes de la aplicación</string>
+    <string name="tap_customization_dialog_title_double_tap">pulsación doble</string>
+    <string name="tap_customization_dialog_title_long_tap">pulsación larga</string>
+    <string name="theme_enable_material_you">Color dinámico</string>
+    <string name="theme_enable_amoled">Negro puro</string>
+    <string name="theme_mode">Modo del tema</string>
+    <string name="theme_enable_amoled_explainer">Utilizar un tema negro puro si el modo oscuro está activado</string>
+    <string name="theme_enable_material_you_explainer">Utiliza el tema para dispositivos Material You de Android 12+</string>
+    <string name="tap_customization_single_tap">Una sola pulsación</string>
+    <string name="tap_customization_long_tap">Pulsación larga</string>
+    <string name="open_app">Abrir la aplicación</string>
+    <string name="tap_customization_dialog_title">Configurar %s</string>
+    <string name="tap_customization_dialog_title_single_tap">una sola pulsación</string>
+    <string name="tap_customization_dialog_text">Elija la acción que debe realizarse</string>
+    <string name="cancel">Cancelar</string>
 </resources>

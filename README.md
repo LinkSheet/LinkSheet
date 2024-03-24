@@ -95,12 +95,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 
 ## Donations / LinkSheet Pro
 
-All donations of
-
-* 4€+ (Crypto) or
-* 5€+ (all other means of payment)
-
-are eligible for ✨ LinkSheet Pro ✨ - donate via the links above
+All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨ - donate via the links above
 
 ## Nightly builds
 

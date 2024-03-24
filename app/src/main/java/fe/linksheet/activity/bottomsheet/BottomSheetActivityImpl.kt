@@ -108,7 +108,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun BottomSheet(bottomSheetViewModel: BottomSheetViewModel) {
-        val isBlackTheme = bottomSheetViewModel.theme() == Theme.AmoledBlack
+        val isBlackTheme = bottomSheetViewModel.themeAmoled()
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val result = bottomSheetViewModel.resolveResult
@@ -257,7 +257,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     UriUtil.declutter(result.uri)
                 } else result.uri.toString()
 
-                val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile && AndroidVersion.AT_LEAST_API_28_P) {
+                val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile && AndroidVersion.AT_LEAST_API_30_R) {
                     val crossProfileApps = getSystemService<CrossProfileApps>()!!
                     val canSwitch =
                         crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.targetUserProfiles.isNotEmpty()
@@ -269,20 +269,22 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 ExperimentalUrlBar(
                     uri = uriString,
                     canSwitchProfile = canSwitch,
-                    profileSwitchText = if (canSwitch) crossProfileApps!!.getProfileSwitchingLabel(target!!)
+                    profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(target!!)
                         .toString() else null,
-                    profileSwitchDrawable = if (canSwitch) crossProfileApps!!.getProfileSwitchingIconDrawable(target!!) else null,
+                    profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(target!!) else null,
                     switchProfile = {
-                        val switchIntent =
-                            Intent(result.intent).setComponent(this@BottomSheetActivityImpl.componentName)
+                        if(AndroidVersion.AT_LEAST_API_30_R){
+                            val switchIntent =
+                                Intent(result.intent).setComponent(this@BottomSheetActivityImpl.componentName)
 
-                        crossProfileApps!!.startActivity(
-                            switchIntent,
-                            target!!,
-                            this@BottomSheetActivityImpl
-                        )
+                            crossProfileApps!!.startActivity(
+                                switchIntent,
+                                target!!,
+                                this@BottomSheetActivityImpl
+                            )
 
-                        finish()
+                            finish()
+                        }
                     },
                     unfurlResult = uriSuccess?.unfurlResult,
                     downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
@@ -395,10 +397,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                 onClick = { _, modifier ->
                     launchApp(result, result.filteredItem, modifier == ClickModifier.Always)
-                },
-//                launchApp = { item, always, private ->
-//                    launchApp(result, item, always, if (private) privateBrowser else null)
-//                }
+                }
             )
 
             // TODO: Not sure if this divider should be kept
@@ -441,15 +440,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     showPackage = showPackage
                 )
             } else {
-//                val configs = mapOf(
-//                    ClickType.Single to bottomSheetViewModel.tapConfigSingle(),
-//                    ClickType.Double to bottomSheetViewModel.tapConfigDouble(),
-//                    ClickType.Long to bottomSheetViewModel.tapConfigLong()
-//                )
-
                 List(
                     result = result,
-//                    clickConfigs = configs,
                     hasPreferredApp = hasPreferredApp,
                     hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
                     isExpanded = isExpanded,

@@ -55,7 +55,7 @@ class MainViewModel(
     val useTimeMs = preferenceRepository.get(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.asState(AppPreferences.showDiscordBanner)
     val donateCardDismissed = preferenceRepository.asState(AppPreferences.donateCardDismissed)
-    var theme = preferenceRepository.asState(AppPreferences.theme)
+    var themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
     val uiOverhaul = experimentRepository.asState(Experiments.uiOverhaul)
 
     private val roleManager by lazy {

@@ -81,7 +81,9 @@ class BottomSheetViewModel(
     val resolveViaToast = preferenceRepository.asState(AppPreferences.resolveViaToast)
     val resolveViaFailedToast = preferenceRepository.asState(AppPreferences.resolveViaFailedToast)
 
-    val theme = preferenceRepository.asState(AppPreferences.theme)
+    val themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
+    val themeAmoled = preferenceRepository.asState(AppPreferences.themeAmoled)
+
     val useTextShareCopyButtons = preferenceRepository.asState(
         AppPreferences.useTextShareCopyButtons
     )

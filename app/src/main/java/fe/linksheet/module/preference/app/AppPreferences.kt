@@ -13,6 +13,7 @@ import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
+import fe.linksheet.ui.ThemeV2
 import java.util.*
 
 object AppPreferences : PreferenceDefinition(
@@ -68,8 +69,10 @@ object AppPreferences : PreferenceDefinition(
     val followRedirectsBuiltInCache = boolean("follow_redirects_builtin_cache", true)
     val followRedirectsAllowDarknets = boolean("follow_redirects_allow_darknets", false)
 
-
+    @Deprecated(message = "Use theme_v2")
     val theme = mapped("theme", Theme.System, Theme)
+
+
     val dontShowFilteredItem = boolean("dont_show_filtered_item")
 
     val useTextShareCopyButtons = boolean("use_text_share_copy_buttons")
@@ -120,6 +123,8 @@ object AppPreferences : PreferenceDefinition(
     @SensitivePreference
     val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Basic, TelemetryLevel)
     val lastVersion = int("last_version", -1)
+
+    val themeV2 = mapped("theme_v2", ThemeV2.System, ThemeV2)
 
     val themeMaterialYou = boolean("theme_material_you", true)
     val themeAmoled = boolean("theme_amoled_enabled")

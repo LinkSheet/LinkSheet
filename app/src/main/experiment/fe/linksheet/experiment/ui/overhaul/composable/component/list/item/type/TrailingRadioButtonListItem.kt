@@ -78,7 +78,7 @@ private fun RadioButtonListItem(
     headlineContentText: String,
     supportingContentText: String? = null,
 ) {
-    val radioButton: OptionalContent = remember(location) {
+    val radioButton: OptionalContent = remember {
         {
             RadioButton(
                 modifier = Modifier.fillMaxHeight(),

@@ -16,6 +16,7 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
     private val followRedirectsExternalService = asState(AppPreferences.followRedirectsExternalService)
     private val amp2HtmlExternalService = asState(AppPreferences.amp2HtmlExternalService)
 
+    private val themeV2 = asState(AppPreferences.themeV2)
     private val theme = asState(AppPreferences.theme)
     private val themeAmoled = asState(AppPreferences.themeAmoled)
 
@@ -34,8 +35,9 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
         // Migrate away from AmoledBlack
         if (theme() == Theme.AmoledBlack) {
             themeAmoled(true)
-            theme(Theme.Dark)
         }
+
+        themeV2(theme().toV2())
     }
 
     fun importPreferences(preferencesToImport: Map<String, String>): List<PermissionBoundPreference> {

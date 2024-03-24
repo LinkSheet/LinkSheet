@@ -2,7 +2,6 @@ package fe.linksheet.resolver
 
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
@@ -22,11 +21,11 @@ object BottomSheetGrouper {
         val grouped = current.toMutableList()
 
         val filteredPair = grouped.findWithIndexOrNull {
-            isLastChosenPosition(it.activityInfo, lastChosenPreferredApp?.componentName)
+            isLastChosenPosition(it.activityInfo, lastChosenPreferredApp)
         }
 
         val filteredPairs = grouped.mapIndexedNotNull { index, resolveInfo ->
-            (resolveInfo to index).takeIf { resolveInfo.activityInfo.packageName == lastChosenPreferredApp?.componentName?.packageName }
+            (resolveInfo to index).takeIf { resolveInfo.activityInfo.packageName == lastChosenPreferredApp?.pkg }
         }
 
         val filteredItem = if (filteredPair != null && (returnFilteredItem || lastChosenPreferredApp?.alwaysPreferred == true)) {
@@ -72,9 +71,8 @@ object BottomSheetGrouper {
 
     private fun isLastChosenPosition(
         activityInfo: ActivityInfo,
-        lastChosenComponent: ComponentName?
-    ) = lastChosenComponent != null && lastChosenComponent.packageName == activityInfo.packageName &&
-            lastChosenComponent.className == activityInfo.name
+        lastChosenComponent: PreferredApp?
+    ) = lastChosenComponent != null && lastChosenComponent.pkg == activityInfo.packageName
 
 
     private val usageStatsPeriod = TimeUnit.DAYS.toMillis(14)

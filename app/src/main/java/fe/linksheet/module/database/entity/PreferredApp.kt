@@ -9,7 +9,6 @@ import fe.linksheet.module.redactor.*
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.resolver.PreferredDisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated
-import java.lang.Package
 
 @Entity(
     tableName = "openwith",
@@ -18,17 +17,43 @@ import java.lang.Package
 data class PreferredApp(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") val id: Int = 0,
     val host: String,
-    val packageName: String? = null,
-    val component: String,
-    val alwaysPreferred: Boolean
+    @ColumnInfo(name = "packageName") val _packageName: String? = null,
+    @ColumnInfo(name = "component") val _component: String?,
+    val alwaysPreferred: Boolean,
 ) : Redactable<PreferredApp> {
-    @delegate:Ignore
-    val componentName by lazy {
-        ComponentName.unflattenFromString(component) ?: ComponentName.unflattenFromString("$packageName/$component")
+    @Ignore
+    val cmp = tryGetComponentName(_component, _packageName)
+
+    @Ignore
+    val pkg = tryGetPackageName(cmp, _packageName)
+
+    companion object {
+        private fun tryGetComponentName(component: String?, packageName: String?): ComponentName? {
+            if (component == null) return null
+            val cmp = ComponentName.unflattenFromString(component)
+            if (cmp != null) return cmp
+            if (packageName == null) return null
+
+            return ComponentName.unflattenFromString("$packageName/$component")
+        }
+
+        private fun tryGetPackageName(componentName: ComponentName?, packageName: String?): String? {
+            if (componentName != null) return componentName.packageName
+            return packageName
+        }
+
+        fun new(host: String, pkg: String, cmp: ComponentName?, always: Boolean): PreferredApp {
+            return PreferredApp(
+                host = host,
+                _packageName = pkg,
+                _component = cmp?.flattenToString(),
+                alwaysPreferred = always,
+            )
+        }
     }
 
     fun toDisplayActivityInfo(context: Context): DisplayActivityInfo? {
-        return context.packageManager.queryFirstIntentActivityByPackageNameOrNull(packageName!!)
+        return context.packageManager.queryFirstIntentActivityByPackageNameOrNull(pkg!!)
             ?.toDisplayActivityInfo(context)
     }
 
@@ -37,6 +62,7 @@ data class PreferredApp(
             PreferredDisplayActivityInfo(this, info)
         }
     }
+
 
     override fun process(builder: StringBuilder, redactor: Redactor) = builder.commaSeparated {
 //        item {
@@ -54,10 +80,19 @@ data class PreferredApp(
     }
 
     override fun equals(other: Any?): Boolean {
-        return (other as? PreferredApp)?.component == this.component
+        if (other is PreferredApp) {
+            return other.host == this.host && other._component == this._component && other._packageName == this._packageName
+        }
+
+        return false
     }
 
     override fun hashCode(): Int {
-        return component.hashCode()
+        var result = host.hashCode()
+        result = 31 * result + (_packageName?.hashCode() ?: 0)
+        result = 31 * result + (_component?.hashCode() ?: 0)
+        return result
     }
+
+
 }

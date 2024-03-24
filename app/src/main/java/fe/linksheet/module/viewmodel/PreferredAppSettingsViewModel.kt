@@ -43,7 +43,8 @@ class PreferredAppSettingsViewModel(
         transform = { app, sideEffect: ProduceSideEffect<String> ->
             app.groupByNoNullKeys(
                 keySelector = { it.toDisplayActivityInfo(context) },
-                nullKeyHandler = { sideEffect(it.packageName!!) },
+                // TODO: Fix
+                nullKeyHandler = { sideEffect("") },
                 cacheIndexSelector = { it },
                 valueTransform = { it.host }
             )

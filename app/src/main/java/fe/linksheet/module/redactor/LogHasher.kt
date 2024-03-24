@@ -109,12 +109,11 @@ sealed interface HashProcessor<T> {
                 append("host=")
                 UrlProcessor.process(stringBuilder, input.host, mac)
             }
-            itemNotNull(input.packageName) {
-                append("pkg=")
-                StringProcessor.process(this, input.packageName!!, mac)
+            itemNotNull(input.pkg, "pkg=") {
+                StringProcessor.process(stringBuilder, input.pkg!!, mac)
             }
-            item {
-                ComponentProcessor.process(stringBuilder, input.componentName!!, mac)
+            itemNotNull(input.cmp, "cmp=") {
+                ComponentProcessor.process(stringBuilder, input.cmp!!, mac)
             }
             item {
                 append("alwaysPreferred=", input.alwaysPreferred)

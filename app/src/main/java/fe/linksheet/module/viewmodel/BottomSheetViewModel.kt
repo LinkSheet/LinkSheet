@@ -170,37 +170,39 @@ class BottomSheetViewModel(
     }
 
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
-        if (intent.component != null) {
-            logger.debug(intent.component!!, HashProcessor.ComponentProcessor, { "Component $it" })
+        val (packageName, component) = intent.component
+            ?.let { it.packageName to it } ?: (intent.`package` to null)
+
+        if (packageName == null && component == null) {
+            logger.error("Passed intent does neither have a package, nor a component, can't persist")
+            return
         }
 
-        intent.component?.let { component ->
-            val host = intent.data!!.host!!.lowercase(Locale.getDefault())
-            val app = PreferredApp(
-                host = host,
-                packageName = component.packageName,
-                component = component.flattenToString(),
-                alwaysPreferred = always
-            )
+        val host = intent.data!!.host!!.lowercase(Locale.getDefault())
+        val app = PreferredApp.new(
+            host = host,
+            pkg = packageName!!,
+            cmp = component,
+            always = always
+        )
 
-            logger.debug(app, HashProcessor.PreferenceAppHashProcessor, { "Inserting $it" }, "AppPreferencePersister")
+        logger.debug(app, HashProcessor.PreferenceAppHashProcessor, { "Inserting $it" }, "AppPreferencePersister")
 
-            preferredAppRepository.insert(app)
+        kotlin.runCatching { preferredAppRepository.insert(app) }.onFailure { it.printStackTrace() }
 
-            val historyEntry = AppSelectionHistory(
-                host = host,
-                packageName = component.packageName,
-                lastUsed = System.currentTimeMillis()
-            )
+        val historyEntry = AppSelectionHistory(
+            host = host,
+            packageName = packageName,
+            lastUsed = System.currentTimeMillis()
+        )
 
-            logger.debug(
-                historyEntry,
-                HashProcessor.AppSelectionHistoryHashProcessor,
-                { "Inserting $it" },
-                "HistoryEntryPersister"
-            )
-            appSelectionHistoryRepository.insert(historyEntry)
-        }
+        logger.debug(
+            historyEntry,
+            HashProcessor.AppSelectionHistoryHashProcessor,
+            { "Inserting $it" },
+            "HistoryEntryPersister"
+        )
+        appSelectionHistoryRepository.insert(historyEntry)
     }
 
     fun startDownload(
@@ -256,11 +258,6 @@ class BottomSheetViewModel(
         }
 
         return newIntent
-    }
-
-    private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {
-        if (!enableRequestPrivateBrowsingButton() || !hasUri) return null
-        return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
     private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {

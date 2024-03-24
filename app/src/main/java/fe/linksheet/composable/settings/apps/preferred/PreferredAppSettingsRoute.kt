@@ -114,7 +114,7 @@ fun PreferredAppSettingsRoute(
                 notFound = R.string.no_such_app_found,
                 mapState = mapState,
                 map = preferredApps,
-                listKey = { it.flatComponentName },
+                listKey = { it.hashCode() },
             ) { app, hosts ->
                 ClickableRow(onClick = {
                     hostDialog.open(HostDialogState(app, hosts))

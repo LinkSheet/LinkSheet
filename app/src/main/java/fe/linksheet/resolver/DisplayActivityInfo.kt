@@ -48,11 +48,11 @@ data class DisplayActivityInfo(
     }
 
     fun toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {
-        return PreferredApp(
+        return PreferredApp.new(
             host = host,
-            packageName = packageName,
-            component = flatComponentName,
-            alwaysPreferred = alwaysPreferred
+            pkg = packageName,
+            cmp = componentName,
+            always = alwaysPreferred
         )
     }
 

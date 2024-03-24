@@ -291,7 +291,7 @@ class IntentResolver(
         val preferredDisplayActivityInfo = preferredApp?.toPreferredDisplayActivityInfo(context)
         if (preferredApp != null && preferredDisplayActivityInfo == null) {
             withContext(Dispatchers.IO) {
-                preferredAppRepository.deleteByPackageName(preferredApp.packageName!!)
+                preferredAppRepository.deleteByPackageName(preferredApp.pkg!!)
             }
         }
 

@@ -141,11 +141,11 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
 
                                     domains.forEach { domain ->
                                         preferred.add(
-                                            PreferredApp(
+                                            PreferredApp.new(
                                                 host = domain,
-                                                packageName = callingPackage,
-                                                component = callingComponent.flattenToString(),
-                                                alwaysPreferred = true,
+                                                pkg = callingPackage,
+                                                cmp = callingComponent,
+                                                always = true,
                                             )
                                         )
 

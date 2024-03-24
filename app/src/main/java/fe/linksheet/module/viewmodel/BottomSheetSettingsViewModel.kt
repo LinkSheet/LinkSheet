@@ -32,6 +32,7 @@ class BottomSheetSettingsViewModel(
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
     val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)
+    val expandOnAppSelect = preferenceRepository.asState(AppPreferences.expandOnAppSelect)
 
     val usageStatsPermission = UsageStatsPermission(context)
 

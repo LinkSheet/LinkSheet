@@ -112,6 +112,7 @@ class BottomSheetViewModel(
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
     val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)
+    val expandOnAppSelect = preferenceRepository.asState(AppPreferences.expandOnAppSelect)
 
     var appListSelectedIdx = mutableIntStateOf(-1)
 
@@ -304,7 +305,7 @@ class BottomSheetViewModel(
 
             TapConfig.SelectItem -> {
                 appListSelectedIdx.intValue = if (appListSelectedIdx.intValue != index) index else -1
-                if (appListSelectedIdx.intValue != -1 && !isExpanded) {
+                if (appListSelectedIdx.intValue != -1 && !isExpanded && expandOnAppSelect()) {
                     requestExpand()
                 }
             }

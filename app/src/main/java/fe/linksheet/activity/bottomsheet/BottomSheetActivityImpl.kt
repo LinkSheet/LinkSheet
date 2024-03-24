@@ -16,11 +16,13 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,7 +31,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
-import fe.linksheet.activity.bottomsheet.column.ClickType
+import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
 import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
@@ -39,7 +41,6 @@ import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -51,7 +52,9 @@ import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.ui.LocalActivity
 import fe.linksheet.ui.Theme
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
@@ -254,7 +257,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     UriUtil.declutter(result.uri)
                 } else result.uri.toString()
 
-                val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile) {
+                val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile && AndroidVersion.AT_LEAST_API_28_P) {
                     val crossProfileApps = getSystemService<CrossProfileApps>()!!
                     val canSwitch =
                         crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.targetUserProfiles.isNotEmpty()
@@ -390,8 +393,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 bottomSheetViewModel = bottomSheetViewModel,
                 showPackage = showPackage,
                 hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
-                onClick = { type ->
-
+                onClick = { _, modifier ->
+                    launchApp(result, result.filteredItem, modifier == ClickModifier.Always)
                 },
 //                launchApp = { item, always, private ->
 //                    launchApp(result, item, always, if (private) privateBrowser else null)
@@ -484,31 +487,32 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             }
         }
 
-        var selected by remember { mutableIntStateOf(-1) }
+        val activity = LocalActivity.current
 
         Column {
             LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
                 itemsIndexed(items = items, key = { _, item -> item.toString() }) { index, (info, privateBrowser) ->
                     GridBrowserButton(
                         appInfo = info,
-                        selected = if (!hasPreferredApp) index == selected else null,
-                        onClick = {
-                            selected = if (selected != index) index else -1
-                            if (selected != -1 && !isExpanded) {
-                                requestExpand()
+                        selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
+                        onClick = { type, modifier ->
+                            val job = viewModel.handleClick(
+                                activity, index, isExpanded,
+                                requestExpand,
+                                result.intent, info, type, modifier
+                            )
+                            if (job != null) {
+                                handleLaunch(job)
                             }
                         },
                         privateBrowser = privateBrowser,
-                        showPackage = showPackage,
-                        launchApp = { item, always ->
-                            launchApp(result, item, always, privateBrowser)
-                        }
+                        showPackage = showPackage
                     )
                 }
             }
 
             if (!hasPreferredApp && !hideChoiceButtons) {
-                NoPreferredAppChoiceButtons(result = result, selected = selected)
+                NoPreferredAppChoiceButtons(result = result, selected = viewModel.appListSelectedIdx.intValue)
             }
         }
     }
@@ -521,56 +525,35 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         showPackage: Boolean,
-//        clickConfigs: Map<ClickType, TapConfig>,
     ) {
-        var selected by remember { mutableIntStateOf(-1) }
-//        val sheetScope = this@List
-//
-        val listState = rememberLazyListState()
-//        listState.layoutInfo.viewportSize
-//        Local
-//        val impl = mapOf(
-//            TapConfig.None to {},
-//            TapConfig.OpenApp to
-//        )
+        val activity = LocalActivity.current
 
-        Column(
-            modifier = Modifier
-                .wrapContentHeight()
-
-//                .border(1.dp, Color.Cyan)
-        ) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1.0f, fill = false),
-//                    .border(1.dp, Color.Blue),
-                state = listState
-            ) {
+        Column(modifier = Modifier.wrapContentHeight()) {
+            LazyColumn(modifier = Modifier.fillMaxWidth().weight(1.0f, fill = false)) {
                 itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
 
                     ListBrowserColumn(
                         appInfo = info,
-                        selected = if (!hasPreferredApp) index == selected else null,
-                        onClick = { type ->
-                            if (type == ClickType.Double) {
-                                launchApp(result, info, false, null)
-                            } else if (type == ClickType.Single) {
-                                selected = if (selected != index) index else -1
-                                if (selected != -1 && !isExpanded) {
-                                    requestExpand()
-                                }
-                            } else if (type == ClickType.Private) {
-                                launchApp(result, info, false, privateBrowser)
+                        selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
+                        onClick = { type, modifier ->
+                            val job = viewModel.handleClick(
+                                activity,
+                                index,
+                                isExpanded,
+                                requestExpand,
+                                result.intent,
+                                info,
+                                type,
+                                modifier
+                            )
+                            if (job != null) {
+                                handleLaunch(job)
                             }
                         },
                         preferred = false,
                         privateBrowser = privateBrowser,
                         showPackage = showPackage,
-//                        launchApp = { item, always, private ->
-//                            launchApp(result, item, always, if (private) privateBrowser else null)
-//                        }
                     )
 
                     // TODO: Selector?
@@ -608,7 +591,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 //                        .padding(bottom = 40.dp)
 //                        .border(1.dp, Color.Magenta)
                 ) {
-                    NoPreferredAppChoiceButtons(result = result, selected = selected)
+                    NoPreferredAppChoiceButtons(result = result, selected = viewModel.appListSelectedIdx.intValue)
                 }
             }
         }
@@ -616,7 +599,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
     @Composable
     private fun NoPreferredAppChoiceButtons(result: BottomSheetResult.SuccessResult, selected: Int) {
-        val activity = LocalContext.currentActivity()
+        val activity = LocalActivity.current
 
         Spacer(modifier = Modifier.height(5.dp))
 
@@ -625,7 +608,9 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             enabled = selected != -1,
             useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
             openSettings = { viewModel.startMainActivity(activity) },
-            choiceClick = { type -> launchApp(result, result.resolved[selected], type == ClickType.Always) },
+            choiceClick = { _, modifier ->
+                launchApp(result, result.resolved[selected], modifier == ClickModifier.Always)
+            },
         )
     }
 
@@ -655,7 +640,6 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun launchApp(
         result: BottomSheetResult.SuccessResult,
         info: DisplayActivityInfo,
@@ -663,11 +647,11 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ) {
-        val deferred = viewModel.launchAppAsync(
-            info, result.intent, always, privateBrowsingBrowser,
-            persist,
-        )
+        handleLaunch(viewModel.launchAppAsync(info, result.intent, always, privateBrowsingBrowser, persist))
+    }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun handleLaunch(deferred: Deferred<Intent>) {
         deferred.invokeOnCompletion {
             val showAsReferrer = viewModel.showAsReferrer()
             val intent = deferred.getCompleted()

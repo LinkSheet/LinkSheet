@@ -28,12 +28,12 @@ import fe.linksheet.resolver.DisplayActivityInfo
 fun GridBrowserButton(
     appInfo: DisplayActivityInfo,
     selected: Boolean?,
-    onClick: () -> Unit,
+    onClick: (ClickType, ClickModifier) -> Unit,
     privateBrowser: KnownBrowser?,
     showPackage: Boolean,
-    launchApp: (DisplayActivityInfo, Boolean) -> Unit,
 ) {
     val context = LocalContext.current
+    val clickModifier = privateBrowser?.let { ClickModifier.Private(it) } ?: ClickModifier.None
 
     Column(
         modifier = Modifier
@@ -42,7 +42,11 @@ fun GridBrowserButton(
             .padding(start = 7.dp, top = 7.dp, end = 7.dp, bottom = 0.dp)
             .clip(defaultRoundedCornerShape)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
-            .combinedClickable(onClick = onClick, onDoubleClick = { launchApp(appInfo, false) })
+            .combinedClickable(
+                onClick = { onClick(ClickType.Single, clickModifier) },
+                onDoubleClick = { onClick(ClickType.Double, clickModifier) },
+                onLongClick = { onClick(ClickType.Long, clickModifier) }
+            )
             .padding(all = 3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

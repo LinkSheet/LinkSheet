@@ -12,12 +12,16 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
+import fe.android.preference.helper.compose.StateMappedPreference
 import fe.linksheet.R
 import fe.linksheet.activity.MainActivity
+import fe.linksheet.activity.bottomsheet.TapConfig
+import fe.linksheet.activity.bottomsheet.column.*
 import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
@@ -41,6 +45,7 @@ import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
+import kotlinx.coroutines.Deferred
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
@@ -105,6 +110,8 @@ class BottomSheetViewModel(
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
     val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)
+
+    var appListSelectedIdx = mutableIntStateOf(-1)
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
         val canAccessInternet = kotlin.runCatching {
@@ -221,7 +228,15 @@ class BottomSheetViewModel(
         always: Boolean = false,
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
-    ) = ioAsync {
+    ) = ioAsync { launchApp(info, intent, always, privateBrowsingBrowser, persist) }
+
+    suspend fun launchApp(
+        info: DisplayActivityInfo,
+        intent: Intent,
+        always: Boolean = false,
+        privateBrowsingBrowser: KnownBrowser? = null,
+        persist: Boolean = true,
+    ): Intent {
         val launchIntent = Intent(intent)
             .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT or Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
 
@@ -240,6 +255,62 @@ class BottomSheetViewModel(
             persistSelectedIntent(newIntent, always)
         }
 
-        newIntent
+        return newIntent
+    }
+
+    private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {
+        if (!enableRequestPrivateBrowsingButton() || !hasUri) return null
+        return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
+    }
+
+    private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {
+        if (modifier is ClickModifier.Private || modifier == ClickModifier.Always) {
+            return TapConfig.OpenApp
+        }
+
+        return when (this) {
+            ClickType.Single -> tapConfigSingle
+            ClickType.Double -> tapConfigDouble
+            ClickType.Long -> tapConfigLong
+        }.value
+    }
+
+    fun handleClick(
+        activity: Activity,
+        index: Int,
+        isExpanded: Boolean,
+        requestExpand: () -> Unit,
+        result: Intent,
+        info: DisplayActivityInfo,
+        type: ClickType,
+        modifier: ClickModifier,
+    ): Deferred<Intent>? {
+        val config = type.getPreference(modifier)
+
+        when (config) {
+            TapConfig.None -> {}
+            TapConfig.OpenApp -> {
+                return launchAppAsync(
+                    info = info,
+                    intent = result,
+                    always = modifier is ClickModifier.Always,
+                    privateBrowsingBrowser = (modifier as? ClickModifier.Private)?.browser,
+                    persist = modifier !is ClickModifier.Private
+                )
+            }
+
+            TapConfig.OpenSettings -> {
+                startPackageInfoActivity(activity, info)
+            }
+
+            TapConfig.SelectItem -> {
+                appListSelectedIdx.intValue = if (appListSelectedIdx.intValue != index) index else -1
+                if (appListSelectedIdx.intValue != -1 && !isExpanded) {
+                    requestExpand()
+                }
+            }
+        }
+
+        return null
     }
 }

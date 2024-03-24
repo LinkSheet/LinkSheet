@@ -33,7 +33,7 @@ fun PreferredAppColumn(
     bottomSheetViewModel: BottomSheetViewModel,
     showPackage: Boolean,
     hideBottomSheetChoiceButtons: Boolean,
-    onClick: (ClickType) -> Unit
+    onClick: (ClickType, ClickModifier) -> Unit
 ) {
     val activity = LocalContext.currentActivity()
 

@@ -83,7 +83,6 @@
     <string name="last_rule_update">अपस्ट्रीम से अंतिम नियम अपडेट (UTC):</string>
     <string name="import_settings">सेटिंग्स इंपोर्ट करें</string>
     <string name="resolve_via_toast">किसी URL का समाधान हो जाने पर एक टोस्ट दिखाएँ</string>
-    <string name="cached_urls_version">बैल्ट-इन कैश्ड URL</string>
     <string name="download_started_toast">डाउनलोड प्रारंभ टोस्ट</string>
     <string name="notifications">नोटीफिकेशन</string>
     <string name="just_version">संस्करण</string>

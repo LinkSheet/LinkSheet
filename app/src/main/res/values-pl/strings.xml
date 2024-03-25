@@ -188,10 +188,7 @@
     <string name="amp2html_external_service">Uzyskaj wersję stron bez AMP</string>
     <string name="amp2html_external_service_explainer">Preferuj bezpośrednie strony zamiast wersji AMP przy użyciu API z supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>) \u0020</string>
     <string name="amp2html_builtin_cache">Użyj wbudowanego bufora Amp2Html</string>
-    <string name="follow_redirects_builtin_cache">Użyj wbudowanego bufora przekierowań</string>
     <string name="amp2html_builtin_cache_explainer">Używaj wbudowanej pamięci podręcznej (która korzysta z eksportu bazy danych usługi zewnętrznej)</string>
-    <string name="redirect_resolve_type_builtin_cache">wbudowana pamięć podręczna</string>
-    <string name="follow_redirects_builtin_cache_explainer">Używaj wbudowanej pamięci podręcznej (która korzysta z eksportu bazy danych usługi zewnętrznej)</string>
     <string name="follow_only_known_trackers_explainer">Próbuj śledzić przekierowania tylko wtedy, gdy host jest znany jako tracker lub przekierowanie. Jeśli opcja „Śledź przekierowania przez usługę zewnętrzną” jest włączona, ta opcja będzie zawsze aktywna.</string>
     <string name="resolved_via">%s rozwiązano przez %s</string>
     <string name="resolve_failed">%s nie powiodło się: %s</string>
@@ -366,7 +363,6 @@
     <string name="clear_urls_version">Reguły ClearURLs</string>
     <string name="last_rule_update">Ostatnia aktualizacja reguł (UTC):</string>
     <string name="resolve_via_toast">Toast: Link został rozwiązany</string>
-    <string name="cached_urls_version">Wbudowane buforowane linki</string>
     <string name="download_started_toast">Toast: Rozpoczęto pobieranie</string>
     <string name="notifications">Powiadomienia</string>
     <string name="just_version">Wersja</string>

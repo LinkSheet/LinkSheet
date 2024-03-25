@@ -7,7 +7,6 @@ abstract class ResolverRepository<T : ResolverEntity<T>>(
     protected val dao: ResolverDao<T>,
     val remoteResolveUrlField: String,
 ) {
-    abstract fun getBuiltInCachedForUrl(inputUrl: String): String?
     fun getForInputUrl(inputUrl: String) = dao.getForInputUrl(inputUrl)
     abstract suspend fun insert(inputUrl: String, resolvedUrl: String)
 }

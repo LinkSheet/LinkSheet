@@ -75,15 +75,6 @@ fun FollowRedirectsSettingsRoute(onBackPressed: () -> Unit, viewModel: FollowRed
                 )
             }
 
-            item(key = "follow_redirects_builtin_cache") {
-                SwitchRow(
-                    state = viewModel.followRedirectsBuiltInCache,
-                    enabled = viewModel.followRedirects(),
-                    headlineId = R.string.follow_redirects_builtin_cache,
-                    subtitleId = R.string.follow_redirects_builtin_cache_explainer
-                )
-            }
-
             item(key = "follow_only_known_trackers") {
                 DividedSwitchRow(
                     state = viewModel.followOnlyKnownTrackers,

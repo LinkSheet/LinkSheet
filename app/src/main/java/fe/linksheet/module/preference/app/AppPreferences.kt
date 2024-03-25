@@ -21,7 +21,9 @@ object AppPreferences : PreferenceDefinition(
     "single_tap",
     "enable_send_button",
     "show_new_bottom_sheet_banner",
-    "show_dev_bottom_sheet_experiment_card"
+    "show_dev_bottom_sheet_experiment_card",
+    "amp2html_builtin_cache",
+    "follow_redirects_builtin_cache"
 ) {
     val hideAfterCopying = boolean("hide_after_copying")
     val usageStatsSorting = boolean("usage_stats_sorting")
@@ -66,7 +68,6 @@ object AppPreferences : PreferenceDefinition(
     val followRedirectsLocalCache = boolean("follow_redirects_local_cache", true)
     val followRedirectsExternalService = boolean("follow_redirects_external_service")
     val followOnlyKnownTrackers = boolean("follow_only_known_trackers")
-    val followRedirectsBuiltInCache = boolean("follow_redirects_builtin_cache", true)
     val followRedirectsAllowDarknets = boolean("follow_redirects_allow_darknets", false)
 
     val dontShowFilteredItem = boolean("dont_show_filtered_item")
@@ -83,7 +84,6 @@ object AppPreferences : PreferenceDefinition(
     val enableAmp2Html = boolean("enable_amp2html")
     val amp2HtmlLocalCache = boolean("amp2html_local_cache", true)
     val amp2HtmlExternalService = boolean("amp2html_external_service")
-    val amp2HtmlBuiltInCache = boolean("amp2html_builtin_cache", true)
     val amp2HtmlAllowDarknets = boolean("amp2html_allow_darknets", false)
 
     val enableRequestPrivateBrowsingButton = boolean(

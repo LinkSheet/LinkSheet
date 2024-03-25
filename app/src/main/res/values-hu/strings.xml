@@ -58,7 +58,6 @@
     <string name="confirm">Megerősítés</string>
     <string name="clear">Törlés</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="follow_redirects_builtin_cache_explainer">Beépített gyorsítótár használata (amely a külső szolgáltatás adatbázis-exportálását használja)</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Ha sok gombot engedélyez az alulról előbukkanó panelen, az a gombok levágásához/meghibásodásához vezethet.</string>
     <string name="shizuku">Shizuku integráció</string>
     <string name="shizuku_explainer">A Shizuku lehetővé teszi, hogy a LinkSheet közvetlenül kommunikáljon a rendszer API-kkal</string>
@@ -152,7 +151,6 @@
     <string name="include_settings">Tartalmazza a beállításokat (ajánlott)</string>
     <string name="amp2html_builtin_cache">Beépített Amp2Html gyorsítótár használata</string>
     <string name="amp2html_builtin_cache_explainer">Beépített gyorsítótár használata (amely a külső szolgáltatás adatbázis-exportálását használja)</string>
-    <string name="redirect_resolve_type_builtin_cache">Beépített gyorsítótár</string>
     <string name="include_fingerprint">Tartalmazza az eszköz ujjlenyomatát (ajánlott)</string>
     <string name="enable_amp2html">Amp2Html engedélyezése</string>
     <string name="amp2html_local_cache">Helyi Amp2Html gyorsítótár engedélyezése</string>
@@ -230,7 +228,6 @@
     <string name="enable_ignore_libredirect_button_explainer">Megjelenít egy gombot az alulról előbukkanó panelen, ha az URL-t a LibRedirect segítségével irányították át, ami helyette az eredeti URL-t nyitja meg</string>
     <string name="enable_request_private_browsing_button_explainer">A böngészők mellett egy gombot jelenít meg, amely privát böngészési módban nyitja meg a kattintott URL-t. Támogatott böngészők: %s</string>
     <string name="amp2html_external_service">Kísérlet a nem AMP-oldalverzió beszerzésére külső szolgáltatáson keresztül</string>
-    <string name="follow_redirects_builtin_cache">Beépített átirányítási gyorsítótár használata</string>
     <string name="enable_amp2html_explainer">Átirányítja az AMP oldalakat a normál webes verzióra. Ennek lehetnek <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">adatvédelemre vonatkozó következményei</annotation>. \u0020</string>
     <string name="onboarding6_headline">Állítsa be</string>
     <string name="title_activity_domain_spoof">DomainSpoofActivity</string>

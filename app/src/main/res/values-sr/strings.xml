@@ -148,7 +148,6 @@
     <string name="linksheet_download">LinkSheet преузимање</string>
     <string name="delete">Избриши</string>
     <string name="fastforward">FastForward</string>
-    <string name="redirect_resolve_type_builtin_cache">уграђени кеш</string>
     <string name="follow_redirects_external_service_explainer">Пратите преусмеравања користећи API постављен на supabase.com (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
     <string name="include_fingerprint">Укључи отисак прста уређаја (препоручено)</string>
     <string name="preferred_apps">Префериране апликације</string>
@@ -282,7 +281,6 @@
     <string name="donate">Донирај</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Замењује наведене дугмад „Копирај URL“, „Дели са“, „Преузми“ и „Игнориши LibRedirect“ једноставним текстуалним дугмадима</string>
-    <string name="follow_redirects_builtin_cache_explainer">Користите уграђени кеш (који користи извоз базе података спољне услуге)</string>
     <string name="disable_in_selected">Онемогући у изабраном</string>
     <string name="debug_explainer">Погледај евиденције апликације</string>
     <string name="follow_redirects_external_service">Пратите преусмеравања путем спољне услуге</string>
@@ -311,7 +309,6 @@
     <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> интеграцију</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
-    <string name="follow_redirects_builtin_cache">Користи уграђени кеш преусмеравања</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „враћа“ „url-app-chooser“ који се појавио када је корисник додирнуо линк на Android верзији &lt;12 и имао је инсталираних више апликација које су могле да рукују линком</string>
     <string name="system">Системски</string>
@@ -363,7 +360,6 @@
     <string name="clear_urls_version">ClearURLs правила</string>
     <string name="last_rule_update">Последње ажурирање правила узводно (UTC):</string>
     <string name="resolve_via_toast">Приказивање искачуће поруке при разрешењу URL адресе</string>
-    <string name="cached_urls_version">Уграђене кеширане URL адресе</string>
     <string name="download_started_toast">Искачућа порука о започетом преузимању</string>
     <string name="notifications">Обавештења</string>
     <string name="just_version">Верзија</string>

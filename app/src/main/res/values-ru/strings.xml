@@ -111,7 +111,6 @@
     <string name="linksheet_download">Скачать LinkSheet</string>
     <string name="delete">Удалить</string>
     <string name="fastforward">FastForward</string>
-    <string name="redirect_resolve_type_builtin_cache">встроенный кэш</string>
     <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url="https://supabase.com/privacy">Политика конфиденциальности</annotation>)</string>
     <string name="include_fingerprint">Включить отпечаток пальца устройства (рекомендуется)</string>
     <string name="preferred_apps">Предпочитаемые приложения</string>
@@ -220,7 +219,6 @@
     <string name="none_explainer">Перечислите только нативные приложения, удалите все браузеры. Если присутствует только одно нативное приложение, оно будет открыто автоматически. Если нативного приложения нет, будут перечислены все браузеры.</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Заменить контурные кнопки «Скопировать URL», «Поделиться», «Загрузить» и «Игнорировать LibRedirect» на простые текстовые кнопки</string>
-    <string name="follow_redirects_builtin_cache_explainer">Использовать встроенный кэш (который использует экспорт базы данных внешнего сервиса)</string>
     <string name="disable_in_selected">Отключить в выбранном</string>
     <string name="debug_explainer">Просмотр логов приложений</string>
     <string name="follow_redirects_external_service">Следовать за перенаправлениями через внешний сервис</string>
@@ -244,7 +242,6 @@
     <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
     <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="app_name">LinkSheet</string>
-    <string name="follow_redirects_builtin_cache">Использовать встроенный кэш перенаправления</string>
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet «восстанавливает» средство выбора URL-приложения, которое появляется, когда пользователь нажимает ссылку на Android &lt;12 и у него установлено несколько приложений, которые могут обрабатывать ссылку</string>
     <string name="system">Системная</string>

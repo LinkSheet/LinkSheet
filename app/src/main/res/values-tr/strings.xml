@@ -47,7 +47,7 @@
     <string name="hide_after_copying">Kopyaladıktan sonra gizle</string>
     <string name="display_grid_layout">Izgara düzeni</string>
     <string name="apps">Uygulamalar</string>
-    <string name="bottom_sheet">Alt tabaka</string>
+    <string name="bottom_sheet">Alt sayfa</string>
     <string name="enabled">Etkinleştirilmiş</string>
     <string name="disabled">Devre dışı bırakıldı</string>
     <string name="open_with_linksheet">LinkSheet ile aç</string>
@@ -266,7 +266,7 @@
     <string name="enable_linksheet_compat">Deneysel LinkSheetCompat menüsünü etkinleştir</string>
     <string name="disclaimer_libredirect_unstable">Deneysel bir özellik olmakla birlikte, LibRedirect şu anlık çok kararsız olarak değerlendirilir ve çalışmaya da bilir.</string>
     <string name="launch_onboaring_explainer">İlk başlatma sürecini test et</string>
-    <string name="base_config">Temel yapılandırma</string>
+    <string name="base_config">Ek yapılandırma</string>
     <string name="donate_card">Kart ile bağış yapın (BuyMeACoffee ile)</string>
     <string name="donate_explainer_crypto">Crypto ile bağış yaparken, <b>LinkSheet Pro</b> talep etmek için ödemenizin kanıtını \u0020<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020adresine gönderin \u0020</string>
     <plurals name="months">
@@ -463,4 +463,20 @@
     <string name="theme_enable_amoled">Kapkara</string>
     <string name="theme_mode">Tema modu</string>
     <string name="theme_enable_material_you_explainer">Android 12+\'nin Material You cihaz temasını kullan</string>
+    <string name="tap_customization">Dokunma özelleştirme</string>
+    <string name="no_action">Eylem yok</string>
+    <string name="open_app">Uygulamayı aç</string>
+    <string name="select_app">Uygulamayı seç</string>
+    <string name="open_app_settings_page">Uygulamanın ayarlar sayfasını aç</string>
+    <string name="tap_customization_dialog_title_single_tap">Tek dokunma</string>
+    <string name="cancel">İptal</string>
+    <string name="expand_on_app_select">Bir uygulama seçildiğinde genişlet</string>
+    <string name="tap_customization_single_tap">Tek dokunma</string>
+    <string name="tap_customization_double_tap">Çift dokunma</string>
+    <string name="tap_customization_long_tap">Uzun dokunma</string>
+    <string name="tap_customization_dialog_title">%syı yapılandır</string>
+    <string name="tap_customization_dialog_title_double_tap">Çift dokunma</string>
+    <string name="tap_customization_dialog_title_long_tap">Uzun dokunma</string>
+    <string name="tap_customization_dialog_text">Gerçekleştirilmesi gereken eylemi seçin</string>
+    <string name="expand_on_app_select_explainer">Bir uygulama seçildiğinde alt sayfayı otomatik olarak genişlet</string>
 </resources>

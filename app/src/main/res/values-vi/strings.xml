@@ -91,7 +91,6 @@
     <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
     <string name="delete">Xóa</string>
-    <string name="redirect_resolve_type_builtin_cache">bộ đệm tích hợp</string>
     <string name="include_fingerprint">Bao gồm dấu vân tay của thiết bị (được khuyến nghị)</string>
     <string name="preferred_apps">Ứng dụng ưu tiên</string>
     <string name="just_once">Chỉ một lần</string>
@@ -182,7 +181,6 @@
     <string name="none_explainer">Chỉ liệt kê các ứng dụng gốc, loại hết các trình duyệt. Nếu chỉ có một ứng dụng gốc duy nhất, nó sẽ tự động được mở. Nếu không có ứng dụng gốc thì tất cả các trình duyệt sẽ được liệt kê.</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Thay thế các nút \"Sao chép URL\", \"Chia sẻ với\", \"Tải xuống\" và \"Bỏ qua LibRedirect\" được bo viền bằng các nút văn bản đơn giản</string>
-    <string name="follow_redirects_builtin_cache_explainer">Sử dụng bộ đệm tích hợp (sử dụng xuất cơ sở dữ liệu của dịch vụ bên ngoài)</string>
     <string name="follow_redirects_external_service">Theo dõi chuyển hướng qua dịch vụ bên ngoài</string>
     <string name="pro_feature">Đây là một tính năng của LinkSheet Pro!</string>
     <string name="settings">Thiết đặt</string>
@@ -198,7 +196,6 @@
     <string name="app_crashed">Có vẻ như LinkSheet đã bị lỗi, hãy kiểm tra lỗi bên dưới</string>
     <string name="no_logs_found">Không tìm thấy nhật ký trước đây!</string>
     <string name="downloader_url_mime_type">Sử dụng loại mime từ URL</string>
-    <string name="follow_redirects_builtin_cache">Sử dụng bộ đệm chuyển hướng tích hợp</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet \"khôi phục\" \"bộ chọn-url-ứng dụng\" xuất hiện khi người dùng nhấn vào một liên kết trên Android &lt;12 và đã cài đặt nhiều ứng dụng có thể xử lý liên kết</string>
     <string name="system">Hệ thống</string>
     <string name="no_log_entries">Phiên này không chứa bất kỳ nhật ký nào.</string>
@@ -235,7 +232,6 @@
     <string name="resolve_via_failed_toast">Hiện thông báo ngắn khi giải quyết thất bại</string>
     <string name="resolve_via_failed_toast_explainer">Hiện thông báo ngắn khi URL không thể giải quyết thông qua dịch vụ bên ngoài</string>
     <string name="opening_with_app_toast_explainer">Hiển thị thông báo ngắn khi một ứng dụng đã được đặt làm mặc định cho một tên miền được khởi chạy</string>
-    <string name="cached_urls_version">URL lưu đệm trong bản dựng</string>
     <string name="last_updated">Cập nhật lần cuối (UTC):</string>
     <string name="enable_linksheet_compat">Bật thực đơn LinkSheet Tương thích thử nghiệm</string>
     <string name="built_by_error">Bản dựng này không được ký bởi 1fexd cũng như Github workflow. Điều này không nhất thiết có nghĩa là bất cứ điều gì xấu, vì bất cứ ai cũng có thể chia tách mã nguồn và xây dựng phiên bản LinkSheet của riêng họ, nhưng họ có thể làm như vậy với mục đích xấu.</string>

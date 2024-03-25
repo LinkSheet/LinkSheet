@@ -297,14 +297,6 @@ fun AboutSettingsRoute(
                 )
             }
 
-            item("cached_urls") {
-                LibraryLastUpdatedRow(
-                    R.string.cached_urls_version,
-                    CachedUrlsMetadata.fetchedAt,
-                    Icons.Default.Cached
-                )
-            }
-
             item("libredirect") {
                 LibraryLastUpdatedRow(
                     R.string.libredirect_version,

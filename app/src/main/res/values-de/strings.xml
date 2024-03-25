@@ -217,7 +217,6 @@
     <string name="linksheet_download">LinkSheet herunterladen</string>
     <string name="delete">Löschen</string>
     <string name="fastforward">FastForward</string>
-    <string name="redirect_resolve_type_builtin_cache">eingebauter Zwischenspeicher</string>
     <string name="follow_redirects_external_service_explainer">Weiterleitungen über eine durch supabase.com bereitgestellte Schnittstelle folgen (<annotation url="https://supabase.com/privacy">Datenschutzerklärung</annotation>)</string>
     <string name="include_fingerprint">Fingerabdruck des Geräts einschließen (empfohlen)</string>
     <string name="github_pipeline_build">Erstellt und signiert durch den Github-Workflow</string>
@@ -293,7 +292,6 @@
     <string name="enable_amp2html_explainer">Leitet AMP-Seiten auf ihre normale Webversion um. Dies kann <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">Auswirkungen auf die Privatsphäre</annotation> haben</string>
     <string name="donate">Spenden</string>
     <string name="seal">Seal</string>
-    <string name="follow_redirects_builtin_cache_explainer">Eingebauten Zwischenspeicher verwenden (welcher einen Datenbankexport des externen Dienstes verwendet)</string>
     <string name="disable_in_selected">In Auswahl deaktivieren</string>
     <string name="follow_redirects_external_service">Weiterleitungen über externen Dienst folgen</string>
     <string name="general_settings_explainer">Einstellungen, die die gesamte App betreffen</string>
@@ -309,7 +307,6 @@
     <string name="disable_link_handling">Link-Verarbeitung deaktivieren</string>
     <string name="enable_libredirect_explainer">Leitet Links mittels experimenteller <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation>-Integration zu datenschutzfreundlichen Benutzeroberflächen um</string>
     <string name="at_least_one_known_browser_installed">Mindestens ein Browser installiert</string>
-    <string name="follow_redirects_builtin_cache">Eingebauten Weiterleitungs-Zwischenspeicher verwenden</string>
     <string name="shizuku_integration_no_permission_explainer">Tippe hier, um die Shizuku-Berechtigung anzufordern</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet \"stellt\" die \"URL-App-Auswahl\" \"wieder her\", die erschien, wenn der Benutzer auf einen Link unter Android &lt;12 tippte und mehrere Apps installiert hatte, die den Link verarbeiten konnten</string>
     <string name="add">Hinzufügen</string>

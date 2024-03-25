@@ -28,7 +28,6 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     suspend fun resolve(
         uri: Uri,
         localCache: Boolean,
-        builtInCache: Boolean,
         resolvePredicate: ResolvePredicate? = null,
         externalService: Boolean,
         connectTimeout: Int,
@@ -53,14 +52,6 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
             if (cached != null) {
                 logger.info(cached, HashProcessor.UrlProcessor) { "From local cache: $it" }
                 return ResolveResultType.Resolved.LocalCache(cached).success()
-            }
-        }
-
-        if (builtInCache) {
-            val cached = resolverRepository.getBuiltInCachedForUrl(uriString)
-            if (cached != null) {
-                logger.info(cached, HashProcessor.UrlProcessor) { "From built-in cache: $it" }
-                return ResolveResultType.Resolved.BuiltInCache(cached).success()
             }
         }
 

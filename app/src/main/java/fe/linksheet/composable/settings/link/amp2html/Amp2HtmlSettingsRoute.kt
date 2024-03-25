@@ -63,15 +63,6 @@ fun Amp2HtmlSettingsRoute(
                 )
             }
 
-            item(key = "enable_amp2html_builtin_cache") {
-                SwitchRow(
-                    state = viewModel.amp2HtmlBuiltInCache,
-                    enabled = viewModel.enableAmp2Html(),
-                    headlineId = R.string.amp2html_builtin_cache,
-                    subtitleId = R.string.amp2html_builtin_cache_explainer
-                )
-            }
-
             item(key = "amp2html_allow_darknets") {
                 SwitchRow(
                     state = viewModel.amp2HtmlAllowDarknets,

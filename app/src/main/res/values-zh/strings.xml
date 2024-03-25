@@ -202,7 +202,6 @@
     <string name="clear_urls">ClearURLs</string>
     <string name="delete">删除</string>
     <string name="fastforward">FastForward</string>
-    <string name="redirect_resolve_type_builtin_cache">内置缓存</string>
     <string name="include_fingerprint">包括设备指纹（推荐）</string>
     <string name="github_pipeline_build">由Github workflow构建并签名</string>
     <string name="import_settings">导入设置</string>
@@ -265,7 +264,6 @@
     <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">隐私方面的影响</annotation></string>
     <string name="none_explainer">仅列出原生应用，去除所有浏览器。如果只存在一个原生应用，则会自动用其打开。如果没有原生应用，则列出所有浏览器应用。</string>
     <string name="donate">捐赠</string>
-    <string name="follow_redirects_builtin_cache_explainer">使用内置缓存（使用从外部服务导出的数据库）</string>
     <string name="debug_explainer">查看应用日志</string>
     <string name="pro_feature">这是一项 LinkSheet Pro 功能！</string>
     <string name="title_activity_main">MainActivity</string>
@@ -284,7 +282,6 @@
     <string name="export_explainer">将当前应用设置导出到文件</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">至少已安装一个浏览器</string>
-    <string name="follow_redirects_builtin_cache">使用内置重定向缓存</string>
     <string name="shizuku_integration_no_permission_explainer">点击此处请求Shizuku权限</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet“恢复”了用户在Android &lt;12上点击链接时出现的“url-app-chooser”（如果安装了多个链接处理应用）</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>

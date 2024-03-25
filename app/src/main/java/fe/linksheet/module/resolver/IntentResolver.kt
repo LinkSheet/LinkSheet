@@ -83,9 +83,7 @@ class IntentResolver(
     private val followRedirectsLocalCache = preferenceRepository.asState(
         AppPreferences.followRedirectsLocalCache
     )
-    private val followRedirectsBuiltInCache = preferenceRepository.asState(
-        AppPreferences.followRedirectsBuiltInCache
-    )
+
     private val followRedirectsExternalService = preferenceRepository.asState(
         AppPreferences.followRedirectsExternalService
     )
@@ -128,9 +126,6 @@ class IntentResolver(
         AppPreferences.amp2HtmlLocalCache
     )
 
-    private val amp2HtmlBuiltInCache = preferenceRepository.asState(
-        AppPreferences.amp2HtmlBuiltInCache
-    )
 
     private val amp2HtmlExternalService =
         preferenceRepository.asState(AppPreferences.amp2HtmlExternalService)
@@ -250,7 +245,6 @@ class IntentResolver(
             redirectResolver.resolve(
                 uriToResolve,
                 followRedirectsLocalCache(),
-                followRedirectsBuiltInCache(),
                 resolvePredicate,
                 externalService,
                 requestTimeout(),
@@ -263,7 +257,6 @@ class IntentResolver(
             amp2HtmlResolver.resolve(
                 uriToResolve,
                 amp2HtmlLocalCache(),
-                amp2HtmlBuiltInCache(),
                 null,
                 amp2HtmlExternalService(),
                 requestTimeout(),

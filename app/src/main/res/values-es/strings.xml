@@ -132,7 +132,6 @@
     <string name="linksheet_download">Descarga de LinkSheet</string>
     <string name="delete">Eliminar</string>
     <string name="fastforward">Avance rápido</string>
-    <string name="redirect_resolve_type_builtin_cache">caché incorporado</string>
     <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>) \u0020</string>
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>
     <string name="preferred_apps">Aplicaciones predeterminadas</string>
@@ -255,7 +254,6 @@
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Reemplaza los botones delineados \"Copiar enlace\", \"Compartir\", \"Descargar\" e \"Ignorar LibRedirect\" con botones de texto simples</string>
-    <string name="follow_redirects_builtin_cache_explainer">Usar la caché integrado (que utiliza una exportación de base de datos del servicio externo)</string>
     <string name="disable_in_selected">Desactivar en la selección</string>
     <string name="debug_explainer">Ver el registro de la aplicación</string>
     <string name="follow_redirects_external_service">Seguir redirecciones a través de un servicio externo</string>
@@ -277,7 +275,6 @@
     <string name="enable_libredirect_explainer">Redirige los enlaces a frontends respetuosos con la privacidad mediante la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation>. \u0020</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
-    <string name="follow_redirects_builtin_cache">Utilice la caché de redireccionamiento incorporada</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet \"restaura\" el \"url-app-chooser\" que aparecía cuando el usuario tocaba en un enlace en un Android anterior al 12 y tenía varias aplicaciones instaladas que podían manejar el enlace</string>
     <string name="system">Seguir el sistema</string>
@@ -374,7 +371,6 @@
     <string name="resolve_via_toast">Mostrar un mensaje emergente al resolver una URL</string>
     <string name="resolve_via_failed_toast">Mostrar un mensaje emergente sobre resolución fallida</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar un mensaje emergente cuando una URL no se resuelve correctamente a través de un servicio externo</string>
-    <string name="cached_urls_version">URL en caché incorporadas</string>
     <string name="last_updated">Última actualización (UTC):</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Activar el menú experimental LinkSheet Compat</string>

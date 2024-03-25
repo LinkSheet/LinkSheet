@@ -165,9 +165,7 @@
     <string name="shizuku">Интеграция с Shizuku</string>
     <string name="shizuku_explainer">Shizuku позволява на LinkSheet да взаимодейства директно с системните ППИ</string>
     <string name="amp2html_builtin_cache">Вградена временна памет на Amp2Html</string>
-    <string name="follow_redirects_builtin_cache_explainer">Използва вградената временна памет</string>
     <string name="enable_shizuku">Интеграция (експериментална) с Shizuku</string>
-    <string name="redirect_resolve_type_builtin_cache">вградена временна памет</string>
     <string name="enable_shizuku_explainer">Ако е отметнато дава възможност на LinkSheet да използва Shizuku за директно взаимодействие с системните ППИ. Може да бъде използвано, например, за автоматично изключване на всички обработчици на препратки. В главния екран ще се покаже нова настройка.</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Включен е режим на „Shizuku“, докосване на приложение, за превключване на автоматичната обработка на препратки. Задържане за отваряне на „Отваряне по подразбиране“на приложението.</string>
     <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите.</string>
@@ -222,7 +220,6 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="license_mit">Лиценз на МТИ</string>
     <string name="amp2html_builtin_cache_explainer">Използва вградената временна памет</string>
-    <string name="follow_redirects_builtin_cache">Вградена временна памет за пренасочване</string>
     <string name="resolve_failed">%s е неуспешно: %s</string>
     <string name="background_image">Фоново изображение</string>
     <string name="onboarding1_headline">Добре дошли при</string>
@@ -372,7 +369,6 @@
     <string name="last_updated">Последно обновяване (КУВ):</string>
     <string name="resolve_via_failed_toast_explainer">Показва плуващо известие, когато външна услуга не намери адрес</string>
     <string name="resolve_via_toast">Плуващо известие при намерен адрес</string>
-    <string name="cached_urls_version">Вградени адреси</string>
     <string name="resolve_via_toast_explainer">Показва плуващо известие при намерен адрес от външна услуга</string>
     <string name="enable_linksheet_compat">Включване на експерименталното меню на LinkSheet Compat</string>
     <string name="enable_linksheet_compat_explainer">Менюто можете данамерите в подменю „Приложения“ и ако е инсталирано може да прехваща заявки към определени присъщи приложения.</string>

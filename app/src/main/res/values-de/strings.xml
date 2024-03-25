@@ -177,7 +177,6 @@
     <string name="use_unified_preferred_browser_explainer">Wenn Sie diese Option aktivieren, werden die nachstehenden Einstellungen sowohl für die normale als auch für die In-App-Verknüpfung übernommen. Verwenden Sie die nachstehenden Schaltflächen, um zwischen dem normalen und dem In-App-Modus zu wechseln, wenn deaktiviert.</string>
     <string name="advanced_explainer">Erweiterte Funktionen wie Funktions-Flags</string>
     <string name="discord">Discord</string>
-    <string name="donate_other">Wenn Sie auf andere Weise spenden möchten (SEPA-Überweisung, PayPal, andere Kryptowährungen usw.), senden Sie bitte eine E-Mail an <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="background_image">Hintergrundbild</string>
     <string name="amp2html_local_cache_explainer">Abgerufene Nicht-AMP-Versionen von Webseiten lokal zwischenspeichern</string>
     <string name="no">Nein</string>
@@ -279,7 +278,6 @@
     <string name="general">Allgemein</string>
     <string name="pretend_to_be_app_explainer">Mit LinkSheetCompat vorgeben, eine native App für unterstützte Domains zu sein</string>
     <string name="license_apache_2">Apache-Lizenz 2.0</string>
-    <string name="linksheet_donation_explainer">LinkSheet ist das Ergebnis von mehr als <b>%s</b> an Arbeit über eine Zeitspanne von mehr als <b>%s</b>n. Wenn Sie meine Arbeit wertschätzen möchten, spenden Sie bitte.</string>
     <string name="enable_request_private_browsing_button">Schaltfläche \"Privates Surfen anfordern\" aktivieren</string>
     <string name="redact_log">Protokoll schwärzen (empfohlen, bei Deaktivierung können Paket- und Hostnamen bekannt werden)</string>
     <string name="always_show_package_name_disclaimer">Dieser Schalter wird in einer zukünftigen Version an eine andere Stelle verschoben.</string>

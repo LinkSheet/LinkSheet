@@ -282,7 +282,6 @@
     <string name="no_handlers_found_explainer">LinkSheet не может открыть эту ссылку.</string>
     <string name="join">Присоединиться</string>
     <string name="discord">Discord</string>
-    <string name="donate_other">Если вы хотите сделать пожертвование другим способом (перевод SEPA, PayPal, другая криптовалюта и т. д.), отправьте электронное письмо по адресу <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="no">Нет</string>
     <string name="import_and_override">Импортировать и переопределить</string>
     <string name="onboarding4_paragraph_2">Это очень раздражает, поскольку иногда вы хотите открыть ссылку не в приложении, а в браузере (например, чтобы добавить ее в закладки).
@@ -330,7 +329,6 @@
     <string name="donate_card_headline">Пожертвовать на поддержку LinkSheet</string>
     <string name="general">Общее</string>
     <string name="pretend_to_be_app_explainer">Притворитесь собственным приложением для поддерживаемых доменов с помощью LinkSheetCompat</string>
-    <string name="linksheet_donation_explainer">LinkSheet является результатом более чем <b>%s</b> работы за период более <b>%s</b>. Если вы хотите выразить благодарность за мою работу, сделайте пожертвование.</string>
     <string name="show_linksheet_referrer_explainer">При запуске приложения LinkSheet может проверить, какое приложение было запущено, или \"ссылается\" на него. По умолчанию, когда LinkSheet запускает приложение, он скрывает себя, говоря, что приложение, запустившее LinkSheet, является целью запуска. Включите эту опцию, чтобы LinkSheet снова стал реферером для приложений, которые он открывает.</string>
     <string name="at_least_one_unknown_browser_installer">Установлен как минимум(неизвестно) один браузер</string>
     <string name="built_by">Создано и подписано</string>

@@ -177,7 +177,7 @@
     <string name="use_app_settings">Uygulama ayarlarını kullan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri olabilir</annotation> \u0020</string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun 
+    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun
 \n <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri olabilir \u0020</annotation> \u0020</string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Her zaman devre dışı bırak</string>
@@ -269,7 +269,6 @@
     <string name="base_config">Temel yapılandırma</string>
     <string name="donate_card">Kart ile bağış yapın (BuyMeACoffee ile)</string>
     <string name="donate_explainer_crypto">Crypto ile bağış yaparken, <b>LinkSheet Pro</b> talep etmek için ödemenizin kanıtını \u0020<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020adresine gönderin \u0020</string>
-    <string name="linksheet_donation_explainer">LinkSheet, <b>%s</b>den fazla, <b>%s</b>dan fazla zaman içerisindeki çalışmaların sonucudur. Çalışmamı takdir etmek istiyorsanız lütfen bağış yapın. \u0020</string>
     <plurals name="months">
         <item quantity="one">%s ay</item>
         <item quantity="other">%s ay</item>
@@ -435,7 +434,6 @@
     <string name="built_by_error">Bu yapı, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="commit">İşleme:</string>
     <string name="branch">Dal:</string>
-    <string name="donate_other">Eğer başka bir yolla (SEPA Transfer, PayPal, başka bir kripto para, vb.) bağış yapmak istiyorsanız, lütfen \u0020<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020adresine bir email gönderin \u0020</string>
     <string name="notifications_explainer">Tost bildirimlerini yapılandırın</string>
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
     <string name="enable_new_bottom_sheet_explainer">Eski alt sayfa yerine yeniden tasarlanmış olanı kullan</string>

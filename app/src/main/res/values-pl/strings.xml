@@ -312,13 +312,11 @@
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="commit">Zatwierdzenie:</string>
     <string name="donate_learn_more">Czytaj więcej</string>
-    <string name="donate_other">Jeśli chcesz przekazać darowiznę w inny sposób (przelew SEPA, PayPal, inna kryptowaluta itp.), wyślij wiadomość e-mail na adres <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020</string>
     <string name="type">Typ:</string>
     <string name="flavor">Wariant:</string>
     <string name="github_pipeline_build">Zbudowana i podpisana przez przepływ pracy Github</string>
     <string name="other">Inne</string>
     <string name="app_setup">Konfiguracja aplikacji</string>
-    <string name="linksheet_donation_explainer">LinkSheet jest wynikiem ponad <b>%s</b> pracy na przestrzeni ponad <b>%s</b>. Jeśli chcesz okazać wdzięczność za moją pracę, przekaż darowiznę. \u0020</string>
     <string name="built_by">Kompilacja</string>
     <string name="donate">Wsparcie</string>
     <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd ani przepływ pracy Github. Nie musi to oznaczać niczego złego, ponieważ każdy może rozwidlić kod źródłowy i zbudować własną wersję LinkSheet, ale może to zrobić w złym zamiarze.</string>
@@ -449,7 +447,7 @@
     <string name="allow_darknets">Zezwól na DarkNet</string>
     <string name="amp2html_allow_darknets_explainer">Zezwalaj na uruchamianie Amp2Html dla darknetu (obsługiwane: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Zezwalaj na następujące przekierowania dla darknetów (obsługiwane: %s)</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie. 
+    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie.
 \nProszę zgłaszać błędy na <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discordzie</annotation>, lub poprzez <annotation url="mailto:1fexd@420blaze.it">e-mail</annotation>. \u0020</string>
     <string name="experiment">Doświadczenie</string>
     <string name="new_dev_bottom_sheet_explainer">Nie podoba Ci się nowy dolny panel? Kliknij, aby zgłosić błędy.</string>

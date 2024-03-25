@@ -328,5 +328,4 @@
     <string name="import_dumped_preference_explainer">Importáló a naplófájlokban található beállításokhoz - valószínűleg nem hasznos az átlagfelhasználó számára</string>
     <string name="discord_explainer">Gyere és csevegj a Discord szerverünkön! Csevegj a más felhasználókkal és a LinkSheet fejlesztőivel az alkalmazás jövőjéről és egyéb törekvésekről!</string>
     <string name="donate_explainer_crypto">Ha kriptovalutával adományozol, a <b>LinkSheet Pro</b> igényléséhez küldd el a fizetési igazolást a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> címre. \u0020</string>
-    <string name="linksheet_donation_explainer">A LinkSheet több mint <b>%s</b> munka eredménye több mint <b>%s</b> alatt. Ha szeretné kifejezni megbecsülését a munkámért, kérem adományozzon. \u0020</string>
 </resources>

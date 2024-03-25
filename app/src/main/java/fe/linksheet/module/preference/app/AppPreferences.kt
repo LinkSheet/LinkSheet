@@ -69,18 +69,6 @@ object AppPreferences : PreferenceDefinition(
     val followRedirectsBuiltInCache = boolean("follow_redirects_builtin_cache", true)
     val followRedirectsAllowDarknets = boolean("follow_redirects_allow_darknets", false)
 
-    @Deprecated(message = "Use theme_v2")
-    private val theme = mapped("theme", Theme.System, Theme).migrate { repository, theme ->
-        if (!repository.hasStoredValue(themeV2)) {
-            if (theme == Theme.AmoledBlack) {
-                repository.put(themeAmoled, true)
-            }
-
-            repository.put(themeV2, theme.toV2())
-        }
-    }
-
-
     val dontShowFilteredItem = boolean("dont_show_filtered_item")
 
     val useTextShareCopyButtons = boolean("use_text_share_copy_buttons")
@@ -144,6 +132,16 @@ object AppPreferences : PreferenceDefinition(
     val expandOnAppSelect = boolean("expand_on_app_select", true)
 
     init {
+        mapped("theme", Theme.System, Theme).migrate { repository, theme ->
+            if (!repository.hasStoredValue(themeV2)) {
+                if (theme == Theme.AmoledBlack) {
+                    repository.put(themeAmoled, true)
+                }
+
+                repository.put(themeV2, theme.toV2())
+            }
+        }
+
         finalize()
     }
 

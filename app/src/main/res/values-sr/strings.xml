@@ -88,7 +88,6 @@
     <string name="use_unified_preferred_browser_explainer">Омогућавање овога ће применити доленаведена подешавања и на нормално и на руковање линковима у апликацији. Користите дугмад испод да бисте се пребацивали између нормалног и режима у апликацији када је онемогућено.</string>
     <string name="advanced_explainer">Напредна подешавања као што су експерименти и извоз/увоз</string>
     <string name="discord">Discord</string>
-    <string name="donate_other">Ако желите да донирате на други начин (SEPA трансфер, PayPal, друге криптовалуте итд.), такође пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020</string>
     <string name="background_image">Позадинска слика</string>
     <string name="amp2html_local_cache_explainer">Локално кеширајте преузете не-AMP верзије веб-страница</string>
     <string name="no">Не</string>
@@ -254,7 +253,6 @@
     <string name="pretend_to_be_app_explainer">Претварање да је ово изворна апликација за подржане домене са LinkSheetCompat</string>
     <string name="license_apache_2">Лиценца Apache 2.0</string>
     <string name="confirm">Потврди</string>
-    <string name="linksheet_donation_explainer">LinkSheet је резултат више од <b>%s</b> рада у распону од више од <b>%s</b>. Ако желите да покажете захвалност за мој рад, донирајте.</string>
     <string name="disabled">Онемогућено</string>
     <string name="enable_request_private_browsing_button">Омогући дугме „Захтевај приватно прегледање“</string>
     <string name="redact_log">Редигуј евиденцију (препоручено, онемогућавање овога може да изазове цурење назива пакета и назива хостова)</string>

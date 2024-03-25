@@ -316,7 +316,6 @@
     <string name="manual_build">1fexd ਦੁਆਰਾ ਮੈਨੁਅਲ ਰੂਪ \'ਚ ਨਿਰਮਤ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
     <string name="commit">ਕਮਿੱਟ:</string>
     <string name="donate_learn_more">ਜਿਆਦਾ ਜਾਣੋ</string>
-    <string name="donate_other">ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਤਰੀਕੇ ਨਾਲ ਦਾਨ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ (SEPA ਟ੍ਰਾਂਸਫਰ, ਪੇਪਾਲ, ਹੋਰ ਕ੍ਰਿਪੋਟੋਕਰੰਸੀ, ਆਦਿ), ਤਾਂ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਵੀ ਇੱਕ ਈਮੇਲ ਭੇਜੋ \u0020</string>
     <string name="type">ਕਿਸਮ:</string>
     <string name="flavor">ਵੰਨਗੀ:</string>
     <string name="github_pipeline_build">ਗਿਟਹੱਬ ਵਰਕਫਲੋ ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
@@ -326,7 +325,6 @@
         <item quantity="one">%s ਮਿੰਟ</item>
         <item quantity="other">%s ਮਿੰਟ</item>
     </plurals>
-    <string name="linksheet_donation_explainer">ਲਿੰਕਸ਼ੀਟ <b>%s</b> ਤੋਂ ਵੱਧ ਕੰਮ ਦਾ ਨਤੀਜਾ ਹੈ ਜੋ <b>%s</b> ਤੋਂ ਵੱਧ ਦੀ ਮਿਆਦ ਵਿੱਚ ਕੀਤਾ ਗਿਆ। ਜੇ ਤੁਸੀਂ ਮੇਰੇ ਕੰਮ ਲਈ ਕੁਝ ਪ੍ਰਸ਼ੰਸਾ ਦਿਖਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਦਾਨ ਕਰੋ। \u0020</string>
     <string name="built_by">ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਸਾਈਨ ਕੀਤਾ</string>
     <string name="donate">ਦਾਨ ਕਰੋ</string>
     <string name="built_by_error">ਇਹ ਬਿਲਡ \'ਤੇ ਨਾ ਤਾਂ 1fexd ਅਤੇ ਨਾ ਹੀ Github ਵਰਕਫਲੋ ਦੁਆਰਾ ਹਸਤਾਖਰ ਕੀਤੇ ਗਏ ਸਨ। ਇਹ ਜ਼ਰੂਰੀ ਤੌਰ \'ਤੇ ਕੁਝ ਵੀ ਮਾੜਾ ਨਹੀਂ ਹੈ ਕਿਉਂਕਿ ਕੋਈ ਵੀ ਸਰੋਤ ਕੋਡ ਨੂੰ ਫੋਰਕ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ ਆਪਣਾ ਲਿੰਕਸ਼ੀਟ ਸੰਸਕਰਣ ਬਣਾ ਸਕਦਾ ਹੈ, ਪਰ ਉਹਨਾਂ ਦੁਆਰਾ ਗਲਤ ਇਰਾਦੇ ਨਾਲ ਅਜਿਹਾ ਕਰਨਾ ਸੰਭਵ ਹੋ ਸਕਦਾ ਹੈ।</string>
@@ -381,8 +379,8 @@
     <string name="fastforward_version">ਫਾਸਟ ਫਾਰਵਰਡ ਨਿਯਮ</string>
     <string name="url_copied_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਉਪਭੋਗਤਾ ਦੁਆਰਾ ਇੱਕ URL ਕਾਪੀ ਕੀਤਾ ਜਾਂਦਾ ਹੈ</string>
     <string name="enable_new_bottom_sheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ। 
-\n 
+    <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ।
+\n
 \nਤੁਸੀਂ ਸੈਟਿੰਗਾਂ -&gt; ਰਾਹੀਂ ਪੁਰਾਣੀ ਥੱਲੇ ਵਾਲੀ ਸ਼ੀਟ \'ਤੇ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ। ਉੱਨਤ -&gt; ਫੀਚਰ ਫਲੈਗ। \u0020</string>
     <string name="enable_new_bottom_sheet_explainer">ਪੁਰਾਣੀ ਸ਼ੀਟ ਦੀ ਬਜਾਏ ਸੁਧਾਰੀ ਹੋਈ ਹੇਠਲੀ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="new_bottomsheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ</string>

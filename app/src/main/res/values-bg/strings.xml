@@ -331,8 +331,6 @@
         <item quantity="one">%s месец</item>
         <item quantity="other">%s месеца</item>
     </plurals>
-    <string name="donate_other">Ако желаете да дарите по друг начин (SEPA, PayPal, друг вид криптовалута и др.) изпратете писмо на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020</string>
-    <string name="linksheet_donation_explainer">LinkSheet е резултат на повече от <b>%s</b> работа, в продължение на повече от <b>%s</b>. Ако оценявате труда ми, направете дарение. \u0020</string>
     <string name="built_by_error">Приложението не е подписано нито от 1fexd, нито от работен процес на Гитхъб. Това не е непременно нещо лошо, защото всеки може да използва изходния код за да компилира свое издание на LinkSheet, но някой може да го направи с цел да навреди.</string>
     <string name="pro_feature">Това е възможност на LinkSheet Pro!</string>
     <string name="export_to_file">Изнасяне във файл</string>

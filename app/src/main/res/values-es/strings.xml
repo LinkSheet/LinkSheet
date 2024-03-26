@@ -458,7 +458,7 @@
     <string name="experiments_explainer_2">Desarrollo activo</string>
     <string name="parse_shared_text_intent">Analizar el texto compartido si no se encuentra ninguna URL</string>
     <string name="parse_shared_text_intent_explainer">Cuando se inicia una acción de compartir desde una aplicación que comparte texto que contiene una URL, intente encontrar (y usar) la primera URL en el texto, en lugar de dar un error</string>
-    <string name="experiments_explainer_3">Los experimentos están en desarrollo activo y pueden no funcionar correctamente, o no funcionar en absoluto. Por favor, no informes de errores en Github. Si quieres dar tu opinión, hazlo en Discord.</string>
+    <string name="experiments_explainer_3">Los experimentos están en desarrollo activo y es posible que no funcionen correctamente o que no funcionen en absoluto. No informe errores en Github. Si desea enviar comentarios, hágalo en Discord.</string>
     <string name="tap_customization_double_tap">Pulsación doble</string>
     <string name="tap_customization">Personalización de las pulsaciones</string>
     <string name="no_action">Sin acción</string>

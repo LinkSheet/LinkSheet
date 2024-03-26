@@ -298,10 +298,10 @@
     <string name="done">Hecho</string>
     <string name="thanks_for_donating">¡Gracias por donar!</string>
     <string name="dismiss">Descartar</string>
-    <string name="donate_explainer_crypto">Al donar con criptomonedas, envíe el comprobante de pago a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> para reclamar <b>LinkSheet Pro</b>. \u0020</string>
+    <string name="donate_explainer_crypto">Al donar con cripto, envíe un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="join">Unirme</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">¡Ven a chatear en nuestro servidor de Discord! ¡Chatea con los usuarios y desarrolladores de LinkSheet sobre su futuro y otros proyectos!</string>
+    <string name="discord_explainer">¡Ven a chatear a nuestro servidor Discord!</string>
     <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
     <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
 \nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas. \u0020</string>
@@ -334,7 +334,7 @@
     </plurals>
     <string name="pro_feature">¡Esta es una función de LinkSheet Pro!</string>
     <string name="export_to_file">Exportar a un archivo</string>
-    <string name="linksheet_donation_explainer_2">¡Una donación de más de <b>5€</b> (¡<b>4€</b> si donas con criptomonedas!) te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>funciones exclusivas de Pro</b> como: ocultar el banner de donación, seguir redireccionamientos externamente, obtener páginas que no son AMP y mucho más por venir! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>funciones exclusivas de Pro</b> como: seguir redirecciones externamente, obtener páginas que no son AMP externamente y mucho más por venir. \u0020</string>
     <string name="import_settings">Importar los ajustes</string>
     <string name="export_import_settings">Exportar o importar los ajustes</string>
     <string name="import_headline">Importar</string>

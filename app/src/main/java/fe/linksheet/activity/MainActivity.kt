@@ -43,6 +43,7 @@ import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
+import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
 import fe.linksheet.extension.android.initPadding
@@ -60,36 +61,11 @@ class MainActivity : ComponentActivity() {
     private val mainViewModel by viewModel<MainViewModel>()
     private val app by inject<LinkSheetApp>()
 
-
-//    override fun onAttachedToWindow() {
-//        super.onAttachedToWindow()
-//    }
-//
-//    override fun onDetachedFromWindow() {
-//        super.onDetachedFromWindow()
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-//        DevicePolicyManager()
-
-//        if (mainViewModel.firstRun.value && BuildConfig.BUILD_TYPE == "release") {
-//            startActivity(Intent(this, OnboardingActivity::class.java))
-//            finish()
-//
-
-//        if (BuildConfig.BUILD_TYPE == "debug") {
-//            startActivity(Intent(this, NewOnboardingActivity::class.java))
-//            finish()
-//        }
-
-//        Intent.ACTION_WEB_SEARCH
         initPadding()
         setContentWithKoin()
-
-
     }
 
     override fun onDestroy() {

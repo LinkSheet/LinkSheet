@@ -183,7 +183,7 @@ private fun getClipboardUrl(clipboardManager: ClipboardManager): Uri? {
 private fun LazyListScope.cardItem(
     @StringRes header: Int? = null,
     height: Dp = 10.dp,
-    content: @Composable LazyItemScope.() -> Unit
+    content: @Composable LazyItemScope.() -> Unit,
 ) {
     if (header != null) {
         header(header = header)

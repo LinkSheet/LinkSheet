@@ -3,6 +3,7 @@ package fe.linksheet.activity.bottomsheet.column
 import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.*
@@ -14,12 +15,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
 import fe.linksheet.composable.util.defaultRoundedCornerShape
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.extension.compose.enabled
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -51,15 +57,43 @@ fun ListBrowserColumn(
     preferred: Boolean,
     privateBrowser: KnownBrowser?,
     showPackage: Boolean,
-//    launchApp: LaunchApp,
 ) {
     val context = LocalContext.current
+
+//    val supporting = @Composable {
+//        Text(
+//            text = appInfo.packageName,
+//        )
+//    }
+//
+//    ShapeListItem(
+//        modifier = Modifier
+//            .combinedClickable(
+////            role = Role.,
+//                onClick = { onClick(ClickType.Single, ClickModifier.None) },
+//                onDoubleClick = { onClick(ClickType.Double, ClickModifier.None) },
+//                onLongClick = { onClick(ClickType.Long, ClickModifier.None) }
+//            )
+//            .selectable(selected = selected ?: false) {
+//                onClick(ClickType.Single, ClickModifier.None)
+//            },
+//        headlineContent = { Text(text = appInfo.label) },
+//        supportingContent = if (showPackage) supporting else null,
+//        leadingContent = {
+//            Image(
+//                bitmap = appInfo.getIcon(context),
+//                contentDescription = appInfo.label,
+//                modifier = Modifier.size(32.dp)
+//            )
+//        }
+//    )
+
 
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp)
-            .clip(defaultRoundedCornerShape)
+            .clip(ShapeListItemDefaults.SingleShape)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
             .combinedClickable(
                 onClick = { onClick(ClickType.Single, ClickModifier.None) },
@@ -70,7 +104,7 @@ fun ListBrowserColumn(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 5.dp, end = 5.dp)
+                .padding(start = 10.dp, end = 10.dp)
                 // TODO: Do we still need to use a constant here?
                 .heightIn(min = preferredAppItemHeight),
             verticalAlignment = Alignment.CenterVertically
@@ -113,7 +147,12 @@ fun ListBrowserColumn(
             if (privateBrowser != null) {
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                     // TODO: Checkout if we should reduce this button's size
-                    FilledTonalIconButton(onClick = { onClick(ClickType.Single, ClickModifier.Private(privateBrowser)) }) {
+                    FilledTonalIconButton(onClick = {
+                        onClick(
+                            ClickType.Single,
+                            ClickModifier.Private(privateBrowser)
+                        )
+                    }) {
                         Icon(
                             imageVector = Icons.Outlined.Shield,
                             contentDescription = stringResource(id = R.string.request_private_browsing)

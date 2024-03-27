@@ -54,7 +54,6 @@ fun PreferredAppColumn(
         if (!hideBottomSheetChoiceButtons && result != null) {
             ChoiceButtons(
                 result = result,
-                useTextShareCopyButtons = bottomSheetViewModel.useTextShareCopyButtons(),
                 openSettings = { bottomSheetViewModel.startMainActivity(activity) },
                 choiceClick = onClick,
             )

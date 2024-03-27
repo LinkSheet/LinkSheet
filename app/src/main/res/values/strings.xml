@@ -123,7 +123,7 @@
             implications
         </annotation>
     </string>
-    <string name="loading_link">Loading link…</string>
+    <string name="loading_link">Processing link…</string>
     <string name="follow_redirects_external_service">Follow redirects via external service</string>
     <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com
         (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)
@@ -638,4 +638,6 @@
     <string name="cancel">Cancel</string>
     <string name="expand_on_app_select">Expand when an app is selected</string>
     <string name="expand_on_app_select_explainer">Automatically expand the bottom sheet when an app is selected</string>
+    <string name="loading_link_subtitle">LinkSheet is performing link operations. This will only take a few seconds
+    </string>
 </resources>

@@ -3,6 +3,7 @@ package fe.linksheet.activity.bottomsheet.button
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +21,6 @@ import fe.linksheet.ui.HkGroteskFontFamily
 fun ChoiceButtons(
     result: BottomSheetResult.SuccessResult,
     enabled: Boolean = true,
-    useTextShareCopyButtons: Boolean,
     openSettings: () -> Unit,
     choiceClick: (ClickType, ClickModifier) -> Unit
 ) {
@@ -42,7 +42,6 @@ fun ChoiceButtons(
         // TODO: Move out of Composable
         ElevatedOrTextButton(
             onClick = openSettings,
-            textButton = useTextShareCopyButtons,
             buttonText = R.string.open_settings
         )
     }
@@ -68,7 +67,7 @@ private fun RowScope.OpenButton(
     }
 
     if (outlined) {
-        OutlinedButton(modifier = modifier, enabled = enabled, onClick = onClick, content = content)
+        FilledTonalButton(modifier = modifier, enabled = enabled, onClick = onClick, content = content)
     } else {
         Button(modifier = modifier, enabled = enabled, onClick = onClick, content = content)
     }

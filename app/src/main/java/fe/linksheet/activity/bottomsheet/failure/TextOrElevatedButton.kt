@@ -10,18 +10,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun TextOrElevatedButton(
     modifier: Modifier = Modifier,
-    isTextBasedButton: Boolean,
     imageVector: ImageVector,
     @StringRes text: Int,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
-    if (!isTextBasedButton) {
-        ElevatedButton(modifier = modifier, onClick = onClick) {
-            ButtonContent(imageVector = imageVector, text = text)
-        }
-    } else {
-        TextButton(modifier = modifier, onClick = onClick) {
-            ButtonContent(imageVector = imageVector, text = text)
-        }
+    ElevatedButton(modifier = modifier, onClick = onClick) {
+        ButtonContent(imageVector = imageVector, text = text)
     }
+
 }

@@ -84,9 +84,6 @@ class BottomSheetViewModel(
     val themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
     val themeAmoled = preferenceRepository.asState(AppPreferences.themeAmoled)
 
-    val useTextShareCopyButtons = preferenceRepository.asState(
-        AppPreferences.useTextShareCopyButtons
-    )
     val previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
 
     val enableRequestPrivateBrowsingButton = preferenceRepository.asState(

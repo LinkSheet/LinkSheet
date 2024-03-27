@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -29,6 +30,7 @@ import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
+import fe.linksheet.activity.LoadingIndicator
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
@@ -128,15 +130,13 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
-
-
         BottomDrawer(
             landscape = landscape,
             isBlackTheme = isBlackTheme,
             drawerState = drawerState,
             shape = RoundedCornerShape(
-                topStart = 16.0.dp,
-                topEnd = 16.0.dp,
+                topStart = 22.0.dp,
+                topEnd = 22.0.dp,
                 bottomEnd = 0.0.dp,
                 bottomStart = 0.0.dp
             ),
@@ -176,6 +176,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         val canShowApps = uriSuccessResult != null && !result.hasAutoLaunchApp
                 || result is BottomSheetResult.BottomSheetWebSearchResult
 
+//        LoadingIndicator()
+
         if (canShowApps) {
             val showPackage = remember {
                 uriSuccessResult?.showExtended == true || viewModel.alwaysShowPackageName()
@@ -195,17 +197,18 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 hasPreferredApp = uriSuccessResult?.filteredItem != null,
                 hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
             )
+        } else if (result !is BottomSheetResult.BottomSheetNoHandlersFound) {
+            LoadingIndicator()
         } else {
             FailureSheetColumn(
                 result = result,
-                useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
                 onShareClick = {
-                    startActivity(shareUri(result?.uri))
+                    startActivity(shareUri(result.uri))
                     finish()
                 },
                 onCopyClick = {
                     viewModel.clipboardManager.setText(
-                        "URL", result?.uri.toString()
+                        "URL", result.uri.toString()
                     )
 
                     if (!viewModel.urlCopiedToast()) {
@@ -236,18 +239,6 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         hasPreferredApp: Boolean,
         hideBottomSheetChoiceButtons: Boolean,
     ) {
-        if (result.isEmpty()) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Text(text = stringResource(id = R.string.no_app_to_handle_link_found))
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-            return
-        }
-
-        // TODO: Add "Once" and "Always" to non-pref UI, long/double tap options/single tap, limit height?
-        //      "Loading Link" show progress / downloader fails
-
         if (previewUrl && result.uri != null) {
             val uriSuccess = result as? BottomSheetResult.BottomSheetSuccessResult
             if (experimentalUrlBar) {
@@ -604,7 +595,6 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         ChoiceButtons(
             result = result,
             enabled = selected != -1,
-            useTextShareCopyButtons = viewModel.useTextShareCopyButtons(),
             openSettings = { viewModel.startMainActivity(activity) },
             choiceClick = { _, modifier ->
                 launchApp(result, result.resolved[selected], modifier == ClickModifier.Always)

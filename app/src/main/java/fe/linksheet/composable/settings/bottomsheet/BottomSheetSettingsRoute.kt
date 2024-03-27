@@ -54,7 +54,6 @@ fun BottomSheetSettingsRoute(
         }
     }
 
-
     val tapTypePreferences = remember {
         mapOf(
             TapType.Single to viewModel.tapConfigSingle,

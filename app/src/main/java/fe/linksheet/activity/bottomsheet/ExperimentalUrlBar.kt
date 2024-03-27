@@ -142,7 +142,7 @@ fun ExperimentalUrlBar(
                 Row(
                     modifier = Modifier
                         .runIf(!showFullUrl && unfurlResult == null) { it.height(60.dp) }
-                        .padding(start = 5.dp, end = 5.dp, top = 5.dp, bottom = 5.dp),
+                        .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {

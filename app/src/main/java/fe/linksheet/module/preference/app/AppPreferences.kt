@@ -23,7 +23,8 @@ object AppPreferences : PreferenceDefinition(
     "show_new_bottom_sheet_banner",
     "show_dev_bottom_sheet_experiment_card",
     "amp2html_builtin_cache",
-    "follow_redirects_builtin_cache"
+    "follow_redirects_builtin_cache",
+    "use_text_share_copy_buttons"
 ) {
     val hideAfterCopying = boolean("hide_after_copying")
     val usageStatsSorting = boolean("usage_stats_sorting")
@@ -72,7 +73,6 @@ object AppPreferences : PreferenceDefinition(
 
     val dontShowFilteredItem = boolean("dont_show_filtered_item")
 
-    val useTextShareCopyButtons = boolean("use_text_share_copy_buttons")
     val previewUrl = boolean("preview_url", true)
     val enableDownloader = boolean("enable_downloader")
     val downloaderCheckUrlMimeType = boolean("downloaderCheckUrlMimeType")

@@ -222,7 +222,7 @@
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet tarayıcı olarak bilinen en az bir uygulama algıladı.</string>
     <string name="domain_selection_confirmation_subtitle">%s uygulamasını aşağıdaki alan adları için tercih edilen uygulama olarak ayarlamak istediğinizden emin misiniz?</string>
     <string name="github_workflow_run_id">Oluşturma iş akışı kimliği:</string>
-    <string name="discord_explainer">Discord sunucumuza gelin! LinkSheet\'in kullanıcıları ve geliştiricileriyle geleceği ve diğer çalışmaları hakkında sohbet edin!</string>
+    <string name="discord_explainer">Discord sunucumuza gelin!</string>
     <string name="dismiss">Gizle</string>
     <string name="join">Katıl</string>
     <string name="background_image">Arka plan resmi</string>
@@ -264,7 +264,7 @@
     <string name="launch_onboaring_explainer">İlk başlatma sürecini test et</string>
     <string name="base_config">Ek yapılandırma</string>
     <string name="donate_card">Kart ile bağış yapın (BuyMeACoffee ile)</string>
-    <string name="donate_explainer_crypto">Crypto ile bağış yaparken, <b>LinkSheet Pro</b> talep etmek için ödemenizin kanıtını \u0020<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020adresine gönderin \u0020</string>
+    <string name="donate_explainer_crypto">Crypto ile bağış yaparken, <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> adresine bir email gönderin.</string>
     <plurals name="months">
         <item quantity="one">%s ay</item>
         <item quantity="other">%s ay</item>
@@ -425,7 +425,7 @@
     <string name="pretend_to_be_app_explainer_2">Google Chrome gibi bazı uygulamalar, örneğin arama sonuçlarındaki bir YouTube bağlantısına tıklandığında, bağlantıyı açacak bir uygulama bulmaya çalışır. LinkSheetCompat desteklenen alan adları için bu uygulamalardan biri gibi davranır ve LinkSheet\'e yönlendirir.</string>
     <string name="configure_explainer">LinkSheetCompat\'ı yapılandırmak için buraya dokunun</string>
     <string name="no_browser_installed_explainer">LinkSheet, tarayıcı olduğunu iddia eden herhangi bir uygulama bulamadı. En iyi deneyim için, bir tarayıcı yükleyin.</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b>\'dan fazla (crypto ile bağış yaparsanız <b>4€</b>) bir bağış, bağış afişini gizleme, harici yönlendirmeleri takip etme, AMP olmayan sayfaları edinme (ve gelecekte daha fazlası) gibi <b>Pro özel özellikleri</b>ni barındıran <b>LinkSheet Pro</b>\'ya erişmenizi sağlar. \u0020</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b>\'dan fazla bir bağış; harici yönlendirmeleri takip etme, AMP olmayan sayfaları edinme (ve gelecekte daha fazlası!) gibi <b>Pro özel özellikleri</b>ni barındıran <b>LinkSheet Pro</b>\'ya erişmenizi sağlar. \u0020</string>
     <string name="show_linksheet_referrer_explainer">Bir uygulama başlatıldığında, hangi uygulamanın başlattığını veya yönlendirdiğini kontrol edebilir. LinkSheet bir uygulama başlattığında, varsayılan olarak kendini gizler ve LinkSheet\'i başlatan uygulamayı gösterir. LinkSheet\'i, açtığı uygulamalar için yönlendiren olarak göstermek için bunu etkinleştirin.</string>
     <string name="built_by_error">Bu yapı, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="commit">İşleme:</string>

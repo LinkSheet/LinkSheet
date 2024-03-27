@@ -397,14 +397,14 @@
     <string name="start_setup_explainer">La funcionalidad de LinkSheet requiere una configuración personalizada de Android. La siguiente configuración le guiará a través del proceso de varios pasos.</string>
     <string name="onboarding_setup">Configurar LinkSheet</string>
     <string name="onboarding_0_title">Bienvenid@ a
-\n%s</string>
+\nLinkSheet</string>
     <string name="onboarding_0_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
     <string name="launch_onboarding_new">Lanzar la nueva integración</string>
     <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>
     <string name="apps_explainer">Aplicaciones preferidas y gestores de enlaces verificados</string>
     <string name="onboarding_1_card_title">Navegador predeterminado</string>
     <string name="onboarding_1_title">Establecer LinkSheet como navegador por defecto</string>
-    <string name="onboarding_1_subtitle">LinkSheet debe configurarse como navegador predeterminado para gestionar los enlaces pulsados.</string>
+    <string name="onboarding_1_subtitle">LinkSheet debe configurarse como navegador predeterminado para gestionar los enlaces pulsados</string>
     <string name="onboarding_2_subtitle">Si tienes muchas aplicaciones instaladas, Shizuku puede mejorar significativamente tu experiencia</string>
     <string name="onboarding_2_card_explainer">Shizuku permite que LinkSheet deshabilite el comportamiento de manejo de enlaces predeterminado de todas las aplicaciones a la vez, en lugar de tener que deshabilitarlos manualmente para cada aplicación individualmente (que es el siguiente paso).</string>
     <string name="onboarding_3_subtitle">Los gestores de enlaces deben desactivarse para que LinkSheet pueda interceptarlos</string>
@@ -450,7 +450,7 @@
     <string name="resolve_embeds_explainer">Resolver espejos integrados como fxtwitter.com en el host real</string>
     <string name="verified_link_handlers_open_settings_page">Abrir la página de configuración</string>
     <string name="share">Compartir el enlace</string>
-    <string name="nightly_experiments_card">Experimentos nocturnos</string>
+    <string name="nightly_experiments_card">Funciones experimentales</string>
     <string name="experiments">Experimentos</string>
     <string name="experiments_explainer">Pruebe las funciones actualmente en desarrollo</string>
     <string name="reset">Restablecer</string>
@@ -458,7 +458,7 @@
     <string name="experiments_explainer_2">Desarrollo activo</string>
     <string name="parse_shared_text_intent">Analizar el texto compartido si no se encuentra ninguna URL</string>
     <string name="parse_shared_text_intent_explainer">Cuando se inicia una acción de compartir desde una aplicación que comparte texto que contiene una URL, intente encontrar (y usar) la primera URL en el texto, en lugar de dar un error</string>
-    <string name="experiments_explainer_3">Los experimentos están en desarrollo activo y pueden no funcionar correctamente, o no funcionar en absoluto. Por favor, no informes de errores en Github. Si quieres dar tu opinión, hazlo en Discord.</string>
+    <string name="experiments_explainer_3">Los experimentos están en desarrollo activo y es posible que no funcionen correctamente o que no funcionen en absoluto. No informe errores en Github. Si desea enviar comentarios, hágalo en Discord.</string>
     <string name="tap_customization_double_tap">Pulsación doble</string>
     <string name="tap_customization">Personalización de las pulsaciones</string>
     <string name="no_action">Sin acción</string>

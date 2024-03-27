@@ -30,7 +30,7 @@
     </string>
     <string name="no_preferred_apps_set_yet">No apps have been set as preferred yet.</string>
     <string name="search">Search</string>
-    <string name="copy_url">Copy URL</string>
+    <string name="copy_url">Copy link</string>
     <string name="enable_copy_button">Enable copy button</string>
     <string name="enable_copy_button_explainer">Shows a \"Copy URL\" button in the bottom sheet</string>
     <string name="url_copied">URL has been copied to clipboard</string>

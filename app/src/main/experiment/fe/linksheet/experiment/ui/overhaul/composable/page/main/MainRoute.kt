@@ -20,7 +20,6 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.debug.composeable.DebugMainRoute
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLazyColumnPageLayout
 import fe.linksheet.extension.compose.ObserveStateChange
@@ -103,7 +102,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                     Text(text = stringResource(id = R.string.thanks_for_donating))
                 }
             }
-            
+
 //            if (BuildType.current?.allowDebug == true) {
 //                item {
 //                    DebugMainRoute()

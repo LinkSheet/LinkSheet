@@ -97,5 +97,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_PRO_REPO_ACCESS_TOKEN }}
           OWNER: 1fexd
-          REPO: LinkSheetPro
+          REPO: linksheet-pro
           EVENT_TYPE: rebuild-nightly

@@ -303,7 +303,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Dołącz do naszego Discorda! Porozmawiaj z użytkownikami i twórcami LinkSheet o jego przyszłości i innych przedsięwzięciach!</string>
     <string name="donate_card">Wesprzyj używając karty (przez BuyMeACoffee)</string>
-    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.
+    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. 
 \nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje.</string>
     <string name="branch">Gałąź:</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
@@ -381,8 +381,8 @@
     <string name="fastforward_version">Reguły FastForward</string>
     <string name="url_copied_toast_explainer">Pokaż toast, gdy link zostanie skopiowany</string>
     <string name="enable_new_bottom_sheet">Nowy dolny panel</string>
-    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail.
-\n
+    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail. 
+\n 
 \nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji.</string>
     <string name="enable_new_bottom_sheet_explainer">Zastąp dolny panel nową przeprojektowaną wersją</string>
     <string name="new_bottomsheet">Nowy dolny panel</string>
@@ -443,7 +443,7 @@
     <string name="allow_darknets">Zezwól na DarkNet</string>
     <string name="amp2html_allow_darknets_explainer">Zezwalaj na uruchamianie Amp2Html dla darknetu (obsługiwane: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Zezwalaj na następujące przekierowania dla darknetów (obsługiwane: %s)</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie.
+    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie. 
 \nProszę zgłaszać błędy na <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discordzie</annotation>, lub poprzez <annotation url="mailto:1fexd@420blaze.it">e-mail</annotation>.</string>
     <string name="experiment">Doświadczenie</string>
     <string name="new_dev_bottom_sheet_explainer">Nie podoba Ci się nowy dolny panel? Kliknij, aby zgłosić błędy.</string>
@@ -451,4 +451,100 @@
     <string name="information">Informacja</string>
     <string name="resolve_embeds">Rozwiąż osadzenia</string>
     <string name="resolve_embeds_explainer">Rozwiązuj lustra osadzeń, takie jak fxtwitter.com, aby prowadziły do rzeczywistego hosta</string>
+    <string name="switch_profile"></string>
+    <string name="something_went_wrong"></string>
+    <string name="theme_enable_material_you"></string>
+    <string name="tap_customization"></string>
+    <string name="expand_on_app_select"></string>
+    <string name="settings__title_select_apps"></string>
+    <string name="customization"></string>
+    <string name="telemetry_level_minimal_description"></string>
+    <string name="show_native_label_explainer"></string>
+    <string name="reset_app_link_verification_status_subtitle"></string>
+    <string name="declutter_url" translatable="false"></string>
+    <string name="telemetry_level_exhaustive_description"></string>
+    <string name="reset"></string>
+    <string name="open_app_settings_page"></string>
+    <string name="telemetry_dialog_text"></string>
+    <string name="telemetry_level_exhaustive"></string>
+    <string name="settings__subtitle_updates"></string>
+    <string name="link_handle_failed"></string>
+    <string name="declutter_url_explainer" translatable="false"></string>
+    <string name="telemetry_identity_full"></string>
+    <string name="theme_enable_amoled_explainer"></string>
+    <string name="settings_shortcuts__title_default_browser"></string>
+    <string name="tap_customization_dialog_title"></string>
+    <string name="experiments_explainer_3"></string>
+    <string name="switch_profile_explainer"></string>
+    <string name="experiments_explainer_2"></string>
+    <string name="settings_shortcuts__subtitle_default_browser"></string>
+    <string name="retry"></string>
+    <string name="resolve_activity_failure"></string>
+    <string name="settings_shortcuts__title_connected_apps"></string>
+    <string name="link_handle_failed_text"></string>
+    <string name="telemetry_level_minimal"></string>
+    <string name="settings_verified_link_handlers__text_disabled"></string>
+    <string name="reset_app_link_verification_status"></string>
+    <string name="try_share"></string>
+    <string name="settings__title_shortcuts"></string>
+    <string name="telemetry_level_disabled"></string>
+    <string name="select_app"></string>
+    <string name="tap_customization_long_tap"></string>
+    <string name="telemetry_dialog_text_2"></string>
+    <string name="settings_shortcuts__title_link_handlers"></string>
+    <string name="telemetry_identifier_reset"></string>
+    <string name="telemetry_configure_type"></string>
+    <string name="external"></string>
+    <string name="show_native_label"></string>
+    <string name="telemetry_identity_basic"></string>
+    <string name="telemetry_dialog_title"></string>
+    <string name="link_handle_failed_text_field_label"></string>
+    <string name="edit"></string>
+    <string name="telemetry_level_disabled_description"></string>
+    <string name="experiments_explainer"></string>
+    <string name="telemetry_level_standard"></string>
+    <string name="telemetry_level_standard_description"></string>
+    <string name="Miscellaneous"></string>
+    <string name="settings__title_filter_apps"></string>
+    <string name="theme_enable_amoled"></string>
+    <string name="tap_customization_dialog_title_long_tap"></string>
+    <string name="parse_shared_text_intent"></string>
+    <string name="settings__subtitle_shortcuts"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short"></string>
+    <string name="open_app"></string>
+    <string name="no_action"></string>
+    <string name="tap_customization_dialog_title_double_tap"></string>
+    <string name="cancel"></string>
+    <string name="tap_customization_dialog_title_single_tap"></string>
+    <string name="expand_on_app_select_explainer"></string>
+    <string name="theme_enable_material_you_explainer"></string>
+    <string name="parse_shared_text_intent_explainer"></string>
+    <string name="theme_mode"></string>
+    <string name="tap_customization_single_tap"></string>
+    <string name="experiments"></string>
+    <string name="tap_customization_dialog_text"></string>
+    <string name="tap_customization_double_tap"></string>
+    <string name="nightly_experiments_card_explainer"></string>
+    <string name="nightly_experiments_card"></string>
+    <string name="log_session_headline"></string>
+    <string name="verified_link_handlers_open_settings_page"></string>
+    <string name="reset_app_link_verification_status_toast"></string>
+    <string name="loading_link_subtitle"></string>
+    <string name="share"></string>
+    <string name="help"></string>
+    <string name="help_subtitle"></string>
+    <string name="build_info"></string>
+    <string name="verified_link_handlers_subtitle"></string>
+    <string name="external_versions"></string>
+    <string name="verified_link_handlers"></string>
+    <string name="settings__title_updates"></string>
+    <string name="settings_verified_link_handlers__text_user_apps"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short"></string>
+    <string name="analytics"></string>
+    <string name="telemetry_configure_title"></string>
+    <string name="settings_notifications__divider_toasts"></string>
 </resources>

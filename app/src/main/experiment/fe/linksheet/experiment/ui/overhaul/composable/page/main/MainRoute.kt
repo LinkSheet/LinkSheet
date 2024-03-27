@@ -103,12 +103,12 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                     Text(text = stringResource(id = R.string.thanks_for_donating))
                 }
             }
-
-            if (BuildType.current?.allowDebug == true) {
-                item {
-                    DebugMainRoute()
-                }
-            }
+            
+//            if (BuildType.current?.allowDebug == true) {
+//                item {
+//                    DebugMainRoute()
+//                }
+//            }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
                 item(

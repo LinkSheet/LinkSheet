@@ -74,7 +74,7 @@
     <string name="privacy_settings_explainer">Подешавања попут укључивања упућивача</string>
     <string name="dont_show_filtered_item">Никада не приказуј одељак „последња изабрана апликација“</string>
     <string name="follow_redirects_local_cache_explainer">Кеширајте резултат преусмеравања локално</string>
-    <string name="donate_explainer_crypto">Када донирате помоћу криптовалуте, пошаљите доказ о \u0020уплати на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020да бисте преузели <b>LinkSheet Pro</b>. \u0020</string>
+    <string name="donate_explainer_crypto">Када донирате помоћу криптовалуте, пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="use_app_settings_explainer">Нека апликација одлучи да ли треба да се користи прегледач у апликацији</string>
     <string name="display_grid_layout_explainer">Прикажите мрежу уместо листе у доњем листу</string>
     <string name="apps">Апликације</string>
@@ -107,13 +107,13 @@
     <string name="success">Успешно</string>
     <string name="onboarding0_headline">Време је да се врати</string>
     <string name="request_timeout_explainer">Дефинише колико секунди ће LinkSheet чекати да се веза успостави. Подешавање на 0 онемогућава временско ограничење, али се то не препоручује.</string>
-    <string name="discord_explainer">Дођите да ћаскате на нашем Discord серверу! Разговарајте са корисницима и програмерима LinkSheet-а о његовој будућности и другим настојањима!</string>
+    <string name="discord_explainer">Дођите да ћаскате на нашем Discord серверу!</string>
     <string name="github">GitHub</string>
     <string name="configure">Конфигуриши</string>
     <string name="show_linksheet_referrer">Прикажи LinkSheet упућивача</string>
     <string name="url_copied">URL адреса је копирана у привремену меморију</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
-    <string name="copy_url">Копирај URL</string>
+    <string name="copy_url">Копирај линк</string>
     <string name="resolve_failed">%s је неуспешно: %s</string>
     <string name="none">Ниједно</string>
     <string name="onboarding7_highlight">покрива</string>
@@ -244,7 +244,7 @@
         <item quantity="other">%s минута</item>
     </plurals>
     <string name="log">Евиденција</string>
-    <string name="loading_link">Учитавање линка…</string>
+    <string name="loading_link">Обрада линка…</string>
     <string name="donate_card_headline">Донирајте да бисте подржали LinkSheet</string>
     <string name="license_mit">Лиценца MIT</string>
     <string name="general">Опште</string>
@@ -290,7 +290,7 @@
     <string name="in_app">У апликацији</string>
     <string name="preferred_browser_explainer">Подесите режим преферираног прегледача</string>
     <string name="crash_log">Евиденција отказивања</string>
-    <string name="built_by_error">Ову верзију није потписао 1fexd ни GitHub радни ток. Ово не мора да значи ништа лоше, јер свако може да рачва изворни кôд и направи своју верзију LinkSheet апликације, али то може учинити са злонамерном намером.</string>
+    <string name="built_by_error">Ову верзију није потписао 1fexd ни GitHub радни ток.</string>
     <string name="single_tap">Омогући један додир</string>
     <string name="set_as_default_browser">Подеси као подразумевани прегледач</string>
     <string name="follow_only_known_trackers">Прати само познате програме за праћење</string>
@@ -311,7 +311,7 @@
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „враћа“ „url-app-chooser“ који се појавио када је корисник додирнуо линк на Android верзији &lt;12 и имао је инсталираних више апликација које су могле да рукују линком</string>
-    <string name="system">Системски</string>
+    <string name="system">Прати систем</string>
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
@@ -334,7 +334,7 @@
     <string name="done">Готово</string>
     <string name="pro_feature">Ово је LinkSheet Pro функција!</string>
     <string name="export_to_file">Извоз у фајл</string>
-    <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> (<b>4€</b>, ако донирате помоћу криптовалуте!) омогућава вам приступ за <b>LinkSheet Pro</b>, што укључује <b>ексклузивне Pro функције</b> као што су: \u0020скривање банера за донације, праћење спољних преусмеравања, екстерно добијање страница које нису AMP и још много тога! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> омогућава вам приступ за <b>LinkSheet Pro</b>, што укључује <b>ексклузивне Pro функције</b> као што су: праћење спољних преусмеравања, екстерно добијање страница које нису AMP и још много тога! \u0020</string>
     <string name="import_settings">Увоз подешавања</string>
     <string name="export_import_settings">Извоз или увоз подешавања</string>
     <string name="import_headline">Увоз</string>
@@ -398,7 +398,7 @@
     <string name="launch_onboarding__now_explainer">Тестирајте нови ток укључивања</string>
     <string name="hide_bottom_sheet_choice_buttons">Сакриј дугмад за избор</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Сакријте дугмад „Једном“ и „Увек“ на доњем листу</string>
-    <string name="base_config">Основна конфигурација</string>
+    <string name="base_config">Додатна конфигурација</string>
     <string name="urlbar_settings">Url трака</string>
     <string name="onboarding_1_title">Подесите LinkSheet као подразумевани прегледач</string>
     <string name="onboarding_1_subtitle">LinkSheet треба да се подеси као подразумевани прегледач за руковање додирнутим линковима</string>
@@ -452,10 +452,33 @@
     <string name="parse_shared_text_intent">Рашчланите дељени текст ако URL адреса није пронађена</string>
     <string name="parse_shared_text_intent_explainer">Када се радња дељења покрене из апликације која дели текст који садржи URL адресу, покушајте пронаћи (и користити) прву URL адресу у тексту, уместо неуспеха</string>
     <string name="experiments">Експерименти</string>
-    <string name="experiments_explainer_2">Следеће функције / експерименти су у активном развоју и можда уопште неће радити. Молимо, не пријављујете грешке у вези са њима на GitHub. Ако желите да дате повратне информације, урадите то на Discord-у.</string>
+    <string name="experiments_explainer_2">Активни развој</string>
     <string name="nightly_experiments_card">Бета експерименти</string>
-    <string name="nightly_experiments_card_explainer">Додирните да бисте проверили експерименте / функције које су тренутно у развоју</string>
+    <string name="nightly_experiments_card_explainer">Додирните да бисте проверили функције које су тренутно у развоју</string>
     <string name="experiments_explainer">Испробајте функције које су тренутно у развоју</string>
     <string name="reset">Ресет</string>
     <string name="share">Дели линк</string>
+    <string name="theme_enable_amoled_explainer">Користите чисто црну тему ако је омогућен тамни режим</string>
+    <string name="theme_enable_material_you_explainer">Користите Android 12+ Material You тему уређаја</string>
+    <string name="experiments_explainer_3">Експерименти су у активном развоју и можда неће радити исправно или уопште неће радити. Не пријављујете грешке на GitHub-у. Ако желите да дате повратне информације, урадите то на Discord-у.</string>
+    <string name="tap_customization_dialog_title_single_tap">један додир</string>
+    <string name="expand_on_app_select">Прошири када је апликација изабрана</string>
+    <string name="expand_on_app_select_explainer">Аутоматски прошири доњи лист када се изабере апликација</string>
+    <string name="cancel">Откажи</string>
+    <string name="theme_enable_material_you">Динамичка боја</string>
+    <string name="theme_mode">Режим теме</string>
+    <string name="theme_enable_amoled">Чисто црна</string>
+    <string name="tap_customization">Прилагођавање додира</string>
+    <string name="tap_customization_single_tap">Један додир</string>
+    <string name="tap_customization_double_tap">Дулли додир</string>
+    <string name="select_app">Изабери апликацију</string>
+    <string name="tap_customization_dialog_title">Конфигуришите %s</string>
+    <string name="tap_customization_dialog_title_double_tap">дупли додир</string>
+    <string name="tap_customization_dialog_title_long_tap">дуги додир</string>
+    <string name="tap_customization_dialog_text">Изаберите радњу коју треба извршити</string>
+    <string name="loading_link_subtitle">LinkSheet обавља радње линка. Ово ће потрајати само неколико секунди</string>
+    <string name="tap_customization_long_tap">Дуги додир</string>
+    <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
+    <string name="no_action">Нема радње</string>
+    <string name="open_app">Отвори апликацију</string>
 </resources>

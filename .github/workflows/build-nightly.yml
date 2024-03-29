@@ -24,21 +24,21 @@ jobs:
           submodules: recursive
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: "17"
           distribution: "zulu"
           cache: gradle
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
 
       #      - name: Setup Android modded android.jar
       #        uses: 1fexd/setup-modded-android-jar@0.0.3
       #        env:
       #          ANDROID_SDK_VERSION: 33
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -54,7 +54,7 @@ jobs:
           fileName: "keystore.jks"
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/actions/setup-gradle@v3
       - run: ./gradlew assembleFossNightly
         env:
           GITHUB_WORKFLOW_RUN_ID: ${{ github.run_id }}
@@ -63,7 +63,7 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
           path: app/build/outputs/apk/foss/nightly/*.apk
@@ -75,7 +75,7 @@ jobs:
 
       - name: Nightly release notes
         id: release_note
-        uses: 1fexd/gh-create-release-notes@0.0.7
+        uses: 1fexd/gh-create-release-notes@0.0.8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           stable-repo: ${{ github.repository }}

@@ -15,16 +15,16 @@ jobs:
           submodules: recursive
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: "17"
           distribution: "zulu"
           cache: gradle
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -33,12 +33,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-        
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/actions/setup-gradle@v3
       - run: ./gradlew assembleFossReleaseDebug
         env:
           GITHUB_WORKFLOW_RUN_ID: ${{ github.run_id }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: linksheet-pr-release-debug
           path: app/build/outputs/apk/foss/releaseDebug/*.apk

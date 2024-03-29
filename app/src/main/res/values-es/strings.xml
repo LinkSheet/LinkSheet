@@ -99,7 +99,7 @@
     <string name="show_linksheet_referrer">Mostrar referencias de LinkSheet</string>
     <string name="url_copied">Enlace copiado al portapapeles</string>
     <string name="title_activity_onboarding">ActividadDeIncorporación</string>
-    <string name="copy_url">Copiar enlace</string>
+    <string name="copy_url">Copiar el enlace</string>
     <string name="resolve_failed">%s fallido: %s</string>
     <string name="none">Ninguno</string>
     <string name="onboarding7_highlight">cubierto</string>
@@ -218,7 +218,7 @@
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>
-    <string name="loading_link">Cargando enlace…</string>
+    <string name="loading_link">Procesando enlace…</string>
     <string name="donate_card_headline">Dona para apoyar a LinkSheet</string>
     <string name="license_mit">Licencia MIT</string>
     <string name="general">General</string>
@@ -480,4 +480,5 @@
     <string name="cancel">Cancelar</string>
     <string name="expand_on_app_select_explainer">Expandir automáticamente la hoja inferior cuando se selecciona una aplicación</string>
     <string name="expand_on_app_select">Expandir cuando se selecciona una aplicación</string>
+    <string name="loading_link_subtitle">LinkSheet está realizando operaciones con el enlace. Esto sólo tardará unos segundos</string>
 </resources>

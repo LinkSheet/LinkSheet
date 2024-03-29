@@ -75,7 +75,7 @@ jobs:
 
       - name: Nightly release notes
         id: release_note
-        uses: 1fexd/gh-create-release-notes@0.0.6
+        uses: 1fexd/gh-create-release-notes@0.0.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           stable-repo: ${{ github.repository }}

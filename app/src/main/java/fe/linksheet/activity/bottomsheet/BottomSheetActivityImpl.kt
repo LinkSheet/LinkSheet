@@ -267,9 +267,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     ) else null,
                     switchProfile = {
                         if (AndroidVersion.AT_LEAST_API_30_R) {
-                            val switchIntent =
-                                Intent(result.intent).setComponent(this@BottomSheetActivityImpl.componentName)
-
+                            val switchIntent = Intent(Intent.ACTION_VIEW, result.uri).setComponent(this@BottomSheetActivityImpl.componentName)
                             crossProfileApps!!.startActivity(
                                 switchIntent,
                                 target!!,

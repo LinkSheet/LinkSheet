@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
+import fe.linksheet.composable.main.DonateCard
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLazyColumnPageLayout
 import fe.linksheet.extension.compose.ObserveStateChange
@@ -127,14 +128,14 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-//            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
-//                cardItem(header = R.string.donate) {
-//                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
-//                }
-//            }
+            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
+                cardItem(header = R.string.donate) {
+                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
+                }
+            }
 
             item(
-                key = R.string.browser_status,
+                key = R.string.set_as_default_browser,
                 contentType = ContentTypeDefaults.ClickableAlert
             ) {
                 OpenDefaultBrowserCard(
@@ -157,14 +158,14 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 )
             }
 
-            if (browserStatus != MainViewModel.BrowserStatus.Known) {
+//            if (browserStatus != MainViewModel.BrowserStatus.Known) {
                 item(
                     key = R.string.browser_status,
                     contentType = ContentTypeDefaults.ClickableAlert
                 ) {
                     BrowserCard(browserStatus = browserStatus)
                 }
-            }
+//            }
 
             if (clipboardUri != null) {
                 item(

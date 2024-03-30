@@ -120,7 +120,7 @@ fun ClickableAlertCard(
                 contentDescription = contentDescription,
             )
 
-            AlertCardLayout(
+            AlertCardContentLayout(
                 title = { Text(text = headline, style = MaterialTheme.typography.titleMedium) },
                 subtitle = { Text(text = subtitle, style = MaterialTheme.typography.bodyMedium) }
             )

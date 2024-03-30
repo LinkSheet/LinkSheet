@@ -1,23 +1,16 @@
 package fe.linksheet.experiment.url.bar
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
@@ -38,43 +31,6 @@ import io.github.fornewid.placeholder.material3.placeholder
 import io.github.fornewid.placeholder.material3.shimmer
 import me.saket.unfurl.UnfurlResult
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-
-@Composable
-fun SuggestedFlagItemArrow(
-    expanded: Boolean,
-    onExpandedChange: () -> Unit,
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-
-    val rotationState by animateFloatAsState(
-        targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(durationMillis = 300, easing = LinearEasing),
-        label = "Rotation"
-    )
-
-    Box(
-        modifier = Modifier
-            .size(28.dp)
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.surfaceContainerHigh),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            Icons.Rounded.KeyboardArrowDown,
-            contentDescription = null,
-            modifier = Modifier
-                .graphicsLayer(
-                    rotationX = rotationState
-                )
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {
-                    onExpandedChange()
-                }
-        )
-    }
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -197,10 +153,6 @@ fun UrlCard(
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 14.sp,
                     )
-                }
-
-                SuggestedFlagItemArrow(expanded = expanded) {
-                    expanded = !expanded
                 }
             }
         }

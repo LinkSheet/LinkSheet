@@ -110,6 +110,7 @@ class BottomSheetViewModel(
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
     val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)
     val expandOnAppSelect = preferenceRepository.asState(AppPreferences.expandOnAppSelect)
+    val bottomSheetNativeLabel = preferenceRepository.asState(AppPreferences.bottomSheetNativeLabel)
 
     var appListSelectedIdx = mutableIntStateOf(-1)
 

@@ -1,9 +1,10 @@
 package fe.linksheet.activity.bottomsheet.column
 
-import android.util.Log
-import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.*
@@ -15,17 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
-import fe.linksheet.composable.util.defaultRoundedCornerShape
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.extension.compose.enabled
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -57,6 +53,7 @@ fun ListBrowserColumn(
     preferred: Boolean,
     privateBrowser: KnownBrowser?,
     showPackage: Boolean,
+    showNativeLabel: Boolean = false,
 ) {
     val context = LocalContext.current
 

@@ -267,7 +267,10 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     ) else null,
                     switchProfile = {
                         if (AndroidVersion.AT_LEAST_API_30_R) {
-                            val switchIntent = Intent(Intent.ACTION_VIEW, result.uri).setComponent(this@BottomSheetActivityImpl.componentName)
+                            val switchIntent = Intent(
+                                Intent.ACTION_VIEW,
+                                result.uri
+                            ).setComponent(this@BottomSheetActivityImpl.componentName)
                             crossProfileApps!!.startActivity(
                                 switchIntent,
                                 target!!,
@@ -435,6 +438,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                     result = result,
                     hasPreferredApp = hasPreferredApp,
                     hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
+                    showNativeLabel = bottomSheetViewModel.bottomSheetNativeLabel(),
                     isExpanded = isExpanded,
                     requestExpand = requestExpand,
                     showPackage = showPackage
@@ -505,6 +509,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         result: BottomSheetResult.SuccessResult,
         hasPreferredApp: Boolean,
         hideChoiceButtons: Boolean,
+        showNativeLabel: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         showPackage: Boolean,
@@ -541,6 +546,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                         preferred = false,
                         privateBrowser = privateBrowser,
                         showPackage = showPackage,
+                        showNativeLabel = showNativeLabel
                     )
 
                     // TODO: Selector?

@@ -635,4 +635,6 @@
     <string name="expand_on_app_select_explainer">Automatically expand the bottom sheet when an app is selected</string>
     <string name="loading_link_subtitle">LinkSheet is performing link operations. This will only take a few seconds
     </string>
+    <string name="show_native_label">Show native label</string>
+    <string name="show_native_label_explainer">Display a label next to apps which natively support the opened link</string>
 </resources>

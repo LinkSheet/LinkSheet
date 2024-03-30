@@ -292,10 +292,6 @@ dependencies {
     implementation(libs.jsoup)
 
     implementation(Google.android.material)
-    // Deprecated in favor of Activity.enableEdgeToEdge from androidx.activity 1.8+
-    //FIXME: See the example PR in the migration guide here:
-    // https://google.github.io/accompanist/systemuicontroller/
-    implementation(libs.accompanist.systemuicontroller)
     implementation(Google.accompanist.permissions)
     implementation(libs.material3)
     implementation(libs.api)

@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.experiment.improved.resolver.activity.bottomsheet
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,10 +16,7 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -29,20 +27,22 @@ import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
-import fe.linksheet.activity.LoadingIndicator
+import fe.linksheet.activity.bottomsheet.UrlBar
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
 import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
-import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
+import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.experiment.url.bar.ExperimentalUrlBar
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.setContentWithKoin
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
@@ -61,70 +61,51 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
 
-abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
+class ImprovedBottomSheetActivity : ComponentActivity(), KoinComponent {
     private val viewModel by viewModel<BottomSheetViewModel>()
-
-    companion object {
-        val preferredAppItemHeight = 60.dp
-        val buttonPadding = 15.dp
-        val buttonRowHeight = 50.dp
-    }
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val resolver = ImprovedIntentResolver(application, lifecycleScope)
 
         initPadding()
-
-        val deferred = resolveAsync(viewModel)
-        if (viewModel.showLoadingBottomSheet()) {
-            setContentWithKoin {
-                LaunchedEffect(viewModel.resolveResult) {
-                    (viewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.let {
-                        showResolveToasts(it)
-                    }
-                }
-
-                AppTheme {
-                    BottomSheet(viewModel)
-                }
-            }
-        } else {
-            deferred.invokeOnCompletion {
-                setContentWithKoin {
-                    AppTheme {
-                        BottomSheet(viewModel)
-                    }
-                }
-            }
+        setContentWithKoin {
+            AppTheme { Wrapper(resolver) }
         }
     }
 
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun BottomSheet(bottomSheetViewModel: BottomSheetViewModel) {
-        val isBlackTheme = bottomSheetViewModel.themeAmoled()
+    private fun Wrapper(resolver: ImprovedIntentResolver) {
+        var status by remember { mutableStateOf<IntentResolveResult>(IntentResolveResult.Pending) }
+
+        // TODO: Use intent and referrer as keys?
+        LaunchedEffect(key1 = resolver) {
+            // TODO: Internet check
+            status = resolver.resolve(intent.toSafeIntent(), referrer)
+        }
+
+
+        LaunchedEffect(key1 = status) {
+//            Toast.makeText(this@ImprovedBottomSheetActivity, "Status: $status", Toast.LENGTH_SHORT).show()
+            Log.d("BottomSheet", "Status: ${status.javaClass.simpleName}")
+        }
+
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        val result = bottomSheetViewModel.resolveResult
 
         val coroutineScope = rememberCoroutineScope()
-
         val drawerState = rememberModalBottomSheetState()
-//        val drawerState = rememberFlexibleBottomSheetState(
-//            flexibleSheetSize = FlexibleSheetSize(
-//                fullyExpanded = 0.9f,
-//                intermediatelyExpanded = 0.5f,
-//                slightlyExpanded = 0.15f,
-//            ),
-//            isModal = true,
-//            skipSlightlyExpanded = false,
-//        )
+
+        LaunchedEffect(key1 = Unit) {
+            drawerState.expand()
+        }
 
         val hide: () -> Unit = {
             coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
@@ -132,7 +113,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
         BottomDrawer(
             landscape = landscape,
-            isBlackTheme = isBlackTheme,
+            // TODO: Replace with pref
+            isBlackTheme = false,
             drawerState = drawerState,
             shape = RoundedCornerShape(
                 topStart = 22.0.dp,
@@ -142,92 +124,54 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             ),
             hide = hide,
             sheetContent = {
+                if (status is IntentResolveResult.Pending) {
+                    LoadingIndicator(resolver = resolver)
+                } else if (status is IntentResolveResult.Default) {
+                    AppWrapper_Temp(
+                        status as IntentResolveResult.Default,
+                        drawerState.currentValue == SheetValue.Expanded
+                    )
+                }
 //                val scope: ColumnScope = this@BottomDrawer
 //                defaultVerticalPadding
 //                Column(modifier = Modifier.weight(1.0f, fill = false)) {
-                SheetContent(
-                    result = result,
-//                    isExpanded = drawerState.currentValue == FlexibleSheetValue.SlightlyExpanded,
-                    isExpanded = drawerState.currentValue == SheetValue.Expanded,
-                    hideDrawer = hide,
-                    requestExpand = {
-                        coroutineScope.launch { drawerState.expand() }
-                    }
-                )
-
-
-//                }
+//                SheetContent(
+//                    result = result,
+////                    isExpanded = drawerState.currentValue == FlexibleSheetValue.SlightlyExpanded,
+//                    isExpanded = drawerState.currentValue == SheetValue.Expanded,
+//                    hideDrawer = hide,
+//                    requestExpand = {
+//                        coroutineScope.launch { drawerState.expand() }
+//                    }
+//                )
             }
         )
-
-        LaunchedEffect(Unit) {
-            drawerState.expand()
-        }
     }
 
     @Composable
-    private fun SheetContent(
-        result: BottomSheetResult?,
-        isExpanded: Boolean,
-        hideDrawer: () -> Unit,
-        requestExpand: () -> Unit,
-    ) {
-        val uriSuccessResult = result as? BottomSheetResult.BottomSheetSuccessResult
-        val canShowApps = uriSuccessResult != null && !result.hasAutoLaunchApp
-                || result is BottomSheetResult.BottomSheetWebSearchResult
+    private fun AppWrapper_Temp(status: IntentResolveResult.Default, isExpanded: Boolean) {
+        BottomSheetApps(
+            bottomSheetViewModel = viewModel,
+            result = status,
+            declutterUrl = viewModel.declutterUrl(),
+            experimentalUrlBar = viewModel.experimentalUrlBar(),
+            enableSwitchProfile = viewModel.switchProfile(),
+            isExpanded = isExpanded,
+            requestExpand = {},
+            hideDrawer = {
 
-//        LoadingIndicator()
-
-        if (canShowApps) {
-            val showPackage = remember {
-                uriSuccessResult?.showExtended == true || viewModel.alwaysShowPackageName()
-            }
-
-            BottomSheetApps(
-                bottomSheetViewModel = viewModel,
-                result = result as BottomSheetResult.SuccessResult,
-                declutterUrl = viewModel.declutterUrl(),
-                experimentalUrlBar = viewModel.experimentalUrlBar(),
-                enableSwitchProfile = viewModel.switchProfile(),
-                isExpanded = isExpanded,
-                requestExpand = requestExpand,
-                hideDrawer = hideDrawer,
-                showPackage = showPackage,
-                previewUrl = viewModel.previewUrl(),
-                hasPreferredApp = uriSuccessResult?.filteredItem != null,
-                hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
-            )
-        } else if (result !is BottomSheetResult.BottomSheetNoHandlersFound) {
-            LoadingIndicator()
-        } else {
-            FailureSheetColumn(
-                result = result,
-                onShareClick = {
-                    startActivity(shareUri(result.uri))
-                    finish()
-                },
-                onCopyClick = {
-                    viewModel.clipboardManager.setText(
-                        "URL", result.uri.toString()
-                    )
-
-                    if (!viewModel.urlCopiedToast()) {
-                        showToast(R.string.url_copied)
-                    }
-
-                    if (viewModel.hideAfterCopying()) {
-                        hideDrawer()
-                    }
-                }
-            )
-        }
+            },
+            showPackage = false,
+            previewUrl = viewModel.previewUrl(),
+            hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
+        )
     }
 
     @Composable
     private fun BottomSheetApps(
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
-        result: BottomSheetResult.SuccessResult,
+        result: IntentResolveResult.Default,
         experimentalUrlBar: Boolean,
         declutterUrl: Boolean,
         enableSwitchProfile: Boolean,
@@ -236,7 +180,6 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         hideDrawer: () -> Unit,
         showPackage: Boolean,
         previewUrl: Boolean,
-        hasPreferredApp: Boolean,
         hideBottomSheetChoiceButtons: Boolean,
     ) {
         if (previewUrl && result.uri != null) {
@@ -270,11 +213,11 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                             val switchIntent = Intent(
                                 Intent.ACTION_VIEW,
                                 result.uri
-                            ).setComponent(this@BottomSheetActivityImpl.componentName)
+                            ).setComponent(this@ImprovedBottomSheetActivity.componentName)
                             crossProfileApps!!.startActivity(
                                 switchIntent,
                                 target!!,
-                                this@BottomSheetActivityImpl
+                                this@ImprovedBottomSheetActivity
                             )
 
                             finish()
@@ -298,34 +241,30 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                         startActivity(shareUri(result.uri))
                         finish()
                     },
-                    downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                        {
-                            bottomSheetViewModel.startDownload(
-                                resources, result.uri,
-                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
-                            )
+                    downloadUri = {
+                        bottomSheetViewModel.startDownload(
+                            resources, result.uri,
+                            result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                        )
 
-                            if (!bottomSheetViewModel.downloadStartedToast()) {
-                                showToast(R.string.download_started)
-                            }
-
-                            hideDrawer()
+                        if (!bottomSheetViewModel.downloadStartedToast()) {
+                            showToast(R.string.download_started)
                         }
-                    } else null,
-                    ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                        {
-                            val redirected =
-                                result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
 
-                            finish()
-                            startActivity(
-                                selfIntent(
-                                    redirected.originalUri,
-                                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
-                                )
+                        hideDrawer()
+                    },
+                    ignoreLibRedirect = {
+                        val redirected =
+                            result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+
+                        finish()
+                        startActivity(
+                            selfIntent(
+                                redirected.originalUri,
+                                bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                             )
-                        }
-                    } else null
+                        )
+                    }
                 )
             } else {
                 UrlBar(
@@ -347,40 +286,36 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                         startActivity(shareUri(result.uri))
                         finish()
                     },
-                    downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                        {
-                            bottomSheetViewModel.startDownload(
-                                resources, result.uri,
-                                result.downloadable as Downloader.DownloadCheckResult.Downloadable
-                            )
+                    downloadUri = {
+                        bottomSheetViewModel.startDownload(
+                            resources, result.uri,
+                            result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                        )
 
-                            if (!bottomSheetViewModel.downloadStartedToast()) {
-                                showToast(R.string.download_started)
-                            }
-
-                            hideDrawer()
+                        if (!bottomSheetViewModel.downloadStartedToast()) {
+                            showToast(R.string.download_started)
                         }
-                    } else null,
-                    ignoreLibRedirect = if (result is BottomSheetResult.BottomSheetSuccessResult) {
-                        {
-                            val redirected =
-                                result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
 
-                            finish()
-                            startActivity(
-                                selfIntent(
-                                    redirected.originalUri,
-                                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
-                                )
+                        hideDrawer()
+                    },
+                    ignoreLibRedirect = {
+                        val redirected =
+                            result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+
+                        finish()
+                        startActivity(
+                            selfIntent(
+                                redirected.originalUri,
+                                bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                             )
-                        }
-                    } else null
+                        )
+                    }
                 )
             }
         }
 
-        if (hasPreferredApp && result is BottomSheetResult.BottomSheetSuccessResult) {
-            val privateBrowser = isPrivateBrowser(result.uri != null, result.filteredItem!!)
+        if (result.filteredItem != null) {
+            val privateBrowser = isPrivateBrowser(result.uri != null, result.filteredItem)
 
             PreferredAppColumn(
                 appInfo = result.filteredItem,
@@ -427,7 +362,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             if (bottomSheetViewModel.gridLayout()) {
                 Grid(
                     result = result,
-                    hasPreferredApp = hasPreferredApp,
+                    hasPreferredApp = result.filteredItem != null,
                     hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
                     isExpanded = isExpanded,
                     requestExpand = requestExpand,
@@ -436,7 +371,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             } else {
                 List(
                     result = result,
-                    hasPreferredApp = hasPreferredApp,
+                    hasPreferredApp = result.filteredItem != null,
                     hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
                     showNativeLabel = bottomSheetViewModel.bottomSheetNativeLabel(),
                     isExpanded = isExpanded,
@@ -524,6 +459,8 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             ) {
                 itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
+
+//                    info.
 
                     ListBrowserColumn(
                         appInfo = info,

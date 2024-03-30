@@ -7,23 +7,18 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.*
-import androidx.core.view.WindowCompat
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import fe.android.preference.helper.EnumTypeMapper
-import fe.android.preference.helper.OptionTypeMapper
-import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
-import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
-
 
 
 //private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
@@ -83,11 +78,11 @@ fun AppTheme(
     val activity = view.context.findActivity()
     val window = activity?.window
 
-    window?.let {
-        WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
-    }
+//    window?.let {
+//        WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
+//    }
 
-    rememberSystemUiController(window).setSystemBarsColor(colorScheme.background, !isDark)
+//    rememberSystemUiController(window).setSystemBarsColor(colorScheme.background, !isDark)
 
     CompositionLocalProvider(LocalActivity provides activity!!) {
         MaterialTheme(

@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -22,9 +23,9 @@ fun BottomDrawer(
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     hide: (() -> Unit)? = null,
     sheetContent: @Composable ColumnScope.() -> Unit = {},
-    content: @Composable () -> Unit = {},
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
 
     ModalBottomSheet(
         modifier = modifier,
@@ -33,42 +34,20 @@ fun BottomDrawer(
         shape = shape,
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = drawerState,
-        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.statusBars,
+        windowInsets = WindowInsets(0, 0, 0, 0),
+//        windowInsets =  WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
+//        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
         onDismissRequest = hide ?: {
             coroutineScope.launch { drawerState.hide() }
             Unit
         }
     ) {
-//        Spacer(
-//            modifier = Modifier
-////                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-//                .fillMaxWidth()
-//                .height(
-//
-//                    WindowInsets.statusBars
-//                        .asPaddingValues()
-//                        .calculateTopPadding()
-//
-//                )
-//        )
+        // Works on both API <29 and API 30+
+        val bottomPadding = remember { safeDrawing.calculateBottomPadding() }
 
-        Column(modifier = if (!landscape) Modifier.navigationBarsPadding() else Modifier) {
+        Column(modifier = if (landscape) Modifier else Modifier.padding(bottom = bottomPadding)) {
             sheetContent()
         }
-
-        // Place bottom padding manually so color is not overridden
-//        Spacer(
-//            modifier = Modifier
-//                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-//                .fillMaxWidth()
-//                .height(
-//
-//                        WindowInsets.navigationBars
-//                            .asPaddingValues()
-//                            .calculateBottomPadding()
-//
-//                )
-//        )
     }
 }
 

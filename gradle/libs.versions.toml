@@ -112,10 +112,6 @@ linksheetinterconnect = "com.github.1fexd:LinkSheetInterConnect:_"
 
 uriparser = "com.github.1fexd:uriparser:_"
 
-compose-material3-pullrefresh = { module = "me.omico.compose:compose-material3-pullrefresh" }
-
-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "google-accompanist" }
-
 bom = "io.github.jan-tennert.supabase:bom:_"
 
 storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }

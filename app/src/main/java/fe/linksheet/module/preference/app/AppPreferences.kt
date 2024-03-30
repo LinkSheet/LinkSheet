@@ -130,6 +130,7 @@ object AppPreferences : PreferenceDefinition(
     val tapConfigLong = mapped("tap_config_long", TapConfig.OpenSettings, TapConfig)
 
     val expandOnAppSelect = boolean("expand_on_app_select", true)
+    val bottomSheetNativeLabel = boolean("bottom_sheet_native_label", true)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

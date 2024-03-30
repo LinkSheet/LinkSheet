@@ -12,9 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
@@ -101,12 +104,12 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
                                     }
                                 }
 
-
                                 item("exception") {
                                     SelectionContainer {
                                         Text(
-                                            text = throwableString,
-                                            fontFamily = FontFamily.Monospace
+                                            text = throwableString.replace("\n", ""),
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 12.sp,
                                         )
                                     }
                                 }

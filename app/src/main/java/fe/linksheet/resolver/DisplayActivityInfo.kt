@@ -19,8 +19,9 @@ typealias DisplayActivityInfoStatus = Pair<DisplayActivityInfo, Boolean>
 data class DisplayActivityInfo(
     val resolvedInfo: ResolveInfo,
     val label: String,
+    val browser: Boolean = false,
 ) : Redactable<DisplayActivityInfo> {
-    companion object  {
+    companion object {
         val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }
         private val valueAndLabelComparator = compareByDescending<DisplayActivityInfoStatus> { (_, status) ->
             status

@@ -11,13 +11,7 @@ import fe.linksheet.extension.android.toDisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
 object BottomSheetGrouper {
-    fun group(
-        context: Context,
-        current: List<ResolveInfo>,
-        historyMap: Map<String, Long>?,
-        lastChosenPreferredApp: PreferredApp?,
-        returnFilteredItem: Boolean = true,
-    ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
+    fun group(context: Context, current: List<ResolveInfo>, historyMap: Map<String, Long>?, lastChosenPreferredApp: PreferredApp?, returnFilteredItem: Boolean = true, ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         val grouped = current.toMutableList()
 
         val filteredPair = grouped.findWithIndexOrNull {

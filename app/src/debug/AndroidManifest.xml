@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
     <application>
+        <activity
+                android:name=".debug.activity.ComposableRendererActivity"
+                android:exported="false"
+                android:label="@string/title_activity_composable_renderer"
+                android:theme="@style/AppTheme"/>
         <activity
                 android:name=".debug.activity.DebugActivity"
                 android:exported="true"
-                android:theme="@style/AppTheme" />
+                android:theme="@style/AppTheme"/>
 
-        <receiver android:name="fe.linksheet.debug.DebugBroadcastReceiver"
-                  android:exported="true">
+        <receiver
+                android:name=".debug.DebugBroadcastReceiver"
+                android:exported="true">
             <intent-filter>
-                <action android:name="fe.linksheet.debug.COPY_URL" />
-                <action android:name="fe.linksheet.debug.RESOLVE_URL" />
-                <action android:name="fe.linksheet.debug.UPDATE_PREF" />
-                <action android:name="fe.linksheet.debug.NAVIGATE" />
-                <action android:name="fe.linksheet.debug.RESET_HISTORY_PREFERRED_APP" />
-                <action android:name="fe.linksheet.debug.DUMP_PREFERENCES" />
-                <action android:name="fe.linksheet.debug.VIEW_URL" />
+                <action android:name="fe.linksheet.debug.COPY_URL"/>
+                <action android:name="fe.linksheet.debug.RESOLVE_URL"/>
+                <action android:name="fe.linksheet.debug.UPDATE_PREF"/>
+                <action android:name="fe.linksheet.debug.NAVIGATE"/>
+                <action android:name="fe.linksheet.debug.RESET_HISTORY_PREFERRED_APP"/>
+                <action android:name="fe.linksheet.debug.DUMP_PREFERENCES"/>
+                <action android:name="fe.linksheet.debug.VIEW_URL"/>
             </intent-filter>
         </receiver>
     </application>

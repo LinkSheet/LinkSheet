@@ -7,8 +7,8 @@ import androidx.compose.ui.layout.*
 import androidx.compose.ui.unit.Constraints
 
 @Composable
-fun AlertCardLayout(modifier: Modifier = Modifier, title: @Composable () -> Unit, subtitle: @Composable () -> Unit) {
-    val measurePolicy = remember { AlertCardMeasurePolicy() }
+fun AlertCardContentLayout(modifier: Modifier = Modifier, title: @Composable () -> Unit, subtitle: @Composable () -> Unit) {
+    val measurePolicy = remember { AlertCardContentMeasurePolicy() }
     Layout(
         modifier = modifier,
         contents = listOf(title, subtitle),
@@ -16,7 +16,7 @@ fun AlertCardLayout(modifier: Modifier = Modifier, title: @Composable () -> Unit
     )
 }
 
-class AlertCardMeasurePolicy : MultiContentMeasurePolicy {
+class AlertCardContentMeasurePolicy : MultiContentMeasurePolicy {
     override fun MeasureScope.measure(measurables: List<List<Measurable>>, constraints: Constraints): MeasureResult {
         val (title, subtitle) = measurables
 
@@ -32,7 +32,6 @@ class AlertCardMeasurePolicy : MultiContentMeasurePolicy {
         val height = calculateHeight(
             titleHeight = titlePlaceable.height,
             subtitleHeight = subtitlePlaceable.height,
-            constraints = constraints
         )
 
         return layout(width, height) {
@@ -61,21 +60,6 @@ private fun calculateWidth(
 private fun calculateHeight(
     titleHeight: Int,
     subtitleHeight: Int,
-    constraints: Constraints,
 ): Int {
     return titleHeight + subtitleHeight
-
-//    val defaultMinHeight = when (listItemType) {
-//        ListItemType.OneLine -> ListTokens.ListItemOneLineContainerHeight
-//        ListItemType.TwoLine -> ListTokens.ListItemTwoLineContainerHeight
-//        else /* ListItemType.ThreeLine */ -> ListTokens.ListItemThreeLineContainerHeight
-//    }
-//    val minHeight = max(constraints.minHeight, defaultMinHeight.roundToPx())
-//
-//    val mainContentHeight = headlineHeight + overlineHeight + supportingHeight
-//
-//    return max(
-//        minHeight,
-//        verticalPadding + maxOf(leadingHeight, mainContentHeight, trailingHeight)
-//    ).coerceAtMost(constraints.maxHeight)
 }

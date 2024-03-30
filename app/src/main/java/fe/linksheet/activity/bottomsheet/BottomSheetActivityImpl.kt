@@ -7,7 +7,6 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -38,6 +37,7 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.experiment.url.bar.ExperimentalUrlBar
 import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri

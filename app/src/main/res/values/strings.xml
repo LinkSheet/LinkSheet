@@ -376,9 +376,7 @@
     <string name="success">Success</string>
     <string name="warning">Warning</string>
     <string name="at_least_one_known_browser_installed">At least one browser installed</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet has detected at least one app known to be an
-        actual browser.
-    </string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet has detected at least one app known to be a browser.</string>
     <string name="at_least_one_unknown_browser_installer">At least one (unknown) browser installed</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet has detected at least one app claiming to
         be a browser. LinkSheet\'s list may not be complete. If you think this is an error, submit an issue on Github.

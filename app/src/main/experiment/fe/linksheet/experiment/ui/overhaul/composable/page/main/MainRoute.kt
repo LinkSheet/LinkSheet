@@ -21,6 +21,7 @@ import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.main.DonateCard
+import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.debug.DebugComposable
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLazyColumnPageLayout
@@ -51,7 +52,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
     val useTime = viewModel.formatUseTime()
 
-    var clipboardUri by remember { mutableStateOf(getClipboardUrl(clipboardManager)) }
+    var clipboardUri by remember { mutableStateOf<Uri?>(null) }
     val browserStatus by remember { mutableStateOf(viewModel.hasBrowser()) }
 
     LaunchedEffect(Unit) {
@@ -63,6 +64,10 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         derivedStateOf {
             defaultBrowserEnabled.isSuccess && MainViewModel.BrowserStatus.hasBrowser(browserStatus)
         }
+    }
+
+    clipboardManager.ObserveClipboard {
+        clipboardUri = getClipboardUrl(it)
     }
 
     LocalWindowInfo.current.OnFocused {
@@ -212,7 +217,11 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 }
 
 private fun getClipboardUrl(clipboardManager: ClipboardManager): Uri? {
-    return clipboardManager.getText()?.text?.let { text -> UriUtil.parseWebUriStrict(text) }
+    return getClipboardUrl(clipboardManager.getText()?.text)
+}
+
+private fun getClipboardUrl(text: String?): Uri? {
+    return text?.let { UriUtil.parseWebUriStrict(it) }
 }
 
 private fun LazyListScope.cardItem(

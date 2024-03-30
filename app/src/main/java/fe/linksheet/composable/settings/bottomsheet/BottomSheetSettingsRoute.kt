@@ -89,7 +89,7 @@ fun BottomSheetSettingsRoute(
 
         divider(stringRes = R.string.base_config)
 
-        group(size = 5) {
+        group(size = 4) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 SwitchListItem(
                     shape = shape,
@@ -147,15 +147,15 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = R.string.show_native_label) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    preference = viewModel.bottomSheetNativeLabel,
-                    headlineContentTextId = R.string.show_native_label,
-                    supportingContentTextId = R.string.show_native_label_explainer
-                )
-            }
+//            item(key = R.string.show_native_label) { padding, shape ->
+//                PreferenceSwitchListItem(
+//                    shape = shape,
+//                    padding = padding,
+//                    preference = viewModel.bottomSheetNativeLabel,
+//                    headlineContentTextId = R.string.show_native_label,
+//                    supportingContentTextId = R.string.show_native_label_explainer
+//                )
+//            }
         }
 
         divider(stringRes = R.string.tap_customization)

@@ -15,7 +15,7 @@
     <string name="download_started">Descarga iniciada</string>
     <string name="close">Cerrar</string>
     <string name="use_clear_urls">Usar enlaces limpios</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet ha detectado al menos una aplicación que se sabe que es un navegador real.</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet ha detectado al menos un navegador.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Actualmente, habilitar muchos botones en la hoja inferior puede provocar que los botones se corten o fallen.</string>
     <string name="opening_with_app">Abriendo con %s</string>
     <string name="enable_shizuku_explainer">Habilitar esta opción permitirá a LinkSheet utilizar Shizuku para interactuar con las APIs del sistema directamente. Esto se puede utilizar, por ejemplo, para desactivar automáticamente todos los link-handlers. Aparecerá una nueva opción en la pantalla principal de la aplicación.</string>

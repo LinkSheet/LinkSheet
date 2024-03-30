@@ -13,18 +13,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
+import fe.linksheet.debug.activity.LinkTestingActivity
+import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity
 import fe.linksheet.ui.LocalActivity
 import kotlin.reflect.KClass
 
 @Composable
 fun DebugMenu() {
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        item(key="link_menu"){
+            FilledTonalActivityLauncher(text = "Link testing", activityClass = LinkTestingActivity::class)
+        }
+
         item(key = "snap_tester") {
             FilledTonalActivityLauncher(text = "Snap tester", activityClass = DebugActivity::class)
         }
 
         item(key = "url_preview") {
             FilledTonalActivityLauncher(text = "Url preview", activityClass = ComposableRendererActivity::class)
+        }
+
+        item(key = "improved_bottomsheet") {
+            FilledTonalActivityLauncher(
+                text = "Improved bottom sheet",
+                activityClass = ImprovedBottomSheetActivity::class
+            )
         }
     }
 }

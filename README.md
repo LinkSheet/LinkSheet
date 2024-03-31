@@ -8,7 +8,7 @@
 <!-- ---------- Description ---------- -->
 <div align="">
 
-LinkSheet restores the app chooser when tapping links which was removed in Android 12 (in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks)).
+LinkSheet restores the app chooser for tapped links, which was removed in Android 12 (in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks))
 
 </div>
 
@@ -16,17 +16,17 @@ LinkSheet restores the app chooser when tapping links which was removed in Andro
 <!-- ---------- Badges ---------- -->
 <div align="">
 
-⚠️ For the time being, please use the [nightly builds](#nightly-builds).
+⚠️ For the time being, please use the [nightly builds](#nightly-builds)
 
-[![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
+[![GitHub version](https://img.shields.io/github/v/release/LinkSheet/LinkSheet)](https://github.com/LinkSheet/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 
-[![Latest Github nightly release](https://img.shields.io/github/v/release/1fexd/LinkSheetNightly?label=nightly%20github&color=orange)](https://github.com/1fexd/LinkSheetNightly/releases/latest)
-[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+[![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=nightly%20github&color=orange)](https://github.com/LinkSheet/nightly/releases/latest)
+[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/nightly/workflows/build-nightly/master/linksheet-nightly.zip)
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/1fexd/LinkSheet/build-nightly.yml)](https://github.com/1fexd/LinkSheet/actions/workflows/build-nightly.yml)
-[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
-[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheetNightly/total?color=orange)](https://github.com/1fexd/LinkSheetNightly/releases)
+[![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml)
+[![Downloads](https://img.shields.io/github/downloads/LinkSheet/LinkSheet/total)](https://github.com/LinkSheet/LinkSheet/releases)
+[![Downloads](https://img.shields.io/github/downloads/LinkSheet/nightly/total?color=orange)](https://github.com/LinkSheet/nightly/releases)
 [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)
 
 </div>
@@ -61,7 +61,7 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
     </a>
 </div>
 
-## Join our Discord
+## Join Discord
 
 <div align="">
   <a href="https://discord.gg/XndZet2pWF"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
@@ -93,19 +93,17 @@ height="80">](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
   <li><strong>Pro:</strong> Sustain LinkSheet's development - a small donation keeps me motivated to work on the app - thank you!</li>
 </ul>
 
-## Donations / LinkSheet Pro
+## Donations
 
 All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨ - donate via the links above
 
 ## Nightly builds
 
-Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred).
-The latest nightly version can always be downloaded
-via [nightly.link](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip), but if
-you are using something like [Obtainium](https://github.com/ImranR98/Obtainium), there also is
-a [LinkSheetNightly](https://github.com/1fexd/LinkSheetNightly) repository where nightly builds are released as Github
-releases.
+Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred)
 
+* Latest build is always available via [nightly.link](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+* Use [Obtainium](https://github.com/ImranR98/Obtainium) with the [nightly](https://github.com/LinkSheet/nightly) repository to auto-download builds
+  
 ## License
 
 * LinkSheet, excluding all `strings.xml` and `plural.xml` files, is licensed under the [FXL](LICENSE)
@@ -113,19 +111,14 @@ releases.
 
 ## Translations
 
-* First of all, thank you to everyone who has contributed translations to this project
-  via [Weblate](https://hosted.weblate.org/projects/linksheet/)
-* Secondly, please acknowledge that all translations (e.g. everything that is not english) is maintained by the
-  community. I do not check these translations currently, so if there are mistakes or intentional errors please open an
-  issue or correct them yourself!
-* Thirdly, special shout-out to [@Daviteusz](https://github.com/Daviteusz) for providing translation updates incredibly
-  fast.
+* Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/)
+* Allow translations except for English are maintained by contributors
 
 ## Acknowledgements
 
-* App was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
-* [Seal](https://github.com/JunkFood02/Seal) has been a reference to learn from
+* LinkSheet was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
+* [Seal](https://github.com/JunkFood02/Seal) has been an amazing resource to learn from
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=1fexd/LinkSheet&type=Date)](https://star-history.com/#1fexd/LinkSheet&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=LinkSheet/LinkSheet&type=Date)](https://star-history.com/#LinkSheet/LinkSheet&Date)

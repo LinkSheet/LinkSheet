@@ -272,7 +272,7 @@
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
     <string name="disable_link_handling">Deshabilitar el manejo de enlaces</string>
     <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
-    <string name="enable_libredirect_explainer">Redirige los enlaces a frontends respetuosos con la privacidad mediante la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation>. \u0020</string>
+    <string name="enable_libredirect_explainer">Redirigir enlaces a frontends respetuosos con la privacidad mediante la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
@@ -481,4 +481,6 @@
     <string name="expand_on_app_select_explainer">Expandir automáticamente la hoja inferior cuando se selecciona una aplicación</string>
     <string name="expand_on_app_select">Expandir cuando se selecciona una aplicación</string>
     <string name="loading_link_subtitle">LinkSheet está realizando operaciones con el enlace. Esto sólo tardará unos segundos</string>
+    <string name="show_native_label">Mostrar etiqueta original</string>
+    <string name="show_native_label_explainer">Mostrar una etiqueta en las aplicaciones que admiten de forma nativa abrir un enlace</string>
 </resources>

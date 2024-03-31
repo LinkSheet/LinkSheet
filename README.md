@@ -8,7 +8,7 @@
 <!-- ---------- Description ---------- -->
 <div align="">
 
-LinkSheet restores the app chooser for tapped links, which was removed in Android 12 (in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks)).
+LinkSheet restores the app chooser for tapped links, which was removed in Android 12 (in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks))
 
 </div>
 
@@ -99,7 +99,7 @@ All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨ - donate via the l
 
 ## Nightly builds
 
-Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred).
+Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred)
 
 * Latest build is always available via [nightly.link](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
 * Use [Obtainium](https://github.com/ImranR98/Obtainium) with the [nightly](https://github.com/LinkSheet/nightly) repository to auto-download builds
@@ -111,8 +111,8 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 ## Translations
 
-* Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/).
-* Allow translations except for English are maintained by contributors.
+* Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/)
+* Allow translations except for English are maintained by contributors
 
 ## Acknowledgements
 

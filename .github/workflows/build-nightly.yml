@@ -75,7 +75,7 @@ jobs:
 
       - name: Nightly release notes
         id: release_note
-        uses: 1fexd/gh-create-release-notes@0.0.8
+        uses: 1fexd/gh-create-release-notes@0.0.9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           stable-repo: ${{ github.repository }}
@@ -93,9 +93,9 @@ jobs:
           BUILD_TYPE: ${{ env.BUILD_TYPE }}
 
       - name: Trigger a remote workflow
-        uses: 1fexd/gh-trigger-remote-action@0.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.NIGHTLY_PRO_REPO_ACCESS_TOKEN }}
-          OWNER: 1fexd
-          REPO: linksheet-pro
-          EVENT_TYPE: rebuild-nightly
+        id: trigger_pro_build
+        uses: 1fexd/gh-trigger-remote-action@0.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repo: ${{ vars.NIGHTLY_PRO_REPO_URL }}
+          event-type: rebuild-nightly

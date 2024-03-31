@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3.internal
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.runtime.Composable
+import androidx.compose.animation.core.EaseOut
 
-internal val WindowInsets.Companion.systemBarsForVisualComponents: WindowInsets
-    @Composable
-    get() = systemBars
+internal object PredictiveBack {
+    internal fun transform(progress: Float) = EaseOut.transform(progress)
+}

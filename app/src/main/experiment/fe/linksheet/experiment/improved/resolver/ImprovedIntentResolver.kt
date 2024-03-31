@@ -156,16 +156,14 @@ class ImprovedIntentResolver(
             return IntentResolveResult.IntentParseFailed
         }
 
+        _events.tryEmit(ResolveEvent.Message("Querying browser list"))
         val browsers = browserResolver.queryBrowsers()
-        _events.emit(ResolveEvent.Message("Found ${browsers.size} browsers"))
 
         uri = runUriModifiers(uri = uri)
         if (uri == null) {
             Log.d("ImprovedIntentResolver", "Failed to run uri modifiers")
             return IntentResolveResult.UrlModificationFailed
         }
-
-        _events.emit(ResolveEvent.Message("Running resolvers on $uri"))
 
         val (resolveStatus, resolvedUri) = runResolvers(
             uri = uri,
@@ -180,7 +178,6 @@ class ImprovedIntentResolver(
 
         uri = resolvedUri
 
-        _events.emit(ResolveEvent.Message("Running modifiers on $uri"))
         uri = runUriModifiers(uri = uri)
         if (uri == null) {
             Log.d("ImprovedIntentResolver", "Failed to run uri modifiers")
@@ -192,8 +189,6 @@ class ImprovedIntentResolver(
             uri = libRedirectResult.redirectedUri
         }
 
-        _events.emit(ResolveEvent.Message("Checking if $uri is downloadable"))
-
         val downloadable = checkDownloadable(uri = uri)
         val (newIntent, customTabInfo) = handleCustomTab(
             intent,
@@ -201,7 +196,7 @@ class ImprovedIntentResolver(
             inAppBrowserHandler.shouldAllowCustomTab(referrer, InAppBrowserHandler.InAppBrowserMode.UseAppSettings)
         )
 
-        _events.emit(ResolveEvent.Message("Querying stored data for ${uri.host}"))
+        _events.tryEmit(ResolveEvent.Message("Querying preferred apps"))
 
         val preferredApp = preferredAppRepository.getByHost(uri)
         val preferredDisplayActivityInfo = preferredApp?.toPreferredDisplayActivityInfo(context)
@@ -221,6 +216,8 @@ class ImprovedIntentResolver(
         val browserModeConfigHelper = createConfig(useInAppConfig)
         val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
 
+        _events.tryEmit(ResolveEvent.Message("Sorting app list"))
+
         val (sorted, filtered) = AppSorter.sort(
             context,
             appList,
@@ -229,7 +226,6 @@ class ImprovedIntentResolver(
             returnLastChosen = true
         )
 
-        _events.emit(ResolveEvent.Message("Loading preview for $uri"))
         val unfurl = tryUnfurl(uri = uri)
 
         return IntentResolveResult.Default(
@@ -322,6 +318,7 @@ class ImprovedIntentResolver(
         uri: Uri,
     ): UnfurlResult? {
         if (!previewUrl) return null
+        _events.tryEmit(ResolveEvent.Message("Generating preview"))
 
         // TODO: Move everything to okhttp
         return withContext(dispatcher) {
@@ -338,6 +335,7 @@ class ImprovedIntentResolver(
     ): Downloader.DownloadCheckResult = withContext(dispatcher) {
         if (!enableDownloader) return@withContext Downloader.DownloadCheckResult.NonDownloadable
 
+        _events.tryEmit(ResolveEvent.Message("Checking download-ability"))
         if (downloaderCheckUrlMimeType) {
             val result = downloader.checkIsNonHtmlFileEnding(uri.toString())
             if (result.isDownloadable()) return@withContext result
@@ -357,6 +355,7 @@ class ImprovedIntentResolver(
             if (ignoreLibRedirectExtra && !enableIgnoreLibRedirectButton) {
                 intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
 
+                _events.tryEmit(ResolveEvent.Message("Redirecting to FOSS frontend"))
 //                val libRedirectResult = libRedirectResolver.resolve(uri)
 //                if (libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
                 return libRedirectResolver.resolve(uri)
@@ -384,8 +383,13 @@ class ImprovedIntentResolver(
         if (uri?.host == null || uri.scheme == null) return@withContext null
         var url = uri.toString()
 
+        _events.tryEmit(ResolveEvent.Message("Resolving embeds"))
         runUriModifier(resolveEmbeds) { EmbedResolver.resolve(url, embedResolverBundled) }?.let { url = it }
+
+        _events.tryEmit(ResolveEvent.Message("Applying rules"))
         runUriModifier(fastForward) { FastForward.getRuleRedirect(url) }?.let { url = it }
+
+        _events.tryEmit(ResolveEvent.Message("Clearing tracking parameters"))
         runUriModifier(clearUrl) { ClearURL.clearUrl(url, clearUrlProviders) }?.let { url = it }
 
         runCatching { Uri.parse(url) }.getOrNull()
@@ -425,6 +429,8 @@ class ImprovedIntentResolver(
                 (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(uri.toString())
             }
 
+            _events.tryEmit(ResolveEvent.Message("Resolving redirects"))
+
             redirectResolver.resolve(
                 uriToResolve,
                 followRedirectsLocalCache,
@@ -437,6 +443,8 @@ class ImprovedIntentResolver(
         }
 
         uriMut = resolveModuleStatus.resolveIfEnabled(enableAmp2Html, ResolveModule.Amp2Html, uriMut) { uriToResolve ->
+            _events.tryEmit(ResolveEvent.Message("Un-amping link"))
+
             amp2HtmlResolver.resolve(
                 uriToResolve,
                 amp2HtmlLocalCache,

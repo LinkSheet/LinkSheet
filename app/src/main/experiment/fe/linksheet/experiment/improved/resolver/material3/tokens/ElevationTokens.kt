@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Android Open Source Project
+ * Copyright 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// VERSION: v0_103
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
-package _androidx.compose.material3.internal
+package fe.linksheet.experiment.improved.resolver.material3.tokens
 
-import androidx.compose.animation.core.EaseOut
+import androidx.compose.ui.unit.dp
 
-internal object PredictiveBack {
-    internal fun transform(progress: Float) = EaseOut.transform(progress)
+internal object ElevationTokens {
+    val Level0 = 0.0.dp
+    val Level1 = 1.0.dp
+    val Level2 = 3.0.dp
+    val Level3 = 6.0.dp
+    val Level4 = 8.0.dp
+    val Level5 = 12.0.dp
 }

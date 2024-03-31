@@ -16,11 +16,11 @@
 // VERSION: v0_210
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
-import _androidx.compose.material3.tokens.ColorSchemeKeyTokens
-import _androidx.compose.material3.tokens.ElevationTokens
-import _androidx.compose.material3.tokens.ShapeKeyTokens
+import fe.linksheet.experiment.improved.resolver.material3.tokens.ColorSchemeKeyTokens
+import fe.linksheet.experiment.improved.resolver.material3.tokens.ElevationTokens
+import fe.linksheet.experiment.improved.resolver.material3.tokens.ShapeKeyTokens
 import androidx.compose.ui.unit.dp
 
 internal object SheetBottomTokens {

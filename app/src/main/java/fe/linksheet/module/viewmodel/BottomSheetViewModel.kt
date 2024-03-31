@@ -17,9 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import fe.android.preference.helper.compose.StateMappedPreference
 import fe.linksheet.R
-import fe.linksheet.activity.MainActivity
+import fe.linksheet.activity.main.MainActivity
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.activity.bottomsheet.column.*
 import fe.linksheet.extension.android.canAccessInternet

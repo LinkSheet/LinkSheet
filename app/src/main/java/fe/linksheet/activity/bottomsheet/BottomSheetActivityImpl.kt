@@ -6,7 +6,7 @@ import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -29,7 +29,7 @@ import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
-import fe.linksheet.activity.LoadingIndicator
+import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
@@ -38,11 +38,9 @@ import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.experiment.url.bar.ExperimentalUrlBar
-import fe.linksheet.extension.android.initPadding
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.Downloader
@@ -62,10 +60,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.KoinComponent
 
 
-abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
+abstract class BottomSheetActivityImpl : BaseComponentActivity() {
     private val viewModel by viewModel<BottomSheetViewModel>()
 
     companion object {
@@ -82,7 +79,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
         val deferred = resolveAsync(viewModel)
         if (viewModel.showLoadingBottomSheet()) {
-            setContentWithKoin {
+            setContent {
                 LaunchedEffect(viewModel.resolveResult) {
                     (viewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult)?.let {
                         showResolveToasts(it)
@@ -95,7 +92,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             }
         } else {
             deferred.invokeOnCompletion {
-                setContentWithKoin {
+                setContent {
                     AppTheme {
                         BottomSheet(viewModel)
                     }
@@ -161,7 +158,7 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
         )
 
         LaunchedEffect(Unit) {
-            drawerState.expand()
+            drawerState.show()
         }
     }
 
@@ -201,7 +198,6 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
             LoadingIndicator()
         } else {
             FailureSheetColumn(
-                result = result,
                 onShareClick = {
                     startActivity(shareUri(result.uri))
                     finish()
@@ -386,7 +382,6 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
                 appInfo = result.filteredItem,
                 privateBrowser = privateBrowser,
                 preferred = true,
-                bottomSheetViewModel = bottomSheetViewModel,
                 showPackage = showPackage,
                 hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                 onClick = { _, modifier ->
@@ -592,14 +587,10 @@ abstract class BottomSheetActivityImpl : ComponentActivity(), KoinComponent {
 
     @Composable
     private fun NoPreferredAppChoiceButtons(result: BottomSheetResult.SuccessResult, selected: Int) {
-        val activity = LocalActivity.current
-
         Spacer(modifier = Modifier.height(5.dp))
 
         ChoiceButtons(
-            result = result,
             enabled = selected != -1,
-            openSettings = { viewModel.startMainActivity(activity) },
             choiceClick = { _, modifier ->
                 launchApp(result, result.resolved[selected], modifier == ClickModifier.Always)
             },

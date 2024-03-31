@@ -15,6 +15,6 @@ object NavigateToRouteCommand : DebugCommand<NavigateToRouteCommand>(
         val extras = requireNotNull(intent.extras) { "Extras must not be null" }
         val route = requireNotNull(extras.getString("route")) { "Argument 'route' is missing" }
 
-        get<LinkSheetApp>().activityEventListener?.invoke(route)
+        // TODO: Re-add navigate
     }
 }

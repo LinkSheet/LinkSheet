@@ -5,17 +5,16 @@ import androidx.compose.ui.platform.ClipboardManager
 
 @Composable
 fun ClipboardManager.observeAsState(): State<String?> {
-    val nativeManager = remember { nativeClipboard }
     val clipboardText = remember { mutableStateOf(getText()?.text) }
 
-    DisposableEffect(nativeManager) {
+    DisposableEffect(nativeClipboard) {
         val listener = android.content.ClipboardManager.OnPrimaryClipChangedListener {
             clipboardText.value = getText()?.text
         }
 
-        nativeManager.addPrimaryClipChangedListener(listener)
+        nativeClipboard.addPrimaryClipChangedListener(listener)
         onDispose {
-            nativeManager.removePrimaryClipChangedListener(listener)
+            nativeClipboard.removePrimaryClipChangedListener(listener)
         }
     }
 

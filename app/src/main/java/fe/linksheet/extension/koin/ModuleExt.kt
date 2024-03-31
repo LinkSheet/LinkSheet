@@ -1,6 +1,6 @@
 package fe.linksheet.extension.koin
 
-import fe.linksheet.module.lifecycle.Service
+import fe.linksheet.lifecycle.Service
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
 import org.koin.core.parameter.ParametersHolder

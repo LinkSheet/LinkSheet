@@ -31,6 +31,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
+            android:enableOnBackInvokedCallback="true"
             tools:targetApi="tiramisu">
         <activity
                 android:name=".activity.onboarding.OnboardingActivity"
@@ -46,7 +47,7 @@
                 android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
         <activity
-                android:name=".activity.MainActivity"
+                android:name=".activity.main.MainActivity"
                 android:configChanges="orientation"
                 android:exported="true"
                 android:launchMode="singleTask"
@@ -78,13 +79,13 @@
                 android:excludeFromRecents="true"
                 android:exported="false"
                 android:screenOrientation="unspecified"
-                android:theme="@style/Theme.LinkSheet.Dialog" />
+                android:theme="@style/DialogTheme" />
         <activity
                 android:name=".activity.BottomSheetActivity"
                 android:excludeFromRecents="true"
                 android:exported="true"
                 android:launchMode="singleInstance"
-                android:theme="@style/Theme.LinkSheet.Dialog"
+                android:theme="@style/DialogTheme"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

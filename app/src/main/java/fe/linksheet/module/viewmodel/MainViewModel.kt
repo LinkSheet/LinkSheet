@@ -6,6 +6,7 @@ import android.app.role.RoleManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
+import androidx.navigation.NavDestination
 
 
 import fe.linksheet.BuildConfig
@@ -27,6 +29,7 @@ import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
@@ -46,7 +49,7 @@ class MainViewModel(
     val experimentRepository: ExperimentRepository,
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
-    val analyticsClient: AnalyticsClient
+    val analyticsClient: AnalyticsClient,
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
@@ -62,6 +65,10 @@ class MainViewModel(
         if (AndroidVersion.AT_LEAST_API_26_O) {
             context.getSystemService<RoleManager>()
         } else null
+    }
+
+    fun enqueueNavigateEvent(destination: NavDestination, args: Bundle?) {
+        analyticsClient.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {
@@ -85,7 +92,7 @@ class MainViewModel(
     )
 
     fun openDefaultBrowserSettings(
-        activity: Activity
+        activity: Activity,
     ) = activity.startActivityWithConfirmation(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
 
     fun checkDefaultBrowser() = context.packageManager
@@ -98,7 +105,7 @@ class MainViewModel(
         val containerColor: @Composable () -> Color,
         val color: @Composable () -> Color,
         val icon: ImageVector,
-        @StringRes val iconDescription: Int
+        @StringRes val iconDescription: Int,
     ) {
 
         Known(

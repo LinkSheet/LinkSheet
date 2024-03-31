@@ -2,6 +2,7 @@ package fe.linksheet.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,10 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.dialogHelper
@@ -23,12 +22,11 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
 import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.PreferenceSubtitle
-import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
-import fe.linksheet.ui.AppHost
+import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
@@ -50,8 +48,8 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
         val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
         logger.fatal(throwableString)
 
-        setContentWithKoin {
-            AppHost {
+        setContent {
+            AppTheme {
                 val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
                     rememberTopAppBarState(),
                     canScroll = { true }

@@ -94,7 +94,7 @@ jobs:
 
       - name: Trigger a remote workflow
         id: trigger_pro_build
-        uses: 1fexd/gh-trigger-remote-action@0.0.2
+        uses: 1fexd/gh-trigger-remote-action@0.0.3
         with:
           github-token: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           repo: ${{ vars.NIGHTLY_PRO_REPO_URL }}

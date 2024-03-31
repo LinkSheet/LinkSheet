@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
 import androidx.compose.foundation.MutatePriority
 import androidx.compose.runtime.Stable

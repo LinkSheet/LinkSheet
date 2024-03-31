@@ -5,23 +5,21 @@ import android.content.Context
 import android.content.ContextWrapper
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import fe.android.preference.helper.EnumTypeMapper
 import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
-
-
-//private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
+import org.koin.core.annotation.KoinExperimentalAPI
 
 tailrec fun Context.findActivity(): Activity? = when (this) {
     is Activity -> this
@@ -54,6 +52,7 @@ enum class Theme {
 
 val LocalActivity = staticCompositionLocalOf<Activity> { error("CompositionLocal LocalActivity not present") }
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
@@ -63,33 +62,34 @@ fun AppTheme(
     val context = LocalContext.current
     val themeV2 = themeSettingsViewModel.themeV2()
 
-    // Do not destructure, Compose can't observe destructured vals
-    val pair = themeV2.getColorScheme(
+    val colorScheme = themeV2.getColorScheme(
         context,
         systemDarkTheme,
         themeSettingsViewModel.themeMaterialYou(),
         themeSettingsViewModel.themeAmoled()
     )
 
-    val colorScheme = pair.first
-    val isDark = pair.second
+    val activity = LocalView.current.context.findActivity()
 
-    val view = LocalView.current
-    val activity = view.context.findActivity()
-    val window = activity?.window
+    KoinAndroidContext {
+        CompositionLocalProvider(LocalActivity provides activity!!) {
+            MaterialTheme(
+                colorScheme = colorScheme,
+                typography = if (themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
+                content = content
+            )
+        }
+    }
+}
 
-//    window?.let {
-//        WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
-//    }
-
-//    rememberSystemUiController(window).setSystemBarsColor(colorScheme.background, !isDark)
-
-    CompositionLocalProvider(LocalActivity provides activity!!) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = if (themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
-            content = content
-        )
+@Composable
+fun BoxAppHost(
+    modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.TopStart,
+    content: @Composable BoxScope.() -> Unit,
+) {
+    AppTheme {
+        Box(modifier = modifier, contentAlignment = contentAlignment, content = content)
     }
 }
 
@@ -102,15 +102,8 @@ fun PreviewTheme(content: @Composable () -> Unit) {
     )
 }
 
+@Deprecated(message = "Use AppTheme", replaceWith = ReplaceWith("AppTheme(content)"))
 @Composable
 fun AppHost(content: @Composable () -> Unit) {
-    AppTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Surface(color = MaterialTheme.colorScheme.surface) {
-                Column(modifier = Modifier.fillMaxSize()) {
-                    content()
-                }
-            }
-        }
-    }
+    AppTheme(content = content)
 }

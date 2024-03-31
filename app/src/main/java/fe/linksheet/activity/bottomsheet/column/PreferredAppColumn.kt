@@ -29,14 +29,10 @@ fun PreferredAppColumn(
     appInfo: DisplayActivityInfo,
     privateBrowser: KnownBrowser?,
     preferred: Boolean,
-    // TODO: Refactor bottomsheet away
-    bottomSheetViewModel: BottomSheetViewModel,
     showPackage: Boolean,
     hideBottomSheetChoiceButtons: Boolean,
-    onClick: (ClickType, ClickModifier) -> Unit
+    onClick: (ClickType, ClickModifier) -> Unit,
 ) {
-    val activity = LocalContext.currentActivity()
-
     Column {
         ListBrowserColumn(
             appInfo = appInfo,
@@ -45,30 +41,12 @@ fun PreferredAppColumn(
             preferred = preferred,
             privateBrowser = privateBrowser,
             showPackage = showPackage,
-//            launchApp = launchApp,
         )
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        val result = bottomSheetViewModel.resolveResult as? BottomSheetResult.BottomSheetSuccessResult
-        if (!hideBottomSheetChoiceButtons && result != null) {
-            ChoiceButtons(
-                result = result,
-                openSettings = { bottomSheetViewModel.startMainActivity(activity) },
-                choiceClick = onClick,
-            )
+        if (!hideBottomSheetChoiceButtons) {
+            ChoiceButtons(choiceClick = onClick)
         }
-
-//        ButtonColumn(
-//            bottomSheetViewModel = bottomSheetViewModel,
-//            enabled = true,
-//            resources = resources,
-//            onClick = { launchApp(appInfo, it, false) },
-//            hideDrawer = hideDrawer,
-//            ignoreLibRedirectClick = ignoreLibRedirectClick,
-//            showToast = showToast
-//        )
-
-
     }
 }

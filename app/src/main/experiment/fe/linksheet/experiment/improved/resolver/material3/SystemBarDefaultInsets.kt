@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Android Open Source Project
+ * Copyright 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// VERSION: v0_103
-// GENERATED CODE - DO NOT MODIFY BY HAND
 
-package _androidx.compose.material3.tokens
+package fe.linksheet.experiment.improved.resolver.material3
 
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.runtime.Composable
 
-internal object ElevationTokens {
-    val Level0 = 0.0.dp
-    val Level1 = 1.0.dp
-    val Level2 = 3.0.dp
-    val Level3 = 6.0.dp
-    val Level4 = 8.0.dp
-    val Level5 = 12.0.dp
-}
+internal val WindowInsets.Companion.systemBarsForVisualComponents: WindowInsets
+    @Composable
+    get() = systemBars

@@ -22,7 +22,7 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
         systemDarkTheme: Boolean,
         materialYou: Boolean,
         amoled: Boolean,
-    ): Pair<ColorScheme, Boolean>
+    ): ColorScheme
 
     data object System : ThemeV2("system", R.string.system) {
         override fun getColorScheme(
@@ -30,7 +30,7 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
             systemDarkTheme: Boolean,
             materialYou: Boolean,
             amoled: Boolean,
-        ): Pair<ColorScheme, Boolean> {
+        ): ColorScheme {
             val theme = if (systemDarkTheme) Dark else Light
             return theme.getColorScheme(context, systemDarkTheme, materialYou, amoled)
         }
@@ -42,10 +42,8 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
             systemDarkTheme: Boolean,
             materialYou: Boolean,
             amoled: Boolean,
-        ): Pair<ColorScheme, Boolean> {
-            val colorScheme =
-                if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicLightColorScheme(context) else LightColors
-            return colorScheme to false
+        ): ColorScheme {
+            return if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicLightColorScheme(context) else LightColors
         }
     }
 
@@ -55,14 +53,14 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
             systemDarkTheme: Boolean,
             materialYou: Boolean,
             amoled: Boolean,
-        ): Pair<ColorScheme, Boolean> {
+        ): ColorScheme {
             val scheme =
                 if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicDarkColorScheme(context) else DarkColors
 
             val colorScheme = if (amoled) scheme.copy(surface = Color.Black, background = Color.Black)
             else scheme
 
-            return colorScheme to true
+            return colorScheme
         }
     }
 

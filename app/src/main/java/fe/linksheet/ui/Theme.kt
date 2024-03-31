@@ -20,9 +20,6 @@ import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
-
-//private val AmoledBlackColors = DarkColors.copy(surface = Color.Black, background = Color.Black)
-
 tailrec fun Context.findActivity(): Activity? = when (this) {
     is Activity -> this
     is ContextWrapper -> baseContext.findActivity()
@@ -63,26 +60,14 @@ fun AppTheme(
     val context = LocalContext.current
     val themeV2 = themeSettingsViewModel.themeV2()
 
-    // Do not destructure, Compose can't observe destructured vals
-    val pair = themeV2.getColorScheme(
+    val colorScheme = themeV2.getColorScheme(
         context,
         systemDarkTheme,
         themeSettingsViewModel.themeMaterialYou(),
         themeSettingsViewModel.themeAmoled()
     )
 
-    val colorScheme = pair.first
-    val isDark = pair.second
-
-    val view = LocalView.current
-    val activity = view.context.findActivity()
-    val window = activity?.window
-
-//    window?.let {
-//        WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = isDark
-//    }
-
-//    rememberSystemUiController(window).setSystemBarsColor(colorScheme.background, !isDark)
+    val activity = LocalView.current.context.findActivity()
 
     CompositionLocalProvider(LocalActivity provides activity!!) {
         MaterialTheme(
@@ -104,13 +89,5 @@ fun PreviewTheme(content: @Composable () -> Unit) {
 
 @Composable
 fun AppHost(content: @Composable () -> Unit) {
-    AppTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Surface(color = MaterialTheme.colorScheme.surface) {
-                Column(modifier = Modifier.fillMaxSize()) {
-                    content()
-                }
-            }
-        }
-    }
+    AppTheme(content = content)
 }

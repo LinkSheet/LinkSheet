@@ -30,7 +30,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-    <style name="BaseAppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="BaseDialogTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -43,5 +43,5 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.LinkSheet.Dialog" parent="BaseAppTheme" />
+    <style name="DialogTheme" parent="BaseDialogTheme" />
 </resources>

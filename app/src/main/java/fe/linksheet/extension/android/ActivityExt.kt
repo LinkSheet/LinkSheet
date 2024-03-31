@@ -38,27 +38,3 @@ fun Activity.showToast(
     if (uiThread) runOnUiThread(toast)
     else toast()
 }
-
-fun ComponentActivity.initPadding() {
-    enableEdgeToEdge(
-//        navigationBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
-    )
-
-//    WindowCompat.setDecorFitsSystemWindows(window, false)
-//    ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->
-//        v.setPadding(0, 0, 0, 0)
-//        insets
-//    }
-
-//    window.setBackgroundDrawable(ColorDrawable(0))
-//    window.setLayout(
-//        WindowManager.LayoutParams.MATCH_PARENT,
-//        WindowManager.LayoutParams.MATCH_PARENT
-//    )
-//
-//    val type = if (AndroidVersion.AT_LEAST_API_26_O) {
-//        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-//    } else WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-//
-//    window.setType(type)
-}

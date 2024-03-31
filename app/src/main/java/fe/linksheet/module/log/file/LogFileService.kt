@@ -8,7 +8,7 @@ import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.extension.koin.service
-import fe.linksheet.module.lifecycle.Service
+import fe.linksheet.lifecycle.Service
 import fe.linksheet.module.log.file.entry.LogEntry
 import org.koin.dsl.module
 import java.io.File
@@ -76,14 +76,15 @@ class LogFileService(private val logDir: File) : Service {
         logEntries.add(entry)
     }
 
-    override fun start(lifecycle: Lifecycle) {
+    override fun onAppInitialized(lifecycle: Lifecycle) {
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
         getLogFiles().filter { it.millis < startupMillis }.forEach { deleteLogFile(it) }
     }
 
-    override fun stop(lifecycle: Lifecycle) {
-        if (logEntries.isNotEmpty()) {
-            LogFile.new(logDir).file.toJson(logEntries)
+    override fun onStop(lifecycle: Lifecycle) {
+        val immutable = logEntries.toList()
+        if (immutable.isNotEmpty()) {
+            LogFile.new(logDir).file.toJson(immutable)
         }
     }
 }

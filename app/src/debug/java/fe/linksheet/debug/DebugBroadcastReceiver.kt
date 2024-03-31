@@ -33,9 +33,8 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
         const val VIEW_URL_BROADCAST = "fe.linksheet.debug.VIEW_URL"
     }
 
-    @OptIn(ExperimentalEncodingApi::class)
     override fun onReceive(context: Context, intent: Intent) {
-        if (BuildType.current?.allowDebug != true) return
+        if (!BuildType.current.allowDebug) return
 
         val handled = DebugCommand.tryHandle(context, intent)
         if (handled) return
@@ -47,53 +46,5 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
 
             return
         }
-
-        if (intent.action == RESOLVE_URL_BROADCAST) {
-            val viewModel = BottomSheetViewModel(get(), get(), get(), get(), get(), get(), get(), SavedStateHandle())
-            val url = intent.extras?.getString("url")
-
-            val uri = Uri.parse(url)
-            val resolveIntent = Intent(Intent.ACTION_VIEW, uri)
-
-            val clipboardManager = context.getSystemService<ClipboardManager>()!!
-
-            coroutineScope.launch(Dispatchers.IO) {
-                val result = viewModel.resolveAsync(resolveIntent, null).await()
-                if (result is BottomSheetResult.BottomSheetSuccessResult) {
-//                    val item = context.packageManager.queryAllResolveInfos().associate {
-//                        it.activityInfo.packageName to Pair(
-//                            it,
-//                            it.loadLabel(context.packageManager).toString()
-//                        )
-//                    }
-
-                    val obj = jsonObject {
-                        "intent" += result.intent
-                        "uri" += result.uri.toString()
-                        "unfurl" += result.unfurlResult
-                        "resolved" += result.resolved.map { it.resolvedInfo.activityInfo.packageName }
-                        "filteredItem" += result.filteredItem?.packageName
-                    }
-
-                    val json = obj.toString()
-                    val base64 = Base64.Default.encode(json.encodeToByteArray())
-                    base64.chunked(4000).forEach {
-                        Log.d("DebugReceiver", it)
-                    }
-
-                    json.chunked(4000).forEach {
-                        Log.d("DebugReceiver", it)
-                    }
-
-                    clipboardManager.setPrimaryClip(ClipData.newPlainText("Resolve result", json))
-
-                    setResult(0, json, Bundle.EMPTY)
-                }
-            }
-
-            return
-        }
     }
-
-
 }

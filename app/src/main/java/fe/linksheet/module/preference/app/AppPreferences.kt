@@ -6,6 +6,7 @@ import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.activity.bottomsheet.TapConfig
+import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.redactor.PackageProcessor
@@ -14,6 +15,7 @@ import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.ui.ThemeV2
+import io.viascom.nanoid.NanoId
 import java.util.*
 
 object AppPreferences : PreferenceDefinition(
@@ -24,7 +26,8 @@ object AppPreferences : PreferenceDefinition(
     "show_dev_bottom_sheet_experiment_card",
     "amp2html_builtin_cache",
     "follow_redirects_builtin_cache",
-    "use_text_share_copy_buttons"
+    "use_text_share_copy_buttons",
+    "telemetry_identity"
 ) {
     val hideAfterCopying = boolean("hide_after_copying")
     val usageStatsSorting = boolean("usage_stats_sorting")
@@ -112,12 +115,13 @@ object AppPreferences : PreferenceDefinition(
     val hideBottomSheetChoiceButtons = boolean("hide_bottom_sheet_choice_buttons")
 
     @SensitivePreference
-    val telemetryIdentity = string("telemetry_identity") {
-        UUID.randomUUID().toString()
-    }
+    val telemetryId = string("telemetry_id") { NanoId.generate() }
 
     @SensitivePreference
-    val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Basic, TelemetryLevel)
+    val telemetryIdentity = mapped("telemetry_identity_2", TelemetryIdentity.Basic, TelemetryIdentity)
+
+    @SensitivePreference
+    val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Standard, TelemetryLevel)
     val lastVersion = int("last_version", -1)
 
     val themeV2 = mapped("theme_v2", ThemeV2.System, ThemeV2)

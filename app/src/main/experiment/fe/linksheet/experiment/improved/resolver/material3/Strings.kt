@@ -1,4 +1,4 @@
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable

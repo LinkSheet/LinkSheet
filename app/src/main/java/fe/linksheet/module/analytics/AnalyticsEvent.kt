@@ -1,26 +1,17 @@
 package fe.linksheet.module.analytics
 
-import com.google.gson.JsonObject
-import fe.gson.dsl.jsonObject
-import fe.gson.extension.json.element.stringOrNull
-
-sealed class AnalyticsEvent(val name: String, obj: JsonObject = JsonObject()) {
-    val properties = obj.asMap().map { (key, element) ->
-        key to (element.stringOrNull() ?: element.toString())
-    }.toMap()
-
+sealed class AnalyticsEvent(val name: String, val data: Map<String, Any>) {
     val unixMillis = System.currentTimeMillis()
 
-    data object FirstStart : AnalyticsEvent("first_run")
-    class AppUpdated(lastVersion: Int) : AnalyticsEvent("app_updated", jsonObject {
-        "last_version" += lastVersion.toString()
-    })
+    constructor(name: String, vararg pairs: Pair<String, Any>) : this(name, mapOf(*pairs))
+    constructor(name: String, map: Map<String, Any>, vararg pairs: Pair<String, Any>) : this(name, map + mapOf(*pairs))
 
-    class AppStarted(version: Int) : AnalyticsEvent("app_started", jsonObject {
-        "app_started" += version.toString()
-    })
+    data class Navigate(val destination: String) : AnalyticsEvent("navigate", mapOf("destination" to destination))
+}
 
-    class Navigate(destination: String) : AnalyticsEvent("navigate", jsonObject {
-        "destination" += destination
-    })
+sealed class AppStart(type: String, vararg data: Pair<String, Any>) :
+    AnalyticsEvent("app_start", mapOf("type" to type), *data) {
+    data object FirstRun : AppStart("first")
+    data object Default : AppStart("normal")
+    data class Updated(val lastVersion: Int) : AppStart("updated", "last_version" to lastVersion)
 }

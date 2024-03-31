@@ -1,9 +1,10 @@
 package fe.linksheet.debug.activity
 
+import fe.linksheet.experiment.improved.resolver.material3.ModalBottomSheet
+import fe.linksheet.experiment.improved.resolver.material3.rememberModalBottomSheetState
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import _androidx.compose.material3.ModalBottomSheet
-import _androidx.compose.material3.rememberModalBottomSheetState
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
@@ -14,8 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import fe.linksheet.extension.compose.setContentWithKoin
-import fe.linksheet.ui.AppHost
+import fe.linksheet.ui.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -24,8 +24,8 @@ class DebugActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentWithKoin {
-            AppHost {
+        setContent {
+            AppTheme {
                 BottomSheetSnapTester()
             }
         }

@@ -3,7 +3,7 @@ package fe.linksheet.module.statistic
 import androidx.lifecycle.Lifecycle
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service
-import fe.linksheet.module.lifecycle.Service
+import fe.linksheet.lifecycle.Service
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
@@ -19,7 +19,7 @@ class StatisticsService(val preferenceRepository: AppPreferenceRepository) : Ser
     private val start = System.currentTimeMillis()
 
     @OptIn(SensitivePreference::class)
-    override fun stop(lifecycle: Lifecycle) {
+    override fun onStop(lifecycle: Lifecycle) {
         val currentUseTime = preferenceRepository.get(AppPreferences.useTimeMs)
         val usedFor = System.currentTimeMillis() - start
 

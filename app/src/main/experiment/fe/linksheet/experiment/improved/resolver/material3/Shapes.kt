@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.MaterialTheme
-import _androidx.compose.material3.tokens.ShapeKeyTokens
-import _androidx.compose.material3.tokens.ShapeTokens
+import fe.linksheet.experiment.improved.resolver.material3.tokens.ShapeKeyTokens
+import fe.linksheet.experiment.improved.resolver.material3.tokens.ShapeTokens
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.RectangleShape

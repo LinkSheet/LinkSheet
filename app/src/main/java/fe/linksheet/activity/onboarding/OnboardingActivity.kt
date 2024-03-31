@@ -3,14 +3,16 @@ package fe.linksheet.activity.onboarding
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -18,17 +20,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.activity.MainActivity
-import fe.linksheet.extension.android.initPadding
-import fe.linksheet.extension.compose.setContentWithKoin
+import fe.linksheet.activity.BaseComponentActivity
+import fe.linksheet.activity.main.MainActivity
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.ui.AppHost
+import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.PoppinsFontFamily
 import fe.linksheet.ui.Typography
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OnboardingActivity : ComponentActivity() {
+class OnboardingActivity : BaseComponentActivity() {
     private val onboardingViewModel by viewModel<MainViewModel>()
 
     private val appBarTitles = arrayOf(
@@ -44,10 +45,8 @@ class OnboardingActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initPadding()
-
-        setContentWithKoin {
-            AppHost {
+        setContent(edgeToEdge = true) {
+            AppTheme {
                 val pagerState = rememberPagerState(pageCount = { appBarTitles.size })
                 val scope = rememberCoroutineScope()
 

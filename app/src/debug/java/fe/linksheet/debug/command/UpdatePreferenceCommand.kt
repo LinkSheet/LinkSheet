@@ -11,6 +11,8 @@ import fe.kotlin.extension.iterable.mapCatching
 import fe.kotlin.extension.iterable.onEachFailure
 import fe.kotlin.extension.iterable.toSuccess
 import fe.linksheet.LinkSheetApp
+import fe.linksheet.activity.UiEvent
+import fe.linksheet.activity.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -19,23 +21,31 @@ import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import org.koin.core.component.get
+import org.koin.core.component.inject
 
 
 object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
     DebugBroadcastReceiver.UPDATE_PREF_BROADCAST, UpdatePreferenceCommand::class
 ) {
+    private val app by inject<LinkSheetApp>()
 
     override fun handle(context: Context, intent: Intent) {
         val extras = requireNotNull(intent.extras) { "Extras must not be null" }
         val keys = requireNotNull(extras.keySet().takeIf { it.isNotEmpty() }) { "Extras must not be empty" }
 
-        val successfulUpdates = keys.mapCatching { it to update(extras, it) }.onEachFailure { logger.error(it) }.toSuccess().toMap()
+        val successfulUpdates =
+            keys.mapCatching { it to update(extras, it) }.onEachFailure { logger.error(it) }.toSuccess().toMap()
 
         for ((key, value) in successfulUpdates) {
             val msg = "Preference '$key' set to '$value'"
             logger.info(msg)
 
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            val activity = app.currentActivity().value
+            if (activity != null && activity is UiEventReceiver) {
+                activity.send(UiEvent.ShowSnackbar(text = msg))
+            } else {
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

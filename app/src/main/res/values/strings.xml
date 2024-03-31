@@ -637,4 +637,10 @@
     </string>
     <string name="show_native_label">Show native label</string>
     <string name="show_native_label_explainer">Display a label next to apps which natively support the opened link</string>
+    <string name="telemetry_level_disabled">Disabled</string>
+    <string name="telemetry_level_minimal">Minimal</string>
+    <string name="telemetry_level_standard">Standard</string>
+    <string name="telemetry_level_exhaustive">Exhaustive</string>
+    <string name="telemetry_identity_basic">Basic</string>
+    <string name="telemetry_identity_full">Full</string>
 </resources>

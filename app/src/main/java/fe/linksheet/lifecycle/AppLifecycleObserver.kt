@@ -1,4 +1,4 @@
-package fe.linksheet.module.lifecycle
+package fe.linksheet.lifecycle
 
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 
 class AppLifecycleObserver(
-    private val lifecycleObserver: LifecycleOwner
+    private val lifecycleObserver: LifecycleOwner,
 ) : DefaultLifecycleObserver {
     private val services = mutableListOf<Service>()
     val coroutineScope = lifecycleObserver.lifecycleScope
@@ -19,14 +19,9 @@ class AppLifecycleObserver(
         lifecycleObserver.lifecycle.addObserver(this)
     }
 
-    fun start() {
+    fun emitAppInitialized() {
         Log.d("AppLifecycle", "Starting ${services.size} services")
-        services.forEach { it.start(lifecycleObserver.lifecycle) }
-    }
-
-    override fun onCreate(owner: LifecycleOwner) {
-//        super.onCreate(owner)
-        Log.d("Test", "$owner")
+        services.forEach { it.onAppInitialized(lifecycleObserver.lifecycle) }
     }
 
 //    override fun onCreate(owner: LifecycleOwner) {
@@ -36,7 +31,7 @@ class AppLifecycleObserver(
 
     override fun onStop(owner: LifecycleOwner) {
         Log.d("AppLifecycle", "Shutting down ${services.size} services")
-        services.forEach { it.stop(owner.lifecycle) }
+        services.forEach { it.onStop(owner.lifecycle) }
 
         lifecycleObserver.lifecycle.removeObserver(this)
     }

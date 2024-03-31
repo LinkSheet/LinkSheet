@@ -40,7 +40,7 @@ fun UrlCard(
 ) {
     val context = LocalContext.current
     var showFullUrl by remember { mutableStateOf(false) }
-    var expanded by remember { mutableStateOf(true) }
+//    var expanded by remember { mutableStateOf(true) }
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
@@ -78,7 +78,7 @@ fun UrlCard(
                 SubcomposeAsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .heightIn(max = if(expanded) 200.dp else 0.dp)
+                        .heightIn(max = 200.dp)
                         .testTag("thumbnail"),
                     model = ImageRequest.Builder(context).data(thumbnailUrl).build(),
                     alignment = Alignment.Center,

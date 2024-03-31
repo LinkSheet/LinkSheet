@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
 import androidx.compose.material3.R as MaterialR
 import android.content.Context
@@ -51,12 +51,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
-import _androidx.compose.material3.SheetValue.Expanded
-import _androidx.compose.material3.SheetValue.Hidden
-import _androidx.compose.material3.SheetValue.PartiallyExpanded
+import fe.linksheet.experiment.improved.resolver.material3.SheetValue.Expanded
+import fe.linksheet.experiment.improved.resolver.material3.SheetValue.Hidden
+import fe.linksheet.experiment.improved.resolver.material3.SheetValue.PartiallyExpanded
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
-import _androidx.compose.material3.internal.PredictiveBack
+import fe.linksheet.experiment.improved.resolver.material3.internal.PredictiveBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionContext

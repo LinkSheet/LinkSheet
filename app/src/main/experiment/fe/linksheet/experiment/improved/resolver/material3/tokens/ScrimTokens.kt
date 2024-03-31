@@ -16,7 +16,7 @@
 // VERSION: v0_117
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-package _androidx.compose.material3.tokens
+package fe.linksheet.experiment.improved.resolver.material3.tokens
 
 internal object ScrimTokens {
     val ContainerColor = ColorSchemeKeyTokens.Scrim

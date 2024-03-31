@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
 /**
  * This is a copy of androidx.compose.foundation.gestures.AnchoredDraggable until that API is

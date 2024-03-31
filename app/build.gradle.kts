@@ -223,7 +223,6 @@ dependencies {
 
     implementation(AndroidX.lifecycle.process)
     implementation(libs.junit.ktx)
-    androidTestImplementation(platform(AndroidX.compose.bom))
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(Koin.android)
@@ -247,12 +246,10 @@ dependencies {
 
     runtimeOnly(AndroidX.compose.material.icons.extended)
     implementation(libs.ipaddress)
-    implementation("io.github.fornewid:placeholder-material3:1.1.2")
-    implementation("androidx.compose.material:material-icons-extended:1.7.0-alpha03")
+    implementation(libs.placeholder.material3)
+    implementation(AndroidX.compose.material.icons.extended)
 
-
-//    implementation("com.google.android.enterprise.connectedapps:connectedapps:_")
-    implementation("com.github.skydoves:flexible-bottomsheet-material3:0.1.2")
+    implementation(libs.flexible.bottomsheet.material3)
     implementation(libs.signifykt)
     implementation(libs.com.gitlab.grrfe.bundled.dependencies.gson.ext)
     implementation(libs.embed.resolve)
@@ -263,6 +260,7 @@ dependencies {
     implementation(AndroidX.lifecycle.viewModelCompose)
     implementation(libs.gson)
 
+    implementation(libs.nanoid)
     implementation(libs.com.gitlab.grrfe.httpkt.core)
     implementation(libs.ext.gson)
     implementation(libs.gson.ext)
@@ -306,11 +304,11 @@ dependencies {
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
+    debugImplementation(Square.leakCanary.android)
 
-    testImplementation(Testing.robolectric)
-    testImplementation(Testing.mockito.core)
-
+    androidTestImplementation(platform(AndroidX.compose.bom))
+    androidTestImplementation(Testing.robolectric)
+    androidTestImplementation(Testing.mockito.core)
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.espresso.core)

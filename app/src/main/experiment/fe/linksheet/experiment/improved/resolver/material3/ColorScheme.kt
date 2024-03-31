@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package _androidx.compose.material3
+package fe.linksheet.experiment.improved.resolver.material3
 
 import androidx.compose.material3.*
-import _androidx.compose.material3.tokens.ColorSchemeKeyTokens
+import fe.linksheet.experiment.improved.resolver.material3.tokens.ColorSchemeKeyTokens
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable

@@ -19,31 +19,26 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 @Composable
 fun ChoiceButtons(
-    result: BottomSheetResult.SuccessResult,
     enabled: Boolean = true,
-    openSettings: () -> Unit,
-    choiceClick: (ClickType, ClickModifier) -> Unit
+    choiceClick: (ClickType, ClickModifier) -> Unit,
 ) {
-    if (!result.isEmpty()) {
-        Row(
-            modifier = Modifier
-                .wrapContentHeight()
-                .padding(start = 15.dp, end = 15.dp)
-        ) {
-            OpenButton(
-                outlined = true,
-                enabled = enabled,
-                textId = R.string.just_once,
-                onClick = { choiceClick(ClickType.Single, ClickModifier.None) })
-            Spacer(modifier = Modifier.width(5.dp))
-            OpenButton(outlined = false, enabled = enabled, textId = R.string.always, onClick = { choiceClick(ClickType.Single, ClickModifier.Always) })
-        }
-    } else {
-        // TODO: Move out of Composable
-        ElevatedOrTextButton(
-            onClick = openSettings,
-            buttonText = R.string.open_settings
-        )
+    Row(
+        modifier = Modifier
+            .wrapContentHeight()
+            .padding(start = 15.dp, end = 15.dp),
+        horizontalArrangement = Arrangement.spacedBy(5.dp)
+    ) {
+        OpenButton(
+            outlined = true,
+            enabled = enabled,
+            textId = R.string.just_once,
+            onClick = { choiceClick(ClickType.Single, ClickModifier.None) })
+
+        OpenButton(
+            outlined = false,
+            enabled = enabled,
+            textId = R.string.always,
+            onClick = { choiceClick(ClickType.Single, ClickModifier.Always) })
     }
 }
 
@@ -52,7 +47,7 @@ private fun RowScope.OpenButton(
     @StringRes textId: Int,
     outlined: Boolean,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val modifier = Modifier
         .fillMaxWidth()

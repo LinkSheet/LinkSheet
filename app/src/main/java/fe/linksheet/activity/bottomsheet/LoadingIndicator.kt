@@ -1,4 +1,4 @@
-package fe.linksheet.activity
+package fe.linksheet.activity.bottomsheet
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator

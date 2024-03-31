@@ -1,24 +1,26 @@
 package fe.linksheet
 
+import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.color.DynamicColors
 import fe.gson.context.GlobalGsonContext
 import fe.gson.globalGsonModule
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.extension.koin.applicationLifecycle
+import fe.linksheet.lifecycle.ActivityLifecycleObserver
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.AppStart
 import fe.linksheet.module.analytics.analyticsModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.lifecycle.AppLifecycleObserver
+import fe.linksheet.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
@@ -41,6 +43,7 @@ import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.HttpUrlTypeAdapter
 import fe.linksheet.util.UriTypeAdapter
+import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -48,18 +51,21 @@ import kotlin.system.exitProcess
 
 
 class LinkSheetApp : Application() {
-    var activityEventListener: ((Any) -> Unit)? = null
-        private set
     private lateinit var lifecycleObserver: AppLifecycleObserver
+    private lateinit var activityLifecycleObserver: ActivityLifecycleObserver
 
+    fun currentActivity(): StateFlow<Activity?> {
+        return activityLifecycleObserver.current
+    }
 
     override fun onCreate() {
         super.onCreate()
 
+        activityLifecycleObserver = ActivityLifecycleObserver()
+        registerActivityLifecycleCallbacks(activityLifecycleObserver)
+
         lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
         lifecycleObserver.attach()
-
-        LocalBroadcastManager.getInstance(this)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -112,7 +118,7 @@ class LinkSheetApp : Application() {
             )
         }
 
-        lifecycleObserver.start()
+        lifecycleObserver.emitAppInitialized()
 
         if (BuildConfig.DEBUG) {
             // TODO: Remove once user is given the choice to opt in/out
@@ -125,12 +131,8 @@ class LinkSheetApp : Application() {
     }
 
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {
-        return if (lastVersion == -1) AnalyticsEvent.FirstStart
-        else if (BuildConfig.VERSION_CODE > lastVersion) AnalyticsEvent.AppUpdated(lastVersion)
-        else AnalyticsEvent.AppStarted(BuildConfig.VERSION_CODE)
-    }
-
-    fun setActivityEventListener(listener: ((Any) -> Unit)?) {
-        activityEventListener = listener
+        return if (lastVersion == -1) AppStart.FirstRun
+        else if (BuildConfig.VERSION_CODE > lastVersion) AppStart.Updated(lastVersion)
+        else AppStart.Default
     }
 }

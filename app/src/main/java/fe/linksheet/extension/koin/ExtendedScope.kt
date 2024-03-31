@@ -1,7 +1,7 @@
 package fe.linksheet.extension.koin
 
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.module.lifecycle.AppLifecycleObserver
+import fe.linksheet.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.log.Logger
 import org.koin.core.parameter.parametersOf
 import org.koin.core.scope.Scope

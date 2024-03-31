@@ -36,8 +36,6 @@ import fe.linksheet.composable.util.DialogSpacer
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.extension.android.getApplicationInfoCompat
-import fe.linksheet.extension.android.initPadding
-import fe.linksheet.extension.compose.setContentWithKoin
 import fe.linksheet.interconnect.IDomainSelectionResultCallback
 import fe.linksheet.interconnect.StringParceledListSlice
 import fe.linksheet.module.database.entity.AppSelectionHistory
@@ -49,7 +47,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class SelectDomainsConfirmationActivity : ComponentActivity() {
+class SelectDomainsConfirmationActivity : BaseComponentActivity() {
     companion object {
         const val ACTION_CONFIRM = "${BuildConfig.APPLICATION_ID}.action.CONFIRM_SELECTION"
         const val EXTRA_CALLING_COMPONENT = "calling_component"
@@ -106,12 +104,10 @@ class SelectDomainsConfirmationActivity : ComponentActivity() {
             return
         }
 
-        initPadding()
-
         val appLabel = packageManager.getApplicationInfoCompat(callingPackage, 0)
             ?.loadLabel(packageManager) ?: callingPackage
 
-        setContentWithKoin {
+        setContent(edgeToEdge = true) {
             val scope = rememberCoroutineScope()
 
             var loading by remember {

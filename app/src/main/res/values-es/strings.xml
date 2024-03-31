@@ -483,4 +483,10 @@
     <string name="loading_link_subtitle">LinkSheet está realizando operaciones con el enlace. Esto sólo tardará unos segundos</string>
     <string name="show_native_label">Mostrar etiqueta original</string>
     <string name="show_native_label_explainer">Mostrar una etiqueta en las aplicaciones que admiten de forma nativa abrir un enlace</string>
+    <string name="telemetry_level_disabled">Desactivado</string>
+    <string name="telemetry_level_minimal">Mínimo</string>
+    <string name="telemetry_level_standard">Estándar</string>
+    <string name="telemetry_level_exhaustive">Exhaustivo</string>
+    <string name="telemetry_identity_basic">Básico</string>
+    <string name="telemetry_identity_full">Completo</string>
 </resources>

@@ -16,7 +16,7 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
 <!-- ---------- Badges ---------- -->
 <div align="">
 
-⚠️ For the time being, please use the [nightly builds](#nightly-builds).
+⚠️ For the time being, please use the [nightly builds](#nightly-builds)
 
 [![GitHub version](https://img.shields.io/github/v/release/LinkSheet/LinkSheet)](https://github.com/LinkSheet/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)

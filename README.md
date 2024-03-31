@@ -18,15 +18,15 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
 
 ⚠️ For the time being, please use the [nightly builds](#nightly-builds).
 
-[![GitHub version](https://img.shields.io/github/v/release/1fexd/LinkSheet)](https://github.com/1fexd/LinkSheet/releases/latest)
+[![GitHub version](https://img.shields.io/github/v/release/LinkSheet/LinkSheet)](https://github.com/LinkSheet/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 
-[![Latest Github nightly release](https://img.shields.io/github/v/release/1fexd/LinkSheetNightly?label=nightly%20github&color=orange)](https://github.com/1fexd/LinkSheetNightly/releases/latest)
-[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+[![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=nightly%20github&color=orange)](https://github.com/LinkSheet/nightly/releases/latest)
+[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/nightly/workflows/build-nightly/master/linksheet-nightly.zip)
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/1fexd/LinkSheet/build-nightly.yml)](https://github.com/1fexd/LinkSheet/actions/workflows/build-nightly.yml)
-[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheet/total)](https://github.com/1fexd/LinkSheet/releases)
-[![Downloads](https://img.shields.io/github/downloads/1fexd/LinkSheetNightly/total?color=orange)](https://github.com/1fexd/LinkSheetNightly/releases)
+[![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml)
+[![Downloads](https://img.shields.io/github/downloads/LinkSheet/LinkSheet/total)](https://github.com/LinkSheet/LinkSheet/releases)
+[![Downloads](https://img.shields.io/github/downloads/LinkSheet/nightly/total?color=orange)](https://github.com/LinkSheet/nightly/releases)
 [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)
 
 </div>
@@ -121,4 +121,4 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=1fexd/LinkSheet&type=Date)](https://star-history.com/#1fexd/LinkSheet&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=LinkSheet/LinkSheet&type=Date)](https://star-history.com/#LinkSheet/LinkSheet&Date)

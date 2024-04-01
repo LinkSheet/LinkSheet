@@ -119,7 +119,7 @@
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may
         have
-        <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">privacy-related
+        <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">privacy-related
             implications
         </annotation>
     </string>
@@ -177,7 +177,7 @@
     <string name="enable_downloader">Enable downloader</string>
     <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link
         to file. This may have
-        <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">privacy-related
+        <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">privacy-related
             implications
         </annotation>
     </string>
@@ -251,13 +251,13 @@
     <string name="include_settings">Include settings (recommended)</string>
     <string name="include_fingerprint">Include device fingerprint (recommended)</string>
     <string name="log_privacy">To learn about log privacy, you can visit this <annotation
-            url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.
+            url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.
     </string>
     <string name="delete">Delete</string>
     <string name="no_logs_found">No past logs found!</string>
     <string name="enable_amp2html">Enable Amp2Html</string>
     <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version. This may have
-        <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related
+        <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related
             implications
         </annotation>
     </string>
@@ -455,7 +455,7 @@
         plan on sharing your export with someone else!
     </string>
     <string name="export_privacy">To learn about export privacy, you can visit this <annotation
-            url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.
+            url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.
     </string>
     <string name="export_to_file">Export to file</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
@@ -572,7 +572,7 @@
     <string name="new_dev_bottom_sheet">Bottom sheet</string>
     <string name="new_dev_bottom_sheet_feature_explainer">The new bottom sheet is nearing feature completion.
         Notably, tap customization is not yet available and will be implemented at a later date.\nPlease
-        report bugs either on <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>,
+        report bugs either on <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>,
         <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, or via <annotation
                 url="mailto:1fexd@420blaze.it">Email</annotation>.
     </string>
@@ -656,7 +656,7 @@
     <string name="telemetry_dialog_text_2">Usage metrics include a random, user-resettable installation-bound
         identifier, as well as your Android version, and are stored at
         <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data,
-        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
+        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
     </string>
     <string name="analytics">Analytics</string>
     <string name="telemetry_configure_title">Analytics</string>

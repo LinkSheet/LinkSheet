@@ -41,6 +41,7 @@ import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.BuildType
 import fe.linksheet.util.HttpUrlTypeAdapter
 import fe.linksheet.util.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
@@ -113,14 +114,14 @@ class LinkSheetApp : Application() {
                 viewModelModule,
                 requestModule,
                 downloaderModule,
-                if (BuildConfig.DEBUG) analyticsModule else DebugLogAnalyticsClient.module,
+                if (BuildType.current.allowDebug) analyticsModule else DebugLogAnalyticsClient.module,
                 statisticsModule
             )
         }
 
-        lifecycleObserver.emitAppInitialized()
+        lifecycleObserver.dispatchAppInitialized()
 
-        if (BuildConfig.DEBUG) {
+        if (BuildType.current.allowDebug) {
             // TODO: Remove once user is given the choice to opt in/out
             val analyticsClient = koinApplication.koin.get<AnalyticsClient>()
             val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()

@@ -210,6 +210,5 @@ interface SaneLazyListScope : LazyListScope {
 
     fun divider(key: Any, text: String)
 
-
     fun group(size: Int, content: SaneLazyColumnGroupScope.() -> Unit)
 }

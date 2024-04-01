@@ -19,7 +19,7 @@ class AppLifecycleObserver(
         lifecycleObserver.lifecycle.addObserver(this)
     }
 
-    fun emitAppInitialized() {
+    fun dispatchAppInitialized() {
         Log.d("AppLifecycle", "Starting ${services.size} services")
         services.forEach { it.onAppInitialized(lifecycleObserver.lifecycle) }
     }

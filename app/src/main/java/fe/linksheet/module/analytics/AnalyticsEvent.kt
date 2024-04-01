@@ -9,9 +9,12 @@ sealed class AnalyticsEvent(val name: String, val data: Map<String, Any>) {
     data class Navigate(val destination: String) : AnalyticsEvent("navigate", mapOf("destination" to destination))
 }
 
-sealed class AppStart(type: String, vararg data: Pair<String, Any>) :
-    AnalyticsEvent("app_start", mapOf("type" to type), *data) {
+sealed class AppStart(
+    type: String, vararg data: Pair<String, Any>,
+) : AnalyticsEvent("app_start", mapOf("type" to type), *data) {
     data object FirstRun : AppStart("first")
+
     data object Default : AppStart("normal")
+
     data class Updated(val lastVersion: Int) : AppStart("updated", "last_version" to lastVersion)
 }

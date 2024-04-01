@@ -1,38 +1,68 @@
 package fe.linksheet.composable.settings.privacy
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.Role
 import fe.linksheet.R
-import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.SwitchRow
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
+import fe.linksheet.util.BuildType
 import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun PrivacySettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: PrivacySettingsViewModel = koinViewModel()
+    viewModel: PrivacySettingsViewModel = koinViewModel(),
 ) {
-    SettingsScaffold(R.string.privacy, onBackPressed = onBackPressed) { padding ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 5.dp)
-        ) {
-            item(key = "include_referrer") {
-                SwitchRow(
-                    state = viewModel.showAsReferrer,
-                    headline = stringResource(id = R.string.show_linksheet_referrer),
-                    subtitle = stringResource(id = R.string.show_linksheet_referrer_explainer)
+    val analyticsDialog = rememberAnalyticDialog(
+        telemetryLevel = viewModel.telemetryLevel(),
+        onChanged = { viewModel.updateTelemetryLevel(it) }
+    )
+
+    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.privacy), onBackPressed = onBackPressed) {
+        group(1) {
+            item(key = R.string.show_linksheet_referrer) { padding, shape ->
+                PreferenceSwitchListItem(
+                    preference = viewModel.showAsReferrer,
+                    shape = shape,
+                    padding = padding,
+                    headlineContentTextId = R.string.show_linksheet_referrer,
+                    supportingContentTextId = R.string.show_linksheet_referrer_explainer
                 )
+            }
+        }
+
+        if (BuildType.current.allowDebug) {
+            divider(key = R.string.telemetry_configure_title, stringRes = R.string.telemetry_configure_title)
+
+            group(2) {
+                item(key = R.string.telemetry_configure_type) { padding, shape ->
+                    ClickableShapeListItem(
+                        shape = shape,
+                        padding = padding,
+                        onClick = analyticsDialog::open,
+                        role = Role.Button,
+                        headlineContent = { Text(text = stringResource(id = R.string.telemetry_configure_type)) },
+                        supportingContent = {
+                            Text(text = stringResource(id = viewModel.telemetryLevel().titleId))
+                        }
+                    )
+                }
+
+                item(key = R.string.telemetry_identifier_reset) { padding, shape ->
+                    ClickableShapeListItem(
+                        shape = shape,
+                        padding = padding,
+                        onClick = { viewModel.resetIdentifier() },
+                        role = Role.Button,
+                        headlineContent = { Text(text = stringResource(id = R.string.telemetry_identifier_reset)) },
+                    )
+                }
             }
         }
     }

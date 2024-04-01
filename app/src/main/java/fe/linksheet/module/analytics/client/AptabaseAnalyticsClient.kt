@@ -19,11 +19,11 @@ class AptabaseAnalyticsClient(
     enabled: Boolean,
     coroutineScope: LifecycleCoroutineScope,
     identityData: TelemetryIdentityData,
-    level: TelemetryLevel,
+    initialLevel: TelemetryLevel?,
     networkState: NetworkStateService,
     logger: Logger,
     private val apiKey: String?,
-) : AnalyticsClient(enabled, coroutineScope, identityData, level, networkState, logger = logger) {
+) : AnalyticsClient(enabled, coroutineScope, identityData, initialLevel, networkState, logger = logger) {
     private val environmentInfo = EnvironmentInfo.from(identityData)
 
     companion object {
@@ -98,15 +98,6 @@ class AptabaseAnalyticsClient(
             environmentInfo,
             event.data
         )
-    }
-
-    @Throws(IOException::class)
-    override fun send(event: AnalyticsEvent): Boolean {
-        val aptabaseEvent = buildEvent(event)
-        val con = request.post(apiEvent, body = JsonBody(aptabaseEvent))
-
-        logger.info("Handled event ${event.name}: ${con.responseCode} (${con.readToString()})")
-        return con.isHttpSuccess()
     }
 
     @Throws(IOException::class)

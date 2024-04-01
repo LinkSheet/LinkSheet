@@ -30,6 +30,7 @@ import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
@@ -61,14 +62,26 @@ class MainViewModel(
     var themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
     val uiOverhaul = experimentRepository.asState(Experiments.uiOverhaul)
 
+    @OptIn(SensitivePreference::class)
+    val telemetryLevel = preferenceRepository.asState(AppPreferences.telemetryLevel)
+
+    val telemetryShowInfoDialog = preferenceRepository.asState(AppPreferences.telemetryShowInfoDialog)
+
+
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {
             context.getSystemService<RoleManager>()
         } else null
     }
 
-    fun enqueueNavigateEvent(destination: NavDestination, args: Bundle?) {
+    fun enqueueNavEvent(destination: NavDestination, args: Bundle?) {
         analyticsClient.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
+    }
+
+    fun updateTelemetryLevel(level: TelemetryLevel) {
+        telemetryLevel(level)
+        telemetryShowInfoDialog(false)
+        analyticsClient.updateLevel(level).tryStart()
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {

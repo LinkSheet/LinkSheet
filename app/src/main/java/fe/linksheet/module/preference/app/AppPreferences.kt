@@ -122,6 +122,8 @@ object AppPreferences : PreferenceDefinition(
 
     @SensitivePreference
     val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Standard, TelemetryLevel)
+    val telemetryShowInfoDialog = boolean("telemetry_dialog", true)
+
     val lastVersion = int("last_version", -1)
 
     val themeV2 = mapped("theme_v2", ThemeV2.System, ThemeV2)

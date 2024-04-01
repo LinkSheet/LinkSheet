@@ -3,18 +3,24 @@ package fe.linksheet.ui
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.res.Resources
+import android.graphics.Color
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import fe.android.preference.helper.EnumTypeMapper
+import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.compose.KoinAndroidContext
@@ -52,11 +58,40 @@ enum class Theme {
 
 val LocalActivity = staticCompositionLocalOf<Activity> { error("CompositionLocal LocalActivity not present") }
 
+/**
+ * The default light scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=35-38;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+
+/**
+ * The default dark scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+
+@Composable
+fun BaseComponentActivity.AppTheme(
+    systemDarkTheme: Boolean = isSystemInDarkTheme(),
+    themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    content: @Composable () -> Unit,
+) {
+    AppTheme(
+        edgeToEdge = edgeToEdge,
+        systemDarkTheme = systemDarkTheme,
+        themeSettingsViewModel = themeSettingsViewModel,
+        updateEdgeToEdge = { status, nav -> enableEdgeToEdge(statusBarStyle = status, navigationBarStyle = nav) },
+        content = content
+    )
+}
+
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun AppTheme(
+    edgeToEdge: Boolean = true,
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    updateEdgeToEdge: ((SystemBarStyle, SystemBarStyle) -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
@@ -71,6 +106,17 @@ fun AppTheme(
 
     val activity = LocalView.current.context.findActivity()
 
+    if (edgeToEdge && updateEdgeToEdge != null) {
+        val isDarkMode: (Resources) -> Boolean = { _ -> themeV2 == ThemeV2.Dark || systemDarkTheme }
+
+        LaunchedEffect(key1 = themeV2) {
+            updateEdgeToEdge(
+                SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT, detectDarkMode = isDarkMode),
+                SystemBarStyle.auto(lightScrim, darkScrim, detectDarkMode = isDarkMode)
+            )
+        }
+    }
+
     KoinAndroidContext {
         CompositionLocalProvider(LocalActivity provides activity!!) {
             MaterialTheme(
@@ -83,7 +129,7 @@ fun AppTheme(
 }
 
 @Composable
-fun BoxAppHost(
+fun BaseComponentActivity.BoxAppHost(
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.TopStart,
     content: @Composable BoxScope.() -> Unit,
@@ -104,6 +150,6 @@ fun PreviewTheme(content: @Composable () -> Unit) {
 
 @Deprecated(message = "Use AppTheme", replaceWith = ReplaceWith("AppTheme(content)"))
 @Composable
-fun AppHost(content: @Composable () -> Unit) {
+fun BaseComponentActivity.AppHost(content: @Composable () -> Unit) {
     AppTheme(content = content)
 }

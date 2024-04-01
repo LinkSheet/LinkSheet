@@ -5,15 +5,16 @@ import android.graphics.Typeface
 import android.text.Spanned
 import android.text.SpannedString
 import android.text.style.*
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
@@ -60,26 +61,26 @@ fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
 }
 
 @Composable
-fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): AnnotatedString {
+fun rememberAnnotatedStringResource(
+    @StringRes id: Int,
+    hyperlinkStyle: SpanStyle = DefaultHyperLinkStyle,
+    vararg formatArgs: Any,
+): AnnotatedString {
     val resources = resources()
     val density = LocalDensity.current
-    val linkColor = Color(0xFF6161FF)
 
-    return remember(id, formatArgs) {
-        val text = resources.getText(id, *formatArgs)
-        spannableStringToAnnotatedString(text, density, linkColor)
+    return remember(id, formatArgs, hyperlinkStyle) {
+        spannableStringToAnnotatedString(resources.getText(id, *formatArgs), density, hyperlinkStyle)
     }
 }
 
 @Composable
-fun annotatedStringResource(@StringRes id: Int): AnnotatedString {
+fun rememberAnnotatedStringResource(@StringRes id: Int, hyperlinkStyle: SpanStyle = DefaultHyperLinkStyle): AnnotatedString {
     val resources = resources()
     val density = LocalDensity.current
-    val linkColor = Color(0xFF6161FF)
 
-    return remember(id) {
-        val text = resources.getText(id)
-        spannableStringToAnnotatedString(text, density, linkColor)
+    return remember(id, hyperlinkStyle) {
+        spannableStringToAnnotatedString(resources.getText(id), density, hyperlinkStyle)
     }
 }
 
@@ -87,7 +88,7 @@ fun annotatedStringResource(@StringRes id: Int): AnnotatedString {
 private fun spannableStringToAnnotatedString(
     text: CharSequence,
     density: Density,
-    linkColor: Color,
+    hyperlinkStyle: SpanStyle,
 ): AnnotatedString {
     return if (text is Spanned) {
         with(density) {
@@ -198,7 +199,7 @@ private fun spannableStringToAnnotatedString(
                         is android.text.Annotation -> {
                             if (it.key == URL_ANNOTATION_KEY) {
                                 addStyle(
-                                    style = SpanStyle(color = linkColor),
+                                    style = hyperlinkStyle,
                                     start = start,
                                     end = end
                                 )
@@ -221,6 +222,7 @@ private fun spannableStringToAnnotatedString(
     }
 }
 
+val DefaultHyperLinkStyle = SpanStyle(color = Color(0xff3b82f6), textDecoration = TextDecoration.Underline)
 
 @Composable
 fun LinkableTextView(
@@ -228,33 +230,39 @@ fun LinkableTextView(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     style: TextStyle = LocalTextStyle.current,
+    // TODO: Move to a better place (custom theme?)
+    // https://developer.android.com/develop/ui/compose/designsystems/custom#implementing-fully-custom
+    hyperlinkStyle: SpanStyle = DefaultHyperLinkStyle,
     parentChecked: Boolean? = null,
-    parentClickListener: ((Boolean) -> Unit)? = null
+    parentClickListener: ((Boolean) -> Unit)? = null,
 ) {
+    val annotatedString = rememberAnnotatedStringResource(id, hyperlinkStyle)
     LinkableTextView(
-        annotatedString = annotatedStringResource(id),
-        modifier,
-        enabled,
-        style,
-        parentChecked,
-        parentClickListener
+        modifier = modifier,
+        annotatedString = annotatedString,
+        enabled = enabled,
+        style = style,
+        parentChecked = parentChecked,
+        parentClickListener = parentClickListener
     )
 }
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun LinkableTextView(
-    annotatedString: AnnotatedString,
     modifier: Modifier = Modifier,
+    annotatedString: AnnotatedString,
     enabled: Boolean = true,
     style: TextStyle = LocalTextStyle.current,
     parentChecked: Boolean? = null,
-    parentClickListener: ((Boolean) -> Unit)? = null
+    parentClickListener: ((Boolean) -> Unit)? = null,
 ) {
     val uriHandler = LocalUriHandler.current
+    val textColor = style.color.takeOrElse { LocalContentColor.current }
+
     ClickableText(
         text = annotatedString,
-        style = style,
+        style = style.merge(color = textColor),
         onClick = { offset ->
             if (enabled) {
                 annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {

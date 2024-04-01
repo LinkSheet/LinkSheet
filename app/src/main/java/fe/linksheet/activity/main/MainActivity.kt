@@ -1,29 +1,27 @@
 package fe.linksheet.activity.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.core.util.Consumer
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import fe.linksheet.activity.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
+import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
+import fe.linksheet.extension.compose.ObserveDestination
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.BoxAppHost
+import fe.linksheet.util.BuildType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : UiEventReceiverBaseComponentActivity() {
-    private val mainViewModel by viewModel<MainViewModel>()
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,44 +37,35 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                 }
 
                 val navController = rememberNavController()
+                AddIntentDeepLinkHandler(navController = navController)
 
-                RegisterIntentHandler(navController = navController)
+                if (BuildType.current.allowDebug) {
+                    navController.ObserveDestination { _, destination, args ->
+                        viewModel.enqueueNavEvent(destination, args)
+                    }
 
-                RegisterDestinationObserver(navController) { _, destination, args ->
-                    mainViewModel.enqueueNavigateEvent(destination, args)
+                    val analyticsDialog = rememberAnalyticDialog(
+                        telemetryLevel = viewModel.telemetryLevel(),
+                        onChanged = { viewModel.updateTelemetryLevel(it) }
+                    )
+
+                    LaunchedEffect(key1 = Unit) {
+                        if (viewModel.telemetryShowInfoDialog()) {
+                            analyticsDialog.open()
+                        }
+                    }
                 }
 
-                MainNavHost(
-                    navController = navController,
-                    // TODO: Can this be moved inside to improve performance? (defer state reads as long as possible)
-                    uiOverhaul = mainViewModel.uiOverhaul()
-                ) { navController.popBackStack() }
+                MainNavHost(navController = navController, uiOverhaul = viewModel.uiOverhaul()) {
+                    navController.popBackStack()
+                }
 
-                SnackbarHost(modifier = Modifier.align(Alignment.BottomCenter).navigationBarsPadding(), hostState = snackbarHostState)
-            }
-        }
-    }
-
-    @Composable
-    private fun RegisterDestinationObserver(
-        navController: NavHostController,
-        onNavigate: NavController.OnDestinationChangedListener,
-    ) {
-        DisposableEffect(key1 = navController) {
-            navController.addOnDestinationChangedListener(onNavigate)
-            onDispose {
-                navController.removeOnDestinationChangedListener(onNavigate)
-            }
-        }
-    }
-
-    @Composable
-    private fun RegisterIntentHandler(navController: NavHostController) {
-        DisposableEffect(key1 = navController) {
-            val consumer = Consumer<Intent> { navController.handleDeepLink(it) }
-            this@MainActivity.addOnNewIntentListener(consumer)
-            onDispose {
-                this@MainActivity.removeOnNewIntentListener(consumer)
+                SnackbarHost(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .navigationBarsPadding(),
+                    hostState = snackbarHostState
+                )
             }
         }
     }

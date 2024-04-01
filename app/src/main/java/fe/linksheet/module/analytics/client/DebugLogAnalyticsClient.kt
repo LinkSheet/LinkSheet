@@ -34,11 +34,6 @@ class DebugLogAnalyticsClient(
         logger.info("Client set up")
     }
 
-    override fun send(event: AnalyticsEvent): Boolean {
-        logger.info("Tracking event ${event.name}")
-        return true
-    }
-
     override fun send(events: List<AnalyticsEvent>): Boolean {
         logger.info("Tracking events ${events.fastJoinToString(separator = ",") { it.name }}")
         return true

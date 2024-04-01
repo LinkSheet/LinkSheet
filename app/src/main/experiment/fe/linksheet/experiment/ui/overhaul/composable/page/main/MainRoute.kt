@@ -134,11 +134,11 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
-                cardItem(header = R.string.donate) {
-                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
-                }
-            }
+//            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
+//                cardItem(header = R.string.donate) {
+//                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
+//                }
+//            }
 
             item(
                 key = R.string.set_as_default_browser,

@@ -1,11 +1,9 @@
 package fe.linksheet.experiment.ui.overhaul.ui
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import fe.linksheet.R
 import fe.linksheet.ui.HkGroteskFontFamily
 
 //
@@ -17,6 +15,13 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 val NewDefaultTypography = Typography()
 
+val HkGroteskSemiBold = TextStyle(fontFamily = HkGroteskFontFamily, fontWeight = FontWeight.SemiBold)
+
+// ListItem fonts
+// TypographyKeyTokens.BodyLarge
+// TypographyKeyTokens.BodyMedium
+//val test = Typography.fromToken()
+
 // Set of Material typography styles to start with
 val NewTypography = Typography(
 //    titleLarge = TextStyle(
@@ -25,29 +30,27 @@ val NewTypography = Typography(
 //        fontSize = 18.sp,
 //        lineHeight = 25.sp
 //    ),
-    titleLarge = NewDefaultTypography.titleLarge.copy(
-        fontFamily = HkGroteskFontFamily,
-        fontWeight = FontWeight.SemiBold,
+    titleLarge = NewDefaultTypography.titleLarge.merge(HkGroteskSemiBold).copy(
+//        fontFamily = HkGroteskFontFamily,
+//        fontWeight = FontWeight.SemiBold,
 //        fontSize = 18.sp,
 //        lineHeight = 25.sp
     ),
-    titleMedium = NewDefaultTypography.titleMedium.copy(
-        fontFamily = HkGroteskFontFamily,
-        fontWeight = FontWeight.SemiBold,
+    titleMedium = NewDefaultTypography.titleMedium.merge(HkGroteskSemiBold).copy(
         fontSize = 16.sp,
         lineHeight = 22.sp
     ),
-    titleSmall = NewDefaultTypography.titleSmall.copy(
-        fontFamily = HkGroteskFontFamily,
-        fontWeight = FontWeight.SemiBold
+    titleSmall = NewDefaultTypography.titleSmall.merge(HkGroteskSemiBold).copy(
+//        fontFamily = HkGroteskFontFamily,
+//        fontWeight = FontWeight.SemiBold,
     ),
-    headlineMedium = NewDefaultTypography.headlineMedium.copy(
-        fontFamily = HkGroteskFontFamily,
-        fontWeight = FontWeight.SemiBold
+    headlineMedium = NewDefaultTypography.headlineMedium.merge(HkGroteskSemiBold).copy(
+//        fontFamily = HkGroteskFontFamily,
+//        fontWeight = FontWeight.SemiBold
     ),
-    headlineSmall = NewDefaultTypography.headlineSmall.copy(
-        fontFamily = HkGroteskFontFamily,
-        fontWeight = FontWeight.SemiBold
+    headlineSmall = NewDefaultTypography.headlineSmall.merge(HkGroteskSemiBold).copy(
+//        fontFamily = HkGroteskFontFamily,
+//        fontWeight = FontWeight.SemiBold
     ),
     bodyLarge = NewDefaultTypography.bodyLarge.copy(
 //        fontFamily = HkGroteskFontFamily,

@@ -1,7 +1,6 @@
 package fe.linksheet.composable.settings.dev
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -13,12 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.LinkableSubtitleText
 import fe.linksheet.composable.util.LinkableTextView
-import fe.linksheet.composable.util.SwitchRow
-import fe.linksheet.composable.util.annotatedStringResource
-import fe.linksheet.donationBuyMeACoffee
-import fe.linksheet.donationCrypto
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import fe.linksheet.ui.Typography
 import org.koin.androidx.compose.koinViewModel

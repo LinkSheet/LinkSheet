@@ -588,15 +588,17 @@
     <string name="permission_required">Permission required</string>
     <string name="permission_required_explainer">Some imported preferences require permissions that are currently not
         given to LinkSheet. Tap below to request them.öh
-        möhöh  999
+        möhöh 999
     </string>
     <string name="allow_darknets">Allow darknets</string>
     <string name="amp2html_allow_darknets_explainer">Allow running Amp2Html for darknets (supported: %s)</string>
-    <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)</string>
+    <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)
+    </string>
     <string name="verified_link_handlers_open_settings_page">Open settings page</string>
     <string name="share">Share link</string>
     <string name="declutter_url" translatable="false">Declutter the url in the bottom sheet</string>
-    <string name="declutter_url_explainer" translatable="false">Declutter the url in the bottom sheet by removing the scheme (if https) and
+    <string name="declutter_url_explainer" translatable="false">Declutter the url in the bottom sheet by removing the
+        scheme (if https) and
         the \"www\" subdomain if present
     </string>
     <string name="nightly_experiments_card">Nightly experiments</string>
@@ -609,7 +611,8 @@
     <string name="parse_shared_text_intent_explainer">When the share action is invoked from an app which shares text
         containing an url, attempt to find (and use) the first url in the text instead of failing
     </string>
-    <string name="experiments_explainer_3">Experiments are under active development and may not work correctly, or at all. Please do not report bugs on Github. If you want to
+    <string name="experiments_explainer_3">Experiments are under active development and may not work correctly, or at
+        all. Please do not report bugs on Github. If you want to
         provide feedback, do so on Discord.
     </string>
     <string name="theme_enable_material_you">Dynamic color</string>
@@ -636,11 +639,27 @@
     <string name="loading_link_subtitle">LinkSheet is performing link operations. This will only take a few seconds
     </string>
     <string name="show_native_label">Show native label</string>
-    <string name="show_native_label_explainer">Display a label next to apps which natively support the opened link</string>
+    <string name="show_native_label_explainer">Display a label next to apps which natively support the opened link
+    </string>
     <string name="telemetry_level_disabled">Disabled</string>
     <string name="telemetry_level_minimal">Minimal</string>
     <string name="telemetry_level_standard">Standard</string>
     <string name="telemetry_level_exhaustive">Exhaustive</string>
     <string name="telemetry_identity_basic">Basic</string>
     <string name="telemetry_identity_full">Full</string>
+    <string name="telemetry_dialog_title">LinkSheet respects your privacy</string>
+    <string name="telemetry_dialog_text">Choose the type of usage metrics you are most comfortable with.</string>
+    <string name="telemetry_level_disabled_description">No data collection</string>
+    <string name="telemetry_level_minimal_description">Installed version metrics</string>
+    <string name="telemetry_level_standard_description">Aggregated usage statistics</string>
+    <string name="telemetry_level_exhaustive_description">Detailed usage statistics</string>
+    <string name="telemetry_dialog_text_2">Usage metrics include a random, user-resettable installation-bound
+        identifier, as well as your Android version, and are stored at
+        <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data,
+        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
+    </string>
+    <string name="analytics">Analytics</string>
+    <string name="telemetry_configure_title">Analytics</string>
+    <string name="telemetry_identifier_reset">Reset identifier</string>
+    <string name="telemetry_configure_type">Analytics type</string>
 </resources>

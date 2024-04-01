@@ -1,34 +1,7 @@
 package fe.linksheet.module.viewmodel.module
 
 
-import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
-import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
-import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
-import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
-import fe.linksheet.module.viewmodel.ExportSettingsViewModel
-import fe.linksheet.module.viewmodel.FeatureFlagViewModel
-import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
-import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
-import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
-import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
-import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel
-import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.module.viewmodel.LoadDumpedPreferencesViewModel
-import fe.linksheet.module.viewmodel.LogSettingsViewModel
-import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
-import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
-import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
-import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
-import fe.linksheet.module.viewmodel.DevSettingsViewModel
-import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
-import fe.linksheet.module.viewmodel.SettingsViewModel
-import fe.linksheet.module.viewmodel.ExperimentsViewModel
+import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf

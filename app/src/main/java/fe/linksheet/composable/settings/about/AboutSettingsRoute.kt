@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.about
 
-import CachedUrlsMetadata
 import ClearURLsMetadata
 import LibRedirectMetadata
 import android.widget.Toast
@@ -18,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Cached
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Euro
@@ -58,7 +56,7 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
-import fe.linksheet.composable.util.annotatedStringResource
+import fe.linksheet.composable.util.rememberAnnotatedStringResource
 import fe.linksheet.creditsSettingsRoute
 import fe.linksheet.discordInvite
 import fe.linksheet.donateSettingsRoute
@@ -147,7 +145,7 @@ fun AboutSettingsRoute(
                 item("donate") {
                     SettingsItemRow(
                         headline = stringResource(id = R.string.donate),
-                        subtitle = annotatedStringResource(id = R.string.donate_explainer),
+                        subtitle = rememberAnnotatedStringResource(id = R.string.donate_explainer),
                         onClick = {
                             navController.navigate(donateSettingsRoute)
                         },

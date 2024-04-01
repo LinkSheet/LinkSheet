@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
@@ -31,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.StatePreference
 import fe.linksheet.R
 import fe.linksheet.amp2HtmlSettingsRoute
@@ -42,7 +40,6 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.DividedSwitchRow
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.LinkableTextView
-import fe.linksheet.composable.util.RowInfoCard
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.downloaderSettingsRoute

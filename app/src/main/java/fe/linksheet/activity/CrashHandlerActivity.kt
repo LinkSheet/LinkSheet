@@ -1,8 +1,6 @@
 package fe.linksheet.activity
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -32,7 +30,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class CrashHandlerActivity : ComponentActivity(), KoinComponent {
+class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
     companion object {
         const val EXTRA_CRASH_EXCEPTION = "EXTRA_CRASH_EXCEPTION_TEXT"
     }
@@ -48,7 +46,7 @@ class CrashHandlerActivity : ComponentActivity(), KoinComponent {
         val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
         logger.fatal(throwableString)
 
-        setContent {
+        setContent(edgeToEdge = true) {
             AppTheme {
                 val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
                     rememberTopAppBarState(),

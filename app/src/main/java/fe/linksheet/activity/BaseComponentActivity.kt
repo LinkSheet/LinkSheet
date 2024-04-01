@@ -7,8 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 
 open class BaseComponentActivity : ComponentActivity() {
+    var edgeToEdge: Boolean = false
+        private set
+
     fun initPadding(): BaseComponentActivity {
         enableEdgeToEdge()
+        edgeToEdge = true
         return this
     }
 

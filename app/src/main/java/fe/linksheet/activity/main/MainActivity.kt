@@ -2,7 +2,7 @@ package fe.linksheet.activity.main
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -15,12 +15,10 @@ import androidx.core.util.Consumer
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import fe.linksheet.*
 import fe.linksheet.activity.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.BoxAppHost
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -31,7 +29,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent(edgeToEdge = true) {
-            BoxAppHost(modifier = Modifier.safeContentPadding()) {
+            BoxAppHost {
                 val snackbarHostState = remember { SnackbarHostState() }
 
                 LaunchedEffect(key1 = eventState.value) {
@@ -54,7 +52,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                     uiOverhaul = mainViewModel.uiOverhaul()
                 ) { navController.popBackStack() }
 
-                SnackbarHost(modifier = Modifier.align(Alignment.BottomCenter), hostState = snackbarHostState)
+                SnackbarHost(modifier = Modifier.align(Alignment.BottomCenter).navigationBarsPadding(), hostState = snackbarHostState)
             }
         }
     }

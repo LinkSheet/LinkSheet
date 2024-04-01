@@ -489,4 +489,15 @@
     <string name="telemetry_level_exhaustive">Exhaustivo</string>
     <string name="telemetry_identity_basic">Básico</string>
     <string name="telemetry_identity_full">Completo</string>
+    <string name="telemetry_level_minimal_description">Métricas de la versión instalada</string>
+    <string name="telemetry_level_standard_description">Estadísticas de uso agregadas</string>
+    <string name="telemetry_level_exhaustive_description">Estadísticas de uso detalladas</string>
+    <string name="analytics">Analítica</string>
+    <string name="telemetry_configure_title">Analíticas</string>
+    <string name="telemetry_identifier_reset">Reiniciar el identificador</string>
+    <string name="telemetry_configure_type">Tipo de análisis</string>
+    <string name="telemetry_dialog_title">LinkSheet respeta su privacidad</string>
+    <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
+    <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
+    <string name="telemetry_dialog_text_2">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>. \u0020</string>
 </resources>

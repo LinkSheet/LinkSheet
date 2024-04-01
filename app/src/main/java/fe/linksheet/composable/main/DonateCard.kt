@@ -1,19 +1,10 @@
 package fe.linksheet.composable.main
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Euro
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,11 +13,12 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.linksheet.*
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.composable.util.annotatedStringResource
-import fe.linksheet.extension.androidx.navigate
+import fe.linksheet.composable.util.rememberAnnotatedStringResource
+import fe.linksheet.developmentTimeHours
+import fe.linksheet.developmentTimeMonths
+import fe.linksheet.donateSettingsRoute
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.Typography
 
@@ -34,7 +26,7 @@ import fe.linksheet.ui.Typography
 fun DonateCard(
     navController: NavHostController,
     viewModel: MainViewModel,
-    useTime: Pair<Int?, Int?>
+    useTime: Pair<Int?, Int?>,
 ) {
     val (hours, minutes) = useTime
     val timeString = if (hours != null) {
@@ -50,6 +42,17 @@ fun DonateCard(
         id = R.plurals.months,
         count = developmentTimeMonths,
         developmentTimeMonths
+    )
+
+    val subtitle = rememberAnnotatedStringResource(
+        R.string.donate_card_subtitle,
+        formatArgs = arrayOf(
+            timeString,
+            devTimeHoursString,
+            devTimeMonthString,
+            developmentTimeHours,
+            developmentTimeMonths
+        )
     )
 
     Card(
@@ -85,14 +88,7 @@ fun DonateCard(
 
                     SelectionContainer {
                         Text(
-                            text = annotatedStringResource(
-                                id = R.string.donate_card_subtitle,
-                                timeString,
-                                devTimeHoursString,
-                                devTimeMonthString,
-                                developmentTimeHours,
-                                developmentTimeMonths
-                            ),
+                            text = subtitle,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }

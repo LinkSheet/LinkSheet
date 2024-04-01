@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.LinkableSubtitleText
-import fe.linksheet.composable.util.annotatedStringResource
+import fe.linksheet.composable.util.rememberAnnotatedStringResource
 import fe.linksheet.developmentTimeHours
 import fe.linksheet.developmentTimeMonths
 import fe.linksheet.donationBuyMeACoffee
@@ -76,7 +76,7 @@ fun DonateSettingsRoute(
                             Spacer(modifier = Modifier.width(10.dp))
 
                             Text(
-                                text = annotatedStringResource(
+                                text = rememberAnnotatedStringResource(
                                     id = R.string.linksheet_donation_explainer_2
                                 ),
                                 color = MaterialTheme.colorScheme.onPrimaryContainer

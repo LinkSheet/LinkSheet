@@ -443,7 +443,7 @@
     <string name="urlbar_settings">Barra de direcciones</string>
     <string name="new_dev_bottom_sheet_explainer">¿No te gusta la nueva hoja inferior? Pulse para informar de los problemas.</string>
     <string name="new_dev_bottom_sheet">Hoja inferior</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante.
+    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante. 
 \nPor favor, informe de errores en <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, o a través de <annotation url="mailto:1fexd@420blaze.it">Correo electrónico</annotation>. \u0020</string>
     <string name="information">Información</string>
     <string name="resolve_embeds">Resolver incorporaciones</string>

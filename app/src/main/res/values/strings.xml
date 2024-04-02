@@ -662,4 +662,5 @@
     <string name="telemetry_configure_title">Analytics</string>
     <string name="telemetry_identifier_reset">Reset identifier</string>
     <string name="telemetry_configure_type">Analytics type</string>
+    <string name="something_went_wrong">Something went wrong, please try again.</string>
 </resources>

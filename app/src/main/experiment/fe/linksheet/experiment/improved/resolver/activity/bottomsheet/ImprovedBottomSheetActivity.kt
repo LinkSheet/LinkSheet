@@ -6,8 +6,6 @@ import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -26,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
+import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
@@ -479,7 +478,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
         ChoiceButtons(
             enabled = selected != -1,
             choiceClick = { _, modifier ->
-                launchApp(result, result.resolved[selected], modifier == ClickModifier.Always)
+                launchApp(result, result.resolved.getOrFirstOrNull(selected), modifier == ClickModifier.Always)
             },
         )
     }
@@ -512,11 +511,16 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
 
     fun launchApp(
         result: BottomSheetResult.SuccessResult,
-        info: DisplayActivityInfo,
+        info: DisplayActivityInfo?,
         always: Boolean = false,
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ) {
+        if (info == null) {
+            showToast(R.string.something_went_wrong, uiThread = true)
+            return
+        }
+
         handleLaunch(viewModel.launchAppAsync(info, result.intent, always, privateBrowsingBrowser, persist))
     }
 

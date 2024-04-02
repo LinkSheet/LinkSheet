@@ -443,7 +443,7 @@
     <string name="urlbar_settings">Barra de direcciones</string>
     <string name="new_dev_bottom_sheet_explainer">¿No te gusta la nueva hoja inferior? Pulse para informar de los problemas.</string>
     <string name="new_dev_bottom_sheet">Hoja inferior</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante.
+    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante. 
 \nPor favor, informe de errores en <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, o a través de <annotation url="mailto:1fexd@420blaze.it">Correo electrónico</annotation>. \u0020</string>
     <string name="information">Información</string>
     <string name="resolve_embeds">Resolver incorporaciones</string>
@@ -489,4 +489,15 @@
     <string name="telemetry_level_exhaustive">Exhaustivo</string>
     <string name="telemetry_identity_basic">Básico</string>
     <string name="telemetry_identity_full">Completo</string>
+    <string name="telemetry_level_minimal_description">Métricas de la versión instalada</string>
+    <string name="telemetry_level_standard_description">Estadísticas de uso agregadas</string>
+    <string name="telemetry_level_exhaustive_description">Estadísticas de uso detalladas</string>
+    <string name="analytics">Analítica</string>
+    <string name="telemetry_configure_title">Analíticas</string>
+    <string name="telemetry_identifier_reset">Reiniciar el identificador</string>
+    <string name="telemetry_configure_type">Tipo de análisis</string>
+    <string name="telemetry_dialog_title">LinkSheet respeta su privacidad</string>
+    <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
+    <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
+    <string name="telemetry_dialog_text_2">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>. \u0020</string>
 </resources>

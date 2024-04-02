@@ -19,7 +19,7 @@
     <string name="set_as_browser">Tarayıcı olarak ayarla</string>
     <string name="no_preferred_apps_set_yet">Henüz hiçbir uygulama tercih edilen olarak ayarlanmadı.</string>
     <string name="search">Arama</string>
-    <string name="copy_url">Url\'yi kopyala</string>
+    <string name="copy_url">Bağlantıyı kopyala</string>
     <string name="enable_copy_button">Kopyalamayı etkinleştir düğmesi</string>
     <string name="url_copied">URL panoya kopyalandı</string>
     <string name="confirm">Onayla</string>
@@ -72,7 +72,7 @@
     <string name="links">Bağlantılar</string>
     <string name="use_clear_urls">Temiz URL\'leri kullanın</string>
     <string name="follow_redirects">Yönlendirmeleri takip et</string>
-    <string name="loading_link">Bağlantı yükleniyor…</string>
+    <string name="loading_link">Bağlantı işleniyor…</string>
     <string name="display_grid_layout_explainer">Alt sayfada bir liste yerine bir ızgara göster</string>
     <string name="browser_status">Tarayıcı durumu</string>
     <string name="set_as_browser_done">LinkSheet varsayılan tarayıcı olarak ayarlandı!</string>
@@ -103,7 +103,7 @@
     <string name="redirect_resolve_type_local">yerel çözücü</string>
     <string name="redirect_resolve_type_not_resolved">yok</string>
     <string name="enable_libredirect">LibRedirect\'i etkinleştir</string>
-    <string name="enable_libredirect_explainer">Deneysel <annotation url="https://github.com/libredirect/libredirect">LibRedirect \u0020</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir \u0020</string>
+    <string name="enable_libredirect_explainer">Deneysel <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Önyüz</string>
@@ -174,7 +174,7 @@
     <string name="use_app_settings">Uygulama ayarlarını kullan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri olabilir</annotation> \u0020</string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun
+    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun 
 \n <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri olabilir \u0020</annotation> \u0020</string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Her zaman devre dışı bırak</string>
@@ -404,7 +404,7 @@
     <string name="experiment">Deney</string>
     <string name="new_dev_bottom_sheet_explainer">Yeni alt sayfayı beğenmediniz mi? Sorun bildirmek için dokunun.</string>
     <string name="new_dev_bottom_sheet">Alt sayfa</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Yeni alt sayfa, özelliklerin tamamlanmasına yaklaşıyor. \u0020Önemli olarak, dokunma özelleştirmesi henüz kullanılabilir değil ve daha sonra yapılacak.
+    <string name="new_dev_bottom_sheet_feature_explainer">Yeni alt sayfa, özelliklerin tamamlanmasına yaklaşıyor. \u0020Önemli olarak, dokunma özelleştirmesi henüz kullanılabilir değil ve daha sonra yapılacak. 
 \nHataları lütfen <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub\'da</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord\'da</annotation> veya <annotation url="mailto:1fexd@420blaze.it">Email</annotation> aracılığıyla bildirin. \u0020</string>
     <string name="information">Bilgi</string>
     <string name="resolve_embeds">Yerleştirmeleri çözümle</string>
@@ -475,4 +475,24 @@
     <string name="tap_customization_dialog_title_long_tap">Uzun dokunma</string>
     <string name="tap_customization_dialog_text">Gerçekleştirilmesi gereken eylemi seçin</string>
     <string name="expand_on_app_select_explainer">Bir uygulama seçildiğinde alt sayfayı otomatik olarak genişlet</string>
+    <string name="telemetry_dialog_text_2">Kullanım istatistikleri, Android sürümünüzün yanı sıra kullanıcı tarafından sıfırlanabilen kuruluma bağlı rastgele bir tanımlayıcıyı içerir ve \u0020<annotation url="https://aptabase.com">Aptabase (EU)</annotation>\'da tutulur. \u0020Yüklü uygulamalar ve tıklanan bağlantılar gibi hassas veriler <b>asla</b> toplanmayacaktır. Daha fazla bilgi edinmek için <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#telemetry">buraya</annotation> dokunun. \u0020</string>
+    <string name="loading_link_subtitle">LinkSheet bağlantı işlemlerini gerçekleştiriyor. Bu işlem yalnızca birkaç saniye sürecektir</string>
+    <string name="show_native_label">\"Yerel\" etiketi göster</string>
+    <string name="show_native_label_explainer">Açılan bağlantıyı yerel olarak destekleyen uygulamaların yanında bir etiket göster</string>
+    <string name="telemetry_level_disabled">Devre dışı</string>
+    <string name="telemetry_level_minimal">Az düzeyde</string>
+    <string name="telemetry_level_standard">Standart</string>
+    <string name="telemetry_level_exhaustive">Kapsamlı</string>
+    <string name="telemetry_identity_basic">Basit</string>
+    <string name="telemetry_identity_full">Tam</string>
+    <string name="telemetry_dialog_title">LinkSheet gizliliğinize saygı duyar</string>
+    <string name="telemetry_level_standard_description">Toplu kullanım istatistikleri</string>
+    <string name="telemetry_dialog_text">En rahat ettiğiniz kullanım ölçümü türlerini seçin.</string>
+    <string name="telemetry_level_disabled_description">Veri toplama yok</string>
+    <string name="telemetry_level_minimal_description">Yüklü sürüm ölçümleri</string>
+    <string name="telemetry_level_exhaustive_description">Detaylı kullanım istatistikleri</string>
+    <string name="analytics">Analizler</string>
+    <string name="telemetry_configure_title">Analizler</string>
+    <string name="telemetry_identifier_reset">Tanımlayıcıyı sıfırla</string>
+    <string name="telemetry_configure_type">Analiz tipi</string>
 </resources>

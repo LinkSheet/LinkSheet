@@ -301,7 +301,7 @@ class ImprovedIntentResolver(
         val isCustomTab = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION)
 //        val allowCustomTab =
 
-        val newIntent = intent.unsafe.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
+        val newIntent = intent.unsafe.newIntent(Intent.ACTION_VIEW, uri, false,!isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
 //                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")

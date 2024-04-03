@@ -140,7 +140,7 @@ class IntentResolver(
     private val checkAllExtras = experimentRepository.asState(Experiments.checkAllExtras)
 
     private val newQueryManager = experimentRepository.asState(Experiments.newQueryManager)
-
+    private val dropCategories = experimentRepository.asState(Experiments.dropCategories)
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
@@ -298,7 +298,7 @@ class IntentResolver(
             referrer, inAppBrowserSettings()
         )
 
-        val newIntent = intent.unsafe.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
+        val newIntent = intent.unsafe.newIntent(Intent.ACTION_VIEW, uri, dropCategories(), !isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
 //                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")

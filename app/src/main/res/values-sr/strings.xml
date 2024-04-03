@@ -21,7 +21,7 @@
     <string name="download_started">Преузимање је започето</string>
     <string name="close">Затвори</string>
     <string name="use_clear_urls">Користи ClearURLs</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheetје открио најмање једну апликацију за коју се зна да је стварни прегледач.</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet је открио најмање једну апликацију за коју се зна да је прегледач.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Омогућавање великог броја дугмади на доњем листу тренутно може довести до одсецања/квара дугмади.</string>
     <string name="opening_with_app">Отварање помоћу %s</string>
     <string name="enable_shizuku_explainer">Омогућавање овога ће дозволити LinkSheet-у да користи Shizuku за директну интеракцију са системским API-јима. Ово се може користити, на пример, да се аутоматски онемогуће сви руковаоци линкова. Нова опција ће се појавити на главном екрану апликације.</string>
@@ -57,7 +57,7 @@
     <string name="enable_shizuku">Омогући (експерименталну) Shizuku интеграцију</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
-    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation></string>
+    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк \u0020до фајла. Ово може имати \u0020<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation> \u0020</string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
@@ -65,7 +65,8 @@
     <string name="misc_settings">Остало</string>
     <string name="commit">Извршење:</string>
     <string name="enable_send_button_explainer">Приказује дугме у доњем листу које вам омогућава да делите URL с другим апликацијама као да сте га изабрали из менија „Дели са“</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">линк</annotation>.</string>
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">
+\nлинк</annotation>. \u0020</string>
     <string name="get_started">Започни</string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
@@ -229,7 +230,8 @@
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
     <string name="links">Линкови</string>
-    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово може имати <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
+    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово може \u0020имати 
+\n <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation> \u0020</string>
     <string name="preferred_browser">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
@@ -276,7 +278,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Приказује дугме у доњем листу ако је URL преусмерен путем LibRedirect-а, који уместо тога отвара оригинални URL</string>
     <string name="mastodon_redirect_subtitle_2">Изворни кôд Mastodon Redirect-а је коришћен као референца за Shizuku комуникацију</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet је открио најмање једну апликацију која тврди да је прегледач. Листа LinkSheet-а можда није потпуна. Ако мислите да је ово грешка, пошаљите проблем GitHub-у.</string>
-    <string name="enable_amp2html_explainer">Преусмерава AMP странице на њихову нормалну веб-верзију. Ово може да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">импликације у вези са приватношћу</annotation></string>
+    <string name="enable_amp2html_explainer">Преусмерава AMP странице на њихову нормалну веб-верзију. Ово може да има <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">импликације у вези са приватношћу</annotation> \u0020</string>
     <string name="none_explainer">Наведите само изворне апликације, уклоните све прегледаче. Ако је присутна само једна изворна апликација, она ће се аутоматски отворити. Ако није присутна изворна апликација, наведени су сви прегледачи.</string>
     <string name="donate">Донирај</string>
     <string name="seal">Seal</string>
@@ -343,7 +345,7 @@
     <string name="confirm_import">Потврди</string>
     <string name="include_log_hash_key">Укључи хеш кључ eвиденције (кључ који се користи за редиговање ваших евиденција)</string>
     <string name="import_explainer">Увезите претходни извоз из фајла</string>
-    <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports"> линк</annotation>.</string>
+    <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports"> линк</annotation>. \u0020</string>
     <string name="export_import_settings_explainer">Извезите тренутна подешавања или увезите претходна подешавања</string>
     <string name="include_history">Укључи историју (ваш клик на линк и историју апликације)</string>
     <string name="export_settings">Извоз подешавања</string>
@@ -481,4 +483,25 @@
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
+    <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични 
+\n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на \u0020<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци, \u0020као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>. \u0020</string>
+    <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
+    <string name="show_native_label">Прикажи изворну ознаку</string>
+    <string name="show_native_label_explainer">Прикажите ознаку поред апликација које изворно подржавају отворен линк</string>
+    <string name="telemetry_level_disabled">Онемогућено</string>
+    <string name="telemetry_level_minimal">Минимално</string>
+    <string name="telemetry_level_standard">Стандардно</string>
+    <string name="telemetry_level_exhaustive">Исцрпно</string>
+    <string name="telemetry_identity_basic">Основно</string>
+    <string name="telemetry_identity_full">Потпуно</string>
+    <string name="telemetry_dialog_title">LinkSheet поштује вашу приватност</string>
+    <string name="telemetry_level_disabled_description">Без прикупљања података</string>
+    <string name="telemetry_level_standard_description">Збирна статистика коришћења</string>
+    <string name="telemetry_level_exhaustive_description">Детаљна статистика коришћења</string>
+    <string name="analytics">Аналитика</string>
+    <string name="telemetry_level_minimal_description">Показатељи инсталиране верзије</string>
+    <string name="telemetry_dialog_text">Одаберите тип показатеља коришћења који вам највише одговара.</string>
+    <string name="telemetry_configure_title">Аналитика</string>
+    <string name="telemetry_identifier_reset">Ресетуј идентификатор</string>
+    <string name="telemetry_configure_type">Тип аналитике</string>
 </resources>

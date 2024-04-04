@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 
 
-fun Intent.newIntent(action: String, uri: Uri?, dropCategories: Boolean = false, dropExtras: Boolean = false): Intent {
+fun Intent.newIntent(action: String, uri: Uri?, dropExtras: Boolean = false): Intent {
     val intent = Intent(this)
 
     intent.action = action
@@ -13,12 +13,6 @@ fun Intent.newIntent(action: String, uri: Uri?, dropCategories: Boolean = false,
     intent.flags = this@newIntent.flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
     intent.`package` = null
     intent.component = null
-
-    if(dropCategories && intent.categories != null) {
-        for (category in intent.categories) {
-            intent.removeCategory(category)
-        }
-    }
 
     if (dropExtras) {
         intent.replaceExtras(null as? Bundle?)

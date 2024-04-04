@@ -4,7 +4,7 @@ import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.compose.StatePreference
 
-object Experiments : PreferenceDefinition() {
+object Experiments : PreferenceDefinition("experiment_drop_categories") {
     val experiments: List<Experiment>
 
     val experimentalUrlBar = boolean("experiment_url_bar")
@@ -17,8 +17,6 @@ object Experiments : PreferenceDefinition() {
 
     val newQueryManager = boolean("experiment_new_query_manager")
     val uiOverhaul = boolean("experiment_ui_overhaul")
-    val dropCategories = boolean("experiment_drop_categories")
-
 
     // TODO: Enforce type
     init {
@@ -27,7 +25,6 @@ object Experiments : PreferenceDefinition() {
             Experiment("share_to", hidden = false, allowCustomShareExtras, checkAllExtras),
             Experiment("new_query_manager", true, newQueryManager),
             Experiment("ui_overhaul", true, uiOverhaul),
-            Experiment("drop_categories", true, dropCategories)
         )
 
         finalize()

@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.new.query.manager.query
 
+import android.R.attr.host
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,6 +14,7 @@ import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.util.AndroidVersion
 import org.koin.core.component.KoinComponent
+
 
 object PackageQueryManager : KoinComponent {
     private val logger by injectLogger<PackageQueryManager>()
@@ -38,7 +40,21 @@ object PackageQueryManager : KoinComponent {
     @RequiresApi(Build.VERSION_CODES.S)
     private fun ResolveInfo.canHandle(dvm: DomainVerificationManager, host: String): Boolean {
         // TODO: Does this work for wildcard subdomains? (*.example.org?)
-        return dvm.getDomainVerificationUserState(activityInfo.packageName)?.hostToStateMap?.containsKey(host) == true
+        val hostToStateMap = dvm.getDomainVerificationUserState(activityInfo.packageName)?.hostToStateMap
+        return hostToStateMap?.contains(host) == true || matchesWildcard(hostToStateMap, host)
+    }
+
+    private fun matchesWildcard(hostToStateMap: Map<String, Int>?, host: String): Boolean {
+        if (hostToStateMap == null) return false
+
+        // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/verify/domain/DomainVerificationService.java;l=1918
+        for ((domain, _) in hostToStateMap) {
+            if (domain.startsWith("*.") && host.endsWith(domain.substring(2))) {
+                return true
+            }
+        }
+
+        return false
     }
 
     private fun ResolveInfo.toUriHandler(packageManager: PackageManager, viewIntent: Intent): UriViewActivity {

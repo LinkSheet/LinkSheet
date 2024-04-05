@@ -654,8 +654,11 @@ abstract class BottomSheetActivityImpl : BaseComponentActivity() {
                 intent.putExtra(Intent.EXTRA_REFERRER, referrer)
             }
 
-            startActivity(intent)
-            finish()
+            if (viewModel.safeStartActivity(this@BottomSheetActivityImpl, intent)) {
+                finish()
+            } else {
+                showToast(R.string.resolve_activity_failure, uiThread = true)
+            }
         }
     }
 

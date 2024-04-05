@@ -4,6 +4,7 @@ package fe.linksheet.module.viewmodel
 import android.app.Activity
 import android.app.Application
 import android.app.DownloadManager
+import android.content.ActivityNotFoundException
 import android.content.ClipboardManager
 import android.content.Intent
 import android.content.res.Resources
@@ -318,5 +319,15 @@ class BottomSheetViewModel(
         }
 
         return null
+    }
+
+    fun safeStartActivity(activity: Activity, intent: Intent): Boolean {
+        try {
+            activity.startActivity(intent)
+            return true
+        } catch (e: ActivityNotFoundException) {
+            logger.error(e)
+            return false
+        }
     }
 }

@@ -38,6 +38,7 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.experiment.ui.overhaul.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.experiment.url.bar.ExperimentalUrlBar
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
@@ -217,6 +218,10 @@ abstract class BottomSheetActivityImpl : BaseComponentActivity() {
                     }
                 }
             )
+
+            if (false) {
+                ExperimentalFailureSheetColumn(onShareClick = {}, onCopyClick = {})
+            }
         }
     }
 
@@ -474,7 +479,9 @@ abstract class BottomSheetActivityImpl : BaseComponentActivity() {
 
         Column {
             LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
-                itemsIndexed(items = items, key = { index, item -> item.toString() + index }) { index, (info, privateBrowser) ->
+                itemsIndexed(
+                    items = items,
+                    key = { index, item -> item.toString() + index }) { index, (info, privateBrowser) ->
                     GridBrowserButton(
                         appInfo = info,
                         selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
@@ -518,7 +525,9 @@ abstract class BottomSheetActivityImpl : BaseComponentActivity() {
                     .fillMaxWidth()
                     .weight(1.0f, fill = false)
             ) {
-                itemsIndexed(items = result.resolved, key = { index, item -> item.flatComponentName + index }) { index, info ->
+                itemsIndexed(
+                    items = result.resolved,
+                    key = { index, item -> item.flatComponentName + index }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
 
                     ListBrowserColumn(

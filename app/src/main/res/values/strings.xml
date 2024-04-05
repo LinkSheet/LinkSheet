@@ -662,5 +662,12 @@
     <string name="telemetry_configure_title">Analytics</string>
     <string name="telemetry_identifier_reset">Reset identifier</string>
     <string name="telemetry_configure_type">Analytics type</string>
+    <string name="link_handle_failed">An error occured</string>
+    <string name="try_share">Share</string>
+    <string name="link_handle_failed_text">LinkSheet can not handle this link as it appears to be malformed. You can edit it below, then try again. Alternatively, you can search on the web.</string>
+    <string name="edit">Edit</string>
+    <string name="link_handle_failed_text_field_label">Query</string>
+    <string name="retry">Try again</string>
     <string name="something_went_wrong">Something went wrong, please try again.</string>
+    <string name="resolve_activity_failure">Failed to resolve activity!</string>
 </resources>

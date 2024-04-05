@@ -22,6 +22,10 @@ val HkGroteskSemiBold = TextStyle(fontFamily = HkGroteskFontFamily, fontWeight =
 // TypographyKeyTokens.BodyMedium
 //val test = Typography.fromToken()
 
+// Alertdialog
+// headlineSmall
+// bodyMedium
+
 // Set of Material typography styles to start with
 val NewTypography = Typography(
 //    titleLarge = TextStyle(

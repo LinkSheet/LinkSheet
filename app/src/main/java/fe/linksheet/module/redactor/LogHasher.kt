@@ -8,6 +8,7 @@ import android.net.Uri
 import fe.linksheet.extension.kotlin.appendHashed
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.stringbuilder.util.*
 import javax.crypto.Mac
@@ -207,6 +208,39 @@ sealed interface HashProcessor<T> {
                 separated(Separator.Comma) {
                     input.forEach {
                         item { ResolveInfoProcessor.process(stringBuilder, it, mac) }
+                    }
+                }
+            }
+        }
+    }
+
+    data object UriViewActivityProcessor : HashProcessor<UriViewActivity> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: UriViewActivity,
+            mac: Mac,
+        ) = stringBuilder.wrapped(Bracket.Curly) {
+            separated(Separator.Comma) {
+                item("info=") { ResolveInfoProcessor.process(this, input.resolveInfo, mac) }
+                item("fallback=") { append(input.fallback) }
+            }
+        }
+
+        private fun ResolveInfo.getComponentInfo(): ComponentInfo? {
+            if (activityInfo != null) return activityInfo
+            if (serviceInfo != null) return serviceInfo
+            if (providerInfo != null) return providerInfo
+
+            return null
+        }
+    }
+
+    data object UriViewActivityListProcessor : HashProcessor<List<UriViewActivity>> {
+        override fun process(stringBuilder: StringBuilder, input: List<UriViewActivity>, mac: Mac): StringBuilder {
+            return stringBuilder.wrapped(Bracket.Square) {
+                separated(Separator.Comma) {
+                    input.forEach {
+                        item { UriViewActivityProcessor.process(stringBuilder, it, mac) }
                     }
                 }
             }

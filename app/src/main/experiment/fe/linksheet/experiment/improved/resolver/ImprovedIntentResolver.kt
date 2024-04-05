@@ -3,7 +3,6 @@ package fe.linksheet.experiment.improved.resolver
 import android.app.Application
 import android.app.SearchManager
 import android.content.Intent
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
@@ -37,7 +36,6 @@ import fe.linksheet.util.IntentParser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import me.saket.unfurl.UnfurlResult
@@ -280,11 +278,13 @@ class ImprovedIntentResolver(
         )
     }
 
-    private fun queryHandlers(newIntent: Intent, uri: Uri, newQueryManager: Boolean = true): List<ResolveInfo> {
+    private fun queryHandlers(newIntent: Intent, uri: Uri, newQueryManager: Boolean = true): List<UriViewActivity> {
         return if (newQueryManager && AndroidVersion.AT_LEAST_API_31_S) {
             PackageQueryManager.findHandlers(context, uri)
         } else {
-            context.packageManager.queryResolveInfosByIntent(newIntent, true)
+            context.packageManager.queryResolveInfosByIntent(newIntent, true).map {
+                UriViewActivity(it, false)
+            }
         }
     }
 

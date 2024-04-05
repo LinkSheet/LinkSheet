@@ -20,6 +20,7 @@ data class DisplayActivityInfo(
     val resolvedInfo: ResolveInfo,
     val label: String,
     val browser: Boolean = false,
+    val fallback: Boolean = false,
 ) : Redactable<DisplayActivityInfo> {
     companion object {
         val labelComparator = compareBy<DisplayActivityInfo> { it.compareLabel }

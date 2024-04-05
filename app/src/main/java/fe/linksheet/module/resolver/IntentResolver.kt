@@ -305,15 +305,16 @@ class IntentResolver(
             }
         }
 
-        val resolvedList: MutableList<ResolveInfo> = if (newQueryManager() && AndroidVersion.AT_LEAST_API_31_S) {
+        val resolvedList: MutableList<UriViewActivity> = if (newQueryManager() && AndroidVersion.AT_LEAST_API_31_S) {
             PackageQueryManager.findHandlers(context, uri!!).toMutableList()
         } else {
-            context.packageManager.queryResolveInfosByIntent(newIntent, true).toMutableList()
+            context.packageManager.queryResolveInfosByIntent(newIntent, true).map { UriViewActivity(it, false) }
+                .toMutableList()
         }
 
-        logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
+        logger.debug(resolvedList, HashProcessor.UriViewActivityListProcessor, { it }, "ResolveList")
 
-        val browserMode = if (UriUtil.hasWebScheme(newIntent)) {
+        val (browserMode, filteredResolveInfos) = if (UriUtil.hasWebScheme(newIntent)) {
             val (
                 mode,
                 selected,
@@ -323,8 +324,30 @@ class IntentResolver(
                 Triple(inAppBrowserMode, selectedInAppBrowser, inAppBrowsersRepository)
             } else Triple(browserMode, selectedBrowser, normalBrowsersRepository)
 
-            browserHandler.handleBrowsers(mode(), selected(), repository, resolvedList)
-        } else null
+            browserHandler.handleBrowsers(
+                mode(),
+                selected(),
+                repository,
+                resolvedList.map { it.resolveInfo }.toMutableList()
+            )
+        } else null to emptyList<ResolveInfo>()
+
+        // I hate the antichrist
+        val map = resolvedList.associateBy { it.resolveInfo.activityInfo.packageName }
+
+        val new = mutableListOf<UriViewActivity>()
+        for (filteredResolveInfo in filteredResolveInfos) {
+            val hasViewActivity = map[filteredResolveInfo.activityInfo.packageName]
+            if (hasViewActivity != null) {
+                new.add(hasViewActivity)
+            } else {
+                new.add(UriViewActivity(filteredResolveInfo, false))
+            }
+        }
+
+        resolvedList.clear()
+        resolvedList.addAll(new)
+
 
         if (resolvedList.isEmpty()) {
             return BottomSheetResult.BottomSheetNoHandlersFound(uri)
@@ -340,7 +363,7 @@ class IntentResolver(
 
         val selectedBrowserIsSingleOption =
             browserMode?.browserMode == BrowserHandler.BrowserMode.SelectedBrowser
-                    && resolvedList.singleOrNull()?.activityInfo?.componentName() == browserMode.resolveInfo?.activityInfo?.componentName()
+                    && resolvedList.singleOrNull()?.resolveInfo?.activityInfo?.componentName() == browserMode.resolveInfo?.activityInfo?.componentName()
 
         val noBrowsersPresentOnlySingleApp =
             browserMode?.browserMode == BrowserHandler.BrowserMode.None && resolvedList.size == 1

@@ -4,22 +4,22 @@ import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.ActivityInfo
-import android.content.pm.ResolveInfo
 import fe.kotlin.extension.iterable.findWithIndexOrNull
-import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.extension.android.toDisplayActivityInfo
+import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.resolver.UriViewActivity
 import java.util.concurrent.TimeUnit
 
 object BottomSheetGrouper {
-    fun group(context: Context, current: List<ResolveInfo>, historyMap: Map<String, Long>?, lastChosenPreferredApp: PreferredApp?, returnFilteredItem: Boolean = true, ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
+    fun group(context: Context, current: List<UriViewActivity>, historyMap: Map<String, Long>?, lastChosenPreferredApp: PreferredApp?, returnFilteredItem: Boolean = true, ): Triple<List<DisplayActivityInfo>, DisplayActivityInfo?, Boolean> {
         val grouped = current.toMutableList()
 
         val filteredPair = grouped.findWithIndexOrNull {
-            isLastChosenPosition(it.activityInfo, lastChosenPreferredApp)
+            isLastChosenPosition(it.resolveInfo.activityInfo, lastChosenPreferredApp)
         }
 
         val filteredPairs = grouped.mapIndexedNotNull { index, resolveInfo ->
-            (resolveInfo to index).takeIf { resolveInfo.activityInfo.packageName == lastChosenPreferredApp?.pkg }
+            (resolveInfo to index).takeIf { resolveInfo.resolveInfo.activityInfo.packageName == lastChosenPreferredApp?.pkg }
         }
 
         val filteredItem = if (filteredPair != null && (returnFilteredItem || lastChosenPreferredApp?.alwaysPreferred == true)) {

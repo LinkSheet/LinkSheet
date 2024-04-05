@@ -9,12 +9,16 @@ import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
+import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.util.AndroidVersion
+import org.koin.core.component.KoinComponent
 
-object PackageQueryManager {
+object PackageQueryManager : KoinComponent {
+    private val logger by injectLogger<PackageQueryManager>()
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun findHandlers(context: Context, uri: Uri): List<ResolveInfo> {
+    fun findHandlers(context: Context, uri: Uri): List<UriViewActivity> {
         val dvm = context.getSystemService<DomainVerificationManager>()!!
         val host = uri.host.toString()
 
@@ -24,10 +28,10 @@ object PackageQueryManager {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri)
 
         val packageManager = context.packageManager
-        val result = context.packageManager.queryIntentActivitiesCompat(mainIntent, PackageManager.MATCH_ALL)
-        return result.asSequence()
+        val result = packageManager.queryIntentActivitiesCompat(mainIntent, PackageManager.MATCH_ALL)
+        return result
             .filter { it.canHandle(dvm, host) }
-            .filter { it.hasActivity(packageManager, viewIntent) != null }
+            .map { it.toUriHandler(packageManager, viewIntent) }
             .toList()
     }
 
@@ -37,11 +41,63 @@ object PackageQueryManager {
         return dvm.getDomainVerificationUserState(activityInfo.packageName)?.hostToStateMap?.containsKey(host) == true
     }
 
-    private fun ResolveInfo.hasActivity(packageManager: PackageManager, viewIntent: Intent): ResolveInfo? {
-        return packageManager.resolveActivity(
-            Intent(viewIntent).setPackage(activityInfo.packageName),
-            PackageManager.MATCH_DEFAULT_ONLY
-        )
+    private fun ResolveInfo.toUriHandler(packageManager: PackageManager, viewIntent: Intent): UriViewActivity {
+//        val activities = packageManager.getPackageInfo(
+//            activityInfo.packageName,
+//            PackageManager.MATCH_ALL or PackageManager.GET_ACTIVITIES or PackageManager.GET_RESOLVED_FILTER
+//        ).activities.filter { it.exported }
+
+        val mainIntent = Intent(Intent.ACTION_MAIN)
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+        mainIntent.selector = viewIntent
+            .setPackage(activityInfo.packageName)
+//            .addCategory(Intent.CATEGORY_DEFAULT)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+
+        try {
+            val resolved = packageManager.queryIntentActivitiesCompat(
+                mainIntent, PackageManager.MATCH_ALL or PackageManager.GET_RESOLVED_FILTER
+            )
+
+            if (resolved.isNotEmpty()) {
+                return UriViewActivity(resolved.first(), false)
+            }
+        } catch (e: Throwable) {
+            logger.error(e)
+        }
+
+//        val ac = activities
+//        for (activity in activities) {
+//            val componentName = ComponentName(activity.packageName, activity.name)
+//            val activityIntent = viewIntent.addCategory(Intent.CATEGORY_BROWSABLE).setComponent(componentName)
+//            val resolved = packageManager.queryIntentActivitiesCompat(
+//                activityIntent, PackageManager.MATCH_ALL or PackageManager.GET_RESOLVED_FILTER
+//            )
+//
+//            val size = resolved.size
+//        }
+//
+////        packageManager.getLaunchIntentForPackage()
+
+        return UriViewActivity(this, true)
+
+
+//
+//
+//        val test = packageManager.queryIntentActivitiesCompat(
+//            Intent(Intent.ACTION_VIEW, null).setPackage(activityInfo.packageName).addCategory(Intent.CATEGORY_DEFAULT)
+//                .addCategory(Intent.CATEGORY_BROWSABLE), PackageManager.MATCH_ALL or PackageManager.GET_RESOLVED_FILTER
+//        )
+//
+//        val alternative = packageManager.resolveActivity(
+//            Intent(viewIntent).addCategory(Intent.CATEGORY_BROWSABLE).setPackage(activityInfo.packageName),
+//            PackageManager.MATCH_ALL
+//        )
+//
+//        return packageManager.resolveActivity(
+//            Intent(viewIntent).addCategory(Intent.CATEGORY_BROWSABLE).setPackage(activityInfo.packageName),
+//            PackageManager.MATCH_ALL
+//        )
     }
 
     private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int): MutableList<ResolveInfo> {

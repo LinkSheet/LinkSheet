@@ -230,7 +230,15 @@ class BottomSheetViewModel(
         always: Boolean = false,
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
-    ) = ioAsync { launchApp(info, intent, always, privateBrowsingBrowser, persist) }
+    ) = ioAsync {
+        launchApp(
+            info = info,
+            intent = intent,
+            always = always,
+            privateBrowsingBrowser = privateBrowsingBrowser,
+            persist = persist
+        )
+    }
 
     suspend fun launchApp(
         info: DisplayActivityInfo,
@@ -242,18 +250,19 @@ class BottomSheetViewModel(
         val launchIntent = Intent(intent)
             .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT or Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
 
-        if (newQueryManager()) {
-            launchIntent.`package` = info.packageName
-        } else {
-            launchIntent.component = info.componentName
-        }
+//        if (newQueryManager()) {
+//            launchIntent.`package` = info.packageName
+//        } else {
+        launchIntent.addCategory(Intent.CATEGORY_BROWSABLE).addCategory(Intent.CATEGORY_DEFAULT)
+        launchIntent.component = info.componentName
+//        }
 
         val newIntent = launchIntent.let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 
         // Check for intent.data != null to make sure we don't attempt to persist web search intents
-        if (persist && privateBrowsingBrowser == null && intent.data != null) {
+        if (!info.fallback && persist && privateBrowsingBrowser == null && intent.data != null) {
             persistSelectedIntent(newIntent, always)
         }
 

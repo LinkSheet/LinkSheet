@@ -474,7 +474,7 @@ abstract class BottomSheetActivityImpl : BaseComponentActivity() {
 
         Column {
             LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
-                itemsIndexed(items = items, key = { _, item -> item.toString() }) { index, (info, privateBrowser) ->
+                itemsIndexed(items = items, key = { index, item -> item.toString() + index }) { index, (info, privateBrowser) ->
                     GridBrowserButton(
                         appInfo = info,
                         selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
@@ -518,7 +518,7 @@ abstract class BottomSheetActivityImpl : BaseComponentActivity() {
                     .fillMaxWidth()
                     .weight(1.0f, fill = false)
             ) {
-                itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
+                itemsIndexed(items = result.resolved, key = { index, item -> item.flatComponentName + index }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
 
                     ListBrowserColumn(

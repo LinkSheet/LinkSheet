@@ -59,7 +59,7 @@ class BrowserHandler(
     data class FilteredBrowserList(
         val browserMode: BrowserMode,
         val browsers: List<ResolveInfo>,
-        val apps: List<ResolveInfo>,
+        val apps: List<UriViewActivity>,
         val isSingleOption: Boolean = false,
         val noBrowsersOnlySingleApp: Boolean = false,
     ) {
@@ -69,7 +69,7 @@ class BrowserHandler(
     suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> filterBrowsers(
         config: BrowserModeConfigHelper<T, C, D>,
         browsers: Map<String, ResolveInfo>,
-        resolveList: List<ResolveInfo>,
+        resolveList: List<UriViewActivity>,
     ): FilteredBrowserList {
         val nonBrowsers = getAllNonBrowsers(browsers, resolveList)
 
@@ -123,11 +123,11 @@ class BrowserHandler(
 
     private fun getAllNonBrowsers(
         browsers: Map<String, ResolveInfo>,
-        resolveList: List<ResolveInfo>,
-    ): List<ResolveInfo> {
-        val map = mutableMapOf<String, ResolveInfo>()
-        for (resolveInfo in resolveList) {
-            map[resolveInfo.activityInfo.packageName] = resolveInfo
+        resolveList: List<UriViewActivity>,
+    ): List<UriViewActivity> {
+        val map = mutableMapOf<String, UriViewActivity>()
+        for (uriViewActivity in resolveList) {
+            map[uriViewActivity.resolveInfo.activityInfo.packageName] = uriViewActivity
         }
 
         for ((pkg, _) in browsers) {
@@ -152,7 +152,7 @@ class BrowserHandler(
         selectedBrowser: String?,
         repository: WhitelistedBrowsersRepository<T, C, D>,
         resolveList: MutableList<ResolveInfo>,
-    ): BrowserModeInfo {
+    ): Pair<BrowserModeInfo, MutableList<ResolveInfo>> {
         // TODO: this should be refactored, passing a list of all applications which can handle the
         //  intent (including browsers), then QUERYING ALL BROWSERS again just to remove them from
         //  the list by comparing each element is just plain stupid, lol
@@ -160,7 +160,6 @@ class BrowserHandler(
         addAllBrowsersToResolveList(browsers, resolveList)
 
         resolveList.removeIf { LinkSheetCompat.isCompat(it) }
-
 
         return when (browserMode) {
             is BrowserMode.AlwaysAsk -> BrowserModeInfo(browserMode, null)
@@ -186,7 +185,7 @@ class BrowserHandler(
 
                 BrowserModeInfo(browserMode, null)
             }
-        }
+        } to resolveList
     }
 
     // TODO: Refactor, old query manager doesn't return separated lists for apps and browsers -> remove browsers from app list,

@@ -6,6 +6,7 @@ import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.BrowserHandler
+import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
@@ -52,7 +53,7 @@ object AppSorter {
 
     private fun toDisplay(
         context: Context,
-        apps: List<ResolveInfo>,
+        apps: List<UriViewActivity>,
         browsers: List<ResolveInfo>,
     ): Map<String, DisplayActivityInfo> {
         val map = mutableMapOf<String, DisplayActivityInfo>()

@@ -1,0 +1,74 @@
+name: Build nightly APK
+
+env:
+  BUILD_FLAVOR: foss
+  BUILD_TYPE: nightly
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '*.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install JQ
+        run:  sudo apt-get install jq -y
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "zulu"
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      #      - name: Setup Android modded android.jar
+      #        uses: 1fexd/setup-modded-android-jar@0.0.3
+      #        env:
+      #          ANDROID_SDK_VERSION: 33
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-        
+
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: android_keystore
+        with:
+          fileName: "keystore.jks"
+          encodedString: ${{ secrets.KEYSTORE_FILE }}
+
+      - uses: gradle/gradle-build-action@v2
+      - run: ./gradlew assembleFossNightly
+        env:
+          GITHUB_WORKFLOW_RUN_ID: ${{ github.run_id }}
+          KEYSTORE_FILE_PATH: ${{ steps.android_keystore.outputs.filePath }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: linksheet-nightly
+          path: app/build/outputs/apk/foss/nightly/*.apk
+
+      - name: Get file name
+        id: get_file_name
+        shell: bash
+        run: echo "FILE_NAME=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"

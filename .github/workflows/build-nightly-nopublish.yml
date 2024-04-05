@@ -1,4 +1,4 @@
-name: Build nightly APK
+name: Build nightly APK (nopublish)
 
 env:
   BUILD_FLAVOR: foss

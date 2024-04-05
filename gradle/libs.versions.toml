@@ -10,14 +10,13 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 
 net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.1.0" }
 
-com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.22-1.0.18" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.23-1.0.20" }
 
 gradle = { id = "gradle", version = "8.1.2" }
 
 [versions]
 
-kotlin = "1.9.22"
-##  ⬆ = "1.9.23"
+kotlin = "1.9.23"
 ##  ⬆ = "2.0.0-Beta1"
 ##  ⬆ = "2.0.0-Beta2"
 ##  ⬆ = "2.0.0-Beta3"

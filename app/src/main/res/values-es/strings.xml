@@ -500,4 +500,5 @@
     <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
     <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
     <string name="telemetry_dialog_text_2">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>. \u0020</string>
+    <string name="something_went_wrong">Algo salió mal. Por favor, vuelva a intentarlo.</string>
 </resources>

@@ -15,7 +15,7 @@
     <string name="download_started">ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ</string>
     <string name="close">ਬੰਦ ਕਰੋ</string>
     <string name="use_clear_urls">ClearURLs ਵਰਤੋ</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet ਨੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ ਜੋ ਇੱਕ ਅਸਲ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ।</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet ਨੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ ਜੋ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ।</string>
     <string name="disclaimer_bottom_sheet_many_buttons">ਵਰਤਮਾਨ ਵਿੱਚ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਬਹੁਤ ਸਾਰੇ ਬਟਨਾਂ ਨੂੰ ਇਨੇਬਲ ਕਰਨ ਨਾਲ ਕੱਟੇ ਹੋਏ/ਗਲਿੱਚ ਕਰਦੇ ਬਟਨ ਵਿਖ ਸਕਦੇ ਹਨ।</string>
     <string name="opening_with_app">%s ਨਾਲ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ</string>
     <string name="enable_shizuku_explainer">ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰਨ ਲਈ Shizuku ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦੇਵੇਗੀ। ਇਸਦੀ ਵਰਤੋਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ, ਉਦਾਹਰਨ ਲਈ, ਸਾਰੇ ਲਿੰਕਹੈਂਡਲਰਾਂ ਨੂੰ ਆਪਣੇ ਆਪ ਅਯੋਗ ਕਰਨ ਲਈ। ਇੱਕ ਨਵਾਂ ਵਿਕਲਪ ਮੁੱਖ ਐਪ ਸਕ੍ਰੀਨ \'ਤੇ ਦਿਖਾਈ ਦੇਵੇਗਾ।</string>
@@ -49,14 +49,14 @@
     <string name="enable_shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ (ਪ੍ਰਯੋਗਾਤਮਕ) ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
-    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
+    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="selected_browser_explainer">ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਕਲਿੱਕ ਕੀਤੇ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਸੰਭਾਲ ਸਕਦਾ</string>
     <string name="title_activity_cross_profile_request_handler">ਕਰੌਸ ਪ੍ਰੋਫਾਈਲ ਰਿਕਵੈਸਟ ਹੈਂਡਲਰ ਐਕਟੀਵਿਟੀ</string>
     <string name="misc_settings">ਫੁਟਕਲ</string>
     <string name="enable_send_button_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ ਜੋ ਤੁਹਾਨੂੰ URL ਨੂੰ ਹੋਰ ਐਪਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ ਜਿਵੇਂ ਕਿ ਤੁਸੀਂ ਇਸਨੂੰ \"ਨਾਲ ਸਾਂਝਾ ਕਰੋ\" ਮੀਨੂ ਤੋਂ ਚੁਣਿਆ ਹੈ</string>
-    <string name="log_privacy">ਲੌਗ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">ਲਿੰਕ</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ। \u0020</string>
+    <string name="log_privacy">ਲੌਗ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ਲਿੰਕ</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ। \u0020</string>
     <string name="get_started">ਸ਼ੁਰੂਆਤ ਕਰੋ</string>
     <string name="send_to">ਨਾਲ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="enable_ignore_libredirect_button">\"LibRedirect ਨੂੰ ਅਣਡਿੱਠ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
@@ -74,7 +74,7 @@
     <string name="onboarding0_highlight">ਚੋਣ ਦੀ ਆਜ਼ਾਦੀ</string>
     <string name="redirect_resolve_type_local_cache">ਸਥਾਨਕ ਕੈਸ਼</string>
     <string name="use_unified_preferred_browser_explainer">ਇਸਨੂੰ ਇਨੇਬਲ ਕਰਨਾ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਦੋਵਾਂ \'ਤੇ ਲਾਗੂ ਕਰਦਾ ਹੈ। ਡਿਸੇਬਲ ਹੋਣ \'ਤੇ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਮੋਡ ਵਿਚਕਾਰ ਸਵਿਚ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।</string>
-    <string name="advanced_explainer">ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਜਿਵੇਂ ਵਿਸ਼ੇਸ਼ਤਾ ਫਲੈਗ ਅਤੇ ਨਿਰਯਾਤ/ਆਯਾਤ</string>
+    <string name="advanced_explainer">ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਜਿਵੇਂ ਪ੍ਰਯੋਗਾਤਮਕ ਅਤੇ ਨਿਰਯਾਤ/ਆਯਾਤ</string>
     <string name="background_image">ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ</string>
     <string name="amp2html_local_cache_explainer">ਵੈੱਬਪੰਨਿਆਂ ਦੇ ਮੁੜ ਪ੍ਰਾਪਤ ਕੀਤੇ ਗੈਰ-AMP ਸੰਸਕਰਣਾਂ ਨੂੰ ਸਥਾਨਕ ਤੌਰ \'ਤੇ ਕੈਸ਼ ਕਰੋ</string>
     <string name="no">ਨਹੀਂ</string>
@@ -249,7 +249,7 @@
     <string name="enable_ignore_libredirect_button_explainer">ਜੇਕਰ URL ਨੂੰ LibRedirect ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟ ਕੀਤਾ ਗਿਆ ਹੈ, ਤਾਂ ਹੇਠਲੇ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ, ਜੋ ਇਸਦੀ ਬਜਾਏ ਅਸਲੀ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ</string>
     <string name="mastodon_redirect_subtitle_2">ਮੈਸਟਾਡੋਨ ਰੀਡਾਇਰੈਕਟ ਦੇ ਸਰੋਤ ਕੋਡ ਨੂੰ ਸ਼ਿਜ਼ੂਕੁ ਇੰਟਰੈਕਸ਼ਨ ਲਈ ਇੱਕ ਸੰਦਰਭ ਵਜੋਂ ਵਰਤਿਆ ਗਿਆ ਸੀ</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ਨੇ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ। ਹੋ ਸਕਦਾ ਲਿੰਕਸ਼ੀਟ ਦੀ ਸੂਚੀ ਪੂਰੀ ਨਾਂ ਹੋਵੇ। ਜੇ ਤੁਸੀਂ ਸੋਚਦੇ ਹੋ ਕਿ ਇਹ ਇੱਕ ਗਲਤੀ ਹੈ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਇੱਕ ਮੁੱਦਾ ਦਰਜ ਕਰੋ।</string>
-    <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
+    <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
     <string name="none_explainer">ਸਿਰਫ਼ ਮੂਲ ਐਪਾਂ ਦੀ ਸੂਚੀ ਬਣਾਓ, ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਹਟਾਓ। ਜੇਕਰ ਸਿਰਫ਼ ਇੱਕ ਹੀ ਮੂਲ ਐਪ ਮੌਜੂਦ ਹੈ, ਤਾਂ ਇਹ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ। ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਸੂਚੀਬੱਧ ਹਨ।</string>
     <string name="donate_crypto">ਕ੍ਰਿਪਟੋ ਦੁਆਰਾ ਦਾਨ ਕਰੋ</string>
     <string name="seal">ਸੀਲ</string>
@@ -272,7 +272,7 @@
     <string name="no_logs_found">ਕੋਈ ਪਿਛਲੇ ਲੌਗ ਨਹੀਂ ਮਿਲੇ!</string>
     <string name="disable_link_handling">ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਨੂੰ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="downloader_url_mime_type">URL ਤੋਂ ਮਾਈਮ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="enable_libredirect_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਗੋਪਨੀਯਤਾ ਅਨੁਕੂਲ ਫਰੰਟਐਂਡਸ ਲਈ ਲਿੰਕ ਰੀਡਾਇਰੈਕਟ ਕਰੋ \u0020</string>
+    <string name="enable_libredirect_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਗੋਪਨੀਯਤਾ ਅਨੁਕੂਲ ਫਰੰਟਐਂਡਸ ਲਈ ਲਿੰਕ ਰੀਡਾਇਰੈਕਟ ਕਰੋ</string>
     <string name="app_name">ਲਿੰਕਸ਼ੀਟ</string>
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
@@ -301,7 +301,7 @@
     <string name="donate_explainer_crypto">ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਸਮੇਂ, <b>LinkSheet Pro</b> ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ, ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਭੇਜੋ \u0020</string>
     <string name="join">ਜੁੜੋ</string>
     <string name="discord">ਡਿਸਕੌਰਡ</string>
-    <string name="discord_explainer">ਸਾਡੇ ਡਿਸਕੌਰਡ ਸਰਵਰ \'ਤੇ ਗੱਲਬਾਤ ਕਰੋ! LinkSheet ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਅਤੇ devs ਨਾਲ ਇਸਦੇ ਭਵਿੱਖ ਅਤੇ ਹੋਰ ਯਤਨਾਂ ਬਾਰੇ ਗੱਲਬਾਤ ਕਰੋ!</string>
+    <string name="discord_explainer">ਸਾਡੇ ਡਿਸਕੌਰਡ ਸਰਵਰ \'ਤੇ ਗੱਲਬਾਤ ਕਰੋ!</string>
     <string name="donate_card">ਕਾਰਡ ਨਾਲ ਦਾਨ ਕਰੋ (BuyMeACoffee ਰਾਹੀਂ)</string>
     <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।
 \n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ। \u0020</string>

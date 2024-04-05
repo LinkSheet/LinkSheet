@@ -59,7 +59,15 @@ class AppsWhichCanOpenLinksViewModel(
     }
 
     fun refresh() {
+//        if (refreshing.value) {
+//            refreshing.value = false
+//        }
+
         refreshing.value = true
+    }
+
+    fun stopRefresh() {
+        refreshing.value = false
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

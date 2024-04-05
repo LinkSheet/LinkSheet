@@ -45,10 +45,9 @@ class ShizukuService : IShizukuService.Stub {
                         "pm", "set-app-links-allowed",
                         "--user",
                         getUserId(),
-                        "--package", packageName,
+                        "--package", packageName, "true",
                     ) { line -> Log.d("ShizukuService", line) }
                 }
-
 
                 val setAppLinkStateResult = launchProcess(
                     "pm", "set-app-links",
@@ -56,6 +55,12 @@ class ShizukuService : IShizukuService.Stub {
                     state.toString(),
                     domains
                 ) { line -> Log.d("ShizukuService", line) }
+
+                if (state == DomainVerificationState.STATE_NO_RESPONSE.state) {
+                    val verifyAppLinksResult = launchProcess(
+                        "pm", "verify-app-links", "--re-verify", packageName
+                    ) { line -> Log.d("ShizukuService", line) }
+                }
 
                 // TODO: Properly return
                 return 0

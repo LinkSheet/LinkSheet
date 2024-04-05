@@ -11,15 +11,16 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
@@ -39,13 +40,15 @@ import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.ui.LocalActivity
+import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 
 private const val allPackages = "all"
 
 @OptIn(
-    ExperimentalFoundationApi::class, ExperimentalMaterialApi::class
+    ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class
 )
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
@@ -53,7 +56,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: AppsWhichCanOpenLinksViewModel = koinViewModel(),
 ) {
-    val activity = LocalContext.currentActivity()
+    val activity = LocalActivity.current
 
     val apps by viewModel.appsFiltered.collectOnIO()
     val filter by viewModel.searchFilter.collectOnIO()
@@ -70,24 +73,36 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val shizukuPermission by rememberHasShizukuPermissionAsState()
 
     val shizukuMode = shizukuInstalled && shizukuRunning && shizukuPermission
+    val state = rememberPullToRefreshState()
 
+    // TODO: Fix refresh state
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange(invokeOnCall = true) {
+//        state.startRefresh()
         viewModel.refresh()
     }
 
-    val state = rememberPullRefreshState(refreshing, onRefresh = viewModel::refresh)
+    LaunchedEffect(refreshing) {
+        if (refreshing) {
+            state.startRefresh()
+            delay(1000)
+            viewModel.stopRefresh()
+            state.endRefresh()
+        }
+    }
 
     fun postCommand(packageName: String) {
         viewModel.postShizukuCommand {
-            val newState = if(linkHandlingAllowed) DomainVerificationState.STATE_DENIED else DomainVerificationState.STATE_NO_RESPONSE
+            val newState =
+                if (linkHandlingAllowed) DomainVerificationState.STATE_DENIED else DomainVerificationState.STATE_NO_RESPONSE
             setDomainState(packageName, "all", newState.state)
             if (packageName == allPackages) {
-                val compatNewState = if(linkHandlingAllowed) DomainVerificationState.STATE_APPROVED else DomainVerificationState.STATE_NO_RESPONSE
+                val compatNewState =
+                    if (linkHandlingAllowed) DomainVerificationState.STATE_APPROVED else DomainVerificationState.STATE_NO_RESPONSE
                 setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", compatNewState.state)
             }
-        }
 
-        viewModel.refresh()
+            viewModel.refresh()
+        }
     }
 
     fun openDefaultSettings(info: DisplayActivityInfo) {
@@ -97,16 +112,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val context = LocalContext.current
 
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .pullRefresh(state)
-        ) {
-            PullRefreshIndicator(
-                refreshing = refreshing,
-                state = state,
-                modifier = Modifier.align(Alignment.TopCenter)
-            )
+        Box(modifier = Modifier.fillMaxSize().nestedScroll(state.nestedScrollConnection)) {
+            PullToRefreshContainer(state = state, modifier = Modifier.align(Alignment.TopCenter))
 
             LazyColumn(
                 modifier = Modifier

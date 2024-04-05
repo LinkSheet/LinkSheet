@@ -14,7 +14,9 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,13 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
+import dev.zwander.shared.shizuku.DomainVerificationState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
-import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
@@ -76,9 +79,11 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
     fun postCommand(packageName: String) {
         viewModel.postShizukuCommand {
-            disableLinkHandling(packageName, !linkHandlingAllowed)
+            val newState = if(linkHandlingAllowed) DomainVerificationState.STATE_DENIED else DomainVerificationState.STATE_NO_RESPONSE
+            setDomainState(packageName, "all", newState.state)
             if (packageName == allPackages) {
-                disableLinkHandling(PretendToBeAppSettingsViewModel.linksheetCompatPackage, true)
+                val compatNewState = if(linkHandlingAllowed) DomainVerificationState.STATE_APPROVED else DomainVerificationState.STATE_NO_RESPONSE
+                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", compatNewState.state)
             }
         }
 

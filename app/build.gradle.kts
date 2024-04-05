@@ -306,15 +306,14 @@ dependencies {
 
     debugImplementation(Square.leakCanary.android)
 
-    androidTestImplementation(platform(AndroidX.compose.bom))
-    androidTestImplementation(Testing.robolectric)
-    androidTestImplementation(Testing.mockito.core)
-    androidTestImplementation(AndroidX.test.core)
-    androidTestImplementation(AndroidX.test.coreKtx)
-    androidTestImplementation(AndroidX.test.espresso.core)
-    androidTestImplementation(AndroidX.test.ext.truth)
-    androidTestImplementation(AndroidX.test.runner)
+    testImplementation(Testing.robolectric)
+    testImplementation(Testing.mockito.core)
+    testImplementation(AndroidX.test.core)
+    testImplementation(AndroidX.test.coreKtx)
+    testImplementation(AndroidX.test.ext.truth)
+    testImplementation(AndroidX.test.runner)
     androidTestUtil(AndroidX.test.orchestrator)
+    androidTestImplementation(platform(AndroidX.compose.bom))
 
     debugImplementation(AndroidX.compose.ui.tooling)
     debugImplementation(AndroidX.compose.ui.testManifest)

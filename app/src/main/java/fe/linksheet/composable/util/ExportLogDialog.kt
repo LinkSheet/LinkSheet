@@ -28,6 +28,7 @@ fun ExportLogDialog(
     logViewCommon: LogViewCommon,
     clipboardManager: ClipboardManager,
     logEntries: List<LogEntry>,
+    includeThrowable: Boolean = false,
     close: OnClose<Unit>,
 ) {
     val context = LocalContext.current
@@ -35,7 +36,7 @@ fun ExportLogDialog(
     var redactLog by remember { mutableStateOf(true) }
     var includeFingerprint by remember { mutableStateOf(true) }
     var includePreferences by remember { mutableStateOf(true) }
-    var includeThrowable by remember { mutableStateOf(false) }
+    var includeThrowableState by remember { mutableStateOf(includeThrowable) }
 
     DialogColumn {
         HeadlineText(headlineId = R.string.export_log)
@@ -51,8 +52,8 @@ fun ExportLogDialog(
 
         if (logEntries.any { it is LogEntry.FatalEntry }) {
             CheckboxRow(
-                checked = includeThrowable,
-                onClick = { includeThrowable = !includeThrowable },
+                checked = includeThrowableState,
+                onClick = { includeThrowableState = !includeThrowableState },
                 textId = R.string.include_throwable
             )
 
@@ -89,7 +90,7 @@ fun ExportLogDialog(
         BottomRow {
             TextButton(
                 onClick = {
-                    val settings = LogViewCommon.ExportSettings(includeFingerprint, includePreferences, redactLog, includeThrowable)
+                    val settings = LogViewCommon.ExportSettings(includeFingerprint, includePreferences, redactLog, includeThrowableState)
                     clipboardManager.setText(
                         context.resources.getString(R.string.log),
                         logViewCommon.buildClipboardText(context, settings, logEntries)

@@ -62,6 +62,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                         logViewCommon = viewModel.logViewCommon,
                         clipboardManager = viewModel.clipboardManager,
                         close = close,
+                        includeThrowable = true,
                         logEntries = state!!
                     )
                 }
@@ -83,13 +84,8 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                         )
                     },
                     content = { padding ->
-                        Column(modifier = Modifier.fillMaxSize()) {
-                            LazyColumn(
-                                modifier = Modifier
-                                    .padding(padding)
-                                    .weight(1f),
-                                contentPadding = PaddingValues(5.dp)
-                            ) {
+                        Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+                            LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(5.dp)) {
                                 stickyHeader(key = "header") {
                                     Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
                                         PreferenceSubtitle(
@@ -103,7 +99,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                                 item("exception") {
                                     SelectionContainer {
                                         Text(
-                                            text = throwableString.replace("\n", ""),
+                                            text = throwableString,
                                             fontFamily = FontFamily.Monospace,
                                             fontSize = 12.sp,
                                         )

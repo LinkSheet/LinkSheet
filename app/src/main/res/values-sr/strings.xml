@@ -504,4 +504,11 @@
     <string name="telemetry_configure_title">Аналитика</string>
     <string name="telemetry_identifier_reset">Ресетуј идентификатор</string>
     <string name="telemetry_configure_type">Тип аналитике</string>
+    <string name="link_handle_failed">Дошло је до грешке</string>
+    <string name="try_share">Дели</string>
+    <string name="edit">Измени</string>
+    <string name="retry">Покушај поново</string>
+    <string name="resolve_activity_failure">Решавање активности није успело!</string>
+    <string name="link_handle_failed_text">LinkSheet не може да обради овај линк, јер се чини да је погрешно обликован. Можете га изменити испод, а затим покушати поново. Алтернативно, можете претраживати на вебу.</string>
+    <string name="link_handle_failed_text_field_label">Упит</string>
 </resources>

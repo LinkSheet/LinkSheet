@@ -496,4 +496,11 @@
     <string name="telemetry_identifier_reset">Tanımlayıcıyı sıfırla</string>
     <string name="telemetry_configure_type">Analiz tipi</string>
     <string name="something_went_wrong">Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin.</string>
+    <string name="link_handle_failed">Bir hata oluştu</string>
+    <string name="try_share">Paylaş</string>
+    <string name="link_handle_failed_text_field_label">Sorgu</string>
+    <string name="retry">Yeniden dene</string>
+    <string name="resolve_activity_failure">Aktivite çözümlenemedi!</string>
+    <string name="link_handle_failed_text">LinkSheet, bu bağlantı hatalı göründüğü için bu bağlantıyı işleyemiyor. Aşağıdan düzenleyip tekrar deneyebilirsiniz. Alternatif olarak web\'de arama yapabilirsiniz.</string>
+    <string name="edit">Düzenle</string>
 </resources>

@@ -7,7 +7,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -34,14 +33,12 @@ import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.LocalActivity
-import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -61,6 +58,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val apps by viewModel.appsFiltered.collectOnIO()
     val filter by viewModel.searchFilter.collectOnIO()
     val linkHandlingAllowed by viewModel.linkHandlingAllowed.collectOnIO()
+    val lastEmitted by viewModel.lastEmitted.collectOnIO()
 
     val listState = remember(apps?.size, filter, linkHandlingAllowed) {
         listState(apps, filter)
@@ -69,39 +67,30 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
     val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
-    val refreshing by viewModel.refreshing.collectAsState()
     val shizukuPermission by rememberHasShizukuPermissionAsState()
 
     val shizukuMode = shizukuInstalled && shizukuRunning && shizukuPermission
     val state = rememberPullToRefreshState()
 
-    // TODO: Fix refresh state
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange(invokeOnCall = true) {
-//        state.startRefresh()
-        viewModel.refresh()
+        viewModel.emitLatest()
     }
 
-    LaunchedEffect(refreshing) {
-        if (refreshing) {
-            state.startRefresh()
-            delay(1000)
-            viewModel.stopRefresh()
-            state.endRefresh()
-        }
-    }
+    LaunchedEffect(lastEmitted) { state.endRefresh() }
 
     fun postCommand(packageName: String) {
-        viewModel.postShizukuCommand {
+        state.startRefresh()
+        viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 1500) {
             val newState =
                 if (linkHandlingAllowed) DomainVerificationState.STATE_DENIED else DomainVerificationState.STATE_NO_RESPONSE
-            setDomainState(packageName, "all", newState.state)
+            val result = setDomainState(packageName, "all", newState.state)
             if (packageName == allPackages) {
                 val compatNewState =
                     if (linkHandlingAllowed) DomainVerificationState.STATE_APPROVED else DomainVerificationState.STATE_NO_RESPONSE
                 setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", compatNewState.state)
             }
 
-            viewModel.refresh()
+            result
         }
     }
 
@@ -112,7 +101,11 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     val context = LocalContext.current
 
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
-        Box(modifier = Modifier.fillMaxSize().nestedScroll(state.nestedScrollConnection)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .nestedScroll(state.nestedScrollConnection)
+        ) {
             PullToRefreshContainer(state = state, modifier = Modifier.align(Alignment.TopCenter))
 
             LazyColumn(

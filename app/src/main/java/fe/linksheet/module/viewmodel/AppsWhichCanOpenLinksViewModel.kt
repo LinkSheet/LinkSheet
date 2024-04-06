@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-
+import androidx.lifecycle.viewModelScope
+import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -18,8 +20,10 @@ import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.VerifiedDomainUtil.hasVerifiedDomains
 import fe.linksheet.util.flowOfLazy
 import fe.linksheet.util.getAppOpenByDefaultIntent
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 
 class AppsWhichCanOpenLinksViewModel(
     context: Context,
@@ -33,16 +37,13 @@ class AppsWhichCanOpenLinksViewModel(
         } else null
     }
 
-    val refreshing = MutableStateFlow(false)
+    val lastEmitted = MutableStateFlow(0L)
     val linkHandlingAllowed = MutableStateFlow(true)
     val searchFilter = MutableStateFlow("")
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }
-        .combine(refreshing) { apps, _ ->
-            refreshing.value = false
-            apps
-        }
+        .combine(lastEmitted) { apps, _ -> apps }
         .combine(linkHandlingAllowed) { apps, _ ->
             apps.filter {
                 it.resolvedInfo.hasVerifiedDomains(
@@ -58,16 +59,9 @@ class AppsWhichCanOpenLinksViewModel(
             .sortedWith(DisplayActivityInfo.labelComparator)
     }
 
-    fun refresh() {
-//        if (refreshing.value) {
-//            refreshing.value = false
-//        }
-
-        refreshing.value = true
-    }
-
-    fun stopRefresh() {
-        refreshing.value = false
+    fun emitLatest() {
+        lastEmitted.value = System.currentTimeMillis()
+        Log.d("ViewModel", "emitLatest=${lastEmitted.value}")
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -75,7 +69,13 @@ class AppsWhichCanOpenLinksViewModel(
         return getAppOpenByDefaultIntent(activityInfo.packageName)
     }
 
-    fun postShizukuCommand(command: ShizukuCommand) {
-        shizukuHandler.postShizukuCommand(command)
+    fun <T> postShizukuCommand(delay: Long, command: IShizukuService.() -> T) {
+        val cmd = ShizukuCommand(command) {
+            viewModelScope.launch {
+                delay(delay)
+                emitLatest()
+            }
+        }
+        shizukuHandler.enqueueCommand(cmd)
     }
 }

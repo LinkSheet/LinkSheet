@@ -18,10 +18,14 @@ val shizukuHandlerModule = module {
     singleOf(::ShizukuHandler)
 }
 
-typealias ShizukuCommand = IShizukuService.() -> Unit
+data class ShizukuCommand<T>(val command: IShizukuService.() -> T, val resultHandler: (T) -> Unit) {
+    fun run(userService: IShizukuService) {
+        resultHandler(command(userService))
+    }
+}
 
 class ShizukuHandler(val context: Context) : ServiceConnection, Shizuku.OnRequestPermissionResultListener {
-    private val queuedCommands: Queue<ShizukuCommand> = LinkedList()
+    private val queuedCommands: Queue<ShizukuCommand<*>> = LinkedList()
     private var userService: IShizukuService? = null
 
     private val serviceArgs = Shizuku.UserServiceArgs(ComponentName(context, ShizukuService::class.java))
@@ -38,9 +42,10 @@ class ShizukuHandler(val context: Context) : ServiceConnection, Shizuku.OnReques
         }
     }
 
-    fun postShizukuCommand(command: ShizukuCommand) {
-        if (userService != null) command(userService!!)
-        else queuedCommands.add(command)
+    fun <T> enqueueCommand(command: ShizukuCommand<T>) {
+        if (userService != null) {
+            command.run(userService!!)
+        } else queuedCommands.add(command)
     }
 
     override fun onRequestPermissionResult(requestCode: Int, grantResult: Int) {
@@ -53,7 +58,7 @@ class ShizukuHandler(val context: Context) : ServiceConnection, Shizuku.OnReques
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
         userService = IShizukuService.Stub.asInterface(service)
         while (queuedCommands.isNotEmpty() && userService != null) {
-            queuedCommands.poll()?.invoke(userService!!)
+            queuedCommands.poll()?.run(userService!!)
         }
     }
 

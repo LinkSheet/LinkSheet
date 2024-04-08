@@ -5,11 +5,11 @@ import android.content.Intent
 import android.content.IntentFilter.AuthorityEntry
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import fe.linksheet.module.resolver.UriViewActivity
-import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BitFlagUtil
 import org.koin.core.component.KoinComponent
 
@@ -37,11 +37,5 @@ object PackageQueryManager : KoinComponent {
         if (count == 1 && filter.getDataAuthority(0) == anyHost) return false
 
         return filter.hasDataAuthority(uri)
-    }
-
-    private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int): MutableList<ResolveInfo> {
-        return if (AndroidVersion.AT_LEAST_API_33_T) {
-            queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
-        } else queryIntentActivities(intent, flags)
     }
 }

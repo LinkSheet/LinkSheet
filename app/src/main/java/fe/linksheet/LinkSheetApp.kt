@@ -12,6 +12,7 @@ import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.extension.koin.applicationLifecycle
 import fe.linksheet.lifecycle.ActivityLifecycleObserver
+import fe.linksheet.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.AppStart
@@ -20,7 +21,6 @@ import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.lifecycle.AppLifecycleObserver
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer

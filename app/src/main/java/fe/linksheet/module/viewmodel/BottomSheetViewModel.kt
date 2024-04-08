@@ -7,6 +7,7 @@ import android.app.DownloadManager
 import android.content.ActivityNotFoundException
 import android.content.ClipboardManager
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.Uri
@@ -248,26 +249,23 @@ class BottomSheetViewModel(
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ): Intent {
-        val launchIntent = Intent(intent)
-            .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT or Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
-
-//        if (newQueryManager()) {
-//            launchIntent.`package` = info.packageName
-//        } else {
-        launchIntent.addCategory(Intent.CATEGORY_BROWSABLE).addCategory(Intent.CATEGORY_DEFAULT)
-        launchIntent.component = info.componentName
-//        }
-
-        val newIntent = launchIntent.let {
+        val viewIntent = Intent(Intent.ACTION_VIEW, intent.data).addCategory(Intent.CATEGORY_BROWSABLE).let {
             privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
         }
 
         // Check for intent.data != null to make sure we don't attempt to persist web search intents
         if (!info.fallback && persist && privateBrowsingBrowser == null && intent.data != null) {
-            persistSelectedIntent(newIntent, always)
+            persistSelectedIntent(viewIntent, always)
         }
 
-        return newIntent
+        val componentEnabled = context.packageManager.getComponentEnabledSetting(info.componentName)
+        if (componentEnabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+            return Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).apply {
+                selector = viewIntent.addCategory(Intent.CATEGORY_BROWSABLE).setPackage(info.packageName)
+            }
+        }
+
+        return viewIntent.setComponent(info.componentName)
     }
 
     private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {

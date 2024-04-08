@@ -26,7 +26,7 @@
     <string name="set_as_browser_explainer">Tocca qui per impostare questa app come browser predefinito</string>
     <string name="apps_which_can_open_links_explainer">Tocca un\'app per aprire il menu \"Apri per impostazione predefinita\" che ti consente di disabilitare l\'apertura automatica del link</string>
     <string name="apps_which_can_open_links_explainer_2">Elenca tutte le app che potrebbero interferire con il comportamento di LinkSheet</string>
-    <string name="copy_url">Copia URL</string>
+    <string name="copy_url">Copia link</string>
     <string name="no_preferred_apps_set_yet">Nessuna app è stata ancora impostata come preferita.</string>
     <string name="single_tap_explainer">Richiede solo un tocco invece di due per aprire le app; premi a lungo per selezionare l\'app, fai doppio clic per aprire le informazioni sull\'app</string>
     <string name="confirm">Conferma</string>
@@ -88,7 +88,7 @@
     <string name="preview_url">Anteprima URL</string>
     <string name="preview_url_explainer">Mostra l\'URL cliccato (dopo che è stato elaborato)</string>
     <string name="download">Download</string>
-    <string name="display_grid_layout">Visualizza layout a griglia</string>
+    <string name="display_grid_layout">Layout a griglia</string>
     <string name="preferred_apps_explainer">Le app preferite sono le app impostate su \"Sempre\" per aprire determinati host</string>
     <string name="whitelisted_explainer">Mostra solo i browser autorizzati</string>
     <string name="whitelisted_browsers">Browser autorizzati</string>
@@ -173,4 +173,19 @@
     <string name="instance_not_available_anymore">L\'istanza non è più disponibile!</string>
     <string name="disable_in_selected_explainer">Disabilita il browser in-app nelle app selezionate, indipendentemente da ciò che l\'app desidera utilizzare</string>
     <string name="disable_in_selected">Disabilita per selezionati</string>
+    <plurals name="hours">
+        <item quantity="one">%s ora</item>
+        <item quantity="many">%s ore</item>
+        <item quantity="other">%s ore</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">%s mese</item>
+        <item quantity="many">%s mesi</item>
+        <item quantity="other">%s mesi</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">%s minuto</item>
+        <item quantity="many">%s minuti</item>
+        <item quantity="other">%s minuti</item>
+    </plurals>
 </resources>

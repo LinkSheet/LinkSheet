@@ -95,7 +95,7 @@
     <string name="fastfoward_rules">FastForward kurallarını kullan</string>
     <string name="theme_explainer">Uygulamanın temasını değiştirin</string>
     <string name="system">Sistemi takip et</string>
-    <string name="fastfoward_rules_explainer">Deneysel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward \u0020</annotation> kural entegrasyonunu kullanın (bağlantıdan yönlendirmeyi çıkararak bazı ana bilgisayarların yönlendirmelerini atlatın) \u0020</string>
+    <string name="fastfoward_rules_explainer">Deneysel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> kural entegrasyonunu kullanın (bağlantıdan yönlendirmeyi çıkararak bazı ana bilgisayarların yönlendirmelerini atlatın)</string>
     <string name="follow_redirects_local_cache">Yerel yönlendirme önbelleğini etkinleştir</string>
     <string name="follow_redirects_local_cache_explainer">Yönlendirmelerin sonucunu yerel olarak önbelleğe al</string>
     <string name="resolved_via">%s %s aracılığıyla çözüldü</string>

@@ -15,8 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontFamily
@@ -258,6 +260,8 @@ fun LinkableTextView(
     parentClickListener: ((Boolean) -> Unit)? = null,
 ) {
     val uriHandler = LocalUriHandler.current
+    val hapticFeedback = LocalHapticFeedback.current
+
     val textColor = style.color.takeOrElse { LocalContentColor.current }
 
     ClickableText(
@@ -266,6 +270,7 @@ fun LinkableTextView(
         onClick = { offset ->
             if (enabled) {
                 annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let {
+                    hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                     uriHandler.openUri(it.item.url)
                 } ?: run {
                     if (parentChecked != null && parentClickListener != null) {

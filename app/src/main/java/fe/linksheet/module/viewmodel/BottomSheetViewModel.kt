@@ -249,14 +249,8 @@ class BottomSheetViewModel(
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ): Intent {
-        val viewIntent = Intent(Intent.ACTION_VIEW, intent.data).addCategory(Intent.CATEGORY_BROWSABLE).let {
-            privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it
-        }
-
-        // Check for intent.data != null to make sure we don't attempt to persist web search intents
-        if (!info.fallback && persist && privateBrowsingBrowser == null && intent.data != null) {
-            persistSelectedIntent(viewIntent, always)
-        }
+        val viewIntent = Intent(Intent.ACTION_VIEW, intent.data)
+            .addCategory(Intent.CATEGORY_BROWSABLE).let { privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it }
 
         val componentEnabled = context.packageManager.getComponentEnabledSetting(info.componentName)
         if (componentEnabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
@@ -265,7 +259,14 @@ class BottomSheetViewModel(
             }
         }
 
-        return viewIntent.setComponent(info.componentName)
+        viewIntent.component = info.componentName
+
+        // Check for intent.data != null to make sure we don't attempt to persist web search intents
+        if (!info.fallback && persist && privateBrowsingBrowser == null && intent.data != null) {
+            persistSelectedIntent(viewIntent, always)
+        }
+
+        return viewIntent
     }
 
     private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {

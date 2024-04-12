@@ -212,7 +212,7 @@
     <string name="preferred_browser">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
-    <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace). \u0020</string>
+    <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward</annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace).</string>
     <string name="donation_instructions">Instrucciones de donación</string>
     <string name="disable_all_toasts_explainer">No mostrar nunca notificaciones emergentes</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
@@ -505,4 +505,7 @@
     <string name="try_share">Compartir</string>
     <string name="edit">Editar</string>
     <string name="retry">Volver a intentarlo</string>
+    <string name="link_handle_failed_text">LinkSheet no puede manejar este enlace ya que parece estar malformado. Puede editarlo a continuación e intentarlo de nuevo. Alternativamente, puede buscar en la web.</string>
+    <string name="link_handle_failed_text_field_label">Consulta</string>
+    <string name="resolve_activity_failure">¡No se pudo resolver la actividad!</string>
 </resources>

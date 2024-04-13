@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
-import dev.zwander.shared.shizuku.DomainVerificationState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
@@ -80,14 +79,11 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
     fun postCommand(packageName: String) {
         state.startRefresh()
-        viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 1500) {
-            val newState =
-                if (linkHandlingAllowed) DomainVerificationState.STATE_DENIED else DomainVerificationState.STATE_NO_RESPONSE
-            val result = setDomainState(packageName, "all", newState.state)
+        viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
+            val newState =  !linkHandlingAllowed
+            val result = setDomainState(packageName, "all", newState)
             if (packageName == allPackages) {
-                val compatNewState =
-                    if (linkHandlingAllowed) DomainVerificationState.STATE_APPROVED else DomainVerificationState.STATE_NO_RESPONSE
-                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", compatNewState.state)
+                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", newState)
             }
 
             result

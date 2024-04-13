@@ -61,7 +61,6 @@ class AppsWhichCanOpenLinksViewModel(
 
     fun emitLatest() {
         lastEmitted.value = System.currentTimeMillis()
-        Log.d("ViewModel", "emitLatest=${lastEmitted.value}")
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

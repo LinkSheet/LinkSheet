@@ -10,24 +10,24 @@ object VerifiedDomainUtil {
     @RequiresApi(Build.VERSION_CODES.S)
     fun ResolveInfo.hasVerifiedDomains(manager: DomainVerificationManager, linkHandlingAllowed: Boolean): Boolean {
         val packageName = activityInfo.packageName
-        val state = manager.getDomainVerificationUserState(packageName) ?: return false
-        if (state.hostToStateMap.isEmpty()) return false
-
-        return if (linkHandlingAllowed) {
-            state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
-        } else {
-            state.hostToStateMap.all { it.value != DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
-        }
-
-
-//        return manager.getDomainVerificationUserState(packageName)?.let { state ->
-//            val linkHandling = if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
-//            val hasAnyVerifiedOrSelected = state.hostToStateMap.any {
-//                it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED
-//            }
+//        val state = manager.getDomainVerificationUserState(packageName) ?: return false
+//        if (state.hostToStateMap.isEmpty()) return false
 //
-//            linkHandling && hasAnyVerifiedOrSelected
-//        } ?: false
+//        return if (linkHandlingAllowed) {
+//            state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
+//        } else {
+//            state.hostToStateMap.all { it.value != DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
+//        }
+
+
+        return manager.getDomainVerificationUserState(packageName)?.let { state ->
+            val linkHandling = if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
+            val hasAnyVerifiedOrSelected = state.hostToStateMap.any {
+                it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED
+            }
+
+            linkHandling && hasAnyVerifiedOrSelected
+        } ?: false
     }
 
 

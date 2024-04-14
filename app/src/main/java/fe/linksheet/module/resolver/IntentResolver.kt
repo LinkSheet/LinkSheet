@@ -18,6 +18,7 @@ import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -266,17 +267,17 @@ class IntentResolver(
 
         uri = modifyUri(uri, resolveEmbeds(), useClearUrls(), useFastForwardRules())
 
-        var libRedirectResult: LibRedirectResolver.LibRedirectResult? = null
+        var libRedirectResult: LibRedirectResult? = null
         if (enableLibRedirect() && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton())) {
             libRedirectResult = libRedirectResolver.resolve(uri)
-            if (libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected) {
+            if (libRedirectResult is LibRedirectResult.Redirected) {
                 uri = libRedirectResult.redirectedUri
             }
         }
 
         val downloadable = if (enableDownloader() && uri != null) {
             checkIsDownloadable(uri, requestTimeout())
-        } else Downloader.DownloadCheckResult.NonDownloadable
+        } else DownloadCheckResult.NonDownloadable
 
         val preferredApp = preferredAppRepository.getByHost(uri)
         val preferredDisplayActivityInfo = preferredApp?.toPreferredDisplayActivityInfo(context)
@@ -393,7 +394,7 @@ class IntentResolver(
         )
     }
 
-    private fun checkIsDownloadable(uri: Uri, timeout: Int): Downloader.DownloadCheckResult {
+    private fun checkIsDownloadable(uri: Uri, timeout: Int): DownloadCheckResult {
         if (downloaderCheckUrlMimeType()) {
             downloader.checkIsNonHtmlFileEnding(uri.toString()).let {
                 logger.debug("File ending check result=$it")

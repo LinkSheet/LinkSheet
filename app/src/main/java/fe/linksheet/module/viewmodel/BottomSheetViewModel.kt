@@ -20,16 +20,17 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
 import fe.linksheet.R
-import fe.linksheet.activity.main.MainActivity
 import fe.linksheet.activity.bottomsheet.TapConfig
-import fe.linksheet.activity.bottomsheet.column.*
+import fe.linksheet.activity.bottomsheet.column.ClickModifier
+import fe.linksheet.activity.bottomsheet.column.ClickType
+import fe.linksheet.activity.main.MainActivity
 import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -207,11 +208,7 @@ class BottomSheetViewModel(
         appSelectionHistoryRepository.insert(historyEntry)
     }
 
-    fun startDownload(
-        resources: Resources,
-        uri: Uri?,
-        downloadable: Downloader.DownloadCheckResult.Downloadable,
-    ) {
+    fun startDownload(resources: Resources, uri: Uri?, downloadable: DownloadCheckResult.Downloadable) {
         val path =
             "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
 

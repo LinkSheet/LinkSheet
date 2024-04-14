@@ -23,45 +23,40 @@ val downloaderModule = module {
     }
 }
 
+sealed class DownloadCheckResult : Redactable<DownloadCheckResult> {
+    class Downloadable(private val fileName: String, private val extension: String?) : DownloadCheckResult() {
+        fun toFileName() = "$fileName.$extension"
+
+        override fun process(builder: StringBuilder, redactor: Redactor) = builder.curlyWrapped {
+            commaSeparated {
+                item { append("type=downloadable") }
+//                        item { redactor.process(builder, fileName, FileNameProcessor, "name=") }
+//                        item { redactor.process(builder, extension, FileExtensionProcessor, "ext=") }
+            }
+        }
+    }
+
+    data object NonDownloadable : DownloadCheckResult() {
+        override fun process(builder: StringBuilder, redactor: Redactor) = builder.curlyWrapped {
+            append("type=non_downloadable")
+        }
+    }
+
+    data object MimeTypeDetectionFailed : DownloadCheckResult() {
+        override fun process(builder: StringBuilder, redactor: Redactor) = builder.curlyWrapped {
+            append("type=failed")
+        }
+    }
+
+    fun isDownloadable() = this is Downloadable
+}
+
+
 class Downloader(private val cachedRequest: CachedRequest, private val logger: Logger) {
 
     companion object {
         private val mimeTypeToExtension = MimeTypes.mimeTypeToExtensions
         private val extensionToMimeType = MimeTypes.extensionToMimeType
-    }
-
-    sealed class DownloadCheckResult : Redactable<DownloadCheckResult> {
-        class Downloadable(private val fileName: String, private val extension: String?) : DownloadCheckResult() {
-            fun toFileName() = "$fileName.$extension"
-
-            override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
-                return builder.curlyWrapped {
-                    commaSeparated {
-                        item { append("type=downloadable") }
-//                        item { redactor.process(builder, fileName, FileNameProcessor, "name=") }
-//                        item { redactor.process(builder, extension, FileExtensionProcessor, "ext=") }
-                    }
-                }
-            }
-        }
-
-        data object NonDownloadable : DownloadCheckResult() {
-            override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
-                return builder.curlyWrapped {
-                    append("type=non_downloadable")
-                }
-            }
-        }
-
-        data object MimeTypeDetectionFailed : DownloadCheckResult() {
-            override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
-                return builder.curlyWrapped {
-                    append("type=failed")
-                }
-            }
-        }
-
-        fun isDownloadable() = this is Downloadable
     }
 
     fun checkIsNonHtmlFileEnding(url: String): DownloadCheckResult {

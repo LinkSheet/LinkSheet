@@ -2,8 +2,8 @@ package fe.linksheet.resolver
 
 import android.content.Intent
 import android.net.Uri
-import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.resolver.LibRedirectResolver
+import fe.linksheet.module.downloader.DownloadCheckResult
+import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import me.saket.unfurl.UnfurlResult
 
@@ -25,8 +25,8 @@ sealed class BottomSheetResult(val uri: Uri?) {
         alwaysPreferred: Boolean?,
         hasSingleMatchingOption: Boolean = false,
         val resolveModuleStatus: ResolveModuleStatus,
-        val libRedirectResult: LibRedirectResolver.LibRedirectResult? = null,
-        val downloadable: Downloader.DownloadCheckResult = Downloader.DownloadCheckResult.NonDownloadable,
+        val libRedirectResult: LibRedirectResult? = null,
+        val downloadable: DownloadCheckResult = DownloadCheckResult.NonDownloadable,
     ) : SuccessResult(uri, intent, resolved) {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
 

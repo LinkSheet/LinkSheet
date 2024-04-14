@@ -667,4 +667,9 @@
     <string name="retry">Try again</string>
     <string name="something_went_wrong">Something went wrong, please try again.</string>
     <string name="resolve_activity_failure">Failed to resolve activity!</string>
+    <string name="reset_app_link_verification_status">Reset app link verification status</string>
+    <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all apps, then way a few
+        minutes while Android re-verifies them. You will not receive a confirmation. Requires Shizuku.
+    </string>
+    <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
 </resources>

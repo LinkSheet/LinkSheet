@@ -34,6 +34,26 @@ class ShizukuService : IShizukuService.Stub {
         return -1
     }
 
+    override fun reset(packageName: String) {
+        val setAppLinkAllowedResult = launchProcess(
+            "pm", "set-app-links-allowed",
+            "--user",
+            getUserId(),
+            "--package", packageName, "true",
+        ) { line -> Log.d("ShizukuService", line) }
+
+        val setAppLinkStateResult = launchProcess(
+            "pm", "set-app-links",
+            "--package", packageName,
+            "0",
+            "all"
+        ) { line -> Log.d("ShizukuService", line) }
+
+        val verifyAppLinksResult = launchProcess(
+            "pm", "verify-app-links", "--re-verify", packageName
+        ) { line -> Log.d("ShizukuService", line) }
+    }
+
     private fun getUserId(): String {
         return UserHandle::class.java.getMethod("myUserId").invoke(null)!!.toString()
     }

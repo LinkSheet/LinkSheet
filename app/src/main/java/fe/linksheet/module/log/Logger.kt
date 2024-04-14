@@ -56,6 +56,11 @@ class Logger(private val delegate: LoggerDelegate) {
         delegate.log(LoggerDelegate.Level.Info, param, msg, null)
     }
 
+    fun <T : Any> info(`return`: T?, param: LoggerDelegate.RedactedParameter, msg: ProduceMessage): T? {
+        delegate.log(LoggerDelegate.Level.Info, param, msg, null)
+        return `return`
+    }
+
     fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Info, param, processor, msg, null)
     }
@@ -122,7 +127,11 @@ class Logger(private val delegate: LoggerDelegate) {
         delegate.log(LoggerDelegate.Level.Error, throwable = throwable, subPrefix = subPrefix)
     }
 
-    inline fun <T, R, C : MutableCollection<in R>> mapNoException(iterable: Iterable<T>, destination: C, transform: (T) -> R): C {
+    inline fun <T, R, C : MutableCollection<in R>> mapNoException(
+        iterable: Iterable<T>,
+        destination: C,
+        transform: (T) -> R,
+    ): C {
         for (item in iterable) {
             try {
                 destination.add(transform(item))
@@ -132,6 +141,15 @@ class Logger(private val delegate: LoggerDelegate) {
         }
 
         return destination
+    }
+
+    inline operator fun <R> invoke(
+        `return`: R,
+        param: LoggerDelegate.RedactedParameter,
+        fn: (Logger, LoggerDelegate.RedactedParameter) -> Unit,
+    ): R {
+        fn(this, param)
+        return `return`
     }
 
     inline operator fun <R> invoke(`return`: R, fn: (Logger) -> Unit): R {

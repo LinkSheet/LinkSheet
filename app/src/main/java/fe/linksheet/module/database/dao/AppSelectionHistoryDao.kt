@@ -20,4 +20,7 @@ interface AppSelectionHistoryDao : BaseDao<AppSelectionHistory> {
 
     @Query("DELETE FROM app_selection_history WHERE packageName = :packageName")
     suspend fun deleteByPackageName(packageName: String)
+
+    @Query("DELETE FROM app_selection_history WHERE packageName IN (:packageNames)")
+    suspend fun deleteByPackageNames(packageNames: List<String>)
 }

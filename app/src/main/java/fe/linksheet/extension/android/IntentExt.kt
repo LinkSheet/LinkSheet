@@ -21,6 +21,16 @@ fun Intent.newIntent(action: String, uri: Uri?, dropExtras: Boolean = false): In
     return intent
 }
 
+fun Intent.newIntent(action: String, uri: Uri?, dropExtras: List<String>?): Intent {
+    val intent = newIntent(action, uri, dropExtras == null)
+    if (dropExtras != null) {
+        for (extra in dropExtras) intent.removeExtra(extra)
+    }
+
+    return intent
+}
+
+
 fun shareUri(uri: Uri?): Intent {
     return Intent.createChooser(Intent().apply {
         this.action = Intent.ACTION_SEND

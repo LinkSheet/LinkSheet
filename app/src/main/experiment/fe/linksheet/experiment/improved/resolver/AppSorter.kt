@@ -18,7 +18,7 @@ object AppSorter {
         context: Context,
         appList: BrowserHandler.FilteredBrowserList,
         lastChosen: PreferredApp?,
-        historyMap: Map<String, Long>?,
+        historyMap: Map<String, Long>,
         returnLastChosen: Boolean = true,
     ): Pair<List<DisplayActivityInfo>, DisplayActivityInfo?> {
         val infos = toDisplay(context, appList.apps, appList.browsers)

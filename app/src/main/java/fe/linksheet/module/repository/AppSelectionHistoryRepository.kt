@@ -3,6 +3,7 @@ package fe.linksheet.module.repository
 import android.net.Uri
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.entity.AppSelectionHistory
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
@@ -12,16 +13,13 @@ class AppSelectionHistoryRepository(private val dao: AppSelectionHistoryDao) {
     suspend fun insert(appSelectionHistories: List<AppSelectionHistory>) = dao.insert(appSelectionHistories)
 
     suspend fun getLastUsedForHostGroupedByPackage(uri: Uri?): Map<String, Long>? {
-        val host = uri?.host
-        if (host != null) {
-            val flow = dao.getLastUsedForHostGroupedByPackage(host)
-            val appSelections = flow.firstOrNull()
-            if (appSelections != null) {
-                return appSelections.associate { it.packageName to it.maxLastUsed }
-            }
-        }
+        val host = uri?.host ?: return null
+        val appSelections = dao.getLastUsedForHostGroupedByPackage(host).firstOrNull() ?: return null
 
+        return appSelections.associate { it.packageName to it.maxLastUsed }
+    }
 
-        return null
+    suspend fun delete(packageNames: List<String>) {
+        dao.deleteByPackageNames(packageNames)
     }
 }

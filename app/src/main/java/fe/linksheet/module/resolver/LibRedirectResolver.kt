@@ -11,6 +11,11 @@ import fe.linksheet.module.repository.LibRedirectStateRepository
 import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.component.KoinComponent
 
+sealed interface LibRedirectResult {
+    class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
+    data object NotRedirected : LibRedirectResult
+}
+
 class LibRedirectResolver(
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
@@ -27,7 +32,7 @@ class LibRedirectResolver(
         logger.debug("Using service: $service")
 
         if (service != null && stateRepository.isEnabled(service.key)) {
-            val savedDefault = defaultRepository.getByServiceKeyFlow(service.key).firstOrNull()
+            val savedDefault = defaultRepository.getByServiceKey(service.key).firstOrNull()
             val (frontendKey, instanceUrl) = if (savedDefault != null) {
                 savedDefault.frontendKey to getInstanceUrl(savedDefault)
             } else {
@@ -37,7 +42,7 @@ class LibRedirectResolver(
             }
 
             val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
-            logger.debug(redirected, HashProcessor.StringProcessor, { "Redirected to: $it" })
+            logger.debug(redirected, HashProcessor.StringProcessor) { "Redirected to: $it" }
 
             if (redirected != null) {
                 return LibRedirectResult.Redirected(uri, Uri.parse(redirected))
@@ -47,15 +52,11 @@ class LibRedirectResolver(
         return LibRedirectResult.NotRedirected
     }
 
-    sealed interface LibRedirectResult {
-        class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
-        data object NotRedirected : LibRedirectResult
-    }
-
     private fun getInstanceUrl(default: LibRedirectDefault): String {
         return if (default.instanceUrl == LibRedirectDefault.randomInstance) {
-            libRedirectInstances.find { it.frontendKey == default.frontendKey }
+            LibRedirectResolver.libRedirectInstances.find { it.frontendKey == default.frontendKey }
                 ?.hosts?.random() ?: default.instanceUrl
         } else default.instanceUrl
     }
+
 }

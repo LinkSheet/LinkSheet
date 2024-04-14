@@ -54,7 +54,9 @@ class BrowserHandler(
         val browserMode: BrowserMode,
         val selectedBrowser: String?,
         val repository: WhitelistedBrowsersRepository<T, C, D>,
-    )
+    ) {
+
+    }
 
     data class FilteredBrowserList(
         val browserMode: BrowserMode,

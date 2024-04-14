@@ -16,7 +16,20 @@
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
 
+<!--        <activity android:name=".experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity"-->
+<!--                  android:exported="true"-->
+<!--                  android:theme="@style/DialogTheme">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
 
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+<!--                <category android:name="android.intent.category.APP_BROWSER" />-->
+
+<!--                <data android:scheme="https" />-->
+<!--                <data android:scheme="http" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
 
         <receiver
                 android:name=".debug.DebugBroadcastReceiver"

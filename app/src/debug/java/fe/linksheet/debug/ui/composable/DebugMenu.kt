@@ -1,6 +1,8 @@
 package fe.linksheet.debug.ui.composable
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
@@ -20,35 +22,55 @@ import kotlin.reflect.KClass
 
 @Composable
 fun DebugMenu() {
+    val activity = LocalActivity.current
+
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-        item(key="link_menu"){
-            FilledTonalActivityLauncher(text = "Link testing", activityClass = LinkTestingActivity::class)
+        item(key = "link_menu") {
+            FilledTonalActivityLauncher(
+                activity = activity,
+                text = "Link testing",
+                intent = createIntent(activity, LinkTestingActivity::class)
+            )
         }
 
         item(key = "snap_tester") {
-            FilledTonalActivityLauncher(text = "Snap tester", activityClass = DebugActivity::class)
+            FilledTonalActivityLauncher(
+                activity = activity,
+                text = "Snap tester",
+                intent = createIntent(activity, DebugActivity::class)
+            )
         }
 
         item(key = "url_preview") {
-            FilledTonalActivityLauncher(text = "Url preview", activityClass = ComposableRendererActivity::class)
+            FilledTonalActivityLauncher(
+                activity = activity,
+                text = "Url preview",
+                intent = createIntent(activity, ComposableRendererActivity::class)
+            )
         }
 
         item(key = "improved_bottomsheet") {
             FilledTonalActivityLauncher(
+                activity = activity,
                 text = "Improved bottom sheet",
-                activityClass = ImprovedBottomSheetActivity::class
+                intent = createIntent(activity, ImprovedBottomSheetActivity::class).setAction(Intent.ACTION_VIEW).setData(
+                    Uri.parse("https://www.youtube.com/watch?v=XaqdBRHG9cI"))
             )
         }
     }
 }
 
+private fun createIntent(activity: Activity, activityClass: KClass<*>): Intent {
+    return Intent(activity, activityClass.java)
+}
+
+
 @Composable
-private fun FilledTonalActivityLauncher(text: String, activityClass: KClass<*>) {
-    val activity = LocalActivity.current
+private fun FilledTonalActivityLauncher(activity: Activity, text: String, intent: Intent) {
 
     FilledTonalButton(
         colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-        onClick = { activity.startActivity(Intent(activity, activityClass.java)) }
+        onClick = { activity.startActivity(intent) }
     ) {
         Text(text = text)
     }

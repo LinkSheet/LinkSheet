@@ -71,7 +71,7 @@ class LibRedirectServiceSettingsViewModel(
     }
 
     val selected: Flow<LibRedirectDefault> = defaultRepository
-        .getByServiceKeyFlow(serviceKey)
+        .getByServiceKey(serviceKey)
         .mapProducingSideEffect(
             transform = { stored, delete ->
                 if (stored == null) return@mapProducingSideEffect fallback

@@ -41,9 +41,11 @@ import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.LibRedirectResolver
+import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -216,7 +218,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
                 },
                 unfurlResult = result?.unfurlResult,
                 downloadable = result?.downloadable?.isDownloadable() ?: false,
-                libRedirected = result?.libRedirectResult is LibRedirectResolver.LibRedirectResult.Redirected,
+                libRedirected = result?.libRedirectResult is LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText("URL", result.uri.toString())
 
@@ -235,7 +237,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
                 downloadUri = {
                     bottomSheetViewModel.startDownload(
                         resources, result.uri,
-                        result.downloadable as Downloader.DownloadCheckResult.Downloadable
+                        result.downloadable as DownloadCheckResult.Downloadable
                     )
 
                     if (!bottomSheetViewModel.downloadStartedToast()) {
@@ -246,7 +248,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
                 },
                 ignoreLibRedirect = {
                     val redirected =
-                        result.libRedirectResult as LibRedirectResolver.LibRedirectResult.Redirected
+                        result.libRedirectResult as LibRedirectResult.Redirected
 
                     finish()
                     startActivity(

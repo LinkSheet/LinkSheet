@@ -35,19 +35,17 @@ class ShizukuService : IShizukuService.Stub {
     }
 
     override fun reset(packageName: String) {
+        val userId = getUserId()
         val setAppLinkAllowedResult = launchProcess(
             "pm", "set-app-links-allowed",
             "--user",
-            getUserId(),
+            userId,
             "--package", packageName, "true",
         ) { line -> Log.d("ShizukuService", line) }
 
-        val setAppLinkStateResult = launchProcess(
-            "pm", "set-app-links",
-            "--package", packageName,
-            "0",
-            "all"
-        ) { line -> Log.d("ShizukuService", line) }
+        val resetAppLinkResult = launchProcess("pm", "reset-app-links", "--user", userId, packageName) { line ->
+            Log.d("ShizukuService", line)
+        }
 
         val verifyAppLinksResult = launchProcess(
             "pm", "verify-app-links", "--re-verify", packageName

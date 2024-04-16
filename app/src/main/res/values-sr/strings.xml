@@ -511,4 +511,7 @@
     <string name="resolve_activity_failure">Решавање активности није успело!</string>
     <string name="link_handle_failed_text">LinkSheet не може да обради овај линк, јер се чини да је погрешно обликован. Можете га изменити испод, а затим покушати поново. Алтернативно, можете претраживати на вебу.</string>
     <string name="link_handle_failed_text_field_label">Упит</string>
+    <string name="reset_app_link_verification_status">Ресетуј статус верификације линка апликације</string>
+    <string name="reset_app_link_verification_status_toast">Поновна верификација неопходна</string>
+    <string name="reset_app_link_verification_status_subtitle">Додирните овде да бисте ресетовали статус верификације линка апликације за све апликације, а затим сачекајте неколико минута док их Android поново верификује. Нећете добити потврду. Захтева Shizuku.</string>
 </resources>

@@ -6,7 +6,6 @@ import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.BrowserHandler
-import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
@@ -40,6 +39,7 @@ object AppSorter {
     }
 
     private fun createUsageStatComparator(context: Context): Comparator<DisplayActivityInfo>? {
+        // TODO: Should probably be done somewhere else
         val usageStatsManager = context.getSystemService(UsageStatsManager::class.java)
 
         val sinceTime: Long = System.currentTimeMillis() - usageStatsPeriod
@@ -53,7 +53,7 @@ object AppSorter {
 
     private fun toDisplay(
         context: Context,
-        apps: List<UriViewActivity>,
+        apps: List<ResolveInfo>,
         browsers: List<ResolveInfo>,
     ): Map<String, DisplayActivityInfo> {
         val map = mutableMapOf<String, DisplayActivityInfo>()

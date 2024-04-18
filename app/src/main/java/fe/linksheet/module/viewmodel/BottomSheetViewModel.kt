@@ -258,7 +258,7 @@ class BottomSheetViewModel(
         viewIntent.component = info.componentName
 
         // Check for intent.data != null to make sure we don't attempt to persist web search intents
-        if (!info.fallback && persist && privateBrowsingBrowser == null && intent.data != null) {
+        if (persist && privateBrowsingBrowser == null && intent.data != null) {
             persistSelectedIntent(viewIntent, always)
         }
 

@@ -59,7 +59,7 @@ class BrowserHandler(
     data class FilteredBrowserList(
         val browserMode: BrowserMode,
         val browsers: List<ResolveInfo>,
-        val apps: List<UriViewActivity>,
+        val apps: List<ResolveInfo>,
         val isSingleOption: Boolean = false,
         val noBrowsersOnlySingleApp: Boolean = false,
     ) {
@@ -69,7 +69,7 @@ class BrowserHandler(
     suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> filterBrowsers(
         config: BrowserModeConfigHelper<T, C, D>,
         browsers: Map<String, ResolveInfo>,
-        resolveList: List<UriViewActivity>,
+        resolveList: List<ResolveInfo>,
     ): FilteredBrowserList {
         val nonBrowsers = getAllNonBrowsers(browsers, resolveList)
 
@@ -123,11 +123,11 @@ class BrowserHandler(
 
     private fun getAllNonBrowsers(
         browsers: Map<String, ResolveInfo>,
-        resolveList: List<UriViewActivity>,
-    ): List<UriViewActivity> {
-        val map = mutableMapOf<String, UriViewActivity>()
+        resolveList: List<ResolveInfo>,
+    ): List<ResolveInfo> {
+        val map = mutableMapOf<String, ResolveInfo>()
         for (uriViewActivity in resolveList) {
-            map[uriViewActivity.resolveInfo.activityInfo.packageName] = uriViewActivity
+            map[uriViewActivity.activityInfo.packageName] = uriViewActivity
         }
 
         for ((pkg, _) in browsers) {

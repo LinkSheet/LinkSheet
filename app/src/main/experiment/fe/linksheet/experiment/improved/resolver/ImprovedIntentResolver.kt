@@ -11,7 +11,7 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
-import fe.linksheet.experiment.new.query.manager.query.PackageQueryManager
+import fe.linksheet.module.resolver.PackageHandler
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
@@ -26,7 +26,6 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -200,7 +199,7 @@ class ImprovedIntentResolver(
         emitEvent("Loading preferred apps")
         val app = queryPreferredApp(uri = uri)
         val lastUsedApps = queryAppSelectionHistory(uri = uri)
-        val resolveList = PackageQueryManager.findHandlers(context, uri)
+        val resolveList = PackageHandler.findHandlers(context, uri)
 
         emitEvent("Checking for browsers")
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
@@ -295,7 +294,6 @@ class ImprovedIntentResolver(
                 repository = inAppBrowsersRepository
             )
         }
-
 
         return BrowserHandler.BrowserModeConfigHelper(
             browserMode = browserMode(),

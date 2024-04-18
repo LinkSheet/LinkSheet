@@ -11,7 +11,6 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
-import fe.linksheet.experiment.new.query.manager.query.PackageQueryManager
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
@@ -26,7 +25,6 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -39,7 +37,6 @@ import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
-import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.IntentParser
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.Dispatchers
@@ -296,9 +293,9 @@ class IntentResolver(
             }
         }
 
-        val resolvedList: MutableList<UriViewActivity> =  PackageQueryManager.findHandlers(context, uri!!).toMutableList()
+        val resolvedList = PackageHandler.findHandlers(context, uri!!).toMutableList()
 
-        logger.debug(resolvedList, HashProcessor.UriViewActivityListProcessor, { it }, "ResolveList")
+        logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
 
         val (browserMode, filteredResolveInfos) = if (UriUtil.hasWebScheme(newIntent)) {
             val (
@@ -314,26 +311,9 @@ class IntentResolver(
                 mode(),
                 selected(),
                 repository,
-                resolvedList.map { it.resolveInfo }.toMutableList()
+                resolvedList
             )
         } else null to emptyList<ResolveInfo>()
-
-        // I hate the antichrist
-        val map = resolvedList.associateBy { it.resolveInfo.activityInfo.packageName }
-
-        val new = mutableListOf<UriViewActivity>()
-        for (filteredResolveInfo in filteredResolveInfos) {
-            val hasViewActivity = map[filteredResolveInfo.activityInfo.packageName]
-            if (hasViewActivity != null) {
-                new.add(hasViewActivity)
-            } else {
-                new.add(UriViewActivity(filteredResolveInfo, false))
-            }
-        }
-
-        resolvedList.clear()
-        resolvedList.addAll(new)
-
 
         if (resolvedList.isEmpty()) {
             return BottomSheetResult.BottomSheetNoHandlersFound(uri)
@@ -349,7 +329,7 @@ class IntentResolver(
 
         val selectedBrowserIsSingleOption =
             browserMode?.browserMode == BrowserHandler.BrowserMode.SelectedBrowser
-                    && resolvedList.singleOrNull()?.resolveInfo?.activityInfo?.componentName() == browserMode.resolveInfo?.activityInfo?.componentName()
+                    && resolvedList.singleOrNull()?.activityInfo?.componentName() == browserMode.resolveInfo?.activityInfo?.componentName()
 
         val noBrowsersPresentOnlySingleApp =
             browserMode?.browserMode == BrowserHandler.BrowserMode.None && resolvedList.size == 1
@@ -359,7 +339,7 @@ class IntentResolver(
         logger.debug(grouped, HashProcessor.DisplayActivityInfoListProcessor, { it }, "Grouped")
         logger.debug(filteredItem, HashProcessor.DisplayActivityInfoProcessor, { it }, "FilteredItem")
 
-        val unfurlResult = if (uri != null && previewUrl()) {
+        val unfurlResult = if (previewUrl()) {
             unfurler.unfurl(uri.toString())
         } else null
 

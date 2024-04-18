@@ -1,6 +1,5 @@
 package fe.linksheet.activity.bottomsheet
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
@@ -38,7 +37,6 @@ import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.experiment.ui.overhaul.composable.component.bottomsheet.ExperimentalFailureSheetColumn
-import fe.linksheet.experiment.url.bar.ExperimentalUrlBar
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
@@ -249,7 +247,7 @@ class BottomSheetActivityImpl(
                 Triple(crossProfileApps, canSwitch, target)
             } else Triple(null, false, null)
 
-            ExperimentalUrlBar(
+            UrlBar(
                 uri = uriString,
                 canSwitchProfile = canSwitch,
                 profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(

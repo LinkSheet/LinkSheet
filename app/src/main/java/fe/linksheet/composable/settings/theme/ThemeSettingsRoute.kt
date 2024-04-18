@@ -8,7 +8,6 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.p
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
-import fe.linksheet.ui.Theme
 import fe.linksheet.ui.ThemeV2
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel

@@ -20,11 +20,10 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.composable.main.DonateCard
 import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.debug.DebugComposable
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLazyColumnPageLayout
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.extension.compose.focusGainedEvents

@@ -16,7 +16,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLazyListScope
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.listHelper

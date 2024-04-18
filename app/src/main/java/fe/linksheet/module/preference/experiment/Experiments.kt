@@ -8,14 +8,14 @@ object Experiments : PreferenceDefinition(
     "experiment_drop_categories",
     "experiment_share_allow_custom_share_extras",
     "experiment_share_check_all_extras",
-    "experiment_new_query_manager"
+    "experiment_new_query_manager",
+    "experiment_url_bar",
+    "experiment_url_bar_switch_profile"
 ) {
     val experiments: List<Experiment>
 
-    val experimentalUrlBar = boolean("experiment_url_bar")
     val urlPreview = boolean("experiment_url_bar_preview")
     val declutterUrl = boolean("experiment_url_bar_declutter_url")
-    val switchProfile = boolean("experiment_url_bar_switch_profile")
 
     val uiOverhaul = boolean("experiment_ui_overhaul")
 
@@ -24,7 +24,7 @@ object Experiments : PreferenceDefinition(
     // TODO: Enforce type
     init {
         experiments = listOf(
-            Experiment("enhanced_url_bar", hidden = false, experimentalUrlBar, urlPreview, declutterUrl, switchProfile),
+            Experiment("enhanced_url_bar", hidden = false, urlPreview, declutterUrl),
             Experiment("ui_overhaul", true, uiOverhaul),
             Experiment("improved_intent_resolver", true, improvedIntentResolver)
         )

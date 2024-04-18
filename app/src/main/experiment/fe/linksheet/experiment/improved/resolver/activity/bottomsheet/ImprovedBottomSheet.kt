@@ -174,13 +174,10 @@ class ImprovedBottomSheet(
             bottomSheetViewModel = viewModel,
             result = status,
             declutterUrl = viewModel.declutterUrl(),
-            experimentalUrlBar = viewModel.experimentalUrlBar(),
             enableSwitchProfile = viewModel.switchProfile(),
             isExpanded = isExpanded,
             requestExpand = {},
-            hideDrawer = {
-
-            },
+            hideDrawer = {},
             showPackage = false,
             previewUrl = viewModel.previewUrl(),
             hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
@@ -192,7 +189,6 @@ class ImprovedBottomSheet(
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: IntentResolveResult.Default,
-        experimentalUrlBar: Boolean,
         declutterUrl: Boolean,
         enableSwitchProfile: Boolean,
         isExpanded: Boolean,
@@ -219,10 +215,7 @@ class ImprovedBottomSheet(
             ExperimentalUrlBar(
                 uri = uriString,
                 canSwitchProfile = canSwitch,
-                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(
-                    target!!
-                )
-                    .toString() else null,
+                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(target!!).toString() else null,
                 profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(
                     target!!
                 ) else null,

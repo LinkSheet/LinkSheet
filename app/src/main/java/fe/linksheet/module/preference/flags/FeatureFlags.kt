@@ -10,6 +10,7 @@ object FeatureFlags : PreferenceDefinition(
     "feature_flag_share_parse_text"
 ) {
     val linkSheetCompat = boolean("feature_flag_linksheet_compat")
+    val switchProfile = boolean("feature_flag_switch_profile")
 
     init { finalize() }
 }

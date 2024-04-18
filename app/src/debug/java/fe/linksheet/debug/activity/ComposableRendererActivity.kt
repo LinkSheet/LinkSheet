@@ -36,7 +36,7 @@ import androidx.lifecycle.setViewTreeViewModelStoreOwner
 import androidx.savedstate.findViewTreeSavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import fe.linksheet.debug.ui.layout.ComposableDebugBoxLayout
-import fe.linksheet.experiment.url.bar.UrlCard
+import fe.linksheet.activity.bottomsheet.UrlCard
 import fe.linksheet.ui.AppTheme
 import me.saket.unfurl.UnfurlResult
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull

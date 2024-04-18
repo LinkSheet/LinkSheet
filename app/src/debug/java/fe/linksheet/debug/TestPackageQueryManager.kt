@@ -13,7 +13,6 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.util.AndroidVersion
 import org.koin.core.component.KoinComponent
 
@@ -22,7 +21,7 @@ object TestPackageQueryManager : KoinComponent {
     private val logger by injectLogger<TestPackageQueryManager>()
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun findHandlers(context: Context, uri: Uri): List<UriViewActivity> {
+    fun findHandlers(context: Context, uri: Uri) {
         val dvm = context.getSystemService<DomainVerificationManager>()!!
         val host = uri.host.toString()
 
@@ -51,7 +50,7 @@ object TestPackageQueryManager : KoinComponent {
 //        resolve.activityInfo.componentName()
 //
 //
-        return activities.map { UriViewActivity(it, false) }
+//        return activities.map { UriViewActivity(it, false) }
 
 //        val packageManager = context.packageManager
 //        val result = packageManager.queryIntentActivitiesCompat(mainIntent, PackageManager.MATCH_ALL)
@@ -90,7 +89,7 @@ object TestPackageQueryManager : KoinComponent {
         return getAllIntentFilters.invoke(this, packageName) as List<IntentFilter>
     }
 
-    private fun ResolveInfo.toUriHandler(packageManager: PackageManager, viewIntent: Intent): UriViewActivity {
+    private fun ResolveInfo.toUriHandler(packageManager: PackageManager, viewIntent: Intent) {
         val activities = packageManager.getPackageInfo(
             activityInfo.packageName,
             PackageManager.MATCH_ALL or PackageManager.GET_ACTIVITIES or PackageManager.GET_RESOLVED_FILTER or PackageManager.MATCH_DISABLED_COMPONENTS
@@ -219,7 +218,7 @@ object TestPackageQueryManager : KoinComponent {
 //                    return UriViewActivity(resolved.first(), false)
 //                }
 
-                return UriViewActivity(this, false)
+//                return UriViewActivity(this, false)
             }
 //            val filters = list
 //            val appPkgManager = packageManager as ApplicationPackageManager
@@ -253,7 +252,7 @@ object TestPackageQueryManager : KoinComponent {
 //
 
 
-        return UriViewActivity(this, true)
+//        return UriViewActivity(this, true)
 
 
 //

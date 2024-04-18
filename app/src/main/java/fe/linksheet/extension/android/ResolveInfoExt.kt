@@ -2,17 +2,7 @@ package fe.linksheet.extension.android
 
 import android.content.Context
 import android.content.pm.ResolveInfo
-import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.resolver.DisplayActivityInfo
-
-fun UriViewActivity.toDisplayActivityInfo(context: Context, browser: Boolean = false): DisplayActivityInfo {
-    return DisplayActivityInfo(
-        resolvedInfo = resolveInfo,
-        label = resolveInfo.loadLabel(context.packageManager).toString(),
-        browser = browser,
-        fallback = fallback
-    )
-}
 
 fun ResolveInfo.toDisplayActivityInfo(context: Context, browser: Boolean = false): DisplayActivityInfo {
     return DisplayActivityInfo(

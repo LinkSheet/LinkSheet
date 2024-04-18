@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.url.bar
+package fe.linksheet.activity.bottomsheet
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable

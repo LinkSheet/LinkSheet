@@ -37,7 +37,7 @@ import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.experiment.improved.resolver.material3.SheetValue
-import fe.linksheet.experiment.url.bar.ExperimentalUrlBar
+import fe.linksheet.activity.bottomsheet.UrlBar
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
@@ -60,8 +60,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import mozilla.components.support.utils.toSafeIntent
-import okhttp3.internal.format
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -212,7 +210,7 @@ class ImprovedBottomSheet(
                 Triple(crossProfileApps, canSwitch, target)
             } else Triple(null, false, null)
 
-            ExperimentalUrlBar(
+            UrlBar(
                 uri = uriString,
                 canSwitchProfile = canSwitch,
                 profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(target!!).toString() else null,

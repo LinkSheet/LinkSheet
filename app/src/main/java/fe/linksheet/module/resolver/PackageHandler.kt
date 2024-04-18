@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.new.query.manager.query
+package fe.linksheet.module.resolver
 
 import android.content.Context
 import android.content.Intent
@@ -7,25 +7,21 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
-import android.os.Build
-import androidx.annotation.RequiresApi
-import fe.linksheet.module.resolver.UriViewActivity
 import fe.linksheet.util.BitFlagUtil
-import org.koin.core.component.KoinComponent
 
 
-object PackageQueryManager : KoinComponent {
+object PackageHandler {
     private val QUERY_FLAGS = BitFlagUtil.or(
         PackageManager.MATCH_ALL,
         PackageManager.GET_RESOLVED_FILTER,
         PackageManager.MATCH_DISABLED_COMPONENTS
     )
 
-    fun findHandlers(context: Context, uri: Uri): List<UriViewActivity> {
+    fun findHandlers(context: Context, uri: Uri): List<ResolveInfo> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
         val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)
 
-        return activities.filter { it.isLinkHandler(uri) }.map { UriViewActivity(it, false) }
+        return activities.filter { it.isLinkHandler(uri) }
     }
 
     private val anyHost = AuthorityEntry("*", "-1")

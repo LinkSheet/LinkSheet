@@ -272,7 +272,7 @@
 \nAhh, Google cổ điển, làm tê liệt các sản phẩm của chính họ mà không có cách đơn giản để khôi phục lại hành vi cũ
 \n
 \nDù sao đi nữa, họ đã để lại một \"lỗ hổng\" nhỏ: Xử lý liên kết có thể bị vô hiệu hóa trên cơ sở mỗi ứng dụng. Bạn có thể cho rằng điều này sẽ mang lại trình chọn ứng dụng cũ, nhưng tất nhiên (cảm ơn Google!), Đó không phải là trường hợp, như bây giờ, liên kết sẽ luôn mở trong trình duyệt mặc định của bạn. Đó là lý do tại sao LinkSheet được tạo ra.</string>
-    <string name="linksheet_donation_explainer_2">Khoản quyên góp hơn <b>5€</b> (<b>4€</b> nếu bạn quyên góp bằng tiền điện tử!) Cho phép bạn truy cập vào <b>LinkSheet Pro</b>, hiện chỉ ẩn biểu ngữ quyên góp trên màn hình chính của ứng dụng, nhưng trong tương lai, sẽ có các <b>tính năng dành riêng cho Pro.</b></string>
+    <string name="linksheet_donation_explainer_2">Khoản quyên tặng hơn <b>5€</b> cho phép bạn truy cập vào <b>LinkSheet Pro</b>, bao gồm <b>các tính năng độc quyền của Pro</b> chẳng hạn như: theo dõi các chuyển hướng bên ngoài, nhận được các chuyển hướng không phải-Các trang AMP bên ngoài và nhiều trang khác sắp ra mắt! \u0020</string>
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
     <string name="opening_with_app_toast">Hiển thị thông báo ngắn khi một ứng dụng được khởi chạy tự động</string>
     <string name="discord_explainer">Hãy trò chuyện trên máy chủ Discord của chúng tôi! Trò chuyện với người dùng và nhà phát triển của LinkSheet về tương lai của nó và những nỗ lực khác!</string>
@@ -280,7 +280,7 @@
     <string name="shizuku_integration_not_setup_explainer">Mặc dù không thực sự cần thiết để LinkSheet hoạt động nhưng bạn nên sử dụng Shizuku. Nhấn vào đây để cài đặt nó.</string>
     <string name="include_throwable">Bao gồm nhật ký sự cố (được khuyến nghị, nhưng không thể chỉnh sửa)</string>
     <string name="copy_version_information">Sao chép thông tin phiên bản</string>
-    <string name="donation">Quyên góp</string>
+    <string name="donation">Quyên tặng</string>
     <string name="just_version">Phiên bản</string>
     <string name="running_unofficial_build">Bản dựng không chính thức</string>
     <string name="debug_build">Bản dựng gỡ lỗi</string>
@@ -407,4 +407,16 @@
     <string name="telemetry_configure_type">Loại phân tích</string>
     <string name="telemetry_configure_title">Phân tích</string>
     <string name="resolve_activity_failure">Không thể giải quyết hoạt động!</string>
+    <string name="onboarding_2_card_explainer">Shizuku cho phép LinkSheet vô hiệu hóa hành vi xử lý liên kết mặc định của tất cả các ứng dụng cùng một lúc, thay vì phải vô hiệu hóa chúng theo cách thủ công cho từng ứng dụng riêng lẻ (đây là bước tiếp theo).</string>
+    <string name="commit">Cam kết:</string>
+    <string name="onboarding_2_subtitle">Nếu bạn cài đặt nhiều ứng dụng, Shizuku có thể cải thiện đáng kể trải nghiệm của bạn</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="onboarding_2_start_shizuku">Khởi động Shizuku</string>
+    <string name="hide_bottom_sheet_choice_buttons">Ẩn các nút lựa chọn</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Ẩn các nút \"Một lần\" và \"Luôn luôn\" ở trang dưới cùng</string>
+    <string name="onboarding_2_title">Bạn có muốn sử dụng Shizuku không?</string>
+    <string name="onboarding_2_request_shizuku_permission">Yêu cầu quyền</string>
+    <string name="branch">Nhánh:</string>
+    <string name="onboarding_2_install_shizuku">Cài đặt Shizuku</string>
+    <string name="onboarding_2_shizuku_enabled">Kế tiếp</string>
 </resources>

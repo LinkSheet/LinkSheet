@@ -15,7 +15,7 @@
     <string name="download_started">Đã bắt đầu tải xuống</string>
     <string name="close">Đóng</string>
     <string name="use_clear_urls">Sử dụng ClearURL</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">Việc kích hoạt nhiều nút ở bảng dưới cùng hiện tại có thể dẫn đến các nút bị cắt/trục trặc.</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">Việc kích hoạt nhiều nút ở trang dưới cùng hiện tại có thể dẫn đến các nút bị cắt/trục trặc.</string>
     <string name="opening_with_app">Đang mở bằng %s</string>
     <string name="browser_explainer">Chế độ trình duyệt và thiết đặt trình duyệt trong ứng dụng</string>
     <string name="save">Lưu</string>
@@ -27,13 +27,13 @@
     <string name="theme_explainer">Thay đổi chủ đề của ứng dụng</string>
     <string name="logs">Nhật ký</string>
     <string name="no_apps_which_can_handle_links_found">Không tìm thấy ứng dụng nào có thể xử lý liên kết.</string>
-    <string name="bottom_sheet">Bảng dưới</string>
+    <string name="bottom_sheet">Trang dưới cùng</string>
     <string name="display_grid_layout">Bố cục lưới</string>
     <string name="usage_stats_sorting">Sắp xếp ứng dụng theo mức sử dụng</string>
     <string name="log_viewer">Trình xem nhật ký</string>
     <string name="open_with_app">Mở bằng %s</string>
     <string name="set_as_browser_done">LinkSheet đã được đặt làm trình duyệt mặc định!</string>
-    <string name="whitelisted_explainer">Chỉ hiển thị các trình duyệt được liệt kê trong danh sách trắng</string>
+    <string name="whitelisted_explainer">Chỉ hiển thị các trình duyệt trong danh sách trắng</string>
     <string name="use_app_settings">Sử dụng thiết đặt của ứng dụng</string>
     <string name="no_preferred_apps_set_yet">Chưa có ứng dụng nào được đặt làm ưu tiên.</string>
     <string name="always_show_package_name_explainer">Luôn hiển thị tên gói thay vì chỉ tên ứng dụng. Điều này áp dụng cho toàn bộ ứng dụng.</string>
@@ -67,7 +67,7 @@
     <string name="onboarding0_headline">Đã đến lúc lấy lại</string>
     <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
     <string name="url_copied">URL đã được sao chép vào clipboard</string>
-    <string name="copy_url">Sao chép URL</string>
+    <string name="copy_url">Sao chép liên kết</string>
     <string name="resolve_failed">%s thất bại: %s</string>
     <string name="none">Không có</string>
     <string name="export">Xuất</string>
@@ -77,7 +77,7 @@
     <string name="theme">Chủ đề</string>
     <string name="use_a_different_app">Sử dụng một ứng dụng khác</string>
     <string name="no_browsers_found">Không tìm thấy trình duyệt nào.</string>
-    <string name="whitelisted_browsers">Trình duyệt thuộc danh sách trắng</string>
+    <string name="whitelisted_browsers">Các trình duyệt trong danh sách trắng</string>
     <string name="amoled_black">Amoled đen</string>
     <string name="export_log">Xuất nhật ký</string>
     <string name="bottom_sheet_explainer">Sắp xếp theo mức dùng, bật nút sao chép, bật nút chia sẻ, v.v.</string>
@@ -86,7 +86,7 @@
     <string name="frontend">Giao diện người dùng</string>
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="finish">Hoàn thành</string>
-    <string name="donate_explainer">Nếu bạn muốn quyên góp và yêu cầu <b>LinkSheet Pro</b> \u0020</string>
+    <string name="donate_explainer">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b> \u0020</string>
     <string name="built_at">Xây dựng lúc (UTC):</string>
     <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
@@ -144,7 +144,7 @@
     <string name="open_link_with">MởLiênKếtBằng</string>
     <string name="select_an_app">Chọn một ứng dụng</string>
     <string name="github_workflow_run_id">Xây dựng ID quy trình làm việc:</string>
-    <string name="resolved_via">%s được giải quyết qua %s</string>
+    <string name="resolved_via">%s giải quyết qua %s</string>
     <string name="onboarding2_highlight">của bạn</string>
     <string name="amp2html_builtin_cache_explainer">Sử dụng bộ đệm tích hợp (sử dụng xuất cơ sở dữ liệu của dịch vụ bên ngoài)</string>
     <string name="open_with_linksheet">Mở bằng LinkSheet</string>
@@ -154,12 +154,12 @@
     <string name="dark">Tối</string>
     <string name="disable_all_toasts_explainer">Không bao giờ hiển thị bất kỳ tin nhắn thông báo ngắn nào</string>
     <string name="set_as_browser">Đặt làm trình duyệt</string>
-    <string name="whitelisted">Đã liệt vào Danh sách trắng</string>
+    <string name="whitelisted">Danh sách trắng</string>
     <plurals name="minutes">
         <item quantity="other">%s phút</item>
     </plurals>
     <string name="log">Nhật ký</string>
-    <string name="loading_link">Đang tải liên kết…</string>
+    <string name="loading_link">Đang xử lý liên kết…</string>
     <string name="pretend_to_be_app_explainer">Giả vờ là một ứng dụng gốc cho các miền được hỗ trợ bằng LinkSheetCompat</string>
     <string name="license_apache_2">Giấy phép Apache 2.0</string>
     <string name="confirm">Xác nhận</string>
@@ -176,7 +176,7 @@
     <string name="set_as_browser_explainer">Nhấn vào đây để đặt LinkSheet làm trình duyệt mặc định</string>
     <string name="current_session">Phiên hiện tại</string>
     <string name="always_disable_explainer">Luôn tắt trình duyệt trong ứng dụng, bất kể ứng dụng muốn sử dụng gì</string>
-    <string name="enable_ignore_libredirect_button_explainer">Hiển thị một nút ở bảng dưới cùng nếu URL đã được chuyển hướng qua LibRedirect, thay vào đó, nút này sẽ mở URL gốc</string>
+    <string name="enable_ignore_libredirect_button_explainer">Hiển thị một nút ở trang dưới cùng nếu URL đã được chuyển hướng qua LibRedirect, thay vào đó, nút này sẽ mở URL gốc</string>
     <string name="mastodon_redirect_subtitle_2">Mã nguồn của Mastodon Redirect được sử dụng làm tài liệu tham khảo cho tương tác Shizuku</string>
     <string name="none_explainer">Chỉ liệt kê các ứng dụng gốc, loại hết các trình duyệt. Nếu chỉ có một ứng dụng gốc duy nhất, nó sẽ tự động được mở. Nếu không có ứng dụng gốc thì tất cả các trình duyệt sẽ được liệt kê.</string>
     <string name="seal">Seal</string>
@@ -197,7 +197,7 @@
     <string name="no_logs_found">Không tìm thấy nhật ký trước đây!</string>
     <string name="downloader_url_mime_type">Sử dụng loại mime từ URL</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet \"khôi phục\" \"bộ chọn-url-ứng dụng\" xuất hiện khi người dùng nhấn vào một liên kết trên Android &lt;12 và đã cài đặt nhiều ứng dụng có thể xử lý liên kết</string>
-    <string name="system">Hệ thống</string>
+    <string name="system">Theo hệ thống</string>
     <string name="no_log_entries">Phiên này không chứa bất kỳ nhật ký nào.</string>
     <string name="add">Thêm</string>
     <string name="follow_redirects_local_cache">Bật bộ đệm chuyển hướng cục bộ</string>
@@ -211,7 +211,7 @@
 \nđể tạo LinkSheet</string>
     <string name="credits">Ghi công</string>
     <string name="copy_to_clipboard">Sao chép vào clipboard</string>
-    <string name="log_privacy">Để tìm hiểu về quyền riêng tư của nhật ký, bạn có thể truy cập vào <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">liên kết</annotation> này.</string>
+    <string name="log_privacy">Để tìm hiểu về quyền riêng tư của nhật ký, bạn có thể truy cập <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">liên kết</annotation> này. \u0020</string>
     <string name="pretend_to_be_app_explainer_2">Một số ứng dụng như Google Chrome tìm kiếm ứng dụng gốc một cách rõ ràng để xử lý, chẳng hạn như liên kết Youtube khi ứng dụng đó được nhấn vào kết quả tìm kiếm. LinkSheetCompat giả vờ là một ứng dụng gốc dành cho các máy chủ được hỗ trợ và sau đó chuyển tiếp yêu cầu tới LinkSheet.</string>
     <string name="configure">Cấu hình</string>
     <string name="onboarding6_highlight">sở thích</string>
@@ -221,11 +221,11 @@
     <string name="general">Tổng quan</string>
     <string name="compat_installed">LinkSheetCompat đã được cài đặt</string>
     <string name="debug_explainer">Xem nhật ký ứng dụng</string>
-    <string name="configure_explainer">Nhấn vào đây để định cấu hình LinkSheetCompat</string>
+    <string name="configure_explainer">Nhấn vào đây để cấu hình LinkSheetCompat</string>
     <string name="done">Xong</string>
     <string name="no_browser_installed">Chưa cài đặt trình duyệt</string>
-    <string name="at_least_one_unknown_browser_installer">Ít nhất (không xác định) một trình duyệt được cài đặt</string>
-    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet đã phát hiện ít nhất một ứng dụng tự xưng là trình duyệt. Danh sách của LinkSheet có thể chưa đầy đủ. Nếu bạn cho rằng đây là lỗi, hãy gửi vấn đề trên Github.</string>
+    <string name="at_least_one_unknown_browser_installer">Đã cài đặt ít nhất một trình duyệt (không xác định)</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet đã phát hiện ít nhất một ứng dụng tự xưng là một trình duyệt. Danh sách của LinkSheet có thể chưa đầy đủ. Nếu bạn cho rằng đây là lỗi, hãy gửi vấn đề trên Github.</string>
     <string name="download_started_toast_explainer">Hiện thông báo ngắn khi tải xuống đã được bắt đầu</string>
     <string name="resolve_via_toast">Hiện thông báo ngắn khi URL được giải quyết</string>
     <string name="resolve_via_toast_explainer">Hiện thông báo ngắn khi một URL được giải quyết thông qua một dịch vụ bên ngoài</string>
@@ -233,10 +233,10 @@
     <string name="resolve_via_failed_toast_explainer">Hiện thông báo ngắn khi URL không thể giải quyết thông qua dịch vụ bên ngoài</string>
     <string name="opening_with_app_toast_explainer">Hiển thị thông báo ngắn khi một ứng dụng đã được đặt làm mặc định cho một tên miền được khởi chạy</string>
     <string name="last_updated">Cập nhật lần cuối (UTC):</string>
-    <string name="enable_linksheet_compat">Bật thực đơn LinkSheet Tương thích thử nghiệm</string>
+    <string name="enable_linksheet_compat">Bật thực đơn LinkSheet Compat thử nghiệm</string>
     <string name="built_by_error">Bản dựng này không được ký bởi 1fexd cũng như Github workflow. Điều này không nhất thiết có nghĩa là bất cứ điều gì xấu, vì bất cứ ai cũng có thể chia tách mã nguồn và xây dựng phiên bản LinkSheet của riêng họ, nhưng họ có thể làm như vậy với mục đích xấu.</string>
-    <string name="follow_redirects_explainer">Tự động làm theo tất cả các chuyển hướng trước khi mở bảng dưới cùng. Điều này có thể có <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ý nghĩa liên quan đến quyền riêng tư</annotation></string>
-    <string name="follow_redirects_external_service_explainer">Theo dõi chuyển hướng bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách bảo mật</annotation>)</string>
+    <string name="follow_redirects_explainer">Tự động theo dõi tất cả các chuyển hướng trước khi mở trang dưới cùng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ngụ ý liên quan đến quyền riêng tư </annotation> \u0020</string>
+    <string name="follow_redirects_external_service_explainer">Theo dõi các chuyển hướng bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>) \u0020</string>
     <string name="disable_in_selected">Vô hiệu hóa trong lựa chọn</string>
     <string name="in_app">Trong ứng dụng</string>
     <string name="libredirect_via">Qua %s</string>
@@ -247,13 +247,13 @@
     <string name="instance_not_available_anymore">Phiên bản không còn khả dụng nữa!</string>
     <string name="advanced">Nâng cao</string>
     <string name="shizuku">Tích hợp Shizuku</string>
-    <string name="advanced_explainer">Thiết đặt nâng cao như cờ tính năng và xuất/nhập</string>
+    <string name="advanced_explainer">Thiết đặt nâng cao như thử nghiệm và xuất/nhập</string>
     <string name="license_mit">Giấy phép MIT</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Đã bật chế độ Shizuku, nhấn vào một ứng dụng để chuyển đổi khả năng xử lý liên kết tự động. Nhấn và giữ một ứng dụng để mở thực đơn thiết đặt \"Mở theo mặc định\".</string>
     <string name="enable_all">Bật tất cả</string>
     <string name="disable_all">Tắt tất cả</string>
     <string name="shizuku_integration_enabled_explainer">Tích hợp Shizuku đã được kích hoạt thành công!</string>
-    <string name="shizuku_not_running_explainer">Shizuku đang không chạy. Nhấn vào đây để mở Shizuku, sau đó làm theo hướng dẫn để khởi động nó</string>
+    <string name="shizuku_not_running_explainer">Shizuku không chạy. Nhấn vào đây để mở Shizuku, sau đó làm theo hướng dẫn để khởi động.</string>
     <string name="shizuku_integration">Tích hợp Shizuku</string>
     <string name="download_started_toast">Thông báo ngắn đã bắt đầu tải xuống</string>
     <string name="known_trackers">Trình theo dõi đã biết</string>
@@ -265,35 +265,35 @@
     <string name="welcome_to_linksheet_explainer_2">Để LinkSheet hoạt động, nó cần được đặt làm trình duyệt hệ thống, vì vậy nó có thể chặn các nhấp chuột liên kết. Đừng lo lắng, LinkSheet có rất nhiều tùy chọn tùy chỉnh, vì vậy điều này sẽ không giới hạn, mà là nâng cao trải nghiệm của bạn.</string>
     <string name="disable_link_handling">Tắt xử lý liên kết</string>
     <string name="open_link_with_subtitle_2">LinkSheet ban đầu dựa trên OpenLinkWith</string>
-    <string name="donate_card">Quyên góp bằng thẻ (qua BuyMeACoffee)</string>
-    <string name="donate_explainer_crypto">Khi quyên góp bằng tiền điện tử, để nhận <b>LinkSheet Pro</b>, hãy gửi bằng chứng thanh toán đến <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_card">Quyên tặng bằng thẻ (qua BuyMeACoffee)</string>
+    <string name="donate_explainer_crypto">Khi quyên tặng bằng tiền điện tử, hãy gửi email đến <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="onboarding4_paragraph_2">Điều này rất khó chịu, vì đôi khi, bạn không muốn mở một liên kết trong ứng dụng của nó, mà là trong một trình duyệt (ví dụ: để đánh dấu trang).
 \n
 \nAhh, Google cổ điển, làm tê liệt các sản phẩm của chính họ mà không có cách đơn giản để khôi phục lại hành vi cũ
 \n
 \nDù sao đi nữa, họ đã để lại một \"lỗ hổng\" nhỏ: Xử lý liên kết có thể bị vô hiệu hóa trên cơ sở mỗi ứng dụng. Bạn có thể cho rằng điều này sẽ mang lại trình chọn ứng dụng cũ, nhưng tất nhiên (cảm ơn Google!), Đó không phải là trường hợp, như bây giờ, liên kết sẽ luôn mở trong trình duyệt mặc định của bạn. Đó là lý do tại sao LinkSheet được tạo ra.</string>
-    <string name="linksheet_donation_explainer_2">Khoản quyên góp hơn <b>5€</b> (<b>4€</b> nếu bạn quyên góp bằng tiền điện tử!) Cho phép bạn truy cập vào <b>LinkSheet Pro</b>, hiện chỉ ẩn biểu ngữ quyên góp trên màn hình chính của ứng dụng, nhưng trong tương lai, sẽ có các <b>tính năng dành riêng cho Pro.</b></string>
+    <string name="linksheet_donation_explainer_2">Khoản quyên tặng hơn <b>5€</b> cho phép bạn truy cập vào <b>LinkSheet Pro</b>, bao gồm <b>các tính năng độc quyền của Pro</b> chẳng hạn như: theo dõi các chuyển hướng bên ngoài, nhận được các chuyển hướng không phải-Các trang AMP bên ngoài và nhiều trang khác sắp ra mắt! \u0020</string>
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
     <string name="opening_with_app_toast">Hiển thị thông báo ngắn khi một ứng dụng được khởi chạy tự động</string>
     <string name="discord_explainer">Hãy trò chuyện trên máy chủ Discord của chúng tôi! Trò chuyện với người dùng và nhà phát triển của LinkSheet về tương lai của nó và những nỗ lực khác!</string>
-    <string name="shizuku_integration_no_permission_explainer">Nhấn vào đây để yêu cầu sự cho phép của Shizuku</string>
-    <string name="shizuku_integration_not_setup_explainer">Mặc dù không thực sự cần thiết để LinkSheet hoạt động, Shizuku được khuyến khích. Nhấn vào đây để cài đặt nó</string>
+    <string name="shizuku_integration_no_permission_explainer">Nhấn vào đây để yêu cầu sự cho phép của Shizuku.</string>
+    <string name="shizuku_integration_not_setup_explainer">Mặc dù không thực sự cần thiết để LinkSheet hoạt động nhưng bạn nên sử dụng Shizuku. Nhấn vào đây để cài đặt nó.</string>
     <string name="include_throwable">Bao gồm nhật ký sự cố (được khuyến nghị, nhưng không thể chỉnh sửa)</string>
     <string name="copy_version_information">Sao chép thông tin phiên bản</string>
-    <string name="donation">Quyên góp</string>
+    <string name="donation">Quyên tặng</string>
     <string name="just_version">Phiên bản</string>
     <string name="running_unofficial_build">Bản dựng không chính thức</string>
     <string name="debug_build">Bản dựng gỡ lỗi</string>
     <string name="notifications">Thông báo</string>
-    <string name="notifications_explainer">Định cấu hình thông báo ngắn</string>
+    <string name="notifications_explainer">Cấu hình thông báo ngắn</string>
     <string name="fastforward_version">Quy tắc chuyển tiếp nhanh</string>
-    <string name="enable_new_bottom_sheet">Bật bảng dưới cùng mới</string>
-    <string name="new_bottomsheet">Bảng dưới cùng mới</string>
+    <string name="enable_new_bottom_sheet">Bật trang dưới cùng mới</string>
+    <string name="new_bottomsheet">Trang dưới cùng mới</string>
     <string name="no_internet_connection">Không có kết nối Internet</string>
     <string name="online_services">Dịch vụ trực tuyến</string>
     <string name="follow_redirects_short">Chuyển hướng</string>
     <string name="unknown_host">%s bị chặn hoặc không tồn tại</string>
-    <string name="enable_dev_bottom_sheet">Bật bảng dưới cùng của nhà phát triển</string>
+    <string name="enable_dev_bottom_sheet">Bật trang dưới cùng của nhà phát triển</string>
     <string name="privacy_settings_explainer">Các thiết đặt như bao gồm người giới thiệu</string>
     <string name="shizuku_manager_start_failed">Không khởi động được Trình quản lý Shizuku, vui lòng khởi động thủ công!</string>
     <string name="start_setup">Tiếp tục</string>
@@ -316,9 +316,9 @@
     <string name="dev_explainer">Thiết đặt dành cho nhà phát triển</string>
     <string name="url_copied_toast">Thông báo ngắn đã sao chép URL</string>
     <string name="url_copied_toast_explainer">Hiển thị thông báo ngắn khi URL được người dùng sao chép</string>
-    <string name="enable_new_bottom_sheet_explainer">Sử dụng bảng dưới cùng được làm lại thay vì bảng cũ</string>
+    <string name="enable_new_bottom_sheet_explainer">Sử dụng trang dưới cùng được làm lại thay vì cái cũ</string>
     <string name="title_activity_main2">HoạtĐộngChính2</string>
-    <string name="enable_dev_bottom_sheet_explainer">Kích hoạt phiên bản bảng dưới cùng mới nhất hiện đang được phát triển</string>
+    <string name="enable_dev_bottom_sheet_explainer">Kích hoạt phiên bản trang dưới cùng mới nhất hiện đang được phát triển</string>
     <string name="onboarding_0_subtitle">Chọn luôn được nhắc khi mở một liên kết, đặt trình duyệt mặc định và hơn thế nữa</string>
     <string name="onboarding_0_title">Chào mừng bạn đến
 \nLinkSheet</string>
@@ -327,4 +327,96 @@
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="apps_explainer">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
+    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> thử nghiệm</string>
+    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. \u0020Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ngụ ý liên quan đến quyền riêng tư </annotation> \u0020</string>
+    <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. \u0020Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư </annotation> \u0020</string>
+    <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>) \u0020</string>
+    <string name="github">Github</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="app_name">LinkSheet</string>
+    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
+    <string name="fastforward">FastForward</string>
+    <string name="clear_urls">ClearURLs</string>
+    <string name="amp2html">Amp2Html</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="show_linksheet_referrer">Hiển thị người giới thiệu LinkSheet</string>
+    <string name="show_linksheet_referrer_explainer">Khi một ứng dụng được khởi chạy, nó có thể kiểm tra xem ứng dụng nào đã khởi chạy hoặc \"được tham chiếu\" tới ứng dụng đó. Theo mặc định, khi LinkSheet khởi chạy một ứng dụng, nó sẽ tự ẩn và nói rằng ứng dụng đã khởi chạy LinkSheet là mục tiêu được khởi chạy. Bật tính năng này để xác nhận lại LinkSheet làm liên kết giới thiệu cho các ứng dụng mà nó mở ra.</string>
+    <string name="parse_shared_text_intent_explainer">Khi hành động chia sẻ được gọi từ một ứng dụng chia sẻ văn bản có chứa url, hãy thử tìm (và sử dụng) url đầu tiên trong văn bản thay vì thất bại</string>
+    <string name="theme_enable_material_you">Màu động</string>
+    <string name="base_config">Cấu hình bổ sung</string>
+    <string name="onboarding_5_card_title">Thiết lập</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet đã phát hiện ít nhất một ứng dụng được biết là một trình duyệt.</string>
+    <string name="donate_crypto">Quyên tặng qua tiền điện tử</string>
+    <string name="donate_learn_more">Tìm hiểu thêm</string>
+    <string name="manual_build">Được xây dựng và ký thủ công bởi 1fexd</string>
+    <string name="flavor">Hương vị:</string>
+    <string name="type">Loại:</string>
+    <string name="enable_linksheet_compat_explainer">Thực đơn có thể được tìm thấy trong thực đơn phụ \"Ứng dụng\" và khi được cài đặt, có thể chặn các yêu cầu đối với một số ứng dụng gốc nhất định.</string>
+    <string name="new_bottomsheet_explainer">Phiên bản LinkSheet này có trang dưới cùng mới nhờ <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Vui lòng cung cấp phản hồi trên Discord, Github hoặc qua email.
+\n
+\nBạn có thể quay lại trang dưới cùng cũ thông qua Cài đặt -&gt; Nâng cao -&gt; Cờ tính năng. \u0020</string>
+    <string name="tap_customization">Tùy chỉnh nhấn</string>
+    <string name="tap_customization_single_tap">Nhấn một lần</string>
+    <string name="tap_customization_double_tap">Nhấn đúp</string>
+    <string name="tap_customization_long_tap">Nhấn lâu</string>
+    <string name="no_action">Không có hành động</string>
+    <string name="theme_enable_material_you_explainer">Sử dụng chủ đề thiết bị Material You của Android 12+</string>
+    <string name="experiments_explainer">Dùng thử các tính năng hiện đang được phát triển</string>
+    <string name="tap_customization_dialog_title_single_tap">nhấn một lần</string>
+    <string name="tap_customization_dialog_title_double_tap">nhấn đúp</string>
+    <string name="tap_customization_dialog_title_long_tap">nhấn lâu</string>
+    <string name="tap_customization_dialog_text">Chọn hành động cần thực hiện</string>
+    <string name="cancel">Hủy</string>
+    <string name="open_app_settings_page">Mở trang thiết đặt của ứng dụng</string>
+    <string name="open_app">Mở ứng dụng</string>
+    <string name="select_app">Chọn ứng dụng</string>
+    <string name="expand_on_app_select">Mở rộng khi một ứng dụng được chọn</string>
+    <string name="expand_on_app_select_explainer">Tự động mở rộng trang dưới cùng khi chọn một ứng dụng</string>
+    <string name="export_privacy">Để tìm hiểu về quyền riêng tư khi xuất, bạn có thể truy cập <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">liên kết</annotation> này. \u0020</string>
+    <string name="nightly_experiments_card">Thử nghiệm hàng đêm</string>
+    <string name="experiments_explainer_2">Phát triển tích cực</string>
+    <string name="experiments">Thử nghiệm</string>
+    <string name="onboarding_1_subtitle">LinkSheet cần được đặt làm trình duyệt mặc định để xử lý các liên kết đã nhấn</string>
+    <string name="nightly_experiments_card_explainer">Nhấn để kiểm tra các tính năng hiện đang được phát triển</string>
+    <string name="app_setup">Thiết lập ứng dụng</string>
+    <string name="start_setup_explainer">Chức năng của LinkSheet yêu cầu cấu hình Android tùy chỉnh. Thiết lập sau đây sẽ hướng dẫn bạn thực hiện quy trình gồm nhiều bước.</string>
+    <string name="onboarding_setup">Thiết lập LinkSheet</string>
+    <string name="at_least_one_known_browser_installed">Đã cài đặt ít nhất một trình duyệt</string>
+    <string name="github_pipeline_build">Được xây dựng và ký bởi quy trình làm việc Github</string>
+    <string name="no_browser_installed_explainer">LinkSheet không thể phát hiện ít nhất một ứng dụng tự xưng là một trình duyệt. Để có trải nghiệm tốt nhất, hãy cài đặt một trình duyệt.</string>
+    <string name="tap_customization_dialog_title">Cấu hình %s</string>
+    <string name="donate">Quyên tặng</string>
+    <string name="donate_card_subtitle_2">Quyên tặng tiền điện tử</string>
+    <string name="disclaimer_libredirect_unstable">Ngoài việc là một tính năng thử nghiệm, LibRedirect hiện được coi là rất không ổn định và có thể không hoạt động.</string>
+    <string name="permission_required_explainer">Một số tùy chọn đã nhập yêu cầu các quyền hiện không được cấp cho LinkSheet. Hãy nhấn vào bên dưới để yêu cầu chúng.</string>
+    <string name="reset_app_link_verification_status_subtitle">Nhấn vào đây để đặt lại trạng thái xác minh liên kết ứng dụng của tất cả các ứng dụng, sau đó đợi vài phút trong khi Android xác minh lại chúng. Bạn sẽ không nhận được xác nhận. Yêu cầu Shizuku.</string>
+    <string name="telemetry_dialog_text_2">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">đây</annotation>. \u0020</string>
+    <string name="resolve_embeds_explainer">Giải quyết các bản sao nhúng như fxtwitter.com vào máy chủ thực sự</string>
+    <string name="experiments_explainer_3">Các thử nghiệm đang được phát triển tích cực và có thể không hoạt động chính xác hoặc hoàn toàn không hoạt động. Vui lòng không báo cáo lỗi trên Github. Nếu bạn muốn cung cấp phản hồi, hãy làm như vậy trên Discord.</string>
+    <string name="donate_card_headline">Quyên tặng để hỗ trợ LinkSheet</string>
+    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng.
+\nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền. \u0020</string>
+    <string name="new_dev_bottom_sheet_explainer">Bạn không thích trang dưới cùng mới? Nhấn để báo cáo vấn đề.</string>
+    <string name="experiment">Thử nghiệm</string>
+    <string name="new_dev_bottom_sheet_feature_explainer">Trang dưới cùng mới sắp hoàn thành tính năng. Đáng chú ý là tính năng tùy chỉnh nhấn chưa có sẵn và sẽ được triển khai sau.
+\nVui lòng báo cáo lỗi trên <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord </annotation> hoặc qua <annotation url="mailto:1fexd@420blaze.it">Email</annotation>. \u0020</string>
+    <string name="resolve_embeds">Giải quyết nhúng</string>
+    <string name="show_native_label_explainer">Hiển thị nhãn bên cạnh các ứng dụng hỗ trợ liên kết đã mở</string>
+    <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>
+    <string name="telemetry_configure_type">Loại phân tích</string>
+    <string name="telemetry_configure_title">Phân tích</string>
+    <string name="resolve_activity_failure">Không thể giải quyết hoạt động!</string>
+    <string name="onboarding_2_card_explainer">Shizuku cho phép LinkSheet vô hiệu hóa hành vi xử lý liên kết mặc định của tất cả các ứng dụng cùng một lúc, thay vì phải vô hiệu hóa chúng theo cách thủ công cho từng ứng dụng riêng lẻ (đây là bước tiếp theo).</string>
+    <string name="commit">Cam kết:</string>
+    <string name="onboarding_2_subtitle">Nếu bạn cài đặt nhiều ứng dụng, Shizuku có thể cải thiện đáng kể trải nghiệm của bạn</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="onboarding_2_start_shizuku">Khởi động Shizuku</string>
+    <string name="hide_bottom_sheet_choice_buttons">Ẩn các nút lựa chọn</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Ẩn các nút \"Một lần\" và \"Luôn luôn\" ở trang dưới cùng</string>
+    <string name="onboarding_2_title">Bạn có muốn sử dụng Shizuku không?</string>
+    <string name="onboarding_2_request_shizuku_permission">Yêu cầu quyền</string>
+    <string name="branch">Nhánh:</string>
+    <string name="onboarding_2_install_shizuku">Cài đặt Shizuku</string>
+    <string name="onboarding_2_shizuku_enabled">Kế tiếp</string>
 </resources>

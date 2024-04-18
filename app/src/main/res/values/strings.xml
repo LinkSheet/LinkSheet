@@ -90,10 +90,10 @@
     <string name="whitelisted_explainer">Only show whitelisted browsers</string>
     <string name="save">Save</string>
     <string name="whitelisted_browsers">Whitelisted browsers</string>
-    <string name="apps_explainer">Preferred apps and verified link handlers</string>
-    <string name="bottom_sheet_explainer">Sort by usage, enable copy button, enable share button etc.</string>
+    <string name="apps_explainer">Preferred apps, verified link handlers</string>
+    <string name="bottom_sheet_explainer">Grid layout, sort by usage, tap customization, url-bar</string>
     <string name="about">About</string>
-    <string name="about_explainer">About this app, licenses</string>
+    <string name="about_explainer">Credits, License, Links, Version</string>
     <string name="credits">Credits</string>
     <string name="credits_explainer">Open source licensing</string>
     <string name="version">LinkSheet Version</string>
@@ -111,7 +111,7 @@
     <string name="error">Error</string>
     <string name="checkmark">Checkmark</string>
     <string name="links">Links</string>
-    <string name="links_explainer">Settings regarding link manipulation</string>
+    <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Follow redirects</string>
     <string name="use_clear_urls">Use ClearURLs</string>
     <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs
     </annotation> integration (clears tracking parameters from URLs)
@@ -134,7 +134,7 @@
         tracker/redirect. If \"Follow redirects via external service\" is enabled, this will always be enabled.
     </string>
     <string name="theme">Theme</string>
-    <string name="theme_explainer">Change the theme of the app</string>
+    <string name="theme_explainer">Material You, dark theme, pure black mode</string>
     <string name="system">Follow system</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
@@ -198,7 +198,7 @@
     <string name="always_disable_explainer">Always disable the In-App browser, regardless of what the app wants to use
     </string>
     <string name="browser">Browser</string>
-    <string name="browser_explainer">Browser mode and In-App browser settings</string>
+    <string name="browser_explainer">Browser mode, In-App browser</string>
     <string name="disable_in_selected">Disable in selected</string>
     <string name="disable_in_selected_explainer">Disable In-App browser in selected apps, regardless of what the app
         wants to use
@@ -216,7 +216,7 @@
     <string name="app_crashed">Looks like LinkSheet has crashed, checkout the error below</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="debug">Debug</string>
-    <string name="debug_explainer">View app logs</string>
+    <string name="debug_explainer">App logs, verified handler reset</string>
     <string name="logs">Logs</string>
     <string name="logs_explainer">View app logs</string>
     <string name="app_log">App log</string>
@@ -286,7 +286,7 @@
     </string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Advanced settings like experiments and export/import</string>
+    <string name="advanced_explainer">Feature Flags, Experiments, Import/Export</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer">Shizuku lets LinkSheet interact with system APIs directly</string>
     <string name="enable_shizuku">Enable (experimental) Shizuku integration</string>
@@ -369,8 +369,8 @@
     <string name="configure">Configure</string>
     <string name="configure_explainer">Tap here to configure LinkSheetCompat</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
-    <string name="general">General</string>
-    <string name="general_settings_explainer">Settings concerning the whole app</string>
+    <string name="general">Miscellaneous</string>
+    <string name="general_settings_explainer">Always show package names</string>
     <string name="no_handlers_found">No browser or native app found!</string>
     <string name="no_handlers_found_explainer">LinkSheet can not open this link.</string>
     <string name="success">Success</string>
@@ -421,7 +421,7 @@
         \"referred\" to it. By default, when LinkSheet launches an app, it hides itself, saying that the app that
         launched LinkSheet is the launched target. Enable this to reinsert LinkSheet as the referrer for apps it opens.
     </string>
-    <string name="privacy_settings_explainer">Settings like referrer inclusion</string>
+    <string name="privacy_settings_explainer">Referrer privacy, telemetry</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Come chat on our Discord server!
@@ -483,7 +483,7 @@
     <string name="dev">Developer</string>
     <string name="dev_explainer">Developer settings</string>
     <string name="notifications">Notifications</string>
-    <string name="notifications_explainer">Configure toast notifications</string>
+    <string name="notifications_explainer">URL copied, Download started</string>
     <string name="url_copied_toast">URL copied toast</string>
     <string name="url_copied_toast_explainer">Show a toast when an URL is copied by the user</string>
     <string name="download_started_toast">Download started toast</string>
@@ -690,7 +690,10 @@
     <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
     <string name="switch_profile">Enable profile switching</string>
     <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-)
-        profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app access ->
+        profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app
+        access ->
         Connected work &amp; personal apps
     </string>
+    <string name="customization">Customization</string>
+    <string name="Miscellaneous">Miscellaneous</string>
 </resources>

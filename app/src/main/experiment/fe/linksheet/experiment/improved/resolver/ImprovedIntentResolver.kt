@@ -295,7 +295,6 @@ class ImprovedIntentResolver(
             )
         }
 
-
         return BrowserHandler.BrowserModeConfigHelper(
             browserMode = browserMode(),
             selectedBrowser = selectedBrowser(),

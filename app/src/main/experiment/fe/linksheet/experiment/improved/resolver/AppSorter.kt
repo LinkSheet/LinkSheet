@@ -39,6 +39,7 @@ object AppSorter {
     }
 
     private fun createUsageStatComparator(context: Context): Comparator<DisplayActivityInfo>? {
+        // TODO: Should probably be done somewhere else
         val usageStatsManager = context.getSystemService(UsageStatsManager::class.java)
 
         val sinceTime: Long = System.currentTimeMillis() - usageStatsPeriod

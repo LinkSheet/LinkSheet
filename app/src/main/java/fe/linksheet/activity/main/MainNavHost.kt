@@ -39,11 +39,21 @@ import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
 import fe.linksheet.util.AndroidVersion
 
 @Composable
-fun MainNavHost(navController: NavHostController, uiOverhaul: Boolean, onBackPressed: () -> Unit) {
+fun MainNavHost(
+    // TODO: Refactor navController away
+    navController: NavHostController,
+    uiOverhaul: Boolean,
+    navigate: (String) -> Unit,
+    onBackPressed: () -> Unit,
+) {
     NavHost(navController = navController, startDestination = mainRoute) {
         animatedComposable(route = mainRoute) {
             if (uiOverhaul) {
@@ -54,10 +64,11 @@ fun MainNavHost(navController: NavHostController, uiOverhaul: Boolean, onBackPre
         }
 
         animatedComposable(route = settingsRoute) {
-            SettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
-            )
+            if (uiOverhaul) {
+                NewSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            } else {
+                SettingsRoute(navController = navController, onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = appsSettingsRoute) {
@@ -75,11 +86,19 @@ fun MainNavHost(navController: NavHostController, uiOverhaul: Boolean, onBackPre
         }
 
         animatedComposable(route = generalSettingsRoute) {
-            GeneralSettingsRoute(onBackPressed = onBackPressed)
+            if (uiOverhaul) {
+                MiscSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                GeneralSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = notificationSettingsRoute) {
-            NotificationSettingsRoute(onBackPressed = onBackPressed)
+            if (uiOverhaul) {
+                NewNotificationSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                NotificationSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = privacySettingsRoute) {
@@ -125,10 +144,14 @@ fun MainNavHost(navController: NavHostController, uiOverhaul: Boolean, onBackPre
         }
 
         animatedComposable(route = advancedSettingsRoute) {
-            AdvancedSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
-            )
+            if (uiOverhaul) {
+                NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            } else {
+                AdvancedSettingsRoute(
+                    navController = navController,
+                    onBackPressed = onBackPressed
+                )
+            }
         }
 
         animatedComposable(route = shizukuSettingsRoute) {

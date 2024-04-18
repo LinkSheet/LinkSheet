@@ -508,4 +508,7 @@
     <string name="link_handle_failed_text">LinkSheet no puede manejar este enlace ya que parece estar malformado. Puede editarlo a continuación e intentarlo de nuevo. Alternativamente, puede buscar en la web.</string>
     <string name="link_handle_failed_text_field_label">Consulta</string>
     <string name="resolve_activity_failure">¡No se pudo resolver la actividad!</string>
+    <string name="reset_app_link_verification_status">Restablecer el estado de verificación del enlace de la aplicación</string>
+    <string name="reset_app_link_verification_status_subtitle">Toque aquí para restablecer el estado de verificación del enlace de la aplicación de todas las aplicaciones y luego espere unos minutos mientras Android las vuelve a verificar. No recibirás una confirmación. Requiere Shizuku.</string>
+    <string name="reset_app_link_verification_status_toast">Solicitada una nueva verificación</string>
 </resources>

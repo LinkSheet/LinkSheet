@@ -140,7 +140,10 @@
     <string name="dark">Dark</string>
     <string name="amoled_black">Amoled Black</string>
     <string name="fastfoward_rules">Use FastForward rules</string>
-    <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
+    <string name="fastfoward_rules_explainer">Use experimental <annotation
+            url="https://github.com/FastForwardTeam/FastForward">FastForward
+    </annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)
+    </string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
     <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
     <string name="resolved_via">%s resolved via %s</string>
@@ -149,7 +152,10 @@
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="redirect_resolve_type_not_resolved">none</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integration</string>
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation
+            url="https://github.com/libredirect/libredirect">LibRedirect
+    </annotation> integration
+    </string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
@@ -370,7 +376,9 @@
     <string name="success">Success</string>
     <string name="warning">Warning</string>
     <string name="at_least_one_known_browser_installed">At least one browser installed</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet has detected at least one app known to be a browser.</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet has detected at least one app known to be a
+        browser.
+    </string>
     <string name="at_least_one_unknown_browser_installer">At least one (unknown) browser installed</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet has detected at least one app claiming to
         be a browser. LinkSheet\'s list may not be complete. If you think this is an error, submit an issue on Github.
@@ -423,10 +431,14 @@
     <string name="donate_card_subtitle_2">Donate crypto</string>
     <string name="donate_crypto">Donate via crypto</string>
     <string name="donate_card">Donate with card (via BuyMeACoffee)</string>
-    <string name="donate_explainer_crypto">When donating with crypto, send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
+    <string name="donate_explainer_crypto">When donating with crypto, send an email to <annotation
+            url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.
+    </string>
     <string name="donate_learn_more">Learn more</string>
     <string name="donate">Donate</string>
-    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet Pro</b>, which includes <b>Pro exclusive features</b> such as: following redirects externally, obtaining non-AMP pages externally and more to come!
+    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet
+        Pro</b>, which includes <b>Pro exclusive features</b> such as: following redirects externally, obtaining non-AMP
+        pages externally and more to come!
     </string>
     <string name="built_by">Built and signed by</string>
     <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow.</string>
@@ -653,7 +665,8 @@
     <string name="telemetry_dialog_text_2">Usage metrics include a random, user-resettable installation-bound
         identifier, as well as your Android version, and are stored at
         <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data,
-        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
+        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation
+                url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
     </string>
     <string name="analytics">Analytics</string>
     <string name="telemetry_configure_title">Analytics</string>
@@ -661,15 +674,23 @@
     <string name="telemetry_configure_type">Analytics type</string>
     <string name="link_handle_failed">An error occured</string>
     <string name="try_share">Share</string>
-    <string name="link_handle_failed_text">LinkSheet can not handle this link as it appears to be malformed. You can edit it below, then try again. Alternatively, you can search on the web.</string>
+    <string name="link_handle_failed_text">LinkSheet can not handle this link as it appears to be malformed. You can
+        edit it below, then try again. Alternatively, you can search on the web.
+    </string>
     <string name="edit">Edit</string>
     <string name="link_handle_failed_text_field_label">Query</string>
     <string name="retry">Try again</string>
     <string name="something_went_wrong">Something went wrong, please try again.</string>
     <string name="resolve_activity_failure">Failed to resolve activity!</string>
     <string name="reset_app_link_verification_status">Reset app link verification status</string>
-    <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all apps, then way a few
+    <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all
+        apps, then way a few
         minutes while Android re-verifies them. You will not receive a confirmation. Requires Shizuku.
     </string>
     <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
+    <string name="switch_profile">Enable profile switching</string>
+    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-)
+        profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app access ->
+        Connected work &amp; personal apps
+    </string>
 </resources>

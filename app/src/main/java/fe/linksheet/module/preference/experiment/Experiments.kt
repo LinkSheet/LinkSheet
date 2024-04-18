@@ -18,6 +18,8 @@ object Experiments : PreferenceDefinition("experiment_drop_categories") {
     val newQueryManager = boolean("experiment_new_query_manager")
     val uiOverhaul = boolean("experiment_ui_overhaul")
 
+    val improvedIntentResolver = boolean("experiment_improved_intent_resolver")
+
     // TODO: Enforce type
     init {
         experiments = listOf(
@@ -25,6 +27,7 @@ object Experiments : PreferenceDefinition("experiment_drop_categories") {
             Experiment("share_to", hidden = false, allowCustomShareExtras, checkAllExtras),
             Experiment("new_query_manager", true, newQueryManager),
             Experiment("ui_overhaul", true, uiOverhaul),
+            Experiment("improved_intent_resolver", true, improvedIntentResolver)
         )
 
         finalize()

@@ -9,6 +9,7 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 
 val resolverModule = module {
     singleOf(::IntentResolver)
@@ -18,4 +19,5 @@ val resolverModule = module {
     singleOf(::Amp2HtmlUrlResolver)
     singleOf(::LibRedirectResolver)
     singleOf(::BrowserResolver)
+    singleOf(::ImprovedIntentResolver)
 }

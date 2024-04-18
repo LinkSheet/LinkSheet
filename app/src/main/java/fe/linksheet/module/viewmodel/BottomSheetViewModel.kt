@@ -107,8 +107,6 @@ class BottomSheetViewModel(
     val switchProfile = experimentRepository.asState(Experiments.switchProfile)
     val improvedIntentResolver = experimentRepository.asState(Experiments.improvedIntentResolver)
 
-    val newQueryManager = experimentRepository.asState(Experiments.newQueryManager)
-
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
     val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)

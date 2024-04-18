@@ -4,7 +4,12 @@ import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.compose.StatePreference
 
-object Experiments : PreferenceDefinition("experiment_drop_categories") {
+object Experiments : PreferenceDefinition(
+    "experiment_drop_categories",
+    "experiment_share_allow_custom_share_extras",
+    "experiment_share_check_all_extras",
+    "experiment_new_query_manager"
+) {
     val experiments: List<Experiment>
 
     val experimentalUrlBar = boolean("experiment_url_bar")
@@ -12,10 +17,6 @@ object Experiments : PreferenceDefinition("experiment_drop_categories") {
     val declutterUrl = boolean("experiment_url_bar_declutter_url")
     val switchProfile = boolean("experiment_url_bar_switch_profile")
 
-    val allowCustomShareExtras = boolean("experiment_share_allow_custom_share_extras")
-    val checkAllExtras = boolean("experiment_share_check_all_extras")
-
-    val newQueryManager = boolean("experiment_new_query_manager")
     val uiOverhaul = boolean("experiment_ui_overhaul")
 
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver")
@@ -24,8 +25,6 @@ object Experiments : PreferenceDefinition("experiment_drop_categories") {
     init {
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, experimentalUrlBar, urlPreview, declutterUrl, switchProfile),
-            Experiment("share_to", hidden = false, allowCustomShareExtras, checkAllExtras),
-            Experiment("new_query_manager", true, newQueryManager),
             Experiment("ui_overhaul", true, uiOverhaul),
             Experiment("improved_intent_resolver", true, improvedIntentResolver)
         )

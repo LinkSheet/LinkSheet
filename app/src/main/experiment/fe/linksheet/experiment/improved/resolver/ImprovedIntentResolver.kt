@@ -107,9 +107,6 @@ class ImprovedIntentResolver(
     private val resolveEmbeds = prefRepo.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
-    private val parseShareText = featureFlagRepository.asState(FeatureFlags.parseShareText)
-    private val allowCustomShareExtras = experimentRepository.asState(Experiments.allowCustomShareExtras)
-    private val checkAllExtras = experimentRepository.asState(Experiments.checkAllExtras)
 
     private val browserResolver = BrowserResolver(context)
 
@@ -130,7 +127,7 @@ class ImprovedIntentResolver(
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) return searchIntentResult
 
-        var uri = getUriFromIntent(intent, allowCustomShareExtras(), checkAllExtras(), parseShareText())
+        var uri = getUriFromIntent(intent)
 
         if (uri == null) {
             Log.d("ImprovedIntentResolver", "Failed to parse intent ${intent.action}")
@@ -275,19 +272,9 @@ class ImprovedIntentResolver(
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)
     }
 
-    private fun getUriFromIntent(
-        intent: SafeIntent,
-        allowCustomExtras: Boolean,
-        tryParseAllExtras: Boolean,
-        parseText: Boolean,
-    ): Uri? {
+    private fun getUriFromIntent(intent: SafeIntent): Uri? {
         if (intent.action == Intent.ACTION_SEND) {
-            return IntentParser.parseSendAction(
-                intent,
-                allowCustomExtras = allowCustomExtras,
-                tryParseAllExtras = tryParseAllExtras,
-                parseText = parseText
-            )
+            return IntentParser.parseSendAction(intent)
         }
 
         if (intent.action == Intent.ACTION_VIEW) {

@@ -22,8 +22,7 @@ class FeatureFlagViewModel(
             featureFlagRepository.asState(FeatureFlags.linkSheetCompat),
             R.string.enable_linksheet_compat,
             R.string.enable_linksheet_compat_explainer
-        ),
-        Flag.Full(featureFlagRepository.asState(FeatureFlags.parseShareText), R.string.parse_shared_text_intent, R.string.parse_shared_text_intent_explainer)
+        )
     )
 }
 

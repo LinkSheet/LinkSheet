@@ -30,9 +30,9 @@ object IntentParser {
 
     fun parseSendAction(
         intent: SafeIntent,
-        allowCustomExtras: Boolean = false,
-        tryParseAllExtras: Boolean = false,
-        parseText: Boolean = false,
+        allowCustomExtras: Boolean = true,
+        tryParseAllExtras: Boolean = true,
+        parseText: Boolean = true,
     ): Uri? {
         if (intent.data != null) return intent.data
 

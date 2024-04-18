@@ -136,11 +136,6 @@ class IntentResolver(
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
-    private val parseShareText = featureFlagRepository.asState(FeatureFlags.parseShareText)
-    private val allowCustomShareExtras = experimentRepository.asState(Experiments.allowCustomShareExtras)
-    private val checkAllExtras = experimentRepository.asState(Experiments.checkAllExtras)
-
-    private val newQueryManager = experimentRepository.asState(Experiments.newQueryManager)
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
@@ -188,12 +183,7 @@ class IntentResolver(
         }
 
         if (intent.action == Intent.ACTION_SEND) {
-            startUri = IntentParser.parseSendAction(
-                intent,
-                allowCustomExtras = allowCustomShareExtras(),
-                tryParseAllExtras = checkAllExtras(),
-                parseText = parseShareText()
-            )
+            startUri = IntentParser.parseSendAction(intent)
         } else if (intent.action == Intent.ACTION_VIEW) {
             startUri = IntentParser.parseViewAction(intent)
         }
@@ -306,12 +296,7 @@ class IntentResolver(
             }
         }
 
-        val resolvedList: MutableList<UriViewActivity> = if (newQueryManager() && AndroidVersion.AT_LEAST_API_31_S) {
-            PackageQueryManager.findHandlers(context, uri!!).toMutableList()
-        } else {
-            context.packageManager.queryResolveInfosByIntent(newIntent, true).map { UriViewActivity(it, false) }
-                .toMutableList()
-        }
+        val resolvedList: MutableList<UriViewActivity> =  PackageQueryManager.findHandlers(context, uri!!).toMutableList()
 
         logger.debug(resolvedList, HashProcessor.UriViewActivityListProcessor, { it }, "ResolveList")
 

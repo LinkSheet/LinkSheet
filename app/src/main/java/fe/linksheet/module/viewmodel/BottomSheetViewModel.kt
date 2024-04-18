@@ -36,6 +36,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
+import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -102,11 +103,9 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
-    val experimentalUrlBar = experimentRepository.asState(Experiments.experimentalUrlBar)
     val declutterUrl = experimentRepository.asState(Experiments.declutterUrl)
-    val switchProfile = experimentRepository.asState(Experiments.switchProfile)
-
-    val newQueryManager = experimentRepository.asState(Experiments.newQueryManager)
+    val switchProfile = featureFlagRepository.asState(FeatureFlags.switchProfile)
+    val improvedIntentResolver = experimentRepository.asState(Experiments.improvedIntentResolver)
 
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)

@@ -1,6 +1,6 @@
 package fe.linksheet.module.resolver
 
-import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
@@ -8,7 +8,7 @@ import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
 
-class BrowserResolver(val context: Application) {
+class BrowserResolver(val context: Context) {
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
         private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")

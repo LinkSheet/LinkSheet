@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
-import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity
+import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.ui.LocalActivity
 import kotlin.reflect.KClass
 
@@ -53,7 +53,7 @@ fun DebugMenu() {
             FilledTonalActivityLauncher(
                 activity = activity,
                 text = "Improved bottom sheet",
-                intent = createIntent(activity, ImprovedBottomSheetActivity::class).setAction(Intent.ACTION_VIEW).setData(
+                intent = createIntent(activity, ImprovedBottomSheet::class).setAction(Intent.ACTION_VIEW).setData(
                     Uri.parse("https://www.youtube.com/watch?v=XaqdBRHG9cI"))
             )
         }

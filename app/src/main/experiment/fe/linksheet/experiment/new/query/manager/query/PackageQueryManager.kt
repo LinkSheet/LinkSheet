@@ -21,7 +21,6 @@ object PackageQueryManager : KoinComponent {
         PackageManager.MATCH_DISABLED_COMPONENTS
     )
 
-    @RequiresApi(Build.VERSION_CODES.S)
     fun findHandlers(context: Context, uri: Uri): List<UriViewActivity> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
         val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)

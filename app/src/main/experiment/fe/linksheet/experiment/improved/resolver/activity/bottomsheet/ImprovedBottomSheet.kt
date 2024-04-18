@@ -6,6 +6,7 @@ import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -26,7 +27,8 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
-import fe.linksheet.activity.BaseComponentActivity
+import fe.linksheet.activity.BottomSheetActivity
+import fe.linksheet.activity.bottomsheet.BottomSheetImpl
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
@@ -42,9 +44,7 @@ import fe.linksheet.extension.android.showToast
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -60,17 +60,43 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import mozilla.components.support.utils.toSafeIntent
+import okhttp3.internal.format
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class ImprovedBottomSheetActivity : BaseComponentActivity() {
-    private val viewModel by viewModel<BottomSheetViewModel>()
+class ImprovedBottomSheet(
+    val activity: BottomSheetActivity,
+    val viewModel: BottomSheetViewModel,
+    val intent: Intent,
+    val referrer: Uri?,
+) : BottomSheetImpl(), KoinComponent {
+    private val resolver by inject<ImprovedIntentResolver>()
+
+    private inline fun <reified T : Any> getSystemService(): T? {
+        return activity.getSystemService<T>()
+    }
+
+    private fun finish() {
+        activity.finish()
+    }
+
+    private fun startActivity(intent: Intent) {
+        activity.startActivity(intent)
+    }
+
+    private fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false, ) {
+        activity.showToast(textId = textId, duration = duration, uiThread = uiThread)
+    }
+
+    private fun showToast(text: String, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false, ) {
+        activity.showToast(text = text, duration = duration, uiThread = uiThread)
+    }
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContent(edgeToEdge = true) {
+        activity.setContent(edgeToEdge = true) {
             AppTheme { Wrapper() }
         }
     }
@@ -78,7 +104,6 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Wrapper() {
-        val resolver = remember { ImprovedIntentResolver(application, lifecycleScope) }
         var status by remember { mutableStateOf<IntentResolveResult>(IntentResolveResult.Pending) }
 
         // TODO: Use intent and referrer as keys?
@@ -149,13 +174,10 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
             bottomSheetViewModel = viewModel,
             result = status,
             declutterUrl = viewModel.declutterUrl(),
-            experimentalUrlBar = viewModel.experimentalUrlBar(),
             enableSwitchProfile = viewModel.switchProfile(),
             isExpanded = isExpanded,
             requestExpand = {},
-            hideDrawer = {
-
-            },
+            hideDrawer = {},
             showPackage = false,
             previewUrl = viewModel.previewUrl(),
             hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
@@ -167,7 +189,6 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: IntentResolveResult.Default,
-        experimentalUrlBar: Boolean,
         declutterUrl: Boolean,
         enableSwitchProfile: Boolean,
         isExpanded: Boolean,
@@ -194,10 +215,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
             ExperimentalUrlBar(
                 uri = uriString,
                 canSwitchProfile = canSwitch,
-                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(
-                    target!!
-                )
-                    .toString() else null,
+                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(target!!).toString() else null,
                 profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(
                     target!!
                 ) else null,
@@ -206,19 +224,19 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
                         val switchIntent = Intent(
                             Intent.ACTION_VIEW,
                             result.uri
-                        ).setComponent(this@ImprovedBottomSheetActivity.componentName)
+                        ).setComponent(activity.componentName)
                         crossProfileApps!!.startActivity(
                             switchIntent,
                             target!!,
-                            this@ImprovedBottomSheetActivity
+                            activity
                         )
 
                         finish()
                     }
                 },
-                unfurlResult = result?.unfurlResult,
-                downloadable = result?.downloadable?.isDownloadable() ?: false,
-                libRedirected = result?.libRedirectResult is LibRedirectResult.Redirected,
+                unfurlResult = result.unfurlResult,
+                downloadable = result.downloadable.isDownloadable(),
+                libRedirected = result.libRedirectResult is LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText("URL", result.uri.toString())
 
@@ -236,7 +254,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
                 },
                 downloadUri = {
                     bottomSheetViewModel.startDownload(
-                        resources, result.uri,
+                        activity.resources, result.uri,
                         result.downloadable as DownloadCheckResult.Downloadable
                     )
 
@@ -327,6 +345,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
             }
         }
     }
+
 
     data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
         override fun toString(): String {
@@ -491,7 +510,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
     }
 
     private fun resolveAsync(viewModel: BottomSheetViewModel): Deferred<Unit> {
-        return lifecycleScope.async {
+        return activity.lifecycleScope.async {
             val completed = viewModel.resolveAsync(intent, referrer).await()
 
             if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
@@ -509,6 +528,10 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
                 )
             }
         }
+    }
+
+    private fun getString(resId: Int, vararg formatArgs: String): String {
+        return activity.getString(resId, *formatArgs)
     }
 
     fun launchApp(
@@ -534,7 +557,7 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
 
             intent.putExtra(
                 LinkSheetConnector.EXTRA_REFERRER,
-                if (showAsReferrer) Uri.parse("android-app://${packageName}") else referrer,
+                if (showAsReferrer) Uri.parse("android-app://${activity.packageName}") else referrer,
             )
 
             if (!showAsReferrer) {
@@ -553,7 +576,6 @@ class ImprovedBottomSheetActivity : BaseComponentActivity() {
     }
 
     override fun onStop() {
-        super.onStop()
         finish()
     }
 }

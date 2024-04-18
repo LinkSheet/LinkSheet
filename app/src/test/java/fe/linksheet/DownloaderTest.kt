@@ -1,5 +1,6 @@
 package fe.linksheet
 
+import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
@@ -26,11 +27,11 @@ class DownloaderTest : KoinTest {
     @Test
     fun testCheckIsNonHtmlFileEnding() {
         mapOf(
-            Downloader.DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com",
-            Downloader.DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/",
-            Downloader.DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/yeet",
-            Downloader.DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/yeet.",
-            Downloader.DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/.yeet",
+            DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com",
+            DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/",
+            DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/yeet",
+            DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/yeet.",
+            DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/.yeet",
         ).forEach { (expected, inputUrl) ->
             assertEquals(expected, downloader.checkIsNonHtmlFileEnding(inputUrl))
         }
@@ -40,7 +41,7 @@ class DownloaderTest : KoinTest {
             "test.yeet.jpg" to "https://test.com/test.yeet.jpg",
         ).forEach { (expectedFile, inputUrl) ->
             val downloadable = downloader.checkIsNonHtmlFileEnding(inputUrl)
-            assertIs<Downloader.DownloadCheckResult.Downloadable>(downloadable)
+            assertIs<DownloadCheckResult.Downloadable>(downloadable)
             assertEquals(expectedFile, downloadable.toFileName())
         }
     }
@@ -52,10 +53,10 @@ class DownloaderTest : KoinTest {
             15
         )
 
-        assertIs<Downloader.DownloadCheckResult.Downloadable>(downloadable)
+        assertIs<DownloadCheckResult.Downloadable>(downloadable)
         assertEquals("FyWt0wvWAAAxgYk.jpg", downloadable.toFileName())
 
         val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com", 15)
-        assertIs<Downloader.DownloadCheckResult.NonDownloadable>(nonDownloadable)
+        assertIs<DownloadCheckResult.NonDownloadable>(nonDownloadable)
     }
 }

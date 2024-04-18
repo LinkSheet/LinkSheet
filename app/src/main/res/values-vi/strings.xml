@@ -353,8 +353,8 @@
     <string name="flavor">Hương vị</string>
     <string name="type">Loại</string>
     <string name="enable_linksheet_compat_explainer">Thực đơn có thể được tìm thấy trong thực đơn phụ \"Ứng dụng\" và khi được cài đặt, có thể chặn các yêu cầu đối với một số ứng dụng gốc nhất định.</string>
-    <string name="new_bottomsheet_explainer">Phiên bản LinkSheet này có trang dưới cùng mới nhờ <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Vui lòng cung cấp phản hồi trên Discord, Github hoặc qua email.
-\n
+    <string name="new_bottomsheet_explainer">Phiên bản LinkSheet này có trang dưới cùng mới nhờ <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Vui lòng cung cấp phản hồi trên Discord, Github hoặc qua email. 
+\n 
 \nBạn có thể quay lại trang dưới cùng cũ thông qua Cài đặt -&gt; Nâng cao -&gt; Cờ tính năng.</string>
     <string name="tap_customization">Tùy chỉnh nhấn</string>
     <string name="tap_customization_single_tap">Thao tác nhấn đơn</string>
@@ -395,11 +395,11 @@
     <string name="resolve_embeds_explainer">Giải quyết các bản sao nhúng như fxtwitter.com vào máy chủ thực sự</string>
     <string name="experiments_explainer_3">Các thử nghiệm đang được phát triển tích cực và có thể không hoạt động chính xác hoặc hoàn toàn không hoạt động. Vui lòng không báo cáo lỗi trên Github. Nếu bạn muốn cung cấp phản hồi, hãy làm như vậy trên Discord.</string>
     <string name="donate_card_headline">Quyên tặng để hỗ trợ LinkSheet</string>
-    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng.
+    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng. 
 \nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
     <string name="new_dev_bottom_sheet_explainer">Bạn không thích trang dưới cùng mới? Nhấn để báo cáo vấn đề.</string>
     <string name="experiment">Thử nghiệm</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Trang dưới cùng mới sắp hoàn thành tính năng. Đáng chú ý là tính năng tùy chỉnh nhấn chưa có sẵn và sẽ được triển khai sau.
+    <string name="new_dev_bottom_sheet_feature_explainer">Trang dưới cùng mới sắp hoàn thành tính năng. Đáng chú ý là tính năng tùy chỉnh nhấn chưa có sẵn và sẽ được triển khai sau. 
 \nVui lòng báo cáo lỗi trên <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord </annotation> hoặc qua <annotation url="mailto:1fexd@420blaze.it">Email</annotation>.</string>
     <string name="resolve_embeds">Giải quyết nhúng</string>
     <string name="show_native_label_explainer">Hiển thị nhãn bên cạnh các ứng dụng hỗ trợ liên kết đã mở</string>

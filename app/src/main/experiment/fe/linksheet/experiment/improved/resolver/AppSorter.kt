@@ -21,7 +21,7 @@ object AppSorter {
         returnLastChosen: Boolean = true,
     ): Pair<List<DisplayActivityInfo>, DisplayActivityInfo?> {
         val infos = toDisplay(context, appList.apps, appList.browsers)
-        val filtered = if (returnLastChosen && lastChosen != null) infos[lastChosen.pkg] else null
+        val filtered = if (returnLastChosen && lastChosen != null) infos.remove(lastChosen.pkg) else null
 
         val comparator = listOfNotNull(
             createHistoryComparator(historyMap),
@@ -55,7 +55,7 @@ object AppSorter {
         context: Context,
         apps: List<ResolveInfo>,
         browsers: List<ResolveInfo>,
-    ): Map<String, DisplayActivityInfo> {
+    ): MutableMap<String, DisplayActivityInfo> {
         val map = mutableMapOf<String, DisplayActivityInfo>()
 
         for (app in apps) {

@@ -17,6 +17,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeL
 
 @Composable
 fun DefaultClickableShapeListItem(
+    enabled: Boolean = true,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int? = null,
     icon: ImageVector? = null,
@@ -25,6 +26,7 @@ fun DefaultClickableShapeListItem(
     onClick: () -> Unit,
 ) {
     ClickableShapeListItem(
+        enabled = enabled,
         shape = shape,
         padding = padding,
         onClick = onClick,

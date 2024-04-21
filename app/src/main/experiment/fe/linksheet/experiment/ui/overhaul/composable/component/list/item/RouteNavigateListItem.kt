@@ -25,11 +25,11 @@ fun RouteNavigateListItem(
     navigate: (String) -> Unit,
 ) {
     DefaultClickableShapeListItem(
-        data.headlineId,
-        data.subtitleId,
-        data.icon,
-        shape,
-        padding,
+        shape = shape,
+        padding = padding,
+        headlineId = data.headlineId,
+        subtitleId = data.subtitleId,
+        icon = data.icon,
         onClick = { navigate(data.route) }
     )
 }

@@ -224,7 +224,7 @@
     <string name="services">Services</string>
     <string name="no_libredirect_services">No LibRedirect services found!</string>
     <string name="current_session">Current session</string>
-    <string name="log_files">Past log files</string>
+    <string name="log_files">Past sessions</string>
     <string name="log_viewer">Log viewer</string>
     <string name="log_viewer_timestamp">Viewing log from %s</string>
     <string name="no_log_entries">This session does not contain any logs.</string>
@@ -696,4 +696,5 @@
     </string>
     <string name="customization">Customization</string>
     <string name="Miscellaneous">Miscellaneous</string>
+    <string name="log_session_headline">Session at</string>
 </resources>

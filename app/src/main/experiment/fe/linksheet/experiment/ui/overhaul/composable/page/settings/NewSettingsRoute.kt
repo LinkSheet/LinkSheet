@@ -24,15 +24,25 @@ internal object NewSettingsRouteData {
     val customization = arrayOf(
         Nav(appsSettingsRoute, Icons.Default.Apps, R.string.apps, R.string.apps_explainer),
         Nav(browserSettingsRoute, Icons.Default.OpenInBrowser, R.string.browser, R.string.browser_explainer),
-        Nav(bottomSheetSettingsRoute, Icons.Default.ArrowUpward, R.string.bottom_sheet, R.string.bottom_sheet_explainer),
+        Nav(
+            bottomSheetSettingsRoute,
+            Icons.Default.ArrowUpward,
+            R.string.bottom_sheet,
+            R.string.bottom_sheet_explainer
+        ),
         Nav(linksSettingsRoute, Icons.Default.Link, R.string.links, R.string.links_explainer)
     )
 
     val miscellaneous = arrayOf(
         Nav(generalSettingsRoute, Icons.Default.Settings, R.string.general, R.string.general_settings_explainer),
-        Nav(notificationSettingsRoute, Icons.Default.Notifications, R.string.notifications, R.string.notifications_explainer),
+        Nav(
+            notificationSettingsRoute,
+            Icons.Default.Notifications,
+            R.string.notifications,
+            R.string.notifications_explainer
+        ),
         Nav(themeSettingsRoute, Icons.Default.DisplaySettings, R.string.theme, R.string.theme_explainer),
-        Nav(privacySettingsRoute,Icons.Default.PrivacyTip, R.string.privacy, R.string.privacy_settings_explainer)
+        Nav(privacySettingsRoute, Icons.Default.PrivacyTip, R.string.privacy, R.string.privacy_settings_explainer)
     )
 
     val advanced = arrayOf(
@@ -90,24 +100,4 @@ fun NewSettingsRoute(
             RouteNavigateListItem(data = NewSettingsRouteData.about, navigate = navigate)
         }
     }
-}
-
-@Composable
-private fun Route(
-    route: String,
-    padding: PaddingValues,
-    shape: Shape,
-    icon: ImageVector,
-    @StringRes headlineId: Int,
-    @StringRes subtitleId: Int,
-    navigateTo: (String) -> Unit,
-) {
-    DefaultClickableShapeListItem(
-        headlineId,
-        subtitleId,
-        icon,
-        shape = shape,
-        padding = padding,
-        onClick = { navigateTo(route) }
-    )
 }

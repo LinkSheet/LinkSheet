@@ -2,6 +2,7 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.libred
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.LocalTextStyle
@@ -10,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import fe.linksheet.R
@@ -18,6 +20,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.loader
@@ -136,13 +139,14 @@ inline fun <T> SaneLazyListScope.listHelper(
     crossinline listItem: @Composable LazyItemScope.(T) -> Unit,
 ) {
     if (listState == ListState.Items && list != null) {
-        group(list.size) {
+        group(size = list.size) {
             items(items = list, key = listKey, itemContent = listItem)
         }
     } else {
         loader(noItems, notFound, listState)
     }
 }
+
 
 
 @Composable

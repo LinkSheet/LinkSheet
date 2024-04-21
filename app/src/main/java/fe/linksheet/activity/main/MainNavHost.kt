@@ -42,9 +42,13 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.NewDebugSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
 import fe.linksheet.util.AndroidVersion
+import fe.android.compose.route.util.navigate
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogTextSettingsRoute
 
 @Composable
 fun MainNavHost(
@@ -170,9 +174,7 @@ fun MainNavHost(
 
         animatedArgumentRouteComposable(route = experimentSettingsRoute) { _, _ ->
             if (uiOverhaul) {
-                NewExperimentsSettingsRoute(
-                    onBackPressed = onBackPressed
-                )
+                NewExperimentsSettingsRoute(onBackPressed = onBackPressed)
             } else {
                 ExperimentsSettingsRoute(
                     navController = navController,
@@ -186,17 +188,25 @@ fun MainNavHost(
         }
 
         animatedComposable(route = debugSettingsRoute) {
-            DebugSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
-            )
+            if (uiOverhaul) {
+                NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            } else {
+                DebugSettingsRoute(
+                    navController = navController,
+                    onBackPressed = onBackPressed
+                )
+            }
         }
 
         animatedComposable(route = logViewerSettingsRoute) {
-            LogSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
-            )
+            if (uiOverhaul) {
+                NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navController = navController)
+            } else {
+                LogSettingsRoute(
+                    navController = navController,
+                    onBackPressed = onBackPressed
+                )
+            }
         }
 
         animatedComposable(route = loadDumpedPreferences) {
@@ -204,7 +214,11 @@ fun MainNavHost(
         }
 
         animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
-            LogTextSettingsRoute(onBackPressed = onBackPressed)
+//            if (uiOverhaul) {
+//                NewLogTextSettingsRoute(onBackPressed = onBackPressed)
+//            } else {
+                LogTextSettingsRoute(onBackPressed = onBackPressed)
+//            }
         }
 
         animatedComposable(route = aboutSettingsRoute) {

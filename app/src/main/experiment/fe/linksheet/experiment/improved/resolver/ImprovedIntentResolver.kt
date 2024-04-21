@@ -211,7 +211,7 @@ class ImprovedIntentResolver(
             appList,
             app,
             lastUsedApps,
-            returnLastChosen = true
+            returnLastChosen = !dontShowFilteredItem()
         )
 
         val unfurl = tryUnfurl(enabled = previewUrl(), uri = uri)

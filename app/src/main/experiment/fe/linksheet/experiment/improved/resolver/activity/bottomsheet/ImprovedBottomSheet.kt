@@ -176,7 +176,7 @@ class ImprovedBottomSheet(
             isExpanded = isExpanded,
             requestExpand = {},
             hideDrawer = {},
-            showPackage = false,
+            showPackage = viewModel.alwaysShowPackageName(),
             previewUrl = viewModel.previewUrl(),
             hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
         )

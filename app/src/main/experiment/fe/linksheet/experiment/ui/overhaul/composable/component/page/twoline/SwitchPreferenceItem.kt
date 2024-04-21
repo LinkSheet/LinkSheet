@@ -10,16 +10,16 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGro
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.TwoLineGroupValueProvider
 
 @Stable
-class TwoLinePreference(
+class SwitchPreferenceItem(
     val preference: StatePreference<Boolean>,
     headlineId: Int,
     subtitleId: Int,
 ) : TwoLineGroupValueProvider(headlineId, subtitleId)
 
 @RememberGroupDslMarker
-class TwoLinePreferenceScope : RememberGroupScope<Int, TwoLinePreference>() {
+class TwoLinePreferenceScope : RememberGroupScope<Int, SwitchPreferenceItem>() {
     fun add(preference: StatePreference<Boolean>, @StringRes headlineId: Int, @StringRes subtitleId: Int) {
-        add(TwoLinePreference(preference, headlineId, subtitleId))
+        add(SwitchPreferenceItem(preference, headlineId, subtitleId))
     }
 }
 
@@ -27,7 +27,7 @@ class TwoLinePreferenceScope : RememberGroupScope<Int, TwoLinePreference>() {
 fun <T : Any?> rememberTwoLinePreferenceGroup(
     key1: T,
     fn: TwoLinePreferenceScope.(T) -> Unit,
-): List<TwoLinePreference> {
+): List<SwitchPreferenceItem> {
     return remember(key1 = key1) {
         val scope = TwoLinePreferenceScope()
         scope.fn(key1)

@@ -107,9 +107,9 @@ fun AppTheme(
     val activity = LocalView.current.context.findActivity()
 
     if (edgeToEdge && updateEdgeToEdge != null) {
-        val isDarkMode: (Resources) -> Boolean = { _ -> themeV2 == ThemeV2.Dark || systemDarkTheme }
-
         LaunchedEffect(key1 = themeV2) {
+            val isDarkMode: (Resources) -> Boolean = { _ -> themeV2 == ThemeV2.Dark || systemDarkTheme }
+
             updateEdgeToEdge(
                 SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT, detectDarkMode = isDarkMode),
                 SystemBarStyle.auto(lightScrim, darkScrim, detectDarkMode = isDarkMode)

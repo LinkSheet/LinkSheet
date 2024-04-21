@@ -51,6 +51,7 @@
                 android:configChanges="orientation"
                 android:exported="true"
                 android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme">
             <intent-filter>

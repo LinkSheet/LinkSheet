@@ -11,9 +11,9 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.rem
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
-internal object NewNotificationSettingsRouteData {
-    fun init(vm: NotificationSettingsViewModel): Array<SwitchPreferenceItem> {
-        return arrayOf(
+private object NewNotificationSettingsRouteData {
+    fun init(vm: NotificationSettingsViewModel): List<SwitchPreferenceItem> {
+        return listOf(
             SwitchPreferenceItem(
                 vm.urlCopiedToast,
                 R.string.url_copied_toast,
@@ -48,7 +48,7 @@ fun NewNotificationSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: NotificationSettingsViewModel = koinViewModel(),
 ) {
-    val notificationSettings = rememberTwoLinePreferenceGroup(viewModel){ vm ->
+    val notificationSettings = rememberTwoLinePreferenceGroup(viewModel) { vm ->
         NewNotificationSettingsRouteData.init(vm)
     }
 

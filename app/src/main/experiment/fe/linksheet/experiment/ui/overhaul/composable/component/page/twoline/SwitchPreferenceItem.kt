@@ -26,11 +26,7 @@ class TwoLinePreferenceScope : RememberGroupScope<Int, SwitchPreferenceItem>() {
 @Composable
 fun <T : Any?> rememberTwoLinePreferenceGroup(
     key1: T,
-    fn: TwoLinePreferenceScope.(T) -> Unit,
+    fn: (T) -> List<SwitchPreferenceItem>,
 ): List<SwitchPreferenceItem> {
-    return remember(key1 = key1) {
-        val scope = TwoLinePreferenceScope()
-        scope.fn(key1)
-        scope.providers
-    }
+    return remember(key1 = key1) { fn(key1) }
 }

@@ -3,11 +3,7 @@ package fe.linksheet.extension.compose
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
@@ -17,11 +13,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.Searchbar
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import kotlinx.coroutines.flow.MutableStateFlow
 
 fun LazyListScope.spacer(height: Int = 10, itemKey: Any? = null) {
@@ -86,6 +85,22 @@ inline fun <T> LazyListScope.listHelper(
         loader(noItems, notFound, listState)
     }
 }
+
+fun <T> SaneLazyListScope.listHelper(
+    @StringRes noItems: Int,
+    @StringRes notFound: Int? = null,
+    listState: ListState,
+    list: List<T>?,
+    listKey: (T) -> Any,
+    content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
+) {
+    if (listState == ListState.Items && list != null) {
+        group(items = list, key = listKey, content = content)
+    } else {
+        loader(noItems, notFound, listState)
+    }
+}
+
 
 
 inline fun <K, V> LazyListScope.mapHelper(

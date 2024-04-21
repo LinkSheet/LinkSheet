@@ -84,11 +84,11 @@ class ImprovedBottomSheet(
         activity.startActivity(intent)
     }
 
-    private fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false, ) {
+    private fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false) {
         activity.showToast(textId = textId, duration = duration, uiThread = uiThread)
     }
 
-    private fun showToast(text: String, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false, ) {
+    private fun showToast(text: String, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false) {
         activity.showToast(text = text, duration = duration, uiThread = uiThread)
     }
 
@@ -122,7 +122,11 @@ class ImprovedBottomSheet(
         val drawerState = fe.linksheet.experiment.improved.resolver.material3.rememberModalBottomSheetState()
 
         LaunchedEffect(key1 = status) {
-            drawerState.expand()
+            if (viewModel.improvedBottomSheetExpandFully()) {
+                drawerState.expand()
+            } else {
+                drawerState.partialExpand()
+            }
         }
 
         val hide: () -> Unit = {
@@ -213,7 +217,9 @@ class ImprovedBottomSheet(
             UrlBar(
                 uri = uriString,
                 canSwitchProfile = canSwitch,
-                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(target!!).toString() else null,
+                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(
+                    target!!
+                ).toString() else null,
                 profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(
                     target!!
                 ) else null,

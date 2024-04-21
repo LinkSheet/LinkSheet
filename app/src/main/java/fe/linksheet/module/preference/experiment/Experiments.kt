@@ -20,13 +20,14 @@ object Experiments : PreferenceDefinition(
     val uiOverhaul = boolean("experiment_ui_overhaul")
 
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver")
+    val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
 
     // TODO: Enforce type
     init {
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, urlPreview, declutterUrl),
             Experiment("ui_overhaul", true, uiOverhaul),
-            Experiment("improved_intent_resolver", true, improvedIntentResolver)
+            Experiment("improved_bottom_sheet", true, improvedIntentResolver, improvedBottomSheetExpandFully)
         )
 
         finalize()

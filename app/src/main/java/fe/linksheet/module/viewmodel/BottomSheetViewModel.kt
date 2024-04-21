@@ -113,6 +113,8 @@ class BottomSheetViewModel(
     val expandOnAppSelect = preferenceRepository.asState(AppPreferences.expandOnAppSelect)
     val bottomSheetNativeLabel = preferenceRepository.asState(AppPreferences.bottomSheetNativeLabel)
 
+    val improvedBottomSheetExpandFully = experimentRepository.asState(Experiments.improvedBottomSheetExpandFully)
+
     var appListSelectedIdx = mutableIntStateOf(-1)
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {

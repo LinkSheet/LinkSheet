@@ -88,6 +88,8 @@ android {
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testOptions.unitTests.isIncludeAndroidResources = true
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -307,7 +309,8 @@ dependencies {
     debugImplementation(Square.leakCanary.android)
 
     testImplementation(Testing.robolectric)
-    testImplementation(Testing.mockito.core)
+    testImplementation(Testing.junit.jupiter)
+
     testImplementation(AndroidX.test.core)
     testImplementation(AndroidX.test.coreKtx)
     testImplementation(AndroidX.test.ext.truth)

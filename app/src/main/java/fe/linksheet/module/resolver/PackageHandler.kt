@@ -2,6 +2,7 @@ package fe.linksheet.module.resolver
 
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.IntentFilter.AuthorityEntry
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -24,17 +25,18 @@ object PackageHandler {
         val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)
 
         return activities.filter {
-            it.activityInfo.applicationInfo.enabled && !LinkSheetCompat.isCompat(it) && it.isLinkHandler(uri)
+            it.activityInfo.applicationInfo.enabled && !LinkSheetCompat.isCompat(it) && isLinkHandler(it.filter, uri)
         }
+    }
+
+    fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean {
+        val authorityCount = filter.countDataAuthorities().takeIf { it > 0 } ?: return false
+        return filter.hasNonWildcardDataAuthority(authorityCount, uri) || filter.hasDataPath(uri.path)
     }
 
     private val anyHost = AuthorityEntry("*", "-1")
 
-    private fun ResolveInfo.isLinkHandler(uri: Uri): Boolean {
-        val count = filter.countDataAuthorities()
-        if (count == 0) return false
-        if (count == 1 && filter.getDataAuthority(0) == anyHost) return false
-
-        return filter.hasDataAuthority(uri)
+    private fun IntentFilter.hasNonWildcardDataAuthority(size: Int, uri: Uri): Boolean {
+        return (0 until size).map { getDataAuthority(it) }.any { it != anyHost && it.match(uri) >= 0 }
     }
 }

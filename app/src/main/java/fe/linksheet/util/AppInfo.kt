@@ -12,6 +12,7 @@ import fe.linksheet.extension.android.getCurrentLocale
 object AppInfo {
     val appInfo by lazyJsonObject {
         "full_identifier" += BuildConfig.VERSION_NAME
+        "version_code" += BuildConfig.VERSION_CODE
         "built_at" += BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
         "commit" += BuildConfig.COMMIT.substring(0, 7)
         "branch" += BuildConfig.BRANCH

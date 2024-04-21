@@ -54,7 +54,7 @@
     <string name="enable_all">Activar todo</string>
     <string name="selected_browser_explainer">Este navegador se abrirá automáticamente si ninguna aplicación nativa puede abrir el enlace seleccionado</string>
     <string name="title_activity_cross_profile_request_handler">ActividadDelControladorDeSolicitudesDePerfilesCruzados</string>
-    <string name="misc_settings">Diverso</string>
+    <string name="misc_settings">Misceláneo</string>
     <string name="enable_send_button_explainer">Muestra un botón que le permite compartir el enlace con otras aplicaciones como si la hubiera seleccionado en el menú \"Compartir\"</string>
     <string name="log_privacy">Para obtener más información sobre la privacidad de los registros, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">enlace</annotation>. \u0020</string>
     <string name="get_started">Comenzar</string>
@@ -505,14 +505,14 @@
     <string name="try_share">Compartir</string>
     <string name="edit">Editar</string>
     <string name="retry">Volver a intentarlo</string>
-    <string name="link_handle_failed_text">LinkSheet no puede manejar este enlace ya que parece estar malformado. Puede editarlo a continuación e intentarlo de nuevo. Alternativamente, puede buscar en la web.</string>
+    <string name="link_handle_failed_text">LinkSheet no puede abrir este enlace porque parece ser incorrecto. Puedes editarlo a continuación e intentarlo de nuevo. Alternativamente, puedes buscar en la web.</string>
     <string name="link_handle_failed_text_field_label">Consulta</string>
-    <string name="resolve_activity_failure">¡No se pudo resolver la actividad!</string>
+    <string name="resolve_activity_failure">¡Error al procesar la actividad!</string>
     <string name="reset_app_link_verification_status">Restablecer el estado de verificación del enlace de la aplicación</string>
     <string name="reset_app_link_verification_status_subtitle">Toque aquí para restablecer el estado de verificación del enlace de la aplicación de todas las aplicaciones y luego espere unos minutos mientras Android las vuelve a verificar. No recibirás una confirmación. Requiere Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Solicitada una nueva verificación</string>
     <string name="switch_profile">Activar el cambio de perfil</string>
     <string name="switch_profile_explainer">Muestra un botón en la hoja inferior para abrir el enlace pulsado en un perfil (de trabajo). Requiere que LinkSheet esté instalado en ambos perfiles y vinculado manualmente a través de Ajustes -&gt; Acceso a aplicaciones especiales -&gt; Aplicaciones personales y de trabajo conectadas</string>
     <string name="customization">Personalización</string>
-    <string name="Miscellaneous">Diverso</string>
+    <string name="Miscellaneous">Misceláneo</string>
 </resources>

@@ -8,20 +8,24 @@ import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import fe.linksheet.util.BitFlagUtil
+import fe.linksheet.util.LinkSheetCompat
 
 
 object PackageHandler {
     private val QUERY_FLAGS = BitFlagUtil.or(
         PackageManager.MATCH_ALL,
         PackageManager.GET_RESOLVED_FILTER,
-        PackageManager.MATCH_DISABLED_COMPONENTS
+        PackageManager.MATCH_DISABLED_COMPONENTS,
+        PackageManager.GET_META_DATA
     )
 
     fun findHandlers(context: Context, uri: Uri): List<ResolveInfo> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
         val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)
 
-        return activities.filter { it.isLinkHandler(uri) }
+        return activities.filter {
+            it.activityInfo.applicationInfo.enabled && !LinkSheetCompat.isCompat(it) && it.isLinkHandler(uri)
+        }
     }
 
     private val anyHost = AuthorityEntry("*", "-1")

@@ -43,7 +43,7 @@
     <string name="disable_all">Desactivar todo</string>
     <string name="always_show_package_name_explainer">Mostrar siempre los nombres de los paquetes en lugar de solo los nombres de las aplicaciones. Esto se aplica a toda la aplicación.</string>
     <string name="domain_selection_confirmation_title">¿Seleccionar Dominios\?</string>
-    <string name="log_files">Archivos del registro pasado</string>
+    <string name="log_files">Sesiones antiguas</string>
     <string name="open_link_with_subtitle_2">LinkSheet estaba originalmente basado en OpenLinkWith</string>
     <string name="use_text_share_copy_buttons">Usar botones de texto simples para \"Copiar enlace\", \"Compartir\", \"Descargar\" e \"Ignorar LibRedirect\"</string>
     <string name="enable_shizuku">Activar la integración con Shizuku (experimental)</string>
@@ -459,7 +459,7 @@
     <string name="parse_shared_text_intent">Analizar el texto compartido si no se encuentra ninguna URL</string>
     <string name="parse_shared_text_intent_explainer">Cuando se inicia una acción de compartir desde una aplicación que comparte texto que contiene una URL, intente encontrar (y usar) la primera URL en el texto, en lugar de dar un error</string>
     <string name="experiments_explainer_3">Los experimentos están en desarrollo activo y es posible que no funcionen correctamente o que no funcionen en absoluto. No informe errores en Github. Si desea enviar comentarios, hágalo en Discord.</string>
-    <string name="tap_customization_double_tap">Pulsación doble</string>
+    <string name="tap_customization_double_tap">Pulsar dos veces para activar</string>
     <string name="tap_customization">Personalización de las pulsaciones</string>
     <string name="no_action">Sin acción</string>
     <string name="select_app">Seleccionar la aplicación</string>
@@ -471,8 +471,8 @@
     <string name="theme_mode">Modo del tema</string>
     <string name="theme_enable_amoled_explainer">Utilizar un tema negro puro si el modo oscuro está activado</string>
     <string name="theme_enable_material_you_explainer">Utiliza el tema para dispositivos Material You de Android 12+</string>
-    <string name="tap_customization_single_tap">Una sola pulsación</string>
-    <string name="tap_customization_long_tap">Pulsación larga</string>
+    <string name="tap_customization_single_tap">Pulsar una vez para activar</string>
+    <string name="tap_customization_long_tap">Pulsación larga para activar</string>
     <string name="open_app">Abrir la aplicación</string>
     <string name="tap_customization_dialog_title">Configurar %s</string>
     <string name="tap_customization_dialog_title_single_tap">una sola pulsación</string>
@@ -515,4 +515,5 @@
     <string name="switch_profile_explainer">Muestra un botón en la hoja inferior para abrir el enlace pulsado en un perfil (de trabajo). Requiere que LinkSheet esté instalado en ambos perfiles y vinculado manualmente a través de Ajustes -&gt; Acceso a aplicaciones especiales -&gt; Aplicaciones personales y de trabajo conectadas</string>
     <string name="customization">Personalización</string>
     <string name="Miscellaneous">Misceláneo</string>
+    <string name="log_session_headline">Sesión en</string>
 </resources>

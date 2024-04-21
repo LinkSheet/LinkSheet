@@ -1,6 +1,9 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.page
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -61,6 +64,7 @@ fun SaneScaffoldSettingsPage(
         },
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
+        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
         content = { padding -> SaneLazyColumnPageLayout(padding = padding, content = content) }
     )
 }

@@ -1,9 +1,6 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.page.layout
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -73,6 +70,12 @@ fun SaneLazyColumnPageLayout(
             .fillMaxSize(),
         contentPadding = contentPadding,
         verticalArrangement = verticalArrangement,
-        content = { content(SaneLazyListScopeImpl(this)) }
+        content = {
+            content(SaneLazyListScopeImpl(this))
+
+            item(key = "navbar-spacer") {
+                Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.systemBars))
+            }
+        }
     )
 }

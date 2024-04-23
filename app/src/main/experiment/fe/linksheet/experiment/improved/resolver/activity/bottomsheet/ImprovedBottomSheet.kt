@@ -176,6 +176,7 @@ class ImprovedBottomSheet(
             bottomSheetViewModel = viewModel,
             result = status,
             declutterUrl = viewModel.declutterUrl(),
+            enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
             enableSwitchProfile = viewModel.switchProfile(),
             isExpanded = isExpanded,
             requestExpand = {},
@@ -192,6 +193,7 @@ class ImprovedBottomSheet(
         bottomSheetViewModel: BottomSheetViewModel,
         result: IntentResolveResult.Default,
         declutterUrl: Boolean,
+        enableIgnoreLibRedirectButton: Boolean,
         enableSwitchProfile: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
@@ -240,7 +242,7 @@ class ImprovedBottomSheet(
                 },
                 unfurlResult = result.unfurlResult,
                 downloadable = result.downloadable.isDownloadable(),
-                libRedirected = result.libRedirectResult is LibRedirectResult.Redirected,
+                libRedirected = enableIgnoreLibRedirectButton && result.libRedirectResult is LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText("URL", result.uri.toString())
 

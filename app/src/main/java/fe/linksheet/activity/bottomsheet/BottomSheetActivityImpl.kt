@@ -274,7 +274,7 @@ class BottomSheetActivityImpl(
                 },
                 unfurlResult = uriSuccess?.unfurlResult,
                 downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
-                libRedirected = uriSuccess?.libRedirectResult is LibRedirectResult.Redirected,
+                libRedirected = viewModel.enableIgnoreLibRedirectButton() && uriSuccess?.libRedirectResult is LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText("URL", result.uri.toString())
 

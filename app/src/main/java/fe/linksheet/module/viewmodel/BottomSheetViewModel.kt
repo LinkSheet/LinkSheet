@@ -97,7 +97,7 @@ class BottomSheetViewModel(
     val showAsReferrer =
         preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
-
+    val enableIgnoreLibRedirectButton = preferenceRepository.asState(AppPreferences.enableIgnoreLibRedirectButton)
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!

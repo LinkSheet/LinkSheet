@@ -54,7 +54,7 @@ class LibRedirectResolver(
 
     private fun getInstanceUrl(default: LibRedirectDefault): String {
         return if (default.instanceUrl == LibRedirectDefault.randomInstance) {
-            LibRedirectResolver.libRedirectInstances.find { it.frontendKey == default.frontendKey }
+            libRedirectInstances.find { it.frontendKey == default.frontendKey }
                 ?.hosts?.random() ?: default.instanceUrl
         } else default.instanceUrl
     }

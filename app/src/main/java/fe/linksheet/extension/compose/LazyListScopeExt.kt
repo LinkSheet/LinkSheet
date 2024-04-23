@@ -94,7 +94,7 @@ fun <T> SaneLazyListScope.listHelper(
     listKey: (T) -> Any,
     content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
 ) {
-    if (listState == ListState.Items && list != null) {
+    if (listState == ListState.Items && !list.isNullOrEmpty()) {
         group(items = list, key = listKey, content = content)
     } else {
         loader(noItems, notFound, listState)

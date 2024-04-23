@@ -149,6 +149,8 @@ class ImprovedIntentResolver(
 
         val (resolveStatus, resolvedUri) = runResolvers(
             uri = uri,
+            // TODO: Check internet
+            canAccessInternet = true,
             redirectResolver = redirectUrlResolver,
             amp2HtmlResolver = amp2HtmlResolver,
             followRedirects = followRedirects(),
@@ -180,7 +182,13 @@ class ImprovedIntentResolver(
             return fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
         }
 
-        val libRedirectResult = tryRunLibRedirect(enableLibRedirect(), intent, uri, enableIgnoreLibRedirectButton())
+        val libRedirectResult = tryRunLibRedirect(
+            enabled = enableLibRedirect(),
+            intent = intent,
+            uri = uri,
+            ignoreLibRedirectButton = enableIgnoreLibRedirectButton()
+        )
+
         if (libRedirectResult is LibRedirectResult.Redirected) {
             uri = libRedirectResult.redirectedUri
         }
@@ -333,22 +341,23 @@ class ImprovedIntentResolver(
     }
 
     private suspend fun tryRunLibRedirect(
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
         enabled: Boolean,
         intent: SafeIntent,
         uri: Uri,
         ignoreLibRedirectButton: Boolean,
-    ): LibRedirectResult? {
-        if (!enabled) return null
+    ): LibRedirectResult? = withContext(dispatcher) {
+        if (!enabled) return@withContext null
 
         val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
         if (ignoreLibRedirectExtra) {
             intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
         }
 
-        if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return null
+        if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
 
         emitEvent("Trying to find FOSS-frontend")
-        return libRedirectResolver.resolve(uri)
+        return@withContext libRedirectResolver.resolve(uri)
     }
 
     companion object {
@@ -358,14 +367,13 @@ class ImprovedIntentResolver(
         private val unfurler by lazy { Unfurler() }
     }
 
-    private suspend fun runUriModifiers(
-        dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private  fun runUriModifiers(
         uri: Uri?,
         resolveEmbeds: Boolean,
         clearUrl: Boolean,
         fastForward: Boolean,
-    ): Uri? = withContext(dispatcher) {
-        if (uri?.host == null || uri.scheme == null) return@withContext null
+    ): Uri? {
+        if (uri?.host == null || uri.scheme == null) return null
         var url = uri.toString()
 
         emitEvent("Resolving embeds")
@@ -377,7 +385,7 @@ class ImprovedIntentResolver(
         emitEvent("Clearing tracking parameters")
         runUriModifier(clearUrl) { ClearURL.clearUrl(url, clearUrlProviders) }?.let { url = it }
 
-        runCatching { Uri.parse(url) }.getOrNull()
+        return runCatching { Uri.parse(url) }.getOrNull()
     }
 
     private inline fun <R> runUriModifier(condition: Boolean, block: () -> R): R? {

@@ -20,13 +20,46 @@ object PackageHandler {
         PackageManager.GET_META_DATA
     )
 
+    class ActivityAlias(
+        var activity: ResolveInfo? = null,
+        private val aliases: MutableList<ResolveInfo> = mutableListOf(),
+    ) {
+        fun add(alias: ResolveInfo) {
+            aliases.add(alias)
+        }
+
+        fun get(): ResolveInfo? {
+            if (activity?.activityInfo?.enabled == true) return activity!!
+            return aliases.firstOrNull { it.activityInfo.enabled } ?: aliases.firstOrNull()
+        }
+    }
+
     fun findHandlers(context: Context, uri: Uri): List<ResolveInfo> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
         val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)
 
-        return activities.filter {
+        val filtered = activities.filter {
             it.activityInfo.applicationInfo.enabled && !LinkSheetCompat.isCompat(it) && isLinkHandler(it.filter, uri)
         }
+
+        return deduplicate(filtered)
+    }
+
+    private fun deduplicate(filtered: List<ResolveInfo>): List<ResolveInfo> {
+        val map = mutableMapOf<String, ActivityAlias>()
+        for (activity in filtered) {
+            val target = activity.activityInfo?.targetActivity
+            val key = "${activity.activityInfo.packageName}/${target ?: activity.activityInfo.name}"
+
+            val activityAlias = map.getOrPut(key) { ActivityAlias() }
+            if (target == null) {
+                activityAlias.activity = activity
+            } else {
+                activityAlias.add(activity)
+            }
+        }
+
+        return map.mapNotNull { (_, activity) -> activity.get() }
     }
 
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean {

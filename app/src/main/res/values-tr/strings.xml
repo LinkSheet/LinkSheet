@@ -133,7 +133,7 @@
     <string name="services">Hizmetler</string>
     <string name="no_libredirect_services">LibRedirect hizmeti bulunamadı!</string>
     <string name="current_session">Mevcut oturum</string>
-    <string name="log_files">Geçmiş günlük dosyaları</string>
+    <string name="log_files">Geçmiş oturumlar</string>
     <string name="log_viewer">Günlük görüntüleyici</string>
     <string name="log_viewer_timestamp">%s\'den günlük görüntüleniyor</string>
     <string name="no_log_entries">Bu oturum herhangi bir günlük içermiyor.</string>
@@ -467,9 +467,9 @@
     <string name="tap_customization_dialog_title_single_tap">Tek dokunma</string>
     <string name="cancel">İptal</string>
     <string name="expand_on_app_select">Bir uygulama seçildiğinde genişlet</string>
-    <string name="tap_customization_single_tap">Tek dokunma</string>
-    <string name="tap_customization_double_tap">Çift dokunma</string>
-    <string name="tap_customization_long_tap">Uzun dokunma</string>
+    <string name="tap_customization_single_tap">Tek dokunma eylemi</string>
+    <string name="tap_customization_double_tap">Çift dokunma eylemi</string>
+    <string name="tap_customization_long_tap">Uzun dokunma eylemi</string>
     <string name="tap_customization_dialog_title">%syı yapılandır</string>
     <string name="tap_customization_dialog_title_double_tap">Çift dokunma</string>
     <string name="tap_customization_dialog_title_long_tap">Uzun dokunma</string>
@@ -510,4 +510,5 @@
     <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -&gt; Özel uygulama erişimi -&gt; Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
     <string name="reset_app_link_verification_status">Uygulama bağlantı onaylama durumunu sıfırla</string>
     <string name="reset_app_link_verification_status_toast">Yeniden onaylama istendi</string>
+    <string name="log_session_headline">Şu zamandaki oturum</string>
 </resources>

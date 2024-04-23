@@ -341,9 +341,11 @@ class ImprovedIntentResolver(
         if (!enabled) return null
 
         val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
-        if (!ignoreLibRedirectExtra || ignoreLibRedirectButton) return null
+        if (ignoreLibRedirectExtra) {
+            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
+        }
 
-        intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
+        if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return null
 
         emitEvent("Trying to find FOSS-frontend")
         return libRedirectResolver.resolve(uri)

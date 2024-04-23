@@ -22,12 +22,14 @@ object Experiments : PreferenceDefinition(
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver")
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
 
+    val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
+
     // TODO: Enforce type
     init {
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, urlPreview, declutterUrl),
             Experiment("ui_overhaul", true, uiOverhaul),
-            Experiment("improved_bottom_sheet", true, improvedIntentResolver, improvedBottomSheetExpandFully)
+            Experiment("improved_bottom_sheet", true, improvedIntentResolver, improvedBottomSheetExpandFully, libRedirectJsEngine),
         )
 
         finalize()

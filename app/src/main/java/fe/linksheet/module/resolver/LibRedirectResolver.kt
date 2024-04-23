@@ -3,11 +3,13 @@ package fe.linksheet.module.resolver
 import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
+import fe.libredirectkt.LibRedirectNew
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.component.KoinComponent
 
@@ -25,9 +27,13 @@ class LibRedirectResolver(
     companion object {
         private val libRedirectServices = LibRedirectLoader.loadBuiltInServices()
         private val libRedirectInstances = LibRedirectLoader.loadBuiltInInstances()
+
+        private val libRedirectZipline by lazy {
+            LibRedirectNew.create(Dispatchers.IO, LibRedirectResource.getLibRedirect())
+        }
     }
 
-    suspend fun resolve(uri: Uri): LibRedirectResult {
+    suspend fun resolve(uri: Uri, jsEngine: Boolean): LibRedirectResult {
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
         logger.debug("Using service: $service")
 
@@ -41,7 +47,10 @@ class LibRedirectResolver(
                 )!!
             }
 
-            val redirected = LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
+            val redirected = if (jsEngine) {
+                libRedirectZipline.redirect(uri.toString(), frontendKey, instanceUrl)
+            } else LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
+
             logger.debug(redirected, HashProcessor.StringProcessor) { "Redirected to: $it" }
 
             if (redirected != null) {

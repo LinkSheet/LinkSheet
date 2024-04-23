@@ -11,7 +11,6 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
-import fe.linksheet.module.resolver.PackageHandler
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
@@ -106,6 +105,7 @@ class ImprovedIntentResolver(
     private val resolveEmbeds = prefRepo.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
+    private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
 
     private val browserResolver = BrowserResolver(context)
 
@@ -169,10 +169,8 @@ class ImprovedIntentResolver(
             return fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
         }
 
-        uri = resolvedUri
-
         uri = runUriModifiers(
-            uri = uri,
+            uri = resolvedUri,
             resolveEmbeds = resolveEmbeds(),
             clearUrl = useClearUrls(),
             fastForward = useFastForwardRules()
@@ -186,7 +184,8 @@ class ImprovedIntentResolver(
             enabled = enableLibRedirect(),
             intent = intent,
             uri = uri,
-            ignoreLibRedirectButton = enableIgnoreLibRedirectButton()
+            ignoreLibRedirectButton = enableIgnoreLibRedirectButton(),
+            jsEngine = libRedirectJsEngine()
         )
 
         if (libRedirectResult is LibRedirectResult.Redirected) {
@@ -346,6 +345,7 @@ class ImprovedIntentResolver(
         intent: SafeIntent,
         uri: Uri,
         ignoreLibRedirectButton: Boolean,
+        jsEngine: Boolean,
     ): LibRedirectResult? = withContext(dispatcher) {
         if (!enabled) return@withContext null
 
@@ -357,7 +357,7 @@ class ImprovedIntentResolver(
         if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
 
         emitEvent("Trying to find FOSS-frontend")
-        return@withContext libRedirectResolver.resolve(uri)
+        return@withContext libRedirectResolver.resolve(uri, jsEngine)
     }
 
     companion object {
@@ -367,7 +367,7 @@ class ImprovedIntentResolver(
         private val unfurler by lazy { Unfurler() }
     }
 
-    private  fun runUriModifiers(
+    private fun runUriModifiers(
         uri: Uri?,
         resolveEmbeds: Boolean,
         clearUrl: Boolean,

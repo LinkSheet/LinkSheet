@@ -279,6 +279,8 @@ dependencies {
     implementation(libs.compose.route.util)
     implementation(libs.compose.dialog.helper)
     implementation(libs.process.launcher)
+    implementation(libs.zipline.android)
+    implementation(libs.zipline.loader.android)
 
     implementation(libs.unfurl)
     implementation(libs.unfurl.social)

@@ -256,7 +256,7 @@ class IntentResolver(
 
         var libRedirectResult: LibRedirectResult? = null
         if (enableLibRedirect() && uri != null && !(ignoreLibRedirectExtra && enableIgnoreLibRedirectButton())) {
-            libRedirectResult = libRedirectResolver.resolve(uri)
+            libRedirectResult = libRedirectResolver.resolve(uri, false)
             if (libRedirectResult is LibRedirectResult.Redirected) {
                 uri = libRedirectResult.redirectedUri
             }

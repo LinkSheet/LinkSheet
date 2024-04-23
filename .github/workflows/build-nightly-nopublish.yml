@@ -3,6 +3,7 @@ name: Build nightly APK (nopublish)
 env:
   BUILD_FLAVOR: foss
   BUILD_TYPE: nightly
+  BUILD_FLAVOR_TYPE: fossNightly
 
 on:
   workflow_dispatch:
@@ -13,7 +14,7 @@ jobs:
 
     steps:
       - name: Install JQ
-        run:  sudo apt-get install jq -y
+        run: sudo apt-get install jq -y
 
       - uses: actions/checkout@v4
         with:
@@ -27,14 +28,9 @@ jobs:
           cache: gradle
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
 
-      #      - name: Setup Android modded android.jar
-      #        uses: 1fexd/setup-modded-android-jar@0.0.3
-      #        env:
-      #          ANDROID_SDK_VERSION: 33
-
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -50,7 +46,7 @@ jobs:
           fileName: "keystore.jks"
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - run: ./gradlew assembleFossNightly
         env:
           GITHUB_WORKFLOW_RUN_ID: ${{ github.run_id }}
@@ -59,12 +55,9 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
-          path: app/build/outputs/apk/foss/nightly/*.apk
-
-      - name: Get file name
-        id: get_file_name
-        shell: bash
-        run: echo "FILE_NAME=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+          path: |
+            app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/*.apk
+            app/build/outputs/mapping/$BUILD_FLAVOR_TYPE/*.txt

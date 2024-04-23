@@ -3,6 +3,7 @@ name: Build nightly APK
 env:
   BUILD_FLAVOR: foss
   BUILD_TYPE: nightly
+  BUILD_FLAVOR_TYPE: fossNightly
 
 on:
   workflow_dispatch:
@@ -17,7 +18,7 @@ jobs:
 
     steps:
       - name: Install JQ
-        run:  sudo apt-get install jq -y
+        run: sudo apt-get install jq -y
 
       - uses: actions/checkout@v4
         with:
@@ -32,11 +33,6 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      #      - name: Setup Android modded android.jar
-      #        uses: 1fexd/setup-modded-android-jar@0.0.3
-      #        env:
-      #          ANDROID_SDK_VERSION: 33
 
       - uses: actions/cache@v4
         with:
@@ -66,7 +62,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
-          path: app/build/outputs/apk/foss/nightly/*.apk
+          path: | 
+            app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/*.apk
+            app/build/outputs/mapping/$BUILD_FLAVOR_TYPE/*.txt
 
       - name: Get file name
         id: get_file_name

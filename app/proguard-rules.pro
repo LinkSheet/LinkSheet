@@ -99,6 +99,10 @@
   <init>();
 }
 
+-keep class fe.embed.resolve.config.** {
+    *;
+}
+
 -dontwarn fe.uribuilder.ParsedUri
 
 -printmapping mapping.txt

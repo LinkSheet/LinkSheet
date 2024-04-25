@@ -43,7 +43,6 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsR
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.NewBrowserSettingsRoute
-import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.NewDebugSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogSettingsRoute

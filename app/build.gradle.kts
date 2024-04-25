@@ -304,6 +304,7 @@ dependencies {
 
     implementation(libs.support.utils)
     implementation(libs.lib.publicsuffixlist)
+    implementation(libs.flavors)
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)

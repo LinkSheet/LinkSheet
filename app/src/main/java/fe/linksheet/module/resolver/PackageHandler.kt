@@ -8,8 +8,8 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
+import fe.linksheet.lib.flavors.LinkSheetApp
 import fe.linksheet.util.BitFlagUtil
-import fe.linksheet.util.LinkSheetPackage
 
 
 object PackageHandler {
@@ -39,7 +39,7 @@ object PackageHandler {
         val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)
 
         val filtered = activities.filter {
-            it.activityInfo.applicationInfo.enabled && !LinkSheetPackage.Compat.isPackage(it) && isLinkHandler(it.filter, uri)
+            it.activityInfo.applicationInfo.enabled && LinkSheetApp.Compat.isApp(it.activityInfo.packageName) == null && isLinkHandler(it.filter, uri)
         }
 
         return deduplicate(filtered)

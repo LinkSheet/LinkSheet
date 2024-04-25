@@ -5,6 +5,7 @@ import fe.android.preference.helper.OptionTypeMapper
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.toPackageKeyedMap
+import fe.linksheet.lib.flavors.LinkSheetApp
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
@@ -12,7 +13,6 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
-import fe.linksheet.util.LinkSheetPackage
 import fe.stringbuilder.util.commaSeparated
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
@@ -159,7 +159,7 @@ class BrowserHandler(
         val browsers = browserResolver.queryBrowsers()
         addAllBrowsersToResolveList(browsers, resolveList)
 
-        resolveList.removeIf { LinkSheetPackage.isCompat(it) }
+        resolveList.removeIf { LinkSheetApp.Compat.isApp(it.activityInfo.packageName) != null }
 
         return when (browserMode) {
             is BrowserMode.AlwaysAsk -> BrowserModeInfo(browserMode, null)

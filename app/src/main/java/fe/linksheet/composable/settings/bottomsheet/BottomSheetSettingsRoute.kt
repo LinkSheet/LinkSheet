@@ -1,8 +1,6 @@
 package fe.linksheet.composable.settings.bottomsheet
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,7 +13,6 @@ import fe.android.compose.dialog.helper.stateful.StatefulDialogState
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.icon.FilledIcon
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
@@ -41,7 +38,6 @@ sealed class TapType(@StringRes val headline: Int, @StringRes val dialogTitle: I
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetSettingsRoute(
     onBackPressed: () -> Unit,
@@ -174,12 +170,15 @@ fun BottomSheetSettingsRoute(
                     supportingContent = {
                         Text(text = stringResource(id = pref().id))
                     },
-                    trailingContent = {
-                        FilledIcon(
-                            imageVector = Icons.Outlined.Tune,
-                            contentDescription = stringResource(id = R.string.settings)
-                        )
-                    }
+//                    trailingContent = {
+//                        FilledTonalIconButton(onClick = {}) {
+//                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
+//                        }
+////                        FilledIcon(
+////                            imageVector = Icons.Outlined.Tune,
+////                            contentDescription = stringResource(id = R.string.settings)
+////                        )
+//                    }
                 )
             }
 

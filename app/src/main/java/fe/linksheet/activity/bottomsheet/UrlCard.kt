@@ -37,6 +37,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 fun UrlCard(
     uri: String,
     unfurlResult: UnfurlResult?,
+    onDoubleClick: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     var showFullUrl by remember { mutableStateOf(false) }
@@ -47,10 +48,13 @@ fun UrlCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(CardDefaults.shape)
-            .combinedClickable(onClick = {}, onLongClick = {
-                showFullUrl = !showFullUrl
-            })
-            .layoutId("url_card"),
+            .combinedClickable(
+                onClick = {},
+                onDoubleClick = onDoubleClick,
+                onLongClick = {
+                    showFullUrl = !showFullUrl
+                }
+            ).layoutId("url_card"),
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             val thumbnailUrl = unfurlResult?.thumbnail?.toString()

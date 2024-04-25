@@ -114,6 +114,7 @@ class BottomSheetViewModel(
     val bottomSheetNativeLabel = preferenceRepository.asState(AppPreferences.bottomSheetNativeLabel)
 
     val improvedBottomSheetExpandFully = experimentRepository.asState(Experiments.improvedBottomSheetExpandFully)
+    val improvedBottomSheetUrlDoubleTap = experimentRepository.asState(Experiments.improvedBottomSheetUrlDoubleTap)
 
     var appListSelectedIdx = mutableIntStateOf(-1)
 

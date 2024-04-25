@@ -183,7 +183,8 @@ class ImprovedBottomSheet(
             hideDrawer = {},
             showPackage = viewModel.alwaysShowPackageName(),
             previewUrl = viewModel.previewUrl(),
-            hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons()
+            hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
+            urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
         )
     }
 
@@ -201,6 +202,7 @@ class ImprovedBottomSheet(
         showPackage: Boolean,
         previewUrl: Boolean,
         hideBottomSheetChoiceButtons: Boolean,
+        urlCardDoubleTap: Boolean,
     ) {
         if (previewUrl && result.uri != null) {
             val uriString = if (declutterUrl) {
@@ -281,7 +283,8 @@ class ImprovedBottomSheet(
                             bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                         )
                     )
-                }
+                },
+                onDoubleClick = { launchApp(result, result.app, false) }.takeIf { urlCardDoubleTap }
             )
         }
 

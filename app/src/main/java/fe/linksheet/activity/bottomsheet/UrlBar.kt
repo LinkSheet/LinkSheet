@@ -40,13 +40,14 @@ fun UrlBar(
     switchProfile: () -> Unit,
     downloadUri: (() -> Unit)? = null,
     ignoreLibRedirect: (() -> Unit)? = null,
+    onDoubleClick: (() -> Unit)? = null
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp)
     ) {
-        UrlCard(uri = uri, unfurlResult = unfurlResult)
+        UrlCard(uri = uri, unfurlResult = unfurlResult, onDoubleClick=onDoubleClick)
 
         Spacer(modifier = Modifier.height(5.dp))
 

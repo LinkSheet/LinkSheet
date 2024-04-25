@@ -62,12 +62,12 @@ fun LeadingRadioButtonListItem(
     )
 }
 
-private enum class RadioLocation {
+enum class RadioLocation {
     Leading, Trailing
 }
 
 @Composable
-private fun RadioButtonListItem(
+fun RadioButtonListItem(
     modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
     enabled: Boolean = true,
     selected: Boolean,
@@ -77,6 +77,7 @@ private fun RadioButtonListItem(
     padding: PaddingValues = PaddingValues(),
     headlineContentText: String,
     supportingContentText: String? = null,
+    otherContent: (@Composable () -> Unit)? = null
 ) {
     val radioButton: OptionalContent = remember(enabled, selected, onClick) {
         {
@@ -100,7 +101,7 @@ private fun RadioButtonListItem(
             Text(text = headlineContentText)
         },
         supportingContent = supportingContentText?.let { { Text(text = it) } },
-        leadingContent = if (location == RadioLocation.Leading) radioButton else null,
-        trailingContent = if (location == RadioLocation.Trailing) radioButton else null
+        leadingContent = if (location == RadioLocation.Leading) radioButton else otherContent,
+        trailingContent = if (location == RadioLocation.Trailing) radioButton else otherContent
     )
 }

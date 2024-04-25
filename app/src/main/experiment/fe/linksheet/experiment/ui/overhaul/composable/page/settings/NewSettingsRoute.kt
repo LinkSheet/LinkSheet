@@ -1,17 +1,12 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings
 
-import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavigateListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group

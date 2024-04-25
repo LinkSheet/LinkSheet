@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceRadioButtonListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceTrailingRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
@@ -32,7 +32,7 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
 
         group(size = 4) {
             items(values = themes) { item, padding, shape ->
-                PreferenceRadioButtonListItem(
+                PreferenceTrailingRadioButtonListItem(
                     shape = shape,
                     padding = padding,
                     value = item,

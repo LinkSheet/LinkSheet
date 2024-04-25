@@ -16,7 +16,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeL
 
 
 @Composable
-fun DefaultClickableShapeListItem(
+fun DefaultLeadingIconClickableShapeListItem(
     enabled: Boolean = true,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int? = null,

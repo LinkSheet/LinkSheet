@@ -10,9 +10,13 @@ fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): 
     else queryIntentActivities(intent, flags)
 }
 
+fun PackageManager.getInstalledPackagesCompat(flags: Int = 0): MutableList<PackageInfo> {
+    return if (AndroidVersion.AT_LEAST_API_33_T) getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
+    else getInstalledPackages(flags)
+}
 
 fun PackageManager.hasLauncher(packageName: String?): ResolveInfo? {
-    if(packageName == null) return null
+    if (packageName == null) return null
 
     val intent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).setPackage(packageName)
     return queryIntentActivitiesCompat(intent).singleOrNull()

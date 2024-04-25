@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultLeadingIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
@@ -33,7 +33,7 @@ fun NewDebugSettingsRoute(
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
         group(2) {
             item(key = R.string.logs) { padding, shape ->
-                DefaultClickableShapeListItem(
+                DefaultLeadingIconClickableShapeListItem(
                     headlineId = R.string.logs,
                     subtitleId = R.string.logs_explainer,
                     icon = Icons.AutoMirrored.Filled.List,
@@ -44,7 +44,7 @@ fun NewDebugSettingsRoute(
             }
 
             item(key = R.string.reset_app_link_verification_status) { padding, shape ->
-                DefaultClickableShapeListItem(
+                DefaultLeadingIconClickableShapeListItem(
                     enabled = shizukuInstalled && shizukuRunning && shizukuPermission,
                     headlineId = R.string.reset_app_link_verification_status,
                     subtitleId = R.string.reset_app_link_verification_status_subtitle,

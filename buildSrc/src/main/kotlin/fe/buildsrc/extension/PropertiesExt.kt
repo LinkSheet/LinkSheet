@@ -2,9 +2,17 @@ package fe.buildsrc.extension
 
 import java.util.*
 
-fun Properties?.getOrSystemEnv(key: String, default: String? = null): String? {
-    val value = if (this == null || !containsKey(key)) System.getenv(key)
-    else getProperty(key)
+private fun getOrSystemEnv(properties: Properties?, key: String, default: String? = null): String? {
+    val value = if (properties == null || !properties.containsKey(key)) System.getenv(key)
+    else properties.getProperty(key)
 
     return value ?: default
+}
+
+fun Properties?.getOrSystemEnv(key: String): String? {
+    return getOrSystemEnv(this, key)
+}
+
+fun Properties?.getOrSystemEnv(key: String, default: String): String {
+    return getOrSystemEnv(this, key, default)!!
 }

@@ -70,12 +70,12 @@ android {
 
         val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
         resourceConfigurations.addAll(supportedLocales)
-        
+
         buildConfigField("String[]", "SUPPORTED_LOCALES", buildString {
             append("{").append(supportedLocales.joinToString(",") { encodeString(it) }).append("}")
         })
 
-        buildConfigField("int", "DONATION_BANNER_MIN", localProperties.getOrSystemEnv("DONATION_BANNER_MIN", "20")!!)
+        buildConfigField("int", "DONATION_BANNER_MIN", localProperties.getOrSystemEnv("DONATION_BANNER_MIN", "20"))
 
         arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
             buildStringConfigField(it, publicLocalProperties.getOrSystemEnv(it))
@@ -89,7 +89,7 @@ android {
         buildConfigField(
             "boolean",
             "ANALYTICS_SUPPORTED",
-            localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED", "true")!!
+            localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED", "true")
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

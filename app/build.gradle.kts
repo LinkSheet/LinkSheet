@@ -3,6 +3,7 @@ import de.fayard.refreshVersions.core.versionFor
 import fe.buildsrc.KotlinClosure4
 import fe.buildsrc.Version
 import fe.buildsrc.extension.getOrSystemEnv
+import fe.buildsrc.extension.getOrSystemEnvOrDef
 import fe.buildsrc.extension.readPropertiesOrNull
 import net.nemerosa.versioning.ReleaseInfo
 import net.nemerosa.versioning.SCMInfo
@@ -75,7 +76,7 @@ android {
             append("{").append(supportedLocales.joinToString(",") { encodeString(it) }).append("}")
         })
 
-        buildConfigField("int", "DONATION_BANNER_MIN", localProperties.getOrSystemEnv("DONATION_BANNER_MIN", "20"))
+        buildConfigField("int", "DONATION_BANNER_MIN", localProperties.getOrSystemEnvOrDef("DONATION_BANNER_MIN", "20"))
 
         arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
             buildStringConfigField(it, publicLocalProperties.getOrSystemEnv(it))
@@ -89,7 +90,7 @@ android {
         buildConfigField(
             "boolean",
             "ANALYTICS_SUPPORTED",
-            localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED", "true")
+            localProperties.getOrSystemEnvOrDef("ANALYTICS_SUPPORTED", "true")
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -40,6 +40,7 @@ import fe.linksheet.composable.util.animatedArgumentRouteComposable
 import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewAboutSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.NewBrowserSettingsRoute
@@ -47,6 +48,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inap
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.NewDebugSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogTextSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
 import fe.linksheet.util.AndroidVersion
@@ -219,18 +221,26 @@ fun MainNavHost(
         }
 
         animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
-//            if (uiOverhaul) {
-//                NewLogTextSettingsRoute(onBackPressed = onBackPressed)
-//            } else {
-            LogTextSettingsRoute(onBackPressed = onBackPressed)
-//            }
+            val flag = false
+            if (uiOverhaul && flag) {
+                NewLogTextSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                LogTextSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = aboutSettingsRoute) {
-            AboutSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
-            )
+            if (uiOverhaul) {
+                NewAboutSettingsRoute(
+                    navigate = navigate,
+                    onBackPressed = onBackPressed
+                )
+            } else {
+                AboutSettingsRoute(
+                    navController = navController,
+                    onBackPressed = onBackPressed
+                )
+            }
         }
 
         animatedComposable(route = donateSettingsRoute) {

@@ -13,6 +13,6 @@ fun Properties?.getOrSystemEnv(key: String): String? {
     return getOrSystemEnv(this, key)
 }
 
-fun Properties?.getOrSystemEnv(key: String, default: String): String {
+fun Properties?.getOrSystemEnvOrDef(key: String, default: String): String {
     return getOrSystemEnv(this, key, default)!!
 }

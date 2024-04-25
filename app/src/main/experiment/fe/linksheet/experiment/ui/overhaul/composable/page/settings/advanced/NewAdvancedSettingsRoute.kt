@@ -16,7 +16,7 @@ import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
 
 
-internal object NewAdvancedSettingsRouteData {
+private object NewAdvancedSettingsRouteData {
     val items = arrayOf(
         RouteNavItem(
             featureFlagSettingsRoute,

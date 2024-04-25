@@ -11,8 +11,44 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.AnnotatedString
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import kotlin.reflect.jvm.internal.impl.descriptors.annotations.Annotated
+
+@Composable
+fun DefaultLeadingIconClickableShapeListItem(
+    enabled: Boolean = true,
+    headlineText: AnnotatedString,
+    subtitleText: AnnotatedString? = null,
+    icon: ImageVector? = null,
+    shape: Shape = ShapeListItemDefaults.SingleShape,
+    padding: PaddingValues = PaddingValues(),
+    onClick: () -> Unit,
+) {
+    ClickableShapeListItem(
+        enabled = enabled,
+        shape = shape,
+        padding = padding,
+        onClick = onClick,
+        role = Role.Button,
+        leadingContent = icon?.let {
+            {
+                Icon(
+                    modifier = Modifier.fillMaxHeight(),
+                    imageVector = it,
+                    contentDescription = headlineText.toString()
+                )
+            }
+        },
+        headlineContent = { Text(text = headlineText) },
+        supportingContent = subtitleText?.let {
+            {
+                Text(text = it)
+            }
+        }
+    )
+}
 
 
 @Composable

@@ -439,7 +439,7 @@
         Pro</b>, which includes <b>Pro exclusive features</b> such as: following redirects externally, obtaining non-AMP
         pages externally and more to come!
     </string>
-    <string name="built_by">Built and signed by</string>
+    <string name="built_by">Build info</string>
     <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
     <string name="github_pipeline_build">Built and signed by the Github workflow</string>
@@ -696,4 +696,5 @@
     <string name="customization">Customization</string>
     <string name="Miscellaneous">Miscellaneous</string>
     <string name="log_session_headline">Session at</string>
+    <string name="external">External</string>
 </resources>

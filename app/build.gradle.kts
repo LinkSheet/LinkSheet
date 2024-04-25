@@ -64,17 +64,22 @@ android {
 
         setProperty("archivesBaseName", archivesBaseName)
 
-        val supportedLocales = arrayOf(
-            "ar", "be", "bg", "de", "es", "hi", "ia", "it", "ja", "pa", "pl", "ru", "sr", "tr", "vi", "zh", "zh-rTW"
-        )
-
-        resourceConfigurations.addAll(supportedLocales)
 
         val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
+        val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()
 
+        val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
+        resourceConfigurations.addAll(supportedLocales)
+        
         buildConfigField("String[]", "SUPPORTED_LOCALES", buildString {
             append("{").append(supportedLocales.joinToString(",") { encodeString(it) }).append("}")
         })
+
+        buildConfigField("int", "DONATION_BANNER_MIN", localProperties.getOrSystemEnv("DONATION_BANNER_MIN", "20")!!)
+
+        arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
+            buildStringConfigField(it, publicLocalProperties.getOrSystemEnv(it))
+        }
 
         buildConfigField("long", "BUILT_AT", "$now")
         buildStringConfigField("COMMIT", versionInfo.commit)

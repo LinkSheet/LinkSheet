@@ -9,15 +9,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.rememberAnnotatedStringResource
-import fe.linksheet.developmentTimeHours
-import fe.linksheet.developmentTimeMonths
 import fe.linksheet.donateSettingsRoute
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.Typography
@@ -28,31 +25,11 @@ fun DonateCard(
     viewModel: MainViewModel,
     useTime: Pair<Int?, Int?>,
 ) {
-    val (hours, minutes) = useTime
-    val timeString = if (hours != null) {
-        pluralStringResource(id = R.plurals.hours, hours, hours)
-    } else pluralStringResource(id = R.plurals.minutes, minutes!!, minutes)
 
-    val devTimeHoursString = pluralStringResource(
-        id = R.plurals.hours,
-        count = developmentTimeHours,
-        developmentTimeHours
-    )
-    val devTimeMonthString = pluralStringResource(
-        id = R.plurals.months,
-        count = developmentTimeMonths,
-        developmentTimeMonths
-    )
 
     val subtitle = rememberAnnotatedStringResource(
-        R.string.donate_card_subtitle,
-        formatArgs = arrayOf(
-            timeString,
-            devTimeHoursString,
-            devTimeMonthString,
-            developmentTimeHours,
-            developmentTimeMonths
-        )
+        R.string.donate_card_subtitle
+
     )
 
     Card(

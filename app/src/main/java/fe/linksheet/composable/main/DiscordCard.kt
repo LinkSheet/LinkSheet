@@ -23,9 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.discordInvite
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.Typography
 
@@ -79,7 +79,7 @@ fun DiscordCard(
 
             Spacer(modifier = Modifier.width(5.dp))
 
-            Button(onClick = { uriHandler.openUri(discordInvite) }) {
+            Button(onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }) {
                 Text(text = stringResource(id = R.string.join))
             }
         }

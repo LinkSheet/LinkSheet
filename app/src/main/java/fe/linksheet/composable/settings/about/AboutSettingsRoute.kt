@@ -48,22 +48,15 @@ import androidx.navigation.NavHostController
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
-import fe.linksheet.BuildConfig
-import fe.linksheet.LinkSheetAppConfig
-import fe.linksheet.R
+import fe.linksheet.*
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.composable.util.SubtitleText
 import fe.linksheet.composable.util.rememberAnnotatedStringResource
-import fe.linksheet.creditsSettingsRoute
-import fe.linksheet.discordInvite
-import fe.linksheet.donateSettingsRoute
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.lineSeparator
-import fe.linksheet.linksheetGithub
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.util.AppSignature
 import org.koin.androidx.compose.koinViewModel
@@ -127,7 +120,7 @@ fun AboutSettingsRoute(
                     headlineId = R.string.discord,
                     subtitleId = R.string.discord_explainer,
                     onClick = {
-                        uriHandler.openUri(discordInvite)
+                        uriHandler.openUri(BuildConfig.LINK_DISCORD)
                     },
                     image = {
                         ColoredIcon(icon = Icons.Default.Chat, descriptionId = R.string.discord)

@@ -25,7 +25,6 @@ import androidx.navigation.NavDestination
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.donationBannerAfterMinutes
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsClient
@@ -89,7 +88,7 @@ class MainViewModel(
 
         val duration = Duration.ofMillis(useTimeMs)
         val minutes = duration.toMinutesPart()
-        if (minutes < donationBannerAfterMinutes) return null
+        if (minutes < BuildConfig.DONATION_BANNER_MIN) return null
 
         val hours = duration.toHoursPart()
         if (hours > 0) {

@@ -424,8 +424,7 @@
     <string name="privacy_settings_explainer">Referrer privacy, telemetry</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">Come chat on our Discord server!
-    </string>
+    <string name="discord_explainer">Chat about LinkSheet on Discord</string>
     <string name="dismiss">Dismiss</string>
     <string name="join">Join</string>
     <string name="donate_card_subtitle_2">Donate crypto</string>

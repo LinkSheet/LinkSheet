@@ -27,6 +27,10 @@ class LibRedirectResolver(
     companion object {
         private val libRedirectServices = LibRedirectLoader.loadBuiltInServices()
         private val libRedirectInstances = LibRedirectLoader.loadBuiltInInstances()
+
+        private val libRedirectZipline by lazy {
+            LibRedirectResource.getLibRedirect().use { it.readBytes() }
+        }
     }
 
     suspend fun resolve(uri: Uri, jsEngine: Boolean): LibRedirectResult {
@@ -58,7 +62,7 @@ class LibRedirectResolver(
     }
 
     private fun redirectZipline(url: String, frontendKey: String, instance: String): String? {
-        return LibRedirectNew.create(Dispatchers.IO, LibRedirectResource.getLibRedirect()).use {
+        return LibRedirectNew.create(Dispatchers.IO, libRedirectZipline).use {
             it.redirect(url, frontendKey, instance)
         }
     }

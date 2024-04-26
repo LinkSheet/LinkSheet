@@ -121,3 +121,9 @@ const val preferredAppsSettingsRoute = "preferred_apps_settings_route"
 const val appsWhichCanOpenLinksSettingsRoute = "apps_which_can_open_links_settings_route"
 const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
+
+object Routes {
+    const val Help = "route__help"
+    const val Shortcuts = "route__shortcuts"
+    const val Updates = "route__updates"
+}

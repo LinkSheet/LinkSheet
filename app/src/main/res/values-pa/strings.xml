@@ -6,7 +6,7 @@
     <string name="onboarding7_headline">ਉਤਸ਼ਾਹ ਨਾਲ ਭਰੇ ਹੋਏ\?
 \nਲਿੰਕਸ਼ੀਟ ਤੁਹਾਡੇ ਕੋਲ ਹੈ</string>
     <string name="enable_send_button">\"ਸਾਂਝਾ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="preferred_apps_explainer">ਤਰਜੀਹੀ ਐਪਸ ਉਹ ਐਪਸ ਹਨ ਜੋ ਤੁਸੀਂ ਕੁਝ ਖਾਸ ਹੋਸਟਾਂ ਨੂੰ \"ਹਮੇਸ਼ਾਂ\" ਖੋਲ੍ਹਣ ਲਈ ਸੈੱਟ ਕਰਦੇ ਹੋ</string>
+    <string name="default_apps_subtitle">ਤਰਜੀਹੀ ਐਪਸ ਉਹ ਐਪਸ ਹਨ ਜੋ ਤੁਸੀਂ ਕੁਝ ਖਾਸ ਹੋਸਟਾਂ ਨੂੰ \"ਹਮੇਸ਼ਾਂ\" ਖੋਲ੍ਹਣ ਲਈ ਸੈੱਟ ਕਰਦੇ ਹੋ</string>
     <string name="amp2html_local_cache">ਸਥਾਨਕ Amp2Html ਕੈਸ਼ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="open_copied_link">ਕਾਪੀ ਕੀਤਾ ਲਿੰਕ ਖੋਲ੍ਹੋ</string>
     <string name="ignore_libredirect">LibRedirect ਨੂੰ ਅਣਡਿੱਠ ਕਰੋ</string>
@@ -66,7 +66,7 @@
     <string name="follow_redirects_local_cache_explainer">ਰੀਡਾਇਰੈਕਟਸ ਦੇ ਨਤੀਜੇ ਨੂੰ ਸਥਾਨਕ ਤੌਰ \'ਤੇ ਕੈਸ਼ ਕਰੋ</string>
     <string name="use_app_settings_explainer">ਐਪ ਨੂੰ ਇਹ ਫੈਸਲਾ ਕਰਨ ਦਿਓ ਕਿ ਕੀ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਵਰਤਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ</string>
     <string name="display_grid_layout_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਸੂਚੀ ਦੀ ਬਜਾਏ ਇੱਕ ਗਰਿੱਡ ਵਿਖਾਓ</string>
-    <string name="apps">ਐਪਸ</string>
+    <string name="app_browsers">ਐਪਸ</string>
     <string name="no_apps_found">ਕੋਈ ਐਪ ਨਹੀਂ ਲੱਭੀ।</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">ਲਿੰਕਸ਼ੀਟ ਇਸ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦੀ।</string>
@@ -123,7 +123,7 @@
     <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
     <string name="finish">ਸਮਾਪਤ</string>
-    <string name="donate_explainer">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ<b>LinkSheet Pro</b>ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
+    <string name="donate_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ<b>LinkSheet Pro</b>ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
@@ -134,7 +134,7 @@
     <string name="fastforward">FastForward</string>
     <string name="follow_redirects_external_service_explainer">ਸੁਪਰਬੇਸਡਾਟਕਾਮ (<annotation url="https://supabase.com/privacy"> \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>)</string>
     <string name="include_fingerprint">ਡਿਵਾਈਸ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸ਼ਾਮਲ ਕਰੋ (ਸਿਫਾਰਸ਼ੀ)</string>
-    <string name="preferred_apps">ਤਰਜੀਹੀ ਐਪਸ</string>
+    <string name="default_apps">ਤਰਜੀਹੀ ਐਪਸ</string>
     <string name="just_once">ਇਸ ਵਾਰ</string>
     <string name="disable_in_selected_explainer">ਚੁਣੀਆਂ ਗਈਆਂ ਐਪਾਂ ਵਿੱਚ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਡਿਸੇਬਲ ਕਰੋ, ਚਾਹੇ ਐਪ ਜੋ ਵੀ ਵਰਤਣਾ ਚਾਹੁੰਦਾ ਹੈ</string>
     <string name="fastfoward_rules">ਫਾਸਟ ਫਾਰਵਰਡ ਨਿਯਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
@@ -175,7 +175,7 @@
     <string name="open_with">ਦੇ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="no_handlers_found">ਕੋਈ ਬ੍ਰਾਊਜ਼ਰ ਜਾਂ ਮੂਲ ਐਪ ਨਹੀਂ ਮਿਲਿਆ!</string>
     <string name="always_ask">ਹਮੇਸ਼ਾਂ ਪੁੱਛੋ</string>
-    <string name="in_app_browser_explainer">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
+    <string name="in_app_browser_subtitle">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
     <string name="about">ਦੇ ਬਾਰੇ ਵਿੱਚ</string>
     <string name="add_all">ਸਭ ਸ਼ਾਮਿਲ ਕਰੋ</string>
     <string name="random_instance">ਰੈਨਡਮ ਇੰਸਟੈਂਸ</string>
@@ -209,7 +209,7 @@
     <string name="in_app_browser">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="links">ਲਿੰਕ</string>
     <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
-    <string name="preferred_browser">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ</string>
+    <string name="browser_mode">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="dark">ਗਹਿਰਾ</string>
     <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ)</string>
@@ -261,7 +261,7 @@
     <string name="settings">ਸੈਟਿੰਗਾਂ</string>
     <string name="title_activity_main">ਮੁੱਖ ਐਕਟੀਵਿਟੀ</string>
     <string name="in_app">ਇਨ-ਐਪ</string>
-    <string name="preferred_browser_explainer">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
+    <string name="browser_mode_subtitle">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
     <string name="crash_log">ਕਰੈਸ਼ ਲੌਗ</string>
     <string name="single_tap">ਸਿੰਗਲ ਟੈਪ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="set_as_default_browser">ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
@@ -397,7 +397,7 @@
     <string name="onboarding_0_subtitle">ਇੱਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਵੇਲੇ ਹਮੇਸ਼ਾਂ ਪ੍ਰੋਂਪਟ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਚੁਣੋ, ਡਿਫੌਲਟ ਬ੍ਰਾਊਜ਼ਰ ਸੈੱਟ ਕਰੋ, ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ</string>
     <string name="start_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੀ ਕਾਰਜਕੁਸ਼ਲਤਾ ਲਈ ਕਸਟਮ ਐਂਡਰਾਇਡ ਸੰਰਚਨਾ ਦੀ ਲੋੜ ਹੈ। ਨਿਮਨਲਿਖਤ ਸੈੱਟਅੱਪ ਤੁਹਾਨੂੰ ਬਹੁ-ਪੜਾਵੀ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇਗਾ।</string>
     <string name="apps_which_can_open_links">ਪ੍ਰਮਾਣਿਤ ਲਿੰਕ ਹੈਂਡਲਰ</string>
-    <string name="apps_explainer">ਤਰਜੀਹੀ ਐਪਸ ਅਤੇ ਪ੍ਰਮਾਣਿਤ ਲਿੰਕ ਹੈਂਡਲਰ</string>
+    <string name="app_browsers_subtitle">ਤਰਜੀਹੀ ਐਪਸ ਅਤੇ ਪ੍ਰਮਾਣਿਤ ਲਿੰਕ ਹੈਂਡਲਰ</string>
     <string name="onboarding_1_title">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="onboarding_1_subtitle">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਟੈਪ ਕੀਤੇ ਲਿੰਕਾਂ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ</string>
     <string name="onboarding_1_card_title">ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ</string>

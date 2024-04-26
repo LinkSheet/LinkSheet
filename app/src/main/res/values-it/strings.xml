@@ -8,8 +8,8 @@
     <string name="enable_copy_button">Abilita pulsante di copia</string>
     <string name="url_copied">L\'URL è stato copiato negli appunti</string>
     <string name="single_tap">Abilita tocco singolo</string>
-    <string name="preferred_browser">Browser preferito</string>
-    <string name="preferred_browser_explainer">Imposta la modalità browser preferita</string>
+    <string name="browser_mode">Browser preferito</string>
+    <string name="browser_mode_subtitle">Imposta la modalità browser preferita</string>
     <string name="always_ask">Chiedi sempre</string>
     <string name="none">Nessuno</string>
     <string name="always_ask_explainer">Elenca sempre tutti i browser</string>
@@ -19,7 +19,7 @@
     <string name="donate_crypto">Dona</string>
     <string name="theme">Tema</string>
     <string name="fastforward">FastForward</string>
-    <string name="preferred_apps">App preferite</string>
+    <string name="default_apps">App preferite</string>
     <string name="use_a_different_app">Usa un\'altra app</string>
     <string name="opening_with_app">Apertura con %s</string>
     <string name="set_as_browser">Imposta come browser</string>
@@ -31,7 +31,7 @@
     <string name="single_tap_explainer">Richiede solo un tocco invece di due per aprire le app; premi a lungo per selezionare l\'app, fai doppio clic per aprire le informazioni sull\'app</string>
     <string name="confirm">Conferma</string>
     <string name="usage_stats_sorting">Ordina app per utilizzo</string>
-    <string name="donate_explainer">Dona criptovalute all\'autore</string>
+    <string name="donate_subtitle">Dona criptovalute all\'autore</string>
     <string name="none_explainer">Elenca solo le app native, rimuovendo tutti i browser. Se è presente una sola app nativa, questa verrà aperta automaticamente. Se non è presente alcuna app nativa, vengono elencati tutti i browser.</string>
     <string name="error">Errore</string>
     <string name="back">Indietro</string>
@@ -39,7 +39,7 @@
     <string name="github">GitHub</string>
     <string name="links">Link</string>
     <string name="open_with_linksheet">Apri con LinkSheet</string>
-    <string name="apps">App</string>
+    <string name="app_browsers">App</string>
     <string name="settings">Imposta</string>
     <string name="github_explainer">Repository del codice sorgente</string>
     <string name="paste">Incolla</string>
@@ -89,7 +89,7 @@
     <string name="preview_url_explainer">Mostra l\'URL cliccato (dopo che è stato elaborato)</string>
     <string name="download">Download</string>
     <string name="display_grid_layout">Layout a griglia</string>
-    <string name="preferred_apps_explainer">Le app preferite sono le app impostate su \"Sempre\" per aprire determinati host</string>
+    <string name="default_apps_subtitle">Le app preferite sono le app impostate su \"Sempre\" per aprire determinati host</string>
     <string name="whitelisted_explainer">Mostra solo i browser autorizzati</string>
     <string name="whitelisted_browsers">Browser autorizzati</string>
     <string name="use_text_share_copy_buttons_explainer">Sostituisce i pulsanti delineati \"Copia URL\", \"Condividi\", \"Download\" e \"Ignora LibRedirect\" con semplici pulsanti di testo</string>
@@ -146,7 +146,7 @@
     <string name="follow_redirects_explainer">Segui automaticamente tutti i reindirizzamenti prima di aprire il foglio inferiore. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicazioni relative alla privacy</annotation></string>
     <string name="downloader_url_mime_type">Usa il tipo MIME dall\'URL</string>
     <string name="in_app_browser">Browser in-app</string>
-    <string name="in_app_browser_explainer">Imposta la modalità browser in-app</string>
+    <string name="in_app_browser_subtitle">Imposta la modalità browser in-app</string>
     <string name="use_app_settings">Usa impostazioni dell\'app</string>
     <string name="use_app_settings_explainer">Consenti all\'app di decidere se utilizzare il browser in-app</string>
     <string name="always_disable">Disabilita sempre</string>

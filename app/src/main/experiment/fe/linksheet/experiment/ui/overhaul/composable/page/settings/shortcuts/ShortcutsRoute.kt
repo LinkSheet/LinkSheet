@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.ui.overhaul.composable.page.settings
+package fe.linksheet.experiment.ui.overhaul.composable.page.settings.shortcuts
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
@@ -11,6 +11,7 @@ import fe.linksheet.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavigateListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultLeadingIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import fe.linksheet.module.viewmodel.SettingsViewModel
@@ -55,73 +56,68 @@ internal object NewSettingsRouteData {
     )
 
     val dev = Nav(devModeRoute, Icons.Outlined.DeveloperMode, R.string.dev, R.string.dev_explainer)
-
-    val about = arrayOf(
-        Nav(Routes.Help, Icons.AutoMirrored.Outlined.HelpOutline, R.string.help, R.string.help_subtitle),
-        Nav(
-            Routes.Shortcuts,
-            Icons.Outlined.SwitchAccessShortcut,
-            R.string.settings__title_shortcuts,
-            R.string.settings__subtitle_shortcuts
-        ),
-        Nav(
-            Routes.Updates,
-            Icons.Outlined.Update,
-            R.string.settings__title_updates,
-            R.string.settings__subtitle_updates
-        ),
-        Nav(aboutSettingsRoute, Icons.Outlined.Info, R.string.about, R.string.about_explainer)
+    val help = Nav(Routes.Help, Icons.AutoMirrored.Outlined.HelpOutline, R.string.help, R.string.help_subtitle)
+    val shortcuts = Nav(
+        Routes.Shortcuts,
+        Icons.Outlined.SwitchAccessShortcut,
+        R.string.settings__title_shortcuts,
+        R.string.settings__subtitle_shortcuts
     )
+    val updates = Nav(
+        Routes.Updates,
+        Icons.Outlined.Update,
+        R.string.settings__title_updates,
+        R.string.settings__subtitle_updates
+    )
+
+    val about = Nav(aboutSettingsRoute, Icons.Outlined.Info, R.string.about, R.string.about_explainer)
 }
 
 @Composable
-fun NewSettingsRoute(
+fun ShortcutsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
-    viewModel: SettingsViewModel = koinViewModel(),
 ) {
-    val devMode = viewModel.devModeEnabled()
+    SaneScaffoldSettingsPage(
+        headline = stringResource(id = R.string.settings__title_shortcuts),
+        onBackPressed = onBackPressed
+    ) {
+        group(size = 3) {
+            item(key = R.string.settings_shortcuts__title_default_browser) { padding, shape ->
+                DefaultLeadingIconClickableShapeListItem(
+                    shape = shape,
+                    padding = padding,
+                    headlineId = R.string.settings_shortcuts__title_default_browser,
+                    subtitleId = R.string.settings_shortcuts__subtitle_default_browser,
+                    onClick = {
 
-    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.settings), onBackPressed = onBackPressed) {
-        item(key = R.string.enable_libredirect, contentType = ContentTypeDefaults.SingleGroupItem) {
-            RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
-        }
-
-        divider(stringRes = R.string.customization)
-
-        group(items = NewSettingsRouteData.customization) { data, padding, shape ->
-            RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
-        }
-
-        divider(stringRes = R.string.misc_settings)
-
-        group(items = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
-            RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
-        }
-
-        divider(stringRes = R.string.advanced)
-
-        group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
-            items(values = NewSettingsRouteData.advanced) { data, padding, shape ->
-                RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
+                    }
+                )
             }
 
-            if (devMode) {
-                item(key = NewSettingsRouteData.dev.route) { padding, shape ->
-                    RouteNavigateListItem(
-                        data = NewSettingsRouteData.dev,
-                        padding = padding,
-                        shape = shape,
-                        navigate = navigate
-                    )
-                }
+            item(key = R.string.settings_shortcuts__title_link_handlers) { padding, shape ->
+                DefaultLeadingIconClickableShapeListItem(
+                    shape = shape,
+                    padding = padding,
+                    headlineId = R.string.settings_shortcuts__title_link_handlers,
+                    subtitleId = R.string.settings_shortcuts__subtitle_default_browser,
+                    onClick = {
+
+                    }
+                )
             }
-        }
 
-        divider(stringRes = R.string.about)
+            item(key = R.string.settings_shortcuts__title_connected_apps) { padding, shape ->
+                DefaultLeadingIconClickableShapeListItem(
+                    shape = shape,
+                    padding = padding,
+                    headlineId = R.string.settings_shortcuts__title_connected_apps,
+                    subtitleId = R.string.settings_shortcuts__subtitle_default_browser,
+                    onClick = {
 
-        group(items = NewSettingsRouteData.about) { data, padding, shape ->
-            RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
+                    }
+                )
+            }
         }
     }
 }

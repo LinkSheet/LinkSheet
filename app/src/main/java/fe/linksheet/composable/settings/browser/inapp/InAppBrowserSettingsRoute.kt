@@ -34,7 +34,7 @@ fun InAppBrowserSettingsRoute(
     BrowserCommonScaffold(
         navController = navController,
         headline = R.string.in_app_browser,
-        explainer = R.string.in_app_browser_explainer,
+        explainer = R.string.in_app_browser_subtitle,
         onBackPressed = onBackPressed,
         viewModel = viewModel,
         values = listOf(

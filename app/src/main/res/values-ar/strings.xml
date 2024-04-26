@@ -16,8 +16,8 @@
     <string name="single_tap">تمكين النقرة الواحدة</string>
     <string name="confirm">أكد</string>
     <string name="clear">مسح</string>
-    <string name="preferred_browser">المتصفح المفضل</string>
-    <string name="preferred_browser_explainer">تعيين وضع المتصفح المفضل</string>
+    <string name="browser_mode">المتصفح المفضل</string>
+    <string name="browser_mode_subtitle">تعيين وضع المتصفح المفضل</string>
     <string name="always_ask">اسأل دائما</string>
     <string name="always_show_package_name">إظهار اسم الحزمة دائما</string>
     <string name="remove_all">إزالة الكل</string>
@@ -28,7 +28,7 @@
     <string name="license_apache_2">رخصة اباتشي 2.0</string>
     <string name="browser">المتصفح</string>
     <string name="just_once">مرة واحدة</string>
-    <string name="preferred_apps">التطبيقات المفضلة</string>
+    <string name="default_apps">التطبيقات المفضلة</string>
     <string name="set_as_browser">تعيين كمتصفح</string>
     <string name="apps_which_can_open_links_explainer">انقر على أحد التطبيقات لفتح قائمة \"الفتح افتراضيًا\" التي تسمح لك بتعطيل فتح الرابط تلقائيًا</string>
     <string name="no_preferred_apps_set_yet">لم يتم تعيين أي تطبيقات على أنها مفضلة حتى الآن.</string>
@@ -41,7 +41,7 @@
     <string name="none_explainer">قائمة التطبيقات الأصلية فقط ، وإزالة جميع المتصفحات. في حالة وجود تطبيق أصلي واحد فقط ، سيتم فتحه تلقائيا. في حالة عدم وجود تطبيق أصلي ، يتم عرض جميع المتصفحات.</string>
     <string name="no_app_to_handle_link_found">لم يتم العثور على تطبيق للتعامل مع الرابط!</string>
     <string name="open_settings">أفتح الإعدادات</string>
-    <string name="preferred_apps_explainer">التطبيقات المفضلة هي التطبيقات التي قمت بتعيينها على \"دائمًا\" لفتح مضيفين معينين</string>
+    <string name="default_apps_subtitle">التطبيقات المفضلة هي التطبيقات التي قمت بتعيينها على \"دائمًا\" لفتح مضيفين معينين</string>
     <string name="enable_send_button">تمكين زر \"مشاركة إلى\"</string>
     <string name="enable_send_button_explainer">يعرض زرا في الورقة السفلية يسمح لك بمشاركة عنوان url مع تطبيقات أخرى كما لو كنت قد حددته من قائمة \"مشاركة إلى\"</string>
     <string name="send_to">مشاركة الى</string>
@@ -55,7 +55,7 @@
     <string name="back">رجوع</string>
     <string name="set_as_browser_done">تم تعيين ورقة الروابط كمتصفح افتراضي!</string>
     <string name="browser_status">حالة المتصفح</string>
-    <string name="apps">تطبيقات</string>
+    <string name="app_browsers">تطبيقات</string>
     <string name="bottom_sheet">الورقة السفلية</string>
     <string name="open_with_linksheet">فتح باستخدام ورقة الروابط</string>
     <string name="settings">الإعدادات</string>
@@ -76,7 +76,7 @@
     <string name="open_copied_link">افتح الرابط المنسوخ</string>
     <string name="seal">ختم</string>
     <string name="github_explainer">مستودع التعليمات البرمجية</string>
-    <string name="donate_explainer">إذا كنت ترغب في التبرع والمطالبة بـ <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">إذا كنت ترغب في التبرع والمطالبة بـ <b>LinkSheet Pro</b></string>
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
     <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
@@ -125,7 +125,7 @@
     <string name="downloader_url_mime_type">استخدام نوع mime من عنوان الرابط</string>
     <string name="in_app_browser">متصفح داخل التطبيق</string>
     <string name="downloader_url_mime_type_explainer">يتحقق مما إذا كان عنوان URL ينتهي بامتداد ملف (على سبيل المثال \".jpg\") ؛ إذا حدث ذلك ، استخدام هذا النوع للملف الذي تم تنزيله.</string>
-    <string name="in_app_browser_explainer">تعيين وضع المتصفح داخل التطبيق</string>
+    <string name="in_app_browser_subtitle">تعيين وضع المتصفح داخل التطبيق</string>
     <string name="use_app_settings">استخدام إعدادات التطبيق</string>
     <string name="always_disable">تعطيل دائما</string>
     <string name="browser_explainer">وضع المتصفح وإعدادات المتصفح داخل التطبيق</string>

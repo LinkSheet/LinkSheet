@@ -1,16 +1,17 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.OptionalContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
@@ -66,6 +67,7 @@ enum class RadioLocation {
     Leading, Trailing
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RadioButtonListItem(
     modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
@@ -81,12 +83,14 @@ fun RadioButtonListItem(
 ) {
     val radioButton: OptionalContent = remember(enabled, selected, onClick) {
         {
-            RadioButton(
-                modifier = Modifier.fillMaxHeight(),
-                enabled = enabled,
-                selected = selected,
-                onClick = onClick,
-            )
+            CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 36.dp) {
+                RadioButton(
+                    modifier = Modifier.fillMaxHeight().width(36.dp),
+                    enabled = enabled,
+                    selected = selected,
+                    onClick = onClick,
+                )
+            }
         }
     }
 

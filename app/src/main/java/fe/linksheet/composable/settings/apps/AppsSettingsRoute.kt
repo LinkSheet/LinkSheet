@@ -30,7 +30,7 @@ fun AppsSettingsRoute(
     onBackPressed: () -> Unit,
     featureFlagViewModel: FeatureFlagViewModel = koinViewModel(),
 ) {
-    SettingsScaffold(R.string.apps, onBackPressed = onBackPressed) { padding ->
+    SettingsScaffold(R.string.app_browsers, onBackPressed = onBackPressed) { padding ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
@@ -40,12 +40,12 @@ fun AppsSettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = preferredAppsSettingsRoute,
-                    headlineId = R.string.preferred_apps,
+                    headlineId = R.string.default_apps,
                     subtitleId = R.string.preferred_apps_settings,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.OpenInNew,
-                            descriptionId = R.string.preferred_apps
+                            descriptionId = R.string.default_apps
                         )
                     }
                 )
@@ -66,7 +66,7 @@ fun AppsSettingsRoute(
                         }
                     )
                 }
-                
+
                 if (featureFlagViewModel.linkSheetCompat()) {
                     item(key = pretendToBeAppRoute) {
                         SettingsItemRow(

@@ -32,10 +32,10 @@ fun SettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = appsSettingsRoute,
-                    headlineId = R.string.apps,
-                    subtitleId = R.string.apps_explainer,
+                    headlineId = R.string.app_browsers,
+                    subtitleId = R.string.app_browsers_subtitle,
                     image = {
-                        ColoredIcon(icon = Icons.Default.Apps, descriptionId = R.string.apps)
+                        ColoredIcon(icon = Icons.Default.Apps, descriptionId = R.string.app_browsers)
                     }
                 )
             }

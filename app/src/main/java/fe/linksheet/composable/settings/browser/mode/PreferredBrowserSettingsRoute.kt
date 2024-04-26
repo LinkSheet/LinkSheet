@@ -58,8 +58,8 @@ fun PreferredBrowserSettingsRoute(
 
     BrowserCommonScaffold(
         navController = navController,
-        headline = R.string.preferred_browser,
-        explainer = R.string.preferred_browser_explainer,
+        headline = R.string.browser_mode,
+        explainer = R.string.browser_mode_subtitle,
         onBackPressed = onBackPressed,
         viewModel = viewModel,
         values = listOf(

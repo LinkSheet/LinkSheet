@@ -85,7 +85,7 @@ fun PreferredAppSettingsRoute(
     val context = LocalContext.current
 
     SettingsScaffold(
-        R.string.preferred_apps,
+        R.string.default_apps,
         onBackPressed = onBackPressed,
         floatingActionButton = {
             if (AndroidVersion.AT_LEAST_API_31_S) {
@@ -104,7 +104,7 @@ fun PreferredAppSettingsRoute(
             contentPadding = PaddingValues(horizontal = 15.dp)
         ) {
             searchHeader(
-                subtitleId = R.string.preferred_apps_explainer,
+                subtitleId = R.string.default_apps_subtitle,
                 filter = filter,
                 searchFilter = viewModel.searchFilter
             )

@@ -4,18 +4,18 @@
     <string name="single_tap_explainer">Uygulamaları açmak için iki yerine yalnızca bir dokunuş gerekir; Uygulamayı seçmek için uzun basın, uygulama bilgilerini açmak için çift tıklayın</string>
     <string name="enable_send_button_explainer">Alt sayfada, URL\'yi bir \"Şununla paylaş\" menüsünden seçmişsiniz gibi diğer uygulamalarla paylaşmanıza izin veren bir düğme gösterir</string>
     <string name="usage_stats_sorting_explainer">Android sistem kullanım istatistiklerini sıralama algoritmasına dahil edin. İlk geçişte izin istenir.</string>
-    <string name="preferred_browser">Tercih edilen tarayıcı</string>
+    <string name="browser_mode">Tercih edilen tarayıcı</string>
     <string name="none">Hiçbiri</string>
     <string name="none_explainer">Yalnızca yerel uygulamaları listeleyin, tüm tarayıcıları kaldırın. Yalnızca tek bir yerel uygulama varsa, otomatik olarak açılır. Yerel uygulama yoksa tüm tarayıcılar listelenir.</string>
     <string name="enable_send_button">\"Paylaş\" düğmesini etkinleştirin</string>
-    <string name="preferred_apps_explainer">Tercih edilen uygulamalar, belirli ana bilgisayarları \"Her zaman\" açacak şekilde ayarladığınız uygulamalardır</string>
+    <string name="default_apps_subtitle">Tercih edilen uygulamalar, belirli ana bilgisayarları \"Her zaman\" açacak şekilde ayarladığınız uygulamalardır</string>
     <string name="always_show_package_name_explainer">Yalnızca uygulama adları yerine her zaman paket adlarını göster. Bu tüm uygulama için geçerlidir.</string>
     <string name="just_once">Sadece bir kere</string>
     <string name="always">Her zaman</string>
     <string name="open_with_app">%s ile aç</string>
     <string name="use_a_different_app">Farklı bir uygulama kullanın</string>
     <string name="opening_with_app">%s ile açılıyor</string>
-    <string name="preferred_apps">Tercih edilen uygulamalar</string>
+    <string name="default_apps">Tercih edilen uygulamalar</string>
     <string name="set_as_browser">Tarayıcı olarak ayarla</string>
     <string name="no_preferred_apps_set_yet">Henüz hiçbir uygulama tercih edilen olarak ayarlanmadı.</string>
     <string name="search">Arama</string>
@@ -34,7 +34,7 @@
     <string name="always_show_package_name">Paket adını her zaman göster</string>
     <string name="open_with">Bununla aç</string>
     <string name="enable_copy_button_explainer">Alt sayfada bir \"URL\'yi kopyala\" düğmesi gösterir</string>
-    <string name="preferred_browser_explainer">Tercih edilen tarayıcı modunu ayarla</string>
+    <string name="browser_mode_subtitle">Tercih edilen tarayıcı modunu ayarla</string>
     <string name="set_as_browser_explainer">LinkSheet\'i varsayılan tarayıcı yapmak için buraya dokunun</string>
     <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>
     <string name="apps_which_can_open_links_explainer_2">LinkSheet\'in davranışına müdahale edebilecek tüm uygulamaları listeler</string>
@@ -46,7 +46,7 @@
     <string name="add_all">Hepsini ekle</string>
     <string name="hide_after_copying">Kopyaladıktan sonra gizle</string>
     <string name="display_grid_layout">Izgara düzeni</string>
-    <string name="apps">Uygulamalar</string>
+    <string name="app_browsers">Uygulamalar</string>
     <string name="bottom_sheet">Alt sayfa</string>
     <string name="enabled">Etkinleştirilmiş</string>
     <string name="disabled">Devre dışı bırakıldı</string>
@@ -65,7 +65,7 @@
     <string name="license_gpl_3">GNU Genel Kamu Lisansı v3.0</string>
     <string name="github">Github</string>
     <string name="donate_crypto">Crypto ile bağış yapın</string>
-    <string name="donate_explainer">Bağış yapıp talep etmek istiyorsanız<b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Bağış yapıp talep etmek istiyorsanız<b>LinkSheet Pro</b></string>
     <string name="paste">Yapıştır</string>
     <string name="error">Hata</string>
     <string name="checkmark">Onay işareti</string>
@@ -164,7 +164,7 @@
     <string name="use_unified_preferred_browser_explainer">Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın.</string>
     <string name="always_show_package_name_disclaimer">Bu anahtar gelecekteki bir sürümde farklı bir konuma taşınacaktır.</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
-    <string name="in_app_browser_explainer">Uygulama içi tarayıcı modunu ayarla</string>
+    <string name="in_app_browser_subtitle">Uygulama içi tarayıcı modunu ayarla</string>
     <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulama karar versin</string>
     <string name="close">Kapat</string>
     <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API\'yi kullanarak yönlendirmeleri takip eder(<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
@@ -312,7 +312,7 @@
     <string name="linksheet_download">LinkSheet\'i İndir</string>
     <string name="pretend_to_be_app_explainer">LinkSheetCompat ile desteklenen alan adları için yerel bir uygulama gibi davran</string>
     <string name="shizuku_manager_start_failed">Shizuku Yöneticisi başlatılamadı, lütfen manuel olarak başlatın!</string>
-    <string name="apps_explainer">Tercih edilen uygulamalar, onaylanmış bağlantıları açabilen uygulamalar</string>
+    <string name="app_browsers_subtitle">Tercih edilen uygulamalar, onaylanmış bağlantıları açabilen uygulamalar</string>
     <string name="start_setup">Devam et</string>
     <string name="start_setup_explainer">LinkSheet\'in çalışması özel bir Android ayarlaması gerektirir. Kurulum size çok-adımlı süreçte size yol gösterecektir.</string>
     <string name="onboarding_setup">LinkSheet\'i kur</string>

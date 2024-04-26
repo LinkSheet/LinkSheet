@@ -4,7 +4,7 @@
     <string name="import_dumped_preference">Nhập tùy chọn kết xuất</string>
     <string name="domain_selection_confirmation_subtitle">Bạn có chắc chắn muốn đặt %s làm ứng dụng ưu tiên cho các miền sau không?</string>
     <string name="enable_send_button">Bật nút \"Chia sẻ tới\"</string>
-    <string name="preferred_apps_explainer">Ứng dụng ưu tiên là ứng dụng bạn đặt thành \"Luôn luôn\" mở một số máy chủ nhất định</string>
+    <string name="default_apps_subtitle">Ứng dụng ưu tiên là ứng dụng bạn đặt thành \"Luôn luôn\" mở một số máy chủ nhất định</string>
     <string name="amp2html_local_cache">Kích hoạt bộ đệm Amp2Html cục bộ</string>
     <string name="open_copied_link">Mở liên kết đã sao chép</string>
     <string name="ignore_libredirect">Bỏ qua LibRedirect</string>
@@ -49,7 +49,7 @@
     <string name="follow_redirects_local_cache_explainer">Lưu trữ kết quả chuyển hướng cục bộ</string>
     <string name="use_app_settings_explainer">Hãy để ứng dụng quyết định xem có nên sử dụng trình duyệt trong ứng dụng hay không</string>
     <string name="display_grid_layout_explainer">Hiển thị lưới thay vì danh sách ở trang dưới cùng</string>
-    <string name="apps">Ứng dụng</string>
+    <string name="app_browsers">Ứng dụng</string>
     <string name="no_apps_found">Không tìm thấy ứng dụng nào.</string>
     <string name="onboarding0_highlight">quyền tự do lựa chọn</string>
     <string name="redirect_resolve_type_local_cache">bộ đệm cục bộ</string>
@@ -86,13 +86,13 @@
     <string name="frontend">Giao diện người dùng</string>
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="finish">Hoàn thành</string>
-    <string name="donate_explainer">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b></string>
     <string name="built_at">Xây dựng lúc (UTC):</string>
     <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
     <string name="delete">Xóa</string>
     <string name="include_fingerprint">Bao gồm dấu vân tay của thiết bị (được khuyến nghị)</string>
-    <string name="preferred_apps">Ứng dụng ưu tiên</string>
+    <string name="default_apps">Ứng dụng ưu tiên</string>
     <string name="just_once">Chỉ một lần</string>
     <string name="disable_in_selected_explainer">Tắt trình duyệt trong ứng dụng trong các ứng dụng đã chọn, bất kể ứng dụng đó muốn sử dụng gì</string>
     <string name="fastfoward_rules">Sử dụng quy tắc FastForward</string>
@@ -123,7 +123,7 @@
     <string name="amp2html_external_service">Cố gắng lấy phiên bản trang không phải AMP thông qua dịch vụ bên ngoài</string>
     <string name="open_with">Mở bằng</string>
     <string name="always_ask">Luôn luôn hỏi</string>
-    <string name="in_app_browser_explainer">Đặt chế độ trình duyệt trong ứng dụng</string>
+    <string name="in_app_browser_subtitle">Đặt chế độ trình duyệt trong ứng dụng</string>
     <string name="about">Giới thiệu</string>
     <string name="add_all">Thêm hết</string>
     <string name="random_instance">Instance ngẫu nhiên</string>
@@ -150,7 +150,7 @@
     <string name="open_with_linksheet">Mở bằng LinkSheet</string>
     <string name="in_app_browser">Trình duyệt trong ứng dụng</string>
     <string name="links">Liên kết</string>
-    <string name="preferred_browser">Trình duyệt ưu tiên</string>
+    <string name="browser_mode">Trình duyệt ưu tiên</string>
     <string name="dark">Tối</string>
     <string name="disable_all_toasts_explainer">Không bao giờ hiển thị bất kỳ tin nhắn thông báo ngắn nào</string>
     <string name="set_as_browser">Đặt làm trình duyệt</string>
@@ -184,7 +184,7 @@
     <string name="follow_redirects_external_service">Theo dõi chuyển hướng qua dịch vụ bên ngoài</string>
     <string name="pro_feature">Đây là một tính năng của LinkSheet Pro!</string>
     <string name="settings">Thiết đặt</string>
-    <string name="preferred_browser_explainer">Đặt chế độ trình duyệt ưu tiên</string>
+    <string name="browser_mode_subtitle">Đặt chế độ trình duyệt ưu tiên</string>
     <string name="crash_log">Nhật ký sự cố</string>
     <string name="single_tap">Bật một lần chạm</string>
     <string name="set_as_default_browser">Đặt làm trình duyệt mặc định</string>
@@ -326,7 +326,7 @@
     <string name="export_explainer">Xuất thiết đặt ứng dụng hiện tại của bạn sang một tệp</string>
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
-    <string name="apps_explainer">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
+    <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
     <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> thử nghiệm</string>
     <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp.Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ngụ ý liên quan đến quyền riêng tư </annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng.Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư </annotation></string>

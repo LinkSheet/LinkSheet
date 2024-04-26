@@ -34,12 +34,12 @@ fun BrowserSettingsRoute(
                 SettingsItemRow(
                     navController = navController,
                     navigateTo = preferredBrowserSettingsRoute,
-                    headlineId = R.string.preferred_browser,
-                    subtitleId = R.string.preferred_browser_explainer,
+                    headlineId = R.string.browser_mode,
+                    subtitleId = R.string.browser_mode_subtitle,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.OpenInBrowser,
-                            descriptionId = R.string.preferred_browser
+                            descriptionId = R.string.browser_mode
                         )
                     }
                 )
@@ -50,7 +50,7 @@ fun BrowserSettingsRoute(
                     navController = navController,
                     navigateTo = inAppBrowserSettingsRoute,
                     headlineId = R.string.in_app_browser,
-                    subtitleId = R.string.in_app_browser_explainer,
+                    subtitleId = R.string.in_app_browser_subtitle,
                     image = {
                         ColoredIcon(
                             icon = Icons.Default.ExitToApp,

@@ -3,7 +3,7 @@
     <string name="no_app_to_handle_link_found">Keine App zum Verarbeiten von Links gefunden!</string>
     <string name="always">Immer</string>
     <string name="just_once">Nur einmal</string>
-    <string name="preferred_apps">Bevorzugte Apps</string>
+    <string name="default_apps">Bevorzugte Apps</string>
     <string name="open_with">Öffnen mit</string>
     <string name="set_as_browser">Als Browser festlegen</string>
     <string name="open_with_app">Öffnen mit %s</string>
@@ -24,15 +24,15 @@
     <string name="single_tap_explainer">Nur einmaliges Tippen anstatt von doppeltem benötigt, um Apps zu öffnen; Lange drücken, um eine App auszuwählen, doppelt, um die App Info zu öffnen</string>
     <string name="confirm">Bestätigen</string>
     <string name="always_ask">Immer fragen</string>
-    <string name="preferred_browser">Bevorzugter Browser</string>
-    <string name="preferred_browser_explainer">Bevorzugten Browsermodus einstellen</string>
+    <string name="browser_mode">Bevorzugter Browser</string>
+    <string name="browser_mode_subtitle">Bevorzugten Browsermodus einstellen</string>
     <string name="none_explainer">Nur native Apps auflisten, alle Browser entfernen. Wenn nur eine einzige native App vorhanden ist, wird diese automatisch geöffnet. Wenn keine native App vorhanden ist, werden alle Browser aufgelistet.</string>
     <string name="always_ask_explainer">Immer alle Browser auflisten</string>
     <string name="none">Keiner</string>
     <string name="no_such_app_found">Keine solche App gefunden!</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="save">Speichern</string>
-    <string name="apps">Apps</string>
+    <string name="app_browsers">Apps</string>
     <string name="enabled">Aktiviert</string>
     <string name="github">Github</string>
     <string name="hide_after_copying">Nach dem Kopieren ausblenden</string>
@@ -91,7 +91,7 @@
     <string name="use_unified_preferred_browser">Einheitliche Einstellungen verwenden</string>
     <string name="enable_downloader">Downloader aktivieren</string>
     <string name="download">Herunterladen</string>
-    <string name="in_app_browser_explainer">In-App-Browser-Modus setzen</string>
+    <string name="in_app_browser_subtitle">In-App-Browser-Modus setzen</string>
     <string name="random_instance">Zufällige Instanz</string>
     <string name="options">Optionen</string>
     <string name="services">Dienste</string>
@@ -125,7 +125,7 @@
     <string name="dismiss">Ablehnen</string>
     <string name="onboarding7_headline">Enthusiast\?
 \nLinkSheet hat Sie</string>
-    <string name="preferred_apps_explainer">Bevorzugte Anwendungen sind die Anwendungen, die Sie für bestimmte Hosts als \"Immer öffnen\" festgelegt haben</string>
+    <string name="default_apps_subtitle">Bevorzugte Anwendungen sind die Anwendungen, die Sie für bestimmte Hosts als \"Immer öffnen\" festgelegt haben</string>
     <string name="amp2html_local_cache">Lokalen Amp2Html-Zwischenspeicher aktivieren</string>
     <string name="open_copied_link">Kopierten Link öffnen</string>
     <string name="include_settings">Einstellungen einbeziehen (empfohlen)</string>
@@ -208,7 +208,7 @@
     <string name="frontend">Benutzeroberfläche</string>
     <string name="redirect_resolve_type_remote">Remote-Server</string>
     <string name="finish">Fertig</string>
-    <string name="donate_explainer">Wenn Sie spenden und <b>LinkSheet Pro</b> beanspruchen möchten</string>
+    <string name="donate_subtitle">Wenn Sie spenden und <b>LinkSheet Pro</b> beanspruchen möchten</string>
     <string name="advanced">Erweitert</string>
     <string name="built_at">Build erstellt um (UTC):</string>
     <string name="shizuku_explainer_short">Direkt mit System-Schnittstellen interagieren</string>

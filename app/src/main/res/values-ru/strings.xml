@@ -4,7 +4,7 @@
     <string name="onboarding7_headline">Энтузиаст?
 \nВ LinkSheet есть ты</string>
     <string name="enable_send_button">Включить кнопку «Поделиться»</string>
-    <string name="preferred_apps_explainer">Предпочитаемые приложения — это приложения, для которых вы установили параметр «Всегда» открывать определенные хосты</string>
+    <string name="default_apps_subtitle">Предпочитаемые приложения — это приложения, для которых вы установили параметр «Всегда» открывать определенные хосты</string>
     <string name="amp2html_local_cache">Включить локальный кэш Amp2Html</string>
     <string name="open_copied_link">Открыть скопированную ссылку</string>
     <string name="ignore_libredirect">Игнорировать LibRedirect</string>
@@ -61,7 +61,7 @@
     <string name="follow_redirects_local_cache_explainer">Локальное кэширование результатов перенаправлений</string>
     <string name="use_app_settings_explainer">Разрешить приложению решать, следует ли использовать браузер в приложении</string>
     <string name="display_grid_layout_explainer">Отобразить сетку вместо списка на нижнем листе</string>
-    <string name="apps">Приложения</string>
+    <string name="app_browsers">Приложения</string>
     <string name="no_apps_found">Приложения не найдены.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="next">Следующий</string>
@@ -103,7 +103,7 @@
     <string name="light">Светлая</string>
     <string name="frontend">Внешний интерфейс</string>
     <string name="redirect_resolve_type_remote">удалённый сервер</string>
-    <string name="donate_explainer">Если вы хотите сделать пожертвование и получить <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Если вы хотите сделать пожертвование и получить <b>LinkSheet Pro</b></string>
     <string name="advanced">Расширенные настройки</string>
     <string name="shizuku_explainer_short">Взаимодействие с системными API напрямую</string>
     <string name="back">Назад</string>
@@ -113,7 +113,7 @@
     <string name="fastforward">FastForward</string>
     <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url="https://supabase.com/privacy">Политика конфиденциальности</annotation>)</string>
     <string name="include_fingerprint">Включить отпечаток пальца устройства (рекомендуется)</string>
-    <string name="preferred_apps">Предпочитаемые приложения</string>
+    <string name="default_apps">Предпочитаемые приложения</string>
     <string name="just_once">Только сейчас</string>
     <string name="disable_in_selected_explainer">Отключить встроенный браузер в выбранных приложениях, независимо от того, что приложение хочет использовать</string>
     <string name="fastfoward_rules">Использовать правила FastForward</string>
@@ -149,7 +149,7 @@
     <string name="amp2html_external_service">Попытка получить версию страницы отличающиеся от AMP через внешний сервис</string>
     <string name="open_with">Открыть с помощью</string>
     <string name="always_ask">Всегда спрашивать</string>
-    <string name="in_app_browser_explainer">Установить режим браузера в приложении</string>
+    <string name="in_app_browser_subtitle">Установить режим браузера в приложении</string>
     <string name="about">О</string>
     <string name="add_all">Добавить всё</string>
     <string name="random_instance">Случайный экземпляр</string>
@@ -179,7 +179,7 @@
     <string name="in_app_browser">Браузер в приложении</string>
     <string name="links">Ссылки</string>
     <string name="follow_redirects_explainer">Автоматически следовать всем перенаправлениям перед открытием нижнего листа. Это может иметь <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, связанные с конфиденциальностью</annotation></string>
-    <string name="preferred_browser">Предпочитаемый браузер</string>
+    <string name="browser_mode">Предпочитаемый браузер</string>
     <string name="dark">Тёмная</string>
     <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
     <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
@@ -224,7 +224,7 @@
     <string name="follow_redirects_external_service">Следовать за перенаправлениями через внешний сервис</string>
     <string name="settings">Настройки</string>
     <string name="in_app">В приложении</string>
-    <string name="preferred_browser_explainer">Установить предпочтительный режим браузера</string>
+    <string name="browser_mode_subtitle">Установить предпочтительный режим браузера</string>
     <string name="crash_log">Лог краша</string>
     <string name="single_tap">Включить одинарное касание</string>
     <string name="set_as_default_browser">Установить браузером по умолчанию</string>

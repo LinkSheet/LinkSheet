@@ -51,6 +51,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.Ne
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogTextSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.util.AndroidVersion
 
 @Composable
@@ -80,8 +81,7 @@ fun MainNavHost(
 
         animatedComposable(route = appsSettingsRoute) {
             AppsSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
+                navController = navController, onBackPressed = onBackPressed
             )
         }
 
@@ -90,8 +90,7 @@ fun MainNavHost(
                 NewBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
             } else {
                 BrowserSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
@@ -159,23 +158,20 @@ fun MainNavHost(
                 NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
             } else {
                 AdvancedSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
 
         animatedComposable(route = shizukuSettingsRoute) {
             ShizukuSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
+                navController = navController, onBackPressed = onBackPressed
             )
         }
 
         animatedComposable(route = featureFlagSettingsRoute) {
             FeatureFlagSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
+                navController = navController, onBackPressed = onBackPressed
             )
         }
 
@@ -184,8 +180,7 @@ fun MainNavHost(
                 NewExperimentsSettingsRoute(onBackPressed = onBackPressed)
             } else {
                 ExperimentsSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
@@ -199,8 +194,7 @@ fun MainNavHost(
                 NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
             } else {
                 DebugSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
@@ -210,8 +204,7 @@ fun MainNavHost(
                 NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navController = navController)
             } else {
                 LogSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
@@ -232,13 +225,11 @@ fun MainNavHost(
         animatedComposable(route = aboutSettingsRoute) {
             if (uiOverhaul) {
                 NewAboutSettingsRoute(
-                    navigate = navigate,
-                    onBackPressed = onBackPressed
+                    navigate = navigate, onBackPressed = onBackPressed
                 )
             } else {
                 AboutSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
@@ -255,8 +246,7 @@ fun MainNavHost(
 
         animatedComposable(route = preferredBrowserSettingsRoute) {
             PreferredBrowserSettingsRoute(
-                navController = navController,
-                onBackPressed = onBackPressed
+                navController = navController, onBackPressed = onBackPressed
             )
         }
 
@@ -269,8 +259,7 @@ fun MainNavHost(
                 NewInAppBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
             } else {
                 InAppBrowserSettingsRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed
+                    navController = navController, onBackPressed = onBackPressed
                 )
             }
         }
@@ -279,9 +268,7 @@ fun MainNavHost(
             val flag = false
             if (uiOverhaul && flag) {
                 NewInAppBrowserSettingsDisableInSelectedRoute(
-                    navController = navController,
-                    onBackPressed = onBackPressed,
-                    navigate = navigate
+                    navController = navController, onBackPressed = onBackPressed, navigate = navigate
                 )
             } else {
                 InAppBrowserSettingsDisableInSelectedRoute(navController = navController)
@@ -308,6 +295,18 @@ fun MainNavHost(
 
         animatedComposable(route = devBottomSheetExperimentRoute) {
             DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)
+        }
+
+        animatedComposable(route = Routes.Help) {
+//            DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)
+        }
+
+        animatedComposable(route = Routes.Shortcuts) {
+            ShortcutsRoute(onBackPressed = onBackPressed, navigate = navigate)
+        }
+
+        animatedComposable(route = Routes.Updates) {
+//            DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)
         }
     }
 }

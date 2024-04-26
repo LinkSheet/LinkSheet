@@ -138,7 +138,7 @@ fun AboutSettingsRoute(
                 item("donate") {
                     SettingsItemRow(
                         headline = stringResource(id = R.string.donate),
-                        subtitle = rememberAnnotatedStringResource(id = R.string.donate_explainer),
+                        subtitle = rememberAnnotatedStringResource(id = R.string.donate_subtitle),
                         onClick = {
                             navController.navigate(donateSettingsRoute)
                         },

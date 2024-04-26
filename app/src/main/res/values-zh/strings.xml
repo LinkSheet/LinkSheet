@@ -6,7 +6,7 @@
     <string name="open_with_app">用 %s 打开</string>
     <string name="use_a_different_app">使用其他应用</string>
     <string name="opening_with_app">用 %s 打开</string>
-    <string name="preferred_apps">首选应用</string>
+    <string name="default_apps">首选应用</string>
     <string name="set_as_browser">设置为浏览器</string>
     <string name="set_as_browser_explainer">点按此处将LinkSheet设置为默认浏览器</string>
     <string name="apps_which_can_open_links_explainer">点击应用打开“默认打开”菜单，使您能够禁用自动打开链接</string>
@@ -22,8 +22,8 @@
     <string name="confirm">确认</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">按使用情况对应用排序</string>
-    <string name="preferred_browser">首选浏览器</string>
-    <string name="preferred_browser_explainer">首选浏览器模式设置</string>
+    <string name="browser_mode">首选浏览器</string>
+    <string name="browser_mode_subtitle">首选浏览器模式设置</string>
     <string name="always_ask">总是询问</string>
     <string name="none">无</string>
     <string name="always_ask_explainer">始终列出所有浏览器</string>
@@ -33,7 +33,7 @@
     <string name="enable_send_button">启用“分享”按钮</string>
     <string name="enable_send_button_explainer">在底栏中显示一个按钮，使您能够将链接共享给其他应用，就像您从“分享”菜单中选择一样</string>
     <string name="send_to">分享</string>
-    <string name="preferred_apps_explainer">首选应用是您设置为“始终”打开某些链接的应用</string>
+    <string name="default_apps_subtitle">首选应用是您设置为“始终”打开某些链接的应用</string>
     <string name="always_show_package_name">始终显示包名</string>
     <string name="always_show_package_name_explainer">始终显示包名而非仅是应用名称。这项设置影响整个应用页面。</string>
     <string name="disable_all_toasts">禁用提示栏</string>
@@ -47,7 +47,7 @@
     <string name="display_grid_layout_explainer">在底栏中显示网格而非列表</string>
     <string name="set_as_browser_done">LinkSheet已设置为默认浏览器！</string>
     <string name="browser_status">浏览器状态</string>
-    <string name="apps">应用</string>
+    <string name="app_browsers">应用</string>
     <string name="bottom_sheet">底栏</string>
     <string name="settings">设置</string>
     <string name="selected_browser_explainer">如果没有原生应用能够处理所点击的链接，此浏览器将自动打开</string>
@@ -71,7 +71,7 @@
     <string name="github">Github</string>
     <string name="github_explainer">源代码仓库</string>
     <string name="donate_crypto">捐赠</string>
-    <string name="donate_explainer">如果你愿意捐赠并申请 <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">如果你愿意捐赠并申请 <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">打开复制的链接</string>
     <string name="paste">粘贴</string>
     <string name="error">错误</string>
@@ -127,7 +127,7 @@
     <string name="always_disable">禁用</string>
     <string name="always_disable_explainer">无论应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
     <string name="use_app_settings">使用应用推荐的选择</string>
-    <string name="in_app_browser_explainer">应用内置浏览器模式设置</string>
+    <string name="in_app_browser_subtitle">应用内置浏览器模式设置</string>
     <string name="use_app_settings_explainer">由应用决定用不用它内置的浏览器</string>
     <string name="disable_in_selected_explainer">无论选中的应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
     <string name="browser">浏览器</string>

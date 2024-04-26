@@ -2,24 +2,16 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.about
 
 import ClearURLsMetadata
 import LibRedirectMetadata
-import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -28,22 +20,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultLeadingIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppSignature
@@ -66,7 +55,19 @@ fun NewAboutSettingsRoute(
     var devClicks by remember { mutableIntStateOf(0) }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.about), onBackPressed = onBackPressed) {
-        divider(stringRes = R.string.misc_settings)
+        item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
+            DefaultLeadingIconClickableShapeListItem(
+                headlineId = R.string.donate,
+                subtitleId = R.string.donate_subtitle,
+                icon = Icons.Outlined.AutoAwesome,
+                onClick = {
+//                    uriHandler.openUri(BuildConfig.LINK_DISCORD)
+                }
+            )
+        }
+
+
+        divider(stringRes = R.string.links)
 
         group(size = 3) {
             item(key = R.string.credits) { padding, shape ->
@@ -75,7 +76,7 @@ fun NewAboutSettingsRoute(
                     padding = padding,
                     headlineId = R.string.credits,
                     subtitleId = R.string.credits_explainer,
-                    icon = Icons.Default.Link,
+                    icon = Icons.Outlined.Link,
                     onClick = { navigate(creditsSettingsRoute) }
                 )
             }
@@ -86,7 +87,7 @@ fun NewAboutSettingsRoute(
                     padding = padding,
                     headlineId = R.string.github,
                     subtitleId = R.string.github_explainer,
-                    icon = Icons.Default.Home,
+                    icon = Icons.Outlined.Code,
                     onClick = { uriHandler.openUri(linksheetGithub) }
                 )
             }
@@ -97,38 +98,28 @@ fun NewAboutSettingsRoute(
                     padding = padding,
                     headlineId = R.string.discord,
                     subtitleId = R.string.discord_explainer,
-                    icon = Icons.AutoMirrored.Filled.Chat,
+                    icon = Icons.Outlined.Forum,
                     onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
                 )
             }
         }
 
-        divider(stringRes = R.string.donation)
 
-        item(key = R.string.enable_libredirect, contentType = ContentTypeDefaults.SingleGroupItem) {
-            DefaultLeadingIconClickableShapeListItem(
-                headlineId = R.string.donate,
-                subtitleId = R.string.donate_explainer,
-                icon = Icons.AutoMirrored.Filled.Chat,
-                onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
-            )
-        }
+        divider(stringRes = R.string.build_info)
 
-        divider(stringRes = R.string.just_version)
+        group(size = 1) {
+//            item(key = R.string.built_by) { padding, shape ->
+//                DefaultLeadingIconClickableShapeListItem(
+//                    padding = padding,
+//                    shape = shape,
+//                    headlineId = R.string.built_by,
+//                    subtitleId = buildType.stringRes,
+//                    icon = Icons.AutoMirrored.Filled.Chat,
+//                    onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
+//                )
+//            }
 
-        group(size = 5) {
-            item(key = R.string.built_by) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
-                    padding = padding,
-                    shape = shape,
-                    headlineId = R.string.built_by,
-                    subtitleId = buildType.stringRes,
-                    icon = Icons.AutoMirrored.Filled.Chat,
-                    onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
-                )
-            }
-
-            item(key = R.string.linksheet_version_info_header) { padding, shape ->
+            item(key = R.string.app_name) { padding, shape ->
                 DefaultLeadingIconClickableShapeListItem(
                     padding = padding,
                     shape = shape,
@@ -151,8 +142,25 @@ fun NewAboutSettingsRoute(
                                 BuildConfig.GITHUB_WORKFLOW_RUN_ID
                             )
                         }
+
+                        addNameValue(
+                            stringResource(id = R.string.clear_urls_version),
+                            ClearURLsMetadata.fetchedAt.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+                        ).appendLine()
+
+                        addNameValue(
+                            stringResource(id = R.string.fastforward_version),
+                            FastForwardRules.fetchedAt.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+                        ).appendLine()
+
+                        addNameValue(
+                            stringResource(id = R.string.libredirect_version),
+                            LibRedirectMetadata.fetchedAt.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+                        )
+
                     },
-                    icon = Icons.Default.Build,
+
+                    icon = Icons.Outlined.Build,
                     onClick = { }
                 )
 
@@ -185,36 +193,6 @@ fun NewAboutSettingsRoute(
 //                        }
 //                    }
 //                )
-            }
-
-            item(R.string.clear_urls_version) { padding, shape ->
-                LibraryLastUpdatedRow(
-                    padding = padding,
-                    shape = shape,
-                    headline = R.string.clear_urls_version,
-                    fetchedAt = ClearURLsMetadata.fetchedAt,
-                    icon = Icons.Default.ClearAll
-                )
-            }
-
-            item(R.string.fastforward_version) { padding, shape ->
-                LibraryLastUpdatedRow(
-                    padding = padding,
-                    shape = shape,
-                    headline = R.string.fastforward_version,
-                    fetchedAt = FastForwardRules.fetchedAt,
-                    icon = Icons.Default.Bolt
-                )
-            }
-
-            item(R.string.libredirect_version) { padding, shape ->
-                LibraryLastUpdatedRow(
-                    padding = padding,
-                    shape = shape,
-                    headline = R.string.libredirect_version,
-                    fetchedAt = LibRedirectMetadata.fetchedAt,
-                    icon = Icons.Default.Security
-                )
             }
         }
     }
@@ -311,7 +289,9 @@ private fun LibraryLastUpdatedRow(
 
 private fun AnnotatedString.Builder.addNameValue(name: String, value: String): AnnotatedString.Builder {
     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) { append(name) }
-    append(" ", value)
+    withStyle(style = SpanStyle(fontFamily = FontFamily.Monospace)) {
+        append(" ", value)
+    }
 
     return this
 }

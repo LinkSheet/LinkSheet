@@ -13,14 +13,14 @@
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
-    <string name="donate_explainer">Ако желаете да направите дарение и да получите <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Ако желаете да направите дарение и да получите <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
     <string name="license_apache_2">Лиценз Apache 2.0</string>
     <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне с/ъс %s</string>
-    <string name="preferred_apps">Предпочитани приложения</string>
+    <string name="default_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
     <string name="use_a_different_app">Изберете друго приложение</string>
     <string name="search">Търсене</string>
@@ -34,7 +34,7 @@
     <string name="enabled">Включен</string>
     <string name="disabled">Изключено</string>
     <string name="bottom_sheet">Долно меню</string>
-    <string name="apps">Приложения</string>
+    <string name="app_browsers">Приложения</string>
     <string name="save">Запазване</string>
     <string name="about">Относно</string>
     <string name="credits">Заслуги</string>
@@ -82,8 +82,8 @@
     <string name="usage_stats_sorting_explainer">При сортирането се взима предвид и системната статистика за използване на приложенията. При първо включване ще бъде поискано право на достъп.</string>
     <string name="set_as_browser">Задаване като браузър</string>
     <string name="set_as_browser_explainer">За да направите LinkSheet браузър по подразбиране докоснете</string>
-    <string name="preferred_browser">Предпочитан браузър</string>
-    <string name="preferred_browser_explainer">Задава режима за избор на приложение</string>
+    <string name="browser_mode">Предпочитан браузър</string>
+    <string name="browser_mode_subtitle">Задава режима за избор на приложение</string>
     <string name="always_ask">Всеки път да пита</string>
     <string name="none">Приоритет на най-ползвания</string>
     <string name="none_explainer">Използват се само приложения, не и браузъри. Ако има само едно приложение, то ще бъде използвано автоматично. Ако няма приложения, ще бъдат показани всички браузъри.</string>
@@ -102,7 +102,7 @@
     <string name="whitelisted_browsers">Избрани браузъри</string>
     <string name="whitelisted">Избрани</string>
     <string name="display_grid_layout_explainer">Подрежда долното меню в редове и колони вместо списък</string>
-    <string name="preferred_apps_explainer">Предпочитаните приложения са тези, които сте настроили винаги да отварят определени адреси</string>
+    <string name="default_apps_subtitle">Предпочитаните приложения са тези, които сте настроили винаги да отварят определени адреси</string>
     <string name="no_apps_which_can_handle_links_found">Не са намерени приложения, които да обработят препратките.</string>
     <string name="use_clear_urls">Използване на ClearURLs</string>
     <string name="in_app">Вграден</string>
@@ -129,7 +129,7 @@
     <string name="add">Добавяне</string>
     <string name="in_app_browser">Вграден в приложението браузър</string>
     <string name="use_app_settings_explainer">Всяко приложение решава дали да използва вградения си браузър</string>
-    <string name="in_app_browser_explainer">Задава режима на вградения браузър</string>
+    <string name="in_app_browser_subtitle">Задава режима на вградения браузър</string>
     <string name="always_disable_explainer">Вграденият браузър не се използва без значение от настройката на приложението</string>
     <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва без значение от настройката на приложението</string>
     <string name="browser_explainer">Режим на браузъра и настройки на вградения в приложенията браузър</string>
@@ -392,7 +392,7 @@
     <string name="online_services">Отдалечени услуги</string>
     <string name="preferred_apps_settings">Настройки на предпочитаните приложения за адресите, които поддържат</string>
     <string name="apps_which_can_open_links">Приложения, отварящи препратки</string>
-    <string name="apps_explainer">Предпочитани приложения и такива, отварящи препратки</string>
+    <string name="app_browsers_subtitle">Предпочитани приложения и такива, отварящи препратки</string>
     <string name="onboarding_0_title">Добре дошли
 \nпри LinkSheet</string>
 </resources>

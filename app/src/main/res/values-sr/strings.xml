@@ -7,7 +7,7 @@
     <string name="onboarding7_headline">Ентузијаста\?
 \nLinkSheet вас</string>
     <string name="enable_send_button">Омогући дугме „Дели са“</string>
-    <string name="preferred_apps_explainer">Префериране апликације су апликације које подесите да „Увек“ отварају одређене хостове</string>
+    <string name="default_apps_subtitle">Префериране апликације су апликације које подесите да „Увек“ отварају одређене хостове</string>
     <string name="amp2html_local_cache">Омогући локални Amp2Html кеш</string>
     <string name="open_copied_link">Отвори копирани линк</string>
     <string name="ignore_libredirect">Игнориши LibRedirect</string>
@@ -78,7 +78,7 @@
     <string name="donate_explainer_crypto">Када донирате помоћу криптовалуте, пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="use_app_settings_explainer">Нека апликација одлучи да ли треба да се користи прегледач у апликацији</string>
     <string name="display_grid_layout_explainer">Прикажите мрежу уместо листе у доњем листу</string>
-    <string name="apps">Апликације</string>
+    <string name="app_browsers">Апликације</string>
     <string name="no_apps_found">Није пронађена ниједна апликација.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet не може да отвори овај линк.</string>
@@ -139,7 +139,7 @@
     <string name="frontend">Фронтенд</string>
     <string name="redirect_resolve_type_remote">удаљени сервер</string>
     <string name="finish">Заврши</string>
-    <string name="donate_explainer">Ако желите да донирате и набавите <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Ако желите да донирате и набавите <b>LinkSheet Pro</b></string>
     <string name="flavor">Варијанта:</string>
     <string name="advanced">Напредно</string>
     <string name="built_at">Направљено (UTC):</string>
@@ -151,7 +151,7 @@
     <string name="fastforward">FastForward</string>
     <string name="follow_redirects_external_service_explainer">Пратите преусмеравања користећи API постављен на supabase.com (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
     <string name="include_fingerprint">Укључи отисак прста уређаја (препоручено)</string>
-    <string name="preferred_apps">Префериране апликације</string>
+    <string name="default_apps">Префериране апликације</string>
     <string name="just_once">Само једном</string>
     <string name="github_pipeline_build">Направљено и потписано од стране GitHub радног тока</string>
     <string name="disable_in_selected_explainer">Онемогућите прегледач у апликацији у изабраним апликацијама, без обзира на то шта апликација жели да користи</string>
@@ -194,7 +194,7 @@
     <string name="open_with">Отвори помоћу</string>
     <string name="no_handlers_found">Није пронађен ниједан прегледач или изворна апликација!</string>
     <string name="always_ask">Увек питај</string>
-    <string name="in_app_browser_explainer">Подесите режим прегледача у апликацији</string>
+    <string name="in_app_browser_subtitle">Подесите режим прегледача у апликацији</string>
     <string name="thanks_for_donating">Хвала вам на донацији!</string>
     <string name="app_setup">Подешавање апликације</string>
     <string name="about">О нама</string>
@@ -232,7 +232,7 @@
     <string name="links">Линкови</string>
     <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати
 \n <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
-    <string name="preferred_browser">Преферирани прегледач</string>
+    <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
     <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
@@ -290,7 +290,7 @@
     <string name="settings">Подешавања</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="in_app">У апликацији</string>
-    <string name="preferred_browser_explainer">Подесите режим преферираног прегледача</string>
+    <string name="browser_mode_subtitle">Подесите режим преферираног прегледача</string>
     <string name="crash_log">Евиденција отказивања</string>
     <string name="built_by_error">Ову верзију није потписао 1fexd ни GitHub радни ток.</string>
     <string name="single_tap">Омогући један додир</string>
@@ -424,7 +424,7 @@
     <string name="amp2html_allow_darknets_explainer">Дозволи покретање Amp2Html-а за darknets (подржано: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Дозволи следећа преусмеравања за darknets (подржано: %s)</string>
     <string name="apps_which_can_open_links">Верификовани руковаоци линкова</string>
-    <string name="apps_explainer">Префериране апликације, верификовани руковаоци линкова</string>
+    <string name="app_browsers_subtitle">Префериране апликације, верификовани руковаоци линкова</string>
     <string name="onboarding_0_subtitle">Изаберите да увек добијате упит када отварате линк, подесите подразумеване прегледаче и још много тога</string>
     <string name="onboarding_2_install_shizuku">Инсталирај Shizuku</string>
     <string name="onboarding_2_skip_button">Прескочи</string>

@@ -6,7 +6,7 @@
     <string name="onboarding7_headline">Emocionado\?
 \nLinkSheet te tiene</string>
     <string name="enable_send_button">Activar el botón \"Compartir\"</string>
-    <string name="preferred_apps_explainer">Las aplicaciones preferidas son las aplicaciones que configuras para abrir \"Siempre\" ciertos dominios</string>
+    <string name="default_apps_subtitle">Las aplicaciones preferidas son las aplicaciones que configuras para abrir \"Siempre\" ciertos dominios</string>
     <string name="amp2html_local_cache">Activar caché local de Amp2Html</string>
     <string name="open_copied_link">Abrir enlace copiado</string>
     <string name="ignore_libredirect">Ignorar LibRedirect</string>
@@ -66,7 +66,7 @@
     <string name="follow_redirects_local_cache_explainer">Almacenar en la caché el resultado de las redirecciones locales</string>
     <string name="use_app_settings_explainer">Dejar que la aplicación decida si el Navegador en aplicación debería ser usado</string>
     <string name="display_grid_layout_explainer">Mostrar una cuadrícula en lugar de una lista en la hoja inferior</string>
-    <string name="apps">Aplicaciones</string>
+    <string name="app_browsers">Aplicaciones</string>
     <string name="no_apps_found">No se han encontrado aplicaciones.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet no puede abrir este enlace.</string>
@@ -123,7 +123,7 @@
     <string name="frontend">Interfaz</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="finish">Termina</string>
-    <string name="donate_explainer">Si desea donar y reclamar <b>LinkSheet Pro</b> \u0020</string>
+    <string name="donate_subtitle">Si desea donar y reclamar <b>LinkSheet Pro</b> \u0020</string>
     <string name="advanced">Avanzado</string>
     <string name="built_at">Construido en (UTC):</string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
@@ -134,7 +134,7 @@
     <string name="fastforward">Avance rápido</string>
     <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>) \u0020</string>
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>
-    <string name="preferred_apps">Aplicaciones predeterminadas</string>
+    <string name="default_apps">Aplicaciones predeterminadas</string>
     <string name="just_once">Solo una vez</string>
     <string name="disable_in_selected_explainer">Desactivar el Navegador en aplicación en las aplicaciones seleccionadas, a pesar de que la aplicación quiera usarlo</string>
     <string name="fastfoward_rules">Usar reglas de FastForward</string>
@@ -175,7 +175,7 @@
     <string name="open_with">Abrir con</string>
     <string name="no_handlers_found">¡No se encontró ningún navegador ni aplicación nativa!</string>
     <string name="always_ask">Preguntar siempre</string>
-    <string name="in_app_browser_explainer">Establecer el modo de Navegador en aplicación</string>
+    <string name="in_app_browser_subtitle">Establecer el modo de Navegador en aplicación</string>
     <string name="about">Acerca de</string>
     <string name="add_all">Añadir todo</string>
     <string name="random_instance">Instancia aleatoria</string>
@@ -209,7 +209,7 @@
     <string name="in_app_browser">Navegador en aplicación</string>
     <string name="links">Enlaces</string>
     <string name="follow_redirects_explainer">Seguir automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad </annotation>. \u0020</string>
-    <string name="preferred_browser">Navegador predeterminado</string>
+    <string name="browser_mode">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
     <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace) \u0020</string>
@@ -261,7 +261,7 @@
     <string name="settings">Ajustes</string>
     <string name="title_activity_main">ActividadPrincipal</string>
     <string name="in_app">En aplicación</string>
-    <string name="preferred_browser_explainer">Establecer el modo de navegación predeterminado</string>
+    <string name="browser_mode_subtitle">Establecer el modo de navegación predeterminado</string>
     <string name="crash_log">Error de registro</string>
     <string name="single_tap">Activar toque único</string>
     <string name="set_as_default_browser">Establecer como navegador predeterminado</string>
@@ -401,7 +401,7 @@
     <string name="onboarding_0_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
     <string name="launch_onboarding_new">Lanzar la nueva integración</string>
     <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>
-    <string name="apps_explainer">Aplicaciones preferidas, gestores de enlaces verificados</string>
+    <string name="app_browsers_subtitle">Aplicaciones preferidas, gestores de enlaces verificados</string>
     <string name="onboarding_1_card_title">Navegador predeterminado</string>
     <string name="onboarding_1_title">Establecer LinkSheet como navegador por defecto</string>
     <string name="onboarding_1_subtitle">LinkSheet debe configurarse como navegador predeterminado para gestionar los enlaces pulsados</string>

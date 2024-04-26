@@ -6,7 +6,7 @@
     <string name="open_with_app">使用%s打開</string>
     <string name="use_a_different_app">使用其他應用程式</string>
     <string name="opening_with_app">正在使用%s打開</string>
-    <string name="preferred_apps">偏好應用程式</string>
+    <string name="default_apps">偏好應用程式</string>
     <string name="set_as_browser">設定為瀏覽器</string>
     <string name="set_as_browser_explainer">點擊此處以將LinkSheet設為預設瀏覽器</string>
     <string name="apps_which_can_open_links_explainer">點擊應用程式以打開「預設開啟方式」選單，允許您停用自動連結開啟功能</string>
@@ -22,8 +22,8 @@
     <string name="confirm">確認</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">按使用統計排序應用程式</string>
-    <string name="preferred_browser">偏好瀏覽器</string>
-    <string name="preferred_browser_explainer">設定偏好瀏覽器模式</string>
+    <string name="browser_mode">偏好瀏覽器</string>
+    <string name="browser_mode_subtitle">設定偏好瀏覽器模式</string>
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
     <string name="always_ask_explainer">始終列出所有瀏覽器</string>
@@ -33,7 +33,7 @@
     <string name="enable_send_button">啟用「分享」按鈕</string>
     <string name="enable_send_button_explainer">在底部工作表中顯示一個按鈕，允許您將網址分享到其他應用程式，就像從「分享」選單中選擇一樣</string>
     <string name="send_to">分享</string>
-    <string name="preferred_apps_explainer">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
+    <string name="default_apps_subtitle">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">始終顯示套件名稱</string>
     <string name="always_show_package_name_explainer">始終顯示套件名稱而不僅僅是應用程式名稱。這適用於整個應用程式。</string>
     <string name="disable_all_toasts">停用浮動訊息</string>
@@ -47,7 +47,7 @@
     <string name="display_grid_layout_explainer">在底部工作表中顯示網格而不是清單</string>
     <string name="set_as_browser_done">LinkSheet已設定為預設瀏覽器！</string>
     <string name="browser_status">瀏覽器狀態</string>
-    <string name="apps">應用程式</string>
+    <string name="app_browsers">應用程式</string>
     <string name="bottom_sheet">底部工作表</string>
     <string name="settings">設定</string>
     <string name="selected_browser_explainer">如果沒有本機應用程式能夠處理所點擊的連結，將自動開啟此瀏覽器</string>
@@ -71,7 +71,7 @@
     <string name="github">Github</string>
     <string name="github_explainer">原始碼存放庫</string>
     <string name="donate_crypto">捐贈</string>
-    <string name="donate_explainer">如果你想捐贈並獲取<b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">如果你想捐贈並獲取<b>LinkSheet Pro</b></string>
     <string name="open_copied_link">開啟已複製的連結</string>
     <string name="paste">貼上</string>
     <string name="error">錯誤</string>
@@ -125,7 +125,7 @@
     <string name="random_instance">隨機實例</string>
     <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">應用程式內瀏覽器</string>
-    <string name="in_app_browser_explainer">設定應用程式內瀏覽器模式</string>
+    <string name="in_app_browser_subtitle">設定應用程式內瀏覽器模式</string>
     <string name="use_app_settings">使用應用程式設定</string>
     <string name="use_app_settings_explainer">讓應用程式決定是否使用應用程式內瀏覽器</string>
     <string name="always_disable">始終停用</string>

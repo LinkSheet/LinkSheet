@@ -5,7 +5,7 @@
     <string name="always">Zawsze</string>
     <string name="use_a_different_app">Użyj innej aplikacji</string>
     <string name="opening_with_app">Otwieranie w %s</string>
-    <string name="preferred_apps">Preferowane aplikacje</string>
+    <string name="default_apps">Preferowane aplikacje</string>
     <string name="set_as_browser">Ustaw jako przeglądarkę</string>
     <string name="apps_which_can_open_links_explainer_2">Lista wszystkich aplikacji, które mogą kolidować z działaniem LinkSheet</string>
     <string name="no_preferred_apps_set_yet">Nie ustawiono jeszcze aplikacji jako preferowanych.</string>
@@ -19,7 +19,7 @@
     <string name="enable_copy_button_explainer">Wyświetla przycisk umożliwiający kopiowanie linku</string>
     <string name="single_tap">Pojedyncze dotknięcie</string>
     <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach, niezależnie od tego, jakiej aplikacja chce używać</string>
-    <string name="preferred_browser_explainer">Ustaw domyślny tryb przeglądarki</string>
+    <string name="browser_mode_subtitle">Ustaw domyślny tryb przeglądarki</string>
     <string name="always_ask">Zawsze pytaj</string>
     <string name="none">Żadna</string>
     <string name="always_ask_explainer">Zawsze wyświetlaj listę wszystkich przeglądarek</string>
@@ -28,7 +28,7 @@
     <string name="no_such_app_found">Nie znaleziono takiej aplikacji!</string>
     <string name="enable_send_button">Przycisk „Udostępnij”</string>
     <string name="send_to">Udostępnij</string>
-    <string name="preferred_apps_explainer">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
+    <string name="default_apps_subtitle">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
     <string name="always_show_package_name_explainer">Zawsze wyświetlaj nazwy pakietów zamiast nazw aplikacji. Dotyczy to całej aplikacji.</string>
     <string name="disable_all_toasts">Wyłącz powiadomienie toast</string>
@@ -39,7 +39,7 @@
     <string name="display_grid_layout">Układ siatki</string>
     <string name="display_grid_layout_explainer">Pokazuj układ siatki zamiast listy</string>
     <string name="browser_status">Status przeglądarki</string>
-    <string name="apps">Aplikacje</string>
+    <string name="app_browsers">Aplikacje</string>
     <string name="bottom_sheet">Dolny panel</string>
     <string name="settings">Ustawienia</string>
     <string name="enabled">Włączone</string>
@@ -58,7 +58,7 @@
     <string name="github">GitHub</string>
     <string name="github_explainer">Repozytorium kodu źródłowego</string>
     <string name="donate_crypto">Wesprzyj poprzez krypto</string>
-    <string name="donate_explainer">Jeśli chcesz przekazać darowiznę i odebrać <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Jeśli chcesz przekazać darowiznę i odebrać <b>LinkSheet Pro</b></string>
     <string name="paste">Wklej</string>
     <string name="error">Błąd</string>
     <string name="checkmark">Znacznik wyboru</string>
@@ -106,11 +106,11 @@
     <string name="browser">Przeglądarka</string>
     <string name="disable_in_selected">Wyłączona w wybranych</string>
     <string name="in_app_browser">Wewnętrzna przeglądarka</string>
-    <string name="in_app_browser_explainer">Ustaw tryb wewnętrznej przeglądarki</string>
+    <string name="in_app_browser_subtitle">Ustaw tryb wewnętrznej przeglądarki</string>
     <string name="always_disable_explainer">Zawsze wyłączaj wewnętrzną przeglądarkę, niezależnie od tego, jakiej aplikacja chce używać</string>
     <string name="open_with">Otwórz w</string>
     <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
-    <string name="preferred_browser">Preferowana przeglądarka</string>
+    <string name="browser_mode">Preferowana przeglądarka</string>
     <string name="enable_send_button_explainer">Wyświetla przycisk umożliwiający udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Ustawiono LinkSheet jako domyślną przeglądarkę!</string>
     <string name="bottom_sheet_explainer">Sortuj według użycia, włącz przycisk kopiowania, włącz przycisk udostępniania itp.</string>
@@ -395,7 +395,7 @@
     <string name="include_throwable">Dołącz logi awarii (zalecane, ale nie można ich zredagować)</string>
     <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla obsługiwanych hostów</string>
     <string name="apps_which_can_open_links">Obsługa zweryfikowanych linków</string>
-    <string name="apps_explainer">Preferowane aplikacje i obsługa zweryfikowanych linków</string>
+    <string name="app_browsers_subtitle">Preferowane aplikacje i obsługa zweryfikowanych linków</string>
     <string name="onboarding_0_title">Witaj w
 \nLinkSheet</string>
     <string name="onboarding_0_subtitle">Wybierz, aby zawsze otrzymywać monit podczas otwierania linku, ustaw domyślne przeglądarki i wiele więcej</string>

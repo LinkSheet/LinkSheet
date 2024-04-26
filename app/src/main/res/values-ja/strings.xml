@@ -184,4 +184,5 @@
     <string name="follow_redirects_explainer">下のシートを開く前に、全てのリダイレクトを自動的に辿ります。 これには、<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシー関連の影響</annotation>が含まれる可能性があります。 \u0020</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">"supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します   （annotation url=\"https://supabase.com/privacy\"&gt;Privacy policy&lt;/annotation&gt;）  "</string>
+    <string name="fastfoward_rules_explainer">実験的な <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward \u0020</annotation> ルールを使用します (リンクからリダイレクトを抽出することで一部のホストのリダイレクトをバイパスします) \u0020</string>
 </resources>

@@ -697,4 +697,6 @@
     <string name="Miscellaneous">Miscellaneous</string>
     <string name="log_session_headline">Session at</string>
     <string name="external">External</string>
+    <string name="help">Help</string>
+    <string name="help_subtitle"><![CDATA[Tutorial, Wiki, Q&A]]></string>
 </resources>

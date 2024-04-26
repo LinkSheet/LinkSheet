@@ -527,4 +527,5 @@
     <string name="telemetry_configure_title"></string>
     <string name="resolve_via_toast"></string>
     <string name="resolve_via_failed_toast"></string>
+    <string name="fastfoward_rules_explainer"></string>
 </resources>

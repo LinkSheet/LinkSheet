@@ -1,14 +1,14 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.*
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavigateListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -46,6 +46,7 @@ internal object NewSettingsRouteData {
     )
 
     val dev = Nav(devModeRoute, Icons.Default.DeveloperMode, R.string.dev, R.string.dev_explainer)
+    val help = Nav(aboutSettingsRoute, Icons.AutoMirrored.Filled.HelpOutline, R.string.help, R.string.help_subtitle)
     val about = Nav(aboutSettingsRoute, Icons.Default.Info, R.string.about, R.string.about_explainer)
 }
 
@@ -91,8 +92,24 @@ fun NewSettingsRoute(
 
         divider(stringRes = R.string.about)
 
-        item(key = NewSettingsRouteData.about.route, contentType = ContentTypeDefaults.SingleGroupItem) {
-            RouteNavigateListItem(data = NewSettingsRouteData.about, navigate = navigate)
+        group(size = 2) {
+            item(key = NewSettingsRouteData.help.route + "_") { padding, shape ->
+                RouteNavigateListItem(
+                    padding = padding,
+                    shape = shape,
+                    data = NewSettingsRouteData.help,
+                    navigate = navigate
+                )
+            }
+
+            item(key = NewSettingsRouteData.about.route) { padding, shape ->
+                RouteNavigateListItem(
+                    padding = padding,
+                    shape = shape,
+                    data = NewSettingsRouteData.about,
+                    navigate = navigate
+                )
+            }
         }
     }
 }

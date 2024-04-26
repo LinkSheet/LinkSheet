@@ -22,7 +22,7 @@
     <string name="browser_explainer">Modo navegador, navegador en la aplicación</string>
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
-    <string name="use_clear_urls_explainer">Utilice la integración experimental <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL) \u0020</string>
+    <string name="use_clear_urls_explainer">Utilice la integración experimental <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL)</string>
     <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
     <string name="always_disable">Desactivar siempre</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
@@ -301,7 +301,7 @@
     <string name="donate_explainer_crypto">Al donar con cripto, envíe un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
     <string name="join">Unirme</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">Chatea sobre LinkSheet en Discord</string>
+    <string name="discord_explainer">¡Ven a chatear a nuestro servidor Discord!</string>
     <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
     <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
 \nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas. \u0020</string>
@@ -314,7 +314,7 @@
     <string name="github_pipeline_build">Desarrollado y firmado para el flujo de trabajo de Github</string>
     <string name="other">Otros</string>
     <string name="app_setup">Configuración de la aplicación</string>
-    <string name="built_by">Información de compilación</string>
+    <string name="built_by">Desarrollado y firmado por</string>
     <string name="donate">Donar</string>
     <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github.</string>
     <plurals name="hours">
@@ -516,5 +516,4 @@
     <string name="customization">Personalización</string>
     <string name="Miscellaneous">Misceláneo</string>
     <string name="log_session_headline">Sesión en</string>
-    <string name="external">Externo</string>
 </resources>

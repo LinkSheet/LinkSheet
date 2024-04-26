@@ -20,7 +20,7 @@
     <string name="browser_explainer">Chế độ trình duyệt và thiết đặt trình duyệt trong ứng dụng</string>
     <string name="save">Lưu</string>
     <string name="enable_amp2html">Bật Amp2Html</string>
-    <string name="use_clear_urls_explainer">Sử dụng tích hợp <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> thử nghiệm (xóa tham số theo dõi khỏi URL) \u0020</string>
+    <string name="use_clear_urls_explainer">Sử dụng tích hợp <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> thử nghiệm (xóa tham số theo dõi khỏi URL)</string>
     <string name="follow_only_known_trackers_explainer">Chỉ cố gắng theo dõi các chuyển hướng khi máy chủ được xác định là trình theo dõi/chuyển hướng. Nếu \"Theo dõi chuyển hướng qua dịch vụ bên ngoài\" được bật thì tính năng này sẽ luôn được bật.</string>
     <string name="always_disable">Luôn tắt</string>
     <string name="preview_url_explainer">Hiển thị URL được nhấp (sau khi được xử lý)</string>
@@ -86,7 +86,7 @@
     <string name="frontend">Giao diện người dùng</string>
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="finish">Hoàn thành</string>
-    <string name="donate_explainer">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b> \u0020</string>
+    <string name="donate_explainer">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b></string>
     <string name="built_at">Xây dựng lúc (UTC):</string>
     <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
@@ -211,7 +211,7 @@
 \nđể tạo LinkSheet</string>
     <string name="credits">Ghi công</string>
     <string name="copy_to_clipboard">Sao chép vào clipboard</string>
-    <string name="log_privacy">Để tìm hiểu về quyền riêng tư của nhật ký, bạn có thể truy cập <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">liên kết</annotation> này. \u0020</string>
+    <string name="log_privacy">Để tìm hiểu về quyền riêng tư của nhật ký, bạn có thể truy cập <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">liên kết</annotation> này.</string>
     <string name="pretend_to_be_app_explainer_2">Một số ứng dụng như Google Chrome tìm kiếm ứng dụng gốc một cách rõ ràng để xử lý, chẳng hạn như liên kết Youtube khi ứng dụng đó được nhấn vào kết quả tìm kiếm. LinkSheetCompat giả vờ là một ứng dụng gốc dành cho các máy chủ được hỗ trợ và sau đó chuyển tiếp yêu cầu tới LinkSheet.</string>
     <string name="configure">Cấu hình</string>
     <string name="onboarding6_highlight">sở thích</string>
@@ -235,8 +235,8 @@
     <string name="last_updated">Cập nhật lần cuối (UTC):</string>
     <string name="enable_linksheet_compat">Bật thực đơn LinkSheet Compat thử nghiệm</string>
     <string name="built_by_error">Bản dựng này không được ký bởi 1fexd cũng như Github workflow. Điều này không nhất thiết có nghĩa là bất cứ điều gì xấu, vì bất cứ ai cũng có thể chia tách mã nguồn và xây dựng phiên bản LinkSheet của riêng họ, nhưng họ có thể làm như vậy với mục đích xấu.</string>
-    <string name="follow_redirects_explainer">Tự động theo dõi tất cả các chuyển hướng trước khi mở trang dưới cùng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ngụ ý liên quan đến quyền riêng tư </annotation> \u0020</string>
-    <string name="follow_redirects_external_service_explainer">Theo dõi các chuyển hướng bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>) \u0020</string>
+    <string name="follow_redirects_explainer">Tự động theo dõi tất cả các chuyển hướng trước khi mở trang dưới cùng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ngụ ý liên quan đến quyền riêng tư </annotation></string>
+    <string name="follow_redirects_external_service_explainer">Theo dõi các chuyển hướng bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="disable_in_selected">Vô hiệu hóa trong lựa chọn</string>
     <string name="in_app">Trong ứng dụng</string>
     <string name="libredirect_via">Qua %s</string>
@@ -272,7 +272,7 @@
 \nAhh, Google cổ điển, làm tê liệt các sản phẩm của chính họ mà không có cách đơn giản để khôi phục lại hành vi cũ
 \n
 \nDù sao đi nữa, họ đã để lại một \"lỗ hổng\" nhỏ: Xử lý liên kết có thể bị vô hiệu hóa trên cơ sở mỗi ứng dụng. Bạn có thể cho rằng điều này sẽ mang lại trình chọn ứng dụng cũ, nhưng tất nhiên (cảm ơn Google!), Đó không phải là trường hợp, như bây giờ, liên kết sẽ luôn mở trong trình duyệt mặc định của bạn. Đó là lý do tại sao LinkSheet được tạo ra.</string>
-    <string name="linksheet_donation_explainer_2">Khoản quyên tặng hơn <b>5€</b> cho phép bạn truy cập vào <b>LinkSheet Pro</b>, bao gồm <b>các tính năng độc quyền của Pro</b> chẳng hạn như: theo dõi các chuyển hướng bên ngoài, nhận được các chuyển hướng không phải-Các trang AMP bên ngoài và nhiều trang khác sắp ra mắt! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Khoản quyên tặng hơn <b>5€</b> cho phép bạn truy cập vào <b>LinkSheet Pro</b>, bao gồm <b>các tính năng độc quyền của Pro</b> chẳng hạn như: theo dõi các chuyển hướng bên ngoài, nhận được các chuyển hướng không phải-Các trang AMP bên ngoài và nhiều trang khác sắp ra mắt!</string>
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
     <string name="opening_with_app_toast">Hiển thị thông báo ngắn khi một ứng dụng được khởi chạy tự động</string>
     <string name="discord_explainer">Hãy trò chuyện trên máy chủ Discord của chúng tôi! Trò chuyện với người dùng và nhà phát triển của LinkSheet về tương lai của nó và những nỗ lực khác!</string>
@@ -328,9 +328,9 @@
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="apps_explainer">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
     <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> thử nghiệm</string>
-    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. \u0020Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ngụ ý liên quan đến quyền riêng tư </annotation> \u0020</string>
-    <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. \u0020Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư </annotation> \u0020</string>
-    <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>) \u0020</string>
+    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp.Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ngụ ý liên quan đến quyền riêng tư </annotation></string>
+    <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng.Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư </annotation></string>
+    <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="github">Github</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
@@ -355,7 +355,7 @@
     <string name="enable_linksheet_compat_explainer">Thực đơn có thể được tìm thấy trong thực đơn phụ \"Ứng dụng\" và khi được cài đặt, có thể chặn các yêu cầu đối với một số ứng dụng gốc nhất định.</string>
     <string name="new_bottomsheet_explainer">Phiên bản LinkSheet này có trang dưới cùng mới nhờ <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Vui lòng cung cấp phản hồi trên Discord, Github hoặc qua email.
 \n
-\nBạn có thể quay lại trang dưới cùng cũ thông qua Cài đặt -&gt; Nâng cao -&gt; Cờ tính năng. \u0020</string>
+\nBạn có thể quay lại trang dưới cùng cũ thông qua Cài đặt -&gt; Nâng cao -&gt; Cờ tính năng.</string>
     <string name="tap_customization">Tùy chỉnh nhấn</string>
     <string name="tap_customization_single_tap">Nhấn một lần</string>
     <string name="tap_customization_double_tap">Nhấn đúp</string>
@@ -373,7 +373,7 @@
     <string name="select_app">Chọn ứng dụng</string>
     <string name="expand_on_app_select">Mở rộng khi một ứng dụng được chọn</string>
     <string name="expand_on_app_select_explainer">Tự động mở rộng trang dưới cùng khi chọn một ứng dụng</string>
-    <string name="export_privacy">Để tìm hiểu về quyền riêng tư khi xuất, bạn có thể truy cập <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">liên kết</annotation> này. \u0020</string>
+    <string name="export_privacy">Để tìm hiểu về quyền riêng tư khi xuất, bạn có thể truy cập <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">liên kết</annotation> này.</string>
     <string name="nightly_experiments_card">Thử nghiệm hàng đêm</string>
     <string name="experiments_explainer_2">Phát triển tích cực</string>
     <string name="experiments">Thử nghiệm</string>
@@ -391,16 +391,16 @@
     <string name="disclaimer_libredirect_unstable">Ngoài việc là một tính năng thử nghiệm, LibRedirect hiện được coi là rất không ổn định và có thể không hoạt động.</string>
     <string name="permission_required_explainer">Một số tùy chọn đã nhập yêu cầu các quyền hiện không được cấp cho LinkSheet. Hãy nhấn vào bên dưới để yêu cầu chúng.</string>
     <string name="reset_app_link_verification_status_subtitle">Nhấn vào đây để đặt lại trạng thái xác minh liên kết ứng dụng của tất cả các ứng dụng, sau đó đợi vài phút trong khi Android xác minh lại chúng. Bạn sẽ không nhận được xác nhận. Yêu cầu Shizuku.</string>
-    <string name="telemetry_dialog_text_2">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">đây</annotation>. \u0020</string>
+    <string name="telemetry_dialog_text_2">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">đây</annotation>.</string>
     <string name="resolve_embeds_explainer">Giải quyết các bản sao nhúng như fxtwitter.com vào máy chủ thực sự</string>
     <string name="experiments_explainer_3">Các thử nghiệm đang được phát triển tích cực và có thể không hoạt động chính xác hoặc hoàn toàn không hoạt động. Vui lòng không báo cáo lỗi trên Github. Nếu bạn muốn cung cấp phản hồi, hãy làm như vậy trên Discord.</string>
     <string name="donate_card_headline">Quyên tặng để hỗ trợ LinkSheet</string>
     <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng.
-\nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền. \u0020</string>
+\nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
     <string name="new_dev_bottom_sheet_explainer">Bạn không thích trang dưới cùng mới? Nhấn để báo cáo vấn đề.</string>
     <string name="experiment">Thử nghiệm</string>
     <string name="new_dev_bottom_sheet_feature_explainer">Trang dưới cùng mới sắp hoàn thành tính năng. Đáng chú ý là tính năng tùy chỉnh nhấn chưa có sẵn và sẽ được triển khai sau.
-\nVui lòng báo cáo lỗi trên <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord </annotation> hoặc qua <annotation url="mailto:1fexd@420blaze.it">Email</annotation>. \u0020</string>
+\nVui lòng báo cáo lỗi trên <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord </annotation> hoặc qua <annotation url="mailto:1fexd@420blaze.it">Email</annotation>.</string>
     <string name="resolve_embeds">Giải quyết nhúng</string>
     <string name="show_native_label_explainer">Hiển thị nhãn bên cạnh các ứng dụng hỗ trợ liên kết đã mở</string>
     <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>

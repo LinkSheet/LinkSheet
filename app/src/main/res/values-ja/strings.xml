@@ -16,7 +16,7 @@
     <plurals name="months">
         <item quantity="other">%s月</item>
     </plurals>
-    <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます \u0020</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます</string>
     <string name="welcome_to_linksheet_explainer_2">LinkSheetを動作させるには、LinkSheet をシステムブラウザとして設定し、リンクのクリックを遮断できるようにする必要があります。ご心配なく、LinkSheetにはカスタマイズ可能なオプションが豊富に用意されているため、エクスペリエンスが制限されるのではなく、むしろ強化されます。</string>
     <string name="built_by_error">このビルドは1fexdによってもGithub workflowによっても署名されていません。 誰でもソースコードをフォークして自分のLinkSheetバージョンを構築出来るため、必ずしも悪いことを意味するわけではありませんが、悪意を持ってそうする可能性があります。</string>
     <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。
@@ -170,7 +170,7 @@
     <string name="github_explainer">ソースコードリポジトリ</string>
     <string name="open_copied_link">コピーしたリンクを開く</string>
     <string name="links_explainer">リンク操作に関する設定</string>
-    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url="https://github.com/ClearURLs">ClearURLs \u0020</annotation> 統合（URL から追跡パラメータをクリア） \u0020</string>
+    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 統合（URL から追跡パラメータをクリア）</string>
     <string name="follow_redirects_external_service">外部サービス経由でリダイレクトを追跡</string>
     <string name="follow_only_known_trackers">既知のトラッカーのみをフォロー</string>
     <string name="follow_only_known_trackers_explainer">ホストがトラッカー/リダイレクトであることがわかっている場合にのみ、リダイレクトを追跡しようとします。 「外部サービス経由のリダイレクトに従う」が有効になっている場合、これは常に有効になります。</string>
@@ -179,10 +179,9 @@
     <string name="follow_redirects_local_cache">ローカルリダイレクトキャッシュを有効</string>
     <string name="apps_which_can_open_links">検証済みのリンク</string>
     <string name="apps_explainer">優先アプリと検証済みリンク</string>
-    <string name="donate_explainer"><b>LinkSheet Pro</b> \u0020入手したい場合は、寄付をしてください \u0020</string>
+    <string name="donate_explainer"><b>LinkSheet Pro</b>入手したい場合は、寄付をしてください</string>
     <string name="use_clear_urls">ClearURLを使用</string>
-    <string name="follow_redirects_explainer">下のシートを開く前に、全てのリダイレクトを自動的に辿ります。 これには、<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシー関連の影響</annotation>が含まれる可能性があります。 \u0020</string>
+    <string name="follow_redirects_explainer">下のシートを開く前に、全てのリダイレクトを自動的に辿ります。 これには、<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシー関連の影響</annotation>が含まれる可能性があります。</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">"supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します   （annotation url=\"https://supabase.com/privacy\"&gt;Privacy policy&lt;/annotation&gt;）  "</string>
-    <string name="fastfoward_rules_explainer">実験的な <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward \u0020</annotation> ルールを使用します (リンクからリダイレクトを抽出することで一部のホストのリダイレクトをバイパスします) \u0020</string>
 </resources>

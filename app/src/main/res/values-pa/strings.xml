@@ -22,7 +22,7 @@
     <string name="browser_explainer">ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਅਤੇ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਸੈਟਿੰਗਾਂ</string>
     <string name="save">ਸਾਂਭੋ</string>
     <string name="enable_amp2html">Amp2Html ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/ClearURLs">ClearURLs \u0020</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ) \u0020</string>
+    <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ)</string>
     <string name="follow_only_known_trackers_explainer">ਸਿਰਫ਼ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜਦੋਂ ਹੋਸਟ ਨੂੰ ਟਰੈਕਰ/ਰੀਡਾਇਰੈਕਟ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ। ਜੇਕਰ \"ਬਾਹਰੀ ਸੇਵਾ ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟਸ ਦਾ ਪਾਲਣ ਕਰੋ\" ਇਨੇਬਲ ਹੈ, ਤਾਂ ਇਹ ਹਮੇਸ਼ਾਂ ਚਾਲੂ ਰਹੇਗਾ।</string>
     <string name="always_disable">ਹਮੇਸ਼ਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="copy_to_clipboard">ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ</string>
@@ -49,14 +49,14 @@
     <string name="enable_shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ (ਪ੍ਰਯੋਗਾਤਮਕ) ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
-    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
+    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="selected_browser_explainer">ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਕਲਿੱਕ ਕੀਤੇ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਸੰਭਾਲ ਸਕਦਾ</string>
     <string name="title_activity_cross_profile_request_handler">ਕਰੌਸ ਪ੍ਰੋਫਾਈਲ ਰਿਕਵੈਸਟ ਹੈਂਡਲਰ ਐਕਟੀਵਿਟੀ</string>
     <string name="misc_settings">ਫੁਟਕਲ</string>
     <string name="enable_send_button_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ ਜੋ ਤੁਹਾਨੂੰ URL ਨੂੰ ਹੋਰ ਐਪਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ ਜਿਵੇਂ ਕਿ ਤੁਸੀਂ ਇਸਨੂੰ \"ਨਾਲ ਸਾਂਝਾ ਕਰੋ\" ਮੀਨੂ ਤੋਂ ਚੁਣਿਆ ਹੈ</string>
-    <string name="log_privacy">ਲੌਗ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ਲਿੰਕ</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ। \u0020</string>
+    <string name="log_privacy">ਲੌਗ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ਲਿੰਕ</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
     <string name="get_started">ਸ਼ੁਰੂਆਤ ਕਰੋ</string>
     <string name="send_to">ਨਾਲ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="enable_ignore_libredirect_button">\"LibRedirect ਨੂੰ ਅਣਡਿੱਠ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
@@ -123,7 +123,7 @@
     <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
     <string name="finish">ਸਮਾਪਤ</string>
-    <string name="donate_explainer">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ \u0020<b>LinkSheet Pro</b> \u0020ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ \u0020</string>
+    <string name="donate_explainer">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ<b>LinkSheet Pro</b>ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
@@ -132,7 +132,7 @@
     <string name="linksheet_download">ਲਿੰਕਸ਼ੀਟ ਡਾਊਨਲੋਡ</string>
     <string name="delete">ਮਿਟਾਓ</string>
     <string name="fastforward">FastForward</string>
-    <string name="follow_redirects_external_service_explainer">ਸੁਪਰਬੇਸਡਾਟਕਾਮ (<annotation url="https://supabase.com/privacy"> \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \u0020</string>
+    <string name="follow_redirects_external_service_explainer">ਸੁਪਰਬੇਸਡਾਟਕਾਮ (<annotation url="https://supabase.com/privacy"> \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>)</string>
     <string name="include_fingerprint">ਡਿਵਾਈਸ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸ਼ਾਮਲ ਕਰੋ (ਸਿਫਾਰਸ਼ੀ)</string>
     <string name="preferred_apps">ਤਰਜੀਹੀ ਐਪਸ</string>
     <string name="just_once">ਇਸ ਵਾਰ</string>
@@ -141,7 +141,7 @@
     <string name="version">ਲਿੰਕਸ਼ੀਟ ਸੰਸਕਰਣ</string>
     <string name="preview_url">URL ਦੀ ਝਲਕ</string>
     <string name="usage_stats_sorting_explainer">ਕ੍ਰਮਬੱਧ ਕਰਨ ਵਾਲੇ ਐਲਗੋਰਿਦਮ ਵਿੱਚ ਐਂਡਰਾਇਡ ਸਿਸਟਮ ਵਰਤੋਂ ਦੇ ਅੰਕੜੇ ਸ਼ਾਮਿਲ ਕਰੋ। ਪਹਿਲੀ ਟੌਗਲ \'ਤੇ ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
-    <string name="amp2html_external_service_explainer">supabase.com (<annotation url="https://supabase.com/privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ \u0020</string>
+    <string name="amp2html_external_service_explainer">supabase.com (<annotation url="https://supabase.com/privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="github_explainer">ਸਰੋਤ ਕੋਡ ਰਿਪੌਜ਼ਟਰੀ</string>
     <string name="launch_onboaring">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
     <string name="shizuku_integration">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
@@ -208,11 +208,11 @@
     <string name="open_with_linksheet">ਲਿੰਕਸ਼ੀਟ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="in_app_browser">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="links">ਲਿੰਕ</string>
-    <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
+    <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="preferred_browser">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="dark">ਗਹਿਰਾ</string>
     <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
-    <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ) \u0020</string>
+    <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ)</string>
     <string name="donation_instructions">ਦਾਨ ਸਬੰਧੀ ਨਿਰਦੇਸ਼</string>
     <string name="disable_all_toasts_explainer">ਕਦੇ ਵੀ ਕੋਈ ਟੋਸਟ ਸੁਨੇਹੇ ਨਾ ਦਿਖਾਓ</string>
     <string name="set_as_browser">ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
@@ -249,7 +249,7 @@
     <string name="enable_ignore_libredirect_button_explainer">ਜੇਕਰ URL ਨੂੰ LibRedirect ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟ ਕੀਤਾ ਗਿਆ ਹੈ, ਤਾਂ ਹੇਠਲੇ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ, ਜੋ ਇਸਦੀ ਬਜਾਏ ਅਸਲੀ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ</string>
     <string name="mastodon_redirect_subtitle_2">ਮੈਸਟਾਡੋਨ ਰੀਡਾਇਰੈਕਟ ਦੇ ਸਰੋਤ ਕੋਡ ਨੂੰ ਸ਼ਿਜ਼ੂਕੁ ਇੰਟਰੈਕਸ਼ਨ ਲਈ ਇੱਕ ਸੰਦਰਭ ਵਜੋਂ ਵਰਤਿਆ ਗਿਆ ਸੀ</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ਨੇ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ। ਹੋ ਸਕਦਾ ਲਿੰਕਸ਼ੀਟ ਦੀ ਸੂਚੀ ਪੂਰੀ ਨਾਂ ਹੋਵੇ। ਜੇ ਤੁਸੀਂ ਸੋਚਦੇ ਹੋ ਕਿ ਇਹ ਇੱਕ ਗਲਤੀ ਹੈ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਇੱਕ ਮੁੱਦਾ ਦਰਜ ਕਰੋ।</string>
-    <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ \u0020</string>
+    <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="none_explainer">ਸਿਰਫ਼ ਮੂਲ ਐਪਾਂ ਦੀ ਸੂਚੀ ਬਣਾਓ, ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਹਟਾਓ। ਜੇਕਰ ਸਿਰਫ਼ ਇੱਕ ਹੀ ਮੂਲ ਐਪ ਮੌਜੂਦ ਹੈ, ਤਾਂ ਇਹ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ। ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਸੂਚੀਬੱਧ ਹਨ।</string>
     <string name="donate_crypto">ਕ੍ਰਿਪਟੋ ਦੁਆਰਾ ਦਾਨ ਕਰੋ</string>
     <string name="seal">ਸੀਲ</string>
@@ -298,13 +298,13 @@
     <string name="done">ਮੁਕੰਮਲ</string>
     <string name="thanks_for_donating">ਆਰਥਿਕ ਮੱਦਦ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!</string>
     <string name="dismiss">ਖ਼ਾਰਿਜ ਕਰੋ</string>
-    <string name="donate_explainer_crypto">ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਸਮੇਂ, <b>LinkSheet Pro</b> ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ, ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਭੇਜੋ \u0020</string>
+    <string name="donate_explainer_crypto">ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਸਮੇਂ, <b>LinkSheet Pro</b> ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ, ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਭੇਜੋ</string>
     <string name="join">ਜੁੜੋ</string>
     <string name="discord">ਡਿਸਕੌਰਡ</string>
     <string name="discord_explainer">ਸਾਡੇ ਡਿਸਕੌਰਡ ਸਰਵਰ \'ਤੇ ਗੱਲਬਾਤ ਕਰੋ!</string>
     <string name="donate_card">ਕਾਰਡ ਨਾਲ ਦਾਨ ਕਰੋ (BuyMeACoffee ਰਾਹੀਂ)</string>
     <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।
-\n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ। \u0020</string>
+\n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ।</string>
     <plurals name="hours">
         <item quantity="one">%s ਘੰਟਾ</item>
         <item quantity="other">%s ਘੰਟੇ</item>
@@ -330,13 +330,13 @@
         <item quantity="other">%s ਮਹੀਨੇ</item>
     </plurals>
     <string name="pro_feature">ਇਹ ਲਿੰਕਸ਼ੀਟ ਪਰੋ ਫ਼ੀਚਰ ਹੈ!</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ (<b>4€</b> ਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਹੋ!) ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਸਿਰਫ਼ ਲੁਕਾਉਂਦਾ ਹੈ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਇੱਥੇ <b>ਪ੍ਰੋ ਐਕਸਕਲੂਸਿਵ ਫੀਚਰਸ</b>ਹੋਣਗੇ। \u0020</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ (<b>4€</b> ਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਹੋ!) ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਸਿਰਫ਼ ਲੁਕਾਉਂਦਾ ਹੈ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਇੱਥੇ <b>ਪ੍ਰੋ ਐਕਸਕਲੂਸਿਵ ਫੀਚਰਸ</b>ਹੋਣਗੇ।</string>
     <string name="export_import_settings">ਐਕਸਪੋਰਟ ਜਾਂ ਇੰਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
     <string name="import_headline">ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="export_include_recommendation">ਅਸੀਂ ਸਿਫ਼ਾਰਿਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਨਿਮਨਲਿਖਤ ਸੈਟਿੰਗਾਂ ਨੂੰ ਤਾਂ ਹੀ ਚਾਲੂ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਨਾਲ ਆਪਣੇ ਐਕਸਪੋਰਟ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਦੀ ਯੋਜਨਾ ਨਹੀਂ ਬਣਾਉਂਦੇ ਹੋ!</string>
     <string name="include_log_hash_key">ਲੌਗ ਹੈਸ਼ ਕੁੰਜੀ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡੇ ਲੌਗਸ ਨੂੰ ਸੋਧਣ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਕੁੰਜੀ)</string>
     <string name="import_explainer">ਇੱਕ ਫ਼ਾਈਲ ਤੋਂ ਇੱਕ ਪਹਿਲਾਂ ਐਕਸਪੋਰਟ ਕੀਤਾ ਇੰਪੋਰਟ ਕਰੋ</string>
-    <string name="export_privacy">ਨਿਰਯਾਤ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ। \u0020</string>
+    <string name="export_privacy">ਨਿਰਯਾਤ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
     <string name="export_import_settings_explainer">ਆਪਣੀਆਂ ਮੌਜੂਦਾ ਸੈਟਿੰਗਾਂ ਨੂੰ ਐਕਸਪੋਰਟ ਕਰੋ ਜਾਂ ਪਿਛਲੀਆਂ ਐਕਸਪੋਰਟ ਕੀਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="include_history">ਇਤਿਹਾਸ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡਾ ਲਿੰਕ ਕਲਿੱਕ ਅਤੇ ਐਪ ਇਤਿਹਾਸ)</string>
     <string name="export_settings">ਐਕਸਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
@@ -377,7 +377,7 @@
     <string name="enable_new_bottom_sheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ।
 \n
-\nਤੁਸੀਂ ਸੈਟਿੰਗਾਂ -&gt; ਰਾਹੀਂ ਪੁਰਾਣੀ ਥੱਲੇ ਵਾਲੀ ਸ਼ੀਟ \'ਤੇ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ। ਉੱਨਤ -&gt; ਫੀਚਰ ਫਲੈਗ। \u0020</string>
+\nਤੁਸੀਂ ਸੈਟਿੰਗਾਂ -&gt; ਰਾਹੀਂ ਪੁਰਾਣੀ ਥੱਲੇ ਵਾਲੀ ਸ਼ੀਟ \'ਤੇ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ। ਉੱਨਤ -&gt; ਫੀਚਰ ਫਲੈਗ।</string>
     <string name="enable_new_bottom_sheet_explainer">ਪੁਰਾਣੀ ਸ਼ੀਟ ਦੀ ਬਜਾਏ ਸੁਧਾਰੀ ਹੋਈ ਹੇਠਲੀ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="new_bottomsheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ</string>
     <string name="shizuku_manager_start_failed">Shizuku ਮੈਨੇਜਰ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਅਸਫਲ, ਕਿਰਪਾ ਕਰਕੇ ਇਸਨੂੰ ਹੱਥੀਂ ਸ਼ੁਰੂ ਕਰੋ!</string>

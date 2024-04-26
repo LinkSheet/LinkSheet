@@ -4,7 +4,7 @@
     <string name="enable_send_button_explainer">Добавя в долното меню бутон, който дава възможност да споделите адреса с други приложения, все едно сте го избрали от менюто за споделяне</string>
     <string name="bottom_sheet_explainer">Сортиране, бутони и други</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
-    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, разположен в supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>) \u0020</string>
+    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, разположен в supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
     <string name="download">Изтегляне</string>
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
     <string name="back">Назад</string>
@@ -13,12 +13,12 @@
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
-    <string name="donate_explainer">Ако желаете да направите дарение и да получите <b>LinkSheet Pro</b> \u0020</string>
+    <string name="donate_explainer">Ако желаете да направите дарение и да получите <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
     <string name="license_apache_2">Лиценз Apache 2.0</string>
-    <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation> \u0020</string>
+    <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне с/ъс %s</string>
     <string name="preferred_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
@@ -70,9 +70,9 @@
     <string name="open_with_linksheet">Отваряне с LinkSheet</string>
     <string name="about_explainer">За приложението, лицензи</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> \u0020</string>
-    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочването от препратката) \u0020</string>
-    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation> \u0020</string>
+    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
+    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочването от препратката)</string>
+    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="redirect_resolve_type_not_resolved">липсва</string>
@@ -135,7 +135,7 @@
     <string name="browser_explainer">Режим на браузъра и настройки на вградения в приложенията браузър</string>
     <string name="always_show_package_name_disclaimer">Този превключвател ще бъде преместен на друго място в бъдещо издание.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Добавянето на много бутони в долното меню в момента може да доведе до отрязване/липсващи бутони.</string>
-    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите) \u0020</string>
+    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
     <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
     <string name="use_unified_preferred_browser_explainer">Когато е отметнато настройките по-долу се прилагат както за обикновената, така и за обработка на препратки в приложението. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
@@ -158,10 +158,10 @@
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="feature_flags_explainer">Включва или изключва експериментални възможности</string>
     <string name="request_timeout_explainer">Задава колко секунди LinkSheet да изчака за установяване на връзка. Стойност 0 изключва времето за изчакване, но не се препоръчва.</string>
-    <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">последствия, свързани с поверителността</annotation> \u0020</string>
+    <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">последствия, свързани с поверителността</annotation></string>
     <string name="amp2html_local_cache_explainer">Запазване на получените нормалните версии на страници в местна временна памет</string>
     <string name="amp2html_external_service">Опит за получаване на нормална версия на страницата чрез външна услуга</string>
-    <string name="amp2html_external_service_explainer">Опит за получаване на нормална версия на страницата чрез ППИ, разположен на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>) \u0020</string>
+    <string name="amp2html_external_service_explainer">Опит за получаване на нормална версия на страницата чрез ППИ, разположен на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
     <string name="shizuku">Интеграция с Shizuku</string>
     <string name="shizuku_explainer">Shizuku позволява на LinkSheet да взаимодейства директно с системните ППИ</string>
     <string name="amp2html_builtin_cache">Вградена временна памет на Amp2Html</string>
@@ -202,7 +202,7 @@
     <string name="redact_log">Обезличаване на дневника (препоръчително, изключването на може да разкрие имена на пакети и хостове)</string>
     <string name="include_settings">Включително настройките (препоръчително)</string>
     <string name="include_fingerprint">Включително пръстов отпечатък (препоръчително)</string>
-    <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>. \u0020</string>
+    <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>.</string>
     <string name="delete">Премахване</string>
     <string name="no_logs_found">Не са намерени предишни дневници!</string>
     <string name="enable_amp2html">Amp2Html</string>
@@ -298,13 +298,13 @@
     <string name="launch_onboaring_explainer">Проверка на екрана за обучение</string>
     <string name="thanks_for_donating">Благодаря за дарението!</string>
     <string name="dismiss">Затваряне</string>
-    <string name="donate_explainer_crypto">Ако сте дарили криптовалута, за да получите <b>LinkSheet Pro</b> изпратете доказателство за плащането на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \u0020</string>
+    <string name="donate_explainer_crypto">Ако сте дарили криптовалута, за да получите <b>LinkSheet Pro</b> изпратете доказателство за плащането на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="join">Присъединяване</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Заповядайте в нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
     <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
-\nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности. \u0020</string>
+\nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
     <plurals name="hours">
         <item quantity="one">%s час</item>
         <item quantity="other">%s часа</item>
@@ -341,10 +341,10 @@
     <string name="export_settings">Изнасяне на настройки</string>
     <string name="export_explainer">Изнася текущите настройки във файл</string>
     <string name="import_settings_override_preferences">Ще бъдат презаписани текущите настройки. Потвърждавате ли?</string>
-    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b>(или еквивалента на <b>4€</b> в криптовалута!) ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което, в момента, само скрива напомнянето за даряване от основния екран, но в бъдеще ще предлага <b>възможности достъпни само там</b>. \u0020</string>
+    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b>(или еквивалента на <b>4€</b> в криптовалута!) ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което, в момента, само скрива напомнянето за даряване от основния екран, но в бъдеще ще предлага <b>възможности достъпни само там</b>.</string>
     <string name="export_include_recommendation">Препоръчваме ви да не включвате тези настройки ако смятате да споделяте изнесеното с други хора!</string>
     <string name="include_log_hash_key">Включително ключа за дневника</string>
-    <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>. \u0020</string>
+    <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
     <string name="include_history">Включително историята (препратки и приложения)</string>
     <string name="last_rule_update">Последно обновяване на правилата (UTC):</string>
     <string name="dev_explainer">Настройки за разработка</string>
@@ -377,7 +377,7 @@
     <string name="enable_new_bottom_sheet">Включване на новото долно меню</string>
     <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща.
 \n
-\nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове. \u0020</string>
+\nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове.</string>
     <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
     <string name="new_bottomsheet">Ново долно меню</string>
     <string name="shizuku_manager_start_failed">Грешка при стартиране на управлението на Шизуку. Отворете го ръчно!</string>

@@ -442,7 +442,7 @@
     <string name="built_by">Build info</string>
     <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
-    <string name="github_pipeline_build">Built and signed by the Github workflow</string>
+    <string name="github_pipeline_build">Built and signed by CI</string>
     <string name="flavor">Flavor:</string>
     <string name="commit">Commit:</string>
     <string name="branch">Branch:</string>

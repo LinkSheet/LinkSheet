@@ -485,4 +485,5 @@
     <string name="shizuku_integration_not_setup_explainer"></string>
     <string name="onboarding_3_card_explainer"></string>
     <string name="settings_app_config_rules__title_default_rule"></string>
+    <string name="fastfoward_rules_explainer"></string>
 </resources>

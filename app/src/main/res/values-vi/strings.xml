@@ -17,14 +17,14 @@
     <string name="use_clear_urls">Sử dụng ClearURL</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Việc kích hoạt nhiều nút ở trang dưới cùng hiện tại có thể dẫn đến các nút bị cắt/trục trặc.</string>
     <string name="opening_with_app">Đang mở bằng %s</string>
-    <string name="browser_explainer">Chế độ trình duyệt và thiết đặt trình duyệt trong ứng dụng</string>
+    <string name="browser_explainer">Chế độ trình duyệt, trình duyệt trong ứng dụng</string>
     <string name="save">Lưu</string>
     <string name="enable_amp2html">Bật Amp2Html</string>
     <string name="use_clear_urls_explainer">Sử dụng tích hợp <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> thử nghiệm (xóa tham số theo dõi khỏi URL)</string>
     <string name="follow_only_known_trackers_explainer">Chỉ cố gắng theo dõi các chuyển hướng khi máy chủ được xác định là trình theo dõi/chuyển hướng. Nếu \"Theo dõi chuyển hướng qua dịch vụ bên ngoài\" được bật thì tính năng này sẽ luôn được bật.</string>
     <string name="always_disable">Luôn tắt</string>
     <string name="preview_url_explainer">Hiển thị URL được nhấp (sau khi được xử lý)</string>
-    <string name="theme_explainer">Thay đổi chủ đề của ứng dụng</string>
+    <string name="theme_explainer">Material You, chủ đề tối, chế độ đen tuyền</string>
     <string name="logs">Nhật ký</string>
     <string name="no_apps_which_can_handle_links_found">Không tìm thấy ứng dụng nào có thể xử lý liên kết.</string>
     <string name="bottom_sheet">Trang dưới cùng</string>
@@ -37,7 +37,7 @@
     <string name="use_app_settings">Sử dụng thiết đặt của ứng dụng</string>
     <string name="no_preferred_apps_set_yet">Chưa có ứng dụng nào được đặt làm ưu tiên.</string>
     <string name="always_show_package_name_explainer">Luôn hiển thị tên gói thay vì chỉ tên ứng dụng. Điều này áp dụng cho toàn bộ ứng dụng.</string>
-    <string name="log_files">Tệp nhật ký trước đây</string>
+    <string name="log_files">Các phiên trước đây</string>
     <string name="use_text_share_copy_buttons">Sử dụng các nút văn bản đơn giản để \"Sao chép URL\", \"Chia sẻ tới\", \"Tải xuống\" và \"Bỏ qua LibRedirect\"</string>
     <string name="enable_shizuku">Kích hoạt (thử nghiệm) tích hợp Shizuku</string>
     <string name="logs_explainer">Xem nhật ký ứng dụng</string>
@@ -80,14 +80,14 @@
     <string name="whitelisted_browsers">Các trình duyệt trong danh sách trắng</string>
     <string name="amoled_black">Amoled đen</string>
     <string name="export_log">Xuất nhật ký</string>
-    <string name="bottom_sheet_explainer">Sắp xếp theo mức dùng, bật nút sao chép, bật nút chia sẻ, v.v.</string>
+    <string name="bottom_sheet_explainer">Bố cục lưới, sắp xếp theo cách sử dụng, tùy chỉnh nhấn, thanh url</string>
     <string name="order_of_operation">Thứ tự hoạt động</string>
     <string name="light">Sáng</string>
     <string name="frontend">Giao diện người dùng</string>
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="finish">Hoàn thành</string>
     <string name="donate_subtitle">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b></string>
-    <string name="built_at">Xây dựng lúc (UTC):</string>
+    <string name="built_at">Xây dựng lúc (UTC)</string>
     <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
     <string name="delete">Xóa</string>
@@ -118,7 +118,7 @@
     <string name="paste">Dán</string>
     <string name="download">Tải xuống</string>
     <string name="linksheet_version_info_header">Thông tin phiên bản LinkSheet:</string>
-    <string name="links_explainer">Cài đặt liên quan đến thao tác liên kết</string>
+    <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Theo dõi chuyển hướng</string>
     <string name="no_app_to_handle_link_found">Không tìm thấy ứng dụng nào để xử lý liên kết!</string>
     <string name="amp2html_external_service">Cố gắng lấy phiên bản trang không phải AMP thông qua dịch vụ bên ngoài</string>
     <string name="open_with">Mở bằng</string>
@@ -129,7 +129,7 @@
     <string name="random_instance">Instance ngẫu nhiên</string>
     <string name="options">Tùy chọn</string>
     <string name="services">Dịch vụ</string>
-    <string name="about_explainer">Giới thiệu về ứng dụng này, giấy phép</string>
+    <string name="about_explainer">Tín dụng, Giấy phép, Liên kết, Phiên bản</string>
     <string name="disable_all_toasts">Tắt thông báo ngắn</string>
     <string name="export_mode">Chế độ xuất</string>
     <string name="app_log">Nhật ký ứng dụng</string>
@@ -143,7 +143,7 @@
     <string name="always">Luôn luôn</string>
     <string name="open_link_with">MởLiênKếtBằng</string>
     <string name="select_an_app">Chọn một ứng dụng</string>
-    <string name="github_workflow_run_id">Xây dựng ID quy trình làm việc:</string>
+    <string name="github_workflow_run_id">ID quy trình xây dựng</string>
     <string name="resolved_via">%s giải quyết qua %s</string>
     <string name="onboarding2_highlight">của bạn</string>
     <string name="amp2html_builtin_cache_explainer">Sử dụng bộ đệm tích hợp (sử dụng xuất cơ sở dữ liệu của dịch vụ bên ngoài)</string>
@@ -206,7 +206,7 @@
     <string name="pretend_to_be_app">Chặn các yêu cầu ứng dụng gốc</string>
     <string name="dont_show_filtered_item_explainer">Sẽ không bao giờ hiển thị phần trên cùng gợi ý ứng dụng được sử dụng lần cuối cho máy chủ được nhấp vào</string>
     <string name="enable_copy_button">Bật nút sao chép</string>
-    <string name="version_name">Mã định danh đầy đủ:</string>
+    <string name="version_name">Mã định danh đầy đủ</string>
     <string name="onboarding2_headline">Rất nhiều thiết đặt
 \nđể tạo LinkSheet</string>
     <string name="credits">Ghi công</string>
@@ -218,9 +218,9 @@
     <string name="onboarding6_headline">Đặt thành của bạn</string>
     <string name="debug">Gỡ lỗi</string>
     <string name="confirm_import">Xác nhận</string>
-    <string name="general">Tổng quan</string>
+    <string name="general">Điều khoản khác</string>
     <string name="compat_installed">LinkSheetCompat đã được cài đặt</string>
-    <string name="debug_explainer">Xem nhật ký ứng dụng</string>
+    <string name="debug_explainer">Nhật ký ứng dụng, đặt lại trình xử lý đã được xác minh</string>
     <string name="configure_explainer">Nhấn vào đây để cấu hình LinkSheetCompat</string>
     <string name="done">Xong</string>
     <string name="no_browser_installed">Chưa cài đặt trình duyệt</string>
@@ -234,7 +234,7 @@
     <string name="opening_with_app_toast_explainer">Hiển thị thông báo ngắn khi một ứng dụng đã được đặt làm mặc định cho một tên miền được khởi chạy</string>
     <string name="last_updated">Cập nhật lần cuối (UTC):</string>
     <string name="enable_linksheet_compat">Bật thực đơn LinkSheet Compat thử nghiệm</string>
-    <string name="built_by_error">Bản dựng này không được ký bởi 1fexd cũng như Github workflow. Điều này không nhất thiết có nghĩa là bất cứ điều gì xấu, vì bất cứ ai cũng có thể chia tách mã nguồn và xây dựng phiên bản LinkSheet của riêng họ, nhưng họ có thể làm như vậy với mục đích xấu.</string>
+    <string name="built_by_error">Bản dựng này không được ký bởi 1fexd cũng như quy trình làm việc Github.</string>
     <string name="follow_redirects_explainer">Tự động theo dõi tất cả các chuyển hướng trước khi mở trang dưới cùng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ngụ ý liên quan đến quyền riêng tư </annotation></string>
     <string name="follow_redirects_external_service_explainer">Theo dõi các chuyển hướng bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="disable_in_selected">Vô hiệu hóa trong lựa chọn</string>
@@ -247,7 +247,7 @@
     <string name="instance_not_available_anymore">Phiên bản không còn khả dụng nữa!</string>
     <string name="advanced">Nâng cao</string>
     <string name="shizuku">Tích hợp Shizuku</string>
-    <string name="advanced_explainer">Thiết đặt nâng cao như thử nghiệm và xuất/nhập</string>
+    <string name="advanced_explainer">Cờ tính năng, Thử nghiệm, Nhập/Xuất</string>
     <string name="license_mit">Giấy phép MIT</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Đã bật chế độ Shizuku, nhấn vào một ứng dụng để chuyển đổi khả năng xử lý liên kết tự động. Nhấn và giữ một ứng dụng để mở thực đơn thiết đặt \"Mở theo mặc định\".</string>
     <string name="enable_all">Bật tất cả</string>
@@ -266,7 +266,7 @@
     <string name="disable_link_handling">Tắt xử lý liên kết</string>
     <string name="open_link_with_subtitle_2">LinkSheet ban đầu dựa trên OpenLinkWith</string>
     <string name="donate_card">Quyên tặng bằng thẻ (qua BuyMeACoffee)</string>
-    <string name="donate_explainer_crypto">Khi quyên tặng bằng tiền điện tử, hãy gửi email đến <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
+    <string name="donate_explainer_crypto">Khi quyên tặng bằng tiền điện tử, hãy gửi email đến <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
     <string name="onboarding4_paragraph_2">Điều này rất khó chịu, vì đôi khi, bạn không muốn mở một liên kết trong ứng dụng của nó, mà là trong một trình duyệt (ví dụ: để đánh dấu trang).
 \n
 \nAhh, Google cổ điển, làm tê liệt các sản phẩm của chính họ mà không có cách đơn giản để khôi phục lại hành vi cũ
@@ -275,7 +275,7 @@
     <string name="linksheet_donation_explainer_2">Khoản quyên tặng hơn <b>5€</b> cho phép bạn truy cập vào <b>LinkSheet Pro</b>, bao gồm <b>các tính năng độc quyền của Pro</b> chẳng hạn như: theo dõi các chuyển hướng bên ngoài, nhận được các chuyển hướng không phải-Các trang AMP bên ngoài và nhiều trang khác sắp ra mắt!</string>
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
     <string name="opening_with_app_toast">Hiển thị thông báo ngắn khi một ứng dụng được khởi chạy tự động</string>
-    <string name="discord_explainer">Hãy trò chuyện trên máy chủ Discord của chúng tôi! Trò chuyện với người dùng và nhà phát triển của LinkSheet về tương lai của nó và những nỗ lực khác!</string>
+    <string name="discord_explainer">Trò chuyện về LinkSheet trên Discord</string>
     <string name="shizuku_integration_no_permission_explainer">Nhấn vào đây để yêu cầu sự cho phép của Shizuku.</string>
     <string name="shizuku_integration_not_setup_explainer">Mặc dù không thực sự cần thiết để LinkSheet hoạt động nhưng bạn nên sử dụng Shizuku. Nhấn vào đây để cài đặt nó.</string>
     <string name="include_throwable">Bao gồm nhật ký sự cố (được khuyến nghị, nhưng không thể chỉnh sửa)</string>
@@ -285,7 +285,7 @@
     <string name="running_unofficial_build">Bản dựng không chính thức</string>
     <string name="debug_build">Bản dựng gỡ lỗi</string>
     <string name="notifications">Thông báo</string>
-    <string name="notifications_explainer">Cấu hình thông báo ngắn</string>
+    <string name="notifications_explainer">URL đã sao chép, Tải xuống đã bắt đầu</string>
     <string name="fastforward_version">Quy tắc chuyển tiếp nhanh</string>
     <string name="enable_new_bottom_sheet">Bật trang dưới cùng mới</string>
     <string name="new_bottomsheet">Trang dưới cùng mới</string>
@@ -294,7 +294,7 @@
     <string name="follow_redirects_short">Chuyển hướng</string>
     <string name="unknown_host">%s bị chặn hoặc không tồn tại</string>
     <string name="enable_dev_bottom_sheet">Bật trang dưới cùng của nhà phát triển</string>
-    <string name="privacy_settings_explainer">Các thiết đặt như bao gồm người giới thiệu</string>
+    <string name="privacy_settings_explainer">Quyền riêng tư của người giới thiệu, Chẩn đoán từ xa</string>
     <string name="shizuku_manager_start_failed">Không khởi động được Trình quản lý Shizuku, vui lòng khởi động thủ công!</string>
     <string name="start_setup">Tiếp tục</string>
     <string name="export_import_settings_explainer">Xuất thiết đặt hiện tại của bạn hoặc nhập thiết đặt đã xuất trước đó</string>
@@ -322,12 +322,12 @@
     <string name="onboarding_0_subtitle">Chọn luôn được nhắc khi mở một liên kết, đặt trình duyệt mặc định và hơn thế nữa</string>
     <string name="onboarding_0_title">Chào mừng bạn đến
 \nLinkSheet</string>
-    <string name="general_settings_explainer">Thiết đặt liên quan đến toàn bộ ứng dụng</string>
+    <string name="general_settings_explainer">Luôn hiển thị tên gói</string>
     <string name="export_explainer">Xuất thiết đặt ứng dụng hiện tại của bạn sang một tệp</string>
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
-    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> thử nghiệm</string>
+    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect \u0020</annotation> thử nghiệm \u0020</string>
     <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp.Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ngụ ý liên quan đến quyền riêng tư </annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng.Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư </annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>)</string>
@@ -335,7 +335,7 @@
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="app_name">LinkSheet</string>
-    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
+    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward \u0020</annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết) \u0020</string>
     <string name="fastforward">FastForward</string>
     <string name="clear_urls">ClearURLs</string>
     <string name="amp2html">Amp2Html</string>
@@ -350,16 +350,16 @@
     <string name="donate_crypto">Quyên tặng qua tiền điện tử</string>
     <string name="donate_learn_more">Tìm hiểu thêm</string>
     <string name="manual_build">Được xây dựng và ký thủ công bởi 1fexd</string>
-    <string name="flavor">Hương vị:</string>
-    <string name="type">Loại:</string>
+    <string name="flavor">Hương vị</string>
+    <string name="type">Loại</string>
     <string name="enable_linksheet_compat_explainer">Thực đơn có thể được tìm thấy trong thực đơn phụ \"Ứng dụng\" và khi được cài đặt, có thể chặn các yêu cầu đối với một số ứng dụng gốc nhất định.</string>
     <string name="new_bottomsheet_explainer">Phiên bản LinkSheet này có trang dưới cùng mới nhờ <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Vui lòng cung cấp phản hồi trên Discord, Github hoặc qua email.
 \n
 \nBạn có thể quay lại trang dưới cùng cũ thông qua Cài đặt -&gt; Nâng cao -&gt; Cờ tính năng.</string>
     <string name="tap_customization">Tùy chỉnh nhấn</string>
-    <string name="tap_customization_single_tap">Nhấn một lần</string>
-    <string name="tap_customization_double_tap">Nhấn đúp</string>
-    <string name="tap_customization_long_tap">Nhấn lâu</string>
+    <string name="tap_customization_single_tap">Thao tác nhấn đơn</string>
+    <string name="tap_customization_double_tap">Thao tác nhấn đúp</string>
+    <string name="tap_customization_long_tap">Hành động nhấn giữ</string>
     <string name="no_action">Không có hành động</string>
     <string name="theme_enable_material_you_explainer">Sử dụng chủ đề thiết bị Material You của Android 12+</string>
     <string name="experiments_explainer">Dùng thử các tính năng hiện đang được phát triển</string>
@@ -383,7 +383,7 @@
     <string name="start_setup_explainer">Chức năng của LinkSheet yêu cầu cấu hình Android tùy chỉnh. Thiết lập sau đây sẽ hướng dẫn bạn thực hiện quy trình gồm nhiều bước.</string>
     <string name="onboarding_setup">Thiết lập LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Đã cài đặt ít nhất một trình duyệt</string>
-    <string name="github_pipeline_build">Được xây dựng và ký bởi quy trình làm việc Github</string>
+    <string name="github_pipeline_build">Được xây dựng và ký kết bởi CI</string>
     <string name="no_browser_installed_explainer">LinkSheet không thể phát hiện ít nhất một ứng dụng tự xưng là một trình duyệt. Để có trải nghiệm tốt nhất, hãy cài đặt một trình duyệt.</string>
     <string name="tap_customization_dialog_title">Cấu hình %s</string>
     <string name="donate">Quyên tặng</string>
@@ -408,7 +408,7 @@
     <string name="telemetry_configure_title">Phân tích</string>
     <string name="resolve_activity_failure">Không thể giải quyết hoạt động!</string>
     <string name="onboarding_2_card_explainer">Shizuku cho phép LinkSheet vô hiệu hóa hành vi xử lý liên kết mặc định của tất cả các ứng dụng cùng một lúc, thay vì phải vô hiệu hóa chúng theo cách thủ công cho từng ứng dụng riêng lẻ (đây là bước tiếp theo).</string>
-    <string name="commit">Cam kết:</string>
+    <string name="commit">Cam kết</string>
     <string name="onboarding_2_subtitle">Nếu bạn cài đặt nhiều ứng dụng, Shizuku có thể cải thiện đáng kể trải nghiệm của bạn</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="onboarding_2_start_shizuku">Khởi động Shizuku</string>
@@ -416,7 +416,7 @@
     <string name="hide_bottom_sheet_choice_buttons_explainer">Ẩn các nút \"Một lần\" và \"Luôn luôn\" ở trang dưới cùng</string>
     <string name="onboarding_2_title">Bạn có muốn sử dụng Shizuku không?</string>
     <string name="onboarding_2_request_shizuku_permission">Yêu cầu quyền</string>
-    <string name="branch">Nhánh:</string>
+    <string name="branch">Nhánh</string>
     <string name="onboarding_2_install_shizuku">Cài đặt Shizuku</string>
     <string name="onboarding_2_shizuku_enabled">Kế tiếp</string>
     <string name="last_rule_update">Cập nhật quy tắc cuối cùng từ thượng nguồn (UTC):</string>
@@ -436,7 +436,7 @@
     <string name="domain_selection_confirmation_title">Chọn tên miền?</string>
     <string name="join">Tham gia</string>
     <string name="dismiss">Bỏ qua</string>
-    <string name="built_by">Được xây dựng và ký bởi</string>
+    <string name="built_by">Thông tin bản dựng</string>
     <string name="clear_urls_version">Quy tắc ClearURLs</string>
     <string name="launch_onboarding_new">Ra mắt chương trình giới thiệu mới</string>
     <string name="launch_onboarding__now_explainer">Kiểm tra quy trình giới thiệu mới</string>
@@ -450,4 +450,69 @@
     <string name="edit">Chỉnh sửa</string>
     <string name="link_handle_failed_text_field_label">Truy vấn</string>
     <string name="retry">Thử lại</string>
+    <string name="customization">Tùy chỉnh</string>
+    <string name="Miscellaneous">Điều khoản khác</string>
+    <string name="parse_shared_text_intent">Phân tích văn bản được chia sẻ nếu không tìm thấy url</string>
+    <string name="theme_enable_amoled">Đen tuyền</string>
+    <string name="theme_enable_amoled_explainer">Sử dụng chủ đề màu đen tuyền nếu bật chế độ tối</string>
+    <string name="theme_mode">Chế độ chủ đề</string>
+    <string name="allow_darknets">Cho phép darknet</string>
+    <string name="amp2html_allow_darknets_explainer">Cho phép chạy Amp2Html cho darknet (được hỗ trợ: %s)</string>
+    <string name="discord">Discord</string>
+    <string name="onboarding_1_card_explainer">LinkSheet không thể hoạt động nếu không có trình duyệt mặc định.</string>
+    <string name="onboarding_2_skip_button">Bỏ qua</string>
+    <string name="onboarding_3_subtitle">Trình xử lý liên kết cần phải được tắt để LinkSheet có thể chặn chúng</string>
+    <string name="onboarding_3_title">Tắt trình xử lý liên kết mặc định</string>
+    <string name="onboarding_3_card_title">Trình xử lý liên kết</string>
+    <string name="onboarding_3_button">Tắt trình xử lý liên kết</string>
+    <string name="onboarding_4_button">Kế tiếp</string>
+    <string name="onboarding_4_card_title">Tắt trình xử lý liên kết</string>
+    <string name="onboarding_4_card_explainer">Tắt việc xử lý liên kết cho tất cả các miền mà LinkSheet nên xử lý.</string>
+    <string name="onboarding_5_subtitle">LinkSheet đã được kích hoạt thành công</string>
+    <string name="onboarding_5_title">Đã xong tất cả!</string>
+    <string name="onboarding_5_button">Hoàn thành</string>
+    <string name="permission_required">Yêu cầu cấp quyền</string>
+    <string name="follow_redirects_allow_darknets_explainer">Cho phép chuyển hướng sau cho darknet (được hỗ trợ: %s)</string>
+    <string name="reset">Đặt lại</string>
+    <string name="log_session_headline">Phiên lúc</string>
+    <string name="onboarding_1_title">Đặt LinkSheet làm trình duyệt mặc định</string>
+    <string name="onboarding_1_card_title">Trình duyệt mặc định</string>
+    <string name="onboarding_1_button">Đặt làm trình duyệt mặc định</string>
+    <string name="external">Bên ngoài</string>
+    <string name="loading_link_subtitle">LinkSheet đang thực hiện các hoạt động liên kết. Việc này sẽ chỉ mất vài giây</string>
+    <string name="share">Chia sẻ liên kết</string>
+    <string name="help">Trợ giúp</string>
+    <string name="help_subtitle">Hướng dẫn, Wiki, Hỏi đáp</string>
+    <string name="external_versions">Phiên bản bên ngoài</string>
+    <string name="build_info">Thông tin bản dựng</string>
+    <string name="settings__title_updates">Cập nhật</string>
+    <string name="settings__subtitle_updates">Cập nhật LinkSheet lên phiên bản mới nhất</string>
+    <string name="settings__title_shortcuts">Lối tắt</string>
+    <string name="settings__subtitle_shortcuts">Trình duyệt mặc định-, xử lý liên kết-, thiết đặt ứng dụng được kết nối</string>
+    <string name="dev_mode_enabled">Xin chúc mừng, bạn đã kích hoạt chế độ nhà phát triển. Chỉ cần thận trọng.</string>
+    <string name="onboarding_3_card_explainer">Google đã giới thiệu các liên kết ứng dụng đã được xác minh trong Android 12, cho phép các ứng dụng chứng minh quyền sở hữu tên miền bằng mật mã. Hành vi này phải được tắt theo cách thủ công để LinkSheet chặn các liên kết được nhấn.</string>
+    <string name="switch_profile">Bật chuyển đổi hồ sơ</string>
+    <string name="switch_profile_explainer">Hiển thị một nút ở trang dưới cùng để mở liên kết đã nhấn trong hồ sơ (công việc-). Yêu cầu cài đặt LinkSheet trong cả hai cấu hình và được liên kết thủ công thông qua Thiết đặt -&gt; Quyền truy cập ứng dụng đặc biệt -&gt; Ứng dụng cá nhân và công việc được kết nối</string>
+    <string name="verified_link_handlers">Trình xử lý liên kết đã được xác minh</string>
+    <string name="verified_link_handlers_subtitle">Kiểm soát trạng thái xác minh miền ứng dụng</string>
+    <string name="settings_shortcuts__title_default_browser">Trình duyệt mặc định</string>
+    <string name="settings_shortcuts__subtitle_default_browser">Mở trang thiết đặt trình duyệt mặc định</string>
+    <string name="settings_shortcuts__title_link_handlers">Trình xử lý liên kết</string>
+    <string name="settings_shortcuts__title_connected_apps">Ứng dụng đã kết nối</string>
+    <string name="new_dev_bottom_sheet">Trang dưới cùng</string>
+    <string name="show_native_label">Hiển thị nhãn gốc</string>
+    <string name="telemetry_level_exhaustive">Toàn diện</string>
+    <string name="telemetry_level_disabled">Đã tắt</string>
+    <string name="telemetry_level_minimal">Tối thiểu</string>
+    <string name="telemetry_level_standard">Tiêu chuẩn</string>
+    <string name="telemetry_identity_basic">Cơ bản</string>
+    <string name="telemetry_identity_full">Đầy đủ</string>
+    <string name="telemetry_dialog_title">LinkSheet tôn trọng quyền riêng tư của bạn</string>
+    <string name="telemetry_level_disabled_description">Không thu thập dữ liệu</string>
+    <string name="telemetry_level_minimal_description">Chỉ số phiên bản đã cài đặt</string>
+    <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
+    <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
+    <string name="analytics">Phân tích</string>
+    <string name="telemetry_identifier_reset">Đặt lại số định danh</string>
+    <string name="verified_link_handlers_open_settings_page">Mở trang thiết đặt</string>
 </resources>

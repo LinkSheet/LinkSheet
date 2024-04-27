@@ -14,7 +14,7 @@ fun UnofficialBuild() {
 //        colors = ShapeListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.errorContainer),
 //        imageVector = Icons.Default.Warning,
 //        contentDescriptionTextId = R.string.warning,
-//        headlineContentTextId = R.string.running_unofficial_build,
-//        supportingContentTextId = R.string.built_by_error
+//        headlineContent = textContent(R.string.running_unofficial_build),
+//        supportingContent = textContent(R.string.built_by_error),
 //    )
 }

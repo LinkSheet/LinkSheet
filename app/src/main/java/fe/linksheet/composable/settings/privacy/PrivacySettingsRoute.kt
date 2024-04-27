@@ -1,13 +1,13 @@
 package fe.linksheet.composable.settings.privacy
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
 import fe.linksheet.util.BuildType
@@ -31,8 +31,8 @@ fun PrivacySettingsRoute(
                     preference = viewModel.showAsReferrer,
                     shape = shape,
                     padding = padding,
-                    headlineContentTextId = R.string.show_linksheet_referrer,
-                    supportingContentTextId = R.string.show_linksheet_referrer_explainer
+                    headlineContent = textContent(R.string.show_linksheet_referrer),
+                    supportingContent = textContent(R.string.show_linksheet_referrer_explainer),
                 )
             }
         }
@@ -47,10 +47,8 @@ fun PrivacySettingsRoute(
                         padding = padding,
                         onClick = analyticsDialog::open,
                         role = Role.Button,
-                        headlineContent = { Text(text = stringResource(id = R.string.telemetry_configure_type)) },
-                        supportingContent = {
-                            Text(text = stringResource(id = viewModel.telemetryLevel().titleId))
-                        }
+                        headlineContent = textContent(R.string.telemetry_configure_type),
+                        supportingContent = textContent(viewModel.telemetryLevel().titleId)
                     )
                 }
 
@@ -60,7 +58,7 @@ fun PrivacySettingsRoute(
                         padding = padding,
                         onClick = { viewModel.resetIdentifier() },
                         role = Role.Button,
-                        headlineContent = { Text(text = stringResource(id = R.string.telemetry_identifier_reset)) },
+                        headlineContent = textContent(R.string.telemetry_identifier_reset)
                     )
                 }
             }

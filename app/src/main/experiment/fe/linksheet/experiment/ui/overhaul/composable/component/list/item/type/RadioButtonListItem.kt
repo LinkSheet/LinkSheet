@@ -1,51 +1,32 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.material3.Switch
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
+import androidx.compose.material3.RadioButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.*
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.rememberContent
 
-@Composable
-fun PreferenceSwitchListItem(
-    enabled: Boolean = true,
-    preference: MutablePreferenceState<Boolean, Boolean, Preference.Default<Boolean>>,
-    shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
-    headlineContent: TextContent,
-    overlineContent: TextContent? = null,
-    supportingContent: TextContent? = null,
-    otherContent: OptionalContent = null,
-) {
-    SwitchListItem(
-        enabled = enabled,
-        shape = shape,
-        padding = padding,
-        position = ContentPosition.Trailing,
-        checked = preference(),
-        onCheckedChange = { preference(it) },
-        overlineContent = overlineContent,
-        headlineContent = headlineContent,
-        supportingContent = supportingContent,
-        otherContent = otherContent
-    )
+object RadioButtonListItemDefaults {
+    val Width = 24.dp
 }
 
 @Composable
-fun SwitchListItem(
+fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
     enabled: Boolean = true,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+    value: NT,
+    preference: MutablePreferenceState<T, NT, P>,
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     position: ContentPosition,
@@ -54,37 +35,64 @@ fun SwitchListItem(
     supportingContent: TextContent? = null,
     otherContent: OptionalContent = null,
 ) {
-    ClickableShapeListItem(
+    RadioButtonListItem(
         enabled = enabled,
-        onClick = { onCheckedChange(!checked) },
-        role = Role.Switch,
         shape = shape,
         padding = padding,
         position = position,
+        selected = preference() == value,
+        onSelect = { preference(value) },
+        overlineContent = overlineContent,
+        headlineContent = headlineContent,
+        supportingContent = supportingContent,
+        otherContent = otherContent
+    )
+}
+
+@Composable
+fun RadioButtonListItem(
+    enabled: Boolean = true,
+    width: Dp = RadioButtonListItemDefaults.Width,
+    selected: Boolean,
+    onSelect: () -> Unit,
+    shape: Shape = ShapeListItemDefaults.SingleShape,
+    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    position: ContentPosition,
+    headlineContent: TextContent,
+    overlineContent: TextContent? = null,
+    supportingContent: TextContent? = null,
+    otherContent: OptionalContent,
+) {
+    ClickableShapeListItem(
+        enabled = enabled,
+        onClick = onSelect,
+        role = Role.RadioButton,
+        shape = shape,
+        padding = padding,
         headlineContent = headlineContent,
         overlineContent = overlineContent,
         supportingContent = supportingContent,
+        position = position,
         primaryContent = {
-            DefaultListItemSwitch(
-                enabled = enabled,
-                checked = checked,
-                onCheckedChange = onCheckedChange
-            )
+            DefaultListItemRadioButton(enabled = enabled, width = width, selected = selected, onSelect = onSelect)
         },
         otherContent = otherContent
     )
 }
 
 @Composable
-private fun DefaultListItemSwitch(
+private fun DefaultListItemRadioButton(
     enabled: Boolean = true,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+    width: Dp = RadioButtonListItemDefaults.Width,
+    selected: Boolean,
+    onSelect: () -> Unit,
 ) {
-    Switch(
-        modifier = ShapeListItemDefaults.BaseContentModifier,
-        enabled = enabled,
-        checked = checked,
-        onCheckedChange = onCheckedChange,
-    )
+    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides width) {
+        RadioButton(
+            modifier = ShapeListItemDefaults.BaseContentModifier.width(width),
+            enabled = enabled,
+            selected = selected,
+            onClick = onSelect,
+        )
+    }
 }

@@ -3,25 +3,19 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.ina
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.FileUpload
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.LeadingRadioButtonListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioLocation
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceLeadingRadioButtonListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceTrailingRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
@@ -36,24 +30,26 @@ fun NewInAppBrowserSettingsRoute(
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.in_app_browser), onBackPressed = onBackPressed) {
         group(size = 3) {
             item(key = R.string.use_app_settings) { padding, shape ->
-                PreferenceLeadingRadioButtonListItem(
+                PreferenceRadioButtonListItem(
                     padding = padding,
                     shape = shape,
                     value = InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
                     preference = viewModel.inAppBrowserMode,
-                    headlineContentTextId = R.string.use_app_settings,
-                    supportingContentTextId = R.string.use_app_settings_explainer
+                    position = ContentPosition.Leading,
+                    headlineContent = textContent(R.string.use_app_settings),
+                    supportingContent = textContent(R.string.use_app_settings_explainer)
                 )
             }
 
             item(key = R.string.always_disable) { padding, shape ->
-                PreferenceLeadingRadioButtonListItem(
+                PreferenceRadioButtonListItem(
                     padding = padding,
                     shape = shape,
                     value = InAppBrowserHandler.InAppBrowserMode.AlwaysDisableInAppBrowser,
                     preference = viewModel.inAppBrowserMode,
-                    headlineContentTextId = R.string.always_disable,
-                    supportingContentTextId = R.string.always_disable_explainer
+                    position = ContentPosition.Leading,
+                    headlineContent = textContent(R.string.always_disable),
+                    supportingContent = textContent(R.string.always_disable_explainer)
                 )
             }
 
@@ -61,11 +57,11 @@ fun NewInAppBrowserSettingsRoute(
                 RadioButtonListItem(
                     shape = shape,
                     padding = padding,
-                    location = RadioLocation.Leading,
                     selected = viewModel.inAppBrowserMode() == InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps,
-                    onClick = { viewModel.inAppBrowserMode(InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps) },
-                    headlineContentText = stringResource(id = R.string.disable_in_selected),
-                    supportingContentText = stringResource(id = R.string.disable_in_selected_explainer),
+                    onSelect = { viewModel.inAppBrowserMode(InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps) },
+                    position = ContentPosition.Leading,
+                    headlineContent = textContent(R.string.disable_in_selected),
+                    supportingContent = textContent(R.string.disable_in_selected_explainer),
                     otherContent = {
                         Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
                             FilledTonalIconButton(onClick = { navigate(inAppBrowserSettingsDisableInSelectedRoute) }) {

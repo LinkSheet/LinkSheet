@@ -51,7 +51,7 @@
     <string name="always_show_package_name_explainer">Увек прикажите називе пакета уместо само назива апликација. Ово се односи на целу апликацију.</string>
     <string name="domain_selection_confirmation_title">Изабрати домене\?</string>
     <string name="manual_build">Ручно направљено и потписано од 1fexd</string>
-    <string name="log_files">Прошли фајлови евиденције</string>
+    <string name="log_files">Прошле сесије</string>
     <string name="open_link_with_subtitle_2">LibkSheet је првобитно био заснован на OpenLinkWith-у</string>
     <string name="use_text_share_copy_buttons">Користи једноставне текстуалне дугмад за „Копирај URL“, „Дели са“, „Преузми“ и „Игнориши LibRedirect“</string>
     <string name="enable_shizuku">Омогући (експерименталну) Shizuku интеграцију</string>

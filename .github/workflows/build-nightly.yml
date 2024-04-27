@@ -62,12 +62,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
-          path: app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/*.apk
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: linksheet-nightly-mappings
-          path: app/build/outputs/mapping/$BUILD_FLAVOR_TYPE/*.txt
+          path: |
+            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/*.apk
+            app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
 
       - name: Get file name
         id: get_file_name

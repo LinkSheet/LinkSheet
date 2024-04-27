@@ -38,6 +38,8 @@ import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.LocalActivity
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -56,7 +58,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
     val apps by viewModel.appsFiltered.collectOnIO()
     val filter by viewModel.searchFilter.collectOnIO()
-    val linkHandlingAllowed by viewModel.linkHandlingAllowed.collectOnIO()
+    val linkHandlingAllowed by viewModel.linkHandlingAllowed.collectOnIO(true)
     val lastEmitted by viewModel.lastEmitted.collectOnIO()
 
     val listState = remember(apps?.size, filter, linkHandlingAllowed) {
@@ -80,7 +82,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     fun postCommand(packageName: String) {
         state.startRefresh()
         viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
-            val newState =  !linkHandlingAllowed
+            val newState = !linkHandlingAllowed
             val result = setDomainState(packageName, "all", newState)
             if (packageName == allPackages) {
                 // TODO: Revert previous state instead of always setting to !newState
@@ -96,6 +98,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
     }
 
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
     SettingsScaffold(R.string.apps_which_can_open_links, onBackPressed = onBackPressed) { padding ->
         Box(
@@ -134,7 +137,9 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                             FilterChips(
                                 currentState = linkHandlingAllowed,
                                 onClick = {
-                                    viewModel.linkHandlingAllowed.value = it
+                                    coroutineScope.launch {
+                                        viewModel.pagerState.scrollToPage(if (it) 0 else 1)
+                                    }
                                 },
                                 values = listOf(
                                     FilterChipValue(

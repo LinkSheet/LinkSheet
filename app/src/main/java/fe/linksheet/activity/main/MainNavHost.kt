@@ -43,6 +43,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsR
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewAboutSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.NewBrowserSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute
@@ -278,7 +279,11 @@ fun MainNavHost(
 
         if (AndroidVersion.AT_LEAST_API_31_S) {
             animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
-                AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
+                if (uiOverhaul) {
+                    VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
+                } else {
+                    AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
+                }
             }
 
             animatedComposable(route = pretendToBeAppRoute) {

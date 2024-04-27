@@ -6,6 +6,9 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.snapshotFlow
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
@@ -38,17 +41,19 @@ class AppsWhichCanOpenLinksViewModel(
     }
 
     val lastEmitted = MutableStateFlow(0L)
-    val linkHandlingAllowed = MutableStateFlow(true)
     val searchFilter = MutableStateFlow("")
+
+    val pagerState = PagerState { 2 }
+    val linkHandlingAllowed = snapshotFlow { pagerState.currentPage == 0 }
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val apps = flowOfLazy { domainVerificationManager!!.getDisplayActivityInfos(context) }
         .combine(lastEmitted) { apps, _ -> apps }
-        .combine(linkHandlingAllowed) { apps, _ ->
+        .combine(linkHandlingAllowed) { apps, linkHandlingAllowed ->
             apps.filter {
                 it.resolvedInfo.hasVerifiedDomains(
                     domainVerificationManager!!,
-                    linkHandlingAllowed.value
+                    linkHandlingAllowed
                 )
             }
         }
@@ -61,6 +66,11 @@ class AppsWhichCanOpenLinksViewModel(
 
     fun emitLatest() {
         lastEmitted.value = System.currentTimeMillis()
+    }
+
+
+    fun search(query: String?) {
+        searchFilter.value = query ?: ""
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

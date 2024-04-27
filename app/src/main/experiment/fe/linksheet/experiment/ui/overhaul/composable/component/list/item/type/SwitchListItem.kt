@@ -1,20 +1,24 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.*
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.rememberContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.rememberOptionalContent
 
 @Composable
 fun PreferenceSwitchListItem(
@@ -81,10 +85,19 @@ private fun DefaultListItemSwitch(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
 ) {
+    val thumbContent = rememberOptionalContent(checked) {
+        Icon(
+            modifier = Modifier.size(SwitchDefaults.IconSize),
+            imageVector = Icons.Filled.Check,
+            contentDescription = null,
+        )
+    }
+
     Switch(
         modifier = ShapeListItemDefaults.BaseContentModifier,
         enabled = enabled,
         checked = checked,
-        onCheckedChange = onCheckedChange,
+        thumbContent = thumbContent,
+        onCheckedChange = onCheckedChange
     )
 }

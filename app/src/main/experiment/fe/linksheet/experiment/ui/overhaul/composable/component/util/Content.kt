@@ -7,6 +7,15 @@ typealias Content = @Composable () -> Unit
 typealias OptionalContent = Content?
 
 @Composable
+inline fun rememberOptionalContent(condition: Boolean, crossinline content: @Composable () -> Unit): OptionalContent {
+    return remember(key1 = condition) {
+        if (condition) {
+            { content() }
+        } else null
+    }
+}
+
+@Composable
 inline fun <T : Any?> rememberOptionalContent(key1: T?, crossinline content: @Composable (T) -> Unit): OptionalContent {
     return remember(key1 = key1) {
         key1?.let {

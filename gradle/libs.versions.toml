@@ -2,7 +2,13 @@
 
 [plugins]
 
+gradle = { id = "gradle", version = "8.1.2" }
 
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.1.0" }
+
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.23-1.0.20" }
 
 [versions]
 
@@ -14,11 +20,7 @@ kotlin = "1.9.23"
 ##  ⬆ = "2.0.0-Beta5"
 ##  ⬆ = "2.0.0-RC1"
 
-koin = "3.5.6"
-##⬆ = "3.6.0-alpha1"
-##⬆ = "3.6.0-alpha3"
-##⬆ = "3.6.0-Beta2"
-##⬆ = "3.6.0-Beta3"
+koin = "3.6.0-Beta3"
 ##⬆ = "3.6.0-wasm-alpha1"
 ##⬆ = "3.6.0-wasm-alpha2"
 
@@ -32,63 +34,62 @@ androidx-compose-material3 = "1.3.0-alpha05"
 
 [libraries]
 
-flavors = "com.github.LinkSheet:flavors:0.0.3"
+flavors = "com.github.LinkSheet:flavors:_"
 linkSheetInterConnect = { module = "com.github.1fexd:LinkSheetInterConnect", version.ref = "linkSheetInterConnect" }
 material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidx-compose-material3" }
-stub = "dev.rikka.hidden:stub:4.3.3"
+stub = "dev.rikka.hidden:stub:_"
 
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 
-gson = "com.google.code.gson:gson:2.10.1"
+gson = "com.google.code.gson:gson:_"
 
-com-gitlab-grrfe-httpkt-core = "com.gitlab.grrfe.httpkt:core:13.0.0-alpha.62"
+com-gitlab-grrfe-httpkt-core = "com.gitlab.grrfe.httpkt:core:_"
 
-ext-gson = "com.gitlab.grrfe.httpkt:ext-gson:13.0.0-alpha.62"
+ext-gson = "com.gitlab.grrfe.httpkt:ext-gson:_"
 
 gson-ext = "com.gitlab.grrfe:gson-ext:_"
 
-kotlin-ext = "com.gitlab.grrfe:kotlin-ext:0.0.59"
+kotlin-ext = "com.gitlab.grrfe:kotlin-ext:_"
 
-clearurlkt = "com.github.1fexd:clearurlkt:0.0.45"
+clearurlkt = "com.github.1fexd:clearurlkt:_"
 
-fastforwardkt = "com.github.1fexd:fastforwardkt:0.0.44"
+fastforwardkt = "com.github.1fexd:fastforwardkt:_"
 
-libredirectkt = "com.github.1fexd:libredirectkt:0.0.66"
+libredirectkt = "com.github.1fexd:libredirectkt:_"
 
-mimetypekt = "com.github.1fexd:mimetypekt:0.0.6"
+mimetypekt = "com.github.1fexd:mimetypekt:_"
 
-amp2htmlkt = "com.github.1fexd:amp2htmlkt:0.0.4"
+amp2htmlkt = "com.github.1fexd:amp2htmlkt:_"
 
-stringbuilder-util-kt = "com.github.1fexd:stringbuilder-util-kt:2.0.0"
+stringbuilder-util-kt = "com.github.1fexd:stringbuilder-util-kt:_"
 
-cached-urls = "com.github.1fexd:cached-urls:0.0.18"
+cached-urls = "com.github.1fexd:cached-urls:_"
 
 preference-helper = "com.github.1fexd.android-pref-helper:core:_"
 
 preference-helper-compose = "com.github.1fexd.android-pref-helper:compose:_"
 
-compose-route-util = "com.github.1fexd:compose-route-util:0.0.12"
+compose-route-util = "com.github.1fexd:compose-route-util:_"
 
-compose-dialog-helper = "com.github.1fexd:compose-dialog-helper:0.0.6"
+compose-dialog-helper = "com.github.1fexd:compose-dialog-helper:_"
 
-process-launcher = "com.gitlab.grrfe:process-launcher:0.0.5"
-##                                                ⬆ :0.0.6"
+process-launcher = "com.gitlab.grrfe:process-launcher:_"
 
-jsoup = "org.jsoup:jsoup:1.17.2"
+jsoup = "org.jsoup:jsoup:_"
 
-api = "dev.rikka.shizuku:api:13.1.5"
+api = "dev.rikka.shizuku:api:_"
 
-provider = "dev.rikka.shizuku:provider:13.1.5"
+provider = "dev.rikka.shizuku:provider:_"
 
-hiddenapibypass = "org.lsposed.hiddenapibypass:hiddenapibypass:4.3"
+hiddenapibypass = "org.lsposed.hiddenapibypass:hiddenapibypass:_"
 
-dev-rikka-tools-refine-runtime = "dev.rikka.tools.refine:runtime:4.4.0"
+dev-rikka-tools-refine-runtime = "dev.rikka.tools.refine:runtime:_"
 
 koin-android-test = { group = "io.insert-koin", name = "koin-android-test", version.ref = "koin" }
 
-uriparser = "com.github.1fexd:uriparser:0.0.11"
+uriparser = "com.github.1fexd:uriparser:_"
 
-bom = "io.github.jan-tennert.supabase:bom:2.3.1"
+bom = "io.github.jan-tennert.supabase:bom:_"
 
 storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }
 
@@ -96,42 +97,49 @@ compose-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui" }
 
 gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt" }
 
-compose-mock = "com.github.1fexd.android-pref-helper:compose-mock:9.3.0"
+compose-mock = "com.github.1fexd.android-pref-helper:compose-mock:_"
 
-embed-resolve = "com.github.1fexd:embed-resolve:0.0.9"
+embed-resolve = "com.github.1fexd:embed-resolve:_"
 
-ipaddress = "com.github.seancfoley:ipaddress:5.5.0"
+ipaddress = "com.github.seancfoley:ipaddress:_"
 junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-ext-junit" }
 
-signifykt = "com.gitlab.grrfe.bundled-dependencies:signifykt:0.0.5"
-##                                                       ⬆ :0.0.7"
-##                                                       ⬆ :0.0.10"
-##                                                       ⬆ :0.0.10-jitfix"
-##                                                       ⬆ :0.0.11"
-##                                                       ⬆ :1.0.1"
-##                                                       ⬆ :2.10.1"
-##                                                       ⬆ :11.0.0"
-##                                                       ⬆ :14.0.2-gson2-koin3"
+signifykt = "com.gitlab.grrfe.bundled-dependencies:signifykt:_"
 
-com-gitlab-grrfe-bundled-dependencies-gson-ext = "com.gitlab.grrfe.bundled-dependencies:gson-ext:11.0.0"
-##                                                                                           ⬆ :14.0.2-gson2-koin3"
+com-gitlab-grrfe-bundled-dependencies-gson-ext = "com.gitlab.grrfe.bundled-dependencies:gson-ext:_"
 
-unfurl = "me.saket.unfurl:unfurl:1.7.0"
+unfurl = "me.saket.unfurl:unfurl:_"
 
-unfurl-social = "me.saket.unfurl:unfurl-social:1.7.0"
+unfurl-social = "me.saket.unfurl:unfurl-social:_"
 
-support-utils = "org.mozilla.components:support-utils:126.0b5"
-##                                                ⬆ :126.0b6"
+support-utils = "org.mozilla.components:support-utils:_"
 
-lib-publicsuffixlist = "org.mozilla.components:lib-publicsuffixlist:126.0b5"
-##                                                              ⬆ :126.0b6"
+lib-publicsuffixlist = "org.mozilla.components:lib-publicsuffixlist:_"
 
-placeholder-material3 = "io.github.fornewid:placeholder-material3:1.1.2"
+placeholder-material3 = "io.github.fornewid:placeholder-material3:_"
 
-flexible-bottomsheet-material3 = "com.github.skydoves:flexible-bottomsheet-material3:0.1.2"
+flexible-bottomsheet-material3 = "com.github.skydoves:flexible-bottomsheet-material3:_"
 
-nanoid = "io.viascom.nanoid:nanoid:1.0.1"
+nanoid = "io.viascom.nanoid:nanoid:_"
 
 zipline-android = { group = "app.cash.zipline", name = "zipline-android", version.ref = "app-cash-zipline" }
 
 zipline-loader-android = { group = "app.cash.zipline", name = "zipline-loader-android", version.ref = "app-cash-zipline" }
+
+kotlin-parcelize-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-runtime", version.ref = "kotlin" }
+
+linksheetinterconnect = "com.github.1fexd:LinkSheetInterConnect:_"
+
+com-gitlab-grrfe-gson-ext = "com.gitlab.grrfe:gson-ext:_"
+
+com-github-1fexd-android-pref-helper-core = "com.github.1fexd.android-pref-helper:core:_"
+
+compose = "com.github.1fexd.android-pref-helper:compose:_"
+
+kotlin-parcelize-compiler = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-compiler", version.ref = "kotlin" }
+
+symbol-processing = "com.google.devtools.ksp:symbol-processing:_"
+
+symbol-processing-api = "com.google.devtools.ksp:symbol-processing-api:_"
+
+symbol-processing-cmdline = "com.google.devtools.ksp:symbol-processing-cmdline:_"

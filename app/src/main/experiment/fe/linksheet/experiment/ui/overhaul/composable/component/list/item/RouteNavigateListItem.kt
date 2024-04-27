@@ -6,30 +6,29 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultIconClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.TwoLineGroupValueProvider
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
-
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
 
 @Stable
 class RouteNavItem(
     val route: String,
-    val icon: ImageVector,
-    headlineId: Int,
-    subtitleId: Int,
-) : TwoLineGroupValueProvider(headlineId, subtitleId)
+    icon: ImageVector,
+    headline: TextContent,
+    subtitle: TextContent,
+) : ListItemData(icon, headline, subtitle)
 
 @Composable
 fun RouteNavigateListItem(
     data: RouteNavItem,
     shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = PaddingValues(),
+    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     navigate: (String) -> Unit,
 ) {
     DefaultIconClickableShapeListItem(
         shape = shape,
         padding = padding,
-        headlineContent = textContent(data.headlineId),
-        supportingContent = textContent(data.subtitleId),
+        headlineContent = data.headlineContent,
+        supportingContent = data.subtitleContent,
         icon = data.icon,
         onClick = { navigate(data.route) }
     )

@@ -7,16 +7,19 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 
 typealias OptionalTextContent = TextContent?
 
 @Stable
-sealed class TextContent {
-    abstract val content: @Composable () -> Unit
+interface TextContent {
+    val key: Any
+    val content: @Composable () -> Unit
 }
 
 @Stable
-class Default(text: String) : TextContent() {
+class Default(text: String) : TextContent {
+    override val key = text
     override val content: @Composable () -> Unit = {
         Text(text = text)
     }
@@ -33,7 +36,8 @@ class Default(text: String) : TextContent() {
 }
 
 @Stable
-class Resource(@StringRes id: Int, vararg formatArgs: Any) : TextContent() {
+class Resource(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
+    override val key = id
     override val content: @Composable () -> Unit = {
         Text(text = stringResource(id = id, formatArgs = formatArgs))
     }
@@ -47,7 +51,8 @@ class Resource(@StringRes id: Int, vararg formatArgs: Any) : TextContent() {
 
 
 @Stable
-class Annotated(annotatedString: AnnotatedString) : TextContent() {
+class Annotated(annotatedString: AnnotatedString) : TextContent {
+    override val key = annotatedString.text
     override val content: @Composable () -> Unit = {
         Text(text = annotatedString)
     }
@@ -61,7 +66,7 @@ class Annotated(annotatedString: AnnotatedString) : TextContent() {
 
 
 @Stable
-class ComposableTextContent(override val content: @Composable () -> Unit) : TextContent() {
+class ComposableTextContent(override val content: @Composable () -> Unit, override val key: Any = Unit) : TextContent {
     companion object {
         fun content(content: @Composable () -> Unit): ComposableTextContent {
             return ComposableTextContent(content)

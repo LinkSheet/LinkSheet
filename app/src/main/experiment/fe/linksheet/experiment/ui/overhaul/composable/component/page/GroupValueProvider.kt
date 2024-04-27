@@ -1,18 +1,21 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.page
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.graphics.vector.ImageVector
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalTextContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
 
 interface GroupValueProvider<K : Any> {
     val key: K
 }
 
 @Stable
-open class TwoLineGroupValueProvider(
-    @StringRes val headlineId: Int,
-    @StringRes val subtitleId: Int,
-) : GroupValueProvider<Int> {
-    override val key = headlineId
+open class ListItemData(
+    val icon: ImageVector? = null,
+    val headlineContent: TextContent,
+    val subtitleContent: OptionalTextContent = null,
+) : GroupValueProvider<Any> {
+    override val key = headlineContent.key
 }
 
 @DslMarker

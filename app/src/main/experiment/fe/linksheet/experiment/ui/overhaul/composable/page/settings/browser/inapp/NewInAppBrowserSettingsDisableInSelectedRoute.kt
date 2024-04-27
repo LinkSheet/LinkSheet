@@ -14,11 +14,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.linksheet.R
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
 import fe.linksheet.extension.compose.clickable
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -31,6 +34,57 @@ fun NewInAppBrowserSettingsDisableInSelectedRoute(
     navigate: (String) -> Unit,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel(),
 ) {
+    var text by rememberSaveable { mutableStateOf("") }
+    var active by rememberSaveable { mutableStateOf(false) }
+
+    SaneSettingsScaffold(
+        headline = stringResource(id = R.string.disable_in_selected),
+        onBackPressed = onBackPressed
+    ) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .semantics { isTraversalGroup = true }
+        ) {
+            SearchBar(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .semantics { traversalIndex = -1f },
+                query = text,
+                onQueryChange = { text = it },
+                onSearch = { active = false },
+                active = active,
+                onActiveChange = {
+                    active = it
+                },
+                placeholder = { Text("Hinted search text") },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
+            ) {}
+        }
+//        divider(stringRes = R.string.)
+
+
+//        SearchBar(
+//            modifier = Modifier
+////                .align(Alignment.TopCenter)
+////                .semantics { traversalIndex = -1f }
+//                ,
+//            query = text,
+//            onQueryChange = { text = it },
+//            onSearch = { active = false },
+//            active = active,
+//            onActiveChange = {
+//                active = it
+//            },
+//            placeholder = { Text("Hinted search text") },
+//            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+//            trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
+//        ) {
+//
+//        }
+    }
+
+
 //    SearchBarSample()
 //    SaneScaffoldSettingsPage(
 //        headline = stringResource(id = R.string.disable_in_selected),
@@ -96,10 +150,12 @@ fun SearchBarSample() {
         ) {
             val list = List(100) { "Text $it" }
             items(count = list.size) {
-                Text(list[it],
+                Text(
+                    list[it],
                     Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp))
+                        .padding(horizontal = 16.dp)
+                )
             }
         }
     }

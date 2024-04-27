@@ -210,7 +210,6 @@ android {
     for (it in setOf("compat", "experiment")) {
         main.java.srcDir("src/main/$it")
     }
-
 }
 
 dependencies {
@@ -219,17 +218,28 @@ dependencies {
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
-    implementation(AndroidX.compose.material)
+    implementation(libs.material3)
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.compose.animation)
     implementation(AndroidX.navigation.compose)
+    implementation(Google.android.material)
+    implementation(Google.accompanist.permissions)
+
+    implementation(AndroidX.lifecycle.process)
+    implementation(AndroidX.lifecycle.runtime.compose)
+    implementation(AndroidX.lifecycle.viewModelCompose)
+    implementation(AndroidX.lifecycle.runtime.ktx)
+
+    implementation(AndroidX.webkit)
+    implementation(AndroidX.core.ktx)
+    implementation(AndroidX.activity.compose)
+    implementation(AndroidX.browser)
 
     implementation(libs.linkSheetInterConnect)
     implementation(project(":config"))
     implementation(libs.uriparser)
 
-    implementation(AndroidX.lifecycle.process)
     implementation(libs.junit.ktx)
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
@@ -241,31 +251,21 @@ dependencies {
     implementation(AndroidX.room.ktx)
     ksp(AndroidX.room.compiler)
 
-    implementation(AndroidX.webkit)
-
-    implementation(AndroidX.core.ktx)
-    implementation(AndroidX.lifecycle.runtime.ktx)
-    implementation(AndroidX.activity.compose)
-
     implementation(libs.compose.mock)
 
     implementation(COIL)
     implementation(COIL.compose)
 
-    runtimeOnly(AndroidX.compose.material.icons.extended)
+
     implementation(libs.ipaddress)
     implementation(libs.placeholder.material3)
-    implementation(AndroidX.compose.material.icons.extended)
 
-    implementation(libs.flexible.bottomsheet.material3)
+
     implementation(libs.signifykt)
     implementation(libs.com.gitlab.grrfe.bundled.dependencies.gson.ext)
     implementation(libs.embed.resolve)
 
-    implementation(AndroidX.lifecycle.runtime.compose)
 
-    implementation(AndroidX.browser)
-    implementation(AndroidX.lifecycle.viewModelCompose)
     implementation(libs.gson)
 
     implementation(libs.nanoid)
@@ -299,9 +299,7 @@ dependencies {
 
     implementation(libs.jsoup)
 
-    implementation(Google.android.material)
-    implementation(Google.accompanist.permissions)
-    implementation(libs.material3)
+
     implementation(libs.api)
     implementation(libs.provider)
     implementation(libs.hiddenapibypass)

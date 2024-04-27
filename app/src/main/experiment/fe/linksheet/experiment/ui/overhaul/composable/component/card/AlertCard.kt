@@ -19,17 +19,17 @@ import fe.linksheet.extension.compose.clickable
 
 
 object AlertCardDefaults {
-    val minHeight = Modifier.heightIn(min = 90.dp)
-    val innerPadding = PaddingValues(all = 16.dp)
-    val horizontalArrangement = Arrangement.spacedBy(12.dp)
+    val MinHeight = Modifier.heightIn(min = 90.dp)
+    val InnerPadding = PaddingValues(all = 16.dp)
+    val HorizontalArrangement = Arrangement.spacedBy(12.dp)
 }
 
 @Composable
 fun AlertCard(
-    modifier: Modifier = AlertCardDefaults.minHeight,
+    modifier: Modifier = AlertCardDefaults.MinHeight,
     colors: CardColors = CardDefaults.cardColors(),
-    innerPadding: PaddingValues = AlertCardDefaults.innerPadding,
-    horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.horizontalArrangement,
+    innerPadding: PaddingValues = AlertCardDefaults.InnerPadding,
+    horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.HorizontalArrangement,
     imageVector: ImageVector,
     @StringRes contentDescriptionId: Int?,
     @StringRes headlineId: Int,
@@ -49,11 +49,11 @@ fun AlertCard(
 
 @Composable
 fun ClickableAlertCard(
-    modifier: Modifier = AlertCardDefaults.minHeight,
+    modifier: Modifier = AlertCardDefaults.MinHeight,
     colors: CardColors = CardDefaults.cardColors(),
     onClick: (() -> Unit)? = null,
-    innerPadding: PaddingValues = AlertCardDefaults.innerPadding,
-    horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.horizontalArrangement,
+    innerPadding: PaddingValues = AlertCardDefaults.InnerPadding,
+    horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.HorizontalArrangement,
     imageVector: ImageVector,
     @StringRes contentDescriptionId: Int?,
     @StringRes headlineId: Int,
@@ -96,11 +96,11 @@ fun ClickableAlertCardPreview() {
 
 @Composable
 fun ClickableAlertCard(
-    modifier: Modifier = AlertCardDefaults.minHeight,
+    modifier: Modifier = AlertCardDefaults.MinHeight,
     colors: CardColors = CardDefaults.cardColors(),
     onClick: (() -> Unit)? = null,
-    innerPadding: PaddingValues = AlertCardDefaults.innerPadding,
-    horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.horizontalArrangement,
+    innerPadding: PaddingValues = AlertCardDefaults.InnerPadding,
+    horizontalArrangement: Arrangement.Horizontal = AlertCardDefaults.HorizontalArrangement,
     imageVector: ImageVector,
     contentDescription: String?,
     headline: String,

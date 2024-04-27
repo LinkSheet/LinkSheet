@@ -73,7 +73,7 @@ fun SaneLazyColumnPageLayout(
         content = {
             content(SaneLazyListScopeImpl(this))
 
-            item(key = "navbar-spacer") {
+            item(key = -1) {
                 Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.systemBars))
             }
         }

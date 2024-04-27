@@ -11,7 +11,7 @@ annotation class SaneLazyListScopeDslMarker
 
 @Stable
 data class SaneLazyListScopeImpl(val lazyListScope: LazyListScope) : SaneLazyListScope, LazyListScope by lazyListScope {
-    private fun dividerKey(stringRes: Int, key: Any) = if (key == stringRes) "$key-divider" else key
+    private fun dividerKey(stringRes: Int, key: Any) = if (key == stringRes) "$key-1" else key
 
     override fun divider(stringRes: Int, key: Any) {
         item(key = dividerKey(stringRes, key), contentType = ContentTypeDefaults.Divider) {

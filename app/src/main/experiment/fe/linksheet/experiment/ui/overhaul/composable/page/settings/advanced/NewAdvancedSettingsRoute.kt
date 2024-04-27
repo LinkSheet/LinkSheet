@@ -11,6 +11,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteN
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.experimentSettingsRoute
 import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
@@ -21,27 +22,30 @@ private object NewAdvancedSettingsRouteData {
         RouteNavItem(
             featureFlagSettingsRoute,
             Icons.Default.Flag,
-            R.string.feature_flags,
-            R.string.feature_flags_explainer
+            textContent(R.string.feature_flags),
+            textContent(R.string.feature_flags_explainer),
         ),
         RouteNavItem(
             experimentSettingsRoute.route,
             Icons.Default.Android,
-            R.string.experiments,
-            R.string.experiments_explainer
+            textContent(R.string.experiments),
+            textContent(R.string.experiments_explainer),
         ),
         RouteNavItem(
             exportImportSettingsRoute,
             Icons.Default.ImportExport,
-            R.string.export_import_settings,
-            R.string.export_import_settings_explainer
+            textContent(R.string.export_import_settings),
+            textContent(R.string.export_import_settings_explainer),
         )
     )
 }
 
 @Composable
 fun NewAdvancedSettingsRoute(onBackPressed: () -> Unit, navigate: (String) -> Unit) {
-    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.advanced), onBackPressed = onBackPressed) {
+    SaneScaffoldSettingsPage(
+        headline = stringResource(id = R.string.advanced),
+        onBackPressed = onBackPressed
+    ) {
         group(items = NewAdvancedSettingsRouteData.items) { data, padding, shape ->
             RouteNavigateListItem(
                 data = data,

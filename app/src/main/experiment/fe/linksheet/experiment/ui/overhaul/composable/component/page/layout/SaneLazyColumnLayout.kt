@@ -44,7 +44,10 @@ data class GroupItem(
 
 object SaneLazyColumnPageDefaults {
     val VerticalSpacing = 12.dp
-    val ContentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = VerticalSpacing, bottom = 6.dp)
+    val HorizontalSpacing = 20.dp
+    val BottomSpacing = 6.dp
+
+    val ContentPadding = PaddingValues(start = HorizontalSpacing, end = HorizontalSpacing, top = VerticalSpacing, bottom = BottomSpacing)
 
     val TextDividerPadding = PaddingValues(
         start = 16.dp,
@@ -59,13 +62,14 @@ object SaneLazyColumnPageDefaults {
 
 @Composable
 fun SaneLazyColumnPageLayout(
+    modifier: Modifier = Modifier,
     padding: PaddingValues,
     contentPadding: PaddingValues = SaneLazyColumnPageDefaults.ContentPadding,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: SaneLazyListScope.() -> Unit,
 ) {
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .padding(padding)
             .fillMaxSize(),
         contentPadding = contentPadding,

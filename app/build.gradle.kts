@@ -217,8 +217,13 @@ dependencies {
     implementation(AndroidX.compose.ui.graphics)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3)
-    implementation(libs.material3)
+    implementation("androidx.compose.material3:material3:1.3.0-alpha05")
+//    implementation(libs.material3.common)
+//    implementation(libs.material3) {
+//        attributes {
+//            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling::class.java, Bundling.EXTERNAL))
+//        }
+//    }
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.compose.animation)

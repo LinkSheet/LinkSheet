@@ -7,4 +7,5 @@ interface UiEventReceiver {
 
 sealed interface UiEvent {
     data class ShowSnackbar(val text: String) : UiEvent
+    data class NavigateTo(val route: String) : UiEvent
 }

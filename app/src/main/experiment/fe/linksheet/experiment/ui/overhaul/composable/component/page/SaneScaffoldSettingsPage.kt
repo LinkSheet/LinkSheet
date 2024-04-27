@@ -15,6 +15,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.Sane
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
 import fe.linksheet.ui.HkGroteskFontFamily
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SaneScaffoldSettingsPage(
     modifier: Modifier = Modifier,
@@ -25,38 +26,13 @@ fun SaneScaffoldSettingsPage(
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     content: SaneLazyListScope.() -> Unit,
 ) {
-    SaneSettingsScaffold(
-        modifier = modifier,
-        headline = headline,
-        onBackPressed = onBackPressed,
-        enableBackButton = enableBackButton,
-        floatingActionButton = floatingActionButton,
-        floatingActionButtonPosition = floatingActionButtonPosition,
-        content = { padding -> SaneLazyColumnPageLayout(padding = padding, content = content) }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SaneSettingsScaffold(
-    modifier: Modifier = Modifier,
-    headline: String,
-    enableBackButton: Boolean = true,
-    onBackPressed: () -> Unit,
-    floatingActionButton: @Composable () -> Unit = {},
-    floatingActionButtonPosition: FabPosition = FabPosition.End,
-    contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
-    content: @Composable (PaddingValues) -> Unit,
-) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
         rememberTopAppBarState(),
         canScroll = { true }
     )
 
-    Scaffold(
-        modifier = modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+    SaneSettingsScaffold(
+        modifier = modifier.then(Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)),
         topBar = {
             LargeTopAppBar(
                 colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
@@ -81,6 +57,24 @@ fun SaneSettingsScaffold(
                 scrollBehavior = scrollBehavior
             )
         },
+        floatingActionButton = floatingActionButton,
+        floatingActionButtonPosition = floatingActionButtonPosition,
+        content = { padding -> SaneLazyColumnPageLayout(padding = padding, content = content) }
+    )
+}
+
+@Composable
+fun SaneSettingsScaffold(
+    modifier: Modifier = Modifier,
+    topBar: @Composable () -> Unit,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
+    contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        topBar = topBar,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         contentWindowInsets = contentWindowInsets,

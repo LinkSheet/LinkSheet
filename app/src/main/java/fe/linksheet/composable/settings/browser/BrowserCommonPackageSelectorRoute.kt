@@ -34,7 +34,7 @@ fun BrowserCommonPackageSelectorRoute(
     viewModel: BrowserCommonViewModel,
 ) {
     val items by viewModel.filteredItems.collectOnIO()
-    val filter by viewModel.searchFilter.collectOnIO()
+    val filter by viewModel.filter.collectOnIO()
     val mapState = remember(items?.size, filter) {
         mapState(items, filter)
     }
@@ -63,7 +63,7 @@ fun BrowserCommonPackageSelectorRoute(
             searchHeader(
                 subtitleId = subtitleId,
                 filter = filter,
-                searchFilter = viewModel.searchFilter
+                searchFilter = viewModel.filter
             )
 
             mapHelper(

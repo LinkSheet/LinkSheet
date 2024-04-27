@@ -1,47 +1,89 @@
 package fe.linksheet.module.viewmodel
 
+
 import android.app.Application
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-
-
+import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.content.pm.getInstalledPackagesCompat
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.ImageBitmap
+import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.extension.android.launchIO
-import fe.linksheet.extension.android.queryAllResolveInfos
-import fe.linksheet.extension.android.toDisplayActivityInfos
+import fe.linksheet.extension.android.*
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
-import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
-import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.util.flowOfLazy
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.*
 
 class InAppBrowserSettingsViewModel(
     context: Application,
     private val repository: DisableInAppBrowserInSelectedRepository,
-    preferenceRepository: AppPreferenceRepository
+    preferenceRepository: AppPreferenceRepository,
 ) : BrowserCommonViewModel(context, preferenceRepository) {
     var inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserSettings)
 
-    private val disableInAppBrowserInSelectedPackages = repository.getAll().map { list ->
+    private val _searchFilter = MutableStateFlow("")
+    val searchFilter = _searchFilter.asStateFlow()
+
+    private val installedPackages = flowOfLazy {
+        context.packageManager.getInstalledPackagesCompat().filter { it.applicationInfo.isUserApp() }.map {
+            SelectableApp(
+                applicationInfo = it.applicationInfo,
+                label = it.applicationInfo.loadLabel(context.packageManager).toString()
+            )
+        }
+    }
+
+    private val disabledPackages = repository.getAll().map { list ->
         list.mapToSet { it.packageName }
     }
 
-    private val packages = flowOfLazy {
-        context.packageManager.queryAllResolveInfos(true).toDisplayActivityInfos(context, true)
+    private val items = installedPackages.combine(disabledPackages) { all, disabledPackages ->
+        for (item in all) {
+            item.update(item.packageName in disabledPackages)
+        }
+
+        all.sortedWith(SelectableApp.labelComparator)
     }
 
-    override fun items() =
-        packages.combine(disableInAppBrowserInSelectedPackages) { packages, disableInAppBrowserInSelectedPackages ->
-            packages.map {
-                it to (it.packageName in disableInAppBrowserInSelectedPackages)
-            }.sortByValueAndName().toMap()
-        }
+    val _filteredItems = items.combine(_searchFilter) { items, filter ->
+        items.filterIf(filter = filter.isNotEmpty()) { item ->
+            item.compareLabel.contains(filter, ignoreCase = true)
+        } as List
+    }
 
-    override fun save(selected: BrowserCommonSelected) = launchIO {
-        selected.forEach { (activityInfo, enabled) ->
-            repository.insertOrDelete(enabled, activityInfo.packageName)
+    fun search(query: String?) {
+        _searchFilter.value = query ?: ""
+    }
+
+    fun save(app: SelectableApp, enabled: Boolean): Job {
+        return launchIO {
+            repository.insertOrDelete(enabled, app.packageName)
         }
+    }
+}
+
+class SelectableApp(
+    val applicationInfo: ApplicationInfo,
+    val label: String,
+    var selected: MutableState<Boolean> = mutableStateOf(false),
+) {
+    val compareLabel = label.lowercase()
+    val packageName: String = applicationInfo.packageName
+
+    companion object {
+        val labelComparator = compareBy<SelectableApp> { it.compareLabel }
+    }
+
+    fun loadIcon(context: Context): ImageBitmap {
+        return applicationInfo.loadIcon(context.packageManager).toImageBitmap()
+    }
+
+    fun update(newState: Boolean) {
+        selected.value = newState
     }
 }

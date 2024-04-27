@@ -147,3 +147,10 @@ fun <K : Any, T> SaneLazyListScope.group(
 ) {
     group(size = items.size) { items(values = items, key = key, content = content) }
 }
+
+fun <K : Any, T : GroupValueProvider<K>, V> SaneLazyListScope.group(
+    values: Map<T, V>,
+    content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
+) {
+    group(size = values.size) { items(values = values, content = content) }
+}

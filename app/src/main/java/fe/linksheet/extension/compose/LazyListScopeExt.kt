@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.Searchbar
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,7 +41,7 @@ inline fun <K, V> LazyListScope.items(
     items: Map<K, V>,
     key: (K) -> Any,
     contentType: (K) -> Any? = { null },
-    crossinline itemContent: @Composable LazyItemScope.(K, V) -> Unit
+    crossinline itemContent: @Composable LazyItemScope.(K, V) -> Unit,
 ) = items.forEach { (k, v) ->
     item(key.invoke(k), contentType.invoke(k)) {
         itemContent(k, v)
@@ -51,7 +52,7 @@ inline fun <K, V> LazyListScope.items(
 fun LazyListScope.searchHeader(
     @StringRes subtitleId: Int,
     filter: String,
-    searchFilter: MutableStateFlow<String>
+    searchFilter: MutableStateFlow<String>,
 ) {
     stickyHeader(key = "header") {
         Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
@@ -101,7 +102,19 @@ fun <T> SaneLazyListScope.listHelper(
     }
 }
 
-
+fun <K : Any, T : GroupValueProvider<K>, V> SaneLazyListScope.mapHelper(
+    @StringRes noItems: Int,
+    @StringRes notFound: Int? = null,
+    mapState: ListState,
+    values: Map<T, V>?,
+    content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
+) {
+    if (mapState == ListState.Items) {
+        group(values = values!!, content = content)
+    } else {
+        loader(noItems, notFound, mapState)
+    }
+}
 
 inline fun <K, V> LazyListScope.mapHelper(
     @StringRes noItems: Int,
@@ -121,7 +134,7 @@ inline fun <K, V> LazyListScope.mapHelper(
 fun LazyListScope.loader(
     @StringRes noItems: Int,
     @StringRes notFound: Int? = null,
-    listState: ListState
+    listState: ListState,
 ) {
     item(key = "loader") {
         Column(

@@ -1,21 +1,15 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.shortcuts
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.*
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavigateListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultLeadingIconClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.module.viewmodel.SettingsViewModel
-import org.koin.androidx.compose.koinViewModel
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 
 internal typealias Nav = RouteNavItem
 
@@ -84,11 +78,11 @@ fun ShortcutsRoute(
     ) {
         group(size = 3) {
             item(key = R.string.settings_shortcuts__title_default_browser) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    headlineId = R.string.settings_shortcuts__title_default_browser,
-                    subtitleId = R.string.settings_shortcuts__subtitle_default_browser,
+                    headlineContent = textContent(R.string.settings_shortcuts__title_default_browser),
+                    supportingContent = textContent(R.string.settings_shortcuts__subtitle_default_browser),
                     onClick = {
 
                     }
@@ -96,11 +90,11 @@ fun ShortcutsRoute(
             }
 
             item(key = R.string.settings_shortcuts__title_link_handlers) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    headlineId = R.string.settings_shortcuts__title_link_handlers,
-                    subtitleId = R.string.settings_shortcuts__subtitle_default_browser,
+                    headlineContent = textContent(R.string.settings_shortcuts__title_link_handlers),
+                    supportingContent = textContent(R.string.settings_shortcuts__subtitle_default_browser),
                     onClick = {
 
                     }
@@ -108,11 +102,11 @@ fun ShortcutsRoute(
             }
 
             item(key = R.string.settings_shortcuts__title_connected_apps) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    headlineId = R.string.settings_shortcuts__title_connected_apps,
-                    subtitleId = R.string.settings_shortcuts__subtitle_default_browser,
+                    headlineContent = textContent(R.string.settings_shortcuts__title_connected_apps),
+                    supportingContent = textContent(R.string.settings_shortcuts__subtitle_default_browser),
                     onClick = {
 
                     }

@@ -4,9 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceTrailingRadioButtonListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.ui.ThemeV2
 import fe.linksheet.util.AndroidVersion
@@ -22,8 +24,8 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
             item(key = R.string.theme_enable_material_you, contentType = ContentTypeDefaults.SingleGroupItem) {
                 PreferenceSwitchListItem(
                     preference = viewModel.themeMaterialYou,
-                    headlineContentTextId = R.string.theme_enable_material_you,
-                    supportingContentTextId = R.string.theme_enable_material_you_explainer
+                    headlineContent = textContent(R.string.theme_enable_material_you),
+                    supportingContent = textContent(R.string.theme_enable_material_you_explainer)
                 )
             }
 
@@ -32,12 +34,13 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
 
         group(size = 4) {
             items(values = themes) { item, padding, shape ->
-                PreferenceTrailingRadioButtonListItem(
+                PreferenceRadioButtonListItem(
                     shape = shape,
                     padding = padding,
                     value = item,
                     preference = viewModel.themeV2,
-                    headlineContentTextId = item.id
+                    position = ContentPosition.Trailing,
+                    headlineContent = textContent(item.id)
                 )
             }
 
@@ -47,8 +50,8 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
                     shape = shape,
                     padding = padding,
                     preference = viewModel.themeAmoled,
-                    headlineContentTextId = R.string.theme_enable_amoled,
-                    supportingContentTextId = R.string.theme_enable_amoled_explainer
+                    headlineContent = textContent(R.string.theme_enable_amoled),
+                    supportingContent = textContent(R.string.theme_enable_amoled_explainer)
                 )
             }
         }

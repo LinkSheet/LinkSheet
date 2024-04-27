@@ -3,11 +3,12 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.notificatio
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.SwitchPreferenceItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.rememberTwoLinePreferenceGroup
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -58,8 +59,8 @@ fun NewNotificationSettingsRoute(
                 shape = shape,
                 padding = padding,
                 preference = data.preference,
-                headlineContentTextId = data.headlineId,
-                supportingContentTextId = data.subtitleId
+                headlineContent = textContent(data.headlineId),
+                supportingContent = textContent(data.subtitleId),
             )
         }
     }

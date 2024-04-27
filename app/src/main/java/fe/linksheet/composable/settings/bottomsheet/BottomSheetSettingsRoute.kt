@@ -1,8 +1,6 @@
 package fe.linksheet.composable.settings.bottomsheet
 
 import androidx.annotation.StringRes
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -14,10 +12,12 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.preference.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -81,8 +81,8 @@ fun BottomSheetSettingsRoute(
         item(key = R.string.display_grid_layout, contentType = ContentTypeDefaults.SingleGroupItem) {
             PreferenceSwitchListItem(
                 preference = viewModel.gridLayout,
-                headlineContentTextId = R.string.display_grid_layout,
-                supportingContentTextId = R.string.display_grid_layout_explainer
+                headlineContent = Resource.textContent(R.string.display_grid_layout),
+                supportingContent = Resource.textContent(R.string.display_grid_layout_explainer),
             )
         }
 
@@ -102,8 +102,9 @@ fun BottomSheetSettingsRoute(
                             viewModel.usageStatsSorting(it)
                         }
                     },
-                    headlineContentText = stringResource(id = R.string.usage_stats_sorting),
-                    supportingContentText = stringResource(id = R.string.usage_stats_sorting_explainer)
+                    position = ContentPosition.Trailing,
+                    headlineContent = Resource.textContent(R.string.usage_stats_sorting),
+                    supportingContent = Resource.textContent(R.string.usage_stats_sorting_explainer)
                 )
             }
 
@@ -118,8 +119,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.enableRequestPrivateBrowsingButton,
-                    headlineContentText = stringResource(id = R.string.enable_request_private_browsing_button),
-                    supportingContentText = stringResource(
+                    headlineContent = Resource.textContent(id = R.string.enable_request_private_browsing_button),
+                    supportingContent = Resource.textContent(
                         id = R.string.enable_request_private_browsing_button_explainer,
                         browsers
                     )
@@ -131,8 +132,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.dontShowFilteredItem,
-                    headlineContentTextId = R.string.dont_show_filtered_item,
-                    supportingContentTextId = R.string.dont_show_filtered_item_explainer
+                    headlineContent = Resource.textContent(R.string.dont_show_filtered_item),
+                    supportingContent = Resource.textContent(R.string.dont_show_filtered_item_explainer),
                 )
             }
 
@@ -141,8 +142,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.hideBottomSheetChoiceButtons,
-                    headlineContentTextId = R.string.hide_bottom_sheet_choice_buttons,
-                    supportingContentTextId = R.string.hide_bottom_sheet_choice_buttons_explainer
+                    headlineContent = Resource.textContent(R.string.hide_bottom_sheet_choice_buttons),
+                    supportingContent = Resource.textContent(R.string.hide_bottom_sheet_choice_buttons_explainer),
                 )
             }
 
@@ -151,8 +152,8 @@ fun BottomSheetSettingsRoute(
 //                    shape = shape,
 //                    padding = padding,
 //                    preference = viewModel.bottomSheetNativeLabel,
-//                    headlineContentTextId = R.string.show_native_label,
-//                    supportingContentTextId = R.string.show_native_label_explainer
+//                    headlineContent = textContent(R.string.show_native_label),
+//                    supportingContent = textContent(R.string.show_native_label_explainer),
 //                )
 //            }
         }
@@ -166,10 +167,8 @@ fun BottomSheetSettingsRoute(
                     padding = padding,
                     onClick = { tapConfigDialog.open(type) },
                     role = Role.Button,
-                    headlineContent = { Text(text = stringResource(id = type.headline)) },
-                    supportingContent = {
-                        Text(text = stringResource(id = pref().id))
-                    },
+                    headlineContent = Resource.textContent(type.headline),
+                    supportingContent = Resource.textContent(pref().id),
 //                    trailingContent = {
 //                        FilledTonalIconButton(onClick = {}) {
 //                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
@@ -187,8 +186,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.expandOnAppSelect,
-                    headlineContentTextId = R.string.expand_on_app_select,
-                    supportingContentTextId = R.string.expand_on_app_select_explainer
+                    headlineContent = Resource.textContent(R.string.expand_on_app_select),
+                    supportingContent = Resource.textContent(R.string.expand_on_app_select_explainer),
                 )
             }
         }
@@ -201,8 +200,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.previewUrl,
-                    headlineContentTextId = R.string.preview_url,
-                    supportingContentTextId = R.string.preview_url_explainer
+                    headlineContent = Resource.textContent(R.string.preview_url),
+                    supportingContent = Resource.textContent(R.string.preview_url_explainer),
                 )
             }
 
@@ -211,8 +210,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.hideAfterCopying,
-                    headlineContentTextId = R.string.hide_after_copying,
-                    supportingContentTextId = R.string.hide_after_copying_explainer
+                    headlineContent = Resource.textContent(R.string.hide_after_copying),
+                    supportingContent = Resource.textContent(R.string.hide_after_copying_explainer),
                 )
             }
 
@@ -221,8 +220,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.enableIgnoreLibRedirectButton,
-                    headlineContentTextId = R.string.enable_ignore_libredirect_button,
-                    supportingContentTextId = R.string.enable_ignore_libredirect_button_explainer
+                    headlineContent = Resource.textContent(R.string.enable_ignore_libredirect_button),
+                    supportingContent = Resource.textContent(R.string.enable_ignore_libredirect_button_explainer),
                 )
             }
         }

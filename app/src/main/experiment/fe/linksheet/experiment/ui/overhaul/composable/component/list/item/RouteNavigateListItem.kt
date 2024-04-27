@@ -5,8 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultLeadingIconClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.TwoLineGroupValueProvider
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 
 
 @Stable
@@ -24,11 +25,11 @@ fun RouteNavigateListItem(
     padding: PaddingValues = PaddingValues(),
     navigate: (String) -> Unit,
 ) {
-    DefaultLeadingIconClickableShapeListItem(
+    DefaultIconClickableShapeListItem(
         shape = shape,
         padding = padding,
-        headlineId = data.headlineId,
-        subtitleId = data.subtitleId,
+        headlineContent = textContent(data.headlineId),
+        supportingContent = textContent(data.subtitleId),
         icon = data.icon,
         onClick = { navigate(data.route) }
     )

@@ -19,9 +19,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import fe.fastforwardkt.FastForwardRules
@@ -31,8 +29,10 @@ import fe.linksheet.*
 import fe.linksheet.R
 import fe.linksheet.composable.util.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultLeadingIconClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Annotated.Companion.buildAnnotatedTextContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppSignature
@@ -56,9 +56,9 @@ fun NewAboutSettingsRoute(
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.about), onBackPressed = onBackPressed) {
         item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
-            DefaultLeadingIconClickableShapeListItem(
-                headlineId = R.string.donate,
-                subtitleId = R.string.donate_subtitle,
+            DefaultIconClickableShapeListItem(
+                headlineContent = textContent(R.string.donate),
+                supportingContent = textContent(R.string.donate_subtitle),
                 icon = Icons.Outlined.AutoAwesome,
                 onClick = {
 //                    uriHandler.openUri(BuildConfig.LINK_DISCORD)
@@ -71,33 +71,33 @@ fun NewAboutSettingsRoute(
 
         group(size = 3) {
             item(key = R.string.credits) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    headlineId = R.string.credits,
-                    subtitleId = R.string.credits_explainer,
+                    headlineContent = textContent(R.string.credits),
+                    supportingContent = textContent(R.string.credits_explainer),
                     icon = Icons.Outlined.Link,
                     onClick = { navigate(creditsSettingsRoute) }
                 )
             }
 
             item(key = R.string.github) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    headlineId = R.string.github,
-                    subtitleId = R.string.github_explainer,
+                    headlineContent = textContent(R.string.github),
+                    supportingContent = textContent(R.string.github_explainer),
                     icon = Icons.Outlined.Code,
                     onClick = { uriHandler.openUri(linksheetGithub) }
                 )
             }
 
             item(key = R.string.discord) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    headlineId = R.string.discord,
-                    subtitleId = R.string.discord_explainer,
+                    headlineContent = textContent(R.string.discord),
+                    supportingContent = textContent(R.string.discord_explainer),
                     icon = Icons.Outlined.Forum,
                     onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
                 )
@@ -113,18 +113,18 @@ fun NewAboutSettingsRoute(
 //                    padding = padding,
 //                    shape = shape,
 //                    headlineId = R.string.built_by,
-//                    subtitleId = buildType.stringRes,
+//                    supportingContent = buildType.stringRes,
 //                    icon = Icons.AutoMirrored.Filled.Chat,
 //                    onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
 //                )
 //            }
 
             item(key = R.string.app_name) { padding, shape ->
-                DefaultLeadingIconClickableShapeListItem(
+                DefaultIconClickableShapeListItem(
                     padding = padding,
                     shape = shape,
-                    headlineText = AnnotatedString(stringResource(id = R.string.version)),
-                    subtitleText = buildAnnotatedString {
+                    headlineContent = textContent(R.string.version),
+                    supportingContent = buildAnnotatedTextContent {
                         addNameValue(stringResource(id = R.string.built_at), buildDate).appendLine()
                         addNameValue(
                             stringResource(id = R.string.commit),
@@ -157,7 +157,6 @@ fun NewAboutSettingsRoute(
                             stringResource(id = R.string.libredirect_version),
                             LibRedirectMetadata.fetchedAt.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
                         )
-
                     },
 
                     icon = Icons.Outlined.Build,
@@ -272,12 +271,12 @@ private fun LibraryLastUpdatedRow(
     fetchedAt: Long,
     icon: ImageVector,
 ) {
-    DefaultLeadingIconClickableShapeListItem(
+    DefaultIconClickableShapeListItem(
         padding = padding,
         shape = shape,
         icon = icon,
-        headlineText = AnnotatedString(stringResource(id = headline)),
-        subtitleText = buildAnnotatedString {
+        headlineContent = textContent(headline),
+        supportingContent = buildAnnotatedTextContent {
             addNameValue(
                 stringResource(id = R.string.last_updated),
                 fetchedAt.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)

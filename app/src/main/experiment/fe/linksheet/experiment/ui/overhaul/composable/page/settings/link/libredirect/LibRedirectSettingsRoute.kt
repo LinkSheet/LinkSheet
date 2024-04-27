@@ -2,25 +2,24 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.libred
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import fe.linksheet.R
 import fe.linksheet.composable.util.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.ComposableTextContent.Companion.content
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.compose.loader
@@ -49,10 +48,9 @@ fun LibRedirectSettingsRoute(
             SwitchListItem(
                 checked = viewModel.enableLibRedirect(),
                 onCheckedChange = { viewModel.enableLibRedirect(it) },
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.enable_libredirect))
-                },
-                supportingContent = {
+                position = ContentPosition.Trailing,
+                headlineContent = textContent(R.string.enable_libredirect),
+                supportingContent = content {
                     LinkableTextView(
                         id = R.string.enable_libredirect_explainer,
                         style = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onSurface)
@@ -152,6 +150,6 @@ inline fun <T> SaneLazyListScope.listHelper(
 @Composable
 private fun instanceUrl(
     instance: String,
-) = if (instance == LibRedirectDefault.randomInstance) stringResource(
+) = if (instance == LibRedirectDefault.randomInstance) textContent(
     id = R.string.random_instance
 ) else instance

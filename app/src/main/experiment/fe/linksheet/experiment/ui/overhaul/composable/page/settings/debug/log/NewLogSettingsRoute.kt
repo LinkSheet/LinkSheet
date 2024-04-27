@@ -6,7 +6,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FileUpload
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -16,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavHostController
 import fe.kotlin.extension.time.localizedString
 import fe.linksheet.LogTextViewerRoute
@@ -25,6 +27,9 @@ import fe.linksheet.composable.util.listState
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Default.Companion.textOrNull
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Default.Companion.text
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.logTextViewerSettingsRoute
@@ -50,13 +55,8 @@ fun DefaultClickableShapeListItem2(
         padding = padding,
         onClick = onClick,
         role = Role.Button,
-        overlineContent = { Text(text = stringResource(id = R.string.log_session_headline)) },
-        headlineContent = { Text(text = headline) },
-        supportingContent = subtitle?.let {
-            {
-                Text(text = it, fontFamily = FontFamily.Monospace)
-            }
-        },
+        headlineContent = text(headline),
+        supportingContent = textOrNull(subtitle),
         trailingContent = {
             Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
@@ -92,10 +92,8 @@ fun NewLogSettingsRoute(
             ClickableShapeListItem(
                 shape = ShapeListItemDefaults.SingleShape,
                 role = Role.Button,
-                headlineContent = { Text(text = startupTime) },
-                supportingContent = {
-                    Text(text = stringResource(id = R.string.current_session))
-                },
+                headlineContent = text(startupTime),
+                supportingContent = textContent(id = R.string.current_session),
                 onClick = {
                     navigate(logTextViewerSettingsRoute.buildNavigation(LogTextViewerRoute(startupTime, null)))
                 }

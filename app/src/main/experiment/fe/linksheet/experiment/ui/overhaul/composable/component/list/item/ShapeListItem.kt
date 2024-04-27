@@ -1,23 +1,23 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalTextContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
 import fe.linksheet.extension.compose.enabled
 
-
-typealias OptionalContent = @Composable (() -> Unit)?
 
 object ShapeListItemDefaults {
     // TODO: Use shape defaults or our own? Can we provide our own via LocalComposition or MaterialTheme?
@@ -42,6 +42,10 @@ object ShapeListItemDefaults {
         bottomStart = ShapeLarge
     )
 
+    val EmptyPadding = PaddingValues()
+    val BaseModifier = Modifier.height(intrinsicSize = IntrinsicSize.Min)
+    val BaseContentModifier = Modifier.fillMaxHeight()
+
     @Composable
     fun colors(
         containerColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh,
@@ -56,56 +60,100 @@ object ShapeListItemDefaults {
     }
 }
 
+@Stable
+enum class ContentPosition {
+    Leading, Trailing;
+
+    fun decide(position: ContentPosition, primary: OptionalContent, other: OptionalContent): OptionalContent {
+        return if (position == this) primary else other
+    }
+}
+
 @Composable
 fun ClickableShapeListItem(
-    modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
+    modifier: Modifier = ShapeListItemDefaults.BaseModifier,
     enabled: Boolean = true,
     onClick: () -> Unit,
     role: Role? = null,
     shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = PaddingValues(),
+    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     colors: ListItemColors = ShapeListItemDefaults.colors(),
-    headlineContent: @Composable () -> Unit,
-    overlineContent: OptionalContent = null,
-    supportingContent: OptionalContent = null,
+    position: ContentPosition,
+    headlineContent: TextContent,
+    overlineContent: OptionalTextContent = null,
+    supportingContent: OptionalTextContent = null,
+    primaryContent: OptionalContent = null,
+    otherContent: OptionalContent = null,
+) {
+    ClickableShapeListItem(
+        modifier = modifier,
+        enabled = enabled,
+        onClick = onClick,
+        role = role,
+        shape = shape,
+        padding = padding,
+        colors = colors,
+        headlineContent = headlineContent,
+        overlineContent = overlineContent,
+        supportingContent = supportingContent,
+        leadingContent = ContentPosition.Leading.decide(position, primaryContent, otherContent),
+        trailingContent = ContentPosition.Trailing.decide(position, primaryContent, otherContent)
+    )
+}
+
+@Composable
+fun ClickableShapeListItem(
+    modifier: Modifier = ShapeListItemDefaults.BaseModifier,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+    role: Role? = null,
+    shape: Shape = ShapeListItemDefaults.SingleShape,
+    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    colors: ListItemColors = ShapeListItemDefaults.colors(),
+    headlineContent: TextContent,
+    overlineContent: OptionalTextContent = null,
+    supportingContent: OptionalTextContent = null,
     leadingContent: OptionalContent = null,
     trailingContent: OptionalContent = null,
 ) {
-    ListItem(
+    ShapeListItem(
         modifier = Modifier
-            .clip(shape)
             .clickable(enabled = enabled, role = role, onClick = onClick)
             .enabled(enabled)
-            .then(modifier)
-            .padding(padding),
+            .then(modifier),
+        shape = shape,
+        padding = padding,
         colors = colors,
-        overlineContent = overlineContent,
         headlineContent = headlineContent,
-        leadingContent = leadingContent,
+        overlineContent = overlineContent,
         supportingContent = supportingContent,
+        leadingContent = leadingContent,
         trailingContent = trailingContent
     )
 }
 
 @Composable
 fun ShapeListItem(
-    modifier: Modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min),
+    modifier: Modifier = ShapeListItemDefaults.BaseModifier,
     shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = PaddingValues(),
+    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     colors: ListItemColors = ShapeListItemDefaults.colors(),
-    headlineContent: @Composable () -> Unit,
-    overlineContent: OptionalContent = null,
-    supportingContent: OptionalContent = null,
+    headlineContent: TextContent,
+    overlineContent: OptionalTextContent = null,
+    supportingContent: OptionalTextContent = null,
     leadingContent: OptionalContent = null,
     trailingContent: OptionalContent = null,
 ) {
     ListItem(
-        modifier = Modifier.clip(shape).then(modifier).padding(padding),
+        modifier = Modifier
+            .clip(shape)
+            .then(modifier)
+            .padding(padding),
         colors = colors,
-        overlineContent = overlineContent,
-        headlineContent = headlineContent,
+        overlineContent = overlineContent?.content,
+        headlineContent = headlineContent.content,
         leadingContent = leadingContent,
-        supportingContent = supportingContent,
+        supportingContent = supportingContent?.content,
         trailingContent = trailingContent
     )
 }

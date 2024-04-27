@@ -62,7 +62,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
-          path: | 
+          path: |
             app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/*.apk
             app/build/outputs/mapping/$BUILD_FLAVOR_TYPE/*.txt
 

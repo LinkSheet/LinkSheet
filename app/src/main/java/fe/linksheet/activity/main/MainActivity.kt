@@ -29,14 +29,16 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
         setContent(edgeToEdge = true) {
             BoxAppHost {
                 val snackbarHostState = remember { SnackbarHostState() }
+                val navController = rememberNavController()
 
                 LaunchedEffect(key1 = eventState.value) {
                     if (eventState.value is UiEvent.ShowSnackbar) {
                         snackbarHostState.showSnackbar(message = (eventState.value as UiEvent.ShowSnackbar).text)
+                    } else if (eventState.value is UiEvent.NavigateTo) {
+                        navController.navigate((eventState.value as UiEvent.NavigateTo).route)
                     }
                 }
 
-                val navController = rememberNavController()
                 AddIntentDeepLinkHandler(navController = navController)
 
                 if (BuildType.current.allowDebug) {

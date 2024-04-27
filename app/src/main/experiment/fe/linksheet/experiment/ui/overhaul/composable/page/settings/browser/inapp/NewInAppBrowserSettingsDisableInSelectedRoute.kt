@@ -1,105 +1,137 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.isTraversalGroup
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import fe.linksheet.extension.compose.clickable
+import fe.linksheet.R
+import fe.linksheet.composable.util.listState
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.ComposableTextContent.Companion.content
+import fe.linksheet.extension.compose.listHelper
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewInAppBrowserSettingsDisableInSelectedRoute(
-    navController: NavHostController,
     onBackPressed: () -> Unit,
-    navigate: (String) -> Unit,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel(),
 ) {
-//    SearchBarSample()
-//    SaneScaffoldSettingsPage(
-//        headline = stringResource(id = R.string.disable_in_selected),
-//        onBackPressed = onBackPressed
-//    ) {
-//
-//    }
-//
-//    BrowserCommonPackageSelectorRoute(
-//        headlineId = R.string.disable_in_selected,
-//        subtitleId = R.string.disable_in_selected_explainer,
-//        noItemsId = R.string.no_apps_found,
-//        navController = navController,
-//        viewModel = viewModel
-//    )
-}
+    val items by viewModel._filteredItems.collectOnIO()
+    val searchFilter by viewModel.searchFilter.collectOnIO()
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchBarSample() {
-    var text by rememberSaveable { mutableStateOf("") }
-    var active by rememberSaveable { mutableStateOf(false) }
+    val listState = remember(items?.size, searchFilter) {
+        listState(items, searchFilter)
+    }
 
-    Box(
-        Modifier
-            .fillMaxSize()
-            .semantics { isTraversalGroup = true }) {
-        SearchBar(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .semantics { traversalIndex = -1f },
-            query = text,
-            onQueryChange = { text = it },
-            onSearch = { active = false },
-            active = active,
-            onActiveChange = {
-                active = it
-            },
-            placeholder = { Text("Hinted search text") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-            trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
-        ) {
-            repeat(4) { idx ->
-                val resultText = "Suggestion $idx"
-                ListItem(
-                    headlineContent = { Text(resultText) },
-                    supportingContent = { Text("Additional info") },
-                    leadingContent = { Icon(Icons.Filled.Star, contentDescription = null) },
-                    modifier = Modifier
-                        .clickable {
-                            text = resultText
-                            active = false
+    val context = LocalContext.current
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
+    SaneSettingsScaffold(
+        topBar = {
+            Column(
+                modifier = Modifier.padding(bottom = SaneLazyColumnPageDefaults.BottomSpacing),
+                verticalArrangement = Arrangement.spacedBy((-1).dp)
+            ) {
+                TopAppBar(
+                    title = { Text(text = stringResource(id = R.string.disable_in_selected)) },
+                    navigationIcon = {
+                        IconButton(onClick = onBackPressed) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                                contentDescription = null
+                            )
                         }
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                    },
+                    scrollBehavior = scrollBehavior
+                )
+
+                DockedSearchBar(
+                    modifier = Modifier.padding(horizontal = SaneLazyColumnPageDefaults.HorizontalSpacing),
+                    inputField = {
+                        SearchBarDefaults.InputField(
+                            query = searchFilter,
+                            onQueryChange = { viewModel.search(it) },
+                            onSearch = {},
+                            expanded = false,
+                            onExpandedChange = {},
+                            placeholder = { Text(text = stringResource(id = R.string.settings__title_filter_apps)) },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Rounded.Search,
+                                    contentDescription = null
+                                )
+                            },
+                            trailingIcon = {
+                                if (searchFilter.isNotEmpty()) {
+                                    IconButton(onClick = { viewModel.search(null) }) {
+                                        Icon(
+                                            imageVector = Icons.Rounded.Clear,
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
+                            }
+                        )
+                    },
+                    expanded = false,
+                    onExpandedChange = {},
+                    content = {}
                 )
             }
         }
-
-        LazyColumn(
-            contentPadding = PaddingValues(start = 16.dp, top = 72.dp, end = 16.dp, bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            val list = List(100) { "Text $it" }
-            items(count = list.size) {
-                Text(list[it],
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp))
+    ) { padding ->
+        SaneLazyColumnPageLayout(padding = padding) {
+            listHelper(
+                noItems = R.string.no_apps_found,
+                notFound = R.string.no_such_app_found,
+                listState = listState,
+                list = items,
+                listKey = { it.packageName }
+            ) { item, padding, shape ->
+                CheckboxListItem(
+                    checked = item.selected.value,
+                    onCheckedChange = {
+                        item.update(it)
+                        viewModel.save(item, it)
+                    },
+                    padding = padding,
+                    shape = shape,
+                    position = ContentPosition.Trailing,
+                    headlineContent = content {
+                        Text(text = item.label, overflow = TextOverflow.Ellipsis, maxLines = 1)
+                    },
+                    supportingContent = content {
+                        Text(text = item.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
+                    },
+                    otherContent = {
+                        Image(
+                            bitmap = item.loadIcon(context),
+                            contentDescription = item.label,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                )
             }
         }
     }

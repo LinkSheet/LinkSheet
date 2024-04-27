@@ -708,4 +708,6 @@
     <string name="settings_shortcuts__title_link_handlers">Link handlers</string>
     <string name="settings_shortcuts__title_connected_apps">Connected apps</string>
     <string name="settings_shortcuts__subtitle_default_browser">Open default browser settings page</string>
+    <string name="settings__title_filter_apps">Filter apps</string>
+    <string name="settings__title_select_apps">Select apps</string>
 </resources>

@@ -1,13 +1,8 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.page
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.exclude
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -36,10 +31,8 @@ fun SaneScaffoldSettingsPage(
         canScroll = { true }
     )
 
-    Scaffold(
-        modifier = modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+    SaneSettingsScaffold(
+        modifier = modifier.then(Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)),
         topBar = {
             LargeTopAppBar(
                 colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
@@ -66,7 +59,25 @@ fun SaneScaffoldSettingsPage(
         },
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
-        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
         content = { padding -> SaneLazyColumnPageLayout(padding = padding, content = content) }
+    )
+}
+
+@Composable
+fun SaneSettingsScaffold(
+    modifier: Modifier = Modifier,
+    topBar: @Composable () -> Unit,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
+    contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        topBar = topBar,
+        floatingActionButton = floatingActionButton,
+        floatingActionButtonPosition = floatingActionButtonPosition,
+        contentWindowInsets = contentWindowInsets,
+        content = content
     )
 }

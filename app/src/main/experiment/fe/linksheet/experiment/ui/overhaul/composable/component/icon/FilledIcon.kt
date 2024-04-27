@@ -1,6 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.icon
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -16,6 +15,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
+object IconDefaults {
+    val ContainerSize = 40.0.dp
+}
+
 @Composable
 fun FilledIcon(
     enabled: Boolean = true,
@@ -23,19 +26,18 @@ fun FilledIcon(
     colors: IconButtonColors = IconButtonDefaults.filledIconButtonColors(),
     imageVector: ImageVector,
     contentDescription: String?,
-) = Surface(
-    shape = shape,
-    color = colors.containerColor(enabled),
-    contentColor = colors.contentColor(enabled),
 ) {
-    Box(
-        modifier = Modifier.size(width = 40.0.dp, height = 40.0.dp),
-        contentAlignment = Alignment.Center
+    Surface(
+        shape = shape,
+        color = colors.containerColor(enabled),
+        contentColor = colors.contentColor(enabled),
     ) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = contentDescription
-        )
+        Box(modifier = Modifier.size(IconDefaults.ContainerSize), contentAlignment = Alignment.Center) {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = contentDescription
+            )
+        }
     }
 }
 

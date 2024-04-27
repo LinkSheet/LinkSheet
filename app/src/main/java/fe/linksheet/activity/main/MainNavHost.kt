@@ -265,11 +265,8 @@ fun MainNavHost(
         }
 
         animatedComposable(route = inAppBrowserSettingsDisableInSelectedRoute) {
-            val flag = false
-            if (uiOverhaul && flag) {
-                NewInAppBrowserSettingsDisableInSelectedRoute(
-                    navController = navController, onBackPressed = onBackPressed, navigate = navigate
-                )
+            if (uiOverhaul) {
+                NewInAppBrowserSettingsDisableInSelectedRoute(onBackPressed = onBackPressed)
             } else {
                 InAppBrowserSettingsDisableInSelectedRoute(navController = navController)
             }

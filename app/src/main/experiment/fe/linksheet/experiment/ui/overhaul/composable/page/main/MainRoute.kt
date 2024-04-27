@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -20,14 +20,10 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.debug.DebugComposable
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.compose.OnFocused
-import fe.linksheet.extension.compose.focusGainedEvents
-import fe.linksheet.extension.compose.header
+import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -87,7 +83,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             navigationIcon = {
                 IconButton(onClick = { navController.navigate(settingsRoute) }) {
                     Icon(
-                        imageVector = Icons.Default.Settings,
+                        imageVector = Icons.Outlined.Settings,
                         contentDescription = stringResource(id = R.string.settings)
                     )
                 }

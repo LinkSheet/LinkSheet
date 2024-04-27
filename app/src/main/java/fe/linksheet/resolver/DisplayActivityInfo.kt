@@ -28,7 +28,6 @@ data class DisplayActivityInfo(
         }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
         fun List<DisplayActivityInfoStatus>.sortByValueAndName() = sortedWith(valueAndLabelComparator)
-
     }
 
     private val activityInfo = resolvedInfo.activityInfo

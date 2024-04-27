@@ -1,25 +1,28 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import fe.android.preference.helper.compose.StatePreference
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGroupDslMarker
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGroupScope
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.TwoLineGroupValueProvider
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
 
 @Stable
 class SwitchPreferenceItem(
     val preference: StatePreference<Boolean>,
-    headlineId: Int,
-    subtitleId: Int,
-) : TwoLineGroupValueProvider(headlineId, subtitleId)
+    headlineContent: TextContent,
+    supportingContent: TextContent,
+) : ListItemData(headlineContent = headlineContent, subtitleContent = supportingContent)
 
 @RememberGroupDslMarker
-class TwoLinePreferenceScope : RememberGroupScope<Int, SwitchPreferenceItem>() {
-    fun add(preference: StatePreference<Boolean>, @StringRes headlineId: Int, @StringRes subtitleId: Int) {
-        add(SwitchPreferenceItem(preference, headlineId, subtitleId))
+class TwoLinePreferenceScope : RememberGroupScope<Any, SwitchPreferenceItem>() {
+    fun add(
+        preference: StatePreference<Boolean>, headlineContent: TextContent,
+        supportingContent: TextContent,
+    ) {
+        add(SwitchPreferenceItem(preference, headlineContent, supportingContent))
     }
 }
 

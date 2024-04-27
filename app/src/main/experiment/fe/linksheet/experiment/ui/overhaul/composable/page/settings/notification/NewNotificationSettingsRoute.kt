@@ -17,28 +17,28 @@ private object NewNotificationSettingsRouteData {
         return listOf(
             SwitchPreferenceItem(
                 vm.urlCopiedToast,
-                R.string.url_copied_toast,
-                R.string.url_copied_toast_explainer
+                textContent(R.string.url_copied_toast),
+                textContent(R.string.url_copied_toast_explainer),
             ),
             SwitchPreferenceItem(
                 vm.downloadStartedToast,
-                R.string.download_started_toast,
-                R.string.download_started_toast_explainer
+                textContent(R.string.download_started_toast),
+                textContent(R.string.download_started_toast_explainer),
             ),
             SwitchPreferenceItem(
                 vm.openingWithAppToast,
-                R.string.opening_with_app_toast,
-                R.string.opening_with_app_toast_explainer
+                textContent(R.string.opening_with_app_toast),
+                textContent(R.string.opening_with_app_toast_explainer),
             ),
             SwitchPreferenceItem(
                 vm.resolveViaToast,
-                R.string.resolve_via_toast,
-                R.string.resolve_via_toast_explainer
+                textContent(R.string.resolve_via_toast),
+                textContent(R.string.resolve_via_toast_explainer),
             ),
             SwitchPreferenceItem(
                 vm.resolveViaFailedToast,
-                R.string.resolve_via_failed_toast,
-                R.string.resolve_via_failed_toast_explainer
+                textContent(R.string.resolve_via_failed_toast),
+                textContent(R.string.resolve_via_failed_toast_explainer),
             )
         )
     }
@@ -59,8 +59,8 @@ fun NewNotificationSettingsRoute(
                 shape = shape,
                 padding = padding,
                 preference = data.preference,
-                headlineContent = textContent(data.headlineId),
-                supportingContent = textContent(data.subtitleId),
+                headlineContent = data.headlineContent,
+                supportingContent = data.subtitleContent,
             )
         }
     }

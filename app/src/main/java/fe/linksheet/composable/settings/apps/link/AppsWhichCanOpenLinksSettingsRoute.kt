@@ -83,7 +83,8 @@ fun AppsWhichCanOpenLinksSettingsRoute(
             val newState =  !linkHandlingAllowed
             val result = setDomainState(packageName, "all", newState)
             if (packageName == allPackages) {
-                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", newState)
+                // TODO: Revert previous state instead of always setting to !newState
+                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", !newState)
             }
 
             result

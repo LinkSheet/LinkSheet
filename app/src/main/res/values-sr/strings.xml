@@ -30,7 +30,7 @@
     <string name="enable_amp2html">Омогући Amp2Html</string>
     <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
     <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено.</string>
-    <string name="branch">Грана:</string>
+    <string name="branch">Грана</string>
     <string name="always_disable">Увек онемогући</string>
     <string name="copy_to_clipboard">Копирај у привремену меморију</string>
     <string name="preview_url_explainer">Приказује URL адресу на коју је кликнуто (након што је обрађена)</string>
@@ -63,7 +63,7 @@
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">Остало</string>
-    <string name="commit">Извршење:</string>
+    <string name="commit">Извршење</string>
     <string name="enable_send_button_explainer">Приказује дугме у доњем листу које вам омогућава да делите URL с другим апликацијама као да сте га изабрали из менија „Дели са“</string>
     <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">
 \nлинк</annotation>.</string>
@@ -108,7 +108,7 @@
     <string name="success">Успешно</string>
     <string name="onboarding0_headline">Време је да се врати</string>
     <string name="request_timeout_explainer">Дефинише колико секунди ће LinkSheet чекати да се веза успостави. Подешавање на 0 онемогућава временско ограничење, али се то не препоручује.</string>
-    <string name="discord_explainer">Дођите да ћаскате на нашем Discord серверу!</string>
+    <string name="discord_explainer">Ћаскајте о LinkSheet-у на нашем Discord серверу!</string>
     <string name="github">GitHub</string>
     <string name="configure">Конфигуриши</string>
     <string name="show_linksheet_referrer">Прикажи LinkSheet упућивача</string>
@@ -128,7 +128,7 @@
     <string name="whitelisted_browsers">Прегледачи на белој листи</string>
     <string name="amoled_black">AMOLED црна</string>
     <string name="export_log">Извоз евиденције</string>
-    <string name="type">Тип:</string>
+    <string name="type">Тип</string>
     <string name="bottom_sheet_explainer">Распоред мреже, сортирање по употреби, прилагођавање додира, URL трака</string>
     <string name="onboarding6_highlight">преференце</string>
     <string name="shizuku_explainer">Shizuku омогућава да LinkSheet директно комуницира са системским API-јима</string>
@@ -140,9 +140,9 @@
     <string name="redirect_resolve_type_remote">удаљени сервер</string>
     <string name="finish">Заврши</string>
     <string name="donate_subtitle">Ако желите да донирате и набавите <b>LinkSheet Pro</b></string>
-    <string name="flavor">Варијанта:</string>
+    <string name="flavor">Варијанта</string>
     <string name="advanced">Напредно</string>
-    <string name="built_at">Направљено (UTC):</string>
+    <string name="built_at">Направљено (UTC)</string>
     <string name="shizuku_explainer_short">Директно комуницирајте са системским API-јима</string>
     <string name="back">Назад</string>
     <string name="clear_urls">ClearURLs</string>
@@ -153,7 +153,7 @@
     <string name="include_fingerprint">Укључи отисак прста уређаја (препоручено)</string>
     <string name="default_apps">Префериране апликације</string>
     <string name="just_once">Само једном</string>
-    <string name="github_pipeline_build">Направљено и потписано од стране GitHub радног тока</string>
+    <string name="github_pipeline_build">Направио и потписао CI</string>
     <string name="disable_in_selected_explainer">Онемогућите прегледач у апликацији у изабраним апликацијама, без обзира на то шта апликација жели да користи</string>
     <string name="fastfoward_rules">Користи FastForward правила</string>
     <string name="version">LinkSheet верзија</string>
@@ -220,7 +220,7 @@
     <string name="always">Увек</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Изаберите апликацију</string>
-    <string name="github_workflow_run_id">ID радног тока издања:</string>
+    <string name="github_workflow_run_id">ID радног тока издања</string>
     <string name="resolved_via">%s решено путем %s</string>
     <string name="instance_not_available_anymore">Инстанца више није доступна!</string>
     <string name="onboarding2_highlight">вашим</string>
@@ -271,7 +271,7 @@
     <string name="onboarding4_paragraph_1">У Android-у 12, Google је представио верификоване линкове за апликације. Апликације сада могу криптографски да верификују власништво над доменима. Када се додирне линк до таквог домена и инсталира се одговарајућа апликација, аутоматски ће се отворити подразумевано, прескачући избор који је претходно био дат кориснику у потпуности.</string>
     <string name="set_as_browser_explainer">Додирните овде да бисте подесили LinkSheet као подразумевани прегледач</string>
     <string name="current_session">Тренутна сесија</string>
-    <string name="built_by">Направљено и потписано од</string>
+    <string name="built_by">Информације о издању</string>
     <string name="compat_installed">LinkSheetCompat је већ инсталиран</string>
     <string name="launch_onboaring_explainer">Тестирајте ток започињања</string>
     <string name="always_disable_explainer">Увек онемогућите прегледач у апликацији, без обзира на то шта апликација жели да користи</string>
@@ -325,7 +325,7 @@
     <string name="shizuku">Shizuku интеграција</string>
     <string name="dont_show_filtered_item_explainer">Никада се неће приказати горњи одељак који предлаже последњу коришћену апликацију за хост на који је кликнуто</string>
     <string name="enable_copy_button">Омогући дугме за копирање</string>
-    <string name="version_name">Потпуни идентификатор:</string>
+    <string name="version_name">Потпуни идентификатор</string>
     <string name="configure_explainer">Додрните овде да бисте конфигурисали LinkSheetCompat</string>
     <string name="feature_flags">Експерименталне функције</string>
     <string name="onboarding2_headline">Много подешавања
@@ -364,7 +364,7 @@
     <string name="resolve_via_toast">Приказивање искачуће поруке при разрешењу URL адресе</string>
     <string name="download_started_toast">Искачућа порука о започетом преузимању</string>
     <string name="notifications">Обавештења</string>
-    <string name="just_version">Верзија</string>
+    <string name="just_version">Верзије</string>
     <string name="resolve_via_toast_explainer">Приказивање искачуће поруке када се URL адреса разреши преко спољне услуге</string>
     <string name="copy_version_information">Копирај информацију о верзији</string>
     <string name="dev">Програмер</string>
@@ -471,15 +471,15 @@
     <string name="theme_mode">Режим теме</string>
     <string name="theme_enable_amoled">Чисто црна</string>
     <string name="tap_customization">Прилагођавање додира</string>
-    <string name="tap_customization_single_tap">Један додир</string>
-    <string name="tap_customization_double_tap">Дулли додир</string>
+    <string name="tap_customization_single_tap">Радња једноструким додиром</string>
+    <string name="tap_customization_double_tap">Радња двоструким додиром</string>
     <string name="select_app">Изабери апликацију</string>
     <string name="tap_customization_dialog_title">Конфигуришите %s</string>
     <string name="tap_customization_dialog_title_double_tap">дупли додир</string>
     <string name="tap_customization_dialog_title_long_tap">дуги додир</string>
     <string name="tap_customization_dialog_text">Изаберите радњу коју треба извршити</string>
     <string name="loading_link_subtitle">LinkSheet обавља радње линка. Ово ће потрајати само неколико секунди</string>
-    <string name="tap_customization_long_tap">Дуги додир</string>
+    <string name="tap_customization_long_tap">Радња дугим додиром</string>
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
@@ -518,4 +518,20 @@
     <string name="Miscellaneous">Разно</string>
     <string name="switch_profile">Омогући промену профила</string>
     <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -&gt; Посебан приступ апликацијама -&gt; Повезане радне и личне апликације</string>
+    <string name="log_session_headline">Сесија у</string>
+    <string name="external">Спољно</string>
+    <string name="external_versions">Спољне верзије</string>
+    <string name="build_info">Информације о издању</string>
+    <string name="settings__title_updates">Ажурирања</string>
+    <string name="settings__subtitle_updates">Ажурирај LinkSheet на најновију верзију</string>
+    <string name="settings__title_shortcuts">Пречице</string>
+    <string name="settings_shortcuts__title_default_browser">Подразумевани прегледач</string>
+    <string name="settings_shortcuts__title_link_handlers">Руковаоци линковима</string>
+    <string name="settings_shortcuts__title_connected_apps">Повезане апликације</string>
+    <string name="settings_shortcuts__subtitle_default_browser">Отвори страницу с подешавањима подразумеваног прегледача</string>
+    <string name="help">Помоћ</string>
+    <string name="help_subtitle">Туторијал, вики, питања и одговори</string>
+    <string name="verified_link_handlers">Верификовани руковаоци линковима</string>
+    <string name="verified_link_handlers_subtitle">Контролиши стање верификације домена апликације</string>
+    <string name="settings__subtitle_shortcuts">Подешавања подразумевананог прегледача, руковања линковима, повезаних апликација</string>
 </resources>

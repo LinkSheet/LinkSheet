@@ -38,8 +38,6 @@ import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.LocalActivity
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -58,7 +56,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
     val apps by viewModel.appsFiltered.collectOnIO()
     val filter by viewModel.searchFilter.collectOnIO()
-    val linkHandlingAllowed by viewModel.linkHandlingAllowed.collectOnIO(true)
+    val linkHandlingAllowed by viewModel.filterDisabledOnly.collectOnIO(true)
     val lastEmitted by viewModel.lastEmitted.collectOnIO()
 
     val listState = remember(apps?.size, filter, linkHandlingAllowed) {
@@ -95,6 +93,10 @@ fun AppsWhichCanOpenLinksSettingsRoute(
 
     fun openDefaultSettings(info: DisplayActivityInfo) {
         activity.startActivityWithConfirmation(viewModel.makeOpenByDefaultSettingsIntent(info))
+    }
+
+    fun openDefaultSettings(info: Any) {
+//        activity.startActivityWithConfirmation(viewModel.makeOpenByDefaultSettingsIntent(info))
     }
 
     val context = LocalContext.current
@@ -137,9 +139,10 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                             FilterChips(
                                 currentState = linkHandlingAllowed,
                                 onClick = {
-                                    coroutineScope.launch {
-                                        viewModel.pagerState.scrollToPage(if (it) 0 else 1)
-                                    }
+                                    viewModel.filterDisabledOnly.value = it
+//                                    coroutineScope.launch {
+//                                        viewModel.pagerState.scrollToPage(if (it) 0 else 1)
+//                                    }
                                 },
                                 values = listOf(
                                     FilterChipValue(
@@ -183,7 +186,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                     notFound = R.string.no_such_app_found,
                     listState = listState,
                     list = apps,
-                    listKey = { it.flatComponentName },
+                    listKey = { it.applicationInfo.packageName },
                 ) { info ->
                     ClickableRow(
                         onClick = {
@@ -196,7 +199,7 @@ fun AppsWhichCanOpenLinksSettingsRoute(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            bitmap = info.getIcon(context),
+                            bitmap = info.loadIcon(context),
                             contentDescription = info.label,
                             modifier = Modifier.size(42.dp)
                         )

@@ -1,17 +1,12 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ListItemFilledIconButton
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
@@ -63,14 +58,11 @@ fun NewInAppBrowserSettingsRoute(
                     headlineContent = textContent(R.string.disable_in_selected),
                     supportingContent = textContent(R.string.disable_in_selected_explainer),
                     otherContent = {
-                        Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
-                            FilledTonalIconButton(onClick = { navigate(inAppBrowserSettingsDisableInSelectedRoute) }) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Settings,
-                                    contentDescription = stringResource(id = R.string.disable_in_selected)
-                                )
-                            }
-                        }
+                        ListItemFilledIconButton(
+                            imageVector = Icons.Outlined.Settings,
+                            contentDescription = stringResource(id = R.string.disable_in_selected),
+                            onClick = { navigate(inAppBrowserSettingsDisableInSelectedRoute) }
+                        )
                     }
                 )
             }

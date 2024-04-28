@@ -1,35 +1,49 @@
 package fe.linksheet.util
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.Stable
+import fe.linksheet.experiment.ui.overhaul.composable.AppListItemData
 
 object VerifiedDomainUtil {
     @RequiresApi(Build.VERSION_CODES.S)
-    fun ResolveInfo.hasVerifiedDomains(manager: DomainVerificationManager, linkHandlingAllowed: Boolean): Boolean {
-        val packageName = activityInfo.packageName
-//        val state = manager.getDomainVerificationUserState(packageName) ?: return false
-//        if (state.hostToStateMap.isEmpty()) return false
-//
-//        return if (linkHandlingAllowed) {
-//            state.hostToStateMap.any { it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
-//        } else {
-//            state.hostToStateMap.all { it.value != DomainVerificationUserState.DOMAIN_STATE_VERIFIED }
-//        }
+    fun getStatus(
+        manager: DomainVerificationManager,
+        applicationInfo: ApplicationInfo,
+        label: CharSequence,
+    ): PackageDomainVerificationStatus? {
+        val userState = manager.getDomainVerificationUserState(applicationInfo.packageName)
+        if (userState == null || userState.hostToStateMap.isEmpty()) return null
 
+        val stateNone = mutableListOf<String>()
+        val stateSelected = mutableListOf<String>()
+        val stateVerified = mutableListOf<String>()
 
-        return manager.getDomainVerificationUserState(packageName)?.let { state ->
-            val linkHandling = if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
-            val hasAnyVerifiedOrSelected = state.hostToStateMap.any {
-                it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED
+        for ((host, state) in userState.hostToStateMap) {
+            when (state) {
+                DomainVerificationUserState.DOMAIN_STATE_NONE -> stateNone.add(host)
+                DomainVerificationUserState.DOMAIN_STATE_SELECTED -> stateSelected.add(host)
+                DomainVerificationUserState.DOMAIN_STATE_VERIFIED -> stateVerified.add(host)
             }
+        }
 
-            linkHandling && hasAnyVerifiedOrSelected
-        } ?: false
+        return PackageDomainVerificationStatus(applicationInfo, label, stateNone, stateSelected, stateVerified)
     }
 
+    @Stable
+    class PackageDomainVerificationStatus(
+        applicationInfo: ApplicationInfo,
+        label: CharSequence,
+        val stateNone: MutableList<String>,
+        val stateSelected: MutableList<String>,
+        val stateVerified: MutableList<String>,
+    ) : AppListItemData(applicationInfo, label.toString()) {
+        val disabled = stateVerified.isEmpty() && stateSelected.isEmpty()
+    }
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun ResolveInfo.canHandleDomains(manager: DomainVerificationManager): Boolean {

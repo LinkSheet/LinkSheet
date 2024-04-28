@@ -710,4 +710,12 @@
     <string name="settings_shortcuts__subtitle_default_browser">Open default browser settings page</string>
     <string name="settings__title_filter_apps">Filter apps</string>
     <string name="settings__title_select_apps">Select apps</string>
+    <string name="settings_verified_link_handlers__text_disabled">Handling disabled</string>
+    <string name="settings_verified_link_handlers__text_user_apps">User apps</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all">Show all</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">All</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Enabled handlers</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Enabled</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Disabled handlers</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Disabled</string>
 </resources>

@@ -84,10 +84,12 @@ class AppsWhichCanOpenLinksViewModel(
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val apps = if (!uiOverhaul()) baseApps.combine(filterDisabledOnly) { apps, filterDisabledOnly ->
-        apps.filter { !filterDisabledOnly || it.disabled }
+        apps.filter { !(filterDisabledOnly && it.enabled) }
     } else baseApps.combine(filterMode) { apps, filterMode ->
         if (filterMode == FilterMode.ShowAll) return@combine apps
-        apps.filter { if (filterMode == FilterMode.EnabledOnly) it.disabled else !it.disabled }
+
+        val enabledMode = filterMode == FilterMode.EnabledOnly
+        apps.filter { if (enabledMode) it.enabled else !it.enabled }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

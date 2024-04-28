@@ -31,18 +31,37 @@ object VerifiedDomainUtil {
             }
         }
 
-        return PackageDomainVerificationStatus(applicationInfo, label, stateNone, stateSelected, stateVerified)
+
+//        val linkHandling =
+//            if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
+//        val linkHandling = if (linkHandlingAllowed) state.isLinkHandlingAllowed else !state.isLinkHandlingAllowed
+//        val hasAnyVerifiedOrSelected = state.hostToStateMap.any {
+//            it.value == DomainVerificationUserState.DOMAIN_STATE_VERIFIED || it.value == DomainVerificationUserState.DOMAIN_STATE_SELECTED
+//        }
+//
+//        linkHandling && hasAnyVerifiedOrSelected
+
+        return PackageDomainVerificationStatus(
+            applicationInfo,
+            label,
+            userState.isLinkHandlingAllowed,
+            stateNone,
+            stateSelected,
+            stateVerified
+        )
     }
 
     @Stable
     class PackageDomainVerificationStatus(
         applicationInfo: ApplicationInfo,
         label: CharSequence,
+        val isLinkHandlingAllowed: Boolean,
         val stateNone: MutableList<String>,
         val stateSelected: MutableList<String>,
         val stateVerified: MutableList<String>,
     ) : AppListItemData(applicationInfo, label.toString()) {
-        val disabled = stateVerified.isEmpty() && stateSelected.isEmpty()
+        val enabled = isLinkHandlingAllowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
+//        val disabled = stateNone.isNotEmpty()
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

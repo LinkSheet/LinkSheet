@@ -191,17 +191,14 @@
     <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">In-App browser</string>
     <string name="in_app_browser_subtitle">Override In-App browser settings</string>
-    <string name="use_app_settings">Use app settings</string>
-    <string name="use_app_settings_explainer">Let app decide if the In-App browser should be used</string>
-    <string name="always_disable">Always disable</string>
-    <string name="always_disable_explainer">Always disable the In-App browser, regardless of what the app wants to use
-    </string>
+    <string name="use_app_settings">Default</string>
+    <string name="use_app_settings_explainer">Apps decide if the In-App browser should be used</string>
+    <string name="always_disable">Force disable</string>
+    <string name="always_disable_explainer">Disable the In-App browser in all apps</string>
     <string name="browser">Browser</string>
     <string name="browser_explainer">Browser mode, In-App browser</string>
-    <string name="disable_in_selected">Disable in selected</string>
-    <string name="disable_in_selected_explainer">Disable In-App browser in selected apps, regardless of what the app
-        wants to use
-    </string>
+    <string name="disable_in_selected">Force disable…</string>
+    <string name="disable_in_selected_explainer">Disable the In-App browser in selected apps</string>
     <string name="no_apps_which_can_handle_links_found">No apps which can handle links have been found.</string>
     <string name="normal">Normal</string>
     <string name="in_app">In-App</string>

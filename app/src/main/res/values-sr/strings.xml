@@ -57,7 +57,7 @@
     <string name="enable_shizuku">Омогући (експерименталну) Shizuku интеграцију</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
-    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линкдо фајла. Ово може имати<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation></string>
+    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може имати<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation> \u0020</string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
@@ -534,4 +534,14 @@
     <string name="verified_link_handlers">Верификовани руковаоци линковима</string>
     <string name="verified_link_handlers_subtitle">Контролиши стање верификације домена апликације</string>
     <string name="settings__subtitle_shortcuts">Подешавања подразумевананог прегледача, руковања линковима, повезаних апликација</string>
+    <string name="settings__title_filter_apps">Филтрирање апликација</string>
+    <string name="settings__title_select_apps">Избор апликација</string>
+    <string name="settings_verified_link_handlers__text_disabled">Руковање онемогућено</string>
+    <string name="settings_verified_link_handlers__text_user_apps">Корисничке апликације</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all">Прикажи све</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Омогућени руковаоци</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Омогућено</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Онемогућено</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Све</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Онемогућени руковаоци</string>
 </resources>

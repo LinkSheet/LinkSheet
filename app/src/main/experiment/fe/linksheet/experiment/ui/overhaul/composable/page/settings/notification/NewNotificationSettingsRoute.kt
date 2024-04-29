@@ -54,6 +54,8 @@ fun NewNotificationSettingsRoute(
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.notifications), onBackPressed = onBackPressed) {
+        divider(stringRes = R.string.settings_notifications__divider_toasts)
+
         group(items = notificationSettings) { data, padding, shape ->
             PreferenceSwitchListItem(
                 shape = shape,

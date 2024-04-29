@@ -16,5 +16,4 @@ class NotificationSettingsViewModel(
     val openingWithAppToast = preferenceRepository.asState(AppPreferences.openingWithAppToast)
     val resolveViaToast = preferenceRepository.asState(AppPreferences.resolveViaToast)
     val resolveViaFailedToast = preferenceRepository.asState(AppPreferences.resolveViaFailedToast)
-
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastForEachIndexed
 import fe.linksheet.R
+import fe.linksheet.experiment.ui.overhaul.composable.component.util.ProvideContentColorTextStyle
 import kotlin.math.max
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -141,20 +142,6 @@ fun ExperimentalFailureSheetColumn(
 
 internal val DialogMinWidth = 280.dp
 internal val DialogMaxWidth = 560.dp
-
-@Composable
-internal fun ProvideContentColorTextStyle(
-    contentColor: Color,
-    textStyle: TextStyle,
-    content: @Composable () -> Unit,
-) {
-    val mergedStyle = LocalTextStyle.current.merge(textStyle)
-    CompositionLocalProvider(
-        LocalContentColor provides contentColor,
-        LocalTextStyle provides mergedStyle,
-        content = content
-    )
-}
 
 private val ButtonsMainAxisSpacing = 8.dp
 private val ButtonsCrossAxisSpacing = 12.dp

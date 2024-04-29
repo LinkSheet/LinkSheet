@@ -180,7 +180,7 @@ fun VerifiedLinkHandlersRoute(
                         },
                         supportingContent = content {
 //                            Column(modifier = Modifier.animateContentSize()) {
-                                Text(text = item.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
+                            Text(text = item.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
 //                                if (expanded) {
 //                                    Row(horizontalArrangement = Arrangement.End) {
 //                                        Button(onClick = { /*TODO*/ }) {
@@ -221,7 +221,11 @@ fun VerifiedLinkHandlersRoute(
                                 imageVector = Icons.Outlined.Settings,
                                 contentDescription = stringResource(id = R.string.settings),
                                 onClick = {
-                                    activity.startActivityWithConfirmation(viewModel.makeOpenByDefaultSettingsIntent(item.packageName))
+                                    activity.startActivityWithConfirmation(
+                                        viewModel.makeOpenByDefaultSettingsIntent(
+                                            item.packageName
+                                        )
+                                    )
                                 }
                             )
                         }
@@ -254,13 +258,13 @@ private fun StateFilter(
                     )
                 )
             },
-//            leadingIcon = {
-//                Icon(
-//                    modifier = Modifier.size(FilterChipDefaults.IconSize),
-//                    imageVector = selection.loadIcon(context),
-//                    contentDescription = null,
-//                )
-//            },
+            leadingIcon = {
+                Icon(
+                    modifier = Modifier.size(FilterChipDefaults.IconSize),
+                    imageVector = selection.icon,
+                    contentDescription = null,
+                )
+            },
             trailingIcon = {
                 Icon(
                     modifier = Modifier.rotate(rotation),
@@ -282,15 +286,27 @@ private fun StateFilter(
                     },
                     text = {
                         Text(text = stringResource(id = mode.stringRes))
+                    },
+                    leadingIcon = {
+                        Icon(
+//                            modifier = Modifier.size(FilterChipDefaults.IconSize),
+                            imageVector = mode.icon,
+                            contentDescription = null
+                        )
                     }
-//                    , leadingIcon = {
-//                        Icon(
-//                            imageVector = mode.loadIcon(context),
-//                            contentDescription = null
-//                        )
-//                    }
                 )
             }
+
+//            DropdownMenuItem(
+//                text = { Text("Send Feedback") },
+//                onClick = { /* Handle send feedback! */ },
+//                leadingIcon = {
+//                    Icon(
+//                        Icons.Outlined.Email,
+//                        contentDescription = null
+//                    )
+//                },
+//                trailingIcon = { Text("F11", textAlign = TextAlign.Center) })
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalTextContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
@@ -144,11 +145,8 @@ fun ShapeListItem(
     leadingContent: OptionalContent = null,
     trailingContent: OptionalContent = null,
 ) {
-    ListItem(
-        modifier = Modifier
-            .clip(shape)
-            .then(modifier)
-            .padding(padding),
+    CustomListItem(
+        modifier = Modifier.clip(shape).then(modifier).padding(padding),
         colors = colors,
         overlineContent = overlineContent?.content,
         headlineContent = headlineContent.content,

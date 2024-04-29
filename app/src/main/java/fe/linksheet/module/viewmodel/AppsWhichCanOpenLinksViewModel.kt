@@ -130,34 +130,40 @@ class AppsWhichCanOpenLinksViewModel(
 sealed class FilterMode(
     @StringRes val shortStringRes: Int,
     @StringRes val stringRes: Int,
-    private val createIcon: (Context) -> ImageVector,
+    val icon: ImageVector,
+//    private val createIcon: (Context) -> ImageVector,
 ) {
-    private var icon: ImageVector? = null
-
-    fun loadIcon(context: Context): ImageVector {
-        if (icon == null) icon = createIcon(context)
-        return icon!!
-    }
+//    private var icon: ImageVector? = null
+//
+//    fun loadIcon(context: Context): ImageVector {
+//        if (icon == null) icon = createIcon(context)
+//        return icon!!
+//    }
 
     data object ShowAll : FilterMode(
         R.string.settings_verified_link_handlers__text_handling_filter_all_short,
         R.string.settings_verified_link_handlers__text_handling_filter_all_short,
-        { Icons.Outlined.FilterAltOff }
+//        {
+        Icons.Outlined.FilterAltOff
+//}
     )
 
     data object EnabledOnly : FilterMode(
         R.string.settings_verified_link_handlers__text_handling_filter_enabled_short,
         R.string.settings_verified_link_handlers__text_handling_filter_enabled_short,
-        { Icons.Outlined.Visibility }
+//        {
+        Icons.Outlined.Visibility
+//}
     )
 
     data object DisabledOnly : FilterMode(
         R.string.settings_verified_link_handlers__text_handling_filter_disabled_short,
         R.string.settings_verified_link_handlers__text_handling_filter_disabled_short,
-        {
-            Icons.Outlined.VisibilityOff
+        Icons.Outlined.VisibilityOff
+//        {
+//            Icons.Outlined.VisibilityOff
 //            ImageVector.vectorResource(res = it.resources, resId = R.drawable.domain_verification_off_24)
-        }
+//        }
     )
 
     companion object {

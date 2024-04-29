@@ -4,10 +4,21 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextOverflow
+
+@Stable
+data class TextOptions(
+    val maxLines: Int = Int.MAX_VALUE,
+    val overflow: TextOverflow = TextOverflow.Clip,
+)
+
+val DefaultTextOptions = TextOptions()
+val LocalTextOptions = compositionLocalOf(structuralEqualityPolicy()) { DefaultTextOptions }
 
 typealias OptionalTextContent = TextContent?
 
@@ -21,7 +32,8 @@ interface TextContent {
 class Default(text: String) : TextContent {
     override val key = text
     override val content: @Composable () -> Unit = {
-        Text(text = text)
+        val textOptions = LocalTextOptions.current
+        Text(text = text, overflow = textOptions.overflow, maxLines = textOptions.maxLines)
     }
 
     companion object {
@@ -39,7 +51,12 @@ class Default(text: String) : TextContent {
 class Resource(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
     override val key = id
     override val content: @Composable () -> Unit = {
-        Text(text = stringResource(id = id, formatArgs = formatArgs))
+        val textOptions = LocalTextOptions.current
+        Text(
+            text = stringResource(id = id, formatArgs = formatArgs),
+            overflow = textOptions.overflow,
+            maxLines = LocalTextOptions.current.maxLines
+        )
     }
 
     companion object {
@@ -54,7 +71,8 @@ class Resource(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
 class Annotated(annotatedString: AnnotatedString) : TextContent {
     override val key = annotatedString.text
     override val content: @Composable () -> Unit = {
-        Text(text = annotatedString)
+        val textOptions = LocalTextOptions.current
+        Text(text = annotatedString, overflow = textOptions.overflow, maxLines = textOptions.maxLines)
     }
 
     companion object {
@@ -66,7 +84,8 @@ class Annotated(annotatedString: AnnotatedString) : TextContent {
 
 
 @Stable
-class ComposableTextContent(override val content: @Composable () -> Unit, override val key: Any = Unit) : TextContent {
+class ComposableTextContent(override val content: @Composable () -> Unit, override val key: Any = Unit) :
+    TextContent {
     companion object {
         fun content(content: @Composable () -> Unit): ComposableTextContent {
             return ComposableTextContent(content)

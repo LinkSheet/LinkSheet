@@ -12,15 +12,13 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.LocalTextOptions
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.ProvideContentColorTextStyle
 import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextOptions
 
 
 object CustomListItemDefaults {
     val ContainerHeightOneLine = 56.0.dp
-    val ContainerHeightTwoLine = 72.0.dp
+    val ContainerHeightTwoLine = 76.0.dp
     val ContainerHeightThreeLine = 88.0.dp
 
     val VerticalPadding = 8.dp

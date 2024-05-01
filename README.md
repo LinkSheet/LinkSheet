@@ -118,7 +118,7 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 * LinkSheet was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 * [MastodonRedirect](https://github.com/zacharee/MastodonRedirect) provided a reference for the Shizuku implementation
-* Inspiration has been taken from [Seal](https://github.com/JunkFood02/Seal)
+* Inspiration has been taken from [Seal](https://github.com/JunkFood02/Seal) and [GMS-Flags](https://github.com/polodarb/GMS-Flags)
 
 ## Star History
 

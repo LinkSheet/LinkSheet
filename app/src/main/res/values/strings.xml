@@ -737,6 +737,8 @@
         <item quantity="other">%d disabled hosts</item>
     </plurals>
     <string name="settings_about__divider_external_versions">External versions</string>
-    <string name="settings_credits__app__name_seal">Seal</string>
-    <string name="settings_credits__app__name_seal_desc">Design inspiration</string>
+    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_credit_reason_seal">Design inspiration</string>
+    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">Design inspiration</string>
 </resources>

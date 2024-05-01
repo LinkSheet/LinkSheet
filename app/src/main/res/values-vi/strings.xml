@@ -351,7 +351,6 @@
     <string name="donate_learn_more">Tìm hiểu thêm</string>
     <string name="manual_build">Được xây dựng và ký thủ công bởi 1fexd</string>
     <string name="flavor">Hương vị</string>
-    <string name="type">Loại</string>
     <string name="enable_linksheet_compat_explainer">Thực đơn có thể được tìm thấy trong thực đơn phụ \"Ứng dụng\" và khi được cài đặt, có thể chặn các yêu cầu đối với một số ứng dụng gốc nhất định.</string>
     <string name="new_bottomsheet_explainer">Phiên bản LinkSheet này có trang dưới cùng mới nhờ <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Vui lòng cung cấp phản hồi trên Discord, Github hoặc qua email.
 \n
@@ -408,7 +407,6 @@
     <string name="telemetry_configure_title">Phân tích</string>
     <string name="resolve_activity_failure">Không thể giải quyết hoạt động!</string>
     <string name="onboarding_2_card_explainer">Shizuku cho phép LinkSheet vô hiệu hóa hành vi xử lý liên kết mặc định của tất cả các ứng dụng cùng một lúc, thay vì phải vô hiệu hóa chúng theo cách thủ công cho từng ứng dụng riêng lẻ (đây là bước tiếp theo).</string>
-    <string name="commit">Cam kết</string>
     <string name="onboarding_2_subtitle">Nếu bạn cài đặt nhiều ứng dụng, Shizuku có thể cải thiện đáng kể trải nghiệm của bạn</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="onboarding_2_start_shizuku">Khởi động Shizuku</string>
@@ -416,7 +414,6 @@
     <string name="hide_bottom_sheet_choice_buttons_explainer">Ẩn các nút \"Một lần\" và \"Luôn luôn\" ở trang dưới cùng</string>
     <string name="onboarding_2_title">Bạn có muốn sử dụng Shizuku không?</string>
     <string name="onboarding_2_request_shizuku_permission">Yêu cầu quyền</string>
-    <string name="branch">Nhánh</string>
     <string name="onboarding_2_install_shizuku">Cài đặt Shizuku</string>
     <string name="onboarding_2_shizuku_enabled">Kế tiếp</string>
     <string name="last_rule_update">Cập nhật quy tắc cuối cùng từ thượng nguồn (UTC):</string>

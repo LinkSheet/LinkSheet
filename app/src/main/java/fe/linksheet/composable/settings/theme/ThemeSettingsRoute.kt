@@ -8,7 +8,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.Conten
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.ui.ThemeV2
 import fe.linksheet.util.AndroidVersion
@@ -33,7 +33,7 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
         }
 
         group(size = 4) {
-            items(values = themes) { item, padding, shape ->
+            items(array = themes) { item, padding, shape ->
                 PreferenceRadioButtonListItem(
                     shape = shape,
                     padding = padding,

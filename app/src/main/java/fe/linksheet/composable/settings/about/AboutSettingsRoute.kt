@@ -182,15 +182,15 @@ fun AboutSettingsRoute(
                     buildDate
                 )
 
-                val commit = buildNameValueAnnotatedString(
-                    stringResource(id = R.string.commit),
-                    BuildConfig.COMMIT.substring(0, 7)
-                )
+//                val commit = buildNameValueAnnotatedString(
+//                    stringResource(id = R.string.commit),
+//                    BuildConfig.COMMIT.substring(0, 7)
+//                )
 
-                val branch = buildNameValueAnnotatedString(
-                    stringResource(id = R.string.branch),
-                    BuildConfig.BRANCH
-                )
+//                val branch = buildNameValueAnnotatedString(
+//                    stringResource(id = R.string.branch),
+//                    BuildConfig.BRANCH
+//                )
 
                 val fullVersionName = buildNameValueAnnotatedString(
                     stringResource(id = R.string.version_name),
@@ -201,11 +201,11 @@ fun AboutSettingsRoute(
                     stringResource(id = R.string.flavor),
                     BuildConfig.FLAVOR
                 )
-
-                val type = buildNameValueAnnotatedString(
-                    stringResource(id = R.string.type),
-                    BuildConfig.BUILD_TYPE
-                )
+//
+//                val type = buildNameValueAnnotatedString(
+//                    stringResource(id = R.string.type),
+//                    BuildConfig.BUILD_TYPE
+//                )
 
                 val workflow = if (BuildConfig.GITHUB_WORKFLOW_RUN_ID != null) {
                     buildNameValueAnnotatedString(
@@ -230,9 +230,9 @@ fun AboutSettingsRoute(
                     },
                     content = {
                         SubtitleText(subtitle = flavor)
-                        SubtitleText(subtitle = type)
-                        SubtitleText(subtitle = commit)
-                        SubtitleText(subtitle = branch)
+//                        SubtitleText(subtitle = type)
+//                        SubtitleText(subtitle = commit)
+//                        SubtitleText(subtitle = branch)
                         SubtitleText(subtitle = fullVersionName)
 
                         if (workflow != null) {
@@ -253,12 +253,12 @@ fun AboutSettingsRoute(
                                 lineSeparator,
                                 flavor,
                                 lineSeparator,
-                                type,
-                                lineSeparator,
-                                commit,
-                                lineSeparator,
-                                branch,
-                                lineSeparator,
+//                                type,
+//                                lineSeparator,
+//                                commit,
+//                                lineSeparator,
+//                                branch,
+//                                lineSeparator,
                                 fullVersionName
                             )
 

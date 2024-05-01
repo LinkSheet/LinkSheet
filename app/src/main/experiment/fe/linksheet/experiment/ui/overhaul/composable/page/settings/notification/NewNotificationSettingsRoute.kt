@@ -8,7 +8,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffol
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.SwitchPreferenceItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.rememberTwoLinePreferenceGroup
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -56,7 +56,7 @@ fun NewNotificationSettingsRoute(
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.notifications), onBackPressed = onBackPressed) {
         divider(stringRes = R.string.settings_notifications__divider_toasts)
 
-        group(items = notificationSettings) { data, padding, shape ->
+        group(list = notificationSettings) { data, padding, shape ->
             PreferenceSwitchListItem(
                 shape = shape,
                 padding = padding,

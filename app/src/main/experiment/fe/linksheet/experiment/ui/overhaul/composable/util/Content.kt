@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.ui.overhaul.composable.component.util
+package fe.linksheet.experiment.ui.overhaul.composable.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

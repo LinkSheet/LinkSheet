@@ -1,9 +1,11 @@
 package fe.linksheet.module.viewmodel.util
 
 import android.content.Context
+import android.os.Build
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.gson.extension.json.`object`.plus
+import fe.linksheet.extension.android.getCurrentLanguageTag
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -12,6 +14,7 @@ import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.util.AppInfo
+import fe.linksheet.util.BuildInfo
 
 
 class LogViewCommon(
@@ -41,15 +44,18 @@ class LogViewCommon(
         logEntries: List<LogEntry>,
     ): String {
         val (fingerprint, preferences, redact, throwable) = settings
+
         return gson.toJson(jsonObject {
-            "device_basics" += AppInfo.getDeviceBasics(context)
+            "build_info" += AppInfo.buildInfo
+            "device_info" += AppInfo.deviceInfo
+
+            "locale" += context.getCurrentLanguageTag()
+
             if (fingerprint) {
-                "device_info" += (AppInfo.deviceInfo + AppInfo.androidFingerprint)
+                "fingerprint" += Build.FINGERPRINT
             }
 
-            "app_info" += AppInfo.appInfo
             "active_experiments" += Experiments.getActive(experimentRepository)
-
             if (preferences) {
                 "preferences" += AppPreferences.toJsonArray(logPreferences(redact))
             }

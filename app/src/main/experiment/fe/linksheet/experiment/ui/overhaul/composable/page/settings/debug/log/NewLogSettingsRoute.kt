@@ -27,9 +27,9 @@ import fe.linksheet.composable.util.listState
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Default.Companion.textOrNull
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Default.Companion.text
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.textOrNull
+import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.logTextViewerSettingsRoute

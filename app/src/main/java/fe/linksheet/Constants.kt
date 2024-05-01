@@ -1,13 +1,13 @@
 package fe.linksheet
 
-import fe.linksheet.util.AppSignature
-
 private const val github = "https://github.com"
 private const val linksheetOrg = "$github/LinkSheet"
 
 
 const val openLinkWithGithub = "$github/tasomaniac/OpenLinkWith"
 const val mastodonRedirectGithub = "$github/zacharee/MastodonRedirect"
+const val sealGithub = "$github/JunkFood02/Seal"
+
 const val linksheetGithub = "$linksheetOrg/LinkSheet"
 
 const val linkSheetCompatGithubReleases = "$linksheetOrg/compat/releases"

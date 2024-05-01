@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

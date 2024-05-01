@@ -60,7 +60,7 @@ class AppsWhichCanOpenLinksViewModel(
     val searchFilter = MutableStateFlow("")
 
     //    val pagerState = PagerState { 2 }
-//    val linkHandlingAllowed = snapshotFlow { pagerState.currentPage == 0 }
+//    val linkHandlingAllowed = snapshotFlow { pagerState.currentPage == 0 }s
     val filterDisabledOnly = MutableStateFlow(true)
     val userApps = MutableStateFlow(true)
 
@@ -76,6 +76,7 @@ class AppsWhichCanOpenLinksViewModel(
             )
         }
     }
+//        .combine(lastEmitted) { installedPackages, _ -> installedPackages }
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val baseApps = installedPackages.combine(userApps) { apps, userApps ->

@@ -11,9 +11,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultIconClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -34,10 +35,10 @@ fun NewDebugSettingsRoute(
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
         group(2) {
             item(key = R.string.logs) { padding, shape ->
-                DefaultIconClickableShapeListItem(
+                DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
                     supportingContent = textContent(R.string.logs_explainer),
-                    icon = Icons.AutoMirrored.Outlined.List,
+                    icon = vector(Icons.AutoMirrored.Outlined.List),
                     shape = shape,
                     padding = padding,
                     onClick = { navigate(logViewerSettingsRoute) }
@@ -45,11 +46,11 @@ fun NewDebugSettingsRoute(
             }
 
             item(key = R.string.reset_app_link_verification_status) { padding, shape ->
-                DefaultIconClickableShapeListItem(
+                DefaultTwoLineIconClickableShapeListItem(
                     enabled = shizukuInstalled && shizukuRunning && shizukuPermission,
                     headlineContent = textContent(R.string.reset_app_link_verification_status),
                     supportingContent = textContent(R.string.reset_app_link_verification_status_subtitle),
-                    icon = Icons.Outlined.RestartAlt,
+                    icon = vector(Icons.Outlined.RestartAlt),
                     shape = shape,
                     padding = padding,
                     onClick = viewModel::enqueueResetAppLinks

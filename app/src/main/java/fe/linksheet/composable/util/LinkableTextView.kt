@@ -2,6 +2,7 @@ package fe.linksheet.composable.util
 
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.text.ParcelableSpan
 import android.text.Spanned
 import android.text.SpannedString
 import android.text.style.*
@@ -52,14 +53,20 @@ fun Spanned.toHtmlWithoutParagraphs(): String {
         .substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
 }
 
-fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
-    val escapedArgs = args.map {
+fun Resources.getSpanned(@StringRes id: Int, formatArgs: Array<out Any>): Spanned {
+    val escapedArgs = formatArgs.map {
         if (it is Spanned) it.toHtmlWithoutParagraphs() else it
     }.toTypedArray()
     val resource = SpannedString(getText(id))
     val htmlResource = resource.toHtmlWithoutParagraphs()
     val formattedHtml = String.format(htmlResource, *escapedArgs)
     return HtmlCompat.fromHtml(formattedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
+}
+
+fun Resources.getSpanned(@StringRes id: Int): Spanned {
+    val resource = SpannedString(getText(id))
+    val htmlResource = resource.toHtmlWithoutParagraphs()
+    return HtmlCompat.fromHtml(htmlResource, HtmlCompat.FROM_HTML_MODE_LEGACY)
 }
 
 @Composable
@@ -72,19 +79,97 @@ fun rememberAnnotatedStringResource(
     val density = LocalDensity.current
 
     return remember(id, formatArgs, hyperlinkStyle) {
-        spannableStringToAnnotatedString(resources.getText(id, *formatArgs), density, hyperlinkStyle)
+        spannableStringToAnnotatedString(resources.getSpanned(id, formatArgs), density, hyperlinkStyle)
     }
 }
 
 @Composable
-fun rememberAnnotatedStringResource(@StringRes id: Int, hyperlinkStyle: SpanStyle = DefaultHyperLinkStyle): AnnotatedString {
+fun rememberAnnotatedStringResource(
+    @StringRes id: Int,
+    hyperlinkStyle: SpanStyle = DefaultHyperLinkStyle,
+): AnnotatedString {
     val resources = resources()
     val density = LocalDensity.current
 
     return remember(id, hyperlinkStyle) {
-        spannableStringToAnnotatedString(resources.getText(id), density, hyperlinkStyle)
+        spannableStringToAnnotatedString(resources.getSpanned(id), density, hyperlinkStyle)
     }
 }
+
+private val EmptySpanStyle = SpanStyle()
+
+//private val FontFamilySansSerif = SpanStyle(fontFamily = FontFamily.SansSerif)
+//private val FontFamilySerif = SpanStyle(fontFamily = FontFamily.Serif)
+//private val FontFamilyMonospace = SpanStyle(fontFamily = FontFamily.Monospace)
+//private val FontFamilyCursive = SpanStyle(fontFamily = FontFamily.Cursive)
+private val FontFamilyDefault = SpanStyle(fontFamily = FontFamily.Default)
+
+private val FontFamilies = arrayOf(
+    FontFamily.SansSerif,
+    FontFamily.Serif,
+    FontFamily.Monospace,
+    FontFamily.Cursive
+).associate { it.name to SpanStyle(fontFamily = it) }
+
+private val TypefaceNormal = SpanStyle(fontWeight = FontWeight.Normal, fontStyle = FontStyle.Normal)
+private val TypefaceBold = SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Normal)
+private val TypefaceItalic = SpanStyle(fontWeight = FontWeight.Normal, fontStyle = FontStyle.Italic)
+private val TypefaceBoldItalic = SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)
+
+private val Typefaces = mapOf(
+    Typeface.NORMAL to TypefaceNormal,
+    Typeface.BOLD to TypefaceBold,
+    Typeface.ITALIC to TypefaceItalic,
+    Typeface.BOLD_ITALIC to TypefaceBoldItalic
+)
+
+private val TextDecorationLineThrough = SpanStyle(textDecoration = TextDecoration.LineThrough)
+private val TextDecorationUnderline = SpanStyle(textDecoration = TextDecoration.Underline)
+private val BaselineShiftSuperscript = SpanStyle(baselineShift = BaselineShift.Superscript)
+private val BaselineShiftSubscript = SpanStyle(baselineShift = BaselineShift.Subscript)
+
+
+//is StrikethroughSpan -> SpanStyle(textDecoration = TextDecoration.LineThrough)
+//is UnderlineSpan -> SpanStyle(textDecoration = TextDecoration.Underline)
+//is SuperscriptSpan -> SpanStyle(baselineShift = BaselineShift.Superscript)
+//is SubscriptSpan -> SpanStyle(baselineShift = BaselineShift.Subscript)
+
+fun ParcelableSpan.toSpanStyle(density: Density): SpanStyle {
+    return when (this) {
+        is StyleSpan -> Typefaces[style] ?: EmptySpanStyle
+        is TypefaceSpan -> FontFamilies[family] ?: FontFamilyDefault
+        is BulletSpan -> EmptySpanStyle
+        is StrikethroughSpan -> TextDecorationLineThrough
+        is UnderlineSpan -> TextDecorationUnderline
+        is SuperscriptSpan -> BaselineShiftSuperscript
+        is SubscriptSpan -> BaselineShiftSubscript
+        is ForegroundColorSpan -> SpanStyle(color = Color(foregroundColor))
+        is RelativeSizeSpan -> SpanStyle(fontSize = sizeChange.em)
+        is AbsoluteSizeSpan -> with(density) {
+            SpanStyle(fontSize = if (dip) size.dp.toSp() else size.toSp())
+        }
+
+        else -> EmptySpanStyle
+    }
+}
+
+fun Spanned.getSpan(tag: Any): Pair<Int, Int> {
+    return getSpanStart(tag) to getSpanEnd(tag)
+}
+
+inline fun Spanned.forEachSpan(fn: (ParcelableSpan, Int, Int) -> Unit) {
+    getSpans(0, length, ParcelableSpan::class.java).forEach {
+        val (start, end) = getSpan(it)
+        fn(it, start, end)
+    }
+
+//    for (span in getSpans(0, length, ParcelableSpan::class.java)) {
+//        val (start, end) = getSpan(span)
+//        fn(span, start, end)
+//    }
+}
+
+
 
 @OptIn(ExperimentalTextApi::class)
 private fun spannableStringToAnnotatedString(
@@ -92,137 +177,17 @@ private fun spannableStringToAnnotatedString(
     density: Density,
     hyperlinkStyle: SpanStyle,
 ): AnnotatedString {
-    return if (text is Spanned) {
-        with(density) {
-            buildAnnotatedString {
-                append((text.toString()))
-                text.getSpans(0, text.length, Any::class.java).forEach {
-                    val start = text.getSpanStart(it)
-                    val end = text.getSpanEnd(it)
-                    when (it) {
-                        is StyleSpan -> when (it.style) {
-                            Typeface.NORMAL -> addStyle(
-                                style = SpanStyle(
-                                    fontWeight = FontWeight.Normal,
-                                    fontStyle = FontStyle.Normal
-                                ),
-                                start = start,
-                                end = end
-                            )
+    return buildAnnotatedString {
+        append(text)
 
-                            Typeface.BOLD -> addStyle(
-                                style = SpanStyle(
-                                    fontWeight = FontWeight.Bold,
-                                    fontStyle = FontStyle.Normal
-                                ),
-                                start = start,
-                                end = end
-                            )
-
-                            Typeface.ITALIC -> addStyle(
-                                style = SpanStyle(
-                                    fontWeight = FontWeight.Normal,
-                                    fontStyle = FontStyle.Italic
-                                ),
-                                start = start,
-                                end = end
-                            )
-
-                            Typeface.BOLD_ITALIC -> addStyle(
-                                style = SpanStyle(
-                                    fontWeight = FontWeight.Bold,
-                                    fontStyle = FontStyle.Italic
-                                ),
-                                start = start,
-                                end = end
-                            )
-                        }
-
-                        is TypefaceSpan -> addStyle(
-                            style = SpanStyle(
-                                fontFamily = when (it.family) {
-                                    FontFamily.SansSerif.name -> FontFamily.SansSerif
-                                    FontFamily.Serif.name -> FontFamily.Serif
-                                    FontFamily.Monospace.name -> FontFamily.Monospace
-                                    FontFamily.Cursive.name -> FontFamily.Cursive
-                                    else -> FontFamily.Default
-                                }
-                            ),
-                            start = start,
-                            end = end
-                        )
-
-                        is BulletSpan -> {
-                            addStyle(style = SpanStyle(), start = start, end = end)
-                        }
-
-                        is AbsoluteSizeSpan -> addStyle(
-                            style = SpanStyle(fontSize = if (it.dip) it.size.dp.toSp() else it.size.toSp()),
-                            start = start,
-                            end = end
-                        )
-
-                        is RelativeSizeSpan -> addStyle(
-                            style = SpanStyle(fontSize = it.sizeChange.em),
-                            start = start,
-                            end = end
-                        )
-
-                        is StrikethroughSpan -> addStyle(
-                            style = SpanStyle(textDecoration = TextDecoration.LineThrough),
-                            start = start,
-                            end = end
-                        )
-
-                        is UnderlineSpan -> addStyle(
-                            style = SpanStyle(textDecoration = TextDecoration.Underline),
-                            start = start,
-                            end = end
-                        )
-
-                        is SuperscriptSpan -> addStyle(
-                            style = SpanStyle(baselineShift = BaselineShift.Superscript),
-                            start = start,
-                            end = end
-                        )
-
-                        is SubscriptSpan -> addStyle(
-                            style = SpanStyle(baselineShift = BaselineShift.Subscript),
-                            start = start,
-                            end = end
-                        )
-
-                        is ForegroundColorSpan -> addStyle(
-                            style = SpanStyle(color = Color(it.foregroundColor)),
-                            start = start,
-                            end = end
-                        )
-
-                        is android.text.Annotation -> {
-                            if (it.key == URL_ANNOTATION_KEY) {
-                                addStyle(
-                                    style = hyperlinkStyle,
-                                    start = start,
-                                    end = end
-                                )
-
-                                addUrlAnnotation(
-                                    urlAnnotation = UrlAnnotation(it.value),
-                                    start = start,
-                                    end = end
-                                )
-                            }
-                        }
-
-                        else -> addStyle(style = SpanStyle(), start = start, end = end)
-                    }
-                }
+        if (text is Spanned) {
+            text.forEachSpan { span, start, end ->
+                addStyle(style = span.toSpanStyle(density), start = start, end = end)
             }
         }
-    } else {
-        AnnotatedString(text = text.toString())
     }
 }
+
 
 val DefaultHyperLinkStyle = SpanStyle(color = Color(0xff3b82f6), textDecoration = TextDecoration.Underline)
 
@@ -238,6 +203,8 @@ fun LinkableTextView(
     parentChecked: Boolean? = null,
     parentClickListener: ((Boolean) -> Unit)? = null,
 ) {
+//    stringResource(id = R)
+
     val annotatedString = rememberAnnotatedStringResource(id, hyperlinkStyle)
     LinkableTextView(
         modifier = modifier,

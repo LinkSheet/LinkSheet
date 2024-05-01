@@ -96,7 +96,7 @@ fun <T> SaneLazyListScope.listHelper(
     content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
 ) {
     if (listState == ListState.Items && !list.isNullOrEmpty()) {
-        group(items = list, key = listKey, content = content)
+        group(list = list, key = listKey, content = content)
     } else {
         loader(noItems, notFound, listState)
     }
@@ -110,7 +110,7 @@ fun <K : Any, T : GroupValueProvider<K>, V> SaneLazyListScope.mapHelper(
     content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
 ) {
     if (mapState == ListState.Items) {
-        group(values = values!!, content = content)
+        group(map = values!!, content = content)
     } else {
         loader(noItems, notFound, mapState)
     }

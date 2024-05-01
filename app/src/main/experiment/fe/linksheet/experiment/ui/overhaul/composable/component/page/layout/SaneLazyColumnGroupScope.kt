@@ -15,13 +15,13 @@ interface SaneLazyColumnGroupScope {
     fun item(key: Any, content: @Composable LazyItemScope.(PaddingValues, Shape) -> Unit)
 
     fun <K : Any, T> items(
-        values: List<T>,
+        list: List<T>,
         key: (T) -> K,
         content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
     )
 
     fun <K : Any, T : GroupValueProvider<K>> items(
-        values: Array<T>,
+        array: Array<T>,
         content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
     )
 
@@ -31,7 +31,13 @@ interface SaneLazyColumnGroupScope {
     )
 
     fun <K : Any, T : GroupValueProvider<K>, V> items(
-        values: Map<T, V>,
+        map: Map<T, V>,
+        content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
+    )
+
+    fun <K : Any, T, V> items(
+        map: Map<T, V>,
+        key: (T) -> K,
         content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
     )
 }
@@ -67,10 +73,10 @@ data class SaneLazyColumnGroupScopeImpl(
     }
 
     override fun <K : Any, T : GroupValueProvider<K>> items(
-        values: Array<T>,
+        array: Array<T>,
         content: @Composable (LazyItemScope.(T, PaddingValues, Shape) -> Unit),
     ) {
-        itemsInternal(valueSize = values.size, values = values.iterator(), key = { it.key }, content = content)
+        itemsInternal(valueSize = array.size, values = array.iterator(), key = { it.key }, content = content)
     }
 
     override fun <K : Any, T : GroupValueProvider<K>> items(
@@ -81,11 +87,11 @@ data class SaneLazyColumnGroupScopeImpl(
     }
 
     override fun <K : Any, T> items(
-        values: List<T>,
+        list: List<T>,
         key: (T) -> K,
         content: @Composable (LazyItemScope.(T, PaddingValues, Shape) -> Unit),
     ) {
-        itemsInternal(valueSize = values.size, values = values.iterator(), key = key, content = content)
+        itemsInternal(valueSize = list.size, values = list.iterator(), key = key, content = content)
     }
 
     private inline fun <K : Any, T> itemsInternal(
@@ -107,18 +113,33 @@ data class SaneLazyColumnGroupScopeImpl(
         }
     }
 
-
     override fun <K : Any, T : GroupValueProvider<K>, V> items(
-        values: Map<T, V>,
+        map: Map<T, V>,
         content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
+    ) {
+        itemsInternal(values = map, key = { it.key }, content = content)
+    }
+
+    override fun <K : Any, T, V> items(
+        map: Map<T, V>,
+        key: (T) -> K,
+        content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
+    ) {
+        itemsInternal(values = map, key = key, content = content)
+    }
+
+    private inline fun <K : Any, T, V> itemsInternal(
+        values: Map<T, V>,
+        key: (T) -> K,
+        crossinline content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
     ) {
         require(counter < size) { "Group has ${counter + 1} items, but only supports $size" }
         require(counter + values.size <= size) { "Group has ${counter + 1}/$size items, can't fit an additional ${values.size}" }
 
-        for ((valueProvider, value) in values) {
+        for ((k, value) in values) {
             val groupItem = currentItem()
-            item(key = valueProvider.key, contentType = groupItem) {
-                content(valueProvider, value, groupItem.padding, groupItem.shape)
+            item(key = key(k), contentType = groupItem) {
+                content(k, value, groupItem.padding, groupItem.shape)
             }
 
             counter++
@@ -127,30 +148,39 @@ data class SaneLazyColumnGroupScopeImpl(
 }
 
 fun <K : Any, T : GroupValueProvider<K>> SaneLazyListScope.group(
-    items: Array<T>,
+    array: Array<T>,
     content: @Composable (LazyItemScope.(T, PaddingValues, Shape) -> Unit),
 ) {
-    group(size = items.size) { items(values = items, content = content) }
+    group(size = array.size) { items(array = array, content = content) }
 }
 
 fun <K : Any, T : GroupValueProvider<K>> SaneLazyListScope.group(
-    items: List<T>,
+    list: List<T>,
     content: @Composable (LazyItemScope.(T, PaddingValues, Shape) -> Unit),
 ) {
-    group(size = items.size) { items(values = items, content = content) }
+    group(size = list.size) { items(values = list, content = content) }
 }
 
 fun <K : Any, T> SaneLazyListScope.group(
-    items: List<T>,
+    list: List<T>,
     key: (T) -> K,
     content: @Composable (LazyItemScope.(T, PaddingValues, Shape) -> Unit),
 ) {
-    group(size = items.size) { items(values = items, key = key, content = content) }
+    group(size = list.size) { items(list = list, key = key, content = content) }
 }
 
 fun <K : Any, T : GroupValueProvider<K>, V> SaneLazyListScope.group(
-    values: Map<T, V>,
+    map: Map<T, V>,
     content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
 ) {
-    group(size = values.size) { items(values = values, content = content) }
+    group(size = map.size) { items(map = map, content = content) }
 }
+
+fun <K : Any, T, V> SaneLazyListScope.group(
+    map: Map<T, V>,
+    key: (T) -> K,
+    content: @Composable (LazyItemScope.(T, V, PaddingValues, Shape) -> Unit),
+) {
+    group(size = map.size) { items(map = map, key = key, content = content) }
+}
+

@@ -1,23 +1,31 @@
 package fe.linksheet.composable.settings.bottomsheet
 
 import androidx.annotation.StringRes
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import fe.android.compose.dialog.helper.stateful.StatefulDialog
 import fe.android.compose.dialog.helper.stateful.StatefulDialogState
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.icon.FilledIcon
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -161,15 +169,33 @@ fun BottomSheetSettingsRoute(
         divider(stringRes = R.string.tap_customization)
 
         group(size = 4) {
-            items(values = tapTypePreferences) { type, pref, padding, shape ->
+            items(map = tapTypePreferences) { type, pref, padding, shape ->
+                var expanded by remember { mutableStateOf(false) }
+                val rotation by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow rotation")
+
                 ClickableShapeListItem(
                     shape = shape,
                     padding = padding,
-                    onClick = { tapConfigDialog.open(type) },
+                    onClick = {
+                        expanded = true
+                        tapConfigDialog.open(type)
+                    },
                     role = Role.Button,
                     headlineContent = Resource.textContent(type.headline),
                     supportingContent = Resource.textContent(pref().id),
-//                    trailingContent = {
+                    trailingContent = {
+                        FilledIcon(
+                            modifier = Modifier.rotate(rotation),
+                            iconSize = 24.dp,
+                            containerSize = 28.dp,
+                            colors = IconButtonDefaults.filledIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                            ),
+                            imageVector = Icons.Outlined.KeyboardArrowDown,
+                            contentDescription = null
+                        )
+
+
 //                        FilledTonalIconButton(onClick = {}) {
 //                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
 //                        }
@@ -177,7 +203,7 @@ fun BottomSheetSettingsRoute(
 ////                            imageVector = Icons.Outlined.Tune,
 ////                            contentDescription = stringResource(id = R.string.settings)
 ////                        )
-//                    }
+                    }
                 )
             }
 

@@ -263,7 +263,6 @@
     <string name="dismiss">Отклонить</string>
     <string name="no_browser_installed">Браузер не установлен</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet обнаружил по крайней мере одно приложение, которое является настоящим браузером.</string>
-    <string name="branch">Branch:</string>
     <string name="export_to_file">Экспортировать в файл</string>
     <string name="domain_selection_confirmation_title">Выбрать домены?</string>
     <string name="manual_build">Создано вручную и подписано 1fexd</string>
@@ -271,7 +270,6 @@
     <string name="warning">Предупреждение</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">Разное</string>
-    <string name="commit">Commit:</string>
     <string name="donate_learn_more">Узнать больше</string>
     <string name="pretend_to_be_app_explainer_2">Некоторые приложения, например Google Chrome, явно ищут нативное приложение для обработки, например, ссылки Youtube при ее нажатии в результатах поиска. LinkSheetCompat притворяется таким родным приложением для поддерживаемых хостов, а затем пересылает запрос в LinkSheet.</string>
     <string name="privacy_settings_explainer">Настройки, такие как включение реферера</string>
@@ -290,7 +288,6 @@
     <string name="discord_explainer">Заходите в наш чат в Discord сервере! Общайтесь с пользователями и разработчиками LinkSheet о его будущем и других начинаниях!</string>
     <string name="configure">Конфигурация</string>
     <string name="show_linksheet_referrer">Показать реферер LinkSheet</string>
-    <string name="type">Type:</string>
     <string name="onboarding6_highlight">предпочтения</string>
     <string name="onboarding6_headline">Установите свои</string>
     <string name="yes">Да</string>

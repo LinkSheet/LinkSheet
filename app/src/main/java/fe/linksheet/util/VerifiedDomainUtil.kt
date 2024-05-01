@@ -61,6 +61,7 @@ object VerifiedDomainUtil {
         val stateVerified: MutableList<String>,
     ) : AppListItemData(applicationInfo, label.toString()) {
         val enabled = isLinkHandlingAllowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
+        val hostSum = stateNone.size + stateSelected.size + stateVerified.size
 //        val disabled = stateNone.isNotEmpty()
     }
 

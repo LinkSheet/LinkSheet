@@ -13,15 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 object IconDefaults {
+    val IconSize = 24.0.dp
     val ContainerSize = 40.0.dp
 }
 
 @Composable
 fun FilledIcon(
     enabled: Boolean = true,
+    modifier: Modifier = Modifier,
+    iconSize: Dp = IconDefaults.IconSize,
+    containerSize: Dp = IconDefaults.ContainerSize,
     shape: Shape = IconButtonDefaults.filledShape,
     colors: IconButtonColors = IconButtonDefaults.filledIconButtonColors(),
     imageVector: ImageVector,
@@ -32,8 +37,11 @@ fun FilledIcon(
         color = colors.containerColor(enabled),
         contentColor = colors.contentColor(enabled),
     ) {
-        Box(modifier = Modifier.size(IconDefaults.ContainerSize), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.size(containerSize), contentAlignment = Alignment.Center) {
             Icon(
+                modifier = Modifier
+                    .size(iconSize)
+                    .then(modifier),
                 imageVector = imageVector,
                 contentDescription = contentDescription
             )

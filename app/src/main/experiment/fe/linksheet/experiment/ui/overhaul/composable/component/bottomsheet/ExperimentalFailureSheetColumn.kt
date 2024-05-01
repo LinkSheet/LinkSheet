@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastForEachIndexed
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.ProvideContentColorTextStyle
+import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideContentColorTextStyle
 import kotlin.math.max
 
 @OptIn(ExperimentalLayoutApi::class)

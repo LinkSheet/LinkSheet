@@ -12,8 +12,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.ProvideContentColorTextStyle
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextOptions
+import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideContentColorTextStyle
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
 
 
 object CustomListItemDefaults {

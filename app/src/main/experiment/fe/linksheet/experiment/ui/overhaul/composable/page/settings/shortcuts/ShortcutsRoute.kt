@@ -3,9 +3,9 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.shortcuts
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultIconClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 
 
 internal object NewSettingsRouteData {
@@ -23,7 +23,7 @@ fun ShortcutsRoute(
     ) {
         group(size = 3) {
             item(key = R.string.settings_shortcuts__title_default_browser) { padding, shape ->
-                DefaultIconClickableShapeListItem(
+                DefaultTwoLineIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
                     headlineContent = textContent(R.string.settings_shortcuts__title_default_browser),
@@ -35,7 +35,7 @@ fun ShortcutsRoute(
             }
 
             item(key = R.string.settings_shortcuts__title_link_handlers) { padding, shape ->
-                DefaultIconClickableShapeListItem(
+                DefaultTwoLineIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
                     headlineContent = textContent(R.string.settings_shortcuts__title_link_handlers),
@@ -47,7 +47,7 @@ fun ShortcutsRoute(
             }
 
             item(key = R.string.settings_shortcuts__title_connected_apps) { padding, shape ->
-                DefaultIconClickableShapeListItem(
+                DefaultTwoLineIconClickableShapeListItem(
                     shape = shape,
                     padding = padding,
                     headlineContent = textContent(R.string.settings_shortcuts__title_connected_apps),

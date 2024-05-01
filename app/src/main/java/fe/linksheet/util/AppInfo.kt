@@ -1,40 +1,36 @@
 package fe.linksheet.util
 
-import android.content.Context
 import android.os.Build
-import fe.gson.dsl.jsonObject
-import fe.gson.dsl.lazyJsonObject
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.android.getCurrentLocale
+
+@Keep
+data class BuildInfo(
+    @SerializedName("version_name") val versionName: String,
+    @SerializedName("version_code") val versionCode: Int,
+    @SerializedName("built_at") val builtAt: String,
+    @SerializedName("flavor") val flavor: String,
+    @SerializedName("workflow_id") val workflowId: String? = null
+)
+
+@Keep
+data class DeviceInfo(
+    @SerializedName("android_version") val androidVersion: String,
+    val manufacturer: String,
+    val model: String
+)
 
 object AppInfo {
-    val appInfo by lazyJsonObject {
-        "full_identifier" += BuildConfig.VERSION_NAME
-        "version_code" += BuildConfig.VERSION_CODE
-        "built_at" += BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
-        "commit" += BuildConfig.COMMIT.substring(0, 7)
-        "branch" += BuildConfig.BRANCH
-        "flavor" += BuildConfig.FLAVOR
-        "type" += BuildConfig.BUILD_TYPE
+    val buildInfo = BuildInfo(
+        BuildConfig.VERSION_NAME,
+        BuildConfig.VERSION_CODE,
+        BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat),
+        "${BuildConfig.FLAVOR}-${BuildConfig.BUILD_TYPE}",
+        BuildConfig.GITHUB_WORKFLOW_RUN_ID
+    )
 
-        BuildConfig.GITHUB_WORKFLOW_RUN_ID?.let { runId ->
-            "workflow_id" += runId
-        }
-    }
-
-    val deviceInfo by lazyJsonObject {
-        "manufacturer" += Build.MANUFACTURER
-        "model" += Build.MODEL
-    }
-
-    val androidFingerprint by lazyJsonObject {
-        "fingerprint" += Build.FINGERPRINT
-    }
-
-    fun getDeviceBasics(context: Context) = jsonObject {
-        "android_version" += Build.VERSION.RELEASE
-        "locale" += context.getCurrentLocale().toLanguageTag()
-    }
+    val deviceInfo = DeviceInfo(Build.VERSION.RELEASE, Build.MANUFACTURER, Build.MODEL)
 }

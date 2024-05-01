@@ -50,11 +50,8 @@
         <item quantity="one">%s घंटा</item>
         <item quantity="other">%s घंटे</item>
     </plurals>
-    <string name="branch">ब्रांच:</string>
     <string name="logs">लॉग्स</string>
     <string name="manual_build">1fexd द्वारा मैन्युअल रूप से निर्मित और हस्ताक्षरित</string>
-    <string name="commit">कमिट:</string>
-    <string name="type">प्रकार:</string>
     <string name="flavor">फ्लेवर:</string>
     <string name="github_pipeline_build">गिटहब वर्कफ़्लो द्वारा निर्मित और हस्ताक्षरित</string>
     <string name="other">अन्य</string>

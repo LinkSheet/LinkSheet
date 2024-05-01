@@ -10,7 +10,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ListIt
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel

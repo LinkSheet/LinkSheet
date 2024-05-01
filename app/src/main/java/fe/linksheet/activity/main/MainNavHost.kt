@@ -41,6 +41,7 @@ import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewAboutSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewCreditsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRoute
@@ -242,7 +243,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = creditsSettingsRoute) {
-            CreditsSettingsRoute(onBackPressed = onBackPressed)
+            if (uiOverhaul) {
+                NewCreditsSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                CreditsSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = preferredBrowserSettingsRoute) {

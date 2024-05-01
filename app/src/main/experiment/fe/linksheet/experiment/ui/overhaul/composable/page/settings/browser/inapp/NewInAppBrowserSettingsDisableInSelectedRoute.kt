@@ -19,8 +19,8 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.Conten
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel

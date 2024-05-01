@@ -13,10 +13,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalTextContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalTextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 import fe.linksheet.extension.compose.enabled
 
 

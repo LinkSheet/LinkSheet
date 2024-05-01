@@ -7,14 +7,14 @@ import fe.android.preference.helper.compose.StatePreference
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGroupDslMarker
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGroupScope
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 
 @Stable
 class SwitchPreferenceItem(
     val preference: StatePreference<Boolean>,
     headlineContent: TextContent,
     supportingContent: TextContent,
-) : ListItemData(headlineContent = headlineContent, subtitleContent = supportingContent)
+) : ListItemData<Any?>(headlineContent = headlineContent, subtitleContent = supportingContent)
 
 @RememberGroupDslMarker
 class TwoLinePreferenceScope : RememberGroupScope<Any, SwitchPreferenceItem>() {

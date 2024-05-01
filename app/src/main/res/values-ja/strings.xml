@@ -137,7 +137,6 @@
     <string name="join">参加</string>
     <string name="donate">寄付</string>
     <string name="flavor">フレーバー：</string>
-    <string name="commit">コミット：</string>
     <string name="confirm_import">確認</string>
     <string name="bottom_sheet">ボトムシート</string>
     <string name="whitelisted_browsers">ホワイトリストに登録されているブラウザ</string>
@@ -149,8 +148,6 @@
     <string name="redirect_resolve_type_local_cache">ローカルキャッシュ</string>
     <string name="redirect_resolve_type_remote">リモートサーバー</string>
     <string name="configure">構成設定</string>
-    <string name="branch">ブランチ：</string>
-    <string name="type">タイプ：</string>
     <string name="other">その他</string>
     <string name="import_headline">インポート</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>

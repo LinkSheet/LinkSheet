@@ -322,7 +322,6 @@
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">تمكين القائمة التجريبية لورقة الروابط المضغوطة</string>
     <string name="built_by">تم البناء والتوقيع من قبل</string>
-    <string name="type">النوع:</string>
     <string name="app_setup">إعداد التطبيق</string>
     <string name="other">أخرى</string>
     <string name="enable_new_bottom_sheet">تمكين الورقة السفلية الجديدة</string>
@@ -330,8 +329,6 @@
     <string name="new_bottomsheet">ورقة سفلية جديدة</string>
     <string name="donate_learn_more">التعرف على المزيد</string>
     <string name="donate">تبرَّع</string>
-    <string name="commit">الالتزام:</string>
-    <string name="branch">الفرع:</string>
     <string name="github_pipeline_build">تم إنشاؤه وتوقيعه بواسطة سير عمل Github</string>
     <string name="flavor">النكهة:</string>
     <plurals name="minutes">

@@ -4,17 +4,17 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.rememberOptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.IconType
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.rememberOptionalContent
 
 @Composable
-fun DefaultIconClickableShapeListItem(
+fun DefaultTwoLineIconClickableShapeListItem(
     enabled: Boolean = true,
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
@@ -23,7 +23,7 @@ fun DefaultIconClickableShapeListItem(
     headlineContent: TextContent,
     overlineContent: TextContent? = null,
     supportingContent: TextContent? = null,
-    icon: ImageVector? = null,
+    icon: IconType? = null,
     otherContent: OptionalContent = null,
 ) {
     val content: OptionalContent = rememberOptionalContent(icon) {
@@ -47,12 +47,12 @@ fun DefaultIconClickableShapeListItem(
 
 @Composable
 private fun DefaultListItemIcon(
-    icon: ImageVector,
+    icon: IconType,
     contentDescription: String? = null,
 ) {
     Icon(
         modifier = ShapeListItemDefaults.BaseContentModifier,
-        imageVector = icon,
+        painter = icon.rememberPainter(),
         contentDescription = contentDescription
     )
 }

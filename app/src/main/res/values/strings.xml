@@ -94,7 +94,7 @@
     <string name="about">About</string>
     <string name="about_explainer">Credits, License, Links, Version</string>
     <string name="credits">Credits</string>
-    <string name="credits_explainer">Open source licensing</string>
+    <string name="credits_explainer">Acknowledgements, Licensing</string>
     <string name="version">LinkSheet Version</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="license_apache_2">Apache License 2.0</string>
@@ -102,7 +102,7 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">Source code repository</string>
-    <string name="donate_subtitle">Donate to receive access to
+    <string name="donate_subtitle">Upgrade to
         <b>LinkSheet Pro</b>
     </string>
     <string name="open_copied_link">Open copied link</string>
@@ -407,9 +407,10 @@
         useful for the average user
     </string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name">Full identifier</string>
-    <string name="built_at">Built at (UTC)</string>
-    <string name="github_workflow_run_id">Build workflow ID</string>
+    <string name="version_name" translatable="false"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="built_at" translatable="false"><b>Built at:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="flavor" translatable="false"><b>Flavor:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id" translatable="false"><b>Workflow ID:</b>\u0020<font face="monospace">%s</font></string>
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
@@ -439,10 +440,6 @@
     <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
     <string name="github_pipeline_build">Built and signed by CI</string>
-    <string name="flavor">Flavor</string>
-    <string name="commit">Commit</string>
-    <string name="branch">Branch</string>
-    <string name="type">Type</string>
     <string name="app_setup">App setup</string>
     <string name="other">Other</string>
     <string name="pro_feature">This is a LinkSheet Pro feature!</string>
@@ -477,7 +474,7 @@
     <string name="debug_build">Debug build</string>
     <string name="dev">Developer</string>
     <string name="dev_explainer">Developer settings</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">Toasts &amp; Notifications</string>
     <string name="notifications_explainer">URL copied, Download started</string>
     <string name="url_copied_toast">URL copied</string>
     <string name="url_copied_toast_explainer">Show a toast when an URL is copied by the user</string>
@@ -493,7 +490,7 @@
     <string name="resolve_via_failed_toast_explainer">Show a toast when an URL fails to resolve via an external
         service
     </string>
-    <string name="last_updated">Last updated (UTC):</string>
+    <string name="last_updated"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
     <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed,
@@ -718,4 +715,28 @@
     <string name="settings_verified_link_handlers__text_handling_filter_disabled">Disabled handlers</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Disabled</string>
     <string name="settings_notifications__divider_toasts">Toasts</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d host: %s</item>
+        <item quantity="other">%d hosts: %s</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d verified</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d verified host</item>
+        <item quantity="other">%d verified hosts</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d enabled</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d enabled host</item>
+        <item quantity="other">%d enabled hosts</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_none">%d disabled</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Link handling allowed</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Link handling not allowed</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d disabled host</item>
+        <item quantity="other">%d disabled hosts</item>
+    </plurals>
+    <string name="settings_about__divider_external_versions">External versions</string>
+    <string name="settings_credits__app__name_seal">Seal</string>
+    <string name="settings_credits__app__name_seal_desc">Design inspiration</string>
 </resources>

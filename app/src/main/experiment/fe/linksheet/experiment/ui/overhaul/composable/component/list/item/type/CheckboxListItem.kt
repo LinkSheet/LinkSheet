@@ -8,8 +8,8 @@ import androidx.compose.ui.semantics.Role
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 
 @Composable
 fun CheckboxListItem(

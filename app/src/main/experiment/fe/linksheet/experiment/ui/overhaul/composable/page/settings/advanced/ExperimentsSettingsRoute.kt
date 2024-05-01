@@ -18,8 +18,8 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.card.AlertCard
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
 

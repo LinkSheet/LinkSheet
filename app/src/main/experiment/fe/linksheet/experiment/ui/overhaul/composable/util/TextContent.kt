@@ -1,11 +1,8 @@
-package fe.linksheet.experiment.ui.overhaul.composable.component.util
+package fe.linksheet.experiment.ui.overhaul.composable.util
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.structuralEqualityPolicy
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
@@ -29,7 +26,7 @@ interface TextContent {
 }
 
 @Stable
-class Default(text: String) : TextContent {
+class Default private constructor(text: String) : TextContent {
     override val key = text
     override val content: @Composable () -> Unit = {
         val textOptions = LocalTextOptions.current
@@ -48,7 +45,7 @@ class Default(text: String) : TextContent {
 }
 
 @Stable
-class Resource(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
+class Resource private constructor(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
     override val key = id
     override val content: @Composable () -> Unit = {
         val textOptions = LocalTextOptions.current
@@ -79,13 +76,39 @@ class Annotated(annotatedString: AnnotatedString) : TextContent {
         inline fun buildAnnotatedTextContent(builder: AnnotatedString.Builder.() -> Unit): Annotated {
             return Annotated(buildAnnotatedString(builder))
         }
+
+        val AnnotatedString.content: Annotated
+            get() = Annotated(this)
+    }
+}
+
+@Stable
+class AnnotatedStringResource private constructor(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
+    override val key = id
+    override val content: @Composable () -> Unit = {
+        val textOptions = LocalTextOptions.current
+
+        Text(
+            text = annotatedStringResource(id = id, *formatArgs),
+            overflow = textOptions.overflow,
+            maxLines = textOptions.maxLines
+        )
+    }
+
+    companion object {
+        fun annotated(@StringRes id: Int, vararg formatArgs: Any): AnnotatedStringResource {
+            return AnnotatedStringResource(id, *formatArgs)
+        }
     }
 }
 
 
 @Stable
-class ComposableTextContent(override val content: @Composable () -> Unit, override val key: Any = Unit) :
-    TextContent {
+class ComposableTextContent(
+    override val content: @Composable () -> Unit,
+    override val key: Any = Unit
+) : TextContent {
+
     companion object {
         fun content(content: @Composable () -> Unit): ComposableTextContent {
             return ComposableTextContent(content)

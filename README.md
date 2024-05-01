@@ -106,7 +106,7 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
   
 ## License
 
-* LinkSheet, excluding all `strings.xml` and `plural.xml` files, is licensed under the [FXL](LICENSE)
+* LinkSheet, excluding all `strings.xml` and `plural.xml` files, is licensed under the [LPL](LICENSE)
 * All `strings.xml` and `plural.xml` files are licensed under [GPL-3.0](LICENSE_STRINGS)
 
 ## Translations
@@ -114,10 +114,11 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 * Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/)
 * Allow translations except for English are maintained by contributors
 
-## Acknowledgements
+## Credits
 
 * LinkSheet was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
-* [Seal](https://github.com/JunkFood02/Seal) has been an amazing resource to learn from
+* [MastodonRedirect](https://github.com/zacharee/MastodonRedirect) provided a reference for the Shizuku implementation
+* Inspiration has been taken from [Seal](https://github.com/JunkFood02/Seal)
 
 ## Star History
 

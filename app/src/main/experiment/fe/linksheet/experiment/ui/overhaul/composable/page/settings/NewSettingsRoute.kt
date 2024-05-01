@@ -11,14 +11,15 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteN
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavigateListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 internal object NewSettingsRouteData {
     val verifiedApps = RouteNavItem(
         appsWhichCanOpenLinksSettingsRoute,
-        Icons.Outlined.DomainVerification,
+        vector(Icons.Outlined.DomainVerification),
         textContent(R.string.verified_link_handlers),
         textContent(R.string.verified_link_handlers_subtitle)
     )
@@ -26,19 +27,19 @@ internal object NewSettingsRouteData {
     val customization = arrayOf(
         RouteNavItem(
             browserSettingsRoute,
-            Icons.Outlined.Apps,
+            vector(Icons.Outlined.Apps),
             textContent(R.string.app_browsers),
             textContent(R.string.app_browsers_subtitle),
         ),
         RouteNavItem(
             bottomSheetSettingsRoute,
-            Icons.Outlined.SwipeUp,
+            vector(Icons.Outlined.SwipeUp),
             textContent(R.string.bottom_sheet),
             textContent(R.string.bottom_sheet_explainer),
         ),
         RouteNavItem(
             linksSettingsRoute,
-            Icons.Outlined.Link,
+            vector(Icons.Outlined.Link),
             textContent(R.string.links),
             textContent(R.string.links_explainer),
         )
@@ -47,25 +48,25 @@ internal object NewSettingsRouteData {
     val miscellaneous = arrayOf(
         RouteNavItem(
             generalSettingsRoute,
-            Icons.Outlined.Settings,
+            vector(Icons.Outlined.Settings),
             textContent(R.string.general),
             textContent(R.string.general_settings_explainer),
         ),
         RouteNavItem(
             notificationSettingsRoute,
-            Icons.Outlined.Notifications,
+            vector(Icons.Outlined.Notifications),
             textContent(R.string.notifications),
             textContent(R.string.notifications_explainer),
         ),
         RouteNavItem(
             themeSettingsRoute,
-            Icons.Outlined.Palette,
+            vector(Icons.Outlined.Palette),
             textContent(R.string.theme),
             textContent(R.string.theme_explainer),
         ),
         RouteNavItem(
             privacySettingsRoute,
-            Icons.Outlined.PrivacyTip,
+            vector(Icons.Outlined.PrivacyTip),
             textContent(R.string.privacy),
             textContent(R.string.privacy_settings_explainer),
         )
@@ -74,13 +75,13 @@ internal object NewSettingsRouteData {
     val advanced = arrayOf(
         RouteNavItem(
             advancedSettingsRoute,
-            Icons.Outlined.Terminal,
+            vector(Icons.Outlined.Terminal),
             textContent(R.string.advanced),
             textContent(R.string.advanced_explainer),
         ),
         RouteNavItem(
             debugSettingsRoute,
-            Icons.Outlined.BugReport,
+            vector(Icons.Outlined.BugReport),
             textContent(R.string.debug),
             textContent(R.string.debug_explainer),
         )
@@ -88,7 +89,7 @@ internal object NewSettingsRouteData {
 
     val dev = RouteNavItem(
         devModeRoute,
-        Icons.Outlined.DeveloperMode,
+        vector(Icons.Outlined.DeveloperMode),
         textContent(R.string.dev),
         textContent(R.string.dev_explainer)
     )
@@ -96,25 +97,25 @@ internal object NewSettingsRouteData {
     val about = arrayOf(
         RouteNavItem(
             Routes.Help,
-            Icons.AutoMirrored.Outlined.HelpOutline,
+            vector(Icons.AutoMirrored.Outlined.HelpOutline),
             textContent(R.string.help),
             textContent(R.string.help_subtitle),
         ),
         RouteNavItem(
             Routes.Shortcuts,
-            Icons.Outlined.SwitchAccessShortcut,
+            vector(Icons.Outlined.SwitchAccessShortcut),
             textContent(R.string.settings__title_shortcuts),
             textContent(R.string.settings__subtitle_shortcuts),
         ),
         RouteNavItem(
             Routes.Updates,
-            Icons.Outlined.Update,
+            vector(Icons.Outlined.Update),
             textContent(R.string.settings__title_updates),
             textContent(R.string.settings__subtitle_updates),
         ),
         RouteNavItem(
             aboutSettingsRoute,
-            Icons.Outlined.Info,
+            vector(Icons.Outlined.Info),
             textContent(R.string.about),
             textContent(R.string.about_explainer),
         )
@@ -139,20 +140,20 @@ fun NewSettingsRoute(
 
         divider(stringRes = R.string.customization)
 
-        group(items = NewSettingsRouteData.customization) { data, padding, shape ->
+        group(array = NewSettingsRouteData.customization) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
         divider(stringRes = R.string.misc_settings)
 
-        group(items = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
+        group(array = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
         divider(stringRes = R.string.advanced)
 
         group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
-            items(values = NewSettingsRouteData.advanced) { data, padding, shape ->
+            items(array = NewSettingsRouteData.advanced) { data, padding, shape ->
                 RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
             }
 
@@ -170,7 +171,7 @@ fun NewSettingsRoute(
 
         divider(stringRes = R.string.about)
 
-        group(items = NewSettingsRouteData.about) { data, padding, shape ->
+        group(array = NewSettingsRouteData.about) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
     }

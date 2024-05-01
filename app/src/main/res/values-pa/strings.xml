@@ -309,11 +309,8 @@
         <item quantity="one">%s ਘੰਟਾ</item>
         <item quantity="other">%s ਘੰਟੇ</item>
     </plurals>
-    <string name="branch">ਬ੍ਰਾਂਚ:</string>
     <string name="manual_build">1fexd ਦੁਆਰਾ ਮੈਨੁਅਲ ਰੂਪ \'ਚ ਨਿਰਮਤ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
-    <string name="commit">ਕਮਿੱਟ:</string>
     <string name="donate_learn_more">ਜਿਆਦਾ ਜਾਣੋ</string>
-    <string name="type">ਕਿਸਮ:</string>
     <string name="flavor">ਵੰਨਗੀ:</string>
     <string name="github_pipeline_build">ਗਿਟਹੱਬ ਵਰਕਫਲੋ ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
     <string name="other">ਹੋਰ</string>

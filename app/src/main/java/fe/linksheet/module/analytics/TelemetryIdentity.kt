@@ -2,12 +2,11 @@ package fe.linksheet.module.analytics
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.annotation.StringRes
 import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.extension.android.getCurrentLocale
+import fe.linksheet.extension.android.getCurrentLanguageTag
 import fe.linksheet.util.BuildType
 
 @JvmInline
@@ -64,7 +63,7 @@ sealed class TelemetryIdentity(
         Basic
     ) {
         override fun getRuntime(context: Context): MutableMap<String, String> {
-            return mutableMapOf("locale" to context.getCurrentLocale().toLanguageTag())
+            return mutableMapOf("locale" to context.getCurrentLanguageTag())
         }
     }
 }

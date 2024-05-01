@@ -309,11 +309,8 @@
         <item quantity="one">%s час</item>
         <item quantity="other">%s часа</item>
     </plurals>
-    <string name="branch">Разклонение:</string>
     <string name="manual_build">Ръчно компилирано и подписано от 1fexd</string>
-    <string name="commit">Идентификатор:</string>
     <string name="donate_learn_more">Научете повече</string>
-    <string name="type">Вид:</string>
     <string name="flavor">Вариант:</string>
     <string name="github_pipeline_build">Компилирано и подписано от работен процес на Гитхъб</string>
     <string name="other">Друго</string>

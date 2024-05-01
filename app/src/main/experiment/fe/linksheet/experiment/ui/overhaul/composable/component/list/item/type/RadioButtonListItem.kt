@@ -15,8 +15,8 @@ import fe.android.preference.helper.compose.MutablePreferenceState
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.TextContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 
 object RadioButtonListItemDefaults {
     val Width = 24.dp

@@ -30,7 +30,6 @@
     <string name="enable_amp2html">Омогући Amp2Html</string>
     <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
     <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено.</string>
-    <string name="branch">Грана</string>
     <string name="always_disable">Увек онемогући</string>
     <string name="copy_to_clipboard">Копирај у привремену меморију</string>
     <string name="preview_url_explainer">Приказује URL адресу на коју је кликнуто (након што је обрађена)</string>
@@ -63,7 +62,6 @@
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">Остало</string>
-    <string name="commit">Извршење</string>
     <string name="enable_send_button_explainer">Приказује дугме у доњем листу које вам омогућава да делите URL с другим апликацијама као да сте га изабрали из менија „Дели са“</string>
     <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">
 \nлинк</annotation>.</string>
@@ -128,7 +126,6 @@
     <string name="whitelisted_browsers">Прегледачи на белој листи</string>
     <string name="amoled_black">AMOLED црна</string>
     <string name="export_log">Извоз евиденције</string>
-    <string name="type">Тип</string>
     <string name="bottom_sheet_explainer">Распоред мреже, сортирање по употреби, прилагођавање додира, URL трака</string>
     <string name="onboarding6_highlight">преференце</string>
     <string name="shizuku_explainer">Shizuku омогућава да LinkSheet директно комуницира са системским API-јима</string>

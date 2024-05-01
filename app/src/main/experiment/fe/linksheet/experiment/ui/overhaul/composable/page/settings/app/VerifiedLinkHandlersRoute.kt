@@ -1,7 +1,10 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.app
 
+import android.content.res.Resources
 import android.os.Build
+import androidx.annotation.PluralsRes
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -15,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -30,8 +34,11 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ListIt
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.experiment.ui.overhaul.composable.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
+import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRouteData.buildHostStateText
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRouteData.hostStateStringRes
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.listHelper
@@ -43,6 +50,55 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.LocalActivity
 import org.koin.androidx.compose.koinViewModel
 
+private object VerifiedLinkHandlersRouteData {
+    val hostStateStringRes = arrayOf(
+        DefaultAltStringRes(
+            R.string.settings_verified_link_handlers__text_app_host_info_verified,
+            R.plurals.settings_verified_link_handlers__text_app_host_info_verified_alt
+        ),
+        DefaultAltStringRes(
+            R.string.settings_verified_link_handlers__text_app_host_info_selected,
+            R.plurals.settings_verified_link_handlers__text_app_host_info_selected_alt
+        ),
+        DefaultAltStringRes(
+            R.string.settings_verified_link_handlers__text_app_host_info_none,
+            R.plurals.settings_verified_link_handlers__text_app_host_info_none_alt
+        )
+    )
+
+    @Composable
+    fun buildHostStateText(sum: Int, vararg states: Pair<DefaultAltStringRes, List<String>>): String {
+        val resources = LocalContext.current.resources
+
+        var hasSingleState: Boolean
+        val strings = states
+            .filter { (_, hosts) -> hosts.isNotEmpty() }
+            .also { hasSingleState = it.size == 1 }
+            .map { (res, hosts) -> res.format(resources, hasSingleState, hosts) }
+
+        if (hasSingleState) {
+            return strings.single()
+        }
+
+        return pluralStringResource(
+            id = R.plurals.settings_verified_link_handlers__text_app_host_info,
+            count = sum,
+            sum, strings.joinToString(separator = ", ")
+        )
+    }
+}
+
+
+@Stable
+data class DefaultAltStringRes(
+    @StringRes val default: Int,
+    @PluralsRes val alt: Int,
+) {
+    fun format(resources: Resources, single: Boolean, list: List<*>): String {
+        return if (single) resources.getQuantityString(alt, list.size, list.size)
+        else resources.getString(default, list.size)
+    }
+}
 
 private const val allPackages = "all"
 
@@ -161,11 +217,11 @@ fun VerifiedLinkHandlersRoute(
                     list = items,
                     listKey = { it.packageName }
                 ) { item, padding, shape ->
-                    var expanded by remember { mutableStateOf(false) }
-                    val rotation by animateFloatAsState(
-                        targetValue = if (expanded) 180f else 0f,
-                        label = "Arrow rotation"
-                    )
+//                    var expanded by remember { mutableStateOf(false) }
+//                    val rotation by animateFloatAsState(
+//                        targetValue = if (expanded) 180f else 0f,
+//                        label = "Arrow rotation"
+//                    )
 
                     ClickableShapeListItem(
                         padding = padding,
@@ -175,12 +231,32 @@ fun VerifiedLinkHandlersRoute(
                             if (shizukuMode) postCommand(item.packageName)
                             else openDefaultSettings(item)
                         },
-                        headlineContent = content {
-                            Text(text = item.label, overflow = TextOverflow.Ellipsis, maxLines = 1)
-                        },
+                        headlineContent = text(item.label),
                         supportingContent = content {
+                            val (verified, selected, none) = hostStateStringRes
+
+                            Column {
+                                Text(text = item.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
+                                Spacer(modifier = Modifier.height(5.dp))
+                                Text(
+                                    text = buildHostStateText(
+                                        item.hostSum,
+                                        verified to item.stateVerified,
+                                        selected to item.stateSelected,
+                                        none to item.stateNone,
+                                    )
+                                )
+
+                                Text(
+                                    text = stringResource(
+                                        id = if (item.isLinkHandlingAllowed) R.string.settings_verified_link_handlers__text_link_handling_allowed_true
+                                        else R.string.settings_verified_link_handlers__text_link_handling_allowed_false
+                                    )
+                                )
+                            }
+
+
 //                            Column(modifier = Modifier.animateContentSize()) {
-                            Text(text = item.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
 //                                if (expanded) {
 //                                    Row(horizontalArrangement = Arrangement.End) {
 //                                        Button(onClick = { /*TODO*/ }) {
@@ -236,21 +312,24 @@ fun VerifiedLinkHandlersRoute(
     }
 }
 
-
 @Composable
 private fun StateFilter(
     selection: FilterMode,
     onSelected: (FilterMode) -> Unit,
 ) {
-    val context = LocalContext.current
-
     var expanded by remember { mutableStateOf(false) }
     val rotation by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow rotation")
 
+
+    // From androidx.compose.material3.tokens#FilterChipTokens
+    // val UnselectedLabelTextColor = ColorSchemeKeyTokens.OnSurfaceVariant
+    val unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
+
     Box(modifier = Modifier) {
         FilterChip(
-            selected = true,
+            selected = selection != FilterMode.ShowAll,
             onClick = { expanded = !expanded },
+            colors = FilterChipDefaults.filterChipColors(iconColor = unselectedColor),
             label = {
                 Text(
                     text = stringResource(

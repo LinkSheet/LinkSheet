@@ -122,8 +122,6 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 ## Star History
 
-## Star History
-
 <a href="https://star-history.com/#LinkSheet/LinkSheet&Date">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=LinkSheet/LinkSheet&type=Date&theme=dark" />

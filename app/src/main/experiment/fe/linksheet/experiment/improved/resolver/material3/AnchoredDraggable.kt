@@ -445,7 +445,7 @@ internal class AnchoredDraggableState<T>(
      * anchor in the direction indicated by the sign of the [velocity] will be the target.
      */
     suspend fun settle(velocity: Float) {
-        Log.d("BottomSheet", "settle: velocity=$velocity")
+        M3Log.d("BottomSheet", "settle: velocity=$velocity")
 
         val previousValue = this.currentValue
         val targetValue = computeTarget(
@@ -688,7 +688,7 @@ internal class AnchoredDraggableState<T>(
  */
 @ExperimentalMaterial3Api
 internal suspend fun <T> AnchoredDraggableState<T>.snapTo(targetValue: T) {
-    Log.d("BottomSheet", "snapTo: targetValue=$targetValue")
+    M3Log.d("BottomSheet", "snapTo: targetValue=$targetValue")
 
     anchoredDrag(targetValue = targetValue) { anchors, latestTarget ->
         val targetOffset = anchors.positionOf(latestTarget)
@@ -712,7 +712,7 @@ internal suspend fun <T> AnchoredDraggableState<T>.animateTo(
     targetValue: T,
     velocity: Float = this.lastVelocity,
 ) {
-    Log.d("BottomSheet", "animateTo: targetValue=$targetValue, velocity=$velocity")
+    M3Log.d("BottomSheet", "animateTo: targetValue=$targetValue, velocity=$velocity")
 
 
     anchoredDrag(targetValue = targetValue) { anchors, latestTarget ->
@@ -897,7 +897,7 @@ private class DraggableAnchorsNode<T>(
         // post-lookahead. If there is no lookahead happening (!isLookingAhead && !didLookahead),
         // update the anchors in the main pass.
 
-        Log.d("BottomSheet", "measure: isLookingAhead=$isLookingAhead, didLookahead=$didLookahead")
+        M3Log.d("BottomSheet", "measure: isLookingAhead=$isLookingAhead, didLookahead=$didLookahead")
         if (!isLookingAhead || !didLookahead) {
             val size = IntSize(placeable.width, placeable.height)
             val newAnchorResult = anchors(size, constraints)
@@ -913,7 +913,7 @@ private class DraggableAnchorsNode<T>(
             val offset = if (isLookingAhead) {
                 state.anchors.positionOf(state.targetValue)
             } else state.requireOffset()
-            Log.d("BottomSheet", "measure: isLookingAhead=$isLookingAhead, offset=$offset")
+            M3Log.d("BottomSheet", "measure: isLookingAhead=$isLookingAhead, offset=$offset")
 
             val xOffset = if (orientation == Orientation.Horizontal) offset else 0f
             val yOffset = if (orientation == Orientation.Vertical) offset else 0f

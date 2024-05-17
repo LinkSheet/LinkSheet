@@ -221,10 +221,10 @@ fun ModalBottomSheet(
         }
     }
 
-    Log.d("BottomSheet", "PreLaunchedEffect: ${sheetState.hasExpandedState}")
+    M3Log.d("BottomSheet", "PreLaunchedEffect: ${sheetState.hasExpandedState}")
     if (sheetState.hasExpandedState) {
         LaunchedEffect(sheetState) {
-            Log.d("BottomSheet", "LaunchedEffect: sheetState.currentValue=${sheetState.currentValue}, sheetState.targetValue=${sheetState.targetValue}")
+            M3Log.d("BottomSheet", "LaunchedEffect: sheetState.currentValue=${sheetState.currentValue}, sheetState.targetValue=${sheetState.targetValue}")
             sheetState.show()
         }
     }
@@ -281,7 +281,7 @@ internal fun BoxScope.ModalBottomSheetContent(
                 sheetState.anchoredDraggableState,
                 Orientation.Vertical
             ) { sheetSize, constraints ->
-                Log.d("BottomSheet", "draggableAnchors: sheetSize=$sheetSize,constraints=$constraints")
+                M3Log.d("BottomSheet", "draggableAnchors: sheetSize=$sheetSize,constraints=$constraints")
 
                 val fullHeight = constraints.maxHeight.toFloat()
                 val newAnchors = DraggableAnchors {
@@ -296,7 +296,7 @@ internal fun BoxScope.ModalBottomSheetContent(
                     }
                 }
 
-                Log.d("BottomSheet", "draggableAnchors: newAnchors=$newAnchors")
+                M3Log.d("BottomSheet", "draggableAnchors: newAnchors=$newAnchors")
 //                val newTarget = when (sheetState.anchoredDraggableState.targetValue) {
 //                    Hidden -> Hidden
 //                    PartiallyExpanded, Expanded -> {
@@ -319,7 +319,7 @@ internal fun BoxScope.ModalBottomSheetContent(
                     }
                 }
 
-                Log.d("BottomSheet", "draggableAnchors: newTarget=$newTarget")
+                M3Log.d("BottomSheet", "draggableAnchors: newTarget=$newTarget")
                 return@draggableAnchors newAnchors to newTarget
             }
             .draggable(

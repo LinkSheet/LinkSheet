@@ -15,6 +15,7 @@ import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.extension.kotlinx.awaitOrNull
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -34,11 +35,9 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.util.IntentParser
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.withContext
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
@@ -112,9 +111,17 @@ class ImprovedIntentResolver(
     private val _events = MutableStateFlow<ResolveEvent>(value = ResolveEvent.Initialized)
     val events = _events.asStateFlow()
 
+    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.None)
+    val interactions = _interactions.asStateFlow()
+
     private fun emitEvent(message: String) {
         _events.tryEmit(ResolveEvent.Message(message))
         logger.info(message)
+    }
+
+    private fun emitInteraction(interaction: ResolverInteraction) {
+        _interactions.tryEmit(interaction)
+        logger.info("Emitted interaction $interaction")
     }
 
     private fun fail(error: String, result: IntentResolveResult): IntentResolveResult {
@@ -122,15 +129,22 @@ class ImprovedIntentResolver(
         return result
     }
 
-    suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult {
+    private suspend fun initState(event: ResolveEvent.Message, interaction: ResolverInteraction) {
+        _events.emit(event)
+        _interactions.emit(interaction)
+    }
+
+    suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope {
+        initState(ResolveEvent.Initialized, ResolverInteraction.None)
+
         val searchIntentResult = tryHandleSearchIntent(intent)
-        if (searchIntentResult != null) return searchIntentResult
+        if (searchIntentResult != null) return@coroutineScope searchIntentResult
 
         var uri = getUriFromIntent(intent)
 
         if (uri == null) {
             Log.d("ImprovedIntentResolver", "Failed to parse intent ${intent.action}")
-            return IntentResolveResult.IntentParseFailed
+            return@coroutineScope IntentResolveResult.IntentParseFailed
         }
 
         emitEvent("Querying browser list")
@@ -144,7 +158,7 @@ class ImprovedIntentResolver(
         )
 
         if (uri == null) {
-            return fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
+            return@coroutineScope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
         }
 
         val (resolveStatus, resolvedUri) = runResolvers(
@@ -166,7 +180,7 @@ class ImprovedIntentResolver(
         )
 
         if (resolvedUri == null) {
-            return fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
+            return@coroutineScope fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
         }
 
         uri = runUriModifiers(
@@ -177,7 +191,7 @@ class ImprovedIntentResolver(
         )
 
         if (uri == null) {
-            return fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
+            return@coroutineScope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
         }
 
         val libRedirectResult = tryRunLibRedirect(
@@ -221,9 +235,20 @@ class ImprovedIntentResolver(
             returnLastChosen = !dontShowFilteredItem()
         )
 
-        val unfurl = tryUnfurl(enabled = previewUrl(), uri = uri)
+        val unfurlDeferred = async { tryUnfurl(enabled = previewUrl(), uri = uri) }
+        val unfurlCancel = ResolverInteraction.Cancelable(1) {
+            Log.d("Cancel", "Cancelling $unfurlDeferred")
+            unfurlDeferred.cancel()
+        }
 
-        return IntentResolveResult.Default(
+        emitInteraction(unfurlCancel)
+
+        Log.d("ImprovedIntentResolver", "Awaiting..")
+        val unfurl = unfurlDeferred.awaitOrNull()
+
+        emitInteraction(ResolverInteraction.None)
+
+        return@coroutineScope IntentResolveResult.Default(
             newIntent,
             uri,
             unfurl,
@@ -317,6 +342,7 @@ class ImprovedIntentResolver(
         if (!enabled) return@withContext null
 
         emitEvent("Generating preview")
+//        delay(10_000)
         // TODO: Move everything to okhttp
         unfurler.unfurl(uri.toString())
     }

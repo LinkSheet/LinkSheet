@@ -147,7 +147,9 @@ class ImprovedBottomSheet(
             hide = hide,
             sheetContent = {
                 if (status is IntentResolveResult.Pending) {
-                    LoadingIndicator(events = resolver.events)
+                    LoadingIndicator(events = resolver.events, interactions = resolver.interactions, requestExpand = {
+                        coroutineScope.launch { drawerState.expand() }
+                    })
                 } else if (status is IntentResolveResult.Default) {
                     AppWrapper_Temp(
                         status as IntentResolveResult.Default,

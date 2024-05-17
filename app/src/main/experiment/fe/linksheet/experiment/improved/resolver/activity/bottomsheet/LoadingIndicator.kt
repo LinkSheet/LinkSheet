@@ -2,36 +2,42 @@ package fe.linksheet.experiment.improved.resolver.activity.bottomsheet
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.ResolveEvent
+import fe.linksheet.experiment.improved.resolver.ResolverInteraction
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.PreviewTheme
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun LoadingIndicator(events: StateFlow<ResolveEvent>) {
+fun LoadingIndicator(
+    events: StateFlow<ResolveEvent>,
+    interactions: StateFlow<ResolverInteraction>,
+    requestExpand: () -> Unit
+) {
     val event by events.collectOnIO(initialState = ResolveEvent.Initialized)
+    val interaction by interactions.collectOnIO(initialState = ResolverInteraction.None)
+
+    LaunchedEffect(key1 = interaction) {
+        requestExpand()
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 20.dp),
+            .padding(horizontal = 20.dp, vertical = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
 //        verticalArrangement = Arrangement.spacedBy(15.dp),
     ) {
@@ -45,6 +51,18 @@ fun LoadingIndicator(events: StateFlow<ResolveEvent>) {
         )
 
         Text(text = "${(event as? ResolveEvent.Message)?.message}", style = MaterialTheme.typography.bodyMedium)
+
+        if (interaction is ResolverInteraction.Cancelable) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+
+                Button(onClick = {
+                    Log.d("Interact", "Cancel")
+                    (interaction as ResolverInteraction.Cancelable).cancel()
+                }) {
+                    Text(text = stringResource(id = R.string.bottom_sheet_loading_indicator__button_skip_job))
+                }
+            }
+        }
 //        LinearProgressIndicator(modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp))
     }
 }
@@ -53,17 +71,26 @@ fun LoadingIndicator(events: StateFlow<ResolveEvent>) {
 @Composable
 private fun LoadingIndicatorPreview() {
     val events = MutableStateFlow<ResolveEvent>(ResolveEvent.Initialized)
+    val interactions = MutableStateFlow<ResolverInteraction>(ResolverInteraction.None)
 
     LaunchedEffect(key1 = Unit) {
         var i = 0
         while (true) {
             events.emit(ResolveEvent.Message("Message $i"))
+            if (i % 5 == 0) {
+                interactions.emit(ResolverInteraction.Cancelable(1) { Log.d("Preview", "Cancel clicked") })
+            }
+
             delay(2000)
+
+
             i++
         }
     }
 
     PreviewTheme {
-        LoadingIndicator(events = events)
+        LoadingIndicator(events = events, interactions = interactions, requestExpand = {
+
+        })
     }
 }

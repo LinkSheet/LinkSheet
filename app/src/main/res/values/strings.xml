@@ -741,4 +741,5 @@
     <string name="settings_credits__app_credit_reason_seal">Design inspiration</string>
     <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Design inspiration</string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job">Skip</string>
 </resources>

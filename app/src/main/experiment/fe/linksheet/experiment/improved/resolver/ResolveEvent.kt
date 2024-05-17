@@ -7,7 +7,12 @@ sealed interface ResolveEvent {
     @Stable
     value class Message(val message: String) : ResolveEvent
 
-    companion object{
+    companion object {
         val Initialized = Message("Initialized")
     }
+}
+
+sealed interface ResolverInteraction {
+    data object None : ResolverInteraction
+    data class Cancelable(val id: Int, val cancel: () -> Unit) : ResolverInteraction
 }

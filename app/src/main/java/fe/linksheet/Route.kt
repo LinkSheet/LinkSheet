@@ -60,7 +60,7 @@ const val loadDumpedPreferences = "log_dumped_reference_settings_route"
 data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
     companion object : Route1<ExperimentSettingsRouteArg, String?>(
         Argument(ExperimentSettingsRouteArg::experiment),
-        { experiment -> ExperimentSettingsRouteArg(experiment) }
+        ::ExperimentSettingsRouteArg
     )
 }
 
@@ -81,7 +81,7 @@ data class LogTextViewerRoute(
     companion object : Route2<LogTextViewerRoute, String, String?>(
         Argument(LogTextViewerRoute::timestamp),
         Argument(LogTextViewerRoute::fileName),
-        { timestamp, fileName -> LogTextViewerRoute(timestamp, fileName) }
+        ::LogTextViewerRoute
     )
 }
 
@@ -97,7 +97,7 @@ const val libRedirectSettingsRoute = "lib_redirect_settings_route"
 data class LibRedirectServiceRoute(val serviceKey: String) : RouteData {
     companion object : Route1<LibRedirectServiceRoute, String>(
         Argument(LibRedirectServiceRoute::serviceKey),
-        { LibRedirectServiceRoute(it) }
+        ::LibRedirectServiceRoute
     )
 }
 

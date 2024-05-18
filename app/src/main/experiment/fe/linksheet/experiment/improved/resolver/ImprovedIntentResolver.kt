@@ -119,6 +119,11 @@ class ImprovedIntentResolver(
         logger.info(message)
     }
 
+    private fun emitEventIf(predicate: Boolean, message: () -> String) {
+        if (!predicate) return
+        emitEvent(message())
+    }
+
     private fun emitInteraction(interaction: ResolverInteraction) {
         _interactions.tryEmit(interaction)
         logger.info("Emitted interaction $interaction")
@@ -134,68 +139,96 @@ class ImprovedIntentResolver(
         _interactions.emit(interaction)
     }
 
-    suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope {
+    suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.None)
 
         val searchIntentResult = tryHandleSearchIntent(intent)
-        if (searchIntentResult != null) return@coroutineScope searchIntentResult
+        if (searchIntentResult != null) return@scope searchIntentResult
 
         var uri = getUriFromIntent(intent)
 
         if (uri == null) {
             Log.d("ImprovedIntentResolver", "Failed to parse intent ${intent.action}")
-            return@coroutineScope IntentResolveResult.IntentParseFailed
+            return@scope IntentResolveResult.IntentParseFailed
         }
 
         emitEvent("Querying browser list")
         val browsers = browserResolver.queryBrowsers()
 
+        val resolveEmbeds = resolveEmbeds()
+        val useClearUrls = useClearUrls()
+        val useFastForwardRules = useFastForwardRules()
+
+        val uriModifiers = resolveEmbeds || useClearUrls || useFastForwardRules
+
+        emitEventIf(uriModifiers) { "Applying link modifiers" }
+
         uri = runUriModifiers(
             uri = uri,
-            resolveEmbeds = resolveEmbeds(),
-            clearUrl = useClearUrls(),
-            fastForward = useFastForwardRules()
+            resolveEmbeds = resolveEmbeds,
+            clearUrl = useClearUrls,
+            fastForward = useFastForwardRules
         )
 
         if (uri == null) {
-            return@coroutineScope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
+            return@scope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
         }
 
-        val (resolveStatus, resolvedUri) = runResolvers(
-            uri = uri,
-            // TODO: Check internet
-            canAccessInternet = true,
+        val resolveStatus = ResolveModuleStatus()
+
+        val followRedirects = followRedirects()
+        emitEventIf(followRedirects) { "Resolving redirects" }
+
+        var resolvedUri = runRedirectResolver(
+            resolveModuleStatus = resolveStatus,
             redirectResolver = redirectUrlResolver,
-            amp2HtmlResolver = amp2HtmlResolver,
-            followRedirects = followRedirects(),
+            uri = uri,
+            canAccessInternet = true,
+            requestTimeout = requestTimeout(),
+            followRedirects = followRedirects,
             followRedirectsExternalService = followRedirectsExternalService(),
             followOnlyKnownTrackers = followOnlyKnownTrackers(),
             followRedirectsLocalCache = followRedirectsLocalCache(),
             followRedirectsAllowDarknets = followRedirectsAllowDarknets(),
+        )
+
+        val amp2Html = enableAmp2Html()
+        emitEventIf(amp2Html) { "Un-amping link" }
+
+        resolvedUri = runAmp2HtmlResolver(
+            resolveModuleStatus = resolveStatus,
+            amp2HtmlResolver = amp2HtmlResolver,
+            uri = resolvedUri,
+            canAccessInternet = true,
             requestTimeout = requestTimeout(),
-            enableAmp2Html = enableAmp2Html(),
+            enableAmp2Html = amp2Html,
             amp2HtmlAllowDarknets = amp2HtmlAllowDarknets(),
             amp2HtmlExternalService = amp2HtmlExternalService(),
             amp2HtmlLocalCache = amp2HtmlLocalCache()
         )
 
         if (resolvedUri == null) {
-            return@coroutineScope fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
+            return@scope fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
         }
+
+        emitEventIf(uriModifiers) { "Applying link modifiers" }
 
         uri = runUriModifiers(
             uri = resolvedUri,
-            resolveEmbeds = resolveEmbeds(),
-            clearUrl = useClearUrls(),
-            fastForward = useFastForwardRules()
+            resolveEmbeds = resolveEmbeds,
+            clearUrl = useClearUrls,
+            fastForward = useFastForwardRules
         )
 
         if (uri == null) {
-            return@coroutineScope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
+            return@scope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
         }
 
+        val enableLibRedirect = enableLibRedirect()
+        emitEventIf(enableLibRedirect) { "Trying to find FOSS-frontend" }
+
         val libRedirectResult = tryRunLibRedirect(
-            enabled = enableLibRedirect(),
+            enabled = enableLibRedirect,
             intent = intent,
             uri = uri,
             ignoreLibRedirectButton = enableIgnoreLibRedirectButton(),
@@ -206,8 +239,11 @@ class ImprovedIntentResolver(
             uri = libRedirectResult.redirectedUri
         }
 
+        val enabledDownloader = enableDownloader()
+        emitEventIf(enabledDownloader) { "Checking download-ability" }
+
         val downloadable = checkDownloadable(
-            enabled = enableDownloader(),
+            enabled = enabledDownloader,
             uri = uri,
             checkUrlMimeType = downloaderCheckUrlMimeType(),
             requestTimeout = requestTimeout()
@@ -235,7 +271,10 @@ class ImprovedIntentResolver(
             returnLastChosen = !dontShowFilteredItem()
         )
 
-        val unfurlDeferred = async { tryUnfurl(enabled = previewUrl(), uri = uri) }
+        val previewUrl = previewUrl()
+        emitEventIf(previewUrl) { "Generating preview" }
+
+        val unfurlDeferred = async { tryUnfurl(enabled = previewUrl, uri = uri) }
         val unfurlCancel = ResolverInteraction.Cancelable(1) {
             Log.d("Cancel", "Cancelling $unfurlDeferred")
             unfurlDeferred.cancel()
@@ -248,7 +287,7 @@ class ImprovedIntentResolver(
 
         emitInteraction(ResolverInteraction.None)
 
-        return@coroutineScope IntentResolveResult.Default(
+        return@scope IntentResolveResult.Default(
             newIntent,
             uri,
             unfurl,
@@ -340,8 +379,6 @@ class ImprovedIntentResolver(
         uri: Uri,
     ): UnfurlResult? = withContext(dispatcher) {
         if (!enabled) return@withContext null
-
-        emitEvent("Generating preview")
 //        delay(10_000)
         // TODO: Move everything to okhttp
         unfurler.unfurl(uri.toString())
@@ -355,7 +392,6 @@ class ImprovedIntentResolver(
         requestTimeout: Int,
     ): DownloadCheckResult = withContext(dispatcher) {
         if (!enabled) return@withContext DownloadCheckResult.NonDownloadable
-        emitEvent("Checking download-ability")
 
         if (checkUrlMimeType) {
             val result = downloader.checkIsNonHtmlFileEnding(uri.toString())
@@ -382,7 +418,6 @@ class ImprovedIntentResolver(
 
         if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
 
-        emitEvent("Trying to find FOSS-frontend")
         return@withContext libRedirectResolver.resolve(uri, jsEngine)
     }
 
@@ -402,13 +437,8 @@ class ImprovedIntentResolver(
         if (uri?.host == null || uri.scheme == null) return null
         var url = uri.toString()
 
-        emitEvent("Resolving embeds")
         runUriModifier(resolveEmbeds) { EmbedResolver.resolve(url, embedResolverBundled) }?.let { url = it }
-
-        emitEvent("Applying rules")
         runUriModifier(fastForward) { FastForward.getRuleRedirect(url) }?.let { url = it }
-
-        emitEvent("Clearing tracking parameters")
         runUriModifier(clearUrl) { ClearURL.clearUrl(url, clearUrlProviders) }?.let { url = it }
 
         return runCatching { Uri.parse(url) }.getOrNull()
@@ -419,38 +449,27 @@ class ImprovedIntentResolver(
         return runCatching(block).onFailure { logger.error("Uri modification failed", it) }.getOrNull()
     }
 
-    private suspend fun runResolvers(
+    private suspend fun runRedirectResolver(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
-        uri: Uri,
+        resolveModuleStatus: ResolveModuleStatus,
         redirectResolver: RedirectUrlResolver,
-        amp2HtmlResolver: Amp2HtmlUrlResolver,
+        uri: Uri,
         canAccessInternet: Boolean = true,
+        requestTimeout: Int,
         followRedirects: Boolean,
         followRedirectsExternalService: Boolean,
         followOnlyKnownTrackers: Boolean,
         followRedirectsLocalCache: Boolean,
         followRedirectsAllowDarknets: Boolean,
-        requestTimeout: Int,
-        enableAmp2Html: Boolean,
-        amp2HtmlLocalCache: Boolean,
-        amp2HtmlExternalService: Boolean,
-        amp2HtmlAllowDarknets: Boolean,
-    ): Pair<ResolveModuleStatus, Uri?> = withContext(dispatcher) {
-        logger.debug("Executing runResolvers on ${Thread.currentThread().name}")
+    ): Uri? = withContext(dispatcher) {
+        logger.debug("Executing runRedirectResolver on ${Thread.currentThread().name}")
 
-        val resolveModuleStatus = ResolveModuleStatus()
-        var uriMut: Uri? = uri
-
-        logger.debug("Executing redirect resolver on ${Thread.currentThread().name}")
-
-        uriMut = resolveModuleStatus.resolveIfEnabled(followRedirects, ResolveModule.Redirect, uriMut) { uriToResolve ->
+        resolveModuleStatus.resolveIfEnabled(followRedirects, ResolveModule.Redirect, uri) { uriToResolve ->
             logger.debug("Inside redirect func, on ${Thread.currentThread().name}")
 
             val resolvePredicate: ResolvePredicate = { uri ->
                 (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(uri.toString())
             }
-
-            emitEvent("Resolving redirects")
 
             redirectResolver.resolve(
                 uriToResolve,
@@ -462,12 +481,24 @@ class ImprovedIntentResolver(
                 followRedirectsAllowDarknets
             )
         }
+    }
 
-        logger.debug("Executing amp2html on ${Thread.currentThread().name}")
-        uriMut = resolveModuleStatus.resolveIfEnabled(enableAmp2Html, ResolveModule.Amp2Html, uriMut) { uriToResolve ->
+    private suspend fun runAmp2HtmlResolver(
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        resolveModuleStatus: ResolveModuleStatus,
+        amp2HtmlResolver: Amp2HtmlUrlResolver,
+        uri: Uri?,
+        canAccessInternet: Boolean = true,
+        requestTimeout: Int,
+        enableAmp2Html: Boolean,
+        amp2HtmlLocalCache: Boolean,
+        amp2HtmlExternalService: Boolean,
+        amp2HtmlAllowDarknets: Boolean,
+    ): Uri? = withContext(dispatcher) {
+        logger.debug("Executing runAmp2HtmlResolver on ${Thread.currentThread().name}")
+
+        resolveModuleStatus.resolveIfEnabled(enableAmp2Html, ResolveModule.Amp2Html, uri) { uriToResolve ->
             logger.debug("Inside amp2html func, on ${Thread.currentThread().name}")
-
-            emitEvent("Un-amping link")
 
             amp2HtmlResolver.resolve(
                 uriToResolve,
@@ -479,7 +510,5 @@ class ImprovedIntentResolver(
                 amp2HtmlAllowDarknets,
             )
         }
-
-        resolveModuleStatus to uriMut
     }
 }

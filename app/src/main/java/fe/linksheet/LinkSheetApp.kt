@@ -26,6 +26,7 @@ import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
+import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
@@ -115,7 +116,8 @@ class LinkSheetApp : Application() {
                 requestModule,
                 downloaderModule,
                 if (BuildType.current.allowDebug) analyticsModule else DebugLogAnalyticsClient.module,
-                statisticsModule
+                statisticsModule,
+                pasteServiceModule
             )
         }
 

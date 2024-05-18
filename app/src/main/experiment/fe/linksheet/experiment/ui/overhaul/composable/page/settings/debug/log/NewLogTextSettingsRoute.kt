@@ -49,7 +49,7 @@ fun NewLogTextSettingsRoute(
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-        ExportLogDialog2(
+        ExportLogDialog(
             logViewCommon = viewModel.logViewCommon,
             clipboardManager = viewModel.clipboardManager,
             logEntries = state!!,

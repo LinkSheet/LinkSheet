@@ -112,19 +112,19 @@ fun ExportLogDialog(
         Spacer(modifier = Modifier.height(10.dp))
 
         BottomRow {
-            TextButton(onClick = {
-                coroutineScope.launch(Dispatchers.IO) {
-                    val paste = logViewCommon.createPaste(text)
-                    clipboardManager.setText(
-                        context.resources.getString(R.string.log),
-                        paste ?: "Failure!"
-                    )
-
-                    close(Unit)
-                }
-            }) {
-                Text(text = stringResource(id = R.string.copy_to_clipboard))
-            }
+//            TextButton(onClick = {
+//                coroutineScope.launch(Dispatchers.IO) {
+//                    val paste = logViewCommon.createPaste(text)
+//                    clipboardManager.setText(
+//                        context.resources.getString(R.string.log),
+//                        paste ?: "Failure!"
+//                    )
+//
+//                    close(Unit)
+//                }
+//            }) {
+//                Text(text = stringResource(id = R.string.copy_to_clipboard))
+//            }
 
             TextButton(
                 onClick = {
@@ -139,7 +139,7 @@ fun ExportLogDialog(
 }
 
 @Composable
-fun ExportLogDialog2(
+fun NewExportLogDialog(
     logViewCommon: LogViewCommon,
     clipboardManager: ClipboardManager,
     logEntries: List<LogEntry>,
@@ -184,7 +184,10 @@ fun ExportLogDialog2(
         },
         text = {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                item(key = R.string.export_log_dialog__title_redact_log, contentType = ContentTypeDefaults.CheckboxRow) {
+                item(
+                    key = R.string.export_log_dialog__title_redact_log,
+                    contentType = ContentTypeDefaults.CheckboxRow
+                ) {
                     CheckboxListItem(
                         checked = redactLog,
                         onCheckedChange = { redactLog = it },
@@ -197,7 +200,10 @@ fun ExportLogDialog2(
                 }
 
                 if (isFatal) {
-                    item(key = R.string.export_log_dialog__title_include_throwable, contentType = ContentTypeDefaults.CheckboxRow) {
+                    item(
+                        key = R.string.export_log_dialog__title_include_throwable,
+                        contentType = ContentTypeDefaults.CheckboxRow
+                    ) {
                         CheckboxListItem(
                             checked = includeThrowableState,
                             onCheckedChange = { includeThrowableState = it },
@@ -210,7 +216,10 @@ fun ExportLogDialog2(
                     }
                 }
 
-                item(key = R.string.export_log_dialog__title_include_fingerprint, contentType = ContentTypeDefaults.CheckboxRow) {
+                item(
+                    key = R.string.export_log_dialog__title_include_fingerprint,
+                    contentType = ContentTypeDefaults.CheckboxRow
+                ) {
                     CheckboxListItem(
                         checked = includeFingerprint,
                         onCheckedChange = { includeFingerprint = it },
@@ -222,7 +231,10 @@ fun ExportLogDialog2(
                     )
                 }
 
-                item(key = R.string.export_log_dialog__title_include_settings, contentType = ContentTypeDefaults.CheckboxRow) {
+                item(
+                    key = R.string.export_log_dialog__title_include_settings,
+                    contentType = ContentTypeDefaults.CheckboxRow
+                ) {
                     CheckboxListItem(
                         checked = includePreferences,
                         onCheckedChange = { includePreferences = it },
@@ -272,7 +284,7 @@ fun ExportLogDialog2(
 //                }
 //            }
         },
-        onDismissRequest = {},
+        onDismissRequest = { close(Unit) },
         dismissButton = null,
         confirmButton = {
 //            TextButton(onClick = { onConfirm(selectedLevel) }) {

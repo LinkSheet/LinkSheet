@@ -86,7 +86,7 @@ class LinkSheetApp : Application() {
             HttpUrlTypeAdapter.register(this)
         }
 
-        if (AndroidVersion.AT_LEAST_API_28_P) {
+        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 

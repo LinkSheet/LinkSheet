@@ -154,7 +154,7 @@ object AppPreferences : PreferenceDefinition(
 
     @SensitivePreference
     val sensitivePreferences = setOf(
-        useTimeMs, logKey, telemetryIdentity, telemetryLevel
+        useTimeMs, logKey, telemetryIdentity, telemetryLevel, telemetryId
     )
 
     @SensitivePreference

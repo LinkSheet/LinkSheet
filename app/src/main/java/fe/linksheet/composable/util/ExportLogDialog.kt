@@ -1,27 +1,41 @@
 package fe.linksheet.composable.util
 
 import android.content.ClipboardManager
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
 import fe.linksheet.R
+import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.DialogDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
+import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
+import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideTextOptions
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContentWrapper
 import fe.linksheet.extension.android.setText
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
+import fe.linksheet.ui.HkGroteskFontFamily
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun ExportLogDialog(
@@ -37,6 +51,16 @@ fun ExportLogDialog(
     var includeFingerprint by remember { mutableStateOf(true) }
     var includePreferences by remember { mutableStateOf(true) }
     var includeThrowableState by remember { mutableStateOf(includeThrowable) }
+
+    val settings = remember(includeFingerprint, includePreferences, redactLog, includeThrowableState) {
+        LogViewCommon.ExportSettings(includeFingerprint, includePreferences, redactLog, includeThrowableState)
+    }
+
+    val text = remember(settings, logEntries) {
+        logViewCommon.buildExportText(context, settings, logEntries)
+    }
+
+    val coroutineScope = rememberCoroutineScope()
 
     DialogColumn {
         HeadlineText(headlineId = R.string.export_log)
@@ -88,18 +112,204 @@ fun ExportLogDialog(
         Spacer(modifier = Modifier.height(10.dp))
 
         BottomRow {
-            TextButton(
-                onClick = {
-                    val settings = LogViewCommon.ExportSettings(includeFingerprint, includePreferences, redactLog, includeThrowableState)
+            TextButton(onClick = {
+                coroutineScope.launch(Dispatchers.IO) {
+                    val paste = logViewCommon.createPaste(text)
                     clipboardManager.setText(
                         context.resources.getString(R.string.log),
-                        logViewCommon.buildClipboardText(context, settings, logEntries)
+                        paste ?: "Failure!"
                     )
+
+                    close(Unit)
+                }
+            }) {
+                Text(text = stringResource(id = R.string.copy_to_clipboard))
+            }
+
+            TextButton(
+                onClick = {
+                    clipboardManager.setText(context.resources.getString(R.string.log), text)
                     close(Unit)
                 }
             ) {
                 Text(text = stringResource(id = R.string.copy_to_clipboard))
             }
+        }
+    }
+}
+
+@Composable
+fun ExportLogDialog2(
+    logViewCommon: LogViewCommon,
+    clipboardManager: ClipboardManager,
+    logEntries: List<LogEntry>,
+    includeThrowable: Boolean = false,
+    close: OnClose<Unit>,
+) {
+    val context = LocalContext.current
+
+    var redactLog by remember { mutableStateOf(true) }
+    var includeFingerprint by remember { mutableStateOf(true) }
+    var includePreferences by remember { mutableStateOf(true) }
+    var includeThrowableState by remember { mutableStateOf(includeThrowable) }
+
+    val settings = remember(includeFingerprint, includePreferences, redactLog, includeThrowableState) {
+        LogViewCommon.ExportSettings(includeFingerprint, includePreferences, redactLog, includeThrowableState)
+    }
+
+    val text = remember(settings, logEntries) {
+        logViewCommon.buildExportText(context, settings, logEntries)
+    }
+
+    val isFatal = remember(logEntries) {
+        logEntries.any { it is LogEntry.FatalEntry }
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+
+    AlertDialog(
+        icon = {
+            Icon(
+                imageVector = Icons.Outlined.Share,
+                contentDescription = stringResource(id = R.string.export_log_dialog__title_share_logs)
+            )
+        },
+        title = {
+            Text(
+                text = stringResource(id = R.string.export_log_dialog__title_share_logs),
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 18.sp
+            )
+        },
+        text = {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                item(key = R.string.export_log_dialog__title_redact_log, contentType = ContentTypeDefaults.CheckboxRow) {
+                    CheckboxListItem(
+                        checked = redactLog,
+                        onCheckedChange = { redactLog = it },
+                        position = ContentPosition.Leading,
+                        headlineContent = textContent(R.string.export_log_dialog__title_redact_log),
+                        supportingContent = textContent(R.string.export_log_dialog__subtitle_redact_log),
+                        otherContent = null,
+                        innerPadding = DialogDefaults.ListItemInnerPadding,
+                    )
+                }
+
+                if (isFatal) {
+                    item(key = R.string.export_log_dialog__title_include_throwable, contentType = ContentTypeDefaults.CheckboxRow) {
+                        CheckboxListItem(
+                            checked = includeThrowableState,
+                            onCheckedChange = { includeThrowableState = it },
+                            position = ContentPosition.Leading,
+                            headlineContent = textContent(R.string.export_log_dialog__title_include_throwable),
+                            supportingContent = textContent(R.string.export_log_dialog__subtitle_include_throwable),
+                            otherContent = null,
+                            innerPadding = DialogDefaults.ListItemInnerPadding,
+                        )
+                    }
+                }
+
+                item(key = R.string.export_log_dialog__title_include_fingerprint, contentType = ContentTypeDefaults.CheckboxRow) {
+                    CheckboxListItem(
+                        checked = includeFingerprint,
+                        onCheckedChange = { includeFingerprint = it },
+                        position = ContentPosition.Leading,
+                        headlineContent = textContent(R.string.export_log_dialog__title_include_fingerprint),
+                        supportingContent = textContent(R.string.export_log_dialog__subtitle_include_fingerprint),
+                        otherContent = null,
+                        innerPadding = DialogDefaults.ListItemInnerPadding,
+                    )
+                }
+
+                item(key = R.string.export_log_dialog__title_include_settings, contentType = ContentTypeDefaults.CheckboxRow) {
+                    CheckboxListItem(
+                        checked = includePreferences,
+                        onCheckedChange = { includePreferences = it },
+                        position = ContentPosition.Leading,
+                        headlineContent = textContent(R.string.export_log_dialog__title_include_settings),
+                        supportingContent = textContent(R.string.export_log_dialog__subtitle_include_settings),
+                        otherContent = null,
+                        innerPadding = DialogDefaults.ListItemInnerPadding,
+                    )
+                }
+
+                item(key = R.string.log_privacy, contentType = ContentTypeDefaults.TextRow) {
+                    TextContentWrapper(textContent = annotated(R.string.log_privacy))
+                }
+            }
+
+//            LinkableTextView(
+//                id = R.string.log_privacy,
+//                style = LocalTextStyle.current.copy(
+//                    color = MaterialTheme.colorScheme.onSurface,
+//                    fontSize = 16.sp
+//                )
+//            )
+
+//            LazyColumn(modifier = Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+//                item(key = R.string.telemetry_dialog_text, contentType = ContentTypeDefaults.Divider) {
+//                    LinkableTextView(
+//                        modifier = Modifier.padding(bottom = DialogDefaults.contentPadding),
+//                        id = R.string.telemetry_dialog_text
+//                    )
+//                }
+//
+//                items(items = telemetryLevels, key = { it.titleId }) { item ->
+//                    AnalyticsRadioButtonRow(
+//                        text = stringResource(id = item.titleId),
+//                        description = stringResource(id = item.descriptionId),
+//                        selected = selectedLevel == item,
+//                        onClick = { selectedLevel = item }
+//                    )
+//                }
+//
+//                item(key = R.string.telemetry_dialog_text_2, contentType = ContentTypeDefaults.Divider) {
+//                    LinkableTextView(
+//                        modifier = Modifier.padding(top = DialogDefaults.contentPadding),
+//                        id = R.string.telemetry_dialog_text_2
+//                    )
+//                }
+//            }
+        },
+        onDismissRequest = {},
+        dismissButton = null,
+        confirmButton = {
+//            TextButton(onClick = { onConfirm(selectedLevel) }) {
+//                Text(text = stringResource(id = R.string.save))
+//            }
+        }
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun DialogCheckboxRow(
+    text: String,
+    description: String,
+    checked: Boolean,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
+            .clip(ShapeListItemDefaults.SingleShape)
+            .combinedClickable(
+                onClick = onClick,
+                role = Role.Checkbox
+            ),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = { onClick() }
+        )
+
+        Column(modifier = Modifier.padding(start = 8.dp)) {
+            Text(text = text, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp))
+            Text(text = description, style = MaterialTheme.typography.bodyMedium)
         }
     }
 }

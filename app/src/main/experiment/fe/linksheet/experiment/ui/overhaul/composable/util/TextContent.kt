@@ -2,30 +2,20 @@ package fe.linksheet.experiment.ui.overhaul.composable.util
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextOverflow
 
-@Stable
-data class TextOptions(
-    val maxLines: Int = Int.MAX_VALUE,
-    val overflow: TextOverflow = TextOverflow.Clip,
-)
 
-val DefaultTextOptions = TextOptions()
-val LocalTextOptions = compositionLocalOf(structuralEqualityPolicy()) { DefaultTextOptions }
-
-typealias OptionalTextContent = TextContent?
-
-@Stable
+@Immutable
 interface TextContent {
     val key: Any
     val content: @Composable () -> Unit
 }
 
-@Stable
+@Immutable
 class Default private constructor(text: String) : TextContent {
     override val key = text
     override val content: @Composable () -> Unit = {
@@ -44,7 +34,7 @@ class Default private constructor(text: String) : TextContent {
     }
 }
 
-@Stable
+@Immutable
 class Resource private constructor(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
     override val key = id
     override val content: @Composable () -> Unit = {
@@ -64,7 +54,7 @@ class Resource private constructor(@StringRes id: Int, vararg formatArgs: Any) :
 }
 
 
-@Stable
+@Immutable
 class Annotated(annotatedString: AnnotatedString) : TextContent {
     override val key = annotatedString.text
     override val content: @Composable () -> Unit = {
@@ -82,7 +72,7 @@ class Annotated(annotatedString: AnnotatedString) : TextContent {
     }
 }
 
-@Stable
+@Immutable
 class AnnotatedStringResource private constructor(@StringRes id: Int, vararg formatArgs: Any) : TextContent {
     override val key = id
     override val content: @Composable () -> Unit = {
@@ -103,7 +93,7 @@ class AnnotatedStringResource private constructor(@StringRes id: Int, vararg for
 }
 
 
-@Stable
+@Immutable
 class ComposableTextContent(
     override val content: @Composable () -> Unit,
     override val key: Any = Unit

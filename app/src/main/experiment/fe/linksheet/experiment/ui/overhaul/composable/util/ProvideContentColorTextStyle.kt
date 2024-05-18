@@ -15,12 +15,12 @@ fun ProvideContentColorTextStyle(
     content: @Composable () -> Unit,
 ) {
     val mergedStyle = LocalTextStyle.current.merge(textStyle)
-    val options = textOptions ?: LocalTextOptions.current
 
-    CompositionLocalProvider(
-        LocalContentColor provides contentColor,
-        LocalTextStyle provides mergedStyle,
-        LocalTextOptions provides options,
-        content = content
-    )
+    ProvideTextOptions(textOptions = textOptions) {
+        CompositionLocalProvider(
+            LocalContentColor provides contentColor,
+            LocalTextStyle provides mergedStyle,
+            content = content
+        )
+    }
 }

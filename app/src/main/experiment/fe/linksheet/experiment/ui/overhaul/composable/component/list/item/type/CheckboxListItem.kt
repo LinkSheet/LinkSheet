@@ -5,6 +5,10 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemContainerHeight
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemPadding
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemTextOptions
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
@@ -18,6 +22,9 @@ fun CheckboxListItem(
     onCheckedChange: (Boolean) -> Unit,
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
+    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
+    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
     position: ContentPosition,
     headlineContent: TextContent,
     overlineContent: TextContent? = null,
@@ -37,7 +44,10 @@ fun CheckboxListItem(
         primaryContent = {
             DefaultListItemCheckbox(enabled = enabled, checked = checked, onCheckedChange = onCheckedChange)
         },
-        otherContent = otherContent
+        otherContent = otherContent,
+        containerHeight = containerHeight,
+        innerPadding = innerPadding,
+        textOptions = textOptions
     )
 }
 

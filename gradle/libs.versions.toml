@@ -2,7 +2,7 @@
 
 [plugins]
 
-gradle = { id = "gradle", version = "8.1.2" }
+gradle = { id = "gradle", version = "8.6" }
 
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

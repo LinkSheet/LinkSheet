@@ -9,6 +9,8 @@ import org.koin.dsl.module
 
 
 val viewModelModule = module {
+    singleOf(::LogViewCommon)
+
     viewModelOf(::MainViewModel)
     viewModelOf(::AppsWhichCanOpenLinksViewModel)
     viewModelOf(::PreferredAppSettingsViewModel)
@@ -37,6 +39,4 @@ val viewModelModule = module {
     viewModelOf(::SettingsViewModel)
     viewModelOf(::NotificationSettingsViewModel)
     viewModelOf(::ExperimentsViewModel)
-
-    singleOf(::LogViewCommon)
 }

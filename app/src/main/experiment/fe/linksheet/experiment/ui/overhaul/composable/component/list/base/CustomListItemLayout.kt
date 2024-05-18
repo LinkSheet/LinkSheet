@@ -1,6 +1,7 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.*
@@ -9,15 +10,15 @@ import kotlin.math.max
 
 @Composable
 fun CustomListItemLayout(
-    startPadding: Dp,
-    endPadding: Dp,
+    containerHeight: CustomListItemContainerHeight,
+    padding: CustomListItemPadding,
     leading: @Composable (() -> Unit)?,
     trailing: @Composable (() -> Unit)?,
     headline: @Composable () -> Unit,
     overline: @Composable (() -> Unit)?,
     supporting: @Composable (() -> Unit)?,
 ) {
-    val measurePolicy = remember(startPadding, endPadding) { CustomListItemMeasurePolicy(startPadding, endPadding) }
+    val measurePolicy = remember(containerHeight, padding) { CustomListItemMeasurePolicy(containerHeight, padding) }
     Layout(
         contents = listOf(
             headline,
@@ -31,12 +32,12 @@ fun CustomListItemLayout(
 }
 
 private class CustomListItemMeasurePolicy(
-    val startPadding: Dp,
-    val endPadding: Dp,
+    val containerHeight: CustomListItemContainerHeight,
+    val padding: CustomListItemPadding,
 ) : MultiContentMeasurePolicy {
-    private val horizontalPadding = startPadding + endPadding
 
     @JvmInline
+    @Immutable
     private value class FirstOnly<T>(val items: List<List<T>>) {
         private fun atIdx(idx: Int) = items.getOrNull(idx)?.firstOrNull()
         operator fun component1() = atIdx(0)
@@ -65,7 +66,7 @@ private class CustomListItemMeasurePolicy(
         var currentTotalWidth = 0
 
         val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
-        val horizontalPadding = horizontalPadding.roundToPx()
+        val horizontalPadding = padding.horizontal.roundToPx()
 
         // ListItem layout has a cycle in its dependencies which we use
         // intrinsic measurements to break:
@@ -91,7 +92,7 @@ private class CustomListItemMeasurePolicy(
             isSupportingMultiline = intrinsicIsSupportingMultiline,
         )
 
-        val intrinsicVerticalPadding = (verticalPadding(intrinsicListItemType) * 2).roundToPx()
+        val intrinsicVerticalPadding = (padding.verticalPadding(intrinsicListItemType) * 2).roundToPx()
 
         val paddedLooseConstraints = looseConstraints.offset(
             horizontal = -horizontalPadding,
@@ -132,7 +133,7 @@ private class CustomListItemMeasurePolicy(
             isSupportingMultiline = supportingPlaceable != null && (supportingPlaceable[FirstBaseline] != supportingPlaceable[LastBaseline]),
         )
 
-        val topPadding = verticalPadding(listItemType)
+        val topPadding = padding.verticalPadding(listItemType)
         val verticalPadding = topPadding * 2
 
         val width = calculateWidth(
@@ -151,7 +152,7 @@ private class CustomListItemMeasurePolicy(
             headlineHeight = heightOrZero(headlinePlaceable),
             overlineHeight = heightOrZero(overlinePlaceable),
             supportingHeight = heightOrZero(supportingPlaceable),
-            listItemType = listItemType,
+            defaultMinHeight = containerHeight.minHeight(listItemType).roundToPx(),
             verticalPadding = verticalPadding.roundToPx(),
             constraints = constraints,
         )
@@ -165,8 +166,7 @@ private class CustomListItemMeasurePolicy(
             overlinePlaceable = overlinePlaceable,
             supportingPlaceable = supportingPlaceable,
             isThreeLine = listItemType == CustomListItemType.ThreeLine,
-            startPadding = startPadding.roundToPx(),
-            endPadding = endPadding.roundToPx(),
+            padding = padding,
             topPadding = topPadding.roundToPx(),
         )
     }
@@ -210,7 +210,7 @@ private class CustomListItemMeasurePolicy(
             headlineWidth = headlineMeasurable?.intrinsicMeasure(height) ?: 0,
             overlineWidth = overlineMeasurable?.intrinsicMeasure(height) ?: 0,
             supportingWidth = supportingMeasurable?.intrinsicMeasure(height) ?: 0,
-            horizontalPadding = horizontalPadding.roundToPx(),
+            horizontalPadding = padding.horizontal.roundToPx(),
             constraints = Constraints(),
         )
     }
@@ -228,7 +228,7 @@ private class CustomListItemMeasurePolicy(
             trailing,
         ) = FirstOnly(measurables)
 
-        var remainingWidth = width.subtractConstraintSafely(horizontalPadding.roundToPx())
+        var remainingWidth = width.subtractConstraintSafely(padding.horizontal.roundToPx())
 
         val leadingHeight = leading?.let {
             val height = it.intrinsicMeasure(remainingWidth)
@@ -258,8 +258,8 @@ private class CustomListItemMeasurePolicy(
             headlineHeight = headline?.intrinsicMeasure(width) ?: 0,
             overlineHeight = overlineHeight,
             supportingHeight = supportingHeight,
-            listItemType = listItemType,
-            verticalPadding = (verticalPadding(listItemType) * 2).roundToPx(),
+            defaultMinHeight = containerHeight.minHeight(listItemType).roundToPx(),
+            verticalPadding = (padding.verticalPadding(listItemType) * 2).roundToPx(),
             constraints = Constraints(),
         )
     }
@@ -269,7 +269,7 @@ private class CustomListItemMeasurePolicy(
 private fun widthOrZero(placeable: Placeable?) = placeable?.width ?: 0
 private fun heightOrZero(placeable: Placeable?) = placeable?.height ?: 0
 
-private fun IntrinsicMeasureScope.calculateWidth(
+private fun calculateWidth(
     leadingWidth: Int,
     trailingWidth: Int,
     headlineWidth: Int,
@@ -286,22 +286,17 @@ private fun IntrinsicMeasureScope.calculateWidth(
     return horizontalPadding + leadingWidth + mainContentWidth + trailingWidth
 }
 
-private fun IntrinsicMeasureScope.calculateHeight(
+private fun calculateHeight(
     leadingHeight: Int,
     trailingHeight: Int,
     headlineHeight: Int,
     overlineHeight: Int,
     supportingHeight: Int,
-    listItemType: CustomListItemType,
+    defaultMinHeight: Int,
     verticalPadding: Int,
     constraints: Constraints,
 ): Int {
-    val defaultMinHeight = when (listItemType) {
-        CustomListItemType.OneLine -> CustomListItemDefaults.ContainerHeightOneLine
-        CustomListItemType.TwoLine -> CustomListItemDefaults.ContainerHeightTwoLine
-        else -> CustomListItemDefaults.ContainerHeightThreeLine
-    }
-    val minHeight = max(constraints.minHeight, defaultMinHeight.roundToPx())
+    val minHeight = max(constraints.minHeight, defaultMinHeight)
 
     val mainContentHeight = headlineHeight + overlineHeight + supportingHeight
 
@@ -320,10 +315,12 @@ private fun MeasureScope.place(
     overlinePlaceable: Placeable?,
     supportingPlaceable: Placeable?,
     isThreeLine: Boolean,
-    startPadding: Int,
-    endPadding: Int,
+    padding: CustomListItemPadding,
     topPadding: Int,
 ): MeasureResult {
+    val startPadding = padding.start.roundToPx()
+    val endPadding = padding.end.roundToPx()
+
     return layout(width, height) {
         leadingPlaceable?.placeRelative(
             x = startPadding,
@@ -339,8 +336,10 @@ private fun MeasureScope.place(
         val mainContentY = if (isThreeLine) {
             topPadding
         } else {
-            val totalHeight = heightOrZero(headlinePlaceable) + heightOrZero(overlinePlaceable) +
+            val totalHeight = heightOrZero(headlinePlaceable) +
+                    heightOrZero(overlinePlaceable) +
                     heightOrZero(supportingPlaceable)
+
             Alignment.CenterVertically.align(totalHeight, height)
         }
         var currentY = mainContentY
@@ -356,7 +355,8 @@ private fun MeasureScope.place(
 }
 
 @JvmInline
-private value class CustomListItemType private constructor(
+@Immutable
+value class CustomListItemType private constructor(
     private val lines: Int,
 ) : Comparable<CustomListItemType> {
 
@@ -387,12 +387,6 @@ private value class CustomListItemType private constructor(
 private fun Density.isSupportingMultilineHeuristic(
     estimatedSupportingHeight: Int,
 ): Boolean = estimatedSupportingHeight > 30.sp.roundToPx()
-
-private fun verticalPadding(listItemType: CustomListItemType): Dp = when (listItemType) {
-    CustomListItemType.ThreeLine -> CustomListItemDefaults.ThreeLineVerticalPadding
-    else -> CustomListItemDefaults.VerticalPadding
-}
-
 
 private fun Int.subtractConstraintSafely(n: Int): Int {
     if (this == Constraints.Infinity) {

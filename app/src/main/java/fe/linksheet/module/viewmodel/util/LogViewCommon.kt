@@ -4,9 +4,9 @@ import android.content.Context
 import android.os.Build
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
-import fe.gson.extension.json.`object`.plus
 import fe.linksheet.extension.android.getCurrentLanguageTag
 import fe.linksheet.module.log.file.entry.LogEntry
+import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -14,12 +14,12 @@ import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.util.AppInfo
-import fe.linksheet.util.BuildInfo
 
 
 class LogViewCommon(
     val preferenceRepository: AppPreferenceRepository,
     val experimentRepository: ExperimentRepository,
+    val pasteService: PasteService<*>,
     val gson: Gson,
     private val redactor: Redactor,
 ) {
@@ -38,7 +38,12 @@ class LogViewCommon(
         val throwable: Boolean,
     )
 
-    fun buildClipboardText(
+    fun createPaste(text: String): String? {
+        val paste = pasteService.createPaste(text)
+        return paste.getOrNull()?.url
+    }
+
+    fun buildExportText(
         context: Context,
         settings: ExportSettings,
         logEntries: List<LogEntry>,

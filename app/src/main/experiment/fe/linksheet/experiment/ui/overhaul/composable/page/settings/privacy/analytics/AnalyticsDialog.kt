@@ -76,7 +76,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
             LazyColumn(modifier = Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 item(key = R.string.telemetry_dialog_text, contentType = ContentTypeDefaults.Divider) {
                     LinkableTextView(
-                        modifier = Modifier.padding(bottom = DialogDefaults.contentPadding),
+                        modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
                         id = R.string.telemetry_dialog_text
                     )
                 }
@@ -92,7 +92,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
 
                 item(key = R.string.telemetry_dialog_text_2, contentType = ContentTypeDefaults.Divider) {
                     LinkableTextView(
-                        modifier = Modifier.padding(top = DialogDefaults.contentPadding),
+                        modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
                         id = R.string.telemetry_dialog_text_2
                     )
                 }

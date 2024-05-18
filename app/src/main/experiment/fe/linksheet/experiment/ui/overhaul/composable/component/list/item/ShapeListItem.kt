@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -12,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.*
 import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalTextContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
@@ -61,10 +62,11 @@ object ShapeListItemDefaults {
     }
 }
 
-@Stable
+@Immutable
 enum class ContentPosition {
     Leading, Trailing;
 
+    @Stable
     fun decide(position: ContentPosition, primary: OptionalContent, other: OptionalContent): OptionalContent {
         return if (position == this) primary else other
     }
@@ -79,6 +81,9 @@ fun ClickableShapeListItem(
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     colors: ListItemColors = ShapeListItemDefaults.colors(),
+    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
+    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
+    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
     position: ContentPosition,
     headlineContent: TextContent,
     overlineContent: OptionalTextContent = null,
@@ -98,7 +103,10 @@ fun ClickableShapeListItem(
         overlineContent = overlineContent,
         supportingContent = supportingContent,
         leadingContent = ContentPosition.Leading.decide(position, primaryContent, otherContent),
-        trailingContent = ContentPosition.Trailing.decide(position, primaryContent, otherContent)
+        trailingContent = ContentPosition.Trailing.decide(position, primaryContent, otherContent),
+        containerHeight = containerHeight,
+        innerPadding = innerPadding,
+        textOptions = textOptions
     )
 }
 
@@ -111,6 +119,9 @@ fun ClickableShapeListItem(
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     colors: ListItemColors = ShapeListItemDefaults.colors(),
+    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
+    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
+    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
     headlineContent: TextContent,
     overlineContent: OptionalTextContent = null,
     supportingContent: OptionalTextContent = null,
@@ -129,7 +140,10 @@ fun ClickableShapeListItem(
         overlineContent = overlineContent,
         supportingContent = supportingContent,
         leadingContent = leadingContent,
-        trailingContent = trailingContent
+        trailingContent = trailingContent,
+        containerHeight = containerHeight,
+        innerPadding = innerPadding,
+        textOptions = textOptions
     )
 }
 
@@ -139,6 +153,9 @@ fun ShapeListItem(
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
     colors: ListItemColors = ShapeListItemDefaults.colors(),
+    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
+    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
+    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
     headlineContent: TextContent,
     overlineContent: OptionalTextContent = null,
     supportingContent: OptionalTextContent = null,
@@ -146,12 +163,18 @@ fun ShapeListItem(
     trailingContent: OptionalContent = null,
 ) {
     CustomListItem(
-        modifier = Modifier.clip(shape).then(modifier).padding(padding),
+        modifier = Modifier
+            .clip(shape)
+            .then(modifier)
+            .padding(padding),
         colors = colors,
         overlineContent = overlineContent?.content,
         headlineContent = headlineContent.content,
         leadingContent = leadingContent,
         supportingContent = supportingContent?.content,
-        trailingContent = trailingContent
+        trailingContent = trailingContent,
+        containerHeight = containerHeight,
+        padding = innerPadding,
+        textOptions = textOptions
     )
 }

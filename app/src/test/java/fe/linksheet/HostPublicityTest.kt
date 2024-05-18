@@ -3,6 +3,7 @@ package fe.linksheet
 import android.net.Uri
 import fe.linksheet.util.HostUtil
 import android.net.compatHost
+import android.os.Build
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -42,7 +43,7 @@ class HostPublicityTest {
         }
     }
 
-    @Config(sdk = [28])
+    @Config(sdk = [Build.VERSION_CODES.P])
     @Test
     fun testIpv6PreApi28Q() {
         // Uri#host does not properly parse IPv6 hosts on < 28 / Q (https://issuetracker.google.com/issues/37069493)

@@ -20,9 +20,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
-import fe.linksheet.BuildConfig
-import fe.linksheet.R
-import fe.linksheet.creditsSettingsRoute
+import fe.linksheet.*
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
@@ -34,7 +32,6 @@ import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.C
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.annotatedStringResource
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
-import fe.linksheet.linksheetGithub
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppInfo
@@ -78,15 +75,16 @@ fun NewAboutSettingsRoute(
     val interaction = LocalHapticFeedbackInteraction.current
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.about), onBackPressed = onBackPressed) {
-        item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
-            DefaultTwoLineIconClickableShapeListItem(
-                headlineContent = textContent(R.string.donate),
-                supportingContent = textContent(R.string.donate_subtitle),
-                icon = vector(Icons.Outlined.AutoAwesome),
-                onClick = { uriHandler.openUri(BuildConfig.LINK_BUY_ME_A_COFFEE) }
-            )
+        if (LinkSheetAppConfig.showDonationBanner()) {
+            item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
+                DefaultTwoLineIconClickableShapeListItem(
+                    headlineContent = textContent(R.string.donate),
+                    supportingContent = textContent(R.string.donate_subtitle),
+                    icon = vector(Icons.Outlined.AutoAwesome),
+                    onClick = { uriHandler.openUri(BuildConfig.LINK_BUY_ME_A_COFFEE) }
+                )
+            }
         }
-
 
         divider(stringRes = R.string.links)
 

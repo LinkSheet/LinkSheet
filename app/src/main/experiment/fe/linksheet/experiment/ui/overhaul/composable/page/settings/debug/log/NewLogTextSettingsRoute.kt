@@ -44,6 +44,7 @@ fun NewLogTextSettingsRoute(
         listState(logEntries)
     }
 
+    // TODO: Switch to new dialog
     val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
         fetch = { logEntries!! },
         awaitFetchBeforeOpen = true,

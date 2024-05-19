@@ -26,15 +26,15 @@ class ExportLogDialogTestActivity : BaseComponentActivity(), KoinComponent {
 
         setContent(edgeToEdge = true) {
             AppTheme {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .systemBarsPadding()
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .systemBarsPadding()
                 ) {
                     val dialogState = rememberNewExportLogDialog(
                         logViewCommon,
-                        name,
-                        listOf()
-                    )
+                        name
+                    ) { listOf() }
 
                     Button(onClick = { dialogState.open() }) {
                         Text(text = "Open")

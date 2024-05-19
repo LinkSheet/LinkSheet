@@ -21,16 +21,12 @@ import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemTextOptions
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
 import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextContentWrapper
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.HapticFeedbackInteraction
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.experiment.ui.overhaul.interaction.wrap
 import fe.linksheet.module.log.file.entry.LogEntry
@@ -41,13 +37,12 @@ import fe.linksheet.ui.HkGroteskFontFamily
 fun rememberNewExportLogDialog(
     logViewCommon: LogViewCommon,
     name: String,
-    logEntries: List<LogEntry>,
+    fnLogEntries: () -> List<LogEntry>,
 ): ResultDialogState<LogViewCommon.ExportSettings> {
     val context = LocalContext.current
     val interaction = LocalHapticFeedbackInteraction.current
-
-    val isFatal = remember(logEntries) {
-        logEntries.any { it is LogEntry.FatalEntry }
+    val logEntries by remember(fnLogEntries) {
+        lazy(fnLogEntries)
     }
 
     val onClose: (LogViewCommon.ExportSettings) -> Unit = { settings ->
@@ -58,6 +53,10 @@ fun rememberNewExportLogDialog(
     val state = rememberResultDialogState<LogViewCommon.ExportSettings>()
 
     ResultDialog(state = state, onClose = onClose) {
+        val isFatal = remember(logEntries) {
+            logEntries.any { it is LogEntry.FatalEntry }
+        }
+
         NewExportLogDialog(
             name = name,
             isFatal = isFatal,
@@ -176,9 +175,11 @@ private fun NewExportLogDialog(
                     )
                 }
 
-
                 item(key = R.string.export_log_dialog__text_log_privacy, contentType = ContentTypeDefaults.TextRow) {
-                    TextContentWrapper(textContent = annotated(R.string.export_log_dialog__text_log_privacy))
+                    TextContentWrapper(
+                        modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
+                        textContent = annotated(R.string.export_log_dialog__text_log_privacy)
+                    )
                 }
             }
         },

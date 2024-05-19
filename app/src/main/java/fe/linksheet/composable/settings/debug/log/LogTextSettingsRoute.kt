@@ -23,6 +23,7 @@ import fe.kotlin.extension.time.localizedString
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
+import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.rememberNewExportLogDialog
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.log.file.entry.LogEntry
@@ -33,6 +34,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun LogTextSettingsRoute(
+    uiOverhaul: Boolean,
     onBackPressed: () -> Unit,
     viewModel: LogTextSettingsViewModel = koinViewModel(),
 ) {
@@ -42,21 +44,36 @@ fun LogTextSettingsRoute(
         listState(logEntries)
     }
 
-    val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
-        fetch = { logEntries!! },
-        awaitFetchBeforeOpen = true,
-        dynamicHeight = true
-    ) { state, close ->
-        ExportLogDialog(
-            logViewCommon = viewModel.logViewCommon,
-            clipboardManager = viewModel.clipboardManager,
-            logEntries = state!!,
-            close = close,
+    val openDialog = if (uiOverhaul) {
+        val dialog = rememberNewExportLogDialog(logViewCommon = viewModel.logViewCommon,
+            name = timestamp,
+            fnLogEntries = { logEntries!! }
         )
+
+        dialog::open
+    } else {
+        val dialog = dialogHelper<Unit, List<LogEntry>, Unit>(
+            fetch = { logEntries!! },
+            awaitFetchBeforeOpen = true,
+            dynamicHeight = true
+        ) { state, close ->
+            ExportLogDialog(
+                logViewCommon = viewModel.logViewCommon,
+                clipboardManager = viewModel.clipboardManager,
+                logEntries = state!!,
+                close = close,
+            )
+        }
+
+        dialog::open
     }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->
-        Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(5.dp)
@@ -76,7 +93,7 @@ fun LogTextSettingsRoute(
                     listState = listState,
                     list = logEntries,
                     listKey = { it.hashCode() }
-                ) {  logEntry ->
+                ) { logEntry ->
                     SelectionContainer {
                         Card(
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -132,7 +149,7 @@ fun LogTextSettingsRoute(
 
                                 Row(modifier = Modifier.fillMaxWidth()) {
                                     Text(
-                                        text =  logEntry.message,
+                                        text = logEntry.message,
                                         fontFamily = FontFamily.Monospace
                                     )
                                 }
@@ -162,7 +179,7 @@ fun LogTextSettingsRoute(
                 BottomRow {
                     TextButton(
                         onClick = {
-                            exportDialog.open(Unit)
+                            openDialog()
                         }
                     ) {
                         Text(text = stringResource(id = R.string.export))

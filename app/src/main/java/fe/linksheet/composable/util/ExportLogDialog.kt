@@ -4,9 +4,6 @@ import android.content.ClipboardManager
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,27 +12,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.DialogDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
-import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideTextOptions
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextContentWrapper
 import fe.linksheet.extension.android.setText
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
-import fe.linksheet.ui.HkGroteskFontFamily
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
 fun ExportLogDialog(

@@ -220,7 +220,7 @@ fun MainNavHost(
             if (uiOverhaul && flag) {
                 NewLogTextSettingsRoute(onBackPressed = onBackPressed)
             } else {
-                LogTextSettingsRoute(onBackPressed = onBackPressed)
+                LogTextSettingsRoute(uiOverhaul = uiOverhaul, onBackPressed = onBackPressed)
             }
         }
 

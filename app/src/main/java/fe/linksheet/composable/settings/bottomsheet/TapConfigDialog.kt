@@ -31,7 +31,7 @@ fun TapConfigDialog(
     type: TapType,
     currentConfig: TapConfig,
     onDismiss: () -> Unit,
-    onConfirm: (Pair<TapType, TapConfig>) -> Unit,
+    onConfirm: (TapConfig) -> Unit,
 ) {
     var selectedTapConfig by remember { mutableStateOf(currentConfig) }
     val title = stringResource(id = type.dialogTitle)
@@ -72,7 +72,7 @@ fun TapConfigDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = { onConfirm(type to selectedTapConfig) }) {
+            TextButton(onClick = { onConfirm(selectedTapConfig) }) {
                 Text(text = stringResource(id = R.string.save))
             }
         }

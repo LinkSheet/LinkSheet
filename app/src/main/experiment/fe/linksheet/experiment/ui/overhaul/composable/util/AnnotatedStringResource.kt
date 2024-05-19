@@ -48,7 +48,7 @@ fun AnnotatedString.Builder.annotatedStringResource(
 @Composable
 fun AnnotatedString.Builder.annotatedStringResource(
     @StringRes id: Int,
-    vararg formatArgs: Any,
+    vararg formatArgs: Any?
 ): AnnotatedString.Builder {
     val resources = LocalContext.current.resources
     val spanned = resources.getText(id).toSpanned().format(*formatArgs)
@@ -57,7 +57,7 @@ fun AnnotatedString.Builder.annotatedStringResource(
 }
 
 @Composable
-fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): AnnotatedString {
+fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any?): AnnotatedString {
     return buildAnnotatedString { annotatedStringResource(id, *formatArgs) }
 }
 

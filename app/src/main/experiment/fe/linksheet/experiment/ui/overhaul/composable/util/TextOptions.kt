@@ -1,12 +1,14 @@
 package fe.linksheet.experiment.ui.overhaul.composable.util
 
 import androidx.compose.runtime.*
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 
 @Immutable
 data class TextOptions(
     val maxLines: Int = Int.MAX_VALUE,
     val overflow: TextOverflow = TextOverflow.Clip,
+    val style: TextStyle? = null
 )
 
 val DefaultTextOptions = TextOptions()

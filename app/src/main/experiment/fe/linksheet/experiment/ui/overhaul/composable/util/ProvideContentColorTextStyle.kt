@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 
 @Composable
+@Deprecated(message = "Migrate to new API")
 fun ProvideContentColorTextStyle(
     contentColor: Color,
     textStyle: TextStyle,
@@ -24,3 +25,21 @@ fun ProvideContentColorTextStyle(
         )
     }
 }
+
+@Composable
+fun ProvideContentColorOptionsStyleText(
+    contentColor: Color,
+    textOptions: TextOptions? = null,
+    content: @Composable () -> Unit,
+) {
+    val mergedStyle = LocalTextStyle.current.merge(textOptions?.style)
+    val options = textOptions ?: LocalTextOptions.current
+
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalTextStyle provides mergedStyle,
+        LocalTextOptions provides options,
+        content = content
+    )
+}
+

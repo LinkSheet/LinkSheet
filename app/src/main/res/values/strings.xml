@@ -407,10 +407,18 @@
         useful for the average user
     </string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name" translatable="false"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
-    <string name="built_at" translatable="false"><b>Built at:</b>\u0020<font face="monospace">%s</font></string>
-    <string name="flavor" translatable="false"><b>Flavor:</b>\u0020<font face="monospace">%s</font></string>
-    <string name="github_workflow_run_id" translatable="false"><b>Workflow ID:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="version_name" translatable="false"><b>Version:</b>\u0020
+        <font face="monospace">%s</font>
+    </string>
+    <string name="built_at" translatable="false"><b>Built at:</b>\u0020
+        <font face="monospace">%s</font>
+    </string>
+    <string name="flavor" translatable="false"><b>Flavor:</b>\u0020
+        <font face="monospace">%s</font>
+    </string>
+    <string name="github_workflow_run_id" translatable="false"><b>Workflow ID:</b>\u0020
+        <font face="monospace">%s</font>
+    </string>
     <string name="linksheet_version_info_header">LinkSheet Version Information:</string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
@@ -490,7 +498,9 @@
     <string name="resolve_via_failed_toast_explainer">Show a toast when an URL fails to resolve via an external
         service
     </string>
-    <string name="last_updated"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="last_updated"><b>Version:</b>\u0020
+        <font face="monospace">%s</font>
+    </string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
     <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed,
@@ -742,13 +752,20 @@
     <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Design inspiration</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Skip</string>
-    <string name="export_log_dialog__title_share_logs">Share logs</string>
+    <string name="export_log_dialog__title_share_logs">Share log</string>
     <string name="export_log_dialog__title_redact_log">Redact log</string>
-    <string name="export_log_dialog__subtitle_redact_log">Recommended, disabling this may leak package names and host names</string>
+    <string name="export_log_dialog__subtitle_redact_log">Recommended, redacts app names and urls</string>
     <string name="export_log_dialog__title_include_throwable">Include crash logs</string>
     <string name="export_log_dialog__subtitle_include_throwable">Recommended, but can not be redacted</string>
-    <string name="export_log_dialog__title_include_fingerprint">Include device fingerprint</string>
+    <string name="export_log_dialog__title_include_fingerprint">Include build fingerprint</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Recommended</string>
     <string name="export_log_dialog__title_include_settings">Include settings</string>
     <string name="export_log_dialog__subtitle_include_settings">Recommended</string>
+    <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log files, tap <annotation
+            url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.
+    </string>
+    <string name="generic__button_text_copy_clipboard">Copy to clipboard</string>
+    <string name="generic__button_text_cancel">Cancel</string>
+    <string name="export_log_dialog__text_log_info">Configure share settings for log captured at: <font face="monospace">%s</font></string>
+
 </resources>

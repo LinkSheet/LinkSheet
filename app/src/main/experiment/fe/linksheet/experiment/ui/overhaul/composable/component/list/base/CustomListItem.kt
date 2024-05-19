@@ -3,16 +3,14 @@ package fe.linksheet.experiment.ui.overhaul.composable.component.list.base
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideContentColorOptionsStyleText
 import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideContentColorTextStyle
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
 
@@ -31,7 +29,28 @@ object CustomListItemDefaults {
     private val LeadingContentEndPadding = 16.dp
     private val TrailingContentStartPadding = 16.dp
 
-    val HeadlineTextOptions = TextOptions(maxLines = 1, overflow = TextOverflow.Ellipsis)
+    private val HeadlineTextOptions: TextOptions
+        @Composable
+        @ReadOnlyComposable
+        get() = TextOptions(
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+    private val SupportingTextOptions: TextOptions
+        @Composable
+        @ReadOnlyComposable
+        get() = TextOptions(
+            style = MaterialTheme.typography.bodyMedium
+        )
+
+    private val OverlineTextOptions: TextOptions
+        @Composable
+        @ReadOnlyComposable
+        get() = TextOptions(
+            style = MaterialTheme.typography.labelSmall
+        )
 
     @Stable
     fun containerHeight(
@@ -54,11 +73,11 @@ object CustomListItemDefaults {
         return CustomListItemPadding(vertical, threeLineVertical, start, end, leadingContentEnd, trailingContentStart)
     }
 
-    @Stable
+    @Composable
     fun textOptions(
-        overline: TextOptions? = null,
+        overline: TextOptions? = OverlineTextOptions,
         headline: TextOptions? = HeadlineTextOptions,
-        supporting: TextOptions? = null,
+        supporting: TextOptions? = SupportingTextOptions,
     ): CustomListItemTextOptions {
         return CustomListItemTextOptions(overline, headline, supporting)
     }
@@ -123,9 +142,8 @@ fun CustomListItem(
     textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions()
 ) {
     val decoratedHeadlineContent: @Composable () -> Unit = {
-        ProvideContentColorTextStyle(
+        ProvideContentColorOptionsStyleText(
             colors.headlineColor(enabled = true),
-            MaterialTheme.typography.bodyLarge,
             textOptions.headline,
             content = headlineContent
         )
@@ -133,9 +151,8 @@ fun CustomListItem(
 
     val decoratedSupportingContent: @Composable (() -> Unit)? = supportingContent?.let {
         {
-            ProvideContentColorTextStyle(
+            ProvideContentColorOptionsStyleText(
                 colors.supportingTextColor,
-                MaterialTheme.typography.bodyMedium,
                 textOptions.supporting,
                 content = it
             )
@@ -144,9 +161,8 @@ fun CustomListItem(
 
     val decoratedOverlineContent: @Composable (() -> Unit)? = overlineContent?.let {
         {
-            ProvideContentColorTextStyle(
+            ProvideContentColorOptionsStyleText(
                 colors.overlineColor,
-                MaterialTheme.typography.labelSmall,
                 textOptions.overline,
                 content = it
             )

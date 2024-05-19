@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
+import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.ui.LocalActivity
@@ -25,6 +26,14 @@ fun DebugMenu() {
     val activity = LocalActivity.current
 
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        item(key = "export_log_dialog") {
+            FilledTonalActivityLauncher(
+                activity = activity,
+                text = "Export log dialog testing",
+                intent = createIntent(activity, ExportLogDialogTestActivity::class)
+            )
+        }
+
         item(key = "link_menu") {
             FilledTonalActivityLauncher(
                 activity = activity,
@@ -54,7 +63,8 @@ fun DebugMenu() {
                 activity = activity,
                 text = "Improved bottom sheet",
                 intent = createIntent(activity, ImprovedBottomSheet::class).setAction(Intent.ACTION_VIEW).setData(
-                    Uri.parse("https://www.youtube.com/watch?v=XaqdBRHG9cI"))
+                    Uri.parse("https://www.youtube.com/watch?v=XaqdBRHG9cI")
+                )
             )
         }
     }

@@ -16,7 +16,13 @@
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
 
-<!--        <activity android:name=".experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity"-->
+        <activity
+                android:name=".debug.activity.ExportLogDialogTestActivity"
+                android:exported="true"
+                android:theme="@style/AppTheme"/>
+
+
+        <!--        <activity android:name=".experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity"-->
 <!--                  android:exported="true"-->
 <!--                  android:theme="@style/DialogTheme">-->
 <!--            <intent-filter>-->

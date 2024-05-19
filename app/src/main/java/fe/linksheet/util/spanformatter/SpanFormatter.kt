@@ -17,7 +17,7 @@ object SpanFormatter {
     fun format(spanned: Spanned, vararg args: Any?): Spanned {
         if (args.isEmpty()) return spanned
 
-        val text = toString()
+        val text = spanned.toString()
         val interceptor = InterceptingAppendable(text.length)
         Formatter(interceptor).use { it.format(text, *args) }
 

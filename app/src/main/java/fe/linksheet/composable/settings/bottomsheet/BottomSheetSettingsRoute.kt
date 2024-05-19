@@ -71,11 +71,11 @@ fun BottomSheetSettingsRoute(
 
     // TODO: Pass data to onClose handler along result
 
-    val tapConfigDialog = remember { StatefulDialogState<TapType, Pair<TapType, TapConfig>>(null) }
+    val tapConfigDialog = remember { StatefulDialogState<TapType, TapConfig>(TapType.Single) }
 //    val tapConfigDialog = rememberStatefulDialog<TapType, Pair<TapType, TapConfig>>()
     StatefulDialog(
         state = tapConfigDialog,
-        onClose = { (type, newConfig) -> tapTypePreferences[type]!!(newConfig) }
+        onClose = { type, newConfig -> tapTypePreferences[type]!!(newConfig) }
     ) { type ->
         TapConfigDialog(
             type = type,

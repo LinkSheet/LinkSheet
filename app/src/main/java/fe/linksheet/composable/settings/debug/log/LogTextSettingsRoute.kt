@@ -17,16 +17,17 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.android.compose.dialog.helper.dialogHelper
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.*
-import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.rememberNewExportLogDialog
+import fe.linksheet.composable.util.BottomRow
+import fe.linksheet.composable.util.ListState
+import fe.linksheet.composable.util.PreferenceSubtitle
+import fe.linksheet.composable.util.listState
+import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.createExportLogDialog
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -44,29 +45,12 @@ fun LogTextSettingsRoute(
         listState(logEntries)
     }
 
-    val openDialog = if (uiOverhaul) {
-        val dialog = rememberNewExportLogDialog(logViewCommon = viewModel.logViewCommon,
-            name = timestamp,
-            fnLogEntries = { logEntries!! }
-        )
-
-        dialog::open
-    } else {
-        val dialog = dialogHelper<Unit, List<LogEntry>, Unit>(
-            fetch = { logEntries!! },
-            awaitFetchBeforeOpen = true,
-            dynamicHeight = true
-        ) { state, close ->
-            ExportLogDialog(
-                logViewCommon = viewModel.logViewCommon,
-                clipboardManager = viewModel.clipboardManager,
-                logEntries = state!!,
-                close = close,
-            )
-        }
-
-        dialog::open
-    }
+    val openDialog = createExportLogDialog(
+        uiOverhaul = uiOverhaul,
+        name = timestamp,
+        clipboardManager = viewModel.clipboardManager,
+        logViewCommon = viewModel.logViewCommon
+    ) { logEntries!! }
 
     SettingsScaffold(R.string.log_viewer, onBackPressed = onBackPressed) { padding ->
         Column(

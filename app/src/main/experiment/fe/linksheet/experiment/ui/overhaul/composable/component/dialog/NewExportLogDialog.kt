@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.dialog
 
+import android.content.ClipboardManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,10 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.android.compose.dialog.helper.dialogHelper
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.linksheet.R
+import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
@@ -32,6 +35,40 @@ import fe.linksheet.experiment.ui.overhaul.interaction.wrap
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.ui.HkGroteskFontFamily
+
+@Composable
+fun createExportLogDialog(
+    uiOverhaul: Boolean,
+    name: String,
+    logViewCommon: LogViewCommon,
+    clipboardManager: ClipboardManager,
+    fnLogEntries: () -> List<LogEntry>
+): () -> Any {
+    return if (uiOverhaul) {
+        val dialog = rememberNewExportLogDialog(
+            logViewCommon = logViewCommon,
+            name = name,
+            fnLogEntries = fnLogEntries
+        )
+
+        dialog::open
+    } else {
+        val dialog = dialogHelper<Unit, List<LogEntry>, Unit>(
+            fetch = { fnLogEntries() },
+            awaitFetchBeforeOpen = true,
+            dynamicHeight = true
+        ) { state, close ->
+            ExportLogDialog(
+                logViewCommon = logViewCommon,
+                clipboardManager = clipboardManager,
+                logEntries = state!!,
+                close = close,
+            )
+        }
+
+        dialog::open
+    }
+}
 
 @Composable
 fun rememberNewExportLogDialog(

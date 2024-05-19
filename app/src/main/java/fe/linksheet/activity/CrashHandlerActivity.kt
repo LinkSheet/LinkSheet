@@ -15,20 +15,20 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.android.compose.dialog.helper.dialogHelper
+import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.R
 import fe.linksheet.composable.util.BottomRow
-import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.composable.util.PreferenceSubtitle
+import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.createExportLogDialog
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.file.LogFileService
-import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppTheme
 import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.time.LocalDateTime
 
 class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
     companion object {
@@ -46,6 +46,8 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
         val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
         logger.fatal(throwableString)
 
+        val timestamp = LocalDateTime.now().format(ISO8601DateTimeFormatter.DefaultFormat)
+
         setContent(edgeToEdge = true) {
             AppTheme {
                 val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
@@ -53,19 +55,12 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                     canScroll = { true }
                 )
 
-                val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
-                    fetch = { logFileService.logEntries },
-                    awaitFetchBeforeOpen = true,
-                    dynamicHeight = true
-                ) { state, close ->
-                    ExportLogDialog(
-                        logViewCommon = viewModel.logViewCommon,
-                        clipboardManager = viewModel.clipboardManager,
-                        close = close,
-                        includeThrowable = true,
-                        logEntries = state!!
-                    )
-                }
+                val openDialog = createExportLogDialog(
+                    uiOverhaul = viewModel.uiOverhaul(),
+                    name = timestamp,
+                    logViewCommon = viewModel.logViewCommon,
+                    clipboardManager = viewModel.clipboardManager
+                ) { logFileService.logEntries }
 
                 Scaffold(
                     modifier = Modifier
@@ -84,7 +79,9 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                         )
                     },
                     content = { padding ->
-                        Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+                        Column(modifier = Modifier
+                            .fillMaxSize()
+                            .padding(padding)) {
                             LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(5.dp)) {
                                 stickyHeader(key = "header") {
                                     Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
@@ -110,7 +107,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                             BottomRow {
                                 TextButton(
                                     onClick = {
-                                        exportDialog.open(Unit)
+                                        openDialog()
                                     }
                                 ) {
                                     Text(text = stringResource(id = R.string.export))

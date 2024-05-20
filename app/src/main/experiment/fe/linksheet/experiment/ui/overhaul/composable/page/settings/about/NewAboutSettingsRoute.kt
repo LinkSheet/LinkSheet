@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
+import fe.android.span.helper.composable.fromStringRes
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
@@ -30,7 +31,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.util.Annotated.Companion.b
 import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
 import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.annotatedStringResource
+import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
@@ -174,7 +175,7 @@ private fun AnnotatedString.Builder.appendBuildInfo(
     newLine: Boolean = true
 ): AnnotatedString.Builder {
     val info = buildAnnotatedString {
-        annotatedStringResource(id, parameter)
+        fromStringRes(id, parameter)
         if (newLine) appendLine()
     }
 
@@ -197,7 +198,7 @@ private fun ExternalVersionListItem(shape: Shape, padding: PaddingValues, data: 
         supportingContent = annotated(R.string.last_updated, formatted),
         icon = data.icon,
         onClick = {
-            interaction.copy(formatted, HapticFeedbackType.LongPress)
+            interaction.copy(formatted, FeedbackType.LongPress)
         }
     )
 }

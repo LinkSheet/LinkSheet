@@ -33,7 +33,9 @@ fun BottomDrawer(
         shape = shape,
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = drawerState,
-        windowInsets = if (AndroidVersion.AT_LEAST_API_30_R) noWindowInsets else WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical),
+        contentWindowInsets = {
+            if (AndroidVersion.AT_LEAST_API_30_R) noWindowInsets else WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+        },
         onDismissRequest = hide ?: {
             coroutineScope.launch { drawerState.hide() }
             Unit

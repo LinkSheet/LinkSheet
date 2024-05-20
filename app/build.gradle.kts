@@ -213,23 +213,19 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
+
     implementation(platform(AndroidX.compose.bom))
-    implementation(AndroidX.compose.ui.graphics)
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.ui.toolingPreview)
-    implementation("androidx.compose.material3:material3:1.3.0-alpha05")
-//    implementation(libs.material3.common)
-//    implementation(libs.material3) {
-//        attributes {
-//            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling::class.java, Bundling.EXTERNAL))
-//        }
-//    }
+    implementation(AndroidX.compose.ui.withVersion("1.7.0-beta01"))
+    implementation(AndroidX.compose.material3.withVersion("1.3.0-beta01"))
+
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
+    implementation(AndroidX.activity.compose)
+
+    implementation(AndroidX.core.ktx)
     implementation(AndroidX.compose.animation)
     implementation(AndroidX.navigation.compose)
-    implementation(Google.android.material)
-    implementation(Google.accompanist.permissions)
 
     implementation(AndroidX.lifecycle.process)
     implementation(AndroidX.lifecycle.runtime.compose)
@@ -237,24 +233,28 @@ dependencies {
     implementation(AndroidX.lifecycle.runtime.ktx)
 
     implementation(AndroidX.webkit)
-    implementation(AndroidX.core.ktx)
-    implementation(AndroidX.activity.compose)
     implementation(AndroidX.browser)
 
-    implementation(libs.linkSheetInterConnect)
+    implementation(AndroidX.room.runtime)
+    implementation(AndroidX.room.ktx)
+    ksp(AndroidX.room.compiler)
+
+    implementation(Google.android.material)
+    implementation(Google.accompanist.permissions)
+
+
+
     implementation(project(":config"))
+    implementation(libs.linkSheetInterConnect)
     implementation(libs.uriparser)
 
     implementation(libs.junit.ktx)
-    coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(libs.kotlin.reflect)
 
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+
 
     implementation(libs.compose.mock)
 
@@ -303,7 +303,7 @@ dependencies {
     "proImplementation"(Ktor.client.android)
 
     implementation(libs.jsoup)
-
+    implementation("com.github.1fexd.android-span-helper:compose:_")
 
     implementation(libs.api)
     implementation(libs.provider)

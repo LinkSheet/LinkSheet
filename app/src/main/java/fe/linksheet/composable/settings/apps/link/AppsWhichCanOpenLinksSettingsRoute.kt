@@ -14,12 +14,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
@@ -75,10 +73,13 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         viewModel.emitLatest()
     }
 
-    LaunchedEffect(lastEmitted) { state.endRefresh() }
+    // TODO: Refactor refresh indicator
+    LaunchedEffect(lastEmitted) {
+//        state.endRefresh()
+    }
 
     fun postCommand(packageName: String) {
-        state.startRefresh()
+//        state.startRefresh()
         viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
             val newState = !linkHandlingAllowed
             val result = setDomainState(packageName, "all", newState)
@@ -106,9 +107,9 @@ fun AppsWhichCanOpenLinksSettingsRoute(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .nestedScroll(state.nestedScrollConnection)
+//                .nestedScroll(state.nestedScrollConnection)
         ) {
-            PullToRefreshContainer(state = state, modifier = Modifier.align(Alignment.TopCenter))
+//            PullToRefreshContainer(state = state, modifier = Modifier.align(Alignment.TopCenter))
 
             LazyColumn(
                 modifier = Modifier

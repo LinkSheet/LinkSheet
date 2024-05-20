@@ -133,10 +133,13 @@ fun VerifiedLinkHandlersRoute(
         viewModel.emitLatest()
     }
 
-    LaunchedEffect(lastEmitted) { state.endRefresh() }
+    // TODO: Refactor refresh indicator
+    LaunchedEffect(lastEmitted) {
+//        state.endRefresh()
+    }
 
     fun postCommand(packageName: String) {
-        state.startRefresh()
+//        state.startRefresh()
         viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
             val newState = !linkHandlingAllowed
             val result = setDomainState(packageName, "all", newState)

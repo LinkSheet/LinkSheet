@@ -14,8 +14,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.SpanStyle
 import fe.android.preference.helper.EnumTypeMapper
+import fe.android.span.helper.LinkAnnotationStyle
+import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.experiment.ui.overhaul.composable.util.ComposeClipboardManager
 import fe.linksheet.experiment.ui.overhaul.composable.util.LocalComposeClipboardManager
@@ -120,11 +124,16 @@ fun AppTheme(
 
     val view = LocalView.current
 
+    val linkAnnotationStyle = remember(colorScheme) {
+        LinkAnnotationStyle(style = SpanStyle(color = colorScheme.primary))
+    }
+
     KoinAndroidContext {
         CompositionLocalProvider(
             LocalActivity provides activity!!,
             LocalComposeClipboardManager provides ComposeClipboardManager(context),
-            LocalHapticFeedbackInteraction provides DefaultHapticFeedbackInteraction(view)
+            LocalHapticFeedbackInteraction provides DefaultHapticFeedbackInteraction(view),
+            LocalLinkAnnotationStyle provides linkAnnotationStyle
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,

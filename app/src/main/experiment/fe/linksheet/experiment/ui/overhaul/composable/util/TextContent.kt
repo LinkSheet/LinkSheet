@@ -7,6 +7,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
+import fe.android.span.helper.composable.createAnnotatedString
 
 
 @Immutable
@@ -79,7 +80,7 @@ class AnnotatedStringResource private constructor(@StringRes id: Int, vararg for
         val textOptions = LocalTextOptions.current
 
         Text(
-            text = annotatedStringResource(id = id, *formatArgs),
+            text = createAnnotatedString(id = id, *formatArgs),
             overflow = textOptions.overflow,
             maxLines = textOptions.maxLines
         )

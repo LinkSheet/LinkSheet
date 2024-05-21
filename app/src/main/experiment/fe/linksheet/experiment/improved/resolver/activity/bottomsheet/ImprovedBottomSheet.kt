@@ -575,8 +575,11 @@ class ImprovedBottomSheet(
                 intent.putExtra(Intent.EXTRA_REFERRER, referrer)
             }
 
-            startActivity(intent)
-            finish()
+            if (viewModel.safeStartActivity(activity, intent)) {
+                finish()
+            } else {
+                showToast(R.string.resolve_activity_failure, uiThread = true)
+            }
         }
     }
 

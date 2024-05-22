@@ -1,7 +1,6 @@
 import com.android.build.api.dsl.VariantDimension
 import de.fayard.refreshVersions.core.versionFor
-import fe.buildsrc.KotlinClosure4
-import fe.buildsrc.Version
+import fe.buildsrc.*
 import fe.buildsrc.extension.getOrSystemEnv
 import fe.buildsrc.extension.getOrSystemEnvOrDef
 import fe.buildsrc.extension.readPropertiesOrNull
@@ -243,21 +242,12 @@ dependencies {
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 
-
-
     implementation(project(":config"))
-    implementation(libs.linkSheetInterConnect)
-    implementation(libs.uriparser)
-
     implementation(libs.junit.ktx)
 
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(libs.kotlin.reflect)
-
-
-
-    implementation(libs.compose.mock)
 
     implementation(COIL)
     implementation(COIL.compose)
@@ -266,31 +256,35 @@ dependencies {
     implementation(libs.ipaddress)
     implementation(libs.placeholder.material3)
 
-
     implementation(libs.signifykt)
     implementation(libs.com.gitlab.grrfe.bundled.dependencies.gson.ext)
-    implementation(libs.embed.resolve)
-
-
     implementation(libs.gson)
 
     implementation(libs.nanoid)
-    implementation(libs.com.gitlab.grrfe.httpkt.core)
-    implementation(libs.ext.gson)
-    implementation(libs.gson.ext)
-    implementation(libs.kotlin.ext)
-    implementation(libs.clearurlkt)
-    implementation(libs.fastforwardkt)
-    implementation(libs.libredirectkt)
-    implementation(libs.mimetypekt)
-    implementation(libs.amp2htmlkt)
-    implementation(libs.stringbuilder.util.kt)
-    implementation(libs.cached.urls)
-    implementation(libs.preference.helper)
-    implementation(libs.preference.helper.compose)
-    implementation(libs.compose.route.util)
-    implementation(libs.compose.dialog.helper)
-    implementation(libs.process.launcher)
+
+    implementation(LinkSheet.flavors)
+    implementation(LinkSheet.interconnect)
+
+    implementation(Grrfe.httpkt.core)
+    implementation(Grrfe.httpkt.gson)
+    implementation(Grrfe.ext.gson)
+    implementation(Grrfe.ext.kotlin)
+    implementation(Grrfe.processLauncher)
+    implementation(_1fexd.uriParser)
+    implementation(_1fexd.clearUrl)
+    implementation(_1fexd.fastForward)
+    implementation(_1fexd.libredirectkt)
+    implementation(_1fexd.mimeType)
+    implementation(_1fexd.amp2html)
+    implementation(_1fexd.stringBuilder)
+    implementation(_1fexd.embedResolve)
+    implementation(_1fexd.android.preference.core)
+    implementation(_1fexd.android.preference.compose)
+    implementation(_1fexd.android.preference.composeMock)
+    implementation(_1fexd.android.compose.dialog)
+    implementation(_1fexd.android.compose.route)
+    implementation(_1fexd.android.span.compose)
+
     implementation(libs.zipline.android)
     implementation(libs.zipline.loader.android)
 
@@ -304,7 +298,6 @@ dependencies {
     "proImplementation"(Ktor.client.android)
 
     implementation(libs.jsoup)
-    implementation("com.github.1fexd.android-span-helper:compose:_")
 
     implementation(libs.api)
     implementation(libs.provider)
@@ -314,7 +307,6 @@ dependencies {
 
     implementation(libs.support.utils)
     implementation(libs.lib.publicsuffixlist)
-    implementation(libs.flavors)
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)

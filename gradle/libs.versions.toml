@@ -2,7 +2,7 @@
 
 [plugins]
 
-gradle = { id = "gradle", version = "8.2.0" }
+gradle = { id = "gradle", version = "8.4.0" }
 
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.24" }
 
@@ -13,7 +13,6 @@ com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.24-1.
 [versions]
 
 kotlin = "1.9.24"
-##  ⬆ = "1.9.24"
 ##  ⬆ = "2.0.0-Beta1"
 ##  ⬆ = "2.0.0-Beta2"
 ##  ⬆ = "2.0.0-Beta3"
@@ -22,21 +21,17 @@ kotlin = "1.9.24"
 ##  ⬆ = "2.0.0-RC1"
 ##  ⬆ = "2.0.0-RC2"
 ##  ⬆ = "2.0.0-RC3"
+##  ⬆ = "2.0.0"
 
-koin = "3.6.0-Beta3"
-##⬆ = "3.6.0-Beta4"
+koin = "3.6.0-Beta4"
 ##⬆ = "3.6.0-wasm-alpha1"
 ##⬆ = "3.6.0-wasm-alpha2"
 
 linkSheetInterConnect = "2.3.2"
 
-app-cash-zipline = "1.9.0"
-##            ⬆ = "1.10.0"
-##            ⬆ = "1.10.1"
+app-cash-zipline = "1.10.1"
 
-androidx-test-ext-junit = "1.2.0-alpha03"
-##                   ⬆ = "1.2.0-alpha04"
-##                   ⬆ = "1.2.0-beta01"
+androidx-test-ext-junit = "1.2.0-beta01"
 
 [libraries]
 

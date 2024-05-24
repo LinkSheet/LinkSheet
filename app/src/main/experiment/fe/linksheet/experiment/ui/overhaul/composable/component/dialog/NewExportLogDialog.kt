@@ -158,7 +158,8 @@ private fun NewExportLogDialog(
                         supportingContent = textContent(R.string.export_log_dialog__subtitle_redact_log),
                         otherContent = null,
                         innerPadding = DialogDefaults.ListItemInnerPadding,
-                        textOptions = DialogDefaults.ListItemTextOptions
+                        textOptions = DialogDefaults.ListItemTextOptions,
+                        colors = DialogDefaults.ListItemColors
                     )
                 }
 
@@ -175,7 +176,8 @@ private fun NewExportLogDialog(
                             supportingContent = textContent(R.string.export_log_dialog__subtitle_include_throwable),
                             otherContent = null,
                             innerPadding = DialogDefaults.ListItemInnerPadding,
-                            textOptions = DialogDefaults.ListItemTextOptions
+                            textOptions = DialogDefaults.ListItemTextOptions,
+                            colors = DialogDefaults.ListItemColors
                         )
                     }
                 }
@@ -192,7 +194,8 @@ private fun NewExportLogDialog(
                         supportingContent = textContent(R.string.export_log_dialog__subtitle_include_fingerprint),
                         otherContent = null,
                         innerPadding = DialogDefaults.ListItemInnerPadding,
-                        textOptions = DialogDefaults.ListItemTextOptions
+                        textOptions = DialogDefaults.ListItemTextOptions,
+                        colors = DialogDefaults.ListItemColors
                     )
                 }
 
@@ -208,7 +211,8 @@ private fun NewExportLogDialog(
                         supportingContent = textContent(R.string.export_log_dialog__subtitle_include_settings),
                         otherContent = null,
                         innerPadding = DialogDefaults.ListItemInnerPadding,
-                        textOptions = DialogDefaults.ListItemTextOptions
+                        textOptions = DialogDefaults.ListItemTextOptions,
+                        colors = DialogDefaults.ListItemColors
                     )
                 }
 

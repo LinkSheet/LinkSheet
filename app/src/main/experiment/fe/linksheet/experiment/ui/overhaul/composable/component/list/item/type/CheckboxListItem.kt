@@ -2,6 +2,7 @@ package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ListItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
@@ -22,6 +23,7 @@ fun CheckboxListItem(
     onCheckedChange: (Boolean) -> Unit,
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    colors: ListItemColors = ShapeListItemDefaults.colors(),
     containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
     innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
     textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
@@ -37,6 +39,7 @@ fun CheckboxListItem(
         role = Role.Checkbox,
         shape = shape,
         padding = padding,
+        colors = colors,
         headlineContent = headlineContent,
         overlineContent = overlineContent,
         supportingContent = supportingContent,

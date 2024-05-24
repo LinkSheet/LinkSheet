@@ -1,11 +1,14 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.dialog
 
+import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemTextOptions
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
 
 object DialogDefaults {
@@ -17,5 +20,13 @@ object DialogDefaults {
         @Composable
         get() = CustomListItemDefaults.textOptions(
             headline = TextOptions(style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp))
+        )
+
+    val ListItemColors: ListItemColors
+        @Composable
+        get() = ShapeListItemDefaults.colors(
+            headlineColor = AlertDialogDefaults.textContentColor,
+            supportingColor = AlertDialogDefaults.textContentColor,
+            containerColor = AlertDialogDefaults.containerColor
         )
 }

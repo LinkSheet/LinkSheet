@@ -28,8 +28,8 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.listState
 import fe.linksheet.experiment.ui.overhaul.composable.component.appbar.SearchTopAppBar
 import fe.linksheet.experiment.ui.overhaul.composable.component.icon.AppIconImage
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ListItemFilledIconButton
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageDefaults

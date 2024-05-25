@@ -2,6 +2,7 @@ package fe.linksheet.debug.activity
 
 import android.os.Bundle
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
@@ -10,6 +11,8 @@ import androidx.compose.ui.Modifier
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.rememberNewExportLogDialog
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
+import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.ui.AppTheme
 import org.koin.core.component.KoinComponent
@@ -26,7 +29,7 @@ class ExportLogDialogTestActivity : BaseComponentActivity(), KoinComponent {
 
         setContent(edgeToEdge = true) {
             AppTheme {
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .systemBarsPadding()
@@ -39,6 +42,15 @@ class ExportLogDialogTestActivity : BaseComponentActivity(), KoinComponent {
                     Button(onClick = { dialogState.open() }) {
                         Text(text = "Open")
                     }
+
+                    val analyticsState = rememberAnalyticDialog(telemetryLevel = TelemetryLevel.Minimal) {
+
+                    }
+
+                    Button(onClick = { analyticsState.open() }) {
+                        Text(text = "Open2")
+                    }
+
                 }
             }
         }

@@ -15,11 +15,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.card.AlertCard
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
 

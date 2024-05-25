@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.ui.PreviewThemeNew
 import fe.linksheet.extension.compose.clickable
 

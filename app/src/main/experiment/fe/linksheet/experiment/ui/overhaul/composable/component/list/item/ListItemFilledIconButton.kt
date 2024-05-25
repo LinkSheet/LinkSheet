@@ -6,6 +6,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 
 @Composable
 fun ListItemFilledIconButton(

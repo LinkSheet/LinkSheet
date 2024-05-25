@@ -1,21 +1,16 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
 import fe.linksheet.experiment.ui.overhaul.composable.component.appbar.SearchTopAppBar
 import fe.linksheet.experiment.ui.overhaul.composable.component.icon.AppIconImage
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout

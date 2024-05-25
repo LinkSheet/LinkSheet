@@ -5,12 +5,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.util.AndroidVersion

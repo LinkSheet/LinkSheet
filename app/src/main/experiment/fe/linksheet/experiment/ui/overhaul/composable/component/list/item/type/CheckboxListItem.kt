@@ -10,9 +10,9 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.Custom
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemPadding
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemTextOptions
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 

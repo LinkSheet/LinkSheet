@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent

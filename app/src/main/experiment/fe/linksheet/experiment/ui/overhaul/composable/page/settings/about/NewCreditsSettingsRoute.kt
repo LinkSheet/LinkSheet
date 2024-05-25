@@ -12,8 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ClickableShapeListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group

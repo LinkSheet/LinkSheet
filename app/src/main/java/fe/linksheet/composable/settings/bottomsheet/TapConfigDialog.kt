@@ -20,7 +20,11 @@ import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.DialogDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.ui.HkGroteskFontFamily
 
 
@@ -49,7 +53,7 @@ fun TapConfigDialog(
         },
         text = {
             LazyColumn(modifier = Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                item(key = ContentTypeDefaults.Divider) {
+                item(key = ContentTypeDefaults.TextItem) {
                     Text(
                         modifier = Modifier.padding(bottom = 6.dp),
                         text = stringResource(id = R.string.tap_customization_dialog_text)
@@ -57,10 +61,17 @@ fun TapConfigDialog(
                 }
 
                 items(items = tapConfigOptions, key = { it.name }) { item ->
-                    RadioButtonRow(
-                        text = stringResource(id = item.id),
+                    RadioButtonListItem(
                         selected = selectedTapConfig == item,
-                        onClick = { selectedTapConfig = item }
+                        onSelect = { selectedTapConfig = item },
+                        position = ContentPosition.Leading,
+                        headlineContent = textContent(item.id),
+                        otherContent = null,
+                        width = 48.dp,
+//                        containerHeight = CustomListItemDefaults.containerHeight(twoLine = 55.dp),
+                        innerPadding = DialogDefaults.ListItemInnerPadding,
+                        textOptions = DialogDefaults.ListItemTextOptions,
+                        colors = DialogDefaults.ListItemColors
                     )
                 }
             }
@@ -77,35 +88,4 @@ fun TapConfigDialog(
             }
         }
     )
-}
-
-@Composable
-fun RadioButtonRow(
-    text: String,
-    selected: Boolean,
-    onClick: () -> Unit,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .clip(ShapeListItemDefaults.SingleShape)
-            .selectable(
-                selected = selected,
-                onClick = onClick,
-                role = Role.RadioButton
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
-    ) {
-        RadioButton(
-            selected = selected,
-            onClick = onClick
-        )
-
-        Text(
-            text = text,
-            modifier = Modifier.padding(start = 8.dp)
-        )
-    }
 }

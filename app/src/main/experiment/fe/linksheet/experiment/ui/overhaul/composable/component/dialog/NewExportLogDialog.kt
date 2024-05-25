@@ -24,7 +24,7 @@ import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.linksheet.R
 import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.CheckboxListItem
 import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
@@ -139,7 +139,7 @@ private fun NewExportLogDialog(
         },
         text = {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                item(key = R.string.export_log_dialog__text_log_info, contentType = ContentTypeDefaults.TextRow) {
+                item(key = R.string.export_log_dialog__text_log_info, contentType = ContentTypeDefaults.TextItem) {
                     TextContentWrapper(
                         modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
                         textContent = annotated(R.string.export_log_dialog__text_log_info, name)
@@ -148,7 +148,7 @@ private fun NewExportLogDialog(
 
                 item(
                     key = R.string.export_log_dialog__title_redact_log,
-                    contentType = ContentTypeDefaults.CheckboxRow
+                    contentType = ContentTypeDefaults.CheckboxItem
                 ) {
                     CheckboxListItem(
                         checked = redactLog,
@@ -166,7 +166,7 @@ private fun NewExportLogDialog(
                 if (isFatal) {
                     item(
                         key = R.string.export_log_dialog__title_include_throwable,
-                        contentType = ContentTypeDefaults.CheckboxRow
+                        contentType = ContentTypeDefaults.CheckboxItem
                     ) {
                         CheckboxListItem(
                             checked = includeThrowableState,
@@ -184,7 +184,7 @@ private fun NewExportLogDialog(
 
                 item(
                     key = R.string.export_log_dialog__title_include_fingerprint,
-                    contentType = ContentTypeDefaults.CheckboxRow
+                    contentType = ContentTypeDefaults.CheckboxItem
                 ) {
                     CheckboxListItem(
                         checked = includeFingerprint,
@@ -201,7 +201,7 @@ private fun NewExportLogDialog(
 
                 item(
                     key = R.string.export_log_dialog__title_include_settings,
-                    contentType = ContentTypeDefaults.CheckboxRow
+                    contentType = ContentTypeDefaults.CheckboxItem
                 ) {
                     CheckboxListItem(
                         checked = includePreferences,
@@ -216,7 +216,7 @@ private fun NewExportLogDialog(
                     )
                 }
 
-                item(key = R.string.export_log_dialog__text_log_privacy, contentType = ContentTypeDefaults.TextRow) {
+                item(key = R.string.export_log_dialog__text_log_privacy, contentType = ContentTypeDefaults.TextItem) {
                     TextContentWrapper(
                         modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
                         textContent = annotated(R.string.export_log_dialog__text_log_privacy)

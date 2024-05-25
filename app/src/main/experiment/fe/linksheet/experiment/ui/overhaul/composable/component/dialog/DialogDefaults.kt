@@ -8,13 +8,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.CustomListItemTextOptions
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
 
 object DialogDefaults {
     val ContentPadding = 6.dp
 
-    val ListItemInnerPadding = CustomListItemDefaults.padding(start = 0.dp, leadingContentEnd = 4.dp)
+    val ListItemInnerPadding = CustomListItemDefaults.padding(
+        start = 0.dp,
+        leadingContentEnd = 4.dp
+    )
 
     val ListItemTextOptions: CustomListItemTextOptions
         @Composable

@@ -8,6 +8,6 @@ enum class ContentTypeDefaults {
     TopGroupItem,
     MiddleGroupItem,
     BottomGroupItem,
-    TextRow,
-    CheckboxRow
+    TextItem,
+    CheckboxItem
 }

@@ -4,7 +4,6 @@ import android.app.Activity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CrueltyFree
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -13,7 +12,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.UriHandler
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard
 import fe.linksheet.module.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload

@@ -30,6 +30,9 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueP
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
+import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
+import fe.linksheet.experiment.ui.overhaul.interaction.wrap
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -216,35 +219,30 @@ private fun TapConfigGroupItem(
     padding: PaddingValues,
     shape: Shape
 ) {
-    var expanded by remember { mutableStateOf(false) }
-    val rotation by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow rotation")
+    val interaction = LocalHapticFeedbackInteraction.current
 
-    val tapConfigDialog = rememberResultDialogState<TapConfig>()
+    val state = rememberResultDialogState<TapConfig>()
+    val rotation by animateFloatAsState(targetValue = if (state.isOpen) 180f else 0f, label = "Arrow rotation")
+
     ResultDialog(
-        state = tapConfigDialog,
+        state = state,
         onClose = { newConfig ->
-            expanded = false
             preference(newConfig)
-        },
-        onDismiss = {
-            expanded = false
+            interaction.perform(FeedbackType.Confirm)
         }
     ) {
         TapConfigDialog(
             type = type,
             currentConfig = preference.value,
-            tapConfigDialog::dismiss,
-            tapConfigDialog::close
+            onDismiss = interaction.wrap(state::dismiss, FeedbackType.Decline),
+            state::close
         )
     }
 
     ClickableShapeListItem(
         shape = shape,
         padding = padding,
-        onClick = {
-            expanded = true
-            tapConfigDialog.open()
-        },
+        onClick = state::open,
         role = Role.Button,
         headlineContent = textContent(type.headline),
         supportingContent = textContent(pref.value.id),

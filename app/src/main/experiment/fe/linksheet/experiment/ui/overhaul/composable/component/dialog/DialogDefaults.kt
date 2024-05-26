@@ -12,6 +12,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeL
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
 
 object DialogDefaults {
+    val RadioButtonWidth = 48.dp
     val ContentPadding = 6.dp
 
     val ListItemInnerPadding = CustomListItemDefaults.padding(

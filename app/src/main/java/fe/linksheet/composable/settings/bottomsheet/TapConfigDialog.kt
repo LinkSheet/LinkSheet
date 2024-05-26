@@ -67,8 +67,7 @@ fun TapConfigDialog(
                         position = ContentPosition.Leading,
                         headlineContent = textContent(item.id),
                         otherContent = null,
-                        width = 48.dp,
-//                        containerHeight = CustomListItemDefaults.containerHeight(twoLine = 55.dp),
+                        width = DialogDefaults.RadioButtonWidth,
                         innerPadding = DialogDefaults.ListItemInnerPadding,
                         textOptions = DialogDefaults.ListItemTextOptions,
                         colors = DialogDefaults.ListItemColors

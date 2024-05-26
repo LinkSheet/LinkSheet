@@ -91,8 +91,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
                         headlineContent = textContent(item.titleId),
                         supportingContent = textContent(item.descriptionId),
                         otherContent = null,
-                        width = 48.dp,
-//                        containerHeight = CustomListItemDefaults.containerHeight(twoLine = 55.dp),
+                        width = DialogDefaults.RadioButtonWidth,
                         innerPadding = DialogDefaults.ListItemInnerPadding,
                         textOptions = DialogDefaults.ListItemTextOptions,
                         colors = DialogDefaults.ListItemColors

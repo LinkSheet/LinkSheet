@@ -1,30 +1,26 @@
 package fe.linksheet.activity
 
 import android.os.Bundle
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.R
-import fe.linksheet.composable.util.BottomRow
-import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.createExportLogDialog
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.LogCard
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.LogTextPageScaffold
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.ui.AppTheme
-import fe.linksheet.ui.HkGroteskFontFamily
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -50,72 +46,43 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
 
         setContent(edgeToEdge = true) {
             AppTheme {
-                val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-                    rememberTopAppBarState(),
-                    canScroll = { true }
-                )
-
                 val openDialog = createExportLogDialog(
-                    uiOverhaul = viewModel.uiOverhaul(),
+                    uiOverhaul = true,
                     name = timestamp,
                     logViewCommon = viewModel.logViewCommon,
                     clipboardManager = viewModel.clipboardManager
                 ) { logFileService.logEntries }
 
-                Scaffold(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .nestedScroll(scrollBehavior.nestedScrollConnection),
-                    topBar = {
-                        LargeTopAppBar(
-                            colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
-                            title = {
-                                Text(
-                                    text = stringResource(id = R.string.app_name),
-                                    fontFamily = HkGroteskFontFamily,
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            }, scrollBehavior = scrollBehavior
-                        )
-                    },
-                    content = { padding ->
-                        Column(modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding)) {
-                            LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(5.dp)) {
-                                stickyHeader(key = "header") {
-                                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                                        PreferenceSubtitle(
-                                            text = stringResource(id = R.string.app_crashed),
-                                        )
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-                                    }
-                                }
-
-                                item("exception") {
-                                    SelectionContainer {
-                                        Text(
-                                            text = throwableString,
-                                            fontFamily = FontFamily.Monospace,
-                                            fontSize = 12.sp,
-                                        )
-                                    }
-                                }
-                            }
-
-                            BottomRow {
-                                TextButton(
-                                    onClick = {
-                                        openDialog()
-                                    }
-                                ) {
-                                    Text(text = stringResource(id = R.string.export))
-                                }
-                            }
+                LogTextPageScaffold(
+                    headline = stringResource(id = R.string.app_name),
+                    onBackPressed = {},
+                    enableBackButton = false,
+                    floatingActionButton = {
+                        FloatingActionButton(
+                            modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
+                            onClick = { openDialog() }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Share,
+                                contentDescription = null
+                            )
                         }
                     }
-                )
+                ) {
+                    divider(stringRes = R.string.crash_viewer__subtitle_app_crashed)
+
+                    item {
+                        LogCard(
+                            border = BorderStroke(0.dp, Color.Transparent),
+                            logEntry = PrefixMessageCardContent(
+                                type = "F",
+                                prefix = "Crash",
+                                start = System.currentTimeMillis(),
+                                messages = mutableListOf(throwableString)
+                            )
+                        )
+                    }
+                }
             }
         }
     }

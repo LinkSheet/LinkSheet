@@ -52,7 +52,8 @@ object SaneLazyColumnPageDefaults {
     val TextDividerPadding = PaddingValues(
         start = 16.dp,
         top = VerticalSpacing,
-        bottom = VerticalSpacing
+        bottom = VerticalSpacing ,
+        end = 16.dp
     )
 
     val GroupSpacingTop = PaddingValues(bottom = 1.dp)

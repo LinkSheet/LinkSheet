@@ -34,32 +34,48 @@ fun SaneScaffoldSettingsPage(
     SaneSettingsScaffold(
         modifier = modifier.then(Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)),
         topBar = {
-            LargeTopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
-                title = {
-                    Text(
-                        modifier = Modifier,
-                        text = headline,
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                },
-                navigationIcon = {
-                    if (enableBackButton) {
-                        IconButton(onClick = onBackPressed) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                                contentDescription = stringResource(R.string.back),
-                            )
-                        }
-                    }
-                },
+            SaneLargeTopAppBar(
+                headline = headline,
+                enableBackButton = enableBackButton,
+                onBackPressed = onBackPressed,
                 scrollBehavior = scrollBehavior
             )
         },
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         content = { padding -> SaneLazyColumnPageLayout(padding = padding, content = content) }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SaneLargeTopAppBar(
+    headline: String,
+    enableBackButton: Boolean,
+    onBackPressed: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
+) {
+    LargeTopAppBar(
+        colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
+        title = {
+            Text(
+                modifier = Modifier,
+                text = headline,
+                fontFamily = HkGroteskFontFamily,
+                fontWeight = FontWeight.SemiBold
+            )
+        },
+        navigationIcon = {
+            if (enableBackButton) {
+                IconButton(onClick = onBackPressed) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                        contentDescription = stringResource(R.string.back),
+                    )
+                }
+            }
+        },
+        scrollBehavior = scrollBehavior
     )
 }
 

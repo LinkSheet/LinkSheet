@@ -1,28 +1,22 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import fe.android.compose.dialog.helper.dialogHelper
-import fe.kotlin.extension.primitive.unixMillisUtc
-import fe.kotlin.extension.time.localizedString
 import fe.linksheet.R
-import fe.linksheet.composable.util.*
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.composable.util.ListState
+import fe.linksheet.composable.util.listState
+import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.rememberNewExportLogDialog
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.log.file.entry.LogEntry
@@ -30,226 +24,74 @@ import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun NewLogTextSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: LogTextSettingsViewModel = koinViewModel(),
 ) {
-    val context = LocalContext.current
-
     val timestamp by viewModel.timestamp.collectOnIO()
     val logEntries by viewModel.logEntries.collectOnIO()
     val listState = remember(logEntries?.size) {
         listState(logEntries)
     }
 
-    // TODO: Switch to new dialog
-    val exportDialog = dialogHelper<Unit, List<LogEntry>, Unit>(
-        fetch = { logEntries!! },
-        awaitFetchBeforeOpen = true,
-        dynamicHeight = true
-    ) { state, close ->
-        ExportLogDialog(
-            logViewCommon = viewModel.logViewCommon,
-            clipboardManager = viewModel.clipboardManager,
-            logEntries = state!!,
-            close = close,
-        )
-    }
-
-    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.log_viewer), onBackPressed = onBackPressed) {
-        divider(key = R.string.log_viewer_timestamp, text = context.getString(R.string.log_viewer_timestamp, timestamp))
-
-        listHelper(
-            noItems = R.string.no_log_entries,
-            listState = listState,
-            list = logEntries,
-            listKey = { it.hashCode() }
-        ) { logEntry, padding, shape ->
-            SelectionContainer {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                    shape = RoundedCornerShape(12.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 10.dp)
-                ) {
-                    FlowRow(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(10.dp)
-                    ) {
-                        Row {
-                            Card(
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
-                                shape = RoundedCornerShape(
-                                    topStart = 50.dp,
-                                    bottomStart = 50.dp,
-                                    topEnd = 0.dp,
-                                    bottomEnd = 0.dp
-                                )
-                            ) {
-                                Text(
-                                    modifier = Modifier.padding(
-                                        horizontal = 5.dp,
-                                        vertical = 2.dp
-                                    ),
-                                    fontWeight = FontWeight.SemiBold,
-                                    text = logEntry.type
-                                )
-                            }
-
-                            Card(
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.inversePrimary),
-                                shape = RoundedCornerShape(
-                                    topStart = 0.dp,
-                                    bottomStart = 0.dp,
-                                    topEnd = 50.dp,
-                                    bottomEnd = 50.dp
-                                )
-                            ) {
-                                Text(
-                                    modifier = Modifier.padding(
-                                        horizontal = 5.dp,
-                                        vertical = 2.dp
-                                    ), text = logEntry.prefix ?: stringResource(id = R.string.app_name)
-                                )
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Text(
-                                text = logEntry.message,
-                                fontFamily = FontFamily.Monospace
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(2.dp))
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            Text(
-                                text = logEntry.unixMillis.unixMillisUtc.value
-                                    .localizedString(),
-                                fontStyle = FontStyle.Italic,
-                                fontSize = 12.sp
-                            )
-                        }
-                    }
-                }
-            }
-
-
-//            Spacer(modifier = Modifier.height(5.dp))
-        }
-
-        item {
-            if (listState == ListState.Items) {
-                BottomRow {
-                    TextButton(
-                        onClick = {
-                            exportDialog.open(Unit)
-                        }
-                    ) {
-                        Text(text = stringResource(id = R.string.export))
-                    }
-                }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-fun LogCard(logEntry: LogEntry) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-        shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)
-    ) {
-        FlowRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
-        ) {
-            Row {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
-                    shape = RoundedCornerShape(
-                        topStart = 50.dp,
-                        bottomStart = 50.dp,
-                        topEnd = 0.dp,
-                        bottomEnd = 0.dp
-                    )
-                ) {
-                    Text(
-                        modifier = Modifier.padding(
-                            horizontal = 5.dp,
-                            vertical = 2.dp
-                        ),
-                        fontWeight = FontWeight.SemiBold,
-                        text = logEntry.type
-                    )
-                }
-
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.inversePrimary),
-                    shape = RoundedCornerShape(
-                        topStart = 0.dp,
-                        bottomStart = 0.dp,
-                        topEnd = 50.dp,
-                        bottomEnd = 50.dp
-                    )
-                ) {
-                    Text(
-                        modifier = Modifier.padding(
-                            horizontal = 5.dp,
-                            vertical = 2.dp
-                        ), text = logEntry.prefix ?: stringResource(id = R.string.app_name)
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(5.dp))
-
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = logEntry.message,
-                    fontFamily = FontFamily.Monospace
-                )
-            }
-
-            Spacer(modifier = Modifier.height(2.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Text(
-                    text = logEntry.unixMillis.unixMillisUtc.value
-                        .localizedString(),
-                    fontStyle = FontStyle.Italic,
-                    fontSize = 12.sp
-                )
-            }
-        }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun LogCardPreview() {
-    LogCard(
-        LogEntry.DefaultLogEntry(
-            type = "D",
-            prefix = "AnalyticsClient",
-            message = "Trying to send events (attemptNo: 1)"
-        )
+    val exportDialog = rememberNewExportLogDialog(logViewCommon = viewModel.logViewCommon,
+        name = timestamp,
+        fnLogEntries = { logEntries!! }
     )
+
+    val text = stringResource(id = R.string.settings_debug_log_viewer__title_log_captured_at, timestamp)
+
+    LogTextPageScaffold(
+        headline = stringResource(id = R.string.log_viewer),
+        onBackPressed = onBackPressed,
+        floatingActionButton = {
+            if (listState == ListState.Items) {
+                FloatingActionButton(
+                    modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
+                    onClick = exportDialog::open
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Share,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
+    ) {
+        divider(
+            key = R.string.settings_debug_log_viewer__title_log_captured_at,
+            text = text
+        )
+
+        listHelper(noItems = R.string.no_log_entries,
+            listState = listState,
+            list = logEntries?.let { mergeEntries(it) },
+            listKey = { it.hashCode() }
+        ) { logEntry, _, _ -> LogCard(logEntry) }
+    }
+}
+
+private fun mergeEntries(logEntries: List<LogEntry>): MutableList<PrefixMessageCardContent> {
+    val merged = mutableListOf<PrefixMessageCardContent>()
+    var last: PrefixMessageCardContent? = null
+    for (entry in logEntries) {
+        if (last != null) {
+            if (last.matches(entry)) {
+                last.add(entry)
+            } else {
+                merged.add(last)
+                last = null
+            }
+        } else {
+            last = PrefixMessageCardContent(entry.type, entry.prefix, entry.unixMillis)
+            last.add(entry)
+        }
+    }
+
+    if (last != null) {
+        merged.add(last)
+    }
+
+    return merged
 }

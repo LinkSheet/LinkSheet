@@ -216,7 +216,7 @@ fun MainNavHost(
         }
 
         animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
-            val flag = false
+            val flag = true
             if (uiOverhaul && flag) {
                 NewLogTextSettingsRoute(onBackPressed = onBackPressed)
             } else {

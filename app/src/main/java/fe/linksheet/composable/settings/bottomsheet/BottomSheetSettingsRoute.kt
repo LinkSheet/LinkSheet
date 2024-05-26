@@ -2,6 +2,7 @@ package fe.linksheet.composable.settings.bottomsheet
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material3.IconButtonDefaults
@@ -9,12 +10,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import fe.android.compose.dialog.helper.stateful.StatefulDialog
-import fe.android.compose.dialog.helper.stateful.StatefulDialogState
+import fe.android.compose.dialog.helper.result.ResultDialog
+import fe.android.compose.dialog.helper.result.rememberResultDialogState
+import fe.android.preference.helper.compose.StateMappedPreference
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
@@ -26,6 +29,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.S
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -66,22 +70,6 @@ fun BottomSheetSettingsRoute(
             TapType.Single to viewModel.tapConfigSingle,
             TapType.Double to viewModel.tapConfigDouble,
             TapType.Long to viewModel.tapConfigLong
-        )
-    }
-
-    // TODO: Pass data to onClose handler along result
-
-    val tapConfigDialog = remember { StatefulDialogState<TapType, TapConfig>(TapType.Single) }
-//    val tapConfigDialog = rememberStatefulDialog<TapType, Pair<TapType, TapConfig>>()
-    StatefulDialog(
-        state = tapConfigDialog,
-        onClose = { type, newConfig -> tapTypePreferences[type]!!(newConfig) }
-    ) { type ->
-        TapConfigDialog(
-            type = type,
-            currentConfig = tapTypePreferences[type]!!.value,
-            tapConfigDialog::dismiss,
-            tapConfigDialog::close
         )
     }
 
@@ -170,41 +158,7 @@ fun BottomSheetSettingsRoute(
 
         group(size = 4) {
             items(map = tapTypePreferences) { type, pref, padding, shape ->
-                var expanded by remember { mutableStateOf(false) }
-                val rotation by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow rotation")
-
-                ClickableShapeListItem(
-                    shape = shape,
-                    padding = padding,
-                    onClick = {
-                        expanded = true
-                        tapConfigDialog.open(type)
-                    },
-                    role = Role.Button,
-                    headlineContent = Resource.textContent(type.headline),
-                    supportingContent = Resource.textContent(pref().id),
-                    trailingContent = {
-                        FilledIcon(
-                            modifier = Modifier.rotate(rotation),
-                            iconSize = 24.dp,
-                            containerSize = 28.dp,
-                            colors = IconButtonDefaults.filledIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer
-                            ),
-                            imageVector = Icons.Outlined.KeyboardArrowDown,
-                            contentDescription = null
-                        )
-
-
-//                        FilledTonalIconButton(onClick = {}) {
-//                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
-//                        }
-////                        FilledIcon(
-////                            imageVector = Icons.Outlined.Tune,
-////                            contentDescription = stringResource(id = R.string.settings)
-////                        )
-                    }
-                )
+                TapConfigGroupItem(tapTypePreferences[type]!!, type, pref, padding, shape)
             }
 
             item(key = R.string.expand_on_app_select) { padding, shape ->
@@ -252,4 +206,68 @@ fun BottomSheetSettingsRoute(
             }
         }
     }
+}
+
+@Composable
+private fun TapConfigGroupItem(
+    preference: StateMappedPreference<TapConfig, String>,
+    type: TapType,
+    pref: StateMappedPreference<TapConfig, String>,
+    padding: PaddingValues,
+    shape: Shape
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val rotation by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow rotation")
+
+    val tapConfigDialog = rememberResultDialogState<TapConfig>()
+    ResultDialog(
+        state = tapConfigDialog,
+        onClose = { newConfig ->
+            expanded = false
+            preference(newConfig)
+        },
+        onDismiss = {
+            expanded = false
+        }
+    ) {
+        TapConfigDialog(
+            type = type,
+            currentConfig = preference.value,
+            tapConfigDialog::dismiss,
+            tapConfigDialog::close
+        )
+    }
+
+    ClickableShapeListItem(
+        shape = shape,
+        padding = padding,
+        onClick = {
+            expanded = true
+            tapConfigDialog.open()
+        },
+        role = Role.Button,
+        headlineContent = textContent(type.headline),
+        supportingContent = textContent(pref.value.id),
+        trailingContent = {
+            FilledIcon(
+                modifier = Modifier.rotate(rotation),
+                iconSize = 24.dp,
+                containerSize = 28.dp,
+                colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                ),
+                imageVector = Icons.Outlined.KeyboardArrowDown,
+                contentDescription = null
+            )
+
+
+//                        FilledTonalIconButton(onClick = {}) {
+//                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
+//                        }
+////                        FilledIcon(
+////                            imageVector = Icons.Outlined.Tune,
+////                            contentDescription = stringResource(id = R.string.settings)
+////                        )
+        }
+    )
 }

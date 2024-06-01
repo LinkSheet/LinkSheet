@@ -3,8 +3,7 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.link
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import fe.linksheet.R
-import fe.linksheet.amp2HtmlSettingsRoute
+import fe.linksheet.*
 import fe.linksheet.composable.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.settings.link.downloader.requestDownloadPermission
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
@@ -14,8 +13,6 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.P
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
-import fe.linksheet.followRedirectsSettingsRoute
-import fe.linksheet.libRedirectSettingsRoute
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -95,7 +92,7 @@ fun NewLinksSettingsRoute(
                             it
                         )
                     },
-                    onContentClick = { navigate(amp2HtmlSettingsRoute) },
+                    onContentClick = { navigate(downloaderSettingsRoute) },
                     position = ContentPosition.Trailing,
                     headlineContent = textContent(R.string.enable_downloader),
                     supportingContent = annotated(R.string.enable_downloader_explainer)

@@ -20,7 +20,10 @@ import fe.linksheet.extension.compose.clickable
 
 object AlertCardDefaults {
     val MinHeight = Modifier.heightIn(min = 90.dp)
-    val InnerPadding = PaddingValues(all = 16.dp)
+
+    val Padding = 16.dp
+    val InnerPadding = PaddingValues(all = Padding)
+
     val HorizontalArrangement = Arrangement.spacedBy(12.dp)
 }
 
@@ -73,28 +76,6 @@ fun ClickableAlertCard(
 }
 
 @Composable
-@Preview(showBackground = true)
-fun ClickableAlertCardPreview() {
-    PreviewThemeNew {
-        Column(modifier = Modifier.width(400.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            ClickableAlertCard(
-                imageVector = Icons.Default.Warning,
-                contentDescription = null,
-                headline = "Browser status",
-                subtitle = "LinkSheet has been set as default browser!"
-            )
-
-            ClickableAlertCard(
-                imageVector = Icons.Default.Warning,
-                contentDescription = null,
-                headline = "Shizuku integration",
-                subtitle = "LinkSheet has detected at least one app known to be actually be a browser."
-            )
-        }
-    }
-}
-
-@Composable
 fun ClickableAlertCard(
     modifier: Modifier = AlertCardDefaults.MinHeight,
     colors: CardColors = CardDefaults.cardColors(),
@@ -128,4 +109,25 @@ fun ClickableAlertCard(
     }
 }
 
+@Composable
+@Preview(showBackground = true)
+fun ClickableAlertCardPreview() {
+    PreviewThemeNew {
+        Column(modifier = Modifier.width(400.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            ClickableAlertCard(
+                imageVector = Icons.Default.Warning,
+                contentDescription = null,
+                headline = "Browser status",
+                subtitle = "LinkSheet has been set as default browser!"
+            )
+
+            ClickableAlertCard(
+                imageVector = Icons.Default.Warning,
+                contentDescription = null,
+                headline = "Shizuku integration",
+                subtitle = "LinkSheet has detected at least one app known to be actually be a browser."
+            )
+        }
+    }
+}
 

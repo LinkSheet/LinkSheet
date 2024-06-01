@@ -103,15 +103,14 @@ class MainViewModel(
         RoleManager.ROLE_BROWSER
     )
 
-    fun openDefaultBrowserSettings(activity: Activity, ): Boolean {
-        return activity.startActivityWithConfirmation(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
+    fun launchIntent(activity: Activity, intent: SettingsIntent): Boolean {
+        return activity.startActivityWithConfirmation(Intent(intent.action))
     }
 
-    fun openLinkHandlersSettings(activity: Activity): Boolean {
-        return activity.startActivityWithConfirmation(Intent("android.settings.MANAGE_DOMAIN_URLS"))
-    }
-    fun openCrossProfileAccess(activity: Activity): Boolean {
-        return activity.startActivityWithConfirmation(Intent("android.settings.MANAGE_CROSS_PROFILE_ACCESS"))
+    enum class SettingsIntent(val action: String) {
+        DefaultApps(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS),
+        DomainUrls("android.settings.MANAGE_DOMAIN_URLS"),
+        CrossProfileAccess("android.settings.MANAGE_CROSS_PROFILE_ACCESS")
     }
 
     fun checkDefaultBrowser() = context.packageManager

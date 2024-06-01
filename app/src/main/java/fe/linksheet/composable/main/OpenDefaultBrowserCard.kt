@@ -74,7 +74,7 @@ fun OpenDefaultBrowserCard(
                         val intent = viewModel.getRequestRoleBrowserIntent()
                         browserLauncherAndroidQPlus!!.launch(intent)
                     } else {
-                        viewModel.openDefaultBrowserSettings(activity)
+                        viewModel.launchIntent(activity, MainViewModel.SettingsIntent.DefaultApps)
                     }
                 }, verticalAlignment = Alignment.CenterVertically
         ) {

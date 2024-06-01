@@ -35,19 +35,19 @@ fun StatusCard(viewModel: MainViewModel = koinViewModel()) {
 
         LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
             item(key = R.string.settings_main_setup_success__button_change_browser) {
-                Button(onClick = { viewModel.openDefaultBrowserSettings(activity) }) {
+                Button(onClick = { viewModel.launchIntent(activity, MainViewModel.SettingsIntent.DefaultApps) }) {
                     Text(text = stringResource(id = R.string.settings_main_setup_success__button_change_browser))
                 }
             }
 
             item(key = R.string.settings_main_setup_success__button_link_handlers) {
-                Button(onClick = { viewModel.openLinkHandlersSettings(activity) }) {
+                Button(onClick = { viewModel.launchIntent(activity, MainViewModel.SettingsIntent.DomainUrls) }) {
                     Text(text = stringResource(id = R.string.settings_main_setup_success__button_link_handlers))
                 }
             }
 
             item(key = R.string.settings_main_setup_success__button_connected_apps) {
-                Button(onClick = { viewModel.openCrossProfileAccess(activity) }) {
+                Button(onClick = { viewModel.launchIntent(activity, MainViewModel.SettingsIntent.CrossProfileAccess) }) {
                     Text(text = stringResource(id = R.string.settings_main_setup_success__button_connected_apps))
                 }
             }

@@ -74,13 +74,13 @@ fun ClickableAlertCard2(
             AlertCardContentLayout(
                 title = {
                     CompositionLocalProvider(
-                        LocalTextOptions provides TextOptions(style = MaterialTheme.typography.titleMedium),
+                        LocalTextStyle provides MaterialTheme.typography.titleMedium,
                         content = headline.content
                     )
                 },
                 subtitle = {
                     CompositionLocalProvider(
-                        LocalTextOptions provides TextOptions(style = MaterialTheme.typography.bodyMedium),
+                        LocalTextStyle provides MaterialTheme.typography.bodyMedium,
                         content = subtitle.content
                     )
                 }

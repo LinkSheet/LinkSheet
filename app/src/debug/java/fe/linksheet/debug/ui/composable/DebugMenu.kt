@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.debug.activity.*
 import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.ui.LocalActivity
@@ -23,6 +24,14 @@ fun DebugMenu() {
     val activity = LocalActivity.current
 
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        item(key = "onboarding") {
+            FilledTonalActivityLauncher(
+                activity = activity,
+                text = "Launch onboarding",
+                intent = createIntent(activity, OnboardingActivity::class)
+            )
+        }
+
         item(key = "export_log_dialog") {
             FilledTonalActivityLauncher(
                 activity = activity,

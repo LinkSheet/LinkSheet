@@ -95,24 +95,24 @@ internal object NewSettingsRouteData {
     )
 
     val about = arrayOf(
-        RouteNavItem(
-            Routes.Help,
-            vector(Icons.AutoMirrored.Outlined.HelpOutline),
-            textContent(R.string.help),
-            textContent(R.string.help_subtitle),
-        ),
-        RouteNavItem(
-            Routes.Shortcuts,
-            vector(Icons.Outlined.SwitchAccessShortcut),
-            textContent(R.string.settings__title_shortcuts),
-            textContent(R.string.settings__subtitle_shortcuts),
-        ),
-        RouteNavItem(
-            Routes.Updates,
-            vector(Icons.Outlined.Update),
-            textContent(R.string.settings__title_updates),
-            textContent(R.string.settings__subtitle_updates),
-        ),
+//        RouteNavItem(
+//            Routes.Help,
+//            vector(Icons.AutoMirrored.Outlined.HelpOutline),
+//            textContent(R.string.help),
+//            textContent(R.string.help_subtitle),
+//        ),
+//        RouteNavItem(
+//            Routes.Shortcuts,
+//            vector(Icons.Outlined.SwitchAccessShortcut),
+//            textContent(R.string.settings__title_shortcuts),
+//            textContent(R.string.settings__subtitle_shortcuts),
+//        ),
+//        RouteNavItem(
+//            Routes.Updates,
+//            vector(Icons.Outlined.Update),
+//            textContent(R.string.settings__title_updates),
+//            textContent(R.string.settings__subtitle_updates),
+//        ),
         RouteNavItem(
             aboutSettingsRoute,
             vector(Icons.Outlined.Info),

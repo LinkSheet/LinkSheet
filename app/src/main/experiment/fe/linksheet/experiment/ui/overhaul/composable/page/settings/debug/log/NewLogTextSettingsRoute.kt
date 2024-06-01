@@ -72,7 +72,7 @@ fun NewLogTextSettingsRoute(
     }
 }
 
-private fun mergeEntries(logEntries: List<LogEntry>): MutableList<PrefixMessageCardContent> {
+private fun mergeEntries(logEntries: List<LogEntry>): List<PrefixMessageCardContent> {
     val merged = mutableListOf<PrefixMessageCardContent>()
     var last: PrefixMessageCardContent? = null
     for (entry in logEntries) {

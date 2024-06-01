@@ -26,7 +26,7 @@ fun NewAmp2HtmlSettingsRoute(
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.settings_links_amp2html__title_amp2html), onBackPressed = onBackPressed) {
-        item(key = R.string.follow_redirects, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.enable_amp2html, contentType = ContentTypeDefaults.SingleGroupItem) {
             PreferenceSwitchListItem(
                 preference = viewModel.enableAmp2Html,
                 headlineContent = textContent(R.string.enable_amp2html),
@@ -37,7 +37,7 @@ fun NewAmp2HtmlSettingsRoute(
         divider(stringRes = R.string.options)
 
         group(size = 3 + if (LinkSheetAppConfig.isPro()) 1 else 0) {
-            item(key = R.string.follow_redirects_local_cache) { padding, shape ->
+            item(key = R.string.amp2html_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = viewModel.enableAmp2Html(),
                     shape = shape,

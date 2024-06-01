@@ -4,9 +4,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.ImportExport
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.ImportExport
+import androidx.compose.material.icons.outlined.Science
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
@@ -31,7 +33,7 @@ private object NewAdvancedSettingsRouteData {
         ),
         RouteNavItem(
             experimentSettingsRoute.route,
-            vector(Icons.Outlined.Android),
+            vector(Icons.Outlined.Science),
             textContent(R.string.experiments),
             textContent(R.string.experiments_explainer),
         ),

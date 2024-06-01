@@ -112,8 +112,7 @@
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Follow redirects</string>
     <string name="use_clear_urls">Use ClearURLs</string>
-    <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs
-    </annotation> integration (clears tracking parameters from URLs)
+    <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)
     </string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may
@@ -139,10 +138,7 @@
     <string name="dark">Dark</string>
     <string name="amoled_black">Amoled Black</string>
     <string name="fastfoward_rules">Use FastForward rules</string>
-    <string name="fastfoward_rules_explainer">Use experimental <annotation
-            url="https://github.com/FastForwardTeam/FastForward">FastForward
-    </annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)
-    </string>
+    <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
     <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
     <string name="resolved_via">%s resolved via %s</string>
@@ -151,10 +147,7 @@
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="redirect_resolve_type_not_resolved">none</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation
-            url="https://github.com/libredirect/libredirect">LibRedirect
-    </annotation> integration
-    </string>
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integration</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>

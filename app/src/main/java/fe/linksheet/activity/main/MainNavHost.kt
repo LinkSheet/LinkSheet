@@ -52,6 +52,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.NewDeb
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogTextSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.NewLinksSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.amp2html.NewAmp2HtmlSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.redirect.NewFollowRedirectsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
@@ -161,7 +162,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = amp2HtmlSettingsRoute) {
-            Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
+            if(uiOverhaul){
+                NewAmp2HtmlSettingsRoute(onBackPressed=onBackPressed)
+            } else {
+                Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = themeSettingsRoute) {

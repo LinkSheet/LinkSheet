@@ -759,4 +759,5 @@
     <string name="export_log_dialog__text_log_info">Configure share settings for log captured at: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Viewing log captured at: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Aww snap, that should not have happened!</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
 </resources>

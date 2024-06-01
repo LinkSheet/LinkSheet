@@ -3,29 +3,38 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.main
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentPaste
+import androidx.compose.material.icons.outlined.ContentPasteGo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard
+import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard2
+import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 
 
 @Composable
 fun OpenCopiedLink(uri: Uri) {
     val context = LocalContext.current
 
-    ClickableAlertCard(
+    ClickableAlertCard2(
         onClick = {
             context.startActivity(Intent(context, BottomSheetActivity::class.java).apply {
                 this.action = Intent.ACTION_VIEW
                 this.data = uri
             })
         },
-        imageVector = Icons.Default.ContentPaste,
+        imageVector = Icons.Outlined.ContentPasteGo,
         contentDescription = stringResource(id = R.string.paste),
-        headline = stringResource(id = R.string.open_copied_link),
-        subtitle = uri.toString()
+        headline = textContent(R.string.open_copied_link),
+        subtitle = text(uri.toString())
     )
+}
+
+@Preview
+@Composable
+fun OpenCopiedLinkPreview() {
+    OpenCopiedLink(uri = Uri.parse("https://google.com"))
 }

@@ -761,4 +761,12 @@
     <string name="crash_viewer__subtitle_app_crashed">Aww snap, that should not have happened!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Downloader</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet is set up</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet is correctly set up and ready to
+        operate
+    </string>
+    <string name="settings_main_setup_success__button_change_browser">Default browser</string>
+    <string name="settings_main_setup_success__button_link_handlers">Link handlers</string>
+    <string name="settings_main_setup_success__button_connected_apps">Connected apps</string>
+    <string name="settings_main_setup_success__subtitle_quick_settings">Quick settings</string>
 </resources>

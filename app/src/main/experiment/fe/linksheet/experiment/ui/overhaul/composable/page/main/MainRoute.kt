@@ -56,9 +56,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     }
 
     val showOtherBanners by remember {
-        derivedStateOf {
-            defaultBrowserEnabled.isSuccess && MainViewModel.BrowserStatus.hasBrowser(browserStatus)
-        }
+        mutableStateOf(defaultBrowserEnabled.isSuccess && MainViewModel.BrowserStatus.hasBrowser(browserStatus))
     }
 
     clipboardManager.ObserveClipboard {
@@ -105,17 +103,33 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (BuildType.current?.allowDebug == true) {
+            if (BuildType.current.allowDebug) {
                 item {
                     DebugComposable.MainRoute.compose(currentComposer, 0)
                 }
             }
 
-            if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
+            if (defaultBrowserEnabled.isSuccess) {
                 item(
-                    key = R.string.nightly_experiments_card,
+                    key = R.string.settings_main_setup_success__title_linksheet_setup_success,
                     contentType = ContentTypeDefaults.ClickableAlert
                 ) {
+                    StatusCard()
+
+//                    ClickableAlertCard2(
+//                        colors = CardDefaults.cardColors(
+//                            containerColor = MaterialTheme.colorScheme.primaryContainer
+//                        ),
+//                        contentDescription = null,
+//                        headline = textContent(R.string.settings_main_setup_success__title_linksheet_setup_success),
+//                        subtitle = textContent(R.string.settings_main_setup_success__text_linksheet_setup_success_info),
+//                        imageVector = Icons.Rounded.CheckCircleOutline,
+//                    )
+                }
+            }
+
+            if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
+                item(key = R.string.nightly_experiments_card, contentType = ContentTypeDefaults.ClickableAlert) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
@@ -129,43 +143,44 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
+
 //            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
 //                cardItem(header = R.string.donate) {
 //                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
 //                }
 //            }
 
-            item(
-                key = R.string.set_as_default_browser,
-                contentType = ContentTypeDefaults.ClickableAlert
-            ) {
-                OpenDefaultBrowserCard(
-                    activity = activity,
-                    defaultBrowserEnabled = defaultBrowserEnabled,
-                    defaultBrowserChanged = { defaultBrowserEnabled = it },
-                    viewModel = viewModel
-                )
-            }
+//            item(
+//                key = R.string.set_as_default_browser,
+//                contentType = ContentTypeDefaults.ClickableAlert
+//            ) {
+//                OpenDefaultBrowserCard(
+//                    activity = activity,
+//                    defaultBrowserEnabled = defaultBrowserEnabled,
+//                    defaultBrowserChanged = { defaultBrowserEnabled = it },
+//                    viewModel = viewModel
+//                )
+//            }
 
-            item(
-                key = R.string.shizuku_integration,
-                contentType = ContentTypeDefaults.ClickableAlert
-            ) {
-                ShizukuCard(
-                    activity = activity,
-                    uriHandler = uriHandler,
-                    shizukuInstalled = shizukuInstalled,
-                    shizukuRunning = shizukuRunning
-                )
-            }
+//            item(
+//                key = R.string.shizuku_integration,
+//                contentType = ContentTypeDefaults.ClickableAlert
+//            ) {
+//                ShizukuCard(
+//                    activity = activity,
+//                    uriHandler = uriHandler,
+//                    shizukuInstalled = shizukuInstalled,
+//                    shizukuRunning = shizukuRunning
+//                )
+//            }
 
 //            if (browserStatus != MainViewModel.BrowserStatus.Known) {
-            item(
-                key = R.string.browser_status,
-                contentType = ContentTypeDefaults.ClickableAlert
-            ) {
-                BrowserCard(browserStatus = browserStatus)
-            }
+//            item(
+//                key = R.string.browser_status,
+//                contentType = ContentTypeDefaults.ClickableAlert
+//            ) {
+//                BrowserCard(browserStatus = browserStatus)
+//            }
 //            }
 
             if (clipboardUri != null) {

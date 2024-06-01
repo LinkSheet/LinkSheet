@@ -53,6 +53,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.Ne
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogTextSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.NewLinksSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.amp2html.NewAmp2HtmlSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.downloader.NewDownloaderSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.redirect.NewFollowRedirectsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
@@ -158,12 +159,16 @@ fun MainNavHost(
         }
 
         animatedComposable(route = downloaderSettingsRoute) {
-            DownloaderSettingsRoute(onBackPressed = onBackPressed)
+            if (uiOverhaul) {
+                NewDownloaderSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                DownloaderSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = amp2HtmlSettingsRoute) {
-            if(uiOverhaul){
-                NewAmp2HtmlSettingsRoute(onBackPressed=onBackPressed)
+            if (uiOverhaul) {
+                NewAmp2HtmlSettingsRoute(onBackPressed = onBackPressed)
             } else {
                 Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
             }

@@ -17,9 +17,11 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeL
 import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
 import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
+import fe.linksheet.extension.compose.enabled
 
 @Composable
 fun SliderListItem(
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
     value: Float,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
@@ -33,6 +35,9 @@ fun SliderListItem(
     overlineContent: TextContent? = null,
 ) {
     ShapeListItem(
+        modifier = Modifier
+            .enabled(enabled)
+            .then(modifier),
         shape = shape,
         padding = padding,
         headlineContent = headlineContent,

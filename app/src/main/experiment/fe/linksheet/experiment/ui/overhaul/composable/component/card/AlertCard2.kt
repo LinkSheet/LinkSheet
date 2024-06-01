@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.experiment.ui.overhaul.composable.component.icon.FilledIcon
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
+import fe.linksheet.experiment.ui.overhaul.composable.util.LocalTextOptions
 import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideContentColorOptionsStyleText
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextOptions
@@ -71,17 +73,14 @@ fun ClickableAlertCard2(
 
             AlertCardContentLayout(
                 title = {
-                    ProvideContentColorOptionsStyleText(
-                        Color.Unspecified,
-                        TextOptions(style = MaterialTheme.typography.titleMedium),
+                    CompositionLocalProvider(
+                        LocalTextOptions provides TextOptions(style = MaterialTheme.typography.titleMedium),
                         content = headline.content
                     )
-//                    Text(text = headline, style = MaterialTheme.typography.titleMedium)
                 },
                 subtitle = {
-                    ProvideContentColorOptionsStyleText(
-                        Color.Unspecified,
-                        TextOptions(style = MaterialTheme.typography.bodyMedium),
+                    CompositionLocalProvider(
+                        LocalTextOptions provides TextOptions(style = MaterialTheme.typography.bodyMedium),
                         content = subtitle.content
                     )
                 }

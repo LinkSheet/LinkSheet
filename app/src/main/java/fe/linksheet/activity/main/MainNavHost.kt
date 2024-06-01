@@ -52,6 +52,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.NewDeb
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.NewLogTextSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.NewLinksSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.redirect.NewFollowRedirectsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.shortcuts.ShortcutsRoute
@@ -137,7 +138,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = followRedirectsSettingsRoute) {
-            FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
+            if (uiOverhaul) {
+                NewFollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = libRedirectSettingsRoute) {

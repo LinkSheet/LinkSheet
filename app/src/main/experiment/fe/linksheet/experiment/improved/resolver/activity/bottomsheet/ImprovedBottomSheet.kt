@@ -269,7 +269,7 @@ class ImprovedBottomSheet(
                         result.downloadable as DownloadCheckResult.Downloadable
                     )
 
-                    if (!bottomSheetViewModel.downloadStartedToast()) {
+                    if (bottomSheetViewModel.downloadStartedToast()) {
                         showToast(R.string.download_started)
                     }
 

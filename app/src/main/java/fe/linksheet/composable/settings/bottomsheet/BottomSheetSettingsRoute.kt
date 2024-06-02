@@ -80,8 +80,8 @@ fun BottomSheetSettingsRoute(
         item(key = R.string.display_grid_layout, contentType = ContentTypeDefaults.SingleGroupItem) {
             PreferenceSwitchListItem(
                 preference = viewModel.gridLayout,
-                headlineContent = Resource.textContent(R.string.display_grid_layout),
-                supportingContent = Resource.textContent(R.string.display_grid_layout_explainer),
+                headlineContent = textContent(R.string.display_grid_layout),
+                supportingContent = textContent(R.string.display_grid_layout_explainer),
             )
         }
 
@@ -102,8 +102,8 @@ fun BottomSheetSettingsRoute(
                         }
                     },
                     position = ContentPosition.Trailing,
-                    headlineContent = Resource.textContent(R.string.usage_stats_sorting),
-                    supportingContent = Resource.textContent(R.string.usage_stats_sorting_explainer)
+                    headlineContent = textContent(R.string.usage_stats_sorting),
+                    supportingContent = textContent(R.string.usage_stats_sorting_explainer)
                 )
             }
 
@@ -118,8 +118,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.enableRequestPrivateBrowsingButton,
-                    headlineContent = Resource.textContent(id = R.string.enable_request_private_browsing_button),
-                    supportingContent = Resource.textContent(
+                    headlineContent = textContent(id = R.string.enable_request_private_browsing_button),
+                    supportingContent = textContent(
                         id = R.string.enable_request_private_browsing_button_explainer,
                         browsers
                     )
@@ -131,8 +131,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.dontShowFilteredItem,
-                    headlineContent = Resource.textContent(R.string.dont_show_filtered_item),
-                    supportingContent = Resource.textContent(R.string.dont_show_filtered_item_explainer),
+                    headlineContent = textContent(R.string.dont_show_filtered_item),
+                    supportingContent = textContent(R.string.dont_show_filtered_item_explainer),
                 )
             }
 
@@ -141,8 +141,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.hideBottomSheetChoiceButtons,
-                    headlineContent = Resource.textContent(R.string.hide_bottom_sheet_choice_buttons),
-                    supportingContent = Resource.textContent(R.string.hide_bottom_sheet_choice_buttons_explainer),
+                    headlineContent = textContent(R.string.hide_bottom_sheet_choice_buttons),
+                    supportingContent = textContent(R.string.hide_bottom_sheet_choice_buttons_explainer),
                 )
             }
 
@@ -169,8 +169,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.expandOnAppSelect,
-                    headlineContent = Resource.textContent(R.string.expand_on_app_select),
-                    supportingContent = Resource.textContent(R.string.expand_on_app_select_explainer),
+                    headlineContent = textContent(R.string.expand_on_app_select),
+                    supportingContent = textContent(R.string.expand_on_app_select_explainer),
                 )
             }
         }
@@ -183,8 +183,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.previewUrl,
-                    headlineContent = Resource.textContent(R.string.preview_url),
-                    supportingContent = Resource.textContent(R.string.preview_url_explainer),
+                    headlineContent = textContent(R.string.preview_url),
+                    supportingContent = textContent(R.string.preview_url_explainer),
                 )
             }
 
@@ -193,8 +193,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.hideAfterCopying,
-                    headlineContent = Resource.textContent(R.string.hide_after_copying),
-                    supportingContent = Resource.textContent(R.string.hide_after_copying_explainer),
+                    headlineContent = textContent(R.string.hide_after_copying),
+                    supportingContent = textContent(R.string.hide_after_copying_explainer),
                 )
             }
 
@@ -203,8 +203,8 @@ fun BottomSheetSettingsRoute(
                     shape = shape,
                     padding = padding,
                     preference = viewModel.enableIgnoreLibRedirectButton,
-                    headlineContent = Resource.textContent(R.string.enable_ignore_libredirect_button),
-                    supportingContent = Resource.textContent(R.string.enable_ignore_libredirect_button_explainer),
+                    headlineContent = textContent(R.string.enable_ignore_libredirect_button),
+                    supportingContent = textContent(R.string.enable_ignore_libredirect_button_explainer),
                 )
             }
         }

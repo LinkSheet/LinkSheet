@@ -152,8 +152,9 @@ class ImprovedBottomSheet(
                     })
                 } else if (status is IntentResolveResult.Default) {
                     AppWrapper_Temp(
-                        status as IntentResolveResult.Default,
-                        drawerState.currentValue == SheetValue.Expanded
+                        status = status as IntentResolveResult.Default,
+                        isExpanded = drawerState.currentValue == SheetValue.Expanded,
+                        hideDrawer = hide
                     )
                 }
 //                val scope: ColumnScope = this@BottomDrawer
@@ -173,7 +174,7 @@ class ImprovedBottomSheet(
     }
 
     @Composable
-    private fun AppWrapper_Temp(status: IntentResolveResult.Default, isExpanded: Boolean) {
+    private fun AppWrapper_Temp(status: IntentResolveResult.Default, isExpanded: Boolean, hideDrawer: () -> Unit) {
         BottomSheetApps(
             bottomSheetViewModel = viewModel,
             result = status,
@@ -182,7 +183,7 @@ class ImprovedBottomSheet(
             enableSwitchProfile = viewModel.switchProfile(),
             isExpanded = isExpanded,
             requestExpand = {},
-            hideDrawer = {},
+            hideDrawer = hideDrawer,
             showPackage = viewModel.alwaysShowPackageName(),
             previewUrl = viewModel.previewUrl(),
             hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
@@ -272,7 +273,9 @@ class ImprovedBottomSheet(
                         showToast(R.string.download_started)
                     }
 
-                    hideDrawer()
+                    if (bottomSheetViewModel.hideAfterCopying()) {
+                        hideDrawer()
+                    }
                 },
                 ignoreLibRedirect = {
                     val redirected =

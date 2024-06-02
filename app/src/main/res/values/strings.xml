@@ -69,8 +69,8 @@
     <string name="disable_all_toasts_explainer">Never show any toast messages</string>
     <string name="remove_all">Remove all</string>
     <string name="add_all">Add all</string>
-    <string name="hide_after_copying">Auto-dismiss on action</string>
-    <string name="hide_after_copying_explainer">Automatically hide bottomsheet when an action button such as \"Copy link\" or \"Download\" is tapped</string>
+    <string name="hide_after_copying">Auto-hide on action</string>
+    <string name="hide_after_copying_explainer">Automatically hide bottom sheet when an action button such as \"Copy link\" or \"Download\" is tapped</string>
     <string name="back">Back</string>
     <string name="display_grid_layout">Grid layout</string>
     <string name="display_grid_layout_explainer">Show a grid instead of a list in the bottom sheet</string>

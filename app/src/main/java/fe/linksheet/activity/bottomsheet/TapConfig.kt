@@ -1,11 +1,16 @@
 package fe.linksheet.activity.bottomsheet
 
+import android.os.Parcelable
 import androidx.annotation.StringRes
 import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.R
 import fe.linksheet.util.StringResHolder
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
-sealed class TapConfig(val name: String, @StringRes stringRes: Int) : StringResHolder {
+@Parcelize
+sealed class TapConfig(val name: String, @StringRes val  stringRes: Int) : StringResHolder, Parcelable {
+    @IgnoredOnParcel
     override val id = stringRes
 
     data object None : TapConfig("none", R.string.no_action)

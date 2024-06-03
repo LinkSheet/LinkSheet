@@ -109,23 +109,17 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (defaultBrowserEnabled.isSuccess) {
-                item(
-                    key = R.string.settings_main_setup_success__title_linksheet_setup_success,
-                    contentType = ContentTypeDefaults.ClickableAlert
-                ) {
-                    StatusCard()
-
-//                    ClickableAlertCard2(
-//                        colors = CardDefaults.cardColors(
-//                            containerColor = MaterialTheme.colorScheme.primaryContainer
-//                        ),
-//                        contentDescription = null,
-//                        headline = textContent(R.string.settings_main_setup_success__title_linksheet_setup_success),
-//                        subtitle = textContent(R.string.settings_main_setup_success__text_linksheet_setup_success_info),
-//                        imageVector = Icons.Rounded.CheckCircleOutline,
-//                    )
-                }
+            item(
+                key = R.string.settings_main_setup_success__title_linksheet_setup_success,
+                contentType = ContentTypeDefaults.ClickableAlert
+            ) {
+                StatusCard_Wrapper(
+                    isDefaultBrowser = defaultBrowserEnabled.isSuccess,
+                    launchIntent = { viewModel.launchIntent(activity, it) },
+                    updateDefaultBrowser = {
+                        defaultBrowserEnabled = Results.success()
+                    }
+                )
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {

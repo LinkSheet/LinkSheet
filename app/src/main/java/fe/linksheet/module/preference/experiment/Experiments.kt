@@ -17,7 +17,7 @@ object Experiments : PreferenceDefinition(
     val urlPreview = boolean("experiment_url_bar_preview")
     val declutterUrl = boolean("experiment_url_bar_declutter_url")
 
-    val uiOverhaul = boolean("experiment_ui_overhaul")
+    val uiOverhaul = boolean("experiment_ui_overhaul", true)
 
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver")
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
@@ -25,14 +25,18 @@ object Experiments : PreferenceDefinition(
 
     val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
 
+    val enableAnalytics = boolean("experiment_enable_analytics")
+
     // TODO: Enforce type
     init {
+        uiOverhaul.migrate { repository, _ -> repository.put(uiOverhaul, true) }
+
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, urlPreview, declutterUrl),
-            Experiment("ui_overhaul", true, uiOverhaul),
+            //Experiment("ui_overhaul", true, uiOverhaul),
             Experiment(
                 "improved_bottom_sheet",
-                true,
+                hidden = false,
                 improvedIntentResolver,
                 improvedBottomSheetExpandFully,
                 improvedBottomSheetUrlDoubleTap,

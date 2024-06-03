@@ -18,6 +18,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SettingsItemRow
+import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -70,14 +71,12 @@ fun DevSettingsRoute(
                 )
             }
 
-//            item(key = "dev_bottomsheet") {
-//                SwitchRow(
-//                    state = viewModel.useDevBottomSheet,
-//                    viewModel = viewModel,
-//                    headlineId = R.string.enable_dev_bottom_sheet,
-//                    subtitleId = R.string.enable_dev_bottom_sheet_explainer
-//                )
-//            }
+            item(key = "enable_analytics") {
+                SwitchRow(
+                    state = viewModel.enableAnalytics,
+                    headline = "Enable analytics",
+                )
+            }
         }
     }
 }

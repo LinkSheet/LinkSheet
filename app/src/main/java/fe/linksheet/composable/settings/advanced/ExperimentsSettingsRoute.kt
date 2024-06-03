@@ -34,23 +34,23 @@ fun ExperimentsSettingsRoute(
 ) {
     val listState = rememberLazyListState()
 
-    val experiment by viewModel.experiment.collectOnIO()
-    val enableExperimentDialog = dialogHelper<String, String, Unit>(
-        fetch = { it },
-        awaitFetchBeforeOpen = true,
-        dynamicHeight = true
-    ) { state, close ->
-
-        ExperimentDialog(state!!)
-    }
-
-    LaunchedEffect(experiment) {
-        val pref = viewModel.stateMap.keys.indexOf(experiment)
-        if (pref != -1) {
-            listState.animateScrollToItem(pref)
-            enableExperimentDialog.open(experiment!!)
-        }
-    }
+//    val experiment by viewModel.experiment.collectOnIO()
+//    val enableExperimentDialog = dialogHelper<String, String, Unit>(
+//        fetch = { it },
+//        awaitFetchBeforeOpen = true,
+//        dynamicHeight = true
+//    ) { state, close ->
+//
+//        ExperimentDialog(state!!)
+//    }
+//
+//    LaunchedEffect(experiment) {
+//        val pref = viewModel.stateMap.keys.indexOf(experiment)
+//        if (pref != -1) {
+//            listState.animateScrollToItem(pref)
+//            enableExperimentDialog.open(experiment!!)
+//        }
+//    }
 
 
     SettingsScaffold(R.string.experiments, onBackPressed = onBackPressed, floatingActionButton = {

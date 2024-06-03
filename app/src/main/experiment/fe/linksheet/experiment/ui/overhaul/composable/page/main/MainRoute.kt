@@ -1,12 +1,14 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,6 +25,7 @@ import fe.linksheet.R
 import fe.linksheet.debug.DebugComposable
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
+import fe.linksheet.experiment.ui.overhaul.composable.page.home.news.NewsCard
 import fe.linksheet.experiment.ui.overhaul.composable.page.home.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -113,7 +116,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 key = R.string.settings_main_setup_success__title_linksheet_setup_success,
                 contentType = ContentTypeDefaults.ClickableAlert
             ) {
-                StatusCard_Wrapper(
+                StatusCardWrapper(
                     isDefaultBrowser = defaultBrowserEnabled.isSuccess,
                     launchIntent = { viewModel.launchIntent(activity, it) },
                     updateDefaultBrowser = {
@@ -128,14 +131,42 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
+            if (clipboardUri != null) {
                 item(
-                    key = R.string.running_unofficial_build,
-                    contentType = ContentTypeDefaults.Alert
+                    key = R.string.open_copied_link,
+                    contentType = ContentTypeDefaults.ClickableAlert
                 ) {
-                    UnofficialBuild()
+                    OpenCopiedLink(uri = clipboardUri!!)
                 }
             }
+
+            divider(stringRes = R.string.settings_main_news__text_header)
+
+            item(
+                key = R.string.settings_main_news__text_ui_overhaul,
+                contentType = ContentTypeDefaults.ClickableAlert
+            ) {
+                NewsCard(
+                    titleId = R.string.settings_main_news__title_ui_overhaul,
+                    icon = Icons.Outlined.AutoAwesome,
+                    contentId = R.string.settings_main_news__text_ui_overhaul,
+                    buttonTextId = R.string.settings_main_news__button_read_more,
+                    onClick = {
+                        Toast.makeText(activity, "News will become available at a later date!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                )
+            }
+
+
+//            if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
+//                item(
+//                    key = R.string.running_unofficial_build,
+//                    contentType = ContentTypeDefaults.Alert
+//                ) {
+//                    UnofficialBuild()
+//                }
+//            }
 
 
 //            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
@@ -177,14 +208,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 //            }
 //            }
 
-            if (clipboardUri != null) {
-                item(
-                    key = R.string.open_copied_link,
-                    contentType = ContentTypeDefaults.ClickableAlert
-                ) {
-                    OpenCopiedLink(uri = clipboardUri!!)
-                }
-            }
 
 //            if (showOtherBanners) {
 //                val discord = viewModel.showDiscordBanner()

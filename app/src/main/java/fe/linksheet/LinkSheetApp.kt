@@ -2,6 +2,7 @@ package fe.linksheet
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -29,6 +30,7 @@ import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
@@ -92,6 +94,9 @@ class LinkSheetApp : Application() {
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
+        val prefs = getSharedPreferences(packageName + "_experiments", Context.MODE_PRIVATE)
+        val enableAnalytics = prefs.getBoolean(Experiments.enableAnalytics.key, false)
+
         val koinApplication = startKoin {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
@@ -115,7 +120,7 @@ class LinkSheetApp : Application() {
                 viewModelModule,
                 requestModule,
                 downloaderModule,
-                if (BuildType.current.allowDebug) analyticsModule else DebugLogAnalyticsClient.module,
+                if (BuildType.current.allowDebug || enableAnalytics) analyticsModule else DebugLogAnalyticsClient.module,
                 statisticsModule,
                 pasteServiceModule
             )
@@ -123,7 +128,7 @@ class LinkSheetApp : Application() {
 
         lifecycleObserver.dispatchAppInitialized()
 
-        if (BuildType.current.allowDebug) {
+        if (BuildType.current.allowDebug || enableAnalytics) {
             // TODO: Remove once user is given the choice to opt in/out
             val analyticsClient = koinApplication.koin.get<AnalyticsClient>()
             val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()

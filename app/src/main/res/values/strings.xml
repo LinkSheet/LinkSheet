@@ -102,9 +102,7 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">Source code repository</string>
-    <string name="donate_subtitle">Upgrade to
-        <b>LinkSheet Pro</b>
-    </string>
+    <string name="donate_subtitle">Upgrade to <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">Open copied link</string>
     <string name="paste">Paste</string>
     <string name="error">Error</string>
@@ -772,4 +770,8 @@
     <string name="settings_main_setup_success__button_link_handlers">Link handlers</string>
     <string name="settings_main_setup_success__button_connected_apps">Connected apps</string>
     <string name="settings_main_setup_success__subtitle_quick_settings">Quick settings</string>
+    <string name="settings_main_news__title_ui_overhaul">New UI</string>
+    <string name="settings_main_news__text_ui_overhaul">LinkSheet has been given a fresh coat of paint!</string>
+    <string name="settings_main_news__button_read_more">Read more</string>
+    <string name="settings_main_news__text_header">News</string>
 </resources>

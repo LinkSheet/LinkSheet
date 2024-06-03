@@ -37,7 +37,7 @@ fun PrivacySettingsRoute(
             }
         }
 
-        if (BuildType.current.allowDebug) {
+        if (BuildType.current.allowDebug || viewModel.enableAnalytics()) {
             divider(key = R.string.telemetry_configure_title, stringRes = R.string.telemetry_configure_title)
 
             group(2) {

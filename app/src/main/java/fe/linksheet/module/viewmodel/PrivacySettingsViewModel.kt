@@ -8,14 +8,18 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 
 import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class PrivacySettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository,
+    experimentsRepository: ExperimentRepository,
     private val analyticsClient: AnalyticsClient,
 ) : BaseViewModel(preferenceRepository) {
     var showAsReferrer = preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
+    val enableAnalytics = experimentsRepository.asState(Experiments.enableAnalytics)
 
     @OptIn(SensitivePreference::class)
     val telemetryLevel = preferenceRepository.asState(AppPreferences.telemetryLevel)

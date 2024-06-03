@@ -2,15 +2,12 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.about
 
 import ClearURLsMetadata
 import LibRedirectMetadata
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalUriHandler
@@ -22,6 +19,7 @@ import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.*
+import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
@@ -33,10 +31,12 @@ import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.C
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
+import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppInfo
 import fe.linksheet.util.AppSignature
+import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -73,6 +73,14 @@ fun NewAboutSettingsRoute(
     val buildType = AppSignature.checkSignature(activity)
 
     var devClicks by remember { mutableIntStateOf(0) }
+
+//    LaunchedEffect(Unit) {
+//        while (true) {
+//            delay(5000)
+//            devClicks = 0
+//        }
+//    }
+
     val interaction = LocalHapticFeedbackInteraction.current
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.about), onBackPressed = onBackPressed) {
@@ -80,7 +88,7 @@ fun NewAboutSettingsRoute(
             item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.donate),
-                    supportingContent = textContent(R.string.donate_subtitle),
+                    supportingContent = annotated(R.string.donate_subtitle),
                     icon = vector(Icons.Outlined.AutoAwesome),
                     onClick = { uriHandler.openUri(BuildConfig.LINK_BUY_ME_A_COFFEE) }
                 )
@@ -144,13 +152,16 @@ fun NewAboutSettingsRoute(
                 },
                 icon = vector(Icons.Outlined.Build),
                 onClick = {
-                    interaction.copy(viewModel.getBuildInfo(), HapticFeedbackType.LongPress)
-//                        if (devClicks == 7 && !viewModel.devModeEnabled()) {
-//                            viewModel.devModeEnabled(true)
-//                            activity.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
-//                        }
-//
-//                        devClicks++
+                    if (devClicks == 0) {
+                        interaction.copy(viewModel.getBuildInfo(), HapticFeedbackType.LongPress)
+                    }
+
+                    if (devClicks == 7 && !viewModel.devModeEnabled()) {
+                        viewModel.devModeEnabled(true)
+                        activity.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
+                    }
+
+                    devClicks++
                 }
             )
         }

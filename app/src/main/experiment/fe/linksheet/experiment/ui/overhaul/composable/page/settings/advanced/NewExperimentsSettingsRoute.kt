@@ -9,16 +9,22 @@ import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
+import fe.linksheet.composable.settings.advanced.ExperimentDialog
 import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.AlertCard
+import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard2
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
+import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -27,6 +33,24 @@ fun NewExperimentsSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: ExperimentsViewModel = koinViewModel(),
 ) {
+    val experiment by viewModel.experiment.collectOnIO()
+    val enableExperimentDialog = dialogHelper<String, String, Unit>(
+        fetch = { it },
+        awaitFetchBeforeOpen = true,
+        dynamicHeight = true
+    ) { state, close ->
+
+        ExperimentDialog(state!!)
+    }
+
+    LaunchedEffect(experiment) {
+        val pref = viewModel.stateMap.keys.indexOf(experiment)
+        if (pref != -1) {
+//            listState.animateScrollToItem(pref)
+            enableExperimentDialog.open(experiment!!)
+        }
+    }
+
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.experiments),
         onBackPressed = onBackPressed,
@@ -43,12 +67,12 @@ fun NewExperimentsSettingsRoute(
         }
     ) {
         item(key = R.string.warning, contentType = ContentTypeDefaults.Alert) {
-            AlertCard(
+            ClickableAlertCard2(
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
                 imageVector = Icons.Default.Warning,
-                contentDescriptionId = R.string.warning,
-                headlineId = R.string.experiments_explainer_2,
-                subtitleId = R.string.experiments_explainer_3
+                contentDescription = stringResource(id = R.string.warning),
+                headline = textContent(R.string.experiments_explainer_2),
+                subtitle = textContent(R.string.experiments_explainer_3)
             )
         }
 

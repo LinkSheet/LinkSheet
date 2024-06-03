@@ -1,14 +1,5 @@
-package fe.linksheet.experiment.ui.overhaul.composable.page.main
+package fe.linksheet.experiment.ui.overhaul.composable.page.home.status
 
-import android.app.Activity
-import android.app.role.RoleManager
-import android.content.Intent
-import android.os.Build
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,20 +9,16 @@ import androidx.compose.material.icons.rounded.CheckCircleOutline
 import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard2
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.ui.PreviewThemeNew
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.util.AndroidVersion
 
 @Composable
 private fun cardContainerColor(isDefaultBrowser: Boolean): Color {
@@ -46,7 +33,7 @@ private fun buttonColor(isDefaultBrowser: Boolean): Color {
 }
 
 @Composable
-private fun StatusCard(
+internal fun StatusCard(
     isDefaultBrowser: Boolean,
     launchIntent: (MainViewModel.SettingsIntent) -> Unit,
     onSetAsDefault: () -> Unit
@@ -110,54 +97,6 @@ private fun StatusCard(
             }
         }
     }
-}
-
-
-@Composable
-fun StatusCard_Wrapper(
-    isDefaultBrowser: Boolean,
-    updateDefaultBrowser: () -> Unit,
-    launchIntent: (MainViewModel.SettingsIntent) -> Unit,
-) {
-    if (AndroidVersion.AT_LEAST_API_29_Q) {
-        val intent = rememberRequestBrowserIntent()
-        val launcher = rememberAndroidQBrowserLauncher {
-            if (it.resultCode == Activity.RESULT_OK) {
-                updateDefaultBrowser()
-            }
-        }
-
-        StatusCard(
-            isDefaultBrowser = isDefaultBrowser,
-            launchIntent = launchIntent,
-            onSetAsDefault = { launcher.launch(intent) }
-        )
-    } else {
-        StatusCard(
-            isDefaultBrowser = isDefaultBrowser,
-            launchIntent = launchIntent,
-            onSetAsDefault = { launchIntent(MainViewModel.SettingsIntent.DefaultApps) }
-        )
-    }
-}
-
-@RequiresApi(Build.VERSION_CODES.Q)
-@Composable
-private fun rememberRequestBrowserIntent(): Intent {
-    val context = LocalContext.current
-    val roleManager = remember(context) { context.getSystemService<RoleManager>()!! }
-
-    return remember(roleManager) {
-        roleManager.createRequestRoleIntent(RoleManager.ROLE_BROWSER)
-    }
-}
-
-@Composable
-private fun rememberAndroidQBrowserLauncher(onResult: (ActivityResult) -> Unit): ManagedActivityResultLauncher<Intent, ActivityResult> {
-    return rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = onResult
-    )
 }
 
 @Composable

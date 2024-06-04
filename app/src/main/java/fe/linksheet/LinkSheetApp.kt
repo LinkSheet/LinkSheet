@@ -94,9 +94,6 @@ class LinkSheetApp : Application() {
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
-        val prefs = getSharedPreferences(packageName + "_experiments", Context.MODE_PRIVATE)
-        val enableAnalytics = prefs.getBoolean(Experiments.enableAnalytics.key, false)
-
         val koinApplication = startKoin {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
@@ -120,7 +117,7 @@ class LinkSheetApp : Application() {
                 viewModelModule,
                 requestModule,
                 downloaderModule,
-                if (BuildType.current.allowDebug || enableAnalytics) analyticsModule else DebugLogAnalyticsClient.module,
+                if (BuildType.current.allowDebug) analyticsModule else DebugLogAnalyticsClient.module,
                 statisticsModule,
                 pasteServiceModule
             )
@@ -128,7 +125,7 @@ class LinkSheetApp : Application() {
 
         lifecycleObserver.dispatchAppInitialized()
 
-        if (BuildType.current.allowDebug || enableAnalytics) {
+        if (BuildType.current.allowDebug) {
             // TODO: Remove once user is given the choice to opt in/out
             val analyticsClient = koinApplication.koin.get<AnalyticsClient>()
             val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()

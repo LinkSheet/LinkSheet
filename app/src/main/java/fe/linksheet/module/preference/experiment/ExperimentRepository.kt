@@ -4,6 +4,10 @@ import android.content.Context
 import fe.android.preference.helper.compose.StatePreferenceRepository
 
 class ExperimentRepository(val context: Context) : StatePreferenceRepository(context, "experiments") {
+    init {
+        Experiments.migrate(this)
+    }
+
     // Hack around repo until we have a contains() api
     private val prefs = context.getSharedPreferences(context.packageName + "_experiments", Context.MODE_PRIVATE)
 

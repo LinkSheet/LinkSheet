@@ -71,12 +71,12 @@ fun DevSettingsRoute(
                 )
             }
 
-            item(key = "enable_analytics") {
-                SwitchRow(
-                    state = viewModel.enableAnalytics,
-                    headline = "Enable analytics",
-                )
-            }
+//            item(key = "enable_analytics") {
+//                SwitchRow(
+//                    state = viewModel.enableAnalytics,
+//                    headline = "Enable analytics",
+//                )
+//            }
         }
     }
 }

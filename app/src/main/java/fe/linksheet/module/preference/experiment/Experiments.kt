@@ -25,11 +25,12 @@ object Experiments : PreferenceDefinition(
 
     val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
 
-    val enableAnalytics = boolean("experiment_enable_analytics")
+    val enableAnalytics = boolean("experiment_enable_analytics", false)
 
     // TODO: Enforce type
     init {
         uiOverhaul.migrate { repository, _ -> repository.put(uiOverhaul, true) }
+        enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
 
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, urlPreview, declutterUrl),

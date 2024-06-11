@@ -15,6 +15,7 @@ object Experiments : PreferenceDefinition(
     val experiments: List<Experiment>
 
     val urlPreview = boolean("experiment_url_bar_preview")
+    val urlPreviewSkipBrowser = boolean("experiment_url_bar_preview_skip_browser")
     val declutterUrl = boolean("experiment_url_bar_declutter_url")
 
     val uiOverhaul = boolean("experiment_ui_overhaul", true)
@@ -33,7 +34,7 @@ object Experiments : PreferenceDefinition(
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
 
         experiments = listOf(
-            Experiment("enhanced_url_bar", hidden = false, urlPreview, declutterUrl),
+            Experiment("enhanced_url_bar", hidden = false, urlPreview, urlPreviewSkipBrowser, declutterUrl),
             //Experiment("ui_overhaul", true, uiOverhaul),
             Experiment(
                 "improved_bottom_sheet",

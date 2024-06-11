@@ -85,7 +85,9 @@ sealed class KnownBrowser(
     companion object {
         val browsers = setOf(Gecko, Chromium, Other)
 
-        fun isKnownBrowser(packageName: String, privateOnly: Boolean = false): KnownBrowser? {
+        fun isKnownBrowser(packageName: String?, privateOnly: Boolean = false): KnownBrowser? {
+            if (packageName == null) return null
+
             val pkg = packageName.lowercase()
             return browsers.firstOrNull { pkg in it.packageNames && (it.privateBrowser || !privateOnly) }
         }

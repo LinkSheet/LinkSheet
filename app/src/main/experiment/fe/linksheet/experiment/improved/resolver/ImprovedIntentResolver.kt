@@ -104,6 +104,7 @@ class ImprovedIntentResolver(
     private val resolveEmbeds = prefRepo.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
+    private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
 
     private val browserResolver = BrowserResolver(context)
@@ -140,6 +141,8 @@ class ImprovedIntentResolver(
     }
 
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
+        Log.d("ImprovedIntentResolver", "Referrer=$referrer")
+
         initState(ResolveEvent.Initialized, ResolverInteraction.None)
 
         val searchIntentResult = tryHandleSearchIntent(intent)
@@ -272,20 +275,24 @@ class ImprovedIntentResolver(
         )
 
         val previewUrl = previewUrl()
-        emitEventIf(previewUrl) { "Generating preview" }
+        var unfurl: UnfurlResult? = null
+        val shouldSkipPreviewUrl = shouldSkipUnfurl(referrer, previewUrlSkipBrowser())
+        if (previewUrl && !shouldSkipPreviewUrl) {
+            emitEvent("Generating preview")
 
-        val unfurlDeferred = async { tryUnfurl(enabled = previewUrl, uri = uri) }
-        val unfurlCancel = ResolverInteraction.Cancelable(1) {
-            Log.d("Cancel", "Cancelling $unfurlDeferred")
-            unfurlDeferred.cancel()
+            val unfurlDeferred = async { tryUnfurl(uri = uri) }
+            val unfurlCancel = ResolverInteraction.Cancelable(1) {
+                Log.d("ImprovedIntentResolver", "Cancelling $unfurlDeferred")
+                unfurlDeferred.cancel()
+            }
+
+            emitInteraction(unfurlCancel)
+
+            Log.d("ImprovedIntentResolver", "Awaiting..")
+            unfurl = unfurlDeferred.awaitOrNull()
+
+            emitInteraction(ResolverInteraction.None)
         }
-
-        emitInteraction(unfurlCancel)
-
-        Log.d("ImprovedIntentResolver", "Awaiting..")
-        val unfurl = unfurlDeferred.awaitOrNull()
-
-        emitInteraction(ResolverInteraction.None)
 
         return@scope IntentResolveResult.Default(
             newIntent,
@@ -373,12 +380,17 @@ class ImprovedIntentResolver(
         )
     }
 
+    private fun shouldSkipUnfurl(referrer: Uri?, skipBrowsers: Boolean = false): Boolean {
+        val referringPackage = referrer?.host
+        return skipBrowsers && KnownBrowser.isKnownBrowser(referringPackage) != null
+    }
+
     private suspend fun tryUnfurl(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
-        enabled: Boolean,
+//        enabled: Boolean,
         uri: Uri,
     ): UnfurlResult? = withContext(dispatcher) {
-        if (!enabled) return@withContext null
+//        if (!enabled) return@withContext null
 //        delay(10_000)
         // TODO: Move everything to okhttp
         unfurler.unfurl(uri.toString())

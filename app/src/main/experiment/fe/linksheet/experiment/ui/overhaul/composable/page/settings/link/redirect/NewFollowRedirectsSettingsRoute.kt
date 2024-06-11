@@ -44,7 +44,7 @@ fun NewFollowRedirectsSettingsRoute(
 
         divider(stringRes = R.string.options)
 
-        group(size = 4 + if(LinkSheetAppConfig.isPro()) 1 else 0) {
+        group(size = 5 + if(LinkSheetAppConfig.isPro()) 1 else 0) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = viewModel.followRedirects(),
@@ -91,6 +91,17 @@ fun NewFollowRedirectsSettingsRoute(
                         supportingContent = annotated(R.string.follow_redirects_external_service_explainer),
                     )
                 }
+            }
+
+            item(key = R.string.settings_links_follow_redirects__title_skip_browser) { padding, shape ->
+                PreferenceSwitchListItem(
+                    enabled = viewModel.followRedirects(),
+                    shape = shape,
+                    padding = padding,
+                    preference = viewModel.followRedirectsSkipBrowser,
+                    headlineContent = textContent(R.string.settings_links_follow_redirects__title_skip_browser),
+                    supportingContent = textContent(id = R.string.settings_links_follow_redirects__text_skip_browser),
+                )
             }
 
             item(key = R.string.request_timeout) { padding, shape ->

@@ -36,7 +36,7 @@ fun NewAmp2HtmlSettingsRoute(
 
         divider(stringRes = R.string.options)
 
-        group(size = 3 + if (LinkSheetAppConfig.isPro()) 1 else 0) {
+        group(size = 4 + if (LinkSheetAppConfig.isPro()) 1 else 0) {
             item(key = R.string.amp2html_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = viewModel.enableAmp2Html(),

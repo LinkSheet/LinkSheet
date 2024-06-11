@@ -73,6 +73,7 @@ object AppPreferences : PreferenceDefinition(
     val followRedirectsExternalService = boolean("follow_redirects_external_service")
     val followOnlyKnownTrackers = boolean("follow_only_known_trackers")
     val followRedirectsAllowDarknets = boolean("follow_redirects_allow_darknets", false)
+    val followRedirectsSkipBrowser = boolean("follow_redirects_skip_browser", true)
 
     val dontShowFilteredItem = boolean("dont_show_filtered_item")
 
@@ -88,6 +89,8 @@ object AppPreferences : PreferenceDefinition(
     val amp2HtmlLocalCache = boolean("amp2html_local_cache", true)
     val amp2HtmlExternalService = boolean("amp2html_external_service")
     val amp2HtmlAllowDarknets = boolean("amp2html_allow_darknets", false)
+    val amp2HtmlSkipBrowser = boolean("amp2html_skip_browser", true)
+
 
     val enableRequestPrivateBrowsingButton = boolean(
         "enable_request_private_browsing_button"

@@ -68,6 +68,7 @@ class ImprovedIntentResolver(
     private var enableIgnoreLibRedirectButton = prefRepo.asState(AppPreferences.enableIgnoreLibRedirectButton)
     private var enableLibRedirect = prefRepo.asState(AppPreferences.enableLibRedirect)
     private val followRedirects = prefRepo.asState(AppPreferences.followRedirects)
+    private val followRedirectsSkipBrowser = prefRepo.asState(AppPreferences.followRedirectsSkipBrowser)
 
     private val followOnlyKnownTrackers = prefRepo.asState(AppPreferences.followOnlyKnownTrackers)
     private val followRedirectsLocalCache = prefRepo.asState(AppPreferences.followRedirectsLocalCache)
@@ -100,6 +101,7 @@ class ImprovedIntentResolver(
 
     private val amp2HtmlExternalService = prefRepo.asState(AppPreferences.amp2HtmlExternalService)
     private val amp2HtmlAllowDarknets = prefRepo.asState(AppPreferences.amp2HtmlAllowDarknets)
+    private val amp2HtmlSkipBrowser = prefRepo.asState(AppPreferences.amp2HtmlSkipBrowser)
 
     private val resolveEmbeds = prefRepo.asState(AppPreferences.resolveEmbeds)
 
@@ -143,8 +145,10 @@ class ImprovedIntentResolver(
     }
 
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
-        Log.d("ImprovedIntentResolver", "Referrer=$referrer")
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
+
+        Log.d("ImprovedIntentResolver", "Referrer=$referrer")
+        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) return@scope searchIntentResult
@@ -181,35 +185,43 @@ class ImprovedIntentResolver(
         val resolveStatus = ResolveModuleStatus()
 
         val followRedirects = followRedirects()
-        emitEventIf(followRedirects, ResolveEvent.ResolvingRedirects)
+        val skipFollowRedirects = followRedirectsSkipBrowser() && isReferrerBrowser
 
-        var resolvedUri = runRedirectResolver(
-            resolveModuleStatus = resolveStatus,
-            redirectResolver = redirectUrlResolver,
-            uri = uri,
-            canAccessInternet = true,
-            requestTimeout = requestTimeout(),
-            followRedirects = followRedirects,
-            followRedirectsExternalService = followRedirectsExternalService(),
-            followOnlyKnownTrackers = followOnlyKnownTrackers(),
-            followRedirectsLocalCache = followRedirectsLocalCache(),
-            followRedirectsAllowDarknets = followRedirectsAllowDarknets(),
-        )
+        var resolvedUri: Uri? = uri
+        if (followRedirects && !skipFollowRedirects) {
+            emitEvent(ResolveEvent.ResolvingRedirects)
+
+            resolvedUri = runRedirectResolver(
+                resolveModuleStatus = resolveStatus,
+                redirectResolver = redirectUrlResolver,
+                uri = uri,
+                canAccessInternet = true,
+                requestTimeout = requestTimeout(),
+                followRedirects = true,
+                followRedirectsExternalService = followRedirectsExternalService(),
+                followOnlyKnownTrackers = followOnlyKnownTrackers(),
+                followRedirectsLocalCache = followRedirectsLocalCache(),
+                followRedirectsAllowDarknets = followRedirectsAllowDarknets(),
+            )
+        }
 
         val amp2Html = enableAmp2Html()
-        emitEventIf(amp2Html, ResolveEvent.RunningAmp2Html)
+        val skipAmp2Html = amp2HtmlSkipBrowser() && isReferrerBrowser
+        if(amp2Html && !skipAmp2Html){
+            emitEvent(ResolveEvent.RunningAmp2Html)
 
-        resolvedUri = runAmp2HtmlResolver(
-            resolveModuleStatus = resolveStatus,
-            amp2HtmlResolver = amp2HtmlResolver,
-            uri = resolvedUri,
-            canAccessInternet = true,
-            requestTimeout = requestTimeout(),
-            enableAmp2Html = amp2Html,
-            amp2HtmlAllowDarknets = amp2HtmlAllowDarknets(),
-            amp2HtmlExternalService = amp2HtmlExternalService(),
-            amp2HtmlLocalCache = amp2HtmlLocalCache()
-        )
+            resolvedUri = runAmp2HtmlResolver(
+                resolveModuleStatus = resolveStatus,
+                amp2HtmlResolver = amp2HtmlResolver,
+                uri = resolvedUri,
+                canAccessInternet = true,
+                requestTimeout = requestTimeout(),
+                enableAmp2Html = true,
+                amp2HtmlAllowDarknets = amp2HtmlAllowDarknets(),
+                amp2HtmlExternalService = amp2HtmlExternalService(),
+                amp2HtmlLocalCache = amp2HtmlLocalCache()
+            )
+        }
 
         if (resolvedUri == null) {
             return@scope fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
@@ -277,7 +289,7 @@ class ImprovedIntentResolver(
 
         val previewUrl = previewUrl()
         var unfurl: UnfurlResult? = null
-        val shouldSkipPreviewUrl = shouldSkipUnfurl(referrer, previewUrlSkipBrowser())
+        val shouldSkipPreviewUrl = previewUrlSkipBrowser() && isReferrerBrowser
         if (previewUrl && !shouldSkipPreviewUrl) {
             emitEvent(ResolveEvent.GeneratingPreview)
 
@@ -379,11 +391,6 @@ class ImprovedIntentResolver(
             selectedBrowser = selectedBrowser(),
             repository = normalBrowsersRepository
         )
-    }
-
-    private fun shouldSkipUnfurl(referrer: Uri?, skipBrowsers: Boolean = false): Boolean {
-        val referringPackage = referrer?.host
-        return skipBrowsers && KnownBrowser.isKnownBrowser(referringPackage) != null
     }
 
     private suspend fun tryUnfurl(

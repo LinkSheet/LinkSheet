@@ -22,5 +22,8 @@ class Amp2HtmlSettingsViewModel(
     val amp2HtmlAllowDarknets = preferenceRepository.asState(
         AppPreferences.amp2HtmlAllowDarknets
     )
+    val amp2HtmlSkipBrowser = preferenceRepository.asState(
+        AppPreferences.amp2HtmlSkipBrowser
+    )
     val requestTimeout = preferenceRepository.asState(AppPreferences.requestTimeout)
 }

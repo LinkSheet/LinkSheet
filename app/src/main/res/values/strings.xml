@@ -785,4 +785,12 @@
     <string name="resolve_event__checking_browsers">Checking for browsers</string>
     <string name="resolve_event__sorting_apps">Sorting app list</string>
     <string name="resolve_event__generating_preview">Generating preview</string>
+    <string name="settings_links_amp2html__title_skip_browser">Skip when coming from browser</string>
+    <string name="settings_links_amp2html__text_skip_browser">Don\'t run Amp2Html if the app launching LinkSheet is
+        known to be a browser
+    </string>
+    <string name="settings_links_follow_redirects__title_skip_browser">Skip when coming from browser</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">Don\'t attempt to follow redirects if the app launching LinkSheet is
+        known to be a browser
+    </string>
 </resources>

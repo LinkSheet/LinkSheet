@@ -72,6 +72,17 @@ fun NewAmp2HtmlSettingsRoute(
                 }
             }
 
+            item(key = R.string.settings_links_amp2html__title_skip_browser) { padding, shape ->
+                PreferenceSwitchListItem(
+                    enabled = viewModel.enableAmp2Html(),
+                    shape = shape,
+                    padding = padding,
+                    preference = viewModel.amp2HtmlSkipBrowser,
+                    headlineContent = textContent(R.string.settings_links_amp2html__title_skip_browser),
+                    supportingContent = textContent(id = R.string.settings_links_amp2html__text_skip_browser),
+                )
+            }
+
             item(key = R.string.request_timeout) { padding, shape ->
                 SliderListItem(
                     enabled = viewModel.enableAmp2Html(),

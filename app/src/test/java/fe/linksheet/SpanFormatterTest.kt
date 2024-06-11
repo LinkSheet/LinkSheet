@@ -5,7 +5,7 @@ import android.text.SpannableStringBuilder
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.util.spanformatter.SpanFormatter
+import fe.android.span.helper.formatter.SpanFormatter
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals

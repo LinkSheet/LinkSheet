@@ -774,4 +774,15 @@
     <string name="settings_main_news__text_ui_overhaul">LinkSheet has been given a fresh coat of paint!</string>
     <string name="settings_main_news__button_read_more">Read more</string>
     <string name="settings_main_news__text_header">News</string>
+    <string name="resolve_event__initialized">Initialized</string>
+    <string name="resolve_event__querying_browser_list">Querying browser list</string>
+    <string name="resolve_event__applying_link_modifiers">Applying link modifiers</string>
+    <string name="resolve_event__resolving_redirects">Resolving redirects</string>
+    <string name="resolve_event__unamping_link">Un-amping link</string>
+    <string name="resolve_event__running_libredirect">Trying to find FOSS-frontend</string>
+    <string name="resolve_event__download_check">Checking download-ability</string>
+    <string name="resolve_event__loading_preferred_apps">Loading preferred apps</string>
+    <string name="resolve_event__checking_browsers">Checking for browsers</string>
+    <string name="resolve_event__sorting_apps">Sorting app list</string>
+    <string name="resolve_event__generating_preview">Generating preview</string>
 </resources>

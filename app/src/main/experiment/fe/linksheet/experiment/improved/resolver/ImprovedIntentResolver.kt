@@ -109,20 +109,20 @@ class ImprovedIntentResolver(
 
     private val browserResolver = BrowserResolver(context)
 
-    private val _events = MutableStateFlow<ResolveEvent>(value = ResolveEvent.Initialized)
+    private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
     val events = _events.asStateFlow()
 
-    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.None)
+    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Clear)
     val interactions = _interactions.asStateFlow()
 
-    private fun emitEvent(message: String) {
-        _events.tryEmit(ResolveEvent.Message(message))
-        logger.info(message)
+    private fun emitEvent(event: ResolveEvent) {
+        _events.tryEmit(event)
+        logger.info(event.toString())
     }
 
-    private fun emitEventIf(predicate: Boolean, message: () -> String) {
+    private fun emitEventIf(predicate: Boolean, event: ResolveEvent) {
         if (!predicate) return
-        emitEvent(message())
+        emitEvent(event)
     }
 
     private fun emitInteraction(interaction: ResolverInteraction) {
@@ -130,20 +130,21 @@ class ImprovedIntentResolver(
         logger.info("Emitted interaction $interaction")
     }
 
+    private fun clearInteraction() = emitInteraction(ResolverInteraction.Clear)
+
     private fun fail(error: String, result: IntentResolveResult): IntentResolveResult {
         logger.error(error)
         return result
     }
 
-    private suspend fun initState(event: ResolveEvent.Message, interaction: ResolverInteraction) {
+    private suspend fun initState(event: ResolveEvent, interaction: ResolverInteraction) {
         _events.emit(event)
         _interactions.emit(interaction)
     }
 
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         Log.d("ImprovedIntentResolver", "Referrer=$referrer")
-
-        initState(ResolveEvent.Initialized, ResolverInteraction.None)
+        initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) return@scope searchIntentResult
@@ -155,7 +156,7 @@ class ImprovedIntentResolver(
             return@scope IntentResolveResult.IntentParseFailed
         }
 
-        emitEvent("Querying browser list")
+        emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = browserResolver.queryBrowsers()
 
         val resolveEmbeds = resolveEmbeds()
@@ -164,7 +165,7 @@ class ImprovedIntentResolver(
 
         val uriModifiers = resolveEmbeds || useClearUrls || useFastForwardRules
 
-        emitEventIf(uriModifiers) { "Applying link modifiers" }
+        emitEventIf(uriModifiers, ResolveEvent.ApplyingLinkModifiers)
 
         uri = runUriModifiers(
             uri = uri,
@@ -180,7 +181,7 @@ class ImprovedIntentResolver(
         val resolveStatus = ResolveModuleStatus()
 
         val followRedirects = followRedirects()
-        emitEventIf(followRedirects) { "Resolving redirects" }
+        emitEventIf(followRedirects, ResolveEvent.ResolvingRedirects)
 
         var resolvedUri = runRedirectResolver(
             resolveModuleStatus = resolveStatus,
@@ -196,7 +197,7 @@ class ImprovedIntentResolver(
         )
 
         val amp2Html = enableAmp2Html()
-        emitEventIf(amp2Html) { "Un-amping link" }
+        emitEventIf(amp2Html, ResolveEvent.RunningAmp2Html)
 
         resolvedUri = runAmp2HtmlResolver(
             resolveModuleStatus = resolveStatus,
@@ -214,7 +215,7 @@ class ImprovedIntentResolver(
             return@scope fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
         }
 
-        emitEventIf(uriModifiers) { "Applying link modifiers" }
+        emitEventIf(uriModifiers, ResolveEvent.ApplyingLinkModifiers)
 
         uri = runUriModifiers(
             uri = resolvedUri,
@@ -228,7 +229,7 @@ class ImprovedIntentResolver(
         }
 
         val enableLibRedirect = enableLibRedirect()
-        emitEventIf(enableLibRedirect) { "Trying to find FOSS-frontend" }
+        emitEventIf(enableLibRedirect, ResolveEvent.CheckingLibRedirect)
 
         val libRedirectResult = tryRunLibRedirect(
             enabled = enableLibRedirect,
@@ -243,7 +244,7 @@ class ImprovedIntentResolver(
         }
 
         val enabledDownloader = enableDownloader()
-        emitEventIf(enabledDownloader) { "Checking download-ability" }
+        emitEventIf(enabledDownloader, ResolveEvent.CheckingDownloader)
 
         val downloadable = checkDownloadable(
             enabled = enabledDownloader,
@@ -256,16 +257,16 @@ class ImprovedIntentResolver(
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentHandler.sanitized(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
-        emitEvent("Loading preferred apps")
+        emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(uri = uri)
         val lastUsedApps = queryAppSelectionHistory(uri = uri)
         val resolveList = PackageHandler.findHandlers(context, uri)
 
-        emitEvent("Checking for browsers")
+        emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
         val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
 
-        emitEvent("Sorting app list")
+        emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = AppSorter.sort(
             context,
             appList,
@@ -278,10 +279,10 @@ class ImprovedIntentResolver(
         var unfurl: UnfurlResult? = null
         val shouldSkipPreviewUrl = shouldSkipUnfurl(referrer, previewUrlSkipBrowser())
         if (previewUrl && !shouldSkipPreviewUrl) {
-            emitEvent("Generating preview")
+            emitEvent(ResolveEvent.GeneratingPreview)
 
             val unfurlDeferred = async { tryUnfurl(uri = uri) }
-            val unfurlCancel = ResolverInteraction.Cancelable(1) {
+            val unfurlCancel = ResolverInteraction.Cancelable(ResolveEvent.GeneratingPreview) {
                 Log.d("ImprovedIntentResolver", "Cancelling $unfurlDeferred")
                 unfurlDeferred.cancel()
             }
@@ -291,7 +292,7 @@ class ImprovedIntentResolver(
             Log.d("ImprovedIntentResolver", "Awaiting..")
             unfurl = unfurlDeferred.awaitOrNull()
 
-            emitInteraction(ResolverInteraction.None)
+            clearInteraction()
         }
 
         return@scope IntentResolveResult.Default(

@@ -16,7 +16,6 @@ import fe.linksheet.experiment.improved.resolver.ResolveEvent
 import fe.linksheet.experiment.improved.resolver.ResolverInteraction
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.ui.PreviewTheme
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,7 +27,7 @@ fun LoadingIndicator(
     requestExpand: () -> Unit
 ) {
     val event by events.collectOnIO(initialState = ResolveEvent.Initialized)
-    val interaction by interactions.collectOnIO(initialState = ResolverInteraction.None)
+    val interaction by interactions.collectOnIO(initialState = ResolverInteraction.Clear)
 
     LaunchedEffect(key1 = interaction) {
         requestExpand()
@@ -50,7 +49,7 @@ fun LoadingIndicator(
             style = MaterialTheme.typography.titleMedium
         )
 
-        Text(text = "${(event as? ResolveEvent.Message)?.message}", style = MaterialTheme.typography.bodyMedium)
+        Text(text = stringResource(id = event.id, *event.args), style = MaterialTheme.typography.bodyMedium)
 
         if (interaction is ResolverInteraction.Cancelable) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
@@ -70,15 +69,16 @@ fun LoadingIndicator(
 @Preview(showBackground = true)
 @Composable
 private fun LoadingIndicatorPreview() {
-    val events = MutableStateFlow<ResolveEvent>(ResolveEvent.Initialized)
-    val interactions = MutableStateFlow<ResolverInteraction>(ResolverInteraction.None)
+    val events = MutableStateFlow(ResolveEvent.Initialized)
+    val interactions = MutableStateFlow<ResolverInteraction>(ResolverInteraction.Clear)
 
     LaunchedEffect(key1 = Unit) {
         var i = 0
         while (true) {
-            events.emit(ResolveEvent.Message("Message $i"))
+            val event = ResolveEvent.entries.random()
+            events.emit(event)
             if (i % 5 == 0) {
-                interactions.emit(ResolverInteraction.Cancelable(1) { Log.d("Preview", "Cancel clicked") })
+                interactions.emit(ResolverInteraction.Cancelable(event) { Log.d("Preview", "Cancel clicked") })
             }
 
             delay(2000)

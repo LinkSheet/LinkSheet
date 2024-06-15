@@ -16,7 +16,7 @@ object PackageHandler {
     private val QUERY_FLAGS = BitFlagUtil.or(
         PackageManager.MATCH_ALL,
         PackageManager.GET_RESOLVED_FILTER,
-        PackageManager.MATCH_DISABLED_COMPONENTS,
+//        PackageManager.MATCH_DISABLED_COMPONENTS,
         PackageManager.GET_META_DATA
     )
 
@@ -30,7 +30,7 @@ object PackageHandler {
 
         fun get(): ResolveInfo? {
             if (activity?.activityInfo?.enabled == true) return activity!!
-            return aliases.firstOrNull { it.activityInfo.enabled } ?: aliases.firstOrNull()
+            return aliases.firstOrNull { it.activityInfo.enabled } ?: activity ?: aliases.firstOrNull()
         }
     }
 
@@ -48,6 +48,11 @@ object PackageHandler {
     private fun deduplicate(filtered: List<ResolveInfo>): List<ResolveInfo> {
         val map = mutableMapOf<String, ActivityAlias>()
         for (activity in filtered) {
+//            val componentEnabled =
+//                context.packageManager.getComponentEnabledSetting(activity.activityInfo.componentName())
+//            val enabled = activity.activityInfo.enabled
+//            val priority = activity.priority
+
             val target = activity.activityInfo?.targetActivity
             val key = "${activity.activityInfo.packageName}/${target ?: activity.activityInfo.name}"
 

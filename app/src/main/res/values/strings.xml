@@ -66,7 +66,7 @@
         applies to the whole app.
     </string>
     <string name="disable_all_toasts">Disable toasts</string>
-    <string name="disable_all_toasts_explainer">Never show any toast messages</string>
+    <string name="disable_all_toasts_explainer">Don\'t show any toast messages</string>
     <string name="remove_all">Remove all</string>
     <string name="add_all">Add all</string>
     <string name="hide_after_copying">Auto-hide on action</string>
@@ -153,8 +153,8 @@
     <string name="add">Add</string>
     <string name="select_an_app">Select an app</string>
     <string name="close">Close</string>
-    <string name="dont_show_filtered_item">Never show \"last picked app\" section</string>
-    <string name="dont_show_filtered_item_explainer">Will never show the top section which suggests the last used app
+    <string name="dont_show_filtered_item">Don\'t show \"last picked app\" section</string>
+    <string name="dont_show_filtered_item_explainer">Don\'t show the top section which suggests the last used app
         for the clicked host
     </string>
     <string name="use_text_share_copy_buttons">Use simple text buttons for \"Copy URL\", \"Share to\", \"Download\" and

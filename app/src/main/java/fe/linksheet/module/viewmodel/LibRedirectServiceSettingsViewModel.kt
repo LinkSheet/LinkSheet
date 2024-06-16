@@ -66,8 +66,9 @@ class LibRedirectServiceSettingsViewModel(
         return frontends.values
     }
 
-    fun getInstancesFor(frontendKey: String): Set<String>? {
-        return frontends[frontendKey]?.instances
+    fun getInstancesFor(frontendKey: String?): Set<String> {
+        if(frontendKey == null) return emptySet()
+        return frontends[frontendKey]?.instances ?: emptySet()
     }
 
     val selected: Flow<LibRedirectDefault> = defaultRepository

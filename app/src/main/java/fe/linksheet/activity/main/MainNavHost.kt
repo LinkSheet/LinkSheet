@@ -54,6 +54,8 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log.Ne
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.NewLinksSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.amp2html.NewAmp2HtmlSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.downloader.NewDownloaderSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.libredirect.NewLibRedirectServiceSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.libredirect.NewLibRedirectSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.redirect.NewFollowRedirectsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.notification.NewNotificationSettingsRoute
@@ -148,14 +150,22 @@ fun MainNavHost(
         }
 
         animatedComposable(route = libRedirectSettingsRoute) {
-            LibRedirectSettingsRoute(
-                onBackPressed = onBackPressed,
-                navController = navController,
-            )
+            if (uiOverhaul) {
+                NewLibRedirectSettingsRoute(onBackPressed = onBackPressed, navController = navController)
+            } else {
+                LibRedirectSettingsRoute(
+                    onBackPressed = onBackPressed,
+                    navController = navController,
+                )
+            }
         }
 
         animatedArgumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
-            LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
+            if(uiOverhaul){
+                NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
+            } else {
+                LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
+            }
         }
 
         animatedComposable(route = downloaderSettingsRoute) {

@@ -30,7 +30,7 @@ object HostUtil {
 
         return if (hostWithoutScheme.endsWith("/")) hostWithoutScheme.substring(
             0,
-            hostWithoutScheme.length - 2
+            hostWithoutScheme.length - 1
         ) else hostWithoutScheme
     }
 

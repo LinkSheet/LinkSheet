@@ -70,13 +70,28 @@ fun MainNavHost(
     navigate: (String) -> Unit,
     onBackPressed: () -> Unit,
 ) {
-    NavHost(navController = navController, startDestination = mainRoute) {
+    NavHost(
+        modifier = Modifier.background(MaterialTheme.colorScheme.background),
+        navController = navController,
+        startDestination = mainRoute
+    ) {
         animatedComposable(route = mainRoute) {
+//            NewRuleRoute(onBackPressed = onBackPressed)
+//            EditRuleRoute(onBackPressed = onBackPressed)
+
             if (uiOverhaul) {
                 NewMainRoute(navController = navController)
             } else {
                 MainRoute(navController = navController)
             }
+        }
+
+        animatedComposable(route = Routes.RuleOverview) {
+            RuleOverviewRoute(onBackPressed = onBackPressed)
+        }
+
+        animatedComposable(route = Routes.RuleNew) {
+            NewRuleRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = settingsRoute) {

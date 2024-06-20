@@ -2,6 +2,8 @@ package fe.linksheet.experiment.ui.overhaul.composable.component.page.layout
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
@@ -64,6 +66,7 @@ object SaneLazyColumnPageDefaults {
 @Composable
 fun SaneLazyColumnPageLayout(
     modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
     padding: PaddingValues,
     contentPadding: PaddingValues = SaneLazyColumnPageDefaults.ContentPadding,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
@@ -73,6 +76,7 @@ fun SaneLazyColumnPageLayout(
         modifier = modifier
             .padding(padding)
             .fillMaxSize(),
+        state = state,
         contentPadding = contentPadding,
         verticalArrangement = verticalArrangement,
         content = {

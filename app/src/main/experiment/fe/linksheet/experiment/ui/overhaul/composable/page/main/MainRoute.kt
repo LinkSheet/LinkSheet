@@ -112,6 +112,17 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
+            if (BuildType.current.allowDebug) {
+                item {
+                    FilledTonalButton(
+                        colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                        onClick = { navController.navigate(Routes.RuleOverview) }
+                    ) {
+                        Text(text = "Rules")
+                    }
+                }
+            }
+
             item(
                 key = R.string.settings_main_setup_success__title_linksheet_setup_success,
                 contentType = ContentTypeDefaults.ClickableAlert

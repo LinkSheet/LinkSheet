@@ -126,4 +126,6 @@ object Routes {
     const val Help = "route__help"
     const val Shortcuts = "route__shortcuts"
     const val Updates = "route__updates"
+    const val RuleOverview = "route__rules_overview"
+    const val RuleNew = "route__rule_new"
 }

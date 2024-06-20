@@ -39,4 +39,5 @@ val viewModelModule = module {
     viewModelOf(::SettingsViewModel)
     viewModelOf(::NotificationSettingsViewModel)
     viewModelOf(::ExperimentsViewModel)
+    viewModelOf(::AppConfigViewModel)
 }

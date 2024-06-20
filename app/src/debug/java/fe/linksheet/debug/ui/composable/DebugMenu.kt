@@ -83,7 +83,6 @@ private fun createIntent(activity: Activity, activityClass: KClass<*>): Intent {
 
 @Composable
 private fun FilledTonalActivityLauncher(activity: Activity, text: String, intent: Intent) {
-
     FilledTonalButton(
         colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
         onClick = { activity.startActivity(intent) }

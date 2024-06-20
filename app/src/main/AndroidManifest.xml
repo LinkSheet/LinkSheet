@@ -2,28 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
     <uses-permission
             android:name="android.permission.QUERY_ALL_PACKAGES"
-            tools:ignore="QueryAllPackagesPermission" />
+            tools:ignore="QueryAllPackagesPermission"/>
     <uses-permission
             android:name="android.permission.PACKAGE_USAGE_STATS"
-            tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />
-    <uses-permission android:name="moe.shizuku.manager.permission.API" />
-    <uses-permission android:name="moe.shizuku.manager.permission.Manager" />
+            tools:ignore="ProtectedPermissions"/>
+    <uses-permission android:name="moe.shizuku.manager.permission.API_V23"/>
+    <uses-permission android:name="moe.shizuku.manager.permission.API"/>
+    <uses-permission android:name="moe.shizuku.manager.permission.Manager"/>
 
     <application
             android:name=".LinkSheetApp"
             android:allowBackup="true"
+            android:enableOnBackInvokedCallback="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:localeConfig="@xml/locales_config"
@@ -31,12 +32,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
-            android:enableOnBackInvokedCallback="true"
             tools:targetApi="tiramisu">
         <activity
                 android:name=".activity.onboarding.OnboardingActivity"
                 android:exported="true"
-                android:theme="@style/AppTheme" />
+                android:theme="@style/AppTheme"/>
 
         <provider
                 android:name="rikka.shizuku.ShizukuProvider"
@@ -44,27 +44,30 @@
                 android:enabled="true"
                 android:exported="true"
                 android:multiprocess="false"
-                android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+                android:permission="android.permission.INTERACT_ACROSS_USERS_FULL"/>
 
         <activity
                 android:name=".activity.main.MainActivity"
                 android:configChanges="orientation"
                 android:exported="true"
                 android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
                 android:screenOrientation="unspecified"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <data android:scheme="linksheet" android:host="experiment" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                        android:host="experiment"
+                        android:scheme="linksheet"/>
             </intent-filter>
         </activity>
         <activity
@@ -73,14 +76,14 @@
                 android:exported="true"
                 android:launchMode="singleTask"
                 android:screenOrientation="unspecified"
-                android:theme="@style/AppTheme" />
+                android:theme="@style/AppTheme"/>
         <activity
                 android:name=".activity.SelectDomainsConfirmationActivity"
                 android:configChanges="orientation"
                 android:excludeFromRecents="true"
                 android:exported="false"
                 android:screenOrientation="unspecified"
-                android:theme="@style/DialogTheme" />
+                android:theme="@style/DialogTheme"/>
         <activity
                 android:name=".activity.BottomSheetActivity"
                 android:excludeFromRecents="true"
@@ -89,43 +92,47 @@
                 android:theme="@style/DialogTheme"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.APP_BROWSER" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.APP_BROWSER"/>
 
-                <data android:scheme="https" />
-                <data android:scheme="http" />
+                <data android:scheme="https"/>
+                <data android:scheme="http"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.APP_BROWSER" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.APP_BROWSER"/>
 
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:mimeType="text/html" />
-                <data android:mimeType="text/plain" />
-                <data android:mimeType="application/xhtml+xml" />
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:mimeType="text/html"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="application/xhtml+xml"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.WEB_SEARCH" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                <action android:name="android.intent.action.SEND"/>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="http" />
-                <data android:scheme="https" />
+                <action android:name="android.intent.action.WEB_SEARCH"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
             </intent-filter>
         </activity>
 
@@ -135,11 +142,11 @@
                 android:label="@string/open_with_linksheet"
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
-                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <action android:name="android.intent.action.PROCESS_TEXT"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
-                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity-alias>
 
@@ -148,7 +155,7 @@
                 android:exported="true"
                 tools:ignore="ExportedService">
             <intent-filter>
-                <action android:name="android.support.customtabs.action.CustomTabsService" />
+                <action android:name="android.support.customtabs.action.CustomTabsService"/>
             </intent-filter>
         </service>
         <service
@@ -157,14 +164,14 @@
                 android:exported="true"
                 android:foregroundServiceType="specialUse">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
 
             <property
                     android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                    android:value="Binder Transactions" />
+                    android:value="Binder Transactions"/>
         </service>
         <service
                 android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
@@ -172,7 +179,7 @@
                 android:exported="false">
             <meta-data
                     android:name="autoStoreLocales"
-                    android:value="true" />
+                    android:value="true"/>
         </service>
     </application>
 

@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.debug.log
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material3.FilledTonalIconButton
@@ -7,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
@@ -19,7 +21,10 @@ import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.Clicka
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalTextContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.experiment.ui.overhaul.interaction.wrap
@@ -62,13 +67,11 @@ fun NewLogSettingsRoute(
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.logs), onBackPressed = onBackPressed) {
         item(key = R.string.reset_app_link_verification_status) {
-            ClickableShapeListItem(
-                shape = ShapeListItemDefaults.SingleShape,
-                headlineContent = text(startupTime),
-                supportingContent = textContent(id = R.string.current_session),
-                onClick = {
-                    navigate(logTextViewerSettingsRoute.buildNavigation(LogTextViewerRoute(startupTime, null)))
-                }
+            LogSessionListItem(
+                logRoute = LogTextViewerRoute(startupTime, null),
+                navigate = navigate,
+                headline = text(startupTime),
+                subtitle = textContent(id = R.string.current_session)
             )
         }
 
@@ -80,15 +83,13 @@ fun NewLogSettingsRoute(
             list = files,
             listKey = { it.millis },
         ) { file, padding, shape ->
-            ClickableShapeListItem(
+            LogSessionListItem(
+                logRoute = LogTextViewerRoute(file.localizedTime, file.file.name),
+                navigate = navigate,
                 shape = shape,
                 padding = padding,
-                onClick = {
-                    val target = LogTextViewerRoute(file.localizedTime, file.file.name)
-                    navigate(logTextViewerSettingsRoute.buildNavigation(target))
-                },
-                headlineContent = text(file.localizedTime),
-                supportingContent = text(file.file.name),
+                headline = text(file.localizedTime),
+                subtitle = text(file.file.name),
                 trailingContent = {
                     FilledTonalIconButton(onClick = { confirmDeleteDialog.open(file) }) {
                         Icon(imageVector = Icons.Rounded.DeleteOutline, contentDescription = null)
@@ -97,4 +98,29 @@ fun NewLogSettingsRoute(
             )
         }
     }
+}
+
+@Composable
+private fun LogSessionListItem(
+    logRoute: LogTextViewerRoute,
+    navigate: (String) -> Unit,
+    shape: Shape = ShapeListItemDefaults.SingleShape,
+    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    headline: TextContent,
+    subtitle: OptionalTextContent,
+    trailingContent: OptionalContent = null,
+) {
+    val route = remember(logRoute) {
+        logTextViewerSettingsRoute.buildNavigation(logRoute)
+    }
+
+    ClickableShapeListItem(
+        shape = shape,
+        padding = padding,
+        role = Role.Button,
+        onClick = { navigate(route) },
+        headlineContent = headline,
+        supportingContent = subtitle,
+        trailingContent = trailingContent
+    )
 }

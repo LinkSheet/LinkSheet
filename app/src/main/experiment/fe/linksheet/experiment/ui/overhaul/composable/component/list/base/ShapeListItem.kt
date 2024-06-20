@@ -1,9 +1,11 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.base
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
@@ -11,12 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalTextContent
 import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
-import fe.linksheet.extension.compose.enabled
 
 
 object ShapeListItemDefaults {

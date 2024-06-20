@@ -106,7 +106,6 @@ class ImprovedBottomSheet(
 
         // TODO: Use intent and referrer as keys?
         LaunchedEffect(key1 = resolver) {
-            // TODO: Internet check
             status = resolver.resolve(intent.toSafeIntent(), referrer)
         }
 

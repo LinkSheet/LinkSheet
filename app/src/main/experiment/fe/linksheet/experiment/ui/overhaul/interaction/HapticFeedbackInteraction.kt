@@ -43,6 +43,9 @@ value class FeedbackType private constructor(val flag: Int) {
         val TextHandleMove = FeedbackType(9)
         val Confirm = FeedbackType(16)
         val Decline = FeedbackType(17)
+        val DragStart = FeedbackType(25)
+        val GestureEnd = FeedbackType(13)
+        val SegmentFrequentTick = FeedbackType(27)
     }
 }
 

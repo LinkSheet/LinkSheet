@@ -1,6 +1,9 @@
 package fe.linksheet.activity.main
 
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.*
@@ -44,7 +47,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewAbo
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewCreditsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
-import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.*
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.NewBrowserSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute
@@ -176,7 +179,7 @@ fun MainNavHost(
         }
 
         animatedArgumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
-            if(uiOverhaul){
+            if (uiOverhaul) {
                 NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
             } else {
                 LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
@@ -251,7 +254,7 @@ fun MainNavHost(
 
         animatedComposable(route = logViewerSettingsRoute) {
             if (uiOverhaul) {
-                NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navController = navController)
+                NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
             } else {
                 LogSettingsRoute(
                     navController = navController, onBackPressed = onBackPressed

@@ -1,6 +1,7 @@
 package fe.linksheet.module.log.file
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.lifecycle.Lifecycle
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
@@ -10,6 +11,8 @@ import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.extension.koin.service
 import fe.linksheet.lifecycle.Service
 import fe.linksheet.module.log.file.entry.LogEntry
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import org.koin.dsl.module
 import java.io.File
 import java.time.LocalDateTime
@@ -32,7 +35,9 @@ class LogFileService(private val logDir: File) : Service {
         }
     }
 
-    data class LogFile(val file: File, val millis: Long) {
+    @Parcelize
+    data class LogFile(val file: File, val millis: Long) : Parcelable {
+        @IgnoredOnParcel
         val localizedTime by lazy { millis.unixMillisUtc.value.localizedString() }
 
         companion object {

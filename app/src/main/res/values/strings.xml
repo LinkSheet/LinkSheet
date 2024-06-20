@@ -90,7 +90,7 @@
     <string name="save">Save</string>
     <string name="whitelisted_browsers">Whitelisted browsers</string>
     <string name="app_browsers_subtitle">Preferred apps, Browser settings</string>
-    <string name="bottom_sheet_explainer">Grid layout, sort by usage, tap customization, url-bar</string>
+    <string name="bottom_sheet_explainer">Configuration &amp; Customization</string>
     <string name="about">About</string>
     <string name="about_explainer">Credits, License, Links, Version</string>
     <string name="credits">Credits</string>
@@ -108,7 +108,7 @@
     <string name="error">Error</string>
     <string name="checkmark">Checkmark</string>
     <string name="links">Links</string>
-    <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Follow redirects</string>
+    <string name="links_explainer">ClearUrls, LibRedirect, Redirect following</string>
     <string name="use_clear_urls">Use ClearURLs</string>
     <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)
     </string>

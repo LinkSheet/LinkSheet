@@ -3,14 +3,17 @@ package fe.linksheet.experiment.improved.resolver
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable
+import androidx.core.content.getSystemService
 import fe.clearurlskt.ClearURL
 import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
+import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
@@ -109,6 +112,7 @@ class ImprovedIntentResolver(
     private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
 
+    private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
     private val browserResolver = BrowserResolver(context)
 
     private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
@@ -146,6 +150,7 @@ class ImprovedIntentResolver(
 
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
+        val canAccessInternet = canAccessInternet()
 
         Log.d("ImprovedIntentResolver", "Referrer=$referrer")
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
@@ -195,7 +200,7 @@ class ImprovedIntentResolver(
                 resolveModuleStatus = resolveStatus,
                 redirectResolver = redirectUrlResolver,
                 uri = uri,
-                canAccessInternet = true,
+                canAccessInternet = canAccessInternet,
                 requestTimeout = requestTimeout(),
                 followRedirects = true,
                 followRedirectsExternalService = followRedirectsExternalService(),
@@ -207,14 +212,14 @@ class ImprovedIntentResolver(
 
         val amp2Html = enableAmp2Html()
         val skipAmp2Html = amp2HtmlSkipBrowser() && isReferrerBrowser
-        if(amp2Html && !skipAmp2Html){
+        if (amp2Html && !skipAmp2Html) {
             emitEvent(ResolveEvent.RunningAmp2Html)
 
             resolvedUri = runAmp2HtmlResolver(
                 resolveModuleStatus = resolveStatus,
                 amp2HtmlResolver = amp2HtmlResolver,
                 uri = resolvedUri,
-                canAccessInternet = true,
+                canAccessInternet = canAccessInternet,
                 requestTimeout = requestTimeout(),
                 enableAmp2Html = true,
                 amp2HtmlAllowDarknets = amp2HtmlAllowDarknets(),
@@ -320,6 +325,15 @@ class ImprovedIntentResolver(
             libRedirectResult,
             downloadable
         )
+    }
+
+    private fun canAccessInternet(default: Boolean = false): Boolean {
+        return runCatching {
+            connectivityManager.canAccessInternet()
+        }.onFailure {
+            logger.error(it)
+            it.printStackTrace()
+        }.getOrDefault(default)
     }
 
     private suspend fun queryAppSelectionHistory(

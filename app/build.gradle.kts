@@ -215,13 +215,14 @@ dependencies {
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
-    implementation(AndroidX.compose.ui.withVersion("1.7.0-beta01"))
+    implementation(AndroidX.compose.ui.withVersion("1.7.0-beta03"))
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3.withVersion("1.3.0-beta01"))
+    implementation(AndroidX.compose.material3.withVersion("1.3.0-beta03"))
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.activity.compose)
+    implementation("sh.calvin.reorderable:reorderable:2.1.1")
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.compose.animation)

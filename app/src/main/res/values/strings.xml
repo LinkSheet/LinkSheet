@@ -136,7 +136,10 @@
     <string name="dark">Dark</string>
     <string name="amoled_black">Amoled Black</string>
     <string name="fastfoward_rules">Use FastForward rules</string>
-    <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
+    <string name="fastfoward_rules_explainer">Use experimental <annotation
+            url="https://github.com/FastForwardTeam/FastForward">FastForward
+    </annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)
+    </string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
     <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
     <string name="resolved_via">%s resolved via %s</string>
@@ -145,7 +148,10 @@
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="redirect_resolve_type_not_resolved">none</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integration</string>
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation
+            url="https://github.com/libredirect/libredirect">LibRedirect
+    </annotation> integration
+    </string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
@@ -588,7 +594,9 @@
     <string name="base_config">Additional configuration</string>
     <string name="urlbar_settings">Url-bar</string>
     <string name="permission_required">Permission required</string>
-    <string name="permission_required_explainer">Some imported preferences require permissions that are currently not given to LinkSheet. Tap below to request them.</string>
+    <string name="permission_required_explainer">Some imported preferences require permissions that are currently not
+        given to LinkSheet. Tap below to request them.
+    </string>
     <string name="allow_darknets">Allow darknets</string>
     <string name="amp2html_allow_darknets_explainer">Allow running Amp2Html for darknets (supported: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)
@@ -749,22 +757,28 @@
     <string name="export_log_dialog__subtitle_include_fingerprint">Recommended</string>
     <string name="export_log_dialog__title_include_settings">Include settings</string>
     <string name="export_log_dialog__subtitle_include_settings">Recommended</string>
-    <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log files, tap <annotation
-            url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.
+    <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log
+        files, tap <annotation
+                url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.
     </string>
     <string name="generic__button_text_copy_clipboard">Copy to clipboard</string>
     <string name="generic__button_text_cancel">Cancel</string>
-    <string name="export_log_dialog__text_log_info">Configure share settings for log captured at: <font face="monospace">%s</font></string>
+    <string name="export_log_dialog__text_log_info">Configure share settings for log captured at:
+        <font face="monospace">%s</font>
+    </string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Viewing log captured at: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Aww snap, that should not have happened!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Downloader</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet is set up</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet is not set up</string>
-    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet is correctly set up and ready to
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet is correctly set up and
+        ready to
         operate
     </string>
-    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet is not set as the system\'s default browser</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet is not set as the system\'s
+        default browser
+    </string>
     <string name="settings_main_setup_success__button_change_browser">Default browser</string>
     <string name="settings_main_setup_success__button_set_default_browser">Set as default browser</string>
     <string name="settings_main_setup_success__button_link_handlers">Link handlers</string>
@@ -790,7 +804,8 @@
         known to be a browser
     </string>
     <string name="settings_links_follow_redirects__title_skip_browser">Skip when coming from browser</string>
-    <string name="settings_links_follow_redirects__text_skip_browser">Don\'t attempt to follow redirects if the app launching LinkSheet is
+    <string name="settings_links_follow_redirects__text_skip_browser">Don\'t attempt to follow redirects if the app
+        launching LinkSheet is
         known to be a browser
     </string>
 </resources>

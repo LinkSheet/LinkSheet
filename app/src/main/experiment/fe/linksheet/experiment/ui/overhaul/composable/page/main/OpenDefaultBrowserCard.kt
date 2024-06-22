@@ -9,7 +9,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard
+import fe.linksheet.component.card.ClickableAlertCard
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Results

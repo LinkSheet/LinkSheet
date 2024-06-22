@@ -3,12 +3,12 @@ package fe.linksheet.composable.settings.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.ui.ThemeV2
 import fe.linksheet.util.AndroidVersion

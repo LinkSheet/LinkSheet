@@ -22,11 +22,11 @@ import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.linksheet.R
 import fe.linksheet.composable.util.LinkableTextView
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.DialogDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.dialog.DialogDefaults
+import fe.linksheet.component.list.base.ContentPosition
+import fe.linksheet.component.list.item.type.RadioButtonListItem
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.ui.HkGroteskFontFamily
 

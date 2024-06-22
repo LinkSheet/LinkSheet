@@ -1,6 +1,5 @@
 package fe.linksheet.module.viewmodel
 
-import DomainVerificationOffFill0Wght400Grad0Opsz24
 import android.content.Context
 import android.content.Intent
 import android.content.pm.getInstalledPackagesCompat
@@ -9,21 +8,16 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.DomainVerification
 import androidx.compose.material.icons.outlined.FilterAltOff
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.material3.Icon
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.AppListItemData
-import fe.linksheet.experiment.ui.overhaul.icons.outlined.DomainVerificationOff
 import fe.linksheet.extension.android.isUserApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository

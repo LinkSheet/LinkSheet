@@ -22,15 +22,15 @@ import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.linksheet.component.page.ListItemData
+import fe.linksheet.component.page.layout.group
+import fe.linksheet.component.util.Annotated.Companion.buildAnnotatedTextContent
+import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
+import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.experiment.ui.overhaul.composable.util.Annotated.Companion.buildAnnotatedTextContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.extension.android.showToast
@@ -38,7 +38,6 @@ import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppInfo
 import fe.linksheet.util.AppSignature
-import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 

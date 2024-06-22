@@ -212,6 +212,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":config"))
+    implementation(project(":components"))
+    implementation(project(":compose-util"))
+    implementation(project(":bottom-sheet"))
+
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
@@ -243,7 +248,6 @@ dependencies {
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 
-    implementation(project(":config"))
     implementation(libs.junit.ktx)
 
     implementation(Koin.android)

@@ -1,28 +1,15 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.dialog
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
-import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.DialogDefaults.DialogPadding
-import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.util.AppInfo
+import fe.linksheet.component.dialog.DialogDefaults.DialogPadding
 
 //
 @Composable
@@ -41,27 +28,27 @@ fun AlertDialogContent(
         Column(modifier = Modifier.padding(DialogPadding)) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
                 Column {
-                    Image(
-                        painter = painterResource(id = R.drawable.app_linksheet),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(48.dp)
-                            .clip(CircleShape),
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        fontFamily = HkGroteskFontFamily,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 18.sp
-                    )
-
-                    Text(text = AppInfo.buildInfo.flavor)
-
-                    Text(text = AppInfo.buildInfo.versionName)
-                    Text(text = AppInfo.buildInfo.builtAt)
+//                    Image(
+//                        painter = painterResource(id = R.drawable.app_linksheet),
+//                        contentDescription = null,
+//                        modifier = Modifier
+//                            .size(48.dp)
+//                            .clip(CircleShape),
+//                    )
+//
+//                    Spacer(modifier = Modifier.height(10.dp))
+//
+//                    Text(
+//                        text = stringResource(id = R.string.app_name),
+//                        fontFamily = HkGroteskFontFamily,
+//                        fontWeight = FontWeight.SemiBold,
+//                        fontSize = 18.sp
+//                    )
+//
+//                    Text(text = AppInfo.buildInfo.flavor)
+//
+//                    Text(text = AppInfo.buildInfo.versionName)
+//                    Text(text = AppInfo.buildInfo.builtAt)
                 }
             }
         }

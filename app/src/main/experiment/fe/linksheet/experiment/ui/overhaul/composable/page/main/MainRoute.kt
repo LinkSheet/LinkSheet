@@ -24,8 +24,8 @@ import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.Routes
 import fe.linksheet.debug.DebugComposable
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
 import fe.linksheet.experiment.ui.overhaul.composable.page.home.news.NewsCard
 import fe.linksheet.experiment.ui.overhaul.composable.page.home.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*

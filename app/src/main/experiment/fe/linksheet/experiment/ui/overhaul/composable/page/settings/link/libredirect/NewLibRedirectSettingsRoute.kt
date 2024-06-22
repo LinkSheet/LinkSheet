@@ -1,9 +1,6 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.libredirect
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,17 +11,16 @@ import androidx.navigation.NavController
 import fe.android.compose.route.util.navigate
 import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.R
-import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.composable.util.listState
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.SwitchListItem
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.list.base.ContentPosition
+import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.linksheet.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
-import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
+import fe.linksheet.component.util.ComposableTextContent.Companion.content
+import fe.linksheet.component.util.Default.Companion.text
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.libRedirectServiceSettingsRoute

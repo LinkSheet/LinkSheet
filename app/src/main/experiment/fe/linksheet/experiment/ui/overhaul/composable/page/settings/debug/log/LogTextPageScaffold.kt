@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLargeTopAppBar
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
+import fe.linksheet.component.page.SaneSettingsScaffold
+import fe.linksheet.component.page.layout.SaneLazyColumnPageDefaults
+import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
+import fe.linksheet.component.page.layout.SaneLazyListScope
+import fe.linksheet.experiment.ui.overhaul.composable.component.appbar.SaneLargeTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -31,6 +31,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "LinkSheet"
 
-include ":app"
-include ":config"
-include ":components"
+include(":app", ":config")
+include(":components", ":compose-util", ":bottom-sheet")

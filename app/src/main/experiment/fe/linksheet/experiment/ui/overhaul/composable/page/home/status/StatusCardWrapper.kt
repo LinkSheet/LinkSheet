@@ -9,7 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import fe.linksheet.experiment.ui.overhaul.composable.util.rememberSystemService
+import fe.linksheet.component.util.rememberSystemService
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.util.AndroidVersion
 
@@ -47,7 +47,7 @@ fun StatusCardWrapper(
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 private fun rememberRequestBrowserIntent(): Intent {
-    val roleManager = rememberSystemService<RoleManager>()
+    val roleManager = fe.linksheet.component.util.rememberSystemService<RoleManager>()
 
     return remember(roleManager) {
         roleManager.createRequestRoleIntent(RoleManager.ROLE_BROWSER)

@@ -6,13 +6,13 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.linksheet.*
 import fe.linksheet.composable.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.settings.link.downloader.requestDownloadPermission
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.DividedSwitchListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceDividedSwitchListItem
+import fe.linksheet.component.list.base.ContentPosition
+import fe.linksheet.component.list.item.type.DividedSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
+import fe.linksheet.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

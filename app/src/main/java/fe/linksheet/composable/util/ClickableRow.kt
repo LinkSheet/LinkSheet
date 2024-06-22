@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
-import fe.linksheet.extension.compose.enabled
-import fe.linksheet.extension.compose.runIf
+import fe.linksheet.compose.util.enabled
+import fe.linksheet.compose.util.runIf
 
 @Composable
 fun NonClickableRow(

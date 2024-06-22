@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.stateful.StatefulDialogState
 import fe.android.compose.dialog.helper.stateful.rememberStatefulDialog
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.dialog.DialogDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextContentWrapper
+import fe.linksheet.component.dialog.DialogDefaults
+import fe.linksheet.component.util.Resource.Companion.textContent
+import fe.linksheet.component.util.TextContentWrapper
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -76,7 +76,7 @@ fun DeleteLogDialog(
             )
         },
         text = {
-            TextContentWrapper(
+            fe.linksheet.component.util.TextContentWrapper(
                 modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
                 textContent = textContent(R.string.delete_log_dialog__subtitle_delete_info)
             )

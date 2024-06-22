@@ -11,21 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.fastForEach
-import androidx.compose.ui.util.fastForEachIndexed
+import fe.android.compose.dialog.helper.DialogMaxWidth
+import fe.android.compose.dialog.helper.DialogMinWidth
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.layout.*
-import fe.linksheet.experiment.ui.overhaul.composable.component.layout.DialogMaxWidth
-import fe.linksheet.experiment.ui.overhaul.composable.util.ProvideContentColorTextStyle
-import kotlin.math.max
+import fe.linksheet.component.layout.AlertDialogFlowRow
+import fe.linksheet.component.layout.ButtonsCrossAxisSpacing
+import fe.linksheet.component.layout.ButtonsMainAxisSpacing
+import fe.linksheet.component.util.ProvideContentColorTextStyle
+
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

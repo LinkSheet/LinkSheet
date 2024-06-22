@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.Searchbar
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
+import fe.linksheet.component.page.GroupValueProvider
+import fe.linksheet.component.page.layout.SaneLazyListScope
+import fe.linksheet.component.page.layout.group
 import kotlinx.coroutines.flow.MutableStateFlow
 
 fun LazyListScope.spacer(height: Int = 10, itemKey: Any? = null) {

@@ -48,7 +48,9 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewCre
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
-import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.*
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.NewRuleRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.RuleOverviewRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.NewBrowserSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute

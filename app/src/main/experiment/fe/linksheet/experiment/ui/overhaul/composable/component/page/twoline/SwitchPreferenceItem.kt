@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import fe.android.preference.helper.compose.StatePreference
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGroupDslMarker
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.RememberGroupScope
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
+import fe.linksheet.component.page.ListItemData
+import fe.linksheet.component.page.RememberGroupDslMarker
+import fe.linksheet.component.page.RememberGroupScope
+import fe.linksheet.component.util.TextContent
 
 @Stable
 class SwitchPreferenceItem(

@@ -36,7 +36,7 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
-import fe.linksheet.experiment.improved.resolver.material3.SheetValue
+import androidx.compose.material3.fix.SheetValue
 import fe.linksheet.activity.bottomsheet.UrlBar
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
@@ -118,7 +118,7 @@ class ImprovedBottomSheet(
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
         val coroutineScope = rememberCoroutineScope()
-        val drawerState = fe.linksheet.experiment.improved.resolver.material3.rememberModalBottomSheetState()
+        val drawerState = androidx.compose.material3.fix.rememberModalBottomSheetState()
 
         LaunchedEffect(key1 = status) {
             if (viewModel.improvedBottomSheetExpandFully()) {

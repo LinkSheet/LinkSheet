@@ -12,13 +12,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
+import fe.linksheet.component.list.base.ClickableShapeListItem
+import fe.linksheet.component.list.base.ShapeListItemDefaults
+import fe.linksheet.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.experiment.ui.overhaul.composable.util.DrawableIconType.Companion.drawable
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.page.layout.group
+import fe.linksheet.component.util.DrawableIconType.Companion.drawable
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 
 

@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard2
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.card.ClickableAlertCard2
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 
 @OptIn(ExperimentalFoundationApi::class)

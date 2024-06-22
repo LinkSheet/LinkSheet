@@ -33,24 +33,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.AlertCardContentLayout
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.AlertCardDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.icon.AppIconImage
-import fe.linksheet.experiment.ui.overhaul.composable.component.icon.FilledIcon
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneLargeTopAppBar
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneSettingsScaffold
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.SaneLazyListScope
-import fe.linksheet.experiment.ui.overhaul.composable.util.ComposableTextContent.Companion.content
-import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
+import fe.linksheet.component.card.AlertCardContentLayout
+import fe.linksheet.component.card.AlertCardDefaults
+import fe.linksheet.component.icon.AppIconImage
+import fe.linksheet.component.icon.FilledIcon
+import fe.linksheet.component.list.base.ShapeListItemDefaults
+import fe.linksheet.component.page.SaneSettingsScaffold
+import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
+import fe.linksheet.component.page.layout.SaneLazyListScope
+import fe.linksheet.component.util.ComposableTextContent.Companion.content
+import fe.linksheet.component.util.Resource.Companion.textContent
+import fe.linksheet.compose.util.atElevation
+import fe.linksheet.experiment.ui.overhaul.composable.component.appbar.SaneLargeTopAppBar
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.extension.android.isUserApp
 import fe.linksheet.extension.android.toImageBitmap
-import fe.linksheet.extension.compose.atElevation
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 
 import sh.calvin.reorderable.ReorderableItem
@@ -296,7 +294,7 @@ private fun FilledIcon(item: IconItem, parentContainerColor: Color) {
         contentDescription = null,
         colors = IconButtonDefaults.iconButtonColors(
             containerColor = containerColor,
-            contentColor = contentColorFor(backgroundColor = containerColor)
+            contentColor = androidx.compose.material3.fix.contentColorFor(backgroundColor = containerColor)
         )
     )
 }
@@ -335,13 +333,13 @@ private class AppItem(val label: CharSequence, val packageName: String, val icon
 
 
 private open class IconItem(
-    title: TextContent, description: TextContent,
+    title: fe.linksheet.component.util.TextContent, description: fe.linksheet.component.util.TextContent,
     val icon: ImageVector
 ) : Item(title, description)
 
 private open class Item(
-    val title: TextContent,
-    val description: TextContent,
+    val title: fe.linksheet.component.util.TextContent,
+    val description: fe.linksheet.component.util.TextContent,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -374,8 +372,6 @@ private fun SaneScaffoldSettingsPage2(
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         content = { padding ->
-
-
             SaneLazyColumnPageLayout(
                 state = state,
                 padding = padding,

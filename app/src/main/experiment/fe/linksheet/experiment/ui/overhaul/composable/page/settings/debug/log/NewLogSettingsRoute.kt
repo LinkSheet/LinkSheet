@@ -17,14 +17,11 @@ import fe.kotlin.extension.time.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
+import fe.linksheet.component.list.base.ClickableShapeListItem
+import fe.linksheet.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
-import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalTextContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
+import fe.linksheet.component.util.Default.Companion.text
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.experiment.ui.overhaul.interaction.wrap
@@ -106,9 +103,9 @@ private fun LogSessionListItem(
     navigate: (String) -> Unit,
     shape: Shape = ShapeListItemDefaults.SingleShape,
     padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
-    headline: TextContent,
-    subtitle: OptionalTextContent,
-    trailingContent: OptionalContent = null,
+    headline: fe.linksheet.component.util.TextContent,
+    subtitle: fe.linksheet.component.util.OptionalTextContent,
+    trailingContent: fe.linksheet.component.util.OptionalContent = null,
 ) {
     val route = remember(logRoute) {
         logTextViewerSettingsRoute.buildNavigation(logRoute)

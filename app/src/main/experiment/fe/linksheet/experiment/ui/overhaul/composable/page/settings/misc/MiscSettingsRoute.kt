@@ -3,10 +3,10 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.misc
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

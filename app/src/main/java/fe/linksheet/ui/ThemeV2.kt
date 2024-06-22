@@ -5,11 +5,10 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.GroupValueProvider
+import fe.linksheet.component.page.GroupValueProvider
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.StringResHolder
 

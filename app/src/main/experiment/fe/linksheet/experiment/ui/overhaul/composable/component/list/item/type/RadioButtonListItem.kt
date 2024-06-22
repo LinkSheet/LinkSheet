@@ -14,13 +14,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.*
-import fe.linksheet.experiment.ui.overhaul.composable.util.OptionalContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.TextContent
-
-object RadioButtonListItemDefaults {
-    val Width = 24.dp
-}
+import fe.linksheet.component.list.base.*
+import fe.linksheet.component.list.item.type.RadioButtonListItem
+import fe.linksheet.component.util.OptionalContent
+import fe.linksheet.component.util.TextContent
 
 @Composable
 fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
@@ -55,63 +52,4 @@ fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
         innerPadding = innerPadding,
         textOptions = textOptions
     )
-}
-
-@Composable
-fun RadioButtonListItem(
-    modifier: Modifier = ShapeListItemDefaults.BaseModifier,
-    enabled: Boolean = true,
-    width: Dp = RadioButtonListItemDefaults.Width,
-    selected: Boolean,
-    onSelect: () -> Unit,
-    shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
-    colors: ListItemColors = ShapeListItemDefaults.colors(),
-    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
-    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
-    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
-    position: ContentPosition,
-    headlineContent: TextContent,
-    overlineContent: TextContent? = null,
-    supportingContent: TextContent? = null,
-    otherContent: OptionalContent,
-) {
-    SelectableShapeListItem(
-        modifier = modifier,
-        enabled = enabled,
-        selected = selected,
-        onClick = onSelect,
-        role = Role.RadioButton,
-        shape = shape,
-        padding = padding,
-        colors = colors,
-        headlineContent = headlineContent,
-        overlineContent = overlineContent,
-        supportingContent = supportingContent,
-        position = position,
-        primaryContent = {
-            DefaultListItemRadioButton(enabled = enabled, width = width, selected = selected, onSelect = onSelect)
-        },
-        otherContent = otherContent,
-        containerHeight = containerHeight,
-        innerPadding = innerPadding,
-        textOptions = textOptions
-    )
-}
-
-@Composable
-private fun DefaultListItemRadioButton(
-    enabled: Boolean = true,
-    width: Dp = RadioButtonListItemDefaults.Width,
-    selected: Boolean,
-    onSelect: () -> Unit,
-) {
-    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides width) {
-        RadioButton(
-            modifier = ShapeListItemDefaults.BaseContentModifier.width(width),
-            enabled = enabled,
-            selected = selected,
-            onClick = onSelect,
-        )
-    }
 }

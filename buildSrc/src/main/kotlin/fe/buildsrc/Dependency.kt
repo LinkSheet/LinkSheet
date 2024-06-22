@@ -5,7 +5,6 @@ import de.fayard.refreshVersions.core.DependencyNotation
 import de.fayard.refreshVersions.core.DependencyNotationAndGroup
 import org.gradle.kotlin.dsl.IsNotADependency
 
-
 object _1fexd : DependencyGroup(group = "com.github.1fexd") {
     val android = Android
 
@@ -71,6 +70,14 @@ object LinkSheet : DependencyGroup(group = "com.github.LinkSheet") {
     val interconnect = DependencyNotation(group = group, name = "interconnect")
 }
 
+object PinnedVersions : IsNotADependency {
+    private const val COMPOSE_VERSION = "1.7.0-beta03"
+
+    var ComposeUi = AndroidX.compose.ui.withVersion(COMPOSE_VERSION)
+    var ComposeFoundation = AndroidX.compose.foundation.withVersion(COMPOSE_VERSION)
+
+    var Material3 = AndroidX.compose.material3.withVersion("1.3.0-beta03")
+}
 
 //clearurlkt = "com.github.1fexd:clearurlkt:_"
 //fastforwardkt = "com.github.1fexd:fastforwardkt:_"

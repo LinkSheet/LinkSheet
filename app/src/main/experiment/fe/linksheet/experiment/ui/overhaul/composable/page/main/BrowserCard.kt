@@ -2,7 +2,7 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.AlertCard
+import fe.linksheet.component.card.AlertCard
 import fe.linksheet.module.viewmodel.MainViewModel
 
 

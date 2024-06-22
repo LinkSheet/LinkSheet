@@ -1,37 +1,21 @@
+import fe.buildsrc.Version
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
+val group = "fe.linksheet.config"
+
 android {
-    namespace = "fe.linksheet.config"
-    compileSdk = 33
+    namespace = group
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 21
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        create("nightly") {
-        }
-    }
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        }
+        minSdk = Version.MIN_SDK
     }
 }
 
-
-dependencies {
+kotlin {
+    jvmToolchain(Version.JVM)
 }

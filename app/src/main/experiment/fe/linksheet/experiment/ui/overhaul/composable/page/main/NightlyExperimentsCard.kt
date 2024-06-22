@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard2
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.card.ClickableAlertCard2
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experimentSettingsRoute
 
 @Composable

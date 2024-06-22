@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.extension.compose.clickable
+import fe.linksheet.compose.util.clickable
 import fe.linksheet.ui.PreviewTheme
 
 

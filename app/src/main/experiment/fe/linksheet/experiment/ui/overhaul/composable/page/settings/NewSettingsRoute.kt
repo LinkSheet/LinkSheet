@@ -1,18 +1,18 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.*
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.RouteNavigateListItem
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.list.item.RouteNavItem
+import fe.linksheet.component.list.item.RouteNavigateListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.page.layout.group
+import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
+import fe.linksheet.component.util.Resource.Companion.textContent
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

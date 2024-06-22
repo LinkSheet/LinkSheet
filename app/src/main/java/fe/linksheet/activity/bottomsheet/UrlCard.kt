@@ -24,7 +24,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
-import fe.linksheet.extension.compose.runIf
+import fe.linksheet.compose.util.runIf
 import fe.linksheet.ui.HkGroteskFontFamily
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.material3.placeholder

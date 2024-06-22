@@ -4,14 +4,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.AppShortcut
 import androidx.compose.material.icons.outlined.OpenInBrowser
-import androidx.compose.material.icons.outlined.OpenInNew
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute

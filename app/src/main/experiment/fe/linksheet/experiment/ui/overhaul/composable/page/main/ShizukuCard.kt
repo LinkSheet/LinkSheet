@@ -12,7 +12,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.UriHandler
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard
+import fe.linksheet.component.card.ClickableAlertCard
 import fe.linksheet.module.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload
 import kotlinx.coroutines.Dispatchers

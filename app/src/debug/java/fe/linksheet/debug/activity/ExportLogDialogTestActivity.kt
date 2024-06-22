@@ -1,7 +1,6 @@
 package fe.linksheet.debug.activity
 
 import android.os.Bundle
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.systemBarsPadding

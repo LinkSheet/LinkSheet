@@ -8,7 +8,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.AndroidUriHandler
 import androidx.core.content.getSystemService
-import fe.linksheet.experiment.ui.overhaul.composable.util.PLAIN_TEXT_LABEL
+import fe.linksheet.component.util.PLAIN_TEXT_LABEL
 
 
 val LocalHapticFeedbackInteraction = staticCompositionLocalOf<HapticFeedbackInteraction> {
@@ -67,7 +67,7 @@ class DefaultHapticFeedbackInteraction(private val view: View) : HapticFeedbackI
     }
 
     override fun copy(content: String, type: FeedbackType) {
-        clipboardManager.setPrimaryClip(ClipData.newPlainText(PLAIN_TEXT_LABEL, content))
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(fe.linksheet.component.util.PLAIN_TEXT_LABEL, content))
         performHapticFeedback(type)
     }
 

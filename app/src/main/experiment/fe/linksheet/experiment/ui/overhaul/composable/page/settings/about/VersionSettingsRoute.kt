@@ -1,8 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.about
 
-import ClearURLsMetadata
-import LibRedirectMetadata
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -15,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -27,31 +23,24 @@ import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
 import fe.android.span.helper.composable.fromStringRes
-import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.ContentTypeDefaults
-import fe.linksheet.experiment.ui.overhaul.composable.component.card.ClickableAlertCard2
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.ListItemData
+import fe.linksheet.component.ContentTypeDefaults
+import fe.linksheet.component.card.ClickableAlertCard2
+import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.linksheet.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.layout.group
-import fe.linksheet.experiment.ui.overhaul.composable.util.Annotated.Companion.buildAnnotatedTextContent
-import fe.linksheet.experiment.ui.overhaul.composable.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.experiment.ui.overhaul.composable.util.Default.Companion.text
-import fe.linksheet.experiment.ui.overhaul.composable.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
+import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
+import fe.linksheet.component.util.Default.Companion.text
 import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
 import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
-import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.LocalActivity
 import fe.linksheet.util.AppInfo
 import fe.linksheet.util.AppSignature
-import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 

@@ -1,7 +1,7 @@
 package fe.linksheet.debug.activity
 
-import fe.linksheet.experiment.improved.resolver.material3.ModalBottomSheet
-import fe.linksheet.experiment.improved.resolver.material3.rememberModalBottomSheetState
+import androidx.compose.material3.fix.ModalBottomSheet
+import androidx.compose.material3.fix.rememberModalBottomSheetState
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

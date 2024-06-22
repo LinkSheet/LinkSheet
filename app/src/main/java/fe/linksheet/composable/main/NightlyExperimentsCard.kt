@@ -14,8 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.experimentSettingsRoute
-import fe.linksheet.extension.compose.clickable
-import fe.linksheet.featureFlagSettingsRoute
+import fe.linksheet.compose.util.clickable
 import fe.linksheet.ui.Typography
 
 @Composable

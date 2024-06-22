@@ -1,6 +1,5 @@
 package fe.linksheet.composable.util
 
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -18,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import fe.linksheet.extension.compose.clickable
-import fe.linksheet.extension.compose.enabled
-import fe.linksheet.extension.compose.runIf
+import fe.linksheet.compose.util.clickable
+import fe.linksheet.compose.util.enabled
+import fe.linksheet.compose.util.runIf
 
 @Composable
 fun DividedRow(

@@ -1,35 +1,47 @@
+import de.fayard.refreshVersions.core.versionFor
+import fe.buildsrc.PinnedVersions
+import fe.buildsrc.Version
+import fe.buildsrc._1fexd
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
+val group = "fe.linksheet.components"
+
 android {
-    namespace = "fe.linksheet.components"
-    compileSdk = 33
+    namespace = group
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 21
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = Version.MIN_SDK
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+    buildFeatures {
+        compose = true
     }
 
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        }
+    composeOptions {
+        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
     }
 }
 
+kotlin {
+    jvmToolchain(Version.JVM)
+}
 
 dependencies {
+    implementation(project(":compose-util"))
+
+    implementation(platform(AndroidX.compose.bom))
+    implementation(PinnedVersions.ComposeUi)
+    implementation(PinnedVersions.Material3)
+
+    implementation(AndroidX.compose.ui.toolingPreview)
+
+    implementation(AndroidX.compose.material.icons.core)
+    implementation(AndroidX.compose.material.icons.extended)
+
+    implementation(_1fexd.android.span.compose)
 }

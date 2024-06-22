@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ShapeListItemDefaults
+import fe.linksheet.component.list.base.ShapeListItemDefaults
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily

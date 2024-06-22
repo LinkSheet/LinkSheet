@@ -5,12 +5,12 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.base.ContentPosition
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.ListItemFilledIconButton
+import fe.linksheet.component.list.base.ContentPosition
+import fe.linksheet.component.list.item.ListItemFilledIconButton
+import fe.linksheet.component.list.item.type.RadioButtonListItem
+import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.RadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.composable.util.Resource.Companion.textContent
 import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel

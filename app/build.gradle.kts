@@ -227,7 +227,7 @@ dependencies {
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.activity.compose)
-    implementation("sh.calvin.reorderable:reorderable:2.1.1")
+    implementation(libs.reorderable)
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.compose.animation)

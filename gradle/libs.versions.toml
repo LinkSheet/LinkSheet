@@ -2,13 +2,15 @@
 
 [plugins]
 
-gradle = { id = "gradle", version = "8.4.0" }
+gradle = { id = "gradle", version = "8.2.0" }
 
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.24" }
 
 net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.1.0" }
 
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.24-1.0.20" }
+
+org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "4.4.0" }
 
 [versions]
 
@@ -22,6 +24,7 @@ kotlin = "1.9.24"
 ##  ⬆ = "2.0.0-RC2"
 ##  ⬆ = "2.0.0-RC3"
 ##  ⬆ = "2.0.0"
+##  ⬆ = "2.0.20-Beta1"
 
 koin = "3.6.0-Beta4"
 ##⬆ = "3.6.0-wasm-alpha1"
@@ -29,14 +32,16 @@ koin = "3.6.0-Beta4"
 
 linkSheetInterConnect = "2.3.2"
 
-app-cash-zipline = "1.10.1"
+app-cash-zipline = "1.13.0"
 
 androidx-test-ext-junit = "1.2.0-beta01"
+reorderable = "2.1.1"
 
 [libraries]
 
 flavors = "com.github.LinkSheet:flavors:_"
 linkSheetInterConnect = { module = "com.github.1fexd:LinkSheetInterConnect", version.ref = "linkSheetInterConnect" }
+reorderable = { module = "sh.calvin.reorderable:reorderable", version.ref = "reorderable" }
 stub = "dev.rikka.hidden:stub:_"
 
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }

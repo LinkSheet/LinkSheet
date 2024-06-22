@@ -17,7 +17,8 @@ abstract class DebugCommand<T : DebugCommand<T>>(val action: String, command: KC
             NavigateToRouteCommand,
             ResetHistoryPreferredAppCommand,
             DumpPreferencesCommand,
-            ViewUrlCommand
+            ViewUrlCommand,
+            DumpNavGraphCommand
         ).associateBy { it.action }
 
         fun tryHandle(context: Context, intent: Intent): Boolean {

@@ -48,6 +48,7 @@
                 <action android:name="fe.linksheet.debug.RESET_HISTORY_PREFERRED_APP"/>
                 <action android:name="fe.linksheet.debug.DUMP_PREFERENCES"/>
                 <action android:name="fe.linksheet.debug.VIEW_URL"/>
+                <action android:name="fe.linksheet.debug.DUMP_NAV_GRAPH"/>
             </intent-filter>
         </receiver>
     </application>

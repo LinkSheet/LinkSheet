@@ -1,6 +1,7 @@
 package fe.linksheet.activity.main
 
 import android.os.Bundle
+import androidx.collection.valueIterator
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -9,6 +10,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import fe.linksheet.activity.DebugStatePublisher
+import fe.linksheet.activity.NavGraphDebugState
 import fe.linksheet.activity.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
@@ -64,6 +67,13 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                     navigate = { navController.navigate(it) },
                     onBackPressed = { navController.popBackStack() }
                 )
+
+                if (BuildType.current.allowDebug) {
+                    LaunchedEffect(key1 = Unit) {
+                        val graphNodes = navController.graph.nodes.valueIterator().asSequence().toList()
+                        DebugStatePublisher.publishDebugState(NavGraphDebugState(graphNodes))
+                    }
+                }
 
                 SnackbarHost(
                     modifier = Modifier

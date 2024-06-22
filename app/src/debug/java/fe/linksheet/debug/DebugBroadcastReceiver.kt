@@ -1,23 +1,12 @@
 package fe.linksheet.debug
 
 import android.content.*
-import android.net.Uri
-import android.os.Bundle
-import android.util.Log
 import androidx.core.content.getSystemService
-import androidx.lifecycle.SavedStateHandle
-import fe.gson.dsl.jsonObject
 import fe.linksheet.debug.command.DebugCommand
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.util.BuildType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
-import kotlin.io.encoding.Base64
-import kotlin.io.encoding.ExperimentalEncodingApi
 
 
 class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
@@ -31,6 +20,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
         const val RESET_HISTORY_PREFERRED_APP_BROADCAST = "fe.linksheet.debug.RESET_HISTORY_PREFERRED_APP"
         const val DUMP_PREFERENCES_BROADCAST = "fe.linksheet.debug.DUMP_PREFERENCES"
         const val VIEW_URL_BROADCAST = "fe.linksheet.debug.VIEW_URL"
+        const val DUMP_NAV_GRAPH_BROADCAST = "fe.linksheet.debug.DUMP_NAV_GRAPH"
     }
 
     override fun onReceive(context: Context, intent: Intent) {

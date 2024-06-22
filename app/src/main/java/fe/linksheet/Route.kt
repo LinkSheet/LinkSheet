@@ -128,4 +128,5 @@ object Routes {
     const val Updates = "route__updates"
     const val RuleOverview = "route__rules_overview"
     const val RuleNew = "route__rule_new"
+    const val AboutVersion = "route__about_version"
 }

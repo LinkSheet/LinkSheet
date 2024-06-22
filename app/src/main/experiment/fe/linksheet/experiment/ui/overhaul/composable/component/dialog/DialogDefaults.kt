@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.dialog
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.MaterialTheme
@@ -33,4 +34,9 @@ object DialogDefaults {
             supportingColor = AlertDialogDefaults.textContentColor,
             containerColor = AlertDialogDefaults.containerColor
         )
+
+    val DialogPadding = PaddingValues(all = 24.dp)
+    val IconPadding = PaddingValues(bottom = 16.dp)
+    val TitlePadding = PaddingValues(bottom = 16.dp)
+    val TextPadding = PaddingValues(bottom = 24.dp)
 }

@@ -45,6 +45,7 @@ import fe.linksheet.experiment.ui.overhaul.composable.page.main.NewMainRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.NewSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewAboutSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.NewCreditsSettingsRoute
+import fe.linksheet.experiment.ui.overhaul.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewAdvancedSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.advanced.NewExperimentsSettingsRoute
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.*
@@ -87,6 +88,10 @@ fun MainNavHost(
             } else {
                 MainRoute(navController = navController)
             }
+        }
+
+        animatedComposable(route = Routes.AboutVersion) {
+            VersionSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = Routes.RuleOverview) {

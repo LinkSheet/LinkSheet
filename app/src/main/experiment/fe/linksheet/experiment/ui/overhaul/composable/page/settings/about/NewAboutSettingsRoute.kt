@@ -14,6 +14,8 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
+import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
+import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
 import fe.android.span.helper.composable.fromStringRes
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
@@ -68,8 +70,7 @@ fun NewAboutSettingsRoute(
 ) {
     val activity = LocalActivity.current
     val uriHandler = LocalUriHandler.current
-    val buildDate =
-        BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+    val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
     val buildType = AppSignature.checkSignature(activity)
 
     var devClicks by remember { mutableIntStateOf(0) }
@@ -82,6 +83,16 @@ fun NewAboutSettingsRoute(
 //    }
 
     val interaction = LocalHapticFeedbackInteraction.current
+
+    val state = rememberConfirmActionDialog<String>()
+
+    ConfirmActionDialog(
+        state = state,
+        onConfirm = { input ->  },
+        onDismiss = { input ->  }
+    ) { input ->
+        VersionDialog(dismiss = state::dismiss, confirm = state::confirm)
+    }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.about), onBackPressed = onBackPressed) {
         if (LinkSheetAppConfig.showDonationBanner()) {
@@ -152,6 +163,8 @@ fun NewAboutSettingsRoute(
                 },
                 icon = vector(Icons.Outlined.Build),
                 onClick = {
+//                    state.open("")
+
                     if (devClicks == 0) {
                         interaction.copy(viewModel.getBuildInfo(), HapticFeedbackType.LongPress)
                     }

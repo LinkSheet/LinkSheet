@@ -33,3 +33,4 @@ rootProject.name = "LinkSheet"
 
 include ":app"
 include ":config"
+include ":components"

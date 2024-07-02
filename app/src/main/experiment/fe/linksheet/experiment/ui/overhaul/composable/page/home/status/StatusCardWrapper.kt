@@ -47,7 +47,7 @@ fun StatusCardWrapper(
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 private fun rememberRequestBrowserIntent(): Intent {
-    val roleManager = fe.linksheet.component.util.rememberSystemService<RoleManager>()
+    val roleManager = rememberSystemService<RoleManager>()
 
     return remember(roleManager) {
         roleManager.createRequestRoleIntent(RoleManager.ROLE_BROWSER)

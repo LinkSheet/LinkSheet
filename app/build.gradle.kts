@@ -262,7 +262,6 @@ dependencies {
     implementation(libs.placeholder.material3)
 
     implementation(libs.signifykt)
-    implementation(libs.com.gitlab.grrfe.bundled.dependencies.gson.ext)
     implementation(libs.gson)
 
     implementation(libs.nanoid)

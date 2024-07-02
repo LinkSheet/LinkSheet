@@ -59,8 +59,6 @@ internal fun StatusCard(
         subtitle = textContent(subtitle),
         imageVector = icon,
     ) {
-//            Text(text = stringResource(id = R.string.settings_main_setup_success__subtitle_quick_settings))
-
         LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
             if (isDefaultBrowser) {
                 item(key = R.string.settings_main_setup_success__button_change_browser) {

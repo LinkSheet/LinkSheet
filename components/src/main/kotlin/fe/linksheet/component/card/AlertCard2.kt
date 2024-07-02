@@ -17,8 +17,10 @@ import fe.linksheet.component.icon.FilledIcon
 import fe.linksheet.component.list.base.ShapeListItemDefaults
 import fe.linksheet.component.util.Default.Companion.text
 import fe.linksheet.component.util.TextContent
+import fe.linksheet.compose.util.PaddingValuesSides
 import fe.linksheet.compose.util.atElevation
 import fe.linksheet.compose.util.clickable
+import fe.linksheet.compose.util.exclude
 
 
 @Composable
@@ -83,9 +85,9 @@ fun ClickableAlertCard2(
         }
 
         if (content != null) {
-//            Box(modifier = Modifier.padding(AlertCardDefaults.InnerPadding.exclude(PaddingValuesSides.Top))) {
-//                content()
-//            }
+            Box(modifier = Modifier.padding(AlertCardDefaults.InnerPadding.exclude(PaddingValuesSides.Top))) {
+                content()
+            }
         }
     }
 }

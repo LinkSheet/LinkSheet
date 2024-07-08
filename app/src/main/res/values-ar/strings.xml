@@ -303,7 +303,7 @@
     <string name="discord">ديسكورد</string>
     <string name="discord_explainer">تعال للدردشة على خادم ديسكورد الخاص بنا! قم بالدردشة مع مستخدمي ومطوري ورقة الروابط حول مستقبله ومساعيه الأخرى!</string>
     <string name="donate_card">التبرع بالبطاقة (عبر BuyMeACoffee)</string>
-    <string name="donate_card_subtitle"> إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع.
+    <string name="donate_card_subtitle"> إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع. 
 \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
     <string name="copy_version_information">نسخ معلومات الإصدار</string>
     <string name="dev">المطور</string>
@@ -352,8 +352,8 @@
     <string name="enable_linksheet_compat_explainer">يمكن العثور على القائمة في القائمة الفرعية \"التطبيقات\"، وعند تثبيتها، تكون قادرا على اعتراض الطلبات لبعض التطبيقات المحلية.</string>
     <string name="running_unofficial_build">بناء غير الرسمي</string>
     <string name="disclaimer_libredirect_unstable">بالإضافة إلى كونها ميزة تجريبية، تعتبر LibRedirect حاليًا غير مستقرة جدًا وقد لا تعمل على الإطلاق.</string>
-    <string name="new_bottomsheet_explainer">يتميز هذا الإصدار من ورقة الروابط بورقة سفلية جديدة بفضل <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! يرجى تقديم تعليقات على Discord أو Github أو عبر البريد الإلكتروني.
-\n
+    <string name="new_bottomsheet_explainer">يتميز هذا الإصدار من ورقة الروابط بورقة سفلية جديدة بفضل <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! يرجى تقديم تعليقات على Discord أو Github أو عبر البريد الإلكتروني. 
+\n 
 \nيمكنك العودة إلى الصفحة السفلية القديمة عبر الإعدادات -&gt; متقدم -&gt; أعلام مميزة.</string>
     <plurals name="hours">
         <item quantity="zero">%s ساعة</item>

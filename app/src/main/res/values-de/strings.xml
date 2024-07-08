@@ -121,9 +121,9 @@
     <string name="no_log_entries">Diese Sitzung enthält keine Protokolle.</string>
     <string name="hide_after_copying_explainer">Unteres Fenster ausblenden, nachdem die Schaltfläche \"URL kopieren\" gedrückt wurde</string>
     <string name="import_dumped_preference">Gespeicherte Einstellungen importieren</string>
-    <string name="domain_selection_confirmation_subtitle">Sind Sie sicher, dass Sie %s als bevorzugte Anwendung für die folgenden Domains festlegen wollen\?</string>
+    <string name="domain_selection_confirmation_subtitle">Sind Sie sicher, dass Sie %s als bevorzugte Anwendung für die folgenden Domains festlegen wollen?</string>
     <string name="dismiss">Ablehnen</string>
-    <string name="onboarding7_headline">Enthusiast\?
+    <string name="onboarding7_headline">Enthusiast?
 \nLinkSheet hat Sie</string>
     <string name="default_apps_subtitle">Bevorzugte Anwendungen sind die Anwendungen, die Sie für bestimmte Hosts als \"Immer öffnen\" festgelegt haben</string>
     <string name="amp2html_local_cache">Lokalen Amp2Html-Zwischenspeicher aktivieren</string>
@@ -146,7 +146,7 @@
     <string name="set_as_browser_done">LinkSheet wurde als Standard-Browser festgelegt!</string>
     <string name="whitelisted_explainer">Nur Browser auf der Whitelist anzeigen</string>
     <string name="disable_all">Alle deaktivieren</string>
-    <string name="domain_selection_confirmation_title">Domains auswählen\?</string>
+    <string name="domain_selection_confirmation_title">Domains auswählen?</string>
     <string name="manual_build">Manuell erstellt und signiert von 1fexd</string>
     <string name="open_link_with_subtitle_2">LinkSheet basiert ursprünglich auf OpenWith</string>
     <string name="enable_shizuku">(Experimentelle) Shizuku-Integration aktivieren</string>

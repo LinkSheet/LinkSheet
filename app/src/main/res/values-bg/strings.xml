@@ -238,7 +238,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="disable_link_handling">Изключване на обработката на препратки</string>
     <string name="onboarding4_highlight">за да заработи LinkSheet</string>
-    <string name="onboarding7_headline">Ентусиаст\?
+    <string name="onboarding7_headline">Ентусиаст?
 \nLinkSheet</string>
     <string name="onboarding7_highlight">също</string>
     <string name="done">Готово</string>
@@ -264,8 +264,8 @@
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet намира най-малко едно приложение, което да претендира ча е браузър. Списъкът на LinkSheet може да е непълен. Ако смятате това за грешка съобщете в Гитхъб.</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
-    <string name="domain_selection_confirmation_title">Избиране на домейни\?</string>
-    <string name="domain_selection_confirmation_subtitle">Сигурни ли сте, че желаете да зададете приложението %s да отваря следните домейни\?</string>
+    <string name="domain_selection_confirmation_title">Избиране на домейни?</string>
+    <string name="domain_selection_confirmation_subtitle">Сигурни ли сте, че желаете да зададете приложението %s да отваря следните домейни?</string>
     <string name="misc_settings">Разни</string>
     <string name="button_settings">Бутони</string>
     <string name="donate_card_headline">Дарения в подкрепа на LinkSheet</string>
@@ -303,7 +303,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Заповядайте в нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.
+    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение. 
 \nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
     <plurals name="hours">
         <item quantity="one">%s час</item>
@@ -372,8 +372,8 @@
     <string name="opening_with_app_toast_explainer">Показва плуващо известие при отваряне на стандартно за даден домейн приложение</string>
     <string name="disclaimer_libredirect_unstable">В допълнение към изпитателната природа на тази възможност интеграцията с LibRedirect се счита за много нестабилна и може да не работи изобщо.</string>
     <string name="enable_new_bottom_sheet">Включване на новото долно меню</string>
-    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща.
-\n
+    <string name="new_bottomsheet_explainer">Това издание представя ново долно меню благодарение на <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Дайте своята обратна връзка в Discord, Гитхъб или по електронна поща. 
+\n 
 \nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове.</string>
     <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
     <string name="new_bottomsheet">Ново долно меню</string>

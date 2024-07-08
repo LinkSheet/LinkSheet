@@ -233,7 +233,7 @@
     <string name="onboarding3_headline">Uzyskaj precyzyjną
 \nkontrolę nad</string>
     <string name="onboarding3_highlight">wszystkim</string>
-    <string name="onboarding7_headline">Entuzjasta\?
+    <string name="onboarding7_headline">Entuzjasta?
 \nLinkSheet ma Cię</string>
     <string name="onboarding7_highlight">w swej garści</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet „przywraca” „url-app-chooser”, który został usunięty w Androidzie 12. Użytkownik za jego pomocą mógł wybrać przez jaką aplikację zostanie otworzony link</string>
@@ -275,8 +275,8 @@
     <string name="no_browser_installed_explainer">LinkSheet nie był w stanie wykryć przeglądarki. Aby uzyskać najlepsze wrażenia, zainstaluj ją.</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
-    <string name="domain_selection_confirmation_title">Wybrać domeny\?</string>
-    <string name="domain_selection_confirmation_subtitle">Czy na pewno chcesz ustawić %s jako preferowaną aplikację dla następujących domen\?</string>
+    <string name="domain_selection_confirmation_title">Wybrać domeny?</string>
+    <string name="domain_selection_confirmation_subtitle">Czy na pewno chcesz ustawić %s jako preferowaną aplikację dla następujących domen?</string>
     <string name="donate_card_subtitle_2">Przekaż kryptowalutę</string>
     <string name="button_settings">Przyciski</string>
     <string name="misc_settings">Różne</string>
@@ -303,7 +303,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Dołącz do naszego Discorda! Porozmawiaj z użytkownikami i twórcami LinkSheet o jego przyszłości i innych przedsięwzięciach!</string>
     <string name="donate_card">Wesprzyj używając karty (przez BuyMeACoffee)</string>
-    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.
+    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. 
 \nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje.</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="donate_learn_more">Czytaj więcej</string>
@@ -378,8 +378,8 @@
     <string name="fastforward_version">Reguły FastForward</string>
     <string name="url_copied_toast_explainer">Pokaż toast, gdy link zostanie skopiowany</string>
     <string name="enable_new_bottom_sheet">Nowy dolny panel</string>
-    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail.
-\n
+    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail. 
+\n 
 \nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji.</string>
     <string name="enable_new_bottom_sheet_explainer">Zastąp dolny panel nową przeprojektowaną wersją</string>
     <string name="new_bottomsheet">Nowy dolny panel</string>
@@ -440,7 +440,7 @@
     <string name="allow_darknets">Zezwól na DarkNet</string>
     <string name="amp2html_allow_darknets_explainer">Zezwalaj na uruchamianie Amp2Html dla darknetu (obsługiwane: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Zezwalaj na następujące przekierowania dla darknetów (obsługiwane: %s)</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie.
+    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie. 
 \nProszę zgłaszać błędy na <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discordzie</annotation>, lub poprzez <annotation url="mailto:1fexd@420blaze.it">e-mail</annotation>.</string>
     <string name="experiment">Doświadczenie</string>
     <string name="new_dev_bottom_sheet_explainer">Nie podoba Ci się nowy dolny panel? Kliknij, aby zgłosić błędy.</string>

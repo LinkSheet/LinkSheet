@@ -2,9 +2,9 @@
 <resources>
     <string name="hide_after_copying_explainer">Сакријте доњи лист након што се додирне дугме „Копирај URL“</string>
     <string name="import_dumped_preference">Увоз бачених преференца</string>
-    <string name="domain_selection_confirmation_subtitle">Желите ли заиста да подесите %s као преферирану апликацију за следеће домене\?</string>
+    <string name="domain_selection_confirmation_subtitle">Желите ли заиста да подесите %s као преферирану апликацију за следеће домене?</string>
     <string name="dismiss">Одбаци</string>
-    <string name="onboarding7_headline">Ентузијаста\?
+    <string name="onboarding7_headline">Ентузијаста?
 \nLinkSheet вас</string>
     <string name="enable_send_button">Омогући дугме „Дели са“</string>
     <string name="default_apps_subtitle">Префериране апликације су апликације које подесите да „Увек“ отварају одређене хостове</string>
@@ -48,7 +48,7 @@
     <string name="no_preferred_apps_set_yet">Ниједна апликација није постављена као преферирана.</string>
     <string name="disable_all">Онемогући све</string>
     <string name="always_show_package_name_explainer">Увек прикажите називе пакета уместо само назива апликација. Ово се односи на целу апликацију.</string>
-    <string name="domain_selection_confirmation_title">Изабрати домене\?</string>
+    <string name="domain_selection_confirmation_title">Изабрати домене?</string>
     <string name="manual_build">Ручно направљено и потписано од 1fexd</string>
     <string name="log_files">Прошле сесије</string>
     <string name="open_link_with_subtitle_2">LibkSheet је првобитно био заснован на OpenLinkWith-у</string>
@@ -533,4 +533,12 @@
     <string name="settings__subtitle_shortcuts">Подешавања подразумевананог прегледача, руковања линковима, повезаних апликација</string>
     <string name="settings__title_filter_apps">Филтрирање апликација</string>
     <string name="settings__title_select_apps">Избор апликација</string>
+    <string name="settings_verified_link_handlers__text_disabled">Руковање онемогућено</string>
+    <string name="settings_verified_link_handlers__text_user_apps">Корисничке апликације</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all">Прикажи све</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Омогућени руковаоци</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Омогућено</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Онемогућено</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Све</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Онемогућени руковаоци</string>
 </resources>

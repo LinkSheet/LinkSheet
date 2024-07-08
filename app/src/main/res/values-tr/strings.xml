@@ -525,4 +525,12 @@
     <string name="settings__title_filter_apps">Uygulamaları filtrele</string>
     <string name="settings__title_select_apps">Uygulama seçin</string>
     <string name="settings__title_shortcuts">Kısayollar</string>
+    <string name="settings_verified_link_handlers__text_disabled">Açma devre dışı bırakıldı</string>
+    <string name="settings_verified_link_handlers__text_user_apps">Kullanıcı uygulamaları</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all">Hepsini göster</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Hepsi</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Etkin açıcılar</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Etkin</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Devre dışı açıcılar</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Devre dışı</string>
 </resources>

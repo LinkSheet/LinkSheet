@@ -39,12 +39,12 @@
     <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>
     <string name="apps_which_can_open_links_explainer_2">LinkSheet\'in davranışına müdahale edebilecek tüm uygulamaları listeler</string>
     <string name="disable_all_toasts">Tostları devre dışı bırak</string>
-    <string name="disable_all_toasts_explainer">Tost mesajlarını asla gösterme</string>
+    <string name="disable_all_toasts_explainer">Tost mesajlarını gösterme</string>
     <string name="remove_all">Hepsini kaldır</string>
     <string name="back">Geri</string>
-    <string name="hide_after_copying_explainer">\"URL\'yi kopyala\" düğmesine basıldıktan sonra alt sayfayı gizle</string>
+    <string name="hide_after_copying_explainer">\"Bağlantıyı kopyala\" veya \"İndir\" gibi eylem düğmelerine dokunduktan sonra alt sayfayı otomatik olarak gizle</string>
     <string name="add_all">Hepsini ekle</string>
-    <string name="hide_after_copying">Kopyaladıktan sonra gizle</string>
+    <string name="hide_after_copying">Eylemden sonra otomatik olarak gizle</string>
     <string name="display_grid_layout">Izgara düzeni</string>
     <string name="app_browsers">Uygulamalar</string>
     <string name="bottom_sheet">Alt sayfa</string>
@@ -58,14 +58,14 @@
     <string name="about">Hakkında</string>
     <string name="about_explainer">Emeği geçenler, Lisans, Bağlantılar, Sürüm</string>
     <string name="credits">Krediler</string>
-    <string name="credits_explainer">Açık kaynak lisanslama</string>
+    <string name="credits_explainer">Teşekkürler, Lisanslama</string>
     <string name="version">LinkSheet Sürümü</string>
     <string name="license_apache_2">Apache Lisansı 2.0</string>
     <string name="seal">Seal</string>
     <string name="license_gpl_3">GNU Genel Kamu Lisansı v3.0</string>
     <string name="github">Github</string>
     <string name="donate_crypto">Crypto ile bağış yapın</string>
-    <string name="donate_subtitle">Bağış yapıp talep etmek istiyorsanız<b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle"><b>LinkSheet Pro</b>\'ya yükselt</string>
     <string name="paste">Yapıştır</string>
     <string name="error">Hata</string>
     <string name="checkmark">Onay işareti</string>
@@ -78,12 +78,12 @@
     <string name="set_as_browser_done">LinkSheet varsayılan tarayıcı olarak ayarlandı!</string>
     <string name="settings">Ayarlar</string>
     <string name="selected_browser_explainer">Hiçbir yerel uygulama tıklanan bağlantıyı işleyemezse bu tarayıcı otomatik olarak açılır</string>
-    <string name="bottom_sheet_explainer">Izgara düzeni, kullanıma göre sıralama, dokunma özelleştirme, URL barı</string>
+    <string name="bottom_sheet_explainer">Yapılandırma &amp; Özelleştirme</string>
     <string name="open_copied_link">Kopyalanan bağlantıyı aç</string>
     <string name="open_link_with">Bağlantıyı Şununla Aç</string>
     <string name="github_explainer">Kaynak kodu deposu</string>
-    <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler)</string>
-    <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Yönlendirmeleri takip etme</string>
+    <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler) \u0020</string>
+    <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>
     <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun gizlilikle ilgili<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">sorunları</annotation>olabilir</string>
     <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Gizlilik politikası</string>
@@ -110,8 +110,8 @@
     <string name="instance">Oluşum</string>
     <string name="add">Ekle</string>
     <string name="select_an_app">Bir uygulama seçin</string>
-    <string name="dont_show_filtered_item">\"Son seçilen uygulama\" bölümünü asla gösterme</string>
-    <string name="dont_show_filtered_item_explainer">Tıklanan sunucunun son kullanılan uygulamasını gösteren üst bölümü asla göstermez</string>
+    <string name="dont_show_filtered_item">\"Son seçilen uygulama\" bölümünü gösterme</string>
+    <string name="dont_show_filtered_item_explainer">Tıklanan sunucu için son kullanılan uygulamayı öneren üst bölümü göstermez</string>
     <string name="use_text_share_copy_buttons">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" için basit metin düğmeleri kullan</string>
     <string name="preview_url">URL\'yi önizle</string>
     <string name="download">İndir</string>
@@ -119,10 +119,10 @@
     <string name="downloader_url_mime_type">URL\'den mime türünü kullan</string>
     <string name="random_instance">Rastgele oluşum</string>
     <string name="app_name">LinkSheet</string>
-    <string name="always_disable_explainer">Uygulamanın ne kullanmak istediğine bakmaksızın uygulama içi tarayıcıyı her zaman devre dışı bırakılır</string>
+    <string name="always_disable_explainer">Uygulama içi tarayıcıyı bütün uygulamalar için devre dışı bırak</string>
     <string name="browser">Tarayıcı</string>
     <string name="browser_explainer">Tarayıcı modu, Uygulama içi tarayıcı</string>
-    <string name="disable_in_selected_explainer">Uygulamanın ne kullanmak istediğinden bağımsız olarak seçilen uygulamalarda uygulama içi tarayıcıyı devre dışı bırakır</string>
+    <string name="disable_in_selected_explainer">Uygulama içi tarayıcıyı seçilen uygulamalarda devre dışı bırak</string>
     <string name="use_unified_preferred_browser">Birleştirilmiş ayarları kullan</string>
     <string name="libredirect_via">%s aracılığıyla</string>
     <string name="ignore_libredirect">LibRedirect\'i yoksay</string>
@@ -165,20 +165,20 @@
     <string name="always_show_package_name_disclaimer">Bu anahtar gelecekteki bir sürümde farklı bir konuma taşınacaktır.</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
     <string name="in_app_browser_subtitle">Uygulama içi tarayıcı modunu ayarla</string>
-    <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulama karar versin</string>
+    <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulamalar karar verir</string>
     <string name="close">Kapat</string>
     <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API\'yi kullanarak yönlendirmeleri takip eder(<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
     <string name="redirect_resolve_type_local_cache">yerel önbellek</string>
     <string name="use_text_share_copy_buttons_explainer">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" başlıklı düğmeleri basit metin düğmeleriyle değiştirir</string>
     <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
-    <string name="use_app_settings">Uygulama ayarlarını kullan</string>
+    <string name="use_app_settings">Varsayılan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri olabilir</annotation></string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
     <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun 
 \n <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri olabilir</annotation></string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
-    <string name="always_disable">Her zaman devre dışı bırak</string>
-    <string name="disable_in_selected">Seçildiğinde devre dışı bırak</string>
+    <string name="always_disable">Zorla devre dışı bırak</string>
+    <string name="disable_in_selected">Zorla devre dışı bırak…</string>
     <string name="no_apps_which_can_handle_links_found">Bağlantıları işleyebilen hiçbir uygulama bulunamadı.</string>
     <string name="normal">Normal</string>
     <string name="enable_ignore_libredirect_button">\"LibRedirect\'i yoksay\" düğmesini etkinleştir</string>
@@ -238,13 +238,13 @@
     <string name="dev">Geliştirici</string>
     <string name="dev_explainer">Geliştirici ayarları</string>
     <string name="notifications">Bildirimler</string>
-    <string name="url_copied_toast">URL kopyalandı bildirimi</string>
+    <string name="url_copied_toast">URL kopyalandı</string>
     <string name="url_copied_toast_explainer">URL kopyalandığında bir bildirim göster</string>
     <string name="download_started_toast_explainer">Bir indirme başlatıldığında bildirim göster</string>
-    <string name="opening_with_app_toast">Bir uygulama otomatik olarak başlatıldığında bildirim göster</string>
-    <string name="resolve_via_toast">Bir URL çözümlendiğinde bildirim göster</string>
+    <string name="opening_with_app_toast">Uygulama otomatik olarak başlatıldı</string>
+    <string name="resolve_via_toast">Çözümleme başarılı</string>
     <string name="resolve_via_toast_explainer">Bir URL dış servis aracılığıyla çözümlendiğinde bildirim göster</string>
-    <string name="resolve_via_failed_toast">Çözümleme başarısız olduğunda bildirim göster</string>
+    <string name="resolve_via_failed_toast">Çözümleme başarısız</string>
     <string name="resolve_via_failed_toast_explainer">Dış kaynak aracılığıyla URL çözümlemesi başarısız olduğunda bildirim göster</string>
     <string name="fastforward_version">FastForward kuralları</string>
     <string name="opening_with_app_toast_explainer">Bir alan adı için varsayılan olarak ayarlanan bir uygulama başlatıldığında bildirim göster</string>
@@ -253,7 +253,7 @@
         <item quantity="other">%s dakika</item>
     </plurals>
     <string name="clear_urls_version">ClearURLs kuralları</string>
-    <string name="last_updated">Son güncelleme (UTC):</string>
+    <string name="last_updated"><b>Sürüm:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <plurals name="hours">
         <item quantity="one">%s saat</item>
         <item quantity="other">%s saat</item>
@@ -278,7 +278,7 @@
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet">Geliştirici alt sayfasını etkinleştir</string>
     <string name="enable_dev_bottom_sheet_explainer">Şu an hâlen geliştirilmekte olan en son alt sayfa sürümünü etkinleştir</string>
-    <string name="download_started_toast">İndirme başladı bildirimi</string>
+    <string name="download_started_toast">İndirme başladı</string>
     <string name="known_trackers">Bilinen izleyiciler</string>
     <string name="apps_which_can_open_links">Onaylanmış bağlantıları açanlar</string>
     <string name="request_private_browsing">Gizli</string>
@@ -533,4 +533,20 @@
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Etkin</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled">Devre dışı açıcılar</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Devre dışı</string>
+    <string name="settings_notifications__divider_toasts">Tostlar</string>
+    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d onaylı</string>
+    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d etkin</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d sunucu: %s</item>
+        <item quantity="other">%d sunucu: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d etkin sunucu</item>
+        <item quantity="other">%d etkin sunucu</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_none">%d devre dışı</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d onaylı sunucu</item>
+        <item quantity="other">%d onaylı sunucu</item>
+    </plurals>
 </resources>

@@ -541,7 +541,4 @@
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Desactivado</string>
     <string name="settings_verified_link_handlers__text_disabled">Manejo deshabilitado</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Todo</string>
-    <string name="declutter_url" translatable="false"></string>
-    <string name="settings_notifications__divider_toasts"></string>
-    <string name="declutter_url_explainer" translatable="false"></string>
 </resources>

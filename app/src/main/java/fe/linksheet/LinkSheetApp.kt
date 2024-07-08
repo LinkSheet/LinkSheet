@@ -2,12 +2,16 @@ package fe.linksheet
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.view.accessibility.AccessibilityNodeInfo
+import androidx.activity.ComponentActivity
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.navigation.NavArgsLazy
 import com.google.android.material.color.DynamicColors
+import com.google.gson.Gson
 import fe.gson.context.GlobalGsonContext
+import fe.gson.extension.writeJson
 import fe.gson.globalGsonModule
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
@@ -27,10 +31,10 @@ import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
+import fe.linksheet.module.okhttp.okHttpModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
@@ -42,11 +46,14 @@ import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
+import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.HttpUrlTypeAdapter
 import fe.linksheet.util.UriTypeAdapter
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -70,6 +77,9 @@ class LinkSheetApp : Application() {
 
         lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
         lifecycleObserver.attach()
+//        InMemoryDexClassLoader(
+//        Class.forName()
+//        View.MeasureSpec().getMo
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -93,9 +103,23 @@ class LinkSheetApp : Application() {
         }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
+//NavArgsLazy
+//        NavArgsLazy
+
+
+//        "test".substring()
+//        jdk.internal.math.FloatingDecimal
+//        KoinComponent()
+//
+//        KoinPlatformTools.defaultContext().startKoin(
+//
+//        )
+//        val x: ComponentCallbacks? = null
+//        x!!.getKoinScope()
 
         val koinApplication = startKoin {
             androidLogger()
+//            androidContext(this@LinkSheetApp)
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
             modules(
@@ -116,6 +140,8 @@ class LinkSheetApp : Application() {
                 repositoryModule,
                 viewModelModule,
                 requestModule,
+                okHttpModule,
+                unfurlerModule,
                 downloaderModule,
                 if (BuildType.current.allowDebug) analyticsModule else DebugLogAnalyticsClient.module,
                 statisticsModule,
@@ -123,6 +149,25 @@ class LinkSheetApp : Application() {
             )
         }
 
+
+
+        MutableSharedFlow<String>(replay = 0, extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+//        Unit
+//        AppCompatButton
+
+//        EmojiCompatConfigurationView
+
+//        kotlin.jvm.functions.Function2
+//        MutableCollection
+
+//        Charsets
+//        AccessibilityNodeInfo
+
+//        NavBackStackEntry()
+//        ViewGroupCompat
+//        AbstractSavedStateViewModelFactory
+
+        AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN
         lifecycleObserver.dispatchAppInitialized()
 
         if (BuildType.current.allowDebug) {

@@ -62,6 +62,7 @@ class ImprovedIntentResolver(
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
+    private val unfurler: Unfurler,
 ) : KoinComponent {
     private val logger by injectLogger<ImprovedIntentResolver>()
 
@@ -459,7 +460,6 @@ class ImprovedIntentResolver(
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
         private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
-        private val unfurler by lazy { Unfurler() }
     }
 
     private fun runUriModifiers(

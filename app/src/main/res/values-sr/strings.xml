@@ -63,7 +63,7 @@
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">Остало</string>
     <string name="enable_send_button_explainer">Приказује дугме у доњем листу које вам омогућава да делите URL с другим апликацијама као да сте га изабрали из менија „Дели са“</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> 
 \nлинк</annotation>.</string>
     <string name="get_started">Започни</string>
     <string name="donate_learn_more">Сазнај више</string>
@@ -227,7 +227,7 @@
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
     <string name="links">Линкови</string>
-    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати
+    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати 
 \n <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
     <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
@@ -314,7 +314,7 @@
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
-    <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате.
+    <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. 
 \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
     <string name="privacy">Приватност</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања. Подржани прегледачи: %s</string>
@@ -377,8 +377,8 @@
     <string name="enable_linksheet_compat_explainer">Мени се може наћи у подменију „Апликације“ и када је инсталиран, може да пресреће захтеве одређеним изворним апликацијама.</string>
     <string name="disclaimer_libredirect_unstable">Поред тога што је експериментална функција, LibRedirect се тренутно сматра веома нестабилним и можда уопште неће радити.</string>
     <string name="enable_new_bottom_sheet">Омогући нови доњи лист</string>
-    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла.
-\n
+    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла. 
+\n 
 \nМожете се вратити на стари доњи лист путем Подешавања -&gt; Напредно -&gt; Експерименталне функције.</string>
     <string name="enable_new_bottom_sheet_explainer">Користите прерађени доњи лист уместо старог</string>
     <string name="new_bottomsheet">Нови доњи лист</string>
@@ -442,7 +442,7 @@
     <string name="experiment">Експеримент</string>
     <string name="new_dev_bottom_sheet_explainer">Не свиђа вам се нови доњи лист? Додирните да бисте пријавили проблеме.</string>
     <string name="new_dev_bottom_sheet">Доњи лист</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Нови доњи лист се ближи завршетку функције. Посебно, прилагођавање додира још није доступно и биће примењено касније.
+    <string name="new_dev_bottom_sheet_feature_explainer">Нови доњи лист се ближи завршетку функције. Посебно, прилагођавање додира још није доступно и биће примењено касније. 
 \nПријавите грешке на <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub-у</annotation>,<annotation url="https://discord.gg/XndZet2pWF">Discord-у</annotation>, или путем <annotation url="mailto:1fexd@420blaze.it">имејла</annotation>.</string>
     <string name="information">Информације</string>
     <string name="resolve_embeds">Разреши уградње</string>
@@ -480,7 +480,7 @@
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
-    <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични
+    <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични 
 \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>.</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
     <string name="show_native_label">Прикажи изворну ознаку</string>

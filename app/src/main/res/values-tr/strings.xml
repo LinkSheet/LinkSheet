@@ -174,7 +174,7 @@
     <string name="use_app_settings">Uygulama ayarlarını kullan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri olabilir</annotation></string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun
+    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun 
 \n <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri olabilir</annotation></string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Her zaman devre dışı bırak</string>
@@ -403,7 +403,7 @@
     <string name="experiment">Deney</string>
     <string name="new_dev_bottom_sheet_explainer">Yeni alt sayfayı beğenmediniz mi? Sorun bildirmek için dokunun.</string>
     <string name="new_dev_bottom_sheet">Alt sayfa</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Yeni alt sayfa, özelliklerin tamamlanmasına yaklaşıyor.Önemli olarak, dokunma özelleştirmesi henüz kullanılabilir değil ve daha sonra yapılacak.
+    <string name="new_dev_bottom_sheet_feature_explainer">Yeni alt sayfa, özelliklerin tamamlanmasına yaklaşıyor.Önemli olarak, dokunma özelleştirmesi henüz kullanılabilir değil ve daha sonra yapılacak. 
 \nHataları lütfen <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub\'da</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord\'da</annotation> veya <annotation url="mailto:1fexd@420blaze.it">Email</annotation> aracılığıyla bildirin.</string>
     <string name="information">Bilgi</string>
     <string name="resolve_embeds">Yerleştirmeleri çözümle</string>
@@ -431,8 +431,8 @@
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
     <string name="enable_new_bottom_sheet_explainer">Eski alt sayfa yerine yeniden tasarlanmış olanı kullan</string>
     <string name="new_bottomsheet">Yeni alt sayfa</string>
-    <string name="new_bottomsheet_explainer">LinkSheet\'in bu sürümü, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> sayesinde yeni bir alt sayfa barındırır. Lütfen Discord, GitHub veya email aracılığıyla geri bildirim gönderin.
-\n
+    <string name="new_bottomsheet_explainer">LinkSheet\'in bu sürümü, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> sayesinde yeni bir alt sayfa barındırır. Lütfen Discord, GitHub veya email aracılığıyla geri bildirim gönderin. 
+\n 
 \nAyarlar -&gt; Gelişmiş -&gt; Özellik işaretlerinden eski alt sayfaya dönebilirsiniz.</string>
     <string name="onboarding_0_title">LinkSheet\'e
 \nhoş geldiniz</string>

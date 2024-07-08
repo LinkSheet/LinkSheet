@@ -303,7 +303,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">¡Ven a chatear a nuestro servidor Discord!</string>
     <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.
+    <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación. 
 \nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas. \u0020</string>
     <string name="branch">Rama</string>
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
@@ -382,8 +382,8 @@
     <string name="shizuku_manager_start_failed">¡No se ha podido iniciar Shizuku Manager, por favor, inícielo manualmente!</string>
     <string name="include_throwable">Incluir registros de colisiones (recomendado, pero no se puede redactar)</string>
     <string name="resolve_via_toast_explainer">Mostrar un mensaje emergente cuando una URL se resuelve a través de un servicio externo</string>
-    <string name="new_bottomsheet_explainer">¡Esta versión de LinkSheet incluye una nueva hoja inferior gracias a <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Por favor, proporcione retroalimentación en Discord, Github o por correo electrónico.
-\n
+    <string name="new_bottomsheet_explainer">¡Esta versión de LinkSheet incluye una nueva hoja inferior gracias a <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Por favor, proporcione retroalimentación en Discord, Github o por correo electrónico. 
+\n 
 \nPuede volver a la antigua hoja inferior a través de Configuración -&gt; Avanzado -&gt; Banderas de características. \u0020</string>
     <string name="follow_redirects_short">Redirecciona</string>
     <string name="online_services">Servicios por Internet</string>
@@ -443,7 +443,7 @@
     <string name="urlbar_settings">Barra de direcciones</string>
     <string name="new_dev_bottom_sheet_explainer">¿No te gusta la nueva hoja inferior? Pulse para informar de los problemas.</string>
     <string name="new_dev_bottom_sheet">Hoja inferior</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante.
+    <string name="new_dev_bottom_sheet_feature_explainer">La nueva hoja inferior está a punto de completarse. \u0020En particular, la personalización del grifo aún no está disponible y se implementará más adelante. 
 \nPor favor, informe de errores en <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, o a través de <annotation url="mailto:1fexd@420blaze.it">correo electrónico</annotation>. \u0020</string>
     <string name="information">Información</string>
     <string name="resolve_embeds">Resolver incorporaciones</string>

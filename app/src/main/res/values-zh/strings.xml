@@ -297,5 +297,5 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku 模式已激活，点击一个应用以切换其自动链接处理功能。长按以打开其“默认打开”设置菜单。</string>
     <string name="done">完成</string>
     <string name="redact_log">匿名化日志（推荐启用，禁用此功能可能会泄漏软件包名称与主机名）</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">在底栏中启用较多按钮目前可能造成按钮被截断或故障。</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">在底栏中启用过多按钮目前可能造成按钮被截断或错乱。</string>
 </resources>

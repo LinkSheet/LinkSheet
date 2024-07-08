@@ -314,7 +314,7 @@
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
-    <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате.
+    <string name="donate_card_subtitle"> Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. 
 \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
     <string name="privacy">Приватност</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања. Подржани прегледачи: %s</string>
@@ -377,8 +377,8 @@
     <string name="enable_linksheet_compat_explainer">Мени се може наћи у подменију „Апликације“ и када је инсталиран, може да пресреће захтеве одређеним изворним апликацијама.</string>
     <string name="disclaimer_libredirect_unstable">Поред тога што је експериментална функција, LibRedirect се тренутно сматра веома нестабилним и можда уопште неће радити.</string>
     <string name="enable_new_bottom_sheet">Омогући нови доњи лист</string>
-    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла.
-\n
+    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла. 
+\n 
 \nМожете се вратити на стари доњи лист путем Подешавања -&gt; Напредно -&gt; Експерименталне функције.</string>
     <string name="enable_new_bottom_sheet_explainer">Користите прерађени доњи лист уместо старог</string>
     <string name="new_bottomsheet">Нови доњи лист</string>
@@ -442,7 +442,7 @@
     <string name="experiment">Експеримент</string>
     <string name="new_dev_bottom_sheet_explainer">Не свиђа вам се нови доњи лист? Додирните да бисте пријавили проблеме.</string>
     <string name="new_dev_bottom_sheet">Доњи лист</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Нови доњи лист се ближи завршетку функције. Посебно, прилагођавање додира још није доступно и биће примењено касније.
+    <string name="new_dev_bottom_sheet_feature_explainer">Нови доњи лист се ближи завршетку функције. Посебно, прилагођавање додира још није доступно и биће примењено касније. 
 \nПријавите грешке на <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub-у</annotation>,<annotation url="https://discord.gg/XndZet2pWF">Discord-у</annotation>, или путем <annotation url="mailto:1fexd@420blaze.it">имејла</annotation>.</string>
     <string name="information">Информације</string>
     <string name="resolve_embeds">Разреши уградње</string>
@@ -541,4 +541,102 @@
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Онемогућено</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Све</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled">Онемогућени руковаоци</string>
+    <string name="settings_notifications__divider_toasts"></string>
+    <string name="declutter_url" translatable="false"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one"></item>
+        <item quantity="few"></item>
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_credits__app_name_seal"></string>
+    <string name="settings_about__divider_external_versions"></string>
+    <string name="export_log_dialog__subtitle_include_settings"></string>
+    <string name="settings_debug_log_viewer__title_log_captured_at"></string>
+    <string name="settings_links_amp2html__title_amp2html"></string>
+    <string name="settings_main_setup_success__button_connected_apps"></string>
+    <string name="settings_main_setup_success__button_set_default_browser"></string>
+    <string name="settings_main_setup_success__subtitle_quick_settings"></string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info"></string>
+    <string name="settings_main_setup_success__button_link_handlers"></string>
+    <string name="settings_main_setup_success__button_change_browser"></string>
+    <string name="settings_main_news__button_read_more"></string>
+    <string name="resolve_event__sorting_apps"></string>
+    <string name="resolve_event__generating_preview"></string>
+    <string name="resolve_event__unamping_link"></string>
+    <string name="title_activity_drag_test"></string>
+    <string name="settings_app_config__title_configure_app_behavior"></string>
+    <string name="settings_app_config__title_native_apps"></string>
+    <string name="settings_app_config__description_browsers"></string>
+    <string name="settings_app_config__title_browsers"></string>
+    <string name="settings_app_config__button_add_item"></string>
+    <string name="settings_app_config__title_preferred_browser"></string>
+    <string name="settings_app_config_rules__title_rules"></string>
+    <string name="settings_new_rule__title_new_rule"></string>
+    <string name="settings_app_config_rules__btn_new_rule"></string>
+    <string name="settings_app_config_rules__title_default_rule"></string>
+    <string name="settings_app_config_rules__subtitle_default_rule"></string>
+    <string name="settings_edit_rule__title_edit_rule"></string>
+    <string name="export_log_dialog__subtitle_include_throwable"></string>
+    <string name="resolve_event__resolving_redirects"></string>
+    <string name="export_log_dialog__title_share_logs"></string>
+    <string name="settings_links_follow_redirects__title_skip_browser"></string>
+    <string name="delete_log_dialog__subtitle_delete_info"></string>
+    <string name="settings_credits__app_credit_reason_seal"></string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info"></string>
+    <string name="declutter_url_explainer" translatable="false"></string>
+    <string name="export_log_dialog__title_include_fingerprint"></string>
+    <string name="export_log_dialog__subtitle_redact_log"></string>
+    <string name="export_log_dialog__subtitle_include_fingerprint"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one"></item>
+        <item quantity="few"></item>
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_main_setup_success__title_linksheet_setup_success"></string>
+    <string name="settings_main_news__text_ui_overhaul"></string>
+    <string name="resolve_event__running_libredirect"></string>
+    <string name="settings_verified_link_handlers__text_app_host_info_verified"></string>
+    <string name="delete_log_dialog__title_delete_log"></string>
+    <string name="settings_links_amp2html__title_skip_browser"></string>
+    <string name="resolve_event__loading_preferred_apps"></string>
+    <string name="resolve_event__initialized"></string>
+    <string name="resolve_event__querying_browser_list"></string>
+    <string name="settings_main_news__text_header"></string>
+    <string name="resolve_event__checking_browsers"></string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job"></string>
+    <string name="settings_links_downloader__title_downloader"></string>
+    <string name="settings_links_amp2html__text_skip_browser"></string>
+    <string name="resolve_event__applying_link_modifiers"></string>
+    <string name="generic__button_text_delete"></string>
+    <string name="resolve_event__download_check"></string>
+    <string name="settings_app_config__description_native_apps"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one"></item>
+        <item quantity="few"></item>
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true"></string>
+    <string name="generic__button_text_cancel"></string>
+    <string name="settings_verified_link_handlers__text_app_host_info_selected"></string>
+    <string name="settings_links_follow_redirects__text_skip_browser"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one"></item>
+        <item quantity="few"></item>
+        <item quantity="other"></item>
+    </plurals>
+    <string name="export_log_dialog__text_log_info"></string>
+    <string name="export_log_dialog__title_redact_log"></string>
+    <string name="settings_main_news__title_ui_overhaul"></string>
+    <string name="generic__button_text_copy_clipboard"></string>
+    <string name="settings_app_config_rules__text_custom_rules"></string>
+    <string name="export_log_dialog__text_log_privacy"></string>
+    <string name="settings_app_config__description_preferred_browser"></string>
+    <string name="crash_viewer__subtitle_app_crashed"></string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false"></string>
+    <string name="export_log_dialog__title_include_throwable"></string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure"></string>
+    <string name="export_log_dialog__title_include_settings"></string>
+    <string name="settings_credits__app_credit_reason_gmsflags"></string>
+    <string name="settings_credits__app_name_gmsflags"></string>
+    <string name="settings_verified_link_handlers__text_app_host_info_none"></string>
 </resources>

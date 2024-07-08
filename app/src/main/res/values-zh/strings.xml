@@ -218,8 +218,7 @@
     <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>
     <string name="running_unofficial_build">非官方构建</string>
-    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。
-\n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。</string>
+    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。 \n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。</string>
     <string name="privacy">隐私</string>
     <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接。支持的浏览器：%s</string>
     <string name="import_settings_override_preferences">这将会覆盖所有已存在的设置，确认继续？</string>
@@ -267,8 +266,7 @@
     <string name="link_handle_failed_text_field_label">询问</string>
     <string name="telemetry_level_minimal_description">已安装版本指标</string>
     <string name="url_copied_toast">已复制链接</string>
-    <string name="onboarding_0_title">欢迎使用
-\nLinkSheet</string>
+    <string name="onboarding_0_title">欢迎使用 \nLinkSheet</string>
     <string name="show_linksheet_referrer">显示 LinkSheet 引用来源</string>
     <string name="open_link_with_subtitle_2">LinkSheet 起初基于 OpenLinkWith</string>
     <string name="nightly_experiments_card">开发实验</string>

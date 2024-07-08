@@ -630,4 +630,7 @@
     <string name="settings_app_config_rules__text_custom_rules">Reglas personalizadas</string>
     <string name="delete_log_dialog__title_delete_log">¿Eliminar sesión?</string>
     <string name="delete_log_dialog__subtitle_delete_info">¿Quieres eliminar este registro de sesión? ¡Esto no puede deshacerse!</string>
+    <string name="settings_main_setup_success__button_link_handlers">Gestores de enlaces</string>
+    <string name="resolve_event__running_libredirect">Intentando encontrar el frontend de FOSS</string>
+    <string name="settings_app_config__button_add_item">Añadir artículo</string>
 </resources>

@@ -536,7 +536,4 @@
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Etkin</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled">Devre dışı açıcılar</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Devre dışı</string>
-    <string name="declutter_url_explainer" translatable="false"></string>
-    <string name="settings_notifications__divider_toasts"></string>
-    <string name="declutter_url" translatable="false"></string>
 </resources>

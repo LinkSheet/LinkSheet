@@ -298,4 +298,5 @@
     <string name="done">完成</string>
     <string name="redact_log">匿名化日志（推荐启用，禁用此功能可能会泄漏软件包名称与主机名）</string>
     <string name="disclaimer_bottom_sheet_many_buttons">在底栏中启用过多按钮目前可能造成按钮被截断或错乱。</string>
+    <string name="use_unified_preferred_browser_explainer">启用本项时，下述设置将会同时被应用于正常链接和应用内链接处理。禁用本项时，使用下面的按钮在正常链接和应用内链接处理模式中切换。</string>
 </resources>

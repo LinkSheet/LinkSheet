@@ -58,7 +58,7 @@
     <string name="whitelisted_explainer">仅显示白名单浏览器</string>
     <string name="save">保存</string>
     <string name="whitelisted_browsers">白名单浏览器</string>
-    <string name="bottom_sheet_explainer">按使用情况排序，启用复制按钮，启用分享按钮等。</string>
+    <string name="bottom_sheet_explainer">配置与自定义</string>
     <string name="about">关于</string>
     <string name="about_explainer">关于此应用，许可证</string>
     <string name="credits">致谢名单</string>
@@ -79,12 +79,12 @@
     <string name="links">链接</string>
     <string name="links_explainer">链接处理相关设置</string>
     <string name="use_clear_urls">使用 ClearURLs</string>
-    <string name="use_clear_urls_explainer">使用实验性 <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 集成（清除链接中的跟踪参数）</string>
+    <string name="use_clear_urls_explainer">使用实验性 <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 集成（清除链接中的跟踪参数） \u0020</string>
     <string name="follow_redirects">跟踪重定向</string>
-    <string name="follow_redirects_explainer">在打开底栏之前自动跟踪所有重定向。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">隐私方面的影响</annotation></string>
+    <string name="follow_redirects_explainer">在打开底栏前自动跟踪所有重定向。这可能带来<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">隐私方面的影响</annotation> \u0020</string>
     <string name="loading_link">加载链接中…</string>
     <string name="follow_redirects_external_service">通过外部服务进行跟踪重定向</string>
-    <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 的 API 进行重定向（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）</string>
+    <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 的 API 进行重定向（<annotation url="https://supabase.com/privacy">隐私政策</annotation>） \u0020</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">隐私政策</string>
     <string name="follow_only_known_trackers">仅跟踪已知跟踪器</string>
     <string name="theme">主题</string>
@@ -94,7 +94,7 @@
     <string name="dark">深色</string>
     <string name="amoled_black">黑色</string>
     <string name="fastfoward_rules">使用 FastForward 规则</string>
-    <string name="fastfoward_rules_explainer">使用实验性 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 规则集成（通过从链接中提取重定向来绕过某些链接的重定向）</string>
+    <string name="fastfoward_rules_explainer">使用实验性 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 规则集成（通过从链接中提取重定向来绕过某些主机的重定向） \u0020</string>
     <string name="follow_redirects_local_cache">启用本地重定向缓存</string>
     <string name="follow_redirects_local_cache_explainer">本地缓存重定向结果</string>
     <string name="redirect_resolve_type_local_cache">本地缓存</string>
@@ -102,7 +102,7 @@
     <string name="redirect_resolve_type_local">本地解析器</string>
     <string name="redirect_resolve_type_not_resolved">无</string>
     <string name="enable_libredirect">启用 LibRedirect</string>
-    <string name="enable_libredirect_explainer">使用实验性 <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> 集成将链接重定向到隐私友好的前端</string>
+    <string name="enable_libredirect_explainer">使用实验性 <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> 集成，将链接重定向到隐私友好的前端 \u0020</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">前端</string>
@@ -119,7 +119,7 @@
     <string name="download">下载</string>
     <string name="linksheet_download">LinkSheet 下载</string>
     <string name="enable_downloader">启用下载器</string>
-    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加一个“下载”按钮。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">隐私方面的影响</annotation></string>
+    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">隐私方面的影响</annotation> \u0020</string>
     <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
     <string name="random_instance">随机实例</string>
@@ -132,7 +132,7 @@
     <string name="disable_in_selected_explainer">无论选中的应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
     <string name="browser">浏览器</string>
     <string name="browser_explainer">浏览器模式和应用内置浏览器设置</string>
-    <string name="disable_in_selected">不使用所选应用内置的浏览器</string>
+    <string name="disable_in_selected">强制禁用…</string>
     <string name="domain_selection_confirmation_subtitle">是否确实要将 %s 设置为以下域名的首选应用程序？</string>
     <string name="dismiss">取消</string>
     <string name="amp2html_local_cache">启用本地Amp2Html缓存</string>
@@ -164,7 +164,7 @@
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">杂项</string>
     <string name="dev_explainer">开发者设置</string>
-    <string name="log_privacy">若要了解更多日志隐私有关信息，访问<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">该链接</annotation>。</string>
+    <string name="log_privacy">若要了解日志隐私相关信息，请访问<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">该链接</annotation>。 \u0020</string>
     <string name="get_started">入门</string>
     <string name="donate_learn_more">了解更多</string>
     <string name="enable_ignore_libredirect_button">启用“忽略LibRedirect”按钮</string>
@@ -206,7 +206,7 @@
     <string name="github_pipeline_build">由Github workflow构建并签名</string>
     <string name="import_settings">导入设置</string>
     <string name="usage_stats_sorting_explainer">在排序算法中引入安卓系统应用使用情况数据。第一次启用时需要请求权限。</string>
-    <string name="amp2html_external_service_explainer">尝试通过在supabase.com（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）部署的API获取非AMP页面</string>
+    <string name="amp2html_external_service_explainer">尝试使用在 supabase.com（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）部署的 API 获取非 AMP 页面 \u0020</string>
     <string name="shizuku_integration">Shizuku集成</string>
     <string name="debug">调试</string>
     <string name="onboarding1_headline">欢迎使用</string>
@@ -230,7 +230,7 @@
     <string name="export_mode">导出模式</string>
     <string name="app_log">应用日志</string>
     <string name="copy_version_information">复制版本信息</string>
-    <string name="shizuku_not_running_explainer">Shizuku未在运行。请点击此处打开Shizuku，并按照指示将其启动</string>
+    <string name="shizuku_not_running_explainer">Shizuku 未在运行。请点击此处打开 Shizuku，并按照指示将其启动。</string>
     <string name="dev">开发者</string>
     <string name="request_private_browsing">隐私</string>
     <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
@@ -239,7 +239,7 @@
     <string name="instance_not_available_anymore">实例已经不再可用！</string>
     <string name="onboarding2_highlight">你的</string>
     <string name="amp2html_builtin_cache_explainer">使用内置缓存（使用从外部服务导出的数据库）</string>
-    <string name="shizuku_integration_not_setup_explainer">虽然 LinkSheet 可在没有Shizuku的情况下工作，但仍然建议使用 Shizuku。点击此处安装Shizuku</string>
+    <string name="shizuku_integration_not_setup_explainer">LinkSheet 可在不使用 Shizuku 的情况下工作，但仍然建议使用 Shizuku。点击此处安装。</string>
     <string name="export_import_settings_explainer">导出当前设置或导入以前导出的设置</string>
     <plurals name="minutes">
         <item quantity="other">%s 分钟</item>
@@ -261,7 +261,7 @@
     <string name="compat_installed">已安装 LinkSheetCompat</string>
     <string name="enable_ignore_libredirect_button_explainer">如果链接已通过LibRedirect重定向，则在底栏中显示一个按钮，用以打开原始链接</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet 检测到至少一个自称是浏览器的应用。LinkSheet 的列表可能不完整。如果您认为这是一个错误，请在 Github 上提交issue。</string>
-    <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">隐私方面的影响</annotation></string>
+    <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">隐私方面的影响</annotation> \u0020</string>
     <string name="none_explainer">仅列出原生应用，去除所有浏览器。如果只存在一个原生应用，则会自动用其打开。如果没有原生应用，则列出所有浏览器应用。</string>
     <string name="donate">捐赠</string>
     <string name="debug_explainer">查看应用日志</string>
@@ -282,12 +282,12 @@
     <string name="export_explainer">将当前应用设置导出到文件</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">至少已安装一个浏览器</string>
-    <string name="shizuku_integration_no_permission_explainer">点击此处请求Shizuku权限</string>
+    <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet“恢复”了用户在Android &lt;12上点击链接时出现的“url-app-chooser”（如果安装了多个链接处理应用）</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>
     <string name="running_unofficial_build">非官方构建</string>
-    <string name="donate_card_subtitle"> 如果您喜欢 LinkSheet，请考虑在 Github 上Star和/或捐款。 \u0020
-\n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有独家功能。</string>
+    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。
+\n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。 \u0020</string>
     <string name="privacy">隐私</string>
     <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接。支持的浏览器：%s</string>
     <string name="import_settings_override_preferences">这将会覆盖所有已存在的设置，确认继续？</string>

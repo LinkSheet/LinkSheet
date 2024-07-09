@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 11,
-    "identityHash": "aae7ecef7816cca48ff5e2c3e24a222e",
+    "version": 12,
+    "identityHash": "fdc7b6d7c2d03e50fe430e9e993f7c2c",
     "entities": [
       {
         "tableName": "openwith",
@@ -23,14 +23,12 @@
           {
             "fieldPath": "_packageName",
             "columnName": "packageName",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "_component",
             "columnName": "component",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "alwaysPreferred",
@@ -55,8 +53,7 @@
             "orders": [],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_openwith_host` ON `${TABLE_NAME}` (`host`)"
           }
-        ],
-        "foreignKeys": []
+        ]
       },
       {
         "tableName": "app_selection_history",
@@ -104,8 +101,7 @@
             "orders": [],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_app_selection_history_host_lastUsed` ON `${TABLE_NAME}` (`host`, `lastUsed`)"
           }
-        ],
-        "foreignKeys": []
+        ]
       },
       {
         "tableName": "whitelisted_browser",
@@ -140,8 +136,7 @@
             "orders": [],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_whitelisted_browser_packageName` ON `${TABLE_NAME}` (`packageName`)"
           }
-        ],
-        "foreignKeys": []
+        ]
       },
       {
         "tableName": "whitelisted_in_app_browser",
@@ -176,8 +171,7 @@
             "orders": [],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_whitelisted_in_app_browser_packageName` ON `${TABLE_NAME}` (`packageName`)"
           }
-        ],
-        "foreignKeys": []
+        ]
       },
       {
         "tableName": "resolved_redirect",
@@ -202,9 +196,7 @@
             "shortUrl",
             "resolvedUrl"
           ]
-        },
-        "indices": [],
-        "foreignKeys": []
+        }
       },
       {
         "tableName": "lib_redirect_default",
@@ -234,9 +226,7 @@
           "columnNames": [
             "serviceKey"
           ]
-        },
-        "indices": [],
-        "foreignKeys": []
+        }
       },
       {
         "tableName": "lib_redirect_service_state",
@@ -260,9 +250,7 @@
           "columnNames": [
             "serviceKey"
           ]
-        },
-        "indices": [],
-        "foreignKeys": []
+        }
       },
       {
         "tableName": "disable_in_app_browser_in_selected",
@@ -297,12 +285,11 @@
             "orders": [],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_disable_in_app_browser_in_selected_packageName` ON `${TABLE_NAME}` (`packageName`)"
           }
-        ],
-        "foreignKeys": []
+        ]
       },
       {
         "tableName": "amp2html_mapping",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ampUrl` TEXT NOT NULL, `canonicalUrl` TEXT NOT NULL, PRIMARY KEY(`ampUrl`, `canonicalUrl`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ampUrl` TEXT NOT NULL, `canonicalUrl` TEXT NOT NULL, `isCacheHit` INTEGER NOT NULL DEFAULT 'true', PRIMARY KEY(`ampUrl`, `canonicalUrl`))",
         "fields": [
           {
             "fieldPath": "ampUrl",
@@ -315,6 +302,13 @@
             "columnName": "canonicalUrl",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "isCacheHit",
+            "columnName": "isCacheHit",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "'true'"
           }
         ],
         "primaryKey": {
@@ -323,15 +317,12 @@
             "ampUrl",
             "canonicalUrl"
           ]
-        },
-        "indices": [],
-        "foreignKeys": []
+        }
       }
     ],
-    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aae7ecef7816cca48ff5e2c3e24a222e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fdc7b6d7c2d03e50fe430e9e993f7c2c')"
     ]
   }
 }

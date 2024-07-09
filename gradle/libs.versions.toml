@@ -35,6 +35,9 @@ linkSheetInterConnect = "2.3.2"
 app-cash-zipline = "1.13.0"
 
 androidx-test-ext-junit = "1.2.0-beta01"
+##                   ⬆ = "1.2.0-rc01"
+##                   ⬆ = "1.2.0"
+##                   ⬆ = "1.2.1"
 reorderable = "2.1.1"
 
 [libraries]
@@ -49,13 +52,6 @@ kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", vers
 gson = "com.google.code.gson:gson:_"
 
 com-github-1fexd-android-span-helper-compose-material3 = "com.github.1fexd.android-span-helper:compose-material3:_"
-com-gitlab-grrfe-httpkt-core = "com.gitlab.grrfe.httpkt:core:_"
-
-ext-gson = "com.gitlab.grrfe.httpkt:ext-gson:_"
-
-gson-ext = "com.gitlab.grrfe:gson-ext:_"
-
-kotlin-ext = "com.gitlab.grrfe:kotlin-ext:_"
 
 clearurlkt = "com.github.1fexd:clearurlkt:_"
 
@@ -110,10 +106,6 @@ embed-resolve = "com.github.1fexd:embed-resolve:_"
 ipaddress = "com.github.seancfoley:ipaddress:_"
 junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-ext-junit" }
 
-signifykt = "com.gitlab.grrfe.bundled-dependencies:signifykt:_"
-
-com-gitlab-grrfe-bundled-dependencies-gson-ext = "com.gitlab.grrfe.bundled-dependencies:gson-ext:_"
-
 unfurl = "me.saket.unfurl:unfurl:_"
 
 unfurl-social = "me.saket.unfurl:unfurl-social:_"
@@ -133,8 +125,6 @@ zipline-loader-android = { group = "app.cash.zipline", name = "zipline-loader-an
 kotlin-parcelize-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-runtime", version.ref = "kotlin" }
 
 linksheetinterconnect = "com.github.1fexd:LinkSheetInterConnect:_"
-
-com-gitlab-grrfe-gson-ext = "com.gitlab.grrfe:gson-ext:_"
 
 com-github-1fexd-android-pref-helper-core = "com.github.1fexd.android-pref-helper:core:_"
 

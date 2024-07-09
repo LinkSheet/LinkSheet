@@ -37,7 +37,7 @@ val databaseModule = module {
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class
     ],
-    version = 11,
+    version = 12,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -48,7 +48,7 @@ val databaseModule = module {
         AutoMigration(from = 8, to = 9),
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
-
+        AutoMigration(from = 11, to = 12),
     ],
     exportSchema = true
 )

@@ -217,6 +217,12 @@ dependencies {
     implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
 
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.14"))
+    //noinspection UseTomlInstead
+    implementation("com.squareup.okhttp3:okhttp-android")
+    //noinspection UseTomlInstead
+    implementation("com.squareup.okhttp3:okhttp-coroutines")
+
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
@@ -260,14 +266,12 @@ dependencies {
 
     implementation(libs.ipaddress)
     implementation(libs.placeholder.material3)
-
-    implementation(libs.signifykt)
-    implementation(libs.gson)
-
     implementation(libs.nanoid)
 
     implementation(LinkSheet.flavors)
     implementation(LinkSheet.interconnect)
+
+    implementation(platform("com.github.1fexd:super:_"))
 
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.gson)
@@ -276,6 +280,7 @@ dependencies {
     implementation(Grrfe.processLauncher)
     implementation(_1fexd.uriParser)
     implementation(_1fexd.clearUrl)
+    implementation(_1fexd.signify)
     implementation(_1fexd.fastForward)
     implementation(_1fexd.libredirectkt)
     implementation(_1fexd.mimeType)

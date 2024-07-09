@@ -45,6 +45,8 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
     val amp2html = DependencyNotation(group = group, name = "amp2htmlkt")
     val stringBuilder = DependencyNotation(group = group, name = "stringbuilder-util-kt")
     val embedResolve = DependencyNotation(group = group, name = "embed-resolve")
+    val signify = DependencyNotation(group = group, name = "signifykt")
+
 }
 
 object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {

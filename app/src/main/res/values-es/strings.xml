@@ -633,4 +633,5 @@
     <string name="settings_main_setup_success__button_link_handlers">Gestores de enlaces</string>
     <string name="resolve_event__running_libredirect">Intentando encontrar el frontend de FOSS</string>
     <string name="settings_app_config__button_add_item">Añadir artículo</string>
+    <string name="title_activity_drag_test">DragTestActivity</string>
 </resources>

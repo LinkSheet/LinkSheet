@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hide_after_copying_explainer">Ocultar el menú después de pulsar el botón \"Copiar enlace\"</string>
+    <string name="hide_after_copying_explainer">Ocultar el menú automáticamente después de pulsar un botón de acción como \"Copiar enlace\" o \"Descargar\"</string>
     <string name="import_dumped_preference">Importar preferencias desechadas</string>
     <string name="domain_selection_confirmation_subtitle">¿Está seguro de que desea configurar %s como la aplicación predeterminada para los siguientes dominios?</string>
     <string name="onboarding7_headline">Emocionado?
@@ -22,7 +22,7 @@
     <string name="browser_explainer">Modo navegador, navegador en la aplicación</string>
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
-    <string name="use_clear_urls_explainer">Utilice la integración experimental <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL)</string>
+    <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL) \u0020</string>
     <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
     <string name="always_disable">Desactivar siempre</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
@@ -38,7 +38,7 @@
     <string name="open_with_app">Abrir con %s</string>
     <string name="set_as_browser_done">¡LinkSheet ha sido establecido como tu navegador predeterminado!</string>
     <string name="whitelisted_explainer">Mostrar solo los navegadores en la lista blanca</string>
-    <string name="use_app_settings">Usar los ajustes de la aplicación</string>
+    <string name="use_app_settings">Predeterminado</string>
     <string name="no_preferred_apps_set_yet">Aún no se ha establecido ninguna aplicación como predeterminada.</string>
     <string name="disable_all">Desactivar todo</string>
     <string name="always_show_package_name_explainer">Mostrar siempre los nombres de los paquetes en lugar de solo los nombres de las aplicaciones. Esto se aplica a toda la aplicación.</string>
@@ -62,7 +62,7 @@
     <string name="enable_ignore_libredirect_button">Activar el botón \"Ignorar LibRedirect\"</string>
     <string name="pretend_to_be_app_explainer_2">Algunas aplicaciones como Google Chrome buscan explícitamente una aplicación nativa para abrir, por ejemplo, un enlace de Youtube cuando se toca en los resultados de búsqueda. LinkSheetCompat pretende ser una aplicación nativa para dominios compatibles y luego reenvía la solicitud a LinkSheet.</string>
     <string name="privacy_settings_explainer">Privacidad del referente, telemetría</string>
-    <string name="dont_show_filtered_item">No mostrar nunca la sección \"última aplicación seleccionada\"</string>
+    <string name="dont_show_filtered_item">No mostrar la sección \"última aplicación seleccionada\"</string>
     <string name="follow_redirects_local_cache_explainer">Almacenar en la caché el resultado de las redirecciones locales</string>
     <string name="use_app_settings_explainer">Dejar que la aplicación decida si el Navegador en aplicación debería ser usado</string>
     <string name="display_grid_layout_explainer">Mostrar una cuadrícula en lugar de una lista en la hoja inferior</string>
@@ -104,7 +104,7 @@
     <string name="none">Ninguno</string>
     <string name="onboarding7_highlight">cubierto</string>
     <string name="export">Exportar</string>
-    <string name="hide_after_copying">Ocultar después de copiar</string>
+    <string name="hide_after_copying">Ocultar automáticamente después de una acción</string>
     <string name="follow_redirects">Seguir redirecciones</string>
     <string name="redirect_resolve_type_local">solucionador local</string>
     <string name="theme">Tema</string>
@@ -113,7 +113,7 @@
     <string name="whitelisted_browsers">Navegadores en la lista blanca</string>
     <string name="amoled_black">Oscuro Amoled</string>
     <string name="export_log">Exportar registro</string>
-    <string name="bottom_sheet_explainer">Diseño de cuadrícula, ordenar por uso, personalización del toque, barra de URL</string>
+    <string name="bottom_sheet_explainer">Configuración y personalización</string>
     <string name="onboarding6_highlight">preferencias</string>
     <string name="shizuku_explainer">Shizuku permite a LinkSheet interactuar con las APIs del sistema directamente</string>
     <string name="onboarding6_headline">Establece tus</string>
@@ -123,7 +123,7 @@
     <string name="frontend">Interfaz</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="finish">Termina</string>
-    <string name="donate_subtitle">Si desea donar y reclamar <b>LinkSheet Pro</b> \u0020</string>
+    <string name="donate_subtitle">Actualiza a <b>LinkSheet Pro</b></string>
     <string name="advanced">Avanzado</string>
     <string name="built_at">Desarrollado a las (UTC)</string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
@@ -136,7 +136,7 @@
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>
     <string name="default_apps">Aplicaciones predeterminadas</string>
     <string name="just_once">Solo una vez</string>
-    <string name="disable_in_selected_explainer">Desactivar el Navegador en aplicación en las aplicaciones seleccionadas, a pesar de que la aplicación quiera usarlo</string>
+    <string name="disable_in_selected_explainer">Desactivar el Navegador en aplicación en las aplicaciones seleccionadas</string>
     <string name="fastfoward_rules">Usar reglas de FastForward</string>
     <string name="version">Versión de LinkSheet</string>
     <string name="preview_url">Previsualizar enlace</string>
@@ -151,7 +151,7 @@
     <string name="downloader_url_mime_type_explainer">Comprueba si el enlace termina con una extensión de archivo (por ejemplo, \".jpg\"); Si es así, este tipo se utiliza para el archivo descargado.</string>
     <string name="onboarding4_headline">Desactivar el manejo de enlaces para hacer LinkSheet</string>
     <string name="open_settings">Abrir ajustes</string>
-    <string name="credits_explainer">Licencias de código abierto</string>
+    <string name="credits_explainer">Agradecimientos, Licencias</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">Borrar todo</string>
     <string name="button_settings">Botones</string>
@@ -169,7 +169,7 @@
     <string name="paste">Pegar</string>
     <string name="download">Descargar</string>
     <string name="linksheet_version_info_header">Información de la versión de LinkSheet:</string>
-    <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Seguir redirecciones</string>
+    <string name="links_explainer">ClearUrls, LibRedirect, Seguir redirecciones</string>
     <string name="no_app_to_handle_link_found">¡No se encontró ninguna aplicación para abrir el enlace!</string>
     <string name="amp2html_external_service">Intentar obtener una versión de la página que no sea AMP a través de un servicio externo</string>
     <string name="open_with">Abrir con</string>
@@ -214,14 +214,14 @@
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
     <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace) \u0020</string>
     <string name="donation_instructions">Instrucciones de donación</string>
-    <string name="disable_all_toasts_explainer">No mostrar nunca notificaciones emergentes</string>
+    <string name="disable_all_toasts_explainer">No mostrar notificaciones emergentes</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>
     <string name="loading_link">Procesando enlace…</string>
     <string name="donate_card_headline">Dona para apoyar a LinkSheet</string>
     <string name="license_mit">Licencia MIT</string>
-    <string name="general">Misceláneas</string>
+    <string name="general">Misceláneo</string>
     <string name="libredirect_via">Vía %s</string>
     <string name="pretend_to_be_app_explainer">Pretende ser una aplicación nativa para dominios compatibles con LinkSheetCompat</string>
     <string name="license_apache_2">Licencia Apache 2.0</string>
@@ -245,7 +245,7 @@
     <string name="current_session">Sesión actual</string>
     <string name="compat_installed">LinkSheetCompat ya está instalada</string>
     <string name="launch_onboaring_explainer">Prueba el flujo de incorporación</string>
-    <string name="always_disable_explainer">Desactivar siempre el Navegador en aplicación, a pesar de que la aplicación quiera usarlo</string>
+    <string name="always_disable_explainer">Desactivar el Navegador en aplicación en todas las aplicaciones</string>
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
@@ -254,7 +254,7 @@
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Reemplaza los botones delineados \"Copiar enlace\", \"Compartir\", \"Descargar\" e \"Ignorar LibRedirect\" con botones de texto simples</string>
-    <string name="disable_in_selected">Desactivar en la selección</string>
+    <string name="disable_in_selected">Desactivar en…</string>
     <string name="debug_explainer">Registros de aplicaciones, reinicio del controlador verificado</string>
     <string name="follow_redirects_external_service">Seguir redirecciones a través de un servicio externo</string>
     <string name="general_settings_explainer">Mostrar siempre los nombres de los paquetes</string>
@@ -285,7 +285,7 @@
     <string name="enable_request_private_browsing_button_explainer">Muestra un botón junto a los navegadores que abre el enlace que te tocó en modo de navegación privada. Navegadores compatibles: %s</string>
     <string name="pretend_to_be_app">Interceptar solicitudes de aplicaciones nativas</string>
     <string name="shizuku">Integración con Shizuku</string>
-    <string name="dont_show_filtered_item_explainer">Nunca mostrará la sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
+    <string name="dont_show_filtered_item_explainer">No mostrar sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
     <string name="enable_copy_button">Activar botón para copiar</string>
     <string name="version_name">Identificador completo</string>
     <string name="configure_explainer">Toca aquí para configurar LinkSheetCompat</string>
@@ -350,7 +350,7 @@
     <string name="dev_explainer">Configuración del desarrollador</string>
     <string name="dev_mode_enabled">Enhorabuena, has activado el modo Dev. Sólo ten cuidado.</string>
     <string name="clear_urls_version">Reglas ClearURLs</string>
-    <string name="notifications">Notificaciones</string>
+    <string name="notifications">Avisos y notificaciones</string>
     <string name="just_version">Versiones</string>
     <string name="copy_version_information">Copiar información sobre la versión</string>
     <string name="dev">Desarrollador</string>
@@ -360,15 +360,15 @@
     <string name="running_unofficial_build">Versión no oficial</string>
     <string name="fastforward_version">Normas FastForward</string>
     <string name="url_copied_toast_explainer">Muestra una notificación flotante cuando el usuario copia la dirección</string>
-    <string name="url_copied_toast">Dirección URL copiada del toast</string>
-    <string name="download_started_toast">Descarga toast iniciada</string>
+    <string name="url_copied_toast">URL copiada</string>
+    <string name="download_started_toast">Descarga iniciada</string>
     <string name="download_started_toast_explainer">Mostrar un toast cuando se ha iniciado una descarga</string>
-    <string name="opening_with_app_toast">Mostrar un mensaje emergente cuando una aplicación se inicia automáticamente</string>
+    <string name="opening_with_app_toast">Aplicación iniciada automáticamente</string>
     <string name="opening_with_app_toast_explainer">Mostrar un mensaje emergente cuando se inicia una aplicación configurada como predeterminada para un dominio</string>
-    <string name="resolve_via_toast">Mostrar un mensaje emergente al resolver una URL</string>
-    <string name="resolve_via_failed_toast">Mostrar un mensaje emergente sobre resolución fallida</string>
+    <string name="resolve_via_toast">Éxito en la resolución</string>
+    <string name="resolve_via_failed_toast">Fallo en la resolución</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar un mensaje emergente cuando una URL no se resuelve correctamente a través de un servicio externo</string>
-    <string name="last_updated">Última actualización (UTC):</string>
+    <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Activar el menú experimental LinkSheet Compat</string>
     <string name="enable_linksheet_compat_explainer">El menú se encuentra en el submenú \"Aplicaciones\" y, una vez instalado, es capaz de interceptar las peticiones a determinadas aplicaciones nativas.</string>
@@ -433,7 +433,7 @@
     <string name="hide_bottom_sheet_choice_buttons">Ocultar botones de selección</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Ocultar los botones \"Una vez\" y \"Siempre\" en la hoja inferior</string>
     <string name="permission_required">Permiso necesario</string>
-    <string name="permission_required_explainer">Algunas preferencias importadas requieren permisos que actualmente no están concedidos a LinkSheet. Pulse a continuación para solicitarlos.öh möhöh 999</string>
+    <string name="permission_required_explainer">Algunas preferencias importadas requieren permisos que actualmente no están concedidos a LinkSheet. Pulse a continuación para solicitarlos.</string>
     <string name="allow_darknets">Permitir Darknet</string>
     <string name="amp2html_allow_darknets_explainer">Permitir la ejecución de Amp2Html para darknets (soportado: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Permitir las siguientes redirecciones para darknets (compatible: %s)</string>
@@ -538,4 +538,100 @@
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Desactivado</string>
     <string name="settings_verified_link_handlers__text_disabled">Manejo deshabilitado</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Todo</string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job">Saltar</string>
+    <string name="generic__button_text_copy_clipboard">Copiar al portapapeles</string>
+    <string name="settings_main_news__title_ui_overhaul">Nueva interfaz</string>
+    <string name="export_log_dialog__title_share_logs">Compartir registro</string>
+    <string name="export_log_dialog__text_log_privacy">Para saber más acerca de los datos potencialmente sensibles en el registro compartido, presiona <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">aquí</annotation>. \u0020</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet está configurado</string>
+    <string name="settings_main_setup_success__button_connected_apps">Aplicaciones conectadas</string>
+    <string name="settings_notifications__divider_toasts">Avisos</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d servidor: %s</item>
+        <item quantity="many">%d servidores: %s</item>
+        <item quantity="other">%d servidores: %s</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d verificado</string>
+    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d activado</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d servidor activado</item>
+        <item quantity="many">%d servidores activado</item>
+        <item quantity="other">%d servidores activado</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Permitir manejo de enlaces</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d servidor verificado</item>
+        <item quantity="many">%d servidores verificados</item>
+        <item quantity="other">%d servidores verificados</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_none">%d desactivado</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Manejo de enlaces no permitido</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d servidor desactivado</item>
+        <item quantity="many">%d servidores desactivados</item>
+        <item quantity="other">%d servidores desactivados</item>
+    </plurals>
+    <string name="settings_credits__app_credit_reason_seal">Inspiración en el diseño</string>
+    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">Inspiración en el diseño</string>
+    <string name="export_log_dialog__title_redact_log">Editar registro</string>
+    <string name="export_log_dialog__title_include_throwable">Incluir registro de errores</string>
+    <string name="export_log_dialog__subtitle_include_fingerprint">Recomendado</string>
+    <string name="generic__button_text_cancel">Cancelar</string>
+    <string name="crash_viewer__subtitle_app_crashed">¡Vaya, eso no debería haber ocurrido!</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
+    <string name="settings_links_downloader__title_downloader">Descargador</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet no está configurado</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet no está establecido como el navegador predeterminado</string>
+    <string name="settings_main_news__button_read_more">Leer más</string>
+    <string name="settings_main_news__text_header">Noticias</string>
+    <string name="resolve_event__initialized">Inicializado</string>
+    <string name="resolve_event__applying_link_modifiers">Aplicando las modificaciones en el enlace</string>
+    <string name="resolve_event__resolving_redirects">Resolviendo redirecciones</string>
+    <string name="settings_main_news__text_ui_overhaul">¡La interfaz de LinkSheet ha sido renovada!</string>
+    <string name="resolve_event__unamping_link">Desactivando el enlace AMP</string>
+    <string name="resolve_event__download_check">Comprobando la posibilidad de descarga</string>
+    <string name="resolve_event__loading_preferred_apps">Cargando aplicaciones predeterminadas</string>
+    <string name="settings_links_amp2html__title_skip_browser">Omitir cuando se accede desde un navegador</string>
+    <string name="settings_links_follow_redirects__title_skip_browser">Omitir cuando se accede desde un navegador</string>
+    <string name="settings_app_config__title_configure_app_behavior">Configurar %s</string>
+    <string name="settings_app_config__title_browsers">Navegadores</string>
+    <string name="settings_app_config__description_browsers">Navegadores web instalados</string>
+    <string name="settings_app_config__title_native_apps">Aplicaciones</string>
+    <string name="settings_app_config__description_native_apps">Aplicaciones capaces de manejar enlaces con este host</string>
+    <string name="settings_app_config__title_preferred_browser">Navegador predeterminado</string>
+    <string name="settings_app_config__description_preferred_browser">Usar el navegador predeterminado elegido</string>
+    <string name="settings_app_config_rules__title_default_rule">Regla predeterminada</string>
+    <string name="export_log_dialog__subtitle_redact_log">Recomendado, editar los nombres de aplicaciones y urls</string>
+    <string name="settings_main_setup_success__subtitle_quick_settings">Ajustes rápidos</string>
+    <string name="settings_main_setup_success__button_change_browser">Navegador predeterminado</string>
+    <string name="export_log_dialog__title_include_settings">Incluir ajustes</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet está correctamente configurado y listo para funcionar</string>
+    <string name="generic__button_text_delete">Eliminar</string>
+    <string name="settings_main_setup_success__button_set_default_browser">Establecer como navegador predeterminado</string>
+    <string name="settings_about__divider_external_versions">Versiones externas</string>
+    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="export_log_dialog__text_log_info">Configurar los ajustes para compartir del registro almacenado en: \u0020<font face="monospace">%s</font> \u0020</string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Viendo el registro almacenado en: %s</string>
+    <string name="export_log_dialog__subtitle_include_throwable">Recomendado, pero no puede ser editado</string>
+    <string name="export_log_dialog__title_include_fingerprint">Incluir huella de compilación</string>
+    <string name="export_log_dialog__subtitle_include_settings">Recomendado</string>
+    <string name="resolve_event__querying_browser_list">Consultando la lista de navegadores</string>
+    <string name="resolve_event__checking_browsers">Comprobando navegadores</string>
+    <string name="resolve_event__sorting_apps">Filtrando la lista de aplicaciones</string>
+    <string name="resolve_event__generating_preview">Generando previsualización</string>
+    <string name="settings_links_amp2html__text_skip_browser">No ejecutar Apm2Html cuando la aplicaciones que inicia LinkSheet es un navegador</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">No intentar seguir las redirecciones si la aplicación que inicia LinkSheet es un navegador</string>
+    <string name="settings_app_config_rules__title_rules">Reglas</string>
+    <string name="settings_app_config_rules__btn_new_rule">Nueva regla</string>
+    <string name="settings_new_rule__title_new_rule">Nueva Regla</string>
+    <string name="settings_app_config_rules__subtitle_default_rule">Esta regla se utiliza si ninguna otra regla es aplicable</string>
+    <string name="settings_edit_rule__title_edit_rule">Editando regla</string>
+    <string name="settings_app_config_rules__text_custom_rules">Reglas personalizadas</string>
+    <string name="delete_log_dialog__title_delete_log">¿Eliminar sesión?</string>
+    <string name="delete_log_dialog__subtitle_delete_info">¿Quieres eliminar este registro de sesión? ¡Esto no puede deshacerse!</string>
+    <string name="settings_main_setup_success__button_link_handlers">Gestores de enlaces</string>
+    <string name="resolve_event__running_libredirect">Intentando encontrar el frontend de FOSS</string>
+    <string name="settings_app_config__button_add_item">Añadir artículo</string>
+    <string name="title_activity_drag_test">DragTestActivity</string>
 </resources>

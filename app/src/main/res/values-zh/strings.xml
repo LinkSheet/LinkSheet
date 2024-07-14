@@ -31,19 +31,19 @@
     <string name="open_settings">打开设置</string>
     <string name="no_such_app_found">未找到应用！</string>
     <string name="enable_send_button">启用“分享”按钮</string>
-    <string name="enable_send_button_explainer">在底栏中显示一个按钮，使您能够将链接共享给其他应用，就像您从“分享”菜单中选择一样</string>
+    <string name="enable_send_button_explainer">在底栏中显示一个按钮，使您能够将链接分享给其他应用，与“分享”菜单功能相同</string>
     <string name="send_to">分享</string>
     <string name="default_apps_subtitle">首选应用是您设置为“始终”打开某些链接的应用</string>
     <string name="always_show_package_name">始终显示包名</string>
     <string name="always_show_package_name_explainer">始终显示包名而非仅是应用名称。这项设置影响整个应用页面。</string>
     <string name="disable_all_toasts">禁用提示栏</string>
-    <string name="disable_all_toasts_explainer">从不显示任何提示栏消息</string>
+    <string name="disable_all_toasts_explainer">不要显示提示栏消息</string>
     <string name="remove_all">移除所有</string>
     <string name="add_all">添加所有</string>
-    <string name="hide_after_copying">复制后隐藏</string>
-    <string name="hide_after_copying_explainer">按下“复制链接”按钮后隐藏底栏</string>
+    <string name="hide_after_copying">操作时自动隐藏</string>
+    <string name="hide_after_copying_explainer">点击“复制链接”或“下载”等操作按钮后隐藏底栏</string>
     <string name="back">返回</string>
-    <string name="display_grid_layout">显示网格布局</string>
+    <string name="display_grid_layout">网格布局</string>
     <string name="display_grid_layout_explainer">在底栏中显示网格而非列表</string>
     <string name="set_as_browser_done">LinkSheet已设置为默认浏览器！</string>
     <string name="browser_status">浏览器状态</string>
@@ -58,11 +58,11 @@
     <string name="whitelisted_explainer">仅显示白名单浏览器</string>
     <string name="save">保存</string>
     <string name="whitelisted_browsers">白名单浏览器</string>
-    <string name="bottom_sheet_explainer">按使用情况排序，启用复制按钮，启用分享按钮等。</string>
+    <string name="bottom_sheet_explainer">配置与自定义</string>
     <string name="about">关于</string>
-    <string name="about_explainer">关于此应用，许可证</string>
+    <string name="about_explainer">鸣谢，许可证，链接，版本</string>
     <string name="credits">致谢名单</string>
-    <string name="credits_explainer">开源许可</string>
+    <string name="credits_explainer">致谢，许可</string>
     <string name="version">LinkSheet版本</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="license_apache_2">Apache License 2.0</string>
@@ -70,31 +70,31 @@
     <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">源代码仓库</string>
-    <string name="donate_crypto">捐赠</string>
-    <string name="donate_subtitle">如果你愿意捐赠并申请 <b>LinkSheet Pro</b></string>
+    <string name="donate_crypto">使用加密货币捐赠</string>
+    <string name="donate_subtitle">升级到 <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">打开复制的链接</string>
     <string name="paste">粘贴</string>
     <string name="error">错误</string>
     <string name="checkmark">复选标记</string>
     <string name="links">链接</string>
-    <string name="links_explainer">链接处理相关设置</string>
+    <string name="links_explainer">ClearUrls，LibRedirect，跟随重定向</string>
     <string name="use_clear_urls">使用 ClearURLs</string>
-    <string name="use_clear_urls_explainer">使用实验性 <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 集成（清除链接中的跟踪参数）</string>
+    <string name="use_clear_urls_explainer">使用实验性 <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 集成（清除链接中的跟踪参数） \u0020</string>
     <string name="follow_redirects">跟踪重定向</string>
-    <string name="follow_redirects_explainer">在打开底栏之前自动跟踪所有重定向。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">隐私方面的影响</annotation></string>
-    <string name="loading_link">加载链接中…</string>
+    <string name="follow_redirects_explainer">在打开底栏前自动跟踪所有重定向。这可能带来<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">隐私方面的影响</annotation> \u0020</string>
+    <string name="loading_link">处理链接中…</string>
     <string name="follow_redirects_external_service">通过外部服务进行跟踪重定向</string>
-    <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 的 API 进行重定向（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）</string>
+    <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 的 API 进行重定向（<annotation url="https://supabase.com/privacy">隐私政策</annotation>） \u0020</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">隐私政策</string>
     <string name="follow_only_known_trackers">仅跟踪已知跟踪器</string>
     <string name="theme">主题</string>
-    <string name="theme_explainer">修改应用主题</string>
-    <string name="system">系统</string>
+    <string name="theme_explainer">Material You，深色主题，纯黑主题</string>
+    <string name="system">跟随系统</string>
     <string name="light">浅色</string>
     <string name="dark">深色</string>
     <string name="amoled_black">黑色</string>
     <string name="fastfoward_rules">使用 FastForward 规则</string>
-    <string name="fastfoward_rules_explainer">使用实验性 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 规则集成（通过从链接中提取重定向来绕过某些链接的重定向）</string>
+    <string name="fastfoward_rules_explainer">使用实验性 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 规则集成（通过从链接中提取重定向来绕过某些主机的重定向） \u0020</string>
     <string name="follow_redirects_local_cache">启用本地重定向缓存</string>
     <string name="follow_redirects_local_cache_explainer">本地缓存重定向结果</string>
     <string name="redirect_resolve_type_local_cache">本地缓存</string>
@@ -102,7 +102,7 @@
     <string name="redirect_resolve_type_local">本地解析器</string>
     <string name="redirect_resolve_type_not_resolved">无</string>
     <string name="enable_libredirect">启用 LibRedirect</string>
-    <string name="enable_libredirect_explainer">使用实验性 <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> 集成将链接重定向到隐私友好的前端</string>
+    <string name="enable_libredirect_explainer">使用实验性 <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> 集成，将链接重定向到隐私友好的前端 \u0020</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">前端</string>
@@ -110,8 +110,8 @@
     <string name="add">添加</string>
     <string name="select_an_app">选择一个应用</string>
     <string name="close">关闭</string>
-    <string name="dont_show_filtered_item">从不显示“上次选择的应用”选项</string>
-    <string name="dont_show_filtered_item_explainer">从不显示顶部建议上次打开链接使用的应用的选项</string>
+    <string name="dont_show_filtered_item">不显示“上次选择的应用”选项</string>
+    <string name="dont_show_filtered_item_explainer">不显示建议上次打开链接应用的顶栏</string>
     <string name="use_text_share_copy_buttons">为“复制链接”、“分享”、“下载”和“忽略LibRedirect”使用简单的文本按钮</string>
     <string name="use_text_share_copy_buttons_explainer">用简单的文本按钮替换“复制链接”、“分享”、“下载”和“忽略LibRedirect”轮廓按钮</string>
     <string name="preview_url">预览链接</string>
@@ -119,20 +119,20 @@
     <string name="download">下载</string>
     <string name="linksheet_download">LinkSheet 下载</string>
     <string name="enable_downloader">启用下载器</string>
-    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加一个“下载”按钮。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">隐私方面的影响</annotation></string>
+    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">隐私方面的影响</annotation> \u0020</string>
     <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
     <string name="random_instance">随机实例</string>
     <string name="in_app_browser">应用内置的浏览器</string>
-    <string name="always_disable">禁用</string>
-    <string name="always_disable_explainer">无论应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
-    <string name="use_app_settings">使用应用推荐的选择</string>
+    <string name="always_disable">强制禁用</string>
+    <string name="always_disable_explainer">禁用所有应用内浏览器</string>
+    <string name="use_app_settings">默认</string>
     <string name="in_app_browser_subtitle">应用内置浏览器模式设置</string>
-    <string name="use_app_settings_explainer">由应用决定用不用它内置的浏览器</string>
-    <string name="disable_in_selected_explainer">无论选中的应用是否建议使用其内置的浏览器，都不用内置的浏览器</string>
+    <string name="use_app_settings_explainer">由应用决定是否使用内置浏览器</string>
+    <string name="disable_in_selected_explainer">禁用所选应用内浏览器</string>
     <string name="browser">浏览器</string>
-    <string name="browser_explainer">浏览器模式和应用内置浏览器设置</string>
-    <string name="disable_in_selected">不使用所选应用内置的浏览器</string>
+    <string name="browser_explainer">浏览器模式，应用内置浏览器</string>
+    <string name="disable_in_selected">强制禁用…</string>
     <string name="domain_selection_confirmation_subtitle">是否确实要将 %s 设置为以下域名的首选应用程序？</string>
     <string name="dismiss">取消</string>
     <string name="amp2html_local_cache">启用本地Amp2Html缓存</string>
@@ -143,19 +143,19 @@
     </plurals>
     <string name="no_browser_installed">未安装任何浏览器</string>
     <string name="download_started">已开始下载</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet 检测到至少一个已知为实际浏览器的应用。</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet 已检测到至少一个已知为浏览器的应用。</string>
     <string name="enable_shizuku_explainer">启用此功能将允许 LinkSheet 使用 Shizuku 直接与系统 API 交互。例如，可用于自动禁用所有链接处理程序。一个新选项将显示在应用主页上。</string>
     <string name="enable_amp2html">启用Amp2Html</string>
     <string name="follow_only_known_trackers_explainer">仅当已知主机是跟踪器/重定向时，才尝试跟踪重定向。如果启用了“通过外部服务跟踪重定向”，则此项将始终启用。</string>
     <string name="copy_to_clipboard">复制到剪贴板</string>
     <string name="logs">日志</string>
     <string name="no_apps_which_can_handle_links_found">没有找到可以处理链接的应用。</string>
-    <string name="known_trackers">已知的trackers</string>
+    <string name="known_trackers">已知跟踪器</string>
     <string name="log_viewer">日志查看器</string>
     <string name="export_to_file">导出到文件</string>
     <string name="disable_all">禁用全部</string>
     <string name="manual_build">由 1fexd 手动构建和签名</string>
-    <string name="log_files">过去的日志文件</string>
+    <string name="log_files">过去的会话</string>
     <string name="enable_shizuku">启用Shizuku集成（实验性）</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku 集成已成功启用！</string>
     <string name="warning">警告</string>
@@ -164,7 +164,7 @@
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">杂项</string>
     <string name="dev_explainer">开发者设置</string>
-    <string name="log_privacy">若要了解更多日志隐私有关信息，访问<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">该链接</annotation>。</string>
+    <string name="log_privacy">若要了解日志隐私相关信息，请访问<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">该链接</annotation>。 \u0020</string>
     <string name="get_started">入门</string>
     <string name="donate_learn_more">了解更多</string>
     <string name="enable_ignore_libredirect_button">启用“忽略LibRedirect”按钮</string>
@@ -174,7 +174,7 @@
     <string name="no_handlers_found_explainer">LinkSheet无法打开此链接。</string>
     <string name="join">加入</string>
     <string name="next">下一个</string>
-    <string name="advanced_explainer">高级设置（例如feature flags和导入导出）</string>
+    <string name="advanced_explainer">功能标志，实验设置，导入/导出</string>
     <string name="discord">Discord</string>
     <string name="background_image">背景图片</string>
     <string name="amp2html_local_cache_explainer">缓存获得的非AMP版本网页到本地</string>
@@ -203,10 +203,10 @@
     <string name="delete">删除</string>
     <string name="fastforward">FastForward</string>
     <string name="include_fingerprint">包括设备指纹（推荐）</string>
-    <string name="github_pipeline_build">由Github workflow构建并签名</string>
+    <string name="github_pipeline_build">由 CI 构建与签名</string>
     <string name="import_settings">导入设置</string>
     <string name="usage_stats_sorting_explainer">在排序算法中引入安卓系统应用使用情况数据。第一次启用时需要请求权限。</string>
-    <string name="amp2html_external_service_explainer">尝试通过在supabase.com（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）部署的API获取非AMP页面</string>
+    <string name="amp2html_external_service_explainer">尝试使用在 supabase.com（<annotation url="https://supabase.com/privacy">隐私政策</annotation>）部署的 API 获取非 AMP 页面 \u0020</string>
     <string name="shizuku_integration">Shizuku集成</string>
     <string name="debug">调试</string>
     <string name="onboarding1_headline">欢迎使用</string>
@@ -214,7 +214,7 @@
     <string name="export_import_settings">导出或导入设置</string>
     <string name="import_headline">导入</string>
     <string name="button_settings">按钮</string>
-    <string name="notifications">通知</string>
+    <string name="notifications">提示框与通知</string>
     <string name="use_unified_preferred_browser">使用统一设置</string>
     <string name="amp2html_builtin_cache">使用内置Amp2Html缓存</string>
     <string name="just_version">版本</string>
@@ -230,7 +230,7 @@
     <string name="export_mode">导出模式</string>
     <string name="app_log">应用日志</string>
     <string name="copy_version_information">复制版本信息</string>
-    <string name="shizuku_not_running_explainer">Shizuku未在运行。请点击此处打开Shizuku，并按照指示将其启动</string>
+    <string name="shizuku_not_running_explainer">Shizuku 未在运行。请点击此处打开 Shizuku，并按照指示将其启动。</string>
     <string name="dev">开发者</string>
     <string name="request_private_browsing">隐私</string>
     <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
@@ -239,7 +239,7 @@
     <string name="instance_not_available_anymore">实例已经不再可用！</string>
     <string name="onboarding2_highlight">你的</string>
     <string name="amp2html_builtin_cache_explainer">使用内置缓存（使用从外部服务导出的数据库）</string>
-    <string name="shizuku_integration_not_setup_explainer">虽然 LinkSheet 可在没有Shizuku的情况下工作，但仍然建议使用 Shizuku。点击此处安装Shizuku</string>
+    <string name="shizuku_integration_not_setup_explainer">LinkSheet 可在不使用 Shizuku 的情况下工作，但仍然建议使用 Shizuku。点击此处安装。</string>
     <string name="export_import_settings_explainer">导出当前设置或导入以前导出的设置</string>
     <plurals name="minutes">
         <item quantity="other">%s 分钟</item>
@@ -247,7 +247,7 @@
     <string name="log">日志</string>
     <string name="donate_card_headline">捐赠以支持LinkSheet</string>
     <string name="license_mit">MIT协议</string>
-    <string name="general">通用</string>
+    <string name="general">杂项</string>
     <string name="libredirect_via">通过%s</string>
     <string name="pretend_to_be_app_explainer">使用 LinkSheetCompat 伪装成受支持域的原生应用</string>
     <string name="libredirect_version">LibRedirect</string>
@@ -261,10 +261,10 @@
     <string name="compat_installed">已安装 LinkSheetCompat</string>
     <string name="enable_ignore_libredirect_button_explainer">如果链接已通过LibRedirect重定向，则在底栏中显示一个按钮，用以打开原始链接</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet 检测到至少一个自称是浏览器的应用。LinkSheet 的列表可能不完整。如果您认为这是一个错误，请在 Github 上提交issue。</string>
-    <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">隐私方面的影响</annotation></string>
+    <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">隐私方面的影响</annotation> \u0020</string>
     <string name="none_explainer">仅列出原生应用，去除所有浏览器。如果只存在一个原生应用，则会自动用其打开。如果没有原生应用，则列出所有浏览器应用。</string>
     <string name="donate">捐赠</string>
-    <string name="debug_explainer">查看应用日志</string>
+    <string name="debug_explainer">应用日志，已验证处理器重置</string>
     <string name="pro_feature">这是一项 LinkSheet Pro 功能！</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="in_app">应用内</string>
@@ -282,12 +282,12 @@
     <string name="export_explainer">将当前应用设置导出到文件</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">至少已安装一个浏览器</string>
-    <string name="shizuku_integration_no_permission_explainer">点击此处请求Shizuku权限</string>
+    <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="welcome_to_linksheet_explainer">LinkSheet“恢复”了用户在Android &lt;12上点击链接时出现的“url-app-chooser”（如果安装了多个链接处理应用）</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>
     <string name="running_unofficial_build">非官方构建</string>
-    <string name="donate_card_subtitle"> 如果您喜欢 LinkSheet，请考虑在 Github 上Star和/或捐款。 \u0020
-\n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有独家功能。</string>
+    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。
+\n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。 \u0020</string>
     <string name="privacy">隐私</string>
     <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接。支持的浏览器：%s</string>
     <string name="import_settings_override_preferences">这将会覆盖所有已存在的设置，确认继续？</string>
@@ -296,4 +296,325 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku 模式已激活，点击一个应用以切换其自动链接处理功能。长按以打开其“默认打开”设置菜单。</string>
     <string name="done">完成</string>
+    <string name="redact_log">匿名化日志（推荐启用，禁用此功能可能会泄漏软件包名称与主机名）</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">在底栏中启用过多按钮目前可能造成按钮被截断或错乱。</string>
+    <string name="use_unified_preferred_browser_explainer">启用此项时，下列设置将会同时被应用于正常链接与应用内链接处理。禁用时，使用下面的按钮切换正常链接与应用内链接处理模式。</string>
+    <string name="feature_flags">功能标志</string>
+    <string name="fastforward_version">FastForward 规则</string>
+    <string name="built_by">构建版本信息</string>
+    <string name="app_setup">应用配置</string>
+    <string name="onboarding4_highlight">工作</string>
+    <string name="app_browsers_subtitle">偏好应用，浏览器设置</string>
+    <string name="at_least_one_unknown_browser_installer">至少一个（未知）浏览器已安装</string>
+    <string name="apps_which_can_open_links">已验证链接处理程序</string>
+    <string name="debug_build">调试版本</string>
+    <string name="built_by_error">此版本未由 1fexd 签名，也未经 Github 工作流签名。</string>
+    <string name="launch_onboaring_explainer">测试引导流程</string>
+    <string name="discord_explainer">在 Discord 上聊聊 LinkSheet</string>
+    <string name="launch_onboaring">启动引导</string>
+    <string name="enable_new_bottom_sheet">启用新版底栏</string>
+    <string name="onboarding_2_card_explainer">Shizuku 可以让 LinkSheet 一次禁用所有应用的链接处理行为，而不需要单独为每个应用手动禁用（也就是下一步）。</string>
+    <string name="onboarding6_headline">设置你的</string>
+    <string name="pretend_to_be_app">拦截原生应用请求</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all">显示全部</string>
+    <string name="start_setup">继续</string>
+    <string name="onboarding_2_shizuku_enabled">下一步</string>
+    <string name="telemetry_identity_basic">基本</string>
+    <string name="retry">重试</string>
+    <string name="open_app">打开应用</string>
+    <string name="settings_verified_link_handlers__text_disabled">链接处理已禁用</string>
+    <string name="link_handle_failed">发生了错误</string>
+    <string name="select_app">选择应用</string>
+    <string name="tap_customization_single_tap">单击操作</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="telemetry_level_minimal">最小</string>
+    <string name="Miscellaneous">杂项</string>
+    <string name="onboarding_setup">配置 LinskSheet</string>
+    <string name="onboarding_4_card_explainer">禁用所有应被 LinkSheet 处理的域名的链接处理功能。</string>
+    <string name="edit">编辑</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">已启用</string>
+    <string name="onboarding_5_button">结束</string>
+    <string name="last_rule_update">上次从上游更新于 (UTC)：</string>
+    <string name="notifications_explainer">链接已复制，并已开始下载</string>
+    <string name="telemetry_identity_full">完全</string>
+    <string name="enable_new_bottom_sheet_explainer">使用重制版底栏代替旧版</string>
+    <string name="tap_customization_double_tap">双击操作</string>
+    <string name="onboarding_4_card_title">禁用链接处理器</string>
+    <string name="download_started_toast">下载开始</string>
+    <string name="onboarding_2_install_shizuku">安装 Shizuku</string>
+    <string name="resolve_via_failed_toast">解析失败</string>
+    <string name="permission_required">需要权限</string>
+    <string name="shizuku_manager_start_failed">无法启动 Shizuku 管理器，请手动启动！</string>
+    <string name="tap_customization_long_tap">长按操作</string>
+    <string name="link_handle_failed_text_field_label">询问</string>
+    <string name="telemetry_level_minimal_description">已安装版本指标</string>
+    <string name="url_copied_toast">已复制链接</string>
+    <string name="onboarding_0_title">欢迎使用
+\nLinkSheet</string>
+    <string name="show_native_label_explainer">在原生支持打开链接的应用旁显示标签</string>
+    <string name="donate_card_subtitle_2">用加密货币捐赠</string>
+    <string name="show_linksheet_referrer">显示 LinkSheet 引用来源</string>
+    <string name="enable_dev_bottom_sheet">启用开发版底栏</string>
+    <string name="enable_dev_bottom_sheet_explainer">启用最新版底栏，目前正在开发中</string>
+    <string name="open_link_with_subtitle_2">LinkSheet 起初基于 OpenLinkWith</string>
+    <string name="new_dev_bottom_sheet_explainer">不喜欢新版底栏？点击报告问题。</string>
+    <string name="nightly_experiments_card">开发实验</string>
+    <string name="expand_on_app_select">选中应用时展开</string>
+    <string name="onboarding3_highlight">一切</string>
+    <string name="onboarding_2_skip_button">跳过</string>
+    <string name="onboarding7_headline">爱好者？
+\nLinkSheet 会</string>
+    <string name="parse_shared_text_intent">当找不到链接时，则解析分享的文本</string>
+    <string name="reset">重置</string>
+    <string name="experiments">实验</string>
+    <string name="experiments_explainer">尝试目前开发中的功能</string>
+    <string name="base_config">附加配置</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled">已启用的处理器</string>
+    <string name="onboarding_3_button">禁用链接处理器</string>
+    <string name="onboarding_2_start_shizuku">启动 Shizuku</string>
+    <string name="url_copied_toast_explainer">用户复制链接时显示提示语</string>
+    <string name="domain_selection_confirmation_title">选择域名？</string>
+    <string name="onboarding_0_subtitle">选择在打开链接时总获得提示、设置默认浏览器，还有更多</string>
+    <string name="onboarding_3_card_explainer">谷歌在 Android 12 引入了已验证应用链接，让应用可以以加密方式证明域名的所有权。必须禁用此行为，才能让 LinkSheet 拦截点击的链接。</string>
+    <string name="unknown_host">%s 被屏蔽或不存在</string>
+    <string name="start_setup_explainer">LinkSheet 的功能需要自定义 Android 配置来实现。下面将指引你完成多步过程。</string>
+    <string name="onboarding_1_card_title">默认浏览器</string>
+    <string name="enable_linksheet_compat">启用实验性 LinkSheet Compat 菜单</string>
+    <string name="onboarding7_highlight">满足你的需求</string>
+    <string name="onboarding_2_title">要使用 Shizuku 吗？</string>
+    <string name="donate_card">用卡捐赠（通过 BuyMeACoffee）</string>
+    <string name="settings_shortcuts__subtitle_default_browser">打开默认浏览器设置页面</string>
+    <string name="resolve_via_toast_explainer">链接通过外部服务解析时显示提示语</string>
+    <string name="seal_subtitle_2">Seal 是用来学习 Jetpack Compose 相关知识的一个好例子</string>
+    <string name="experiment">实验</string>
+    <string name="include_log_hash_key">包含日志哈希密钥（用来删减日志的密钥）</string>
+    <string name="download_started_toast_explainer">下载开始时显示提示语</string>
+    <string name="last_updated"><b>版本：</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="onboarding_5_card_explainer">已完成 LinkSheet 运作所需的基本配置 - 转到设置，探索一下其他的东西！</string>
+    <string name="onboarding_1_button">设置为默认浏览器</string>
+    <string name="theme_enable_material_you_explainer">使用 Android 12 以上的 Material You 设备主题</string>
+    <string name="onboarding_5_card_title">配置</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="launch_onboarding_new">启动新版引导</string>
+    <string name="something_went_wrong">发生了问题，请重试。</string>
+    <string name="include_throwable">包含崩溃日志（推荐，但无法删减）</string>
+    <string name="tap_customization">点击操作自定义</string>
+    <string name="telemetry_dialog_title">LinkSheet 尊重你的隐私</string>
+    <string name="enable_linksheet_compat_explainer">此菜单可在“应用”子菜单中找到，当安装后可拦截部分原生应用的请求。</string>
+    <string name="onboarding_3_card_title">链接处理器</string>
+    <string name="settings_notifications__divider_toasts">提示语</string>
+    <string name="new_bottomsheet">新版底栏</string>
+    <string name="telemetry_level_exhaustive">详尽</string>
+    <string name="parse_shared_text_intent_explainer">当应用分享过来的内容包含链接时，尝试寻找（并使用）文本中的第一个链接而非直接报错</string>
+    <string name="disclaimer_libredirect_unstable">除了属于实验性功能之外，LibRedirect 目前极为不稳定，可能无法运作。</string>
+    <string name="onboarding_4_button">下一步</string>
+    <string name="reset_app_link_verification_status">重置应用链接验证状态</string>
+    <string name="resolve_activity_failure">无法解析活动！</string>
+    <string name="onboarding_5_subtitle">已成功启用 LinkSheet</string>
+    <string name="opening_with_app_toast_explainer">启动处理域名的默认应用时显示提示语</string>
+    <string name="onboarding0_headline">是时候夺回</string>
+    <string name="finish">结束</string>
+    <string name="general_settings_explainer">总是显示包名</string>
+    <string name="donation_instructions">捐赠指示</string>
+    <string name="opening_with_app_toast">应用已自动启动</string>
+    <string name="verified_link_handlers_open_settings_page">打开设置页面</string>
+    <string name="permission_required_explainer">一些导入设置需要的权限目前未给予 LinkSheet。点击下方进行请求。</string>
+    <string name="theme_mode">主题模式</string>
+    <string name="open_app_settings_page">打开应用设置页面</string>
+    <string name="no_action">无操作</string>
+    <string name="try_share">分享</string>
+    <string name="switch_profile">启用档案切换</string>
+    <string name="reset_app_link_verification_status_toast">已请求重新验证</string>
+    <string name="no_internet_connection">网络未连接</string>
+    <string name="generic__button_text_delete">删除</string>
+    <string name="delete_log_dialog__subtitle_delete_info">要删除此日志会话吗？此操作不可逆！</string>
+    <string name="delete_log_dialog__title_delete_log">删除会话？</string>
+    <string name="preferred_apps_settings">为支持的主机设置偏好应用</string>
+    <string name="cancel">取消</string>
+    <string name="export_log_dialog__title_redact_log">删减日志</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">隐藏底栏中的“仅一次”与“始终”按钮</string>
+    <string name="loading_link_subtitle">LinkSheet 正在进行链接操作。只需要几秒钟</string>
+    <string name="telemetry_level_standard_description">使用情况汇总数据</string>
+    <string name="crash_viewer__subtitle_app_crashed">哦天哪，这不该发生的！</string>
+    <string name="resolve_event__resolving_redirects">解析重定向中</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet 尚未配置就绪</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet 配置就绪</string>
+    <string name="resolve_event__querying_browser_list">获取浏览器列表中</string>
+    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）资料中打开。两个档案都需要安装 LinkSheet，并使用“设置 -&gt; 特殊应用权限 -&gt; 关联的工作&amp;个人应用”手动进行关联</string>
+    <string name="export_log_dialog__subtitle_include_throwable">推荐，但无法删减</string>
+    <string name="settings_app_config__description_preferred_browser">用户选择的偏好浏览器</string>
+    <string name="telemetry_dialog_text">选择最适合你的使用指标类型。</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
+    <string name="expand_on_app_select_explainer">选中应用时自动展开底栏</string>
+    <string name="export_log_dialog__title_include_settings">包含设置</string>
+    <string name="tap_customization_dialog_title_single_tap">单击</string>
+    <string name="settings_main_news__text_header">新闻</string>
+    <string name="new_dev_bottom_sheet">底栏</string>
+    <string name="settings_app_config__button_add_item">添加项目</string>
+    <string name="settings_main_news__title_ui_overhaul">新界面</string>
+    <string name="telemetry_level_disabled">禁用</string>
+    <string name="export_log_dialog__subtitle_include_settings">推荐</string>
+    <string name="telemetry_level_standard">标准</string>
+    <string name="onboarding_2_request_shizuku_permission">请求权限</string>
+    <string name="settings_app_config_rules__text_custom_rules">自定义规则</string>
+    <string name="settings_app_config_rules__subtitle_default_rule">当其他规则不匹配时，则使用此规则</string>
+    <string name="export_log_dialog__title_include_fingerprint">包含构建版指纹</string>
+    <string name="show_native_label">显示原生标签</string>
+    <string name="resolve_event__initialized">已初始化</string>
+    <string name="settings_about__divider_external_versions">外部版本</string>
+    <string name="resolve_event__running_libredirect">尝试查找 FOSS-frontend</string>
+    <string name="export_log_dialog__title_include_throwable">包含崩溃日志</string>
+    <string name="settings_app_config_rules__btn_new_rule">新规则</string>
+    <string name="generic__button_text_copy_clipboard">复制到剪贴板</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">当已知浏览器唤起 LinkSheet 时，不要尝试跟踪重定向</string>
+    <string name="online_services">在线服务</string>
+    <string name="onboarding0_highlight">选择的自由了</string>
+    <string name="onboarding2_headline">大量设置
+\n让 LinkSheet 成为</string>
+    <string name="onboarding3_headline">获得全权控制
+\n向</string>
+    <string name="onboarding4_headline">关闭链接处理，让 LinkSheet</string>
+    <string name="clear_urls_version">ClearURLs 规则</string>
+    <string name="mastodon_redirect_subtitle_2">Mastodon Redirect 的源代码曾用作与 Shizuku 交互的参考</string>
+    <string name="amp2html_short">Amp2Html</string>
+    <string name="follow_redirects_short">重定向</string>
+    <string name="launch_onboarding__now_explainer">试试新版引导流程</string>
+    <string name="resolve_via_toast">解析成功</string>
+    <string name="resolve_via_failed_toast_explainer">链接未能通过外部服务解析时显示提示语</string>
+    <string name="onboarding_1_card_explainer">若不设置为默认浏览器，则 LinkSheet 无法正常运作。</string>
+    <string name="hide_bottom_sheet_choice_buttons">隐藏选择按钮</string>
+    <string name="onboarding_5_title">一切就绪！</string>
+    <string name="onboarding_1_subtitle">LinkSheet 需要成为默认浏览器来处理点击的链接</string>
+    <string name="onboarding_3_title">禁用默认链接处理器</string>
+    <string name="resolve_embeds_explainer">将短链接镜像（如 fxtwitter.com）解析到真实主机</string>
+    <string name="theme_enable_material_you">动态颜色</string>
+    <string name="theme_enable_amoled">纯黑</string>
+    <string name="tap_customization_dialog_title_double_tap">双击</string>
+    <string name="tap_customization_dialog_title_long_tap">长按</string>
+    <string name="telemetry_level_disabled_description">不收集数据</string>
+    <string name="tap_customization_dialog_title">配置 %s</string>
+    <string name="link_handle_failed_text">此链接似乎已损坏，LinkSheet 无法处理。你可以在下方编辑，然后重试。你也可以在网上搜索。</string>
+    <string name="log_session_headline">会话于</string>
+    <string name="settings_verified_link_handlers__text_user_apps">用户应用</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">全部</string>
+    <string name="settings_shortcuts__title_connected_apps">已关联应用</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">已禁用</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled">已禁用的处理器</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="other">%d 个主机：%s</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">允许链接处理</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">不允许链接处理</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="other">%d 个已禁用主机</item>
+    </plurals>
+    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_credit_reason_seal">设计灵感</string>
+    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">设计灵感</string>
+    <string name="export_log_dialog__subtitle_include_fingerprint">推荐</string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job">跳过</string>
+    <string name="export_log_dialog__title_share_logs">分享日志</string>
+    <string name="export_log_dialog__subtitle_redact_log">推荐，删减应用名称与链接</string>
+    <string name="settings_links_downloader__title_downloader">下载器</string>
+    <string name="generic__button_text_cancel">取消</string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">查看捕获于 %s 的日志</string>
+    <string name="settings_main_setup_success__subtitle_quick_settings">快速设置</string>
+    <string name="settings_main_news__text_ui_overhaul">LinkSheet 的界面焕然一新！</string>
+    <string name="settings_main_setup_success__button_connected_apps">已关联应用</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet 已被正确配置，准备就绪</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet 未被设置为系统默认浏览器</string>
+    <string name="settings_main_news__button_read_more">阅读更多</string>
+    <string name="resolve_event__download_check">检查下载能力中</string>
+    <string name="resolve_event__applying_link_modifiers">应用链接修改器中</string>
+    <string name="resolve_event__unamping_link">正为链接去 AMP</string>
+    <string name="title_activity_drag_test">DragTestActivity</string>
+    <string name="settings_app_config__title_browsers">浏览器</string>
+    <string name="settings_app_config__title_configure_app_behavior">配置 %s</string>
+    <string name="settings_links_follow_redirects__title_skip_browser">跳过来自浏览器的链接</string>
+    <string name="settings_links_amp2html__text_skip_browser">当已知浏览器唤起 LinkSheet 时，不要运行 Amp2Html</string>
+    <string name="resolve_event__generating_preview">生成预览中</string>
+    <string name="resolve_event__checking_browsers">检查浏览器中</string>
+    <string name="resolve_event__sorting_apps">排列应用中</string>
+    <string name="resolve_event__loading_preferred_apps">加载偏好应用中</string>
+    <string name="settings_app_config_rules__title_rules">规则</string>
+    <string name="settings_app_config__title_preferred_browser">偏好浏览器</string>
+    <string name="settings_app_config__title_native_apps">应用</string>
+    <string name="settings_app_config__description_native_apps">能够处理此域名链接的应用</string>
+    <string name="settings_app_config__description_browsers">已安装的网页浏览器</string>
+    <string name="settings_app_config_rules__title_default_rule">默认规则</string>
+    <string name="settings_edit_rule__title_edit_rule">编辑规则</string>
+    <string name="settings_new_rule__title_new_rule">新规则</string>
+    <string name="theme_enable_amoled_explainer">启用深色模式时使用纯黑主题</string>
+    <string name="show_linksheet_referrer_explainer">当应用被启动时，可以检查启动（或“引用”）它的应用。默认情况下，LinkSheet 启动应用时会隐藏自身，声称启动 LinkSheet 的应用是启动目标。启用此选项来将 LinkSheet 重新插入为应用的引用来源。</string>
+    <string name="privacy_settings_explainer">引用来源隐私，遥测</string>
+    <string name="nightly_experiments_card_explainer">点击看看我们正在开发的功能</string>
+    <string name="experiments_explainer_2">活跃开发中</string>
+    <string name="import_dumped_preference_explainer">导入日志文件中的设置 - 可能对一般用户没用</string>
+    <string name="onboarding_1_title">将 LinkSheet 设置为默认浏览器</string>
+    <string name="onboarding_2_subtitle">如果你安装了大量应用，Shizuku 可显著改善使用体验</string>
+    <string name="external">外部</string>
+    <string name="share">分享链接</string>
+    <string name="allow_darknets">允许暗网</string>
+    <string name="amp2html_allow_darknets_explainer">允许为暗网链接运行 Amp2Html（支持：%s）</string>
+    <string name="follow_redirects_allow_darknets_explainer">允许为暗网链接跟踪重定向（支持：%s）</string>
+    <string name="urlbar_settings">链接条</string>
+    <string name="help">帮助</string>
+    <string name="help_subtitle">入门指南，Wiki，常见问题</string>
+    <string name="verified_link_handlers">已验证链接处理器</string>
+    <string name="settings__subtitle_updates">将 LinkSheet 更新到最新版</string>
+    <string name="settings__title_shortcuts">快捷方式</string>
+    <string name="settings__subtitle_shortcuts">默认浏览器，链接处理，关联应用设置</string>
+    <string name="verified_link_handlers_subtitle">控制应用-域名验证状态</string>
+    <string name="tap_customization_dialog_text">选择应执行的操作</string>
+    <string name="settings_main_setup_success__button_change_browser">默认浏览器</string>
+    <string name="settings_main_setup_success__button_set_default_browser">设置为默认浏览器</string>
+    <string name="settings_shortcuts__title_default_browser">默认浏览器</string>
+    <string name="settings_main_setup_success__button_link_handlers">链接处理器</string>
+    <string name="external_versions">外部版本</string>
+    <string name="build_info">构建版信息</string>
+    <string name="settings__title_updates">更新</string>
+    <string name="settings_shortcuts__title_link_handlers">连接处理器</string>
+    <string name="customization">定制</string>
+    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d 已验证</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="other">%d 个已验证主机</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_none">%d 已禁用</string>
+    <string name="reset_app_link_verification_status_subtitle">点击重置所有应用的链接验证状态，然后等几分钟让 Android 重新验证它们。不会显示确认信息。需要 Shizuku。</string>
+    <string name="onboarding_3_subtitle">需要禁用链接处理，让 LinkSheet 拦截它们</string>
+    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d 已启用</string>
+    <string name="settings_links_amp2html__title_skip_browser">跳过来自浏览器的链接</string>
+    <string name="import_dumped_preference">导出转储设置</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="other">%d 个已启用主机</item>
+    </plurals>
+    <string name="experiments_explainer_3">实验性功能正活跃开发中，可能运作不正常或无法运作。请不要在 GitHub 上报告问题。如果你想提供反馈，请在 Discord 上发一下。</string>
+    <string name="include_history">包含历史记录（点击链接与应用历史）</string>
+    <string name="export_log_dialog__text_log_info">为捕获于 <font face="monospace">%s</font> 的日志配置分享设置 \u0020</string>
+    <string name="onboarding4_paragraph_2">这是特别烦人的，因为有时你不想在对应应用中打开链接，而是想在浏览器中打开（例如添加书签）。
+\n
+\n哎，这就是谷歌，削弱了自己的产品，却没有简单的方法恢复原有行为。
+\n
+\n 不管怎样，它们留了个小“漏洞”：可以按应用禁用链接处理。你可能会希望这会把原来的应用选择器带回来，但当然不可能（因为谷歌！）。现在这些链接总会在默认浏览器中打开。这就是创建 LinkSheet 的原因。</string>
+    <string name="donate_explainer_crypto">用加密货币捐赠时，请发电子邮件给 <annotation url="mailto:1fexd@420blaze.it"/>。 \u0020</string>
+    <string name="new_bottomsheet_explainer">多亏了 <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>，这个版本的 LinkSheet 引入了新版底栏。请在 Discord、GitHub 上或发电子邮件提供反馈。
+\n
+\n你可以在“设置 -&gt; 高级 -&gt; 功能标志”中使用旧版底栏。 \u0020</string>
+    <string name="export_privacy">要了解导出隐私，可以查看这个<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">链接</annotation>。 \u0020</string>
+    <string name="export_include_recommendation">我们推荐你仅在不想将导出数据与他人分享时，再启用以下选项！</string>
+    <string name="linksheet_donation_explainer_2">当捐赠超过 <b>5€</b> 时，你可以获得 <b>LinkSheet Pro</b>，其中包含 <b>Pro 版的特有功能</b>如：外部跟踪重定向、外部获取非 AMP 页面，还有更多！ \u0020</string>
+    <string name="telemetry_dialog_text_2">使用指标包括随安装而定、用户可重置的随机标识符，以及你的 Android 版本，会被存放在 <annotation url="https://aptabase.com">Aptabase (EU)</annotation>。我们<b>从不</b>会收集诸如已安装应用、点击的链接一类的敏感数据。要了解更多，请点击<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">这里</annotation>。 \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">要了解共享日志文件中可能存有的敏感数据，请点击<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">这里</annotation>。 \u0020</string>
+    <string name="new_dev_bottom_sheet_feature_explainer">新版底栏功能快要完成了。值得注意的是，自定义点击尚不可用，将于未来实现。
+\n请在 <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">GitHub</annotation>、<annotation url="https://discord.gg/XndZet2pWF">Discord</annotation> 上或者用<annotation url="mailto:1fexd@420blaze.it">电子邮件</annotation>报告问题。 \u0020</string>
+    <string name="settings__title_filter_apps">筛选应用</string>
+    <string name="settings__title_select_apps">选择应用</string>
+    <string name="information">信息</string>
+    <string name="resolve_embeds">解析短链接</string>
+    <string name="telemetry_level_exhaustive_description">详细的使用统计数据</string>
+    <string name="telemetry_identifier_reset">重置标识符</string>
+    <string name="analytics">分析</string>
+    <string name="telemetry_configure_title">分析</string>
+    <string name="telemetry_configure_type">分析类型</string>
 </resources>

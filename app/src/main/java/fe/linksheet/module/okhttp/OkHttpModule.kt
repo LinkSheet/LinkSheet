@@ -1,4 +1,3 @@
-pip install wlc
 package fe.linksheet.module.okhttp
 
 import android.content.Context
@@ -12,9 +11,6 @@ val okHttpModule = module {
         val context = get<Context>()
         val cache = Cache(context.cacheDir, 25 * 1024 * 1024)
 
-        OkHttpClient.Builder()
-
-
-            .cache(cache).build()
+        OkHttpClient.Builder().cache(cache).build()
     }
 }

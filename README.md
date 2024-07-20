@@ -103,7 +103,7 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 ## Donations
 
-All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨ - donate via the links above
+All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨
 
 <div align="">
     <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img

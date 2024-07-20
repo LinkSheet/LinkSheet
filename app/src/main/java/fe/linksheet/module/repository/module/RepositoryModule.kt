@@ -22,4 +22,5 @@ val repositoryModule = module {
     singleOf(::LibRedirectStateRepository)
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
+    singleOf(::CacheRepository)
 }

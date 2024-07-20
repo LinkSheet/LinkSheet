@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "preview_cache",
     foreignKeys = [
-        ForeignKey(entity = UrlEntity::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
+        ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
     ]
 )
 data class PreviewCache(

@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "html_cache",
     foreignKeys = [
-        ForeignKey(entity = UrlEntity::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
+        ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
     ]
 )
-data class HtmlCache(
+data class CachedHtml(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val content: String
 ) {

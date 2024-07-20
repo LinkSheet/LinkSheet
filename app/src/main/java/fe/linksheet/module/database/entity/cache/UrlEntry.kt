@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "url")
-data class UrlEntity(
+data class UrlEntry(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val timestamp: Long,
+    val timestamp: Long = System.currentTimeMillis(),
     val url: String
 ) {
 }

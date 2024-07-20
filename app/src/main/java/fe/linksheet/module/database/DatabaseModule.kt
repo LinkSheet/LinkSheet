@@ -13,6 +13,7 @@ import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
 import fe.linksheet.module.database.entity.*
+import fe.linksheet.module.database.entity.cache.*
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
@@ -33,6 +34,7 @@ val databaseModule = module {
         PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
+        HtmlCache::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntity::class
     ],
     version = 17,
     autoMigrations = [
@@ -45,7 +47,8 @@ val databaseModule = module {
         AutoMigration(from = 8, to = 9),
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
-        AutoMigration(from = 11, to = 12)
+        AutoMigration(from = 11, to = 12),
+        AutoMigration(from = 12, to = 13)
     ],
     exportSchema = true
 )

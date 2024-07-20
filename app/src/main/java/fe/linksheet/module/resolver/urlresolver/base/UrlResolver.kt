@@ -48,10 +48,12 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         }
 
         if (localCache) {
-            val cached = resolverRepository.getForInputUrl(uriString)?.url
-            if (cached != null) {
-                logger.info(cached, HashProcessor.UrlProcessor) { "From local cache: $it" }
-                return ResolveResultType.Resolved.LocalCache(cached).success()
+            val entry = resolverRepository.getForInputUrl(uriString)
+            if (entry != null) {
+                val cachedUrl = entry.url ?: return null
+
+                logger.info(cachedUrl, HashProcessor.UrlProcessor) { "From local cache: $it" }
+                return ResolveResultType.Resolved.LocalCache(cachedUrl).success()
             }
         }
 
@@ -62,6 +64,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         val resolveResult = resolve(uriString, uriLogContext, externalService, uri.compatHost, darknet, connectTimeout)
 
         if (localCache) {
+            // TODO: Insert skip
             val url = resolveResult.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
             if (url != null) {
                 resolverRepository.insert(uriString, url)

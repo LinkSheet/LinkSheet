@@ -8,14 +8,13 @@ import fe.linksheet.module.redactor.Redactor
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 
-@Entity(tableName = "resolved_redirect", primaryKeys = ["shortUrl", "resolvedUrl"])
+@Entity(tableName = "resolved_redirect", primaryKeys = ["shortUrl"])
 data class ResolvedRedirect(
     val shortUrl: String,
-    val resolvedUrl: String
+    val resolvedUrl: String? = null
 ) : ResolverEntity<ResolvedRedirect>, Redactable<ResolvedRedirect> {
     @Ignore
-    override val url: String = resolvedUrl
-
+    override val url: String? = resolvedUrl
 
     override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
         return builder.curlyWrapped {

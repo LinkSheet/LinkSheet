@@ -153,7 +153,7 @@ class ImprovedIntentResolver(
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
         val canAccessInternet = canAccessInternet()
 
-        Log.d("ImprovedIntentResolver", "Referrer=$referrer")
+        logger.debug("Referrer=$referrer")
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
@@ -162,7 +162,7 @@ class ImprovedIntentResolver(
         var uri = getUriFromIntent(intent)
 
         if (uri == null) {
-            Log.d("ImprovedIntentResolver", "Failed to parse intent ${intent.action}")
+            logger.error("Failed to parsed intent ${intent.action}")
             return@scope IntentResolveResult.IntentParseFailed
         }
 
@@ -301,7 +301,7 @@ class ImprovedIntentResolver(
 
             val unfurlDeferred = async { tryUnfurl(uri = uri) }
             val unfurlCancel = ResolverInteraction.Cancelable(ResolveEvent.GeneratingPreview) {
-                Log.d("ImprovedIntentResolver", "Cancelling $unfurlDeferred")
+                logger.debug("Cancelling $unfurlDeferred")
                 unfurlDeferred.cancel()
             }
 

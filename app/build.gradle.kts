@@ -283,7 +283,6 @@ dependencies {
     implementation(_1fexd.signify)
     implementation(_1fexd.fastForward)
     implementation(_1fexd.libredirectkt)
-    implementation(_1fexd.mimeType)
     implementation(_1fexd.amp2html)
     implementation(_1fexd.stringBuilder)
     implementation(_1fexd.embedResolve)

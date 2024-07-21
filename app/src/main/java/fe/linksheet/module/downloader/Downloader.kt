@@ -9,7 +9,7 @@ import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.util.MimeType
-import fe.mimetypekt.MimeTypes
+import fe.linksheet.util.KnownMimeTypes
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import org.koin.dsl.module
@@ -55,8 +55,8 @@ sealed class DownloadCheckResult : Redactable<DownloadCheckResult> {
 class Downloader(private val cachedRequest: CachedRequest, private val logger: Logger) {
 
     companion object {
-        private val mimeTypeToExtension = MimeTypes.mimeTypeToExtensions
-        private val extensionToMimeType = MimeTypes.extensionToMimeType
+        private val mimeTypeToExtension = KnownMimeTypes.mimeTypeToExtensions
+        private val extensionToMimeType = KnownMimeTypes.extensionToMimeType
     }
 
     fun checkIsNonHtmlFileEnding(url: String): DownloadCheckResult {

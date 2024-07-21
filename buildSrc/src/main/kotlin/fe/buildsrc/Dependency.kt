@@ -41,7 +41,6 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
     val clearUrl = DependencyNotation(group = group, name = "clearurlkt")
     val fastForward = DependencyNotation(group = group, name = "fastforwardkt")
     val libredirectkt = DependencyNotation(group = group, name = "libredirectkt")
-    val mimeType = DependencyNotation(group = group, name = "mimetypekt")
     val amp2html = DependencyNotation(group = group, name = "amp2htmlkt")
     val stringBuilder = DependencyNotation(group = group, name = "stringbuilder-util-kt")
     val embedResolve = DependencyNotation(group = group, name = "embed-resolve")

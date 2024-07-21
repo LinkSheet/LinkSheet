@@ -52,18 +52,6 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
   </div>
  </div>
 
-## Donations
-
-<div align="">
-    <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img
-            src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png"
-            alt="Buy Me A Coffee"
-            style="border-radius: 10px; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" /></a>
-    <a href="https://coindrop.to/fexd" target="_blank">
-        <img src="https://coindrop.to/embed-button.png" alt="Coindrop.to me" style="border-radius: 10px; !important; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" />
-    </a>
-</div>
-
 ## Join Discord
 
 <div align="">
@@ -96,10 +84,6 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
   <li><strong>Pro:</strong> Sustain LinkSheet's development - a small donation keeps me motivated to work on the app - thank you!</li>
 </ul>
 
-## Donations
-
-All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨ - donate via the links above
-
 ## Nightly builds
 
 Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred)
@@ -117,11 +101,25 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 * Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/)
 * Allow translations except for English are maintained by contributors
 
+## Donations
+
+All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨
+
+<div align="">
+    <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img
+            src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png"
+            alt="Buy Me A Coffee"
+            style="border-radius: 10px; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" /></a>
+    <a href="https://coindrop.to/fexd" target="_blank">
+        <img src="https://coindrop.to/embed-button.png" alt="Coindrop.to me" style="border-radius: 10px; !important; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" />
+    </a>
+</div>
+
 ## Credits
 
 * LinkSheet was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
-* [MastodonRedirect](https://github.com/zacharee/MastodonRedirect) provided a reference for the Shizuku implementation
-* Inspiration has been taken from [Seal](https://github.com/JunkFood02/Seal) and [GMS-Flags](https://github.com/polodarb/GMS-Flags)
+* [MastodonRedirect](https://github.com/zacharee/MastodonRedirect): Reference for the Shizuku implementation
+* Design inspired by [Seal](https://github.com/JunkFood02/Seal) and [GMS-Flags](https://github.com/polodarb/GMS-Flags)
 
 ## Star History
 

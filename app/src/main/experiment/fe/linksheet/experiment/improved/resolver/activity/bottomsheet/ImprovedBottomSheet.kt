@@ -109,6 +109,27 @@ class ImprovedBottomSheet(
             status = resolver.resolve(intent.toSafeIntent(), referrer)
         }
 
+        val coroutineScope = rememberCoroutineScope()
+        val drawerState = androidx.compose.material3.fix.rememberModalBottomSheetState()
+
+        val hideDrawer: () -> Unit = {
+            coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
+        }
+
+        if (status is IntentResolveResult.Default) {
+            val completed = status as IntentResolveResult.Default
+            if (completed.hasAutoLaunchApp) {
+                launchApp(
+                    completed,
+                    completed.app,
+                    always = completed.isRegularPreferredApp,
+                    persist = false,
+                )
+
+                return
+            }
+        }
+
 //        LaunchedEffect(key1 = status) {
 ////            Toast.makeText(this@ImprovedBottomSheetActivity, "Status: $status", Toast.LENGTH_SHORT).show()
 //            Log.d("BottomSheet", "Status: ${status.javaClass.simpleName}")
@@ -117,19 +138,12 @@ class ImprovedBottomSheet(
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-        val coroutineScope = rememberCoroutineScope()
-        val drawerState = androidx.compose.material3.fix.rememberModalBottomSheetState()
-
         LaunchedEffect(key1 = status) {
             if (viewModel.improvedBottomSheetExpandFully()) {
                 drawerState.expand()
             } else {
                 drawerState.partialExpand()
             }
-        }
-
-        val hide: () -> Unit = {
-            coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
         ImprovedBottomDrawer(
@@ -143,7 +157,7 @@ class ImprovedBottomSheet(
                 bottomEnd = 0.0.dp,
                 bottomStart = 0.0.dp
             ),
-            hide = hide,
+            hide = hideDrawer,
             sheetContent = {
                 if (status is IntentResolveResult.Pending) {
                     LoadingIndicator(events = resolver.events, interactions = resolver.interactions, requestExpand = {
@@ -153,7 +167,7 @@ class ImprovedBottomSheet(
                     AppWrapper_Temp(
                         status = status as IntentResolveResult.Default,
                         isExpanded = drawerState.currentValue == SheetValue.Expanded,
-                        hideDrawer = hide
+                        hideDrawer = hideDrawer
                     )
                 }
 //                val scope: ColumnScope = this@BottomDrawer

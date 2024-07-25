@@ -77,9 +77,6 @@ class LinkSheetApp : Application() {
 
         lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
         lifecycleObserver.attach()
-//        InMemoryDexClassLoader(
-//        Class.forName()
-//        View.MeasureSpec().getMo
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -103,23 +100,9 @@ class LinkSheetApp : Application() {
         }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
-//NavArgsLazy
-//        NavArgsLazy
-
-
-//        "test".substring()
-//        jdk.internal.math.FloatingDecimal
-//        KoinComponent()
-//
-//        KoinPlatformTools.defaultContext().startKoin(
-//
-//        )
-//        val x: ComponentCallbacks? = null
-//        x!!.getKoinScope()
 
         val koinApplication = startKoin {
             androidLogger()
-//            androidContext(this@LinkSheetApp)
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
             modules(
@@ -149,25 +132,6 @@ class LinkSheetApp : Application() {
             )
         }
 
-
-
-        MutableSharedFlow<String>(replay = 0, extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-//        Unit
-//        AppCompatButton
-
-//        EmojiCompatConfigurationView
-
-//        kotlin.jvm.functions.Function2
-//        MutableCollection
-
-//        Charsets
-//        AccessibilityNodeInfo
-
-//        NavBackStackEntry()
-//        ViewGroupCompat
-//        AbstractSavedStateViewModelFactory
-
-        AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN
         lifecycleObserver.dispatchAppInitialized()
 
         if (BuildType.current.allowDebug) {

@@ -1,6 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.about
 
-import ClearURLsMetadata
 import LibRedirectMetadata
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
 import fe.android.span.helper.composable.fromStringRes
+import fe.clearurlskt.ClearURLsMetadata
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
@@ -46,7 +46,7 @@ object NewAboutSettingsRouteData {
         ListItemData(
             vector(Icons.Outlined.ClearAll),
             textContent(R.string.clear_urls_version),
-            additional = ClearURLsMetadata.fetchedAt
+            additional = ClearURLsMetadata.FETCHED_AT
         ),
         ListItemData(
             vector(Icons.Outlined.Bolt),

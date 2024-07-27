@@ -1,6 +1,5 @@
 package fe.linksheet.composable.settings.about
 
-import ClearURLsMetadata
 import LibRedirectMetadata
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -45,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.clearurlskt.ClearURLsMetadata
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
@@ -275,7 +275,7 @@ fun AboutSettingsRoute(
             item("clearurls_version") {
                 LibraryLastUpdatedRow(
                     R.string.clear_urls_version,
-                    ClearURLsMetadata.fetchedAt,
+                    ClearURLsMetadata.FETCHED_AT,
                     Icons.Default.ClearAll
                 )
             }

@@ -66,7 +66,7 @@
     <string name="follow_redirects_local_cache_explainer">Almacenar en la caché el resultado de las redirecciones locales</string>
     <string name="use_app_settings_explainer">Dejar que la aplicación decida si el Navegador en aplicación debería ser usado</string>
     <string name="display_grid_layout_explainer">Mostrar una cuadrícula en lugar de una lista en la hoja inferior</string>
-    <string name="app_browsers">Aplicaciones</string>
+    <string name="app_browsers">Aplicaciones y Navegadores</string>
     <string name="no_apps_found">No se han encontrado aplicaciones.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet no puede abrir este enlace.</string>

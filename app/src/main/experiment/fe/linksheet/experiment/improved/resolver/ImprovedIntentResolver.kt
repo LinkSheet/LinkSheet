@@ -18,7 +18,6 @@ import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.extension.kotlinx.awaitOrNull
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -37,6 +36,7 @@ import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
+import fe.linksheet.module.unfurler.CooperativeUnfurler
 import fe.linksheet.util.IntentParser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,6 +44,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
+import okhttp3.OkHttpClient
 import org.koin.core.component.KoinComponent
 
 @Stable
@@ -62,7 +63,7 @@ class ImprovedIntentResolver(
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
-    private val unfurler: Unfurler,
+    private val unfurler: CooperativeUnfurler,
 ) : KoinComponent {
     private val logger by injectLogger<ImprovedIntentResolver>()
 
@@ -300,15 +301,23 @@ class ImprovedIntentResolver(
             emitEvent(ResolveEvent.GeneratingPreview)
 
             val unfurlDeferred = async { tryUnfurl(uri = uri) }
+
             val unfurlCancel = ResolverInteraction.Cancelable(ResolveEvent.GeneratingPreview) {
                 logger.debug("Cancelling $unfurlDeferred")
                 unfurlDeferred.cancel()
+                unfurler.cancel()
             }
 
             emitInteraction(unfurlCancel)
 
             Log.d("ImprovedIntentResolver", "Awaiting..")
-            unfurl = unfurlDeferred.awaitOrNull()
+
+            try {
+                unfurl = unfurlDeferred.await()
+            } catch (e: CancellationException) {
+                currentCoroutineContext().ensureActive()
+                logger.error(e)
+            }
 
             clearInteraction()
         }

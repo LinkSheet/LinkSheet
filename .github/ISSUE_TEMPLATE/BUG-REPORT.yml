@@ -57,7 +57,7 @@ body:
     id: reproducible-nightly
     attributes:
       label: Reproducible on latest nightly build
-      description: Is this issue reproducible on the [latest nightly build](https://nightly.link/1fexd/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)?
+      description: Is this issue reproducible on the [latest nightly build](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)?
       options:
         - "Yes"
         - "No"

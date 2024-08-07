@@ -23,7 +23,7 @@ class DebugLoggerDelegate(
         val module = module {
             factory<Logger, Redactor, LogFileService> { params, redactor, storageService ->
                 val delegate = DebugLoggerDelegate(params.get<KClass<*>>(), redactor, storageService)
-                Logger(delegate, applicationLifecycle.coroutineScope)
+                Logger(delegate)
             }
         }
     }

@@ -1,6 +1,5 @@
 package fe.linksheet.module.log
 
-import androidx.lifecycle.LifecycleCoroutineScope
 import fe.linksheet.extension.koin.factory
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.log.internal.DefaultLoggerDelegate
@@ -8,24 +7,18 @@ import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.log.internal.ProduceMessage
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import org.koin.dsl.module
 import kotlin.reflect.KClass
 
 val defaultLoggerModule = module {
     factory<Logger, Redactor, LogFileService> { params, redactor, logFileService ->
-        val clazz = params.get<KClass<*>>()
-        val delegate = DefaultLoggerDelegate(clazz, redactor, logFileService)
-
-        Logger(delegate, applicationLifecycle.coroutineScope)
+        val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, logFileService)
+        Logger(delegate)
     }
 }
 
-class Logger(private val delegate: LoggerDelegate, private val scope: LifecycleCoroutineScope) {
-
-    fun fatal(stacktrace: String) = scope.launch(Dispatchers.Default) {
+class Logger(private val delegate: LoggerDelegate) {
+    fun fatal(stacktrace: String) {
         delegate.fatal(stacktrace)
     }
 
@@ -36,34 +29,30 @@ class Logger(private val delegate: LoggerDelegate, private val scope: LifecycleC
     /**
      * Verbose facades
      */
-    fun verbose(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun verbose(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Verbose, param, msg, null)
     }
 
-    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, null)
     }
 
-    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, subPrefix)
-        }
+    fun <T> verbose(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Verbose, param, processor, msg, subPrefix)
     }
 
-    fun verbose(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Verbose, msg, throwable, subPrefix)
-        }
+    fun verbose(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Verbose, msg, throwable, subPrefix)
     }
 
-    fun verbose(throwable: Throwable, subPrefix: String? = null) = scope.launch(Dispatchers.Default) {
+    fun verbose(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Verbose, throwable = throwable, subPrefix = subPrefix)
     }
 
     /**
      * Info facades
      */
-    fun info(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun info(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Info, param, msg, null)
     }
 
@@ -72,81 +61,69 @@ class Logger(private val delegate: LoggerDelegate, private val scope: LifecycleC
         return `return`
     }
 
-    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Info, param, processor, msg, null)
     }
 
-    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Info, param, processor, msg, subPrefix)
-        }
+    fun <T> info(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Info, param, processor, msg, subPrefix)
     }
 
-    fun info(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Info, msg, throwable, subPrefix)
-        }
+    fun info(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Info, msg, throwable, subPrefix)
     }
 
-    fun info(throwable: Throwable, subPrefix: String? = null) = scope.launch(Dispatchers.Default) {
+    fun info(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Info, throwable = throwable, subPrefix = subPrefix)
     }
 
     /**
      * Debug facades
      */
-    fun debug(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun debug(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Debug, param, msg, null)
     }
 
-    fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun <T> debug(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, null)
     }
 
-    fun <T> debug(param: T?, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            if (param != null) {
-                delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
-            } else {
-                delegate.log(LoggerDelegate.Level.Debug, msg("<null>"), subPrefix = subPrefix)
-            }
+    fun <T> debug(param: T?, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        if (param != null) {
+            delegate.log(LoggerDelegate.Level.Debug, param, processor, msg, subPrefix)
+        } else {
+            delegate.log(LoggerDelegate.Level.Debug, msg("<null>"), subPrefix = subPrefix)
         }
     }
 
-    fun debug(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Debug, msg, throwable, subPrefix)
-        }
+    fun debug(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Debug, msg, throwable, subPrefix)
     }
 
-    fun debug(throwable: Throwable, subPrefix: String? = null) = scope.launch(Dispatchers.Default) {
+    fun debug(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Debug, throwable = throwable, subPrefix = subPrefix)
     }
 
     /**
      * Error facades
      */
-    fun error(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun error(param: LoggerDelegate.RedactedParameter, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Error, param, msg, null)
     }
 
-    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage) = scope.launch(Dispatchers.Default) {
+    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage) {
         delegate.log(LoggerDelegate.Level.Error, param, processor, msg)
     }
 
-    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Error, param, processor, msg, subPrefix)
-        }
+    fun <T> error(param: T, processor: HashProcessor<T>, msg: ProduceMessage, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Error, param, processor, msg, subPrefix)
     }
 
-    fun error(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null): Job {
-        return scope.launch(Dispatchers.Default) {
-            delegate.log(LoggerDelegate.Level.Error, msg, throwable, subPrefix)
-        }
+    fun error(msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        delegate.log(LoggerDelegate.Level.Error, msg, throwable, subPrefix)
     }
 
-    fun error(throwable: Throwable, subPrefix: String? = null) = scope.launch(Dispatchers.Default) {
+    fun error(throwable: Throwable, subPrefix: String? = null) {
         delegate.log(LoggerDelegate.Level.Error, throwable = throwable, subPrefix = subPrefix)
     }
 

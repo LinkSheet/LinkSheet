@@ -1,62 +1,27 @@
 package fe.linksheet.module.analytics
 
-import android.content.Context
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
-import fe.linksheet.BuildConfig
-import fe.linksheet.extension.koin.service
-import fe.linksheet.lifecycle.Service
-import fe.linksheet.module.analytics.client.AptabaseAnalyticsClient
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
-import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
-import org.koin.dsl.module
-import java.io.IOException
 import java.util.*
 import kotlin.math.pow
-import kotlin.properties.Delegates
 
-@OptIn(SensitivePreference::class)
-val analyticsModule = module {
-    service<AnalyticsClient, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
-        val id = preferences.getOrPutInit(AppPreferences.telemetryId)
-        val identity = preferences.get(AppPreferences.telemetryIdentity)
-        val level = preferences.get(AppPreferences.telemetryLevel)
-        val hasMadeChoice = !preferences.get(AppPreferences.telemetryShowInfoDialog)
-
-        AptabaseAnalyticsClient(
-            BuildConfig.ANALYTICS_SUPPORTED,
-            applicationLifecycle.coroutineScope,
-            identity.create(applicationContext, id),
-            if (hasMadeChoice) level else null,
-            networkState,
-            logger,
-            BuildConfig.APTABASE_API_KEY
-        )
-    }
-}
-
-abstract class AnalyticsClient(
-    private val supported: Boolean,
+class BatchedEventQueue(
+    private val client: AnalyticsClient,
     private val coroutineScope: LifecycleCoroutineScope,
-    protected val identityData: TelemetryIdentityData,
-    initialLevel: TelemetryLevel? = null,
-    private val networkState: NetworkStateService,
     val logger: Logger,
-) : Service {
-    private var currentLevel: TelemetryLevel? = initialLevel
-
-    private var eventProcessor: Job? = null
-    private var enabled by Delegates.notNull<Boolean>()
-
+    private var currentLevel: TelemetryLevel?,
+    private val networkState: NetworkStateService,
+) {
+    private var job: Job? = null
     private val eventQueue = Channel<AnalyticsEvent>(capacity = UNLIMITED)
 
     companion object {
+        // TODO: The client should define these settings
+
         // At most 25 (https://github.com/aptabase/aptabase/blob/06c026505f1a91b9ddb4717838a8f8132d830fcb/src/Features/Ingestion/EventsController.cs#L95)
         const val CHUNK_SIZE = 5
         const val MAX_CHUNK_SIZE = 25
@@ -65,48 +30,41 @@ abstract class AnalyticsClient(
         val TRY_DELAY: (Int) -> Long = { attemptNo -> 10 * 1000L * 2.0.pow(attemptNo).toLong() }
     }
 
-    protected open fun checkImplEnabled() = true
+    private fun createEventProcessor(level: TelemetryLevel?, dispatcher: CoroutineDispatcher = Dispatchers.IO): Job? {
+        if (level == null) return null
+//        if (!supported || !checkImplEnabled()) return null
+        if (level == TelemetryLevel.Disabled) return null
 
-    protected open fun setup(context: Context) {}
-
-    @Throws(IOException::class)
-    protected abstract fun send(events: List<AnalyticsEvent>): Boolean
-
-    override fun onAppInitialized(lifecycle: Lifecycle) {
-        if (currentLevel != null) {
-            tryStart()
-        }
+        return coroutineScope.launch(dispatcher) { processEvents() }
     }
 
-    fun updateLevel(newLevel: TelemetryLevel): AnalyticsClient {
+    fun startWith(newLevel: TelemetryLevel?) {
+        logger.debug("Starting client, currentLevel: $currentLevel, newLevel: $newLevel")
         currentLevel = newLevel
-        return this
+
+        coroutineScope.launch { start() }
     }
 
-    fun tryStart(): Boolean {
-        if (!supported || !this.checkImplEnabled()) return false
-        if (currentLevel == TelemetryLevel.Disabled) return false
+    suspend fun start() {
+        logger.debug("Active processor: $job, cancelling")
 
-        eventProcessor = coroutineScope.launch(Dispatchers.IO) {
-            processEvents()
-        }
+        job?.cancelAndJoin()
 
-        return true
+        logger.debug("Creating event processor with level $currentLevel")
+        job = createEventProcessor(currentLevel)
     }
 
-    override fun onStop(lifecycle: Lifecycle) {
+    suspend fun stop() {
         logger.debug("Stop received, cancelling processor")
 
-        coroutineScope.launch(Dispatchers.IO) {
-            eventProcessor?.cancelAndJoin()
-            logger.debug("Cancelled, have ${batchedEvents.size} batched events")
+        job?.cancelAndJoin()
+        logger.debug("Cancelled, have ${batchedEvents.size} batched events")
 
-            val chunks = batchedEvents.chunked(MAX_CHUNK_SIZE)
-            logger.debug("Split batched events into ${chunks.size} chunks")
+        val chunks = batchedEvents.chunked(MAX_CHUNK_SIZE)
+        logger.debug("Split batched events into ${chunks.size} chunks")
 
-            for (chunk in chunks) {
-                trySend(chunk)
-            }
+        for (chunk in chunks) {
+            send(chunk)
         }
     }
 
@@ -114,9 +72,10 @@ abstract class AnalyticsClient(
 
     @OptIn(DelicateCoroutinesApi::class)
     private suspend fun processEvents() {
+        logger.debug("Process event loop started")
         var lastSend = -1L
 
-        while (!eventQueue.isClosedForReceive) {
+        while (!eventQueue.isClosedForReceive && currentCoroutineContext().isActive) {
             batchedEvents.clear()
 
             val firstEvent = eventQueue.receive()
@@ -144,14 +103,17 @@ abstract class AnalyticsClient(
             }
 
             logger.debug("Sending events (${batchedEvents.size}, timeout: $timeoutExceeded)")
-            trySend(batchedEvents)
+            send(batchedEvents)
 
             lastSend = System.currentTimeMillis()
         }
     }
 
-    private suspend fun trySend(events: List<AnalyticsEvent>): Boolean {
-        if (events.isEmpty()) return false
+    private suspend fun send(
+        events: List<AnalyticsEvent>,
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    ) = withContext(dispatcher) {
+        if (events.isEmpty()) return@withContext false
 
         logger.debug("Awaiting internet access..")
         networkState.awaitNetworkConnection()
@@ -160,10 +122,10 @@ abstract class AnalyticsClient(
         for (i in 0 until SEND_TRIES) {
             logger.debug("Trying to send events (attemptNo: ${i + 1})")
             runCatching {
-                val success = send(events)
+                val success = client.sendEvents(events)
                 logger.debug("Send result: $success")
                 if (success) {
-                    return true
+                    return@withContext true
                 }
             }.onFailure {
                 it.printStackTrace()
@@ -174,7 +136,7 @@ abstract class AnalyticsClient(
             delay(TRY_DELAY(i))
         }
 
-        return false
+        false
     }
 
     fun enqueue(event: AnalyticsEvent?): Boolean {

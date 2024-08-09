@@ -1,12 +1,11 @@
 package fe.linksheet.module.statistic
 
-import androidx.lifecycle.Lifecycle
+import fe.android.lifecycle.LifecycleService
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service
-import fe.linksheet.lifecycle.Service
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.SensitivePreference
 import org.koin.dsl.module
 
 val statisticsModule = module {
@@ -15,11 +14,11 @@ val statisticsModule = module {
     }
 }
 
-class StatisticsService(val preferenceRepository: AppPreferenceRepository) : Service {
+class StatisticsService(val preferenceRepository: AppPreferenceRepository) : LifecycleService {
     private val start = System.currentTimeMillis()
 
     @OptIn(SensitivePreference::class)
-    override fun onStop(lifecycle: Lifecycle) {
+    override suspend fun onStop() {
         val currentUseTime = preferenceRepository.get(AppPreferences.useTimeMs)
         val usedFor = System.currentTimeMillis() - start
 

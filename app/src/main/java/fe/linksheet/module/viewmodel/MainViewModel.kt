@@ -27,7 +27,7 @@ import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.AnalyticsService
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -49,7 +49,7 @@ class MainViewModel(
     val experimentRepository: ExperimentRepository,
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
-    val analyticsClient: AnalyticsClient,
+    val analyticsService: AnalyticsService,
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
@@ -74,13 +74,13 @@ class MainViewModel(
     }
 
     fun enqueueNavEvent(destination: NavDestination, args: Bundle?) {
-        analyticsClient.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
+        analyticsService.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
     }
 
     fun updateTelemetryLevel(level: TelemetryLevel) {
         telemetryLevel(level)
         telemetryShowInfoDialog(false)
-        analyticsClient.updateLevel(level).tryStart()
+        analyticsService.startWith(level)
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {

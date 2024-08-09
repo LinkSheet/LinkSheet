@@ -1,6 +1,11 @@
 import com.android.build.api.dsl.VariantDimension
 import de.fayard.refreshVersions.core.versionFor
-import fe.buildsrc.*
+import fe.buildsrc.KotlinClosure4
+import fe.buildsrc.Version
+import fe.buildsrc.dependency.Grrfe
+import fe.buildsrc.dependency.LinkSheet
+import fe.buildsrc.dependency.MozillaComponents
+import fe.buildsrc.dependency._1fexd
 import fe.buildsrc.extension.getOrSystemEnv
 import fe.buildsrc.extension.getOrSystemEnvOrDef
 import fe.buildsrc.extension.readPropertiesOrNull
@@ -292,7 +297,11 @@ dependencies {
     implementation(_1fexd.android.compose.dialog)
     implementation(_1fexd.android.compose.route)
     implementation(_1fexd.android.span.compose)
+    implementation(_1fexd.android.lifecycleUtil.core)
+    implementation(_1fexd.android.lifecycleUtil.koin)
 
+//    implementation("fe.android.lifecycle.util.core:core")
+//    implementation("fe.android.lifecycle.util.koin:koin")
     implementation(libs.zipline.android)
     implementation(libs.zipline.loader.android)
 
@@ -313,8 +322,8 @@ dependencies {
     implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
-    implementation(libs.support.utils)
-    implementation(libs.lib.publicsuffixlist)
+    implementation(MozillaComponents.support.utils)
+    implementation(MozillaComponents.lib.publicSuffixList)
 
     testImplementation(Koin.test)
     testImplementation(libs.koin.android.test)

@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
-import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.AnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -16,7 +16,7 @@ class PrivacySettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository,
     experimentsRepository: ExperimentRepository,
-    private val analyticsClient: AnalyticsClient,
+    private val analyticsService: AnalyticsService,
 ) : BaseViewModel(preferenceRepository) {
     var showAsReferrer = preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
     val enableAnalytics = experimentsRepository.asState(Experiments.enableAnalytics)
@@ -27,7 +27,7 @@ class PrivacySettingsViewModel(
     fun updateTelemetryLevel(level: TelemetryLevel) {
         telemetryLevel(level)
         // TODO: Cancel old job?
-        analyticsClient.updateLevel(level).tryStart()
+        analyticsService.startWith(level)
     }
 
     fun resetIdentifier() {

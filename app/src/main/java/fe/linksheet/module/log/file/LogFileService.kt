@@ -2,14 +2,14 @@ package fe.linksheet.module.log.file
 
 import android.content.Context
 import android.os.Parcelable
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import fe.android.lifecycle.LifecycleService
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.extension.koin.service
-import fe.linksheet.lifecycle.Service
 import fe.linksheet.module.log.file.entry.LogEntry
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -24,7 +24,7 @@ val logFileServiceModule = module {
     }
 }
 
-class LogFileService(private val logDir: File) : Service {
+class LogFileService(private val logDir: File) : LifecycleService {
     companion object {
         private const val LOG_DIR = "logs"
         const val FILE_EXT = "log"
@@ -81,12 +81,12 @@ class LogFileService(private val logDir: File) : Service {
         logEntries.add(entry)
     }
 
-    override fun onAppInitialized(lifecycle: Lifecycle) {
+    override suspend fun onAppInitialized(owner: LifecycleOwner) {
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
         getLogFiles().filter { it.millis < startupMillis }.forEach { deleteLogFile(it) }
     }
 
-    override fun onStop(lifecycle: Lifecycle) {
+    override suspend fun onStop() {
         val immutable = logEntries.toList()
         if (immutable.isNotEmpty()) {
             LogFile.new(logDir).file.toJson(immutable)

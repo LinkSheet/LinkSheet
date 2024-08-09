@@ -1,4 +1,4 @@
-package fe.buildsrc
+package fe.buildsrc.dependency
 
 import de.fayard.refreshVersions.core.DependencyGroup
 import de.fayard.refreshVersions.core.DependencyNotation
@@ -34,6 +34,16 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
         ) {
             val compose = module("compose")
         }
+
+        val lifecycleUtil = LifecycleUtil
+
+        object LifecycleUtil : DependencyNotationAndGroup(
+            group = "$group.android-lifecycle-util",
+            name = "android-lifecycle-util"
+        ) {
+            val core = module("core")
+            val koin = module("koin")
+        }
     }
 
     val uriParser = DependencyNotation(group = group, name = "uriparser")
@@ -47,47 +57,3 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
     val signify = DependencyNotation(group = group, name = "signifykt")
 
 }
-
-object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
-    val httpkt = HttpKt
-
-    object HttpKt : DependencyNotationAndGroup(group = "$group.httpkt", name = "httpkt") {
-        val core = module("core")
-        val gson = module("ext-gson")
-    }
-
-    val ext = Ext
-
-    object Ext : IsNotADependency {
-        val gson = DependencyNotation(group = group, name = "gson-ext")
-        val kotlin = DependencyNotation(group = group, name = "kotlin-ext")
-    }
-
-    val processLauncher = DependencyNotation(group = group, name = "process-launcher")
-}
-
-object LinkSheet : DependencyGroup(group = "com.github.LinkSheet") {
-    val flavors = DependencyNotation(group = group, name = "flavors")
-    val interconnect = DependencyNotation(group = group, name = "interconnect")
-}
-
-object PinnedVersions : IsNotADependency {
-    private const val COMPOSE_VERSION = "1.7.0-beta03"
-
-    var ComposeUi = AndroidX.compose.ui.withVersion(COMPOSE_VERSION)
-    var ComposeFoundation = AndroidX.compose.foundation.withVersion(COMPOSE_VERSION)
-
-    var Material3 = AndroidX.compose.material3.withVersion("1.3.0-beta03")
-}
-
-//clearurlkt = "com.github.1fexd:clearurlkt:_"
-//fastforwardkt = "com.github.1fexd:fastforwardkt:_"
-//libredirectkt = "com.github.1fexd:libredirectkt:_"
-//
-//mimetypekt = "com.github.1fexd:mimetypekt:_"
-//
-//amp2htmlkt = "com.github.1fexd:amp2htmlkt:_"
-//
-//stringbuilder-util-kt = "com.github.1fexd:stringbuilder-util-kt:_"
-
-

@@ -1,5 +1,5 @@
 import de.fayard.refreshVersions.core.versionFor
-import fe.buildsrc.PinnedVersions
+import fe.buildsrc.dependency.PinnedVersions
 import fe.buildsrc.Version
 
 plugins {

@@ -1,4 +1,5 @@
 import org.gradle.api.initialization.resolve.RepositoriesMode
+import java.util.Properties
 
 pluginManagement {
     repositories {
@@ -33,3 +34,14 @@ rootProject.name = "LinkSheet"
 
 include(":app", ":config")
 include(":components", ":compose-util", ":bottom-sheet")
+
+
+val dev = false
+if (dev) {
+    val properties = Properties().apply {
+        file("local.properties").reader().use(::load)
+    }
+
+    includeBuild(properties["android-lifecycle-util.dir"].toString())
+}
+

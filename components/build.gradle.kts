@@ -1,7 +1,7 @@
 import de.fayard.refreshVersions.core.versionFor
-import fe.buildsrc.PinnedVersions
+import fe.buildsrc.dependency.PinnedVersions
 import fe.buildsrc.Version
-import fe.buildsrc._1fexd
+import fe.buildsrc.dependency._1fexd
 
 plugins {
     id("com.android.library")

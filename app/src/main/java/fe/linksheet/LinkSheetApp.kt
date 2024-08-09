@@ -4,25 +4,21 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.util.Log
-import android.view.accessibility.AccessibilityNodeInfo
-import androidx.activity.ComponentActivity
 import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.navigation.NavArgsLazy
 import com.google.android.material.color.DynamicColors
-import com.google.gson.Gson
+import fe.android.lifecycle.AppLifecycleObserver
+import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.gson.context.GlobalGsonContext
-import fe.gson.extension.writeJson
 import fe.gson.globalGsonModule
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
-import fe.linksheet.extension.koin.applicationLifecycle
 import fe.linksheet.lifecycle.ActivityLifecycleObserver
-import fe.linksheet.lifecycle.AppLifecycleObserver
-import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.AnalyticsService
 import fe.linksheet.module.analytics.AppStart
-import fe.linksheet.module.analytics.analyticsModule
+import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
+import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
@@ -52,8 +48,6 @@ import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.HttpUrlTypeAdapter
 import fe.linksheet.util.UriTypeAdapter
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -62,8 +56,10 @@ import kotlin.system.exitProcess
 
 
 class LinkSheetApp : Application() {
-    private lateinit var lifecycleObserver: AppLifecycleObserver
-    private lateinit var activityLifecycleObserver: ActivityLifecycleObserver
+    private val activityLifecycleObserver = ActivityLifecycleObserver()
+    private val lifecycleObserver by lazy {
+        AppLifecycleObserver.observe(ProcessLifecycleOwner.get())
+    }
 
     fun currentActivity(): StateFlow<Activity?> {
         return activityLifecycleObserver.current
@@ -71,12 +67,8 @@ class LinkSheetApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        activityLifecycleObserver = ActivityLifecycleObserver()
         registerActivityLifecycleCallbacks(activityLifecycleObserver)
 
-        lifecycleObserver = AppLifecycleObserver(ProcessLifecycleOwner.get())
-        lifecycleObserver.attach()
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -126,17 +118,18 @@ class LinkSheetApp : Application() {
                 okHttpModule,
                 unfurlerModule,
                 downloaderModule,
-                if (BuildType.current.allowDebug) analyticsModule else DebugLogAnalyticsClient.module,
+                analyticsServiceModule,
+                if (BuildType.current.allowDebug) aptabaseAnalyticsClientModule else DebugLogAnalyticsClient.module,
                 statisticsModule,
                 pasteServiceModule
             )
         }
 
-        lifecycleObserver.dispatchAppInitialized()
+        lifecycleObserver.onAppInitialized()
 
         if (BuildType.current.allowDebug) {
             // TODO: Remove once user is given the choice to opt in/out
-            val analyticsClient = koinApplication.koin.get<AnalyticsClient>()
+            val analyticsClient = koinApplication.koin.get<AnalyticsService>()
             val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()
 
             val lastVersion = preferenceRepository.get(AppPreferences.lastVersion)

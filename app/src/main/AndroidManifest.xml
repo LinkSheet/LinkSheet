@@ -128,7 +128,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
 
                 <data android:scheme="http"/>
@@ -143,7 +142,6 @@
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
 
                 <data android:mimeType="text/plain"/>

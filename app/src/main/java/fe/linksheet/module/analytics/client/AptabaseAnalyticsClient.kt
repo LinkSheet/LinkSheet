@@ -1,29 +1,45 @@
 package fe.linksheet.module.analytics.client
 
 import android.os.Build
-import androidx.lifecycle.LifecycleCoroutineScope
 import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
 import fe.kotlin.extension.primitive.unixMillisAtZone
 import fe.linksheet.BuildConfig
+import fe.linksheet.LinkSheetApp
+import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.*
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.network.NetworkStateService
+import fe.linksheet.module.preference.SensitivePreference
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.util.BuildType
+import org.koin.dsl.module
 import java.io.IOException
 import java.time.format.DateTimeFormatter
 
+@OptIn(SensitivePreference::class)
+val aptabaseAnalyticsClientModule = module {
+    single<AnalyticsClient> {
+        val applicationContext = get<LinkSheetApp>()
+        val preferences = get<AppPreferenceRepository>()
+        val id = preferences.getOrPutInit(AppPreferences.telemetryId)
+        val identity = preferences.get(AppPreferences.telemetryIdentity)
+
+        AptabaseAnalyticsClient(
+            identity.create(applicationContext, id),
+            createLogger<AptabaseAnalyticsClient>(),
+            BuildConfig.APTABASE_API_KEY
+        )
+    }
+}
+
 class AptabaseAnalyticsClient(
-    enabled: Boolean,
-    coroutineScope: LifecycleCoroutineScope,
-    identityData: TelemetryIdentityData,
-    initialLevel: TelemetryLevel?,
-    networkState: NetworkStateService,
+    private val identityData: TelemetryIdentityData,
     logger: Logger,
     private val apiKey: String?,
-) : AnalyticsClient(enabled, coroutineScope, identityData, initialLevel, networkState, logger = logger) {
+) : AnalyticsClient(logger = logger) {
     private val environmentInfo = EnvironmentInfo.from(identityData)
 
     companion object {
@@ -101,7 +117,7 @@ class AptabaseAnalyticsClient(
     }
 
     @Throws(IOException::class)
-    override fun send(events: List<AnalyticsEvent>): Boolean {
+    override fun sendEvents(events: List<AnalyticsEvent>): Boolean {
         val aptabaseEvents = events.map { buildEvent(it) }
         val con = request.post(apiEvents, body = JsonBody(aptabaseEvents))
 

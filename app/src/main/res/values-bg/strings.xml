@@ -2,7 +2,7 @@
 <resources>
     <string name="open_with_app">Отваряне с/ъс %s</string>
     <string name="enable_send_button_explainer">Добавя в долното меню бутон, който дава възможност да споделите адреса с други приложения, все едно сте го избрали от менюто за споделяне</string>
-    <string name="bottom_sheet_explainer">Сортиране, бутони и други</string>
+    <string name="bottom_sheet_explainer">Настройки и изглед</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
     <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, разположен в supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
     <string name="download">Изтегляне</string>
@@ -13,7 +13,7 @@
     <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="clear_urls">ClearURL</string>
     <string name="checkmark">Отметка</string>
-    <string name="donate_subtitle">Ако желаете да направите дарение и да получите <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="single_tap_explainer">Приложенията се избират с едно докосване вместо две; Задържане за избор на приложение, двойно докосване за информация за приложението</string>
@@ -38,7 +38,7 @@
     <string name="save">Запазване</string>
     <string name="about">Относно</string>
     <string name="credits">Заслуги</string>
-    <string name="credits_explainer">Лицензиране на софтуер с отворен код</string>
+    <string name="credits_explainer">Благодарности, лицензи</string>
     <string name="seal">Seal</string>
     <string name="license_gpl_3">Общ публичен лиценз на GNU v3.0</string>
     <string name="open_link_with">OpenLinkWith</string>
@@ -46,9 +46,9 @@
     <string name="error">Грешка</string>
     <string name="github">Гитхъб</string>
     <string name="donate_crypto">Дарение на криптовалута</string>
-    <string name="links_explainer">Настройки за обработка на препратките</string>
+    <string name="links_explainer">ClearUrls, LibRedirect, разрешаване на препращане</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Политика за поверителност</string>
-    <string name="loading_link">Зареждане на препратка…</string>
+    <string name="loading_link">Обработване на препратка…</string>
     <string name="follow_redirects_external_service">Последване на пренасочванията от външна услуга</string>
     <string name="follow_redirects_local_cache_explainer">Запазва резултатите от пренасочванията</string>
     <string name="redirect_resolve_type_local">местно откриване</string>
@@ -90,11 +90,11 @@
     <string name="always_show_package_name">Името на пакета е винаги видимо</string>
     <string name="always_show_package_name_explainer">До името на приложението се показва и името на пакета. Важи за цялото приложение.</string>
     <string name="disable_all_toasts">Изключване на плуващите известия</string>
-    <string name="disable_all_toasts_explainer">Никога не се показват плуващи известия</string>
+    <string name="disable_all_toasts_explainer">Да не се показват плуващи известия</string>
     <string name="remove_all">Премахване на всички</string>
     <string name="add_all">Добавяне на всички</string>
-    <string name="hide_after_copying">Скриване след копиране</string>
-    <string name="hide_after_copying_explainer">Долното меню се скрива след докосване на бутона за копиране</string>
+    <string name="hide_after_copying">Скриване след действие</string>
+    <string name="hide_after_copying_explainer">Долното меню се скрива след докосване на бутона за копиране или изтегляне</string>
     <string name="set_as_browser_done">Приложението LinkSheet е зададено като подразбиран браузър!</string>
     <string name="display_grid_layout">Таблична подредба</string>
     <string name="browser_status">Състояние</string>
@@ -118,7 +118,7 @@
     <string name="open_copied_link">Посещаване на копираната препратка</string>
     <string name="follow_only_known_trackers">Последване на известни проследявания</string>
     <string name="theme">Тема</string>
-    <string name="theme_explainer">Променя темата</string>
+    <string name="theme_explainer">Material You, тъмна тема, чисто черна тема</string>
     <string name="system">Като системната</string>
     <string name="light">Светла</string>
     <string name="dark">Тъмна</string>
@@ -130,18 +130,18 @@
     <string name="in_app_browser">Вграден в приложението браузър</string>
     <string name="use_app_settings_explainer">Всяко приложение решава дали да използва вградения си браузър</string>
     <string name="in_app_browser_subtitle">Задава режима на вградения браузър</string>
-    <string name="always_disable_explainer">Вграденият браузър не се използва без значение от настройката на приложението</string>
-    <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва без значение от настройката на приложението</string>
-    <string name="browser_explainer">Режим на браузъра и настройки на вградения в приложенията браузър</string>
+    <string name="always_disable_explainer">Вграденият браузър не се използва от приложенията</string>
+    <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва</string>
+    <string name="browser_explainer">Режим на браузъра, вграден в приложенията браузър</string>
     <string name="always_show_package_name_disclaimer">Този превключвател ще бъде преместен на друго място в бъдещо издание.</string>
     <string name="disclaimer_bottom_sheet_many_buttons">Добавянето на много бутони в долното меню в момента може да доведе до отрязване/липсващи бутони.</string>
-    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
+    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите) \u0020</string>
     <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
     <string name="use_unified_preferred_browser_explainer">Когато е отметнато настройките по-долу се прилагат както за обикновената, така и за обработка на препратки в приложението. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
     <string name="frontend">Интерфейс</string>
     <string name="close">Затваряне</string>
-    <string name="dont_show_filtered_item">Да не се отделят последно избраните приложения</string>
+    <string name="dont_show_filtered_item">Да не се показват последно избраните приложения</string>
     <string name="select_an_app">Избиране на приложение</string>
     <string name="dont_show_filtered_item_explainer">Не предлага последно използваното приложение най-отгоре в списъка</string>
     <string name="preview_url">Преглед на адреса</string>
@@ -149,11 +149,11 @@
     <string name="linksheet_download">Изтегляне на LinkSheet</string>
     <string name="app_name">LinkSheet</string>
     <string name="random_instance">Произволен екземпляр</string>
-    <string name="always_disable">Винаги изключен</string>
-    <string name="use_app_settings">Настройки от приложението</string>
+    <string name="always_disable">Винаги изключено</string>
+    <string name="use_app_settings">Подразбирани</string>
     <string name="browser">Браузър</string>
     <string name="libredirect_via">От %s</string>
-    <string name="disable_in_selected">Изключен в избраните</string>
+    <string name="disable_in_selected">Винаги изключено…</string>
     <string name="get_started">Първи стъпки</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="feature_flags_explainer">Включва или изключва експериментални възможности</string>
@@ -175,7 +175,7 @@
     <string name="ignore_libredirect">Пренебрегване на LibRedirect</string>
     <string name="app_crashed">Изглежда, че LinkSheet се е сринал. Проверете грешката по-долу</string>
     <string name="debug">Отстраняване на грешки</string>
-    <string name="debug_explainer">Преглед на дневника</string>
+    <string name="debug_explainer">Дневник, нулиране на проверени приложения</string>
     <string name="logs">Дневници</string>
     <string name="logs_explainer">Преглед на дневника на приложението</string>
     <string name="app_log">Дневник на приложението</string>
@@ -196,7 +196,7 @@
     <string name="export_log">Изнасяне на дневника</string>
     <string name="export_mode">Режим на изнасяне</string>
     <string name="copy_to_clipboard">Копиране в междинната памет</string>
-    <string name="log_files">Предишни дневници</string>
+    <string name="log_files">Предишни сеанси</string>
     <string name="crash_log">Доклад за срив</string>
     <string name="log">Дневник</string>
     <string name="redact_log">Обезличаване на дневника (препоръчително, изключването на може да разкрие имена на пакети и хостове)</string>
@@ -215,7 +215,7 @@
     <string name="shizuku_integration">Интеграция с Shizuku</string>
     <string name="known_trackers">Известни проследявания</string>
     <string name="advanced">Разширени</string>
-    <string name="advanced_explainer">Разширени настройки като флагове и внасяне/изнасяне</string>
+    <string name="advanced_explainer">Флагове, експерименти, внасяне/изнасяне</string>
     <string name="shizuku_explainer_short">Директно взаимодейства със системните ППИ</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="license_mit">Лиценз на МТИ</string>
@@ -249,8 +249,8 @@
     <string name="pretend_to_be_app">Прехващане на заявки от приложения</string>
     <string name="configure">Настройки</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
-    <string name="general">Общи</string>
-    <string name="general_settings_explainer">Настройки, касаещи цялото приложение</string>
+    <string name="general">Разни</string>
+    <string name="general_settings_explainer">Да се показва името на пакета</string>
     <string name="compat_installed">LinkSheetCompat вече е инсталирано</string>
     <string name="configure_explainer">Докоснете за настройване на LinkSheetCompat</string>
     <string name="no_handlers_found_explainer">LinkSheet не може да отвори тази препратка.</string>
@@ -282,7 +282,7 @@
     <string name="import_dumped_preference_explainer">Внасяне на настройките, съдържащи се в дневника - вероятно е безполезно за потребители</string>
     <string name="github_workflow_run_id">Идентификатор на компилацията:</string>
     <string name="version_name">Идентификатор:</string>
-    <string name="privacy_settings_explainer">Настройки като попълване на изпращач</string>
+    <string name="privacy_settings_explainer">Поверителност на изпращача, статистика</string>
     <string name="show_linksheet_referrer">Попълване на LinkSheet като изпращач</string>
     <string name="privacy">Поверителност</string>
     <string name="pretend_to_be_app_explainer_2">Някои приложения, като Google Chrome, изрично търсят приложение, което да обработва например връзка от Youtube, когато тя бъде докосната в резултатите от търсенето. LinkSheetCompat се преструва на такова приложение за поддържаните домейни и след това препраща заявката към LinkSheet.</string>
@@ -301,7 +301,7 @@
     <string name="donate_explainer_crypto">Ако сте дарили криптовалута, за да получите <b>LinkSheet Pro</b> изпратете доказателство за плащането на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
     <string name="join">Присъединяване</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">Заповядайте в нашия сървър на Discord! Общувайте с потребителите и разработчиците на LinkSheet относно бъдещето на приложението и други начинания!</string>
+    <string name="discord_explainer">Разговаряйте относно LinkSheet в Discord</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
     <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение. \u0020
 \nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
@@ -312,20 +312,20 @@
     <string name="manual_build">Ръчно компилирано и подписано от 1fexd</string>
     <string name="donate_learn_more">Научете повече</string>
     <string name="flavor">Вариант:</string>
-    <string name="github_pipeline_build">Компилирано и подписано от работен процес на Гитхъб</string>
+    <string name="github_pipeline_build">Компилирано и подписано от CI</string>
     <string name="other">Друго</string>
     <string name="app_setup">Настройка на приложението</string>
     <plurals name="minutes">
         <item quantity="one">%s минута</item>
         <item quantity="other">%s минути</item>
     </plurals>
-    <string name="built_by">Компилирано и подписано от</string>
+    <string name="built_by">Компилирано</string>
     <string name="donate">Дарение</string>
     <plurals name="months">
         <item quantity="one">%s месец</item>
         <item quantity="other">%s месеца</item>
     </plurals>
-    <string name="built_by_error">Приложението не е подписано нито от 1fexd, нито от работен процес на Гитхъб. Това не е непременно нещо лошо, защото всеки може да използва изходния код за да компилира свое издание на LinkSheet, но някой може да го направи с цел да навреди.</string>
+    <string name="built_by_error">Приложението не е подписано нито от 1fexd, нито от работен процес на Гитхъб.</string>
     <string name="pro_feature">Това е възможност на LinkSheet Pro!</string>
     <string name="export_to_file">Изнасяне във файл</string>
     <string name="import_settings">Внасяне на настройки</string>
@@ -338,34 +338,34 @@
     <string name="export_settings">Изнасяне на настройки</string>
     <string name="export_explainer">Изнася текущите настройки във файл</string>
     <string name="import_settings_override_preferences">Ще бъдат презаписани текущите настройки. Потвърждавате ли?</string>
-    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b>(или еквивалента на <b>4€</b> в криптовалута!) ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което, в момента, само скрива напомнянето за даряване от основния екран, но в бъдеще ще предлага <b>възможности достъпни само там</b>.</string>
+    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b> ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което включва <b>възможностите на Pro</b> като: последване на препращане от трети страни, получаване на не-AMP версии на страниците от трети страни и други предстоящи! \u0020</string>
     <string name="export_include_recommendation">Препоръчваме ви да не включвате тези настройки ако смятате да споделяте изнесеното с други хора!</string>
     <string name="include_log_hash_key">Включително ключа за дневника</string>
     <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
     <string name="include_history">Включително историята (препратки и приложения)</string>
     <string name="last_rule_update">Последно обновяване на правилата (UTC):</string>
     <string name="dev_explainer">Настройки за разработка</string>
-    <string name="opening_with_app_toast">Плуващо известие при автоматично отваряне на приложение</string>
+    <string name="opening_with_app_toast">Автоматично отваряне на приложение</string>
     <string name="download_started_toast_explainer">Показва плуващо известие при започнало изтегляне</string>
-    <string name="url_copied_toast">Плуващо известие при копиране на адрес</string>
+    <string name="url_copied_toast">Копиране на адрес</string>
     <string name="dev_mode_enabled">Поздравления, отключихте режима на разработчик. Бъдете внимателни.</string>
     <string name="clear_urls_version">Правила на ClearURLs</string>
-    <string name="download_started_toast">Плуващо известие при започнато изтегляне</string>
+    <string name="download_started_toast">Започване на изтегляне</string>
     <string name="notifications">Известия</string>
-    <string name="just_version">Издание</string>
+    <string name="just_version">Издания</string>
     <string name="copy_version_information">Копиране на информацията за изданието</string>
     <string name="dev">Разработчик</string>
     <string name="debug_build">Издание за отстраняване на дефекти</string>
     <string name="donation">Даряване</string>
-    <string name="notifications_explainer">Настройка на плуващи известия</string>
+    <string name="notifications_explainer">При копиране и изтегляне</string>
     <string name="running_unofficial_build">Неофициално издание</string>
     <string name="fastforward_version">Правила на FastForward</string>
     <string name="url_copied_toast_explainer">Показва плуващо известие при копиран от потребителя адрес</string>
     <string name="libredirect_version">LibRedirect</string>
-    <string name="resolve_via_failed_toast">Плуващо известие при неуспешно намиране</string>
-    <string name="last_updated">Последно обновяване (КУВ):</string>
+    <string name="resolve_via_failed_toast">Неуспешно намиране</string>
+    <string name="last_updated"><b>Издание:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="resolve_via_failed_toast_explainer">Показва плуващо известие, когато външна услуга не намери адрес</string>
-    <string name="resolve_via_toast">Плуващо известие при намерен адрес</string>
+    <string name="resolve_via_toast">Намиране на адрес</string>
     <string name="resolve_via_toast_explainer">Показва плуващо известие при намерен адрес от външна услуга</string>
     <string name="enable_linksheet_compat">Включване на експерименталното меню на LinkSheet Compat</string>
     <string name="enable_linksheet_compat_explainer">Менюто можете данамерите в подменю „Приложения“ и ако е инсталирано може да прехваща заявки към определени присъщи приложения.</string>
@@ -377,7 +377,7 @@
 \nМожете да върнете старото меню от Настройки -&gt; Разширени -&gt; Флагове.</string>
     <string name="enable_new_bottom_sheet_explainer">Използвайте преработеното долно меню вместо старото</string>
     <string name="new_bottomsheet">Ново долно меню</string>
-    <string name="shizuku_manager_start_failed">Грешка при стартиране на управлението на Шизуку. Отворете го ръчно!</string>
+    <string name="shizuku_manager_start_failed">Грешка при стартиране на управлението на Shizuku. Отворете го ръчно!</string>
     <string name="include_throwable">Включително и дневника на срива (препоръчително, но не може да бъде цензуриран)</string>
     <string name="follow_redirects_short">Пренасочвания</string>
     <string name="title_activity_main2">MainActivity2</string>
@@ -392,4 +392,16 @@
     <string name="app_browsers_subtitle">Предпочитани приложения и такива, отварящи препратки</string>
     <string name="onboarding_0_title">Добре дошли
 \nпри LinkSheet</string>
+    <string name="reset_app_link_verification_status_toast">Заявена повторна проверка</string>
+    <string name="settings_shortcuts__title_default_browser">Подразбиран браузър</string>
+    <string name="start_setup">Напред</string>
+    <string name="onboarding_2_subtitle">Ако имате инсталирани многоприложения, Shizuku чувствително ще подобри изживяването ви</string>
+    <string name="settings_notifications__divider_toasts">Плуващи съобщения</string>
+    <string name="settings_main_setup_success__button_change_browser">Подразбиран браузър</string>
+    <string name="onboarding_setup">Настройка на LinkSheet</string>
+    <string name="onboarding_1_title">Задаеане на LinkSheet като подразбиран браузър</string>
+    <string name="onboarding_1_card_title">Подразбиран браузър</string>
+    <string name="onboarding_1_button">Задаване като подразбиран браузър</string>
+    <string name="onboarding_1_card_explainer">LinkSheet не може да работи ако не е зададен като подразбиран браузър.</string>
+    <string name="onboarding_2_title">Желаете ли да използвате Shizuku?</string>
 </resources>

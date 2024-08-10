@@ -182,7 +182,7 @@
     <string name="services">Услуги</string>
     <string name="no_libredirect_services">Не са намерени услуги на LibRedirect!</string>
     <string name="current_session">Текущ сеанс</string>
-    <string name="log_viewer">Преглед на дневници</string>
+    <string name="log_viewer">Преглед на дневник</string>
     <string name="log_viewer_timestamp">Преглед на дневник от %s</string>
     <string name="no_log_entries">Сеансът не съдържа дневници.</string>
     <string name="order_of_operation">Ред на изпълнение</string>
@@ -200,7 +200,7 @@
     <string name="crash_log">Доклад за срив</string>
     <string name="log">Дневник</string>
     <string name="redact_log">Обезличаване на дневника (препоръчително, изключването на може да разкрие имена на пакети и хостове)</string>
-    <string name="include_settings">Включително настройките (препоръчително)</string>
+    <string name="include_settings">Да включва настройките (препоръчително)</string>
     <string name="include_fingerprint">Включително пръстов отпечатък (препоръчително)</string>
     <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>. \u0020</string>
     <string name="delete">Премахване</string>
@@ -452,7 +452,7 @@
     <string name="loading_link_subtitle">LinkSheet извършва обработка на препратката. Ще отнеме няколко секунди</string>
     <string name="settings__subtitle_shortcuts">Настройки на подразбиран браузър, отваряне на препратки, свързани приложения</string>
     <string name="Miscellaneous">Разни</string>
-    <string name="experiments_explainer_3">Експериментите са под усилена разработка и може да не работят добре ако работят изобщо. Не декладвайте дефекти в Гитхъб. Ако искате да дадете обратна връзка го направете в Дискорд.</string>
+    <string name="experiments_explainer_3">Експериментите са под усилена разработка и може да не работят добре ако изобщо работят. Не съобщавайте за дефекти в Гитхъб. Ако искате да дадете обратна връзка го направете в Дискорд.</string>
     <string name="analytics">Статистика</string>
     <string name="something_went_wrong">Нещо се обърка, пробвайте отново.</string>
     <string name="open_app">Отваряне на приложението</string>
@@ -502,7 +502,7 @@
     <string name="settings_main_setup_success__button_connected_apps">Свързани приложения</string>
     <string name="title_activity_drag_test">DragTestActivity</string>
     <string name="settings_verified_link_handlers__text_app_host_info_none">%d изключени</string>
-    <string name="delete_log_dialog__subtitle_delete_info">Желаете ли дневникът за сеанса да бъде премахнат? Действието е необратимо!</string>
+    <string name="delete_log_dialog__subtitle_delete_info">Желаете ли дневникът на сеанса да бъде премахнат? Действието е необратимо!</string>
     <string name="verified_link_handlers">Проверени приложения, отварящи препратки</string>
     <string name="telemetry_level_minimal">Минимална</string>
     <string name="resolve_event__initialized">Подготвено</string>
@@ -520,7 +520,7 @@
     <string name="resolve_event__querying_browser_list">Заявяване на списък с браузъри</string>
     <string name="settings_app_config_rules__btn_new_rule">Добавяне</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all">Показване на всички</string>
-    <string name="export_log_dialog__title_include_fingerprint">Включително отпечатък от компилацията</string>
+    <string name="export_log_dialog__title_include_fingerprint">Да включва отпечатъка на компилацията</string>
     <string name="export_log_dialog__title_share_logs">Споделяне на дневник</string>
     <string name="settings_links_follow_redirects__text_skip_browser">Без последване на пренасочвания ако приложението отворило LinkSheet е познат браузър</string>
     <string name="export_log_dialog__subtitle_redact_log">Препоръчително, обезличава имената на приложенията и адресите</string>
@@ -535,7 +535,7 @@
     <string name="tap_customization_double_tap">Действие при двукратно докосване</string>
     <string name="theme_mode">Режим на темата</string>
     <string name="select_app">Избиране на приложението</string>
-    <string name="theme_enable_amoled_explainer">Чисто черна тема ако е включена тъмната тема</string>
+    <string name="theme_enable_amoled_explainer">Чисто черна тема ако е избрана тъмната тема</string>
     <string name="telemetry_level_exhaustive">Подробна</string>
     <string name="reset_app_link_verification_status_subtitle">Нулиране на състоянието на проверените препратки на всички приложения. Изчакайте няколко минути докато Андроид ги провери отново. Няма да получите потвърждение. Изисква Shuzuku.</string>
     <string name="help">Помощ</string>
@@ -551,7 +551,7 @@
         <item quantity="one">%d изключен хост</item>
         <item quantity="other">%d изключени хоста</item>
     </plurals>
-    <string name="export_log_dialog__title_redact_log">Обезличаване на дневник</string>
+    <string name="export_log_dialog__title_redact_log">Обезличаване на дневника</string>
     <string name="settings_credits__app_credit_reason_seal">Вдъхновение на дизайна</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Вдъхновение на дизайна</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Препоръчително</string>
@@ -562,7 +562,7 @@
         <item quantity="other">%d включени хоста</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_app_host_info_selected">%d включени</string>
-    <string name="settings_credits__app_name_seal">Печат</string>
+    <string name="settings_credits__app_name_seal">Seal</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Пропускане</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Отварянето на препратки е разрешено</string>
     <string name="generic__button_text_cancel">Отказ</string>
@@ -579,7 +579,7 @@
     <string name="settings_main_setup_success__title_linksheet_setup_failure">Приложението LinkSheet не е настроено</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">Приложението е настроено и готово за работа</string>
     <string name="settings_main_setup_success__subtitle_quick_settings">Бързи настройки</string>
-    <string name="settings_main_news__title_ui_overhaul">Нов и интерфейс</string>
+    <string name="settings_main_news__title_ui_overhaul">Нов интерфейс</string>
     <string name="settings_main_news__button_read_more">Прочетете</string>
     <string name="resolve_event__applying_link_modifiers">Прилагане на промени към препратка</string>
     <string name="resolve_event__resolving_redirects">Откриване на пренасочвания</string>
@@ -612,13 +612,13 @@
         <item quantity="other">%d проверени хоста</item>
     </plurals>
     <string name="onboarding_5_button">Край</string>
-    <string name="theme_enable_amoled">Чисто черно</string>
+    <string name="theme_enable_amoled">Чисто черна</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Скрива бутоните „Веднъж“ и „Винаги“ от долното меню</string>
     <string name="tap_customization_long_tap">Действие при продължително докосване</string>
     <string name="log_session_headline">Сеанс в</string>
     <string name="onboarding_1_subtitle">LinkSheet трябва да бъде подразбиран браузър, за да отваря препратките при докосване</string>
     <string name="external">Външни</string>
-    <string name="share">Споделяне на препратка</string>
+    <string name="share">Споделяне</string>
     <string name="settings_shortcuts__subtitle_default_browser">Настройки на подразбирания браузър</string>
     <string name="settings_shortcuts__title_connected_apps">Свързани приложения</string>
     <string name="settings__title_filter_apps">Филтриране на приложения</string>

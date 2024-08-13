@@ -5,7 +5,7 @@
     <string name="always">Zawsze</string>
     <string name="use_a_different_app">Użyj innej aplikacji</string>
     <string name="opening_with_app">Otwieranie w %s</string>
-    <string name="default_apps">Preferowane aplikacje</string>
+    <string name="default_apps">Domyślne aplikacje</string>
     <string name="set_as_browser">Ustaw jako przeglądarkę</string>
     <string name="apps_which_can_open_links_explainer_2">Lista wszystkich aplikacji, które mogą kolidować z działaniem LinkSheet</string>
     <string name="no_preferred_apps_set_yet">Nie ustawiono jeszcze aplikacji jako preferowanych.</string>
@@ -17,7 +17,7 @@
     <string name="clear">Wyczyść</string>
     <string name="usage_stats_sorting">Sortuj aplikacje według użycia</string>
     <string name="enable_copy_button_explainer">Wyświetla przycisk umożliwiający kopiowanie linku</string>
-    <string name="single_tap">Pojedyncze dotknięcie</string>
+    <string name="single_tap">Włącz pojedyncze dotknięcie</string>
     <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach</string>
     <string name="browser_mode_subtitle">Ustaw domyślny tryb przeglądarki</string>
     <string name="always_ask">Zawsze pytaj</string>
@@ -63,7 +63,7 @@
     <string name="error">Błąd</string>
     <string name="checkmark">Znacznik wyboru</string>
     <string name="links">Linki</string>
-    <string name="links_explainer">ClearURLs, LibRedirect, Przekierowanie po kliknięciu</string>
+    <string name="links_explainer">ClearURLs, LibRedirect, Śledzenie przekierowań</string>
     <string name="use_clear_urls">Użyj ClearURLs</string>
     <string name="follow_redirects">Śledzenie przekierowań</string>
     <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">negatywny wpływ na prywatność</annotation> \u0020</string>
@@ -91,7 +91,7 @@
     <string name="add">Dodaj</string>
     <string name="select_an_app">Wybierz aplikację</string>
     <string name="close">Zamknij</string>
-    <string name="dont_show_filtered_item">Nie wyświetlaj sekcji ostatnio wybranej aplikacji</string>
+    <string name="dont_show_filtered_item">Wyłącz sekcję ostatnio wybranej aplikacji</string>
     <string name="dont_show_filtered_item_explainer">Nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
     <string name="set_as_browser_explainer">Dotknij, aby ustawić LinkSheet jako domyślną przeglądarkę</string>
     <string name="single_tap_explainer">Umożliwia otwieranie aplikacji tylko jednym dotknięciem; długie przytrzymanie wybierze aplikację, podwójne dotknięcie otworzy informacje o aplikacji</string>
@@ -109,8 +109,8 @@
     <string name="in_app_browser_subtitle">Ustaw tryb wewnętrznej przeglądarki</string>
     <string name="always_disable_explainer">Wyłącz wewnętrzną przeglądarkę we wszystkich aplikacjach</string>
     <string name="open_with">Otwórz w</string>
-    <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
-    <string name="browser_mode">Preferowana przeglądarka</string>
+    <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które pozwala wyłączyć automatyczne otwieranie linków</string>
+    <string name="browser_mode">Tryb przeglądarki</string>
     <string name="enable_send_button_explainer">Wyświetla przycisk umożliwiający udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Ustawiono LinkSheet jako domyślną przeglądarkę!</string>
     <string name="bottom_sheet_explainer">Konfiguracja i personalizacja</string>
@@ -390,8 +390,8 @@
     <string name="online_services">Usługi online</string>
     <string name="shizuku_manager_start_failed">Nie udało się uruchomić menedżera Shizuku. Uruchom go ręcznie!</string>
     <string name="include_throwable">Dołącz logi awarii (zalecane, ale nie można ich zredagować)</string>
-    <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla obsługiwanych hostów</string>
-    <string name="apps_which_can_open_links">Zweryfikowane aplikacje otwierające linki</string>
+    <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla linków, które obsługują</string>
+    <string name="apps_which_can_open_links">Aplikacje otwierające linki</string>
     <string name="app_browsers_subtitle">Preferowane aplikacje i obsługa zweryfikowanych linków</string>
     <string name="onboarding_0_title">Witaj w
 \nLinkSheet</string>
@@ -405,7 +405,7 @@
     <string name="onboarding_4_card_title">Wyłącz obsługę linków</string>
     <string name="onboarding_4_card_explainer">Wyłącz obsługę linków dla wszystkich domen, które powinny być obsłużone przez LinkSheet.</string>
     <string name="base_config">Dodatkowa konfiguracja</string>
-    <string name="urlbar_settings">Pasek adresu URL</string>
+    <string name="urlbar_settings">Pasek adresu</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet">Testowy dolny panel</string>
     <string name="enable_dev_bottom_sheet_explainer">Włącz najnowszą wersję dolnego panelu, która jest obecnie w fazie rozwoju</string>
@@ -470,7 +470,7 @@
     <string name="try_share">Udostępnij</string>
     <string name="telemetry_level_disabled">Wyłączone</string>
     <string name="select_app">Wybierz aplikację</string>
-    <string name="tap_customization_long_tap">Akcja przy długim dotknięciu</string>
+    <string name="tap_customization_long_tap">Akcja przy przytrzymaniu</string>
     <string name="settings_shortcuts__title_link_handlers">Otwieranie linków</string>
     <string name="telemetry_configure_type">Typ analizy</string>
     <string name="edit">Edytuj</string>
@@ -495,7 +495,7 @@
     <string name="settings__title_shortcuts">Skróty</string>
     <string name="verified_link_handlers_subtitle">Kontroluj stan weryfikacji domeny aplikacji</string>
     <string name="expand_on_app_select">Rozwiń po wybraniu aplikacji</string>
-    <string name="tap_customization_single_tap">Akcja przy pojedynczym dotknięciu</string>
+    <string name="tap_customization_single_tap">Akcja przy jednym dotknięciu</string>
     <string name="log_session_headline">Sesja o</string>
     <string name="tap_customization_dialog_title">Skonfiguruj %s</string>
     <string name="telemetry_identifier_reset">Zresetuj identyfikator</string>

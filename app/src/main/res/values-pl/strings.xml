@@ -538,7 +538,7 @@
     <string name="share">Udostępnij link</string>
     <string name="external_versions">Wersje zewnętrzne</string>
     <string name="build_info">O kompilacji</string>
-    <string name="verified_link_handlers">Zweryfikowane aplikacje otwierające linki</string>
+    <string name="verified_link_handlers">Aplikacje otwierające linki</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Nie otwiera obsługiwanych linków</string>
     <string name="export_log_dialog__text_log_privacy">Aby dowiedzieć się więcej o potencjalnie wrażliwych danych w udostępnionych plikach dzienników, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">tutaj</annotation>. \u0020</string>
     <string name="settings_main_setup_success__button_change_browser">Domyślna przeglądarka</string>

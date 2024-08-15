@@ -1,2 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="open_with">Abrir com</string>
+    <string name="just_once">Esta vez</string>
+    <string name="use_a_different_app">Usar um app diferente</string>
+    <string name="default_apps">Apps padrão</string>
+    <string name="no_preferred_apps_set_yet">Ainda não foram definidos quaisquer apps como preferidos.</string>
+    <string name="enable_copy_button_explainer">Mostra um botão \"Copiar URL\" na parte de baixo da página</string>
+    <string name="url_copied">URL copiado para a área de transferência</string>
+    <string name="single_tap">Ativar toque único</string>
+    <string name="always_ask">Sempre perguntar</string>
+    <string name="enable_send_button">Ativar botão \"Compartilhar\"</string>
+    <plurals name="minutes">
+        <item quantity="one">%s minuto</item>
+        <item quantity="many">%s minutos</item>
+        <item quantity="other">%s minutos</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">%s hora</item>
+        <item quantity="many">%s horas</item>
+        <item quantity="other">%s horas</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">%s mês</item>
+        <item quantity="many">%s meses</item>
+        <item quantity="other">%s meses</item>
+    </plurals>
+    <string name="always">Sempre</string>
+    <string name="open_with_app">Abrir com %s</string>
+    <string name="apps_which_can_open_links_explainer_2">Lista todos os apps que podem interferir no comportamento do LinkSheet</string>
+    <string name="opening_with_app">Abrindo com %s</string>
+    <string name="search">Pesquisar</string>
+    <string name="copy_url">Copiar link</string>
+    <string name="preferred_apps_settings">Definir aplicações preferidas para os hosts que eles suportam</string>
+    <string name="set_as_browser">Definir como navegador</string>
+    <string name="set_as_browser_explainer">Toque aqui para tornar o LinkSheet o navegador padrão</string>
+    <string name="apps_which_can_open_links">Manipuladores de links verificados</string>
+    <string name="apps_which_can_open_links_explainer">Toque num app para abrir o menu \"Abrir por padrão\", que lhe permite desativar a abertura automática de links</string>
+    <string name="enable_copy_button">Ativar botão de copiar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="single_tap_explainer">Exigir apenas um toque ao invés de dois para abrir apps; Pressione para selecionar o app, duplo-clique para detalhes do app</string>
+    <string name="usage_stats_sorting">Ordenar apps por uso</string>
+    <string name="clear">Limpar</string>
+    <string name="none">Nenhum</string>
+    <string name="usage_stats_sorting_explainer">Incluir estatísticas de utilização do sistema Android no algoritmo de ordenação. A permissão é solicitada na primeira ativação.</string>
+    <string name="browser_mode">Modo de navegador</string>
+    <string name="browser_mode_subtitle">Escolha os navegadores a serem mostrados</string>
+    <string name="always_ask_explainer">Sempre listar todos os navegadores</string>
+    <string name="no_app_to_handle_link_found">Nenhum app para abrir o link!</string>
+    <string name="no_such_app_found">Este app não foi encontrado!</string>
+    <string name="open_settings">Abrir configurações</string>
+    <string name="always_show_package_name">Sempre mostrar o nome do pacote</string>
+    <string name="enable_send_button_explainer">Mostra um botão na folha inferior que permite compartilhar o URL com outros apps, como se o tivesse selecionado a partir de um menu \"Compartilhar\"</string>
+    <string name="default_apps_subtitle">Definir apps padrão para hosts</string>
+    <string name="send_to">Compartilhar para</string>
+</resources>

@@ -4,7 +4,7 @@
     <string name="enable_send_button_explainer">Добавя в долното меню бутон, който дава възможност да споделите адреса с други приложения, все едно сте го избрали от менюто за споделяне</string>
     <string name="bottom_sheet_explainer">Настройки и изглед</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
-    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, разположен в supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>) \u0020</string>
     <string name="download">Изтегляне</string>
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
     <string name="back">Назад</string>
@@ -71,7 +71,7 @@
     <string name="about_explainer">За приложението, лицензи</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
-    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочването от препратката)</string>
+    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките) \u0020</string>
     <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>

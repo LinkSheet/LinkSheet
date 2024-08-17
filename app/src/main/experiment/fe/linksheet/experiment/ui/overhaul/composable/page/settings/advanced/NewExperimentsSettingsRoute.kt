@@ -15,15 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import fe.android.compose.dialog.helper.dialogHelper
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.ComposableTextContent.Companion.content
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.card.AlertCard
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
 import fe.linksheet.composable.settings.advanced.ExperimentDialog
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.card.ClickableAlertCard2
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -66,11 +67,11 @@ fun NewExperimentsSettingsRoute(
             }
         }
     ) {
-        item(key = R.string.warning, contentType = ContentTypeDefaults.Alert) {
-            ClickableAlertCard2(
+        item(key = R.string.warning, contentType = ContentType.Alert) {
+            AlertCard(
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                imageVector = Icons.Default.Warning,
-                contentDescription = stringResource(id = R.string.warning),
+                icon = Icons.Default.Warning.iconPainter,
+                iconContentDescription = stringResource(id = R.string.warning),
                 headline = textContent(R.string.experiments_explainer_2),
                 subtitle = textContent(R.string.experiments_explainer_3)
             )

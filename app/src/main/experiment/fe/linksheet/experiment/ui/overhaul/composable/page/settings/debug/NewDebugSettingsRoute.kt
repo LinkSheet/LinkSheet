@@ -10,11 +10,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.zwander.shared.ShizukuUtil
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.logViewerSettingsRoute
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -38,7 +38,7 @@ fun NewDebugSettingsRoute(
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
                     supportingContent = textContent(R.string.logs_explainer),
-                    icon = vector(Icons.AutoMirrored.Outlined.List),
+                    icon = Icons.AutoMirrored.Outlined.List.iconPainter,
                     shape = shape,
                     padding = padding,
                     onClick = { navigate(logViewerSettingsRoute) }
@@ -50,7 +50,7 @@ fun NewDebugSettingsRoute(
                     enabled = shizukuInstalled && shizukuRunning && shizukuPermission,
                     headlineContent = textContent(R.string.reset_app_link_verification_status),
                     supportingContent = textContent(R.string.reset_app_link_verification_status_subtitle),
-                    icon = vector(Icons.Outlined.RestartAlt),
+                    icon = Icons.Outlined.RestartAlt.iconPainter,
                     shape = shape,
                     padding = padding,
                     onClick = viewModel::enqueueResetAppLinks

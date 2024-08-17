@@ -20,12 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
+import fe.android.compose.icon.iconPainter
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.Routes
 import fe.linksheet.debug.DebugComposable
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
 import fe.linksheet.experiment.ui.overhaul.composable.page.home.news.NewsCard
 import fe.linksheet.experiment.ui.overhaul.composable.page.home.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
@@ -92,7 +93,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
         )
     }) { padding ->
-        SaneLazyColumnPageLayout(padding = padding, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        SaneLazyColumnLayout(padding = padding, verticalArrangement = Arrangement.spacedBy(6.dp)) {
             item {
                 Text(
                     modifier = Modifier,
@@ -126,7 +127,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             item(
                 key = R.string.settings_main_setup_success__title_linksheet_setup_success,
-                contentType = ContentTypeDefaults.ClickableAlert
+                contentType = ContentType.ClickableAlert
             ) {
                 StatusCardWrapper(
                     isDefaultBrowser = defaultBrowserEnabled.isSuccess,
@@ -138,7 +139,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
-                item(key = R.string.nightly_experiments_card, contentType = ContentTypeDefaults.ClickableAlert) {
+                item(key = R.string.nightly_experiments_card, contentType = ContentType.ClickableAlert) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
@@ -146,21 +147,21 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             if (clipboardUri != null) {
                 item(
                     key = R.string.open_copied_link,
-                    contentType = ContentTypeDefaults.ClickableAlert
+                    contentType = ContentType.ClickableAlert
                 ) {
                     OpenCopiedLink(uri = clipboardUri!!)
                 }
             }
 
-            divider(stringRes = R.string.settings_main_news__text_header)
+            divider(id =  R.string.settings_main_news__text_header)
 
             item(
                 key = R.string.settings_main_news__text_ui_overhaul,
-                contentType = ContentTypeDefaults.ClickableAlert
+                contentType = ContentType.ClickableAlert
             ) {
                 NewsCard(
                     titleId = R.string.settings_main_news__title_ui_overhaul,
-                    icon = Icons.Outlined.AutoAwesome,
+                    icon = Icons.Outlined.AutoAwesome.iconPainter,
                     contentId = R.string.settings_main_news__text_ui_overhaul,
                     buttonTextId = R.string.settings_main_news__button_read_more,
                     onClick = {
@@ -174,7 +175,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 //            if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
 //                item(
 //                    key = R.string.running_unofficial_build,
-//                    contentType = ContentTypeDefaults.Alert
+//                    contentType = ContentType.Alert
 //                ) {
 //                    UnofficialBuild()
 //                }
@@ -189,7 +190,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
 //            item(
 //                key = R.string.set_as_default_browser,
-//                contentType = ContentTypeDefaults.ClickableAlert
+//                contentType = ContentType.ClickableAlert
 //            ) {
 //                OpenDefaultBrowserCard(
 //                    activity = activity,
@@ -201,7 +202,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
 //            item(
 //                key = R.string.shizuku_integration,
-//                contentType = ContentTypeDefaults.ClickableAlert
+//                contentType = ContentType.ClickableAlert
 //            ) {
 //                ShizukuCard(
 //                    activity = activity,
@@ -214,7 +215,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 //            if (browserStatus != MainViewModel.BrowserStatus.Known) {
 //            item(
 //                key = R.string.browser_status,
-//                contentType = ContentTypeDefaults.ClickableAlert
+//                contentType = ContentType.ClickableAlert
 //            ) {
 //                BrowserCard(browserStatus = browserStatus)
 //            }

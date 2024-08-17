@@ -46,6 +46,30 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
         }
     }
 
+    val composeKit = ComposeKit
+
+    object ComposeKit : DependencyNotationAndGroup(
+        group = "$group.composekit",
+        name = "composekit"
+    ) {
+        val app = App
+
+        object App : IsNotADependency {
+            val core = DependencyNotation(group = group, name = "app-core")
+        }
+
+        val theme = Theme
+
+        object Theme : IsNotADependency {
+            val core = DependencyNotation(group = group, name = "theme-core")
+            val preference = DependencyNotation(group = group, name = "theme-preference")
+        }
+
+        val component = module("component")
+        val core = module("core")
+        val layout = module("layout")
+    }
+
     val uriParser = DependencyNotation(group = group, name = "uriparser")
 
     val clearUrl = DependencyNotation(group = group, name = "clearurlkt")
@@ -55,5 +79,4 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
     val stringBuilder = DependencyNotation(group = group, name = "stringbuilder-util-kt")
     val embedResolve = DependencyNotation(group = group, name = "embed-resolve")
     val signify = DependencyNotation(group = group, name = "signifykt")
-
 }

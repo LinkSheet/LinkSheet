@@ -6,13 +6,13 @@ import androidx.compose.material.icons.outlined.ImportExport
 import androidx.compose.material.icons.outlined.Science
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.list.item.RouteNavItem
+import fe.composekit.component.list.item.RouteNavigateListItem
+import fe.composekit.layout.column.group
 import fe.linksheet.R
-import fe.linksheet.component.list.item.RouteNavigateListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.list.item.RouteNavItem
-import fe.linksheet.component.page.layout.group
-import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experimentSettingsRoute
 import fe.linksheet.exportImportSettingsRoute
 import fe.linksheet.featureFlagSettingsRoute
@@ -22,19 +22,19 @@ private object NewAdvancedSettingsRouteData {
     val items = arrayOf(
         RouteNavItem(
             featureFlagSettingsRoute,
-            vector(Icons.Outlined.Flag),
+            Icons.Outlined.Flag.iconPainter,
             textContent(R.string.feature_flags),
             textContent(R.string.feature_flags_explainer),
         ),
         RouteNavItem(
             experimentSettingsRoute.route,
-            vector(Icons.Outlined.Science),
+            Icons.Outlined.Science.iconPainter,
             textContent(R.string.experiments),
             textContent(R.string.experiments_explainer),
         ),
         RouteNavItem(
             exportImportSettingsRoute,
-            vector(Icons.Outlined.ImportExport),
+            Icons.Outlined.ImportExport.iconPainter,
             textContent(R.string.export_import_settings),
             textContent(R.string.export_import_settings_explainer),
         )

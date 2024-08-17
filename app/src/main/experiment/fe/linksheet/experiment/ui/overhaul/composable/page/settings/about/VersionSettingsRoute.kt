@@ -5,7 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.Bolt
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,20 +22,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.span.helper.composable.fromStringRes
+import fe.composekit.component.ContentType
+import fe.composekit.component.card.AlertCard
+import fe.composekit.component.list.column.group.ListItemData
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
-import fe.linksheet.*
+import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.card.ClickableAlertCard2
-import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.linksheet.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.component.util.Default.Companion.text
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.LocalActivity
@@ -47,17 +48,17 @@ import org.koin.androidx.compose.koinViewModel
 //object NewAboutSettingsRouteData {
 //    val externalVersions = arrayOf(
 //        ListItemData(
-//            vector(Icons.Outlined.ClearAll),
+//            Icons.Outlined.ClearAll.iconPainter,
 //            textContent(R.string.clear_urls_version),
 //            additional = ClearURLsMetadata.fetchedAt
 //        ),
 //        ListItemData(
-//            vector(Icons.Outlined.Bolt),
+//            Icons.Outlined.Bolt.iconPainter,
 //            textContent(R.string.fastforward_version),
 //            additional = FastForwardRules.fetchedAt
 //        ),
 //        ListItemData(
-//            vector(Icons.Outlined.Security),
+//            Icons.Outlined.Security.iconPainter,
 //            textContent(R.string.libredirect_version),
 //            additional = LibRedirectMetadata.fetchedAt
 //        )
@@ -126,10 +127,10 @@ fun VersionSettingsRoute(
 //            }
         }
 
-        item(key = R.string.app_name, contentType = ContentTypeDefaults.SingleGroupItem) {
-            ClickableAlertCard2(
-                imageVector = Icons.Outlined.Bolt,
-                contentDescription = null,
+        item(key = R.string.app_name, contentType = ContentType.SingleGroupItem) {
+            AlertCard(
+                icon = Icons.Outlined.Bolt.iconPainter,
+                iconContentDescription = null,
                 headline = text("Build"),
                 subtitle = text(AppInfo.buildInfo.versionName)
             )
@@ -167,7 +168,7 @@ fun VersionSettingsRoute(
 //            )
         }
 
-//        divider(stringRes = R.string.settings_about__divider_external_versions)
+//        divider(id =  R.string.settings_about__divider_external_versions)
 //
 //        group(array = NewAboutSettingsRouteData.externalVersions) { data, padding, shape ->
 //            ExternalVersionListItem(
@@ -184,7 +185,7 @@ fun VersionSettingsRoute(
 private fun AnnotatedString.Builder.appendBuildInfo(
     @StringRes id: Int,
     parameter: String,
-    newLine: Boolean = true
+    newLine: Boolean = true,
 ): AnnotatedString.Builder {
     val info = buildAnnotatedString {
         fromStringRes(id, parameter)
@@ -207,7 +208,7 @@ private fun ExternalVersionListItem(shape: Shape, padding: PaddingValues, data: 
         shape = shape,
         padding = padding,
         headlineContent = data.headlineContent,
-        supportingContent = annotated(R.string.last_updated, formatted),
+        supportingContent = annotatedStringResource(R.string.last_updated, formatted),
         icon = data.icon,
         onClick = {
             interaction.copy(formatted, FeedbackType.LongPress)

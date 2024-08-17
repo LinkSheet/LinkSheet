@@ -3,9 +3,9 @@ package fe.linksheet.composable.settings.privacy
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.component.list.base.ClickableShapeListItem
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
@@ -38,7 +38,7 @@ fun PrivacySettingsRoute(
         }
 
         if (BuildType.current.allowDebug || viewModel.enableAnalytics()) {
-            divider(key = R.string.telemetry_configure_title, stringRes = R.string.telemetry_configure_title)
+            divider(key = R.string.telemetry_configure_title, id = R.string.telemetry_configure_title)
 
             group(2) {
                 item(key = R.string.telemetry_configure_type) { padding, shape ->

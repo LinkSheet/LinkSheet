@@ -1,25 +1,26 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.about
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.icon.DrawableIconPainter.Companion.drawable
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.CommonDefaults
+import fe.composekit.component.list.column.group.ListItemData
+import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.layout.column.group
 import fe.linksheet.*
-import fe.linksheet.R
-import fe.linksheet.component.list.base.ClickableShapeListItem
-import fe.linksheet.component.list.base.ShapeListItemDefaults
-import fe.linksheet.component.page.ListItemData
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.page.layout.group
-import fe.linksheet.component.util.DrawableIconType.Companion.drawable
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 
 
 internal object NewCreditsSettingsRouteData {
@@ -63,7 +64,7 @@ fun NewCreditsSettingsRoute(onBackPressed: () -> Unit) {
                 headlineContent = app.headlineContent,
                 supportingContent = app.subtitleContent,
                 leadingContent = {
-                    Box(modifier = ShapeListItemDefaults.BaseContentModifier, contentAlignment = Alignment.Center) {
+                    Box(modifier = CommonDefaults.BaseContentModifier, contentAlignment = Alignment.Center) {
                         Image(
                             modifier = Modifier
                                 .size(32.dp)
@@ -74,7 +75,7 @@ fun NewCreditsSettingsRoute(onBackPressed: () -> Unit) {
                     }
                 },
                 onClick = {
-                    interaction.openUri(app.additional!!, HapticFeedbackType.LongPress)
+                    interaction.openUri(app.additional!!, FeedbackType.LongPress)
                 }
             )
         }

@@ -21,8 +21,9 @@ import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.linksheet.activity.BaseComponentActivity
-import fe.linksheet.experiment.ui.overhaul.interaction.DefaultHapticFeedbackInteraction
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.DefaultHapticFeedbackInteraction
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.rememberHapticFeedbackInteraction
 import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.compose.KoinAndroidContext
@@ -126,13 +127,12 @@ fun AppTheme(
         LinkAnnotationStyle(style = SpanStyle(color = colorScheme.primary))
     }
 
+    val hapticFeedbackInteraction = rememberHapticFeedbackInteraction()
+
     KoinAndroidContext {
         CompositionLocalProvider(
             LocalActivity provides activity!!,
-            fe.linksheet.component.util.LocalComposeClipboardManager provides fe.linksheet.component.util.ComposeClipboardManager(
-                context
-            ),
-            LocalHapticFeedbackInteraction provides DefaultHapticFeedbackInteraction(view),
+            LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
             LocalLinkAnnotationStyle provides linkAnnotationStyle
         ) {
             MaterialTheme(

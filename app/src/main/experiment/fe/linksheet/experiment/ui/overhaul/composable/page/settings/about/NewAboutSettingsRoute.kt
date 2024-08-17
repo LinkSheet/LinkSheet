@@ -15,24 +15,24 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.AnnotatedStringContent.Companion.buildAnnotatedTextContent
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.span.helper.composable.fromStringRes
 import fe.clearurlskt.ClearURLsMetadata
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.column.group.ListItemData
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.composekit.layout.column.group
 import fe.fastforwardkt.FastForwardRules
 import fe.kotlin.extension.primitive.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.linksheet.component.page.ListItemData
-import fe.linksheet.component.page.layout.group
-import fe.linksheet.component.util.Annotated.Companion.buildAnnotatedTextContent
-import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.LocalActivity
@@ -44,17 +44,17 @@ import org.koin.androidx.compose.koinViewModel
 object NewAboutSettingsRouteData {
     val externalVersions = arrayOf(
         ListItemData(
-            vector(Icons.Outlined.ClearAll),
+            Icons.Outlined.ClearAll.iconPainter,
             textContent(R.string.clear_urls_version),
             additional = ClearURLsMetadata.FETCHED_AT
         ),
         ListItemData(
-            vector(Icons.Outlined.Bolt),
+            Icons.Outlined.Bolt.iconPainter,
             textContent(R.string.fastforward_version),
             additional = FastForwardRules.fetchedAt
         ),
         ListItemData(
-            vector(Icons.Outlined.Security),
+            Icons.Outlined.Security.iconPainter,
             textContent(R.string.libredirect_version),
             additional = LibRedirectMetadata.fetchedAt
         )
@@ -87,25 +87,25 @@ fun NewAboutSettingsRoute(
 
     ConfirmActionDialog(
         state = state,
-        onConfirm = { input ->  },
-        onDismiss = { input ->  }
+        onConfirm = { input -> },
+        onDismiss = { input -> }
     ) { input ->
         VersionDialog(dismiss = state::dismiss, confirm = state::confirm)
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.about), onBackPressed = onBackPressed) {
         if (LinkSheetAppConfig.showDonationBanner()) {
-            item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
+            item(key = R.string.donate, contentType = ContentType.SingleGroupItem) {
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.donate),
-                    supportingContent = annotated(R.string.donate_subtitle),
-                    icon = vector(Icons.Outlined.AutoAwesome),
+                    supportingContent = annotatedStringResource(R.string.donate_subtitle),
+                    icon = Icons.Outlined.AutoAwesome.iconPainter,
                     onClick = { uriHandler.openUri(BuildConfig.LINK_BUY_ME_A_COFFEE) }
                 )
             }
         }
 
-        divider(stringRes = R.string.links)
+        divider(id = R.string.links)
 
         group(size = 3) {
             item(key = R.string.credits) { padding, shape ->
@@ -114,7 +114,7 @@ fun NewAboutSettingsRoute(
                     padding = padding,
                     headlineContent = textContent(R.string.credits),
                     supportingContent = textContent(R.string.credits_explainer),
-                    icon = vector(Icons.Outlined.Link),
+                    icon = Icons.Outlined.Link.iconPainter,
                     onClick = { navigate(creditsSettingsRoute) }
                 )
             }
@@ -125,7 +125,7 @@ fun NewAboutSettingsRoute(
                     padding = padding,
                     headlineContent = textContent(R.string.github),
                     supportingContent = textContent(R.string.github_explainer),
-                    icon = vector(Icons.Outlined.Code),
+                    icon = Icons.Outlined.Code.iconPainter,
                     onClick = { uriHandler.openUri(linksheetGithub) }
                 )
             }
@@ -136,15 +136,15 @@ fun NewAboutSettingsRoute(
                     padding = padding,
                     headlineContent = textContent(R.string.discord),
                     supportingContent = textContent(R.string.discord_explainer),
-                    icon = vector(Icons.Outlined.Forum),
+                    icon = Icons.Outlined.Forum.iconPainter,
                     onClick = { uriHandler.openUri(BuildConfig.LINK_DISCORD) }
                 )
             }
         }
 
-        divider(stringRes = R.string.build_info)
+        divider(id = R.string.build_info)
 
-        item(key = R.string.app_name, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.app_name, contentType = ContentType.SingleGroupItem) {
             DefaultTwoLineIconClickableShapeListItem(
                 headlineContent = textContent(R.string.version),
                 supportingContent = buildAnnotatedTextContent {
@@ -160,12 +160,12 @@ fun NewAboutSettingsRoute(
                         appendBuildInfo(id = R.string.github_workflow_run_id, AppInfo.buildInfo.workflowId, false)
                     }
                 },
-                icon = vector(Icons.Outlined.Build),
+                icon = Icons.Outlined.Build.iconPainter,
                 onClick = {
 //                    state.open("")
 
                     if (devClicks == 0) {
-                        interaction.copy(viewModel.getBuildInfo(), HapticFeedbackType.LongPress)
+                        interaction.copy(viewModel.getBuildInfo(), FeedbackType.LongPress)
                     }
 
                     if (devClicks == 7 && !viewModel.devModeEnabled()) {
@@ -178,7 +178,7 @@ fun NewAboutSettingsRoute(
             )
         }
 
-        divider(stringRes = R.string.settings_about__divider_external_versions)
+        divider(id = R.string.settings_about__divider_external_versions)
 
         group(array = NewAboutSettingsRouteData.externalVersions) { data, padding, shape ->
             ExternalVersionListItem(
@@ -195,7 +195,7 @@ fun NewAboutSettingsRoute(
 private fun AnnotatedString.Builder.appendBuildInfo(
     @StringRes id: Int,
     parameter: String,
-    newLine: Boolean = true
+    newLine: Boolean = true,
 ): AnnotatedString.Builder {
     val info = buildAnnotatedString {
         fromStringRes(id, parameter)
@@ -218,7 +218,7 @@ private fun ExternalVersionListItem(shape: Shape, padding: PaddingValues, data: 
         shape = shape,
         padding = padding,
         headlineContent = data.headlineContent,
-        supportingContent = annotated(R.string.last_updated, formatted),
+        supportingContent = annotatedStringResource(R.string.last_updated, formatted),
         icon = data.icon,
         onClick = {
             interaction.copy(formatted, FeedbackType.LongPress)

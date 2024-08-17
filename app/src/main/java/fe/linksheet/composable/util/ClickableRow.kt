@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
-import fe.linksheet.compose.util.enabled
-import fe.linksheet.compose.util.runIf
+import fe.android.compose.extension.enabled
+import fe.android.compose.extension.thenIf
 
 @Composable
 fun NonClickableRow(
@@ -75,7 +75,7 @@ fun ClickableRow(
         modifier = modifier
             .fillMaxWidth()
             .clip(defaultRoundedCornerShape)
-            .runIf(enabled && onClick != null) {
+            .thenIf(enabled && onClick != null) {
                 it.combinedClickable(
                     onClick = onClick!!,
                     onLongClick = onLongClick,

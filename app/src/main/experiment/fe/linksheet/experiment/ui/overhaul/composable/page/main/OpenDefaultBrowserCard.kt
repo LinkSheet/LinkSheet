@@ -8,8 +8,11 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
-import fe.linksheet.component.card.ClickableAlertCard
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Results
@@ -35,10 +38,10 @@ fun OpenDefaultBrowserCard(
 
     val shouldUsePrimaryColor = defaultBrowserEnabled.isSuccess || defaultBrowserEnabled.isLoading
 
-    ClickableAlertCard(
+    AlertCard(
         onClick = {
             if (defaultBrowserEnabled.isLoading) {
-                return@ClickableAlertCard
+                return@AlertCard
             }
 
             if (AndroidVersion.AT_LEAST_API_29_Q && !defaultBrowserEnabled.isSuccess) {
@@ -51,9 +54,9 @@ fun OpenDefaultBrowserCard(
         colors = CardDefaults.cardColors(
             containerColor = if (shouldUsePrimaryColor) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.error
         ),
-        imageVector = if (defaultBrowserEnabled.isSuccess) Icons.Default.RocketLaunch else Icons.Default.Error,
-        contentDescriptionId = if (defaultBrowserEnabled.isSuccess) R.string.checkmark else R.string.error,
-        headlineId = if (defaultBrowserEnabled.isSuccess) R.string.browser_status else R.string.set_as_browser,
-        subtitleId = if (defaultBrowserEnabled.isSuccess) R.string.set_as_browser_done else R.string.set_as_browser_explainer
+        icon = if (defaultBrowserEnabled.isSuccess) Icons.Default.RocketLaunch.iconPainter else Icons.Default.Error.iconPainter,
+        iconContentDescription = stringResource(if (defaultBrowserEnabled.isSuccess) R.string.checkmark else R.string.error),
+        headline = textContent(if (defaultBrowserEnabled.isSuccess) R.string.browser_status else R.string.set_as_browser),
+        subtitle = textContent(if (defaultBrowserEnabled.isSuccess) R.string.set_as_browser_done else R.string.set_as_browser_explainer)
     )
 }

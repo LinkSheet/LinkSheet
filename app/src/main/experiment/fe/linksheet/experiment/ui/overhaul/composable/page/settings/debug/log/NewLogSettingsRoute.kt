@@ -11,20 +11,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import fe.android.compose.content.OptionalContent
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
+import fe.android.compose.text.DefaultContent.Companion.text
+import fe.android.compose.text.OptionalTextContent
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContent
+import fe.composekit.component.CommonDefaults
+import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.component.list.column.shape.ShapeListItemDefaults
+import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.time.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.component.list.base.ClickableShapeListItem
-import fe.linksheet.component.list.base.ShapeListItemDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.Default.Companion.text
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
-import fe.linksheet.experiment.ui.overhaul.interaction.wrap
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.wrap
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.logTextViewerSettingsRoute
@@ -57,8 +62,8 @@ fun NewLogSettingsRoute(
         onDismiss = { _ -> }
     ) { _ ->
         DeleteLogDialog(
-            dismiss = interaction.wrap(confirmDeleteDialog::dismiss, FeedbackType.Decline),
-            confirm = interaction.wrap(confirmDeleteDialog::confirm, FeedbackType.Confirm),
+            dismiss = interaction.wrap(FeedbackType.Decline, confirmDeleteDialog::dismiss),
+            confirm = interaction.wrap(FeedbackType.Confirm, confirmDeleteDialog::confirm),
         )
     }
 
@@ -72,7 +77,7 @@ fun NewLogSettingsRoute(
             )
         }
 
-        divider(stringRes = R.string.log_files)
+        divider(id = R.string.log_files)
 
         listHelper(
             noItems = R.string.no_logs_found,
@@ -101,11 +106,11 @@ fun NewLogSettingsRoute(
 private fun LogSessionListItem(
     logRoute: LogTextViewerRoute,
     navigate: (String) -> Unit,
-    shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
-    headline: fe.linksheet.component.util.TextContent,
-    subtitle: fe.linksheet.component.util.OptionalTextContent,
-    trailingContent: fe.linksheet.component.util.OptionalContent = null,
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
+    headline: TextContent,
+    subtitle: OptionalTextContent,
+    trailingContent: OptionalContent = null,
 ) {
     val route = remember(logRoute) {
         logTextViewerSettingsRoute.buildNavigation(logRoute)

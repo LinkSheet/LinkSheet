@@ -33,15 +33,37 @@ dependencyResolutionManagement {
 rootProject.name = "LinkSheet"
 
 include(":app", ":config")
-include(":components", ":compose-util", ":bottom-sheet")
+include(":bottom-sheet")
+//":components", ":compose-util", "
 
-
-val dev = false
+val dev = true
 if (dev) {
     val properties = Properties().apply {
         file("local.properties").reader().use(::load)
     }
 
-    includeBuild(properties["android-lifecycle-util.dir"].toString())
+    properties["android-lifecycle-util.dir"]?.let { lifecycleUtilDir ->
+        includeBuild(lifecycleUtilDir) {
+            val projects = setOf("core", "koin")
+
+            dependencySubstitution {
+                for (project in projects) {
+                    substitute(module("com.github.1fexd.android-lifecycle-util:$project")).using(project(":$project"))
+                }
+            }
+        }
+    }
+
+    properties["composekit.dir"]?.let { composeKitDir ->
+        includeBuild(composeKitDir) {
+            val projects = setOf("app-core", "theme-core", "theme-preference", "component", "core", "layout")
+
+            dependencySubstitution {
+                for (project in projects) {
+                    substitute(module("com.github.1fexd.composekit:$project")).using(project(":$project"))
+                }
+            }
+        }
+    }
 }
 

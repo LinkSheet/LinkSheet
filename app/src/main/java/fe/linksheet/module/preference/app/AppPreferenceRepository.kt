@@ -26,7 +26,7 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
             amp2HtmlExternalService(false)
         }
 
-        AppPreferences.migrate(this)
+        AppPreferences.runMigrations(this)
     }
 
     fun importPreferences(preferencesToImport: Map<String, String>): List<PermissionBoundPreference> {
@@ -45,7 +45,7 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
             }
         }
 
-        AppPreferences.migrate(this)
+        AppPreferences.runMigrations(this)
 
         // Refresh must be delayed to until after the editor has been closed
         return mappedPreferences.mapNotNull { (preference) ->

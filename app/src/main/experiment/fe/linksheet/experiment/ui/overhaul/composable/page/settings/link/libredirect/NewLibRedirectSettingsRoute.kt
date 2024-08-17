@@ -9,18 +9,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.navigation.NavController
 import fe.android.compose.route.util.navigate
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.ComposableTextContent.Companion.content
+import fe.android.compose.text.DefaultContent.Companion.text
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.LibRedirectServiceRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.linksheet.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.component.util.Default.Companion.text
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.libRedirectServiceSettingsRoute
@@ -45,17 +45,17 @@ fun NewLibRedirectSettingsRoute(
         headline = stringResource(id = R.string.lib_redirect),
         onBackPressed = onBackPressed
     ) {
-        item(key = R.string.enable_libredirect, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.enable_libredirect, contentType = ContentType.SingleGroupItem) {
             SwitchListItem(
                 checked = viewModel.enableLibRedirect(),
                 onCheckedChange = { viewModel.enableLibRedirect(it) },
                 position = ContentPosition.Trailing,
                 headlineContent = textContent(R.string.enable_libredirect),
-                supportingContent = annotated(R.string.enable_libredirect_explainer),
+                supportingContent = annotatedStringResource(R.string.enable_libredirect_explainer),
             )
         }
 
-        divider(stringRes = R.string.services)
+        divider(id =  R.string.services)
 
         listHelper(
             noItems = R.string.no_libredirect_services,

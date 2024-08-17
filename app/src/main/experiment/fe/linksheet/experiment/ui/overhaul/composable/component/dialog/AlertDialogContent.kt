@@ -9,9 +9,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.window.DialogProperties
-import fe.linksheet.component.dialog.DialogDefaults.DialogPadding
+import fe.composekit.component.dialog.DialogDefaults
 
-//
+
 @Composable
 fun AlertDialogContent(
     buttons: @Composable () -> Unit,
@@ -25,7 +25,7 @@ fun AlertDialogContent(
     properties: DialogProperties = DialogProperties()
 ) {
     Surface(modifier = modifier, shape = shape, color = containerColor, tonalElevation = tonalElevation,) {
-        Column(modifier = Modifier.padding(DialogPadding)) {
+        Column(modifier = Modifier.padding(DialogDefaults.DialogPadding)) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
                 Column {
 //                    Image(

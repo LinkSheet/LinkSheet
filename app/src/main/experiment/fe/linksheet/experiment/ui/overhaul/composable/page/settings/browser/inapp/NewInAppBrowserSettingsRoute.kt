@@ -4,11 +4,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.ListItemFilledIconButton
+import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.ListItemFilledIconButton
-import fe.linksheet.component.list.item.type.RadioButtonListItem
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.inAppBrowserSettingsDisableInSelectedRoute
@@ -59,7 +60,7 @@ fun NewInAppBrowserSettingsRoute(
                     supportingContent = textContent(R.string.disable_in_selected_explainer),
                     otherContent = {
                         ListItemFilledIconButton(
-                            imageVector = Icons.Outlined.Settings,
+                            iconPainter = Icons.Outlined.Settings.iconPainter,
                             contentDescription = stringResource(id = R.string.disable_in_selected),
                             onClick = { navigate(inAppBrowserSettingsDisableInSelectedRoute) }
                         )

@@ -24,7 +24,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
-import fe.linksheet.compose.util.runIf
+import fe.android.compose.extension.thenIf
 import fe.linksheet.ui.HkGroteskFontFamily
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.material3.placeholder
@@ -111,7 +111,7 @@ fun UrlCard(
 
             Row(
                 modifier = Modifier
-                    .runIf(!showFullUrl && unfurlResult == null) { it.height(60.dp) }
+                    .thenIf(!showFullUrl && unfurlResult == null) { it.height(60.dp) }
                     .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)

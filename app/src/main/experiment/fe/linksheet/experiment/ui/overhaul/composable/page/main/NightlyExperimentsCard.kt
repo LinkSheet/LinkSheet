@@ -5,17 +5,18 @@ import androidx.compose.material.icons.outlined.Science
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
-import fe.linksheet.component.card.ClickableAlertCard2
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experimentSettingsRoute
 
 @Composable
 fun NightlyExperimentsCard(navigate: (String) -> Unit) {
-    ClickableAlertCard2(
+    AlertCard(
         onClick = { navigate(experimentSettingsRoute.route) },
-        imageVector = Icons.Outlined.Science,
-        contentDescription = stringResource(id = R.string.nightly_experiments_card),
+        icon = Icons.Outlined.Science.iconPainter,
+        iconContentDescription = stringResource(id = R.string.nightly_experiments_card),
         headline = textContent(R.string.nightly_experiments_card),
         subtitle = textContent(R.string.nightly_experiments_card_explainer)
     )

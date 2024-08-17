@@ -2,7 +2,10 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
-import fe.linksheet.component.card.AlertCard
+import androidx.compose.ui.res.stringResource
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.card.AlertCard
 import fe.linksheet.module.viewmodel.MainViewModel
 
 
@@ -10,9 +13,9 @@ import fe.linksheet.module.viewmodel.MainViewModel
 fun BrowserCard(browserStatus: MainViewModel.BrowserStatus) {
     AlertCard(
         colors = CardDefaults.cardColors(containerColor = browserStatus.containerColor()),
-        imageVector = browserStatus.icon,
-        contentDescriptionId = browserStatus.iconDescription,
-        headlineId = browserStatus.headline,
-        subtitleId = browserStatus.subtitle
+        icon = browserStatus.icon.iconPainter,
+        iconContentDescription = stringResource(id = browserStatus.iconDescription),
+        headline = textContent(browserStatus.headline),
+        subtitle = textContent(browserStatus.subtitle)
     )
 }

@@ -6,16 +6,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import fe.android.compose.text.ComposableTextContent.Companion.content
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.appbar.SearchTopAppBar
+import fe.composekit.component.icon.AppIconImage
+import fe.composekit.component.list.column.SaneLazyColumnLayout
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.CheckboxListItem
+import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.component.appbar.SearchTopAppBar
-import fe.linksheet.component.icon.AppIconImage
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.CheckboxListItem
-import fe.linksheet.component.page.SaneSettingsScaffold
-import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
@@ -46,7 +46,7 @@ fun NewInAppBrowserSettingsDisableInSelectedRoute(
             )
         }
     ) { padding ->
-        SaneLazyColumnPageLayout(padding = padding) {
+        SaneLazyColumnLayout(padding = padding) {
             listHelper(
                 noItems = R.string.no_apps_found,
                 notFound = R.string.no_such_app_found,

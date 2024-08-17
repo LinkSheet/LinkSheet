@@ -7,8 +7,9 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.ui.graphics.Color
 import fe.android.preference.helper.OptionTypeMapper
+import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R
-import fe.linksheet.component.page.GroupValueProvider
+
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.StringResHolder
 

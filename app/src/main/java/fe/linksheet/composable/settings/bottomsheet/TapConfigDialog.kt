@@ -13,13 +13,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.dialog.DialogDefaults
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.dialog.DialogDefaults
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.RadioButtonListItem
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.ui.HkGroteskFontFamily
 
 
@@ -48,7 +48,7 @@ fun TapConfigDialog(
         },
         text = {
             LazyColumn(modifier = Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                item(key = ContentTypeDefaults.TextItem) {
+                item(key = ContentType.TextItem) {
                     Text(
                         modifier = Modifier.padding(bottom = 6.dp),
                         text = stringResource(id = R.string.tap_customization_dialog_text)

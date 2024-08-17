@@ -1,5 +1,6 @@
 package fe.linksheet.composable.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -14,7 +15,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
 import fe.linksheet.experimentSettingsRoute
-import fe.linksheet.compose.util.clickable
 import fe.linksheet.ui.Typography
 
 @Composable

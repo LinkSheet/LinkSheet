@@ -21,18 +21,18 @@ import fe.android.compose.dialog.helper.dialogHelper
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.wrap
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContentWrapper
+import fe.composekit.component.ContentType
+import fe.composekit.component.dialog.DialogDefaults
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
 import fe.linksheet.composable.util.ExportLogDialog
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.dialog.DialogDefaults
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.CheckboxListItem
-import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.component.util.TextContentWrapper
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
-import fe.linksheet.experiment.ui.overhaul.interaction.wrap
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -43,7 +43,7 @@ fun createExportLogDialog(
     name: String,
     logViewCommon: LogViewCommon,
     clipboardManager: ClipboardManager,
-    fnLogEntries: () -> List<LogEntry>
+    fnLogEntries: () -> List<LogEntry>,
 ): () -> Any {
     return if (uiOverhaul) {
         val dialog = rememberNewExportLogDialog(
@@ -98,7 +98,7 @@ fun rememberNewExportLogDialog(
         NewExportLogDialog(
             name = name,
             isFatal = isFatal,
-            dismiss = interaction.wrap(state::dismiss, FeedbackType.Decline),
+            dismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
             close = state::close
         )
     }
@@ -112,7 +112,7 @@ private fun NewExportLogDialog(
     name: String,
     isFatal: Boolean = false,
     dismiss: () -> Unit,
-    close: (LogViewCommon.ExportSettings) -> Unit
+    close: (LogViewCommon.ExportSettings) -> Unit,
 ) {
     var redactLog by remember { mutableStateOf(true) }
     var includeFingerprint by remember { mutableStateOf(true) }
@@ -140,16 +140,16 @@ private fun NewExportLogDialog(
         },
         text = {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                item(key = R.string.export_log_dialog__text_log_info, contentType = ContentTypeDefaults.TextItem) {
+                item(key = R.string.export_log_dialog__text_log_info, contentType = ContentType.TextItem) {
                     TextContentWrapper(
                         modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
-                        textContent = annotated(R.string.export_log_dialog__text_log_info, name)
+                        textContent = annotatedStringResource(R.string.export_log_dialog__text_log_info, name)
                     )
                 }
 
                 item(
                     key = R.string.export_log_dialog__title_redact_log,
-                    contentType = ContentTypeDefaults.CheckboxItem
+                    contentType = ContentType.CheckboxItem
                 ) {
                     CheckboxListItem(
                         checked = redactLog,
@@ -167,7 +167,7 @@ private fun NewExportLogDialog(
                 if (isFatal) {
                     item(
                         key = R.string.export_log_dialog__title_include_throwable,
-                        contentType = ContentTypeDefaults.CheckboxItem
+                        contentType = ContentType.CheckboxItem
                     ) {
                         CheckboxListItem(
                             checked = includeThrowableState,
@@ -185,7 +185,7 @@ private fun NewExportLogDialog(
 
                 item(
                     key = R.string.export_log_dialog__title_include_fingerprint,
-                    contentType = ContentTypeDefaults.CheckboxItem
+                    contentType = ContentType.CheckboxItem
                 ) {
                     CheckboxListItem(
                         checked = includeFingerprint,
@@ -202,7 +202,7 @@ private fun NewExportLogDialog(
 
                 item(
                     key = R.string.export_log_dialog__title_include_settings,
-                    contentType = ContentTypeDefaults.CheckboxItem
+                    contentType = ContentType.CheckboxItem
                 ) {
                     CheckboxListItem(
                         checked = includePreferences,
@@ -217,10 +217,10 @@ private fun NewExportLogDialog(
                     )
                 }
 
-                item(key = R.string.export_log_dialog__text_log_privacy, contentType = ContentTypeDefaults.TextItem) {
+                item(key = R.string.export_log_dialog__text_log_privacy, contentType = ContentType.TextItem) {
                     TextContentWrapper(
                         modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
-                        textContent = annotated(R.string.export_log_dialog__text_log_privacy)
+                        textContent = annotatedStringResource(R.string.export_log_dialog__text_log_privacy)
                     )
                 }
             }

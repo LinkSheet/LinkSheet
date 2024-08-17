@@ -1,14 +1,14 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.app
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import fe.android.compose.text.DefaultContent.Companion.text
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.Default.Companion.text
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -35,7 +35,7 @@ fun EditRuleRoute(
     ) {
         divider(text = "Condition", key = "Condition")
 
-        item(key = R.string.donate, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.donate, contentType = ContentType.SingleGroupItem) {
 //            ClickableAlertCard2(imageVector = , contentDescription = , headline = ) {
 //
 //            }
@@ -45,28 +45,28 @@ fun EditRuleRoute(
             DefaultTwoLineIconClickableShapeListItem(
                 headlineContent = text("Default"),
                 supportingContent = text("When no other rule matches"),
-//                icon = vector(Icons.Outlined.AutoAwesome),
-                onClick = {  }
+//                icon = Icons.Outlined.AutoAwesome.iconPainter,
+                onClick = { }
             )
         }
 
         divider(text = "Action", key = 1234)
 
-        item(key = "action", contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = "action", contentType = ContentType.SingleGroupItem) {
             DefaultTwoLineIconClickableShapeListItem(
                 headlineContent = text("Show bottomsheet"),
                 supportingContent = text(""),
-//                icon = vector(Icons.Outlined.AutoAwesome),
-                onClick = {  }
+//                icon = Icons.Outlined.AutoAwesome.iconPainter,
+                onClick = { }
             )
         }
 
-//        divider(stringRes = R.string.)
+//        divider(id =  R.string.)
     }
 }
 
 @Preview
 @Composable
-fun EditRuleRoutePreview(){
+fun EditRuleRoutePreview() {
     EditRuleRoute(onBackPressed = {})
 }

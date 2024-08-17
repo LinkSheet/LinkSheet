@@ -14,9 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
-import fe.linksheet.component.card.ClickableAlertCard2
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.ui.PreviewThemeNew
 import fe.linksheet.module.viewmodel.MainViewModel
 
@@ -36,7 +37,7 @@ private fun buttonColor(isDefaultBrowser: Boolean): Color {
 internal fun StatusCard(
     isDefaultBrowser: Boolean,
     launchIntent: (MainViewModel.SettingsIntent) -> Unit,
-    onSetAsDefault: () -> Unit
+    onSetAsDefault: () -> Unit,
 ) {
     val containerColor = cardContainerColor(isDefaultBrowser)
     val buttonColor = buttonColor(isDefaultBrowser)
@@ -50,14 +51,14 @@ internal fun StatusCard(
     val subtitle = if (isDefaultBrowser) R.string.settings_main_setup_success__text_linksheet_setup_success_info
     else R.string.settings_main_setup_success__text_linksheet_setup_failure_info
 
-    ClickableAlertCard2(
+    AlertCard(
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         ),
-        contentDescription = null,
+        icon = icon.iconPainter,
+        iconContentDescription = null,
         headline = textContent(title),
         subtitle = textContent(subtitle),
-        imageVector = icon,
     ) {
         LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
             if (isDefaultBrowser) {
@@ -101,7 +102,7 @@ internal fun StatusCard(
 private fun StatusCardButton(
     @StringRes id: Int,
     buttonColor: Color,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Button(
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),

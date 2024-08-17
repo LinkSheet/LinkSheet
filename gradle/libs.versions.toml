@@ -24,58 +24,32 @@ kotlin = "1.9.25"
 ##  ⬆ = "2.0.0-RC2"
 ##  ⬆ = "2.0.0-RC3"
 ##  ⬆ = "2.0.0"
+##  ⬆ = "2.0.10-RC"
+##  ⬆ = "2.0.10-RC2"
+##  ⬆ = "2.0.10"
 ##  ⬆ = "2.0.20-Beta1"
+##  ⬆ = "2.0.20-Beta2"
+##  ⬆ = "2.0.20-RC"
+##  ⬆ = "2.0.20-RC2"
 
 koin = "3.6.0-Beta4"
+##⬆ = "3.6.0-Beta5"
 ##⬆ = "3.6.0-wasm-alpha1"
 ##⬆ = "3.6.0-wasm-alpha2"
+##⬆ = "4.0.0-RC1"
 
-linkSheetInterConnect = "2.3.2"
+app-cash-zipline = "1.16.0"
 
-app-cash-zipline = "1.13.0"
-
-androidx-test-ext-junit = "1.2.0-beta01"
-##                   ⬆ = "1.2.0-rc01"
-##                   ⬆ = "1.2.0"
-##                   ⬆ = "1.2.1"
-reorderable = "2.1.1"
+androidx-test-ext-junit = "1.2.1"
+reorderable = "2.3.0"
+##       ⬆ = "2.4.0-alpha01"
 
 [libraries]
 
-flavors = "com.github.LinkSheet:flavors:_"
-linkSheetInterConnect = { module = "com.github.1fexd:LinkSheetInterConnect", version.ref = "linkSheetInterConnect" }
 reorderable = { module = "sh.calvin.reorderable:reorderable", version.ref = "reorderable" }
 stub = "dev.rikka.hidden:stub:_"
 
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
-
-gson = "com.google.code.gson:gson:_"
-
-com-github-1fexd-android-span-helper-compose-material3 = "com.github.1fexd.android-span-helper:compose-material3:_"
-
-clearurlkt = "com.github.1fexd:clearurlkt:_"
-
-fastforwardkt = "com.github.1fexd:fastforwardkt:_"
-
-libredirectkt = "com.github.1fexd:libredirectkt:_"
-
-mimetypekt = "com.github.1fexd:mimetypekt:_"
-
-amp2htmlkt = "com.github.1fexd:amp2htmlkt:_"
-
-stringbuilder-util-kt = "com.github.1fexd:stringbuilder-util-kt:_"
-
-cached-urls = "com.github.1fexd:cached-urls:_"
-
-preference-helper = "com.github.1fexd.android-pref-helper:core:_"
-
-preference-helper-compose = "com.github.1fexd.android-pref-helper:compose:_"
-
-compose-route-util = "com.github.1fexd:compose-route-util:_"
-
-compose-dialog-helper = "com.github.1fexd:compose-dialog-helper:_"
-
-process-launcher = "com.gitlab.grrfe:process-launcher:_"
 
 jsoup = "org.jsoup:jsoup:_"
 
@@ -89,8 +63,6 @@ dev-rikka-tools-refine-runtime = "dev.rikka.tools.refine:runtime:_"
 
 koin-android-test = { group = "io.insert-koin", name = "koin-android-test", version.ref = "koin" }
 
-uriparser = "com.github.1fexd:uriparser:_"
-
 bom = "io.github.jan-tennert.supabase:bom:_"
 
 storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }
@@ -99,20 +71,12 @@ compose-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui" }
 
 gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt" }
 
-compose-mock = "com.github.1fexd.android-pref-helper:compose-mock:_"
-
-embed-resolve = "com.github.1fexd:embed-resolve:_"
-
 ipaddress = "com.github.seancfoley:ipaddress:_"
 junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-ext-junit" }
 
 unfurl = "me.saket.unfurl:unfurl:_"
 
 unfurl-social = "me.saket.unfurl:unfurl-social:_"
-
-support-utils = "org.mozilla.components:support-utils:_"
-
-lib-publicsuffixlist = "org.mozilla.components:lib-publicsuffixlist:_"
 
 placeholder-material3 = "io.github.fornewid:placeholder-material3:_"
 
@@ -121,19 +85,3 @@ nanoid = "io.viascom.nanoid:nanoid:_"
 zipline-android = { group = "app.cash.zipline", name = "zipline-android", version.ref = "app-cash-zipline" }
 
 zipline-loader-android = { group = "app.cash.zipline", name = "zipline-loader-android", version.ref = "app-cash-zipline" }
-
-kotlin-parcelize-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-runtime", version.ref = "kotlin" }
-
-linksheetinterconnect = "com.github.1fexd:LinkSheetInterConnect:_"
-
-com-github-1fexd-android-pref-helper-core = "com.github.1fexd.android-pref-helper:core:_"
-
-compose = "com.github.1fexd.android-pref-helper:compose:_"
-
-kotlin-parcelize-compiler = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-compiler", version.ref = "kotlin" }
-
-symbol-processing = "com.google.devtools.ksp:symbol-processing:_"
-
-symbol-processing-api = "com.google.devtools.ksp:symbol-processing-api:_"
-
-symbol-processing-cmdline = "com.google.devtools.ksp:symbol-processing-cmdline:_"

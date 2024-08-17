@@ -1,31 +1,30 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.LocalMinimumInteractiveComponentSize
-import androidx.compose.material3.RadioButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import fe.android.compose.content.OptionalContent
+import fe.android.compose.text.TextContent
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
-import fe.linksheet.component.list.base.*
-import fe.linksheet.component.list.item.type.RadioButtonListItem
-import fe.linksheet.component.util.OptionalContent
-import fe.linksheet.component.util.TextContent
+import fe.composekit.component.CommonDefaults
+import fe.composekit.component.list.column.CustomListItemContainerHeight
+import fe.composekit.component.list.column.CustomListItemDefaults
+import fe.composekit.component.list.column.CustomListItemPadding
+import fe.composekit.component.list.column.CustomListItemTextOptions
+import fe.composekit.component.list.column.shape.ShapeListItemDefaults
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.RadioButtonListItem
+import fe.composekit.component.shape.CustomShapeDefaults
 
 @Composable
 fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
     enabled: Boolean = true,
     value: NT,
     preference: MutablePreferenceState<T, NT, P>,
-    shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
     colors: ListItemColors = ShapeListItemDefaults.colors(),
     containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
     innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),

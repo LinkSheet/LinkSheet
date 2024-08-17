@@ -4,14 +4,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.RouteNavItem
+import fe.composekit.component.list.item.RouteNavigateListItem
+import fe.composekit.layout.column.group
 import fe.linksheet.*
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.list.item.RouteNavItem
-import fe.linksheet.component.list.item.RouteNavigateListItem
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.page.layout.group
-import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -19,7 +18,7 @@ import org.koin.androidx.compose.koinViewModel
 internal object NewSettingsRouteData {
     val verifiedApps = RouteNavItem(
         appsWhichCanOpenLinksSettingsRoute,
-        vector(Icons.Outlined.DomainVerification),
+        Icons.Outlined.DomainVerification.iconPainter,
         textContent(R.string.verified_link_handlers),
         textContent(R.string.verified_link_handlers_subtitle)
     )
@@ -27,19 +26,19 @@ internal object NewSettingsRouteData {
     val customization = arrayOf(
         RouteNavItem(
             browserSettingsRoute,
-            vector(Icons.Outlined.Apps),
+            Icons.Outlined.Apps.iconPainter,
             textContent(R.string.app_browsers),
             textContent(R.string.app_browsers_subtitle),
         ),
         RouteNavItem(
             bottomSheetSettingsRoute,
-            vector(Icons.Outlined.SwipeUp),
+            Icons.Outlined.SwipeUp.iconPainter,
             textContent(R.string.bottom_sheet),
             textContent(R.string.bottom_sheet_explainer),
         ),
         RouteNavItem(
             linksSettingsRoute,
-            vector(Icons.Outlined.Link),
+            Icons.Outlined.Link.iconPainter,
             textContent(R.string.links),
             textContent(R.string.links_explainer),
         )
@@ -48,25 +47,25 @@ internal object NewSettingsRouteData {
     val miscellaneous = arrayOf(
         RouteNavItem(
             generalSettingsRoute,
-            vector(Icons.Outlined.Settings),
+            Icons.Outlined.Settings.iconPainter,
             textContent(R.string.general),
             textContent(R.string.general_settings_explainer),
         ),
         RouteNavItem(
             notificationSettingsRoute,
-            vector(Icons.Outlined.Notifications),
+            Icons.Outlined.Notifications.iconPainter,
             textContent(R.string.notifications),
             textContent(R.string.notifications_explainer),
         ),
         RouteNavItem(
             themeSettingsRoute,
-            vector(Icons.Outlined.Palette),
+            Icons.Outlined.Palette.iconPainter,
             textContent(R.string.theme),
             textContent(R.string.theme_explainer),
         ),
         RouteNavItem(
             privacySettingsRoute,
-            vector(Icons.Outlined.PrivacyTip),
+            Icons.Outlined.PrivacyTip.iconPainter,
             textContent(R.string.privacy),
             textContent(R.string.privacy_settings_explainer),
         )
@@ -75,13 +74,13 @@ internal object NewSettingsRouteData {
     val advanced = arrayOf(
         RouteNavItem(
             advancedSettingsRoute,
-            vector(Icons.Outlined.Terminal),
+            Icons.Outlined.Terminal.iconPainter,
             textContent(R.string.advanced),
             textContent(R.string.advanced_explainer),
         ),
         RouteNavItem(
             debugSettingsRoute,
-            vector(Icons.Outlined.BugReport),
+            Icons.Outlined.BugReport.iconPainter,
             textContent(R.string.debug),
             textContent(R.string.debug_explainer),
         )
@@ -89,7 +88,7 @@ internal object NewSettingsRouteData {
 
     val dev = RouteNavItem(
         devModeRoute,
-        vector(Icons.Outlined.DeveloperMode),
+        Icons.Outlined.DeveloperMode.iconPainter,
         textContent(R.string.dev),
         textContent(R.string.dev_explainer)
     )
@@ -97,25 +96,25 @@ internal object NewSettingsRouteData {
     val about = arrayOf(
 //        RouteNavItem(
 //            Routes.Help,
-//            vector(Icons.AutoMirrored.Outlined.HelpOutline),
+//            Icons.AutoMirrored.Outlined.HelpOutline.iconPainter,
 //            textContent(R.string.help),
 //            textContent(R.string.help_subtitle),
 //        ),
 //        RouteNavItem(
 //            Routes.Shortcuts,
-//            vector(Icons.Outlined.SwitchAccessShortcut),
+//            Icons.Outlined.SwitchAccessShortcut.iconPainter,
 //            textContent(R.string.settings__title_shortcuts),
 //            textContent(R.string.settings__subtitle_shortcuts),
 //        ),
 //        RouteNavItem(
 //            Routes.Updates,
-//            vector(Icons.Outlined.Update),
+//            Icons.Outlined.Update.iconPainter,
 //            textContent(R.string.settings__title_updates),
 //            textContent(R.string.settings__subtitle_updates),
 //        ),
         RouteNavItem(
             aboutSettingsRoute,
-            vector(Icons.Outlined.Info),
+            Icons.Outlined.Info.iconPainter,
             textContent(R.string.about),
             textContent(R.string.about_explainer),
         )
@@ -134,23 +133,23 @@ fun NewSettingsRoute(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
-        item(key = R.string.enable_libredirect, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.enable_libredirect, contentType = ContentType.SingleGroupItem) {
             RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
         }
 
-        divider(stringRes = R.string.customization)
+        divider(id =  R.string.customization)
 
         group(array = NewSettingsRouteData.customization) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
-        divider(stringRes = R.string.misc_settings)
+        divider(id =  R.string.misc_settings)
 
         group(array = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
-        divider(stringRes = R.string.advanced)
+        divider(id =  R.string.advanced)
 
         group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
             items(array = NewSettingsRouteData.advanced) { data, padding, shape ->
@@ -169,7 +168,7 @@ fun NewSettingsRoute(
             }
         }
 
-        divider(stringRes = R.string.about)
+        divider(id =  R.string.about)
 
         group(array = NewSettingsRouteData.about) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)

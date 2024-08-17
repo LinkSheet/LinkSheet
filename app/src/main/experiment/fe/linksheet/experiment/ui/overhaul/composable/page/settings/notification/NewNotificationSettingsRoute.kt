@@ -2,11 +2,11 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.notificatio
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.layout.column.group
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.page.layout.group
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.SwitchPreferenceItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline.rememberTwoLinePreferenceGroup
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
@@ -54,7 +54,7 @@ fun NewNotificationSettingsRoute(
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.notifications), onBackPressed = onBackPressed) {
-        divider(stringRes = R.string.settings_notifications__divider_toasts)
+        divider(id =  R.string.settings_notifications__divider_toasts)
 
         group(list = notificationSettings) { data, padding, shape ->
             PreferenceSwitchListItem(

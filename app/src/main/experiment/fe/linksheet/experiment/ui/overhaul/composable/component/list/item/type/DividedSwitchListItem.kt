@@ -1,29 +1,16 @@
 package fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
-import androidx.compose.material3.VerticalDivider
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import fe.android.compose.content.OptionalContent
+import fe.android.compose.text.TextContent
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
-import fe.linksheet.component.list.base.ClickableShapeListItem
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.base.ShapeListItemDefaults
-import fe.linksheet.component.list.item.type.DividedSwitchListItem
-import fe.linksheet.component.util.Default.Companion.text
-import fe.linksheet.component.util.OptionalContent
-import fe.linksheet.component.util.TextContent
-import fe.linksheet.component.util.rememberOptionalContent
+import fe.composekit.component.CommonDefaults
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.DividedSwitchListItem
+import fe.composekit.component.shape.CustomShapeDefaults
 
 
 @Composable
@@ -31,8 +18,8 @@ fun PreferenceDividedSwitchListItem(
     enabled: Boolean = true,
     preference: MutablePreferenceState<Boolean, Boolean, Preference.Default<Boolean>>,
     onContentClick: () -> Unit,
-    shape: Shape = ShapeListItemDefaults.SingleShape,
-    padding: PaddingValues = ShapeListItemDefaults.EmptyPadding,
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
     headlineContent: TextContent,
     overlineContent: TextContent? = null,
     supportingContent: TextContent? = null,

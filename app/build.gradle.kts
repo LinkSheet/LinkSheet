@@ -218,8 +218,8 @@ android {
 
 dependencies {
     implementation(project(":config"))
-    implementation(project(":components"))
-    implementation(project(":compose-util"))
+//    implementation(project(":components"))
+//    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
 
     implementation(platform("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.14"))
@@ -299,9 +299,13 @@ dependencies {
     implementation(_1fexd.android.span.compose)
     implementation(_1fexd.android.lifecycleUtil.core)
     implementation(_1fexd.android.lifecycleUtil.koin)
+    implementation(_1fexd.composeKit.app.core)
+    implementation(_1fexd.composeKit.theme.core)
+    implementation(_1fexd.composeKit.theme.preference)
+    implementation(_1fexd.composeKit.component)
+    implementation(_1fexd.composeKit.core)
+    implementation(_1fexd.composeKit.layout)
 
-//    implementation("fe.android.lifecycle.util.core:core")
-//    implementation("fe.android.lifecycle.util.koin:koin")
     implementation(libs.zipline.android)
     implementation(libs.zipline.loader.android)
 

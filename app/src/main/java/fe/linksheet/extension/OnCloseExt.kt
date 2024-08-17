@@ -1,8 +1,8 @@
 package fe.linksheet.extension
 
 import fe.android.compose.dialog.helper.OnClose
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.HapticFeedbackInteraction
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.HapticFeedbackInteraction
 
 fun OnClose<Unit>.wrap(interaction: HapticFeedbackInteraction, type: FeedbackType): () -> Unit {
     return {

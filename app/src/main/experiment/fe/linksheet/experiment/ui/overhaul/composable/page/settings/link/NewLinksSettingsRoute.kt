@@ -3,16 +3,16 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.link
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.DividedSwitchListItem
 import fe.linksheet.*
 import fe.linksheet.composable.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.settings.link.downloader.requestDownloadPermission
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.DividedSwitchListItem
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -33,7 +33,7 @@ fun NewLinksSettingsRoute(
                     padding = padding,
                     preference = viewModel.useClearUrls,
                     headlineContent = textContent(R.string.use_clear_urls),
-                    supportingContent = annotated(R.string.use_clear_urls_explainer),
+                    supportingContent = annotatedStringResource(R.string.use_clear_urls_explainer),
                 )
             }
 
@@ -43,7 +43,7 @@ fun NewLinksSettingsRoute(
                     padding = padding,
                     preference = viewModel.useFastForwardRules,
                     headlineContent = textContent(R.string.fastfoward_rules),
-                    supportingContent = annotated(R.string.fastfoward_rules_explainer),
+                    supportingContent = annotatedStringResource(R.string.fastfoward_rules_explainer),
                 )
             }
 
@@ -54,7 +54,7 @@ fun NewLinksSettingsRoute(
                     preference = viewModel.enableLibRedirect,
                     onContentClick = { navigate(libRedirectSettingsRoute) },
                     headlineContent = textContent(R.string.enable_libredirect),
-                    supportingContent = annotated(R.string.enable_libredirect_explainer),
+                    supportingContent = annotatedStringResource(R.string.enable_libredirect_explainer),
                 )
             }
 
@@ -65,7 +65,7 @@ fun NewLinksSettingsRoute(
                     preference = viewModel.followRedirects,
                     onContentClick = { navigate(followRedirectsSettingsRoute) },
                     headlineContent = textContent(R.string.follow_redirects),
-                    supportingContent = annotated(R.string.follow_redirects_explainer),
+                    supportingContent = annotatedStringResource(R.string.follow_redirects_explainer),
                 )
             }
 
@@ -76,7 +76,7 @@ fun NewLinksSettingsRoute(
                     preference = viewModel.enableAmp2Html,
                     onContentClick = { navigate(amp2HtmlSettingsRoute) },
                     headlineContent = textContent(R.string.enable_amp2html),
-                    supportingContent = annotated(R.string.enable_amp2html_explainer),
+                    supportingContent = annotatedStringResource(R.string.enable_amp2html_explainer),
                 )
             }
 
@@ -95,7 +95,7 @@ fun NewLinksSettingsRoute(
                     onContentClick = { navigate(downloaderSettingsRoute) },
                     position = ContentPosition.Trailing,
                     headlineContent = textContent(R.string.enable_downloader),
-                    supportingContent = annotated(R.string.enable_downloader_explainer)
+                    supportingContent = annotatedStringResource(R.string.enable_downloader_explainer)
                 )
             }
 

@@ -20,18 +20,19 @@ import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.android.preference.helper.compose.StateMappedPreference
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.icon.FilledIcon
-import fe.linksheet.component.list.base.ClickableShapeListItem
-import fe.linksheet.component.list.base.ContentPosition
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.component.list.item.type.SwitchListItem
-import fe.linksheet.component.page.GroupValueProvider
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
-import fe.linksheet.experiment.ui.overhaul.interaction.wrap
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.wrap
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.icon.FilledIcon
+import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.SwitchListItem
+import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -76,7 +77,7 @@ fun BottomSheetSettingsRoute(
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.bottom_sheet), onBackPressed = onBackPressed) {
-        item(key = R.string.display_grid_layout, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.display_grid_layout, contentType = ContentType.SingleGroupItem) {
             PreferenceSwitchListItem(
                 preference = viewModel.gridLayout,
                 headlineContent = textContent(R.string.display_grid_layout),
@@ -84,7 +85,7 @@ fun BottomSheetSettingsRoute(
             )
         }
 
-        divider(stringRes = R.string.base_config)
+        divider(id =  R.string.base_config)
 
         group(size = 4) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
@@ -156,7 +157,7 @@ fun BottomSheetSettingsRoute(
 //            }
         }
 
-        divider(stringRes = R.string.tap_customization)
+        divider(id =  R.string.tap_customization)
 
         group(size = 4) {
             items(map = tapTypePreferences) { type, pref, padding, shape ->
@@ -174,7 +175,7 @@ fun BottomSheetSettingsRoute(
             }
         }
 
-        divider(stringRes = R.string.urlbar_settings)
+        divider(id =  R.string.urlbar_settings)
 
         group(size = 3) {
             item(key = R.string.preview_url) { padding, shape ->
@@ -233,7 +234,7 @@ private fun TapConfigGroupItem(
         TapConfigDialog(
             type = type,
             currentConfig = preference.value,
-            onDismiss = interaction.wrap(state::dismiss, FeedbackType.Decline),
+            onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
             state::close
         )
     }
@@ -253,7 +254,7 @@ private fun TapConfigGroupItem(
                 colors = IconButtonDefaults.filledIconButtonColors(
                     containerColor = MaterialTheme.colorScheme.secondaryContainer
                 ),
-                imageVector = Icons.Outlined.KeyboardArrowDown,
+                icon = Icons.Outlined.KeyboardArrowDown.iconPainter,
                 contentDescription = null
             )
 

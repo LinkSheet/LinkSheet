@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import fe.android.compose.extension.optionalClickable
 import fe.linksheet.R
-import fe.linksheet.compose.util.clickable
 import fe.linksheet.ui.PreviewTheme
 
 
@@ -80,7 +80,7 @@ fun MainCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clickable(onClick)
+                .optionalClickable(onClick)
                 .padding(innerPadding),
             horizontalArrangement = horizontalArrangement,
             verticalAlignment = Alignment.CenterVertically,

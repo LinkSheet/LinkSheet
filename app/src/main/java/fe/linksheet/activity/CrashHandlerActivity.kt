@@ -69,7 +69,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                         }
                     }
                 ) {
-                    divider(stringRes = R.string.crash_viewer__subtitle_app_crashed)
+                    divider(id =  R.string.crash_viewer__subtitle_app_crashed)
 
                     item {
                         LogCard(

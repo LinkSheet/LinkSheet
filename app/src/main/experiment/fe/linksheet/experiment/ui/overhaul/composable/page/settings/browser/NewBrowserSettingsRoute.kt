@@ -6,11 +6,11 @@ import androidx.compose.material.icons.outlined.AppShortcut
 import androidx.compose.material.icons.outlined.OpenInBrowser
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.ImageVectorIconType.Companion.vector
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.inAppBrowserSettingsRoute
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.preferredBrowserSettingsRoute
@@ -27,7 +27,7 @@ fun NewBrowserSettingsRoute(
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.default_apps),
                     supportingContent = textContent(R.string.default_apps_subtitle),
-                    icon = vector(Icons.Outlined.AppShortcut),
+                    icon = Icons.Outlined.AppShortcut.iconPainter,
                     shape = shape,
                     padding = padding,
                     onClick = { navigate(preferredAppsSettingsRoute) }
@@ -38,7 +38,7 @@ fun NewBrowserSettingsRoute(
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.browser_mode),
                     supportingContent = textContent(R.string.browser_mode_subtitle),
-                    icon = vector(Icons.Outlined.OpenInBrowser),
+                    icon = Icons.Outlined.OpenInBrowser.iconPainter,
                     shape = shape,
                     padding = padding,
                     onClick = { navigate(preferredBrowserSettingsRoute) }
@@ -49,7 +49,7 @@ fun NewBrowserSettingsRoute(
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.in_app_browser),
                     supportingContent = textContent(R.string.in_app_browser_subtitle),
-                    icon = vector(Icons.AutoMirrored.Outlined.OpenInNew),
+                    icon = Icons.AutoMirrored.Outlined.OpenInNew.iconPainter,
                     shape = shape,
                     padding = padding,
                     onClick = { navigate(inAppBrowserSettingsRoute) }

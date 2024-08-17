@@ -20,13 +20,13 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.dialog.DialogDefaults
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
 import fe.linksheet.composable.util.LinkableTextView
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.dialog.DialogDefaults
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.RadioButtonListItem
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.ui.HkGroteskFontFamily
 
@@ -76,7 +76,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
         },
         text = {
             LazyColumn(modifier = Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                item(key = R.string.telemetry_dialog_text, contentType = ContentTypeDefaults.TextItem) {
+                item(key = R.string.telemetry_dialog_text, contentType = ContentType.TextItem) {
                     LinkableTextView(
                         modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
                         id = R.string.telemetry_dialog_text
@@ -98,7 +98,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
                     )
                 }
 
-                item(key = R.string.telemetry_dialog_text_2, contentType = ContentTypeDefaults.TextItem) {
+                item(key = R.string.telemetry_dialog_text_2, contentType = ContentType.TextItem) {
                     LinkableTextView(
                         modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
                         id = R.string.telemetry_dialog_text_2

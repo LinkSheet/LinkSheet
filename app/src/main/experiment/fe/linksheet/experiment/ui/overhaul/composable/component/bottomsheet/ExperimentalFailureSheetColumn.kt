@@ -16,11 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.android.compose.dialog.helper.DialogMaxWidth
 import fe.android.compose.dialog.helper.DialogMinWidth
+import fe.android.compose.text.ProvideContentColorTextStyle
+import fe.composekit.layout.dialog.AlertDialogFlowRow
+import fe.composekit.layout.dialog.AlertDialogFlowRowDefaults
 import fe.linksheet.R
-import fe.linksheet.component.layout.AlertDialogFlowRow
-import fe.linksheet.component.layout.ButtonsCrossAxisSpacing
-import fe.linksheet.component.layout.ButtonsMainAxisSpacing
-import fe.linksheet.component.util.ProvideContentColorTextStyle
 
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -100,8 +99,8 @@ fun ExperimentalFailureSheetColumn(
 
         Box(modifier = Modifier.align(Alignment.End)) {
             AlertDialogFlowRow(
-                mainAxisSpacing = ButtonsMainAxisSpacing,
-                crossAxisSpacing = ButtonsCrossAxisSpacing
+                mainAxisSpacing = AlertDialogFlowRowDefaults.MainAxisSpacing,
+                crossAxisSpacing = AlertDialogFlowRowDefaults.CrossAxisSpacing
             ) {
                 FilledTonalButton(
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,

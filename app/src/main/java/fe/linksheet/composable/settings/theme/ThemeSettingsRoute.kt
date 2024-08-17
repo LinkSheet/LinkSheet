@@ -2,13 +2,13 @@ package fe.linksheet.composable.settings.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.ContentPosition
 import fe.linksheet.R
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.list.base.ContentPosition
+import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.ui.ThemeV2
 import fe.linksheet.util.AndroidVersion
@@ -21,7 +21,7 @@ private val themes = arrayOf(ThemeV2.Light, ThemeV2.Dark, ThemeV2.System)
 fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewModel = koinViewModel()) {
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.theme), onBackPressed = onBackPressed) {
         if (AndroidVersion.AT_LEAST_API_31_S) {
-            item(key = R.string.theme_enable_material_you, contentType = ContentTypeDefaults.SingleGroupItem) {
+            item(key = R.string.theme_enable_material_you, contentType = ContentType.SingleGroupItem) {
                 PreferenceSwitchListItem(
                     preference = viewModel.themeMaterialYou,
                     headlineContent = textContent(R.string.theme_enable_material_you),
@@ -29,7 +29,7 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
                 )
             }
 
-            divider(stringRes = R.string.theme_mode)
+            divider(id =  R.string.theme_mode)
         }
 
         group(size = 4) {

@@ -5,7 +5,7 @@ import fe.android.preference.helper.compose.StatePreferenceRepository
 
 class ExperimentRepository(val context: Context) : StatePreferenceRepository(context, "experiments") {
     init {
-        Experiments.migrate(this)
+        Experiments.runMigrations(this)
     }
 
     // Hack around repo until we have a contains() api

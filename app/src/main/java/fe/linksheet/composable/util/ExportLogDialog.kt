@@ -15,8 +15,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
+import fe.composekit.component.shape.CustomShapeDefaults
 import fe.linksheet.R
-import fe.linksheet.component.list.base.ShapeListItemDefaults
 import fe.linksheet.extension.android.setText
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
@@ -135,7 +135,7 @@ fun DialogCheckboxRow(
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
-            .clip(ShapeListItemDefaults.SingleShape)
+            .clip(CustomShapeDefaults.SingleShape)
             .combinedClickable(
                 onClick = onClick,
                 role = Role.Checkbox

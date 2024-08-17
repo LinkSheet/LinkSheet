@@ -3,11 +3,12 @@ package fe.linksheet.experiment.ui.overhaul.composable.component.page.twoline
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
+import fe.android.compose.text.TextContent
 import fe.android.preference.helper.compose.StatePreference
-import fe.linksheet.component.page.ListItemData
-import fe.linksheet.component.page.RememberGroupDslMarker
-import fe.linksheet.component.page.RememberGroupScope
-import fe.linksheet.component.util.TextContent
+import fe.composekit.component.list.column.group.ListItemData
+import fe.composekit.component.list.column.group.RememberGroupDslMarker
+import fe.composekit.component.list.column.group.RememberGroupScope
+
 
 @Stable
 class SwitchPreferenceItem(

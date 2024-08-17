@@ -24,19 +24,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.ComposableTextContent.Companion.content
+import fe.android.compose.text.DefaultContent.Companion.text
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.appbar.SearchTopAppBar
+import fe.composekit.component.icon.AppIconImage
+import fe.composekit.component.list.column.SaneLazyColumnDefaults
+import fe.composekit.component.list.column.SaneLazyColumnLayout
+import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.ListItemFilledIconButton
+import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.component.appbar.SearchTopAppBar
-import fe.linksheet.component.icon.AppIconImage
-import fe.linksheet.component.list.base.ClickableShapeListItem
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.ListItemFilledIconButton
-import fe.linksheet.component.page.SaneSettingsScaffold
-import fe.linksheet.component.page.layout.SaneLazyColumnPageDefaults
-import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.component.util.Default.Companion.text
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRouteData.buildHostStateText
 import fe.linksheet.experiment.ui.overhaul.composable.page.settings.app.VerifiedLinkHandlersRouteData.hostStateStringRes
 import fe.linksheet.extension.android.startActivityWithConfirmation
@@ -185,7 +186,7 @@ fun VerifiedLinkHandlersRoute(
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = SaneLazyColumnPageDefaults.HorizontalSpacing),
+                    .padding(horizontal = SaneLazyColumnDefaults.HorizontalSpacing),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 StateFilter(selection = filterMode, onSelected = {
@@ -212,7 +213,7 @@ fun VerifiedLinkHandlersRoute(
                 )
             }
 
-            SaneLazyColumnPageLayout(padding = PaddingValues()) {
+            SaneLazyColumnLayout(padding = PaddingValues()) {
                 listHelper(
                     noItems = R.string.no_apps_found,
                     notFound = R.string.no_such_app_found,
@@ -278,7 +279,7 @@ fun VerifiedLinkHandlersRoute(
                         otherContent = {
 //                            CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 24.dp) {
 //                                Box(
-//                                    modifier = ShapeListItemDefaults.BaseContentModifier,
+//                                    modifier = CommonDefaults.BaseContentModifier,
 //                                    contentAlignment = Alignment.Center
 //                                ) {
 //                                    FilledTonalIconButton(
@@ -297,7 +298,7 @@ fun VerifiedLinkHandlersRoute(
 
 
                             ListItemFilledIconButton(
-                                imageVector = Icons.Outlined.Settings,
+                                iconPainter = Icons.Outlined.Settings.iconPainter,
                                 contentDescription = stringResource(id = R.string.settings),
                                 onClick = {
                                     activity.startActivityWithConfirmation(

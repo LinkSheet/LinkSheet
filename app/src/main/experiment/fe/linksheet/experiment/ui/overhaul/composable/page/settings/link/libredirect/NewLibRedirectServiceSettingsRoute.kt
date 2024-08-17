@@ -5,15 +5,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.extension.enabled
+import fe.android.compose.text.DefaultContent.Companion.text
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.RadioButtonListItem
+import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
-import fe.linksheet.component.ContentTypeDefaults
-import fe.linksheet.component.list.base.ContentPosition
-import fe.linksheet.component.list.item.type.RadioButtonListItem
-import fe.linksheet.component.list.item.type.SwitchListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.Default.Companion.text
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.compose.util.enabled
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.BuiltInFrontendHolder
@@ -38,7 +38,7 @@ fun NewLibRedirectServiceSettingsRoute(
         headline = stringResource(id = R.string.lib_redirect_service, viewModel.service.name),
         onBackPressed = onBackPressed
     ) {
-        item(key = R.string.enabled, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.enabled, contentType = ContentType.SingleGroupItem) {
             SwitchListItem(
                 checked = enabled,
                 onCheckedChange = { viewModel.updateState(it) },
@@ -47,10 +47,10 @@ fun NewLibRedirectServiceSettingsRoute(
             )
         }
 
-        divider(stringRes = R.string.frontend)
+        divider(id = R.string.frontend)
 
         if (selected != null) {
-            item(key = "dropdown", contentType = ContentTypeDefaults.SingleGroupItem) {
+            item(key = "dropdown", contentType = ContentType.SingleGroupItem) {
                 FrontendDropdown(
                     enabled = enabled,
                     selected = viewModel.getFrontendByKey(selected!!.frontendKey)!!,
@@ -60,7 +60,7 @@ fun NewLibRedirectServiceSettingsRoute(
             }
         }
 
-        divider(stringRes = R.string.instance)
+        divider(id = R.string.instance)
 
         if (selected != null) {
             group(size = instances.size + 1) {

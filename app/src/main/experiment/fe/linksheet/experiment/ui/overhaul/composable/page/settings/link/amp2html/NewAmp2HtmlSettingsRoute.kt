@@ -3,14 +3,14 @@ package fe.linksheet.experiment.ui.overhaul.composable.page.settings.link.amp2ht
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.type.SliderListItem
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
-import fe.linksheet.component.ContentTypeDefaults
 import fe.linksheet.experiment.ui.overhaul.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.component.list.item.type.SliderListItem
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.component.util.AnnotatedStringResource.Companion.annotated
-import fe.linksheet.component.util.Resource.Companion.textContent
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.util.Darknet
 import org.koin.androidx.compose.koinViewModel
@@ -26,15 +26,15 @@ fun NewAmp2HtmlSettingsRoute(
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.settings_links_amp2html__title_amp2html), onBackPressed = onBackPressed) {
-        item(key = R.string.enable_amp2html, contentType = ContentTypeDefaults.SingleGroupItem) {
+        item(key = R.string.enable_amp2html, contentType = ContentType.SingleGroupItem) {
             PreferenceSwitchListItem(
                 preference = viewModel.enableAmp2Html,
                 headlineContent = textContent(R.string.enable_amp2html),
-                supportingContent = annotated(R.string.enable_amp2html_explainer),
+                supportingContent = annotatedStringResource(R.string.enable_amp2html_explainer),
             )
         }
 
-        divider(stringRes = R.string.options)
+        divider(id =  R.string.options)
 
         group(size = 4 + if (LinkSheetAppConfig.isPro()) 1 else 0) {
             item(key = R.string.amp2html_local_cache) { padding, shape ->
@@ -67,7 +67,7 @@ fun NewAmp2HtmlSettingsRoute(
                         padding = padding,
                         preference = viewModel.amp2HtmlExternalService,
                         headlineContent = textContent(R.string.amp2html_external_service),
-                        supportingContent = annotated(R.string.amp2html_external_service_explainer),
+                        supportingContent = annotatedStringResource(R.string.amp2html_external_service_explainer),
                     )
                 }
             }
@@ -93,7 +93,7 @@ fun NewAmp2HtmlSettingsRoute(
                     onValueChange = { viewModel.requestTimeout(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
                     headlineContent = textContent(R.string.request_timeout),
-                    supportingContent = annotated(R.string.request_timeout_explainer),
+                    supportingContent = annotatedStringResource(R.string.request_timeout_explainer),
                 )
             }
         }

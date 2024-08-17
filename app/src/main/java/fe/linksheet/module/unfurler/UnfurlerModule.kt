@@ -14,7 +14,7 @@ val unfurlerModule = module {
 class CooperativeUnfurler(val cacheSize: Int, val httpClient: OkHttpClient) {
     private val unfurler = Unfurler(cacheSize, httpClient = httpClient)
 
-    fun unfurl(url: String): UnfurlResult? {
+     fun unfurl(url: String): UnfurlResult? {
         return unfurler.unfurl(url)
     }
 

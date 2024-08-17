@@ -19,9 +19,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.composekit.component.list.column.shape.ShapeListItemDefaults
+import fe.composekit.component.shape.CustomShapeDefaults
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
-import fe.linksheet.component.list.base.ShapeListItemDefaults
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.ui.HkGroteskFontFamily
@@ -90,7 +91,7 @@ fun ListBrowserColumn(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp)
-            .clip(ShapeListItemDefaults.SingleShape)
+            .clip(CustomShapeDefaults.SingleShape)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
             .combinedClickable(
                 onClick = { onClick(ClickType.Single, ClickModifier.None) },

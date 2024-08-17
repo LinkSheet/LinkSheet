@@ -32,21 +32,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import fe.android.compose.extension.atElevation
 import fe.linksheet.R
-import fe.linksheet.component.card.AlertCardContentLayout
-import fe.linksheet.component.card.AlertCardDefaults
-import fe.linksheet.component.icon.AppIconImage
-import fe.linksheet.component.icon.FilledIcon
-import fe.linksheet.component.list.base.ShapeListItemDefaults
-import fe.linksheet.component.page.SaneSettingsScaffold
-import fe.linksheet.component.page.layout.SaneLazyColumnPageLayout
-import fe.linksheet.component.page.layout.SaneLazyListScope
-import fe.linksheet.component.util.ComposableTextContent.Companion.content
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.compose.util.atElevation
 import fe.linksheet.experiment.ui.overhaul.composable.component.appbar.SaneLargeTopAppBar
-import fe.linksheet.experiment.ui.overhaul.interaction.FeedbackType
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.ComposableTextContent.Companion.content
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContent
+import fe.composekit.component.card.AlertCardContentLayout
+import fe.composekit.component.card.AlertCardDefaults
+import fe.composekit.component.icon.AppIconImage
+import fe.composekit.component.icon.FilledIcon
+import fe.composekit.component.list.column.SaneLazyColumnLayout
+import fe.composekit.component.list.column.shape.ShapeListItemDefaults
+import fe.composekit.component.page.SaneSettingsScaffold
+import fe.composekit.component.shape.CustomShapeDefaults
+import fe.composekit.layout.column.SaneLazyListScope
 import fe.linksheet.extension.android.isUserApp
 import fe.linksheet.extension.android.toImageBitmap
 import sh.calvin.reorderable.ReorderableCollectionItemScope
@@ -156,7 +159,7 @@ fun AppConfigRoute(
             }
         }
 
-//        divider(stringRes = R.string.settings_app_config__title_configure_app_behavior)
+//        divider(id =  R.string.settings_app_config__title_configure_app_behavior)
     }
 }
 
@@ -187,7 +190,7 @@ private fun ReorderableCollectionItemScope.ItemCard2(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(ShapeListItemDefaults.SingleShape)
+            .clip(CustomShapeDefaults.SingleShape)
             .combinedClickable(onClick = {}, onLongClick = onLongClick)
             .semantics { selected = isSelected },
         colors = CardDefaults.cardColors(
@@ -208,7 +211,7 @@ private fun ReorderableCollectionItemScope.ItemCard2(
             if (item is AppItem) {
                 AppIconImage(bitmap = item.icon, label = item.label.toString())
             } else if (item is IconItem) {
-                FilledIcon(item = item, parentContainerColor = cardContainerColor)
+                FilledIconWrapper(item = item, parentContainerColor = cardContainerColor)
             }
 
             AlertCardContentLayout(
@@ -282,13 +285,13 @@ private fun ReorderableCollectionItemScope.ItemCard2(
 }
 
 @Composable
-private fun FilledIcon(item: IconItem, parentContainerColor: Color) {
+private fun FilledIconWrapper(item: IconItem, parentContainerColor: Color) {
     val containerColor = parentContainerColor.atElevation(
         MaterialTheme.colorScheme.surfaceTint, 6.dp
     )
 
     FilledIcon(
-        imageVector = item.icon,
+        icon = item.icon.iconPainter,
         iconSize = 20.dp,
         containerSize = 34.dp,
         contentDescription = null,
@@ -326,20 +329,20 @@ private class AppItem(val label: CharSequence, val packageName: String, val icon
     title = content {
         Text(text = label.toString(), overflow = TextOverflow.Ellipsis, maxLines = 1)
     },
-    description =  content {
+    description = content {
         Text(text = packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
     },
 )
 
 
 private open class IconItem(
-    title: fe.linksheet.component.util.TextContent, description: fe.linksheet.component.util.TextContent,
-    val icon: ImageVector
+    title: TextContent, description: TextContent,
+    val icon: ImageVector,
 ) : Item(title, description)
 
 private open class Item(
-    val title: fe.linksheet.component.util.TextContent,
-    val description: fe.linksheet.component.util.TextContent,
+    val title: TextContent,
+    val description: TextContent,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -372,7 +375,7 @@ private fun SaneScaffoldSettingsPage2(
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         content = { padding ->
-            SaneLazyColumnPageLayout(
+            SaneLazyColumnLayout(
                 state = state,
                 padding = padding,
                 verticalArrangement = Arrangement.spacedBy(5.dp),

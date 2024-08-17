@@ -7,8 +7,9 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import fe.linksheet.component.page.SaneScaffoldSettingsPageInternal
-import fe.linksheet.component.page.layout.SaneLazyListScope
+import fe.composekit.component.page.SaneScaffoldSettingsPageInternal
+import fe.composekit.layout.column.SaneLazyListScope
+
 import fe.linksheet.experiment.ui.overhaul.composable.component.appbar.SaneLargeTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)

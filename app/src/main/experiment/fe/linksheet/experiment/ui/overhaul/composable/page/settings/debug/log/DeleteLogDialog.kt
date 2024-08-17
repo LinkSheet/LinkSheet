@@ -7,7 +7,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -15,18 +15,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.stateful.StatefulDialogState
 import fe.android.compose.dialog.helper.stateful.rememberStatefulDialog
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContentWrapper
+import fe.composekit.component.dialog.DialogDefaults
 import fe.linksheet.R
-import fe.linksheet.component.dialog.DialogDefaults
-import fe.linksheet.component.util.Resource.Companion.textContent
-import fe.linksheet.component.util.TextContentWrapper
-import fe.linksheet.experiment.ui.overhaul.interaction.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.ui.HkGroteskFontFamily
 
 
 @Composable
 fun rememberDeleteLogDialog(
-    logFile: LogFileService.LogFile
+    logFile: LogFileService.LogFile,
 ): StatefulDialogState<LogFileService.LogFile, LogFileService.LogFile> {
     val context = LocalContext.current
     val interaction = LocalHapticFeedbackInteraction.current
@@ -58,7 +58,7 @@ fun rememberDeleteLogDialog(
 @Composable
 fun DeleteLogDialog(
     dismiss: () -> Unit,
-    confirm: () -> Unit
+    confirm: () -> Unit,
 ) {
     AlertDialog(
         icon = {
@@ -76,7 +76,7 @@ fun DeleteLogDialog(
             )
         },
         text = {
-            fe.linksheet.component.util.TextContentWrapper(
+            TextContentWrapper(
                 modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
                 textContent = textContent(R.string.delete_log_dialog__subtitle_delete_info)
             )

@@ -10,9 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.UriHandler
+import androidx.compose.ui.res.stringResource
 import dev.zwander.shared.ShizukuUtil
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
-import fe.linksheet.component.card.ClickableAlertCard
 import fe.linksheet.module.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +43,7 @@ fun ShizukuCard(
 
     val scope = rememberCoroutineScope()
 
-    ClickableAlertCard(
+    AlertCard(
         onClick = {
             when (status) {
                 ShizukuStatus.NoPermission -> scope.launch(Dispatchers.IO) {
@@ -57,9 +60,9 @@ fun ShizukuCard(
             containerColor = if (status == ShizukuStatus.Enabled) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.tertiaryContainer
         ),
-        imageVector = if (status == ShizukuStatus.Enabled) Icons.Default.CrueltyFree else Icons.Default.Warning,
-        contentDescriptionId = if (status == ShizukuStatus.Enabled) R.string.checkmark else R.string.error,
-        headlineId = R.string.shizuku_integration,
-        subtitleId = statusStringId
+        icon = if (status == ShizukuStatus.Enabled) Icons.Default.CrueltyFree.iconPainter else Icons.Default.Warning.iconPainter,
+        iconContentDescription = stringResource(if (status == ShizukuStatus.Enabled) R.string.checkmark else R.string.error),
+        headline = textContent(R.string.shizuku_integration),
+        subtitle = textContent(statusStringId)
     )
 }

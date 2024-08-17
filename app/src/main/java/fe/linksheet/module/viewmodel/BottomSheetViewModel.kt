@@ -6,6 +6,7 @@ import android.app.Application
 import android.app.DownloadManager
 import android.content.ActivityNotFoundException
 import android.content.ClipboardManager
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -49,6 +50,8 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
@@ -193,7 +196,11 @@ class BottomSheetViewModel(
 
         logger.debug(app, HashProcessor.PreferenceAppHashProcessor, { "Inserting $it" }, "AppPreferencePersister")
 
-        kotlin.runCatching { preferredAppRepository.insert(app) }.onFailure { it.printStackTrace() }
+        kotlin.runCatching {
+            withContext(Dispatchers.IO) {
+                preferredAppRepository.insert(app)
+            }
+        }.onFailure { it.printStackTrace() }
 
         val historyEntry = AppSelectionHistory(
             host = host,
@@ -207,7 +214,10 @@ class BottomSheetViewModel(
             { "Inserting $it" },
             "HistoryEntryPersister"
         )
-        appSelectionHistoryRepository.insert(historyEntry)
+
+        withContext(Dispatchers.IO) {
+            appSelectionHistoryRepository.insert(historyEntry)
+        }
     }
 
     fun startDownload(resources: Resources, uri: Uri?, downloadable: DownloadCheckResult.Downloadable) {
@@ -241,6 +251,24 @@ class BottomSheetViewModel(
         )
     }
 
+    object GithubWorkaround {
+        private val latestReleasesRegex = Regex(
+            "^((?:https?|github)://(?:.+\\.)?github\\.com/.+/.+/releases)/latest/?$"
+        )
+
+        private val `package` = ComponentName(
+            "com.github.android", "com.github.android.activities.DeepLinkActivity"
+        )
+
+        fun tryFixUri(componentName: ComponentName, uri: Uri?): Uri? {
+            if (componentName != `package`) return null
+
+            return uri
+                ?.let { latestReleasesRegex.matchEntire(it.toString()) }?.groupValues
+                ?.let { (_, releasesPath) -> Uri.parse(releasesPath) }
+        }
+    }
+
     suspend fun launchApp(
         info: DisplayActivityInfo,
         intent: Intent,
@@ -248,6 +276,11 @@ class BottomSheetViewModel(
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ): Intent {
+        // (Hopefully) temporary workaround since Github Mobile doesn't support the releases/latest route (https://github.com/orgs/community/discussions/136120)
+        GithubWorkaround.tryFixUri(info.componentName, intent.data)?.let { fixedUri ->
+            intent.data = fixedUri
+        }
+
         val viewIntent = Intent(Intent.ACTION_VIEW, intent.data)
             .addCategory(Intent.CATEGORY_BROWSABLE).let { privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it }
 
@@ -280,7 +313,7 @@ class BottomSheetViewModel(
         }.value
     }
 
-    fun handleClick(
+    fun handleClickAsync(
         activity: Activity,
         index: Int,
         isExpanded: Boolean,
@@ -289,13 +322,26 @@ class BottomSheetViewModel(
         info: DisplayActivityInfo,
         type: ClickType,
         modifier: ClickModifier,
-    ): Deferred<Intent>? {
+    ): Deferred<Intent?> = ioAsync {
+        handleClick(activity, index, isExpanded, requestExpand, result, info, type, modifier)
+    }
+
+    suspend fun handleClick(
+        activity: Activity,
+        index: Int,
+        isExpanded: Boolean,
+        requestExpand: () -> Unit,
+        result: Intent,
+        info: DisplayActivityInfo,
+        type: ClickType,
+        modifier: ClickModifier,
+    ): Intent? {
         val config = type.getPreference(modifier)
 
         when (config) {
             TapConfig.None -> {}
             TapConfig.OpenApp -> {
-                return launchAppAsync(
+                return launchApp(
                     info = info,
                     intent = result,
                     always = modifier is ClickModifier.Always,

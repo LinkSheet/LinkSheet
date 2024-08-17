@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable

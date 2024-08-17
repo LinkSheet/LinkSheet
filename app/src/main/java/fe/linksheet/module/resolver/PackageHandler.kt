@@ -3,12 +3,8 @@ package fe.linksheet.module.resolver
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentFilter.AuthorityEntry
-import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
-import fe.gson.context.GlobalGsonContext
-import fe.gson.extension.toJsonElement
 import fe.linksheet.util.ResolveInfoFlags
 
 
@@ -48,8 +44,6 @@ class PackageHandler(
                 uri
             )
         }
-
-//        val json = filtered.toJsonElement()
 
         return deduplicate(filtered)
     }

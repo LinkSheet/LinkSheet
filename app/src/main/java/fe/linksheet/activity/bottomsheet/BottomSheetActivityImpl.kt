@@ -428,14 +428,13 @@ class BottomSheetActivityImpl(
                         appInfo = info,
                         selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
                         onClick = { type, modifier ->
-                            val job = viewModel.handleClick(
+                            val job = viewModel.handleClickAsync(
                                 activity, index, isExpanded,
                                 requestExpand,
                                 result.intent, info, type, modifier
                             )
-                            if (job != null) {
-                                handleLaunch(job)
-                            }
+
+                            handleLaunch(job)
                         },
                         privateBrowser = privateBrowser,
                         showPackage = showPackage
@@ -476,7 +475,7 @@ class BottomSheetActivityImpl(
                         appInfo = info,
                         selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
                         onClick = { type, modifier ->
-                            val job = viewModel.handleClick(
+                            val job = viewModel.handleClickAsync(
                                 activity,
                                 index,
                                 isExpanded,
@@ -594,10 +593,10 @@ class BottomSheetActivityImpl(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun handleLaunch(deferred: Deferred<Intent>) {
+    private fun handleLaunch(deferred: Deferred<Intent?>) {
         deferred.invokeOnCompletion {
             val showAsReferrer = viewModel.showAsReferrer()
-            val intent = deferred.getCompleted()
+            val intent = deferred.getCompleted() ?: return@invokeOnCompletion
 
             intent.putExtra(
                 LinkSheetConnector.EXTRA_REFERRER,

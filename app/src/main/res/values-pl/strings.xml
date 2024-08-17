@@ -5,7 +5,7 @@
     <string name="always">Zawsze</string>
     <string name="use_a_different_app">Użyj innej aplikacji</string>
     <string name="opening_with_app">Otwieranie w %s</string>
-    <string name="default_apps">Preferowane aplikacje</string>
+    <string name="default_apps">Domyślne aplikacje</string>
     <string name="set_as_browser">Ustaw jako przeglądarkę</string>
     <string name="apps_which_can_open_links_explainer_2">Lista wszystkich aplikacji, które mogą kolidować z działaniem LinkSheet</string>
     <string name="no_preferred_apps_set_yet">Nie ustawiono jeszcze aplikacji jako preferowanych.</string>
@@ -17,8 +17,8 @@
     <string name="clear">Wyczyść</string>
     <string name="usage_stats_sorting">Sortuj aplikacje według użycia</string>
     <string name="enable_copy_button_explainer">Wyświetla przycisk umożliwiający kopiowanie linku</string>
-    <string name="single_tap">Pojedyncze dotknięcie</string>
-    <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach, niezależnie od tego, jakiej aplikacja chce używać</string>
+    <string name="single_tap">Włącz pojedyncze dotknięcie</string>
+    <string name="disable_in_selected_explainer">Wyłącz wewnętrzną przeglądarkę w wybranych aplikacjach</string>
     <string name="browser_mode_subtitle">Ustaw domyślny tryb przeglądarki</string>
     <string name="always_ask">Zawsze pytaj</string>
     <string name="none">Żadna</string>
@@ -31,10 +31,10 @@
     <string name="default_apps_subtitle">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
     <string name="always_show_package_name_explainer">Zawsze wyświetlaj nazwy pakietów zamiast nazw aplikacji. Dotyczy to całej aplikacji.</string>
-    <string name="disable_all_toasts">Wyłącz powiadomienie toast</string>
+    <string name="disable_all_toasts">Wyłącz komunikaty (toasts)</string>
     <string name="remove_all">Usuń wszystkie</string>
     <string name="add_all">Dodaj wszystkie</string>
-    <string name="hide_after_copying">Ukryj po skopiowaniu</string>
+    <string name="hide_after_copying">Auto. ukryj po akcji</string>
     <string name="back">Cofnij</string>
     <string name="display_grid_layout">Układ siatki</string>
     <string name="display_grid_layout_explainer">Pokazuj układ siatki zamiast listy</string>
@@ -50,30 +50,30 @@
     <string name="save">Zapisz</string>
     <string name="whitelisted_browsers">Przeglądarki na białej liście</string>
     <string name="about">O aplikacji</string>
-    <string name="about_explainer">Informacje o tej aplikacji i licencjach</string>
+    <string name="about_explainer">Podziękowania, Licencja, Linki, Wersja</string>
     <string name="credits">Uznanie</string>
-    <string name="credits_explainer">Licencje open source</string>
+    <string name="credits_explainer">Podziękowania, Licencjonowanie</string>
     <string name="version">Informacje o wersji</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="github">GitHub</string>
     <string name="github_explainer">Repozytorium kodu źródłowego</string>
     <string name="donate_crypto">Wesprzyj poprzez krypto</string>
-    <string name="donate_subtitle">Jeśli chcesz przekazać darowiznę i odebrać <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Uaktualnij do <b>LinkSheet Pro</b></string>
     <string name="paste">Wklej</string>
     <string name="error">Błąd</string>
     <string name="checkmark">Znacznik wyboru</string>
     <string name="links">Linki</string>
-    <string name="links_explainer">Ustawienia dotyczące manipulacją linkami</string>
+    <string name="links_explainer">ClearURLs, LibRedirect, Śledzenie przekierowań</string>
     <string name="use_clear_urls">Użyj ClearURLs</string>
     <string name="follow_redirects">Śledzenie przekierowań</string>
-    <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu. Może to mieć <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">negatywny wpływ na prywatność</annotation></string>
-    <string name="loading_link">Wczytywanie linku…</string>
+    <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">negatywny wpływ na prywatność</annotation> \u0020</string>
+    <string name="loading_link">Przetwarzanie linku…</string>
     <string name="follow_redirects_external_service">Śledź przekierowania przez usługę zewnętrzną</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Polityka prywatności</string>
     <string name="follow_only_known_trackers">Podążaj tylko za znanymi trackerami</string>
     <string name="theme">Motyw</string>
-    <string name="theme_explainer">Zmień motyw aplikacji</string>
-    <string name="system">Systemowy</string>
+    <string name="theme_explainer">Material You, ciemny motyw, tryb czystej czerni</string>
+    <string name="system">Zgodnie z systemem</string>
     <string name="light">Jasny</string>
     <string name="dark">Ciemny</string>
     <string name="amoled_black">Czarny (Amoled)</string>
@@ -91,42 +91,42 @@
     <string name="add">Dodaj</string>
     <string name="select_an_app">Wybierz aplikację</string>
     <string name="close">Zamknij</string>
-    <string name="dont_show_filtered_item">Nigdy nie wyświetlaj sekcji ostatnio wybranej aplikacji</string>
-    <string name="dont_show_filtered_item_explainer">Nigdy nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
+    <string name="dont_show_filtered_item">Wyłącz sekcję ostatnio wybranej aplikacji</string>
+    <string name="dont_show_filtered_item_explainer">Nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
     <string name="set_as_browser_explainer">Dotknij, aby ustawić LinkSheet jako domyślną przeglądarkę</string>
     <string name="single_tap_explainer">Umożliwia otwieranie aplikacji tylko jednym dotknięciem; długie przytrzymanie wybierze aplikację, podwójne dotknięcie otworzy informacje o aplikacji</string>
-    <string name="disable_all_toasts_explainer">Nigdy nie pokazuj wyskakujących wiadomości</string>
+    <string name="disable_all_toasts_explainer">Nie pokazuj komunikatów (toast)</string>
     <string name="linksheet_download">Pobieranie LinkSheet</string>
     <string name="enable_downloader">Włącz program do pobierania</string>
     <string name="downloader_url_mime_type">Użyj typu MIME z adresu URL</string>
     <string name="downloader_url_mime_type_explainer">Sprawdza, czy adres URL kończy się rozszerzeniem pliku (np. \".jpg\"); jeśli tak, ten typ jest używany dla pobieranego pliku.</string>
     <string name="random_instance">Losowa instancja</string>
-    <string name="use_app_settings">Użyj ustawień aplikacji</string>
-    <string name="always_disable">Zawsze wyłączona</string>
+    <string name="use_app_settings">Domyślnie</string>
+    <string name="always_disable">Wymuś wyłączenie</string>
     <string name="browser">Przeglądarka</string>
-    <string name="disable_in_selected">Wyłączona w wybranych</string>
+    <string name="disable_in_selected">Wymuś wyłączenie…</string>
     <string name="in_app_browser">Wewnętrzna przeglądarka</string>
     <string name="in_app_browser_subtitle">Ustaw tryb wewnętrznej przeglądarki</string>
-    <string name="always_disable_explainer">Zawsze wyłączaj wewnętrzną przeglądarkę, niezależnie od tego, jakiej aplikacja chce używać</string>
+    <string name="always_disable_explainer">Wyłącz wewnętrzną przeglądarkę we wszystkich aplikacjach</string>
     <string name="open_with">Otwórz w</string>
-    <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które umożliwia wyłączenie automatycznego otwierania obsługiwanych linków</string>
-    <string name="browser_mode">Preferowana przeglądarka</string>
+    <string name="apps_which_can_open_links_explainer">Dotknij aplikację, aby otworzyć menu „Otwieraj domyślnie”, które pozwala wyłączyć automatyczne otwieranie linków</string>
+    <string name="browser_mode">Tryb przeglądarki</string>
     <string name="enable_send_button_explainer">Wyświetla przycisk umożliwiający udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Ustawiono LinkSheet jako domyślną przeglądarkę!</string>
-    <string name="bottom_sheet_explainer">Sortuj według użycia, włącz przycisk kopiowania, włącz przycisk udostępniania itp.</string>
+    <string name="bottom_sheet_explainer">Konfiguracja i personalizacja</string>
     <string name="open_copied_link">Otwórz skopiowany link</string>
     <string name="open_with_app">Otwórz w %s</string>
-    <string name="hide_after_copying_explainer">Ukryj dolny panel po naciśnięciu przycisku „Kopiuj link”</string>
+    <string name="hide_after_copying_explainer">Automatycznie ukryj dolny panel, gdy zostanie naciśnięty przycisk akcji, taki jak „Kopiuj link” lub „Pobierz”</string>
     <string name="selected_browser_explainer">Ta przeglądarka zostanie automatycznie otwarta, jeśli żadna natywna aplikacja nie będzie w stanie obsłużyć klikniętego linku</string>
     <string name="preview_url_explainer">Pokazuje kliknięty link (po jego przetworzeniu)</string>
-    <string name="use_clear_urls_explainer">Używaj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
-    <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">negatywny wpływ na prywatność</annotation></string>
+    <string name="use_clear_urls_explainer">Używaj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL) \u0020</string>
+    <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">negatywny wpływ na prywatność</annotation> \u0020</string>
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
     <string name="fastfoward_rules_explainer">Używaj eksperymentalnej integracji reguły <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
     <string name="redirect_resolve_type_local">lokalny rozwiązywacz</string>
     <string name="enable_libredirect_explainer">Przekieruj linki do przyjaznych dla prywatności frontendów przy użyciu eksperymentalnej integracji <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
-    <string name="use_app_settings_explainer">Niech aplikacja zdecyduje, czy wewnętrzna przeglądarka powinna być używana</string>
-    <string name="browser_explainer">Tryb przeglądarki i ustawienia wewnętrznej przeglądarki</string>
+    <string name="use_app_settings_explainer">Aplikacje decydują, czy wewnętrzna przeglądarka powinna być używana</string>
+    <string name="browser_explainer">Tryb przeglądarki, wewnętrzna przeglądarka</string>
     <string name="seal">Seal</string>
     <string name="license_gpl_3">Licencja GNU General Public v3.0</string>
     <string name="lib_redirect">LibRedirect</string>
@@ -144,7 +144,7 @@
     <string name="app_crashed">LinkSheet uległ awarii, sprawdź poniższy błąd</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
     <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki. Jeśli obecna jest tylko jedna aplikacja natywna, zostanie automatycznie otwarta. Jeśli nie ma takiej aplikacji, wszystkie przeglądarki są wyświetlane na liście.</string>
-    <string name="debug_explainer">Wyświetl logi aplikacji</string>
+    <string name="debug_explainer">Dzienniki aplikacji, reset zweryfikowanego obsługiwania</string>
     <string name="logs">Logi</string>
     <string name="logs_explainer">Wyświetl logi aplikacji</string>
     <string name="app_log">Logi aplikacji</string>
@@ -152,7 +152,7 @@
     <string name="options">Opcje</string>
     <string name="services">Usługi</string>
     <string name="current_session">Bieżąca sesja</string>
-    <string name="log_files">Poprzednie logi</string>
+    <string name="log_files">Poprzednie sesje</string>
     <string name="log_viewer">Przeglądarka logów</string>
     <string name="log_viewer_timestamp">Wyświetlanie logu z %s</string>
     <string name="no_log_entries">Ta sesja nie zawiera dzienników.</string>
@@ -178,12 +178,12 @@
     <string name="include_settings">Dołącz ustawienia (zalecane)</string>
     <string name="include_fingerprint">Dołącz odcisk palca urządzenia (zalecane)</string>
     <string name="delete">Usuń</string>
-    <string name="log_privacy">Aby dowiedzieć się więcej na temat prywatności logów, możesz odwiedzić ten <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
+    <string name="log_privacy">Aby dowiedzieć się więcej na temat prywatności logów, możesz odwiedzić ten <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>. \u0020</string>
     <string name="no_logs_found">Brak poprzednich logów!</string>
     <string name="amp2html_local_cache">Włącz lokalny bufor Amp2Html</string>
     <string name="amp2html">Amp2Html</string>
     <string name="enable_amp2html">Włącz Amp2Html</string>
-    <string name="enable_amp2html_explainer">Przekierowuje strony AMP do ich normalnej wersji internetowej. Może to mieć <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">negatywny wpływ na prywatność</annotation></string>
+    <string name="enable_amp2html_explainer">Przekierowuje strony AMP do ich normalnej wersji internetowej. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">negatywny wpływ na prywatność</annotation> \u0020</string>
     <string name="amp2html_local_cache_explainer">Buforuj pobrane wersje stron internetowych bez AMP lokalnie</string>
     <string name="amp2html_external_service">Uzyskaj wersję stron bez AMP</string>
     <string name="amp2html_external_service_explainer">Preferuj bezpośrednie strony zamiast wersji AMP przy użyciu API z supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
@@ -203,7 +203,7 @@
     <string name="shizuku_not_running_explainer">Shizuku nie jest uruchomiony. Dotknij tutaj, aby go otworzyć, a następnie postępuj zgodnie z instrukcjami.</string>
     <string name="shizuku_integration_not_setup_explainer">Shizuku nie jest niezbędny do działania LinkSheet, ale jest zalecany. Kliknij tutaj, aby zainstalować.</string>
     <string name="shizuku">Integracja Shizuku</string>
-    <string name="enable_shizuku_explainer">Włącz, aby użyć Shizuku do automatycznego wyłączenia wszystkich mechanizmów obsługi linków. Na głównym ekranie aplikacji pojawi się nowa opcja.</string>
+    <string name="enable_shizuku_explainer">Włączenie tej opcji pozwoli LinkSheet na używanie Shizuku do bezpośredniej interakcji z interfejsami API systemu. Może to być używane, na przykład, do automatycznego wyłączania obsługi otwierania linków dla wszystkich aplikacji. Na głównym ekranie aplikacji pojawi się nowa opcja.</string>
     <string name="enable_all">Włącz wszystko</string>
     <string name="disable_all">Wyłącz wszystko</string>
     <string name="shizuku_integration_enabled_explainer">Integracja z Shizuku została włączona!</string>
@@ -211,7 +211,7 @@
     <string name="shizuku_integration">Integracja Shizuku</string>
     <string name="known_trackers">Znane trackery</string>
     <string name="advanced">Zaawansowane</string>
-    <string name="advanced_explainer">Opcje, takie jak flagi funkcji i import/eksport</string>
+    <string name="advanced_explainer">Flagi funkcji, Eksperymenty, Import/Eksport</string>
     <string name="shizuku_explainer">Shizuku umożliwia bezpośrednią interakcję z systemowymi API</string>
     <string name="enable_shizuku">Włącz (eksperymentalną) integrację Shizuku</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -261,10 +261,10 @@
     <string name="pretend_to_be_app_explainer">Udawaj natywną aplikację dla obsługiwanych domen za pomocą LinkSheetCompat</string>
     <string name="compat_installed">LinkSheetCompat jest już zainstalowany</string>
     <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
-    <string name="general">Ogólne</string>
+    <string name="general">Różne</string>
     <string name="success">Powodzenie</string>
     <string name="warning">Ostrzeżenie</string>
-    <string name="general_settings_explainer">Ustawienia dotyczące całej aplikacji</string>
+    <string name="general_settings_explainer">Zawsze pokazuj nazwy pakietów</string>
     <string name="no_handlers_found">Nie znaleziono przeglądarki ani aplikacji natywnej!</string>
     <string name="no_handlers_found_explainer">LinkSheet nie może otworzyć tego linku.</string>
     <string name="at_least_one_known_browser_installed">Wykryto przeglądarkę</string>
@@ -292,28 +292,28 @@
     <string name="built_at">Zbudowano (UTC):</string>
     <string name="github_workflow_run_id">ID kompilacji workflow:</string>
     <string name="linksheet_version_info_header">Informacje o wersji LinkSheet:</string>
-    <string name="privacy_settings_explainer">Ustawienia takie jak uwzględnienie odsyłacza</string>
+    <string name="privacy_settings_explainer">Prywatność odsyłacza, Telemetria</string>
     <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Kiedy uruchamiana jest aplikacja, może sprawdzić, która aplikacja ją uruchomiła, lub \"odwołała\" się do niej. Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, twierdząc, że to aplikacja, która uruchomiła LinkSheet, jest docelową aplikacją. Włącz to, aby ponownie wstawić LinkSheet jako odwołującą się aplikację dla aplikacji, które otwiera.</string>
     <string name="privacy">Prywatność</string>
     <string name="thanks_for_donating">Dziękuję za wsparcie!</string>
     <string name="dismiss">Odrzuć</string>
-    <string name="donate_explainer_crypto">Jeśli przekazano darowiznę przez krypto, aby odebrać <b>LinkSheet Pro</b>, wyślij dowód wpłaty na <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation></string>
+    <string name="donate_explainer_crypto">Jeśli przekazano darowiznę przez krypto, wyślij dowód wpłaty na <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
     <string name="join">Dołącz</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">Dołącz do naszego Discorda! Porozmawiaj z użytkownikami i twórcami LinkSheet o jego przyszłości i innych przedsięwzięciach!</string>
+    <string name="discord_explainer">Czat LinkSheet na Discordzie</string>
     <string name="donate_card">Wesprzyj używając karty (przez BuyMeACoffee)</string>
-    <string name="donate_card_subtitle"> Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. \u0020
-\nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje.</string>
+    <string name="donate_card_subtitle">Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. \u0020 
+\nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje. \u0020</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="donate_learn_more">Czytaj więcej</string>
     <string name="flavor">Wariant:</string>
-    <string name="github_pipeline_build">Zbudowana i podpisana przez przepływ pracy Github</string>
+    <string name="github_pipeline_build">Zbudowana i podpisana przez CI</string>
     <string name="other">Inne</string>
     <string name="app_setup">Konfiguracja aplikacji</string>
-    <string name="built_by">Kompilacja</string>
+    <string name="built_by">O kompilacji</string>
     <string name="donate">Wsparcie</string>
-    <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd ani przepływ pracy Github. Nie musi to oznaczać niczego złego, ponieważ każdy może rozwidlić kod źródłowy i zbudować własną wersję LinkSheet, ale może to zrobić w złym zamiarze.</string>
+    <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd, ani przez przepływ pracy GitHub.</string>
     <plurals name="hours">
         <item quantity="one">%s godzinę</item>
         <item quantity="few">%s godziny</item>
@@ -334,7 +334,7 @@
     </plurals>
     <string name="pro_feature">Funkcja dostępna w LinkSheet Pro!</string>
     <string name="export_to_file">Eksportuj do pliku</string>
-    <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5 €</b> (<b>4 €</b> w przypadku dotacji kryptowalutami!) umożliwia uzyskanie dostępu do <b>LinkSheet Pro</b>, który obecnie jedynie ukrywa baner dotacyjny na głównym ekranie aplikacji, ale w przyszłości pojawią się <b>funkcje dostępne wyłącznie w wersji Pro.</b></string>
+    <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5€</b> zapewnia dostęp do <b>LinkSheet Pro</b>, który zawiera <b>funkcje dostępne tylko w wersji Pro</b>, takie jak: śledzenie przekierowań na zewnątrz, uzyskiwanie stron nie-AMP na zewnątrz i wiele innych, które będą dostępne w przyszłości! \u0020</string>
     <string name="import_settings">Przywracanie ustawień</string>
     <string name="export_import_settings">Kopia ustawień</string>
     <string name="import_headline">Przywróć z kopii zapasowej</string>
@@ -343,26 +343,26 @@
     <string name="confirm_import">Potwierdzam</string>
     <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>
     <string name="import_explainer">Importuj ustawienia z pliku</string>
-    <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
+    <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>. \u0020</string>
     <string name="export_import_settings_explainer">Wykonaj kopię ustawień lub przywróć je z pliku</string>
     <string name="include_history">Uwzględnij historię (kliknięć linków i aplikacji)</string>
     <string name="export_settings">Eksportuj ustawienia</string>
     <string name="export_explainer">Zapisz bieżące ustawienia do pliku</string>
     <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
-    <string name="resolve_via_failed_toast">Toast: Rozwiązanie nie powiodło się</string>
-    <string name="last_updated">Ostatnia aktualizacja (UTC):</string>
+    <string name="resolve_via_failed_toast">Rozwiązanie nie powiodło się</string>
+    <string name="last_updated"><b>Wersja:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="resolve_via_failed_toast_explainer">Wyświetl toast, gdy link nie zostanie rozpoznany przez usługę zewnętrzną</string>
     <string name="dev_explainer">Użyteczne dla programistów</string>
-    <string name="opening_with_app_toast">Toast: Aplikacja uruchomiona automatycznie</string>
+    <string name="opening_with_app_toast">Aplikacja uruchomiła się automatycznie</string>
     <string name="download_started_toast_explainer">Wyświetl toast po rozpoczęciu pobierania</string>
-    <string name="url_copied_toast">Toast: Link został skopiowany</string>
+    <string name="url_copied_toast">Skopiowano link</string>
     <string name="dev_mode_enabled">Włączono tryb deweloperski. Postępuj ostrożnie!</string>
     <string name="clear_urls_version">Reguły ClearURLs</string>
     <string name="last_rule_update">Ostatnia aktualizacja reguł (UTC):</string>
-    <string name="resolve_via_toast">Toast: Link został rozwiązany</string>
-    <string name="download_started_toast">Toast: Rozpoczęto pobieranie</string>
-    <string name="notifications">Powiadomienia</string>
-    <string name="just_version">Wersja</string>
+    <string name="resolve_via_toast">Rozwiązanie powiodło się</string>
+    <string name="download_started_toast">Rozpoczęto pobieranie</string>
+    <string name="notifications">Powiadomienia i komunikaty</string>
+    <string name="just_version">Wersje</string>
     <string name="resolve_via_toast_explainer">Wyświetl toast, gdy link zostanie rozwiązany za pośrednictwem usługi zewnętrznej</string>
     <string name="copy_version_information">Kopiuj informacje o wersji</string>
     <string name="dev">Opcje programisty</string>
@@ -373,14 +373,14 @@
     <string name="opening_with_app_toast_explainer">Pokaż toast po uruchomieniu aplikacji, która została ustawiona jako domyślna dla domeny</string>
     <string name="disclaimer_libredirect_unstable">Funkcja eksperymentalna. LibRedirect jest obecnie uważany za bardzo niestabilny i może w ogóle nie działać.</string>
     <string name="donation">Dotacja</string>
-    <string name="notifications_explainer">Skonfiguruj powiadomienia toast</string>
+    <string name="notifications_explainer">Skopiowano link, Rozpoczęto pobieranie</string>
     <string name="running_unofficial_build">Nieoficjalna kompilacja</string>
     <string name="fastforward_version">Reguły FastForward</string>
     <string name="url_copied_toast_explainer">Pokaż toast, gdy link zostanie skopiowany</string>
     <string name="enable_new_bottom_sheet">Nowy dolny panel</string>
-    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail. \u0020
-\n \u0020
-\nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji.</string>
+    <string name="new_bottomsheet_explainer">Ta wersja LinkSheet zawiera nowy dolny panel dzięki <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Proszę o informację zwrotną na Discordzie, Githubie lub przez e-mail. \u0020 
+\n \u0020 
+\nMożesz przywrócić stary dolny panel w Ustawienia -&gt; Zaawansowane -&gt; Flagi funkcji. \u0020</string>
     <string name="enable_new_bottom_sheet_explainer">Zastąp dolny panel nową przeprojektowaną wersją</string>
     <string name="new_bottomsheet">Nowy dolny panel</string>
     <string name="amp2html_short">amp2html</string>
@@ -390,13 +390,13 @@
     <string name="online_services">Usługi online</string>
     <string name="shizuku_manager_start_failed">Nie udało się uruchomić menedżera Shizuku. Uruchom go ręcznie!</string>
     <string name="include_throwable">Dołącz logi awarii (zalecane, ale nie można ich zredagować)</string>
-    <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla obsługiwanych hostów</string>
-    <string name="apps_which_can_open_links">Obsługa zweryfikowanych linków</string>
+    <string name="preferred_apps_settings">Ustaw preferowane aplikacje dla linków, które obsługują</string>
+    <string name="apps_which_can_open_links">Aplikacje otwierające linki</string>
     <string name="app_browsers_subtitle">Preferowane aplikacje i obsługa zweryfikowanych linków</string>
     <string name="onboarding_0_title">Witaj w
 \nLinkSheet</string>
     <string name="onboarding_0_subtitle">Wybierz, aby zawsze otrzymywać monit podczas otwierania linku, ustaw domyślne przeglądarki i wiele więcej</string>
-    <string name="onboarding_2_card_explainer">Shizuku umożliwia LinkSheet wyłączenie domyślnego zachowania obsługi linków we wszystkich aplikacjach naraz, zamiast konieczności ręcznego wyłączania ich dla każdej aplikacji osobno (co jest następnym krokiem).</string>
+    <string name="onboarding_2_card_explainer">Shizuku umożliwia LinkSheet wyłączenie domyślnego zachowania obsługi linków we wszystkich aplikacjach jednocześnie, zamiast ręcznego wyłączania tego dla każdej aplikacji z osobna (co jest następnym krokiem).</string>
     <string name="onboarding_3_card_explainer">Google wprowadził zweryfikowane linki aplikacji w Androidzie 12, co pozwala aplikacjom na kryptograficzne potwierdzanie własności domen. To zachowanie musi być ręcznie wyłączone, aby LinkSheet mógł przechwytywać kliknięte linki.</string>
     <string name="onboarding_3_button">Wyłącz obsługę linków</string>
     <string name="onboarding_2_start_shizuku">Uruchom Shizuku</string>
@@ -404,8 +404,8 @@
     <string name="onboarding_4_button">Dalej</string>
     <string name="onboarding_4_card_title">Wyłącz obsługę linków</string>
     <string name="onboarding_4_card_explainer">Wyłącz obsługę linków dla wszystkich domen, które powinny być obsłużone przez LinkSheet.</string>
-    <string name="base_config">Konfiguracja podstawowa</string>
-    <string name="urlbar_settings">Pasek adresu URL</string>
+    <string name="base_config">Dodatkowa konfiguracja</string>
+    <string name="urlbar_settings">Pasek adresu</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="enable_dev_bottom_sheet">Testowy dolny panel</string>
     <string name="enable_dev_bottom_sheet_explainer">Włącz najnowszą wersję dolnego panelu, która jest obecnie w fazie rozwoju</string>
@@ -427,8 +427,8 @@
     <string name="onboarding_2_request_shizuku_permission">Poproś o uprawnienie</string>
     <string name="onboarding_2_install_shizuku">Instaluj Shizuku</string>
     <string name="onboarding_2_skip_button">Pomiń</string>
-    <string name="onboarding_3_subtitle">Obsługiwacze linków muszą być wyłączone, aby LinkSheet mógł je przechwycić</string>
-    <string name="onboarding_3_card_title">Obsługa łączy</string>
+    <string name="onboarding_3_subtitle">„Otwieraj obsługiwane linki” musi być wyłączone, aby LinkSheet mógł je przechwycić</string>
+    <string name="onboarding_3_card_title">Aplikacje otwierające linki</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="onboarding_5_subtitle">LinkSheet został pomyślnie włączony</string>
     <string name="onboarding_5_title">Wszystko zostało ustawione!</string>
@@ -440,12 +440,205 @@
     <string name="allow_darknets">Zezwól na DarkNet</string>
     <string name="amp2html_allow_darknets_explainer">Zezwalaj na uruchamianie Amp2Html dla darknetu (obsługiwane: %s)</string>
     <string name="follow_redirects_allow_darknets_explainer">Zezwalaj na następujące przekierowania dla darknetów (obsługiwane: %s)</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. Warto zauważyć, że niestety dostosowanie dotykiem nie jest jeszcze dostępne i zostanie zaimplementowane w późniejszym terminie. \u0020
-\nProszę zgłaszać błędy na <annotation url="https://github.com/1fexd/LinkSheet/issues/308">Github</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discordzie</annotation>, lub poprzez <annotation url="mailto:1fexd@420blaze.it">e-mail</annotation>.</string>
+    <string name="new_dev_bottom_sheet_feature_explainer">Nowy dolny panel zbliża się do ukończenia funkcji. W szczególności, personalizacja dotknięć nie jest jeszcze dostępna i zostanie wdrożona w późniejszym terminie.
+\nProszę zgłaszać błędy na <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">GitHubie</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discordzie</annotation> lub za pośrednictwem <annotation url="mailto:1fexd@420blaze.it">e-maila</annotation>. \u0020</string>
     <string name="experiment">Doświadczenie</string>
     <string name="new_dev_bottom_sheet_explainer">Nie podoba Ci się nowy dolny panel? Kliknij, aby zgłosić błędy.</string>
     <string name="new_dev_bottom_sheet">Dolny panel</string>
     <string name="information">Informacja</string>
     <string name="resolve_embeds">Rozwiąż osadzenia</string>
     <string name="resolve_embeds_explainer">Rozwiązuj lustra osadzeń, takie jak fxtwitter.com, aby prowadziły do rzeczywistego hosta</string>
+    <string name="parse_shared_text_intent_explainer">Gdy akcja udostępniania jest wywoływana z aplikacji, która udostępnia tekst zawierający URL, spróbuj znaleźć (i użyć) pierwszy URL w tekście, zamiast zakończyć działanie błędem</string>
+    <string name="tap_customization">Personalizacja dotknięć</string>
+    <string name="loading_link_subtitle">LinkSheet wykonuje operacje związane z linkami. To zajmie tylko kilka sekund</string>
+    <string name="telemetry_dialog_text_2">Metryki użycia obejmują losowy, możliwy do zresetowania przez użytkownika identyfikator związany z instalacją, a także wersję Androida, i są przechowywane w <annotation url="https://aptabase.com">Aptabase (UE)</annotation>. Wrażliwe dane, takie jak zainstalowane aplikacje i kliknięte linki, <b>nigdy</b> nie będą zbierane. Aby dowiedzieć się więcej, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">tutaj</annotation>. \u0020</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Włączone otwieranie linków</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Włączone</string>
+    <string name="switch_profile">Włącz przełączanie profili</string>
+    <string name="something_went_wrong">Coś poszło nie tak, proszę spróbuj ponownie.</string>
+    <string name="theme_enable_material_you">Kolor dynamiczny</string>
+    <string name="customization">Personalizacja</string>
+    <string name="telemetry_level_minimal_description">Metryki wersji zainstalowanej</string>
+    <string name="reset_app_link_verification_status_subtitle">Naciśnij tutaj, aby zresetować status weryfikacji linków aplikacji we wszystkich aplikacjach, a następnie poczekaj kilka minut, podczas gdy Android ponownie je weryfikuje. Nie otrzymasz potwierdzenia. Wymaga Shizuku.</string>
+    <string name="open_app_settings_page">Otwórz stronę ustawień aplikacji</string>
+    <string name="telemetry_dialog_text">Wybierz typ metryk użycia, z którym czujesz się najbardziej komfortowo.</string>
+    <string name="theme_enable_amoled_explainer">Użyj motywu czystej czerni, jeśli włączony jest tryb ciemny</string>
+    <string name="experiments_explainer_2">Aktywne prace rozwojowe</string>
+    <string name="retry">Spróbuj ponownie</string>
+    <string name="resolve_activity_failure">Nie udało się rozwiązać aktywności!</string>
+    <string name="settings_shortcuts__title_connected_apps">Połączone aplikacje</string>
+    <string name="try_share">Udostępnij</string>
+    <string name="telemetry_level_disabled">Wyłączone</string>
+    <string name="select_app">Wybierz aplikację</string>
+    <string name="tap_customization_long_tap">Akcja przy przytrzymaniu</string>
+    <string name="settings_shortcuts__title_link_handlers">Otwieranie linków</string>
+    <string name="telemetry_configure_type">Typ analizy</string>
+    <string name="edit">Edytuj</string>
+    <string name="link_handle_failed_text_field_label">Zapytanie</string>
+    <string name="telemetry_level_disabled_description">Brak zbierania danych</string>
+    <string name="experiments_explainer">Wypróbuj funkcje, które są obecnie w fazie rozwoju</string>
+    <string name="telemetry_level_standard">Standardowe</string>
+    <string name="telemetry_level_standard_description">Zbiorcze statystyki użycia</string>
+    <string name="telemetry_identity_full">Pełne</string>
+    <string name="telemetry_level_exhaustive_description">Szczegółowe statystyki użycia</string>
+    <string name="help">Pomoc</string>
+    <string name="settings_verified_link_handlers__text_user_apps">Aplikacje użytkownika</string>
+    <string name="switch_profile_explainer">Wyświetla przycisk w dolnym panelu, aby otworzyć kliknięty link w profilu (pracy). Wymaga, aby LinkSheet był zainstalowany w obu profilach i ręcznie powiązany za pomocą Ustawienia -&gt; Aplikacje -&gt; Aplikacje ze specjalnym dostępem -&gt; Wspólny widok aplikacji służbowych i osobistych</string>
+    <string name="settings_shortcuts__subtitle_default_browser">Otwórz stronę ustawień domyślnej przeglądarki</string>
+    <string name="analytics">Analizy</string>
+    <string name="help_subtitle">Samouczek, Wiki, Pytania i odpowiedzi</string>
+    <string name="tap_customization_dialog_text">Wybierz akcję, która powinna zostać wykonana</string>
+    <string name="telemetry_level_minimal">Minimalne</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Wszystkie</string>
+    <string name="reset_app_link_verification_status">Zresetuj status weryfikacji linków aplikacji</string>
+    <string name="telemetry_configure_title">Analizy</string>
+    <string name="settings__title_shortcuts">Skróty</string>
+    <string name="verified_link_handlers_subtitle">Kontroluj stan weryfikacji domeny aplikacji</string>
+    <string name="expand_on_app_select">Rozwiń po wybraniu aplikacji</string>
+    <string name="tap_customization_single_tap">Akcja przy jednym dotknięciu</string>
+    <string name="log_session_headline">Sesja o</string>
+    <string name="tap_customization_dialog_title">Skonfiguruj %s</string>
+    <string name="telemetry_identifier_reset">Zresetuj identyfikator</string>
+    <string name="show_native_label">Pokaż etykietę natywną</string>
+    <string name="telemetry_identity_basic">Podstawowe</string>
+    <string name="Miscellaneous">Różne</string>
+    <string name="settings__title_filter_apps">Filtruj aplikacje</string>
+    <string name="theme_enable_amoled">Czysta czerń</string>
+    <string name="parse_shared_text_intent">Analizuj udostępniony tekst, jeśli URL nie zostanie znaleziony</string>
+    <string name="settings__subtitle_shortcuts">Ustawienia domyślnej przeglądarki, obsługi linków i połączonych aplikacji</string>
+    <string name="nightly_experiments_card_explainer">Naciśnij, aby sprawdzić funkcje, które są obecnie w fazie rozwoju</string>
+    <string name="experiments_explainer_3">Eksperymenty są w fazie aktywnego rozwoju i mogą nie działać poprawnie lub wcale. Proszę nie zgłaszaj błędów na GitHubie. Jeśli chcesz przekazać opinię, zrób to na Discordzie.</string>
+    <string name="theme_mode">Tryb motywu</string>
+    <string name="link_handle_failed">Wystąpił błąd</string>
+    <string name="settings__title_updates">Aktualizacje</string>
+    <string name="settings__subtitle_updates">Zaktualizuj LinkSheet do najnowszej wersji</string>
+    <string name="settings_shortcuts__title_default_browser">Domyślna przeglądarka</string>
+    <string name="settings_verified_link_handlers__text_disabled">Obsługa wyłączona</string>
+    <string name="reset_app_link_verification_status_toast">Żądanie ponownej weryfikacji</string>
+    <string name="experiments">Eksperymenty</string>
+    <string name="external">Zewnętrzny</string>
+    <string name="tap_customization_dialog_title_long_tap">długie przytrzymanie</string>
+    <string name="reset">Resetuj</string>
+    <string name="theme_enable_material_you_explainer">Użyj motywu Material You urządzenia (Android 12+)</string>
+    <string name="tap_customization_double_tap">Akcja przy podwójnym dotknięciu</string>
+    <string name="show_native_label_explainer">Wyświetl etykietę obok aplikacji, które natywnie obsługują otwarty link</string>
+    <string name="telemetry_level_exhaustive">Wyjątkowe</string>
+    <string name="telemetry_dialog_title">LinkSheet szanuje Twoją prywatność</string>
+    <string name="link_handle_failed_text">LinkSheet nie może obsłużyć tego linku, ponieważ wydaje się być niepoprawny. Możesz go edytować poniżej, a następnie spróbować ponownie. Alternatywnie, możesz poszukać w Internecie.</string>
+    <string name="settings__title_select_apps">Wybierz aplikacje</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all">Pokaż wszystkie</string>
+    <string name="no_action">Brak akcji</string>
+    <string name="open_app">Otwórz aplikację</string>
+    <string name="tap_customization_dialog_title_single_tap">pojedyncze dotknięcie</string>
+    <string name="tap_customization_dialog_title_double_tap">podwójne dotknięcie</string>
+    <string name="cancel">Anuluj</string>
+    <string name="expand_on_app_select_explainer">Automatycznie rozwijaj dolny panel, gdy aplikacja jest wybrana</string>
+    <string name="nightly_experiments_card">Nocne eksperymenty</string>
+    <string name="verified_link_handlers_open_settings_page">Otwórz stronę ustawień</string>
+    <string name="share">Udostępnij link</string>
+    <string name="external_versions">Wersje zewnętrzne</string>
+    <string name="build_info">O kompilacji</string>
+    <string name="verified_link_handlers">Aplikacje otwierające linki</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Nie otwiera obsługiwanych linków</string>
+    <string name="export_log_dialog__text_log_privacy">Aby dowiedzieć się więcej o potencjalnie wrażliwych danych w udostępnionych plikach dzienników, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">tutaj</annotation>. \u0020</string>
+    <string name="settings_main_setup_success__button_change_browser">Domyślna przeglądarka</string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Wyświetlanie dziennika: %s</string>
+    <string name="settings_app_config__title_configure_app_behavior">Konfiguruj %s</string>
+    <string name="settings_notifications__divider_toasts">Komunikaty (toasty)</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Wyłączone otwieranie linków</string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job">Pomiń</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
+    <string name="settings_about__divider_external_versions">Wersje zewnętrzne</string>
+    <string name="settings_app_config_rules__subtitle_default_rule">Ta reguła jest stosowana, jeśli żadna inna reguła nie pasuje</string>
+    <string name="resolve_event__initialized">Zainicjowano</string>
+    <string name="generic__button_text_copy_clipboard">Skopiuj do schowka</string>
+    <string name="settings_app_config_rules__title_default_rule">Domyślna reguła</string>
+    <string name="settings_main_news__title_ui_overhaul">Nowy interfejs</string>
+    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="resolve_event__generating_preview">Generowanie poglądu</string>
+    <string name="delete_log_dialog__title_delete_log">Usunąć sesję?</string>
+    <string name="settings_main_setup_success__button_connected_apps">Połączone aplikacje</string>
+    <string name="settings_app_config_rules__title_rules">Reguły</string>
+    <string name="resolve_event__checking_browsers">Sprawdzanie przeglądarek</string>
+    <string name="export_log_dialog__text_log_info">Skonfiguruj udostępnianie dla przechwyconego dziennika: <font face="monospace">%s</font> \u0020</string>
+    <string name="export_log_dialog__title_include_fingerprint">Dołącz odcisk wersji (build fingerprint)</string>
+    <string name="generic__button_text_cancel">Anuluj</string>
+    <string name="settings_edit_rule__title_edit_rule">Edytowanie zasady</string>
+    <string name="settings_links_follow_redirects__title_skip_browser">Pomiń, gdy pochodzi z przeglądarki</string>
+    <string name="settings_credits__app_credit_reason_seal">Inspiracja projektowa</string>
+    <string name="settings_links_downloader__title_downloader">Program do pobierania</string>
+    <string name="settings_links_amp2html__title_skip_browser">Pomiń, gdy pochodzi z przeglądarki</string>
+    <string name="settings_main_news__text_ui_overhaul">LinkSheet zyskał nowy wygląd!</string>
+    <string name="settings_app_config_rules__btn_new_rule">Nowa reguła</string>
+    <string name="settings_app_config_rules__text_custom_rules">Reguły niestandardowe</string>
+    <string name="settings_main_setup_success__button_link_handlers">Otwieranie linków</string>
+    <string name="export_log_dialog__subtitle_include_throwable">Zalecane, ale nie może być zanonimizowane</string>
+    <string name="settings_new_rule__title_new_rule">Nowa reguła</string>
+    <string name="resolve_event__download_check">Sprawdzanie możliwości pobrania</string>
+    <string name="settings_app_config__button_add_item">Dodaj pozycję</string>
+    <string name="export_log_dialog__subtitle_redact_log">Zalecane, anonimizuje nazwy aplikacji i linki</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d link: %s</item>
+        <item quantity="few">%d linki: %s</item>
+        <item quantity="many">%d linków: %s</item>
+        <item quantity="other">%d linków: %s</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Wyłączone</string>
+    <string name="settings_verified_link_handlers__text_app_host_info_verified">Zweryfikowano: %d</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d zweryfikowany link</item>
+        <item quantity="few">%d zweryfikowane linki</item>
+        <item quantity="many">%d zweryfikowanych linków</item>
+        <item quantity="other">%d zweryfikowanych linków</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_selected">Włączono: %d</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d włączony link</item>
+        <item quantity="few">%d włączone linki</item>
+        <item quantity="many">%d włączonych linków</item>
+        <item quantity="other">%d włączonych linków</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_app_host_info_none">Wyłączono: %d</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Otwiera obsługiwane linki</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d wyłączony link</item>
+        <item quantity="few">%d wyłączone linki</item>
+        <item quantity="many">%d wyłączonych linków</item>
+        <item quantity="other">%d wyłączonych linków</item>
+    </plurals>
+    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">Inspiracja projektowa</string>
+    <string name="export_log_dialog__title_share_logs">Udostępnij dziennik</string>
+    <string name="export_log_dialog__title_redact_log">Zredukuj dziennik</string>
+    <string name="export_log_dialog__title_include_throwable">Dołącz dzienniki awarii</string>
+    <string name="export_log_dialog__subtitle_include_fingerprint">Zalecane</string>
+    <string name="export_log_dialog__title_include_settings">Dołącz ustawienia</string>
+    <string name="export_log_dialog__subtitle_include_settings">Zalecane</string>
+    <string name="crash_viewer__subtitle_app_crashed">Ojej, to nie powinno się zdarzyć!</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet działa</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet nie działa</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet jest poprawnie ustawiony i gotowy do działania</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet nie jest ustawiony jako domyślna przeglądarka</string>
+    <string name="settings_main_setup_success__button_set_default_browser">Ustaw jako domyślną przeglądarkę</string>
+    <string name="settings_main_setup_success__subtitle_quick_settings">Szybkie ustawienia</string>
+    <string name="settings_main_news__button_read_more">Czytaj więcej</string>
+    <string name="settings_main_news__text_header">Nowości</string>
+    <string name="resolve_event__querying_browser_list">Wyszukiwanie listy przeglądarek</string>
+    <string name="resolve_event__applying_link_modifiers">Stosowanie modyfikatorów linków</string>
+    <string name="resolve_event__resolving_redirects">Rozwiązywanie przekierowań</string>
+    <string name="resolve_event__unamping_link">Od-AMP-ienie linku</string>
+    <string name="resolve_event__running_libredirect">Próbuję znaleźć FOSS-frontend</string>
+    <string name="resolve_event__loading_preferred_apps">Ładowanie preferowanych aplikacji</string>
+    <string name="resolve_event__sorting_apps">Sortowanie listy aplikacji</string>
+    <string name="settings_links_amp2html__text_skip_browser">Nie uruchamiaj Amp2Html, jeśli aplikacja uruchamiająca LinkSheet jest znana jako przeglądarka</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">Nie próbuj śledzić przekierowań, jeśli aplikacja uruchamiająca LinkSheet jest znana jako przeglądarka</string>
+    <string name="title_activity_drag_test">DragTestActivity</string>
+    <string name="settings_app_config__title_browsers">Przeglądarki</string>
+    <string name="settings_app_config__description_browsers">Zainstalowane przeglądarki internetowe</string>
+    <string name="settings_app_config__title_native_apps">Aplikacje</string>
+    <string name="settings_app_config__description_native_apps">Aplikacje zdolne do obsługi linków z tym hostem</string>
+    <string name="settings_app_config__title_preferred_browser">Preferowana przeglądarka</string>
+    <string name="settings_app_config__description_preferred_browser">Preferowana przeglądarka wybrana przez użytkownika</string>
+    <string name="delete_log_dialog__subtitle_delete_info">Czy chcesz usunąć tę sesję dziennika? Nie można tego cofnąć!</string>
+    <string name="generic__button_text_delete">Usuń</string>
 </resources>

@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import org.gradle.api.initialization.resolve.RepositoriesMode
 import java.util.Properties
 
@@ -34,12 +36,12 @@ rootProject.name = "LinkSheet"
 
 include(":app", ":config")
 include(":bottom-sheet")
-//":components", ":compose-util", "
 
-val dev = true
-if (dev) {
+val isCI = System.getenv("CI")?.toBooleanStrictOrNull() == true
+
+if (!isCI) {
     val properties = Properties().apply {
-        file("local.properties").reader().use(::load)
+        file("local.properties").reader().use { load(it) }
     }
 
     properties["android-lifecycle-util.dir"]?.let { lifecycleUtilDir ->

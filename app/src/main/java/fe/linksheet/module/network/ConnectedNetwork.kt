@@ -1,6 +1,5 @@
 package fe.linksheet.module.network
 
-import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 data class ConnectedNetwork(
@@ -9,11 +8,6 @@ data class ConnectedNetwork(
     val isBlocked: Boolean,
 ) {
     companion object {
-        /**
-         * On Android 9, [ConnectivityManager.NetworkCallback.onBlockedStatusChanged] is not called when
-         * we call the [ConnectivityManager.registerDefaultNetworkCallback] function.
-         * Hence we assume that the network is unblocked by default.
-         */
         val Unknown = ConnectedNetwork(
             networkCapabilities = null,
             isAvailable = false,
@@ -32,11 +26,8 @@ data class ConnectedNetwork(
         )
     }
 
-    val isConnected by lazy {
-        if (networkCapabilities == null) false
-        else isAvailable && !isBlocked
-                && CAPABILITIES.all { networkCapabilities.hasCapability(it) }
-                && TRANSPORTS.any { networkCapabilities.hasTransport(it) }
-    }
+    val isConnected = networkCapabilities?.let { cap ->
+        isAvailable && !isBlocked && CAPABILITIES.all(cap::hasCapability) && TRANSPORTS.any(cap::hasTransport)
+    } ?: false
 }
 

@@ -1,6 +1,5 @@
 package fe.linksheet.module.resolver
 
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentFilter.AuthorityEntry
@@ -8,17 +7,22 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
-import fe.linksheet.lib.flavors.LinkSheetApp
-import fe.linksheet.util.BitFlagUtil
+import fe.gson.context.GlobalGsonContext
+import fe.gson.extension.toJsonElement
+import fe.linksheet.util.ResolveInfoFlags
 
 
-object PackageHandler {
-    private val QUERY_FLAGS = BitFlagUtil.or(
-        PackageManager.MATCH_ALL,
-        PackageManager.GET_RESOLVED_FILTER,
-//        PackageManager.MATCH_DISABLED_COMPONENTS,
-        PackageManager.GET_META_DATA
-    )
+class PackageHandler(
+    val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
+    val isLinkSheetCompat: (String) -> Boolean,
+) {
+    companion object {
+        private val QUERY_FLAGS = ResolveInfoFlags.select(
+            ResolveInfoFlags.MATCH_ALL,
+            ResolveInfoFlags.GET_RESOLVED_FILTER,
+            ResolveInfoFlags.GET_META_DATA
+        )
+    }
 
     class ActivityAlias(
         var activity: ResolveInfo? = null,
@@ -34,13 +38,18 @@ object PackageHandler {
         }
     }
 
-    fun findHandlers(context: Context, uri: Uri): List<ResolveInfo> {
+    fun findHandlers(uri: Uri): List<ResolveInfo> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
-        val activities = context.packageManager.queryIntentActivitiesCompat(viewIntent, QUERY_FLAGS)
+        val activities = queryIntentActivities(viewIntent, QUERY_FLAGS)
 
         val filtered = activities.filter {
-            it.activityInfo.applicationInfo.enabled && LinkSheetApp.Compat.isApp(it.activityInfo.packageName) == null && isLinkHandler(it.filter, uri)
+            it.activityInfo.applicationInfo.enabled && !isLinkSheetCompat(it.activityInfo.packageName) && isLinkHandler(
+                it.filter,
+                uri
+            )
         }
+
+//        val json = filtered.toJsonElement()
 
         return deduplicate(filtered)
     }
@@ -48,11 +57,6 @@ object PackageHandler {
     private fun deduplicate(filtered: List<ResolveInfo>): List<ResolveInfo> {
         val map = mutableMapOf<String, ActivityAlias>()
         for (activity in filtered) {
-//            val componentEnabled =
-//                context.packageManager.getComponentEnabledSetting(activity.activityInfo.componentName())
-//            val enabled = activity.activityInfo.enabled
-//            val priority = activity.priority
-
             val target = activity.activityInfo?.targetActivity
             val key = "${activity.activityInfo.packageName}/${target ?: activity.activityInfo.name}"
 

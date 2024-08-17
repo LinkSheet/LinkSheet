@@ -1,14 +1,15 @@
 package fe.linksheet.module.resolver
 
-import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
+import fe.linksheet.resolver.DisplayActivityInfo
 
-class BrowserResolver(val context: Context) {
+class BrowserResolver(val packageManager: PackageManager) {
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
         private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")
@@ -25,8 +26,9 @@ class BrowserResolver(val context: Context) {
         }
     }
 
-    fun queryDisplayActivityInfoBrowsers(sorted: Boolean) = queryBrowsers()
-        .toDisplayActivityInfos(context, sorted)
+    fun queryDisplayActivityInfoBrowsers(sorted: Boolean): List<DisplayActivityInfo> {
+        return queryBrowsers().toDisplayActivityInfos(packageManager, sorted)
+    }
 
     fun queryBrowsers(): Map<String, ResolveInfo> {
         // Some apps (looking at you Coinbase) declare their app as a browser (via CATEGORY_BROWSABLE and ACTION_VIEW) but ONLY for HTTPS schemes.
@@ -36,7 +38,7 @@ class BrowserResolver(val context: Context) {
     }
 
     private fun queryBrowsers(intent: Intent): Map<String, ResolveInfo> {
-        return context.packageManager.queryResolveInfosByIntent(intent, true).toPackageKeyedMap()
+        return packageManager.queryResolveInfosByIntent(intent, true).toPackageKeyedMap()
     }
 }
 

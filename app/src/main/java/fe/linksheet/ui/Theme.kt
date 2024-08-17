@@ -121,13 +121,11 @@ fun AppTheme(
         }
     }
 
-    val view = LocalView.current
-
     val linkAnnotationStyle = remember(colorScheme) {
         LinkAnnotationStyle(style = SpanStyle(color = colorScheme.primary))
     }
 
-    val hapticFeedbackInteraction = rememberHapticFeedbackInteraction()
+    val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
     KoinAndroidContext {
         CompositionLocalProvider(

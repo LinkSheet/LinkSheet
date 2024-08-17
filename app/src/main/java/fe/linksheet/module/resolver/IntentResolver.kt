@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
+import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import fe.clearurlskt.ClearURL
@@ -16,6 +17,7 @@ import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.lib.flavors.LinkSheetApp.Compat
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
@@ -133,6 +135,11 @@ class IntentResolver(
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
+
+    private val packageHandler = PackageHandler(
+        queryIntentActivities = context.packageManager::queryIntentActivitiesCompat,
+        isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null }
+    )
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
@@ -293,7 +300,7 @@ class IntentResolver(
             }
         }
 
-        val resolvedList = PackageHandler.findHandlers(context, uri!!).toMutableList()
+        val resolvedList = packageHandler.findHandlers(uri!!).toMutableList()
 
         logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
 

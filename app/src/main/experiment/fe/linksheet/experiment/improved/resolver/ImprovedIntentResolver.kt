@@ -1,9 +1,9 @@
 package fe.linksheet.experiment.improved.resolver
 
 import android.app.SearchManager
+import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable
@@ -13,15 +13,16 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
-import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.lib.flavors.LinkSheetApp.Compat
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -42,9 +43,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import me.saket.unfurl.UnfurlResult
-import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
-import okhttp3.OkHttpClient
 import org.koin.core.component.KoinComponent
 
 @Stable
@@ -60,10 +59,12 @@ class ImprovedIntentResolver(
     private val downloader: Downloader,
     private val redirectUrlResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
+    private val browserResolver: BrowserResolver,
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
     private val unfurler: CooperativeUnfurler,
+    private val networkStateService: NetworkStateService,
 ) : KoinComponent {
     private val logger by injectLogger<ImprovedIntentResolver>()
 
@@ -114,8 +115,24 @@ class ImprovedIntentResolver(
     private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
 
-    private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
-    private val browserResolver = BrowserResolver(context)
+    private val packageManager by lazy {
+        context.packageManager
+    }
+
+    private val packageHandler by lazy {
+        PackageHandler(
+            queryIntentActivities = packageManager::queryIntentActivitiesCompat,
+            isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null }
+        )
+    }
+
+    private val appSorter by lazy {
+        AppSorter(packageManager = packageManager, usageStatsManager = context.getSystemService<UsageStatsManager>()!!)
+    }
+
+    private val packageLauncherHelper by lazy {
+        PackageLauncherHelper(packageManager = packageManager)
+    }
 
     private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
     val events = _events.asStateFlow()
@@ -152,7 +169,7 @@ class ImprovedIntentResolver(
 
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
-        val canAccessInternet = canAccessInternet()
+        val canAccessInternet = networkStateService.isNetworkConnected
 
         logger.debug("Referrer=$referrer")
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
@@ -251,6 +268,7 @@ class ImprovedIntentResolver(
         emitEventIf(enableLibRedirect, ResolveEvent.CheckingLibRedirect)
 
         val libRedirectResult = tryRunLibRedirect(
+            resolver = libRedirectResolver,
             enabled = enableLibRedirect,
             intent = intent,
             uri = uri,
@@ -266,6 +284,7 @@ class ImprovedIntentResolver(
         emitEventIf(enabledDownloader, ResolveEvent.CheckingDownloader)
 
         val downloadable = checkDownloadable(
+            downloader = downloader,
             enabled = enabledDownloader,
             uri = uri,
             checkUrlMimeType = downloaderCheckUrlMimeType(),
@@ -277,17 +296,23 @@ class ImprovedIntentResolver(
         val newIntent = IntentHandler.sanitized(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
         emitEvent(ResolveEvent.LoadingPreferredApps)
-        val app = queryPreferredApp(uri = uri)
-        val lastUsedApps = queryAppSelectionHistory(uri = uri)
-        val resolveList = PackageHandler.findHandlers(context, uri)
+        val app = queryPreferredApp(
+            repository = preferredAppRepository,
+            packageLauncherHelper = packageLauncherHelper,
+            uri = uri
+        )
+        val lastUsedApps = queryAppSelectionHistory(
+            repository = appSelectionHistoryRepository,
+            packageLauncherHelper = packageLauncherHelper, uri = uri
+        )
+        val resolveList = packageHandler.findHandlers(uri)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
         val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
 
         emitEvent(ResolveEvent.SortingApps)
-        val (sorted, filtered) = AppSorter.sort(
-            context,
+        val (sorted, filtered) = appSorter.sort(
             appList,
             app,
             lastUsedApps,
@@ -337,35 +362,30 @@ class ImprovedIntentResolver(
         )
     }
 
-    private fun canAccessInternet(default: Boolean = false): Boolean {
-        return runCatching {
-            connectivityManager.canAccessInternet()
-        }.onFailure {
-            logger.error(it)
-            it.printStackTrace()
-        }.getOrDefault(default)
-    }
-
     private suspend fun queryAppSelectionHistory(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        repository: AppSelectionHistoryRepository,
+        packageLauncherHelper: PackageLauncherHelper,
         uri: Uri?,
     ): Map<String, Long> = withContext(dispatcher) {
-        val lastUsedApps = appSelectionHistoryRepository.getLastUsedForHostGroupedByPackage(uri)
+        val lastUsedApps = repository.getLastUsedForHostGroupedByPackage(uri)
             ?: return@withContext emptyMap()
 
-        val (result, delete) = PackageInstallHelper.hasLauncher(context, lastUsedApps.keys)
-        if (delete.isNotEmpty()) appSelectionHistoryRepository.delete(delete)
+        val (result, delete) = packageLauncherHelper.hasLauncher(lastUsedApps.keys)
+        if (delete.isNotEmpty()) repository.delete(delete)
 
         lastUsedApps.filter { it.key in result }.toMap()
     }
 
     private suspend fun queryPreferredApp(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        repository: PreferredAppRepository,
+        packageLauncherHelper: PackageLauncherHelper,
         uri: Uri?,
     ): PreferredApp? = withContext(dispatcher) {
-        val app = preferredAppRepository.getByHost(uri)
-        val resolveInfo = PackageInstallHelper.getLauncherOrNull(context, app?.pkg)
-        if (app != null && resolveInfo == null) preferredAppRepository.delete(app)
+        val app = repository.getByHost(uri)
+        val resolveInfo = packageLauncherHelper.getLauncherOrNull(app?.pkg)
+        if (app != null && resolveInfo == null) repository.delete(app)
 
         app
     }
@@ -430,6 +450,7 @@ class ImprovedIntentResolver(
 
     private suspend fun checkDownloadable(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        downloader: Downloader,
         enabled: Boolean,
         uri: Uri,
         checkUrlMimeType: Boolean,
@@ -447,6 +468,7 @@ class ImprovedIntentResolver(
 
     private suspend fun tryRunLibRedirect(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        resolver: LibRedirectResolver,
         enabled: Boolean,
         intent: SafeIntent,
         uri: Uri,
@@ -462,7 +484,7 @@ class ImprovedIntentResolver(
 
         if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
 
-        return@withContext libRedirectResolver.resolve(uri, jsEngine)
+        return@withContext resolver.resolve(uri, jsEngine)
     }
 
     companion object {

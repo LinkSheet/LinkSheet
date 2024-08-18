@@ -69,7 +69,6 @@ class LinkSheetApp : Application() {
         super.onCreate()
         registerActivityLifecycleCallbacks(activityLifecycleObserver)
 
-
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

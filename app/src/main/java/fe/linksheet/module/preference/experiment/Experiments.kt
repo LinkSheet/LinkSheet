@@ -20,7 +20,7 @@ object Experiments : PreferenceDefinition(
 
     val uiOverhaul = boolean("experiment_ui_overhaul", true)
 
-    val improvedIntentResolver = boolean("experiment_improved_intent_resolver")
+    val improvedIntentResolver = boolean("experiment_improved_intent_resolver", true)
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
     val improvedBottomSheetUrlDoubleTap = boolean("experiment_impr_btm_sheet_url_double_tap")
 
@@ -32,6 +32,7 @@ object Experiments : PreferenceDefinition(
     init {
         uiOverhaul.migrate { repository, _ -> repository.put(uiOverhaul, true) }
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
+        improvedIntentResolver.migrate { repository, _ -> repository.put(improvedIntentResolver, true) }
 
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, urlPreview, urlPreviewSkipBrowser, declutterUrl),

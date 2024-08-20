@@ -114,7 +114,7 @@
     <string name="enable_send_button_explainer">Wyświetla przycisk umożliwiający udostępnienie linku innym aplikacjom, tak jakby został wybrany z menu „Udostępnij”</string>
     <string name="set_as_browser_done">Ustawiono LinkSheet jako domyślną przeglądarkę!</string>
     <string name="bottom_sheet_explainer">Konfiguracja i personalizacja</string>
-    <string name="open_copied_link">Otwórz skopiowany link</string>
+    <string name="open_copied_link">Ze schowka</string>
     <string name="open_with_app">Otwórz w %s</string>
     <string name="hide_after_copying_explainer">Automatycznie ukryj dolny panel, gdy zostanie naciśnięty przycisk akcji, taki jak „Kopiuj link” lub „Pobierz”</string>
     <string name="selected_browser_explainer">Ta przeglądarka zostanie automatycznie otwarta, jeśli żadna natywna aplikacja nie będzie w stanie obsłużyć klikniętego linku</string>

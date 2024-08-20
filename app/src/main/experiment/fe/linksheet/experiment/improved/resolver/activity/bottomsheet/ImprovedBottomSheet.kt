@@ -76,10 +76,6 @@ class ImprovedBottomSheet(
 ) : BottomSheetImpl(), KoinComponent {
     private val resolver by inject<ImprovedIntentResolver>()
 
-    private inline fun <reified T : Any> getSystemService(): T? {
-        return activity.getSystemService<T>()
-    }
-
     private fun finish() {
         activity.finish()
     }
@@ -174,7 +170,6 @@ class ImprovedBottomSheet(
                         enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
                         enableSwitchProfile = viewModel.switchProfile(),
                         isExpanded = drawerState.currentValue == SheetValue.Expanded,
-                        hideDrawer = hideDrawer
                         requestExpand = {},
                         hideDrawer = hideDrawer,
                         showPackage = viewModel.alwaysShowPackageName(),

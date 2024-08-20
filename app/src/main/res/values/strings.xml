@@ -103,7 +103,7 @@
     <string name="github">Github</string>
     <string name="github_explainer">Source code repository</string>
     <string name="donate_subtitle">Upgrade to <b>LinkSheet Pro</b></string>
-    <string name="open_copied_link">Open copied link</string>
+    <string name="open_copied_link">From clipboard</string>
     <string name="paste">Paste</string>
     <string name="error">Error</string>
     <string name="checkmark">Checkmark</string>

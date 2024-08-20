@@ -37,10 +37,9 @@ sealed interface IntentResolveResult {
             if (referrer?.scheme == "android-app") referrer.host else null
 
         val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
-        val app = filteredItem ?: resolved[0]
+        val app = filteredItem ?: resolved.firstOrNull()
 
-        val hasAutoLaunchApp =
-            (isRegularPreferredApp || hasSingleMatchingOption) && (referringPackageName == null || app.packageName != referringPackageName)
+        val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption) && (referringPackageName == null || app?.packageName != referringPackageName)
 
         override fun isEmpty(): Boolean {
             return totalCount == 0

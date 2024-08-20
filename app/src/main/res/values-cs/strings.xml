@@ -1,3 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    </resources>
+    <string name="open_with">Otevřít v aplikaci</string>
+    <string name="just_once">Pouze jednou</string>
+    <string name="open_with_app">Otevřít v aplikaci %s</string>
+    <string name="always">Vždy</string>
+    <string name="use_a_different_app">Použít jinou aplikaci</string>
+    <plurals name="minutes">
+        <item quantity="one">%s minuta</item>
+        <item quantity="few">%s minuty</item>
+        <item quantity="other">%s minut</item>
+    </plurals>
+    <string name="opening_with_app">Otevírání v aplikaci %s</string>
+    <plurals name="months">
+        <item quantity="one">%s měsíc</item>
+        <item quantity="few">%s měsíce</item>
+        <item quantity="other">%s měsíců</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">%s hodina</item>
+        <item quantity="few">%s hodiny</item>
+        <item quantity="other">%s hodin</item>
+    </plurals>
+    <string name="default_apps">Výchozí aplikace</string>
+</resources>

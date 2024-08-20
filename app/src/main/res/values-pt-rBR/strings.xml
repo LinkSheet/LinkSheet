@@ -125,4 +125,5 @@
     <string name="add">Adicionar</string>
     <string name="select_an_app">Selecione um app</string>
     <string name="close">Fechar</string>
+    <string name="redirect_resolve_type_local_cache">local cache</string>
 </resources>

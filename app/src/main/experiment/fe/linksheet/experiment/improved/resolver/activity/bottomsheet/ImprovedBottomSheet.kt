@@ -30,6 +30,7 @@ import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
+import fe.android.compose.system.rememberSystemService
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
@@ -166,10 +167,20 @@ class ImprovedBottomSheet(
                         coroutineScope.launch { drawerState.expand() }
                     })
                 } else if (status is IntentResolveResult.Default) {
-                    AppWrapper_Temp(
-                        status = status as IntentResolveResult.Default,
+                    BottomSheetApps(
+                        bottomSheetViewModel = viewModel,
+                        result = status as IntentResolveResult.Default,
+                        declutterUrl = viewModel.declutterUrl(),
+                        enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
+                        enableSwitchProfile = viewModel.switchProfile(),
                         isExpanded = drawerState.currentValue == SheetValue.Expanded,
                         hideDrawer = hideDrawer
+                        requestExpand = {},
+                        hideDrawer = hideDrawer,
+                        showPackage = viewModel.alwaysShowPackageName(),
+                        previewUrl = viewModel.previewUrl(),
+                        hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
+                        urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
                     )
                 }
 //                val scope: ColumnScope = this@BottomDrawer
@@ -185,24 +196,6 @@ class ImprovedBottomSheet(
 //                    }
 //                )
             }
-        )
-    }
-
-    @Composable
-    private fun AppWrapper_Temp(status: IntentResolveResult.Default, isExpanded: Boolean, hideDrawer: () -> Unit) {
-        BottomSheetApps(
-            bottomSheetViewModel = viewModel,
-            result = status,
-            declutterUrl = viewModel.declutterUrl(),
-            enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
-            enableSwitchProfile = viewModel.switchProfile(),
-            isExpanded = isExpanded,
-            requestExpand = {},
-            hideDrawer = hideDrawer,
-            showPackage = viewModel.alwaysShowPackageName(),
-            previewUrl = viewModel.previewUrl(),
-            hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
-            urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
         )
     }
 
@@ -227,38 +220,23 @@ class ImprovedBottomSheet(
                 UriUtil.declutter(result.uri)
             } else result.uri.toString()
 
-            val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile && AndroidVersion.AT_LEAST_API_30_R) {
-                val crossProfileApps = getSystemService<CrossProfileApps>()!!
-                val canSwitch =
-                    crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.targetUserProfiles.isNotEmpty()
-                val target = crossProfileApps.targetUserProfiles.firstOrNull()
+            val crossProfileApps = rememberSystemService<CrossProfileApps>()
 
-                Triple(crossProfileApps, canSwitch, target)
-            } else Triple(null, false, null)
+            val appLabel = stringResource(id = R.string.app_name)
+            val profileSwitcher = remember(key1 = enableSwitchProfile) {
+                ProfileSwitcher(appLabel, crossProfileApps)
+            }
+
+            val profiles = AndroidVersion.atLeastApi30R {
+                profileSwitcher.getProfiles()
+            }
 
             UrlBar(
                 uri = uriString,
-                canSwitchProfile = canSwitch,
-                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(
-                    target!!
-                ).toString() else null,
-                profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(
-                    target!!
-                ) else null,
+                profiles = profiles,
                 switchProfile = {
-                    if (AndroidVersion.AT_LEAST_API_30_R) {
-                        val switchIntent = Intent(
-                            Intent.ACTION_VIEW,
-                            result.uri
-                        ).setComponent(activity.componentName)
-                        crossProfileApps!!.startActivity(
-                            switchIntent,
-                            target!!,
-                            activity
-                        )
-
-                        finish()
-                    }
+                    profileSwitcher.switchTo(it, result.uri, activity)
+                    hideDrawer()
                 },
                 unfurlResult = result.unfurlResult,
                 downloadable = result.downloadable.isDownloadable(),
@@ -276,7 +254,7 @@ class ImprovedBottomSheet(
                 },
                 shareUri = {
                     startActivity(shareUri(result.uri))
-                    finish()
+                    hideDrawer()
                 },
                 downloadUri = {
                     bottomSheetViewModel.startDownload(
@@ -293,22 +271,23 @@ class ImprovedBottomSheet(
                     }
                 },
                 ignoreLibRedirect = {
-                    val redirected =
-                        result.libRedirectResult as LibRedirectResult.Redirected
+                    val redirected = result.libRedirectResult as LibRedirectResult.Redirected
 
-                    finish()
                     startActivity(
                         selfIntent(
                             redirected.originalUri,
                             bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                         )
                     )
+                    hideDrawer()
                 },
                 onDoubleClick = {
                     viewModel.viewModelScope.launch {
                         launchApp(result, result.app, false)
-                    }.takeIf { urlCardDoubleTap }
-                }
+                    }
+
+                    Unit
+                }.takeIf { urlCardDoubleTap }
             )
         }
 
@@ -462,8 +441,6 @@ class ImprovedBottomSheet(
             ) {
                 itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
                     val privateBrowser = isPrivateBrowser(result.uri != null, info)
-
-//                    info.
 
                     ListBrowserColumn(
                         appInfo = info,

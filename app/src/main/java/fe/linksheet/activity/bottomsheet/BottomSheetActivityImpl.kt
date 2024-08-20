@@ -23,9 +23,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
+import fe.android.compose.system.rememberSystemService
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
@@ -36,6 +36,7 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
+import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ProfileSwitcher
 import fe.linksheet.experiment.ui.overhaul.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
@@ -238,39 +239,23 @@ class BottomSheetActivityImpl(
                 UriUtil.declutter(result.uri)
             } else result.uri.toString()
 
-            val (crossProfileApps, canSwitch, target) = if (enableSwitchProfile && AndroidVersion.AT_LEAST_API_30_R) {
-                val crossProfileApps = activity.getSystemService<CrossProfileApps>()!!
-                val canSwitch =
-                    crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.targetUserProfiles.isNotEmpty()
-                val target = crossProfileApps.targetUserProfiles.firstOrNull()
+            val crossProfileApps = rememberSystemService<CrossProfileApps>()
 
-                Triple(crossProfileApps, canSwitch, target)
-            } else Triple(null, false, null)
+            val appLabel = stringResource(id = R.string.app_name)
+            val profileSwitcher = remember(key1 = enableSwitchProfile) {
+                ProfileSwitcher(appLabel, crossProfileApps)
+            }
+
+            val profiles = AndroidVersion.atLeastApi30R {
+                profileSwitcher.getProfiles()
+            }
 
             UrlBar(
                 uri = uriString,
-                canSwitchProfile = canSwitch,
-                profileSwitchText = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingLabel(
-                    target!!
-                )
-                    .toString() else null,
-                profileSwitchDrawable = if (canSwitch && AndroidVersion.AT_LEAST_API_30_R) crossProfileApps!!.getProfileSwitchingIconDrawable(
-                    target!!
-                ) else null,
+                profiles = profiles,
                 switchProfile = {
-                    if (AndroidVersion.AT_LEAST_API_30_R) {
-                        val switchIntent = Intent(
-                            Intent.ACTION_VIEW,
-                            result.uri
-                        ).setComponent(activity.componentName)
-                        crossProfileApps!!.startActivity(
-                            switchIntent,
-                            target!!,
-                            activity
-                        )
-
-                        activity.finish()
-                    }
+                    profileSwitcher.switchTo(it, result.uri, activity)
+                    activity.finish()
                 },
                 unfurlResult = uriSuccess?.unfurlResult,
                 downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,

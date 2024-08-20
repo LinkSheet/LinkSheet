@@ -1,7 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.content.ClipboardManager
-import android.graphics.drawable.Drawable
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -23,31 +22,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
 import fe.linksheet.R
-import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.CrossProfile
 import me.saket.unfurl.UnfurlResult
 
 @Composable
 fun UrlBar(
     uri: String,
     unfurlResult: UnfurlResult?,
-    canSwitchProfile: Boolean,
-    profileSwitchText: String? = null,
-    profileSwitchDrawable: Drawable? = null,
+    profiles: List<CrossProfile>?,
     downloadable: Boolean,
     libRedirected: Boolean,
     copyUri: () -> Unit,
     shareUri: () -> Unit,
-    switchProfile: () -> Unit,
+    switchProfile: (CrossProfile) -> Unit,
     downloadUri: (() -> Unit)? = null,
     ignoreLibRedirect: (() -> Unit)? = null,
-    onDoubleClick: (() -> Unit)? = null
+    onDoubleClick: (() -> Unit)? = null,
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp)
     ) {
-        UrlCard(uri = uri, unfurlResult = unfurlResult, onDoubleClick=onDoubleClick)
+        UrlCard(uri = uri, unfurlResult = unfurlResult, onDoubleClick = onDoubleClick)
 
         Spacer(modifier = Modifier.height(5.dp))
 
@@ -63,12 +60,12 @@ fun UrlBar(
                 UrlActionButton(text = R.string.share, icon = Icons.Filled.Share, onClick = shareUri)
             }
 
-            if (canSwitchProfile) {
+            profiles?.forEach { target ->
                 item {
                     UrlActionButton(
-                        text = profileSwitchText!!,
-                        icon = profileSwitchDrawable!!.toImageBitmap(),
-                        onClick = switchProfile
+                        text = target.label,
+                        icon = target.bitmap,
+                        onClick = { switchProfile(target) }
                     )
                 }
             }

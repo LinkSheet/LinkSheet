@@ -136,8 +136,7 @@
     <string name="dark">Dark</string>
     <string name="amoled_black">Amoled Black</string>
     <string name="fastfoward_rules">Use FastForward rules</string>
-    <string name="fastfoward_rules_explainer">Use experimental <annotation
-            url="https://github.com/FastForwardTeam/FastForward">FastForward
+    <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward
     </annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)
     </string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
@@ -148,8 +147,7 @@
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="redirect_resolve_type_not_resolved">none</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation
-            url="https://github.com/libredirect/libredirect">LibRedirect
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect
     </annotation> integration
     </string>
     <string name="lib_redirect">LibRedirect</string>
@@ -246,8 +244,7 @@
     <string name="redact_log">Redact log (recommended, disabling this may leak package names and host names)</string>
     <string name="include_settings">Include settings (recommended)</string>
     <string name="include_fingerprint">Include device fingerprint (recommended)</string>
-    <string name="log_privacy">To learn about log privacy, you can visit this <annotation
-            url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.
+    <string name="log_privacy">To learn about log privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.
     </string>
     <string name="delete">Delete</string>
     <string name="no_logs_found">No past logs found!</string>
@@ -432,8 +429,7 @@
     <string name="donate_card_subtitle_2">Donate crypto</string>
     <string name="donate_crypto">Donate via crypto</string>
     <string name="donate_card">Donate with card (via BuyMeACoffee)</string>
-    <string name="donate_explainer_crypto">When donating with crypto, send an email to <annotation
-            url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.
+    <string name="donate_explainer_crypto">When donating with crypto, send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.
     </string>
     <string name="donate_learn_more">Learn more</string>
     <string name="donate">Donate</string>
@@ -460,8 +456,7 @@
     <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not
         plan on sharing your export with someone else!
     </string>
-    <string name="export_privacy">To learn about export privacy, you can visit this <annotation
-            url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.
+    <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.
     </string>
     <string name="export_to_file">Export to file</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
@@ -509,9 +504,8 @@
     <string name="enable_new_bottom_sheet">Enable new bottom sheet</string>
     <string name="enable_new_bottom_sheet_explainer">Use the reworked bottom sheet instead of the old one</string>
     <string name="new_bottomsheet">New bottomsheet</string>
-    <string name="new_bottomsheet_explainer">This version of LinkSheet features a new bottom sheet thanks to <annotation
-            url="https://github.com/sakethpathike">@sakethpathike</annotation>! Please provide feedback on Discord,
-        Github or via email.\n\nYou can revert to the old bottom sheet via Settings -> Advanced -> Feature flags.
+    <string name="new_bottomsheet_explainer">This version of LinkSheet features a new bottom sheet thanks to <annotation url="https://github.com/sakethpathike">@sakethpathike</annotation>! Please provide feedback on Discord,
+        Github or via email.\n\nYou can revert to the old bottom sheet via Settings -&gt; Advanced -&gt; Feature flags.
     </string>
     <string name="shizuku_manager_start_failed">Failed to start Shizuku Manager, please start it manually!</string>
     <string name="include_throwable">Include crash logs (recommended, but can not be redacted)</string>
@@ -581,8 +575,7 @@
     <string name="new_dev_bottom_sheet_feature_explainer">The new bottom sheet is nearing feature completion.
         Notably, tap customization is not yet available and will be implemented at a later date.\nPlease
         report bugs either on <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Github</annotation>,
-        <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, or via <annotation
-                url="mailto:1fexd@420blaze.it">Email</annotation>.
+        <annotation url="https://discord.gg/XndZet2pWF">Discord</annotation>, or via <annotation url="mailto:1fexd@420blaze.it">Email</annotation>.
     </string>
     <string name="information">Information</string>
     <string name="resolve_embeds">Resolve embeds</string>
@@ -663,8 +656,7 @@
     <string name="telemetry_dialog_text_2">Usage metrics include a random, user-resettable installation-bound
         identifier, as well as your Android version, and are stored at
         <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data,
-        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation
-                url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
+        such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.
     </string>
     <string name="analytics">Analytics</string>
     <string name="telemetry_configure_title">Analytics</string>
@@ -688,8 +680,8 @@
     <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
     <string name="switch_profile">Enable profile switching</string>
     <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-)
-        profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app
-        access ->
+        profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -&gt; Special app
+        access -&gt;
         Connected work &amp; personal apps
     </string>
     <string name="customization">Customization</string>
@@ -758,8 +750,7 @@
     <string name="export_log_dialog__title_include_settings">Include settings</string>
     <string name="export_log_dialog__subtitle_include_settings">Recommended</string>
     <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log
-        files, tap <annotation
-                url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.
+        files, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.
     </string>
     <string name="generic__button_text_copy_clipboard">Copy to clipboard</string>
     <string name="generic__button_text_cancel">Cancel</string>

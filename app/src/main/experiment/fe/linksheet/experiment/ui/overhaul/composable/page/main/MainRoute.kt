@@ -153,23 +153,23 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            divider(id =  R.string.settings_main_news__text_header)
+//            divider(id =  R.string.settings_main_news__text_header)
 
-            item(
-                key = R.string.settings_main_news__text_ui_overhaul,
-                contentType = ContentType.ClickableAlert
-            ) {
-                NewsCard(
-                    titleId = R.string.settings_main_news__title_ui_overhaul,
-                    icon = Icons.Outlined.AutoAwesome.iconPainter,
-                    contentId = R.string.settings_main_news__text_ui_overhaul,
-                    buttonTextId = R.string.settings_main_news__button_read_more,
-                    onClick = {
-                        Toast.makeText(activity, "News will become available at a later date!", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                )
-            }
+//            item(
+//                key = R.string.settings_main_news__text_ui_overhaul,
+//                contentType = ContentType.ClickableAlert
+//            ) {
+//                NewsCard(
+//                    titleId = R.string.settings_main_news__title_ui_overhaul,
+//                    icon = Icons.Outlined.AutoAwesome.iconPainter,
+//                    contentId = R.string.settings_main_news__text_ui_overhaul,
+//                    buttonTextId = R.string.settings_main_news__button_read_more,
+//                    onClick = {
+//                        Toast.makeText(activity, "News will become available at a later date!", Toast.LENGTH_SHORT)
+//                            .show()
+//                    }
+//                )
+//            }
 
 
 //            if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {

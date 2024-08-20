@@ -32,7 +32,12 @@ object Experiments : PreferenceDefinition(
     init {
         uiOverhaul.migrate { repository, _ -> repository.put(uiOverhaul, true) }
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
-        improvedIntentResolver.migrate { repository, _ -> repository.put(improvedIntentResolver, true) }
+        improvedIntentResolver.migrate { repository, _ ->
+            // Used to be false, if user has not manually changed this, migrate to true; If they turn it back off, we won't update it again
+            if (!repository.hasStoredValue(improvedIntentResolver)) {
+                repository.put(improvedIntentResolver, true)
+            }
+        }
 
         experiments = listOf(
             Experiment("enhanced_url_bar", hidden = false, urlPreview, urlPreviewSkipBrowser, declutterUrl),

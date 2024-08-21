@@ -213,4 +213,49 @@
     <string name="amp2html_builtin_cache_explainer">Usar o cache interno (que usa uma exportação de banco de dados do serviço externo)</string>
     <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de links Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
     <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicações relacionadas à privacidade </annotation> \u0020</string>
+    <string name="always_show_package_name_disclaimer">Esse switch será movido para um local diferente em uma versão futura.</string>
+    <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
+    <string name="advanced">Avançado</string>
+    <string name="advanced_explainer">Sinalizadores de Recursos, Experimentos, Importação/Exportação</string>
+    <string name="shizuku">Integração com o Shizuku</string>
+    <string name="shizuku_explainer">O Shizuku permite que o LinkSheet interaja diretamente com as APIs do sistema</string>
+    <string name="enable_shizuku">Ativar a integração (experimental) do Shizuku</string>
+    <string name="shizuku_explainer_short">Interagir diretamente com as APIs do sistema</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="enable_all">Habilitar todos</string>
+    <string name="disable_all">Desabilitar todos</string>
+    <string name="shizuku_integration_enabled_explainer">A integração com o Shizuku foi ativada com sucesso!</string>
+    <string name="shizuku_integration_no_permission_explainer">Toque aqui para solicitar a permissão ao Shizuku.</string>
+    <string name="shizuku_integration_not_setup_explainer">Embora não seja estritamente necessário para que o LinkSheet funcione, o Shizuku é recomendado. Toque aqui para instalá-lo.</string>
+    <string name="shizuku_integration">Integração com o Shizuku</string>
+    <string name="get_started">Comece a usar</string>
+    <string name="next">Avançar</string>
+    <string name="feature_flags">Sinalizadores de recursos</string>
+    <string name="feature_flags_explainer">Ativar ou desativar recursos experimentais</string>
+    <string name="background_image">Imagem de fundo</string>
+    <string name="onboarding1_headline">Bem-vindo ao</string>
+    <string name="welcome_to_linksheet_explainer">O LinkSheet \"restaura\" o \"url-app-chooser\" que aparecia quando o usuário tocava em um link no Android &lt;12 e tinha vários aplicativos instalados que podiam manipular o link</string>
+    <string name="set_as_default_browser">Definir como navegador padrão</string>
+    <string name="onboarding0_headline">Hora de retomar</string>
+    <string name="onboarding0_highlight">liberdade de escolha</string>
+    <string name="onboarding2_headline">Muitas configurações
+\npara fazer o LinkSheet</string>
+    <string name="onboarding2_highlight">seu</string>
+    <string name="onboarding3_headline">Tenha controle 
+\nafinado</string>
+    <string name="onboarding3_highlight">sobre tudo</string>
+    <string name="onboarding7_headline">Entusiasta?
+\nO LinkSheet te</string>
+    <string name="onboarding7_highlight">cobre</string>
+    <string name="disable_link_handling">Desativar o tratamento de links</string>
+    <string name="onboarding4_headline">Desativar o tratamento de links para fazer o LinkSheet</string>
+    <string name="onboarding4_highlight">funcionar</string>
+    <string name="onboarding4_paragraph_1">No Android 12, o Google introduziu os links de aplicativos verificados. Os aplicativos agora podem verificar criptograficamente a propriedade dos domínios. Quando um link para esse domínio for tocado e o aplicativo correspondente for instalado, ele será aberto automaticamente por padrão, ignorando totalmente a escolha que era dada anteriormente ao usuário.</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku ativado, toque em um app para alternar seus recursos de manipulação automática de links. Pressione em um app para abrir o menu de configurações \"Abrir por padrão\".</string>
+    <string name="shizuku_not_running_explainer">O Shizuku não está em execução. Toque aqui para abrir o Shizuku e siga as instruções para iniciá-lo.</string>
+    <string name="known_trackers">Rastreadores conhecidos</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="license_mit">Licença MIT</string>
+    <string name="welcome_to_linksheet_explainer_2">Para que o LinkSheet funcione, ele precisa ser definido como o navegador do sistema, para que possa interceptar os cliques nos links. Não se preocupe, o LinkSheet tem muitas opções de personalização, portanto isso não limitará, mas aprimorará sua experiência.</string>
+    <string name="enable_shizuku_explainer">A ativação dessa opção permitirá que o LinkSheet use o Shizuku para interagir diretamente com as APIs do sistema. Isso pode ser usado, por exemplo, para desativar automaticamente todos os manipuladores de links. Uma nova opção será exibida na tela principal do aplicativo.</string>
 </resources>

@@ -9,7 +9,7 @@
     <string name="enable_send_button">Омогући дугме „Дели са“</string>
     <string name="default_apps_subtitle">Префериране апликације су апликације које подесите да „Увек“ отварају одређене хостове</string>
     <string name="amp2html_local_cache">Омогући локални Amp2Html кеш</string>
-    <string name="open_copied_link">Отвори копирани линк</string>
+    <string name="open_copied_link">Из привремене меморије</string>
     <string name="ignore_libredirect">Игнориши LibRedirect</string>
     <string name="include_settings">Укључи подешавања (препоручено)</string>
     <plurals name="hours">

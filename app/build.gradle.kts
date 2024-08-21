@@ -222,11 +222,11 @@ dependencies {
 //    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
 
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.14"))
+    implementation(platform(Square.okHttp3.bom))
     //noinspection UseTomlInstead
-    implementation("com.squareup.okhttp3:okhttp-android")
+    implementation(Square.okHttp3.android)
     //noinspection UseTomlInstead
-    implementation("com.squareup.okhttp3:okhttp-coroutines")
+    implementation(Square.okHttp3.coroutines)
 
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 

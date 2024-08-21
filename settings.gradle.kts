@@ -38,8 +38,9 @@ include(":app", ":config")
 include(":bottom-sheet")
 
 val isCI = System.getenv("CI")?.toBooleanStrictOrNull() == true
+val dev = false
 
-if (!isCI) {
+if (!isCI && dev) {
     val properties = Properties().apply {
         file("local.properties").reader().use { load(it) }
     }

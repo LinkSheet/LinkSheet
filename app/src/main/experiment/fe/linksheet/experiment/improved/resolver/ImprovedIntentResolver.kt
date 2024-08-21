@@ -38,12 +38,12 @@ import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
-import fe.linksheet.module.unfurler.CooperativeUnfurler
 import fe.linksheet.util.IntentParser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import me.saket.unfurl.UnfurlResult
+import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 
@@ -64,7 +64,7 @@ class ImprovedIntentResolver(
     private val browserHandler: BrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
-    private val unfurler: CooperativeUnfurler,
+    private val unfurler: Unfurler,
     private val networkStateService: NetworkStateService,
 ) : KoinComponent {
     private val logger by injectLogger<ImprovedIntentResolver>()
@@ -331,7 +331,7 @@ class ImprovedIntentResolver(
             val unfurlCancel = ResolverInteraction.Cancelable(ResolveEvent.GeneratingPreview) {
                 logger.debug("Cancelling $unfurlDeferred")
                 unfurlDeferred.cancel()
-                unfurler.cancel()
+//                unfurler.cancel()
             }
 
             emitInteraction(unfurlCancel)

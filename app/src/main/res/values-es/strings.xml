@@ -8,7 +8,7 @@
     <string name="enable_send_button">Activar el botón \"Compartir\"</string>
     <string name="default_apps_subtitle">Las aplicaciones preferidas son las aplicaciones que configuras para abrir \"Siempre\" ciertos dominios</string>
     <string name="amp2html_local_cache">Activar caché local de Amp2Html</string>
-    <string name="open_copied_link">Abrir enlace copiado</string>
+    <string name="open_copied_link">Desde el portapapeles</string>
     <string name="ignore_libredirect">Ignorar LibRedirect</string>
     <string name="include_settings">Incluir ajustes (recomendado)</string>
     <string name="no_browser_installed">No hay navegadores instalados</string>
@@ -24,7 +24,7 @@
     <string name="enable_amp2html">Activar Amp2Html</string>
     <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL) \u0020</string>
     <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
-    <string name="always_disable">Desactivar siempre</string>
+    <string name="always_disable">Forzar desactivación</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
     <string name="preview_url_explainer">Muestra el enlace seleccionado (después de que ha sido procesado)</string>
     <string name="theme_explainer">Material You, tema oscuro, modo negro puro</string>
@@ -245,7 +245,7 @@
     <string name="current_session">Sesión actual</string>
     <string name="compat_installed">LinkSheetCompat ya está instalada</string>
     <string name="launch_onboaring_explainer">Prueba el flujo de incorporación</string>
-    <string name="always_disable_explainer">Desactivar el Navegador en aplicación en todas las aplicaciones</string>
+    <string name="always_disable_explainer">Desactivar el navegador dentro de la aplicación en todas las aplicaciones</string>
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
@@ -254,7 +254,7 @@
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="seal">Seal</string>
     <string name="use_text_share_copy_buttons_explainer">Reemplaza los botones delineados \"Copiar enlace\", \"Compartir\", \"Descargar\" e \"Ignorar LibRedirect\" con botones de texto simples</string>
-    <string name="disable_in_selected">Desactivar en…</string>
+    <string name="disable_in_selected">Forzando la desactivación…</string>
     <string name="debug_explainer">Registros de aplicaciones, reinicio del controlador verificado</string>
     <string name="follow_redirects_external_service">Seguir redirecciones a través de un servicio externo</string>
     <string name="general_settings_explainer">Mostrar siempre los nombres de los paquetes</string>
@@ -367,7 +367,7 @@
     <string name="opening_with_app_toast_explainer">Mostrar un mensaje emergente cuando se inicia una aplicación configurada como predeterminada para un dominio</string>
     <string name="resolve_via_toast">Éxito en la resolución</string>
     <string name="resolve_via_failed_toast">Fallo en la resolución</string>
-    <string name="resolve_via_failed_toast_explainer">Mostrar un mensaje emergente cuando una URL no se resuelve correctamente a través de un servicio externo</string>
+    <string name="resolve_via_failed_toast_explainer">Mostrar una ventana emergente cuando una URL no se resuelve a través de un servicio externo</string>
     <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Activar el menú experimental LinkSheet Compat</string>

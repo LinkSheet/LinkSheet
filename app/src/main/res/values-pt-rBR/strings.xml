@@ -126,4 +126,6 @@
     <string name="select_an_app">Selecione um app</string>
     <string name="close">Fechar</string>
     <string name="redirect_resolve_type_local_cache">local cache</string>
+    <string name="follow_redirects_external_service_explainer">Seguir os redirecionamentos usando uma API implantada em supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>) \u0020</string>
+    <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicações relacionadas à privacidade </annotation> \u0020</string>
 </resources>

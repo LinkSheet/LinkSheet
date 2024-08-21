@@ -310,7 +310,7 @@ dependencies {
     implementation(libs.zipline.loader.android)
 
     implementation(libs.unfurl)
-    implementation(libs.unfurl.social)
+//    implementation(libs.unfurl.social)
 
     "proImplementation"(platform(libs.bom))
     "proImplementation"(libs.storage.kt)

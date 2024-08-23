@@ -222,7 +222,7 @@ dependencies {
 //    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
 
-    implementation(platform(Square.okHttp3.bom))
+    implementation(platform(Square.okHttp3.bom.withVersion("5.0.0-alpha.14")))
     //noinspection UseTomlInstead
     implementation(Square.okHttp3.android)
     //noinspection UseTomlInstead

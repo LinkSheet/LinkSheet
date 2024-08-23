@@ -128,4 +128,134 @@
     <string name="redirect_resolve_type_local_cache">local cache</string>
     <string name="follow_redirects_external_service_explainer">Seguir os redirecionamentos usando uma API implantada em supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>) \u0020</string>
     <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicações relacionadas à privacidade </annotation> \u0020</string>
+    <string name="fastfoward_rules_explainer">Usar a integração experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward </annotation> (ignore os redirecionamentos de alguns hosts extraindo o redirecionamento do link) \u0020</string>
+    <string name="follow_redirects_local_cache">Ativar o cache de redirecionamento local</string>
+    <string name="follow_redirects_local_cache_explainer">Armazenar em cache o resultado dos redirecionamentos localmente</string>
+    <string name="resolved_via">%s resolvido via %s</string>
+    <string name="dont_show_filtered_item">Não mostre a seção \"último app escolhido\"</string>
+    <string name="dont_show_filtered_item_explainer">Não mostrar a seção superior que sugere o último aplicativo usado para o host clicado</string>
+    <string name="use_text_share_copy_buttons">Usar botões de texto simples para \"Copiar URL\", \"Compartilhar Com\", \"Baixar\" e \"Ignorar LibRedirect\"</string>
+    <string name="preview_url_explainer">Mostra o URL clicado (após ter sido processado)</string>
+    <string name="linksheet_download">Download via LinkSheet</string>
+    <string name="enable_downloader">Ativar baixador</string>
+    <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
+    <string name="random_instance">Instância aleatória</string>
+    <string name="app_name">LinkSheet</string>
+    <string name="in_app_browser">Navegador incorporado</string>
+    <string name="in_app_browser_subtitle">Alterar configurações do navegador incorporado</string>
+    <string name="use_app_settings">Padrão</string>
+    <string name="use_app_settings_explainer">Os apps decidem se o navegador incorporado deve ser usado</string>
+    <string name="always_disable">Forçar desativação</string>
+    <string name="always_disable_explainer">Desativar o navegador incorporado em todos os apps</string>
+    <string name="browser">Navegador</string>
+    <string name="browser_explainer">Modo de navegador, Navegador incorporado</string>
+    <string name="disable_in_selected">Forçar desativação…</string>
+    <string name="disable_in_selected_explainer">Desativar o navegador incorporado nos apps selecionados</string>
+    <string name="no_apps_which_can_handle_links_found">Não foram encontrados aplicativos que possam lidar com links.</string>
+    <string name="use_unified_preferred_browser">Usar configurações unificadas</string>
+    <string name="libredirect_via">Via %s</string>
+    <string name="enable_ignore_libredirect_button">Ativar o botão \"Ignorar LibRedirect\"</string>
+    <string name="enable_ignore_libredirect_button_explainer">Mostra um botão na folha inferior se a URL tiver sido redirecionada por meio da LibRedirect, a qual abre a URL original</string>
+    <string name="ignore_libredirect">Ignorar LibRedirect</string>
+    <string name="app_crashed">Parece que o LinkSheet falhou, veja o erro abaixo</string>
+    <string name="logs">Registros</string>
+    <string name="logs_explainer">Ver logs do app</string>
+    <string name="app_log">Log do app</string>
+    <string name="options">Opções</string>
+    <string name="log_viewer">Visualizador de logs</string>
+    <string name="log_viewer_timestamp">Vendo o log de %s</string>
+    <string name="no_log_entries">Essa sessão não contém nenhum registro.</string>
+    <string name="order_of_operation">Ordem de operação</string>
+    <string name="info">Detalhes</string>
+    <string name="fastforward">FastForward</string>
+    <string name="clear_urls">ClearURLs</string>
+    <string name="download_started">Download iniciado</string>
+    <string name="request_timeout">Tempo limite da solicitação</string>
+    <string name="request_timeout_explainer">Define quantos segundos o LinkSheet aguardará o estabelecimento de uma conexão. Definir esse valor como 0 desativa o tempo limite, mas isso não é recomendado.</string>
+    <string name="no_browsers_found">Nenhum navegador encontrado.</string>
+    <string name="export">Exportar</string>
+    <string name="export_log">Exportar log</string>
+    <string name="export_mode">Modo de exportação</string>
+    <string name="request_private_browsing">Privado</string>
+    <string name="crash_log">Registro de travamento</string>
+    <string name="log">Registro</string>
+    <string name="redact_log">Reduzir o registro (recomendado, a desativação pode vazar nomes de pacotes e nomes de hosts)</string>
+    <string name="include_settings">Incluir configurações (recomendado)</string>
+    <string name="include_fingerprint">Incluir a impressão digital do dispositivo (recomendado)</string>
+    <string name="log_privacy">Para saber mais sobre a privacidade dos registros, visite este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>. \u0020</string>
+    <string name="no_logs_found">Nenhum registro anterior!</string>
+    <string name="enable_amp2html">Habilitar Amp2Html</string>
+    <string name="amp2html_local_cache">Ativar o cache local do Amp2Html</string>
+    <string name="amp2html_local_cache_explainer">Armazenar em cache as versões não AMP recuperadas de páginas da Web localmente</string>
+    <string name="amp2html_external_service">Tentar obter uma versão de página não AMP por meio de um serviço externo</string>
+    <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em \u0020 supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>) \u0020</string>
+    <string name="amp2html">Amp2Html</string>
+    <string name="disclaimer_bottom_sheet_many_buttons">A ativação de muitos botões na folha inferior atualmente pode resultar em botões cortados ou com falhas.</string>
+    <string name="enable_libredirect_explainer">Redirecionar links para front-ends favoráveis à privacidade usando a integração experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation>. \u0020</string>
+    <string name="use_text_share_copy_buttons_explainer">Substitui os botões delineados \"Copiar URL\", \"Compartilhar Com\", \"Baixar\" e \"Ignorar LibRedirect\" por botões de texto simples</string>
+    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicações relacionadas à privacidade </annotation> \u0020</string>
+    <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
+    <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
+    <string name="in_app">Incorporado</string>
+    <string name="normal">Normal</string>
+    <string name="copy_to_clipboard">Copiar para a área de transferência</string>
+    <string name="debug">Depurar</string>
+    <string name="debug_explainer">Registros do app, redefinir manipuladores verificados</string>
+    <string name="log_files">Sessões anteriores</string>
+    <string name="services">Serviços</string>
+    <string name="current_session">Sessão atual</string>
+    <string name="resolve_failed">%s falhou: %s</string>
+    <string name="amp2html_builtin_cache">Usar o cache integrado do Amp2Html</string>
+    <string name="no_apps_found">Nenhum app foi encontrado.</string>
+    <string name="enable_request_private_browsing_button">Ativar o botão \"Solicitar navegação privada\"</string>
+    <string name="enable_request_private_browsing_button_explainer">Exibe um botão ao lado dos navegadores que abre o URL clicado no modo de navegação privada. Navegadores compatíveis: %s</string>
+    <string name="delete">Excluir</string>
+    <string name="amp2html_builtin_cache_explainer">Usar o cache interno (que usa uma exportação de banco de dados do serviço externo)</string>
+    <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de links Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
+    <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicações relacionadas à privacidade </annotation> \u0020</string>
+    <string name="always_show_package_name_disclaimer">Esse switch será movido para um local diferente em uma versão futura.</string>
+    <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
+    <string name="advanced">Avançado</string>
+    <string name="advanced_explainer">Sinalizadores de Recursos, Experimentos, Importação/Exportação</string>
+    <string name="shizuku">Integração com o Shizuku</string>
+    <string name="shizuku_explainer">O Shizuku permite que o LinkSheet interaja diretamente com as APIs do sistema</string>
+    <string name="enable_shizuku">Ativar a integração (experimental) do Shizuku</string>
+    <string name="shizuku_explainer_short">Interagir diretamente com as APIs do sistema</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="enable_all">Habilitar todos</string>
+    <string name="disable_all">Desabilitar todos</string>
+    <string name="shizuku_integration_enabled_explainer">A integração com o Shizuku foi ativada com sucesso!</string>
+    <string name="shizuku_integration_no_permission_explainer">Toque aqui para solicitar a permissão ao Shizuku.</string>
+    <string name="shizuku_integration_not_setup_explainer">Embora não seja estritamente necessário para que o LinkSheet funcione, o Shizuku é recomendado. Toque aqui para instalá-lo.</string>
+    <string name="shizuku_integration">Integração com o Shizuku</string>
+    <string name="get_started">Comece a usar</string>
+    <string name="next">Avançar</string>
+    <string name="feature_flags">Sinalizadores de recursos</string>
+    <string name="feature_flags_explainer">Ativar ou desativar recursos experimentais</string>
+    <string name="background_image">Imagem de fundo</string>
+    <string name="onboarding1_headline">Bem-vindo ao</string>
+    <string name="welcome_to_linksheet_explainer">O LinkSheet \"restaura\" o \"url-app-chooser\" que aparecia quando o usuário tocava em um link no Android &lt;12 e tinha vários aplicativos instalados que podiam manipular o link</string>
+    <string name="set_as_default_browser">Definir como navegador padrão</string>
+    <string name="onboarding0_headline">Hora de retomar</string>
+    <string name="onboarding0_highlight">liberdade de escolha</string>
+    <string name="onboarding2_headline">Muitas configurações
+\npara fazer o LinkSheet</string>
+    <string name="onboarding2_highlight">seu</string>
+    <string name="onboarding3_headline">Tenha controle 
+\nafinado</string>
+    <string name="onboarding3_highlight">sobre tudo</string>
+    <string name="onboarding7_headline">Entusiasta?
+\nO LinkSheet te</string>
+    <string name="onboarding7_highlight">cobre</string>
+    <string name="disable_link_handling">Desativar o tratamento de links</string>
+    <string name="onboarding4_headline">Desativar o tratamento de links para fazer o LinkSheet</string>
+    <string name="onboarding4_highlight">funcionar</string>
+    <string name="onboarding4_paragraph_1">No Android 12, o Google introduziu os links de aplicativos verificados. Os aplicativos agora podem verificar criptograficamente a propriedade dos domínios. Quando um link para esse domínio for tocado e o aplicativo correspondente for instalado, ele será aberto automaticamente por padrão, ignorando totalmente a escolha que era dada anteriormente ao usuário.</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku ativado, toque em um app para alternar seus recursos de manipulação automática de links. Pressione em um app para abrir o menu de configurações \"Abrir por padrão\".</string>
+    <string name="shizuku_not_running_explainer">O Shizuku não está em execução. Toque aqui para abrir o Shizuku e siga as instruções para iniciá-lo.</string>
+    <string name="known_trackers">Rastreadores conhecidos</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="license_mit">Licença MIT</string>
+    <string name="welcome_to_linksheet_explainer_2">Para que o LinkSheet funcione, ele precisa ser definido como o navegador do sistema, para que possa interceptar os cliques nos links. Não se preocupe, o LinkSheet tem muitas opções de personalização, portanto isso não limitará, mas aprimorará sua experiência.</string>
+    <string name="enable_shizuku_explainer">A ativação dessa opção permitirá que o LinkSheet use o Shizuku para interagir diretamente com as APIs do sistema. Isso pode ser usado, por exemplo, para desativar automaticamente todos os manipuladores de links. Uma nova opção será exibida na tela principal do aplicativo.</string>
 </resources>

@@ -56,7 +56,7 @@ fun LoadingIndicator(
 
                 Button(onClick = {
                     Log.d("Interact", "Cancel")
-                    (interaction as ResolverInteraction.Cancelable).cancel()
+                    (interaction as? ResolverInteraction.Cancelable)?.cancel?.invoke()
                 }) {
                     Text(text = stringResource(id = R.string.bottom_sheet_loading_indicator__button_skip_job))
                 }

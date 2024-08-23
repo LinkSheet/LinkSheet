@@ -115,7 +115,7 @@
     <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
     <string name="selected_browser_explainer">Този браузър ще бъде отварян автоматично ако липсва приложение, което да отвори посетената препратка</string>
     <string name="github_explainer">Хранилище на изходния код</string>
-    <string name="open_copied_link">Посещаване на копираната препратка</string>
+    <string name="open_copied_link">От копираното</string>
     <string name="follow_only_known_trackers">Последване на известни проследявания</string>
     <string name="theme">Тема</string>
     <string name="theme_explainer">Material You, тъмна тема, чисто черна тема</string>

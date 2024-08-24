@@ -406,7 +406,7 @@
     <string name="onboarding_2_title">Желаете ли да използвате Shizuku?</string>
     <string name="start_setup_explainer">Възможностите на LinkSheet изискват определена настройка на Андроид. Помощникът ще ви преведе през стъпките на процеса.</string>
     <string name="telemetry_dialog_text">Изберете вида на статистиките за използване, които смятате за най-удачни.</string>
-    <string name="reset_app_link_verification_status">Нулиране на състоянието на проверените препратки</string>
+    <string name="reset_app_link_verification_status">Нулиране на проверените препратки</string>
     <string name="switch_profile_explainer">Добавя бутон в долното меню, който отваря препратката в (работния) профил. Необходимо е LinkSheet да бъде инсталиран и в двата профила и ръчно свързан от Настройки &gt; Свързани приложения</string>
     <string name="new_dev_bottom_sheet_feature_explainer">Новото долно меню е попти готово. И по-точно, настройките за докосване ще бъдат реализирани на по-къден етап.
 \nСъобщавайте дефекти в <annotation url="https://github.com/LinkSheet/LinkSheet/issues/308">Гитхъб</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Дискорд</annotation> или по <annotation url="mailto:1fexd@420blaze.it">електронна поща</annotation>. \u0020</string>

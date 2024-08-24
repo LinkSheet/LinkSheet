@@ -1,6 +1,6 @@
 package fe.linksheet.module.viewmodel
 
-import android.content.Context
+import android.app.Application
 import android.content.Intent
 import android.content.pm.getInstalledPackagesCompat
 import android.content.pm.verify.domain.DomainVerificationManager
@@ -21,7 +21,6 @@ import fe.linksheet.experiment.ui.overhaul.composable.AppListItemData
 import fe.linksheet.extension.android.isUserApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -36,13 +35,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class AppsWhichCanOpenLinksViewModel(
-    private val context: Context,
+    private val context: Application,
     private val shizukuHandler: ShizukuHandler,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    private val uiOverhaul = experimentRepository.asState(Experiments.uiOverhaul)
+    private val uiOverhaul = { true }
 
     private val domainVerificationManager by lazy {
         if (AndroidVersion.AT_LEAST_API_31_S) {

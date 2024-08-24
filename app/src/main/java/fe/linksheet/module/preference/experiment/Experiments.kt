@@ -10,15 +10,14 @@ object Experiments : PreferenceDefinition(
     "experiment_share_check_all_extras",
     "experiment_new_query_manager",
     "experiment_url_bar",
-    "experiment_url_bar_switch_profile"
+    "experiment_url_bar_switch_profile",
+    "experiment_ui_overhaul"
 ) {
     val experiments: List<Experiment>
 
     val urlPreview = boolean("experiment_url_bar_preview")
     val urlPreviewSkipBrowser = boolean("experiment_url_bar_preview_skip_browser")
     val declutterUrl = boolean("experiment_url_bar_declutter_url")
-
-    val uiOverhaul = boolean("experiment_ui_overhaul", true)
 
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver", true)
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
@@ -30,7 +29,6 @@ object Experiments : PreferenceDefinition(
 
     // TODO: Enforce type
     init {
-        uiOverhaul.migrate { repository, _ -> repository.put(uiOverhaul, true) }
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
         improvedIntentResolver.migrate { repository, _ ->
             // Used to be false, if user has not manually changed this, migrate to true; If they turn it back off, we won't update it again

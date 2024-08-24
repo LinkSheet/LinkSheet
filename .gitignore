@@ -4,3 +4,4 @@ local.properties
 build
 app/release
 .ignored
+app/*.txt

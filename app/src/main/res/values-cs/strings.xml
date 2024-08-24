@@ -22,4 +22,26 @@
         <item quantity="other">%s hodin</item>
     </plurals>
     <string name="default_apps">Výchozí aplikace</string>
+    <string name="preferred_apps_settings">Nastavte preferované aplikace pro hostitele, které podporují</string>
+    <string name="set_as_browser">Nastavit jako prohlížeč</string>
+    <string name="no_preferred_apps_set_yet">Zatím nebyly nastaveny žádné preferované aplikace.</string>
+    <string name="search">Hledat</string>
+    <string name="enable_copy_button">Povolit tlačítko kopírování</string>
+    <string name="enable_copy_button_explainer">Zobrazí tlačítko „Kopírovat adresu“ v dolní části listu</string>
+    <string name="single_tap_explainer">Pro otevírání aplikací vyžadovat pouze jedno klepnutí namísto dvou; dlouze podržte pro výběr aplikace, dvakrát klepněte pro otevření informací o aplikaci</string>
+    <string name="confirm">Potvrdit</string>
+    <string name="clear">Vymazat</string>
+    <string name="usage_stats_sorting">Seřadit aplikace podle využití</string>
+    <string name="set_as_browser_explainer">Klepněte sem pro nastavení LinkSheet jako výchozí prohlížeč</string>
+    <string name="apps_which_can_open_links">Ověřené zpracovatele odkazů</string>
+    <string name="apps_which_can_open_links_explainer">Klepněte na aplikaci pro otevření nabídky „Otevírání ve výchozím nastavení“, která umožňuje zakázat automatické otevírání odkazů</string>
+    <string name="copy_url">Kopírovat odkaz</string>
+    <string name="url_copied">Adresa byla zkopírována do schránky</string>
+    <string name="single_tap">Zapnout jedno klepnutí</string>
+    <string name="usage_stats_sorting_explainer">Zahrnout statistiky o využití systému Android do seřazovacího algoritmu. Při prvním přepnutí je vyžadováno oprávnění.</string>
+    <string name="always_ask">Vždy se ptát</string>
+    <string name="browser_mode">Režim prohlížeče</string>
+    <string name="browser_mode_subtitle">Vyberte zobrazené prohlížeče</string>
+    <string name="none">Žádný</string>
+    <string name="apps_which_can_open_links_explainer_2">Zobrazí všechny aplikace, které mohou zasahovat do chování LinkSheetu</string>
 </resources>

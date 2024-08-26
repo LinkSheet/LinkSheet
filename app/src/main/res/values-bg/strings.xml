@@ -624,4 +624,16 @@
     <string name="new_dev_bottom_sheet_explainer">Не харесвате новото долно меню? Докоснете, за да съобщите за дефект.</string>
     <string name="new_dev_bottom_sheet">Долно меню</string>
     <string name="onboarding_3_subtitle">За да може LinkSheet да прехваща препратки, отварянето от регистрираните приложения трябва да бъде изключено</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d изключено</item>
+        <item quantity="other">%d изключени</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d проверена</item>
+        <item quantity="other">%d проверени</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d включено</item>
+        <item quantity="other">%d включени</item>
+    </plurals>
 </resources>

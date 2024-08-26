@@ -576,14 +576,11 @@
     <string name="settings__title_updates">更新</string>
     <string name="settings_shortcuts__title_link_handlers">连接处理器</string>
     <string name="customization">定制</string>
-    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d 已验证</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="other">%d 个已验证主机</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_app_host_info_none">%d 已禁用</string>
     <string name="reset_app_link_verification_status_subtitle">点击重置所有应用的链接验证状态，然后等几分钟让 Android 重新验证它们。不会显示确认信息。需要 Shizuku。</string>
     <string name="onboarding_3_subtitle">需要禁用链接处理，让 LinkSheet 拦截它们</string>
-    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d 已启用</string>
     <string name="settings_links_amp2html__title_skip_browser">跳过来自浏览器的链接</string>
     <string name="import_dumped_preference">导出转储设置</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">

@@ -227,7 +227,7 @@
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
     <string name="links">Линкови</string>
-    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати 
+    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати
 \n <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
     <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
@@ -556,14 +556,11 @@
     <string name="export_log_dialog__text_log_privacy">Да бисте сазнали више о потенцијално осетљивим подацима у дељеним фајловима \u0020 евиденције, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">овде</annotation> \u0020</string>
     <string name="settings_app_config__description_preferred_browser">Преферирани прегледач који је изабрао корисник</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet није подешен</string>
-    <string name="settings_verified_link_handlers__text_app_host_info_none">%d онемогућен</string>
-    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d верификован</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d хост: %s</item>
         <item quantity="few">%d хостови: %s</item>
         <item quantity="other">%d хостови: %s</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d омогућен</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Руковање линком дозвољено</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Руковање линком није дозвољено</string>
     <string name="settings_about__divider_external_versions">Спољне верзије</string>

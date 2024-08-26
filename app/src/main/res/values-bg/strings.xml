@@ -501,7 +501,6 @@
     <string name="settings_app_config_rules__subtitle_default_rule">Това е използваното правило ако другите не съвпадат</string>
     <string name="settings_main_setup_success__button_connected_apps">Свързани приложения</string>
     <string name="title_activity_drag_test">DragTestActivity</string>
-    <string name="settings_verified_link_handlers__text_app_host_info_none">%d изключени</string>
     <string name="delete_log_dialog__subtitle_delete_info">Желаете ли дневникът на сеанса да бъде премахнат? Действието е необратимо!</string>
     <string name="verified_link_handlers">Проверени приложения, отварящи препратки</string>
     <string name="telemetry_level_minimal">Минимална</string>
@@ -546,7 +545,6 @@
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Всички</string>
     <string name="verified_link_handlers_subtitle">Управление на заявените от приложения домейни</string>
     <string name="settings_verified_link_handlers__text_disabled">Отварянето на препратки е изключено</string>
-    <string name="settings_verified_link_handlers__text_app_host_info_verified">Хостът %d е проверен</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="one">%d изключен хост</item>
         <item quantity="other">%d изключени хоста</item>
@@ -561,7 +559,6 @@
         <item quantity="one">%d включен хост</item>
         <item quantity="other">%d включени хоста</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d включени</string>
     <string name="settings_credits__app_name_seal">Seal</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Пропускане</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Отварянето на препратки е разрешено</string>

@@ -174,7 +174,7 @@
     <string name="use_app_settings">Varsayılan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden bir doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri</annotation> olabilir. \u0020</string>
+    <string name="enable_downloader_explainer">URL dosyaya giden bir doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Zorla devre dışı bırak</string>
     <string name="disable_in_selected">Zorla devre dışı bırak…</string>

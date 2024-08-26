@@ -717,17 +717,26 @@
         <item quantity="one">%d host: %s</item>
         <item quantity="other">%d hosts: %s</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_app_host_info_verified">%d verified</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d verified</item>
+        <item quantity="other">%d verified</item>
+    </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="one">%d verified host</item>
         <item quantity="other">%d verified hosts</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_app_host_info_selected">%d enabled</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d enabled</item>
+        <item quantity="other">%d enabled</item>
+    </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
         <item quantity="one">%d enabled host</item>
         <item quantity="other">%d enabled hosts</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_app_host_info_none">%d disabled</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d disabled</item>
+        <item quantity="other">%d disabled</item>
+    </plurals>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Link handling allowed</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Link handling not allowed</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">

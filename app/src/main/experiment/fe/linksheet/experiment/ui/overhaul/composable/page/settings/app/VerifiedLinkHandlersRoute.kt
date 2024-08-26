@@ -54,15 +54,15 @@ import org.koin.androidx.compose.koinViewModel
 private object VerifiedLinkHandlersRouteData {
     val hostStateStringRes = arrayOf(
         DefaultAltStringRes(
-            R.string.settings_verified_link_handlers__text_app_host_info_verified,
+            R.plurals.settings_verified_link_handlers__text_app_host_info_verified,
             R.plurals.settings_verified_link_handlers__text_app_host_info_verified_alt
         ),
         DefaultAltStringRes(
-            R.string.settings_verified_link_handlers__text_app_host_info_selected,
+            R.plurals.settings_verified_link_handlers__text_app_host_info_selected,
             R.plurals.settings_verified_link_handlers__text_app_host_info_selected_alt
         ),
         DefaultAltStringRes(
-            R.string.settings_verified_link_handlers__text_app_host_info_none,
+            R.plurals.settings_verified_link_handlers__text_app_host_info_none,
             R.plurals.settings_verified_link_handlers__text_app_host_info_none_alt
         )
     )
@@ -92,12 +92,12 @@ private object VerifiedLinkHandlersRouteData {
 
 @Stable
 data class DefaultAltStringRes(
-    @StringRes val default: Int,
+    @PluralsRes val default: Int,
     @PluralsRes val alt: Int,
 ) {
     fun format(resources: Resources, single: Boolean, list: List<*>): String {
-        return if (single) resources.getQuantityString(alt, list.size, list.size)
-        else resources.getString(default, list.size)
+        val res = if (single) alt else default
+        return resources.getQuantityString(res, list.size, list.size)
     }
 }
 

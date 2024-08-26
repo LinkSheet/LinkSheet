@@ -84,7 +84,7 @@
     <string name="github_explainer">Kaynak kodu deposu</string>
     <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler) \u0020</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>
-    <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun gizlilikle ilgili<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">sorunları</annotation>olabilir</string>
+    <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
     <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>
     <string name="follow_redirects_external_service_explainer_privacy_policy">Gizlilik politikası</string>
     <string name="follow_only_known_trackers">Yalnızca bilinen izleyicileri takip et</string>
@@ -172,10 +172,9 @@
     <string name="use_text_share_copy_buttons_explainer">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" başlıklı düğmeleri basit metin düğmeleriyle değiştirir</string>
     <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
     <string name="use_app_settings">Varsayılan</string>
-    <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri olabilir</annotation></string>
+    <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun 
-\n <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri olabilir</annotation></string>
+    <string name="enable_downloader_explainer">URL dosyaya giden bir doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Zorla devre dışı bırak</string>
     <string name="disable_in_selected">Zorla devre dışı bırak…</string>

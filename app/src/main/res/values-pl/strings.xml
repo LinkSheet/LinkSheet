@@ -638,4 +638,22 @@
     <string name="settings_app_config__description_preferred_browser">Preferowana przeglądarka wybrana przez użytkownika</string>
     <string name="delete_log_dialog__subtitle_delete_info">Czy chcesz usunąć tę sesję dziennika? Nie można tego cofnąć!</string>
     <string name="generic__button_text_delete">Usuń</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d zweryfikowany</item>
+        <item quantity="few">%d zweryfikowane</item>
+        <item quantity="many">%d zweryfikowanych</item>
+        <item quantity="other">%d zweryfikowanych</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d włączony</item>
+        <item quantity="few">%d włączone</item>
+        <item quantity="many">%d włączonych</item>
+        <item quantity="other">%d włączonych</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d wyłączony</item>
+        <item quantity="few">%d wyłączone</item>
+        <item quantity="many">%d wyłączonych</item>
+        <item quantity="other">%d wyłączonych</item>
+    </plurals>
 </resources>

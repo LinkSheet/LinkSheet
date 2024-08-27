@@ -634,4 +634,19 @@
     <string name="resolve_event__generating_preview">Генерисање прегледа</string>
     <string name="settings_app_config__description_native_apps">Апликације које могу да обрађују линкове са овим хостом</string>
     <string name="resolve_event__download_check">Провера могућности преузимања</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d верификован</item>
+        <item quantity="few">%d верификована</item>
+        <item quantity="other">%d верификованих</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d омогућен</item>
+        <item quantity="few">%d омогућена</item>
+        <item quantity="other">%d омогућених</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d онемогућен</item>
+        <item quantity="few">%d онемогућена</item>
+        <item quantity="other">%d онемогућених</item>
+    </plurals>
 </resources>

@@ -94,7 +94,7 @@
     <string name="always_show_package_name_explainer">Sempre mostrar os nomes dos pacotes em vez de apenas os nomes dos aplicativos. Isso se aplica a todo o aplicativo.</string>
     <string name="none_explainer">Listar apenas os aplicativos nativos, remover todos os navegadores. Se apenas um único aplicativo nativo estiver presente, ele será aberto automaticamente. Se nenhum aplicativo nativo estiver presente, todos os navegadores serão listados.</string>
     <string name="disable_all_toasts">Desativar toasts</string>
-    <string name="open_copied_link">Abrir link copiado</string>
+    <string name="open_copied_link">Da área de transferência</string>
     <string name="checkmark">Checado</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
@@ -258,4 +258,10 @@
     <string name="license_mit">Licença MIT</string>
     <string name="welcome_to_linksheet_explainer_2">Para que o LinkSheet funcione, ele precisa ser definido como o navegador do sistema, para que possa interceptar os cliques nos links. Não se preocupe, o LinkSheet tem muitas opções de personalização, portanto isso não limitará, mas aprimorará sua experiência.</string>
     <string name="enable_shizuku_explainer">A ativação dessa opção permitirá que o LinkSheet use o Shizuku para interagir diretamente com as APIs do sistema. Isso pode ser usado, por exemplo, para desativar automaticamente todos os manipuladores de links. Uma nova opção será exibida na tela principal do aplicativo.</string>
+    <string name="onboarding4_paragraph_2">Isso é muito irritante, pois, às vezes, você não quer abrir um link no aplicativo, mas sim em um navegador (por exemplo, para marcá-lo como favorito).
+\n
+\nAhh, o clássico Google, prejudicando seus próprios produtos sem uma maneira simples de restaurar o comportamento antigo
+\n
+\n De qualquer forma, eles deixaram uma pequena \"brecha\": O tratamento de links pode ser desativado por aplicativo. Você pode supor que isso traria de volta o antigo seletor de aplicativos, mas, é claro (obrigado, Google!), esse não é o caso, pois agora o link sempre será aberto no navegador padrão. É por isso que o LinkSheet foi criado.</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

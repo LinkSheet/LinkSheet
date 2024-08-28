@@ -631,4 +631,19 @@
     <string name="resolve_event__running_libredirect">Intentando encontrar el frontend de FOSS</string>
     <string name="settings_app_config__button_add_item">Añadir artículo</string>
     <string name="title_activity_drag_test">DragTestActivity</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d verificado</item>
+        <item quantity="many">%d verificados</item>
+        <item quantity="other">%d verificados</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d activado</item>
+        <item quantity="many">%d activados</item>
+        <item quantity="other">%d activados</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d desactivado</item>
+        <item quantity="many">%d desactivados</item>
+        <item quantity="other">%d desactivados</item>
+    </plurals>
 </resources>

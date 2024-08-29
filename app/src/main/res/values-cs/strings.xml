@@ -326,4 +326,69 @@
 \nDárci, kteří přispějí více než <b>5 €</b>, mají nárok na <b>LinkSheet Pro</b>, který bude mít exkluzivní funkce. \u0020</string>
     <string name="donation_instructions">Návod k přispění</string>
     <string name="done">Hotovo</string>
+    <string name="include_history">Zahrnout historii (historie vašich klepnutí na odkazy a aplikací)</string>
+    <string name="resolve_via_toast_explainer">Zobrazit vyskakovací zprávu po vyřešení adresy URL externí službou</string>
+    <string name="enable_new_bottom_sheet">Povolit nový spodní list</string>
+    <string name="new_bottomsheet">Nový spodní list</string>
+    <string name="follow_redirects_short">Přesměrování</string>
+    <string name="online_services">Online služby</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="export_explainer">Exportovat vaše aktuální nastavení aplikace do souboru</string>
+    <string name="last_rule_update">Poslední aktualizace pravidel z upstreamu (UTC):</string>
+    <string name="onboarding_0_subtitle">Vyberte si, zda chcete být vždy dotázáni po otevření odkazu, nastavte výchozí prohlížeče a spoustu dalšího</string>
+    <string name="import_settings">Importovat nastavení</string>
+    <string name="linksheet_donation_explainer_2">Darováním více než <b>5 €</b> vám umožní přístup k <b>LinkSheet Pro</b>, který zahrnuje <b>exkluzivní funkce</b>, jako například: externí následování přesměrování, externí načtení ne-AMP stránek a již brzy spoustu dalšího! \u0020</string>
+    <string name="privacy_settings_explainer">Soukromí odkazovatele, telemetrie</string>
+    <string name="include_log_hash_key">Zahrnout hash klíč protokolu (klíč používaný k redigování protokolů)</string>
+    <string name="export_settings">Nastavení exportu</string>
+    <string name="export_to_file">Exportovat do souboru</string>
+    <string name="fastforward_version">Pravidla FastForward</string>
+    <string name="running_unofficial_build">Neoficiální sestavení</string>
+    <string name="notifications">Vyskakovací zprávy a oznámení</string>
+    <string name="amp2html_short">Amp2Html</string>
+    <string name="enable_dev_bottom_sheet">Povolit vývojářský spodní list</string>
+    <string name="enable_dev_bottom_sheet_explainer">Povolit nejnovější verzi spodního listu, která je momentálně ve vývoji</string>
+    <string name="dev_explainer">Vývojářská nastavení</string>
+    <string name="copy_version_information">Kopírovat informace o verzi</string>
+    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="show_linksheet_referrer">Zobrazit odkazovatele LinkSheet</string>
+    <string name="export_import_settings">Exportovat nebo importovat nastavení</string>
+    <string name="export_import_settings_explainer">Exportujte svá aktuální nastavení nebo importujte předchozí export nastavení</string>
+    <string name="import_headline">Import</string>
+    <string name="import_explainer">Importovat předchozí export ze souboru</string>
+    <string name="export_include_recommendation">Doporučujeme zapnout následující nastavení pouze, pokud neplánujete svůj export sdílet s někým jiným!</string>
+    <string name="import_settings_override_preferences">Tímto přepíšete všechna existující nastavení. Pokračovat?</string>
+    <string name="confirm_import">Potvrdit</string>
+    <string name="clear_urls_version">Pravidla ClearURLs</string>
+    <string name="donation">Přispět</string>
+    <string name="just_version">Verze</string>
+    <string name="debug_build">Ladicí sestavení</string>
+    <string name="dev">Vývojář</string>
+    <string name="notifications_explainer">Adresa URL zkopírována, spuštěno stahování</string>
+    <string name="url_copied_toast_explainer">Zobrazit vyskakovací zprávu při zkopírování adresy URL uživatelem</string>
+    <string name="download_started_toast">Stahování spuštěno</string>
+    <string name="download_started_toast_explainer">Zobrazit vyskakovací zprávu po spuštění stahování</string>
+    <string name="opening_with_app_toast_explainer">Zobrazit vyskakovací zprávu po spuštění aplikace, která byla nastavena jako výchozí pro doménu</string>
+    <string name="resolve_via_toast">Úspěšné vyřešení</string>
+    <string name="resolve_via_failed_toast">Neúspěšné vyřešení</string>
+    <string name="resolve_via_failed_toast_explainer">Zobrazit vyskakovací zprávu, když se nepovede adresu URL vyřešit externí službou</string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">Povolit experimentální nabídku LinkSheet Compat</string>
+    <string name="enable_new_bottom_sheet_explainer">Použít přepracovaný spodní list namísto původního</string>
+    <string name="new_bottomsheet_explainer">Tato verze aplikace LinkSheet obsahuje nový spodní list, který vytvořil <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! Poskytněte prosím zpětnou vazbu na Discordu, GitHubu nebo přes e-mail.
+\n
+\nKe starému spodnímu listu se můžete vrátit přes Nastavení -&gt; Pokročilé -&gt; Příznaky funkcí. \u0020</string>
+    <string name="unknown_host">%s je buď blokován nebo neexistuje</string>
+    <string name="onboarding_0_title">Vítejte v aplikaci
+\nLinkSheet</string>
+    <string name="start_setup">Pokračovat</string>
+    <string name="last_updated"><b>Verze:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="include_throwable">Zahrnout protokoly o pádu (doporučeno, ale nelze je redigovat)</string>
+    <string name="dev_mode_enabled">Gratulujeme, povolili jste vývojářský režim. Buďte opatrní.</string>
+    <string name="url_copied_toast">Adresa URL zkopírována</string>
+    <string name="no_internet_connection">Žádné připojení k internetu</string>
+    <string name="show_linksheet_referrer_explainer">Aplikace při spuštění může zkontrolovat, která aplikace ji spustila, nebo na ni „odkazovala“. Ve výchozím nastavení se LinkSheet po spuštění aplikace skryje, čímž cílové aplikaci řekne, že ji spustila ta aplikace, která spustila LinkSheet. Povolte tuto možnost pro vložení LinkSheet jako odkazovatele pro aplikace, které jsou přes něj otevřeny.</string>
+    <string name="export_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">odkaz</annotation>. \u0020</string>
+    <string name="opening_with_app_toast">Aplikace automaticky spuštěna</string>
+    <string name="shizuku_manager_start_failed">Nepodařilo se spustit Správce Shizuku, spusťte jej prosím ručně!</string>
 </resources>

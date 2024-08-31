@@ -28,7 +28,7 @@
     <string name="apps_which_can_open_links_explainer_2">LinkSheetの動作を妨げる可能性があるアプリを全てリストします</string>
     <string name="no_preferred_apps_set_yet">まだ優先として設定されているアプリはありません。</string>
     <string name="search">検索</string>
-    <string name="copy_url">URLをコピー</string>
+    <string name="copy_url">リンクをコピー</string>
     <string name="enable_copy_button">コピーボタンを有効</string>
     <string name="single_tap_explainer">アプリを開くのに必要なタップは２回ではなく１回だけです。 長押ししてアプリを選択し、ダブルクリックしてアプリ情報を開きます</string>
     <string name="confirm">確認</string>
@@ -55,13 +55,13 @@
     <string name="always_show_package_name">常にパッケージ名を表示</string>
     <string name="always_show_package_name_explainer">アプリ名だけではなく、常にパッケージ名を表示します。 これはアプリ全体に当てはまります。</string>
     <string name="disable_all_toasts">トーストを無効</string>
-    <string name="disable_all_toasts_explainer">トーストメッセージを一切表示しないようにします</string>
+    <string name="disable_all_toasts_explainer">トーストメッセージを表示しないようにします</string>
     <string name="remove_all">全て削除</string>
     <string name="add_all">全て追加</string>
-    <string name="hide_after_copying">コピー後に非表示</string>
-    <string name="hide_after_copying_explainer">「URLをコピー」ボタンを押した後、下のシートを非表示にします</string>
+    <string name="hide_after_copying">アクションを自動で非表示</string>
+    <string name="hide_after_copying_explainer">「リンクのコピー」や「ダウンロード」などのアクションボタンを押した後、下のシートを自動的に非表示にします</string>
     <string name="back">戻る</string>
-    <string name="display_grid_layout">グリッドレイアウトを表示</string>
+    <string name="display_grid_layout">グリッドレイアウト</string>
     <string name="set_as_browser_done">LinkSheetがデフォルトブラウザに設定されました！</string>
     <string name="pretend_to_be_app_explainer_2">Google Chromeなどの一部のアプリは、検索結果で Youtubeリンクがタップされたときに、処理するネイティブ アプリを明示的に検索します。 LinkSheetCompat は、サポートされているホストに対してそのようなネイティブアプリであるふりをして、リクエストをLinkSheetに転送します。</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet は、ブラウザであると主張するアプリを少なくとも 1 つ検出しました。 LinkSheetのリストは完全ではない可能性があります。 これがエラーだと思われる場合は、Githubでissueを作成してください。</string>
@@ -159,8 +159,8 @@
     <string name="selected_browser_explainer">クリックされたリンクがネイティブアプリで処理できない場合、このブラウザは自動的に開きます</string>
     <string name="open_with_linksheet">LinkSheetで開く</string>
     <string name="whitelisted_explainer">ホワイトリストに登録されたブラウザのみを表示</string>
-    <string name="bottom_sheet_explainer">用途別に並べ替えたり、コピーボタンを有効にしたり、共有ボタンを有効にしたり出来ます。</string>
-    <string name="about_explainer">このアプリとライセンスについて</string>
+    <string name="bottom_sheet_explainer">設定とカスタマイズ</string>
+    <string name="about_explainer">クレジット、ライセンス、リンク、バージョン</string>
     <string name="credits_explainer">オープンソースライセンス</string>
     <string name="license_apache_2">Apache License 2.0</string>
     <string name="license_gpl_3">GNU General Public License v3.0</string>
@@ -176,7 +176,7 @@
     <string name="follow_redirects_local_cache">ローカルリダイレクトキャッシュを有効</string>
     <string name="apps_which_can_open_links">検証済みのリンク</string>
     <string name="app_browsers_subtitle">優先アプリと検証済みリンク</string>
-    <string name="donate_subtitle"><b>LinkSheet Pro</b>入手したい場合は、寄付をしてください</string>
+    <string name="donate_subtitle"><b>LinkSheet Pro</b>にアップグレード</string>
     <string name="use_clear_urls">ClearURLを使用</string>
     <string name="follow_redirects_explainer">下のシートを開く前に、全てのリダイレクトを自動的に辿ります。 これには、<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシー関連の影響</annotation>が含まれる可能性があります。</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>

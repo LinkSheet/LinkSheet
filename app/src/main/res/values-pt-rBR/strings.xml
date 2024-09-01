@@ -64,7 +64,8 @@
     <string name="download">Baixar</string>
     <string name="always_show_package_name_explainer">Sempre mostrar os nomes dos pacotes em vez de apenas os nomes dos aplicativos. Isso se aplica a todo o aplicativo.</string>
     <string name="none_explainer">Listar apenas os aplicativos nativos, remover todos os navegadores. Se apenas um único aplicativo nativo estiver presente, ele será aberto automaticamente. Se nenhum aplicativo nativo estiver presente, todos os navegadores serão listados.</string>
-    <string name="open_copied_link">Abrir link copiado</string>
+    <string name="disable_all_toasts">Desativar toasts</string>
+    <string name="open_copied_link">Da área de transferência</string>
     <string name="checkmark">Checado</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
@@ -182,3 +183,4 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku ativado, toque em um app para alternar seus recursos de manipulação automática de links. Pressione em um app para abrir o menu de configurações \"Abrir por padrão\".</string>
     <string name="shizuku_not_running_explainer">O Shizuku não está em execução. Toque aqui para abrir o Shizuku e siga as instruções para iniciá-lo.</string>
 </resources>
+

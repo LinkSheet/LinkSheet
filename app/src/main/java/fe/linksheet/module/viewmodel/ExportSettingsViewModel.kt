@@ -4,11 +4,10 @@ import android.app.Application
 import android.net.Uri
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
-
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.ImportExportService
 

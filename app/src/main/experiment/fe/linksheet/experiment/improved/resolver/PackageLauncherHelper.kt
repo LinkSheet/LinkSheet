@@ -1,7 +1,9 @@
 package fe.linksheet.experiment.improved.resolver
 
 import android.content.Intent
-import android.content.pm.*
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.content.pm.queryIntentActivitiesCompat
 import fe.linksheet.extension.android.toPackageKeyedMap
 
 class PackageLauncherHelper(private val packageManager: PackageManager) {

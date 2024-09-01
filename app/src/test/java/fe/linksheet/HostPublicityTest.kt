@@ -1,9 +1,9 @@
 package fe.linksheet
 
 import android.net.Uri
-import fe.linksheet.util.HostUtil
 import android.net.compatHost
 import android.os.Build
+import fe.linksheet.util.HostUtil
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner

@@ -16,12 +16,7 @@ import fe.linksheet.interconnect.ILinkSheetService
 import fe.linksheet.interconnect.ISelectedDomainsCallback
 import fe.linksheet.interconnect.StringParceledListSlice
 import fe.linksheet.module.repository.PreferredAppRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 
 class InterconnectService : Service(), CoroutineScope by MainScope() {

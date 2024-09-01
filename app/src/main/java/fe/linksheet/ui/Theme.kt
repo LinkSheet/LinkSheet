@@ -15,15 +15,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.SpanStyle
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.rememberHapticFeedbackInteraction
 import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.linksheet.activity.BaseComponentActivity
-import fe.android.compose.feedback.DefaultHapticFeedbackInteraction
-import fe.android.compose.feedback.LocalHapticFeedbackInteraction
-import fe.android.compose.feedback.rememberHapticFeedbackInteraction
 import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.compose.KoinAndroidContext

@@ -1,5 +1,6 @@
 package fe.linksheet.module.resolver
 
+import LibRedirectResource
 import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader

@@ -6,7 +6,9 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 
 abstract class BrowserCommonViewModel(
     val context: Application,

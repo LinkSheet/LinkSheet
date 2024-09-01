@@ -10,14 +10,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.ImageBitmap
 import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.extension.android.*
+import fe.linksheet.extension.android.isUserApp
+import fe.linksheet.extension.android.launchIO
+import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 
 class InAppBrowserSettingsViewModel(
     context: Application,

@@ -6,7 +6,6 @@ import fe.httpkt.Request
 import fe.httpkt.isHttpSuccess
 import fe.httpkt.json.JsonBody
 import fe.httpkt.json.readToJson
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import java.io.IOException
 

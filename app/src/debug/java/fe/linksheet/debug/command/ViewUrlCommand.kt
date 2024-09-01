@@ -5,13 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.debug.DebugBroadcastReceiver
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.flags.FeatureFlags
-import org.koin.core.component.get
 
 object ViewUrlCommand : DebugCommand<ViewUrlCommand>(
     DebugBroadcastReceiver.VIEW_URL_BROADCAST, ViewUrlCommand::class

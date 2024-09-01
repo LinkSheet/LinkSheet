@@ -1,5 +1,6 @@
 package fe.linksheet.module.viewmodel
 
+
 import android.app.Activity
 import android.app.Application
 import android.app.role.RoleManager
@@ -20,22 +21,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
-
-
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.module.analytics.AnalyticsService
 import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.AnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
+import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
+import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel

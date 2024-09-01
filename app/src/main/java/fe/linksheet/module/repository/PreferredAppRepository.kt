@@ -3,7 +3,6 @@ package fe.linksheet.module.repository
 import android.net.Uri
 import fe.linksheet.module.database.dao.PreferredAppDao
 import fe.linksheet.module.database.entity.PreferredApp
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 

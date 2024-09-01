@@ -1,11 +1,7 @@
 package fe.linksheet.composable.settings.apps.preferred
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -19,11 +15,7 @@ import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.OnClose
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
-import fe.linksheet.composable.util.ClickableRow
-import fe.linksheet.composable.util.DialogColumn
-import fe.linksheet.composable.util.DialogContent
-import fe.linksheet.composable.util.DialogSpacer
-import fe.linksheet.composable.util.HeadlineText
+import fe.linksheet.composable.util.*
 import fe.linksheet.resolver.DisplayActivityInfo
 
 data class AppsDialogCloseState(

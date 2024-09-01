@@ -5,7 +5,8 @@ import android.content.Context
 import androidx.room.*
 import fe.linksheet.extension.android.queryFirstIntentActivityByPackageNameOrNull
 import fe.linksheet.extension.android.toDisplayActivityInfo
-import fe.linksheet.module.redactor.*
+import fe.linksheet.module.redactor.Redactable
+import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.resolver.PreferredDisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated

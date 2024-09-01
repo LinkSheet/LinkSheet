@@ -1,20 +1,10 @@
 package fe.linksheet.composable.main
 
 import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.CrueltyFree
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
@@ -26,22 +16,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
-import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload
 import fe.linksheet.ui.Typography
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import rikka.shizuku.Shizuku
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 private val statusMap = mapOf(

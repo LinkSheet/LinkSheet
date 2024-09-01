@@ -22,9 +22,9 @@ import fe.linksheet.composable.util.FilterChipValue
 import fe.linksheet.composable.util.FilterChips
 import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
+import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.whitelistedBrowsersSettingsRoute

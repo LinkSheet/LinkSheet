@@ -2,7 +2,6 @@ package fe.linksheet.module.database.dao.module
 
 import fe.linksheet.module.database.LinkSheetDatabase
 import fe.linksheet.module.database.databaseModule
-import org.koin.androidx.compose.get
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 

@@ -2,11 +2,7 @@ package fe.linksheet.composable.settings.browser
 
 import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,9 +15,9 @@ import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.CheckboxRow
 import fe.linksheet.composable.util.mapState
-import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
 

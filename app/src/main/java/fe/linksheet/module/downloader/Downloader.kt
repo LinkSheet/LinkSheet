@@ -2,14 +2,14 @@ package fe.linksheet.module.downloader
 
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.util.Extension
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.extension.java.normalizedContentType
+import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
-import fe.linksheet.util.MimeType
 import fe.linksheet.util.KnownMimeTypes
+import fe.linksheet.util.MimeType
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import org.koin.dsl.module

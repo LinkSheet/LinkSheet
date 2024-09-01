@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.os.Build
 import androidx.annotation.PluralsRes
 import androidx.annotation.RequiresApi
-import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

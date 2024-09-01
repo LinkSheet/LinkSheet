@@ -15,13 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

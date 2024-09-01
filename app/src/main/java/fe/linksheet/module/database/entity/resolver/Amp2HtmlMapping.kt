@@ -3,7 +3,10 @@ package fe.linksheet.module.database.entity.resolver
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
-import fe.linksheet.module.redactor.*
+import fe.linksheet.module.redactor.ProtectedStringBuilder
+import fe.linksheet.module.redactor.Redactable
+import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.module.redactor.StringUrl
 import fe.stringbuilder.util.*
 
 @Entity(

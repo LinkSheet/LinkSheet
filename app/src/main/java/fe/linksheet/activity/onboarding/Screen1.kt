@@ -2,12 +2,8 @@ package fe.linksheet.activity.onboarding
 
 import android.app.role.RoleManager
 import android.content.Intent
-import android.os.Build
 import android.provider.Settings
-import android.util.Log
-import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

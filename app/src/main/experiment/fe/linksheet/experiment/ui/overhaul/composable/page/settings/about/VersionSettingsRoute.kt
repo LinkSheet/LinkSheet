@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -35,8 +37,6 @@ import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.android.compose.feedback.FeedbackType
-import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.LocalActivity

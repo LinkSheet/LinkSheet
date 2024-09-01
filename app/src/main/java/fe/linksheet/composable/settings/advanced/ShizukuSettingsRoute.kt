@@ -18,11 +18,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.linksheet.composable.util.PreferenceSubtitle
 import dev.zwander.shared.ShizukuUtil.isShizukuRunning
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
+import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.module.viewmodel.FeatureFlagViewModel
 import org.koin.androidx.compose.koinViewModel
 

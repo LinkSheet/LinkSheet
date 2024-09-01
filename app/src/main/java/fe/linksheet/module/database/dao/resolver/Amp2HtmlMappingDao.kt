@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import fe.linksheet.module.database.dao.base.ResolverDao
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface Amp2HtmlMappingDao : ResolverDao<Amp2HtmlMapping> {

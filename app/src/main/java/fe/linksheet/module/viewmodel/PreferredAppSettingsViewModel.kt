@@ -9,11 +9,11 @@ import androidx.lifecycle.viewModelScope
 import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.kotlin.extension.iterable.mapToSet
 import fe.kotlin.extension.map.filterIf
-import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
+import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository

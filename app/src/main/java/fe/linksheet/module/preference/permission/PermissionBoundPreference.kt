@@ -1,7 +1,6 @@
 package fe.linksheet.module.preference.permission
 
 import android.app.Activity
-import android.content.Context
 import androidx.annotation.StringRes
 
 abstract class PermissionBoundPreference(@StringRes val title: Int, @StringRes val explainer: Int) {

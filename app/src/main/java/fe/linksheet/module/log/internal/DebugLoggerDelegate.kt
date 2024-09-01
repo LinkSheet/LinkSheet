@@ -1,8 +1,8 @@
 package fe.linksheet.module.log.internal
 
 import fe.linksheet.extension.koin.factory
-import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactor
 import org.koin.dsl.module

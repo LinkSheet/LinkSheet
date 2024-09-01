@@ -1,14 +1,12 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
 import android.net.Uri
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -20,14 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
-import fe.android.compose.icon.iconPainter
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.Routes
 import fe.linksheet.debug.DebugComposable
-import fe.linksheet.experiment.ui.overhaul.composable.page.home.news.NewsCard
 import fe.linksheet.experiment.ui.overhaul.composable.page.home.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel

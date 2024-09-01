@@ -4,25 +4,17 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import fe.linksheet.module.database.dao.*
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
-import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.database.dao.PreferredAppDao
-import fe.linksheet.module.database.migrations.Migration1to2
-import fe.linksheet.module.database.dao.AppSelectionHistoryDao
-import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
-import fe.linksheet.module.database.dao.LibRedirectDefaultDao
-import fe.linksheet.module.database.dao.LibRedirectServiceStateDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
+import fe.linksheet.module.database.entity.*
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
-import fe.linksheet.module.database.entity.AppSelectionHistory
-import fe.linksheet.module.database.entity.DisableInAppBrowserInSelected
-import fe.linksheet.module.database.entity.LibRedirectDefault
-import fe.linksheet.module.database.entity.LibRedirectServiceState
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
+import fe.linksheet.module.database.migrations.Migration1to2
 import org.koin.dsl.module
 
 val databaseModule = module {

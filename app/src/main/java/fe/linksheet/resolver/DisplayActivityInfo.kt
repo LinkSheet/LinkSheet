@@ -1,10 +1,7 @@
 package fe.linksheet.resolver
 
 import android.content.Context
-import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import android.os.Parcel
 import androidx.compose.ui.graphics.ImageBitmap
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.getIcon

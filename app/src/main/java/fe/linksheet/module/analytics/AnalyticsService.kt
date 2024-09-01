@@ -1,6 +1,6 @@
 package fe.linksheet.module.analytics
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleCoroutineScope
 import fe.android.lifecycle.LifecycleService
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service

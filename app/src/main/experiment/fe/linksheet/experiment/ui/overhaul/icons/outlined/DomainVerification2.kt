@@ -1,6 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.icons.outlined
 
-import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path

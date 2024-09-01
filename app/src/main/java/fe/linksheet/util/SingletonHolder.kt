@@ -1,7 +1,5 @@
 package fe.linksheet.util
 
-import java.lang.Exception
-
 /**
  * Taken from https://stackoverflow.com/a/53580852
  */

@@ -1,12 +1,11 @@
 package fe.linksheet.module.viewmodel
 
+
 import android.app.Application
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-
-
 import fe.libredirectkt.LibRedirectInstance
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository

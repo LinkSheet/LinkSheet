@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.annotation.StringRes
 import fe.linksheet.R
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
-import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
 import fe.linksheet.util.StringResHolder
 import java.net.UnknownHostException
 

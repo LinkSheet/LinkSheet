@@ -4,7 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import fe.linksheet.module.redactor.*
+import fe.linksheet.module.redactor.HostProcessor
+import fe.linksheet.module.redactor.PackageProcessor
+import fe.linksheet.module.redactor.Redactable
+import fe.linksheet.module.redactor.Redactor
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 

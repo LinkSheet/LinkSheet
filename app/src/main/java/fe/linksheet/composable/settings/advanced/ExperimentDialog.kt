@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
 import fe.linksheet.composable.util.*
-import kotlin.math.exp
 
 @Composable
 fun ExperimentDialog(experiment: String) {

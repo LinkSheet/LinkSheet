@@ -3,7 +3,6 @@ package fe.linksheet.module.resolver.urlresolver.base
 import fe.httpkt.Request
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
-import fe.linksheet.module.log.Logger
 import org.koin.dsl.module
 
 

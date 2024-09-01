@@ -1,6 +1,7 @@
 package fe.linksheet.module.database.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
 import fe.linksheet.module.database.dao.base.BaseDao
 import fe.linksheet.module.database.entity.LibRedirectServiceState
 import kotlinx.coroutines.flow.Flow

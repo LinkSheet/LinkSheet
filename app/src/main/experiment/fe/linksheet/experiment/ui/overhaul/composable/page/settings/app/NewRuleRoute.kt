@@ -1,15 +1,12 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.settings.app
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.linksheet.R
 import fe.linksheet.experiment.ui.overhaul.composable.component.page.SaneScaffoldSettingsPage
-import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

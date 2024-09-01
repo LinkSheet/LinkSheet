@@ -3,12 +3,8 @@ package fe.linksheet.module.resolver.urlresolver.amp2html
 import android.util.Log
 import fe.amp2htmlkt.Amp2Html
 import fe.httpkt.Request
-import fe.httpkt.ext.getGZIPOrDefaultStream
-import fe.httpkt.ext.isHttpSuccess
 import fe.linksheet.LinkSheetAppConfig
-import fe.linksheet.extension.java.normalizedContentType
 import fe.linksheet.extension.koin.single
-import fe.linksheet.extension.kotlin.failure
 import fe.linksheet.extension.okhttp.isHtml
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.CachedResponseImpl
@@ -16,11 +12,8 @@ import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
 import fe.linksheet.util.MimeType
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
-import java.io.IOException
 import java.io.InputStream
 import java.net.URL
 

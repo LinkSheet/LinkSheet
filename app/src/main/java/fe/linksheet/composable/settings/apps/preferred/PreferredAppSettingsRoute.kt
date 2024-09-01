@@ -1,15 +1,7 @@
 package fe.linksheet.composable.settings.apps.preferred
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -28,11 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.settings.SettingsScaffold
-import fe.linksheet.composable.util.*
+import fe.linksheet.composable.util.ClickableRow
+import fe.linksheet.composable.util.ColoredIcon
+import fe.linksheet.composable.util.HeadlineText
+import fe.linksheet.composable.util.mapState
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
+import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel

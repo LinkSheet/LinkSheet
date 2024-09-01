@@ -1,13 +1,11 @@
 package fe.linksheet.module.viewmodel
 
+
 import android.app.Application
 import fe.linksheet.extension.android.launchIO
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-
-
-
-import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.SensitivePreference
+import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserHandler
@@ -16,11 +14,7 @@ import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.util.flowOfLazy
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class PreferredBrowserViewModel(
     context: Application,

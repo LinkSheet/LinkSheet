@@ -16,7 +16,6 @@ import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.ui.Theme
 import fe.linksheet.ui.ThemeV2
 import io.viascom.nanoid.NanoId
-import java.util.*
 
 object AppPreferences : PreferenceDefinition(
     "enable_copy_button",

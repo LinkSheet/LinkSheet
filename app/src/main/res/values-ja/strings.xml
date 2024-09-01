@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <plurals name="minutes">
-        <item quantity="other">%s分</item>
-    </plurals>
-    <plurals name="hours">
-        <item quantity="other">%s時間</item>
-    </plurals>
     <string name="open_with">で開く</string>
     <string name="just_once">一度だけ</string>
     <string name="use_a_different_app">別のアプリを使用</string>
     <string name="default_apps">優先アプリ</string>
     <string name="set_as_browser">ブラウザとして設定</string>
     <string name="set_as_browser_explainer">ここをタップしてLinkSheetをデフォルトのブラウザにします</string>
-    <string name="enable_shizuku_explainer">有効にすると、LinkSheetはShizukuを使用してシステムAPIと直接対話出来るようになります。 これは、例えば、全てのリンクハンドラーを自動的に無効にするために使用出来ます。 新しいオプションがアプリのメイン画面に表示されます。</string>
-    <plurals name="months">
-        <item quantity="other">%s月</item>
-    </plurals>
     <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます</string>
-    <string name="welcome_to_linksheet_explainer_2">LinkSheetを動作させるには、LinkSheet をシステムブラウザとして設定し、リンクのクリックを遮断できるようにする必要があります。ご心配なく、LinkSheetにはカスタマイズ可能なオプションが豊富に用意されているため、エクスペリエンスが制限されるのではなく、むしろ強化されます。</string>
     <string name="built_by_error">このビルドは1fexdによってもGithub workflowによっても署名されていません。 誰でもソースコードをフォークして自分のLinkSheetバージョンを構築出来るため、必ずしも悪いことを意味するわけではありませんが、悪意を持ってそうする可能性があります。</string>
-    <string name="new_bottomsheet_explainer">このバージョンの LinkSheet には、<annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> のおかげで新しい下部シートが追加されました。 Discord、Github、またはメールにてフィードバックをお寄せください。 \u0020
-\n \u0020
-\n設定 -&gt; 上級 -&gt; 機能フラグにて古いボトムシートに戻すことができます。</string>
     <string name="always">常に</string>
     <string name="open_with_app">%sで開く</string>
     <string name="opening_with_app">%sで開きます</string>
@@ -29,14 +15,10 @@
     <string name="no_preferred_apps_set_yet">まだ優先として設定されているアプリはありません。</string>
     <string name="search">検索</string>
     <string name="copy_url">URLをコピー</string>
-    <string name="enable_copy_button">コピーボタンを有効</string>
-    <string name="single_tap_explainer">アプリを開くのに必要なタップは２回ではなく１回だけです。 長押ししてアプリを選択し、ダブルクリックしてアプリ情報を開きます</string>
     <string name="confirm">確認</string>
     <string name="clear">消去</string>
     <string name="apps_which_can_open_links_explainer">アプリをタップして「デフォルトで開く」メニューを開き、リンクの自動オープンを無効に出来ます</string>
-    <string name="enable_copy_button_explainer">下部に「URLをコピー」ボタンを表示します</string>
     <string name="url_copied">URLがクリップボードにコピーされました</string>
-    <string name="single_tap">シングルタップを有効</string>
     <string name="usage_stats_sorting">用途別にアプリを並べ替え</string>
     <string name="usage_stats_sorting_explainer">Androidシステムの使用状況を並べ替えアルゴリズムに含めます。 最初の切り替え時に許可が要求されます。</string>
     <string name="browser_mode">優先ブラウザ</string>
@@ -45,17 +27,11 @@
     <string name="none">無し</string>
     <string name="none_explainer">ネイティブアプリのみをリストし、全てのブラウザを削除します。 ネイティブアプリが１つだけ存在する場合、それが自動的に開きます。 ネイティブアプリが存在しない場合は、全てのブラウザがリストされます。</string>
     <string name="always_ask_explainer">常に全てのブラウザをリスト</string>
-    <string name="no_app_to_handle_link_found">リンクを処理するアプリが見つかりません！</string>
-    <string name="open_settings">設定を開く</string>
     <string name="no_such_app_found">そのようなアプリは見つかりませんでした！</string>
-    <string name="enable_send_button">「共有先」ボタンを有効</string>
-    <string name="enable_send_button_explainer">下のシートにボタンが表示され、「共有先」メニューから他のアプリにURLを共有出来ます</string>
     <string name="send_to">共有先</string>
     <string name="default_apps_subtitle">優先アプリは、特定のホストを「常に」開くように設定したアプリです</string>
     <string name="always_show_package_name">常にパッケージ名を表示</string>
     <string name="always_show_package_name_explainer">アプリ名だけではなく、常にパッケージ名を表示します。 これはアプリ全体に当てはまります。</string>
-    <string name="disable_all_toasts">トーストを無効</string>
-    <string name="disable_all_toasts_explainer">トーストメッセージを一切表示しないようにします</string>
     <string name="remove_all">全て削除</string>
     <string name="add_all">全て追加</string>
     <string name="hide_after_copying">コピー後に非表示</string>
@@ -74,7 +50,6 @@
     <string name="about">詳細</string>
     <string name="credits">クレジット</string>
     <string name="open_link_with">OpenLinkWith</string>
-    <string name="seal">Seal</string>
     <string name="github">Github</string>
     <string name="paste">ペースト</string>
     <string name="error">エラー</string>
@@ -93,43 +68,23 @@
     <string name="debug">デバッグ</string>
     <string name="logs">ログ</string>
     <string name="options">オプション</string>
-    <string name="onboarding4_paragraph_1">Android 12 では、Googleは検証済みアプリリンクを導入しました。 アプリはドメインの所有権を暗号的に検証出来る様になりました。 このようなドメインへのリンクがタップされ、対応するアプリがインストールされている場合、デフォルトで自動的に開き、以前にユーザーに与えられた選択肢は完全にスキップされます。</string>
-    <string name="redirect_resolve_type_not_resolved">無し</string>
-    <string name="browser">ブラウザ</string>
     <string name="in_app">アプリ内</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="normal">通常</string>
     <string name="settings">設定</string>
     <string name="enabled">有効</string>
     <string name="services">サービス</string>
-    <string name="info">情報</string>
-    <string name="fastforward">FastForward</string>
-    <string name="clear_urls">URLを消去</string>
     <string name="export">エクスポート</string>
     <string name="request_private_browsing">プライベート</string>
     <string name="log">ログ</string>
-    <string name="delete">削除</string>
     <string name="amp2html">Amp2Html</string>
     <string name="advanced">高度</string>
     <string name="mastodon_redirect">Mastodonにリダイレクト</string>
-    <string name="title_activity_onboarding">OnboardingActivity</string>
-    <string name="next">次</string>
-    <string name="onboarding2_highlight">あなたの</string>
-    <string name="onboarding3_highlight">全て</string>
-    <string name="onboarding7_highlight">カバー</string>
-    <string name="onboarding4_highlight">仕事</string>
-    <string name="title_activity_main">主な活動</string>
-    <string name="done">完了</string>
-    <string name="onboarding6_highlight">環境設定</string>
-    <string name="finish">終了</string>
-    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
-    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="general">一般</string>
     <string name="success">成功</string>
     <string name="warning">警告</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
-    <string name="button_settings">ボタン</string>
     <string name="misc_settings">その他</string>
     <string name="privacy">プライバシー</string>
     <string name="discord">ディスコード</string>
@@ -143,16 +98,12 @@
     <string name="version">LinkSheetバージョン</string>
     <string name="follow_redirects">リダイレクトを許可する</string>
     <string name="loading_link">リンクを読み込んでいます…</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">プライバシーポリシー</string>
-    <string name="amoled_black">Amoledブラック</string>
     <string name="redirect_resolve_type_local_cache">ローカルキャッシュ</string>
     <string name="redirect_resolve_type_remote">リモートサーバー</string>
     <string name="configure">構成設定</string>
     <string name="other">その他</string>
     <string name="import_headline">インポート</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
-    <string name="donation">寄付</string>
-    <string name="just_version">バージョン</string>
     <string name="dev">開発者</string>
     <string name="notifications">通知</string>
     <string name="libredirect_version">LibRedirect</string>
@@ -162,8 +113,6 @@
     <string name="bottom_sheet_explainer">用途別に並べ替えたり、コピーボタンを有効にしたり、共有ボタンを有効にしたり出来ます。</string>
     <string name="about_explainer">このアプリとライセンスについて</string>
     <string name="credits_explainer">オープンソースライセンス</string>
-    <string name="license_apache_2">Apache License 2.0</string>
-    <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github_explainer">ソースコードリポジトリ</string>
     <string name="open_copied_link">コピーしたリンクを開く</string>
     <string name="links_explainer">リンク操作に関する設定</string>

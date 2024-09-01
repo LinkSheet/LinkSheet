@@ -24,60 +24,10 @@ fun SliderRow(
     value: Float,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     valueRangeStep: Float = 1f,
-    valueFormatter: (Float) -> String = { it.toString() },
-    state: StatePreference<Number>,
-    headline: String,
-    subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle)
-) {
-    SliderRow(
-        modifier = modifier,
-        enabled = enabled,
-        value = value,
-        valueRange = valueRange,
-        valueRangeStep = valueRangeStep,
-        onValueChange = { state(it) },
-        valueFormatter = valueFormatter,
-        headline = headline,
-        subtitle = subtitle,
-        subtitleBuilder = subtitleBuilder
-    )
-}
-
-@Composable
-fun SliderRow(
-    modifier: Modifier = Modifier,
-    value: Float,
-    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-    valueRangeStep: Float = 1f,
-    valueFormatter: (Float) -> String = { it.toString() },
-    state: StatePreference<Number>,
-    @StringRes headlineId: Int,
-    @StringRes subtitleId: Int
-) {
-    SliderRow(
-        modifier = modifier,
-        value = value,
-        valueRange = valueRange,
-        valueRangeStep = valueRangeStep,
-        onValueChange = { state(it) },
-        valueFormatter = valueFormatter,
-        headlineId = headlineId,
-        subtitleId = subtitleId
-    )
-}
-
-@Composable
-fun SliderRow(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    value: Float,
-    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-    valueRangeStep: Float = 1f,
     onValueChange: (Float) -> Unit,
     valueFormatter: (Float) -> String = { it.toString() },
     @StringRes headlineId: Int,
-    @StringRes subtitleId: Int
+    @StringRes subtitleId: Int,
 ) {
     SliderRow(
         modifier = modifier,
@@ -103,7 +53,7 @@ fun SliderRow(
     valueFormatter: (Float) -> String = { it.toString() },
     headline: String,
     subtitle: String? = null,
-    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle)
+    subtitleBuilder: @Composable ((enabled: Boolean) -> Unit)? = buildEnabledSubtitle(subtitle = subtitle),
 ) {
     NonClickableRow(
         modifier = modifier,

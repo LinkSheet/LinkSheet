@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hide_after_copying_explainer">Скрыть нижний лист после нажатия кнопки «Скопировать URL»</string>
-    <string name="onboarding7_headline">Энтузиаст?
-\nВ LinkSheet есть ты</string>
-    <string name="enable_send_button">Включить кнопку «Поделиться»</string>
     <string name="default_apps_subtitle">Предпочитаемые приложения — это приложения, для которых вы установили параметр «Всегда» открывать определенные хосты</string>
     <string name="amp2html_local_cache">Включить локальный кэш Amp2Html</string>
     <string name="open_copied_link">Открыть скопированную ссылку</string>
     <string name="ignore_libredirect">Игнорировать LibRedirect</string>
     <string name="include_settings">Включить настройки (рекомендуется)</string>
-    <plurals name="hours">
-        <item quantity="one">%s час</item>
-        <item quantity="few">%s часа</item>
-        <item quantity="many">%s часов</item>
-        <item quantity="other">%s часов</item>
-    </plurals>
     <string name="download_started">Загрузка началась</string>
     <string name="close">Закрыть</string>
     <string name="use_clear_urls">Использовать ClearURLs</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">Включение большого количества кнопок на нижнем листе в настоящее время может привести к отключению или сбоям в работе кнопок.</string>
     <string name="opening_with_app">Открытие с помощью %s</string>
-    <string name="enable_shizuku_explainer">Включение этого параметра позволит LinkSheet использовать Shizuku для прямого взаимодействия с системными API. Это можно использовать, например, для автоматического отключения всех обработчиков ссылок.</string>
-    <string name="browser_explainer">Режим браузера и настройки браузера в приложении</string>
     <string name="save">Сохранить</string>
     <string name="enable_amp2html">Включить Amp2Html</string>
     <string name="use_clear_urls_explainer">Использовать экспериментальную интеграцию <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (удаляет параметры отслеживания из URL-адресов)</string>
@@ -33,7 +21,6 @@
     <string name="logs">Логи</string>
     <string name="no_apps_which_can_handle_links_found">Приложения, которые могут обрабатывать ссылки, не найдены.</string>
     <string name="bottom_sheet">Нижний лист</string>
-    <string name="known_trackers">Известные трекеры</string>
     <string name="display_grid_layout">Отобразить макет сетки</string>
     <string name="usage_stats_sorting">Сортировка приложений по использованию</string>
     <string name="log_viewer">Просмотр лога</string>
@@ -45,16 +32,12 @@
     <string name="disable_all">Отключить всё</string>
     <string name="always_show_package_name_explainer">Всегда показывать название пакетов, а не только имена приложений. Это относится ко всему приложению.</string>
     <string name="log_files">Прошлые лог файлы</string>
-    <string name="use_text_share_copy_buttons">Использовать простые текстовые кнопки для «Скопировать URL», «Поделиться», «Загрузить» и «Игнорировать LibRedirect»</string>
-    <string name="enable_shizuku">Включить (экспериментальную) интеграцию с Shizuku</string>
     <string name="shizuku_integration_enabled_explainer">Интеграция с Shizuku успешно включена!</string>
     <string name="enable_downloader_explainer">Добавить кнопку «Скачать» на нижний лист, если URL-адрес содержит прямую ссылку на файл. Это может иметь <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="logs_explainer">Просмотр логов приложений</string>
     <string name="enable_all">Включить всё</string>
     <string name="selected_browser_explainer">Этот браузер откроется автоматически, если ни одно нативное приложение не сможет обработать выбранную ссылку</string>
-    <string name="enable_send_button_explainer">Показывает кнопку на нижнем листе, которая позволяет вам поделиться URL с другими приложениями, как если бы вы выбрали его в меню «Поделиться»</string>
     <string name="log_privacy">Чтобы узнать о конфиденциальности журналов, перейдите по этой <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">ссылке</annotation>.</string>
-    <string name="get_started">Начать</string>
     <string name="send_to">Поделиться с</string>
     <string name="enable_ignore_libredirect_button">Включить кнопку «Игнорировать LibRedirect»</string>
     <string name="dont_show_filtered_item">Никогда не показывать раздел «последнее выбранное приложение»</string>
@@ -64,29 +47,20 @@
     <string name="app_browsers">Приложения</string>
     <string name="no_apps_found">Приложения не найдены.</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="next">Следующий</string>
-    <string name="onboarding0_highlight">свобода выбора</string>
     <string name="redirect_resolve_type_local_cache">локальный кэш</string>
     <string name="use_unified_preferred_browser_explainer">Включение этого параметра применяет приведенные ниже настройки как к обычной обработке ссылок, так и к обработке ссылок в приложении. Используйте кнопки ниже для переключения между обычным режимом и режимом в приложении, когда он отключен.</string>
     <string name="advanced_explainer">Расширенные настройки, такие как флаги функций и экспорт/импорт</string>
-    <string name="background_image">Изображение на заднем фоне</string>
     <string name="amp2html_local_cache_explainer">Локальное кэширование полученных версий веб-страниц, не относящихся к AMP</string>
-    <string name="info">Информация</string>
     <string name="normal">Нормально</string>
     <string name="clear">Очистить</string>
     <string name="apps_which_can_open_links_explainer">Коснитесь приложения, чтобы открыть меню «Открыть по умолчанию», которое позволяет отключить автоматическое открытие ссылки</string>
     <string name="enabled">Включено</string>
-    <string name="redirect_resolve_type_not_resolved">ничего</string>
-    <string name="log_viewer_timestamp">Просмотр лога от %s</string>
-    <string name="onboarding0_headline">Время вернуть</string>
     <string name="request_timeout_explainer">Определяет, сколько секунд LinkSheet будет ждать установления соединения. Установка значения 0 отключает тайм-аут, но это не рекомендуется.</string>
     <string name="github">Github</string>
     <string name="url_copied">URL был скопирован в буфер обмена</string>
-    <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="copy_url">Скопировать URL</string>
     <string name="resolve_failed">%s не удалось: %s</string>
     <string name="none">Ничего</string>
-    <string name="onboarding7_highlight">покрытый</string>
     <string name="export">Экспорт</string>
     <string name="hide_after_copying">Скрыть после копирования</string>
     <string name="follow_redirects">Следовать перенаправлениям</string>
@@ -95,11 +69,8 @@
     <string name="use_a_different_app">Исп. другое приложение</string>
     <string name="no_browsers_found">Браузеры не найдены.</string>
     <string name="whitelisted_browsers">Браузеры из белого списка</string>
-    <string name="amoled_black">Чёрный Amoled</string>
     <string name="export_log">Экспортировать лог</string>
     <string name="bottom_sheet_explainer">Сортировать по использованию, включить кнопку копирования, включить кнопку поделиться и т. д.</string>
-    <string name="shizuku_explainer">Shizuku позволяет LinkSheet напрямую взаимодействовать с системными API</string>
-    <string name="order_of_operation">Порядок работы</string>
     <string name="light">Светлая</string>
     <string name="frontend">Внешний интерфейс</string>
     <string name="redirect_resolve_type_remote">удалённый сервер</string>
@@ -107,10 +78,7 @@
     <string name="advanced">Расширенные настройки</string>
     <string name="shizuku_explainer_short">Взаимодействие с системными API напрямую</string>
     <string name="back">Назад</string>
-    <string name="clear_urls">ClearURLs</string>
     <string name="linksheet_download">Скачать LinkSheet</string>
-    <string name="delete">Удалить</string>
-    <string name="fastforward">FastForward</string>
     <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url="https://supabase.com/privacy">Политика конфиденциальности</annotation>)</string>
     <string name="include_fingerprint">Включить отпечаток пальца устройства (рекомендуется)</string>
     <string name="default_apps">Предпочитаемые приложения</string>
@@ -124,28 +92,17 @@
     <string name="github_explainer">Репозиторий исходного кода</string>
     <string name="shizuku_integration">Интеграция Shizuku</string>
     <string name="debug">Дебаг</string>
-    <string name="onboarding1_headline">Добро пожаловать в</string>
-    <string name="enable_copy_button_explainer">Показывает кнопку «Скопировать URL» на нижнем листе</string>
     <string name="downloader_url_mime_type_explainer">Проверяет, заканчивается ли URL-адрес расширением файла (например, «.jpg»); Если да, то этот тип используется для загруженного файла.</string>
-    <string name="onboarding4_headline">Отключите обработку ссылок, чтобы сделать LinkSheet</string>
-    <string name="open_settings">Открыть настройки</string>
     <string name="credits_explainer">Лицензирование открытого исходного кода</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">Убрать всё</string>
-    <string name="single_tap_explainer">Для открытия приложений требуется только одинарное касание вместо двух; Нажмите и удерживайте, чтобы выбрать приложение, дважды нажмите, чтобы открыть информацию о приложении</string>
-    <string name="onboarding3_headline">Получить тонкий
-\nконтроль над</string>
-    <string name="browser">Браузер</string>
-    <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="use_unified_preferred_browser">Использовать единые настройки</string>
     <string name="instance">Пример</string>
     <string name="always_ask_explainer">Всегда перечислять все браузеры</string>
     <string name="enable_downloader">Включить загрузчик</string>
-    <string name="amp2html_builtin_cache">Использовать встроенный кэш Amp2Html</string>
     <string name="paste">Вставить</string>
     <string name="download">Скачать</string>
     <string name="links_explainer">Настройки, касающиеся манипулирования ссылками</string>
-    <string name="no_app_to_handle_link_found">Приложение для обработки данной ссылки не найдено!</string>
     <string name="amp2html_external_service">Попытка получить версию страницы отличающиеся от AMP через внешний сервис</string>
     <string name="open_with">Открыть с помощью</string>
     <string name="always_ask">Всегда спрашивать</string>
@@ -157,24 +114,16 @@
     <string name="options">Опции</string>
     <string name="services">Сервисы</string>
     <string name="about_explainer">Об этом приложении, лицензии</string>
-    <string name="disable_all_toasts">Отключить тост сообщения</string>
-    <string name="export_mode">Режим экспорта</string>
-    <string name="app_log">Лог приложения</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku не запущен. Нажмите здесь, чтобы открыть Shizuku, затем следуйте инструкциям, чтобы запустить его</string>
     <string name="browser_status">Статус браузера</string>
     <string name="no_such_app_found">Такого приложения не найдено!</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">Политика конфиденциальности</string>
-    <string name="onboarding3_highlight">всем</string>
     <string name="request_private_browsing">Приватный</string>
     <string name="always">Всегда</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Выбрать приложение</string>
     <string name="resolved_via">%s решено через %s</string>
     <string name="instance_not_available_anymore">Экземпляр больше не доступен!</string>
-    <string name="onboarding2_highlight">твой</string>
-    <string name="onboarding4_highlight">работа</string>
-    <string name="amp2html_builtin_cache_explainer">Использовать встроенный кэш (который использует экспорт базы данных внешнего сервиса)</string>
     <string name="open_with_linksheet">Открыть с помощью LinkSheet</string>
     <string name="in_app_browser">Браузер в приложении</string>
     <string name="links">Ссылки</string>
@@ -183,67 +132,41 @@
     <string name="dark">Тёмная</string>
     <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
     <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
-    <string name="disable_all_toasts_explainer">Никогда не показывать тост сообщения</string>
     <string name="set_as_browser">Установить как браузер</string>
     <string name="whitelisted">В белом списке</string>
-    <plurals name="minutes">
-        <item quantity="one">%s минута</item>
-        <item quantity="few">%s минуты</item>
-        <item quantity="many">%s минут</item>
-        <item quantity="other">%s минут</item>
-    </plurals>
     <string name="log">Лог</string>
     <string name="loading_link">Загрузка ссылки…</string>
-    <string name="license_mit">MIT License</string>
     <string name="libredirect_via">Через %s</string>
-    <string name="license_apache_2">Apache License 2.0</string>
     <string name="confirm">Подтвердить</string>
     <string name="disabled">Отключено</string>
     <string name="enable_request_private_browsing_button">Включить кнопку «Запросить приватный просмотр»</string>
     <string name="redact_log">Редактировать лог (рекомендуется, отключение может привести к утечке названия пакетов и имен хостов)</string>
-    <string name="always_show_package_name_disclaimer">В будущем релизе этот переключатель будет перенесен в другое место.</string>
     <string name="search">Поиск</string>
-    <string name="welcome_to_linksheet_explainer_2">Чтобы LinkSheet работал, его необходимо настроить в качестве системного браузера, чтобы он мог перехватывать нажатия по ссылкам. Не волнуйтесь, LinkSheet имеет множество возможностей настройки, поэтому это не ограничит, а скорее улучшит ваш опыт.</string>
     <string name="always_show_package_name">Всегда показывать название пакета</string>
     <string name="no_libredirect_services">Службы LibRedirect не найдены!</string>
     <string name="error">Ошибка</string>
     <string name="checkmark">Галочка</string>
     <string name="request_timeout">Запросить тайм-аут</string>
     <string name="apps_which_can_open_links_explainer_2">Содержит список приложений, которые могут мешать работе LinkSheet</string>
-    <string name="onboarding4_paragraph_1">В Android 12 компания Google представила функцию Verified App Links. Теперь приложения могут криптографически проверять принадлежность доменов. Если нажать на ссылку на такой домен и установить соответствующее приложение, оно автоматически откроется по умолчанию, минуя выбор, который ранее предоставлялся пользователю.</string>
     <string name="set_as_browser_explainer">Нажмите здесь, чтобы сделать LinkSheet браузером по умолчанию</string>
     <string name="current_session">Текущая сессия</string>
     <string name="always_disable_explainer">Всегда отключать браузер в приложении, независимо от того, что приложение хочет использовать</string>
     <string name="enable_ignore_libredirect_button_explainer">Показывать кнопку на нижнем листе, если URL-адрес был перенаправлен через LibRedirect, который вместо этого открывает исходный URL-адрес</string>
     <string name="enable_amp2html_explainer">Перенаправление страницы AMP в их обычную веб-версию. Это может иметь <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="none_explainer">Перечислите только нативные приложения, удалите все браузеры. Если присутствует только одно нативное приложение, оно будет открыто автоматически. Если нативного приложения нет, будут перечислены все браузеры.</string>
-    <string name="seal">Seal</string>
-    <string name="use_text_share_copy_buttons_explainer">Заменить контурные кнопки «Скопировать URL», «Поделиться», «Загрузить» и «Игнорировать LibRedirect» на простые текстовые кнопки</string>
     <string name="disable_in_selected">Отключить в выбранном</string>
     <string name="debug_explainer">Просмотр логов приложений</string>
     <string name="follow_redirects_external_service">Следовать за перенаправлениями через внешний сервис</string>
     <string name="settings">Настройки</string>
     <string name="in_app">В приложении</string>
     <string name="browser_mode_subtitle">Установить предпочтительный режим браузера</string>
-    <string name="crash_log">Лог краша</string>
-    <string name="single_tap">Включить одинарное касание</string>
-    <string name="set_as_default_browser">Установить браузером по умолчанию</string>
     <string name="follow_only_known_trackers">Следовать только за известными трекерами</string>
     <string name="enable_libredirect">Включить LibRedirect</string>
-    <plurals name="months">
-        <item quantity="one">%s месяц</item>
-        <item quantity="few">%s месяца</item>
-        <item quantity="many">%s месяцев</item>
-        <item quantity="other">%s месяцев</item>
-    </plurals>
-    <string name="app_crashed">Похоже, LinkSheet крашнулся. Проверьте ошибку ниже</string>
     <string name="no_logs_found">Прошлые логи не найдены!</string>
-    <string name="disable_link_handling">Отключить обработку ссылок</string>
     <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
     <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="app_name">LinkSheet</string>
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
-    <string name="welcome_to_linksheet_explainer">LinkSheet «восстанавливает» средство выбора URL-приложения, которое появляется, когда пользователь нажимает ссылку на Android &lt;12 и у него установлено несколько приложений, которые могут обрабатывать ссылку</string>
     <string name="system">Системная</string>
     <string name="no_log_entries">Эта сессия не содержит логов.</string>
     <string name="add">Добавить</string>
@@ -251,10 +174,7 @@
     <string name="enable_request_private_browsing_button_explainer">Отображение кнопки рядом с браузерами, которая открывает выбранный URL-адрес в режиме приватного просмотра. Поддерживаемые браузеры: %s</string>
     <string name="shizuku">Интеграция Shizuku</string>
     <string name="dont_show_filtered_item_explainer">Больше не будет отображаться верхний раздел, в котором предлагается последнее использованное приложение для выбранного хоста</string>
-    <string name="enable_copy_button">Включить кнопку копирования</string>
     <string name="feature_flags">Экспериментальные функции</string>
-    <string name="onboarding2_headline">Множество настроек,
-\nчтобы сделать LinkSheet</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Активирован режим Shizuku, коснитесь приложения, чтобы переключить его возможности автоматической обработки ссылок. Нажмите и удерживайте приложение, чтобы открыть меню настроек «Открыть по умолчанию».</string>
     <string name="credits">О программе</string>
@@ -268,7 +188,6 @@
     <string name="manual_build">Создано вручную и подписано 1fexd</string>
     <string name="open_link_with_subtitle_2">LinkSheet изначально был основан на OpenLinkWith</string>
     <string name="warning">Предупреждение</string>
-    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">Разное</string>
     <string name="donate_learn_more">Узнать больше</string>
     <string name="pretend_to_be_app_explainer_2">Некоторые приложения, например Google Chrome, явно ищут нативное приложение для обработки, например, ссылки Youtube при ее нажатии в результатах поиска. LinkSheetCompat притворяется таким родным приложением для поддерживаемых хостов, а затем пересылает запрос в LinkSheet.</string>
@@ -279,62 +198,43 @@
     <string name="discord">Discord</string>
     <string name="no">Нет</string>
     <string name="import_and_override">Импортировать и переопределить</string>
-    <string name="onboarding4_paragraph_2">Это очень раздражает, поскольку иногда вы хотите открыть ссылку не в приложении, а в браузере (например, чтобы добавить ее в закладки).
-\n
-\nАх, классический Google, калечащий свои собственные продукты без простого способа восстановить старое поведение.
-\n
-\n В любом случае, они оставили небольшую \"лазейку\": Обработка ссылок может быть отключена в каждом конкретном приложении. Вы можете предположить, что это вернет старый выбор приложений, но, конечно же (спасибо Google!), это не так, поскольку теперь ссылка всегда будет открываться в браузере по умолчанию. Именно для этого и был создан LinkSheet.</string>
     <string name="success">Успех</string>
     <string name="discord_explainer">Заходите в наш чат в Discord сервере! Общайтесь с пользователями и разработчиками LinkSheet о его будущем и других начинаниях!</string>
     <string name="configure">Конфигурация</string>
     <string name="show_linksheet_referrer">Показать реферер LinkSheet</string>
-    <string name="onboarding6_highlight">предпочтения</string>
-    <string name="onboarding6_headline">Установите свои</string>
     <string name="yes">Да</string>
-    <string name="finish">Закончить</string>
     <string name="flavor">Flavor:</string>
     <string name="built_at">Построено в (UTC):</string>
     <string name="linksheet_donation_explainer_2">Пожертвование на сумму более <b>5€</b> (<b>4€</b>, если вы делаете пожертвование в криптовалюте!) открывает вам доступ к <b>LinkSheet Pro</b>, который в настоящее время только скрывает баннер пожертвования на главном экране приложения, но в будущем появятся <b>эксклюзивные Pro функции.</b></string>
     <string name="github_pipeline_build">Создан и подписан рабочим процессом Github</string>
     <string name="import_settings">Импортировать настройки</string>
-    <string name="launch_onboaring">Запустить процесс адаптации</string>
+    <string name="launch_onboarding">Запустить процесс адаптации</string>
     <string name="other">Другое</string>
     <string name="export_import_settings">Экспорт или импорт настроек</string>
     <string name="import_headline">Импорт</string>
-    <string name="button_settings">Кнопки</string>
-    <string name="donate_card_subtitle_2">Пожертвовать криптовалюту</string>
-    <string name="linksheet_version_info_header">Информация о версии LinkSheet:</string>
     <string name="export_include_recommendation">Мы рекомендуем вам включить следующие настройки, только если вы не планируете делиться экспортированными данными с кем-то ещё!</string>
     <string name="no_handlers_found">Ни браузер, ни нативное приложение не найдены!</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
     <string name="thanks_for_donating">Спасибо за пожертвование!</string>
     <string name="app_setup">Настройка приложения</string>
     <string name="confirm_import">Подтвердить</string>
-    <string name="seal_subtitle_2">Seal был отличным ресурсом для изучения Jetpack Compose</string>
     <string name="include_log_hash_key">Включите хэш-ключ журнала (ключ, используемый для редактирования ваших журналов)</string>
-    <string name="import_dumped_preference_explainer">Импортер настроек, содержащихся в файлах логов - вероятно, бесполезен для обычного пользователя</string>
-    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
     <string name="import_explainer">Импортировать предыдущий экспорт из файла</string>
     <string name="github_workflow_run_id">Идентификатор рабочего процесса сборки:</string>
     <string name="export_privacy">Чтобы узнать о конфиденциальности экспорта, перейдите по этой <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">ссылке</annotation>.</string>
     <string name="donate_crypto">Пожертвовать через криптовалюту</string>
     <string name="export_import_settings_explainer">Экспортируйте текущие настройки или импортируйте предыдущие настройки</string>
-    <string name="donation_instructions">Инструкции по пожертвованию</string>
     <string name="donate_card_headline">Пожертвовать на поддержку LinkSheet</string>
     <string name="general">Общее</string>
     <string name="pretend_to_be_app_explainer">Притворитесь собственным приложением для поддерживаемых доменов с помощью LinkSheetCompat</string>
     <string name="show_linksheet_referrer_explainer">При запуске приложения LinkSheet может проверить, какое приложение было запущено, или \"ссылается\" на него. По умолчанию, когда LinkSheet запускает приложение, он скрывает себя, говоря, что приложение, запустившее LinkSheet, является целью запуска. Включите эту опцию, чтобы LinkSheet снова стал реферером для приложений, которые он открывает.</string>
     <string name="at_least_one_unknown_browser_installer">Установлен как минимум(неизвестно) один браузер</string>
-    <string name="built_by">Создано и подписано</string>
     <string name="compat_installed">LinkSheetCompat уже установлен</string>
-    <string name="launch_onboaring_explainer">Протестировать процесс адаптации</string>
     <string name="mastodon_redirect_subtitle_2">Исходный код Mastodon Redirect использовался в качестве образца для взаимодействия с Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet обнаружил как минимум одно приложение, выдающее себя за браузер. Список LinkSheet может быть неполным. Если вы считаете, что это ошибка, отправьте сообщение о проблеме на Github.</string>
     <string name="donate">Пожертвовать</string>
     <string name="include_history">Включить историю (ваши нажатия по ссылке и историю приложений)</string>
-    <string name="pro_feature">Это функция LinkSheet Pro!</string>
     <string name="general_settings_explainer">Настройки, касающиеся всего приложения</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="built_by_error">Эта сборка не была подписана 1fexd. Это не обязательно означает что-то плохое, поскольку любой может разветвить исходный код и создать свое приложение, но он может сделать это со злым умыслом.</string>
     <string name="no_browser_installed_explainer">LinkSheet не удалось обнаружить хотя бы одно приложение, выдающее себя за браузер. Для удобства установите браузер.</string>
     <string name="donate_card">Пожертвуйте картой (через BuyMeACoffee)</string>
@@ -348,5 +248,4 @@
     <string name="pretend_to_be_app">Перехват запросов собственных приложений</string>
     <string name="version_name">Полный идентификатор:</string>
     <string name="configure_explainer">Нажмите здесь, чтобы настроить LinkSheetCompat</string>
-    <string name="done">Готово</string>
 </resources>

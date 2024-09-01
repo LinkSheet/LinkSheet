@@ -5,20 +5,16 @@
     <string name="always">Sempre</string>
     <string name="open_with_app">Apri con %s</string>
     <string name="search">Cerca</string>
-    <string name="enable_copy_button">Abilita pulsante di copia</string>
     <string name="url_copied">L\'URL è stato copiato negli appunti</string>
-    <string name="single_tap">Abilita tocco singolo</string>
     <string name="browser_mode">Browser preferito</string>
     <string name="browser_mode_subtitle">Imposta la modalità browser preferita</string>
     <string name="always_ask">Chiedi sempre</string>
     <string name="none">Nessuno</string>
     <string name="always_ask_explainer">Elenca sempre tutti i browser</string>
-    <string name="no_app_to_handle_link_found">Nessuna app per gestire il link trovato!</string>
     <string name="version">Versione</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="donate_crypto">Dona</string>
     <string name="theme">Tema</string>
-    <string name="fastforward">FastForward</string>
     <string name="default_apps">App preferite</string>
     <string name="use_a_different_app">Usa un\'altra app</string>
     <string name="opening_with_app">Apertura con %s</string>
@@ -28,14 +24,12 @@
     <string name="apps_which_can_open_links_explainer_2">Elenca tutte le app che potrebbero interferire con il comportamento di LinkSheet</string>
     <string name="copy_url">Copia link</string>
     <string name="no_preferred_apps_set_yet">Nessuna app è stata ancora impostata come preferita.</string>
-    <string name="single_tap_explainer">Richiede solo un tocco invece di due per aprire le app; premi a lungo per selezionare l\'app, fai doppio clic per aprire le informazioni sull\'app</string>
     <string name="confirm">Conferma</string>
     <string name="usage_stats_sorting">Ordina app per utilizzo</string>
     <string name="donate_subtitle">Dona criptovalute all\'autore</string>
     <string name="none_explainer">Elenca solo le app native, rimuovendo tutti i browser. Se è presente una sola app nativa, questa verrà aperta automaticamente. Se non è presente alcuna app nativa, vengono elencati tutti i browser.</string>
     <string name="error">Errore</string>
     <string name="back">Indietro</string>
-    <string name="seal">Seal</string>
     <string name="github">GitHub</string>
     <string name="links">Link</string>
     <string name="open_with_linksheet">Apri con LinkSheet</string>
@@ -46,7 +40,6 @@
     <string name="system">Sistema</string>
     <string name="dark">Scuro</string>
     <string name="light">Chiaro</string>
-    <string name="amoled_black">Nero Amoled</string>
     <string name="frontend">Frontend</string>
     <string name="theme_explainer">Cambia il tema dell\'app</string>
     <string name="lib_redirect">LibRedirect</string>
@@ -55,21 +48,16 @@
     <string name="add">Aggiungi</string>
     <string name="close">Chiudi</string>
     <string name="app_name">LinkSheet</string>
-    <string name="browser">Browser</string>
     <string name="remove_all">Rimuovi tutto</string>
     <string name="add_all">Aggiungi tutto</string>
     <string name="select_an_app">Seleziona un\'app</string>
     <string name="random_instance">Istanza casuale</string>
-    <string name="clear_urls">ClearURLs</string>
     <string name="save">Salva</string>
     <string name="debug">Debug</string>
     <string name="no_such_app_found">Nessuna applicazione trovata!</string>
-    <string name="enable_send_button">Abilita il pulsante \"Condividi\"</string>
     <string name="always_show_package_name">Mostra sempre nome pacchetto</string>
     <string name="send_to">Condividi</string>
     <string name="hide_after_copying">Nascondi dopo copia</string>
-    <string name="disable_all_toasts">Disabilita avvisi popup</string>
-    <string name="disable_all_toasts_explainer">Non mostrare mai messaggi di avviso popup</string>
     <string name="set_as_browser_done">L\'app è stata impostata come browser predefinito!</string>
     <string name="selected_browser_explainer">Questo browser viene aperto automaticamente se nessuna app nativa è in grado di gestire il link cliccato</string>
     <string name="enabled">Abilitate</string>
@@ -77,13 +65,10 @@
     <string name="whitelisted">Autorizzati</string>
     <string name="about_explainer">Informazioni su questa app, licenze</string>
     <string name="credits">Riconoscimenti</string>
-    <string name="license_apache_2">Apache License 2.0</string>
     <string name="links_explainer">Impostazioni relative alla manipolazione dei link</string>
     <string name="use_clear_urls">Utilizza ClearURLs</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">Informativa sulla privacy</string>
     <string name="fastfoward_rules">Utilizza regole FastForward</string>
     <string name="follow_redirects_local_cache">Abilita cache di reindirizzamento locale</string>
-    <string name="use_text_share_copy_buttons">Utilizza semplici pulsanti di testo per \"Copia URL\", \"Condividi\", \"Download\" e \"Ignora LibRedirect\"</string>
     <string name="dont_show_filtered_item">Non mostrare mai sezione \"ultima app selezionata\"</string>
     <string name="preview_url">Anteprima URL</string>
     <string name="preview_url_explainer">Mostra l\'URL cliccato (dopo che è stato elaborato)</string>
@@ -92,7 +77,6 @@
     <string name="default_apps_subtitle">Le app preferite sono le app impostate su \"Sempre\" per aprire determinati host</string>
     <string name="whitelisted_explainer">Mostra solo i browser autorizzati</string>
     <string name="whitelisted_browsers">Browser autorizzati</string>
-    <string name="use_text_share_copy_buttons_explainer">Sostituisce i pulsanti delineati \"Copia URL\", \"Condividi\", \"Download\" e \"Ignora LibRedirect\" con semplici pulsanti di testo</string>
     <string name="bottom_sheet_explainer">Ordina per utilizzo, abilita pulsante di copia, abilita pulsante di condivisione, ecc.</string>
     <string name="about">Informazioni</string>
     <string name="always_show_package_name_explainer">Mostra sempre i nomi dei pacchetti anziché solo i nomi delle app. Questo vale per l\'intera app.</string>
@@ -100,7 +84,6 @@
     <string name="enable_downloader">Abilita download</string>
     <string name="downloader_url_mime_type_explainer">Controlla se l\'URL termina con un\'estensione di file (ad es. \".jpg\"); in caso affermativo, questo tipo viene utilizzato per il file scaricato.</string>
     <string name="credits_explainer">Licenze open source</string>
-    <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="browser_status">Stato del browser</string>
     <string name="open_copied_link">Apri link copiato</string>
     <string name="dont_show_filtered_item_explainer">Non viene mai visualizzata la sezione superiore che suggerisce l\'ultima app utilizzata per l\'host cliccato</string>
@@ -117,10 +100,8 @@
     <string name="resolved_via">%s risolto tramite %s</string>
     <string name="redirect_resolve_type_remote">server remoto</string>
     <string name="redirect_resolve_type_local">risolutore locale</string>
-    <string name="redirect_resolve_type_not_resolved">nessuno</string>
     <string name="normal">Normale</string>
     <string name="ignore_libredirect">Ignora LibRedirect</string>
-    <string name="app_crashed">Sembra che LinkSheet si sia arrestato in modo anomalo, controlla l\'errore di seguito</string>
     <string name="options">Opzioni</string>
     <string name="no_apps_found">Nessuna app trovata.</string>
     <string name="usage_stats_sorting_explainer">Includi le statistiche di utilizzo nell\'algoritmo di ordinamento. L\'autorizzazione è richiesta alla prima attivazione.</string>
@@ -130,16 +111,12 @@
     <string name="redact_log">Censura log (raccomandato, disabilitarlo potrebbe far trapelare i nomi dei pacchetti e degli host)</string>
     <string name="include_settings">Includi impostazioni (consigliato)</string>
     <string name="log_privacy">Per informazioni sulla privacy dei log, puoi visitare questo <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
-    <string name="delete">Elimina</string>
     <string name="enable_amp2html_explainer">Reindirizza le pagine AMP alla loro normale versione web. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">implicazioni relative alla privacy</annotation></string>
     <string name="redirect_resolve_type_local_cache">cache locale</string>
     <string name="services">Servizi</string>
     <string name="current_session">Sessione in corso</string>
     <string name="enable_amp2html">Abilita Amp2Html</string>
-    <string name="enable_copy_button_explainer">Mostra un pulsante \"Copia URL\" nel foglio inferiore</string>
     <string name="clear">Pulisci</string>
-    <string name="open_settings">Apri impostazioni</string>
-    <string name="enable_send_button_explainer">Mostra un pulsante nel foglio inferiore che consente di condividere l\'URL con altre app come se fosse stato selezionato da un menu \"Condividi \"</string>
     <string name="hide_after_copying_explainer">Nascondi foglio inferiore dopo aver premuto \"Copia URL\"</string>
     <string name="display_grid_layout_explainer">Visualizza una griglia invece di un elenco nel foglio inferiore</string>
     <string name="bottom_sheet">Foglio inferiore</string>
@@ -150,7 +127,6 @@
     <string name="use_app_settings">Usa impostazioni dell\'app</string>
     <string name="use_app_settings_explainer">Consenti all\'app di decidere se utilizzare il browser in-app</string>
     <string name="always_disable">Disabilita sempre</string>
-    <string name="browser_explainer">Modalità browser e impostazioni del browser in-app</string>
     <string name="always_disable_explainer">Disabilita sempre il browser in-app, indipendentemente da ciò che l\'app desidera utilizzare</string>
     <string name="no_apps_which_can_handle_links_found">Non è stata trovata alcuna app in grado di gestire i link.</string>
     <string name="in_app">In-app</string>
@@ -159,33 +135,14 @@
     <string name="enable_ignore_libredirect_button">Abilita pulsante \"Ignora LibRedirect\"</string>
     <string name="enable_ignore_libredirect_button_explainer">Mostra un pulsante nel foglio inferiore se l\'URL è stato reindirizzato tramite LibRedirect, che apre invece l\'URL originale</string>
     <string name="no_libredirect_services">Nessun servizio LibRedirect trovato!</string>
-    <string name="info">Informazioni</string>
     <string name="download_started">Download avviato</string>
     <string name="no_browsers_found">Nessun browser trovato.</string>
     <string name="export">Esporta</string>
-    <string name="export_mode">Modalità esportazione</string>
     <string name="enable_request_private_browsing_button">Abilita pulsante \"Richiedi navigazione privata\"</string>
     <string name="enable_request_private_browsing_button_explainer">Visualizza un pulsante accanto ai browser che apre l\'URL cliccato in modalità di navigazione privata. Browser supportati: %s</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">L\'abilitazione di molti pulsanti nel foglio inferiore al momento può portare a pulsanti tagliati o glitch.</string>
     <string name="use_unified_preferred_browser_explainer">L\'abilitazione di questa opzione applica le impostazioni seguenti sia alla gestione dei link normale che in-app. Usa i pulsanti qui sotto per passare dalla modalità normale a quella in-app quando è disabilitata.</string>
-    <string name="always_show_package_name_disclaimer">Questo interruttore verrà spostato in una posizione diversa in una versione futura.</string>
     <string name="enable_downloader_explainer">Aggiungi un pulsante \"Download\" nel foglio inferiore se l\'URL contiene un collegamento diretto al file. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">implicazioni relative alla privacy</annotation></string>
     <string name="instance_not_available_anymore">L\'istanza non è più disponibile!</string>
     <string name="disable_in_selected_explainer">Disabilita il browser in-app nelle app selezionate, indipendentemente da ciò che l\'app desidera utilizzare</string>
     <string name="disable_in_selected">Disabilita per selezionati</string>
-    <plurals name="hours">
-        <item quantity="one">%s ora</item>
-        <item quantity="many">%s ore</item>
-        <item quantity="other">%s ore</item>
-    </plurals>
-    <plurals name="months">
-        <item quantity="one">%s mese</item>
-        <item quantity="many">%s mesi</item>
-        <item quantity="other">%s mesi</item>
-    </plurals>
-    <plurals name="minutes">
-        <item quantity="one">%s minuto</item>
-        <item quantity="many">%s minuti</item>
-        <item quantity="other">%s minuti</item>
-    </plurals>
 </resources>

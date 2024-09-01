@@ -14,11 +14,7 @@
     <string name="no_preferred_apps_set_yet">尚未設定偏好應用程式。</string>
     <string name="search">搜尋</string>
     <string name="copy_url">複製網址</string>
-    <string name="enable_copy_button">啟用複製按鈕</string>
-    <string name="enable_copy_button_explainer">在底部工作表中顯示「複製網址」按鈕</string>
     <string name="url_copied">網址已複製到剪貼簿</string>
-    <string name="single_tap">啟用單次點擊</string>
-    <string name="single_tap_explainer">只需點擊一次即可開啟應用程式；長按以選擇應用程式，點擊兩次以開啟應用程式資訊</string>
     <string name="confirm">確認</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">按使用統計排序應用程式</string>
@@ -27,17 +23,11 @@
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
     <string name="always_ask_explainer">始終列出所有瀏覽器</string>
-    <string name="no_app_to_handle_link_found">找不到可處理連結的應用程式！</string>
-    <string name="open_settings">開啟設定</string>
     <string name="no_such_app_found">找不到此應用程式！</string>
-    <string name="enable_send_button">啟用「分享」按鈕</string>
-    <string name="enable_send_button_explainer">在底部工作表中顯示一個按鈕，允許您將網址分享到其他應用程式，就像從「分享」選單中選擇一樣</string>
     <string name="send_to">分享</string>
     <string name="default_apps_subtitle">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">始終顯示套件名稱</string>
     <string name="always_show_package_name_explainer">始終顯示套件名稱而不僅僅是應用程式名稱。這適用於整個應用程式。</string>
-    <string name="disable_all_toasts">停用浮動訊息</string>
-    <string name="disable_all_toasts_explainer">從不顯示任何浮動訊息</string>
     <string name="remove_all">全部移除</string>
     <string name="add_all">全部新增</string>
     <string name="hide_after_copying">複製後隱藏</string>
@@ -65,9 +55,6 @@
     <string name="credits_explainer">開源授權</string>
     <string name="version">LinkSheet版本</string>
     <string name="open_link_with">OpenLinkWith</string>
-    <string name="license_apache_2">Apache License 2.0</string>
-    <string name="seal">Seal</string>
-    <string name="license_gpl_3">GNU General Public License v3.0</string>
     <string name="github">Github</string>
     <string name="github_explainer">原始碼存放庫</string>
     <string name="donate_crypto">捐贈</string>
@@ -82,17 +69,15 @@
     <string name="use_clear_urls_explainer">使用實驗性的<annotation url="https://github.com/ClearURLs">ClearURLs</annotation>整合（清除網址中的追蹤參數）</string>
     <string name="follow_redirects">跟隨重新導向</string>
     <string name="follow_redirects_explainer">在開啟底部工作表之前自動跟隨所有重新導向</string>
-    <string name="loading_link">正在載入連結...</string>
+    <string name="loading_link">正在載入連結…</string>
     <string name="follow_redirects_external_service">透過外部服務跟隨重新導向</string>
     <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 上的 API 來跟隨重新導向（<annotation url="https://supabase.com/privacy">隱私政策</annotation>）</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">隱私政策</string>
     <string name="follow_only_known_trackers">僅跟隨已知追蹤器</string>
     <string name="theme">主題</string>
     <string name="theme_explainer">更改應用程式的主題</string>
     <string name="system">系統</string>
     <string name="light">亮色</string>
     <string name="dark">暗色</string>
-    <string name="amoled_black">AMOLED 黑色</string>
     <string name="fastfoward_rules">使用 FastForward 規則</string>
     <string name="fastfoward_rules_explainer">使用實驗性的 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 規則整合（通過從連結中提取重新導向來繞過某些主機的重新導向）</string>
     <string name="follow_redirects_local_cache">啟用本地重新導向快取</string>
@@ -100,7 +85,6 @@
     <string name="redirect_resolve_type_local_cache">本地快取</string>
     <string name="redirect_resolve_type_remote">遠程伺服器</string>
     <string name="redirect_resolve_type_local">本地解析器</string>
-    <string name="redirect_resolve_type_not_resolved">無</string>
     <string name="enable_libredirect">啟用 LibRedirect</string>
     <string name="enable_libredirect_explainer">使用實驗性的 <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> 整合，將連結重定向到隱私友好的前端</string>
     <string name="lib_redirect">LibRedirect</string>
@@ -112,8 +96,6 @@
     <string name="close">關閉</string>
     <string name="dont_show_filtered_item">永不顯示「最近選取的應用程式」部分</string>
     <string name="dont_show_filtered_item_explainer">永遠不顯示建議使用過的應用程式作為點選主機的頂部區域</string>
-    <string name="use_text_share_copy_buttons">使用簡單的文字按鈕「複製連結」、「分享到」、「下載」和「忽略 LibRedirect」</string>
-    <string name="use_text_share_copy_buttons_explainer">將「複製連結」、「分享到」、「下載」和「忽略 LibRedirect」的輪廓按鈕替換為簡單的文字按鈕</string>
     <string name="preview_url">預覽連結</string>
     <string name="preview_url_explainer">顯示點選連結處理後的連結</string>
     <string name="download">下載</string>
@@ -130,8 +112,6 @@
     <string name="use_app_settings_explainer">讓應用程式決定是否使用應用程式內瀏覽器</string>
     <string name="always_disable">始終停用</string>
     <string name="always_disable_explainer">始終停用應用程式內瀏覽器，不論應用程式想要使用何種模式</string>
-    <string name="browser">瀏覽器</string>
-    <string name="browser_explainer">瀏覽器模式和應用程式內瀏覽器設定</string>
     <string name="disable_in_selected">在選定的應用程式中停用</string>
     <string name="disable_in_selected_explainer">在選定的應用程式中停用應用程式內瀏覽器，不論應用程式想要使用何種模式</string>
     <string name="no_apps_which_can_handle_links_found">找不到能處理連結的應用程式。</string>
@@ -141,16 +121,7 @@
     <string name="enable_ignore_libredirect_button">啟用「忽略 LibRedirect」按鈕</string>
     <string name="enable_ignore_libredirect_button_explainer">如果連結經由 LibRedirect 重新導向，將在底部表單中顯示一個按鈕，可打開原始連結</string>
     <string name="ignore_libredirect">忽略 LibRedirect</string>
-    <plurals name="hours">
-        <item quantity="other">%s小時</item>
-    </plurals>
     <string name="follow_only_known_trackers_explainer">僅在知道主機是追蹤器/重定向時才嘗試遵循重定向。 如果啟用“透過外部服務追蹤重定向”，則該功能將始終啟用</string>
     <string name="usage_stats_sorting_explainer">在排序演算法中包含 Android 系統使用統計資料。 第一次切換時需要請求權限。</string>
-    <plurals name="minutes">
-        <item quantity="other">%s分鐘</item>
-    </plurals>
     <string name="none_explainer">僅列出本地應用程序，刪除所有瀏覽器。 如果僅存在一個本地應用程序，將會自動開啟。 如果不存在本地應用程序，則會列出所有瀏覽器。</string>
-    <plurals name="months">
-        <item quantity="other">%s月</item>
-    </plurals>
 </resources>

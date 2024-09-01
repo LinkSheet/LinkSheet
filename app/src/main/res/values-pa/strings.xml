@@ -3,9 +3,6 @@
     <string name="hide_after_copying_explainer">\"ਕਾਪੀ URL\" ਬਟਨ ਦਬਾਏ ਜਾਣ ਤੋਂ ਬਾਅਦ ਹੇਠਲੀ ਸ਼ੀਟ ਨੂੰ ਲੁਕਾਓ</string>
     <string name="import_dumped_preference">ਡੰਪ ਕੀਤੀਆਂ ਤਰਜੀਹਾਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="domain_selection_confirmation_subtitle">ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ \'ਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਡੋਮੇਨਾਂ ਲਈ %s ਨੂੰ ਤਰਜੀਹੀ ਐਪਲੀਕੇਸ਼ਨ ਵਜੋਂ ਸੈੱਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
-    <string name="onboarding7_headline">ਉਤਸ਼ਾਹ ਨਾਲ ਭਰੇ ਹੋਏ?
-\nਲਿੰਕਸ਼ੀਟ ਤੁਹਾਡੇ ਕੋਲ ਹੈ</string>
-    <string name="enable_send_button">\"ਸਾਂਝਾ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="default_apps_subtitle">ਤਰਜੀਹੀ ਐਪਸ ਉਹ ਐਪਸ ਹਨ ਜੋ ਤੁਸੀਂ ਕੁਝ ਖਾਸ ਹੋਸਟਾਂ ਨੂੰ \"ਹਮੇਸ਼ਾਂ\" ਖੋਲ੍ਹਣ ਲਈ ਸੈੱਟ ਕਰਦੇ ਹੋ</string>
     <string name="amp2html_local_cache">ਸਥਾਨਕ Amp2Html ਕੈਸ਼ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="open_copied_link">ਕਾਪੀ ਕੀਤਾ ਲਿੰਕ ਖੋਲ੍ਹੋ</string>
@@ -16,10 +13,7 @@
     <string name="close">ਬੰਦ ਕਰੋ</string>
     <string name="use_clear_urls">ClearURLs ਵਰਤੋ</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet ਨੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ ਜੋ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ।</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">ਵਰਤਮਾਨ ਵਿੱਚ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਬਹੁਤ ਸਾਰੇ ਬਟਨਾਂ ਨੂੰ ਇਨੇਬਲ ਕਰਨ ਨਾਲ ਕੱਟੇ ਹੋਏ/ਗਲਿੱਚ ਕਰਦੇ ਬਟਨ ਵਿਖ ਸਕਦੇ ਹਨ।</string>
     <string name="opening_with_app">%s ਨਾਲ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ</string>
-    <string name="enable_shizuku_explainer">ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰਨ ਲਈ Shizuku ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦੇਵੇਗੀ। ਇਸਦੀ ਵਰਤੋਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ, ਉਦਾਹਰਨ ਲਈ, ਸਾਰੇ ਲਿੰਕਹੈਂਡਲਰਾਂ ਨੂੰ ਆਪਣੇ ਆਪ ਅਯੋਗ ਕਰਨ ਲਈ। ਇੱਕ ਨਵਾਂ ਵਿਕਲਪ ਮੁੱਖ ਐਪ ਸਕ੍ਰੀਨ \'ਤੇ ਦਿਖਾਈ ਦੇਵੇਗਾ।</string>
-    <string name="browser_explainer">ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਅਤੇ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਸੈਟਿੰਗਾਂ</string>
     <string name="save">ਸਾਂਭੋ</string>
     <string name="enable_amp2html">Amp2Html ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ)</string>
@@ -31,7 +25,6 @@
     <string name="logs">ਲੌਗਸ</string>
     <string name="no_apps_which_can_handle_links_found">ਕੋਈ ਐਪਸ ਨਹੀਂ ਮਿਲੀਆਂ ਜੋ ਲਿੰਕਾਂ ਨੂੰ ਸੰਭਾਲ ਸਕਦੀਆਂ ਹਨ।</string>
     <string name="bottom_sheet">ਹੇਠਲੀ ਸ਼ੀਟ</string>
-    <string name="known_trackers">ਜਾਣੇ-ਪਛਾਣੇ ਟਰੈਕਰ</string>
     <string name="display_grid_layout">ਗਰਿੱਡ ਲੇਆਊਟ</string>
     <string name="usage_stats_sorting">ਐਪਸ ਨੂੰ ਵਰਤੋਂ ਮੁਤਾਬਿਕ ਕ੍ਰਮਬੱਧ ਕਰੋ</string>
     <string name="log_viewer">ਲੌਗ ਵਿਊਅਰ</string>
@@ -45,19 +38,14 @@
     <string name="domain_selection_confirmation_title">ਡੋਮੇਨ ਚੁਣੋ?</string>
     <string name="log_files">ਪਿਛਲੀਆਂ ਲੌਗ ਫਾਈਲਾਂ</string>
     <string name="open_link_with_subtitle_2">ਲਿੰਕਸ਼ੀਟ ਸ਼ੁਰੂ ਵਿੱਚ OpenLinkWith \'ਤੇ ਅਧਾਰਤ ਸੀ</string>
-    <string name="use_text_share_copy_buttons">\"ਕਾਪੀ URL\", \"ਇਸ ਨਾਲ ਸਾਂਝਾ ਕਰੋ\", \"ਡਾਊਨਲੋਡ ਕਰੋ\" ਅਤੇ \"LibRedirect ਨੂੰ ਅਣਡਿੱਠ ਕਰੋ\" ਲਈ ਸਧਾਰਨ ਟੈਕਸਟ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="enable_shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ (ਪ੍ਰਯੋਗਾਤਮਕ) ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
     <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="selected_browser_explainer">ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਕਲਿੱਕ ਕੀਤੇ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਸੰਭਾਲ ਸਕਦਾ</string>
-    <string name="title_activity_cross_profile_request_handler">ਕਰੌਸ ਪ੍ਰੋਫਾਈਲ ਰਿਕਵੈਸਟ ਹੈਂਡਲਰ ਐਕਟੀਵਿਟੀ</string>
     <string name="misc_settings">ਫੁਟਕਲ</string>
-    <string name="enable_send_button_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ ਜੋ ਤੁਹਾਨੂੰ URL ਨੂੰ ਹੋਰ ਐਪਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ ਜਿਵੇਂ ਕਿ ਤੁਸੀਂ ਇਸਨੂੰ \"ਨਾਲ ਸਾਂਝਾ ਕਰੋ\" ਮੀਨੂ ਤੋਂ ਚੁਣਿਆ ਹੈ</string>
     <string name="log_privacy">ਲੌਗ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ਲਿੰਕ</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
-    <string name="get_started">ਸ਼ੁਰੂਆਤ ਕਰੋ</string>
     <string name="send_to">ਨਾਲ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="enable_ignore_libredirect_button">\"LibRedirect ਨੂੰ ਅਣਡਿੱਠ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="pretend_to_be_app_explainer_2">ਗੂਗਲ ਕਰੋਮ ਵਰਗੀਆਂ ਕੁਝ ਐਪਾਂ ਸਪਸ਼ਟ ਤੌਰ \'ਤੇ ਹੈਂਡਲ ਕਰਨ ਲਈ ਇੱਕ ਮੂਲ ਐਪ ਦੀ ਖੋਜ ਕਰਦੀਆਂ ਹਨ, ਉਦਾਹਰਨ ਲਈ, ਇੱਕ ਯੂਟਿਊਬ ਲਿੰਕ ਜਦੋਂ ਖੋਜ ਨਤੀਜਿਆਂ ਵਿੱਚ ਟੈਪ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। LinkSheetCompat ਸਮਰਥਿਤ ਮੇਜ਼ਬਾਨਾਂ ਲਈ ਅਜਿਹੀ ਇੱਕ ਮੂਲ ਐਪ ਹੋਣ ਦਾ ਦਿਖਾਵਾ ਕਰਦਾ ਹੈ ਅਤੇ ਫਿਰ ਬੇਨਤੀ ਨੂੰ ਅੱਗੇ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਭੇਜਦਾ ਹੈ।</string>
@@ -70,39 +58,25 @@
     <string name="no_apps_found">ਕੋਈ ਐਪ ਨਹੀਂ ਲੱਭੀ।</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">ਲਿੰਕਸ਼ੀਟ ਇਸ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦੀ।</string>
-    <string name="next">ਅਗਲਾ</string>
-    <string name="onboarding0_highlight">ਚੋਣ ਦੀ ਆਜ਼ਾਦੀ</string>
     <string name="redirect_resolve_type_local_cache">ਸਥਾਨਕ ਕੈਸ਼</string>
     <string name="use_unified_preferred_browser_explainer">ਇਸਨੂੰ ਇਨੇਬਲ ਕਰਨਾ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਦੋਵਾਂ \'ਤੇ ਲਾਗੂ ਕਰਦਾ ਹੈ। ਡਿਸੇਬਲ ਹੋਣ \'ਤੇ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਮੋਡ ਵਿਚਕਾਰ ਸਵਿਚ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।</string>
     <string name="advanced_explainer">ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਜਿਵੇਂ ਪ੍ਰਯੋਗਾਤਮਕ ਅਤੇ ਨਿਰਯਾਤ/ਆਯਾਤ</string>
-    <string name="background_image">ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ</string>
     <string name="amp2html_local_cache_explainer">ਵੈੱਬਪੰਨਿਆਂ ਦੇ ਮੁੜ ਪ੍ਰਾਪਤ ਕੀਤੇ ਗੈਰ-AMP ਸੰਸਕਰਣਾਂ ਨੂੰ ਸਥਾਨਕ ਤੌਰ \'ਤੇ ਕੈਸ਼ ਕਰੋ</string>
     <string name="no">ਨਹੀਂ</string>
-    <string name="info">ਜਾਣਕਾਰੀ</string>
     <string name="normal">ਸਧਾਰਣ</string>
     <string name="clear">ਸਾਫ ਕਰੋ</string>
     <string name="import_and_override">ਇੰਪੋਰਟ ਕਰੋ ਅਤੇ ਓਵਰਰਾਈਡ ਕਰੋ</string>
     <string name="apps_which_can_open_links_explainer">\"ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਖੋਲ੍ਹੋ\" ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਕ ਐਪ \'ਤੇ ਟੈਪ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਹਾਨੂੰ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਮਿਲਦੀ ਹੈ</string>
     <string name="enabled">ਇਨੇਬਲ ਕੀਤੇ</string>
-    <string name="redirect_resolve_type_not_resolved">ਕੋਈ ਨਹੀਂ</string>
-    <string name="onboarding4_paragraph_2">ਇਹ ਬਹੁਤ ਤੰਗ ਕਰਨ ਵਾਲਾ ਹੈ, ਜਿਵੇਂ ਕਿ ਕਈ ਵਾਰ, ਤੁਸੀਂ ਇਸਦੇ ਐਪ ਵਿੱਚ ਇੱਕ ਲਿੰਕ ਨਹੀਂ ਖੋਲ੍ਹਣਾ ਚਾਹੁੰਦੇ ਹੋ, ਸਗੋਂ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ (ਉਦਾਹਰਨ ਲਈ, ਇਸਨੂੰ ਬੁੱਕਮਾਰਕ ਕਰਨ ਲਈ)।
-\n
-\nਆਹ, ਕਲਾਸਿਕ ਗੂਗਲ, ਪੁਰਾਣੇ ਵਿਵਹਾਰ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦੇ ਇੱਕ ਸਧਾਰਨ ਤਰੀਕੇ ਦੇ ਬਿਨਾਂ ਆਪਣੇ ਖੁਦ ਦੇ ਉਤਪਾਦਾਂ ਨੂੰ ਅਪਾਹਜ ਕਰ ਰਿਹਾ ਹੈ
-\n
-\nਵੈਸੇ ਵੀ, ਉਹਨਾਂ ਨੇ ਇੱਕ ਛੋਟੀ ਜਿਹੀ \"ਲੂਪਹੋਲ\" ਛੱਡ ਦਿੱਤੀ ਹੈ: ਲਿੰਕ-ਹੈਂਡਲਿੰਗ ਨੂੰ ਪ੍ਰਤੀ-ਐਪ ਦੇ ਆਧਾਰ \'ਤੇ ਡਿਸੇਬਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਇਹ ਮੰਨ ਸਕਦੇ ਹੋ ਕਿ ਇਹ ਪੁਰਾਣੇ ਐਪ ਚੋਣਕਾਰ ਨੂੰ ਵਾਪਸ ਲਿਆਏਗਾ, ਪਰ ਬੇਸ਼ੱਕ (ਧੰਨਵਾਦ ਗੂਗਲ!), ਅਜਿਹਾ ਨਹੀਂ ਹੈ, ਜਿਵੇਂ ਕਿ ਹੁਣ, ਲਿੰਕ ਹਮੇਸ਼ਾ ਤੁਹਾਡੇ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਖੁੱਲ੍ਹੇਗਾ। ਇਸੇ ਲਈ ਲਿੰਕਸ਼ੀਟ ਬਣਾਈ ਗਈ।</string>
-    <string name="log_viewer_timestamp">%s ਤੋਂ ਲੌਗ ਵੇਖਿਆ ਜਾ ਰਿਹਾ</string>
     <string name="success">ਸਫਲਤਾ</string>
-    <string name="onboarding0_headline">ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਵਾਪਿਸ ਲੈਣ ਦਾ ਸਮਾਂ</string>
     <string name="request_timeout_explainer">ਇਹ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦਾ ਹੈ ਕਿ ਲਿੰਕਸ਼ੀਟ ਕਿੰਨੇ ਸਕਿੰਟਾਂ ਲਈ ਇੱਕ ਕਨੈਕਸ਼ਨ ਸਥਾਪਤ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੇਗੀ। ਇਸਨੂੰ 0 \'ਤੇ ਸੈੱਟ ਕਰਨ ਨਾਲ ਟਾਈਮਆਊਟ ਡਿਸੇਬਲ ਹੋ ਜਾਂਦਾ ਹੈ, ਪਰ ਇਸਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ।</string>
     <string name="github">ਗਿਟਹੱਬ</string>
     <string name="configure">ਕੌਨਫਿਗਰ ਕਰੋ</string>
     <string name="show_linksheet_referrer">ਲਿੰਕਸ਼ੀਟ ਰੈਫਰਰ ਦਿਖਾਓ</string>
     <string name="url_copied">URL ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
-    <string name="title_activity_onboarding">ਆਨਬੋਰਡਿੰਗ ਐਕਟੀਵਿਟੀ</string>
     <string name="copy_url">URL ਕਾਪੀ ਕਰੋ</string>
     <string name="resolve_failed">%s ਅਸਫਲ: %s</string>
     <string name="none">ਕੋਈ ਵੀ ਨਹੀਂ</string>
-    <string name="onboarding7_highlight">ਕਵਰ ਕੀਤਾ</string>
     <string name="export">ਐਕਸਪੋਰਟ ਕਰੋ</string>
     <string name="hide_after_copying">ਕਾਪੀ ਕਰਨ ਤੋਂ ਬਾਅਦ ਓਹਲੇ ਕਰੋ</string>
     <string name="follow_redirects">ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ</string>
@@ -111,27 +85,18 @@
     <string name="use_a_different_app">ਕੋਈ ਵੱਖਰੀ ਐਪ ਵਰਤੋ</string>
     <string name="no_browsers_found">ਕੋਈ ਬ੍ਰਾਊਜ਼ਰ ਨਹੀਂ ਮਿਲਿਆ।</string>
     <string name="whitelisted_browsers">ਵ੍ਹਾਈਟਲਿਸਟ ਕੀਤੇ ਬ੍ਰਾਊਜ਼ਰ</string>
-    <string name="amoled_black">ਅਮੋਲੇਡ ਕਾਲ੍ਹਾ</string>
     <string name="export_log">ਲੌਗ ਐਕਸਪੋਰਟ ਕਰੋ</string>
     <string name="bottom_sheet_explainer">ਵਰਤੋਂ ਅਨੁਸਾਰ ਕ੍ਰਮਬੱਧ ਕਰੋ, ਕਾਪੀ ਬਟਨ ਇਨੇਬਲ ਕਰੋ, ਸ਼ੇਅਰ ਬਟਨ ਇਨੇਬਲ ਕਰੋ ਆਦਿ।</string>
-    <string name="onboarding6_highlight">ਤਰਜੀਹਾਂ</string>
-    <string name="shizuku_explainer">Shizuku ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰਨ ਦਿੰਦਾ ਹੈ</string>
-    <string name="onboarding6_headline">ਆਪਣੀਆਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="yes">ਠੀਕ ਹੈ</string>
-    <string name="order_of_operation">ਕਾਰਵਾਈ ਦਾ ਕ੍ਰਮ</string>
     <string name="light">ਸਫ਼ੈਦ</string>
     <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
-    <string name="finish">ਸਮਾਪਤ</string>
     <string name="donate_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ<b>LinkSheet Pro</b>ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
     <string name="back">ਪਿੱਛੇ</string>
-    <string name="clear_urls">ClearURLs</string>
     <string name="linksheet_download">ਲਿੰਕਸ਼ੀਟ ਡਾਊਨਲੋਡ</string>
-    <string name="delete">ਮਿਟਾਓ</string>
-    <string name="fastforward">FastForward</string>
     <string name="follow_redirects_external_service_explainer">ਸੁਪਰਬੇਸਡਾਟਕਾਮ (<annotation url="https://supabase.com/privacy"> \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>)</string>
     <string name="include_fingerprint">ਡਿਵਾਈਸ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸ਼ਾਮਲ ਕਰੋ (ਸਿਫਾਰਸ਼ੀ)</string>
     <string name="default_apps">ਤਰਜੀਹੀ ਐਪਸ</string>
@@ -143,34 +108,20 @@
     <string name="usage_stats_sorting_explainer">ਕ੍ਰਮਬੱਧ ਕਰਨ ਵਾਲੇ ਐਲਗੋਰਿਦਮ ਵਿੱਚ ਐਂਡਰਾਇਡ ਸਿਸਟਮ ਵਰਤੋਂ ਦੇ ਅੰਕੜੇ ਸ਼ਾਮਿਲ ਕਰੋ। ਪਹਿਲੀ ਟੌਗਲ \'ਤੇ ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
     <string name="amp2html_external_service_explainer">supabase.com (<annotation url="https://supabase.com/privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="github_explainer">ਸਰੋਤ ਕੋਡ ਰਿਪੌਜ਼ਟਰੀ</string>
-    <string name="launch_onboaring">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
+    <string name="launch_onboarding">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
     <string name="shizuku_integration">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="debug">ਡੀਬੱਗ</string>
-    <string name="onboarding1_headline">ਸਵਾਗਤ ਹੈ</string>
-    <string name="enable_copy_button_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"URL ਕਾਪੀ ਕਰੋ\" ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ</string>
     <string name="downloader_url_mime_type_explainer">ਜਾਂਚ ਕਰਦਾ ਹੈ ਕਿ ਕੀ URL ਇੱਕ ਫਾਈਲ ਐਕਸਟੈਂਸ਼ਨ ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ (ਉਦਾਹਰਨ ਲਈ \".jpg\"); ਜੇਕਰ ਅਜਿਹਾ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਇਸ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
-    <string name="onboarding4_headline">ਲਿੰਕਸ਼ੀਟ ਬਣਾਉਣ ਲਈ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਨੂੰ ਟੌਗਲ ਕਰੋ</string>
-    <string name="open_settings">ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ</string>
     <string name="credits_explainer">ਓਪਨ ਸੋਰਸ ਲਾਈਸੈਂਸਿੰਗ</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">ਸਾਰੇ ਹਟਾਓ</string>
-    <string name="button_settings">ਬਟਨ</string>
-    <string name="single_tap_explainer">ਐਪਾਂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਦੋ ਦੀ ਬਜਾਏ ਸਿਰਫ਼ ਇੱਕ ਟੈਪ ਦੀ ਲੋੜ ਹੈ; ਐਪ ਨੂੰ ਚੁਣਨ ਲਈ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਦਬਾਓ, ਐਪ ਜਾਣਕਾਰੀ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਡਬਲ ਕਲਿੱਕ ਕਰੋ</string>
-    <string name="onboarding3_headline">ਸ਼ਾਨਦਾਰ ਬਣੋ
-\nਨਿਯੰਤਰਣ ਪਾਓ</string>
-    <string name="browser">ਬ੍ਰਾਊਜ਼ਰ</string>
-    <string name="license_gpl_3">GNU ਜਨਰਲ ਪਬਲਿਕ ਲਾਈਸੈਂਸ v3.0</string>
     <string name="use_unified_preferred_browser">ਯੂਨੀਫਾਈਡ ਸੈਟਿੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="instance">ਇੰਸਟੈਂਸ</string>
     <string name="always_ask_explainer">ਹਮੇਸ਼ਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੀ ਸੂਚੀ ਪੇਸ਼ ਕਰੋ</string>
-    <string name="donate_card_subtitle_2">ਕ੍ਰਿਪਟੋ ਦਾਨ ਕਰੋ</string>
     <string name="enable_downloader">ਡਾਉਨਲੋਡਰ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="amp2html_builtin_cache">ਬਿਲਟ-ਇਨ Amp2Html ਕੈਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="paste">ਪੇਸਟ ਕਰੋ</string>
     <string name="download">ਡਾਊਨਲੋਡ</string>
-    <string name="linksheet_version_info_header">ਲਿੰਕਸ਼ੀਟ ਸੰਸਕਰਣ ਜਾਣਕਾਰੀ:</string>
     <string name="links_explainer">ਲਿੰਕ ਹੇਰਾਫੇਰੀ ਸੰਬੰਧੀ ਸੈਟਿੰਗਾਂ</string>
-    <string name="no_app_to_handle_link_found">ਲਿੰਕ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਕੋਈ ਐਪ ਨਹੀਂ ਮਿਲੀ!</string>
     <string name="amp2html_external_service">ਬਾਹਰੀ ਸੇਵਾ ਰਾਹੀਂ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="open_with">ਦੇ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="no_handlers_found">ਕੋਈ ਬ੍ਰਾਊਜ਼ਰ ਜਾਂ ਮੂਲ ਐਪ ਨਹੀਂ ਮਿਲਿਆ!</string>
@@ -183,28 +134,17 @@
     <string name="options">ਵਿਕਲਪ</string>
     <string name="services">ਸੇਵਾਵਾਂ</string>
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
-    <string name="disable_all_toasts">ਟੋਸਟਸ ਨੂੰ ਅਸਮਰੱਥ ਕਰੋ</string>
-    <string name="export_mode">ਐਕਸਪੋਰਟ ਮੋਡ</string>
-    <string name="app_log">ਐਪ ਲੌਗ</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="seal_subtitle_2">Jetpack ਕੰਪੋਜ਼ ਬਾਰੇ ਸਿੱਖਣ ਲਈ Seal ਇੱਕ ਵਧੀਆ ਸਰੋਤ ਰਿਹਾ ਹੈ</string>
     <string name="shizuku_not_running_explainer">Shizuku ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ। Shizuku ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ, ਫਿਰ ਇਸਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।</string>
     <string name="browser_status">ਬ੍ਰਾਊਜ਼ਰ ਸਥਿਤੀ</string>
     <string name="no_such_app_found">ਅਜਿਹਾ ਕੋਈ ਐਪ ਨਹੀਂ ਮਿਲਿਆ!</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</string>
-    <string name="onboarding3_highlight">ਸਭ ਕੁਝ</string>
     <string name="request_private_browsing">ਪ੍ਰਾਈਵੇਟ</string>
-    <string name="import_dumped_preference_explainer">ਲੌਗ ਫਾਈਲਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਤਰਜੀਹਾਂ ਲਈ ਇੰਪੋਰਟਰ - ਸ਼ਾਇਦ ਔਸਤ ਉਪਭੋਗਤਾ ਲਈ ਉਪਯੋਗੀ ਨਹੀਂ ਹੈ</string>
-    <string name="title_activity_domain_spoof">ਡੋਮੇਨ ਸਪੂਫ ਐਕਟੀਵਿਟੀ</string>
     <string name="always">ਹਮੇਸ਼ਾਂ</string>
     <string name="open_link_with">ਲਿੰਕ ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="select_an_app">ਇੱਕ ਐਪ ਚੁਣੋ</string>
     <string name="github_workflow_run_id">ਬਿਲਡ ਵਰਕਫਲੋ ਆਈਡੀ:</string>
     <string name="resolved_via">%s ਨੂੰ %s ਰਾਹੀਂ ਰਿਜ਼ੌਲਵ ਕੀਤਾ</string>
     <string name="instance_not_available_anymore">ਇੰਸਟੈਂਸ ਹੁਣ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!</string>
-    <string name="onboarding2_highlight">ਤੁਹਾਡਾ ਆਪਣਾ</string>
-    <string name="onboarding4_highlight">ਕੰਮ</string>
-    <string name="amp2html_builtin_cache_explainer">ਬਿਲਟ-ਇਨ ਕੈਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਜੋ ਕਿ ਬਾਹਰੀ ਸੇਵਾ ਦੇ ਡੇਟਾਬੇਸ ਨਿਰਯਾਤ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ)</string>
     <string name="open_with_linksheet">ਲਿੰਕਸ਼ੀਟ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="in_app_browser">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="links">ਲਿੰਕ</string>
@@ -213,38 +153,30 @@
     <string name="dark">ਗਹਿਰਾ</string>
     <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ)</string>
-    <string name="donation_instructions">ਦਾਨ ਸਬੰਧੀ ਨਿਰਦੇਸ਼</string>
-    <string name="disable_all_toasts_explainer">ਕਦੇ ਵੀ ਕੋਈ ਟੋਸਟ ਸੁਨੇਹੇ ਨਾ ਦਿਖਾਓ</string>
     <string name="set_as_browser">ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="whitelisted">ਵ੍ਹਾਈਟਲਿਸਟਡ</string>
     <string name="log">ਲੌਗ</string>
     <string name="loading_link">ਲਿੰਕ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
     <string name="donate_card_headline">ਲਿੰਕਸ਼ੀਟ ਦਾ ਸਮਰਥਨ ਕਰਨ ਲਈ ਦਾਨ ਕਰੋ</string>
-    <string name="license_mit">MIT ਲਾਈਸੈਂਸ</string>
     <string name="general">ਜਨਰਲ</string>
     <string name="libredirect_via">ਵਾਇਆ %s</string>
     <string name="pretend_to_be_app_explainer">LinkSheetCompat ਨਾਲ ਸਮਰਥਿਤ ਡੋਮੇਨਾਂ ਲਈ ਇੱਕ ਮੂਲ ਐਪ ਹੋਣ ਦਾ ਦਿਖਾਵਾ ਕਰੋ</string>
-    <string name="license_apache_2">ਅਪਾਚੇ ਲਾਈਸੈਂਸ 2.0</string>
     <string name="confirm">ਪੁਸ਼ਟੀ ਕਰੋ</string>
     <string name="disabled">ਡਿਸੇਬਲ ਕੀਤੇ</string>
     <string name="enable_request_private_browsing_button">\"ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਦੀ ਬੇਨਤੀ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="redact_log">ਰੀਡੈਕਟ ਲੌਗ (ਸਿਫਾਰਿਸ਼ ਕੀਤਾ ਗਿਆ, ਇਸ ਨੂੰ ਅਯੋਗ ਕਰਨ ਨਾਲ ਪੈਕੇਜ ਨਾਮ ਅਤੇ ਹੋਸਟ ਨਾਮ ਲੀਕ ਹੋ ਸਕਦੇ ਹਨ)</string>
     <string name="show_linksheet_referrer_explainer">ਜਦੋਂ ਕੋਈ ਐਪ ਲਾਂਚ ਕੀਤੀ ਜਾਂਦੀ ਹੈ, ਤਾਂ ਇਹ ਐਹ ਵੇਖਣ ਲਈ ਜਾਂਚ ਕਰ ਸਕਦੀ ਹੈ ਕਿ ਕਿਹੜੀ ਐਪ ਲਾਂਚ ਕੀਤੀ ਗਈ ਹੈ, ਜਾਂ ਇਸਨੂੰ \"ਰੈਫਰ\" ਕੀਤਾ ਗਿਆ ਹੈ। ਮੂਲ ਰੂਪ ਵਿੱਚ, ਜਦੋਂ ਲਿੰਕਸ਼ੀਟ ਇੱਕ ਐਪ ਲਾਂਚ ਕਰਦੀ ਹੈ, ਇਹ ਆਪਣੇ ਆਪ ਨੂੰ ਛੁਪਾਉਂਦੀ ਹੈ, ਇਹ ਕਹਿੰਦੇ ਹੋਏ ਕਿ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਲਾਂਚ ਕਰਨ ਵਾਲੀ ਐਪ ਉਹੀ ਹੈ ਜਿਸਨੇ ਟੀਚਾ ਲਾਂਚ ਕੀਤਾ ਹੈ। ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਖੋਲ੍ਹਣ ਵਾਲੇ ਐਪਾਂ ਲਈ ਰੈਫਰਰ ਵਜੋਂ ਇਸਨੂੰ ਦੁਬਾਰਾ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਇਸਨੂੰ ਚਾਲੂ ਕਰੋ।</string>
-    <string name="always_show_package_name_disclaimer">ਇਸ ਸਵਿੱਚ ਨੂੰ ਭਵਿੱਖੀ ਰੀਲੀਜ਼ ਵਿੱਚ ਇੱਕ ਵੱਖਰੇ ਸਥਾਨ \'ਤੇ ਲਿਜਾਇਆ ਜਾਵੇਗਾ।</string>
     <string name="search">ਖੋਜ ਕਰੋ</string>
     <string name="at_least_one_unknown_browser_installer">ਘੱਟੋ-ਘੱਟ ਇੱਕ (ਅਣਜਾਣ) ਬ੍ਰਾਊਜ਼ਰ ਸਥਾਪਤ ਕੀਤਾ ਗਿਆ ਹੈ</string>
-    <string name="welcome_to_linksheet_explainer_2">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਚਲਾਉਣ ਲਈ, ਇਸਨੂੰ ਸਿਸਟਮ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਤੌਰ \'ਤੇ ਸੈੱਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ, ਤਾਂ ਜੋ ਇਹ ਲਿੰਕ ਕਲਿੱਕਾਂ ਨੂੰ ਰੋਕ ਸਕੇ। ਚਿੰਤਾ ਨਾ ਕਰੋ, ਲਿੰਕਸ਼ੀਟ ਵਿੱਚ ਬਹੁਤ ਸਾਰੇ ਅਨੁਕੂਲਿਤ ਵਿਕਲਪ ਹਨ, ਇਸ ਲਈ ਇਹ ਸੀਮਤ ਨਹੀਂ ਕਰੇਗਾ, ਸਗੋਂ ਤੁਹਾਡੇ ਅਨੁਭਵ ਨੂੰ ਵਧਾਏਗਾ।</string>
     <string name="always_show_package_name">ਹਮੇਸ਼ਾਂ ਪੈਕੇਜ ਨਾਮ ਵਿਖਾਓ</string>
     <string name="no_libredirect_services">ਕੋਈ LibRedirect ਸੇਵਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ!</string>
     <string name="error">ਤਰੁੱਟੀ</string>
     <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
     <string name="request_timeout">ਰਿਕਵੈਸਟ ਟਾਈਮਆਊਟ</string>
     <string name="apps_which_can_open_links_explainer_2">ਉਹਨਾਂ ਸਾਰੀਆਂ ਐਪਾਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰਦਾ ਹੈ ਜੋ ਲਿੰਕਸ਼ੀਟ ਦੇ ਵਿਹਾਰ ਵਿੱਚ ਦਖਲ ਦੇ ਸਕਦੀਆਂ ਹਨ</string>
-    <string name="onboarding4_paragraph_1">ਐਂਡਰਾਇਡ 12 ਵਿੱਚ, ਗੂਗਲ ਨੇ ਵੈਰੀਫਾਈਡ ਐਪ ਲਿੰਕਸ ਪੇਸ਼ ਕੀਤੇ। ਐਪਸ ਹੁਣ ਡੋਮੇਨਾਂ ਦੀ ਮਲਕੀਅਤ ਦੀ ਕ੍ਰਿਪਟੋਗ੍ਰਾਫੀ ਤੌਰ \'ਤੇ ਪੁਸ਼ਟੀ ਕਰ ਸਕਦੇ ਹਨ। ਜਦੋਂ ਅਜਿਹੇ ਡੋਮੇਨ ਲਈ ਇੱਕ ਲਿੰਕ ਟੈਪ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਅਤੇ ਸੰਬੰਧਿਤ ਐਪ ਨੂੰ ਸਥਾਪਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਇਹ ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ, ਜੋ ਕਿ ਪਹਿਲਾਂ ਉਪਭੋਗਤਾ ਨੂੰ ਪੂਰਨ ਤੌਰ ਤੇ ਦਿੱਤਾ ਗਿਆ ਸੀ, ਉਸ ਵਿਕਲਪ ਨੂੰ ਛੱਡ ਦਿੱਤਾ ਗਿਆ।</string>
     <string name="set_as_browser_explainer">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਬਣਾਉਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="current_session">ਮੌਜੂਦਾ ਸੈਸ਼ਨ</string>
     <string name="compat_installed">LinkSheetCompat ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹੈ</string>
-    <string name="launch_onboaring_explainer">ਔਨਬੋਰਡਿੰਗ ਪ੍ਰਵਾਹ ਟੈਸਟ ਕਰੋ</string>
     <string name="always_disable_explainer">ਐਪ-ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਹਮੇਸ਼ਾਂ ਡਿਸੇਬਲ ਰੱਖੋ, ਚਾਹੇ ਐਪ ਜੋ ਵੀ ਵਰਤਣਾ ਚਾਹੁੰਦਾ ਹੈ</string>
     <string name="enable_ignore_libredirect_button_explainer">ਜੇਕਰ URL ਨੂੰ LibRedirect ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟ ਕੀਤਾ ਗਿਆ ਹੈ, ਤਾਂ ਹੇਠਲੇ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ, ਜੋ ਇਸਦੀ ਬਜਾਏ ਅਸਲੀ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ</string>
     <string name="mastodon_redirect_subtitle_2">ਮੈਸਟਾਡੋਨ ਰੀਡਾਇਰੈਕਟ ਦੇ ਸਰੋਤ ਕੋਡ ਨੂੰ ਸ਼ਿਜ਼ੂਕੁ ਇੰਟਰੈਕਸ਼ਨ ਲਈ ਇੱਕ ਸੰਦਰਭ ਵਜੋਂ ਵਰਤਿਆ ਗਿਆ ਸੀ</string>
@@ -252,31 +184,22 @@
     <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="none_explainer">ਸਿਰਫ਼ ਮੂਲ ਐਪਾਂ ਦੀ ਸੂਚੀ ਬਣਾਓ, ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਹਟਾਓ। ਜੇਕਰ ਸਿਰਫ਼ ਇੱਕ ਹੀ ਮੂਲ ਐਪ ਮੌਜੂਦ ਹੈ, ਤਾਂ ਇਹ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ। ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਸੂਚੀਬੱਧ ਹਨ।</string>
     <string name="donate_crypto">ਕ੍ਰਿਪਟੋ ਦੁਆਰਾ ਦਾਨ ਕਰੋ</string>
-    <string name="seal">ਸੀਲ</string>
-    <string name="use_text_share_copy_buttons_explainer">ਸਧਾਰਨ ਟੈਕਸਟ ਬਟਨਾਂ ਨਾਲ \"ਕਾਪੀ URL\", \"ਇਸ ਨਾਲ ਸਾਂਝਾ ਕਰੋ\", \"ਡਾਊਨਲੋਡ ਕਰੋ\" ਅਤੇ \" LibRedirect ਅਣਡਿੱਠ ਕਰੋ\" ਬਟਨਾਂ ਨੂੰ ਬਦਲਦਾ ਹੈ</string>
     <string name="disable_in_selected">ਚੁਣੇ ਹੋਏ ਵਿੱਚ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="debug_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="follow_redirects_external_service">ਬਾਹਰੀ ਸੇਵਾ ਦੁਆਰਾ ਰੀਡਾਇਰੈਕਟਸ ਦਾ ਪਾਲਣ ਕਰੋ</string>
     <string name="general_settings_explainer">ਪੂਰੀ ਐਪ ਨਾਲ ਸੰਬੰਧਿਤ ਸੈਟਿੰਗਾਂ</string>
     <string name="settings">ਸੈਟਿੰਗਾਂ</string>
-    <string name="title_activity_main">ਮੁੱਖ ਐਕਟੀਵਿਟੀ</string>
     <string name="in_app">ਇਨ-ਐਪ</string>
     <string name="browser_mode_subtitle">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
-    <string name="crash_log">ਕਰੈਸ਼ ਲੌਗ</string>
-    <string name="single_tap">ਸਿੰਗਲ ਟੈਪ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="set_as_default_browser">ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="follow_only_known_trackers">ਸਿਰਫ਼ ਜਾਣੇ-ਪਛਾਣੇ ਟਰੈਕਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ</string>
     <string name="enable_libredirect">LibRedirect ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="app_crashed">ਲੱਗਦਾ ਹੈ ਕਿ ਲਿੰਕਸ਼ੀਟ ਕ੍ਰੈਸ਼ ਹੋ ਗਈ ਹੈ, ਹੋਈ ਤਰੁੱਟੀ ਨੂੰ ਹੇਠਾਂ ਵੇਖੋ</string>
     <string name="no_browser_installed_explainer">ਲਿੰਕਸ਼ੀਟ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਪਤਾ ਲਗਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ ਰਹੀ। ਸਭ ਤੋਂ ਵਧੀਆ ਅਨੁਭਵ ਲਈ, ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕਰੋ।</string>
     <string name="no_logs_found">ਕੋਈ ਪਿਛਲੇ ਲੌਗ ਨਹੀਂ ਮਿਲੇ!</string>
-    <string name="disable_link_handling">ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਨੂੰ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="downloader_url_mime_type">URL ਤੋਂ ਮਾਈਮ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="enable_libredirect_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਗੋਪਨੀਯਤਾ ਅਨੁਕੂਲ ਫਰੰਟਐਂਡਸ ਲਈ ਲਿੰਕ ਰੀਡਾਇਰੈਕਟ ਕਰੋ</string>
     <string name="app_name">ਲਿੰਕਸ਼ੀਟ</string>
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
-    <string name="welcome_to_linksheet_explainer">ਲਿੰਕਸ਼ੀਟ \"ਯੂਆਰਐਲ-ਐਪ-ਚੋਣਕਾਰ\" ਨੂੰ \"ਰੀਸਟੋਰ\" ਕਰਦੀ ਹੈ ਜੋ ਉਦੋਂ ਪ੍ਰਗਟ ਹੁੰਦੀ ਹੈ ਜਦੋਂ ਉਪਭੋਗਤਾ ਨੇ ਐਂਡਰੌਇਡ &lt;12 \'ਤੇ ਇੱਕ ਲਿੰਕ ਨੂੰ ਟੈਪ ਕੀਤਾ ਸੀ ਅਤੇ ਉਸ ਵਿੱਚ ਕਈ ਐਪਸ ਸਥਾਪਤ ਸਨ ਜੋ ਲਿੰਕ ਨੂੰ ਸੰਭਾਲ ਸਕਦੀਆਂ ਸਨ</string>
     <string name="system">ਸਿਸਟਮ</string>
     <string name="no_log_entries">ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਕੋਈ ਲੌਗ ਨਹੀਂ ਹਨ।</string>
     <string name="add">ਜੋੜ੍ਹੋ</string>
@@ -286,16 +209,12 @@
     <string name="pretend_to_be_app">ਨੇਟਿਵ ਐਪ ਬੇਨਤੀਆਂ ਨੂੰ ਇੰਟਰਸੈਪਟ ਕਰੋ</string>
     <string name="shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="dont_show_filtered_item_explainer">ਕਦੇ ਵੀ ਟੌਪ ਸੈਕਸ਼ਨ ਨੂੰ ਨਹੀਂ ਵਿਖਾਏਗਾ ਜੋ ਕਲਿੱਕ ਕੀਤੇ ਹੋਸਟ ਲਈ ਆਖਰੀ ਵਰਤੇ ਐਪ ਦਾ ਸੁਝਾਅ ਦਿੰਦਾ ਹੈ</string>
-    <string name="enable_copy_button">ਕਾਪੀ ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="version_name">ਪੂਰਾ ਪਛਾਣਕਰਤਾ:</string>
     <string name="configure_explainer">LinkSheetCompat ਨੂੰ ਕੌਨਫਿਗਰ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="feature_flags">ਫੀਚਰ ਫਲੈਗ</string>
-    <string name="onboarding2_headline">ਬਹੁਤ ਸਾਰੀਆਂ ਸੈਟਿੰਗਾਂ
-\nਲਿੰਕਸ਼ੀਟ ਬਣਾਉਣ ਲਈ</string>
     <string name="mastodon_redirect">ਮਾਸਟੋਡੋਨ ਰੀਡਾਇਰੈਕਟ</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku ਮੋਡ ਨੂੰ ਸਰਗਰਮ ਕੀਤਾ ਗਿਆ ਹੈ, ਇੱਕ ਐਪ ਨੂੰ ਇਸਦੇ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਸਮਰੱਥਾਵਾਂ ਨੂੰ ਟੌਗਲ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ। ਇੱਕ ਐਪ ਦੇ \"ਡਿਫ਼ਾਲਟ ਰੂਪ ਵਿੱਚ ਖੋਲ੍ਹੋ\" ਸੈਟਿੰਗ ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਟੈਪ ਕਰੋ।</string>
     <string name="credits">ਕ੍ਰੈਡਿਟਸ</string>
-    <string name="done">ਮੁਕੰਮਲ</string>
     <string name="thanks_for_donating">ਆਰਥਿਕ ਮੱਦਦ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!</string>
     <string name="dismiss">ਖ਼ਾਰਿਜ ਕਰੋ</string>
     <string name="donate_explainer_crypto">ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਸਮੇਂ, <b>LinkSheet Pro</b> ਦਾ ਦਾਅਵਾ ਕਰਨ ਲਈ, ਭੁਗਤਾਨ ਦਾ ਸਬੂਤ <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> \'ਤੇ ਭੇਜੋ</string>
@@ -305,28 +224,14 @@
     <string name="donate_card">ਕਾਰਡ ਨਾਲ ਦਾਨ ਕਰੋ (BuyMeACoffee ਰਾਹੀਂ)</string>
     <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ। \u0020
 \n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ।</string>
-    <plurals name="hours">
-        <item quantity="one">%s ਘੰਟਾ</item>
-        <item quantity="other">%s ਘੰਟੇ</item>
-    </plurals>
     <string name="manual_build">1fexd ਦੁਆਰਾ ਮੈਨੁਅਲ ਰੂਪ \'ਚ ਨਿਰਮਤ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
     <string name="donate_learn_more">ਜਿਆਦਾ ਜਾਣੋ</string>
     <string name="flavor">ਵੰਨਗੀ:</string>
     <string name="github_pipeline_build">ਗਿਟਹੱਬ ਵਰਕਫਲੋ ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
     <string name="other">ਹੋਰ</string>
     <string name="app_setup">ਐਪ ਸੈੱਟਅੱਪ</string>
-    <plurals name="minutes">
-        <item quantity="one">%s ਮਿੰਟ</item>
-        <item quantity="other">%s ਮਿੰਟ</item>
-    </plurals>
-    <string name="built_by">ਦੁਆਰਾ ਬਣਾਇਆ ਅਤੇ ਸਾਈਨ ਕੀਤਾ</string>
     <string name="donate">ਦਾਨ ਕਰੋ</string>
     <string name="built_by_error">ਇਹ ਬਿਲਡ \'ਤੇ ਨਾ ਤਾਂ 1fexd ਅਤੇ ਨਾ ਹੀ Github ਵਰਕਫਲੋ ਦੁਆਰਾ ਹਸਤਾਖਰ ਕੀਤੇ ਗਏ ਸਨ। ਇਹ ਜ਼ਰੂਰੀ ਤੌਰ \'ਤੇ ਕੁਝ ਵੀ ਮਾੜਾ ਨਹੀਂ ਹੈ ਕਿਉਂਕਿ ਕੋਈ ਵੀ ਸਰੋਤ ਕੋਡ ਨੂੰ ਫੋਰਕ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ ਆਪਣਾ ਲਿੰਕਸ਼ੀਟ ਸੰਸਕਰਣ ਬਣਾ ਸਕਦਾ ਹੈ, ਪਰ ਉਹਨਾਂ ਦੁਆਰਾ ਗਲਤ ਇਰਾਦੇ ਨਾਲ ਅਜਿਹਾ ਕਰਨਾ ਸੰਭਵ ਹੋ ਸਕਦਾ ਹੈ।</string>
-    <plurals name="months">
-        <item quantity="one">%s ਮਹੀਨਾ</item>
-        <item quantity="other">%s ਮਹੀਨੇ</item>
-    </plurals>
-    <string name="pro_feature">ਇਹ ਲਿੰਕਸ਼ੀਟ ਪਰੋ ਫ਼ੀਚਰ ਹੈ!</string>
     <string name="linksheet_donation_explainer_2"><b>5€</b> ਤੋਂ ਵੱਧ ਦਾ ਦਾਨ (<b>4€</b> ਜੇਕਰ ਤੁਸੀਂ ਕ੍ਰਿਪਟੋ ਨਾਲ ਦਾਨ ਕਰਦੇ ਹੋ!) ਤੁਹਾਨੂੰ <b>LinkSheet Pro</b> ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਜੋ ਵਰਤਮਾਨ ਵਿੱਚ ਸਿਰਫ਼ ਲੁਕਾਉਂਦਾ ਹੈ ਐਪ ਦੀ ਮੁੱਖ ਸਕ੍ਰੀਨ \'ਤੇ ਦਾਨ ਬੈਨਰ, ਪਰ ਭਵਿੱਖ ਵਿੱਚ, ਇੱਥੇ <b>ਪ੍ਰੋ ਐਕਸਕਲੂਸਿਵ ਫੀਚਰਸ</b>ਹੋਣਗੇ।</string>
     <string name="export_import_settings">ਐਕਸਪੋਰਟ ਜਾਂ ਇੰਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
     <string name="import_headline">ਇੰਪੋਰਟ ਕਰੋ</string>
@@ -348,39 +253,25 @@
     <string name="url_copied_toast">URL ਨੂੰ ਕਾਪੀ ਕੀਤਾ ਟੋਸਟ</string>
     <string name="dev_mode_enabled">ਵਧਾਈਆਂ, ਤੁਸੀਂ dev-mode ਨੂੰ ਸਮਰੱਥ ਬਣਾਇਆ ਹੈ। ਜਰਾ ਸਾਵਧਾਨੀ ਨਾਲ।</string>
     <string name="clear_urls_version">ClearURLs ਦੇ ਨਿਯਮ</string>
-    <string name="last_rule_update">ਅੱਪਸਟ੍ਰੀਮ (UTC) ਤੋਂ ਆਖਰੀ ਨਿਯਮ ਅੱਪਡੇਟ:</string>
     <string name="import_settings">ਸੈਟਿੰਗਾਂ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="resolve_via_toast">ਜਦੋਂ ਇੱਕ URL ਹੱਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਤਾਂ ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ</string>
     <string name="download_started_toast">ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਹੋਣ ਦਾ ਟੋਸਟ</string>
     <string name="notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
-    <string name="just_version">ਸੰਸਕਰਣ</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
     <string name="resolve_via_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਇੱਕ URL ਨੂੰ ਇੱਕ ਬਾਹਰੀ ਸੇਵਾ ਦੁਆਰਾ ਹੱਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ</string>
     <string name="confirm_import">ਤਸਦੀਕ ਕਰੋ</string>
-    <string name="copy_version_information">ਸੰਸਕਰਣ ਜਾਣਕਾਰੀ ਕਾਪੀ ਕਰੋ</string>
     <string name="dev">ਡਿਵੈਲਪਰ</string>
     <string name="debug_build">ਡੀਬੱਗ ਬਿਲਡ</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">ਪ੍ਰਯੋਗਾਤਮਕ ਲਿੰਕਸ਼ੀਟ ਕੰਪੈਟ ਮੀਨੂ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ</string>
     <string name="enable_linksheet_compat_explainer">ਮੀਨੂ ਉਪ-ਮੀਨੂ \"ਐਪਾਂ\" ਵਿੱਚ ਲੱਭਿਆ ਜਾ ਸਕਦਾ ਹੈ ਅਤੇ ਜਦੋਂ ਸਥਾਪਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਕੁਝ ਮੂਲ ਐਪਾਂ ਲਈ ਬੇਨਤੀਆਂ ਨੂੰ ਇੰਟਰਸੈਪਟ ਕਰਨ ਦੇ ਯੋਗ ਹੁੰਦਾ ਹੈ।</string>
     <string name="opening_with_app_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਇੱਕ ਐਪ ਜੋ ਕਿ ਇੱਕ ਡੋਮੇਨ ਲਈ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ \'ਤੇ ਸੈੱਟ ਕੀਤੀ ਗਈ ਹੈ ਲਾਂਚ ਕੀਤੀ ਜਾਂਦੀ ਹੈ</string>
-    <string name="disclaimer_libredirect_unstable">ਇੱਕ ਪ੍ਰਯੋਗਾਤਮਕ ਵਿਸ਼ੇਸ਼ਤਾ ਹੋਣ ਦੇ ਇਲਾਵਾ, LibRedirect ਨੂੰ ਵਰਤਮਾਨ ਵਿੱਚ ਬਹੁਤ ਅਸਥਿਰ ਮੰਨਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਬਿਲਕੁਲ ਵੀ ਕੰਮ ਨਾ ਕਰੇ।</string>
-    <string name="donation">ਦਾਨ</string>
     <string name="notifications_explainer">ਟੋਸਟ ਨੋਟੀਫਿਕੇਸ਼ਨ ਕੌਨਫਿਗਰ ਕਰੋ</string>
     <string name="running_unofficial_build">ਅਣਅਧਿਕਾਰਤ ਬਿਲਡ</string>
     <string name="import_settings_override_preferences">ਇਹ ਸਾਰੀਆਂ ਮੌਜੂਦਾ ਤਰਜੀਹਾਂ ਨੂੰ ਓਵਰਰਾਈਡ ਕਰ ਦੇਵੇਗਾ। ਜਾਰੀ ਰੱਖਣਾ ਹੈ?</string>
     <string name="fastforward_version">ਫਾਸਟ ਫਾਰਵਰਡ ਨਿਯਮ</string>
     <string name="url_copied_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਉਪਭੋਗਤਾ ਦੁਆਰਾ ਇੱਕ URL ਕਾਪੀ ਕੀਤਾ ਜਾਂਦਾ ਹੈ</string>
-    <string name="enable_new_bottom_sheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="new_bottomsheet_explainer">LinkSheet ਦੇ ਇਸ ਸੰਸਕਰਣ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ ਹੈ, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> ਦਾ ਧੰਨਵਾਦ! ਕਿਰਪਾ ਕਰਕੇ Discord, Github ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਫੀਡਬੈਕ ਪ੍ਰਦਾਨ ਕਰੋ। \u0020
-\n \u0020
-\nਤੁਸੀਂ ਸੈਟਿੰਗਾਂ -&gt; ਰਾਹੀਂ ਪੁਰਾਣੀ ਥੱਲੇ ਵਾਲੀ ਸ਼ੀਟ \'ਤੇ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ। ਉੱਨਤ -&gt; ਫੀਚਰ ਫਲੈਗ।</string>
-    <string name="enable_new_bottom_sheet_explainer">ਪੁਰਾਣੀ ਸ਼ੀਟ ਦੀ ਬਜਾਏ ਸੁਧਾਰੀ ਹੋਈ ਹੇਠਲੀ ਸ਼ੀਟ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="new_bottomsheet">ਨਵੀਂ ਹੇਠਲੀ ਸ਼ੀਟ</string>
     <string name="shizuku_manager_start_failed">Shizuku ਮੈਨੇਜਰ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਅਸਫਲ, ਕਿਰਪਾ ਕਰਕੇ ਇਸਨੂੰ ਹੱਥੀਂ ਸ਼ੁਰੂ ਕਰੋ!</string>
-    <string name="title_activity_main2">ਮੁੱਖ ਗਤੀਵਿਧੀ 2</string>
-    <string name="enable_dev_bottom_sheet">ਡਿਵੈਲਪਰ ਲਈ ਹੇਠਲੀ ਪੱਟੀ ਚਾਲੂ ਕਰੋ</string>
-    <string name="enable_dev_bottom_sheet_explainer">ਨਵੀਨਤਮ ਹੇਠਲੀ ਪੱਟੀ ਸੰਸਕਰਣ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ ਜੋ ਇਸ ਸਮੇਂ ਡਿਵੈਲਪਮੈਂਟ ਵਿੱਚ ਹੈ</string>
     <string name="no_internet_connection">ਕੋਈ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਨਹੀਂ</string>
     <string name="amp2html_short">Amp ਤੋਂ Html</string>
     <string name="follow_redirects_short">ਰੀਡਾਇਰੈਕਟ</string>

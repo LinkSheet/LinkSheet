@@ -63,7 +63,6 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
 
                 MainNavHost(
                     navController = navController,
-                    uiOverhaul = viewModel.uiOverhaul(),
                     navigate = { navController.navigate(it) },
                     onBackPressed = { navController.popBackStack() }
                 )

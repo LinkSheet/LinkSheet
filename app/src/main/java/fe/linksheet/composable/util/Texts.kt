@@ -18,10 +18,7 @@ import fe.linksheet.ui.HkGroteskFontFamily
 import fe.linksheet.ui.Typography
 
 
-@Composable
-fun SettingSpacerText(modifier: Modifier = Modifier, @StringRes contentTitleId: Int) {
-    SettingSpacerText(contentTitle = stringResource(id = contentTitleId))
-}
+
 
 @Composable
 fun SettingSpacerText(modifier: Modifier = Modifier, contentTitle: String) {
@@ -113,11 +110,6 @@ fun SubtitleText(
             color = MaterialTheme.colorScheme.onSurface
         )
     }
-}
-
-@Composable
-fun SubtitleText(modifier: Modifier = Modifier, @StringRes subtitleId: Int) {
-    SubtitleText(modifier = modifier, subtitle = stringResource(id = subtitleId))
 }
 
 @Composable

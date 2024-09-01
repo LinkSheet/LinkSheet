@@ -7,36 +7,18 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.*
-import fe.linksheet.composable.main.MainRoute
-import fe.linksheet.composable.settings.SettingsRoute
-import fe.linksheet.composable.settings.about.AboutSettingsRoute
-import fe.linksheet.composable.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.settings.about.DonateSettingsRoute
-import fe.linksheet.composable.settings.advanced.*
+import fe.linksheet.composable.settings.advanced.ExportImportSettingsRoute
+import fe.linksheet.composable.settings.advanced.FeatureFlagSettingsRoute
+import fe.linksheet.composable.settings.advanced.ShizukuSettingsRoute
 import fe.linksheet.composable.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.settings.apps.PretendToBeAppSettingsRoute
-import fe.linksheet.composable.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.settings.browser.BrowserSettingsRoute
-import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsDisableInSelectedRoute
-import fe.linksheet.composable.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.settings.browser.mode.WhitelistedBrowsersSettingsRoute
-import fe.linksheet.composable.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.settings.debug.loadpreferences.LoadDumpedPreferences
-import fe.linksheet.composable.settings.debug.log.LogSettingsRoute
-import fe.linksheet.composable.settings.debug.log.LogTextSettingsRoute
-import fe.linksheet.composable.settings.dev.DevBottomSheetSettingsRoute
 import fe.linksheet.composable.settings.dev.DevSettingsRoute
-import fe.linksheet.composable.settings.general.GeneralSettingsRoute
-import fe.linksheet.composable.settings.link.LinksSettingsRoute
-import fe.linksheet.composable.settings.link.amp2html.Amp2HtmlSettingsRoute
-import fe.linksheet.composable.settings.link.downloader.DownloaderSettingsRoute
-import fe.linksheet.composable.settings.link.libredirect.LibRedirectServiceSettingsRoute
-import fe.linksheet.composable.settings.link.libredirect.LibRedirectSettingsRoute
-import fe.linksheet.composable.settings.link.redirect.FollowRedirectsSettingsRoute
-import fe.linksheet.composable.settings.notification.NotificationSettingsRoute
 import fe.linksheet.composable.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.animatedArgumentRouteComposable
@@ -72,7 +54,6 @@ import fe.linksheet.util.AndroidVersion
 fun MainNavHost(
     // TODO: Refactor navController away
     navController: NavHostController,
-    uiOverhaul: Boolean,
     navigate: (String) -> Unit,
     onBackPressed: () -> Unit,
 ) {
@@ -84,12 +65,7 @@ fun MainNavHost(
         animatedComposable(route = mainRoute) {
 //            NewRuleRoute(onBackPressed = onBackPressed)
 //            EditRuleRoute(onBackPressed = onBackPressed)
-
-            if (uiOverhaul) {
-                NewMainRoute(navController = navController)
-            } else {
-                MainRoute(navController = navController)
-            }
+            NewMainRoute(navController = navController)
         }
 
         animatedComposable(route = Routes.AboutVersion) {
@@ -105,11 +81,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = settingsRoute) {
-            if (uiOverhaul) {
-                NewSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-            } else {
-                SettingsRoute(navController = navController, onBackPressed = onBackPressed)
-            }
+            NewSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = appsSettingsRoute) {
@@ -119,29 +91,15 @@ fun MainNavHost(
         }
 
         animatedComposable(route = browserSettingsRoute) {
-            if (uiOverhaul) {
-                NewBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-            } else {
-                BrowserSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = generalSettingsRoute) {
-            if (uiOverhaul) {
-                MiscSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                GeneralSettingsRoute(onBackPressed = onBackPressed)
-            }
+            MiscSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = notificationSettingsRoute) {
-            if (uiOverhaul) {
-                NewNotificationSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                NotificationSettingsRoute(onBackPressed = onBackPressed)
-            }
+            NewNotificationSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = privacySettingsRoute) {
@@ -153,60 +111,30 @@ fun MainNavHost(
         }
 
         animatedComposable(route = linksSettingsRoute) {
-            if (uiOverhaul) {
-                NewLinksSettingsRoute(
-                    onBackPressed = onBackPressed,
-                    navigate = navigate
-                )
-            } else {
-                LinksSettingsRoute(
-                    onBackPressed = onBackPressed,
-                    navController = navController,
-                )
-            }
+            NewLinksSettingsRoute(
+                onBackPressed = onBackPressed,
+                navigate = navigate
+            )
         }
 
         animatedComposable(route = followRedirectsSettingsRoute) {
-            if (uiOverhaul) {
-                NewFollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
-            }
+            NewFollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = libRedirectSettingsRoute) {
-            if (uiOverhaul) {
-                NewLibRedirectSettingsRoute(onBackPressed = onBackPressed, navController = navController)
-            } else {
-                LibRedirectSettingsRoute(
-                    onBackPressed = onBackPressed,
-                    navController = navController,
-                )
-            }
+            NewLibRedirectSettingsRoute(onBackPressed = onBackPressed, navController = navController)
         }
 
         animatedArgumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
-            if (uiOverhaul) {
-                NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
-            }
+            NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = downloaderSettingsRoute) {
-            if (uiOverhaul) {
-                NewDownloaderSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                DownloaderSettingsRoute(onBackPressed = onBackPressed)
-            }
+            NewDownloaderSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = amp2HtmlSettingsRoute) {
-            if (uiOverhaul) {
-                NewAmp2HtmlSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
-            }
+            NewAmp2HtmlSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = themeSettingsRoute) {
@@ -214,13 +142,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = advancedSettingsRoute) {
-            if (uiOverhaul) {
-                NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-            } else {
-                AdvancedSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = shizukuSettingsRoute) {
@@ -236,13 +158,7 @@ fun MainNavHost(
         }
 
         animatedArgumentRouteComposable(route = experimentSettingsRoute) { _, _ ->
-            if (uiOverhaul) {
-                NewExperimentsSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                ExperimentsSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewExperimentsSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = exportImportSettingsRoute) {
@@ -250,23 +166,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = debugSettingsRoute) {
-            if (uiOverhaul) {
-                NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-            } else {
-                DebugSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = logViewerSettingsRoute) {
-            if (uiOverhaul) {
-                NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-            } else {
-                LogSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = loadDumpedPreferences) {
@@ -274,24 +178,13 @@ fun MainNavHost(
         }
 
         animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
-            val flag = true
-            if (uiOverhaul && flag) {
-                NewLogTextSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                LogTextSettingsRoute(uiOverhaul = uiOverhaul, onBackPressed = onBackPressed)
-            }
+            NewLogTextSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = aboutSettingsRoute) {
-            if (uiOverhaul) {
-                NewAboutSettingsRoute(
-                    navigate = navigate, onBackPressed = onBackPressed
-                )
-            } else {
-                AboutSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewAboutSettingsRoute(
+                navigate = navigate, onBackPressed = onBackPressed
+            )
         }
 
         animatedComposable(route = donateSettingsRoute) {
@@ -301,11 +194,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = creditsSettingsRoute) {
-            if (uiOverhaul) {
-                NewCreditsSettingsRoute(onBackPressed = onBackPressed)
-            } else {
-                CreditsSettingsRoute(onBackPressed = onBackPressed)
-            }
+            NewCreditsSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = preferredBrowserSettingsRoute) {
@@ -319,21 +208,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = inAppBrowserSettingsRoute) {
-            if (uiOverhaul) {
-                NewInAppBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-            } else {
-                InAppBrowserSettingsRoute(
-                    navController = navController, onBackPressed = onBackPressed
-                )
-            }
+            NewInAppBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = inAppBrowserSettingsDisableInSelectedRoute) {
-            if (uiOverhaul) {
-                NewInAppBrowserSettingsDisableInSelectedRoute(onBackPressed = onBackPressed)
-            } else {
-                InAppBrowserSettingsDisableInSelectedRoute(navController = navController)
-            }
+            NewInAppBrowserSettingsDisableInSelectedRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = preferredAppsSettingsRoute) {
@@ -342,11 +221,7 @@ fun MainNavHost(
 
         if (AndroidVersion.AT_LEAST_API_31_S) {
             animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
-                if (uiOverhaul) {
-                    VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
-                } else {
-                    AppsWhichCanOpenLinksSettingsRoute(onBackPressed = onBackPressed)
-                }
+                VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
             }
 
             animatedComposable(route = pretendToBeAppRoute) {
@@ -356,10 +231,6 @@ fun MainNavHost(
 
         animatedComposable(route = devModeRoute) {
             DevSettingsRoute(onBackPressed = onBackPressed)
-        }
-
-        animatedComposable(route = devBottomSheetExperimentRoute) {
-            DevBottomSheetSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = Routes.Help) {

@@ -4,28 +4,17 @@
     <string name="import_dumped_preference">Увоз бачених преференца</string>
     <string name="domain_selection_confirmation_subtitle">Желите ли заиста да подесите %s као преферирану апликацију за следеће домене?</string>
     <string name="dismiss">Одбаци</string>
-    <string name="onboarding7_headline">Ентузијаста?
-\nLinkSheet вас</string>
-    <string name="enable_send_button">Омогући дугме „Дели са“</string>
     <string name="default_apps_subtitle">Префериране апликације су апликације које подесите да „Увек“ отварају одређене хостове</string>
     <string name="amp2html_local_cache">Омогући локални Amp2Html кеш</string>
     <string name="open_copied_link">Из привремене меморије</string>
     <string name="ignore_libredirect">Игнориши LibRedirect</string>
     <string name="include_settings">Укључи подешавања (препоручено)</string>
-    <plurals name="hours">
-        <item quantity="one">%s сат</item>
-        <item quantity="few">%s сата</item>
-        <item quantity="other">%s сати</item>
-    </plurals>
     <string name="no_browser_installed">Ниједан прегледач није инсталиран</string>
     <string name="download_started">Преузимање је започето</string>
     <string name="close">Затвори</string>
     <string name="use_clear_urls">Користи ClearURLs</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet је открио најмање једну апликацију за коју се зна да је прегледач.</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">Омогућавање великог броја дугмади на доњем листу тренутно може довести до одсецања/квара дугмади.</string>
     <string name="opening_with_app">Отварање помоћу %s</string>
-    <string name="enable_shizuku_explainer">Омогућавање овога ће дозволити LinkSheet-у да користи Shizuku за директну интеракцију са системским API-јима. Ово се може користити, на пример, да се аутоматски онемогуће сви руковаоци линкова. Нова опција ће се појавити на главном екрану апликације.</string>
-    <string name="browser_explainer">Режим прегледача, прегледач у апликацији</string>
     <string name="save">Сачувај</string>
     <string name="enable_amp2html">Омогући Amp2Html</string>
     <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (брише параметре праћења са URL адреса) \u0020</string>
@@ -37,7 +26,6 @@
     <string name="logs">Евиденције</string>
     <string name="no_apps_which_can_handle_links_found">Није пронађена ниједна апликација која може да рукује линковима.</string>
     <string name="bottom_sheet">Доњи лист</string>
-    <string name="known_trackers">Познати програми за праћење</string>
     <string name="display_grid_layout">Распоред мреже</string>
     <string name="usage_stats_sorting">Сортирај апликације по употреби</string>
     <string name="log_viewer">Прегледник евиденције</string>
@@ -52,20 +40,15 @@
     <string name="manual_build">Ручно направљено и потписано од 1fexd</string>
     <string name="log_files">Прошле сесије</string>
     <string name="open_link_with_subtitle_2">LibkSheet је првобитно био заснован на OpenLinkWith-у</string>
-    <string name="use_text_share_copy_buttons">Користи једноставне текстуалне дугмад за „Копирај URL“, „Дели са“, „Преузми“ и „Игнориши LibRedirect“</string>
-    <string name="enable_shizuku">Омогући (експерименталну) Shizuku интеграцију</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
     <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може имати<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">импликације у вези са приватношћу</annotation> \u0020</string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
-    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="misc_settings">Остало</string>
-    <string name="enable_send_button_explainer">Приказује дугме у доњем листу које вам омогућава да делите URL с другим апликацијама као да сте га изабрали из менија „Дели са“</string>
     <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> \u0020
 \nлинк</annotation> \u0020</string>
-    <string name="get_started">Започни</string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
     <string name="enable_ignore_libredirect_button">Омогући дугме „Игнориши LibRedirect“</string>
@@ -81,41 +64,27 @@
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet не може да отвори овај линк.</string>
     <string name="join">Придружи се</string>
-    <string name="next">Следеће</string>
-    <string name="onboarding0_highlight">слобода избора</string>
     <string name="redirect_resolve_type_local_cache">локални кеш</string>
     <string name="use_unified_preferred_browser_explainer">Омогућавање овога ће применити доленаведена подешавања и на нормално и на руковање линковима у апликацији. Користите дугмад испод да бисте се пребацивали између нормалног и режима у апликацији када је онемогућено.</string>
     <string name="advanced_explainer">Експерименталне функције, увоз/извоз</string>
     <string name="discord">Discord</string>
-    <string name="background_image">Позадинска слика</string>
     <string name="amp2html_local_cache_explainer">Локално кеширајте преузете не-AMP верзије веб-страница</string>
     <string name="no">Не</string>
-    <string name="info">Информације</string>
     <string name="normal">Нормално</string>
     <string name="clear">Очисти</string>
     <string name="import_and_override">Увоз и преписивање</string>
     <string name="apps_which_can_open_links_explainer">Додирните апликацију да бисте отворили мени „Отвори подразумевано“ који вам омогућава да онемогућите аутоматско отварање линка</string>
     <string name="enabled">Омогућено</string>
-    <string name="redirect_resolve_type_not_resolved">ниједно</string>
-    <string name="onboarding4_paragraph_2">Ово је веома неугодно, јер понекад не желите да отворите линк у њеној апликацији, већ у прегледачу (на пример, да га обележите).
-\n
-\nАхх, класични Google који осакаћује сопствене производе без једноставног начина за враћање старог понашања
-\n
-\n У сваком случају, оставили су малу „рупу“: руковање линковима може бити онемогућено за сваку апликацију. Можете претпоставити да би се ово вратило на стари бирач апликација, али наравно (хвала Google!), то није случај, јер ће се сада линк увек отварати у вашем подразумеваном прегледачу. Због тога је направљен LinkSheet.</string>
-    <string name="log_viewer_timestamp">Прегледање евиденције из %s</string>
     <string name="success">Успешно</string>
-    <string name="onboarding0_headline">Време је да се врати</string>
     <string name="request_timeout_explainer">Дефинише колико секунди ће LinkSheet чекати да се веза успостави. Подешавање на 0 онемогућава временско ограничење, али се то не препоручује.</string>
     <string name="discord_explainer">Ћаскајте о LinkSheet-у на нашем Discord серверу</string>
     <string name="github">GitHub</string>
     <string name="configure">Конфигуриши</string>
     <string name="show_linksheet_referrer">Прикажи LinkSheet упућивача</string>
     <string name="url_copied">URL адреса је копирана у привремену меморију</string>
-    <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="copy_url">Копирај линк</string>
     <string name="resolve_failed">%s је неуспешно: %s</string>
     <string name="none">Ниједно</string>
-    <string name="onboarding7_highlight">покрива</string>
     <string name="export">Извоз</string>
     <string name="hide_after_copying">Аутоматски сакриј при радњи</string>
     <string name="follow_redirects">Прати преусмеравања</string>
@@ -124,28 +93,19 @@
     <string name="use_a_different_app">Користи другу апликацију</string>
     <string name="no_browsers_found">Није пронађен ниједан прегледач.</string>
     <string name="whitelisted_browsers">Прегледачи на белој листи</string>
-    <string name="amoled_black">AMOLED црна</string>
     <string name="export_log">Извоз евиденције</string>
     <string name="bottom_sheet_explainer">Конфигурација и прилагођавање</string>
-    <string name="onboarding6_highlight">преференце</string>
-    <string name="shizuku_explainer">Shizuku омогућава да LinkSheet директно комуницира са системским API-јима</string>
-    <string name="onboarding6_headline">Подесите ваше</string>
     <string name="yes">Да</string>
-    <string name="order_of_operation">Редослед радњи</string>
     <string name="light">Светла</string>
     <string name="frontend">Фронтенд</string>
     <string name="redirect_resolve_type_remote">удаљени сервер</string>
-    <string name="finish">Заврши</string>
     <string name="donate_subtitle">Надоградите на <b>LinkSheet Pro</b></string>
     <string name="flavor">Варијанта</string>
     <string name="advanced">Напредно</string>
     <string name="built_at">Направљено (UTC)</string>
     <string name="shizuku_explainer_short">Директно комуницирајте са системским API-јима</string>
     <string name="back">Назад</string>
-    <string name="clear_urls">ClearURLs</string>
     <string name="linksheet_download">LinkSheet преузимање</string>
-    <string name="delete">Избриши</string>
-    <string name="fastforward">FastForward</string>
     <string name="follow_redirects_external_service_explainer">Пратите преусмеравања користећи API постављен на supabase.com (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
     <string name="include_fingerprint">Укључи отисак прста уређаја (препоручено)</string>
     <string name="default_apps">Префериране апликације</string>
@@ -158,35 +118,21 @@
     <string name="usage_stats_sorting_explainer">Укључите статистику коришћења Android система у алгоритам за сортирање. Дозвола се тражи при првом укључивању.</string>
     <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>) \u0020</string>
     <string name="github_explainer">Репозиторијум изворног кода</string>
-    <string name="launch_onboaring">Покрени започињање</string>
+    <string name="launch_onboarding">Покрени започињање</string>
     <string name="shizuku_integration">Shizuku интеграција</string>
     <string name="debug">Отклањање грешака</string>
-    <string name="onboarding1_headline">Добро дошли у</string>
-    <string name="enable_copy_button_explainer">Приказује дугме „Копирај URL“ у доњем листу</string>
     <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. „.jpg“); Ако је тако, овај тип се користи за преузети фајл.</string>
-    <string name="onboarding4_headline">Искључите руковање линком да бисте направили LinkSheet</string>
     <string name="other">Остало</string>
-    <string name="open_settings">Отвори подешавања</string>
     <string name="credits_explainer">Признања, лиценцирање</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">Уклони све</string>
-    <string name="button_settings">Дугмад</string>
-    <string name="single_tap_explainer">Омогућите само један додир уместо два за отварање апликације; Дуго додирните да бисте изабрали апликацију, двапут додирните да бисте отворили информације о апликацији</string>
-    <string name="onboarding3_headline">Добијте потпуну
-\nконтролу над</string>
-    <string name="browser">Прегледач</string>
-    <string name="license_gpl_3">GNU општа јавна лиценца v3.0</string>
     <string name="use_unified_preferred_browser">Користи обједињена подешавања</string>
     <string name="instance">Инстанца</string>
     <string name="always_ask_explainer">Увек наведите све прегледаче</string>
-    <string name="donate_card_subtitle_2">Донирање криптовалуте</string>
     <string name="enable_downloader">Омогући програм за преузимање</string>
-    <string name="amp2html_builtin_cache">Користи уграђени Amp2Html кеш</string>
     <string name="paste">Налепи</string>
     <string name="download">Преузми</string>
-    <string name="linksheet_version_info_header">LinkSheet информације о верзији:</string>
     <string name="links_explainer">ClearUrls, LibRedirect, праћење преусмеравања</string>
-    <string name="no_app_to_handle_link_found">Није пронађена ниједна апликација за руковање линком!</string>
     <string name="amp2html_external_service">Покушај да добијеш не-AMP верзије странице преко спољне услуге</string>
     <string name="open_with">Отвори помоћу</string>
     <string name="no_handlers_found">Није пронађен ниједан прегледач или изворна апликација!</string>
@@ -201,28 +147,17 @@
     <string name="options">Опције</string>
     <string name="services">Услуге</string>
     <string name="about_explainer">Кредити, лиценце, линкови, верзија</string>
-    <string name="disable_all_toasts">Онемогући искачуће поруке</string>
-    <string name="export_mode">Режим извоза</string>
-    <string name="app_log">Евиденција апликације</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="seal_subtitle_2">Seal је био одличан ресурс за учење у вези са Jetpack Compose</string>
     <string name="shizuku_not_running_explainer">Shizuku није покренут. Додирните овде да бисте отворили Shizuku, а затим пратите упутства да бисте га покренули.</string>
     <string name="browser_status">Статус прегледача</string>
     <string name="no_such_app_found">Није пронађена таква апликација!</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">Политика приватности</string>
-    <string name="onboarding3_highlight">свему</string>
     <string name="request_private_browsing">Приватно</string>
-    <string name="import_dumped_preference_explainer">Увозник за преференце садржане у фајловима евиденција - вероватно није корисно за просечног корисника</string>
-    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
     <string name="always">Увек</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Изаберите апликацију</string>
     <string name="github_workflow_run_id">ID радног тока издања</string>
     <string name="resolved_via">%s решено путем %s</string>
     <string name="instance_not_available_anymore">Инстанца више није доступна!</string>
-    <string name="onboarding2_highlight">вашим</string>
-    <string name="onboarding4_highlight">ради</string>
-    <string name="amp2html_builtin_cache_explainer">Користите уграђени кеш (који користи извоз базе података спољне услуге)</string>
     <string name="open_with_linksheet">Отвори помоћу LinkSheet</string>
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
@@ -233,44 +168,30 @@
     <string name="dark">Тамна</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
     <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
-    <string name="donation_instructions">Упутства за донацију</string>
-    <string name="disable_all_toasts_explainer">Не приказуј искачуће поруке</string>
     <string name="set_as_browser">Подеси као прегледач</string>
     <string name="whitelisted">Бела листа</string>
-    <plurals name="minutes">
-        <item quantity="one">%s минут</item>
-        <item quantity="few">%s минута</item>
-        <item quantity="other">%s минута</item>
-    </plurals>
     <string name="log">Евиденција</string>
     <string name="loading_link">Обрада линка…</string>
     <string name="donate_card_headline">Донирајте да бисте подржали LinkSheet</string>
-    <string name="license_mit">Лиценца MIT</string>
     <string name="general">Разно</string>
     <string name="libredirect_via">Путем %s</string>
     <string name="pretend_to_be_app_explainer">Претварање да је ово изворна апликација за подржане домене са LinkSheetCompat</string>
-    <string name="license_apache_2">Лиценца Apache 2.0</string>
     <string name="confirm">Потврди</string>
     <string name="disabled">Онемогућено</string>
     <string name="enable_request_private_browsing_button">Омогући дугме „Захтевај приватно прегледање“</string>
     <string name="redact_log">Редигуј евиденцију (препоручено, онемогућавање овога може да изазове цурење назива пакета и назива хостова)</string>
     <string name="show_linksheet_referrer_explainer">Када се апликација покрене, може да провери која је апликација покренута или да је „препоручи“. Подразумевано, када LinkSheet покрене апликацију, она се сакрива, говорећи да је апликација која је покренула LinkSheet покренула циљ. Омогућите ово да бисте поново уметнули LinkSheet као упућивач за апликације које отвара.</string>
-    <string name="always_show_package_name_disclaimer">Овај прекидач ће бити премештен на другу локацију у будућем издању.</string>
     <string name="search">Претрага</string>
     <string name="at_least_one_unknown_browser_installer">Инсталиран је најмање један (непознати) прегледач</string>
-    <string name="welcome_to_linksheet_explainer_2">Да би LinkSheet функционисао, потребно га је подесити као претраживач система, тако да може да пресреће кликове на линкове. Не брините, LinkSheet има много опција за прилагођавање, тако да ово неће ограничити, него побољшати ваше искуство.</string>
     <string name="always_show_package_name">Увек приказуј назив пакета</string>
     <string name="no_libredirect_services">Нису пронађене LibRedirect услуге!</string>
     <string name="error">Грешка</string>
     <string name="checkmark">Квачица</string>
     <string name="request_timeout">Време за истек захтева</string>
     <string name="apps_which_can_open_links_explainer_2">Наводи све апликације које могу да ометају понашање LinkSheet-а</string>
-    <string name="onboarding4_paragraph_1">У Android-у 12, Google је представио верификоване линкове за апликације. Апликације сада могу криптографски да верификују власништво над доменима. Када се додирне линк до таквог домена и инсталира се одговарајућа апликација, аутоматски ће се отворити подразумевано, прескачући избор који је претходно био дат кориснику у потпуности.</string>
     <string name="set_as_browser_explainer">Додирните овде да бисте подесили LinkSheet као подразумевани прегледач</string>
     <string name="current_session">Тренутна сесија</string>
-    <string name="built_by">Информације о издању</string>
     <string name="compat_installed">LinkSheetCompat је већ инсталиран</string>
-    <string name="launch_onboaring_explainer">Тестирајте ток започињања</string>
     <string name="always_disable_explainer">Онемогућите прегледач у апликацији у свим апликацијама</string>
     <string name="enable_ignore_libredirect_button_explainer">Приказује дугме у доњем листу ако је URL преусмерен путем LibRedirect-а, који уместо тога отвара оригинални URL</string>
     <string name="mastodon_redirect_subtitle_2">Изворни кôд Mastodon Redirect-а је коришћен као референца за Shizuku комуникацију</string>
@@ -278,38 +199,24 @@
     <string name="enable_amp2html_explainer">Преусмерава AMP странице на њихову нормалну веб-верзију. Ово може да има <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">импликације у вези са приватношћу</annotation> \u0020</string>
     <string name="none_explainer">Наведите само изворне апликације, уклоните све прегледаче. Ако је присутна само једна изворна апликација, она ће се аутоматски отворити. Ако није присутна изворна апликација, наведени су сви прегледачи.</string>
     <string name="donate">Донирај</string>
-    <string name="seal">Seal</string>
-    <string name="use_text_share_copy_buttons_explainer">Замењује наведене дугмад „Копирај URL“, „Дели са“, „Преузми“ и „Игнориши LibRedirect“ једноставним текстуалним дугмадима</string>
     <string name="disable_in_selected">Присилно онемогући…</string>
     <string name="debug_explainer">Евиденције апликације, ресетовање верификованог руковаоца</string>
     <string name="follow_redirects_external_service">Пратите преусмеравања путем спољне услуге</string>
     <string name="general_settings_explainer">Увек прикажите називе пакета</string>
     <string name="settings">Подешавања</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="in_app">У апликацији</string>
     <string name="browser_mode_subtitle">Подесите режим преферираног прегледача</string>
-    <string name="crash_log">Евиденција отказивања</string>
     <string name="built_by_error">Ову верзију није потписао 1fexd ни GitHub радни ток.</string>
-    <string name="single_tap">Омогући један додир</string>
-    <string name="set_as_default_browser">Подеси као подразумевани прегледач</string>
     <string name="follow_only_known_trackers">Прати само познате програме за праћење</string>
     <string name="enable_libredirect">Омогући LibRedirect</string>
-    <plurals name="months">
-        <item quantity="one">%s месец</item>
-        <item quantity="few">%s месеца</item>
-        <item quantity="other">%s месеци</item>
-    </plurals>
-    <string name="app_crashed">Изгледа да је LinkSheet отказао, погледајте грешку испод</string>
     <string name="no_browser_installed_explainer">LinkSheet није успео да открије најмање једну апликацију која тврди да је прегледач. За најбоље искуство, инсталирајте прегледач.</string>
     <string name="donate_card">Донирање картицом (путем BuyMeACoffee)</string>
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
-    <string name="disable_link_handling">Онемогући руковање линком</string>
     <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
     <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> интеграцију \u0020</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
-    <string name="welcome_to_linksheet_explainer">LinkSheet „враћа“ „url-app-chooser“ који се појавио када је корисник додирнуо линк на Android верзији &lt;12 и имао је инсталираних више апликација које су могле да рукују линком</string>
     <string name="system">Прати систем</string>
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
@@ -321,17 +228,12 @@
     <string name="pretend_to_be_app">Пресретни захтеве за изворне апликације</string>
     <string name="shizuku">Shizuku интеграција</string>
     <string name="dont_show_filtered_item_explainer">Неће се приказати горњи одељак који предлаже последњу коришћену апликацију за хост на који је кликнуто</string>
-    <string name="enable_copy_button">Омогући дугме за копирање</string>
     <string name="version_name">Потпуни идентификатор</string>
     <string name="configure_explainer">Додрните овде да бисте конфигурисали LinkSheetCompat</string>
     <string name="feature_flags">Експерименталне функције</string>
-    <string name="onboarding2_headline">Много подешавања
-\nда бисмо учинили LinkSheet</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku режим је активиран, додирните апликацију да бисте укључили њене могућности аутоматског руковања линком. Дуго додирните апликацију да бисте отворили њен мени са подешавањима „Отвори подразумевано“.</string>
     <string name="credits">Кредити</string>
-    <string name="done">Готово</string>
-    <string name="pro_feature">Ово је LinkSheet Pro функција!</string>
     <string name="export_to_file">Извоз у фајл</string>
     <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> омогућава вам приступ за <b>LinkSheetPro</b>, што укључује <b>ексклузивне Pro функције</b> као што су: праћење спољних преусмеравања, спољно добијање не-AMP страница и још много тога! \u0020</string>
     <string name="import_settings">Увоз подешавања</string>
@@ -357,17 +259,13 @@
     <string name="url_copied_toast">URL адреса је копирана</string>
     <string name="dev_mode_enabled">Честитамо, омогућили сте режим за програмере. Само будите опрезни.</string>
     <string name="clear_urls_version">ClearURLs правила</string>
-    <string name="last_rule_update">Последње ажурирање правила узводно (UTC):</string>
     <string name="resolve_via_toast">Успешно разрешење</string>
     <string name="download_started_toast">Преузимање започето</string>
     <string name="notifications">Искачуће поруке и обавештења</string>
-    <string name="just_version">Верзије</string>
     <string name="resolve_via_toast_explainer">Приказивање искачуће поруке када се URL адреса разреши преко спољне услуге</string>
-    <string name="copy_version_information">Копирај информацију о верзији</string>
     <string name="dev">Програмер</string>
     <string name="debug_build">Издање за отклањање грешака</string>
     <string name="opening_with_app_toast_explainer">Приказивање искачуће поруке када се покрене апликација која је постављена као подразумевана за домен</string>
-    <string name="donation">Донација</string>
     <string name="notifications_explainer">Копиран URL, преузимање започето</string>
     <string name="running_unofficial_build">Незванично издање</string>
     <string name="fastforward_version">FastForward правила</string>
@@ -375,13 +273,6 @@
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Омогући експериментални LinkSheet Compat мени</string>
     <string name="enable_linksheet_compat_explainer">Мени се може наћи у подменију „Апликације“ и када је инсталиран, може да пресреће захтеве одређеним изворним апликацијама.</string>
-    <string name="disclaimer_libredirect_unstable">Поред тога што је експериментална функција, LibRedirect се тренутно сматра веома нестабилним и можда уопште неће радити.</string>
-    <string name="enable_new_bottom_sheet">Омогући нови доњи лист</string>
-    <string name="new_bottomsheet_explainer">Ова верзија LinkSheet-а има нови доњи лист захваљујући <annotation url="https://github.com/sakethpathike"> @sakethpathike</annotation>! Молимо, пошаљите повратне информације на Discord-у, GitHub-у или путем имејла. \u0020
-\n \u0020
-\nМожете се вратити на стари доњи лист путем Подешавања -&gt; Напредно -&gt; Експерименталне функције. \u0020</string>
-    <string name="enable_new_bottom_sheet_explainer">Користите прерађени доњи лист уместо старог</string>
-    <string name="new_bottomsheet">Нови доњи лист</string>
     <string name="shizuku_manager_start_failed">Покретање Shizuku Manager-а није успело, покрените га ручно!</string>
     <string name="include_throwable">Укључи евиденције о отказивању (препоручено, али се не може редиговати)</string>
     <string name="no_internet_connection">Нема интернет везе</string>
@@ -389,11 +280,9 @@
     <string name="online_services">Онлајн услуге</string>
     <string name="follow_redirects_short">Преусмеравања</string>
     <string name="unknown_host">%s је или блокиран или не постоји</string>
-    <string name="title_activity_main2">MainActivity2</string>
     <string name="preferred_apps_settings">Подесите префериране апликације за хостове које подржавају</string>
     <string name="start_setup">Настави</string>
     <string name="onboarding_setup">Подеси LinkSheet</string>
-    <string name="enable_dev_bottom_sheet">Омогући програмерски доњи лист</string>
     <string name="launch_onboarding__now_explainer">Тестирајте нови ток укључивања</string>
     <string name="hide_bottom_sheet_choice_buttons">Сакриј дугмад за избор</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Сакријте дугмад „Једном“ и „Увек“ на доњем листу</string>
@@ -405,7 +294,6 @@
     <string name="start_setup_explainer">Функционалност LinkSheet-а захтева прилагођену Android конфигурацију. Следеће подешавање ће вас водити кроз процес у више корака.</string>
     <string name="launch_onboarding_new">Покрени ново укључивање</string>
     <string name="onboarding_5_card_explainer">Основна конфигурација потребна да би LinkSheet функционисао је завршена - идите у подешавања да бисте истражили шта још може да понуди!</string>
-    <string name="enable_dev_bottom_sheet_explainer">Омогућите најновију верзију доњег листа која је тренутно у развоју</string>
     <string name="onboarding_2_title">Желите ли да користите Shizuku?</string>
     <string name="onboarding_1_button">Подеси као подразумевани прегледач</string>
     <string name="onboarding_1_card_explainer">LinkSheet не може да функционише ако није подразумевани прегледач.</string>
@@ -439,17 +327,8 @@
     <string name="onboarding_5_title">Све је подешено!</string>
     <string name="onboarding_5_card_title">Конфигурација</string>
     <string name="onboarding_5_button">Заврши</string>
-    <string name="experiment">Експеримент</string>
-    <string name="new_dev_bottom_sheet_explainer">Не свиђа вам се нови доњи лист? Додирните да бисте пријавили проблеме.</string>
-    <string name="new_dev_bottom_sheet">Доњи лист</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Нови доњи лист се ближи завршетку функције. Посебно, прилагођавање додира још није доступно и биће примењено касније. \u0020
-\nПријавите грешке на <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub-у</annotation>,<annotation url="https://discord.gg/XndZet2pWF">Discord-у</annotation>, или путем <annotation url="mailto:1fexd@420blaze.it">имејла</annotation>. \u0020</string>
-    <string name="information">Информације</string>
     <string name="resolve_embeds">Разреши уградње</string>
     <string name="resolve_embeds_explainer">Решите урађење замене као што је fxtwitter.com на прави хост</string>
-    <string name="verified_link_handlers_open_settings_page">Отвори страницу подешавања</string>
-    <string name="parse_shared_text_intent">Рашчланите дељени текст ако URL адреса није пронађена</string>
-    <string name="parse_shared_text_intent_explainer">Када се радња дељења покрене из апликације која дели текст који садржи URL адресу, покушајте пронаћи (и користити) прву URL адресу у тексту, уместо неуспеха</string>
     <string name="experiments">Експерименти</string>
     <string name="experiments_explainer_2">Активни развој</string>
     <string name="nightly_experiments_card">Бета експерименти</string>
@@ -475,7 +354,6 @@
     <string name="tap_customization_dialog_title_double_tap">дупли додир</string>
     <string name="tap_customization_dialog_title_long_tap">дуги додир</string>
     <string name="tap_customization_dialog_text">Изаберите радњу коју треба извршити</string>
-    <string name="loading_link_subtitle">LinkSheet обавља радње линка. Ово ће потрајати само неколико секунди</string>
     <string name="tap_customization_long_tap">Радња дугим додиром</string>
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
@@ -483,8 +361,6 @@
     <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични \u0020
 \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>. \u0020</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
-    <string name="show_native_label">Прикажи изворну ознаку</string>
-    <string name="show_native_label_explainer">Прикажите ознаку поред апликација које изворно подржавају отворен линк</string>
     <string name="telemetry_level_disabled">Онемогућено</string>
     <string name="telemetry_level_minimal">Минимално</string>
     <string name="telemetry_level_standard">Стандардно</string>
@@ -495,15 +371,12 @@
     <string name="telemetry_level_disabled_description">Без прикупљања података</string>
     <string name="telemetry_level_standard_description">Збирна статистика коришћења</string>
     <string name="telemetry_level_exhaustive_description">Детаљна статистика коришћења</string>
-    <string name="analytics">Аналитика</string>
     <string name="telemetry_level_minimal_description">Показатељи инсталиране верзије</string>
     <string name="telemetry_dialog_text">Одаберите тип показатеља коришћења који вам највише одговара.</string>
     <string name="telemetry_configure_title">Аналитика</string>
     <string name="telemetry_identifier_reset">Ресетуј идентификатор</string>
     <string name="telemetry_configure_type">Тип аналитике</string>
     <string name="link_handle_failed">Дошло је до грешке</string>
-    <string name="try_share">Дели</string>
-    <string name="edit">Измени</string>
     <string name="retry">Покушај поново</string>
     <string name="resolve_activity_failure">Решавање активности није успело!</string>
     <string name="link_handle_failed_text">LinkSheet не може да обради овај линк, јер се чини да је погрешно обликован. Можете га изменити испод, а затим покушати поново. Алтернативно, можете претраживати на вебу.</string>
@@ -512,35 +385,21 @@
     <string name="reset_app_link_verification_status_toast">Поновна верификација неопходна</string>
     <string name="reset_app_link_verification_status_subtitle">Додирните овде да бисте ресетовали статус верификације линка апликације за све апликације, а затим сачекајте неколико минута док их Android поново верификује. Нећете добити потврду. Захтева Shizuku.</string>
     <string name="customization">Прилагођавање</string>
-    <string name="Miscellaneous">Разно</string>
     <string name="switch_profile">Омогући промену профила</string>
     <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -&gt; Посебан приступ апликацијама -&gt; Повезане радне и личне апликације</string>
-    <string name="log_session_headline">Сесија у</string>
-    <string name="external">Спољно</string>
-    <string name="external_versions">Спољне верзије</string>
     <string name="build_info">Информације о издању</string>
-    <string name="settings__title_updates">Ажурирања</string>
-    <string name="settings__subtitle_updates">Ажурирај LinkSheet на најновију верзију</string>
     <string name="settings__title_shortcuts">Пречице</string>
     <string name="settings_shortcuts__title_default_browser">Подразумевани прегледач</string>
     <string name="settings_shortcuts__title_link_handlers">Руковаоци линковима</string>
     <string name="settings_shortcuts__title_connected_apps">Повезане апликације</string>
     <string name="settings_shortcuts__subtitle_default_browser">Отвори страницу с подешавањима подразумеваног прегледача</string>
-    <string name="help">Помоћ</string>
-    <string name="help_subtitle">Туторијал, вики, питања и одговори</string>
     <string name="verified_link_handlers">Верификовани руковаоци линковима</string>
     <string name="verified_link_handlers_subtitle">Контролиши стање верификације домена апликације</string>
-    <string name="settings__subtitle_shortcuts">Подешавања подразумевананог прегледача, руковања линковима, повезаних апликација</string>
     <string name="settings__title_filter_apps">Филтрирање апликација</string>
-    <string name="settings__title_select_apps">Избор апликација</string>
-    <string name="settings_verified_link_handlers__text_disabled">Руковање онемогућено</string>
     <string name="settings_verified_link_handlers__text_user_apps">Корисничке апликације</string>
-    <string name="settings_verified_link_handlers__text_handling_filter_all">Прикажи све</string>
-    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Омогућени руковаоци</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Омогућено</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Онемогућено</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Све</string>
-    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Онемогућени руковаоци</string>
     <string name="settings_notifications__divider_toasts">Искачуће поруке</string>
     <string name="settings_app_config_rules__btn_new_rule">Ново правило</string>
     <string name="settings_new_rule__title_new_rule">Ново правило</string>
@@ -584,10 +443,8 @@
     <string name="settings_main_setup_success__button_set_default_browser">Подеси као подразумевани прегледач</string>
     <string name="settings_main_setup_success__button_link_handlers">Руковаоци линковима</string>
     <string name="settings_main_setup_success__button_connected_apps">Повезане апликације</string>
-    <string name="settings_main_setup_success__subtitle_quick_settings">Брза подешавања</string>
     <string name="settings_main_news__title_ui_overhaul">Нови UI</string>
     <string name="settings_main_news__button_read_more">Прочитај више</string>
-    <string name="settings_main_news__text_header">Вести</string>
     <string name="resolve_event__initialized">Иницијализовано</string>
     <string name="resolve_event__applying_link_modifiers">Примена измењивача линкова</string>
     <string name="resolve_event__running_libredirect">Покушавање тражења FOSS-фронтенда</string>
@@ -597,7 +454,6 @@
     <string name="settings_links_amp2html__title_skip_browser">Прескочи при доласку из прегледача</string>
     <string name="settings_app_config__title_configure_app_behavior">Конфигуриши %s</string>
     <string name="settings_app_config__button_add_item">Додај предмет</string>
-    <string name="title_activity_drag_test">DragTestActivity</string>
     <string name="settings_app_config__title_browsers">Прегледачи</string>
     <string name="settings_app_config__description_browsers">Инсталирани веб-прегледачи</string>
     <string name="settings_app_config__title_preferred_browser">Преферирани прегледач</string>

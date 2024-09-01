@@ -5,30 +5,11 @@
     <string name="open_with_app">Otevřít v aplikaci %s</string>
     <string name="always">Vždy</string>
     <string name="use_a_different_app">Použít jinou aplikaci</string>
-    <plurals name="minutes">
-        <item quantity="one">%s minuta</item>
-        <item quantity="few">%s minuty</item>
-        <item quantity="other">%s minut</item>
-    </plurals>
-    <string name="opening_with_app">Otevírání v aplikaci %s</string>
-    <plurals name="months">
-        <item quantity="one">%s měsíc</item>
-        <item quantity="few">%s měsíce</item>
-        <item quantity="other">%s měsíců</item>
-    </plurals>
-    <plurals name="hours">
-        <item quantity="one">%s hodina</item>
-        <item quantity="few">%s hodiny</item>
-        <item quantity="other">%s hodin</item>
-    </plurals>
     <string name="default_apps">Výchozí aplikace</string>
     <string name="preferred_apps_settings">Nastavte preferované aplikace pro hostitele, které podporují</string>
     <string name="set_as_browser">Nastavit jako prohlížeč</string>
     <string name="no_preferred_apps_set_yet">Zatím nebyly nastaveny žádné preferované aplikace.</string>
     <string name="search">Hledat</string>
-    <string name="enable_copy_button">Povolit tlačítko kopírování</string>
-    <string name="enable_copy_button_explainer">Zobrazí tlačítko „Kopírovat adresu“ v dolní části listu</string>
-    <string name="single_tap_explainer">Pro otevírání aplikací vyžadovat pouze jedno klepnutí namísto dvou; dlouze podržte pro výběr aplikace, dvakrát klepněte pro otevření informací o aplikaci</string>
     <string name="confirm">Potvrdit</string>
     <string name="clear">Vymazat</string>
     <string name="usage_stats_sorting">Seřadit aplikace podle využití</string>
@@ -37,7 +18,6 @@
     <string name="apps_which_can_open_links_explainer">Klepněte na aplikaci pro otevření nabídky „Otevírání ve výchozím nastavení“, která umožňuje zakázat automatické otevírání odkazů</string>
     <string name="copy_url">Kopírovat odkaz</string>
     <string name="url_copied">Adresa byla zkopírována do schránky</string>
-    <string name="single_tap">Zapnout jedno klepnutí</string>
     <string name="usage_stats_sorting_explainer">Zahrnout statistiky o využití systému Android do seřazovacího algoritmu. Při prvním přepnutí je vyžadováno oprávnění.</string>
     <string name="always_ask">Vždy se ptát</string>
     <string name="browser_mode">Režim prohlížeče</string>

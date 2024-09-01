@@ -18,7 +18,6 @@ import fe.linksheet.R
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.settings.SettingsScaffold
 import fe.linksheet.composable.util.SettingsItemRow
-import fe.linksheet.composable.util.SwitchRow
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -62,7 +61,7 @@ fun DevSettingsRoute(
                         Icon(
                             imageVector = Icons.Default.DeveloperMode,
                             tint = MaterialTheme.colorScheme.onSurface,
-                            contentDescription = stringResource(id = R.string.launch_onboaring)
+                            contentDescription = stringResource(id = R.string.launch_onboarding)
                         )
                     },
                     onClick = {

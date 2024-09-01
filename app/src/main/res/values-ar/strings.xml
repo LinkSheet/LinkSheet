@@ -5,7 +5,6 @@
     <string name="open_with_app">فتح باستخدام %s</string>
     <string name="use_a_different_app">استخدام تطبيق مختلف</string>
     <string name="opening_with_app">الفتح باستخدام %s</string>
-    <string name="enable_copy_button_explainer">يعرض زر \"نسخ عنوان الرابط\" في الورقة السفلية</string>
     <string name="none">بدون</string>
     <string name="add_all">إضافة الكل</string>
     <string name="hide_after_copying_explainer">إخفاء الورقة السفلية تلقائيًا عند النقر على زر إجراء مثل \"نسخ الرابط\" أو \"تنزيل\"</string>
@@ -13,7 +12,6 @@
     <string name="apps_which_can_open_links_explainer_2">يسرد جميع التطبيقات التي قد تتداخل مع سلوك LinkSheet</string>
     <string name="search">بحث</string>
     <string name="url_copied">تم نسخ عنوان الرابط إلى الحافظة</string>
-    <string name="single_tap">تمكين النقرة الواحدة</string>
     <string name="confirm">أكد</string>
     <string name="clear">مسح</string>
     <string name="browser_mode">المتصفح المفضل</string>
@@ -25,33 +23,23 @@
     <string name="display_grid_layout">تخطيط الشبكة</string>
     <string name="save">حفظ</string>
     <string name="open_link_with">افتح الرابط بواسطة</string>
-    <string name="license_apache_2">رخصة اباتشي 2.0</string>
-    <string name="browser">المتصفح</string>
     <string name="just_once">مرة واحدة</string>
     <string name="default_apps">التطبيقات المفضلة</string>
     <string name="set_as_browser">تعيين كمتصفح</string>
     <string name="apps_which_can_open_links_explainer">انقر على أحد التطبيقات لفتح قائمة \"الفتح افتراضيًا\" التي تسمح لك بتعطيل فتح الرابط تلقائيًا</string>
     <string name="no_preferred_apps_set_yet">لم يتم تعيين أي تطبيقات على أنها مفضلة حتى الآن.</string>
     <string name="copy_url">نسخ الرابط</string>
-    <string name="enable_copy_button">تمكين زر النسخ</string>
-    <string name="single_tap_explainer">تتطلب نقرة واحدة فقط بدلا من نقرتين لفتح التطبيقات ؛ اضغط لفترة طويلة لتحديد التطبيق ، وانقر نقرا مزدوجا لفتح معلومات التطبيق</string>
     <string name="always_ask_explainer">قم دائما بإدراج جميع المتصفحات</string>
     <string name="usage_stats_sorting">فرز التطبيقات حسب الاستخدام</string>
     <string name="no_such_app_found">لا يوجد مثل هذا التطبيق!</string>
     <string name="none_explainer">قائمة التطبيقات الأصلية فقط ، وإزالة جميع المتصفحات. في حالة وجود تطبيق أصلي واحد فقط ، سيتم فتحه تلقائيا. في حالة عدم وجود تطبيق أصلي ، يتم عرض جميع المتصفحات.</string>
-    <string name="no_app_to_handle_link_found">لم يتم العثور على تطبيق للتعامل مع الرابط!</string>
-    <string name="open_settings">أفتح الإعدادات</string>
     <string name="default_apps_subtitle">التطبيقات المفضلة هي التطبيقات التي قمت بتعيينها على \"دائمًا\" لفتح مضيفين معينين</string>
-    <string name="enable_send_button">تمكين زر \"مشاركة إلى\"</string>
-    <string name="enable_send_button_explainer">يعرض زرا في الورقة السفلية يسمح لك بمشاركة عنوان url مع تطبيقات أخرى كما لو كنت قد حددته من قائمة \"مشاركة إلى\"</string>
     <string name="send_to">مشاركة الى</string>
     <string name="display_grid_layout_explainer">عرض شبكة بدلا من قائمة في الورقة السفلية</string>
     <string name="enabled">ممكن</string>
     <string name="disabled">معطل</string>
     <string name="always_show_package_name_explainer">اعرض دائما أسماء الحزم بدلا من أسماء التطبيقات فقط. هذا ينطبق على التطبيق بأكمله.</string>
     <string name="whitelisted_browsers">المتصفحات المدرجة في القائمة البيضاء</string>
-    <string name="disable_all_toasts">تعطيل الإشعار المنبثق</string>
-    <string name="disable_all_toasts_explainer">لا تظهر أبدا أي رسائل منبثقة</string>
     <string name="back">رجوع</string>
     <string name="set_as_browser_done">تم تعيين ورقة الروابط كمتصفح افتراضي!</string>
     <string name="browser_status">حالة المتصفح</string>
@@ -70,11 +58,9 @@
     <string name="credits">شكر</string>
     <string name="random_instance">مثيل عشوائي</string>
     <string name="credits_explainer">الإقرارات والتراخيص</string>
-    <string name="license_gpl_3">رخصة جنو العمومية v3.0</string>
     <string name="use_app_settings_explainer">السماح للتطبيق بتحديد ما إذا كان يجب استخدام المتصفح داخل التطبيق أم لا</string>
     <string name="donate_crypto">تبرّع عبر العملات الرقمية</string>
     <string name="open_copied_link">افتح الرابط المنسوخ</string>
-    <string name="seal">ختم</string>
     <string name="github_explainer">مستودع التعليمات البرمجية</string>
     <string name="donate_subtitle">إذا كنت ترغب في التبرع والمطالبة بـ <b>LinkSheet Pro</b></string>
     <string name="links">الروابط</string>
@@ -82,7 +68,6 @@
     <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs </annotation> التجريبي (مسح معلمات التتبع من عناوين URL) \u0020</string>
     <string name="checkmark">علامة الاختيار</string>
     <string name="links_explainer">الإعدادات المتعلقة بمعالجة الارتباط</string>
-    <string name="clear_urls">منظف عناوين URL</string>
     <string name="system">النظام</string>
     <string name="light">مظيء</string>
     <string name="follow_redirects">اتبع عمليات إعادة التوجيه</string>
@@ -91,20 +76,17 @@
     <string name="follow_redirects_explainer">اتبع جميع عمليات إعادة التوجيه تلقائيا قبل فتح الورقة السفلية. قد يكون لهذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects"> آثار متعلقة بالخصوصية </annotation> \u0020</string>
     <string name="follow_redirects_external_service_explainer">متابعة عمليات إعادة التوجيه باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>) \u0020</string>
     <string name="follow_only_known_trackers">اتبع فقط أدوات التتبع المعروفة</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">سياسة الخصوصية</string>
     <string name="theme">الموضوع</string>
     <string name="theme_explainer">تغيير موضوع التطبيق</string>
     <string name="dark">مظلم</string>
     <string name="redirect_resolve_type_local_cache">ذاكرة التخزين المؤقت المحلية</string>
     <string name="redirect_resolve_type_remote">خادم بعيد</string>
     <string name="enable_libredirect">تمكين LibRedirect</string>
-    <string name="amoled_black">أسود مظلم</string>
     <string name="fastfoward_rules">استخدم قواعد FastForward</string>
     <string name="fastfoward_rules_explainer">استخدم تكامل قاعدة <annotation url="https://github.com/FastForwardTeam/FastForward"> FastForward </annotation> التجريبي (لتجاوز عمليات إعادة التوجيه لبعض المضيفات عن طريق استخراج إعادة التوجيه من الرابط) \u0020</string>
     <string name="follow_redirects_local_cache">تمكين ذاكرة التخزين المؤقت المحلية لإعادة التوجيه</string>
     <string name="redirect_resolve_type_local">محلل محلي</string>
     <string name="follow_redirects_local_cache_explainer">تخزين نتيجة عمليات إعادة التوجيه مؤقتا محليا</string>
-    <string name="redirect_resolve_type_not_resolved">لاشيء</string>
     <string name="instance">المثيل</string>
     <string name="enable_libredirect_explainer">إعادة توجيه الروابط إلى واجهات أمامية صديقة للخصوصية باستخدام تكامل تجريبي <annotation url="https://github.com/libredirect/libredirect"> LibRedirect </annotation> \u0020</string>
     <string name="frontend">الواجهة الأمامية</string>
@@ -113,8 +95,6 @@
     <string name="close">اغلاق</string>
     <string name="dont_show_filtered_item">عدم إظهار مطلقا قسم \"آخر تطبيق تم اختياره\"</string>
     <string name="dont_show_filtered_item_explainer">لن يظهر أبدا القسم العلوي الذي يقترح آخر تطبيق مستخدم للمضيف الذي تم النقر عليه</string>
-    <string name="use_text_share_copy_buttons">استخدم أزرار نصية بسيطة ل \"نسخ عنوان url\" و \"مشاركة إلى\" و \"تنزيل\" و \"تجاهل LibRedirect\"</string>
-    <string name="use_text_share_copy_buttons_explainer">يستبدل الأزرار الموضحة \"نسخ عنوان url\" و \"مشاركة إلى\" و \"تنزيل\" و \"تجاهل LibRedirect\" بأزرار نصية بسيطة</string>
     <string name="preview_url">معاينة عنوان الرابط</string>
     <string name="app_name">ورقة الروابط</string>
     <string name="preview_url_explainer">إظهار عنوان الرابط الذي تم النقر عليه (بعد معالجته)</string>
@@ -128,7 +108,6 @@
     <string name="in_app_browser_subtitle">تعيين وضع المتصفح داخل التطبيق</string>
     <string name="use_app_settings">استخدام إعدادات التطبيق</string>
     <string name="always_disable">تعطيل دائما</string>
-    <string name="browser_explainer">وضع المتصفح وإعدادات المتصفح داخل التطبيق</string>
     <string name="always_disable_explainer">قم دائما بتعطيل المتصفح داخل التطبيق ، بغض النظر عما يريد التطبيق استخدامه</string>
     <string name="disable_in_selected">فرض التعطيل…</string>
     <string name="disable_in_selected_explainer">تعطيل المتصفح داخل التطبيق في التطبيقات المحددة ، بغض النظر عما يريد التطبيق استخدامه</string>
@@ -144,41 +123,32 @@
     <string name="enable_ignore_libredirect_button">تمكين زر \"تجاهل LibRedirect\"</string>
     <string name="copy_to_clipboard">نسخ إلى الحافظة</string>
     <string name="logs">السجلات</string>
-    <string name="fastforward">تسريع الى الامام</string>
     <string name="enable_ignore_libredirect_button_explainer">يعرض زرا في الورقة السفلية إذا تمت إعادة توجيه عنوان url عبر LibRedirect، والذي يفتح عنوان url الأصلي بدلا من ذلك</string>
     <string name="ignore_libredirect">تجاهل LibRedirect</string>
-    <string name="app_crashed">يبدو أن LinkSheet قد تعطل ، تحقق من الخطأ أدناه</string>
     <string name="debug">تصحيح</string>
     <string name="debug_explainer">عرض سجلات التطبيق</string>
     <string name="logs_explainer">عرض سجلات التطبيق</string>
-    <string name="app_log">سجل التطبيق</string>
     <string name="log_files">ملفات السجل السابقة</string>
     <string name="services">الخدمات</string>
     <string name="current_session">الجلسة الحالية</string>
     <string name="no_log_entries">هذه الجلسة لا تحتوي على أي سجلات.</string>
     <string name="download_started">بدأ التنزيل</string>
     <string name="log_viewer">عارض السجل</string>
-    <string name="info">المعلومات</string>
-    <string name="log_viewer_timestamp">عرض السجل من %s</string>
-    <string name="order_of_operation">ترتيب العملية</string>
     <string name="request_timeout">انتهت مهلة الطلب</string>
     <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
     <string name="no_apps_found">لم يتم العثور على تطبيقات.</string>
     <string name="no_browsers_found">لم يتم العثور على متصفحات.</string>
     <string name="export_log">تصدير السجلات</string>
     <string name="export">تصدير</string>
-    <string name="export_mode">وضع التصدير</string>
     <string name="enable_request_private_browsing_button">تمكين زر \"طلب التصفح الخاص\"</string>
     <string name="request_private_browsing">خاص</string>
     <string name="use_clear_urls">استخدام ClearURLs</string>
     <string name="options">الخيارات</string>
-    <string name="crash_log">سجل الأعطال</string>
     <string name="log">سجل</string>
     <string name="redact_log">سجل التنقيح (مستحسن ، قد يؤدي تعطيل هذا إلى تسريب أسماء الحزم وأسماء المضيفين)</string>
     <string name="include_settings">تضمين الإعدادات (موصى به)</string>
     <string name="include_fingerprint">تضمين بصمة الجهاز (موصى به)</string>
     <string name="log_privacy">للتعرف على خصوصية السجل، يمكنك زيارة هذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">الرابط</annotation>. \u0020</string>
-    <string name="delete">حذف</string>
     <string name="no_logs_found">لم يتم العثور على سجلات سابقة!</string>
     <string name="amp2html">Amp الى Html</string>
     <string name="amp2html_external_service">محاولة الحصول على إصدار صفحة غير AMP عبر خدمة خارجية</string>
@@ -187,28 +157,19 @@
     <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
     <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
     <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على \u0020supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>) \u0020</string>
-    <string name="amp2html_builtin_cache_explainer">استخدام ذاكرة التخزين المؤقت المدمجة (التي تستخدم تصدير قاعدة البيانات للخدمة الخارجية)</string>
-    <string name="amp2html_builtin_cache">استخدام ذاكرة التخزين المؤقت المدمجة Amp2Html</string>
     <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
     <string name="resolved_via">%s تم حلها عبر %s</string>
     <string name="resolve_failed">%s فشل: %s</string>
     <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات استخدام نظام Android في خوارزمية الفرز. يتم طلب الإذن عند التبديل الأول.</string>
     <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
-    <string name="always_show_package_name_disclaimer">سيتم نقل هذا المفتاح إلى موقع مختلف في إصدار مستقبلي.</string>
     <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">قد يؤدي تمكين الكثير من الأزرار في الورقة السفلية حاليا إلى قطع / خلل في الأزرار.</string>
     <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
     <string name="shizuku">دمج شيزوكو</string>
-    <string name="enable_shizuku">تفعيل تكامل شيزوكو (التجريبي)</string>
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
     <string name="advanced">متقدم</string>
     <string name="advanced_explainer">الإعدادات المتقدمة مثل علامات الميزات والتصدير/الاستيراد</string>
-    <string name="shizuku_explainer">شيزوكو يسمح لورقة الروابط بالتفاعل مباشرة مع واجهة روابط النظام</string>
-    <string name="enable_shizuku_explainer">سيؤدي تمكين هذا إلى السماح لـ LinkSheet باستخدام Shizuku للتفاعل مع واجهات برمجة تطبيقات النظام مباشرةً. يمكن استخدام هذا، على سبيل المثال، لتعطيل كافة معالجات الارتباط تلقائيًا. سيظهر خيار جديد على شاشة التطبيق الرئيسية.</string>
     <string name="mastodon_redirect">إعادة توجيه Mastodon</string>
-    <string name="license_mit">ترخيص MIT</string>
     <string name="shizuku_integration">دمج شيزوكو</string>
-    <string name="known_trackers">المتعقبون المعروفون</string>
     <string name="shizuku_integration_no_permission_explainer">انقر هنا لطلب إذن شيزوكو.</string>
     <string name="shizuku_integration_not_setup_explainer">في حين أنه ليس ضروريًا تمامًا لعمل ورقة الروابط ، يوصى باستخدام شيزوكو. اضغط هنا لتثبيته.</string>
     <string name="apps_which_can_open_links_shizuku_explainer">تم تنشيط وضع شيزوكو ، انقر فوق أحد التطبيقات لتبديل إمكانيات التعامل مع الارتباط التلقائي. انقر مطولاً على أحد التطبيقات لفتح قائمة الإعدادات \"الفتح افتراضيًا\".</string>
@@ -216,51 +177,15 @@
     <string name="disable_all">تعطيل الكل</string>
     <string name="shizuku_integration_enabled_explainer">تم تمكين تكامل شيزوكو بنجاح!</string>
     <string name="shizuku_not_running_explainer">شيزوكو لا يعمل. انقر هنا لفتح شيزوكو ، ثم اتبع التعليمات لبدء تشغيله.</string>
-    <string name="get_started">لنبدأ</string>
-    <string name="next">التالي</string>
     <string name="feature_flags">الاعلام المميزة</string>
     <string name="feature_flags_explainer">تمكين أو تعطيل الميزات التجريبية</string>
-    <string name="title_activity_onboarding">نشاط اعلى السفينة</string>
-    <string name="onboarding1_headline">مرحبًا بك في</string>
-    <string name="background_image">صورة الخلفية</string>
-    <string name="onboarding2_headline">الكثير من الإعدادات
-\nلجعل ورقة الروابط</string>
-    <string name="welcome_to_linksheet_explainer">يستعيد ورقة الروابط \"url-app-chooser\" الذي يظهر عندما ينقر المستخدم على رابط لإصدارات اندرويد &lt;12 كان لديه عدة تطبيقات مثبتة يمكنها التعامل مع الرابط</string>
-    <string name="welcome_to_linksheet_explainer_2">لكي تعمل ورقة الروابط ، يجب تعيينها كمتصفح الأنظمة ، حتى تتمكن من اعتراض نقرات الارتباط. لا تقلق ، تحتوي ورقة الروابط على الكثير من خيارات التخصيص ، لذا لن يحد ذلك من تجربتك ، بل سيعززها.</string>
-    <string name="set_as_default_browser">تم تعيينه كالمتصفح الافتراضي</string>
-    <string name="onboarding0_headline">حان الوقت لإستعادة</string>
-    <string name="onboarding0_highlight">حرية الاختيار</string>
-    <string name="onboarding3_headline">أحصل على
-\nتحكم متكامل</string>
-    <string name="onboarding3_highlight">لكل شيء</string>
-    <string name="onboarding2_highlight">لك</string>
-    <string name="disable_link_handling">تعطيل معالجة الروابط</string>
-    <string name="title_activity_main">النشاط الرئيسي</string>
-    <string name="onboarding4_paragraph_1">في Android 12 ، قدمت Google روابط التطبيقات التي تم التحقق منها. يمكن للتطبيقات الآن التحقق من ملكية المجالات بطريقة مشفرة. عندما يتم النقر على رابط لمثل هذا المجال ، ويتم تثبيت التطبيق المقابل ، سيتم فتحه تلقائيًا افتراضيًا ، متخطيًا الخيار الذي تم اختياره مسبقا.</string>
-    <string name="onboarding4_paragraph_2">هذا أمر مزعج للغاية ، لأنه في بعض الأحيان ، لا تريد فتح رابط في تطبيقه ، بل في متصفح (على سبيل المثال ، لوضع إشارة مرجعية عليه).
-\n
-\nآه ، Google الكلاسيكية ، تشل منتجاتها دون طريقة بسيطة لاستعادة السلوك القديم
-\n
-\n على أي حال ، فقد تركوا \"ثغرة\" صغيرة: يمكن تعطيل التعامل مع الروابط على أساس كل تطبيق. قد تفترض أن هذا سيعيدك إلى منتقي التطبيق القديم ، ولكن بالطبع (بفضل Google!) ، ليس هذا هو الحال ، كما هو الحال الآن ، سيتم فتح الرابط دائمًا في متصفحك الافتراضي. لهذا السبب تم إنشاء ورقة الروابط.</string>
-    <string name="onboarding4_highlight">العمل</string>
-    <string name="launch_onboaring">تشغيل onboarding</string>
-    <string name="launch_onboaring_explainer">اختبار نشاط onboarding</string>
-    <string name="onboarding4_headline">قم بإيقاف تشغيل معالجة الارتباط لإنشاء ورقة الروابط</string>
-    <string name="onboarding7_headline">متحمس؟
-\nورقة الروابط</string>
-    <string name="onboarding7_highlight">ستساعدك</string>
-    <string name="done">إنتهى</string>
-    <string name="onboarding6_highlight">التفضيلات</string>
-    <string name="finish">انتهى</string>
-    <string name="onboarding6_headline">جهز</string>
+    <string name="launch_onboarding">تشغيل onboarding</string>
     <string name="pretend_to_be_app_explainer_2">بعض التطبيقات مثل Google Chrome يبحث بشكل صريح عن تطبيق محلي للتعامل معه ، على سبيل المثال ، رابط Youtube عند النقر عليه في نتائج البحث. يتظاهر LinkSheetCompat بأنه تطبيق أصلي للمضيفين المدعومين ثم يعيد توجيه الطلب إلى ورقة الروابط.</string>
-    <string name="title_activity_domain_spoof">نشاط تمويه النطاق</string>
     <string name="pretend_to_be_app">اعتراض طلبات التطبيق المحلية</string>
     <string name="pretend_to_be_app_explainer">تظاهر بأنك تطبيق أصلي للمجالات المدعومة باستخدام LinkSheetCompat</string>
     <string name="compat_installed">تم تثبيت LinkSheetCompat بالفعل</string>
     <string name="configure">إعداد</string>
     <string name="configure_explainer">انقر هنا لإعداد LinkSheetCompat</string>
-    <string name="title_activity_cross_profile_request_handler">نشاط متلقي طلب الملف الشخصي</string>
     <string name="general">عام</string>
     <string name="general_settings_explainer">الإعدادات المتعلقة بالتطبيق بأكمله</string>
     <string name="no_handlers_found">لا يوجد متصفح أو تطبيق محلي!</string>
@@ -277,21 +202,15 @@
     <string name="no">لا</string>
     <string name="domain_selection_confirmation_title">حدد المجالات؟</string>
     <string name="domain_selection_confirmation_subtitle">هل تريد بالتأكيد تعيين %s باعتباره التطبيق المفضل للمجالات التالية؟</string>
-    <string name="button_settings">الأزرار</string>
     <string name="misc_settings">متنوعة</string>
-    <string name="donate_card_subtitle_2">تبرع بالعملات المشفرة</string>
     <string name="donate_card_headline">التبرع لدعم ورقة الروابط</string>
-    <string name="donation_instructions">تعليمات التبرع</string>
     <string name="open_link_with_subtitle_2">كانت ورقة الرابط مبنية على فتح بواسطة</string>
-    <string name="seal_subtitle_2">لقد كان SEAL مصدرا رائعًا للتعلم منه فيما يتعلق بـ Jetpack</string>
     <string name="mastodon_redirect_subtitle_2">تم استخدام رمز مصدر Maston Redirect كمرجع لتكامل Shizuku</string>
     <string name="import_and_override">استيراد وتجاوز</string>
     <string name="import_dumped_preference">استيراد التفضيلات الملقاة</string>
-    <string name="import_dumped_preference_explainer">أداة استيراد التفضيلات الموجودة في ملفات السجلات - ربما لا تكون مفيدة للمستخدم العادي</string>
     <string name="version_name">المعرف الكامل:</string>
     <string name="built_at">بنيت في (التوقيت العالمي المنسق):</string>
     <string name="github_workflow_run_id">معرف بناء سير العمل:</string>
-    <string name="linksheet_version_info_header">معلومات إصدار ورقة الروابط:</string>
     <string name="privacy_settings_explainer">إعدادات مثل تضمين المراجع</string>
     <string name="privacy">الخصوصية</string>
     <string name="show_linksheet_referrer">إظهار مرجع ورقة الروابط</string>
@@ -303,9 +222,8 @@
     <string name="discord">ديسكورد</string>
     <string name="discord_explainer">الدردشة حول ورقة الروابط على ديسكورد</string>
     <string name="donate_card">التبرع بالبطاقة (عبر BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع. \u0020 
+    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع. \u0020
 \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية. \u0020</string>
-    <string name="copy_version_information">نسخ معلومات الإصدار</string>
     <string name="dev">المطور</string>
     <string name="notifications">الإشعارات</string>
     <string name="notifications_explainer">تكوين الإشعارات المنبثقة</string>
@@ -321,56 +239,22 @@
     <string name="last_updated"><b>الإصدار:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">تمكين القائمة التجريبية لورقة الروابط المضغوطة</string>
-    <string name="built_by">تم البناء والتوقيع من قبل</string>
     <string name="app_setup">إعداد التطبيق</string>
     <string name="other">أخرى</string>
-    <string name="enable_new_bottom_sheet">تمكين الورقة السفلية الجديدة</string>
-    <string name="enable_new_bottom_sheet_explainer">استخدم الورقة السفلية المعاد صياغتها بدلاً من الورقة القديمة</string>
-    <string name="new_bottomsheet">ورقة سفلية جديدة</string>
     <string name="donate_learn_more">التعرف على المزيد</string>
     <string name="donate">تبرَّع</string>
     <string name="github_pipeline_build">تم إنشاؤه وتوقيعه بواسطة سير عمل Github</string>
     <string name="flavor">النكهة:</string>
-    <plurals name="minutes">
-        <item quantity="zero">%s دقيقة</item>
-        <item quantity="one">%s دقيقة</item>
-        <item quantity="two">%s دقيقتان</item>
-        <item quantity="few">%s دقيقة</item>
-        <item quantity="many">%s دقائق</item>
-        <item quantity="other">%s دقيقة</item>
-    </plurals>
     <string name="shizuku_manager_start_failed">فشل في بدء مدير شيزوكو، من فضلك بدء تشغيله يدويا!</string>
     <string name="built_by_error">لم يتم التوقيع على هذا الإصدار بواسطة 1fexd ولا سير عمل Github. هذا لا يعني بالضرورة أي شيء سيئ، حيث يمكن لأي شخص إجراء تفرع للكود المصدري وإنشاء إصدار LinkSheet الخاص به، لكنه قد يفعل ذلك بنية خبيثة.</string>
     <string name="debug_build">بناء تطوير</string>
     <string name="dev_mode_enabled">تهانينا، لقد قمت بتمكين وضع التطوير. فقط كن حذرا.</string>
     <string name="opening_with_app_toast_explainer">قم بإظهار نخب عند تشغيل التطبيق الذي تم تعيينه كإعداد افتراضي للمجال</string>
     <string name="resolve_via_failed_toast_explainer">أظهر نخبًا عندما يفشل حل عنوان URL عبر خدمة خارجية</string>
-    <string name="donation">التبرع</string>
     <string name="dev_explainer">إعدادات المطور</string>
     <string name="url_copied_toast_explainer">إظهار نخب عندما يقوم المستخدم بنسخ عنوان URL</string>
-    <string name="just_version">الإصدار</string>
     <string name="enable_linksheet_compat_explainer">يمكن العثور على القائمة في القائمة الفرعية \"التطبيقات\"، وعند تثبيتها، تكون قادرا على اعتراض الطلبات لبعض التطبيقات المحلية.</string>
     <string name="running_unofficial_build">بناء غير الرسمي</string>
-    <string name="disclaimer_libredirect_unstable">بالإضافة إلى كونها ميزة تجريبية، تعتبر LibRedirect حاليًا غير مستقرة جدًا وقد لا تعمل على الإطلاق.</string>
-    <string name="new_bottomsheet_explainer">يتميز هذا الإصدار من ورقة الروابط بورقة سفلية جديدة بفضل <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation>! يرجى تقديم ملاحظاتك على Discord أو \u0020Github أو عبر البريد الإلكتروني.
-\n
-\nيمكنك العودة إلى الورقة السفلية القديمة عبر الإعدادات -&gt; خيارات متقدمة -&gt; أعلام الميزات. \u0020</string>
-    <plurals name="hours">
-        <item quantity="zero">%s ساعة</item>
-        <item quantity="one">%s ساعة</item>
-        <item quantity="two">%s ساعات</item>
-        <item quantity="few">%s ساعة</item>
-        <item quantity="many">%s ساعات</item>
-        <item quantity="other">%s ساعة</item>
-    </plurals>
-    <plurals name="months">
-        <item quantity="zero">%s شهر</item>
-        <item quantity="one">%s شهر</item>
-        <item quantity="two">%s شهران</item>
-        <item quantity="few">%s شهر</item>
-        <item quantity="many">%s اشهر</item>
-        <item quantity="other">%s شهر</item>
-    </plurals>
     <string name="export_import_settings">إعدادات التصدير أو الاستيراد</string>
     <string name="export_import_settings_explainer">تصدير إعداداتك الحالية أو استيراد تصدير الإعدادات السابقة</string>
     <string name="export_explainer">يصدّر اعدادات تطبيقك الحالي إلى ملف</string>
@@ -386,10 +270,8 @@
     <string name="import_settings_override_preferences">سيؤدي هذا إلى تجاوز كافة التفضيلات الموجودة. استمرار؟</string>
     <string name="confirm_import">تاكيد</string>
     <string name="manual_build">تم إنشاؤه يدويًا وتوقيعه بواسطة 1fexd</string>
-    <string name="pro_feature">هذه من مميزات ورقة الروابط الإصدار المدفوع!</string>
     <string name="export_include_recommendation">نوصي بتمكين الإعدادات التالية فقط إذا كنت لا تخطط لمشاركة تصديرك مع شخص آخر!</string>
     <string name="export_privacy">للتعرف على خصوصية التصدير، يمكنك زيارة هذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">الرابط</annotation>. \u0020</string>
-    <string name="last_rule_update">آخر تحديث للقاعدة من المنبع (UTC):</string>
     <string name="preferred_apps_settings">تعيين التطبيقات المفضلة للمضيفين الذين يدعمونهم</string>
     <string name="apps_which_can_open_links">التطبيقات التي يمكنها فتح الروابط</string>
     <string name="app_browsers_subtitle">التطبيقات المفضلة، إعدادات المتصفح</string>

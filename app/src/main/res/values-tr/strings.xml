@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="single_tap">Tek dokunmayı etkinleştir</string>
-    <string name="single_tap_explainer">Uygulamaları açmak için iki yerine yalnızca bir dokunuş gerekir; Uygulamayı seçmek için uzun basın, uygulama bilgilerini açmak için çift tıklayın</string>
-    <string name="enable_send_button_explainer">Alt sayfada, URL\'yi bir \"Şununla paylaş\" menüsünden seçmişsiniz gibi diğer uygulamalarla paylaşmanıza izin veren bir düğme gösterir</string>
     <string name="usage_stats_sorting_explainer">Android sistem kullanım istatistiklerini sıralama algoritmasına dahil edin. İlk geçişte izin istenir.</string>
     <string name="browser_mode">Tercih edilen tarayıcı</string>
     <string name="none">Hiçbiri</string>
     <string name="none_explainer">Yalnızca yerel uygulamaları listeleyin, tüm tarayıcıları kaldırın. Yalnızca tek bir yerel uygulama varsa, otomatik olarak açılır. Yerel uygulama yoksa tüm tarayıcılar listelenir.</string>
-    <string name="enable_send_button">\"Paylaş\" düğmesini etkinleştirin</string>
     <string name="default_apps_subtitle">Tercih edilen uygulamalar, belirli ana bilgisayarları \"Her zaman\" açacak şekilde ayarladığınız uygulamalardır</string>
     <string name="always_show_package_name_explainer">Yalnızca uygulama adları yerine her zaman paket adlarını göster. Bu tüm uygulama için geçerlidir.</string>
     <string name="just_once">Sadece bir kere</string>
@@ -20,26 +16,20 @@
     <string name="no_preferred_apps_set_yet">Henüz hiçbir uygulama tercih edilen olarak ayarlanmadı.</string>
     <string name="search">Arama</string>
     <string name="copy_url">Bağlantıyı kopyala</string>
-    <string name="enable_copy_button">Kopyalamayı etkinleştir düğmesi</string>
     <string name="url_copied">URL panoya kopyalandı</string>
     <string name="confirm">Onayla</string>
     <string name="clear">Temizle</string>
     <string name="usage_stats_sorting">Uygulamaları kullanıma göre sırala</string>
     <string name="always_ask">Her zaman sor</string>
     <string name="always_ask_explainer">Her zaman tüm tarayıcıları listele</string>
-    <string name="no_app_to_handle_link_found">Bağlantıyı işlemek için uygulama bulunamadı!</string>
-    <string name="open_settings">Ayarları aç</string>
     <string name="no_such_app_found">Böyle bir uygulama bulunamadı!</string>
     <string name="send_to">Şununla paylaş</string>
     <string name="always_show_package_name">Paket adını her zaman göster</string>
     <string name="open_with">Bununla aç</string>
-    <string name="enable_copy_button_explainer">Alt sayfada bir \"URL\'yi kopyala\" düğmesi gösterir</string>
     <string name="browser_mode_subtitle">Tercih edilen tarayıcı modunu ayarla</string>
     <string name="set_as_browser_explainer">LinkSheet\'i varsayılan tarayıcı yapmak için buraya dokunun</string>
     <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>
     <string name="apps_which_can_open_links_explainer_2">LinkSheet\'in davranışına müdahale edebilecek tüm uygulamaları listeler</string>
-    <string name="disable_all_toasts">Tostları devre dışı bırak</string>
-    <string name="disable_all_toasts_explainer">Tost mesajlarını gösterme</string>
     <string name="remove_all">Hepsini kaldır</string>
     <string name="back">Geri</string>
     <string name="hide_after_copying_explainer">\"Bağlantıyı kopyala\" veya \"İndir\" gibi eylem düğmelerine dokunduktan sonra alt sayfayı otomatik olarak gizle</string>
@@ -60,9 +50,6 @@
     <string name="credits">Krediler</string>
     <string name="credits_explainer">Teşekkürler, Lisanslama</string>
     <string name="version">LinkSheet Sürümü</string>
-    <string name="license_apache_2">Apache Lisansı 2.0</string>
-    <string name="seal">Seal</string>
-    <string name="license_gpl_3">GNU Genel Kamu Lisansı v3.0</string>
     <string name="github">Github</string>
     <string name="donate_crypto">Crypto ile bağış yapın</string>
     <string name="donate_subtitle"><b>LinkSheet Pro</b>\'ya yükselt</string>
@@ -86,12 +73,10 @@
     <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>
     <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
     <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>
-    <string name="follow_redirects_external_service_explainer_privacy_policy">Gizlilik politikası</string>
     <string name="follow_only_known_trackers">Yalnızca bilinen izleyicileri takip et</string>
     <string name="theme">Tema</string>
     <string name="light">Açık</string>
     <string name="dark">Koyu</string>
-    <string name="amoled_black">Amoled Siyah</string>
     <string name="fastfoward_rules">FastForward kurallarını kullan</string>
     <string name="theme_explainer">Material You, karanlık tema, zifiri karanlık modu</string>
     <string name="system">Sistemi takip et</string>
@@ -101,7 +86,6 @@
     <string name="resolved_via">%s %s aracılığıyla çözüldü</string>
     <string name="redirect_resolve_type_remote">uzak sunucu</string>
     <string name="redirect_resolve_type_local">yerel çözücü</string>
-    <string name="redirect_resolve_type_not_resolved">yok</string>
     <string name="enable_libredirect">LibRedirect\'i etkinleştir</string>
     <string name="enable_libredirect_explainer">Deneysel <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
     <string name="lib_redirect">LibRedirect</string>
@@ -112,7 +96,6 @@
     <string name="select_an_app">Bir uygulama seçin</string>
     <string name="dont_show_filtered_item">\"Son seçilen uygulama\" bölümünü gösterme</string>
     <string name="dont_show_filtered_item_explainer">Tıklanan sunucu için son kullanılan uygulamayı öneren üst bölümü göstermez</string>
-    <string name="use_text_share_copy_buttons">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" için basit metin düğmeleri kullan</string>
     <string name="preview_url">URL\'yi önizle</string>
     <string name="download">İndir</string>
     <string name="enable_downloader">İndiriciyi etkinleştir</string>
@@ -120,56 +103,41 @@
     <string name="random_instance">Rastgele oluşum</string>
     <string name="app_name">LinkSheet</string>
     <string name="always_disable_explainer">Uygulama içi tarayıcıyı bütün uygulamalar için devre dışı bırak</string>
-    <string name="browser">Tarayıcı</string>
-    <string name="browser_explainer">Tarayıcı modu, Uygulama içi tarayıcı</string>
     <string name="disable_in_selected_explainer">Uygulama içi tarayıcıyı seçilen uygulamalarda devre dışı bırak</string>
     <string name="use_unified_preferred_browser">Birleştirilmiş ayarları kullan</string>
     <string name="libredirect_via">%s aracılığıyla</string>
     <string name="ignore_libredirect">LibRedirect\'i yoksay</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <string name="debug_explainer">Uygulama günlükleri, onaylanmış işleyicileri sıfırlama</string>
-    <string name="app_log">Uygulama günlüğü</string>
     <string name="options">Seçenekler</string>
     <string name="services">Hizmetler</string>
     <string name="no_libredirect_services">LibRedirect hizmeti bulunamadı!</string>
     <string name="current_session">Mevcut oturum</string>
     <string name="log_files">Geçmiş oturumlar</string>
     <string name="log_viewer">Günlük görüntüleyici</string>
-    <string name="log_viewer_timestamp">%s\'den günlük görüntüleniyor</string>
     <string name="no_log_entries">Bu oturum herhangi bir günlük içermiyor.</string>
-    <string name="order_of_operation">Operasyon sırası</string>
-    <string name="info">Bilgi</string>
-    <string name="fastforward">FastForward</string>
-    <string name="clear_urls">ClearURLs</string>
     <string name="download_started">İndirme başladı</string>
     <string name="request_timeout">İstek zaman aşımı</string>
     <string name="resolve_failed">%s başarısız oldu: %s</string>
     <string name="request_timeout_explainer">LinkSheet\'in bir bağlantının kurulması için kaç saniye bekleyeceğini belirler. Bunu 0 yapmak zaman aşımını devre dışı bırakır, ancak bu önerilmez.</string>
     <string name="no_browsers_found">Tarayıcı bulunamadı.</string>
     <string name="export">Dışa aktar</string>
-    <string name="export_mode">Dışa aktarma modu</string>
     <string name="enable_request_private_browsing_button">\"Gizli gezinme iste\" düğmesini etkinleştir</string>
-    <string name="crash_log">Çökme günlüğü</string>
     <string name="log">Günlük</string>
     <string name="include_settings">Ayarları dahil et (önerilir)</string>
     <string name="include_fingerprint">Cihaz parmak izini dahil et (önerilir)</string>
-    <string name="delete">Sil</string>
     <string name="no_logs_found">Geçmiş kayıt bulunamadı!</string>
     <string name="enable_amp2html">Amp2Html\'i etkinleştir</string>
     <string name="amp2html_local_cache">Yerel Amp2Html önbelleğini etkinleştir</string>
     <string name="amp2html_local_cache_explainer">Web sayfalarının alınan AMP olmayan sürümlerini yerel olarak önbelleğe alır</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="amp2html_builtin_cache">Yerleşik Amp2Html önbelleğini kullan</string>
-    <string name="amp2html_builtin_cache_explainer">Yerleşik önbelleği kullanır (harici hizmetin veritabanı dışa aktarımını kullanır)</string>
     <string name="use_unified_preferred_browser_explainer">Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın.</string>
-    <string name="always_show_package_name_disclaimer">Bu anahtar gelecekteki bir sürümde farklı bir konuma taşınacaktır.</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
     <string name="in_app_browser_subtitle">Uygulama içi tarayıcı modunu ayarla</string>
     <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulamalar karar verir</string>
     <string name="close">Kapat</string>
     <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API\'yi kullanarak yönlendirmeleri takip eder(<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
     <string name="redirect_resolve_type_local_cache">yerel önbellek</string>
-    <string name="use_text_share_copy_buttons_explainer">\"URL\'yi kopyala\", \"Şurada paylaş\", \"İndir\" ve \"LibRedirect\'i yoksay\" başlıklı düğmeleri basit metin düğmeleriyle değiştirir</string>
     <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
     <string name="use_app_settings">Varsayılan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
@@ -183,7 +151,6 @@
     <string name="enable_ignore_libredirect_button">\"LibRedirect\'i yoksay\" düğmesini etkinleştir</string>
     <string name="in_app">Uygulama içi</string>
     <string name="enable_ignore_libredirect_button_explainer">URL LibRedirect aracılığıyla yeniden yönlendirilmişse, alt sayfada bunun yerine orijinal URL\'yi açan bir düğme gösterir</string>
-    <string name="app_crashed">LinkSheet çökmüş görünüyor, aşağıdaki hataya göz atın</string>
     <string name="logs_explainer">Uygulama günlüklerini görüntüle</string>
     <string name="debug">Hata ayıklama</string>
     <string name="logs">Günlükler</string>
@@ -195,23 +162,12 @@
     <string name="log_privacy">Günlük kaydı gizliliği hakkında bilgi edinmek için bu <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">bağlantıyı</annotation> ziyaret edebilirsiniz.</string>
     <string name="amp2html_external_service">AMP olmayan sayfa sürümünü harici hizmet aracılığıyla edinme girişimi</string>
     <string name="amp2html_external_service_explainer">supabase.com adresinde bulunan bir API kullanarak AMP olmayan sayfa sürümü elde etme girişimi (<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
-    <string name="disclaimer_bottom_sheet_many_buttons">Şu anda alt sayfadaki çok sayıda düğmenin etkinleştirilmesi, düğmelerin kesilmesine/aksamasına neden olabilir.</string>
-    <string name="license_mit">MIT Lisansı</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku modu etkinleştirildi, otomatik link açmasını açıp kapatmak için bir uygulamaya dokunun. Uygulamanın \"Varsayılan olarak aç\" ayarlar menüsünü açmak için basılı tutun.</string>
     <string name="disable_all">Tümünü devre dışı bırak</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku entegrasyonu başarıyla etkinleştirildi!</string>
     <string name="shizuku_integration_not_setup_explainer">LinkSheet\'in çalışması için gerekli olmasa da, Shizuku önerilir. Yüklemek için buraya dokunun.</string>
     <string name="shizuku_integration">Shizuku entegrasyonu</string>
-    <string name="onboarding1_headline">Hoş geldiniz</string>
-    <string name="set_as_default_browser">Varsayılan tarayıcı olarak ayarla</string>
-    <string name="onboarding0_headline">Seçme özgürlüğünü</string>
-    <string name="onboarding0_highlight">geri alma zamanı</string>
-    <string name="onboarding2_highlight">birçok seçenek</string>
-    <string name="onboarding3_headline">Her şeyin</string>
-    <string name="onboarding4_highlight">kapatın</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="launch_onboaring">İlk başlatmayı başlat</string>
-    <string name="title_activity_domain_spoof">DomainSpoofActivity</string>
+    <string name="launch_onboarding">İlk başlatmayı başlat</string>
     <string name="pretend_to_be_app">Yerel uygulama isteklerini algıla</string>
     <string name="configure">Yapılandır</string>
     <string name="general_settings_explainer">Paket adlarını her zaman göster</string>
@@ -224,14 +180,7 @@
     <string name="discord_explainer">Discord\'da LinkSheet hakkında konuşun</string>
     <string name="dismiss">Gizle</string>
     <string name="join">Katıl</string>
-    <string name="background_image">Arka plan resmi</string>
-    <string name="onboarding2_headline">LinkSheet\'i sizin yapmak için</string>
-    <string name="onboarding3_highlight">kontrolü sizde olsun</string>
-    <string name="last_rule_update">Kaynaktaki son kural güncellemesi (UTC):</string>
     <string name="dev_mode_enabled">Tebrikler, geliştirici modunu etkinleştirdiniz. Sadece dikkatli olun.</string>
-    <string name="copy_version_information">Sürüm bilgisini kopyala</string>
-    <string name="donation">Bağış</string>
-    <string name="just_version">Sürümler</string>
     <string name="running_unofficial_build">Gayriresmi yapı</string>
     <string name="debug_build">Hata ayıklama yapısı</string>
     <string name="dev">Geliştirici</string>
@@ -247,60 +196,32 @@
     <string name="resolve_via_failed_toast_explainer">Dış kaynak aracılığıyla URL çözümlemesi başarısız olduğunda bildirim göster</string>
     <string name="fastforward_version">FastForward kuralları</string>
     <string name="opening_with_app_toast_explainer">Bir alan adı için varsayılan olarak ayarlanan bir uygulama başlatıldığında bildirim göster</string>
-    <plurals name="minutes">
-        <item quantity="one">%s dakika</item>
-        <item quantity="other">%s dakika</item>
-    </plurals>
     <string name="clear_urls_version">ClearURLs kuralları</string>
     <string name="last_updated"><b>Sürüm:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <plurals name="hours">
-        <item quantity="one">%s saat</item>
-        <item quantity="other">%s saat</item>
-    </plurals>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Deneysel LinkSheetCompat menüsünü etkinleştir</string>
-    <string name="disclaimer_libredirect_unstable">Deneysel bir özellik olmakla birlikte, LibRedirect şu anlık çok kararsız olarak değerlendirilir ve çalışmaya da bilir.</string>
-    <string name="launch_onboaring_explainer">İlk başlatma sürecini test et</string>
     <string name="base_config">Ek yapılandırma</string>
     <string name="donate_card">Kart ile bağış yapın (BuyMeACoffee ile)</string>
     <string name="donate_explainer_crypto">Crypto ile bağış yaparken, <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> adresine bir email gönderin.</string>
-    <plurals name="months">
-        <item quantity="one">%s ay</item>
-        <item quantity="other">%s ay</item>
-    </plurals>
-    <string name="enable_new_bottom_sheet">Yeni alt sayfayı etkinleştir</string>
     <string name="no_internet_connection">İnternet bağlantısı yok</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="follow_redirects_short">Yönlendirmeler</string>
     <string name="unknown_host">%s engelli veya yok</string>
     <string name="online_services">Çevrimiçi hizmetler</string>
-    <string name="title_activity_main2">MainActivity2</string>
-    <string name="enable_dev_bottom_sheet">Geliştirici alt sayfasını etkinleştir</string>
-    <string name="enable_dev_bottom_sheet_explainer">Şu an hâlen geliştirilmekte olan en son alt sayfa sürümünü etkinleştir</string>
     <string name="download_started_toast">İndirme başladı</string>
-    <string name="known_trackers">Bilinen izleyiciler</string>
     <string name="apps_which_can_open_links">Onaylanmış bağlantı işleyiciler</string>
     <string name="request_private_browsing">Gizli</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="shizuku_not_running_explainer">Shizuku çalışmıyor. Shizuku\'yu açmak için dokunun, ardından yönergeleri takip ederek onu başlatın.</string>
     <string name="shizuku_integration_no_permission_explainer">Shizuku iznini talep etmek için buraya dokunun.</string>
-    <string name="next">Sonraki</string>
     <string name="feature_flags">Özellik işaretleri</string>
     <string name="feature_flags_explainer">Deneysel özellikleri etkinleştirin veya devre dışı bırakın</string>
-    <string name="disable_link_handling">Bağlantı açmayı devre dışı bırak</string>
-    <string name="welcome_to_linksheet_explainer_2">LinkSheet\'in çalışması için, varsayılan tarayıcı olarak seçilmesi gerekiyor, bu sayede bağlantıları yakalayabilecek. Endişelenmeyin, LinkSheet\'in birçok özelleştirme seçeneği vardır, yani deneyiminizi kısıtlamayacak, aksine iyileştirecektir.</string>
-    <string name="onboarding4_headline">LinkSheet\'in çalışması için bağlantı açmayı</string>
-    <string name="onboarding4_paragraph_1">Android 12 ile birlikte Google, Onaylanmış Uygulama Bağlantılarını getirdi. Uygulamalar artık alan adlarının sahipliğini kriptografik olarak doğrulayabiliyor. Bunun gibi alan adlarına giden bağlantılara tıklandığında, önceden kullanıcıya verilen seçimi atlayarak otomatik olarak ilgili uygulamayı açacak.</string>
-    <string name="onboarding6_headline">Tercihlerinizi</string>
-    <string name="onboarding6_highlight">ayarlayın</string>
-    <string name="finish">Bitir</string>
     <string name="compat_installed">LinkSheetCompat zaten yüklü</string>
     <string name="general">Çeşitli</string>
     <string name="domain_selection_confirmation_title">Alan Adlarını Seçin?</string>
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'in kaynak kodu Shizuku entegrasyonu için referans olarak kullanıldı</string>
     <string name="built_at">Oluşturulduğu zaman (UTC)</string>
     <string name="discord">Discord</string>
-    <string name="donate_card_subtitle_2">Crypto bağışlayın</string>
     <string name="manual_build">1fexd tarafından manuel olarak oluşturuldu ve imzalandı</string>
     <string name="github_pipeline_build">CI tarafından oluşturuldu ve imzalandı</string>
     <string name="flavor">Eklenti</string>
@@ -332,7 +253,6 @@
     <string name="launch_onboarding_new">Yeni ilk başlatmayı başlat</string>
     <string name="launch_onboarding__now_explainer">Yeni ilk başlatma sürecini test edin</string>
     <string name="import_dumped_preference">Tercihleri içe aktar</string>
-    <string name="import_dumped_preference_explainer">Günlük dosyalarında bulunan tercihler için içe aktarıcı - normal bir kullanıcı için büyük ihtimalle kullanışlı değil</string>
     <string name="import_and_override">İçe aktar ve üzerine yaz</string>
     <string name="onboarding_1_card_title">Varsayılan tarayıcı</string>
     <string name="onboarding_1_title">LinkSheet\'i varsayılan tarayıcı olarak ayarlayın</string>
@@ -359,7 +279,6 @@
     <string name="onboarding_5_card_title">Kurulum</string>
     <string name="onboarding_5_card_explainer">LinkSheet\'in çalışması için gereken temel ayarlar yapıldı - başka neler sunabileceğini görmek için ayarlara gidin!</string>
     <string name="donate_card_headline">LinkSheet\'i desteklemek için bağış yapın</string>
-    <string name="pro_feature">Bu bir LinkSheet Pro özelliği!</string>
     <string name="show_linksheet_referrer">LinkSheet yönlendirenini göster</string>
     <string name="permission_required">İzin gerekli</string>
     <string name="permission_required_explainer">İçe aktarılan bazı tercihler şu an LinkSheet\'in sahip olmadığı yetkileri gerektiriyor. Onları talep etmek için dokunun.</string>
@@ -369,57 +288,30 @@
     <string name="urlbar_settings">Url-bar</string>
     <string name="include_throwable">Çökme günlüklerini dahil et (önerilir, fakat özel bilgiler gizlenemez)</string>
     <string name="advanced_explainer">Özellik işaretleri, Deneyler, İçe/dışa aktarma</string>
-    <string name="shizuku_explainer">Shizuku, LinkSheet\'in direkt olarak sistem APIlerini kullanmasına izin verir</string>
-    <string name="enable_shizuku">(Deneysel) Shizuku entegrasyonunu etkinleştir</string>
     <string name="enable_all">Tümünü etkinleştir</string>
-    <string name="onboarding7_headline">Meraklı mısınız?
-\nLinkSheet</string>
-    <string name="onboarding7_highlight">tam size göre</string>
-    <string name="done">Bitti</string>
-    <string name="title_activity_cross_profile_request_handler">CrossProfileRequestHandlerActivity</string>
     <string name="no_handlers_found">Tarayıcı veya yerel uygulama bulunamadı!</string>
     <string name="no_handlers_found_explainer">LinkSheet bu bağlantıyı açamaz.</string>
     <string name="no_browser_installed">Hiç tarayıcı yüklenmedi</string>
     <string name="yes">Evet</string>
-    <string name="button_settings">Düğmeler</string>
     <string name="misc_settings">Çeşitli</string>
     <string name="donate_card_subtitle">LinkSheet\'i sevdiyseniz, GitHub\'da yıldızlamayı veya bağış yapmayı düşünün. <b>5€</b>\'dan fazla bağış yapanlar,özel özelliklerbulunduracak <b>LinkSheet Pro</b> için hak sahibidir.</string>
-    <string name="donation_instructions">Bağış yapma talimatları</string>
     <string name="open_link_with_subtitle_2">LinkSheet, ilk başta OpenLinkWith temelli idi</string>
-    <string name="seal_subtitle_2">Seal, Jetpack Compose hakkında bilgi edinmek için harika bir kaynak oldu</string>
     <string name="version_name">Tam tanımlayıcı</string>
-    <string name="linksheet_version_info_header">LinkSheet Sürümü Bilgisi:</string>
     <string name="privacy">Gizlilik</string>
     <string name="privacy_settings_explainer">Yönlendiren gizliliği, Telemetri</string>
     <string name="thanks_for_donating">Bağış yaptığınız için teşekkürler!</string>
     <string name="donate_learn_more">Daha fazla bilgi</string>
     <string name="donate">Bağış</string>
-    <string name="built_by">Yapı bilgisi</string>
     <string name="export_explainer">Şimdiki uygulama ayarlarınızı bir dosyaya aktarın</string>
     <string name="import_headline">İçe aktar</string>
     <string name="import_explainer">Bir dosyadan önceki bir dışa aktarmayı içe aktarın</string>
     <string name="confirm_import">Onayla</string>
-    <string name="experiment">Deney</string>
-    <string name="new_dev_bottom_sheet_explainer">Yeni alt sayfayı beğenmediniz mi? Sorun bildirmek için dokunun.</string>
-    <string name="new_dev_bottom_sheet">Alt sayfa</string>
-    <string name="new_dev_bottom_sheet_feature_explainer">Yeni alt sayfa, özelliklerin tamamlanmasına yaklaşıyor.Önemli olarak, dokunma özelleştirmesi henüz kullanılabilir değil ve daha sonra yapılacak.
-\nHataları lütfen <annotation url="https://github.com/1fexd/LinkSheet/issues/308">GitHub\'da</annotation>, <annotation url="https://discord.gg/XndZet2pWF">Discord\'da</annotation> veya <annotation url="mailto:1fexd@420blaze.it">Email</annotation> aracılığıyla bildirin.</string>
-    <string name="information">Bilgi</string>
     <string name="resolve_embeds">Yerleştirmeleri çözümle</string>
     <string name="resolve_embeds_explainer">fxtwitter gibi yerleştirme (embed) alternatif kaynaklarını, gerçek alan adına çözümle</string>
     <string name="advanced">Gelişmiş</string>
     <string name="shizuku">Shizuku entegrasyonu</string>
-    <string name="enable_shizuku_explainer">Bunu etkinleştirmek, sistem APIlerine direkt olarak erişmesi için LinkSheet\'in Shizuku kullanmasına izin verir. Bu, örneğin bütün bağlantı işleyicileri devre dışı bırakmak için kullanılabilir. Ana sayfada yeni bir seçenek belirecektir.</string>
     <string name="shizuku_explainer_short">Sistem APIlerine direkt olarak eriş</string>
-    <string name="title_activity_onboarding">OnboardingActivity</string>
-    <string name="get_started">Başlayalım</string>
-    <string name="welcome_to_linksheet_explainer">LinkSheet, Android 12\'den önceki sürümlerde bağlantılara dokunulduğunda görünen ve bağlantıyı açabilen birden fazla uygulamayı barındıran \"url-uygulama-seçici\"yi \"geri getirir\"</string>
     <string name="at_least_one_unknown_browser_installer">En az bir (bilinmeyen) tarayıcı yüklü</string>
-    <string name="onboarding4_paragraph_2">Bu oldukça can sıkıcıdır, çünkü bazen bağlantıyı uygulamasında değil, bir tarayıcıda açmak istersiniz (örneğin, yer işareti eklemek için).
-\n
-\nGoogle işte, eski özelliği geri getirmenin kolay bir yolunu bırakmadan ürünlerini basitleştiriyor.
-\n
-\n Her neyse, küçük bir \"boşluk\" bıraktılar: bağlantıların açılması uygulama bazında devre dışı bırakılabiliyor. Bunun eski uygulama seçimini geri getirdiğini düşünebilirsiniz, fakat tabii ki (teşekkürler Google!) öyle değil çünkü artık bağlantı her zaman varsayılan tarayıcınızda açılacak. LinkSheet\'in varoluş amacı da budur.</string>
     <string name="pretend_to_be_app_explainer_2">Google Chrome gibi bazı uygulamalar, örneğin arama sonuçlarındaki bir YouTube bağlantısına tıklandığında, bağlantıyı açacak bir uygulama bulmaya çalışır. LinkSheetCompat desteklenen alan adları için bu uygulamalardan biri gibi davranır ve LinkSheet\'e yönlendirir.</string>
     <string name="configure_explainer">LinkSheetCompat\'ı yapılandırmak için buraya dokunun</string>
     <string name="no_browser_installed_explainer">LinkSheet, tarayıcı olduğunu iddia eden herhangi bir uygulama bulamadı. En iyi deneyim için, bir tarayıcı yükleyin.</string>
@@ -428,11 +320,6 @@
     <string name="built_by_error">Bu yapı, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="notifications_explainer">URL kopyalandı, İndirme başladı</string>
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
-    <string name="enable_new_bottom_sheet_explainer">Eski alt sayfa yerine yeniden tasarlanmış olanı kullan</string>
-    <string name="new_bottomsheet">Yeni alt sayfa</string>
-    <string name="new_bottomsheet_explainer">LinkSheet\'in bu sürümü, <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> sayesinde yeni bir alt sayfa barındırır. Lütfen Discord, GitHub veya email aracılığıyla geri bildirim gönderin.
-\n
-\nAyarlar -&gt; Gelişmiş -&gt; Özellik işaretlerinden eski alt sayfaya dönebilirsiniz.</string>
     <string name="onboarding_0_title">LinkSheet\'e
 \nhoş geldiniz</string>
     <string name="onboarding_2_card_explainer">Shizuku, LinkSheet\'in (bir sonraki adım olan) bütün uygulamaların varsayılan bağlantı açma davranışını tek tek kapatmak yerine, tek seferde kapatmasına izin verir.</string>
@@ -446,9 +333,6 @@
     <string name="experiments_explainer">Geliştirilmekte olan özellikleri deneyin</string>
     <string name="reset">Sıfırla</string>
     <string name="share">Bağlantı paylaş</string>
-    <string name="verified_link_handlers_open_settings_page">Ayarlar sayfasını aç</string>
-    <string name="parse_shared_text_intent">URL bulunamazsa paylaşılan metni ayrıştır</string>
-    <string name="parse_shared_text_intent_explainer">URL içeren bir metin paylaşıldığında, başarısız olmak yerine metindeki ilk URL\'yi bulmaya (ve kullanmaya) çalış</string>
     <string name="theme_enable_material_you">Dinamik renk</string>
     <string name="theme_enable_amoled_explainer">Koyu mod etkinken zifiri karanlık tema kullan</string>
     <string name="experiments_explainer_3">Deneyler aktif olarak geliştirilme aşamasındadır ve düzgün/tamamen çalışmayabilir. Hataları GitHub\'da bildirmeyin. Eğer geri bildirim sağlamak istiyorsanız, Discord\'da yapın.</string>
@@ -472,9 +356,6 @@
     <string name="tap_customization_dialog_text">Gerçekleştirilmesi gereken eylemi seçin</string>
     <string name="expand_on_app_select_explainer">Bir uygulama seçildiğinde alt sayfayı otomatik olarak genişlet</string>
     <string name="telemetry_dialog_text_2">Kullanım istatistikleri, Android sürümünüzün yanı sıra kullanıcı tarafından sıfırlanabilen kuruluma bağlı rastgele bir tanımlayıcıyı içerir ve<annotation url="https://aptabase.com">Aptabase (EU)</annotation>\'da tutulur.Yüklü uygulamalar ve tıklanan bağlantılar gibi hassas veriler <b>asla</b> toplanmayacaktır. Daha fazla bilgi edinmek için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">buraya</annotation> dokunun.</string>
-    <string name="loading_link_subtitle">LinkSheet bağlantı işlemlerini gerçekleştiriyor. Bu işlem yalnızca birkaç saniye sürecektir</string>
-    <string name="show_native_label">\"Yerel\" etiketi göster</string>
-    <string name="show_native_label_explainer">Açılan bağlantıyı yerel olarak destekleyen uygulamaların yanında bir etiket göster</string>
     <string name="telemetry_level_disabled">Devre dışı</string>
     <string name="telemetry_level_minimal">Az düzeyde</string>
     <string name="telemetry_level_standard">Standart</string>
@@ -487,50 +368,33 @@
     <string name="telemetry_level_disabled_description">Veri toplama yok</string>
     <string name="telemetry_level_minimal_description">Yüklü sürüm ölçümleri</string>
     <string name="telemetry_level_exhaustive_description">Detaylı kullanım istatistikleri</string>
-    <string name="analytics">Analizler</string>
     <string name="telemetry_configure_title">Analizler</string>
     <string name="telemetry_identifier_reset">Tanımlayıcıyı sıfırla</string>
     <string name="telemetry_configure_type">Analiz tipi</string>
     <string name="something_went_wrong">Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin.</string>
     <string name="link_handle_failed">Bir hata oluştu</string>
-    <string name="try_share">Paylaş</string>
     <string name="link_handle_failed_text_field_label">Sorgu</string>
     <string name="retry">Yeniden dene</string>
     <string name="resolve_activity_failure">Aktivite çözümlenemedi!</string>
     <string name="link_handle_failed_text">LinkSheet, bu bağlantı hatalı göründüğü için bu bağlantıyı işleyemiyor. Aşağıdan düzenleyip tekrar deneyebilirsiniz. Alternatif olarak web\'de arama yapabilirsiniz.</string>
-    <string name="edit">Düzenle</string>
     <string name="customization">Özelleştirme</string>
-    <string name="Miscellaneous">Çeşitli</string>
     <string name="reset_app_link_verification_status_subtitle">Bütün uygulamaların bağlantı onaylama durumunu sıfırlamak için buraya dokunun, sonra Android\'in yeniden onaylaması için birkaç dakika bekleyin. Bir onay almayacaksınız. Shizuku gerektirir.</string>
     <string name="switch_profile">Profil değiştirmeyi etkinleştir</string>
     <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -&gt; Özel uygulama erişimi -&gt; Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
     <string name="reset_app_link_verification_status">Uygulama bağlantı onaylama durumunu sıfırla</string>
     <string name="reset_app_link_verification_status_toast">Yeniden onaylama istendi</string>
-    <string name="log_session_headline">Şu zamandaki oturum</string>
-    <string name="external">Harici</string>
-    <string name="help">Yardım</string>
-    <string name="help_subtitle">Öğretici, Wiki, Soru-cevap</string>
-    <string name="external_versions">Harici sürümler</string>
     <string name="build_info">Yapı bilgisi</string>
     <string name="verified_link_handlers">Onaylanmış bağlantı işleyiciler</string>
     <string name="verified_link_handlers_subtitle">Uygulamaların domain onay durumunu yönetin</string>
-    <string name="settings__title_updates">Güncellemeler</string>
-    <string name="settings__subtitle_shortcuts">Varsayılan tarayıcı, bağlantı açma, bağlanılan uygulama ayarları</string>
     <string name="settings_shortcuts__title_default_browser">Varsayılan tarayıcı</string>
     <string name="settings_shortcuts__title_link_handlers">Bağlantı işleyiciler</string>
     <string name="settings_shortcuts__title_connected_apps">Bağlanılan uygulamalar</string>
     <string name="settings_shortcuts__subtitle_default_browser">Varsayılan tarayıcı ayarları sayfasını aç</string>
-    <string name="settings__subtitle_updates">LinkSheet\'i son sürüme güncelle</string>
     <string name="settings__title_filter_apps">Uygulamaları filtrele</string>
-    <string name="settings__title_select_apps">Uygulama seçin</string>
     <string name="settings__title_shortcuts">Kısayollar</string>
-    <string name="settings_verified_link_handlers__text_disabled">Açma devre dışı bırakıldı</string>
     <string name="settings_verified_link_handlers__text_user_apps">Kullanıcı uygulamaları</string>
-    <string name="settings_verified_link_handlers__text_handling_filter_all">Hepsini göster</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Hepsi</string>
-    <string name="settings_verified_link_handlers__text_handling_filter_enabled">Etkin işleyiciler</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Etkin</string>
-    <string name="settings_verified_link_handlers__text_handling_filter_disabled">Devre dışı işleyiciler</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Devre dışı</string>
     <string name="settings_notifications__divider_toasts">Tostlar</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
@@ -560,7 +424,6 @@
     <string name="settings_app_config__title_configure_app_behavior">Yapılandır: %s</string>
     <string name="resolve_event__loading_preferred_apps">Tercih edilen uygulamalar yükleniyor</string>
     <string name="settings_main_setup_success__button_connected_apps">Bağlı uygulamalar</string>
-    <string name="settings_main_news__text_header">Haberler</string>
     <string name="resolve_event__sorting_apps">Uygulama listesi sıralanıyor</string>
     <string name="settings_main_news__title_ui_overhaul">Yeni arayüz</string>
     <string name="settings_app_config__description_browsers">Yüklü web tarayıcıları</string>
@@ -584,7 +447,6 @@
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet kurulmadı</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet sistemin varsayılan tarayıcısı olarak ayarlı değil</string>
-    <string name="settings_main_setup_success__subtitle_quick_settings">Hızlı ayarlar</string>
     <string name="resolve_event__initialized">Başlatıldı</string>
     <string name="settings_main_setup_success__button_link_handlers">Bağlantı işleyiciler</string>
     <string name="resolve_event__querying_browser_list">Tarayıcı listesi sorgulanıyor</string>
@@ -620,5 +482,4 @@
     <string name="settings_main_news__text_ui_overhaul">LinkSheet\'e yeni bir görünüm verildi!</string>
     <string name="resolve_event__generating_preview">Önizleme oluşturuluyor</string>
     <string name="settings_links_amp2html__title_skip_browser">Tarayıcıdan gelirken atla</string>
-    <string name="title_activity_drag_test">DragTestActivity</string>
 </resources>

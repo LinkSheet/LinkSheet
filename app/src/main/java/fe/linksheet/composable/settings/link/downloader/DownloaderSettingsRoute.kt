@@ -27,64 +27,6 @@ import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
-@OptIn(ExperimentalPermissionsApi::class, ExperimentalFoundationApi::class)
-@Composable
-fun DownloaderSettingsRoute(
-    onBackPressed: () -> Unit,
-    viewModel: DownloaderSettingsViewModel = koinViewModel()
-) {
-    val writeExternalStoragePermissionState = downloaderPermissionState()
-
-    SettingsScaffold(
-        headline = stringResource(id = R.string.enable_downloader),
-        onBackPressed = onBackPressed
-    ) { padding ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 5.dp)
-        ) {
-            stickyHeader(key = "enable_downloader") {
-                SettingEnabledCardColumn(
-                    checked = viewModel.enableDownloader(),
-                    onChange = {
-                      requestDownloadPermission(
-                            writeExternalStoragePermissionState,
-                            viewModel.enableDownloader,
-                            it
-                        )
-                    },
-                    headline = stringResource(id = R.string.enable_downloader),
-                    subtitleBuilder = linkableSubtitleBuilder(id = R.string.enable_downloader_explainer),
-                    contentTitle = stringResource(id = R.string.options)
-                )
-            }
-
-            item(key = "downloader_url_mime_type") {
-                SwitchRow(
-                    state = viewModel.downloaderCheckUrlMimeType,
-                    enabled = viewModel.enableDownloader(),
-                    headlineId = R.string.downloader_url_mime_type,
-                    subtitleId = R.string.downloader_url_mime_type_explainer
-                )
-            }
-
-            item(key = "downloader_timeout") {
-                SliderRow(
-                    value = viewModel.requestTimeout().toFloat(),
-                    onValueChange = { viewModel.requestTimeout(it.toInt()) },
-                    enabled = viewModel.enableDownloader(),
-                    valueRange = 0f..30f,
-                    valueFormatter = { it.toInt().toString() },
-                    headlineId = R.string.request_timeout,
-                    subtitleId = R.string.request_timeout_explainer
-                )
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun downloaderPermissionState() = rememberPermissionState(
@@ -95,7 +37,7 @@ fun downloaderPermissionState() = rememberPermissionState(
 fun requestDownloadPermission(
     permissionState: PermissionState,
     state: StatePreference<Boolean>,
-    newState: Boolean
+    newState: Boolean,
 ) {
     if (!AndroidVersion.AT_LEAST_API_29_Q && !permissionState.status.isGranted) {
         permissionState.launchPermissionRequest()

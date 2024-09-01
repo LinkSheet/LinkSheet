@@ -1,72 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="onboarding7_headline">उत्साही?
-\nलिंकशीट आपके पास है</string>
     <string name="open_copied_link">कॉपी किया गया लिंक खोलें</string>
     <string name="pretend_to_be_app_explainer_2">Google Chrome जैसे कुछ ऐप्स स्पष्ट रूप से प्रबंधित करने के लिए एक मूल ऐप की खोज करते हैं, उदाहरण के लिए, खोज परिणामों में टैप किए जाने पर एक यूट्यूब लिंक। LinkSheetCompat समर्थित होस्ट के लिए एक ऐसा मूल ऐप होने का दिखावा करता है और फिर अनुरोध को LinkSheet पर फारवर्ड करता है।</string>
-    <string name="onboarding0_highlight">चयन की आज़ादी</string>
-    <string name="onboarding4_paragraph_2">यह अत्यधिक कष्टदायक है, क्योंकि कभी-कभी, आप किसी लिंक को उसके ऐप में नहीं, बल्कि ब्राउज़र में खोलना चाहते हैं (उदाहरण के लिए, कुछ बुकमार्क करने के लिए)।
-\n
-\nआह, क्लासिक गूगल, पुराने व्यवहार को बहाल करने के सरल तरीके के बिना अपने स्वयं के उत्पादों को पंगु बना रहा है
-\n
-\n वैसे भी, उन्होंने एक छोटी सी \"ख़ामी\" छोड़ दी: लिंक-हैंडलिंग को प्रति-ऐप के आधार पर अक्षम किया जा सकता है। आप मान सकते हैं कि यह पुराने ऐप चयनकर्ता को वापस लाएगा, लेकिन निश्चित रूप से (गूगल को धन्यवाद!), ऐसा नहीं है, क्योंकि अब, लिंक हमेशा आपके डिफ़ॉल्ट ब्राउज़र में खुलेगा। इसीलिए LinkSheet बनाई गई।</string>
-    <string name="onboarding0_headline">लिंक हैंडलिंग वापस लेने का समय</string>
-    <string name="title_activity_onboarding">ऑनबोर्डिंग ऐक्टिवटी</string>
-    <string name="onboarding7_highlight">कवर किये हुए</string>
-    <string name="onboarding6_highlight">प्राथमिकताएं</string>
-    <string name="onboarding6_headline">अपनी सेट करें</string>
-    <string name="finish">समाप्त</string>
     <string name="donate_subtitle">यदि आप दान करना और <b>लिंकशीट प्रो</b> को लेना चाहते हैं</string>
-    <string name="launch_onboaring">ऑनबोर्डिंग लॉन्च करें</string>
-    <string name="onboarding1_headline">आपका स्वागत है</string>
-    <string name="onboarding4_headline">लिंकशीट बनाने के लिए लिंकहैंडलिंग को टॉगल करें</string>
-    <string name="onboarding3_headline">शानदार बनें
-\nनियंत्रण पाएं</string>
+    <string name="launch_onboarding">ऑनबोर्डिंग लॉन्च करें</string>
     <string name="paste">पेस्ट करें</string>
     <string name="thanks_for_donating">आर्थिक मदद के लिए धन्यवाद!</string>
-    <string name="onboarding3_highlight">सब कुछ</string>
-    <string name="onboarding2_highlight">आपका अपना</string>
-    <string name="onboarding4_highlight">काम</string>
     <string name="pretend_to_be_app_explainer">LinkSheetCompat के साथ समर्थित डोमेन के लिए एक मूल ऐप होने का दिखावा करें</string>
     <string name="error">त्रुटि</string>
-    <string name="onboarding4_paragraph_1">एंड्रॉइड 12 में, गूगल ने सत्यापित ऐप लिंक पेश किए। ऐप्स अब डोमेन के स्वामित्व को क्रिप्टोग्राफ़िक रूप से सत्यापित कर सकते हैं। जब ऐसे डोमेन के लिंक को टैप किया जाता है, और संबंधित ऐप इंस्टॉल किया जाता है, तो यह स्वचालित रूप से डिफ़ॉल्ट रूप से खुल जाएगा, जो कि पहले उपयोगकर्ता को पूर्ण रूप से दिया गया था, वह विकल्प छोड़ दिया गया।</string>
     <string name="compat_installed">LinkSheetCompat पहले से इंस्टॉल है</string>
-    <string name="launch_onboaring_explainer">ऑनबोर्डिंग प्रवाह का परीक्षण करें</string>
-    <string name="title_activity_main">मुख्य एक्टिविटी</string>
-    <string name="onboarding2_headline">बहुत सारी सेटिंग्स
-\nलिंकशीट बनाने के लिए</string>
-    <string name="done">मुकम्मल</string>
     <string name="dismiss">ख़ारिज करें</string>
     <string name="privacy_settings_explainer">रेफ़रर समावेशन जैसी सेटिंग्स</string>
     <string name="donate_explainer_crypto">क्रिप्टो के साथ दान करते समय, <b>LinkSheet Pro</b> का दावा करने के लिए, भुगतान का प्रमाण <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> पर भेजें</string>
     <string name="join">जुड़ें</string>
     <string name="discord">डिस्कॉर्ड</string>
     <string name="discord_explainer">आइए हमारे डिस्कॉर्ड सर्वर पर चैट करें! इसके भविष्य और अन्य प्रयासों के बारे में लिंकशीट के उपयोगकर्ताओं और डेवलपर्स से बातचीत करें!</string>
-    <string name="donate_card_subtitle_2">क्रिप्टो दान करें</string>
     <string name="donate_crypto">क्रिप्टो के माध्यम से दान करें</string>
     <string name="show_linksheet_referrer_explainer">जब कोई ऐप लॉन्च किया जाता है, तो यह यह देखने के लिए जांच कर सकता है कि कौन सा ऐप लॉन्च हुआ है, या उसे \"रेफ़र\" किया गया है। डिफ़ॉल्ट रूप से, जब लिंकशीट एक ऐप लॉन्च करता है, तो यह खुद को छुपाता है, यह कहते हुए कि लिंकशीट लॉन्च करने वाला ऐप वही है जिसने लक्ष्य लॉन्च किया है। लिंकशीट को खुलने वाले ऐप्स के लिए रेफ़रलकर्ता के रूप में पुनः सम्मिलित करने के लिए इसे सक्षम करें।</string>
     <string name="donate_card">कार्ड से दान करें (BuyMeACoffee के माध्यम से)</string>
-    <plurals name="hours">
-        <item quantity="one">%s घंटा</item>
-        <item quantity="other">%s घंटे</item>
-    </plurals>
     <string name="logs">लॉग्स</string>
     <string name="manual_build">1fexd द्वारा मैन्युअल रूप से निर्मित और हस्ताक्षरित</string>
     <string name="flavor">फ्लेवर:</string>
     <string name="github_pipeline_build">गिटहब वर्कफ़्लो द्वारा निर्मित और हस्ताक्षरित</string>
     <string name="other">अन्य</string>
     <string name="app_setup">ऐप सेटअप</string>
-    <plurals name="minutes">
-        <item quantity="one">%s मिनट</item>
-        <item quantity="other">%s मिनट</item>
-    </plurals>
-    <string name="built_by">द्वारा निर्मित एवं हस्ताक्षरित</string>
     <string name="built_by_error">इस बिल्ड पर न तो 1fexd और न ही Github वर्कफ़्लो द्वारा हस्ताक्षर किए गए थे। इसका मतलब जरूरी नहीं कि कुछ बुरा हो क्योंकि कोई भी स्रोत कोड को फोर्क कर सकता है और अपना लिंकशीट संस्करण बना सकता है, लेकिन उनके दुआरा दुर्भावनापूर्ण इरादे से ऐसा करना मुमकिन हो सकता है।</string>
-    <plurals name="months">
-        <item quantity="one">%s महीना</item>
-        <item quantity="other">%s महीने</item>
-    </plurals>
-    <string name="pro_feature">यह लिंकशीट परो फ़ीचर है!</string>
     <string name="resolve_via_failed_toast">संकल्प विफल होने पर टोस्ट दिखाएँ</string>
     <string name="last_updated">अंतिम अपडेट की (यूटीसी):</string>
     <string name="export_to_file">फ़ाइल में निर्यात करें</string>
@@ -77,17 +35,14 @@
     <string name="url_copied_toast">URL कॉपी किया गया टोस्ट</string>
     <string name="dev_mode_enabled">बधाई हो, आपने डेव-मोड सक्षम कर दिया है। जरा सावधान रहें।</string>
     <string name="clear_urls_version">ClearURLs नियम</string>
-    <string name="last_rule_update">अपस्ट्रीम से अंतिम नियम अपडेट (UTC):</string>
     <string name="import_settings">सेटिंग्स इंपोर्ट करें</string>
     <string name="resolve_via_toast">किसी URL का समाधान हो जाने पर एक टोस्ट दिखाएँ</string>
     <string name="download_started_toast">डाउनलोड प्रारंभ टोस्ट</string>
     <string name="notifications">नोटीफिकेशन</string>
-    <string name="just_version">संस्करण</string>
     <string name="export_include_recommendation">हम अनुशंसा करते हैं कि आप निम्नलिखित सेटिंग्स तभी चालू करें जब आप अपना निर्यात किसी और के साथ साझा करने की योजना नहीं बनाते हैं!</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
     <string name="resolve_via_toast_explainer">जब किसी URL का समाधान किसी बाहरी सेवा के माध्यम से किया जाता है तो एक टोस्ट दिखाएं</string>
     <string name="confirm_import">पुष्टि करें</string>
-    <string name="copy_version_information">संस्करण जानकारी कॉपी करें</string>
     <string name="dev">डेवलपर</string>
     <string name="include_log_hash_key">लॉग हैश कुंजी शामिल करें (आपके लॉग को संशोधित करने के लिए उपयोग की जाने वाली कुंजी)</string>
     <string name="export_privacy">निर्यात गोपनीयता के बारे में जानने के लिए, आप इस <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> पर जा सकते हैं।</string>
@@ -97,7 +52,6 @@
     <string name="include_history">इतिहास शामिल करें (आपका लिंक क्लिक और ऐप इतिहास)</string>
     <string name="enable_linksheet_compat_explainer">मेनू उप-मेनू \"ऐप्स\" में पाया जा सकता है और इंस्टॉल होने पर, कुछ मूल ऐप्स के अनुरोधों को रोकने में सक्षम होता है।</string>
     <string name="opening_with_app_toast_explainer">किसी डोमेन के लिए डिफ़ॉल्ट के रूप में सेट किया गया ऐप लॉन्च होने पर एक टोस्ट दिखाएं</string>
-    <string name="donation">दान</string>
     <string name="export_settings">सेटिंग्स एक्सपोर्ट करें</string>
     <string name="notifications_explainer">टोस्ट नोटीफिकेशन कॉन्फ़िगर करें</string>
     <string name="running_unofficial_build">अनौपचारिक बिल्ड</string>
@@ -115,35 +69,23 @@
     <string name="import_and_override">आयात करें और ओवरराइड करें</string>
     <string name="show_linksheet_referrer">लिंकशीट रेफ़रलकर्ता दिखाएँ</string>
     <string name="yes">हां</string>
-    <string name="enable_new_bottom_sheet">नई निचली शीट सक्षम करें</string>
     <string name="built_at">(UTC) पर निर्मित:</string>
     <string name="linksheet_donation_explainer_2"><b>5€</b> से अधिक का दान (<b>4€</b> यदि आप क्रिप्टो के साथ दान करते हैं!) आपको <b>लिंकशीट प्रो</b> तक पहुंच की अनुमति देता है, जो वर्तमान में केवल छिपा हुआ है ऐप की मुख्य स्क्रीन पर दान बैनर, लेकिन भविष्य में, <b>प्रो एक्सक्लूसिव फीचर्स</b> होंगे।</string>
     <string name="export_import_settings">निर्यात या आयात सेटिंग्स</string>
     <string name="import_headline">आयात करें</string>
-    <string name="button_settings">बटन</string>
-    <string name="linksheet_version_info_header">लिंकशीट संस्करण जानकारी:</string>
-    <string name="seal_subtitle_2">जेटपैक कंपोज़ के संबंध में सीखने के लिए सील एक बेहतरीन संसाधन रहा है</string>
-    <string name="import_dumped_preference_explainer">प्राथमिकताओं के लिए इंपोर्टर लॉग फ़ाइलों में मौजूद है - संभवतः औसत उपयोगकर्ता के लिए उपयोगी नहीं है</string>
     <string name="import_explainer">फ़ाइल से पिछला निर्यात आयात करें</string>
     <string name="github_workflow_run_id">बिल्ड वर्कफ़्लो आईडी:</string>
     <string name="export_import_settings_explainer">अपनी वर्तमान सेटिंग्स निर्यात करें या पिछली निर्यात की हूई सेटिंग्स आयात करें</string>
-    <string name="donation_instructions">दान निर्देश</string>
-    <string name="new_bottomsheet_explainer">लिंकशीट के इस संस्करण में <annotation url="https://github.com/sakethpathike">\@sakethpathike</annotation> की बदौलत एक नई निचली शीट मौजूद है! कृपया Discord, Github या ईमेल के माध्यम से प्रतिक्रिया प्रदान करें। \u0020
-\n \u0020
-\nआप सेटिंग्स के माध्यम से पुरानी निचली शीट पर वापस लौट सकते हैं -&gt; एडवांस्ड -&gt; फ़ीचर फ्लैग्स।</string>
     <string name="donate_card_headline">लिंकशीट का समर्थन करने के लिए दान करें</string>
     <string name="at_least_one_unknown_browser_installer">कम से कम (अज्ञात) एक ब्राउज़र स्थापित है</string>
     <string name="mastodon_redirect_subtitle_2">मास्टोडन रीडायरेक्ट के स्रोत कोड का उपयोग शिज़ुकु इंटरैक्शन के संदर्भ के रूप में किया गया था</string>
     <string name="at_least_one_unknown_browser_installer_explainer">लिंकशीट ने ब्राउज़र होने का दावा करने वाले कम से कम एक ऐप का पता लगाया है। लिंकशीट की सूची पूरी नहीं हो सकती है. यदि आपको लगता है कि यह एक त्रुटि है, तो Github पर एक समस्या सबमिट करें।</string>
     <string name="donate">दान करें</string>
-    <string name="enable_new_bottom_sheet_explainer">पुरानी शीट के बजाय दोबारा तैयार की गई निचली शीट का उपयोग करें</string>
-    <string name="disclaimer_libredirect_unstable">प्रायोगिक सुविधा होने के अलावा, LibRedirect को वर्तमान में बहुत अस्थिर माना जाता है और यह बिल्कुल भी काम नहीं कर सकता है।</string>
     <string name="no_browser_installed_explainer">लिंकशीट ब्राउज़र होने का दावा करने वाले कम से कम एक एप्लिकेशन का पता लगाने में असमर्थ रही। सर्वोत्तम अनुभव के लिए, एक ब्राउज़र इंस्टॉल करें।</string>
     <string name="export_explainer">अपनी वर्तमान ऐप सेटिंग को एक फ़ाइल में निर्यात करें</string>
     <string name="donate_card_subtitle"> यदि आपको लिंकशीट पसंद है, तो GitHub पर एक स्टार छोड़ने और/या दान करने पर विचार करें। \u0020
 \n<b>5€</b> से अधिक दान करने वाले दानकर्ता <b>लिंकशीट प्रो</b> के लिए पात्र हैं, जिसमें विशिष्ट सुविधाएं होंगी।</string>
     <string name="privacy">गोपनीयता</string>
-    <string name="new_bottomsheet">नई निचली शीट</string>
     <string name="version_name">पूर्ण आईडेंटिफायर:</string>
     <string name="shizuku_manager_start_failed">Shizuku प्रबंधक प्रारंभ करने में विफल, कृपया इसे मैन्युअल रूप से प्रारंभ करें!</string>
 </resources>

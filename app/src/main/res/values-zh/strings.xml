@@ -476,4 +476,16 @@
     <string name="telemetry_identifier_reset">重置标识符</string>
     <string name="telemetry_configure_title">分析</string>
     <string name="telemetry_configure_type">分析类型</string>
+    <string name="github_workflow_run_id" translatable="false"></string>
+    <string name="version_name" translatable="false"></string>
+    <string name="flavor" translatable="false"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="other"></item>
+    </plurals>
 </resources>

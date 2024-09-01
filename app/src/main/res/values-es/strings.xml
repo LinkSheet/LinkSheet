@@ -487,19 +487,4 @@
     <string name="settings_main_setup_success__button_link_handlers">Gestores de enlaces</string>
     <string name="resolve_event__running_libredirect">Intentando encontrar el frontend de FOSS</string>
     <string name="settings_app_config__button_add_item">Añadir artículo</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="one"></item>
-        <item quantity="many"></item>
-        <item quantity="other"></item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="one"></item>
-        <item quantity="many"></item>
-        <item quantity="other"></item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="one"></item>
-        <item quantity="many"></item>
-        <item quantity="other"></item>
-    </plurals>
 </resources>

@@ -47,7 +47,7 @@
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="misc_settings">Остало</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> \u0020
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> \u0020 
 \nлинк</annotation> \u0020</string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
@@ -162,7 +162,7 @@
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
     <string name="links">Линкови</string>
-    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати
+    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати 
 \n <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
     <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
@@ -221,7 +221,7 @@
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
-    <string name="donate_card_subtitle">Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. \u0020
+    <string name="donate_card_subtitle">Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. \u0020 
 \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције. \u0020</string>
     <string name="privacy">Приватност</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања. Подржани прегледачи: %s</string>
@@ -358,7 +358,7 @@
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
-    <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични \u0020
+    <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични \u0020 
 \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>. \u0020</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
     <string name="telemetry_level_disabled">Онемогућено</string>

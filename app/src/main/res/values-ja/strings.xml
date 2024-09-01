@@ -131,4 +131,3 @@
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">"supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します   （annotation url=\"https://supabase.com/privacy\"&gt;Privacy policy&lt;/annotation&gt;）  "</string>
 </resources>
-

@@ -218,7 +218,7 @@
     <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>
     <string name="running_unofficial_build">非官方构建</string>
-    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。
+    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。 
 \n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。 \u0020</string>
     <string name="privacy">隐私</string>
     <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接。支持的浏览器：%s</string>

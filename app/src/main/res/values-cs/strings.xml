@@ -224,7 +224,7 @@
     <string name="warning">Varování</string>
     <string name="at_least_one_known_browser_installed">Je nainstalován alespoň jeden prohlížeč</string>
     <string name="no_browser_installed_explainer">Aplikace LinkSheet nedetekovala žádnou aplikaci prohlížeče. Pro nejlepší funkčnost prosím nainstalujte prohlížeč.</string>
-    <string name="donate_card_subtitle">Pokud se vám aplikace LinkSheet líbí, zvažte možnost zanechat hvězdičku na GitHubu a/nebo přispět.
+    <string name="donate_card_subtitle">Pokud se vám aplikace LinkSheet líbí, zvažte možnost zanechat hvězdičku na GitHubu a/nebo přispět. 
 \nDárci, kteří přispějí více než <b>5 €</b>, mají nárok na <b>LinkSheet Pro</b>, který bude mít exkluzivní funkce. \u0020</string>
     <string name="include_history">Zahrnout historii (historie vašich klepnutí na odkazy a aplikací)</string>
     <string name="resolve_via_toast_explainer">Zobrazit vyskakovací zprávu po vyřešení adresy URL externí službou</string>

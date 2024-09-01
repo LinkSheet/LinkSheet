@@ -222,7 +222,7 @@
     <string name="discord">Discord</string>
     <string name="discord_explainer">Czat LinkSheet na Discordzie</string>
     <string name="donate_card">Wesprzyj używając karty (przez BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. \u0020
+    <string name="donate_card_subtitle">Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny. \u0020 
 \nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje. \u0020</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="donate_learn_more">Czytaj więcej</string>

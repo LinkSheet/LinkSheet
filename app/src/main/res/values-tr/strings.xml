@@ -197,7 +197,7 @@
     <string name="fastforward_version">FastForward kuralları</string>
     <string name="opening_with_app_toast_explainer">Bir alan adı için varsayılan olarak ayarlanan bir uygulama başlatıldığında bildirim göster</string>
     <string name="clear_urls_version">ClearURLs kuralları</string>
-    <string name="last_updated"><b>Sürüm:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Sürüm:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Deneysel LinkSheetCompat menüsünü etkinleştir</string>
     <string name="base_config">Ek yapılandırma</string>

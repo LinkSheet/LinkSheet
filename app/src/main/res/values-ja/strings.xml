@@ -28,14 +28,10 @@
     <string name="none_explainer">ネイティブアプリのみをリストし、全てのブラウザを削除します。 ネイティブアプリが１つだけ存在する場合、それが自動的に開きます。 ネイティブアプリが存在しない場合は、全てのブラウザがリストされます。</string>
     <string name="always_ask_explainer">常に全てのブラウザをリスト</string>
     <string name="no_such_app_found">そのようなアプリは見つかりませんでした！</string>
-    <string name="enable_send_button">「共有先」ボタンを有効</string>
-    <string name="enable_send_button_explainer">下のシートにボタンが表示され、「共有先」メニューから他のアプリにURLを共有出来ます</string>
     <string name="send_to">共有先</string>
     <string name="default_apps_subtitle">優先アプリは、特定のホストを「常に」開くように設定したアプリです</string>
     <string name="always_show_package_name">常にパッケージ名を表示</string>
     <string name="always_show_package_name_explainer">アプリ名だけではなく、常にパッケージ名を表示します。 これはアプリ全体に当てはまります。</string>
-    <string name="disable_all_toasts">トーストを無効</string>
-    <string name="disable_all_toasts_explainer">トーストメッセージを表示しないようにします</string>
     <string name="remove_all">全て削除</string>
     <string name="add_all">全て追加</string>
     <string name="hide_after_copying">アクションを自動で非表示</string>

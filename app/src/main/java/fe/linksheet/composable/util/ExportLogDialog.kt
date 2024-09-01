@@ -121,36 +121,3 @@ fun ExportLogDialog(
         }
     }
 }
-
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun DialogCheckboxRow(
-    text: String,
-    description: String,
-    checked: Boolean,
-    onClick: () -> Unit,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-            .clip(CustomShapeDefaults.SingleShape)
-            .combinedClickable(
-                onClick = onClick,
-                role = Role.Checkbox
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
-    ) {
-        Checkbox(
-            checked = checked,
-            onCheckedChange = { onClick() }
-        )
-
-        Column(modifier = Modifier.padding(start = 8.dp)) {
-            Text(text = text, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp))
-            Text(text = description, style = MaterialTheme.typography.bodyMedium)
-        }
-    }
-}

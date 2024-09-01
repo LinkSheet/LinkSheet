@@ -99,13 +99,3 @@ fun DonateSettingsRoute(
         }
     }
 }
-
-private fun buildNameValueAnnotatedString(name: String, value: String): AnnotatedString {
-    return buildAnnotatedString {
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-            append(name)
-        }
-
-        append(" ", value)
-    }
-}

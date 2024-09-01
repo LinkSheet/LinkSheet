@@ -18,12 +18,6 @@ class DevSettingsViewModel(
     experimentRepository: ExperimentRepository,
     private val shizukuHandler: ShizukuHandler,
 ) : BaseViewModel(preferenceRepository) {
-    var devModeEnabled = preferenceRepository.asState(AppPreferences.devModeEnabled)
-    val useDevBottomSheet = preferenceRepository.asState(AppPreferences.useDevBottomSheet)
-    val devBottomSheetExperiment = preferenceRepository.asState(AppPreferences.devBottomSheetExperiment)
-
-    val enableAnalytics = experimentRepository.asState(Experiments.enableAnalytics)
-
     fun enqueueResetAppLinks() {
         val command = ShizukuCommand(command = { reset("all") }, resultHandler = {
             Toast.makeText(context, context.getText(R.string.reset_app_link_verification_status_toast), Toast.LENGTH_SHORT).show()

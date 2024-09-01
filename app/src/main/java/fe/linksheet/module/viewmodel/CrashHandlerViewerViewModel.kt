@@ -15,6 +15,4 @@ class CrashHandlerViewerViewModel(
     val logViewCommon: LogViewCommon,
 ) : BaseViewModel(preferenceRepository) {
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
-
-    val uiOverhaul = { true }
 }

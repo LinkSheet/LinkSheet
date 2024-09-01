@@ -25,15 +25,6 @@ fun Iterable<ResolveInfo>.toDisplayActivityInfos(
     return map { it.toDisplayActivityInfo(context, browser) }.labelSorted(sorted)
 }
 
-
-fun Map<String, ResolveInfo>.toDisplayActivityInfos(
-    context: Context,
-    sorted: Boolean = true,
-    browser: Boolean = false,
-): List<DisplayActivityInfo> {
-    return toDisplayActivityInfos(context.packageManager, sorted, browser)
-}
-
 fun Map<String, ResolveInfo>.toDisplayActivityInfos(
     packageManager: PackageManager,
     sorted: Boolean = true,

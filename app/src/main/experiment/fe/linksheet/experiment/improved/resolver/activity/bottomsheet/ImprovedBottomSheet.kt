@@ -524,31 +524,6 @@ class ImprovedBottomSheet(
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
-    private fun resolveAsync(viewModel: BottomSheetViewModel): Deferred<Unit> {
-        return activity.lifecycleScope.async {
-            val completed = viewModel.resolveAsync(intent, referrer).await()
-
-            if (completed is BottomSheetResult.BottomSheetSuccessResult && completed.hasAutoLaunchApp) {
-                showResolveToasts(completed, uiThread = true)
-
-                if (viewModel.openingWithAppToast()) {
-                    showToast(getString(R.string.opening_with_app, completed.app.label), uiThread = true)
-                }
-
-                launchApp(
-                    completed,
-                    completed.app,
-                    always = completed.isRegularPreferredApp,
-                    persist = false,
-                )
-            }
-        }
-    }
-
-    private fun getString(resId: Int, vararg formatArgs: String): String {
-        return activity.getString(resId, *formatArgs)
-    }
-
     suspend fun launchApp(
         result: BottomSheetResult.SuccessResult,
         info: DisplayActivityInfo?,

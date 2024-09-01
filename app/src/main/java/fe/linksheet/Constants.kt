@@ -15,4 +15,3 @@ const val linkSheetCompatGithubReleases = "$linksheetOrg/compat/releases"
 
 const val shizukuDownload = "https://shizuku.rikka.app/download"
 
-val lineSeparator: String = System.lineSeparator()

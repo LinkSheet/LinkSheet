@@ -25,37 +25,6 @@ import fe.linksheet.ui.HkGroteskFontFamily
 
 
 @Composable
-fun rememberDeleteLogDialog(
-    logFile: LogFileService.LogFile,
-): StatefulDialogState<LogFileService.LogFile, LogFileService.LogFile> {
-    val context = LocalContext.current
-    val interaction = LocalHapticFeedbackInteraction.current
-
-
-    val onClose: (LogFileService.LogFile) -> LogFileService.LogFile = {
-        it
-        //        interaction.copy(text, FeedbackType.Confirm)
-    }
-
-//    val state = rememberResultDialogState<LogViewCommon.ExportSettings>()
-
-    val state = rememberStatefulDialog<LogFileService.LogFile, LogFileService.LogFile>(data = logFile)
-
-    state.open()
-//    StatefulDialog(state = state, onClose = onClose) {
-//        DeleteLogDialog(
-//            dismiss = interaction.wrap(state::dismiss, FeedbackType.Decline),
-//            close = {
-//                state.close()
-//            },
-//        )
-//    }
-
-    return state
-}
-
-
-@Composable
 fun DeleteLogDialog(
     dismiss: () -> Unit,
     confirm: () -> Unit,

@@ -259,16 +259,3 @@ private fun getClipboardUrl(clipboardManager: ClipboardManager): Uri? {
 private fun getClipboardUrl(text: String?): Uri? {
     return text?.let { UriUtil.parseWebUriStrict(it) }
 }
-
-private fun LazyListScope.cardItem(
-    @StringRes header: Int? = null,
-    content: @Composable LazyItemScope.() -> Unit,
-) {
-    if (header != null) {
-        header(header = header)
-    }
-
-    item {
-        content(this)
-    }
-}

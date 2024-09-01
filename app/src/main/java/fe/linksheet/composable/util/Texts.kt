@@ -56,10 +56,7 @@ fun HeadlineText(modifier: Modifier = Modifier, @StringRes headlineId: Int) {
     HeadlineText(modifier, headline = stringResource(id = headlineId))
 }
 
-fun buildSubtitle(modifier: Modifier = Modifier, subtitle: String?): @Composable (() -> Unit)? =
-    if (subtitle != null) {
-        { SubtitleText(modifier = modifier, subtitle = subtitle) }
-    } else null
+
 
 fun buildEnabledSubtitle(
     modifier: Modifier = Modifier,
@@ -67,12 +64,6 @@ fun buildEnabledSubtitle(
 ): @Composable ((Boolean) -> Unit)? = if (subtitle != null) {
     { SubtitleText(modifier = modifier, subtitle = subtitle) }
 } else null
-
-fun linkableSubtitleBuilder(@StringRes id: Int): @Composable ((Boolean) -> Unit) {
-    return { enabled ->
-        LinkableSubtitleText(id = id, enabled = enabled)
-    }
-}
 
 @Composable
 fun LinkableSubtitleText(modifier: Modifier = Modifier, @StringRes id: Int, enabled: Boolean) {

@@ -1,6 +1,5 @@
 package fe.linksheet.experiment.ui.overhaul.composable.page.main
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -12,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,48 +18,6 @@ import fe.android.compose.extension.optionalClickable
 import fe.linksheet.R
 import fe.linksheet.ui.PreviewTheme
 
-
-@Composable
-fun MainCardContent(
-    icon: ImageVector,
-    @StringRes iconDescription: Int,
-    @StringRes title: Int,
-    content: String,
-) {
-    Column {
-        Icon(
-            modifier = Modifier.size(28.dp),
-            imageVector = icon,
-            contentDescription = stringResource(id = iconDescription),
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = stringResource(id = title),
-            style = MaterialTheme.typography.titleMedium,
-        )
-
-        Text(
-            text = content,
-        )
-    }
-}
-
-@Composable
-fun MainCardContent(
-    icon: ImageVector,
-    @StringRes iconDescription: Int,
-    @StringRes title: Int,
-    @StringRes content: Int,
-) {
-    MainCardContent(
-        icon = icon,
-        iconDescription = iconDescription,
-        title = title,
-        content = stringResource(id = content)
-    )
-}
 
 @Composable
 fun MainCard(

@@ -263,7 +263,7 @@
     <string name="download_started_toast_explainer">Mostrar un toast cuando se ha iniciado una descarga</string>
     <string name="opening_with_app_toast">Aplicación iniciada automáticamente</string>
     <string name="opening_with_app_toast_explainer">Mostrar un mensaje emergente cuando se inicia una aplicación configurada como predeterminada para un dominio</string>
-    <string name="resolve_via_toast">Éxito en la resolución</string>
+    <string name="resolve_via_toast">La solución fue exitosa</string>
     <string name="resolve_via_failed_toast">Fallo en la resolución</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar una ventana emergente cuando una URL no se resuelve a través de un servicio externo</string>
     <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>

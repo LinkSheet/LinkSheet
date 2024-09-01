@@ -197,7 +197,7 @@
     <string name="fastforward_version">FastForward kuralları</string>
     <string name="opening_with_app_toast_explainer">Bir alan adı için varsayılan olarak ayarlanan bir uygulama başlatıldığında bildirim göster</string>
     <string name="clear_urls_version">ClearURLs kuralları</string>
-    <string name="last_updated"><b>Sürüm:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Sürüm:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Deneysel LinkSheetCompat menüsünü etkinleştir</string>
     <string name="base_config">Ek yapılandırma</string>
@@ -482,4 +482,16 @@
     <string name="settings_main_news__text_ui_overhaul">LinkSheet\'e yeni bir görünüm verildi!</string>
     <string name="resolve_event__generating_preview">Önizleme oluşturuluyor</string>
     <string name="settings_links_amp2html__title_skip_browser">Tarayıcıdan gelirken atla</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d devre dışı</item>
+        <item quantity="other">%d devre dışı</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d etkin</item>
+        <item quantity="other">%d etkin</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d onaylı</item>
+        <item quantity="other">%d onaylı</item>
+    </plurals>
 </resources>

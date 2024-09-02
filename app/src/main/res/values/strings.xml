@@ -286,13 +286,13 @@
     <string name="version_name" translatable="false"><b>Version:</b>\u0020
         <font face="monospace">%s</font>
     </string>
-    <string name="built_at" translatable="false"><b>Built at:</b>\u0020
+    <string name="built_at"><b>Built at:</b>\u0020
         <font face="monospace">%s</font>
     </string>
-    <string name="flavor" translatable="false"><b>Flavor:</b>\u0020
+    <string name="flavor"><b>Flavor:</b>\u0020
         <font face="monospace">%s</font>
     </string>
-    <string name="github_workflow_run_id" translatable="false"><b>Workflow ID:</b>\u0020
+    <string name="github_workflow_run_id"><b>Workflow ID:</b>\u0020
         <font face="monospace">%s</font>
     </string>
     <string name="privacy">Privacy</string>

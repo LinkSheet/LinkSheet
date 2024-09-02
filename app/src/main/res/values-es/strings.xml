@@ -263,7 +263,7 @@
     <string name="download_started_toast_explainer">Mostrar un toast cuando se ha iniciado una descarga</string>
     <string name="opening_with_app_toast">Aplicación iniciada automáticamente</string>
     <string name="opening_with_app_toast_explainer">Mostrar un mensaje emergente cuando se inicia una aplicación configurada como predeterminada para un dominio</string>
-    <string name="resolve_via_toast">Éxito en la resolución</string>
+    <string name="resolve_via_toast">La solución fue exitosa</string>
     <string name="resolve_via_failed_toast">Fallo en la resolución</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar una ventana emergente cuando una URL no se resuelve a través de un servicio externo</string>
     <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
@@ -487,4 +487,19 @@
     <string name="settings_main_setup_success__button_link_handlers">Gestores de enlaces</string>
     <string name="resolve_event__running_libredirect">Intentando encontrar el frontend de FOSS</string>
     <string name="settings_app_config__button_add_item">Añadir artículo</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d verificado</item>
+        <item quantity="many">%d verificados</item>
+        <item quantity="other">%d verificados</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d activado</item>
+        <item quantity="many">%d activados</item>
+        <item quantity="other">%d activados</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d desactivado</item>
+        <item quantity="many">%d desactivados</item>
+        <item quantity="other">%d desactivados</item>
+    </plurals>
 </resources>

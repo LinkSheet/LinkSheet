@@ -7,7 +7,7 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Stable
-import fe.linksheet.experiment.ui.overhaul.composable.AppListItemData
+import fe.linksheet.composable.AppListItemData
 
 object VerifiedDomainUtil {
     @RequiresApi(Build.VERSION_CODES.S)

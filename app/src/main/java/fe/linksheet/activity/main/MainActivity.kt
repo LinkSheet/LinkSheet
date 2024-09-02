@@ -14,7 +14,7 @@ import fe.linksheet.activity.DebugStatePublisher
 import fe.linksheet.activity.NavGraphDebugState
 import fe.linksheet.activity.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
-import fe.linksheet.experiment.ui.overhaul.composable.page.settings.privacy.analytics.rememberAnalyticDialog
+import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination
 import fe.linksheet.module.viewmodel.MainViewModel

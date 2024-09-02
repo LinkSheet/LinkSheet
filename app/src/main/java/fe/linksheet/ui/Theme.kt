@@ -22,7 +22,6 @@ import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.linksheet.activity.BaseComponentActivity
-import fe.linksheet.experiment.ui.overhaul.ui.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
@@ -133,7 +132,7 @@ fun AppTheme(
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,
-                typography = if (themeSettingsViewModel.uiOverhaul()) NewTypography else Typography,
+                typography = NewTypography,
                 content = content
             )
         }
@@ -155,7 +154,7 @@ fun BaseComponentActivity.BoxAppHost(
 fun PreviewTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = LightColors,
-        typography = Typography,
+        typography = NewTypography,
         content = content
     )
 }

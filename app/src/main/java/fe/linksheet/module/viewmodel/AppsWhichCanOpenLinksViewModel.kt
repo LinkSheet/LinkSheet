@@ -17,7 +17,7 @@ import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.R
-import fe.linksheet.experiment.ui.overhaul.composable.AppListItemData
+import fe.linksheet.composable.AppListItemData
 import fe.linksheet.extension.android.isUserApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository

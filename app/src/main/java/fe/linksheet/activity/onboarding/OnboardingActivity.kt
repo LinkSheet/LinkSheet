@@ -22,8 +22,8 @@ import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.activity.main.MainActivity
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.ui.AppTheme
+import fe.linksheet.ui.NewTypography
 import fe.linksheet.ui.PoppinsFontFamily
-import fe.linksheet.ui.Typography
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -76,7 +76,7 @@ class OnboardingActivity : BaseComponentActivity() {
                                 Text(
                                     text = stringResource(id = appBarTitles[pagerState.currentPage]),
                                     overflow = TextOverflow.Visible,
-                                    style = Typography.titleLarge.copy(
+                                    style = NewTypography.titleLarge.copy(
                                         fontFamily = PoppinsFontFamily,
                                         fontSize = 32.sp
                                     ),

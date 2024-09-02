@@ -15,8 +15,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.ui.Typography
-
+import fe.linksheet.ui.NewTypography
 
 
 
@@ -38,14 +37,14 @@ fun HeadlineText(modifier: Modifier = Modifier, headline: CharSequence) {
         Text(
             modifier = modifier,
             text = headline,
-            style = Typography.titleLarge,
+            style = NewTypography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
     } else if (headline is String) {
         Text(
             modifier = modifier,
             text = headline,
-            style = Typography.titleLarge,
+            style = NewTypography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
     }

@@ -37,7 +37,7 @@ import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ProfileSwitcher
-import fe.linksheet.experiment.ui.overhaul.composable.component.bottomsheet.ExperimentalFailureSheetColumn
+import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast

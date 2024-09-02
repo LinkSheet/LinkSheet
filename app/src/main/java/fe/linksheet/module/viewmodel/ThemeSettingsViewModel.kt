@@ -13,6 +13,4 @@ class ThemeSettingsViewModel(
 
     val themeMaterialYou = preferenceRepository.asState(AppPreferences.themeMaterialYou)
     var themeAmoled = preferenceRepository.asState(AppPreferences.themeAmoled)
-
-    val uiOverhaul = { true }
 }

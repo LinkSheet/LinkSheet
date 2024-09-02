@@ -370,4 +370,7 @@
     <string name="telemetry_level_standard_description">Souhrnné statistiky používání</string>
     <string name="telemetry_level_minimal_description">Informace o nainstalované verzi</string>
     <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
+    <string name="opening_with_app">Otevírání v aplikaci %s</string>
+    <string name="launch_onboarding">Spustit úvod</string>
+    <string name="telemetry_dialog_text_2">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">sem</annotation>. \u0020</string>
 </resources>

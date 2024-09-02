@@ -263,8 +263,8 @@
     <string name="download_started_toast_explainer">Mostrar un toast cuando se ha iniciado una descarga</string>
     <string name="opening_with_app_toast">Aplicación iniciada automáticamente</string>
     <string name="opening_with_app_toast_explainer">Mostrar un mensaje emergente cuando se inicia una aplicación configurada como predeterminada para un dominio</string>
-    <string name="resolve_via_toast">La solución fue exitosa</string>
-    <string name="resolve_via_failed_toast">Fallo en la resolución</string>
+    <string name="resolve_via_toast">La resolución fue exitosa</string>
+    <string name="resolve_via_failed_toast">Resolver el fallo</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar una ventana emergente cuando una URL no se resuelve a través de un servicio externo</string>
     <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="libredirect_version">LibRedirect</string>
@@ -443,7 +443,7 @@
     <string name="resolve_event__initialized">Inicializado</string>
     <string name="resolve_event__applying_link_modifiers">Aplicando las modificaciones en el enlace</string>
     <string name="resolve_event__resolving_redirects">Resolviendo redirecciones</string>
-    <string name="settings_main_news__text_ui_overhaul">¡La interfaz de LinkSheet ha sido renovada!</string>
+    <string name="settings_main_news__text_ui_overhaul">¡LinkSheet ha sido renovado!</string>
     <string name="resolve_event__unamping_link">Desactivando el enlace AMP</string>
     <string name="resolve_event__download_check">Comprobando la posibilidad de descarga</string>
     <string name="resolve_event__loading_preferred_apps">Cargando aplicaciones predeterminadas</string>

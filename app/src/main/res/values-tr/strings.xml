@@ -176,7 +176,7 @@
     <string name="no">Hayır</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet tarayıcı olarak bilinen en az bir uygulama algıladı.</string>
     <string name="domain_selection_confirmation_subtitle">%s uygulamasını aşağıdaki alan adları için tercih edilen uygulama olarak ayarlamak istediğinizden emin misiniz?</string>
-    <string name="github_workflow_run_id">Yapı iş akışı kimliği</string>
+    <string name="github_workflow_run_id"><b>İş akışı kimliği:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="discord_explainer">Discord\'da LinkSheet hakkında konuşun</string>
     <string name="dismiss">Gizle</string>
     <string name="join">Katıl</string>
@@ -220,11 +220,11 @@
     <string name="general">Çeşitli</string>
     <string name="domain_selection_confirmation_title">Alan Adlarını Seçin?</string>
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'in kaynak kodu Shizuku entegrasyonu için referans olarak kullanıldı</string>
-    <string name="built_at">Oluşturulduğu zaman (UTC)</string>
+    <string name="built_at"><b>Şu tarihte derlendi:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="discord">Discord</string>
     <string name="manual_build">1fexd tarafından manuel olarak oluşturuldu ve imzalandı</string>
     <string name="github_pipeline_build">CI tarafından oluşturuldu ve imzalandı</string>
-    <string name="flavor">Eklenti</string>
+    <string name="flavor"><b>Ortam:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="app_setup">Uygulama kurulumu</string>
     <string name="other">Diğer</string>
     <string name="preferred_apps_settings">Destekledikleri bağlantılar için varsayılan uygulamalar ayarlayın</string>

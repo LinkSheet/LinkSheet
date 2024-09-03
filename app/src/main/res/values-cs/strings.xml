@@ -373,4 +373,132 @@
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
     <string name="telemetry_dialog_text_2">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">sem</annotation>. \u0020</string>
+    <string name="settings_verified_link_handlers__text_user_apps">Uživatelské aplikace</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Vše</string>
+    <string name="settings_notifications__divider_toasts">Vyskakovací zprávy</string>
+    <string name="settings_shortcuts__title_link_handlers">Zpracování odkazů</string>
+    <string name="built_at"><b>Sestaveno:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="customization">Přizpůsobení</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Zakázané</string>
+    <string name="flavor"><b>Úprava:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="switch_profile">Povolit přepínání profilů</string>
+    <string name="build_info">Informace o sestavení</string>
+    <string name="verified_link_handlers">Ověření zpracovatelé odkazů</string>
+    <string name="verified_link_handlers_subtitle">Ovládání stavu ověření domény aplikací</string>
+    <string name="settings__title_shortcuts">Zkratky</string>
+    <string name="settings_shortcuts__subtitle_default_browser">Otevřít stránku nastavení výchozího prohlížeče</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Zpracování odkazů povoleno</string>
+    <string name="settings_about__divider_external_versions">Externí verze</string>
+    <string name="export_log_dialog__title_redact_log">Redigovat protokol</string>
+    <string name="export_log_dialog__subtitle_redact_log">Doporučeno, skryje názvy aplikací a adresy URL</string>
+    <string name="export_log_dialog__subtitle_include_fingerprint">Doporučeno</string>
+    <string name="export_log_dialog__text_log_info">Nastavit sdílená nastavení pro protokol zachycený: <font face="monospace">%s</font> \u0020</string>
+    <string name="settings_main_news__button_read_more">Více informací</string>
+    <string name="settings_main_news__title_ui_overhaul">Nové rozhraní</string>
+    <string name="settings_main_news__text_ui_overhaul">LinkSheet dostal nový kabát!</string>
+    <string name="resolve_event__initialized">Inicializováno</string>
+    <string name="settings_links_follow_redirects__title_skip_browser">Přeskočit při příchodu z prohlížeče</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">Nepokoušet se následovat přesměrování, pokud je aplikace, která spustila LinkSheet, prohlížečem</string>
+    <string name="settings_app_config__description_preferred_browser">Uživatelem zvolený upřednostňovaný prohlížeč</string>
+    <string name="settings_edit_rule__title_edit_rule">Úprava pravidla</string>
+    <string name="delete_log_dialog__title_delete_log">Odstranit relaci?</string>
+    <string name="generic__button_text_delete">Odstranit</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d zakázaný hostitel</item>
+        <item quantity="few">%d zakázaní hostitelé</item>
+        <item quantity="other">%d zakázaných hostitelů</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d zakázaný</item>
+        <item quantity="few">%d zakázané</item>
+        <item quantity="other">%d zakázaných</item>
+    </plurals>
+    <string name="settings__title_filter_apps">Filtrovat aplikace</string>
+    <string name="link_handle_failed_text">LinkSheet nedokáže zpracovat tento odkaz, protože se zdá, že je poškozený. Můžete jej upravit níže a zkusit to znovu. Případně také můžete zkusit webové vyhledávání.</string>
+    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="reset_app_link_verification_status">Resetovat status ověřených odkazů aplikací</string>
+    <string name="reset_app_link_verification_status_subtitle">Klepněte sem pro resetování statusu ověřených odkazů u všech aplikací, poté počkejte několik minut, než je systém Android znovu ověří. Potvrzení neobdržíte. Vyžaduje Shizuku.</string>
+    <string name="reset_app_link_verification_status_toast">Vyžádáno opětovné ověření</string>
+    <string name="settings_shortcuts__title_default_browser">Výchozí prohlížeč</string>
+    <string name="settings_shortcuts__title_connected_apps">Připojené aplikace</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Povolené</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Zpracování odkazů nepovoleno</string>
+    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_credit_reason_seal">Inspirace designem</string>
+    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">Inspirace designem</string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job">Přeskočit</string>
+    <string name="export_log_dialog__title_share_logs">Sdílet protokol</string>
+    <string name="export_log_dialog__title_include_throwable">Zahrnout protokoly o pádech</string>
+    <string name="export_log_dialog__subtitle_include_throwable">Doporučeno, ale nelze redigovat</string>
+    <string name="export_log_dialog__title_include_fingerprint">Zahrnout otisk sestavení</string>
+    <string name="export_log_dialog__title_include_settings">Zahrnout nastavení</string>
+    <string name="export_log_dialog__subtitle_include_settings">Doporučeno</string>
+    <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">sem</annotation>. \u0020</string>
+    <string name="generic__button_text_copy_clipboard">Zkopírovat do schránky</string>
+    <string name="generic__button_text_cancel">Zrušit</string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Prohlížení protokolu zachyceného: %s</string>
+    <string name="crash_viewer__subtitle_app_crashed">Jejda, tohle se nemělo stát!</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
+    <string name="settings_links_downloader__title_downloader">Služba stahování</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet není nastaven jako výchozí prohlížeč systému</string>
+    <string name="settings_main_setup_success__button_change_browser">Výchozí prohlížeč</string>
+    <string name="settings_main_setup_success__button_set_default_browser">Nastavit jako výchozí prohlížeč</string>
+    <string name="settings_main_setup_success__button_link_handlers">Zpracování odkazů</string>
+    <string name="settings_main_setup_success__button_connected_apps">Připojené aplikace</string>
+    <string name="resolve_event__querying_browser_list">Dotazování na seznam prohlížečů</string>
+    <string name="resolve_event__applying_link_modifiers">Použití modifikátorů odkazů</string>
+    <string name="resolve_event__resolving_redirects">Řešení přesměrování</string>
+    <string name="resolve_event__unamping_link">Od-AMPování odkazu</string>
+    <string name="resolve_event__running_libredirect">Hledání FOSS frontendu</string>
+    <string name="resolve_event__download_check">Kontrola stahovatelnosti</string>
+    <string name="resolve_event__loading_preferred_apps">Načítání preferovaných aplikací</string>
+    <string name="resolve_event__checking_browsers">Kontrola prohlížečů</string>
+    <string name="resolve_event__sorting_apps">Seřazování aplikací</string>
+    <string name="resolve_event__generating_preview">Generování náhledu</string>
+    <string name="settings_links_amp2html__title_skip_browser">Přeskočit při příchodu z prohlížeče</string>
+    <string name="settings_links_amp2html__text_skip_browser">Nespouštět Amp2Html, pokud je aplikace, která spustila LinkSheet, prohlížečem</string>
+    <string name="settings_app_config__title_configure_app_behavior">Nastavit %s</string>
+    <string name="settings_app_config__button_add_item">Přidat položku</string>
+    <string name="settings_app_config__title_browsers">Prohlížeče</string>
+    <string name="settings_app_config__description_browsers">Nainstalované webové prohlížeče</string>
+    <string name="settings_app_config__title_native_apps">Aplikace</string>
+    <string name="settings_app_config__description_native_apps">Aplikace schopné zpracovávat odkazy s tímto hostitelem</string>
+    <string name="settings_app_config__title_preferred_browser">Preferovaný prohlížeč</string>
+    <string name="settings_app_config_rules__title_rules">Pravidla</string>
+    <string name="settings_app_config_rules__btn_new_rule">Nové pravidlo</string>
+    <string name="settings_new_rule__title_new_rule">Nové pravidlo</string>
+    <string name="settings_app_config_rules__title_default_rule">Výchozí pravidlo</string>
+    <string name="settings_app_config_rules__subtitle_default_rule">Toto pravidlo je použito, pokud neodpovídá žádné jiné pravidlo</string>
+    <string name="settings_app_config_rules__text_custom_rules">Vlastní pravidla</string>
+    <string name="delete_log_dialog__subtitle_delete_info">Chcete odstranit tuto relaci protokolu? Tato akce je nevratná!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d povolený</item>
+        <item quantity="few">%d povolené</item>
+        <item quantity="other">%d povolených</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d povolený hostitel</item>
+        <item quantity="few">%d povolení hostitelé</item>
+        <item quantity="other">%d povolených hostitelů</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d hostitel: %s</item>
+        <item quantity="few">%d hostitelé: %s</item>
+        <item quantity="other">%d hostitelů: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d ověřený</item>
+        <item quantity="few">%d ověřené</item>
+        <item quantity="other">%d ověřených</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d ověřený hostitel</item>
+        <item quantity="few">%d ověření hostitelé</item>
+        <item quantity="other">%d ověřených hostitelů</item>
+    </plurals>
+    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt; Propojení pracovních a osobních aplikací</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet není nastaven</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet je nastaven</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>
 </resources>

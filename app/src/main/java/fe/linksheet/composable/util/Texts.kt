@@ -14,8 +14,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.ui.NewTypography
+import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.NewTypography
 
 
 

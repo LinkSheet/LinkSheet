@@ -25,7 +25,7 @@ import fe.linksheet.extension.compose.updateState
 import fe.linksheet.extension.compose.updateStateFromResult
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 data class HostDialogState(
     val displayActivityInfo: DisplayActivityInfo,

@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 
 import fe.linksheet.R
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Deprecated(message = "Use SaneScaffoldSettingsPage instead")
 @OptIn(ExperimentalMaterial3Api::class)

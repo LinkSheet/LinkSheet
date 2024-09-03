@@ -17,7 +17,7 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.rememberAnnotatedStringResource
 import fe.linksheet.donateSettingsRoute
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.ui.NewTypography
+import fe.linksheet.composable.ui.NewTypography
 
 @Composable
 fun DonateCard(

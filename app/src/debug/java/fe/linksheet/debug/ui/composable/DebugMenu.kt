@@ -19,7 +19,7 @@ import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
-import fe.linksheet.ui.LocalActivity
+import fe.linksheet.composable.ui.LocalActivity
 import kotlin.reflect.KClass
 
 @Composable

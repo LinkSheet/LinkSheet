@@ -10,7 +10,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonLis
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
-import fe.linksheet.ui.ThemeV2
+import fe.linksheet.composable.ui.ThemeV2
 import fe.linksheet.util.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 

@@ -19,7 +19,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.ui.PreviewTheme
+import fe.linksheet.composable.ui.PreviewTheme
 
 @Composable
 private fun cardContainerColor(isDefaultBrowser: Boolean): Color {

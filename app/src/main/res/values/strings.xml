@@ -283,7 +283,7 @@
     </string>
     <string name="import_dumped_preference">Import dumped preferences</string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name" translatable="false"><b>Version:</b>\u0020
+    <string name="version_name"><b>Version:</b>\u0020
         <font face="monospace">%s</font>
     </string>
     <string name="built_at"><b>Built at:</b>\u0020

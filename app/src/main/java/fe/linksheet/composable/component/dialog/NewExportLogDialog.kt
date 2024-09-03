@@ -35,7 +35,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.util.ExportLogDialog
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Composable
 fun createExportLogDialog(

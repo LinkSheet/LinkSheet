@@ -1,4 +1,4 @@
-package fe.linksheet.ui
+package fe.linksheet.composable.ui
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme

@@ -1,4 +1,4 @@
-package fe.linksheet.ui
+package fe.linksheet.composable.ui
 
 import android.content.Context
 import androidx.annotation.StringRes

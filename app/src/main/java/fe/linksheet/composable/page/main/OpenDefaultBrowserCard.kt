@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.ui.NewTypography
+import fe.linksheet.composable.ui.NewTypography
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.Results
 

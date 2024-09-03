@@ -28,7 +28,7 @@ import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
 import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 
 @Composable

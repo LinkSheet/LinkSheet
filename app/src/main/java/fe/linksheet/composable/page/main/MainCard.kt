@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.android.compose.extension.optionalClickable
 import fe.linksheet.R
-import fe.linksheet.ui.PreviewTheme
+import fe.linksheet.composable.ui.PreviewTheme
 
 
 @Composable

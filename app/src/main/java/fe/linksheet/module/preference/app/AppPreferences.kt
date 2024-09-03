@@ -13,8 +13,8 @@ import fe.linksheet.module.redactor.PackageProcessor
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
-import fe.linksheet.ui.Theme
-import fe.linksheet.ui.ThemeV2
+import fe.linksheet.composable.ui.Theme
+import fe.linksheet.composable.ui.ThemeV2
 import io.viascom.nanoid.NanoId
 
 object AppPreferences : PreferenceDefinition(

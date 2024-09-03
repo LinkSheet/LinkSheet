@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Composable
 fun ButtonContent(imageVector: ImageVector, @StringRes text: Int) {

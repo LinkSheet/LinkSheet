@@ -25,8 +25,8 @@ import fe.linksheet.composable.page.home.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.settingsRoute
-import fe.linksheet.ui.HkGroteskFontFamily
-import fe.linksheet.ui.LocalActivity
+import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.Results
 import fe.linksheet.util.UriUtil

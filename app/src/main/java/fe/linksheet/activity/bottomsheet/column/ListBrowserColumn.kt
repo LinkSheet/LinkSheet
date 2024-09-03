@@ -24,7 +24,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 //enum class ClickType {
 //    Single, Double, Long, Private, Once, Always

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.ClickType
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Composable
 fun ChoiceButtons(

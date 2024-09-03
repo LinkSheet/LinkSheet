@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Preview(
     showBackground = true,

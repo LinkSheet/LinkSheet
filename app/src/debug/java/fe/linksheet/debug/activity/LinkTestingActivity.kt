@@ -7,7 +7,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.ui.AppTheme
+import fe.linksheet.composable.ui.AppTheme
 
 class LinkTestingActivity : BaseComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

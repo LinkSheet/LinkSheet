@@ -38,7 +38,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.ui.LocalActivity
+import fe.linksheet.composable.ui.LocalActivity
 import org.koin.androidx.compose.koinViewModel
 
 

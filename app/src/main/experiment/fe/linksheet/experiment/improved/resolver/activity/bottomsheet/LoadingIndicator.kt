@@ -18,7 +18,7 @@ import fe.linksheet.R
 import fe.linksheet.experiment.improved.resolver.ResolveEvent
 import fe.linksheet.experiment.improved.resolver.ResolverInteraction
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.ui.PreviewTheme
+import fe.linksheet.composable.ui.PreviewTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

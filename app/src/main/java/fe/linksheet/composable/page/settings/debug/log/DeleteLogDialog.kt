@@ -21,7 +21,7 @@ import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.DialogDefaults
 import fe.linksheet.R
 import fe.linksheet.module.log.file.LogFileService
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 
 @Composable

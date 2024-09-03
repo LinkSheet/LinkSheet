@@ -1,4 +1,4 @@
-package fe.linksheet.ui
+package fe.linksheet.composable.ui
 
 import android.app.Activity
 import android.content.Context

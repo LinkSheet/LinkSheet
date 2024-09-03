@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Composable
 fun Screen5(padding: PaddingValues, onNextClick: () -> Unit) {

@@ -34,7 +34,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.ui.LocalActivity
+import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.util.AppInfo
 import fe.linksheet.util.AppSignature
 import org.koin.androidx.compose.koinViewModel

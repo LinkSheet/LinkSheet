@@ -13,7 +13,7 @@ import fe.linksheet.composable.component.dialog.rememberNewExportLogDialog
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
-import fe.linksheet.ui.AppTheme
+import fe.linksheet.composable.ui.AppTheme
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.time.LocalDateTime

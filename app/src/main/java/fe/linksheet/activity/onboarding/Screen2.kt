@@ -22,7 +22,7 @@ import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.focusGainedEvents
 import fe.linksheet.module.shizuku.ShizukuStatus
 import fe.linksheet.shizukuDownload
-import fe.linksheet.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

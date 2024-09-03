@@ -47,7 +47,7 @@ import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
 import fe.linksheet.module.viewmodel.FilterMode
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.ui.LocalActivity
+import fe.linksheet.composable.ui.LocalActivity
 import org.koin.androidx.compose.koinViewModel
 
 private object VerifiedLinkHandlersRouteData {

@@ -25,7 +25,7 @@ import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
-import fe.linksheet.ui.AppTheme
+import fe.linksheet.composable.ui.AppTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

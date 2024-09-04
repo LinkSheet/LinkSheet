@@ -181,8 +181,8 @@
     <string name="dismiss">Gizle</string>
     <string name="join">Katıl</string>
     <string name="dev_mode_enabled">Tebrikler, geliştirici modunu etkinleştirdiniz. Sadece dikkatli olun.</string>
-    <string name="running_unofficial_build">Gayriresmi yapı</string>
-    <string name="debug_build">Hata ayıklama yapısı</string>
+    <string name="running_unofficial_build">Gayriresmi derleme</string>
+    <string name="debug_build">Hata ayıklama derlemesi</string>
     <string name="dev">Geliştirici</string>
     <string name="dev_explainer">Geliştirici ayarları</string>
     <string name="notifications">Bildirimler</string>
@@ -222,8 +222,8 @@
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'in kaynak kodu Shizuku entegrasyonu için referans olarak kullanıldı</string>
     <string name="built_at"><b>Şu tarihte derlendi:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="discord">Discord</string>
-    <string name="manual_build">1fexd tarafından manuel olarak oluşturuldu ve imzalandı</string>
-    <string name="github_pipeline_build">CI tarafından oluşturuldu ve imzalandı</string>
+    <string name="manual_build">1fexd tarafından manuel olarak derlendi ve imzalandı</string>
+    <string name="github_pipeline_build">CI tarafından derlendi ve imzalandı</string>
     <string name="flavor"><b>Ortam:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="app_setup">Uygulama kurulumu</string>
     <string name="other">Diğer</string>
@@ -296,7 +296,7 @@
     <string name="misc_settings">Çeşitli</string>
     <string name="donate_card_subtitle">LinkSheet\'i sevdiyseniz, GitHub\'da yıldızlamayı veya bağış yapmayı düşünün. <b>5€</b>\'dan fazla bağış yapanlar,özel özelliklerbulunduracak <b>LinkSheet Pro</b> için hak sahibidir.</string>
     <string name="open_link_with_subtitle_2">LinkSheet, ilk başta OpenLinkWith temelli idi</string>
-    <string name="version_name">Tam tanımlayıcı</string>
+    <string name="version_name"><b>Sürüm:</b> <font face="monospace">%s</font> \u0020</string>
     <string name="privacy">Gizlilik</string>
     <string name="privacy_settings_explainer">Yönlendiren gizliliği, Telemetri</string>
     <string name="thanks_for_donating">Bağış yaptığınız için teşekkürler!</string>
@@ -317,7 +317,7 @@
     <string name="no_browser_installed_explainer">LinkSheet, tarayıcı olduğunu iddia eden herhangi bir uygulama bulamadı. En iyi deneyim için, bir tarayıcı yükleyin.</string>
     <string name="linksheet_donation_explainer_2"><b>5€</b>\'dan fazla bir bağış; harici yönlendirmeleri takip etme, AMP olmayan sayfaları edinme (ve gelecekte daha fazlası!) gibi <b>Pro özel özellikleri</b>ni barındıran <b>LinkSheetPro</b>\'ya erişmenizi sağlar.</string>
     <string name="show_linksheet_referrer_explainer">Bir uygulama başlatıldığında, hangi uygulamanın başlattığını veya yönlendirdiğini kontrol edebilir. LinkSheet bir uygulama başlattığında, varsayılan olarak kendini gizler ve LinkSheet\'i başlatan uygulamayı gösterir. LinkSheet\'i, açtığı uygulamalar için yönlendiren olarak göstermek için bunu etkinleştirin.</string>
-    <string name="built_by_error">Bu yapı, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
+    <string name="built_by_error">Bu derleme, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="notifications_explainer">URL kopyalandı, İndirme başladı</string>
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
     <string name="onboarding_0_title">LinkSheet\'e
@@ -383,7 +383,7 @@
     <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -&gt; Özel uygulama erişimi -&gt; Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
     <string name="reset_app_link_verification_status">Uygulama bağlantı onaylama durumunu sıfırla</string>
     <string name="reset_app_link_verification_status_toast">Yeniden onaylama istendi</string>
-    <string name="build_info">Yapı bilgisi</string>
+    <string name="build_info">Derleme bilgisi</string>
     <string name="verified_link_handlers">Onaylanmış bağlantı işleyiciler</string>
     <string name="verified_link_handlers_subtitle">Uygulamaların domain onay durumunu yönetin</string>
     <string name="settings_shortcuts__title_default_browser">Varsayılan tarayıcı</string>
@@ -439,7 +439,7 @@
     <string name="export_log_dialog__title_share_logs">Günlükleri paylaş</string>
     <string name="export_log_dialog__title_redact_log">Günlüğü sansürle</string>
     <string name="export_log_dialog__subtitle_redact_log">Önerilir, uygulama isimlerini ve URLleri sansürler</string>
-    <string name="export_log_dialog__title_include_fingerprint">Yapı parmak izini dahil et</string>
+    <string name="export_log_dialog__title_include_fingerprint">Derleme parmak izini dahil et</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Önerilir</string>
     <string name="export_log_dialog__title_include_settings">Ayarları dahil et</string>
     <string name="generic__button_text_cancel">İptal</string>

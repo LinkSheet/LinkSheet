@@ -208,9 +208,9 @@
     <string name="mastodon_redirect_subtitle_2">Kod źródłowy Mastodon Redirect został użyty jako odniesienie dla interakcji Shizuku</string>
     <string name="import_dumped_preference">Przywróć kopię preferencji</string>
     <string name="import_and_override">Importuj i nadpisz</string>
-    <string name="version_name">Pełny identyfikator:</string>
-    <string name="built_at">Zbudowano (UTC):</string>
-    <string name="github_workflow_run_id">ID kompilacji workflow:</string>
+    <string name="version_name"><b>Wersja:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="built_at"><b>Data:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="privacy_settings_explainer">Prywatność odsyłacza, Telemetria</string>
     <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Kiedy uruchamiana jest aplikacja, może sprawdzić, która aplikacja ją uruchomiła, lub \"odwołała\" się do niej. Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, twierdząc, że to aplikacja, która uruchomiła LinkSheet, jest docelową aplikacją. Włącz to, aby ponownie wstawić LinkSheet jako odwołującą się aplikację dla aplikacji, które otwiera.</string>
@@ -226,7 +226,7 @@
 \nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje. \u0020</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="donate_learn_more">Czytaj więcej</string>
-    <string name="flavor">Wariant:</string>
+    <string name="flavor"><b>Wariant:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="github_pipeline_build">Zbudowana i podpisana przez CI</string>
     <string name="other">Inne</string>
     <string name="app_setup">Konfiguracja aplikacji</string>

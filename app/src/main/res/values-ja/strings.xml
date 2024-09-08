@@ -426,8 +426,7 @@
     <string name="download_started_toast_explainer">ダウンロードが開始されたらトーストを表示する</string>
     <string name="resolve_via_toast_explainer">URL が外部サービス経由で解決されたときにトーストを表示する</string>
     <string name="resolve_via_failed_toast">失敗を解決する</string>
-    <string name="onboarding_0_title">ようこそ
-\nLinkSheetへ</string>
+    <string name="onboarding_0_title">ようこそ \nLinkSheetへ</string>
     <string name="onboarding_0_subtitle">リンクを開くときに常にプロンプトを表示するように選択したり、デフォルトのブラウザを設定したり、その他多くの設定が可能です</string>
     <string name="onboarding_1_card_title">デフォルトのブラウザ</string>
     <string name="onboarding_1_button">デフォルトのブラウザとして設定</string>

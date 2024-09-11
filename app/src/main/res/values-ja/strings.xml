@@ -3,7 +3,7 @@
     <string name="open_with">次のアプリで開く</string>
     <string name="just_once">一度だけ</string>
     <string name="use_a_different_app">別のアプリを使用</string>
-    <string name="default_apps">デフォルトのアプリ</string>
+    <string name="default_apps">優先アプリ</string>
     <string name="set_as_browser">ブラウザとして設定</string>
     <string name="set_as_browser_explainer">ここをタップしてLinkSheetをデフォルトのブラウザにします</string>
     <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます！ \u0020</string>
@@ -38,7 +38,7 @@
     <string name="hide_after_copying_explainer">「リンクのコピー」や「ダウンロード」などのアクションボタンを押した後、下のシートを自動的に非表示にします</string>
     <string name="back">戻る</string>
     <string name="display_grid_layout">グリッドレイアウト</string>
-    <string name="set_as_browser_done">LinkSheetがデフォルトブラウザに設定されました！</string>
+    <string name="set_as_browser_done">LinkSheetがデフォルトのブラウザに設定されました！</string>
     <string name="pretend_to_be_app_explainer_2">Google Chrome などの一部のアプリは、検索結果で YouTube のリンクをタップすると、YouTube のアプリがあればそれを開こうとします。LinkSheetCompat は、YouTube などの特定のウェブサイトのリンクをタップしたときに、YouTube のアプリがあるかのように Chrome に見せかけます。そして、実際に YouTube のアプリがない場合は、LinkSheet という別のアプリを使ってリンクを開きます。</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet は、ブラウザであると主張するアプリを少なくとも 1 つ検出しました。 LinkSheetのリストは完全ではない可能性があります。 これがエラーだと思われる場合は、Githubでissueを作成してください。</string>
     <string name="display_grid_layout_explainer">ボトムシートでリストの代わりにグリッドを表示する</string>

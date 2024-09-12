@@ -181,4 +181,9 @@
     <string name="feature_flags_explainer">Ativar ou desativar recursos experimentais</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku ativado, toque em um app para alternar seus recursos de manipulação automática de links. Pressione em um app para abrir o menu de configurações \"Abrir por padrão\".</string>
     <string name="shizuku_not_running_explainer">O Shizuku não está em execução. Toque aqui para abrir o Shizuku e siga as instruções para iniciá-lo.</string>
+    <string name="pretend_to_be_app">Interceptar solicitações de aplicativos nativos</string>
+    <string name="pretend_to_be_app_explainer">Fingir ser um aplicativo nativo para domínios compatíveis com o LinkSheetCompat</string>
+    <string name="general">Diversos</string>
+    <string name="pretend_to_be_app_explainer_2">Alguns aplicativos, como o Google Chrome, procuram explicitamente um aplicativo nativo para lidar, por exemplo, com um link do YouTube quando ele é tocado nos resultados da pesquisa. O LinkSheetCompat finge ser esse aplicativo nativo para hosts compatíveis e, em seguida, encaminha a solicitação ao LinkSheet.</string>
+    <string name="configure">Configurar</string>
 </resources>

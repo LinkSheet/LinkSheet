@@ -39,7 +39,12 @@ class Amp2HtmlResolveRequest(
     override fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
         val req = okhttp3.Request.Builder().url(url).build()
 
-        val response = okHttpClient.newCall(req).execute()
+        val response = try {
+            okHttpClient.newCall(req).execute()
+        } catch (e: Exception) {
+            return Result.failure(e)
+        }
+
         val statusCode = response.code
         val contentType = response.body.contentType() ?: return Result.failure(ResolveRequestException(statusCode))
 
@@ -52,13 +57,18 @@ class Amp2HtmlResolveRequest(
             return Result.success(ResolveResultType.NothingToResolve)
         }
 
-        val nonAmpLink = response.body.byteStream().buffered().use { tryFromCache2(it, req.url.host) }
+        val nonAmpLink = try {
+            response.body.byteStream().buffered().use { tryFromCache2(it, req.url.host) }
+        } catch (e: Exception) {
+            return Result.failure(e)
+        }
+
         if (nonAmpLink != null) {
             Log.d("Amp2Html", "$nonAmpLink")
-//            Result.success(ResolveResultType.Resolved.Local(nonAmpLink))
-
             return nonAmpLink
         }
+
+        return Result.failure(ResolveRequestException())
 
 //        val (current, cache, invalidate, send) = urlResolverCache.getNew(url, timeout, false)
 //
@@ -102,7 +112,6 @@ class Amp2HtmlResolveRequest(
 //        if (nonAmpLink != null) {
 //            return Result.success(ResolveResultType.Resolved.Local(nonAmpLink))
 //        }
-        return Result.failure(ResolveRequestException())
     }
 
     private fun tryFromCache2(stream: InputStream?, host: String): Result<ResolveResultType>? {
@@ -112,7 +121,12 @@ class Amp2HtmlResolveRequest(
 //        if (current.contentType != MimeType.TEXT_HTML) return Result.success(ResolveResultType.NothingToResolve)
 //        val body = current.content?.let { String(it) } ?: return null
 
-        val nonAmpLink = Amp2Html.getNonAmpLink(stream, host)
+        val nonAmpLinkResult = runCatching { Amp2Html.getNonAmpLink(stream, host) }
+        if(nonAmpLinkResult.isFailure){
+            return Result.failure(Exception("Failed to extract AMP-Link"))
+        }
+
+        val nonAmpLink = nonAmpLinkResult.getOrNull()
         if (nonAmpLink != null) {
             return Result.success(ResolveResultType.Resolved.Local(nonAmpLink))
         }

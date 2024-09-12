@@ -7,6 +7,7 @@ import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import org.koin.dsl.module
 
 val redirectResolveRequestModule = module {
@@ -28,20 +29,31 @@ class RedirectResolveRequest(
 ) : ResolveRequest(apiUrl, token, request, "redirect") {
     override fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
         val req = okhttp3.Request.Builder().url(url).head().build()
-        val response = okHttpClient.newCall(req).execute()
-        val statusCode = response.code
 
+        val headResult = sendRequest(req)
+        if (headResult.isFailure) {
+            return Result.failure(headResult.exceptionOrNull()!!)
+        }
 
-//        val result = try {
-//            urlResolverCache.head(url, timeout, true)
-//        } catch (e: Exception) {
-//            return Result.failure(e)
-//        }
-//
-        val req2 = if (statusCode in 400..499) {
-            req.newBuilder().get().build()
-        } else req
+        val headResponse = headResult.getOrNull()!!
 
-        return ResolveResultType.Resolved.Local(req2.url.toString()).success()
+        if (headResponse.code !in 400..499) {
+            return headResponse.toSuccessResult()
+        }
+
+        val getResult = sendRequest(req.newBuilder().get().build())
+        if (getResult.isFailure) {
+            return Result.failure(getResult.exceptionOrNull()!!)
+        }
+
+        return getResult.getOrNull()!!.toSuccessResult()
+    }
+
+    private fun Response.toSuccessResult(): Result<ResolveResultType> {
+        return ResolveResultType.Resolved.Local(request.url.toString()).success()
+    }
+
+    private fun sendRequest(request: okhttp3.Request): Result<Response> {
+        return runCatching { okHttpClient.newCall(request).execute() }
     }
 }

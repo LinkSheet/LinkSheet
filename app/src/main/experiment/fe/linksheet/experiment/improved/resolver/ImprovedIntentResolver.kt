@@ -168,6 +168,10 @@ class ImprovedIntentResolver(
         _interactions.emit(interaction)
     }
 
+//    private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+//
+//    }
+
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
         val canAccessInternet = networkStateService.isNetworkConnected

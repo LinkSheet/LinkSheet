@@ -31,7 +31,7 @@ class ProfileSwitcher(
     }
 
     private fun trimLabel(label: String): String {
-        return label.indexOf(appLabel).takeIf { it != -1 }?.let { idx -> label.substring(0, idx).trim() } ?: label
+        return label.indexOf(appLabel).takeIf { it != -1 }?.let { label.substring(0, it).trim() } ?: label
     }
 
     @RequiresApi(Build.VERSION_CODES.P)

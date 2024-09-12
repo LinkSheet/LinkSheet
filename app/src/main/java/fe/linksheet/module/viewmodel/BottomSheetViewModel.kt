@@ -177,9 +177,11 @@ class BottomSheetViewModel(
         return context.getString(R.string.resolve_failed, name, str)
     }
 
+    private val Intent.pkgCmp: Pair<String?, ComponentName?>
+        get() = component?.let { it.packageName to it } ?: (`package` to null)
+
     private suspend fun persistSelectedIntent(intent: Intent, always: Boolean) {
-        val (packageName, component) = intent.component
-            ?.let { it.packageName to it } ?: (intent.`package` to null)
+        val (packageName, component) = intent.pkgCmp
 
         if (packageName == null && component == null) {
             logger.error("Passed intent does neither have a package, nor a component, can't persist")

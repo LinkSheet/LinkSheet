@@ -14,7 +14,7 @@ sealed interface IntentResolveResult {
     data object Pending : IntentResolveResult
 
     data class WebSearch(
-        val query: String, val newIntent: Intent, val resolvedList: List<DisplayActivityInfo>
+        val query: String, val newIntent: Intent, val resolvedList: List<DisplayActivityInfo>,
     ) : IntentResolveResult
 
     @Stable
@@ -33,13 +33,13 @@ sealed interface IntentResolveResult {
     ) : IntentResolveResult, BottomSheetResult.SuccessResult(uri, intent, resolved) {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
 
-        private val referringPackageName =
-            if (referrer?.scheme == "android-app") referrer.host else null
+        private val referringPackageName = ReferrerHelper.getReferringPackage(referrer)
 
         val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
         val app = filteredItem ?: resolved.firstOrNull()
 
-        val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption) && (referringPackageName == null || app?.packageName != referringPackageName)
+        val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption)
+                && (referringPackageName == null || app?.packageName != referringPackageName)
 
         override fun isEmpty(): Boolean {
             return totalCount == 0

@@ -56,11 +56,10 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
@@ -115,28 +114,20 @@ class ImprovedBottomSheet(
             coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
         }
 
-        LaunchedEffect(key1 = status) {
-            if (status is IntentResolveResult.Default) {
-                val completed = status as IntentResolveResult.Default
-                if (completed.hasAutoLaunchApp) {
-                    return@LaunchedEffect launchApp(
-                        completed,
-                        completed.app,
-                        always = completed.isRegularPreferredApp,
-                        persist = false,
-                    )
-                }
-            }
-        }
-
-////            Toast.makeText(this@ImprovedBottomSheetActivity, "Status: $status", Toast.LENGTH_SHORT).show()
-//            Log.d("BottomSheet", "Status: ${status.javaClass.simpleName}")
-//        }
-
         val configuration = LocalConfiguration.current
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
         LaunchedEffect(key1 = status) {
+            val completed = status as? IntentResolveResult.Default
+            if (completed?.hasAutoLaunchApp == true) {
+                return@LaunchedEffect launchApp(
+                    completed,
+                    completed.app,
+                    always = completed.isRegularPreferredApp,
+                    persist = false,
+                )
+            }
+
             if (viewModel.improvedBottomSheetExpandFully()) {
                 drawerState.expand()
             } else {
@@ -544,7 +535,7 @@ class ImprovedBottomSheet(
 
         intent.putExtra(
             LinkSheetConnector.EXTRA_REFERRER,
-            if (showAsReferrer) Uri.parse("android-app://${activity.packageName}") else referrer,
+            if (showAsReferrer) ReferrerHelper.createReferrer(activity) else referrer
         )
 
         if (!showAsReferrer) {

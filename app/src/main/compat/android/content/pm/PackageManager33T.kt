@@ -5,7 +5,7 @@ import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.ResolveInfoFlags
 
 
-fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: ResolveInfoFlags): MutableList<ResolveInfo> {
+fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: ResolveInfoFlags = ResolveInfoFlags.EMPTY): MutableList<ResolveInfo> {
     return queryIntentActivitiesCompat(intent, flags.value)
 }
 

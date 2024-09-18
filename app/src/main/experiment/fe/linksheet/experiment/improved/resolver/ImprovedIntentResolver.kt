@@ -16,6 +16,7 @@ import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
+import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
@@ -127,12 +128,19 @@ class ImprovedIntentResolver(
         )
     }
 
+    private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
+
     private val appSorter by lazy {
-        AppSorter(packageManager = packageManager, usageStatsManager = context.getSystemService<UsageStatsManager>()!!)
+        AppSorter(
+            queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
+            toDisplayActivityInfo = { resolveInfo, browser ->
+                resolveInfo.toDisplayActivityInfo(packageManager, browser)
+            }
+        )
     }
 
     private val packageLauncherHelper by lazy {
-        PackageLauncherHelper(packageManager = packageManager)
+        PackageLauncherHelper(queryIntentActivities = packageManager::queryIntentActivitiesCompat)
     }
 
     private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
@@ -175,6 +183,8 @@ class ImprovedIntentResolver(
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
         val canAccessInternet = networkStateService.isNetworkConnected
+
+//        WebChromeClient
 
         logger.debug("Referrer=$referrer")
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
@@ -297,6 +307,7 @@ class ImprovedIntentResolver(
         )
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, inAppBrowserSettings())
+        logger.info("allowCustomTab=$allowCustomTab")
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentHandler.sanitized(intent, Intent.ACTION_VIEW, uri, dropExtras)
 

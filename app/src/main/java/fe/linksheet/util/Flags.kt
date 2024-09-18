@@ -14,6 +14,8 @@ interface Flags {
 @JvmInline
 value class ResolveInfoFlags(override val value: Int) : Flags {
     companion object {
+        val EMPTY = ResolveInfoFlags(0)
+
         val GET_META_DATA = ResolveInfoFlags(PackageManager.GET_META_DATA)
         val GET_RESOLVED_FILTER = ResolveInfoFlags(PackageManager.GET_RESOLVED_FILTER)
         val GET_SHARED_LIBRARY_FILES = ResolveInfoFlags(PackageManager.GET_SHARED_LIBRARY_FILES)

@@ -1,17 +1,15 @@
 package fe.linksheet.experiment.improved.resolver
 
-import android.app.usage.UsageStatsManager
-import android.content.pm.PackageManager
+import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
-import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
 class AppSorter(
-    private val packageManager: PackageManager,
-    private val usageStatsManager: UsageStatsManager
+    private val queryAndAggregateUsageStats: (beginTime: Long, endTime: Long) -> Map<String, UsageStats>,
+    private val toDisplayActivityInfo: (ResolveInfo, browser: Boolean) -> DisplayActivityInfo,
 ) {
     private val emptyComparator: Comparator<DisplayActivityInfo> = Comparator { _, _ -> 0 }
     private val usageStatsPeriod = TimeUnit.DAYS.toMillis(14)
@@ -43,7 +41,7 @@ class AppSorter(
     private fun createUsageStatComparator(): Comparator<DisplayActivityInfo> {
         val now = System.currentTimeMillis()
         val sinceTime = now - usageStatsPeriod
-        val usageStatsMap = usageStatsManager.queryAndAggregateUsageStats(sinceTime, now)
+        val usageStatsMap = queryAndAggregateUsageStats(sinceTime, now)
 
         return compareByDescending { app -> usageStatsMap[app.packageName]?.totalTimeInForeground ?: -1L }
     }
@@ -55,12 +53,12 @@ class AppSorter(
         val map = mutableMapOf<String, DisplayActivityInfo>()
 
         for (app in apps) {
-            val info = app.toDisplayActivityInfo(packageManager, false)
+            val info = toDisplayActivityInfo(app, false)
             map[info.packageName] = info
         }
 
         for (browser in browsers) {
-            val info = browser.toDisplayActivityInfo(packageManager, true)
+            val info = toDisplayActivityInfo(browser, true)
             map[info.packageName] = info
         }
 

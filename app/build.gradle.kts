@@ -231,9 +231,9 @@ dependencies {
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
-    implementation(AndroidX.compose.ui.withVersion("1.7.0-beta03"))
+    implementation(AndroidX.compose.ui.withVersion("1.7.0"))
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3.withVersion("1.3.0-beta03"))
+    implementation(AndroidX.compose.material3.withVersion("1.3.0"))
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -248,6 +248,7 @@ dependencies {
     implementation(AndroidX.lifecycle.runtime.compose)
     implementation(AndroidX.lifecycle.viewModelCompose)
     implementation(AndroidX.lifecycle.runtime.ktx)
+    implementation(AndroidX.startup.runtime)
 
     implementation(AndroidX.webkit)
     implementation(AndroidX.browser)

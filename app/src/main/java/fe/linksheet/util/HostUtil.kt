@@ -57,6 +57,10 @@ object HostUtil {
             null
         }
 
-        return !(address?.isLocal == true || address?.isLoopback == true)
+        if(address == null){
+            return false
+        }
+
+        return !(address.isLocal || address.isLoopback)
     }
 }

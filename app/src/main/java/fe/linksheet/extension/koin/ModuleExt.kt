@@ -1,6 +1,6 @@
 package fe.linksheet.extension.koin
 
-import fe.android.lifecycle.LifecycleService
+import fe.android.lifecycle.LifecycleAwareService
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
 import org.koin.core.parameter.ParametersHolder
@@ -50,7 +50,7 @@ inline fun <reified T : Any, reified P : Any, reified P2 : Any, reified P3 : Any
     }
 }
 
-inline fun <reified T : LifecycleService> Module.service(
+inline fun <reified T : LifecycleAwareService> Module.service(
     qualifier: Qualifier? = null,
     noinline definition: DefinitionParam0<T>
 ): KoinDefinition<T> {
@@ -63,7 +63,7 @@ inline fun <reified T : LifecycleService> Module.service(
     }
 }
 
-inline fun <reified T : LifecycleService, reified P : Any> Module.service(
+inline fun <reified T : LifecycleAwareService, reified P : Any> Module.service(
     qualifier: Qualifier? = null,
     noinline definition: DefinitionParam1<T, P>
 ): KoinDefinition<T> {
@@ -76,7 +76,7 @@ inline fun <reified T : LifecycleService, reified P : Any> Module.service(
     }
 }
 
-inline fun <reified T : LifecycleService, reified P : Any, reified P2 : Any> Module.service(
+inline fun <reified T : LifecycleAwareService, reified P : Any, reified P2 : Any> Module.service(
     qualifier: Qualifier? = null,
     noinline definition: DefinitionParam2<T, P, P2>
 ): KoinDefinition<T> {

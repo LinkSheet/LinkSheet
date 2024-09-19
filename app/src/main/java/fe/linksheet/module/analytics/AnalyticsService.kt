@@ -1,7 +1,7 @@
 package fe.linksheet.module.analytics
 
 import androidx.lifecycle.LifecycleCoroutineScope
-import fe.android.lifecycle.LifecycleService
+import fe.android.lifecycle.LifecycleAwareService
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.log.Logger
@@ -37,7 +37,7 @@ class AnalyticsService(
     initialLevel: TelemetryLevel? = null,
     networkState: NetworkStateService,
     val logger: Logger,
-) : LifecycleService {
+) : LifecycleAwareService {
     private val eventQueue = BatchedEventQueue(client, coroutineScope, logger, initialLevel, networkState)
 
     fun startWith(newLevel: TelemetryLevel?) {

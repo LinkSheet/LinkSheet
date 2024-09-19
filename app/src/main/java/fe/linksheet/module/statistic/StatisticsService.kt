@@ -1,6 +1,6 @@
 package fe.linksheet.module.statistic
 
-import fe.android.lifecycle.LifecycleService
+import fe.android.lifecycle.LifecycleAwareService
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.preference.SensitivePreference
@@ -14,7 +14,7 @@ val statisticsModule = module {
     }
 }
 
-class StatisticsService(val preferenceRepository: AppPreferenceRepository) : LifecycleService {
+class StatisticsService(val preferenceRepository: AppPreferenceRepository) : LifecycleAwareService {
     private val start = System.currentTimeMillis()
 
     @OptIn(SensitivePreference::class)

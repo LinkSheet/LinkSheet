@@ -5,7 +5,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import androidx.core.content.getSystemService
 import androidx.lifecycle.LifecycleOwner
-import fe.android.lifecycle.LifecycleService
+import fe.android.lifecycle.LifecycleAwareService
 import fe.linksheet.extension.koin.service
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +24,7 @@ val networkStateServiceModule = module {
 
 class NetworkStateService(
     private val connectivityManager: ConnectivityManager,
-) : LifecycleService, ConnectivityManager.NetworkCallback() {
+) : LifecycleAwareService, ConnectivityManager.NetworkCallback() {
 
     private val _currentNetwork = MutableStateFlow(ConnectedNetwork.Unknown)
     val currentNetwork = _currentNetwork.asStateFlow()

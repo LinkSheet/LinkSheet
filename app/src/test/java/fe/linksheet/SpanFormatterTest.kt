@@ -6,19 +6,23 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.android.span.helper.formatter.SpanFormatter
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
+import org.koin.mp.KoinPlatformTools
 import org.koin.test.AutoCloseKoinTest
+import org.koin.test.ClosingKoinTest
 import kotlin.test.assertEquals
 
 
 @RunWith(AndroidJUnit4::class)
-class SpanFormatterTest : AutoCloseKoinTest() {
+class SpanFormatterTest {
 
     private fun compareHtml(
         input: SpannableStringBuilder.() -> Unit,
         vararg args: Any?,
-        expected: SpannableStringBuilder.() -> Unit
+        expected: SpannableStringBuilder.() -> Unit,
     ) {
         val result = Html.toHtml(SpanFormatter.format(buildSpannedString(input), *args), Html.FROM_HTML_MODE_LEGACY)
         val ex = Html.toHtml(buildSpannedString(expected), Html.FROM_HTML_MODE_LEGACY)
@@ -65,4 +69,7 @@ class SpanFormatterTest : AutoCloseKoinTest() {
             }
         )
     }
+
+    @After
+    fun teardown() = stopKoin()
 }

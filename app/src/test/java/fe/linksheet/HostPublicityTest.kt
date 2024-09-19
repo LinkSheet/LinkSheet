@@ -4,15 +4,17 @@ import android.net.Uri
 import android.net.compatHost
 import android.os.Build
 import fe.linksheet.util.HostUtil
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.test.AutoCloseKoinTest
+import org.koin.core.context.stopKoin
+import org.koin.test.ClosingKoinTest
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
-class HostPublicityTest : AutoCloseKoinTest() {
+class HostPublicityTest : ClosingKoinTest {
     companion object {
         private val data = mapOf(
             "localhost" to false,
@@ -52,4 +54,7 @@ class HostPublicityTest : AutoCloseKoinTest() {
         assertEquals("[", uri.host)
         assertEquals("[::1]", uri.compatHost?.value)
     }
+
+    @After
+    fun teardown() = stopKoin()
 }

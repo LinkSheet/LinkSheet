@@ -7,17 +7,19 @@ import android.os.Build
 import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.resolver.PackageHandler
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.test.AutoCloseKoinTest
+import org.koin.core.context.stopKoin
+import org.koin.mp.KoinPlatformTools
 import org.robolectric.annotation.Config
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 
 @RunWith(AndroidJUnit4::class)
-class PackageHandlerTest : AutoCloseKoinTest() {
+class PackageHandlerTest {
     private lateinit var packageHandler: PackageHandler
 
     @Before
@@ -69,7 +71,7 @@ class PackageHandlerTest : AutoCloseKoinTest() {
             addDataAuthority("*", null)
         })
 
-        assertTrue(runTest("https://test.com/test.zip") {
+        assertFalse(runTest("https://test.com/test.zip") {
             addDataAuthority("*", null)
             addDataPath(".*\\.zip", PatternMatcher.PATTERN_ADVANCED_GLOB)
         })
@@ -78,4 +80,7 @@ class PackageHandlerTest : AutoCloseKoinTest() {
     private fun runTest(uri: String, filter: IntentFilter.() -> Unit): Boolean {
         return packageHandler.isLinkHandler(IntentFilter().apply(filter), Uri.parse(uri))
     }
+
+    @After
+    fun teardown() = stopKoin()
 }

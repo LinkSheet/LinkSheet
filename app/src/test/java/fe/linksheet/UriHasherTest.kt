@@ -1,11 +1,15 @@
 package fe.linksheet
 
 import fe.linksheet.util.CryptoUtil
+import org.junit.After
 import org.junit.Test
+import org.koin.core.context.stopKoin
+import org.koin.mp.KoinPlatformTools
 import org.koin.test.AutoCloseKoinTest
+import org.koin.test.ClosingKoinTest
 import javax.crypto.Mac
 
-class UriHasherTest : AutoCloseKoinTest() {
+class UriHasherTest {
     private val mac: Mac
 
     init {
@@ -22,4 +26,7 @@ class UriHasherTest : AutoCloseKoinTest() {
         // TODO: query parameters are currently broken. Let's fix this later, there's more important stuff to do (tracked in #226)
 //        assertEquals(buildHashedUriString("https://google.com?we=is&fren=yes", mac), "https://b60687.8fc4dccb1dcf/b3901e/452116/")
     }
+
+    @After
+    fun teardown() = stopKoin()
 }

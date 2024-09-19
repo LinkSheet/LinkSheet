@@ -1,5 +1,7 @@
 package fe.linksheet.benchmark
 
+import android.content.Intent
+import android.net.Uri
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
@@ -33,6 +35,6 @@ class ExampleStartupBenchmark {
         startupMode = StartupMode.COLD
     ) {
         pressHome()
-        startActivityAndWait()
+        startActivityAndWait(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c")))
     }
 }

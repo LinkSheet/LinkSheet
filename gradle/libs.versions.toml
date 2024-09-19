@@ -32,21 +32,28 @@ kotlin = "1.9.25"
 ##  ⬆ = "2.0.20-Beta2"
 ##  ⬆ = "2.0.20-RC"
 ##  ⬆ = "2.0.20-RC2"
+##  ⬆ = "2.0.20"
+##  ⬆ = "2.1.0-Beta1"
 
 koin = "3.6.0-Beta4"
-##⬆ = "3.6.0-Beta5"
-##⬆ = "3.6.0-wasm-alpha1"
-##⬆ = "3.6.0-wasm-alpha2"
-##⬆ = "4.0.0-RC1"
 
 app-cash-zipline = "1.16.0"
+##            ⬆ = "1.17.0"
 
 androidx-test-ext-junit = "1.2.1"
 reorderable = "2.3.0"
+##       ⬆ = "2.3.1"
+##       ⬆ = "2.3.2"
+##       ⬆ = "2.3.3"
+##       ⬆ = "2.4.0-alpha01"
+##       ⬆ = "2.4.0-alpha02"
+##       ⬆ = "2.4.0-beta01"
 junit = "1.2.1"
 espresso-core = "3.6.1"
 uiautomator = "2.3.0"
+##       ⬆ = "2.4.0-alpha01"
 benchmark-macro-junit4 = "1.3.1"
+##                  ⬆ = "1.4.0-alpha01"
 
 [libraries]
 

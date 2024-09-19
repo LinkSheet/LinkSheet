@@ -35,10 +35,10 @@ rootProject.name = "LinkSheet"
 
 include(":app", ":config")
 include(":bottom-sheet")
-//include(":benchmark")
+include(":benchmark")
 
 val isCI = System.getenv("CI")?.toBooleanStrictOrNull() == true
-val dev = true
+val dev = false
 
 if (!isCI && dev) {
     val properties = Properties().apply {

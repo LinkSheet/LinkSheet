@@ -7,19 +7,22 @@ import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.test.AutoCloseKoinTest
+import org.koin.core.context.stopKoin
+import org.koin.mp.KoinPlatformTools
+import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.koin.test.inject
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 @RunWith(AndroidJUnit4::class)
-class DownloaderTest : AutoCloseKoinTest() {
+class DownloaderTest : KoinTest {
     @get:Rule
-    val koinTestRule = KoinTestRule.create {
+    val koinTestRule = KoinTestRuleFix.create {
         modules(
             DebugLoggerDelegate.Factory,
             requestModule,
@@ -65,4 +68,7 @@ class DownloaderTest : AutoCloseKoinTest() {
         val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com", 15)
         assertIs<DownloadCheckResult.NonDownloadable>(nonDownloadable)
     }
+
+    @After
+    fun teardown() = stopKoin()
 }

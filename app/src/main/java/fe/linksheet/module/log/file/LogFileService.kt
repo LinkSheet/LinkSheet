@@ -1,9 +1,8 @@
 package fe.linksheet.module.log.file
 
 import android.content.Context
-import android.os.Parcelable
 import androidx.lifecycle.LifecycleOwner
-import fe.android.lifecycle.LifecycleService
+import fe.android.lifecycle.LifecycleAwareService
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
 import fe.kotlin.extension.primitive.unixMillisUtc
@@ -11,20 +10,48 @@ import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.log.file.entry.LogEntry
-import kotlinx.parcelize.IgnoredOnParcel
-import kotlinx.parcelize.Parcelize
 import org.koin.dsl.module
 import java.io.File
 import java.time.LocalDateTime
 
 val logFileServiceModule = module {
-    service<LogFileService> {
+    service<LogPersistService> {
         val logDir = LogFileService.getLogDir(applicationContext)
-        LogFileService(logDir)
+        LogFileService(logDir, applicationContext.startupTime)
     }
 }
 
-class LogFileService(private val logDir: File) : LifecycleService {
+fun DebugLogPersistService(startupTime: LocalDateTime = LocalDateTime.now()): LogPersistService {
+    return object : LogPersistService {
+        override val startupTime: LocalDateTime = startupTime
+
+        override fun readEntries(id: String?): List<LogEntry> = emptyList()
+
+        override fun getLogSessions(): List<LogSession> = emptyList()
+
+        override fun delete(session: LogSession): Boolean = true
+
+        override fun write(entry: LogEntry) {}
+    }
+}
+
+
+interface LogPersistService : LifecycleAwareService {
+    val startupTime: LocalDateTime
+
+    fun readEntries(id: String?): List<LogEntry>
+
+    fun getLogSessions(): List<LogSession>
+    fun delete(session: LogSession): Boolean
+    fun write(entry: LogEntry)
+}
+
+abstract class LogSession(
+    val id: String,
+    val info: String,
+)
+
+private class LogFileService(private val logDir: File, override val startupTime: LocalDateTime) : LogPersistService {
     companion object {
         private const val LOG_DIR = "logs"
         const val FILE_EXT = "log"
@@ -35,10 +62,10 @@ class LogFileService(private val logDir: File) : LifecycleService {
         }
     }
 
-    @Parcelize
-    data class LogFile(val file: File, val millis: Long) : Parcelable {
-        @IgnoredOnParcel
-        val localizedTime by lazy { millis.unixMillisUtc.value.localizedString() }
+    data class LogFile(
+        val file: File,
+        val millis: Long,
+    ) : LogSession(file.name, millis.unixMillisUtc.value.localizedString()) {
 
         companion object {
             fun new(logDir: File): LogFile {
@@ -48,22 +75,8 @@ class LogFileService(private val logDir: File) : LifecycleService {
         }
     }
 
-    val startupTime: LocalDateTime = LocalDateTime.now()
     val logEntries = mutableListOf<LogEntry>()
 
-    fun getLogFiles(): List<LogFile> {
-        return logDir.listFiles()
-            ?.filter { it.length() > 0L }
-            ?.sortedDescending()
-            ?.mapNotNull {
-                val millis = it.nameWithoutExtension.substringBefore(".").toLongOrNull() ?: return@mapNotNull null
-                LogFile(it, millis)
-            } ?: emptyList()
-    }
-
-    fun deleteLogFile(logFile: LogFile): Boolean {
-        return logFile.file.delete()
-    }
 
     fun readLogFile(name: String): List<LogEntry> {
         val logFile = File(logDir, name)
@@ -77,13 +90,36 @@ class LogFileService(private val logDir: File) : LifecycleService {
         return logFile.fromJsonOrNull<List<LogEntry?>>()?.filterNotNull() ?: emptyList()
     }
 
-    fun write(entry: LogEntry) {
+    override fun write(entry: LogEntry) {
         logEntries.add(entry)
+    }
+
+    override fun readEntries(id: String?): List<LogEntry> {
+        return if (id == null) logEntries else readLogFile(id)
+    }
+
+    override fun getLogSessions(): List<LogFile> {
+        return logDir.listFiles()
+            ?.filter { it.length() > 0L }
+            ?.sortedDescending()
+            ?.mapNotNull {
+                val millis = it.nameWithoutExtension.substringBefore(".").toLongOrNull() ?: return@mapNotNull null
+                LogFile(it, millis)
+            } ?: emptyList()
+    }
+
+    override fun delete(session: LogSession): Boolean {
+        val file = File(logDir, session.id)
+        return if (file.exists()) file.delete() else false
+    }
+
+    private fun delete(session: LogFile): Boolean {
+        return session.file.delete()
     }
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
-        getLogFiles().filter { it.millis < startupMillis }.forEach { deleteLogFile(it) }
+        getLogSessions().filter { it.millis < startupMillis }.forEach { delete(it) }
     }
 
     override suspend fun onStop() {

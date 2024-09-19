@@ -246,16 +246,16 @@ class BottomSheetActivityImpl(
                 ProfileSwitcher(appLabel, crossProfileApps)
             }
 
-            val profiles = AndroidVersion.atLeastApi30R {
-                profileSwitcher.getProfiles()
-            }
-
             UrlBar(
                 uri = uriString,
-                profiles = profiles,
-                switchProfile = {
-                    profileSwitcher.switchTo(it, result.uri, activity)
-                    activity.finish()
+                profiles = AndroidVersion.atLeastApi30R {
+                    profileSwitcher.getProfiles()
+                },
+                switchProfile = AndroidVersion.atLeastApi30R {
+                    {
+                        profileSwitcher.switchTo(it, result.uri, activity)
+                        activity.finish()
+                    }
                 },
                 unfurlResult = uriSuccess?.unfurlResult,
                 downloadable = uriSuccess?.downloadable?.isDownloadable() ?: false,
@@ -325,7 +325,12 @@ class BottomSheetActivityImpl(
             // TODO: Not sure if this divider should be kept
             if (result.resolved.isNotEmpty()) {
                 HorizontalDivider(
-                    modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 10.dp),
+                    modifier = Modifier.padding(
+                        start = 15.dp,
+                        end = 15.dp,
+                        top = 5.dp,
+                        bottom = 10.dp
+                    ),
                     color = MaterialTheme.colorScheme.outline.copy(0.25f)
                 )
 
@@ -339,7 +344,10 @@ class BottomSheetActivityImpl(
                 Spacer(modifier = Modifier.height(10.dp))
             }
         } else {
-            Row(modifier = Modifier.padding(horizontal = 15.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.padding(horizontal = 15.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     modifier = Modifier.weight(1f),
                     text = stringResource(id = R.string.open_with),
@@ -375,7 +383,10 @@ class BottomSheetActivityImpl(
         }
     }
 
-    data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
+    data class GridItem(
+        val info: DisplayActivityInfo,
+        val privateBrowsingBrowser: KnownBrowser? = null
+    ) {
         override fun toString(): String {
             return info.flatComponentName + (privateBrowsingBrowser?.hashCode() ?: -1)
         }
@@ -405,7 +416,10 @@ class BottomSheetActivityImpl(
         val activity = LocalActivity.current
 
         Column {
-            LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
+            LazyVerticalGrid(
+                modifier = Modifier.fillMaxWidth(),
+                columns = GridCells.Adaptive(85.dp)
+            ) {
                 itemsIndexed(
                     items = items,
                     key = { index, item -> item.toString() + index }) { index, (info, privateBrowser) ->
@@ -428,7 +442,10 @@ class BottomSheetActivityImpl(
             }
 
             if (!hasPreferredApp && !hideChoiceButtons) {
-                NoPreferredAppChoiceButtons(result = result, selected = viewModel.appListSelectedIdx.intValue)
+                NoPreferredAppChoiceButtons(
+                    result = result,
+                    selected = viewModel.appListSelectedIdx.intValue
+                )
             }
         }
     }
@@ -515,20 +532,30 @@ class BottomSheetActivityImpl(
 //                        .padding(bottom = 40.dp)
 //                        .border(1.dp, Color.Magenta)
                 ) {
-                    NoPreferredAppChoiceButtons(result = result, selected = viewModel.appListSelectedIdx.intValue)
+                    NoPreferredAppChoiceButtons(
+                        result = result,
+                        selected = viewModel.appListSelectedIdx.intValue
+                    )
                 }
             }
         }
     }
 
     @Composable
-    private fun NoPreferredAppChoiceButtons(result: BottomSheetResult.SuccessResult, selected: Int) {
+    private fun NoPreferredAppChoiceButtons(
+        result: BottomSheetResult.SuccessResult,
+        selected: Int
+    ) {
         Spacer(modifier = Modifier.height(5.dp))
 
         ChoiceButtons(
             enabled = selected != -1,
             choiceClick = { _, modifier ->
-                launchApp(result, result.resolved.getOrFirstOrNull(selected), modifier == ClickModifier.Always)
+                launchApp(
+                    result,
+                    result.resolved.getOrFirstOrNull(selected),
+                    modifier == ClickModifier.Always
+                )
             },
         )
     }
@@ -574,7 +601,15 @@ class BottomSheetActivityImpl(
             return
         }
 
-        handleLaunch(viewModel.launchAppAsync(info, result.intent, always, privateBrowsingBrowser, persist))
+        handleLaunch(
+            viewModel.launchAppAsync(
+                info,
+                result.intent,
+                always,
+                privateBrowsingBrowser,
+                persist
+            )
+        )
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -600,7 +635,10 @@ class BottomSheetActivityImpl(
         }
     }
 
-    private fun showResolveToasts(result: BottomSheetResult.BottomSheetSuccessResult, uiThread: Boolean = false) {
+    private fun showResolveToasts(
+        result: BottomSheetResult.BottomSheetSuccessResult,
+        uiThread: Boolean = false
+    ) {
         viewModel.getResolveToastTexts(result.resolveModuleStatus).forEach {
             activity.showToast(it, uiThread = uiThread)
         }

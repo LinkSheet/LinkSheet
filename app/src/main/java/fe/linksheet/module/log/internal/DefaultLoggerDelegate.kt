@@ -1,6 +1,6 @@
 package fe.linksheet.module.log.internal
 
-import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactor
 import kotlin.reflect.KClass
@@ -8,12 +8,13 @@ import kotlin.reflect.KClass
 class DefaultLoggerDelegate(
     prefix: String,
     redactor: Redactor,
-    logStorageService: LogFileService
-) : LoggerDelegate(prefix, redactor, logStorageService) {
+    logPersistService: LogPersistService
+) : LoggerDelegate(prefix, redactor, logPersistService) {
+
     constructor(
         clazz: KClass<*>,
         redactor: Redactor,
-        logStorageService: LogFileService
+        logStorageService: LogPersistService,
     ) : this(clazz.simpleName!!, redactor, logStorageService)
 
     override fun <T> redactParameter(param: T, processor: HashProcessor<T>): RedactedParameter {

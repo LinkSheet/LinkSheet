@@ -8,11 +8,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.android.span.helper.formatter.SpanFormatter
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
 import kotlin.test.assertEquals
 
 
 @RunWith(AndroidJUnit4::class)
-class SpanFormatterTest {
+class SpanFormatterTest : AutoCloseKoinTest() {
 
     private fun compareHtml(
         input: SpannableStringBuilder.() -> Unit,

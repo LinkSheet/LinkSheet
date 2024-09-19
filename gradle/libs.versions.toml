@@ -11,6 +11,7 @@ net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.1.0" }
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.25-1.0.20" }
 
 org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "4.1.2" }
+android-test = { id = "com.android.test", version = "8.2.0" }
 
 [versions]
 
@@ -42,7 +43,10 @@ app-cash-zipline = "1.16.0"
 
 androidx-test-ext-junit = "1.2.1"
 reorderable = "2.3.0"
-##       ⬆ = "2.4.0-alpha01"
+junit = "1.2.1"
+espresso-core = "3.6.1"
+uiautomator = "2.3.0"
+benchmark-macro-junit4 = "1.3.1"
 
 [libraries]
 
@@ -85,3 +89,7 @@ nanoid = "io.viascom.nanoid:nanoid:_"
 zipline-android = { group = "app.cash.zipline", name = "zipline-android", version.ref = "app-cash-zipline" }
 
 zipline-loader-android = { group = "app.cash.zipline", name = "zipline-loader-android", version.ref = "app-cash-zipline" }
+junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmark-macro-junit4" }

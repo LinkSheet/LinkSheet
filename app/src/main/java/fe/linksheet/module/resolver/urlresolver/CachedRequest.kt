@@ -1,16 +1,15 @@
 package fe.linksheet.module.resolver.urlresolver
 
 import fe.httpkt.Request
-import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.HashProcessor
-import org.koin.core.component.KoinComponent
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.io.IOException
 import java.net.HttpURLConnection
 
 val cachedRequestModule = module {
-    singleOf(::CachedRequest)
+    single { CachedRequest(get(), createLogger<CachedRequest>()) }
 }
 
 interface CachedResponse {}
@@ -29,9 +28,7 @@ data class CacheStatus(
     val send: () -> HttpURLConnection,
 )
 
-class CachedRequest(private val request: Request) : KoinComponent {
-    private val logger by injectLogger<CachedRequest>()
-
+class CachedRequest(private val request: Request, private val logger: Logger) {
     private val headCache = mutableMapOf<String, HttpURLConnection>()
     private val getCache = mutableMapOf<String, HttpURLConnection>()
 

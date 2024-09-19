@@ -15,6 +15,7 @@ class ProfileSwitcher(
     private val crossProfileApps: CrossProfileApps,
 ) {
 
+    @RequiresApi(Build.VERSION_CODES.R)
     fun switchTo(profile: CrossProfile, uri: Uri, activity: Activity) {
         val switchIntent = Intent(Intent.ACTION_VIEW, uri).setComponent(activity.componentName)
 

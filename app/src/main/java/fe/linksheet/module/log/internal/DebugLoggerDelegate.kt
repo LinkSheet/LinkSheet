@@ -1,8 +1,8 @@
 package fe.linksheet.module.log.internal
 
-import fe.linksheet.extension.koin.factory
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.log.file.DebugLogPersistService
+import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactor
 import org.koin.dsl.module
@@ -10,19 +10,20 @@ import kotlin.reflect.KClass
 
 class DebugLoggerDelegate(
     prefix: String,
-    redactor: Redactor,
-    logStorageService: LogFileService
-) : LoggerDelegate(prefix, redactor, logStorageService) {
+    redactor: Redactor = Redactor.NoOp,
+    logPersistService: LogPersistService = DebugLogPersistService(),
+) : LoggerDelegate(prefix, redactor, logPersistService) {
+
     constructor(
         clazz: KClass<*>,
-        redactor: Redactor,
-        logStorageService: LogFileService
-    ) : this(clazz.simpleName!!, redactor, logStorageService)
+        redactor: Redactor = Redactor.NoOp,
+        logPersistService: LogPersistService = DebugLogPersistService(),
+    ) : this(clazz.simpleName!!, redactor, logPersistService)
 
-    companion object{
-        val module = module {
-            factory<Logger, Redactor, LogFileService> { params, redactor, storageService ->
-                val delegate = DebugLoggerDelegate(params.get<KClass<*>>(), redactor, storageService)
+    companion object {
+        val Factory = module {
+            factory<Logger> { params ->
+                val delegate = DebugLoggerDelegate(params.get<KClass<*>>())
                 Logger(delegate)
             }
         }

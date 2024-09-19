@@ -2,9 +2,10 @@ package fe.linksheet
 
 import fe.linksheet.util.CryptoUtil
 import org.junit.Test
+import org.koin.test.AutoCloseKoinTest
 import javax.crypto.Mac
 
-class UriHasherTest {
+class UriHasherTest : AutoCloseKoinTest() {
     private val mac: Mac
 
     init {

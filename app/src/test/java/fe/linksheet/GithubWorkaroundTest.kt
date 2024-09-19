@@ -6,11 +6,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @RunWith(AndroidJUnit4::class)
-class GithubWorkaroundTest {
+class GithubWorkaroundTest : AutoCloseKoinTest() {
     @Test
     fun test() {
         val notFixedUri = BottomSheetViewModel.GithubWorkaround.tryFixUri(

@@ -34,7 +34,7 @@ fun UrlBar(
     libRedirected: Boolean,
     copyUri: () -> Unit,
     shareUri: () -> Unit,
-    switchProfile: (CrossProfile) -> Unit,
+    switchProfile: ((CrossProfile) -> Unit)?,
     downloadUri: (() -> Unit)? = null,
     ignoreLibRedirect: (() -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
@@ -60,13 +60,15 @@ fun UrlBar(
                 UrlActionButton(text = R.string.share, icon = Icons.Filled.Share, onClick = shareUri)
             }
 
-            profiles?.forEach { target ->
-                item {
-                    UrlActionButton(
-                        text = target.label,
-                        icon = target.bitmap,
-                        onClick = { switchProfile(target) }
-                    )
+            if(switchProfile != null && profiles != null){
+                for (target in profiles) {
+                    item {
+                        UrlActionButton(
+                            text = target.label,
+                            icon = target.bitmap,
+                            onClick = { switchProfile(target) }
+                        )
+                    }
                 }
             }
 

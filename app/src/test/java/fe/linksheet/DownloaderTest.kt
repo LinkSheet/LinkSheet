@@ -1,28 +1,34 @@
 package fe.linksheet
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
+import org.junit.Rule
 import org.junit.Test
-import org.koin.core.component.get
-import org.koin.core.context.startKoin
-import org.koin.test.KoinTest
+import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
+import org.koin.test.KoinTestRule
+import org.koin.test.inject
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
-class DownloaderTest : KoinTest {
-    private val downloader: Downloader
-
-    init {
-        startKoin {
-            modules(DebugLoggerDelegate.module, requestModule, cachedRequestModule, downloaderModule)
-        }
-
-        downloader = get()
+@RunWith(AndroidJUnit4::class)
+class DownloaderTest : AutoCloseKoinTest() {
+    @get:Rule
+    val koinTestRule = KoinTestRule.create {
+        modules(
+            DebugLoggerDelegate.Factory,
+            requestModule,
+            cachedRequestModule,
+            downloaderModule
+        )
     }
+
+    private val downloader by inject<Downloader>()
 
     @Test
     fun testCheckIsNonHtmlFileEnding() {

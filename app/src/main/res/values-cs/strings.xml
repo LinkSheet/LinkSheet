@@ -224,7 +224,7 @@
     <string name="warning">Varování</string>
     <string name="at_least_one_known_browser_installed">Je nainstalován alespoň jeden prohlížeč</string>
     <string name="no_browser_installed_explainer">Aplikace LinkSheet nedetekovala žádnou aplikaci prohlížeče. Pro nejlepší funkčnost prosím nainstalujte prohlížeč.</string>
-    <string name="donate_card_subtitle">Pokud se vám aplikace LinkSheet líbí, zvažte možnost zanechat hvězdičku na GitHubu a/nebo přispět. 
+    <string name="donate_card_subtitle">Pokud se vám aplikace LinkSheet líbí, zvažte možnost zanechat hvězdičku na GitHubu a/nebo přispět.
 \nDárci, kteří přispějí více než <b>5 €</b>, mají nárok na <b>LinkSheet Pro</b>, který bude mít exkluzivní funkce. \u0020</string>
     <string name="include_history">Zahrnout historii (historie vašich klepnutí na odkazy a aplikací)</string>
     <string name="resolve_via_toast_explainer">Zobrazit vyskakovací zprávu po vyřešení adresy URL externí službou</string>
@@ -406,12 +406,12 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="one">%d zakázaný hostitel</item>
         <item quantity="few">%d zakázaní hostitelé</item>
-        <item quantity="other">%d zakázaných hostitelů</item>
+        <item quantity="many">%d zakázaných hostitelů</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none">
         <item quantity="one">%d zakázaný</item>
         <item quantity="few">%d zakázané</item>
-        <item quantity="other">%d zakázaných</item>
+        <item quantity="many">%d zakázaných</item>
     </plurals>
     <string name="settings__title_filter_apps">Filtrovat aplikace</string>
     <string name="link_handle_failed_text">LinkSheet nedokáže zpracovat tento odkaz, protože se zdá, že je poškozený. Můžete jej upravit níže a zkusit to znovu. Případně také můžete zkusit webové vyhledávání.</string>
@@ -475,27 +475,27 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
         <item quantity="one">%d povolený</item>
         <item quantity="few">%d povolené</item>
-        <item quantity="other">%d povolených</item>
+        <item quantity="many">%d povolených</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
         <item quantity="one">%d povolený hostitel</item>
         <item quantity="few">%d povolení hostitelé</item>
-        <item quantity="other">%d povolených hostitelů</item>
+        <item quantity="many">%d povolených hostitelů</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d hostitel: %s</item>
         <item quantity="few">%d hostitelé: %s</item>
-        <item quantity="other">%d hostitelů: %s</item>
+        <item quantity="many">%d hostitelů: %s</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
         <item quantity="one">%d ověřený</item>
         <item quantity="few">%d ověřené</item>
-        <item quantity="other">%d ověřených</item>
+        <item quantity="many">%d ověřených</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="one">%d ověřený hostitel</item>
         <item quantity="few">%d ověření hostitelé</item>
-        <item quantity="other">%d ověřených hostitelů</item>
+        <item quantity="many">%d ověřených hostitelů</item>
     </plurals>
     <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt; Propojení pracovních a osobních aplikací</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet není nastaven</string>

@@ -184,6 +184,13 @@ android {
 
             resValue("string", "app_name", "$appName Migrate")
         }
+
+        register("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
 
     compileOptions {
@@ -269,7 +276,6 @@ dependencies {
     implementation(COIL)
     implementation(COIL.compose)
 
-
     implementation(libs.ipaddress)
     implementation(libs.placeholder.material3)
     implementation(libs.nanoid)
@@ -324,26 +330,28 @@ dependencies {
     implementation(libs.api)
     implementation(libs.provider)
     implementation(libs.hiddenapibypass)
-    implementation(libs.dev.rikka.tools.refine.runtime)
+//    implementation(libs.dev.rikka.tools.refine.runtime)
     compileOnly(libs.stub)
 
     implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
 
-    testImplementation(Koin.test)
-    testImplementation(libs.koin.android.test)
+
 
     debugImplementation(Square.leakCanary.android)
 
+    testImplementation(Koin.test)
+    testImplementation(Koin.junit4)
+    testImplementation(Koin.android)
+    testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
-    testImplementation(Testing.junit.jupiter)
-
-    testImplementation(AndroidX.test.core)
-    testImplementation(AndroidX.test.coreKtx)
-    testImplementation(AndroidX.test.ext.truth)
-    testImplementation(AndroidX.test.runner)
-    androidTestUtil(AndroidX.test.orchestrator)
-    androidTestImplementation(platform(AndroidX.compose.bom))
+    testImplementation(kotlin("test"))
+//    androidTestImplementation(AndroidX.test.core)
+//    androidTestImplementation(AndroidX.test.runner)
+//    androidTestImplementation(AndroidX.test.espresso.core)
+//    androidTestImplementation(AndroidX.test.rules)
+//    androidTestImplementation(AndroidX.test.ext.junit)
+//    androidTestImplementation(platform(AndroidX.compose.bom))
 
     debugImplementation(AndroidX.compose.ui.tooling)
     debugImplementation(AndroidX.compose.ui.testManifest)

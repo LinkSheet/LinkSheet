@@ -1,7 +1,7 @@
 package fe.linksheet.module.log
 
 import fe.linksheet.extension.koin.factory
-import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.internal.DefaultLoggerDelegate
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.log.internal.ProduceMessage
@@ -11,7 +11,7 @@ import org.koin.dsl.module
 import kotlin.reflect.KClass
 
 val defaultLoggerModule = module {
-    factory<Logger, Redactor, LogFileService> { params, redactor, logFileService ->
+    factory<Logger, Redactor, LogPersistService> { params, redactor, logFileService ->
         val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, logFileService)
         Logger(delegate)
     }

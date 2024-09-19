@@ -52,10 +52,13 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
+import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
 
 class LinkSheetApp : Application() {
+    val startupTime: LocalDateTime = LocalDateTime.now()
+
     private val activityLifecycleObserver = ActivityLifecycleObserver()
     private val lifecycleObserver by lazy {
         AppLifecycleObserver.observe(ProcessLifecycleOwner.get())

@@ -32,7 +32,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.logTextViewerSettingsRoute
-import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.log.file.LogSession
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -50,10 +50,10 @@ fun NewLogSettingsRoute(
     }
 
     val startupTime = remember {
-        viewModel.fileAppLogger.startupTime.localizedString()
+        viewModel.logPersistService.startupTime.localizedString()
     }
 
-    val confirmDeleteDialog = rememberConfirmActionDialog<LogFileService.LogFile>()
+    val confirmDeleteDialog = rememberConfirmActionDialog<LogSession>()
 
     ConfirmActionDialog(
         state = confirmDeleteDialog,
@@ -82,17 +82,21 @@ fun NewLogSettingsRoute(
             noItems = R.string.no_logs_found,
             listState = mapState,
             list = files,
-            listKey = { it.millis },
-        ) { file, padding, shape ->
+            listKey = { it.hashCode() },
+        ) { session, padding, shape ->
+            val route = remember(session) {
+                LogTextViewerRoute(session.id, session.info)
+            }
+
             LogSessionListItem(
-                logRoute = LogTextViewerRoute(file.localizedTime, file.file.name),
+                logRoute = route,
                 navigate = navigate,
                 shape = shape,
                 padding = padding,
-                headline = text(file.localizedTime),
-                subtitle = text(file.file.name),
+                headline = text(session.id),
+                subtitle = text(session.info),
                 trailingContent = {
-                    FilledTonalIconButton(onClick = { confirmDeleteDialog.open(file) }) {
+                    FilledTonalIconButton(onClick = { confirmDeleteDialog.open(session) }) {
                         Icon(imageVector = Icons.Rounded.DeleteOutline, contentDescription = null)
                     }
                 }

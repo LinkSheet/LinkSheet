@@ -23,9 +23,9 @@ import fe.linksheet.composable.page.settings.debug.log.LogCard
 import fe.linksheet.composable.page.settings.debug.log.LogTextPageScaffold
 import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.composable.ui.AppTheme
+import fe.linksheet.module.log.file.LogPersistService
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -38,7 +38,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
 
     private val viewModel by viewModel<CrashHandlerViewerViewModel>()
     private val logger by injectLogger<CrashHandlerActivity>()
-    private val logFileService by inject<LogFileService>()
+    private val logFileService by inject<LogPersistService>()
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
                     name = timestamp,
                     logViewCommon = viewModel.logViewCommon,
                     clipboardManager = viewModel.clipboardManager
-                ) { logFileService.logEntries }
+                ) { logFileService.readEntries(null) }
 
                 LogTextPageScaffold(
                     headline = stringResource(id = R.string.app_name),

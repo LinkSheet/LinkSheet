@@ -212,16 +212,16 @@ class ImprovedBottomSheet(
                 ProfileSwitcher(appLabel, crossProfileApps)
             }
 
-            val profiles = AndroidVersion.atLeastApi30R {
-                profileSwitcher.getProfiles()
-            }
-
             UrlBar(
                 uri = uriString,
-                profiles = profiles,
-                switchProfile = {
-                    profileSwitcher.switchTo(it, result.uri, activity)
-                    hideDrawer()
+                profiles = AndroidVersion.atLeastApi30R {
+                    profileSwitcher.getProfiles()
+                },
+                switchProfile = AndroidVersion.atLeastApi30R {
+                    {
+                        profileSwitcher.switchTo(it, result.uri, activity)
+                        activity.finish()
+                    }
                 },
                 unfurlResult = result.unfurlResult,
                 downloadable = result.downloadable.isDownloadable(),

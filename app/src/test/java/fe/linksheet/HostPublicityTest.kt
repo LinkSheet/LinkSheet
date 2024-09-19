@@ -6,12 +6,13 @@ import android.os.Build
 import fe.linksheet.util.HostUtil
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
-class HostPublicityTest {
+class HostPublicityTest : AutoCloseKoinTest() {
     companion object {
         private val data = mapOf(
             "localhost" to false,

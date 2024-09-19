@@ -1,7 +1,7 @@
 package fe.linksheet.module.log.internal
 
 import android.util.Log
-import fe.linksheet.module.log.file.LogFileService
+import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.redactor.Redactor
@@ -11,7 +11,7 @@ typealias ProduceMessage = (String) -> String
 abstract class LoggerDelegate(
     private val prefix: String,
     val redactor: Redactor,
-    private val fileAppLogger: LogFileService
+    private val logPersistService: LogPersistService
 ) {
     enum class Level(val code: String) {
         Verbose("V"), Info("I"), Debug("D"), Error("E")
@@ -30,7 +30,7 @@ abstract class LoggerDelegate(
 
     private fun writeFileLogEntry(level: Level, fileLogEntry: FileLogEntry, subPrefix: String?) {
         val (plain, redacted) = fileLogEntry
-        fileAppLogger.write(
+        logPersistService.write(
             LogEntry.DefaultLogEntry(
                 level.code,
                 prefix = prefix + (subPrefix?.let { "/$it" } ?: ""),
@@ -82,7 +82,7 @@ abstract class LoggerDelegate(
 
     fun fatal(stacktrace: String) {
         Log.wtf(prefix, stacktrace)
-        fileAppLogger.write(LogEntry.FatalEntry(message = stacktrace))
+        logPersistService.write(LogEntry.FatalEntry(message = stacktrace))
     }
 }
 

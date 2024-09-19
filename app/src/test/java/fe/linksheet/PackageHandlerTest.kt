@@ -5,26 +5,25 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.PatternMatcher
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.resolver.PackageHandler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.koin.test.AutoCloseKoinTest
 import org.robolectric.annotation.Config
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 
-@RunWith(RobolectricTestRunner::class)
-class PackageHandlerTest {
+@RunWith(AndroidJUnit4::class)
+class PackageHandlerTest : AutoCloseKoinTest() {
     private lateinit var packageHandler: PackageHandler
 
     @Before
     fun setup() {
         packageHandler = PackageHandler(
-            queryIntentActivities = { intent, flags ->
-                listOf()
-            },
+            queryIntentActivities = { _, _ -> listOf() },
             isLinkSheetCompat = { false }
         )
     }

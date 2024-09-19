@@ -1,8 +1,9 @@
 package fe.linksheet
 
 import org.junit.Test
+import org.koin.test.AutoCloseKoinTest
 
-class PrivateBinPasteServiceTest {
+class PrivateBinPasteServiceTest : AutoCloseKoinTest() {
     @Test
     fun test(){
 //        val result = PrivateBinPasteService().createPaste("yeet")

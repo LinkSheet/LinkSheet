@@ -15,9 +15,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.NewTypography
-
-
+import fe.linksheet.composable.ui.LegacyTypography
 
 @Composable
 fun SettingSpacerText(modifier: Modifier = Modifier, contentTitle: String) {
@@ -37,14 +35,14 @@ fun HeadlineText(modifier: Modifier = Modifier, headline: CharSequence) {
         Text(
             modifier = modifier,
             text = headline,
-            style = NewTypography.titleLarge,
+            style = LegacyTypography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
     } else if (headline is String) {
         Text(
             modifier = modifier,
             text = headline,
-            style = NewTypography.titleLarge,
+            style = LegacyTypography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
     }

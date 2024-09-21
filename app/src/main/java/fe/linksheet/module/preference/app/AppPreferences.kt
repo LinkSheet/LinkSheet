@@ -11,10 +11,10 @@ import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.redactor.PackageProcessor
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.composable.ui.Theme
 import fe.linksheet.composable.ui.ThemeV2
+import fe.linksheet.module.resolver.browser.BrowserMode
 import io.viascom.nanoid.NanoId
 
 object AppPreferences : PreferenceDefinition(
@@ -33,8 +33,8 @@ object AppPreferences : PreferenceDefinition(
 
     val browserMode = mapped(
         "browser_mode",
-        BrowserHandler.BrowserMode.AlwaysAsk,
-        BrowserHandler.BrowserMode
+        BrowserMode.AlwaysAsk,
+        BrowserMode
     )
 
     @SensitivePreference
@@ -42,8 +42,8 @@ object AppPreferences : PreferenceDefinition(
 
     val inAppBrowserMode = mapped(
         "in_app_browser_mode",
-        BrowserHandler.BrowserMode.AlwaysAsk,
-        BrowserHandler.BrowserMode
+        BrowserMode.AlwaysAsk,
+        BrowserMode
     )
 
     @SensitivePreference

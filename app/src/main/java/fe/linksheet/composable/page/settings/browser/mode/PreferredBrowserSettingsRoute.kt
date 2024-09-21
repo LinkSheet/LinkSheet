@@ -25,7 +25,7 @@ import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.resolver.BrowserHandler
+import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.whitelistedBrowsersSettingsRoute
 import org.koin.androidx.compose.koinViewModel
@@ -63,8 +63,8 @@ fun PreferredBrowserSettingsRoute(
         onBackPressed = onBackPressed,
         viewModel = viewModel,
         values = listOf(
-            BrowserHandler.BrowserMode.AlwaysAsk,
-            BrowserHandler.BrowserMode.None,
+            BrowserMode.AlwaysAsk,
+            BrowserMode.None,
         ),
         state = browserMode,
         rowKey = { it.value },
@@ -99,7 +99,7 @@ fun PreferredBrowserSettingsRoute(
         selectorData = BrowserCommonPackageSelectorData(
             R.string.whitelisted,
             R.string.whitelisted_explainer,
-            BrowserHandler.BrowserMode.Whitelisted,
+            BrowserMode.Whitelisted,
             whitelistedBrowsersSettingsRoute
         )
     ) { browserState ->
@@ -113,7 +113,7 @@ fun PreferredBrowserSettingsRoute(
                 key = { it.flatComponentName },
                 contentType = { it.flatComponentName }
             ) { app ->
-                val selected = (browserMode!!)() == BrowserHandler.BrowserMode.SelectedBrowser
+                val selected = (browserMode!!)() == BrowserMode.SelectedBrowser
                         && (selectedBrowser!!)() == app.packageName
 
                 RadioButtonRow(

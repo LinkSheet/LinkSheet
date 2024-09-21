@@ -8,7 +8,7 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
-import fe.linksheet.module.resolver.BrowserHandler
+import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
@@ -105,7 +105,7 @@ class PreferredBrowserViewModel(
         val state = browserModeState.first()
         val selected = selectedBrowserState.first()
 
-        state(BrowserHandler.BrowserMode.SelectedBrowser)
+        state(BrowserMode.SelectedBrowser)
         selected(selectedBrowserPackage)
     }
 }

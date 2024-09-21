@@ -14,14 +14,20 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
+import fe.kotlin.extension.iterable.mapToSet
+import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
+import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
+import fe.linksheet.module.database.dao.base.PackageEntityCreator
+import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.network.NetworkStateService
@@ -33,9 +39,11 @@ import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.*
+import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
@@ -43,6 +51,7 @@ import fe.linksheet.util.IntentParser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.firstOrNull
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
@@ -62,7 +71,7 @@ class ImprovedIntentResolver(
     private val redirectUrlResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
     private val browserResolver: BrowserResolver,
-    private val browserHandler: BrowserHandler,
+    private val browserHandler: ImprovedBrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
     private val unfurler: Unfurler,
@@ -434,22 +443,27 @@ class ImprovedIntentResolver(
         return null
     }
 
-    private fun createBrowserModeConfig(
+    private suspend fun createBrowserModeConfig(
         unifiedPreferredBrowser: Boolean,
         customTab: Boolean,
-    ): BrowserHandler.BrowserModeConfigHelper<*, *, *> {
+    ): BrowserModeConfigHelper {
         if (!unifiedPreferredBrowser && customTab) {
-            return BrowserHandler.BrowserModeConfigHelper(
-                browserMode = inAppBrowserMode(),
-                selectedBrowser = selectedInAppBrowser(),
-                repository = inAppBrowsersRepository
-            )
+            return mapToBrowserConfig(inAppBrowserMode(), selectedInAppBrowser(), inAppBrowsersRepository)
         }
 
-        return BrowserHandler.BrowserModeConfigHelper(
-            browserMode = browserMode(),
-            selectedBrowser = selectedBrowser(),
-            repository = normalBrowsersRepository
+        return mapToBrowserConfig(browserMode(), selectedBrowser(), normalBrowsersRepository)
+    }
+
+    private suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> mapToBrowserConfig(
+        mode: BrowserMode,
+        selectedInAppBrowser: String?,
+        repository: WhitelistedBrowsersRepository<T, C, D>,
+    ): BrowserModeConfigHelper = when (mode) {
+        BrowserMode.AlwaysAsk -> BrowserModeConfigHelper.AlwaysAsk
+        BrowserMode.None -> BrowserModeConfigHelper.None
+        BrowserMode.SelectedBrowser -> BrowserModeConfigHelper.SelectedBrowser(selectedInAppBrowser)
+        BrowserMode.Whitelisted -> BrowserModeConfigHelper.Whitelisted(
+            repository.getAll().firstOrNull()?.mapToSet { it.packageName }
         )
     }
 

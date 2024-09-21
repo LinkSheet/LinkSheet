@@ -3,7 +3,6 @@ package fe.linksheet.experiment.improved.resolver
 import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.resolver.BrowserHandler
 import fe.linksheet.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit
 
@@ -15,7 +14,7 @@ class AppSorter(
     private val usageStatsPeriod = TimeUnit.DAYS.toMillis(14)
 
     fun sort(
-        appList: BrowserHandler.FilteredBrowserList,
+        appList: FilteredBrowserList,
         lastChosen: PreferredApp?,
         historyMap: Map<String, Long>,
         returnLastChosen: Boolean = true,

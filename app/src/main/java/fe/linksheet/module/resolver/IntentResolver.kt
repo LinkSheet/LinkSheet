@@ -32,6 +32,8 @@ import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.resolver.browser.BrowserHandler
+import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
@@ -335,11 +337,11 @@ class IntentResolver(
         )
 
         val selectedBrowserIsSingleOption =
-            browserMode?.browserMode == BrowserHandler.BrowserMode.SelectedBrowser
+            browserMode?.browserMode == BrowserMode.SelectedBrowser
                     && resolvedList.singleOrNull()?.activityInfo?.componentName() == browserMode.resolveInfo?.activityInfo?.componentName()
 
         val noBrowsersPresentOnlySingleApp =
-            browserMode?.browserMode == BrowserHandler.BrowserMode.None && resolvedList.size == 1
+            browserMode?.browserMode == BrowserMode.None && resolvedList.size == 1
 
         logger.debug("BrowserMode: $browserMode, IsSingleOption: $selectedBrowserIsSingleOption, OnlySingleApp: $noBrowsersPresentOnlySingleApp")
 

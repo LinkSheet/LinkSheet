@@ -7,14 +7,13 @@ import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
+import fe.linksheet.util.KoinTestRuleFix
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
-import org.koin.mp.KoinPlatformTools
 import org.koin.test.KoinTest
-import org.koin.test.KoinTestRule
 import org.koin.test.inject
 import kotlin.test.assertEquals
 import kotlin.test.assertIs

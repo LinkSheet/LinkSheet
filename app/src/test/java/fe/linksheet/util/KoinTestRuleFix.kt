@@ -1,4 +1,4 @@
-package fe.linksheet
+package fe.linksheet.util
 
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description

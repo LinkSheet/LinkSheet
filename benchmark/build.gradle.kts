@@ -16,6 +16,8 @@ android {
         minSdk = 24
         targetSdk = 34
 
+
+        missingDimensionStrategy("type", "foss")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,11 +32,11 @@ android {
         }
     }
 
-    flavorDimensions += listOf("type")
-    productFlavors {
-        create("foss") { dimension = "type" }
-        create("pro") { dimension = "type" }
-    }
+//    flavorDimensions += listOf("type")
+//    productFlavors {
+//        create("foss") { dimension = "type" }
+//        create("pro") { dimension = "type" }
+//    }
 
 
     kotlin {

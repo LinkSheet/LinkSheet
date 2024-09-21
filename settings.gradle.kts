@@ -35,12 +35,13 @@ rootProject.name = "LinkSheet"
 
 include(":app", ":config")
 include(":bottom-sheet")
-include(":benchmark")
 
 val isCI = System.getenv("CI")?.toBooleanStrictOrNull() == true
 val dev = false
 
 if (!isCI && dev) {
+    include(":benchmark")
+
     val properties = Properties().apply {
         file("local.properties").reader().use { load(it) }
     }

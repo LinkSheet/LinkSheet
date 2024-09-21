@@ -7,7 +7,7 @@ import mozilla.components.support.utils.SafeIntent
 object IntentHandler {
     private const val INV_FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
 
-    fun sanitized(intent: SafeIntent, action: String, uri: Uri?, dropExtras: List<String>?): Intent {
+    fun sanitize(intent: SafeIntent, action: String, uri: Uri?, dropExtras: List<String>?): Intent {
         val sanitized = newIntent(action, uri, intent.flags and INV_FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
 
         if (dropExtras != null && intent.extras != null) {

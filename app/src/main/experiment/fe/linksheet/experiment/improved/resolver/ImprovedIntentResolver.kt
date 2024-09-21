@@ -318,7 +318,7 @@ class ImprovedIntentResolver(
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, inAppBrowserSettings())
         logger.info("allowCustomTab=$allowCustomTab")
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
-        val newIntent = IntentHandler.sanitized(intent, Intent.ACTION_VIEW, uri, dropExtras)
+        val newIntent = IntentHandler.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(

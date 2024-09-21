@@ -345,6 +345,7 @@ dependencies {
     testImplementation(Koin.android)
     testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
+    testImplementation("com.willowtreeapps.assertk:assertk:0.28.1")
     testImplementation(kotlin("test"))
 //    androidTestImplementation(AndroidX.test.core)
 //    androidTestImplementation(AndroidX.test.runner)

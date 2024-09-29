@@ -93,7 +93,7 @@
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="donate_subtitle">Actualiza a <b>LinkSheet Pro</b></string>
     <string name="advanced">Avanzado</string>
-    <string name="built_at">Desarrollado a las (UTC)</string>
+    <string name="built_at"><b>Compilado a las:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
     <string name="back">Atrás</string>
     <string name="linksheet_download">Descarga de LinkSheet</string>
@@ -140,9 +140,9 @@
     <string name="no_such_app_found">¡No se encontró la aplicación!</string>
     <string name="request_private_browsing">Privado</string>
     <string name="always">Siempre</string>
-    <string name="open_link_with">Abrir enlace con</string>
+    <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Seleccionar una aplicación</string>
-    <string name="github_workflow_run_id">ID de flujo de trabajo</string>
+    <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="resolved_via">%s vía resuelta %s</string>
     <string name="instance_not_available_anymore">¡Esta instancia ya no está disponible!</string>
     <string name="open_with_linksheet">Abrir con LinkSheet</string>
@@ -209,7 +209,7 @@
     <string name="pretend_to_be_app">Interceptar solicitudes de aplicaciones nativas</string>
     <string name="shizuku">Integración con Shizuku</string>
     <string name="dont_show_filtered_item_explainer">No mostrar sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
-    <string name="version_name">Identificador completo</string>
+    <string name="version_name"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="configure_explainer">Toca aquí para configurar LinkSheetCompat</string>
     <string name="feature_flags">Características experimentales</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -226,7 +226,7 @@
 \nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas. \u0020</string>
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
     <string name="donate_learn_more">Más información</string>
-    <string name="flavor">Sabor</string>
+    <string name="flavor"><b>Sabor:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="github_pipeline_build">Desarrollado y firmado por CI</string>
     <string name="other">Otros</string>
     <string name="app_setup">Configuración de la aplicación</string>

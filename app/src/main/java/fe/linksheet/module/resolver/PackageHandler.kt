@@ -5,6 +5,7 @@ import android.content.IntentFilter
 import android.content.IntentFilter.AuthorityEntry
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import androidx.annotation.VisibleForTesting
 import fe.linksheet.util.ResolveInfoFlags
 
 
@@ -28,7 +29,7 @@ class PackageHandler(
             aliases.add(alias)
         }
 
-        fun get(): ResolveInfo? {
+        fun getBestActivity(): ResolveInfo? {
             if (activity?.activityInfo?.enabled == true) return activity!!
             return aliases.firstOrNull { it.activityInfo.enabled } ?: activity ?: aliases.firstOrNull()
         }
@@ -39,10 +40,9 @@ class PackageHandler(
         val activities = queryIntentActivities(viewIntent, QUERY_FLAGS)
 
         val filtered = activities.filter {
-            it.activityInfo.applicationInfo.enabled && !isLinkSheetCompat(it.activityInfo.packageName) && isLinkHandler(
-                it.filter,
-                uri
-            )
+            it.activityInfo.applicationInfo.enabled
+                    && !isLinkSheetCompat(it.activityInfo.packageName)
+                    && isLinkHandler(it.filter, uri)
         }
 
         return deduplicate(filtered)
@@ -62,9 +62,10 @@ class PackageHandler(
             }
         }
 
-        return map.mapNotNull { (_, activity) -> activity.get() }
+        return map.mapNotNull { (_, activity) -> activity.getBestActivity() }
     }
 
+    @VisibleForTesting
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean {
         val authorityCount = filter.countDataAuthorities().takeIf { it > 0 } ?: return false
         return filter.hasNonWildcardDataAuthority(authorityCount, uri) || filter.hasDataPath(uri.path)

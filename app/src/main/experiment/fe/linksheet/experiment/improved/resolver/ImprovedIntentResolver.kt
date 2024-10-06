@@ -17,10 +17,9 @@ import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
 import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
+import fe.linksheet.extension.android.labelSorted
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
-import fe.linksheet.extension.android.toDisplayActivityInfo
-import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
@@ -137,14 +136,19 @@ class ImprovedIntentResolver(
         )
     }
 
+    private val packageDisplayInfoHelper by lazy {
+        PackageDisplayInfoHelper(
+            loadLabel = { it.loadLabel(packageManager) },
+            getApplicationLabel = packageManager::getApplicationLabel
+        )
+    }
+
     private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
 
     private val appSorter by lazy {
         AppSorter(
             queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
-            toDisplayActivityInfo = { resolveInfo, browser ->
-                resolveInfo.toDisplayActivityInfo(packageManager, browser)
-            }
+            toDisplayActivityInfo = packageDisplayInfoHelper::createDisplayActivityInfo
         )
     }
 
@@ -192,8 +196,6 @@ class ImprovedIntentResolver(
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
         val canAccessInternet = networkStateService.isNetworkConnected
-
-//        WebChromeClient
 
         logger.debug("Referrer=$referrer")
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
@@ -316,7 +318,6 @@ class ImprovedIntentResolver(
         )
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, inAppBrowserSettings())
-        logger.info("allowCustomTab=$allowCustomTab")
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentHandler.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
@@ -426,7 +427,8 @@ class ImprovedIntentResolver(
 
         val resolvedList = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)
-            .toDisplayActivityInfos(context, true)
+            .map { packageDisplayInfoHelper.createDisplayActivityInfo(it, true) }
+            .labelSorted()
 
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)
     }

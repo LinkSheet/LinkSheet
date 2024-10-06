@@ -5,10 +5,12 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import fe.linksheet.resolver.DisplayActivityInfo
 
+@Deprecated(message = "Use PackageDisplayInfoHelper")
 fun ResolveInfo.toDisplayActivityInfo(context: Context, browser: Boolean = false): DisplayActivityInfo {
     return toDisplayActivityInfo(context.packageManager, browser)
 }
 
+@Deprecated(message = "Use PackageDisplayInfoHelper")
 fun ResolveInfo.toDisplayActivityInfo(packageManager: PackageManager, browser: Boolean = false): DisplayActivityInfo {
     return DisplayActivityInfo(
         resolvedInfo = this,
@@ -17,6 +19,7 @@ fun ResolveInfo.toDisplayActivityInfo(packageManager: PackageManager, browser: B
     )
 }
 
+@Deprecated(message = "Use PackageDisplayInfoHelper")
 fun Iterable<ResolveInfo>.toDisplayActivityInfos(
     context: Context,
     sorted: Boolean = true,

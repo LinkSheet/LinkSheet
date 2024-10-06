@@ -11,7 +11,7 @@ net-nemerosa-versioning = { id = "net.nemerosa.versioning", version = "3.1.0" }
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version = "1.9.25-1.0.20" }
 
 org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "4.1.2" }
-android-test = { id = "com.android.test", version = "8.2.0" }
+android-test = { id = "com.android.test", version = "8.2.2" }
 
 [versions]
 

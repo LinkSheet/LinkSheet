@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import java.util.*
+import kotlin.experimental.ExperimentalTypeInference
 
 pluginManagement {
     repositories {
@@ -33,41 +34,57 @@ dependencyResolutionManagement {
 
 rootProject.name = "LinkSheet"
 
+fun substitute(directory: Any, dependency: String, substitutes: Map<String, String>) {
+    includeBuild(directory) {
+        dependencySubstitution {
+            for ((artifact, project) in substitutes) {
+                substitute(module("$dependency:$artifact")).using(project(":$project"))
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalTypeInference::class)
+fun Any?.trySubstitute(dependency: String, @BuilderInference builderAction: MutableMap<String, String>.() -> Unit) {
+    this?.let { substitute(this, dependency, buildMap(builderAction)) }
+}
+
+
+fun hasEnv(name: String): Boolean {
+    return System.getenv(name)?.toBooleanStrictOrNull() == true
+}
+
+
 include(":app", ":config")
 include(":bottom-sheet")
 
-val isCI = System.getenv("CI")?.toBooleanStrictOrNull() == true
-val dev = false
+val isCI = hasEnv("CI")
+val isJitPack = hasEnv("JITPACK")
 
-if (!isCI && dev) {
+val substitutes = file("local.properties")
+if (substitutes.exists() && !isCI && !isJitPack) {
     include(":benchmark")
 
     val properties = Properties().apply {
         file("local.properties").reader().use { load(it) }
     }
 
-    properties["android-lifecycle-util.dir"]?.let { lifecycleUtilDir ->
-        includeBuild(lifecycleUtilDir) {
-            val projects = setOf("core", "koin")
-
-            dependencySubstitution {
-                for (project in projects) {
-                    substitute(module("com.github.1fexd.android-lifecycle-util:$project")).using(project(":$project"))
-                }
-            }
-        }
+    properties["android-lifecycle-util.dir"]?.trySubstitute("com.github.1fexd.android-lifecycle-util") {
+        this["core"] = "core"
+        this["koin"] = "koin"
     }
 
-    properties["composekit.dir"]?.let { composeKitDir ->
-        includeBuild(composeKitDir) {
-            val projects = setOf("app-core", "theme-core", "theme-preference", "component", "core", "layout")
+    properties["composekit.dir"]?.trySubstitute("com.github.1fexd.composekit") {
+        this["app-core"] = "app-core"
+        this["theme-core"] = "theme-core"
+        this["theme-preference"] = "theme-preference"
+        this["component"] = "component"
+        this["core"] = "core"
+        this["layout"] = "layout"
+    }
 
-            dependencySubstitution {
-                for (project in projects) {
-                    substitute(module("com.github.1fexd.composekit:$project")).using(project(":$project"))
-                }
-            }
-        }
+    properties["libredirectkt.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
+        this[":"] = "lib"
     }
 }
 

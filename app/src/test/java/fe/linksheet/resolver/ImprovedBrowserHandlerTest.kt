@@ -1,4 +1,4 @@
-package fe.linksheet
+package fe.linksheet.resolver
 
 import android.content.pm.ResolveInfo
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -44,17 +44,22 @@ class ImprovedBrowserHandlerTest {
             activity.packageName = "InfinityLoop1309.NewPipeEnhanced"
         }
 
+        val pepper = buildResolveInfoTestMock { activity, application ->
+            activity.name = "com.pepper.presentation.dispatch.DispatchActivity"
+            activity.packageName = "com.tippingcanoe.pepperpl"
+        }
+
         val allApps = listOf(youtube, newPipe, newPipeEnhanced)
         val allBrowsers = listOf(miBrowser, duckduckgoBrowser)
         val allResolved = allApps + allBrowsers
-    }
 
-    private fun packageSetOf(vararg resolveInfos: ResolveInfo): Set<String> {
-        return resolveInfos.mapTo(LinkedHashSet()) { it.activityInfo.packageName }
-    }
+        private fun packageSetOf(vararg resolveInfos: ResolveInfo): Set<String> {
+            return resolveInfos.mapTo(LinkedHashSet()) { it.activityInfo.packageName }
+        }
 
-    private fun List<ResolveInfo>.toKeyedMap(): Map<String, ResolveInfo> {
-        return associateBy { it.activityInfo.packageName }
+        private fun List<ResolveInfo>.toKeyedMap(): Map<String, ResolveInfo> {
+            return associateBy { it.activityInfo.packageName }
+        }
     }
 
     @Test

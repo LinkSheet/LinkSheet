@@ -123,7 +123,7 @@
     <string name="theme_explainer">Material You、ダークテーマ、ピュアブラックモード</string>
     <string name="fastfoward_rules">FastForwardルールを使用する</string>
     <string name="follow_redirects_local_cache">ローカルリダイレクトキャッシュを有効</string>
-    <string name="apps_which_can_open_links">検証済みのリンク</string>
+    <string name="apps_which_can_open_links">確認済みリンクハンドラー</string>
     <string name="app_browsers_subtitle">優先アプリとブラウザの設定</string>
     <string name="donate_subtitle"><b>LinkSheet Pro</b>にアップグレード</string>
     <string name="use_clear_urls">ClearURLを使用</string>
@@ -224,7 +224,7 @@
     <string name="onboarding_setup">LinkSheetを設定する</string>
     <string name="telemetry_level_standard">標準</string>
     <string name="telemetry_identity_basic">基本</string>
-    <string name="verified_link_handlers">検証済みリンクハンドラー</string>
+    <string name="verified_link_handlers">確認済みのリンクハンドラー</string>
     <string name="verified_link_handlers_subtitle">アプリドメイン検証状態を制御する</string>
     <string name="shizuku_integration">Shizuku統合</string>
     <string name="shizuku_not_running_explainer">Shizukuが起動していません。 ここをタップしてShizukuを開き、指示に従って起動してください。</string>
@@ -308,7 +308,7 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="other">%d ホスト: %s</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">リンク処理は許可されていません</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">対応リンクを開くことは許可されていません</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="other">%d ホストが無効です</item>
     </plurals>
@@ -464,7 +464,7 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_none">
         <item quantity="other">%d が無効</item>
     </plurals>
-    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">リンク処理が許可されています</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">対応リンクを開くことが許可されています</string>
     <string name="settings_credits__app_name_seal">Seal</string>
     <string name="settings_credits__app_credit_reason_gmsflags">デザインのインスピレーション</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">スキップ</string>

@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="open_with">Atvērt ar</string>
+    <string name="just_once">Tikai šoreiz</string>
+    <string name="open_with_app">Atvērt ar %s</string>
+    <string name="use_a_different_app">Izmantot citu lietotni</string>
+    <string name="default_apps">Noklusējuma (vēlamās) lietotnes</string>
+    <string name="preferred_apps_settings">Iestatiet vēlamās lietotnes saimniekiem, kurus tie atbalsta</string>
+    <string name="always">Vienmēr</string>
+    <string name="set_as_browser">Iestatīt kā pārlūku</string>
+    <string name="set_as_browser_explainer">Noklikšķiniet šeit, lai padarītu LinkSheet par noklusējuma pārlūku</string>
+</resources>

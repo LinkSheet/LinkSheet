@@ -37,8 +37,7 @@ kotlin = "1.9.25"
 
 koin = "3.6.0-Beta4"
 
-app-cash-zipline = "1.16.0"
-##            ⬆ = "1.17.0"
+app-cash-zipline = "1.17.0"
 
 androidx-test-ext-junit = "1.2.1"
 reorderable = "2.3.0"

@@ -16,6 +16,7 @@ import fe.linksheet.composable.ui.Theme
 import fe.linksheet.composable.ui.ThemeV2
 import fe.linksheet.module.resolver.browser.BrowserMode
 import io.viascom.nanoid.NanoId
+import java.util.*
 
 object AppPreferences : PreferenceDefinition(
     "enable_copy_button",
@@ -139,6 +140,9 @@ object AppPreferences : PreferenceDefinition(
 
     val expandOnAppSelect = boolean("expand_on_app_select", true)
     val bottomSheetNativeLabel = boolean("bottom_sheet_native_label", true)
+
+    @SensitivePreference
+    val installationId = string("installation_id") { UUID.randomUUID().toString() }
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

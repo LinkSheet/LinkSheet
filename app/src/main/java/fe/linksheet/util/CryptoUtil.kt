@@ -25,8 +25,16 @@ object CryptoUtil {
         init(SecretKeySpec(key, algorithm))
     }
 
-    fun sha256Hex(input: ByteArray): String {
+    fun md5(input: ByteArray): ByteArray {
+        return MessageDigest.getInstance("MD5").digest(input)
+    }
+
+    fun sha256(input: ByteArray): ByteArray {
         return MessageDigest.getInstance("SHA-256").digest(input)
+    }
+
+    fun sha256Hex(input: ByteArray): String {
+        return sha256(input)
             .fold(StringBuilder()) { sb, it -> sb.append("%02x".format(it)) }
             .toString()
     }

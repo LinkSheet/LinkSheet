@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.resolver.util
 
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo

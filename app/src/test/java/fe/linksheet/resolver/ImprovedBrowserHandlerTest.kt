@@ -8,7 +8,7 @@ import fe.linksheet.experiment.improved.resolver.FilteredBrowserList
 import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
 import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.util.buildResolveInfoTestMock
+import fe.linksheet.resolver.util.buildResolveInfoTestMock
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin

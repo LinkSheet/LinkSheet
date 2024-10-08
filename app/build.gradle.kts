@@ -245,7 +245,7 @@ dependencies {
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.activity.compose)
-    implementation(libs.reorderable)
+    implementation("sh.calvin.reorderable:reorderable:_")
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.compose.animation)
@@ -267,18 +267,18 @@ dependencies {
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 
-    implementation(libs.junit.ktx)
+    implementation("androidx.test.ext:junit-ktx:_")
 
     implementation(Koin.android)
     implementation(Koin.compose)
-    implementation(libs.kotlin.reflect)
+    implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
     implementation(COIL)
     implementation(COIL.compose)
 
-    implementation(libs.ipaddress)
-    implementation(libs.placeholder.material3)
-    implementation(libs.nanoid)
+    implementation("com.github.seancfoley:ipaddress:_")
+    implementation("io.github.fornewid:placeholder-material3:_")
+    implementation("io.viascom.nanoid:nanoid:_")
 
     implementation(LinkSheet.flavors)
     implementation(LinkSheet.interconnect)
@@ -313,25 +313,26 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
 
-    implementation(libs.zipline.android)
-    implementation(libs.zipline.loader.android)
+    implementation("app.cash.zipline:zipline-android:_")
+    implementation("app.cash.zipline:zipline-loader-android:_")
 
-    implementation(libs.unfurl)
+    implementation("me.saket.unfurl:unfurl:_")
+    implementation("me.saket.unfurl:unfurl-social:_")
 //    implementation(libs.unfurl.social)
 
-    "proImplementation"(platform(libs.bom))
-    "proImplementation"(libs.storage.kt)
-    "proImplementation"(libs.compose.auth.ui)
-    "proImplementation"(libs.gotrue.kt)
+    "proImplementation"(platform("io.github.jan-tennert.supabase:bom:_"))
+    "proImplementation"("io.github.jan-tennert.supabase:storage-kt:_")
+    "proImplementation"("io.github.jan-tennert.supabase:compose-auth-ui:_")
+    "proImplementation"("io.github.jan-tennert.supabase:gotrue-kt:_")
     "proImplementation"(Ktor.client.android)
 
-    implementation(libs.jsoup)
+    implementation("org.jsoup:jsoup:_")
 
-    implementation(libs.api)
-    implementation(libs.provider)
-    implementation(libs.hiddenapibypass)
+    implementation("dev.rikka.shizuku:api:_")
+    implementation("dev.rikka.shizuku:provider:_")
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
 //    implementation(libs.dev.rikka.tools.refine.runtime)
-    compileOnly(libs.stub)
+    compileOnly("dev.rikka.hidden:stub:_")
 
     implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
@@ -345,7 +346,7 @@ dependencies {
     testImplementation(Koin.android)
     testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
-    testImplementation("com.willowtreeapps.assertk:assertk:0.28.1")
+    testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation(kotlin("test"))
 //    androidTestImplementation(AndroidX.test.core)
 //    androidTestImplementation(AndroidX.test.runner)

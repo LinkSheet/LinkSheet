@@ -60,9 +60,10 @@ include(":bottom-sheet")
 
 val isCI = hasEnv("CI")
 val isJitPack = hasEnv("JITPACK")
+val dev = false
 
 val substitutes = file("local.properties")
-if (substitutes.exists() && !isCI && !isJitPack) {
+if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
     include(":benchmark")
 
     val properties = Properties().apply {
@@ -85,6 +86,10 @@ if (substitutes.exists() && !isCI && !isJitPack) {
 
     properties["libredirectkt.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
         this[":"] = "lib"
+    }
+
+    properties["embed-resolve.dir"]?.trySubstitute("com.github.1fexd:embed-resolve") {
+        this[":"] = "core"
     }
 }
 

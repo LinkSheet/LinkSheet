@@ -1,10 +1,10 @@
-import de.fayard.refreshVersions.core.versionFor
 import fe.buildsrc.Version
 import fe.buildsrc.dependency.PinnedVersions
 
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 val group = "fe.linksheet.bottom.sheet"
@@ -19,10 +19,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
     }
 }
 

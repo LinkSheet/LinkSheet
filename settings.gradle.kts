@@ -45,7 +45,7 @@ fun substitute(directory: Any, dependency: String, substitutes: Map<String, Stri
 }
 
 @OptIn(ExperimentalTypeInference::class)
-fun Any?.trySubstitute(dependency: String, @BuilderInference builderAction: MutableMap<String, String>.() -> Unit) {
+fun Any?.trySubstitute(dependency: String, @BuilderInference builderAction: MutableMap<String, String>.() -> Unit = {}) {
     this?.let { substitute(this, dependency, buildMap(builderAction)) }
 }
 
@@ -70,6 +70,10 @@ if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
         file("local.properties").reader().use { load(it) }
     }
 
+    properties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe:gson-ext") {
+        this["core"] = "core"
+    }
+
     properties["android-lifecycle-util.dir"]?.trySubstitute("com.github.1fexd.android-lifecycle-util") {
         this["core"] = "core"
         this["koin"] = "koin"
@@ -84,12 +88,21 @@ if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
         this["layout"] = "layout"
     }
 
-    properties["libredirectkt.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
+    properties["libredirect.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
         this[":"] = "lib"
     }
+
+    properties["tld-lib.dir"]?.trySubstitute("com.github.1fexd:tld-lib") {
+        this[":"] = "lib"
+    }
+
+    properties["uriparser.dir"]?.trySubstitute("com.github.1fexd:uriparser")
+    properties["signify.dir"]?.trySubstitute("com.github.1fexd:signifykt")
 
     properties["embed-resolve.dir"]?.trySubstitute("com.github.1fexd:embed-resolve") {
         this[":"] = "core"
     }
+
+    properties["clearurl.dir"]?.trySubstitute("com.github.1fexd:clearurlkt")
 }
 

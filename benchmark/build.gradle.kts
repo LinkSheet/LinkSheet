@@ -48,10 +48,10 @@ android {
 }
 
 dependencies {
-    implementation("androidx.test.ext:junit:_")
-    implementation("androidx.test.espresso:espresso-core:_")
-    implementation("androidx.test.uiautomator:uiautomator:_")
-    implementation("androidx.benchmark:benchmark-junit4:_")
+    implementation(AndroidX.test.ext.junit)
+    implementation(AndroidX.test.espresso.core)
+    implementation(AndroidX.test.uiAutomator)
+    implementation(AndroidX.benchmark.junit4)
 }
 
 androidComponents {

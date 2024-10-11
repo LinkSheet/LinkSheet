@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.kotlin.extension.iterable.forEachWithInfo
+import fe.kotlin.extension.iterator.forEachWithInfo
 
 data class FilterChipValue<T>(
     val value: T,

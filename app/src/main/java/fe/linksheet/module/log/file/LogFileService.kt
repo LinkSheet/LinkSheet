@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
-import fe.kotlin.extension.primitive.unixMillisUtc
+import fe.kotlin.extension.unixMillisUtc
 import fe.kotlin.extension.time.localizedString
 import fe.kotlin.extension.time.unixMillis
 import fe.linksheet.extension.koin.service

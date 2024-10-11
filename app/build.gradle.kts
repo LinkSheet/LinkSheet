@@ -23,6 +23,7 @@ plugins {
     id("kotlin-parcelize")
     id("net.nemerosa.versioning")
     id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 // Must be defined before the android block, or else it won't work
@@ -56,7 +57,7 @@ android {
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-        val versionInfo = providers.provider { versioning.info }.get()
+        val versionInfo = provider { versioning.info }.get()
 
         versionCode = versionInfo.tag?.let {
             versionInfo.versionNumber.versionCode
@@ -207,10 +208,6 @@ android {
         buildConfig = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = versionFor(AndroidX.compose.compiler)
-    }
-
     packaging {
         resources {
             excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
@@ -267,7 +264,7 @@ dependencies {
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 
-    implementation("androidx.test.ext:junit-ktx:_")
+    implementation(AndroidX.test.ext.junit.ktx)
 
     implementation(Koin.android)
     implementation(Koin.compose)

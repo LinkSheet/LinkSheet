@@ -1,7 +1,7 @@
 package fe.linksheet.module.redactor
 
 import fe.kotlin.extension.asString
-import fe.kotlin.extension.iterable.forEachWithInfo
+import fe.kotlin.extension.iterator.forEachWithInfo
 import fe.linksheet.extension.kotlin.appendHashed
 import fe.linksheet.extension.kotlin.appendHashedTrim
 import fe.uribuilder.UriParseResult

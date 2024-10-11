@@ -32,7 +32,7 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.kotlin.extension.primitive.unixMillisUtc
+import fe.kotlin.extension.unixMillisUtc
 import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.R

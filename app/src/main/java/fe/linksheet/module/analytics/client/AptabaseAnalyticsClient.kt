@@ -5,7 +5,7 @@ import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
-import fe.kotlin.extension.primitive.unixMillisAtZone
+import fe.kotlin.extension.unixMillisAtZone
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.koin.createLogger

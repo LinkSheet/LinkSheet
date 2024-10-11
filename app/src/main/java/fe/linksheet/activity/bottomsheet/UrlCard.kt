@@ -91,10 +91,7 @@ fun UrlCard(
                 ) {
                     val state = painter.state
                     if (state is AsyncImagePainter.State.Success) {
-                        SubcomposeAsyncImageContent(
-
-                            modifier = Modifier.clip(CardDefaults.shape)
-                        )
+                        SubcomposeAsyncImageContent(modifier = Modifier.clip(CardDefaults.shape))
                     } else if (state is AsyncImagePainter.State.Empty || state is AsyncImagePainter.State.Loading) {
                         Spacer(
                             modifier = Modifier

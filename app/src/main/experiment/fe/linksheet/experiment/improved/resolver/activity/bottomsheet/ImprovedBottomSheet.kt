@@ -212,6 +212,8 @@ class ImprovedBottomSheet(
                 ProfileSwitcher(appLabel, crossProfileApps)
             }
 
+            val clipboardLabel = stringResource(id = R.string.generic__text_url)
+
             UrlBar(
                 uri = uriString,
                 profiles = AndroidVersion.atLeastApi30R {
@@ -227,7 +229,7 @@ class ImprovedBottomSheet(
                 downloadable = result.downloadable.isDownloadable(),
                 libRedirected = enableIgnoreLibRedirectButton && result.libRedirectResult is LibRedirectResult.Redirected,
                 copyUri = {
-                    viewModel.clipboardManager.setText("URL", result.uri.toString())
+                    viewModel.clipboardManager.setText(clipboardLabel, result.uri.toString())
 
                     if (bottomSheetViewModel.urlCopiedToast()) {
                         showToast(R.string.url_copied)

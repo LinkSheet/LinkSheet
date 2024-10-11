@@ -1,12 +1,9 @@
 package fe.linksheet.composable.page.settings.advanced
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Restore
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,16 +11,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
+import fe.composekit.component.icon.IconOffset
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
-import fe.linksheet.composable.page.settings.advanced.ExperimentDialog
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
@@ -40,7 +39,6 @@ fun NewExperimentsSettingsRoute(
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-
         ExperimentDialog(state!!)
     }
 
@@ -68,13 +66,7 @@ fun NewExperimentsSettingsRoute(
         }
     ) {
         item(key = R.string.warning, contentType = ContentType.Alert) {
-            AlertCard(
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                icon = Icons.Default.Warning.iconPainter,
-                iconContentDescription = stringResource(id = R.string.warning),
-                headline = textContent(R.string.experiments_explainer_2),
-                subtitle = textContent(R.string.experiments_explainer_3)
-            )
+            ExperimentAlertCard()
         }
 
         for (experiment in viewModel.visibleExperiments) {
@@ -101,5 +93,23 @@ fun NewExperimentsSettingsRoute(
             }
         }
     }
+}
+
+@Composable
+private fun ExperimentAlertCard() {
+    AlertCard(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+        icon = Icons.Rounded.WarningAmber.iconPainter,
+        iconOffset = IconOffset(y = (-1).dp),
+        iconContentDescription = stringResource(id = R.string.warning),
+        headline = textContent(R.string.experiments_explainer_2),
+        subtitle = textContent(R.string.experiments_explainer_3)
+    )
+}
+
+@Preview
+@Composable
+private fun ExperimentAlertCardPreview() {
+    ExperimentAlertCard()
 }
 

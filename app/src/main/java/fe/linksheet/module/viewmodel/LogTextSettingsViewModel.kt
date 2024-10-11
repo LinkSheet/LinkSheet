@@ -20,8 +20,8 @@ class LogTextSettingsViewModel(
 ) : SavedStateViewModel<LogTextViewerRoute>(savedStateHandle, preferenceRepository) {
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
-    val timestamp = getSavedStateFlow(LogTextViewerRoute::timestamp)
-    private val fileName = getSavedStateFlowNullable(LogTextViewerRoute::fileName)
+    private val sessionId = getSavedStateFlowNullable(LogTextViewerRoute::id)
+    val sessionName = getSavedStateFlow(LogTextViewerRoute::name)
 
-    val logEntries = fileName.map { logPersistService.readEntries(it) }
+    val logEntries = sessionId.map { logPersistService.readEntries(it) }
 }

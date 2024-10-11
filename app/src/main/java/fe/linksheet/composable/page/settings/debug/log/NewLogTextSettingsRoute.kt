@@ -29,18 +29,18 @@ fun NewLogTextSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: LogTextSettingsViewModel = koinViewModel(),
 ) {
-    val timestamp by viewModel.timestamp.collectOnIO()
+    val sessionName by viewModel.sessionName.collectOnIO()
     val logEntries by viewModel.logEntries.collectOnIO()
     val listState = remember(logEntries?.size) {
         listState(logEntries)
     }
 
     val exportDialog = rememberNewExportLogDialog(logViewCommon = viewModel.logViewCommon,
-        name = timestamp,
+        name = sessionName,
         fnLogEntries = { logEntries!! }
     )
 
-    val text = stringResource(id = R.string.settings_debug_log_viewer__title_log_captured_at, timestamp)
+    val text = stringResource(id = R.string.settings_debug_log_viewer__title_log_captured_at, sessionName)
 
     LogTextPageScaffold(
         headline = stringResource(id = R.string.log_viewer),

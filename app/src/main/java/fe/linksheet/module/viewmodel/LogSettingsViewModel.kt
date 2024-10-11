@@ -18,8 +18,8 @@ class LogSettingsViewModel(
         launchIO { files.emit(logPersistService.getLogSessions()) }
     }
 
-    fun deleteFileAsync(session: LogSession) = launchIO {
-        if (logPersistService.delete(session)) {
+    fun deleteFileAsync(sessionId: String) = launchIO {
+        if (logPersistService.delete(sessionId)) {
             files.emit(logPersistService.getLogSessions())
         }
     }

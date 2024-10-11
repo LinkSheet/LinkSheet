@@ -25,11 +25,11 @@ fun DebugLogPersistService(startupTime: LocalDateTime = LocalDateTime.now()): Lo
     return object : LogPersistService {
         override val startupTime: LocalDateTime = startupTime
 
-        override fun readEntries(id: String?): List<LogEntry> = emptyList()
+        override fun readEntries(sessionId: String?): List<LogEntry> = emptyList()
 
         override fun getLogSessions(): List<LogSession> = emptyList()
 
-        override fun delete(session: LogSession): Boolean = true
+        override fun delete(sessionId: String): Boolean = true
 
         override fun write(entry: LogEntry) {}
     }
@@ -39,10 +39,10 @@ fun DebugLogPersistService(startupTime: LocalDateTime = LocalDateTime.now()): Lo
 interface LogPersistService : LifecycleAwareService {
     val startupTime: LocalDateTime
 
-    fun readEntries(id: String?): List<LogEntry>
+    fun readEntries(sessionId: String?): List<LogEntry>
 
     fun getLogSessions(): List<LogSession>
-    fun delete(session: LogSession): Boolean
+    fun delete(sessionId: String): Boolean
     fun write(entry: LogEntry)
 }
 
@@ -94,8 +94,8 @@ private class LogFileService(private val logDir: File, override val startupTime:
         logEntries.add(entry)
     }
 
-    override fun readEntries(id: String?): List<LogEntry> {
-        return if (id == null) logEntries else readLogFile(id)
+    override fun readEntries(sessionId: String?): List<LogEntry> {
+        return if (sessionId == null) logEntries else readLogFile(sessionId)
     }
 
     override fun getLogSessions(): List<LogFile> {
@@ -108,8 +108,8 @@ private class LogFileService(private val logDir: File, override val startupTime:
             } ?: emptyList()
     }
 
-    override fun delete(session: LogSession): Boolean {
-        val file = File(logDir, session.id)
+    override fun delete(sessionId: String): Boolean {
+        val file = File(logDir, sessionId)
         return if (file.exists()) file.delete() else false
     }
 

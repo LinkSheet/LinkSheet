@@ -32,7 +32,6 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.logTextViewerSettingsRoute
-import fe.linksheet.module.log.file.LogSession
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -53,11 +52,11 @@ fun NewLogSettingsRoute(
         viewModel.logPersistService.startupTime.localizedString()
     }
 
-    val confirmDeleteDialog = rememberConfirmActionDialog<LogSession>()
+    val confirmDeleteDialog = rememberConfirmActionDialog<String>()
 
     ConfirmActionDialog(
         state = confirmDeleteDialog,
-        onConfirm = { file -> viewModel.deleteFileAsync(file) },
+        onConfirm = { sessionId -> viewModel.deleteFileAsync(sessionId) },
         onDismiss = { _ -> }
     ) { _ ->
         DeleteLogDialog(
@@ -69,7 +68,7 @@ fun NewLogSettingsRoute(
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.logs), onBackPressed = onBackPressed) {
         item(key = R.string.reset_app_link_verification_status) {
             LogSessionListItem(
-                logRoute = LogTextViewerRoute(startupTime, null),
+                logRoute = LogTextViewerRoute(null, startupTime),
                 navigate = navigate,
                 headline = text(startupTime),
                 subtitle = textContent(id = R.string.current_session)
@@ -96,7 +95,7 @@ fun NewLogSettingsRoute(
                 headline = text(session.id),
                 subtitle = text(session.info),
                 trailingContent = {
-                    FilledTonalIconButton(onClick = { confirmDeleteDialog.open(session) }) {
+                    FilledTonalIconButton(onClick = { confirmDeleteDialog.open(session.id) }) {
                         Icon(imageVector = Icons.Rounded.DeleteOutline, contentDescription = null)
                     }
                 }

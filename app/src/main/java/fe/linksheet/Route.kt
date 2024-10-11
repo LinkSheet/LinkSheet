@@ -74,12 +74,12 @@ val experimentSettingsRoute = ArgumentRoute(
 
 @Keep
 data class LogTextViewerRoute(
-    val timestamp: String,
-    val fileName: String?,
+    val id: String?,
+    val name: String
 ) : RouteData {
-    companion object : Route2<LogTextViewerRoute, String, String?>(
-        Argument(LogTextViewerRoute::timestamp),
-        Argument(LogTextViewerRoute::fileName),
+    companion object : Route2<LogTextViewerRoute, String?, String>(
+        Argument(LogTextViewerRoute::id),
+        Argument(LogTextViewerRoute::name),
         ::LogTextViewerRoute
     )
 }

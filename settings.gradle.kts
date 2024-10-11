@@ -58,7 +58,7 @@ include(":bottom-sheet")
 
 val isCI = hasEnv("CI")
 val isJitPack = hasEnv("JITPACK")
-val dev = false
+val dev = true
 
 val substitutes = file("local.properties")
 if (dev && (substitutes.exists() && !isCI && !isJitPack)) {

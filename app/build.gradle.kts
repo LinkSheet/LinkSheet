@@ -57,7 +57,7 @@ android {
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-        val versionInfo = provider { versioning.info }.get()
+        val versionInfo =  providers.provider { versioning.computeInfo() }.get()
 
         versionCode = versionInfo.tag?.let {
             versionInfo.versionNumber.versionCode
@@ -235,9 +235,9 @@ dependencies {
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
-    implementation(AndroidX.compose.ui.withVersion("1.7.0"))
+    implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3.withVersion("1.3.0"))
+    implementation(AndroidX.compose.material3)
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)

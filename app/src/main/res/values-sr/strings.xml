@@ -505,4 +505,5 @@
         <item quantity="few">%d онемогућена</item>
         <item quantity="other">%d онемогућених</item>
     </plurals>
+    <string name="generic__text_url">URL</string>
 </resources>

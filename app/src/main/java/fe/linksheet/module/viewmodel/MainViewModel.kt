@@ -33,6 +33,7 @@ import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
@@ -63,6 +64,7 @@ class MainViewModel(
 
     val telemetryShowInfoDialog = preferenceRepository.asState(AppPreferences.telemetryShowInfoDialog)
 
+    val editClipboard = experimentRepository.asState(Experiments.editClipboard)
 
     private val roleManager by lazy {
         if (AndroidVersion.AT_LEAST_API_26_O) {

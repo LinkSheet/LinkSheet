@@ -27,6 +27,8 @@ object Experiments : PreferenceDefinition(
 
     val enableAnalytics = boolean("experiment_enable_analytics", false)
 
+    val editClipboard = boolean("experiment_edit_clipboard", false)
+
     // TODO: Enforce type
     init {
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
@@ -38,16 +40,25 @@ object Experiments : PreferenceDefinition(
         }
 
         experiments = listOf(
-            Experiment("enhanced_url_bar", hidden = false, urlPreview, urlPreviewSkipBrowser, declutterUrl),
+            Experiment(
+                name = "enhanced_url_bar",
+                preferences = arrayOf(urlPreview, urlPreviewSkipBrowser, declutterUrl)
+            ),
             //Experiment("ui_overhaul", true, uiOverhaul),
             Experiment(
                 "improved_bottom_sheet",
-                hidden = false,
-                improvedIntentResolver,
-                improvedBottomSheetExpandFully,
-                improvedBottomSheetUrlDoubleTap,
-                libRedirectJsEngine
+                preferences = arrayOf(
+                    improvedIntentResolver,
+                    improvedBottomSheetExpandFully,
+                    improvedBottomSheetUrlDoubleTap,
+                    libRedirectJsEngine
+                )
             ),
+            Experiment(
+                name= "edit_clipboard",
+                displayName = "Edit clipboard content on home page",
+                preferences = arrayOf(editClipboard)
+            )
         )
 
         finalize()
@@ -64,7 +75,12 @@ object Experiments : PreferenceDefinition(
     }
 }
 
-class Experiment(val name: String, val hidden: Boolean = false, vararg val preferences: Preference.Boolean) {
+class Experiment(
+    val name: String,
+    val displayName: String = "Experiment $name",
+    vararg val preferences: Preference.Boolean,
+) {
+    val hidden: Boolean = false
     val defaultValues: Map<String, Boolean> by lazy { preferences.associate { it.key to it.default } }
 
     fun asState(repository: ExperimentRepository): Map<String, StatePreference<Boolean>> {

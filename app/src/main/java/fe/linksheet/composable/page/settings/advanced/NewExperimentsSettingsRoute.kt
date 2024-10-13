@@ -70,7 +70,7 @@ fun NewExperimentsSettingsRoute(
         }
 
         for (experiment in viewModel.visibleExperiments) {
-            divider(key = experiment.name, text = "Experiment ${experiment.name}")
+            divider(key = experiment.name, text = experiment.displayName)
 
             group(experiment.preferences.size) {
                 for (pref in experiment.preferences) {

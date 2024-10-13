@@ -4,6 +4,7 @@ package fe.linksheet
 import androidx.annotation.Keep
 import androidx.navigation.navDeepLink
 import fe.android.compose.route.util.*
+import kotlinx.serialization.Serializable
 
 
 const val mainRoute = "main_route"
@@ -75,7 +76,7 @@ val experimentSettingsRoute = ArgumentRoute(
 @Keep
 data class LogTextViewerRoute(
     val id: String?,
-    val name: String
+    val name: String,
 ) : RouteData {
     companion object : Route2<LogTextViewerRoute, String?, String>(
         Argument(LogTextViewerRoute::id),
@@ -121,6 +122,18 @@ const val appsWhichCanOpenLinksSettingsRoute = "apps_which_can_open_links_settin
 const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
 
+interface Route
+
+@Keep
+@Serializable
+data class TextEditorRoute(val text: String) : Route
+
+@Serializable
+data object MainRoute : Route
+
+@Serializable
+data object MainOverviewRoute : Route
+
 object Routes {
     const val Help = "route__help"
     const val Shortcuts = "route__shortcuts"
@@ -129,3 +142,4 @@ object Routes {
     const val RuleNew = "route__rule_new"
     const val AboutVersion = "route__about_version"
 }
+

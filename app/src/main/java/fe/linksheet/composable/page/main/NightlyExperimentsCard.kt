@@ -25,6 +25,6 @@ fun NightlyExperimentsCard(navigate: (String) -> Unit) {
 
 @Preview
 @Composable
-fun NightlyExperimentsCardPreview(){
+private fun NightlyExperimentsCardPreview() {
     NightlyExperimentsCard(navigate = {})
 }

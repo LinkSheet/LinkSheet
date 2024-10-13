@@ -10,7 +10,9 @@ pluginManagement {
     }
 
     plugins {
+        kotlin("plugin.serialization") version "2.0.20"
         id("de.fayard.refreshVersions") version "0.60.5"
+        id("androidx.navigation.safeargs") version "2.8.2"
     }
 }
 
@@ -84,6 +86,11 @@ if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
         this["component"] = "component"
         this["core"] = "core"
         this["layout"] = "layout"
+    }
+
+    properties["android-pref-helper.dir"]?.trySubstitute("com.github.1fexd.android-pref-helper") {
+        this["core"] = "core"
+        this["compose"] = "compose"
     }
 
     properties["libredirect.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {

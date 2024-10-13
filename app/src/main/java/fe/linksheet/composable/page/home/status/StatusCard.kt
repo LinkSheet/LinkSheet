@@ -114,7 +114,7 @@ private fun StatusCardButton(
 
 @Preview
 @Composable
-fun StatusCardPreview() {
+private fun StatusCardPreview() {
     PreviewTheme {
         StatusCard(
             isDefaultBrowser = true,
@@ -126,7 +126,7 @@ fun StatusCardPreview() {
 
 @Preview
 @Composable
-fun StatusCardPreviewNonDefault() {
+private fun StatusCardPreviewNonDefaultPreview() {
     PreviewTheme {
         StatusCard(
             isDefaultBrowser = false,

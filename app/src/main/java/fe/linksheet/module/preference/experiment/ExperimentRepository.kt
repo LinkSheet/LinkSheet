@@ -8,11 +8,10 @@ class ExperimentRepository(val context: Context) : StatePreferenceRepository(con
         Experiments.runMigrations(this)
     }
 
-    // Hack around repo until we have a contains() api
-    private val prefs = context.getSharedPreferences(context.packageName + "_experiments", Context.MODE_PRIVATE)
-
     fun hasExperiment(keys: Set<String>): Boolean {
-        for (key in keys) if (key in prefs) return true
+        for (key in keys) {
+            if (hasStoredValue(key)) return true
+        }
         return false
     }
 }

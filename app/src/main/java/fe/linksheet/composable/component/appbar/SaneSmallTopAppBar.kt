@@ -1,7 +1,7 @@
 package fe.linksheet.composable.component.appbar
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -10,19 +10,23 @@ import fe.android.compose.content.rememberOptionalContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SaneLargeTopAppBar(
-    headline: String,
+fun SaneSmallTopAppBar(
+    headline: String?,
     enableBackButton: Boolean,
     onBackPressed: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
+    val title = rememberOptionalContent(headline) {
+        SaneAppBarTitle(headline = it)
+    }
+
     val navigationIcon = rememberOptionalContent(enableBackButton) {
         SaneAppBarBackButton(onBackPressed = onBackPressed)
     }
 
-    LargeTopAppBar(
-        colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Transparent),
-        title = { SaneAppBarTitle(headline = headline) },
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        title = title ?: {},
         navigationIcon = navigationIcon ?: {},
         scrollBehavior = scrollBehavior
     )

@@ -644,4 +644,7 @@
     <string name="delete_log_dialog__subtitle_delete_info">Do you want to delete this log session? This can not be undone!</string>
     <string name="generic__button_text_delete">Delete</string>
     <string name="generic__text_url">Url</string>
+    <string name="generic__text_edit">Edit</string>
+    <string name="generic__text_done">Done</string>
+    <string name="home__clipboard_card_source">From clipboard</string>
 </resources>

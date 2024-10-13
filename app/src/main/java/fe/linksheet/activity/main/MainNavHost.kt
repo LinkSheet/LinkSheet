@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.*
+import fe.linksheet.composable.page.home.HomePageRoute
+import fe.linksheet.composable.page.home.addPageRoute
 import fe.linksheet.composable.page.settings.about.DonateSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.ExportImportSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.FeatureFlagSettingsRoute
@@ -21,9 +23,6 @@ import fe.linksheet.composable.page.settings.debug.loadpreferences.LoadDumpedPre
 import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
-import fe.linksheet.composable.util.animatedArgumentRouteComposable
-import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.composable.page.main.NewMainRoute
 import fe.linksheet.composable.page.settings.NewSettingsRoute
 import fe.linksheet.composable.page.settings.about.NewAboutSettingsRoute
 import fe.linksheet.composable.page.settings.about.NewCreditsSettingsRoute
@@ -48,6 +47,7 @@ import fe.linksheet.composable.page.settings.link.redirect.NewFollowRedirectsSet
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NewNotificationSettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
+import fe.linksheet.composable.util.*
 import fe.linksheet.util.AndroidVersion
 
 @Composable
@@ -60,13 +60,9 @@ fun MainNavHost(
     NavHost(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         navController = navController,
-        startDestination = mainRoute
+        startDestination = HomePageRoute
     ) {
-        animatedComposable(route = mainRoute) {
-//            NewRuleRoute(onBackPressed = onBackPressed)
-//            EditRuleRoute(onBackPressed = onBackPressed)
-            NewMainRoute(navController = navController)
-        }
+        addPageRoute(HomePageRoute, navController)
 
         animatedComposable(route = Routes.AboutVersion) {
             VersionSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)

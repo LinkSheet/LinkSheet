@@ -24,6 +24,8 @@ plugins {
     id("net.nemerosa.versioning")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("androidx.navigation.safeargs.kotlin") version "2.8.2"
 }
 
 // Must be defined before the android block, or else it won't work
@@ -57,7 +59,7 @@ android {
 
         val now = System.currentTimeMillis()
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-        val versionInfo =  providers.provider { versioning.computeInfo() }.get()
+        val versionInfo = providers.provider { versioning.computeInfo() }.get()
 
         versionCode = versionInfo.tag?.let {
             versionInfo.versionNumber.versionCode
@@ -208,11 +210,13 @@ android {
         buildConfig = true
     }
 
-    packaging {
-        resources {
-            excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
-        }
-    }
+//    val p = this@android.packaging
+//    val r = p.resources
+//    packaging {
+//        resources {
+////            it.excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
+//        }
+//    }
 
     val main by sourceSets
     for (it in setOf("compat", "experiment")) {
@@ -238,6 +242,7 @@ dependencies {
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
+    implementation(AndroidX.compose.foundation)
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -333,7 +338,7 @@ dependencies {
 
     implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
 
 
     debugImplementation(Square.leakCanary.android)

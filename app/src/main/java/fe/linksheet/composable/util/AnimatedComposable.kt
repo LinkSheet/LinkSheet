@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.toRoute
 import fe.android.compose.route.util.ArgumentRoute
 import fe.android.compose.route.util.Route
 import fe.android.compose.route.util.RouteData
@@ -51,7 +52,7 @@ val popExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> E
 
 fun <T : RouteData, A : Route.Arguments<T, U>, U> NavGraphBuilder.animatedArgumentRouteComposable(
     route: ArgumentRoute<T, A, U>,
-    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, T) -> Unit
+    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, T) -> Unit,
 ) {
     navigationComposable(
         route.route,
@@ -71,7 +72,7 @@ fun <T : RouteData, A : Route.Arguments<T, U>, U> NavGraphBuilder.animatedArgume
 
 fun NavGraphBuilder.animatedComposable(
     route: String,
-    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit
+    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,
 ) = navigationComposable(
     route,
     enterTransition = enterTransition,
@@ -80,3 +81,16 @@ fun NavGraphBuilder.animatedComposable(
     popExitTransition = popExitTransition,
     content = content
 )
+
+inline fun <reified T : Any> NavGraphBuilder.animatedComposable(
+    noinline content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, T) -> Unit,
+) {
+    navigationComposable<T>(
+        enterTransition = enterTransition,
+        exitTransition = exitTransition,
+        popEnterTransition = popEnterTransition,
+        popExitTransition = popExitTransition,
+    ) { stack ->
+        content(stack, stack.toRoute<T>())
+    }
+}

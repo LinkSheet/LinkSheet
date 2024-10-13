@@ -2,6 +2,7 @@ package fe.linksheet.composable.page.main
 
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -17,14 +18,12 @@ import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
-import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.*
 import fe.linksheet.R
-import fe.linksheet.Routes
 import fe.linksheet.debug.DebugComposable
 import fe.linksheet.composable.page.home.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.settingsRoute
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.util.BuildType
@@ -109,11 +108,13 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             if (BuildType.current.allowDebug) {
                 item {
-                    FilledTonalButton(
-                        colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                        onClick = { navController.navigate(Routes.RuleOverview) }
-                    ) {
-                        Text(text = "Rules")
+                    Row {
+                        FilledTonalButton(
+                            colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                            onClick = { navController.navigate(Routes.RuleOverview) }
+                        ) {
+                            Text(text = "Rules")
+                        }
                     }
                 }
             }
@@ -142,7 +143,11 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                     key = R.string.open_copied_link,
                     contentType = ContentType.ClickableAlert
                 ) {
-                    OpenCopiedLink(uri = clipboardUri!!)
+                    OpenCopiedLink(
+                        editClipboard = viewModel.editClipboard(),
+                        uri = clipboardUri!!,
+                        navigate = { navController.navigate(it) }
+                    )
                 }
             }
 

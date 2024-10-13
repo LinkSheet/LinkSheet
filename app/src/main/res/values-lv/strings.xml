@@ -9,4 +9,24 @@
     <string name="always">Vienmēr</string>
     <string name="set_as_browser">Iestatīt kā pārlūku</string>
     <string name="set_as_browser_explainer">Noklikšķiniet šeit, lai padarītu LinkSheet par noklusējuma pārlūku</string>
+    <string name="usage_stats_sorting">Kārtot lietotnes pēc lietojuma</string>
+    <string name="usage_stats_sorting_explainer">Iekļauj Android sistēmas lietošanas statistiku šķirošanas algoritmā. Atļauja tiks pieprasīta pirmajā izmantošanas reizē.</string>
+    <string name="none_explainer">Parāda tikai vietējās lietotnes ignorējot visus pārlūkus. Ja ir pieejama tikai viena vietējā lietotne, tā tiks automātiski izmantota. Ja nav nevienas vietējās lietotnes, tiks parādīti visi pārlūki.</string>
+    <string name="always_ask_explainer">Vienmēr parāda visus pārlūkus</string>
+    <string name="no_such_app_found">Tāda lietotne nav atrasta!</string>
+    <string name="opening_with_app">Atvēršana ar %s</string>
+    <string name="apps_which_can_open_links">Pārbaudīti saites apstrādātāji</string>
+    <string name="apps_which_can_open_links_explainer">Pieskarieties lietotnei, lai atvērtu izvēlni \"Atvērt pēc noklusējuma\", kas ļauj atspējot automātisko saites atvēršanu</string>
+    <string name="apps_which_can_open_links_explainer_2">Uzskaita visas lietotnes, kuras var traucēt LinkSheet darbību</string>
+    <string name="no_preferred_apps_set_yet">Neviena lietotne vēl nav iestatīta kā vēlamā.</string>
+    <string name="search">Meklēt</string>
+    <string name="copy_url">Kopēt saiti</string>
+    <string name="url_copied">URL iekopēts starpliktuvē</string>
+    <string name="confirm">Apstiprināt</string>
+    <string name="clear">Notīrīt</string>
+    <string name="browser_mode">Vēlamie pārlūki</string>
+    <string name="browser_mode_subtitle">Atlasiet pārlūkus, kurus rādīt</string>
+    <string name="always_ask">Vienmēr jautā</string>
+    <string name="none">Neviens</string>
+    <string name="send_to">Kopīgot ar</string>
 </resources>

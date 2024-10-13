@@ -495,4 +495,5 @@
         <item quantity="one">%d включено</item>
         <item quantity="other">%d включени</item>
     </plurals>
+    <string name="generic__text_url">Адрес</string>
 </resources>

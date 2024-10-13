@@ -509,4 +509,5 @@
         <item quantity="many">%d wyłączonych</item>
         <item quantity="other">%d wyłączonych</item>
     </plurals>
+    <string name="generic__text_url">Adres</string>
 </resources>

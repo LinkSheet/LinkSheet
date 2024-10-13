@@ -502,4 +502,5 @@
         <item quantity="many">%d desactivados</item>
         <item quantity="other">%d desactivados</item>
     </plurals>
+    <string name="generic__text_url">Url</string>
 </resources>

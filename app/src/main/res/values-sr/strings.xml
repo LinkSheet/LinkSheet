@@ -506,4 +506,7 @@
         <item quantity="other">%d онемогућених</item>
     </plurals>
     <string name="generic__text_url">URL</string>
+    <string name="generic__text_done">Готово</string>
+    <string name="generic__text_edit">Измени</string>
+    <string name="home__clipboard_card_source">Из привремене меморије</string>
 </resources>

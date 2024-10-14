@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.*
 import fe.linksheet.composable.page.home.HomePageRoute
-import fe.linksheet.composable.page.home.addPageRoute
 import fe.linksheet.composable.page.settings.about.DonateSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.ExportImportSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.FeatureFlagSettingsRoute
@@ -48,6 +47,7 @@ import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NewNotificationSettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.util.*
+import fe.linksheet.navigation.addPageRoute
 import fe.linksheet.util.AndroidVersion
 
 @Composable

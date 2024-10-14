@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.main
+package fe.linksheet.composable.page.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -20,8 +20,10 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.linksheet.*
 import fe.linksheet.R
+import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
+import fe.linksheet.composable.page.home.card.OpenCopiedLink
 import fe.linksheet.debug.DebugComposable
-import fe.linksheet.composable.page.home.status.StatusCardWrapper
+import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily

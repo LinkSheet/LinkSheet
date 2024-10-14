@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.main
+package fe.linksheet.composable.page.home.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.main
+package fe.linksheet.composable.page.home.card
 
 import android.app.Activity
 import androidx.compose.material.icons.Icons

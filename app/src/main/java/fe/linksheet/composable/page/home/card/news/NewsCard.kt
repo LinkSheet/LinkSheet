@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.home.news
+package fe.linksheet.composable.page.home.card.news
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*

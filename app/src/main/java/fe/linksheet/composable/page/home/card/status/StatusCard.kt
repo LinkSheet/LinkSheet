@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.home.status
+package fe.linksheet.composable.page.home.card.status
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement

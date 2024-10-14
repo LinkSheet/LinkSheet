@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.main
+package fe.linksheet.composable.page.home.card
 
 import android.content.Intent
 import android.net.Uri

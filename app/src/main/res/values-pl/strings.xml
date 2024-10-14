@@ -510,4 +510,7 @@
         <item quantity="other">%d wyłączonych</item>
     </plurals>
     <string name="generic__text_url">Adres</string>
+    <string name="generic__text_edit">Edytuj</string>
+    <string name="generic__text_done">Gotowe</string>
+    <string name="home__clipboard_card_source">Ze schowka</string>
 </resources>

@@ -503,4 +503,7 @@
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>
     <string name="version_name"><b>Verze:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="generic__text_url">URL</string>
+    <string name="home__clipboard_card_source">Ze schránky</string>
+    <string name="generic__text_edit">Upravit</string>
+    <string name="generic__text_done">Hotovo</string>
 </resources>

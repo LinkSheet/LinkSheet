@@ -494,4 +494,8 @@
         <item quantity="one">%d onaylı</item>
         <item quantity="other">%d onaylı</item>
     </plurals>
+    <string name="home__clipboard_card_source">Panodan</string>
+    <string name="generic__text_edit">Düzenle</string>
+    <string name="generic__text_done">Tamam</string>
+    <string name="generic__text_url">Url</string>
 </resources>

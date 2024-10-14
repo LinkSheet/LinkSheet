@@ -205,9 +205,9 @@
     <string name="import_dumped_preference">Внасяне на настройки от дневника</string>
     <string name="import_and_override">Внасяне и заменяне</string>
     <string name="success">Готово</string>
-    <string name="built_at">Време на компилиране (UTC):</string>
-    <string name="github_workflow_run_id">Идентификатор на компилацията:</string>
-    <string name="version_name">Идентификатор:</string>
+    <string name="built_at"><b>Време на изграждане:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="github_workflow_run_id"><b>Работен процес на изграждане:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="version_name"><b>Издание:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="privacy_settings_explainer">Поверителност на изпращача, статистика</string>
     <string name="show_linksheet_referrer">Попълване на LinkSheet като изпращач</string>
     <string name="privacy">Поверителност</string>
@@ -226,7 +226,7 @@
 \nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
     <string name="manual_build">Ръчно компилирано и подписано от 1fexd</string>
     <string name="donate_learn_more">Научете повече</string>
-    <string name="flavor">Вариант:</string>
+    <string name="flavor"><b>Вариант:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
     <string name="github_pipeline_build">Компилирано и подписано от CI</string>
     <string name="other">Друго</string>
     <string name="app_setup">Настройка на приложението</string>
@@ -496,4 +496,7 @@
         <item quantity="other">%d включени</item>
     </plurals>
     <string name="generic__text_url">Адрес</string>
+    <string name="generic__text_edit">Променяне</string>
+    <string name="generic__text_done">Готово</string>
+    <string name="home__clipboard_card_source">От копираното</string>
 </resources>

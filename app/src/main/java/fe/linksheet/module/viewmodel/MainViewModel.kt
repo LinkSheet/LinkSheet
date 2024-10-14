@@ -4,8 +4,10 @@ package fe.linksheet.module.viewmodel
 import android.app.Activity
 import android.app.Application
 import android.app.role.RoleManager
+import android.content.ClipboardManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -24,7 +26,9 @@ import androidx.navigation.NavDestination
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
+import fe.linksheet.extension.android.getFirstText
 import fe.linksheet.extension.android.resolveActivityCompat
+import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.AnalyticsService
@@ -39,6 +43,9 @@ import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.AndroidVersion
+import fe.linksheet.util.UriUtil
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.time.Duration
 
 
@@ -70,6 +77,29 @@ class MainViewModel(
         if (AndroidVersion.AT_LEAST_API_26_O) {
             context.getSystemService<RoleManager>()
         } else null
+    }
+
+    private val clipboardManager by lazy { context.getSystemService<ClipboardManager>()!! }
+
+    private val _clipboardContent = MutableStateFlow<Uri?>(null)
+    val clipboardContent = _clipboardContent.asStateFlow()
+
+    fun tryUpdateClipboard() {
+        val clipboardUri = clipboardManager.getFirstText()?.let { tryParseUriString(it) }
+        if (clipboardUri != null && _clipboardContent.value != clipboardUri) {
+            _clipboardContent.value = clipboardUri
+        }
+    }
+
+    fun tryUpdateClipboard(label: String, uriStr: String) {
+        val uri = tryParseUriString(uriStr)
+        if (uri != null) {
+            clipboardManager.setText(label, uri.toString())
+        }
+    }
+
+    private fun tryParseUriString(uriStr: String): Uri? {
+        return UriUtil.parseWebUriStrict(uriStr)
     }
 
     fun enqueueNavEvent(destination: NavDestination, args: Bundle?) {

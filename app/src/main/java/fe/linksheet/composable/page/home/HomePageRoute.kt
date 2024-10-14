@@ -1,13 +1,11 @@
 package fe.linksheet.composable.page.home
 
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
-import fe.android.compose.extension.setText
 import fe.linksheet.MainOverviewRoute
 import fe.linksheet.TextEditorRoute
-import fe.linksheet.composable.page.edit.TextEditorPage
+import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
 import fe.linksheet.composable.page.main.NewMainRoute
 import fe.linksheet.composable.util.animatedComposable
 import kotlinx.serialization.Serializable
@@ -28,14 +26,9 @@ object HomePageRoute : PageRoute {
         }
 
         animatedComposable<TextEditorRoute> { _, route ->
-            val clipboardManager = LocalClipboardManager.current
-
-            TextEditorPage(
+            TextEditorPageWrapper(
                 initialText = route.text,
-                onDoneClicked = { text ->
-                    clipboardManager.setText(text)
-                    navController.popBackStack()
-                },
+                popBackStack = navController::popBackStack
             )
         }
     }

@@ -24,6 +24,8 @@ import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
 
 
+private val editorPadding = 16.dp
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextEditorPage(
@@ -46,7 +48,7 @@ fun TextEditorPage(
                 title = {},
                 navigationIcon = {
                     Button(
-                        modifier = Modifier.padding(start = 16.dp),
+                        modifier = Modifier.padding(start = editorPadding),
                         onClick = {
                             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
                             onDoneClicked(textState)
@@ -68,9 +70,9 @@ fun TextEditorPage(
             Column(
                 modifier = Modifier
                     .padding(
-                        top = 16.dp,
-                        start = 16.dp,
-                        end = 16.dp
+                        top = editorPadding,
+                        start = editorPadding,
+                        end = editorPadding
                     )
                     .fillMaxSize()
             ) {

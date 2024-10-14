@@ -9,11 +9,11 @@ import androidx.compose.material.icons.outlined.ContentPasteGo
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -28,8 +28,12 @@ fun OpenCopiedLink(editClipboard: Boolean, uri: Uri, navigate: (Route) -> Unit) 
     val uriString = uri.toString()
     val context = LocalContext.current
 
-    val editRow = rememberOptionalContent(editClipboard) {
-        EditExperiment(uriString = uriString, navigate = navigate)
+    val editRow = remember(key1 = editClipboard, key2 = uriString) {
+        val composable: @Composable () -> Unit = {
+            EditExperiment(uriString = uriString, navigate = navigate)
+        }
+
+        return@remember if(editClipboard) composable else null
     }
 
     AlertCard(

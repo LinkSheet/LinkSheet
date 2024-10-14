@@ -1,6 +1,5 @@
 package fe.linksheet.composable.page.main
 
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.component.ContentType
@@ -28,7 +28,6 @@ import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.Results
-import fe.linksheet.util.UriUtil
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,13 +37,13 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
 
+    val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
     var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
     var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
     val useTime = viewModel.formatUseTime()
 
-    var clipboardUri by remember { mutableStateOf<Uri?>(null) }
     val browserStatus by remember { mutableStateOf(viewModel.hasBrowser()) }
 
     LaunchedEffect(Unit) {
@@ -57,11 +56,11 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     }
 
     clipboardManager.ObserveClipboard {
-        clipboardUri = getClipboardUrl(it)
+        viewModel.tryUpdateClipboard()
     }
 
     LocalWindowInfo.current.OnFocused {
-        clipboardUri = getClipboardUrl(clipboardManager)
+        viewModel.tryUpdateClipboard()
     }
 
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
@@ -254,10 +253,3 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     }
 }
 
-private fun getClipboardUrl(clipboardManager: ClipboardManager): Uri? {
-    return getClipboardUrl(clipboardManager.getText()?.text)
-}
-
-private fun getClipboardUrl(text: String?): Uri? {
-    return text?.let { UriUtil.parseWebUriStrict(it) }
-}

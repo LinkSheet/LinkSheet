@@ -6,6 +6,7 @@ import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
@@ -47,7 +48,7 @@ fun NewFollowRedirectsSettingsRoute(
         group(size = 5 + if(LinkSheetAppConfig.isPro()) 1 else 0) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects(),
+                    enabled = viewModel.followRedirects().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.followRedirectsLocalCache,
@@ -59,7 +60,7 @@ fun NewFollowRedirectsSettingsRoute(
             item(key = R.string.follow_only_known_trackers) { padding, shape ->
                 // TODO: This settings should allow the user to add their own rules in the future, or at least display a _understandable_ list of known tracker domains
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects() && !viewModel.followRedirectsExternalService(),
+                    enabled = (viewModel.followRedirects() && !viewModel.followRedirectsExternalService()).toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.followOnlyKnownTrackers,
@@ -71,7 +72,7 @@ fun NewFollowRedirectsSettingsRoute(
 
             item(key = R.string.allow_darknets) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects(),
+                    enabled = viewModel.followRedirects().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.followRedirectsAllowsDarknets,
@@ -83,7 +84,7 @@ fun NewFollowRedirectsSettingsRoute(
             if(LinkSheetAppConfig.isPro()){
                 item(key = R.string.follow_redirects_external_service) { padding, shape ->
                     PreferenceSwitchListItem(
-                        enabled = viewModel.followRedirects() && LinkSheetAppConfig.isPro(),
+                        enabled = (viewModel.followRedirects() && LinkSheetAppConfig.isPro()).toEnabledContentSet(),
                         shape = shape,
                         padding = padding,
                         preference = viewModel.followRedirectsExternalService,
@@ -95,7 +96,7 @@ fun NewFollowRedirectsSettingsRoute(
 
             item(key = R.string.settings_links_follow_redirects__title_skip_browser) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects(),
+                    enabled = viewModel.followRedirects().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.followRedirectsSkipBrowser,
@@ -106,7 +107,7 @@ fun NewFollowRedirectsSettingsRoute(
 
             item(key = R.string.request_timeout) { padding, shape ->
                 SliderListItem(
-                    enabled = viewModel.followRedirects(),
+                    enabled = viewModel.followRedirects().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     valueRange = 0f..30f,

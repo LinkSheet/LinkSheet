@@ -144,6 +144,8 @@ object AppPreferences : PreferenceDefinition(
     @SensitivePreference
     val installationId = string("installation_id") { UUID.randomUUID().toString() }
 
+    val bottomSheetProfileSwitcher = boolean("bottom_sheet_profile_switcher")
+
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->
             if (!repository.hasStoredValue(themeV2)) {

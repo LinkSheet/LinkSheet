@@ -9,13 +9,14 @@ import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.MutablePreferenceState
 import fe.composekit.component.CommonDefaults
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.EnabledContent
+import fe.composekit.component.list.item.EnabledContentSet
 import fe.composekit.component.list.item.type.DividedSwitchListItem
 import fe.composekit.component.shape.CustomShapeDefaults
 
-
 @Composable
 fun PreferenceDividedSwitchListItem(
-    enabled: Boolean = true,
+    enabled: EnabledContentSet = EnabledContent.all,
     preference: MutablePreferenceState<Boolean, Boolean, Preference.Default<Boolean>>,
     onContentClick: () -> Unit,
     shape: Shape = CustomShapeDefaults.SingleShape,

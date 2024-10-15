@@ -517,6 +517,7 @@
         access -&gt;
         Connected work &amp; personal apps
     </string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Displays a button in the bottom sheet to open the tapped link in a (work-) profile</string>
     <string name="customization">Customization</string>
     <string name="build_info">Build info</string>
     <string name="verified_link_handlers">Verified link handlers</string>

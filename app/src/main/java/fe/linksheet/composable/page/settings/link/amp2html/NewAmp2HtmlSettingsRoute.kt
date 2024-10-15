@@ -6,6 +6,7 @@ import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
+import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
@@ -39,7 +40,7 @@ fun NewAmp2HtmlSettingsRoute(
         group(size = 4 + if (LinkSheetAppConfig.isPro()) 1 else 0) {
             item(key = R.string.amp2html_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.enableAmp2Html(),
+                    enabled = viewModel.enableAmp2Html().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.enableAmp2HtmlLocalCache,
@@ -50,7 +51,7 @@ fun NewAmp2HtmlSettingsRoute(
 
             item(key = R.string.allow_darknets) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.enableAmp2Html(),
+                    enabled = viewModel.enableAmp2Html().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.amp2HtmlAllowDarknets,
@@ -62,7 +63,7 @@ fun NewAmp2HtmlSettingsRoute(
             if (LinkSheetAppConfig.isPro()) {
                 item(key = R.string.amp2html_external_service) { padding, shape ->
                     PreferenceSwitchListItem(
-                        enabled = viewModel.enableAmp2Html() && LinkSheetAppConfig.isPro(),
+                        enabled = (viewModel.enableAmp2Html() && LinkSheetAppConfig.isPro()).toEnabledContentSet(),
                         shape = shape,
                         padding = padding,
                         preference = viewModel.amp2HtmlExternalService,
@@ -74,7 +75,7 @@ fun NewAmp2HtmlSettingsRoute(
 
             item(key = R.string.settings_links_amp2html__title_skip_browser) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.enableAmp2Html(),
+                    enabled = viewModel.enableAmp2Html().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.amp2HtmlSkipBrowser,
@@ -85,7 +86,7 @@ fun NewAmp2HtmlSettingsRoute(
 
             item(key = R.string.request_timeout) { padding, shape ->
                 SliderListItem(
-                    enabled = viewModel.enableAmp2Html(),
+                    enabled = viewModel.enableAmp2Html().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     valueRange = 0f..30f,

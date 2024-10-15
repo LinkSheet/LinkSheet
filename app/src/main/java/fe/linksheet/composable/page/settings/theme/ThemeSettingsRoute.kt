@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.toEnabledContentSet
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
@@ -46,7 +47,7 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
 
             item(key = R.string.theme_enable_amoled) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.themeV2() == ThemeV2.System || viewModel.themeV2() == ThemeV2.Dark,
+                    enabled = (viewModel.themeV2() == ThemeV2.System || viewModel.themeV2() == ThemeV2.Dark).toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.themeAmoled,

@@ -12,6 +12,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.compose.StatePreference
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
@@ -55,7 +56,7 @@ fun NewDownloaderSettingsRoute(
         group(size = 2) {
             item(key = R.string.downloader_url_mime_type) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.enableDownloader(),
+                    enabled = viewModel.enableDownloader().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     preference = viewModel.downloaderCheckUrlMimeType,
@@ -66,7 +67,7 @@ fun NewDownloaderSettingsRoute(
 
             item(key = R.string.request_timeout) { padding, shape ->
                 SliderListItem(
-                    enabled = viewModel.enableDownloader(),
+                    enabled = viewModel.enableDownloader().toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
                     valueRange = 0f..30f,

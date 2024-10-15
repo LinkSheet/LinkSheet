@@ -29,16 +29,19 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
+import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.util.BuildType
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -60,6 +63,12 @@ fun BottomSheetSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: BottomSheetSettingsViewModel = koinViewModel(),
 ) {
+    val displayProfileSwitcherPreference = remember {
+        viewModel.canDisplayProfileSwitcherPreference()
+                // TODO: Remove
+                && BuildType.current.allowDebug
+    }
+
     val context = LocalActivity.current
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange {
         if (!viewModel.usageStatsPermission.check()) {
@@ -87,9 +96,9 @@ fun BottomSheetSettingsRoute(
             )
         }
 
-        divider(id =  R.string.base_config)
+        divider(id = R.string.base_config)
 
-        group(size = 4) {
+        group(size = 4 + if (displayProfileSwitcherPreference) 1 else 0) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 SwitchListItem(
                     shape = shape,
@@ -148,6 +157,22 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
+            if (displayProfileSwitcherPreference) {
+                item(key = R.string.switch_profile) { padding, shape ->
+                    PreferenceDividedSwitchListItem(
+                        enabled = EnabledContent.Main.set,
+                        shape = shape,
+                        padding = padding,
+                        preference = viewModel.bottomSheetProfileSwitcher,
+                        onContentClick = {
+
+                        },
+                        headlineContent = textContent(R.string.switch_profile),
+                        supportingContent = textContent(R.string.settings_bottom_sheet__text_profile_switcher),
+                    )
+                }
+            }
+
 //            item(key = R.string.show_native_label) { padding, shape ->
 //                PreferenceSwitchListItem(
 //                    shape = shape,
@@ -159,7 +184,7 @@ fun BottomSheetSettingsRoute(
 //            }
         }
 
-        divider(id =  R.string.tap_customization)
+        divider(id = R.string.tap_customization)
 
         group(size = 4) {
             items(map = tapTypePreferences) { type, pref, padding, shape ->
@@ -177,7 +202,7 @@ fun BottomSheetSettingsRoute(
             }
         }
 
-        divider(id =  R.string.urlbar_settings)
+        divider(id = R.string.urlbar_settings)
 
         group(size = 3) {
             item(key = R.string.preview_url) { padding, shape ->
@@ -219,7 +244,7 @@ private fun TapConfigGroupItem(
     type: TapType,
     pref: StateMappedPreference<TapConfig, String>,
     padding: PaddingValues,
-    shape: Shape
+    shape: Shape,
 ) {
     val interaction = LocalHapticFeedbackInteraction.current
 

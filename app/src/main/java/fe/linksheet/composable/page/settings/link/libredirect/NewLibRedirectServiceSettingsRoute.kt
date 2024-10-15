@@ -10,6 +10,7 @@ import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
@@ -68,7 +69,7 @@ fun NewLibRedirectServiceSettingsRoute(
                     RadioButtonListItem(
                         shape = shape,
                         padding = padding,
-                        enabled = enabled,
+                        enabled = enabled.toEnabledContentSet(),
                         selected = selected!!.instanceUrl == LibRedirectDefault.randomInstance,
                         onSelect = { viewModel.updateInstance(selected!!, LibRedirectDefault.randomInstance) },
                         position = ContentPosition.Leading,
@@ -82,7 +83,7 @@ fun NewLibRedirectServiceSettingsRoute(
                         RadioButtonListItem(
                             shape = shape,
                             padding = padding,
-                            enabled = enabled,
+                            enabled = enabled.toEnabledContentSet(),
                             selected = selected!!.instanceUrl == instance,
                             onSelect = { viewModel.updateInstance(selected!!, instance) },
                             position = ContentPosition.Leading,

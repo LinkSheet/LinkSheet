@@ -15,12 +15,14 @@ import fe.composekit.component.list.column.CustomListItemPadding
 import fe.composekit.component.list.column.CustomListItemTextOptions
 import fe.composekit.component.list.column.shape.ShapeListItemDefaults
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.EnabledContent
+import fe.composekit.component.list.item.EnabledContentSet
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.composekit.component.shape.CustomShapeDefaults
 
 @Composable
 fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
-    enabled: Boolean = true,
+    enabled: EnabledContentSet = EnabledContent.all,
     value: NT,
     preference: MutablePreferenceState<T, NT, P>,
     shape: Shape = CustomShapeDefaults.SingleShape,

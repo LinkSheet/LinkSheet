@@ -69,15 +69,15 @@ fun NewExperimentsSettingsRoute(
             ExperimentAlertCard()
         }
 
-        for (experiment in viewModel.visibleExperiments) {
-            divider(key = experiment.name, text = experiment.displayName)
+        for (group in viewModel.visibleExperiments) {
+            divider(key = group.name, text = group.displayName)
 
-            group(experiment.preferences.size) {
-                for (pref in experiment.preferences) {
-                    val state = viewModel.stateMap[pref.key]!!
-                    val title = pref.key.replace("experiment_", "")
+            group(group.preferences.size) {
+                for (experimentPreference in group.preferences) {
+                    val key = experimentPreference.preference.key
+                    val state = viewModel.stateMap[key]!!
 
-                    item(key = pref.key) { padding, shape ->
+                    item(key = key) { padding, shape ->
                         SwitchListItem(
                             shape = shape,
                             padding = padding,
@@ -85,7 +85,7 @@ fun NewExperimentsSettingsRoute(
                             onCheckedChange = { state(it) },
                             position = ContentPosition.Trailing,
                             headlineContent = content {
-                                Text(text = title, overflow = TextOverflow.Ellipsis, maxLines = 1)
+                                Text(text = experimentPreference.displayName, overflow = TextOverflow.Ellipsis)
                             }
                         )
                     }

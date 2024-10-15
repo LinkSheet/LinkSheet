@@ -13,7 +13,7 @@ object Experiments : PreferenceDefinition(
     "experiment_url_bar_switch_profile",
     "experiment_ui_overhaul"
 ) {
-    val experiments: List<Experiment>
+    val experiments: List<ExperimentGroup>
 
     val urlPreview = boolean("experiment_url_bar_preview")
     val urlPreviewSkipBrowser = boolean("experiment_url_bar_preview_skip_browser")
@@ -40,25 +40,22 @@ object Experiments : PreferenceDefinition(
         }
 
         experiments = listOf(
-            Experiment(
-                name = "enhanced_url_bar",
-                preferences = arrayOf(urlPreview, urlPreviewSkipBrowser, declutterUrl)
-            ),
-            //Experiment("ui_overhaul", true, uiOverhaul),
-            Experiment(
-                "improved_bottom_sheet",
-                preferences = arrayOf(
-                    improvedIntentResolver,
-                    improvedBottomSheetExpandFully,
-                    improvedBottomSheetUrlDoubleTap,
-                    libRedirectJsEngine
-                )
-            ),
-            Experiment(
-                name= "edit_clipboard",
-                displayName = "Edit clipboard content on home page",
-                preferences = arrayOf(editClipboard)
-            )
+            ExperimentGroup("enhanced_url_bar", "Enhanced url bar").apply {
+                addPreference(ExperimentPreference("Open Graph preview", urlPreview))
+                addPreference(ExperimentPreference("Disable preview if referrer is browser", urlPreviewSkipBrowser))
+                addPreference(ExperimentPreference("Declutter url", declutterUrl))
+            },
+
+            ExperimentGroup("improved_bottom_sheet", "Improved bottom sheet").apply {
+                addPreference(ExperimentPreference("Improved intent resolver", improvedIntentResolver))
+                addPreference(ExperimentPreference("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully))
+                addPreference(ExperimentPreference("Double tap url to open app", improvedBottomSheetUrlDoubleTap))
+                addPreference(ExperimentPreference("LibRedirect QuickJS engine", libRedirectJsEngine))
+            },
+
+            ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {
+                addPreference(ExperimentPreference("Enable", editClipboard))
+            }
         )
 
         finalize()
@@ -75,20 +72,24 @@ object Experiments : PreferenceDefinition(
     }
 }
 
-class Experiment(
-    val name: String,
-    val displayName: String = "Experiment $name",
-    vararg val preferences: Preference.Boolean,
-) {
-    val hidden: Boolean = false
-    val defaultValues: Map<String, Boolean> by lazy { preferences.associate { it.key to it.default } }
+class ExperimentGroup(val name: String, val displayName: String = "Experiment $name") {
+    private val _preferences = mutableListOf<ExperimentPreference>()
+    val preferences: List<ExperimentPreference> = _preferences
 
-    fun asState(repository: ExperimentRepository): Map<String, StatePreference<Boolean>> {
-        return preferences.associate { preference -> preference.key to repository.asState(preference) }
+    fun addPreference(preference: ExperimentPreference) {
+        _preferences.add(preference)
     }
 
+    val defaultValues: Map<String, Boolean> by lazy { _preferences.associate { it.preference.key to it.preference.default } }
+
+    fun asState(repository: ExperimentRepository): Map<String, StatePreference<Boolean>> {
+        return _preferences.associate { preference -> preference.preference.key to repository.asState(preference.preference) }
+    }
+
+    val hidden: Boolean = false
     fun isVisible(repository: ExperimentRepository): Boolean {
         return !hidden || repository.hasExperiment(defaultValues.keys)
     }
 }
 
+data class ExperimentPreference(val displayName: String, val preference: Preference.Boolean)

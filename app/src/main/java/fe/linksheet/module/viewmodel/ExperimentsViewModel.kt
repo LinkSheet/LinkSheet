@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import fe.android.preference.helper.compose.StatePreference
 import fe.linksheet.ExperimentSettingsRouteArg
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.experiment.Experiment
+import fe.linksheet.module.preference.experiment.ExperimentGroup
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel
@@ -27,7 +27,7 @@ class ExperimentsViewModel(
     val experiment = getSavedStateFlowNullable(ExperimentSettingsRouteArg::experiment)
 
 
-    fun isVisible(experiment: Experiment): Boolean {
+    fun isVisible(experiment: ExperimentGroup): Boolean {
         // Stub this for now
         return true
     }

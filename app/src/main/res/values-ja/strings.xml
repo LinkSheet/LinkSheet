@@ -264,8 +264,7 @@
     <string name="feature_flags_explainer">実験的な機能を有効または無効にする</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet は、ブラウザとして知られているアプリを少なくとも 1 つ検出しました。</string>
     <string name="at_least_one_unknown_browser_installer">少なくとも 1 つの (不明な) ブラウザがインストールされている</string>
-    <string name="donate_card_subtitle">LinkSheet が気に入ったら、Github でスターを付けたり、寄付したりすることを検討してください。
-\n<b>5 ユーロ</b> 以上を寄付した寄付者は、独占的な機能を備えた <b>LinkSheet Pro</b> の対象となります。 \u0020</string>
+    <string name="donate_card_subtitle">LinkSheet が気に入ったら、Github でスターを付けたり、寄付したりすることを検討してください。 \n<b>5 ユーロ</b> 以上を寄付した寄付者は、独占的な機能を備えた <b>LinkSheet Pro</b> の対象となります。 \u0020</string>
     <string name="import_dumped_preference">以前バックアップとして保存された設定情報を、再びシステムに読み込んで復元する</string>
     <string name="import_and_override">インポートと上書き</string>
     <string name="github_workflow_run_id"><b>ワークフロー ID:</b> \u0020 <font face="monospace">%s</font> \u0020</string>

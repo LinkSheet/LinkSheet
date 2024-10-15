@@ -602,7 +602,7 @@ class BottomSheetActivityImpl(
         }
 
         handleLaunch(
-            viewModel.launchAppAsync(
+            viewModel.makeOpenAppIntentAsync(
                 info,
                 result.intent,
                 always,

@@ -237,14 +237,14 @@ class BottomSheetViewModel(
         downloadManager.enqueue(request)
     }
 
-    fun launchAppAsync(
+    fun makeOpenAppIntentAsync(
         info: DisplayActivityInfo,
         intent: Intent,
         always: Boolean = false,
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
     ) = ioAsync {
-        launchApp(
+        makeOpenAppIntent(
             info = info,
             intent = intent,
             always = always,
@@ -271,7 +271,7 @@ class BottomSheetViewModel(
         }
     }
 
-    suspend fun launchApp(
+    suspend fun makeOpenAppIntent(
         info: DisplayActivityInfo,
         intent: Intent,
         always: Boolean = false,
@@ -301,6 +301,16 @@ class BottomSheetViewModel(
         }
 
         return viewIntent
+    }
+
+    suspend fun makeOpenAppIntent(info: DisplayActivityInfo, result: Intent, modifier: ClickModifier): Intent {
+        return makeOpenAppIntent(
+            info,
+            result,
+            modifier is ClickModifier.Always,
+            (modifier as? ClickModifier.Private)?.browser,
+            modifier !is ClickModifier.Private
+        )
     }
 
     private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {
@@ -342,15 +352,7 @@ class BottomSheetViewModel(
 
         when (config) {
             TapConfig.None -> {}
-            TapConfig.OpenApp -> {
-                return launchApp(
-                    info = info,
-                    intent = result,
-                    always = modifier is ClickModifier.Always,
-                    privateBrowsingBrowser = (modifier as? ClickModifier.Private)?.browser,
-                    persist = modifier !is ClickModifier.Private
-                )
-            }
+            TapConfig.OpenApp -> makeOpenAppIntent(info, result, modifier)
 
             TapConfig.OpenSettings -> {
                 startPackageInfoActivity(activity, info)

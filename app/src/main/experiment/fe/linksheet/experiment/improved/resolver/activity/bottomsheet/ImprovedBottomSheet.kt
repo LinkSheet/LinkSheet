@@ -27,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import fe.android.compose.system.rememberSystemService
 import fe.kotlin.extension.iterable.getOrFirstOrNull
@@ -36,10 +35,7 @@ import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetImpl
 import fe.linksheet.activity.bottomsheet.UrlBar
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
-import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
-import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
-import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
+import fe.linksheet.activity.bottomsheet.column.*
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.extension.android.setText
@@ -119,13 +115,16 @@ class ImprovedBottomSheet(
 
         LaunchedEffect(key1 = status) {
             val completed = status as? IntentResolveResult.Default
-            if (completed?.hasAutoLaunchApp == true) {
-                return@LaunchedEffect launchApp(
-                    completed,
+            if (completed?.hasAutoLaunchApp == true && completed.app != null) {
+                val intent = viewModel.makeOpenAppIntent(
                     completed.app,
-                    always = completed.isRegularPreferredApp,
-                    persist = false,
+                    completed.intent,
+                    completed.isRegularPreferredApp,
+                    null,
+                    false
                 )
+
+                return@LaunchedEffect handleLaunch(intent)
             }
 
             if (viewModel.improvedBottomSheetExpandFully()) {
@@ -269,8 +268,10 @@ class ImprovedBottomSheet(
                     hideDrawer()
                 },
                 onDoubleClick = {
-                    viewModel.viewModelScope.launch {
-                        launchApp(result, result.app, false)
+                    if (result.app != null) {
+                        viewModel.viewModelScope.launch {
+                            handleLaunch(viewModel.makeOpenAppIntent(result.app, result.intent, ClickModifier.None))
+                        }
                     }
 
                     Unit
@@ -289,7 +290,7 @@ class ImprovedBottomSheet(
                 hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                 onClick = { _, modifier ->
                     viewModel.viewModelScope.launch {
-                        launchApp(result, result.filteredItem, modifier == ClickModifier.Always)
+                        handleLaunch(viewModel.makeOpenAppIntent(result.filteredItem, result.intent, modifier))
                     }
                 }
             )
@@ -386,9 +387,14 @@ class ImprovedBottomSheet(
                         onClick = { type, modifier ->
                             viewModel.viewModelScope.launch {
                                 val intent = viewModel.handleClick(
-                                    activity, index, isExpanded,
+                                    activity,
+                                    index,
+                                    isExpanded,
                                     requestExpand,
-                                    result.intent, info, type, modifier
+                                    result.intent,
+                                    info,
+                                    type,
+                                    modifier
                                 )
 
                                 if (intent != null) {
@@ -434,15 +440,8 @@ class ImprovedBottomSheet(
                         selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
                         onClick = { type, modifier ->
                             viewModel.viewModelScope.launch {
-                                val intent = viewModel.handleClick(
-                                    activity,
-                                    index,
-                                    isExpanded,
-                                    requestExpand,
-                                    result.intent,
-                                    info,
-                                    type,
-                                    modifier
+                                val intent = viewModel.handleClick(activity, index, isExpanded,
+                                    requestExpand, result.intent, info, type, modifier
                                 )
 
                                 if (intent != null) {
@@ -505,8 +504,13 @@ class ImprovedBottomSheet(
             enabled = selected != -1,
             choiceClick = { _, modifier ->
                 val info = result.resolved.getOrFirstOrNull(selected)
+                if (info == null) {
+                    showToast(R.string.something_went_wrong, uiThread = true)
+                    return@ChoiceButtons
+                }
+
                 viewModel.viewModelScope.launch {
-                    launchApp(result, info, modifier == ClickModifier.Always)
+                    handleLaunch(viewModel.makeOpenAppIntent(info, result.intent, modifier))
                 }
             },
         )
@@ -515,21 +519,6 @@ class ImprovedBottomSheet(
     private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {
         if (!viewModel.enableRequestPrivateBrowsingButton() || !hasUri) return null
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
-    }
-
-    suspend fun launchApp(
-        result: BottomSheetResult.SuccessResult,
-        info: DisplayActivityInfo?,
-        always: Boolean = false,
-        privateBrowsingBrowser: KnownBrowser? = null,
-        persist: Boolean = true,
-    ) {
-        if (info == null) {
-            showToast(R.string.something_went_wrong, uiThread = true)
-            return
-        }
-
-        handleLaunch(viewModel.launchApp(info, result.intent, always, privateBrowsingBrowser, persist))
     }
 
     private fun handleLaunch(intent: Intent) {

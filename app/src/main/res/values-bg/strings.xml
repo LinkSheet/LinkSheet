@@ -3,7 +3,7 @@
     <string name="open_with_app">Отваряне с/ъс %s</string>
     <string name="bottom_sheet_explainer">Настройки и изглед</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
-    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>) \u0020</string>
+    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
     <string name="download">Изтегляне</string>
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
     <string name="back">Назад</string>
@@ -57,7 +57,7 @@
     <string name="about_explainer">За приложението, лицензи</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
-    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките) \u0020</string>
+    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките)</string>
     <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
@@ -113,7 +113,7 @@
     <string name="in_app_browser_subtitle">Задава режима на вградения браузър</string>
     <string name="always_disable_explainer">Вграденият браузър не се използва от приложенията</string>
     <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва</string>
-    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите) \u0020</string>
+    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
     <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
     <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
@@ -164,7 +164,7 @@
     <string name="redact_log">Обезличаване на дневника (препоръчително, изключването на може да разкрие имена на пакети и хостове)</string>
     <string name="include_settings">Да включва настройките (препоръчително)</string>
     <string name="include_fingerprint">Включително пръстов отпечатък (препоръчително)</string>
-    <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>. \u0020</string>
+    <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>.</string>
     <string name="no_logs_found">Не са намерени предишни дневници!</string>
     <string name="enable_amp2html">Amp2Html</string>
     <string name="amp2html_local_cache">Местна временна памет за Amp2Html</string>
@@ -205,9 +205,9 @@
     <string name="import_dumped_preference">Внасяне на настройки от дневника</string>
     <string name="import_and_override">Внасяне и заменяне</string>
     <string name="success">Готово</string>
-    <string name="built_at"><b>Време на изграждане:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <string name="github_workflow_run_id"><b>Работен процес на изграждане:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <string name="version_name"><b>Издание:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="built_at"><b>Време на изграждане:</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>Работен процес на изграждане:</b> <font face="monospace">%s</font></string>
+    <string name="version_name"><b>Издание:</b> <font face="monospace">%s</font></string>
     <string name="privacy_settings_explainer">Поверителност на изпращача, статистика</string>
     <string name="show_linksheet_referrer">Попълване на LinkSheet като изпращач</string>
     <string name="privacy">Поверителност</string>
@@ -217,16 +217,15 @@
     <string name="show_linksheet_referrer_explainer">Когато дадено приложения се отваря, то може да провери кое друго приложение го е отворило или го „изпраща“. По подразбиране, когато LinkSheet отваря приложение, не се обявява като „изпращач“, а указва приложението, което е стартирало LinkSheet. Ако е отметнато LinkSheet ще се обявава като „изпращач“ на приложенията, които отваря.</string>
     <string name="thanks_for_donating">Благодаря за дарението!</string>
     <string name="dismiss">Затваряне</string>
-    <string name="donate_explainer_crypto">Ако сте дарили криптовалута, изпратете писмо до <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
+    <string name="donate_explainer_crypto">Ако сте дарили криптовалута, изпратете писмо до <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="join">Присъединяване</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Разговаряйте относно LinkSheet в Discord</string>
     <string name="donate_card">Дарение с карта (чрез BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение. \u0020 
-\nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
+    <string name="donate_card_subtitle">Ако харесвате LinkSheet оставете звезда в Гитхъб и/или направете дарение.\nДарилите повече от <b>€5</b> получават приложението <b>LinkSheet Pro</b>, което ще има допълнителни възможности.</string>
     <string name="manual_build">Ръчно компилирано и подписано от 1fexd</string>
     <string name="donate_learn_more">Научете повече</string>
-    <string name="flavor"><b>Вариант:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="flavor"><b>Вариант:</b> <font face="monospace">%s</font></string>
     <string name="github_pipeline_build">Компилирано и подписано от CI</string>
     <string name="other">Друго</string>
     <string name="app_setup">Настройка на приложението</string>
@@ -243,7 +242,7 @@
     <string name="export_settings">Изнасяне на настройки</string>
     <string name="export_explainer">Изнася текущите настройки във файл</string>
     <string name="import_settings_override_preferences">Ще бъдат презаписани текущите настройки. Потвърждавате ли?</string>
-    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b> ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което включва <b>възможностите на Pro</b> като: последване на препращане от трети страни, получаване на не-AMP версии на страниците от трети страни и други предстоящи! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b> ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което включва <b>възможностите на Pro</b> като: последване на препращане от трети страни, получаване на не-AMP версии на страниците от трети страни и други предстоящи!</string>
     <string name="export_include_recommendation">Препоръчваме ви да не отмятате тези отметки ако смятате да споделяте изнесеното с други хора!</string>
     <string name="include_log_hash_key">Включително ключа за дневника</string>
     <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
@@ -264,7 +263,7 @@
     <string name="url_copied_toast_explainer">Показва плуващо известие при копиран от потребителя адрес</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="resolve_via_failed_toast">Неуспешно откриване</string>
-    <string name="last_updated"><b>Издание:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Издание:</b> <font face="monospace">%s</font></string>
     <string name="resolve_via_failed_toast_explainer">Показва плуващо известие, когато външна услуга не открие адрес</string>
     <string name="resolve_via_toast">Намиране на адрес</string>
     <string name="resolve_via_toast_explainer">Показва плуващо известие при открит адрес от външна услуга</string>
@@ -324,7 +323,7 @@
     <string name="telemetry_identity_basic">Основна</string>
     <string name="customization">Нагласяне</string>
     <string name="onboarding_2_request_shizuku_permission">Искане на права</string>
-    <string name="telemetry_dialog_text_2">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">докоснете тук</annotation>. \u0020</string>
+    <string name="telemetry_dialog_text_2">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">докоснете тук</annotation>.</string>
     <string name="telemetry_level_standard_description">Обобщена статистика за използването</string>
     <string name="telemetry_configure_title">Статистики</string>
     <string name="nightly_experiments_card">Нощни експерименти</string>
@@ -431,11 +430,11 @@
     <string name="generic__button_text_cancel">Отказ</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="crash_viewer__subtitle_app_crashed">Олеле, това не биваше да се случва!</string>
-    <string name="export_log_dialog__text_log_privacy">За да научите повече за потенциално чувствителната информация в споделяните дневници <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">докоснете тук</annotation>. \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">За да научите повече за потенциално чувствителната информация в споделяните дневници <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">докоснете тук</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Копиране</string>
     <string name="export_log_dialog__title_include_settings">Включително настройките</string>
     <string name="export_log_dialog__subtitle_include_settings">Препоръчително</string>
-    <string name="export_log_dialog__text_log_info">Настройки на споделяне на дневника от: <font face="monospace">%s</font> \u0020</string>
+    <string name="export_log_dialog__text_log_info">Настройки на споделяне на дневника от: <font face="monospace">%s</font></string>
     <string name="settings_links_downloader__title_downloader">Изтегляне</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet не е зададен като подразбиран системен браузър</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">Приложението LinkSheet е настроено</string>
@@ -499,4 +498,5 @@
     <string name="generic__text_edit">Променяне</string>
     <string name="generic__text_done">Готово</string>
     <string name="home__clipboard_card_source">От копираното</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Добавя бутон в долното меню, който отваря препратката в (работния) профил</string>
 </resources>

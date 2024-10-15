@@ -33,7 +33,7 @@
     <string name="github_explainer">Repozitář se zdrojovým kódem</string>
     <string name="use_clear_urls">Použít ClearURLs</string>
     <string name="follow_redirects">Následovat přesměrování</string>
-    <string name="follow_redirects_explainer">Automaticky následovat všechna přesměrování před otevřením spodního listu. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">následky na vaše soukromí</annotation> \u0020</string>
+    <string name="follow_redirects_explainer">Automaticky následovat všechna přesměrování před otevřením spodního listu. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">následky na vaše soukromí</annotation></string>
     <string name="loading_link">Zpracovávání odkazu…</string>
     <string name="follow_redirects_external_service">Následovat přesměrování skrze externí službu</string>
     <string name="follow_redirects_local_cache">Povolit místní mezipaměť přesměrování</string>
@@ -85,8 +85,8 @@
     <string name="error">Chyba</string>
     <string name="checkmark">Zaškrtávátko</string>
     <string name="links">Odkazy</string>
-    <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (odstraní sledovací prvky z adres URL) \u0020</string>
-    <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>) \u0020</string>
+    <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
+    <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="follow_only_known_trackers_explainer">Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena.</string>
     <string name="theme">Motiv</string>
     <string name="dark">Tmavý</string>
@@ -115,14 +115,14 @@
     <string name="follow_only_known_trackers">Následovat pouze známé sledovací stránky</string>
     <string name="system">Podle systému</string>
     <string name="theme_explainer">Material You, tmavý motiv, čistě černý motiv</string>
-    <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu) \u0020</string>
-    <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">následky na soukromí</annotation> \u0020</string>
-    <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> \u0020</string>
+    <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu)</string>
+    <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">následky na soukromí</annotation></string>
+    <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="in_app">V aplikaci</string>
     <string name="export">Export</string>
-    <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">odkaz</annotation>. \u0020</string>
+    <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">odkaz</annotation>.</string>
     <string name="enable_amp2html">Povolit Amp2Html</string>
-    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation> \u0020</string>
+    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation></string>
     <string name="amp2html_local_cache">Povolit místní mezipaměť Amp2Html</string>
     <string name="amp2html_local_cache_explainer">Ukládat načtené ne-AMP verze stránek do místní mezipaměti</string>
     <string name="feature_flags">Příznaky funkcí</string>
@@ -138,7 +138,7 @@
     <string name="no_handlers_found_explainer">Aplikace LinkSheet nedokáže otevřít tento odkaz.</string>
     <string name="enable_request_private_browsing_button">Povolit tlačítko „Požádat o soukromé prohlížení“</string>
     <string name="thanks_for_donating">Děkujeme za váš příspěvek!</string>
-    <string name="donate_explainer_crypto">Při přispívání kryptoměnou pošlete e-mail na adresu <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
+    <string name="donate_explainer_crypto">Při přispívání kryptoměnou pošlete e-mail na adresu <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="download_started">Stahování spuštěno</string>
     <string name="request_timeout_explainer">Určuje, kolik sekund bude aplikace LinkSheet čekat na navázání spojení. Nastavením na 0 se časový limit vypne, to ale nedoporučujeme.</string>
     <string name="resolve_failed">%s selhalo: %s</string>
@@ -180,7 +180,7 @@
     <string name="include_fingerprint">Zahrnout otisk zařízení (doporučeno)</string>
     <string name="no_logs_found">Nenalezeny žádné minulé protokoly!</string>
     <string name="amp2html_external_service">Pokusit se získat ne-AMP verzi stránky pomocí externí služby</string>
-    <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>) \u0020</string>
+    <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="use_unified_preferred_browser_explainer">Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán.</string>
     <string name="instance_not_available_anymore">Instance již není dostupná!</string>
@@ -224,7 +224,7 @@
     <string name="warning">Varování</string>
     <string name="at_least_one_known_browser_installed">Je nainstalován alespoň jeden prohlížeč</string>
     <string name="no_browser_installed_explainer">Aplikace LinkSheet nedetekovala žádnou aplikaci prohlížeče. Pro nejlepší funkčnost prosím nainstalujte prohlížeč.</string>
-    <string name="donate_card_subtitle">Pokud se vám aplikace LinkSheet líbí, zvažte možnost zanechat hvězdičku na GitHubu a/nebo přispět. \nDárci, kteří přispějí více než <b>5 €</b>, mají nárok na <b>LinkSheet Pro</b>, který bude mít exkluzivní funkce. \u0020</string>
+    <string name="donate_card_subtitle">Pokud se vám aplikace LinkSheet líbí, zvažte možnost zanechat hvězdičku na GitHubu a/nebo přispět.\nDárci, kteří přispějí více než <b>5 €</b>, mají nárok na <b>LinkSheet Pro</b>, který bude mít exkluzivní funkce.</string>
     <string name="include_history">Zahrnout historii (historie vašich klepnutí na odkazy a aplikací)</string>
     <string name="resolve_via_toast_explainer">Zobrazit vyskakovací zprávu po vyřešení adresy URL externí službou</string>
     <string name="follow_redirects_short">Přesměrování</string>
@@ -232,7 +232,7 @@
     <string name="export_explainer">Exportovat vaše aktuální nastavení aplikace do souboru</string>
     <string name="onboarding_0_subtitle">Vyberte si, zda chcete být vždy dotázáni po otevření odkazu, nastavte výchozí prohlížeče a spoustu dalšího</string>
     <string name="import_settings">Importovat nastavení</string>
-    <string name="linksheet_donation_explainer_2">Darováním více než <b>5 €</b> vám umožní přístup k <b>LinkSheet Pro</b>, který zahrnuje <b>exkluzivní funkce</b>, jako například: externí následování přesměrování, externí načtení ne-AMP stránek a již brzy spoustu dalšího! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Darováním více než <b>5 €</b> vám umožní přístup k <b>LinkSheet Pro</b>, který zahrnuje <b>exkluzivní funkce</b>, jako například: externí následování přesměrování, externí načtení ne-AMP stránek a již brzy spoustu dalšího!</string>
     <string name="privacy_settings_explainer">Soukromí odkazovatele, telemetrie</string>
     <string name="include_log_hash_key">Zahrnout hash klíč protokolu (klíč používaný k redigování protokolů)</string>
     <string name="export_settings">Nastavení exportu</string>
@@ -268,13 +268,13 @@
     <string name="onboarding_0_title">Vítejte v aplikaci
 \nLinkSheet</string>
     <string name="start_setup">Pokračovat</string>
-    <string name="last_updated"><b>Verze:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Verze:</b> \u0020<font face="monospace">%s</font></string>
     <string name="include_throwable">Zahrnout protokoly o pádu (doporučeno, ale nelze je redigovat)</string>
     <string name="dev_mode_enabled">Gratulujeme, povolili jste vývojářský režim. Buďte opatrní.</string>
     <string name="url_copied_toast">Adresa URL zkopírována</string>
     <string name="no_internet_connection">Žádné připojení k internetu</string>
     <string name="show_linksheet_referrer_explainer">Aplikace při spuštění může zkontrolovat, která aplikace ji spustila, nebo na ni „odkazovala“. Ve výchozím nastavení se LinkSheet po spuštění aplikace skryje, čímž cílové aplikaci řekne, že ji spustila ta aplikace, která spustila LinkSheet. Povolte tuto možnost pro vložení LinkSheet jako odkazovatele pro aplikace, které jsou přes něj otevřeny.</string>
-    <string name="export_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">odkaz</annotation>. \u0020</string>
+    <string name="export_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">odkaz</annotation>.</string>
     <string name="opening_with_app_toast">Aplikace automaticky spuštěna</string>
     <string name="shizuku_manager_start_failed">Nepodařilo se spustit Správce Shizuku, spusťte jej prosím ručně!</string>
     <string name="onboarding_1_subtitle">Pro zpracování odkazů, na které klepnete, musíte aplikaci LinkSheet nastavit jako výchozí prohlížeč</string>
@@ -371,15 +371,15 @@
     <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
-    <string name="telemetry_dialog_text_2">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">sem</annotation>. \u0020</string>
+    <string name="telemetry_dialog_text_2">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">sem</annotation>.</string>
     <string name="settings_verified_link_handlers__text_user_apps">Uživatelské aplikace</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Vše</string>
     <string name="settings_notifications__divider_toasts">Vyskakovací zprávy</string>
     <string name="settings_shortcuts__title_link_handlers">Zpracování odkazů</string>
-    <string name="built_at"><b>Sestaveno:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="built_at"><b>Sestaveno:</b> \u0020<font face="monospace">%s</font></string>
     <string name="customization">Přizpůsobení</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Zakázané</string>
-    <string name="flavor"><b>Úprava:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="flavor"><b>Úprava:</b> \u0020<font face="monospace">%s</font></string>
     <string name="switch_profile">Povolit přepínání profilů</string>
     <string name="build_info">Informace o sestavení</string>
     <string name="verified_link_handlers">Ověření zpracovatelé odkazů</string>
@@ -391,7 +391,7 @@
     <string name="export_log_dialog__title_redact_log">Redigovat protokol</string>
     <string name="export_log_dialog__subtitle_redact_log">Doporučeno, skryje názvy aplikací a adresy URL</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Doporučeno</string>
-    <string name="export_log_dialog__text_log_info">Nastavit sdílená nastavení pro protokol zachycený: <font face="monospace">%s</font> \u0020</string>
+    <string name="export_log_dialog__text_log_info">Nastavit sdílená nastavení pro protokol zachycený: <font face="monospace">%s</font></string>
     <string name="settings_main_news__button_read_more">Více informací</string>
     <string name="settings_main_news__title_ui_overhaul">Nové rozhraní</string>
     <string name="settings_main_news__text_ui_overhaul">LinkSheet dostal nový kabát!</string>
@@ -414,7 +414,7 @@
     </plurals>
     <string name="settings__title_filter_apps">Filtrovat aplikace</string>
     <string name="link_handle_failed_text">LinkSheet nedokáže zpracovat tento odkaz, protože se zdá, že je poškozený. Můžete jej upravit níže a zkusit to znovu. Případně také můžete zkusit webové vyhledávání.</string>
-    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020<font face="monospace">%s</font></string>
     <string name="reset_app_link_verification_status">Resetovat status ověřených odkazů aplikací</string>
     <string name="reset_app_link_verification_status_subtitle">Klepněte sem pro resetování statusu ověřených odkazů u všech aplikací, poté počkejte několik minut, než je systém Android znovu ověří. Potvrzení neobdržíte. Vyžaduje Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Vyžádáno opětovné ověření</string>
@@ -433,7 +433,7 @@
     <string name="export_log_dialog__title_include_fingerprint">Zahrnout otisk sestavení</string>
     <string name="export_log_dialog__title_include_settings">Zahrnout nastavení</string>
     <string name="export_log_dialog__subtitle_include_settings">Doporučeno</string>
-    <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">sem</annotation>. \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">sem</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Zkopírovat do schránky</string>
     <string name="generic__button_text_cancel">Zrušit</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Prohlížení protokolu zachyceného: %s</string>
@@ -500,9 +500,10 @@
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet není nastaven</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet je nastaven</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>
-    <string name="version_name"><b>Verze:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="version_name"><b>Verze:</b> \u0020<font face="monospace">%s</font></string>
     <string name="generic__text_url">URL</string>
     <string name="home__clipboard_card_source">Ze schránky</string>
     <string name="generic__text_edit">Upravit</string>
     <string name="generic__text_done">Hotovo</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Zobrazí tlačítko ve spodním listu pro otevřený odkazu, na který jste klepnuli, v (pracovním) profilu</string>
 </resources>

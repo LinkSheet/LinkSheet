@@ -241,7 +241,7 @@
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
-    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url-id="libredirect-github">LibRedirect  </annotation> thử nghiệm</string>
+    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url-id="libredirect-github">LibRedirect </annotation> thử nghiệm</string>
     <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url-id="privacy-downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url-id="privacy-amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
@@ -249,7 +249,7 @@
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="app_name">LinkSheet</string>
-    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url-id="fastforward-github">FastForward  </annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
+    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url-id="fastforward-github">FastForward </annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="show_linksheet_referrer">Hiển thị người giới thiệu LinkSheet</string>
@@ -387,4 +387,122 @@
     <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
     <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
     <string name="telemetry_identifier_reset">Đặt lại số định danh</string>
+    <string name="settings_bottom_sheet__text_profile_switcher"></string>
+    <string name="export_log_dialog__text_log_info"></string>
+    <string name="home__clipboard_card_source"></string>
+    <string name="delete_log_dialog__title_delete_log"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="other"></item>
+    </plurals>
+    <string name="resolve_event__querying_browser_list"></string>
+    <string name="resolve_event__sorting_apps"></string>
+    <string name="settings_profile_switcher__text_current_profile"></string>
+    <string name="export_log_dialog__title_include_settings"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_debug_log_viewer__title_log_captured_at"></string>
+    <string name="settings_profile_switcher__text_enable_cross_profile"></string>
+    <string name="export_log_dialog__subtitle_include_settings"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="other"></item>
+    </plurals>
+    <string name="export_log_dialog__subtitle_include_throwable"></string>
+    <string name="settings_profile_switcher__text_other_profile"></string>
+    <string name="resolve_event__loading_preferred_apps"></string>
+    <string name="settings_links_amp2html__text_skip_browser"></string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false"></string>
+    <string name="settings_profile_switcher__text_not_installed"></string>
+    <string name="settings_app_config_rules__text_custom_rules"></string>
+    <string name="generic__button_text_copy_clipboard"></string>
+    <string name="settings_links_follow_redirects__title_skip_browser"></string>
+    <string name="settings_new_rule__title_new_rule"></string>
+    <string name="generic__text_done"></string>
+    <string name="settings__title_filter_apps"></string>
+    <string name="export_log_dialog__subtitle_include_fingerprint"></string>
+    <string name="export_log_dialog__title_include_fingerprint"></string>
+    <string name="settings__hint_search"></string>
+    <string name="resolve_event__running_libredirect"></string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info"></string>
+    <string name="settings_edit_rule__title_edit_rule"></string>
+    <string name="settings_app_config__description_browsers"></string>
+    <string name="settings_main_news__text_ui_overhaul"></string>
+    <string name="settings_app_config_rules__subtitle_default_rule"></string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure"></string>
+    <string name="settings_profile_switcher__divider_other_profiles"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_links_amp2html__title_skip_browser"></string>
+    <string name="resolve_event__generating_preview"></string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job"></string>
+    <string name="generic__button_text_cancel"></string>
+    <string name="instance"></string>
+    <string name="settings_verified_link_handlers__text_user_apps"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short"></string>
+    <string name="settings_app_config__title_configure_app_behavior"></string>
+    <string name="delete_log_dialog__subtitle_delete_info"></string>
+    <string name="settings_links_amp2html__title_amp2html"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short"></string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short"></string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="other"></item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_credits__app_credit_reason_gmsflags"></string>
+    <string name="export_log_dialog__title_redact_log"></string>
+    <string name="export_log_dialog__subtitle_redact_log"></string>
+    <string name="settings_links_downloader__title_downloader"></string>
+    <string name="crash_viewer__subtitle_app_crashed"></string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success"></string>
+    <string name="settings_main_setup_success__button_change_browser"></string>
+    <string name="settings_main_setup_success__button_link_handlers"></string>
+    <string name="settings_main_news__title_ui_overhaul"></string>
+    <string name="settings_main_setup_success__button_set_default_browser"></string>
+    <string name="settings_main_news__button_read_more"></string>
+    <string name="resolve_event__unamping_link"></string>
+    <string name="resolve_event__download_check"></string>
+    <string name="settings_app_config__title_browsers"></string>
+    <string name="settings_app_config_rules__title_rules"></string>
+    <string name="settings_app_config__description_preferred_browser"></string>
+    <string name="settings_profile_switcher__title_profile_switcher"></string>
+    <string name="settings_profile_switcher__divider_configuration"></string>
+    <string name="resolve_event__resolving_redirects"></string>
+    <string name="settings_app_config_rules__btn_new_rule"></string>
+    <string name="resolve_event__checking_browsers"></string>
+    <string name="bottom_sheet__event_app_refusal"></string>
+    <string name="libredirect_version"></string>
+    <string name="amp2html_short"></string>
+    <string name="settings_notifications__divider_toasts"></string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_credits__app_name_seal"></string>
+    <string name="export_log_dialog__title_share_logs"></string>
+    <string name="settings_credits__app_credit_reason_seal"></string>
+    <string name="settings_credits__app_name_gmsflags"></string>
+    <string name="settings_about__divider_external_versions"></string>
+    <string name="export_log_dialog__title_include_throwable"></string>
+    <string name="export_log_dialog__text_log_privacy"></string>
+    <string name="settings_main_setup_success__button_connected_apps"></string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info"></string>
+    <string name="resolve_event__initialized"></string>
+    <string name="resolve_event__applying_link_modifiers"></string>
+    <string name="settings_app_config__description_native_apps"></string>
+    <string name="settings_app_config_rules__title_default_rule"></string>
+    <string name="settings_app_config__button_add_item"></string>
+    <string name="settings_app_config__title_native_apps"></string>
+    <string name="settings_links_follow_redirects__text_skip_browser"></string>
+    <string name="settings_app_config__title_preferred_browser"></string>
+    <string name="generic__button_text_delete"></string>
+    <string name="generic__text_edit"></string>
+    <string name="generic__text_url"></string>
+    <string name="settings_profile_switcher__title_enable_cross_profile"></string>
+    <string name="settings_profile_switcher__divider_current_profile"></string>
+    <string name="generic__label_work_profile"></string>
+    <string name="generic__label_personal_profile"></string>
+    <string name="generic__label_unknown_profile"></string>
 </resources>

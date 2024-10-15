@@ -352,7 +352,9 @@ class BottomSheetViewModel(
 
         when (config) {
             TapConfig.None -> {}
-            TapConfig.OpenApp -> makeOpenAppIntent(info, result, modifier)
+            TapConfig.OpenApp -> {
+                return makeOpenAppIntent(info, result, modifier)
+            }
 
             TapConfig.OpenSettings -> {
                 startPackageInfoActivity(activity, info)

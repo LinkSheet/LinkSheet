@@ -314,7 +314,7 @@ class BottomSheetViewModel(
     }
 
     private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {
-        if (modifier is ClickModifier.Private || modifier == ClickModifier.Always) {
+        if (modifier is ClickModifier.Private || modifier is ClickModifier.Always) {
             return TapConfig.OpenApp
         }
 

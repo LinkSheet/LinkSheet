@@ -16,7 +16,7 @@
     <string name="opening_with_app">Abriendo con %s</string>
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
-    <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL) \u0020</string>
+    <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url="https://github.com/ClearURLs">ClearURLs </annotation> (borra los parámetros de seguimiento de las URL)</string>
     <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
     <string name="always_disable">Forzar desactivación</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
@@ -40,12 +40,12 @@
     <string name="open_link_with_subtitle_2">LinkSheet estaba originalmente basado en OpenLinkWith</string>
     <string name="shizuku_integration_enabled_explainer">¡La integración con Shizuku se ha activado exitosamente!</string>
     <string name="warning">Alerta</string>
-    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si la URL contiene un enlace directo al archivo. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicaciones relacionadas con la privacidad </annotation>. \u0020</string>
+    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si la URL contiene un enlace directo al archivo. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicaciones relacionadas con la privacidad </annotation></string>
     <string name="logs_explainer">Ver el registro de la aplicación</string>
     <string name="enable_all">Activar todo</string>
     <string name="selected_browser_explainer">Este navegador se abrirá automáticamente si ninguna aplicación nativa puede abrir el enlace seleccionado</string>
     <string name="misc_settings">Misceláneo</string>
-    <string name="log_privacy">Para obtener más información sobre la privacidad de los registros, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">enlace</annotation>. \u0020</string>
+    <string name="log_privacy">Para obtener más información sobre la privacidad de los registros, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">enlace</annotation>.</string>
     <string name="send_to">Compartir con</string>
     <string name="enable_ignore_libredirect_button">Activar el botón \"Ignorar LibRedirect\"</string>
     <string name="pretend_to_be_app_explainer_2">Algunas aplicaciones como Google Chrome buscan explícitamente una aplicación nativa para abrir, por ejemplo, un enlace de Youtube cuando se toca en los resultados de búsqueda. LinkSheetCompat pretende ser una aplicación nativa para dominios compatibles y luego reenvía la solicitud a LinkSheet.</string>
@@ -93,11 +93,11 @@
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="donate_subtitle">Actualiza a <b>LinkSheet Pro</b></string>
     <string name="advanced">Avanzado</string>
-    <string name="built_at"><b>Compilado a las:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="built_at"><b>Compilado a las:</b> \u0020 <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
     <string name="back">Atrás</string>
     <string name="linksheet_download">Descarga de LinkSheet</string>
-    <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>) \u0020</string>
+    <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>)</string>
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>
     <string name="default_apps">Aplicaciones predeterminadas</string>
     <string name="just_once">Solo una vez</string>
@@ -106,7 +106,7 @@
     <string name="version">Versión de LinkSheet</string>
     <string name="preview_url">Previsualizar enlace</string>
     <string name="usage_stats_sorting_explainer">Incluya estadísticas de uso del sistema Android en el algoritmo de clasificación. Se solicitará permiso en el primer cambio.</string>
-    <string name="amp2html_external_service_explainer">Intento de obtener una versión de página no AMP mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>). \u0020</string>
+    <string name="amp2html_external_service_explainer">Intento de obtener una versión de página no AMP mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>)</string>
     <string name="github_explainer">Repositorio de código fuente</string>
     <string name="launch_onboarding">Iniciar la incorporación</string>
     <string name="shizuku_integration">Integración con Shizuku</string>
@@ -142,17 +142,17 @@
     <string name="always">Siempre</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Seleccionar una aplicación</string>
-    <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> \u0020 <font face="monospace">%s</font></string>
     <string name="resolved_via">%s vía resuelta %s</string>
     <string name="instance_not_available_anymore">¡Esta instancia ya no está disponible!</string>
     <string name="open_with_linksheet">Abrir con LinkSheet</string>
     <string name="in_app_browser">Navegador en aplicación</string>
     <string name="links">Enlaces</string>
-    <string name="follow_redirects_explainer">Seguir automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad </annotation>. \u0020</string>
+    <string name="follow_redirects_explainer">Seguir automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad </annotation></string>
     <string name="browser_mode">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
-    <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace) \u0020</string>
+    <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace)</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>
@@ -181,7 +181,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
-    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su versión web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad </annotation>. \u0020</string>
+    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su versión web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad </annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="disable_in_selected">Forzando la desactivación…</string>
@@ -196,7 +196,7 @@
     <string name="no_browser_installed_explainer">LinkSheet no pudo detectar ninguna una aplicación que afirme ser un navegador. Para obtener la mejor experiencia, instale un navegador.</string>
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
     <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
-    <string name="enable_libredirect_explainer">Redirige los enlaces a frontends respetuosos con la privacidad mediante la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation> \u0020</string>
+    <string name="enable_libredirect_explainer">Redirige los enlaces a frontends respetuosos con la privacidad mediante la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation></string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
@@ -209,7 +209,7 @@
     <string name="pretend_to_be_app">Interceptar solicitudes de aplicaciones nativas</string>
     <string name="shizuku">Integración con Shizuku</string>
     <string name="dont_show_filtered_item_explainer">No mostrar sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
-    <string name="version_name"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="version_name"><b>Versión:</b> \u0020 <font face="monospace">%s</font></string>
     <string name="configure_explainer">Toca aquí para configurar LinkSheetCompat</string>
     <string name="feature_flags">Características experimentales</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -217,23 +217,22 @@
     <string name="credits">Créditos</string>
     <string name="thanks_for_donating">¡Gracias por donar!</string>
     <string name="dismiss">Descartar</string>
-    <string name="donate_explainer_crypto">Al donar con cripto, envíe un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
+    <string name="donate_explainer_crypto">Al donar con cripto, envíe un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="join">Unirme</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">¡Ven a chatear a nuestro servidor Discord!</string>
     <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación. 
-\nLos donantes que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas. \u0020</string>
+    <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.\nLos que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas.</string>
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
     <string name="donate_learn_more">Más información</string>
-    <string name="flavor"><b>Sabor:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="flavor"><b>Sabor:</b> \u0020 <font face="monospace">%s</font></string>
     <string name="github_pipeline_build">Desarrollado y firmado por CI</string>
     <string name="other">Otros</string>
     <string name="app_setup">Configuración de la aplicación</string>
     <string name="donate">Donar</string>
     <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github.</string>
     <string name="export_to_file">Exportar a un archivo</string>
-    <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>características exclusivas Pro</b> como: seguir redirecciones externamente, obtener páginas no AMP externamente y ¡mucho más por venir! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>características exclusivas Pro</b> como: seguir redirecciones externamente, obtener páginas no AMP externamente y ¡mucho más por venir!</string>
     <string name="import_settings">Importar los ajustes</string>
     <string name="export_import_settings">Exportar o importar los ajustes</string>
     <string name="import_headline">Importar</string>
@@ -242,7 +241,7 @@
     <string name="confirm_import">Confirmar</string>
     <string name="include_log_hash_key">Incluya la clave hash del registro (la clave utilizada para redactar sus registros)</string>
     <string name="import_explainer">Importar una exportación anterior desde un archivo</string>
-    <string name="export_privacy">Para obtener información sobre la privacidad de las exportaciones, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">enlace</annotation>. \u0020</string>
+    <string name="export_privacy">Para obtener información sobre la privacidad de las exportaciones, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">enlace</annotation>.</string>
     <string name="export_import_settings_explainer">Exporta tus ajustes actuales o importa una exportación de los ajustes anteriores</string>
     <string name="include_history">Incluir el historial (tu historial de clics en enlaces y aplicaciones)</string>
     <string name="export_settings">Ajustes de la exportación</string>
@@ -266,7 +265,7 @@
     <string name="resolve_via_toast">La resolución fue exitosa</string>
     <string name="resolve_via_failed_toast">Resolver el fallo</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar una ventana emergente cuando una URL no se resuelve a través de un servicio externo</string>
-    <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Activar el menú experimental LinkSheet Compat</string>
     <string name="enable_linksheet_compat_explainer">El menú se encuentra en el submenú \"Aplicaciones\" y, una vez instalado, es capaz de interceptar las peticiones a determinadas aplicaciones nativas.</string>
@@ -371,7 +370,7 @@
     <string name="telemetry_dialog_title">LinkSheet respeta su privacidad</string>
     <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
     <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
-    <string name="telemetry_dialog_text_2">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>. \u0020</string>
+    <string name="telemetry_dialog_text_2">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>.</string>
     <string name="something_went_wrong">Algo salió mal. Por favor, vuelva a intentarlo.</string>
     <string name="link_handle_failed">Ocurrió un error</string>
     <string name="retry">Volver a intentarlo</string>
@@ -401,7 +400,7 @@
     <string name="generic__button_text_copy_clipboard">Copiar al portapapeles</string>
     <string name="settings_main_news__title_ui_overhaul">Nueva interfaz</string>
     <string name="export_log_dialog__title_share_logs">Compartir registro</string>
-    <string name="export_log_dialog__text_log_privacy">Para saber más acerca de los datos potencialmente sensibles en el registro compartido, presiona <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">aquí</annotation>. \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">Para saber más acerca de los datos potencialmente sensibles en el registro compartido, presiona <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">aquí</annotation>.</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet está configurado</string>
     <string name="settings_main_setup_success__button_connected_apps">Aplicaciones conectadas</string>
     <string name="settings_notifications__divider_toasts">Avisos</string>
@@ -465,7 +464,7 @@
     <string name="settings_main_setup_success__button_set_default_browser">Establecer como navegador predeterminado</string>
     <string name="settings_about__divider_external_versions">Versiones externas</string>
     <string name="settings_credits__app_name_seal">Seal</string>
-    <string name="export_log_dialog__text_log_info">Configurar los ajustes para compartir del registro almacenado en: \u0020<font face="monospace">%s</font> \u0020</string>
+    <string name="export_log_dialog__text_log_info">Configurar los ajustes para compartir del registro almacenado en: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Viendo el registro almacenado en: %s</string>
     <string name="export_log_dialog__subtitle_include_throwable">Recomendado, pero no puede ser editado</string>
     <string name="export_log_dialog__title_include_fingerprint">Incluir huella de compilación</string>
@@ -506,4 +505,5 @@
     <string name="home__clipboard_card_source">Desde el portapapeles</string>
     <string name="generic__text_edit">Editar</string>
     <string name="generic__text_done">Hecho</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón en el pie de página para el enlace abierto en el que hizo clic en el perfil (de trabajo)</string>
 </resources>

@@ -59,7 +59,7 @@
     <string name="links_explainer">ClearURLs, LibRedirect, Śledzenie przekierowań</string>
     <string name="use_clear_urls">Użyj ClearURLs</string>
     <string name="follow_redirects">Śledzenie przekierowań</string>
-    <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">negatywny wpływ na prywatność</annotation> \u0020</string>
+    <string name="follow_redirects_explainer">Automatycznie śledź wszystkie przekierowania przed otwarciem dolnego panelu. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">negatywny wpływ na prywatność</annotation></string>
     <string name="loading_link">Przetwarzanie linku…</string>
     <string name="follow_redirects_external_service">Śledź przekierowania przez usługę zewnętrzną</string>
     <string name="follow_only_known_trackers">Podążaj tylko za znanymi trackerami</string>
@@ -103,8 +103,8 @@
     <string name="hide_after_copying_explainer">Automatycznie ukryj dolny panel, gdy zostanie naciśnięty przycisk akcji, taki jak „Kopiuj link” lub „Pobierz”</string>
     <string name="selected_browser_explainer">Ta przeglądarka zostanie automatycznie otwarta, jeśli żadna natywna aplikacja nie będzie w stanie obsłużyć klikniętego linku</string>
     <string name="preview_url_explainer">Pokazuje kliknięty link (po jego przetworzeniu)</string>
-    <string name="use_clear_urls_explainer">Używaj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL) \u0020</string>
-    <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">negatywny wpływ na prywatność</annotation> \u0020</string>
+    <string name="use_clear_urls_explainer">Używaj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
+    <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">negatywny wpływ na prywatność</annotation></string>
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
     <string name="fastfoward_rules_explainer">Używaj eksperymentalnej integracji reguły <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
     <string name="redirect_resolve_type_local">lokalny rozwiązywacz</string>
@@ -148,12 +148,12 @@
     <string name="redact_log">Redagowanie logu (zalecane, wyłączenie tej opcji może spowodować wyciek nazw pakietów i hostów)</string>
     <string name="include_settings">Dołącz ustawienia (zalecane)</string>
     <string name="include_fingerprint">Dołącz odcisk palca urządzenia (zalecane)</string>
-    <string name="log_privacy">Aby dowiedzieć się więcej na temat prywatności logów, możesz odwiedzić ten <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>. \u0020</string>
+    <string name="log_privacy">Aby dowiedzieć się więcej na temat prywatności logów, możesz odwiedzić ten <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
     <string name="no_logs_found">Brak poprzednich logów!</string>
     <string name="amp2html_local_cache">Włącz lokalny bufor Amp2Html</string>
     <string name="amp2html">Amp2Html</string>
     <string name="enable_amp2html">Włącz Amp2Html</string>
-    <string name="enable_amp2html_explainer">Przekierowuje strony AMP do ich normalnej wersji internetowej. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">negatywny wpływ na prywatność</annotation> \u0020</string>
+    <string name="enable_amp2html_explainer">Przekierowuje strony AMP do ich normalnej wersji internetowej. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">negatywny wpływ na prywatność</annotation></string>
     <string name="amp2html_local_cache_explainer">Buforuj pobrane wersje stron internetowych bez AMP lokalnie</string>
     <string name="amp2html_external_service">Uzyskaj wersję stron bez AMP</string>
     <string name="amp2html_external_service_explainer">Preferuj bezpośrednie strony zamiast wersji AMP przy użyciu API z supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
@@ -208,16 +208,16 @@
     <string name="mastodon_redirect_subtitle_2">Kod źródłowy Mastodon Redirect został użyty jako odniesienie dla interakcji Shizuku</string>
     <string name="import_dumped_preference">Przywróć kopię preferencji</string>
     <string name="import_and_override">Importuj i nadpisz</string>
-    <string name="version_name"><b>Wersja:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <string name="built_at"><b>Data:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="version_name"><b>Wersja:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="built_at"><b>Data:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020<font face="monospace">%s</font></string>
     <string name="privacy_settings_explainer">Prywatność odsyłacza, Telemetria</string>
     <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Kiedy uruchamiana jest aplikacja, może sprawdzić, która aplikacja ją uruchomiła, lub \"odwołała\" się do niej. Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, twierdząc, że to aplikacja, która uruchomiła LinkSheet, jest docelową aplikacją. Włącz to, aby ponownie wstawić LinkSheet jako odwołującą się aplikację dla aplikacji, które otwiera.</string>
     <string name="privacy">Prywatność</string>
     <string name="thanks_for_donating">Dziękuję za wsparcie!</string>
     <string name="dismiss">Odrzuć</string>
-    <string name="donate_explainer_crypto">Jeśli przekazano darowiznę przez krypto, wyślij dowód wpłaty na <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>. \u0020</string>
+    <string name="donate_explainer_crypto">Przekazując darowiznę za pomocą kryptowalut, wyślij wiadomość e-mail na adres <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="join">Dołącz</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Czat LinkSheet na Discordzie</string>
@@ -226,14 +226,14 @@
 \nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje. \u0020</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="donate_learn_more">Czytaj więcej</string>
-    <string name="flavor"><b>Wariant:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="flavor"><b>Wariant:</b> \u0020<font face="monospace">%s</font></string>
     <string name="github_pipeline_build">Zbudowana i podpisana przez CI</string>
     <string name="other">Inne</string>
     <string name="app_setup">Konfiguracja aplikacji</string>
     <string name="donate">Wsparcie</string>
     <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd, ani przez przepływ pracy GitHub.</string>
     <string name="export_to_file">Eksportuj do pliku</string>
-    <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5€</b> zapewnia dostęp do <b>LinkSheet Pro</b>, który zawiera <b>funkcje dostępne tylko w wersji Pro</b>, takie jak: śledzenie przekierowań na zewnątrz, uzyskiwanie stron nie-AMP na zewnątrz i wiele innych, które będą dostępne w przyszłości! \u0020</string>
+    <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5€</b> zapewnia dostęp do <b>LinkSheet Pro</b>, który zawiera <b>funkcje dostępne tylko w wersji Pro</b>, takie jak: zewnętrzne śledzenie przekierowań, zewnętrznie uzyskiwanie stron nie-AMP i wiele innych, które będą dostępne w przyszłości!</string>
     <string name="import_settings">Przywracanie ustawień</string>
     <string name="export_import_settings">Kopia ustawień</string>
     <string name="import_headline">Przywróć z kopii zapasowej</string>
@@ -242,14 +242,14 @@
     <string name="confirm_import">Potwierdzam</string>
     <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>
     <string name="import_explainer">Importuj ustawienia z pliku</string>
-    <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>. \u0020</string>
+    <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
     <string name="export_import_settings_explainer">Wykonaj kopię ustawień lub przywróć je z pliku</string>
     <string name="include_history">Uwzględnij historię (kliknięć linków i aplikacji)</string>
     <string name="export_settings">Eksportuj ustawienia</string>
     <string name="export_explainer">Zapisz bieżące ustawienia do pliku</string>
     <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
     <string name="resolve_via_failed_toast">Rozwiązanie nie powiodło się</string>
-    <string name="last_updated"><b>Wersja:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Wersja:</b> \u0020<font face="monospace">%s</font></string>
     <string name="resolve_via_failed_toast_explainer">Wyświetl toast, gdy link nie zostanie rozpoznany przez usługę zewnętrzną</string>
     <string name="dev_explainer">Użyteczne dla programistów</string>
     <string name="opening_with_app_toast">Aplikacja uruchomiła się automatycznie</string>
@@ -328,7 +328,7 @@
     <string name="resolve_embeds">Rozwiąż osadzenia</string>
     <string name="resolve_embeds_explainer">Rozwiązuj lustra osadzeń, takie jak fxtwitter.com, aby prowadziły do rzeczywistego hosta</string>
     <string name="tap_customization">Personalizacja dotknięć</string>
-    <string name="telemetry_dialog_text_2">Metryki użycia obejmują losowy, możliwy do zresetowania przez użytkownika identyfikator związany z instalacją, a także wersję Androida, i są przechowywane w <annotation url="https://aptabase.com">Aptabase (UE)</annotation>. Wrażliwe dane, takie jak zainstalowane aplikacje i kliknięte linki, <b>nigdy</b> nie będą zbierane. Aby dowiedzieć się więcej, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">tutaj</annotation>. \u0020</string>
+    <string name="telemetry_dialog_text_2">Metryki użycia obejmują losowy, możliwy do zresetowania przez użytkownika identyfikator związany z instalacją, a także wersję Androida i są przechowywane w <annotation url="https://aptabase.com">Aptabase (UE)</annotation>. Wrażliwe dane, takie jak zainstalowane aplikacje i kliknięte linki, <b>nigdy</b> nie będą zbierane. Aby dowiedzieć się więcej, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">tutaj</annotation>.</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Włączone</string>
     <string name="switch_profile">Włącz przełączanie profili</string>
     <string name="something_went_wrong">Coś poszło nie tak, proszę spróbuj ponownie.</string>
@@ -397,7 +397,7 @@
     <string name="build_info">O kompilacji</string>
     <string name="verified_link_handlers">Aplikacje otwierające linki</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Nie otwiera obsługiwanych linków</string>
-    <string name="export_log_dialog__text_log_privacy">Aby dowiedzieć się więcej o potencjalnie wrażliwych danych w udostępnionych plikach dzienników, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">tutaj</annotation>. \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">Aby dowiedzieć się więcej o potencjalnie wrażliwych danych w udostępnionych plikach dzienników, naciśnij <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">tutaj</annotation>.</string>
     <string name="settings_main_setup_success__button_change_browser">Domyślna przeglądarka</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Wyświetlanie dziennika: %s</string>
     <string name="settings_app_config__title_configure_app_behavior">Konfiguruj %s</string>
@@ -416,7 +416,7 @@
     <string name="settings_main_setup_success__button_connected_apps">Połączone aplikacje</string>
     <string name="settings_app_config_rules__title_rules">Reguły</string>
     <string name="resolve_event__checking_browsers">Sprawdzanie przeglądarek</string>
-    <string name="export_log_dialog__text_log_info">Skonfiguruj udostępnianie dla przechwyconego dziennika: <font face="monospace">%s</font> \u0020</string>
+    <string name="export_log_dialog__text_log_info">Skonfiguruj udostępnianie dla przechwyconego dziennika: <font face="monospace">%s</font></string>
     <string name="export_log_dialog__title_include_fingerprint">Dołącz odcisk wersji (build fingerprint)</string>
     <string name="generic__button_text_cancel">Anuluj</string>
     <string name="settings_edit_rule__title_edit_rule">Edytowanie zasady</string>
@@ -513,4 +513,5 @@
     <string name="generic__text_edit">Edytuj</string>
     <string name="generic__text_done">Gotowe</string>
     <string name="home__clipboard_card_source">Ze schowka</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Wyświetla przycisk w dolnym panelu, który otwiera kliknięty link w zwykłym lub roboczym profilu</string>
 </resources>

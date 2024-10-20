@@ -12,6 +12,7 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
+import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
@@ -137,10 +138,12 @@ class IntentResolver(
     private val resolveEmbeds = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
+    private val hideReferrerFromSheet = experimentRepository.asState(Experiments.hideReferrerFromSheet)
 
     private val packageHandler = PackageHandler(
         queryIntentActivities = context.packageManager::queryIntentActivitiesCompat,
-        isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null }
+        isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
+        checkReferrerExperiment = { hideReferrerFromSheet() }
     )
 
     companion object {
@@ -302,7 +305,8 @@ class IntentResolver(
             }
         }
 
-        val resolvedList = packageHandler.findHandlers(uri!!).toMutableList()
+        val referringPackage = ReferrerHelper.getReferringPackage(referrer)
+        val resolvedList = packageHandler.findHandlers(uri!!, referringPackage).toMutableList()
 
         logger.debug(resolvedList, HashProcessor.ResolveInfoListProcessor, { it }, "ResolveList")
 

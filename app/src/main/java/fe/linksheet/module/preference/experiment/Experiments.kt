@@ -28,6 +28,8 @@ object Experiments : PreferenceDefinition(
     val enableAnalytics = boolean("experiment_enable_analytics", false)
 
     val editClipboard = boolean("experiment_edit_clipboard", false)
+    val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
+
 
     // TODO: Enforce type
     init {
@@ -51,11 +53,12 @@ object Experiments : PreferenceDefinition(
                 addPreference(ExperimentPreference("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully))
                 addPreference(ExperimentPreference("Double tap url to open app", improvedBottomSheetUrlDoubleTap))
                 addPreference(ExperimentPreference("LibRedirect QuickJS engine", libRedirectJsEngine))
+                addPreference(ExperimentPreference("Hide referring app from results in bottom sheet", hideReferrerFromSheet))
             },
 
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {
                 addPreference(ExperimentPreference("Enable", editClipboard))
-            }
+            },
         )
 
         finalize()

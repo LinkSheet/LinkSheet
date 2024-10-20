@@ -12,6 +12,7 @@ import fe.linksheet.util.ResolveInfoFlags
 class PackageHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val isLinkSheetCompat: (String) -> Boolean,
+    val checkReferrerExperiment: () -> Boolean,
 ) {
     companion object {
         private val QUERY_FLAGS = ResolveInfoFlags.select(
@@ -35,14 +36,18 @@ class PackageHandler(
         }
     }
 
-    fun findHandlers(uri: Uri): List<ResolveInfo> {
+    fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
         val activities = queryIntentActivities(viewIntent, QUERY_FLAGS)
 
-        val filtered = activities.filter {
+        var filtered = activities.filter {
             it.activityInfo.applicationInfo.enabled
                     && !isLinkSheetCompat(it.activityInfo.packageName)
                     && isLinkHandler(it.filter, uri)
+        }
+
+        if (referringPackage != null && checkReferrerExperiment()) {
+            filtered = filtered.filter { it.activityInfo.packageName != referringPackage }
         }
 
         return deduplicate(filtered)

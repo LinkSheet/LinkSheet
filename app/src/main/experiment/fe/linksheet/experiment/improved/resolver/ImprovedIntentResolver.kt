@@ -124,6 +124,7 @@ class ImprovedIntentResolver(
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
     private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
+    private val hideReferrerFromSheet = experimentRepository.asState(Experiments.hideReferrerFromSheet)
 
     private val packageManager by lazy {
         context.packageManager
@@ -132,7 +133,8 @@ class ImprovedIntentResolver(
     private val packageHandler by lazy {
         PackageHandler(
             queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-            isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null }
+            isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
+            checkReferrerExperiment = { hideReferrerFromSheet() }
         )
     }
 
@@ -198,7 +200,8 @@ class ImprovedIntentResolver(
         val canAccessInternet = networkStateService.isNetworkConnected
 
         logger.debug("Referrer=$referrer")
-        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referrer?.host) != null
+        val referringPackage = ReferrerHelper.getReferringPackage(referrer)
+        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) return@scope searchIntentResult
@@ -331,7 +334,7 @@ class ImprovedIntentResolver(
             repository = appSelectionHistoryRepository,
             packageLauncherHelper = packageLauncherHelper, uri = uri
         )
-        val resolveList = packageHandler.findHandlers(uri)
+        val resolveList = packageHandler.findHandlers(uri, referringPackage)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)

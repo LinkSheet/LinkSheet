@@ -20,7 +20,8 @@ class PackageHandlerIntentFilterTest {
     companion object {
         private val handler: PackageHandler = PackageHandler(
             queryIntentActivities = { _, _ -> listOf() },
-            isLinkSheetCompat = { false }
+            isLinkSheetCompat = { false },
+            checkReferrerExperiment = { true }
         )
 
         private val githubIntentFilter = buildIntentFilter {

@@ -12,7 +12,7 @@
     <string name="apps_which_can_open_links_explainer_2">Listet alle Apps auf, die das Verhalten von LinkSheet beeinträchtigen können</string>
     <string name="apps_which_can_open_links_explainer">Tippe auf eine App, um das Menü „Standardmäßig öffnen“ zu öffnen, mit dem du das automatische Öffnen von Links deaktivieren kannst</string>
     <string name="no_preferred_apps_set_yet">Bisher wurden noch keine Apps als bevorzugt eingestellt.</string>
-    <string name="copy_url">URL kopieren</string>
+    <string name="copy_url">Link kopieren</string>
     <string name="search">Suche</string>
     <string name="url_copied">URL wurde in die Zwischenablage kopiert</string>
     <string name="clear">Leeren</string>
@@ -106,7 +106,7 @@
     <string name="follow_only_known_trackers_explainer">Versucht nur, Weiterleitungen zu folgen, wenn der Host als Tracker/Weiterleitung bekannt ist. Wenn \"Weiterleitungen über externen Dienst folgen\" aktiviert ist, ist dies immer aktiviert.</string>
     <string name="theme_explainer">Design der App ändern</string>
     <string name="bottom_sheet">Unteres Fenster</string>
-    <string name="display_grid_layout">Gitter-Layout anzeigen</string>
+    <string name="display_grid_layout">Raster-Layout</string>
     <string name="log_viewer">Protokoll-Anzeige</string>
     <string name="set_as_browser_done">LinkSheet wurde als Standard-Browser festgelegt!</string>
     <string name="whitelisted_explainer">Nur Browser auf der Whitelist anzeigen</string>

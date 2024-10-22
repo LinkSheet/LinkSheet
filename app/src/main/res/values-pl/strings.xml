@@ -106,7 +106,7 @@
     <string name="use_clear_urls_explainer">Używaj eksperymentalnej integracji <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
     <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">negatywny wpływ na prywatność</annotation></string>
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url="https://supabase.com/privacy">Polityka prywatności</annotation>)</string>
-    <string name="fastfoward_rules_explainer">Używaj eksperymentalnej integracji reguły <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
+    <string name="fastfoward_rules_explainer">Używaj eksperymentalnej integracji reguł <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
     <string name="redirect_resolve_type_local">lokalny rozwiązywacz</string>
     <string name="enable_libredirect_explainer">Przekieruj linki do przyjaznych dla prywatności frontendów przy użyciu eksperymentalnej integracji <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="use_app_settings_explainer">Aplikacje decydują, czy wewnętrzna przeglądarka powinna być używana</string>
@@ -513,4 +513,6 @@
     <string name="generic__text_done">Gotowe</string>
     <string name="home__clipboard_card_source">Ze schowka</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Wyświetla przycisk w dolnym panelu, który otwiera kliknięty link w zwykłym lub roboczym profilu</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Przełączanie profili</string>
+    <string name="settings_profile_switcher__divider_configuration">Konfiguracja</string>
 </resources>

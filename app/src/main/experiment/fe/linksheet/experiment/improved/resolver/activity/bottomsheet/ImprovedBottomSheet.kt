@@ -7,6 +7,8 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -14,14 +16,12 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.material3.fix.SheetValue
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -56,6 +56,7 @@ import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
@@ -90,6 +91,34 @@ class ImprovedBottomSheet(
     override fun onCreate(savedInstanceState: Bundle?) {
         activity.setContent(edgeToEdge = true) {
             AppTheme { Wrapper() }
+        }
+    }
+
+    // https://stackoverflow.com/a/76168038
+    private suspend fun PointerInputScope.interceptTap(
+        pass: PointerEventPass = PointerEventPass.Initial,
+        shouldCancel: (PointerEvent) -> Boolean,
+    ) = coroutineScope {
+        awaitEachGesture {
+            val down = awaitFirstDown(pass = pass)
+            val downTime = System.currentTimeMillis()
+            val tapTimeout = viewConfiguration.longPressTimeoutMillis
+
+            do {
+                val event = awaitPointerEvent(pass)
+                if (shouldCancel(event)) break
+
+                val currentTime = System.currentTimeMillis()
+
+                if (event.changes.size != 1) break // More than one event: not a tap
+                if (currentTime - downTime >= tapTimeout) break // Too slow: not a tap
+
+                val change = event.changes[0]
+
+                if (change.id == down.id && !change.pressed) {
+                    change.consume()
+                }
+            } while (event.changes.any { it.id == down.id && it.pressed })
         }
     }
 
@@ -135,6 +164,11 @@ class ImprovedBottomSheet(
         }
 
         ImprovedBottomDrawer(
+            contentModifier = if (viewModel.interceptAccidentalTaps()) {
+                Modifier.pointerInput(Unit) {
+                    interceptTap { !drawerState.isAnimationRunning }
+                }
+            } else Modifier,
             landscape = landscape,
             // TODO: Replace with pref
             isBlackTheme = false,
@@ -148,9 +182,11 @@ class ImprovedBottomSheet(
             hide = hideDrawer,
             sheetContent = {
                 if (status is IntentResolveResult.Pending) {
-                    LoadingIndicator(events = resolver.events, interactions = resolver.interactions, requestExpand = {
-                        coroutineScope.launch { drawerState.expand() }
-                    })
+                    LoadingIndicator(
+                        events = resolver.events,
+                        interactions = resolver.interactions,
+                        requestExpand = { coroutineScope.launch { drawerState.expand() } }
+                    )
                 } else if (status is IntentResolveResult.Default) {
                     BottomSheetApps(
                         bottomSheetViewModel = viewModel,
@@ -167,18 +203,6 @@ class ImprovedBottomSheet(
                         urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
                     )
                 }
-//                val scope: ColumnScope = this@BottomDrawer
-//                defaultVerticalPadding
-//                Column(modifier = Modifier.weight(1.0f, fill = false)) {
-//                SheetContent(
-//                    result = result,
-////                    isExpanded = drawerState.currentValue == FlexibleSheetValue.SlightlyExpanded,
-//                    isExpanded = drawerState.currentValue == SheetValue.Expanded,
-//                    hideDrawer = hide,
-//                    requestExpand = {
-//                        coroutineScope.launch { drawerState.expand() }
-//                    }
-//                )
             }
         )
     }

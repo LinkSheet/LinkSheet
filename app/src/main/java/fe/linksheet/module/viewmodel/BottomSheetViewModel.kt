@@ -118,6 +118,7 @@ class BottomSheetViewModel(
 
     val improvedBottomSheetExpandFully = experimentRepository.asState(Experiments.improvedBottomSheetExpandFully)
     val improvedBottomSheetUrlDoubleTap = experimentRepository.asState(Experiments.improvedBottomSheetUrlDoubleTap)
+    val interceptAccidentalTaps = experimentRepository.asState(Experiments.interceptAccidentalTaps)
 
     var appListSelectedIdx = mutableIntStateOf(-1)
 

@@ -127,6 +127,9 @@ class SheetState(
      */
     fun requireOffset(): Float = anchoredDraggableState.requireOffset()
 
+    val isAnimationRunning: Boolean
+        get() = anchoredDraggableState.isAnimationRunning
+
     /**
      * Whether the sheet has an expanded state defined.
      */

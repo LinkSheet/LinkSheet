@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Shape
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImprovedBottomDrawer(
-    modifier: Modifier = Modifier,
+    contentModifier: Modifier = Modifier,
     landscape: Boolean = false,
     isBlackTheme: Boolean = isSystemInDarkTheme(),
     drawerState: SheetState = androidx.compose.material3.fix.rememberModalBottomSheetState(),
@@ -27,7 +27,7 @@ fun ImprovedBottomDrawer(
     val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
 
     androidx.compose.material3.fix.ModalBottomSheet(
-        modifier = modifier,
+//        modifier = modifier,
         // TODO: Change to default? (surfaceContainerLow)
         containerColor = MaterialTheme.colorScheme.surface,
         shape = shape,
@@ -41,7 +41,7 @@ fun ImprovedBottomDrawer(
         // Works on both API <29 and API 30+
         val bottomPadding = remember { safeDrawing.calculateBottomPadding() }
 
-        Column(modifier = if (landscape) Modifier else Modifier.padding(bottom = bottomPadding)) {
+        Column(modifier = if (landscape) contentModifier else contentModifier.padding(bottom = bottomPadding)) {
             sheetContent()
         }
     }

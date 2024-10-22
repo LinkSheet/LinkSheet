@@ -494,16 +494,8 @@ class ImprovedBottomSheet(
 //                    }
                 }
             }
-//        AlertDialog(onDismissRequest = { /*TODO*/ }, confirmButton = { /*TODO*/ })
 
             if (!hasPreferredApp && !hideChoiceButtons) {
-//                Box(
-//                    modifier = Modifier
-//                        .align(Alignment.BottomCenter)
-//                        .fillMaxWidth()
-//                        .navigationBarsPadding()
-//                ) {
-
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -561,12 +553,6 @@ class ImprovedBottomSheet(
             finish()
         } else {
             showToast(R.string.resolve_activity_failure, uiThread = true)
-        }
-    }
-
-    private fun showResolveToasts(result: BottomSheetResult.BottomSheetSuccessResult, uiThread: Boolean = false) {
-        viewModel.getResolveToastTexts(result.resolveModuleStatus).forEach {
-            showToast(it, uiThread = uiThread)
         }
     }
 

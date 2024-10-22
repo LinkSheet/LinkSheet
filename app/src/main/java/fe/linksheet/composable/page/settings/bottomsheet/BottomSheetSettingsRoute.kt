@@ -33,6 +33,7 @@ import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R
+import fe.linksheet.Routes
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
@@ -61,6 +62,7 @@ sealed class TapType(@StringRes val headline: Int, @StringRes val dialogTitle: I
 @Composable
 fun BottomSheetSettingsRoute(
     onBackPressed: () -> Unit,
+    navigate: (String) -> Unit,
     viewModel: BottomSheetSettingsViewModel = koinViewModel(),
 ) {
     val displayProfileSwitcherPreference = remember {
@@ -165,7 +167,7 @@ fun BottomSheetSettingsRoute(
                         padding = padding,
                         preference = viewModel.bottomSheetProfileSwitcher,
                         onContentClick = {
-
+                            navigate(Routes.ProfileSwitching)
                         },
                         headlineContent = textContent(R.string.switch_profile),
                         supportingContent = textContent(R.string.settings_bottom_sheet__text_profile_switcher),

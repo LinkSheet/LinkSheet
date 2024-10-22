@@ -8,35 +8,30 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.*
 import fe.linksheet.composable.page.home.HomePageRoute
+import fe.linksheet.composable.page.settings.NewSettingsRoute
 import fe.linksheet.composable.page.settings.about.DonateSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.ExportImportSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.FeatureFlagSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.ShizukuSettingsRoute
+import fe.linksheet.composable.page.settings.about.NewAboutSettingsRoute
+import fe.linksheet.composable.page.settings.about.NewCreditsSettingsRoute
+import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
+import fe.linksheet.composable.page.settings.advanced.*
+import fe.linksheet.composable.page.settings.app.NewRuleRoute
+import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
+import fe.linksheet.composable.page.settings.app.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.page.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.page.settings.apps.PretendToBeAppSettingsRoute
 import fe.linksheet.composable.page.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.page.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.page.settings.browser.mode.PreferredBrowserSettingsRoute
-import fe.linksheet.composable.page.settings.browser.mode.WhitelistedBrowsersSettingsRoute
-import fe.linksheet.composable.page.settings.debug.loadpreferences.LoadDumpedPreferences
-import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
-import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
-import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
-import fe.linksheet.composable.page.settings.NewSettingsRoute
-import fe.linksheet.composable.page.settings.about.NewAboutSettingsRoute
-import fe.linksheet.composable.page.settings.about.NewCreditsSettingsRoute
-import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.NewAdvancedSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.NewExperimentsSettingsRoute
-import fe.linksheet.composable.page.settings.app.NewRuleRoute
-import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
-import fe.linksheet.composable.page.settings.app.VerifiedLinkHandlersRoute
+import fe.linksheet.composable.page.settings.bottomsheet.ProfileSwitchingSettingsRoute
 import fe.linksheet.composable.page.settings.browser.NewBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute
+import fe.linksheet.composable.page.settings.browser.mode.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.page.settings.browser.mode.WhitelistedBrowsersSettingsRoute
 import fe.linksheet.composable.page.settings.debug.NewDebugSettingsRoute
+import fe.linksheet.composable.page.settings.debug.loadpreferences.LoadDumpedPreferences
 import fe.linksheet.composable.page.settings.debug.log.NewLogSettingsRoute
 import fe.linksheet.composable.page.settings.debug.log.NewLogTextSettingsRoute
+import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.page.settings.link.NewLinksSettingsRoute
 import fe.linksheet.composable.page.settings.link.amp2html.NewAmp2HtmlSettingsRoute
 import fe.linksheet.composable.page.settings.link.downloader.NewDownloaderSettingsRoute
@@ -45,7 +40,9 @@ import fe.linksheet.composable.page.settings.link.libredirect.NewLibRedirectSett
 import fe.linksheet.composable.page.settings.link.redirect.NewFollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NewNotificationSettingsRoute
+import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
+import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
 import fe.linksheet.util.AndroidVersion
@@ -103,7 +100,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = bottomSheetSettingsRoute) {
-            BottomSheetSettingsRoute(onBackPressed = onBackPressed)
+            BottomSheetSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+        }
+
+        animatedComposable(route = Routes.ProfileSwitching) {
+            ProfileSwitchingSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = linksSettingsRoute) {

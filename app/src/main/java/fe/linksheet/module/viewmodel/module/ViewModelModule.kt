@@ -3,10 +3,9 @@ package fe.linksheet.module.viewmodel.module
 
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
-import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
-
 
 val viewModelModule = module {
     singleOf(::LogViewCommon)
@@ -40,4 +39,5 @@ val viewModelModule = module {
     viewModelOf(::NotificationSettingsViewModel)
     viewModelOf(::ExperimentsViewModel)
     viewModelOf(::AppConfigViewModel)
+    viewModelOf(::ProfileSwitchingSettingsViewModel)
 }

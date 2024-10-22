@@ -27,12 +27,13 @@ import kotlinx.coroutines.flow.StateFlow
 fun LoadingIndicator(
     events: StateFlow<ResolveEvent>,
     interactions: StateFlow<ResolverInteraction>,
-    requestExpand: () -> Unit
+    requestExpand: () -> Unit,
 ) {
     val event by events.collectOnIO(initialState = ResolveEvent.Initialized)
     val interaction by interactions.collectOnIO(initialState = ResolverInteraction.Clear)
 
     LaunchedEffect(key1 = interaction) {
+        // Request resize on interaction change to accommodate interaction UI
         requestExpand()
     }
 

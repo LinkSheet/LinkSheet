@@ -506,4 +506,6 @@
     <string name="generic__text_edit">Upravit</string>
     <string name="generic__text_done">Hotovo</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Zobrazí tlačítko ve spodním listu pro otevřený odkazu, na který jste klepnuli, v (pracovním) profilu</string>
+    <string name="settings_profile_switcher__divider_configuration">Nastavení</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Přepínač profilu</string>
 </resources>

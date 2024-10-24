@@ -17,7 +17,14 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
 
     object Ext : IsNotADependency {
         val gson = DependencyNotation(group = group, name = "gson-ext")
-        val kotlin = DependencyNotation(group = group, name = "kotlin-ext")
+    }
+
+    val std = Std
+
+    object Std : DependencyNotationAndGroup(group = "$group.kotlin-ext", name = "kotlin-ext") {
+        val core = module("core")
+        val result = module("result")
+        val javaTime = module("java-time")
     }
 
     val processLauncher = DependencyNotation(group = group, name = "process-launcher")

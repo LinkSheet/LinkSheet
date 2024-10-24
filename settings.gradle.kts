@@ -70,6 +70,13 @@ if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
         file("local.properties").reader().use { load(it) }
     }
 
+    properties["kotlin-ext.dir"]?.trySubstitute("com.gitlab.grrfe.kotlin-ext") {
+        this["core"] = "core"
+        this["io"] = "io"
+        this["java-time"] = "java-time"
+        this["result"] = "result"
+    }
+
     properties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe:gson-ext") {
         this["core"] = "core"
     }

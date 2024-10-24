@@ -22,19 +22,18 @@ import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
+import fe.linksheet.module.http.HttpClientModule
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
-import fe.linksheet.module.okhttp.okHttpModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
-import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
 import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
@@ -42,7 +41,7 @@ import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
-import fe.linksheet.module.unfurler.unfurlerModule
+import fe.linksheet.module.unfurler.UnfurlerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
@@ -51,7 +50,6 @@ import fe.linksheet.util.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
-import org.lsposed.hiddenapibypass.HiddenApiBypass
 import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
@@ -89,9 +87,9 @@ class LinkSheetApp : Application() {
             HttpUrlTypeAdapter.register(this)
         }
 
-        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
-            HiddenApiBypass.addHiddenApiExemptions("")
-        }
+//        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
+//            HiddenApiBypass.addHiddenApiExemptions("")
+//        }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
@@ -116,9 +114,8 @@ class LinkSheetApp : Application() {
                 resolverModule,
                 repositoryModule,
                 viewModelModule,
-                requestModule,
-                okHttpModule,
-                unfurlerModule,
+                HttpClientModule,
+                UnfurlerModule,
                 downloaderModule,
                 analyticsServiceModule,
                 if (BuildType.current.allowDebug) aptabaseAnalyticsClientModule else DebugLogAnalyticsClient.module,

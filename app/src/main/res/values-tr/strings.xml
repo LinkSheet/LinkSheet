@@ -69,9 +69,9 @@
     <string name="open_copied_link">Panodan</string>
     <string name="open_link_with">Bağlantıyı Şununla Aç</string>
     <string name="github_explainer">Kaynak kodu deposu</string>
-    <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler) \u0020</string>
+    <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler)</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>
-    <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
+    <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>
     <string name="follow_only_known_trackers">Yalnızca bilinen izleyicileri takip et</string>
     <string name="theme">Tema</string>
@@ -140,9 +140,9 @@
     <string name="redirect_resolve_type_local_cache">yerel önbellek</string>
     <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
     <string name="use_app_settings">Varsayılan</string>
-    <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
+    <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden bir doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri</annotation> olabilir \u0020</string>
+    <string name="enable_downloader_explainer">URL dosyaya giden bir doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Zorla devre dışı bırak</string>
     <string name="disable_in_selected">Zorla devre dışı bırak…</string>
@@ -176,7 +176,7 @@
     <string name="no">Hayır</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet tarayıcı olarak bilinen en az bir uygulama algıladı.</string>
     <string name="domain_selection_confirmation_subtitle">%s uygulamasını aşağıdaki alan adları için tercih edilen uygulama olarak ayarlamak istediğinizden emin misiniz?</string>
-    <string name="github_workflow_run_id"><b>İş akışı kimliği:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="github_workflow_run_id"><b>İş akışı kimliği:</b> <font face="monospace">%s</font></string>
     <string name="discord_explainer">Discord\'da LinkSheet hakkında konuşun</string>
     <string name="dismiss">Gizle</string>
     <string name="join">Katıl</string>
@@ -197,7 +197,7 @@
     <string name="fastforward_version">FastForward kuralları</string>
     <string name="opening_with_app_toast_explainer">Bir alan adı için varsayılan olarak ayarlanan bir uygulama başlatıldığında bildirim göster</string>
     <string name="clear_urls_version">ClearURLs kuralları</string>
-    <string name="last_updated"><b>Sürüm:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>Sürüm:</b> <font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Deneysel LinkSheetCompat menüsünü etkinleştir</string>
     <string name="base_config">Ek yapılandırma</string>
@@ -220,11 +220,11 @@
     <string name="general">Çeşitli</string>
     <string name="domain_selection_confirmation_title">Alan Adlarını Seçin?</string>
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'in kaynak kodu Shizuku entegrasyonu için referans olarak kullanıldı</string>
-    <string name="built_at"><b>Şu tarihte derlendi:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="built_at"><b>Şu tarihte derlendi:</b> <font face="monospace">%s</font></string>
     <string name="discord">Discord</string>
     <string name="manual_build">1fexd tarafından manuel olarak derlendi ve imzalandı</string>
     <string name="github_pipeline_build">CI tarafından derlendi ve imzalandı</string>
-    <string name="flavor"><b>Ortam:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="flavor"><b>Ortam:</b> <font face="monospace">%s</font></string>
     <string name="app_setup">Uygulama kurulumu</string>
     <string name="other">Diğer</string>
     <string name="preferred_apps_settings">Destekledikleri bağlantılar için varsayılan uygulamalar ayarlayın</string>
@@ -294,9 +294,9 @@
     <string name="no_browser_installed">Hiç tarayıcı yüklenmedi</string>
     <string name="yes">Evet</string>
     <string name="misc_settings">Çeşitli</string>
-    <string name="donate_card_subtitle">LinkSheet\'i sevdiyseniz, GitHub\'da yıldızlamayı veya bağış yapmayı düşünün. <b>5€</b>\'dan fazla bağış yapanlar,özel özelliklerbulunduracak <b>LinkSheet Pro</b> için hak sahibidir.</string>
+    <string name="donate_card_subtitle">LinkSheet\'i sevdiyseniz, GitHub\'da yıldızlamayı veya bağış yapmayı düşünün. <b>5€</b>\'dan fazla bağış yapanlar, özel özellikler bulunduracak <b>LinkSheet Pro</b> için hak sahibidir.</string>
     <string name="open_link_with_subtitle_2">LinkSheet, ilk başta OpenLinkWith temelli idi</string>
-    <string name="version_name"><b>Sürüm:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="version_name"><b>Sürüm:</b> <font face="monospace">%s</font></string>
     <string name="privacy">Gizlilik</string>
     <string name="privacy_settings_explainer">Yönlendiren gizliliği, Telemetri</string>
     <string name="thanks_for_donating">Bağış yaptığınız için teşekkürler!</string>
@@ -443,7 +443,7 @@
     <string name="export_log_dialog__subtitle_include_fingerprint">Önerilir</string>
     <string name="export_log_dialog__title_include_settings">Ayarları dahil et</string>
     <string name="generic__button_text_cancel">İptal</string>
-    <string name="export_log_dialog__text_log_info"><font face="monospace">%s</font> tarihli günlük için paylaşım ayarlarını yapılandırın \u0020</string>
+    <string name="export_log_dialog__text_log_info"><font face="monospace">%s</font> tarihli günlük için paylaşım ayarlarını yapılandırın</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet kurulmadı</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet sistemin varsayılan tarayıcısı olarak ayarlı değil</string>
@@ -474,7 +474,7 @@
     <string name="settings_app_config__title_native_apps">Uygulamalar</string>
     <string name="settings_app_config_rules__title_rules">Kurallar</string>
     <string name="settings_app_config_rules__btn_new_rule">Yeni kural</string>
-    <string name="export_log_dialog__text_log_privacy">Paylaşılan günlük dosyalarındaki muhtemel hassas veriler hakkında daha fazla bilgi için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">buraya</annotation> dokunun \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">Paylaşılan günlük dosyalarındaki muhtemel hassas veriler hakkında daha fazla bilgi için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">buraya</annotation> dokunun</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">%s tarihli günlük görüntüleniyor</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet kuruldu</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet doğru bir şekilde kuruldu ve çalışmaya hazır</string>
@@ -498,4 +498,7 @@
     <string name="generic__text_edit">Düzenle</string>
     <string name="generic__text_done">Tamam</string>
     <string name="generic__text_url">Url</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı bir (iş) profilde açmak için alt sayfada bir düğme gösterir</string>
+    <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Profil değiştirme</string>
 </resources>

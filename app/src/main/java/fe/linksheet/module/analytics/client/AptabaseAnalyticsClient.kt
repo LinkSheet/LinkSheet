@@ -5,7 +5,6 @@ import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
-import fe.kotlin.extension.unixMillisAtZone
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.koin.createLogger
@@ -15,6 +14,7 @@ import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.util.BuildType
+import fe.std.javatime.extension.unixMillisAtZone
 import org.koin.dsl.module
 import java.io.IOException
 import java.time.format.DateTimeFormatter

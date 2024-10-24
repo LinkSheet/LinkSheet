@@ -24,7 +24,7 @@ import fe.android.compose.text.TextContent
 import fe.composekit.component.CommonDefaults
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.shape.CustomShapeDefaults
-import fe.kotlin.extension.time.localizedString
+import fe.std.javatime.time.localizedString
 import fe.linksheet.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState

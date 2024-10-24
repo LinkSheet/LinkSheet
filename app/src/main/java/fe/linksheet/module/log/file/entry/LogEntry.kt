@@ -3,7 +3,7 @@ package fe.linksheet.module.log.file.entry
 import androidx.annotation.Keep
 import com.google.gson.JsonObject
 import fe.gson.dsl.jsonObject
-import fe.kotlin.extension.unixMillisUtc
+import fe.std.javatime.extension.unixMillisUtc
 import fe.kotlin.extension.string.decodeBase64Throw
 import fe.kotlin.extension.string.encodeBase64Throw
 import fe.stringbuilder.util.buildSeparatedString

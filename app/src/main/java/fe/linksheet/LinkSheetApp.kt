@@ -44,14 +44,12 @@ import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
-import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.HttpUrlTypeAdapter
 import fe.linksheet.util.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
-import org.lsposed.hiddenapibypass.HiddenApiBypass
 import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
@@ -89,9 +87,9 @@ class LinkSheetApp : Application() {
             HttpUrlTypeAdapter.register(this)
         }
 
-        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
-            HiddenApiBypass.addHiddenApiExemptions("")
-        }
+//        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
+//            HiddenApiBypass.addHiddenApiExemptions("")
+//        }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 

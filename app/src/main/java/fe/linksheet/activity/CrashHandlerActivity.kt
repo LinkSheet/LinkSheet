@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.kotlin.time.ISO8601DateTimeFormatter
 import fe.linksheet.R
 import fe.linksheet.composable.component.dialog.createExportLogDialog
 import fe.linksheet.composable.page.settings.debug.log.LogCard
@@ -26,6 +25,7 @@ import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.module.log.file.LogPersistService
+import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

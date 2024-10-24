@@ -3,8 +3,8 @@ package fe.linksheet.util
 import android.os.Build
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import fe.kotlin.extension.unixMillisUtc
-import fe.kotlin.time.ISO8601DateTimeFormatter
+import fe.std.javatime.extension.unixMillisUtc
+import fe.std.javatime.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 
 @Keep

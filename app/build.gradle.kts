@@ -25,7 +25,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.kotlin.plugin.serialization")
-    id("androidx.navigation.safeargs.kotlin") version "2.8.2"
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 // Must be defined before the android block, or else it won't work
@@ -219,7 +219,7 @@ android {
 //    }
 
     val main by sourceSets
-    for (it in setOf("compat", "experiment")) {
+    for (it in arrayOf("compat", "experiment")) {
         main.java.srcDir("src/main/$it")
     }
 }
@@ -235,7 +235,6 @@ dependencies {
     implementation(Square.okHttp3.android)
     //noinspection UseTomlInstead
     implementation(Square.okHttp3.coroutines)
-
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
@@ -277,6 +276,7 @@ dependencies {
 
     implementation(COIL)
     implementation(COIL.compose)
+    implementation("io.coil-kt.coil3:coil-network-ktor3:_")
 
     implementation("com.github.seancfoley:ipaddress:_")
     implementation("io.github.fornewid:placeholder-material3:_")
@@ -287,12 +287,18 @@ dependencies {
 
     implementation(platform("com.github.1fexd:super:_"))
 
+    implementation(JetBrains.ktor.client.core)
+    implementation(JetBrains.ktor.client.gson)
+    implementation(JetBrains.ktor.client.okHttp)
+    implementation(JetBrains.ktor.client.android)
+    implementation(JetBrains.ktor.client.mock)
+
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.gson)
     implementation(Grrfe.ext.gson)
     implementation(Grrfe.std.core)
-    implementation(Grrfe.std.result)
     implementation(Grrfe.std.javaTime)
+    implementation(Grrfe.std.result.core)
     implementation(Grrfe.processLauncher)
     implementation(_1fexd.uriParser)
     implementation(_1fexd.clearUrl)
@@ -334,17 +340,18 @@ dependencies {
 
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
-    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
+//    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
 //    implementation(libs.dev.rikka.tools.refine.runtime)
-    compileOnly("dev.rikka.hidden:stub:_")
+//    compileOnly("dev.rikka.hidden:stub:_")
 
     implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
+    implementation(KotlinX.serialization.json)
 
 
     debugImplementation(Square.leakCanary.android)
 
+    testImplementation(Grrfe.std.result.assert)
     testImplementation(Koin.test)
     testImplementation(Koin.junit4)
     testImplementation(Koin.android)

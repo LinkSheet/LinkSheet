@@ -23,8 +23,14 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
 
     object Std : DependencyNotationAndGroup(group = "$group.kotlin-ext", name = "kotlin-ext") {
         val core = module("core")
-        val result = module("result")
         val javaTime = module("java-time")
+
+        val result = Result
+
+        object Result : IsNotADependency {
+            val core = DependencyNotation(group = group, name = "result-core")
+            val assert = DependencyNotation(group = group, name = "result-assert")
+        }
     }
 
     val processLauncher = DependencyNotation(group = group, name = "process-launcher")

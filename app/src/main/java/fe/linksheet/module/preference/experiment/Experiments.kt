@@ -22,6 +22,8 @@ object Experiments : PreferenceDefinition(
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver", true)
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
     val improvedBottomSheetUrlDoubleTap = boolean("experiment_impr_btm_sheet_url_double_tap")
+    val autoLaunchSingleBrowser = boolean("experiment_improved_bottom_sheet_auto_launch_single_browser")
+    val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps")
 
     val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
 
@@ -29,7 +31,6 @@ object Experiments : PreferenceDefinition(
 
     val editClipboard = boolean("experiment_edit_clipboard", false)
     val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
-    val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps")
 
 
     // TODO: Enforce type
@@ -56,6 +57,7 @@ object Experiments : PreferenceDefinition(
                 addPreference(ExperimentPreference("LibRedirect QuickJS engine", libRedirectJsEngine))
                 addPreference(ExperimentPreference("Hide referring app from results in bottom sheet", hideReferrerFromSheet))
                 addPreference(ExperimentPreference("Ignore accidental taps while sheet is animating", interceptAccidentalTaps))
+                addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
             },
 
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {

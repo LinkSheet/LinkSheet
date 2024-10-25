@@ -1,6 +1,5 @@
 package fe.linksheet.resolver
 
-import android.content.pm.ResolveInfo
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
@@ -8,7 +7,14 @@ import fe.linksheet.experiment.improved.resolver.FilteredBrowserList
 import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
 import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.resolver.util.buildResolveInfoTestMock
+import fe.linksheet.resolver.util.ResolveInfos.allApps
+import fe.linksheet.resolver.util.ResolveInfos.allBrowsers
+import fe.linksheet.resolver.util.ResolveInfos.allResolved
+import fe.linksheet.resolver.util.ResolveInfos.duckduckgoBrowser
+import fe.linksheet.resolver.util.ResolveInfos.miBrowser
+import fe.linksheet.resolver.util.ResolveInfos.packageSetOf
+import fe.linksheet.resolver.util.ResolveInfos.toKeyedMap
+import fe.linksheet.resolver.util.ResolveInfos.youtube
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
@@ -18,48 +24,6 @@ import kotlin.test.Test
 class ImprovedBrowserHandlerTest {
     companion object {
         private val handler = ImprovedBrowserHandler()
-
-        val miBrowser = buildResolveInfoTestMock { activity, application ->
-            activity.name = "com.sec.android.app.sbrowser.SBrowserLauncherActivity"
-            activity.packageName = "com.mi.globalbrowser"
-        }
-
-        val duckduckgoBrowser = buildResolveInfoTestMock { activity, application ->
-            activity.name = "com.duckduckgo.app.dispatchers.IntentDispatcherActivity"
-            activity.packageName = "com.duckduckgo.mobile.android"
-        }
-
-        val youtube = buildResolveInfoTestMock { activity, application ->
-            activity.name = "com.google.android.youtube.UrlActivity"
-            activity.packageName = "com.google.android.youtube"
-        }
-
-        val newPipe = buildResolveInfoTestMock { activity, application ->
-            activity.name = "org.schabi.newpipe.RouterActivity"
-            activity.packageName = "org.schabi.newpipe"
-        }
-
-        val newPipeEnhanced = buildResolveInfoTestMock { activity, application ->
-            activity.name = "org.schabi.newpipe.RouterActivity"
-            activity.packageName = "InfinityLoop1309.NewPipeEnhanced"
-        }
-
-        val pepper = buildResolveInfoTestMock { activity, application ->
-            activity.name = "com.pepper.presentation.dispatch.DispatchActivity"
-            activity.packageName = "com.tippingcanoe.pepperpl"
-        }
-
-        val allApps = listOf(youtube, newPipe, newPipeEnhanced)
-        val allBrowsers = listOf(miBrowser, duckduckgoBrowser)
-        val allResolved = allApps + allBrowsers
-
-        private fun packageSetOf(vararg resolveInfos: ResolveInfo): Set<String> {
-            return resolveInfos.mapTo(LinkedHashSet()) { it.activityInfo.packageName }
-        }
-
-        private fun List<ResolveInfo>.toKeyedMap(): Map<String, ResolveInfo> {
-            return associateBy { it.activityInfo.packageName }
-        }
     }
 
     @Test

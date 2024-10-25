@@ -125,6 +125,7 @@ class ImprovedIntentResolver(
     private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
     private val hideReferrerFromSheet = experimentRepository.asState(Experiments.hideReferrerFromSheet)
+    private val autoLaunchSingleBrowser = experimentRepository.asState(Experiments.autoLaunchSingleBrowser)
 
     private val packageManager by lazy {
         context.packageManager
@@ -338,7 +339,7 @@ class ImprovedIntentResolver(
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
-        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
+        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList, autoLaunchSingleBrowser())
 
         emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = appSorter.sort(

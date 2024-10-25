@@ -162,7 +162,7 @@
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
     <string name="links">Линкови</string>
-    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово можеимати \n <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
+    <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово може имати <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">импликације у вези са приватношћу</annotation></string>
     <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
@@ -509,4 +509,6 @@
     <string name="generic__text_edit">Измени</string>
     <string name="home__clipboard_card_source">Из привремене меморије</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Мењање профила</string>
+    <string name="settings_profile_switcher__divider_configuration">Конфигурација</string>
 </resources>

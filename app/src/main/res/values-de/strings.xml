@@ -144,7 +144,7 @@
     <string name="redirect_resolve_type_local">lokaler Auflöser</string>
     <string name="theme">Design</string>
     <string name="whitelisted_browsers">Browser auf der Whitelist</string>
-    <string name="bottom_sheet_explainer">Nach Nutzung sortieren, \"Kopieren\"-Schaltfläche aktivieren, \"Teilen\"-Schaltfläche aktivieren etc.</string>
+    <string name="bottom_sheet_explainer">Konfiguration &amp; Anpassung</string>
     <string name="yes">Ja</string>
     <string name="frontend">Benutzeroberfläche</string>
     <string name="redirect_resolve_type_remote">Remote-Server</string>
@@ -174,7 +174,7 @@
     <string name="thanks_for_donating">Danke, dass Sie gespendet haben!</string>
     <string name="app_setup">App-Setup</string>
     <string name="feature_flags_explainer">Experimentelle Funktionen aktivieren oder deaktivieren</string>
-    <string name="about_explainer">Über diese App, Lizenzen</string>
+    <string name="about_explainer">Danksagungen, Lizenz, Links, Version</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku wird nicht ausgeführt. Tippen Sie hier, um Shizuku zu öffnen, und folgen Sie dann den Anweisungen, um es zu starten</string>
     <string name="browser_status">Browser-Status</string>

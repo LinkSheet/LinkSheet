@@ -1,6 +1,7 @@
 package fe.linksheet.experiment.improved.resolver.browser
 
 import android.content.pm.ResolveInfo
+import fe.linksheet.experiment.improved.resolver.AutoLaunchSingleBrowserExperiment
 import fe.linksheet.experiment.improved.resolver.FilteredBrowserList
 import fe.linksheet.extension.android.componentName
 
@@ -14,12 +15,10 @@ class ImprovedBrowserHandler(
         autoLaunchSingleBrowserExperiment: Boolean = false,
     ): FilteredBrowserList {
         val nonBrowsers = getAllNonBrowsers(browsers, resolveList)
+
         if (autoLaunchSingleBrowserExperiment) {
-            if (nonBrowsers.isEmpty() && browsers.size == 1) {
-                return FilteredBrowserList(config.mode, browsers.values.toList(), nonBrowsers,
-                    isSingleOption = true,
-                    noBrowsersOnlySingleApp = false
-                )
+            AutoLaunchSingleBrowserExperiment.handle(config, nonBrowsers, browsers)?.let { result ->
+                return result
             }
         }
 

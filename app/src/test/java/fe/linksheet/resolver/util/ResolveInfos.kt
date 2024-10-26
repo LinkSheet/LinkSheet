@@ -44,11 +44,15 @@ object ResolveInfos {
         return resolveInfos.mapTo(LinkedHashSet()) { it.packageName }
     }
 
-    fun List<ResolveInfo>.toKeyedMap(): Map<String, ResolveInfo> {
+    fun Iterable<ResolveInfo>.toKeyedMap(): Map<String, ResolveInfo> {
         return associateBy { it.packageName }
     }
 
     fun ResolveInfo.toKeyedMap(): Map<String, ResolveInfo> {
         return mapOf(this.packageName to this)
+    }
+
+    fun keyedMap(vararg resolveInfos: ResolveInfo): Map<String, ResolveInfo> {
+        return listOf(*resolveInfos).toKeyedMap()
     }
 }

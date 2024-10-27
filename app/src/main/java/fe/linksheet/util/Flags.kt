@@ -1,5 +1,6 @@
 package fe.linksheet.util
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,12 +9,23 @@ import androidx.annotation.RequiresApi
 interface Flags {
     val value: Int
 
-    fun contains(flag: Int) = (value and flag) != 0
+    operator fun contains(flag: Int): Boolean {
+        return (value and flag) != 0
+    }
+}
+
+interface FlagCompanion<T : Flags> {
+    val new: (Int) -> T
+
+    fun select(vararg flags: T): T {
+        val sum = flags.sumOf { it.value }
+        return new(sum)
+    }
 }
 
 @JvmInline
 value class ResolveInfoFlags(override val value: Int) : Flags {
-    companion object {
+    companion object : FlagCompanion<ResolveInfoFlags> {
         val EMPTY = ResolveInfoFlags(0)
 
         val GET_META_DATA = ResolveInfoFlags(PackageManager.GET_META_DATA)
@@ -32,8 +44,21 @@ value class ResolveInfoFlags(override val value: Int) : Flags {
         val MATCH_SYSTEM_ONLY = ResolveInfoFlags(PackageManager.MATCH_SYSTEM_ONLY)
         val MATCH_UNINSTALLED_PACKAGES = ResolveInfoFlags(PackageManager.MATCH_UNINSTALLED_PACKAGES)
 
-        fun <T : Flags> select(vararg flags: T): ResolveInfoFlags {
-            return ResolveInfoFlags(flags.sumOf { it.value })
+        override val new: (Int) -> ResolveInfoFlags = {
+            ResolveInfoFlags(it)
+        }
+    }
+}
+
+
+@JvmInline
+value class ApplicationInfoPrivateFlags(override val value: Int) : Flags {
+    companion object : FlagCompanion<ApplicationInfoPrivateFlags> {
+        val SYSTEM = ApplicationInfoPrivateFlags(ApplicationInfo.FLAG_SYSTEM)
+        val UPDATED_SYSTEM_APP = ApplicationInfoPrivateFlags(ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
+
+        override val new: (Int) -> ApplicationInfoPrivateFlags = {
+            ApplicationInfoPrivateFlags(it)
         }
     }
 }

@@ -1,11 +1,14 @@
 package fe.linksheet.extension.android
 
 import android.content.pm.ApplicationInfo
-import fe.linksheet.util.BitFlagUtil
+import fe.linksheet.util.ApplicationInfoPrivateFlags
 
 
-private val systemAppFlag = BitFlagUtil.or(ApplicationInfo.FLAG_SYSTEM, ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
+private val SYSTEM_APP_FLAGS = ApplicationInfoPrivateFlags.select(
+    ApplicationInfoPrivateFlags.SYSTEM,
+    ApplicationInfoPrivateFlags.UPDATED_SYSTEM_APP
+)
 
 fun ApplicationInfo.isUserApp(): Boolean {
-    return (flags and systemAppFlag) == 0
+    return flags !in SYSTEM_APP_FLAGS
 }

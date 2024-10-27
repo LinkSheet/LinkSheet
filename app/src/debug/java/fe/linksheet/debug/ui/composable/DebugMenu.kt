@@ -14,12 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.activity.onboarding.OnboardingActivity
-import fe.linksheet.debug.activity.ComposableRendererActivity
-import fe.linksheet.debug.activity.DebugActivity
-import fe.linksheet.debug.activity.ExportLogDialogTestActivity
-import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.debug.activity.*
 import kotlin.reflect.KClass
 
 @Composable
@@ -27,6 +24,14 @@ fun DebugMenu() {
     val activity = LocalActivity.current
 
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        item(key = "installed_app_cache") {
+            FilledTonalActivityLauncher(
+                activity = activity,
+                text = "Installed app cache",
+                intent = createIntent(activity, InstalledAppCacheServiceTestActivity::class)
+            )
+        }
+
         item(key = "onboarding") {
             FilledTonalActivityLauncher(
                 activity = activity,

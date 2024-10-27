@@ -3,6 +3,8 @@ package fe.linksheet.module.repository.module
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.repository.*
+import fe.linksheet.module.repository.app.AppDomainVerificationStateRepository
+import fe.linksheet.module.repository.app.InstalledAppRepository
 import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -22,5 +24,7 @@ val repositoryModule = module {
     singleOf(::LibRedirectStateRepository)
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
+    singleOf(::InstalledAppRepository)
+    singleOf(::AppDomainVerificationStateRepository)
 }
 

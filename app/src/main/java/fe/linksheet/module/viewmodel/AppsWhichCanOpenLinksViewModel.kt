@@ -25,10 +25,7 @@ import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.AndroidVersion
-import fe.linksheet.util.VerifiedDomainUtil
-import fe.linksheet.util.flowOfLazy
-import fe.linksheet.util.getAppOpenByDefaultIntent
+import fe.linksheet.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -40,8 +37,6 @@ class AppsWhichCanOpenLinksViewModel(
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
 ) : BaseViewModel(preferenceRepository) {
-
-    private val uiOverhaul = { true }
 
     private val domainVerificationManager by lazy {
         if (AndroidVersion.AT_LEAST_API_31_S) {
@@ -77,9 +72,7 @@ class AppsWhichCanOpenLinksViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private val apps = if (!uiOverhaul()) baseApps.combine(filterDisabledOnly) { apps, filterDisabledOnly ->
-        apps.filter { !(filterDisabledOnly && it.enabled) }
-    } else baseApps.combine(filterMode) { apps, filterMode ->
+    private val apps = baseApps.combine(filterMode) { apps, filterMode ->
         if (filterMode == FilterMode.ShowAll) return@combine apps
 
         val enabledMode = filterMode == FilterMode.EnabledOnly

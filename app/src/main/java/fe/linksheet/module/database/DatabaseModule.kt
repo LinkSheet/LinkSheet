@@ -24,7 +24,8 @@ import org.koin.dsl.module
 
 val databaseModule = module {
     single<LinkSheetDatabase> {
-        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet").addMigrations(Migration1to2, Migration13to16).build()
+        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet")
+            .addMigrations(Migration1to2, Migration13to16).build()
     }
 }
 
@@ -47,7 +48,8 @@ val databaseModule = module {
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
         AutoMigration(from = 11, to = 12),
-        AutoMigration(from = 12, to = 13)
+        AutoMigration(from = 12, to = 13),
+        AutoMigration(from = 15, to = 16),
     ],
     exportSchema = true
 )

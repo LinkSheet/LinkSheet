@@ -18,12 +18,13 @@ import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
+import fe.linksheet.module.database.migrations.Migration13to15
 import fe.linksheet.module.database.migrations.Migration1to2
 import org.koin.dsl.module
 
 val databaseModule = module {
     single<LinkSheetDatabase> {
-        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet").addMigrations(Migration1to2).build()
+        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet").addMigrations(Migration1to2, Migration13to15).build()
     }
 }
 
@@ -34,7 +35,7 @@ val databaseModule = module {
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
         InstalledApp::class, AppDomainVerificationState::class,
     ],
-    version = 14,
+    version = 15,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -46,8 +47,7 @@ val databaseModule = module {
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
         AutoMigration(from = 11, to = 12),
-        AutoMigration(from = 12, to = 13),
-        AutoMigration(from = 13, to = 14),
+        AutoMigration(from = 12, to = 13)
     ],
     exportSchema = true
 )

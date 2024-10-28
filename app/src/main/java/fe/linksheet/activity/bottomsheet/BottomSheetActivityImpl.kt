@@ -212,10 +212,6 @@ class BottomSheetActivityImpl(
                     }
                 }
             )
-
-            if (false) {
-                ExperimentalFailureSheetColumn(onShareClick = {}, onCopyClick = {})
-            }
         }
     }
 

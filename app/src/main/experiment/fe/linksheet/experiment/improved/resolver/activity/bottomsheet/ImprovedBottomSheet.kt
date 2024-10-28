@@ -55,6 +55,7 @@ import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.android.compose.version.AndroidVersion
+import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.coroutineScope
@@ -128,9 +129,13 @@ class ImprovedBottomSheet(
     private fun Wrapper() {
         var status by remember { mutableStateOf<IntentResolveResult>(IntentResolveResult.Pending) }
 
+        val safeIntent = remember(intent) {
+            intent.toSafeIntent()
+        }
+
         // TODO: Use intent and referrer as keys?
         LaunchedEffect(key1 = resolver) {
-            status = resolver.resolve(intent.toSafeIntent(), referrer)
+            status = resolver.resolve(safeIntent, referrer)
         }
 
         val coroutineScope = rememberCoroutineScope()
@@ -182,27 +187,43 @@ class ImprovedBottomSheet(
             ),
             hide = hideDrawer,
             sheetContent = {
-                if (status is IntentResolveResult.Pending) {
-                    LoadingIndicator(
-                        events = resolver.events,
-                        interactions = resolver.interactions,
-                        requestExpand = { coroutineScope.launch { drawerState.expand() } }
-                    )
-                } else if (status is IntentResolveResult.Default) {
-                    BottomSheetApps(
-                        bottomSheetViewModel = viewModel,
-                        result = status as IntentResolveResult.Default,
-                        declutterUrl = viewModel.declutterUrl(),
-                        enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
-                        enableSwitchProfile = viewModel.switchProfile(),
-                        isExpanded = drawerState.currentValue == SheetValue.Expanded,
-                        requestExpand = {},
-                        hideDrawer = hideDrawer,
-                        showPackage = viewModel.alwaysShowPackageName(),
-                        previewUrl = viewModel.previewUrl(),
-                        hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
-                        urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
-                    )
+                when (status) {
+                    is IntentResolveResult.Pending -> {
+                        LoadingIndicator(
+                            events = resolver.events,
+                            interactions = resolver.interactions,
+                            requestExpand = { coroutineScope.launch { drawerState.expand() } }
+                        )
+                    }
+
+                    is IntentResolveResult.Default -> {
+                        BottomSheetApps(
+                            bottomSheetViewModel = viewModel,
+                            result = status as IntentResolveResult.Default,
+                            declutterUrl = viewModel.declutterUrl(),
+                            enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
+                            enableSwitchProfile = viewModel.switchProfile(),
+                            isExpanded = drawerState.currentValue == SheetValue.Expanded,
+                            requestExpand = {},
+                            hideDrawer = hideDrawer,
+                            showPackage = viewModel.alwaysShowPackageName(),
+                            previewUrl = viewModel.previewUrl(),
+                            hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
+                            urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
+                        )
+                    }
+
+                    is IntentResolveResult.IntentParseFailed, is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
+                        ExperimentalFailureSheetColumn(
+                            data = safeIntent.dataString,
+                            onShareClick = {},
+                            onCopyClick = {}
+                        )
+                    }
+
+                    is IntentResolveResult.WebSearch -> {
+
+                    }
                 }
             }
         )
@@ -465,7 +486,8 @@ class ImprovedBottomSheet(
                         selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
                         onClick = { type, modifier ->
                             viewModel.viewModelScope.launch {
-                                val intent = viewModel.handleClick(activity, index, isExpanded,
+                                val intent = viewModel.handleClick(
+                                    activity, index, isExpanded,
                                     requestExpand, result.intent, info, type, modifier
                                 )
 

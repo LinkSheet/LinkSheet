@@ -210,7 +210,7 @@ class ImprovedIntentResolver(
         var uri = getUriFromIntent(intent)
 
         if (uri == null) {
-            logger.error("Failed to parsed intent ${intent.action}")
+            logger.error("Failed to parse intent ${intent.action}")
             return@scope IntentResolveResult.IntentParseFailed
         }
 

@@ -33,7 +33,7 @@ fun OpenCopiedLink(editClipboard: Boolean, uri: Uri, navigate: (Route) -> Unit) 
             EditExperiment(uriString = uriString, navigate = navigate)
         }
 
-        return@remember if(editClipboard) composable else null
+        return@remember if (editClipboard) composable else null
     }
 
     AlertCard(
@@ -52,7 +52,7 @@ fun OpenCopiedLink(editClipboard: Boolean, uri: Uri, navigate: (Route) -> Unit) 
 }
 
 @Composable
-private fun EditExperiment(uriString: String, navigate: (Route) -> Unit) {
+fun EditExperiment(uriString: String, navigate: (Route) -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
         EditButton(
             id = R.string.generic__text_edit,
@@ -64,7 +64,7 @@ private fun EditExperiment(uriString: String, navigate: (Route) -> Unit) {
 }
 
 @Composable
-private fun EditButton(
+fun EditButton(
     @StringRes id: Int,
     onClick: () -> Unit,
 ) {

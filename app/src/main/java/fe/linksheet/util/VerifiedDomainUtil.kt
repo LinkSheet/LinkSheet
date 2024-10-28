@@ -13,9 +13,11 @@ object VerifiedDomainUtil {
     @RequiresApi(Build.VERSION_CODES.S)
     fun getStatus(
         manager: DomainVerificationManager,
-        applicationInfo: ApplicationInfo,
-        label: CharSequence,
+        applicationInfo: ApplicationInfo?,
+        label: CharSequence?,
     ): PackageDomainVerificationStatus? {
+        if(applicationInfo == null) return null
+
         val userState = manager.getDomainVerificationUserState(applicationInfo.packageName)
         if (userState == null || userState.hostToStateMap.isEmpty()) return null
 
@@ -43,7 +45,7 @@ object VerifiedDomainUtil {
 
         return PackageDomainVerificationStatus(
             applicationInfo,
-            label,
+            label!!,
             userState.isLinkHandlingAllowed,
             stateNone,
             stateSelected,

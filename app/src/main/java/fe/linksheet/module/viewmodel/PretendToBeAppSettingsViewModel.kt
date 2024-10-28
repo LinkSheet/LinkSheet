@@ -10,7 +10,7 @@ import androidx.core.content.getSystemService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.getAppOpenByDefaultIntent
 
 class PretendToBeAppSettingsViewModel(

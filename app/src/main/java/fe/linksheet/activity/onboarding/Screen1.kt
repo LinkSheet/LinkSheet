@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 
 @Composable
 fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {

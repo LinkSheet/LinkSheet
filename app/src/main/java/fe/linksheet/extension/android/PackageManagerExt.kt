@@ -8,7 +8,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import fe.linksheet.BuildConfig
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 
 fun PackageManager.queryFirstIntentActivityByPackageNameOrNull(packageName: String): ResolveInfo? {
     val intent = Intent().setPackage(packageName)

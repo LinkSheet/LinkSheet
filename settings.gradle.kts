@@ -45,7 +45,10 @@ fun substitute(directory: Any, dependency: String, substitutes: Map<String, Stri
 }
 
 @OptIn(ExperimentalTypeInference::class)
-fun Any?.trySubstitute(dependency: String, @BuilderInference builderAction: MutableMap<String, String>.() -> Unit = {}) {
+fun Any?.trySubstitute(
+    dependency: String,
+    @BuilderInference builderAction: MutableMap<String, String>.() -> Unit = {},
+) {
     this?.let { substitute(this, dependency, buildMap(builderAction)) }
 }
 
@@ -60,33 +63,36 @@ include(":bottom-sheet")
 
 val isCI = hasEnv("CI")
 val isJitPack = hasEnv("JITPACK")
-val dev = false
 
-val substitutes = file("local.properties")
-if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
+val localProperties = file("local.properties")
+val devProperties: Properties? = if (localProperties.exists()) {
+    Properties().apply {
+        localProperties.reader().use { load(it) }
+    }
+} else null
+
+val isDev = (devProperties?.get("dev")?.toString()?.toBooleanStrictOrNull() == true)
+
+if (devProperties != null && isDev && (!isCI && !isJitPack)) {
     include(":benchmark")
 
-    val properties = Properties().apply {
-        file("local.properties").reader().use { load(it) }
-    }
-
-    properties["kotlin-ext.dir"]?.trySubstitute("com.gitlab.grrfe.kotlin-ext") {
+    devProperties["kotlin-ext.dir"]?.trySubstitute("com.gitlab.grrfe.kotlin-ext") {
         this["core"] = "core"
         this["io"] = "io"
         this["java-time"] = "java-time"
         this["result"] = "result"
     }
 
-    properties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe:gson-ext") {
+    devProperties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe:gson-ext") {
         this["core"] = "core"
     }
 
-    properties["android-lifecycle-util.dir"]?.trySubstitute("com.github.1fexd.android-lifecycle-util") {
+    devProperties["android-lifecycle-util.dir"]?.trySubstitute("com.github.1fexd.android-lifecycle-util") {
         this["core"] = "core"
         this["koin"] = "koin"
     }
 
-    properties["composekit.dir"]?.trySubstitute("com.github.1fexd.composekit") {
+    devProperties["composekit.dir"]?.trySubstitute("com.github.1fexd.composekit") {
         this["app-core"] = "app-core"
         this["theme-core"] = "theme-core"
         this["theme-preference"] = "theme-preference"
@@ -95,26 +101,26 @@ if (dev && (substitutes.exists() && !isCI && !isJitPack)) {
         this["layout"] = "layout"
     }
 
-    properties["android-pref-helper.dir"]?.trySubstitute("com.github.1fexd.android-pref-helper") {
+    devProperties["android-pref-helper.dir"]?.trySubstitute("com.github.1fexd.android-pref-helper") {
         this["core"] = "core"
         this["compose"] = "compose"
     }
 
-    properties["libredirect.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
+    devProperties["libredirect.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
         this[":"] = "lib"
     }
 
-    properties["tld-lib.dir"]?.trySubstitute("com.github.1fexd:tld-lib") {
+    devProperties["tld-lib.dir"]?.trySubstitute("com.github.1fexd:tld-lib") {
         this[":"] = "lib"
     }
 
-    properties["uriparser.dir"]?.trySubstitute("com.github.1fexd:uriparser")
-    properties["signify.dir"]?.trySubstitute("com.github.1fexd:signifykt")
+    devProperties["uriparser.dir"]?.trySubstitute("com.github.1fexd:uriparser")
+    devProperties["signify.dir"]?.trySubstitute("com.github.1fexd:signifykt")
 
-    properties["embed-resolve.dir"]?.trySubstitute("com.github.1fexd:embed-resolve") {
+    devProperties["embed-resolve.dir"]?.trySubstitute("com.github.1fexd:embed-resolve") {
         this[":"] = "core"
     }
 
-    properties["clearurl.dir"]?.trySubstitute("com.github.1fexd:clearurlkt")
+    devProperties["clearurl.dir"]?.trySubstitute("com.github.1fexd:clearurlkt")
 }
 

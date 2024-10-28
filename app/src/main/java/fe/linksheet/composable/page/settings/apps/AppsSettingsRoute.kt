@@ -20,7 +20,7 @@ import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.module.viewmodel.FeatureFlagViewModel
 import fe.linksheet.preferredAppsSettingsRoute
 import fe.linksheet.pretendToBeAppRoute
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 

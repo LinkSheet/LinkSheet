@@ -12,7 +12,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 
 class BottomSheetSettingsViewModel(
     val context: Application,

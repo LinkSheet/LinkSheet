@@ -5,15 +5,16 @@ import android.content.Intent
 import android.content.pm.*
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.graphics.drawable.Drawable
+import android.os.Build
 import androidx.core.content.getSystemService
 import fe.linksheet.extension.android.toPackageKeyedMap
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.ResolveInfoFlags
 
 
 fun AndroidPackageInfoService(context: Context): PackageInfoService {
     val packageManager = context.packageManager
-    val domainVerificationManager = AndroidVersion.atLeastApi31S {
+    val domainVerificationManager = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
         context.getSystemService<DomainVerificationManager>()
     }
 
@@ -24,7 +25,7 @@ fun AndroidPackageInfoService(context: Context): PackageInfoService {
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
         getInstalledPackages = packageManager::getInstalledPackagesCompat,
         getDomainVerificationUserState = { applicationInfo ->
-            AndroidVersion.atLeastApi31S {
+            AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
                 domainVerificationManager!!.getDomainVerificationUserState(applicationInfo.packageName)?.let { state ->
                     VerificationState(state.hostToStateMap, state.isLinkHandlingAllowed)
                 }
@@ -50,17 +51,21 @@ class PackageInfoService(
         val label = loadLabel(resolveInfo)
         if (label.isNotEmpty()) return label.toString()
 
-        return findApplicationLabel(resolveInfo.activityInfo.applicationInfo)
+        return findApplicationLabel(resolveInfo.activityInfo.applicationInfo) ?: resolveInfo.resolvePackageName
     }
 
-    fun findApplicationLabel(applicationInfo: ApplicationInfo): String {
+    fun findApplicationLabel(applicationInfo: ApplicationInfo?): String? {
+        if (applicationInfo == null) return null
+
         val appLabel = getApplicationLabel(applicationInfo)
         if (appLabel.isNotEmpty()) return appLabel.toString()
 
         return applicationInfo.packageName
     }
 
-    fun getVerificationState(applicationInfo: ApplicationInfo): VerificationState? {
+    fun getVerificationState(applicationInfo: ApplicationInfo?): VerificationState? {
+        if (applicationInfo == null) return null
+
         val state = getDomainVerificationUserState(applicationInfo)
         if (state?.hostToStateMap?.isEmpty() == true) return null
 

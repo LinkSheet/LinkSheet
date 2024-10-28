@@ -35,10 +35,10 @@ class InAppBrowserSettingsViewModel(
     val searchFilter = _searchFilter.asStateFlow()
 
     private val installedPackages = flowOfLazy {
-        context.packageManager.getInstalledPackagesCompat().filter { it.applicationInfo.isUserApp() }.map {
+        context.packageManager.getInstalledPackagesCompat().filter { it.applicationInfo?.isUserApp() == true }.map {
             SelectableApp(
-                applicationInfo = it.applicationInfo,
-                label = it.applicationInfo.loadLabel(context.packageManager).toString()
+                applicationInfo = it.applicationInfo!!,
+                label = it.applicationInfo!!.loadLabel(context.packageManager).toString()
             )
         }
     }

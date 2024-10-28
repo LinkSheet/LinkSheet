@@ -42,7 +42,7 @@ import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -45,7 +45,7 @@ import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 
 @Composable
 fun MainNavHost(

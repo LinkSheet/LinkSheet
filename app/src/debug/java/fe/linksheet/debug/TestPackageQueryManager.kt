@@ -13,7 +13,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import org.koin.core.component.KoinComponent
 
 
@@ -93,7 +93,7 @@ object TestPackageQueryManager : KoinComponent {
         val activities = packageManager.getPackageInfo(
             activityInfo.packageName,
             PackageManager.MATCH_ALL or PackageManager.GET_ACTIVITIES or PackageManager.GET_RESOLVED_FILTER or PackageManager.MATCH_DISABLED_COMPONENTS
-        ).activities.filter { it.exported }
+        ).activities?.filter { it.exported } ?: emptyList()
 
         val resolved = packageManager.resolveActivity(
             Intent(viewIntent).addCategory(Intent.CATEGORY_DEFAULT)

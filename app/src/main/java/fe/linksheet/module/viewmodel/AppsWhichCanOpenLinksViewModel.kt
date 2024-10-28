@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
+import fe.android.compose.version.AndroidVersion
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.R
 import fe.linksheet.composable.AppListItemData
@@ -60,7 +61,7 @@ class AppsWhichCanOpenLinksViewModel(
             VerifiedDomainUtil.getStatus(
                 domainVerificationManager!!,
                 it.applicationInfo,
-                it.applicationInfo.loadLabel(context.packageManager)
+                it.applicationInfo?.loadLabel(context.packageManager)
             )
         }
     }

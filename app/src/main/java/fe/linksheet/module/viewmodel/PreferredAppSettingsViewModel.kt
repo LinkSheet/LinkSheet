@@ -19,7 +19,7 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.VerifiedDomainUtil.canHandleDomains
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

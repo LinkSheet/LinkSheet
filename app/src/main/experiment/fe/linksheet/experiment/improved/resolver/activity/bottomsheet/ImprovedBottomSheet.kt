@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -53,7 +54,7 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ReferrerHelper
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.coroutineScope
@@ -239,10 +240,10 @@ class ImprovedBottomSheet(
 
             UrlBar(
                 uri = uriString,
-                profiles = AndroidVersion.atLeastApi30R {
+                profiles = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
                     profileSwitcher.getProfiles()
                 },
-                switchProfile = AndroidVersion.atLeastApi30R {
+                switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
                     {
                         profileSwitcher.switchTo(it, result.uri, activity)
                         activity.finish()

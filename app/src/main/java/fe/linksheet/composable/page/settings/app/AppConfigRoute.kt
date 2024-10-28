@@ -68,14 +68,17 @@ fun AppConfigRoute(
     val interaction = LocalHapticFeedbackInteraction.current
 
     val host = "amazon.de"
-    val app = context.packageManager.getInstalledPackagesCompat().first { it.applicationInfo.isUserApp() }
+    val app = context.packageManager.getInstalledPackagesCompat()
+        .first { it.applicationInfo?.isUserApp() == true }
+    val applicationInfo = app.applicationInfo!!
+
 
     val list = remember {
         mutableStateListOf(
             AppItem(
-                label = app.applicationInfo.loadLabel(context.packageManager),
-                packageName = app.applicationInfo.packageName,
-                icon = app.applicationInfo.loadIcon(context.packageManager).toImageBitmap(),
+                label = applicationInfo.loadLabel(context.packageManager),
+                packageName = applicationInfo.packageName,
+                icon = applicationInfo.loadIcon(context.packageManager).toImageBitmap(),
             ),
             PreferredBrowserItem,
             BrowsersItem,

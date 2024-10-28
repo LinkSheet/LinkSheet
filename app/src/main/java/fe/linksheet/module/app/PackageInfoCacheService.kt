@@ -26,20 +26,26 @@ class PackageInfoCacheService(
             return packageInfoService.findBestLabel(resolveInfo)
         }
 
-        return packageInfoService.findApplicationLabel(installedApp.applicationInfo)
+        return packageInfoService.findApplicationLabel(installedApp.applicationInfo) ?: installedApp.packageName
     }
 
     private fun createInstalledApp(packageInfo: PackageInfo, sizeDp: Int = 64): InstalledApp {
         val label = getBestLabel(packageInfo)
-        val drawable = packageInfoService.getApplicationIcon(packageInfo.applicationInfo)
+        val applicationInfo = packageInfo.applicationInfo
+        if(applicationInfo != null){
+            val drawable = packageInfoService.getApplicationIcon(applicationInfo)
 
-        val size = Math.round(density() * sizeDp)
+            val size = Math.round(density() * sizeDp)
 
-        val bitmap = ImageFactory.convertToBitmap(drawable, size, size)
-        val iconHash = ImageFactory.hash(bitmap)
-        val iconBlob = ImageFactory.compress(bitmap)
+            val bitmap = ImageFactory.convertToBitmap(drawable, size, size)
+            val iconHash = ImageFactory.hash(bitmap)
+            val iconBlob = ImageFactory.compress(bitmap)
 
-        return InstalledApp(packageInfo.packageName, label, packageInfo.applicationInfo.flags, iconHash, iconBlob)
+            return InstalledApp(packageInfo.packageName, label, applicationInfo.flags, iconHash, iconBlob)
+        }
+
+
+        return InstalledApp(packageInfo.packageName, label, 0, 0, null)
     }
 
     private fun createDomainVerificationStates(packageInfo: PackageInfo): List<AppDomainVerificationState> {

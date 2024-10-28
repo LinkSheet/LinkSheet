@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -52,7 +53,7 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
@@ -248,10 +249,10 @@ class BottomSheetActivityImpl(
 
             UrlBar(
                 uri = uriString,
-                profiles = AndroidVersion.atLeastApi30R {
+                profiles = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
                     profileSwitcher.getProfiles()
                 },
-                switchProfile = AndroidVersion.atLeastApi30R {
+                switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
                     {
                         profileSwitcher.switchTo(it, result.uri, activity)
                         activity.finish()

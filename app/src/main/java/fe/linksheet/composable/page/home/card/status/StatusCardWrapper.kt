@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import fe.android.compose.system.rememberSystemService
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 
 @Composable
 fun StatusCardWrapper(

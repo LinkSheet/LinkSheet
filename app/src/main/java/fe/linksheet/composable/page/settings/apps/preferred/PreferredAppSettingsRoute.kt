@@ -29,7 +29,7 @@ import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 

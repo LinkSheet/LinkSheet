@@ -5,7 +5,7 @@ import android.os.UserHandle
 import android.util.Log
 import androidx.annotation.Keep
 import dev.zwander.shared.IShizukuService
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 import fe.processlauncher.launchProcess
 import kotlin.system.exitProcess
 

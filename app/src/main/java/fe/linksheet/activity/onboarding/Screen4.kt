@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.apps.link.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.util.AndroidVersion
+import fe.android.compose.version.AndroidVersion
 
 @Composable
 fun Screen4(onBackClick: () -> Unit, onNextClick: () -> Unit) {

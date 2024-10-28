@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 13,
-    "identityHash": "c1eddee36cd766c36abf9a2f783fb564",
+    "version": 14,
+    "identityHash": "777e2ac0d63c4df27b3bff0c72bd6aaa",
     "entities": [
       {
         "tableName": "openwith",
@@ -321,7 +321,7 @@
       },
       {
         "tableName": "installed_app",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`packageName` TEXT NOT NULL, `label` TEXT, `iconHash` INTEGER NOT NULL, `icon` BLOB, PRIMARY KEY(`packageName`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`packageName` TEXT NOT NULL, `label` TEXT, `flags` INTEGER NOT NULL DEFAULT 0, `iconHash` INTEGER NOT NULL, `icon` BLOB, PRIMARY KEY(`packageName`))",
         "fields": [
           {
             "fieldPath": "packageName",
@@ -333,6 +333,13 @@
             "fieldPath": "label",
             "columnName": "label",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "flags",
+            "columnName": "flags",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
           },
           {
             "fieldPath": "iconHash",
@@ -387,7 +394,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c1eddee36cd766c36abf9a2f783fb564')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '777e2ac0d63c4df27b3bff0c72bd6aaa')"
     ]
   }
 }

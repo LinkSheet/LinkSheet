@@ -1,5 +1,6 @@
 package fe.linksheet.module.database.entity.app
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,7 +9,8 @@ import androidx.room.PrimaryKey
 class InstalledApp(
     @PrimaryKey val packageName: String,
     val label: String? = null,
-    val flags: Int,
+    @ColumnInfo(defaultValue = "0")
+    val flags: Int = 0,
     val iconHash: Int,
     val icon: ByteArray? = null,
 )

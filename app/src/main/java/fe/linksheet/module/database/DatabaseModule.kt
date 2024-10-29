@@ -1,32 +1,32 @@
 package fe.linksheet.module.database
 
+//import fe.linksheet.module.database.dao.app.AppDomainVerificationStateDao
+//import fe.linksheet.module.database.dao.app.InstalledAppDao
 import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.database.dao.*
-import fe.linksheet.module.database.dao.app.AppDomainVerificationStateDao
-import fe.linksheet.module.database.dao.app.InstalledAppDao
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
 import fe.linksheet.module.database.entity.*
-import fe.linksheet.module.database.entity.app.AppDomainVerificationState
-import fe.linksheet.module.database.entity.app.InstalledApp
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
-import fe.linksheet.module.database.migrations.Migration13to15
-import fe.linksheet.module.database.migrations.Migration14to15
+import fe.linksheet.module.database.migrations.Migration12to17
 import fe.linksheet.module.database.migrations.Migration1to2
+import fe.linksheet.module.log.Logger
 import org.koin.dsl.module
 
 val databaseModule = module {
     single<LinkSheetDatabase> {
-        LinkSheetDatabase.create(get(), "linksheet")
+        LinkSheetDatabase.create(get(), createLogger<LinkSheetDatabase>(), "linksheet")
     }
 }
 
@@ -35,9 +35,9 @@ val databaseModule = module {
         PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
-        InstalledApp::class, AppDomainVerificationState::class,
+//        InstalledApp::class, AppDomainVerificationState::class,
     ],
-    version = 16,
+    version = 17,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -48,9 +48,7 @@ val databaseModule = module {
         AutoMigration(from = 8, to = 9),
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
-        AutoMigration(from = 11, to = 12),
-        AutoMigration(from = 12, to = 13),
-        AutoMigration(from = 15, to = 16),
+        AutoMigration(from = 11, to = 12)
     ],
     exportSchema = true
 )
@@ -64,16 +62,20 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
-    abstract fun installedAppDao(): InstalledAppDao
-    abstract fun appDomainVerificationStateDao(): AppDomainVerificationStateDao
+//    abstract fun installedAppDao(): InstalledAppDao
+//    abstract fun appDomainVerificationStateDao(): AppDomainVerificationStateDao
 
     companion object {
-        private val migrations = arrayOf(Migration1to2, Migration13to15, Migration14to15)
+        private fun buildMigrations(logger: Logger): Array<Migration> {
+            return arrayOf(
+                Migration1to2, *Migration12to17(logger).create()
+            )
+        }
 
-        fun create(context: Context, name: String): LinkSheetDatabase {
+        fun create(context: Context, logger: Logger, name: String): LinkSheetDatabase {
             return Room
                 .databaseBuilder(context, LinkSheetDatabase::class.java, name)
-                .addMigrations(*migrations)
+                .addMigrations(*buildMigrations(logger))
                 .build()
         }
     }

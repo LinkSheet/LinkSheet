@@ -2,28 +2,30 @@ package fe.linksheet.module.database.migrations
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import fe.linksheet.module.log.Logger
 import fe.std.result.tryCatch
+import org.koin.core.context.startKoin
 
-object Migration13to15 : Migration(13, 15) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        tryCatch {
-            db.execSQL("ALTER TABLE installed_app DROP COLUMN flags")
+class Migration12to17(private val logger: Logger) {
+    companion object {
+        private const val START = 12
+        private const val END = 17
+    }
+
+    fun create(): Array<Migration> {
+        return Array(END - START) { idx ->
+            createMigration(START + idx)
         }
+    }
 
-        tryCatch {
-            db.execSQL("ALTER TABLE installed_app ADD COLUMN flags INTEGER DEFAULT 0 NOT NULL")
+    private fun createMigration(start: Int): Migration {
+        return Migration(start, start + 1) { db ->
+            logger.info("Running migration from $start to ${start + 1}")
+
+            runCatching { db.execSQL("DROP TABLE IF EXISTS installed_app") }.onFailure { logger.error(it) }
+            runCatching { db.execSQL("DROP TABLE IF EXISTS app_domain_verification_state") }.onFailure { logger.error(it) }
         }
     }
 }
 
-object Migration14to15 : Migration(14, 15) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        tryCatch {
-            db.execSQL("ALTER TABLE installed_app DROP COLUMN flags")
-        }
 
-        tryCatch {
-            db.execSQL("ALTER TABLE installed_app ADD COLUMN flags INTEGER DEFAULT 0 NOT NULL")
-        }
-    }
-}

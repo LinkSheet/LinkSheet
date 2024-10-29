@@ -19,7 +19,8 @@ import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
-import fe.linksheet.module.database.migrations.Migration13to16
+import fe.linksheet.module.database.migrations.Migration13to15
+import fe.linksheet.module.database.migrations.Migration14to15
 import fe.linksheet.module.database.migrations.Migration1to2
 import org.koin.dsl.module
 
@@ -67,7 +68,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun appDomainVerificationStateDao(): AppDomainVerificationStateDao
 
     companion object {
-        private val migrations = arrayOf(Migration1to2, Migration13to16)
+        private val migrations = arrayOf(Migration1to2, Migration13to15, Migration14to15)
 
         fun create(context: Context, name: String): LinkSheetDatabase {
             return Room

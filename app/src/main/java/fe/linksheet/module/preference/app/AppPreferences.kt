@@ -146,6 +146,9 @@ object AppPreferences : PreferenceDefinition(
 
     val bottomSheetProfileSwitcher = boolean("bottom_sheet_profile_switcher")
 
+    // TODO: This should be moved to a proper implementation which uses a string set or something similar, but we don't have an API for that (yet)
+    val lastVersions = string("last_versions_v0")
+
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->
             if (!repository.hasStoredValue(themeV2)) {

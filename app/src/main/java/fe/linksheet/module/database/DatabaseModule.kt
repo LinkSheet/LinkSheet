@@ -59,8 +59,6 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
-//    abstract fun installedAppDao(): InstalledAppDao
-//    abstract fun appDomainVerificationStateDao(): AppDomainVerificationStateDao
 
     companion object {
         private fun buildMigrations(logger: Logger): Array<Migration> {

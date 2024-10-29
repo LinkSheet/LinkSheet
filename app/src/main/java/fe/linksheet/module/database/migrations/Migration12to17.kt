@@ -1,10 +1,7 @@
 package fe.linksheet.module.database.migrations
 
 import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import fe.linksheet.module.log.Logger
-import fe.std.result.tryCatch
-import org.koin.core.context.startKoin
 
 class Migration12to17(private val logger: Logger) {
     companion object {

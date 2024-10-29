@@ -24,14 +24,6 @@ fun DebugMenu() {
     val activity = LocalActivity.current
 
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-        item(key = "installed_app_cache") {
-            FilledTonalActivityLauncher(
-                activity = activity,
-                text = "Installed app cache",
-                intent = createIntent(activity, InstalledAppCacheServiceTestActivity::class)
-            )
-        }
-
         item(key = "onboarding") {
             FilledTonalActivityLauncher(
                 activity = activity,

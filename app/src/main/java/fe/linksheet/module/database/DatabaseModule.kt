@@ -1,7 +1,5 @@
 package fe.linksheet.module.database
 
-//import fe.linksheet.module.database.dao.app.AppDomainVerificationStateDao
-//import fe.linksheet.module.database.dao.app.InstalledAppDao
 import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
@@ -35,7 +33,6 @@ val databaseModule = module {
         PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
-//        InstalledApp::class, AppDomainVerificationState::class,
     ],
     version = 17,
     autoMigrations = [

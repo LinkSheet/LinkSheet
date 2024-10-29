@@ -95,9 +95,7 @@ android {
         buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
         buildStringConfigField("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
         buildConfigField(
-            "boolean",
-            "ANALYTICS_SUPPORTED",
-            localProperties.getOrSystemEnvOrDef("ANALYTICS_SUPPORTED", "true")
+            "boolean", "ANALYTICS_SUPPORTED", localProperties.getOrSystemEnvOrDef("ANALYTICS_SUPPORTED", "true")
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -209,6 +207,9 @@ android {
         aidl = true
         buildConfig = true
     }
+
+    val androidTest by sourceSets
+    androidTest.assets.srcDir("$projectDir/schemas")
 
 //    val p = this@android.packaging
 //    val r = p.resources
@@ -349,7 +350,13 @@ dependencies {
     implementation(KotlinX.serialization.json)
 
 
-    debugImplementation(Square.leakCanary.android)
+    androidTestImplementation(platform(AndroidX.compose.bom))
+    androidTestImplementation(AndroidX.test.core)
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.ext.junit)
+    androidTestImplementation(AndroidX.room.testing)
 
     testImplementation(Grrfe.std.result.assert)
     testImplementation(Koin.test)
@@ -359,13 +366,8 @@ dependencies {
     testImplementation(Testing.robolectric)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation(kotlin("test"))
-//    androidTestImplementation(AndroidX.test.core)
-//    androidTestImplementation(AndroidX.test.runner)
-//    androidTestImplementation(AndroidX.test.espresso.core)
-//    androidTestImplementation(AndroidX.test.rules)
-//    androidTestImplementation(AndroidX.test.ext.junit)
-//    androidTestImplementation(platform(AndroidX.compose.bom))
 
+    debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)
     debugImplementation(AndroidX.compose.ui.testManifest)
 }

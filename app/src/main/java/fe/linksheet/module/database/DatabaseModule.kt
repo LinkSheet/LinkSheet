@@ -1,5 +1,6 @@
 package fe.linksheet.module.database
 
+import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
@@ -24,8 +25,7 @@ import org.koin.dsl.module
 
 val databaseModule = module {
     single<LinkSheetDatabase> {
-        Room.databaseBuilder(get(), LinkSheetDatabase::class.java, "linksheet")
-            .addMigrations(Migration1to2, Migration13to16).build()
+        LinkSheetDatabase.create(get(), "linksheet")
     }
 }
 
@@ -65,4 +65,15 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
     abstract fun installedAppDao(): InstalledAppDao
     abstract fun appDomainVerificationStateDao(): AppDomainVerificationStateDao
+
+    companion object {
+        private val migrations = arrayOf(Migration1to2, Migration13to16)
+
+        fun create(context: Context, name: String): LinkSheetDatabase {
+            return Room
+                .databaseBuilder(context, LinkSheetDatabase::class.java, name)
+                .addMigrations(*migrations)
+                .build()
+        }
+    }
 }

@@ -4,11 +4,14 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import fe.std.result.tryCatch
 
-object Migration13to16 : Migration(13, 16) {
-    override fun migrate(db: SupportSQLiteDatabase): Unit = db.run {
+object Migration13to16 : Migration(13, 15) {
+    override fun migrate(db: SupportSQLiteDatabase) {
         tryCatch {
-            execSQL("ALTER TABLE installed_app DROP COLUMN flags")
-            execSQL("ALTER TABLE installed_app ADD COLUMN flags INTEGER DEFAULT 0 NOT NULL")
+            db.execSQL("ALTER TABLE installed_app DROP COLUMN flags")
+        }
+
+        tryCatch {
+            db.execSQL("ALTER TABLE installed_app ADD COLUMN flags INTEGER DEFAULT 0 NOT NULL")
         }
     }
 }

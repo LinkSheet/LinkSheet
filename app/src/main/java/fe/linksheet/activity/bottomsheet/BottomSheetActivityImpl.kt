@@ -180,7 +180,6 @@ class BottomSheetActivityImpl(
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
                 result = result as BottomSheetResult.SuccessResult,
-                declutterUrl = viewModel.declutterUrl(),
                 enableSwitchProfile = viewModel.switchProfile(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
@@ -220,7 +219,6 @@ class BottomSheetActivityImpl(
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: BottomSheetResult.SuccessResult,
-        declutterUrl: Boolean,
         enableSwitchProfile: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
@@ -232,9 +230,7 @@ class BottomSheetActivityImpl(
     ) {
         if (previewUrl && result.uri != null) {
             val uriSuccess = result as? BottomSheetResult.BottomSheetSuccessResult
-            val uriString = if (declutterUrl) {
-                UriUtil.declutter(result.uri)
-            } else result.uri.toString()
+            val uriString = result.uri.toString()
 
             val crossProfileApps = rememberSystemService<CrossProfileApps>()
 

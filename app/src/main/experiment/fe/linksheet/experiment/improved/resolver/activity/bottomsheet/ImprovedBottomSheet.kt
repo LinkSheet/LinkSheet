@@ -200,7 +200,6 @@ class ImprovedBottomSheet(
                         BottomSheetApps(
                             bottomSheetViewModel = viewModel,
                             result = status as IntentResolveResult.Default,
-                            declutterUrl = viewModel.declutterUrl(),
                             enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
                             enableSwitchProfile = viewModel.switchProfile(),
                             isExpanded = drawerState.currentValue == SheetValue.Expanded,
@@ -234,7 +233,6 @@ class ImprovedBottomSheet(
         // TODO: Refactor this away
         bottomSheetViewModel: BottomSheetViewModel,
         result: IntentResolveResult.Default,
-        declutterUrl: Boolean,
         enableIgnoreLibRedirectButton: Boolean,
         enableSwitchProfile: Boolean,
         isExpanded: Boolean,
@@ -246,10 +244,7 @@ class ImprovedBottomSheet(
         urlCardDoubleTap: Boolean,
     ) {
         if (previewUrl && result.uri != null) {
-            val uriString = if (declutterUrl) {
-                UriUtil.declutter(result.uri)
-            } else result.uri.toString()
-
+            val uriString = result.uri.toString()
             val crossProfileApps = rememberSystemService<CrossProfileApps>()
 
             val appLabel = stringResource(id = R.string.app_name)

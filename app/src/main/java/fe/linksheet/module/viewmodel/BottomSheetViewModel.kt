@@ -106,7 +106,6 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
-    val declutterUrl = experimentRepository.asState(Experiments.declutterUrl)
     val switchProfile = featureFlagRepository.asState(FeatureFlags.switchProfile)
     val improvedIntentResolver = experimentRepository.asState(Experiments.improvedIntentResolver)
 

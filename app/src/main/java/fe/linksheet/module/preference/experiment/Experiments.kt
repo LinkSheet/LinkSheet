@@ -17,7 +17,6 @@ object Experiments : PreferenceDefinition(
 
     val urlPreview = boolean("experiment_url_bar_preview")
     val urlPreviewSkipBrowser = boolean("experiment_url_bar_preview_skip_browser")
-    val declutterUrl = boolean("experiment_url_bar_declutter_url")
 
     val improvedIntentResolver = boolean("experiment_improved_intent_resolver", true)
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
@@ -47,7 +46,6 @@ object Experiments : PreferenceDefinition(
             ExperimentGroup("enhanced_url_bar", "Enhanced url bar").apply {
                 addPreference(ExperimentPreference("Open Graph preview", urlPreview))
                 addPreference(ExperimentPreference("Disable preview if referrer is browser", urlPreviewSkipBrowser))
-                addPreference(ExperimentPreference("Declutter url", declutterUrl))
             },
 
             ExperimentGroup("improved_bottom_sheet", "Improved bottom sheet").apply {

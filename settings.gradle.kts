@@ -92,6 +92,12 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["koin"] = "koin"
     }
 
+    devProperties["android-pref-helper.dir"]?.trySubstitute("com.github.1fexd.android-pref-helper") {
+        this["core"] = "core"
+        this["compose"] = "compose"
+        this["mock"] = "compose-mock"
+    }
+
     devProperties["composekit.dir"]?.trySubstitute("com.github.1fexd.composekit") {
         this["app-core"] = "app-core"
         this["theme-core"] = "theme-core"

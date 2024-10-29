@@ -1,8 +1,6 @@
 package fe.linksheet.composable.page.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
@@ -98,6 +96,8 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
                 if (!LinkSheetAppConfig.showDonationBanner()) {
                     Text(text = stringResource(id = R.string.thanks_for_donating))
+                } else if (!BuildType.current.allowDebug) {
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 

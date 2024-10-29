@@ -9,7 +9,7 @@ import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.IOException
+
 
 @RunWith(AndroidJUnit4::class)
 class MigrationTest {
@@ -21,10 +21,8 @@ class MigrationTest {
         LinkSheetDatabase::class.java
     )
 
-    @Test
-    @Throws(IOException::class)
-    fun migrateAll() {
-        helper.createDatabase(testDb, 2).apply {
+    private fun runTest(version: Int) {
+        helper.createDatabase(testDb, version).apply {
             close()
         }
 
@@ -35,4 +33,35 @@ class MigrationTest {
             openHelper.writableDatabase.close()
         }
     }
+
+    @Test
+    fun testMigrateFull() {
+        runTest(2)
+    }
+
+    @Test
+    fun testMigrate12to17() {
+        runTest(12)
+    }
+
+    @Test
+    fun testMigrate13to17() {
+        runTest(13)
+    }
+
+    @Test
+    fun testMigrate14to17() {
+        runTest(14)
+    }
+
+    @Test
+    fun testMigrate15to17() {
+        runTest(15)
+    }
+
+    @Test
+    fun testMigrate16to17() {
+        runTest(16)
+    }
+
 }

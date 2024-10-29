@@ -50,7 +50,7 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
         // Refresh must be delayed to until after the editor has been closed
         return mappedPreferences.mapNotNull { (preference) ->
             // Forces refresh by reading new value from the preference file; In the future, maybe this should be updating
-            // newValue to the RepositoryState instance directly, but that would required converting the
+            // newValue to the RepositoryState instance directly, but that would require converting the
             // string value to the appropriate state type
             stateCache.get(preference.key)?.forceRefresh()
 

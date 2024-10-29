@@ -57,7 +57,7 @@ class LastVersionService(
 ) {
     fun handleVersions(lastVersions: String?): String? {
         val lastVersionArray = runCatching { parseLastVersions(lastVersions) }.getOrDefault(JsonArray())
-        val lastVersionCodes = runCatching {  parseVersionCodes(lastVersionArray) }.getOrDefault(emptySet())
+        val lastVersionCodes = runCatching { parseVersionCodes(lastVersionArray) }.getOrDefault(emptySet())
 
         if (!lastVersionCodes.contains(buildInfo.versionCode)) {
             lastVersionArray.add(gson.toJsonTree(buildInfo))

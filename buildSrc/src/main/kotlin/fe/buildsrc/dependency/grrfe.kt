@@ -31,6 +31,8 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
             val core = DependencyNotation(group = group, name = "result-core")
             val assert = DependencyNotation(group = group, name = "result-assert")
         }
+
+        val uri = DependencyNotation(group = group, name = "uri")
     }
 
     val processLauncher = DependencyNotation(group = group, name = "process-launcher")

@@ -7,6 +7,7 @@ import androidx.annotation.Keep
 import dev.zwander.shared.IShizukuService
 import fe.android.compose.version.AndroidVersion
 import fe.processlauncher.launchProcess
+
 import kotlin.system.exitProcess
 
 class ShizukuService : IShizukuService.Stub {
@@ -41,15 +42,35 @@ class ShizukuService : IShizukuService.Stub {
             "--user",
             userId,
             "--package", packageName, "true",
-        ) { line -> Log.d("ShizukuService", line) }
+//            receiver = object : ProcessHook.LineReceiver.All {
+//                override fun handle(handler: ProcessHandler, line: String) {
+//                    Log.d("ShizukuService", line)
+//                }
+//
+//            }
+        ).waitFor()
 
-        val resetAppLinkResult = launchProcess("pm", "reset-app-links", "--user", userId, packageName) { line ->
-            Log.d("ShizukuService", line)
-        }
+        val resetAppLinkResult = launchProcess(
+            "pm",
+            "reset-app-links",
+            "--user",
+            userId,
+            packageName,
+//            receiver = object : ProcessHook.LineReceiver.All {
+//                override fun handle(handler: ProcessHandler, line: String) {
+//                    Log.d("ShizukuService", line)
+//                }
+//            }
+        ).waitFor()
 
         val verifyAppLinksResult = launchProcess(
-            "pm", "verify-app-links", "--re-verify", packageName
-        ) { line -> Log.d("ShizukuService", line) }
+            "pm", "verify-app-links", "--re-verify", packageName,
+//            receiver = object : ProcessHook.LineReceiver.All {
+//                override fun handle(handler: ProcessHandler, line: String) {
+//                    Log.d("ShizukuService", line)
+//                }
+//            }
+        ).waitFor()
     }
 
     private fun getUserId(): String {

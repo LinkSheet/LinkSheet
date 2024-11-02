@@ -82,9 +82,10 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["java-time"] = "java-time"
         this["result-core"] = "result:result-core"
         this["result-assert"] = "result:result-assert"
+        this["uri"] = "uri"
     }
 
-    devProperties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe:gson-ext") {
+    devProperties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe.gson-ext") {
         this["core"] = "core"
     }
 
@@ -113,21 +114,15 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["compose"] = "compose"
     }
 
-    devProperties["libredirect.dir"]?.trySubstitute("com.github.1fexd:libredirectkt") {
-        this[":"] = "lib"
-    }
+    devProperties["libredirect.dir"]?.trySubstitute("com.github.1fexd:libredirectkt")
 
-    devProperties["tld-lib.dir"]?.trySubstitute("com.github.1fexd:tld-lib") {
-        this[":"] = "lib"
-    }
-
-    devProperties["uriparser.dir"]?.trySubstitute("com.github.1fexd:uriparser")
-    devProperties["signify.dir"]?.trySubstitute("com.github.1fexd:signifykt")
+    devProperties["tld-lib.dir"]?.trySubstitute("com.github.1fexd:tld-lib")
 
     devProperties["embed-resolve.dir"]?.trySubstitute("com.github.1fexd:embed-resolve") {
         this[":"] = "core"
     }
 
     devProperties["clearurl.dir"]?.trySubstitute("com.github.1fexd:clearurlkt")
+    devProperties["process-launcher.dir"]?.trySubstitute("com.gitlab.grrfe:process-launcher")
 }
 

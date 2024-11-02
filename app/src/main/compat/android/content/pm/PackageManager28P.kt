@@ -12,3 +12,5 @@ fun PackageManager.getSignature(packageName: String): Signature? {
     else info.signatures?.firstOrNull()
 }
 
+// TODO: Use hasSigningCertificate on P+
+//pm.hasSigningCertificate(packageName, certificate, PackageManager.CERT_INPUT_SHA256)

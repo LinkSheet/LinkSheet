@@ -6,8 +6,7 @@ import android.util.Log
 import androidx.annotation.Keep
 import dev.zwander.shared.IShizukuService
 import fe.android.compose.version.AndroidVersion
-import fe.processlauncher.launchProcess
-
+import fe.std.javaprocess.launchProcess
 import kotlin.system.exitProcess
 
 class ShizukuService : IShizukuService.Stub {
@@ -26,7 +25,7 @@ class ShizukuService : IShizukuService.Stub {
                     "--user", userId,
                     "--package", packageName,
                     enabled.toString()
-                ).waitFor()
+                )
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
@@ -42,13 +41,9 @@ class ShizukuService : IShizukuService.Stub {
             "--user",
             userId,
             "--package", packageName, "true",
-//            receiver = object : ProcessHook.LineReceiver.All {
-//                override fun handle(handler: ProcessHandler, line: String) {
-//                    Log.d("ShizukuService", line)
-//                }
-//
-//            }
-        ).waitFor()
+        ) { line ->
+            Log.d("ShizukuService", line)
+        }
 
         val resetAppLinkResult = launchProcess(
             "pm",
@@ -56,21 +51,15 @@ class ShizukuService : IShizukuService.Stub {
             "--user",
             userId,
             packageName,
-//            receiver = object : ProcessHook.LineReceiver.All {
-//                override fun handle(handler: ProcessHandler, line: String) {
-//                    Log.d("ShizukuService", line)
-//                }
-//            }
-        ).waitFor()
+        ) { line ->
+            Log.d("ShizukuService", line)
+        }
 
         val verifyAppLinksResult = launchProcess(
             "pm", "verify-app-links", "--re-verify", packageName,
-//            receiver = object : ProcessHook.LineReceiver.All {
-//                override fun handle(handler: ProcessHandler, line: String) {
-//                    Log.d("ShizukuService", line)
-//                }
-//            }
-        ).waitFor()
+        ) { line ->
+            Log.d("ShizukuService", line)
+        }
     }
 
     private fun getUserId(): String {

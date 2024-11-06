@@ -294,14 +294,17 @@ dependencies {
     implementation(JetBrains.ktor.client.android)
     implementation(JetBrains.ktor.client.mock)
 
+    implementation(platform(Grrfe.std.bom))
+    implementation(Grrfe.std.core)
+    implementation(Grrfe.std.javaTime)
+    implementation(Grrfe.std.javaProcess)
+    implementation(Grrfe.std.result.core)
+    implementation(Grrfe.std.uri)
+
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.gson)
     implementation(Grrfe.ext.gson)
-    implementation(Grrfe.std.core)
-    implementation(Grrfe.std.javaTime)
-    implementation(Grrfe.std.result.core)
-//    implementation(Grrfe.std.uri)
-    implementation(Grrfe.processLauncher)
+
     implementation(_1fexd.uriParser)
     implementation(_1fexd.clearUrl)
     implementation(_1fexd.signify)
@@ -318,6 +321,8 @@ dependencies {
     implementation(_1fexd.android.span.compose)
     implementation(_1fexd.android.lifecycleUtil.core)
     implementation(_1fexd.android.lifecycleUtil.koin)
+
+    implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.app.core)
     implementation(_1fexd.composeKit.theme.core)
     implementation(_1fexd.composeKit.theme.preference)

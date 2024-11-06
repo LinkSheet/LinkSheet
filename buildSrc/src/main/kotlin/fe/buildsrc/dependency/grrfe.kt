@@ -22,8 +22,11 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
     val std = Std
 
     object Std : DependencyNotationAndGroup(group = "$group.kotlin-ext", name = "kotlin-ext") {
+        val bom = module("platform", isBom = true)
+
         val core = module("core")
         val javaTime = module("java-time")
+        val javaProcess = module("java-process")
 
         val result = Result
 

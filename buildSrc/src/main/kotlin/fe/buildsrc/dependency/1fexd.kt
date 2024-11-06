@@ -52,6 +52,8 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
         group = "$group.composekit",
         name = "composekit"
     ) {
+        val bom = module("platform", isBom = true)
+
         val app = App
 
         object App : IsNotADependency {

@@ -13,17 +13,17 @@ data class BuildInfo(
     @SerializedName("version_code") val versionCode: Int,
     @SerializedName("built_at") val builtAt: String,
     @SerializedName("flavor") val flavor: String,
-    @SerializedName("workflow_id") val workflowId: String? = null
+    @SerializedName("workflow_id") val workflowId: String? = null,
 )
 
 @Keep
 data class DeviceInfo(
     @SerializedName("android_version") val androidVersion: String,
     val manufacturer: String,
-    val model: String
+    val model: String,
 )
 
-object AppInfo {
+object LinkSheetInfo {
     val buildInfo = BuildInfo(
         BuildConfig.VERSION_NAME,
         BuildConfig.VERSION_CODE,

@@ -11,7 +11,7 @@ import fe.linksheet.extension.koin.service
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.util.AppInfo
+import fe.linksheet.util.LinkSheetInfo
 import fe.linksheet.util.BuildInfo
 import org.koin.dsl.module
 
@@ -25,7 +25,7 @@ val statisticsModule = module {
 
 class StatisticsService(val preferenceRepository: AppPreferenceRepository, val gson: Gson) : LifecycleAwareService {
     private val lastVersionsService by lazy {
-        LastVersionService(gson, AppInfo.buildInfo)
+        LastVersionService(gson, LinkSheetInfo.buildInfo)
     }
 
     private val start = System.currentTimeMillis()
@@ -51,6 +51,7 @@ class StatisticsService(val preferenceRepository: AppPreferenceRepository, val g
     }
 }
 
+// TODO: Find a better way to do this
 class LastVersionService(
     private val gson: Gson,
     private val buildInfo: BuildInfo,

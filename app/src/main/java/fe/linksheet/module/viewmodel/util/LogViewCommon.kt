@@ -14,7 +14,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.util.AppInfo
+import fe.linksheet.util.LinkSheetInfo
 import kotlinx.parcelize.Parcelize
 
 
@@ -54,8 +54,8 @@ class LogViewCommon(
         val (fingerprint, preferences, redact, throwable) = settings
 
         return gson.toJson(jsonObject {
-            "build_info" += AppInfo.buildInfo
-            "device_info" += AppInfo.deviceInfo
+            "build_info" += LinkSheetInfo.buildInfo
+            "device_info" += LinkSheetInfo.deviceInfo
 
             "locale" += context.getCurrentLanguageTag()
 

@@ -33,7 +33,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.util.AppInfo
+import fe.linksheet.util.LinkSheetInfo
 import fe.linksheet.util.AppSignature
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
@@ -147,16 +147,16 @@ fun NewAboutSettingsRoute(
             DefaultTwoLineIconClickableShapeListItem(
                 headlineContent = textContent(R.string.version),
                 supportingContent = buildAnnotatedTextContent {
-                    appendBuildInfo(R.string.built_at, AppInfo.buildInfo.builtAt)
-                    appendBuildInfo(R.string.version_name, AppInfo.buildInfo.versionName)
+                    appendBuildInfo(R.string.built_at, LinkSheetInfo.buildInfo.builtAt)
+                    appendBuildInfo(R.string.version_name, LinkSheetInfo.buildInfo.versionName)
                     appendBuildInfo(
                         R.string.flavor,
-                        AppInfo.buildInfo.flavor,
-                        AppInfo.buildInfo.workflowId != null
+                        LinkSheetInfo.buildInfo.flavor,
+                        LinkSheetInfo.buildInfo.workflowId != null
                     )
 
-                    if (AppInfo.buildInfo.workflowId != null) {
-                        appendBuildInfo(id = R.string.github_workflow_run_id, AppInfo.buildInfo.workflowId, false)
+                    if (LinkSheetInfo.buildInfo.workflowId != null) {
+                        appendBuildInfo(id = R.string.github_workflow_run_id, LinkSheetInfo.buildInfo.workflowId, false)
                     }
                 },
                 icon = Icons.Outlined.Build.iconPainter,

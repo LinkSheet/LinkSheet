@@ -301,6 +301,7 @@ dependencies {
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
 
+    implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.gson)
     implementation(Grrfe.ext.gson)

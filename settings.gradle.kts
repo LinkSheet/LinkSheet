@@ -86,6 +86,12 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["uri"] = "uri"
     }
 
+    devProperties["httpkt.dir"].trySubstitute("com.gitlab.grrfe.httpkt") {
+        this["core"] = "core"
+        this["ext-gson"] = "ext-gson"
+        this["ext-jsoup"] = "ext-jsoup"
+    }
+
     devProperties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe.gson-ext") {
         this["core"] = "core"
     }
@@ -124,6 +130,5 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
     }
 
     devProperties["clearurl.dir"]?.trySubstitute("com.github.1fexd:clearurlkt")
-    devProperties["process-launcher.dir"]?.trySubstitute("com.gitlab.grrfe:process-launcher")
 }
 

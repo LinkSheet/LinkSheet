@@ -9,6 +9,8 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
     val httpkt = HttpKt
 
     object HttpKt : DependencyNotationAndGroup(group = "$group.httpkt", name = "httpkt") {
+        val bom = module("platform", isBom = true)
+
         val core = module("core")
         val gson = module("ext-gson")
     }

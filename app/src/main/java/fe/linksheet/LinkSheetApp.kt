@@ -59,7 +59,7 @@ class LinkSheetApp : Application() {
 
     private val activityLifecycleObserver = ActivityLifecycleObserver()
     private val lifecycleObserver by lazy {
-        AppLifecycleObserver.observe(ProcessLifecycleOwner.get())
+        AppLifecycleObserver(owner = ProcessLifecycleOwner.get())
     }
 
     fun currentActivity(): StateFlow<Activity?> {

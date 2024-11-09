@@ -1,14 +1,15 @@
-import fe.buildsrc.Version
+import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    id("build-logic-plugin")
 }
 
-val group = "fe.linksheet.config"
+group = "fe.linksheet.config"
 
 android {
-    namespace = group
+    namespace = group.toString()
     compileSdk = Version.COMPILE_SDK
 
     defaultConfig {

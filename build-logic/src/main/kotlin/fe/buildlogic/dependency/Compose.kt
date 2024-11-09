@@ -1,4 +1,4 @@
-package fe.buildsrc.dependency
+package fe.buildlogic.dependency
 
 import AndroidX
 import org.gradle.kotlin.dsl.IsNotADependency

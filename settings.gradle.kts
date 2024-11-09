@@ -58,6 +58,8 @@ fun hasEnv(name: String): Boolean {
     return System.getenv(name)?.toBooleanStrictOrNull() == true
 }
 
+includeBuild("build-logic")
+
 
 include(":app", ":config")
 include(":bottom-sheet")

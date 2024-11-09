@@ -1,16 +1,17 @@
-import fe.buildsrc.Version
-import fe.buildsrc.dependency.PinnedVersions
+import fe.buildlogic.dependency.PinnedVersions
+import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
+    kotlin("android")
+    kotlin("plugin.compose")
+    id("build-logic-plugin")
 }
 
-val group = "fe.linksheet.bottom.sheet"
+group = "fe.linksheet.bottom.sheet"
 
 android {
-    namespace = group
+    namespace = group.toString()
     compileSdk = Version.COMPILE_SDK
 
     defaultConfig {

@@ -1,52 +1,34 @@
-import com.android.build.api.dsl.VariantDimension
-import de.fayard.refreshVersions.core.versionFor
-import fe.buildsrc.KotlinClosure4
-import fe.buildsrc.Version
-import fe.buildsrc.dependency.Grrfe
-import fe.buildsrc.dependency.LinkSheet
-import fe.buildsrc.dependency.MozillaComponents
-import fe.buildsrc.dependency._1fexd
-import fe.buildsrc.extension.getOrSystemEnv
-import fe.buildsrc.extension.getOrSystemEnvOrDef
-import fe.buildsrc.extension.readPropertiesOrNull
-import net.nemerosa.versioning.ReleaseInfo
-import net.nemerosa.versioning.SCMInfo
-import net.nemerosa.versioning.VersioningExtension
+import fe.buildlogic.Version
+import fe.buildlogic.dependency.Grrfe
+import fe.buildlogic.dependency.LinkSheet
+import fe.buildlogic.dependency.MozillaComponents
+import fe.buildlogic.dependency._1fexd
+import fe.buildlogic.extension.*
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 plugins {
+    kotlin("android")
+    kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("net.nemerosa.versioning")
     id("com.google.devtools.ksp")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("androidx.navigation.safeargs.kotlin")
+    id("build-logic-plugin")
 }
 
 // Must be defined before the android block, or else it won't work
 versioning {
-    releaseMode = KotlinClosure4<String?, String?, String?, VersioningExtension, String>({ _, _, currentTag, _ ->
-        currentTag
-    })
-
-    releaseParser = KotlinClosure2<SCMInfo, String, ReleaseInfo>({ info, _ -> ReleaseInfo("release", info.tag) })
+    releaseMode = CurrentTagMode.closure
+    releaseParser = TagReleaseParser.closure
 }
 
 var appName = "LinkSheet"
 val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
-
-fun VariantDimension.buildStringConfigField(name: String, value: String? = null) {
-    buildConfigField("String", name, encodeString(value))
-}
-
-fun encodeString(value: String? = null): String {
-    return if (value == null) "null" else "\"${value}\""
-}
 
 android {
     namespace = "fe.linksheet"
@@ -58,20 +40,16 @@ android {
         targetSdk = Version.COMPILE_SDK
 
         val now = System.currentTimeMillis()
+        val provider = AndroidVersionStrategy(now)
+        val versionProvider = versioning.asProvider(project, provider)
+        val (name, code, commit, branch) = versionProvider.get()
+
         val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-        val versionInfo = providers.provider { versioning.computeInfo() }.get()
 
-        versionCode = versionInfo.tag?.let {
-            versionInfo.versionNumber.versionCode
-        } ?: (now / 1000).toInt()
+        versionCode = code
+        versionName = name
 
-        versionName = versionInfo.tag ?: versionInfo.full
-        val archivesBaseName = if (versionInfo.tag != null) {
-            "$appName-$versionName"
-        } else "$appName-${dtf.format(localDateTime)}-$versionName"
-
-        setProperty("archivesBaseName", archivesBaseName)
-
+        setProperty("archivesBaseName", "$appName-${dtf.format(localDateTime)}-$versionName")
 
         val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
         val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()
@@ -79,24 +57,24 @@ android {
         val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
         resourceConfigurations.addAll(supportedLocales)
 
-        buildConfigField("String[]", "SUPPORTED_LOCALES", buildString {
-            append("{").append(supportedLocales.joinToString(",") { encodeString(it) }).append("}")
-        })
+        buildConfig {
+            stringArray("SUPPORTED_LOCALES", supportedLocales)
+            int("DONATION_BANNER_MIN", localProperties.getOrSystemEnv("DONATION_BANNER_MIN")?.toIntOrNull() ?: 20)
 
-        buildConfigField("int", "DONATION_BANNER_MIN", localProperties.getOrSystemEnvOrDef("DONATION_BANNER_MIN", "20"))
+            arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
+                string(it, publicLocalProperties.getOrSystemEnv(it))
+            }
 
-        arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
-            buildStringConfigField(it, publicLocalProperties.getOrSystemEnv(it))
+            long("BUILT_AT", now)
+            string("COMMIT", commit)
+            string("BRANCH", branch)
+            string("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
+            string("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
+            boolean(
+                "ANALYTICS_SUPPORTED",
+                localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() ?: true
+            )
         }
-
-        buildConfigField("long", "BUILT_AT", "$now")
-        buildStringConfigField("COMMIT", versionInfo.commit)
-        buildStringConfigField("BRANCH", versionInfo.branch)
-        buildStringConfigField("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
-        buildStringConfigField("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
-        buildConfigField(
-            "boolean", "ANALYTICS_SUPPORTED", localProperties.getOrSystemEnvOrDef("ANALYTICS_SUPPORTED", "true")
-        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testOptions.unitTests.isIncludeAndroidResources = true

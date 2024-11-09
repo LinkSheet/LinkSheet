@@ -1,4 +1,4 @@
-package fe.buildsrc.extension
+package fe.buildlogic.extension
 
 import java.io.File
 import java.util.*

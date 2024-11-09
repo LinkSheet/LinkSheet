@@ -1,4 +1,4 @@
-package fe.buildsrc
+package fe.buildlogic
 
 object Version {
     const val JVM = 21

@@ -1,4 +1,4 @@
-package fe.buildsrc.dependency
+package fe.buildlogic.dependency
 
 import de.fayard.refreshVersions.core.DependencyGroup
 import de.fayard.refreshVersions.core.DependencyNotation

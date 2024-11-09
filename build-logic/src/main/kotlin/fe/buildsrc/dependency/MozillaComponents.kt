@@ -2,6 +2,7 @@ package fe.buildsrc.dependency
 
 import de.fayard.refreshVersions.core.DependencyGroup
 import de.fayard.refreshVersions.core.DependencyNotation
+import de.fayard.refreshVersions.core.DependencyNotation.Companion.invoke
 import org.gradle.kotlin.dsl.IsNotADependency
 
 object MozillaComponents : DependencyGroup(group = "org.mozilla.components") {

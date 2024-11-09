@@ -1,5 +1,6 @@
 package fe.linksheet.resolver
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
@@ -18,9 +19,11 @@ import fe.linksheet.resolver.util.ResolveInfos.youtube
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
+import org.robolectric.annotation.Config
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 class ImprovedBrowserHandlerTest {
     companion object {
         private val handler = ImprovedBrowserHandler()

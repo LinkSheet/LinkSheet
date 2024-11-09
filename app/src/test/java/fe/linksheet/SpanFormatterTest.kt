@@ -1,5 +1,6 @@
 package fe.linksheet
 
+import android.os.Build
 import android.text.Html
 import android.text.SpannableStringBuilder
 import androidx.core.text.bold
@@ -10,13 +11,12 @@ import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
-import org.koin.mp.KoinPlatformTools
-import org.koin.test.AutoCloseKoinTest
-import org.koin.test.ClosingKoinTest
+import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 class SpanFormatterTest {
 
     private fun compareHtml(

@@ -1,5 +1,6 @@
 package fe.linksheet
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
@@ -15,10 +16,12 @@ import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 class DownloaderTest : KoinTest {
     @get:Rule
     val koinTestRule = KoinTestRuleFix.create {

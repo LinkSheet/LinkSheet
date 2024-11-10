@@ -3,6 +3,7 @@ package fe.linksheet
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.os.StrictMode
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.material.color.DynamicColors
@@ -68,6 +69,14 @@ class LinkSheetApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (BuildType.current.allowDebug) {
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .build()
+            )
+        }
+
         registerActivityLifecycleCallbacks(activityLifecycleObserver)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->

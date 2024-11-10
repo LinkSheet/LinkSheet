@@ -57,3 +57,8 @@ sealed class TelemetryLevel(@StringRes val titleId: Int, @StringRes val descript
         }
     }
 }
+
+
+fun TelemetryLevel?.canSendEvent(event: AnalyticsEvent): Boolean {
+    return this?.canSendEvent(event) == true
+}

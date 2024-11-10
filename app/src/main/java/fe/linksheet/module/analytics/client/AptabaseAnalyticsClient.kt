@@ -35,7 +35,7 @@ val aptabaseAnalyticsClientModule = module {
     }
 }
 
-class AptabaseAnalyticsClient(
+internal class AptabaseAnalyticsClient(
     private val identityData: TelemetryIdentityData,
     logger: Logger,
     private val apiKey: String?,

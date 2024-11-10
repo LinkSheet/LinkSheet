@@ -8,7 +8,7 @@ import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.log.Logger
 import org.koin.dsl.module
 
-class DebugLogAnalyticsClient(
+internal class DebugLogAnalyticsClient(
     logger: Logger,
 ) : AnalyticsClient(logger) {
     companion object {

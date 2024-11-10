@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
@@ -31,7 +32,7 @@ import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsEvent
-import fe.linksheet.module.analytics.AnalyticsService
+import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -42,7 +43,6 @@ import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -55,7 +55,7 @@ class MainViewModel(
     val experimentRepository: ExperimentRepository,
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
-    val analyticsService: AnalyticsService,
+    private val analyticsService: BaseAnalyticsService,
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
@@ -109,7 +109,7 @@ class MainViewModel(
     fun updateTelemetryLevel(level: TelemetryLevel) {
         telemetryLevel(level)
         telemetryShowInfoDialog(false)
-        analyticsService.startWith(level)
+        analyticsService.changeLevel(level)
     }
 
     fun formatUseTime(): Pair<Int?, Int?>? {

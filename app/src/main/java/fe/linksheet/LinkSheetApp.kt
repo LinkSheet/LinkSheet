@@ -123,8 +123,8 @@ class LinkSheetApp : Application() {
                 okHttpModule,
                 unfurlerModule,
                 downloaderModule,
-                analyticsServiceModule,
                 if (BuildType.current.allowDebug) aptabaseAnalyticsClientModule else DebugLogAnalyticsClient.module,
+                analyticsServiceModule,
                 statisticsModule,
                 VersionTrackerModule(),
                 pasteServiceModule
@@ -132,20 +132,5 @@ class LinkSheetApp : Application() {
         }
 
         lifecycleObserver.onAppInitialized()
-
-        if (BuildType.current.allowDebug) {
-            // TODO: Remove once user is given the choice to opt in/out
-            val analyticsClient = koinApplication.koin.get<AnalyticsService>()
-            val preferenceRepository = koinApplication.koin.get<AppPreferenceRepository>()
-
-            val lastVersion = preferenceRepository.get(AppPreferences.lastVersion)
-            analyticsClient.enqueue(createAppStartEvent(lastVersion))
-        }
-    }
-
-    private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {
-        return if (lastVersion == -1) AppStart.FirstRun
-        else if (BuildConfig.VERSION_CODE > lastVersion) AppStart.Updated(lastVersion)
-        else AppStart.Default
     }
 }

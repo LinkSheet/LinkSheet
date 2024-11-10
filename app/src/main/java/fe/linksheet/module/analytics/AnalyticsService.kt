@@ -1,7 +1,6 @@
 package fe.linksheet.module.analytics
 
 import androidx.lifecycle.LifecycleCoroutineScope
-import fe.android.lifecycle.LifecycleAwareService
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.log.Logger
@@ -13,7 +12,7 @@ import org.koin.dsl.module
 
 @OptIn(SensitivePreference::class)
 val analyticsServiceModule = module {
-    service<AnalyticsService, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
+    service<BaseAnalyticsService, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
         val client = scope.get<AnalyticsClient>()
 
         val level = preferences.get(AppPreferences.telemetryLevel)
@@ -30,17 +29,17 @@ val analyticsServiceModule = module {
     }
 }
 
-class AnalyticsService(
+internal class AnalyticsService(
     private val analyticsSupported: Boolean,
     client: AnalyticsClient,
     coroutineScope: LifecycleCoroutineScope,
     initialLevel: TelemetryLevel? = null,
     networkState: NetworkStateService,
     val logger: Logger,
-) : LifecycleAwareService {
+) : BaseAnalyticsService {
     private val eventQueue = BatchedEventQueue(client, coroutineScope, logger, initialLevel, networkState)
 
-    fun startWith(newLevel: TelemetryLevel?) {
+    override fun changeLevel(newLevel: TelemetryLevel?) {
         eventQueue.startWith(newLevel)
     }
 
@@ -53,7 +52,7 @@ class AnalyticsService(
         eventQueue.stop()
     }
 
-    fun enqueue(event: AnalyticsEvent?): Boolean {
+    override fun enqueue(event: AnalyticsEvent?): Boolean {
         if (!analyticsSupported) return false
         return eventQueue.enqueue(event)
     }

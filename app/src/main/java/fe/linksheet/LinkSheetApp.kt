@@ -14,9 +14,6 @@ import fe.gson.globalGsonModule
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.lifecycle.ActivityLifecycleObserver
-import fe.linksheet.module.analytics.AnalyticsEvent
-import fe.linksheet.module.analytics.AnalyticsService
-import fe.linksheet.module.analytics.AppStart
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
@@ -30,8 +27,6 @@ import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.okhttp.okHttpModule
 import fe.linksheet.module.paste.pasteServiceModule
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
@@ -44,6 +39,7 @@ import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestM
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.unfurler.unfurlerModule
+import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.HttpUrlTypeAdapter
@@ -130,6 +126,7 @@ class LinkSheetApp : Application() {
                 analyticsServiceModule,
                 if (BuildType.current.allowDebug) aptabaseAnalyticsClientModule else DebugLogAnalyticsClient.module,
                 statisticsModule,
+                VersionTrackerModule(),
                 pasteServiceModule
             )
         }

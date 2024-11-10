@@ -33,12 +33,12 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
-    val activity = LocalActivity.current
+    val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
 
     val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
-    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
+    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
     var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
     var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
@@ -67,7 +67,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         defaultBrowserEnabled = Results.loading()
         defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
 
-        shizukuInstalled = ShizukuUtil.isShizukuInstalled(activity)
+        shizukuInstalled = ShizukuUtil.isShizukuInstalled(context)
         shizukuRunning = ShizukuUtil.isShizukuRunning()
     }
 
@@ -124,6 +124,8 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 key = R.string.settings_main_setup_success__title_linksheet_setup_success,
                 contentType = ContentType.ClickableAlert
             ) {
+                val activity = LocalActivity.current
+
                 StatusCardWrapper(
                     isDefaultBrowser = defaultBrowserEnabled.isSuccess,
                     launchIntent = { viewModel.launchIntent(activity, it) },

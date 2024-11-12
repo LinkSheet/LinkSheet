@@ -1,30 +1,31 @@
 package fe.linksheet.module.redactor
 
+import fe.hc.core5.TextUtils
 import fe.kotlin.extension.asString
 import fe.kotlin.extension.iterator.forEachWithInfo
 import fe.linksheet.extension.kotlin.appendHashed
 import fe.linksheet.extension.kotlin.appendHashedTrim
-import fe.uribuilder.UriParseResult
-import fe.uribuilder.UriParser
-import org.apache.hc.core5.net.InetAddressUtils
-import org.apache.hc.core5.net.PercentCodec
-import org.apache.hc.core5.util.TextUtils
+import fe.relocated.org.apache.hc.core5.core5.net.InetAddressUtils
+import fe.relocated.org.apache.hc.core5.core5.net.PercentCodec
+import fe.std.uri.ParserFailure
+import fe.std.uri.Url
 import javax.crypto.Mac
 
 fun buildHashedUriString(uriString: String, mac: Mac): String {
-    var result = UriParser.parseUri(uriString)
-    if (result is UriParseResult.ParserFailure) {
-        return "Something went very wrong. Parsing this url failed: ${result.exception.asString()}"
+    var url = Url(uriString)
+
+    if (url is ParserFailure) {
+        return "Something went very wrong. Parsing this url failed: ${url.exception.asString()}"
     }
 
-    val uri = result as UriParseResult.ParsedUri
+    val uri = url as Url
     return buildString {
         if (uri.scheme != null) {
             append(uri.scheme).append(":")
         }
 
         if (uri.encodedSchemeSpecificPart != null) {
-            result = UriParser.parseUri(uri.encodedSchemeSpecificPart!!)
+            url = Url(uri.encodedSchemeSpecificPart!!)
         }
 
         if (uri.encodedFragment != null) {
@@ -40,34 +41,34 @@ fun buildHashedUriString(uriString: String, mac: Mac): String {
     }
 }
 
-private fun StringBuilder.parse(uri: UriParseResult.ParsedUri, mac: Mac) {
-    val authoritySpecified: Boolean = if (uri.encodedAuthority != null) {
+private fun StringBuilder.parse(url: Url, mac: Mac) {
+    val authoritySpecified: Boolean = if (url.encodedAuthority != null) {
         append("//")
-        uri.encodedAuthority!!.split(".").forEachWithInfo { element, _, _, last ->
+        url.encodedAuthority!!.split(".").forEachWithInfo { element, _, _, last ->
             appendHashedTrim(mac, 6, element)
             if (!last) append(".")
         }
         true
-    } else if (uri.host != null) {
+    } else if (url.host != null) {
         append("//")
-        if (uri.encodedUserInfo != null) {
-            appendHashed(mac, uri.encodedUserInfo).append("@")
-        } else if (uri.userInfo != null) {
-            val idx = uri.userInfo!!.indexOf(':')
+        if (url.encodedUserInfo != null) {
+            appendHashed(mac, url.encodedUserInfo).append("@")
+        } else if (url.userInfo != null) {
+            val idx = url.userInfo!!.indexOf(':')
             if (idx != -1) {
                 appendHashedTrim(mac, 6, buildString {
                     PercentCodec.encode(
                         this,
-                        uri.userInfo!!.substring(0, idx),
-                        uri.charset
+                        url.userInfo!!.substring(0, idx),
+                        url.charset
                     )
                 })
                 append(':')
                 appendHashedTrim(mac, 6, buildString {
                     PercentCodec.encode(
                         this,
-                        uri.userInfo!!.substring(idx + 1),
-                        uri.charset
+                        url.userInfo!!.substring(idx + 1),
+                        url.charset
                     )
                 })
             } else {
@@ -75,51 +76,49 @@ private fun StringBuilder.parse(uri: UriParseResult.ParsedUri, mac: Mac) {
                     buildString {
                         PercentCodec.encode(
                             this,
-                            uri.userInfo,
-                            uri.charset
+                            url.userInfo,
+                            url.charset
                         )
                     })
             }
             append("@")
         }
 
-        if (InetAddressUtils.isIPv6Address(uri.host)) {
-            append("[").appendHashedTrim(mac, 6, uri.host).append("]")
+        if (InetAddressUtils.isIPv6(url.host)) {
+            append("[").appendHashedTrim(mac, 6, url.host).append("]")
         } else {
-            appendHashed(mac, PercentCodec.encode(uri.host, uri.charset))
+            appendHashed(mac, PercentCodec.encode(url.host, url.charset))
         }
-        if (uri.port >= 0) {
-            append(":").appendHashedTrim(mac, 6, uri.port.toString())
+        if (url.port >= 0) {
+            append(":").appendHashedTrim(mac, 6, url.port.toString())
         }
 
         true
     } else false
 
-    if (uri.encodedPath != null) {
-        if (authoritySpecified && !TextUtils.isEmpty(uri.encodedPath) && !uri.encodedPath!!.startsWith(
+    if (url.encodedPath != null) {
+        if (authoritySpecified && !TextUtils.isEmpty(url.encodedPath!!) && !url.encodedPath!!.startsWith(
                 "/"
             )
         ) {
             append("/")
         }
 
-        uri.encodedPath!!.split("/").forEach {
+        url.encodedPath!!.split("/").forEach {
             appendHashedTrim(mac, 6, it).append("/")
         }
-    } else if (uri.pathSegments.isNotEmpty()) {
-        uri.pathSegments.forEach {
+    } else if (url.pathSegments.isNotEmpty()) {
+        url.pathSegments.forEach {
             appendHashedTrim(mac, 6, it).append("/")
         }
     }
 
-    if (uri.encodedQuery != null) {
-        append("?").appendHashed(mac, uri.encodedQuery)
-    } else if (uri.queryParams.isNotEmpty()) {
+    if (url.encodedQuery != null) {
+        append("?").appendHashed(mac, url.encodedQuery)
+    } else if (url.queryParams.isNotEmpty()) {
         append("?")
 
-        val query = buildString {
-            uri.formatQuery(this, uri.queryParams, uri.charset)
-        }
+        val query = url.formattedQuery
 
         query.split("&").forEach {
             appendHashed(mac, it).append("&")

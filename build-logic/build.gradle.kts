@@ -18,8 +18,8 @@ kotlin {
 }
 
 dependencies {
-    implementation("net.nemerosa.versioning:net.nemerosa.versioning.gradle.plugin:3.1.0")
-    implementation("de.fayard.refreshVersions:refreshVersions:0.60.5")
+    compileOnly("net.nemerosa.versioning:net.nemerosa.versioning.gradle.plugin:3.1.0")
+    compileOnly("de.fayard.refreshVersions:refreshVersions:0.60.5")
     compileOnly("com.android.tools.build:gradle-api:8.4.2")
 //    implementation("com.android.tools.build:gradle-api:8.4.0")
 }

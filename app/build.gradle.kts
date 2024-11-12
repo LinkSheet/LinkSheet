@@ -284,7 +284,6 @@ dependencies {
     implementation(Grrfe.httpkt.gson)
     implementation(Grrfe.ext.gson)
 
-    implementation(_1fexd.uriParser)
     implementation(_1fexd.clearUrl)
     implementation(_1fexd.signify)
     implementation(_1fexd.fastForward)

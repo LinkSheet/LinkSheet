@@ -18,7 +18,9 @@ import fe.linksheet.util.LinkSheetInfo
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-fun VersionTrackerModule(): Module = module {
+val VersionTrackerModule = VersionTrackerModule()
+
+private fun VersionTrackerModule(): Module = module {
     includes(globalGsonModule, preferenceRepositoryModule)
 
     service<VersionTracker, BaseAnalyticsService, AppPreferenceRepository> { _, analyticsService, preferences ->
@@ -28,7 +30,7 @@ fun VersionTrackerModule(): Module = module {
     }
 }
 
-class VersionTracker(
+private class VersionTracker(
     private val analyticsService: BaseAnalyticsService,
     val preferenceRepository: AppPreferenceRepository,
     val gson: Gson,

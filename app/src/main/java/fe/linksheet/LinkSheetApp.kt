@@ -126,7 +126,7 @@ class LinkSheetApp : Application() {
                 if (BuildType.current.allowDebug) aptabaseAnalyticsClientModule else DebugLogAnalyticsClient.module,
                 analyticsServiceModule,
                 statisticsModule,
-                VersionTrackerModule(),
+                VersionTrackerModule,
                 pasteServiceModule
             )
         }

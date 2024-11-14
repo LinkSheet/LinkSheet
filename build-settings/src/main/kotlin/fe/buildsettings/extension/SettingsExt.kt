@@ -17,7 +17,7 @@ fun Settings.substitute(directory: Any, dependency: String, substitutes: Map<Str
 }
 
 @OptIn(ExperimentalTypeInference::class)
-fun Settings.trySubstitute(
+fun Settings.trySubstituteDir(
     dir: Any?,
     dependency: String,
     @BuilderInference builderAction: MutableMap<String, String>.() -> Unit = {},

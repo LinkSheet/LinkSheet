@@ -2,7 +2,6 @@ plugins {
     kotlin("jvm")
     java
     `java-gradle-plugin`
-
 }
 
 repositories {
@@ -18,15 +17,15 @@ kotlin {
 }
 
 dependencies {
-    compileOnly("net.nemerosa.versioning:net.nemerosa.versioning.gradle.plugin:_")
-    compileOnly("de.fayard.refreshVersions:refreshVersions:_")
-    compileOnly("com.android.tools.build:gradle-api:_")
+//    compileOnly("net.nemerosa.versioning:net.nemerosa.versioning.gradle.plugin:_")
+//    compileOnly("de.fayard.refreshVersions:refreshVersions:_")
+//    compileOnly("com.android.tools.build:gradle-api:_")
 //    implementation("com.android.tools.build:gradle-api:_")
 }
 
 gradlePlugin {
-    plugins.register("build-logic-plugin") {
-        id = "build-logic-plugin"
-        implementationClass = "fe.buildlogic.BuildLogicPlugin"
+    plugins.register("build-settings-plugin") {
+        id = "build-settings-plugin"
+        implementationClass = "fe.buildsettings.BuildSettingsPlugin"
     }
 }

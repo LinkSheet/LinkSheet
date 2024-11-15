@@ -6,7 +6,7 @@ import java.util.*
 import kotlin.experimental.ExperimentalTypeInference
 
 
-fun Settings.substitute(directory: Any, dependency: String, substitutes: Map<String, String>) {
+fun Settings.substitute(directory: String, dependency: String, substitutes: Map<String, String>) {
     includeBuild(directory) { build ->
         build.dependencySubstitution {
             for ((artifact, project) in substitutes) {
@@ -17,12 +17,12 @@ fun Settings.substitute(directory: Any, dependency: String, substitutes: Map<Str
 }
 
 @OptIn(ExperimentalTypeInference::class)
-fun Settings.trySubstituteDir(
+fun Settings.trySubstitute(
     dir: Any?,
     dependency: String,
     @BuilderInference builderAction: MutableMap<String, String>.() -> Unit = {},
 ) {
-    dir?.let { substitute(this, dependency, buildMap(builderAction)) }
+    dir?.let { substitute(it.toString(), dependency, buildMap(builderAction)) }
 }
 
 

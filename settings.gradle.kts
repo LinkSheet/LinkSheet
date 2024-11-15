@@ -50,7 +50,7 @@ val isDev = (devProperties?.get("dev")?.toString()?.toBooleanStrictOrNull() == t
 if (devProperties != null && isDev && (!isCI && !isJitPack)) {
     include(":benchmark")
 
-    trySubstituteDir(devProperties["kotlin-ext.dir"], "com.gitlab.grrfe.kotlin-ext") {
+    trySubstitute(devProperties["kotlin-ext.dir"], "com.gitlab.grrfe.kotlin-ext") {
         this["core"] = "core"
         this["io"] = "io"
         this["java-time"] = "java-time"
@@ -59,28 +59,28 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["uri"] = "uri"
     }
 
-    trySubstituteDir(devProperties["httpkt.dir"], "com.gitlab.grrfe.httpkt") {
+    trySubstitute(devProperties["httpkt.dir"], "com.gitlab.grrfe.httpkt") {
         this["core"] = "core"
         this["ext-gson"] = "ext-gson"
         this["ext-jsoup"] = "ext-jsoup"
     }
 
-    trySubstituteDir(devProperties["gson-ext.dir"], "com.gitlab.grrfe.gson-ext") {
+    trySubstitute(devProperties["gson-ext.dir"], "com.gitlab.grrfe.gson-ext") {
         this["core"] = "core"
     }
 
-    trySubstituteDir(devProperties["android-lifecycle-util.dir"], "com.github.1fexd.android-lifecycle-util") {
+    trySubstitute(devProperties["android-lifecycle-util.dir"], "com.github.1fexd.android-lifecycle-util") {
         this["core"] = "core"
         this["koin"] = "koin"
     }
 
-    trySubstituteDir(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
+    trySubstitute(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
         this["core"] = "core"
         this["compose"] = "compose"
         this["mock"] = "compose-mock"
     }
 
-    trySubstituteDir(devProperties["composekit.dir"], "com.github.1fexd.composekit") {
+    trySubstitute(devProperties["composekit.dir"], "com.github.1fexd.composekit") {
         this["app-core"] = "app-core"
         this["theme-core"] = "theme-core"
         this["theme-preference"] = "theme-preference"
@@ -89,18 +89,18 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["layout"] = "layout"
     }
 
-    trySubstituteDir(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
+    trySubstitute(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
         this["core"] = "core"
         this["compose"] = "compose"
     }
 
-    trySubstituteDir(devProperties["libredirect.dir"], "com.github.1fexd:libredirectkt")
+    trySubstitute(devProperties["libredirect.dir"], "com.github.1fexd:libredirectkt")
 
-    trySubstituteDir(devProperties["tld-lib.dir"], "com.github.1fexd:tld-lib")
-    trySubstituteDir(devProperties["embed-resolve.dir"], "com.github.1fexd:embed-resolve") {
+    trySubstitute(devProperties["tld-lib.dir"], "com.github.1fexd:tld-lib")
+    trySubstitute(devProperties["embed-resolve.dir"], "com.github.1fexd:embed-resolve") {
         this[":"] = "core"
     }
 
-    trySubstituteDir(devProperties["clearurl.dir"], "com.github.1fexd:clearurlkt")
+    trySubstitute(devProperties["clearurl.dir"], "com.github.1fexd:clearurlkt")
 }
 

@@ -10,5 +10,5 @@ object PinnedVersions : IsNotADependency {
     var ComposeUi = AndroidX.compose.ui.withVersion(COMPOSE_VERSION)
     var ComposeFoundation = AndroidX.compose.foundation.withVersion(COMPOSE_VERSION)
 
-    var Material3 = AndroidX.compose.material3.withVersion("1.3.0-beta03")
+    var Material3 = AndroidX.compose.material3.withVersion("1.4.0-alpha04")
 }

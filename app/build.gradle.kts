@@ -2,6 +2,7 @@ import fe.buildlogic.Version
 import fe.buildlogic.dependency.Grrfe
 import fe.buildlogic.dependency.LinkSheet
 import fe.buildlogic.dependency.MozillaComponents
+import fe.buildlogic.dependency.PinnedVersions
 import fe.buildlogic.dependency._1fexd
 import fe.buildlogic.extension.*
 import java.time.Instant
@@ -217,9 +218,9 @@ dependencies {
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
-    implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3)
+    implementation(PinnedVersions.ComposeUi)
+    implementation(PinnedVersions.Material3)
     implementation(AndroidX.compose.foundation)
 
     implementation(AndroidX.compose.material.icons.core)

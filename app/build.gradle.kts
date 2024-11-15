@@ -209,6 +209,7 @@ dependencies {
 //    implementation(project(":components"))
 //    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
+    implementation(project(":scaffold"))
 
     implementation(platform(Square.okHttp3.bom.withVersion("5.0.0-alpha.14")))
     //noinspection UseTomlInstead

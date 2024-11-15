@@ -28,10 +28,6 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-
-// A very sincere fuck you to whoever at Google decided that all of this needs to be hidden away from developers
-// using internal/private modifiers without providing any way to FULLY customize it, you are a horrible person
-
 internal val DefaultTextStyle = TextStyle.Default.copy(
     platformStyle = PlatformTextStyle(
         includeFontPadding = true

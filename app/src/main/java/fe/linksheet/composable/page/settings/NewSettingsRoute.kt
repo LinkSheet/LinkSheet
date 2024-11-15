@@ -133,7 +133,7 @@ fun NewSettingsRoute(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
-        item(key = R.string.enable_libredirect, contentType = ContentType.SingleGroupItem) {
+        item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
             RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
         }
 

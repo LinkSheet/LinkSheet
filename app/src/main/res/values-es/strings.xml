@@ -40,7 +40,7 @@
     <string name="open_link_with_subtitle_2">LinkSheet estaba originalmente basado en OpenLinkWith</string>
     <string name="shizuku_integration_enabled_explainer">¡La integración con Shizuku se ha activado exitosamente!</string>
     <string name="warning">Alerta</string>
-    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si la URL contiene un enlace directo al archivo. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicaciones relacionadas con la privacidad </annotation></string>
+    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si URL contiene enlace directo al archivo. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="logs_explainer">Ver el registro de la aplicación</string>
     <string name="enable_all">Activar todo</string>
     <string name="selected_browser_explainer">Este navegador se abrirá automáticamente si ninguna aplicación nativa puede abrir el enlace seleccionado</string>
@@ -148,11 +148,11 @@
     <string name="open_with_linksheet">Abrir con LinkSheet</string>
     <string name="in_app_browser">Navegador en aplicación</string>
     <string name="links">Enlaces</string>
-    <string name="follow_redirects_explainer">Seguir automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad </annotation></string>
+    <string name="follow_redirects_explainer">Sigue automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="browser_mode">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
-    <string name="fastfoward_rules_explainer">Uso experimental <annotation url="https://github.com/FastForwardTeam/FastForward">Integración de la regla FastForward </annotation> (eludir las redirecciones de algunos hosts extrayendo la redirección del enlace)</string>
+    <string name="fastfoward_rules_explainer">Usar la integración experimental de reglas <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (evita los redireccionamientos de algunos hosts extrayendo el redireccionamiento del enlace)</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>
@@ -181,7 +181,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
-    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su versión web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad </annotation></string>
+    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="disable_in_selected">Forzando la desactivación…</string>
@@ -196,7 +196,7 @@
     <string name="no_browser_installed_explainer">LinkSheet no pudo detectar ninguna una aplicación que afirme ser un navegador. Para obtener la mejor experiencia, instale un navegador.</string>
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
     <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
-    <string name="enable_libredirect_explainer">Redirige los enlaces a frontends respetuosos con la privacidad mediante la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation></string>
+    <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
@@ -506,4 +506,6 @@
     <string name="generic__text_edit">Editar</string>
     <string name="generic__text_done">Hecho</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón en el pie de página para el enlace abierto en el que hizo clic en el perfil (de trabajo)</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Cambio de perfil</string>
+    <string name="settings_profile_switcher__divider_configuration">Configuración</string>
 </resources>

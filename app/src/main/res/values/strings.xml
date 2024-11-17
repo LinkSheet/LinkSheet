@@ -11,11 +11,8 @@
     <string name="set_as_browser">Set as browser</string>
     <string name="set_as_browser_explainer">Tap here to make LinkSheet the default browser</string>
     <string name="apps_which_can_open_links">Verified link handlers</string>
-    <string name="apps_which_can_open_links_explainer">Tap an app to open the \"Open by default\" menu which allows you
-        to disable automatic link opening
-    </string>
-    <string name="apps_which_can_open_links_explainer_2">Lists all apps which may interfere with LinkSheet\'s behavior
-    </string>
+    <string name="apps_which_can_open_links_explainer">Tap an app to open the \"Open by default\" menu which allows you to disable automatic link opening</string>
+    <string name="apps_which_can_open_links_explainer_2">Lists all apps which may interfere with LinkSheet\'s behavior</string>
     <string name="no_preferred_apps_set_yet">No apps have been set as preferred yet.</string>
     <string name="search">Search</string>
     <string name="copy_url">Copy link</string>
@@ -23,28 +20,22 @@
     <string name="confirm">Confirm</string>
     <string name="clear">Clear</string>
     <string name="usage_stats_sorting">Sort apps by usage</string>
-    <string name="usage_stats_sorting_explainer">Include Android system usage stats in sorting algorithm. Permission is
-        requested on first toggle.
-    </string>
+    <string name="usage_stats_sorting_explainer">Include Android system usage stats in sorting algorithm. Permission is requested on first toggle.</string>
     <string name="browser_mode">Browser mode</string>
     <string name="browser_mode_subtitle">Choose browsers to show</string>
     <string name="always_ask">Always ask</string>
     <string name="none">None</string>
-    <string name="none_explainer">Only list native apps, remove all browsers. If only a single native app is present, it
-        will automatically be opened. If no native app is present, all browsers are listed.
-    </string>
+    <string name="none_explainer">Only list native apps, remove all browsers. If only a single native app is present, it will automatically be opened. If no native app is present, all browsers are listed.</string>
     <string name="always_ask_explainer">Always list all browsers</string>
     <string name="no_such_app_found">No such app found!</string>
     <string name="send_to">Share to</string>
     <string name="default_apps_subtitle">Set default apps for hosts</string>
     <string name="always_show_package_name">Always show package name</string>
-    <string name="always_show_package_name_explainer">Always show the package names instead of just app names. This
-        applies to the whole app.
-    </string>
+    <string name="always_show_package_name_explainer">Always show the package names instead of just app names. This applies to the whole app.</string>
     <string name="remove_all">Remove all</string>
     <string name="add_all">Add all</string>
     <string name="hide_after_copying">Auto-hide on action</string>
-    <string name="hide_after_copying_explainer">"Automatically hide bottom sheet when an action button such as \"Copy link\" or \"Download\" is tapped"</string>
+    <string name="hide_after_copying_explainer">Automatically hide bottom sheet when an action button such as \"Copy link\" or \"Download\" is tapped</string>
     <string name="back">Back</string>
     <string name="display_grid_layout">Grid layout</string>
     <string name="display_grid_layout_explainer">Show a grid instead of a list in the bottom sheet</string>
@@ -53,9 +44,7 @@
     <string name="app_browsers">Apps &amp; Browsers</string>
     <string name="bottom_sheet">Bottom sheet</string>
     <string name="settings">Settings</string>
-    <string name="selected_browser_explainer">This browser will automatically be opened if no native app can handle the
-        clicked link
-    </string>
+    <string name="selected_browser_explainer">This browser will automatically be opened if no native app can handle the clicked link</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="open_with_linksheet">Open with LinkSheet</string>
@@ -81,25 +70,21 @@
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirect following</string>
     <string name="use_clear_urls">Use ClearURLs</string>
-    <string name="use_clear_urls_explainer">"Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)"</string>
+    <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
     <string name="follow_redirects">Follow redirects</string>
-    <string name="follow_redirects_explainer">"Automatically follow all redirects before opening bottom sheet. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">privacy-related implications</annotation>"</string>
+    <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">privacy-related implications</annotation></string>
     <string name="loading_link">Processing link…</string>
     <string name="follow_redirects_external_service">Follow redirects via external service</string>
-    <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com
-        (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)
-    </string>
+    <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
     <string name="follow_only_known_trackers">Follow only known trackers</string>
-    <string name="follow_only_known_trackers_explainer">Only attempt to follow redirects when the host is known to be a
-        tracker/redirect. If \"Follow redirects via external service\" is enabled, this will always be enabled.
-    </string>
+    <string name="follow_only_known_trackers_explainer">"Only attempt to follow redirects when the host is known to be a tracker/redirect. If \"Follow redirects via external service\" is enabled, this will always be enabled "</string>
     <string name="theme">Theme</string>
     <string name="theme_explainer">Material You, dark theme, pure black mode</string>
     <string name="system">Follow system</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="fastfoward_rules">Use FastForward rules</string>
-    <string name="fastfoward_rules_explainer">"Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)"</string>
+    <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
     <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
     <string name="resolved_via">%s resolved via %s</string>
@@ -107,7 +92,7 @@
     <string name="redirect_resolve_type_remote">remote server</string>
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">"Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integration"</string>
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integration</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
@@ -116,19 +101,15 @@
     <string name="select_an_app">Select an app</string>
     <string name="close">Close</string>
     <string name="dont_show_filtered_item">Don\'t show \"last picked app\" section</string>
-    <string name="dont_show_filtered_item_explainer">Don\'t show the top section which suggests the last used app
-        for the clicked host
-    </string>
+    <string name="dont_show_filtered_item_explainer">Don\'t show the top section which suggests the last used app for the clicked host</string>
     <string name="preview_url">Preview URL</string>
     <string name="preview_url_explainer">Shows the clicked URL (after it has been processed)</string>
     <string name="download">Download</string>
     <string name="linksheet_download">LinkSheet Download</string>
     <string name="enable_downloader">Enable downloader</string>
-    <string name="enable_downloader_explainer">"Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">privacy-related implications"</annotation></string>
+    <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">privacy-related implications</annotation></string>
     <string name="downloader_url_mime_type">Use mime type from URL</string>
-    <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If
-        it does, this type is used for the downloaded file.
-    </string>
+    <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
     <string name="random_instance">Random instance</string>
     <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">In-App browser</string>
@@ -145,9 +126,7 @@
     <string name="use_unified_preferred_browser">Use unified settings</string>
     <string name="libredirect_via">Via %s</string>
     <string name="enable_ignore_libredirect_button">Enable \"Ignore LibRedirect\" button</string>
-    <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the URL has been
-        redirected via LibRedirect, which opens the original URL instead
-    </string>
+    <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the URL has been redirected via LibRedirect, which opens the original URL instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="debug">Debug</string>
@@ -163,67 +142,49 @@
     <string name="no_log_entries">This session does not contain any logs.</string>
     <string name="download_started">Download started</string>
     <string name="request_timeout">Request timeout</string>
-    <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be
-        established. Setting this to 0 disables the timeout, but this is not recommended.
-    </string>
+    <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
     <string name="resolve_failed">%s failed: %s</string>
     <string name="no_browsers_found">No browsers found.</string>
     <string name="no_apps_found">No apps found.</string>
     <string name="export">Export</string>
     <string name="export_log">Export log</string>
     <string name="enable_request_private_browsing_button">Enable \"Request private browsing\" button</string>
-    <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the
-        clicked URL in private browsing mode. Supported browsers: %s
-    </string>
+    <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the clicked URL in private browsing mode. Supported browsers: %s</string>
     <string name="request_private_browsing">Private</string>
     <string name="log">Log</string>
     <string name="redact_log">Redact log (recommended, disabling this may leak package names and host names)</string>
     <string name="include_settings">Include settings (recommended)</string>
     <string name="include_fingerprint">Include device fingerprint (recommended)</string>
-    <string name="log_privacy">"To learn about log privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>."</string>
+    <string name="log_privacy">To learn about log privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
     <string name="no_logs_found">No past logs found!</string>
     <string name="enable_amp2html">Enable Amp2Html</string>
-    <string name="enable_amp2html_explainer">"Redirects AMP pages to their normal web version. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related implications</annotation>"</string>
+    <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version. This may have<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related implications</annotation></string>
     <string name="amp2html_local_cache">Enable local Amp2Html cache</string>
     <string name="amp2html_local_cache_explainer">Cache the retrieved non-AMP versions of webpages locally</string>
     <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>
-    <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at
-        supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)
-    </string>
+    <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and
-        In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.
-    </string>
+    <string name="use_unified_preferred_browser_explainer">"Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled. "</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
     <string name="advanced_explainer">Feature Flags, Experiments, Import/Export</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer_short">Interact with system APIs directly</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
-    <string name="apps_which_can_open_links_shizuku_explainer">Shizuku mode activated, tap an app to toggle its
-        automatic link handling capabilities. Long tap an app to open its \"Open by default\" settings menu.
-    </string>
+    <string name="apps_which_can_open_links_shizuku_explainer">Shizuku mode activated, tap an app to toggle its automatic link handling capabilities. Long tap an app to open its \"Open by default\" settings menu.</string>
     <string name="enable_all">Enable all</string>
     <string name="disable_all">Disable all</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku integration has been successfully enabled!</string>
-    <string name="shizuku_not_running_explainer">Shizuku is not running. Tap here to open Shizuku, then follow the
-        instructions to start it.
-    </string>
+    <string name="shizuku_not_running_explainer">Shizuku is not running. Tap here to open Shizuku, then follow the instructions to start it.</string>
     <string name="shizuku_integration_no_permission_explainer">Tap here to request Shizuku permission.</string>
-    <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku
-        is recommended. Tap here to install it.
-    </string>
+    <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku is recommended. Tap here to install it.</string>
     <string name="shizuku_integration">Shizuku integration</string>
     <string name="feature_flags">Feature flags</string>
     <string name="feature_flags_explainer">Enable or disable experimental features</string>
     <string name="launch_onboarding">Launch onboarding</string>
     <string name="pretend_to_be_app">Intercept native app requests</string>
-    <string name="pretend_to_be_app_explainer">Pretend to be a native app for supported domains with LinkSheetCompat
-    </string>
-    <string name="pretend_to_be_app_explainer_2">Some apps like Google Chrome explicitly search for a native app to
-        handle, for example, a Youtube link when it is tapped in the search results. LinkSheetCompat pretends to be such
-        a native app for supported hosts and then forwards the request to LinkSheet.
-    </string>
+    <string name="pretend_to_be_app_explainer">Pretend to be a native app for supported domains with LinkSheetCompat</string>
+    <string name="pretend_to_be_app_explainer_2">Some apps like Google Chrome explicitly search for a native app to handle, for example, a Youtube link when it is tapped in the search results. LinkSheetCompat pretends to be such a native app for supported hosts and then forwards the request to LinkSheet.</string>
     <string name="compat_installed">LinkSheetCompat is already installed</string>
     <string name="configure">Configure</string>
     <string name="configure_explainer">Tap here to configure LinkSheetCompat</string>
@@ -234,53 +195,29 @@
     <string name="success">Success</string>
     <string name="warning">Warning</string>
     <string name="at_least_one_known_browser_installed">At least one browser installed</string>
-    <string name="at_least_one_known_browser_installed_explainer">LinkSheet has detected at least one app known to be a
-        browser.
-    </string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet has detected at least one app known to be a browser.</string>
     <string name="at_least_one_unknown_browser_installer">At least one (unknown) browser installed</string>
-    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet has detected at least one app claiming to
-        be a browser. LinkSheet\'s list may not be complete. If you think this is an error, submit an issue on Github.
-    </string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet has detected at least one app claiming to be a browser. LinkSheet\'s list may not be complete. If you think this is an error, submit an issue on Github.</string>
     <string name="no_browser_installed">No browser installed</string>
-    <string name="no_browser_installed_explainer">LinkSheet was unable to detect at least one application claiming to be
-        a browser. For the best experience, install a browser.
-    </string>
+    <string name="no_browser_installed_explainer">LinkSheet was unable to detect at least one application claiming to be a browser. For the best experience, install a browser.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="domain_selection_confirmation_title">Select Domains?</string>
-    <string name="domain_selection_confirmation_subtitle">Are you sure you want to set %s as the preferred application
-        for the following domains?
-    </string>
+    <string name="domain_selection_confirmation_subtitle">Are you sure you want to set %s as the preferred application for the following domains?</string>
     <string name="misc_settings">Miscellaneous</string>
     <string name="donate_card_headline">Donate to support LinkSheet</string>
-    <string name="donate_card_subtitle">If you like LinkSheet, consider leaving a star on Github and/or
-        donating.\nDonators who donate more than <b>5€</b> are eligible for <b>LinkSheet Pro</b>, which will have
-        exclusive features.
-    </string>
+    <string name="donate_card_subtitle">If you like LinkSheet, consider leaving a star on Github and/or donating.\nDonators who donate more than <b>5€</b> are eligible for <b>LinkSheet Pro</b>, which will have exclusive features.</string>
     <string name="open_link_with_subtitle_2">LinkSheet was initially based on OpenLinkWith</string>
-    <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'s source code was used as a reference for Shizuku
-        interaction
-    </string>
+    <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'s source code was used as a reference for Shizuku interaction</string>
     <string name="import_dumped_preference">Import dumped preferences</string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name"><b>Version:</b>\u0020
-        <font face="monospace">%s</font>
-    </string>
-    <string name="built_at"><b>Built at:</b>\u0020
-        <font face="monospace">%s</font>
-    </string>
-    <string name="flavor"><b>Flavor:</b>\u0020
-        <font face="monospace">%s</font>
-    </string>
-    <string name="github_workflow_run_id"><b>Workflow ID:</b>\u0020
-        <font face="monospace">%s</font>
-    </string>
+    <string name="version_name"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="built_at"><b>Built at:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="flavor"><b>Flavor:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>Workflow ID:</b>\u0020<font face="monospace">%s</font></string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
-    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or
-        \"referred\" to it. By default, when LinkSheet launches an app, it hides itself, saying that the app that
-        launched LinkSheet is the launched target. Enable this to reinsert LinkSheet as the referrer for apps it opens.
-    </string>
+    <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" to it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the launched target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
     <string name="privacy_settings_explainer">Referrer privacy, Telemetry</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
     <string name="discord">Discord</string>
@@ -289,31 +226,25 @@
     <string name="join">Join</string>
     <string name="donate_crypto">Donate via crypto</string>
     <string name="donate_card">Donate with card (via BuyMeACoffee)</string>
-    <string name="donate_explainer_crypto">"When donating with crypto, send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>."</string>
+    <string name="donate_explainer_crypto">When donating with crypto, send an email to <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="donate_learn_more">Learn more</string>
     <string name="donate">Donate</string>
-    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet
-        Pro</b>, which includes <b>Pro exclusive features</b> such as: following redirects externally, obtaining non-AMP
-        pages externally and more to come!
-    </string>
+    <string name="linksheet_donation_explainer_2">A donation of more than <b>5€</b> allows you access to <b>LinkSheet Pro</b>, which includes <b>Pro exclusive features</b> such as: following redirects externally, obtaining non-AMP pages externally and more to come!</string>
     <string name="built_by_error">This build was neither signed by 1fexd nor the Github workflow.</string>
     <string name="manual_build">Manually built and signed by 1fexd</string>
     <string name="github_pipeline_build">Built and signed by CI</string>
     <string name="app_setup">App setup</string>
     <string name="other">Other</string>
     <string name="export_import_settings">Export or import settings</string>
-    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export
-    </string>
+    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
     <string name="export_explainer">Export your current app settings to a file</string>
     <string name="import_headline">Import</string>
     <string name="import_explainer">Import a previous export from a file</string>
     <string name="export_settings">Export settings</string>
     <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
     <string name="include_history">Include history (your link click and app history)</string>
-    <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not
-        plan on sharing your export with someone else!
-    </string>
-    <string name="export_privacy">"To learn about export privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>."</string>
+    <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
+    <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
     <string name="export_to_file">Export to file</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
     <string name="import_settings">Import settings</string>
@@ -333,23 +264,15 @@
     <string name="download_started_toast">Download started</string>
     <string name="download_started_toast_explainer">Show a toast when a download has been started</string>
     <string name="opening_with_app_toast">App auto-launched</string>
-    <string name="opening_with_app_toast_explainer">Show a toast when an app that has been set as default for a domain
-        is launched
-    </string>
+    <string name="opening_with_app_toast_explainer">Show a toast when an app that has been set as default for a domain is launched</string>
     <string name="resolve_via_toast">Resolve success</string>
     <string name="resolve_via_toast_explainer">Show a toast when a URL is resolved via an external service</string>
     <string name="resolve_via_failed_toast">Resolve failure</string>
-    <string name="resolve_via_failed_toast_explainer">Show a toast when an URL fails to resolve via an external
-        service
-    </string>
-    <string name="last_updated"><b>Version:</b>\u0020
-        <font face="monospace">%s</font>
-    </string>
+    <string name="resolve_via_failed_toast_explainer">Show a toast when an URL fails to resolve via an external service</string>
+    <string name="last_updated"><b>Version:</b>\u002<font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
-    <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed,
-        is able to intercept requests to certain native apps.
-    </string>
+    <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed, is able to intercept requests to certain native apps.</string>
     <string name="shizuku_manager_start_failed">Failed to start Shizuku Manager, please start it manually!</string>
     <string name="include_throwable">Include crash logs (recommended, but can not be redacted)</string>
     <string name="no_internet_connection">No internet connection</string>
@@ -358,13 +281,9 @@
     <string name="online_services">Online services</string>
     <string name="unknown_host">%s is either blocked or does not exist</string>
     <string name="onboarding_0_title">Welcome to\nLinkSheet</string>
-    <string name="onboarding_0_subtitle">Choose to always get prompted when opening a link, set default browsers, and
-        much more
-    </string>
+    <string name="onboarding_0_subtitle">Choose to always get prompted when opening a link, set default browsers, and much more</string>
     <string name="start_setup">Continue</string>
-    <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following
-        setup will guide you through the multi-step process.
-    </string>
+    <string name="start_setup_explainer">LinkSheet\'s functionality requires custom Android configuration. The following setup will guide you through the multi-step process.</string>
     <string name="onboarding_setup">Set up LinkSheet</string>
     <string name="launch_onboarding_new">Launch new onboarding</string>
     <string name="launch_onboarding__now_explainer">Test the new onboarding flow</string>
@@ -374,22 +293,14 @@
     <string name="onboarding_1_button">Set as default browser</string>
     <string name="onboarding_1_card_explainer">LinkSheet can not function without being the default browser.</string>
     <string name="onboarding_2_title">Do you want to use Shizuku?</string>
-    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may significantly improve your
-        experience
-    </string>
-    <string name="onboarding_2_card_explainer">Shizuku allows LinkSheet to disable the default link handling behavior
-        of all apps at once, instead of having to manually disable them for each app individually (which is the next
-        step).
-    </string>
+    <string name="onboarding_2_subtitle">If you have a lot of apps installed, Shizuku may significantly improve your experience</string>
+    <string name="onboarding_2_card_explainer">Shizuku allows LinkSheet to disable the default link handling behavior of all apps at once, instead of having to manually disable them for each app individually (which is the next step).</string>
     <string name="onboarding_2_request_shizuku_permission">Request permission</string>
     <string name="onboarding_2_install_shizuku">Install Shizuku</string>
     <string name="onboarding_2_skip_button">Skip</string>
     <string name="onboarding_3_subtitle">Link handlers need to be disabled so LinkSheet can intercept them</string>
     <string name="onboarding_3_title">Disable default link handlers</string>
-    <string name="onboarding_3_card_explainer">Google introduced verified app links in Android 12, which allows apps to
-        cryptographically proof ownership of domains. This behavior must be manually disabled for LinkSheet to intercept
-        tapped links.
-    </string>
+    <string name="onboarding_3_card_explainer">Google introduced verified app links in Android 12, which allows apps to cryptographically proof ownership of domains. This behavior must be manually disabled for LinkSheet to intercept tapped links.</string>
     <string name="onboarding_3_card_title">Link handlers</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="onboarding_2_start_shizuku">Start Shizuku</string>
@@ -397,32 +308,23 @@
     <string name="onboarding_3_button">Disable link handlers</string>
     <string name="onboarding_4_button">Next</string>
     <string name="onboarding_4_card_title">Disable link handlers</string>
-    <string name="onboarding_4_card_explainer">Disable link handling for all domains that should be handled by
-        LinkSheet.
-    </string>
+    <string name="onboarding_4_card_explainer">Disable link handling for all domains that should be handled by LinkSheet.</string>
     <string name="onboarding_5_subtitle">LinkSheet has successfully been enabled</string>
     <string name="onboarding_5_title">All set!</string>
     <string name="onboarding_5_card_title">Setup</string>
-    <string name="onboarding_5_card_explainer">Basic configuration required for LinkSheet to function has been done -
-        head to the settings to explore what else it has to offer!
-    </string>
+    <string name="onboarding_5_card_explainer">Basic configuration required for LinkSheet to function has been done - head to the settings to explore what else it has to offer!</string>
     <string name="onboarding_5_button">Finish</string>
     <string name="resolve_embeds">Resolve embeds</string>
     <string name="resolve_embeds_explainer">Resolve embed mirrors like fxtwitter.com to the real host</string>
     <string name="hide_bottom_sheet_choice_buttons">Hide choice buttons</string>
-    <string name="hide_bottom_sheet_choice_buttons_explainer">Hide the \"Once\" and \"Always\" buttons in the
-        bottom sheet
-    </string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Hide the \"Once\" and \"Always\" buttons in the bottom sheet</string>
     <string name="base_config">Additional configuration</string>
     <string name="urlbar_settings">Url-bar</string>
     <string name="permission_required">Permission required</string>
-    <string name="permission_required_explainer">Some imported preferences require permissions that are currently not
-        given to LinkSheet. Tap below to request them.
-    </string>
+    <string name="permission_required_explainer">Some imported preferences require permissions that are currently not given to LinkSheet. Tap below to request them.</string>
     <string name="allow_darknets">Allow darknets</string>
     <string name="amp2html_allow_darknets_explainer">Allow running Amp2Html for darknets (supported: %s)</string>
-    <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)
-    </string>
+    <string name="follow_redirects_allow_darknets_explainer">Allow following redirects for darknets (supported: %s)</string>
     <string name="share">Share link</string>
     <string name="nightly_experiments_card">Nightly experiments</string>
     <string name="nightly_experiments_card_explainer">Tap to check out features currently in development</string>
@@ -430,10 +332,7 @@
     <string name="experiments_explainer">Try features currently in development</string>
     <string name="reset">Reset</string>
     <string name="experiments_explainer_2">Active development</string>
-    <string name="experiments_explainer_3">Experiments are under active development and may not work correctly, or at
-        all. Please do not report bugs on Github. If you want to
-        provide feedback, do so on Discord.
-    </string>
+    <string name="experiments_explainer_3">Experiments are under active development and may not work correctly, or at all. Please do not report bugs on Github. If you want to provide feedback, do so on Discord.</string>
     <string name="theme_enable_material_you">Dynamic color</string>
     <string name="theme_enable_amoled">Pure black</string>
     <string name="theme_mode">Theme mode</string>
@@ -467,31 +366,22 @@
     <string name="telemetry_level_minimal_description">Installed version metrics</string>
     <string name="telemetry_level_standard_description">Aggregated usage statistics</string>
     <string name="telemetry_level_exhaustive_description">Detailed usage statistics</string>
-    <string name="telemetry_dialog_text_2" translatable="false">"Usage metrics include a random, user-resettable installation-bound identifier, as well as your Android version, and are stored at <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data, such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>."</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Usage metrics include a random, user-resettable installation-bound identifier, as well as your Android version, and are stored at <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data, such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.</string>
     <string name="telemetry_configure_title">Analytics</string>
     <string name="telemetry_identifier_reset">Reset identifier</string>
     <string name="telemetry_configure_type">Analytics type</string>
     <string name="link_handle_failed">An error occurred</string>
-    <string name="link_handle_failed_text">LinkSheet can not handle this link as it appears to be malformed. You can
-        edit it below, then try again. Alternatively, you can search on the web.
-    </string>
+    <string name="link_handle_failed_text">LinkSheet can not handle this link as it appears to be malformed. You can edit it below, then try again. Alternatively, you can search on the web.</string>
     <string name="link_handle_failed_text_field_label">Query</string>
     <string name="retry">Try again</string>
     <string name="something_went_wrong">Something went wrong, please try again.</string>
     <string name="resolve_activity_failure">Failed to resolve activity!</string>
     <string name="reset_app_link_verification_status">Reset app link verification status</string>
-    <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all
-        apps, then wait a few
-        minutes while Android re-verifies them. You will not receive a confirmation. Requires Shizuku.
-    </string>
+    <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all apps, then wait a few minutes while Android re-verifies them. You will not receive a confirmation. Requires Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
     <string name="switch_profile">Enable profile switching</string>
-    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-)
-        profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -&gt; Special app
-        access -&gt;
-        Connected work &amp; personal apps
-    </string>
-    <string name="settings_bottom_sheet__text_profile_switcher">"Displays a button in the bottom sheet to open the tapped link in a (work-) profile"</string>
+    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -&gt; Special app access -&gt;Connected work &amp; personal apps</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Displays a button in the bottom sheet to open the tapped link in a (work-) profile</string>
     <string name="customization">Customization</string>
     <string name="build_info">Build info</string>
     <string name="verified_link_handlers">Verified link handlers</string>
@@ -552,25 +442,18 @@
     <string name="export_log_dialog__subtitle_include_fingerprint">Recommended</string>
     <string name="export_log_dialog__title_include_settings">Include settings</string>
     <string name="export_log_dialog__subtitle_include_settings">Recommended</string>
-    <string name="export_log_dialog__text_log_privacy">"To learn more about potentially sensitive data in shared log files, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>."</string>
+    <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log files, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Copy to clipboard</string>
     <string name="generic__button_text_cancel">Cancel</string>
-    <string name="export_log_dialog__text_log_info">Configure share settings for log captured at:
-        <font face="monospace">%s</font>
-    </string>
+    <string name="export_log_dialog__text_log_info">Configure share settings for log captured at: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Viewing log captured at: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Aww snap, that should not have happened!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Downloader</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet is set up</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet is not set up</string>
-    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet is correctly set up and
-        ready to
-        operate
-    </string>
-    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet is not set as the system\'s
-        default browser
-    </string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet is correctly set up and ready to operate</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet is not set as the system\'s default browser</string>
     <string name="settings_main_setup_success__button_change_browser">Default browser</string>
     <string name="settings_main_setup_success__button_set_default_browser">Set as default browser</string>
     <string name="settings_main_setup_success__button_link_handlers">Link handlers</string>
@@ -590,14 +473,9 @@
     <string name="resolve_event__sorting_apps">Sorting app list</string>
     <string name="resolve_event__generating_preview">Generating preview</string>
     <string name="settings_links_amp2html__title_skip_browser">Skip when coming from browser</string>
-    <string name="settings_links_amp2html__text_skip_browser">Don\'t run Amp2Html if the app launching LinkSheet is
-        known to be a browser
-    </string>
+    <string name="settings_links_amp2html__text_skip_browser">Don\'t run Amp2Html if the app launching LinkSheet is known to be a browser</string>
     <string name="settings_links_follow_redirects__title_skip_browser">Skip when coming from browser</string>
-    <string name="settings_links_follow_redirects__text_skip_browser">Don\'t attempt to follow redirects if the app
-        launching LinkSheet is
-        known to be a browser
-    </string>
+    <string name="settings_links_follow_redirects__text_skip_browser">Don\'t attempt to follow redirects if the app launching LinkSheet is known to be a browser</string>
     <string name="settings_app_config__title_configure_app_behavior">Configure %s</string>
     <string name="settings_app_config__button_add_item">Add item</string>
     <string name="settings_app_config__title_browsers">Browsers</string>
@@ -614,7 +492,7 @@
     <string name="settings_edit_rule__title_edit_rule">Editing rule</string>
     <string name="settings_app_config_rules__text_custom_rules">Custom rules</string>
     <string name="delete_log_dialog__title_delete_log">Delete session?</string>
-    <string name="delete_log_dialog__subtitle_delete_info">"Do you want to delete this log session? This can not be undone!"</string>
+    <string name="delete_log_dialog__subtitle_delete_info">Do you want to delete this log session? This can not be undone!</string>
     <string name="generic__button_text_delete">Delete</string>
     <string name="generic__text_url">Url</string>
     <string name="generic__text_edit">Edit</string>
@@ -622,4 +500,5 @@
     <string name="home__clipboard_card_source">From clipboard</string>
     <string name="settings_profile_switcher__title_profile_switcher">Profile switching</string>
     <string name="settings_profile_switcher__divider_configuration">Configuration</string>
+    <string name="settings__hint_search">Search</string>
 </resources>

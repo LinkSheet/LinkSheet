@@ -10,28 +10,33 @@ import androidx.core.content.getSystemService
 import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.ResolveInfoFlags
+import org.koin.dsl.module
 
+val AndroidPackageInfoModule = AndroidPackageInfoModule()
 
-fun AndroidPackageInfoService(context: Context): PackageInfoService {
-    val packageManager = context.packageManager
-    val domainVerificationManager = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
-        context.getSystemService<DomainVerificationManager>()
-    }
+private fun AndroidPackageInfoModule() = module {
+    single<PackageInfoService> {
+        val context = get<Context>()
+        val packageManager = context.packageManager
+        val domainVerificationManager = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
+            context.getSystemService<DomainVerificationManager>()
+        }
 
-    return PackageInfoService(
-        loadLabel = { it.loadLabel(packageManager) },
-        getApplicationLabel = packageManager::getApplicationLabel,
-        getApplicationIcon = packageManager::getApplicationIcon,
-        queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-        getInstalledPackages = packageManager::getInstalledPackagesCompat,
-        getDomainVerificationUserState = { applicationInfo ->
-            AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
-                domainVerificationManager!!.getDomainVerificationUserState(applicationInfo.packageName)?.let { state ->
-                    VerificationState(state.hostToStateMap, state.isLinkHandlingAllowed)
+        PackageInfoService(
+            loadLabel = { it.loadLabel(packageManager) },
+            getApplicationLabel = packageManager::getApplicationLabel,
+            getApplicationIcon = packageManager::getApplicationIcon,
+            queryIntentActivities = packageManager::queryIntentActivitiesCompat,
+            getInstalledPackages = packageManager::getInstalledPackagesCompat,
+            getDomainVerificationUserState = { applicationInfo ->
+                AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
+                    domainVerificationManager!!.getDomainVerificationUserState(applicationInfo.packageName)?.let { state ->
+                        VerificationState(state.hostToStateMap, state.isLinkHandlingAllowed)
+                    }
                 }
-            }
-        },
-    )
+            },
+        )
+    }
 }
 
 data class VerificationState(
@@ -47,25 +52,24 @@ class PackageInfoService(
     val getInstalledPackages: () -> List<PackageInfo>,
     private val getDomainVerificationUserState: (ApplicationInfo) -> VerificationState?,
 ) {
-    fun findBestLabel(resolveInfo: ResolveInfo): String {
-        val label = loadLabel(resolveInfo)
-        if (label.isNotEmpty()) return label.toString()
+    fun findBestLabel(packageInfo: PackageInfo): String {
+        val resolveInfo = getLauncherOrNull(packageInfo.packageName)
+        if (resolveInfo != null) {
+            val label = loadLabel(resolveInfo)
+            if (label.isNotEmpty()) return label.toString()
+        }
 
-        return findApplicationLabel(resolveInfo.activityInfo.applicationInfo) ?: resolveInfo.resolvePackageName
+        return packageInfo.applicationInfo?.let(::findApplicationLabel) ?: packageInfo.packageName
     }
 
-    fun findApplicationLabel(applicationInfo: ApplicationInfo?): String? {
-        if (applicationInfo == null) return null
-
+    fun findApplicationLabel(applicationInfo: ApplicationInfo): String? {
         val appLabel = getApplicationLabel(applicationInfo)
         if (appLabel.isNotEmpty()) return appLabel.toString()
 
         return applicationInfo.packageName
     }
 
-    fun getVerificationState(applicationInfo: ApplicationInfo?): VerificationState? {
-        if (applicationInfo == null) return null
-
+    fun getVerificationState(applicationInfo: ApplicationInfo): VerificationState? {
         val state = getDomainVerificationUserState(applicationInfo)
         if (state?.hostToStateMap?.isEmpty() == true) return null
 

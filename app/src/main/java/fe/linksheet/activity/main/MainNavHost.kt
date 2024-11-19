@@ -16,7 +16,7 @@ import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.*
 import fe.linksheet.composable.page.settings.app.NewRuleRoute
 import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
-import fe.linksheet.composable.page.settings.app.VerifiedLinkHandlersRoute
+import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.page.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.page.settings.apps.PretendToBeAppSettingsRoute
 import fe.linksheet.composable.page.settings.apps.preferred.PreferredAppSettingsRoute

@@ -17,6 +17,7 @@ import fe.linksheet.lifecycle.ActivityLifecycleObserver
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
+import fe.linksheet.module.app.AndroidPackageInfoModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.downloader.downloaderModule
@@ -127,7 +128,8 @@ class LinkSheetApp : Application() {
                 analyticsServiceModule,
                 statisticsModule,
                 VersionTrackerModule,
-                pasteServiceModule
+                pasteServiceModule,
+                AndroidPackageInfoModule
             )
         }
 

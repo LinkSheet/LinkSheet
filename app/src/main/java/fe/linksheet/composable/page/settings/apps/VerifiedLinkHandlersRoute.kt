@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.app
+package fe.linksheet.composable.page.settings.apps
 
 import android.content.res.Resources
 import android.os.Build
@@ -37,13 +37,13 @@ import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.composable.page.settings.app.VerifiedLinkHandlersRouteData.buildHostStateText
-import fe.linksheet.composable.page.settings.app.VerifiedLinkHandlersRouteData.hostStateStringRes
+import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRouteData.buildHostStateText
+import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRouteData.hostStateStringRes
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.viewmodel.AppsWhichCanOpenLinksViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.module.viewmodel.FilterMode
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -109,15 +109,13 @@ private const val allPackages = "all"
 @Composable
 fun VerifiedLinkHandlersRoute(
     onBackPressed: () -> Unit,
-    viewModel: AppsWhichCanOpenLinksViewModel = koinViewModel(),
+    viewModel: VerifiedLinkHandlersViewModel = koinViewModel(),
 ) {
     val activity = LocalActivity.current
 
-
     val linkHandlingAllowed by viewModel.filterDisabledOnly.collectOnIO(true)
 
-
-    val userApps by viewModel.userApps.collectOnIO()
+    val userApps by viewModel.userAppFilter.collectOnIO()
     val lastEmitted by viewModel.lastEmitted.collectOnIO()
 
 
@@ -163,7 +161,7 @@ fun VerifiedLinkHandlersRoute(
     val context = LocalContext.current
 
     val items by viewModel.appsFiltered.collectOnIO()
-    val filter by viewModel.searchFilter.collectOnIO()
+    val filter by viewModel.searchQuery.collectOnIO()
     val filterMode by viewModel.filterMode.collectOnIO()
 
     val listState = remember(items?.size, filter, linkHandlingAllowed) {
@@ -195,7 +193,7 @@ fun VerifiedLinkHandlersRoute(
                 FilterChip(
                     selected = userApps,
                     onClick = {
-                        viewModel.userApps.value = !userApps
+                        viewModel.userAppFilter.value = !userApps
                     },
                     label = {
                         Text(text = stringResource(id = R.string.settings_verified_link_handlers__text_user_apps))

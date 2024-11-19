@@ -1,21 +1,19 @@
 package fe.linksheet.composable
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.ImageBitmap
 import fe.linksheet.extension.android.toImageBitmap
 
 @Stable
 open class AppListItemData(
-    val applicationInfo: ApplicationInfo,
+    val packageName: String,
     val label: String,
 ) {
     val compareLabel = label.lowercase()
-    val packageName: String = applicationInfo.packageName
 
     fun matches(query: String): Boolean {
-        return compareLabel.contains(query, ignoreCase = true) || applicationInfo.packageName.contains(
+        return compareLabel.contains(query, ignoreCase = true) || packageName.contains(
             query,
             ignoreCase = true
         )
@@ -26,6 +24,6 @@ open class AppListItemData(
     }
 
     fun loadIcon(context: Context): ImageBitmap {
-        return applicationInfo.loadIcon(context.packageManager).toImageBitmap()
+        return context.packageManager.getApplicationIcon(packageName).toImageBitmap()
     }
 }

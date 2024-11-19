@@ -2,8 +2,8 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import android.content.Intent
-import android.content.pm.getInstalledPackagesCompat
 import android.content.pm.verify.domain.DomainVerificationManager
+import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
@@ -19,24 +19,27 @@ import fe.android.compose.version.AndroidVersion
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.R
 import fe.linksheet.composable.AppListItemData
-import fe.linksheet.extension.android.isUserApp
+import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
+import fe.linksheet.module.app.PackageDomainVerificationStatus
+import fe.linksheet.module.app.PackageInfoService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.*
+import fe.linksheet.util.getAppOpenByDefaultIntent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class AppsWhichCanOpenLinksViewModel(
+class VerifiedLinkHandlersViewModel(
     private val context: Application,
     private val shizukuHandler: ShizukuHandler,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
+    private val packageInfoService: PackageInfoService,
 ) : BaseViewModel(preferenceRepository) {
 
     private val domainVerificationManager by lazy {
@@ -46,51 +49,78 @@ class AppsWhichCanOpenLinksViewModel(
     }
 
     val lastEmitted = MutableStateFlow(0L)
-    val searchFilter = MutableStateFlow("")
 
-    //    val pagerState = PagerState { 2 }
-//    val linkHandlingAllowed = snapshotFlow { pagerState.currentPage == 0 }s
     val filterDisabledOnly = MutableStateFlow(true)
-    val userApps = MutableStateFlow(true)
 
-    val filterMode = MutableStateFlow<FilterMode>(FilterMode.EnabledOnly)
+    val userAppFilter = MutableStateFlow(true)
+    val filterMode = MutableStateFlow<FilterMode>(FilterMode.ShowAll)
+    val searchQuery = MutableStateFlow("")
+    private val sorting = MutableStateFlow(AppListItemData.labelComparator)
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private val installedPackages = flowOfLazy {
-        context.packageManager.getInstalledPackagesCompat().mapNotNull {
-            VerifiedDomainUtil.getStatus(
-                domainVerificationManager!!,
-                it.applicationInfo,
-                it.applicationInfo?.loadLabel(context.packageManager)
+    private fun createDomainVerificationFlow(): Flow<PackageDomainVerificationStatus> = flow {
+        val packages = packageInfoService.getInstalledPackages()
+        for (packageInfo in packages) {
+            val applicationInfo = packageInfo.applicationInfo ?: continue
+            val verificationState = packageInfoService.getVerificationState(applicationInfo) ?: continue
+            val label = packageInfoService.findBestLabel(packageInfo)
+
+            val stateNone = mutableListOf<String>()
+            val stateSelected = mutableListOf<String>()
+            val stateVerified = mutableListOf<String>()
+
+            for ((domain, state) in verificationState.hostToStateMap) {
+                when (state) {
+                    DomainVerificationUserState.DOMAIN_STATE_NONE -> stateNone.add(domain)
+                    DomainVerificationUserState.DOMAIN_STATE_SELECTED -> stateSelected.add(domain)
+                    DomainVerificationUserState.DOMAIN_STATE_VERIFIED -> stateVerified.add(domain)
+                }
+            }
+
+            val status = PackageDomainVerificationStatus(
+                packageInfo.packageName,
+                label,
+                applicationInfo.flags,
+                verificationState.isLinkHandlingAllowed,
+                stateNone,
+                stateSelected,
+                stateVerified
             )
+
+            emit(status)
         }
     }
-//        .combine(lastEmitted) { installedPackages, _ -> installedPackages }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    private val baseApps = installedPackages.combine(userApps) { apps, userApps ->
-        apps.filter { !userApps || it.applicationInfo.isUserApp() }
-    }
+    val appsFiltered = createDomainVerificationFlow()
+        .scan(emptyList<PackageDomainVerificationStatus>()) { acc, elem -> acc + elem }
+        .flowOn(Dispatchers.IO)
+        .combine(userAppFilter) { apps, userAppFilter ->
+            apps.filter { !userAppFilter || it.flags !in SYSTEM_APP_FLAGS }
+        }
+        .combine(filterMode) { apps, filterMode ->
+            if (filterMode == FilterMode.ShowAll) return@combine apps
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private val apps = baseApps.combine(filterMode) { apps, filterMode ->
-        if (filterMode == FilterMode.ShowAll) return@combine apps
-
-        val enabledMode = filterMode == FilterMode.EnabledOnly
-        apps.filter { if (enabledMode) it.enabled else !it.enabled }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    val appsFiltered = apps.combine(searchFilter) { apps, query ->
-        apps.filterIf(query.isNotEmpty()) { it.matches(query) }.sortedWith(AppListItemData.labelComparator)
-    }
+            val enabledMode = filterMode == FilterMode.EnabledOnly
+            apps.filter { if (enabledMode) it.enabled else !it.enabled }
+        }
+        .combine(searchQuery) { apps, searchQuery ->
+            apps.filterIf(searchQuery.isNotEmpty()) { it.matches(searchQuery) }
+        }
+        .combine(sorting) { apps, sorting ->
+            apps.sortedWith(sorting)
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(0),
+            initialValue = emptyList()
+        )
 
     fun emitLatest() {
         lastEmitted.value = System.currentTimeMillis()
     }
 
     fun search(query: String?) {
-        searchFilter.value = query ?: ""
+        searchQuery.value = query ?: ""
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

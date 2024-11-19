@@ -23,4 +23,3 @@ val repositoryModule = module {
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
 }
-

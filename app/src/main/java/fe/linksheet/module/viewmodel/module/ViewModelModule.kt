@@ -11,7 +11,7 @@ val viewModelModule = module {
     singleOf(::LogViewCommon)
 
     viewModelOf(::MainViewModel)
-    viewModelOf(::AppsWhichCanOpenLinksViewModel)
+    viewModelOf(::VerifiedLinkHandlersViewModel)
     viewModelOf(::PreferredAppSettingsViewModel)
     viewModelOf(::InAppBrowserSettingsViewModel)
     viewModelOf(::PreferredBrowserViewModel)

@@ -507,4 +507,6 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу</string>
     <string name="settings_profile_switcher__title_profile_switcher">Мењање профила</string>
     <string name="settings_profile_switcher__divider_configuration">Конфигурација</string>
+    <string name="settings__hint_search"></string>
+    <string name="bottom_sheet__event_app_refusal"></string>
 </resources>

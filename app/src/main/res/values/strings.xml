@@ -501,4 +501,5 @@
     <string name="settings_profile_switcher__title_profile_switcher">Profile switching</string>
     <string name="settings_profile_switcher__divider_configuration">Configuration</string>
     <string name="settings__hint_search">Search</string>
+    <string name="bottom_sheet__event_app_refusal">Target app refused to handle link!</string>
 </resources>

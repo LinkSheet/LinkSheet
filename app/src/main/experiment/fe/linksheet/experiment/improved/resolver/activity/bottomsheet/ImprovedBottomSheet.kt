@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -28,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import fe.android.compose.system.rememberSystemService
 import fe.kotlin.extension.iterable.getOrFirstOrNull
@@ -56,9 +58,10 @@ import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
-import fe.linksheet.util.UriUtil
+import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
@@ -66,9 +69,10 @@ import org.koin.core.component.inject
 
 
 class ImprovedBottomSheet(
+    private val loopDetectorExperiment: LoopDetectorExperiment?,
     val activity: BottomSheetActivity,
     val viewModel: BottomSheetViewModel,
-    val intent: Intent,
+    intent: Intent,
     val referrer: Uri?,
 ) : BottomSheetImpl(), KoinComponent {
     private val resolver by inject<ImprovedIntentResolver>()
@@ -124,17 +128,20 @@ class ImprovedBottomSheet(
         }
     }
 
+    private val intentFlow = MutableStateFlow(intent)
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Wrapper() {
         var status by remember { mutableStateOf<IntentResolveResult>(IntentResolveResult.Pending) }
+        val currentIntent by intentFlow.collectAsStateWithLifecycle()
 
-        val safeIntent = remember(intent) {
-            intent.toSafeIntent()
+        val safeIntent = remember(currentIntent) {
+            currentIntent.toSafeIntent()
         }
 
         // TODO: Use intent and referrer as keys?
-        LaunchedEffect(key1 = resolver) {
+        LaunchedEffect(key1 = resolver, key2 = safeIntent) {
             status = resolver.resolve(safeIntent, referrer)
         }
 
@@ -567,14 +574,26 @@ class ImprovedBottomSheet(
             intent.putExtra(Intent.EXTRA_REFERRER, referrer)
         }
 
-        if (viewModel.safeStartActivity(activity, intent)) {
-            finish()
+        if (loopDetectorExperiment == null) {
+            if (viewModel.safeStartActivity(activity, intent)) {
+                finish()
+            } else {
+                showToast(R.string.resolve_activity_failure, uiThread = true)
+            }
         } else {
-            showToast(R.string.resolve_activity_failure, uiThread = true)
+            if (!loopDetectorExperiment.start(intent)) {
+                showToast(R.string.resolve_activity_failure, uiThread = true)
+            }
         }
     }
 
     override fun onStop() {
         finish()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        if(loopDetectorExperiment != null) {
+            intentFlow.value = intent
+        }
     }
 }

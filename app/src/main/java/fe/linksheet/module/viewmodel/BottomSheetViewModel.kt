@@ -108,6 +108,7 @@ class BottomSheetViewModel(
 
     val switchProfile = featureFlagRepository.asState(FeatureFlags.switchProfile)
     val improvedIntentResolver = experimentRepository.asState(Experiments.improvedIntentResolver)
+    val loopDetector = experimentRepository.asState(Experiments.loopDetector)
 
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)

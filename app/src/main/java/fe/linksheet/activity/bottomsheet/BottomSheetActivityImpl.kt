@@ -640,4 +640,8 @@ class BottomSheetActivityImpl(
     override fun onStop() {
         activity.finish()
     }
+
+    override fun onNewIntent(intent: Intent) {
+
+    }
 }

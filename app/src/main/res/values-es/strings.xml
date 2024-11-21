@@ -507,4 +507,6 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón en el pie de página para el enlace abierto en el que hizo clic en el perfil (de trabajo)</string>
     <string name="settings_profile_switcher__title_profile_switcher">Cambio de perfil</string>
     <string name="settings_profile_switcher__divider_configuration">Configuración</string>
+    <string name="bottom_sheet__event_app_refusal"></string>
+    <string name="settings__hint_search"></string>
 </resources>

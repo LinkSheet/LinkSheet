@@ -500,6 +500,4 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Добавя бутон в долното меню, който отваря препратката в (работния) профил</string>
     <string name="settings_profile_switcher__divider_configuration">Настройка</string>
     <string name="settings_profile_switcher__title_profile_switcher">Смяна на профили</string>
-    <string name="settings__hint_search"></string>
-    <string name="bottom_sheet__event_app_refusal"></string>
 </resources>

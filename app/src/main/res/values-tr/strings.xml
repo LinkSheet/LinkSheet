@@ -500,6 +500,4 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı bir (iş) profilde açmak için alt sayfada bir düğme gösterir</string>
     <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>
     <string name="settings_profile_switcher__title_profile_switcher">Profil değiştirme</string>
-    <string name="settings__hint_search"></string>
-    <string name="bottom_sheet__event_app_refusal"></string>
 </resources>

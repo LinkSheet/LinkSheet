@@ -486,4 +486,23 @@
     <string name="settings_new_rule__title_new_rule">新しいルール</string>
     <string name="settings_app_config_rules__title_default_rule">デフォルトのルール</string>
     <string name="launch_onboarding">オンボーディングの開始</string>
+    <string name="generic__text_edit"></string>
+    <string name="settings_profile_switcher__text_enable_cross_profile"></string>
+    <string name="generic__text_url"></string>
+    <string name="generic__label_personal_profile"></string>
+    <string name="settings_profile_switcher__title_profile_switcher"></string>
+    <string name="settings_profile_switcher__divider_other_profiles"></string>
+    <string name="home__clipboard_card_source"></string>
+    <string name="generic__label_unknown_profile"></string>
+    <string name="settings_bottom_sheet__text_profile_switcher"></string>
+    <string name="settings_profile_switcher__title_enable_cross_profile"></string>
+    <string name="settings__hint_search"></string>
+    <string name="generic__text_done"></string>
+    <string name="settings_profile_switcher__divider_configuration"></string>
+    <string name="bottom_sheet__event_app_refusal"></string>
+    <string name="settings_profile_switcher__divider_current_profile"></string>
+    <string name="generic__label_work_profile"></string>
+    <string name="settings_profile_switcher__text_not_installed"></string>
+    <string name="settings_profile_switcher__text_current_profile"></string>
+    <string name="settings_profile_switcher__text_other_profile"></string>
 </resources>

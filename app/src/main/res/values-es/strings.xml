@@ -17,7 +17,7 @@
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
     <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (borra los parámetros de seguimiento de las URL)</string>
-    <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
+    <string name="follow_only_known_trackers_explainer">"Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado. "</string>
     <string name="always_disable">Forzar desactivación</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
     <string name="preview_url_explainer">Muestra el enlace seleccionado (después de que ha sido procesado)</string>
@@ -59,7 +59,7 @@
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet no puede abrir este enlace.</string>
     <string name="redirect_resolve_type_local_cache">caché local</string>
-    <string name="use_unified_preferred_browser_explainer">Al habilitar esto, se aplican las configuraciones siguientes tanto al manejo de enlaces normal como en la aplicación. Utilice los botones a continuación para cambiar entre el modo Normal y el modo En aplicación cuando esté deshabilitado.</string>
+    <string name="use_unified_preferred_browser_explainer">"Al habilitar esto, se aplican las configuraciones siguientes tanto al manejo de enlaces normal como en la aplicación. Utilice los botones a continuación para cambiar entre el modo Normal y el modo En aplicación cuando esté deshabilitado. "</string>
     <string name="advanced_explainer">Indicadores de funciones, experimentos, importación/exportación</string>
     <string name="amp2html_local_cache_explainer">Almacenar localmente en caché las versiones recuperadas de páginas web que no sean AMP</string>
     <string name="no">No</string>
@@ -93,7 +93,7 @@
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="donate_subtitle">Actualiza a <b>LinkSheet Pro</b></string>
     <string name="advanced">Avanzado</string>
-    <string name="built_at"><b>Compilado a las:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="built_at"><b>Compilado a las:</b> <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
     <string name="back">Atrás</string>
     <string name="linksheet_download">Descarga de LinkSheet</string>
@@ -142,7 +142,7 @@
     <string name="always">Siempre</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Seleccionar una aplicación</string>
-    <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> <font face="monospace">%s</font></string>
     <string name="resolved_via">%s vía resuelta %s</string>
     <string name="instance_not_available_anymore">¡Esta instancia ya no está disponible!</string>
     <string name="open_with_linksheet">Abrir con LinkSheet</string>
@@ -181,7 +181,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
-    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
+    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="disable_in_selected">Forzando la desactivación…</string>
@@ -209,7 +209,7 @@
     <string name="pretend_to_be_app">Interceptar solicitudes de aplicaciones nativas</string>
     <string name="shizuku">Integración con Shizuku</string>
     <string name="dont_show_filtered_item_explainer">No mostrar sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
-    <string name="version_name"><b>Versión:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="version_name"><b>Versión:</b> <font face="monospace">%s</font></string>
     <string name="configure_explainer">Toca aquí para configurar LinkSheetCompat</string>
     <string name="feature_flags">Características experimentales</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -225,7 +225,7 @@
     <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.\nLos que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas.</string>
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
     <string name="donate_learn_more">Más información</string>
-    <string name="flavor"><b>Sabor:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Sabor:</b> <font face="monospace">%s</font></string>
     <string name="github_pipeline_build">Desarrollado y firmado por CI</string>
     <string name="other">Otros</string>
     <string name="app_setup">Configuración de la aplicación</string>
@@ -265,7 +265,7 @@
     <string name="resolve_via_toast">La resolución fue exitosa</string>
     <string name="resolve_via_failed_toast">Resolver el fallo</string>
     <string name="resolve_via_failed_toast_explainer">Mostrar una ventana emergente cuando una URL no se resuelve a través de un servicio externo</string>
-    <string name="last_updated"><b>Versión:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="last_updated"><b>Versión:</b> <font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Activar el menú experimental LinkSheet Compat</string>
     <string name="enable_linksheet_compat_explainer">El menú se encuentra en el submenú \"Aplicaciones\" y, una vez instalado, es capaz de interceptar las peticiones a determinadas aplicaciones nativas.</string>
@@ -507,4 +507,6 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón en el pie de página para el enlace abierto en el que hizo clic en el perfil (de trabajo)</string>
     <string name="settings_profile_switcher__title_profile_switcher">Cambio de perfil</string>
     <string name="settings_profile_switcher__divider_configuration">Configuración</string>
+    <string name="settings__hint_search">Buscar</string>
+    <string name="bottom_sheet__event_app_refusal">¡La aplicación de destino se negó a procesar la conexión!</string>
 </resources>

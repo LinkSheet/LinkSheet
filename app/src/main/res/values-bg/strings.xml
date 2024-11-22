@@ -62,7 +62,7 @@
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="always_ask_explainer">Винаги показва всички браузъри</string>
-    <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ. Ако „Последване на пренасочванията от външна услуга“ е включено тук също е включено.</string>
+    <string name="follow_only_known_trackers_explainer">"Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ. Ако „Последване на пренасочванията от външна услуга“ е включено тук също е включено. "</string>
     <string name="usage_stats_sorting_explainer">При сортирането се взима предвид и системната статистика за използване на приложенията. При първо включване ще бъде поискано право на достъп.</string>
     <string name="set_as_browser">Задаване като браузър</string>
     <string name="set_as_browser_explainer">За да направите LinkSheet браузър по подразбиране докоснете</string>
@@ -115,7 +115,7 @@
     <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва</string>
     <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
     <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
-    <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
+    <string name="use_unified_preferred_browser_explainer">"Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим. "</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
     <string name="frontend">Интерфейс</string>
     <string name="close">Затваряне</string>
@@ -296,7 +296,7 @@
     <string name="start_setup_explainer">Възможностите на LinkSheet изискват определена настройка на Андроид. Помощникът ще ви преведе през стъпките на процеса.</string>
     <string name="telemetry_dialog_text">Изберете вида на статистиките за използване, които смятате за най-удачни.</string>
     <string name="reset_app_link_verification_status">Нулиране на проверените препратки</string>
-    <string name="switch_profile_explainer">Добавя бутон в долното меню, който отваря препратката в (работния) профил. Необходимо е LinkSheet да бъде инсталиран и в двата профила и ръчно свързан от Настройки &gt; Свързани приложения</string>
+    <string name="switch_profile_explainer">Добавя бутон в долното меню, който отваря препратката в (работния) профил. Необходимо е LinkSheet да бъде инсталиран и в двата профила и ръчно свързан от Настройки → Свързани приложения</string>
     <string name="base_config">Допълнителни настройки</string>
     <string name="tap_customization_dialog_text">Изберете действието, което да бъде изпълнено</string>
     <string name="onboarding_5_card_explainer">Основните настройки, които обуславят правилната работа на LinkSheet да направени. Посетете настройките, за да проучите какво още може приложението!</string>
@@ -500,4 +500,6 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Добавя бутон в долното меню, който отваря препратката в (работния) профил</string>
     <string name="settings_profile_switcher__divider_configuration">Настройка</string>
     <string name="settings_profile_switcher__title_profile_switcher">Смяна на профили</string>
+    <string name="settings__hint_search">Търсене</string>
+    <string name="bottom_sheet__event_app_refusal">Целевото приложение отказва да обработи препратката!</string>
 </resources>

@@ -290,7 +290,7 @@
     <string name="telemetry_level_minimal_description">インストール済みバージョンに関する指標</string>
     <string name="telemetry_level_standard_description">集計された使用統計</string>
     <string name="telemetry_level_exhaustive_description">詳細な使用統計</string>
-    <string name="telemetry_dialog_text_2">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url="https://aptabase.com">Aptabase (EU)</annotation> に保存されます。</string>
+    <string name="telemetry_dialog_text_2" translatable="false">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url="https://aptabase.com">Aptabase (EU)</annotation> に保存されます。</string>
     <string name="telemetry_configure_title">アナリティクス</string>
     <string name="telemetry_identifier_reset">識別子をリセット</string>
     <string name="telemetry_configure_type">アナリティクスタイプ</string>
@@ -487,4 +487,13 @@
     <string name="settings_new_rule__title_new_rule">新しいルール</string>
     <string name="settings_app_config_rules__title_default_rule">デフォルトのルール</string>
     <string name="launch_onboarding">オンボーディングの開始</string>
+    <string name="generic__text_edit"></string>
+    <string name="generic__text_done"></string>
+    <string name="home__clipboard_card_source"></string>
+    <string name="settings_profile_switcher__divider_configuration"></string>
+    <string name="settings_bottom_sheet__text_profile_switcher"></string>
+    <string name="settings__hint_search"></string>
+    <string name="bottom_sheet__event_app_refusal"></string>
+    <string name="settings_profile_switcher__title_profile_switcher"></string>
+    <string name="generic__text_url"></string>
 </resources>

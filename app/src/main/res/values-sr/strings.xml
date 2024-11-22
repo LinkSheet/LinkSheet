@@ -47,8 +47,7 @@
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="misc_settings">Остало</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> \u0020
-\nлинк</annotation></string>
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> \u0020 \nлинк</annotation></string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
     <string name="enable_ignore_libredirect_button">Омогући дугме „Игнориши LibRedirect“</string>
@@ -220,8 +219,7 @@
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
-    <string name="donate_card_subtitle">Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. \u0020
-\nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
+    <string name="donate_card_subtitle">Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. \u0020 \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
     <string name="privacy">Приватност</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања. Подржани прегледачи: %s</string>
     <string name="pretend_to_be_app">Пресретни захтеве за изворне апликације</string>
@@ -298,8 +296,7 @@
     <string name="onboarding_1_card_explainer">LinkSheet не може да функционише ако није подразумевани прегледач.</string>
     <string name="onboarding_2_subtitle">Ако имате инсталирано много апликација, Shizuku може значајно побољшати ваше искуство</string>
     <string name="onboarding_2_card_explainer">Shizuku омогућава LinkSheet-у да онемогући подразумевано понашање руковања линковима за све апликације одједном, уместо да их мора ручно онемогућити за сваку апликацију појединачно (што је следећи корак).</string>
-    <string name="onboarding_0_title">Добро дошли у
-\nLinkSheet</string>
+    <string name="onboarding_0_title">Добро дошли у \nLinkSheet</string>
     <string name="onboarding_3_card_explainer">Google је увео верификоване линкове за апликације уз ажурирање на Android 12, што омогућава апликацијама да криптографски доказују власништво над доменима. Ово понашање мора бити ручно онемогућено да би LinkSheet пресрео додирнуте линкове.</string>
     <string name="onboarding_2_request_shizuku_permission">Затражи дозволу</string>
     <string name="permission_required">Потребна је дозвола</string>
@@ -357,8 +354,7 @@
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
-    <string name="telemetry_dialog_text_2">Показатељи коришћења укључују насумични \u0020
-\n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични \u0020 \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>.</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
     <string name="telemetry_level_disabled">Онемогућено</string>
     <string name="telemetry_level_minimal">Минимално</string>

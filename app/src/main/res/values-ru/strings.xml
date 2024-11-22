@@ -241,8 +241,7 @@
     <string name="export_settings">Настройки экспорта</string>
     <string name="export_explainer">Экспортируйте текущие настройки приложения в файл</string>
     <string name="at_least_one_known_browser_installed">Установлен как минимум один браузер</string>
-    <string name="donate_card_subtitle"> Если вам нравится LinkSheet, подумайте о том, чтобы оставить звезду на Github и/или сделать пожертвование. \u0020 
-\nЛюди, которые пожертвовавшие более <b>5€</b>, имеют право на <b>LinkSheet Pro</b>, который будет обладать эксклюзивными функциями.</string>
+    <string name="donate_card_subtitle">Если вам нравится LinkSheet, подумайте о том, чтобы оставить звезду на Github и/или сделать пожертвование. \u0020 \nЛюди, которые пожертвовавшие более <b>5€</b>, имеют право на <b>LinkSheet Pro</b>, который будет обладать эксклюзивными функциями.</string>
     <string name="privacy">Конфиденциальность</string>
     <string name="import_settings_override_preferences">Это отменит все существующие настройки. Продолжить?</string>
     <string name="pretend_to_be_app">Перехват запросов собственных приложений</string>

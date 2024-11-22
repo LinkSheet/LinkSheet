@@ -222,8 +222,7 @@
     <string name="discord">ਡਿਸਕੌਰਡ</string>
     <string name="discord_explainer">ਸਾਡੇ ਡਿਸਕੌਰਡ ਸਰਵਰ \'ਤੇ ਗੱਲਬਾਤ ਕਰੋ!</string>
     <string name="donate_card">ਕਾਰਡ ਨਾਲ ਦਾਨ ਕਰੋ (BuyMeACoffee ਰਾਹੀਂ)</string>
-    <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ। \u0020 
-\n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ।</string>
+    <string name="donate_card_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਪਸੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਸਟਾਰ ਛੱਡਣ ਅਤੇ/ਜਾਂ ਦਾਨ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ। \u0020 \n<b>5€</b> ਤੋਂ ਵੱਧ ਦਾਨ ਕਰਨ ਵਾਲੇ ਦਾਨਕਰਤਾ <b>LinkSheet Pro</b> ਲਈ ਯੋਗ ਹਨ, ਜਿਸ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹੋਣਗੀਆਂ।</string>
     <string name="manual_build">1fexd ਦੁਆਰਾ ਮੈਨੁਅਲ ਰੂਪ \'ਚ ਨਿਰਮਤ ਅਤੇ ਹਸਤਾਖਰਿਤ</string>
     <string name="donate_learn_more">ਜਿਆਦਾ ਜਾਣੋ</string>
     <string name="flavor">ਵੰਨਗੀ:</string>
@@ -279,8 +278,7 @@
     <string name="unknown_host">%s ਜਾਂ ਤਾਂ ਬਲੌਕ ਹੈ ਜਾਂ ਮੌਜੂਦ ਨਹੀਂ ਹੈ</string>
     <string name="include_throwable">ਕ੍ਰੈਸ਼ ਲੌਗ ਸ਼ਾਮਿਲ ਕਰੋ (ਸਿਫ਼ਾਰਸ਼ੀ, ਪਰ ਸੋਧਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ)</string>
     <string name="start_setup">ਜਾਰੀ ਰੱਖੋ</string>
-    <string name="onboarding_0_title">ਸਵਾਗਤ ਹੈ
-\nਲਿੰਕਸ਼ੀਟ ਵਿੱਚ</string>
+    <string name="onboarding_0_title">ਸਵਾਗਤ ਹੈ \nਲਿੰਕਸ਼ੀਟ ਵਿੱਚ</string>
     <string name="preferred_apps_settings">ਉਹਨਾਂ ਮੇਜ਼ਬਾਨਾਂ ਲਈ ਤਰਜੀਹੀ ਐਪਸ ਸੈੱਟ ਕਰੋ ਜਿਨ੍ਹਾਂ ਦਾ ਉਹ ਸਮਰਥਨ ਕਰਦੇ ਹਨ</string>
     <string name="onboarding_0_subtitle">ਇੱਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਵੇਲੇ ਹਮੇਸ਼ਾਂ ਪ੍ਰੋਂਪਟ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਚੁਣੋ, ਡਿਫੌਲਟ ਬ੍ਰਾਊਜ਼ਰ ਸੈੱਟ ਕਰੋ, ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ</string>
     <string name="start_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੀ ਕਾਰਜਕੁਸ਼ਲਤਾ ਲਈ ਕਸਟਮ ਐਂਡਰਾਇਡ ਸੰਰਚਨਾ ਦੀ ਲੋੜ ਹੈ। ਨਿਮਨਲਿਖਤ ਸੈੱਟਅੱਪ ਤੁਹਾਨੂੰ ਬਹੁ-ਪੜਾਵੀ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇਗਾ।</string>

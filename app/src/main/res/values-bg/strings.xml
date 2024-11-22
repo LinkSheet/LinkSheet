@@ -280,8 +280,7 @@
     <string name="preferred_apps_settings">Настройки на предпочитаните приложения за адресите, които поддържат</string>
     <string name="apps_which_can_open_links">Проверени приложения</string>
     <string name="app_browsers_subtitle">Предпочитани приложения и такива, отварящи препратки</string>
-    <string name="onboarding_0_title">Добре дошли
-\nпри LinkSheet</string>
+    <string name="onboarding_0_title">Добре дошли \nпри LinkSheet</string>
     <string name="reset_app_link_verification_status_toast">Заявена повторна проверка</string>
     <string name="settings_shortcuts__title_default_browser">Подразбиран браузър</string>
     <string name="start_setup">Напред</string>
@@ -323,7 +322,7 @@
     <string name="telemetry_identity_basic">Основна</string>
     <string name="customization">Нагласяне</string>
     <string name="onboarding_2_request_shizuku_permission">Искане на права</string>
-    <string name="telemetry_dialog_text_2">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">докоснете тук</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">докоснете тук</annotation>.</string>
     <string name="telemetry_level_standard_description">Обобщена статистика за използването</string>
     <string name="telemetry_configure_title">Статистики</string>
     <string name="nightly_experiments_card">Нощни експерименти</string>

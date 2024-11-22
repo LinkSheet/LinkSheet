@@ -320,8 +320,7 @@
     <string name="built_by_error">Bu derleme, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="notifications_explainer">URL kopyalandı, İndirme başladı</string>
     <string name="enable_linksheet_compat_explainer">Menü, \"Uygulamalar\" alt menüsünde bulunabilir ve yüklendiğinde, belirli uygulamalara gelen istekleri engelleyebilir.</string>
-    <string name="onboarding_0_title">LinkSheet\'e
-\nhoş geldiniz</string>
+    <string name="onboarding_0_title">LinkSheet\'e \nhoş geldiniz</string>
     <string name="onboarding_2_card_explainer">Shizuku, LinkSheet\'in (bir sonraki adım olan) bütün uygulamaların varsayılan bağlantı açma davranışını tek tek kapatmak yerine, tek seferde kapatmasına izin verir.</string>
     <string name="onboarding_0_subtitle">Bir bağlantıyı açarken her zaman seçim yapmayı isteyin, varsayılan tarayıcılar ayarlayın, ve çok daha fazlası</string>
     <string name="onboarding_5_subtitle">LinkSheet başarıyla etkinleştirildi</string>
@@ -355,7 +354,7 @@
     <string name="tap_customization_dialog_title_long_tap">Uzun dokunma</string>
     <string name="tap_customization_dialog_text">Gerçekleştirilmesi gereken eylemi seçin</string>
     <string name="expand_on_app_select_explainer">Bir uygulama seçildiğinde alt sayfayı otomatik olarak genişlet</string>
-    <string name="telemetry_dialog_text_2">Kullanım istatistikleri, Android sürümünüzün yanı sıra kullanıcı tarafından sıfırlanabilen kuruluma bağlı rastgele bir tanımlayıcıyı içerir ve<annotation url="https://aptabase.com">Aptabase (EU)</annotation>\'da tutulur.Yüklü uygulamalar ve tıklanan bağlantılar gibi hassas veriler <b>asla</b> toplanmayacaktır. Daha fazla bilgi edinmek için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">buraya</annotation> dokunun.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Kullanım istatistikleri, Android sürümünüzün yanı sıra kullanıcı tarafından sıfırlanabilen kuruluma bağlı rastgele bir tanımlayıcıyı içerir ve<annotation url="https://aptabase.com">Aptabase (EU)</annotation>\'da tutulur.Yüklü uygulamalar ve tıklanan bağlantılar gibi hassas veriler <b>asla</b> toplanmayacaktır. Daha fazla bilgi edinmek için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">buraya</annotation> dokunun.</string>
     <string name="telemetry_level_disabled">Devre dışı</string>
     <string name="telemetry_level_minimal">Az düzeyde</string>
     <string name="telemetry_level_standard">Standart</string>

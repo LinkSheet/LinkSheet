@@ -218,8 +218,7 @@
     <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>
     <string name="running_unofficial_build">非官方构建</string>
-    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。
-\n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。</string>
+    <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。 \n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。</string>
     <string name="privacy">隐私</string>
     <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接。支持的浏览器：%s</string>
     <string name="import_settings_override_preferences">这将会覆盖所有已存在的设置，确认继续？</string>
@@ -267,8 +266,7 @@
     <string name="link_handle_failed_text_field_label">询问</string>
     <string name="telemetry_level_minimal_description">已安装版本指标</string>
     <string name="url_copied_toast">已复制链接</string>
-    <string name="onboarding_0_title">欢迎使用
-\nLinkSheet</string>
+    <string name="onboarding_0_title">欢迎使用 \nLinkSheet</string>
     <string name="show_linksheet_referrer">显示 LinkSheet 引用来源</string>
     <string name="open_link_with_subtitle_2">LinkSheet 起初基于 OpenLinkWith</string>
     <string name="nightly_experiments_card">开发实验</string>
@@ -468,7 +466,7 @@
     <string name="export_privacy">要了解导出隐私，可以查看这个<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">链接</annotation>。</string>
     <string name="export_include_recommendation">我们推荐你仅在不想将导出数据与他人分享时，再启用以下选项！</string>
     <string name="linksheet_donation_explainer_2">捐赠超过 <b>5€</b> 后，你可以获得 <b>LinkSheet Pro</b>，其中包含 <b>Pro 版的特有功能</b>如：外部跟踪重定向、外部获取非 AMP 页面，还有更多！</string>
-    <string name="telemetry_dialog_text_2">使用指标包括随安装而定、用户可重置的随机标识符，以及你的 Android 版本，会被存放在 <annotation url="https://aptabase.com">Aptabase (EU)</annotation>。我们<b>从不</b>会收集诸如已安装应用、点击的链接一类的敏感数据。要了解更多，请点击<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">这里</annotation>。</string>
+    <string name="telemetry_dialog_text_2" translatable="false">使用指标包括随安装而定、用户可重置的随机标识符，以及你的 Android 版本，会被存放在 <annotation url="https://aptabase.com">Aptabase (EU)</annotation>。我们<b>从不</b>会收集诸如已安装应用、点击的链接一类的敏感数据。要了解更多，请点击<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">这里</annotation>。</string>
     <string name="export_log_dialog__text_log_privacy">要了解共享日志文件中可能存有的敏感数据，请点击<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">这里</annotation>。</string>
     <string name="settings__title_filter_apps">筛选应用</string>
     <string name="resolve_embeds">解析短链接</string>

@@ -280,8 +280,7 @@
     <string name="start_setup">Continuar</string>
     <string name="start_setup_explainer">La funcionalidad de LinkSheet requiere una configuración personalizada de Android. La siguiente configuración le guiará a través del proceso de varios pasos.</string>
     <string name="onboarding_setup">Configurar LinkSheet</string>
-    <string name="onboarding_0_title">Bienvenid@ a
-\nLinkSheet</string>
+    <string name="onboarding_0_title">Bienvenid@ a \nLinkSheet</string>
     <string name="onboarding_0_subtitle">Elija que se le pregunte siempre al abrir un enlace, configure los navegadores por defecto y mucho más</string>
     <string name="launch_onboarding_new">Lanzar la nueva integración</string>
     <string name="launch_onboarding__now_explainer">Probar el nuevo flujo de incorporación</string>
@@ -370,7 +369,7 @@
     <string name="telemetry_dialog_title">LinkSheet respeta su privacidad</string>
     <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
     <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
-    <string name="telemetry_dialog_text_2">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>.</string>
     <string name="something_went_wrong">Algo salió mal. Por favor, vuelva a intentarlo.</string>
     <string name="link_handle_failed">Ocurrió un error</string>
     <string name="retry">Volver a intentarlo</string>

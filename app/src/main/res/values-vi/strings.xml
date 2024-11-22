@@ -235,8 +235,7 @@
     <string name="url_copied_toast">Thông báo ngắn đã sao chép URL</string>
     <string name="url_copied_toast_explainer">Hiển thị thông báo ngắn khi URL được người dùng sao chép</string>
     <string name="onboarding_0_subtitle">Chọn luôn được nhắc khi mở một liên kết, đặt trình duyệt mặc định và hơn thế nữa</string>
-    <string name="onboarding_0_title">Chào mừng bạn đến
-\nLinkSheet</string>
+    <string name="onboarding_0_title">Chào mừng bạn đến \nLinkSheet</string>
     <string name="general_settings_explainer">Luôn hiển thị tên gói</string>
     <string name="export_explainer">Xuất thiết đặt ứng dụng hiện tại của bạn sang một tệp</string>
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
@@ -297,12 +296,11 @@
     <string name="donate">Quyên tặng</string>
     <string name="permission_required_explainer">Một số tùy chọn đã nhập yêu cầu các quyền hiện không được cấp cho LinkSheet. Hãy nhấn vào bên dưới để yêu cầu chúng.</string>
     <string name="reset_app_link_verification_status_subtitle">Nhấn vào đây để đặt lại trạng thái xác minh liên kết ứng dụng của tất cả các ứng dụng, sau đó đợi vài phút trong khi Android xác minh lại chúng. Bạn sẽ không nhận được xác nhận. Yêu cầu Shizuku.</string>
-    <string name="telemetry_dialog_text_2">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">đây</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">đây</annotation>.</string>
     <string name="resolve_embeds_explainer">Giải quyết các bản sao nhúng như fxtwitter.com vào máy chủ thực sự</string>
     <string name="experiments_explainer_3">Các thử nghiệm đang được phát triển tích cực và có thể không hoạt động chính xác hoặc hoàn toàn không hoạt động. Vui lòng không báo cáo lỗi trên Github. Nếu bạn muốn cung cấp phản hồi, hãy làm như vậy trên Discord.</string>
     <string name="donate_card_headline">Quyên tặng để hỗ trợ LinkSheet</string>
-    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng. \u0020
-\nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
+    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng. \u0020 \nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
     <string name="resolve_embeds">Giải quyết nhúng</string>
     <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>
     <string name="telemetry_configure_type">Loại phân tích</string>

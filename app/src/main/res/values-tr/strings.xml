@@ -131,7 +131,7 @@
     <string name="amp2html_local_cache">Yerel Amp2Html önbelleğini etkinleştir</string>
     <string name="amp2html_local_cache_explainer">Web sayfalarının alınan AMP olmayan sürümlerini yerel olarak önbelleğe alır</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="use_unified_preferred_browser_explainer">Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın.</string>
+    <string name="use_unified_preferred_browser_explainer">"Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın. "</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
     <string name="in_app_browser_subtitle">Uygulama içi tarayıcı modunu ayarla</string>
     <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulamalar karar verir</string>
@@ -154,7 +154,7 @@
     <string name="logs_explainer">Uygulama günlüklerini görüntüle</string>
     <string name="debug">Hata ayıklama</string>
     <string name="logs">Günlükler</string>
-    <string name="follow_only_known_trackers_explainer">Yönlendirmeleri yalnızca sunucunun bir izleyici/yönlendirici olduğu bilindiğinde takip etmeye çalışın. \"Harici hizmet aracılığıyla yönlendirmeleri takip et\" etkinleştirilmişse, bu her zaman etkin olacaktır.</string>
+    <string name="follow_only_known_trackers_explainer">"Yönlendirmeleri yalnızca sunucunun bir izleyici/yönlendirici olduğu bilindiğinde takip etmeye çalışın. \"Harici hizmet aracılığıyla yönlendirmeleri takip et\" etkinleştirilmişse, bu her zaman etkin olacaktır "</string>
     <string name="no_apps_found">Uygulama bulunamadı.</string>
     <string name="enable_request_private_browsing_button_explainer">Tarayıcıların yanında, tıklanan URL\'yi gizli gezinme modunda açan bir düğme görüntüler. Desteklenen tarayıcılar: %s</string>
     <string name="redact_log">Günlüğü yeniden düzenle (önerilir, bunu devre dışı bırakmak paket adlarını ve sunucu adlarını sızdırabilir)</string>
@@ -500,4 +500,6 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı bir (iş) profilde açmak için alt sayfada bir düğme gösterir</string>
     <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>
     <string name="settings_profile_switcher__title_profile_switcher">Profil değiştirme</string>
+    <string name="settings__hint_search">Ara</string>
+    <string name="bottom_sheet__event_app_refusal">Hedef uygulama bağlantıyı işlemeyi reddetti!</string>
 </resources>

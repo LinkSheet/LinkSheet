@@ -68,7 +68,7 @@
     <string name="checkmark">Checado</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
-    <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> \u0020(limpa parâmetros de rastreamento de URLs) \u0020</string>
+    <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> \u0020(limpa parâmetros de rastreamento de URLs)</string>
     <string name="error">Erro</string>
     <string name="back">Voltar</string>
     <string name="selected_browser_explainer">Esse navegador será aberto automaticamente se nenhum aplicativo nativo puder lidar com o link clicado</string>
@@ -95,9 +95,9 @@
     <string name="select_an_app">Selecione um app</string>
     <string name="close">Fechar</string>
     <string name="redirect_resolve_type_local_cache">local cache</string>
-    <string name="follow_redirects_external_service_explainer">Seguir os redirecionamentos usando uma API implantada em supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>) \u0020</string>
-    <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicações relacionadas à privacidade </annotation> \u0020</string>
-    <string name="fastfoward_rules_explainer">Usar a integração experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward </annotation> (ignore os redirecionamentos de alguns hosts extraindo o redirecionamento do link) \u0020</string>
+    <string name="follow_redirects_external_service_explainer">Seguir os redirecionamentos usando uma API implantada em supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>)</string>
+    <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicações relacionadas à privacidade</annotation></string>
+    <string name="fastfoward_rules_explainer">Usar a integração experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (ignore os redirecionamentos de alguns hosts extraindo o redirecionamento do link)</string>
     <string name="follow_redirects_local_cache">Ativar o cache de redirecionamento local</string>
     <string name="follow_redirects_local_cache_explainer">Armazenar em cache o resultado dos redirecionamentos localmente</string>
     <string name="resolved_via">%s resolvido via %s</string>
@@ -139,16 +139,16 @@
     <string name="redact_log">Reduzir o registro (recomendado, a desativação pode vazar nomes de pacotes e nomes de hosts)</string>
     <string name="include_settings">Incluir configurações (recomendado)</string>
     <string name="include_fingerprint">Incluir a impressão digital do dispositivo (recomendado)</string>
-    <string name="log_privacy">Para saber mais sobre a privacidade dos registros, visite este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>. \u0020</string>
+    <string name="log_privacy">Para saber mais sobre a privacidade dos registros, visite este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
     <string name="no_logs_found">Nenhum registro anterior!</string>
     <string name="enable_amp2html">Habilitar Amp2Html</string>
     <string name="amp2html_local_cache">Ativar o cache local do Amp2Html</string>
     <string name="amp2html_local_cache_explainer">Armazenar em cache as versões não AMP recuperadas de páginas da Web localmente</string>
     <string name="amp2html_external_service">Tentar obter uma versão de página não AMP por meio de um serviço externo</string>
-    <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em \u0020 supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>) \u0020</string>
+    <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em \u0020 supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="enable_libredirect_explainer">Redirecionar links para front-ends favoráveis à privacidade usando a integração experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation>. \u0020</string>
-    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicações relacionadas à privacidade </annotation> \u0020</string>
+    <string name="enable_libredirect_explainer">Redirecionar links para front-ends favoráveis à privacidade usando a integração experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation>.</string>
+    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicações relacionadas à privacidade</annotation></string>
     <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
     <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
     <string name="in_app">Incorporado</string>
@@ -164,7 +164,7 @@
     <string name="enable_request_private_browsing_button">Ativar o botão \"Solicitar navegação privada\"</string>
     <string name="enable_request_private_browsing_button_explainer">Exibe um botão ao lado dos navegadores que abre o URL clicado no modo de navegação privada. Navegadores compatíveis: %s</string>
     <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de links Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
-    <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicações relacionadas à privacidade </annotation> \u0020</string>
+    <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicações relacionadas à privacidade</annotation></string>
     <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
     <string name="advanced">Avançado</string>
     <string name="advanced_explainer">Sinalizadores de Recursos, Experimentos, Importação/Exportação</string>

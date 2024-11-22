@@ -6,7 +6,7 @@
     <string name="default_apps">優先アプリ</string>
     <string name="set_as_browser">ブラウザとして設定</string>
     <string name="set_as_browser_explainer">ここをタップしてLinkSheetをデフォルトのブラウザにします</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます！ \u0020</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます！</string>
     <string name="built_by_error">このビルドは 1fexd によっても Github workflowによっても署名されていません。</string>
     <string name="always">常に</string>
     <string name="open_with_app">%sで開く</string>
@@ -91,7 +91,7 @@
     <string name="dismiss">却下</string>
     <string name="join">参加</string>
     <string name="donate">寄付</string>
-    <string name="flavor"><b>フレーバー:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
+    <string name="flavor"><b>フレーバー:</b> \u0020 <font face="monospace">%s</font></string>
     <string name="confirm_import">確認</string>
     <string name="bottom_sheet">ボトムシート</string>
     <string name="whitelisted_browsers">ホワイトリストに登録されているブラウザ</string>
@@ -116,7 +116,7 @@
     <string name="github_explainer">ソースコードリポジトリ</string>
     <string name="open_copied_link">クリップボードから</string>
     <string name="links_explainer">ClearUrls、LibRedirect、リダイレクトの許可</string>
-    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 統合（URL から追跡パラメータをクリア） \u0020</string>
+    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 統合（URL から追跡パラメータをクリア）</string>
     <string name="follow_redirects_external_service">外部サービス経由でリダイレクトを追跡</string>
     <string name="follow_only_known_trackers">既知のトラッカーだけを許可する</string>
     <string name="follow_only_known_trackers_explainer">ホストがトラッカー/リダイレクトであることがわかっている場合にのみ、リダイレクトを追跡しようとします。 「外部サービス経由のリダイレクトに従う」が有効になっている場合、これは常に有効になります。</string>
@@ -127,19 +127,19 @@
     <string name="app_browsers_subtitle">優先アプリとブラウザの設定</string>
     <string name="donate_subtitle"><b>LinkSheet Pro</b>にアップグレード</string>
     <string name="use_clear_urls">ClearURLを使用</string>
-    <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。 \u0020</string>
+    <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">"supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します   （annotation url=\"https://supabase.com/privacy\"&gt;Privacy policy&lt;/annotation&gt;）  "</string>
     <string name="switch_profile">プロファイル切り替えを有効にする</string>
     <string name="follow_redirects_short">リダイレクト</string>
     <string name="unknown_host">%s はブロックされているか存在しません</string>
-    <string name="fastfoward_rules_explainer">実験的な <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward </annotation> ルールの統合を使用する (リンクからリダイレクトを抽出することで、一部のホストのリダイレクトをバイパスする)。 \u0020</string>
+    <string name="fastfoward_rules_explainer">実験的な <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ルールの統合を使用する (リンクからリダイレクトを抽出することで、一部のホストのリダイレクトをバイパスする)。</string>
     <string name="resolved_via">%s は %s 経由で解決されました</string>
     <string name="dont_show_filtered_item_explainer">クリックしたホストの最後に使用したアプリを提案する上部の項目を表示しない</string>
     <string name="downloader_url_mime_type_explainer">URLの末尾にファイル拡張子（例：\".jpg\"）があるかどうかをチェックする。拡張子がある場合は、ダウンロードしたファイルにこのタイプが使われる。</string>
     <string name="disable_in_selected">強制無効化…</string>
     <string name="no_apps_found">アプリが見つかりません。</string>
-    <string name="donate_explainer_crypto">暗号通貨で寄付する場合は、<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> にメールを送信してください。 \u0020</string>
+    <string name="donate_explainer_crypto">暗号通貨で寄付する場合は、<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> にメールを送信してください。</string>
     <string name="debug_build">デバッグビルド</string>
     <string name="url_copied_toast_explainer">ユーザーがURLをコピーしたときにトーストを表示する</string>
     <string name="enable_linksheet_compat">実験的なLinkSheet Compatメニューを有効にする</string>
@@ -177,7 +177,7 @@
     <string name="configure_explainer">LinkSheetCompatを設定するにはここをタップしてください</string>
     <string name="onboarding_2_install_shizuku">Shizukuをインストール</string>
     <string name="at_least_one_known_browser_installed">少なくとも 1 つのブラウザがインストールされている</string>
-    <string name="enable_amp2html_explainer">AMP ページを通常の Web バージョンにリダイレクトします。これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">プライバシー関連の影響</annotation>がある可能性があります。 \u0020</string>
+    <string name="enable_amp2html_explainer">AMP ページを通常の Web バージョンにリダイレクトします。これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">プライバシー関連の影響</annotation>がある可能性があります。</string>
     <string name="onboarding_5_card_title">セットアップ</string>
     <string name="instance_not_available_anymore">インスタンスはもう利用できません！</string>
     <string name="experiments_explainer_3">実験は現在開発中であり、正しく動作しないか、まったく動作しない可能性があります。Github でバグを報告しないでください。フィードバックを提供したい場合は、Discord で行ってください。</string>
@@ -192,7 +192,7 @@
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">すべて</string>
     <string name="generic__button_text_copy_clipboard">クリップボードにコピー</string>
     <string name="generic__button_text_cancel">キャンセル</string>
-    <string name="export_log_dialog__text_log_info">次の場所でキャプチャされたログの共有設定を構成します: <font face="monospace">%s</font> \u0020</string>
+    <string name="export_log_dialog__text_log_info">次の場所でキャプチャされたログの共有設定を構成します: <font face="monospace">%s</font></string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheetは正しくセットアップされ、操作できる状態です</string>
     <string name="resolve_event__sorting_apps">アプリリストの並べ替え</string>
     <string name="follow_redirects_allow_darknets_explainer">ダークネットの次のリダイレクトを許可する (サポート対象: %s)</string>
@@ -240,8 +240,8 @@
     <string name="reset_app_link_verification_status">アプリリンクの検証ステータスをリセット</string>
     <string name="settings_app_config__button_add_item">アイテムを追加</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">推奨</string>
-    <string name="enable_libredirect_explainer">実験的な<annotation url="https://github.com/libredirect/libredirect">LibRedirect </annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします。 \u0020</string>
-    <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">プライバシーに関連した意味を持つかもしれません</annotation>。 \u0020</string>
+    <string name="enable_libredirect_explainer">実験的な<annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします。</string>
+    <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">プライバシーに関連した意味を持つかもしれません</annotation>。</string>
     <string name="random_instance">ランダムインスタンス</string>
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にする</string>
     <string name="debug_explainer">アプリログ、検証済みハンドラーリセット</string>
@@ -252,24 +252,24 @@
     <string name="export_log">ログをエクスポート</string>
     <string name="include_settings">設定を含める（推奨）</string>
     <string name="include_fingerprint">デバイスのフィンガープリントを含める（推奨）</string>
-    <string name="log_privacy">ログのプライバシーについて詳しくは、この <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">リンク</annotation> をご覧ください。 \u0020</string>
+    <string name="log_privacy">ログのプライバシーについて詳しくは、この <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">リンク</annotation> をご覧ください。</string>
     <string name="no_logs_found">過去のログが見つかりません！</string>
     <string name="enable_amp2html">Amp2Htmlを有効にする</string>
     <string name="use_unified_preferred_browser_explainer">これを有効にすると、以下の設定が通常リンクとアプリ内リンクの両方に適用されます。無効にした場合は、以下のボタンを使用して通常モードとアプリ内モードを切り替えることができます。</string>
     <string name="amp2html_external_service">外部サービス経由で非 AMP ページ バージョンを取得しようとしています</string>
-    <string name="amp2html_external_service_explainer">supabase.com にデプロイされた API を使用して、非 AMP ページ バージョンを取得しようとします (<annotation url="https://supabase.com/privacy">プライバシー ポリシー</annotation>) \u0020</string>
+    <string name="amp2html_external_service_explainer">supabase.com にデプロイされた API を使用して、非 AMP ページ バージョンを取得しようとします (<annotation url="https://supabase.com/privacy">プライバシー ポリシー</annotation>)</string>
     <string name="enable_all">すべてを有効にする</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizukuモードがアクティブ化されました。アプリをタップすると、自動リンク処理機能を切り替えることができます。アプリを長押しすると、「デフォルトで開く」設定メニューが開きます。</string>
     <string name="feature_flags">機能フラグ</string>
     <string name="feature_flags_explainer">実験的な機能を有効または無効にする</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet は、ブラウザとして知られているアプリを少なくとも 1 つ検出しました。</string>
     <string name="at_least_one_unknown_browser_installer">少なくとも 1 つの (不明な) ブラウザがインストールされている</string>
-    <string name="donate_card_subtitle">LinkSheet が気に入ったら、Github でスターを付けたり、寄付したりすることを検討してください。 \n<b>5 ユーロ</b> 以上を寄付した寄付者は、独占的な機能を備えた <b>LinkSheet Pro</b> の対象となります。 \u0020</string>
+    <string name="donate_card_subtitle">LinkSheet が気に入ったら、Github でスターを付けたり、寄付したりすることを検討してください。 \n<b>5 ユーロ</b> 以上を寄付した寄付者は、独占的な機能を備えた <b>LinkSheet Pro</b> の対象となります。</string>
     <string name="import_dumped_preference">以前バックアップとして保存された設定情報を、再びシステムに読み込んで復元する</string>
     <string name="import_and_override">インポートと上書き</string>
-    <string name="github_workflow_run_id"><b>ワークフロー ID:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <string name="version_name"><b>バージョン:</b> \u0020 <font face="monospace">%s</font> \u0020</string>
-    <string name="built_at"><b>ビルド:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="github_workflow_run_id"><b>ワークフロー ID:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="version_name"><b>バージョン:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="built_at"><b>ビルド:</b> <font face="monospace">%s</font></string>
     <string name="import_settings">インポート設定</string>
     <string name="fastforward_version">FastForward ルール</string>
     <string name="download_started_toast">ダウンロードを開始しました</string>
@@ -290,7 +290,7 @@
     <string name="telemetry_level_minimal_description">インストール済みバージョンに関する指標</string>
     <string name="telemetry_level_standard_description">集計された使用統計</string>
     <string name="telemetry_level_exhaustive_description">詳細な使用統計</string>
-    <string name="telemetry_dialog_text_2">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url="https://aptabase.com">Aptabase (EU)</annotation> に保存されます。 \u0020</string>
+    <string name="telemetry_dialog_text_2">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url="https://aptabase.com">Aptabase (EU)</annotation> に保存されます。</string>
     <string name="telemetry_configure_title">アナリティクス</string>
     <string name="telemetry_identifier_reset">識別子をリセット</string>
     <string name="telemetry_configure_type">アナリティクスタイプ</string>
@@ -363,7 +363,7 @@
     <string name="dev_mode_enabled">おめでとうございます。開発モードが有効になりました。ただし注意してください。</string>
     <string name="resolve_via_failed_toast_explainer">外部サービス経由で URL を解決できない場合にトーストを表示する</string>
     <string name="dev_explainer">開発者設定</string>
-    <string name="last_updated"><b>バージョン:</b> <font face="monospace">%s</font> \u0020</string>
+    <string name="last_updated"><b>バージョン:</b> <font face="monospace">%s</font></string>
     <string name="permission_required_explainer">インポートされた設定の中には、現在 LinkSheet に付与されていない権限を必要とするものがあります。以下をタップしてリクエストしてください。</string>
     <string name="experiments_explainer_2">積極的な開発</string>
     <string name="no_action">何もしない</string>
@@ -418,7 +418,7 @@
     <string name="export_import_settings_explainer">現在の設定をエクスポートするか、以前の設定のエクスポートをインポートします</string>
     <string name="import_explainer">ファイルから以前のエクスポートをインポートする</string>
     <string name="include_log_hash_key">ログハッシュキー（ログを編集するために使用されるキー）を含める</string>
-    <string name="export_privacy">エクスポートのプライバシーについて詳しくは、この <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">リンク</annotation> をご覧ください。 \u0020</string>
+    <string name="export_privacy">エクスポートのプライバシーについて詳しくは、この <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">リンク</annotation> をご覧ください。</string>
     <string name="export_to_file">ファイルにエクスポート</string>
     <string name="running_unofficial_build">非公式ビルド</string>
     <string name="notifications_explainer">URL をコピーしました。ダウンロードを開始しました</string>
@@ -474,7 +474,7 @@
     <string name="export_log_dialog__title_include_fingerprint">ビルドフィンガープリントを含める</string>
     <string name="export_log_dialog__title_include_settings">設定を含める</string>
     <string name="export_log_dialog__subtitle_include_settings">推奨</string>
-    <string name="export_log_dialog__text_log_privacy">共有ログ ファイル内の潜在的に機密性の高いデータの詳細については、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ここ</annotation> をタップしてください。 \u0020</string>
+    <string name="export_log_dialog__text_log_privacy">共有ログ ファイル内の潜在的に機密性の高いデータの詳細については、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ここ</annotation> をタップしてください。</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">%s でキャプチャされたログを表示しています</string>
     <string name="crash_viewer__subtitle_app_crashed">ああ、大変、そんなことが起こるはずじゃなかった！</string>
     <string name="settings_main_setup_success__button_link_handlers">リンクハンドラー</string>

@@ -274,6 +274,7 @@ class ImprovedBottomSheet(
                 },
                 unfurlResult = result.unfurlResult,
                 downloadable = result.downloadable.isDownloadable(),
+                // TODO: Use LibRedirectResult.Redirected? as type
                 libRedirected = enableIgnoreLibRedirectButton && result.libRedirectResult is LibRedirectResult.Redirected,
                 copyUri = {
                     viewModel.clipboardManager.setText(clipboardLabel, result.uri.toString())
@@ -287,8 +288,8 @@ class ImprovedBottomSheet(
                     }
                 },
                 shareUri = {
-                    startActivity(shareUri(result.uri))
-                    hideDrawer()
+                    activity.finish()
+                    activity.startActivity(shareUri(result.uri))
                 },
                 downloadUri = {
                     bottomSheetViewModel.startDownload(
@@ -307,13 +308,13 @@ class ImprovedBottomSheet(
                 ignoreLibRedirect = {
                     val redirected = result.libRedirectResult as LibRedirectResult.Redirected
 
-                    startActivity(
+                    activity.finish()
+                    activity.startActivity(
                         selfIntent(
                             redirected.originalUri,
                             bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                         )
                     )
-                    hideDrawer()
                 },
                 onDoubleClick = {
                     if (result.app != null) {

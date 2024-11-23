@@ -509,4 +509,14 @@
     <string name="settings_profile_switcher__title_profile_switcher">Přepínač profilu</string>
     <string name="bottom_sheet__event_app_refusal">Cílová aplikace odmítla zpracovat odkaz!</string>
     <string name="settings__hint_search">Hledat</string>
+    <string name="generic__label_unknown_profile">Neznámý profil</string>
+    <string name="settings_profile_switcher__text_not_installed">Nepodařilo se připojit k tomuto profilu</string>
+    <string name="settings_profile_switcher__text_current_profile">Aktuálně spuštěné v tomto profilu</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Povolit připojení napříč profily</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Klepnutím připojíte LinkSheet k jeho protějšku v sekundárním profilu</string>
+    <string name="settings_profile_switcher__divider_current_profile">Aktuální profil</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Další profily</string>
+    <string name="generic__label_personal_profile">Osobní profil</string>
+    <string name="generic__label_work_profile">Pracovní profil</string>
+    <string name="settings_profile_switcher__text_other_profile">Jiný profil</string>
 </resources>

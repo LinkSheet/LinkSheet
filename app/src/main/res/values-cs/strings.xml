@@ -87,7 +87,7 @@
     <string name="links">Odkazy</string>
     <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
     <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>)</string>
-    <string name="follow_only_known_trackers_explainer">Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena.</string>
+    <string name="follow_only_known_trackers_explainer">"Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena "</string>
     <string name="theme">Motiv</string>
     <string name="dark">Tmavý</string>
     <string name="fastfoward_rules">Použít pravidla FastForward</string>
@@ -122,7 +122,7 @@
     <string name="export">Export</string>
     <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">odkaz</annotation>.</string>
     <string name="enable_amp2html">Povolit Amp2Html</string>
-    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation></string>
+    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation></string>
     <string name="amp2html_local_cache">Povolit místní mezipaměť Amp2Html</string>
     <string name="amp2html_local_cache_explainer">Ukládat načtené ne-AMP verze stránek do místní mezipaměti</string>
     <string name="feature_flags">Příznaky funkcí</string>
@@ -182,7 +182,7 @@
     <string name="amp2html_external_service">Pokusit se získat ne-AMP verzi stránky pomocí externí služby</string>
     <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="use_unified_preferred_browser_explainer">Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán.</string>
+    <string name="use_unified_preferred_browser_explainer">"Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán. "</string>
     <string name="instance_not_available_anymore">Instance již není dostupná!</string>
     <string name="advanced">Pokročilé</string>
     <string name="shizuku">Integrace Shizuku</string>
@@ -267,7 +267,7 @@
     <string name="unknown_host">%s je buď blokován nebo neexistuje</string>
     <string name="onboarding_0_title">Vítejte v aplikaci \nLinkSheet</string>
     <string name="start_setup">Pokračovat</string>
-    <string name="last_updated"><b>Verze:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="last_updated"><b>Verze:</b> <font face="monospace">%s</font></string>
     <string name="include_throwable">Zahrnout protokoly o pádu (doporučeno, ale nelze je redigovat)</string>
     <string name="dev_mode_enabled">Gratulujeme, povolili jste vývojářský režim. Buďte opatrní.</string>
     <string name="url_copied_toast">Adresa URL zkopírována</string>
@@ -375,10 +375,10 @@
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Vše</string>
     <string name="settings_notifications__divider_toasts">Vyskakovací zprávy</string>
     <string name="settings_shortcuts__title_link_handlers">Zpracování odkazů</string>
-    <string name="built_at"><b>Sestaveno:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="built_at"><b>Sestaveno:</b> <font face="monospace">%s</font></string>
     <string name="customization">Přizpůsobení</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Zakázané</string>
-    <string name="flavor"><b>Úprava:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="flavor"><b>Úprava:</b> <font face="monospace">%s</font></string>
     <string name="switch_profile">Povolit přepínání profilů</string>
     <string name="build_info">Informace o sestavení</string>
     <string name="verified_link_handlers">Ověření zpracovatelé odkazů</string>
@@ -413,7 +413,7 @@
     </plurals>
     <string name="settings__title_filter_apps">Filtrovat aplikace</string>
     <string name="link_handle_failed_text">LinkSheet nedokáže zpracovat tento odkaz, protože se zdá, že je poškozený. Můžete jej upravit níže a zkusit to znovu. Případně také můžete zkusit webové vyhledávání.</string>
-    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>ID workflow:</b> <font face="monospace">%s</font></string>
     <string name="reset_app_link_verification_status">Resetovat status ověřených odkazů aplikací</string>
     <string name="reset_app_link_verification_status_subtitle">Klepněte sem pro resetování statusu ověřených odkazů u všech aplikací, poté počkejte několik minut, než je systém Android znovu ověří. Potvrzení neobdržíte. Vyžaduje Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Vyžádáno opětovné ověření</string>
@@ -495,11 +495,11 @@
         <item quantity="few">%d ověření hostitelé</item>
         <item quantity="other">%d ověřených hostitelů</item>
     </plurals>
-    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt; Propojení pracovních a osobních aplikací</string>
+    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt;Propojení pracovních a osobních aplikací</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet není nastaven</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet je nastaven</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>
-    <string name="version_name"><b>Verze:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="version_name"><b>Verze:</b> <font face="monospace">%s</font></string>
     <string name="generic__text_url">URL</string>
     <string name="home__clipboard_card_source">Ze schránky</string>
     <string name="generic__text_edit">Upravit</string>
@@ -507,4 +507,6 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Zobrazí tlačítko ve spodním listu pro otevřený odkazu, na který jste klepnuli, v (pracovním) profilu</string>
     <string name="settings_profile_switcher__divider_configuration">Nastavení</string>
     <string name="settings_profile_switcher__title_profile_switcher">Přepínač profilu</string>
+    <string name="bottom_sheet__event_app_refusal">Cílová aplikace odmítla zpracovat odkaz!</string>
+    <string name="settings__hint_search">Hledat</string>
 </resources>

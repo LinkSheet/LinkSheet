@@ -7,10 +7,10 @@ object FeatureFlags : PreferenceDefinition(
     "feature_flag_declutter_url",
     "feature_flag_url_preview",
     "experiment_share_parse_text",
-    "feature_flag_share_parse_text"
+    "feature_flag_share_parse_text",
+    "feature_flag_switch_profile"
 ) {
     val linkSheetCompat = boolean("feature_flag_linksheet_compat")
-    val switchProfile = boolean("feature_flag_switch_profile")
 
     init { finalize() }
 }

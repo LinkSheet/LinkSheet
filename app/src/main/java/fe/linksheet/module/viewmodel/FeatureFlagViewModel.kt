@@ -22,11 +22,6 @@ class FeatureFlagViewModel(
             featureFlagRepository.asState(FeatureFlags.linkSheetCompat),
             R.string.enable_linksheet_compat,
             R.string.enable_linksheet_compat_explainer
-        ),
-        Flag.Full(
-            featureFlagRepository.asState(FeatureFlags.switchProfile),
-            R.string.switch_profile,
-            R.string.switch_profile_explainer
         )
     )
 }

@@ -502,4 +502,14 @@
     <string name="settings_profile_switcher__divider_configuration">Configuration</string>
     <string name="settings__hint_search">Search</string>
     <string name="bottom_sheet__event_app_refusal">Target app refused to handle link!</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Enable cross-profile connection</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Tap to connect LinkSheet to its counterpart in your secondary profile</string>
+    <string name="settings_profile_switcher__divider_current_profile">Current profile</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Other profiles</string>
+    <string name="generic__label_personal_profile">Personal profile</string>
+    <string name="generic__label_work_profile">Work profile</string>
+    <string name="generic__label_unknown_profile">Unknown profile</string>
+    <string name="settings_profile_switcher__text_not_installed">Unable to connect to this profile</string>
+    <string name="settings_profile_switcher__text_current_profile">Currently running in this profile</string>
+    <string name="settings_profile_switcher__text_other_profile">Other profile</string>
 </resources>

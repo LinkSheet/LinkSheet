@@ -2,12 +2,9 @@ package fe.linksheet.experiment.improved.resolver.activity.bottomsheet
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.CrossProfileApps
 import android.content.res.Configuration
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -28,27 +25,20 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import fe.android.compose.system.rememberSystemService
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetImpl
-import fe.linksheet.activity.bottomsheet.UrlBar
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.column.*
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.extension.android.setText
-import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.interconnect.LinkSheetConnector
-import fe.linksheet.module.database.entity.LibRedirectDefault
-import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
@@ -56,10 +46,8 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ReferrerHelper
-import fe.android.compose.version.AndroidVersion
 import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
-import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -205,10 +193,9 @@ class ImprovedBottomSheet(
 
                     is IntentResolveResult.Default -> {
                         BottomSheetApps(
-                            bottomSheetViewModel = viewModel,
                             result = status as IntentResolveResult.Default,
                             enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
-                            enableSwitchProfile = viewModel.switchProfile(),
+                            enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
                             isExpanded = drawerState.currentValue == SheetValue.Expanded,
                             requestExpand = {},
                             hideDrawer = hideDrawer,
@@ -237,8 +224,6 @@ class ImprovedBottomSheet(
 
     @Composable
     private fun BottomSheetApps(
-        // TODO: Refactor this away
-        bottomSheetViewModel: BottomSheetViewModel,
         result: IntentResolveResult.Default,
         enableIgnoreLibRedirectButton: Boolean,
         enableSwitchProfile: Boolean,
@@ -251,80 +236,28 @@ class ImprovedBottomSheet(
         urlCardDoubleTap: Boolean,
     ) {
         if (previewUrl && result.uri != null) {
-            val uriString = result.uri.toString()
-            val crossProfileApps = rememberSystemService<CrossProfileApps>()
-
-            val appLabel = stringResource(id = R.string.app_name)
-            val profileSwitcher = remember(key1 = enableSwitchProfile) {
-                ProfileSwitcher(appLabel, crossProfileApps)
-            }
-
-            val clipboardLabel = stringResource(id = R.string.generic__text_url)
-
-            UrlBar(
-                uri = uriString,
-                profiles = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
-                    profileSwitcher.getProfiles()
+            UrlBarWrapper(
+                profileSwitcher = viewModel.profileSwitcher,
+                result = result,
+                enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
+                enableSwitchProfile = enableSwitchProfile,
+                enableUrlCopiedToast = viewModel.urlCopiedToast(),
+                enableDownloadStartedToast = viewModel.downloadStartedToast(),
+                enableUrlCardDoubleTap = urlCardDoubleTap,
+                hideAfterCopying = viewModel.hideAfterCopying(),
+                hideDrawer = hideDrawer,
+                showToast = { id -> showToast(id) },
+                copyUrl = { label, url ->
+                    viewModel.clipboardManager.setText(label, url)
                 },
-                switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
-                    {
-                        profileSwitcher.switchTo(it, result.uri, activity)
-                        activity.finish()
-                    }
+                startDownload = { url, downloadable ->
+                    viewModel.startDownload(activity.resources, url, downloadable)
                 },
-                unfurlResult = result.unfurlResult,
-                downloadable = result.downloadable.isDownloadable(),
-                // TODO: Use LibRedirectResult.Redirected? as type
-                libRedirected = enableIgnoreLibRedirectButton && result.libRedirectResult is LibRedirectResult.Redirected,
-                copyUri = {
-                    viewModel.clipboardManager.setText(clipboardLabel, result.uri.toString())
-
-                    if (bottomSheetViewModel.urlCopiedToast()) {
-                        showToast(R.string.url_copied)
+                launchApp = { app, intent, modifier ->
+                    viewModel.viewModelScope.launch {
+                        handleLaunch(viewModel.makeOpenAppIntent(app, intent, modifier))
                     }
-
-                    if (bottomSheetViewModel.hideAfterCopying()) {
-                        hideDrawer()
-                    }
-                },
-                shareUri = {
-                    activity.finish()
-                    activity.startActivity(shareUri(result.uri))
-                },
-                downloadUri = {
-                    bottomSheetViewModel.startDownload(
-                        activity.resources, result.uri,
-                        result.downloadable as DownloadCheckResult.Downloadable
-                    )
-
-                    if (bottomSheetViewModel.downloadStartedToast()) {
-                        showToast(R.string.download_started)
-                    }
-
-                    if (bottomSheetViewModel.hideAfterCopying()) {
-                        hideDrawer()
-                    }
-                },
-                ignoreLibRedirect = {
-                    val redirected = result.libRedirectResult as LibRedirectResult.Redirected
-
-                    activity.finish()
-                    activity.startActivity(
-                        selfIntent(
-                            redirected.originalUri,
-                            bundleOf(LibRedirectDefault.libRedirectIgnore to true)
-                        )
-                    )
-                },
-                onDoubleClick = {
-                    if (result.app != null) {
-                        viewModel.viewModelScope.launch {
-                            handleLaunch(viewModel.makeOpenAppIntent(result.app, result.intent, ClickModifier.None))
-                        }
-                    }
-
-                    Unit
-                }.takeIf { urlCardDoubleTap }
+                }
             )
         }
 
@@ -374,11 +307,11 @@ class ImprovedBottomSheet(
         }
 
         if (result.resolved.isNotEmpty()) {
-            if (bottomSheetViewModel.gridLayout()) {
+            if (viewModel.gridLayout()) {
                 Grid(
                     result = result,
                     hasPreferredApp = result.filteredItem != null,
-                    hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
+                    hideChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
                     isExpanded = isExpanded,
                     requestExpand = requestExpand,
                     showPackage = showPackage
@@ -387,8 +320,8 @@ class ImprovedBottomSheet(
                 List(
                     result = result,
                     hasPreferredApp = result.filteredItem != null,
-                    hideChoiceButtons = bottomSheetViewModel.hideBottomSheetChoiceButtons(),
-                    showNativeLabel = bottomSheetViewModel.bottomSheetNativeLabel(),
+                    hideChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
+                    showNativeLabel = viewModel.bottomSheetNativeLabel(),
                     isExpanded = isExpanded,
                     requestExpand = requestExpand,
                     showPackage = showPackage
@@ -593,7 +526,7 @@ class ImprovedBottomSheet(
     }
 
     override fun onNewIntent(intent: Intent) {
-        if(loopDetectorExperiment != null) {
+        if (loopDetectorExperiment != null) {
             intentFlow.value = intent
         }
     }

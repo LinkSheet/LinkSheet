@@ -37,8 +37,7 @@ import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
-import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ProfileSwitcher
-import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
+import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
@@ -54,7 +53,6 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.android.compose.version.AndroidVersion
-import fe.linksheet.util.UriUtil
 import fe.linksheet.util.selfIntent
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -180,7 +178,7 @@ class BottomSheetActivityImpl(
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
                 result = result as BottomSheetResult.SuccessResult,
-                enableSwitchProfile = viewModel.switchProfile(),
+                enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
                 hideDrawer = hideDrawer,
@@ -246,7 +244,7 @@ class BottomSheetActivityImpl(
                 },
                 switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
                     {
-                        profileSwitcher.switchTo(it, result.uri, activity)
+                        profileSwitcher.switchTo(it, result.uri.toString(), activity)
                         activity.finish()
                     }
                 },
@@ -271,7 +269,7 @@ class BottomSheetActivityImpl(
                 downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
                     {
                         bottomSheetViewModel.startDownload(
-                            activity.resources, result.uri,
+                            activity.resources, result.uri.toString(),
                             result.downloadable as DownloadCheckResult.Downloadable
                         )
 

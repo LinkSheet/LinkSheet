@@ -32,9 +32,13 @@ fun Intent.newIntent(action: String, uri: Uri?, dropExtras: List<String>?): Inte
 
 
 fun shareUri(uri: Uri?): Intent {
+    return shareUri(uri.toString())
+}
+
+fun shareUri(uri: String?): Intent {
     return Intent.createChooser(Intent().apply {
         this.action = Intent.ACTION_SEND
         this.type = "text/plain"
-        this.putExtra(Intent.EXTRA_TEXT, uri?.toString())
+        this.putExtra(Intent.EXTRA_TEXT, uri)
     }, null)
 }

@@ -29,6 +29,7 @@ import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.okhttp.okHttpModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.profile.ProfileSwitcherModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.request.requestModule
@@ -42,12 +43,14 @@ import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
+import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.BuildType
 import fe.linksheet.util.HttpUrlTypeAdapter
 import fe.linksheet.util.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
+import org.lsposed.hiddenapibypass.HiddenApiBypass
 import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
@@ -93,9 +96,9 @@ class LinkSheetApp : Application() {
             HttpUrlTypeAdapter.register(this)
         }
 
-//        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
-//            HiddenApiBypass.addHiddenApiExemptions("")
-//        }
+        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
+            HiddenApiBypass.addHiddenApiExemptions("L")
+        }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
@@ -129,7 +132,8 @@ class LinkSheetApp : Application() {
                 statisticsModule,
                 VersionTrackerModule,
                 pasteServiceModule,
-                AndroidPackageInfoModule
+                AndroidPackageInfoModule,
+                ProfileSwitcherModule
             )
         }
 

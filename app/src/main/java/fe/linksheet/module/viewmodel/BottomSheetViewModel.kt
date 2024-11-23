@@ -37,7 +37,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.flags.FeatureFlags
+import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -65,6 +65,7 @@ class BottomSheetViewModel(
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val intentResolver: IntentResolver,
+    val profileSwitcher: ProfileSwitcher,
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
@@ -106,7 +107,7 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemService<DownloadManager>()!!
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
-    val switchProfile = featureFlagRepository.asState(FeatureFlags.switchProfile)
+    val bottomSheetProfileSwitcher = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
     val improvedIntentResolver = experimentRepository.asState(Experiments.improvedIntentResolver)
     val loopDetector = experimentRepository.asState(Experiments.loopDetector)
 
@@ -223,11 +224,11 @@ class BottomSheetViewModel(
         }
     }
 
-    fun startDownload(resources: Resources, uri: Uri?, downloadable: DownloadCheckResult.Downloadable) {
+    fun startDownload(resources: Resources, uri: String?, downloadable: DownloadCheckResult.Downloadable) {
         val path =
             "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
 
-        val request = DownloadManager.Request(uri)
+        val request = DownloadManager.Request(Uri.parse(uri))
             .setTitle(resources.getString(R.string.linksheet_download))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(

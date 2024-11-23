@@ -24,6 +24,7 @@ import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.version.AndroidVersion
 import fe.android.preference.helper.compose.StateMappedPreference
 import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
@@ -65,12 +66,6 @@ fun BottomSheetSettingsRoute(
     navigate: (String) -> Unit,
     viewModel: BottomSheetSettingsViewModel = koinViewModel(),
 ) {
-    val displayProfileSwitcherPreference = remember {
-        viewModel.canDisplayProfileSwitcherPreference()
-                // TODO: Remove
-                && BuildType.current.allowDebug
-    }
-
     val context = LocalActivity.current
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange {
         if (!viewModel.usageStatsPermission.check()) {
@@ -100,7 +95,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.base_config)
 
-        group(size = 4 + if (displayProfileSwitcherPreference) 1 else 0) {
+        group(size = 4 + if (AndroidVersion.AT_LEAST_API_30_R) 1 else 0) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 SwitchListItem(
                     shape = shape,
@@ -122,9 +117,7 @@ fun BottomSheetSettingsRoute(
 
             item(key = R.string.enable_request_private_browsing_button) { padding, shape ->
                 val browsers = remember {
-                    KnownBrowser.browsers
-                        .filter { it.privateBrowser }
-                        .joinToString(separator = ", ") { it.displayName }
+                    KnownBrowser.browsers.filter { it.privateBrowser }.joinToString(separator = ", ") { it.displayName }
                 }
 
                 PreferenceSwitchListItem(
@@ -133,8 +126,7 @@ fun BottomSheetSettingsRoute(
                     preference = viewModel.enableRequestPrivateBrowsingButton,
                     headlineContent = textContent(id = R.string.enable_request_private_browsing_button),
                     supportingContent = textContent(
-                        id = R.string.enable_request_private_browsing_button_explainer,
-                        browsers
+                        id = R.string.enable_request_private_browsing_button_explainer, browsers
                     )
                 )
             }
@@ -159,10 +151,10 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            if (displayProfileSwitcherPreference) {
+            if (AndroidVersion.AT_LEAST_API_30_R) {
                 item(key = R.string.switch_profile) { padding, shape ->
                     PreferenceDividedSwitchListItem(
-                        enabled = EnabledContent.Main.set,
+                        enabled = if (!viewModel.profileSwitcher.needsSetup()) EnabledContent.all else EnabledContent.Main.set,
                         shape = shape,
                         padding = padding,
                         preference = viewModel.bottomSheetProfileSwitcher,
@@ -254,12 +246,10 @@ private fun TapConfigGroupItem(
     val rotation by animateFloatAsState(targetValue = if (state.isOpen) 180f else 0f, label = "Arrow rotation")
 
     ResultDialog(
-        state = state,
-        onClose = { newConfig ->
+        state = state, onClose = { newConfig ->
             preference(newConfig)
             interaction.perform(FeedbackType.Confirm)
-        }
-    ) {
+        }) {
         TapConfigDialog(
             type = type,
             currentConfig = preference.value,

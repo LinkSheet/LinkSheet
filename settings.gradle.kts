@@ -41,6 +41,7 @@ rootProject.name = "LinkSheet"
 
 include(":app", ":config")
 include(":bottom-sheet", ":scaffold")
+include(":hidden-api")
 
 val localProperties = file("local.properties")
 val devProperties = localProperties.loadPropertiesOrNull()

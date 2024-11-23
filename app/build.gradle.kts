@@ -20,6 +20,7 @@ plugins {
     id("net.nemerosa.versioning")
     id("com.google.devtools.ksp")
     id("build-logic-plugin")
+    id("dev.rikka.tools.refine") version "4.0.0"
 }
 
 // Must be defined before the android block, or else it won't work
@@ -205,6 +206,7 @@ android {
 }
 
 dependencies {
+    compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 //    implementation(project(":components"))
 //    implementation(project(":compose-util"))
@@ -327,8 +329,8 @@ dependencies {
 
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
-//    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
-//    implementation(libs.dev.rikka.tools.refine.runtime)
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
+    implementation("dev.rikka.tools.refine:runtime:4.0.0")
 //    compileOnly("dev.rikka.hidden:stub:_")
 
     implementation(MozillaComponents.support.utils)

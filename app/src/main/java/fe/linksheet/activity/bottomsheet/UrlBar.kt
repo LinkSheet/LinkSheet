@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
 import fe.linksheet.R
-import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.CrossProfile
+import fe.linksheet.module.profile.CrossProfile
 import me.saket.unfurl.UnfurlResult
 
 @Composable
@@ -64,7 +64,7 @@ fun UrlBar(
                 for (target in profiles) {
                     item {
                         UrlActionButton(
-                            text = target.label,
+                            text = target.switchLabel,
                             icon = target.bitmap,
                             onClick = { switchProfile(target) }
                         )

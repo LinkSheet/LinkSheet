@@ -40,7 +40,7 @@
     <string name="open_link_with_subtitle_2">ਲਿੰਕਸ਼ੀਟ ਸ਼ੁਰੂ ਵਿੱਚ OpenLinkWith \'ਤੇ ਅਧਾਰਤ ਸੀ</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
-    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
+    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="selected_browser_explainer">ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਕਲਿੱਕ ਕੀਤੇ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਸੰਭਾਲ ਸਕਦਾ</string>
@@ -148,7 +148,7 @@
     <string name="open_with_linksheet">ਲਿੰਕਸ਼ੀਟ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="in_app_browser">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="links">ਲਿੰਕ</string>
-    <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
+    <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="browser_mode">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="dark">ਗਹਿਰਾ</string>
     <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
@@ -181,7 +181,7 @@
     <string name="enable_ignore_libredirect_button_explainer">ਜੇਕਰ URL ਨੂੰ LibRedirect ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟ ਕੀਤਾ ਗਿਆ ਹੈ, ਤਾਂ ਹੇਠਲੇ ਸ਼ੀਟ ਵਿੱਚ ਇੱਕ ਬਟਨ ਵਿਖਾਉਂਦਾ ਹੈ, ਜੋ ਇਸਦੀ ਬਜਾਏ ਅਸਲੀ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ</string>
     <string name="mastodon_redirect_subtitle_2">ਮੈਸਟਾਡੋਨ ਰੀਡਾਇਰੈਕਟ ਦੇ ਸਰੋਤ ਕੋਡ ਨੂੰ ਸ਼ਿਜ਼ੂਕੁ ਇੰਟਰੈਕਸ਼ਨ ਲਈ ਇੱਕ ਸੰਦਰਭ ਵਜੋਂ ਵਰਤਿਆ ਗਿਆ ਸੀ</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ਨੇ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ। ਹੋ ਸਕਦਾ ਲਿੰਕਸ਼ੀਟ ਦੀ ਸੂਚੀ ਪੂਰੀ ਨਾਂ ਹੋਵੇ। ਜੇ ਤੁਸੀਂ ਸੋਚਦੇ ਹੋ ਕਿ ਇਹ ਇੱਕ ਗਲਤੀ ਹੈ, ਤਾਂ ਗਿਟਹੱਬ \'ਤੇ ਇੱਕ ਮੁੱਦਾ ਦਰਜ ਕਰੋ।</string>
-    <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
+    <string name="enable_amp2html_explainer">AMP ਪੰਨਿਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਆਮ ਵੈੱਬ ਸੰਸਕਰਣ \'ਤੇ ਰੀਡਾਇਰੈਕਟ ਕਰਦਾ ਹੈ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-amp2html">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="none_explainer">ਸਿਰਫ਼ ਮੂਲ ਐਪਾਂ ਦੀ ਸੂਚੀ ਬਣਾਓ, ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਹਟਾਓ। ਜੇਕਰ ਸਿਰਫ਼ ਇੱਕ ਹੀ ਮੂਲ ਐਪ ਮੌਜੂਦ ਹੈ, ਤਾਂ ਇਹ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ। ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰ ਸੂਚੀਬੱਧ ਹਨ।</string>
     <string name="donate_crypto">ਕ੍ਰਿਪਟੋ ਦੁਆਰਾ ਦਾਨ ਕਰੋ</string>
     <string name="disable_in_selected">ਚੁਣੇ ਹੋਏ ਵਿੱਚ ਡਿਸੇਬਲ ਕਰੋ</string>
@@ -237,7 +237,7 @@
     <string name="export_include_recommendation">ਅਸੀਂ ਸਿਫ਼ਾਰਿਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਨਿਮਨਲਿਖਤ ਸੈਟਿੰਗਾਂ ਨੂੰ ਤਾਂ ਹੀ ਚਾਲੂ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਨਾਲ ਆਪਣੇ ਐਕਸਪੋਰਟ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਦੀ ਯੋਜਨਾ ਨਹੀਂ ਬਣਾਉਂਦੇ ਹੋ!</string>
     <string name="include_log_hash_key">ਲੌਗ ਹੈਸ਼ ਕੁੰਜੀ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡੇ ਲੌਗਸ ਨੂੰ ਸੋਧਣ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਕੁੰਜੀ)</string>
     <string name="import_explainer">ਇੱਕ ਫ਼ਾਈਲ ਤੋਂ ਇੱਕ ਪਹਿਲਾਂ ਐਕਸਪੋਰਟ ਕੀਤਾ ਇੰਪੋਰਟ ਕਰੋ</string>
-    <string name="export_privacy">ਨਿਰਯਾਤ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
+    <string name="export_privacy">ਨਿਰਯਾਤ ਗੋਪਨੀਯਤਾ ਬਾਰੇ ਜਾਣਨ ਲਈ, ਤੁਸੀਂ ਇਸ <annotation url-id="privacy-exports">link</annotation> \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।</string>
     <string name="export_import_settings_explainer">ਆਪਣੀਆਂ ਮੌਜੂਦਾ ਸੈਟਿੰਗਾਂ ਨੂੰ ਐਕਸਪੋਰਟ ਕਰੋ ਜਾਂ ਪਿਛਲੀਆਂ ਐਕਸਪੋਰਟ ਕੀਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="include_history">ਇਤਿਹਾਸ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡਾ ਲਿੰਕ ਕਲਿੱਕ ਅਤੇ ਐਪ ਇਤਿਹਾਸ)</string>
     <string name="export_settings">ਐਕਸਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>

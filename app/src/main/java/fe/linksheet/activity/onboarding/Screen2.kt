@@ -21,8 +21,8 @@ import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.focusGainedEvents
 import fe.linksheet.module.shizuku.ShizukuStatus
-import fe.linksheet.shizukuDownload
 import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.util.ShizukuDownload
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -117,7 +117,7 @@ fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
                                         }
                                     }
 
-                                    ShizukuStatus.NotInstalled -> uriHandler.openUri(shizukuDownload)
+                                    ShizukuStatus.NotInstalled -> uriHandler.openUri(ShizukuDownload)
                                     ShizukuStatus.NotRunning -> ShizukuUtil.startManager(activity)
                                     ShizukuStatus.Enabled -> onNextClick()
                                 }

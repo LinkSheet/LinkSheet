@@ -26,8 +26,8 @@ import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.PreferenceSubtitle
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.linkSheetCompatGithubReleases
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
+import fe.linksheet.util.LinkSheet
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -65,7 +65,7 @@ fun PretendToBeAppSettingsRoute(
                 ClickableRow(
                     enabled = !installed,
                     onClick = {
-                        uriHandler.openUri(linkSheetCompatGithubReleases)
+                        uriHandler.openUri(LinkSheet.CompatReleases)
                     },
                     verticalAlignment = Alignment.CenterVertically
                 ) {

@@ -33,7 +33,7 @@
     <string name="github_explainer">Repozitář se zdrojovým kódem</string>
     <string name="use_clear_urls">Použít ClearURLs</string>
     <string name="follow_redirects">Následovat přesměrování</string>
-    <string name="follow_redirects_explainer">Automaticky následovat všechna přesměrování před otevřením spodního listu. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">následky na vaše soukromí</annotation></string>
+    <string name="follow_redirects_explainer">Automaticky následovat všechna přesměrování před otevřením spodního listu. Tato funkce může mít <annotation url-id="privacy-follow-redirects">následky na vaše soukromí</annotation></string>
     <string name="loading_link">Zpracovávání odkazu…</string>
     <string name="follow_redirects_external_service">Následovat přesměrování skrze externí službu</string>
     <string name="follow_redirects_local_cache">Povolit místní mezipaměť přesměrování</string>
@@ -116,13 +116,13 @@
     <string name="system">Podle systému</string>
     <string name="theme_explainer">Material You, tmavý motiv, čistě černý motiv</string>
     <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url-id="fastforward-github">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu)</string>
-    <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">následky na soukromí</annotation></string>
+    <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url-id="privacy-downloader">následky na soukromí</annotation></string>
     <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="in_app">V aplikaci</string>
     <string name="export">Export</string>
     <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url-id="privacy-logs">odkaz</annotation>.</string>
     <string name="enable_amp2html">Povolit Amp2Html</string>
-    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation></string>
+    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít <annotation url-id="privacy-amp2html">dopad na soukromí</annotation></string>
     <string name="amp2html_local_cache">Povolit místní mezipaměť Amp2Html</string>
     <string name="amp2html_local_cache_explainer">Ukládat načtené ne-AMP verze stránek do místní mezipaměti</string>
     <string name="feature_flags">Příznaky funkcí</string>

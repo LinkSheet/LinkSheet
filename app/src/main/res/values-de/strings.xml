@@ -116,11 +116,11 @@
     <string name="open_link_with_subtitle_2">LinkSheet basiert ursprünglich auf OpenWith</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku-Integration wurde erfolgreich aktiviert!</string>
     <string name="warning">Warnung</string>
-    <string name="enable_downloader_explainer">Fügt einen \"Herunterladen\"-Knopf zum unteren Fenster hinzu, wenn die URL einen direkten Link zu einer Datei enthält. Dies kann <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">Auswirkungen auf den Datenschutz</annotation> haben</string>
+    <string name="enable_downloader_explainer">Fügt einen \"Herunterladen\"-Knopf zum unteren Fenster hinzu, wenn die URL einen direkten Link zu einer Datei enthält. Dies kann <annotation url-id="privacy-downloader">Auswirkungen auf den Datenschutz</annotation> haben</string>
     <string name="enable_all">Alle aktivieren</string>
     <string name="selected_browser_explainer">Dieser Browser wird automatisch geöffnet, wenn keine native App den angetippten Link verarbeiten kann</string>
     <string name="misc_settings">Verschiedenes</string>
-    <string name="log_privacy">Um mehr über Protokoll-Datenschutz zu erfahren, besuchen Sie diesen <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">Link</annotation>.</string>
+    <string name="log_privacy">Um mehr über Protokoll-Datenschutz zu erfahren, besuchen Sie diesen <annotation url-id="privacy-logs">Link</annotation>.</string>
     <string name="donate_learn_more">Mehr erfahren</string>
     <string name="pretend_to_be_app_explainer_2">Manche Apps, wie Google Chrome, suchen explizit nach einer nativen App zur Verarbeitung von z.B. einem Youtube-Link, wenn er in den Suchergebnissen angeklickt wird. LinkSheetCompat gibt vor, eine native App für unterstützte Hosts zu sein, und leitet die Anfrage an LinkSheet weiter.</string>
     <string name="dont_show_filtered_item">Niemals Abschnitt \"zuletzt ausgewählte App\" anzeigen</string>
@@ -185,7 +185,7 @@
     <string name="resolved_via">%s aufgelöst über %s</string>
     <string name="instance_not_available_anymore">Instanz ist nicht mehr verfügbar!</string>
     <string name="donate_crypto">Mit Krypto spenden</string>
-    <string name="follow_redirects_explainer">Automatisch allen Weiterleitungen folgen, bevor das untere Fenster geöffnet wird. Dies kann <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">Auswirkungen auf die Privatsphäre</annotation> haben</string>
+    <string name="follow_redirects_explainer">Automatisch allen Weiterleitungen folgen, bevor das untere Fenster geöffnet wird. Dies kann <annotation url-id="privacy-follow-redirects">Auswirkungen auf die Privatsphäre</annotation> haben</string>
     <string name="shizuku_integration_not_setup_explainer">Shizuku ist zwar nicht unbedingt notwendig, um LinkSheet zu nutzen, wird aber empfohlen. Tippen Sie hier, um es zu installieren</string>
     <string name="fastfoward_rules_explainer">Experimentelle Integration von <annotation url-id="fastforward-github">FastForward</annotation>-Regeln verwenden (umgeht Weiterleitungen einiger Hosts durch Extraktion der Weiterleitung aus dem Link)</string>
     <string name="whitelisted">Auf der Whitelist</string>
@@ -202,7 +202,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Zeigt eine Schaltfläche im unteren Fenster, wenn die URL über LibRedirect umgeleitet wurde, die stattdessen die ursprüngliche URL öffnet</string>
     <string name="mastodon_redirect_subtitle_2">Der Quellcode von Mastodon Redirect wurde als Referenz für die Interaktion mit Shizuku verwendet</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet hat mindestens eine App erkannt, die angibt, ein Browser zu sein. Die Liste von LinkSheet ist möglicherweise unvollständig. Wenn Sie denken, dass dies ein Fehler ist, öffnen Sie einen Issue auf GitHub.</string>
-    <string name="enable_amp2html_explainer">Leitet AMP-Seiten auf ihre normale Webversion um. Dies kann <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">Auswirkungen auf die Privatsphäre</annotation> haben</string>
+    <string name="enable_amp2html_explainer">Leitet AMP-Seiten auf ihre normale Webversion um. Dies kann <annotation url-id="privacy-amp2html">Auswirkungen auf die Privatsphäre</annotation> haben</string>
     <string name="donate">Spenden</string>
     <string name="disable_in_selected">In Auswahl deaktivieren</string>
     <string name="follow_redirects_external_service">Weiterleitungen über externen Dienst folgen</string>

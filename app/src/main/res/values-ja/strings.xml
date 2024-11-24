@@ -127,7 +127,7 @@
     <string name="app_browsers_subtitle">優先アプリとブラウザの設定</string>
     <string name="donate_subtitle"><b>LinkSheet Pro</b>にアップグレード</string>
     <string name="use_clear_urls">ClearURLを使用</string>
-    <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。</string>
+    <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url-id="privacy-follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します（<annotation url-id="supabase-privacy">プライバシーポリシー</annotation>）</string>
     <string name="switch_profile">プロファイル切り替えを有効にする</string>
@@ -177,7 +177,7 @@
     <string name="configure_explainer">LinkSheetCompatを設定するにはここをタップしてください</string>
     <string name="onboarding_2_install_shizuku">Shizukuをインストール</string>
     <string name="at_least_one_known_browser_installed">少なくとも 1 つのブラウザがインストールされている</string>
-    <string name="enable_amp2html_explainer">AMP ページを通常の Web バージョンにリダイレクトします。これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">プライバシー関連の影響</annotation>がある可能性があります。</string>
+    <string name="enable_amp2html_explainer">AMP ページを通常の Web バージョンにリダイレクトします。これは、<annotation url-id="privacy-amp2html">プライバシー関連の影響</annotation>がある可能性があります。</string>
     <string name="onboarding_5_card_title">セットアップ</string>
     <string name="instance_not_available_anymore">インスタンスはもう利用できません！</string>
     <string name="experiments_explainer_3">実験は現在開発中であり、正しく動作しないか、まったく動作しない可能性があります。Github でバグを報告しないでください。フィードバックを提供したい場合は、Discord で行ってください。</string>
@@ -241,7 +241,7 @@
     <string name="settings_app_config__button_add_item">アイテムを追加</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">推奨</string>
     <string name="enable_libredirect_explainer">実験的な<annotation url-id="libredirect-github">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします。</string>
-    <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">プライバシーに関連した意味を持つかもしれません</annotation>。</string>
+    <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url-id="privacy-downloader">プライバシーに関連した意味を持つかもしれません</annotation>。</string>
     <string name="random_instance">ランダムインスタンス</string>
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にする</string>
     <string name="debug_explainer">アプリログ、検証済みハンドラーリセット</string>

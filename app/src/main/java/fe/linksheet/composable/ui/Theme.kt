@@ -22,9 +22,9 @@ import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
-import fe.linksheet.LinkSpans
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.util.LinkConstants
 import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -124,8 +124,6 @@ fun AppTheme(
         LinkAnnotationStyle(style = SpanStyle(color = colorScheme.primary))
     }
 
-    val linkTags = remember { LinkSpans.tags }
-
     val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
     KoinAndroidContext {
@@ -133,7 +131,7 @@ fun AppTheme(
             LocalActivity provides activity!!,
             LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
             LocalLinkAnnotationStyle provides linkAnnotationStyle,
-            LocalLinkTags provides linkTags
+            LocalLinkTags provides LinkConstants.tags
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,

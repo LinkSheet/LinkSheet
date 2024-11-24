@@ -45,7 +45,7 @@
     <string name="confirm_import">पुष्टि करें</string>
     <string name="dev">डेवलपर</string>
     <string name="include_log_hash_key">लॉग हैश कुंजी शामिल करें (आपके लॉग को संशोधित करने के लिए उपयोग की जाने वाली कुंजी)</string>
-    <string name="export_privacy">निर्यात गोपनीयता के बारे में जानने के लिए, आप इस <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation> पर जा सकते हैं।</string>
+    <string name="export_privacy">निर्यात गोपनीयता के बारे में जानने के लिए, आप इस <annotation url-id="privacy-exports">link</annotation> पर जा सकते हैं।</string>
     <string name="debug_build">डीबग बिल्ड</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">प्रयोगात्मक लिंकशीट कॉम्पैट मेनू सक्षम करें</string>

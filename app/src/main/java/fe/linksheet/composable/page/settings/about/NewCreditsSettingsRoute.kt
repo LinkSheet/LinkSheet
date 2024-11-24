@@ -20,6 +20,10 @@ import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.linksheet.*
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.util.GmsFlagsRepo
+import fe.linksheet.util.MastodonRedirectRepo
+import fe.linksheet.util.OpenLinkWithRepo
+import fe.linksheet.util.SealRepo
 
 
 internal object NewCreditsSettingsRouteData {
@@ -28,25 +32,25 @@ internal object NewCreditsSettingsRouteData {
             drawable(R.drawable.app_openlinkwith),
             textContent(R.string.open_link_with),
             textContent(R.string.open_link_with_subtitle_2),
-            additional = openLinkWithGithub
+            additional = OpenLinkWithRepo
         ),
         ListItemData(
             drawable(R.drawable.app_mastodonredirect),
             textContent(R.string.mastodon_redirect),
             textContent(R.string.mastodon_redirect_subtitle_2),
-            additional = mastodonRedirectGithub
+            additional = MastodonRedirectRepo
         ),
         ListItemData(
             drawable(R.drawable.app_seal),
             textContent(R.string.settings_credits__app_name_seal),
             textContent(R.string.settings_credits__app_credit_reason_seal),
-            additional = sealGithub
+            additional = SealRepo
         ),
         ListItemData(
             drawable(R.drawable.app_gmsflags),
             textContent(R.string.settings_credits__app_name_gmsflags),
             textContent(R.string.settings_credits__app_credit_reason_gmsflags),
-            additional = gmsFlagsGithub
+            additional = GmsFlagsRepo
         )
     )
 }

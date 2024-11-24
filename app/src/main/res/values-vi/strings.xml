@@ -175,7 +175,7 @@
     <string name="last_updated">Cập nhật lần cuối (UTC):</string>
     <string name="enable_linksheet_compat">Bật thực đơn LinkSheet Compat thử nghiệm</string>
     <string name="built_by_error">Bản dựng này không được ký bởi 1fexd cũng như quy trình làm việc Github.</string>
-    <string name="follow_redirects_explainer">Tự động theo dõi tất cả các chuyển hướng trước khi mở trang dưới cùng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">ngụ ý liên quan đến quyền riêng tư</annotation></string>
+    <string name="follow_redirects_explainer">Tự động theo dõi tất cả các chuyển hướng trước khi mở trang dưới cùng. Điều này có thể có <annotation url-id="privacy-follow-redirects">ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="follow_redirects_external_service_explainer">Theo dõi các chuyển hướng bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="disable_in_selected">Vô hiệu hóa trong lựa chọn</string>
     <string name="in_app">Trong ứng dụng</string>
@@ -242,8 +242,8 @@
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
     <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url-id="libredirect-github">LibRedirect  </annotation> thử nghiệm</string>
-    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
-    <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
+    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url-id="privacy-downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
+    <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url-id="privacy-amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="github">Github</string>
     <string name="lib_redirect">LibRedirect</string>

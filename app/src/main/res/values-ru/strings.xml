@@ -33,11 +33,11 @@
     <string name="always_show_package_name_explainer">Всегда показывать название пакетов, а не только имена приложений. Это относится ко всему приложению.</string>
     <string name="log_files">Прошлые лог файлы</string>
     <string name="shizuku_integration_enabled_explainer">Интеграция с Shizuku успешно включена!</string>
-    <string name="enable_downloader_explainer">Добавить кнопку «Скачать» на нижний лист, если URL-адрес содержит прямую ссылку на файл. Это может иметь <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">последствия, связанные с конфиденциальностью</annotation></string>
+    <string name="enable_downloader_explainer">Добавить кнопку «Скачать» на нижний лист, если URL-адрес содержит прямую ссылку на файл. Это может иметь <annotation url-id="privacy-downloader">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="logs_explainer">Просмотр логов приложений</string>
     <string name="enable_all">Включить всё</string>
     <string name="selected_browser_explainer">Этот браузер откроется автоматически, если ни одно нативное приложение не сможет обработать выбранную ссылку</string>
-    <string name="log_privacy">Чтобы узнать о конфиденциальности журналов, перейдите по этой <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">ссылке</annotation>.</string>
+    <string name="log_privacy">Чтобы узнать о конфиденциальности журналов, перейдите по этой <annotation url-id="privacy-logs">ссылке</annotation>.</string>
     <string name="send_to">Поделиться с</string>
     <string name="enable_ignore_libredirect_button">Включить кнопку «Игнорировать LibRedirect»</string>
     <string name="dont_show_filtered_item">Никогда не показывать раздел «последнее выбранное приложение»</string>
@@ -127,7 +127,7 @@
     <string name="open_with_linksheet">Открыть с помощью LinkSheet</string>
     <string name="in_app_browser">Браузер в приложении</string>
     <string name="links">Ссылки</string>
-    <string name="follow_redirects_explainer">Автоматически следовать всем перенаправлениям перед открытием нижнего листа. Это может иметь <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, связанные с конфиденциальностью</annotation></string>
+    <string name="follow_redirects_explainer">Автоматически следовать всем перенаправлениям перед открытием нижнего листа. Это может иметь <annotation url-id="privacy-follow-redirects">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="browser_mode">Предпочитаемый браузер</string>
     <string name="dark">Тёмная</string>
     <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
@@ -152,7 +152,7 @@
     <string name="current_session">Текущая сессия</string>
     <string name="always_disable_explainer">Всегда отключать браузер в приложении, независимо от того, что приложение хочет использовать</string>
     <string name="enable_ignore_libredirect_button_explainer">Показывать кнопку на нижнем листе, если URL-адрес был перенаправлен через LibRedirect, который вместо этого открывает исходный URL-адрес</string>
-    <string name="enable_amp2html_explainer">Перенаправление страницы AMP в их обычную веб-версию. Это может иметь <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">последствия, связанные с конфиденциальностью</annotation></string>
+    <string name="enable_amp2html_explainer">Перенаправление страницы AMP в их обычную веб-версию. Это может иметь <annotation url-id="privacy-amp2html">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="none_explainer">Перечислите только нативные приложения, удалите все браузеры. Если присутствует только одно нативное приложение, оно будет открыто автоматически. Если нативного приложения нет, будут перечислены все браузеры.</string>
     <string name="disable_in_selected">Отключить в выбранном</string>
     <string name="debug_explainer">Просмотр логов приложений</string>
@@ -221,7 +221,7 @@
     <string name="include_log_hash_key">Включите хэш-ключ журнала (ключ, используемый для редактирования ваших журналов)</string>
     <string name="import_explainer">Импортировать предыдущий экспорт из файла</string>
     <string name="github_workflow_run_id">Идентификатор рабочего процесса сборки:</string>
-    <string name="export_privacy">Чтобы узнать о конфиденциальности экспорта, перейдите по этой <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">ссылке</annotation>.</string>
+    <string name="export_privacy">Чтобы узнать о конфиденциальности экспорта, перейдите по этой <annotation url-id="privacy-exports">ссылке</annotation>.</string>
     <string name="donate_crypto">Пожертвовать через криптовалюту</string>
     <string name="export_import_settings_explainer">Экспортируйте текущие настройки или импортируйте предыдущие настройки</string>
     <string name="donate_card_headline">Пожертвовать на поддержку LinkSheet</string>

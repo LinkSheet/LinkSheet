@@ -14,7 +14,7 @@
     <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
-    <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
+    <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне с/ъс %s</string>
     <string name="default_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
@@ -58,7 +58,7 @@
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url-id="fastforward-github">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките)</string>
-    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
+    <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="always_ask_explainer">Винаги показва всички браузъри</string>
@@ -133,7 +133,7 @@
     <string name="disable_in_selected">Винаги изключено…</string>
     <string name="feature_flags_explainer">Включва или изключва експериментални възможности</string>
     <string name="request_timeout_explainer">Задава колко секунди LinkSheet да изчака за установяване на връзка. Стойност 0 изключва времето за изчакване, но не се препоръчва.</string>
-    <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">последствия, свързани с поверителността</annotation></string>
+    <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url-id="privacy-amp2html">последствия, свързани с поверителността</annotation></string>
     <string name="amp2html_local_cache_explainer">Запазване на получените нормалните версии на страници в местна временна памет</string>
     <string name="amp2html_external_service">Опит за получаване на нормална версия на страницата чрез външна услуга</string>
     <string name="amp2html_external_service_explainer">Опит за получаване на нормална версия на страницата чрез ППИ, разположен на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
@@ -245,7 +245,7 @@
     <string name="linksheet_donation_explainer_2">Дарение на повече от <b>5€</b> ще ви осигури достъп до приложението <b>LinkSheet Pro</b>, което включва <b>възможностите на Pro</b> като: последване на препращане от трети страни, получаване на не-AMP версии на страниците от трети страни и други предстоящи!</string>
     <string name="export_include_recommendation">Препоръчваме ви да не отмятате тези отметки ако смятате да споделяте изнесеното с други хора!</string>
     <string name="include_log_hash_key">Включително ключа за дневника</string>
-    <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#exports">прочетете тук</annotation>.</string>
+    <string name="export_privacy">За да научите повече за поверителността на изнесените файлове <annotation url-id="privacy-exports">прочетете тук</annotation>.</string>
     <string name="include_history">Включително историята (препратки и приложения)</string>
     <string name="dev_explainer">Настройки за разработка</string>
     <string name="opening_with_app_toast">Автоматично отваряне на приложение</string>

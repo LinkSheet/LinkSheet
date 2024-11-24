@@ -110,8 +110,8 @@
     <string name="log">Log</string>
     <string name="redact_log">Censura log (raccomandato, disabilitarlo potrebbe far trapelare i nomi dei pacchetti e degli host)</string>
     <string name="include_settings">Includi impostazioni (consigliato)</string>
-    <string name="log_privacy">Per informazioni sulla privacy dei log, puoi visitare questo <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
-    <string name="enable_amp2html_explainer">Reindirizza le pagine AMP alla loro normale versione web. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">implicazioni relative alla privacy</annotation></string>
+    <string name="log_privacy">Per informazioni sulla privacy dei log, puoi visitare questo <annotation url-id="privacy-logs">link</annotation>.</string>
+    <string name="enable_amp2html_explainer">Reindirizza le pagine AMP alla loro normale versione web. Ciò potrebbe avere <annotation url-id="privacy-amp2html">implicazioni relative alla privacy</annotation></string>
     <string name="redirect_resolve_type_local_cache">cache locale</string>
     <string name="services">Servizi</string>
     <string name="current_session">Sessione in corso</string>
@@ -120,7 +120,7 @@
     <string name="hide_after_copying_explainer">Nascondi foglio inferiore dopo aver premuto \"Copia URL\"</string>
     <string name="display_grid_layout_explainer">Visualizza una griglia invece di un elenco nel foglio inferiore</string>
     <string name="bottom_sheet">Foglio inferiore</string>
-    <string name="follow_redirects_explainer">Segui automaticamente tutti i reindirizzamenti prima di aprire il foglio inferiore. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicazioni relative alla privacy</annotation></string>
+    <string name="follow_redirects_explainer">Segui automaticamente tutti i reindirizzamenti prima di aprire il foglio inferiore. Ciò potrebbe avere <annotation url-id="privacy-follow-redirects">implicazioni relative alla privacy</annotation></string>
     <string name="downloader_url_mime_type">Usa il tipo MIME dall\'URL</string>
     <string name="in_app_browser">Browser in-app</string>
     <string name="in_app_browser_subtitle">Imposta la modalità browser in-app</string>
@@ -141,7 +141,7 @@
     <string name="enable_request_private_browsing_button">Abilita pulsante \"Richiedi navigazione privata\"</string>
     <string name="enable_request_private_browsing_button_explainer">Visualizza un pulsante accanto ai browser che apre l\'URL cliccato in modalità di navigazione privata. Browser supportati: %s</string>
     <string name="use_unified_preferred_browser_explainer">L\'abilitazione di questa opzione applica le impostazioni seguenti sia alla gestione dei link normale che in-app. Usa i pulsanti qui sotto per passare dalla modalità normale a quella in-app quando è disabilitata.</string>
-    <string name="enable_downloader_explainer">Aggiungi un pulsante \"Download\" nel foglio inferiore se l\'URL contiene un collegamento diretto al file. Ciò potrebbe avere <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">implicazioni relative alla privacy</annotation></string>
+    <string name="enable_downloader_explainer">Aggiungi un pulsante \"Download\" nel foglio inferiore se l\'URL contiene un collegamento diretto al file. Ciò potrebbe avere <annotation url-id="privacy-downloader">implicazioni relative alla privacy</annotation></string>
     <string name="instance_not_available_anymore">L\'istanza non è più disponibile!</string>
     <string name="disable_in_selected_explainer">Disabilita il browser in-app nelle app selezionate, indipendentemente da ciò che l\'app desidera utilizzare</string>
     <string name="disable_in_selected">Disabilita per selezionati</string>

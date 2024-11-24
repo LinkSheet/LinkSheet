@@ -96,7 +96,7 @@
     <string name="close">Fechar</string>
     <string name="redirect_resolve_type_local_cache">local cache</string>
     <string name="follow_redirects_external_service_explainer">Seguir os redirecionamentos usando uma API implantada em supabase.com (<annotation url-id="supabase-privacy">Política de privacidade</annotation>)</string>
-    <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicações relacionadas à privacidade</annotation></string>
+    <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isso pode ter <annotation url-id="privacy-follow-redirects">implicações relacionadas à privacidade</annotation></string>
     <string name="fastfoward_rules_explainer">Usar a integração experimental <annotation url-id="fastforward-github">FastForward</annotation> (ignore os redirecionamentos de alguns hosts extraindo o redirecionamento do link)</string>
     <string name="follow_redirects_local_cache">Ativar o cache de redirecionamento local</string>
     <string name="follow_redirects_local_cache_explainer">Armazenar em cache o resultado dos redirecionamentos localmente</string>
@@ -148,7 +148,7 @@
     <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em   supabase.com (<annotation url-id="supabase-privacy">Política de privacidade</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="enable_libredirect_explainer">Redirecionar links para front-ends favoráveis à privacidade usando a integração experimental <annotation url-id="libredirect-github">LibRedirect</annotation>.</string>
-    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicações relacionadas à privacidade</annotation></string>
+    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url-id="privacy-downloader">implicações relacionadas à privacidade</annotation></string>
     <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
     <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
     <string name="in_app">Incorporado</string>
@@ -164,7 +164,7 @@
     <string name="enable_request_private_browsing_button">Ativar o botão \"Solicitar navegação privada\"</string>
     <string name="enable_request_private_browsing_button_explainer">Exibe um botão ao lado dos navegadores que abre o URL clicado no modo de navegação privada. Navegadores compatíveis: %s</string>
     <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de links Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
-    <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicações relacionadas à privacidade</annotation></string>
+    <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url-id="privacy-amp2html">implicações relacionadas à privacidade</annotation></string>
     <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
     <string name="advanced">Avançado</string>
     <string name="advanced_explainer">Sinalizadores de Recursos, Experimentos, Importação/Exportação</string>

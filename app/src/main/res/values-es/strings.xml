@@ -40,7 +40,7 @@
     <string name="open_link_with_subtitle_2">LinkSheet estaba originalmente basado en OpenLinkWith</string>
     <string name="shizuku_integration_enabled_explainer">¡La integración con Shizuku se ha activado exitosamente!</string>
     <string name="warning">Alerta</string>
-    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si URL contiene enlace directo al archivo. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicaciones relacionadas con la privacidad</annotation></string>
+    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si URL contiene enlace directo al archivo. Esto puede tener <annotation url-id="privacy-downloader">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="logs_explainer">Ver el registro de la aplicación</string>
     <string name="enable_all">Activar todo</string>
     <string name="selected_browser_explainer">Este navegador se abrirá automáticamente si ninguna aplicación nativa puede abrir el enlace seleccionado</string>
@@ -148,7 +148,7 @@
     <string name="open_with_linksheet">Abrir con LinkSheet</string>
     <string name="in_app_browser">Navegador en aplicación</string>
     <string name="links">Enlaces</string>
-    <string name="follow_redirects_explainer">Sigue automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">implicaciones relacionadas con la privacidad</annotation></string>
+    <string name="follow_redirects_explainer">Sigue automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url-id="privacy-follow-redirects">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="browser_mode">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
@@ -181,7 +181,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
-    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
+    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener <annotation url-id="privacy-amp2html">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="disable_in_selected">Forzando la desactivación…</string>

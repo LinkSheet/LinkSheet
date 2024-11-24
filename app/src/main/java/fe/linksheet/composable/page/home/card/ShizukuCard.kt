@@ -17,7 +17,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
 import fe.linksheet.module.shizuku.ShizukuStatus
-import fe.linksheet.shizukuDownload
+import fe.linksheet.util.ShizukuDownload
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -52,7 +52,7 @@ fun ShizukuCard(
                     }
                 }
 
-                ShizukuStatus.NotInstalled -> uriHandler.openUri(shizukuDownload)
+                ShizukuStatus.NotInstalled -> uriHandler.openUri(ShizukuDownload)
                 else -> ShizukuUtil.startManager(activity)
             }
         },

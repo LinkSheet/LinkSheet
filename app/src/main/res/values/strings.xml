@@ -72,7 +72,7 @@
     <string name="use_clear_urls">Use ClearURLs</string>
     <string name="use_clear_urls_explainer">Use experimental <annotation url-id="clearurls-github">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
     <string name="follow_redirects">Follow redirects</string>
-    <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">privacy-related implications</annotation></string>
+    <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may have <annotation url-id="privacy-follow-redirects">privacy-related implications</annotation></string>
     <string name="loading_link">Processing link…</string>
     <string name="follow_redirects_external_service">Follow redirects via external service</string>
     <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com (<annotation url-id="supabase-privacy">Privacy policy</annotation>)</string>
@@ -107,7 +107,7 @@
     <string name="download">Download</string>
     <string name="linksheet_download">LinkSheet Download</string>
     <string name="enable_downloader">Enable downloader</string>
-    <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">privacy-related implications</annotation></string>
+    <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This may have <annotation url-id="privacy-downloader">privacy-related implications</annotation></string>
     <string name="downloader_url_mime_type">Use mime type from URL</string>
     <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
     <string name="random_instance">Random instance</string>
@@ -158,7 +158,7 @@
     <string name="log_privacy">To learn about log privacy, you can visit this <annotation url-id="privacy-logs">link</annotation>.</string>
     <string name="no_logs_found">No past logs found!</string>
     <string name="enable_amp2html">Enable Amp2Html</string>
-    <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related implications</annotation></string>
+    <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version. This may have <annotation url-id="privacy-amp2html">privacy-related implications</annotation></string>
     <string name="amp2html_local_cache">Enable local Amp2Html cache</string>
     <string name="amp2html_local_cache_explainer">Cache the retrieved non-AMP versions of webpages locally</string>
     <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>

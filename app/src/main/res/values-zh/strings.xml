@@ -68,7 +68,7 @@
     <string name="use_clear_urls">使用 ClearURLs</string>
     <string name="use_clear_urls_explainer">使用实验性 <annotation url-id="clearurls-github">ClearURLs</annotation> 集成（清除链接中的跟踪参数）</string>
     <string name="follow_redirects">跟踪重定向</string>
-    <string name="follow_redirects_explainer">在打开底栏前自动跟踪所有重定向。这可能带来<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">隐私方面的影响</annotation></string>
+    <string name="follow_redirects_explainer">在打开底栏前自动跟踪所有重定向。这可能带来<annotation url-id="privacy-follow-redirects">隐私方面的影响</annotation></string>
     <string name="loading_link">处理链接中…</string>
     <string name="follow_redirects_external_service">通过外部服务进行跟踪重定向</string>
     <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 的 API 进行重定向（<annotation url-id="supabase-privacy">隐私政策</annotation>）</string>
@@ -101,7 +101,7 @@
     <string name="download">下载</string>
     <string name="linksheet_download">LinkSheet 下载</string>
     <string name="enable_downloader">启用下载器</string>
-    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来 <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">隐私方面的影响</annotation></string>
+    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来 <annotation url-id="privacy-downloader">隐私方面的影响</annotation></string>
     <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
     <string name="random_instance">随机实例</string>
@@ -204,7 +204,7 @@
     <string name="compat_installed">已安装 LinkSheetCompat</string>
     <string name="enable_ignore_libredirect_button_explainer">如果链接已通过LibRedirect重定向，则在底栏中显示一个按钮，用以打开原始链接</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet 检测到至少一个自称是浏览器的应用。LinkSheet 的列表可能不完整。如果您认为这是一个错误，请在 Github 上提交issue。</string>
-    <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">隐私方面的影响</annotation></string>
+    <string name="enable_amp2html_explainer">重定向AMP页面到其正常版本。这可能带来<annotation url-id="privacy-amp2html">隐私方面的影响</annotation></string>
     <string name="none_explainer">仅列出原生应用，去除所有浏览器。如果只存在一个原生应用，则会自动用其打开。如果没有原生应用，则列出所有浏览器应用。</string>
     <string name="donate">捐赠</string>
     <string name="debug_explainer">应用日志，已验证处理器重置</string>

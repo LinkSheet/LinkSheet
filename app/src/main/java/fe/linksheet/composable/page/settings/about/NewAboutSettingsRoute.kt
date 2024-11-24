@@ -35,6 +35,7 @@ import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.util.LinkSheetInfo
 import fe.linksheet.util.AppSignature
+import fe.linksheet.util.LinkSheet
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.androidx.compose.koinViewModel
@@ -125,7 +126,7 @@ fun NewAboutSettingsRoute(
                     headlineContent = textContent(R.string.github),
                     supportingContent = textContent(R.string.github_explainer),
                     icon = Icons.Outlined.Code.iconPainter,
-                    onClick = { uriHandler.openUri(linksheetGithub) }
+                    onClick = { uriHandler.openUri(LinkSheet.Repo) }
                 )
             }
 

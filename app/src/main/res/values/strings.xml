@@ -77,7 +77,7 @@
     <string name="follow_redirects_external_service">Follow redirects via external service</string>
     <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
     <string name="follow_only_known_trackers">Follow only known trackers</string>
-    <string name="follow_only_known_trackers_explainer">"Only attempt to follow redirects when the host is known to be a tracker/redirect. If \"Follow redirects via external service\" is enabled, this will always be enabled "</string>
+    <string name="follow_only_known_trackers_explainer">Only attempt to follow redirects when the host is known to be a tracker/redirect. If \"Follow redirects via external service\" is enabled, this will always be enabled</string>
     <string name="theme">Theme</string>
     <string name="theme_explainer">Material You, dark theme, pure black mode</string>
     <string name="system">Follow system</string>
@@ -164,7 +164,7 @@
     <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>
     <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="use_unified_preferred_browser_explainer">"Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled. "</string>
+    <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
     <string name="advanced_explainer">Feature Flags, Experiments, Import/Export</string>
@@ -211,10 +211,10 @@
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect\'s source code was used as a reference for Shizuku interaction</string>
     <string name="import_dumped_preference">Import dumped preferences</string>
     <string name="import_and_override">Import and override</string>
-    <string name="version_name"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
-    <string name="built_at"><b>Built at:</b>\u0020<font face="monospace">%s</font></string>
-    <string name="flavor"><b>Flavor:</b>\u0020<font face="monospace">%s</font></string>
-    <string name="github_workflow_run_id"><b>Workflow ID:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="version_name"><b>Version:</b> <font face="monospace">%s</font></string>
+    <string name="built_at"><b>Built at:</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Flavor:</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>Workflow ID:</b> <font face="monospace">%s</font></string>
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
     <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" to it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the launched target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
@@ -269,7 +269,7 @@
     <string name="resolve_via_toast_explainer">Show a toast when a URL is resolved via an external service</string>
     <string name="resolve_via_failed_toast">Resolve failure</string>
     <string name="resolve_via_failed_toast_explainer">Show a toast when an URL fails to resolve via an external service</string>
-    <string name="last_updated"><b>Version:</b>\u0020<font face="monospace">%s</font></string>
+    <string name="last_updated"><b>Version:</b> <font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Enable the experimental LinkSheet Compat menu</string>
     <string name="enable_linksheet_compat_explainer">The menu can be found in the sub-menu \"Apps\" and when installed, is able to intercept requests to certain native apps.</string>
@@ -380,7 +380,7 @@
     <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all apps, then wait a few minutes while Android re-verifies them. You will not receive a confirmation. Requires Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
     <string name="switch_profile">Enable profile switching</string>
-    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -&gt; Special app access -&gt;Connected work &amp; personal apps</string>
+    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app access ->Connected work &amp; personal apps</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Displays a button in the bottom sheet to open the url in another profile</string>
     <string name="customization">Customization</string>
     <string name="build_info">Build info</string>

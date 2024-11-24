@@ -161,7 +161,7 @@
     <string name="dev_mode_enabled">恭喜，你已启用开发模式。请小心。</string>
     <string name="yes">是</string>
     <string name="advanced">高级</string>
-    <string name="built_at"><b>构建于：</b> \u0020<font face="monospace">%s</font></string>
+    <string name="built_at"><b>构建于：</b> <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">与系统API直接交互</string>
     <string name="include_fingerprint">包括设备指纹（推荐）</string>
     <string name="github_pipeline_build">由 CI 构建与签名</string>
@@ -292,7 +292,7 @@
     <string name="resolve_via_toast_explainer">链接通过外部服务解析时显示提示语</string>
     <string name="include_log_hash_key">包含日志哈希密钥（用来删减日志的密钥）</string>
     <string name="download_started_toast_explainer">下载开始时显示提示语</string>
-    <string name="last_updated"><b>版本：</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="last_updated"><b>版本：</b> <font face="monospace">%s</font></string>
     <string name="onboarding_5_card_explainer">已完成 LinkSheet 运作所需的基本配置 - 转到设置，探索一下其他的东西！</string>
     <string name="onboarding_1_button">设置为默认浏览器</string>
     <string name="theme_enable_material_you_explainer">使用 Android 12 以上的 Material You 设备主题</string>
@@ -334,7 +334,7 @@
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet 尚未配置就绪</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet 配置就绪</string>
     <string name="resolve_event__querying_browser_list">获取浏览器列表中</string>
-    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）资料中打开。两个档案都需要安装 LinkSheet，并使用“设置 -&gt; 特殊应用权限 -&gt; 关联的工作&amp;个人应用”手动进行关联</string>
+    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）资料中打开。两个档案都需要安装 LinkSheet，并使用“设置 -> 特殊应用权限 -> 关联的工作&amp;个人应用”手动进行关联</string>
     <string name="export_log_dialog__subtitle_include_throwable">推荐，但无法删减</string>
     <string name="settings_app_config__description_preferred_browser">用户选择的偏好浏览器</string>
     <string name="telemetry_dialog_text">选择最适合你的使用指标类型。</string>
@@ -477,11 +477,11 @@
     <string name="settings_bottom_sheet__text_profile_switcher">在底栏显示按钮，将点击的链接在（工作）资料中打开</string>
     <string name="generic__text_done">完成</string>
     <string name="generic__text_edit">编辑</string>
-    <string name="github_workflow_run_id"><b>工作流 ID：</b> \u0020<font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>工作流 ID：</b> <font face="monospace">%s</font></string>
     <string name="settings_profile_switcher__divider_configuration">配置</string>
     <string name="settings_profile_switcher__title_profile_switcher">资料切换</string>
-    <string name="version_name"><b>版本：</b> \u0020<font face="monospace">%s</font></string>
-    <string name="flavor"><b>特性：</b> \u0020<font face="monospace">%s</font></string>
+    <string name="version_name"><b>版本：</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>特性：</b> <font face="monospace">%s</font></string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
         <item quantity="other">已启用 %d</item>
     </plurals>

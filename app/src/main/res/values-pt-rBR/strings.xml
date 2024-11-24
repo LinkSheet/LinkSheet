@@ -68,7 +68,7 @@
     <string name="checkmark">Checado</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
-    <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> \u0020(limpa parâmetros de rastreamento de URLs)</string>
+    <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url="https://github.com/ClearURLs">ClearURLs</annotation>  (limpa parâmetros de rastreamento de URLs)</string>
     <string name="error">Erro</string>
     <string name="back">Voltar</string>
     <string name="selected_browser_explainer">Esse navegador será aberto automaticamente se nenhum aplicativo nativo puder lidar com o link clicado</string>
@@ -145,7 +145,7 @@
     <string name="amp2html_local_cache">Ativar o cache local do Amp2Html</string>
     <string name="amp2html_local_cache_explainer">Armazenar em cache as versões não AMP recuperadas de páginas da Web localmente</string>
     <string name="amp2html_external_service">Tentar obter uma versão de página não AMP por meio de um serviço externo</string>
-    <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em \u0020 supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em   supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidade</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="enable_libredirect_explainer">Redirecionar links para front-ends favoráveis à privacidade usando a integração experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation>.</string>
     <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">implicações relacionadas à privacidade</annotation></string>

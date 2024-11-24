@@ -241,7 +241,7 @@
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
-    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect \u0020</annotation> thử nghiệm</string>
+    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url="https://github.com/libredirect/libredirect">LibRedirect  </annotation> thử nghiệm</string>
     <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url="https://supabase.com/privacy">Chính sách quyền riêng tư</annotation>)</string>
@@ -249,7 +249,7 @@
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="app_name">LinkSheet</string>
-    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward \u0020</annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
+    <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward  </annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="show_linksheet_referrer">Hiển thị người giới thiệu LinkSheet</string>
@@ -300,7 +300,7 @@
     <string name="resolve_embeds_explainer">Giải quyết các bản sao nhúng như fxtwitter.com vào máy chủ thực sự</string>
     <string name="experiments_explainer_3">Các thử nghiệm đang được phát triển tích cực và có thể không hoạt động chính xác hoặc hoàn toàn không hoạt động. Vui lòng không báo cáo lỗi trên Github. Nếu bạn muốn cung cấp phản hồi, hãy làm như vậy trên Discord.</string>
     <string name="donate_card_headline">Quyên tặng để hỗ trợ LinkSheet</string>
-    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng. \u0020 \nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
+    <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng.   \nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
     <string name="resolve_embeds">Giải quyết nhúng</string>
     <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>
     <string name="telemetry_configure_type">Loại phân tích</string>
@@ -368,7 +368,7 @@
     <string name="dev_mode_enabled">Xin chúc mừng, bạn đã kích hoạt chế độ nhà phát triển. Chỉ cần thận trọng.</string>
     <string name="onboarding_3_card_explainer">Google đã giới thiệu các liên kết ứng dụng đã được xác minh trong Android 12, cho phép các ứng dụng chứng minh quyền sở hữu tên miền bằng mật mã. Hành vi này phải được tắt theo cách thủ công để LinkSheet chặn các liên kết được nhấn.</string>
     <string name="switch_profile">Bật chuyển đổi hồ sơ</string>
-    <string name="switch_profile_explainer">Hiển thị một nút ở trang dưới cùng để mở liên kết đã nhấn trong hồ sơ (công việc-). Yêu cầu cài đặt LinkSheet trong cả hai cấu hình và được liên kết thủ công thông qua Thiết đặt -&gt; Quyền truy cập ứng dụng đặc biệt -&gt; Ứng dụng cá nhân và công việc được kết nối</string>
+    <string name="switch_profile_explainer">Hiển thị một nút ở trang dưới cùng để mở liên kết đã nhấn trong hồ sơ (công việc-). Yêu cầu cài đặt LinkSheet trong cả hai cấu hình và được liên kết thủ công thông qua Thiết đặt -> Quyền truy cập ứng dụng đặc biệt -> Ứng dụng cá nhân và công việc được kết nối</string>
     <string name="verified_link_handlers">Trình xử lý liên kết đã được xác minh</string>
     <string name="verified_link_handlers_subtitle">Kiểm soát trạng thái xác minh miền ứng dụng</string>
     <string name="settings_shortcuts__title_default_browser">Trình duyệt mặc định</string>

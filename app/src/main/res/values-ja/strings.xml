@@ -91,7 +91,7 @@
     <string name="dismiss">却下</string>
     <string name="join">参加</string>
     <string name="donate">寄付</string>
-    <string name="flavor"><b>フレーバー:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="flavor"><b>フレーバー:</b> <font face="monospace">%s</font></string>
     <string name="confirm_import">確認</string>
     <string name="bottom_sheet">ボトムシート</string>
     <string name="whitelisted_browsers">ホワイトリストに登録されているブラウザ</string>
@@ -129,7 +129,7 @@
     <string name="use_clear_urls">ClearURLを使用</string>
     <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
-    <string name="follow_redirects_external_service_explainer">"supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します   （annotation url=\"https://supabase.com/privacy\"&gt;Privacy policy&lt;/annotation&gt;）  "</string>
+    <string name="follow_redirects_external_service_explainer">supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します（<annotation url="https://supabase.com/privacy">プライバシーポリシー</annotation>）</string>
     <string name="switch_profile">プロファイル切り替えを有効にする</string>
     <string name="follow_redirects_short">リダイレクト</string>
     <string name="unknown_host">%s はブロックされているか存在しません</string>
@@ -161,7 +161,7 @@
     <string name="settings__title_filter_apps">アプリをフィルター</string>
     <string name="reset_app_link_verification_status_subtitle">ここをタップしてすべてのアプリのアプリリンク検証ステータスをリセットし、Android が再検証するまで数分間お待ちください。確認は届きません。Shizuku が必要です。</string>
     <string name="reset_app_link_verification_status_toast">再確認を要求</string>
-    <string name="switch_profile_explainer">タップしたリンクを（仕事用）プロファイルで開くためのボタンを下部のシートに表示します。両方のプロファイルに LinkSheet をインストールし、設定 -&gt; 特別なアプリアクセス -&gt; 接続から手動でリンクする必要があります</string>
+    <string name="switch_profile_explainer">タップしたリンクを（仕事用）プロファイルで開くためのボタンを下部のシートに表示します。両方のプロファイルに LinkSheet をインストールし、設定 -> 特別なアプリアクセス -> 接続から手動でリンクする必要があります</string>
     <string name="settings_app_config_rules__text_custom_rules">カスタムルール</string>
     <string name="settings_app_config_rules__subtitle_default_rule">このルールは他のルールが一致しない場合に使用されます</string>
     <string name="settings_edit_rule__title_edit_rule">ルールを編集しています</string>
@@ -267,8 +267,8 @@
     <string name="donate_card_subtitle">LinkSheet が気に入ったら、Github でスターを付けたり、寄付したりすることを検討してください。 \n<b>5 ユーロ</b> 以上を寄付した寄付者は、独占的な機能を備えた <b>LinkSheet Pro</b> の対象となります。</string>
     <string name="import_dumped_preference">以前バックアップとして保存された設定情報を、再びシステムに読み込んで復元する</string>
     <string name="import_and_override">インポートと上書き</string>
-    <string name="github_workflow_run_id"><b>ワークフロー ID:</b> \u0020 <font face="monospace">%s</font></string>
-    <string name="version_name"><b>バージョン:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>ワークフロー ID:</b> <font face="monospace">%s</font></string>
+    <string name="version_name"><b>バージョン:</b> <font face="monospace">%s</font></string>
     <string name="built_at"><b>ビルド:</b> <font face="monospace">%s</font></string>
     <string name="import_settings">インポート設定</string>
     <string name="fastforward_version">FastForward ルール</string>

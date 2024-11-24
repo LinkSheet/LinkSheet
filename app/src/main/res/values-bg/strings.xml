@@ -115,7 +115,7 @@
     <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва</string>
     <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
     <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
-    <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим. "</string>
+    <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
     <string name="frontend">Интерфейс</string>
     <string name="close">Затваряне</string>

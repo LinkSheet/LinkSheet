@@ -208,9 +208,9 @@
     <string name="mastodon_redirect_subtitle_2">Kod źródłowy Mastodon Redirect został użyty jako odniesienie dla interakcji Shizuku</string>
     <string name="import_dumped_preference">Przywróć kopię preferencji</string>
     <string name="import_and_override">Importuj i nadpisz</string>
-    <string name="version_name"><b>Wersja:</b> \u0020<font face="monospace">%s</font></string>
-    <string name="built_at"><b>Data:</b> \u0020<font face="monospace">%s</font></string>
-    <string name="github_workflow_run_id"><b>ID workflow:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="version_name"><b>Wersja:</b> <font face="monospace">%s</font></string>
+    <string name="built_at"><b>Data:</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>ID workflow:</b> <font face="monospace">%s</font></string>
     <string name="privacy_settings_explainer">Prywatność odsyłacza, Telemetria</string>
     <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Kiedy uruchamiana jest aplikacja, może sprawdzić, która aplikacja ją uruchomiła, lub \"odwołała\" się do niej. Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, twierdząc, że to aplikacja, która uruchomiła LinkSheet, jest docelową aplikacją. Włącz to, aby ponownie wstawić LinkSheet jako odwołującą się aplikację dla aplikacji, które otwiera.</string>
@@ -225,7 +225,7 @@
     <string name="donate_card_subtitle">Jeśli podoba Ci się LinkSheet, rozważ pozostawienie gwiazdki na GitHubie i/lub przekazanie darowizny.\nDarczyńcy, którzy wpłacą więcej niż <b>5 €</b>, kwalifikują się do <b>LinkSheet Pro</b>, który będzie miał ekskluzywne funkcje.</string>
     <string name="manual_build">Ręcznie zbudowana i podpisana przez 1fexd</string>
     <string name="donate_learn_more">Czytaj więcej</string>
-    <string name="flavor"><b>Wariant:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="flavor"><b>Wariant:</b> <font face="monospace">%s</font></string>
     <string name="github_pipeline_build">Zbudowana i podpisana przez CI</string>
     <string name="other">Inne</string>
     <string name="app_setup">Konfiguracja aplikacji</string>
@@ -248,7 +248,7 @@
     <string name="export_explainer">Zapisz bieżące ustawienia do pliku</string>
     <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
     <string name="resolve_via_failed_toast">Rozwiązanie nie powiodło się</string>
-    <string name="last_updated"><b>Wersja:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="last_updated"><b>Wersja:</b> <font face="monospace">%s</font></string>
     <string name="resolve_via_failed_toast_explainer">Wyświetl toast, gdy link nie zostanie rozpoznany przez usługę zewnętrzną</string>
     <string name="dev_explainer">Użyteczne dla programistów</string>
     <string name="opening_with_app_toast">Aplikacja uruchomiła się automatycznie</string>
@@ -354,7 +354,7 @@
     <string name="telemetry_identity_full">Pełne</string>
     <string name="telemetry_level_exhaustive_description">Szczegółowe statystyki użycia</string>
     <string name="settings_verified_link_handlers__text_user_apps">Aplikacje użytkownika</string>
-    <string name="switch_profile_explainer">Wyświetla przycisk w dolnym panelu, aby otworzyć kliknięty link w profilu (pracy). Wymaga, aby LinkSheet był zainstalowany w obu profilach i ręcznie powiązany za pomocą Ustawienia -&gt; Aplikacje -&gt; Aplikacje ze specjalnym dostępem -&gt; Wspólny widok aplikacji służbowych i osobistych</string>
+    <string name="switch_profile_explainer">Wyświetla przycisk w dolnym panelu, aby otworzyć kliknięty link w profilu (pracy). Wymaga, aby LinkSheet był zainstalowany w obu profilach i ręcznie powiązany za pomocą Ustawienia -> Aplikacje -> Aplikacje ze specjalnym dostępem -> Wspólny widok aplikacji służbowych i osobistych</string>
     <string name="settings_shortcuts__subtitle_default_browser">Otwórz stronę ustawień domyślnej przeglądarki</string>
     <string name="tap_customization_dialog_text">Wybierz akcję, która powinna zostać wykonana</string>
     <string name="telemetry_level_minimal">Minimalne</string>

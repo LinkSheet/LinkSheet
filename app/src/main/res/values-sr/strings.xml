@@ -47,7 +47,7 @@
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="misc_settings">Остало</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs"> \u0020 \nлинк</annotation></string>
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">   \nлинк</annotation></string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
     <string name="enable_ignore_libredirect_button">Омогући дугме „Игнориши LibRedirect“</string>
@@ -99,9 +99,9 @@
     <string name="frontend">Фронтенд</string>
     <string name="redirect_resolve_type_remote">удаљени сервер</string>
     <string name="donate_subtitle">Надоградите на <b>LinkSheet Pro</b></string>
-    <string name="flavor"><b>Варијанта:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="flavor"><b>Варијанта:</b> <font face="monospace">%s</font></string>
     <string name="advanced">Напредно</string>
-    <string name="built_at">"&lt;b&gt;Израђено на:  &lt;font face=\"monospace\"&gt;%s&lt;/font&gt;"</string>
+    <string name="built_at"><b>Израђено на:</b> <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">Директно комуницирајте са системским API-јима</string>
     <string name="back">Назад</string>
     <string name="linksheet_download">LinkSheet преузимање</string>
@@ -154,7 +154,7 @@
     <string name="always">Увек</string>
     <string name="open_link_with">OpenLinkWith</string>
     <string name="select_an_app">Изаберите апликацију</string>
-    <string name="github_workflow_run_id"><b>ID радног тока:</b> \u0020<font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>ID радног тока:</b> <font face="monospace">%s</font></string>
     <string name="resolved_via">%s решено путем %s</string>
     <string name="instance_not_available_anymore">Инстанца више није доступна!</string>
     <string name="open_with_linksheet">Отвори помоћу LinkSheet</string>
@@ -219,13 +219,13 @@
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>
     <string name="follow_redirects_local_cache">Омогући локални кеш за преусмеравање</string>
-    <string name="donate_card_subtitle">Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате. \u0020 \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
+    <string name="donate_card_subtitle">Ако вам се свиђа LinkSheet, размислите о томе да оставите звездицу на GitHub-у и/или донирате.   \nДонатори који донирају више од <b>5€</b> испуњавају услове за <b>LinkSheet Pro</b>, који ће имати ексклузивне функције.</string>
     <string name="privacy">Приватност</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања. Подржани прегледачи: %s</string>
     <string name="pretend_to_be_app">Пресретни захтеве за изворне апликације</string>
     <string name="shizuku">Shizuku интеграција</string>
     <string name="dont_show_filtered_item_explainer">Неће се приказати горњи одељак који предлаже последњу коришћену апликацију за хост на који је кликнуто</string>
-    <string name="version_name">"&lt;b&gt;Верзија:&lt;&lt;/b&gt;  &lt;font face=\"monospace\"&gt;%s&lt;/font&gt;"</string>
+    <string name="version_name"><b>Верзија:</b> <font face="monospace">%s</font></string>
     <string name="configure_explainer">Додрните овде да бисте конфигурисали LinkSheetCompat</string>
     <string name="feature_flags">Експерименталне функције</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -248,7 +248,7 @@
     <string name="export_explainer">Извезите тренутна подешавања апликације у фајл</string>
     <string name="import_settings_override_preferences">Ово ће заменити сва постојећа подешавања. Наставити?</string>
     <string name="resolve_via_failed_toast">Неуспешно разрешење</string>
-    <string name="last_updated"><b>Верзија</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="last_updated"><b>Верзија</b> <font face="monospace">%s</font></string>
     <string name="resolve_via_failed_toast_explainer">Приказивање искачуће поруке када се URL адреса неуспешно разреши преко спољне услуге</string>
     <string name="dev_explainer">Програмерска подешавања</string>
     <string name="opening_with_app_toast">Апликација аутоматски покренута</string>
@@ -354,7 +354,7 @@
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични \u0020 \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични   \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>.</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
     <string name="telemetry_level_disabled">Онемогућено</string>
     <string name="telemetry_level_minimal">Минимално</string>
@@ -381,7 +381,7 @@
     <string name="reset_app_link_verification_status_subtitle">Додирните овде да бисте ресетовали статус верификације линка апликације за све апликације, а затим сачекајте неколико минута док их Android поново верификује. Нећете добити потврду. Захтева Shizuku.</string>
     <string name="customization">Прилагођавање</string>
     <string name="switch_profile">Омогући промену профила</string>
-    <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -&gt; Посебан приступ апликацијама -&gt; Повезане радне и личне апликације</string>
+    <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -> Посебан приступ апликацијама -> Повезане радне и личне апликације</string>
     <string name="build_info">Информације о издању</string>
     <string name="settings__title_shortcuts">Пречице</string>
     <string name="settings_shortcuts__title_default_browser">Подразумевани прегледач</string>

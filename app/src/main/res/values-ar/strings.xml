@@ -156,7 +156,7 @@
     <string name="enable_amp2html_explainer">لإعادة توجيه صفحات AMP إلى إصدار الويب العادي. قد يكون لهذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html"> آثار متعلقة بالخصوصية</annotation></string>
     <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
     <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
-    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على \u0020supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
+    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على  supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
     <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
     <string name="resolved_via">%s تم حلها عبر %s</string>
     <string name="resolve_failed">%s فشل: %s</string>
@@ -222,7 +222,7 @@
     <string name="discord">ديسكورد</string>
     <string name="discord_explainer">الدردشة حول ورقة الروابط على ديسكورد</string>
     <string name="donate_card">التبرع بالبطاقة (عبر BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع. \u0020 \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
+    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع.   \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
     <string name="dev">المطور</string>
     <string name="notifications">الإشعارات</string>
     <string name="notifications_explainer">تكوين الإشعارات المنبثقة</string>
@@ -235,7 +235,7 @@
     <string name="fastforward_version">قواعد التقديم السريع</string>
     <string name="opening_with_app_toast">إظهار نخب عند تشغيل التطبيق تلقائيًا</string>
     <string name="clear_urls_version">تنظيف قواعد الروابط</string>
-    <string name="last_updated"><b>الإصدار:</b> \u0020 <font face="monospace">%s</font></string>
+    <string name="last_updated"><b>الإصدار:</b> <font face="monospace">%s</font></string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">تمكين القائمة التجريبية لورقة الروابط المضغوطة</string>
     <string name="app_setup">إعداد التطبيق</string>

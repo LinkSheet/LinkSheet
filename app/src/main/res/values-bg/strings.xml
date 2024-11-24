@@ -3,7 +3,7 @@
     <string name="open_with_app">Отваряне с/ъс %s</string>
     <string name="bottom_sheet_explainer">Настройки и изглед</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
-    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
     <string name="download">Изтегляне</string>
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
     <string name="back">Назад</string>
@@ -56,8 +56,8 @@
     <string name="open_with_linksheet">Отваряне с LinkSheet</string>
     <string name="about_explainer">За приложението, лицензи</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
-    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките)</string>
+    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url-id="fastforward-github">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките)</string>
     <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
@@ -113,7 +113,7 @@
     <string name="in_app_browser_subtitle">Задава режима на вградения браузър</string>
     <string name="always_disable_explainer">Вграденият браузър не се използва от приложенията</string>
     <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва</string>
-    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
+    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url-id="clearurls-github">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
     <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
     <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
@@ -136,7 +136,7 @@
     <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#amp2html">последствия, свързани с поверителността</annotation></string>
     <string name="amp2html_local_cache_explainer">Запазване на получените нормалните версии на страници в местна временна памет</string>
     <string name="amp2html_external_service">Опит за получаване на нормална версия на страницата чрез външна услуга</string>
-    <string name="amp2html_external_service_explainer">Опит за получаване на нормална версия на страницата чрез ППИ, разположен на supabase.com (<annotation url="https://supabase.com/privacy">Политика за поверителност</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Опит за получаване на нормална версия на страницата чрез ППИ, разположен на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
     <string name="shizuku">Интеграция с Shizuku</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Включен е режим на „Shizuku“, докосване на приложение превключва автоматичното отваряне на препратки. При задържане се отваря менюто „Отваряне по подразбиране“ на приложението.</string>
     <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите.</string>
@@ -164,7 +164,7 @@
     <string name="redact_log">Обезличаване на дневника (препоръчително, изключването на може да разкрие имена на пакети и хостове)</string>
     <string name="include_settings">Да включва настройките (препоръчително)</string>
     <string name="include_fingerprint">Включително пръстов отпечатък (препоръчително)</string>
-    <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">страница</annotation>.</string>
+    <string name="log_privacy">За да научите повече за поверителността на дневниците, посетете тази <annotation url-id="privacy-logs">страница</annotation>.</string>
     <string name="no_logs_found">Не са намерени предишни дневници!</string>
     <string name="enable_amp2html">Amp2Html</string>
     <string name="amp2html_local_cache">Местна временна памет за Amp2Html</string>
@@ -322,7 +322,7 @@
     <string name="telemetry_identity_basic">Основна</string>
     <string name="customization">Нагласяне</string>
     <string name="onboarding_2_request_shizuku_permission">Искане на права</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">докоснете тук</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url-id="aptabase">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url-id="privacy-telemetry">докоснете тук</annotation>.</string>
     <string name="telemetry_level_standard_description">Обобщена статистика за използването</string>
     <string name="telemetry_configure_title">Статистики</string>
     <string name="nightly_experiments_card">Нощни експерименти</string>
@@ -429,7 +429,7 @@
     <string name="generic__button_text_cancel">Отказ</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="crash_viewer__subtitle_app_crashed">Олеле, това не биваше да се случва!</string>
-    <string name="export_log_dialog__text_log_privacy">За да научите повече за потенциално чувствителната информация в споделяните дневници <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">докоснете тук</annotation>.</string>
+    <string name="export_log_dialog__text_log_privacy">За да научите повече за потенциално чувствителната информация в споделяните дневници <annotation url-id="privacy-logs">докоснете тук</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Копиране</string>
     <string name="export_log_dialog__title_include_settings">Включително настройките</string>
     <string name="export_log_dialog__subtitle_include_settings">Препоръчително</string>

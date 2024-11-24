@@ -20,7 +20,7 @@ plugins {
     id("net.nemerosa.versioning")
     id("com.google.devtools.ksp")
     id("build-logic-plugin")
-    id("dev.rikka.tools.refine") version "4.0.0"
+    id("dev.rikka.tools.refine")
 }
 
 // Must be defined before the android block, or else it won't work
@@ -221,10 +221,11 @@ dependencies {
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
-    implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(PinnedVersions.ComposeUi)
-    implementation(PinnedVersions.Material3)
     implementation(AndroidX.compose.foundation)
+    implementation(AndroidX.compose.ui.text)
+    implementation(AndroidX.compose.ui.withVersion(PinnedVersions.ComposeVersion))
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(PinnedVersions.Material3)
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -329,8 +330,8 @@ dependencies {
 
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
-    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
-    implementation("dev.rikka.tools.refine:runtime:4.0.0")
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
+    implementation("dev.rikka.tools.refine:runtime:_")
 //    compileOnly("dev.rikka.hidden:stub:_")
 
     implementation(MozillaComponents.support.utils)

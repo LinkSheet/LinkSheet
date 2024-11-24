@@ -70,12 +70,12 @@
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirect following</string>
     <string name="use_clear_urls">Use ClearURLs</string>
-    <string name="use_clear_urls_explainer">Use experimental <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
+    <string name="use_clear_urls_explainer">Use experimental <annotation url-id="clearurls-github">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">privacy-related implications</annotation></string>
     <string name="loading_link">Processing link…</string>
     <string name="follow_redirects_external_service">Follow redirects via external service</string>
-    <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Follow redirects using an API deployed at supabase.com (<annotation url-id="supabase-privacy">Privacy policy</annotation>)</string>
     <string name="follow_only_known_trackers">Follow only known trackers</string>
     <string name="follow_only_known_trackers_explainer">Only attempt to follow redirects when the host is known to be a tracker/redirect. If \"Follow redirects via external service\" is enabled, this will always be enabled</string>
     <string name="theme">Theme</string>
@@ -84,7 +84,7 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="fastfoward_rules">Use FastForward rules</string>
-    <string name="fastfoward_rules_explainer">Use experimental <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
+    <string name="fastfoward_rules_explainer">Use experimental <annotation url-id="fastforward-github">FastForward</annotation> rule integration (bypass redirects of some hosts by extracting redirect from link)</string>
     <string name="follow_redirects_local_cache">Enable local redirect cache</string>
     <string name="follow_redirects_local_cache_explainer">Cache the result of redirects locally</string>
     <string name="resolved_via">%s resolved via %s</string>
@@ -92,7 +92,7 @@
     <string name="redirect_resolve_type_remote">remote server</string>
     <string name="redirect_resolve_type_local">local resolver</string>
     <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integration</string>
+    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url-id="libredirect-github">LibRedirect</annotation> integration</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
@@ -155,14 +155,14 @@
     <string name="redact_log">Redact log (recommended, disabling this may leak package names and host names)</string>
     <string name="include_settings">Include settings (recommended)</string>
     <string name="include_fingerprint">Include device fingerprint (recommended)</string>
-    <string name="log_privacy">To learn about log privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">link</annotation>.</string>
+    <string name="log_privacy">To learn about log privacy, you can visit this <annotation url-id="privacy-logs">link</annotation>.</string>
     <string name="no_logs_found">No past logs found!</string>
     <string name="enable_amp2html">Enable Amp2Html</string>
-    <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version. This may have<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related implications</annotation></string>
+    <string name="enable_amp2html_explainer">Redirects AMP pages to their normal web version. This may have <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">privacy-related implications</annotation></string>
     <string name="amp2html_local_cache">Enable local Amp2Html cache</string>
     <string name="amp2html_local_cache_explainer">Cache the retrieved non-AMP versions of webpages locally</string>
     <string name="amp2html_external_service">Attempt to obtain non-AMP page version via external service</string>
-    <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url="https://supabase.com/privacy">Privacy policy</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url-id="supabase-privacy">Privacy policy</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
@@ -244,7 +244,7 @@
     <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
     <string name="include_history">Include history (your link click and app history)</string>
     <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
-    <string name="export_privacy">To learn about export privacy, you can visit this <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">link</annotation>.</string>
+    <string name="export_privacy">To learn about export privacy, you can visit this <annotation url-id="privacy-exports">link</annotation>.</string>
     <string name="export_to_file">Export to file</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
     <string name="import_settings">Import settings</string>
@@ -366,7 +366,7 @@
     <string name="telemetry_level_minimal_description">Installed version metrics</string>
     <string name="telemetry_level_standard_description">Aggregated usage statistics</string>
     <string name="telemetry_level_exhaustive_description">Detailed usage statistics</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Usage metrics include a random, user-resettable installation-bound identifier, as well as your Android version, and are stored at <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Sensitive data, such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">here</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Usage metrics include a random, user-resettable installation-bound identifier, as well as your Android version, and are stored at <annotation url-id="aptabase">Aptabase (EU)</annotation>. Sensitive data, such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url-id="privacy-telemetry">here</annotation>.</string>
     <string name="telemetry_configure_title">Analytics</string>
     <string name="telemetry_identifier_reset">Reset identifier</string>
     <string name="telemetry_configure_type">Analytics type</string>
@@ -442,7 +442,7 @@
     <string name="export_log_dialog__subtitle_include_fingerprint">Recommended</string>
     <string name="export_log_dialog__title_include_settings">Include settings</string>
     <string name="export_log_dialog__subtitle_include_settings">Recommended</string>
-    <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log files, tap <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">here</annotation>.</string>
+    <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log files, tap <annotation url-id="privacy-logs">here</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Copy to clipboard</string>
     <string name="generic__button_text_cancel">Cancel</string>
     <string name="export_log_dialog__text_log_info">Configure share settings for log captured at: <font face="monospace">%s</font></string>

@@ -12,7 +12,7 @@
     <string name="opening_with_app">Открытие с помощью %s</string>
     <string name="save">Сохранить</string>
     <string name="enable_amp2html">Включить Amp2Html</string>
-    <string name="use_clear_urls_explainer">Использовать экспериментальную интеграцию <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (удаляет параметры отслеживания из URL-адресов)</string>
+    <string name="use_clear_urls_explainer">Использовать экспериментальную интеграцию <annotation url-id="clearurls-github">ClearURLs</annotation> (удаляет параметры отслеживания из URL-адресов)</string>
     <string name="follow_only_known_trackers_explainer">Попытаться следовать перенаправлениям только в том случае, если известно, что хост является трекером/перенаправлением. Если включен параметр «Следовать за перенаправлениями через внешний сервис», то он всегда будет включен.</string>
     <string name="always_disable">Всегда отключать</string>
     <string name="copy_to_clipboard">Скопировать в буфер обмена</string>
@@ -79,7 +79,7 @@
     <string name="shizuku_explainer_short">Взаимодействие с системными API напрямую</string>
     <string name="back">Назад</string>
     <string name="linksheet_download">Скачать LinkSheet</string>
-    <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url="https://supabase.com/privacy">Политика конфиденциальности</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url-id="supabase-privacy">Политика конфиденциальности</annotation>)</string>
     <string name="include_fingerprint">Включить отпечаток пальца устройства (рекомендуется)</string>
     <string name="default_apps">Предпочитаемые приложения</string>
     <string name="just_once">Только сейчас</string>
@@ -88,7 +88,7 @@
     <string name="version">Версия</string>
     <string name="preview_url">Предварительный просмотр URL</string>
     <string name="usage_stats_sorting_explainer">Включите статистику использования системы Android в алгоритм сортировки. Разрешение запрашивается при первом переключении.</string>
-    <string name="amp2html_external_service_explainer">Попытка получить версию страницы, отличающееся от AMP, с помощью API, развернутого на сайте supabase.com (<annotation url="https://supabase.com/privacy">Политика конфиденциальности</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Попытка получить версию страницы, отличающееся от AMP, с помощью API, развернутого на сайте supabase.com (<annotation url-id="supabase-privacy">Политика конфиденциальности</annotation>)</string>
     <string name="github_explainer">Репозиторий исходного кода</string>
     <string name="shizuku_integration">Интеграция Shizuku</string>
     <string name="debug">Дебаг</string>
@@ -131,7 +131,7 @@
     <string name="browser_mode">Предпочитаемый браузер</string>
     <string name="dark">Тёмная</string>
     <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
-    <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
+    <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url-id="fastforward-github">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
     <string name="set_as_browser">Установить как браузер</string>
     <string name="whitelisted">В белом списке</string>
     <string name="log">Лог</string>
@@ -164,7 +164,7 @@
     <string name="enable_libredirect">Включить LibRedirect</string>
     <string name="no_logs_found">Прошлые логи не найдены!</string>
     <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
-    <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
+    <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="app_name">LinkSheet</string>
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="system">Системная</string>

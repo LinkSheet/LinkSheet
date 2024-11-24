@@ -116,7 +116,7 @@
     <string name="github_explainer">ソースコードリポジトリ</string>
     <string name="open_copied_link">クリップボードから</string>
     <string name="links_explainer">ClearUrls、LibRedirect、リダイレクトの許可</string>
-    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url="https://github.com/ClearURLs">ClearURLs</annotation> 統合（URL から追跡パラメータをクリア）</string>
+    <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url-id="clearurls-github">ClearURLs</annotation> 統合（URL から追跡パラメータをクリア）</string>
     <string name="follow_redirects_external_service">外部サービス経由でリダイレクトを追跡</string>
     <string name="follow_only_known_trackers">既知のトラッカーだけを許可する</string>
     <string name="follow_only_known_trackers_explainer">ホストがトラッカー/リダイレクトであることがわかっている場合にのみ、リダイレクトを追跡しようとします。 「外部サービス経由のリダイレクトに従う」が有効になっている場合、これは常に有効になります。</string>
@@ -129,11 +129,11 @@
     <string name="use_clear_urls">ClearURLを使用</string>
     <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。</string>
     <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
-    <string name="follow_redirects_external_service_explainer">supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します（<annotation url="https://supabase.com/privacy">プライバシーポリシー</annotation>）</string>
+    <string name="follow_redirects_external_service_explainer">supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します（<annotation url-id="supabase-privacy">プライバシーポリシー</annotation>）</string>
     <string name="switch_profile">プロファイル切り替えを有効にする</string>
     <string name="follow_redirects_short">リダイレクト</string>
     <string name="unknown_host">%s はブロックされているか存在しません</string>
-    <string name="fastfoward_rules_explainer">実験的な <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> ルールの統合を使用する (リンクからリダイレクトを抽出することで、一部のホストのリダイレクトをバイパスする)。</string>
+    <string name="fastfoward_rules_explainer">実験的な <annotation url-id="fastforward-github">FastForward</annotation> ルールの統合を使用する (リンクからリダイレクトを抽出することで、一部のホストのリダイレクトをバイパスする)。</string>
     <string name="resolved_via">%s は %s 経由で解決されました</string>
     <string name="dont_show_filtered_item_explainer">クリックしたホストの最後に使用したアプリを提案する上部の項目を表示しない</string>
     <string name="downloader_url_mime_type_explainer">URLの末尾にファイル拡張子（例：\".jpg\"）があるかどうかをチェックする。拡張子がある場合は、ダウンロードしたファイルにこのタイプが使われる。</string>
@@ -240,7 +240,7 @@
     <string name="reset_app_link_verification_status">アプリリンクの検証ステータスをリセット</string>
     <string name="settings_app_config__button_add_item">アイテムを追加</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">推奨</string>
-    <string name="enable_libredirect_explainer">実験的な<annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします。</string>
+    <string name="enable_libredirect_explainer">実験的な<annotation url-id="libredirect-github">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします。</string>
     <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">プライバシーに関連した意味を持つかもしれません</annotation>。</string>
     <string name="random_instance">ランダムインスタンス</string>
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にする</string>
@@ -252,12 +252,12 @@
     <string name="export_log">ログをエクスポート</string>
     <string name="include_settings">設定を含める（推奨）</string>
     <string name="include_fingerprint">デバイスのフィンガープリントを含める（推奨）</string>
-    <string name="log_privacy">ログのプライバシーについて詳しくは、この <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">リンク</annotation> をご覧ください。</string>
+    <string name="log_privacy">ログのプライバシーについて詳しくは、この <annotation url-id="privacy-logs">リンク</annotation> をご覧ください。</string>
     <string name="no_logs_found">過去のログが見つかりません！</string>
     <string name="enable_amp2html">Amp2Htmlを有効にする</string>
     <string name="use_unified_preferred_browser_explainer">これを有効にすると、以下の設定が通常リンクとアプリ内リンクの両方に適用されます。無効にした場合は、以下のボタンを使用して通常モードとアプリ内モードを切り替えることができます。</string>
     <string name="amp2html_external_service">外部サービス経由で非 AMP ページ バージョンを取得しようとしています</string>
-    <string name="amp2html_external_service_explainer">supabase.com にデプロイされた API を使用して、非 AMP ページ バージョンを取得しようとします (<annotation url="https://supabase.com/privacy">プライバシー ポリシー</annotation>)</string>
+    <string name="amp2html_external_service_explainer">supabase.com にデプロイされた API を使用して、非 AMP ページ バージョンを取得しようとします (<annotation url-id="supabase-privacy">プライバシー ポリシー</annotation>)</string>
     <string name="enable_all">すべてを有効にする</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizukuモードがアクティブ化されました。アプリをタップすると、自動リンク処理機能を切り替えることができます。アプリを長押しすると、「デフォルトで開く」設定メニューが開きます。</string>
     <string name="feature_flags">機能フラグ</string>
@@ -290,7 +290,7 @@
     <string name="telemetry_level_minimal_description">インストール済みバージョンに関する指標</string>
     <string name="telemetry_level_standard_description">集計された使用統計</string>
     <string name="telemetry_level_exhaustive_description">詳細な使用統計</string>
-    <string name="telemetry_dialog_text_2" translatable="false">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url="https://aptabase.com">Aptabase (EU)</annotation> に保存されます。</string>
+    <string name="telemetry_dialog_text_2" translatable="false">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url-id="aptabase">Aptabase (EU)</annotation> に保存されます。</string>
     <string name="telemetry_configure_title">アナリティクス</string>
     <string name="telemetry_identifier_reset">識別子をリセット</string>
     <string name="telemetry_configure_type">アナリティクスタイプ</string>
@@ -418,7 +418,7 @@
     <string name="export_import_settings_explainer">現在の設定をエクスポートするか、以前の設定のエクスポートをインポートします</string>
     <string name="import_explainer">ファイルから以前のエクスポートをインポートする</string>
     <string name="include_log_hash_key">ログハッシュキー（ログを編集するために使用されるキー）を含める</string>
-    <string name="export_privacy">エクスポートのプライバシーについて詳しくは、この <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">リンク</annotation> をご覧ください。</string>
+    <string name="export_privacy">エクスポートのプライバシーについて詳しくは、この <annotation url-id="privacy-exports">リンク</annotation> をご覧ください。</string>
     <string name="export_to_file">ファイルにエクスポート</string>
     <string name="running_unofficial_build">非公式ビルド</string>
     <string name="notifications_explainer">URL をコピーしました。ダウンロードを開始しました</string>
@@ -473,7 +473,7 @@
     <string name="export_log_dialog__title_include_fingerprint">ビルドフィンガープリントを含める</string>
     <string name="export_log_dialog__title_include_settings">設定を含める</string>
     <string name="export_log_dialog__subtitle_include_settings">推奨</string>
-    <string name="export_log_dialog__text_log_privacy">共有ログ ファイル内の潜在的に機密性の高いデータの詳細については、<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">ここ</annotation> をタップしてください。</string>
+    <string name="export_log_dialog__text_log_privacy">共有ログ ファイル内の潜在的に機密性の高いデータの詳細については、<annotation url-id="privacy-logs">ここ</annotation> をタップしてください。</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">%s でキャプチャされたログを表示しています</string>
     <string name="crash_viewer__subtitle_app_crashed">ああ、大変、そんなことが起こるはずじゃなかった！</string>
     <string name="settings_main_setup_success__button_link_handlers">リンクハンドラー</string>

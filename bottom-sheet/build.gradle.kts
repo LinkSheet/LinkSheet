@@ -29,7 +29,7 @@ kotlin {
 
 dependencies {
     implementation(platform(AndroidX.compose.bom))
-    implementation(PinnedVersions.ComposeUi)
+    implementation(AndroidX.compose.ui.withVersion(PinnedVersions.ComposeVersion))
     implementation(PinnedVersions.Material3)
     implementation(AndroidX.Lifecycle.viewModelCompose)
 }

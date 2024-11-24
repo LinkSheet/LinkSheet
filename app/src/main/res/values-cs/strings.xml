@@ -85,8 +85,8 @@
     <string name="error">Chyba</string>
     <string name="checkmark">Zaškrtávátko</string>
     <string name="links">Odkazy</string>
-    <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
-    <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>)</string>
+    <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url-id="clearurls-github">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
+    <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="follow_only_known_trackers_explainer">"Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena</string>
     <string name="theme">Motiv</string>
     <string name="dark">Tmavý</string>
@@ -115,14 +115,14 @@
     <string name="follow_only_known_trackers">Následovat pouze známé sledovací stránky</string>
     <string name="system">Podle systému</string>
     <string name="theme_explainer">Material You, tmavý motiv, čistě černý motiv</string>
-    <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu)</string>
+    <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url-id="fastforward-github">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu)</string>
     <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#downloader">následky na soukromí</annotation></string>
-    <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
+    <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="in_app">V aplikaci</string>
     <string name="export">Export</string>
-    <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">odkaz</annotation>.</string>
+    <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url-id="privacy-logs">odkaz</annotation>.</string>
     <string name="enable_amp2html">Povolit Amp2Html</string>
-    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation></string>
+    <string name="enable_amp2html_explainer">Přesměruje stránky AMP na jejich normální webové verze. Tato funkce může mít <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">dopad na soukromí</annotation></string>
     <string name="amp2html_local_cache">Povolit místní mezipaměť Amp2Html</string>
     <string name="amp2html_local_cache_explainer">Ukládat načtené ne-AMP verze stránek do místní mezipaměti</string>
     <string name="feature_flags">Příznaky funkcí</string>
@@ -180,7 +180,7 @@
     <string name="include_fingerprint">Zahrnout otisk zařízení (doporučeno)</string>
     <string name="no_logs_found">Nenalezeny žádné minulé protokoly!</string>
     <string name="amp2html_external_service">Pokusit se získat ne-AMP verzi stránky pomocí externí služby</string>
-    <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url="https://supabase.com/privacy">zásady ochrany soukromí</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="use_unified_preferred_browser_explainer">"Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán.</string>
     <string name="instance_not_available_anymore">Instance již není dostupná!</string>
@@ -273,7 +273,7 @@
     <string name="url_copied_toast">Adresa URL zkopírována</string>
     <string name="no_internet_connection">Žádné připojení k internetu</string>
     <string name="show_linksheet_referrer_explainer">Aplikace při spuštění může zkontrolovat, která aplikace ji spustila, nebo na ni „odkazovala“. Ve výchozím nastavení se LinkSheet po spuštění aplikace skryje, čímž cílové aplikaci řekne, že ji spustila ta aplikace, která spustila LinkSheet. Povolte tuto možnost pro vložení LinkSheet jako odkazovatele pro aplikace, které jsou přes něj otevřeny.</string>
-    <string name="export_privacy">Pro více informací o soukromí navštivte tento <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">odkaz</annotation>.</string>
+    <string name="export_privacy">Pro více informací o soukromí navštivte tento <annotation url-id="privacy-exports">odkaz</annotation>.</string>
     <string name="opening_with_app_toast">Aplikace automaticky spuštěna</string>
     <string name="shizuku_manager_start_failed">Nepodařilo se spustit Správce Shizuku, spusťte jej prosím ručně!</string>
     <string name="onboarding_1_subtitle">Pro zpracování odkazů, na které klepnete, musíte aplikaci LinkSheet nastavit jako výchozí prohlížeč</string>
@@ -370,7 +370,7 @@
     <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">sem</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url-id="aptabase">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url-id="privacy-telemetry">sem</annotation>.</string>
     <string name="settings_verified_link_handlers__text_user_apps">Uživatelské aplikace</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Vše</string>
     <string name="settings_notifications__divider_toasts">Vyskakovací zprávy</string>
@@ -432,7 +432,7 @@
     <string name="export_log_dialog__title_include_fingerprint">Zahrnout otisk sestavení</string>
     <string name="export_log_dialog__title_include_settings">Zahrnout nastavení</string>
     <string name="export_log_dialog__subtitle_include_settings">Doporučeno</string>
-    <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">sem</annotation>.</string>
+    <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url-id="privacy-logs">sem</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Zkopírovat do schránky</string>
     <string name="generic__button_text_cancel">Zrušit</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Prohlížení protokolu zachyceného: %s</string>

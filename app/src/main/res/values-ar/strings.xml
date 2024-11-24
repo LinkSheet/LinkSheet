@@ -65,7 +65,7 @@
     <string name="donate_subtitle">إذا كنت ترغب في التبرع والمطالبة بـ <b>LinkSheet Pro</b></string>
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
-    <string name="use_clear_urls_explainer">استخدام تكامل <annotation url="https://github.com/ClearURLs"> ClearURLs</annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
+    <string name="use_clear_urls_explainer">استخدام تكامل <annotation url-id="clearurls-github"> ClearURLs</annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
     <string name="checkmark">علامة الاختيار</string>
     <string name="links_explainer">الإعدادات المتعلقة بمعالجة الارتباط</string>
     <string name="system">النظام</string>
@@ -74,7 +74,7 @@
     <string name="loading_link">جاري تحميل الرابط…</string>
     <string name="follow_redirects_external_service">متابعة عمليات إعادة التوجيه عبر الخدمة الخارجية</string>
     <string name="follow_redirects_explainer">اتبع جميع عمليات إعادة التوجيه تلقائيا قبل فتح الورقة السفلية. قد يكون لهذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects"> آثار متعلقة بالخصوصية</annotation></string>
-    <string name="follow_redirects_external_service_explainer">متابعة عمليات إعادة التوجيه باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">متابعة عمليات إعادة التوجيه باستخدام واجهة برمجة تطبيقات تم نشرها في supabase.com (<annotation url-id="supabase-privacy">سياسة الخصوصية</annotation>)</string>
     <string name="follow_only_known_trackers">اتبع فقط أدوات التتبع المعروفة</string>
     <string name="theme">الموضوع</string>
     <string name="theme_explainer">تغيير موضوع التطبيق</string>
@@ -83,12 +83,12 @@
     <string name="redirect_resolve_type_remote">خادم بعيد</string>
     <string name="enable_libredirect">تمكين LibRedirect</string>
     <string name="fastfoward_rules">استخدم قواعد FastForward</string>
-    <string name="fastfoward_rules_explainer">استخدم تكامل قاعدة <annotation url="https://github.com/FastForwardTeam/FastForward"> FastForward</annotation> التجريبي (لتجاوز عمليات إعادة التوجيه لبعض المضيفات عن طريق استخراج إعادة التوجيه من الرابط)</string>
+    <string name="fastfoward_rules_explainer">استخدم تكامل قاعدة <annotation url-id="fastforward-github"> FastForward</annotation> التجريبي (لتجاوز عمليات إعادة التوجيه لبعض المضيفات عن طريق استخراج إعادة التوجيه من الرابط)</string>
     <string name="follow_redirects_local_cache">تمكين ذاكرة التخزين المؤقت المحلية لإعادة التوجيه</string>
     <string name="redirect_resolve_type_local">محلل محلي</string>
     <string name="follow_redirects_local_cache_explainer">تخزين نتيجة عمليات إعادة التوجيه مؤقتا محليا</string>
     <string name="instance">المثيل</string>
-    <string name="enable_libredirect_explainer">إعادة توجيه الروابط إلى واجهات أمامية صديقة للخصوصية باستخدام تكامل تجريبي <annotation url="https://github.com/libredirect/libredirect"> LibRedirect</annotation></string>
+    <string name="enable_libredirect_explainer">إعادة توجيه الروابط إلى واجهات أمامية صديقة للخصوصية باستخدام تكامل تجريبي <annotation url-id="libredirect-github"> LibRedirect</annotation></string>
     <string name="frontend">الواجهة الأمامية</string>
     <string name="add">اضف</string>
     <string name="select_an_app">حدد تطبيقا</string>
@@ -148,7 +148,7 @@
     <string name="redact_log">سجل التنقيح (مستحسن ، قد يؤدي تعطيل هذا إلى تسريب أسماء الحزم وأسماء المضيفين)</string>
     <string name="include_settings">تضمين الإعدادات (موصى به)</string>
     <string name="include_fingerprint">تضمين بصمة الجهاز (موصى به)</string>
-    <string name="log_privacy">للتعرف على خصوصية السجل، يمكنك زيارة هذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">الرابط</annotation>.</string>
+    <string name="log_privacy">للتعرف على خصوصية السجل، يمكنك زيارة هذا <annotation url-id="privacy-logs">الرابط</annotation>.</string>
     <string name="no_logs_found">لم يتم العثور على سجلات سابقة!</string>
     <string name="amp2html">Amp الى Html</string>
     <string name="amp2html_external_service">محاولة الحصول على إصدار صفحة غير AMP عبر خدمة خارجية</string>
@@ -156,7 +156,7 @@
     <string name="enable_amp2html_explainer">لإعادة توجيه صفحات AMP إلى إصدار الويب العادي. قد يكون لهذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html"> آثار متعلقة بالخصوصية</annotation></string>
     <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
     <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
-    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على  supabase.com (<annotation url="https://supabase.com/privacy">سياسة الخصوصية</annotation>)</string>
+    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على  supabase.com (<annotation url-id="supabase-privacy">سياسة الخصوصية</annotation>)</string>
     <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
     <string name="resolved_via">%s تم حلها عبر %s</string>
     <string name="resolve_failed">%s فشل: %s</string>
@@ -270,7 +270,7 @@
     <string name="confirm_import">تاكيد</string>
     <string name="manual_build">تم إنشاؤه يدويًا وتوقيعه بواسطة 1fexd</string>
     <string name="export_include_recommendation">نوصي بتمكين الإعدادات التالية فقط إذا كنت لا تخطط لمشاركة تصديرك مع شخص آخر!</string>
-    <string name="export_privacy">للتعرف على خصوصية التصدير، يمكنك زيارة هذا <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">الرابط</annotation>.</string>
+    <string name="export_privacy">للتعرف على خصوصية التصدير، يمكنك زيارة هذا <annotation url-id="privacy-exports">الرابط</annotation>.</string>
     <string name="preferred_apps_settings">تعيين التطبيقات المفضلة للمضيفين الذين يدعمونهم</string>
     <string name="apps_which_can_open_links">التطبيقات التي يمكنها فتح الروابط</string>
     <string name="app_browsers_subtitle">التطبيقات المفضلة، إعدادات المتصفح</string>

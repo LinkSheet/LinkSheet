@@ -69,7 +69,7 @@
     <string name="open_copied_link">Panodan</string>
     <string name="open_link_with">Bağlantıyı Şununla Aç</string>
     <string name="github_explainer">Kaynak kodu deposu</string>
-    <string name="use_clear_urls_explainer">Deneysel <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler)</string>
+    <string name="use_clear_urls_explainer">Deneysel <annotation url-id="clearurls-github">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler)</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>
     <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#follow-redirects">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>
@@ -80,14 +80,14 @@
     <string name="fastfoward_rules">FastForward kurallarını kullan</string>
     <string name="theme_explainer">Material You, karanlık tema, zifiri karanlık modu</string>
     <string name="system">Sistemi takip et</string>
-    <string name="fastfoward_rules_explainer">Deneysel <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> kural entegrasyonunu kullanın (bağlantıdan yönlendirmeyi çıkararak bazı ana bilgisayarların yönlendirmelerini atlatın)</string>
+    <string name="fastfoward_rules_explainer">Deneysel <annotation url-id="fastforward-github">FastForward</annotation> kural entegrasyonunu kullanın (bağlantıdan yönlendirmeyi çıkararak bazı ana bilgisayarların yönlendirmelerini atlatın)</string>
     <string name="follow_redirects_local_cache">Yerel yönlendirme önbelleğini etkinleştir</string>
     <string name="follow_redirects_local_cache_explainer">Yönlendirmelerin sonucunu yerel olarak önbelleğe al</string>
     <string name="resolved_via">%s %s aracılığıyla çözüldü</string>
     <string name="redirect_resolve_type_remote">uzak sunucu</string>
     <string name="redirect_resolve_type_local">yerel çözücü</string>
     <string name="enable_libredirect">LibRedirect\'i etkinleştir</string>
-    <string name="enable_libredirect_explainer">Deneysel <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
+    <string name="enable_libredirect_explainer">Deneysel <annotation url-id="libredirect-github">LibRedirect</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Önyüz</string>
@@ -136,7 +136,7 @@
     <string name="in_app_browser_subtitle">Uygulama içi tarayıcı modunu ayarla</string>
     <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulamalar karar verir</string>
     <string name="close">Kapat</string>
-    <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API\'yi kullanarak yönlendirmeleri takip eder(<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API\'yi kullanarak yönlendirmeleri takip eder(<annotation url-id="supabase-privacy">Gizlilik politikası</annotation>)</string>
     <string name="redirect_resolve_type_local_cache">yerel önbellek</string>
     <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
     <string name="use_app_settings">Varsayılan</string>
@@ -159,9 +159,9 @@
     <string name="enable_request_private_browsing_button_explainer">Tarayıcıların yanında, tıklanan URL\'yi gizli gezinme modunda açan bir düğme görüntüler. Desteklenen tarayıcılar: %s</string>
     <string name="redact_log">Günlüğü yeniden düzenle (önerilir, bunu devre dışı bırakmak paket adlarını ve sunucu adlarını sızdırabilir)</string>
     <string name="export_log">Günlüğü dışa aktar</string>
-    <string name="log_privacy">Günlük kaydı gizliliği hakkında bilgi edinmek için bu <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">bağlantıyı</annotation> ziyaret edebilirsiniz.</string>
+    <string name="log_privacy">Günlük kaydı gizliliği hakkında bilgi edinmek için bu <annotation url-id="privacy-logs">bağlantıyı</annotation> ziyaret edebilirsiniz.</string>
     <string name="amp2html_external_service">AMP olmayan sayfa sürümünü harici hizmet aracılığıyla edinme girişimi</string>
-    <string name="amp2html_external_service_explainer">supabase.com adresinde bulunan bir API kullanarak AMP olmayan sayfa sürümü elde etme girişimi (<annotation url="https://supabase.com/privacy">Gizlilik politikası</annotation>)</string>
+    <string name="amp2html_external_service_explainer">supabase.com adresinde bulunan bir API kullanarak AMP olmayan sayfa sürümü elde etme girişimi (<annotation url-id="supabase-privacy">Gizlilik politikası</annotation>)</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku modu etkinleştirildi, otomatik link açmasını açıp kapatmak için bir uygulamaya dokunun. Uygulamanın \"Varsayılan olarak aç\" ayarlar menüsünü açmak için basılı tutun.</string>
     <string name="disable_all">Tümünü devre dışı bırak</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku entegrasyonu başarıyla etkinleştirildi!</string>
@@ -245,7 +245,7 @@
     <string name="include_log_hash_key">Günlük hash anahtarını dahil et (günlüklerinizi gizlemek için kullanılan anahtar)</string>
     <string name="include_history">Geçmişi dahil et (link tıklamaları ve uygulama geçmişi)</string>
     <string name="export_include_recommendation">Aşağıdaki ayarları sadece dışa aktarmanızı başka biriyle paylaşmayı düşünmüyorsanız etkinleştirmenizi öneririz!</string>
-    <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">bağlantıyı</annotation> ziyaret edin</string>
+    <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu <annotation url-id="privacy-exports">bağlantıyı</annotation> ziyaret edin</string>
     <string name="export_to_file">Dosyaya aktar</string>
     <string name="import_settings">İçe aktarma ayarları</string>
     <string name="export_file_name">linksheet_settings_export_%s.json</string>
@@ -354,7 +354,7 @@
     <string name="tap_customization_dialog_title_long_tap">Uzun dokunma</string>
     <string name="tap_customization_dialog_text">Gerçekleştirilmesi gereken eylemi seçin</string>
     <string name="expand_on_app_select_explainer">Bir uygulama seçildiğinde alt sayfayı otomatik olarak genişlet</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Kullanım istatistikleri, Android sürümünüzün yanı sıra kullanıcı tarafından sıfırlanabilen kuruluma bağlı rastgele bir tanımlayıcıyı içerir ve<annotation url="https://aptabase.com">Aptabase (EU)</annotation>\'da tutulur.Yüklü uygulamalar ve tıklanan bağlantılar gibi hassas veriler <b>asla</b> toplanmayacaktır. Daha fazla bilgi edinmek için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">buraya</annotation> dokunun.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Kullanım istatistikleri, Android sürümünüzün yanı sıra kullanıcı tarafından sıfırlanabilen kuruluma bağlı rastgele bir tanımlayıcıyı içerir ve<annotation url-id="aptabase">Aptabase (EU)</annotation>\'da tutulur.Yüklü uygulamalar ve tıklanan bağlantılar gibi hassas veriler <b>asla</b> toplanmayacaktır. Daha fazla bilgi edinmek için <annotation url-id="privacy-telemetry">buraya</annotation> dokunun.</string>
     <string name="telemetry_level_disabled">Devre dışı</string>
     <string name="telemetry_level_minimal">Az düzeyde</string>
     <string name="telemetry_level_standard">Standart</string>
@@ -473,7 +473,7 @@
     <string name="settings_app_config__title_native_apps">Uygulamalar</string>
     <string name="settings_app_config_rules__title_rules">Kurallar</string>
     <string name="settings_app_config_rules__btn_new_rule">Yeni kural</string>
-    <string name="export_log_dialog__text_log_privacy">Paylaşılan günlük dosyalarındaki muhtemel hassas veriler hakkında daha fazla bilgi için <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">buraya</annotation> dokunun</string>
+    <string name="export_log_dialog__text_log_privacy">Paylaşılan günlük dosyalarındaki muhtemel hassas veriler hakkında daha fazla bilgi için <annotation url-id="privacy-logs">buraya</annotation> dokunun</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">%s tarihli günlük görüntüleniyor</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet kuruldu</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet doğru bir şekilde kuruldu ve çalışmaya hazır</string>

@@ -122,7 +122,7 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="log_privacy">Ha többet szeretne megtudni a naplók adatvédelméről, látogasson el erre a <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#logs">linkre</annotation>.</string>
     <string name="follow_redirects_external_service">Kövesse az átirányításokat külső szolgáltatáson keresztül</string>
-    <string name="follow_redirects_external_service_explainer">Kövesse az átirányításokat a supabase.com webhelyen telepített API segítségével (<annotation url="https://supabase.com/privacy">Adatvédelmi irányelvek</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Kövesse az átirányításokat a supabase.com webhelyen telepített API segítségével (<annotation url-id="supabase-privacy">Adatvédelmi irányelvek</annotation>)</string>
     <string name="follow_only_known_trackers">Csak az ismert nyomkövetőket kövesse</string>
     <string name="theme">Téma</string>
     <string name="theme_explainer">Módosítsa az alkalmazás témáját</string>
@@ -136,7 +136,7 @@
     <string name="redirect_resolve_type_remote">távoli szerver</string>
     <string name="redirect_resolve_type_local">helyi feloldó</string>
     <string name="enable_libredirect">LibRedirect engedélyezése</string>
-    <string name="enable_libredirect_explainer">Linkek átirányítása adatvédelmibarát frontendekre a kísérleti <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> integráció segítségével.</string>
+    <string name="enable_libredirect_explainer">Linkek átirányítása adatvédelmibarát frontendekre a kísérleti <annotation url-id="libredirect-github">LibRedirect</annotation> integráció segítségével.</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
@@ -163,10 +163,10 @@
     <string name="none_explainer">Csak a natív alkalmazások listázása, az összes böngésző eltávolítása. Ha csak egyetlen natív alkalmazás van jelen, az automatikusan megnyílik. Ha nincs natív alkalmazás, az összes böngésző fel lesz sorolva.</string>
     <string name="app_browsers">Alkalmazások</string>
     <string name="github_explainer">Forráskód tároló</string>
-    <string name="use_clear_urls_explainer">Kísérleti <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> integráció használata (törli a követési paramétereket az URL-ekből)</string>
+    <string name="use_clear_urls_explainer">Kísérleti <annotation url-id="clearurls-github">ClearURLs</annotation> integráció használata (törli a követési paramétereket az URL-ekből)</string>
     <string name="follow_redirects_explainer">Automatikusan követi az összes átirányítást az alulról előbukkanó panel megnyitása előtt. Ennek lehetnek <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">adatvédelemre vonatkozó következményei</annotation></string>
     <string name="follow_only_known_trackers_explainer">Csak akkor próbálja követni az átirányításokat, ha a fogadóról ismert, hogy nyomkövető/átirányító. Ha a \"Kövesse az átirányításokat külső szolgáltatáson keresztül\" opció be van kapcsolva, akkor ez mindig engedélyezve lesz.</string>
-    <string name="fastfoward_rules_explainer">Kísérleti <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> szabály integrálása (egyes hostok átirányításainak megkerülése a linkből történő átirányítás kivonásával).</string>
+    <string name="fastfoward_rules_explainer">Kísérleti <annotation url-id="fastforward-github">FastForward</annotation> szabály integrálása (egyes hostok átirányításainak megkerülése a linkből történő átirányítás kivonásával).</string>
     <string name="ignore_libredirect">LibRedirect figyelmen kívül hagyása</string>
     <string name="enable_downloader_explainer">Adjon hozzá egy \"Letöltés\" gombot az alulról előbukkanó panelhez, ha az URL közvetlen linket tartalmaz a fájlra. Ennek lehetnek <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#downloader">adatvédelemre vonatkozó következményei</annotation>.</string>
     <string name="downloader_url_mime_type_explainer">Ellenőrzi, hogy az URL fájlkiterjesztéssel végződjön-e (pl. \".jpg\"); Ha igen, akkor a rendszer ezt a típust használja a letöltött fájlhoz.</string>
@@ -184,7 +184,7 @@
     <string name="discord">Discord</string>
     <string name="donate_crypto">Kriptón keresztüli adományozás</string>
     <string name="donate_card">Adományozás kártyával (a BuyMeACoffee-n keresztül)</string>
-    <string name="amp2html_external_service_explainer">Kísérlet nem-AMP oldalváltozat beszerzésére a supabase.com webhelyen telepített API segítségével (<annotation url="https://supabase.com/privacy">Adatvédelmi irányelvek</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Kísérlet nem-AMP oldalváltozat beszerzésére a supabase.com webhelyen telepített API segítségével (<annotation url-id="supabase-privacy">Adatvédelmi irányelvek</annotation>)</string>
     <string name="pretend_to_be_app">Natív alkalmazások kéréseinek elfogása</string>
     <string name="dismiss">Elvetés</string>
     <string name="join">Csatlakozás</string>

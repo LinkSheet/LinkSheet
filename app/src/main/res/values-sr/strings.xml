@@ -17,7 +17,7 @@
     <string name="opening_with_app">Отварање помоћу %s</string>
     <string name="save">Сачувај</string>
     <string name="enable_amp2html">Омогући Amp2Html</string>
-    <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
+    <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url-id="clearurls-github">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
     <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено.</string>
     <string name="always_disable">Присилно онемогући</string>
     <string name="copy_to_clipboard">Копирај у привремену меморију</string>
@@ -47,7 +47,7 @@
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="misc_settings">Остало</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">   \nлинк</annotation></string>
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url-id="privacy-logs">   \nлинк</annotation></string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
     <string name="enable_ignore_libredirect_button">Омогући дугме „Игнориши LibRedirect“</string>
@@ -105,7 +105,7 @@
     <string name="shizuku_explainer_short">Директно комуницирајте са системским API-јима</string>
     <string name="back">Назад</string>
     <string name="linksheet_download">LinkSheet преузимање</string>
-    <string name="follow_redirects_external_service_explainer">Пратите преусмеравања користећи API постављен на supabase.com (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Пратите преусмеравања користећи API постављен на supabase.com (<annotation url-id="supabase-privacy">Политика приватности</annotation>)</string>
     <string name="include_fingerprint">Укључи отисак прста уређаја (препоручено)</string>
     <string name="default_apps">Префериране апликације</string>
     <string name="just_once">Само једном</string>
@@ -115,7 +115,7 @@
     <string name="version">LinkSheet верзија</string>
     <string name="preview_url">Преглед URL адресе</string>
     <string name="usage_stats_sorting_explainer">Укључите статистику коришћења Android система у алгоритам за сортирање. Дозвола се тражи при првом укључивању.</string>
-    <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url="https://supabase.com/privacy">Политика приватности</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url-id="supabase-privacy">Политика приватности</annotation>)</string>
     <string name="github_explainer">Репозиторијум изворног кода</string>
     <string name="launch_onboarding">Покрени започињање</string>
     <string name="shizuku_integration">Shizuku интеграција</string>
@@ -165,7 +165,7 @@
     <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
-    <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
+    <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url-id="fastforward-github">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
     <string name="set_as_browser">Подеси као прегледач</string>
     <string name="whitelisted">Бела листа</string>
     <string name="log">Евиденција</string>
@@ -211,7 +211,7 @@
     <string name="donate_card">Донирање картицом (путем BuyMeACoffee)</string>
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
     <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
-    <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> интеграцију</string>
+    <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url-id="libredirect-github">LibRedirect</annotation> интеграцију</string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
@@ -241,7 +241,7 @@
     <string name="confirm_import">Потврди</string>
     <string name="include_log_hash_key">Укључи хеш кључ eвиденције (кључ који се користи за редиговање ваших евиденција)</string>
     <string name="import_explainer">Увезите претходни извоз из фајла</string>
-    <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports"> линк</annotation>.</string>
+    <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј <annotation url-id="privacy-exports"> линк</annotation>.</string>
     <string name="export_import_settings_explainer">Извезите тренутна подешавања или увезите претходна подешавања</string>
     <string name="include_history">Укључи историју (ваш клик на линк и историју апликације)</string>
     <string name="export_settings">Извоз подешавања</string>
@@ -354,7 +354,7 @@
     <string name="open_app_settings_page">Отвори страницу са подешавањима апликације</string>
     <string name="no_action">Нема радње</string>
     <string name="open_app">Отвори апликацију</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични   \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url="https://aptabase.com">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">овде</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични   \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url-id="aptabase">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url-id="privacy-telemetry">овде</annotation>.</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
     <string name="telemetry_level_disabled">Онемогућено</string>
     <string name="telemetry_level_minimal">Минимално</string>
@@ -407,7 +407,7 @@
     <string name="settings_main_news__text_ui_overhaul">LinkSheet-у је дат свеж слој боје!</string>
     <string name="resolve_event__checking_browsers">Провера прегледача</string>
     <string name="settings_links_follow_redirects__text_skip_browser">Неће бити покушавано праћење преусмеравања, ако је познато да је апликација која покреће LinkSheet прегледач</string>
-    <string name="export_log_dialog__text_log_privacy">Да бисте сазнали више о потенцијално осетљивим подацима у дељеним фајловима евиденције, додирните <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">овде</annotation>.</string>
+    <string name="export_log_dialog__text_log_privacy">Да бисте сазнали више о потенцијално осетљивим подацима у дељеним фајловима евиденције, додирните <annotation url-id="privacy-logs">овде</annotation>.</string>
     <string name="settings_app_config__description_preferred_browser">Преферирани прегледач који је изабрао корисник</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet није подешен</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">

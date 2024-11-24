@@ -102,7 +102,7 @@
     <string name="use_clear_urls">ClearURLs verwenden</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet hat mindestens eine App erkannt, die als Browser bekannt ist.</string>
     <string name="enable_amp2html">Amp2Html aktivieren</string>
-    <string name="use_clear_urls_explainer">Experimentelle <annotation url="https://github.com/ClearURLs">ClearURLs</annotation>-Integration verwenden (entfernt Tracking-Parameter von URLs)</string>
+    <string name="use_clear_urls_explainer">Experimentelle <annotation url-id="clearurls-github">ClearURLs</annotation>-Integration verwenden (entfernt Tracking-Parameter von URLs)</string>
     <string name="follow_only_known_trackers_explainer">Versucht nur, Weiterleitungen zu folgen, wenn der Host als Tracker/Weiterleitung bekannt ist. Wenn \"Weiterleitungen über externen Dienst folgen\" aktiviert ist, ist dies immer aktiviert.</string>
     <string name="theme_explainer">Design der App ändern</string>
     <string name="bottom_sheet">Unteres Fenster</string>
@@ -154,12 +154,12 @@
     <string name="shizuku_explainer_short">Direkt mit System-Schnittstellen interagieren</string>
     <string name="linksheet_donation_explainer_2">Eine Spende von mehr als <b>5€</b> ermöglicht Ihnen den Zugang zu <b>LinkSheet Pro</b>, das derzeitig nur das Spendenbanner auf dem Hauptbildschirm der App ausblendet, aber in Zukunft wird es <b>Exklusive Pro-Funktionen</b> geben.</string>
     <string name="linksheet_download">LinkSheet herunterladen</string>
-    <string name="follow_redirects_external_service_explainer">Weiterleitungen über eine durch supabase.com bereitgestellte Schnittstelle folgen (<annotation url="https://supabase.com/privacy">Datenschutzerklärung</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Weiterleitungen über eine durch supabase.com bereitgestellte Schnittstelle folgen (<annotation url-id="supabase-privacy">Datenschutzerklärung</annotation>)</string>
     <string name="include_fingerprint">Fingerabdruck des Geräts einschließen (empfohlen)</string>
     <string name="github_pipeline_build">Erstellt und signiert durch den Github-Workflow</string>
     <string name="disable_in_selected_explainer">In-App-Browser in ausgewählten Anwendungen deaktivieren, unabhängig davon, was die Anwendung verwenden möchte</string>
     <string name="fastfoward_rules">FastForward-Regeln verwenden</string>
-    <string name="amp2html_external_service_explainer">Versucht, die Nicht-AMP-Seitenversion über eine auf supabase.com bereitgestellte API zu erhalten (<annotation url="https://supabase.com/privacy">Datenschutzrichtlinie</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Versucht, die Nicht-AMP-Seitenversion über eine auf supabase.com bereitgestellte API zu erhalten (<annotation url-id="supabase-privacy">Datenschutzrichtlinie</annotation>)</string>
     <string name="github_explainer">Quellcode-Repository</string>
     <string name="launch_onboarding">Onboarding starten</string>
     <string name="shizuku_integration">Shizuku-Integration</string>
@@ -187,7 +187,7 @@
     <string name="donate_crypto">Mit Krypto spenden</string>
     <string name="follow_redirects_explainer">Automatisch allen Weiterleitungen folgen, bevor das untere Fenster geöffnet wird. Dies kann <annotation url="https://github.com/1fexd/LinkSheet/blob/master/PRIVACY.md#follow-redirects">Auswirkungen auf die Privatsphäre</annotation> haben</string>
     <string name="shizuku_integration_not_setup_explainer">Shizuku ist zwar nicht unbedingt notwendig, um LinkSheet zu nutzen, wird aber empfohlen. Tippen Sie hier, um es zu installieren</string>
-    <string name="fastfoward_rules_explainer">Experimentelle Integration von <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation>-Regeln verwenden (umgeht Weiterleitungen einiger Hosts durch Extraktion der Weiterleitung aus dem Link)</string>
+    <string name="fastfoward_rules_explainer">Experimentelle Integration von <annotation url-id="fastforward-github">FastForward</annotation>-Regeln verwenden (umgeht Weiterleitungen einiger Hosts durch Extraktion der Weiterleitung aus dem Link)</string>
     <string name="whitelisted">Auf der Whitelist</string>
     <string name="log">Protokoll</string>
     <string name="loading_link">Link lädt…</string>
@@ -213,7 +213,7 @@
     <string name="no_browser_installed_explainer">LinkSheet war nicht in der Lage, mindestens eine Anwendung zu erkennen, die angibt, ein Browser zu sein. Installieren Sie einen Browser für die beste Erfahrung.</string>
     <string name="donate_card">Mit Karte spenden (über BuyMeACoffee)</string>
     <string name="no_logs_found">Keine vergangenen Protokolle gefunden!</string>
-    <string name="enable_libredirect_explainer">Leitet Links mittels experimenteller <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation>-Integration zu datenschutzfreundlichen Benutzeroberflächen um</string>
+    <string name="enable_libredirect_explainer">Leitet Links mittels experimenteller <annotation url-id="libredirect-github">LibRedirect</annotation>-Integration zu datenschutzfreundlichen Benutzeroberflächen um</string>
     <string name="at_least_one_known_browser_installed">Mindestens ein Browser installiert</string>
     <string name="shizuku_integration_no_permission_explainer">Tippe hier, um die Shizuku-Berechtigung anzufordern</string>
     <string name="add">Hinzufügen</string>

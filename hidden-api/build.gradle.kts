@@ -16,8 +16,8 @@ android {
 }
 
 dependencies {
-    annotationProcessor("dev.rikka.tools.refine:annotation-processor:4.0.0")
-    compileOnly("dev.rikka.tools.refine:annotation:4.0.0")
-    compileOnly("org.jetbrains:annotations:24.0.1")
-    compileOnly("androidx.annotation:annotation:1.8.0")
+    annotationProcessor("dev.rikka.tools.refine:annotation-processor:_")
+    compileOnly("dev.rikka.tools.refine:annotation:_")
+    compileOnly("org.jetbrains:annotations:_")
+    compileOnly(AndroidX.annotation)
 }

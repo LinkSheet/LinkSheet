@@ -21,6 +21,8 @@ import fe.android.compose.feedback.rememberHapticFeedbackInteraction
 import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
+import fe.android.span.helper.LocalLinkTags
+import fe.linksheet.LinkSpans
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import org.koin.androidx.compose.KoinAndroidContext
@@ -122,13 +124,16 @@ fun AppTheme(
         LinkAnnotationStyle(style = SpanStyle(color = colorScheme.primary))
     }
 
+    val linkTags = remember { LinkSpans.tags }
+
     val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
     KoinAndroidContext {
         CompositionLocalProvider(
             LocalActivity provides activity!!,
             LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
-            LocalLinkAnnotationStyle provides linkAnnotationStyle
+            LocalLinkAnnotationStyle provides linkAnnotationStyle,
+            LocalLinkTags provides linkTags
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,

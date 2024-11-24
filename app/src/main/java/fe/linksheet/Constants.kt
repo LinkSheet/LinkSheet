@@ -14,4 +14,3 @@ const val linksheetGithub = "$linksheetOrg/LinkSheet"
 const val linkSheetCompatGithubReleases = "$linksheetOrg/compat/releases"
 
 const val shizukuDownload = "https://shizuku.rikka.app/download"
-

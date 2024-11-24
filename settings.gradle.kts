@@ -81,6 +81,11 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["mock"] = "compose-mock"
     }
 
+    trySubstitute(devProperties["android-span-helper.dir"], "com.github.1fexd.android-span-helper") {
+        this["core"] = "core"
+        this["compose"] = "compose"
+    }
+
     trySubstitute(devProperties["composekit.dir"], "com.github.1fexd.composekit") {
         this["app-core"] = "app-core"
         this["theme-core"] = "theme-core"
@@ -88,11 +93,6 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["component"] = "component"
         this["core"] = "core"
         this["layout"] = "layout"
-    }
-
-    trySubstitute(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
-        this["core"] = "core"
-        this["compose"] = "compose"
     }
 
     trySubstitute(devProperties["libredirect.dir"], "com.github.1fexd:libredirectkt")

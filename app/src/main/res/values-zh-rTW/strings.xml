@@ -66,12 +66,12 @@
     <string name="links">連結</string>
     <string name="links_explainer">連結操作相關設定</string>
     <string name="use_clear_urls">使用 ClearURLs</string>
-    <string name="use_clear_urls_explainer">使用實驗性的<annotation url="https://github.com/ClearURLs">ClearURLs</annotation>整合（清除網址中的追蹤參數）</string>
+    <string name="use_clear_urls_explainer">使用實驗性的<annotation url-id="clearurls-github">ClearURLs</annotation>整合（清除網址中的追蹤參數）</string>
     <string name="follow_redirects">跟隨重新導向</string>
     <string name="follow_redirects_explainer">在開啟底部工作表之前自動跟隨所有重新導向</string>
     <string name="loading_link">正在載入連結…</string>
     <string name="follow_redirects_external_service">透過外部服務跟隨重新導向</string>
-    <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 上的 API 來跟隨重新導向（<annotation url="https://supabase.com/privacy">隱私政策</annotation>）</string>
+    <string name="follow_redirects_external_service_explainer">使用部署在 supabase.com 上的 API 來跟隨重新導向（<annotation url-id="supabase-privacy">隱私政策</annotation>）</string>
     <string name="follow_only_known_trackers">僅跟隨已知追蹤器</string>
     <string name="theme">主題</string>
     <string name="theme_explainer">更改應用程式的主題</string>
@@ -79,14 +79,14 @@
     <string name="light">亮色</string>
     <string name="dark">暗色</string>
     <string name="fastfoward_rules">使用 FastForward 規則</string>
-    <string name="fastfoward_rules_explainer">使用實驗性的 <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> 規則整合（通過從連結中提取重新導向來繞過某些主機的重新導向）</string>
+    <string name="fastfoward_rules_explainer">使用實驗性的 <annotation url-id="fastforward-github">FastForward</annotation> 規則整合（通過從連結中提取重新導向來繞過某些主機的重新導向）</string>
     <string name="follow_redirects_local_cache">啟用本地重新導向快取</string>
     <string name="follow_redirects_local_cache_explainer">在本地緩存重新導向的結果</string>
     <string name="redirect_resolve_type_local_cache">本地快取</string>
     <string name="redirect_resolve_type_remote">遠程伺服器</string>
     <string name="redirect_resolve_type_local">本地解析器</string>
     <string name="enable_libredirect">啟用 LibRedirect</string>
-    <string name="enable_libredirect_explainer">使用實驗性的 <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation> 整合，將連結重定向到隱私友好的前端</string>
+    <string name="enable_libredirect_explainer">使用實驗性的 <annotation url-id="libredirect-github">LibRedirect</annotation> 整合，將連結重定向到隱私友好的前端</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">前端</string>

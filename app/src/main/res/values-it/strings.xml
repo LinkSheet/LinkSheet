@@ -87,13 +87,13 @@
     <string name="browser_status">Stato del browser</string>
     <string name="open_copied_link">Apri link copiato</string>
     <string name="dont_show_filtered_item_explainer">Non viene mai visualizzata la sezione superiore che suggerisce l\'ultima app utilizzata per l\'host cliccato</string>
-    <string name="fastfoward_rules_explainer">Utilizzare l\'integrazione sperimentale delle regole di <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (salta i reindirizzamenti di alcuni host estraendo il reindirizzamento dal link)</string>
-    <string name="enable_libredirect_explainer">Reindirizza i link a frontend rispettosi della privacy utilizzando l\'integrazione sperimentale di <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
+    <string name="fastfoward_rules_explainer">Utilizzare l\'integrazione sperimentale delle regole di <annotation url-id="fastforward-github">FastForward</annotation> (salta i reindirizzamenti di alcuni host estraendo il reindirizzamento dal link)</string>
+    <string name="enable_libredirect_explainer">Reindirizza i link a frontend rispettosi della privacy utilizzando l\'integrazione sperimentale di <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="enable_libredirect">Abilita LibRedirect</string>
-    <string name="use_clear_urls_explainer">Utilizza l\'integrazione sperimentale di <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (cancella i parametri di tracciamento dagli URL)</string>
+    <string name="use_clear_urls_explainer">Utilizza l\'integrazione sperimentale di <annotation url-id="clearurls-github">ClearURLs</annotation> (cancella i parametri di tracciamento dagli URL)</string>
     <string name="follow_redirects">Segui reindirizzamenti</string>
     <string name="follow_redirects_external_service">Segui reindirizzamenti tramite servizio esterno</string>
-    <string name="follow_redirects_external_service_explainer">Segui i reindirizzamenti utilizzando un\'API distribuita su supabase.com (<annotation url="https://supabase.com/privacy">Informativa sulla privacy</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Segui i reindirizzamenti utilizzando un\'API distribuita su supabase.com (<annotation url-id="supabase-privacy">Informativa sulla privacy</annotation>)</string>
     <string name="follow_only_known_trackers">Segui solo tracker noti</string>
     <string name="amp2html">Amp2Html</string>
     <string name="loading_link">Caricamento link…</string>

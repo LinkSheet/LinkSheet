@@ -16,7 +16,7 @@
     <string name="opening_with_app">Abriendo con %s</string>
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
-    <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url="https://github.com/ClearURLs">ClearURLs</annotation> (borra los parámetros de seguimiento de las URL)</string>
+    <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url-id="clearurls-github">ClearURLs</annotation> (borra los parámetros de seguimiento de las URL)</string>
     <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
     <string name="always_disable">Forzar desactivación</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
@@ -45,7 +45,7 @@
     <string name="enable_all">Activar todo</string>
     <string name="selected_browser_explainer">Este navegador se abrirá automáticamente si ninguna aplicación nativa puede abrir el enlace seleccionado</string>
     <string name="misc_settings">Misceláneo</string>
-    <string name="log_privacy">Para obtener más información sobre la privacidad de los registros, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">enlace</annotation>.</string>
+    <string name="log_privacy">Para obtener más información sobre la privacidad de los registros, puede visitar este <annotation url-id="privacy-logs">enlace</annotation>.</string>
     <string name="send_to">Compartir con</string>
     <string name="enable_ignore_libredirect_button">Activar el botón \"Ignorar LibRedirect\"</string>
     <string name="pretend_to_be_app_explainer_2">Algunas aplicaciones como Google Chrome buscan explícitamente una aplicación nativa para abrir, por ejemplo, un enlace de Youtube cuando se toca en los resultados de búsqueda. LinkSheetCompat pretende ser una aplicación nativa para dominios compatibles y luego reenvía la solicitud a LinkSheet.</string>
@@ -97,7 +97,7 @@
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
     <string name="back">Atrás</string>
     <string name="linksheet_download">Descarga de LinkSheet</string>
-    <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>)</string>
+    <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url-id="supabase-privacy">Política de privacidad</annotation>)</string>
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>
     <string name="default_apps">Aplicaciones predeterminadas</string>
     <string name="just_once">Solo una vez</string>
@@ -106,7 +106,7 @@
     <string name="version">Versión de LinkSheet</string>
     <string name="preview_url">Previsualizar enlace</string>
     <string name="usage_stats_sorting_explainer">Incluya estadísticas de uso del sistema Android en el algoritmo de clasificación. Se solicitará permiso en el primer cambio.</string>
-    <string name="amp2html_external_service_explainer">Intento de obtener una versión de página no AMP mediante una API desplegada en supabase.com (<annotation url="https://supabase.com/privacy">Política de privacidad</annotation>)</string>
+    <string name="amp2html_external_service_explainer">Intento de obtener una versión de página no AMP mediante una API desplegada en supabase.com (<annotation url-id="supabase-privacy">Política de privacidad</annotation>)</string>
     <string name="github_explainer">Repositorio de código fuente</string>
     <string name="launch_onboarding">Iniciar la incorporación</string>
     <string name="shizuku_integration">Integración con Shizuku</string>
@@ -152,7 +152,7 @@
     <string name="browser_mode">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
-    <string name="fastfoward_rules_explainer">Usar la integración experimental de reglas <annotation url="https://github.com/FastForwardTeam/FastForward">FastForward</annotation> (evita los redireccionamientos de algunos hosts extrayendo el redireccionamiento del enlace)</string>
+    <string name="fastfoward_rules_explainer">Usar la integración experimental de reglas <annotation url-id="fastforward-github">FastForward</annotation> (evita los redireccionamientos de algunos hosts extrayendo el redireccionamiento del enlace)</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
     <string name="log">Registro</string>
@@ -181,7 +181,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Muestra un botón en el menú si el enlace ha sido redirigido a través de LibRedirect, que abre el enlace original en su lugar</string>
     <string name="mastodon_redirect_subtitle_2">El código fuente de Mastodon Redirect se utilizó como referencia para la interacción con Shizuku</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet ha detectado al menos una aplicación que afirma ser un navegador. Es posible que la lista de LinkSheet no esté completa. Si cree que se trata de un error, envíe un aviso de error en Github.</string>
-    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener<annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
+    <string name="enable_amp2html_explainer">Redirige las páginas AMP a su fomato web normal. Esto puede tener <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#amp2html">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="none_explainer">Mostrar solo aplicaciones nativas, eliminar todos los navegadores. Si solo hay una aplicación nativa presente, se abrirá automáticamente. Si no hay ninguna aplicación nativa presente, se mostrarán todos los navegadores.</string>
     <string name="donate_crypto">Donar a través de criptomonedas</string>
     <string name="disable_in_selected">Forzando la desactivación…</string>
@@ -196,7 +196,7 @@
     <string name="no_browser_installed_explainer">LinkSheet no pudo detectar ninguna una aplicación que afirme ser un navegador. Para obtener la mejor experiencia, instale un navegador.</string>
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
     <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
-    <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url="https://github.com/libredirect/libredirect">LibRedirect</annotation></string>
+    <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
@@ -241,7 +241,7 @@
     <string name="confirm_import">Confirmar</string>
     <string name="include_log_hash_key">Incluya la clave hash del registro (la clave utilizada para redactar sus registros)</string>
     <string name="import_explainer">Importar una exportación anterior desde un archivo</string>
-    <string name="export_privacy">Para obtener información sobre la privacidad de las exportaciones, puede visitar este <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#exports">enlace</annotation>.</string>
+    <string name="export_privacy">Para obtener información sobre la privacidad de las exportaciones, puede visitar este <annotation url-id="privacy-exports">enlace</annotation>.</string>
     <string name="export_import_settings_explainer">Exporta tus ajustes actuales o importa una exportación de los ajustes anteriores</string>
     <string name="include_history">Incluir el historial (tu historial de clics en enlaces y aplicaciones)</string>
     <string name="export_settings">Ajustes de la exportación</string>
@@ -369,7 +369,7 @@
     <string name="telemetry_dialog_title">LinkSheet respeta su privacidad</string>
     <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
     <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url="https://aptabase.com">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#telemetry">aquí</annotation>.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url-id="aptabase">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url-id="privacy-telemetry">aquí</annotation>.</string>
     <string name="something_went_wrong">Algo salió mal. Por favor, vuelva a intentarlo.</string>
     <string name="link_handle_failed">Ocurrió un error</string>
     <string name="retry">Volver a intentarlo</string>
@@ -399,7 +399,7 @@
     <string name="generic__button_text_copy_clipboard">Copiar al portapapeles</string>
     <string name="settings_main_news__title_ui_overhaul">Nueva interfaz</string>
     <string name="export_log_dialog__title_share_logs">Compartir registro</string>
-    <string name="export_log_dialog__text_log_privacy">Para saber más acerca de los datos potencialmente sensibles en el registro compartido, presiona <annotation url="https://github.com/LinkSheet/LinkSheet/blob/master/PRIVACY.md#logs">aquí</annotation>.</string>
+    <string name="export_log_dialog__text_log_privacy">Para saber más acerca de los datos potencialmente sensibles en el registro compartido, presiona <annotation url-id="privacy-logs">aquí</annotation>.</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet está configurado</string>
     <string name="settings_main_setup_success__button_connected_apps">Aplicaciones conectadas</string>
     <string name="settings_notifications__divider_toasts">Avisos</string>

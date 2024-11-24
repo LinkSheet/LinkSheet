@@ -497,9 +497,19 @@
     <string name="generic__text_edit">Düzenle</string>
     <string name="generic__text_done">Tamam</string>
     <string name="generic__text_url">Url</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı bir (iş) profilde açmak için alt sayfada bir düğme gösterir</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı başka bir profilde açmak için alt sayfada bir düğme gösterir</string>
     <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>
     <string name="settings_profile_switcher__title_profile_switcher">Profil değiştirme</string>
     <string name="settings__hint_search">Ara</string>
     <string name="bottom_sheet__event_app_refusal">Hedef uygulama bağlantıyı işlemeyi reddetti!</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Profiller arası bağlantıyı etkinleştir</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">LinkSheet\'i ikincil profilinizdeki karşılığına bağlamak için dokunun</string>
+    <string name="settings_profile_switcher__text_current_profile">Şu anda bu profilde çalışıyor</string>
+    <string name="settings_profile_switcher__text_other_profile">Diğer profil</string>
+    <string name="settings_profile_switcher__divider_current_profile">Şu anki profil</string>
+    <string name="generic__label_unknown_profile">Bilinmeyen profil</string>
+    <string name="settings_profile_switcher__text_not_installed">Bu profile bağlanılamıyor</string>
+    <string name="generic__label_personal_profile">Kişisel profil</string>
+    <string name="generic__label_work_profile">İş profili</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Diğer profiller</string>
 </resources>

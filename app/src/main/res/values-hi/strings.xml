@@ -83,7 +83,7 @@
     <string name="donate">दान करें</string>
     <string name="no_browser_installed_explainer">लिंकशीट ब्राउज़र होने का दावा करने वाले कम से कम एक एप्लिकेशन का पता लगाने में असमर्थ रही। सर्वोत्तम अनुभव के लिए, एक ब्राउज़र इंस्टॉल करें।</string>
     <string name="export_explainer">अपनी वर्तमान ऐप सेटिंग को एक फ़ाइल में निर्यात करें</string>
-    <string name="donate_card_subtitle">यदि आपको लिंकशीट पसंद है, तो GitHub पर एक स्टार छोड़ने और/या दान करने पर विचार करें।   \n<b>5€</b> से अधिक दान करने वाले दानकर्ता <b>लिंकशीट प्रो</b> के लिए पात्र हैं, जिसमें विशिष्ट सुविधाएं होंगी।</string>
+    <string name="donate_card_subtitle">यदि आपको लिंकशीट पसंद है, तो GitHub पर एक स्टार छोड़ने और/या दान करने पर विचार करें। \n<b>5€</b> से अधिक दान करने वाले दानकर्ता <b>लिंकशीट प्रो</b> के लिए पात्र हैं, जिसमें विशिष्ट सुविधाएं होंगी।</string>
     <string name="privacy">गोपनीयता</string>
     <string name="version_name">पूर्ण आईडेंटिफायर:</string>
     <string name="shizuku_manager_start_failed">Shizuku प्रबंधक प्रारंभ करने में विफल, कृपया इसे मैन्युअल रूप से प्रारंभ करें!</string>

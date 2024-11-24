@@ -156,7 +156,7 @@
     <string name="enable_amp2html_explainer">لإعادة توجيه صفحات AMP إلى إصدار الويب العادي. قد يكون لهذا <annotation url-id="privacy-amp2html"> آثار متعلقة بالخصوصية</annotation></string>
     <string name="amp2html_local_cache">تمكين ذاكرة التخزين المؤقت Amp2Html المحلية</string>
     <string name="amp2html_local_cache_explainer">تخزين النسخ المستردة بخلاف AMP لصفحات الويب محليًا</string>
-    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على  supabase.com (<annotation url-id="supabase-privacy">سياسة الخصوصية</annotation>)</string>
+    <string name="amp2html_external_service_explainer">محاولة الحصول على إصدار صفحة غير AMP باستخدام واجهة برمجة تطبيقات منشورة على supabase.com (<annotation url-id="supabase-privacy">سياسة الخصوصية</annotation>)</string>
     <string name="follow_only_known_trackers_explainer">حاول فقط اتباع عمليات إعادة التوجيه عندما يكون من المعروف أن المضيف متتبع / إعادة توجيه. إذا تم تمكين \"متابعة عمليات إعادة التوجيه عبر خدمة خارجية\" ، فسيتم تمكين هذا دائمًا.</string>
     <string name="resolved_via">%s تم حلها عبر %s</string>
     <string name="resolve_failed">%s فشل: %s</string>
@@ -222,7 +222,7 @@
     <string name="discord">ديسكورد</string>
     <string name="discord_explainer">الدردشة حول ورقة الروابط على ديسكورد</string>
     <string name="donate_card">التبرع بالبطاقة (عبر BuyMeACoffee)</string>
-    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع.   \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
+    <string name="donate_card_subtitle">إذا كنت تحب LinkSheet، فكر في ترك نجمة على Github و/أو التبرع. \nالمتبرعون الذين يتبرعون بأكثر من <b>5€</b> مؤهلون للحصول على <b>LinkSheet Pro</b>، والذي سيكون له ميزات حصرية.</string>
     <string name="dev">المطور</string>
     <string name="notifications">الإشعارات</string>
     <string name="notifications_explainer">تكوين الإشعارات المنبثقة</string>

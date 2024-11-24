@@ -87,7 +87,7 @@
     <string name="links">Odkazy</string>
     <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url-id="clearurls-github">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
     <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
-    <string name="follow_only_known_trackers_explainer">"Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena</string>
+    <string name="follow_only_known_trackers_explainer">Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena</string>
     <string name="theme">Motiv</string>
     <string name="dark">Tmavý</string>
     <string name="fastfoward_rules">Použít pravidla FastForward</string>
@@ -182,7 +182,7 @@
     <string name="amp2html_external_service">Pokusit se získat ne-AMP verzi stránky pomocí externí služby</string>
     <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="use_unified_preferred_browser_explainer">"Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán.</string>
+    <string name="use_unified_preferred_browser_explainer">Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán.</string>
     <string name="instance_not_available_anymore">Instance již není dostupná!</string>
     <string name="advanced">Pokročilé</string>
     <string name="shizuku">Integrace Shizuku</string>

@@ -381,7 +381,7 @@
     <string name="reset_app_link_verification_status_subtitle">Додирните овде да бисте ресетовали статус верификације линка апликације за све апликације, а затим сачекајте неколико минута док их Android поново верификује. Нећете добити потврду. Захтева Shizuku.</string>
     <string name="customization">Прилагођавање</string>
     <string name="switch_profile">Омогући промену профила</string>
-    <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -> Посебан приступ апликацијама -> Повезане радне и личне апликације</string>
+    <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -&gt; Посебан приступ апликацијама -&gt; Повезане радне и личне апликације</string>
     <string name="build_info">Информације о издању</string>
     <string name="settings__title_shortcuts">Пречице</string>
     <string name="settings_shortcuts__title_default_browser">Подразумевани прегледач</string>

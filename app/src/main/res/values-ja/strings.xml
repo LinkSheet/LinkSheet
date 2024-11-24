@@ -161,7 +161,7 @@
     <string name="settings__title_filter_apps">アプリをフィルター</string>
     <string name="reset_app_link_verification_status_subtitle">ここをタップしてすべてのアプリのアプリリンク検証ステータスをリセットし、Android が再検証するまで数分間お待ちください。確認は届きません。Shizuku が必要です。</string>
     <string name="reset_app_link_verification_status_toast">再確認を要求</string>
-    <string name="switch_profile_explainer">タップしたリンクを（仕事用）プロファイルで開くためのボタンを下部のシートに表示します。両方のプロファイルに LinkSheet をインストールし、設定 -> 特別なアプリアクセス -> 接続から手動でリンクする必要があります</string>
+    <string name="switch_profile_explainer">タップしたリンクを（仕事用）プロファイルで開くためのボタンを下部のシートに表示します。両方のプロファイルに LinkSheet をインストールし、設定 -&gt; 特別なアプリアクセス -&gt; 接続から手動でリンクする必要があります</string>
     <string name="settings_app_config_rules__text_custom_rules">カスタムルール</string>
     <string name="settings_app_config_rules__subtitle_default_rule">このルールは他のルールが一致しない場合に使用されます</string>
     <string name="settings_edit_rule__title_edit_rule">ルールを編集しています</string>

@@ -514,16 +514,4 @@
     <string name="settings_bottom_sheet__text_profile_switcher">Wyświetla przycisk w dolnym panelu, który otwiera kliknięty link w zwykłym lub roboczym profilu</string>
     <string name="settings_profile_switcher__title_profile_switcher">Przełączanie profili</string>
     <string name="settings_profile_switcher__divider_configuration">Konfiguracja</string>
-    <string name="settings_profile_switcher__divider_current_profile"></string>
-    <string name="generic__label_personal_profile"></string>
-    <string name="settings_profile_switcher__title_enable_cross_profile"></string>
-    <string name="settings_profile_switcher__divider_other_profiles"></string>
-    <string name="settings_profile_switcher__text_enable_cross_profile"></string>
-    <string name="generic__label_work_profile"></string>
-    <string name="generic__label_unknown_profile"></string>
-    <string name="settings__hint_search"></string>
-    <string name="bottom_sheet__event_app_refusal"></string>
-    <string name="settings_profile_switcher__text_other_profile"></string>
-    <string name="settings_profile_switcher__text_not_installed"></string>
-    <string name="settings_profile_switcher__text_current_profile"></string>
 </resources>

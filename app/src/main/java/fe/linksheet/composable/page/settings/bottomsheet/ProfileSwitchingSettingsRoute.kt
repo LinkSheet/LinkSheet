@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.bottomsheet.profileswitcher
+package fe.linksheet.composable.page.settings.bottomsheet
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,7 +9,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,7 +51,7 @@ private fun ProfileSwitchingSettingsRouteInternal(
     onBackPressed: () -> Unit,
     viewModel: ProfileSwitchingSettingsViewModel,
 ) {
-    val needsSetup by viewModel.needSetupFlow.collectAsStateWithLifecycle(false)
+    val needsSetup by viewModel.needSetup.collectAsStateWithLifecycle(false)
     val activity = LocalActivity.current
 
     SaneScaffoldSettingsPage(
@@ -72,7 +71,7 @@ private fun ProfileSwitchingSettingsRouteInternal(
                     headline = textContent(R.string.settings_profile_switcher__title_enable_cross_profile),
                     subtitle = textContent(R.string.settings_profile_switcher__text_enable_cross_profile),
                     onClick = {
-                        viewModel.profileSwitcher.launchCrossProfileInteractSettings(activity)
+                        viewModel.launchCrossProfileInteractSettings(activity)
                     }
                 )
             }
@@ -90,28 +89,29 @@ private fun ProfileSwitchingSettingsRouteInternal(
 
         divider(id = R.string.settings_profile_switcher__divider_current_profile)
 
-        val profileSwitcher = viewModel.profileSwitcher
-        val crossProfiles = profileSwitcher.getProfilesInternal() ?: emptyList()
-
         val userProfileInfo = viewModel.getUserProfileInfo()
         val isManagedProfile = viewModel.isManagedProfile()
 
         item(key = userProfileInfo.userHandle.identifier, contentType = ContentType.SingleGroupItem) {
-            val textId = if (isManagedProfile) R.string.generic__label_work_profile else R.string.generic__label_personal_profile
+            val textId =
+                if (isManagedProfile) R.string.generic__label_work_profile else R.string.generic__label_personal_profile
 
-            ProfileListItem(
+            DefaultTwoLineIconClickableShapeListItem(
                 headlineContent = textContent(textId),
                 supportingContent = textContent(R.string.settings_profile_switcher__text_current_profile),
                 icon = Icons.Rounded.Person.iconPainter,
+                onClick = {}
             )
         }
 
         divider(id = R.string.settings_profile_switcher__divider_other_profiles)
 
-        group(list = userProfileInfo.otherHandles, key = { it.identifier }) { userHandle, padding, shape ->
-            val crossProfile = remember(userHandle) { crossProfiles.firstOrNull { it.id == userHandle.identifier } }
+        group(
+            list = userProfileInfo.otherHandles,
+            key = { (handle, _) -> handle.identifier }) { (_, crossProfile), padding, shape ->
             if (crossProfile != null) {
-                val textId = if (isManagedProfile) R.string.generic__label_personal_profile else R.string.generic__label_work_profile
+                val textId =
+                    if (isManagedProfile) R.string.generic__label_personal_profile else R.string.generic__label_work_profile
 
                 DefaultTwoLineIconClickableShapeListItem(
                     shape = shape,
@@ -124,17 +124,24 @@ private fun ProfileSwitchingSettingsRouteInternal(
                     }
                 )
             } else {
-                ProfileListItem(
+                DefaultTwoLineIconClickableShapeListItem(
+                    enabled = false,
                     shape = shape,
                     padding = padding,
                     headlineContent = textContent(R.string.generic__label_unknown_profile),
                     supportingContent = textContent(R.string.settings_profile_switcher__text_not_installed),
                     icon = Icons.Rounded.Person.iconPainter,
+                    onClick = {}
                 )
             }
         }
+
+//        item(key = "info", contentType = ContentType.SingleGroupItem) {
+//            PageInfo(textContent = text("This is a test"))
+//        }
     }
 }
+
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Preview

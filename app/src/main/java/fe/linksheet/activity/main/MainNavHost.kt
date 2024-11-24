@@ -21,7 +21,7 @@ import fe.linksheet.composable.page.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.page.settings.apps.PretendToBeAppSettingsRoute
 import fe.linksheet.composable.page.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.page.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.page.settings.bottomsheet.profileswitcher.ProfileSwitchingSettingsRoute
+import fe.linksheet.composable.page.settings.bottomsheet.ProfileSwitchingSettingsRoute
 import fe.linksheet.composable.page.settings.browser.NewBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute

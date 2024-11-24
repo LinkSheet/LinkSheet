@@ -379,7 +379,7 @@
     <string name="customization">Özelleştirme</string>
     <string name="reset_app_link_verification_status_subtitle">Bütün uygulamaların bağlantı onaylama durumunu sıfırlamak için buraya dokunun, sonra Android\'in yeniden onaylaması için birkaç dakika bekleyin. Bir onay almayacaksınız. Shizuku gerektirir.</string>
     <string name="switch_profile">Profil değiştirmeyi etkinleştir</string>
-    <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -> Özel uygulama erişimi -> Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
+    <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -&gt; Özel uygulama erişimi -&gt; Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
     <string name="reset_app_link_verification_status">Uygulama bağlantı onaylama durumunu sıfırla</string>
     <string name="reset_app_link_verification_status_toast">Yeniden onaylama istendi</string>
     <string name="build_info">Derleme bilgisi</string>

@@ -368,7 +368,7 @@
     <string name="dev_mode_enabled">Xin chúc mừng, bạn đã kích hoạt chế độ nhà phát triển. Chỉ cần thận trọng.</string>
     <string name="onboarding_3_card_explainer">Google đã giới thiệu các liên kết ứng dụng đã được xác minh trong Android 12, cho phép các ứng dụng chứng minh quyền sở hữu tên miền bằng mật mã. Hành vi này phải được tắt theo cách thủ công để LinkSheet chặn các liên kết được nhấn.</string>
     <string name="switch_profile">Bật chuyển đổi hồ sơ</string>
-    <string name="switch_profile_explainer">Hiển thị một nút ở trang dưới cùng để mở liên kết đã nhấn trong hồ sơ (công việc-). Yêu cầu cài đặt LinkSheet trong cả hai cấu hình và được liên kết thủ công thông qua Thiết đặt -> Quyền truy cập ứng dụng đặc biệt -> Ứng dụng cá nhân và công việc được kết nối</string>
+    <string name="switch_profile_explainer">Hiển thị một nút ở trang dưới cùng để mở liên kết đã nhấn trong hồ sơ (công việc-). Yêu cầu cài đặt LinkSheet trong cả hai cấu hình và được liên kết thủ công thông qua Thiết đặt -&gt; Quyền truy cập ứng dụng đặc biệt -&gt; Ứng dụng cá nhân và công việc được kết nối</string>
     <string name="verified_link_handlers">Trình xử lý liên kết đã được xác minh</string>
     <string name="verified_link_handlers_subtitle">Kiểm soát trạng thái xác minh miền ứng dụng</string>
     <string name="settings_shortcuts__title_default_browser">Trình duyệt mặc định</string>

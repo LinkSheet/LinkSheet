@@ -354,7 +354,7 @@
     <string name="telemetry_identity_full">Pełne</string>
     <string name="telemetry_level_exhaustive_description">Szczegółowe statystyki użycia</string>
     <string name="settings_verified_link_handlers__text_user_apps">Aplikacje użytkownika</string>
-    <string name="switch_profile_explainer">Wyświetla przycisk w dolnym panelu, aby otworzyć kliknięty link w profilu (pracy). Wymaga, aby LinkSheet był zainstalowany w obu profilach i ręcznie powiązany za pomocą Ustawienia -> Aplikacje -> Aplikacje ze specjalnym dostępem -> Wspólny widok aplikacji służbowych i osobistych</string>
+    <string name="switch_profile_explainer">Wyświetla przycisk w dolnym panelu, aby otworzyć kliknięty link w profilu (pracy). Wymaga, aby LinkSheet był zainstalowany w obu profilach i ręcznie powiązany za pomocą Ustawienia -&gt; Aplikacje -&gt; Aplikacje ze specjalnym dostępem -&gt; Wspólny widok aplikacji służbowych i osobistych</string>
     <string name="settings_shortcuts__subtitle_default_browser">Otwórz stronę ustawień domyślnej przeglądarki</string>
     <string name="tap_customization_dialog_text">Wybierz akcję, która powinna zostać wykonana</string>
     <string name="telemetry_level_minimal">Minimalne</string>

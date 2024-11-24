@@ -334,7 +334,7 @@
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet 尚未配置就绪</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet 配置就绪</string>
     <string name="resolve_event__querying_browser_list">获取浏览器列表中</string>
-    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）资料中打开。两个档案都需要安装 LinkSheet，并使用“设置 -> 特殊应用权限 -> 关联的工作&amp;个人应用”手动进行关联</string>
+    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）资料中打开。两个档案都需要安装 LinkSheet，并使用“设置 -&gt; 特殊应用权限 -&gt; 关联的工作&amp;个人应用”手动进行关联</string>
     <string name="export_log_dialog__subtitle_include_throwable">推荐，但无法删减</string>
     <string name="settings_app_config__description_preferred_browser">用户选择的偏好浏览器</string>
     <string name="telemetry_dialog_text">选择最适合你的使用指标类型。</string>

@@ -495,7 +495,7 @@
         <item quantity="few">%d ověření hostitelé</item>
         <item quantity="other">%d ověřených hostitelů</item>
     </plurals>
-    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -> Zvláštní přístup aplikací ->Propojení pracovních a osobních aplikací</string>
+    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt;Propojení pracovních a osobních aplikací</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet není nastaven</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet je nastaven</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>

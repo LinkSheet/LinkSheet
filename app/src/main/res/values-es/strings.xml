@@ -380,7 +380,7 @@
     <string name="reset_app_link_verification_status_subtitle">Toque aquí para restablecer el estado de verificación del enlace de aplicaciones de todas las aplicaciones y luego espere unos minutos mientras Android las vuelve a verificar. No recibirás una confirmación. Requiere Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Solicitada una nueva verificación</string>
     <string name="switch_profile">Activar el cambio de perfil</string>
-    <string name="switch_profile_explainer">Muestra un botón en la hoja inferior para abrir el enlace pulsado en un perfil (de trabajo). Requiere que LinkSheet esté instalado en ambos perfiles y vinculado manualmente a través de Ajustes -> Acceso a aplicaciones especiales -> Aplicaciones personales y de trabajo conectadas</string>
+    <string name="switch_profile_explainer">Muestra un botón en la hoja inferior para abrir el enlace pulsado en un perfil (de trabajo). Requiere que LinkSheet esté instalado en ambos perfiles y vinculado manualmente a través de Ajustes -&gt; Acceso a aplicaciones especiales -&gt; Aplicaciones personales y de trabajo conectadas</string>
     <string name="customization">Personalización</string>
     <string name="build_info">Información de compilación</string>
     <string name="verified_link_handlers">Gestores de enlaces verificados</string>

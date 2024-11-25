@@ -148,7 +148,6 @@
     <string name="yes">Ja</string>
     <string name="frontend">Benutzeroberfläche</string>
     <string name="redirect_resolve_type_remote">Remote-Server</string>
-    <string name="donate_subtitle"></string>
     <string name="advanced">Erweitert</string>
     <string name="built_at">Build erstellt um (UTC):</string>
     <string name="shizuku_explainer_short">Direkt mit System-Schnittstellen interagieren</string>
@@ -168,7 +167,6 @@
     <string name="credits_explainer">Danksagungen, Lizenzierung</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="instance">Instanz</string>
-    <string name="links_explainer"></string>
     <string name="amp2html_external_service">Versucht, die Nicht-AMP-Seitenversion über einen externen Dienst zu erhalten</string>
     <string name="no_handlers_found">Kein Browser oder native App gefunden!</string>
     <string name="thanks_for_donating">Danke, dass Sie gespendet haben!</string>

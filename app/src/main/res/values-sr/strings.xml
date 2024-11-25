@@ -504,7 +504,19 @@
     <string name="generic__text_done">Готово</string>
     <string name="generic__text_edit">Измени</string>
     <string name="home__clipboard_card_source">Из привремене меморије</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Приказује дугме у доњем листу за отварање линка у другом профилу</string>
     <string name="settings_profile_switcher__title_profile_switcher">Мењање профила</string>
     <string name="settings_profile_switcher__divider_configuration">Конфигурација</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Омогући међупрофилну везу</string>
+    <string name="generic__label_personal_profile">Лични профил</string>
+    <string name="generic__label_work_profile">Радни профил</string>
+    <string name="generic__label_unknown_profile">Непознати профил</string>
+    <string name="settings_profile_switcher__text_not_installed">Није могуће повезивање на овај профил</string>
+    <string name="settings_profile_switcher__text_current_profile">Тренутно ради на овом профилу</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Други профили</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Додирните да бисте повезали LinkSheet са његовим панданом у вашем секундарном профилу</string>
+    <string name="bottom_sheet__event_app_refusal">Циљна апликација је одбила да обрађује линк!</string>
+    <string name="settings_profile_switcher__text_other_profile">Други профил</string>
+    <string name="settings__hint_search">Претрага</string>
+    <string name="settings_profile_switcher__divider_current_profile">Тренутни профил</string>
 </resources>

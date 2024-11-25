@@ -69,7 +69,7 @@ fun UrlBarWrapper(
         },
         switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
             { crossProfile, url ->
-                activity.finish()
+                hideDrawer()
                 profileSwitcher.switchTo(crossProfile, url, activity)
             }
         },
@@ -88,7 +88,7 @@ fun UrlBarWrapper(
             }
         },
         shareUri = { uri ->
-            activity.finish()
+            hideDrawer()
             activity.startActivity(shareUri(uri))
         },
         downloadUri = { uri, downloadResult ->
@@ -104,7 +104,7 @@ fun UrlBarWrapper(
             }
         },
         ignoreLibRedirect = { redirectedResult ->
-            activity.finish()
+            hideDrawer()
             activity.startActivity(
                 selfIntent(
                     redirectedResult.originalUri,

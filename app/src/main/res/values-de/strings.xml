@@ -45,7 +45,7 @@
     <string name="always_show_package_name">Paketname immer anzeigen</string>
     <string name="error">Fehler</string>
     <string name="settings">Einstellungen</string>
-    <string name="system">System</string>
+    <string name="system">System folgen</string>
     <string name="credits">Danksagungen</string>
     <string name="ignore_libredirect">LibRedirect ignorieren</string>
     <string name="download_started">Download gestartet</string>
@@ -54,7 +54,7 @@
     <string name="preview_url_explainer">Zeigt die geklickte URL (nachdem sie verarbeitet wurde)</string>
     <string name="logs">Protokolle</string>
     <string name="no_apps_which_can_handle_links_found">Es wurden keine Apps gefunden, die mit Links umgehen können.</string>
-    <string name="use_app_settings">App-Einstellungen verwenden</string>
+    <string name="use_app_settings">Standard</string>
     <string name="always_show_package_name_explainer">Immer die Paketnamen statt nur Appnamen anzeigen. Dies wird auf die gesamte App angewandt.</string>
     <string name="log_files">Vergangene Protokolldateien</string>
     <string name="logs_explainer">Anwendungsprotokolle anzeigen</string>
@@ -89,13 +89,13 @@
     <string name="downloader_url_mime_type">Mime-Typ aus URL verwenden</string>
     <string name="app_name">LinkSheet</string>
     <string name="no_log_entries">Diese Sitzung enthält keine Protokolle.</string>
-    <string name="hide_after_copying_explainer">Unteres Fenster ausblenden, nachdem die Schaltfläche \"URL kopieren\" gedrückt wurde</string>
+    <string name="hide_after_copying_explainer">Unteres Blatt automatisch ausblenden, wenn eine Aktionsschaltfläche wie „Link kopieren“ oder „Herunterladen“ angetippt wird</string>
     <string name="import_dumped_preference">Gespeicherte Einstellungen importieren</string>
     <string name="domain_selection_confirmation_subtitle">Sind Sie sicher, dass Sie %s als bevorzugte Anwendung für die folgenden Domains festlegen wollen?</string>
     <string name="dismiss">Ablehnen</string>
     <string name="default_apps_subtitle">Bevorzugte Anwendungen sind die Anwendungen, die Sie für bestimmte Hosts als \"Immer öffnen\" festgelegt haben</string>
     <string name="amp2html_local_cache">Lokalen Amp2Html-Zwischenspeicher aktivieren</string>
-    <string name="open_copied_link">Kopierten Link öffnen</string>
+    <string name="open_copied_link">Von der Zwischenablage</string>
     <string name="include_settings">Einstellungen einbeziehen (empfohlen)</string>
     <string name="no_browser_installed">Kein Browser installiert</string>
     <string name="close">Schließen</string>
@@ -103,8 +103,8 @@
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet hat mindestens eine App erkannt, die als Browser bekannt ist.</string>
     <string name="enable_amp2html">Amp2Html aktivieren</string>
     <string name="use_clear_urls_explainer">Experimentelle <annotation url-id="clearurls-github">ClearURLs</annotation>-Integration verwenden (entfernt Tracking-Parameter von URLs)</string>
-    <string name="follow_only_known_trackers_explainer">Versucht nur, Weiterleitungen zu folgen, wenn der Host als Tracker/Weiterleitung bekannt ist. Wenn \"Weiterleitungen über externen Dienst folgen\" aktiviert ist, ist dies immer aktiviert.</string>
-    <string name="theme_explainer">Design der App ändern</string>
+    <string name="follow_only_known_trackers_explainer">Es wird nur versucht, Weiterleitungen zu folgen, wenn der Host als Tracker/Weiterleitung bekannt ist. Wenn „Weiterleitungen über einen externen Dienst folgen“ aktiviert ist, wird dies immer aktiviert sein</string>
+    <string name="theme_explainer">Material You, dunkles Thema, rein schwarzer Modus</string>
     <string name="bottom_sheet">Unteres Fenster</string>
     <string name="display_grid_layout">Raster-Layout</string>
     <string name="log_viewer">Protokoll-Anzeige</string>
@@ -126,7 +126,7 @@
     <string name="dont_show_filtered_item">Niemals Abschnitt \"zuletzt ausgewählte App\" anzeigen</string>
     <string name="follow_redirects_local_cache_explainer">Ergebnis von Weiterleitungen lokal zwischenspeichern</string>
     <string name="donate_explainer_crypto">Wenn Sie mit Kryptowährungen spenden, senden Sie einen Zahlungsnachweis an <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>, um den Anspruch auf <b>LinkSheet Pro</b> geltend zu machen</string>
-    <string name="display_grid_layout_explainer">Anzeige eines Gitters anstelle einer Liste im unteren Fenster</string>
+    <string name="display_grid_layout_explainer">Ein Raster anstelle einer Liste auf dem unteren Blatt anzeigen</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet kann diesen Link nicht öffnen.</string>
     <string name="join">Beitreten</string>
@@ -148,7 +148,7 @@
     <string name="yes">Ja</string>
     <string name="frontend">Benutzeroberfläche</string>
     <string name="redirect_resolve_type_remote">Remote-Server</string>
-    <string name="donate_subtitle">Wenn Sie spenden und <b>LinkSheet Pro</b> beanspruchen möchten</string>
+    <string name="donate_subtitle"></string>
     <string name="advanced">Erweitert</string>
     <string name="built_at">Build erstellt um (UTC):</string>
     <string name="shizuku_explainer_short">Direkt mit System-Schnittstellen interagieren</string>
@@ -165,10 +165,10 @@
     <string name="shizuku_integration">Shizuku-Integration</string>
     <string name="debug">Fehlersuche</string>
     <string name="other">Anderes</string>
-    <string name="credits_explainer">Open-Source-Lizenzierung</string>
+    <string name="credits_explainer">Danksagungen, Lizenzierung</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="instance">Instanz</string>
-    <string name="links_explainer">Einstellungen zur Linkmanipulation</string>
+    <string name="links_explainer"></string>
     <string name="amp2html_external_service">Versucht, die Nicht-AMP-Seitenversion über einen externen Dienst zu erhalten</string>
     <string name="no_handlers_found">Kein Browser oder native App gefunden!</string>
     <string name="thanks_for_donating">Danke, dass Sie gespendet haben!</string>
@@ -190,7 +190,7 @@
     <string name="fastfoward_rules_explainer">Experimentelle Integration von <annotation url-id="fastforward-github">FastForward</annotation>-Regeln verwenden (umgeht Weiterleitungen einiger Hosts durch Extraktion der Weiterleitung aus dem Link)</string>
     <string name="whitelisted">Auf der Whitelist</string>
     <string name="log">Protokoll</string>
-    <string name="loading_link">Link lädt…</string>
+    <string name="loading_link">Link wird verarbeitet …</string>
     <string name="donate_card_headline">Spenden, um LinkSheet zu unterstützen</string>
     <string name="general">Allgemein</string>
     <string name="pretend_to_be_app_explainer">Mit LinkSheetCompat vorgeben, eine native App für unterstützte Domains zu sein</string>
@@ -229,4 +229,5 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku-Modus ist aktiviert, tippen Sie auf eine App, um ihre automatische Linkbehandlung umzuschalten. Tippen Sie lange auf eine App, um ihr \"Standardmäßig öffnen\"-Einstellungsmenü zu öffnen.</string>
     <string name="preferred_apps_settings">Bevorzugte Anwendungen für die von dir unterstützten Hosts festlegen</string>
+    <string name="app_browsers_subtitle">Bevorzugte Apps, Browser-Einstellungen</string>
 </resources>

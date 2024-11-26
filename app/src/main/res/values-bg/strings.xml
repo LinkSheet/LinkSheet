@@ -62,7 +62,7 @@
     <string name="redirect_resolve_type_local_cache">местна памет</string>
     <string name="redirect_resolve_type_remote">отдалечен сървър</string>
     <string name="always_ask_explainer">Винаги показва всички браузъри</string>
-    <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ. Ако „Последване на пренасочванията от външна услуга“ е включено тук също е включено.</string>
+    <string name="follow_only_known_trackers_explainer">Пренасочванията се последват само когато е известно, че сървърът е проследяващ/пренасочващ. Ако „Последване на пренасочванията от външна услуга“ е включено тук също е включено</string>
     <string name="usage_stats_sorting_explainer">При сортирането се взима предвид и системната статистика за използване на приложенията. При първо включване ще бъде поискано право на достъп.</string>
     <string name="set_as_browser">Задаване като браузър</string>
     <string name="set_as_browser_explainer">За да направите LinkSheet браузър по подразбиране докоснете</string>
@@ -497,9 +497,19 @@
     <string name="generic__text_edit">Променяне</string>
     <string name="generic__text_done">Готово</string>
     <string name="home__clipboard_card_source">От копираното</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Добавя бутон в долното меню, който отваря препратката в (работния) профил</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Добавя бутон в долното меню, който отваря препратката в друг профил</string>
     <string name="settings_profile_switcher__divider_configuration">Настройка</string>
     <string name="settings_profile_switcher__title_profile_switcher">Смяна на профили</string>
     <string name="settings__hint_search">Търсене</string>
     <string name="bottom_sheet__event_app_refusal">Целевото приложение отказва да обработи препратката!</string>
+    <string name="settings_profile_switcher__divider_current_profile">Текущ профил</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Други профили</string>
+    <string name="generic__label_unknown_profile">Неизвестен профил</string>
+    <string name="settings_profile_switcher__text_other_profile">Друг профил</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Свързване на профили</string>
+    <string name="generic__label_work_profile">Работен профил</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Докоснете, за да направите връзка с LinkSheet, инсталиран в друг профил</string>
+    <string name="generic__label_personal_profile">Личен профил</string>
+    <string name="settings_profile_switcher__text_not_installed">Не може да бъде направена връзка с този профил</string>
+    <string name="settings_profile_switcher__text_current_profile">В момента работи в този профил</string>
 </resources>

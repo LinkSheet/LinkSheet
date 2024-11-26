@@ -17,7 +17,7 @@
     <string name="save">Guardar</string>
     <string name="enable_amp2html">Activar Amp2Html</string>
     <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url-id="clearurls-github">ClearURLs</annotation> (borra los parámetros de seguimiento de las URL)</string>
-    <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado.</string>
+    <string name="follow_only_known_trackers_explainer">Solo intentar seguir redirecciones cuando se sepa que el dominio es un rastreador/redireccionamiento. Si está habilitado \"Seguir redirecciones a través de un servicio externo\", esto siempre estará habilitado</string>
     <string name="always_disable">Forzar desactivación</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
     <string name="preview_url_explainer">Muestra el enlace seleccionado (después de que ha sido procesado)</string>
@@ -59,7 +59,7 @@
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet no puede abrir este enlace.</string>
     <string name="redirect_resolve_type_local_cache">caché local</string>
-    <string name="use_unified_preferred_browser_explainer">Al habilitar esto, se aplican las configuraciones siguientes tanto al manejo de enlaces normal como en la aplicación. Utilice los botones a continuación para cambiar entre el modo Normal y el modo En aplicación cuando esté deshabilitado.</string>
+    <string name="use_unified_preferred_browser_explainer">Al habilitar esta opción, se aplican las siguientes configuraciones tanto al manejo de enlaces normal como dentro de la aplicación. Use los botones a continuación para cambiar entre el modo normal y dentro de la aplicación cuando esté deshabilitado.</string>
     <string name="advanced_explainer">Indicadores de funciones, experimentos, importación/exportación</string>
     <string name="amp2html_local_cache_explainer">Almacenar localmente en caché las versiones recuperadas de páginas web que no sean AMP</string>
     <string name="no">No</string>
@@ -504,7 +504,7 @@
     <string name="home__clipboard_card_source">Desde el portapapeles</string>
     <string name="generic__text_edit">Editar</string>
     <string name="generic__text_done">Hecho</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón en el pie de página para el enlace abierto en el que hizo clic en el perfil (de trabajo)</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón al pie de página para abrir la URL en otro perfil</string>
     <string name="settings_profile_switcher__title_profile_switcher">Cambio de perfil</string>
     <string name="settings_profile_switcher__divider_configuration">Configuración</string>
     <string name="settings__hint_search">Buscar</string>

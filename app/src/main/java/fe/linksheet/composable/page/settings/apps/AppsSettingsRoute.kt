@@ -66,23 +66,6 @@ fun AppsSettingsRoute(
                         }
                     )
                 }
-
-                if (featureFlagViewModel.linkSheetCompat()) {
-                    item(key = pretendToBeAppRoute) {
-                        SettingsItemRow(
-                            navController = navController,
-                            navigateTo = pretendToBeAppRoute,
-                            headlineId = R.string.pretend_to_be_app,
-                            subtitleId = R.string.pretend_to_be_app_explainer,
-                            image = {
-                                ColoredIcon(
-                                    icon = Icons.Default.PublishedWithChanges,
-                                    descriptionId = R.string.pretend_to_be_app
-                                )
-                            }
-                        )
-                    }
-                }
             }
         }
     }

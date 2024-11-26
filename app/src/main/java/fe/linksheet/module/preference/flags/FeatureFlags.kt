@@ -8,10 +8,9 @@ object FeatureFlags : PreferenceDefinition(
     "feature_flag_url_preview",
     "experiment_share_parse_text",
     "feature_flag_share_parse_text",
-    "feature_flag_switch_profile"
+    "feature_flag_switch_profile",
+    "feature_flag_linksheet_compat"
 ) {
-    val linkSheetCompat = boolean("feature_flag_linksheet_compat")
-
     init { finalize() }
 }
 

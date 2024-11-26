@@ -13,17 +13,6 @@ class FeatureFlagViewModel(
     preferenceRepository: AppPreferenceRepository,
     featureFlagRepository: FeatureFlagRepository,
 ) : BaseViewModel(preferenceRepository) {
-
-    // TODO: Cleanup
-    val linkSheetCompat = featureFlagRepository.asState(FeatureFlags.linkSheetCompat)
-
-    val flags = setOf<Flag>(
-        Flag.Full(
-            featureFlagRepository.asState(FeatureFlags.linkSheetCompat),
-            R.string.enable_linksheet_compat,
-            R.string.enable_linksheet_compat_explainer
-        )
-    )
 }
 
 sealed class Flag(val pref: StatePreference<Boolean>) {

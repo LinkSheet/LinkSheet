@@ -150,12 +150,6 @@ fun MainNavHost(
             )
         }
 
-        animatedComposable(route = featureFlagSettingsRoute) {
-            FeatureFlagSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
-            )
-        }
-
         animatedArgumentRouteComposable(route = experimentSettingsRoute) { _, _ ->
             NewExperimentsSettingsRoute(onBackPressed = onBackPressed)
         }

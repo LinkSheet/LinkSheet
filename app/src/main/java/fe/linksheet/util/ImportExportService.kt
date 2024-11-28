@@ -41,7 +41,7 @@ class ImportExportService(val context: Context) {
             return Result.failure(Exception("Provided file is not a LinkSheet preferences export!"))
         }
 
-        val preferences = (jsonElement as JsonObject).asArray("preferences")
+        val preferences = jsonElement.asArray("preferences")
         val map = preferences.mapNotNull { preference ->
             if (preference !is JsonObject) return@mapNotNull null
 

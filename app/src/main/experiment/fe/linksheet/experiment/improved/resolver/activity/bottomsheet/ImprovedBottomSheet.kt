@@ -15,12 +15,19 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.fix.SheetValue
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.*
+import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerInputScope
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,22 +39,26 @@ import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetImpl
 import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
-import fe.linksheet.activity.bottomsheet.column.*
+import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
+import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
+import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
+import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
+import fe.linksheet.composable.ui.AppTheme
+import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
+import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
+import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.interconnect.LinkSheetConnector
+import fe.linksheet.module.intent.BottomSheetStateController
+import fe.linksheet.module.intent.DefaultBottomSheetStateController
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.experiment.improved.resolver.ReferrerHelper
-import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
-import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -121,6 +132,7 @@ class ImprovedBottomSheet(
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Wrapper() {
+        var sheetOpen by rememberSaveable { mutableStateOf(true) }
         var status by remember { mutableStateOf<IntentResolveResult>(IntentResolveResult.Pending) }
         val currentIntent by intentFlow.collectAsStateWithLifecycle()
 
@@ -134,10 +146,17 @@ class ImprovedBottomSheet(
         }
 
         val coroutineScope = rememberCoroutineScope()
-        val drawerState = androidx.compose.material3.fix.rememberModalBottomSheetState()
 
-        val hideDrawer: () -> Unit = {
-            coroutineScope.launch { drawerState.hide() }.invokeOnCompletion { finish() }
+        val sheetState = androidx.compose.material3.fix.rememberModalBottomSheetState {
+//            if(it != SheetValue.Hidden) {
+//                return@rememberModalBottomSheetState true
+//            }
+            true
+        }
+
+
+        val controller = remember {
+            DefaultBottomSheetStateController(activity, coroutineScope, sheetState)
         }
 
         val configuration = LocalConfiguration.current
@@ -158,36 +177,42 @@ class ImprovedBottomSheet(
             }
 
             if (viewModel.improvedBottomSheetExpandFully()) {
-                drawerState.expand()
+                sheetState.expand()
             } else {
-                drawerState.partialExpand()
+                sheetState.partialExpand()
             }
         }
 
+
+//        sheetState
+//        if(sheetOpen){
         ImprovedBottomDrawer(
             contentModifier = if (viewModel.interceptAccidentalTaps()) {
                 Modifier.pointerInput(Unit) {
-                    interceptTap { !drawerState.isAnimationRunning }
+                    interceptTap { !sheetState.isAnimationRunning }
                 }
             } else Modifier,
             landscape = landscape,
             // TODO: Replace with pref
             isBlackTheme = false,
-            drawerState = drawerState,
+            sheetState = sheetState,
             shape = RoundedCornerShape(
                 topStart = 22.0.dp,
                 topEnd = 22.0.dp,
                 bottomEnd = 0.0.dp,
                 bottomStart = 0.0.dp
             ),
-            hide = hideDrawer,
+            hide = {
+                finish()
+//                sheetOpen = false
+            },
             sheetContent = {
                 when (status) {
                     is IntentResolveResult.Pending -> {
                         LoadingIndicator(
                             events = resolver.events,
                             interactions = resolver.interactions,
-                            requestExpand = { coroutineScope.launch { drawerState.expand() } }
+                            requestExpand = { coroutineScope.launch { sheetState.expand() } }
                         )
                     }
 
@@ -196,9 +221,9 @@ class ImprovedBottomSheet(
                             result = status as IntentResolveResult.Default,
                             enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
                             enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
-                            isExpanded = drawerState.currentValue == SheetValue.Expanded,
+                            isExpanded = sheetState.currentValue == SheetValue.Expanded,
                             requestExpand = {},
-                            hideDrawer = hideDrawer,
+                            controller = controller,
                             showPackage = viewModel.alwaysShowPackageName(),
                             previewUrl = viewModel.previewUrl(),
                             hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
@@ -220,6 +245,7 @@ class ImprovedBottomSheet(
                 }
             }
         )
+//        }
     }
 
     @Composable
@@ -229,7 +255,7 @@ class ImprovedBottomSheet(
         enableSwitchProfile: Boolean,
         isExpanded: Boolean,
         requestExpand: () -> Unit,
-        hideDrawer: () -> Unit,
+        controller: BottomSheetStateController,
         showPackage: Boolean,
         previewUrl: Boolean,
         hideBottomSheetChoiceButtons: Boolean,
@@ -245,7 +271,7 @@ class ImprovedBottomSheet(
                 enableDownloadStartedToast = viewModel.downloadStartedToast(),
                 enableUrlCardDoubleTap = urlCardDoubleTap,
                 hideAfterCopying = viewModel.hideAfterCopying(),
-                hideDrawer = hideDrawer,
+                controller = controller,
                 showToast = { id -> showToast(id) },
                 copyUrl = { label, url ->
                     viewModel.clipboardManager.setText(label, url)

@@ -14,7 +14,6 @@ import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
 import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.linksheet.extension.android.componentName
-import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.koin.injectLogger
@@ -42,7 +41,8 @@ import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.resolver.BottomSheetGrouper
 import fe.linksheet.resolver.BottomSheetResult
-import fe.linksheet.util.IntentParser
+import fe.linksheet.module.intent.IntentParser
+import fe.linksheet.module.intent.cloneIntent
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -165,7 +165,7 @@ class IntentResolver(
                 val uri = IntentParser.tryParse(query)
                 if (uri == null) {
                     val newIntent = intent.unsafe
-                        .newIntent(Intent.ACTION_WEB_SEARCH, null, true)
+                        .cloneIntent(Intent.ACTION_WEB_SEARCH, null, true)
                         .putExtra(SearchManager.QUERY, query)
 
                     val resolvedList = context.packageManager
@@ -297,7 +297,7 @@ class IntentResolver(
             referrer, inAppBrowserSettings()
         )
 
-        val newIntent = intent.unsafe.newIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
+        val newIntent = intent.unsafe.cloneIntent(Intent.ACTION_VIEW, uri, !isCustomTab || !allowCustomTab)
         if (allowCustomTab) {
             newIntent.extras?.keySet()?.filter { !it.contains("customtabs") }?.forEach { key ->
 //                Timber.tag("ResolveIntents").d("CustomTab: Remove extra: $key")

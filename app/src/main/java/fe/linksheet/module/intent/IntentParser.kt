@@ -1,8 +1,9 @@
-package fe.linksheet.util
+package fe.linksheet.module.intent
 
 import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
+import fe.linksheet.util.UriUtil
 import mozilla.components.support.utils.SafeIntent
 import mozilla.components.support.utils.WebURLFinder
 
@@ -89,7 +90,7 @@ object IntentParser {
     fun tryParse(text: CharSequence): Uri? {
         val str = text.toString()
         if (UriUtil.isWebStrict(str)) {
-            return kotlin.runCatching { Uri.parse(str) }.getOrNull()
+            return runCatching { Uri.parse(str) }.getOrNull()
         }
 
         return null

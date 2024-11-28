@@ -18,7 +18,6 @@ import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
 import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
 import fe.linksheet.extension.android.labelSorted
-import fe.linksheet.extension.android.newIntent
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
@@ -46,7 +45,8 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
-import fe.linksheet.util.IntentParser
+import fe.linksheet.module.intent.IntentParser
+import fe.linksheet.module.intent.cloneIntent
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -426,7 +426,7 @@ class ImprovedIntentResolver(
         // TODO: Do we need to handle this case? Or is it impossible anyway
 //        val uri = IntentParser.tryParse(query) ?: return null
         val newIntent = intent.unsafe
-            .newIntent(Intent.ACTION_WEB_SEARCH, null, true)
+            .cloneIntent(Intent.ACTION_WEB_SEARCH, null, true)
             .putExtra(SearchManager.QUERY, query)
 
         val resolvedList = context.packageManager

@@ -32,14 +32,14 @@ import fe.linksheet.activity.bottomsheet.UrlCard
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
-import fe.linksheet.extension.android.shareUri
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
+import fe.linksheet.module.intent.BottomSheetStateController
+import fe.linksheet.module.intent.Intents
 import fe.linksheet.module.profile.CrossProfile
 import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.util.selfIntent
 import me.saket.unfurl.UnfurlResult
 
 @Composable
@@ -52,7 +52,7 @@ fun UrlBarWrapper(
     enableDownloadStartedToast: Boolean,
     enableUrlCardDoubleTap: Boolean,
     hideAfterCopying: Boolean,
-    hideDrawer: () -> Unit,
+    controller: BottomSheetStateController,
     showToast: (Int) -> Unit,
     copyUrl: (String, String) -> Unit,
     startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
@@ -69,7 +69,7 @@ fun UrlBarWrapper(
         },
         switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
             { crossProfile, url ->
-                hideDrawer()
+                controller.hideAndFinish()
                 profileSwitcher.switchTo(crossProfile, url, activity)
             }
         },
@@ -84,12 +84,12 @@ fun UrlBarWrapper(
             }
 
             if (hideAfterCopying) {
-                hideDrawer()
+                controller.hideAndFinish()
             }
         },
         shareUri = { uri ->
-            hideDrawer()
-            activity.startActivity(shareUri(uri))
+            controller.hideAndFinish()
+            controller.startActivity(controller.createChooser(Intents.createShareUriIntent(uri)))
         },
         downloadUri = { uri, downloadResult ->
             startDownload(uri, downloadResult)
@@ -100,13 +100,13 @@ fun UrlBarWrapper(
             }
 
             if (hideAfterCopying) {
-                hideDrawer()
+                controller.hideAndFinish()
             }
         },
         ignoreLibRedirect = { redirectedResult ->
-            hideDrawer()
-            activity.startActivity(
-                selfIntent(
+            controller.hideAndFinish()
+            controller.startActivity(
+                Intents.createSelfIntent(
                     redirectedResult.originalUri,
                     bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                 )

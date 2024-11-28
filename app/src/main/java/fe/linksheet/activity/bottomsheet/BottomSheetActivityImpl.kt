@@ -39,7 +39,6 @@ import fe.linksheet.activity.bottomsheet.failure.FailureSheetColumn
 import fe.linksheet.composable.util.BottomDrawer
 import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.extension.android.setText
-import fe.linksheet.extension.android.shareUri
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -53,7 +52,7 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.android.compose.version.AndroidVersion
-import fe.linksheet.util.selfIntent
+import fe.linksheet.module.intent.Intents
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -177,7 +176,7 @@ class BottomSheetActivityImpl(
 
             BottomSheetApps(
                 bottomSheetViewModel = viewModel,
-                result = result as BottomSheetResult.SuccessResult,
+                result = result,
                 enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
                 isExpanded = isExpanded,
                 requestExpand = requestExpand,
@@ -192,7 +191,7 @@ class BottomSheetActivityImpl(
         } else {
             FailureSheetColumn(
                 onShareClick = {
-                    activity.startActivity(shareUri(result.uri))
+                    activity.startActivity(Intents.createShareUriIntent(result.uri))
                     activity.finish()
                 },
                 onCopyClick = {
@@ -263,7 +262,7 @@ class BottomSheetActivityImpl(
                     }
                 },
                 shareUri = {
-                    activity.startActivity(shareUri(result.uri))
+                    activity.startActivity(Intents.createShareUriIntent(result.uri))
                     activity.finish()
                 },
                 downloadUri = if (result is BottomSheetResult.BottomSheetSuccessResult) {
@@ -287,7 +286,7 @@ class BottomSheetActivityImpl(
 
                         activity.finish()
                         activity.startActivity(
-                            selfIntent(
+                            Intents.createSelfIntent(
                                 redirected.originalUri,
                                 bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                             )

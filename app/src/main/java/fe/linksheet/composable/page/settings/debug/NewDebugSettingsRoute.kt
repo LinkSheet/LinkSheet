@@ -2,7 +2,9 @@ package fe.linksheet.composable.page.settings.debug
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.List
+import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.outlined.RestartAlt
+import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,12 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dev.zwander.shared.ShizukuUtil
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.logViewerSettingsRoute
+import fe.linksheet.util.xiaomi.MIUIAuditor
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -32,8 +38,10 @@ fun NewDebugSettingsRoute(
 
     val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
 
+    val feedback = LocalHapticFeedbackInteraction.current
+
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
-        group(2) {
+        group(size = 2 + if (MIUIAuditor.isXiaomiDevice) 1 else 0) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
@@ -55,6 +63,21 @@ fun NewDebugSettingsRoute(
                     padding = padding,
                     onClick = viewModel::enqueueResetAppLinks
                 )
+            }
+
+
+            if (MIUIAuditor.isXiaomiDevice) {
+                item(key = "Audit MIUI environment") { padding, shape ->
+                    DefaultTwoLineIconClickableShapeListItem(
+                        headlineContent = text("Audit MIUI environment"),
+                        icon = Icons.Rounded.BugReport.iconPainter,
+                        shape = shape,
+                        padding = padding,
+                        onClick = {
+                            feedback.copy(viewModel.auditMiuiEnvironment(), FeedbackType.Confirm)
+                        }
+                    )
+                }
             }
         }
     }

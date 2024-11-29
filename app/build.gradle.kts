@@ -280,7 +280,8 @@ dependencies {
     implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.javaTime)
-    implementation(Grrfe.std.javaProcess)
+    implementation(Grrfe.std.process.core)
+    implementation(Grrfe.std.process.android)
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
 

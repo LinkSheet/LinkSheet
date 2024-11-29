@@ -57,6 +57,8 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["java-time"] = "java-time"
         this["result-core"] = "result:result-core"
         this["result-assert"] = "result:result-assert"
+        this["process-core"] = "process:process-core"
+        this["process-android"] = "process:process-android"
         this["uri"] = "uri"
     }
 

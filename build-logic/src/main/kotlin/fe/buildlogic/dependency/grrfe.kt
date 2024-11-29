@@ -29,7 +29,6 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
 
         val core = module("core")
         val javaTime = module("java-time")
-        val javaProcess = module("java-process")
 
         val result = Result
 
@@ -38,8 +37,13 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
             val assert = DependencyNotation(group = group, name = "result-assert")
         }
 
+        val process = Process
+
+        object Process : IsNotADependency {
+            val core = DependencyNotation(group = group, name = "process-core")
+            val android = DependencyNotation(group = group, name = "process-android")
+        }
+
         val uri = DependencyNotation(group = group, name = "uri")
     }
-
-    val processLauncher = DependencyNotation(group = group, name = "process-launcher")
 }

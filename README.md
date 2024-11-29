@@ -1,4 +1,3 @@
-<!-- ---------- Mascot ---------- -->
 <div align="">
   <h1>LinkSheet</h1>
  </div>
@@ -13,10 +12,11 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
 </div>
 
 
+> [!IMPORTANT]
+> LinkSheet is rapidly evolving and has not had a "stable" release in over a year - please use the [nightly builds](#nightly-builds) for the time being
+
 <!-- ---------- Badges ---------- -->
 <div align="">
-
-⚠️ For the time being, please use the [nightly builds](#nightly-builds)
 
 [![GitHub version](https://img.shields.io/github/v/release/LinkSheet/LinkSheet)](https://github.com/LinkSheet/LinkSheet/releases/latest)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
@@ -25,8 +25,6 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
 [![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/nightly/workflows/build-nightly/master/linksheet-nightly.zip)
 
 [![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml)
-[![Downloads](https://img.shields.io/github/downloads/LinkSheet/LinkSheet/total)](https://github.com/LinkSheet/LinkSheet/releases)
-[![Downloads](https://img.shields.io/github/downloads/LinkSheet/nightly/total?color=orange)](https://github.com/LinkSheet/nightly/releases)
 [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)
 
 </div>
@@ -99,7 +97,7 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 ## Translations
 
 * Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/)
-* Allow translations except for English are maintained by contributors
+* All translations except for English are maintained by contributors
 
 ## Donations
 

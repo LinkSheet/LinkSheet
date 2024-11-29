@@ -7,6 +7,7 @@ import fe.linksheet.activity.bottomsheet.BottomSheetImpl
 import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
 import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // Must not be moved or renamed since LinkSheetCompat hardcodes the package/name
@@ -25,7 +26,7 @@ class BottomSheetActivity : BaseComponentActivity() {
         }
 
         loopDetectorExperiment = if (viewModel.loopDetector()) LoopDetectorExperiment(this) else null
-        impl = ImprovedBottomSheet(loopDetectorExperiment, this, viewModel, intent, referrer)
+        impl = ImprovedBottomSheet(loopDetectorExperiment, this, viewModel, intent.toSafeIntent(), referrer)
         impl.onCreate(savedInstanceState)
     }
 

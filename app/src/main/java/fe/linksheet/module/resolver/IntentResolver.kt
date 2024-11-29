@@ -12,7 +12,7 @@ import fe.clearurlskt.ClearURLLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
-import fe.linksheet.experiment.improved.resolver.ReferrerHelper
+import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos

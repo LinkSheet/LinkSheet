@@ -17,6 +17,12 @@ import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
 import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
+import fe.linksheet.experiment.improved.resolver.util.AppSorter
+import fe.linksheet.experiment.improved.resolver.util.CustomTabHandler
+import fe.linksheet.experiment.improved.resolver.util.IntentHandler
+import fe.linksheet.experiment.improved.resolver.util.PackageDisplayInfoHelper
+import fe.linksheet.experiment.improved.resolver.util.PackageLauncherHelper
+import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.labelSorted
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.koin.injectLogger

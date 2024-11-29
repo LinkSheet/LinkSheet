@@ -1,11 +1,13 @@
-package fe.linksheet.experiment.improved.resolver.activity.bottomsheet
+package fe.linksheet.experiment.improved.resolver.composable
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.fix.ModalBottomSheet
 import androidx.compose.material3.fix.SheetState
+import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -18,7 +20,7 @@ fun ImprovedBottomDrawer(
     contentModifier: Modifier = Modifier,
     landscape: Boolean = false,
     isBlackTheme: Boolean = isSystemInDarkTheme(),
-    sheetState: SheetState = androidx.compose.material3.fix.rememberModalBottomSheetState(),
+    sheetState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     hide: () -> Unit,
     sheetContent: @Composable ColumnScope.() -> Unit = {},
@@ -26,7 +28,7 @@ fun ImprovedBottomDrawer(
     val coroutineScope = rememberCoroutineScope()
     val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
 
-    androidx.compose.material3.fix.ModalBottomSheet(
+    ModalBottomSheet(
 //        modifier = modifier,
         // TODO: Change to default? (surfaceContainerLow)
         containerColor = MaterialTheme.colorScheme.surface,

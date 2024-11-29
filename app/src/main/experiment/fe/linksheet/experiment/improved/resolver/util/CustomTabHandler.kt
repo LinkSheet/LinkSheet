@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.experiment.improved.resolver.util
 
 import androidx.browser.customtabs.CustomTabsIntent
 import mozilla.components.support.utils.SafeIntent

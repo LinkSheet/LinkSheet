@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.activity.bottomsheet
+package fe.linksheet.experiment.improved.resolver.composable
 
 import android.util.Log
 import androidx.compose.foundation.layout.*

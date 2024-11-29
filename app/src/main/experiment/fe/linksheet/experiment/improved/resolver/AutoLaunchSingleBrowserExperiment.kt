@@ -2,6 +2,7 @@ package fe.linksheet.experiment.improved.resolver
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
+import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
 
 object AutoLaunchSingleBrowserExperiment {
     fun handle(
@@ -22,7 +23,7 @@ object AutoLaunchSingleBrowserExperiment {
         }
 
         if (config is BrowserModeConfigHelper.Whitelisted) {
-            // If we have a single whitelisted browser, try to lookup it up, then return
+            // If we have a single whitelisted browser, try to look it up, then return
             return config.whitelistedPackages
                 ?.singleOrNull()?.let { browsers[it] }
                 ?.let { createResult(config, nonBrowsers, it) }

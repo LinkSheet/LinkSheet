@@ -5,7 +5,7 @@ import android.os.Bundle
 import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl
 import fe.linksheet.activity.bottomsheet.BottomSheetImpl
 import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
-import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
+import fe.linksheet.experiment.improved.resolver.composable.ImprovedBottomSheet
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,7 +29,6 @@ class BottomSheetActivity : BaseComponentActivity() {
         impl = ImprovedBottomSheet(loopDetectorExperiment, this, viewModel, intent.toSafeIntent(), referrer)
         impl.onCreate(savedInstanceState)
     }
-
 
     override fun onStop() {
         super.onStop()

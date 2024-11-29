@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.activity.bottomsheet
+package fe.linksheet.experiment.improved.resolver.composable
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -20,6 +20,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.fix.SheetValue
+import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -49,7 +50,7 @@ import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
-import fe.linksheet.experiment.improved.resolver.ReferrerHelper
+import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
@@ -143,7 +144,7 @@ class ImprovedBottomSheet(
 
         val coroutineScope = rememberCoroutineScope()
 
-        val sheetState = androidx.compose.material3.fix.rememberModalBottomSheetState {
+        val sheetState = rememberModalBottomSheetState {
 //            if(it != SheetValue.Hidden) {
 //                return@rememberModalBottomSheetState true
 //            }

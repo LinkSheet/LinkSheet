@@ -1,10 +1,12 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.experiment.improved.resolver.util
 
 import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
+import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit
+import kotlin.collections.remove
 
 class AppSorter(
     private val queryAndAggregateUsageStats: (beginTime: Long, endTime: Long) -> Map<String, UsageStats>,
@@ -25,7 +27,7 @@ class AppSorter(
         val comparator = listOfNotNull(
             createHistoryComparator(historyMap),
             createUsageStatComparator(),
-            DisplayActivityInfo.labelComparator
+            DisplayActivityInfo.Companion.labelComparator
         ).fold(emptyComparator) { current, next -> current.then(next) }
 
         val sorted = infos.values.sortedWith(comparator)

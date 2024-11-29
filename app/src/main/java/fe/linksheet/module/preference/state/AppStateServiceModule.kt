@@ -33,7 +33,7 @@ class AppStateService(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun init(now: Long) {
-        val requiredUpdates = updates.filter { !appStateRepository.hasStoredValue(it.key) }
+        val requiredUpdates = updates.filterKeys { !appStateRepository.hasStoredValue(it) }
         logger.info("Updates required: ${requiredUpdates.size}")
 
         for ((preference, update) in requiredUpdates) {

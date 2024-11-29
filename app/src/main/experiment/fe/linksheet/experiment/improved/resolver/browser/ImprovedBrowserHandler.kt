@@ -2,9 +2,10 @@ package fe.linksheet.experiment.improved.resolver.browser
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.experiment.improved.resolver.AutoLaunchSingleBrowserExperiment
-import fe.linksheet.experiment.improved.resolver.FilteredBrowserList
+import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
 import fe.linksheet.extension.android.componentName
-
+import kotlin.collections.get
+import kotlin.collections.iterator
 
 class ImprovedBrowserHandler(
 ) {

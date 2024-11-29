@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.activity.onboarding.OnboardingActivity
-import fe.linksheet.experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheet
+import fe.linksheet.experiment.improved.resolver.composable.ImprovedBottomSheet
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.debug.activity.*
 import kotlin.reflect.KClass

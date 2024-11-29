@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.experiment.improved.resolver.browser
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.module.resolver.browser.BrowserMode

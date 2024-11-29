@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.experiment.improved.resolver.util
 
 import android.content.Intent
 import android.net.Uri

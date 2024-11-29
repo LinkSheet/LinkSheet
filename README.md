@@ -22,7 +22,7 @@ LinkSheet restores the app chooser for tapped links, which was removed in Androi
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)
 
 [![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=nightly%20github&color=orange)](https://github.com/LinkSheet/nightly/releases/latest)
-[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/nightly/workflows/build-nightly/master/linksheet-nightly.zip)
+[![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
 
 [![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml)
 [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)

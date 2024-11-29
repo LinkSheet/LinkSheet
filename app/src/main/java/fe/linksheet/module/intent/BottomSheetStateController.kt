@@ -11,6 +11,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 interface BottomSheetStateController {
+    val onNewIntent: (Intent) -> Unit
+
     fun hideAndFinish()
 
     fun hide(onCompletion: CompletionHandler? = null)
@@ -28,6 +30,7 @@ class DefaultBottomSheetStateController(
     val activity: Activity,
     val coroutineScope: CoroutineScope,
     val drawerState: SheetState,
+    override val onNewIntent: (Intent) -> Unit
 ) : BottomSheetStateController {
 
     override fun hideAndFinish() {

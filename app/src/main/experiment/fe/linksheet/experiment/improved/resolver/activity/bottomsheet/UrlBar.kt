@@ -56,7 +56,7 @@ fun UrlBarWrapper(
     showToast: (Int) -> Unit,
     copyUrl: (String, String) -> Unit,
     startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
-    launchApp: (DisplayActivityInfo, Intent, ClickModifier) -> Unit
+    launchApp: (DisplayActivityInfo, Intent, ClickModifier) -> Unit,
 ) {
     val uriString = result.uri.toString()
     val clipboardLabel = stringResource(id = R.string.generic__text_url)
@@ -93,7 +93,6 @@ fun UrlBarWrapper(
         },
         downloadUri = { uri, downloadResult ->
             startDownload(uri, downloadResult)
-//            bottomSheetViewModel.startDownload(activity.resources, uri, downloadResult)
 
             if (enableDownloadStartedToast) {
                 showToast(R.string.download_started)
@@ -104,13 +103,13 @@ fun UrlBarWrapper(
             }
         },
         ignoreLibRedirect = { redirectedResult ->
-            controller.hideAndFinish()
-            controller.startActivity(
+            controller.onNewIntent(
                 Intents.createSelfIntent(
                     redirectedResult.originalUri,
                     bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                 )
             )
+
         },
         onDoubleClick = {
             if (result.app != null) {

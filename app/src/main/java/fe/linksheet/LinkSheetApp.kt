@@ -29,6 +29,7 @@ import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.okhttp.okHttpModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
@@ -133,7 +134,8 @@ class LinkSheetApp : Application() {
                 VersionTrackerModule,
                 pasteServiceModule,
                 AndroidPackageInfoModule,
-                ProfileSwitcherModule
+                ProfileSwitcherModule,
+                AppStateServiceModule
             )
         }
 

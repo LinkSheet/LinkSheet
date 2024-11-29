@@ -52,6 +52,7 @@ import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
 import fe.linksheet.experiment.improved.resolver.ReferrerHelper
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
+import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.intent.BottomSheetStateController
 import fe.linksheet.module.intent.DefaultBottomSheetStateController
@@ -71,10 +72,12 @@ class ImprovedBottomSheet(
     private val loopDetectorExperiment: LoopDetectorExperiment?,
     val activity: BottomSheetActivity,
     val viewModel: BottomSheetViewModel,
-    intent: Intent,
+    val intent: Intent,
     val referrer: Uri?,
 ) : BottomSheetImpl(), KoinComponent {
+    private val logger by injectLogger<ImprovedBottomSheet>()
     private val resolver by inject<ImprovedIntentResolver>()
+
 
     private fun finish() {
         activity.finish()
@@ -128,21 +131,17 @@ class ImprovedBottomSheet(
     }
 
     private val intentFlow = MutableStateFlow(intent)
+    private val resolveResultFlow = MutableStateFlow<IntentResolveResult>(IntentResolveResult.Pending)
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Wrapper() {
         var sheetOpen by rememberSaveable { mutableStateOf(true) }
-        var status by remember { mutableStateOf<IntentResolveResult>(IntentResolveResult.Pending) }
+        val status by resolveResultFlow.collectAsStateWithLifecycle()
         val currentIntent by intentFlow.collectAsStateWithLifecycle()
 
         val safeIntent = remember(currentIntent) {
             currentIntent.toSafeIntent()
-        }
-
-        // TODO: Use intent and referrer as keys?
-        LaunchedEffect(key1 = resolver, key2 = safeIntent) {
-            status = resolver.resolve(safeIntent, referrer)
         }
 
         val coroutineScope = rememberCoroutineScope()
@@ -154,9 +153,19 @@ class ImprovedBottomSheet(
             true
         }
 
+        LaunchedEffect(key1 = resolver, key2 = safeIntent) {
+//            logger.info("intent=$intent, newIntent=${safeIntent.unsafe}, status=$status")
+//            if (status !is IntentResolveResult.Pending) {
+//                sheetState.hide()
+//            }
+
+            val result = resolver.resolve(safeIntent, referrer)
+            resolveResultFlow.value = result
+        }
+
 
         val controller = remember {
-            DefaultBottomSheetStateController(activity, coroutineScope, sheetState)
+            DefaultBottomSheetStateController(activity, coroutineScope, sheetState, ::onNewIntent)
         }
 
         val configuration = LocalConfiguration.current
@@ -552,8 +561,9 @@ class ImprovedBottomSheet(
     }
 
     override fun onNewIntent(intent: Intent) {
-        if (loopDetectorExperiment != null) {
-            intentFlow.value = intent
-        }
+//        if (loopDetectorExperiment != null) {
+        intentFlow.value = intent
+        resolveResultFlow.value = IntentResolveResult.Pending
+//        }
     }
 }

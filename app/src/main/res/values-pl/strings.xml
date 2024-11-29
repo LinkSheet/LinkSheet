@@ -157,7 +157,7 @@
     <string name="amp2html_local_cache_explainer">Buforuj pobrane wersje stron internetowych bez AMP lokalnie</string>
     <string name="amp2html_external_service">Uzyskaj wersję stron bez AMP</string>
     <string name="amp2html_external_service_explainer">Preferuj bezpośrednie strony zamiast wersji AMP przy użyciu API z supabase.com (<annotation url-id="supabase-privacy">Polityka prywatności</annotation>)</string>
-    <string name="follow_only_known_trackers_explainer">Próbuj śledzić przekierowania tylko wtedy, gdy host jest znany jako tracker lub przekierowanie. Jeśli opcja „Śledź przekierowania przez usługę zewnętrzną” jest włączona, ta opcja będzie zawsze aktywna.</string>
+    <string name="follow_only_known_trackers_explainer">Próbuj śledzić przekierowania tylko wtedy, gdy host jest znany jako tracker lub przekierowanie. Jeśli opcja „Śledź przekierowania przez usługę zewnętrzną” jest włączona, ta opcja będzie zawsze aktywna</string>
     <string name="resolved_via">%s rozwiązano przez %s</string>
     <string name="resolve_failed">%s nie powiodło się: %s</string>
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego. Obsługiwane przeglądarki: %s</string>
@@ -511,7 +511,19 @@
     <string name="generic__text_edit">Edytuj</string>
     <string name="generic__text_done">Gotowe</string>
     <string name="home__clipboard_card_source">Ze schowka</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Wyświetla przycisk w dolnym panelu, który otwiera kliknięty link w zwykłym lub roboczym profilu</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Wyświetla przycisk w dolnym panelu, który otwiera link w innym profilu</string>
     <string name="settings_profile_switcher__title_profile_switcher">Przełączanie profili</string>
     <string name="settings_profile_switcher__divider_configuration">Konfiguracja</string>
+    <string name="settings_profile_switcher__divider_current_profile">Aktualny profil</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Inne profile</string>
+    <string name="generic__label_personal_profile">Osobisty profil</string>
+    <string name="generic__label_unknown_profile">Nieznany profil</string>
+    <string name="settings_profile_switcher__text_not_installed">Nie można połączyć z tym profilem</string>
+    <string name="settings_profile_switcher__text_current_profile">Ten profil jest aktualnie używany</string>
+    <string name="settings_profile_switcher__text_other_profile">Inny profil</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Włącz połączenie między profilami</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Dotknij, aby połączyć LinkSheet z jego odpowiednikiem w drugim profilu</string>
+    <string name="generic__label_work_profile">Profil pracy</string>
+    <string name="settings__hint_search">Szukaj</string>
+    <string name="bottom_sheet__event_app_refusal">Docelowa aplikacja odmówiła obsługi linku!</string>
 </resources>

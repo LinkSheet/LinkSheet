@@ -6,7 +6,7 @@
     <string name="default_apps">優先アプリ</string>
     <string name="set_as_browser">ブラウザとして設定</string>
     <string name="set_as_browser_explainer">ここをタップしてLinkSheetをデフォルトのブラウザにします</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b>（暗号通貨で寄付した場合は <b>4€</b>）以上の寄付により、<b>LinkSheet Pro</b> にアクセス出来る様になります。現在は非表示のみとなっていますが、将来的には<b>プロ専用の機能</b>が追加される予定です。 アプリのメイン画面に寄付バナーが表示されます！</string>
+    <string name="linksheet_donation_explainer_2"><b>5 ユーロ</b>以上の寄付をすると、<b>LinkSheet Pro</b> にアクセスできます。これには、外部からのリダイレクトの追跡、外部からの非 AMP ページの取得など、<b>Pro 限定の機能</b>が含まれます!</string>
     <string name="built_by_error">このビルドは 1fexd によっても Github workflowによっても署名されていません。</string>
     <string name="always">常に</string>
     <string name="open_with_app">%sで開く</string>
@@ -29,7 +29,7 @@
     <string name="always_ask_explainer">常に全てのブラウザをリスト</string>
     <string name="no_such_app_found">そのようなアプリは見つかりませんでした！</string>
     <string name="send_to">共有先</string>
-    <string name="default_apps_subtitle">優先アプリは、特定のホストを「常に」開くように設定したアプリです</string>
+    <string name="default_apps_subtitle">優先アプリは、特定のウェブサイトを「常に」開くように設定したアプリです</string>
     <string name="always_show_package_name">常にパッケージ名を表示</string>
     <string name="always_show_package_name_explainer">アプリ名だけではなく、常にパッケージ名を表示します。 これはアプリ全体に当てはまります。</string>
     <string name="remove_all">全て削除</string>
@@ -49,7 +49,7 @@
     <string name="save">保存</string>
     <string name="about">詳細</string>
     <string name="credits">クレジット</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with">次のアプリで開く</string>
     <string name="github">Github</string>
     <string name="paste">貼り付け</string>
     <string name="error">エラー</string>
@@ -78,7 +78,7 @@
     <string name="request_private_browsing">プライベート</string>
     <string name="log">ログ</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="advanced">高度</string>
+    <string name="advanced">開発者向けオプション</string>
     <string name="mastodon_redirect">Mastodonにリダイレクト</string>
     <string name="general">その他</string>
     <string name="success">成功</string>
@@ -87,7 +87,7 @@
     <string name="no">いいえ</string>
     <string name="misc_settings">その他</string>
     <string name="privacy">プライバシー</string>
-    <string name="discord">Discord</string>
+    <string name="discord">ディスコード</string>
     <string name="dismiss">却下</string>
     <string name="join">参加</string>
     <string name="donate">寄付</string>
@@ -119,7 +119,7 @@
     <string name="use_clear_urls_explainer">実験的なものを使用する<annotation url-id="clearurls-github">ClearURLs</annotation> 統合（URL から追跡パラメータをクリア）</string>
     <string name="follow_redirects_external_service">外部サービス経由でリダイレクトを追跡</string>
     <string name="follow_only_known_trackers">既知のトラッカーだけを許可する</string>
-    <string name="follow_only_known_trackers_explainer">ホストがトラッカー/リダイレクトであることがわかっている場合にのみ、リダイレクトを追跡しようとします。 「外部サービス経由のリダイレクトに従う」が有効になっている場合、これは常に有効になります。</string>
+    <string name="follow_only_known_trackers_explainer">特定のウェブサイトがトラッカーやリダイレクトであることが判明している場合にのみリダイレクトを試みます。「外部サービスを介してリダイレクトをフォローする」が有効になっている場合、これは常に有効になります</string>
     <string name="theme_explainer">Material You、ダークテーマ、ピュアブラックモード</string>
     <string name="fastfoward_rules">FastForwardルールを使用する</string>
     <string name="follow_redirects_local_cache">ローカルリダイレクトキャッシュを有効</string>
@@ -127,15 +127,15 @@
     <string name="app_browsers_subtitle">優先アプリとブラウザの設定</string>
     <string name="donate_subtitle"><b>LinkSheet Pro</b>にアップグレード</string>
     <string name="use_clear_urls">ClearURLを使用</string>
-    <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url-id="privacy-follow-redirects">プライバシーに悪影響があるかもしれません</annotation>。</string>
-    <string name="preferred_apps_settings">サポートするホストに優先アプリを設定</string>
+    <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的にたどります。 これは、<annotation url-id="privacy-follow-redirects">プライバシーに悪影響があるかもしれません</annotation></string>
+    <string name="preferred_apps_settings">サポートされているウェブリンクの優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">supabase.comにデプロイされたAPIを使用してリダイレクトを追跡します（<annotation url-id="supabase-privacy">プライバシーポリシー</annotation>）</string>
     <string name="switch_profile">プロファイル切り替えを有効にする</string>
     <string name="follow_redirects_short">リダイレクト</string>
     <string name="unknown_host">%s はブロックされているか存在しません</string>
-    <string name="fastfoward_rules_explainer">実験的な <annotation url-id="fastforward-github">FastForward</annotation> ルールの統合を使用する (リンクからリダイレクトを抽出することで、一部のホストのリダイレクトをバイパスする)。</string>
+    <string name="fastfoward_rules_explainer">実験的な <annotation url-id="fastforward-github">FastForward</annotation> ルールの統合を使用する (リンクからリダイレクトを抽出することで、一部のウェブサイトのリダイレクトをバイパスする)</string>
     <string name="resolved_via">%s は %s 経由で解決されました</string>
-    <string name="dont_show_filtered_item_explainer">クリックしたホストの最後に使用したアプリを提案する上部の項目を表示しない</string>
+    <string name="dont_show_filtered_item_explainer">最後に使用したアプリを提案する上部の項目を表示しない</string>
     <string name="downloader_url_mime_type_explainer">URLの末尾にファイル拡張子（例：\".jpg\"）があるかどうかをチェックする。拡張子がある場合は、ダウンロードしたファイルにこのタイプが使われる。</string>
     <string name="disable_in_selected">強制無効化…</string>
     <string name="no_apps_found">アプリが見つかりません。</string>
@@ -144,7 +144,7 @@
     <string name="url_copied_toast_explainer">ユーザーがURLをコピーしたときにトーストを表示する</string>
     <string name="enable_linksheet_compat">実験的なLinkSheet Compatメニューを有効にする</string>
     <string name="onboarding_1_subtitle">タップされたリンクを処理するには、LinkSheet をデフォルトのブラウザとして設定する必要があります</string>
-    <string name="onboarding_3_card_explainer">Google は Android 12 で検証済みのアプリリンクを導入しました。これにより、アプリはドメインの所有権を暗号的に証明できます。LinkSheet がタップされたリンクを傍受するには、この動作を手動で無効にする必要があります。</string>
+    <string name="onboarding_3_card_explainer">Google は Android 12 で「確認済みのリンク」設定を導入しました。これにより、アプリはドメインの所有権を暗号的に証明できます。LinkSheet がタップされたリンクを傍受するには、この動作を手動で無効にする必要があります。</string>
     <string name="onboarding_3_card_title">リンクハンドラー</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="enable_linksheet_compat_explainer">このメニューはサブメニュー「アプリ」にあり、インストールすると特定のネイティブ アプリへのリクエストを傍受できるようになります。</string>
@@ -159,9 +159,9 @@
     <string name="resolve_activity_failure">アクティビティを解決できませんでした！</string>
     <string name="customization">カスタマイズ</string>
     <string name="settings__title_filter_apps">アプリをフィルター</string>
-    <string name="reset_app_link_verification_status_subtitle">ここをタップしてすべてのアプリのアプリリンク検証ステータスをリセットし、Android が再検証するまで数分間お待ちください。確認は届きません。Shizuku が必要です。</string>
+    <string name="reset_app_link_verification_status_subtitle">ここをタップしてすべてのアプリのアプリリンク検証ステータスをリセットし、Android が再確認するまで数分間お待ちください。確認は届きません。Shizuku が必要です。</string>
     <string name="reset_app_link_verification_status_toast">再確認を要求</string>
-    <string name="switch_profile_explainer">タップしたリンクを（仕事用）プロファイルで開くためのボタンを下部のシートに表示します。両方のプロファイルに LinkSheet をインストールし、設定 -&gt; 特別なアプリアクセス -&gt; 接続から手動でリンクする必要があります</string>
+    <string name="switch_profile_explainer">下のシートに、タップしたリンクを（仕事用の）プロファイルで開くためのボタンを表示します。 LinkSheetが両方のプロファイルにインストールされ、設定 -&gt; 特別なアプリへのアクセス -&gt; 仕事とプライベートのアプリの接続を介して手動でリンクされている必要があります</string>
     <string name="settings_app_config_rules__text_custom_rules">カスタムルール</string>
     <string name="settings_app_config_rules__subtitle_default_rule">このルールは他のルールが一致しない場合に使用されます</string>
     <string name="settings_edit_rule__title_edit_rule">ルールを編集しています</string>
@@ -177,7 +177,7 @@
     <string name="configure_explainer">LinkSheetCompatを設定するにはここをタップしてください</string>
     <string name="onboarding_2_install_shizuku">Shizukuをインストール</string>
     <string name="at_least_one_known_browser_installed">少なくとも 1 つのブラウザがインストールされている</string>
-    <string name="enable_amp2html_explainer">AMP ページを通常の Web バージョンにリダイレクトします。これは、<annotation url-id="privacy-amp2html">プライバシー関連の影響</annotation>がある可能性があります。</string>
+    <string name="enable_amp2html_explainer">AMP ページを通常の Web バージョンにリダイレクトします。これは、<annotation url-id="privacy-amp2html">プライバシー関連の影響</annotation>がある可能性があります</string>
     <string name="onboarding_5_card_title">セットアップ</string>
     <string name="instance_not_available_anymore">インスタンスはもう利用できません！</string>
     <string name="experiments_explainer_3">実験は現在開発中であり、正しく動作しないか、まったく動作しない可能性があります。Github でバグを報告しないでください。フィードバックを提供したい場合は、Discord で行ってください。</string>
@@ -224,8 +224,8 @@
     <string name="onboarding_setup">LinkSheetを設定する</string>
     <string name="telemetry_level_standard">標準</string>
     <string name="telemetry_identity_basic">基本</string>
-    <string name="verified_link_handlers">確認済みのリンクハンドラー</string>
-    <string name="verified_link_handlers_subtitle">アプリドメイン検証状態を制御する</string>
+    <string name="verified_link_handlers">デフォルトで開く</string>
+    <string name="verified_link_handlers_subtitle">各アプリの対応リンクの設定</string>
     <string name="shizuku_integration">Shizuku統合</string>
     <string name="shizuku_not_running_explainer">Shizukuが起動していません。 ここをタップしてShizukuを開き、指示に従って起動してください。</string>
     <string name="enable_ignore_libredirect_button_explainer">LibRedirectを経由してURLがリダイレクトされた場合、元のURLを開くボタンをボトムシートに表示する</string>
@@ -237,14 +237,14 @@
     <string name="open_link_with_subtitle_2">LinkSheetは当初OpenLinkWithをベースにしていた</string>
     <string name="ignore_libredirect">LibRedirectを無視する</string>
     <string name="onboarding_2_shizuku_enabled">次</string>
-    <string name="reset_app_link_verification_status">アプリリンクの検証ステータスをリセット</string>
+    <string name="reset_app_link_verification_status">「確認済みのリンク」設定をリセット</string>
     <string name="settings_app_config__button_add_item">アイテムを追加</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">推奨</string>
-    <string name="enable_libredirect_explainer">実験的な<annotation url-id="libredirect-github">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします。</string>
-    <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url-id="privacy-downloader">プライバシーに関連した意味を持つかもしれません</annotation>。</string>
+    <string name="enable_libredirect_explainer">実験的な<annotation url-id="libredirect-github">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします</string>
+    <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url-id="privacy-downloader">プライバシーに関連した意味を持つかもしれません</annotation></string>
     <string name="random_instance">ランダムインスタンス</string>
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にする</string>
-    <string name="debug_explainer">アプリログ、検証済みハンドラーリセット</string>
+    <string name="debug_explainer">アプリログ、確認済みのリンクをリセット</string>
     <string name="no_libredirect_services">LibRedirectのサービスは見つかりませんでした！</string>
     <string name="download_started">ダウンロードが開始されました</string>
     <string name="request_timeout">リクエストタイムアウト</string>
@@ -280,7 +280,7 @@
     <string name="onboarding_2_card_explainer">Shizuku を使用すると、LinkSheet は、各アプリごとに個別に手動で無効にするのではなく (次のステップ)、すべてのアプリのデフォルトのリンク処理動作を一度に無効にすることができます。</string>
     <string name="onboarding_5_title">準備完了！</string>
     <string name="resolve_embeds">埋め込みを解決する</string>
-    <string name="resolve_embeds_explainer">fxtwitter.comのような埋め込みミラーを実際のホストに解決する</string>
+    <string name="resolve_embeds_explainer">fxtwitter.comなどのミラーサイトを使用しているリンクを、本来のウェブサイトに変換する</string>
     <string name="hide_bottom_sheet_choice_buttons">選択ボタンを非表示にする</string>
     <string name="urlbar_settings">URLバー</string>
     <string name="theme_enable_amoled">ピュアブラック</string>
@@ -298,9 +298,9 @@
     <string name="something_went_wrong">問題が発生しました。もう一度お試しください。</string>
     <string name="in_app_browser_subtitle">アプリ内ブラウザの設定を上書きする</string>
     <string name="build_info">ビルド情報</string>
-    <string name="settings_shortcuts__title_default_browser">­デフォルトのブラウザ</string>
-    <string name="settings_shortcuts__title_link_handlers">リンクハンドラー</string>
-    <string name="settings_shortcuts__title_connected_apps">接続されたアプリ</string>
+    <string name="settings_shortcuts__title_default_browser">デフォルトのブラウザ</string>
+    <string name="settings_shortcuts__title_link_handlers">デフォルトで開く</string>
+    <string name="settings_shortcuts__title_connected_apps">シングルプロファイルモード</string>
     <string name="settings_shortcuts__subtitle_default_browser">デフォルトのブラウザ設定ページを開く</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">有効</string>
     <string name="settings_notifications__divider_toasts">トースト</string>
@@ -309,7 +309,7 @@
     </plurals>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">対応リンクを開くことは許可されていません</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="other">%d ホストが無効です</item>
+        <item quantity="other">%d ウェブリンクが無効です</item>
     </plurals>
     <string name="settings_about__divider_external_versions">外部バージョン</string>
     <string name="settings_credits__app_credit_reason_seal">デザインのインスピレーション</string>
@@ -336,7 +336,7 @@
     <string name="settings_app_config__title_browsers">ブラウザ</string>
     <string name="settings_app_config__description_browsers">インストールされているウェブブラウザ</string>
     <string name="settings_app_config__title_native_apps">アプリ</string>
-    <string name="settings_app_config__description_native_apps">このホストとのリンクを処理できるアプリ</string>
+    <string name="settings_app_config__description_native_apps">このウェブサイトのリンクを処理できるアプリ</string>
     <string name="settings_app_config__title_preferred_browser">優先ブラウザ</string>
     <string name="settings_app_config__description_preferred_browser">ユーザーが選択した優先ブラウザ</string>
     <string name="settings_app_config_rules__title_rules">ルール</string>
@@ -369,7 +369,7 @@
     <string name="no_action">何もしない</string>
     <string name="tap_customization_long_tap">長押しアクション</string>
     <string name="start_setup">続行する</string>
-    <string name="shizuku">­Shizuku統合</string>
+    <string name="shizuku">Shizuku統合</string>
     <string name="disable_all">すべてを無効にする</string>
     <string name="compat_installed">LinkSheetCompatはすでにインストールされています</string>
     <string name="github_pipeline_build">CIによって構築され署名された</string>
@@ -389,7 +389,7 @@
     <string name="always_disable_explainer">すべてのアプリでアプリ内ブラウザを無効にする</string>
     <string name="follow_redirects_local_cache_explainer">リダイレクト結果をローカルにキャッシュする</string>
     <string name="enable_libredirect">LibRedirectを有効にする</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="lib_redirect_service">LibRedirect %s</string>
     <string name="linksheet_download">LinkSheet ダウンロード</string>
     <string name="enable_downloader">ダウンローダーを有効にする</string>
     <string name="downloader_url_mime_type">URLからMIMEタイプを使用する</string>
@@ -451,13 +451,13 @@
     <string name="telemetry_identity_full">フル</string>
     <string name="amp2html_short">Amp2Html</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="other">%d 検証済みホスト</item>
+        <item quantity="other">%d 確認済みウェブリンク</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
         <item quantity="other">%d が有効</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="other">%d 有効なホスト</item>
+        <item quantity="other">%d 有効なウェブリンク</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none">
         <item quantity="other">%d が無効</item>
@@ -486,4 +486,23 @@
     <string name="settings_new_rule__title_new_rule">新しいルール</string>
     <string name="settings_app_config_rules__title_default_rule">デフォルトのルール</string>
     <string name="launch_onboarding">オンボーディングの開始</string>
+    <string name="generic__text_edit">編集</string>
+    <string name="generic__label_personal_profile">個人用プロフィール</string>
+    <string name="settings_profile_switcher__title_profile_switcher">プロフィール切り替え</string>
+    <string name="settings_profile_switcher__divider_other_profiles">その他のプロフィール</string>
+    <string name="generic__label_unknown_profile">プロフィール不明</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">別のプロファイルでURLを開くためのボタンをボトムシートに表示します</string>
+    <string name="generic__text_done">確定</string>
+    <string name="home__clipboard_card_source">クリップボードより</string>
+    <string name="generic__text_url">URL</string>
+    <string name="settings_profile_switcher__divider_configuration">構成</string>
+    <string name="bottom_sheet__event_app_refusal">対象アプリがリンクの処理を拒否しました！</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">クロスプロファイル接続を有効にする</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">タップして、LinkSheetをセカンダリ・プロファイルの対応するものに接続します</string>
+    <string name="settings_profile_switcher__divider_current_profile">現在のプロフィール</string>
+    <string name="settings_profile_switcher__text_other_profile">その他のプロフィール</string>
+    <string name="generic__label_work_profile">仕事用プロファイル</string>
+    <string name="settings__hint_search">検索</string>
+    <string name="settings_profile_switcher__text_not_installed">このプロファイルに接続できません</string>
+    <string name="settings_profile_switcher__text_current_profile">このプロファイルで現在実行中</string>
 </resources>

@@ -63,6 +63,7 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import mozilla.components.support.utils.SafeIntent
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -72,7 +73,7 @@ class ImprovedBottomSheet(
     private val loopDetectorExperiment: LoopDetectorExperiment?,
     val activity: BottomSheetActivity,
     val viewModel: BottomSheetViewModel,
-    val intent: Intent,
+    val initialIntent: SafeIntent,
     val referrer: Uri?,
 ) : BottomSheetImpl(), KoinComponent {
     private val logger by injectLogger<ImprovedBottomSheet>()
@@ -130,7 +131,7 @@ class ImprovedBottomSheet(
         }
     }
 
-    private val intentFlow = MutableStateFlow(intent)
+    private val intentFlow = MutableStateFlow(initialIntent)
     private val resolveResultFlow = MutableStateFlow<IntentResolveResult>(IntentResolveResult.Pending)
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -139,10 +140,6 @@ class ImprovedBottomSheet(
         var sheetOpen by rememberSaveable { mutableStateOf(true) }
         val status by resolveResultFlow.collectAsStateWithLifecycle()
         val currentIntent by intentFlow.collectAsStateWithLifecycle()
-
-        val safeIntent = remember(currentIntent) {
-            currentIntent.toSafeIntent()
-        }
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -153,26 +150,14 @@ class ImprovedBottomSheet(
             true
         }
 
-        LaunchedEffect(key1 = resolver, key2 = safeIntent) {
+        LaunchedEffect(key1 = resolver, key2 = currentIntent) {
 //            logger.info("intent=$intent, newIntent=${safeIntent.unsafe}, status=$status")
 //            if (status !is IntentResolveResult.Pending) {
 //                sheetState.hide()
 //            }
 
-            val result = resolver.resolve(safeIntent, referrer)
-            resolveResultFlow.value = result
-        }
-
-
-        val controller = remember {
-            DefaultBottomSheetStateController(activity, coroutineScope, sheetState, ::onNewIntent)
-        }
-
-        val configuration = LocalConfiguration.current
-        val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
-        LaunchedEffect(key1 = status) {
-            val completed = status as? IntentResolveResult.Default
+            val resolveResult = resolver.resolve(currentIntent, referrer)
+            val completed = resolveResult as? IntentResolveResult.Default
             if (completed?.hasAutoLaunchApp == true && completed.app != null) {
                 val intent = viewModel.makeOpenAppIntent(
                     completed.app,
@@ -185,12 +170,24 @@ class ImprovedBottomSheet(
                 return@LaunchedEffect handleLaunch(intent)
             }
 
+            resolveResultFlow.value = resolveResult
+        }
+
+        LaunchedEffect(key1 = status) {
+            // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
             if (viewModel.improvedBottomSheetExpandFully()) {
                 sheetState.expand()
             } else {
                 sheetState.partialExpand()
             }
         }
+
+        val controller = remember {
+            DefaultBottomSheetStateController(activity, coroutineScope, sheetState, ::onNewIntent)
+        }
+
+        val configuration = LocalConfiguration.current
+        val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 
 //        sheetState
@@ -242,7 +239,7 @@ class ImprovedBottomSheet(
 
                     is IntentResolveResult.IntentParseFailed, is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
                         ExperimentalFailureSheetColumn(
-                            data = safeIntent.dataString,
+                            data = currentIntent.dataString,
                             onShareClick = {},
                             onCopyClick = {}
                         )
@@ -562,7 +559,7 @@ class ImprovedBottomSheet(
 
     override fun onNewIntent(intent: Intent) {
 //        if (loopDetectorExperiment != null) {
-        intentFlow.value = intent
+        intentFlow.value = intent.toSafeIntent()
         resolveResultFlow.value = IntentResolveResult.Pending
 //        }
     }

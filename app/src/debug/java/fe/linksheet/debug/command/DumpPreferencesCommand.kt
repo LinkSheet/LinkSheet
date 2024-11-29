@@ -9,6 +9,8 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
+import fe.linksheet.module.preference.state.AppStatePreferences
+import fe.linksheet.module.preference.state.AppStateRepository
 import org.koin.core.component.get
 
 object DumpPreferencesCommand : DebugCommand<DumpPreferencesCommand>(
@@ -17,7 +19,8 @@ object DumpPreferencesCommand : DebugCommand<DumpPreferencesCommand>(
     private val allPrefs = listOf(
         Triple("Preferences", AppPreferences.all, get<AppPreferenceRepository>()),
         Triple("Experiments", Experiments.all, get<ExperimentRepository>()),
-        Triple("Feature flags", FeatureFlags.all, get<FeatureFlagRepository>())
+        Triple("Feature flags", FeatureFlags.all, get<FeatureFlagRepository>()),
+        Triple("App state", AppStatePreferences.all, get<AppStateRepository>()),
     )
 
     override fun handle(context: Context, intent: Intent) {

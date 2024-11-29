@@ -165,18 +165,6 @@ fun UrlBar(
                 )
             }
 
-            if (switchProfile != null && profiles != null) {
-                for (target in profiles) {
-                    item {
-                        UrlActionButton(
-                            text = text(target.switchLabel),
-                            icon = bitmap(target.bitmap),
-                            onClick = { switchProfile(target, uri) }
-                        )
-                    }
-                }
-            }
-
             if (downloadable.isDownloadable()) {
                 item {
                     UrlActionButton(
@@ -194,6 +182,18 @@ fun UrlBar(
                         icon = Icons.Filled.FastForward.iconPainter,
                         onClick = { ignoreLibRedirect!!(libRedirected) }
                     )
+                }
+            }
+
+            if (switchProfile != null && profiles != null) {
+                for (target in profiles) {
+                    item {
+                        UrlActionButton(
+                            text = text(target.switchLabel),
+                            icon = bitmap(target.bitmap),
+                            onClick = { switchProfile(target, uri) }
+                        )
+                    }
                 }
             }
         }

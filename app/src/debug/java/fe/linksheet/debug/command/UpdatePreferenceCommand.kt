@@ -20,6 +20,8 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
+import fe.linksheet.module.preference.state.AppStatePreferences
+import fe.linksheet.module.preference.state.AppStateRepository
 import org.koin.core.component.get
 import org.koin.core.component.inject
 
@@ -75,7 +77,8 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
         val repositories = setOf(
             Repository(AppPreferences, get<AppPreferenceRepository>()),
             Repository(FeatureFlags, get<FeatureFlagRepository>()),
-            Repository(Experiments, get<ExperimentRepository>())
+            Repository(Experiments, get<ExperimentRepository>()),
+            Repository(AppStatePreferences, get<AppStateRepository>())
         )
 
         val merged = mutableMapOf<String, Repository>()

@@ -20,11 +20,9 @@ internal class DebugLogAnalyticsClient(
     }
 
     override fun setup(context: Context) {
-        logger.info("Client set up, using a NoOp-implementation, no events will be sent")
     }
 
     override fun sendEvents(events: List<AnalyticsEvent>): Boolean {
-        logger.info("Tracking events ${events.fastJoinToString(separator = ",") { it.name }}")
         return true
     }
 }

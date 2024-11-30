@@ -17,12 +17,13 @@ fun TextEditorPageWrapper(
 
     TextEditorPage(
         initialText = initialText,
-        onDoneClicked = { text ->
+        onDone = { text ->
             if (text != initialText) {
                 viewModel.tryUpdateClipboard(label, text)
             }
 
             popBackStack()
         },
+        onDismiss = popBackStack
     )
 }

@@ -495,7 +495,7 @@
     </plurals>
     <string name="home__clipboard_card_source">Panodan</string>
     <string name="generic__text_edit">Düzenle</string>
-    <string name="generic__text_done">Tamam</string>
+    <string name="generic__button_text_done">Tamam</string>
     <string name="generic__text_url">Url</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı başka bir profilde açmak için alt sayfada bir düğme gösterir</string>
     <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>

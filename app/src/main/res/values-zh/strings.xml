@@ -475,7 +475,7 @@
     <string name="telemetry_configure_title">分析</string>
     <string name="telemetry_configure_type">分析类型</string>
     <string name="settings_bottom_sheet__text_profile_switcher">在底栏显示按钮，将点击的链接在（工作）资料中打开</string>
-    <string name="generic__text_done">完成</string>
+    <string name="generic__button_text_done">完成</string>
     <string name="generic__text_edit">编辑</string>
     <string name="github_workflow_run_id"><b>工作流 ID：</b> <font face="monospace">%s</font></string>
     <string name="settings_profile_switcher__divider_configuration">配置</string>

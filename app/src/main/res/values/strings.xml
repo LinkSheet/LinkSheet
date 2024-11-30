@@ -496,7 +496,7 @@
     <string name="generic__button_text_delete">Delete</string>
     <string name="generic__text_url">Url</string>
     <string name="generic__text_edit">Edit</string>
-    <string name="generic__text_done">Done</string>
+    <string name="generic__button_text_done">Done</string>
     <string name="home__clipboard_card_source">From clipboard</string>
     <string name="settings_profile_switcher__title_profile_switcher">Profile switching</string>
     <string name="settings_profile_switcher__divider_configuration">Configuration</string>

@@ -24,7 +24,8 @@ class AppStateService(
 ) : LifecycleAwareService {
 
     private val updates = mapOf(
-        AppStatePreferences.newDefaults_2024_11_29 to { experimentsRepository.put(Experiments.loopDetector, true) }
+        AppStatePreferences.newDefaults_2024_11_29 to { experimentsRepository.put(Experiments.loopDetector, true) },
+        AppStatePreferences.newDefaults_2024_11_30 to { experimentsRepository.put(Experiments.editClipboard, true) }
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {

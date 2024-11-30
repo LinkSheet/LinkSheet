@@ -29,7 +29,7 @@ object Experiments : PreferenceDefinition(
 
     val enableAnalytics = boolean("experiment_enable_analytics", false)
 
-    val editClipboard = boolean("experiment_edit_clipboard", false)
+    val editClipboard = boolean("experiment_edit_clipboard", true)
     val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
 
 

@@ -1,4 +1,4 @@
-package fe.linksheet.util.xiaomi
+package fe.linksheet.util.device.xiaomi
 
 import android.app.AppOpsManager
 import android.app.AppOpsManagerHidden

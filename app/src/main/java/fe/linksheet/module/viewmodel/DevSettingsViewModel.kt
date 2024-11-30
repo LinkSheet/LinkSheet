@@ -6,13 +6,12 @@ import android.widget.Toast
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.linksheet.R
-import fe.linksheet.util.xiaomi.MIUIAuditor
+import fe.linksheet.util.device.xiaomi.MIUIAuditor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.BuildInfo
 
 class DevSettingsViewModel(
     val context: Application,

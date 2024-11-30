@@ -1,4 +1,4 @@
-package fe.linksheet.image
+package fe.linksheet.util.image
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

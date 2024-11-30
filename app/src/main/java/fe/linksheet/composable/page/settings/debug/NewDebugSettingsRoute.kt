@@ -2,7 +2,6 @@ package fe.linksheet.composable.page.settings.debug
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.List
-import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.runtime.Composable
@@ -21,7 +20,7 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.util.xiaomi.MIUIAuditor
+import fe.linksheet.util.device.xiaomi.MIUIAuditor
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

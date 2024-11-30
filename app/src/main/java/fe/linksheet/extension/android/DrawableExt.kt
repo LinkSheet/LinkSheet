@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
-import fe.linksheet.image.ImageFactory
+import fe.linksheet.util.image.ImageFactory
 
 fun Drawable.toImageBitmap(): ImageBitmap {
     return toBitmap().asImageBitmap()

@@ -1,9 +1,16 @@
 package fe.linksheet.module.devicecompat
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AppOpsManager
+import android.app.AppOpsManagerHidden
 import android.content.Context
 import android.os.Build
+import android.os.Process
 import android.os.SystemProperties
+import androidx.core.content.getSystemService
+import dev.rikka.tools.refine.Refine
+import fe.linksheet.module.intent.buildIntent
 import fe.linksheet.util.device.xiaomi.MIUIAuditor
 import org.koin.dsl.module
 import java.lang.reflect.Method
@@ -11,21 +18,34 @@ import java.lang.reflect.Method
 
 val MiuiCompatModule = module {
     single<MiuiCompat> {
-        if (RealMiuiCompat.isXiaomiDevice) RealMiuiCompat() else NoOpMiuiCompat
+        if (RealMiuiCompat.isXiaomiDevice) {
+            val context = get<Context>()
+            val appOpsManager = context.getSystemService<AppOpsManager>()!!
+            val appOpsManagerHidden = Refine.unsafeCast<AppOpsManagerHidden>(appOpsManager)
+
+            RealMiuiCompat(context, appOpsManager, appOpsManagerHidden)
+        } else {
+            NoOpMiuiCompat
+        }
     }
 }
 
 interface MiuiCompat {
     fun showAlert(context: Context): Boolean
-    fun setAutoStart(context: Context, autoStart: Boolean): Boolean
+    fun startPermissionRequest(activity: Activity): Boolean
 }
 
 object NoOpMiuiCompat : MiuiCompat {
     override fun showAlert(context: Context) = false
-    override fun setAutoStart(context: Context, autoStart: Boolean) = true
+    override fun startPermissionRequest(activity: Activity) = true
 }
 
-class RealMiuiCompat : MiuiCompat {
+class RealMiuiCompat(
+    private val context: Context,
+    private val appOpsManager: AppOpsManager,
+    private val appOpsManagerHidden: AppOpsManagerHidden,
+) : MiuiCompat {
+
     companion object {
         val isXiaomiDevice = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true)
     }
@@ -71,14 +91,18 @@ class RealMiuiCompat : MiuiCompat {
     }
 
     fun getAutoStartMode(context: Context): Mode? {
-        return runCatching { getApplicationAutoStart.invoke(null, context, context.packageName) as Int }
+        return runCatching { appOpsManagerHidden.checkOp(10021, Process.myUid(), context.packageName) }
             .map { Mode.entries[it] }
             .getOrNull()
     }
 
-    override fun setAutoStart(context: Context, autoStart: Boolean): Boolean {
-        return runCatching { setApplicationAutoStart.invoke(null, context, context.packageName, autoStart) }
-            .map { true }
-            .getOrDefault(false)
+    override fun startPermissionRequest(activity: Activity): Boolean {
+        val intent = buildIntent("miui.intent.action.APP_PERM_EDITOR") {
+            putExtra("extra_package_uid", Process.myUid())
+            putExtra("extra_pkgname", context.packageName)
+            putExtra("extra_package_name", context.packageName)
+        }
+
+        return runCatching { activity.startActivity(intent) }.map { true }.getOrDefault(false)
     }
 }

@@ -107,9 +107,11 @@ class MainViewModel(
     private val _showMiuiAlert = RefreshableStateFlow(false) { miuiCompat.showAlert(context) }
     val showMiuiAlert = _showMiuiAlert
 
-    fun updateMiuiAutoStartAppOp() = viewModelScope.launch {
-        miuiCompat.setAutoStart(context, true)
+    suspend fun updateMiuiAutoStartAppOp(activity: Activity): Boolean {
+        val result = miuiCompat.startPermissionRequest(activity)
         _showMiuiAlert.refresh()
+
+        return result
     }
 
     private val _defaultBrowser = { checkDefaultBrowser() }.asFlow()

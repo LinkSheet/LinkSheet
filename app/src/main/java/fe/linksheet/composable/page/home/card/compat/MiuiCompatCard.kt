@@ -14,12 +14,12 @@ import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
 import fe.linksheet.composable.ui.PreviewTheme
 
-fun LazyListScope.MiuiCompatCardWrapper(onGrant: () -> Unit) {
+fun LazyListScope.MiuiCompatCardWrapper(onClick: () -> Unit) {
     item(
         key = R.string.settings_main_miui_compat__title_linksheet_auto_start_failure,
         contentType = ContentType.ClickableAlert
     ) {
-        MiuiCompatCard(onGrant = onGrant)
+        MiuiCompatCard(onGrant = onClick)
 
 //        when (mode) {
 //            MiuiCompat.Mode.Default -> TODO()

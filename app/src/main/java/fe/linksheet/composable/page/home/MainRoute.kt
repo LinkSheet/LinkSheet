@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.home
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -29,6 +30,7 @@ import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.util.BuildType
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,6 +65,8 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 //        shizukuInstalled = ShizukuUtil.isShizukuInstalled(context)
 //        shizukuRunning = ShizukuUtil.isShizukuRunning()
 //    }
+    val activity = LocalActivity.current
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -122,8 +126,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 key = R.string.settings_main_setup_success__title_linksheet_setup_success,
                 contentType = ContentType.ClickableAlert
             ) {
-                val activity = LocalActivity.current
-
                 StatusCardWrapper(
                     isDefaultBrowser = defaultBrowser,
                     launchIntent = { viewModel.launchIntent(activity, it) },
@@ -132,7 +134,13 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
 
             if (showMiuiAlert) {
-                MiuiCompatCardWrapper(onGrant = { viewModel.updateMiuiAutoStartAppOp() })
+                MiuiCompatCardWrapper(onClick = {
+                    coroutineScope.launch {
+                        if (!viewModel.updateMiuiAutoStartAppOp(activity)) {
+                            Toast.makeText(activity, R.string.settings_main_miui_compat__text_request_failed, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                })
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {

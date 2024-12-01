@@ -512,4 +512,7 @@
     <string name="settings_profile_switcher__text_not_installed">Unable to connect to this profile</string>
     <string name="settings_profile_switcher__text_current_profile">Currently running in this profile</string>
     <string name="settings_profile_switcher__text_other_profile">Other profile</string>
+    <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Additional setup required</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi is known to heavily restrict apps in unpredictable ways, leading to LinkSheet not functioning correctly.\nTap the button below to grant LinkSheet permission to display pop-up windows</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Grant</string>
 </resources>

@@ -20,6 +20,7 @@ import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.app.AndroidPackageInfoModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
+import fe.linksheet.module.devicecompat.MiuiCompatModule
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
@@ -115,6 +116,7 @@ class LinkSheetApp : Application() {
                 preferenceRepositoryModule,
                 redactorModule,
                 defaultLoggerModule,
+                MiuiCompatModule,
                 databaseModule,
                 daoModule,
                 cachedRequestModule,

@@ -11,23 +11,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import dev.zwander.shared.ShizukuUtil
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.linksheet.*
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
+import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.debug.DebugComposable
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.util.BuildType
-import fe.linksheet.util.Results
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,25 +36,18 @@ import org.koin.androidx.compose.koinViewModel
 fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
-    val uriHandler = LocalUriHandler.current
 
     val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
-    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
-    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
-    var defaultBrowserEnabled by remember { mutableStateOf(Results.loading()) }
-    val useTime = viewModel.formatUseTime()
+    val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED,
+        initialValue = false
+    )
 
-    val browserStatus by remember { mutableStateOf(viewModel.hasBrowser()) }
-
-    LaunchedEffect(Unit) {
-//        delay(200)
-        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
-    }
-
-    val showOtherBanners by remember {
-        mutableStateOf(defaultBrowserEnabled.isSuccess && MainViewModel.BrowserStatus.hasBrowser(browserStatus))
-    }
+    val defaultBrowser by viewModel.defaultBrowser.collectAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED,
+        initialValue = true
+    )
 
     clipboardManager.ObserveClipboard {
         viewModel.tryUpdateClipboard()
@@ -63,29 +57,31 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         viewModel.tryUpdateClipboard()
     }
 
-    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
-        defaultBrowserEnabled = Results.loading()
-        defaultBrowserEnabled = Results.result(viewModel.checkDefaultBrowser())
+//    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
+//    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
+//    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
+//        shizukuInstalled = ShizukuUtil.isShizukuInstalled(context)
+//        shizukuRunning = ShizukuUtil.isShizukuRunning()
+//    }
 
-        shizukuInstalled = ShizukuUtil.isShizukuInstalled(context)
-        shizukuRunning = ShizukuUtil.isShizukuRunning()
-    }
-
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-        TopAppBar(
-            title = {},
-            navigationIcon = {
-                IconButton(onClick = { navController.navigate(settingsRoute) }) {
-                    Icon(
-                        imageVector = Icons.Outlined.Settings,
-                        contentDescription = stringResource(id = R.string.settings)
-                    )
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = {},
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(settingsRoute) }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Settings,
+                            contentDescription = stringResource(id = R.string.settings)
+                        )
+                    }
                 }
-            }
-        )
-    }) { padding ->
+            )
+        }
+    ) { padding ->
         SaneLazyColumnLayout(padding = padding, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            item {
+            item(key = R.string.app_name, contentType = ContentType.TextItem) {
                 Text(
                     modifier = Modifier,
                     text = stringResource(R.string.app_name),
@@ -93,7 +89,9 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 30.sp,
                 )
+            }
 
+            item(key = R.string.thanks_for_donating, contentType = ContentType.TextItem) {
                 if (!LinkSheetAppConfig.showDonationBanner()) {
                     Text(text = stringResource(id = R.string.thanks_for_donating))
                 } else if (!BuildType.current.allowDebug) {
@@ -127,12 +125,14 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 val activity = LocalActivity.current
 
                 StatusCardWrapper(
-                    isDefaultBrowser = defaultBrowserEnabled.isSuccess,
+                    isDefaultBrowser = defaultBrowser,
                     launchIntent = { viewModel.launchIntent(activity, it) },
-                    updateDefaultBrowser = {
-                        defaultBrowserEnabled = Results.success()
-                    }
+                    updateDefaultBrowser = {}
                 )
+            }
+
+            if (showMiuiAlert) {
+                MiuiCompatCardWrapper(onGrant = { viewModel.updateMiuiAutoStartAppOp() })
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
@@ -142,10 +142,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
 
             if (clipboardUri != null) {
-                item(
-                    key = R.string.open_copied_link,
-                    contentType = ContentType.ClickableAlert
-                ) {
+                item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
                     OpenCopiedLink(
                         editClipboard = viewModel.editClipboard(),
                         uri = clipboardUri!!,

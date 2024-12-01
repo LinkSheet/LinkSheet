@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.BuildConfig
@@ -31,9 +32,11 @@ import fe.linksheet.extension.android.getFirstText
 import fe.linksheet.extension.android.resolveActivityCompat
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.extension.kotlinx.RefreshableStateFlow
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
+import fe.linksheet.module.devicecompat.MiuiCompat
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -45,7 +48,9 @@ import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.time.Duration
 
 
@@ -56,6 +61,7 @@ class MainViewModel(
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
     private val analyticsService: BaseAnalyticsService,
+    private val miuiCompat: MiuiCompat,
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
@@ -98,6 +104,25 @@ class MainViewModel(
         }
     }
 
+    private val _showMiuiAlert = RefreshableStateFlow(false) { miuiCompat.showAlert(context) }
+    val showMiuiAlert = _showMiuiAlert
+
+    fun updateMiuiAutoStartAppOp() = viewModelScope.launch {
+        miuiCompat.setAutoStart(context, true)
+        _showMiuiAlert.refresh()
+    }
+
+    private val _defaultBrowser = { checkDefaultBrowser() }.asFlow()
+    val defaultBrowser = _defaultBrowser
+
+    private fun checkDefaultBrowser() = context.packageManager
+        .resolveActivityCompat(BrowserResolver.httpBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
+
+    fun launchIntent(activity: Activity, intent: SettingsIntent): Boolean {
+        return activity.startActivityWithConfirmation(Intent(intent.action))
+    }
+
     private fun tryParseUriString(uriStr: String): Uri? {
         return UriUtil.parseWebUriStrict(uriStr)
     }
@@ -132,19 +157,11 @@ class MainViewModel(
         RoleManager.ROLE_BROWSER
     )
 
-    fun launchIntent(activity: Activity, intent: SettingsIntent): Boolean {
-        return activity.startActivityWithConfirmation(Intent(intent.action))
-    }
-
     enum class SettingsIntent(val action: String) {
         DefaultApps(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS),
         DomainUrls("android.settings.MANAGE_DOMAIN_URLS"),
         CrossProfileAccess("android.settings.MANAGE_CROSS_PROFILE_ACCESS")
     }
-
-    fun checkDefaultBrowser() = context.packageManager
-        .resolveActivityCompat(BrowserResolver.httpBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
-        ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
     enum class BrowserStatus(
         @StringRes val headline: Int,

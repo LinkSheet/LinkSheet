@@ -1,6 +1,5 @@
 package fe.linksheet.module.devicecompat
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AppOpsManager
 import android.app.AppOpsManagerHidden
@@ -13,7 +12,6 @@ import dev.rikka.tools.refine.Refine
 import fe.linksheet.module.intent.buildIntent
 import fe.linksheet.util.device.xiaomi.MIUIAuditor
 import org.koin.dsl.module
-import java.lang.reflect.Method
 
 
 val MiuiCompatModule = module {
@@ -57,28 +55,6 @@ class RealMiuiCompat(
         if (version.isNullOrEmpty()) return null
 
         return version.toIntOrNull()
-    }
-
-    private val appOpsUtil by lazy {
-        @SuppressLint("PrivateApi")
-        Class.forName("android.miui.AppOpsUtils")
-    }
-
-    private val getApplicationAutoStart: Method by lazy {
-        appOpsUtil.getDeclaredMethod(
-            "getApplicationAutoStart",
-            Context::class.java,
-            String::class.java
-        )
-    }
-
-    private val setApplicationAutoStart: Method by lazy {
-        appOpsUtil.getDeclaredMethod(
-            "setApplicationAutoStart",
-            Context::class.java,
-            String::class.java,
-            Boolean::class.java
-        )
     }
 
     enum class Mode {

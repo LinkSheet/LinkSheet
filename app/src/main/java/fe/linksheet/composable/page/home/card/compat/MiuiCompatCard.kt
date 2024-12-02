@@ -19,20 +19,12 @@ fun LazyListScope.MiuiCompatCardWrapper(onClick: () -> Unit) {
         key = R.string.settings_main_miui_compat__title_linksheet_auto_start_failure,
         contentType = ContentType.ClickableAlert
     ) {
-        MiuiCompatCard(onGrant = onClick)
-
-//        when (mode) {
-//            MiuiCompat.Mode.Default -> TODO()
-//            MiuiCompat.Mode.Rejected -> TODO()
-//            MiuiCompat.Mode.Prompt -> TODO()
-//            MiuiCompat.Mode.Accepted -> TODO()
-//            null -> TODO()
-//        }
+        MiuiCompatCard(onClick = onClick)
     }
 }
 
 @Composable
-fun MiuiCompatCard(onGrant: () -> Unit) {
+fun MiuiCompatCard(onClick: () -> Unit) {
     AlertCard(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.errorContainer
@@ -44,7 +36,7 @@ fun MiuiCompatCard(onGrant: () -> Unit) {
     ) {
         Button(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-            onClick = onGrant
+            onClick = onClick
         ) {
             Text(text = stringResource(id = R.string.settings_main_miui_compat__button_linksheet_auto_start_allow))
         }

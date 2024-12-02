@@ -519,4 +519,7 @@
     <string name="settings_profile_switcher__divider_other_profiles">Další profily</string>
     <string name="generic__label_personal_profile">Osobní profil</string>
     <string name="settings_profile_switcher__text_other_profile">Jiný profil</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Udělit</string>
+    <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Vyžadováno další nastavení</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Společnost Xiaomi je známá tím, že silně a nepředvídatelným způsobem omezuje aplikace, což vede k tomu, že LinkSheet nefunguje správně.\nKlepnutím na tlačítko níže udělíte aplikaci LinkSheet oprávnění zobrazovat vyskakovací okna</string>
 </resources>

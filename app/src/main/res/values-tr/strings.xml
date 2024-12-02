@@ -513,7 +513,7 @@
     <string name="generic__label_work_profile">İş profili</string>
     <string name="settings_profile_switcher__divider_other_profiles">Diğer profiller</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Ek kurulum gerekli</string>
-    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi\'nin uygulamaları öngörülemeyen yöntemlerle ciddi şekilde kısıtladığı ve bunun da LinkSheet\'in düzgün çalışmamasına yol açtığı biliniyor.\nÇalışırken yeni pencere açma izni istemek için aşağıdaki düğmeye dokunun</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi\'nin uygulamaları öngörülemeyen yöntemlerle ciddi şekilde kısıtladığı ve bunun da LinkSheet\'in düzgün çalışmamasına yol açtığı biliniyor.\nArka planda alışırken yeni pencere açma izni istemek için aşağıdaki düğmeye dokunun</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">İzin iste</string>
     <string name="settings_main_miui_compat__text_request_failed">İzin istenemedi!</string>
 </resources>

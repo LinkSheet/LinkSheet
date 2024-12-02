@@ -513,7 +513,7 @@
     <string name="settings_profile_switcher__text_current_profile">Currently running in this profile</string>
     <string name="settings_profile_switcher__text_other_profile">Other profile</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Additional setup required</string>
-    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi is known to heavily restrict apps in unpredictable ways, leading to LinkSheet not functioning correctly.\nTap the button below to request permission to open new windows while running</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi is known to heavily restrict apps in unpredictable ways, leading to LinkSheet not functioning correctly.\nTap the button below to request permission to open new windows while running in background.</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Request permission</string>
     <string name="settings_main_miui_compat__text_request_failed">Failed to request permission!</string>
 </resources>

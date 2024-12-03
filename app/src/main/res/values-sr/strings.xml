@@ -519,4 +519,8 @@
     <string name="settings_profile_switcher__text_other_profile">Други профил</string>
     <string name="settings__hint_search">Претрага</string>
     <string name="settings_profile_switcher__divider_current_profile">Тренутни профил</string>
+    <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Потребно је додатно подешавање</string>
+    <string name="settings_main_miui_compat__text_request_failed">Затраживање дозволе није успело!</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Познато је да Xiaomi снажно ограничава апликације на непредвидиве начине, што доводи до тога да LinkSheet не ради исправно.\nДодирните дугме испод да бисте затражили дозволу за отварање нових прозора током рада у позадини</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Затражи дозволу</string>
 </resources>

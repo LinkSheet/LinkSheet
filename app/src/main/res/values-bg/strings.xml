@@ -512,7 +512,8 @@
     <string name="generic__label_personal_profile">Личен профил</string>
     <string name="settings_profile_switcher__text_not_installed">Не може да бъде направена връзка с този профил</string>
     <string name="settings_profile_switcher__text_current_profile">В момента работи в този профил</string>
-    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Разрешаване</string>
-    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Известно е, че Xiaomi силно ограничава приложенията по непредсказуеми начини, което води до нарушение на работата на LinkSheet.\nДокоснете бутона, за да разрешите на LinkSheet да показва изскачащи прозорци</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Искане на права</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Известно е, че Xiaomi силно ограничава приложенията по непредсказуеми начини, което води до нарушение на работата на LinkSheet.\nДокоснете бутона за искане на права за отваряне на нови прозорци при работа във фонов режим</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Необходима е допълнителна настройка</string>
+    <string name="settings_main_miui_compat__text_request_failed">Грешка при искане на права!</string>
 </resources>

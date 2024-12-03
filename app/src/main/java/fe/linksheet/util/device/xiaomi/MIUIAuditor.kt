@@ -49,13 +49,12 @@ object MIUIAuditor {
         }
     }
 
-    fun getMiuiOpStatus(context: Context): List<Int> {
+    fun getMiuiOpStatus(context: Context): Map<Int, Int> {
         val appOpsManager = context.getSystemService<AppOpsManager>()!!
         val appOpsManagerHidden = Refine.unsafeCast<AppOpsManagerHidden>(appOpsManager)
 
-        return (0..40).map {
-            runCatching { appOpsManagerHidden.checkOp(10_000 + it, Process.myUid(), context.packageName) }
-                .getOrDefault(-1)
+        return (0..40).map { 10_000 + it }.associateWith {
+            runCatching { appOpsManagerHidden.checkOp(it, Process.myUid(), context.packageName) }.getOrDefault(-1)
         }
     }
 

@@ -34,14 +34,10 @@ class DevSettingsViewModel(
     }
 
     fun auditMiuiEnvironment(): String {
-        val properties = MIUIAuditor.getProperties()
         val opStatus = MIUIAuditor.getMiuiOpStatus(context)
-        val intentExists = MIUIAuditor.checkIntentExists(context)
 
         val environment = jsonObject {
-            "properties" += properties
-            "opStatus" += opStatus
-            "intentExists" += intentExists
+            "app_ops" += opStatus
         }
 
         return gson.toJson(environment)

@@ -519,4 +519,8 @@
     <string name="settings_profile_switcher__text_other_profile">Otro perfil</string>
     <string name="settings_profile_switcher__title_enable_cross_profile">Habilitar conexión entre perfiles</string>
     <string name="settings_profile_switcher__text_enable_cross_profile">Toque para conectar LinkSheet a su contraparte en su perfil secundario</string>
+    <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Configuración adicional requerida</string>
+    <string name="settings_main_miui_compat__text_request_failed">¡Error al solicitar permiso!</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Se sabe que Xiaomi restringe mucho las aplicaciones de forma impredecible, lo que provoca que LinkSheet no funcione correctamente.\nPulse el botón inferior para solicitar permiso para abrir nuevas ventanas mientras se ejecuta en segundo plano</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Solicitar permiso</string>
 </resources>

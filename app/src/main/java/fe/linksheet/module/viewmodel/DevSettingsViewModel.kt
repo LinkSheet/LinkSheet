@@ -35,9 +35,10 @@ class DevSettingsViewModel(
 
     fun auditMiuiEnvironment(): String {
         val opStatus = MIUIAuditor.getMiuiOpStatus(context)
-
         val environment = jsonObject {
-            "app_ops" += opStatus
+            for ((op, status) in opStatus) {
+                "$op" += status
+            }
         }
 
         return gson.toJson(environment)

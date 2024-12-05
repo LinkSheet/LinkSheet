@@ -20,7 +20,7 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.util.device.xiaomi.MIUIAuditor
+import fe.linksheet.module.devicecompat.MiuiCompat
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -40,7 +40,7 @@ fun NewDebugSettingsRoute(
     val feedback = LocalHapticFeedbackInteraction.current
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
-        group(size = 2 + if (MIUIAuditor.isXiaomiDevice) 1 else 0) {
+        group(size = 2 + if (MiuiCompat.isRequired) 1 else 0) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
@@ -65,7 +65,7 @@ fun NewDebugSettingsRoute(
             }
 
 
-            if (MIUIAuditor.isXiaomiDevice) {
+            if (MiuiCompat.isRequired) {
                 item(key = "Audit MIUI environment") { padding, shape ->
                     DefaultTwoLineIconClickableShapeListItem(
                         headlineContent = text("Audit MIUI environment"),

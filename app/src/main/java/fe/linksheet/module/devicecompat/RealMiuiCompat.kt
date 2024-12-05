@@ -10,13 +10,12 @@ import android.os.SystemProperties
 import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
 import fe.linksheet.module.intent.buildIntent
-import fe.linksheet.util.device.xiaomi.MIUIAuditor
 import org.koin.dsl.module
 
 
 val MiuiCompatModule = module {
     single<MiuiCompat> {
-        if (RealMiuiCompat.isXiaomiDevice) {
+        if (MiuiCompat.isRequired) {
             val context = get<Context>()
             val appOpsManager = context.getSystemService<AppOpsManager>()!!
             val appOpsManagerHidden = Refine.unsafeCast<AppOpsManagerHidden>(appOpsManager)
@@ -29,6 +28,26 @@ val MiuiCompatModule = module {
 }
 
 interface MiuiCompat {
+    companion object {
+        private val isXiaomiDevice = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true)
+        private val miuiVersion by lazy { readMiuiVersion() }
+
+        val isRequired by lazy {
+            isXiaomiDevice && miuiVersion != null
+        }
+
+        private fun readMiuiVersion(): Int? {
+            val result = runCatching { SystemProperties.get("ro.miui.ui.version.code") }
+            if (result.isFailure) {
+                return null
+            }
+
+            val version = result.getOrNull()
+            if (version.isNullOrEmpty()) return null
+            return version.toIntOrNull()
+        }
+    }
+
     fun showAlert(context: Context): Boolean
     fun startPermissionRequest(activity: Activity): Boolean
 }
@@ -44,25 +63,11 @@ class RealMiuiCompat(
     private val appOpsManagerHidden: AppOpsManagerHidden,
 ) : MiuiCompat {
 
-    companion object {
-        val isXiaomiDevice = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true)
-    }
-
-    fun getMiuiVersion(): Int? {
-        if (!MIUIAuditor.isXiaomiDevice) return null
-
-        val version = SystemProperties.get("ro.miui.ui.version.code")
-        if (version.isNullOrEmpty()) return null
-
-        return version.toIntOrNull()
-    }
-
     enum class Mode {
         Default, Rejected, Prompt, Accepted
     }
 
     override fun showAlert(context: Context): Boolean {
-        if (!isXiaomiDevice) return false
         return getAutoStartMode(context) != Mode.Accepted
     }
 

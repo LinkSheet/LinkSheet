@@ -5,9 +5,7 @@ import android.app.AppOpsManagerHidden
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Process
-import android.os.SystemProperties
 import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
 import fe.kotlin.extension.string.substringOrNull
@@ -17,17 +15,6 @@ import fe.std.process.android.AndroidStartConfig
 import fe.std.process.launchProcess
 
 object MIUIAuditor {
-    val isXiaomiDevice = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true)
-
-    fun getMiuiVersion(): Int? {
-        if (!isXiaomiDevice) return null
-
-        val version = SystemProperties.get("ro.miui.ui.version.name")
-        if (version.isNullOrEmpty()) return null
-
-        return version.substringOrNull(1)?.toIntOrNull()
-    }
-
     fun getProperties(): Map<String, String> {
         fun String.unwrap(): String? {
             return trim().run { substringOrNull(1, length - 1) }

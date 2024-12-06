@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.linksheet.R
+import fe.linksheet.module.devicecompat.MiuiCompatProvider
 import fe.linksheet.util.device.xiaomi.MIUIAuditor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -18,8 +19,11 @@ class DevSettingsViewModel(
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
     private val shizukuHandler: ShizukuHandler,
+    miuiCompatProvider: MiuiCompatProvider,
     val gson: Gson,
 ) : BaseViewModel(preferenceRepository) {
+
+    val miuiCompatRequired by miuiCompatProvider.isRequired
 
     fun enqueueResetAppLinks() {
         val command = ShizukuCommand(command = { reset("all") }, resultHandler = {

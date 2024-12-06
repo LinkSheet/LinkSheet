@@ -10,20 +10,45 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.activity.onboarding.OnboardingActivity
-import fe.linksheet.experiment.improved.resolver.composable.ImprovedBottomSheet
 import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.debug.activity.*
+import fe.linksheet.debug.activity.ComposableRendererActivity
+import fe.linksheet.debug.activity.DebugActivity
+import fe.linksheet.debug.activity.ExportLogDialogTestActivity
+import fe.linksheet.debug.activity.LinkTestingActivity
+import fe.linksheet.debug.module.viewmodel.DebugViewModel
+import fe.linksheet.experiment.improved.resolver.composable.ImprovedBottomSheet
+import org.koin.androidx.compose.koinViewModel
 import kotlin.reflect.KClass
 
 @Composable
-fun DebugMenu() {
+fun DebugMenuWrapper() {
+    DebugMenu()
+}
+
+@Composable
+private fun DebugMenu(viewModel: DebugViewModel = koinViewModel()) {
     val activity = LocalActivity.current
 
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        if (viewModel.debugMiuiCompatProvider != null) {
+            item(key = "miui") {
+                var isRequired by remember {
+                    mutableStateOf(viewModel.debugMiuiCompatProvider.isRequired.value)
+                }
+
+                DebugMenuButton(
+                    text = "Toggle Miui ($isRequired)",
+                    onClick = {
+                        isRequired = viewModel.toggleMiuiCompatRequired()
+                    }
+                )
+            }
+        }
+
         item(key = "onboarding") {
             FilledTonalActivityLauncher(
                 activity = activity,
@@ -80,13 +105,21 @@ private fun createIntent(activity: Activity, activityClass: KClass<*>): Intent {
     return Intent(activity, activityClass.java)
 }
 
-
 @Composable
-private fun FilledTonalActivityLauncher(activity: Activity, text: String, intent: Intent) {
+private fun DebugMenuButton(text: String, onClick: () -> Unit) {
     FilledTonalButton(
         colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-        onClick = { activity.startActivity(intent) }
+        onClick = onClick
     ) {
         Text(text = text)
     }
+}
+
+
+@Composable
+private fun FilledTonalActivityLauncher(activity: Activity, text: String, intent: Intent) {
+    DebugMenuButton(
+        text = text,
+        onClick = { activity.startActivity(intent) }
+    )
 }

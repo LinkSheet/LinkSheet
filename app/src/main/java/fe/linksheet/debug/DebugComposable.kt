@@ -13,7 +13,7 @@ sealed class DebugComposable(clazzName: String, methodName: String) {
         private const val DEBUG_PACKAGE: String = "fe.linksheet.debug.ui.composable"
     }
 
-    data object MainRoute : DebugComposable("$DEBUG_PACKAGE.DebugMenuKt", "DebugMenu")
+    data object MainRoute : DebugComposable("$DEBUG_PACKAGE.DebugMenuKt", "DebugMenuWrapper")
 
     fun compose(currentComposer: Composer, i: Int) {
         method?.invoke(null, currentComposer, i)

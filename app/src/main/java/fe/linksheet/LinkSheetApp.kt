@@ -16,11 +16,12 @@ import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.lifecycle.ActivityLifecycleObserver
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
-import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.app.AndroidPackageInfoModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.devicecompat.MiuiCompatModule
+import fe.linksheet.module.devicecompat.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.RealMiuiCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
@@ -52,12 +53,14 @@ import fe.linksheet.util.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
+import org.koin.core.module.Module
+import org.koin.dsl.module
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
 
-class LinkSheetApp : Application() {
+open class LinkSheetApp : Application(), DependencyProvider {
     val startupTime: LocalDateTime = LocalDateTime.now()
 
     private val activityLifecycleObserver = ActivityLifecycleObserver()
@@ -104,43 +107,59 @@ class LinkSheetApp : Application() {
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
+        val koinModules = provideKoinModules()
         val koinApplication = startKoin {
             androidLogger()
             androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
-            modules(
-                networkStateServiceModule,
-                logFileServiceModule,
-                shizukuHandlerModule,
-                globalGsonModule,
-                preferenceRepositoryModule,
-                redactorModule,
-                defaultLoggerModule,
-                MiuiCompatModule,
-                databaseModule,
-                daoModule,
-                cachedRequestModule,
-                redirectResolveRequestModule,
-                amp2HtmlResolveRequestModule,
-                allRemoteResolveRequest,
-                resolverModule,
-                repositoryModule,
-                viewModelModule,
-                requestModule,
-                okHttpModule,
-                unfurlerModule,
-                downloaderModule,
-                if (BuildType.current.allowDebug) aptabaseAnalyticsClientModule else DebugLogAnalyticsClient.module,
-                analyticsServiceModule,
-                statisticsModule,
-                VersionTrackerModule,
-                pasteServiceModule,
-                AndroidPackageInfoModule,
-                ProfileSwitcherModule,
-                AppStateServiceModule
-            )
+            modules(koinModules)
         }
 
         lifecycleObserver.onAppInitialized()
+    }
+
+    override fun provideKoinModules(): List<Module> {
+        return listOf(
+            networkStateServiceModule,
+            logFileServiceModule,
+            shizukuHandlerModule,
+            globalGsonModule,
+            preferenceRepositoryModule,
+            redactorModule,
+            defaultLoggerModule,
+            provideMiuiCompatProvider(),
+            MiuiCompatModule,
+            databaseModule,
+            daoModule,
+            cachedRequestModule,
+            redirectResolveRequestModule,
+            amp2HtmlResolveRequestModule,
+            allRemoteResolveRequest,
+            resolverModule,
+            repositoryModule,
+            viewModelModule,
+            requestModule,
+            okHttpModule,
+            unfurlerModule,
+            downloaderModule,
+            provideAnalyticsClient(),
+            analyticsServiceModule,
+            statisticsModule,
+            VersionTrackerModule,
+            pasteServiceModule,
+            AndroidPackageInfoModule,
+            ProfileSwitcherModule,
+            AppStateServiceModule
+        )
+    }
+
+    override fun provideMiuiCompatProvider(): Module {
+        return module {
+            single<MiuiCompatProvider> { RealMiuiCompatProvider }
+        }
+    }
+
+    override fun provideAnalyticsClient(): Module {
+        return DebugLogAnalyticsClient.module
     }
 }

@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.BuildConfig
@@ -37,6 +36,7 @@ import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.devicecompat.MiuiCompat
+import fe.linksheet.module.devicecompat.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -50,7 +50,6 @@ import fe.linksheet.util.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import java.time.Duration
 
 
@@ -61,6 +60,7 @@ class MainViewModel(
     val browserResolver: BrowserResolver,
     featureFlagRepository: FeatureFlagRepository,
     private val analyticsService: BaseAnalyticsService,
+    private val miuiCompatProvider: MiuiCompatProvider,
     private val miuiCompat: MiuiCompat,
 ) : BaseViewModel(preferenceRepository) {
 
@@ -104,7 +104,9 @@ class MainViewModel(
         }
     }
 
-    private val _showMiuiAlert = RefreshableStateFlow(false) { miuiCompat.showAlert(context) }
+    private val _showMiuiAlert = RefreshableStateFlow(false) {
+        if(miuiCompatProvider.isRequired.value) miuiCompat.showAlert(context) else false
+    }
     val showMiuiAlert = _showMiuiAlert
 
     suspend fun updateMiuiAutoStartAppOp(activity: Activity): Boolean {

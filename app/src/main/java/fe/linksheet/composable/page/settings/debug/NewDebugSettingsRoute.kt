@@ -40,7 +40,7 @@ fun NewDebugSettingsRoute(
     val feedback = LocalHapticFeedbackInteraction.current
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
-        group(size = 2 + if (MiuiCompat.isRequired) 1 else 0) {
+        group(size = 2 + if (viewModel.miuiCompatRequired) 1 else 0) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
@@ -65,7 +65,7 @@ fun NewDebugSettingsRoute(
             }
 
 
-            if (MiuiCompat.isRequired) {
+            if (viewModel.miuiCompatRequired) {
                 item(key = "Audit MIUI environment") { padding, shape ->
                     DefaultTwoLineIconClickableShapeListItem(
                         headlineContent = text("Audit MIUI environment"),

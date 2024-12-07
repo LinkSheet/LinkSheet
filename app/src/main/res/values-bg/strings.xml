@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="open_with_app">Отваряне с/ъс %s</string>
+    <string name="open_with_app">Отваряне от %s</string>
     <string name="bottom_sheet_explainer">Настройки и изглед</string>
     <string name="follow_redirects_local_cache">Временна памет за пренасочвания</string>
     <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
@@ -15,7 +15,7 @@
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
-    <string name="opening_with_app">Отваряне с/ъс %s</string>
+    <string name="opening_with_app">Отваряне от %s</string>
     <string name="default_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
     <string name="use_a_different_app">Изберете друго приложение</string>

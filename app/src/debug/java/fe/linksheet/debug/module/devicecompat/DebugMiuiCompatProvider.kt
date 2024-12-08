@@ -9,7 +9,7 @@ import fe.linksheet.module.devicecompat.RealMiuiCompat
 import fe.std.lazy.resettableLazy
 
 object DebugMiuiCompatProvider : MiuiCompatProvider {
-    private var required = true
+    private var required = false
 
     override val isXiaomiDevice = true
 

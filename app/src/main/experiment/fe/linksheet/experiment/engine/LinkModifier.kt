@@ -1,12 +1,12 @@
 package fe.linksheet.experiment.engine
 
 interface LinkModifier {
-    fun modify(data: Input): Output?
+   suspend fun modify(data: ModifyInput): ModifyOutput?
 }
 
-data class Input(val url: String)
+data class ModifyInput(val url: String)
 
-data class Output(val url: String)
+data class ModifyOutput(val url: String)
 
 
 

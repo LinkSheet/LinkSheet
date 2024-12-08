@@ -21,5 +21,5 @@ val daoModule = module {
     singleOf(LinkSheetDatabase::previewCacheDao)
     singleOf(LinkSheetDatabase::resolvedUrlCacheDao)
     singleOf(LinkSheetDatabase::resolveTypeDao)
-    singleOf(LinkSheetDatabase::urlEntityDao)
+    singleOf(LinkSheetDatabase::urlEntryDao)
 }

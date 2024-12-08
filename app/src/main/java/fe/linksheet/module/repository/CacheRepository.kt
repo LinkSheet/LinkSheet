@@ -8,11 +8,11 @@ class CacheRepository(
     val previewCacheDao: PreviewCacheDao,
     val resolvedUrlCacheDao: ResolvedUrlCacheDao,
     val resolveTypeDao: ResolveTypeDao,
-    val urlEntityDao: UrlEntityDao
+    val urlEntityDao: UrlEntryDao
 ) {
     suspend fun checkCache(url: String, resolveType: ResolveType): CacheData? {
         val entry = urlEntityDao.getCacheEntry(url) ?: return null
-        
+
         val resolved = resolvedUrlCacheDao.getResolved(entry.id, resolveType.id)
         val html = htmlCacheDao.getCachedHtml(entry.id)
 

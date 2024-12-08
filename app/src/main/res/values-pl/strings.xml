@@ -529,5 +529,6 @@
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Wymagana dodatkowa konfiguracja</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Poproś o uprawnienie</string>
     <string name="settings_main_miui_compat__text_request_failed">Nie udało się poprosić o pozwolenie!</string>
-    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi mocno ogranicza aplikacje w nieprzewidywalny sposób, co prowadzi do nieprawidłowego działania LinkSheet.\nNaciśnij poniższy przycisk, aby poprosić o pozwolenie na otwarcie nowych okien podczas działania w tle</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi mocno ogranicza aplikacje w nieprzewidywalny sposób, co prowadzi do nieprawidłowego działania LinkSheet.\nNaciśnij poniższy przycisk i zezwól na uprawnienie \"Otwórz nowe okna podczas działania w tle\"</string>
+    <string name="generic__button_learn_more">Czytaj więcej</string>
 </resources>

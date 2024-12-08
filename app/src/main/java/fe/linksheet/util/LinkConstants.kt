@@ -15,7 +15,8 @@ object LinkConstants {
             "privacy-telemetry" to "${LinkSheet.Wiki}/Privacy#telemetry",
             "privacy-amp2html" to "${LinkSheet.Wiki}/Privacy#amp2html",
             "privacy-follow-redirects" to "${LinkSheet.Wiki}/Privacy#follow-redirects",
-            "privacy-downloader" to "${LinkSheet.Wiki}/Privacy#downloader"
+            "privacy-downloader" to "${LinkSheet.Wiki}/Privacy#downloader",
+            "device-issues-xiaomi" to LinkSheet.WikiDeviceIssuesXiaomi
         )
     )
 }
@@ -25,13 +26,16 @@ fun Github(user: String, repo: String? = null): String {
     return "https://github.com/$user$repoStr"
 }
 
+
 object LinkSheet {
     val Org = Github("LinkSheet")
     val Repo = "$Org/LinkSheet"
     val Wiki = "$Repo/wiki"
+    val WikiDeviceIssuesXiaomi = "${Wiki}/Device%E2%80%90specific-issues#xiaomimiui"
 
     val CompatReleases = "$Org/compat/releases"
 }
+
 
 val OpenLinkWithRepo = Github("tasomaniac", "OpenLinkWith")
 val MastodonRedirectRepo = Github("zacharee", "MastodonRedirect")

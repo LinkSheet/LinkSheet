@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hide_after_copying_explainer">Ẩn trang dưới cùng sau khi nhấn nút \"Sao chép URL\"</string>
+    <string name="hide_after_copying_explainer">Tự động ẩn trang dưới cùng khi nhấn vào nút hành động như \"Sao chép liên kết\" hoặc \"Tải xuống\"</string>
     <string name="import_dumped_preference">Nhập tùy chọn kết xuất</string>
     <string name="domain_selection_confirmation_subtitle">Bạn có chắc chắn muốn đặt %s làm ứng dụng ưu tiên cho các miền sau không?</string>
     <string name="default_apps_subtitle">Ứng dụng ưu tiên là ứng dụng bạn đặt thành \"Luôn luôn\" mở một số máy chủ nhất định</string>
     <string name="amp2html_local_cache">Kích hoạt bộ đệm Amp2Html cục bộ</string>
-    <string name="open_copied_link">Mở liên kết đã sao chép</string>
+    <string name="open_copied_link">Từ clipboard</string>
     <string name="ignore_libredirect">Bỏ qua LibRedirect</string>
     <string name="include_settings">Bao gồm các thiết đặt (được khuyến nghị)</string>
     <string name="download_started">Đã bắt đầu tải xuống</string>
@@ -36,7 +36,7 @@
     <string name="selected_browser_explainer">Trình duyệt này sẽ tự động được mở nếu không có ứng dụng gốc nào có thể xử lý liên kết được nhấp</string>
     <string name="send_to">Chia sẻ tới</string>
     <string name="enable_ignore_libredirect_button">Bật nút \"Bỏ qua LibRedirect\"</string>
-    <string name="dont_show_filtered_item">Không bao giờ hiện phần \"ứng dụng được chọn lần cuối\"</string>
+    <string name="dont_show_filtered_item">Không hiển thị phần \"ứng dụng được chọn gần đây nhất\"</string>
     <string name="follow_redirects_local_cache_explainer">Lưu trữ kết quả chuyển hướng cục bộ</string>
     <string name="use_app_settings_explainer">Hãy để ứng dụng quyết định xem có nên sử dụng trình duyệt trong ứng dụng hay không</string>
     <string name="display_grid_layout_explainer">Hiển thị lưới thay vì danh sách ở trang dưới cùng</string>
@@ -56,7 +56,7 @@
     <string name="resolve_failed">%s thất bại: %s</string>
     <string name="none">Không có</string>
     <string name="export">Xuất</string>
-    <string name="hide_after_copying">Ẩn sau khi sao chép</string>
+    <string name="hide_after_copying">Tự động ẩn khi hành động</string>
     <string name="follow_redirects">Theo dõi chuyển hướng</string>
     <string name="redirect_resolve_type_local">trình phân giải cục bộ</string>
     <string name="theme">Chủ đề</string>
@@ -64,11 +64,11 @@
     <string name="no_browsers_found">Không tìm thấy trình duyệt nào.</string>
     <string name="whitelisted_browsers">Các trình duyệt trong danh sách trắng</string>
     <string name="export_log">Xuất nhật ký</string>
-    <string name="bottom_sheet_explainer">Bố cục lưới, sắp xếp theo cách sử dụng, tùy chỉnh nhấn, thanh url</string>
+    <string name="bottom_sheet_explainer">Cấu hình &amp; Tùy chỉnh</string>
     <string name="light">Sáng</string>
     <string name="frontend">Giao diện người dùng</string>
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
-    <string name="donate_subtitle">Nếu bạn muốn quyên tặng và yêu cầu <b>LinkSheet Pro</b></string>
+    <string name="donate_subtitle">Nâng cấp lên <b>LinkSheet Pro</b></string>
     <string name="built_at">Xây dựng lúc (UTC)</string>
     <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
@@ -83,14 +83,14 @@
     <string name="github_explainer">Kho lưu trữ mã nguồn</string>
     <string name="downloader_url_mime_type_explainer">Kiểm tra xem URL có kết thúc bằng phần mở rộng tệp hay không (ví dụ: \".jpg\"); Nếu có, loại này được sử dụng cho tệp tải xuống.</string>
     <string name="other">Khác</string>
-    <string name="credits_explainer">Cấp phép nguồn mở</string>
+    <string name="credits_explainer">Lời cảm ơn, Giấy phép</string>
     <string name="remove_all">Loại bỏ hết</string>
     <string name="use_unified_preferred_browser">Sử dụng thiết đặt thống nhất</string>
     <string name="always_ask_explainer">Luôn liệt kê mọi trình duyệt</string>
     <string name="enable_downloader">Bật trình tải xuống</string>
     <string name="paste">Dán</string>
     <string name="download">Tải xuống</string>
-    <string name="links_explainer">ClearUrls, FastForward, LibRedirect, Theo dõi chuyển hướng</string>
+    <string name="links_explainer">ClearUrls, LibRedirect, Chuyển hướng theo dõi</string>
     <string name="amp2html_external_service">Cố gắng lấy phiên bản trang không phải AMP thông qua dịch vụ bên ngoài</string>
     <string name="open_with">Mở bằng</string>
     <string name="always_ask">Luôn luôn hỏi</string>
@@ -167,9 +167,9 @@
     <string name="at_least_one_unknown_browser_installer">Đã cài đặt ít nhất một trình duyệt (không xác định)</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet đã phát hiện ít nhất một ứng dụng tự xưng là một trình duyệt. Danh sách của LinkSheet có thể chưa đầy đủ. Nếu bạn cho rằng đây là lỗi, hãy gửi vấn đề trên Github.</string>
     <string name="download_started_toast_explainer">Hiện thông báo ngắn khi tải xuống đã được bắt đầu</string>
-    <string name="resolve_via_toast">Hiện thông báo ngắn khi URL được giải quyết</string>
+    <string name="resolve_via_toast">Giải quyết thành công</string>
     <string name="resolve_via_toast_explainer">Hiện thông báo ngắn khi một URL được giải quyết thông qua một dịch vụ bên ngoài</string>
-    <string name="resolve_via_failed_toast">Hiện thông báo ngắn khi giải quyết thất bại</string>
+    <string name="resolve_via_failed_toast">Giải quyết thất bại</string>
     <string name="resolve_via_failed_toast_explainer">Hiện thông báo ngắn khi URL không thể giải quyết thông qua dịch vụ bên ngoài</string>
     <string name="opening_with_app_toast_explainer">Hiển thị thông báo ngắn khi một ứng dụng đã được đặt làm mặc định cho một tên miền được khởi chạy</string>
     <string name="last_updated">Cập nhật lần cuối (UTC):</string>
@@ -191,7 +191,7 @@
     <string name="shizuku_integration_enabled_explainer">Tích hợp Shizuku đã được kích hoạt thành công!</string>
     <string name="shizuku_not_running_explainer">Shizuku không chạy. Nhấn vào đây để mở Shizuku, sau đó làm theo hướng dẫn để khởi động.</string>
     <string name="shizuku_integration">Tích hợp Shizuku</string>
-    <string name="download_started_toast">Thông báo ngắn đã bắt đầu tải xuống</string>
+    <string name="download_started_toast">Đã bắt đầu tải xuống</string>
     <string name="feature_flags">Cờ tính năng</string>
     <string name="feature_flags_explainer">Bật hoặc tắt các tính năng thử nghiệm</string>
     <string name="open_link_with_subtitle_2">LinkSheet ban đầu dựa trên OpenLinkWith</string>
@@ -199,7 +199,7 @@
     <string name="donate_explainer_crypto">Khi quyên tặng bằng tiền điện tử, hãy gửi email đến <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="linksheet_donation_explainer_2">Khoản quyên tặng hơn <b>5€</b> cho phép bạn truy cập vào <b>LinkSheet Pro</b>, bao gồm <b>các tính năng độc quyền của Pro</b> chẳng hạn như: theo dõi các chuyển hướng bên ngoài, nhận được các chuyển hướng không phải-Các trang AMP bên ngoài và nhiều trang khác sắp ra mắt!</string>
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
-    <string name="opening_with_app_toast">Hiển thị thông báo ngắn khi một ứng dụng được khởi chạy tự động</string>
+    <string name="opening_with_app_toast">Ứng dụng tự động khởi chạy</string>
     <string name="discord_explainer">Trò chuyện về LinkSheet trên Discord</string>
     <string name="shizuku_integration_no_permission_explainer">Nhấn vào đây để yêu cầu sự cho phép của Shizuku.</string>
     <string name="shizuku_integration_not_setup_explainer">Mặc dù không thực sự cần thiết để LinkSheet hoạt động nhưng bạn nên sử dụng Shizuku. Nhấn vào đây để cài đặt nó.</string>
@@ -232,7 +232,7 @@
     <string name="include_history">Bao gồm lịch sử (lịch sử nhấp vào liên kết và ứng dụng của bạn)</string>
     <string name="dev">Nhà phát triển</string>
     <string name="dev_explainer">Thiết đặt dành cho nhà phát triển</string>
-    <string name="url_copied_toast">Thông báo ngắn đã sao chép URL</string>
+    <string name="url_copied_toast">Đã sao chép URL</string>
     <string name="url_copied_toast_explainer">Hiển thị thông báo ngắn khi URL được người dùng sao chép</string>
     <string name="onboarding_0_subtitle">Chọn luôn được nhắc khi mở một liên kết, đặt trình duyệt mặc định và hơn thế nữa</string>
     <string name="onboarding_0_title">Chào mừng bạn đến \nLinkSheet</string>
@@ -387,4 +387,17 @@
     <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
     <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
     <string name="telemetry_identifier_reset">Đặt lại số định danh</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Hiển thị một nút ở trang dưới cùng để mở url trong một hồ sơ khác</string>
+    <string name="settings__title_filter_apps">Lọc ứng dụng</string>
+    <string name="settings_notifications__divider_toasts">Thông báo ngắn</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Tất cả</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Đã bật</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="other">%d đã bật</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="other">%d máy chủ được kích hoạt</item>
+    </plurals>
+    <string name="generic__button_learn_more">Tìm hiểu thêm</string>
+    <string name="settings_about__divider_external_versions">Phiên bản bên ngoài</string>
 </resources>

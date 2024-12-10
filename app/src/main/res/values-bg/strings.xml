@@ -516,4 +516,5 @@
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Известно е, че Xiaomi силно ограничава приложенията по непредсказуеми начини, което води до нарушение на работата на LinkSheet.\nДокоснете бутона след това дайте разрешение за отваряне на нови прозорци при работа във фонов режим</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Необходима е допълнителна настройка</string>
     <string name="settings_main_miui_compat__text_request_failed">Грешка при искане на права!</string>
+    <string name="generic__button_learn_more">Научете повече</string>
 </resources>

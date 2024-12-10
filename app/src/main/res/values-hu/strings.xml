@@ -328,7 +328,7 @@
     <string name="export_settings">Beállítások exportálása</string>
     <string name="include_history">Előzmények felvétele (a linkre leadott kattintások és az alkalmazáselőzmények)</string>
     <string name="export_include_recommendation">Javasoljuk, hogy csak akkor kapcsolja be az alábbi beállításokat, ha nem tervezi megosztani az exportálást másokkal!</string>
-    <string name="export_privacy">Ha többet szeretne megtudni az exportálási adatvédelemről, látogasson el erre a linkre: <annotation url-id="privacy-exports">link</annotation>.</string>
+    <string name="export_privacy">Ha többet szeretne megtudni az exportálási adatvédelemről, látogasson el erre a <annotation url-id="privacy-exports">linkre</annotation>.</string>
     <string name="onboarding_0_subtitle">Válassza ki, hogy mindig kapjon értesítést egy hivatkozás megnyitásakor, állítsa be az alapértelmezett böngészőket és egyebek...</string>
     <string name="resolve_via_toast">Sikeresen feloldva</string>
     <string name="onboarding_3_card_explainer">A Google bevezette az ellenőrzött alkalmazáshivatkozásokat az Android 12-ben, amely lehetővé teszi az alkalmazások számára, hogy kriptográfiailag igazolják a domainek tulajdonjogát. Ezt a viselkedést manuálisan le kell tiltani ahhoz, hogy a LinkSheet elfoghassa a kiválasztott hivatkozásokat.</string>
@@ -440,4 +440,77 @@
     </plurals>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Linkkezelés engedélyezett</string>
     <string name="settings_about__divider_external_versions">Külső változatok</string>
+    <string name="settings_main_setup_success__button_connected_apps">Csatlakozott alkalmazások</string>
+    <string name="generic__button_text_done">Kész</string>
+    <string name="settings_main_news__button_read_more">Olvasson tovább</string>
+    <string name="generic__text_url">Url</string>
+    <string name="settings_app_config__title_native_apps">Alkalmazások</string>
+    <string name="settings_app_config_rules__btn_new_rule">Új szabály</string>
+    <string name="resolve_event__running_libredirect">Megpróbálja megtalálni a FOSS-frontendet</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Profil váltás</string>
+    <string name="settings_app_config_rules__title_default_rule">Alapértelmezett szabály</string>
+    <string name="generic__button_text_delete">Törlés</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">A LinkSheet nincs beállítva a rendszer alapértelmezett böngészőjeként</string>
+    <string name="settings_app_config_rules__title_rules">Szabályok</string>
+    <string name="settings__hint_search">Keresés</string>
+    <string name="resolve_event__unamping_link">AMP nélküli link</string>
+    <string name="export_log_dialog__text_log_privacy">Ha többet szeretne megtudni a megosztott naplófájlokban található potenciálisan érzékeny adatokról, koppintson erre a <annotation url-id="privacy-logs"> linkre</annotation>.</string>
+    <string name="generic__button_text_copy_clipboard">Másolás a vágólapra</string>
+    <string name="generic__button_text_cancel">Mégse</string>
+    <string name="export_log_dialog__text_log_info">Megosztási beállítások konfigurálása a következő helyen rögzített naplóhoz: <font face="monospace">%s</font></string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Rögzített napló megtekintése: %s</string>
+    <string name="crash_viewer__subtitle_app_crashed">Jajj, ennek nem lett volna szabad megtörténnie!</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
+    <string name="settings_links_downloader__title_downloader">Letöltő</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">A LinkSheet megfelelően be van állítva, és készen áll a működésre</string>
+    <string name="settings_main_setup_success__button_change_browser">Alapértelmezett böngésző</string>
+    <string name="settings_main_setup_success__button_set_default_browser">Beállítás alapértelmezett böngészőként</string>
+    <string name="settings_main_news__title_ui_overhaul">Új kinézet</string>
+    <string name="settings_main_news__text_ui_overhaul">A LinkSheet friss külcsínyt kapott!</string>
+    <string name="resolve_event__initialized">Inicializálva</string>
+    <string name="resolve_event__applying_link_modifiers">Hivatkozásmódosítók alkalmazása</string>
+    <string name="resolve_event__resolving_redirects">Átirányítások feloldása</string>
+    <string name="resolve_event__loading_preferred_apps">Előnyben részesített alkalmazások betöltése</string>
+    <string name="resolve_event__sorting_apps">Alkalmazáslista rendezése</string>
+    <string name="settings_links_amp2html__title_skip_browser">Kihagyás, ha böngészőből érkezik</string>
+    <string name="settings_links_follow_redirects__title_skip_browser">Kihagyás, ha böngészőből érkezik</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">Ne kísérelje meg követni az átirányításokat, ha a LinkSheet programot elindító alkalmazásról ismert, hogy böngésző</string>
+    <string name="settings_app_config__title_configure_app_behavior">Konfigurálás %s</string>
+    <string name="settings_app_config__title_browsers">Böngészők</string>
+    <string name="settings_app_config__description_browsers">Telepített webböngészők</string>
+    <string name="settings_new_rule__title_new_rule">Új szabály</string>
+    <string name="settings_app_config_rules__subtitle_default_rule">Ez a szabály akkor használatos, ha más szabályra nincs egyezés</string>
+    <string name="settings_edit_rule__title_edit_rule">Szabály szerkesztése</string>
+    <string name="settings_app_config_rules__text_custom_rules">Egyéni szabályok</string>
+    <string name="delete_log_dialog__title_delete_log">Törli a munkamenetet?</string>
+    <string name="delete_log_dialog__subtitle_delete_info">Törli ezt a napló munkamenetet? Visszavonni már nem lehet!</string>
+    <string name="generic__text_edit">Szerkesztés</string>
+    <string name="home__clipboard_card_source">A vágólapról</string>
+    <string name="settings_profile_switcher__divider_configuration">Konfiguráció</string>
+    <string name="bottom_sheet__event_app_refusal">A célalkalmazás megtagadta a link kezelését!</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Profilok közötti kapcsolat engedélyezése</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Koppintson a LinkSheet és a másodlagos profilban lévő megfelelőjének összekapcsolásához</string>
+    <string name="settings_profile_switcher__divider_current_profile">Jelenlegi profil</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Egyéb profilok</string>
+    <string name="generic__label_personal_profile">Személyes profil</string>
+    <string name="generic__label_work_profile">Munka profil</string>
+    <string name="generic__label_unknown_profile">Ismeretlen profil</string>
+    <string name="settings_profile_switcher__text_not_installed">Nem lehet csatlakozni ehhez a profilhoz</string>
+    <string name="settings_profile_switcher__text_current_profile">Jelenleg ebben a profilban fut</string>
+    <string name="settings_profile_switcher__text_other_profile">Egyéb profil</string>
+    <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">További beállítás szükséges</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Engedélykérés</string>
+    <string name="settings_main_miui_compat__text_request_failed">Nem sikerült engedély kérni!</string>
+    <string name="settings_app_config__description_preferred_browser">Felhasználó által választott preferált böngésző</string>
+    <string name="settings_app_config__title_preferred_browser">Preferált böngésző</string>
+    <string name="settings_app_config__button_add_item">Elem hozzáadása</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">A LinkSheet be van állítva</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">A LinkSheet nincs beállítva</string>
+    <string name="resolve_event__querying_browser_list">Böngészőlista lekérdezése</string>
+    <string name="resolve_event__generating_preview">Előnézet generálása</string>
+    <string name="settings_links_amp2html__text_skip_browser">Ne futtassa az Amp2Html-t, ha a LinkSheet programot elindító alkalmazásról ismert, hogy böngésző</string>
+    <string name="settings_main_setup_success__button_link_handlers">Linkkezelők</string>
+    <string name="resolve_event__download_check">A letölthetőség vizsgálata</string>
+    <string name="settings_app_config__description_native_apps">Alkalmazások, amelyek képesek kezelni a linkeket ezzel a gazdagéppel</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">A Xiaomiról ismert, hogy előre nem látható módon erősen korlátozza az alkalmazásokat, ami a LinkSheet nem megfelelő működéséhez vezet.\nKoppintson az alábbi gombra, majd engedélyezze az \"Új ablakok megnyitása a háttérben\" engedélyt</string>
 </resources>

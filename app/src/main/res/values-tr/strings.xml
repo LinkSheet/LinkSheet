@@ -429,7 +429,7 @@
     <string name="export_log_dialog__title_include_throwable">Çökme raporlarını dahil et</string>
     <string name="settings_about__divider_external_versions">Harici sürümler</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Bağlantı açmaya izin verildi</string>
-    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_name_seal" translatable="false">Seal</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Bağlantı açmaya izin verilmedi</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="one">%d devre dışı sunucu</item>
@@ -467,7 +467,7 @@
     <string name="delete_log_dialog__subtitle_delete_info">Bu günlük oturumunu silmek istiyor musunuz? Bu geri alınamaz!</string>
     <string name="generic__button_text_delete">Sil</string>
     <string name="export_log_dialog__subtitle_include_settings">Önerilir</string>
-    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_name_gmsflags" translatable="false">GMS-Flags</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Atla</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Tasarım ilhamı</string>
     <string name="settings_app_config__title_native_apps">Uygulamalar</string>

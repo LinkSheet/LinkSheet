@@ -313,7 +313,7 @@
     </plurals>
     <string name="settings_about__divider_external_versions">外部バージョン</string>
     <string name="settings_credits__app_credit_reason_seal">デザインのインスピレーション</string>
-    <string name="settings_credits__app_name_gmsflags">GMS フラグ</string>
+    <string name="settings_credits__app_name_gmsflags" translatable="false">GMS-Flags</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">ダウンローダー</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheetが設定されました</string>
@@ -463,7 +463,8 @@
         <item quantity="other">%d が無効</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">対応リンクを開くことが許可されています</string>
-    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_name_seal" translatable="false">
+Seal</string>
     <string name="settings_credits__app_credit_reason_gmsflags">デザインのインスピレーション</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">スキップ</string>
     <string name="export_log_dialog__title_share_logs">ログを共有</string>

@@ -421,9 +421,9 @@
     <string name="settings_shortcuts__title_connected_apps">Připojené aplikace</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Povolené</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Zpracování odkazů nepovoleno</string>
-    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_name_seal" translatable="false">Seal</string>
     <string name="settings_credits__app_credit_reason_seal">Inspirace designem</string>
-    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_name_gmsflags" translatable="false">GMS-Flags</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Inspirace designem</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Přeskočit</string>
     <string name="export_log_dialog__title_share_logs">Sdílet protokol</string>

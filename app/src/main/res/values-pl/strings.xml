@@ -408,7 +408,7 @@
     <string name="generic__button_text_copy_clipboard">Skopiuj do schowka</string>
     <string name="settings_app_config_rules__title_default_rule">Domyślna reguła</string>
     <string name="settings_main_news__title_ui_overhaul">Nowy interfejs</string>
-    <string name="settings_credits__app_name_seal">Seal</string>
+    <string name="settings_credits__app_name_seal" translatable="false">Seal</string>
     <string name="resolve_event__generating_preview">Generowanie poglądu</string>
     <string name="delete_log_dialog__title_delete_log">Usunąć sesję?</string>
     <string name="settings_main_setup_success__button_connected_apps">Połączone aplikacje</string>
@@ -457,7 +457,7 @@
         <item quantity="many">%d wyłączonych linków</item>
         <item quantity="other">%d wyłączonych linków</item>
     </plurals>
-    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_name_gmsflags" translatable="false">GMS-Flags</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Inspiracja projektowa</string>
     <string name="export_log_dialog__title_share_logs">Udostępnij dziennik</string>
     <string name="export_log_dialog__title_redact_log">Zredukuj dziennik</string>

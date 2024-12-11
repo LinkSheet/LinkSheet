@@ -371,7 +371,7 @@
         <item quantity="one">%d gazdagép: %s</item>
         <item quantity="other">%d gazdagép: %s</item>
     </plurals>
-    <string name="settings_credits__app_name_gmsflags">GMS-Flags</string>
+    <string name="settings_credits__app_name_gmsflags">GMS-flegek</string>
     <string name="reset_app_link_verification_status_toast">Újbóli ellenőrzés kérve</string>
     <string name="build_info">Build infó</string>
     <string name="settings_shortcuts__subtitle_default_browser">Nyissa meg az alapértelmezett böngészőbeállítások oldalát</string>
@@ -513,4 +513,5 @@
     <string name="resolve_event__download_check">A letölthetőség vizsgálata</string>
     <string name="settings_app_config__description_native_apps">Alkalmazások, amelyek képesek kezelni a linkeket ezzel a gazdagéppel</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">A Xiaomiról ismert, hogy előre nem látható módon erősen korlátozza az alkalmazásokat, ami a LinkSheet nem megfelelő működéséhez vezet.\nKoppintson az alábbi gombra, majd engedélyezze az \"Új ablakok megnyitása a háttérben\" engedélyt</string>
+    <string name="generic__button_learn_more">Tudjon meg többet</string>
 </resources>

@@ -7,4 +7,5 @@ interface DependencyProvider {
 
     fun provideMiuiCompatProvider(): Module
     fun provideAnalyticsClient(): Module
+    fun provideDebugMenu(): Module
 }

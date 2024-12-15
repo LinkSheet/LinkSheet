@@ -35,6 +35,7 @@ import fe.linksheet.extension.kotlinx.RefreshableStateFlow
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
+import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.MiuiCompat
 import fe.linksheet.module.devicecompat.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference
@@ -62,6 +63,7 @@ class MainViewModel(
     private val analyticsService: BaseAnalyticsService,
     private val miuiCompatProvider: MiuiCompatProvider,
     private val miuiCompat: MiuiCompat,
+    val debugMenu: DebugMenuSlotProvider,
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)

@@ -22,7 +22,6 @@ import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
-import fe.linksheet.debug.DebugComposable
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.compose.*
 import fe.linksheet.module.viewmodel.MainViewModel
@@ -103,22 +102,9 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (BuildType.current.allowDebug) {
+            if (viewModel.debugMenu.enabled) {
                 item {
-                    DebugComposable.MainRoute.compose(currentComposer, 0)
-                }
-            }
-
-            if (BuildType.current.allowDebug) {
-                item {
-                    Row {
-                        FilledTonalButton(
-                            colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                            onClick = { navController.navigate(Routes.RuleOverview) }
-                        ) {
-                            Text(text = "Rules")
-                        }
-                    }
+                    viewModel.debugMenu.SlotContent(navigate = navController::navigate)
                 }
             }
 
@@ -137,7 +123,11 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 MiuiCompatCardWrapper(onClick = {
                     coroutineScope.launch {
                         if (!viewModel.updateMiuiAutoStartAppOp(activity)) {
-                            Toast.makeText(activity, R.string.settings_main_miui_compat__text_request_failed, Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                activity,
+                                R.string.settings_main_miui_compat__text_request_failed,
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
                 })

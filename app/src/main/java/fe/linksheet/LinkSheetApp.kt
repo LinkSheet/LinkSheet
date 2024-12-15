@@ -19,6 +19,8 @@ import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.app.AndroidPackageInfoModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
+import fe.linksheet.module.debug.DebugMenuSlotProvider
+import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.MiuiCompatModule
 import fe.linksheet.module.devicecompat.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.RealMiuiCompatProvider
@@ -102,7 +104,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
         }
 
         if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
-            HiddenApiBypass.addHiddenApiExemptions("L")
+            HiddenApiBypass.addHiddenApiExemptions("")
         }
 
         DynamicColors.applyToActivitiesIfAvailable(this)
@@ -149,7 +151,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             pasteServiceModule,
             AndroidPackageInfoModule,
             ProfileSwitcherModule,
-            AppStateServiceModule
+            AppStateServiceModule,
+            provideDebugMenu()
         )
     }
 
@@ -161,5 +164,11 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideAnalyticsClient(): Module {
         return DebugLogAnalyticsClient.module
+    }
+
+    override fun provideDebugMenu(): Module {
+        return module {
+            single<DebugMenuSlotProvider> { NoOpDebugMenuSlotProvider }
+        }
     }
 }

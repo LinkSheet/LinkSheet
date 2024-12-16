@@ -8,7 +8,7 @@ env:
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ master, "hotfix/*" ]
     paths-ignore:
       - "*.md"
 

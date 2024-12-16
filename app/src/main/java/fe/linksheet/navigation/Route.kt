@@ -2,6 +2,7 @@ package fe.linksheet.navigation
 
 
 import androidx.annotation.Keep
+import androidx.annotation.StringRes
 import androidx.navigation.navDeepLink
 import fe.android.compose.route.util.*
 import fe.linksheet.util.WikiPage

@@ -74,7 +74,7 @@ android {
             string("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
             boolean(
                 "ANALYTICS_SUPPORTED",
-                localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() ?: true
+                localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
         }
 

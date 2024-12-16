@@ -149,12 +149,12 @@ class IntentResolver(
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
-        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull()!! }
+        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
         private val unfurler by lazy { Unfurler() }
     }
 
-    private val clearUrls = ClearUrls(clearUrlProviders)
+    private val clearUrls = clearUrlProviders?.let { ClearUrls(it) }
 
     suspend fun resolveIfEnabled(intent: SafeIntent, referrer: Uri?, canAccessInternet: Boolean): BottomSheetResult {
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
@@ -414,9 +414,13 @@ class IntentResolver(
             logger.debug(url, HashProcessor.UrlProcessor, { "Output: $it" }, "FastForward")
 
             if (clearUrl) {
-                runCatching {
-                    url = clearUrls.clearUrl(url).first
-                }.onFailure { logger.error(throwable = it, subPrefix = "ClearUrls") }
+                if(clearUrls == null) {
+                    logger.error(msg= "ClearURLs is enabled, but rules failed to load, ignoring..", subPrefix = "ClearUrls")
+                } else {
+                    runCatching {
+                        clearUrls?.clearUrl(url)?.first?.let { url = it }
+                    }.onFailure { logger.error(throwable = it, subPrefix = "ClearUrls") }
+                }
             }
 
             logger.debug(url, HashProcessor.UrlProcessor, { "Output: $it" }, "ClearURLs")

@@ -33,6 +33,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.navigation.creditsSettingsRoute
 import fe.linksheet.util.LinkSheetInfo
 import fe.linksheet.util.AppSignature
 import fe.linksheet.util.LinkSheet

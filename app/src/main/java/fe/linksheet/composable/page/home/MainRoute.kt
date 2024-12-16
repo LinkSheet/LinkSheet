@@ -28,6 +28,7 @@ import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
+import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.BuildType
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel

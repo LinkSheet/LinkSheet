@@ -1,4 +1,4 @@
-package fe.linksheet
+package fe.linksheet.navigation
 
 
 import androidx.annotation.Keep

@@ -3,7 +3,7 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import fe.android.preference.helper.compose.StatePreference
-import fe.linksheet.ExperimentSettingsRouteArg
+import fe.linksheet.navigation.ExperimentSettingsRouteArg
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentGroup
 import fe.linksheet.module.preference.experiment.ExperimentRepository

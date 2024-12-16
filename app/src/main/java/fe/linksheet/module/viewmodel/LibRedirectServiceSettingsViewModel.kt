@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
-import fe.linksheet.LibRedirectServiceRoute
+import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.extension.kotlin.mapProducingSideEffect
 import fe.linksheet.module.database.entity.LibRedirectDefault

@@ -11,9 +11,9 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.inAppBrowserSettingsRoute
-import fe.linksheet.preferredAppsSettingsRoute
-import fe.linksheet.preferredBrowserSettingsRoute
+import fe.linksheet.navigation.inAppBrowserSettingsRoute
+import fe.linksheet.navigation.preferredAppsSettingsRoute
+import fe.linksheet.navigation.preferredBrowserSettingsRoute
 
 
 @Composable

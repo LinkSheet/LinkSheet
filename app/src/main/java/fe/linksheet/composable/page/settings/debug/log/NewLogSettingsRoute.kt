@@ -25,13 +25,13 @@ import fe.composekit.component.CommonDefaults
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.std.javatime.time.localizedString
-import fe.linksheet.LogTextViewerRoute
+import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.logTextViewerSettingsRoute
+import fe.linksheet.navigation.logTextViewerSettingsRoute
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

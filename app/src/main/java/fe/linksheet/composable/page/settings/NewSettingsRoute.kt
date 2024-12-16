@@ -13,6 +13,18 @@ import fe.composekit.layout.column.group
 import fe.linksheet.*
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.SettingsViewModel
+import fe.linksheet.navigation.aboutSettingsRoute
+import fe.linksheet.navigation.advancedSettingsRoute
+import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.navigation.bottomSheetSettingsRoute
+import fe.linksheet.navigation.browserSettingsRoute
+import fe.linksheet.navigation.debugSettingsRoute
+import fe.linksheet.navigation.devModeRoute
+import fe.linksheet.navigation.generalSettingsRoute
+import fe.linksheet.navigation.linksSettingsRoute
+import fe.linksheet.navigation.notificationSettingsRoute
+import fe.linksheet.navigation.privacySettingsRoute
+import fe.linksheet.navigation.themeSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 internal object NewSettingsRouteData {

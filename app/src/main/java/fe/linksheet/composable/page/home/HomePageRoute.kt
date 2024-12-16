@@ -2,9 +2,8 @@ package fe.linksheet.composable.page.home
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.navigation
-import fe.linksheet.MainOverviewRoute
-import fe.linksheet.TextEditorRoute
+import fe.linksheet.navigation.MainOverviewRoute
+import fe.linksheet.navigation.TextEditorRoute
 import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
 import fe.linksheet.composable.util.animatedComposable
 import fe.linksheet.navigation.PageRoute

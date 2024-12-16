@@ -6,20 +6,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.OpenInNew
-import androidx.compose.material.icons.filled.PublishedWithChanges
 import androidx.compose.material.icons.filled.Verified
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import fe.linksheet.R
-import fe.linksheet.appsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.SettingsItemRow
 import fe.linksheet.module.viewmodel.FeatureFlagViewModel
-import fe.linksheet.preferredAppsSettingsRoute
-import fe.linksheet.pretendToBeAppRoute
+import fe.linksheet.navigation.preferredAppsSettingsRoute
 import fe.android.compose.version.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 

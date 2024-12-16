@@ -34,7 +34,7 @@ import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R
-import fe.linksheet.Routes
+import fe.linksheet.navigation.Routes
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
@@ -43,7 +43,6 @@ import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.util.BuildType
 import org.koin.androidx.compose.koinViewModel
 
 

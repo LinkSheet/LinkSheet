@@ -27,7 +27,7 @@ import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.whitelistedBrowsersSettingsRoute
+import fe.linksheet.navigation.whitelistedBrowsersSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

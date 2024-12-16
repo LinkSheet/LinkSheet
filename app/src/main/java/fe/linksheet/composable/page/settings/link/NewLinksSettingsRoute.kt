@@ -14,6 +14,10 @@ import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchL
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
+import fe.linksheet.navigation.amp2HtmlSettingsRoute
+import fe.linksheet.navigation.downloaderSettingsRoute
+import fe.linksheet.navigation.followRedirectsSettingsRoute
+import fe.linksheet.navigation.libRedirectSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)

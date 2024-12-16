@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.ClipboardManager
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
-import fe.linksheet.LogTextViewerRoute
+import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.viewmodel.base.SavedStateViewModel

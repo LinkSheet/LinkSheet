@@ -17,13 +17,13 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.component.list.item.type.SwitchListItem
-import fe.linksheet.LibRedirectServiceRoute
+import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.libRedirectServiceSettingsRoute
+import fe.linksheet.navigation.libRedirectServiceSettingsRoute
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel
 import fe.linksheet.util.HostUtil

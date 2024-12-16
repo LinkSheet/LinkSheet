@@ -12,8 +12,8 @@ import fe.composekit.component.list.item.RouteNavigateListItem
 import fe.composekit.layout.column.group
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.experimentSettingsRoute
-import fe.linksheet.exportImportSettingsRoute
+import fe.linksheet.navigation.experimentSettingsRoute
+import fe.linksheet.navigation.exportImportSettingsRoute
 
 
 private object NewAdvancedSettingsRouteData {

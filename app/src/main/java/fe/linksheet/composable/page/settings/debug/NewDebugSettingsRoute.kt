@@ -19,8 +19,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.logViewerSettingsRoute
-import fe.linksheet.module.devicecompat.MiuiCompat
+import fe.linksheet.navigation.logViewerSettingsRoute
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

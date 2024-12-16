@@ -517,4 +517,8 @@
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Необходима е допълнителна настройка</string>
     <string name="settings_main_miui_compat__text_request_failed">Грешка при искане на права!</string>
     <string name="generic__button_learn_more">Научете повече</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Някои от изключените експерименти са включени в това издание.</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Нови подразбирани настройки</string>
+    <string name="generic__button_dismiss">Затваряне</string>
+    <string name="settings_main_experiment_changelog__title_changelog">Дневник на промените на експериментите</string>
 </resources>

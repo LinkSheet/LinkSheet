@@ -22,7 +22,7 @@ object Experiments : PreferenceDefinition(
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
     val improvedBottomSheetUrlDoubleTap = boolean("experiment_impr_btm_sheet_url_double_tap")
     val autoLaunchSingleBrowser = boolean("experiment_improved_bottom_sheet_auto_launch_single_browser")
-    val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps")
+    val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps", true)
     val loopDetector = boolean("experiment_loop_detector", true)
 
     val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")

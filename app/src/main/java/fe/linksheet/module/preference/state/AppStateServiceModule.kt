@@ -6,7 +6,6 @@ import fe.android.lifecycle.LifecycleAwareService
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import org.koin.dsl.module
 
@@ -24,8 +23,9 @@ class AppStateService(
 ) : LifecycleAwareService {
 
     private val updates = mapOf(
-        AppStatePreferences.newDefaults_2024_11_29 to { experimentsRepository.put(Experiments.loopDetector, true) },
-        AppStatePreferences.newDefaults_2024_11_30 to { experimentsRepository.put(Experiments.editClipboard, true) }
+        AppStatePreferences.newDefaults_2024_11_29 to NewDefaults2024_11_29,
+        AppStatePreferences.newDefaults_2024_11_30 to NewDefaults2024_11_30,
+        AppStatePreferences.newDefaults_2024_12_16 to NewDefaults2024_12_16,
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
@@ -39,7 +39,7 @@ class AppStateService(
 
         for ((preference, update) in requiredUpdates) {
             logger.info("Running update for ${preference.key}")
-            update()
+            update.execute(experimentsRepository)
             appStateRepository.put(preference, now)
         }
     }

@@ -531,4 +531,8 @@
     <string name="settings_main_miui_compat__text_request_failed">Nie udało się poprosić o pozwolenie!</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi mocno ogranicza aplikacje w nieprzewidywalny sposób, co prowadzi do nieprawidłowego działania LinkSheet.\nNaciśnij poniższy przycisk i zezwól na uprawnienie \"Otwórz nowe okna podczas działania w tle\"</string>
     <string name="generic__button_learn_more">Czytaj więcej</string>
+    <string name="generic__button_dismiss">Odrzuć</string>
+    <string name="settings_main_experiment_changelog__title_changelog">Dziennik zmian eksperymentów</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Nowe ustawienia domyślne</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Niektóre wcześniej wyłączone eksperymenty zostały włączone w tej wersji.</string>
 </resources>

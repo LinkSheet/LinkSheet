@@ -40,4 +40,5 @@ val viewModelModule = module {
     viewModelOf(::ExperimentsViewModel)
     viewModelOf(::AppConfigViewModel)
     viewModelOf(::ProfileSwitchingSettingsViewModel)
+    viewModelOf(::MarkdownViewModel)
 }

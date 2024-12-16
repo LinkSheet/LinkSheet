@@ -127,6 +127,14 @@ interface Route
 @Serializable
 data class TextEditorRoute(val text: String) : Route
 
+@Keep
+@Serializable
+data class MarkdownViewerRoute(
+    val title: String,
+    val url: String,
+) : Route {
+}
+
 @Serializable
 data object MainRoute : Route
 

@@ -41,7 +41,7 @@ fun MiuiCompatCard(onClick: () -> Unit) {
         headline = textContent(id = R.string.settings_main_miui_compat__title_linksheet_auto_start_failure),
         subtitle = textContent(id = R.string.settings_main_miui_compat__text_linksheet_auto_start_info),
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
                 onClick = onClick

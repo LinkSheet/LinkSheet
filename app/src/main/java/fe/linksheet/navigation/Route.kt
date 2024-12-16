@@ -4,6 +4,7 @@ package fe.linksheet.navigation
 import androidx.annotation.Keep
 import androidx.navigation.navDeepLink
 import fe.android.compose.route.util.*
+import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
 
 
@@ -133,6 +134,7 @@ data class MarkdownViewerRoute(
     val title: String,
     val url: String,
 ) : Route {
+    constructor(wikiPage: WikiPage) : this(wikiPage.page, wikiPage.rawUrl)
 }
 
 @Serializable

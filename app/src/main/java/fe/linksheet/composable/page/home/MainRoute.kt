@@ -1,13 +1,20 @@
 package fe.linksheet.composable.page.home
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.*
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -17,19 +24,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
-import fe.linksheet.*
+import fe.linksheet.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
+import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
-import fe.linksheet.extension.compose.*
-import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.extension.compose.ObserveClipboard
+import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
+import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.BuildType
+import fe.linksheet.util.LinkSheet
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -150,105 +161,22 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-//            divider(id =  R.string.settings_main_news__text_header)
-
-//            item(
-//                key = R.string.settings_main_news__text_ui_overhaul,
-//                contentType = ContentType.ClickableAlert
-//            ) {
-//                NewsCard(
-//                    titleId = R.string.settings_main_news__title_ui_overhaul,
-//                    icon = Icons.Outlined.AutoAwesome.iconPainter,
-//                    contentId = R.string.settings_main_news__text_ui_overhaul,
-//                    buttonTextId = R.string.settings_main_news__button_read_more,
-//                    onClick = {
-//                        Toast.makeText(activity, "News will become available at a later date!", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
-//                )
-//            }
-
-
-//            if (AppSignature.checkSignature(activity) == AppSignature.SignatureBuildType.Unofficial) {
-//                item(
-//                    key = R.string.running_unofficial_build,
-//                    contentType = ContentType.Alert
-//                ) {
-//                    UnofficialBuild()
-//                }
-//            }
-
-
-//            if (useTime != null && showOtherBanners && !viewModel.donateCardDismissed()) {
-//                cardItem(header = R.string.donate) {
-//                    DonateCard(navController = navController, viewModel = viewModel, useTime = useTime)
-//                }
-//            }
-
-//            item(
-//                key = R.string.set_as_default_browser,
-//                contentType = ContentType.ClickableAlert
-//            ) {
-//                OpenDefaultBrowserCard(
-//                    activity = activity,
-//                    defaultBrowserEnabled = defaultBrowserEnabled,
-//                    defaultBrowserChanged = { defaultBrowserEnabled = it },
-//                    viewModel = viewModel
-//                )
-//            }
-
-//            item(
-//                key = R.string.shizuku_integration,
-//                contentType = ContentType.ClickableAlert
-//            ) {
-//                ShizukuCard(
-//                    activity = activity,
-//                    uriHandler = uriHandler,
-//                    shizukuInstalled = shizukuInstalled,
-//                    shizukuRunning = shizukuRunning
-//                )
-//            }
-
-//            if (browserStatus != MainViewModel.BrowserStatus.Known) {
-//            item(
-//                key = R.string.browser_status,
-//                contentType = ContentType.ClickableAlert
-//            ) {
-//                BrowserCard(browserStatus = browserStatus)
-//            }
-//            }
-
-
-//            if (showOtherBanners) {
-//                val discord = viewModel.showDiscordBanner()
-//
-//                if (discord) {
-//                    header(header = R.string.other)
-//                }
-//
-//                if (discord) {
-//                    cardItem {
-//                        DiscordCard(viewModel = viewModel, uriHandler = uriHandler)
-//                    }
-//                }
-//            }
-
-//            items(count = 100, key = { it }) { idx ->
-//                OutlinedCard(modifier = Modifier.requiredHeight(100.dp), onClick = { /*TODO*/ }) {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(all = 16.dp)
-//                    ) {
-//                        Text(
-//                            text = "$idx",
-//                            fontFamily = HkGroteskFontFamily,
-//                            fontWeight = FontWeight.SemiBold,
-//                            fontSize = 20.sp,
-//                        )
-//                    }
-//                }
-//            }
+//            divider(id = R.string.settings_main_news__text_header)
+            if(!viewModel.newDefaultsDismissed()) {
+                item(
+                    key = R.string.settings_main_experiment_news__title_experiment_state_updated,
+                    contentType = ContentType.ClickableAlert
+                ) {
+                    ExperimentUpdatedCard(
+                        onClick = {
+                            navController.navigate(MarkdownViewerRoute(LinkSheet.WikiExperiments))
+                        },
+                        onDismiss = {
+                            viewModel.newDefaultsDismissed(true)
+                        }
+                    )
+                }
+            }
         }
     }
 }

@@ -45,6 +45,8 @@ import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
 import fe.android.compose.version.AndroidVersion
+import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
+import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.Routes
 import fe.linksheet.navigation.aboutSettingsRoute
 import fe.linksheet.navigation.advancedSettingsRoute
@@ -93,6 +95,10 @@ fun MainNavHost(
         startDestination = HomePageRoute
     ) {
         addPageRoute(HomePageRoute, navController)
+
+        animatedComposable<MarkdownViewerRoute> { _, route ->
+            MarkdownViewerWrapper(onBackPressed = onBackPressed, title = route.title, url = route.url)
+        }
 
         animatedComposable(route = Routes.AboutVersion) {
             VersionSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)

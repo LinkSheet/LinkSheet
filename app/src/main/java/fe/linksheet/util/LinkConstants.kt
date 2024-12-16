@@ -33,9 +33,15 @@ object LinkSheet {
     val Wiki = "$Repo/wiki"
     val WikiDeviceIssuesXiaomi = "${Wiki}/Device%E2%80%90specific-issues#xiaomimiui"
 
+    val WikiExperiments = WikiPage("LinkSheet", "LinkSheet", "Experiments")
+
     val CompatReleases = "$Org/compat/releases"
 }
 
+class WikiPage(val org: String, val repo: String, val page: String) {
+    val url = "https://github.com/$org/$repo/wiki/$page"
+    val rawUrl = "https://raw.githubusercontent.com/wiki/$org/$repo/$page.md"
+}
 
 val OpenLinkWithRepo = Github("tasomaniac", "OpenLinkWith")
 val MastodonRedirectRepo = Github("zacharee", "MastodonRedirect")

@@ -44,6 +44,8 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
+import fe.linksheet.module.preference.state.AppStatePreferences
+import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -56,6 +58,7 @@ import java.time.Duration
 
 class MainViewModel(
     val context: Application,
+    val appStateRepository: AppStateRepository,
     val preferenceRepository: AppPreferenceRepository,
     val experimentRepository: ExperimentRepository,
     val browserResolver: BrowserResolver,
@@ -65,6 +68,7 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
 ) : BaseViewModel(preferenceRepository) {
+    val newDefaultsDismissed = appStateRepository.asState(AppStatePreferences.newDefaults_2024_12_16_InfoDismissed)
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
 

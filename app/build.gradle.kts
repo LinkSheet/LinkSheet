@@ -314,7 +314,7 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
 
-    implementation ("com.github.jeziellago:compose-markdown:0.5.4")
+    implementation ("com.github.jeziellago:compose-markdown:_")
 
     implementation("app.cash.zipline:zipline-android:_")
     implementation("app.cash.zipline:zipline-loader-android:_")

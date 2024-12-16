@@ -7,11 +7,12 @@ import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import fe.clearurlskt.ClearURL
-import fe.clearurlskt.ClearURLLoader
+import fe.clearurlskt.ClearUrls
+import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
+import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.queryResolveInfosByIntent
@@ -148,10 +149,12 @@ class IntentResolver(
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
-        private val clearUrlProviders by lazy { ClearURLLoader.loadBuiltInClearURLProviders() }
+        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull()!! }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
         private val unfurler by lazy { Unfurler() }
     }
+
+    private val clearUrls = ClearUrls(clearUrlProviders)
 
     suspend fun resolveIfEnabled(intent: SafeIntent, referrer: Uri?, canAccessInternet: Boolean): BottomSheetResult {
 //        logger.debug({ "Intent=$it"}, intent, NoOpProcessor)
@@ -412,7 +415,7 @@ class IntentResolver(
 
             if (clearUrl) {
                 runCatching {
-                    url = ClearURL.clearUrl(url, clearUrlProviders)
+                    url = clearUrls.clearUrl(url).first
                 }.onFailure { logger.error(throwable = it, subPrefix = "ClearUrls") }
             }
 

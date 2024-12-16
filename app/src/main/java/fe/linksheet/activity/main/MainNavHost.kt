@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.composable.page.home.HomePageRoute
@@ -97,7 +98,8 @@ fun MainNavHost(
         addPageRoute(HomePageRoute, navController)
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
-            MarkdownViewerWrapper(onBackPressed = onBackPressed, title = route.title, url = route.url)
+            val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
+            MarkdownViewerWrapper(onBackPressed = onBackPressed, title = titleStr, url = route.url)
         }
 
         animatedComposable(route = Routes.AboutVersion) {

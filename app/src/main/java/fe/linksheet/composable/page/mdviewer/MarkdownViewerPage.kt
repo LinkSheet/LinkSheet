@@ -3,6 +3,7 @@ package fe.linksheet.composable.page.mdviewer
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import dev.jeziellago.compose.markdowntext.MarkdownText
+import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
@@ -77,7 +79,9 @@ private fun MarkdownViewer(
                     MarkdownText(
                         modifier = Modifier,
                         markdown = markdown,
+                        linkColor = LocalLinkAnnotationStyle.current.style.color,
                         style = MaterialTheme.typography.bodyMedium,
+                        isTextSelectable = true
                     )
                 }
             }
@@ -198,7 +202,7 @@ private class MarkdownPreviewParameterProvider : PreviewParameterProvider<Pair<S
 @Preview(group = "MarkdownViewerPage", showBackground = false)
 @Composable
 private fun PreviewText(
-    @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>
+    @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>,
 ) {
     val (title, markdown) = preview
 

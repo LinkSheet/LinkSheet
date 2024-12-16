@@ -1,6 +1,8 @@
 package fe.linksheet.util
 
+import androidx.annotation.StringRes
 import fe.android.span.helper.LinkTags
+import fe.linksheet.R
 
 object LinkConstants {
     val tags = LinkTags(
@@ -33,12 +35,12 @@ object LinkSheet {
     val Wiki = "$Repo/wiki"
     val WikiDeviceIssuesXiaomi = "${Wiki}/Device%E2%80%90specific-issues#xiaomimiui"
 
-    val WikiExperiments = WikiPage("LinkSheet", "LinkSheet", "Experiments")
+    val WikiExperiments = WikiPage("LinkSheet", "LinkSheet", "Changelog-(Experiments)", R.string.settings_main_experiment_changelog__title_changelog)
 
     val CompatReleases = "$Org/compat/releases"
 }
 
-class WikiPage(val org: String, val repo: String, val page: String) {
+class WikiPage(val org: String, val repo: String, val page: String, @StringRes val customTitle: Int? = null) {
     val url = "https://github.com/$org/$repo/wiki/$page"
     val rawUrl = "https://raw.githubusercontent.com/wiki/$org/$repo/$page.md"
 }

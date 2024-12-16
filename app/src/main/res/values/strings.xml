@@ -520,4 +520,5 @@
     <string name="settings_main_experiment_news__title_experiment_state_updated">New defaults</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Some previously disabled experiments have been enabled in this build.</string>
     <string name="generic__button_dismiss">Dismiss</string>
+    <string name="settings_main_experiment_changelog__title_changelog">Experiments changelog</string>
 </resources>

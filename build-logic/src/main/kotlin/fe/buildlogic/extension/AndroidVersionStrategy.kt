@@ -35,7 +35,6 @@ fun handleNightlyTag(tag: String): Int? {
 
     val (_, year, month, day, buildNum) = match
     val date = LocalDate.of(year.toInt(), month.toInt(), day.toInt())
-    val dateStr = date.format(dtf) + buildNum.padStart(1, '0')
 
-    return dateStr.toIntOrNull()
+    return date.format(dtf).toIntOrNull()
 }

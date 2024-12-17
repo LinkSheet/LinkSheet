@@ -60,7 +60,6 @@
     <string name="no_handlers_found_explainer">ਲਿੰਕਸ਼ੀਟ ਇਸ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦੀ।</string>
     <string name="redirect_resolve_type_local_cache">ਸਥਾਨਕ ਕੈਸ਼</string>
     <string name="use_unified_preferred_browser_explainer">ਇਸਨੂੰ ਇਨੇਬਲ ਕਰਨਾ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਲਿੰਕ ਹੈਂਡਲਿੰਗ ਦੋਵਾਂ \'ਤੇ ਲਾਗੂ ਕਰਦਾ ਹੈ। ਡਿਸੇਬਲ ਹੋਣ \'ਤੇ ਸਧਾਰਨ ਅਤੇ ਇਨ-ਐਪ ਮੋਡ ਵਿਚਕਾਰ ਸਵਿਚ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।</string>
-    <string name="advanced_explainer">ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਜਿਵੇਂ ਪ੍ਰਯੋਗਾਤਮਕ ਅਤੇ ਨਿਰਯਾਤ/ਆਯਾਤ</string>
     <string name="amp2html_local_cache_explainer">ਵੈੱਬਪੰਨਿਆਂ ਦੇ ਮੁੜ ਪ੍ਰਾਪਤ ਕੀਤੇ ਗੈਰ-AMP ਸੰਸਕਰਣਾਂ ਨੂੰ ਸਥਾਨਕ ਤੌਰ \'ਤੇ ਕੈਸ਼ ਕਰੋ</string>
     <string name="no">ਨਹੀਂ</string>
     <string name="normal">ਸਧਾਰਣ</string>

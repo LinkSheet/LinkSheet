@@ -49,7 +49,6 @@
     <string name="amp2html">Amp2Html</string>
     <string name="redirect_resolve_type_local_cache">локальный кэш</string>
     <string name="use_unified_preferred_browser_explainer">Включение этого параметра применяет приведенные ниже настройки как к обычной обработке ссылок, так и к обработке ссылок в приложении. Используйте кнопки ниже для переключения между обычным режимом и режимом в приложении, когда он отключен.</string>
-    <string name="advanced_explainer">Расширенные настройки, такие как флаги функций и экспорт/импорт</string>
     <string name="amp2html_local_cache_explainer">Локальное кэширование полученных версий веб-страниц, не относящихся к AMP</string>
     <string name="normal">Нормально</string>
     <string name="clear">Очистить</string>

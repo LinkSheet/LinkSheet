@@ -184,7 +184,6 @@
     <string name="instance_not_available_anymore">Phiên bản không còn khả dụng nữa!</string>
     <string name="advanced">Nâng cao</string>
     <string name="shizuku">Tích hợp Shizuku</string>
-    <string name="advanced_explainer">Cờ tính năng, Thử nghiệm, Nhập/Xuất</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Đã bật chế độ Shizuku, nhấn vào một ứng dụng để chuyển đổi khả năng xử lý liên kết tự động. Nhấn và giữ một ứng dụng để mở thực đơn thiết đặt \"Mở theo mặc định\".</string>
     <string name="enable_all">Bật tất cả</string>
     <string name="disable_all">Tắt tất cả</string>

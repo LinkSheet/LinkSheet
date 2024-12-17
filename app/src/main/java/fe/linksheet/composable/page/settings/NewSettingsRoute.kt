@@ -88,7 +88,7 @@ internal object NewSettingsRouteData {
             advancedSettingsRoute,
             Icons.Outlined.Terminal.iconPainter,
             textContent(R.string.advanced),
-            textContent(R.string.advanced_explainer),
+            textContent(R.string.settings__subtitle_advanced),
         ),
         RouteNavItem(
             debugSettingsRoute,

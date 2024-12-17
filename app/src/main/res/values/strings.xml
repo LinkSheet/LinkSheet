@@ -167,7 +167,6 @@
     <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
     <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
-    <string name="advanced_explainer">Feature Flags, Experiments, Import/Export</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer_short">Interact with system APIs directly</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -521,4 +520,5 @@
     <string name="settings_main_experiment_news__text_experiment_state_updated">Some previously disabled experiments have been enabled in this build.</string>
     <string name="generic__button_dismiss">Dismiss</string>
     <string name="settings_main_experiment_changelog__title_changelog">Experiments changelog</string>
+    <string name="settings__subtitle_advanced"><![CDATA[Experiments & Export/Import]]></string>
 </resources>

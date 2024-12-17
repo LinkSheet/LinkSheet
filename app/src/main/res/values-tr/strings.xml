@@ -287,7 +287,6 @@
     <string name="follow_redirects_allow_darknets_explainer">Darknetler için aşağıdaki yönlendirmelere izin ver (desteklenen: %s)</string>
     <string name="urlbar_settings">Url-bar</string>
     <string name="include_throwable">Çökme günlüklerini dahil et (önerilir, fakat özel bilgiler gizlenemez)</string>
-    <string name="advanced_explainer">Özellik işaretleri, Deneyler, İçe/dışa aktarma</string>
     <string name="enable_all">Tümünü etkinleştir</string>
     <string name="no_handlers_found">Tarayıcı veya yerel uygulama bulunamadı!</string>
     <string name="no_handlers_found_explainer">LinkSheet bu bağlantıyı açamaz.</string>

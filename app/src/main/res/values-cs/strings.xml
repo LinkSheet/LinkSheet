@@ -209,7 +209,6 @@
     <string name="feature_flags_explainer">Povolit nebo zakázat experimentální funkce</string>
     <string name="no_apps_which_can_handle_links_found">Nebyly nalezeny žádné aplikace, které dokážou zpracovat odkazy.</string>
     <string name="services">Služby</string>
-    <string name="advanced_explainer">Příznaky funkcí, experimenty, import/export</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="shizuku_integration_enabled_explainer">Integrace Shizuku byla úspěšně povolena!</string>
     <string name="shizuku_integration">Integrace Shizuku</string>

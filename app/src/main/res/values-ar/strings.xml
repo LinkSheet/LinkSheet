@@ -167,7 +167,6 @@
     <string name="shizuku">دمج شيزوكو</string>
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
     <string name="advanced">متقدم</string>
-    <string name="advanced_explainer">الإعدادات المتقدمة مثل علامات الميزات والتصدير/الاستيراد</string>
     <string name="mastodon_redirect">إعادة توجيه Mastodon</string>
     <string name="shizuku_integration">دمج شيزوكو</string>
     <string name="shizuku_integration_no_permission_explainer">انقر هنا لطلب إذن شيزوكو.</string>

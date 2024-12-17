@@ -65,7 +65,6 @@
     <string name="join">Придружи се</string>
     <string name="redirect_resolve_type_local_cache">локални кеш</string>
     <string name="use_unified_preferred_browser_explainer">Омогућавање овога ће применити доленаведена подешавања и на нормално и на руковање линковима у апликацији. Користите дугмад испод да бисте се пребацивали између нормалног и режима у апликацији када је онемогућено.</string>
-    <string name="advanced_explainer">Експерименталне функције, увоз/извоз</string>
     <string name="discord">Discord</string>
     <string name="amp2html_local_cache_explainer">Локално кеширајте преузете не-AMP верзије веб-страница</string>
     <string name="no">Не</string>

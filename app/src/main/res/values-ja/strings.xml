@@ -405,7 +405,6 @@
     <string name="enable_request_private_browsing_button_explainer">ブラウザボタンの横にクリックした URL をプライベート ブラウジング モードで開くボタンを表示します。サポートされているブラウザ: %s</string>
     <string name="amp2html_local_cache">ローカル Amp2Html キャッシュを有効にする</string>
     <string name="amp2html_local_cache_explainer">取得したウェブページの非AMPバージョンをローカルにキャッシュする</string>
-    <string name="advanced_explainer">機能フラグ、実験、インポート/エクスポート</string>
     <string name="shizuku_explainer_short">システムAPIと直接連携する</string>
     <string name="shizuku_integration_enabled_explainer">Shizukuの統合が正常に有効になりました！</string>
     <string name="shizuku_integration_no_permission_explainer">ここをタップしてShizukuに許可を求める。</string>

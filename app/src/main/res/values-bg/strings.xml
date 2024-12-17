@@ -175,7 +175,6 @@
     <string name="shizuku_integration_no_permission_explainer">За да поискате разрешение за Shizuku докоснете.</string>
     <string name="shizuku_integration">Интеграция с Shizuku</string>
     <string name="advanced">Разширени</string>
-    <string name="advanced_explainer">Флагове, експерименти, внасяне/изнасяне</string>
     <string name="shizuku_explainer_short">Директно взаимодейства със системните ППИ</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="resolve_failed">%s е неуспешно: %s</string>

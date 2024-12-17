@@ -132,7 +132,6 @@
     <string name="join">Beitreten</string>
     <string name="redirect_resolve_type_local_cache">lokaler Zwischenspeicher</string>
     <string name="use_unified_preferred_browser_explainer">Wenn Sie diese Option aktivieren, werden die nachstehenden Einstellungen sowohl für die normale als auch für die In-App-Verknüpfung übernommen. Verwenden Sie die nachstehenden Schaltflächen, um zwischen dem normalen und dem In-App-Modus zu wechseln, wenn deaktiviert.</string>
-    <string name="advanced_explainer">Erweiterte Funktionen wie Funktions-Flags</string>
     <string name="discord">Discord</string>
     <string name="amp2html_local_cache_explainer">Abgerufene Nicht-AMP-Versionen von Webseiten lokal zwischenspeichern</string>
     <string name="no">Nein</string>

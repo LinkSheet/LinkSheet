@@ -145,7 +145,6 @@
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet无法打开此链接。</string>
     <string name="join">加入</string>
-    <string name="advanced_explainer">功能标志，实验设置，导入/导出</string>
     <string name="discord">Discord</string>
     <string name="amp2html_local_cache_explainer">缓存获得的非AMP版本网页到本地</string>
     <string name="no">否</string>

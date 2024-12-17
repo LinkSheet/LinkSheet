@@ -167,7 +167,6 @@
     <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url-id="privacy-amp2html">implicações relacionadas à privacidade</annotation></string>
     <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
     <string name="advanced">Avançado</string>
-    <string name="advanced_explainer">Sinalizadores de Recursos, Experimentos, Importação/Exportação</string>
     <string name="shizuku">Integração com o Shizuku</string>
     <string name="shizuku_explainer_short">Interagir diretamente com as APIs do sistema</string>
     <string name="mastodon_redirect">MastodonRedirect</string>

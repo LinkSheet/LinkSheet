@@ -175,7 +175,6 @@
     <string name="shizuku_integration_no_permission_explainer">Kliknij tutaj, aby poprosić Shizuku o uprawnienie.</string>
     <string name="shizuku_integration">Integracja Shizuku</string>
     <string name="advanced">Zaawansowane</string>
-    <string name="advanced_explainer">Flagi funkcji, Eksperymenty, Import/Eksport</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="feature_flags_explainer">Włącz lub wyłącz funkcje eksperymentalne</string>
     <string name="feature_flags">Flagi funkcji</string>

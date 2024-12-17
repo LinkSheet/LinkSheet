@@ -60,7 +60,6 @@
     <string name="no_handlers_found_explainer">LinkSheet no puede abrir este enlace.</string>
     <string name="redirect_resolve_type_local_cache">caché local</string>
     <string name="use_unified_preferred_browser_explainer">Al habilitar esta opción, se aplican las siguientes configuraciones tanto al manejo de enlaces normal como dentro de la aplicación. Use los botones a continuación para cambiar entre el modo normal y dentro de la aplicación cuando esté deshabilitado.</string>
-    <string name="advanced_explainer">Indicadores de funciones, experimentos, importación/exportación</string>
     <string name="amp2html_local_cache_explainer">Almacenar localmente en caché las versiones recuperadas de páginas web que no sean AMP</string>
     <string name="no">No</string>
     <string name="normal">Normal</string>

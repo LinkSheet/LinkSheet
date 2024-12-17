@@ -115,7 +115,6 @@
     <string name="enable_amp2html">Amp2Html engedélyezése</string>
     <string name="amp2html_local_cache">Helyi Amp2Html gyorsítótár engedélyezése</string>
     <string name="amp2html_local_cache_explainer">Gyorsítótárazza a weboldalak letöltött nem AMP-verzióit helyileg</string>
-    <string name="advanced_explainer">Funkció kapcsolók, kísérleti funkciók, importálás/exportálás</string>
     <string name="instance_not_available_anymore">A példány már nem elérhető!</string>
     <string name="advanced">Speciális</string>
     <string name="shizuku_explainer_short">Közvetlenül interakcióba léphet a rendszer API-kkal</string>

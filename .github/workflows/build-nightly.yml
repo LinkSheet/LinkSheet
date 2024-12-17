@@ -60,17 +60,22 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
+      - name: Get output file path
+        id: get_output_file_path
+        shell: bash
+        run: |
+          json_content=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json)
+          echo "VERSION_CODE=$(echo "$json_content" | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+          echo "OUTPUT_FILE=$(echo "$json_content" | jq '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+
       - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
           path: |
-            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/*.apk
+            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/$APK_FILE
             app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
-
-      - name: Get file name
-        id: get_file_name
-        shell: bash
-        run: echo "FILE_NAME=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+        env:
+          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
 
       - name: Nightly release notes
         id: release_note
@@ -82,11 +87,13 @@ jobs:
           last-commit-sha: ${{ github.event.before }}
           commit-sha: ${{ github.sha }}
 
-      - run: gh release create -R "$NIGHTLY_REPO" $NIGHTLY_TAG app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/*.apk --latest --notes "$RELEASE_NOTE"
+      - run: gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"
         env:
+          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
+          NIGHTLY_TAG: ${{ github.ref }}
+          VERSION_CODE: ${{ steps.get_output_file_path.VERSION_CODE }}
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
-          NIGHTLY_TAG: ${{ steps.get_file_name.outputs.FILE_NAME }}
           RELEASE_NOTE: ${{ steps.release_note.outputs.releaseNote }}
           BUILD_FLAVOR: ${{ env.BUILD_FLAVOR }}
           BUILD_TYPE: ${{ env.BUILD_TYPE }}

@@ -65,17 +65,17 @@ jobs:
         shell: bash
         run: |
           json_content=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json)
-          VERSION_CODE=$(echo "$json_content" | jq '.elements[0].versionCode|tostring')
-          OUTPUT_FILE=$(echo "$json_content" | jq '.elements[0].outputFile')
-          echo "VERSION_CODE=$VERSION_CODE" >> "$GITHUB_OUTPUT"
-          echo "OUTPUT_FILE=$OUTPUT_FILE" >> "$GITHUB_OUTPUT"
+          echo "VERSION_CODE=$(json_content | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+          echo "OUTPUT_FILE=$(json_content | jq '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
           path: |
-            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.get_output_file_path.OUTPUT_FILE }}
+            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/$APK_FILE
             app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
+        env:
+          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
 
       - name: Nightly release notes
         id: release_note

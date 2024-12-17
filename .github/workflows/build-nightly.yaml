@@ -58,7 +58,7 @@ jobs:
     - id: 'step-6'
       name: 'Get output file path'
       env:
-        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/${{ BUILD_FLAVOR }}/${{ BUILD_TYPE }}/output-metadata.json'
+        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/output-metadata.json'
       shell: 'bash'
       run: |-
         json_content=$(cat "$OUTPUT_METADATA_JSON")
@@ -69,5 +69,5 @@ jobs:
       with:
         name: 'linksheet-nightly'
         path: |-
-          app/build/outputs/apk/${{ BUILD_FLAVOR }}/${{ BUILD_TYPE }}/${{ steps.step-6.outputs.OUTPUT_FILE }}
-          app/build/outputs/apk/${{ BUILD_FLAVOR_TYPE }}/*.txt
+          app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-6.outputs.OUTPUT_FILE }}
+          app/build/outputs/apk/${{ env.BUILD_FLAVOR_TYPE }}/*.txt

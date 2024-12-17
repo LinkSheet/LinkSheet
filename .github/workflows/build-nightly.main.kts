@@ -117,7 +117,7 @@ workflow(
 //            )
 //        )
 
-        val baseOutPathExpr = "app/build/outputs/apk/${expr { env["BUILD_FLAVOR"].toString() }}/${expr { env["BUILD_TYPE"].toString() }}"
+        val baseOutPathExpr = "app/build/outputs/apk/${expr("env.BUILD_FLAVOR")}/${expr("env.BUILD_TYPE")}"
 
         fun cmdQuote(name: String): String {
             return """"$name""""
@@ -160,7 +160,7 @@ workflow(
         uses(
             action = UploadArtifact(
                 name = "linksheet-nightly",
-                path = listOf(apkPathExpr, "app/build/outputs/apk/${expr { env["BUILD_FLAVOR_TYPE"].toString() }}/*.txt")
+                path = listOf(apkPathExpr, "app/build/outputs/apk/${expr("env.BUILD_FLAVOR_TYPE")}/*.txt")
             )
         )
 

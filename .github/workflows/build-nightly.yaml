@@ -11,9 +11,9 @@ on:
     tags:
     - 'nightly/2[0-9][2-9][4-9][0-1][0-2][0-3][0-9][0-9][0-9]'
 env:
-  $BUILD_FLAVOR: 'foss'
-  $BUILD_TYPE: 'nightly'
-  $BUILD_FLAVOR_TYPE: 'fossNightly'
+  BUILD_FLAVOR: 'foss'
+  BUILD_TYPE: 'nightly'
+  BUILD_FLAVOR_TYPE: 'fossNightly'
 jobs:
   check_yaml_consistency:
     name: 'Check YAML consistency'
@@ -56,26 +56,18 @@ jobs:
     - id: 'step-5'
       uses: 'gradle/actions/setup-gradle@v3'
     - id: 'step-6'
-      env:
-        GITHUB_WORKFLOW_RUN_ID: '${{ github.run_id }}'
-        KEYSTORE_FILE_PATH: '${{ steps.step-4.outputs.filePath }}'
-        KEYSTORE_PASSWORD: '${{ secrets.KEYSTORE_PASSWORD }}'
-        KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
-        KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
-      run: './gradlew assembleFossNightly'
-    - id: 'step-7'
       name: 'Get output file path'
       env:
-        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json'
+        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/${{ BUILD_FLAVOR }}/${{ BUILD_TYPE }}/output-metadata.json'
       shell: 'bash'
       run: |-
         json_content=$(cat "$OUTPUT_METADATA_JSON")
         echo "VERSION_CODE=$(echo "$json_content" | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
         echo "OUTPUT_FILE=$(echo "$json_content" | jq '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
-    - id: 'step-8'
+    - id: 'step-7'
       uses: 'actions/upload-artifact@v4'
       with:
         name: 'linksheet-nightly'
         path: |-
-          app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/${{ steps.step-7.outputs.OUTPUT_FILE }}
-          app/build/outputs/apk/$BUILD_FLAVOR_TYPE/*.txt
+          app/build/outputs/apk/${{ BUILD_FLAVOR }}/${{ BUILD_TYPE }}/${{ steps.step-6.outputs.OUTPUT_FILE }}
+          app/build/outputs/apk/${{ BUILD_FLAVOR_TYPE }}/*.txt

@@ -71,16 +71,16 @@ val triggerRemoteWorkflow = CustomAction(
 )
 
 
-val BUILD_FLAVOR by Contexts.env
-val BUILD_TYPE by Contexts.env
-val BUILD_FLAVOR_TYPE by Contexts.env
+//val BUILD_FLAVOR by Contexts.env
+//val BUILD_TYPE by Contexts.env
+//val BUILD_FLAVOR_TYPE by Contexts.env
 
 workflow(
     name = "Build nightly APK",
     env = mapOf(
-        BUILD_FLAVOR to "foss",
-        BUILD_TYPE to "nightly",
-        BUILD_FLAVOR_TYPE to "fossNightly"
+        "BUILD_FLAVOR" to "foss",
+        "BUILD_TYPE" to "nightly",
+        "BUILD_FLAVOR_TYPE" to "fossNightly"
     ),
     on = listOf(
         WorkflowDispatch(), Push(
@@ -106,18 +106,18 @@ workflow(
         val androidKeyStore = uses(action = base64ToFile)
         uses(action = ActionsSetupGradle())
 
-        run(
-            command = "./gradlew assembleFossNightly",
-            env = mapOf(
-                "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
-                "KEYSTORE_FILE_PATH" to expr { androidKeyStore.outputs["filePath"] },
-                "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
-                "KEY_ALIAS" to expr { KEY_ALIAS },
-                "KEY_PASSWORD" to expr { KEY_PASSWORD }
-            )
-        )
+//        run(
+//            command = "./gradlew assembleFossNightly",
+//            env = mapOf(
+//                "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
+//                "KEYSTORE_FILE_PATH" to expr { androidKeyStore.outputs["filePath"] },
+//                "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
+//                "KEY_ALIAS" to expr { KEY_ALIAS },
+//                "KEY_PASSWORD" to expr { KEY_PASSWORD }
+//            )
+//        )
 
-        val baseOutPathExpr = "app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE"
+        val baseOutPathExpr = "app/build/outputs/apk/${expr { env["BUILD_FLAVOR"].toString() }}/${expr { env["BUILD_TYPE"].toString() }}"
 
         fun cmdQuote(name: String): String {
             return """"$name""""
@@ -160,7 +160,7 @@ workflow(
         uses(
             action = UploadArtifact(
                 name = "linksheet-nightly",
-                path = listOf(apkPathExpr, "app/build/outputs/apk/$BUILD_FLAVOR_TYPE/*.txt")
+                path = listOf(apkPathExpr, "app/build/outputs/apk/${expr { env["BUILD_FLAVOR_TYPE"].toString() }}/*.txt")
             )
         )
 

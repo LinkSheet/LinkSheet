@@ -71,3 +71,22 @@ jobs:
         path: |-
           app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-6.outputs.OUTPUT_FILE }}
           app/build/outputs/apk/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
+    - id: 'step-8'
+      uses: '1fexd/gh-create-release-notes@0.0.9'
+      with:
+        github-token: '${{ secrets.GITHUB_TOKEN }}'
+        stable-repo: '${{ github.repository }}'
+        nightly-repo: '${{ vars.NIGHTLY_REPO_URL }}'
+        last-commit-sha: '${{ github.event.before }}'
+        commit-sha: '${{ github.sha }}'
+    - id: 'step-9'
+      env:
+        APK_FILE: 'app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-6.outputs.OUTPUT_FILE }}'
+        NIGHTLY_TAG: '${{ github.ref }}'
+        VERSION_CODE: '${{ steps.step-6.outputs.VERSION_CODE }}'
+        GITHUB_TOKEN: '${{ github.token }}'
+        NIGHTLY_REPO: '${{ vars.NIGHTLY_REPO_URL }}'
+        BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
+        BUILD_TYPE: '${{ env.BUILD_TYPE }}'
+        RELEASE_NOTE: '${{ steps.step-8.outputs.releaseNote }}'
+      run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'

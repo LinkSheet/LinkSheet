@@ -164,23 +164,23 @@ workflow(
             )
         )
 
-//        val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
+        val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
 
-//        run(
-//            command = """
-//                gh release create -R "${'$'}NIGHTLY_REPO" -t "${'$'}VERSION_CODE" "${'$'}NIGHTLY_TAG" "${'$'}APK_FILE" --latest --notes "${'$'}RELEASE_NOTE"
-//            """.trimIndent(),
-//            env = mapOf(
-//                "APK_FILE" to apkPathExpr,
-//                "NIGHTLY_TAG" to expr { github.ref },
-//                "VERSION_CODE" to versionCodeExpr,
-//                "GITHUB_TOKEN" to expr { github.token },
-//                "NIGHTLY_REPO" to expr("vars.NIGHTLY_REPO_URL"),
-//                "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
-//                "BUILD_TYPE" to expr(BUILD_TYPE),
-//                "RELEASE_NOTE" to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
-//            )
-//        )
+        run(
+            command = """
+                gh release create -R "${'$'}NIGHTLY_REPO" -t "${'$'}VERSION_CODE" "${'$'}NIGHTLY_TAG" "${'$'}APK_FILE" --latest --notes "${'$'}RELEASE_NOTE"
+            """.trimIndent(),
+            env = mapOf(
+                "APK_FILE" to apkPathExpr,
+                "NIGHTLY_TAG" to expr { github.ref },
+                "VERSION_CODE" to versionCodeExpr,
+                "GITHUB_TOKEN" to expr { github.token },
+                "NIGHTLY_REPO" to expr("vars.NIGHTLY_REPO_URL"),
+                "BUILD_FLAVOR" to expr("env.BUILD_FLAVOR"),
+                "BUILD_TYPE" to expr("env.BUILD_TYPE"),
+                "RELEASE_NOTE" to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
+            )
+        )
 //
 //
 //        uses(action = triggerRemoteWorkflow)

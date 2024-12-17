@@ -528,4 +528,5 @@ Seal</string>
     <string name="generic__button_dismiss">Descartar</string>
     <string name="settings_main_experiment_changelog__title_changelog">Registro de cambios de experimentos</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">En esta compilación se han habilitado algunos experimentos previamente deshabilitados.</string>
+    <string name="settings__subtitle_advanced"><![CDATA[Experimentos y exportación/importación]]></string>
 </resources>

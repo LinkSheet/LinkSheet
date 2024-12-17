@@ -1,0 +1,239 @@
+#!/usr/bin/env kotlin
+
+@file:Repository("https://repo.maven.apache.org/maven2/")
+@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.0.1")
+@file:Repository("https://bindings.krzeminski.it")
+@file:DependsOn("actions:checkout:v4")
+@file:DependsOn("actions:setup-java:v4")
+@file:DependsOn("actions:cache:v4")
+@file:DependsOn("actions:upload-artifact:v4")
+@file:DependsOn("gradle:actions__setup-gradle:v3")
+
+import io.github.typesafegithub.workflows.actions.actions.Checkout
+import io.github.typesafegithub.workflows.actions.actions.SetupJava
+import io.github.typesafegithub.workflows.actions.actions.UploadArtifact
+import io.github.typesafegithub.workflows.actions.gradle.ActionsSetupGradle
+import io.github.typesafegithub.workflows.domain.RunnerType.UbuntuLatest
+import io.github.typesafegithub.workflows.domain.Shell
+import io.github.typesafegithub.workflows.domain.actions.CustomAction
+import io.github.typesafegithub.workflows.domain.triggers.Push
+import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
+import io.github.typesafegithub.workflows.dsl.expressions.Contexts
+import io.github.typesafegithub.workflows.dsl.expressions.expr
+import io.github.typesafegithub.workflows.dsl.workflow
+
+
+val KEYSTORE_FILE by Contexts.secrets
+val KEYSTORE_PASSWORD by Contexts.secrets
+val KEY_ALIAS by Contexts.secrets
+val KEY_PASSWORD by Contexts.secrets
+val NIGHTLY_REPO_ACCESS_TOKEN by Contexts.secrets
+
+val setupAndroid = CustomAction(
+    actionOwner = "android-actions",
+    actionName = "setup-android",
+    actionVersion = "v3",
+)
+
+val base64ToFile = CustomAction(
+    actionOwner = "timheuer",
+    actionName = "base64-to-file",
+    actionVersion = "v1",
+    inputs = mapOf(
+        "fileName" to "keystore.jks",
+        "encodedString" to expr(KEYSTORE_FILE)
+    )
+)
+
+val nightlyReleaseNotes = CustomAction(
+    actionOwner = "1fexd",
+    actionName = "gh-create-release-notes",
+    actionVersion = "0.0.9",
+    inputs = mapOf(
+        "github-token" to expr { secrets.GITHUB_TOKEN },
+        "stable-repo" to expr { github.repository },
+        "nightly-repo" to expr("vars.NIGHTLY_REPO_URL"),
+        "last-commit-sha" to expr("github.event.before"),
+        "commit-sha" to expr { github.sha }
+    )
+)
+
+val triggerRemoteWorkflow = CustomAction(
+    actionOwner = "1fexd",
+    actionName = "gh-trigger-remote-action",
+    actionVersion = "0.0.4",
+    inputs = mapOf(
+        "github-token" to expr(NIGHTLY_REPO_ACCESS_TOKEN),
+        "repo" to expr("vars.NIGHTLY_PRO_REPO_URL"),
+        "ref" to expr { github.ref },
+        "event-type" to "rebuild-nightly"
+    )
+)
+
+
+val BUILD_FLAVOR by Contexts.env
+val BUILD_TYPE by Contexts.env
+val BUILD_FLAVOR_TYPE by Contexts.env
+
+workflow(
+    name = "Build nightly APK",
+    env = mapOf(
+        BUILD_FLAVOR to "foss",
+        BUILD_TYPE to "nightly",
+        BUILD_FLAVOR_TYPE to "fossNightly"
+    ),
+    on = listOf(
+        WorkflowDispatch(), Push(
+            tags = listOf("nightly/2[0-9][2-9][4-9][0-1][0-2][0-3][0-9][0-9][0-9]"),
+            pathsIgnore = listOf("*.md")
+        )
+    ),
+    sourceFile = __FILE__,
+) {
+    job(id = "build", runsOn = UbuntuLatest) {
+        run(name = "Install JQ", command = "sudo apt-get install jq -y")
+        uses(action = Checkout(submodules = true))
+
+        uses(
+            action = SetupJava(
+                javaVersion = "21",
+                distribution = SetupJava.Distribution.Zulu,
+                cache = SetupJava.BuildPlatform.Gradle
+            )
+        )
+
+        uses(action = setupAndroid)
+        val androidKeyStore = uses(action = base64ToFile)
+        uses(action = ActionsSetupGradle())
+
+        run(
+            command = "./gradlew assembleFossNightly",
+            env = mapOf(
+                "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
+                "KEYSTORE_FILE_PATH" to expr { androidKeyStore.outputs["filePath"] },
+                "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
+                "KEY_ALIAS" to expr { KEY_ALIAS },
+                "KEY_PASSWORD" to expr { KEY_PASSWORD }
+            )
+        )
+
+        val baseOutPathExpr = "app/build/outputs/apk/${expr(BUILD_FLAVOR)}/${expr(BUILD_TYPE)}"
+
+        fun cmdQuote(name: String): String {
+            return """"$name""""
+        }
+
+        fun getVar(name: String): String {
+            return cmdQuote("\$$name")
+        }
+
+        fun subshell(cmd: String): String {
+            return "\$($cmd)"
+        }
+
+        var outputMetaDataJsonVar = getVar("OUTPUT_METADATA_JSON")
+
+        val cmdGetJsonContent = "json_content=${subshell("cat $outputMetaDataJsonVar")}"
+        val jsonContentVar = getVar("json_content")
+
+        val cmdGetVersionCode = "VERSION_CODE=${subshell("echo $jsonContentVar | jq '.elements[0].versionCode'")}"
+        val cmdGetOutputFile = "OUTPUT_FILE=${subshell("echo $jsonContentVar | jq '.elements[0].outputFile'")}"
+
+        val githubOutputVar = getVar("GITHUB_OUTPUT")
+
+        val outputFilePathStep = run(
+            name = "Get output file path",
+            shell = Shell.Bash,
+            command = """
+                $cmdGetJsonContent
+                echo "$cmdGetVersionCode" >> $githubOutputVar
+                echo "$cmdGetOutputFile" >> $githubOutputVar
+            """.trimIndent(),
+            env = mapOf(
+                "OUTPUT_METADATA_JSON" to "$baseOutPathExpr/output-metadata.json"
+            )
+        )
+
+        val versionCodeExpr = expr(outputFilePathStep.outputs["VERSION_CODE"])
+        val apkPathExpr = "$baseOutPathExpr/${expr(outputFilePathStep.outputs["OUTPUT_FILE"])}"
+
+        uses(
+            action = UploadArtifact(
+                name = "linksheet-nightly",
+                path = listOf(apkPathExpr, "app/build/outputs/apk/${expr(BUILD_FLAVOR_TYPE)}/*.txt")
+            )
+        )
+
+//        val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
+
+//        run(
+//            command = """
+//                gh release create -R "${'$'}NIGHTLY_REPO" -t "${'$'}VERSION_CODE" "${'$'}NIGHTLY_TAG" "${'$'}APK_FILE" --latest --notes "${'$'}RELEASE_NOTE"
+//            """.trimIndent(),
+//            env = mapOf(
+//                "APK_FILE" to apkPathExpr,
+//                "NIGHTLY_TAG" to expr { github.ref },
+//                "VERSION_CODE" to versionCodeExpr,
+//                "GITHUB_TOKEN" to expr { github.token },
+//                "NIGHTLY_REPO" to expr("vars.NIGHTLY_REPO_URL"),
+//                "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
+//                "BUILD_TYPE" to expr(BUILD_TYPE),
+//                "RELEASE_NOTE" to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
+//            )
+//        )
+//
+//
+//        uses(action = triggerRemoteWorkflow)
+
+        /*
+        - name: Trigger a remote workflow
+        id: trigger_pro_build
+        uses: 1fexd/gh-trigger-remote-action@0.0.4
+        with:
+          github-token: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
+          repo: ${{ vars.NIGHTLY_PRO_REPO_URL }}
+          ref: ${{ github.ref }}
+          event-type: rebuild-nightly
+
+
+         */
+
+        /*
+        - run: gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"
+        env:
+          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
+          NIGHTLY_TAG: ${{ github.ref }}
+          VERSION_CODE: ${{ steps.get_output_file_path.VERSION_CODE }}
+          GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
+          NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
+          RELEASE_NOTE: ${{ steps.release_note.outputs.releaseNote }}
+          BUILD_FLAVOR: ${{ env.BUILD_FLAVOR }}
+          BUILD_TYPE: ${{ env.BUILD_TYPE }}
+         */
+
+//        - uses: actions/upload-artifact@v4
+//        with:
+//        name: linksheet-nightly
+//        path: |
+//        app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/"$APK_FILE"
+//        app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
+//        env:
+//          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
+//        uses(
+//            action = Cache(
+//                path = listOf("~/.gradle/caches", "~/.gradle/wrapper"),
+//                key = expr { "${runner.os}-gradle-${hashFiles("**/*.gradle*", "**/gradle-wrapper.properties")}" },
+//            )
+//        )
+//        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+//        restore-keys: |
+//        ${{ runner.os }}-gradle-
+//        uses()
+
+
+//        uses(name = "Set up JDK 21", action = SetupJava())
+
+//        run(name = "Print greeting", command = "echo 'Hello world!'")
+    }
+}
+

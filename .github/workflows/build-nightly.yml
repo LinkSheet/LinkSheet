@@ -60,12 +60,22 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
+      - name: Get output file path
+        id: get_output_file_path
+        shell: bash
+        run: |
+          json_content=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json)
+          echo "VERSION_CODE=$(json_content | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+          echo "OUTPUT_FILE=$(json_content | jq '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+
       - uses: actions/upload-artifact@v4
         with:
           name: linksheet-nightly
           path: |
-            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/*.apk
+            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ APK_FILE }}
             app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
+        env:
+          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
 
       - name: Get file name
         id: get_file_name
@@ -86,7 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
           NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
-          NIGHTLY_TAG: ${{ steps.get_file_name.outputs.FILE_NAME }}
+          NIGHTLY_TAG: ${{ steps.get_output_file_path.VERSION_CODE }}
           RELEASE_NOTE: ${{ steps.release_note.outputs.releaseNote }}
           BUILD_FLAVOR: ${{ env.BUILD_FLAVOR }}
           BUILD_TYPE: ${{ env.BUILD_TYPE }}

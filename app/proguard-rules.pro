@@ -103,6 +103,10 @@
     *;
 }
 
+-keep class fe.clearurlskt.** {
+    *;
+}
+
 -dontwarn fe.uribuilder.ParsedUri
 
 -printmapping mapping.txt

@@ -11,7 +11,7 @@ pluginManagement {
     includeBuild("build-settings")
 
     plugins {
-        kotlin("plugin.serialization") version "2.0.20"
+        kotlin("plugin.serialization") version "2.1.0"
         id("de.fayard.refreshVersions") version "0.60.5"
         id("androidx.navigation.safeargs") version "2.8.2"
     }

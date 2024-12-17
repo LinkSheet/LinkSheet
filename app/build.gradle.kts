@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
 plugins {
     kotlin("android")
     kotlin("plugin.compose")
-    kotlin("plugin.serialization")
+    kotlin("plugin.serialization") version "2.1.0"
     id("com.android.application")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
@@ -74,7 +74,7 @@ android {
             string("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
             boolean(
                 "ANALYTICS_SUPPORTED",
-                localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() ?: true
+                localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
         }
 
@@ -314,7 +314,7 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
 
-    implementation ("com.github.jeziellago:compose-markdown:0.5.4")
+    implementation("com.github.jeziellago:compose-markdown:_")
 
     implementation("app.cash.zipline:zipline-android:_")
     implementation("app.cash.zipline:zipline-loader-android:_")

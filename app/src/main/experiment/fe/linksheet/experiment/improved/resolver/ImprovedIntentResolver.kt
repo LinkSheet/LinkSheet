@@ -531,11 +531,11 @@ class ImprovedIntentResolver(
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
-        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull()!! }
+        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
     }
 
-    private val clearUrls = ClearUrls(clearUrlProviders)
+    private val clearUrls = clearUrlProviders?.let { ClearUrls(it) }
 
     private fun runUriModifiers(
         uri: Uri?,
@@ -548,7 +548,11 @@ class ImprovedIntentResolver(
 
         runUriModifier(resolveEmbeds) { EmbedResolver.resolve(url, embedResolverBundled) }?.let { url = it }
         runUriModifier(fastForward) { FastForward.getRuleRedirect(url) }?.let { url = it }
-        runUriModifier(clearUrl) { clearUrls.clearUrl(url) }?.let { url = it.first }
+
+        if(clearUrl && clearUrls == null) {
+            logger.error("ClearURLs is enabled, but rules failed to load, ignoring..")
+        }
+        runUriModifier(clearUrl) { clearUrls?.clearUrl(url) }?.let { url = it.first }
 
         return runCatching { Uri.parse(url) }.getOrNull()
     }

@@ -139,8 +139,8 @@ workflow(
         val cmdGetJsonContent = "json_content=${subshell("cat $outputMetaDataJsonVar")}"
         val jsonContentVar = getVar("json_content")
 
-        val cmdGetVersionCode = "VERSION_CODE=${subshell("echo $jsonContentVar | jq '.elements[0].versionCode'")}"
-        val cmdGetOutputFile = "OUTPUT_FILE=${subshell("echo $jsonContentVar | jq '.elements[0].outputFile'")}"
+        val cmdGetVersionCode = "VERSION_CODE=${subshell("echo $jsonContentVar | jq -r '.elements[0].versionCode'")}"
+        val cmdGetOutputFile = "OUTPUT_FILE=${subshell("echo $jsonContentVar | jq -r '.elements[0].outputFile'")}"
 
         val githubOutputVar = getVar("GITHUB_OUTPUT")
 

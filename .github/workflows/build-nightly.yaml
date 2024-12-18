@@ -70,8 +70,8 @@ jobs:
       shell: 'bash'
       run: |-
         json_content=$(cat "$OUTPUT_METADATA_JSON")
-        echo "VERSION_CODE=$(echo "$json_content" | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
-        echo "OUTPUT_FILE=$(echo "$json_content" | jq '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+        echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+        echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
     - id: 'step-8'
       uses: 'actions/upload-artifact@v4'
       with:

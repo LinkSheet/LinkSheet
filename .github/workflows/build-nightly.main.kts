@@ -140,10 +140,8 @@ class ExecDsl(var exec: String="") {
 
 fun bash(block: BashDsl.() -> String): String {
 //    return BashScript()
-
     return block(BashDsl())
 }
-
 
 workflow(
     name = "Build nightly APK",

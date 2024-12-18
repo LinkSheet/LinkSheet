@@ -527,4 +527,5 @@
     <string name="settings_main_experiment_changelog__title_changelog">Евиденција промена експеримената</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Неки претходно онемогућени експерименти су омогућени у овој верзији.</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Нове подразумеване вредности</string>
+    <string name="settings__subtitle_advanced"><![CDATA[Експерименти и извоз/увоз]]></string>
 </resources>

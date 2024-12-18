@@ -250,7 +250,7 @@ workflow(
                 "APK_FILE" to apkPathExpr,
                 "NIGHTLY_TAG" to expr { github.ref },
                 "VERSION_CODE" to versionCodeExpr,
-                "GITHUB_TOKEN" to expr { github.token },
+                "GITHUB_TOKEN" to expr(NIGHTLY_REPO_ACCESS_TOKEN),
                 "NIGHTLY_REPO" to expr("vars.NIGHTLY_REPO_URL"),
                 "BUILD_FLAVOR" to expr("env.BUILD_FLAVOR"),
                 "BUILD_TYPE" to expr("env.BUILD_TYPE"),

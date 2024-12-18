@@ -78,6 +78,73 @@ val BUILD_FLAVOR by Contexts.env.propertyToExprPath
 val BUILD_TYPE by Contexts.env.propertyToExprPath
 val BUILD_FLAVOR_TYPE by Contexts.env.propertyToExprPath
 
+
+fun cmdQuote(name: String): String {
+    return """"$name""""
+}
+
+
+fun subshell(cmd: String): String {
+    return "\$($cmd)"
+}
+
+class Variable(val name: String) {
+    private val quoted = cmdQuote("\$$name")
+
+    operator fun invoke(): String {
+        return quoted
+    }
+
+    override fun toString(): String {
+        return name
+    }
+}
+
+var outputMetaDataJsonVar = Variable("OUTPUT_METADATA_JSON")
+
+
+@DslMarker
+annotation class BashDslMarker
+
+@BashDslMarker
+class BashDsl {
+    fun cat(what: String): String {
+        return "cat $what"
+    }
+
+    fun echo(what: String): String {
+        return "echo $what"
+    }
+
+    fun jq(what: String): String {
+        return "jq $what"
+    }
+
+    infix fun String.pipe(to: String): String {
+        return "$this | $to"
+    }
+
+    fun exec(exec: ExecDsl.() -> Unit): String {
+        val dsl = ExecDsl().apply(exec)
+        return dsl.exec
+    }
+}
+
+class ExecDsl(var exec: String="") {
+
+    operator fun set(variable: Variable, value: String) {
+        exec = "$variable=$value"
+    }
+}
+
+
+fun bash(block: BashDsl.() -> String): String {
+//    return BashScript()
+
+    return block(BashDsl())
+}
+
+
 workflow(
     name = "Build nightly APK",
     env = mapOf(
@@ -121,49 +188,57 @@ workflow(
         )
 
         val baseOutPathExpr = "app/build/outputs/apk/${expr("env.BUILD_FLAVOR")}/${expr("env.BUILD_TYPE")}"
+        val jsonContentVar = Variable("json_content")
 
-        fun cmdQuote(name: String): String {
-            return """"$name""""
+        val cmdGetJsonContent = bash {
+            val cmdReadOutputMetaData = cat(outputMetaDataJsonVar())
+            exec {
+                this[jsonContentVar] = subshell(cmdReadOutputMetaData)
+            }
         }
 
-        fun getVar(name: String): String {
-            return cmdQuote("\$$name")
+//        app/build/outputs/apk/foss/nightly/LinkSheet-2024-12-18T05_53_07-nightly/2024121802-foss-nightly.apk
+//        app/build/outputs/mapping/fossNightly/*.txt
+
+        val versionCodeVar = Variable("VERSION_CODE")
+        val outputFileVar = Variable("OUTPUT_FILE")
+
+        val cmdGetVersionCode = bash {
+            val cmdReadVersionCode = echo(jsonContentVar()) pipe jq("-r '.elements[0].versionCode'")
+            exec {
+                this[versionCodeVar] = subshell(cmdReadVersionCode)
+            }
         }
 
-        fun subshell(cmd: String): String {
-            return "\$($cmd)"
+        val cmdGetOutputFile = bash {
+            val cmdReadOutputFile = echo(jsonContentVar()) pipe jq("-r '.elements[0].outputFile'")
+            exec {
+                this[outputFileVar] = subshell(cmdReadOutputFile)
+            }
         }
 
-        var outputMetaDataJsonVar = getVar("OUTPUT_METADATA_JSON")
-
-        val cmdGetJsonContent = "json_content=${subshell("cat $outputMetaDataJsonVar")}"
-        val jsonContentVar = getVar("json_content")
-
-        val cmdGetVersionCode = "VERSION_CODE=${subshell("echo $jsonContentVar | jq -r '.elements[0].versionCode'")}"
-        val cmdGetOutputFile = "OUTPUT_FILE=${subshell("echo $jsonContentVar | jq -r '.elements[0].outputFile'")}"
-
-        val githubOutputVar = getVar("GITHUB_OUTPUT")
+        val githubOutputVar = Variable("GITHUB_OUTPUT")
 
         val outputFilePathStep = run(
             name = "Get output file path",
             shell = Shell.Bash,
             command = """
                 $cmdGetJsonContent
-                echo "$cmdGetVersionCode" >> $githubOutputVar
-                echo "$cmdGetOutputFile" >> $githubOutputVar
+                echo "$cmdGetVersionCode" >> ${githubOutputVar()}
+                echo "$cmdGetOutputFile" >> ${githubOutputVar()}
             """.trimIndent(),
             env = mapOf(
                 "OUTPUT_METADATA_JSON" to "$baseOutPathExpr/output-metadata.json"
             )
         )
 
-        val versionCodeExpr = expr(outputFilePathStep.outputs["VERSION_CODE"])
-        val apkPathExpr = "$baseOutPathExpr/${expr(outputFilePathStep.outputs["OUTPUT_FILE"])}"
+        val versionCodeExpr = expr(outputFilePathStep.outputs[versionCodeVar.name])
+        val apkPathExpr = "$baseOutPathExpr/${expr(outputFilePathStep.outputs[outputFileVar.name])}"
 
         uses(
             action = UploadArtifact(
                 name = "linksheet-nightly",
-                path = listOf(apkPathExpr, "app/build/outputs/apk/${expr("env.BUILD_FLAVOR_TYPE")}/*.txt")
+                path = listOf(apkPathExpr, "app/build/outputs/mapping/${expr("env.BUILD_FLAVOR_TYPE")}/*.txt")
             )
         )
 

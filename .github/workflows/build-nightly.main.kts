@@ -19,6 +19,7 @@ import io.github.typesafegithub.workflows.domain.actions.CustomAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
 import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
 import io.github.typesafegithub.workflows.dsl.expressions.Contexts
+import io.github.typesafegithub.workflows.dsl.expressions.contexts.EnvContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
 
@@ -71,9 +72,11 @@ val triggerRemoteWorkflow = CustomAction(
 )
 
 
-//val BUILD_FLAVOR by Contexts.env
-//val BUILD_TYPE by Contexts.env
-//val BUILD_FLAVOR_TYPE by Contexts.env
+//val BUILD_FLAVOR by Contexts.env.propertyToExprPath
+
+val BUILD_FLAVOR by Contexts.env.propertyToExprPath
+val BUILD_TYPE by Contexts.env.propertyToExprPath
+val BUILD_FLAVOR_TYPE by Contexts.env.propertyToExprPath
 
 workflow(
     name = "Build nightly APK",
@@ -106,16 +109,16 @@ workflow(
         val androidKeyStore = uses(action = base64ToFile)
         uses(action = ActionsSetupGradle())
 
-//        run(
-//            command = "./gradlew assembleFossNightly",
-//            env = mapOf(
-//                "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
-//                "KEYSTORE_FILE_PATH" to expr { androidKeyStore.outputs["filePath"] },
-//                "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
-//                "KEY_ALIAS" to expr { KEY_ALIAS },
-//                "KEY_PASSWORD" to expr { KEY_PASSWORD }
-//            )
-//        )
+        run(
+            command = "./gradlew assembleFossNightly",
+            env = mapOf(
+                "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
+                "KEYSTORE_FILE_PATH" to expr { androidKeyStore.outputs["filePath"] },
+                "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
+                "KEY_ALIAS" to expr { KEY_ALIAS },
+                "KEY_PASSWORD" to expr { KEY_PASSWORD }
+            )
+        )
 
         val baseOutPathExpr = "app/build/outputs/apk/${expr("env.BUILD_FLAVOR")}/${expr("env.BUILD_TYPE")}"
 
@@ -181,6 +184,8 @@ workflow(
                 "RELEASE_NOTE" to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
             )
         )
+
+
 //
 //
 //        uses(action = triggerRemoteWorkflow)

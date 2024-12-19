@@ -270,7 +270,7 @@ workflow(
             },
             env = mapOf(
                 apkFileVar.name to apkPathExpr,
-                nightlyRepoVar.name to expr { github.ref },
+                nightlyTagVar.name to expr { github.ref },
                 versionCodeVar.name to versionCodeExpr,
                 "GITHUB_TOKEN" to expr(NIGHTLY_REPO_ACCESS_TOKEN),
                 nightlyRepoVar.name to expr(NIGHTLY_REPO_URL),

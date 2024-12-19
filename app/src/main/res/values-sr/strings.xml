@@ -7,7 +7,7 @@
     <string name="default_apps_subtitle">Префериране апликације су апликације које подесите да „Увек“ отварају одређене хостове</string>
     <string name="amp2html_local_cache">Омогући локални Amp2Html кеш</string>
     <string name="open_copied_link">Из привремене меморије</string>
-    <string name="ignore_libredirect">Игнориши LibRedirect</string>
+    <string name="ignore_libredirect">Занемари LibRedirect</string>
     <string name="include_settings">Укључи подешавања (препоручено)</string>
     <string name="no_browser_installed">Ниједан прегледач није инсталиран</string>
     <string name="download_started">Преузимање је започето</string>
@@ -144,7 +144,7 @@
     <string name="feature_flags_explainer">Омогућите или онемогућите експерименталне функције</string>
     <string name="options">Опције</string>
     <string name="services">Услуге</string>
-    <string name="about_explainer">Кредити, лиценце, линкови, верзија</string>
+    <string name="about_explainer">Заслуге, лиценце, линкови, верзија</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku није покренут. Додирните овде да бисте отворили Shizuku, а затим пратите упутства да бисте га покренули.</string>
     <string name="browser_status">Статус прегледача</string>
@@ -229,7 +229,7 @@
     <string name="feature_flags">Експерименталне функције</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku режим је активиран, додирните апликацију да бисте укључили њене могућности аутоматског руковања линком. Дуго додирните апликацију да бисте отворили њен мени са подешавањима „Отвори подразумевано“.</string>
-    <string name="credits">Кредити</string>
+    <string name="credits">Заслуге</string>
     <string name="export_to_file">Извоз у фајл</string>
     <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> омогућава вам приступ за <b>LinkSheetPro</b>, што укључује <b>ексклузивне Pro функције</b> као што су: праћење спољних преусмеравања, спољно добијање не-AMP страница и још много тога!</string>
     <string name="import_settings">Увоз подешавања</string>

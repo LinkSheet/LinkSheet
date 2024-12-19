@@ -19,6 +19,7 @@ import io.github.typesafegithub.workflows.domain.actions.CustomAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
 import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
 import io.github.typesafegithub.workflows.dsl.expressions.Contexts
+import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
 
@@ -28,6 +29,23 @@ val KEYSTORE_PASSWORD by Contexts.secrets
 val KEY_ALIAS by Contexts.secrets
 val KEY_PASSWORD by Contexts.secrets
 val NIGHTLY_REPO_ACCESS_TOKEN by Contexts.secrets
+
+object VariablesContext : ExpressionContext("vars")
+object ActionEnvironmentContext : ExpressionContext("env")
+
+val Contexts.vars: VariablesContext
+    get() = VariablesContext
+
+val Contexts.actionEnv: ActionEnvironmentContext
+    get() = ActionEnvironmentContext
+
+val ENABLE_RELEASES by Contexts.vars
+val ENABLE_PRO_BUILDS by Contexts.vars
+val NIGHTLY_REPO_URL by Contexts.vars
+
+val BUILD_FLAVOR by Contexts.actionEnv
+val BUILD_TYPE by Contexts.actionEnv
+val BUILD_FLAVOR_TYPE by Contexts.actionEnv
 
 val setupAndroid = CustomAction(
     actionOwner = "android-actions",
@@ -114,6 +132,10 @@ class BashDsl {
 
     infix fun String.pipe(to: String): String {
         return "$this | $to"
+    }
+
+    fun exec(cmd: String): String {
+        return cmd
     }
 
     fun exec(exec: ExecDsl.() -> Unit): String {
@@ -230,30 +252,39 @@ workflow(
         uses(
             action = UploadArtifact(
                 name = "linksheet-nightly",
-                path = listOf(apkPathExpr, "app/build/outputs/mapping/${expr("env.BUILD_FLAVOR_TYPE")}/*.txt")
+                path = listOf(apkPathExpr, "app/build/outputs/mapping/${expr(BUILD_FLAVOR_TYPE)}/*.txt")
             )
         )
 
         val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
 
+
+        val nightlyRepoVar = Variable("NIGHTLY_REPO")
+        val nightlyTagVar = Variable("NIGHTLY_TAG")
+        val apkFileVar = Variable("APK_FILE")
+        val releaseNoteVar = Variable("RELEASE_NOTE")
+
         run(
-            command = """
-                gh release create -R "${'$'}NIGHTLY_REPO" -t "${'$'}VERSION_CODE" "${'$'}NIGHTLY_TAG" "${'$'}APK_FILE" --latest --notes "${'$'}RELEASE_NOTE"
-            """.trimIndent(),
+            command = bash {
+                exec("gh release create -R ${nightlyRepoVar()} -t ${versionCodeVar()} ${nightlyTagVar()} ${apkFileVar()} --latest --notes ${releaseNoteVar()}")
+            },
             env = mapOf(
-                "APK_FILE" to apkPathExpr,
-                "NIGHTLY_TAG" to expr { github.ref },
-                "VERSION_CODE" to versionCodeExpr,
+                apkFileVar.name to apkPathExpr,
+                nightlyRepoVar.name to expr { github.ref },
+                versionCodeVar.name to versionCodeExpr,
                 "GITHUB_TOKEN" to expr(NIGHTLY_REPO_ACCESS_TOKEN),
-                "NIGHTLY_REPO" to expr("vars.NIGHTLY_REPO_URL"),
-                "BUILD_FLAVOR" to expr("env.BUILD_FLAVOR"),
-                "BUILD_TYPE" to expr("env.BUILD_TYPE"),
-                "RELEASE_NOTE" to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
+                nightlyRepoVar.name to expr(NIGHTLY_REPO_URL),
+                "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
+                "BUILD_TYPE" to expr(BUILD_TYPE),
+                releaseNoteVar.name to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
             ),
-            `if` = expr("vars.ENABLE_RELEASES")
+            `if` = expr { "$ENABLE_RELEASES == true" }
         )
 
-        uses(action = triggerRemoteWorkflow, `if` = expr("vars.ENABLE_PRO_BUILDS"))
+        uses(
+            action = triggerRemoteWorkflow,
+            `if` = expr { "$ENABLE_PRO_BUILDS == true" }
+        )
     }
 }
 

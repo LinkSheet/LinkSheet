@@ -115,6 +115,9 @@ android {
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
             buildStringConfigField("FLAVOR", "Pro")
+
+            val pro by sourceSets
+            pro.setRoot(rootDir.parentFile.resolve("pro").absolutePath)
         }
     }
 

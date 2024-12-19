@@ -100,7 +100,7 @@ jobs:
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
       if: '${{ vars.ENABLE_RELEASES }}'
     - id: 'step-11'
-      uses: '1fexd/gh-trigger-remote-action@0.0.4'
+      uses: '1fexd/gh-trigger-remote-action@0.0.5'
       with:
         github-token: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
         repo: '${{ vars.NIGHTLY_PRO_REPO_URL }}'

@@ -61,7 +61,7 @@ val nightlyReleaseNotes = CustomAction(
 val triggerRemoteWorkflow = CustomAction(
     actionOwner = "1fexd",
     actionName = "gh-trigger-remote-action",
-    actionVersion = "0.0.4",
+    actionVersion = "0.0.5",
     inputs = mapOf(
         "github-token" to expr(NIGHTLY_REPO_ACCESS_TOKEN),
         "repo" to expr("vars.NIGHTLY_PRO_REPO_URL"),

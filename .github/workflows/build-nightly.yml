@@ -1,108 +1,109 @@
-name: Build nightly APK
+# This file was generated using Kotlin DSL (.github/workflows/build-nightly.main.kts).
+# If you want to modify the workflow, please change the Kotlin file and regenerate this YAML file.
+# Generated with https://github.com/typesafegithub/github-workflows-kt
 
-env:
-  BUILD_FLAVOR: foss
-  BUILD_TYPE: nightly
-  BUILD_FLAVOR_TYPE: fossNightly
-
+name: 'Build nightly APK'
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   push:
-    tags:
-      - "nightly/2[0-9][2-9][4-9][0-1][0-2][0-3][0-9][0-9][0-9]"
     paths-ignore:
-      - "*.md"
-
+    - '*.md'
+    tags:
+    - 'nightly/2[0-9][2-9][4-9][0-1][0-2][0-3][0-9][0-9][0-9]'
+env:
+  BUILD_FLAVOR: 'foss'
+  BUILD_TYPE: 'nightly'
+  BUILD_FLAVOR_TYPE: 'fossNightly'
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  check_yaml_consistency:
+    name: 'Check YAML consistency'
+    runs-on: 'ubuntu-latest'
     steps:
-      - name: Install JQ
-        run: sudo apt-get install jq -y
-
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: "21"
-          distribution: "zulu"
-          cache: gradle
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-        
-
-      - name: Decode Keystore File
-        uses: timheuer/base64-to-file@v1
-        id: android_keystore
-        with:
-          fileName: "keystore.jks"
-          encodedString: ${{ secrets.KEYSTORE_FILE }}
-
-      - uses: gradle/actions/setup-gradle@v3
-      - run: ./gradlew assembleFossNightly
-        env:
-          GITHUB_WORKFLOW_RUN_ID: ${{ github.run_id }}
-          KEYSTORE_FILE_PATH: ${{ steps.android_keystore.outputs.filePath }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-
-      - name: Get output file path
-        id: get_output_file_path
-        shell: bash
-        run: |
-          json_content=$(cat app/build/outputs/apk/$BUILD_FLAVOR/$BUILD_TYPE/output-metadata.json)
-          echo "VERSION_CODE=$(json_content | jq '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
-          echo "OUTPUT_FILE=$(json_content | jq '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: linksheet-nightly
-          path: |
-            app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/$APK_FILE
-            app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
-        env:
-          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
-
-      - name: Nightly release notes
-        id: release_note
-        uses: 1fexd/gh-create-release-notes@0.0.9
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          stable-repo: ${{ github.repository }}
-          nightly-repo: ${{ vars.NIGHTLY_REPO_URL }}
-          last-commit-sha: ${{ github.event.before }}
-          commit-sha: ${{ github.sha }}
-
-      - run: gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"
-        env:
-          APK_FILE: ${{ steps.get_output_file_path.OUTPUT_FILE }}
-          NIGHTLY_TAG: ${{ github.ref }}
-          VERSION_CODE: ${{ steps.get_output_file_path.VERSION_CODE }}
-          GITHUB_TOKEN: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
-          NIGHTLY_REPO: ${{ vars.NIGHTLY_REPO_URL }}
-          RELEASE_NOTE: ${{ steps.release_note.outputs.releaseNote }}
-          BUILD_FLAVOR: ${{ env.BUILD_FLAVOR }}
-          BUILD_TYPE: ${{ env.BUILD_TYPE }}
-
-      - name: Trigger a remote workflow
-        id: trigger_pro_build
-        uses: 1fexd/gh-trigger-remote-action@0.0.4
-        with:
-          github-token: ${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}
-          repo: ${{ vars.NIGHTLY_PRO_REPO_URL }}
-          ref: ${{ github.ref }}
-          event-type: rebuild-nightly
+    - id: 'step-0'
+      name: 'Check out'
+      uses: 'actions/checkout@v4'
+    - id: 'step-1'
+      name: 'Execute script'
+      run: 'rm ''.github/workflows/build-nightly.yml'' && ''.github/workflows/build-nightly.main.kts'''
+    - id: 'step-2'
+      name: 'Consistency check'
+      run: 'git diff --exit-code ''.github/workflows/build-nightly.yml'''
+  build:
+    runs-on: 'ubuntu-latest'
+    needs:
+    - 'check_yaml_consistency'
+    steps:
+    - id: 'step-0'
+      name: 'Install JQ'
+      run: 'sudo apt-get install jq -y'
+    - id: 'step-1'
+      uses: 'actions/checkout@v4'
+      with:
+        submodules: 'true'
+    - id: 'step-2'
+      uses: 'actions/setup-java@v4'
+      with:
+        java-version: '21'
+        distribution: 'zulu'
+        cache: 'gradle'
+    - id: 'step-3'
+      uses: 'android-actions/setup-android@v3'
+    - id: 'step-4'
+      uses: 'timheuer/base64-to-file@v1'
+      with:
+        fileName: 'keystore.jks'
+        encodedString: '${{ secrets.KEYSTORE_FILE }}'
+    - id: 'step-5'
+      uses: 'gradle/actions/setup-gradle@v3'
+    - id: 'step-6'
+      env:
+        GITHUB_WORKFLOW_RUN_ID: '${{ github.run_id }}'
+        KEYSTORE_FILE_PATH: '${{ steps.step-4.outputs.filePath }}'
+        KEYSTORE_PASSWORD: '${{ secrets.KEYSTORE_PASSWORD }}'
+        KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
+        KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
+      run: './gradlew assembleFossNightly'
+    - id: 'step-7'
+      name: 'Get output file path'
+      env:
+        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/output-metadata.json'
+      shell: 'bash'
+      run: |-
+        json_content=$(cat "$OUTPUT_METADATA_JSON")
+        echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+        echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+    - id: 'step-8'
+      uses: 'actions/upload-artifact@v4'
+      with:
+        name: 'linksheet-nightly'
+        path: |-
+          app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-7.outputs.OUTPUT_FILE }}
+          app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
+    - id: 'step-9'
+      uses: '1fexd/gh-create-release-notes@0.0.9'
+      with:
+        github-token: '${{ secrets.GITHUB_TOKEN }}'
+        stable-repo: '${{ github.repository }}'
+        nightly-repo: '${{ vars.NIGHTLY_REPO_URL }}'
+        last-commit-sha: '${{ github.event.before }}'
+        commit-sha: '${{ github.sha }}'
+    - id: 'step-10'
+      env:
+        APK_FILE: 'app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-7.outputs.OUTPUT_FILE }}'
+        NIGHTLY_TAG: '${{ github.ref }}'
+        VERSION_CODE: '${{ steps.step-7.outputs.VERSION_CODE }}'
+        GITHUB_TOKEN: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
+        NIGHTLY_REPO: '${{ vars.NIGHTLY_REPO_URL }}'
+        BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
+        BUILD_TYPE: '${{ env.BUILD_TYPE }}'
+        RELEASE_NOTE: '${{ steps.step-9.outputs.releaseNote }}'
+      run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
+      if: '${{ vars.ENABLE_RELEASES }}'
+    - id: 'step-11'
+      uses: '1fexd/gh-trigger-remote-action@0.0.4'
+      with:
+        github-token: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
+        repo: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
+        ref: '${{ github.ref }}'
+        event-type: 'rebuild-nightly'
+      if: '${{ vars.ENABLE_PRO_BUILDS }}'

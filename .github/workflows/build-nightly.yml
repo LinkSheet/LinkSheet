@@ -98,7 +98,7 @@ jobs:
         BUILD_TYPE: '${{ env.BUILD_TYPE }}'
         RELEASE_NOTE: '${{ steps.step-9.outputs.releaseNote }}'
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
-      if: '${{ vars.ENABLE_RELEASES == true }}'
+      if: '${{ contains(vars.ENABLE_RELEASES, true) }}'
     - id: 'step-11'
       uses: '1fexd/gh-trigger-remote-action@0.0.5'
       with:
@@ -106,4 +106,4 @@ jobs:
         repo: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
         ref: '${{ github.ref }}'
         event-type: 'rebuild-nightly'
-      if: '${{ vars.ENABLE_PRO_BUILDS == true }}'
+      if: '${{ contains(vars.ENABLE_PRO_BUILDS, true) }}'

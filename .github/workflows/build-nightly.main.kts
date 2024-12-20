@@ -278,12 +278,12 @@ workflow(
                 "BUILD_TYPE" to expr(BUILD_TYPE),
                 releaseNoteVar.name to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
             ),
-            `if` = expr { "$ENABLE_RELEASES == true" }
+            `if` = expr { contains(ENABLE_RELEASES, "true") }
         )
 
         uses(
             action = triggerRemoteWorkflow,
-            `if` = expr { "$ENABLE_PRO_BUILDS == true" }
+            `if` = expr { contains(ENABLE_PRO_BUILDS, "true") }
         )
     }
 }

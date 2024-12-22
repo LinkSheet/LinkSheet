@@ -4,11 +4,10 @@ import android.app.Activity
 import android.app.AppOpsManager
 import android.app.AppOpsManagerHidden
 import android.content.Context
-import android.os.Build
 import android.os.Process
-import android.os.SystemProperties
 import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
+import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.module.intent.buildIntent
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
@@ -27,12 +26,14 @@ interface MiuiCompatProvider {
     fun provideCompat(context: Context): MiuiCompat
 }
 
-object RealMiuiCompatProvider : MiuiCompatProvider {
-    override val isXiaomiDevice = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true)
+class RealMiuiCompatProvider(
+    val infoService: SystemInfoService,
+) : MiuiCompatProvider {
+    override val isXiaomiDevice = infoService.build.manufacturer.contains("xiaomi", ignoreCase = true)
 
     override fun readMiuiVersion(): Int? {
-        val result = runCatching { SystemProperties.get("ro.miui.ui.version.code") }
-        return result.map { it.toIntOrNull() }.getOrNull()
+        val result = runCatching { infoService.properties.get("ro.miui.ui.version.code") }
+        return result.map { it?.toIntOrNull() }.getOrNull()
     }
 
     override val isRequired = resettableLazy {

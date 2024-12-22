@@ -7,7 +7,7 @@ import com.google.gson.JsonParser
 import fe.gson.extension.json.array.elementsOrNull
 import fe.gson.extension.json.element.arrayOrNull
 import fe.gson.extension.json.`object`.asIntOrNull
-import fe.linksheet.module.build.BuildInfo
+import fe.linksheet.module.systeminfo.BuildInfo
 
 // TODO: Find a better way to do this
 class LastVersionService(

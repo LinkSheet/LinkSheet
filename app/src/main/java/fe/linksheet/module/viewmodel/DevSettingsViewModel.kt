@@ -5,9 +5,9 @@ import android.app.Application
 import android.widget.Toast
 import com.google.gson.Gson
 import fe.linksheet.R
-import fe.linksheet.module.build.BuildInfoService
+import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.module.devicecompat.MiuiCompatProvider
-import fe.linksheet.util.device.xiaomi.MiuiAuditor
+import fe.linksheet.module.devicecompat.MiuiAuditor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
@@ -21,8 +21,9 @@ class DevSettingsViewModel(
     private val shizukuHandler: ShizukuHandler,
     miuiCompatProvider: MiuiCompatProvider,
     val gson: Gson,
-    val buildInfoService: BuildInfoService,
+    val systemInfoService: SystemInfoService,
 ) : BaseViewModel(preferenceRepository) {
+    private val auditor = MiuiAuditor(systemInfoService)
 
     val miuiCompatRequired by miuiCompatProvider.isRequired
 
@@ -39,7 +40,7 @@ class DevSettingsViewModel(
     }
 
     fun auditMiuiEnvironment(): String {
-        val audit = MiuiAuditor(buildInfoService).audit(context)
+        val audit = auditor.audit(context)
         return gson.toJson(audit)
     }
 }

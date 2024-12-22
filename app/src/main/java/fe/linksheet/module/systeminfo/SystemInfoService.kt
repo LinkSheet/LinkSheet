@@ -1,20 +1,20 @@
-package fe.linksheet.module.build
+package fe.linksheet.module.systeminfo
 
 import fe.linksheet.BuildConfig
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.dsl.module
 
-val BuildInfoServiceModule = module {
-    single { BuildInfoService(RealSystemProperties, RealBuildConstants) }
+val SystemInfoServiceModule = module {
+    single { SystemInfoService(RealSystemProperties, StaticBuildConstants) }
 }
 
-class BuildInfoService(
+class SystemInfoService(
     val properties: SystemProperties = RealSystemProperties,
-    val buildConstants: BuildConstants = RealBuildConstants,
+    val build: BuildConstants = StaticBuildConstants,
 ) {
     val deviceInfo by lazy {
-        DeviceInfo(buildConstants.release, buildConstants.manufacturer, buildConstants.model)
+        DeviceInfo(build.release, build.manufacturer, build.model)
     }
 
     val buildInfo by lazy {

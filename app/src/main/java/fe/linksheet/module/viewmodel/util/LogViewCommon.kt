@@ -14,6 +14,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.util.LinkSheetInfo
 import kotlinx.parcelize.Parcelize
 
@@ -24,6 +25,7 @@ class LogViewCommon(
     private val pasteService: PasteService<*>,
     val gson: Gson,
     private val redactor: Redactor,
+    private val systemInfoService: SystemInfoService,
 ) {
     @OptIn(SensitivePreference::class)
     private fun logPreferences(redact: Boolean): Map<String, String?> {
@@ -55,12 +57,12 @@ class LogViewCommon(
 
         return gson.toJson(jsonObject {
             "build_info" += LinkSheetInfo.buildInfo
-            "device_info" += LinkSheetInfo.deviceInfo
+            "device_info" += systemInfoService.deviceInfo
 
             "locale" += context.getCurrentLanguageTag()
 
             if (fingerprint) {
-                "fingerprint" += Build.FINGERPRINT
+                "fingerprint" += systemInfoService.build.fingerprint
             }
 
             "active_experiments" += Experiments.getActive(experimentRepository)

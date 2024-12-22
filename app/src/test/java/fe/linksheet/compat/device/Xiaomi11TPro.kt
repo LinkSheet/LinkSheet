@@ -1,4 +1,4 @@
-package fe.linksheet.compat
+package fe.linksheet.compat.device
 
 object Xiaomi11TPro_A13 : Device(
     codename = "cas",

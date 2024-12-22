@@ -1,4 +1,4 @@
-package fe.linksheet.module.build
+package fe.linksheet.module.systeminfo
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

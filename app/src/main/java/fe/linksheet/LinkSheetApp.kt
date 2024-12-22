@@ -17,7 +17,7 @@ import fe.linksheet.lifecycle.ActivityLifecycleObserver
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.app.AndroidPackageInfoModule
-import fe.linksheet.module.build.BuildInfoServiceModule
+import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
@@ -123,7 +123,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideKoinModules(): List<Module> {
         return listOf(
-            BuildInfoServiceModule,
+            SystemInfoServiceModule,
             networkStateServiceModule,
             logFileServiceModule,
             shizukuHandlerModule,
@@ -160,7 +160,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideMiuiCompatProvider(): Module {
         return module {
-            single<MiuiCompatProvider> { RealMiuiCompatProvider }
+            single<MiuiCompatProvider> { RealMiuiCompatProvider(get()) }
         }
     }
 

@@ -1,6 +1,6 @@
-package fe.linksheet.compat
+package fe.linksheet.compat.device
 
-import fe.linksheet.module.build.SystemProperties
+import fe.linksheet.module.systeminfo.SystemProperties
 
 sealed class Device(
     val codename: String? = null,
@@ -10,6 +10,10 @@ sealed class Device(
 
     override fun get(key: String): String? {
         return buildProperties[key]
+    }
+
+    override fun getAllProperties(): Map<String, String> {
+        return buildProperties
     }
 }
 

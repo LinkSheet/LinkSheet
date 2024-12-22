@@ -1,4 +1,4 @@
-package fe.linksheet.compat
+package fe.linksheet.compat.device
 
 object XiaomiRedmi2a : Device(
     buildProperties = parseTestBuildProperties(

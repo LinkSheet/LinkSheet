@@ -1,4 +1,4 @@
-package fe.linksheet.compat
+package fe.linksheet.compat.device
 
 object XiaomiRedmiNote13_A15 : Device(
     codename = "aurora",

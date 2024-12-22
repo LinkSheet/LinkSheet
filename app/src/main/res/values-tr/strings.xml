@@ -6,7 +6,7 @@
     <string name="none_explainer">Yalnızca yerel uygulamaları listeleyin, tüm tarayıcıları kaldırın. Yalnızca tek bir yerel uygulama varsa, otomatik olarak açılır. Yerel uygulama yoksa tüm tarayıcılar listelenir.</string>
     <string name="default_apps_subtitle">Tercih edilen uygulamalar, belirli ana bilgisayarları \"Her zaman\" açacak şekilde ayarladığınız uygulamalardır</string>
     <string name="always_show_package_name_explainer">Yalnızca uygulama adları yerine her zaman paket adlarını göster. Bu tüm uygulama için geçerlidir.</string>
-    <string name="just_once">Sadece bir kere</string>
+    <string name="just_once">Yalnızca bir defa</string>
     <string name="always">Her zaman</string>
     <string name="open_with_app">%s ile aç</string>
     <string name="use_a_different_app">Farklı bir uygulama kullanın</string>
@@ -516,4 +516,9 @@
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">İzin iste</string>
     <string name="settings_main_miui_compat__text_request_failed">İzin istenemedi!</string>
     <string name="generic__button_learn_more">Daha fazla bilgi</string>
+    <string name="generic__button_dismiss">Yok say</string>
+    <string name="settings_main_experiment_changelog__title_changelog">Deneyler değişiklik günlüğü</string>
+    <string name="settings__subtitle_advanced"><![CDATA[Deneyleri dışa/içe aktar]]></string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Yeni varsayılanlar</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Önceden devre dışı olan bazı deneyler bu sürümde etkinleştirildi.</string>
 </resources>

@@ -6,22 +6,9 @@ import com.google.gson.annotations.SerializedName
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
+import fe.linksheet.module.build.BuildInfo
+import fe.linksheet.module.build.DeviceInfo
 
-@Keep
-data class BuildInfo(
-    @SerializedName("version_name") val versionName: String,
-    @SerializedName("version_code") val versionCode: Int,
-    @SerializedName("built_at") val builtAt: String,
-    @SerializedName("flavor") val flavor: String,
-    @SerializedName("workflow_id") val workflowId: String? = null,
-)
-
-@Keep
-data class DeviceInfo(
-    @SerializedName("android_version") val androidVersion: String,
-    val manufacturer: String,
-    val model: String,
-)
 
 object LinkSheetInfo {
     val buildInfo = BuildInfo(

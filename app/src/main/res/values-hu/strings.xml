@@ -514,4 +514,9 @@ Seal</string>
     <string name="settings_app_config__description_native_apps">Alkalmazások, amelyek képesek kezelni a linkeket ezzel a gazdagéppel</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">A Xiaomiról ismert, hogy előre nem látható módon erősen korlátozza az alkalmazásokat, ami a LinkSheet nem megfelelő működéséhez vezet.\nKoppintson az alábbi gombra, majd engedélyezze az \"Új ablakok megnyitása a háttérben\" engedélyt</string>
     <string name="generic__button_learn_more">Tudjon meg többet</string>
+    <string name="generic__button_dismiss">Elvetés</string>
+    <string name="settings_main_experiment_changelog__title_changelog">Kísérleti funkciók változásnaplója</string>
+    <string name="settings__subtitle_advanced"><![CDATA[Kísérleti funkciók & Export/Import]]></string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Új alapértékek</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Néhány korábban letiltott kísérleti funkció engedélyezve lett ebben a buildben.</string>
 </resources>

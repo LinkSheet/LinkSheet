@@ -176,7 +176,13 @@ workflow(
 ) {
     job(id = "build", runsOn = UbuntuLatest) {
         run(name = "Install JQ", command = "sudo apt-get install jq -y")
-        uses(action = Checkout(submodules = true))
+        uses(
+            action = Checkout(
+                submodules = true,
+                fetchDepth = Checkout.FetchDepth.Infinite,
+                fetchTags = true
+            )
+        )
 
         uses(
             action = SetupJava(

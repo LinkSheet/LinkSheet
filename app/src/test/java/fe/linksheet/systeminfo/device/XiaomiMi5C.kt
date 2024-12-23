@@ -1,4 +1,4 @@
-package fe.linksheet.compat.device
+package fe.linksheet.systeminfo.device
 
 object XiaomiMi5C : Device(
     codename = "meri",

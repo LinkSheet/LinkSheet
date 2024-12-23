@@ -1,4 +1,4 @@
-package fe.linksheet.compat.device
+package fe.linksheet.systeminfo.device
 
 object XiaomiRedmiNote3 : Device(
     buildProperties = parseTestBuildProperties(

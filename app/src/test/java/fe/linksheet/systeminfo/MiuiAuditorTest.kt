@@ -1,13 +1,12 @@
-package fe.linksheet.compat
+package fe.linksheet.systeminfo
 
 import android.os.Build
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.compat.device.*
+import fe.linksheet.systeminfo.device.*
 import fe.linksheet.module.devicecompat.MiuiAuditor
 import fe.linksheet.module.systeminfo.DeviceInfo
-import fe.linksheet.module.systeminfo.InjectedBuildConstants
 import fe.linksheet.module.systeminfo.SystemInfoService
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -69,8 +68,7 @@ internal class MiuiAuditorTest {
                 "Xiaomi/aurora/miproduct:15/AQ3A.240627.003/OS2.0.2.0.VNAEUXM:user/release-keys"
             )
             .forAll { device, expectedDeviceInfo, expectedMiui, expectedFingerprint ->
-                val build = InjectedBuildConstants(device)
-                val infoService = SystemInfoService(device, build)
+                val infoService = SystemInfoService(device)
 
                 val auditor = MiuiAuditor(infoService)
                 val audit = auditor.audit(context)

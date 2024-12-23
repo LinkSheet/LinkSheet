@@ -1,7 +1,9 @@
-package fe.linksheet.compat.device
+package fe.linksheet.systeminfo.device
 
 import fe.linksheet.module.systeminfo.SystemProperties
 
+// https://github.com/pytorch/cpuinfo/blob/main/test/mock/xiaomi-mi-5c.h
+// https://github.com/godotengine/godot/blob/master/platform/android/os_android.cpp
 sealed class Device(
     val codename: String? = null,
     val fingerprint: String? = null,

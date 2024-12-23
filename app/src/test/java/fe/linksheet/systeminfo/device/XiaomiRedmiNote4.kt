@@ -1,4 +1,4 @@
-package fe.linksheet.compat.device
+package fe.linksheet.systeminfo.device
 
 object XiaomiRedmiNote4 : Device(
     codename = "mido",

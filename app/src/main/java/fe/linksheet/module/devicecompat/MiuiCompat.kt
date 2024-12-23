@@ -37,7 +37,7 @@ class RealMiuiCompatProvider(
     }
 
     override val isRequired = resettableLazy {
-        isXiaomiDevice && readMiuiVersion() != null
+        isXiaomiDevice && !infoService.isCustomRom && readMiuiVersion() != null
     }
 
     override fun provideCompat(context: Context): MiuiCompat {

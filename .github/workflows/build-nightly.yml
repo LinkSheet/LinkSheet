@@ -82,7 +82,7 @@ jobs:
           app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-7.outputs.OUTPUT_FILE }}
           app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
     - id: 'step-9'
-      uses: '1fexd/gh-create-release-notes@0.0.10'
+      uses: '1fexd/gh-create-release-notes@0.0.11'
       with:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
         stable-repo: '${{ github.repository }}'

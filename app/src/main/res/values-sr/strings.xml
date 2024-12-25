@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hide_after_copying_explainer">Аутоматски сакријте доњи лист када се додирне дугме за радњу као што је „Копирај линк“ или „Преузми“</string>
+    <string name="hide_after_copying_explainer">Аутоматски сакрива доњи лист када се додирне дугме за радњу као што је „Копирај линк“ или „Преузми“</string>
     <string name="import_dumped_preference">Увоз бачених преференца</string>
     <string name="domain_selection_confirmation_subtitle">Желите ли заиста да подесите %s као преферирану апликацију за следеће домене?</string>
     <string name="dismiss">Одбаци</string>
@@ -42,12 +42,12 @@
     <string name="open_link_with_subtitle_2">LibkSheet је првобитно био заснован на OpenLinkWith-у</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
-    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може имати<annotation url-id="privacy-downloader">импликације у вези са приватношћу</annotation></string>
+    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може имати <annotation url-id="privacy-downloader">импликације у вези са приватношћу</annotation></string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
     <string name="misc_settings">Остало</string>
-    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url-id="privacy-logs"> \nлинк</annotation></string>
+    <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url-id="privacy-logs"> линк</annotation>.</string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
     <string name="enable_ignore_libredirect_button">Омогући дугме „Игнориши LibRedirect“</string>
@@ -193,7 +193,7 @@
     <string name="enable_ignore_libredirect_button_explainer">Приказује дугме у доњем листу ако је URL преусмерен путем LibRedirect-а, који уместо тога отвара оригинални URL</string>
     <string name="mastodon_redirect_subtitle_2">Изворни кôд Mastodon Redirect-а је коришћен као референца за Shizuku комуникацију</string>
     <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet је открио најмање једну апликацију која тврди да је прегледач. Листа LinkSheet-а можда није потпуна. Ако мислите да је ово грешка, пошаљите проблем GitHub-у.</string>
-    <string name="enable_amp2html_explainer">Преусмерава AMP странице на њихову нормалну веб-верзију. Ово може да има <annotation url-id="privacy-amp2html">импликације у вези са приватношћу</annotation></string>
+    <string name="enable_amp2html_explainer">Преусмерава AMP странице на њихову нормалну веб-верзију. Ово може имати <annotation url-id="privacy-amp2html">импликације у вези са приватношћу</annotation></string>
     <string name="none_explainer">Наведите само изворне апликације, уклоните све прегледаче. Ако је присутна само једна изворна апликација, она ће се аутоматски отворити. Ако није присутна изворна апликација, наведени су сви прегледачи.</string>
     <string name="donate">Донирај</string>
     <string name="disable_in_selected">Присилно онемогући…</string>
@@ -283,7 +283,7 @@
     <string name="hide_bottom_sheet_choice_buttons">Сакриј дугмад за избор</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Сакријте дугмад „Једном“ и „Увек“ на доњем листу</string>
     <string name="base_config">Додатна конфигурација</string>
-    <string name="urlbar_settings">Url трака</string>
+    <string name="urlbar_settings">URL трака</string>
     <string name="onboarding_1_title">Подесите LinkSheet као подразумевани прегледач</string>
     <string name="onboarding_1_subtitle">LinkSheet треба да се подеси као подразумевани прегледач за руковање додирнутим линковима</string>
     <string name="onboarding_1_card_title">Подразумевани прегледач</string>
@@ -336,7 +336,7 @@
     <string name="experiments_explainer_3">Експерименти су у активном развоју и можда неће радити исправно или уопште неће радити. Не пријављујете грешке на GitHub-у. Ако желите да дате повратне информације, урадите то на Discord-у.</string>
     <string name="tap_customization_dialog_title_single_tap">један додир</string>
     <string name="expand_on_app_select">Прошири када је апликација изабрана</string>
-    <string name="expand_on_app_select_explainer">Аутоматски прошири доњи лист када се изабере апликација</string>
+    <string name="expand_on_app_select_explainer">Аутоматски проширује доњи лист када се изабере апликација</string>
     <string name="cancel">Откажи</string>
     <string name="theme_enable_material_you">Динамичка боја</string>
     <string name="theme_mode">Режим теме</string>
@@ -388,7 +388,7 @@
     <string name="settings_shortcuts__title_connected_apps">Повезане апликације</string>
     <string name="settings_shortcuts__subtitle_default_browser">Отвори страницу с подешавањима подразумеваног прегледача</string>
     <string name="verified_link_handlers">Верификовани руковаоци линковима</string>
-    <string name="verified_link_handlers_subtitle">Контролиши стање верификације домена апликације</string>
+    <string name="verified_link_handlers_subtitle">Контролишите стање верификације домена апликације</string>
     <string name="settings__title_filter_apps">Филтрирање апликација</string>
     <string name="settings_verified_link_handlers__text_user_apps">Корисничке апликације</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Омогућено</string>

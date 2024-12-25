@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.rounded.DoubleArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
 import fe.android.compose.icon.IconPainter
@@ -31,6 +33,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.UrlCard
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -51,6 +54,7 @@ fun UrlBarWrapper(
     enableUrlCopiedToast: Boolean,
     enableDownloadStartedToast: Boolean,
     enableUrlCardDoubleTap: Boolean,
+    enableManualRedirect: Boolean,
     hideAfterCopying: Boolean,
     controller: BottomSheetStateController,
     showToast: (Int) -> Unit,
@@ -65,7 +69,7 @@ fun UrlBarWrapper(
     UrlBar(
         uri = uriString,
         profiles = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
-            if(enableSwitchProfile) profileSwitcher.getProfiles() else null
+            if (enableSwitchProfile) profileSwitcher.getProfiles() else null
         },
         switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
             { crossProfile, url ->
@@ -109,11 +113,18 @@ fun UrlBarWrapper(
                     bundleOf(LibRedirectDefault.libRedirectIgnore to true)
                 )
             )
-
         },
+        manualRedirect = if (enableManualRedirect) { uri ->
+            controller.onNewIntent(
+                Intents.createSelfIntent(
+                    uri.toUri(),
+                    bundleOf(ImprovedIntentResolver.IntentKeyResolveRedirects to true)
+                )
+            )
+        } else null,
         onDoubleClick = {
             if (result.app != null) {
-               launchApp(result.app, result.intent, ClickModifier.None)
+                launchApp(result.app, result.intent, ClickModifier.None)
             }
 
             Unit
@@ -134,6 +145,7 @@ fun UrlBar(
     switchProfile: ((CrossProfile, String) -> Unit)?,
     downloadUri: ((String, DownloadCheckResult.Downloadable) -> Unit)? = null,
     ignoreLibRedirect: ((LibRedirectResult.Redirected) -> Unit)? = null,
+    manualRedirect: ((String) -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
 ) {
     Column(
@@ -181,6 +193,16 @@ fun UrlBar(
                         text = textContent(R.string.ignore_libredirect),
                         icon = Icons.Filled.FastForward.iconPainter,
                         onClick = { ignoreLibRedirect!!(libRedirected) }
+                    )
+                }
+            }
+
+            if (manualRedirect != null) {
+                item {
+                    UrlActionButton(
+                        text = textContent(R.string.bottom_sheet__button_manual_redirect),
+                        icon = Icons.Rounded.DoubleArrow.iconPainter,
+                        onClick = { manualRedirect(uri) }
                     )
                 }
             }

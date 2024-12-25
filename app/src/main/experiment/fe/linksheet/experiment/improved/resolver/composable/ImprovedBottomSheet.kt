@@ -277,6 +277,7 @@ class ImprovedBottomSheet(
                 enableUrlCopiedToast = viewModel.urlCopiedToast(),
                 enableDownloadStartedToast = viewModel.downloadStartedToast(),
                 enableUrlCardDoubleTap = urlCardDoubleTap,
+                enableManualRedirect = viewModel.manualFollowRedirects(),
                 hideAfterCopying = viewModel.hideAfterCopying(),
                 controller = controller,
                 showToast = { id -> showToast(id) },

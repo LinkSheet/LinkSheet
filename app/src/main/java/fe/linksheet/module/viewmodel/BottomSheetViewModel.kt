@@ -121,6 +121,8 @@ class BottomSheetViewModel(
     val improvedBottomSheetUrlDoubleTap = experimentRepository.asState(Experiments.improvedBottomSheetUrlDoubleTap)
     val interceptAccidentalTaps = experimentRepository.asState(Experiments.interceptAccidentalTaps)
 
+    val manualFollowRedirects = experimentRepository.asState(Experiments.manualFollowRedirects)
+
     var appListSelectedIdx = mutableIntStateOf(-1)
 
     fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {

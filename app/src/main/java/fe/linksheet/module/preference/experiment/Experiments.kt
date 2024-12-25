@@ -24,6 +24,7 @@ object Experiments : PreferenceDefinition(
     val autoLaunchSingleBrowser = boolean("experiment_improved_bottom_sheet_auto_launch_single_browser")
     val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps", true)
     val loopDetector = boolean("experiment_loop_detector", true)
+    val manualFollowRedirects = boolean("experiment_manual_follow_redirects", false)
 
     val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
 
@@ -68,6 +69,7 @@ object Experiments : PreferenceDefinition(
                 )
                 addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
                 addPreference(ExperimentPreference("Loop detector", loopDetector))
+                addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
             },
 
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {

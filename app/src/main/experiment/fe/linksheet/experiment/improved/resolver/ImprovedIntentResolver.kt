@@ -244,7 +244,9 @@ class ImprovedIntentResolver(
 
         val resolveStatus = ResolveModuleStatus()
 
-        val followRedirects = followRedirects()
+        val manualResolveRedirects = intent.getBooleanExtra(IntentKeyResolveRedirects, false)
+
+        val followRedirects = followRedirects() || manualResolveRedirects
         val skipFollowRedirects = followRedirectsSkipBrowser() && isReferrerBrowser
 
         var resolvedUri: Uri? = uri
@@ -533,6 +535,8 @@ class ImprovedIntentResolver(
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
         private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
         private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
+
+        const val IntentKeyResolveRedirects = "resolve_redirects"
     }
 
     private val clearUrls = clearUrlProviders?.let { ClearUrls(it) }

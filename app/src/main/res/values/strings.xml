@@ -521,4 +521,5 @@
     <string name="generic__button_dismiss">Dismiss</string>
     <string name="settings_main_experiment_changelog__title_changelog">Experiments changelog</string>
     <string name="settings__subtitle_advanced"><![CDATA[Experiments & Export/Import]]></string>
+    <string name="bottom_sheet__button_manual_redirect">Follow redirects</string>
 </resources>

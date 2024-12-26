@@ -521,4 +521,5 @@
     <string name="generic__button_dismiss">Затваряне</string>
     <string name="settings_main_experiment_changelog__title_changelog">Дневник на промените на експериментите</string>
     <string name="settings__subtitle_advanced"><![CDATA[Експерименти и внасяне/изнасяне]]></string>
+    <string name="bottom_sheet__button_manual_redirect">Последване на пренасочвания</string>
 </resources>

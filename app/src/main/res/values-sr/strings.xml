@@ -50,7 +50,7 @@
     <string name="log_privacy">Да бисте сазнали више о приватности евиденције, можете да посетите овај <annotation url-id="privacy-logs"> линк</annotation>.</string>
     <string name="donate_learn_more">Сазнај више</string>
     <string name="send_to">Дели са</string>
-    <string name="enable_ignore_libredirect_button">Омогући дугме „Игнориши LibRedirect“</string>
+    <string name="enable_ignore_libredirect_button">Омогући дугме „Занемари LibRedirect“</string>
     <string name="pretend_to_be_app_explainer_2">Неке апликације попут Google Chrome-а експлицитно траже изворну апликацију за руковање, на пример, YouTube линк када се додирне у резултатима претраге. LinkSheetCompat се претвара да је таква изворна апликација за подржане хостове, а затим прослеђује захтев LinkSheet-у.</string>
     <string name="privacy_settings_explainer">Приватност упућивача, телеметрија</string>
     <string name="dont_show_filtered_item">Не приказуј одељак „последња изабрана апликација“</string>
@@ -119,7 +119,7 @@
     <string name="launch_onboarding">Покрени започињање</string>
     <string name="shizuku_integration">Shizuku интеграција</string>
     <string name="debug">Отклањање грешака</string>
-    <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. „.jpg“); Ако је тако, овај тип се користи за преузети фајл.</string>
+    <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. .jpg); Ако је тако, овај тип се користи за преузети фајл.</string>
     <string name="other">Остало</string>
     <string name="credits_explainer">Признања, лиценцирање</string>
     <string name="lib_redirect">LibRedirect</string>
@@ -177,7 +177,7 @@
     <string name="disabled">Онемогућено</string>
     <string name="enable_request_private_browsing_button">Омогући дугме „Захтевај приватно прегледање“</string>
     <string name="redact_log">Редигуј евиденцију (препоручено, онемогућавање овога може да изазове цурење назива пакета и назива хостова)</string>
-    <string name="show_linksheet_referrer_explainer">Када се апликација покрене, може да провери која је апликација покренута или да је „препоручи“. Подразумевано, када LinkSheet покрене апликацију, она се сакрива, говорећи да је апликација која је покренула LinkSheet покренула циљ. Омогућите ово да бисте поново уметнули LinkSheet као упућивач за апликације које отвара.</string>
+    <string name="show_linksheet_referrer_explainer">Када се апликација покрене, може да провери која је апликација покренута или да је препоручи. Подразумевано, када LinkSheet покрене апликацију, она се сакрива, говорећи да је апликација која је покренула LinkSheet покренула циљ. Омогућите ово да бисте поново уметнули LinkSheet као упућивач за апликације које отвара.</string>
     <string name="search">Претрага</string>
     <string name="at_least_one_unknown_browser_installer">Инсталиран је најмање један (непознати) прегледач</string>
     <string name="always_show_package_name">Увек приказуј назив пакета</string>
@@ -528,4 +528,5 @@
     <string name="settings_main_experiment_news__text_experiment_state_updated">Неки претходно онемогућени експерименти су омогућени у овој верзији.</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Нове подразумеване вредности</string>
     <string name="settings__subtitle_advanced"><![CDATA[Експерименти и извоз/увоз]]></string>
+    <string name="bottom_sheet__button_manual_redirect">Прати преусмеравања</string>
 </resources>

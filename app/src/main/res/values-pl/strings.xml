@@ -263,7 +263,7 @@
     <string name="debug_build">Kompilacja debug</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_linksheet_compat">Włącz eksperymentalne menu LinkSheet Compat</string>
-    <string name="enable_linksheet_compat_explainer">Po zainstalowaniu może przechwytywać żądania do niektórych aplikacji natywnych. To menu można znaleźć w podmenu \"Aplikacje\".</string>
+    <string name="enable_linksheet_compat_explainer">Po zainstalowaniu może przechwytywać żądania do niektórych aplikacji natywnych. To menu można znaleźć w podmenu aplikacje.</string>
     <string name="opening_with_app_toast_explainer">Pokaż toast po uruchomieniu aplikacji, która została ustawiona jako domyślna dla domeny</string>
     <string name="notifications_explainer">Skopiowano link, Rozpoczęto pobieranie</string>
     <string name="running_unofficial_build">Nieoficjalna kompilacja</string>
@@ -535,4 +535,5 @@
     <string name="settings_main_experiment_news__title_experiment_state_updated">Nowe ustawienia domyślne</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Niektóre wcześniej wyłączone eksperymenty zostały włączone w tej wersji.</string>
     <string name="settings__subtitle_advanced"><![CDATA[Eksperymenty i import/eksport]]></string>
+    <string name="bottom_sheet__button_manual_redirect">Śledź przekierowania</string>
 </resources>

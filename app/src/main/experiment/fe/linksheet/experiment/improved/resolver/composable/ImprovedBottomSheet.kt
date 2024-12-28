@@ -9,11 +9,6 @@ import android.widget.Toast
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -35,18 +30,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetImpl
-import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
-import fe.linksheet.activity.bottomsheet.column.GridBrowserButton
-import fe.linksheet.activity.bottomsheet.column.ListBrowserColumn
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
 import fe.linksheet.experiment.improved.resolver.IntentResolveResult
 import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
@@ -59,7 +49,6 @@ import fe.linksheet.module.intent.BottomSheetStateController
 import fe.linksheet.module.intent.DefaultBottomSheetStateController
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -268,7 +257,11 @@ class ImprovedBottomSheet(
         hideBottomSheetChoiceButtons: Boolean,
         urlCardDoubleTap: Boolean,
     ) {
-        if (previewUrl && result.uri != null) {
+        val hasUri = result.uri != null
+        val hasResolvedApps = result.resolved.isNotEmpty()
+        val hasPreferredApp = result.filteredItem != null
+
+        if (previewUrl && hasUri) {
             UrlBarWrapper(
                 profileSwitcher = viewModel.profileSwitcher,
                 result = result,
@@ -295,8 +288,8 @@ class ImprovedBottomSheet(
             )
         }
 
-        if (result.filteredItem != null) {
-            val privateBrowser = isPrivateBrowser(result.uri != null, result.filteredItem)
+        if (hasPreferredApp) {
+            val privateBrowser = isPrivateBrowser(hasUri, result.filteredItem)
 
             PreferredAppColumn(
                 appInfo = result.filteredItem,
@@ -312,7 +305,7 @@ class ImprovedBottomSheet(
             )
 
             // TODO: Not sure if this divider should be kept
-            if (result.resolved.isNotEmpty()) {
+            if (hasResolvedApps) {
                 HorizontalDivider(
                     modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 10.dp),
                     color = MaterialTheme.colorScheme.outline.copy(0.25f)
@@ -340,189 +333,37 @@ class ImprovedBottomSheet(
             Spacer(modifier = Modifier.height(10.dp))
         }
 
-        if (result.resolved.isNotEmpty()) {
-            if (viewModel.gridLayout()) {
-                Grid(
-                    result = result,
-                    hasPreferredApp = result.filteredItem != null,
-                    hideChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
-                    isExpanded = isExpanded,
-                    requestExpand = requestExpand,
-                    showPackage = showPackage
-                )
-            } else {
-                List(
-                    result = result,
-                    hasPreferredApp = result.filteredItem != null,
-                    hideChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
-                    showNativeLabel = viewModel.bottomSheetNativeLabel(),
-                    isExpanded = isExpanded,
-                    requestExpand = requestExpand,
-                    showPackage = showPackage
-                )
-            }
-        }
-    }
+        if (hasResolvedApps) {
+            AppContentRoot(
+                gridLayout = viewModel.gridLayout(),
+                apps = result.resolved,
+                uri = result.uri,
+                appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
+                hasPreferredApp = hasPreferredApp,
+                hideChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
+                showPackage = showPackage,
+                isPrivateBrowser = ::isPrivateBrowser,
+                showToast = ::showToast,
+                showNativeLabel = viewModel.bottomSheetNativeLabel(),
+                launch = { info, modifier ->
+                    viewModel.viewModelScope.launch {
+                        handleLaunch(viewModel.makeOpenAppIntent(info, result.intent, modifier))
+                    }
+                },
+                launch2 = { index, info, type, modifier ->
+                    viewModel.viewModelScope.launch {
+                        val intent = viewModel.handleClick(
+                            activity, index, isExpanded,
+                            requestExpand, result.intent, info, type, modifier
+                        )
 
-
-    data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
-        override fun toString(): String {
-            return info.flatComponentName + (privateBrowsingBrowser?.hashCode() ?: -1)
-        }
-    }
-
-    // TODO: Grid and List are pretty similar, refactor maybe?
-    @Composable
-    private fun Grid(
-        result: BottomSheetResult.SuccessResult,
-        hasPreferredApp: Boolean,
-        hideChoiceButtons: Boolean,
-        isExpanded: Boolean,
-        requestExpand: () -> Unit,
-        showPackage: Boolean,
-    ) {
-        val items = mutableListOf<GridItem>()
-
-        for (info in result.resolved) {
-            items.add(GridItem(info))
-
-            val privateBrowser = isPrivateBrowser(result.uri != null, info)
-            if (privateBrowser != null) {
-                items.add(GridItem(info, privateBrowser))
-            }
-        }
-
-        val activity = LocalActivity.current
-
-        Column {
-            LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Adaptive(85.dp)) {
-                itemsIndexed(items = items, key = { _, item -> item.toString() }) { index, (info, privateBrowser) ->
-                    GridBrowserButton(
-                        appInfo = info,
-                        selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
-                        onClick = { type, modifier ->
-                            viewModel.viewModelScope.launch {
-                                val intent = viewModel.handleClick(
-                                    activity,
-                                    index,
-                                    isExpanded,
-                                    requestExpand,
-                                    result.intent,
-                                    info,
-                                    type,
-                                    modifier
-                                )
-
-                                if (intent != null) {
-                                    handleLaunch(intent)
-                                }
-                            }
-                        },
-                        privateBrowser = privateBrowser,
-                        showPackage = showPackage
-                    )
+                        if (intent != null) {
+                            handleLaunch(intent)
+                        }
+                    }
                 }
-            }
-
-            if (!hasPreferredApp && !hideChoiceButtons) {
-                NoPreferredAppChoiceButtons(result = result, selected = viewModel.appListSelectedIdx.intValue)
-            }
+            )
         }
-    }
-
-    @Composable
-    private fun List(
-        result: BottomSheetResult.SuccessResult,
-        hasPreferredApp: Boolean,
-        hideChoiceButtons: Boolean,
-        showNativeLabel: Boolean,
-        isExpanded: Boolean,
-        requestExpand: () -> Unit,
-        showPackage: Boolean,
-    ) {
-        val activity = LocalActivity.current
-
-        Column(modifier = Modifier.wrapContentHeight()) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1.0f, fill = false)
-            ) {
-                itemsIndexed(items = result.resolved, key = { _, item -> item.flatComponentName }) { index, info ->
-                    val privateBrowser = isPrivateBrowser(result.uri != null, info)
-
-                    ListBrowserColumn(
-                        appInfo = info,
-                        selected = if (!hasPreferredApp) index == viewModel.appListSelectedIdx.intValue else null,
-                        onClick = { type, modifier ->
-                            viewModel.viewModelScope.launch {
-                                val intent = viewModel.handleClick(
-                                    activity, index, isExpanded,
-                                    requestExpand, result.intent, info, type, modifier
-                                )
-
-                                if (intent != null) {
-                                    handleLaunch(intent)
-                                }
-                            }
-                        },
-                        preferred = false,
-                        privateBrowser = privateBrowser,
-                        showPackage = showPackage,
-                        showNativeLabel = showNativeLabel
-                    )
-
-                    // TODO: Selector?
-//                    Box(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        contentAlignment = Alignment.CenterEnd
-//                    ) {
-//                        if (selectedItem == index && !hasPreferredApp) {
-//                            Icon(
-//                                imageVector = Icons.Default.CheckCircle,
-//                                contentDescription = null,
-//                                modifier = Modifier.align(Alignment.CenterEnd)
-//                            )
-//                        }
-//                    }
-                }
-            }
-
-            if (!hasPreferredApp && !hideChoiceButtons) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-//                        .wrapContentHeight()
-//                        .weight(0.1f)
-
-//                    .padding(padding)
-//                        .padding(bottom = 40.dp)
-//                        .border(1.dp, Color.Magenta)
-                ) {
-                    NoPreferredAppChoiceButtons(result = result, selected = viewModel.appListSelectedIdx.intValue)
-                }
-            }
-        }
-    }
-
-    @Composable
-    private fun NoPreferredAppChoiceButtons(result: BottomSheetResult.SuccessResult, selected: Int) {
-        Spacer(modifier = Modifier.height(5.dp))
-
-        ChoiceButtons(
-            enabled = selected != -1,
-            choiceClick = { _, modifier ->
-                val info = result.resolved.getOrFirstOrNull(selected)
-                if (info == null) {
-                    showToast(R.string.something_went_wrong, uiThread = true)
-                    return@ChoiceButtons
-                }
-
-                viewModel.viewModelScope.launch {
-                    handleLaunch(viewModel.makeOpenAppIntent(info, result.intent, modifier))
-                }
-            },
-        )
     }
 
     private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {

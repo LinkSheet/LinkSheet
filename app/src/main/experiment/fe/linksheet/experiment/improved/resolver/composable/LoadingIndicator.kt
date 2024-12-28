@@ -58,10 +58,12 @@ fun LoadingIndicator(
         if (interaction is ResolverInteraction.Cancelable) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
 
-                Button(onClick = {
-                    Log.d("Interact", "Cancel")
-                    (interaction as? ResolverInteraction.Cancelable)?.cancel?.invoke()
-                }) {
+                Button(
+                    onClick = {
+                        Log.d("Interact", "Cancel")
+                        (interaction as? ResolverInteraction.Cancelable)?.cancel?.invoke()
+                    }
+                ) {
                     Text(text = stringResource(id = R.string.bottom_sheet_loading_indicator__button_skip_job))
                 }
             }
@@ -93,8 +95,10 @@ private fun LoadingIndicatorPreview() {
     }
 
     PreviewTheme {
-        LoadingIndicator(events = events, interactions = interactions, requestExpand = {
-
-        })
+        LoadingIndicator(
+            events = events,
+            interactions = interactions,
+            requestExpand = {}
+        )
     }
 }

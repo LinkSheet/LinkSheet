@@ -357,6 +357,7 @@ dependencies {
     testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
+    testImplementation("com.github.gmazzo.okhttp.mock:mock-client:2.0.0")
     testImplementation(kotlin("test"))
 
     debugImplementation(Square.leakCanary.android)

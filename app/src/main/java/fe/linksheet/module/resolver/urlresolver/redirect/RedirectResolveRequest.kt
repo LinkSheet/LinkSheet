@@ -56,7 +56,7 @@ class RedirectResolveRequest(
     }
 
     private fun Response.handleRefreshHeader(): String? {
-        val refreshHeader = header("refresh")
+        val refreshHeader = header("refresh") ?: return null
         val parsedHeader = parseRefreshHeader(refreshHeader) ?: return null
 
         return parsedHeader
@@ -74,7 +74,9 @@ class RedirectResolveRequest(
     }
 
     companion object {
-        internal fun parseRefreshHeader(refreshHeader: String?): Pair<Int, String>? {
+        private val refreshHeaderRegex = Regex("(\\d+)(?:\\.\\d*)?[;,](?:URL=)?(.+)", RegexOption.IGNORE_CASE)
+
+        internal fun parseRefreshHeader(refreshHeader: String): Pair<Int, String>? {
             fun unquoteHeader(value: String): String {
                 if (value.length <= 2) return value
 
@@ -88,30 +90,10 @@ class RedirectResolveRequest(
                 return value
             }
 
-            fun trySplit(refreshHeader: String?, delimiter: String): Pair<Int, String>? {
-                val (time, url) = refreshHeader?.split(delimiter)?.takeIf { it.size == 2 } ?: return null
-                val intTime = time.trim().toFloatOrNull()?.toInt() ?: return null
-                val trimmedUrl = url.trim()
+            val (_, time, url) = refreshHeaderRegex.matchEntire(refreshHeader)?.groupValues ?: return null
+            val intTime = time.toIntOrNull() ?: return null
 
-                return intTime to trimmedUrl
-            }
-
-            // 0;URL=https://linkin.bio/google
-            val (time, refreshUrl) = (trySplit(refreshHeader, ";") ?: trySplit(refreshHeader, ",")) ?: return null
-
-            if (refreshUrl.startsWith("url=", ignoreCase = true) == true) {
-                if (refreshUrl.length > 4) {
-                    return time to unquoteHeader(refreshUrl.substring(4))
-                }
-
-                return null
-            }
-
-            if (refreshUrl.isNotEmpty() == true) {
-                return time to unquoteHeader(refreshUrl)
-            }
-
-            return null
+            return intTime to unquoteHeader(url)
         }
     }
 }

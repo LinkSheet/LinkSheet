@@ -72,6 +72,7 @@ internal class RedirectResolveRequestTest : KoinTest {
     @Test
     fun `test parse valid refresh header`() {
         tableOf("header", "expected")
+            .row("0,https://linkin.bio/google", 0 to "https://linkin.bio/google")
             .row("0;https://linkin.bio/google", 0 to "https://linkin.bio/google")
             .row("0;URL=https://linkin.bio/google", 0 to "https://linkin.bio/google")
             .row("1;URL=https://linkin.bio/google", 1 to "https://linkin.bio/google")
@@ -80,7 +81,7 @@ internal class RedirectResolveRequestTest : KoinTest {
             .row("0;url=\"https://linkin.bio/google\"", 0 to "https://linkin.bio/google")
             .row("0;url='https://linkin.bio/google'", 0 to "https://linkin.bio/google")
             // Parser doesn't do validation beyond basic length checks, so this is valid
-            .row("0;url=ht", 0 to  "ht")
+            .row("0;url=ht", 0 to "ht")
             .forAll { header, expected ->
                 assertThat(RedirectResolveRequest.parseRefreshHeader(header)).isEqualTo(expected)
             }

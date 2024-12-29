@@ -528,4 +528,5 @@
     <string name="settings__subtitle_advanced"><![CDATA[Import a export experimentů]]></string>
     <string name="generic__button_dismiss">Zavřít</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Nové výchozí hodnoty</string>
+    <string name="bottom_sheet__button_manual_redirect">Následovat přesměrování</string>
 </resources>

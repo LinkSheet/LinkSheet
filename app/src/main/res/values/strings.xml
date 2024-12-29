@@ -516,8 +516,8 @@
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Request permission</string>
     <string name="settings_main_miui_compat__text_request_failed">Failed to request permission!</string>
     <string name="generic__button_learn_more">Learn more</string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">New defaults</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">Some previously disabled experiments have been enabled in this build.</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Behavior changes</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Some experiments have been removed and are now the default behavior.</string>
     <string name="generic__button_dismiss">Dismiss</string>
     <string name="settings_main_experiment_changelog__title_changelog">Experiments changelog</string>
     <string name="settings__subtitle_advanced"><![CDATA[Experiments & Export/Import]]></string>

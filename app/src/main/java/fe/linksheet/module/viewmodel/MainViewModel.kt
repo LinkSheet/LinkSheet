@@ -68,7 +68,7 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
 ) : BaseViewModel(preferenceRepository) {
-    val newDefaultsDismissed = appStateRepository.asState(AppStatePreferences.newDefaults_2024_12_16_InfoDismissed)
+    val newDefaultsDismissed = appStateRepository.asState(AppStatePreferences.newDefaults_2024_12_29_InfoDismissed)
 
     val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
 

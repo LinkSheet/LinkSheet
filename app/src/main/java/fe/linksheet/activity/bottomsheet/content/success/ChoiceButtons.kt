@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.button
+package fe.linksheet.activity.bottomsheet.content.success
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
-import fe.linksheet.activity.bottomsheet.column.ClickType
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Composable

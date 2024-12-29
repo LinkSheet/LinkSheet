@@ -1,11 +1,11 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.activity.bottomsheet.content.success
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
-import fe.linksheet.activity.bottomsheet.column.ClickType
-import fe.linksheet.activity.bottomsheet.appcontent.AppContentGrid
-import fe.linksheet.activity.bottomsheet.appcontent.AppContentList
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
+import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 

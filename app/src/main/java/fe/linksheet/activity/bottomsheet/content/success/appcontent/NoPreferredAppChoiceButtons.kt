@@ -1,10 +1,10 @@
-package fe.linksheet.activity.bottomsheet.appcontent
+package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.button.ChoiceButtons
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
+import fe.linksheet.activity.bottomsheet.content.success.ChoiceButtons
+import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.resolver.DisplayActivityInfo
 
 @Composable

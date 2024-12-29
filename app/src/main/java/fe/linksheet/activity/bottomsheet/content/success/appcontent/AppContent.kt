@@ -1,11 +1,11 @@
-package fe.linksheet.activity.bottomsheet.appcontent
+package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.resolver.DisplayActivityInfo
 
 @Composable

@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.activity.bottomsheet.content.success.url
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable

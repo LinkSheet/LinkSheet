@@ -12,7 +12,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.extension.android.showToast
 
-class LoopDetectorExperiment(
+class LoopDetector(
     private val activity: BottomSheetActivity,
 ) : ActivityResultContract<Intent, ActivityResult>() {
 

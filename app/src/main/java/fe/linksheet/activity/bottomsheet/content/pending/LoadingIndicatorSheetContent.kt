@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.activity.bottomsheet.content.pending
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun LoadingIndicator(
+fun LoadingIndicatorSheetContent(
     events: StateFlow<ResolveEvent>,
     interactions: StateFlow<ResolverInteraction>,
     requestExpand: () -> Unit,
@@ -95,7 +95,7 @@ private fun LoadingIndicatorPreview() {
     }
 
     PreviewTheme {
-        LoadingIndicator(
+        LoadingIndicatorSheetContent(
             events = events,
             interactions = interactions,
             requestExpand = {}

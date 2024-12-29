@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.activity.bottomsheet.content.success.url
 
 import android.content.ClipboardManager
 import android.content.Intent
@@ -30,7 +30,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.IntentResolveResult

@@ -32,8 +32,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
-import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
+import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
+import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
+import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
+import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
+import fe.linksheet.activity.bottomsheet.content.failure.ExperimentalFailureSheetContent
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.resolver.ImprovedIntentResolver
@@ -58,7 +61,7 @@ import org.koin.core.component.inject
 
 
 class ImprovedBottomSheet(
-    private val loopDetectorExperiment: LoopDetectorExperiment?,
+    private val loopDetector: LoopDetector?,
     val activity: BottomSheetActivity,
     val viewModel: BottomSheetViewModel,
     val initialIntent: SafeIntent,
@@ -208,7 +211,7 @@ class ImprovedBottomSheet(
             sheetContent = {
                 when (status) {
                     is IntentResolveResult.Pending -> {
-                        LoadingIndicator(
+                        LoadingIndicatorSheetContent(
                             events = resolver.events,
                             interactions = resolver.interactions,
                             requestExpand = { coroutineScope.launch { sheetState.expand() } }
@@ -231,7 +234,7 @@ class ImprovedBottomSheet(
                     }
 
                     is IntentResolveResult.IntentParseFailed, is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
-                        ExperimentalFailureSheetColumn(
+                        ExperimentalFailureSheetContent(
                             data = currentIntent.dataString,
                             onShareClick = {},
                             onCopyClick = {}
@@ -386,14 +389,14 @@ class ImprovedBottomSheet(
             intent.putExtra(Intent.EXTRA_REFERRER, referrer)
         }
 
-        if (loopDetectorExperiment == null) {
+        if (loopDetector == null) {
             if (viewModel.safeStartActivity(activity, intent)) {
                 finish()
             } else {
                 showToast(R.string.resolve_activity_failure, uiThread = true)
             }
         } else {
-            if (!loopDetectorExperiment.start(intent)) {
+            if (!loopDetector.start(intent)) {
                 showToast(R.string.resolve_activity_failure, uiThread = true)
             }
         }

@@ -9,7 +9,7 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-sealed class TapConfig(val name: String, @StringRes val  stringRes: Int) : StringResHolder, Parcelable {
+sealed class TapConfig(val name: String, @StringRes val stringRes: Int) : StringResHolder, Parcelable {
     @IgnoredOnParcel
     override val id = stringRes
 
@@ -18,9 +18,10 @@ sealed class TapConfig(val name: String, @StringRes val  stringRes: Int) : Strin
     data object SelectItem : TapConfig("select_item", R.string.select_app)
     data object OpenSettings : TapConfig("open_settings", R.string.open_app_settings_page)
 
-    companion object : OptionTypeMapper<TapConfig, String>({ it.name }, {
-        arrayOf(None, OpenApp, SelectItem, OpenSettings)
-    })
+    companion object : OptionTypeMapper<TapConfig, String>(
+        key = { it.name },
+        options = { arrayOf(None, OpenApp, SelectItem, OpenSettings) }
+    )
 
     override fun toString(): String {
         return name

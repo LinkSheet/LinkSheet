@@ -1,13 +1,28 @@
-package fe.linksheet.activity.bottomsheet.column
+package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -20,32 +35,69 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.composekit.component.shape.CustomShapeDefaults
+import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 
-//enum class ClickType {
-//    Single, Double, Long, Private, Once, Always
-//}
+@Composable
+fun AppContentList(
+    apps: List<DisplayActivityInfo>,
+    uri: Uri?,
+    appListSelectedIdx: Int,
+    hasPreferredApp: Boolean,
+    hideChoiceButtons: Boolean,
+    showNativeLabel: Boolean,
+    showPackage: Boolean,
+    launch: (info: DisplayActivityInfo, modifier: ClickModifier) -> Unit,
+    launch2: (
+        index: Int,
+        info: DisplayActivityInfo,
+        type: ClickType,
+        modifier: ClickModifier,
+    ) -> Unit,
+    isPrivateBrowser: (hasUri: Boolean, info: DisplayActivityInfo) -> KnownBrowser?,
+    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
+) {
+    AppContent(
+        info = apps.getOrFirstOrNull(appListSelectedIdx),
+        appListSelectedIdx = appListSelectedIdx,
+        hasPreferredApp = hasPreferredApp,
+        hideChoiceButtons = hideChoiceButtons,
+//        showNativeLabel = showNativeLabel,
+        launch = launch,
+        showToast = showToast,
+    ) { modifier ->
+        LazyColumn(modifier = modifier) {
+            itemsIndexed(
+                items = apps,
+                key = { _, item -> item.flatComponentName }
+            ) { index, info ->
+                val privateBrowser = isPrivateBrowser(uri != null, info)
 
-sealed interface ClickType {
-    data object Single : ClickType
-    data object Double : ClickType
-    data object Long : ClickType
+                AppListItem(
+                    appInfo = info,
+                    selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
+                    onClick = { type, modifier ->
+                        launch2(index, info, type, modifier)
+                    },
+                    preferred = false,
+                    privateBrowser = privateBrowser,
+                    showPackage = showPackage,
+                    showNativeLabel = showNativeLabel
+                )
+            }
+        }
+    }
 }
-
-sealed interface ClickModifier {
-    data class Private(val browser: KnownBrowser) : ClickModifier
-    data object Always : ClickModifier
-    data object None : ClickModifier
-}
-
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun ListBrowserColumn(
+fun AppListItem(
     modifier: Modifier = Modifier,
     appInfo: DisplayActivityInfo,
     selected: Boolean?,

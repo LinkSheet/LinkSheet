@@ -22,8 +22,8 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
-import fe.linksheet.activity.bottomsheet.column.ClickModifier
-import fe.linksheet.activity.bottomsheet.column.ClickType
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger

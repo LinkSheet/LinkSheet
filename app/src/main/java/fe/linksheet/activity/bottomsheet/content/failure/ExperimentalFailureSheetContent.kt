@@ -1,4 +1,4 @@
-package fe.linksheet.composable.component.bottomsheet
+package fe.linksheet.activity.bottomsheet.content.failure
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -28,7 +28,7 @@ import fe.linksheet.navigation.Route
 
 
 @Composable
-fun ExperimentalFailureSheetColumn(
+fun ExperimentalFailureSheetContent(
     onShareClick: () -> Unit,
     onCopyClick: () -> Unit,
     data: String?,
@@ -153,7 +153,7 @@ private fun ExperimentalFailureSheetColumnPreview() {
         color = MaterialTheme.colorScheme.surfaceContainerHigh,
         tonalElevation = 6.0.dp,
     ) {
-        ExperimentalFailureSheetColumn(
+        ExperimentalFailureSheetContent(
             onShareClick = {},
             onCopyClick = {},
             data = ""

@@ -1,4 +1,4 @@
-package fe.linksheet.composable.component.bottomsheet
+package fe.linksheet.activity.bottomsheet.content.failure
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

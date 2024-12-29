@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.composable
+package fe.linksheet.activity.bottomsheet
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -32,15 +32,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.BottomSheetImpl
 import fe.linksheet.activity.bottomsheet.column.PreferredAppColumn
 import fe.linksheet.composable.component.bottomsheet.ExperimentalFailureSheetColumn
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.experiment.improved.resolver.ImprovedIntentResolver
-import fe.linksheet.experiment.improved.resolver.IntentResolveResult
-import fe.linksheet.experiment.improved.resolver.LoopDetectorExperiment
-import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
+import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.IntentResolveResult
+import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
@@ -69,6 +67,11 @@ class ImprovedBottomSheet(
     private val logger by injectLogger<ImprovedBottomSheet>()
     private val resolver by inject<ImprovedIntentResolver>()
 
+    companion object {
+        val preferredAppItemHeight = 60.dp
+        val buttonPadding = 15.dp
+        val buttonRowHeight = 50.dp
+    }
 
     private fun finish() {
         activity.finish()

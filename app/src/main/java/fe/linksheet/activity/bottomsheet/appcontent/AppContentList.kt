@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.composable.appcontent
+package fe.linksheet.activity.bottomsheet.appcontent
 
 import android.net.Uri
 import androidx.compose.foundation.lazy.LazyColumn

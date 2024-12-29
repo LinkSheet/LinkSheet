@@ -1,7 +1,8 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.content.ClipboardManager
-import androidx.annotation.StringRes
+import android.content.Intent
+import android.os.Build
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
@@ -10,33 +11,140 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.rounded.DoubleArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
+import androidx.core.os.bundleOf
+import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
+import fe.android.compose.icon.IconPainter
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.DefaultContent.Companion.text
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContent
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.column.ClickModifier
+import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.IntentResolveResult
+import fe.linksheet.module.database.entity.LibRedirectDefault
+import fe.linksheet.module.downloader.DownloadCheckResult
+import fe.linksheet.module.intent.BottomSheetStateController
+import fe.linksheet.module.intent.Intents
 import fe.linksheet.module.profile.CrossProfile
+import fe.linksheet.module.profile.ProfileSwitcher
+import fe.linksheet.module.resolver.LibRedirectResult
+import fe.linksheet.resolver.DisplayActivityInfo
 import me.saket.unfurl.UnfurlResult
+
+@Composable
+fun UrlBarWrapper(
+    result: IntentResolveResult.Default,
+    profileSwitcher: ProfileSwitcher,
+    enableIgnoreLibRedirectButton: Boolean,
+    enableSwitchProfile: Boolean,
+    enableUrlCopiedToast: Boolean,
+    enableDownloadStartedToast: Boolean,
+    enableUrlCardDoubleTap: Boolean,
+    enableManualRedirect: Boolean,
+    hideAfterCopying: Boolean,
+    controller: BottomSheetStateController,
+    showToast: (Int) -> Unit,
+    copyUrl: (String, String) -> Unit,
+    startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
+    launchApp: (DisplayActivityInfo, Intent, ClickModifier) -> Unit,
+) {
+    val uriString = result.uri.toString()
+    val clipboardLabel = stringResource(id = R.string.generic__text_url)
+    val activity = LocalActivity.current
+
+    UrlBar(
+        uri = uriString,
+        profiles = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
+            if (enableSwitchProfile) profileSwitcher.getProfiles() else null
+        },
+        switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
+            { crossProfile, url ->
+                controller.hideAndFinish()
+                profileSwitcher.switchTo(crossProfile, url, activity)
+            }
+        },
+        unfurlResult = result.unfurlResult,
+        downloadable = result.downloadable,
+        libRedirected = if (enableIgnoreLibRedirectButton) result.libRedirectResult as? LibRedirectResult.Redirected else null,
+        copyUri = { uri ->
+            copyUrl(clipboardLabel, uri)
+
+            if (enableUrlCopiedToast) {
+                showToast(R.string.url_copied)
+            }
+
+            if (hideAfterCopying) {
+                controller.hideAndFinish()
+            }
+        },
+        shareUri = { uri ->
+            controller.hideAndFinish()
+            controller.startActivity(controller.createChooser(Intents.createShareUriIntent(uri)))
+        },
+        downloadUri = { uri, downloadResult ->
+            startDownload(uri, downloadResult)
+
+            if (enableDownloadStartedToast) {
+                showToast(R.string.download_started)
+            }
+
+            if (hideAfterCopying) {
+                controller.hideAndFinish()
+            }
+        },
+        ignoreLibRedirect = { redirectedResult ->
+            controller.onNewIntent(
+                Intents.createSelfIntent(
+                    redirectedResult.originalUri,
+                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                )
+            )
+        },
+        manualRedirect = if (enableManualRedirect) { uri ->
+            controller.onNewIntent(
+                Intents.createSelfIntent(
+                    uri.toUri(),
+                    bundleOf(ImprovedIntentResolver.IntentKeyResolveRedirects to true)
+                )
+            )
+        } else null,
+        onDoubleClick = {
+            if (result.app != null) {
+                launchApp(result.app, result.intent, ClickModifier.None)
+            }
+
+            Unit
+        }.takeIf { enableUrlCardDoubleTap }
+    )
+}
+
 
 @Composable
 fun UrlBar(
     uri: String,
     unfurlResult: UnfurlResult?,
     profiles: List<CrossProfile>?,
-    downloadable: Boolean,
-    libRedirected: Boolean,
-    copyUri: () -> Unit,
-    shareUri: () -> Unit,
-    switchProfile: ((CrossProfile) -> Unit)?,
-    downloadUri: (() -> Unit)? = null,
-    ignoreLibRedirect: (() -> Unit)? = null,
+    downloadable: DownloadCheckResult,
+    libRedirected: LibRedirectResult.Redirected?,
+    copyUri: (String) -> Unit,
+    shareUri: (String) -> Unit,
+    switchProfile: ((CrossProfile, String) -> Unit)?,
+    downloadUri: ((String, DownloadCheckResult.Downloadable) -> Unit)? = null,
+    ignoreLibRedirect: ((LibRedirectResult.Redirected) -> Unit)? = null,
+    manualRedirect: ((String) -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
 ) {
     Column(
@@ -53,38 +161,60 @@ fun UrlBar(
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             item {
-                UrlActionButton(text = R.string.copy_url, icon = Icons.Filled.ContentCopy, onClick = copyUri)
+                UrlActionButton(
+                    text = textContent(R.string.copy_url),
+                    icon = Icons.Filled.ContentCopy.iconPainter,
+                    onClick = { copyUri(uri) }
+                )
             }
 
             item {
-                UrlActionButton(text = R.string.share, icon = Icons.Filled.Share, onClick = shareUri)
+                UrlActionButton(
+                    text = textContent(R.string.share),
+                    icon = Icons.Filled.Share.iconPainter,
+                    onClick = { shareUri(uri) }
+                )
             }
 
-            if(switchProfile != null && profiles != null){
+            if (downloadable.isDownloadable()) {
+                item {
+                    UrlActionButton(
+                        text = textContent(R.string.download),
+                        icon = Icons.Filled.Download.iconPainter,
+                        onClick = { downloadUri!!(uri, downloadable as DownloadCheckResult.Downloadable) }
+                    )
+                }
+            }
+
+            if (libRedirected != null) {
+                item {
+                    UrlActionButton(
+                        text = textContent(R.string.ignore_libredirect),
+                        icon = Icons.Filled.FastForward.iconPainter,
+                        onClick = { ignoreLibRedirect!!(libRedirected) }
+                    )
+                }
+            }
+
+            if (manualRedirect != null) {
+                item {
+                    UrlActionButton(
+                        text = textContent(R.string.bottom_sheet__button_manual_redirect),
+                        icon = Icons.Rounded.DoubleArrow.iconPainter,
+                        onClick = { manualRedirect(uri) }
+                    )
+                }
+            }
+
+            if (switchProfile != null && profiles != null) {
                 for (target in profiles) {
                     item {
                         UrlActionButton(
-                            text = target.switchLabel,
-                            icon = target.bitmap,
-                            onClick = { switchProfile(target) }
+                            text = text(target.switchLabel),
+                            icon = bitmap(target.bitmap),
+                            onClick = { switchProfile(target, uri) }
                         )
                     }
-                }
-            }
-
-            if (downloadable) {
-                item {
-                    UrlActionButton(text = R.string.download, icon = Icons.Filled.Download, onClick = downloadUri!!)
-                }
-            }
-
-            if (libRedirected) {
-                item {
-                    UrlActionButton(
-                        text = R.string.ignore_libredirect,
-                        icon = Icons.Filled.FastForward,
-                        onClick = ignoreLibRedirect!!
-                    )
                 }
             }
         }
@@ -98,25 +228,9 @@ fun UrlBar(
 }
 
 @Composable
-private fun UrlActionButton(text: String, icon: ImageBitmap, onClick: () -> Unit) {
-    ElevatedAssistChip(
-        onClick = onClick,
-        elevation = AssistChipDefaults.assistChipElevation(),
-        shape = CircleShape,
-        leadingIcon = {
-            Icon(
-                modifier = Modifier.size(18.dp),
-                bitmap = icon,
-                tint = MaterialTheme.colorScheme.onSurface,
-                contentDescription = text
-            )
-        },
-        label = { Text(text = text, fontSize = 13.sp) }
-    )
-}
+private fun UrlActionButton(text: TextContent, icon: IconPainter, onClick: () -> Unit) {
+    val painter = icon.rememberPainter()
 
-@Composable
-private fun UrlActionButton(@StringRes text: Int, icon: ImageVector, onClick: () -> Unit) {
     ElevatedAssistChip(
         onClick = onClick,
         elevation = AssistChipDefaults.assistChipElevation(),
@@ -124,12 +238,12 @@ private fun UrlActionButton(@StringRes text: Int, icon: ImageVector, onClick: ()
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(18.dp),
-                imageVector = icon,
+                painter = painter,
                 tint = MaterialTheme.colorScheme.onSurface,
-                contentDescription = stringResource(id = text)
+                contentDescription = null
             )
         },
-        label = { Text(text = stringResource(id = text), fontSize = 13.sp) }
+        label = text.content
     )
 }
 

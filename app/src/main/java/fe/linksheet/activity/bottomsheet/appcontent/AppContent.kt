@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.composable.appcontent
+package fe.linksheet.activity.bottomsheet.appcontent
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.module.resolver
 
 import android.app.SearchManager
 import android.app.usage.UsageStatsManager
@@ -15,14 +15,12 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
-import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
-import fe.linksheet.experiment.improved.resolver.util.AppSorter
-import fe.linksheet.experiment.improved.resolver.util.CustomTabHandler
-import fe.linksheet.experiment.improved.resolver.util.IntentHandler
-import fe.linksheet.experiment.improved.resolver.util.PackageDisplayInfoHelper
-import fe.linksheet.experiment.improved.resolver.util.PackageLauncherHelper
-import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
+import fe.linksheet.module.resolver.util.AppSorter
+import fe.linksheet.module.resolver.util.CustomTabHandler
+import fe.linksheet.module.resolver.util.IntentHandler
+import fe.linksheet.module.resolver.util.PackageDisplayInfoHelper
+import fe.linksheet.module.resolver.util.PackageLauncherHelper
+import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.labelSorted
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.koin.injectLogger
@@ -46,7 +44,6 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
-import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate

@@ -18,6 +18,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImagePainter
@@ -30,14 +32,39 @@ import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.material3.placeholder
 import io.github.fornewid.placeholder.material3.shimmer
 import me.saket.unfurl.UnfurlResult
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+
+@Composable
+fun UrlCard(
+    uri: String,
+    unfurlResult: UnfurlResult?,
+    onDoubleClick: (() -> Unit)? = null,
+) {
+    val data = when (unfurlResult) {
+        null -> null
+        else -> UrlCardData(unfurlResult.title, unfurlResult.favicon, unfurlResult.thumbnail)
+    }
+
+    UrlCard(
+        uri = uri,
+        data = data,
+        onDoubleClick = onDoubleClick
+    )
+}
+
+data class UrlCardData(
+    val title: String?,
+    val favicon: Any?,
+    val thumbnail: Any?,
+)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun UrlCard(
     uri: String,
-    unfurlResult: UnfurlResult?,
-    onDoubleClick: (() -> Unit)? = null
+    data: UrlCardData? = null,
+    onDoubleClick: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     var showFullUrl by remember { mutableStateOf(false) }
@@ -54,13 +81,11 @@ fun UrlCard(
                 onLongClick = {
                     showFullUrl = !showFullUrl
                 }
-            ).layoutId("url_card"),
+            )
+            .layoutId("url_card"),
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            val thumbnailUrl = unfurlResult?.thumbnail?.toString()
-            val faviconUrl = unfurlResult?.favicon?.toString()
-
-            if (thumbnailUrl != null) {
+            if (data?.thumbnail != null) {
 //                    var thumbnail by remember { mutableStateOf(true) }
 
 //                    if (thumbnail) {
@@ -84,7 +109,7 @@ fun UrlCard(
                         .fillMaxWidth()
                         .heightIn(max = 200.dp)
                         .testTag("thumbnail"),
-                    model = ImageRequest.Builder(context).data(thumbnailUrl).build(),
+                    model = ImageRequest.Builder(context).data(data.thumbnail).build(),
                     alignment = Alignment.Center,
                     contentScale = ContentScale.FillWidth,
                     contentDescription = ""
@@ -108,12 +133,12 @@ fun UrlCard(
 
             Row(
                 modifier = Modifier
-                    .thenIf(!showFullUrl && unfurlResult == null) { it.height(60.dp) }
+                    .thenIf(!showFullUrl && data == null) { it.height(60.dp) }
                     .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                if (faviconUrl != null) {
+                if (data?.favicon != null) {
 //                        AsyncImage(
 //                            model = ImageRequest.Builder(context).data(faviconUrl).size(16).build(),
 //                            contentDescription = "",
@@ -124,7 +149,7 @@ fun UrlCard(
                         modifier = Modifier
                             .size(16.dp)
                             .testTag("favicon"),
-                        model = faviconUrl,
+                        model = ImageRequest.Builder(context).data(data.favicon).build(),
                         contentDescription = ""
                     ) {
                         val state = painter.state
@@ -138,9 +163,9 @@ fun UrlCard(
                 }
 
                 Column(verticalArrangement = Arrangement.Center) {
-                    if (unfurlResult?.title != null) {
+                    if (data?.title != null) {
                         Text(
-                            text = unfurlResult.title!!,
+                            text = data.title,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             fontFamily = HkGroteskFontFamily,
@@ -160,17 +185,25 @@ fun UrlCard(
     }
 }
 
+private class UrlCardPreviewProvider : PreviewParameterProvider<UrlCardData> {
+    @OptIn(ExperimentalEncodingApi::class)
+    override val values: Sequence<UrlCardData> = sequenceOf(
+        UrlCardData(
+            title = "",
+            favicon =  Base64.decode("""AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAD/EAAA/0AAAP9AAAD/cAAA/4AAAP+AAAD/gAAA/4AAAP+AAAD/QAAA/0AAAP8Q////AP///wD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8AAAD/MAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/MAAA/1AAAP//AAD//wAA//8AAP//AAD//wAA//8QEP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//1BQ//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/gAAA//8AAP//AAD//wAA//8AAP//AAD/////////////wMD//yAg//8AAP//AAD//wAA//8AAP//AAD/gAAA/4AAAP//AAD//wAA//8AAP//AAD//wAA/////////////7Cw//8gIP//AAD//wAA//8AAP//AAD//wAA/4AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//0BA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/UAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/YAAA/zAAAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/zD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8A////AP///wAAAP8QAAD/QAAA/0AAAP+AAAD/gAAA/4AAAP+AAAD/gAAA/4AAAP9AAAD/QAAA/xD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AADAAwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAD//wAA//8AAA=="""),
+            thumbnail =  Base64.decode("""""")
+        )
+    )
+}
+
+@OptIn(ExperimentalEncodingApi::class)
 @Composable
 @Preview
-private fun UrlCardPreview() {
+private fun UrlCardPreview(@PreviewParameter(UrlCardPreviewProvider::class) data: UrlCardData) {
     UrlCard(
         uri = "https://www.youtube.com/watch?v=DEhphcTaVxM",
-        unfurlResult = UnfurlResult(
-            url = "https://www.youtube.com/watch?v=DEhphcTaVxM".toHttpUrlOrNull()!!,
-            description = "Skip the waitlist and invest in blue-chip art for the very first time by signing up for Masterworks: https://www.masterworks.art/moonPurchase shares in great...",
-            title = "What Happens When China Invades America?",
-            favicon = "https://www.youtube.com/s/desktop/accca349/img/favicon.ico".toHttpUrlOrNull(),
-            thumbnail = "https://i.ytimg.com/vi/DEhphcTaVxM/maxresdefault.jpg".toHttpUrlOrNull(),
-        )
+        data = data
+//            thumbnail = "https://i.ytimg.com/vi/DEhphcTaVxM/maxresdefault.jpg".toHttpUrlOrNull(),
+//        )
     )
 }

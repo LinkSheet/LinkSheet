@@ -24,7 +24,7 @@ import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
-import fe.linksheet.experiment.improved.resolver.composable.ImprovedBottomSheet
+import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.extension.compose.dashedBorder
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import kotlin.reflect.KClass

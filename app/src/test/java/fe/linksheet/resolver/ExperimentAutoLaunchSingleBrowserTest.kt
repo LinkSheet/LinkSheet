@@ -5,9 +5,9 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.*
 import assertk.assertions.*
-import fe.linksheet.experiment.improved.resolver.AutoLaunchSingleBrowserExperiment
-import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
-import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
+import fe.linksheet.module.resolver.AutoLaunchSingleBrowserExperiment
+import fe.linksheet.module.resolver.FilteredBrowserList
+import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.resolver.util.ResolveInfos.allBrowsers
 import fe.linksheet.resolver.util.ResolveInfos.duckduckgoBrowser

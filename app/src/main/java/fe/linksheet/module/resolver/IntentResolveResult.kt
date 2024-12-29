@@ -1,12 +1,10 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.module.resolver
 
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
-import fe.linksheet.experiment.improved.resolver.util.ReferrerHelper
+import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.module.resolver.LibRedirectResult
-import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.resolver.BottomSheetResult
 import fe.linksheet.resolver.DisplayActivityInfo
 import me.saket.unfurl.UnfurlResult

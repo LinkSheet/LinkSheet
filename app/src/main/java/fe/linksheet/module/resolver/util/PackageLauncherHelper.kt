@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.util
+package fe.linksheet.module.resolver.util
 
 import android.content.Intent
 import android.content.pm.ResolveInfo

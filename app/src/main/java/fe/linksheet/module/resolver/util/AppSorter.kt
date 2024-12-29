@@ -1,8 +1,8 @@
-package fe.linksheet.experiment.improved.resolver.util
+package fe.linksheet.module.resolver.util
 
 import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
-import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
+import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit

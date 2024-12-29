@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.BottomSheetActivityImpl.Companion.preferredAppItemHeight
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 
 //enum class ClickType {
 //    Single, Double, Long, Private, Once, Always
@@ -103,7 +103,7 @@ fun ListBrowserColumn(
                 .fillMaxWidth()
                 .padding(start = 10.dp, end = 10.dp)
                 // TODO: Do we still need to use a constant here?
-                .heightIn(min = preferredAppItemHeight),
+                .heightIn(min = ImprovedBottomSheet.preferredAppItemHeight),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(

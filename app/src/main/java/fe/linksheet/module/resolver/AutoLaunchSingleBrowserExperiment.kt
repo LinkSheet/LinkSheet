@@ -1,8 +1,7 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
-import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
-import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
+import kotlin.collections.get
 
 object AutoLaunchSingleBrowserExperiment {
     fun handle(

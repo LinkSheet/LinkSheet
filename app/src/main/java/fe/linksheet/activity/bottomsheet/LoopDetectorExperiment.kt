@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.activity.bottomsheet
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -45,4 +45,3 @@ class LoopDetectorExperiment(
         intent: Intent?,
     ): ActivityResult = ActivityResult(resultCode, intent)
 }
-

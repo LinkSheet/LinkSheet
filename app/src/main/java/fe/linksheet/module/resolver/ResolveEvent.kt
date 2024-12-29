@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver
+package fe.linksheet.module.resolver
 
 import androidx.annotation.StringRes
 import fe.linksheet.R

@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.composable.appcontent
+package fe.linksheet.activity.bottomsheet.appcontent
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable

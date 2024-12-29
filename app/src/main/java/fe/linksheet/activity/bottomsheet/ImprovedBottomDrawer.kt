@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.improved.resolver.composable
+package fe.linksheet.activity.bottomsheet
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*

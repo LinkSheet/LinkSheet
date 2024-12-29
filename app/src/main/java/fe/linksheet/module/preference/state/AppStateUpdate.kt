@@ -9,7 +9,7 @@ sealed interface AppStateUpdate {
 
 object NewDefaults2024_11_29 : AppStateUpdate {
     override fun execute(experimentsRepository: ExperimentRepository) {
-        experimentsRepository.put(Experiments.loopDetector, true)
+//        experimentsRepository.put(Experiments.loopDetector, true)
     }
 }
 
@@ -22,7 +22,7 @@ object NewDefaults2024_11_30 : AppStateUpdate {
 
 object NewDefaults2024_12_16 : AppStateUpdate {
     override fun execute(experimentsRepository: ExperimentRepository) {
-        experimentsRepository.put(Experiments.improvedIntentResolver, true)
+//        experimentsRepository.put(Experiments.improvedIntentResolver, true)
         experimentsRepository.put(Experiments.interceptAccidentalTaps, true)
     }
 }

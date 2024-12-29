@@ -4,9 +4,9 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
-import fe.linksheet.experiment.improved.resolver.browser.FilteredBrowserList
-import fe.linksheet.experiment.improved.resolver.browser.BrowserModeConfigHelper
-import fe.linksheet.experiment.improved.resolver.browser.ImprovedBrowserHandler
+import fe.linksheet.module.resolver.FilteredBrowserList
+import fe.linksheet.module.resolver.BrowserModeConfigHelper
+import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.resolver.util.ResolveInfos.allApps
 import fe.linksheet.resolver.util.ResolveInfos.allBrowsers

@@ -24,8 +24,6 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.activity.bottomsheet.column.ClickModifier
 import fe.linksheet.activity.bottomsheet.column.ClickType
-import fe.linksheet.activity.main.MainActivity
-import fe.linksheet.extension.android.canAccessInternet
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
@@ -41,10 +39,8 @@ import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveModule
-import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.resolver.BottomSheetResult
@@ -52,7 +48,6 @@ import fe.linksheet.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mozilla.components.support.utils.toSafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*
@@ -64,7 +59,6 @@ class BottomSheetViewModel(
     experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
-    private val intentResolver: IntentResolver,
     val profileSwitcher: ProfileSwitcher,
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
@@ -108,8 +102,6 @@ class BottomSheetViewModel(
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
     val bottomSheetProfileSwitcher = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
-    val improvedIntentResolver = experimentRepository.asState(Experiments.improvedIntentResolver)
-    val loopDetector = experimentRepository.asState(Experiments.loopDetector)
 
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
@@ -125,39 +117,11 @@ class BottomSheetViewModel(
 
     var appListSelectedIdx = mutableIntStateOf(-1)
 
-    fun resolveAsync(intent: Intent, referrer: Uri?) = ioAsync {
-        val canAccessInternet = kotlin.runCatching {
-            connectivityManager.canAccessInternet()
-        }.onFailure {
-            logger.error(it)
-            it.printStackTrace()
-        }.getOrDefault(true)
-
-        intentResolver.resolveIfEnabled(intent.toSafeIntent(), referrer, canAccessInternet).apply {
-            resolveResult = this
-        }
-    }
-
-    fun showLoadingBottomSheet() = followRedirects.value || enableAmp2Html.value
-            || enableDownloader.value
-
-    fun startMainActivity(context: Activity): Boolean {
-        return context.startActivityWithConfirmation(Intent(context, MainActivity::class.java))
-    }
 
     fun startPackageInfoActivity(context: Activity, info: DisplayActivityInfo): Boolean {
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             this.data = Uri.parse("package:${info.packageName}")
         })
-    }
-
-    fun getResolveToastTexts(resolveModuleStatus: ResolveModuleStatus): List<String> {
-        return resolveModuleStatus.globalFailure?.getString(context)?.let {
-            listOf(resolveFailureString(context.getString(R.string.online_services), it))
-
-        } ?: resolveModuleStatus.resolved.mapNotNull {
-            getResolveToastText(it.key, it.value)
-        }
     }
 
     private fun getResolveToastText(resolveModule: ResolveModule, result: Result<ResolveResultType>?): String? {
@@ -239,22 +203,6 @@ class BottomSheetViewModel(
             )
 
         downloadManager.enqueue(request)
-    }
-
-    fun makeOpenAppIntentAsync(
-        info: DisplayActivityInfo,
-        intent: Intent,
-        always: Boolean = false,
-        privateBrowsingBrowser: KnownBrowser? = null,
-        persist: Boolean = true,
-    ) = ioAsync {
-        makeOpenAppIntent(
-            info = info,
-            intent = intent,
-            always = always,
-            privateBrowsingBrowser = privateBrowsingBrowser,
-            persist = persist
-        )
     }
 
     object GithubWorkaround {

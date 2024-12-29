@@ -18,12 +18,10 @@ object Experiments : PreferenceDefinition(
     val urlPreview = boolean("experiment_url_bar_preview")
     val urlPreviewSkipBrowser = boolean("experiment_url_bar_preview_skip_browser")
 
-    val improvedIntentResolver = boolean("experiment_improved_intent_resolver", true)
     val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
     val improvedBottomSheetUrlDoubleTap = boolean("experiment_impr_btm_sheet_url_double_tap")
     val autoLaunchSingleBrowser = boolean("experiment_improved_bottom_sheet_auto_launch_single_browser")
     val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps", true)
-    val loopDetector = boolean("experiment_loop_detector", true)
     val manualFollowRedirects = boolean("experiment_manual_follow_redirects", false)
 
     val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
@@ -37,12 +35,6 @@ object Experiments : PreferenceDefinition(
     // TODO: Enforce type
     init {
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
-        improvedIntentResolver.migrate { repository, _ ->
-            // Used to be false, if user has not manually changed this, migrate to true; If they turn it back off, we won't update it again
-            if (!repository.hasStoredValue(improvedIntentResolver)) {
-                repository.put(improvedIntentResolver, true)
-            }
-        }
 
         experiments = listOf(
             ExperimentGroup("enhanced_url_bar", "Enhanced url bar").apply {
@@ -51,7 +43,6 @@ object Experiments : PreferenceDefinition(
             },
 
             ExperimentGroup("improved_bottom_sheet", "Improved bottom sheet").apply {
-                addPreference(ExperimentPreference("Improved intent resolver", improvedIntentResolver))
                 addPreference(ExperimentPreference("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully))
                 addPreference(ExperimentPreference("Double tap url to open app", improvedBottomSheetUrlDoubleTap))
                 addPreference(ExperimentPreference("LibRedirect QuickJS engine", libRedirectJsEngine))
@@ -68,7 +59,6 @@ object Experiments : PreferenceDefinition(
                     )
                 )
                 addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
-                addPreference(ExperimentPreference("Loop detector", loopDetector))
                 addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
             },
 

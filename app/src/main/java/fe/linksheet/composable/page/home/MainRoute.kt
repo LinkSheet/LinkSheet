@@ -151,17 +151,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (clipboardUri != null) {
-                item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
-                    OpenCopiedLink(
-                        editClipboard = viewModel.editClipboard(),
-                        uri = clipboardUri!!,
-                        navigate = { navController.navigate(it) }
-                    )
-                }
-            }
-
-//            divider(id = R.string.settings_main_news__text_header)
             if(!viewModel.newDefaultsDismissed()) {
                 item(
                     key = R.string.settings_main_experiment_news__title_experiment_state_updated,
@@ -177,6 +166,18 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                     )
                 }
             }
+
+            if (clipboardUri != null) {
+                item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
+                    OpenCopiedLink(
+                        editClipboard = viewModel.editClipboard(),
+                        uri = clipboardUri!!,
+                        navigate = { navController.navigate(it) }
+                    )
+                }
+            }
+
+//            divider(id = R.string.settings_main_news__text_header)
         }
     }
 }

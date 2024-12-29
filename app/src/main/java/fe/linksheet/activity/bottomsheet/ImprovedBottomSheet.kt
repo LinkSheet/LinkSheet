@@ -407,9 +407,7 @@ class ImprovedBottomSheet(
     }
 
     override fun onNewIntent(intent: Intent) {
-//        if (loopDetectorExperiment != null) {
         intentFlow.value = intent.toSafeIntent()
         resolveResultFlow.value = IntentResolveResult.Pending
-//        }
     }
 }

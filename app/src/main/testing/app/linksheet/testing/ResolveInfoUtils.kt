@@ -1,4 +1,4 @@
-package fe.linksheet.resolver.util
+package app.linksheet.testing
 
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
@@ -15,5 +15,6 @@ fun buildResolveInfoTestMock(block: ResolveInfo.(ActivityInfo, ApplicationInfo) 
     block(resolveInfo, activityInfo, applicationInfo)
 
     applicationInfo.packageName = activityInfo.packageName
+    resolveInfo.resolvePackageName = activityInfo.packageName
     return resolveInfo
 }

@@ -156,7 +156,7 @@ private fun ExperimentalFailureSheetColumnPreview() {
         ExperimentalFailureSheetContent(
             onShareClick = {},
             onCopyClick = {},
-            data = ""
+            data = "https://linksheet.app"
         )
     }
 }

@@ -1,8 +1,8 @@
-package fe.linksheet.resolver.util
+package app.linksheet.testing
 
 import android.content.pm.ResolveInfo
 
-object ResolveInfos {
+object ResolveInfoMocks {
     val miBrowser = buildResolveInfoTestMock { activity, application ->
         activity.name = "com.sec.android.app.sbrowser.SBrowserLauncherActivity"
         activity.packageName = "com.mi.globalbrowser"
@@ -33,8 +33,13 @@ object ResolveInfos {
         activity.packageName = "com.tippingcanoe.pepperpl"
     }
 
-    val allApps = listOf(youtube, newPipe, newPipeEnhanced)
-    val allBrowsers = listOf(miBrowser, duckduckgoBrowser)
+    val chromeBrowser = buildResolveInfoTestMock { activity, application ->
+        activity.name = "com.google.android.apps.chrome.Main"
+        activity.packageName = "com.android.chrome"
+    }
+
+    val allApps = listOf(youtube, newPipe, newPipeEnhanced, pepper)
+    val allBrowsers = listOf(miBrowser, duckduckgoBrowser, chromeBrowser)
     val allResolved = allApps + allBrowsers
 
     val ResolveInfo.packageName: String

@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
 plugins {
     kotlin("android")
     kotlin("plugin.compose")
-    kotlin("plugin.serialization") version "2.1.0"
+    kotlin("plugin.serialization")
     id("com.android.application")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
@@ -200,7 +200,7 @@ android {
 //    }
 
     val main by sourceSets
-    for (it in arrayOf("compat", "experiment")) {
+    for (it in arrayOf("compat", "experiment", "testing")) {
         main.java.srcDir("src/main/$it")
     }
 }
@@ -349,6 +349,8 @@ dependencies {
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.room.testing)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 
     testImplementation(Grrfe.std.result.assert)
     testImplementation(Koin.test)
@@ -357,8 +359,9 @@ dependencies {
     testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
-    testImplementation("com.github.gmazzo.okhttp.mock:mock-client:2.0.0")
+    testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     testImplementation(kotlin("test"))
+
 
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

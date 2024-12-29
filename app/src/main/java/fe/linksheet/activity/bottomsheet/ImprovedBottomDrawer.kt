@@ -1,5 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.BottomSheetDefaults
@@ -12,7 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,6 +50,20 @@ fun ImprovedBottomDrawer(
 
         Column(modifier = if (landscape) contentModifier else contentModifier.padding(bottom = bottomPadding)) {
             sheetContent()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showSystemUi = true, device = Devices.PIXEL_7A)
+@Composable
+private fun ImprovedBottomDrawerPreview() {
+    val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
+    val bottomPadding = remember { safeDrawing.calculateBottomPadding() }
+
+    Column(modifier = Modifier.padding(bottom = bottomPadding)) {
+        Box(modifier = Modifier.height(24.dp).fillMaxWidth().background(Color.Red)) {
+
         }
     }
 }

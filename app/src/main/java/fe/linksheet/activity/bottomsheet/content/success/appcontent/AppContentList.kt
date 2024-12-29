@@ -29,11 +29,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.testing.ResolveInfoMocks
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
@@ -212,3 +215,53 @@ fun AppListItem(
         }
     }
 }
+
+@Preview(group = "AppContentList", showBackground = true)
+@Composable
+private fun AppContentListPreview_Short() {
+    val image = ImageBitmap(1, 1)
+
+    val apps = listOf(
+        DisplayActivityInfo(ResolveInfoMocks.youtube, "Youtube", icon = image),
+        DisplayActivityInfo(ResolveInfoMocks.duckduckgoBrowser, "DuckDuckGo", icon = image),
+        DisplayActivityInfo(ResolveInfoMocks.chromeBrowser, "Google Chrome", icon = image)
+    )
+
+    AppContentList(
+        apps = apps,
+        uri = Uri.parse("https://linksheet.app"),
+        appListSelectedIdx = -1,
+        hasPreferredApp = false,
+        hideChoiceButtons = false,
+        showNativeLabel = false,
+        showPackage = false,
+        launch = { _, _ -> },
+        launch2 = { _, _, _, _ -> },
+        isPrivateBrowser = { _, _ -> null },
+        showToast = { _, _, _ -> }
+    )
+}
+
+@Preview(group = "AppContentList", showBackground = true)
+@Composable
+private fun AppContentListPreview_Long() {
+    val image = ImageBitmap(1, 1)
+    val apps = ResolveInfoMocks.allResolved.map {
+        DisplayActivityInfo(it, it.resolvePackageName, icon = image)
+    }
+
+    AppContentList(
+        apps = apps,
+        uri = Uri.parse("https://linksheet.app"),
+        appListSelectedIdx = -1,
+        hasPreferredApp = false,
+        hideChoiceButtons = false,
+        showNativeLabel = false,
+        showPackage = false,
+        launch = { _, _ -> },
+        launch2 = { _, _, _, _ -> },
+        isPrivateBrowser = { _, _ -> null },
+        showToast = { _, _, _ -> }
+    )
+}
+

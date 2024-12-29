@@ -17,6 +17,7 @@ data class DisplayActivityInfo(
     val resolvedInfo: ResolveInfo,
     val label: String,
     val browser: Boolean = false,
+    var icon: ImageBitmap? = null
 ) : Redactable<DisplayActivityInfo> {
 
     companion object {
@@ -34,8 +35,6 @@ data class DisplayActivityInfo(
     val packageName: String = activityInfo.packageName
     val componentName by lazy { activityInfo.componentName() }
     val flatComponentName by lazy { componentName.flattenToString() }
-
-    private var icon: ImageBitmap? = null
 
     fun getIcon(context: Context): ImageBitmap {
         if (icon == null) {

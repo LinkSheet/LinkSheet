@@ -19,6 +19,7 @@ plugins {
     id("kotlin-parcelize")
     id("net.nemerosa.versioning")
     id("androidx.room")
+    id("com.google.devtools.ksp")
     id("build-logic-plugin")
     id("dev.rikka.tools.refine")
 }
@@ -254,7 +255,7 @@ dependencies {
 
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
-
+    ksp("androidx.room:room-compiler:2.7.0-alpha12")
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 

@@ -5,4 +5,5 @@ plugins {
     id("com.android.application") apply false
     id("net.nemerosa.versioning") apply false
     id("androidx.room") apply false
+    id("com.google.devtools.ksp") apply false
 }

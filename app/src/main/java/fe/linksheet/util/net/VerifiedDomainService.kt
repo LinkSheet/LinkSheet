@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.net
 
 import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationManager

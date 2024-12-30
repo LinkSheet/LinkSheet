@@ -25,7 +25,7 @@ import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.BuildConfig
-import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.extension.android.getFirstText
 import fe.linksheet.extension.android.resolveActivityCompat
@@ -49,7 +49,7 @@ import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.UriUtil
+import fe.linksheet.util.net.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow

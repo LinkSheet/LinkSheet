@@ -8,8 +8,8 @@ import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
-import fe.linksheet.util.KnownMimeTypes
-import fe.linksheet.util.MimeType
+import fe.linksheet.util.mime.KnownMimeTypes
+import fe.linksheet.util.mime.MimeType
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import org.koin.dsl.module

@@ -13,8 +13,8 @@ import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
-import fe.linksheet.util.BuildType
-import fe.linksheet.util.LinkSheetInfo
+import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.buildconfig.LinkSheetInfo
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

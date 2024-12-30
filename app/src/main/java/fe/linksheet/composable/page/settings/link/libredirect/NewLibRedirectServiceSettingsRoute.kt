@@ -19,7 +19,7 @@ import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.BuiltInFrontendHolder
 import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
-import fe.linksheet.util.HostUtil
+import fe.linksheet.util.net.HostUtil
 import org.koin.androidx.compose.koinViewModel
 
 

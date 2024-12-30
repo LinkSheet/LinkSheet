@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
 import fe.httpkt.Request
-import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType

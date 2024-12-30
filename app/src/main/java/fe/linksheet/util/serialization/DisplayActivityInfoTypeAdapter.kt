@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.serialization
 
 import android.content.pm.ResolveInfo
 import android.net.Uri

@@ -1,7 +1,6 @@
 package fe.linksheet.module.viewmodel.util
 
 import android.content.Context
-import android.os.Build
 import android.os.Parcelable
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
@@ -15,7 +14,7 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.systeminfo.SystemInfoService
-import fe.linksheet.util.LinkSheetInfo
+import fe.linksheet.util.buildconfig.LinkSheetInfo
 import kotlinx.parcelize.Parcelize
 
 

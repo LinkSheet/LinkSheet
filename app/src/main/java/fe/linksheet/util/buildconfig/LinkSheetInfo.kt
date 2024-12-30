@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.buildconfig
 
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter

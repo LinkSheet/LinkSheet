@@ -19,7 +19,7 @@ import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.BoxAppHost
-import fe.linksheet.util.BuildType
+import fe.linksheet.util.buildconfig.BuildType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

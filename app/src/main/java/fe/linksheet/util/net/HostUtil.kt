@@ -1,10 +1,9 @@
-package fe.linksheet.util
+package fe.linksheet.util.net
 
 import android.net.CompatUriHost
 import android.net.Uri
 import android.net.compatHost
 import inet.ipaddr.HostName
-
 
 object HostUtil {
     private val mDnsTlds = setOf(".local", ".test", ".example", ".invalid", ".localhost")

@@ -3,7 +3,7 @@ package fe.linksheet.debug
 import android.content.*
 import androidx.core.content.getSystemService
 import fe.linksheet.debug.command.DebugCommand
-import fe.linksheet.util.BuildType
+import fe.linksheet.util.buildconfig.BuildType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.component.KoinComponent

@@ -40,7 +40,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.util.LinkSheetInfo
+import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.linksheet.util.AppSignature
 import org.koin.androidx.compose.koinViewModel
 

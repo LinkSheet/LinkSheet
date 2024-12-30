@@ -34,9 +34,10 @@ import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.navigation.creditsSettingsRoute
-import fe.linksheet.util.LinkSheetInfo
+import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.linksheet.util.AppSignature
 import fe.linksheet.util.LinkSheet
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.androidx.compose.koinViewModel

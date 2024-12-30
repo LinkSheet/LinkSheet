@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.net
 
 import android.content.Intent
 import android.net.Uri

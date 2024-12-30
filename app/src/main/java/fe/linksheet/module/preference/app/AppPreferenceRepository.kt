@@ -3,7 +3,7 @@ package fe.linksheet.module.preference.app
 import android.content.Context
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.compose.StatePreferenceRepository
-import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission

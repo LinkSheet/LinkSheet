@@ -1,7 +1,7 @@
 package fe.linksheet.extension.java
 
 import fe.httpkt.ext.findHeader
-import fe.linksheet.util.MimeType
+import fe.linksheet.util.mime.MimeType
 import java.net.HttpURLConnection
 
 

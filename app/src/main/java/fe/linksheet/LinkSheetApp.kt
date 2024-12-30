@@ -50,9 +50,9 @@ import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.AndroidVersion
-import fe.linksheet.util.BuildType
-import fe.linksheet.util.HttpUrlTypeAdapter
-import fe.linksheet.util.UriTypeAdapter
+import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.serialization.HttpUrlTypeAdapter
+import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin

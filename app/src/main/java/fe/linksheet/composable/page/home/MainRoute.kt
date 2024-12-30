@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
-import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
@@ -39,7 +39,7 @@ import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.settingsRoute
-import fe.linksheet.util.BuildType
+import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.LinkSheet
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel

@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
 import fe.httpkt.Request
-import fe.linksheet.LinkSheetAppConfig
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
 import org.koin.dsl.module
 

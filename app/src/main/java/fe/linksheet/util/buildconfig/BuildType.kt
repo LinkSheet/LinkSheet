@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.buildconfig
 
 import android.os.Build
 import fe.linksheet.BuildConfig
@@ -11,7 +11,7 @@ enum class BuildType {
 
     companion object {
         val current by lazy {
-            BuildType.entries.find { it.name.equals(BuildConfig.BUILD_TYPE, ignoreCase = true) } ?: Unknown
+            entries.find { it.name.equals(BuildConfig.BUILD_TYPE, ignoreCase = true) } ?: Unknown
         }
     }
 }

@@ -10,7 +10,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
-import fe.linksheet.util.BuildType
+import fe.linksheet.util.buildconfig.BuildType
 import org.koin.androidx.compose.koinViewModel
 
 

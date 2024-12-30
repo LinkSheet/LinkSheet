@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.net
 
 import android.net.Uri
 
@@ -7,7 +7,7 @@ enum class Darknet(val displayName: String, val tld: String) {
 
     companion object {
         fun getOrNull(uri: Uri): Darknet? {
-            return Darknet.entries.find { uri.host?.endsWith(it.tld) == true }
+            return entries.find { uri.host?.endsWith(it.tld) == true }
         }
     }
 }

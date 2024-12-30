@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.util.mime
 
 object KnownMimeTypes {
     val mimeTypeToExtensions = mapOf(

@@ -18,7 +18,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("net.nemerosa.versioning")
-    id("com.google.devtools.ksp")
+    id("androidx.room")
     id("build-logic-plugin")
     id("dev.rikka.tools.refine")
 }
@@ -85,8 +85,8 @@ android {
             useSupportLibrary = true
         }
 
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
+        room {
+            schemaDirectory("$projectDir/schemas")
         }
     }
 
@@ -254,7 +254,6 @@ dependencies {
 
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
 
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)

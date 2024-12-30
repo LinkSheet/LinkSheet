@@ -49,6 +49,7 @@ jobs:
         KEYSTORE_PASSWORD: '${{ secrets.KEYSTORE_PASSWORD }}'
         KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
+        PRO_FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
       run: './gradlew assembleNightly'
     - id: 'step-7'
       name: 'Get output file path'

@@ -32,6 +32,7 @@ val KEY_ALIAS by Contexts.secrets
 val KEY_PASSWORD by Contexts.secrets
 val NIGHTLY_REPO_ACCESS_TOKEN by Contexts.secrets
 val NIGHTLY_PRO_REPO_ACCESS_TOKEN by Contexts.secrets
+val PRO_FLAVOR_CONFIG by Contexts.secrets
 
 object VariablesContext : ExpressionContext("vars")
 object ActionEnvironmentContext : ExpressionContext("env")
@@ -240,7 +241,8 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
             "KEYSTORE_FILE_PATH" to expr { keyStoreFilePath },
             "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
             "KEY_ALIAS" to expr { KEY_ALIAS },
-            "KEY_PASSWORD" to expr { KEY_PASSWORD }
+            "KEY_PASSWORD" to expr { KEY_PASSWORD },
+            "PRO_FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
         )
     )
 

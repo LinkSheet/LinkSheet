@@ -76,8 +76,6 @@ android {
                 "ANALYTICS_SUPPORTED",
                 localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
-
-            string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -108,7 +106,11 @@ android {
     productFlavors {
         register("foss") {
             dimension = "type"
-            buildStringConfigField("FLAVOR", "Foss")
+
+            buildConfig {
+                string("FLAVOR", "Foss")
+                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
+            }
         }
 
         register("pro") {

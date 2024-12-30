@@ -15,23 +15,8 @@ env:
   BUILD_TYPE: 'nightly'
   BUILD_FLAVOR_TYPE: 'fossNightly'
 jobs:
-  check_yaml_consistency:
-    name: 'Check YAML consistency'
-    runs-on: 'ubuntu-latest'
-    steps:
-    - id: 'step-0'
-      name: 'Check out'
-      uses: 'actions/checkout@v4'
-    - id: 'step-1'
-      name: 'Execute script'
-      run: 'rm ''.github/workflows/build-nightly.yml'' && ''.github/workflows/build-nightly.main.kts'''
-    - id: 'step-2'
-      name: 'Consistency check'
-      run: 'git diff --exit-code ''.github/workflows/build-nightly.yml'''
   build:
     runs-on: 'ubuntu-latest'
-    needs:
-    - 'check_yaml_consistency'
     steps:
     - id: 'step-0'
       name: 'Install JQ'
@@ -64,24 +49,33 @@ jobs:
         KEYSTORE_PASSWORD: '${{ secrets.KEYSTORE_PASSWORD }}'
         KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
-      run: './gradlew assembleFossNightly'
+      run: './gradlew assembleNightly'
     - id: 'step-7'
       name: 'Get output file path'
       env:
-        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/output-metadata.json'
+        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/foss/nightly/output-metadata.json'
       shell: 'bash'
       run: |-
         json_content=$(cat "$OUTPUT_METADATA_JSON")
         echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
         echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
     - id: 'step-8'
+      name: 'Get output file path'
+      env:
+        OUTPUT_METADATA_JSON: 'app/build/outputs/apk/pro/nightly/output-metadata.json'
+      shell: 'bash'
+      run: |-
+        json_content=$(cat "$OUTPUT_METADATA_JSON")
+        echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+        echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+    - id: 'step-9'
       uses: 'actions/upload-artifact@v4'
       with:
         name: 'linksheet-nightly'
         path: |-
-          app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-7.outputs.OUTPUT_FILE }}
+          app/build/outputs/apk/foss/nightly/${{ steps.step-7.outputs.OUTPUT_FILE }}
           app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
-    - id: 'step-9'
+    - id: 'step-10'
       uses: '1fexd/gh-create-release-notes@0.0.11'
       with:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
@@ -89,23 +83,27 @@ jobs:
         nightly-repo: '${{ vars.NIGHTLY_REPO_URL }}'
         last-commit-sha: '${{ github.event.before }}'
         commit-sha: '${{ github.sha }}'
-    - id: 'step-10'
+    - id: 'step-11'
       env:
-        APK_FILE: 'app/build/outputs/apk/${{ env.BUILD_FLAVOR }}/${{ env.BUILD_TYPE }}/${{ steps.step-7.outputs.OUTPUT_FILE }}'
+        APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ steps.step-7.outputs.OUTPUT_FILE }}'
         NIGHTLY_TAG: '${{ github.ref }}'
         VERSION_CODE: '${{ steps.step-7.outputs.VERSION_CODE }}'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
         BUILD_TYPE: '${{ env.BUILD_TYPE }}'
-        RELEASE_NOTE: '${{ steps.step-9.outputs.releaseNote }}'
+        RELEASE_NOTE: '${{ steps.step-10.outputs.releaseNote }}'
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
       if: '${{ contains(vars.ENABLE_RELEASES, true) }}'
-    - id: 'step-11'
-      uses: '1fexd/gh-trigger-remote-action@0.0.5'
-      with:
-        github-token: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
-        repo: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
-        ref: '${{ github.ref }}'
-        event-type: 'rebuild-nightly'
-      if: '${{ contains(vars.ENABLE_PRO_BUILDS, true) }}'
+    - id: 'step-12'
+      env:
+        APK_FILE: 'app/build/outputs/apk/pro/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}'
+        NIGHTLY_TAG: '${{ github.ref }}'
+        VERSION_CODE: '${{ steps.step-8.outputs.VERSION_CODE }}'
+        GITHUB_TOKEN: '${{ secrets.NIGHTLY_PRO_REPO_ACCESS_TOKEN }}'
+        NIGHTLY_REPO: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
+        BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
+        BUILD_TYPE: '${{ env.BUILD_TYPE }}'
+        RELEASE_NOTE: '${{ steps.step-10.outputs.releaseNote }}'
+      run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
+      if: '${{ contains(vars.ENABLE_RELEASES, true) }}'

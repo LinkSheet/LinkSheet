@@ -76,6 +76,8 @@ android {
                 "ANALYTICS_SUPPORTED",
                 localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
+
+            string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -114,7 +116,10 @@ android {
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
-            buildStringConfigField("FLAVOR", "Pro")
+            buildConfig {
+                string("FLAVOR", "Pro")
+                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG"))
+            }
         }
     }
 

@@ -18,10 +18,12 @@ import io.github.typesafegithub.workflows.domain.Shell
 import io.github.typesafegithub.workflows.domain.actions.CustomAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
 import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
+import io.github.typesafegithub.workflows.dsl.JobBuilder
 import io.github.typesafegithub.workflows.dsl.expressions.Contexts
 import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
+import io.github.typesafegithub.workflows.yaml.ConsistencyCheckJobConfig
 
 
 val KEYSTORE_FILE by Contexts.secrets
@@ -29,6 +31,7 @@ val KEYSTORE_PASSWORD by Contexts.secrets
 val KEY_ALIAS by Contexts.secrets
 val KEY_PASSWORD by Contexts.secrets
 val NIGHTLY_REPO_ACCESS_TOKEN by Contexts.secrets
+val NIGHTLY_PRO_REPO_ACCESS_TOKEN by Contexts.secrets
 
 object VariablesContext : ExpressionContext("vars")
 object ActionEnvironmentContext : ExpressionContext("env")
@@ -42,6 +45,7 @@ val Contexts.actionEnv: ActionEnvironmentContext
 val ENABLE_RELEASES by Contexts.vars
 val ENABLE_PRO_BUILDS by Contexts.vars
 val NIGHTLY_REPO_URL by Contexts.vars
+val NIGHTLY_PRO_REPO_URL by Contexts.vars
 
 val BUILD_FLAVOR by Contexts.actionEnv
 val BUILD_TYPE by Contexts.actionEnv
@@ -151,9 +155,102 @@ class ExecDsl(var exec: String = "") {
     }
 }
 
-
 fun bash(block: BashDsl.() -> String): String {
     return block(BashDsl())
+}
+
+val versionCodeVar = Variable("VERSION_CODE")
+val nightlyRepoVar = Variable("NIGHTLY_REPO")
+val nightlyTagVar = Variable("NIGHTLY_TAG")
+val apkFileVar = Variable("APK_FILE")
+val releaseNoteVar = Variable("RELEASE_NOTE")
+
+
+fun JobBuilder<*>.createRelease(path: String, version: String, token: String, nightlyRepoUrl: String, releaseNote: String) {
+    run(
+        command = bash {
+            exec("gh release create -R ${nightlyRepoVar()} -t ${versionCodeVar()} ${nightlyTagVar()} ${apkFileVar()} --latest --notes ${releaseNoteVar()}")
+        },
+        env = mapOf(
+            apkFileVar.name to path,
+            nightlyTagVar.name to expr { github.ref },
+            versionCodeVar.name to version,
+            "GITHUB_TOKEN" to expr(token),
+            nightlyRepoVar.name to expr(nightlyRepoUrl),
+            "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
+            "BUILD_TYPE" to expr(BUILD_TYPE),
+            releaseNoteVar.name to expr(releaseNote)
+        ),
+        `if` = expr { contains(ENABLE_RELEASES, "true") }
+    )
+}
+
+fun JobBuilder<*>.parseOutput(baseOutPathExpr: String): Pair<String, String> {
+    val jsonContentVar = Variable("json_content")
+
+    val cmdGetJsonContent = bash {
+        val cmdReadOutputMetaData = cat(outputMetaDataJsonVar())
+        exec {
+            this[jsonContentVar] = subshell(cmdReadOutputMetaData)
+        }
+    }
+
+    val outputFileVar = Variable("OUTPUT_FILE")
+
+    val cmdGetVersionCode = bash {
+        val cmdReadVersionCode = echo(jsonContentVar()) pipe jq("-r '.elements[0].versionCode'")
+        exec {
+            this[versionCodeVar] = subshell(cmdReadVersionCode)
+        }
+    }
+
+    val cmdGetOutputFile = bash {
+        val cmdReadOutputFile = echo(jsonContentVar()) pipe jq("-r '.elements[0].outputFile'")
+        exec {
+            this[outputFileVar] = subshell(cmdReadOutputFile)
+        }
+    }
+
+    val githubOutputVar = Variable("GITHUB_OUTPUT")
+
+    val outputFilePathStep = run(
+        name = "Get output file path",
+        shell = Shell.Bash,
+        command = """ 
+                $cmdGetJsonContent
+                echo "$cmdGetVersionCode" >> ${githubOutputVar()}
+                echo "$cmdGetOutputFile" >> ${githubOutputVar()}
+            """.trimIndent(),
+        env = mapOf(
+            "OUTPUT_METADATA_JSON" to "$baseOutPathExpr/output-metadata.json"
+        )
+    )
+
+    val versionCodeExpr = expr(outputFilePathStep.outputs[versionCodeVar.name])
+    val apkPathExpr = "$baseOutPathExpr/${expr(outputFilePathStep.outputs[outputFileVar.name])}"
+
+    return versionCodeExpr to apkPathExpr
+}
+
+fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, String>, Pair<String, String>> {
+    run(
+        command = "./gradlew assembleNightly",
+        env = mapOf(
+            "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
+            "KEYSTORE_FILE_PATH" to expr { keyStoreFilePath },
+            "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
+            "KEY_ALIAS" to expr { KEY_ALIAS },
+            "KEY_PASSWORD" to expr { KEY_PASSWORD }
+        )
+    )
+
+    val fossBaseOutPathExpr = "app/build/outputs/apk/foss/nightly"
+    val proBaseOutPathExpr = "app/build/outputs/apk/pro/nightly"
+
+    val foss = parseOutput(fossBaseOutPathExpr)
+    val pro = parseOutput(proBaseOutPathExpr)
+
+    return foss to pro
 }
 
 workflow(
@@ -169,6 +266,7 @@ workflow(
             pathsIgnore = listOf("*.md")
         )
     ),
+    consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
     sourceFile = __FILE__,
     targetFileName = __FILE__.toPath().fileName?.let {
         it.toString().substringBeforeLast(".main.kts") + ".yml"
@@ -196,101 +294,22 @@ workflow(
         val androidKeyStore = uses(action = base64ToFile)
         uses(action = ActionsSetupGradle())
 
-        run(
-            command = "./gradlew assembleFossNightly",
-            env = mapOf(
-                "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
-                "KEYSTORE_FILE_PATH" to expr { androidKeyStore.outputs["filePath"] },
-                "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
-                "KEY_ALIAS" to expr { KEY_ALIAS },
-                "KEY_PASSWORD" to expr { KEY_PASSWORD }
-            )
-        )
-
-        val baseOutPathExpr = "app/build/outputs/apk/${expr("env.BUILD_FLAVOR")}/${expr("env.BUILD_TYPE")}"
-        val jsonContentVar = Variable("json_content")
-
-        val cmdGetJsonContent = bash {
-            val cmdReadOutputMetaData = cat(outputMetaDataJsonVar())
-            exec {
-                this[jsonContentVar] = subshell(cmdReadOutputMetaData)
-            }
-        }
-
-//        app/build/outputs/apk/foss/nightly/LinkSheet-2024-12-18T05_53_07-nightly/2024121802-foss-nightly.apk
-//        app/build/outputs/mapping/fossNightly/*.txt
-
-        val versionCodeVar = Variable("VERSION_CODE")
-        val outputFileVar = Variable("OUTPUT_FILE")
-
-        val cmdGetVersionCode = bash {
-            val cmdReadVersionCode = echo(jsonContentVar()) pipe jq("-r '.elements[0].versionCode'")
-            exec {
-                this[versionCodeVar] = subshell(cmdReadVersionCode)
-            }
-        }
-
-        val cmdGetOutputFile = bash {
-            val cmdReadOutputFile = echo(jsonContentVar()) pipe jq("-r '.elements[0].outputFile'")
-            exec {
-                this[outputFileVar] = subshell(cmdReadOutputFile)
-            }
-        }
-
-        val githubOutputVar = Variable("GITHUB_OUTPUT")
-
-        val outputFilePathStep = run(
-            name = "Get output file path",
-            shell = Shell.Bash,
-            command = """
-                $cmdGetJsonContent
-                echo "$cmdGetVersionCode" >> ${githubOutputVar()}
-                echo "$cmdGetOutputFile" >> ${githubOutputVar()}
-            """.trimIndent(),
-            env = mapOf(
-                "OUTPUT_METADATA_JSON" to "$baseOutPathExpr/output-metadata.json"
-            )
-        )
-
-        val versionCodeExpr = expr(outputFilePathStep.outputs[versionCodeVar.name])
-        val apkPathExpr = "$baseOutPathExpr/${expr(outputFilePathStep.outputs[outputFileVar.name])}"
+        val (foss, pro) = buildFlavor(androidKeyStore.outputs["filePath"])
+        val (fossVersionCodeExpr, fossApkPathExpr) = foss
+        val (proVersionCodeExpr, proApkPathExpr) = pro
 
         uses(
             action = UploadArtifact(
                 name = "linksheet-nightly",
-                path = listOf(apkPathExpr, "app/build/outputs/mapping/${expr(BUILD_FLAVOR_TYPE)}/*.txt")
+                path = listOf(fossApkPathExpr, "app/build/outputs/mapping/${expr(BUILD_FLAVOR_TYPE)}/*.txt")
             )
         )
 
         val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
+        val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
 
-
-        val nightlyRepoVar = Variable("NIGHTLY_REPO")
-        val nightlyTagVar = Variable("NIGHTLY_TAG")
-        val apkFileVar = Variable("APK_FILE")
-        val releaseNoteVar = Variable("RELEASE_NOTE")
-
-        run(
-            command = bash {
-                exec("gh release create -R ${nightlyRepoVar()} -t ${versionCodeVar()} ${nightlyTagVar()} ${apkFileVar()} --latest --notes ${releaseNoteVar()}")
-            },
-            env = mapOf(
-                apkFileVar.name to apkPathExpr,
-                nightlyTagVar.name to expr { github.ref },
-                versionCodeVar.name to versionCodeExpr,
-                "GITHUB_TOKEN" to expr(NIGHTLY_REPO_ACCESS_TOKEN),
-                nightlyRepoVar.name to expr(NIGHTLY_REPO_URL),
-                "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
-                "BUILD_TYPE" to expr(BUILD_TYPE),
-                releaseNoteVar.name to expr(nightlyReleaseNotesStep.outputs["releaseNote"])
-            ),
-            `if` = expr { contains(ENABLE_RELEASES, "true") }
-        )
-
-        uses(
-            action = triggerRemoteWorkflow,
-            `if` = expr { contains(ENABLE_PRO_BUILDS, "true") }
-        )
+        createRelease(fossApkPathExpr, fossVersionCodeExpr, NIGHTLY_REPO_ACCESS_TOKEN, NIGHTLY_REPO_URL, releaseNote)
+        createRelease(proApkPathExpr, proVersionCodeExpr, NIGHTLY_PRO_REPO_ACCESS_TOKEN, NIGHTLY_PRO_REPO_URL, releaseNote)
     }
 }
 

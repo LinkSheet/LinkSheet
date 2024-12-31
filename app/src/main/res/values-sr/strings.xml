@@ -18,7 +18,7 @@
     <string name="save">Сачувај</string>
     <string name="enable_amp2html">Омогући Amp2Html</string>
     <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url-id="clearurls-github">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
-    <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено.</string>
+    <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено</string>
     <string name="always_disable">Присилно онемогући</string>
     <string name="copy_to_clipboard">Копирај у привремену меморију</string>
     <string name="preview_url_explainer">Приказује URL адресу на коју је кликнуто (након што је обрађена)</string>
@@ -525,8 +525,8 @@
     <string name="generic__button_learn_more">Сазнај више</string>
     <string name="generic__button_dismiss">Одбаци</string>
     <string name="settings_main_experiment_changelog__title_changelog">Евиденција промена експеримената</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">Неки претходно онемогућени експерименти су омогућени у овој верзији.</string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">Нове подразумеване вредности</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Неки експерименти су уклоњени и сада су подразумевано понашање апликације.</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Промене понашања</string>
     <string name="settings__subtitle_advanced"><![CDATA[Експерименти и извоз/увоз]]></string>
     <string name="bottom_sheet__button_manual_redirect">Прати преусмеравања</string>
 </resources>

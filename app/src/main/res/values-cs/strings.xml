@@ -523,10 +523,10 @@
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Společnost Xiaomi je známá tím, že silně a nepředvídatelným způsobem omezuje aplikace, což vede k tomu, že LinkSheet nefunguje správně.\nKlepněte na tlačítko níže a povolte oprávnění „Otevírat nová okna při běhu na pozadí“</string>
     <string name="settings_main_miui_compat__text_request_failed">Nepodařilo se vyžádat oprávnění!</string>
     <string name="generic__button_learn_more">Zjistit více</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">Některé dříve zakázané experimenty byly v tomto sestavení povoleny.</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Některé experimenty byly odebrány a jsou nyní výchozím chováním aplikace.</string>
     <string name="settings_main_experiment_changelog__title_changelog">Seznam změn v experimentech</string>
     <string name="settings__subtitle_advanced"><![CDATA[Import a export experimentů]]></string>
     <string name="generic__button_dismiss">Zavřít</string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">Nové výchozí hodnoty</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Změny chování</string>
     <string name="bottom_sheet__button_manual_redirect">Následovat přesměrování</string>
 </resources>

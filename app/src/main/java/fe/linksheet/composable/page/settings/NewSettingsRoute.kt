@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.version.AndroidVersion
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.RouteNavItem
 import fe.composekit.component.list.item.RouteNavigateListItem
@@ -145,23 +146,25 @@ fun NewSettingsRoute(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
-        item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
-            RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
-        }
+        if (AndroidVersion.AT_LEAST_API_31_S) {
+            item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
+                RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
+            }
 
-        divider(id =  R.string.customization)
+            divider(id = R.string.customization)
+        }
 
         group(array = NewSettingsRouteData.customization) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
-        divider(id =  R.string.misc_settings)
+        divider(id = R.string.misc_settings)
 
         group(array = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
-        divider(id =  R.string.advanced)
+        divider(id = R.string.advanced)
 
         group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
             items(array = NewSettingsRouteData.advanced) { data, padding, shape ->
@@ -180,7 +183,7 @@ fun NewSettingsRoute(
             }
         }
 
-        divider(id =  R.string.about)
+        divider(id = R.string.about)
 
         group(array = NewSettingsRouteData.about) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)

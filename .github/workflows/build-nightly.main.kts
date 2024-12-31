@@ -235,14 +235,26 @@ fun JobBuilder<*>.parseOutput(baseOutPathExpr: String): Pair<String, String> {
 
 fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, String>, Pair<String, String>> {
     run(
-        command = "./gradlew assembleNightly",
+        command = "./gradlew assembleFossNightly",
         env = mapOf(
             "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
             "KEYSTORE_FILE_PATH" to expr { keyStoreFilePath },
             "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
             "KEY_ALIAS" to expr { KEY_ALIAS },
             "KEY_PASSWORD" to expr { KEY_PASSWORD },
-            "PRO_FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
+            "FLAVOR_CONFIG" to "",
+        )
+    )
+
+    run(
+        command = "./gradlew assembleProNightly",
+        env = mapOf(
+            "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
+            "KEYSTORE_FILE_PATH" to expr { keyStoreFilePath },
+            "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
+            "KEY_ALIAS" to expr { KEY_ALIAS },
+            "KEY_PASSWORD" to expr { KEY_PASSWORD },
+            "FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
         )
     )
 

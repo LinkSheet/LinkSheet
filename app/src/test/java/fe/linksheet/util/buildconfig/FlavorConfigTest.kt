@@ -1,12 +1,14 @@
-package fe.linksheet
+package fe.linksheet.util.buildconfig
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.util.buildconfig.FlavorConfig
+import fe.kotlin.extension.string.encodeBase64OrNull
+import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.test.Test
 
 internal class FlavorConfigTest {
+    @OptIn(ExperimentalEncodingApi::class)
     @Test
     fun test() {
         tableOf("config", "expected")
@@ -19,7 +21,7 @@ internal class FlavorConfigTest {
                 FlavorConfig(true, "Host", "ApiKey")
             )
             .forAll { config, expected ->
-                assertThat(FlavorConfig.parseFlavorConfig(config)).isEqualTo(expected)
+                assertThat(FlavorConfig.parseFlavorConfig(config?.encodeBase64OrNull())).isEqualTo(expected)
             }
     }
 }

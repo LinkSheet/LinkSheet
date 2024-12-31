@@ -243,7 +243,6 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
             "KEY_ALIAS" to expr { KEY_ALIAS },
             "KEY_PASSWORD" to expr { KEY_PASSWORD },
             "FLAVOR_CONFIG" to "",
-            "PRO_FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
         )
     )
 
@@ -255,8 +254,7 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
             "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
             "KEY_ALIAS" to expr { KEY_ALIAS },
             "KEY_PASSWORD" to expr { KEY_PASSWORD },
-            "FLAVOR_CONFIG" to "",
-            "PRO_FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
+            "FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
         )
     )
 

@@ -78,8 +78,7 @@ android {
                 localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
 
-            string("FLAVOR", "")
-            string("FLAVOR_CONFIG", "")
+            string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -111,11 +110,7 @@ android {
     productFlavors {
         register("foss") {
             dimension = "type"
-
-            buildConfig {
-                string("FLAVOR", "Foss")
-                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG") ?: "")
-            }
+            buildStringConfigField("FLAVOR", "Foss")
         }
 
         register("pro") {
@@ -123,10 +118,7 @@ android {
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
-            buildConfig {
-                string("FLAVOR", "Pro")
-                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG") ?: "")
-            }
+            buildStringConfigField("FLAVOR", "Pro")
         }
     }
 

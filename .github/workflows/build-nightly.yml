@@ -50,7 +50,6 @@ jobs:
         KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
         FLAVOR_CONFIG: ''
-        PRO_FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
       run: './gradlew assembleFossNightly'
     - id: 'step-7'
       env:
@@ -59,8 +58,7 @@ jobs:
         KEYSTORE_PASSWORD: '${{ secrets.KEYSTORE_PASSWORD }}'
         KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
-        FLAVOR_CONFIG: ''
-        PRO_FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
+        FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
       run: './gradlew assembleProNightly'
     - id: 'step-8'
       name: 'Get output file path'

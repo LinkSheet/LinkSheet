@@ -110,7 +110,7 @@ android {
 
             buildConfig {
                 string("FLAVOR", "Foss")
-                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
+                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG") ?: "")
             }
         }
 
@@ -121,7 +121,7 @@ android {
             versionNameSuffix = "-pro"
             buildConfig {
                 string("FLAVOR", "Pro")
-                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG"))
+                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG") ?: "")
             }
         }
     }

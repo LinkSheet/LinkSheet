@@ -247,6 +247,19 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
         )
     )
 
+    run(
+        command = "./gradlew assembleProNightly",
+        env = mapOf(
+            "GITHUB_WORKFLOW_RUN_ID" to expr { github.run_id },
+            "KEYSTORE_FILE_PATH" to expr { keyStoreFilePath },
+            "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
+            "KEY_ALIAS" to expr { KEY_ALIAS },
+            "KEY_PASSWORD" to expr { KEY_PASSWORD },
+            "FLAVOR_CONFIG" to "",
+            "PRO_FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
+        )
+    )
+
     val fossBaseOutPathExpr = "app/build/outputs/apk/foss/nightly"
     val proBaseOutPathExpr = "app/build/outputs/apk/pro/nightly"
 

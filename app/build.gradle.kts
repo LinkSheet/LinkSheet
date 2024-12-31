@@ -77,6 +77,9 @@ android {
                 "ANALYTICS_SUPPORTED",
                 localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
+
+            string("FLAVOR", "")
+            string("FLAVOR_CONFIG", "")
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

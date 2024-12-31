@@ -2,7 +2,10 @@ package fe.linksheet.module.redactor
 
 interface Redactable<T> {
     @Deprecated("Use buildString")
-    fun process(builder: StringBuilder, redactor: Redactor): StringBuilder
+    fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+        return StringBuilder()
+    }
+
 
      fun buildString(builder: ProtectedStringBuilder){}
 //

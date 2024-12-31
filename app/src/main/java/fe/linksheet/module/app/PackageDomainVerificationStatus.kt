@@ -13,6 +13,7 @@ class PackageDomainVerificationStatus(
     val stateSelected: MutableList<String>,
     val stateVerified: MutableList<String>,
 ) : AppListItemData(packageName, label.toString()) {
+
     val enabled = isLinkHandlingAllowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
     val hostSum = stateNone.size + stateSelected.size + stateVerified.size
 //        val disabled = stateNone.isNotEmpty()

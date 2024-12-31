@@ -10,7 +10,7 @@ import assertk.assertions.prop
 import assertk.tableOf
 import fe.httpkt.Request
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
-import fe.linksheet.module.request.requestModule
+import fe.linksheet.module.http.requestModule
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule

@@ -36,12 +36,12 @@ import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.module.intent.BottomSheetStateController
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.module.intent.Intents
 import fe.linksheet.module.profile.CrossProfile
 import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.resolver.LibRedirectResult
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import me.saket.unfurl.UnfurlResult
 
 @Composable

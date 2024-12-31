@@ -4,22 +4,25 @@ import android.app.Application
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
+import fe.android.compose.version.AndroidVersion
 import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.kotlin.extension.iterable.mapToSet
 import fe.kotlin.extension.map.filterIf
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.launchIO
+import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
+import fe.linksheet.module.resolver.DisplayActivityInfo
+import fe.linksheet.module.app.PackageIconLoader
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.resolver.DisplayActivityInfo
-import fe.android.compose.version.AndroidVersion
 import fe.linksheet.util.net.VerifiedDomainService.canHandleDomains
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -28,7 +31,8 @@ import kotlinx.coroutines.withContext
 class PreferredAppSettingsViewModel(
     val context: Application,
     private val repository: PreferredAppRepository,
-    preferenceRepository: AppPreferenceRepository
+    preferenceRepository: AppPreferenceRepository,
+    private val iconLoader: PackageIconLoader,
 ) : BaseViewModel(preferenceRepository) {
 
     private val domainVerificationManager by lazy {
@@ -113,5 +117,9 @@ class PreferredAppSettingsViewModel(
         repository.insert(hostState.map { (host, _) ->
             displayActivityInfo.toPreferredApp(host, true)
         })
+    }
+
+    fun loadIcon(info: DisplayActivityInfo): ImageBitmap? {
+        return iconLoader.loadIcon(info.resolvedInfo.activityInfo)?.toImageBitmap()
     }
 }

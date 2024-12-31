@@ -45,7 +45,7 @@ import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun AppContentList(
@@ -91,7 +91,7 @@ fun AppContentList(
                     preferred = false,
                     privateBrowser = privateBrowser,
                     showPackage = showPackage,
-                    showNativeLabel = showNativeLabel
+                    showNativeLabel = showNativeLabel,
                 )
             }
         }
@@ -168,7 +168,7 @@ fun AppListItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    bitmap = appInfo.getIcon(context),
+                    bitmap = appInfo.icon.value,
                     contentDescription = appInfo.label,
                     modifier = Modifier.size(32.dp)
                 )
@@ -219,7 +219,7 @@ fun AppListItem(
 @Preview(group = "AppContentList", showBackground = true)
 @Composable
 private fun AppContentListPreview_Short() {
-    val image = ImageBitmap(1, 1)
+    val image = lazy { ImageBitmap(1, 1) }
 
     val apps = listOf(
         DisplayActivityInfo(ResolveInfoMocks.youtube, "Youtube", icon = image),
@@ -245,7 +245,7 @@ private fun AppContentListPreview_Short() {
 @Preview(group = "AppContentList", showBackground = true)
 @Composable
 private fun AppContentListPreview_Long() {
-    val image = ImageBitmap(1, 1)
+    val image = lazy { ImageBitmap(1, 1) }
     val apps = ResolveInfoMocks.allResolved.map {
         DisplayActivityInfo(it, it.resolvePackageName, icon = image)
     }

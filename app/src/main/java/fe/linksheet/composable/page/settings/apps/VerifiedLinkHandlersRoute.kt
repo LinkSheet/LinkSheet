@@ -46,7 +46,7 @@ import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.module.viewmodel.FilterMode
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.composable.ui.LocalActivity
 import org.koin.androidx.compose.koinViewModel
 

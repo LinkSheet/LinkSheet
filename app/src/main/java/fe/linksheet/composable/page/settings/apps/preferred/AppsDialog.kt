@@ -16,7 +16,7 @@ import fe.android.compose.dialog.helper.OnClose
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.R
 import fe.linksheet.composable.util.*
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 data class AppsDialogCloseState(
     val displayActivityInfo: DisplayActivityInfo
@@ -26,7 +26,7 @@ data class AppsDialogCloseState(
 internal fun appsDialog(
     appsExceptPreferred: List<DisplayActivityInfo>?,
     alwaysShowPackageName: Boolean,
-    onClose: OnClose<AppsDialogCloseState?> = {},
+    onClose: OnClose<AppsDialogCloseState?> = {}
 ) = dialogHelper(
     state = appsExceptPreferred,
     onClose = onClose,
@@ -52,7 +52,7 @@ internal fun appsDialog(
                     onClick = { close(AppsDialogCloseState(info)) }
                 ) {
                     Image(
-                        bitmap = info.getIcon(context),
+                        bitmap = info.icon.value,
                         contentDescription = info.label,
                         modifier = Modifier.size(32.dp)
                     )

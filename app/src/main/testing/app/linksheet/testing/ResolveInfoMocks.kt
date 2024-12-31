@@ -1,6 +1,8 @@
 package app.linksheet.testing
 
 import android.content.pm.ResolveInfo
+import androidx.compose.ui.graphics.ImageBitmap
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 object ResolveInfoMocks {
     val miBrowser = buildResolveInfoTestMock { activity, application ->
@@ -59,5 +61,10 @@ object ResolveInfoMocks {
 
     fun keyedMap(vararg resolveInfos: ResolveInfo): Map<String, ResolveInfo> {
         return listOf(*resolveInfos).toKeyedMap()
+    }
+
+    fun ResolveInfo.toDisplayActivityInfo(): DisplayActivityInfo {
+        val image = lazy { ImageBitmap(1, 1) }
+        return DisplayActivityInfo(this, resolvePackageName, icon = image)
     }
 }

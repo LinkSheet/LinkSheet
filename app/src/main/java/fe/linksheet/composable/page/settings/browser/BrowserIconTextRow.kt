@@ -15,20 +15,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
-import fe.linksheet.resolver.DisplayActivityInfo
 import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun BrowserIconTextRow(
     app: DisplayActivityInfo,
     selected: Boolean,
     showSelectedText: Boolean,
-    alwaysShowPackageName: Boolean
+    alwaysShowPackageName: Boolean,
 ) {
     val context = LocalContext.current
 
     Image(
-        bitmap = app.getIcon(context),
+        bitmap = app.icon.value,
         contentDescription = app.label,
         modifier = Modifier.size(32.dp)
     )

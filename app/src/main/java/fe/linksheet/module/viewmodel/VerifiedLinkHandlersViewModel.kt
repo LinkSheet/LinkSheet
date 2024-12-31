@@ -27,7 +27,7 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.getAppOpenByDefaultIntent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

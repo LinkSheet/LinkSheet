@@ -43,8 +43,7 @@ import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveModule
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.resolver.BottomSheetResult
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -63,8 +62,6 @@ class BottomSheetViewModel(
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
-
-    var resolveResult by mutableStateOf<BottomSheetResult?>(null)
 
     val hideAfterCopying = preferenceRepository.asState(AppPreferences.hideAfterCopying)
 

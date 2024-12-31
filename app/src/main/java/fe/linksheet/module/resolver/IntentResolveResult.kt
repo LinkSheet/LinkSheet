@@ -3,10 +3,8 @@ package fe.linksheet.module.resolver
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
-import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.resolver.BottomSheetResult
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.util.ReferrerHelper
 import me.saket.unfurl.UnfurlResult
 
 sealed interface IntentResolveResult {
@@ -18,18 +16,18 @@ sealed interface IntentResolveResult {
 
     @Stable
     class Default(
-        intent: Intent,
-        uri: Uri?,
+        val intent: Intent,
+        val uri: Uri?,
         val unfurlResult: UnfurlResult?,
         referrer: Uri?,
-        resolved: List<DisplayActivityInfo>,
+        val resolved: List<DisplayActivityInfo>,
         val filteredItem: DisplayActivityInfo?,
         alwaysPreferred: Boolean?,
         hasSingleMatchingOption: Boolean = false,
         val resolveModuleStatus: ResolveModuleStatus,
         val libRedirectResult: LibRedirectResult? = null,
         val downloadable: DownloadCheckResult = DownloadCheckResult.NonDownloadable,
-    ) : IntentResolveResult, BottomSheetResult.SuccessResult(uri, intent, resolved) {
+    ) : IntentResolveResult {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
 
         private val referringPackageName = ReferrerHelper.getReferringPackage(referrer)
@@ -39,10 +37,6 @@ sealed interface IntentResolveResult {
 
         val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption)
                 && (referringPackageName == null || app?.packageName != referringPackageName)
-
-        override fun isEmpty(): Boolean {
-            return totalCount == 0
-        }
     }
 
     data object IntentParseFailed : IntentResolveResult

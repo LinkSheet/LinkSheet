@@ -19,7 +19,7 @@ import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun BrowserCommonPackageSelectorRoute(

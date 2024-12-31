@@ -1,4 +1,4 @@
-package fe.linksheet.module.request
+package fe.linksheet.module.http
 
 import fe.httpkt.Request
 import org.koin.dsl.module

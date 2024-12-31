@@ -16,8 +16,7 @@ import fe.linksheet.extension.koin.androidApplicationContext
 import fe.linksheet.lifecycle.ActivityLifecycleObserver
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
-import fe.linksheet.module.app.AndroidPackageInfoModule
-import fe.linksheet.module.systeminfo.SystemInfoServiceModule
+import fe.linksheet.module.app.PackageModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
@@ -26,19 +25,19 @@ import fe.linksheet.module.devicecompat.MiuiCompatModule
 import fe.linksheet.module.devicecompat.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.RealMiuiCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
+import fe.linksheet.module.http.okHttpModule
+import fe.linksheet.module.http.requestModule
 import fe.linksheet.module.log.defaultLoggerModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
-import fe.linksheet.module.okhttp.okHttpModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
 import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
-import fe.linksheet.module.request.requestModule
 import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
 import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
@@ -46,6 +45,7 @@ import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
+import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
@@ -124,6 +124,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
     override fun provideKoinModules(): List<Module> {
         return listOf(
             SystemInfoServiceModule,
+            PackageModule,
             networkStateServiceModule,
             logFileServiceModule,
             shizukuHandlerModule,
@@ -151,7 +152,6 @@ open class LinkSheetApp : Application(), DependencyProvider {
             statisticsModule,
             VersionTrackerModule,
             pasteServiceModule,
-            AndroidPackageInfoModule,
             ProfileSwitcherModule,
             AppStateServiceModule,
             provideDebugMenu()

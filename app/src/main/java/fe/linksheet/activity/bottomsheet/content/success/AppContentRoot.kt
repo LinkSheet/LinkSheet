@@ -7,7 +7,7 @@ import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun AppContentRoot(

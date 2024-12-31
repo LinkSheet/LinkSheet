@@ -46,11 +46,9 @@ import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.interconnect.LinkSheetConnector
-import fe.linksheet.module.intent.BottomSheetStateController
-import fe.linksheet.module.intent.DefaultBottomSheetStateController
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

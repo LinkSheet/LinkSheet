@@ -7,8 +7,8 @@ import fe.linksheet.extension.android.queryFirstIntentActivityByPackageNameOrNul
 import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.resolver.DisplayActivityInfo
-import fe.linksheet.resolver.PreferredDisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.PreferredDisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated
 
 @Entity(

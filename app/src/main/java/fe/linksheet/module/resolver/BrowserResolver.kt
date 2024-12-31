@@ -7,7 +7,6 @@ import android.net.Uri
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
-import fe.linksheet.resolver.DisplayActivityInfo
 
 class BrowserResolver(val packageManager: PackageManager) {
     companion object {

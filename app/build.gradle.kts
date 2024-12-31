@@ -77,6 +77,8 @@ android {
                 "ANALYTICS_SUPPORTED",
                 localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
+
+            string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -108,11 +110,7 @@ android {
     productFlavors {
         register("foss") {
             dimension = "type"
-
-            buildConfig {
-                string("FLAVOR", "Foss")
-                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG") ?: "")
-            }
+            buildStringConfigField("FLAVOR", "Foss")
         }
 
         register("pro") {
@@ -120,10 +118,7 @@ android {
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
-            buildConfig {
-                string("FLAVOR", "Pro")
-                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG") ?: "")
-            }
+            buildStringConfigField("FLAVOR", "Pro")
         }
     }
 
@@ -256,7 +251,8 @@ dependencies {
 
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
-    ksp("androidx.room:room-compiler:2.7.0-alpha12")
+    ksp(AndroidX.room.compiler)
+
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 

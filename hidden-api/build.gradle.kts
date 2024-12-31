@@ -13,6 +13,11 @@ android {
     defaultConfig {
         minSdk = Version.MIN_SDK
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 }
 
 dependencies {

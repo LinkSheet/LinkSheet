@@ -18,6 +18,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("net.nemerosa.versioning")
+    id("androidx.room")
     id("com.google.devtools.ksp")
     id("build-logic-plugin")
     id("dev.rikka.tools.refine")
@@ -85,8 +86,9 @@ android {
             useSupportLibrary = true
         }
 
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
+        room {
+            schemaDirectory("$projectDir/schemas")
+            generateKotlin = true
         }
     }
 
@@ -109,7 +111,7 @@ android {
 
             buildConfig {
                 string("FLAVOR", "Foss")
-                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
+                string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG") ?: "")
             }
         }
 
@@ -120,7 +122,7 @@ android {
             versionNameSuffix = "-pro"
             buildConfig {
                 string("FLAVOR", "Pro")
-                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG"))
+                string("FLAVOR_CONFIG", System.getenv("PRO_FLAVOR_CONFIG") ?: "")
             }
         }
     }
@@ -254,8 +256,7 @@ dependencies {
 
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
-
+    ksp("androidx.room:room-compiler:2.7.0-alpha12")
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 

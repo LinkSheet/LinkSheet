@@ -14,7 +14,7 @@
     <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
     <string name="lib_redirect">LibRedirect</string>
-    <string name="enable_downloader_explainer">Добавя в долното меню бутон „Изтегляне“, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
+    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне от %s</string>
     <string name="default_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
@@ -512,12 +512,12 @@
     <string name="settings_profile_switcher__text_not_installed">Не може да бъде направена връзка с този профил</string>
     <string name="settings_profile_switcher__text_current_profile">В момента работи в този профил</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Искане на права</string>
-    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Известно е, че Xiaomi силно ограничава приложенията по непредсказуеми начини, което води до нарушение на работата на LinkSheet.\nДокоснете бутона след това дайте разрешение за отваряне на нови прозорци при работа във фонов режим</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Известно е, че Xiaomi силно ограничава приложенията по непредсказуеми начини, което води до нарушение на работата на LinkSheet.\nДокоснете бутона, след това дайте разрешение за отваряне на нови прозорци при работа във фонов режим</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Необходима е допълнителна настройка</string>
     <string name="settings_main_miui_compat__text_request_failed">Грешка при искане на права!</string>
     <string name="generic__button_learn_more">Научете повече</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">Някои от изключените експерименти са включени в това издание.</string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">Нови подразбирани настройки</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Някои от експериментите са премахнати като такива и са включени в настройките.</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Промяна на поведението</string>
     <string name="generic__button_dismiss">Затваряне</string>
     <string name="settings_main_experiment_changelog__title_changelog">Дневник на промените на експериментите</string>
     <string name="settings__subtitle_advanced"><![CDATA[Експерименти и внасяне/изнасяне]]></string>

@@ -5,8 +5,10 @@ import com.google.gson.JsonObject
 import fe.gson.extension.json.`object`.asBooleanOrNull
 import fe.gson.extension.json.`object`.asStringOrNull
 import fe.gson.util.Json
+import fe.kotlin.extension.string.decodeBase64OrNull
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
+import kotlin.io.encoding.ExperimentalEncodingApi
 
 @Keep
 data class FlavorConfig(
@@ -17,8 +19,9 @@ data class FlavorConfig(
     companion object {
         val Default = FlavorConfig(false, "", "")
 
+        @OptIn(ExperimentalEncodingApi::class)
         fun parseFlavorConfig(config: String?): FlavorConfig {
-            val flavorConfig = config ?: return Default
+            val flavorConfig = config?.decodeBase64OrNull() ?: return Default
 
             val result = tryCatch {
                 val obj = Json.parseJsonOrNull<JsonObject>(flavorConfig)

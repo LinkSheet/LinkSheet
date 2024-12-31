@@ -3,21 +3,29 @@ package fe.linksheet.extension.android
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.resolver.DisplayActivityInfo
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 @Deprecated(message = "Use PackageDisplayInfoHelper")
 fun ResolveInfo.toDisplayActivityInfo(context: Context, browser: Boolean = false): DisplayActivityInfo {
-    return toDisplayActivityInfo(context.packageManager, browser)
+    return ResolveInfoCompat.toDisplayActivityInfo(context.packageManager, this, browser)
 }
 
-@Deprecated(message = "Use PackageDisplayInfoHelper")
-fun ResolveInfo.toDisplayActivityInfo(packageManager: PackageManager, browser: Boolean = false): DisplayActivityInfo {
-    return DisplayActivityInfo(
-        resolvedInfo = this,
-        label = loadLabel(packageManager).toString(),
-        browser = browser
-    )
+object ResolveInfoCompat : KoinComponent {
+    private val packageInfoService by inject<PackageInfoService>()
+
+    @Deprecated(message = "Use PackageDisplayInfoHelper")
+    fun toDisplayActivityInfo(
+        packageManager: PackageManager,
+        resolveInfo: ResolveInfo,
+        browser: Boolean = false,
+    ): DisplayActivityInfo {
+        return packageInfoService.createDisplayActivityInfo(resolveInfo, browser)
+    }
 }
+
 
 @Deprecated(message = "Use PackageDisplayInfoHelper")
 fun Iterable<ResolveInfo>.toDisplayActivityInfos(
@@ -33,7 +41,7 @@ fun Map<String, ResolveInfo>.toDisplayActivityInfos(
     sorted: Boolean = true,
     browser: Boolean = false,
 ): List<DisplayActivityInfo> {
-    return map { (_, it) -> it.toDisplayActivityInfo(packageManager, browser) }.labelSorted(sorted)
+    return map { (_, it) -> ResolveInfoCompat.toDisplayActivityInfo(packageManager, it, browser) }.labelSorted(sorted)
 }
 
 fun Iterable<ResolveInfo>.toPackageKeyedMap() = associateBy { it.activityInfo.packageName }

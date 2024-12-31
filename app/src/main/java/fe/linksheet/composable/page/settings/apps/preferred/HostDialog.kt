@@ -24,7 +24,7 @@ import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.updateState
 import fe.linksheet.extension.compose.updateStateFromResult
 import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 data class HostDialogState(
@@ -46,7 +46,7 @@ data class HostDialogCloseState(
 internal fun hostDialog(
     activity: Activity,
     fetch: suspend (HostDialogState) -> PreferredAppSettingsViewModel.HostStateResult,
-    onClose: OnClose<HostDialogCloseState?> = {},
+    onClose: OnClose<HostDialogCloseState?> = {}
 ) =
     dialogHelper<HostDialogState, PreferredAppSettingsViewModel.HostStateResult, HostDialogCloseState>(
         fetch = fetch,
@@ -69,7 +69,7 @@ internal fun hostDialog(
             ) {
                 Spacer(modifier = Modifier.height(5.dp))
                 Image(
-                    bitmap = displayActivityInfo.getIcon(context),
+                    bitmap = displayActivityInfo.icon.value,
                     contentDescription = displayActivityInfo.label,
                     modifier = Modifier.size(42.dp)
                 )

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package fe.linksheet.module.intent
+package fe.linksheet.activity.bottomsheet
 
 import android.app.Activity
 import android.content.Intent

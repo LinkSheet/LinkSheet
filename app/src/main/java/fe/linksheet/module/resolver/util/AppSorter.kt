@@ -4,7 +4,7 @@ import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import java.util.concurrent.TimeUnit
 import kotlin.collections.remove
 

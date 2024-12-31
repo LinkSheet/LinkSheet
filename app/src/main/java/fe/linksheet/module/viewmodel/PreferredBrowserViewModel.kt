@@ -12,7 +12,7 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
-import fe.linksheet.resolver.DisplayActivityInfo.Companion.sortByValueAndName
+import fe.linksheet.module.resolver.DisplayActivityInfo.Companion.sortByValueAndName
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.*
 

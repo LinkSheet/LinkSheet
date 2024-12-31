@@ -8,7 +8,7 @@ import android.net.Uri
 import fe.linksheet.extension.kotlin.appendHashed
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.stringbuilder.util.*
 import javax.crypto.Mac
 

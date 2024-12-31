@@ -1,4 +1,4 @@
-package fe.linksheet.resolver
+package fe.linksheet.module.resolver
 
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.redactor.Redactable

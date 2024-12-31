@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.module.resolver.PackageHandler
+import fe.linksheet.module.app.PackageUriHandler
 import fe.linksheet.resolver.util.addDataPaths
 import fe.linksheet.resolver.util.buildIntentFilter
 import org.junit.After
@@ -21,7 +21,7 @@ import kotlin.test.assertTrue
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 class PackageHandlerIntentFilterTest {
     companion object {
-        private val handler: PackageHandler = PackageHandler(
+        private val handler: PackageUriHandler = PackageUriHandler(
             queryIntentActivities = { _, _ -> listOf() },
             isLinkSheetCompat = { false },
             checkReferrerExperiment = { true }

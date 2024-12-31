@@ -6,7 +6,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.StringRes
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 fun Activity.startActivityWithConfirmation(intent: Intent) = kotlin.runCatching {
     this.startActivity(intent)

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun NoPreferredAppChoiceButtons(

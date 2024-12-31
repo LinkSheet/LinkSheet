@@ -1,20 +1,8 @@
 package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import android.net.Uri
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.basicMarquee
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
@@ -40,8 +28,8 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.composable.util.defaultRoundedCornerShape
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.resolver.DisplayActivityInfo
 
 
 data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
@@ -86,7 +74,7 @@ fun AppContentGrid(
         modifier: ClickModifier,
     ) -> Unit,
     isPrivateBrowser: (hasUri: Boolean, info: DisplayActivityInfo) -> KnownBrowser?,
-    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
+    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit
 ) {
     val items = remember(apps, uri) {
         createGridItems(apps, uri, isPrivateBrowser)
@@ -116,7 +104,7 @@ fun AppContentGrid(
                         launch2(index, info, type, modifier)
                     },
                     privateBrowser = privateBrowser,
-                    showPackage = showPackage
+                    showPackage = showPackage,
                 )
             }
         }
@@ -156,7 +144,7 @@ private fun AppGridItem(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(32.dp),
-                bitmap = appInfo.getIcon(context),
+                bitmap = appInfo.icon.value,
                 contentDescription = appInfo.label
             )
 

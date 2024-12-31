@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.testing.ResolveInfoMocks
 import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun AppContent(
@@ -52,7 +52,7 @@ fun AppContent(
 @Preview(showBackground = true, heightDp = 250)
 @Composable
 private fun AppContentPreview() {
-    val image = ImageBitmap(1, 1)
+    val image = lazy { ImageBitmap(1, 1) }
 
     val apps = listOf(
         DisplayActivityInfo(ResolveInfoMocks.youtube, "Youtube", icon = image),

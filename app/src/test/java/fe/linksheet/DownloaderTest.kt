@@ -6,7 +6,7 @@ import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
-import fe.linksheet.module.request.requestModule
+import fe.linksheet.module.http.requestModule
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.util.KoinTestRuleFix
 import org.junit.After

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import fe.linksheet.BuildConfig
+import fe.linksheet.util.intent.buildIntent
 
 object Intents {
     fun createSelfIntent(uri: Uri?, extras: Bundle? = null): Intent {

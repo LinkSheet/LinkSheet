@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable
@@ -15,16 +14,12 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.module.resolver.util.AppSorter
-import fe.linksheet.module.resolver.util.CustomTabHandler
-import fe.linksheet.module.resolver.util.IntentHandler
-import fe.linksheet.module.resolver.util.PackageDisplayInfoHelper
-import fe.linksheet.module.resolver.util.PackageLauncherHelper
-import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.extension.android.labelSorted
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
+import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.app.PackageUriHandler
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -32,6 +27,8 @@ import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.intent.IntentParser
+import fe.linksheet.module.intent.cloneIntent
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -48,8 +45,7 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
-import fe.linksheet.module.intent.IntentParser
-import fe.linksheet.module.intent.cloneIntent
+import fe.linksheet.module.resolver.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -69,6 +65,7 @@ class ImprovedIntentResolver(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
+    private val packageInfoService: PackageInfoService,
     private val downloader: Downloader,
     private val redirectUrlResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
@@ -130,22 +127,11 @@ class ImprovedIntentResolver(
     private val hideReferrerFromSheet = experimentRepository.asState(Experiments.hideReferrerFromSheet)
     private val autoLaunchSingleBrowser = experimentRepository.asState(Experiments.autoLaunchSingleBrowser)
 
-    private val packageManager by lazy {
-        context.packageManager
-    }
-
-    private val packageHandler by lazy {
-        PackageHandler(
-            queryIntentActivities = packageManager::queryIntentActivitiesCompat,
+    private val packageUriHandler by lazy {
+        PackageUriHandler(
+            queryIntentActivities = packageInfoService.queryIntentActivities,
             isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
             checkReferrerExperiment = { hideReferrerFromSheet() }
-        )
-    }
-
-    private val packageDisplayInfoHelper by lazy {
-        PackageDisplayInfoHelper(
-            loadLabel = { it.loadLabel(packageManager) },
-            getApplicationLabel = packageManager::getApplicationLabel
         )
     }
 
@@ -154,12 +140,8 @@ class ImprovedIntentResolver(
     private val appSorter by lazy {
         AppSorter(
             queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
-            toDisplayActivityInfo = packageDisplayInfoHelper::createDisplayActivityInfo
+            toDisplayActivityInfo = packageInfoService::createDisplayActivityInfo
         )
-    }
-
-    private val packageLauncherHelper by lazy {
-        PackageLauncherHelper(queryIntentActivities = packageManager::queryIntentActivitiesCompat)
     }
 
     private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
@@ -333,14 +315,14 @@ class ImprovedIntentResolver(
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(
             repository = preferredAppRepository,
-            packageLauncherHelper = packageLauncherHelper,
+            packageInfoService = packageInfoService,
             uri = uri
         )
         val lastUsedApps = queryAppSelectionHistory(
             repository = appSelectionHistoryRepository,
-            packageLauncherHelper = packageLauncherHelper, uri = uri
+            packageInfoService = packageInfoService, uri = uri
         )
-        val resolveList = packageHandler.findHandlers(uri, referringPackage)
+        val resolveList = packageUriHandler.findHandlers(uri, referringPackage)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
@@ -400,13 +382,13 @@ class ImprovedIntentResolver(
     private suspend fun queryAppSelectionHistory(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: AppSelectionHistoryRepository,
-        packageLauncherHelper: PackageLauncherHelper,
+        packageInfoService: PackageInfoService,
         uri: Uri?,
     ): Map<String, Long> = withContext(dispatcher) {
         val lastUsedApps = repository.getLastUsedForHostGroupedByPackage(uri)
             ?: return@withContext emptyMap()
 
-        val (result, delete) = packageLauncherHelper.hasLauncher(lastUsedApps.keys)
+        val (result, delete) = packageInfoService.hasLauncher(lastUsedApps.keys)
         if (delete.isNotEmpty()) repository.delete(delete)
 
         lastUsedApps.filter { it.key in result }.toMap()
@@ -415,11 +397,11 @@ class ImprovedIntentResolver(
     private suspend fun queryPreferredApp(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: PreferredAppRepository,
-        packageLauncherHelper: PackageLauncherHelper,
+        packageInfoService: PackageInfoService,
         uri: Uri?,
     ): PreferredApp? = withContext(dispatcher) {
         val app = repository.getByHost(uri)
-        val resolveInfo = packageLauncherHelper.getLauncherOrNull(app?.pkg)
+        val resolveInfo = packageInfoService.getLauncherOrNull(app?.pkg)
         if (app != null && resolveInfo == null) repository.delete(app)
 
         app
@@ -436,7 +418,7 @@ class ImprovedIntentResolver(
 
         val resolvedList = context.packageManager
             .queryResolveInfosByIntent(newIntent, true)
-            .map { packageDisplayInfoHelper.createDisplayActivityInfo(it, true) }
+            .map { packageInfoService.createDisplayActivityInfo(it, true) }
             .labelSorted()
 
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)

@@ -3,7 +3,7 @@ package fe.linksheet.module.viewmodel.base
 import android.app.Application
 import fe.kotlin.extension.map.filterIf
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.resolver.DisplayActivityInfo
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow

@@ -1,15 +1,13 @@
-package fe.linksheet.module.resolver
+package fe.linksheet.module.app
 
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.IntentFilter.AuthorityEntry
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import fe.linksheet.util.ResolveInfoFlags
 
-
-class PackageHandler(
+class PackageUriHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val isLinkSheetCompat: (String) -> Boolean,
     val checkReferrerExperiment: () -> Boolean,
@@ -76,7 +74,7 @@ class PackageHandler(
         return filter.hasNonWildcardDataAuthority(authorityCount, uri) || filter.hasDataPath(uri.path)
     }
 
-    private val anyHost = AuthorityEntry("*", "-1")
+    private val anyHost = IntentFilter.AuthorityEntry("*", "-1")
 
     private fun IntentFilter.hasNonWildcardDataAuthority(size: Int, uri: Uri): Boolean {
         return (0 until size).map { getDataAuthority(it) }.any { it != anyHost && it.match(uri) >= 0 }

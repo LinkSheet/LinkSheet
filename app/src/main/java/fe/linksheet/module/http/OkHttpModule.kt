@@ -1,4 +1,4 @@
-package fe.linksheet.module.okhttp
+package fe.linksheet.module.http
 
 import android.content.Context
 import okhttp3.Cache

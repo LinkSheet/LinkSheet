@@ -7,11 +7,14 @@ object CustomTabHandler {
     private const val EXTRA_SESSION = CustomTabsIntent.EXTRA_SESSION
     private const val EXTRA_INDICATOR = "customtabs.extra"
 
-    fun getInfo(intent: SafeIntent, allowCustomTab: Boolean): Pair<Boolean, List<String>?> {
+    fun getInfo(intent: SafeIntent, allowCustomTab: Boolean): CustomTabInfo {
         val isCustomTab = intent.hasExtra(EXTRA_SESSION)
-        if (!isCustomTab || !allowCustomTab) return false to null
+        if (!isCustomTab || !allowCustomTab) return CustomTabInfo(false, null)
 
-        val drop = intent.extras?.keySet()?.filter { extra -> !extra.contains(EXTRA_INDICATOR) } ?: emptyList()
-        return true to drop
+        val dropExtras = intent.extras?.keySet()?.filter { extra -> !extra.contains(EXTRA_INDICATOR) } ?: emptyList()
+
+        return CustomTabInfo(true, dropExtras)
     }
 }
+
+data class CustomTabInfo(val isCustomTab: Boolean, val extras: List<String>?)

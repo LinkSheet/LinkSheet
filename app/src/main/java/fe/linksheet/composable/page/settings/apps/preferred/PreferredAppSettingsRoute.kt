@@ -36,7 +36,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PreferredAppSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: PreferredAppSettingsViewModel = koinViewModel()
+    viewModel: PreferredAppSettingsViewModel = koinViewModel(),
 ) {
     val activity = LocalContext.currentActivity()
 
@@ -116,7 +116,7 @@ fun PreferredAppSettingsRoute(
                 }) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
-                            bitmap = app.getIcon(context),
+                            bitmap = app.icon.value,
                             contentDescription = app.label,
                             modifier = Modifier.size(42.dp)
                         )

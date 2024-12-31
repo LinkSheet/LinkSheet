@@ -13,6 +13,7 @@ android {
     defaultConfig {
         minSdk = Version.MIN_SDK
     }
+    compileOptions {
 }
 
 dependencies {

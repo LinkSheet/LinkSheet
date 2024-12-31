@@ -88,6 +88,7 @@ android {
 
         room {
             schemaDirectory("$projectDir/schemas")
+            generateKotlin = true
         }
     }
 

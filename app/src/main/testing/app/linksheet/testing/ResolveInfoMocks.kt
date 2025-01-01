@@ -2,6 +2,7 @@ package app.linksheet.testing
 
 import android.content.pm.ResolveInfo
 import androidx.compose.ui.graphics.ImageBitmap
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.DisplayActivityInfo
 
 object ResolveInfoMocks {
@@ -66,5 +67,9 @@ object ResolveInfoMocks {
     fun ResolveInfo.toDisplayActivityInfo(): DisplayActivityInfo {
         val image = lazy { ImageBitmap(1, 1) }
         return DisplayActivityInfo(this, resolvePackageName, icon = image)
+    }
+
+    fun ResolveInfo.toAppInfo(label: String, icon: Lazy<ImageBitmap>): ActivityAppInfo {
+        return ActivityAppInfo(activityInfo, label, icon)
     }
 }

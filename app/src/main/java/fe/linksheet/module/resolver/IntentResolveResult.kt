@@ -3,6 +3,7 @@ package fe.linksheet.module.resolver
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.resolver.util.ReferrerHelper
 import me.saket.unfurl.UnfurlResult
@@ -11,7 +12,7 @@ sealed interface IntentResolveResult {
     data object Pending : IntentResolveResult
 
     data class WebSearch(
-        val query: String, val newIntent: Intent, val resolvedList: List<DisplayActivityInfo>,
+        val query: String, val newIntent: Intent, val resolvedList: List<ActivityAppInfo>,
     ) : IntentResolveResult
 
     @Stable
@@ -20,8 +21,8 @@ sealed interface IntentResolveResult {
         val uri: Uri?,
         val unfurlResult: UnfurlResult?,
         referrer: Uri?,
-        val resolved: List<DisplayActivityInfo>,
-        val filteredItem: DisplayActivityInfo?,
+        val resolved: List<ActivityAppInfo>,
+        val filteredItem: ActivityAppInfo?,
         alwaysPreferred: Boolean?,
         hasSingleMatchingOption: Boolean = false,
         val resolveModuleStatus: ResolveModuleStatus,

@@ -46,9 +46,9 @@ import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.interconnect.LinkSheetConnector
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -370,7 +370,7 @@ class ImprovedBottomSheet(
         }
     }
 
-    private fun isPrivateBrowser(hasUri: Boolean, info: DisplayActivityInfo): KnownBrowser? {
+    private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): KnownBrowser? {
         if (!viewModel.enableRequestPrivateBrowsingButton() || !hasUri) return null
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }

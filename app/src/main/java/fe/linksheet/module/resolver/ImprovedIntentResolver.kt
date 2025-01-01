@@ -14,12 +14,11 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.config.ConfigType
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.extension.android.labelSorted
-import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
 import fe.linksheet.module.app.PackageInfoService
-import fe.linksheet.module.app.PackageUriHandler
+import fe.linksheet.module.app.PackageIntentHandler
+import fe.linksheet.module.app.labelSorted
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -127,8 +126,8 @@ class ImprovedIntentResolver(
     private val hideReferrerFromSheet = experimentRepository.asState(Experiments.hideReferrerFromSheet)
     private val autoLaunchSingleBrowser = experimentRepository.asState(Experiments.autoLaunchSingleBrowser)
 
-    private val packageUriHandler by lazy {
-        PackageUriHandler(
+    private val packageIntentHandler by lazy {
+        PackageIntentHandler(
             queryIntentActivities = packageInfoService.queryIntentActivities,
             isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
             checkReferrerExperiment = { hideReferrerFromSheet() }
@@ -140,7 +139,7 @@ class ImprovedIntentResolver(
     private val appSorter by lazy {
         AppSorter(
             queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
-            toDisplayActivityInfo = packageInfoService::createDisplayActivityInfo
+            toAppInfo = packageInfoService::toAppInfo
         )
     }
 
@@ -322,7 +321,7 @@ class ImprovedIntentResolver(
             repository = appSelectionHistoryRepository,
             packageInfoService = packageInfoService, uri = uri
         )
-        val resolveList = packageUriHandler.findHandlers(uri, referringPackage)
+        val resolveList = packageIntentHandler.findHandlers(uri, referringPackage)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
@@ -416,9 +415,8 @@ class ImprovedIntentResolver(
             .cloneIntent(Intent.ACTION_WEB_SEARCH, null, true)
             .putExtra(SearchManager.QUERY, query)
 
-        val resolvedList = context.packageManager
-            .queryResolveInfosByIntent(newIntent, true)
-            .map { packageInfoService.createDisplayActivityInfo(it, true) }
+        val resolvedList = packageIntentHandler.findHandlers(newIntent)
+            .map { packageInfoService.toAppInfo(it, true) }
             .labelSorted()
 
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)

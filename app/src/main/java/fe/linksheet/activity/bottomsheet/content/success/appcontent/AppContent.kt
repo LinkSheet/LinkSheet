@@ -13,15 +13,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.testing.ResolveInfoMocks
 import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun AppContent(
-    info: DisplayActivityInfo?,
+    info: ActivityAppInfo?,
     appListSelectedIdx: Int,
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
-    launch: (DisplayActivityInfo, ClickModifier) -> Unit,
+    launch: (ActivityAppInfo, ClickModifier) -> Unit,
     showToast: (Int, Int, Boolean) -> Unit,
     content: @Composable ((Modifier) -> Unit),
 ) {

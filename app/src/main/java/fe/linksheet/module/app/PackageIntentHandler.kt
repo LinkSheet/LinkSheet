@@ -7,7 +7,7 @@ import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import fe.linksheet.util.ResolveInfoFlags
 
-class PackageUriHandler(
+class PackageIntentHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val isLinkSheetCompat: (String) -> Boolean,
     val checkReferrerExperiment: () -> Boolean,
@@ -34,15 +34,16 @@ class PackageUriHandler(
         }
     }
 
+    fun findHandlers(intent: Intent): List<ResolveInfo> {
+        val activities = queryIntentActivities(intent, QUERY_FLAGS)
+        return activities.filter { it.activityInfo.applicationInfo.enabled && !isLinkSheetCompat(it.activityInfo.packageName) }
+    }
+
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo> {
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
-        val activities = queryIntentActivities(viewIntent, QUERY_FLAGS)
+        val activities = findHandlers(viewIntent)
 
-        var filtered = activities.filter {
-            it.activityInfo.applicationInfo.enabled
-                    && !isLinkSheetCompat(it.activityInfo.packageName)
-                    && isLinkHandler(it.filter, uri)
-        }
+        var filtered = activities.filter { isLinkHandler(it.filter, uri) }
 
         if (referringPackage != null && checkReferrerExperiment()) {
             filtered = filtered.filter { it.activityInfo.packageName != referringPackage }

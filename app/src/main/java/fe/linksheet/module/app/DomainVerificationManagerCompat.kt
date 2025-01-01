@@ -16,11 +16,11 @@ data class VerificationState(
 )
 
 fun DomainVerificationManagerCompat(context: Context): DomainVerificationManagerCompat {
-    return if (AndroidVersion.AT_LEAST_API_31_S) {
-        val domainVerificationManager = context.getSystemService<DomainVerificationManager>()
-        Api31Impl(domainVerificationManager)
-    } else {
-        PreApi31Impl
+    return when {
+        AndroidVersion.AT_LEAST_API_31_S -> Api31Impl(
+            domainVerificationManager = context.getSystemService<DomainVerificationManager>()
+        )
+        else -> PreApi31Impl
     }
 }
 

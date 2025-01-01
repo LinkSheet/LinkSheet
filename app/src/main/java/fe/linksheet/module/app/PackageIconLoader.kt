@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 
-fun PackageIconLoaderModule(packageManager: PackageManager, activityManager: ActivityManager): PackageIconLoader {
+internal fun PackageIconLoaderModule(packageManager: PackageManager, activityManager: ActivityManager): PackageIconLoader {
     val launcherLargeIconDensity = activityManager.launcherLargeIconDensity
 
     return PackageIconLoader(
@@ -35,7 +35,7 @@ class PackageIconLoader(
         return loadIcon(resolveInfo.activityInfo)
     }
 
-    fun loadApplicationIcon(packageName: String, resId: Int): Drawable? {
+    private fun loadApplicationIcon(packageName: String, resId: Int): Drawable? {
         if (resId == 0) return null
 
         return tryCatch {

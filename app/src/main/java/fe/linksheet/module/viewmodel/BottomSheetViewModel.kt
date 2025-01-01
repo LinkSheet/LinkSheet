@@ -14,10 +14,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
 import fe.linksheet.R
@@ -27,6 +24,7 @@ import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -115,7 +113,7 @@ class BottomSheetViewModel(
     var appListSelectedIdx = mutableIntStateOf(-1)
 
 
-    fun startPackageInfoActivity(context: Activity, info: DisplayActivityInfo): Boolean {
+    fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             this.data = Uri.parse("package:${info.packageName}")
         })
@@ -221,7 +219,7 @@ class BottomSheetViewModel(
     }
 
     suspend fun makeOpenAppIntent(
-        info: DisplayActivityInfo,
+        info: ActivityAppInfo,
         intent: Intent,
         always: Boolean = false,
         privateBrowsingBrowser: KnownBrowser? = null,
@@ -252,7 +250,7 @@ class BottomSheetViewModel(
         return viewIntent
     }
 
-    suspend fun makeOpenAppIntent(info: DisplayActivityInfo, result: Intent, modifier: ClickModifier): Intent {
+    suspend fun makeOpenAppIntent(info: ActivityAppInfo, result: Intent, modifier: ClickModifier): Intent {
         return makeOpenAppIntent(
             info,
             result,
@@ -280,7 +278,7 @@ class BottomSheetViewModel(
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         result: Intent,
-        info: DisplayActivityInfo,
+        info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
     ): Deferred<Intent?> = ioAsync {
@@ -293,7 +291,7 @@ class BottomSheetViewModel(
         isExpanded: Boolean,
         requestExpand: () -> Unit,
         result: Intent,
-        info: DisplayActivityInfo,
+        info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
     ): Intent? {

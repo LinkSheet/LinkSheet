@@ -32,6 +32,16 @@ class PackageInfoService(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val getInstalledPackages: () -> List<PackageInfo>,
 ) {
+    fun toAppInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): ActivityAppInfo {
+        val packageName = resolveInfo.activityInfo.packageName
+
+        return ActivityAppInfo(
+            activityInfo = resolveInfo.activityInfo,
+            label = findBestLabel(resolveInfo) ?: packageName,
+            icon = lazy { loadIcon(resolveInfo)?.toImageBitmap()!! }
+        )
+    }
+
     fun createDisplayActivityInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): DisplayActivityInfo {
         return DisplayActivityInfo(
             resolvedInfo = resolveInfo,

@@ -6,27 +6,27 @@ import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun AppContentRoot(
     gridLayout: Boolean,
-    apps: List<DisplayActivityInfo>,
+    apps: List<ActivityAppInfo>,
     uri: Uri?,
     appListSelectedIdx: Int,
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
     showNativeLabel: Boolean,
     showPackage: Boolean,
-    launch: (info: DisplayActivityInfo, modifier: ClickModifier) -> Unit,
+    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
     launch2: (
         index: Int,
-        info: DisplayActivityInfo,
+        info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
     ) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: DisplayActivityInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     if (gridLayout) {

@@ -1,5 +1,6 @@
 package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
+import android.app.Activity
 import android.net.Uri
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -27,21 +28,22 @@ import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import fe.linksheet.module.resolver.DisplayActivityInfo
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 
 
-data class GridItem(val info: DisplayActivityInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
+data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
     override fun toString(): String {
         return info.flatComponentName + (privateBrowsingBrowser?.hashCode() ?: -1)
     }
 }
 
 private fun createGridItems(
-    apps: List<DisplayActivityInfo>,
+    apps: List<ActivityAppInfo>,
     uri: Uri?,
-    isPrivateBrowser: (hasUri: Boolean, info: DisplayActivityInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
 ): List<GridItem> {
     val items = mutableListOf<GridItem>()
 
@@ -60,21 +62,21 @@ private fun createGridItems(
 // TODO: Grid and List are pretty similar, refactor maybe?
 @Composable
 fun AppContentGrid(
-    apps: List<DisplayActivityInfo>,
+    apps: List<ActivityAppInfo>,
     uri: Uri?,
     appListSelectedIdx: Int,
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
     showPackage: Boolean,
-    launch: (info: DisplayActivityInfo, modifier: ClickModifier) -> Unit,
+    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
     launch2: (
         index: Int,
-        info: DisplayActivityInfo,
+        info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
     ) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: DisplayActivityInfo) -> KnownBrowser?,
-    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
+    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     val items = remember(apps, uri) {
         createGridItems(apps, uri, isPrivateBrowser)
@@ -114,7 +116,7 @@ fun AppContentGrid(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun AppGridItem(
-    appInfo: DisplayActivityInfo,
+    appInfo: ActivityAppInfo,
     selected: Boolean?,
     onClick: (ClickType, ClickModifier) -> Unit,
     privateBrowser: KnownBrowser?,
@@ -140,12 +142,9 @@ private fun AppGridItem(
         verticalArrangement = Arrangement.Center
     ) {
         Box(modifier = Modifier.size(40.dp)) {
-            Image(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .size(32.dp),
-                bitmap = appInfo.icon.value,
-                contentDescription = appInfo.label
+            AppInfoIcon(
+                modifier = Modifier.align(Alignment.Center),
+                appInfo = appInfo
             )
 
             if (privateBrowser != null) {

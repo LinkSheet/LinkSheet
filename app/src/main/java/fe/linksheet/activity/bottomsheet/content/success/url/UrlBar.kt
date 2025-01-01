@@ -37,11 +37,11 @@ import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.activity.bottomsheet.BottomSheetStateController
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.intent.Intents
 import fe.linksheet.module.profile.CrossProfile
 import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.resolver.LibRedirectResult
-import fe.linksheet.module.resolver.DisplayActivityInfo
 import me.saket.unfurl.UnfurlResult
 
 @Composable
@@ -59,7 +59,7 @@ fun UrlBarWrapper(
     showToast: (Int) -> Unit,
     copyUrl: (String, String) -> Unit,
     startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
-    launchApp: (DisplayActivityInfo, Intent, ClickModifier) -> Unit,
+    launchApp: (ActivityAppInfo, Intent, ClickModifier) -> Unit,
 ) {
     val uriString = result.uri.toString()
     val clipboardLabel = stringResource(id = R.string.generic__text_url)

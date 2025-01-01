@@ -18,9 +18,9 @@ import dev.zwander.shared.IShizukuService
 import fe.android.compose.version.AndroidVersion
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.R
-import fe.linksheet.composable.AppListItemData
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
-import fe.linksheet.module.app.PackageDomainVerificationStatus
+import fe.linksheet.module.app.AppInfo
+import fe.linksheet.module.app.DomainVerificationAppInfo
 import fe.linksheet.module.app.PackageInfoService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -55,9 +55,9 @@ class VerifiedLinkHandlersViewModel(
     val userAppFilter = MutableStateFlow(true)
     val filterMode = MutableStateFlow<FilterMode>(FilterMode.ShowAll)
     val searchQuery = MutableStateFlow("")
-    private val sorting = MutableStateFlow(AppListItemData.labelComparator)
+    private val sorting = MutableStateFlow(AppInfo.labelComparator)
 
-    private fun createDomainVerificationFlow(): Flow<PackageDomainVerificationStatus> = flow {
+    private fun createDomainVerificationFlow(): Flow<DomainVerificationAppInfo> = flow {
         val packages = packageInfoService.getInstalledPackages()
         for (packageInfo in packages) {
             val applicationInfo = packageInfo.applicationInfo ?: continue
@@ -76,7 +76,7 @@ class VerifiedLinkHandlersViewModel(
                 }
             }
 
-            val status = PackageDomainVerificationStatus(
+            val status = DomainVerificationAppInfo(
                 packageInfo.packageName,
                 label,
                 applicationInfo.flags,
@@ -92,7 +92,7 @@ class VerifiedLinkHandlersViewModel(
 
     @RequiresApi(Build.VERSION_CODES.S)
     val appsFiltered = createDomainVerificationFlow()
-        .scan(emptyList<PackageDomainVerificationStatus>()) { acc, elem -> acc + elem }
+        .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
         .flowOn(Dispatchers.IO)
         .combine(userAppFilter) { apps, userAppFilter ->
             apps.filter { !userAppFilter || it.flags !in SYSTEM_APP_FLAGS }

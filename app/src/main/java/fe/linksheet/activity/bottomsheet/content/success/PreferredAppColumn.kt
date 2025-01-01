@@ -9,13 +9,13 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppListItem
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.DisplayActivityInfo
 
 
 @Composable
 fun PreferredAppColumn(
-    appInfo: DisplayActivityInfo,
+    appInfo: ActivityAppInfo,
     privateBrowser: KnownBrowser?,
     preferred: Boolean,
     showPackage: Boolean,

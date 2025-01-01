@@ -37,33 +37,35 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.linksheet.testing.ResolveInfoMocks
+import app.linksheet.testing.ResolveInfoMocks.toAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @Composable
 fun AppContentList(
-    apps: List<DisplayActivityInfo>,
+    apps: List<ActivityAppInfo>,
     uri: Uri?,
     appListSelectedIdx: Int,
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
     showNativeLabel: Boolean,
     showPackage: Boolean,
-    launch: (info: DisplayActivityInfo, modifier: ClickModifier) -> Unit,
+    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
     launch2: (
         index: Int,
-        info: DisplayActivityInfo,
+        info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
     ) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: DisplayActivityInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     AppContent(
@@ -102,7 +104,7 @@ fun AppContentList(
 @Composable
 fun AppListItem(
     modifier: Modifier = Modifier,
-    appInfo: DisplayActivityInfo,
+    appInfo: ActivityAppInfo,
     selected: Boolean?,
     onClick: (ClickType, ClickModifier) -> Unit,
     preferred: Boolean,
@@ -167,10 +169,8 @@ fun AppListItem(
                     .weight(1f),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    bitmap = appInfo.icon.value,
-                    contentDescription = appInfo.label,
-                    modifier = Modifier.size(32.dp)
+                AppInfoIcon(
+                    appInfo = appInfo
                 )
 
                 Spacer(modifier = Modifier.width(10.dp))
@@ -221,10 +221,11 @@ fun AppListItem(
 private fun AppContentListPreview_Short() {
     val image = lazy { ImageBitmap(1, 1) }
 
+
     val apps = listOf(
-        DisplayActivityInfo(ResolveInfoMocks.youtube, "Youtube", icon = image),
-        DisplayActivityInfo(ResolveInfoMocks.duckduckgoBrowser, "DuckDuckGo", icon = image),
-        DisplayActivityInfo(ResolveInfoMocks.chromeBrowser, "Google Chrome", icon = image)
+        ResolveInfoMocks.youtube.toAppInfo("Youtube", image),
+        ResolveInfoMocks.duckduckgoBrowser.toAppInfo("DuckDuckGo", image),
+        ResolveInfoMocks.chromeBrowser.toAppInfo("Google Chrome", image)
     )
 
     AppContentList(
@@ -247,7 +248,7 @@ private fun AppContentListPreview_Short() {
 private fun AppContentListPreview_Long() {
     val image = lazy { ImageBitmap(1, 1) }
     val apps = ResolveInfoMocks.allResolved.map {
-        DisplayActivityInfo(it, it.resolvePackageName, icon = image)
+        it.toAppInfo( it.resolvePackageName, icon = image)
     }
 
     AppContentList(

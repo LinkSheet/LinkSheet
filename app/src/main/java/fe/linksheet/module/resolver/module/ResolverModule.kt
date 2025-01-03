@@ -11,7 +11,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val resolverModule = module {
-    single { BrowserResolver(get<Context>().packageManager) }
+    single { BrowserResolver(get<Context>().packageManager, get()) }
     singleOf(::BrowserHandler)
     singleOf(::ImprovedBrowserHandler)
     singleOf(::InAppBrowserHandler)

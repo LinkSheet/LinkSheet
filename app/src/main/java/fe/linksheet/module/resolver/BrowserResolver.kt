@@ -5,10 +5,15 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import fe.linksheet.extension.android.queryResolveInfosByIntent
-import fe.linksheet.extension.android.toDisplayActivityInfos
 import fe.linksheet.extension.android.toPackageKeyedMap
+import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.app.labelSorted
 
-class BrowserResolver(val packageManager: PackageManager) {
+class BrowserResolver(
+    val packageManager: PackageManager,
+    val packageInfoService: PackageInfoService,
+) {
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
         private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")
@@ -25,8 +30,11 @@ class BrowserResolver(val packageManager: PackageManager) {
         }
     }
 
-    fun queryDisplayActivityInfoBrowsers(sorted: Boolean): List<DisplayActivityInfo> {
-        return queryBrowsers().toDisplayActivityInfos(packageManager, sorted)
+    fun queryDisplayActivityInfoBrowsers(sorted: Boolean): List<ActivityAppInfo> {
+        val browsers = queryBrowsers()
+        val appInfos = browsers.map { (_, resolveInfo) -> packageInfoService.toAppInfo(resolveInfo, false) }
+
+        return appInfos.labelSorted(sorted)
     }
 
     fun queryBrowsers(): Map<String, ResolveInfo> {

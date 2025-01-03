@@ -1,6 +1,6 @@
 package fe.linksheet.module.resolver
 
-import android.content.pm.ResolveInfo
+import android.content.pm.ComponentInfo
 import androidx.compose.ui.graphics.ImageBitmap
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.module.database.entity.PreferredApp
@@ -14,7 +14,8 @@ import fe.stringbuilder.util.wrapped
 typealias DisplayActivityInfoStatus = Pair<DisplayActivityInfo, Boolean>
 
 data class DisplayActivityInfo(
-    val resolvedInfo: ResolveInfo,
+//    val resolvedInfo: ResolveInfo? = null,
+    val componentInfo: ComponentInfo,
     val label: String,
     val browser: Boolean = false,
     var icon: Lazy<ImageBitmap>,
@@ -29,11 +30,11 @@ data class DisplayActivityInfo(
         fun List<DisplayActivityInfoStatus>.sortByValueAndName() = sortedWith(valueAndLabelComparator)
     }
 
-    private val activityInfo = resolvedInfo.activityInfo
+//    private val activityInfo = componentInfo.activityInfo
 
     val compareLabel = label.lowercase()
-    val packageName: String = activityInfo.packageName
-    val componentName by lazy { activityInfo.componentName() }
+    val packageName: String = componentInfo.packageName
+    val componentName by lazy { componentInfo.componentName }
     val flatComponentName by lazy { componentName.flattenToString() }
 
 //    fun getIcon(context: Context): ImageBitmap {

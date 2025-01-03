@@ -20,6 +20,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.compose.items
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.resolver.DisplayActivityInfo
 
@@ -36,9 +37,9 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
     rowKey: (T) -> String,
     rows: List<BrowserCommonRadioButtonRowData>,
     header: @Composable (ColumnScope.() -> Unit)? = null,
-    browsers: List<DisplayActivityInfo>? = null,
+    browsers: List<ActivityAppInfo>? = null,
     selectorData: BrowserCommonPackageSelectorData<T>,
-    content: (LazyListScope.(List<DisplayActivityInfo>?) -> Unit)? = null,
+    content: (LazyListScope.(List<ActivityAppInfo>?) -> Unit)? = null,
 ) {
     SettingsScaffold(headlineId = headline, onBackPressed = onBackPressed) { padding ->
         LazyColumn(

@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.*
 import android.graphics.drawable.Drawable
+import fe.linksheet.extension.android.info
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.extension.android.toPackageKeyedMap
-import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.ResolveInfoFlags
 
 
@@ -16,7 +16,7 @@ internal fun AndroidPackageInfoModule(context: Context, iconLoader: PackageIconL
 
     return PackageInfoService(
         domainVerificationManager = domainVerificationManager,
-        loadLabel = { it.loadLabel(packageManager) },
+        loadComponentInfoLabelInternal = { it.loadLabel(packageManager) },
         getApplicationLabel = packageManager::getApplicationLabel,
         loadIcon = iconLoader::loadIcon,
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
@@ -26,34 +26,25 @@ internal fun AndroidPackageInfoModule(context: Context, iconLoader: PackageIconL
 
 class PackageInfoService(
     private val domainVerificationManager: DomainVerificationManagerCompat,
-    private val loadLabel: (ResolveInfo) -> CharSequence,
+    private val loadComponentInfoLabelInternal: (ComponentInfo) -> CharSequence,
     private val getApplicationLabel: (ApplicationInfo) -> CharSequence,
-    val loadIcon: (ResolveInfo) -> Drawable?,
+    val loadIcon: (ComponentInfo) -> Drawable?,
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val getInstalledPackages: () -> List<PackageInfo>,
 ) {
     fun toAppInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): ActivityAppInfo {
-        val packageName = resolveInfo.activityInfo.packageName
+        val info = resolveInfo.info
+        val packageName = info.packageName
 
         return ActivityAppInfo(
-            activityInfo = resolveInfo.activityInfo,
-            label = findBestLabel(resolveInfo) ?: packageName,
-            icon = lazy { loadIcon(resolveInfo)?.toImageBitmap()!! }
+            componentInfo = info,
+            label = loadComponentInfoLabel(info) ?: packageName,
+            icon = lazy { loadIcon(info)?.toImageBitmap()!! }
         )
     }
 
-    fun createDisplayActivityInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): DisplayActivityInfo {
-        return DisplayActivityInfo(
-            resolvedInfo = resolveInfo,
-            // TODO: Find a better way to do this
-            label = findBestLabel(resolveInfo) ?: resolveInfo.resolvePackageName,
-            browser = isBrowser,
-            icon = lazy { loadIcon(resolveInfo)?.toImageBitmap()!! }
-        )
-    }
-
-    fun findBestLabel(resolveInfo: ResolveInfo): String? {
-        val label = loadLabel(resolveInfo)
+    fun loadComponentInfoLabel(info: ComponentInfo): String? {
+        val label = loadComponentInfoLabelInternal(info)
         if (label.isNotEmpty()) return label.toString()
 
         return null
@@ -62,7 +53,7 @@ class PackageInfoService(
     fun findBestLabel(packageInfo: PackageInfo): String {
         val resolveInfo = getLauncherOrNull(packageInfo.packageName)
         if (resolveInfo != null) {
-            val label = findBestLabel(resolveInfo)
+            val label = loadComponentInfoLabel(resolveInfo.info)
             if (label != null) return label
         }
 

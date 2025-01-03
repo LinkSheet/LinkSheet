@@ -1,14 +1,9 @@
 package fe.linksheet.module.database.entity
 
 import android.content.ComponentName
-import android.content.Context
 import androidx.room.*
-import fe.linksheet.extension.android.queryFirstIntentActivityByPackageNameOrNull
-import fe.linksheet.extension.android.toDisplayActivityInfo
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.module.resolver.DisplayActivityInfo
-import fe.linksheet.module.resolver.PreferredDisplayActivityInfo
 import fe.stringbuilder.util.commaSeparated
 
 @Entity(
@@ -52,18 +47,6 @@ data class PreferredApp(
             )
         }
     }
-
-    fun toDisplayActivityInfo(context: Context): DisplayActivityInfo? {
-        return context.packageManager.queryFirstIntentActivityByPackageNameOrNull(pkg!!)
-            ?.toDisplayActivityInfo(context)
-    }
-
-    fun toPreferredDisplayActivityInfo(context: Context): PreferredDisplayActivityInfo? {
-        return toDisplayActivityInfo(context)?.let { info ->
-            PreferredDisplayActivityInfo(this, info)
-        }
-    }
-
 
     override fun process(builder: StringBuilder, redactor: Redactor) = builder.commaSeparated {
 //        item {

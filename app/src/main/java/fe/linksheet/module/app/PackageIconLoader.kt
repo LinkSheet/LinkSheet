@@ -1,11 +1,12 @@
 package fe.linksheet.module.app
 
 import android.app.ActivityManager
-import android.content.pm.ActivityInfo
+import android.content.pm.ComponentInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import fe.linksheet.extension.android.info
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 
@@ -22,17 +23,17 @@ internal fun PackageIconLoaderModule(packageManager: PackageManager, activityMan
 class PackageIconLoader(
     val density: Int,
     val getResourcesForApplication: (String) -> Resources,
-    private val loadActivityIcon: (ActivityInfo) -> Drawable,
+    private val loadActivityIcon: (ComponentInfo) -> Drawable,
 ) {
-    fun loadIcon(activityInfo: ActivityInfo): Drawable? {
-        val appIcon = loadApplicationIcon(activityInfo.packageName, activityInfo.iconResource)
+    fun loadIcon(componentInfo: ComponentInfo): Drawable? {
+        val appIcon = loadApplicationIcon(componentInfo.packageName, componentInfo.iconResource)
         if (appIcon != null) return appIcon
 
-        return loadActivityIcon(activityInfo)
+        return loadActivityIcon(componentInfo)
     }
 
     fun loadIcon(resolveInfo: ResolveInfo): Drawable? {
-        return loadIcon(resolveInfo.activityInfo)
+        return loadIcon(resolveInfo.info)
     }
 
     private fun loadApplicationIcon(packageName: String, resId: Int): Drawable? {

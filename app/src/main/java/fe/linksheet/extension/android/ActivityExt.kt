@@ -6,6 +6,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.StringRes
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.DisplayActivityInfo
 
 fun Activity.startActivityWithConfirmation(intent: Intent) = kotlin.runCatching {
@@ -15,6 +16,13 @@ fun Activity.startActivityWithConfirmation(intent: Intent) = kotlin.runCatching 
 
 @Deprecated(message = "Centralise this somewhere")
 fun Activity.startPackageInfoActivity(info: DisplayActivityInfo): Boolean {
+    return this.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+        this.data = Uri.parse("package:${info.packageName}")
+    })
+}
+
+@Deprecated(message = "Centralise this somewhere")
+fun Activity.startPackageInfoActivity(info: ActivityAppInfo): Boolean {
     return this.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
         this.data = Uri.parse("package:${info.packageName}")
     })

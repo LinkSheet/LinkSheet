@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
 import fe.linksheet.module.app.AppInfo
@@ -16,11 +17,11 @@ object AppInfoIconDefaults {
 }
 
 @Composable
-fun <T : AppInfo> AppInfoIcon(modifier: Modifier = Modifier, appInfo: T) {
+fun <T : AppInfo> AppInfoIcon(modifier: Modifier = Modifier, size: Dp = DefaultIconSize, appInfo: T) {
     val icon = appInfo.icon?.value
     if (icon != null) {
         Image(
-            modifier = modifier.size(DefaultIconSize),
+            modifier = modifier.size(size),
             bitmap = icon,
             contentDescription = appInfo.label,
         )

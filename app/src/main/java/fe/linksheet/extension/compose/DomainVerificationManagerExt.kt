@@ -9,7 +9,7 @@ import fe.kotlin.extension.iterable.filterIfPredicateIsNotNull
 import fe.kotlin.`typealias`.KtPredicate
 import fe.linksheet.extension.android.queryAllResolveInfos
 import fe.linksheet.extension.android.toDisplayActivityInfos
-import fe.linksheet.module.resolver.DisplayActivityInfo
+import fe.linksheet.module.app.ActivityAppInfo
 
 @RequiresApi(Build.VERSION_CODES.S)
 fun DomainVerificationManager.getAppHosts(packageName: String) = getDomainVerificationUserState(
@@ -20,7 +20,7 @@ fun DomainVerificationManager.getAppHosts(packageName: String) = getDomainVerifi
 fun DomainVerificationManager.getDisplayActivityInfos(
     context: Context,
     filter: KtPredicate<ResolveInfo>? = null
-): List<DisplayActivityInfo> {
+): List<ActivityAppInfo> {
     return context.packageManager.queryAllResolveInfos(true)
         .filterIfPredicateIsNotNull(filter)
         .toDisplayActivityInfos(context, true)

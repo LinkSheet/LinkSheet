@@ -162,7 +162,7 @@ sealed interface HashProcessor<T> {
         override fun process(stringBuilder: StringBuilder, input: DisplayActivityInfo, mac: Mac): StringBuilder {
             return stringBuilder.wrapped(Bracket.Curly) {
                 separated(Separator.Comma) {
-                    item("resolveInfo=") { ResolveInfoProcessor.process(stringBuilder, input.resolvedInfo, mac) }
+                    item("resolveInfo=") { ComponentInfoProcessor.process(stringBuilder, input.componentInfo, mac) }
 //                    item("activityInfo=") { ActivityInfoProcessor.process(stringBuilder, input.activityInfo, mac) }
                     item("label=") { StringProcessor.process(stringBuilder, input.label, mac) }
                 }
@@ -179,6 +179,17 @@ sealed interface HashProcessor<T> {
                     }
                 }
             }
+        }
+    }
+
+    data object ComponentInfoProcessor : HashProcessor<ComponentInfo> {
+        override fun process(
+            stringBuilder: StringBuilder,
+            input: ComponentInfo,
+            mac: Mac,
+        ) = stringBuilder.apply {
+            val packageName = input.packageName
+            PackageProcessor.process(this, packageName ?: "", mac)
         }
     }
 

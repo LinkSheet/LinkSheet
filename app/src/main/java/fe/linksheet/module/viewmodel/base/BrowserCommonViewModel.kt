@@ -2,8 +2,8 @@ package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
 import fe.kotlin.extension.map.filterIf
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -25,7 +25,7 @@ abstract class BrowserCommonViewModel(
         }
     }
 
-    protected open fun items(): Flow<Map<DisplayActivityInfo, Boolean>> {
+    protected open fun items(): Flow<Map<ActivityAppInfo, Boolean>> {
         return flowOfLazy { emptyMap() }
     }
 
@@ -34,4 +34,4 @@ abstract class BrowserCommonViewModel(
     }
 }
 
-typealias BrowserCommonSelected = MutableMap<DisplayActivityInfo, Boolean>
+typealias BrowserCommonSelected = MutableMap<ActivityAppInfo, Boolean>

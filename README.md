@@ -2,12 +2,11 @@
   <h1>LinkSheet</h1>
  </div>
 
-
-
 <!-- ---------- Description ---------- -->
 <div align="">
 
-LinkSheet restores the app chooser for tapped links, which was removed in Android 12 (in favor of [verified app links](https://developer.android.com/training/app-links/verify-android-applinks))
+LinkSheet attempts to re-implement the old (pre-Android 12) system link handling behavior by allowing users to choose 
+which app to open clicked links in
 
 </div>
 

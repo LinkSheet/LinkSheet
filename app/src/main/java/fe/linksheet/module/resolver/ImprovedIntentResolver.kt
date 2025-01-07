@@ -11,7 +11,7 @@ import androidx.core.content.getSystemService
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.embed.resolve.EmbedResolver
-import fe.embed.resolve.config.ConfigType
+import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.koin.injectLogger
@@ -511,12 +511,13 @@ class ImprovedIntentResolver(
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
         private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
-        private val embedResolverBundled by lazy { ConfigType.Bundled.load() }
+        private val embedResolverConfig by lazy { BundledEmbedResolveConfigLoader.load().getOrNull() }
 
         const val IntentKeyResolveRedirects = "resolve_redirects"
     }
 
     private val clearUrls = clearUrlProviders?.let { ClearUrls(it) }
+    private val embedResolver = embedResolverConfig?.let { EmbedResolver(it) }
 
     private fun runUriModifiers(
         uri: Uri?,
@@ -527,10 +528,15 @@ class ImprovedIntentResolver(
         if (uri?.host == null || uri.scheme == null) return null
         var url = uri.toString()
 
-        runUriModifier(resolveEmbeds) { EmbedResolver.resolve(url, embedResolverBundled) }?.let { url = it }
+        if (clearUrl && embedResolver == null) {
+            logger.error("embed-resolve is enabled, but config failed to load, ignoring..")
+        }
+
+        runUriModifier(resolveEmbeds) { embedResolver?.resolve(url) }?.let { url = it }
+
         runUriModifier(fastForward) { FastForward.getRuleRedirect(url) }?.let { url = it }
 
-        if(clearUrl && clearUrls == null) {
+        if (clearUrl && clearUrls == null) {
             logger.error("ClearURLs is enabled, but rules failed to load, ignoring..")
         }
         runUriModifier(clearUrl) { clearUrls?.clearUrl(url) }?.let { url = it.first }

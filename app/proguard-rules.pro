@@ -99,7 +99,7 @@
   <init>();
 }
 
--keep class fe.embed.resolve.config.** {
+-keep class fe.embed.resolve.** {
     *;
 }
 

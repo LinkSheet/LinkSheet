@@ -354,6 +354,8 @@ dependencies {
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.room.testing)
     androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
+
     debugImplementation(AndroidX.compose.ui.testManifest)
 
     testImplementation(Grrfe.std.result.assert)

@@ -184,10 +184,12 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
+        compilerOptions{
+            freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:experimentalCodeGeneration=true")
+        }
     }
 
     buildFeatures {
-        compose = true
         aidl = true
         buildConfig = true
     }

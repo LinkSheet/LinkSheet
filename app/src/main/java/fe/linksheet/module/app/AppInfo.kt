@@ -2,6 +2,7 @@ package fe.linksheet.module.app
 
 import android.content.Context
 import android.content.pm.ComponentInfo
+import android.os.Parcelable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.ImageBitmap
 import fe.kotlin.util.applyIf
@@ -9,8 +10,11 @@ import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.DisplayActivityInfo
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
-
+@Parcelize
 @Stable
 class DomainVerificationAppInfo(
     packageName: String,
@@ -22,9 +26,20 @@ class DomainVerificationAppInfo(
     val stateVerified: MutableList<String>,
 ) : AppInfo(packageName, label.toString()) {
 
-    val enabled = isLinkHandlingAllowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
-    val hostSum = stateNone.size + stateSelected.size + stateVerified.size
-//        val disabled = stateNone.isNotEmpty()
+    @IgnoredOnParcel
+    val enabled by lazy {
+        isLinkHandlingAllowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
+    }
+
+    @IgnoredOnParcel
+    val hostSum by lazy {
+        stateNone.size + stateSelected.size + stateVerified.size
+    }
+
+    @IgnoredOnParcel
+    val hostSet by lazy {
+        (stateNone + stateSelected + stateVerified).toSet()
+    }
 }
 
 typealias ActivityAppInfoStatus = Pair<ActivityAppInfo, Boolean>
@@ -55,14 +70,18 @@ object ActivityAppInfoCompat {
     }
 }
 
+@Parcelize
 @Stable
 open class ActivityAppInfo(
-    val componentInfo: ComponentInfo,
+    val componentInfo: @RawValue ComponentInfo,
     label: String,
     icon: Lazy<ImageBitmap>? = null,
 ) : AppInfo(componentInfo.packageName, label, icon) {
 
+    @IgnoredOnParcel
     val componentName by lazy { componentInfo.componentName }
+
+    @IgnoredOnParcel
     val flatComponentName by lazy { componentName.flattenToString() }
 
     companion object {
@@ -79,12 +98,15 @@ fun ActivityAppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): Pref
     )
 }
 
+@Parcelize
 @Stable
 open class AppInfo(
     val packageName: String,
     val label: String,
-    val icon: Lazy<ImageBitmap>? = null,
-) {
+    val icon: @RawValue Lazy<ImageBitmap>? = null,
+) : Parcelable {
+
+    @IgnoredOnParcel
     val compareLabel = label.lowercase()
 
     fun matches(query: String): Boolean {
@@ -105,4 +127,13 @@ open class AppInfo(
 
 fun <T : AppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {
     return applyIf(sorted) { sortedWith(AppInfo.labelComparator) }
+}
+
+fun AppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {
+    return PreferredApp.new(
+        host = host,
+        pkg = packageName,
+        cmp = null,
+        always = alwaysPreferred
+    )
 }

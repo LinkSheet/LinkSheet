@@ -2,7 +2,6 @@ package fe.linksheet.composable.page.settings.apps
 
 import android.content.res.Resources
 import android.os.Build
-import androidx.annotation.PluralsRes
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
@@ -23,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
+import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -36,18 +36,18 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.composable.util.listState
 import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRouteData.buildHostStateText
 import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRouteData.hostStateStringRes
+import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
+import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.module.viewmodel.FilterMode
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
-import fe.linksheet.module.resolver.DisplayActivityInfo
-import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import org.koin.androidx.compose.koinViewModel
 
 private object VerifiedLinkHandlersRouteData {
@@ -91,8 +91,8 @@ private object VerifiedLinkHandlersRouteData {
 
 @Stable
 data class DefaultAltStringRes(
-    @PluralsRes val default: Int,
-    @PluralsRes val alt: Int,
+    val default: Int,
+    val alt: Int,
 ) {
     fun format(resources: Resources, single: Boolean, list: List<*>): String {
         val res = if (single) alt else default
@@ -160,6 +160,8 @@ fun VerifiedLinkHandlersRoute(
 
     val context = LocalContext.current
 
+    val preferredApps by viewModel.preferredApps.collectOnIO(emptyMap())
+
     val items by viewModel.appsFiltered.collectOnIO()
     val filter by viewModel.searchQuery.collectOnIO()
     val filterMode by viewModel.filterMode.collectOnIO()
@@ -167,6 +169,12 @@ fun VerifiedLinkHandlersRoute(
     val listState = remember(items?.size, filter, linkHandlingAllowed) {
         listState(items, filter)
     }
+
+    val dialogState = rememberAppHostDialog(
+        onClose = { (info, hostStates) ->
+            viewModel.updateHostState(info, hostStates)
+        }
+    )
 
     SaneSettingsScaffold(
         topBar = {
@@ -186,9 +194,12 @@ fun VerifiedLinkHandlersRoute(
                     .padding(horizontal = SaneLazyColumnDefaults.HorizontalSpacing),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                StateFilter(selection = filterMode, onSelected = {
-                    viewModel.filterMode.value = it
-                })
+                StateFilter(
+                    selection = filterMode,
+                    onSelected = {
+                        viewModel.filterMode.value = it
+                    }
+                )
 
                 FilterChip(
                     selected = userApps,
@@ -198,15 +209,13 @@ fun VerifiedLinkHandlersRoute(
                     label = {
                         Text(text = stringResource(id = R.string.settings_verified_link_handlers__text_user_apps))
                     },
-                    leadingIcon = if (userApps) {
-                        {
-                            Icon(
-                                modifier = Modifier.size(FilterChipDefaults.IconSize),
-                                imageVector = Icons.Filled.Done,
-                                contentDescription = null,
-                            )
-                        }
-                    } else null
+                    leadingIcon = rememberOptionalContent(userApps) {
+                        Icon(
+                            modifier = Modifier.size(FilterChipDefaults.IconSize),
+                            imageVector = Icons.Filled.Done,
+                            contentDescription = null,
+                        )
+                    }
                 )
             }
 
@@ -218,19 +227,16 @@ fun VerifiedLinkHandlersRoute(
                     list = items,
                     listKey = { it.packageName }
                 ) { item, padding, shape ->
-//                    var expanded by remember { mutableStateOf(false) }
-//                    val rotation by animateFloatAsState(
-//                        targetValue = if (expanded) 180f else 0f,
-//                        label = "Arrow rotation"
-//                    )
-
                     ClickableShapeListItem(
                         padding = padding,
                         shape = shape,
                         position = ContentPosition.Leading,
                         onClick = {
-                            if (shizukuMode) postCommand(item.packageName)
-                            else openDefaultSettings(item)
+                            val preferredHosts = preferredApps[item.packageName]?.toSet() ?: emptySet()
+                            dialogState.open(AppHostDialogData(item, preferredHosts))
+
+//                            if (shizukuMode) postCommand(item.packageName)
+//                            else openDefaultSettings(item)
                         },
                         headlineContent = text(item.label),
                         supportingContent = content {
@@ -326,7 +332,7 @@ private fun StateFilter(
     // val UnselectedLabelTextColor = ColorSchemeKeyTokens.OnSurfaceVariant
     val unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
 
-    Box(modifier = Modifier) {
+    Box {
         FilterChip(
             selected = selection != FilterMode.ShowAll,
             onClick = { expanded = !expanded },
@@ -358,7 +364,7 @@ private fun StateFilter(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            FilterMode.Modes.forEach { mode ->
+            for (mode in FilterMode.Modes) {
                 DropdownMenuItem(
                     onClick = {
                         expanded = false
@@ -369,24 +375,12 @@ private fun StateFilter(
                     },
                     leadingIcon = {
                         Icon(
-//                            modifier = Modifier.size(FilterChipDefaults.IconSize),
                             imageVector = mode.icon,
                             contentDescription = null
                         )
                     }
                 )
             }
-
-//            DropdownMenuItem(
-//                text = { Text("Send Feedback") },
-//                onClick = { /* Handle send feedback! */ },
-//                leadingIcon = {
-//                    Icon(
-//                        Icons.Outlined.Email,
-//                        contentDescription = null
-//                    )
-//                },
-//                trailingIcon = { Text("F11", textAlign = TextAlign.Center) })
         }
     }
 }

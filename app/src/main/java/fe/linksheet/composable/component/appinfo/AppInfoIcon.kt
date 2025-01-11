@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import fe.composekit.component.CommonDefaults
 import fe.composekit.component.icon.AppIconImage
 import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
 import fe.linksheet.module.app.AppInfo
@@ -18,7 +17,7 @@ object AppInfoIconDefaults {
 
 @Composable
 fun <T : AppInfo> AppInfoIcon(
-    modifier: Modifier = CommonDefaults.BaseContentModifier,
+    modifier: Modifier = Modifier,
     size: Dp = DefaultIconSize,
     appInfo: T,
 ) {

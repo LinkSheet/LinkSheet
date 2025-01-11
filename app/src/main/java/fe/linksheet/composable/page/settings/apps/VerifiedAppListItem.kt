@@ -26,6 +26,7 @@ import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
+import fe.composekit.component.CommonDefaults
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
@@ -52,7 +53,10 @@ fun VerifiedAppListItem(
             ItemContent(appInfo = item)
         },
         primaryContent = {
-            AppInfoIcon(appInfo = item)
+            AppInfoIcon(
+                modifier = CommonDefaults.BaseContentModifier,
+                appInfo = item
+            )
         },
         otherContent = rememberOptionalContent(onOtherClick != null && item.linkHandling != LinkHandling.Unsupported) {
             ListItemFilledIconButton(

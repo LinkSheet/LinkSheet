@@ -536,4 +536,8 @@
     <string name="settings_main_experiment_news__text_experiment_state_updated">Niektóre eksperymenty zostały usunięte i mają domyślne zachowanie.</string>
     <string name="settings__subtitle_advanced"><![CDATA[Eksperymenty i import/eksport]]></string>
     <string name="bottom_sheet__button_manual_redirect">Śledź przekierowania</string>
+    <string name="app_host_dialog__title_hosts">Domyślne hosty</string>
+    <string name="generic__button_text_save">Zapisz</string>
+    <string name="generic__button_text_close">Zamknij</string>
+    <string name="app_host_dialog__text_no_hosts">W tej aplikacji nie ustawiono domyślnego otwierania żadnych hostów!</string>
 </resources>

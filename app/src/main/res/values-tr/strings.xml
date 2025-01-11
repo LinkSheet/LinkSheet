@@ -522,4 +522,8 @@
     <string name="settings_main_experiment_news__title_experiment_state_updated">Davranış değişiklikleri</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Bazı deneyler kaldırıldı ve artık varsayılan davranış haline geldi.</string>
     <string name="bottom_sheet__button_manual_redirect">Yönlendirmeleri takip et</string>
+    <string name="app_host_dialog__title_hosts">Varsayılan sunucular</string>
+    <string name="generic__button_text_save">Kaydet</string>
+    <string name="app_host_dialog__text_no_hosts">Bu uygulamada varsayılan olarak açılacak hiçbir sunucu ayarlanmadı!</string>
+    <string name="generic__button_text_close">Kapat</string>
 </resources>

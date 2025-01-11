@@ -522,4 +522,8 @@
     <string name="settings_main_experiment_changelog__title_changelog">Дневник на промените на експериментите</string>
     <string name="settings__subtitle_advanced"><![CDATA[Експерименти и внасяне/изнасяне]]></string>
     <string name="bottom_sheet__button_manual_redirect">Последване на пренасочвания</string>
+    <string name="app_host_dialog__title_hosts">Подразбирани хостове</string>
+    <string name="generic__button_text_save">Запазване</string>
+    <string name="generic__button_text_close">Затваряне</string>
+    <string name="app_host_dialog__text_no_hosts">Не са настроени хостове, които приложението да отваря по подразбиране!</string>
 </resources>

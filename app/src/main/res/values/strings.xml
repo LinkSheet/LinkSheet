@@ -524,4 +524,6 @@
     <string name="bottom_sheet__button_manual_redirect">Follow redirects</string>
     <string name="app_host_dialog__title_hosts">Default hosts</string>
     <string name="generic__button_text_save">Save</string>
+    <string name="app_host_dialog__text_no_hosts">No hosts have been set to open by default in this app!</string>
+    <string name="generic__button_text_close">Close</string>
 </resources>

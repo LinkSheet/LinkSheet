@@ -2,7 +2,6 @@ package fe.linksheet.composable.page.settings.browser
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
-import androidx.compose.material.icons.outlined.AppShortcut
 import androidx.compose.material.icons.outlined.OpenInBrowser
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -12,7 +11,6 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.navigation.inAppBrowserSettingsRoute
-import fe.linksheet.navigation.preferredAppsSettingsRoute
 import fe.linksheet.navigation.preferredBrowserSettingsRoute
 
 
@@ -22,18 +20,7 @@ fun NewBrowserSettingsRoute(
     navigate: (String) -> Unit,
 ) {
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.app_browsers), onBackPressed = onBackPressed) {
-        group(size = 3) {
-            item(key = R.string.default_apps) { padding, shape ->
-                DefaultTwoLineIconClickableShapeListItem(
-                    headlineContent = textContent(R.string.default_apps),
-                    supportingContent = textContent(R.string.default_apps_subtitle),
-                    icon = Icons.Outlined.AppShortcut.iconPainter,
-                    shape = shape,
-                    padding = padding,
-                    onClick = { navigate(preferredAppsSettingsRoute) }
-                )
-            }
-
+        group(size = 2) {
             item(key = R.string.browser_mode) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.browser_mode),

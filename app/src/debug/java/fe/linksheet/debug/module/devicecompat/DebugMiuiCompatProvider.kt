@@ -3,9 +3,9 @@ package fe.linksheet.debug.module.devicecompat
 import android.app.AppOpsManager
 import android.content.Context
 import androidx.core.content.getSystemService
-import fe.linksheet.module.devicecompat.MiuiCompat
-import fe.linksheet.module.devicecompat.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.RealMiuiCompat
+import fe.linksheet.module.devicecompat.miui.MiuiCompat
+import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.RealMiuiCompat
 import fe.std.lazy.resettableLazy
 
 object DebugMiuiCompatProvider : MiuiCompatProvider {

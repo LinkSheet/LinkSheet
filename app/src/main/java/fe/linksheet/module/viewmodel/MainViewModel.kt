@@ -36,8 +36,8 @@ import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.debug.DebugMenuSlotProvider
-import fe.linksheet.module.devicecompat.MiuiCompat
-import fe.linksheet.module.devicecompat.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.MiuiCompat
+import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences

@@ -1,34 +1,37 @@
 package fe.linksheet.module.app
 
-import android.content.Context
 import android.content.pm.ComponentInfo
 import android.os.Parcelable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.ImageBitmap
 import fe.kotlin.util.applyIf
 import fe.linksheet.extension.android.componentName
-import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
+enum class LinkHandling {
+    Allowed, Disallowed, Unsupported
+}
+
 @Parcelize
 @Stable
 class DomainVerificationAppInfo(
     packageName: String,
     label: CharSequence,
+    icon: Lazy<ImageBitmap>? = null,
     val flags: Int,
-    val isLinkHandlingAllowed: Boolean,
+    val linkHandling: LinkHandling,
     val stateNone: MutableList<String>,
     val stateSelected: MutableList<String>,
     val stateVerified: MutableList<String>,
-) : AppInfo(packageName, label.toString()) {
+) : AppInfo(packageName, label.toString(), icon) {
 
     @IgnoredOnParcel
     val enabled by lazy {
-        isLinkHandlingAllowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
+        linkHandling == LinkHandling.Allowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
     }
 
     @IgnoredOnParcel
@@ -120,9 +123,9 @@ open class AppInfo(
         val labelComparator = compareBy<AppInfo> { it.compareLabel }
     }
 
-    fun loadIcon(context: Context): ImageBitmap {
-        return context.packageManager.getApplicationIcon(packageName).toImageBitmap()
-    }
+//    fun loadIcon(context: Context): ImageBitmap {
+//        return context.packageManager.getApplicationIcon(packageName).toImageBitmap()
+//    }
 }
 
 fun <T : AppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {

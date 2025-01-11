@@ -1,4 +1,4 @@
-package fe.linksheet.module.devicecompat
+package fe.linksheet.module.devicecompat.miui
 
 import android.app.Activity
 import android.app.AppOpsManager
@@ -11,11 +11,6 @@ import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.util.intent.buildIntent
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
-import org.koin.dsl.module
-
-val MiuiCompatModule = module {
-    single<MiuiCompat> { get<MiuiCompatProvider>().provideCompat(get()) }
-}
 
 interface MiuiCompatProvider {
     val isXiaomiDevice: Boolean

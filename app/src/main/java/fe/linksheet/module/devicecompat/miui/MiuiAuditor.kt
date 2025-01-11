@@ -1,4 +1,4 @@
-package fe.linksheet.module.devicecompat
+package fe.linksheet.module.devicecompat.miui
 
 import android.app.AppOpsManager
 import android.app.AppOpsManagerHidden

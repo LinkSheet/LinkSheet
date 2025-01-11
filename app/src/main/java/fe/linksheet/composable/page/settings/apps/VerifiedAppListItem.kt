@@ -40,7 +40,7 @@ fun VerifiedAppListItem(
     padding: PaddingValues,
     shape: Shape,
     onClick: () -> Unit,
-    onOtherClick: () -> Unit,
+    onOtherClick: (() -> Unit)? = null,
 ) {
     ClickableShapeListItem(
         padding = padding,
@@ -54,11 +54,11 @@ fun VerifiedAppListItem(
         primaryContent = {
             AppInfoIcon(appInfo = item)
         },
-        otherContent = rememberOptionalContent(item.linkHandling != LinkHandling.Unsupported) {
+        otherContent = rememberOptionalContent(onOtherClick != null && item.linkHandling != LinkHandling.Unsupported) {
             ListItemFilledIconButton(
                 iconPainter = Icons.Outlined.Settings.iconPainter,
                 contentDescription = stringResource(id = R.string.settings),
-                onClick = onOtherClick
+                onClick = onOtherClick!!
             )
         }
     )

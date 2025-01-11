@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.settings.apps
 
+import android.os.Build
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -18,6 +19,7 @@ import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.version.AndroidVersion
 import fe.composekit.component.appbar.SearchTopAppBar
 import fe.composekit.component.list.column.SaneLazyColumnDefaults
 import fe.composekit.component.list.column.SaneLazyColumnLayout
@@ -158,12 +160,12 @@ fun VerifiedLinkHandlersRoute(
                             val preferredHosts = preferredApps[item.packageName]?.toSet() ?: emptySet()
                             dialogState.open(AppHostDialogData(item, preferredHosts))
                         },
-                        onOtherClick = {
-                            activity.startActivityWithConfirmation(
-                                viewModel.makeOpenByDefaultSettingsIntent(
-                                    item.packageName
+                        onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
+                            {
+                                activity.startActivityWithConfirmation(
+                                    viewModel.makeOpenByDefaultSettingsIntent(item.packageName)
                                 )
-                            )
+                            }
                         }
                     )
                 }

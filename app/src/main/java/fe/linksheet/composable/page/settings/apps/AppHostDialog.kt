@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
@@ -19,8 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.dialog.helper.input.InputResultDialog
 import fe.android.compose.dialog.helper.input.InputResultDialogState
 import fe.android.compose.dialog.helper.input.rememberInputResultDialog
@@ -28,6 +32,8 @@ import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
 import fe.android.compose.text.DefaultContent.Companion.text
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.DialogDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
@@ -35,6 +41,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.app.AppInfo
 import fe.linksheet.module.app.DomainVerificationAppInfo
+import fe.linksheet.module.app.LinkHandling
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -52,7 +59,7 @@ fun rememberAppHostDialog(
         }
 
         AppHostDialog(
-            hosts = info.hostSet.toTypedArray(),
+            hosts = data.states.map { it.first },
             hostState = selectedStates,
             dismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
             close = {
@@ -87,7 +94,10 @@ data class AppHostDialogData(
 
     @IgnoredOnParcel
     val states by lazy {
-        appInfo.hostSet.map { it to (it in preferredHosts) }
+        when (appInfo.linkHandling) {
+            LinkHandling.Unsupported -> preferredHosts.map { it to true }
+            else -> appInfo.hostSet.map { it to (it in preferredHosts) }
+        }
     }
 }
 
@@ -99,11 +109,13 @@ data class AppHostDialogResult(
 
 @Composable
 private fun AppHostDialog(
-    hosts: Array<String>,
+    hosts: List<String>,
     hostState: SnapshotStateMap<String, Boolean>,
     dismiss: () -> Unit,
     close: () -> Unit,
 ) {
+    val hasHosts = hosts.isNotEmpty()
+
     AlertDialog(
         icon = {
             Icon(
@@ -123,37 +135,49 @@ private fun AppHostDialog(
             DialogContent(hosts = hosts, hostState = hostState)
         },
         onDismissRequest = dismiss,
-        dismissButton = {
+        dismissButton = rememberOptionalContent(hasHosts) {
             TextButton(onClick = dismiss) {
                 Text(text = stringResource(id = R.string.generic__button_text_cancel))
             }
         },
         confirmButton = {
             TextButton(onClick = close) {
-                Text(text = stringResource(id = R.string.generic__button_text_save))
+                Text(
+                    text = stringResource(
+                        id = if (hasHosts) R.string.generic__button_text_save
+                        else R.string.generic__button_text_close
+                    )
+                )
             }
         }
     )
 }
 
 @Composable
-private fun DialogContent(hosts: Array<String>, hostState: SnapshotStateMap<String, Boolean>) {
-    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-        HorizontalDivider()
+private fun DialogContent(hosts: List<String>, hostState: SnapshotStateMap<String, Boolean>) {
+    if (hosts.isEmpty()) {
+        TextContentWrapper(
+            modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
+            textContent = textContent(R.string.app_host_dialog__text_no_hosts)
+        )
+    } else {
+        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+            HorizontalDivider()
 
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            items(items = hosts) { host ->
-                CheckboxListItem(
-                    host = host,
-                    isChecked = hostState[host]!!,
-                    onCheckedChange = {
-                        hostState[host] = it
-                    }
-                )
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                items(items = hosts, key = { it }) { host ->
+                    CheckboxListItem(
+                        host = host,
+                        isChecked = hostState[host]!!,
+                        onCheckedChange = {
+                            hostState[host] = it
+                        }
+                    )
+                }
             }
-        }
 
-        HorizontalDivider()
+            HorizontalDivider()
+        }
     }
 }
 
@@ -175,17 +199,32 @@ private fun LazyItemScope.CheckboxListItem(host: String, isChecked: Boolean, onC
     )
 }
 
+private class HostStatePreviewProvider() : PreviewParameterProvider<Map<String, Boolean>> {
+    override val values: Sequence<SnapshotStateMap<String, Boolean>> = sequenceOf(
+        mutableStateMapOf(
+            "google.com" to false,
+            "youtube.com" to true,
+            "facebook.com" to false
+        ),
+        mutableStateMapOf()
+    )
+}
+
+@Composable
+@Preview(showBackground = true)
+private fun DialogContentPreview(
+    @PreviewParameter(HostStatePreviewProvider::class) hostState: SnapshotStateMap<String, Boolean>,
+) {
+    DialogContent(hosts = hostState.keys.toList(), hostState = hostState)
+}
+
 @Composable
 @Preview
-private fun AppHostDialogPreview() {
-    val hostState = remember {
-        mutableStateMapOf<String, Boolean>(
-            "google.com" to false, "youtube.com" to true, "facebook.com" to false
-        )
-    }
-
+private fun AppHostDialogPreview(
+    @PreviewParameter(HostStatePreviewProvider::class) hostState: SnapshotStateMap<String, Boolean>,
+) {
     AppHostDialog(
-        hosts = hostState.keys.toTypedArray(),
+        hosts = hostState.keys.toList(),
         hostState = hostState,
         dismiss = {
 

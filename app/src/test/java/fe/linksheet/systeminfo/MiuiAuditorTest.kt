@@ -5,7 +5,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.linksheet.systeminfo.device.*
-import fe.linksheet.module.devicecompat.MiuiAuditor
+import fe.linksheet.module.devicecompat.miui.MiuiAuditor
 import fe.linksheet.module.systeminfo.DeviceInfo
 import fe.linksheet.module.systeminfo.SystemInfoService
 import org.junit.runner.RunWith

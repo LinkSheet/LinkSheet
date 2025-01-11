@@ -184,9 +184,10 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        compilerOptions{
-            freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:experimentalCodeGeneration=true")
-        }
+        compilerOptions.freeCompilerArgs.addAll(
+            "-Xwhen-guards",
+            "-P", "plugin:org.jetbrains.kotlin.parcelize:experimentalCodeGeneration=true"
+        )
     }
 
     buildFeatures {

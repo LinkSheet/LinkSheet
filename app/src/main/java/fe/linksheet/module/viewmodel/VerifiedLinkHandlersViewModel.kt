@@ -23,13 +23,12 @@ import fe.linksheet.module.app.DomainVerificationAppInfo
 import fe.linksheet.module.app.PackageInfoService
 import fe.linksheet.module.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.getAppOpenByDefaultIntent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -41,6 +40,7 @@ class VerifiedLinkHandlersViewModel(
     preferenceRepository: AppPreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val packageInfoService: PackageInfoService,
+    private val intentCompat: SamsungIntentCompat
 ) : BaseViewModel(preferenceRepository) {
 
     val lastEmitted = MutableStateFlow(0L)
@@ -79,7 +79,6 @@ class VerifiedLinkHandlersViewModel(
             replay = 1
         )
 
-    @RequiresApi(Build.VERSION_CODES.S)
     val appsFiltered = packageInfoService.getDomainVerificationAppInfos()
         .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
         .flowOn(Dispatchers.IO)
@@ -113,13 +112,8 @@ class VerifiedLinkHandlersViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    fun makeOpenByDefaultSettingsIntent(activityInfo: DisplayActivityInfo): Intent {
-        return makeOpenByDefaultSettingsIntent(activityInfo.packageName)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
     fun makeOpenByDefaultSettingsIntent(packageName: String): Intent {
-        return getAppOpenByDefaultIntent(packageName)
+        return intentCompat.createAppOpenByDefaultSettingsIntent(packageName)
     }
 
     fun <T> postShizukuCommand(delay: Long, command: IShizukuService.() -> T) {

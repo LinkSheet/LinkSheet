@@ -6,8 +6,8 @@ import android.widget.Toast
 import com.google.gson.Gson
 import fe.linksheet.R
 import fe.linksheet.module.systeminfo.SystemInfoService
-import fe.linksheet.module.devicecompat.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.MiuiAuditor
+import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.MiuiAuditor
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.shizuku.ShizukuCommand

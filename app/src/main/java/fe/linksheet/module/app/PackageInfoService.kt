@@ -8,12 +8,12 @@ import android.graphics.drawable.Drawable
 import fe.linksheet.extension.android.info
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.extension.android.toPackageKeyedMap
+import fe.linksheet.module.app.domain.DomainVerificationManagerCompat
+import fe.linksheet.module.app.domain.VerificationState
+import fe.linksheet.module.app.domain.VerificationStateCompat
 import fe.linksheet.util.ResolveInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.iterator
 
 
 internal fun AndroidPackageInfoModule(context: Context, iconLoader: PackageIconLoader): PackageInfoService {
@@ -25,6 +25,7 @@ internal fun AndroidPackageInfoModule(context: Context, iconLoader: PackageIconL
         loadComponentInfoLabelInternal = { it.loadLabel(packageManager) },
         getApplicationLabel = packageManager::getApplicationLabel,
         loadIcon = iconLoader::loadIcon,
+        loadApplicationIcon = iconLoader::loadApplicationIcon,
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
         getInstalledPackages = packageManager::getInstalledPackagesCompat,
     )
@@ -34,7 +35,8 @@ class PackageInfoService(
     private val domainVerificationManager: DomainVerificationManagerCompat,
     private val loadComponentInfoLabelInternal: (ComponentInfo) -> CharSequence,
     private val getApplicationLabel: (ApplicationInfo) -> CharSequence,
-    val loadIcon: (ComponentInfo) -> Drawable?,
+    val loadIcon: (ComponentInfo) -> Drawable,
+    val loadApplicationIcon: (ApplicationInfo) -> Drawable,
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val getInstalledPackages: () -> List<PackageInfo>,
 ) {
@@ -45,7 +47,7 @@ class PackageInfoService(
         return ActivityAppInfo(
             componentInfo = info,
             label = loadComponentInfoLabel(info) ?: packageName,
-            icon = lazy { loadIcon(info)?.toImageBitmap()!! }
+            icon = lazy { loadIcon(info).toImageBitmap() }
         )
     }
 
@@ -73,11 +75,8 @@ class PackageInfoService(
         return applicationInfo.packageName
     }
 
-    fun getVerificationState(applicationInfo: ApplicationInfo): VerificationState? {
-        val state = domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
-        if (state?.hostToStateMap?.isEmpty() == true) return null
-
-        return state
+    fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
+        return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
     }
 
     companion object {
@@ -113,19 +112,28 @@ class PackageInfoService(
             val stateSelected = mutableListOf<String>()
             val stateVerified = mutableListOf<String>()
 
-            for ((domain, state) in verificationState.hostToStateMap) {
-                when (state) {
-                    DomainVerificationUserState.DOMAIN_STATE_NONE -> stateNone.add(domain)
-                    DomainVerificationUserState.DOMAIN_STATE_SELECTED -> stateSelected.add(domain)
-                    DomainVerificationUserState.DOMAIN_STATE_VERIFIED -> stateVerified.add(domain)
+            if (verificationState is VerificationState) {
+                for ((domain, state) in verificationState.hostToStateMap) {
+                    when (state) {
+                        DomainVerificationUserState.DOMAIN_STATE_NONE -> stateNone.add(domain)
+                        DomainVerificationUserState.DOMAIN_STATE_SELECTED -> stateSelected.add(domain)
+                        DomainVerificationUserState.DOMAIN_STATE_VERIFIED -> stateVerified.add(domain)
+                    }
                 }
+            }
+
+            val linkHandling = when (verificationState) {
+                is VerificationState if verificationState.isLinkHandlingAllowed -> LinkHandling.Allowed
+                is VerificationState -> LinkHandling.Disallowed
+                else -> LinkHandling.Unsupported
             }
 
             val status = DomainVerificationAppInfo(
                 packageInfo.packageName,
                 label,
+                lazy { loadApplicationIcon(applicationInfo).toImageBitmap() },
                 applicationInfo.flags,
-                verificationState.isLinkHandlingAllowed,
+                linkHandling,
                 stateNone,
                 stateSelected,
                 stateVerified

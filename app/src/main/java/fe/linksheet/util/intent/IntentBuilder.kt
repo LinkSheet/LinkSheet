@@ -8,7 +8,7 @@ inline fun buildIntent(
     action: String? = null,
     uri: Uri? = null,
     componentName: ComponentName? = null,
-    block: Intent.() -> Unit,
+    block: Intent.() -> Unit = {},
 ): Intent {
     val intent = Intent(action, uri)
     if (componentName != null) {

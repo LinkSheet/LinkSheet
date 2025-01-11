@@ -1,7 +1,5 @@
 package fe.linksheet.composable.component.appinfo
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -9,6 +7,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import fe.composekit.component.CommonDefaults
+import fe.composekit.component.icon.AppIconImage
 import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
 import fe.linksheet.module.app.AppInfo
 
@@ -17,13 +17,18 @@ object AppInfoIconDefaults {
 }
 
 @Composable
-fun <T : AppInfo> AppInfoIcon(modifier: Modifier = Modifier, size: Dp = DefaultIconSize, appInfo: T) {
+fun <T : AppInfo> AppInfoIcon(
+    modifier: Modifier = CommonDefaults.BaseContentModifier,
+    size: Dp = DefaultIconSize,
+    appInfo: T,
+) {
     val icon = appInfo.icon?.value
     if (icon != null) {
-        Image(
-            modifier = modifier.size(size),
+        AppIconImage(
+            modifier = modifier,
+            size = size,
             bitmap = icon,
-            contentDescription = appInfo.label,
+            label = appInfo.label,
         )
     }
 }
@@ -35,5 +40,8 @@ private fun AppInfoIconPreview() {
         lazy { ImageBitmap(32, 32) }
     }
 
-    AppInfoIcon(appInfo = AppInfo(packageName = "fe.linksheet", label = "LinkSheet", icon = icon))
+    AppInfoIcon(
+        modifier = Modifier,
+        appInfo = AppInfo(packageName = "fe.linksheet", label = "LinkSheet", icon = icon)
+    )
 }

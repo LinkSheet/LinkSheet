@@ -2,7 +2,7 @@ package fe.linksheet.debug.module.viewmodel
 
 import androidx.lifecycle.ViewModel
 import fe.linksheet.debug.module.devicecompat.DebugMiuiCompatProvider
-import fe.linksheet.module.devicecompat.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 
 class DebugViewModel(
     val miuiCompatProvider: MiuiCompatProvider,

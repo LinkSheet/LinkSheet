@@ -19,7 +19,6 @@ import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
 import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.page.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.page.settings.apps.PretendToBeAppSettingsRoute
-import fe.linksheet.composable.page.settings.apps.preferred.PreferredAppSettingsRoute
 import fe.linksheet.composable.page.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.page.settings.bottomsheet.ProfileSwitchingSettingsRoute
 import fe.linksheet.composable.page.settings.browser.NewBrowserSettingsRoute
@@ -74,7 +73,6 @@ import fe.linksheet.navigation.loadDumpedPreferences
 import fe.linksheet.navigation.logTextViewerSettingsRoute
 import fe.linksheet.navigation.logViewerSettingsRoute
 import fe.linksheet.navigation.notificationSettingsRoute
-import fe.linksheet.navigation.preferredAppsSettingsRoute
 import fe.linksheet.navigation.preferredBrowserSettingsRoute
 import fe.linksheet.navigation.pretendToBeAppRoute
 import fe.linksheet.navigation.privacySettingsRoute
@@ -249,15 +247,15 @@ fun MainNavHost(
             NewInAppBrowserSettingsDisableInSelectedRoute(onBackPressed = onBackPressed)
         }
 
-        animatedComposable(route = preferredAppsSettingsRoute) {
-            PreferredAppSettingsRoute(onBackPressed = onBackPressed)
+//        animatedComposable(route = preferredAppsSettingsRoute) {
+//            PreferredAppSettingsRoute(onBackPressed = onBackPressed)
+//        }
+
+        animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
+            VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
         }
 
         if (AndroidVersion.AT_LEAST_API_31_S) {
-            animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
-                VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
-            }
-
             animatedComposable(route = pretendToBeAppRoute) {
                 PretendToBeAppSettingsRoute(onBackPressed = onBackPressed)
             }

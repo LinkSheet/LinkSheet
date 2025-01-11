@@ -146,13 +146,11 @@ fun NewSettingsRoute(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
-        if (AndroidVersion.AT_LEAST_API_31_S) {
-            item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
-                RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
-            }
-
-            divider(id = R.string.customization)
+        item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
+            RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
         }
+
+        divider(id = R.string.customization)
 
         group(array = NewSettingsRouteData.customization) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)

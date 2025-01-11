@@ -7,6 +7,7 @@ interface BuildConstants {
     val fingerprint: String
     val release: String
     val model: String
+    val sdk: Int
 }
 
 object StaticBuildConstants : BuildConstants {
@@ -14,6 +15,7 @@ object StaticBuildConstants : BuildConstants {
     override val fingerprint: String = Build.FINGERPRINT
     override val release: String = Build.VERSION.RELEASE
     override val model: String = Build.MODEL
+    override val sdk: Int = Build.VERSION.SDK_INT
 }
 
 class InjectedBuildConstants(
@@ -28,4 +30,5 @@ class InjectedBuildConstants(
     )!!,
     override val release: String = properties.get("ro.build.version.release")!!,
     override val model: String = properties.firstNotNullOrNull("ro.product.model", "ro.product.system.model")!!,
+    override val sdk: Int = properties.get("ro.build.sdk")?.toInt() ?: 0
 ) : BuildConstants

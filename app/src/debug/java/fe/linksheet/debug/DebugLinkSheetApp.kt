@@ -6,7 +6,7 @@ import fe.linksheet.debug.module.devicecompat.DebugMiuiCompatProvider
 import fe.linksheet.debug.module.viewmodel.module.DebugViewModelModule
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
-import fe.linksheet.module.devicecompat.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -15,7 +15,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
         return super.provideKoinModules() + DebugViewModelModule
     }
 
-    override fun provideMiuiCompatProvider(): Module {
+    override fun provideCompatProvider(): Module {
         return module {
             single<MiuiCompatProvider> { DebugMiuiCompatProvider }
         }

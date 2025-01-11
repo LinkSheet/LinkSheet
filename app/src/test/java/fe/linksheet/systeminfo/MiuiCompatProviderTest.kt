@@ -3,7 +3,7 @@ package fe.linksheet.systeminfo
 import assertk.assertThat
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
-import fe.linksheet.module.devicecompat.RealMiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
 import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.systeminfo.device.*
 import kotlin.test.Test

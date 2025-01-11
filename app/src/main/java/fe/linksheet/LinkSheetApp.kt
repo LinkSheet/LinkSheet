@@ -21,9 +21,11 @@ import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
-import fe.linksheet.module.devicecompat.MiuiCompatModule
-import fe.linksheet.module.devicecompat.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.RealMiuiCompatProvider
+import fe.linksheet.module.devicecompat.CompatModule
+import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
+import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
+import fe.linksheet.module.devicecompat.samsung.RealSamsungIntentCompatProvider
+import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.http.okHttpModule
 import fe.linksheet.module.http.requestModule
@@ -132,8 +134,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             preferenceRepositoryModule,
             redactorModule,
             defaultLoggerModule,
-            provideMiuiCompatProvider(),
-            MiuiCompatModule,
+            provideCompatProvider(),
+            CompatModule,
             databaseModule,
             daoModule,
             cachedRequestModule,
@@ -158,9 +160,10 @@ open class LinkSheetApp : Application(), DependencyProvider {
         )
     }
 
-    override fun provideMiuiCompatProvider(): Module {
+    override fun provideCompatProvider(): Module {
         return module {
             single<MiuiCompatProvider> { RealMiuiCompatProvider(get()) }
+            single<SamsungIntentCompatProvider> { RealSamsungIntentCompatProvider(get()) }
         }
     }
 

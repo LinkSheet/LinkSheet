@@ -529,4 +529,6 @@
     <string name="generic__button_dismiss">Zavřít</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Změny chování</string>
     <string name="bottom_sheet__button_manual_redirect">Následovat přesměrování</string>
+    <string name="generic__button_text_save">Uložit</string>
+    <string name="app_host_dialog__title_hosts">Výchozí hostitelé</string>
 </resources>

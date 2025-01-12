@@ -531,4 +531,6 @@
     <string name="bottom_sheet__button_manual_redirect">Následovat přesměrování</string>
     <string name="generic__button_text_save">Uložit</string>
     <string name="app_host_dialog__title_hosts">Výchozí hostitelé</string>
+    <string name="generic__button_text_close">Zavřít</string>
+    <string name="app_host_dialog__text_no_hosts">K výchozímu otevírání v této aplikaci nebyli nastaveni žádní hostitelé!</string>
 </resources>

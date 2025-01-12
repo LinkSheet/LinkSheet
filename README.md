@@ -1,14 +1,7 @@
-<div align="">
-  <h1>LinkSheet</h1>
- </div>
+# LinkSheet
 
-<!-- ---------- Description ---------- -->
-<div align="">
+LinkSheet attempts to re-implement the old (pre-Android 12) system link handling behavior by allowing users to choose which app to open links in
 
-LinkSheet attempts to re-implement the old (pre-Android 12) system link handling behavior by allowing users to choose 
-which app to open clicked links in
-
-</div>
 
 
 > [!IMPORTANT]

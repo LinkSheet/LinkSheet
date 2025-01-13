@@ -3,6 +3,7 @@ package fe.linksheet.composable.page.settings.apps
 import android.os.Build
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.outlined.ArrowDropDown
@@ -144,7 +145,16 @@ fun VerifiedLinkHandlersRoute(
                 )
             }
 
-            SaneLazyColumnLayout(padding = PaddingValues()) {
+            val state = rememberLazyListState()
+
+            LaunchedEffect(key1 = items) {
+//                state.scrollToItem(0)
+            }
+
+            SaneLazyColumnLayout(
+                state = state,
+                padding = PaddingValues()
+            ) {
                 listHelper(
                     noItems = R.string.no_apps_found,
                     notFound = R.string.no_such_app_found,
@@ -152,12 +162,16 @@ fun VerifiedLinkHandlersRoute(
                     list = items,
                     listKey = { it.packageName }
                 ) { item, padding, shape ->
+                    val preferredHosts = remember(preferredApps, item) {
+                        preferredApps[item.packageName]?.toSet() ?: emptySet()
+                    }
+
                     VerifiedAppListItem(
                         item = item,
                         padding = padding,
                         shape = shape,
+                        preferredHosts = preferredHosts.size,
                         onClick = {
-                            val preferredHosts = preferredApps[item.packageName]?.toSet() ?: emptySet()
                             dialogState.open(AppHostDialogData(item, preferredHosts))
                         },
                         onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {

@@ -1,10 +1,9 @@
 package fe.linksheet.composable.page.settings.apps
 
 import android.content.res.Resources
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -12,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
@@ -40,6 +38,7 @@ fun VerifiedAppListItem(
     item: DomainVerificationAppInfo,
     padding: PaddingValues,
     shape: Shape,
+    preferredHosts: Int,
     onClick: () -> Unit,
     onOtherClick: (() -> Unit)? = null,
 ) {
@@ -50,7 +49,7 @@ fun VerifiedAppListItem(
         onClick = onClick,
         headlineContent = text(item.label),
         supportingContent = content {
-            ItemContent(appInfo = item)
+            ItemContent(appInfo = item, preferredHosts = preferredHosts)
         },
         primaryContent = {
             AppInfoIcon(
@@ -69,29 +68,37 @@ fun VerifiedAppListItem(
 }
 
 @Composable
-private fun ItemContent(appInfo: DomainVerificationAppInfo) {
-    Column {
+private fun ItemContent(appInfo: DomainVerificationAppInfo, preferredHosts: Int) {
+    Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
         Text(text = appInfo.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
 
         if (appInfo.linkHandling != LinkHandling.Unsupported) {
-            Spacer(modifier = Modifier.height(5.dp))
-
-            Text(
-                text = buildHostStateText(
-                    appInfo.hostSum,
-                    stringVerified to appInfo.stateVerified,
-                    stringSelected to appInfo.stateSelected,
-                    stringNone to appInfo.stateNone,
+            Column {
+                Text(
+                    text = buildHostStateText(
+                        appInfo.hostSum,
+                        stringVerified to appInfo.stateVerified,
+                        stringSelected to appInfo.stateSelected,
+                        stringNone to appInfo.stateNone,
+                    )
                 )
-            )
 
-            Text(
-                text = stringResource(
-                    id = if (appInfo.linkHandling == LinkHandling.Allowed) R.string.settings_verified_link_handlers__text_link_handling_allowed_true
-                    else R.string.settings_verified_link_handlers__text_link_handling_allowed_false
+                Text(
+                    text = stringResource(
+                        id = if (appInfo.linkHandling == LinkHandling.Allowed) R.string.settings_verified_link_handlers__text_link_handling_allowed_true
+                        else R.string.settings_verified_link_handlers__text_link_handling_allowed_false
+                    )
                 )
-            )
+            }
         }
+
+        Text(
+            text = pluralStringResource(
+                id = R.plurals.settings_verified_link_handlers__text_app_host_default_host,
+                count = preferredHosts,
+                preferredHosts
+            ),
+        )
     }
 }
 
@@ -235,6 +242,7 @@ private fun VerifiedAppListItemPreview(
                 item = item,
                 padding = PaddingValues(),
                 shape = RoundedCornerShape(0),
+                preferredHosts = 0,
                 onClick = {},
                 onOtherClick = {}
             )

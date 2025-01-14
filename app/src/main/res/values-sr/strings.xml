@@ -529,4 +529,8 @@
     <string name="settings_main_experiment_news__title_experiment_state_updated">Промене понашања</string>
     <string name="settings__subtitle_advanced"><![CDATA[Експерименти и извоз/увоз]]></string>
     <string name="bottom_sheet__button_manual_redirect">Прати преусмеравања</string>
+    <string name="app_host_dialog__title_hosts">Подразумевани хостови</string>
+    <string name="app_host_dialog__text_no_hosts">Ниједан хост није подешен да се подразумевано отвара у овој апликацији!</string>
+    <string name="generic__button_text_save">Сачувај</string>
+    <string name="generic__button_text_close">Затвори</string>
 </resources>

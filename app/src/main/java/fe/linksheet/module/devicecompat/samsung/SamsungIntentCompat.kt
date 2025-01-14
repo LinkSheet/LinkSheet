@@ -26,9 +26,9 @@ class RealSamsungIntentCompatProvider(
         }
     }
 
-    override fun provideCompat(context: Context): SamsungIntentCompat {
-        if (!isRequired.value) DefaultSamsungIntentCompat
-        return RealSamsungIntentCompat
+    override fun provideCompat(context: Context): SamsungIntentCompat = when {
+        !isRequired.value -> DefaultSamsungIntentCompat
+        else -> RealSamsungIntentCompat
     }
 }
 

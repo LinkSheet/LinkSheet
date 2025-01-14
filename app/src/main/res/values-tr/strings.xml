@@ -526,4 +526,8 @@
     <string name="generic__button_text_save">Kaydet</string>
     <string name="app_host_dialog__text_no_hosts">Bu uygulamada varsayılan olarak açılacak hiçbir sunucu ayarlanmadı!</string>
     <string name="generic__button_text_close">Kapat</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d varsayılan sunucu</item>
+        <item quantity="other">%d varsayılan sunucu</item>
+    </plurals>
 </resources>

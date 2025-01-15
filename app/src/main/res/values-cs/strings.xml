@@ -533,4 +533,9 @@
     <string name="app_host_dialog__title_hosts">Výchozí hostitelé</string>
     <string name="generic__button_text_close">Zavřít</string>
     <string name="app_host_dialog__text_no_hosts">K výchozímu otevírání v této aplikaci nebyli nastaveni žádní hostitelé!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d výchozí hostitel</item>
+        <item quantity="few">%d výchozí hostitelé</item>
+        <item quantity="other">%d výchozích hostitelů</item>
+    </plurals>
 </resources>

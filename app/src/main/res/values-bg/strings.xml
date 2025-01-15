@@ -526,4 +526,8 @@
     <string name="generic__button_text_save">Запазване</string>
     <string name="generic__button_text_close">Затваряне</string>
     <string name="app_host_dialog__text_no_hosts">Не са настроени хостове, които приложението да отваря по подразбиране!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d подразбиран хост</item>
+        <item quantity="other">%d подразбирани хоста</item>
+    </plurals>
 </resources>

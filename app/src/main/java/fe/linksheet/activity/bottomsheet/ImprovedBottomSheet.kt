@@ -8,37 +8,26 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.fix.SheetValue
 import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
-import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
-import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
 import fe.linksheet.activity.bottomsheet.content.failure.ExperimentalFailureSheetContent
 import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.util.ReferrerHelper
@@ -221,8 +210,41 @@ class ImprovedBottomSheet(
                             result = status as IntentResolveResult.Default,
                             enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
                             enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
+                            profileSwitcher = viewModel.profileSwitcher,
+                            enableUrlCopiedToast = viewModel.urlCopiedToast(),
+                            enableDownloadStartedToast = viewModel.downloadStartedToast(),
+                            enableManualRedirect = viewModel.manualFollowRedirects(),
+                            hideAfterCopying = viewModel.hideAfterCopying(),
+                            bottomSheetNativeLabel = viewModel.bottomSheetNativeLabel(),
+                            gridLayout = viewModel.gridLayout(),
+                            appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
+                            launchApp = { app, intent, modifier ->
+                                viewModel.viewModelScope.launch {
+                                    handleLaunch(viewModel.makeOpenAppIntent(app, intent, modifier))
+                                }
+                            },
+                            launch2 = { index, info, type, modifier ->
+                                viewModel.viewModelScope.launch {
+                                    val intent = viewModel.handleClick(
+                                        activity, index, sheetState.currentValue == SheetValue.Expanded,
+                                        {  }, (status as IntentResolveResult.Default).intent, info, type, modifier
+                                    )
+
+                                    if (intent != null) {
+                                        handleLaunch(intent)
+                                    }
+                                }
+                            },
+                            copyUrl = { label, url ->
+                                viewModel.clipboardManager.setText(label, url)
+                            },
+                            startDownload = { url, downloadable ->
+                                viewModel.startDownload(activity.resources, url, downloadable)
+                            },
+                            isPrivateBrowser = ::isPrivateBrowser,
+                            showToast = ::showToast,
                             isExpanded = sheetState.currentValue == SheetValue.Expanded,
-                            requestExpand = {},
+                            requestExpand = {  },
                             controller = controller,
                             showPackage = viewModel.alwaysShowPackageName(),
                             previewUrl = viewModel.previewUrl(),
@@ -246,128 +268,6 @@ class ImprovedBottomSheet(
             }
         )
 //        }
-    }
-
-    @Composable
-    private fun BottomSheetApps(
-        result: IntentResolveResult.Default,
-        enableIgnoreLibRedirectButton: Boolean,
-        enableSwitchProfile: Boolean,
-        isExpanded: Boolean,
-        requestExpand: () -> Unit,
-        controller: BottomSheetStateController,
-        showPackage: Boolean,
-        previewUrl: Boolean,
-        hideBottomSheetChoiceButtons: Boolean,
-        urlCardDoubleTap: Boolean,
-    ) {
-        val hasUri = result.uri != null
-        val hasResolvedApps = result.resolved.isNotEmpty()
-        val hasPreferredApp = result.filteredItem != null
-
-        if (previewUrl && hasUri) {
-            UrlBarWrapper(
-                profileSwitcher = viewModel.profileSwitcher,
-                result = result,
-                enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
-                enableSwitchProfile = enableSwitchProfile,
-                enableUrlCopiedToast = viewModel.urlCopiedToast(),
-                enableDownloadStartedToast = viewModel.downloadStartedToast(),
-                enableUrlCardDoubleTap = urlCardDoubleTap,
-                enableManualRedirect = viewModel.manualFollowRedirects(),
-                hideAfterCopying = viewModel.hideAfterCopying(),
-                controller = controller,
-                showToast = { id -> showToast(id) },
-                copyUrl = { label, url ->
-                    viewModel.clipboardManager.setText(label, url)
-                },
-                startDownload = { url, downloadable ->
-                    viewModel.startDownload(activity.resources, url, downloadable)
-                },
-                launchApp = { app, intent, modifier ->
-                    viewModel.viewModelScope.launch {
-                        handleLaunch(viewModel.makeOpenAppIntent(app, intent, modifier))
-                    }
-                }
-            )
-        }
-
-        if (hasPreferredApp) {
-            val privateBrowser = isPrivateBrowser(hasUri, result.filteredItem)
-
-            PreferredAppColumn(
-                appInfo = result.filteredItem,
-                privateBrowser = privateBrowser,
-                preferred = true,
-                showPackage = showPackage,
-                hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
-                onClick = { _, modifier ->
-                    viewModel.viewModelScope.launch {
-                        handleLaunch(viewModel.makeOpenAppIntent(result.filteredItem, result.intent, modifier))
-                    }
-                }
-            )
-
-            // TODO: Not sure if this divider should be kept
-            if (hasResolvedApps) {
-                HorizontalDivider(
-                    modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 10.dp),
-                    color = MaterialTheme.colorScheme.outline.copy(0.25f)
-                )
-
-                Text(
-                    modifier = Modifier.padding(start = 15.dp),
-                    text = stringResource(id = R.string.use_a_different_app),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        } else {
-            Row(modifier = Modifier.padding(horizontal = 15.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    modifier = Modifier.weight(1f),
-                    text = stringResource(id = R.string.open_with),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                )
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-        }
-
-        if (hasResolvedApps) {
-            AppContentRoot(
-                gridLayout = viewModel.gridLayout(),
-                apps = result.resolved,
-                uri = result.uri,
-                appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
-                hasPreferredApp = hasPreferredApp,
-                hideChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
-                showPackage = showPackage,
-                isPrivateBrowser = ::isPrivateBrowser,
-                showToast = ::showToast,
-                showNativeLabel = viewModel.bottomSheetNativeLabel(),
-                launch = { info, modifier ->
-                    viewModel.viewModelScope.launch {
-                        handleLaunch(viewModel.makeOpenAppIntent(info, result.intent, modifier))
-                    }
-                },
-                launch2 = { index, info, type, modifier ->
-                    viewModel.viewModelScope.launch {
-                        val intent = viewModel.handleClick(
-                            activity, index, isExpanded,
-                            requestExpand, result.intent, info, type, modifier
-                        )
-
-                        if (intent != null) {
-                            handleLaunch(intent)
-                        }
-                    }
-                }
-            )
-        }
     }
 
     private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): KnownBrowser? {

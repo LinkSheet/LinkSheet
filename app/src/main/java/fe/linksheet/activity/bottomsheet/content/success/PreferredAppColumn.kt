@@ -1,10 +1,8 @@
 package fe.linksheet.activity.bottomsheet.content.success
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
@@ -22,7 +20,7 @@ fun PreferredAppColumn(
     hideBottomSheetChoiceButtons: Boolean,
     onClick: (ClickType, ClickModifier) -> Unit,
 ) {
-    Column {
+    Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
         AppListItem(
             appInfo = appInfo,
             selected = false,
@@ -31,8 +29,6 @@ fun PreferredAppColumn(
             privateBrowser = privateBrowser,
             showPackage = showPackage,
         )
-
-        Spacer(modifier = Modifier.height(5.dp))
 
         if (!hideBottomSheetChoiceButtons) {
             ChoiceButtons(choiceClick = onClick)

@@ -148,13 +148,10 @@ fun UrlBar(
     onDoubleClick: (() -> Unit)? = null,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 15.dp, end = 15.dp)
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         UrlCard(uri = uri, unfurlResult = unfurlResult, onDoubleClick = onDoubleClick)
-
-        Spacer(modifier = Modifier.height(5.dp))
 
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -218,12 +215,6 @@ fun UrlBar(
                 }
             }
         }
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(0.25f))
-
-        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 

@@ -32,13 +32,15 @@ fun ChoiceButtons(
             outlined = true,
             enabled = enabled,
             textId = R.string.just_once,
-            onClick = { choiceClick(ClickType.Single, ClickModifier.None) })
+            onClick = { choiceClick(ClickType.Single, ClickModifier.None) }
+        )
 
         OpenButton(
             outlined = false,
             enabled = enabled,
             textId = R.string.always,
-            onClick = { choiceClick(ClickType.Single, ClickModifier.Always) })
+            onClick = { choiceClick(ClickType.Single, ClickModifier.Always) }
+        )
     }
 }
 

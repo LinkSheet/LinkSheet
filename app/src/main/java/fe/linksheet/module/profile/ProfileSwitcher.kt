@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.CrossProfileApps
 import android.net.Uri
-import android.os.*
+import android.os.Build
+import android.os.UserHandle
+import android.os.UserHandleHidden
 import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
-import fe.linksheet.R.*
+import fe.linksheet.R.string
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.util.AndroidVersion
 import org.koin.dsl.module
@@ -21,16 +23,27 @@ val ProfileSwitcherModule = module {
         val appLabel = context.resources.getString(string.app_name)
         val crossProfileApps = context.getSystemService<CrossProfileApps>()!!
 
-        ProfileSwitcher(appLabel, crossProfileApps)
+        RealProfileSwitcher(appLabel, crossProfileApps)
     }
 }
 
-class ProfileSwitcher(
+interface ProfileSwitcher {
+    fun launchCrossProfileInteractSettings(activity: Activity): Boolean
+    fun needsSetupAtLeastR(): Boolean
+    fun needsSetup(): Boolean
+    fun switchTo(profile: CrossProfile, url: String, activity: Activity)
+    fun startOther(profile: CrossProfile, activity: Activity)
+    fun getProfiles(): List<CrossProfile>?
+    fun getProfilesInternal(): List<CrossProfile>?
+}
+
+
+class RealProfileSwitcher(
     private val appLabel: String,
     private val crossProfileApps: CrossProfileApps,
-) {
+) : ProfileSwitcher {
 
-    fun launchCrossProfileInteractSettings(activity: Activity): Boolean {
+    override fun launchCrossProfileInteractSettings(activity: Activity): Boolean {
         if (!AndroidVersion.AT_LEAST_API_30_R) return false
 
         val intent = crossProfileApps.createRequestInteractAcrossProfilesIntent()
@@ -38,35 +51,35 @@ class ProfileSwitcher(
         return true
     }
 
-    fun needsSetupAtLeastR(): Boolean {
+    override fun needsSetupAtLeastR(): Boolean {
         return if (AndroidVersion.AT_LEAST_API_30_R) needsSetup() else false
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    fun needsSetup(): Boolean {
+    override fun needsSetup(): Boolean {
         return !crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.canRequestInteractAcrossProfiles()
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    fun switchTo(profile: CrossProfile, url: String, activity: Activity) {
+    override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {
         val switchIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).setComponent(activity.componentName)
 
         crossProfileApps.startActivity(switchIntent, profile.userHandle, activity)
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
-    fun startOther(profile: CrossProfile, activity: Activity) {
+    override fun startOther(profile: CrossProfile, activity: Activity) {
         crossProfileApps.startMainActivity(activity.componentName, profile.userHandle)
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    fun getProfiles(): List<CrossProfile>? {
+    override fun getProfiles(): List<CrossProfile>? {
         if (!crossProfileApps.canInteractAcrossProfiles()) return null
         return getProfilesInternal()
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
-    fun getProfilesInternal(): List<CrossProfile>? {
+    override fun getProfilesInternal(): List<CrossProfile>? {
         return crossProfileApps.targetUserProfiles
             .takeIf { it.isNotEmpty() }
             ?.map { toCrossProfile(it) }

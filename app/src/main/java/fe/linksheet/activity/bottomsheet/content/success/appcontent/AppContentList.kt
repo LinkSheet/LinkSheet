@@ -2,7 +2,6 @@ package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -36,8 +34,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.linksheet.testing.ResolveInfoMocks
-import app.linksheet.testing.ResolveInfoMocks.toAppInfo
+import app.linksheet.testing.ResolveInfoFakes
+import app.linksheet.testing.ResolveInfoFakes.toAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
@@ -223,9 +221,9 @@ private fun AppContentListPreview_Short() {
 
 
     val apps = listOf(
-        ResolveInfoMocks.youtube.toAppInfo("Youtube", image),
-        ResolveInfoMocks.duckduckgoBrowser.toAppInfo("DuckDuckGo", image),
-        ResolveInfoMocks.chromeBrowser.toAppInfo("Google Chrome", image)
+        ResolveInfoFakes.Youtube.toAppInfo("Youtube", image),
+        ResolveInfoFakes.DuckDuckGoBrowser.toAppInfo("DuckDuckGo", image),
+        ResolveInfoFakes.ChromeBrowser.toAppInfo("Google Chrome", image)
     )
 
     AppContentList(
@@ -247,7 +245,7 @@ private fun AppContentListPreview_Short() {
 @Composable
 private fun AppContentListPreview_Long() {
     val image = lazy { ImageBitmap(1, 1) }
-    val apps = ResolveInfoMocks.allResolved.map {
+    val apps = ResolveInfoFakes.allResolved.map {
         it.toAppInfo( it.resolvePackageName, icon = image)
     }
 

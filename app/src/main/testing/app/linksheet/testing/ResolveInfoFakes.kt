@@ -2,48 +2,53 @@ package app.linksheet.testing
 
 import android.content.pm.ResolveInfo
 import androidx.compose.ui.graphics.ImageBitmap
-import fe.linksheet.extension.android.info
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.resolver.DisplayActivityInfo
 
-object ResolveInfoMocks {
-    val miBrowser = buildResolveInfoTestMock { activity, application ->
+object ResolveInfoFakes {
+    val MiBrowser = buildResolveInfoTestFake { activity, application ->
         activity.name = "com.sec.android.app.sbrowser.SBrowserLauncherActivity"
         activity.packageName = "com.mi.globalbrowser"
+        application.name = "MiBrowser"
     }
 
-    val duckduckgoBrowser = buildResolveInfoTestMock { activity, application ->
+    val DuckDuckGoBrowser = buildResolveInfoTestFake { activity, application ->
         activity.name = "com.duckduckgo.app.dispatchers.IntentDispatcherActivity"
         activity.packageName = "com.duckduckgo.mobile.android"
+        application.name = "DuckDuckGo"
     }
 
-    val youtube = buildResolveInfoTestMock { activity, application ->
+    val Youtube = buildResolveInfoTestFake { activity, application ->
         activity.name = "com.google.android.youtube.UrlActivity"
         activity.packageName = "com.google.android.youtube"
+        application.name = "Youtube"
     }
 
-    val newPipe = buildResolveInfoTestMock { activity, application ->
+    val NewPipe = buildResolveInfoTestFake { activity, application ->
         activity.name = "org.schabi.newpipe.RouterActivity"
         activity.packageName = "org.schabi.newpipe"
+        application.name = "NewPipe"
     }
 
-    val newPipeEnhanced = buildResolveInfoTestMock { activity, application ->
+    val NewPipeEnhanced = buildResolveInfoTestFake { activity, application ->
         activity.name = "org.schabi.newpipe.RouterActivity"
         activity.packageName = "InfinityLoop1309.NewPipeEnhanced"
+        application.name = "NewPipeEnhanced"
     }
 
-    val pepper = buildResolveInfoTestMock { activity, application ->
+    val Pepper = buildResolveInfoTestFake { activity, application ->
         activity.name = "com.pepper.presentation.dispatch.DispatchActivity"
         activity.packageName = "com.tippingcanoe.pepperpl"
+        application.name = "Pepper"
     }
 
-    val chromeBrowser = buildResolveInfoTestMock { activity, application ->
+    val ChromeBrowser = buildResolveInfoTestFake { activity, application ->
         activity.name = "com.google.android.apps.chrome.Main"
         activity.packageName = "com.android.chrome"
+        application.name = "Chrome"
     }
 
-    val allApps = listOf(youtube, newPipe, newPipeEnhanced, pepper)
-    val allBrowsers = listOf(miBrowser, duckduckgoBrowser, chromeBrowser)
+    val allApps = listOf(Youtube, NewPipe, NewPipeEnhanced, Pepper)
+    val allBrowsers = listOf(MiBrowser, DuckDuckGoBrowser, ChromeBrowser)
     val allResolved = allApps + allBrowsers
 
     val ResolveInfo.packageName: String
@@ -65,12 +70,11 @@ object ResolveInfoMocks {
         return listOf(*resolveInfos).toKeyedMap()
     }
 
-    fun ResolveInfo.toDisplayActivityInfo(): DisplayActivityInfo {
-        val image = lazy { ImageBitmap(1, 1) }
-        return DisplayActivityInfo(info, resolvePackageName, icon = image)
-    }
-
     fun ResolveInfo.toAppInfo(label: String, icon: Lazy<ImageBitmap>): ActivityAppInfo {
         return ActivityAppInfo(activityInfo, label, icon)
+    }
+
+    fun ResolveInfo.toAppInfo(icon: Lazy<ImageBitmap>): ActivityAppInfo {
+        return toAppInfo(activityInfo.applicationInfo.name, icon)
     }
 }

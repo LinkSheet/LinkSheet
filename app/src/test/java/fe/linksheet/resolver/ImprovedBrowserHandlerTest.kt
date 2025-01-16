@@ -8,14 +8,14 @@ import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
-import app.linksheet.testing.ResolveInfoMocks.allApps
-import app.linksheet.testing.ResolveInfoMocks.allBrowsers
-import app.linksheet.testing.ResolveInfoMocks.allResolved
-import app.linksheet.testing.ResolveInfoMocks.duckduckgoBrowser
-import app.linksheet.testing.ResolveInfoMocks.miBrowser
-import app.linksheet.testing.ResolveInfoMocks.packageSetOf
-import app.linksheet.testing.ResolveInfoMocks.toKeyedMap
-import app.linksheet.testing.ResolveInfoMocks.youtube
+import app.linksheet.testing.ResolveInfoFakes.allApps
+import app.linksheet.testing.ResolveInfoFakes.allBrowsers
+import app.linksheet.testing.ResolveInfoFakes.allResolved
+import app.linksheet.testing.ResolveInfoFakes.DuckDuckGoBrowser
+import app.linksheet.testing.ResolveInfoFakes.MiBrowser
+import app.linksheet.testing.ResolveInfoFakes.packageSetOf
+import app.linksheet.testing.ResolveInfoFakes.toKeyedMap
+import app.linksheet.testing.ResolveInfoFakes.Youtube
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
@@ -63,11 +63,11 @@ class ImprovedBrowserHandlerTest {
     fun `only list native apps, of which user has single, but no browser`() {
         val config = BrowserModeConfigHelper.None
 
-        assertThat(handler.filterBrowsers(config, emptyMap(), listOf(youtube))).isDataClassEqualTo(
+        assertThat(handler.filterBrowsers(config, emptyMap(), listOf(Youtube))).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = emptyList(),
-                apps = listOf(youtube),
+                apps = listOf(Youtube),
                 // TODO: Test returns false, is that a bug or expected behavior?
 //                isSingleOption = true,
                 noBrowsersOnlySingleApp = true
@@ -107,12 +107,12 @@ class ImprovedBrowserHandlerTest {
 
     @Test
     fun `selected browser`() {
-        val config = BrowserModeConfigHelper.SelectedBrowser(miBrowser.activityInfo.packageName)
+        val config = BrowserModeConfigHelper.SelectedBrowser(MiBrowser.activityInfo.packageName)
 
         assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.SelectedBrowser,
-                browsers = listOf(miBrowser),
+                browsers = listOf(MiBrowser),
                 apps = allApps,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
@@ -139,12 +139,12 @@ class ImprovedBrowserHandlerTest {
 
     @Test
     fun `whitelisted browsers, one selected`() {
-        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(miBrowser))
+        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(MiBrowser))
 
         assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
-                browsers = listOf(miBrowser),
+                browsers = listOf(MiBrowser),
                 apps = allApps,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
@@ -154,12 +154,12 @@ class ImprovedBrowserHandlerTest {
 
     @Test
     fun `whitelisted browsers, multiple selected`() {
-        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(miBrowser, duckduckgoBrowser))
+        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(MiBrowser, DuckDuckGoBrowser))
 
         assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
-                browsers = listOf(miBrowser, duckduckgoBrowser),
+                browsers = listOf(MiBrowser, DuckDuckGoBrowser),
                 apps = allApps,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false

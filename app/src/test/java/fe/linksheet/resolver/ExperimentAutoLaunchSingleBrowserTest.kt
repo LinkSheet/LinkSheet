@@ -9,13 +9,13 @@ import fe.linksheet.module.resolver.AutoLaunchSingleBrowserExperiment
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.browser.BrowserMode
-import app.linksheet.testing.ResolveInfoMocks.allBrowsers
-import app.linksheet.testing.ResolveInfoMocks.duckduckgoBrowser
-import app.linksheet.testing.ResolveInfoMocks.miBrowser
-import app.linksheet.testing.ResolveInfoMocks.newPipe
-import app.linksheet.testing.ResolveInfoMocks.packageName
-import app.linksheet.testing.ResolveInfoMocks.toKeyedMap
-import app.linksheet.testing.ResolveInfoMocks.youtube
+import app.linksheet.testing.ResolveInfoFakes.allBrowsers
+import app.linksheet.testing.ResolveInfoFakes.DuckDuckGoBrowser
+import app.linksheet.testing.ResolveInfoFakes.MiBrowser
+import app.linksheet.testing.ResolveInfoFakes.NewPipe
+import app.linksheet.testing.ResolveInfoFakes.packageName
+import app.linksheet.testing.ResolveInfoFakes.toKeyedMap
+import app.linksheet.testing.ResolveInfoFakes.Youtube
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
@@ -29,17 +29,17 @@ class ExperimentAutoLaunchSingleBrowserTest {
         private val whitelistedNull = BrowserModeConfigHelper.Whitelisted(null)
         private val whitelistedEmpty = BrowserModeConfigHelper.Whitelisted(emptySet())
         private val whitelistedDuckDuckGoBrowser = BrowserModeConfigHelper.Whitelisted(
-            setOf(duckduckgoBrowser.packageName)
+            setOf(DuckDuckGoBrowser.packageName)
         )
 
-        private val whitelistedMiBrowser = BrowserModeConfigHelper.Whitelisted(setOf(miBrowser.packageName))
+        private val whitelistedMiBrowser = BrowserModeConfigHelper.Whitelisted(setOf(MiBrowser.packageName))
         private val whitelistedMiDuckDuckGoBrowser = BrowserModeConfigHelper.Whitelisted(
-            setOf(duckduckgoBrowser.packageName, miBrowser.packageName)
+            setOf(DuckDuckGoBrowser.packageName, MiBrowser.packageName)
         )
 
         private val selectedNull = BrowserModeConfigHelper.SelectedBrowser(null)
-        private val selectedDuckDuckGoBrowser = BrowserModeConfigHelper.SelectedBrowser(duckduckgoBrowser.packageName)
-        private val selectedMiBrowser = BrowserModeConfigHelper.SelectedBrowser(miBrowser.packageName)
+        private val selectedDuckDuckGoBrowser = BrowserModeConfigHelper.SelectedBrowser(DuckDuckGoBrowser.packageName)
+        private val selectedMiBrowser = BrowserModeConfigHelper.SelectedBrowser(MiBrowser.packageName)
 
         val configs = listOf(
             BrowserModeConfigHelper.None,
@@ -90,7 +90,7 @@ class ExperimentAutoLaunchSingleBrowserTest {
     @Test
     fun `single browser, single app`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(config, listOf(youtube), duckduckgoBrowser.toKeyedMap())
+            AutoLaunchSingleBrowserExperiment.handle(config, listOf(Youtube), DuckDuckGoBrowser.toKeyedMap())
         }
 
         assertEach(configs) { config ->
@@ -101,7 +101,7 @@ class ExperimentAutoLaunchSingleBrowserTest {
     @Test
     fun `single browser, many apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(config, listOf(youtube, newPipe), duckduckgoBrowser.toKeyedMap())
+            AutoLaunchSingleBrowserExperiment.handle(config, listOf(Youtube, NewPipe), DuckDuckGoBrowser.toKeyedMap())
         }
 
         assertEach(configs) { config ->
@@ -112,11 +112,11 @@ class ExperimentAutoLaunchSingleBrowserTest {
     @Test
     fun `single browser, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), duckduckgoBrowser.toKeyedMap())
+            AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), DuckDuckGoBrowser.toKeyedMap())
         }
 
         assertEach(configs) { config ->
-            assertThat(runTest(config)).isValid(config.mode, duckduckgoBrowser)
+            assertThat(runTest(config)).isValid(config.mode, DuckDuckGoBrowser)
         }
     }
 
@@ -134,10 +134,10 @@ class ExperimentAutoLaunchSingleBrowserTest {
             assertThat(runTest(whitelistedMiDuckDuckGoBrowser)).isNull()
             assertThat(runTest(selectedNull)).isNull()
 
-            assertThat(runTest(whitelistedDuckDuckGoBrowser)).isValid(BrowserMode.Whitelisted, duckduckgoBrowser)
-            assertThat(runTest(whitelistedMiBrowser)).isValid(BrowserMode.Whitelisted, miBrowser)
-            assertThat(runTest(selectedDuckDuckGoBrowser)).isValid(BrowserMode.SelectedBrowser, duckduckgoBrowser)
-            assertThat(runTest(selectedMiBrowser)).isValid(BrowserMode.SelectedBrowser, miBrowser)
+            assertThat(runTest(whitelistedDuckDuckGoBrowser)).isValid(BrowserMode.Whitelisted, DuckDuckGoBrowser)
+            assertThat(runTest(whitelistedMiBrowser)).isValid(BrowserMode.Whitelisted, MiBrowser)
+            assertThat(runTest(selectedDuckDuckGoBrowser)).isValid(BrowserMode.SelectedBrowser, DuckDuckGoBrowser)
+            assertThat(runTest(selectedMiBrowser)).isValid(BrowserMode.SelectedBrowser, MiBrowser)
         }
     }
 

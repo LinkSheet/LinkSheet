@@ -528,7 +528,7 @@ class ImprovedIntentResolver(
         if (uri?.host == null || uri.scheme == null) return null
         var url = uri.toString()
 
-        if (clearUrl && embedResolver == null) {
+        if (resolveEmbeds && embedResolver == null) {
             logger.error("embed-resolve is enabled, but config failed to load, ignoring..")
         }
 

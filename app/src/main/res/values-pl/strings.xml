@@ -540,4 +540,10 @@
     <string name="generic__button_text_save">Zapisz</string>
     <string name="generic__button_text_close">Zamknij</string>
     <string name="app_host_dialog__text_no_hosts">W tej aplikacji nie ustawiono domyślnego otwierania żadnych hostów!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d domyślny host</item>
+        <item quantity="few">%d domyślne hosty</item>
+        <item quantity="many">%d domyślnych hostów</item>
+        <item quantity="other">%d domyślnych hostów</item>
+    </plurals>
 </resources>

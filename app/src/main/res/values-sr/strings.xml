@@ -533,4 +533,9 @@
     <string name="app_host_dialog__text_no_hosts">Ниједан хост није подешен да се подразумевано отвара у овој апликацији!</string>
     <string name="generic__button_text_save">Сачувај</string>
     <string name="generic__button_text_close">Затвори</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d подразумевани хост</item>
+        <item quantity="few">%d подразумевана хоста</item>
+        <item quantity="other">%d подразумеваних хостова</item>
+    </plurals>
 </resources>

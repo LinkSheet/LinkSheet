@@ -25,7 +25,8 @@ sealed class KnownBrowser(
         "org.torproject.torbrowser",
         "org.torproject.torbrowser_alpha",
         "org.mozilla.reference.browser",
-        "info.guardianproject.orfox"
+        "info.guardianproject.orfox",
+        "org.ironfoxoss.ironfox"
     ) {
         private const val EXTRA = "private_browsing_mode"
         override fun requestPrivateBrowsing(intent: Intent): Intent = intent.putExtra(EXTRA, true)

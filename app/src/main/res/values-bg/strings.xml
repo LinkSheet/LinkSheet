@@ -530,4 +530,5 @@
         <item quantity="one">%d подразбиран хост</item>
         <item quantity="other">%d подразбирани хоста</item>
     </plurals>
+    <string name="settings_verified_link_handlers__text_browser">Мрежов четец</string>
 </resources>

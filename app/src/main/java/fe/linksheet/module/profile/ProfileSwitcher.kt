@@ -37,7 +37,6 @@ interface ProfileSwitcher {
     fun getProfilesInternal(): List<CrossProfile>?
 }
 
-
 class RealProfileSwitcher(
     private val appLabel: String,
     private val crossProfileApps: CrossProfileApps,

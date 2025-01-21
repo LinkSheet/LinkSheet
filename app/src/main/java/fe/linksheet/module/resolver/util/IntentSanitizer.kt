@@ -4,7 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import mozilla.components.support.utils.SafeIntent
 
-object IntentHandler {
+object IntentSanitizer {
     private const val INV_FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS = Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
 
     fun sanitize(intent: SafeIntent, action: String, uri: Uri?, dropExtras: List<String>?): Intent {

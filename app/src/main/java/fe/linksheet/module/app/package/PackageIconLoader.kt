@@ -1,51 +1,56 @@
-package fe.linksheet.module.app
+package fe.linksheet.module.app.`package`
 
 import android.app.ActivityManager
 import android.content.pm.ApplicationInfo
 import android.content.pm.ComponentInfo
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 
-internal fun PackageIconLoaderModule(
+internal fun AndroidPackageIconLoaderModule(
     packageManager: PackageManager,
     activityManager: ActivityManager,
 ): PackageIconLoader {
-    val defaultIcon  =packageManager.defaultActivityIcon
+    val defaultIcon = packageManager.defaultActivityIcon
     val launcherLargeIconDensity = activityManager.launcherLargeIconDensity
 
-    return PackageIconLoader(
+    return DefaultPackageIconLoader(
         defaultIcon = defaultIcon,
-        density = launcherLargeIconDensity,
-        getResourcesForApplication = packageManager::getResourcesForApplication,
+        getDrawableForDensity = { packageName, resId ->
+            packageManager
+                .getResourcesForApplication(packageName)
+                .getDrawableForDensity(resId, launcherLargeIconDensity, null)
+        },
         loadActivityIcon = { it.loadIcon(packageManager) },
     )
 }
 
-class PackageIconLoader(
+interface PackageIconLoader {
+    fun loadIcon(componentInfo: ComponentInfo): Drawable
+    fun loadApplicationIcon(applicationInfo: ApplicationInfo): Drawable
+}
+
+internal class DefaultPackageIconLoader(
     val defaultIcon: Drawable,
-    val density: Int,
-    val getResourcesForApplication: (String) -> Resources,
+    val getDrawableForDensity: (String, Int) -> Drawable?,
     private val loadActivityIcon: (ComponentInfo) -> Drawable,
-) {
-    fun loadIcon(componentInfo: ComponentInfo): Drawable {
+) : PackageIconLoader {
+
+    override fun loadIcon(componentInfo: ComponentInfo): Drawable {
         val appIcon = loadApplicationIcon(componentInfo.packageName, componentInfo.iconResource)
         if (appIcon != null) return appIcon
 
         return loadActivityIcon(componentInfo)
     }
 
-    fun loadApplicationIcon(applicationInfo: ApplicationInfo): Drawable {
+    override fun loadApplicationIcon(applicationInfo: ApplicationInfo): Drawable {
         return loadApplicationIcon(applicationInfo.packageName, applicationInfo.icon) ?: defaultIcon
     }
 
     private fun loadApplicationIcon(packageName: String, resId: Int): Drawable? {
         if (resId == 0) return null
 
-        return tryCatch {
-            getResourcesForApplication(packageName).getDrawableForDensity(resId, density, null)
-        }.getOrNull()
+        return tryCatch { getDrawableForDensity(packageName, resId) }.getOrNull()
     }
 }

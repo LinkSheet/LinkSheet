@@ -13,7 +13,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
-import fe.linksheet.util.net.Darknet
+import fe.linksheet.util.web.Darknet
 import org.koin.androidx.compose.koinViewModel
 
 

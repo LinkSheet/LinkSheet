@@ -18,12 +18,12 @@ import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.app.ActivityAppInfoCompat
-import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.net.VerifiedDomainService.canHandleDomains
+import fe.linksheet.util.web.VerifiedDomainService.canHandleDomains
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
@@ -32,7 +32,7 @@ class PreferredAppSettingsViewModel(
     val context: Application,
     private val repository: PreferredAppRepository,
     preferenceRepository: AppPreferenceRepository,
-    private val packageInfoService: PackageInfoService,
+    private val packageInfoService: PackageService,
 ) : BaseViewModel(preferenceRepository) {
 
     private val domainVerificationManager by lazy {

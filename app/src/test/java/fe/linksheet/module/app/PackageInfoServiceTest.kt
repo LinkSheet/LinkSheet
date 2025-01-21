@@ -4,8 +4,12 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.ImageFakes
 import app.linksheet.testing.PackageInfoFakes
-import fe.linksheet.module.app.domain.DomainVerificationManagerCompat
-import fe.linksheet.module.app.domain.VerificationBrowserState
+import fe.linksheet.module.app.`package`.DefaultPackageBrowserService
+import fe.linksheet.module.app.`package`.DefaultPackageIconLoader
+import fe.linksheet.module.app.`package`.DefaultPackageLabelService
+import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
+import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
+import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
@@ -22,14 +26,16 @@ internal class PackageInfoServiceTest {
             VerificationBrowserState
         }
 
-        val pkgInfoService = PackageInfoService(
+        val pkgInfoService = PackageService(
             domainVerificationManager = domainVerificationManager,
-            packageLabelService = RealPackageInfoLabelService({ "" }, { "" }),
-            packageInfoLauncherService = RealPackageInfoLauncherService { intent, flags -> emptyList() },
-            packageInfoBrowserService = RealPackageInfoBrowserService { intent, flags -> emptyList() },
-            queryIntentActivities = { intent, flags -> emptyList() },
-            loadIcon = { info -> ImageFakes.EmptyDrawable },
-            loadApplicationIcon = { appInfo -> ImageFakes.EmptyDrawable },
+            packageLabelService = DefaultPackageLabelService({ "" }, { "" }),
+            packageLauncherService = DefaultPackageLauncherService { intent, flags -> emptyList() },
+            packageBrowserService = DefaultPackageBrowserService { intent, flags -> emptyList() },
+            packageIconLoader = DefaultPackageIconLoader(
+                ImageFakes.EmptyDrawable,
+                { _, _ -> ImageFakes.EmptyDrawable },
+                { ImageFakes.EmptyDrawable }
+            ),
             getInstalledPackages = { emptyList() },
         )
 

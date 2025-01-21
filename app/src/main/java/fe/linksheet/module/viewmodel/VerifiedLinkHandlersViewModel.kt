@@ -20,7 +20,7 @@ import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.app.AppInfo
 import fe.linksheet.module.app.DomainVerificationAppInfo
-import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompat
@@ -39,7 +39,7 @@ class VerifiedLinkHandlersViewModel(
     private val shizukuHandler: ShizukuHandler,
     preferenceRepository: AppPreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val packageInfoService: PackageInfoService,
+    private val packageInfoService: PackageService,
     private val intentCompat: SamsungIntentCompat
 ) : BaseViewModel(preferenceRepository) {
 

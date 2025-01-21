@@ -49,7 +49,7 @@ import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.net.UriUtil
+import fe.linksheet.util.web.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow

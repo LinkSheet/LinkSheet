@@ -10,8 +10,8 @@ import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
-import fe.linksheet.util.net.Darknet
-import fe.linksheet.util.net.HostUtil
+import fe.linksheet.util.web.Darknet
+import fe.linksheet.util.web.HostUtil
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
 

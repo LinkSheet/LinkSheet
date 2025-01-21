@@ -55,7 +55,6 @@ object ActivityAppInfoSortCompat {
         status
     }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
-
     private fun mapBrowserState(appInfo: ActivityAppInfo, pkgs: Set<String>): ActivityAppInfoStatus {
         return appInfo to (appInfo.packageName in pkgs)
     }

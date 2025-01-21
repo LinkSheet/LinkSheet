@@ -2,13 +2,23 @@ package fe.linksheet.module.app
 
 import android.content.Context
 import fe.linksheet.extension.koin.getSystemServiceOrThrow
+import fe.linksheet.module.app.`package`.AndroidPackageIconLoaderModule
+import fe.linksheet.module.app.`package`.AndroidPackageIntentHandler
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import org.koin.dsl.module
 
 val PackageModule = module {
     single {
-        PackageIconLoaderModule(get<Context>().packageManager, getSystemServiceOrThrow())
+        AndroidPackageIconLoaderModule(get<Context>().packageManager, getSystemServiceOrThrow())
     }
     single {
-        AndroidPackageInfoModule(get(), get())
+        AndroidPackageIntentHandler(
+            get<Context>().packageManager,
+            get<ExperimentRepository>().asState(Experiments.hideReferrerFromSheet)::invoke
+        )
+    }
+    single {
+        AndroidPackageServiceModule(get(), get())
     }
 }

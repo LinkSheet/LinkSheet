@@ -1,4 +1,4 @@
-package fe.linksheet.module.app
+package fe.linksheet.module.app.`package`
 
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -6,14 +6,14 @@ import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.util.ResolveInfoFlags
 import kotlin.collections.contains
 
-interface PackageInfoLauncherService {
+interface PackageLauncherService {
     fun getLauncherOrNull(packageName: String?): ResolveInfo?
     fun hasLauncher(packages: Set<String>): Pair<Set<String>, List<String>>
 }
 
-class RealPackageInfoLauncherService(
+internal class DefaultPackageLauncherService(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>
-) : PackageInfoLauncherService {
+) : PackageLauncherService {
 
     companion object {
         private val launcherIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)

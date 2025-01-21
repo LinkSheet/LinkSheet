@@ -3,7 +3,7 @@ package fe.linksheet.module.intent
 import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
-import fe.linksheet.util.net.UriUtil
+import fe.linksheet.util.web.UriUtil
 import mozilla.components.support.utils.SafeIntent
 import mozilla.components.support.utils.WebURLFinder
 

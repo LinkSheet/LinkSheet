@@ -5,7 +5,7 @@ import android.content.pm.ComponentInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -19,7 +19,7 @@ fun ResolveInfo.toAppInfo(context: Context, browser: Boolean = false): ActivityA
 }
 
 object ResolveInfoCompat : KoinComponent {
-    private val packageInfoService by inject<PackageInfoService>()
+    private val packageInfoService by inject<PackageService>()
 
     @Deprecated(message = "Use PackageDisplayInfoHelper")
     fun toAppInfo(

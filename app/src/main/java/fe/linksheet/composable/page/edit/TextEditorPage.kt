@@ -22,7 +22,7 @@ import androidx.core.widget.addTextChangedListener
 import fe.android.compose.system.rememberSystemService
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.util.net.UriUtil
+import fe.linksheet.util.web.UriUtil
 
 
 private val editorPadding = 16.dp

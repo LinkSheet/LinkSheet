@@ -1,4 +1,4 @@
-package fe.linksheet.module.app
+package fe.linksheet.module.app.`package`
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.ComponentInfo
@@ -6,16 +6,16 @@ import android.content.pm.PackageInfo
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.info
 
-interface PackageInfoLabelService {
+interface PackageLabelService {
     fun loadComponentInfoLabel(info: ComponentInfo): String?
     fun findBestLabel(packageInfo: PackageInfo, launcher: ResolveInfo?): String
     fun findApplicationLabel(applicationInfo: ApplicationInfo): String?
 }
 
-class RealPackageInfoLabelService(
+internal class DefaultPackageLabelService(
     private val loadComponentInfoLabelInternal: (ComponentInfo) -> CharSequence,
     private val getApplicationLabel: (ApplicationInfo) -> CharSequence,
-) : PackageInfoLabelService {
+) : PackageLabelService {
 
     override fun loadComponentInfoLabel(info: ComponentInfo): String? {
         val label = loadComponentInfoLabelInternal(info)

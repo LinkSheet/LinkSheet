@@ -1,63 +1,51 @@
 package fe.linksheet.module.app
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.*
 import android.content.pm.verify.domain.DomainVerificationUserState
-import android.graphics.drawable.Drawable
 import androidx.annotation.VisibleForTesting
 import fe.linksheet.extension.android.info
 import fe.linksheet.extension.android.toImageBitmap
-import fe.linksheet.module.app.domain.DomainVerificationManagerCompat
-import fe.linksheet.module.app.domain.VerificationBrowserState
-import fe.linksheet.module.app.domain.VerificationState
-import fe.linksheet.module.app.domain.VerificationStateCompat
-import fe.linksheet.util.ResolveInfoFlags
+import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
+import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
+import fe.linksheet.module.app.`package`.domain.VerificationState
+import fe.linksheet.module.app.`package`.domain.VerificationStateCompat
+import fe.linksheet.module.app.`package`.PackageBrowserService
+import fe.linksheet.module.app.`package`.PackageIconLoader
+import fe.linksheet.module.app.`package`.PackageLabelService
+import fe.linksheet.module.app.`package`.PackageLauncherService
+import fe.linksheet.module.app.`package`.DefaultPackageBrowserService
+import fe.linksheet.module.app.`package`.DefaultPackageLabelService
+import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-internal fun AndroidPackageInfoModule(context: Context, iconLoader: PackageIconLoader): PackageInfoService {
+internal fun AndroidPackageServiceModule(context: Context, packageIconLoader: PackageIconLoader): PackageService {
     val packageManager = context.packageManager
-    val domainVerificationManager = DomainVerificationManagerCompat(context)
 
-    val packageInfoLabelService = RealPackageInfoLabelService(
-        loadComponentInfoLabelInternal = { it.loadLabel(packageManager) },
-        getApplicationLabel = packageManager::getApplicationLabel,
-    )
-
-    val packageInfoLauncherService = RealPackageInfoLauncherService(
-        queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-    )
-
-    val packageInfoBrowserService = RealPackageInfoBrowserService(
-        queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-    )
-
-    return PackageInfoService(
-        domainVerificationManager = domainVerificationManager,
-        packageLabelService = packageInfoLabelService,
-        packageInfoLauncherService = packageInfoLauncherService,
-        packageInfoBrowserService = packageInfoBrowserService,
-        queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-        loadIcon = iconLoader::loadIcon,
-        loadApplicationIcon = iconLoader::loadApplicationIcon,
+    return PackageService(
+        domainVerificationManager = DomainVerificationManagerCompat(context),
+        packageLabelService = DefaultPackageLabelService(
+            loadComponentInfoLabelInternal = { it.loadLabel(packageManager) },
+            getApplicationLabel = packageManager::getApplicationLabel,
+        ),
+        packageLauncherService = DefaultPackageLauncherService(packageManager::queryIntentActivitiesCompat),
+        packageBrowserService = DefaultPackageBrowserService(packageManager::queryIntentActivitiesCompat),
+        packageIconLoader = packageIconLoader,
         getInstalledPackages = packageManager::getInstalledPackagesCompat,
     )
 }
 
-class PackageInfoService(
+class PackageService(
     private val domainVerificationManager: DomainVerificationManagerCompat,
-    private val packageLabelService: PackageInfoLabelService,
-    private val packageInfoLauncherService: PackageInfoLauncherService,
-    private val packageInfoBrowserService: PackageInfoBrowserService,
-    val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
-    val loadIcon: (ComponentInfo) -> Drawable,
-    val loadApplicationIcon: (ApplicationInfo) -> Drawable,
+    private val packageLabelService: PackageLabelService,
+    private val packageLauncherService: PackageLauncherService,
+    private val packageBrowserService: PackageBrowserService,
+    private val packageIconLoader: PackageIconLoader,
     val getInstalledPackages: () -> List<PackageInfo>,
-) : PackageInfoLabelService by packageLabelService,
-    PackageInfoLauncherService by packageInfoLauncherService,
-    PackageInfoBrowserService by packageInfoBrowserService {
+) : PackageLabelService by packageLabelService, PackageLauncherService by packageLauncherService,
+    PackageBrowserService by packageBrowserService, PackageIconLoader by packageIconLoader {
 
     fun toAppInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): ActivityAppInfo {
         val info = resolveInfo.info
@@ -66,14 +54,12 @@ class PackageInfoService(
         return ActivityAppInfo(
             componentInfo = info,
             label = loadComponentInfoLabel(info) ?: packageName,
-            icon = lazy { loadIcon(info).toImageBitmap() }
-        )
+            icon = lazy { loadIcon(info).toImageBitmap() })
     }
 
     fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
-            ?: getBrowsableResolveInfos(applicationInfo.packageName)
-                ?.takeIf { it.isNotEmpty() }
+            ?: getBrowsableResolveInfos(applicationInfo.packageName)?.takeIf { it.isNotEmpty() }
                 ?.let { VerificationBrowserState }
     }
 
@@ -84,7 +70,6 @@ class PackageInfoService(
             emit(status)
         }
     }
-
 
     @VisibleForTesting
     fun createDomainVerificationAppInfo(packageInfo: PackageInfo): DomainVerificationAppInfo? {

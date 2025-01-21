@@ -1,17 +1,17 @@
-package fe.linksheet.module.app
+package fe.linksheet.module.app.`package`
 
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import fe.linksheet.util.ResolveInfoFlags
 
-interface PackageInfoBrowserService {
+interface PackageBrowserService {
     fun getBrowsableResolveInfos(packageName: String?): Set<ResolveInfo>?
 }
 
-class RealPackageInfoBrowserService(
+internal class DefaultPackageBrowserService(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>
-) : PackageInfoBrowserService {
+) : PackageBrowserService {
 
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")

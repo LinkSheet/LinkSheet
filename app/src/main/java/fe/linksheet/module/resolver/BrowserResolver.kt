@@ -7,12 +7,12 @@ import android.net.Uri
 import fe.linksheet.extension.android.queryResolveInfosByIntent
 import fe.linksheet.extension.android.toPackageKeyedMap
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.app.PackageInfoService
+import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
 
 class BrowserResolver(
     val packageManager: PackageManager,
-    val packageInfoService: PackageInfoService,
+    val packageInfoService: PackageService,
 ) {
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")

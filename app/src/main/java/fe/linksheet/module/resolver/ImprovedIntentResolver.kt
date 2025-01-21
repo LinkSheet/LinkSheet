@@ -15,10 +15,9 @@ import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.lib.flavors.LinkSheetApp.Compat
-import fe.linksheet.module.app.PackageInfoService
-import fe.linksheet.module.app.PackageIntentHandler
+import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
+import fe.linksheet.module.app.`package`.PackageIntentHandler
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -44,7 +43,10 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
-import fe.linksheet.module.resolver.util.*
+import fe.linksheet.module.resolver.util.AppSorter
+import fe.linksheet.module.resolver.util.CustomTabHandler
+import fe.linksheet.module.resolver.util.IntentSanitizer
+import fe.linksheet.module.resolver.util.ReferrerHelper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -64,7 +66,8 @@ class ImprovedIntentResolver(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    private val packageInfoService: PackageInfoService,
+    private val packageInfoService: PackageService,
+    private val packageIntentHandler: PackageIntentHandler,
     private val downloader: Downloader,
     private val redirectUrlResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
@@ -123,16 +126,7 @@ class ImprovedIntentResolver(
     private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
     private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
-    private val hideReferrerFromSheet = experimentRepository.asState(Experiments.hideReferrerFromSheet)
     private val autoLaunchSingleBrowser = experimentRepository.asState(Experiments.autoLaunchSingleBrowser)
-
-    private val packageIntentHandler by lazy {
-        PackageIntentHandler(
-            queryIntentActivities = packageInfoService.queryIntentActivities,
-            isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
-            checkReferrerExperiment = { hideReferrerFromSheet() }
-        )
-    }
 
     private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
 
@@ -309,7 +303,7 @@ class ImprovedIntentResolver(
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, inAppBrowserSettings())
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
-        val newIntent = IntentHandler.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
+        val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(
@@ -381,7 +375,7 @@ class ImprovedIntentResolver(
     private suspend fun queryAppSelectionHistory(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: AppSelectionHistoryRepository,
-        packageInfoService: PackageInfoService,
+        packageInfoService: PackageService,
         uri: Uri?,
     ): Map<String, Long> = withContext(dispatcher) {
         val lastUsedApps = repository.getLastUsedForHostGroupedByPackage(uri)
@@ -396,7 +390,7 @@ class ImprovedIntentResolver(
     private suspend fun queryPreferredApp(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: PreferredAppRepository,
-        packageInfoService: PackageInfoService,
+        packageInfoService: PackageService,
         uri: Uri?,
     ): PreferredApp? = withContext(dispatcher) {
         val app = repository.getByHost(uri)

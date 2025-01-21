@@ -3,7 +3,7 @@ package fe.linksheet
 import android.net.Uri
 import android.net.compatHost
 import android.os.Build
-import fe.linksheet.util.net.HostUtil
+import fe.linksheet.util.web.HostUtil
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -546,4 +546,5 @@
         <item quantity="many">%d domyślnych hostów</item>
         <item quantity="other">%d domyślnych hostów</item>
     </plurals>
+    <string name="settings_verified_link_handlers__text_browser">Przeglądarka</string>
 </resources>

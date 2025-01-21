@@ -530,4 +530,5 @@
         <item quantity="one">%d varsayılan sunucu</item>
         <item quantity="other">%d varsayılan sunucu</item>
     </plurals>
+    <string name="settings_verified_link_handlers__text_browser">Tarayıcı</string>
 </resources>

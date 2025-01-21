@@ -5,6 +5,7 @@ import android.content.pm.verify.domain.DomainVerificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 
+@Deprecated(message = "No longer supported/needed")
 object VerifiedDomainService {
 
     @RequiresApi(Build.VERSION_CODES.S)

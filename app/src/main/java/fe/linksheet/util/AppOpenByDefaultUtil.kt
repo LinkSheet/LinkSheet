@@ -6,6 +6,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 
+@Deprecated(message = "Use SamsungCompat instead")
 @RequiresApi(Build.VERSION_CODES.S)
 fun getAppOpenByDefaultIntent(packageName: String): Intent {
     return if (Build.MANUFACTURER.equals("samsung", ignoreCase = true) && Build.VERSION.SDK_INT == Build.VERSION_CODES.S) {

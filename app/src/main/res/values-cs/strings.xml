@@ -538,4 +538,5 @@
         <item quantity="few">%d výchozí hostitelé</item>
         <item quantity="other">%d výchozích hostitelů</item>
     </plurals>
+    <string name="settings_verified_link_handlers__text_browser">Prohlížeč</string>
 </resources>

@@ -6,7 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.android.compose.version.AndroidVersion
 
-interface DomainVerificationManagerCompat {
+fun interface DomainVerificationManagerCompat {
     fun getDomainVerificationUserState(packageName: String): VerificationStateCompat?
 }
 
@@ -20,14 +20,14 @@ fun DomainVerificationManagerCompat(context: Context): DomainVerificationManager
     }
 }
 
-object PreApi31Impl : DomainVerificationManagerCompat {
+private object PreApi31Impl : DomainVerificationManagerCompat {
     override fun getDomainVerificationUserState(packageName: String): VerificationStateCompat? {
         return VerificationUnsupportedState
     }
 }
 
 @RequiresApi(31)
-class Api31Impl(private val domainVerificationManager: DomainVerificationManager?) : DomainVerificationManagerCompat {
+private class Api31Impl(private val domainVerificationManager: DomainVerificationManager?) : DomainVerificationManagerCompat {
 
     override fun getDomainVerificationUserState(packageName: String): VerificationStateCompat? {
         return domainVerificationManager

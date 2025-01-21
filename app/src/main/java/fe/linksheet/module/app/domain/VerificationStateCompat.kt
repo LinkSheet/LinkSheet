@@ -7,4 +7,6 @@ data class VerificationState(
     val isLinkHandlingAllowed: Boolean,
 ) : VerificationStateCompat
 
+data object VerificationBrowserState : VerificationStateCompat
+
 data object VerificationUnsupportedState : VerificationStateCompat

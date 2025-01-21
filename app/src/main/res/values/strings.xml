@@ -526,6 +526,7 @@
     <string name="generic__button_text_save">Save</string>
     <string name="app_host_dialog__text_no_hosts">No hosts have been set to open by default in this app!</string>
     <string name="generic__button_text_close">Close</string>
+    <string name="settings_verified_link_handlers__text_browser">Browser</string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="one">%d default host</item>
         <item quantity="other">%d default hosts</item>

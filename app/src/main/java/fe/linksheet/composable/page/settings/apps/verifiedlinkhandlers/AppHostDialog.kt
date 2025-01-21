@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.apps
+package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import android.os.Parcelable
 import androidx.compose.foundation.layout.Arrangement
@@ -95,7 +95,7 @@ data class AppHostDialogData(
     @IgnoredOnParcel
     val states by lazy {
         when (appInfo.linkHandling) {
-            LinkHandling.Unsupported -> preferredHosts.map { it to true }
+            LinkHandling.Unsupported, LinkHandling.Browser -> preferredHosts.map { it to true }
             else -> appInfo.hostSet.map { it to (it in preferredHosts) }
         }
     }

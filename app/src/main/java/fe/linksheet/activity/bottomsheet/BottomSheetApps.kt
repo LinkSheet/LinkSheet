@@ -13,16 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import app.linksheet.testing.ResolveInfoFakes
-import app.linksheet.testing.ResolveInfoFakes.packageName
-import app.linksheet.testing.ResolveInfoFakes.toAppInfo
+import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.listOfFirstActivityResolveInfo
+import app.linksheet.testing.packageName
+import app.linksheet.testing.toActivityAppInfo
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
@@ -190,13 +190,13 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
         PreviewState(
             filteredBrowserList = FilteredBrowserList(
                 browserMode = BrowserMode.None,
-                browsers = listOf(ResolveInfoFakes.MiBrowser),
-                apps = listOf(ResolveInfoFakes.Youtube, ResolveInfoFakes.NewPipe, ResolveInfoFakes.NewPipeEnhanced),
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe, PackageInfoFakes.NewPipeEnhanced),
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             ),
             lastChosen = PreferredApp(
-                _packageName = ResolveInfoFakes.MiBrowser.packageName,
+                _packageName = PackageInfoFakes.MiBrowser.packageInfo.packageName,
                 _component = null,
                 host = "google.com",
                 alwaysPreferred = false
@@ -208,13 +208,13 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
         PreviewState(
             filteredBrowserList = FilteredBrowserList(
                 browserMode = BrowserMode.None,
-                browsers = listOf(ResolveInfoFakes.MiBrowser),
-                apps = listOf(ResolveInfoFakes.Youtube, ResolveInfoFakes.NewPipe, ResolveInfoFakes.NewPipeEnhanced),
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe, PackageInfoFakes.NewPipeEnhanced),
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             ),
             lastChosen = PreferredApp(
-                _packageName = ResolveInfoFakes.MiBrowser.packageName,
+                _packageName = PackageInfoFakes.MiBrowser.packageName,
                 _component = null,
                 host = "google.com",
                 alwaysPreferred = false
@@ -226,13 +226,13 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
         PreviewState(
             filteredBrowserList = FilteredBrowserList(
                 browserMode = BrowserMode.None,
-                browsers = listOf(ResolveInfoFakes.MiBrowser),
-                apps = listOf(ResolveInfoFakes.Youtube, ResolveInfoFakes.NewPipe, ResolveInfoFakes.NewPipeEnhanced),
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe, PackageInfoFakes.NewPipeEnhanced),
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             ),
             lastChosen = PreferredApp(
-                _packageName = ResolveInfoFakes.MiBrowser.packageName,
+                _packageName = PackageInfoFakes.MiBrowser.packageName,
                 _component = null,
                 host = "google.com",
                 alwaysPreferred = false
@@ -270,11 +270,9 @@ private fun BottomSheetAppsPreview_Grid(
 
 @Composable
 private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean) {
-    val image = lazy { ImageBitmap(1, 1) }
-
     val appSorter = AppSorter(
         queryAndAggregateUsageStats = { _, _ -> emptyMap<String, UsageStats>() },
-        toAppInfo = { resolveInfo, browser -> resolveInfo.toAppInfo(image) }
+        toAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() }
     )
 
     val (sorted, filtered) = appSorter.sort(

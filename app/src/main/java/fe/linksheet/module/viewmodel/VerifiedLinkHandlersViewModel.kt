@@ -14,7 +14,7 @@ import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.linksheet.R
-import fe.linksheet.composable.page.settings.apps.HostState
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.HostState
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects

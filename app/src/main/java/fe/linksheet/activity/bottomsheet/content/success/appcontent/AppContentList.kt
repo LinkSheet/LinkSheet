@@ -4,44 +4,32 @@ import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.linksheet.testing.ResolveInfoFakes
-import app.linksheet.testing.ResolveInfoFakes.toAppInfo
+import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.app.ActivityAppInfo
@@ -217,13 +205,10 @@ fun AppListItem(
 @Preview(group = "AppContentList", showBackground = true)
 @Composable
 private fun AppContentListPreview_Short() {
-    val image = lazy { ImageBitmap(1, 1) }
-
-
     val apps = listOf(
-        ResolveInfoFakes.Youtube.toAppInfo("Youtube", image),
-        ResolveInfoFakes.DuckDuckGoBrowser.toAppInfo("DuckDuckGo", image),
-        ResolveInfoFakes.ChromeBrowser.toAppInfo("Google Chrome", image)
+        PackageInfoFakes.Youtube.toActivityAppInfo( ),
+        PackageInfoFakes.DuckDuckGoBrowser.toActivityAppInfo(),
+        PackageInfoFakes.ChromeBrowser.toActivityAppInfo()
     )
 
     AppContentList(
@@ -244,9 +229,8 @@ private fun AppContentListPreview_Short() {
 @Preview(group = "AppContentList", showBackground = true)
 @Composable
 private fun AppContentListPreview_Long() {
-    val image = lazy { ImageBitmap(1, 1) }
-    val apps = ResolveInfoFakes.allResolved.map {
-        it.toAppInfo( it.resolvePackageName, icon = image)
+    val apps = PackageInfoFakes.allResolved.map {
+        it.toActivityAppInfo()
     }
 
     AppContentList(

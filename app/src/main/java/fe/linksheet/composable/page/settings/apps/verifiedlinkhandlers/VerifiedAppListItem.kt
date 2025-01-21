@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.apps
+package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement
@@ -72,7 +72,7 @@ private fun ItemContent(appInfo: DomainVerificationAppInfo, preferredHosts: Int)
     Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
         Text(text = appInfo.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
 
-        if (appInfo.linkHandling != LinkHandling.Unsupported) {
+        if (appInfo.linkHandling == LinkHandling.Allowed || appInfo.linkHandling == LinkHandling.Disallowed) {
             Column {
                 Text(
                     text = buildHostStateText(
@@ -99,6 +99,10 @@ private fun ItemContent(appInfo: DomainVerificationAppInfo, preferredHosts: Int)
                 preferredHosts
             ),
         )
+
+        if (appInfo.linkHandling == LinkHandling.Browser) {
+            Text(text = stringResource(id = R.string.settings_verified_link_handlers__text_browser))
+        }
     }
 }
 
@@ -224,6 +228,26 @@ private class DomainVerificationAppInfoProvider() : PreviewParameterProvider<Lis
                 flags = 0,
                 linkHandling = LinkHandling.Unsupported,
                 stateNone = mutableStateListOf("google.com"),
+                stateSelected = mutableStateListOf(),
+                stateVerified = mutableStateListOf(),
+            )
+        ),
+        listOf(
+            DomainVerificationAppInfo(
+                packageName = "fe.linksheet",
+                label = "LinkSheet",
+                flags = 0,
+                linkHandling = LinkHandling.Unsupported,
+                stateNone = mutableStateListOf(),
+                stateSelected = mutableStateListOf(),
+                stateVerified = mutableStateListOf(),
+            ),
+            DomainVerificationAppInfo(
+                packageName = "fe.linksheet",
+                label = "LinkSheet",
+                flags = 0,
+                linkHandling = LinkHandling.Browser,
+                stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf(),
                 stateVerified = mutableStateListOf(),
             )

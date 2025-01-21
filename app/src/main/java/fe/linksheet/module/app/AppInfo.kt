@@ -13,7 +13,10 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 enum class LinkHandling {
-    Allowed, Disallowed, Unsupported
+    Browser,
+    Allowed,
+    Disallowed,
+    Unsupported
 }
 
 @Parcelize
@@ -106,7 +109,7 @@ fun ActivityAppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): Pref
 open class AppInfo(
     val packageName: String,
     val label: String,
-    val icon: @RawValue Lazy<ImageBitmap>? = null,
+    @IgnoredOnParcel val icon: Lazy<ImageBitmap>? = null,
 ) : Parcelable {
 
     @IgnoredOnParcel
@@ -122,10 +125,6 @@ open class AppInfo(
     companion object {
         val labelComparator = compareBy<AppInfo> { it.compareLabel }
     }
-
-//    fun loadIcon(context: Context): ImageBitmap {
-//        return context.packageManager.getApplicationIcon(packageName).toImageBitmap()
-//    }
 }
 
 fun <T : AppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {

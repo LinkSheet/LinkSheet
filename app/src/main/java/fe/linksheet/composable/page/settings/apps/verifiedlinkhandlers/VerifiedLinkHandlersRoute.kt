@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.apps
+package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import android.os.Build
 import androidx.compose.animation.core.animateFloatAsState

@@ -2,20 +2,16 @@ package fe.linksheet.resolver
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.listOfFirstActivityResolveInfo
+import app.linksheet.testing.packageSetOf
+import app.linksheet.testing.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
-import app.linksheet.testing.ResolveInfoFakes.allApps
-import app.linksheet.testing.ResolveInfoFakes.allBrowsers
-import app.linksheet.testing.ResolveInfoFakes.allResolved
-import app.linksheet.testing.ResolveInfoFakes.DuckDuckGoBrowser
-import app.linksheet.testing.ResolveInfoFakes.MiBrowser
-import app.linksheet.testing.ResolveInfoFakes.packageSetOf
-import app.linksheet.testing.ResolveInfoFakes.toKeyedMap
-import app.linksheet.testing.ResolveInfoFakes.Youtube
 import org.junit.After
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
@@ -24,20 +20,30 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class ImprovedBrowserHandlerTest {
+internal class ImprovedBrowserHandlerTest {
     companion object {
         private val handler = ImprovedBrowserHandler()
+        private val allBrowsersKeyed = PackageInfoFakes.allBrowsers.toKeyedMap()
+        private val allAppsInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allApps)
+        private val allBrowsersInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allBrowsers)
+        private val allResolvedInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allResolved)
     }
 
     @Test
     fun `always ask user which browser to choose`() {
         val config = BrowserModeConfigHelper.AlwaysAsk
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(
+                config,
+                allBrowsersKeyed,
+                allResolvedInfoList
+            )
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.AlwaysAsk,
-                browsers = allBrowsers,
-                apps = allApps,
+                browsers = allBrowsersInfoList,
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -48,11 +54,13 @@ class ImprovedBrowserHandlerTest {
     fun `only list native apps`() {
         val config = BrowserModeConfigHelper.None
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = emptyList(),
-                apps = allApps,
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -63,11 +71,14 @@ class ImprovedBrowserHandlerTest {
     fun `only list native apps, of which user has single, but no browser`() {
         val config = BrowserModeConfigHelper.None
 
-        assertThat(handler.filterBrowsers(config, emptyMap(), listOf(Youtube))).isDataClassEqualTo(
+        val youtube = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube)
+        assertThat(
+            handler.filterBrowsers(config, emptyMap(), youtube)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = emptyList(),
-                apps = listOf(Youtube),
+                apps = youtube,
                 // TODO: Test returns false, is that a bug or expected behavior?
 //                isSingleOption = true,
                 noBrowsersOnlySingleApp = true
@@ -79,11 +90,17 @@ class ImprovedBrowserHandlerTest {
     fun `only list native apps, of which user has multiple`() {
         val config = BrowserModeConfigHelper.None
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(
+                config,
+                allBrowsersKeyed,
+                allResolvedInfoList
+            )
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = emptyList(),
-                apps = allApps,
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -94,11 +111,13 @@ class ImprovedBrowserHandlerTest {
     fun `selected browser, but none specified`() {
         val config = BrowserModeConfigHelper.SelectedBrowser(null)
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.SelectedBrowser,
                 browsers = emptyList(),
-                apps = allApps,
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -107,13 +126,15 @@ class ImprovedBrowserHandlerTest {
 
     @Test
     fun `selected browser`() {
-        val config = BrowserModeConfigHelper.SelectedBrowser(MiBrowser.activityInfo.packageName)
+        val config = BrowserModeConfigHelper.SelectedBrowser(PackageInfoFakes.MiBrowser.packageInfo.packageName)
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.SelectedBrowser,
-                browsers = listOf(MiBrowser),
-                apps = allApps,
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -124,13 +145,15 @@ class ImprovedBrowserHandlerTest {
     fun `whitelisted browsers, but none selected`() {
         val config = BrowserModeConfigHelper.Whitelisted(null)
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
                 // TODO: If no browsers are whitelisted, currently all browsers are returned; Do we actually want this behavior?
 //                browsers = emptyList(),
-                browsers = allBrowsers,
-                apps = allApps,
+                browsers = allBrowsersInfoList,
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -139,13 +162,15 @@ class ImprovedBrowserHandlerTest {
 
     @Test
     fun `whitelisted browsers, one selected`() {
-        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(MiBrowser))
+        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(PackageInfoFakes.MiBrowser))
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
-                browsers = listOf(MiBrowser),
-                apps = allApps,
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )
@@ -154,13 +179,23 @@ class ImprovedBrowserHandlerTest {
 
     @Test
     fun `whitelisted browsers, multiple selected`() {
-        val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(MiBrowser, DuckDuckGoBrowser))
+        val config = BrowserModeConfigHelper.Whitelisted(
+            packageSetOf(
+                PackageInfoFakes.MiBrowser,
+                PackageInfoFakes.DuckDuckGoBrowser
+            )
+        )
 
-        assertThat(handler.filterBrowsers(config, allBrowsers.toKeyedMap(), allResolved)).isDataClassEqualTo(
+        assertThat(
+            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+        ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
-                browsers = listOf(MiBrowser, DuckDuckGoBrowser),
-                apps = allApps,
+                browsers = listOfFirstActivityResolveInfo(
+                    PackageInfoFakes.MiBrowser,
+                    PackageInfoFakes.DuckDuckGoBrowser
+                ),
+                apps = allAppsInfoList,
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             )

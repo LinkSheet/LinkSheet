@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.R
-import fe.linksheet.composable.page.settings.apps.VerifiedLinkHandlersRoute
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 @Composable

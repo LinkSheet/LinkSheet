@@ -256,10 +256,7 @@ private class DomainVerificationAppInfoProvider() : PreviewParameterProvider<Lis
 }
 
 @Composable
-@Preview
-private fun VerifiedAppListItemPreview(
-    @PreviewParameter(DomainVerificationAppInfoProvider::class) items: List<DomainVerificationAppInfo>,
-) {
+private fun VerifiedAppListItemPreviewContainer(items: List<DomainVerificationAppInfo>) {
     Column {
         for (item in items) {
             VerifiedAppListItem(
@@ -272,4 +269,20 @@ private fun VerifiedAppListItemPreview(
             )
         }
     }
+}
+
+@Composable
+@Preview(apiLevel = 31, group = "Api31")
+private fun VerifiedAppListItemPreview(
+    @PreviewParameter(DomainVerificationAppInfoProvider::class) items: List<DomainVerificationAppInfo>,
+) {
+    VerifiedAppListItemPreviewContainer(items)
+}
+
+@Composable
+@Preview(apiLevel = 30, group="PreApi31")
+private fun VerifiedAppListItemPreviewPreApi31(
+    @PreviewParameter(DomainVerificationAppInfoProvider::class) items: List<DomainVerificationAppInfo>,
+) {
+    VerifiedAppListItemPreviewContainer(items)
 }

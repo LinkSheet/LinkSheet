@@ -538,4 +538,5 @@
         <item quantity="few">%d подразумевана хоста</item>
         <item quantity="other">%d подразумеваних хостова</item>
     </plurals>
+    <string name="settings_verified_link_handlers__text_browser">Прегледач</string>
 </resources>

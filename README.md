@@ -1,6 +1,8 @@
-# LinkSheet
+# LinkSheet [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/) [![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml) ![Discord](https://img.shields.io/discord/1137845851344081038?label=discord) [![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=download&color=orange)](https://github.com/LinkSheet/nightly/releases/latest)
 
-LinkSheet attempts to re-implement the old (pre-Android 12) system link handling behavior by allowing users to choose which app to open links in
+
+
+**LinkSheet** reimplements the Pre-Android 12 system link handling behavior in a standalone app, allowing users to choose which app to open links in.
 
 
 
@@ -16,13 +18,11 @@ LinkSheet attempts to re-implement the old (pre-Android 12) system link handling
 ~~[![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)~~
 -->
 
-[![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=nightly%20github&color=orange)](https://github.com/LinkSheet/nightly/releases/latest)
 <!--
 // [![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
 -->
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml)
-[![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/)
+
 
 </div>
 
@@ -49,12 +49,6 @@ LinkSheet attempts to re-implement the old (pre-Android 12) system link handling
     <img src="readme/screenshots.webp">
   </div>
  </div>
-
-## Join Discord
-
-<div align="">
-  <a href="https://discord.gg/XndZet2pWF"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
-</div>
 
 ## Features
 
@@ -101,6 +95,12 @@ Github automatically builds a "nightly" version of LinkSheet on push (e.g. meani
 
 * Translations are managed via [Weblate](https://hosted.weblate.org/projects/linksheet/)
 * All translations except for English are maintained by contributors
+
+## Discord
+
+<div align="">
+  <a href="https://discord.gg/XndZet2pWF"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
+</div>
 
 ## Donations
 

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,7 +23,6 @@ import androidx.core.widget.addTextChangedListener
 import fe.android.compose.system.rememberSystemService
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.util.web.UriUtil
 
 
 private val editorPadding = 16.dp
@@ -30,7 +30,8 @@ private val editorPadding = 16.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextEditorPage(
-    source: TextSource = ClipboardCard,
+    source: TextSource = TextSource.ClipboardCard,
+    validator: TextValidator = WebUriTextValidator,
     initialText: String,
     onDone: (String) -> Unit,
     onDismiss: () -> Unit,
@@ -39,8 +40,10 @@ fun TextEditorPage(
     val inputMethodManager = rememberSystemService<InputMethodManager>()
 
     var text by rememberSaveable { mutableStateOf(initialText) }
-    val uri by rememberSaveable(text) {
-        mutableStateOf(UriUtil.parseWebUriStrict(text))
+    var isValid by rememberSaveable { mutableStateOf(validator.isValid(text)) }
+
+    LaunchedEffect(text) {
+        isValid = validator.isValid(text)
     }
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -50,7 +53,7 @@ fun TextEditorPage(
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
         topBar = {
             EditorAppBar(
-                enabled = uri != null,
+                enabled = isValid,
                 scrollBehavior = scrollBehavior,
                 onDone = {
                     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
@@ -60,9 +63,11 @@ fun TextEditorPage(
             )
         },
     ) { padding ->
-        Box(modifier = Modifier
-            .padding(padding)
-            .fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
+        ) {
             Editor(
                 source = source,
                 initialText = text,
@@ -90,11 +95,17 @@ private fun EditorAppBar(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Button(enabled = enabled, onClick = onDone) {
+                Button(
+                    modifier = Modifier.testTag("done"),
+                    enabled = enabled, onClick = onDone
+                ) {
                     Text(text = stringResource(id = R.string.generic__button_text_done))
                 }
 
-                TextButton(onClick = onDismiss) {
+                TextButton(
+                    modifier = Modifier.testTag("cancel"),
+                    onClick = onDismiss
+                ) {
                     Text(text = stringResource(id = R.string.generic__button_text_cancel))
                 }
             }

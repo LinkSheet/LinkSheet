@@ -5,6 +5,7 @@ import android.app.usage.UsageStats
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -178,6 +179,8 @@ object ProfileSwitcherStub : ProfileSwitcher {
 }
 
 object BottomSheetStateControllerStub : BottomSheetStateController {
+    override val editorLauncher: ActivityResultLauncher<Intent>
+        get() = TODO("Not yet implemented")
     override val onNewIntent: (Intent) -> Unit = {}
     override fun hideAndFinish() {}
     override fun hide(onCompletion: CompletionHandler?) {}

@@ -84,6 +84,13 @@
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme" />
         <activity
+                android:name=".activity.TextEditorActivity"
+                android:configChanges="orientation"
+                android:excludeFromRecents="true"
+                android:exported="false"
+                android:screenOrientation="unspecified"
+                android:theme="@style/AppTheme" />
+        <activity
                 android:name=".activity.SelectDomainsConfirmationActivity"
                 android:configChanges="orientation"
                 android:excludeFromRecents="true"

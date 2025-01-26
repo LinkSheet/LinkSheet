@@ -10,7 +10,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FastForward
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.rounded.DoubleArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -30,19 +31,21 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
 import fe.android.compose.version.AndroidVersion
 import fe.linksheet.R
+import fe.linksheet.activity.TextEditorActivity
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.module.resolver.ImprovedIntentResolver
-import fe.linksheet.module.resolver.IntentResolveResult
+import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.activity.bottomsheet.BottomSheetStateController
-import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.intent.Intents
 import fe.linksheet.module.profile.CrossProfile
 import fe.linksheet.module.profile.ProfileSwitcher
+import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.LibRedirectResult
+import fe.linksheet.util.intent.Intents
 import me.saket.unfurl.UnfurlResult
+
 
 @Composable
 fun UrlBarWrapper(
@@ -63,6 +66,7 @@ fun UrlBarWrapper(
 ) {
     val uriString = result.uri.toString()
     val clipboardLabel = stringResource(id = R.string.generic__text_url)
+    val context = LocalContext.current
     val activity = LocalActivity.current
 
     UrlBar(
@@ -93,6 +97,20 @@ fun UrlBarWrapper(
         shareUri = { uri ->
             controller.hideAndFinish()
             controller.startActivity(controller.createChooser(Intents.createShareUriIntent(uri)))
+        },
+        editUri = { text ->
+            val intent = Intent(context, TextEditorActivity::class.java)
+//            intent.addFlags(PendingIntent.FLAG_MUTABLE)
+            intent.putExtra(TextEditorActivity.EXTRA_TEXT, text)
+
+            val receiver = Intents.createSelfIntent(null)
+//            val chooser = Intent.createChooser(intent, "test", pendingIntent.intentSender)
+//            startActivity(chooser)
+
+//            controller.startActivity(intent)
+
+//            controller.editorLauncher.launch(intent)
+            text
         },
         downloadUri = { uri, downloadResult ->
             startDownload(uri, downloadResult)
@@ -141,6 +159,7 @@ fun UrlBar(
     libRedirected: LibRedirectResult.Redirected?,
     copyUri: (String) -> Unit,
     shareUri: (String) -> Unit,
+    editUri: (String) -> String,
     switchProfile: ((CrossProfile, String) -> Unit)?,
     downloadUri: ((String, DownloadCheckResult.Downloadable) -> Unit)? = null,
     ignoreLibRedirect: ((LibRedirectResult.Redirected) -> Unit)? = null,
@@ -168,9 +187,21 @@ fun UrlBar(
             item {
                 UrlActionButton(
                     text = textContent(R.string.share),
-                    icon = Icons.Filled.Share.iconPainter,
+                    icon = Icons.Outlined.Share.iconPainter,
                     onClick = { shareUri(uri) }
                 )
+            }
+
+            if(false){
+                item {
+                    UrlActionButton(
+                        text = textContent(R.string.generic__text_edit),
+                        icon = Icons.Outlined.Edit.iconPainter,
+                        onClick = {
+                            editUri(uri)
+                        }
+                    )
+                }
             }
 
             if (downloadable.isDownloadable()) {
@@ -243,23 +274,19 @@ private fun UrlActionButton(text: TextContent, icon: IconPainter, onClick: () ->
 private fun UrlBarPreview() {
     val clipboardManager = LocalContext.current.getSystemService<ClipboardManager>()!!
 
-
-//    UrlBar(
-//        uri = uri,
-//        unfurlResult = unfurled,
-//        downloadable = false,
-//        libRedirected = false,
-//        copyUri = { /*TODO*/ },
-//        shareUri = { /*TODO*/ }
-//    )
-
-//    UrlBar(
-//        uri = Uri.parse("https://developer.android.com/jetpack/compose/text/configure-layout"),
-//        clipboardManager = clipboardManager,
-//        urlCopiedToast = MockRepositoryState.preference(true),
-//        hideAfterCopying = MockRepositoryState.preference(true),
-//        showToast = {},
-//        hideDrawer = {},
-//        shareUri = {}
-//    )
+    UrlBar(
+        uri = "https://developer.android.com/jetpack/compose/text/configure-layout",
+        unfurlResult = null,
+        downloadable = DownloadCheckResult.NonDownloadable,
+        libRedirected = null,
+        copyUri = { /*TODO*/ },
+        shareUri = { /*TODO*/ },
+        editUri = { it },
+        profiles = null,
+        switchProfile = null,
+        downloadUri = null,
+        ignoreLibRedirect = null,
+        manualRedirect = null,
+        onDoubleClick = null,
+    )
 }

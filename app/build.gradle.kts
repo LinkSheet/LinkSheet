@@ -351,13 +351,16 @@ dependencies {
 
     androidTestImplementation(platform(AndroidX.compose.bom))
     androidTestImplementation(AndroidX.test.core)
+    androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.espresso.core)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.ext.junit)
+    androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.room.testing)
     androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
+    androidTestImplementation(kotlin("test"))
 
     debugImplementation(AndroidX.compose.ui.testManifest)
 

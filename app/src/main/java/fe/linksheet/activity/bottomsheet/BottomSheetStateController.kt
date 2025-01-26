@@ -4,6 +4,7 @@ package fe.linksheet.activity.bottomsheet
 
 import android.app.Activity
 import android.content.Intent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.fix.SheetState
 import kotlinx.coroutines.CompletionHandler
@@ -11,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 interface BottomSheetStateController {
+    val editorLauncher: ActivityResultLauncher<Intent>
     val onNewIntent: (Intent) -> Unit
 
     fun hideAndFinish()
@@ -28,6 +30,7 @@ interface BottomSheetStateController {
 
 class DefaultBottomSheetStateController(
     val activity: Activity,
+    override val editorLauncher: ActivityResultLauncher<Intent>,
     val coroutineScope: CoroutineScope,
     val drawerState: SheetState,
     override val onNewIntent: (Intent) -> Unit

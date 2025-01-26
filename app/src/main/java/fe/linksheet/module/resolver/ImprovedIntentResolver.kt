@@ -25,8 +25,8 @@ import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.intent.IntentParser
-import fe.linksheet.module.intent.cloneIntent
+import fe.linksheet.util.intent.IntentParser
+import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -423,6 +423,10 @@ class ImprovedIntentResolver(
 
         if (intent.action == Intent.ACTION_VIEW) {
             return IntentParser.parseViewAction(intent)
+        }
+
+        if (intent.action == Intent.ACTION_PROCESS_TEXT) {
+            return IntentParser.parseProcessTextAction(intent)
         }
 
         return null

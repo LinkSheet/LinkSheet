@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,6 +50,7 @@ import org.koin.core.component.inject
 
 class ImprovedBottomSheet(
     private val loopDetector: LoopDetector?,
+    val editorLauncher: ActivityResultLauncher<Intent>,
     val activity: BottomSheetActivity,
     val viewModel: BottomSheetViewModel,
     val initialIntent: SafeIntent,
@@ -166,7 +168,7 @@ class ImprovedBottomSheet(
         }
 
         val controller = remember {
-            DefaultBottomSheetStateController(activity, coroutineScope, sheetState, ::onNewIntent)
+            DefaultBottomSheetStateController(activity, editorLauncher, coroutineScope, sheetState, ::onNewIntent)
         }
 
         val configuration = LocalConfiguration.current

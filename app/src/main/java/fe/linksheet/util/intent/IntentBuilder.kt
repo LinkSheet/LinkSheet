@@ -19,3 +19,6 @@ inline fun buildIntent(
     return intent
 }
 
+inline fun buildIntent(block: Intent.() -> Unit): Intent {
+    return Intent().apply(block)
+}

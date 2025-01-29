@@ -1,4 +1,4 @@
-package fe.linksheet.fe.linksheet.util.intent
+package linksheet.util.intent
 
 import android.app.SearchManager
 import android.content.Intent

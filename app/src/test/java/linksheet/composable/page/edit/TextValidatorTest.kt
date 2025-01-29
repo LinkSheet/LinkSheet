@@ -1,4 +1,4 @@
-package fe.linksheet.fe.linksheet.composable.page.edit
+package linksheet.composable.page.edit
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat

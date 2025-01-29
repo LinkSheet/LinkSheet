@@ -6,25 +6,49 @@ import android.net.Uri
 import fe.linksheet.util.web.UriUtil
 import mozilla.components.support.utils.SafeIntent
 import mozilla.components.support.utils.WebURLFinder
+import kotlin.collections.set
 
 object IntentParser {
+    private val textExtras = setOf(
+        Intent.EXTRA_TEXT,
+        Intent.EXTRA_PROCESS_TEXT,
+    )
+
     private val customExtras = setOf("url")
 
-    fun parseSearchIntent(intent: SafeIntent): String? {
-        val query = intent.getStringExtra(SearchManager.QUERY)
-        if (query != null) return query
+    private val queryExtras = arrayOf(
+        SearchManager.QUERY,
+        SearchManager.USER_QUERY
+    )
 
-        return intent.getStringExtra(SearchManager.USER_QUERY)
+    private fun readExtra(intent: SafeIntent, map: MutableMap<String, CharSequence>?, extra: String): Uri? {
+        val value = intent.getCharSequenceExtra(extra)
+        if (value == null) return null
+
+        val uri = tryParseWebUriStrict(value)
+        if (uri != null) return uri
+
+        map?.set(extra, value)
+
+        return null
+    }
+
+    fun parseSearchIntent(intent: SafeIntent): String? {
+        for (extra in queryExtras) {
+            val query = intent.getStringExtra(extra)
+            if (query != null) return query
+        }
+
+        return null
     }
 
     fun parseViewAction(intent: SafeIntent): Uri? {
         if (intent.data != null) return intent.data
 
-        val text = intent.getCharSequenceExtra(Intent.EXTRA_TEXT)
-        if (text != null) tryParseWebUriStrict(text)?.let { return it }
-
-        val processText = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)
-        if (processText != null) tryParseWebUriStrict(processText)?.let { return it }
+        for (extra in textExtras) {
+            val uri = readExtra(intent, null, extra)
+            if (uri != null) return uri
+        }
 
         return null
     }
@@ -48,41 +72,28 @@ object IntentParser {
 
         val extras = mutableMapOf<String, CharSequence>()
 
-        val text = intent.getCharSequenceExtra(Intent.EXTRA_TEXT)
-        if (text != null) {
-            tryParseWebUriStrict(text)?.let { return it }
-            extras[Intent.EXTRA_TEXT] = text
-        }
-
-        val processText = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)
-        if (processText != null) {
-            tryParseWebUriStrict(processText)?.let { return it }
-            extras[Intent.EXTRA_PROCESS_TEXT] = processText
+        for (extra in textExtras) {
+            val uri = readExtra(intent, extras, extra)
+            if (uri != null) return uri
         }
 
         if (allowCustomExtras) {
             for (customExtra in customExtras) {
-                val value = intent.getCharSequenceExtra(customExtra)
-                if (value != null) {
-                    tryParseWebUriStrict(value)?.let { return it }
-                    extras[customExtra] = value
-                }
+                val uri = readExtra(intent, extras, customExtra)
+                if (uri != null) return uri
             }
         }
 
         if (tryParseAllExtras && intent.extras != null) {
             val keys = intent.extras!!.keySet() - extras.keys
             for (key in keys) {
-                val value = intent.getCharSequenceExtra(key)
-                if (value != null) {
-                    tryParseWebUriStrict(value)?.let { return it }
-                    extras[key] = value
-                }
+                val uri = readExtra(intent, extras, key)
+                if (uri != null) return uri
             }
         }
 
-        if (parseText && text != null) {
-            return parseText(text.toString())
+        if (parseText && extras[Intent.EXTRA_TEXT] != null) {
+            return parseText(extras[Intent.EXTRA_TEXT].toString())
         }
 
         return null

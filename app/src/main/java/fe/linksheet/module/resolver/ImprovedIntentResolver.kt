@@ -417,19 +417,12 @@ class ImprovedIntentResolver(
     }
 
     private fun getUriFromIntent(intent: SafeIntent): Uri? {
-        if (intent.action == Intent.ACTION_SEND) {
-            return IntentParser.parseSendAction(intent)
+        return when (intent.action) {
+            Intent.ACTION_SEND -> IntentParser.parseSendAction(intent)
+            Intent.ACTION_VIEW -> IntentParser.parseViewAction(intent)
+            Intent.ACTION_PROCESS_TEXT -> IntentParser.parseProcessTextAction(intent)
+            else -> null
         }
-
-        if (intent.action == Intent.ACTION_VIEW) {
-            return IntentParser.parseViewAction(intent)
-        }
-
-        if (intent.action == Intent.ACTION_PROCESS_TEXT) {
-            return IntentParser.parseProcessTextAction(intent)
-        }
-
-        return null
     }
 
     private suspend fun createBrowserModeConfig(

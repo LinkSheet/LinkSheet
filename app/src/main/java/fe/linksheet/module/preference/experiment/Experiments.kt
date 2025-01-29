@@ -30,6 +30,7 @@ object Experiments : PreferenceDefinition(
 
     val editClipboard = boolean("experiment_edit_clipboard", true)
     val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
+    val disableDeduplication = boolean("experiment_disable_deduplication", false)
 
 
     // TODO: Enforce type
@@ -60,6 +61,7 @@ object Experiments : PreferenceDefinition(
                 )
                 addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
                 addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
+                addPreference(ExperimentPreference("Disable deduplication", disableDeduplication))
             },
 
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {

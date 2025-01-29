@@ -13,11 +13,13 @@ import fe.linksheet.util.ResolveInfoFlags
 internal fun AndroidPackageIntentHandler(
     packageManager: PackageManager,
     checkReferrerExperiment: () -> Boolean,
+    checkDisableDeduplicationExperiment: () -> Boolean = { false },
 ): PackageIntentHandler {
     return DefaultPackageIntentHandler(
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
         isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
-        checkReferrerExperiment = checkReferrerExperiment
+        checkReferrerExperiment = checkReferrerExperiment,
+        checkDisableDeduplicationExperiment = checkDisableDeduplicationExperiment
     )
 }
 
@@ -31,6 +33,7 @@ internal class DefaultPackageIntentHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val isLinkSheetCompat: (String) -> Boolean,
     val checkReferrerExperiment: () -> Boolean,
+    val checkDisableDeduplicationExperiment: () -> Boolean = { false },
 ) : PackageIntentHandler {
 
     companion object {
@@ -70,6 +73,10 @@ internal class DefaultPackageIntentHandler(
 
         if (referringPackage != null && checkReferrerExperiment()) {
             filtered = filtered.filter { it.activityInfo.packageName != referringPackage }
+        }
+
+        if (checkDisableDeduplicationExperiment()) {
+            return filtered
         }
 
         return deduplicate(filtered)

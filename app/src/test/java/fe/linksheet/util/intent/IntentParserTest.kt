@@ -1,14 +1,11 @@
-package linksheet.util.intent
+package fe.linksheet.util.intent
 
-import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.util.intent.IntentParser
-import fe.linksheet.util.intent.buildIntent
 import mozilla.components.support.utils.toSafeIntent
 import org.junit.runner.RunWith
 import kotlin.test.Test

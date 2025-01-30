@@ -1,5 +1,6 @@
 package app.linksheet.testing
 
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
@@ -20,7 +21,7 @@ fun buildPackageInfoTestFake(packageName: String, name: String, block: PackageIn
     val scope = PackageInfoFakeScope(packageInfo)
     block(scope)
 
-    return PackageInfoFake(scope.packageInfo, scope.activities)
+    return PackageInfoFake(scope.packageInfo, scope.resolveInfos)
 }
 
 @DslMarker
@@ -28,23 +29,38 @@ annotation class PackageInfoFakeDsl
 
 @PackageInfoFakeDsl
 class PackageInfoFakeScope(val packageInfo: PackageInfo) {
-    val activities = mutableListOf<ResolveInfo>()
+    val resolveInfos = mutableListOf<ResolveInfo>()
 
-    fun activity(name: String, block: (ActivityInfo.() -> Unit)? = null) {
+    fun activity(name: String, block: (ActivityScope.() -> Unit)? = null) {
         val activityInfo = ActivityInfo().apply {
             this.name = name
             applicationInfo = packageInfo.applicationInfo
             packageName = packageInfo.packageName
         }
 
-        block?.invoke(activityInfo)
+        val scope = ActivityScope(resolveInfos, activityInfo)
+        block?.invoke(scope)
+        activityInfo.targetActivity = scope.targetActivity
+    }
+}
 
+@PackageInfoFakeDsl
+class ActivityScope(private val resolveInfos: MutableList<ResolveInfo>, val activityInfo: ActivityInfo) {
+    var targetActivity: String? = null
+
+    fun addFilter(filter: IntentFilter): ResolveInfo {
         val resolveInfo = ResolveInfo().apply {
-            this.activityInfo = activityInfo
+            this.activityInfo = this@ActivityScope.activityInfo
             resolvePackageName = activityInfo.packageName
+            this.filter = filter
         }
 
-        activities.add(resolveInfo)
+        resolveInfos.add(resolveInfo)
+        return resolveInfo
+    }
+
+    fun addFilter(block: IntentFilter.() -> Unit = {}): ResolveInfo {
+        return addFilter(IntentFilter().apply(block))
     }
 }
 

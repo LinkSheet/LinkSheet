@@ -7,8 +7,8 @@ import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.module.app.`package`.PackageIntentHandler
-import fe.linksheet.resolver.util.addDataPaths
-import fe.linksheet.resolver.util.buildIntentFilter
+import app.linksheet.testing.addDataPaths
+import app.linksheet.testing.buildIntentFilter
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -49,11 +49,10 @@ class PackageService(
 
     fun toAppInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): ActivityAppInfo {
         val info = resolveInfo.info
-        val packageName = info.packageName
 
         return ActivityAppInfo(
             componentInfo = info,
-            label = loadComponentInfoLabel(info) ?: packageName,
+            label = loadComponentInfoLabel(info) ?: findApplicationLabel(info.applicationInfo),
             icon = lazy { loadIcon(info).toImageBitmap() })
     }
 

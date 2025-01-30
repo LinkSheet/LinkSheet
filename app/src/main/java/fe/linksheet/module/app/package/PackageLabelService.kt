@@ -9,7 +9,7 @@ import fe.linksheet.extension.android.info
 interface PackageLabelService {
     fun loadComponentInfoLabel(info: ComponentInfo): String?
     fun findBestLabel(packageInfo: PackageInfo, launcher: ResolveInfo?): String
-    fun findApplicationLabel(applicationInfo: ApplicationInfo): String?
+    fun findApplicationLabel(applicationInfo: ApplicationInfo): String
 }
 
 internal class DefaultPackageLabelService(
@@ -33,7 +33,7 @@ internal class DefaultPackageLabelService(
         return packageInfo.applicationInfo?.let(::findApplicationLabel) ?: packageInfo.packageName
     }
 
-    override fun findApplicationLabel(applicationInfo: ApplicationInfo): String? {
+    override fun findApplicationLabel(applicationInfo: ApplicationInfo): String {
         val appLabel = getApplicationLabel(applicationInfo)
         if (appLabel.isNotEmpty()) return appLabel.toString()
 

@@ -2,10 +2,12 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.componentName
+import fe.linksheet.extension.android.getDeduplicationKey
 import kotlin.collections.get
 import kotlin.collections.iterator
 
 class ImprovedBrowserHandler(
+    private val checkDisableDeduplicationExperiment: () -> Boolean = { false },
 ) {
     fun filterBrowsers(
         config: BrowserModeConfigHelper,
@@ -73,9 +75,10 @@ class ImprovedBrowserHandler(
         browsers: Map<String, ResolveInfo>,
         resolveList: List<ResolveInfo>,
     ): List<ResolveInfo> {
+        val disableDeduplication = checkDisableDeduplicationExperiment()
         val map = mutableMapOf<String, ResolveInfo>()
         for (uriViewActivity in resolveList) {
-            map[uriViewActivity.activityInfo.packageName] = uriViewActivity
+            map[uriViewActivity.activityInfo.getDeduplicationKey(disableDeduplication)] = uriViewActivity
         }
 
         for ((pkg, _) in browsers) {

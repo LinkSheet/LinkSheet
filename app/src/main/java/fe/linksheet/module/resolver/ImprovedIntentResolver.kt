@@ -127,13 +127,15 @@ class ImprovedIntentResolver(
     private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
     private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
     private val autoLaunchSingleBrowser = experimentRepository.asState(Experiments.autoLaunchSingleBrowser)
+    private val disableDeduplication = experimentRepository.asState(Experiments.disableDeduplication)
 
     private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
 
     private val appSorter by lazy {
         AppSorter(
             queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
-            toAppInfo = packageInfoService::toAppInfo
+            toAppInfo = packageInfoService::toAppInfo,
+            checkDisableDeduplicationExperiment = disableDeduplication::invoke
         )
     }
 

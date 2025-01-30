@@ -1,6 +1,8 @@
 package fe.linksheet.module.resolver.module
 
 import android.content.Context
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.*
@@ -13,7 +15,11 @@ import org.koin.dsl.module
 val resolverModule = module {
     single { BrowserResolver(get<Context>().packageManager, get()) }
     singleOf(::BrowserHandler)
-    singleOf(::ImprovedBrowserHandler)
+    single {
+        ImprovedBrowserHandler(
+            checkDisableDeduplicationExperiment = get<ExperimentRepository>().asState(Experiments.disableDeduplication)::invoke
+        )
+    }
     singleOf(::InAppBrowserHandler)
     singleOf(::RedirectUrlResolver)
     singleOf(::Amp2HtmlUrlResolver)

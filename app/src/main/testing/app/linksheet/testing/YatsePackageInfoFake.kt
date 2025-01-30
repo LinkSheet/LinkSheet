@@ -1,6 +1,5 @@
 package app.linksheet.testing
 
-import android.content.IntentFilter
 import android.os.PatternMatcher
 
 private val mimeTypeIntentFilter = buildIntentFilter {
@@ -67,9 +66,7 @@ val YatsePackageInfoFake = buildPackageInfoTestFake("org.leetzone.android.yatsew
         addFilter(hostsIntentFilter)
     }
 
-    activity(
-        "org.leetzone.android.yatsewidgetfree.QueueToActivity",
-    ) {
+    activity("org.leetzone.android.yatsewidgetfree.QueueToActivity") {
         targetActivity = "org.leetzone.android.yatsewidget.ui.activity.SendToActivity"
         addFilter(mimeTypeIntentFilter)
         addFilter(extensionIntentFilter)

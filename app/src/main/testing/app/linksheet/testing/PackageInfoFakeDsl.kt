@@ -39,7 +39,17 @@ class PackageInfoFakeScope(val packageInfo: PackageInfo) {
         }
 
         val scope = ActivityScope(resolveInfos, activityInfo)
-        block?.invoke(scope)
+        if (block != null) {
+            block.invoke(scope)
+        } else {
+            val resolveInfo = ResolveInfo().apply {
+                this.activityInfo = activityInfo
+                resolvePackageName = activityInfo.packageName
+            }
+
+            resolveInfos.add(resolveInfo)
+        }
+
         activityInfo.targetActivity = scope.targetActivity
     }
 }

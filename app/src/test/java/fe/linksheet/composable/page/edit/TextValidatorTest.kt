@@ -1,10 +1,9 @@
-package linksheet.composable.page.edit
+package fe.linksheet.composable.page.edit
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.composable.page.edit.WebUriTextValidator
 import org.junit.runner.RunWith
 import kotlin.test.Test
 

@@ -23,14 +23,23 @@ object PackageInfoFakes {
     }
 
     val Pepper = buildPackageInfoTestFake("com.tippingcanoe.pepperpl", "Pepper") {
-        activity("com.pepper.presentation.dispatch.DispatchActivity")
+        activity("com.pepper.presentation.dispatch.DispatchActivity") {
+            addFilter {
+                addAction("android.intent.action.VIEW")
+                addCategory("android.intent.category.DEFAULT")
+                addCategory("android.intent.category.BROWSABLE")
+                addDataScheme("https")
+                addDataAuthority("www.pepper.pl", null)
+                addDataAuthority("pl.dea.ls", null)
+            }
+        }
     }
 
     val ChromeBrowser = buildPackageInfoTestFake("com.android.chrome", "Chrome") {
         activity("com.google.android.apps.chrome.Main")
     }
 
-    val allApps = listOf(Youtube, NewPipe, NewPipeEnhanced, Pepper)
+    val allApps = listOf(Youtube, NewPipe, NewPipeEnhanced, Pepper, YatsePackageInfoFake)
     val allBrowsers = listOf(MiBrowser, DuckDuckGoBrowser, ChromeBrowser)
     val allResolved = allApps + allBrowsers
 }

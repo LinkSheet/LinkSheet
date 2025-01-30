@@ -219,7 +219,7 @@
     <string name="donate_explainer_crypto">Al donar con cripto, envíe un correo electrónico a <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="join">Unirme</string>
     <string name="discord">Discord</string>
-    <string name="discord_explainer">¡Ven a chatear a nuestro servidor Discord!</string>
+    <string name="discord_explainer">Chatear sobre LinkSheet en Discord</string>
     <string name="donate_card">Donar con tarjeta (a través de BuyMeACoffee)</string>
     <string name="donate_card_subtitle">Si te gusta LinkSheet, considera dejar una estrella en Github y/o hacer una donación.\nLos que donen más de <b>5€</b> podrán optar a <b>LinkSheet Pro</b>, que tendrá funciones exclusivas.</string>
     <string name="manual_build">Desarrollado y firmado manualmente por 1fexd</string>
@@ -524,9 +524,20 @@ Seal</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Se sabe que Xiaomi restringe fuertemente las aplicaciones de formas impredecibles, lo que provoca que LinkSheet no funcione correctamente.\nPulsa el botón de abajo y luego habilita el permiso \"Abrir nuevas ventanas en segundo plano\"</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Solicitar permiso</string>
     <string name="generic__button_learn_more">Más información</string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">Nuevos valores predeterminados</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Cambios de comportamiento</string>
     <string name="generic__button_dismiss">Descartar</string>
     <string name="settings_main_experiment_changelog__title_changelog">Registro de cambios de experimentos</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">En esta compilación se han habilitado algunos experimentos previamente deshabilitados.</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Se eliminaron algunos experimentos y ahora son el comportamiento predeterminado.</string>
     <string name="settings__subtitle_advanced"><![CDATA[Experimentos y exportación/importación]]></string>
+    <string name="settings_verified_link_handlers__text_browser">Navegador</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d host predeterminado</item>
+        <item quantity="many">%d hosts predeterminados</item>
+        <item quantity="other">%d hosts predeterminados</item>
+    </plurals>
+    <string name="app_host_dialog__title_hosts">Hosts predeterminados</string>
+    <string name="generic__button_text_save">Guardar</string>
+    <string name="app_host_dialog__text_no_hosts">¡No se ha establecido ningún host para abrirse de forma predeterminada en esta aplicación!</string>
+    <string name="generic__button_text_close">Cerrar</string>
+    <string name="bottom_sheet__button_manual_redirect">Seguir redirecciones</string>
 </resources>

@@ -500,4 +500,38 @@
     <string name="generic__button_text_save">Sauvegarder</string>
     <string name="app_host_dialog__text_no_hosts">Aucun hôte n\'a été défini pour s\'ouvrir par défaut dans cette application !</string>
     <string name="generic__button_text_close">Fermer</string>
+    <string name="follow_only_known_trackers_explainer">Essayez de suivre les redirections uniquement lorsque l\'hôte est connu pour être un tracker/une redirection. Si l\'option « Suivre les redirections via un service externe » est activée, cette option sera toujours activée</string>
+    <string name="follow_only_known_trackers">Suivez uniquement les trackers connus</string>
+    <string name="linksheet_download">Téléchargement via LinkSheet</string>
+    <string name="feature_flags">Drapeaux de caractéristiques</string>
+    <string name="onboarding_2_request_shizuku_permission">Demander l\'autorisation</string>
+    <string name="onboarding_3_card_title">Gestionnaire de liens</string>
+    <string name="resolve_embeds_explainer">Résoudre les miroirs d\'intégration comme fxtwitter.com vers l\'hôte réel</string>
+    <string name="resolve_embeds">Résoudre les intégrations</string>
+    <string name="settings_shortcuts__title_link_handlers">Gestionnaires de liens</string>
+    <string name="telemetry_level_minimal_description">Statistiques de la version installée</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Gestion des liens autorisée</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Traitement des liens non autorisé</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">Inspiration de conception</string>
+    <string name="export_log_dialog__text_log_info">Configurer les paramètres de partage pour le journal capturé à : <font face="monospace">%s</font></string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Affichage du journal capturé à : %s</string>
+    <string name="export_log_dialog__title_redact_log">Rédiger le journal</string>
+    <string name="settings_main_setup_success__button_link_handlers">Gestionnaires de liens</string>
+    <string name="resolve_event__applying_link_modifiers">Application des modificateurs de lien</string>
+    <string name="resolve_event__unamping_link">Dé-ampé le lien</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi est connu pour restreindre fortement les applications de manière imprévisible, ce qui fait que LinkSheet ne fonctionne pas correctement.\nAppuyez sur le bouton ci-dessous, puis autorisez la permission \"Ouvrir de nouvelles fenêtres en arrière-plan\"</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Demander des autorisations</string>
+    <string name="settings_main_miui_compat__text_request_failed">Échec de la demande d\'autorisation !</string>
+    <string name="generic__button_learn_more">En savoir plus</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Changements de comportements</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">Certaines fonctionnalités expérimentales ont été supprimées et sont désormais appliquées par défaut.</string>
+    <string name="generic__button_dismiss">Ignorer</string>
+    <string name="settings__subtitle_advanced"><![CDATA[expérimentales & Exportations/Importations]]></string>
+    <string name="bottom_sheet__button_manual_redirect">Suivre les redirections</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d hôte par défaut</item>
+        <item quantity="many">%d hôtes par défaut</item>
+        <item quantity="other">%d hôtes par défaut</item>
+    </plurals>
+    <string name="settings_main_experiment_changelog__title_changelog">Journal des modifications expérimentales</string>
 </resources>

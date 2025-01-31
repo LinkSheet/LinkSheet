@@ -1,15 +1,13 @@
 package fe.linksheet
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.util.CryptoUtil
-import org.junit.After
 import org.junit.Test
-import org.koin.core.context.stopKoin
-import org.koin.mp.KoinPlatformTools
-import org.koin.test.AutoCloseKoinTest
-import org.koin.test.ClosingKoinTest
+import org.junit.runner.RunWith
 import javax.crypto.Mac
 
-class UriHasherTest {
+@RunWith(AndroidJUnit4::class)
+class UriHasherTest : LinkSheetTest {
     private val mac: Mac
 
     init {
@@ -26,7 +24,4 @@ class UriHasherTest {
         // TODO: query parameters are currently broken. Let's fix this later, there's more important stuff to do (tracked in #226)
 //        assertEquals(buildHashedUriString("https://google.com?we=is&fren=yes", mac), "https://b60687.8fc4dccb1dcf/b3901e/452116/")
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

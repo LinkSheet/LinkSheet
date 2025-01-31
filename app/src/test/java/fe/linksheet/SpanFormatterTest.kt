@@ -7,17 +7,14 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.android.span.helper.formatter.SpanFormatter
-import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
-
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class SpanFormatterTest {
+class SpanFormatterTest : LinkSheetTest {
 
     private fun compareHtml(
         input: SpannableStringBuilder.() -> Unit,
@@ -69,7 +66,4 @@ class SpanFormatterTest {
             }
         )
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

@@ -14,7 +14,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class BucketTest {
+class BucketTest : LinkSheetTest {
     @Test
     fun test() {
         if (System.getenv("CI")?.toBooleanStrictOrNull() == true) {
@@ -39,7 +39,4 @@ class BucketTest {
         // Given enough runs, we can expect the average of eligible users per run to be ~500
         assertThat(eligibleCounts.average()).isCloseTo(500.0, 1.0)
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

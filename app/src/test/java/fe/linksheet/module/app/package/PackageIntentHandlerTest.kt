@@ -7,14 +7,13 @@ import app.linksheet.testing.YatsePackageInfoFake
 import app.linksheet.testing.flatResolveInfos
 import assertk.assertThat
 import assertk.assertions.containsExactly
+import fe.linksheet.LinkSheetTest
 import fe.linksheet.extension.android.info
-import org.junit.After
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class PackageIntentHandlerTest {
+internal class PackageIntentHandlerTest : LinkSheetTest {
 
     @Test
     fun test() {
@@ -48,7 +47,4 @@ internal class PackageIntentHandlerTest {
 //        val handlers = handler.findHandlers(Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c"), null)
 //        handlers
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

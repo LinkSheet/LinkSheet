@@ -6,17 +6,16 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
+import fe.linksheet.LinkSheetTest
 import mozilla.components.support.utils.toSafeIntent
-import org.junit.After
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class IntentParserTest {
+internal class IntentParserTest : LinkSheetTest {
     @Test
     fun `test parse view intent`() {
-        tableOf("intent",  "expected")
+        tableOf("intent", "expected")
             .row(
                 buildIntent(Intent.ACTION_VIEW, Uri.parse("http://data.com")),
                 Uri.parse("http://data.com")
@@ -43,7 +42,4 @@ internal class IntentParserTest {
         val result = IntentParser.parseText("foo bar google.com hello world")
         assertThat(result).isEqualTo(Uri.parse("http://google.com"))
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

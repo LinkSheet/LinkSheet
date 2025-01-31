@@ -4,6 +4,7 @@ import android.os.Build
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
+import fe.linksheet.LinkSheetTest
 import fe.linksheet.systeminfo.device.*
 import fe.linksheet.module.devicecompat.miui.MiuiAuditor
 import fe.linksheet.module.systeminfo.DeviceInfo
@@ -18,7 +19,7 @@ import kotlin.test.Test
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 @ConscryptMode(ConscryptMode.Mode.OFF)
-internal class MiuiAuditorTest {
+internal class MiuiAuditorTest : LinkSheetTest{
 
     @Test
     fun test() {

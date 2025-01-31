@@ -5,22 +5,20 @@ import android.net.Uri
 import android.os.Build
 import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.module.app.`package`.DefaultPackageIntentHandler
-import fe.linksheet.module.app.`package`.PackageIntentHandler
 import app.linksheet.testing.addDataPaths
 import app.linksheet.testing.buildIntentFilter
-import org.junit.After
+import fe.linksheet.LinkSheetTest
+import fe.linksheet.module.app.`package`.DefaultPackageIntentHandler
+import fe.linksheet.module.app.`package`.PackageIntentHandler
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class PackageHandlerIntentFilterTest {
+class PackageHandlerIntentFilterTest : LinkSheetTest {
     companion object {
         private val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> listOf() },
@@ -65,7 +63,4 @@ class PackageHandlerIntentFilterTest {
 
         assertFalse(isLinkHandler("https://google.com", githubIntentFilter))
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

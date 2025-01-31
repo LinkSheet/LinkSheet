@@ -4,21 +4,20 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.ImageFakes
 import app.linksheet.testing.PackageInfoFakes
+import fe.linksheet.LinkSheetTest
 import fe.linksheet.module.app.`package`.DefaultPackageBrowserService
 import fe.linksheet.module.app.`package`.DefaultPackageIconLoader
 import fe.linksheet.module.app.`package`.DefaultPackageLabelService
 import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
-import org.junit.After
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageInfoServiceTest {
+internal class PackageInfoServiceTest : LinkSheetTest{
 
     @Test
     fun test() {
@@ -41,7 +40,4 @@ internal class PackageInfoServiceTest {
 
         val info = pkgInfoService.createDomainVerificationAppInfo(PackageInfoFakes.MiBrowser.packageInfo)
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

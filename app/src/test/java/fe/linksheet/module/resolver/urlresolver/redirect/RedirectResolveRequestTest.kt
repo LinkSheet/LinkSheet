@@ -9,8 +9,9 @@ import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import assertk.tableOf
 import fe.httpkt.Request
-import fe.linksheet.module.log.internal.DebugLoggerDelegate
+import fe.linksheet.LinkSheetTest
 import fe.linksheet.module.http.requestModule
+import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
@@ -19,19 +20,15 @@ import okhttp3.OkHttpClient
 import okhttp3.mock.MockInterceptor
 import okhttp3.mock.head
 import okhttp3.mock.rule
-import org.junit.After
 import org.junit.Rule
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
-import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class RedirectResolveRequestTest : KoinTest {
+internal class RedirectResolveRequestTest : LinkSheetTest {
     @get:Rule
     val koinTestRule = KoinTestRuleFix.create {
         modules(
@@ -105,7 +102,4 @@ internal class RedirectResolveRequestTest : KoinTest {
                 assertThat(RedirectResolveRequest.parseRefreshHeader(header)).isEqualTo(expected)
             }
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

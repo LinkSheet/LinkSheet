@@ -10,17 +10,14 @@ import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.module.systeminfo.BuildInfo
 import fe.linksheet.module.versiontracker.LastVersionService
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
-import org.koin.test.KoinTest
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.Test
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class LastVersionServiceTest : KoinTest {
+class LastVersionServiceTest : LinkSheetTest {
 
     companion object {
         private val gson = GsonBuilder().apply {
@@ -68,7 +65,4 @@ class LastVersionServiceTest : KoinTest {
 
         assertThat(service.handleVersions(input)).isEqualTo(expected)
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

@@ -5,13 +5,12 @@ import app.linksheet.testing.YatsePackageInfoFake
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.kotlin.extension.iterable.mapToSet
-import org.junit.After
+import fe.linksheet.LinkSheetTest
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class PackageKeyServiceTest {
+internal class PackageKeyServiceTest : LinkSheetTest {
     @Test
     fun test() {
         val packageKey = PackageKeyService(
@@ -28,7 +27,4 @@ internal class PackageKeyServiceTest {
             )
         )
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

@@ -5,16 +5,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.module.http.requestModule
+import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.util.KoinTestRuleFix
-import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
-import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
@@ -22,7 +19,7 @@ import kotlin.test.assertIs
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class DownloaderTest : KoinTest {
+class DownloaderTest : LinkSheetTest {
     @get:Rule
     val koinTestRule = KoinTestRuleFix.create {
         modules(
@@ -70,7 +67,4 @@ class DownloaderTest : KoinTest {
         val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com", 15)
         assertIs<DownloadCheckResult.NonDownloadable>(nonDownloadable)
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

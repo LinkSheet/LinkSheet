@@ -5,17 +5,15 @@ import android.net.Uri
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class GithubWorkaroundTest {
+class GithubWorkaroundTest : LinkSheetTest{
     @Test
     fun test() {
         val notFixedUri = BottomSheetViewModel.GithubWorkaround.tryFixUri(
@@ -42,7 +40,4 @@ class GithubWorkaroundTest {
             assertNotNull(fixedUri)
         }
     }
-
-    @After
-    fun teardown() = stopKoin()
 }

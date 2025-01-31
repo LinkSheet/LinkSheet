@@ -18,5 +18,4 @@ internal class ImprovedIntentResolverTest {
 
        assertThat(resolved).isEqualTo("https://twitter.com/GrapheneOS/status/1805591682013876245")
     }
-
 }

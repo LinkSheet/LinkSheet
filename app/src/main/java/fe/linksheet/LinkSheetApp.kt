@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.StrictMode
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
+import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
 import fe.android.lifecycle.AppLifecycleObserver
 import fe.android.lifecycle.koin.extension.applicationLifecycle
@@ -106,7 +107,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             HttpUrlTypeAdapter.register(this)
         }
 
-        if (AndroidVersion.AT_LEAST_API_28_P && !BuildType.current.isTestRunner) {
+        if (AndroidVersion.AT_LEAST_API_28_P && !Testing.IsTestRunner) {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 

@@ -1,5 +1,6 @@
 package fe.linksheet.debug
 
+import app.linksheet.testing.Testing
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.debug.module.debug.RealDebugMenuSlotProvider
 import fe.linksheet.debug.module.devicecompat.DebugMiuiCompatProvider
@@ -27,7 +28,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
     }
 
     override fun provideAnalyticsClient(): Module = when {
-        BuildType.current.isTestRunner -> DebugLogAnalyticsClient.module
+        Testing.IsTestRunner -> DebugLogAnalyticsClient.module
         else -> aptabaseAnalyticsClientModule
     }
 

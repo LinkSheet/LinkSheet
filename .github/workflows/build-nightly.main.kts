@@ -308,6 +308,8 @@ workflow(
         val androidKeyStore = uses(action = base64ToFile)
         uses(action = ActionsSetupGradle())
 
+        run(command = "./gradlew test")
+
         val (foss, pro) = buildFlavor(androidKeyStore.outputs["filePath"])
         val (fossVersionCodeExpr, fossApkPathExpr) = foss
         val (proVersionCodeExpr, proApkPathExpr) = pro

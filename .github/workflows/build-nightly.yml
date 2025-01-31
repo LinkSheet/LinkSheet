@@ -43,6 +43,8 @@ jobs:
     - id: 'step-5'
       uses: 'gradle/actions/setup-gradle@v3'
     - id: 'step-6'
+      run: './gradlew test'
+    - id: 'step-7'
       env:
         GITHUB_WORKFLOW_RUN_ID: '${{ github.run_id }}'
         KEYSTORE_FILE_PATH: '${{ steps.step-4.outputs.filePath }}'
@@ -51,7 +53,7 @@ jobs:
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
         FLAVOR_CONFIG: ''
       run: './gradlew assembleFossNightly'
-    - id: 'step-7'
+    - id: 'step-8'
       env:
         GITHUB_WORKFLOW_RUN_ID: '${{ github.run_id }}'
         KEYSTORE_FILE_PATH: '${{ steps.step-4.outputs.filePath }}'
@@ -60,7 +62,7 @@ jobs:
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
         FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
       run: './gradlew assembleProNightly'
-    - id: 'step-8'
+    - id: 'step-9'
       name: 'Get output file path'
       env:
         OUTPUT_METADATA_JSON: 'app/build/outputs/apk/foss/nightly/output-metadata.json'
@@ -69,7 +71,7 @@ jobs:
         json_content=$(cat "$OUTPUT_METADATA_JSON")
         echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
         echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
-    - id: 'step-9'
+    - id: 'step-10'
       name: 'Get output file path'
       env:
         OUTPUT_METADATA_JSON: 'app/build/outputs/apk/pro/nightly/output-metadata.json'
@@ -78,14 +80,14 @@ jobs:
         json_content=$(cat "$OUTPUT_METADATA_JSON")
         echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
         echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
-    - id: 'step-10'
+    - id: 'step-11'
       uses: 'actions/upload-artifact@v4'
       with:
         name: 'linksheet-nightly'
         path: |-
-          app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}
+          app/build/outputs/apk/foss/nightly/${{ steps.step-9.outputs.OUTPUT_FILE }}
           app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
-    - id: 'step-11'
+    - id: 'step-12'
       uses: '1fexd/gh-create-release-notes@0.0.11'
       with:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
@@ -93,27 +95,27 @@ jobs:
         nightly-repo: '${{ vars.NIGHTLY_REPO_URL }}'
         last-commit-sha: '${{ github.event.before }}'
         commit-sha: '${{ github.sha }}'
-    - id: 'step-12'
+    - id: 'step-13'
       env:
-        APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}'
+        APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ steps.step-9.outputs.OUTPUT_FILE }}'
         NIGHTLY_TAG: '${{ github.ref }}'
-        VERSION_CODE: '${{ steps.step-8.outputs.VERSION_CODE }}'
+        VERSION_CODE: '${{ steps.step-9.outputs.VERSION_CODE }}'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
         BUILD_TYPE: '${{ env.BUILD_TYPE }}'
-        RELEASE_NOTE: '${{ steps.step-11.outputs.releaseNote }}'
+        RELEASE_NOTE: '${{ steps.step-12.outputs.releaseNote }}'
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
       if: '${{ contains(vars.ENABLE_RELEASES, true) }}'
-    - id: 'step-13'
+    - id: 'step-14'
       env:
-        APK_FILE: 'app/build/outputs/apk/pro/nightly/${{ steps.step-9.outputs.OUTPUT_FILE }}'
+        APK_FILE: 'app/build/outputs/apk/pro/nightly/${{ steps.step-10.outputs.OUTPUT_FILE }}'
         NIGHTLY_TAG: '${{ github.ref }}'
-        VERSION_CODE: '${{ steps.step-9.outputs.VERSION_CODE }}'
+        VERSION_CODE: '${{ steps.step-10.outputs.VERSION_CODE }}'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_PRO_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
         BUILD_TYPE: '${{ env.BUILD_TYPE }}'
-        RELEASE_NOTE: '${{ steps.step-11.outputs.releaseNote }}'
+        RELEASE_NOTE: '${{ steps.step-12.outputs.releaseNote }}'
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
       if: '${{ contains(vars.ENABLE_RELEASES, true) }}'

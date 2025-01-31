@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver.util
 
 import android.app.usage.UsageStats
+import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import fe.linksheet.extension.android.getDeduplicationKey
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 class AppSorter(
     private val queryAndAggregateUsageStats: (beginTime: Long, endTime: Long) -> Map<String, UsageStats>,
     private val toAppInfo: (ResolveInfo, browser: Boolean) -> ActivityAppInfo,
-    private val checkDisableDeduplicationExperiment: () -> Boolean = { false },
+    private val toPackageKey: (ActivityInfo) -> String,
 ) {
     private val emptyComparator: Comparator<ActivityAppInfo> = Comparator { _, _ -> 0 }
     private val usageStatsPeriod = TimeUnit.DAYS.toMillis(14)
@@ -52,17 +52,16 @@ class AppSorter(
         apps: List<ResolveInfo>,
         browsers: List<ResolveInfo>,
     ): MutableMap<String, ActivityAppInfo> {
-        val disableDeduplication = checkDisableDeduplicationExperiment()
         val map = mutableMapOf<String, ActivityAppInfo>()
 
         for (app in apps) {
             val info = toAppInfo(app, false)
-            map[app.activityInfo.getDeduplicationKey(disableDeduplication)] = info
+            map[toPackageKey(app.activityInfo)] = info
         }
 
         for (browser in browsers) {
             val info = toAppInfo(browser, true)
-            map[browser.activityInfo.getDeduplicationKey(disableDeduplication)] = info
+            map[toPackageKey(browser.activityInfo)] = info
         }
 
         return map

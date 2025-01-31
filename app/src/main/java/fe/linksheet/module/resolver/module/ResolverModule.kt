@@ -1,6 +1,7 @@
 package fe.linksheet.module.resolver.module
 
 import android.content.Context
+import fe.linksheet.module.app.PackageKeyService
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
@@ -16,8 +17,14 @@ val resolverModule = module {
     single { BrowserResolver(get<Context>().packageManager, get()) }
     singleOf(::BrowserHandler)
     single {
+        PackageKeyService(
+            checkDisableDeduplicationExperiment = get<ExperimentRepository>().asState(Experiments.disableDeduplication)::invoke,
+        )
+    }
+    single {
         ImprovedBrowserHandler(
-            checkDisableDeduplicationExperiment = get<ExperimentRepository>().asState(Experiments.disableDeduplication)::invoke
+            autoLaunchSingleBrowserExperiment = get<ExperimentRepository>().asState(Experiments.autoLaunchSingleBrowser)::invoke,
+            toPackageKey = get()
         )
     }
     singleOf(::InAppBrowserHandler)

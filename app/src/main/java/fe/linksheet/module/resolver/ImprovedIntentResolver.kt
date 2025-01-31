@@ -15,6 +15,7 @@ import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.koin.injectLogger
+import fe.linksheet.module.app.PackageKeyService
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
 import fe.linksheet.module.app.`package`.PackageIntentHandler
@@ -131,11 +132,17 @@ class ImprovedIntentResolver(
 
     private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
 
+    private val packageKey by lazy {
+        PackageKeyService(
+            checkDisableDeduplicationExperiment = disableDeduplication::invoke
+        )
+    }
+
     private val appSorter by lazy {
         AppSorter(
             queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
             toAppInfo = packageInfoService::toAppInfo,
-            checkDisableDeduplicationExperiment = disableDeduplication::invoke
+            toPackageKey = packageKey::getDuplicationKey
         )
     }
 
@@ -315,13 +322,31 @@ class ImprovedIntentResolver(
         )
         val lastUsedApps = queryAppSelectionHistory(
             repository = appSelectionHistoryRepository,
-            packageInfoService = packageInfoService, uri = uri
+            packageInfoService = packageInfoService,
+            uri = uri
         )
         val resolveList = packageIntentHandler.findHandlers(uri, referringPackage)
+        for (info in resolveList) {
+            logger.info("$info")
+        }
+
+        for ((pkg, info) in browsers) {
+            logger.info("$info ($pkg)")
+        }
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
-        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList, autoLaunchSingleBrowser())
+        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
+
+        logger.info("= appList::apps =")
+        for (info in appList.apps) {
+            logger.info("$info")
+        }
+
+        logger.info("= appList::browsers =")
+        for (info in appList.browsers) {
+            logger.info("$info")
+        }
 
         emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = appSorter.sort(

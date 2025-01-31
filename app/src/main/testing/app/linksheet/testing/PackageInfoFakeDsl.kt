@@ -83,6 +83,10 @@ fun packageSetOf(vararg packageInfos: PackageInfoFake): Set<String> {
     return packageInfos.mapTo(LinkedHashSet()) { it.packageName }
 }
 
+fun List<PackageInfoFake>.flatResolveInfos(): List<ResolveInfo> {
+    return flatMap { it.resolveInfos }
+}
+
 fun listOfFirstActivityResolveInfo(vararg packageInfo: PackageInfoFake): List<ResolveInfo> {
     return packageInfo.mapNotNull { it.firstActivityResolveInfo }
 }

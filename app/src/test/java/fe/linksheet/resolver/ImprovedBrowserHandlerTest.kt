@@ -8,6 +8,7 @@ import app.linksheet.testing.packageSetOf
 import app.linksheet.testing.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
+import fe.linksheet.module.app.PackageKeyService
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
@@ -22,7 +23,10 @@ import kotlin.test.Test
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class ImprovedBrowserHandlerTest {
     companion object {
-        private val handler = ImprovedBrowserHandler()
+        private val packageKey = PackageKeyService(
+            checkDisableDeduplicationExperiment = { false }
+        )
+        private val handler = ImprovedBrowserHandler(autoLaunchSingleBrowserExperiment = { false }, toPackageKey = packageKey::getDuplicationKey)
         private val allBrowsersKeyed = PackageInfoFakes.allBrowsers.toKeyedMap()
         private val allAppsInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allApps)
         private val allBrowsersInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allBrowsers)

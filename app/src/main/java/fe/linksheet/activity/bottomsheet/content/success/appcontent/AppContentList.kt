@@ -211,19 +211,7 @@ private fun AppContentListPreview_Short() {
         PackageInfoFakes.ChromeBrowser.toActivityAppInfo()
     )
 
-    AppContentList(
-        apps = apps,
-        uri = Uri.parse("https://linksheet.app"),
-        appListSelectedIdx = -1,
-        hasPreferredApp = false,
-        hideChoiceButtons = false,
-        showNativeLabel = false,
-        showPackage = false,
-        launch = { _, _ -> },
-        launch2 = { _, _, _, _ -> },
-        isPrivateBrowser = { _, _ -> null },
-        showToast = { _, _, _ -> }
-    )
+    AppContentListPreviewBase(apps = apps)
 }
 
 @Preview(group = "AppContentList", showBackground = true)
@@ -233,6 +221,11 @@ private fun AppContentListPreview_Long() {
         it.toActivityAppInfo()
     }
 
+    AppContentListPreviewBase(apps = apps)
+}
+
+@Composable
+private fun AppContentListPreviewBase(apps: List<ActivityAppInfo>) {
     AppContentList(
         apps = apps,
         uri = Uri.parse("https://linksheet.app"),

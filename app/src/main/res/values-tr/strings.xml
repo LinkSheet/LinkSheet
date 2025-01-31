@@ -25,7 +25,7 @@
     <string name="no_such_app_found">Böyle bir uygulama bulunamadı!</string>
     <string name="send_to">Şununla paylaş</string>
     <string name="always_show_package_name">Paket adını her zaman göster</string>
-    <string name="open_with">Bununla aç</string>
+    <string name="open_with">Şununla aç</string>
     <string name="browser_mode_subtitle">Tercih edilen tarayıcı modunu ayarla</string>
     <string name="set_as_browser_explainer">LinkSheet\'i varsayılan tarayıcı yapmak için buraya dokunun</string>
     <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>

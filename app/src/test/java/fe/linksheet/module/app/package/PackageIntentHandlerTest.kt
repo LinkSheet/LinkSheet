@@ -21,7 +21,6 @@ internal class PackageIntentHandlerTest : LinkSheetTest {
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },
             checkReferrerExperiment = { true },
-            checkDisableDeduplicationExperiment = { true },
         )
 
         val handlers = handler.findHandlers(Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c"), null)
@@ -41,7 +40,6 @@ internal class PackageIntentHandlerTest : LinkSheetTest {
             queryIntentActivities = { _, _ -> PackageInfoFakes.allResolved.flatResolveInfos() },
             isLinkSheetCompat = { false },
             checkReferrerExperiment = { true },
-            checkDisableDeduplicationExperiment = { true },
         )
 
 //        val handlers = handler.findHandlers(Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c"), null)

@@ -16,7 +16,6 @@ val PackageModule = module {
         AndroidPackageIntentHandler(
             get<Context>().packageManager,
             get<ExperimentRepository>().asState(Experiments.hideReferrerFromSheet)::invoke,
-            get<ExperimentRepository>().asState(Experiments.disableDeduplication)::invoke
         )
     }
     single {

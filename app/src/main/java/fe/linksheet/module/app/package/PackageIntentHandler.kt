@@ -13,13 +13,11 @@ import fe.linksheet.util.ResolveInfoFlags
 internal fun AndroidPackageIntentHandler(
     packageManager: PackageManager,
     checkReferrerExperiment: () -> Boolean,
-    checkDisableDeduplicationExperiment: () -> Boolean = { false },
 ): PackageIntentHandler {
     return DefaultPackageIntentHandler(
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
         isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
         checkReferrerExperiment = checkReferrerExperiment,
-        checkDisableDeduplicationExperiment = checkDisableDeduplicationExperiment
     )
 }
 
@@ -33,7 +31,6 @@ internal class DefaultPackageIntentHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val isLinkSheetCompat: (String) -> Boolean,
     val checkReferrerExperiment: () -> Boolean,
-    val checkDisableDeduplicationExperiment: () -> Boolean = { false },
 ) : PackageIntentHandler {
 
     companion object {
@@ -44,20 +41,6 @@ internal class DefaultPackageIntentHandler(
         )
 
         private val anyHost = IntentFilter.AuthorityEntry("*", "-1")
-    }
-
-    class ActivityAlias(
-        var activity: ResolveInfo? = null,
-        private val aliases: MutableList<ResolveInfo> = mutableListOf(),
-    ) {
-        fun add(alias: ResolveInfo) {
-            aliases.add(alias)
-        }
-
-        fun getBestActivity(): ResolveInfo? {
-            if (activity?.activityInfo?.enabled == true) return activity!!
-            return aliases.firstOrNull { it.activityInfo.enabled } ?: activity ?: aliases.firstOrNull()
-        }
     }
 
     override fun findHandlers(intent: Intent): List<ResolveInfo> {
@@ -75,28 +58,7 @@ internal class DefaultPackageIntentHandler(
             filtered = filtered.filter { it.activityInfo.packageName != referringPackage }
         }
 
-        if (checkDisableDeduplicationExperiment()) {
-            return filtered
-        }
-
-        return deduplicate(filtered)
-    }
-
-    private fun deduplicate(filtered: List<ResolveInfo>): List<ResolveInfo> {
-        val map = mutableMapOf<String, ActivityAlias>()
-        for (activity in filtered) {
-            val target = activity.activityInfo?.targetActivity
-            val key = "${activity.activityInfo.packageName}/${target ?: activity.activityInfo.name}"
-
-            val activityAlias = map.getOrPut(key) { ActivityAlias() }
-            if (target == null) {
-                activityAlias.activity = activity
-            } else {
-                activityAlias.add(activity)
-            }
-        }
-
-        return map.mapNotNull { (_, activity) -> activity.getBestActivity() }
+        return filtered
     }
 
     @VisibleForTesting

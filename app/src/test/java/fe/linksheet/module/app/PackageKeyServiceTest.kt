@@ -6,6 +6,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.LinkSheetTest
+import fe.linksheet.extension.android.activityDescriptor
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
@@ -13,11 +14,8 @@ import kotlin.test.Test
 internal class PackageKeyServiceTest : LinkSheetTest {
     @Test
     fun test() {
-        val packageKey = PackageKeyService(
-            checkDisableDeduplicationExperiment = { true }
-        )
         val result = YatsePackageInfoFake.resolveInfos.mapToSet {
-            packageKey.getDuplicationKey(it.activityInfo)
+            it.activityInfo.activityDescriptor
         }
 
         assertThat(result).isEqualTo(

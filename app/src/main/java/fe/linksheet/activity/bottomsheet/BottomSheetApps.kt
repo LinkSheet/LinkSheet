@@ -32,7 +32,6 @@ import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.composable.ui.PreviewTheme
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.app.PackageKeyService
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.profile.CrossProfile
@@ -274,13 +273,9 @@ private fun BottomSheetAppsPreview_Grid(
 
 @Composable
 private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean) {
-    val packageKey = PackageKeyService(
-        checkDisableDeduplicationExperiment = { false }
-    )
     val appSorter = AppSorter(
         queryAndAggregateUsageStats = { _, _ -> emptyMap<String, UsageStats>() },
         toAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
-        toPackageKey = packageKey::getDuplicationKey
     )
 
     val (sorted, filtered) = appSorter.sort(

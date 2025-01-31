@@ -3,10 +3,8 @@ package fe.linksheet.module.app
 import android.content.pm.ActivityInfo
 import fe.linksheet.extension.android.componentName
 
-class PackageKeyService(
-    private val checkDisableDeduplicationExperiment: () -> Boolean = { false },
-) {
-    fun getShortClassName(appPackage: String, clazz: String): String {
+object PackageIdHelper {
+    private fun getShortClassName(appPackage: String, clazz: String): String {
         if (!clazz.startsWith(appPackage)) return clazz
 
         val pn = appPackage.length
@@ -16,11 +14,7 @@ class PackageKeyService(
         return clazz.substring(pn, cn)
     }
 
-    fun getDuplicationKey(activityInfo: ActivityInfo): String {
-        if(!checkDisableDeduplicationExperiment()) {
-            return activityInfo.applicationInfo.packageName
-        }
-
+    fun getDescriptor(activityInfo: ActivityInfo): String {
         val componentName = activityInfo.componentName
         val appPackage = activityInfo.applicationInfo.packageName
         val targetActivity = activityInfo.targetActivity ?: ""

@@ -1,14 +1,11 @@
 package fe.linksheet.module.resolver
 
-import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.componentName
-import kotlin.collections.get
-import kotlin.collections.iterator
+import fe.linksheet.extension.android.activityDescriptor
 
 class ImprovedBrowserHandler(
-    private val autoLaunchSingleBrowserExperiment: () -> Boolean,
-    private val toPackageKey: (ActivityInfo) -> String,
+    private val autoLaunchSingleBrowserExperiment: () -> Boolean
 ) {
     fun filterBrowsers(
         config: BrowserModeConfigHelper,
@@ -77,11 +74,11 @@ class ImprovedBrowserHandler(
     ): List<ResolveInfo> {
         val map = mutableMapOf<String, ResolveInfo>()
         for (uriViewActivity in resolveList) {
-            map[toPackageKey(uriViewActivity.activityInfo)] = uriViewActivity
+            map[uriViewActivity.activityInfo.activityDescriptor] = uriViewActivity
         }
 
-        for ((pkg, _) in browsers) {
-            map.remove(pkg)
+        for ((_, resolveInfo) in browsers) {
+            map.remove(resolveInfo.activityInfo.activityDescriptor)
         }
 
         return map.values.toList()

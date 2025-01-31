@@ -9,15 +9,11 @@ import app.linksheet.testing.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
 import fe.linksheet.LinkSheetTest
-import fe.linksheet.module.app.PackageKeyService
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
-import org.junit.After
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
-import org.koin.test.KoinTest
 import org.robolectric.annotation.Config
 import kotlin.test.Test
 
@@ -25,12 +21,8 @@ import kotlin.test.Test
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class ImprovedBrowserHandlerTest : LinkSheetTest {
     companion object {
-        private val packageKey = PackageKeyService(
-            checkDisableDeduplicationExperiment = { false }
-        )
         private val handler = ImprovedBrowserHandler(
             autoLaunchSingleBrowserExperiment = { false },
-            toPackageKey = packageKey::getDuplicationKey
         )
         private val allBrowsersKeyed = PackageInfoFakes.allBrowsers.toKeyedMap()
         private val allAppsInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allApps)

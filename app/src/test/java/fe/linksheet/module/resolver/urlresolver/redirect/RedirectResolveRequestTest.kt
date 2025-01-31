@@ -10,36 +10,34 @@ import assertk.assertions.prop
 import assertk.tableOf
 import fe.httpkt.Request
 import fe.linksheet.LinkSheetTest
-import fe.linksheet.module.http.requestModule
-import fe.linksheet.module.log.internal.DebugLoggerDelegate
+import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.file.DebugLogPersistService
+import fe.linksheet.module.log.internal.DefaultLoggerDelegate
+import fe.linksheet.module.redactor.LogHasher
+import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
-import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
-import fe.linksheet.util.KoinTestRuleFix
 import okhttp3.OkHttpClient
 import okhttp3.mock.MockInterceptor
 import okhttp3.mock.head
 import okhttp3.mock.rule
-import org.junit.Rule
 import org.junit.runner.RunWith
-import org.koin.test.inject
 import org.robolectric.annotation.Config
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class RedirectResolveRequestTest : LinkSheetTest {
-    @get:Rule
-    val koinTestRule = KoinTestRuleFix.create {
-        modules(
-            DebugLoggerDelegate.Factory,
-            requestModule,
-            cachedRequestModule,
+    companion object {
+        private val loggerDelegate = DefaultLoggerDelegate(
+            "test",
+            Redactor(LogHasher.NoOpHasher),
+            DebugLogPersistService()
         )
+        private val logger = Logger(loggerDelegate)
+        private val request = Request()
+        private val cachedRequest = CachedRequest(request, logger)
     }
-
-    private val request by inject<Request>()
-    private val cachedRequest by inject<CachedRequest>()
 
     @Test
     fun `test refresh header is redirect`() {

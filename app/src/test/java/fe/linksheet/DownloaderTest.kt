@@ -2,17 +2,17 @@ package fe.linksheet
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import fe.httpkt.Request
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.http.requestModule
-import fe.linksheet.module.log.internal.DebugLoggerDelegate
-import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
-import fe.linksheet.util.KoinTestRuleFix
-import org.junit.Rule
+import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.file.DebugLogPersistService
+import fe.linksheet.module.log.internal.DefaultLoggerDelegate
+import fe.linksheet.module.redactor.LogHasher
+import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.test.inject
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -20,17 +20,18 @@ import kotlin.test.assertIs
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 class DownloaderTest : LinkSheetTest {
-    @get:Rule
-    val koinTestRule = KoinTestRuleFix.create {
-        modules(
-            DebugLoggerDelegate.Factory,
-            requestModule,
-            cachedRequestModule,
-            downloaderModule
+    companion object {
+        private val loggerDelegate = DefaultLoggerDelegate(
+            "test",
+            Redactor(LogHasher.NoOpHasher),
+            DebugLogPersistService()
+        )
+        private val logger = Logger(loggerDelegate)
+        private val downloader = Downloader(
+            CachedRequest(Request(), logger),
+            Logger(loggerDelegate)
         )
     }
-
-    private val downloader by inject<Downloader>()
 
     @Test
     fun testCheckIsNonHtmlFileEnding() {

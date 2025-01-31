@@ -24,7 +24,7 @@ val resolverModule = module {
     single {
         ImprovedBrowserHandler(
             autoLaunchSingleBrowserExperiment = get<ExperimentRepository>().asState(Experiments.autoLaunchSingleBrowser)::invoke,
-            toPackageKey = get()
+            toPackageKey = get<PackageKeyService>()::getDuplicationKey
         )
     }
     singleOf(::InAppBrowserHandler)

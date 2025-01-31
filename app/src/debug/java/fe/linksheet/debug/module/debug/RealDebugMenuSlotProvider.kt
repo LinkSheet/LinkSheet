@@ -43,6 +43,17 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                item(key = "crash") {
+                    FilledTonalButton(
+                        colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                        onClick = {
+                            throw Exception("Crash")
+                        }
+                    ) {
+                        Text(text = "Crash")
+                    }
+                }
+
                 if (viewModel.debugMiuiCompatProvider != null) {
                     item(key = "miui") {
                         var isRequired by remember {

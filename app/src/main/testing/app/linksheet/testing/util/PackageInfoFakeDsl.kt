@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.ResolveInfo
 import androidx.compose.ui.graphics.ImageBitmap
+import app.linksheet.testing.fake.ImageFakes
 import fe.linksheet.module.app.ActivityAppInfo
 
 fun buildPackageInfoTestFake(packageName: String, name: String, block: PackageInfoFakeScope.() -> Unit): PackageInfoFake {

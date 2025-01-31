@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull

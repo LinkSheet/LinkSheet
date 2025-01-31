@@ -31,4 +31,7 @@ internal class PackageIntentHandlerTest {
             "org.leetzone.android.yatsewidgetfree/org.leetzone.android.yatsewidgetfree.QueueToActivity"
         )
     }
+
+    @After
+    fun teardown() = stopKoin()
 }

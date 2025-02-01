@@ -244,7 +244,7 @@ dependencies {
     implementation(AndroidX.compose.ui.withVersion("1.8.0-beta03"))
     implementation(AndroidX.compose.ui.text)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3.withVersion("1.4.0-alpha09"))
+    implementation(PinnedVersions.Material3)
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)

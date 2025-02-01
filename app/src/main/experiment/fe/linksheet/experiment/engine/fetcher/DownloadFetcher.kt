@@ -1,9 +1,5 @@
 package fe.linksheet.experiment.engine.fetcher
 
-import fe.linksheet.experiment.engine.FetchInput
-import fe.linksheet.experiment.engine.FetchOutput
-import fe.linksheet.experiment.engine.LinkFetcher
-import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

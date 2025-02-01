@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.engine
+package fe.linksheet.experiment.engine.fetcher
 
 interface LinkFetcher {
     suspend fun resolve(data: FetchInput): FetchOutput?

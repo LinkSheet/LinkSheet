@@ -1,8 +1,5 @@
 package fe.linksheet.experiment.engine.modifier
 
-import fe.linksheet.experiment.engine.LinkModifier
-import fe.linksheet.experiment.engine.ModifyInput
-import fe.linksheet.experiment.engine.ModifyOutput
 import fe.linksheet.module.resolver.LibRedirectResolver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

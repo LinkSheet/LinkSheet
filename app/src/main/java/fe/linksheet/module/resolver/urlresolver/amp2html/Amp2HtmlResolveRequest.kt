@@ -4,6 +4,7 @@ import android.util.Log
 import fe.amp2htmlkt.Amp2Html
 import fe.droidkit.koin.single
 import fe.httpkt.Request
+import fe.linksheet.extension.koin.single
 import fe.linksheet.extension.okhttp.isHtml
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
@@ -11,11 +12,8 @@ import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
-import fe.linksheet.util.mime.MimeType
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
-import java.io.InputStream
-import java.net.URL
 
 val amp2HtmlResolveRequestModule = module {
     single<Amp2HtmlResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
@@ -43,26 +41,28 @@ class Amp2HtmlResolveRequest(
 
         val response = okHttpClient.newCall(req).execute()
         val statusCode = response.code
-        val contentType = response.body.contentType() ?: return Result.failure(ResolveRequestException(statusCode))
+        response.body.use {
+            val contentType = it.contentType() ?: return Result.failure(ResolveRequestException(statusCode))
 
-        if (!response.isSuccessful) {
-            return Result.failure(ResolveRequestException(statusCode))
+            if (!response.isSuccessful) {
+                return Result.failure(ResolveRequestException(statusCode))
+            }
+
+            Log.d("Mime", "$contentType ${contentType.isHtml()}")
+            if (!contentType.isHtml()) {
+                return Result.success(ResolveResultType.NothingToResolve)
+            }
+
+            val html = it.string()
+
+            val nonAmpLink = parseHtml(html, req.url.host)
+            if (nonAmpLink != null) {
+                Log.d("Amp2Html", "$nonAmpLink")
+                return nonAmpLink
+            }
+
+            return Result.failure(ResolveRequestException())
         }
-
-        Log.d("Mime", "$contentType ${contentType.isHtml()}")
-        if (!contentType.isHtml()) {
-            return Result.success(ResolveResultType.NothingToResolve)
-        }
-
-        val html = response.body.string()
-
-        val nonAmpLink = parseHtml(html, req.url.host)
-        if (nonAmpLink != null) {
-            Log.d("Amp2Html", "$nonAmpLink")
-            return nonAmpLink
-        }
-
-        return Result.failure(ResolveRequestException())
     }
 
     private fun parseHtml(html: String, host: String): Result<ResolveResultType>? {

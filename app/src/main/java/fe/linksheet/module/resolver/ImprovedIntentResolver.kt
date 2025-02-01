@@ -19,6 +19,7 @@ import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
@@ -532,7 +533,8 @@ class ImprovedIntentResolver(
                 followRedirectsExternalService,
                 requestTimeout,
                 canAccessInternet,
-                followRedirectsAllowDarknets
+                followRedirectsAllowDarknets,
+                ResolveType.FollowRedirects
             )
         }
     }
@@ -562,6 +564,7 @@ class ImprovedIntentResolver(
                 requestTimeout,
                 canAccessInternet,
                 amp2HtmlAllowDarknets,
+                ResolveType.Amp2Html
             )
         }
     }

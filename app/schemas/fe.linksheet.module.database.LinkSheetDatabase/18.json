@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "1e99222ca3946173a96d7b999aff8698",
+    "identityHash": "3f602328cb5c907e6c25f770645acc1d",
     "entities": [
       {
         "tableName": "openwith",
@@ -287,7 +287,7 @@
       },
       {
         "tableName": "amp2html_mapping",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ampUrl` TEXT NOT NULL, `canonicalUrl` TEXT, PRIMARY KEY(`ampUrl`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ampUrl` TEXT NOT NULL, `canonicalUrl` TEXT, `isCacheHit` INTEGER NOT NULL DEFAULT 'true', PRIMARY KEY(`ampUrl`))",
         "fields": [
           {
             "fieldPath": "ampUrl",
@@ -299,6 +299,13 @@
             "fieldPath": "canonicalUrl",
             "columnName": "canonicalUrl",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isCacheHit",
+            "columnName": "isCacheHit",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "'true'"
           }
         ],
         "primaryKey": {
@@ -537,7 +544,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1e99222ca3946173a96d7b999aff8698')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3f602328cb5c907e6c25f770645acc1d')"
     ]
   }
 }

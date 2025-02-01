@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 import androidx.sqlite.db.SupportSQLiteDatabase
 import fe.linksheet.module.database.dao.base.IKnown
 import fe.linksheet.module.database.dao.base.KnownHolder
-import fe.linksheet.module.database.dao.cache.ResolveTypeDao
 
 @Entity(tableName = "resolve_type")
 data class ResolveType(
@@ -16,10 +15,10 @@ data class ResolveType(
 ) : IKnown {
 
     companion object : KnownHolder<ResolveType> {
-        val REDIRECT = ResolveType(1, "redirect")
-        val AMP2HTML = ResolveType(2, "amp")
+        val FollowRedirects = ResolveType(1, "follow_redirects")
+        val Amp2Html = ResolveType(2, "amp2html")
 
-        override val items = listOf(REDIRECT, AMP2HTML)
+        override val items = listOf(FollowRedirects, Amp2Html)
 
         override fun initialize(db: SupportSQLiteDatabase) {
             for (item in items) {

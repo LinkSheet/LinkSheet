@@ -2,9 +2,6 @@ package fe.linksheet.experiment.engine.modifier
 
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
-import fe.linksheet.experiment.engine.LinkModifier
-import fe.linksheet.experiment.engine.ModifyInput
-import fe.linksheet.experiment.engine.ModifyOutput
 
 class EmbedLinkModifier : LinkModifier {
     companion object {

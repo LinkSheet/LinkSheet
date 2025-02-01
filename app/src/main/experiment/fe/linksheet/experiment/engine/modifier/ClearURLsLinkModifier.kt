@@ -2,9 +2,6 @@ package fe.linksheet.experiment.engine.modifier
 
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
-import fe.linksheet.experiment.engine.LinkModifier
-import fe.linksheet.experiment.engine.ModifyInput
-import fe.linksheet.experiment.engine.ModifyOutput
 
 class ClearURLsLinkModifier : LinkModifier {
     companion object {

@@ -107,7 +107,7 @@
     <string name="include_fingerprint">Vingerafdruk van apparaat meesturen (aanbevolen)</string>
     <string name="no_logs_found">Geen oude logs gevonden!</string>
     <string name="enable_amp2html_explainer">Stuur de gebruiker bij AMP-pagina\'s door naar de normale webversie. Dit kan <annotation url-id="privacy-amp2html">privacy-gerelateerde implicaties</annotation> hebben.</string>
-    <string name="linksheet_donation_explainer_2">Een donatie van meer dan <b>5€</b> geeft je toegang tot <b>LinkSheet Pro</b> met <b>exclusieve functies</b>, zoals het extern volgen van omleidingen, het extern achterhalen van de normale webversies van AMP-pagina\'s en nog meer!</string>
+    <string name="linksheet_donation_explainer_2">Een donatie van meer dan <b>5€</b> geeft je toegang tot <b>LinkSheet Pro</b> met <b>exclusieve functies</b>, zoals het extern volgen van omleidingen, het extern achterhalen van de normale webversies van AMP-links en nog meer!</string>
     <string name="selected_browser_explainer">Deze browser wordt automatisch geopend als er geen native app is die de aangeklikte link kan verwerken</string>
     <string name="enabled">Ingeschakeld</string>
     <string name="whitelisted_explainer">Toon alleen de gekozen browsers</string>
@@ -165,4 +165,66 @@
     <string name="include_settings">Instellingen meesturen (aanbevolen)</string>
     <string name="log_privacy">Voor meer informatie over de privacy van logs kun je <annotation url-id="privacy-logs">hier terecht</annotation>.</string>
     <string name="enable_request_private_browsing_button">Knop \"Privénavigatie\" tonen</string>
+    <string name="use_unified_preferred_browser_explainer">Wanneer ingeschakeld worden de onderstaande instellingen toegepast bij zowel het openen van normale links als bij in-app links. Gebruik anders de onderstaande knoppen om te schakelen tussen de modus voor normale links en in-app links.</string>
+    <string name="advanced">Geavanceerd</string>
+    <string name="amp2html_local_cache_explainer">Sla de opgehaalde niet-AMP-versies van webpagina\'s lokaal op</string>
+    <string name="amp2html_external_service">Probeer de niet-AMP-versie van pagina\'s op te halen via een externe service</string>
+    <string name="amp2html_external_service_explainer">Probeer de niet-AMP-versie van pagina\'s op te halen via een API op supabase.com (<annotation url-id="supabase-privacy">Privacybeleid</annotation>)</string>
+    <string name="pretend_to_be_app">Verzoeken voor native apps onderscheppen</string>
+    <string name="domain_selection_confirmation_title">Domeinen kiezen?</string>
+    <string name="shizuku_explainer_short">Schakel directe interactie met systeem-API\'s in</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">De Shizuku-modus is geactiveerd: klik op een app om de automatische linkafhandeling in te stellen. Druk lang op een app voor het instellingenmenu \"Standaard openen\".</string>
+    <string name="shizuku_not_running_explainer">Shizuku wordt niet uitgevoerd. Klik hier om Shizuku te openen en volg de instructies om het te starten.</string>
+    <string name="warning">Waarschuwing</string>
+    <string name="shizuku_integration_no_permission_explainer">Klik hier om toestemming te vragen in Shizuku.</string>
+    <string name="shizuku_integration_not_setup_explainer">Hoewel het niet strikt noodzakelijk is om LinkSheet te laten werken, wordt Shizuku wel aanbevolen. Klik hier om het te installeren.</string>
+    <string name="shizuku_integration">Integratie met Shizuku</string>
+    <string name="no_browser_installed_explainer">LinkSheet heeft geen browser gevonden. Het wordt aanbevolen om eerst een browser te installeren.</string>
+    <string name="feature_flags_explainer">Schakel experimentele functies in</string>
+    <string name="pretend_to_be_app_explainer_2">Sommige apps, zoals Google Chrome, zoeken expliciet naar een native app om bijvoorbeeld een Youtube-link af te handelen wanneer deze wordt aangeklikt in de zoekresultaten. LinkSheetCompat doet zich voor als zo\'n native app voor ondersteunde hosts en stuurt het verzoek door naar LinkSheet.</string>
+    <string name="donate_crypto">Doneren via crypto</string>
+    <string name="configure_explainer">Klik hier om LinkSheetCompat te configureren</string>
+    <string name="no_handlers_found_explainer">LinkSheet kan deze link niet openen.</string>
+    <string name="at_least_one_known_browser_installed_explainer">LinkSheet heeft ten minste één app gedetecteerd waarvan bekend is dat het een browser is.</string>
+    <string name="at_least_one_unknown_browser_installer_explainer">LinkSheet heeft ten minste één app gedetecteerd die beweert een browser te zijn. LinkSheet\'s lijst met browsers is mogelijk incompleet, dus als dit een bekende browser is, meld dit dan via GitHub.</string>
+    <string name="at_least_one_unknown_browser_installer">Minimaal 1 (onbekende) browser geïnstalleerd</string>
+    <string name="domain_selection_confirmation_subtitle">Weet je zeker dat je %s wilt instellen als standaardapp voor de volgende domeinen?</string>
+    <string name="open_link_with_subtitle_2">LinkSheet was oorspronkelijk gebaseerd op OpenLinkWith</string>
+    <string name="built_at"><b>Gecreëerd op:</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Uitvoering:</b> <font face="monospace">%s</font></string>
+    <string name="donate_card_subtitle">Als je LinkSheet leuk vindt, overweeg dan een ster achter te laten op GitHub en/of te doneren.\nDonateurs die meer dan <b>€5</b> doneren, komen in aanmerking voor de exclusieve functies van <b>LinkSheet Pro</b>.</string>
+    <string name="generic__label_work_profile">Werkprofiel</string>
+    <string name="donate">Doneren</string>
+    <string name="mastodon_redirect_subtitle_2">De broncode van Mastodon Redirect werd gebruikt als referentie voor de interactie met Shizuku</string>
+    <string name="import_and_override">Importeren en overschrijven</string>
+    <string name="version_name"><b>Versie:</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>Workflow-ID:</b> <font face="monospace">%s</font></string>
+    <string name="privacy">Privacy</string>
+    <string name="amp2html_local_cache">Lokale cache voor Amp2Html</string>
+    <string name="amp2html">Amp2Html</string>
+    <string name="instance_not_available_anymore">Deze server is niet meer beschikbaar!</string>
+    <string name="shizuku">Integratie met Shizuku</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="enable_all">Alles inschakelen</string>
+    <string name="disable_all">Alles uitschakelen</string>
+    <string name="shizuku_integration_enabled_explainer">De integratie met Shizuku is ingeschakeld!</string>
+    <string name="feature_flags">Extra functies</string>
+    <string name="launch_onboarding">Introductie starten</string>
+    <string name="pretend_to_be_app_explainer">Presenteer LinkSheet als een native app bij ondersteunde domeinen via LinkSheetCompat</string>
+    <string name="compat_installed">LinkSheetCompat is al geïnstalleerd</string>
+    <string name="configure">Configureren</string>
+    <string name="general">Overig</string>
+    <string name="general_settings_explainer">Altijd pakketnamen tonen</string>
+    <string name="no_handlers_found">Geen browser of native app gevonden!</string>
+    <string name="success">Voltooid</string>
+    <string name="at_least_one_known_browser_installed">Minimaal 1 browser geïnstalleerd</string>
+    <string name="no_browser_installed">Geen browser geïnstalleerd</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
+    <string name="misc_settings">Overige instellingen</string>
+    <string name="donate_card_headline">Doneer om LinkSheet te ondersteunen</string>
+    <string name="import_dumped_preference">Gedumpte voorkeuren importeren</string>
+    <string name="donate_card">Doneren met een pas (via BuyMeACoffee)</string>
+    <string name="donate_learn_more">Meer informatie</string>
+    <string name="generic__label_unknown_profile">Onbekend profiel</string>
 </resources>

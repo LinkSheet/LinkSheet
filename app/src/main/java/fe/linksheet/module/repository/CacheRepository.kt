@@ -14,8 +14,29 @@ class CacheRepository(
     val urlEntryDao: UrlEntryDao,
     private val now: () -> Long = { System.currentTimeMillis() }
 ) {
+
+    suspend fun getOrCreateCacheEntry(url: String): UrlEntry {
+        val entry = urlEntryDao.getUrlEntry(url)
+        if (entry != null) return entry
+
+        return createUrlEntry(url)
+    }
+
+    suspend fun getCacheEntry(url: String): UrlEntry? {
+        return urlEntryDao.getUrlEntry(url)
+    }
+
+    suspend fun getResolved(entryId: Long, resolveType: ResolveType): ResolvedUrl? {
+        return resolvedUrlCacheDao.getResolved(entryId, resolveType.id)
+    }
+
+    suspend fun getCachedHtml(entryId: Long): CachedHtml? {
+        return htmlCacheDao.getCachedHtml(entryId)
+    }
+
+    @Deprecated(message = "Use new API")
     suspend fun checkCache(url: String, resolveType: ResolveType): CacheData? {
-        val entry = urlEntryDao.getCacheEntry(url) ?: return null
+        val entry = urlEntryDao.getUrlEntry(url) ?: return null
 
         val resolved = resolvedUrlCacheDao.getResolved(entry.id, resolveType.id)
         val html = htmlCacheDao.getCachedHtml(entry.id)
@@ -23,13 +44,15 @@ class CacheRepository(
         return CacheData(resolveType, resolved?.result, html?.content)
     }
 
-    suspend fun createUrlEntry(url: String): Long {
-        val id = urlEntryDao.insertReturningId(UrlEntry(timestamp = now(), url = url))
+    suspend fun createUrlEntry(url: String): UrlEntry {
+        val entry = UrlEntry(timestamp = now(), url = url)
+        val id = urlEntryDao.insertReturningId(entry)
 
-        return id
+        entry.id = id
+        return entry
     }
 
-    suspend fun insertResolved(entryId: Long, resolveType: ResolveType, resolvedUrl: String) {
+    suspend fun insertResolved(entryId: Long, resolveType: ResolveType, resolvedUrl: String?) {
         resolvedUrlCacheDao.insert(ResolvedUrl(entryId, resolveType.id, resolvedUrl))
     }
 

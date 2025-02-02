@@ -1,13 +1,14 @@
-package fe.linksheet.experiment.engine.resolver.redirects
+package fe.linksheet.experiment.engine.resolver.followredirects
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
+import assertk.assertions.prop
 import assertk.fail
 import fe.linksheet.LinkSheetTest
-import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.std.result.assert.assertFailure
 import fe.std.result.assert.assertSuccess
+import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.*
 import io.ktor.client.plugins.*
 import io.ktor.http.*
@@ -18,26 +19,26 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class FollowRedirectsLocalSourceTest : LinkSheetTest {
     companion object {
-        private const val input = "https://linksheet.app/redirect-me"
-        private const val target = "https://linksheet.app/target"
+        private const val INPUT = "https://linksheet.app/redirect-me"
+        private const val TARGET = "https://linksheet.app/target"
     }
 
     @Test
     fun `redirect on head request`(): Unit = runBlocking {
         val mockEngine = MockEngine { request ->
             when (request.url.toString()) {
-                input -> respondRedirect(target)
+                INPUT -> respondRedirect(TARGET)
                 else -> respondOk()
             }
         }
 
-        val source = FollowRedirectsLocalSource(mockEngine)
-        val result = source.resolve(input)
+        val source = FollowRedirectsLocalSource(HttpClient(mockEngine))
+        val result = source.resolve(INPUT)
 
         assertSuccess(result)
             .isInstanceOf<FollowRedirectsResult.LocationHeader>()
-            .transform { it.url }
-            .isEqualTo(target)
+            .prop(FollowRedirectsResult.LocationHeader::url)
+            .isEqualTo(TARGET)
     }
 
     @Test
@@ -46,7 +47,7 @@ internal class FollowRedirectsLocalSourceTest : LinkSheetTest {
             when (request.method) {
                 HttpMethod.Head -> respondBadRequest()
                 HttpMethod.Get -> when (request.url.toString()) {
-                    input -> respondRedirect(target)
+                    INPUT -> respondRedirect(TARGET)
                     else -> respondOk()
                 }
 
@@ -54,23 +55,23 @@ internal class FollowRedirectsLocalSourceTest : LinkSheetTest {
             }
         }
 
-        val source = FollowRedirectsLocalSource(mockEngine)
-        val result = source.resolve(input)
+        val source = FollowRedirectsLocalSource(HttpClient(mockEngine))
+        val result = source.resolve(INPUT)
 
         assertSuccess(result)
             .isInstanceOf<FollowRedirectsResult.GetRequest>()
-            .transform { it.url }
-            .isEqualTo(target)
+            .prop(FollowRedirectsResult.GetRequest::url)
+            .isEqualTo(TARGET)
     }
 
     @Test
     fun `redirect loop`(): Unit = runBlocking {
         val mockEngine = MockEngine { _ ->
-            respondRedirect(target)
+            respondRedirect(TARGET)
         }
 
-        val source = FollowRedirectsLocalSource(mockEngine)
-        val result = source.resolve(input)
+        val source = FollowRedirectsLocalSource(HttpClient(mockEngine))
+        val result = source.resolve(INPUT)
 
         assertFailure(result).isInstanceOf<SendCountExceedException>()
     }

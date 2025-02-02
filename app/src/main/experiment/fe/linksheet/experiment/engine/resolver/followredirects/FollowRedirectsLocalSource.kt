@@ -1,5 +1,8 @@
-package fe.linksheet.experiment.engine.resolver.redirects
+package fe.linksheet.experiment.engine.resolver.followredirects
 
+import fe.linksheet.experiment.engine.resolver.configureHeaders
+import fe.linksheet.extension.ktor.isHtml
+import fe.linksheet.extension.ktor.urlString
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest.Companion.parseRefreshHeader
 import fe.std.result.*
 import io.ktor.client.*
@@ -11,13 +14,12 @@ import io.ktor.http.*
 import me.saket.unfurl.extension.HtmlMetadataUnfurlerExtension
 
 
-class FollowRedirectsLocalSource(engine: HttpClientEngine) : FollowRedirectsSource {
-    private val client = HttpClient(engine) {
-        defaultRequest { configureHeaders() }
-    }
+class FollowRedirectsLocalSource(private val client: HttpClient) : FollowRedirectsSource {
 
     override suspend fun resolve(urlString: String): IResult<FollowRedirectsResult> {
-        val headResult = tryCatch { client.head(urlString = urlString) }
+        val headResult = tryCatch {
+            client.head(urlString = urlString) { configureHeaders() }
+        }
         if (headResult.isFailure()) {
             return +headResult
         }
@@ -29,10 +31,12 @@ class FollowRedirectsLocalSource(engine: HttpClientEngine) : FollowRedirectsSour
         }
 
         if (headResponse.status.value !in 400..499) {
-            return FollowRedirectsResult.LocationHeader(headResponse.request.url.toString()).success
+            return FollowRedirectsResult.LocationHeader(headResponse.urlString()).success
         }
 
-        val getResult = tryCatch { client.get(urlString = urlString) }
+        val getResult = tryCatch {
+            client.get(urlString = urlString) { configureHeaders() }
+        }
         if (getResult.isFailure()) {
             return +getResult
         }
@@ -43,17 +47,8 @@ class FollowRedirectsLocalSource(engine: HttpClientEngine) : FollowRedirectsSour
             return FollowRedirectsResult.RefreshHeader(getRefreshHeaderUrl).success
         }
 
-        return FollowRedirectsResult.GetRequest(getResponse.request.url.toString(), getResponse.bodyAsText()).success
-    }
-
-    private fun HttpMessageBuilder.configureHeaders(
-        httpUserAgent: String = HtmlMetadataUnfurlerExtension.SlackBotUserAgent,
-        htmlByteLimit: Long = 32_768
-    ) {
-        header("User-Agent", httpUserAgent)
-        header("Accept", "text/html")
-        header("Accept-Language", "en-US,en;q=0.5")
-        header("Range", "bytes=0-$htmlByteLimit")
+        val htmlText = if (getResponse.isHtml()) getResponse.bodyAsText() else null
+        return FollowRedirectsResult.GetRequest(getResponse.urlString(), htmlText).success
     }
 
     private fun HttpResponse.handleRefreshHeader(): String? {
@@ -65,10 +60,4 @@ class FollowRedirectsLocalSource(engine: HttpClientEngine) : FollowRedirectsSour
             ?.takeIf { parseUrl(it.second) != null }
             ?.second
     }
-}
-
-sealed class FollowRedirectsResult(val url: String) {
-    class RefreshHeader(url: String) : FollowRedirectsResult(url)
-    class LocationHeader(url: String) : FollowRedirectsResult(url)
-    class GetRequest(url: String, val body: String) : FollowRedirectsResult(url)
 }

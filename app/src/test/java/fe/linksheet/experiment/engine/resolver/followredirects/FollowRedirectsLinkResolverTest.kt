@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.engine.resolver.redirects
+package fe.linksheet.experiment.engine.resolver.followredirects
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.all
@@ -20,8 +20,8 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
     companion object {
-        private const val shortUrl = "https://t.co/JvpSaTXZDi"
-        private const val resolvedUrl = "https://grumpy.website"
+        private const val SHORT_URL = "https://t.co/JvpSaTXZDi"
+        private const val RESOLVED_URL = "https://grumpy.website"
     }
 
     private val cacheRepository by lazy {
@@ -36,7 +36,7 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
     }
 
     private val source = FollowRedirectsSource {
-        FollowRedirectsResult.LocationHeader(resolvedUrl).success
+        FollowRedirectsResult.LocationHeader(RESOLVED_URL).success
     }
 
     @Test
@@ -48,17 +48,17 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
             localCache = { true }
         )
 
-        val result = resolver.resolve(ResolveInput(shortUrl))
+        val result = resolver.resolve(ResolveInput(SHORT_URL))
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
-            .isEqualTo(resolvedUrl)
+            .isEqualTo(RESOLVED_URL)
 
-        val entry = database.urlEntryDao().getCacheEntry(resolvedUrl)
+        val entry = database.urlEntryDao().getUrlEntry(SHORT_URL)
         assertThat(entry)
             .isNotNull()
             .all {
-                prop(UrlEntry::url).isEqualTo(resolvedUrl)
+                prop(UrlEntry::url).isEqualTo(SHORT_URL)
                 prop(UrlEntry::timestamp).isEqualTo(unixMillisOf(2025))
             }
     }

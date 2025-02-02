@@ -1,4 +1,4 @@
-package fe.linksheet.experiment.engine.resolver.redirects
+package fe.linksheet.experiment.engine.resolver.followredirects
 
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveInput
@@ -6,8 +6,7 @@ import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.util.web.Darknet
-import fe.std.result.isSuccess
-import io.ktor.client.HttpClient
+import fe.std.result.isFailure
 import org.koin.core.component.KoinComponent
 
 
@@ -18,12 +17,11 @@ class FollowRedirectsLinkResolver(
     private val localCache: () -> Boolean,
 ) : LinkResolver, KoinComponent {
 
-    private suspend fun insertCache(url: String, result: FollowRedirectsResult) {
-        val entry = cacheRepository.createUrlEntry(url)
-        cacheRepository.insertResolved(entry, ResolveType.FollowRedirects, result.url)
+    private suspend fun insertCache(entryId: Long, result: FollowRedirectsResult) {
+        cacheRepository.insertResolved(entryId, ResolveType.FollowRedirects, result.url)
 
-        if (result is FollowRedirectsResult.GetRequest) {
-            cacheRepository.insertHtml(entry, result.body)
+        if (result is FollowRedirectsResult.GetRequest && result.body != null) {
+            cacheRepository.insertHtml(entryId, result.body)
         }
     }
 
@@ -34,21 +32,22 @@ class FollowRedirectsLinkResolver(
         }
 
         val localCache = localCache()
+        val entry = cacheRepository.getOrCreateCacheEntry(data.url)
+
         if (localCache) {
-            val cacheData = cacheRepository.checkCache(data.url, ResolveType.FollowRedirects)
-            if (cacheData != null) {
-                val resolved = cacheData.resolved ?: data.url
-                return ResolveOutput(resolved)
+            val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.FollowRedirects)
+            if (resolvedUrl != null && resolvedUrl.result != null) {
+                return ResolveOutput(resolvedUrl.result)
             }
         }
 
         val result = source.resolve(data.url)
-        if (!result.isSuccess()) {
+        if (result.isFailure()) {
             return ResolveOutput(data.url)
         }
 
         if (localCache) {
-            insertCache(data.url, result.value)
+            insertCache(entry.id, result.value)
         }
 
         return ResolveOutput(result.value.url)

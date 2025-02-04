@@ -534,4 +534,6 @@
         <item quantity="other">%d hôtes par défaut</item>
     </plurals>
     <string name="settings_main_experiment_changelog__title_changelog">Journal des modifications expérimentales</string>
+    <string name="import_dumped_preference">Importations en dumping des préférences</string>
+    <string name="verified_link_handlers_subtitle">Contrôler l\'état de app-domain-verification</string>
 </resources>

@@ -31,6 +31,8 @@ object Experiments : PreferenceDefinition(
     val editClipboard = boolean("experiment_edit_clipboard", true)
     val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
 
+    val noBottomSheetStateSave = boolean("experiment_no_bottom_sheet_state_save")
+
     // TODO: Enforce type
     init {
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
@@ -59,6 +61,7 @@ object Experiments : PreferenceDefinition(
                 )
                 addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
                 addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
+                addPreference(ExperimentPreference("Disable bottom sheet state save", noBottomSheetStateSave))
             },
 
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {

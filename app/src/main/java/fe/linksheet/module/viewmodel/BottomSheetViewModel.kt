@@ -109,6 +109,7 @@ class BottomSheetViewModel(
     val interceptAccidentalTaps = experimentRepository.asState(Experiments.interceptAccidentalTaps)
 
     val manualFollowRedirects = experimentRepository.asState(Experiments.manualFollowRedirects)
+    val noBottomSheetStateSave = experimentRepository.asState(Experiments.noBottomSheetStateSave)
 
     var appListSelectedIdx = mutableIntStateOf(-1)
 

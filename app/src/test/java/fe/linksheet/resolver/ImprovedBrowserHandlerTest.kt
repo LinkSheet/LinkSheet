@@ -2,7 +2,7 @@ package fe.linksheet.resolver
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.listOfFirstActivityResolveInfo
 import app.linksheet.testing.packageSetOf
 import app.linksheet.testing.toKeyedMap

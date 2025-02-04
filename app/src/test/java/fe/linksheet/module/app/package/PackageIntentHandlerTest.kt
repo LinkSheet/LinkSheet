@@ -2,7 +2,7 @@ package fe.linksheet.module.app.`package`
 
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.YatsePackageInfoFake
 import app.linksheet.testing.flatResolveInfos
 import assertk.assertThat

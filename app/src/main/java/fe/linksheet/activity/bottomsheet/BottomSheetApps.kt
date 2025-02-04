@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import app.linksheet.testing.PackageInfoFakes
+import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.listOfFirstActivityResolveInfo
 import app.linksheet.testing.packageName
 import app.linksheet.testing.toActivityAppInfo

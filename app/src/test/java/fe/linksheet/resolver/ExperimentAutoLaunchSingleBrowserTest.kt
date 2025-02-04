@@ -3,6 +3,7 @@ package fe.linksheet.resolver
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.*
+import app.linksheet.testing.fake.PackageInfoFakes
 import assertk.Assert
 import assertk.all
 import assertk.assertAll

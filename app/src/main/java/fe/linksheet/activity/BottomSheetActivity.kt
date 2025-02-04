@@ -67,4 +67,10 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         lifecycleScope.launch { loopDetector.onNewIntent(intent) }
         impl.onNewIntent(intent)
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        if(!viewModel.noBottomSheetStateSave()){
+            super.onSaveInstanceState(outState)
+        }
+    }
 }

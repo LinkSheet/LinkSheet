@@ -84,4 +84,25 @@
     <string name="no_preferred_apps_set_yet">Belum ada aplikasi yang disetel sebagai pilihan.</string>
     <string name="open_with">Buka dengan</string>
     <string name="follow_only_known_trackers">Hanya ikuti pelacak yang diketahui</string>
+    <string name="fastfoward_rules">Gunakan aturan FastForward</string>
+    <string name="follow_redirects_local_cache">Aktifkan singgahan (cache) pengalihan lokal</string>
+    <string name="follow_redirects_local_cache_explainer">Singgahkan (cache) hasil pengalihan secara lokal</string>
+    <string name="resolved_via">%s diselesaikan melalui %s</string>
+    <string name="redirect_resolve_type_remote">peladen jarak jauh</string>
+    <string name="redirect_resolve_type_local">penyelesai lokal</string>
+    <string name="enable_libredirect">Aktifkan LibRedirect</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Antarmuka</string>
+    <string name="instance">Instansi</string>
+    <string name="add">Tambahkan</string>
+    <string name="select_an_app">Pilih apl</string>
+    <string name="close">Tutup</string>
+    <string name="preview_url">Pratinjau URL</string>
+    <string name="fastfoward_rules_explainer">Gunakan integrasi aturan <annotation url-id="fastforward-github">FastForward</annotation> yang bersifat eksperimental (melewati pengalihan beberapa host dengan mengekstrak pengalihan dari tautan)</string>
+    <string name="redirect_resolve_type_local_cache">singgahan (cache) lokal</string>
+    <string name="enable_libredirect_explainer">Alihkan tautan ke antarmuka yang ramah privasi menggunakan integrasi <annotation url-id="libredirect-github">LibRedirect</annotation> yang bersifat eksperimental</string>
+    <string name="dont_show_filtered_item">Jangan perlihatkan bagian \"apl yang terakhir dipilih\"</string>
+    <string name="dont_show_filtered_item_explainer">Jangan perlihatkan bagian atas yang menunjukkan apl yang terakhir digunakan untuk host yang diklik</string>
+    <string name="preview_url_explainer">Memperlihatkan URL yang diklik (usai diproses)</string>
 </resources>

@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class SpanFormatterTest : LinkSheetTest {
+internal class SpanFormatterTest : UnitTest {
 
     private fun compareHtml(
         input: SpannableStringBuilder.() -> Unit,

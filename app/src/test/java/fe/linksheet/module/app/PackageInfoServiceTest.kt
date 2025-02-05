@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.ImageFakes
 import app.linksheet.testing.fake.PackageInfoFakes
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.UnitTest
 import fe.linksheet.module.app.`package`.DefaultPackageBrowserService
 import fe.linksheet.module.app.`package`.DefaultPackageIconLoader
 import fe.linksheet.module.app.`package`.DefaultPackageLabelService
@@ -17,7 +17,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageInfoServiceTest : LinkSheetTest{
+internal class PackageInfoServiceTest : UnitTest{
 
     @Test
     fun test() {

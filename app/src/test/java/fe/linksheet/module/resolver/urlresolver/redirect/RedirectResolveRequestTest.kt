@@ -9,7 +9,7 @@ import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import assertk.tableOf
 import fe.httpkt.Request
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.UnitTest
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.file.DebugLogPersistService
 import fe.linksheet.module.log.internal.DefaultLoggerDelegate
@@ -27,7 +27,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class RedirectResolveRequestTest : LinkSheetTest {
+internal class RedirectResolveRequestTest : UnitTest {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
             "test",

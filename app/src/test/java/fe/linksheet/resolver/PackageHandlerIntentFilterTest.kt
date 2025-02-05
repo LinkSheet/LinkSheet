@@ -5,6 +5,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.testing.addDataPaths
+import app.linksheet.testing.buildIntentFilter
+import fe.linksheet.UnitTest
 import app.linksheet.testing.util.addDataPaths
 import app.linksheet.testing.util.buildIntentFilter
 import fe.linksheet.LinkSheetTest
@@ -18,7 +21,7 @@ import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageHandlerIntentFilterTest : LinkSheetTest {
+internal class PackageHandlerIntentFilterTest : UnitTest {
     companion object {
         private val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> listOf() },

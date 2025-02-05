@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 import javax.crypto.Mac
 
 @RunWith(AndroidJUnit4::class)
-class UriHasherTest : LinkSheetTest {
+class UriHasherTest : UnitTest {
     private val mac: Mac
 
     init {

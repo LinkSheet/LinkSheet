@@ -4,14 +4,13 @@ import android.os.Build
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.RobolectricTest
 import fe.linksheet.systeminfo.device.*
 import fe.linksheet.module.devicecompat.miui.MiuiAuditor
 import fe.linksheet.module.systeminfo.DeviceInfo
 import fe.linksheet.module.systeminfo.SystemInfoService
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.ConscryptMode
 import kotlin.test.Test
@@ -19,12 +18,10 @@ import kotlin.test.Test
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 @ConscryptMode(ConscryptMode.Mode.OFF)
-internal class MiuiAuditorTest : LinkSheetTest {
+internal class MiuiAuditorTest : RobolectricTest {
 
     @Test
     fun test() {
-        val context = RuntimeEnvironment.getApplication().applicationContext
-
         tableOf("device", "expectedDeviceInfo", "expectedMiui", "expectedFingerprint")
             .row<Device, DeviceInfo, MiuiAuditor.MiuiVersion, String>(
                 XiaomiRedmi2a,

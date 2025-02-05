@@ -8,7 +8,7 @@ import app.linksheet.testing.util.packageSetOf
 import app.linksheet.testing.util.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.UnitTest
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
@@ -19,7 +19,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class ImprovedBrowserHandlerTest : LinkSheetTest {
+internal class ImprovedBrowserHandlerTest : UnitTest {
     companion object {
         private val handler = ImprovedBrowserHandler(
             autoLaunchSingleBrowserExperiment = { false },

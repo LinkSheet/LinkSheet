@@ -17,7 +17,7 @@ import kotlin.test.Test
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class LastVersionServiceTest : LinkSheetTest {
+internal class LastVersionServiceTest : UnitTest {
 
     companion object {
         private val gson = GsonBuilder().apply {

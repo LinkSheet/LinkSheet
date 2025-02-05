@@ -6,13 +6,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.UnitTest
 import mozilla.components.support.utils.toSafeIntent
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class IntentParserTest : LinkSheetTest {
+internal class IntentParserTest : UnitTest {
     @Test
     fun `test view intent parsing`() {
         tableOf("intent", "expected")

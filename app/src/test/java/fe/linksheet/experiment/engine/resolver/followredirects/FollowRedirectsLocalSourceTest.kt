@@ -5,7 +5,7 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import assertk.fail
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.UnitTest
 import fe.std.result.assert.assertFailure
 import fe.std.result.assert.assertSuccess
 import io.ktor.client.HttpClient
@@ -17,7 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class FollowRedirectsLocalSourceTest : LinkSheetTest {
+internal class FollowRedirectsLocalSourceTest : UnitTest {
     companion object {
         private const val INPUT = "https://linksheet.app/redirect-me"
         private const val TARGET = "https://linksheet.app/target"

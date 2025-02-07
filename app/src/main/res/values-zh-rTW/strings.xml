@@ -13,7 +13,7 @@
     <string name="apps_which_can_open_links_explainer_2">列出可能影響 LinkSheet 行為的所有應用程式</string>
     <string name="no_preferred_apps_set_yet">尚未設定偏好應用程式。</string>
     <string name="search">搜尋</string>
-    <string name="copy_url">複製網址</string>
+    <string name="copy_url">複製連結</string>
     <string name="url_copied">網址已複製到剪貼簿</string>
     <string name="confirm">確認</string>
     <string name="clear">清除</string>

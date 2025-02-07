@@ -3,6 +3,7 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import android.content.ClipboardManager
 import androidx.core.content.getSystemService
+import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -13,6 +14,7 @@ class CrashHandlerViewerViewModel(
     val preferenceRepository: AppPreferenceRepository,
     experimentsRepository: ExperimentRepository,
     val logViewCommon: LogViewCommon,
+    val logPersistService: LogPersistService
 ) : BaseViewModel(preferenceRepository) {
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
 }

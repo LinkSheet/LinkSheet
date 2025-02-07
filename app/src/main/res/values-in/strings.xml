@@ -105,4 +105,20 @@
     <string name="dont_show_filtered_item">Jangan perlihatkan bagian \"apl yang terakhir dipilih\"</string>
     <string name="dont_show_filtered_item_explainer">Jangan perlihatkan bagian atas yang menunjukkan apl yang terakhir digunakan untuk host yang diklik</string>
     <string name="preview_url_explainer">Memperlihatkan URL yang diklik (usai diproses)</string>
+    <string name="download">Unduh</string>
+    <string name="linksheet_download">Unduhan LinkSheet</string>
+    <string name="enable_downloader">Aktifkan pengunduh</string>
+    <string name="downloader_url_mime_type">Gunakan jenis mime dari URL</string>
+    <string name="random_instance">Instansi acak</string>
+    <string name="app_name">LinkSheet</string>
+    <string name="download_started">Unduhan dimulai</string>
+    <string name="url_copied_toast">URL disalin</string>
+    <string name="notifications_explainer">URL disalin, Unduhan dimulai</string>
+    <string name="download_started_toast">Unduhan dimulai</string>
+    <string name="enable_downloader_explainer">Tambahkan tombol \"Unduh\" ke lembar bawah jika URL berisi tautan langsung ke berkas. Opsi ini mungkin memiliki <annotation url-id="privacy-downloader">implikasi terkait privasi</annotation></string>
+    <string name="downloader_url_mime_type_explainer">Memeriksa apakah URL diakhiri dengan ekstensi berkas (misalnya \".jpg\"); Jika ya, jenis ini digunakan untuk berkas yang diunduh.</string>
+    <string name="resolve_event__download_check">Memeriksa kemampuan untuk diunduh</string>
+    <string name="settings_links_downloader__title_downloader">Pengunduh</string>
+    <string name="download_started_toast_explainer">Perlihatkan toast ketika unduhan telah dimulai</string>
+    <string name="instance_not_available_anymore">Instansi tidak tersedia lagi!</string>
 </resources>

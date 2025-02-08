@@ -17,7 +17,7 @@ import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
@@ -57,7 +57,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun `skip cache if disabled`() = runBlocking {
+    fun `skip cache if disabled`() = runTest {
         val resolver = Amp2HtmlLinkResolver(
             source = source,
             cacheRepository = cacheRepository,
@@ -78,7 +78,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun `return cached url if present`() = runBlocking {
+    fun `return cached url if present`() = runTest {
         val resolver = Amp2HtmlLinkResolver(
             source = createSource("https://not-from-cache.com", "<html></html>"),
             cacheRepository = cacheRepository,
@@ -100,7 +100,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun `use cached html if present`() = runBlocking {
+    fun `use cached html if present`() = runTest {
         val cachedHtml = "<html><body><h1>Cached html</h1></body></html>"
         val resolver = Amp2HtmlLinkResolver(
             source = object : Amp2HtmlSource {

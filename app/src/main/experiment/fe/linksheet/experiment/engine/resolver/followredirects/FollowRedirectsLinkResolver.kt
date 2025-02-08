@@ -1,5 +1,7 @@
 package fe.linksheet.experiment.engine.resolver.followredirects
 
+import android.net.Uri
+import fe.fastforwardkt.FastForward
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveInput
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
@@ -7,15 +9,17 @@ import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.util.web.Darknet
 import fe.std.result.isFailure
-import org.koin.core.component.KoinComponent
 
 
 class FollowRedirectsLinkResolver(
     private val source: FollowRedirectsSource,
     private val cacheRepository: CacheRepository,
+    private val isDarknet: (Uri) -> Boolean = { Darknet.getOrNull(it) != null },
+    private val isTracker: (String) -> Boolean= { FastForward.isTracker(it) },
     private val allowDarknets: () -> Boolean,
+    private val followOnlyKnownTrackers: () -> Boolean,
     private val localCache: () -> Boolean,
-) : LinkResolver, KoinComponent {
+) : LinkResolver {
 
     private suspend fun insertCache(entryId: Long, result: FollowRedirectsResult) {
         cacheRepository.insertResolved(entryId, ResolveType.FollowRedirects, result.url)
@@ -26,8 +30,13 @@ class FollowRedirectsLinkResolver(
     }
 
     override suspend fun resolve(data: ResolveInput): ResolveOutput? {
-        val darknet = Darknet.getOrNull(data.uri)
-        if (!allowDarknets() && darknet != null) {
+        val isTracker = isTracker(data.url)
+        if(followOnlyKnownTrackers() && !isTracker) {
+            return ResolveOutput(data.url)
+        }
+
+        val isDarknet = isDarknet(data.uri)
+        if (!allowDarknets() && isDarknet) {
             return ResolveOutput(data.url)
         }
 

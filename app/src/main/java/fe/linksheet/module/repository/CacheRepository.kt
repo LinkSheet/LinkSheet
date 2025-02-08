@@ -2,6 +2,7 @@ package fe.linksheet.module.repository
 
 import fe.linksheet.module.database.dao.cache.*
 import fe.linksheet.module.database.entity.cache.CachedHtml
+import fe.linksheet.module.database.entity.cache.PreviewCache
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.cache.ResolvedUrl
 import fe.linksheet.module.database.entity.cache.UrlEntry
@@ -32,6 +33,10 @@ class CacheRepository(
 
     suspend fun getCachedHtml(entryId: Long): CachedHtml? {
         return htmlCacheDao.getCachedHtml(entryId)
+    }
+
+    suspend fun getCachedPreview(entryId: Long): PreviewCache? {
+        return previewCacheDao.getPreviewCache(entryId)
     }
 
     @Deprecated(message = "Use new API")

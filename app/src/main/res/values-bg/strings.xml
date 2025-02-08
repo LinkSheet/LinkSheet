@@ -531,4 +531,5 @@
         <item quantity="other">%d подразбирани хоста</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Мрежов четец</string>
+    <string name="generic__button_text_share">Споделяне</string>
 </resources>

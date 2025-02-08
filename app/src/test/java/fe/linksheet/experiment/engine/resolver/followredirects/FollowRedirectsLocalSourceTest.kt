@@ -12,7 +12,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.*
 import io.ktor.client.plugins.*
 import io.ktor.http.*
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -24,7 +24,7 @@ internal class FollowRedirectsLocalSourceTest : UnitTest {
     }
 
     @Test
-    fun `redirect on head request`(): Unit = runBlocking {
+    fun `redirect on head request`(): Unit = runTest {
         val mockEngine = MockEngine { request ->
             when (request.url.toString()) {
                 INPUT -> respondRedirect(TARGET)
@@ -42,7 +42,7 @@ internal class FollowRedirectsLocalSourceTest : UnitTest {
     }
 
     @Test
-    fun `return 400 on head, redirect on get`(): Unit = runBlocking {
+    fun `return 400 on head, redirect on get`(): Unit = runTest {
         val mockEngine = MockEngine { request ->
             when (request.method) {
                 HttpMethod.Head -> respondBadRequest()
@@ -65,7 +65,7 @@ internal class FollowRedirectsLocalSourceTest : UnitTest {
     }
 
     @Test
-    fun `redirect loop`(): Unit = runBlocking {
+    fun `redirect loop`(): Unit = runTest {
         val mockEngine = MockEngine { _ ->
             respondRedirect(TARGET)
         }

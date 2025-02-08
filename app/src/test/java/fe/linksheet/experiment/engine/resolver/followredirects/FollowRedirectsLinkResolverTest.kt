@@ -13,7 +13,7 @@ import fe.linksheet.module.database.entity.cache.UrlEntry
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.success
 import fe.std.time.unixMillisOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
@@ -40,11 +40,12 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun test() = runBlocking {
+    fun test() = runTest {
         val resolver = FollowRedirectsLinkResolver(
             source = source,
             cacheRepository = cacheRepository,
             allowDarknets = { false },
+            followOnlyKnownTrackers = { false },
             localCache = { true }
         )
 

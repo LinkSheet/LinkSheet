@@ -54,11 +54,11 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
     trySubstitute(devProperties["kotlin-ext.dir"], "com.gitlab.grrfe.kotlin-ext") {
         this["core"] = "core"
         this["io"] = "io"
-        this["java-time"] = "java-time"
+        this["time-core"] = "time:time-core"
+        this["time-java"] = "time:time-java"
         this["result-core"] = "result:result-core"
         this["result-assert"] = "result:result-assert"
         this["process-core"] = "process:process-core"
-        this["process-android"] = "process:process-android"
         this["uri"] = "uri"
     }
 

@@ -28,9 +28,15 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
         val bom = module("platform", isBom = true)
 
         val core = module("core")
-        val javaTime = module("java-time")
         val io = module("io")
         val uri = module("uri")
+
+        val time = Time
+
+        object Time : IsNotADependency {
+            val core = DependencyNotation(group = group, name = "time-core")
+            val java = DependencyNotation(group = group, name = "time-java")
+        }
 
 
         val result = Result

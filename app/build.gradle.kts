@@ -295,7 +295,7 @@ dependencies {
 
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
-    implementation(Grrfe.httpkt.gson)
+    implementation(Grrfe.httpkt.serialization.gson)
     implementation(Grrfe.ext.gson)
 
     implementation(_1fexd.clearUrl)

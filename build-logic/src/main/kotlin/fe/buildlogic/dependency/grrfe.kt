@@ -13,7 +13,13 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
         val bom = module("platform", isBom = true)
 
         val core = module("core")
-        val gson = module("ext-gson")
+
+        val serialization = Serialization
+
+        object Serialization : IsNotADependency {
+            val gson = module("serialization-gson")
+            val jsoup = module("serialization-jsoup")
+        }
     }
 
     val ext = Ext

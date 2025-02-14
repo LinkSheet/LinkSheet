@@ -2,8 +2,11 @@ package fe.linksheet.resolver
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.testing.*
 import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.util.PackageInfoFake
+import app.linksheet.testing.util.listOfFirstActivityResolveInfo
+import app.linksheet.testing.util.packageName
+import app.linksheet.testing.util.toKeyedMap
 import assertk.Assert
 import assertk.all
 import assertk.assertAll

@@ -1,4 +1,4 @@
-package app.linksheet.testing
+package app.linksheet.testing.util
 
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.ResolveInfo
 import androidx.compose.ui.graphics.ImageBitmap
 import app.linksheet.testing.fake.ImageFakes
+import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.module.app.ActivityAppInfo
 
 fun buildPackageInfoTestFake(packageName: String, name: String, block: PackageInfoFakeScope.() -> Unit): PackageInfoFake {
@@ -32,7 +33,7 @@ annotation class PackageInfoFakeDsl
 class PackageInfoFakeScope(val packageInfo: PackageInfo) {
     val resolveInfos = mutableListOf<ResolveInfo>()
 
-    fun activity(name: String, block: (ActivityScope.() -> Unit)? = null) {
+    fun activity(name: String, exported: Boolean = true, block: (ActivityScope.() -> Unit)? = null) {
         val activityInfo = ActivityInfo().apply {
             this.name = name
             applicationInfo = packageInfo.applicationInfo
@@ -52,6 +53,7 @@ class PackageInfoFakeScope(val packageInfo: PackageInfo) {
         }
 
         activityInfo.targetActivity = scope.targetActivity
+        activityInfo.exported = exported
     }
 }
 
@@ -120,4 +122,8 @@ fun Iterable<PackageInfoFake>.toKeyedMap(): Map<String, ResolveInfo> {
 
 fun PackageInfoFake.toKeyedMap(): Map<String, ResolveInfo> {
     return mapOf(this.packageName to firstActivityResolveInfo!!)
+}
+
+fun Iterable<ResolveInfo>.asDescriptors(): List<String> {
+    return map { it.activityInfo.activityDescriptor }.distinct()
 }

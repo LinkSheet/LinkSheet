@@ -1,6 +1,11 @@
-package app.linksheet.testing
+package app.linksheet.testing.fake
 
 import android.os.PatternMatcher
+import app.linksheet.testing.util.addDataPaths
+import app.linksheet.testing.util.addDataTypes
+import app.linksheet.testing.util.addHosts
+import app.linksheet.testing.util.buildIntentFilter
+import app.linksheet.testing.util.buildPackageInfoTestFake
 
 private val mimeTypeIntentFilter = buildIntentFilter {
     addAction("android.intent.action.VIEW")

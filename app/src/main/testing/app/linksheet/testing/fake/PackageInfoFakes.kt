@@ -1,7 +1,6 @@
 package app.linksheet.testing.fake
 
-import app.linksheet.testing.YatsePackageInfoFake
-import app.linksheet.testing.buildPackageInfoTestFake
+import app.linksheet.testing.util.buildPackageInfoTestFake
 
 object PackageInfoFakes {
     val MiBrowser = buildPackageInfoTestFake("com.mi.globalbrowser", "MiBrowser") {

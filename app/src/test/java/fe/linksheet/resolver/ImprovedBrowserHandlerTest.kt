@@ -3,9 +3,9 @@ package fe.linksheet.resolver
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.listOfFirstActivityResolveInfo
-import app.linksheet.testing.packageSetOf
-import app.linksheet.testing.toKeyedMap
+import app.linksheet.testing.util.listOfFirstActivityResolveInfo
+import app.linksheet.testing.util.packageSetOf
+import app.linksheet.testing.util.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
 import fe.linksheet.LinkSheetTest

@@ -21,9 +21,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.listOfFirstActivityResolveInfo
-import app.linksheet.testing.packageName
-import app.linksheet.testing.toActivityAppInfo
+import app.linksheet.testing.util.listOfFirstActivityResolveInfo
+import app.linksheet.testing.util.packageName
+import app.linksheet.testing.util.toActivityAppInfo
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn

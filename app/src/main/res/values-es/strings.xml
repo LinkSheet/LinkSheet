@@ -139,7 +139,7 @@
     <string name="no_such_app_found">¡No se encontró la aplicación!</string>
     <string name="request_private_browsing">Privado</string>
     <string name="always">Siempre</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="select_an_app">Seleccionar una aplicación</string>
     <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> <font face="monospace">%s</font></string>
     <string name="resolved_via">%s vía resuelta %s</string>

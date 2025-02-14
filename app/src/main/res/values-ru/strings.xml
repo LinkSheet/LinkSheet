@@ -119,7 +119,7 @@
     <string name="no_such_app_found">Такого приложения не найдено!</string>
     <string name="request_private_browsing">Приватный</string>
     <string name="always">Всегда</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="select_an_app">Выбрать приложение</string>
     <string name="resolved_via">%s решено через %s</string>
     <string name="instance_not_available_anymore">Экземпляр больше не доступен!</string>

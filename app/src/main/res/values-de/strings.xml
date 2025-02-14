@@ -176,7 +176,7 @@
     <string name="shizuku_not_running_explainer">Shizuku wird nicht ausgeführt. Tippen Sie hier, um Shizuku zu öffnen, und folgen Sie dann den Anweisungen, um es zu starten</string>
     <string name="browser_status">Browser-Status</string>
     <string name="request_private_browsing">Privat</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="select_an_app">App auswählen</string>
     <string name="github_workflow_run_id">Build-Workflow-ID:</string>
     <string name="resolved_via">%s aufgelöst über %s</string>

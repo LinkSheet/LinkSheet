@@ -54,7 +54,7 @@
     <string name="credits">鳴謝</string>
     <string name="credits_explainer">開源授權</string>
     <string name="version">LinkSheet版本</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">Github</string>
     <string name="github_explainer">原始碼存放庫</string>
     <string name="donate_crypto">捐贈</string>

@@ -33,7 +33,7 @@
     <string name="set_as_browser_done">LinkSheet is nu de standaardbrowser!</string>
     <string name="app_browsers">Apps &amp; Browsers</string>
     <string name="settings">Instellingen</string>
-    <string name="open_link_with">OpenLinkMet</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="loading_link">Link verwerken…</string>
     <string name="follow_redirects_external_service">Omleidingen volgen via een externe service</string>
     <string name="follow_redirects_external_service_explainer">Volg omleidingen met behulp van een API op supabase.com (<annotation url-id="supabase-privacy">Privacybeleid</annotation>)</string>

@@ -95,7 +95,7 @@
     <string name="download_started">Letöltés elindult</string>
     <string name="credits_explainer">Köszönetnyilvánítás, licenc</string>
     <string name="version">LinkSheet verzió</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">Github</string>
     <string name="donate_subtitle">Frissítsen a <b>LinkSheet Pro</b>-ra</string>
     <string name="paste">Beillesztés</string>

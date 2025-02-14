@@ -67,7 +67,7 @@
     <string name="selected_browser_explainer">Hiçbir yerel uygulama tıklanan bağlantıyı işleyemezse bu tarayıcı otomatik olarak açılır</string>
     <string name="bottom_sheet_explainer">Yapılandırma &amp; Özelleştirme</string>
     <string name="open_copied_link">Panodan</string>
-    <string name="open_link_with">Bağlantıyı Şununla Aç</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github_explainer">Kaynak kodu deposu</string>
     <string name="use_clear_urls_explainer">Deneysel <annotation url-id="clearurls-github">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler)</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>

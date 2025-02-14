@@ -47,7 +47,7 @@
     <string name="credits">Uznanie</string>
     <string name="credits_explainer">Podziękowania, Licencjonowanie</string>
     <string name="version">Informacje o wersji</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">GitHub</string>
     <string name="github_explainer">Repozytorium kodu źródłowego</string>
     <string name="donate_crypto">Wesprzyj poprzez krypto</string>

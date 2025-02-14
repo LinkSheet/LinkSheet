@@ -43,7 +43,7 @@
     <string name="bottom_sheet_explainer">Configuração e Personalização</string>
     <string name="credits_explainer">Agradecimentos, Licenciamento</string>
     <string name="version">Versão do LinkSheet</string>
-    <string name="open_link_with">AbrirLinkCom</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github_explainer">Repositório de código-fonte</string>
     <string name="donate_subtitle">Atualizar para <b>LinkSheet Pro</b></string>
     <string name="links">Links</string>

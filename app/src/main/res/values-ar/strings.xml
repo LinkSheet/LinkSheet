@@ -22,7 +22,7 @@
     <string name="hide_after_copying">إخفاء تلقائي بعد الإجراء</string>
     <string name="display_grid_layout">تخطيط الشبكة</string>
     <string name="save">حفظ</string>
-    <string name="open_link_with">افتح الرابط بواسطة</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="just_once">مرة واحدة</string>
     <string name="default_apps">التطبيقات المفضلة</string>
     <string name="set_as_browser">تعيين كمتصفح</string>

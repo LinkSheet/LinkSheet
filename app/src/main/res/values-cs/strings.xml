@@ -28,7 +28,7 @@
     <string name="remove_all">Odstranit vše</string>
     <string name="bottom_sheet">Spodní list</string>
     <string name="save">Uložit</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="version">Verze aplikace LinkSheet</string>
     <string name="github_explainer">Repozitář se zdrojovým kódem</string>
     <string name="use_clear_urls">Použít ClearURLs</string>

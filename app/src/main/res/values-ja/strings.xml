@@ -49,7 +49,7 @@
     <string name="save">保存</string>
     <string name="about">詳細</string>
     <string name="credits">クレジット</string>
-    <string name="open_link_with">次のアプリで開く</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">Github</string>
     <string name="paste">貼り付け</string>
     <string name="error">エラー</string>

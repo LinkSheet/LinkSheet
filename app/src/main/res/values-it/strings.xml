@@ -12,7 +12,7 @@
     <string name="none">Nessuno</string>
     <string name="always_ask_explainer">Proponi sempre tutti i browser</string>
     <string name="version">Versione</string>
-    <string name="open_link_with">Apri il link con...</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="donate_crypto">Dona</string>
     <string name="theme">Tema</string>
     <string name="default_apps">App preferite</string>

@@ -75,7 +75,7 @@
     <string name="use_clear_urls_explainer">Gunakan integrasi <annotation url-id="clearurls-github">ClearURLs</annotation> yang bersifat eksperimental (membersihkan parameter pelacakan dari URL)</string>
     <string name="loading_link">Memproses tautan…</string>
     <string name="open_with_linksheet">Buka dengan LinkSheet</string>
-    <string name="open_link_with">OpenLinkWith</string>
+    <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="whitelisted_browsers">Peramban yang masuk daftar putih</string>
     <string name="follow_redirects_external_service_explainer">Ikuti pengalihan menggunakan API yang digunakan di supabase.com (<annotation url-id="supabase-privacy">Kebijakan privasi</annotation>)</string>
     <string name="follow_redirects_explainer">Ikuti semua pengalihan secara otomatis sebelum membuka lembar bawah. Opsi ini mungkin memiliki <annotation url-id="privacy-follow-redirects">implikasi terkait privasi</annotation></string>

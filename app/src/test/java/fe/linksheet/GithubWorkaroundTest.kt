@@ -13,7 +13,7 @@ import kotlin.test.assertNull
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class GithubWorkaroundTest : LinkSheetTest{
+internal class GithubWorkaroundTest : LinkSheetTest {
     @Test
     fun test() {
         val notFixedUri = BottomSheetViewModel.GithubWorkaround.tryFixUri(

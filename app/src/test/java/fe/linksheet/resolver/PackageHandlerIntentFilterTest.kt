@@ -18,7 +18,7 @@ import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class PackageHandlerIntentFilterTest : LinkSheetTest {
+internal class PackageHandlerIntentFilterTest : LinkSheetTest {
     companion object {
         private val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> listOf() },

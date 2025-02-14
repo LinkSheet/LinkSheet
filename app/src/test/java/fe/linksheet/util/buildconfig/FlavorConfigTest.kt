@@ -11,7 +11,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class FlavorConfigTest : LinkSheetTest{
+internal class FlavorConfigTest : LinkSheetTest {
     @OptIn(ExperimentalEncodingApi::class)
     @Test
     fun test() {

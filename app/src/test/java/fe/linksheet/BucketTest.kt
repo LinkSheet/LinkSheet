@@ -6,15 +6,13 @@ import assertk.assertThat
 import assertk.assertions.isCloseTo
 import fe.linksheet.module.preference.Bucket
 import fe.linksheet.util.percent
-import org.junit.After
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class BucketTest : LinkSheetTest {
+internal class BucketTest : LinkSheetTest {
     @Test
     fun test() {
         if (System.getenv("CI")?.toBooleanStrictOrNull() == true) {

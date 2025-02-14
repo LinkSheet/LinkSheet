@@ -15,7 +15,7 @@ import kotlin.test.Test
 internal class PackageIntentHandlerTest : LinkSheetTest {
 
     @Test
-    fun `trampoline activity correctly handled`() {
+    fun `test trampoline activity correctly handled`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },
@@ -31,7 +31,7 @@ internal class PackageIntentHandlerTest : LinkSheetTest {
     }
 
     @Test
-    fun `non-exported activities are ignored`() {
+    fun `test non-exported activities are ignored`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> TurretPackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },

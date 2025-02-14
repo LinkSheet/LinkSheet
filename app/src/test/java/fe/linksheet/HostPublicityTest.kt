@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class HostPublicityTest : LinkSheetTest {
+internal class HostPublicityTest : LinkSheetTest {
     companion object {
         private val data = mapOf(
             "localhost" to false,

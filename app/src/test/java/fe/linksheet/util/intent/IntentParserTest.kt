@@ -14,7 +14,7 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class IntentParserTest : LinkSheetTest {
     @Test
-    fun `test parse view intent`() {
+    fun `test view intent parsing`() {
         tableOf("intent", "expected")
             .row(
                 buildIntent(Intent.ACTION_VIEW, Uri.parse("http://data.com")),

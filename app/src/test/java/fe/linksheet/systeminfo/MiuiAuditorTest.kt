@@ -19,7 +19,7 @@ import kotlin.test.Test
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 @ConscryptMode(ConscryptMode.Mode.OFF)
-internal class MiuiAuditorTest : LinkSheetTest{
+internal class MiuiAuditorTest : LinkSheetTest {
 
     @Test
     fun test() {

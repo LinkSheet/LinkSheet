@@ -8,8 +8,6 @@ import app.linksheet.testing.util.asDescriptors
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import fe.linksheet.UnitTest
-import fe.linksheet.extension.android.info
-import fe.linksheet.UnitTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
 

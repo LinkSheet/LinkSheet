@@ -29,7 +29,7 @@ class InAppBrowserSettingsViewModel(
     private val repository: DisableInAppBrowserInSelectedRepository,
     preferenceRepository: AppPreferenceRepository,
 ) : BrowserCommonViewModel(context, preferenceRepository) {
-    var inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserSettings)
+    val inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserSettings)
 
     private val _searchFilter = MutableStateFlow("")
     val searchFilter = _searchFilter.asStateFlow()
@@ -75,7 +75,7 @@ class InAppBrowserSettingsViewModel(
 class SelectableApp(
     val applicationInfo: ApplicationInfo,
     val label: String,
-    var selected: MutableState<Boolean> = mutableStateOf(false),
+    val selected: MutableState<Boolean> = mutableStateOf(false),
 ) {
     val compareLabel = label.lowercase()
     val packageName: String = applicationInfo.packageName

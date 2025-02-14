@@ -8,7 +8,6 @@ import org.koin.test.KoinTest
 import org.robolectric.RuntimeEnvironment
 
 interface BaseTest : KoinTest {
-
     @After
     fun teardown() {
         stopKoin()

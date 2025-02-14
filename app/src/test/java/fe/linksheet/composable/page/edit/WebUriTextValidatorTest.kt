@@ -9,7 +9,7 @@ import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class TextValidatorTest : UnitTest {
+internal class WebUriTextValidatorTest : UnitTest {
 
     @Test
     fun `test web uri text validator`() {

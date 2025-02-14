@@ -11,11 +11,11 @@ class LinksSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var useClearUrls = preferenceRepository.asState(AppPreferences.useClearUrls)
-    var useFastForwardRules = preferenceRepository.asState(AppPreferences.useFastForwardRules)
-    var enableLibRedirect = preferenceRepository.asState(AppPreferences.enableLibRedirect)
-    var followRedirects = preferenceRepository.asState(AppPreferences.followRedirects)
-    var enableDownloader = preferenceRepository.asState(AppPreferences.enableDownloader)
-    var enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
+    val useClearUrls = preferenceRepository.asState(AppPreferences.useClearUrls)
+    val useFastForwardRules = preferenceRepository.asState(AppPreferences.useFastForwardRules)
+    val enableLibRedirect = preferenceRepository.asState(AppPreferences.enableLibRedirect)
+    val followRedirects = preferenceRepository.asState(AppPreferences.followRedirects)
+    val enableDownloader = preferenceRepository.asState(AppPreferences.enableDownloader)
+    val enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
     val resolveEmbeds  = preferenceRepository.asState(AppPreferences.resolveEmbeds)
 }

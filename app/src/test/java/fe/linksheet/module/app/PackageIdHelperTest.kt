@@ -5,12 +5,12 @@ import app.linksheet.testing.fake.YatsePackageInfoFake
 import app.linksheet.testing.util.asDescriptors
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import fe.linksheet.LinkSheetTest
+import fe.linksheet.UnitTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class PackageIdHelperTest : LinkSheetTest {
+internal class PackageIdHelperTest : UnitTest {
     @Test
     fun `test activity descriptors`() {
         val result = YatsePackageInfoFake.resolveInfos.asDescriptors()

@@ -11,5 +11,5 @@ class SettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var devModeEnabled = preferenceRepository.asState(AppPreferences.devModeEnabled)
+    val devModeEnabled = preferenceRepository.asState(AppPreferences.devModeEnabled)
 }

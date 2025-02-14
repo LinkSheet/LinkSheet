@@ -30,7 +30,7 @@ versioning {
     releaseParser = TagReleaseParser.closure
 }
 
-var appName = "LinkSheet"
+val appName = "LinkSheet"
 val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
 
 android {

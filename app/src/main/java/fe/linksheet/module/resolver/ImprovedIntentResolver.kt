@@ -81,10 +81,10 @@ class ImprovedIntentResolver(
     private val logger by injectLogger<ImprovedIntentResolver>()
 
     private val useClearUrls = prefRepo.asState(AppPreferences.useClearUrls)
-    private var useFastForwardRules = prefRepo.asState(AppPreferences.useFastForwardRules)
+    private val useFastForwardRules = prefRepo.asState(AppPreferences.useFastForwardRules)
 
-    private var enableIgnoreLibRedirectButton = prefRepo.asState(AppPreferences.enableIgnoreLibRedirectButton)
-    private var enableLibRedirect = prefRepo.asState(AppPreferences.enableLibRedirect)
+    private val enableIgnoreLibRedirectButton = prefRepo.asState(AppPreferences.enableIgnoreLibRedirectButton)
+    private val enableLibRedirect = prefRepo.asState(AppPreferences.enableLibRedirect)
     private val followRedirects = prefRepo.asState(AppPreferences.followRedirects)
     private val followRedirectsSkipBrowser = prefRepo.asState(AppPreferences.followRedirectsSkipBrowser)
 
@@ -96,8 +96,8 @@ class ImprovedIntentResolver(
     private val followRedirectsAllowDarknets = prefRepo.asState(AppPreferences.followRedirectsAllowDarknets)
     private val requestTimeout = prefRepo.asState(AppPreferences.requestTimeout)
 
-    private var enableDownloader = prefRepo.asState(AppPreferences.enableDownloader)
-    private var downloaderCheckUrlMimeType = prefRepo.asState(AppPreferences.downloaderCheckUrlMimeType)
+    private val enableDownloader = prefRepo.asState(AppPreferences.enableDownloader)
+    private val downloaderCheckUrlMimeType = prefRepo.asState(AppPreferences.downloaderCheckUrlMimeType)
 
     private val dontShowFilteredItem = prefRepo.asState(AppPreferences.dontShowFilteredItem)
 

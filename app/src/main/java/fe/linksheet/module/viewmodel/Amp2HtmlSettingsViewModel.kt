@@ -11,7 +11,7 @@ class Amp2HtmlSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
+    val enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
     val enableAmp2HtmlLocalCache = preferenceRepository.asState(
         AppPreferences.amp2HtmlLocalCache
     )

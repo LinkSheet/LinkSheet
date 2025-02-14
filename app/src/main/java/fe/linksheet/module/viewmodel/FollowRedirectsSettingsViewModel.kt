@@ -12,15 +12,15 @@ class FollowRedirectsSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    var followRedirects = preferenceRepository.asState(AppPreferences.followRedirects)
-    var followRedirectsLocalCache = preferenceRepository.asState(
+    val followRedirects = preferenceRepository.asState(AppPreferences.followRedirects)
+    val followRedirectsLocalCache = preferenceRepository.asState(
         AppPreferences.followRedirectsLocalCache
     )
 
-    var followRedirectsExternalService = preferenceRepository.asState(
+    val followRedirectsExternalService = preferenceRepository.asState(
         AppPreferences.followRedirectsExternalService
     )
-    var followOnlyKnownTrackers = preferenceRepository.asState(
+    val followOnlyKnownTrackers = preferenceRepository.asState(
         AppPreferences.followOnlyKnownTrackers
     )
     val followRedirectsAllowsDarknets = preferenceRepository.asState(AppPreferences.followRedirectsAllowDarknets)

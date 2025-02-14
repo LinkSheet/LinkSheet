@@ -17,7 +17,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageInfoServiceTest : UnitTest{
+internal class PackageInfoServiceTest : UnitTest {
 
     @Test
     fun test() {

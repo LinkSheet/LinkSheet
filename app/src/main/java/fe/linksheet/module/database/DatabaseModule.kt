@@ -67,11 +67,16 @@ abstract class LinkSheetDatabase : RoomDatabase() {
             )
         }
 
+        fun Builder<LinkSheetDatabase>.configureAndBuild(logger: Logger): LinkSheetDatabase {
+            return this
+                .addMigrations(*buildMigrations(logger))
+                .build()
+        }
+
         fun create(context: Context, logger: Logger, name: String): LinkSheetDatabase {
             return Room
                 .databaseBuilder(context, LinkSheetDatabase::class.java, name)
-                .addMigrations(*buildMigrations(logger))
-                .build()
+                .configureAndBuild(logger)
         }
     }
 }

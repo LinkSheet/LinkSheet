@@ -17,7 +17,7 @@ class PrivacySettingsViewModel(
     experimentsRepository: ExperimentRepository,
     private val analyticsService: BaseAnalyticsService,
 ) : BaseViewModel(preferenceRepository) {
-    var showAsReferrer = preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
+    val showAsReferrer = preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
     val enableAnalytics = experimentsRepository.asState(Experiments.enableAnalytics)
 
     @OptIn(SensitivePreference::class)

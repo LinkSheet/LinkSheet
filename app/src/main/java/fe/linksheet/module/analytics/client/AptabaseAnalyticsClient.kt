@@ -52,13 +52,13 @@ internal class AptabaseAnalyticsClient(
     }
 
     data class EnvironmentInfo(
-        var isDebug: Boolean,
-        var osName: String,
-        var osVersion: String,
-        var locale: String,
-        var appVersion: String,
-        var appBuildNumber: String,
-        var deviceModel: String,
+        val isDebug: Boolean,
+        val osName: String,
+        val osVersion: String,
+        val locale: String,
+        val appVersion: String,
+        val appBuildNumber: String,
+        val deviceModel: String,
         val sdkVersion: String,
     ) {
         companion object {

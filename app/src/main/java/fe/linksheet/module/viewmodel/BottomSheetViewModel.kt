@@ -69,7 +69,7 @@ class BottomSheetViewModel(
     val gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
     private val followRedirects =
         preferenceRepository.asState(AppPreferences.followRedirects)
-    private var enableDownloader = preferenceRepository.asState(
+    private val enableDownloader = preferenceRepository.asState(
         AppPreferences.enableDownloader
     )
 
@@ -111,7 +111,7 @@ class BottomSheetViewModel(
     val manualFollowRedirects = experimentRepository.asState(Experiments.manualFollowRedirects)
     val noBottomSheetStateSave = experimentRepository.asState(Experiments.noBottomSheetStateSave)
 
-    var appListSelectedIdx = mutableIntStateOf(-1)
+    val appListSelectedIdx = mutableIntStateOf(-1)
 
 
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {

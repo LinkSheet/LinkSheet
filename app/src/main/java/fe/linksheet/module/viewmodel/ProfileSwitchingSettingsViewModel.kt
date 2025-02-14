@@ -57,7 +57,7 @@ class ProfileSwitchingSettingsViewModel(
         val otherHandles: MutableList<Pair<UserHandleHidden, CrossProfile?>>,
     )
 
-    var enabled = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
+    val enabled = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
 
     fun launchCrossProfileInteractSettings(activity: Activity) {
         profileSwitcher.launchCrossProfileInteractSettings(activity)

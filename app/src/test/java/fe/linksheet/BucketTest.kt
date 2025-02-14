@@ -12,7 +12,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class BucketTest : UnitTest {
+internal class BucketTest : UnitTest {
     @Test
     fun test() {
         if (System.getenv("CI")?.toBooleanStrictOrNull() == true) {

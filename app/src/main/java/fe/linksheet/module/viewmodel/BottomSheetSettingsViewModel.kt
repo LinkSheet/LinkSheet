@@ -21,14 +21,14 @@ class BottomSheetSettingsViewModel(
 
     val enableIgnoreLibRedirectButton =
         preferenceRepository.asState(AppPreferences.enableIgnoreLibRedirectButton)
-    var hideAfterCopying = preferenceRepository.asState(AppPreferences.hideAfterCopying)
-    var gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
-    var dontShowFilteredItem = preferenceRepository.asState(AppPreferences.dontShowFilteredItem)
-    var previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
-    var enableRequestPrivateBrowsingButton =
+    val hideAfterCopying = preferenceRepository.asState(AppPreferences.hideAfterCopying)
+    val gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
+    val dontShowFilteredItem = preferenceRepository.asState(AppPreferences.dontShowFilteredItem)
+    val previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
+    val enableRequestPrivateBrowsingButton =
         preferenceRepository.asState(AppPreferences.enableRequestPrivateBrowsingButton)
 
-    var usageStatsSorting = preferenceRepository.asState(AppPreferences.usageStatsSorting)
+    val usageStatsSorting = preferenceRepository.asState(AppPreferences.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
 
     val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)

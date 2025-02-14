@@ -76,7 +76,7 @@ class MainViewModel(
     val useTimeMs = preferenceRepository.get(AppPreferences.useTimeMs)
     val showDiscordBanner = preferenceRepository.asState(AppPreferences.showDiscordBanner)
     val donateCardDismissed = preferenceRepository.asState(AppPreferences.donateCardDismissed)
-    var themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
+    val themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
 
     @OptIn(SensitivePreference::class)
     val telemetryLevel = preferenceRepository.asState(AppPreferences.telemetryLevel)

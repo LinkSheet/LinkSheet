@@ -2,13 +2,12 @@ package fe.linksheet.module.app.`package`
 
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.YatsePackageInfoFake
-import app.linksheet.testing.flatResolveInfos
+import app.linksheet.testing.fake.TurretPackageInfoFake
+import app.linksheet.testing.fake.YatsePackageInfoFake
+import app.linksheet.testing.util.asDescriptors
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import fe.linksheet.LinkSheetTest
-import fe.linksheet.extension.android.info
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
@@ -16,7 +15,7 @@ import kotlin.test.Test
 internal class PackageIntentHandlerTest : LinkSheetTest {
 
     @Test
-    fun test() {
+    fun `trampoline activity correctly handled`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },
@@ -24,25 +23,24 @@ internal class PackageIntentHandlerTest : LinkSheetTest {
         )
 
         val handlers = handler.findHandlers(Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c"), null)
-        val infos = handlers.map {
-            with(it.info) { "$packageName/$name" }
-        }
 
-        assertThat(infos).containsExactly(
-            "org.leetzone.android.yatsewidgetfree/org.leetzone.android.yatsewidget.ui.activity.SendToActivity",
-            "org.leetzone.android.yatsewidgetfree/org.leetzone.android.yatsewidgetfree.QueueToActivity"
+        assertThat(handlers.asDescriptors()).containsExactly(
+            "org.leetzone.android.yatsewidgetfree/org.leetzone.android.yatsewidget.ui.activity.SendToActivity:",
+            "org.leetzone.android.yatsewidgetfree/.QueueToActivity:org.leetzone.android.yatsewidget.ui.activity.SendToActivity"
         )
     }
 
     @Test
-    fun test2() {
+    fun `non-exported activities are ignored`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
-            queryIntentActivities = { _, _ -> PackageInfoFakes.allResolved.flatResolveInfos() },
+            queryIntentActivities = { _, _ -> TurretPackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },
             checkReferrerExperiment = { true },
         )
 
-//        val handlers = handler.findHandlers(Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c"), null)
-//        handlers
+        val handlers = handler.findHandlers(Uri.parse("https://t.me/magiskalpha"), null)
+        assertThat(handlers.asDescriptors()).containsExactly(
+            "org.telegram.group/org.telegram.ui.LaunchActivity:"
+        )
     }
 }

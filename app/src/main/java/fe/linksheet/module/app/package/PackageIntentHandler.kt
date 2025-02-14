@@ -45,7 +45,9 @@ internal class DefaultPackageIntentHandler(
 
     override fun findHandlers(intent: Intent): List<ResolveInfo> {
         val activities = queryIntentActivities(intent, QUERY_FLAGS)
-        return activities.filter { it.activityInfo.applicationInfo.enabled && !isLinkSheetCompat(it.activityInfo.packageName) }
+        return activities.filter {
+            it.activityInfo.exported && it.activityInfo.applicationInfo.enabled && !isLinkSheetCompat(it.activityInfo.packageName)
+        }
     }
 
     override fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo> {

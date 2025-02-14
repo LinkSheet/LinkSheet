@@ -64,8 +64,8 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
 
     trySubstitute(devProperties["httpkt.dir"], "com.gitlab.grrfe.httpkt") {
         this["core"] = "core"
-        this["ext-gson"] = "ext-gson"
-        this["ext-jsoup"] = "ext-jsoup"
+        this["serialization-gson"] = "serialization:serialization-gson"
+        this["serialization-jsoup"] = "serialization:serialization-jsoup"
     }
 
     trySubstitute(devProperties["gson-ext.dir"], "com.gitlab.grrfe.gson-ext") {
@@ -89,9 +89,9 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
     }
 
     trySubstitute(devProperties["composekit.dir"], "com.github.1fexd.composekit") {
-        this["app-core"] = "app-core"
-        this["theme-core"] = "theme-core"
-        this["theme-preference"] = "theme-preference"
+        this["app-core"] = "app:app-core"
+        this["theme-core"] = "theme:theme-core"
+        this["theme-preference"] = "theme:theme-preference"
         this["component"] = "component"
         this["core"] = "core"
         this["layout"] = "layout"

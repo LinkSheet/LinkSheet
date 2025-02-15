@@ -8,7 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import fe.linksheet.activity.BaseComponentActivity
-import fe.linksheet.composable.component.dialog.rememberNewExportLogDialog
+import fe.linksheet.composable.component.dialog.rememberExportLogDialog
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
@@ -33,7 +33,7 @@ class ExportLogDialogTestActivity : BaseComponentActivity(), KoinComponent {
                         .fillMaxWidth()
                         .systemBarsPadding()
                 ) {
-                    val dialogState = rememberNewExportLogDialog(
+                    val dialogState = rememberExportLogDialog(
                         logViewCommon,
                         name
                     ) { listOf() }

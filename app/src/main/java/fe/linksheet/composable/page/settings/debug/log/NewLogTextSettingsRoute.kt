@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import fe.linksheet.R
 import fe.linksheet.composable.util.ListState
 import fe.linksheet.composable.util.listState
-import fe.linksheet.composable.component.dialog.rememberNewExportLogDialog
+import fe.linksheet.composable.component.dialog.rememberExportLogDialog
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.log.file.entry.LogEntry
@@ -35,7 +35,7 @@ fun NewLogTextSettingsRoute(
         listState(logEntries)
     }
 
-    val exportDialog = rememberNewExportLogDialog(logViewCommon = viewModel.logViewCommon,
+    val exportDialog = rememberExportLogDialog(logViewCommon = viewModel.logViewCommon,
         name = sessionName,
         fnLogEntries = { logEntries!! }
     )

@@ -3,6 +3,10 @@ package fe.linksheet.activity
 import android.os.Bundle
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,12 +14,13 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.linksheet.R
-import fe.linksheet.composable.component.dialog.createExportLogDialog
+import fe.linksheet.composable.component.dialog.rememberExportLogDialog
 import fe.linksheet.composable.page.settings.debug.log.LogCard
 import fe.linksheet.composable.page.settings.debug.log.LogTextPageScaffold
 import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
@@ -57,24 +62,26 @@ fun CrashAppPageWrapper(
     timestamp: String,
     throwableString: String
 ) {
-    val openDialog = createExportLogDialog(
-        uiOverhaul = true,
-        name = timestamp,
+    val dialog = rememberExportLogDialog(
         logViewCommon = viewModel.logViewCommon,
-        clipboardManager = viewModel.clipboardManager
-    ) { viewModel.logPersistService.readEntries(null) }
+        name = timestamp,
+        fnLogEntries = {
+            viewModel.logPersistService.readEntries(null)
+        }
+    )
 
-    CrashAppPage(timestamp = timestamp, throwableString = throwableString, openDialog = openDialog)
+    CrashAppPage(timestamp = timestamp, throwableString = throwableString, openDialog = dialog::open)
 }
 
 @Composable
-fun CrashAppPage(timestamp: String, throwableString: String, openDialog: () -> Any) {
+fun CrashAppPage(timestamp: String, throwableString: String, openDialog: () -> Unit) {
     LogTextPageScaffold(
         headline = stringResource(id = R.string.app_name),
         onBackPressed = {},
         enableBackButton = false,
         floatingActionButton = {
             ExtendedFloatingActionButton(
+                modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
                 icon = {
                     Icon(
                         imageVector = Icons.Rounded.Share,
@@ -84,36 +91,8 @@ fun CrashAppPage(timestamp: String, throwableString: String, openDialog: () -> A
                 text = {
                     Text(text = stringResource(id = R.string.generic__button_text_share))
                 },
-                onClick = {
-
-                }
+                onClick = openDialog
             )
-//            Column {
-//                FloatingActionButton(
-//                    modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
-//                    onClick = { openDialog() }
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Outlined.Share,
-//                        contentDescription = null
-//                    )
-//                }
-//
-//                ExtendedFloatingActionButton(
-//                    icon = {
-//                        Icon(
-//                            imageVector = Icons.Rounded.Share,
-//                            contentDescription = null
-//                        )
-//                    },
-//                    text = {
-//                        Text(text = stringResource(id = R.string.share))
-//                    },
-//                    onClick = {
-//
-//                    }
-//                )
-//            }
         }
     ) {
         divider(id = R.string.crash_viewer__subtitle_app_crashed)

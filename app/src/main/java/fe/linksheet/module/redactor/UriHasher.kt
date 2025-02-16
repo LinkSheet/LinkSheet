@@ -2,7 +2,7 @@ package fe.linksheet.module.redactor
 
 import fe.hc.core5.TextUtils
 import fe.kotlin.extension.asString
-import fe.kotlin.extension.iterator.forEachWithInfo
+import fe.kotlin.extension.iterator.withElementInfo
 import fe.linksheet.extension.kotlin.appendHashed
 import fe.linksheet.extension.kotlin.appendHashedTrim
 import fe.relocated.org.apache.hc.core5.core5.net.InetAddressUtils
@@ -44,7 +44,7 @@ fun buildHashedUriString(uriString: String, mac: Mac): String {
 private fun StringBuilder.parse(url: Url, mac: Mac) {
     val authoritySpecified: Boolean = if (url.encodedAuthority != null) {
         append("//")
-        url.encodedAuthority!!.split(".").forEachWithInfo { element, _, _, last ->
+        for ((element, _, _, last) in url.encodedAuthority!!.split(".").withElementInfo()) {
             appendHashedTrim(mac, 6, element)
             if (!last) append(".")
         }

@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.kotlin.extension.iterator.forEachWithInfo
+import fe.kotlin.extension.iterator.withElementInfo
 
 data class FilterChipValue<T>(
     val value: T,
@@ -26,7 +27,7 @@ fun <T> FilterChips(
     values: List<FilterChipValue<T>>
 ) {
     Row {
-        values.forEachWithInfo { value, _, _, last ->
+        for((value, _, _, isLast) in values.withElementInfo()) {
             FilterChip(
                 value = value.value,
                 currentState = currentState,
@@ -35,7 +36,7 @@ fun <T> FilterChips(
                 icon = value.icon
             )
 
-            if (!last) {
+            if (!isLast) {
                 Spacer(modifier = Modifier.width(5.dp))
             }
         }

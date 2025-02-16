@@ -1,12 +1,18 @@
 package fe.linksheet.composable.ui
 
+import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
+import kotlin.reflect.KProperty0
 
 //
 //val GoogleSansText = FontFamily(
@@ -82,3 +88,63 @@ val LegacyTypography = Typography(
         fontSize = 18.sp,
     )
 )
+
+private data class TypographyPreviewState(
+    val property: KProperty0<TextStyle>,
+    val style: TextStyle = property.get(),
+    val text: String = property.name,
+)
+
+private class SmallTypographyPreviewProvider() : PreviewParameterProvider<TypographyPreviewState> {
+    override val values = sequenceOf(
+        TypographyPreviewState(NewTypography::headlineSmall),
+        TypographyPreviewState(NewTypography::titleSmall),
+        TypographyPreviewState(NewTypography::bodySmall),
+    )
+}
+
+private class MediumTypographyPreviewProvider() : PreviewParameterProvider<TypographyPreviewState> {
+    override val values = sequenceOf(
+        TypographyPreviewState(NewTypography::headlineMedium),
+        TypographyPreviewState(NewTypography::titleMedium),
+        TypographyPreviewState(NewTypography::bodyMedium),
+    )
+}
+
+private class LargeTypographyPreviewProvider() : PreviewParameterProvider<TypographyPreviewState> {
+    override val values = sequenceOf(
+        TypographyPreviewState(NewTypography::headlineLarge),
+        TypographyPreviewState(NewTypography::titleLarge),
+        TypographyPreviewState(NewTypography::bodyLarge),
+    )
+}
+
+@Preview(group = "Small", showBackground = true, widthDp = 600)
+@Composable
+private fun NewTypographyPreview_Small(@PreviewParameter(SmallTypographyPreviewProvider::class) state: TypographyPreviewState) {
+    NewTypographyPreviewBase(state = state)
+}
+
+@Preview(group = "Medium", showBackground = true, widthDp = 600)
+@Composable
+private fun NewTypographyPreview_Medium(@PreviewParameter(MediumTypographyPreviewProvider::class) state: TypographyPreviewState) {
+    NewTypographyPreviewBase(state = state)
+}
+
+@Preview(group = "Large", showBackground = true, widthDp = 600)
+@Composable
+private fun NewTypographyPreview_Large(@PreviewParameter(LargeTypographyPreviewProvider ::class) state: TypographyPreviewState) {
+    NewTypographyPreviewBase(state = state)
+}
+
+@Composable
+private fun NewTypographyPreviewBase(state: TypographyPreviewState) {
+    val size = with(state.style) {
+        "(w=${fontWeight?.weight},s=$fontSize,lH=$lineHeight,s=$letterSpacing)"
+    }
+
+    Text(
+        text = "${state.text} $size",
+        style = state.style
+    )
+}

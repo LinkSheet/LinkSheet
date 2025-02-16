@@ -37,7 +37,7 @@ class PreferredBrowserViewModel(
     private val inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserMode)
 
     @OptIn(SensitivePreference::class)
-    private var selectedInAppBrowser = preferenceRepository.asState(
+    private val selectedInAppBrowser = preferenceRepository.asState(
         AppPreferences.selectedInAppBrowser
     )
 

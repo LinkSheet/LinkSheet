@@ -492,4 +492,6 @@
         <item quantity="other">已验证 %d</item>
     </plurals>
     <string name="generic__text_url">链接</string>
+    <string name="bottom_sheet__event_app_refusal">目标app拒绝处理该链接！</string>
+    <string name="settings__hint_search">搜索</string>
 </resources>

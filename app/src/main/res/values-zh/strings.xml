@@ -494,4 +494,9 @@
     <string name="generic__text_url">链接</string>
     <string name="bottom_sheet__event_app_refusal">目标app拒绝处理该链接！</string>
     <string name="settings__hint_search">搜索</string>
+    <string name="generic__button_text_share">分享</string>
+    <string name="settings_main_miui_compat__text_request_failed">申请权限失败！</string>
+    <string name="generic__button_text_save">保存</string>
+    <string name="generic__button_text_close">关闭</string>
+    <string name="generic__button_learn_more">了解更多</string>
 </resources>

@@ -40,7 +40,8 @@ dependencyResolutionManagement {
 rootProject.name = "LinkSheet"
 
 include(":app", ":config")
-include(":bottom-sheet", ":scaffold")
+include(":bottom-sheet", ":bottom-sheet-new")
+include(":scaffold")
 include(":hidden-api")
 
 val localProperties = file("local.properties")

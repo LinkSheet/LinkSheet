@@ -15,9 +15,15 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
         object PreferenceHelper : DependencyNotationAndGroup(
             group = "$group.android-pref-helper", name = "android-pref-helper"
         ) {
+            val bom = module("platform", isBom = true)
             val core = module("core")
-            val compose = module("compose")
-            val composeMock = module("compose-mock")
+
+            val compose = Compose
+
+            object Compose : IsNotADependency {
+                val core = DependencyNotation(group = group, name = "compose-core")
+                val mock = DependencyNotation(group = group, name = "compose-mock")
+            }
         }
 
         val compose = Compose
@@ -68,9 +74,15 @@ object _1fexd : DependencyGroup(group = "com.github.1fexd") {
             val preference = DependencyNotation(group = group, name = "theme-preference")
         }
 
-        val component = module("component")
-        val core = module("core")
-        val layout = module("layout")
+        val dialog = Dialog
+
+        object Dialog : IsNotADependency {
+            val core = DependencyNotation(group = group, name = "dialog-core")
+        }
+
+        val component = DependencyNotation(group = group, name = "component")
+        val core = DependencyNotation(group = group, name = "core")
+        val layout = DependencyNotation(group = group, name = "layout")
     }
 
     val uriParser = DependencyNotation(group = group, name = "uriparser")

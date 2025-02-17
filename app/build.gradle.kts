@@ -195,6 +195,10 @@ android {
         buildConfig = true
     }
 
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     val androidTest by sourceSets
     androidTest.assets.srcDir("$projectDir/schemas")
 
@@ -218,6 +222,7 @@ dependencies {
 //    implementation(project(":components"))
 //    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
+    implementation(project(":bottom-sheet-new"))
     implementation(project(":scaffold"))
 
     implementation(platform(Square.okHttp3.bom.withVersion("5.0.0-alpha.14")))
@@ -230,7 +235,7 @@ dependencies {
     implementation(platform(AndroidX.compose.bom))
     implementation(AndroidX.compose.foundation)
     implementation(AndroidX.compose.ui.text)
-    implementation(AndroidX.compose.ui.withVersion(PinnedVersions.ComposeVersion))
+    implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(PinnedVersions.Material3)
 
@@ -276,8 +281,6 @@ dependencies {
     implementation(LinkSheet.flavors)
     implementation(LinkSheet.interconnect)
 
-    implementation(platform("com.github.1fexd:super:_"))
-
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.gson)
     implementation(JetBrains.ktor.client.okHttp)
@@ -305,10 +308,12 @@ dependencies {
     implementation(_1fexd.amp2html)
     implementation(_1fexd.stringBuilder)
     implementation(_1fexd.embedResolve)
+
+//    implementation(platform(_1fexd.android.preference.bom))
     implementation(_1fexd.android.preference.core)
-    implementation(_1fexd.android.preference.compose)
-    implementation(_1fexd.android.preference.composeMock)
-    implementation(_1fexd.android.compose.dialog)
+    implementation(_1fexd.android.preference.compose.core)
+    implementation(_1fexd.android.preference.compose.mock)
+
     implementation(_1fexd.android.compose.route)
     implementation(_1fexd.android.span.compose)
     implementation(_1fexd.android.lifecycleUtil.core)
@@ -318,10 +323,13 @@ dependencies {
     implementation(_1fexd.composeKit.app.core)
     implementation(_1fexd.composeKit.theme.core)
     implementation(_1fexd.composeKit.theme.preference)
-    implementation(_1fexd.composeKit.component)
+    implementation(_1fexd.composeKit.dialog.core)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
-
+    implementation(_1fexd.composeKit.component)
+//    implementation("com.github.1fexd.composekit:core:0.0.29")
+//    implementation("com.github.1fexd.composekit:layout:0.0.29")
+//    implementation("com.github.1fexd.composekit:component:0.0.29")
     implementation("com.github.jeziellago:compose-markdown:_")
 
     implementation("app.cash.zipline:zipline-android:_")

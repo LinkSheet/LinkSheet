@@ -80,8 +80,8 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
 
     trySubstitute(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
         this["core"] = "core"
-        this["compose"] = "compose"
-        this["mock"] = "compose-mock"
+        this["compose"] = "compose:compose-core"
+        this["mock"] = "compose:compose-mock"
     }
 
     trySubstitute(devProperties["android-span-helper.dir"], "com.github.1fexd.android-span-helper") {

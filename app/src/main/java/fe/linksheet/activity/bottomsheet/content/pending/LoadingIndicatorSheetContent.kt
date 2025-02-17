@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction
@@ -21,20 +22,23 @@ import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.composable.ui.PreviewTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun LoadingIndicatorSheetContent(
-    events: StateFlow<ResolveEvent>,
-    interactions: StateFlow<ResolverInteraction>,
+    event: ResolveEvent,
+    interaction: ResolverInteraction,
     requestExpand: () -> Unit,
 ) {
-    val event by events.collectOnIO(initialState = ResolveEvent.Initialized)
-    val interaction by interactions.collectOnIO(initialState = ResolverInteraction.Clear)
-
     LaunchedEffect(key1 = interaction) {
-        // Request resize on interaction change to accommodate interaction UI
-        requestExpand()
+        Log.d(
+            "LoadingIndicatorSheetContent",
+            "Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
+                    "isInitialized=${interaction == ResolverInteraction.Initialized}"
+        )
+        if (interaction != ResolverInteraction.Initialized) {
+            // Request resize on interaction change to accommodate interaction UI
+            requestExpand()
+        }
     }
 
     Column(
@@ -61,7 +65,7 @@ fun LoadingIndicatorSheetContent(
                 Button(
                     onClick = {
                         Log.d("Interact", "Cancel")
-                        (interaction as? ResolverInteraction.Cancelable)?.cancel?.invoke()
+                        interaction.cancel()
                     }
                 ) {
                     Text(text = stringResource(id = R.string.bottom_sheet_loading_indicator__button_skip_job))
@@ -95,9 +99,12 @@ private fun LoadingIndicatorPreview() {
     }
 
     PreviewTheme {
+        val event by events.collectAsStateWithLifecycle()
+        val interaction by interactions.collectAsStateWithLifecycle()
+
         LoadingIndicatorSheetContent(
-            events = events,
-            interactions = interactions,
+            event = event,
+            interaction = interaction,
             requestExpand = {}
         )
     }

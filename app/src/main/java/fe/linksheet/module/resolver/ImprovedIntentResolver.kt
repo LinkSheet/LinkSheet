@@ -14,7 +14,6 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
 import fe.linksheet.module.app.`package`.PackageIntentHandler
@@ -25,21 +24,16 @@ import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
-import fe.linksheet.util.intent.IntentParser
-import fe.linksheet.util.intent.cloneIntent
+import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
-import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.browser.BrowserMode
+import fe.linksheet.module.resolver.module.BrowserSettings
+import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
@@ -47,6 +41,8 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
 import fe.linksheet.module.resolver.util.ReferrerHelper
+import fe.linksheet.util.intent.IntentParser
+import fe.linksheet.util.intent.cloneIntent
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -54,14 +50,11 @@ import kotlinx.coroutines.flow.firstOrNull
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
-import org.koin.core.component.KoinComponent
 
 @Stable
 class ImprovedIntentResolver(
     val context: Context,
-    prefRepo: AppPreferenceRepository,
-    featureFlagRepository: FeatureFlagRepository,
-    experimentRepository: ExperimentRepository,
+    val logger: Logger,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
@@ -77,57 +70,14 @@ class ImprovedIntentResolver(
     private val libRedirectResolver: LibRedirectResolver,
     private val unfurler: Unfurler,
     private val networkStateService: NetworkStateService,
-) : KoinComponent {
-    private val logger by injectLogger<ImprovedIntentResolver>()
-
-    private val useClearUrls = prefRepo.asState(AppPreferences.useClearUrls)
-    private val useFastForwardRules = prefRepo.asState(AppPreferences.useFastForwardRules)
-
-    private val enableIgnoreLibRedirectButton = prefRepo.asState(AppPreferences.enableIgnoreLibRedirectButton)
-    private val enableLibRedirect = prefRepo.asState(AppPreferences.enableLibRedirect)
-    private val followRedirects = prefRepo.asState(AppPreferences.followRedirects)
-    private val followRedirectsSkipBrowser = prefRepo.asState(AppPreferences.followRedirectsSkipBrowser)
-
-    private val followOnlyKnownTrackers = prefRepo.asState(AppPreferences.followOnlyKnownTrackers)
-    private val followRedirectsLocalCache = prefRepo.asState(AppPreferences.followRedirectsLocalCache)
-
-    private val followRedirectsExternalService = prefRepo.asState(AppPreferences.followRedirectsExternalService)
-
-    private val followRedirectsAllowDarknets = prefRepo.asState(AppPreferences.followRedirectsAllowDarknets)
-    private val requestTimeout = prefRepo.asState(AppPreferences.requestTimeout)
-
-    private val enableDownloader = prefRepo.asState(AppPreferences.enableDownloader)
-    private val downloaderCheckUrlMimeType = prefRepo.asState(AppPreferences.downloaderCheckUrlMimeType)
-
-    private val dontShowFilteredItem = prefRepo.asState(AppPreferences.dontShowFilteredItem)
-
-    private val inAppBrowserSettings = prefRepo.asState(AppPreferences.inAppBrowserSettings)
-    private val browserMode = prefRepo.asState(AppPreferences.browserMode)
-
-    @OptIn(SensitivePreference::class)
-    private val selectedBrowser = prefRepo.asState(AppPreferences.selectedBrowser)
-    private val inAppBrowserMode = prefRepo.asState(AppPreferences.inAppBrowserMode)
-
-    @OptIn(SensitivePreference::class)
-    private val selectedInAppBrowser = prefRepo.asState(AppPreferences.selectedInAppBrowser)
-
-    private val unifiedPreferredBrowser = prefRepo.asState(AppPreferences.unifiedPreferredBrowser)
-
-    private val enableAmp2Html = prefRepo.asState(AppPreferences.enableAmp2Html)
-    private val amp2HtmlLocalCache = prefRepo.asState(AppPreferences.amp2HtmlLocalCache)
-
-
-    private val amp2HtmlExternalService = prefRepo.asState(AppPreferences.amp2HtmlExternalService)
-    private val amp2HtmlAllowDarknets = prefRepo.asState(AppPreferences.amp2HtmlAllowDarknets)
-    private val amp2HtmlSkipBrowser = prefRepo.asState(AppPreferences.amp2HtmlSkipBrowser)
-
-    private val resolveEmbeds = prefRepo.asState(AppPreferences.resolveEmbeds)
-
-    private val previewUrl = experimentRepository.asState(Experiments.urlPreview)
-    private val previewUrlSkipBrowser = experimentRepository.asState(Experiments.urlPreviewSkipBrowser)
-    private val libRedirectJsEngine = experimentRepository.asState(Experiments.libRedirectJsEngine)
-    private val autoLaunchSingleBrowser = experimentRepository.asState(Experiments.autoLaunchSingleBrowser)
-
+    private val settings: IntentResolverSettings,
+) : IntentResolver {
+    private val browserSettings = settings.browserSettings
+    private val previewSettings = settings.previewSettings
+    private val downloaderSettings = settings.downloaderSettings
+    private val libRedirectSettings = settings.libRedirectSettings
+    private val amp2HtmlSettings = settings.amp2HtmlSettings
+    private val followRedirectsSettings = settings.followRedirectsSettings
     private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
 
     private val appSorter by lazy {
@@ -138,10 +88,10 @@ class ImprovedIntentResolver(
     }
 
     private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
-    val events = _events.asStateFlow()
+    override val events = _events.asStateFlow()
 
-    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Clear)
-    val interactions = _interactions.asStateFlow()
+    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Initialized)
+    override val interactions = _interactions.asStateFlow()
 
     private fun emitEvent(event: ResolveEvent) {
         _events.tryEmit(event)
@@ -174,8 +124,8 @@ class ImprovedIntentResolver(
 //
 //    }
 
-    suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
-        initState(ResolveEvent.Initialized, ResolverInteraction.Clear)
+    override suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
+        initState(ResolveEvent.Initialized, ResolverInteraction.Initialized)
         val canAccessInternet = networkStateService.isNetworkConnected
 
         logger.debug("Referrer=$referrer")
@@ -195,9 +145,9 @@ class ImprovedIntentResolver(
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = browserResolver.queryBrowsers()
 
-        val resolveEmbeds = resolveEmbeds()
-        val useClearUrls = useClearUrls()
-        val useFastForwardRules = useFastForwardRules()
+        val resolveEmbeds = settings.resolveEmbeds()
+        val useClearUrls = settings.useClearUrls()
+        val useFastForwardRules = settings.useFastForwardRules()
 
         val uriModifiers = resolveEmbeds || useClearUrls || useFastForwardRules
 
@@ -218,8 +168,8 @@ class ImprovedIntentResolver(
 
         val manualResolveRedirects = intent.getBooleanExtra(IntentKeyResolveRedirects, false)
 
-        val followRedirects = followRedirects() || manualResolveRedirects
-        val skipFollowRedirects = followRedirectsSkipBrowser() && isReferrerBrowser
+        val followRedirects = followRedirectsSettings.followRedirects() || manualResolveRedirects
+        val skipFollowRedirects = followRedirectsSettings.followRedirectsSkipBrowser() && isReferrerBrowser
 
         var resolvedUri: Uri? = uri
         if (followRedirects && !skipFollowRedirects) {
@@ -230,17 +180,17 @@ class ImprovedIntentResolver(
                 redirectResolver = redirectUrlResolver,
                 uri = uri,
                 canAccessInternet = canAccessInternet,
-                requestTimeout = requestTimeout(),
+                requestTimeout = settings.requestTimeout(),
                 followRedirects = true,
-                followRedirectsExternalService = followRedirectsExternalService(),
-                followOnlyKnownTrackers = followOnlyKnownTrackers(),
-                followRedirectsLocalCache = followRedirectsLocalCache(),
-                followRedirectsAllowDarknets = followRedirectsAllowDarknets(),
+                followRedirectsExternalService = followRedirectsSettings.followRedirectsExternalService(),
+                followOnlyKnownTrackers = followRedirectsSettings.followOnlyKnownTrackers(),
+                followRedirectsLocalCache = followRedirectsSettings.followRedirectsLocalCache(),
+                followRedirectsAllowDarknets = followRedirectsSettings.followRedirectsAllowDarknets(),
             )
         }
 
-        val amp2Html = enableAmp2Html()
-        val skipAmp2Html = amp2HtmlSkipBrowser() && isReferrerBrowser
+        val amp2Html = amp2HtmlSettings.enableAmp2Html()
+        val skipAmp2Html = amp2HtmlSettings.amp2HtmlSkipBrowser() && isReferrerBrowser
         if (amp2Html && !skipAmp2Html) {
             emitEvent(ResolveEvent.RunningAmp2Html)
 
@@ -249,11 +199,11 @@ class ImprovedIntentResolver(
                 amp2HtmlResolver = amp2HtmlResolver,
                 uri = resolvedUri,
                 canAccessInternet = canAccessInternet,
-                requestTimeout = requestTimeout(),
+                requestTimeout = settings.requestTimeout(),
                 enableAmp2Html = true,
-                amp2HtmlAllowDarknets = amp2HtmlAllowDarknets(),
-                amp2HtmlExternalService = amp2HtmlExternalService(),
-                amp2HtmlLocalCache = amp2HtmlLocalCache()
+                amp2HtmlAllowDarknets = amp2HtmlSettings.amp2HtmlAllowDarknets(),
+                amp2HtmlExternalService = amp2HtmlSettings.amp2HtmlExternalService(),
+                amp2HtmlLocalCache = amp2HtmlSettings.amp2HtmlLocalCache()
             )
         }
 
@@ -274,7 +224,7 @@ class ImprovedIntentResolver(
             return@scope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
         }
 
-        val enableLibRedirect = enableLibRedirect()
+        val enableLibRedirect = libRedirectSettings.enableLibRedirect()
         emitEventIf(enableLibRedirect, ResolveEvent.CheckingLibRedirect)
 
         val libRedirectResult = tryRunLibRedirect(
@@ -282,26 +232,26 @@ class ImprovedIntentResolver(
             enabled = enableLibRedirect,
             intent = intent,
             uri = uri,
-            ignoreLibRedirectButton = enableIgnoreLibRedirectButton(),
-            jsEngine = libRedirectJsEngine()
+            ignoreLibRedirectButton = libRedirectSettings.enableIgnoreLibRedirectButton(),
+            jsEngine = libRedirectSettings.libRedirectJsEngine()
         )
 
         if (libRedirectResult is LibRedirectResult.Redirected) {
             uri = libRedirectResult.redirectedUri
         }
 
-        val enabledDownloader = enableDownloader()
+        val enabledDownloader = downloaderSettings.enableDownloader()
         emitEventIf(enabledDownloader, ResolveEvent.CheckingDownloader)
 
         val downloadable = checkDownloadable(
             downloader = downloader,
             enabled = enabledDownloader,
             uri = uri,
-            checkUrlMimeType = downloaderCheckUrlMimeType(),
-            requestTimeout = requestTimeout()
+            checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType(),
+            requestTimeout = settings.requestTimeout()
         )
 
-        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, inAppBrowserSettings())
+        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
@@ -326,7 +276,7 @@ class ImprovedIntentResolver(
         }
 
         emitEvent(ResolveEvent.CheckingBrowsers)
-        val browserModeConfigHelper = createBrowserModeConfig(unifiedPreferredBrowser(), customTab)
+        val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
         val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
 
         emitEvent(ResolveEvent.SortingApps)
@@ -334,12 +284,12 @@ class ImprovedIntentResolver(
             appList,
             app,
             lastUsedApps,
-            returnLastChosen = !dontShowFilteredItem()
+            returnLastChosen = !settings.dontShowFilteredItem()
         )
 
-        val previewUrl = previewUrl()
+        val previewUrl = previewSettings.previewUrl()
         var unfurl: UnfurlResult? = null
-        val shouldSkipPreviewUrl = previewUrlSkipBrowser() && isReferrerBrowser
+        val shouldSkipPreviewUrl = previewSettings.previewUrlSkipBrowser() && isReferrerBrowser
         if (previewUrl && !shouldSkipPreviewUrl) {
             emitEvent(ResolveEvent.GeneratingPreview)
 
@@ -434,14 +384,22 @@ class ImprovedIntentResolver(
     }
 
     private suspend fun createBrowserModeConfig(
-        unifiedPreferredBrowser: Boolean,
+        browserSettings: BrowserSettings,
         customTab: Boolean,
     ): BrowserModeConfigHelper {
-        if (!unifiedPreferredBrowser && customTab) {
-            return mapToBrowserConfig(inAppBrowserMode(), selectedInAppBrowser(), inAppBrowsersRepository)
+        if (!browserSettings.unifiedPreferredBrowser() && customTab) {
+            return mapToBrowserConfig(
+                browserSettings.inAppBrowserMode(),
+                browserSettings.selectedInAppBrowser(),
+                inAppBrowsersRepository
+            )
         }
 
-        return mapToBrowserConfig(browserMode(), selectedBrowser(), normalBrowsersRepository)
+        return mapToBrowserConfig(
+            browserSettings.browserMode(),
+            browserSettings.selectedBrowser(),
+            normalBrowsersRepository
+        )
     }
 
     private suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> mapToBrowserConfig(

@@ -1,6 +1,9 @@
 package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,13 +20,13 @@ fun AppContent(
     hideChoiceButtons: Boolean,
     launch: (ActivityAppInfo, ClickModifier) -> Unit,
     showToast: (Int, Int, Boolean) -> Unit,
-    content: @Composable ((Modifier) -> Unit),
+    content: @Composable (Modifier) -> Unit,
 ) {
-    Column(modifier = Modifier.wrapContentHeight(), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+    Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(5.dp)) {
         content(
             Modifier
                 .fillMaxWidth()
-                .weight(1.0f, fill = false)
+                .weight(1.0f, fill = false),
         )
 
         if (!hasPreferredApp && !hideChoiceButtons) {
@@ -43,7 +46,7 @@ fun AppContent(
     }
 }
 
-@Preview(showBackground = true, heightDp = 250)
+@Preview(showBackground = true)
 @Composable
 private fun AppContentPreview() {
     AppContent(
@@ -54,6 +57,5 @@ private fun AppContentPreview() {
         launch = { _, _ -> },
         showToast = { _, _, _ -> }
     ) {
-
     }
 }

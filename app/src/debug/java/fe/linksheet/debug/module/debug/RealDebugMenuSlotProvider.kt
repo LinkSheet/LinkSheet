@@ -24,7 +24,6 @@ import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
-import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
 import fe.linksheet.extension.compose.dashedBorder
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import kotlin.reflect.KClass
@@ -115,17 +114,6 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
                         activity = activity,
                         text = "Url preview",
                         intent = createIntent(activity, ComposableRendererActivity::class)
-                    )
-                }
-
-                item(key = "improved_bottomsheet") {
-                    FilledTonalActivityLauncher(
-                        activity = activity,
-                        text = "Improved bottom sheet",
-                        intent = createIntent(activity, ImprovedBottomSheet::class).setAction(Intent.ACTION_VIEW)
-                            .setData(
-                                Uri.parse("https://www.youtube.com/watch?v=XaqdBRHG9cI")
-                            )
                     )
                 }
             }

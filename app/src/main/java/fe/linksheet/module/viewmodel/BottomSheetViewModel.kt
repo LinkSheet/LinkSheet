@@ -10,7 +10,6 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
@@ -18,9 +17,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
@@ -32,19 +31,22 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
+import fe.linksheet.module.resolver.IntentResolveResult
+import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveModule
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
+import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*
@@ -52,11 +54,11 @@ import java.util.*
 class BottomSheetViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
-    featureFlagRepository: FeatureFlagRepository,
     experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     val profileSwitcher: ProfileSwitcher,
+    val intentResolver: IntentResolver,
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
@@ -67,26 +69,13 @@ class BottomSheetViewModel(
     val downloadStartedToast = preferenceRepository.asState(AppPreferences.downloadStartedToast)
 
     val gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
-    private val followRedirects =
-        preferenceRepository.asState(AppPreferences.followRedirects)
-    private val enableDownloader = preferenceRepository.asState(
-        AppPreferences.enableDownloader
-    )
-
-    val openingWithAppToast = preferenceRepository.asState(AppPreferences.openingWithAppToast)
     val resolveViaToast = preferenceRepository.asState(AppPreferences.resolveViaToast)
     val resolveViaFailedToast = preferenceRepository.asState(AppPreferences.resolveViaFailedToast)
-
-    val themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
-    val themeAmoled = preferenceRepository.asState(AppPreferences.themeAmoled)
-
     val previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
-
     val enableRequestPrivateBrowsingButton = preferenceRepository.asState(
         AppPreferences.enableRequestPrivateBrowsingButton
     )
 
-    val enableAmp2Html = preferenceRepository.asState(AppPreferences.enableAmp2Html)
     val showAsReferrer =
         preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
@@ -94,7 +83,6 @@ class BottomSheetViewModel(
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
-    private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 
     val bottomSheetProfileSwitcher = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
 
@@ -113,6 +101,16 @@ class BottomSheetViewModel(
 
     val appListSelectedIdx = mutableIntStateOf(-1)
 
+    val events = intentResolver.events
+    val interactions = intentResolver.interactions
+
+    private val _resolveResultFlow = MutableStateFlow<IntentResolveResult>(IntentResolveResult.Pending)
+    val resolveResultFlow = _resolveResultFlow.asStateFlow()
+
+    suspend fun resolve(intent: SafeIntent, uri: Uri?) {
+        val resolveResult = intentResolver.resolve(intent, uri)
+        _resolveResultFlow.emit(resolveResult)
+    }
 
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {

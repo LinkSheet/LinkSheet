@@ -301,7 +301,7 @@ private fun FilledIconWrapper(item: IconItem, parentContainerColor: Color) {
         contentDescription = null,
         colors = IconButtonDefaults.iconButtonColors(
             containerColor = containerColor,
-            contentColor = androidx.compose.material3.fix.contentColorFor(backgroundColor = containerColor)
+            contentColor = contentColorFor(backgroundColor = containerColor)
         )
     )
 }

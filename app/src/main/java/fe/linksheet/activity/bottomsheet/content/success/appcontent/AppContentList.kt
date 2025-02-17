@@ -7,21 +7,20 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.util.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
@@ -29,9 +28,6 @@ import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
-import fe.linksheet.activity.bottomsheet.ImprovedBottomSheet
-import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 
@@ -54,30 +50,35 @@ fun AppContentList(
     isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
+    val state = rememberLazyListState()
+
+
     AppContent(
         info = apps.getOrFirstOrNull(appListSelectedIdx),
         appListSelectedIdx = appListSelectedIdx,
         hasPreferredApp = hasPreferredApp,
         hideChoiceButtons = hideChoiceButtons,
-//        showNativeLabel = showNativeLabel,
         launch = launch,
         showToast = showToast,
     ) { modifier ->
-        LazyColumn(modifier = modifier) {
+        LazyColumn(
+            state = state,
+            modifier = modifier
+//            .then(Modifier.requiredHeight(AppListItemRowDefaults.RowHeight * apps.size))
+        ) {
             itemsIndexed(
                 items = apps,
                 key = { _, item -> item.flatComponentName }
             ) { index, info ->
-                val privateBrowser = isPrivateBrowser(uri != null, info)
-
                 AppListItem(
+                    modifier = Modifier.requiredHeight(AppListItemRowDefaults.RowHeight),
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
                         launch2(index, info, type, modifier)
                     },
                     preferred = false,
-                    privateBrowser = privateBrowser,
+                    privateBrowser = isPrivateBrowser(uri != null, info),
                     showPackage = showPackage,
                     showNativeLabel = showNativeLabel,
                 )
@@ -98,41 +99,10 @@ fun AppListItem(
     showPackage: Boolean,
     showNativeLabel: Boolean = false,
 ) {
-    val context = LocalContext.current
-
-//    val supporting = @Composable {
-//        Text(
-//            text = appInfo.packageName,
-//        )
-//    }
-//
-//    ShapeListItem(
-//        modifier = Modifier
-//            .combinedClickable(
-////            role = Role.,
-//                onClick = { onClick(ClickType.Single, ClickModifier.None) },
-//                onDoubleClick = { onClick(ClickType.Double, ClickModifier.None) },
-//                onLongClick = { onClick(ClickType.Long, ClickModifier.None) }
-//            )
-//            .selectable(selected = selected ?: false) {
-//                onClick(ClickType.Single, ClickModifier.None)
-//            },
-//        headlineContent = { Text(text = appInfo.label) },
-//        supportingContent = if (showPackage) supporting else null,
-//        leadingContent = {
-//            Image(
-//                bitmap = appInfo.getIcon(context),
-//                contentDescription = appInfo.label,
-//                modifier = Modifier.size(32.dp)
-//            )
-//        }
-//    )
-
-
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 10.dp, end = 10.dp)
+            .padding(horizontal = 10.dp)
             .clip(CustomShapeDefaults.SingleShape)
             .background(if (selected == true) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
             .combinedClickable(
@@ -142,45 +112,21 @@ fun AppListItem(
             )
     ) {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+                .padding(horizontal = 10.dp)
                 // TODO: Do we still need to use a constant here?
-                .heightIn(min = ImprovedBottomSheet.preferredAppItemHeight),
+                ,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
+            AppListItemRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                AppInfoIcon(
-                    appInfo = appInfo
-                )
-
-                Spacer(modifier = Modifier.width(10.dp))
-
-                Column {
-                    if (preferred) {
-                        Text(
-                            text = stringResource(id = R.string.open_with_app, appInfo.label),
-                            fontFamily = HkGroteskFontFamily,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    } else {
-                        Text(text = appInfo.label)
-                    }
-
-                    if (showPackage) {
-                        Text(
-                            text = appInfo.packageName,
-                            fontSize = 12.sp,
-                            lineHeight = 12.sp
-                        )
-                    }
-                }
-            }
+                appInfo = appInfo,
+                preferred = preferred,
+                showPackage = showPackage,
+            )
 
             if (privateBrowser != null) {
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
@@ -205,11 +151,13 @@ fun AppListItem(
 @Preview(group = "AppContentList", showBackground = true)
 @Composable
 private fun AppContentListPreview_Short() {
-    val apps = listOf(
-        PackageInfoFakes.Youtube.toActivityAppInfo( ),
-        PackageInfoFakes.DuckDuckGoBrowser.toActivityAppInfo(),
-        PackageInfoFakes.ChromeBrowser.toActivityAppInfo()
-    )
+    val apps = remember {
+        listOf(
+            PackageInfoFakes.Youtube.toActivityAppInfo(),
+            PackageInfoFakes.DuckDuckGoBrowser.toActivityAppInfo(),
+            PackageInfoFakes.ChromeBrowser.toActivityAppInfo()
+        )
+    }
 
     AppContentListPreviewBase(apps = apps)
 }
@@ -217,8 +165,8 @@ private fun AppContentListPreview_Short() {
 @Preview(group = "AppContentList", showBackground = true)
 @Composable
 private fun AppContentListPreview_Long() {
-    val apps = PackageInfoFakes.allResolved.map {
-        it.toActivityAppInfo()
+    val apps = remember {
+        PackageInfoFakes.allResolved.map { it.toActivityAppInfo() }
     }
 
     AppContentListPreviewBase(apps = apps)
@@ -240,4 +188,3 @@ private fun AppContentListPreviewBase(apps: List<ActivityAppInfo>) {
         showToast = { _, _, _ -> }
     )
 }
-

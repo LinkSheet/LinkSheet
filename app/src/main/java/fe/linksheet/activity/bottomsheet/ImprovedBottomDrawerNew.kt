@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.fix.ModalBottomSheet
-import androidx.compose.material3.fix.SheetState
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -16,10 +13,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import fe.linksheet.composable.util.debugBorder
+import relocated.androidx.compose.material3.ModalBottomSheet
+import relocated.androidx.compose.material3.SheetState
+import relocated.androidx.compose.material3.rememberModalBottomSheetState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImprovedBottomDrawer(
+fun ImprovedBottomDrawerNew(
     contentModifier: Modifier,
     landscape: Boolean = false,
     isBlackTheme: Boolean = isSystemInDarkTheme(),
@@ -38,8 +38,8 @@ fun ImprovedBottomDrawer(
         shape = shape,
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = sheetState,
-//        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
-        windowInsets = WindowInsets(0, 0, 0, 0),
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
+//        windowInsets = WindowInsets(0, 0, 0, 0),
 //        windowInsets =  WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
 //        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
         onDismissRequest = hide

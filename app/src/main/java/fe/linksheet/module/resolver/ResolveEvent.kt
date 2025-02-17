@@ -19,6 +19,7 @@ enum class ResolveEvent(@StringRes override val id: Int) : StringResHolder {
 }
 
 sealed interface ResolverInteraction {
+    data object Initialized : ResolverInteraction
     data object Clear : ResolverInteraction
     data class Cancelable(val event: ResolveEvent, val cancel: () -> Unit) : ResolverInteraction
 }

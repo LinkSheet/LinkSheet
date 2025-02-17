@@ -27,7 +27,7 @@ fun <T> FilterChips(
     values: List<FilterChipValue<T>>
 ) {
     Row {
-        for((value, _, _, isLast) in values.withElementInfo()) {
+        for((value, _, _, last) in values.withElementInfo()) {
             FilterChip(
                 value = value.value,
                 currentState = currentState,
@@ -36,7 +36,7 @@ fun <T> FilterChips(
                 icon = value.icon
             )
 
-            if (!isLast) {
+            if (!last) {
                 Spacer(modifier = Modifier.width(5.dp))
             }
         }

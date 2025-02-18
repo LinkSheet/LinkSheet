@@ -122,7 +122,7 @@
     <string name="download_started">已开始下载</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet 已检测到至少一个已知为浏览器的应用。</string>
     <string name="enable_amp2html">启用Amp2Html</string>
-    <string name="follow_only_known_trackers_explainer">仅当已知主机是跟踪器/重定向时，才尝试跟踪重定向。如果启用了“通过外部服务跟踪重定向”，则此项将始终启用。</string>
+    <string name="follow_only_known_trackers_explainer">仅当已知主机是跟踪器/重定向时，才尝试跟踪重定向。如果启用了“通过外部服务跟踪重定向”，则此项将始终启用</string>
     <string name="copy_to_clipboard">复制到剪贴板</string>
     <string name="logs">日志</string>
     <string name="no_apps_which_can_handle_links_found">没有找到可以处理链接的应用。</string>
@@ -333,7 +333,7 @@
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet 尚未配置就绪</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet 配置就绪</string>
     <string name="resolve_event__querying_browser_list">获取浏览器列表中</string>
-    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）资料中打开。两个档案都需要安装 LinkSheet，并使用“设置 -&gt; 特殊应用权限 -&gt; 关联的工作&amp;个人应用”手动进行关联</string>
+    <string name="switch_profile_explainer">在底栏中显示按钮，用于将点击的链接在（工作）空间中打开。两个空间都需要安装 LinkSheet，并使用“设置 -&gt; 特殊应用权限 -&gt; 关联的工作&amp;个人应用”手动进行关联</string>
     <string name="export_log_dialog__subtitle_include_throwable">推荐，但无法删减</string>
     <string name="settings_app_config__description_preferred_browser">用户选择的偏好浏览器</string>
     <string name="telemetry_dialog_text">选择最适合你的使用指标类型。</string>
@@ -473,12 +473,12 @@
     <string name="telemetry_identifier_reset">重置标识符</string>
     <string name="telemetry_configure_title">分析</string>
     <string name="telemetry_configure_type">分析类型</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">在底栏显示按钮，将点击的链接在另一个资料中打开</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">在底栏显示按钮，将点击的链接在另一个配置文件中打开</string>
     <string name="generic__button_text_done">完成</string>
     <string name="generic__text_edit">编辑</string>
     <string name="github_workflow_run_id"><b>工作流 ID：</b> <font face="monospace">%s</font></string>
     <string name="settings_profile_switcher__divider_configuration">配置</string>
-    <string name="settings_profile_switcher__title_profile_switcher">资料切换</string>
+    <string name="settings_profile_switcher__title_profile_switcher">配置文件切换</string>
     <string name="version_name"><b>版本：</b> <font face="monospace">%s</font></string>
     <string name="flavor"><b>特性：</b> <font face="monospace">%s</font></string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
@@ -499,12 +499,12 @@
     <string name="generic__button_text_save">保存</string>
     <string name="generic__button_text_close">关闭</string>
     <string name="generic__button_learn_more">了解更多</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">点击让 LinkSheet 与第二资料中的分身关联</string>
-    <string name="settings_profile_switcher__divider_other_profiles">其他资料</string>
-    <string name="generic__label_personal_profile">个人资料</string>
-    <string name="generic__label_work_profile">工作资料</string>
-    <string name="settings_profile_switcher__text_not_installed">无法关联到此资料</string>
-    <string name="settings_profile_switcher__text_other_profile">其他资料</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">点击让 LinkSheet 与第二配置文件中的分身关联</string>
+    <string name="settings_profile_switcher__divider_other_profiles">其他配置文件</string>
+    <string name="generic__label_personal_profile">个人配置文件</string>
+    <string name="generic__label_work_profile">工作配置文件</string>
+    <string name="settings_profile_switcher__text_not_installed">无法关联到此配置文件</string>
+    <string name="settings_profile_switcher__text_other_profile">其他配置文件</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">行为更改</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">请求权限</string>
     <string name="generic__button_dismiss">知道了</string>
@@ -517,11 +517,11 @@
     <string name="app_host_dialog__title_hosts">默认主机</string>
     <string name="app_host_dialog__text_no_hosts">没有设置默认在此应用中打开的主机！</string>
     <string name="settings_main_experiment_changelog__title_changelog">实验更新日志</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">启用跨资料关联</string>
-    <string name="settings_profile_switcher__text_current_profile">目前运行于此资料</string>
-    <string name="generic__label_unknown_profile">未知资料</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">启用跨配置文件关联</string>
+    <string name="settings_profile_switcher__text_current_profile">目前在此配置文件运行</string>
+    <string name="generic__label_unknown_profile">未知配置文件</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">需要额外配置</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">已知小米会严格限制应用活动，方式难以预测，从而导致 LinkSheet 无法正常运行。\n请点击下方按钮，然后允许“在后台弹出界面”权限</string>
-    <string name="settings_profile_switcher__divider_current_profile">当前资料</string>
+    <string name="settings_profile_switcher__divider_current_profile">当前配置文件</string>
     <string name="bottom_sheet__button_manual_redirect">跟随重定向</string>
 </resources>

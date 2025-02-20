@@ -739,7 +739,7 @@ private class ModalBottomSheetDialogWrapper(
                     // state
                     // defined inside the Dialog via rememberSaveable()
 
-//                    setTag(R.id.compose_view_saveable_id_tag, "Dialog:$dialogId")
+                    setTag(1337, "Dialog:$dialogId")
                     // Enable children to draw their shadow by not clipping them
                     clipChildren = false
                     // Allocate space for elevation

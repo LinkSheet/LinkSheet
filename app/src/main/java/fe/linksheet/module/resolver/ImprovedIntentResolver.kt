@@ -87,10 +87,10 @@ class ImprovedIntentResolver(
         )
     }
 
-    private val _events = MutableStateFlow(value = ResolveEvent.Initialized)
+    private val _events = MutableStateFlow(value = ResolveEvent.Idle)
     override val events = _events.asStateFlow()
 
-    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Initialized)
+    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Idle)
     override val interactions = _interactions.asStateFlow()
 
     private fun emitEvent(event: ResolveEvent) {
@@ -133,7 +133,9 @@ class ImprovedIntentResolver(
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
-        if (searchIntentResult != null) return@scope searchIntentResult
+        if (searchIntentResult != null) {
+            return@scope searchIntentResult
+        }
 
         var uri = getUriFromIntent(intent)
 

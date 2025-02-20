@@ -25,6 +25,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityOptionsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -43,8 +44,6 @@ import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.ResolveEvent
-import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
@@ -108,7 +107,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
         lifecycleScope.launch {
             viewModel.resolveResultFlow
-                .flowWithLifecycle(lifecycle)
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .mapNotNull { it as? IntentResolveResult.Default }
                 .filter { it.hasAutoLaunchApp && it.app != null }
                 .map {
@@ -125,12 +124,11 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Wrapper() {
-        val event by viewModel.events.collectOnIO(initialState = ResolveEvent.Initialized)
-        val interaction by viewModel.interactions.collectOnIO(initialState = ResolverInteraction.Initialized)
+        val event by viewModel.events.collectOnIO()
+        val interaction by viewModel.interactions.collectOnIO()
 
         val resolveResult by viewModel.resolveResultFlow.collectAsStateWithLifecycle()
         val currentIntent by intentFlow.collectAsStateWithLifecycle()
@@ -245,8 +243,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                             },
                             isPrivateBrowser = ::isPrivateBrowser,
                             showToast = ::showToast,
-                            isExpanded = sheetState.currentValue == SheetValue.Expanded,
-                            requestExpand = { },
                             controller = controller,
                             showPackage = viewModel.alwaysShowPackageName(),
                             previewUrl = viewModel.previewUrl(),
@@ -370,9 +366,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     fun setInitialIntent(intent: Intent) {
         initialIntent.tryEmit(intent)
         latestNewIntent.tryEmit(null)
-        lifecycleScope.launch {
-            viewModel.resolve(intent.toSafeIntent(), referrer)
-        }
+        viewModel.resolveAsync(intent.toSafeIntent(), referrer)
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -380,9 +374,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         logger.info("onNewIntent: $intent")
 
         latestNewIntent.tryEmit(intent)
-        lifecycleScope.launch {
-            viewModel.resolve(intent.toSafeIntent(), referrer)
-        }
+        viewModel.resolveAsync(intent.toSafeIntent(), referrer)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

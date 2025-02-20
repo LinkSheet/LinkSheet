@@ -16,6 +16,7 @@ import android.provider.Settings
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
@@ -45,6 +46,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
@@ -107,7 +109,7 @@ class BottomSheetViewModel(
     private val _resolveResultFlow = MutableStateFlow<IntentResolveResult>(IntentResolveResult.Pending)
     val resolveResultFlow = _resolveResultFlow.asStateFlow()
 
-    suspend fun resolve(intent: SafeIntent, uri: Uri?) {
+    fun resolveAsync(intent: SafeIntent, uri: Uri?) = viewModelScope.launch(Dispatchers.IO) {
         val resolveResult = intentResolver.resolve(intent, uri)
         _resolveResultFlow.emit(resolveResult)
     }

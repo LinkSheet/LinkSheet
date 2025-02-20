@@ -463,10 +463,13 @@ object ModalBottomSheetDefaults {
 fun rememberModalBottomSheetState(
     skipPartiallyExpanded: Boolean = false,
     confirmValueChange: (SheetValue) -> Boolean = { true },
+    initialValue: SheetValue = SheetValue.Hidden,
+    skipHiddenState: Boolean = false
 ) = rememberSheetState(
     skipPartiallyExpanded = skipPartiallyExpanded,
     confirmValueChange = confirmValueChange,
-    initialValue = Hidden,
+    initialValue = initialValue,
+    skipHiddenState = skipHiddenState
 )
 
 @Composable

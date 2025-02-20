@@ -528,6 +528,7 @@
     <string name="generic__button_text_close">Close</string>
     <string name="settings_verified_link_handlers__text_browser">Browser</string>
     <string name="generic__button_text_share">Share</string>
+    <string name="resolve_event__idle">Idle</string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="one">%d default host</item>
         <item quantity="other">%d default hosts</item>

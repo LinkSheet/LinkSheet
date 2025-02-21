@@ -29,12 +29,13 @@ import fe.linksheet.navigation.Route
 
 @Composable
 fun ExperimentalFailureSheetContent(
+    modifier: Modifier = Modifier,
     onShareClick: () -> Unit,
     onCopyClick: () -> Unit,
     data: String?,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally

@@ -49,6 +49,7 @@ typealias Launch2 = (index: Int, info: ActivityAppInfo, type: ClickType, modifie
 
 @Composable
 fun BottomSheetApps(
+    modifier: Modifier = Modifier,
     result: IntentResolveResult.Default,
     enableIgnoreLibRedirectButton: Boolean,
     enableSwitchProfile: Boolean,
@@ -77,6 +78,7 @@ fun BottomSheetApps(
     val hasPreferredApp = result.filteredItem != null
 
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         if (previewUrl && hasUri) {
@@ -329,7 +331,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
 private fun PreviewContainer(content: @Composable () -> Unit) {
     PreviewTheme {
         CompositionLocalProvider(LocalActivity provides Activity()) {
-            Column(modifier = Modifier.wrapContentSize()) {
+            Column() {
                 content()
             }
         }

@@ -131,7 +131,11 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val currentIntent by intentFlow.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
-        val sheetState = rememberModalBottomSheetState()
+        val sheetState = rememberModalBottomSheetState(
+//            confirmValueChange = {
+//                if(it == SheetValue.Hidden) true else true
+//            }
+        )
 
         LaunchedEffect(key1 = resolveResult) {
             logger.info("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")

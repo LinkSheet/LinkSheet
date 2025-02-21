@@ -28,6 +28,7 @@ import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 
@@ -52,7 +53,6 @@ fun AppContentList(
 ) {
     val state = rememberLazyListState()
 
-
     AppContent(
         info = apps.getOrFirstOrNull(appListSelectedIdx),
         appListSelectedIdx = appListSelectedIdx,
@@ -63,15 +63,14 @@ fun AppContentList(
     ) { modifier ->
         LazyColumn(
             state = state,
-            modifier = modifier
-//            .then(Modifier.requiredHeight(AppListItemRowDefaults.RowHeight * apps.size))
+            modifier = modifier.debugBorder(1.dp, Color.Green)
         ) {
             itemsIndexed(
                 items = apps,
                 key = { _, item -> item.flatComponentName }
             ) { index, info ->
                 AppListItem(
-                    modifier = Modifier.requiredHeight(AppListItemRowDefaults.RowHeight),
+                    modifier = Modifier.heightIn(min = AppListItemRowDefaults.RowHeight),
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
@@ -114,9 +113,7 @@ fun AppListItem(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 10.dp)
-                // TODO: Do we still need to use a constant here?
-                ,
+                .padding(horizontal = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             AppListItemRow(

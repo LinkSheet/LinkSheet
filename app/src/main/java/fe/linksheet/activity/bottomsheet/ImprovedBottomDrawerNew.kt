@@ -51,7 +51,7 @@ fun ImprovedBottomDrawerNew(
             if (landscape) this else padding(bottom = bottomPadding)
         }
 
-        Column(modifier = contentModifier.debugBorder(1.dp, Color.Blue)) {
+        Column(modifier = contentModifier) {
             sheetContent()
         }
     }

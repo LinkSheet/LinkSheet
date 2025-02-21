@@ -24,7 +24,7 @@ fun ChoiceButtons(
 ) {
     Row(
         modifier = Modifier
-            .requiredHeight(height = ButtonDefaults.MinHeight)
+            .heightIn(min = ButtonDefaults.MinHeight)
             .padding(start = 15.dp, end = 15.dp),
         horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {

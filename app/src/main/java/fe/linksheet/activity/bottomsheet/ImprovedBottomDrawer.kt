@@ -12,10 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
-import fe.linksheet.composable.util.debugBorder
+import fe.linksheet.util.AndroidVersion
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,13 +24,9 @@ fun ImprovedBottomDrawer(
     sheetState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     hide: () -> Unit,
-    sheetContent: @Composable ColumnScope.() -> Unit = {},
+    sheetContent: @Composable (Modifier) -> Unit = {},
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
-
     ModalBottomSheet(
-//        modifier = modifier,
         // TODO: Change to default? (surfaceContainerLow)
         containerColor = MaterialTheme.colorScheme.surface,
         shape = shape,
@@ -40,19 +34,25 @@ fun ImprovedBottomDrawer(
         sheetState = sheetState,
 //        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         windowInsets = WindowInsets(0, 0, 0, 0),
+//        windowInsets = androidx.compose.material3.fix.BottomSheetDefaults.windowInsets,
 //        windowInsets =  WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
 //        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
         onDismissRequest = hide
     ) {
         // Works on both API <29 and API 30+
-        val bottomPadding = remember { safeDrawing.calculateBottomPadding() }
+        if (AndroidVersion.AT_LEAST_API_30_R) {
+            Box(modifier = Modifier.navigationBarsPadding()) {
+                sheetContent(contentModifier)
+            }
+        } else {
+            val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
 
-        val contentModifier = with(contentModifier) {
-            if (landscape) this else padding(bottom = bottomPadding)
-        }
+            val bottomPadding = remember { safeDrawing.calculateBottomPadding() }
+            val contentModifier = with(contentModifier) {
+                if (landscape) this else padding(bottom = bottomPadding)
+            }
 
-        Column(modifier = contentModifier.debugBorder(1.dp, Color.Blue)) {
-            sheetContent()
+            sheetContent(contentModifier)
         }
     }
 }

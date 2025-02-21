@@ -90,8 +90,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
     val editorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        logger.info("editorLauncher: $result")
-
         if (result.resultCode == RESULT_OK && result.data != null) {
             val uri = result.data?.getStringExtra(TextEditorActivity.EXTRA_TEXT)
                 ?.let { Uri.parse(it) }
@@ -103,7 +101,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        logger.info("onCreate")
 
         lifecycleScope.launch {
             viewModel.resolveResultFlow
@@ -140,11 +137,11 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             logger.info("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
             if (resolveResult != IntentResolveResult.Pending) {
                 // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
-//                if (viewModel.improvedBottomSheetExpandFully()) {
-//                    sheetState.expand()
-//                } else {
-//                    sheetState.partialExpand()
-//                }
+                if (viewModel.improvedBottomSheetExpandFully()) {
+                    sheetState.expand()
+                } else {
+                    sheetState.partialExpand()
+                }
             }
         }
 
@@ -189,10 +186,11 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 finish()
 //                sheetOpen = false
             },
-            sheetContent = {
+            sheetContent = { modifier ->
                 when (resolveResult) {
                     is IntentResolveResult.Pending -> {
                         LoadingIndicatorSheetContent(
+                            modifier = modifier,
                             event = event,
                             interaction = interaction,
                             requestExpand = {
@@ -207,6 +205,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
                     is IntentResolveResult.Default -> {
                         BottomSheetApps(
+                            modifier = modifier,
                             result = resolveResult as IntentResolveResult.Default,
                             enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
                             enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
@@ -253,6 +252,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
                     is IntentResolveResult.IntentParseFailed, is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
                         ExperimentalFailureSheetContent(
+                            modifier = modifier,
                             data = currentIntent?.dataString,
                             onShareClick = {},
                             onCopyClick = {}

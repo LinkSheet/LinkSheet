@@ -16,15 +16,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.linksheet.R
+import fe.linksheet.composable.ui.PreviewTheme
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction
-import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.composable.ui.PreviewTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun LoadingIndicatorSheetContent(
+    modifier: Modifier = Modifier,
     event: ResolveEvent,
     interaction: ResolverInteraction,
     requestExpand: () -> Unit,
@@ -42,7 +42,7 @@ fun LoadingIndicatorSheetContent(
     }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

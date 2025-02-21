@@ -548,4 +548,5 @@
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Przeglądarka</string>
     <string name="generic__button_text_share">Udostępnij</string>
+    <string name="resolve_event__idle">Bezczynny</string>
 </resources>

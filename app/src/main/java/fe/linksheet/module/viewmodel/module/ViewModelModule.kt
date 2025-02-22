@@ -1,6 +1,8 @@
 package fe.linksheet.module.viewmodel.module
 
 
+import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.core.module.dsl.singleOf
@@ -8,6 +10,7 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
+    includes(preferenceRepositoryModule, repositoryModule)
     singleOf(::LogViewCommon)
 
     viewModelOf(::MainViewModel)

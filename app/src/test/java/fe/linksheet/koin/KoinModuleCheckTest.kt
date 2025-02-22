@@ -82,6 +82,7 @@ internal class KoinModuleCheckTest : UnitTest {
     private val extraTypes = listOf(
         Context::class,
         PackageManager::class,
+        ConnectivityManager::class,
         Function0::class,
         Function1::class,
         Application::class,
@@ -99,7 +100,6 @@ internal class KoinModuleCheckTest : UnitTest {
             PackageLauncherService::class,
             PackageBrowserService::class,
         ),
-        definition<NetworkStateService>(ConnectivityManager::class),
         definition<Redactor>(LogHasher::class),
         definition<Logger>(LoggerDelegate::class),
         definition<CachedRequest>(Request::class, Logger::class),
@@ -114,7 +114,7 @@ internal class KoinModuleCheckTest : UnitTest {
             OkHttpClient::class
         ),
         definition<AllRemoteResolveRequest>(Request::class),
-        definition<BrowserResolver>(PackageManager::class, PackageService::class),
+        definition<BrowserResolver>( PackageService::class),
         definition<InAppBrowserHandler>(DisableInAppBrowserInSelectedRepository::class),
         definition<RedirectUrlResolver>(
             RedirectResolveRequest::class, ResolvedRedirectRepository::class
@@ -148,11 +148,7 @@ internal class KoinModuleCheckTest : UnitTest {
         ),
         definition<PreferredAppSettingsViewModel>(PackageService::class),
         definition<PreferredBrowserViewModel>(BrowserResolver::class),
-        definition<BottomSheetSettingsViewModel>(ProfileSwitcher::class),
-        definition<BottomSheetViewModel>(ProfileSwitcher::class, IntentResolver::class),
-        definition<LogSettingsViewModel>(LogPersistService::class),
-        definition<LogTextSettingsViewModel>(LogPersistService::class),
-        definition<CrashHandlerViewerViewModel>(LogPersistService::class),
+        definition<BottomSheetViewModel>(IntentResolver::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
         definition<ExportSettingsViewModel>(Gson::class),
         definition<AboutSettingsViewModel>(Gson::class),
@@ -162,7 +158,6 @@ internal class KoinModuleCheckTest : UnitTest {
             Gson::class,
             SystemInfoService::class
         ),
-        definition<ProfileSwitchingSettingsViewModel>(ProfileSwitcher::class),
         definition<MarkdownViewModel>(Request::class),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(CachedRequest::class, Logger::class),

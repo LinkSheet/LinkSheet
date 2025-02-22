@@ -30,16 +30,14 @@ import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.http.okHttpModule
 import fe.linksheet.module.http.requestModule
-import fe.linksheet.module.log.defaultLoggerModule
+import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
-import fe.linksheet.module.log.file.logFileServiceModule
 import fe.linksheet.module.network.networkStateServiceModule
 import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
-import fe.linksheet.module.redactor.redactorModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
@@ -129,12 +127,10 @@ open class LinkSheetApp : Application(), DependencyProvider {
             SystemInfoServiceModule,
             PackageModule,
             networkStateServiceModule,
-            logFileServiceModule,
             shizukuHandlerModule,
             globalGsonModule,
             preferenceRepositoryModule,
-            redactorModule,
-            defaultLoggerModule,
+            DefaultLogModule,
             provideCompatProvider(),
             CompatModule,
             databaseModule,

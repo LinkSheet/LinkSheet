@@ -264,7 +264,7 @@
     <string name="resolve_via_failed_toast">Неуспешно откриване</string>
     <string name="last_updated"><b>Издание:</b> <font face="monospace">%s</font></string>
     <string name="resolve_via_failed_toast_explainer">Показва плуващо известие, когато външна услуга не открие адрес</string>
-    <string name="resolve_via_toast">Намиране на адрес</string>
+    <string name="resolve_via_toast">Адресът е открит</string>
     <string name="resolve_via_toast_explainer">Показва плуващо известие при открит адрес от външна услуга</string>
     <string name="enable_linksheet_compat">Включване на експерименталното меню на LinkSheet Compat</string>
     <string name="enable_linksheet_compat_explainer">Менюто можете данамерите в подменю „Приложения“ и ако е инсталирано може да прехваща заявки към определени присъщи приложения.</string>
@@ -532,4 +532,5 @@
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Мрежов четец</string>
     <string name="generic__button_text_share">Споделяне</string>
+    <string name="resolve_event__idle">Изчакване</string>
 </resources>

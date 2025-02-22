@@ -1,7 +1,7 @@
 package fe.linksheet.module.app
 
-import android.content.Context
 import fe.android.preference.helper.compose.asFunction
+import fe.linksheet.extension.koin.getPackageManager
 import fe.linksheet.extension.koin.getSystemServiceOrThrow
 import fe.linksheet.module.app.`package`.AndroidPackageIconLoaderModule
 import fe.linksheet.module.app.`package`.AndroidPackageIntentHandler
@@ -11,11 +11,11 @@ import org.koin.dsl.module
 
 val PackageModule = module {
     single {
-        AndroidPackageIconLoaderModule(get<Context>().packageManager, getSystemServiceOrThrow())
+        AndroidPackageIconLoaderModule(getPackageManager(), getSystemServiceOrThrow())
     }
     single {
         AndroidPackageIntentHandler(
-            get<Context>().packageManager,
+            getPackageManager(),
             get<ExperimentRepository>().asFunction(Experiments.hideReferrerFromSheet),
         )
     }

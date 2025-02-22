@@ -1,7 +1,9 @@
 package fe.linksheet.composable.page.settings.bottomsheet
 
+import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.WarningAmber
@@ -9,10 +11,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.preview.PreviewContainer
 import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -26,6 +30,10 @@ import fe.composekit.layout.column.group
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.ui.LocalActivity
+import fe.linksheet.module.profile.CrossProfile
+import fe.linksheet.module.profile.ProfileStatus
+import fe.linksheet.module.profile.ProfileSwitcher
+import fe.linksheet.module.profile.UserProfileInfo
 import fe.linksheet.module.viewmodel.ProfileSwitchingSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -35,47 +43,84 @@ fun ProfileSwitchingSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: ProfileSwitchingSettingsViewModel = koinViewModel(),
 ) {
+    val status by viewModel.status.collectAsStateWithLifecycle(ProfileStatus.Unsupported)
+
     ProfileSwitchingSettingsRouteInternal(
-        viewModel = viewModel,
+        status = status,
+        isManagedProfile = viewModel.profileSwitcher.checkIsManagedProfile(),
         enabled = viewModel.enabled(),
         onEnable = { viewModel.enabled(it) },
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        launchCrossProfileInteractSettings = viewModel::launchCrossProfileInteractSettings,
+        startOther = viewModel::startOther
     )
 }
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
 private fun ProfileSwitchingSettingsRouteInternal(
+    status: ProfileStatus,
+    isManagedProfile: Boolean,
     enabled: Boolean,
     onEnable: (Boolean) -> Unit,
     onBackPressed: () -> Unit,
-    viewModel: ProfileSwitchingSettingsViewModel,
+    launchCrossProfileInteractSettings: (Activity) -> Unit,
+    startOther: (CrossProfile, Activity) -> Unit,
 ) {
-    val needsSetup by viewModel.needSetup.collectAsStateWithLifecycle(false)
     val activity = LocalActivity.current
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings_profile_switcher__title_profile_switcher),
         onBackPressed = onBackPressed
     ) {
-        if (needsSetup) {
-            item(
-                key = R.string.settings_profile_switcher__title_enable_cross_profile,
-                contentType = ContentType.SingleGroupItem
-            ) {
-                AlertCard(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                    icon = Icons.Rounded.WarningAmber.iconPainter,
-                    iconOffset = IconOffset(y = (-1).dp),
-                    iconContentDescription = stringResource(id = R.string.settings_profile_switcher__title_enable_cross_profile),
-                    headline = textContent(R.string.settings_profile_switcher__title_enable_cross_profile),
-                    subtitle = textContent(R.string.settings_profile_switcher__text_enable_cross_profile),
-                    onClick = {
-                        viewModel.launchCrossProfileInteractSettings(activity)
-                    }
-                )
+        when (status) {
+            is ProfileStatus.Available -> {
+
             }
-        } else {
+
+            ProfileStatus.NoProfiles -> {
+                item(
+                    key = R.string.settings_profile_switcher__title_no_profile,
+                    contentType = ContentType.SingleGroupItem
+                ) {
+                    AlertCard(
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                        icon = Icons.Rounded.WarningAmber.iconPainter,
+                        iconOffset = IconOffset(y = (-1).dp),
+                        iconContentDescription = stringResource(id = R.string.settings_profile_switcher__title_no_profile),
+                        headline = textContent(R.string.settings_profile_switcher__title_no_profile),
+                        subtitle = textContent(R.string.settings_profile_switcher__no_profile),
+                        onClick = {
+                        }
+                    )
+                }
+            }
+
+            ProfileStatus.NotConnected -> {
+                item(
+                    key = R.string.settings_profile_switcher__title_enable_cross_profile,
+                    contentType = ContentType.SingleGroupItem
+                ) {
+                    AlertCard(
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                        icon = Icons.Rounded.WarningAmber.iconPainter,
+                        iconOffset = IconOffset(y = (-1).dp),
+                        iconContentDescription = stringResource(id = R.string.settings_profile_switcher__title_enable_cross_profile),
+                        headline = textContent(R.string.settings_profile_switcher__title_enable_cross_profile),
+                        subtitle = textContent(R.string.settings_profile_switcher__text_enable_cross_profile),
+                        onClick = {
+                            launchCrossProfileInteractSettings(activity)
+                        }
+                    )
+                }
+            }
+
+            ProfileStatus.Unsupported -> {
+
+            }
+        }
+
+        if (status is ProfileStatus.Available) {
             item(key = R.string.enabled, contentType = ContentType.SingleGroupItem) {
                 SwitchListItem(
                     checked = enabled,
@@ -87,65 +132,130 @@ private fun ProfileSwitchingSettingsRouteInternal(
             }
         }
 
-        divider(id = R.string.settings_profile_switcher__divider_current_profile)
+        if (status is ProfileStatus.Available) {
+            divider(id = R.string.settings_profile_switcher__divider_current_profile)
 
-        val userProfileInfo = viewModel.getUserProfileInfo()
-        val isManagedProfile = viewModel.isManagedProfile()
-
-        item(key = userProfileInfo.userHandle.identifier, contentType = ContentType.SingleGroupItem) {
-            val textId =
-                if (isManagedProfile) R.string.generic__label_work_profile else R.string.generic__label_personal_profile
-
-            DefaultTwoLineIconClickableShapeListItem(
-                headlineContent = textContent(textId),
-                supportingContent = textContent(R.string.settings_profile_switcher__text_current_profile),
-                icon = Icons.Rounded.Person.iconPainter,
-                onClick = {}
-            )
-        }
-
-        divider(id = R.string.settings_profile_switcher__divider_other_profiles)
-
-        group(
-            list = userProfileInfo.otherHandles,
-            key = { (handle, _) -> handle.identifier }) { (_, crossProfile), padding, shape ->
-            if (crossProfile != null) {
-                val textId =
-                    if (isManagedProfile) R.string.generic__label_personal_profile else R.string.generic__label_work_profile
+            item(key = status.userProfileInfo.userHandle, contentType = ContentType.SingleGroupItem) {
+                val textId = when {
+                    isManagedProfile -> R.string.generic__label_work_profile
+                    else -> R.string.generic__label_personal_profile
+                }
 
                 DefaultTwoLineIconClickableShapeListItem(
-                    shape = shape,
-                    padding = padding,
                     headlineContent = textContent(textId),
-                    supportingContent = textContent(R.string.settings_profile_switcher__text_other_profile),
-                    icon = bitmap(crossProfile.bitmap),
-                    onClick = {
-                        viewModel.profileSwitcher.startOther(crossProfile, activity)
-                    }
-                )
-            } else {
-                DefaultTwoLineIconClickableShapeListItem(
-                    enabled = false,
-                    shape = shape,
-                    padding = padding,
-                    headlineContent = textContent(R.string.generic__label_unknown_profile),
-                    supportingContent = textContent(R.string.settings_profile_switcher__text_not_installed),
+                    supportingContent = textContent(R.string.settings_profile_switcher__text_current_profile),
                     icon = Icons.Rounded.Person.iconPainter,
                     onClick = {}
                 )
             }
-        }
 
-//        item(key = "info", contentType = ContentType.SingleGroupItem) {
-//            PageInfo(textContent = text("This is a test"))
-//        }
+            if (status.userProfileInfo.otherHandles.isNotEmpty()) {
+                divider(id = R.string.settings_profile_switcher__divider_other_profiles)
+
+                group(
+                    list = status.userProfileInfo.otherHandles,
+                    key = { (handle, _) -> handle }
+                ) { (_, crossProfile), padding, shape ->
+                    OtherProfiles(
+                        shape = shape,
+                        padding = padding,
+                        crossProfile = crossProfile,
+                        isManagedProfile = isManagedProfile,
+                        startOther = startOther
+                    )
+                }
+            }
+        }
     }
 }
 
+@Composable
+private fun OtherProfiles(
+    shape: Shape,
+    padding: PaddingValues,
+    crossProfile: CrossProfile?,
+    isManagedProfile: Boolean,
+    startOther: (CrossProfile, Activity) -> Unit,
+) {
+    val activity = LocalActivity.current
+    if (crossProfile != null) {
+        val textId = when {
+            isManagedProfile -> R.string.generic__label_personal_profile
+            else -> R.string.generic__label_work_profile
+        }
+
+        DefaultTwoLineIconClickableShapeListItem(
+            shape = shape,
+            padding = padding,
+            headlineContent = textContent(textId),
+            supportingContent = textContent(R.string.settings_profile_switcher__text_other_profile),
+            icon = bitmap(crossProfile.bitmap),
+            onClick = {
+                startOther(crossProfile, activity)
+            }
+        )
+    } else {
+        DefaultTwoLineIconClickableShapeListItem(
+            enabled = false,
+            shape = shape,
+            padding = padding,
+            headlineContent = textContent(R.string.generic__label_unknown_profile),
+            supportingContent = textContent(R.string.settings_profile_switcher__text_not_installed),
+            icon = Icons.Rounded.Person.iconPainter,
+            onClick = {}
+        )
+    }
+}
+
+private object ProfileSwitcherStub : ProfileSwitcher {
+    override fun checkIsManagedProfile(): Boolean = false
+    override fun getStatus(): ProfileStatus = ProfileStatus.Unsupported
+    override fun launchCrossProfileInteractSettings(activity: Activity): Boolean = false
+    override fun canSetupAtLeastR(): Boolean = false
+    override fun canSetup(): Boolean = false
+    override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {}
+    override fun startOther(profile: CrossProfile, activity: Activity) {}
+    override fun getProfiles(): List<CrossProfile>? = null
+    override fun getProfilesInternal(): List<CrossProfile>? = null
+}
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Preview
 @Composable
 private fun ProfileSwitchingSettingsRoutePreview() {
-//    ProfileSwitchingSettingsRouteInternal(enabled = false, onEnable = {}, onBackPressed = {}, viewModel = viewModel)
+    ProfileSwitchingSettingsRouteBase(
+        status = ProfileStatus.NoProfiles,
+    )
+}
+
+@RequiresApi(Build.VERSION_CODES.P)
+@Preview
+@Composable
+private fun ProfileSwitchingSettingsRoutePreview2() {
+    ProfileSwitchingSettingsRouteBase(
+        status = ProfileStatus.Available(
+            UserProfileInfo(
+                1,
+                emptyList()
+            )
+        )
+    )
+}
+
+@RequiresApi(Build.VERSION_CODES.P)
+@Composable
+private fun ProfileSwitchingSettingsRouteBase(status: ProfileStatus) {
+    PreviewContainer {
+        ProfileSwitchingSettingsRouteInternal(
+            status = status,
+            isManagedProfile = false,
+            enabled = false,
+            onEnable = {},
+            onBackPressed = {},
+            launchCrossProfileInteractSettings = {
+            },
+            startOther = { _, _ ->
+            }
+        )
+    }
 }

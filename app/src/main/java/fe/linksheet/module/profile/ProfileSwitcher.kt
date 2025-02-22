@@ -8,29 +8,51 @@ import android.net.Uri
 import android.os.Build
 import android.os.UserHandle
 import android.os.UserHandleHidden
+import android.os.UserManager
 import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
 import fe.linksheet.R.string
 import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.extension.koin.getSystemServiceOrThrow
 import fe.linksheet.util.AndroidVersion
 import org.koin.dsl.module
 
 val ProfileSwitcherModule = module {
-    single<ProfileSwitcher> {
-        val context = get<Context>()
-        val appLabel = context.resources.getString(string.app_name)
-        val crossProfileApps = context.getSystemService<CrossProfileApps>()!!
-
-        RealProfileSwitcher(appLabel, crossProfileApps)
+    single {
+        AndroidProfileSwitcherModule(
+            appLabel = get<Context>().resources.getString(string.app_name),
+            crossProfileApps = getSystemServiceOrThrow(),
+            userManager = getSystemServiceOrThrow()
+        )
     }
 }
 
+internal fun AndroidProfileSwitcherModule(
+    appLabel: String,
+    crossProfileApps: CrossProfileApps,
+    userManager: UserManager
+): ProfileSwitcher {
+    val isManagedProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
+        userManager::isManagedProfile
+    } ?: { false }
+
+    return RealProfileSwitcher(
+        appLabel = appLabel,
+        crossProfileApps = crossProfileApps,
+        isManagedProfile = isManagedProfile,
+        isSystemUser = userManager::isSystemUser,
+        getUserProfiles = { userManager.userProfiles },
+        getMyUserId = { UserHandleHidden.myUserId() }
+    )
+}
+
 interface ProfileSwitcher {
+    fun checkIsManagedProfile(): Boolean
+    fun getStatus(): ProfileStatus
     fun launchCrossProfileInteractSettings(activity: Activity): Boolean
-    fun needsSetupAtLeastR(): Boolean
-    fun needsSetup(): Boolean
+    fun canSetupAtLeastR(): Boolean
+    fun canSetup(): Boolean
     fun switchTo(profile: CrossProfile, url: String, activity: Activity)
     fun startOther(profile: CrossProfile, activity: Activity)
     fun getProfiles(): List<CrossProfile>?
@@ -40,7 +62,53 @@ interface ProfileSwitcher {
 class RealProfileSwitcher(
     private val appLabel: String,
     private val crossProfileApps: CrossProfileApps,
+    private val isManagedProfile: () -> Boolean,
+    private val isSystemUser: () -> Boolean,
+    private val getUserProfiles: () -> List<UserHandle>,
+    private val getMyUserId: () -> Int,
 ) : ProfileSwitcher {
+
+    override fun checkIsManagedProfile(): Boolean {
+        return if (AndroidVersion.AT_LEAST_API_30_R) isManagedProfile()
+        else !isSystemUser()
+    }
+
+    override fun getStatus(): ProfileStatus = when {
+        AndroidVersion.AT_LEAST_API_30_R -> getStatusInternal()
+        else -> ProfileStatus.Unsupported
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    private fun getStatusInternal(): ProfileStatus {
+        val canInteract = crossProfileApps.canInteractAcrossProfiles()
+        val canRequestInteract = crossProfileApps.canRequestInteractAcrossProfiles()
+
+        if (!canInteract && canRequestInteract) {
+            return ProfileStatus.NotConnected
+        }
+
+        val crossProfiles = getProfilesInternal() ?: emptyList()
+        if (crossProfiles.isEmpty()) {
+            return ProfileStatus.NoProfiles
+        }
+
+        val profiles = getUserProfiles().associateWith { Refine.unsafeCast<UserHandleHidden>(it) }
+        val myUserId = getMyUserId()
+
+        var myUserHandle: UserHandleHidden? = null
+        val otherHandles = mutableListOf<Pair<Int, CrossProfile?>>()
+
+        for ((_, hiddenUserHandle) in profiles) {
+            if (hiddenUserHandle.identifier == myUserId) {
+                myUserHandle = hiddenUserHandle
+            } else {
+                val crossProfile = crossProfiles.firstOrNull { it.id == hiddenUserHandle.identifier }
+                otherHandles.add(hiddenUserHandle.identifier to crossProfile)
+            }
+        }
+
+        return ProfileStatus.Available(UserProfileInfo(myUserHandle!!.identifier, otherHandles))
+    }
 
     override fun launchCrossProfileInteractSettings(activity: Activity): Boolean {
         if (!AndroidVersion.AT_LEAST_API_30_R) return false
@@ -50,13 +118,14 @@ class RealProfileSwitcher(
         return true
     }
 
-    override fun needsSetupAtLeastR(): Boolean {
-        return if (AndroidVersion.AT_LEAST_API_30_R) needsSetup() else false
+    override fun canSetupAtLeastR(): Boolean {
+        return if (AndroidVersion.AT_LEAST_API_30_R) canSetup() else false
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    override fun needsSetup(): Boolean {
-        return !crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.canRequestInteractAcrossProfiles()
+    override fun canSetup(): Boolean {
+        return crossProfileApps.targetUserProfiles.isNotEmpty() &&
+                !crossProfileApps.canInteractAcrossProfiles() && crossProfileApps.canRequestInteractAcrossProfiles()
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -102,6 +171,20 @@ class RealProfileSwitcher(
         return toCrossProfile(handle, userHandle.identifier)
     }
 }
+
+sealed interface ProfileStatus {
+    data object Unsupported : ProfileStatus
+    data object NoProfiles : ProfileStatus
+    data object NotConnected : ProfileStatus
+    data class Available(
+        val userProfileInfo: UserProfileInfo,
+    ) : ProfileStatus
+}
+
+data class UserProfileInfo(
+    val userHandle: Int,
+    val otherHandles: List<Pair<Int, CrossProfile?>>
+)
 
 data class CrossProfile(
     val userHandle: UserHandle,

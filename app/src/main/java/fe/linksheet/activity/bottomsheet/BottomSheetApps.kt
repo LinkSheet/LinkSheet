@@ -11,7 +11,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import app.linksheet.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.util.listOfFirstActivityResolveInfo
 import app.linksheet.testing.util.packageName
@@ -29,12 +29,11 @@ import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.LocalActivity
-import fe.linksheet.composable.ui.PreviewTheme
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.profile.CrossProfile
+import fe.linksheet.module.profile.ProfileStatus
 import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.IntentResolveResult
@@ -168,10 +167,12 @@ fun BottomSheetApps(
     }
 }
 
-object ProfileSwitcherStub : ProfileSwitcher {
+private object ProfileSwitcherStub : ProfileSwitcher {
+    override fun checkIsManagedProfile(): Boolean  = false
+    override fun getStatus(): ProfileStatus = ProfileStatus.Unsupported
     override fun launchCrossProfileInteractSettings(activity: Activity): Boolean = false
-    override fun needsSetupAtLeastR(): Boolean = false
-    override fun needsSetup(): Boolean = false
+    override fun canSetupAtLeastR(): Boolean = false
+    override fun canSetup(): Boolean = false
     override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {}
     override fun startOther(profile: CrossProfile, activity: Activity) {}
     override fun getProfiles(): List<CrossProfile>? = null
@@ -324,16 +325,5 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
             hideBottomSheetChoiceButtons = state.hideBottomSheetChoiceButtons,
             urlCardDoubleTap = false
         )
-    }
-}
-
-@Composable
-private fun PreviewContainer(content: @Composable () -> Unit) {
-    PreviewTheme {
-        CompositionLocalProvider(LocalActivity provides Activity()) {
-            Column() {
-                content()
-            }
-        }
     }
 }

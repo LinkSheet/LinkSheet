@@ -23,44 +23,16 @@ class ProfileSwitchingSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
     private val userManager = context.getSystemService<UserManager>()!!
 
-    val needSetup = flowOfLazy { profileSwitcher.needsSetupAtLeastR() }
-
-    fun isManagedProfile(): Boolean {
-        return if (AndroidVersion.AT_LEAST_API_30_R) userManager.isManagedProfile
-        else !userManager.isSystemUser
-    }
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    fun getUserProfileInfo(): UserProfileInfo {
-        val crossProfiles = profileSwitcher.getProfilesInternal() ?: emptyList()
-
-        val profiles = userManager.userProfiles.associateWith { Refine.unsafeCast<UserHandleHidden>(it) }
-        val myUserId = UserHandleHidden.myUserId()
-
-        var myUserHandle: UserHandleHidden? = null
-        val otherHandles = mutableListOf<Pair<UserHandleHidden, CrossProfile?>>()
-
-        for ((_, hiddenUserHandle) in profiles) {
-            if (hiddenUserHandle.identifier == myUserId) {
-                myUserHandle = hiddenUserHandle
-            } else {
-                val crossProfile = crossProfiles.firstOrNull { it.id == hiddenUserHandle.identifier }
-                otherHandles.add(hiddenUserHandle to crossProfile)
-            }
-        }
-
-        return UserProfileInfo(myUserHandle!!, otherHandles)
-    }
-
-    data class UserProfileInfo(
-        val userHandle: UserHandleHidden,
-        val otherHandles: MutableList<Pair<UserHandleHidden, CrossProfile?>>,
-    )
+    val status = flowOfLazy { profileSwitcher.getStatus() }
 
     val enabled = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
 
     fun launchCrossProfileInteractSettings(activity: Activity) {
         profileSwitcher.launchCrossProfileInteractSettings(activity)
+    }
+
+    fun startOther(crossProfile: CrossProfile, activity: Activity) {
+        profileSwitcher.startOther(crossProfile, activity)
     }
 }
 

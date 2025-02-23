@@ -540,4 +540,6 @@ Seal</string>
     <string name="app_host_dialog__text_no_hosts">¡No se ha establecido ningún host para abrirse de forma predeterminada en esta aplicación!</string>
     <string name="generic__button_text_close">Cerrar</string>
     <string name="bottom_sheet__button_manual_redirect">Seguir redirecciones</string>
+    <string name="generic__button_text_share">Compartir</string>
+    <string name="resolve_event__idle">Sin uso</string>
 </resources>

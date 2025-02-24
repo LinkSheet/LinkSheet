@@ -8,6 +8,7 @@ import fe.kotlin.util.applyIf
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.DisplayActivityInfo
+import fe.linksheet.util.RefactorGlue
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
@@ -50,7 +51,8 @@ class DomainVerificationAppInfo(
 
 typealias ActivityAppInfoStatus = Pair<ActivityAppInfo, Boolean>
 
-object ActivityAppInfoSortCompat {
+@RefactorGlue(reason = "Ensure compatibility of (new) PackageService with old UI")
+object ActivityAppInfoSortGlue {
     private val valueAndLabelComparator = compareByDescending<ActivityAppInfoStatus> { (_, status) ->
         status
     }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
@@ -64,7 +66,8 @@ object ActivityAppInfoSortCompat {
     }
 }
 
-object ActivityAppInfoCompat {
+@RefactorGlue(reason = "Ensure compatibility of (new) PackageService with old UI")
+object ActivityAppInfoGlue {
     fun toDisplayActivityInfo(appInfo: ActivityAppInfo): DisplayActivityInfo {
         return DisplayActivityInfo(
             componentInfo = appInfo.componentInfo,

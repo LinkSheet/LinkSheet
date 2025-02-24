@@ -1,3 +1,5 @@
+@file:OptIn(RefactorGlue::class)
+
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
@@ -17,12 +19,13 @@ import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.app.ActivityAppInfoCompat
+import fe.linksheet.module.app.ActivityAppInfoGlue
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.RefactorGlue
 import fe.linksheet.util.web.VerifiedDomainService.canHandleDomains
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -67,7 +70,7 @@ class PreferredAppSettingsViewModel(
         }
     }.map { apps ->
         apps.map { (info, state) ->
-            ActivityAppInfoCompat.toDisplayActivityInfo(info) to state
+            ActivityAppInfoGlue.toDisplayActivityInfo(info) to state
         }.toMap()
     }
 
@@ -78,7 +81,7 @@ class PreferredAppSettingsViewModel(
             it.canHandleDomains(domainVerificationManager!!) && it.activityInfo.packageName !in preferredAppsPackages
         }.sortedWith(ActivityAppInfo.labelComparator)
     }.map { apps ->
-        apps.map { ActivityAppInfoCompat.toDisplayActivityInfo(it) }
+        apps.map { ActivityAppInfoGlue.toDisplayActivityInfo(it) }
     }
 
     fun getHostStateAsync(

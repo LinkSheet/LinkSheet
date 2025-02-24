@@ -86,7 +86,8 @@ internal class KoinModuleCheckTest : UnitTest {
         Function0::class,
         Function1::class,
         Application::class,
-        SavedStateHandle::class
+        SavedStateHandle::class,
+        Logger::class,
     )
 
     private val injections = injectedParameters(
@@ -102,7 +103,7 @@ internal class KoinModuleCheckTest : UnitTest {
         ),
         definition<Redactor>(LogHasher::class),
         definition<Logger>(LoggerDelegate::class),
-        definition<CachedRequest>(Request::class, Logger::class),
+        definition<CachedRequest>(Request::class),
         definition<RedirectResolveRequest>(
             Request::class,
             CachedRequest::class,
@@ -160,9 +161,7 @@ internal class KoinModuleCheckTest : UnitTest {
         ),
         definition<MarkdownViewModel>(Request::class),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
-        definition<Downloader>(CachedRequest::class, Logger::class),
-        definition<AnalyticsClient>(Logger::class),
-        definition<AppStateService>(Logger::class),
+        definition<Downloader>(CachedRequest::class),
         definition<StatisticsService>(AppPreferenceRepository::class)
     )
 

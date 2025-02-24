@@ -153,7 +153,7 @@ fun BottomSheetSettingsRoute(
             if (AndroidVersion.AT_LEAST_API_30_R) {
                 item(key = R.string.switch_profile) { padding, shape ->
                     PreferenceDividedSwitchListItem(
-                        enabled = if (!viewModel.profileSwitcher.needsSetup()) EnabledContent.all else EnabledContent.Main.set,
+                        enabled = if (viewModel.profileSwitcher.canSetup()) EnabledContent.all else EnabledContent.Main.set,
                         shape = shape,
                         padding = padding,
                         preference = viewModel.bottomSheetProfileSwitcher,

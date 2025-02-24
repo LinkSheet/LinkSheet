@@ -30,7 +30,7 @@ private fun VersionTrackerModule(): Module = module {
     }
 }
 
-private class VersionTracker(
+internal class VersionTracker(
     private val analyticsService: BaseAnalyticsService,
     val preferenceRepository: AppPreferenceRepository,
     val gson: Gson,

@@ -6,6 +6,7 @@ import androidx.compose.runtime.Stable
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.resolver.util.ReferrerHelper
+import fe.linksheet.util.intent.parser.UriException
 import me.saket.unfurl.UnfurlResult
 
 sealed interface IntentResolveResult {
@@ -40,7 +41,7 @@ sealed interface IntentResolveResult {
                 && (referringPackageName == null || app?.packageName != referringPackageName)
     }
 
-    data object IntentParseFailed : IntentResolveResult
+    data class IntentParseFailed(val exception: UriException) : IntentResolveResult
     data object UrlModificationFailed : IntentResolveResult
     data object ResolveUrlFailed : IntentResolveResult
 }

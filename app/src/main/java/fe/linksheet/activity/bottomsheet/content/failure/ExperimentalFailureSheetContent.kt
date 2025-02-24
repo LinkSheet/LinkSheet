@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.preview.PreviewContainer
 import fe.android.compose.dialog.helper.DialogMaxWidth
 import fe.android.compose.dialog.helper.DialogMinWidth
 import fe.android.compose.icon.iconPainter
@@ -25,14 +26,35 @@ import fe.composekit.layout.dialog.AlertDialogFlowRow
 import fe.composekit.layout.dialog.AlertDialogFlowRowDefaults
 import fe.linksheet.R
 import fe.linksheet.navigation.Route
+import fe.linksheet.util.intent.parser.*
 
+
+@Composable
+fun FailureSheetContentWrapper(
+    modifier: Modifier = Modifier,
+    onSearchClick: (String) -> Unit,
+    onShareClick: () -> Unit,
+    onCopyClick: () -> Unit,
+    exception: UriException,
+) {
+    if (exception is NoUriFoundRecoverableException) {
+        ExperimentalFailureSheetContent(
+            modifier = modifier,
+            onSearchClick = onSearchClick,
+            onShareClick = onShareClick,
+            onCopyClick = onCopyClick,
+            data = exception.recoverable,
+        )
+    }
+}
 
 @Composable
 fun ExperimentalFailureSheetContent(
     modifier: Modifier = Modifier,
+    onSearchClick: (String) -> Unit,
     onShareClick: () -> Unit,
     onCopyClick: () -> Unit,
-    data: String?,
+    data: String,
 ) {
     Column(
         modifier = modifier
@@ -81,7 +103,7 @@ fun ExperimentalFailureSheetContent(
                 ) {
                     Text(text = stringResource(id = R.string.link_handle_failed_text))
 
-                    LinkCard(data = data ?: "", navigate = {})
+                    LinkCard(data = data, navigate = {})
                 }
             }
         }
@@ -93,7 +115,7 @@ fun ExperimentalFailureSheetContent(
             ) {
                 FilledTonalButton(
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
-                    onClick = { /*TODO*/ }
+                    onClick = { }
                 ) {
                     Icon(
                         modifier = Modifier.size(ButtonDefaults.IconSize),
@@ -108,7 +130,10 @@ fun ExperimentalFailureSheetContent(
 
                 Button(
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
-                    onClick = onShareClick
+
+                    onClick = {
+                        onSearchClick(data)
+                    }
                 ) {
                     Icon(
                         modifier = Modifier.size(ButtonDefaults.IconSize),
@@ -132,7 +157,7 @@ private fun LinkCard(data: String, navigate: (Route) -> Unit) {
     FailureSheetLinkCard(
         onClick = { },
         icon = Icons.Rounded.Public.iconPainter,
-        iconContentDescription = stringResource(id = R.string.nightly_experiments_card),
+        iconContentDescription = stringResource(id = R.string.generic__text_url),
 //        headline = textContent(R.string.nightly_experiments_card),
 //        subtitle = text(data),
         text = content {
@@ -148,18 +173,28 @@ private fun LinkCard(data: String, navigate: (Route) -> Unit) {
 @Preview(showBackground = true, widthDp = 400)
 @Composable
 private fun ExperimentalFailureSheetColumnPreview() {
-    Surface(
+    PreviewContainer {
+//        Surface(
 //        modifier = modifier,
 //        shape = shape,
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        tonalElevation = 6.0.dp,
-    ) {
+//            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+//            tonalElevation = 6.0.dp,
+//        ) {
         ExperimentalFailureSheetContent(
+            onSearchClick = {},
             onShareClick = {},
             onCopyClick = {},
             data = "https://linksheet.app"
         )
+//        }
     }
 }
 
+@Preview
+@Composable
+private fun LinkCardPreview() {
+    PreviewContainer {
+        LinkCard(data = "https://linksheet.app", navigate = {})
+    }
+}
 

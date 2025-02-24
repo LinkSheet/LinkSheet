@@ -291,6 +291,7 @@ dependencies {
     implementation(Grrfe.std.process.android)
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
+    implementation(Grrfe.std.test)
 
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)

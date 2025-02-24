@@ -9,7 +9,6 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.*
-import fe.linksheet.module.resolver.browser.BrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
@@ -18,7 +17,6 @@ import org.koin.dsl.module
 
 val resolverModule = module {
     single { BrowserResolver(get<Context>().packageManager, get()) }
-    singleOf(::BrowserHandler)
     single {
         ImprovedBrowserHandler(
             autoLaunchSingleBrowserExperiment = get<ExperimentRepository>().asFunction(Experiments.autoLaunchSingleBrowser),

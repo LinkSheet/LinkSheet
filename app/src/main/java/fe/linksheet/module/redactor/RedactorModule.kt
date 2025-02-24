@@ -1,21 +1,6 @@
 package fe.linksheet.module.redactor
 
-import fe.kotlin.extension.string.decodeHexOrThrow
-import fe.linksheet.extension.koin.single
-import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.util.CryptoUtil
-import org.koin.dsl.module
-
-val redactorModule = module {
-    single<Redactor, AppPreferenceRepository> { _, preferences ->
-        @OptIn(SensitivePreference::class)
-        val logKey = preferences.getOrPutInit(AppPreferences.logKey).decodeHexOrThrow()
-
-        DefaultRedactor(logKey)
-    }
-}
 
 open class Redactor(val hasher: LogHasher) {
     fun <T> processToString(param: T, processor: HashProcessor<T>): String {

@@ -8,19 +8,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.preview.PreviewContainer
+import app.linksheet.preview.rememberInfiniteEnumTransition
 import fe.linksheet.R
-import fe.linksheet.composable.ui.PreviewTheme
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun LoadingIndicatorSheetContent(
@@ -48,7 +47,13 @@ fun LoadingIndicatorSheetContent(
         horizontalAlignment = Alignment.CenterHorizontally,
 //        verticalArrangement = Arrangement.spacedBy(15.dp),
     ) {
-        CircularProgressIndicator()
+        if (LocalInspectionMode.current) {
+            CircularProgressIndicator(
+                progress = { 0.7f },
+            )
+        } else {
+            CircularProgressIndicator()
+        }
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -61,7 +66,6 @@ fun LoadingIndicatorSheetContent(
 
         if (interaction is ResolverInteraction.Cancelable) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-
                 Button(
                     onClick = {
                         Log.d("Interact", "Cancel")
@@ -76,32 +80,23 @@ fun LoadingIndicatorSheetContent(
     }
 }
 
+
+
 @Preview(showBackground = true)
 @Composable
 private fun LoadingIndicatorPreview() {
-    val events = MutableStateFlow(ResolveEvent.Initialized)
-    val interactions = MutableStateFlow<ResolverInteraction>(ResolverInteraction.Clear)
-
-    LaunchedEffect(key1 = Unit) {
-        var i = 0
-        while (true) {
-            val event = ResolveEvent.entries.random()
-            events.emit(event)
-            if (i % 5 == 0) {
-                interactions.emit(ResolverInteraction.Cancelable(event) { Log.d("Preview", "Cancel clicked") })
-            }
-
-            delay(2000)
-
-
-            i++
-        }
+    val event = rememberInfiniteEnumTransition<ResolveEvent>()
+    val interaction = remember(event) {
+        if(event == ResolveEvent.GeneratingPreview) ResolverInteraction.Cancelable(event) {  }
+        else ResolverInteraction.Clear
     }
 
-    PreviewTheme {
-        val event by events.collectAsStateWithLifecycle()
-        val interaction by interactions.collectAsStateWithLifecycle()
+    LoadingIndicatorPreviewBase(event = event, interaction = interaction)
+}
 
+@Composable
+private fun LoadingIndicatorPreviewBase(event: ResolveEvent, interaction: ResolverInteraction) {
+    PreviewContainer {
         LoadingIndicatorSheetContent(
             event = event,
             interaction = interaction,

@@ -1,6 +1,7 @@
 package fe.linksheet.extension.koin
 
 import android.content.Context
+import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import fe.linksheet.module.log.Logger
 import org.koin.core.parameter.parametersOf
@@ -16,4 +17,8 @@ inline fun <reified T : Any> Scope.getSystemServiceOrNull(): T? {
 
 inline fun <reified T : Any> Scope.getSystemServiceOrThrow(): T {
     return getSystemServiceOrNull()!!
+}
+
+fun Scope.getPackageManager(): PackageManager {
+    return get<Context>().packageManager
 }

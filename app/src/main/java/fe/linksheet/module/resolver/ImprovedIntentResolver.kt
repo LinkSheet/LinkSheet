@@ -41,8 +41,11 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
 import fe.linksheet.module.resolver.util.ReferrerHelper
-import fe.linksheet.util.intent.IntentParser
+import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.cloneIntent
+import fe.linksheet.util.intent.parser.UriException
+import fe.std.result.getOrNull
+import fe.std.result.isFailure
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -137,12 +140,14 @@ class ImprovedIntentResolver(
             return@scope searchIntentResult
         }
 
-        var uri = getUriFromIntent(intent)
+        var uriResult = IntentParser.getUriFromIntent(intent)
 
-        if (uri == null) {
+        if(uriResult.isFailure()) {
             logger.error("Failed to parse intent ${intent.action}")
-            return@scope IntentResolveResult.IntentParseFailed
+            return@scope IntentResolveResult.IntentParseFailed(uriResult.exception as UriException)
         }
+
+        var uri = uriResult.getOrNull()
 
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = browserResolver.queryBrowsers()
@@ -363,8 +368,6 @@ class ImprovedIntentResolver(
     private fun tryHandleSearchIntent(intent: SafeIntent): IntentResolveResult.WebSearch? {
         if (intent.action != Intent.ACTION_WEB_SEARCH) return null
         val query = IntentParser.parseSearchIntent(intent) ?: return null
-        // TODO: Do we need to handle this case? Or is it impossible anyway
-//        val uri = IntentParser.tryParse(query) ?: return null
         val newIntent = intent.unsafe
             .cloneIntent(Intent.ACTION_WEB_SEARCH, null, true)
             .putExtra(SearchManager.QUERY, query)
@@ -374,15 +377,6 @@ class ImprovedIntentResolver(
             .labelSorted()
 
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)
-    }
-
-    private fun getUriFromIntent(intent: SafeIntent): Uri? {
-        return when (intent.action) {
-            Intent.ACTION_SEND -> IntentParser.parseSendAction(intent)
-            Intent.ACTION_VIEW -> IntentParser.parseViewAction(intent)
-            Intent.ACTION_PROCESS_TEXT -> IntentParser.parseProcessTextAction(intent)
-            else -> null
-        }
     }
 
     private suspend fun createBrowserModeConfig(

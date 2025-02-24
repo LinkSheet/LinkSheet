@@ -5,21 +5,12 @@ import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
+import fe.linksheet.module.log.file.entry.LogEntry
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.localizedString
-import fe.linksheet.extension.koin.service
-import fe.linksheet.module.log.file.entry.LogEntry
 import fe.std.javatime.time.unixMillis
-import org.koin.dsl.module
 import java.io.File
 import java.time.LocalDateTime
-
-val logFileServiceModule = module {
-    service<LogPersistService> {
-        val logDir = LogFileService.getLogDir(applicationContext)
-        LogFileService(logDir, applicationContext.startupTime)
-    }
-}
 
 fun DebugLogPersistService(startupTime: LocalDateTime = LocalDateTime.now()): LogPersistService {
     return object : LogPersistService {
@@ -51,7 +42,7 @@ abstract class LogSession(
     val info: String,
 )
 
-private class LogFileService(private val logDir: File, override val startupTime: LocalDateTime) : LogPersistService {
+internal class LogFileService(private val logDir: File, override val startupTime: LocalDateTime) : LogPersistService {
     companion object {
         private const val LOG_DIR = "logs"
         const val FILE_EXT = "log"

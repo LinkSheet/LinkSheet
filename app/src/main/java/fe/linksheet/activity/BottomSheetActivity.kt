@@ -33,7 +33,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetApps
 import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
 import fe.linksheet.activity.bottomsheet.ImprovedBottomDrawer
-import fe.linksheet.activity.bottomsheet.content.failure.ExperimentalFailureSheetContent
+import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.util.debugBorder
@@ -254,13 +254,20 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                         )
                     }
 
-                    is IntentResolveResult.IntentParseFailed, is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
-                        ExperimentalFailureSheetContent(
+                    is IntentResolveResult.IntentParseFailed -> {
+                        FailureSheetContentWrapper(
                             modifier = modifier,
-                            data = currentIntent?.dataString,
+                            exception = (resolveResult as IntentResolveResult.IntentParseFailed).exception,
                             onShareClick = {},
-                            onCopyClick = {}
+                            onCopyClick = {},
+                            onSearchClick = {
+
+                            }
                         )
+                    }
+
+                    is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
+
                     }
 
                     is IntentResolveResult.WebSearch -> {

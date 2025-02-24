@@ -61,6 +61,7 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["result-assert"] = "result:result-assert"
         this["process-core"] = "process:process-core"
         this["uri"] = "uri"
+        this["test"] = "test"
     }
 
     trySubstitute(devProperties["httpkt.dir"], "com.gitlab.grrfe.httpkt") {

@@ -36,6 +36,7 @@ object Grrfe : DependencyGroup(group = "com.gitlab.grrfe") {
         val core = module("core")
         val io = module("io")
         val uri = module("uri")
+        val test = module("test")
 
         val time = Time
 

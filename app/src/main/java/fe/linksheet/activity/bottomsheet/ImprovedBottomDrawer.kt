@@ -39,7 +39,6 @@ fun ImprovedBottomDrawer(
 //        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
         onDismissRequest = hide
     ) {
-        // Works on both API <29 and API 30+
         if (AndroidVersion.AT_LEAST_API_30_R) {
             Box(modifier = Modifier.navigationBarsPadding()) {
                 sheetContent(contentModifier)

@@ -23,7 +23,7 @@
     <string name="usage_stats_sorting_explainer">Androidシステムの使用状況を並べ替えアルゴリズムとして利用します。 最初の設定時に権限が要求されます。</string>
     <string name="browser_mode">ブラウザモード</string>
     <string name="browser_mode_subtitle">表示するブラウザを選択</string>
-    <string name="always_ask">常に聞く</string>
+    <string name="always_ask">すべて表示する</string>
     <string name="none">無し</string>
     <string name="none_explainer">ネイティブアプリのみをリストし、全てのブラウザを削除します。 ネイティブアプリが１つだけ存在する場合、それが自動的に開きます。 ネイティブアプリが存在しない場合は、全てのブラウザがリストされます。</string>
     <string name="always_ask_explainer">常に全てのブラウザをリスト</string>
@@ -516,7 +516,7 @@ Seal</string>
     <string name="app_host_dialog__text_no_hosts">このアプリでは、デフォルトで開くように設定されたホストはありません！</string>
     <string name="generic__button_text_close">閉じる</string>
     <string name="generic__button_dismiss">却下する</string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">行動の変化</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">アプリの動作の変更</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">いくつかの実験は削除され、デフォルトの動作になりました。</string>
     <string name="settings_main_experiment_changelog__title_changelog">実験の変更履歴</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">権限をリクエストする</string>
@@ -524,4 +524,8 @@ Seal</string>
     <string name="generic__button_learn_more">詳しく知る</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi は予期せぬ方法でアプリを厳しく制限することで知られており、LinkSheet が正しく機能しなくなります。\n下のボタンをタップして、「バックグラウンドで新しいウィンドウを開く」権限を許可してください</string>
     <string name="app_host_dialog__title_hosts">デフォルトのホスト</string>
+    <string name="generic__button_text_share">共有</string>
+    <string name="resolve_event__idle">アイドル</string>
+    <string name="settings_profile_switcher__title_no_profile">利用可能なプロフィールはありません</string>
+    <string name="settings_profile_switcher__no_profile">この機能は、デバイスに（仕事用）プロファイルが設定されている場合にのみ利用できます。</string>
 </resources>

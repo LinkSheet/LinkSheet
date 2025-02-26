@@ -533,4 +533,6 @@
     <string name="settings_verified_link_handlers__text_browser">Мрежов четец</string>
     <string name="generic__button_text_share">Споделяне</string>
     <string name="resolve_event__idle">Изчакване</string>
+    <string name="settings_profile_switcher__title_no_profile">Не са налични профили</string>
+    <string name="settings_profile_switcher__no_profile">Тази възможност е достъпна само при настроени (работни) профили на устройството.</string>
 </resources>

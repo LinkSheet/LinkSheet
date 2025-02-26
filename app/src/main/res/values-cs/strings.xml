@@ -541,6 +541,6 @@
     <string name="settings_verified_link_handlers__text_browser">Prohlížeč</string>
     <string name="generic__button_text_share">Sdílet</string>
     <string name="resolve_event__idle">Nečinný</string>
-    <string name="settings_profile_switcher__no_profile">Tato funkce je k dispozici pouze, pokud jste na svém zařízení nastavili (pracovní) profil.</string>
+    <string name="settings_profile_switcher__text_no_profile">Tato funkce je k dispozici pouze, pokud jste na svém zařízení nastavili (pracovní) profil.</string>
     <string name="settings_profile_switcher__title_no_profile">Nejsou dostupné žádné profily</string>
 </resources>

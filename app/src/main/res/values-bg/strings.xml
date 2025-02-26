@@ -534,5 +534,5 @@
     <string name="generic__button_text_share">Споделяне</string>
     <string name="resolve_event__idle">Изчакване</string>
     <string name="settings_profile_switcher__title_no_profile">Не са налични профили</string>
-    <string name="settings_profile_switcher__no_profile">Тази възможност е достъпна само при настроени (работни) профили на устройството.</string>
+    <string name="settings_profile_switcher__text_no_profile">Тази възможност е достъпна само при настроени (работни) профили на устройството.</string>
 </resources>

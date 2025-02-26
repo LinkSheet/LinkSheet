@@ -550,5 +550,5 @@
     <string name="generic__button_text_share">Udostępnij</string>
     <string name="resolve_event__idle">Bezczynny</string>
     <string name="settings_profile_switcher__title_no_profile">Brak dostępnych profili</string>
-    <string name="settings_profile_switcher__no_profile">Funkcja ta jest dostępna tylko wtedy, gdy na Twoim urządzeniu skonfigurowano (służbowy) profil.</string>
+    <string name="settings_profile_switcher__text_no_profile">Funkcja ta jest dostępna tylko wtedy, gdy na Twoim urządzeniu skonfigurowano (służbowy) profil.</string>
 </resources>

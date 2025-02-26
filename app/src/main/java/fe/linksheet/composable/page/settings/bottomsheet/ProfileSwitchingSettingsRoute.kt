@@ -89,7 +89,7 @@ private fun ProfileSwitchingSettingsRouteInternal(
                         iconOffset = IconOffset(y = (-1).dp),
                         iconContentDescription = stringResource(id = R.string.settings_profile_switcher__title_no_profile),
                         headline = textContent(R.string.settings_profile_switcher__title_no_profile),
-                        subtitle = textContent(R.string.settings_profile_switcher__no_profile),
+                        subtitle = textContent(R.string.settings_profile_switcher__text_no_profile),
                         onClick = {
                         }
                     )

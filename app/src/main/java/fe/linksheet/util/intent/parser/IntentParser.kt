@@ -42,8 +42,8 @@ open class InternalIntentParser internal constructor(
         if (intent.data != null) return intent.data!!.success
 
         for (extra in textExtras) {
-            val uri = readExtra(intent, null, extra)
-            if (uri != null) return uri
+            val uri = readExtra(intent, null, extra) ?: continue
+            if (uri.isSuccess()) return uri
         }
 
         return NoUriFoundFailure
@@ -69,22 +69,22 @@ open class InternalIntentParser internal constructor(
         val extras = mutableMapOf<String, CharSequence>()
 
         for (extra in textExtras) {
-            val uri = readExtra(intent, extras, extra)
-            if (uri != null) return uri
+            val uri = readExtra(intent, extras, extra) ?: continue
+            if (uri.isSuccess()) return uri
         }
 
         if (allowCustomExtras) {
             for (customExtra in customExtras) {
-                val uri = readExtra(intent, extras, customExtra)
-                if (uri != null) return uri
+                val uri = readExtra(intent, extras, customExtra) ?: continue
+                if (uri.isSuccess()) return uri
             }
         }
 
         if (tryParseAllExtras && intent.extras != null) {
             val keys = intent.extras!!.keySet() - extras.keys
             for (key in keys) {
-                val uri = readExtra(intent, extras, key)
-                if (uri != null) return uri
+                val uri = readExtra(intent, extras, key)?: continue
+                if (uri.isSuccess()) return uri
             }
         }
 

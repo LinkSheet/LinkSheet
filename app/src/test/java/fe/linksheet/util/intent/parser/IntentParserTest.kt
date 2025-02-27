@@ -47,6 +47,11 @@ internal class IntentParserTest : UnitTest {
         val result = IntentParser.parseText("foo bar google.com hello world").getOrNull()?.toString()
         assertThat(result).isEqualTo("http://google.com")
     }
+
+    @Test
+    fun `test send intent parsing`() {
+        // TODO
+    }
 }
 
 

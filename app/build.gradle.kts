@@ -368,8 +368,6 @@ dependencies {
     androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
     androidTestImplementation(kotlin("test"))
 
-    debugImplementation(AndroidX.compose.ui.testManifest)
-
     testImplementation(Grrfe.std.result.assert)
     testImplementation(Koin.test)
     testImplementation(Koin.junit4)

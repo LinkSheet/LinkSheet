@@ -38,6 +38,7 @@ import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetCo
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.extension.android.setText
+import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.interconnect.LinkSheetConnector
@@ -47,9 +48,11 @@ import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
@@ -245,7 +248,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                                 viewModel.startDownload(resources, url, downloadable)
                             },
                             isPrivateBrowser = ::isPrivateBrowser,
-                            showToast = ::showToast,
+                            showToast = { textId, duration, _ ->
+                                coroutineScope.launch { showToast(textId = textId, duration = duration) }
+                            },
                             controller = controller,
                             showPackage = viewModel.alwaysShowPackageName(),
                             previewUrl = viewModel.previewUrl(),
@@ -282,8 +287,11 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
 
-    private fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT, uiThread: Boolean = false) {
-        showToast(textId = textId, duration = duration, uiThread = uiThread)
+    private suspend fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT) {
+        val text = getString(textId)
+        withContext(Dispatchers.Main) {
+            Toast.makeText(this@BottomSheetActivity, text, duration).show()
+        }
     }
 
 
@@ -320,7 +328,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
-    private fun handleLaunch(intent: Intent) {
+    private suspend fun handleLaunch(intent: Intent) {
         val showAsReferrer = viewModel.showAsReferrer()
 
         intent.putExtra(
@@ -344,7 +352,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 //            }
 //        }
         if (!start(intent)) {
-            showToast(R.string.resolve_activity_failure, uiThread = true)
+            showToast(R.string.resolve_activity_failure, Toast.LENGTH_SHORT)
         }
     }
 

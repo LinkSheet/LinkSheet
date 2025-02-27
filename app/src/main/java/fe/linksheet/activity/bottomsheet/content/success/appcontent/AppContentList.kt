@@ -70,7 +70,6 @@ fun AppContentList(
                 key = { _, item -> item.flatComponentName }
             ) { index, info ->
                 AppListItem(
-                    modifier = Modifier.heightIn(min = AppListItemRowDefaults.RowHeight),
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
@@ -89,7 +88,6 @@ fun AppContentList(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun AppListItem(
-    modifier: Modifier = Modifier,
     appInfo: ActivityAppInfo,
     selected: Boolean?,
     onClick: (ClickType, ClickModifier) -> Unit,
@@ -111,7 +109,8 @@ fun AppListItem(
             )
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
+                .heightIn(min = AppListItemRowDefaults.RowHeight)
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp),
             verticalAlignment = Alignment.CenterVertically

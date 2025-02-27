@@ -40,6 +40,10 @@ object PackageInfoFakes {
         activity("com.google.android.apps.chrome.Main")
     }
 
+    val Dummy = buildPackageInfoTestFake("dummy", "Dummy") {
+        activity("dummy.Activity")
+    }
+
     val allApps = listOf(Youtube, NewPipe, NewPipeEnhanced, Pepper, YatsePackageInfoFake)
     val allBrowsers = listOf(MiBrowser, DuckDuckGoBrowser, ChromeBrowser)
     val allResolved = allApps + allBrowsers

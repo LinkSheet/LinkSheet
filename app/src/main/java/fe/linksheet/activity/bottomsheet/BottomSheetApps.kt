@@ -6,7 +6,10 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,14 +24,13 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import app.linksheet.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.util.listOfFirstActivityResolveInfo
-import app.linksheet.testing.util.packageName
-import app.linksheet.testing.util.toActivityAppInfo
+import app.linksheet.testing.util.*
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
 import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.extension.android.componentName
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -168,7 +170,7 @@ fun BottomSheetApps(
 }
 
 private object ProfileSwitcherStub : ProfileSwitcher {
-    override fun checkIsManagedProfile(): Boolean  = false
+    override fun checkIsManagedProfile(): Boolean = false
     override fun getStatus(): ProfileStatus = ProfileStatus.Unsupported
     override fun launchCrossProfileInteractSettings(activity: Activity): Boolean = false
     override fun canSetupAtLeastR(): Boolean = false
@@ -195,7 +197,11 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
             filteredBrowserList = FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe, PackageInfoFakes.NewPipeEnhanced),
+                apps = listOfFirstActivityResolveInfo(
+                    PackageInfoFakes.Youtube,
+                    PackageInfoFakes.NewPipe,
+                    PackageInfoFakes.NewPipeEnhanced
+                ),
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             ),
@@ -213,7 +219,11 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
             filteredBrowserList = FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe, PackageInfoFakes.NewPipeEnhanced),
+                apps = listOfFirstActivityResolveInfo(
+                    PackageInfoFakes.Youtube,
+                    PackageInfoFakes.NewPipe,
+                    PackageInfoFakes.NewPipeEnhanced
+                ),
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             ),
@@ -231,7 +241,11 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
             filteredBrowserList = FilteredBrowserList(
                 browserMode = BrowserMode.None,
                 browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
-                apps = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe, PackageInfoFakes.NewPipeEnhanced),
+                apps = listOfFirstActivityResolveInfo(
+                    PackageInfoFakes.Youtube,
+                    PackageInfoFakes.NewPipe,
+                    PackageInfoFakes.NewPipeEnhanced
+                ),
                 isSingleOption = false,
                 noBrowsersOnlySingleApp = false
             ),
@@ -245,6 +259,36 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
             hasSingleMatchingOption = false,
             hideBottomSheetChoiceButtons = false,
         ),
+        PreviewState(
+            filteredBrowserList = FilteredBrowserList(
+                browserMode = BrowserMode.None,
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = listOfFirstActivityResolveInfo(
+                    PackageInfoFakes.Youtube,
+                    PackageInfoFakes.NewPipe,
+                    PackageInfoFakes.NewPipeEnhanced,
+                    PackageInfoFakes.Dummy
+                ),
+                isSingleOption = false,
+                noBrowsersOnlySingleApp = false
+            ),
+            lastChosen = PackageInfoFakes.Dummy.asPreferredApp("google.com"),
+            returnLastChosen = true,
+            hasSingleMatchingOption = false,
+            hideBottomSheetChoiceButtons = false,
+        ),
+    )
+}
+
+private fun PackageInfoFake.asPreferredApp(host: String): PreferredApp {
+    val resolveInfo = firstActivityResolveInfo
+    val componentName = resolveInfo?.activityInfo?.componentName
+
+    return PreferredApp(
+        _packageName = componentName?.packageName,
+        _component = componentName?.flattenToString(),
+        host = host,
+        alwaysPreferred = false
     )
 }
 
@@ -257,7 +301,7 @@ private data class PreviewState(
 )
 
 @Composable
-@Preview(showBackground = true)
+@Preview(showBackground = true, group = "List")
 private fun BottomSheetAppsPreview_List(
     @PreviewParameter(PreviewStateProvider::class) state: PreviewState,
 ) {
@@ -265,7 +309,7 @@ private fun BottomSheetAppsPreview_List(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview(showBackground = true, group = "Grid")
 private fun BottomSheetAppsPreview_Grid(
     @PreviewParameter(PreviewStateProvider::class) state: PreviewState,
 ) {

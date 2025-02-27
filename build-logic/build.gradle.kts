@@ -30,3 +30,12 @@ gradlePlugin {
         implementationClass = "fe.buildlogic.BuildLogicPlugin"
     }
 }
+
+runCatching {
+    tasks.getByName("GradleDependencyReportTask")
+    tasks.register("GradleDependencyReportTask") {
+
+    }
+}
+
+

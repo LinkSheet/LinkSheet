@@ -29,3 +29,10 @@ gradlePlugin {
         implementationClass = "fe.buildsettings.BuildSettingsPlugin"
     }
 }
+
+runCatching {
+    tasks.getByName("GradleDependencyReportTask")
+    tasks.register("GradleDependencyReportTask") {
+
+    }
+}

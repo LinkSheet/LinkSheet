@@ -291,6 +291,7 @@ dependencies {
     implementation(Grrfe.std.process.android)
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
+    implementation(Grrfe.std.stringbuilder)
     implementation(Grrfe.std.test)
 
     implementation(platform(Grrfe.httpkt.bom))
@@ -303,7 +304,6 @@ dependencies {
     implementation(_1fexd.fastForward)
     implementation(_1fexd.libredirectkt)
     implementation(_1fexd.amp2html)
-    implementation(_1fexd.stringBuilder)
     implementation(_1fexd.embedResolve)
 
 //    implementation(platform(_1fexd.android.preference.bom))

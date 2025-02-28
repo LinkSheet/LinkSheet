@@ -37,6 +37,7 @@ import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.profile.CrossProfile
 import fe.linksheet.module.profile.ProfileStatus
 import fe.linksheet.module.profile.ProfileSwitcher
+import fe.linksheet.module.profile.UserProfileInfo
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
@@ -172,13 +173,12 @@ fun BottomSheetApps(
 private object ProfileSwitcherStub : ProfileSwitcher {
     override fun checkIsManagedProfile(): Boolean = false
     override fun getStatus(): ProfileStatus = ProfileStatus.Unsupported
+    override fun getUserProfileInfo(status: ProfileStatus): UserProfileInfo? = null
     override fun launchCrossProfileInteractSettings(activity: Activity): Boolean = false
-    override fun canSetupAtLeastR(): Boolean = false
-    override fun canSetup(): Boolean = false
+    override fun canQuickToggle(): Boolean = false
     override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {}
     override fun startOther(profile: CrossProfile, activity: Activity) {}
-    override fun getProfiles(): List<CrossProfile>? = null
-    override fun getProfilesInternal(): List<CrossProfile>? = null
+    override fun getProfiles(status: ProfileStatus): List<CrossProfile>? = null
 }
 
 object BottomSheetStateControllerStub : BottomSheetStateController {

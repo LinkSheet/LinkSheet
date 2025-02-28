@@ -44,12 +44,14 @@ fun ProfileSwitchingSettingsRoute(
     viewModel: ProfileSwitchingSettingsViewModel = koinViewModel(),
 ) {
     val status by viewModel.status.collectAsStateWithLifecycle(ProfileStatus.Unsupported)
+    val userProfileInfo by viewModel.userProfileInfo.collectAsStateWithLifecycle(null)
 
     ProfileSwitchingSettingsRouteInternal(
         status = status,
-        isManagedProfile = viewModel.profileSwitcher.checkIsManagedProfile(),
+        userProfileInfo = userProfileInfo,
+        isManagedProfile = viewModel.checkIsManagedProfile(),
         enabled = viewModel.enabled(),
-        onEnable = { viewModel.enabled(it) },
+        onEnable = viewModel.enabled,
         onBackPressed = onBackPressed,
         launchCrossProfileInteractSettings = viewModel::launchCrossProfileInteractSettings,
         startOther = viewModel::startOther
@@ -60,6 +62,7 @@ fun ProfileSwitchingSettingsRoute(
 @Composable
 private fun ProfileSwitchingSettingsRouteInternal(
     status: ProfileStatus,
+    userProfileInfo: UserProfileInfo?,
     isManagedProfile: Boolean,
     enabled: Boolean,
     onEnable: (Boolean) -> Unit,
@@ -132,10 +135,10 @@ private fun ProfileSwitchingSettingsRouteInternal(
             }
         }
 
-        if (status is ProfileStatus.Available) {
+        if (userProfileInfo != null) {
             divider(id = R.string.settings_profile_switcher__divider_current_profile)
 
-            item(key = status.userProfileInfo.userHandle, contentType = ContentType.SingleGroupItem) {
+            item(key = userProfileInfo.userHandle, contentType = ContentType.SingleGroupItem) {
                 val textId = when {
                     isManagedProfile -> R.string.generic__label_work_profile
                     else -> R.string.generic__label_personal_profile
@@ -149,11 +152,11 @@ private fun ProfileSwitchingSettingsRouteInternal(
                 )
             }
 
-            if (status.userProfileInfo.otherHandles.isNotEmpty()) {
+            if (userProfileInfo.otherHandles.isNotEmpty()) {
                 divider(id = R.string.settings_profile_switcher__divider_other_profiles)
 
                 group(
-                    list = status.userProfileInfo.otherHandles,
+                    list = userProfileInfo.otherHandles,
                     key = { (handle, _) -> handle }
                 ) { (_, crossProfile), padding, shape ->
                     OtherProfiles(
@@ -207,24 +210,13 @@ private fun OtherProfiles(
     }
 }
 
-private object ProfileSwitcherStub : ProfileSwitcher {
-    override fun checkIsManagedProfile(): Boolean = false
-    override fun getStatus(): ProfileStatus = ProfileStatus.Unsupported
-    override fun launchCrossProfileInteractSettings(activity: Activity): Boolean = false
-    override fun canSetupAtLeastR(): Boolean = false
-    override fun canSetup(): Boolean = false
-    override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {}
-    override fun startOther(profile: CrossProfile, activity: Activity) {}
-    override fun getProfiles(): List<CrossProfile>? = null
-    override fun getProfilesInternal(): List<CrossProfile>? = null
-}
-
 @RequiresApi(Build.VERSION_CODES.P)
 @Preview
 @Composable
 private fun ProfileSwitchingSettingsRoutePreview() {
     ProfileSwitchingSettingsRouteBase(
         status = ProfileStatus.NoProfiles,
+        userProfileInfo = null
     )
 }
 
@@ -233,21 +225,20 @@ private fun ProfileSwitchingSettingsRoutePreview() {
 @Composable
 private fun ProfileSwitchingSettingsRoutePreview2() {
     ProfileSwitchingSettingsRouteBase(
-        status = ProfileStatus.Available(
-            UserProfileInfo(
-                1,
-                emptyList()
-            )
+        status = ProfileStatus.Available(listOf()),
+        userProfileInfo = UserProfileInfo(
+            1, emptyList()
         )
     )
 }
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
-private fun ProfileSwitchingSettingsRouteBase(status: ProfileStatus) {
+private fun ProfileSwitchingSettingsRouteBase(status: ProfileStatus, userProfileInfo: UserProfileInfo?) {
     PreviewContainer {
         ProfileSwitchingSettingsRouteInternal(
             status = status,
+            userProfileInfo = userProfileInfo,
             isManagedProfile = false,
             enabled = false,
             onEnable = {},

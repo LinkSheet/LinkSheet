@@ -71,14 +71,10 @@ fun UrlBarWrapper(
 
     UrlBar(
         uri = uriString,
-        profiles = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
-            if (enableSwitchProfile) profileSwitcher.getProfiles() else null
-        },
-        switchProfile = AndroidVersion.atLeastApi(Build.VERSION_CODES.R) {
-            { crossProfile, url ->
-                controller.hideAndFinish()
-                profileSwitcher.switchTo(crossProfile, url, activity)
-            }
+        profiles = if (enableSwitchProfile) profileSwitcher.getProfiles() else null,
+        switchProfile = { crossProfile, url ->
+            controller.hideAndFinish()
+            profileSwitcher.switchTo(crossProfile, url, activity)
         },
         unfurlResult = result.unfurlResult,
         downloadable = result.downloadable,
@@ -192,7 +188,7 @@ fun UrlBar(
                 )
             }
 
-            if(false){
+            if (false) {
                 item {
                     UrlActionButton(
                         text = textContent(R.string.generic__text_edit),

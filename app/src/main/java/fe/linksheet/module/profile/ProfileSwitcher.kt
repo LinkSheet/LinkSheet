@@ -10,10 +10,10 @@ import android.os.UserHandleHidden
 import android.os.UserManager
 import androidx.compose.ui.graphics.ImageBitmap
 import dev.rikka.tools.refine.Refine
+import fe.android.compose.version.AndroidVersion
 import fe.linksheet.R.string
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.extension.koin.getSystemServiceOrThrow
-import fe.linksheet.util.AndroidVersion
 import org.koin.dsl.module
 
 val ProfileSwitcherModule = module {

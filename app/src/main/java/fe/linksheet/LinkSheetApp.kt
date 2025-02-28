@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
+import fe.android.compose.version.AndroidVersion
 import fe.android.lifecycle.AppLifecycleObserver
 import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.gson.context.GlobalGsonContext
@@ -50,7 +51,6 @@ import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
-import fe.linksheet.util.AndroidVersion
 import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter

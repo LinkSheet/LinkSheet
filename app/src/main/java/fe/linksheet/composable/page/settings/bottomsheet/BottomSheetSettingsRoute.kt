@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
@@ -153,7 +154,7 @@ fun BottomSheetSettingsRoute(
             if (AndroidVersion.AT_LEAST_API_30_R) {
                 item(key = R.string.switch_profile) { padding, shape ->
                     PreferenceDividedSwitchListItem(
-                        enabled = if (viewModel.profileSwitcher.canSetup()) EnabledContent.all else EnabledContent.Main.set,
+                        enabled = if (viewModel.profileSwitcher.canQuickToggle()) EnabledContent.all else EnabledContent.Main.set,
                         shape = shape,
                         padding = padding,
                         preference = viewModel.bottomSheetProfileSwitcher,
@@ -286,4 +287,10 @@ private fun TapConfigGroupItem(
 ////                        )
         }
     )
+}
+
+@Preview
+@Composable
+private fun BottomSheetSettingsRoutePreview() {
+
 }

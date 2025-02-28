@@ -306,7 +306,7 @@ dependencies {
     implementation(_1fexd.amp2html)
     implementation(_1fexd.embedResolve)
 
-//    implementation(platform(_1fexd.android.preference.bom))
+    implementation(platform(_1fexd.android.preference.bom))
     implementation(_1fexd.android.preference.core)
     implementation(_1fexd.android.preference.compose.core)
     implementation(_1fexd.android.preference.compose.mock)
@@ -324,9 +324,7 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
     implementation(_1fexd.composeKit.component)
-//    implementation("com.github.1fexd.composekit:core:0.0.29")
-//    implementation("com.github.1fexd.composekit:layout:0.0.29")
-//    implementation("com.github.1fexd.composekit:component:0.0.29")
+
     implementation("com.github.jeziellago:compose-markdown:_")
 
     implementation("app.cash.zipline:zipline-android:_")

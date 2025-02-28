@@ -541,4 +541,6 @@
     <string name="settings_verified_link_handlers__text_browser">Прегледач</string>
     <string name="generic__button_text_share">Дели</string>
     <string name="resolve_event__idle">У мировању</string>
+    <string name="settings_profile_switcher__title_no_profile">Нема доступних профила</string>
+    <string name="settings_profile_switcher__text_no_profile">Ова функција је доступна само ако је на вашем уређају подешен (радни) профил.</string>
 </resources>

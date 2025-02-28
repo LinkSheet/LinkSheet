@@ -1,18 +1,12 @@
 package fe.linksheet
 
-import android.os.Build
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isCloseTo
 import fe.linksheet.module.preference.Bucket
 import fe.linksheet.util.percent
-import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 import kotlin.test.Test
 
-@RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class BucketTest : UnitTest {
+internal class BucketTest : BaseUnitTest {
     @Test
     fun test() {
         if (System.getenv("CI")?.toBooleanStrictOrNull() == true) {

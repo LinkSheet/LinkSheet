@@ -1,17 +1,14 @@
 package fe.linksheet.util.buildconfig
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.kotlin.extension.string.encodeBase64OrNull
-import fe.linksheet.UnitTest
-import org.junit.runner.RunWith
+import fe.linksheet.BaseUnitTest
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.test.Test
 
-@RunWith(AndroidJUnit4::class)
-internal class FlavorConfigTest : UnitTest {
+internal class FlavorConfigTest : BaseUnitTest {
     @OptIn(ExperimentalEncodingApi::class)
     @Test
     fun test() {

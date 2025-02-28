@@ -7,19 +7,19 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.robolectric.RuntimeEnvironment
 
-interface BaseTest : KoinTest {
+interface BaseUnitTest : KoinTest {
     @After
     fun teardown() {
         stopKoin()
     }
 }
 
-interface UnitTest : BaseTest {
+interface UnitTest : BaseUnitTest {
     val context: Context
         get() = ApplicationProvider.getApplicationContext<Context>()
 }
 
-interface RobolectricTest : BaseTest {
+interface RobolectricTest : BaseUnitTest {
     val context: Context
         get() = RuntimeEnvironment.getApplication().applicationContext
 }

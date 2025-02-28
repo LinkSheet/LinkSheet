@@ -23,7 +23,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class ExperimentAutoLaunchSingleBrowserTest : UnitTest{
+internal class ExperimentAutoLaunchSingleBrowserTest : UnitTest {
     companion object {
         private val whitelistedNull = BrowserModeConfigHelper.Whitelisted(null)
         private val whitelistedEmpty = BrowserModeConfigHelper.Whitelisted(emptySet())

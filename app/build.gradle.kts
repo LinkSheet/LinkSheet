@@ -324,6 +324,7 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
     implementation(_1fexd.composeKit.component)
+    runtimeOnly(AndroidX.annotation)
 
     implementation("com.github.jeziellago:compose-markdown:_")
 
@@ -352,8 +353,11 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
-
-    androidTestImplementation(platform(AndroidX.compose.bom))
+    androidTestImplementation(Koin.test)
+    androidTestImplementation(Koin.junit4)
+    androidTestImplementation(Koin.android)
+    androidTestImplementation(Testing.junit4)
+    androidTestImplementation(Testing.robolectric)
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)

@@ -1,6 +1,5 @@
 package fe.linksheet
 
-import android.os.Build
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.isEqualTo
@@ -10,14 +9,9 @@ import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.module.systeminfo.BuildInfo
 import fe.linksheet.module.versiontracker.LastVersionService
 import kotlinx.coroutines.runBlocking
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import kotlin.test.Test
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class LastVersionServiceTest : UnitTest {
+internal class LastVersionServiceTest : BaseUnitTest {
 
     companion object {
         private val gson = GsonBuilder().apply {

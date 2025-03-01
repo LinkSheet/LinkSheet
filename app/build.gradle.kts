@@ -334,8 +334,8 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
     implementation(_1fexd.composeKit.component)
+    implementation(_1fexd.composeKit.route.core)
 
-    implementation(_1fexd.android.compose.route)
     runtimeOnly(AndroidX.annotation)
 
     implementation("com.github.jeziellago:compose-markdown:_")

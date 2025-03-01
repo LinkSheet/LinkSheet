@@ -1,6 +1,5 @@
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildsettings.extension.*
 
 rootProject.name = "LinkSheet"
 
@@ -69,9 +68,6 @@ buildSettings {
         trySubstitute(Grrfe.std, properties["kotlin-ext.dir"])
         trySubstitute(Grrfe.httpkt, properties["httpkt.dir"])
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
-        trySubstitute(_1fexd.android.lifecycleUtil, properties["android-lifecycle-util.dir"])
-        trySubstitute(_1fexd.android.preference, properties["android-pref-helper.dir"])
-        trySubstitute(_1fexd.android.span, properties["android-span-helper.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
         trySubstitute(_1fexd.droidKit, properties["droidkit.dir"])
     }

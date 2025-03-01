@@ -1,5 +1,6 @@
 package fe.linksheet.debug
 
+import android.os.StrictMode
 import app.linksheet.testing.Testing
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.debug.module.debug.RealDebugMenuSlotProvider
@@ -11,11 +12,15 @@ import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.samsung.RealSamsungIntentCompatProvider
 import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompatProvider
-import fe.linksheet.util.buildconfig.BuildType
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 class DebugLinkSheetApp : LinkSheetApp() {
+    override fun onCreate() {
+        StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder().detectAll().build())
+        super.onCreate()
+    }
+
     override fun provideKoinModules(): List<Module> {
         return super.provideKoinModules() + DebugViewModelModule
     }

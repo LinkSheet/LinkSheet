@@ -13,7 +13,7 @@ import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
-import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.buildconfig.LinkSheetInfo
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -50,7 +50,7 @@ internal class VersionTracker(
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         val lastVersion = preferenceRepository.get(AppPreferences.lastVersion)
 
-        if (BuildType.current.allowDebug) {
+        if (Build.IsDebug) {
             // TODO: Remove once user is given the choice to opt in/out
             analyticsService.enqueue(createAppStartEvent(lastVersion))
         }

@@ -3,7 +3,7 @@ package fe.linksheet.debug
 import android.content.*
 import androidx.core.content.getSystemService
 import fe.linksheet.debug.command.DebugCommand
-import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.buildconfig.Build
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.component.KoinComponent
@@ -24,7 +24,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (!BuildType.current.allowDebug) return
+        if (!Build.IsDebug) return
 
         val handled = DebugCommand.tryHandle(context, intent)
         if (handled) return

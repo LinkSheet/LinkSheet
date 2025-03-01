@@ -67,7 +67,7 @@ internal class AptabaseAnalyticsClient(
                 val model = data.data["model"]
 
                 return EnvironmentInfo(
-                    BuildType.current.allowDebug,
+                    fe.linksheet.util.buildconfig.Build.IsDebug,
                     "Android",
                     Build.VERSION.RELEASE,
                     data.data.getOrDefault("locale", "<null>"),

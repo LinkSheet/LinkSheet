@@ -3,7 +3,6 @@ package fe.linksheet
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
-import android.os.StrictMode
 import android.util.Log
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
@@ -50,7 +49,6 @@ import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
-import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
@@ -71,14 +69,6 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildType.current.allowDebug) {
-            StrictMode.setVmPolicy(
-                StrictMode.VmPolicy.Builder()
-                    .detectAll()
-                    .build()
-            )
-        }
-
         registerActivityLifecycleCallbacks(currentActivityObserver)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->

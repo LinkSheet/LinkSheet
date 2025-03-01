@@ -41,6 +41,7 @@ import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.LinkSheet
+import fe.linksheet.util.buildconfig.Build
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -109,7 +110,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             item(key = R.string.thanks_for_donating, contentType = ContentType.TextItem) {
                 if (!LinkSheetAppConfig.showDonationBanner()) {
                     Text(text = stringResource(id = R.string.thanks_for_donating))
-                } else if (!BuildType.current.allowDebug) {
+                } else if (!Build.IsDebug) {
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }

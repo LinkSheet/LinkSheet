@@ -15,11 +15,11 @@ import fe.linksheet.activity.NavGraphDebugState
 import fe.linksheet.activity.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
+import fe.linksheet.composable.ui.BoxAppHost
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.composable.ui.BoxAppHost
-import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.buildconfig.Build
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -44,7 +44,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
 
                 AddIntentDeepLinkHandler(navController = navController)
 
-                if (BuildType.current.allowDebug) {
+                if (Build.IsDebug) {
                     navController.ObserveDestination { _, destination, args ->
                         viewModel.enqueueNavEvent(destination, args)
                     }
@@ -67,7 +67,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                     onBackPressed = { navController.popBackStack() }
                 )
 
-                if (BuildType.current.allowDebug) {
+                if (Build.IsDebug) {
                     LaunchedEffect(key1 = Unit) {
                         val graphNodes = navController.graph.nodes.valueIterator().asSequence().toList()
                         DebugStatePublisher.publishDebugState(NavGraphDebugState(graphNodes))

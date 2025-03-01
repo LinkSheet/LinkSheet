@@ -10,7 +10,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
-import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.buildconfig.Build
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -37,7 +37,7 @@ fun PrivacySettingsRoute(
             }
         }
 
-        if (BuildType.current.allowDebug || viewModel.enableAnalytics()) {
+        if (Build.IsDebug || viewModel.enableAnalytics()) {
             divider(key = R.string.telemetry_configure_title, id = R.string.telemetry_configure_title)
 
             group(2) {

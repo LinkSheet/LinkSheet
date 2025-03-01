@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.linksheet.BuildConfig
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
@@ -86,7 +86,7 @@ class MainViewModel(
     val editClipboard = experimentRepository.asState(Experiments.editClipboard)
 
     private val roleManager by lazy {
-        if (AndroidVersion.AT_LEAST_API_26_O) {
+        if (AndroidVersion.isAtLeastApi26O()) {
             context.getSystemService<RoleManager>()
         } else null
     }

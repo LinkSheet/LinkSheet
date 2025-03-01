@@ -5,17 +5,16 @@ import android.app.Application
 import android.content.Intent
 import android.os.StrictMode
 import android.util.Log
-import androidx.lifecycle.ProcessLifecycleOwner
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
-import fe.android.compose.version.AndroidVersion
-import fe.android.lifecycle.AppLifecycleObserver
+import fe.android.lifecycle.CurrentActivityObserver
+import fe.android.lifecycle.ProcessServiceRegistry
 import fe.android.lifecycle.koin.extension.applicationLifecycle
+import fe.android.version.AndroidVersion
+import fe.droidkit.koin.androidApplicationContext
 import fe.gson.context.GlobalGsonContext
 import fe.gson.globalGsonModule
 import fe.linksheet.activity.CrashHandlerActivity
-import fe.linksheet.extension.koin.androidApplicationContext
-import fe.linksheet.lifecycle.ActivityLifecycleObserver
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.app.PackageModule
@@ -67,14 +66,8 @@ import kotlin.system.exitProcess
 open class LinkSheetApp : Application(), DependencyProvider {
     val startupTime: LocalDateTime = LocalDateTime.now()
 
-    private val activityLifecycleObserver = ActivityLifecycleObserver()
-    private val lifecycleObserver by lazy {
-        AppLifecycleObserver(owner = ProcessLifecycleOwner.get())
-    }
-
-    fun currentActivity(): StateFlow<Activity?> {
-        return activityLifecycleObserver.current
-    }
+    private val currentActivityObserver = CurrentActivityObserver()
+    private val lifecycleObserver by lazy { ProcessServiceRegistry() }
 
     override fun onCreate() {
         super.onCreate()
@@ -86,7 +79,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             )
         }
 
-        registerActivityLifecycleCallbacks(activityLifecycleObserver)
+        registerActivityLifecycleCallbacks(currentActivityObserver)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
@@ -105,7 +98,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             HttpUrlTypeAdapter.register(this)
         }
 
-        if (AndroidVersion.AT_LEAST_API_28_P && !Testing.IsTestRunner) {
+        if (AndroidVersion.isAtLeastApi28P() && !Testing.IsTestRunner) {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
@@ -114,7 +107,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
         val koinModules = provideKoinModules()
         val koinApplication = startKoin {
             androidLogger()
-            androidApplicationContext<LinkSheetApp>(this@LinkSheetApp)
+            androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
             modules(koinModules)
         }
@@ -172,5 +165,9 @@ open class LinkSheetApp : Application(), DependencyProvider {
         return module {
             single<DebugMenuSlotProvider> { NoOpDebugMenuSlotProvider }
         }
+    }
+
+    fun currentActivity(): StateFlow<Activity?> {
+        return currentActivityObserver.current
     }
 }

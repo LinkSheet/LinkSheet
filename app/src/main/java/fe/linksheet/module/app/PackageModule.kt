@@ -1,8 +1,8 @@
 package fe.linksheet.module.app
 
 import fe.android.preference.helper.compose.asFunction
-import fe.linksheet.extension.koin.getPackageManager
-import fe.linksheet.extension.koin.getSystemServiceOrThrow
+import fe.droidkit.koin.getPackageManager
+import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.module.app.`package`.AndroidPackageIconLoaderModule
 import fe.linksheet.module.app.`package`.AndroidPackageIntentHandler
 import fe.linksheet.module.preference.experiment.ExperimentRepository

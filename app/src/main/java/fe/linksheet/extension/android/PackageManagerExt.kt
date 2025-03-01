@@ -8,7 +8,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import fe.linksheet.BuildConfig
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 fun PackageManager.queryFirstIntentActivityByPackageNameOrNull(packageName: String): ResolveInfo? {
     val intent = Intent().setPackage(packageName)
@@ -37,26 +37,26 @@ fun PackageManager.queryAllResolveInfos(
 
 
 fun PackageManager.getInstalledPackagesCompat(flags: Int): MutableList<PackageInfo> {
-    return if (AndroidVersion.AT_LEAST_API_33_T) {
+    return if (AndroidVersion.isAtLeastApi33T()) {
         getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
     } else getInstalledPackages(flags)
 }
 
 fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int): MutableList<ResolveInfo> {
-    return if (AndroidVersion.AT_LEAST_API_33_T) {
+    return if (AndroidVersion.isAtLeastApi33T()) {
         queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
     } else queryIntentActivities(intent, flags)
 }
 
 fun PackageManager.resolveActivityCompat(intent: Intent, flags: Int): ResolveInfo? {
-    return if (AndroidVersion.AT_LEAST_API_33_T) {
+    return if (AndroidVersion.isAtLeastApi33T()) {
         resolveActivity(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
     } else resolveActivity(intent, flags)
 }
 
 fun PackageManager.getApplicationInfoCompat(packageName: String, flags: Int): ApplicationInfo? {
     return runCatching {
-        if (AndroidVersion.AT_LEAST_API_33_T) {
+        if (AndroidVersion.isAtLeastApi33T()) {
             getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(flags.toLong()))
         } else getApplicationInfo(packageName, flags)
     }.getOrNull()

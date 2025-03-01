@@ -44,7 +44,7 @@ import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.Routes
@@ -142,7 +142,7 @@ fun MainNavHost(
             BottomSheetSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
-        if (AndroidVersion.AT_LEAST_API_30_R) {
+        if (AndroidVersion.isAtLeastApi30R()) {
             animatedComposable(route = Routes.ProfileSwitching) {
                 ProfileSwitchingSettingsRoute(onBackPressed = onBackPressed)
             }
@@ -255,7 +255,7 @@ fun MainNavHost(
             VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
         }
 
-        if (AndroidVersion.AT_LEAST_API_31_S) {
+        if (AndroidVersion.isAtLeastApi31S()) {
             animatedComposable(route = pretendToBeAppRoute) {
                 PretendToBeAppSettingsRoute(onBackPressed = onBackPressed)
             }

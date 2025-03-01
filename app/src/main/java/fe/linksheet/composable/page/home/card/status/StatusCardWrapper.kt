@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import fe.android.compose.system.rememberSystemService
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 @Composable
 fun StatusCardWrapper(
@@ -19,7 +19,7 @@ fun StatusCardWrapper(
     updateDefaultBrowser: () -> Unit,
     launchIntent: (MainViewModel.SettingsIntent) -> Unit,
 ) {
-    if (AndroidVersion.AT_LEAST_API_29_Q) {
+    if (AndroidVersion.isAtLeastApi29Q()) {
         val intent = rememberRequestBrowserIntent()
         val launcher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.StartActivityForResult(),

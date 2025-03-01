@@ -20,7 +20,7 @@ import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.composekit.component.appbar.SearchTopAppBar
 import fe.composekit.component.list.column.SaneLazyColumnDefaults
 import fe.composekit.component.list.column.SaneLazyColumnLayout

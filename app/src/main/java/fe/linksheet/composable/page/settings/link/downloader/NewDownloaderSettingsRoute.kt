@@ -19,7 +19,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -94,7 +94,7 @@ fun requestDownloadPermission(
     state: StatePreference<Boolean>,
     newState: Boolean,
 ) {
-    if (!AndroidVersion.AT_LEAST_API_29_Q && !permissionState.status.isGranted) {
+    if (!AndroidVersion.isAtLeastApi29Q() && !permissionState.status.isGranted) {
         permissionState.launchPermissionRequest()
     } else state(newState)
 }

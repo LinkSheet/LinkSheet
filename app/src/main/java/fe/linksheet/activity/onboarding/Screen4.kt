@@ -10,7 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.ui.HkGroteskFontFamily
@@ -19,7 +19,7 @@ import fe.linksheet.composable.ui.HkGroteskFontFamily
 fun Screen4(onBackClick: () -> Unit, onNextClick: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize().navigationBarsPadding()) {
         Column(modifier = Modifier.weight(1f)) {
-            if (AndroidVersion.AT_LEAST_API_31_S) {
+            if (AndroidVersion.isAtLeastApi31S()) {
                 VerifiedLinkHandlersRoute(onBackPressed = onBackClick)
             }
         }

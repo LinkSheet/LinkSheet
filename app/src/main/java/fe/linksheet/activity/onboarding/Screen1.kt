@@ -21,12 +21,12 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 @Composable
 fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {
     val context = LocalContext.current
-    val launcher = if (AndroidVersion.AT_LEAST_API_29_Q) {
+    val launcher = if (AndroidVersion.isAtLeastApi29Q()) {
         rememberLauncherForActivityResult(
             contract = ActivityResultContracts.StartActivityForResult(),
             onResult = { onNextClick() }
@@ -89,7 +89,7 @@ fun Screen1(padding: PaddingValues, onNextClick: () -> Unit) {
                         modifier = Modifier.height(50.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                         onClick = {
-                            if (AndroidVersion.AT_LEAST_API_29_Q) {
+                            if (AndroidVersion.isAtLeastApi29Q()) {
                                 val roleManager = context.getSystemService<RoleManager>()
 
 //                                val casted = (obj as ManagedActivityResultLauncher<Intent, ActivityResult>)

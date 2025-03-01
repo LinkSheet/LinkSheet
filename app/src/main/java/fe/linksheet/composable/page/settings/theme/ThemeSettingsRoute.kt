@@ -12,7 +12,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.composable.ui.ThemeV2
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -21,7 +21,7 @@ private val themes = arrayOf(ThemeV2.Light, ThemeV2.Dark, ThemeV2.System)
 @Composable
 fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewModel = koinViewModel()) {
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.theme), onBackPressed = onBackPressed) {
-        if (AndroidVersion.AT_LEAST_API_31_S) {
+        if (AndroidVersion.isAtLeastApi31S()) {
             item(key = R.string.theme_enable_material_you, contentType = ContentType.SingleGroupItem) {
                 PreferenceSwitchListItem(
                     preference = viewModel.themeMaterialYou,

@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +38,7 @@ fun ImprovedBottomDrawer(
 //        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
         onDismissRequest = hide
     ) {
-        if (AndroidVersion.AT_LEAST_API_30_R) {
+        if (AndroidVersion.isAtLeastApi30R()) {
             Box(modifier = Modifier.navigationBarsPadding()) {
                 sheetContent(contentModifier)
             }

@@ -25,7 +25,7 @@ import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.android.preference.helper.compose.StateMappedPreference
 import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
@@ -95,7 +95,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.base_config)
 
-        group(size = 4 + if (AndroidVersion.AT_LEAST_API_30_R) 1 else 0) {
+        group(size = 4 + if (AndroidVersion.isAtLeastApi30R()) 1 else 0) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 SwitchListItem(
                     shape = shape,
@@ -151,7 +151,7 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            if (AndroidVersion.AT_LEAST_API_30_R) {
+            if (AndroidVersion.isAtLeastApi30R()) {
                 item(key = R.string.switch_profile) { padding, shape ->
                     PreferenceDividedSwitchListItem(
                         enabled = if (viewModel.profileSwitcher.canQuickToggle()) EnabledContent.all else EnabledContent.Main.set,

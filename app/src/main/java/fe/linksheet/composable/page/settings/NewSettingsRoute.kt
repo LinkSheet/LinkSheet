@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.RouteNavItem
 import fe.composekit.component.list.item.RouteNavigateListItem

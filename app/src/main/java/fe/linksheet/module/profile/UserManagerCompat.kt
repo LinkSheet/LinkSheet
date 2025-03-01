@@ -3,7 +3,7 @@ package fe.linksheet.module.profile
 import android.os.UserHandle
 import android.os.UserHandleHidden
 import android.os.UserManager
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 interface UserManagerCompat {
     fun isManagedProfile(): Boolean = false
@@ -17,7 +17,7 @@ fun UserManagerCompat(userManager: UserManager): UserManagerCompat {
 
 private class UserManagerCompatImpl(val userManager: UserManager) : UserManagerCompat {
     override fun isManagedProfile(): Boolean {
-        if (AndroidVersion.AT_LEAST_API_30_R) {
+        if (AndroidVersion.isAtLeastApi30R()) {
             return userManager.isManagedProfile
         }
 

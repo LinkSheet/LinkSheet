@@ -2,14 +2,12 @@ package fe.linksheet.module.profile
 
 import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.pm.CrossProfileApps
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
 import androidx.annotation.RequiresApi
-import androidx.core.content.getSystemService
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 interface CrossProfileAppsCompat {
     fun getProfileInfo(userHandle: UserHandle): ProfileInfoCompat = UnsupportedProfileInfoCompat
@@ -21,15 +19,9 @@ interface CrossProfileAppsCompat {
     fun startActivity(switchIntent: Intent, userHandle: UserHandle, activity: Activity): Boolean = false
 }
 
-fun CrossProfileAppsCompat(context: Context): CrossProfileAppsCompat {
-    return CrossProfileAppsCompat(
-        context.getSystemService<CrossProfileApps>()!!
-    )
-}
-
 fun CrossProfileAppsCompat(crossProfileApps: CrossProfileApps) = when {
-    AndroidVersion.AT_LEAST_API_30_R -> CrossProfileAppsCompatImpl.Api30(crossProfileApps)
-    AndroidVersion.AT_LEAST_API_28_P -> CrossProfileAppsCompatImpl.Api28(crossProfileApps)
+    AndroidVersion.isAtLeastApi30R() -> CrossProfileAppsCompatImpl.Api30(crossProfileApps)
+    AndroidVersion.isAtLeastApi28P() -> CrossProfileAppsCompatImpl.Api28(crossProfileApps)
     else -> CrossProfileAppsCompatImpl.PreApi28
 }
 

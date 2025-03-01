@@ -5,7 +5,7 @@ import android.os.UserHandle
 import android.util.Log
 import androidx.annotation.Keep
 import dev.zwander.shared.IShizukuService
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.std.process.android.AndroidStartConfig
 import fe.std.process.launchProcess
 import kotlin.system.exitProcess
@@ -18,7 +18,7 @@ class ShizukuService : IShizukuService.Stub {
     constructor(@Suppress("UNUSED_PARAMETER") context: Context) : super()
 
     override fun setDomainState(packageName: String, domains: String, enabled: Boolean): Int {
-        if (AndroidVersion.AT_LEAST_API_31_S) {
+        if (AndroidVersion.isAtLeastApi31S()) {
             try {
                 val userId = getUserId()
                 return launchProcess(

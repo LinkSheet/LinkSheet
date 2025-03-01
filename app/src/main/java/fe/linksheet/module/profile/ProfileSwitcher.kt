@@ -10,8 +10,7 @@ import android.os.UserHandleHidden
 import android.os.UserManager
 import androidx.compose.ui.graphics.ImageBitmap
 import dev.rikka.tools.refine.Refine
-import fe.android.compose.version.AndroidVersion
-import fe.linksheet.R.string
+import fe.android.version.AndroidVersion
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.extension.koin.getSystemServiceOrThrow
 import org.koin.dsl.module
@@ -63,7 +62,7 @@ class RealProfileSwitcher(
     }
 
     override fun getStatus(): ProfileStatus = when {
-        AndroidVersion.AT_LEAST_API_30_R -> getStatusFast()
+        AndroidVersion.isAtLeastApi30R() -> getStatusFast()
         else -> ProfileStatus.Unsupported
     }
 
@@ -106,7 +105,7 @@ class RealProfileSwitcher(
     }
 
     override fun launchCrossProfileInteractSettings(activity: Activity): Boolean {
-        if (!AndroidVersion.AT_LEAST_API_30_R) return false
+        if (!AndroidVersion.isAtLeastApi30R()) return false
 
         val intent = crossProfileAppsCompat.createRequestInteractAcrossProfilesIntent() ?: return false
         activity.startActivity(intent)

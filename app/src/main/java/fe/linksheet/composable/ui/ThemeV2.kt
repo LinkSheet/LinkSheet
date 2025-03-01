@@ -9,8 +9,7 @@ import androidx.compose.ui.graphics.Color
 import fe.android.preference.helper.OptionTypeMapper
 import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R
-
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import fe.linksheet.util.StringResHolder
 
 sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHolder, GroupValueProvider<Int> {
@@ -43,7 +42,7 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
             materialYou: Boolean,
             amoled: Boolean,
         ): ColorScheme {
-            return if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicLightColorScheme(context) else LightColors
+            return if (AndroidVersion.isAtLeastApi31S() && materialYou) dynamicLightColorScheme(context) else LightColors
         }
     }
 
@@ -55,7 +54,7 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
             amoled: Boolean,
         ): ColorScheme {
             val scheme =
-                if (AndroidVersion.AT_LEAST_API_31_S && materialYou) dynamicDarkColorScheme(context) else DarkColors
+                if (AndroidVersion.isAtLeastApi31S() && materialYou) dynamicDarkColorScheme(context) else DarkColors
 
             val colorScheme = if (amoled) scheme.copy(surface = Color.Black, background = Color.Black)
             else scheme

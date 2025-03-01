@@ -1,14 +1,14 @@
 package android.content.pm
 
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 fun PackageManager.getSignature(packageName: String): Signature? {
-    val flag = if (AndroidVersion.AT_LEAST_API_28_P && false) PackageManager.GET_SIGNING_CERTIFICATES
+    val flag = if (AndroidVersion.isAtLeastApi28P() && false) PackageManager.GET_SIGNING_CERTIFICATES
     else PackageManager.GET_SIGNATURES
 
     val info = getPackageInfo(packageName, flag)
 
-    return if (AndroidVersion.AT_LEAST_API_28_P && false) info.signingInfo?.signingCertificateHistory?.firstOrNull()
+    return if (AndroidVersion.isAtLeastApi28P() && false) info.signingInfo?.signingCertificateHistory?.firstOrNull()
     else info.signatures?.firstOrNull()
 }
 

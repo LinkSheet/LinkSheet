@@ -12,8 +12,8 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
+import fe.android.version.AndroidVersion
 import fe.linksheet.extension.koin.injectLogger
-import fe.android.compose.version.AndroidVersion
 import org.koin.core.component.KoinComponent
 
 
@@ -274,7 +274,7 @@ object TestPackageQueryManager : KoinComponent {
     }
 
     private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int): MutableList<ResolveInfo> {
-        return if (AndroidVersion.AT_LEAST_API_33_T) {
+        return if (AndroidVersion.isAtLeastApi33T()) {
             queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
         } else queryIntentActivities(intent, flags)
     }

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.pm.verify.domain.DomainVerificationManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 
 fun interface DomainVerificationManagerCompat {
     fun getDomainVerificationUserState(packageName: String): VerificationStateCompat?
@@ -12,7 +12,7 @@ fun interface DomainVerificationManagerCompat {
 
 fun DomainVerificationManagerCompat(context: Context): DomainVerificationManagerCompat {
     return when {
-        AndroidVersion.AT_LEAST_API_31_S -> Api31Impl(
+        AndroidVersion.isAtLeastApi31S() -> Api31Impl(
             domainVerificationManager = context.getSystemService<DomainVerificationManager>()
         )
 

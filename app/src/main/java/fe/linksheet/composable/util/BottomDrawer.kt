@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import fe.android.compose.version.AndroidVersion
+import fe.android.version.AndroidVersion
 import kotlinx.coroutines.launch
 
 
@@ -34,14 +34,14 @@ fun BottomDrawer(
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = drawerState,
         contentWindowInsets = {
-            if (AndroidVersion.AT_LEAST_API_30_R) noWindowInsets else WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+            if (AndroidVersion.isAtLeastApi30R()) noWindowInsets else WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
         },
         onDismissRequest = hide ?: {
             coroutineScope.launch { drawerState.hide() }
             Unit
         }
     ) {
-        if (AndroidVersion.AT_LEAST_API_30_R) {
+        if (AndroidVersion.isAtLeastApi30R()) {
             Column(modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars), content = sheetContent)
         } else {
             sheetContent()

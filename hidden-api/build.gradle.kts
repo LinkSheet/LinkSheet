@@ -2,7 +2,7 @@ import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
-    id("build-logic-plugin")
+    id("com.gitlab.grrfe.build-logic-plugin")
 }
 group = "fe.linksheet.hiddenapi"
 

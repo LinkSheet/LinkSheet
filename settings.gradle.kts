@@ -1,4 +1,8 @@
+import fe.build.dependencies.Grrfe
+import fe.build.dependencies._1fexd
 import fe.buildsettings.extension.*
+
+rootProject.name = "LinkSheet"
 
 pluginManagement {
     repositories {
@@ -8,21 +12,31 @@ pluginManagement {
         maven { url = uri("https://jitpack.io") }
     }
 
-    includeBuild("build-settings")
-
     plugins {
-        kotlin("plugin.serialization")
         id("de.fayard.refreshVersions") version "0.60.5"
+        id("com.android.library")
+        id("org.jetbrains.kotlin.android")
+        id("net.nemerosa.versioning") version "3.1.0"
         id("androidx.navigation.safeargs") version "2.8.2"
     }
-}
 
-plugins {
-    id("de.fayard.refreshVersions")
-    id("build-settings-plugin")
-}
+    when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
+        null -> {
+            val gradleBuildVersion = extra.properties["gradle.build.version"]
+            val plugins = mapOf(
+                "com.gitlab.grrfe.build-settings-plugin" to "com.gitlab.grrfe.gradle-build:build-settings",
+                "com.gitlab.grrfe.build-logic-plugin" to "com.gitlab.grrfe.gradle-build:build-logic"
+            )
 
-includeBuild("build-logic")
+            resolutionStrategy {
+                eachPlugin {
+                    plugins[requested.id.id]?.let { useModule("$it:$gradleBuildVersion") }
+                }
+            }
+        }
+        else -> includeBuild(gradleBuildDir.toString())
+    }
+}
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
@@ -37,75 +51,29 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "LinkSheet"
+plugins {
+    id("de.fayard.refreshVersions")
+    id("com.gitlab.grrfe.build-settings-plugin")
+}
+
+extra.properties["gradle.build.dir"]
+    ?.let { includeBuild(it.toString()) }
 
 include(":app", ":config")
 include(":bottom-sheet", ":bottom-sheet-new")
 include(":scaffold")
 include(":hidden-api")
 
-val localProperties = file("local.properties")
-val devProperties = localProperties.loadPropertiesOrNull()
-
-val isDev = (devProperties?.get("dev")?.toString()?.toBooleanStrictOrNull() == true)
-
-if (devProperties != null && isDev && (!isCI && !isJitPack)) {
-    include(":benchmark")
-
-    trySubstitute(devProperties["kotlin-ext.dir"], "com.gitlab.grrfe.kotlin-ext") {
-        this["core"] = "core"
-        this["io"] = "io"
-        this["time-core"] = "time:time-core"
-        this["time-java"] = "time:time-java"
-        this["result-core"] = "result:result-core"
-        this["result-assert"] = "result:result-assert"
-        this["process-core"] = "process:process-core"
-        this["uri"] = "uri"
-        this["test"] = "test"
+buildSettings {
+    substitutes {
+        trySubstitute(Grrfe.std, properties["kotlin-ext.dir"])
+        trySubstitute(Grrfe.httpkt, properties["httpkt.dir"])
+        trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
+        trySubstitute(_1fexd.android.lifecycleUtil, properties["android-lifecycle-util.dir"])
+        trySubstitute(_1fexd.android.preference, properties["android-pref-helper.dir"])
+        trySubstitute(_1fexd.android.span, properties["android-span-helper.dir"])
+        trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
+        trySubstitute(_1fexd.droidKit, properties["droidkit.dir"])
     }
-
-    trySubstitute(devProperties["httpkt.dir"], "com.gitlab.grrfe.httpkt") {
-        this["core"] = "core"
-        this["serialization-gson"] = "serialization:serialization-gson"
-        this["serialization-jsoup"] = "serialization:serialization-jsoup"
-    }
-
-    trySubstitute(devProperties["gson-ext.dir"], "com.gitlab.grrfe.gson-ext") {
-        this["core"] = "core"
-    }
-
-    trySubstitute(devProperties["android-lifecycle-util.dir"], "com.github.1fexd.android-lifecycle-util") {
-        this["core"] = "core"
-        this["koin"] = "koin"
-    }
-
-    trySubstitute(devProperties["android-pref-helper.dir"], "com.github.1fexd.android-pref-helper") {
-        this["core"] = "core"
-        this["compose"] = "compose:compose-core"
-        this["mock"] = "compose:compose-mock"
-    }
-
-    trySubstitute(devProperties["android-span-helper.dir"], "com.github.1fexd.android-span-helper") {
-        this["core"] = "core"
-        this["compose"] = "compose"
-    }
-
-    trySubstitute(devProperties["composekit.dir"], "com.github.1fexd.composekit") {
-        this["app-core"] = "app:app-core"
-        this["theme-core"] = "theme:theme-core"
-        this["theme-preference"] = "theme:theme-preference"
-        this["component"] = "component"
-        this["core"] = "core"
-        this["layout"] = "layout"
-    }
-
-    trySubstitute(devProperties["libredirect.dir"], "com.github.1fexd:libredirectkt")
-
-    trySubstitute(devProperties["tld-lib.dir"], "com.github.1fexd:tld-lib")
-    trySubstitute(devProperties["embed-resolve.dir"], "com.github.1fexd:embed-resolve") {
-        this[":"] = "core"
-    }
-
-    trySubstitute(devProperties["clearurl.dir"], "com.github.1fexd:clearurlkt")
 }
 

@@ -1,10 +1,18 @@
+import fe.build.dependencies.Grrfe
+import fe.build.dependencies.LinkSheet
+import fe.build.dependencies.MozillaComponents
+import fe.build.dependencies.PinnedVersions
+import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
-import fe.buildlogic.dependency.Grrfe
-import fe.buildlogic.dependency.LinkSheet
-import fe.buildlogic.dependency.MozillaComponents
-import fe.buildlogic.dependency.PinnedVersions
-import fe.buildlogic.dependency._1fexd
-import fe.buildlogic.extension.*
+import fe.buildlogic.extension.CurrentTagMode
+import fe.buildlogic.extension.TagReleaseParser
+import fe.buildlogic.extension.asProvider
+import fe.buildlogic.extension.buildConfig
+import fe.buildlogic.extension.buildStringConfigField
+import fe.buildlogic.extension.closure
+import fe.buildlogic.extension.getOrSystemEnv
+import fe.buildlogic.extension.readPropertiesOrNull
+import fe.buildlogic.version.AndroidVersionStrategy
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -20,8 +28,8 @@ plugins {
     id("net.nemerosa.versioning")
     id("androidx.room")
     id("com.google.devtools.ksp")
-    id("build-logic-plugin")
     id("dev.rikka.tools.refine")
+    id("com.gitlab.grrfe.build-logic-plugin")
 }
 
 // Must be defined before the android block, or else it won't work
@@ -44,6 +52,7 @@ android {
 
         val now = System.currentTimeMillis()
         val provider = AndroidVersionStrategy(now)
+
         val versionProvider = versioning.asProvider(project, provider)
         val (name, code, commit, branch) = versionProvider.get()
 
@@ -233,7 +242,7 @@ dependencies {
     implementation(AndroidX.compose.ui.text)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(PinnedVersions.Material3)
+    implementation(AndroidX.compose.material3)
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -288,7 +297,7 @@ dependencies {
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.process.core)
-    implementation(Grrfe.std.process.android)
+    implementation("com.gitlab.grrfe:kotlin-ext-android:0.0.115")
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
     implementation(Grrfe.std.stringbuilder)
@@ -297,7 +306,7 @@ dependencies {
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.serialization.gson)
-    implementation(Grrfe.ext.gson)
+    implementation(Grrfe.gsonExt.core)
 
     implementation(_1fexd.clearUrl)
     implementation(_1fexd.signify)
@@ -306,15 +315,16 @@ dependencies {
     implementation(_1fexd.amp2html)
     implementation(_1fexd.embedResolve)
 
-    implementation(platform(_1fexd.android.preference.bom))
-    implementation(_1fexd.android.preference.core)
-    implementation(_1fexd.android.preference.compose.core)
-    implementation(_1fexd.android.preference.compose.mock)
-
-    implementation(_1fexd.android.compose.route)
-    implementation(_1fexd.android.span.compose)
-    implementation(_1fexd.android.lifecycleUtil.core)
-    implementation(_1fexd.android.lifecycleUtil.koin)
+    implementation(platform(_1fexd.droidKit.bom))
+    implementation(_1fexd.droidKit.core)
+    implementation(_1fexd.droidKit.koin)
+    implementation(_1fexd.droidKit.lifecycle.core)
+    implementation(_1fexd.droidKit.lifecycle.koin)
+    implementation(_1fexd.droidKit.preference.core)
+    implementation(_1fexd.droidKit.preference.compose.core)
+    implementation(_1fexd.droidKit.preference.compose.mock)
+    implementation(_1fexd.droidKit.span.core)
+    implementation(_1fexd.droidKit.span.compose)
 
     implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.app.core)
@@ -324,6 +334,8 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.layout)
     implementation(_1fexd.composeKit.component)
+
+    implementation(_1fexd.android.compose.route)
     runtimeOnly(AndroidX.annotation)
 
     implementation("com.github.jeziellago:compose-markdown:_")
@@ -370,6 +382,7 @@ dependencies {
     androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
     androidTestImplementation(kotlin("test"))
 
+    testImplementation(AndroidX.room.testing)
     testImplementation(Grrfe.std.result.assert)
     testImplementation(Koin.test)
     testImplementation(Koin.junit4)

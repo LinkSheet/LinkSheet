@@ -389,6 +389,7 @@ dependencies {
     testImplementation(Koin.android)
     testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
+    testImplementation(AndroidX.room.testing)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     testImplementation(kotlin("test"))

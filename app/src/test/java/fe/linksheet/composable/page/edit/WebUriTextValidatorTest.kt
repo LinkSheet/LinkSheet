@@ -4,12 +4,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.UnitTest
+import fe.linksheet.BaseUnitTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class WebUriTextValidatorTest : UnitTest {
+internal class WebUriTextValidatorTest : BaseUnitTest {
 
     @Test
     fun `test web uri text validator`() {

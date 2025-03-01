@@ -1,15 +1,16 @@
-package fe.linksheet.module.resolver
+package fe.linksheet.resolver
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
+import fe.linksheet.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class ImprovedIntentResolverTest {
+internal class ImprovedIntentResolverTest : BaseUnitTest {
 
     @Test
     fun testBundledEmbedResolving() {

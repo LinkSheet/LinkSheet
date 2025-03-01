@@ -23,7 +23,7 @@ abstract class DatabaseTest : UnitTest {
 
     @Before
     fun setup() {
-        database = createInMemoryTestDatabase(context)
+        database = createInMemoryTestDatabase(applicationContext)
     }
 
     @After

@@ -1,7 +1,8 @@
 package fe.linksheet
 
+import android.app.Instrumentation
 import android.content.Context
-import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -15,8 +16,15 @@ interface BaseUnitTest : KoinTest {
 }
 
 interface UnitTest : BaseUnitTest {
-    val context: Context
-        get() = ApplicationProvider.getApplicationContext<Context>()
+    val instrumentation: Instrumentation
+        get() = InstrumentationRegistry.getInstrumentation()
+
+    val targetContext: Context
+        get() = instrumentation.targetContext
+
+    val applicationContext: Context
+        get() = targetContext.applicationContext
+
 }
 
 interface RobolectricTest : BaseUnitTest {

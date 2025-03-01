@@ -1,7 +1,6 @@
 package fe.linksheet.module.profile
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.CrossProfileApps
 import android.net.Uri
@@ -12,18 +11,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import dev.rikka.tools.refine.Refine
 import fe.android.version.AndroidVersion
 import fe.linksheet.extension.android.toImageBitmap
-import fe.linksheet.extension.koin.getSystemServiceOrThrow
-import org.koin.dsl.module
-
-val ProfileSwitcherModule = module {
-    single {
-        AndroidProfileSwitcherModule(
-            appLabel = get<Context>().resources.getString(string.app_name),
-            crossProfileApps = getSystemServiceOrThrow(),
-            userManager = getSystemServiceOrThrow()
-        )
-    }
-}
 
 internal fun AndroidProfileSwitcherModule(
     appLabel: String,
@@ -51,7 +38,7 @@ interface ProfileSwitcher {
     fun getProfiles(status: ProfileStatus = getStatus()): List<CrossProfile>?
 }
 
-class RealProfileSwitcher(
+internal class RealProfileSwitcher(
     private val appLabel: String,
     private val crossProfileAppsCompat: CrossProfileAppsCompat,
     private val userManagerCompat: UserManagerCompat,

@@ -36,5 +36,5 @@ dependencies {
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
     implementation(AndroidX.activity.compose)
-    implementation("androidx.compose.material3:material3-android:1.4.0-alpha04")
+    implementation("androidx.compose.material3:material3-android:_")
 }

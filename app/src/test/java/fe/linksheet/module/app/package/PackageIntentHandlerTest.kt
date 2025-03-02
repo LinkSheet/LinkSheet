@@ -19,6 +19,7 @@ internal class PackageIntentHandlerTest : UnitTest {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },
+            isSelf = { false },
             checkReferrerExperiment = { true },
         )
 
@@ -35,6 +36,7 @@ internal class PackageIntentHandlerTest : UnitTest {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> TurretPackageInfoFake.resolveInfos },
             isLinkSheetCompat = { false },
+            isSelf = { false },
             checkReferrerExperiment = { true },
         )
 

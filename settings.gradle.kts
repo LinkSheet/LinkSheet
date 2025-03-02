@@ -1,5 +1,6 @@
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
+import fe.buildsettings.extension.maybeResolveIncludingRootContext
 
 rootProject.name = "LinkSheet"
 
@@ -58,6 +59,13 @@ plugins {
 extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
 
+maybeResolveIncludingRootContext()?.rootProject {
+//    refreshVersions {
+//        versionsPropertiesFile = rootDir.resolve("versions.properties")
+//        logger.info("Using versions file from $versionsPropertiesFile")
+//    }
+}
+
 include(":app", ":config")
 include(":bottom-sheet", ":bottom-sheet-new")
 include(":scaffold")
@@ -69,7 +77,6 @@ buildSettings {
         trySubstitute(Grrfe.httpkt, properties["httpkt.dir"])
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
-        trySubstitute(_1fexd.droidKit, properties["droidkit.dir"])
     }
 }
 

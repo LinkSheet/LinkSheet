@@ -20,6 +20,6 @@ val PackageModule = module {
         )
     }
     single {
-        AndroidPackageServiceModule(get(), get())
+        AndroidPackageServiceModule(get(), get(), get())
     }
 }

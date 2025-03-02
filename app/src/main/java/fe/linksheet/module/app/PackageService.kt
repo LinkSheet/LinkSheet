@@ -10,18 +10,21 @@ import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
 import fe.linksheet.module.app.`package`.domain.VerificationState
 import fe.linksheet.module.app.`package`.domain.VerificationStateCompat
-import fe.linksheet.module.app.`package`.PackageBrowserService
 import fe.linksheet.module.app.`package`.PackageIconLoader
 import fe.linksheet.module.app.`package`.PackageLabelService
 import fe.linksheet.module.app.`package`.PackageLauncherService
-import fe.linksheet.module.app.`package`.DefaultPackageBrowserService
 import fe.linksheet.module.app.`package`.DefaultPackageLabelService
 import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
+import fe.linksheet.module.app.`package`.PackageIntentHandler
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-internal fun AndroidPackageServiceModule(context: Context, packageIconLoader: PackageIconLoader): PackageService {
+internal fun AndroidPackageServiceModule(
+    context: Context,
+    packageIconLoader: PackageIconLoader,
+    packageIntentHandler: PackageIntentHandler
+): PackageService {
     val packageManager = context.packageManager
 
     return PackageService(
@@ -31,8 +34,8 @@ internal fun AndroidPackageServiceModule(context: Context, packageIconLoader: Pa
             getApplicationLabel = packageManager::getApplicationLabel,
         ),
         packageLauncherService = DefaultPackageLauncherService(packageManager::queryIntentActivitiesCompat),
-        packageBrowserService = DefaultPackageBrowserService(packageManager::queryIntentActivitiesCompat),
         packageIconLoader = packageIconLoader,
+        packageIntentHandler = packageIntentHandler,
         getInstalledPackages = packageManager::getInstalledPackagesCompat,
     )
 }
@@ -41,11 +44,13 @@ class PackageService(
     private val domainVerificationManager: DomainVerificationManagerCompat,
     private val packageLabelService: PackageLabelService,
     private val packageLauncherService: PackageLauncherService,
-    private val packageBrowserService: PackageBrowserService,
     private val packageIconLoader: PackageIconLoader,
+    private val packageIntentHandler: PackageIntentHandler,
     val getInstalledPackages: () -> List<PackageInfo>,
-) : PackageLabelService by packageLabelService, PackageLauncherService by packageLauncherService,
-    PackageBrowserService by packageBrowserService, PackageIconLoader by packageIconLoader {
+) : PackageLabelService by packageLabelService,
+    PackageLauncherService by packageLauncherService,
+    PackageIconLoader by packageIconLoader,
+    PackageIntentHandler by packageIntentHandler {
 
     fun toAppInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): ActivityAppInfo {
         val info = resolveInfo.info
@@ -53,12 +58,14 @@ class PackageService(
         return ActivityAppInfo(
             componentInfo = info,
             label = loadComponentInfoLabel(info) ?: findApplicationLabel(info.applicationInfo),
-            icon = lazy { loadIcon(info).toImageBitmap() })
+            icon = lazy { loadIcon(info).toImageBitmap() }
+        )
     }
 
     fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
-            ?: getBrowsableResolveInfos(applicationInfo.packageName)?.takeIf { it.isNotEmpty() }
+            ?: packageIntentHandler.findBrowsers(applicationInfo.packageName)
+                ?.takeIf { it.isNotEmpty() }
                 ?.let { VerificationBrowserState }
     }
 

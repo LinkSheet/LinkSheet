@@ -64,10 +64,10 @@ class ImprovedIntentResolver(
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     private val packageInfoService: PackageService,
     private val packageIntentHandler: PackageIntentHandler,
+    private val appSorter: AppSorter,
     private val downloader: Downloader,
     private val redirectUrlResolver: RedirectUrlResolver,
     private val amp2HtmlResolver: Amp2HtmlUrlResolver,
-    private val browserResolver: BrowserResolver,
     private val browserHandler: ImprovedBrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
@@ -81,14 +81,6 @@ class ImprovedIntentResolver(
     private val libRedirectSettings = settings.libRedirectSettings
     private val amp2HtmlSettings = settings.amp2HtmlSettings
     private val followRedirectsSettings = settings.followRedirectsSettings
-    private val usageStatsManager by lazy { context.getSystemService<UsageStatsManager>()!! }
-
-    private val appSorter by lazy {
-        AppSorter(
-            queryAndAggregateUsageStats = usageStatsManager::queryAndAggregateUsageStats,
-            toAppInfo = packageInfoService::toAppInfo,
-        )
-    }
 
     private val _events = MutableStateFlow(value = ResolveEvent.Idle)
     override val events = _events.asStateFlow()
@@ -150,7 +142,10 @@ class ImprovedIntentResolver(
         var uri = uriResult.getOrNull()
 
         emitEvent(ResolveEvent.QueryingBrowsers)
-        val browsers = browserResolver.queryBrowsers()
+        val browsers = packageInfoService.findBrowsers(null)
+
+        // TODO: Refactor properly
+        val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
 
         val resolveEmbeds = settings.resolveEmbeds()
         val useClearUrls = settings.useClearUrls()
@@ -274,17 +269,10 @@ class ImprovedIntentResolver(
             uri = uri
         )
         val resolveList = packageIntentHandler.findHandlers(uri, referringPackage)
-        for (info in resolveList) {
-            logger.info("$info")
-        }
-
-        for ((pkg, info) in browsers) {
-            logger.info("$info ($pkg)")
-        }
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
-        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
+        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browserPackageMap, resolveList)
 
         emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = appSorter.sort(

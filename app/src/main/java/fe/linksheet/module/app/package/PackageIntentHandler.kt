@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
+import fe.linksheet.BuildConfig
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
 import fe.linksheet.util.ResolveInfoFlags
 
@@ -17,11 +18,13 @@ internal fun AndroidPackageIntentHandler(
     return DefaultPackageIntentHandler(
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
         isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
+        isSelf = { pkg -> BuildConfig.APPLICATION_ID == pkg },
         checkReferrerExperiment = checkReferrerExperiment,
     )
 }
 
 interface PackageIntentHandler {
+    fun findBrowsers(packageName: String?): List<ResolveInfo>?
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
@@ -30,6 +33,7 @@ interface PackageIntentHandler {
 internal class DefaultPackageIntentHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     val isLinkSheetCompat: (String) -> Boolean,
+    val isSelf: (String) -> Boolean,
     val checkReferrerExperiment: () -> Boolean,
 ) : PackageIntentHandler {
 
@@ -41,12 +45,34 @@ internal class DefaultPackageIntentHandler(
         )
 
         private val anyHost = IntentFilter.AuthorityEntry("*", "-1")
+
+        private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
+        private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")
+    }
+
+    internal fun Iterable<ResolveInfo>.filterLaunchable(): List<ResolveInfo> {
+        return filter { it.activityInfo.exported && it.activityInfo.applicationInfo.enabled }
+    }
+
+    override fun findBrowsers(packageName: String?): List<ResolveInfo>? {
+        if (packageName == null) return null
+
+        val httpIntent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setPackage(packageName)
+
+        val httpInfos = queryIntentActivities(httpIntent, ResolveInfoFlags.MATCH_ALL)
+        val httpsInfos = queryIntentActivities(httpIntent.setData(httpsSchemeUri), ResolveInfoFlags.MATCH_ALL)
+        return (httpInfos + httpsInfos)
+            .distinct()
+            .filterLaunchable()
+            .filter { !isSelf(it.activityInfo.packageName) }
     }
 
     override fun findHandlers(intent: Intent): List<ResolveInfo> {
         val activities = queryIntentActivities(intent, QUERY_FLAGS)
-        return activities.filter {
-            it.activityInfo.exported && it.activityInfo.applicationInfo.enabled && !isLinkSheetCompat(it.activityInfo.packageName)
+        return activities.filterLaunchable().filter {
+            !isLinkSheetCompat(it.activityInfo.packageName)
         }
     }
 

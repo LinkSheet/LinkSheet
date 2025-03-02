@@ -10,9 +10,10 @@ import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
 
+@Deprecated(message = "Switch to PackageService")
 class BrowserResolver(
     val packageManager: PackageManager,
-    val packageInfoService: PackageService,
+    val packageService: PackageService,
 ) {
     companion object {
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
@@ -32,11 +33,10 @@ class BrowserResolver(
 
     fun queryDisplayActivityInfoBrowsers(sorted: Boolean): List<ActivityAppInfo> {
         val browsers = queryBrowsers()
-        val appInfos = browsers.map { (_, resolveInfo) -> packageInfoService.toAppInfo(resolveInfo, false) }
+        val appInfos = browsers.map { (_, resolveInfo) -> packageService.toAppInfo(resolveInfo, false) }
 
         return appInfos.labelSorted(sorted)
     }
-
     fun queryBrowsers(): Map<String, ResolveInfo> {
         // Some apps (looking at you Coinbase) declare their app as a browser (via CATEGORY_BROWSABLE and ACTION_VIEW) but ONLY for HTTPS schemes.
         // Previously, LinkSheet assumed (rightfully so) that an app, which is declared as a BROWSER, could handle HTTP (alongside HTTPS and other schemes).

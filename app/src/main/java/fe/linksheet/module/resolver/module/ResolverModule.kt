@@ -1,8 +1,12 @@
 package fe.linksheet.module.resolver.module
 
+import android.app.usage.UsageStatsManager
 import android.content.Context
 import fe.android.preference.helper.compose.asFunction
+import fe.droidkit.koin.getPackageManager
+import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -12,14 +16,21 @@ import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
+import fe.linksheet.module.resolver.util.AppSorter
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val resolverModule = module {
-    single { BrowserResolver(get<Context>().packageManager, get()) }
+    single { BrowserResolver(getPackageManager(), get()) }
     single {
         ImprovedBrowserHandler(
             autoLaunchSingleBrowserExperiment = get<ExperimentRepository>().asFunction(Experiments.autoLaunchSingleBrowser),
+        )
+    }
+    single {
+        AppSorter(
+            queryAndAggregateUsageStats = getSystemServiceOrThrow<UsageStatsManager>()::queryAndAggregateUsageStats,
+            toAppInfo = get<PackageService>()::toAppInfo
         )
     }
     singleOf(::InAppBrowserHandler)

@@ -5,8 +5,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.ImageFakes
 import app.linksheet.testing.fake.PackageInfoFakes
 import fe.linksheet.UnitTest
-import fe.linksheet.module.app.`package`.DefaultPackageBrowserService
 import fe.linksheet.module.app.`package`.DefaultPackageIconLoader
+import fe.linksheet.module.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.module.app.`package`.DefaultPackageLabelService
 import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
@@ -29,7 +29,12 @@ internal class PackageInfoServiceTest : UnitTest {
             domainVerificationManager = domainVerificationManager,
             packageLabelService = DefaultPackageLabelService({ "" }, { "" }),
             packageLauncherService = DefaultPackageLauncherService { intent, flags -> emptyList() },
-            packageBrowserService = DefaultPackageBrowserService { intent, flags -> emptyList() },
+            packageIntentHandler = DefaultPackageIntentHandler(
+                queryIntentActivities = { _, _ -> emptyList() },
+                isLinkSheetCompat = { false },
+                isSelf = { false },
+                checkReferrerExperiment = { false }
+            ),
             packageIconLoader = DefaultPackageIconLoader(
                 ImageFakes.EmptyDrawable,
                 { _, _ -> ImageFakes.EmptyDrawable },

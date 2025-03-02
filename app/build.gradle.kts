@@ -207,13 +207,14 @@ android {
     val androidTest by sourceSets
     androidTest.assets.srcDir("$projectDir/schemas")
 
-//    val p = this@android.packaging
-//    val r = p.resources
-//    packaging {
+    packaging {
+
+//        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
 //        resources {
-////            it.excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
+//            it.excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
 //        }
-//    }
+    }
 
     val main by sourceSets
     for (it in arrayOf("compat", "experiment", "testing")) {
@@ -239,10 +240,10 @@ dependencies {
 
     implementation(platform(AndroidX.compose.bom))
     implementation(AndroidX.compose.foundation)
+    implementation(AndroidX.compose.ui.withVersion("1.8.0-beta03"))
     implementation(AndroidX.compose.ui.text)
-    implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3)
+    implementation(AndroidX.compose.material3.withVersion("1.4.0-alpha09"))
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -296,8 +297,7 @@ dependencies {
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
-    implementation(Grrfe.std.process.core)
-    implementation("com.gitlab.grrfe:kotlin-ext-android:0.0.115")
+    implementation(Grrfe.std.process.core.withVersion("0.0.115"))
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
     implementation(Grrfe.std.stringbuilder)
@@ -315,26 +315,27 @@ dependencies {
     implementation(_1fexd.amp2html)
     implementation(_1fexd.embedResolve)
 
-    implementation(platform(_1fexd.droidKit.bom))
-    implementation(_1fexd.droidKit.core)
-    implementation(_1fexd.droidKit.koin)
-    implementation(_1fexd.droidKit.lifecycle.core)
-    implementation(_1fexd.droidKit.lifecycle.koin)
-    implementation(_1fexd.droidKit.preference.core)
-    implementation(_1fexd.droidKit.preference.compose.core)
-    implementation(_1fexd.droidKit.preference.compose.mock)
-    implementation(_1fexd.droidKit.span.core)
-    implementation(_1fexd.droidKit.span.compose)
+//    implementation(platform(_1fexd.droidKit.bom))
 
     implementation(platform(_1fexd.composeKit.bom))
-    implementation(_1fexd.composeKit.app.core)
-    implementation(_1fexd.composeKit.theme.core)
-    implementation(_1fexd.composeKit.theme.preference)
-    implementation(_1fexd.composeKit.dialog.core)
+    implementation(_1fexd.composeKit.compose.core)
+    implementation(_1fexd.composeKit.compose.layout)
+    implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.compose.app)
+    implementation(_1fexd.composeKit.compose.theme.core)
+    implementation(_1fexd.composeKit.compose.theme.preference)
+    implementation(_1fexd.composeKit.compose.dialog)
+    implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.core)
-    implementation(_1fexd.composeKit.layout)
-    implementation(_1fexd.composeKit.component)
-    implementation(_1fexd.composeKit.route.core)
+    implementation(_1fexd.composeKit.koin)
+    implementation(_1fexd.composeKit.process)
+    implementation(_1fexd.composeKit.lifecycle.core)
+    implementation(_1fexd.composeKit.lifecycle.koin)
+    implementation(_1fexd.composeKit.preference.core)
+    implementation(_1fexd.composeKit.preference.compose.core)
+    implementation(_1fexd.composeKit.preference.compose.mock)
+    implementation(_1fexd.composeKit.span.core)
+    implementation(_1fexd.composeKit.span.compose)
 
     runtimeOnly(AndroidX.annotation)
 
@@ -367,7 +368,6 @@ dependencies {
 
     androidTestImplementation(Koin.test)
     androidTestImplementation(Koin.junit4)
-    androidTestImplementation(Koin.android)
     androidTestImplementation(Testing.junit4)
     androidTestImplementation(Testing.robolectric)
     androidTestImplementation(AndroidX.test.core)
@@ -378,7 +378,8 @@ dependencies {
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.room.testing)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+//    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.0-beta03")
     androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
     androidTestImplementation(kotlin("test"))
 
@@ -389,7 +390,6 @@ dependencies {
     testImplementation(Koin.android)
     testImplementation(Testing.junit4)
     testImplementation(Testing.robolectric)
-    testImplementation(AndroidX.room.testing)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     testImplementation(kotlin("test"))

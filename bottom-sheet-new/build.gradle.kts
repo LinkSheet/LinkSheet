@@ -31,7 +31,7 @@ dependencies {
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.material3)
     implementation(AndroidX.Lifecycle.viewModelCompose)
-    implementation("androidx.compose.material3:material3-android:1.4.0-alpha05")
+    implementation("androidx.compose.material3:material3-android:_")
 
     implementation(AndroidX.activity.compose)
 }

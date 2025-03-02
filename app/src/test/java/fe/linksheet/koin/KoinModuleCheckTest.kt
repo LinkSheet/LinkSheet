@@ -11,10 +11,8 @@ import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.UnitTest
-import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.app.PackageService
-import fe.linksheet.module.app.`package`.PackageBrowserService
 import fe.linksheet.module.app.`package`.PackageLabelService
 import fe.linksheet.module.app.`package`.PackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
@@ -24,13 +22,9 @@ import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompat
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.internal.LoggerDelegate
-import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.state.AppStateService
-import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
@@ -54,21 +48,7 @@ import fe.linksheet.module.systeminfo.BuildConstants
 import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.module.systeminfo.SystemProperties
 import fe.linksheet.module.versiontracker.VersionTracker
-import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
-import fe.linksheet.module.viewmodel.DevSettingsViewModel
-import fe.linksheet.module.viewmodel.ExportSettingsViewModel
-import fe.linksheet.module.viewmodel.LogSettingsViewModel
-import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
-import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.module.viewmodel.MarkdownViewModel
-import fe.linksheet.module.viewmodel.PreferredAppSettingsViewModel
-import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
-import fe.linksheet.module.viewmodel.ProfileSwitchingSettingsViewModel
-import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
+import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import okhttp3.OkHttpClient
 import org.junit.Test
@@ -85,6 +65,7 @@ internal class KoinModuleCheckTest : UnitTest {
         ConnectivityManager::class,
         Function0::class,
         Function1::class,
+        Function2::class,
         Application::class,
         SavedStateHandle::class,
         Logger::class,
@@ -99,7 +80,6 @@ internal class KoinModuleCheckTest : UnitTest {
             DomainVerificationManagerCompat::class,
             PackageLabelService::class,
             PackageLauncherService::class,
-            PackageBrowserService::class,
         ),
         definition<Redactor>(LogHasher::class),
         definition<Logger>(LoggerDelegate::class),

@@ -537,4 +537,7 @@
     <string name="import_dumped_preference">Importations en dumping des préférences</string>
     <string name="verified_link_handlers_subtitle">Contrôler l\'état de app-domain-verification</string>
     <string name="generic__button_text_share">Partager</string>
+    <string name="settings_profile_switcher__text_no_profile">Cette fonctionnalité n\'est disponible que si un profil (professionnel) a été configuré sur votre appareil.</string>
+    <string name="resolve_event__idle">Inactif</string>
+    <string name="settings_profile_switcher__title_no_profile">Aucun profil(s) disponible</string>
 </resources>

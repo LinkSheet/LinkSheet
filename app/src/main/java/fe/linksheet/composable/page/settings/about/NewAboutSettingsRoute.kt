@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -27,19 +28,18 @@ import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.fastforwardkt.FastForwardRules
-import fe.linksheet.*
+import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.navigation.creditsSettingsRoute
-import fe.linksheet.util.buildconfig.LinkSheetInfo
-import fe.linksheet.util.AppSignature
 import fe.linksheet.util.LinkSheet
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
+import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -69,10 +69,10 @@ fun NewAboutSettingsRoute(
     navigate: (String) -> Unit,
     viewModel: AboutSettingsViewModel = koinViewModel(),
 ) {
-    val activity = LocalActivity.current
+    val activity = androidx.activity.compose.LocalActivity.current
     val uriHandler = LocalUriHandler.current
     val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
-    val buildType = AppSignature.checkSignature(activity)
+//    val buildType = AppSignature.checkSignature(activity)
 
     var devClicks by remember { mutableIntStateOf(0) }
 
@@ -85,6 +85,8 @@ fun NewAboutSettingsRoute(
 
     val interaction = LocalHapticFeedbackInteraction.current
 
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     val state = rememberConfirmActionDialog<String>()
 
     ConfirmActionDialog(
@@ -172,7 +174,9 @@ fun NewAboutSettingsRoute(
 
                     if (devClicks == 7 && !viewModel.devModeEnabled()) {
                         viewModel.devModeEnabled(true)
-                        activity.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
+                        coroutineScope.launch {
+                            context.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
+                        }
                     }
 
                     devClicks++

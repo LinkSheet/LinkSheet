@@ -58,8 +58,6 @@ enum class Theme {
     }
 }
 
-val LocalActivity = staticCompositionLocalOf<Activity> { error("CompositionLocal LocalActivity not present") }
-
 
 /**
  * The default light scrim, as defined by androidx and the platform:
@@ -128,7 +126,6 @@ fun AppTheme(
 
     KoinAndroidContext {
         CompositionLocalProvider(
-            LocalActivity provides activity!!,
             LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
             LocalLinkAnnotationStyle provides linkAnnotationStyle,
             LocalLinkTags provides LinkConstants.tags

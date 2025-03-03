@@ -1,6 +1,7 @@
 package fe.linksheet.extension.android
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
@@ -8,6 +9,8 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.DisplayActivityInfo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 fun Activity.startActivityWithConfirmation(intent: Intent) = kotlin.runCatching {
     this.startActivity(intent)
@@ -26,6 +29,13 @@ fun Activity.startPackageInfoActivity(info: ActivityAppInfo): Boolean {
     return this.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
         this.data = Uri.parse("package:${info.packageName}")
     })
+}
+
+suspend fun Context.showToast(
+    @StringRes textId: Int,
+    duration: Int = Toast.LENGTH_SHORT
+) = withContext(Dispatchers.Main) {
+    Toast.makeText(this@showToast, getString(textId), duration).show()
 }
 
 fun Activity.showToast(

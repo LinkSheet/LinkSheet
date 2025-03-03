@@ -26,7 +26,6 @@ import fe.composekit.component.list.column.SaneLazyColumnDefaults
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.compose.ObserveStateChange
@@ -45,15 +44,15 @@ fun VerifiedLinkHandlersRoute(
     onBackPressed: () -> Unit,
     viewModel: VerifiedLinkHandlersViewModel = koinViewModel(),
 ) {
-    val activity = LocalActivity.current
+    val activity = androidx.activity.compose.LocalActivity.current
 
     val linkHandlingAllowed by viewModel.filterDisabledOnly.collectOnIO(true)
 
     val userApps by viewModel.userAppFilter.collectOnIO()
     val lastEmitted by viewModel.lastEmitted.collectOnIO()
 
-
-    val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }
+    val context = LocalContext.current
+    val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
     val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
 
     val shizukuPermission by rememberHasShizukuPermissionAsState()
@@ -83,8 +82,6 @@ fun VerifiedLinkHandlersRoute(
             result
         }
     }
-
-    val context = LocalContext.current
 
     val preferredApps by viewModel.preferredApps.collectOnIO(emptyMap())
 
@@ -176,7 +173,7 @@ fun VerifiedLinkHandlersRoute(
                         },
                         onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
                             {
-                                activity.startActivityWithConfirmation(
+                                activity?.startActivityWithConfirmation(
                                     viewModel.makeOpenByDefaultSettingsIntent(item.packageName)
                                 )
                             }

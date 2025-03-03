@@ -39,9 +39,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.util.buildconfig.LinkSheetInfo
-import fe.linksheet.util.AppSignature
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -71,11 +69,8 @@ fun VersionSettingsRoute(
     navigate: (String) -> Unit,
     viewModel: AboutSettingsViewModel = koinViewModel(),
 ) {
-    val activity = LocalActivity.current
     val uriHandler = LocalUriHandler.current
     val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
-    val buildType = AppSignature.checkSignature(activity)
-
     var devClicks by remember { mutableIntStateOf(0) }
 
 //    LaunchedEffect(Unit) {

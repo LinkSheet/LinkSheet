@@ -2,6 +2,7 @@ package fe.linksheet.composable.page.settings.advanced
 
 import android.app.Activity
 import android.net.Uri
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.icons.Icons
@@ -15,9 +16,7 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.page.settings.advanced.exportimport.ExportSettingsDialog
-import fe.linksheet.composable.page.settings.advanced.exportimport.ImportPermissionRequiredDialog
 import fe.linksheet.composable.page.settings.advanced.exportimport.ImportSettingsDialog
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -43,7 +42,7 @@ fun ExportImportSettingsRoute(
             awaitFetchBeforeOpen = true,
             dynamicHeight = true
         ) { state, close ->
-            ImportPermissionRequiredDialog(activity = activity, permissions = state, close = close)
+//            ImportPermissionRequiredDialog(activity = activity, permissions = state, close = close)
         }
 
     val confirmImportDialog = dialogHelper<Uri, Uri, Result<List<PermissionBoundPreference>>>(

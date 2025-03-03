@@ -34,7 +34,6 @@ import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -67,14 +66,16 @@ fun UrlBarWrapper(
     val uriString = result.uri.toString()
     val clipboardLabel = stringResource(id = R.string.generic__text_url)
     val context = LocalContext.current
-    val activity = LocalActivity.current
+    val activity = androidx.activity.compose.LocalActivity.current
 
     UrlBar(
         uri = uriString,
         profiles = if (enableSwitchProfile) profileSwitcher.getProfiles() else null,
         switchProfile = { crossProfile, url ->
             controller.hideAndFinish()
-            profileSwitcher.switchTo(crossProfile, url, activity)
+            if (activity != null) {
+                profileSwitcher.switchTo(crossProfile, url, activity)
+            }
         },
         unfurlResult = result.unfurlResult,
         downloadable = result.downloadable,

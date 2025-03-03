@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.home
 
 import android.widget.Toast
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +25,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
-import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
@@ -32,16 +32,16 @@ import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.settingsRoute
-import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.LinkSheet
 import fe.linksheet.util.buildconfig.Build
+import fe.linksheet.util.buildconfig.BuildType
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 

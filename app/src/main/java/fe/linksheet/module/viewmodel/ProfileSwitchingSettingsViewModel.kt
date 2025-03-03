@@ -30,11 +30,13 @@ class ProfileSwitchingSettingsViewModel(
         return profileSwitcher.checkIsManagedProfile()
     }
 
-    fun launchCrossProfileInteractSettings(activity: Activity) {
+    fun launchCrossProfileInteractSettings(activity: Activity?) {
+        if (activity == null) return
         profileSwitcher.launchCrossProfileInteractSettings(activity)
     }
 
-    fun startOther(crossProfile: CrossProfile, activity: Activity) {
+    fun startOther(crossProfile: CrossProfile, activity: Activity?) {
+        if(activity == null) return
         profileSwitcher.startOther(crossProfile, activity)
     }
 }

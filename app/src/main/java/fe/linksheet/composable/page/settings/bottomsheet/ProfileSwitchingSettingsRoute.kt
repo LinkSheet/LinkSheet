@@ -2,6 +2,7 @@ package fe.linksheet.composable.page.settings.bottomsheet
 
 import android.app.Activity
 import android.os.Build
+import androidx.activity.compose.LocalActivity
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
@@ -29,10 +30,8 @@ import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.group
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.module.profile.CrossProfile
 import fe.linksheet.module.profile.ProfileStatus
-import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.profile.UserProfileInfo
 import fe.linksheet.module.viewmodel.ProfileSwitchingSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -67,8 +66,8 @@ private fun ProfileSwitchingSettingsRouteInternal(
     enabled: Boolean,
     onEnable: (Boolean) -> Unit,
     onBackPressed: () -> Unit,
-    launchCrossProfileInteractSettings: (Activity) -> Unit,
-    startOther: (CrossProfile, Activity) -> Unit,
+    launchCrossProfileInteractSettings: (Activity?) -> Unit,
+    startOther: (CrossProfile, Activity?) -> Unit,
 ) {
     val activity = LocalActivity.current
 
@@ -178,7 +177,7 @@ private fun OtherProfiles(
     padding: PaddingValues,
     crossProfile: CrossProfile?,
     isManagedProfile: Boolean,
-    startOther: (CrossProfile, Activity) -> Unit,
+    startOther: (CrossProfile, Activity?) -> Unit,
 ) {
     val activity = LocalActivity.current
     if (crossProfile != null) {

@@ -115,7 +115,8 @@ class MainViewModel(
     }
     val showMiuiAlert = _showMiuiAlert
 
-    suspend fun updateMiuiAutoStartAppOp(activity: Activity): Boolean {
+    suspend fun updateMiuiAutoStartAppOp(activity: Activity?): Boolean {
+        if(activity == null) return false
         val result = miuiCompat.startPermissionRequest(activity)
         _showMiuiAlert.refresh()
 
@@ -129,7 +130,8 @@ class MainViewModel(
         .resolveActivityCompat(BrowserResolver.httpBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
-    fun launchIntent(activity: Activity, intent: SettingsIntent): Boolean {
+    fun launchIntent(activity: Activity?, intent: SettingsIntent): Boolean {
+        if(activity == null) return false
         return activity.startActivityWithConfirmation(Intent(intent.action))
     }
 

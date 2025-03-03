@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.settings.bottomsheet
 
+import androidx.activity.compose.LocalActivity
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.PaddingValues
@@ -40,7 +41,6 @@ import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.composable.ui.LocalActivity
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
@@ -66,7 +66,7 @@ fun BottomSheetSettingsRoute(
     navigate: (String) -> Unit,
     viewModel: BottomSheetSettingsViewModel = koinViewModel(),
 ) {
-    val context = LocalActivity.current
+    val activity = LocalActivity.current
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange {
         if (!viewModel.usageStatsPermission.check()) {
             viewModel.usageStatsSorting(false)
@@ -102,11 +102,13 @@ fun BottomSheetSettingsRoute(
                     padding = padding,
                     checked = viewModel.usageStatsSorting(),
                     onCheckedChange = {
-                        if (!viewModel.usageStatsPermission.check()) {
-                            viewModel.usageStatsPermission.request(context)
-                            viewModel.wasTogglingUsageStatsSorting = true
-                        } else {
-                            viewModel.usageStatsSorting(it)
+                        if(activity != null) {
+                            if (!viewModel.usageStatsPermission.check()) {
+                                viewModel.usageStatsPermission.request(activity)
+                                viewModel.wasTogglingUsageStatsSorting = true
+                            } else {
+                                viewModel.usageStatsSorting(it)
+                            }
                         }
                     },
                     position = ContentPosition.Trailing,

@@ -366,10 +366,7 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
-    androidTestImplementation(Koin.test)
-    androidTestImplementation(Koin.junit4)
-    androidTestImplementation(Testing.junit4)
-    androidTestImplementation(Testing.robolectric)
+    androidTestImplementation(platform(AndroidX.compose.bom))
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
@@ -378,8 +375,9 @@ dependencies {
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.room.testing)
-//    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.0-beta03")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
     androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
     androidTestImplementation(kotlin("test"))
 

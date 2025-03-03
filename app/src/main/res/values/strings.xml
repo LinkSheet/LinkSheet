@@ -531,6 +531,10 @@
     <string name="resolve_event__idle">Idle</string>
     <string name="settings_profile_switcher__title_no_profile">No profile(s) available</string>
     <string name="settings_profile_switcher__text_no_profile">This feature is only available if a (work-) profile has been set up on your device.</string>
+    <string name="settings_home__title_clipboard_card">Clipboard card</string>
+    <string name="settings_home__text_clipboard_card">Show the current clipboard content on the home page if it is a
+        url
+    </string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="one">%d default host</item>
         <item quantity="other">%d default hosts</item>

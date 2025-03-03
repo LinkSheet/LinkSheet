@@ -27,7 +27,9 @@ object AppPreferences : PreferenceDefinition(
     "amp2html_builtin_cache",
     "follow_redirects_builtin_cache",
     "use_text_share_copy_buttons",
-    "telemetry_identity"
+    "telemetry_identity",
+    "use_dev_bottom_sheet",
+    "dev_bottom_sheet_experiment"
 ) {
     val hideAfterCopying = boolean("hide_after_copying")
     val usageStatsSorting = boolean("usage_stats_sorting")
@@ -110,10 +112,8 @@ object AppPreferences : PreferenceDefinition(
     val firstRun = boolean("first_run", true)
     val showDiscordBanner = boolean("show_discord_banner", true)
 
-    val useDevBottomSheet = boolean("use_dev_bottom_sheet")
     val donateCardDismissed = boolean("donate_card_dismissed")
 
-    val devBottomSheetExperiment = boolean("dev_bottom_sheet_experiment", true)
     val resolveEmbeds = boolean("resolve_embeds")
     val hideBottomSheetChoiceButtons = boolean("hide_bottom_sheet_choice_buttons")
 
@@ -148,6 +148,8 @@ object AppPreferences : PreferenceDefinition(
 
     // TODO: This should be moved to a proper implementation which uses a string set or something similar, but we don't have an API for that (yet)
     val lastVersions = string("last_versions_v0")
+
+    val homeClipboardCard = boolean("home_clipboard_card", true)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

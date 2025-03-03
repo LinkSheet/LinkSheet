@@ -32,6 +32,7 @@ import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.composable.ui.HkGroteskFontFamily
+import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
@@ -64,11 +65,11 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     )
 
     clipboardManager.ObserveClipboard {
-        viewModel.tryUpdateClipboard()
+        viewModel.tryReadClipboard()
     }
 
     LocalWindowInfo.current.OnFocused {
-        viewModel.tryUpdateClipboard()
+        viewModel.tryReadClipboard()
     }
 
 //    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
@@ -136,11 +137,10 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 MiuiCompatCardWrapper(onClick = {
                     coroutineScope.launch {
                         if (!viewModel.updateMiuiAutoStartAppOp(activity)) {
-                            Toast.makeText(
-                                activity,
-                                R.string.settings_main_miui_compat__text_request_failed,
-                                Toast.LENGTH_LONG
-                            ).show()
+                            activity?.showToast(
+                                textId = R.string.settings_main_miui_compat__text_request_failed,
+                                duration = Toast.LENGTH_LONG
+                            )
                         }
                     }
                 })
@@ -152,7 +152,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if(!viewModel.newDefaultsDismissed()) {
+            if (!viewModel.newDefaultsDismissed()) {
                 item(
                     key = R.string.settings_main_experiment_news__title_experiment_state_updated,
                     contentType = ContentType.ClickableAlert

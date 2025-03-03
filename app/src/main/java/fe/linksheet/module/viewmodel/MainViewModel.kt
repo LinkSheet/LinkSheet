@@ -84,6 +84,7 @@ class MainViewModel(
     val telemetryShowInfoDialog = preferenceRepository.asState(AppPreferences.telemetryShowInfoDialog)
 
     val editClipboard = experimentRepository.asState(Experiments.editClipboard)
+    val homeClipboardCard = preferenceRepository.asState(AppPreferences.homeClipboardCard)
 
     private val roleManager by lazy {
         if (AndroidVersion.isAtLeastApi26O()) {
@@ -96,10 +97,15 @@ class MainViewModel(
     private val _clipboardContent = MutableStateFlow<Uri?>(null)
     val clipboardContent = _clipboardContent.asStateFlow()
 
-    fun tryUpdateClipboard() {
+    fun tryReadClipboard() {
+        if (!homeClipboardCard()) {
+            _clipboardContent.tryEmit(null)
+            return
+        }
+
         val clipboardUri = clipboardManager.getFirstText()?.let { tryParseUriString(it) }
         if (clipboardUri != null && _clipboardContent.value != clipboardUri) {
-            _clipboardContent.value = clipboardUri
+            _clipboardContent.tryEmit(clipboardUri)
         }
     }
 
@@ -111,12 +117,13 @@ class MainViewModel(
     }
 
     private val _showMiuiAlert = RefreshableStateFlow(false) {
-        if(miuiCompatProvider.isRequired.value) miuiCompat.showAlert(context) else false
+        if (miuiCompatProvider.isRequired.value) miuiCompat.showAlert(context) else false
     }
+
     val showMiuiAlert = _showMiuiAlert
 
     suspend fun updateMiuiAutoStartAppOp(activity: Activity?): Boolean {
-        if(activity == null) return false
+        if (activity == null) return false
         val result = miuiCompat.startPermissionRequest(activity)
         _showMiuiAlert.refresh()
 
@@ -131,7 +138,7 @@ class MainViewModel(
         ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
     fun launchIntent(activity: Activity?, intent: SettingsIntent): Boolean {
-        if(activity == null) return false
+        if (activity == null) return false
         return activity.startActivityWithConfirmation(Intent(intent.action))
     }
 

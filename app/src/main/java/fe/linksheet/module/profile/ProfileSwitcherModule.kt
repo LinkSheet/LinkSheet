@@ -7,9 +7,12 @@ import org.koin.dsl.module
 
 val ProfileSwitcherModule = module {
     single {
+        CrossProfileAppsCompat(get())
+    }
+    single {
         AndroidProfileSwitcherModule(
             appLabel = getResources().getString(string.app_name),
-            crossProfileApps = getSystemServiceOrThrow(),
+            crossProfileAppsCompat = get(),
             userManager = getSystemServiceOrThrow()
         )
     }

@@ -2,7 +2,6 @@ package fe.linksheet.module.profile
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.CrossProfileApps
 import android.net.Uri
 import android.os.UserHandle
 import android.os.UserHandleHidden
@@ -14,10 +13,9 @@ import fe.linksheet.extension.android.toImageBitmap
 
 internal fun AndroidProfileSwitcherModule(
     appLabel: String,
-    crossProfileApps: CrossProfileApps,
+    crossProfileAppsCompat: CrossProfileAppsCompat,
     userManager: UserManager
 ): ProfileSwitcher {
-    val crossProfileAppsCompat = CrossProfileAppsCompat(crossProfileApps)
     val userManagerCompat = UserManagerCompat(userManager)
 
     return RealProfileSwitcher(

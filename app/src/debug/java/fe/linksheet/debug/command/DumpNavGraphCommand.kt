@@ -3,8 +3,8 @@ package fe.linksheet.debug.command
 import android.content.Context
 import android.content.Intent
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.activity.DebugStatePublisher
-import fe.linksheet.activity.NavGraphDebugState
+import fe.linksheet.activity.util.DebugStatePublisher
+import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.debug.DebugBroadcastReceiver
 import org.koin.core.component.inject
 

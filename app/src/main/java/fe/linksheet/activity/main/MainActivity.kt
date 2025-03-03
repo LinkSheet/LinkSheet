@@ -10,9 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import fe.linksheet.activity.DebugStatePublisher
-import fe.linksheet.activity.NavGraphDebugState
-import fe.linksheet.activity.UiEvent
+import fe.linksheet.activity.util.DebugStatePublisher
+import fe.linksheet.activity.util.NavGraphDebugState
+import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.composable.ui.BoxAppHost

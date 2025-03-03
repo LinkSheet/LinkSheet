@@ -3,8 +3,8 @@ package fe.linksheet.debug.command
 import android.content.Context
 import android.content.Intent
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.activity.UiEvent
-import fe.linksheet.activity.UiEventReceiver
+import fe.linksheet.activity.util.UiEvent
+import fe.linksheet.activity.util.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
 import org.koin.core.component.inject
 

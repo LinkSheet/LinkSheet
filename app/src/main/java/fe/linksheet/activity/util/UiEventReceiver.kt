@@ -1,4 +1,4 @@
-package fe.linksheet.activity
+package fe.linksheet.activity.util
 
 interface UiEventReceiver {
     fun receive(event: UiEvent)

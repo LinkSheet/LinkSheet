@@ -1,4 +1,4 @@
-package fe.linksheet.activity
+package fe.linksheet.activity.util
 
 import androidx.navigation.NavDestination
 import kotlin.reflect.KClass

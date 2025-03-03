@@ -11,8 +11,8 @@ import fe.kotlin.extension.iterable.mapCatching
 import fe.kotlin.extension.iterable.onEachFailure
 import fe.kotlin.extension.iterable.toSuccess
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.activity.UiEvent
-import fe.linksheet.activity.UiEventReceiver
+import fe.linksheet.activity.util.UiEvent
+import fe.linksheet.activity.util.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences

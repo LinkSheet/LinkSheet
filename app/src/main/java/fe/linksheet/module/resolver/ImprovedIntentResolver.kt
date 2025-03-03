@@ -1,13 +1,11 @@
 package fe.linksheet.module.resolver
 
 import android.app.SearchManager
-import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable
-import androidx.core.content.getSystemService
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.embed.resolve.EmbedResolver
@@ -142,7 +140,7 @@ class ImprovedIntentResolver(
         var uri = uriResult.getOrNull()
 
         emitEvent(ResolveEvent.QueryingBrowsers)
-        val browsers = packageInfoService.findBrowsers(null)
+        val browsers = packageInfoService.findHttpBrowsable(null)
 
         // TODO: Refactor properly
         val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()

@@ -64,7 +64,7 @@ class PackageService(
 
     fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
-            ?: packageIntentHandler.findBrowsers(applicationInfo.packageName)
+            ?: packageIntentHandler.findHttpBrowsable(applicationInfo.packageName)
                 ?.takeIf { it.isNotEmpty() }
                 ?.let { VerificationBrowserState }
     }

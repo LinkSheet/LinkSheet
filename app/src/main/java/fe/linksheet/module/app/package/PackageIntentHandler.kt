@@ -24,7 +24,7 @@ internal fun AndroidPackageIntentHandler(
 }
 
 interface PackageIntentHandler {
-    fun findBrowsers(packageName: String?): List<ResolveInfo>?
+    fun findHttpBrowsable(packageName: String?): List<ResolveInfo>?
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
@@ -54,9 +54,7 @@ internal class DefaultPackageIntentHandler(
         return filter { it.activityInfo.exported && it.activityInfo.applicationInfo.enabled }
     }
 
-    override fun findBrowsers(packageName: String?): List<ResolveInfo>? {
-        if (packageName == null) return null
-
+    override fun findHttpBrowsable(packageName: String?): List<ResolveInfo>? {
         val httpIntent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setPackage(packageName)

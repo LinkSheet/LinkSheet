@@ -542,4 +542,6 @@ Seal</string>
     <string name="bottom_sheet__button_manual_redirect">Seguir redirecciones</string>
     <string name="generic__button_text_share">Compartir</string>
     <string name="resolve_event__idle">Sin uso</string>
+    <string name="settings_profile_switcher__text_no_profile">Esta función solo está disponible si se ha configurado un perfil (de trabajo) en tu dispositivo.</string>
+    <string name="settings_profile_switcher__title_no_profile">No hay perfil(es) disponible(s)</string>
 </resources>

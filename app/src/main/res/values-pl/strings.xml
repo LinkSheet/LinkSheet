@@ -551,4 +551,6 @@
     <string name="resolve_event__idle">Bezczynny</string>
     <string name="settings_profile_switcher__title_no_profile">Brak dostępnych profili</string>
     <string name="settings_profile_switcher__text_no_profile">Funkcja ta jest dostępna tylko wtedy, gdy na Twoim urządzeniu skonfigurowano (służbowy) profil.</string>
+    <string name="settings_home__title_clipboard_card">Karta schowka</string>
+    <string name="settings_home__text_clipboard_card">Pokaż aktualną zawartość schowka na stronie głównej, jeśli jest to adres URL</string>
 </resources>

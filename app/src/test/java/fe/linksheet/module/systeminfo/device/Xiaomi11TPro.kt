@@ -1,4 +1,4 @@
-package fe.linksheet.systeminfo.device
+package fe.linksheet.module.systeminfo.device
 
 object Xiaomi11TPro_A13 : Device(
     codename = "cas",

@@ -1,4 +1,4 @@
-package fe.linksheet.systeminfo.device
+package fe.linksheet.module.systeminfo.device
 
 object XiaomiRedmi2a : Device(
     buildProperties = parseTestBuildProperties(

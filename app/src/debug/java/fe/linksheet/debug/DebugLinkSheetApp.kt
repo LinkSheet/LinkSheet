@@ -10,8 +10,8 @@ import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.samsung.RealSamsungIntentCompatProvider
-import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompatProvider
+import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
+import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -28,7 +28,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
     override fun provideCompatProvider(): Module {
         return module {
             single<MiuiCompatProvider> { DebugMiuiCompatProvider }
-            single<SamsungIntentCompatProvider> { RealSamsungIntentCompatProvider(get()) }
+            single<OneUiCompatProvider> { RealOneUiCompatProvider(get()) }
         }
     }
 

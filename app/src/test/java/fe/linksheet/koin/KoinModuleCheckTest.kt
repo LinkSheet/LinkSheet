@@ -19,7 +19,7 @@ import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompat
+import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.LoggerDelegate
@@ -125,7 +125,7 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<VerifiedLinkHandlersViewModel>(
             ShizukuHandler::class,
             PackageService::class,
-            SamsungIntentCompat::class
+            OneUiCompat::class
         ),
         definition<PreferredAppSettingsViewModel>(PackageService::class),
         definition<PreferredBrowserViewModel>(BrowserResolver::class),

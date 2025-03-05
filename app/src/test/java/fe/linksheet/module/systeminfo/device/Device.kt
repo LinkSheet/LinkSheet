@@ -1,4 +1,4 @@
-package fe.linksheet.systeminfo.device
+package fe.linksheet.module.systeminfo.device
 
 import fe.linksheet.module.systeminfo.SystemProperties
 

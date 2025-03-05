@@ -23,7 +23,7 @@ import fe.linksheet.module.app.DomainVerificationAppInfo
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.devicecompat.samsung.SamsungIntentCompat
+import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
@@ -40,7 +40,7 @@ class VerifiedLinkHandlersViewModel(
     preferenceRepository: AppPreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val packageInfoService: PackageService,
-    private val intentCompat: SamsungIntentCompat
+    private val intentCompat: OneUiCompat
 ) : BaseViewModel(preferenceRepository) {
 
     val lastEmitted = MutableStateFlow(0L)

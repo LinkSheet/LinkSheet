@@ -1,4 +1,4 @@
-package fe.linksheet.systeminfo.device
+package fe.linksheet.module.systeminfo.device
 
 object XiaomiRedmiNote7Pro_DroidxA14 : Device(
     buildProperties = parseTestBuildProperties(

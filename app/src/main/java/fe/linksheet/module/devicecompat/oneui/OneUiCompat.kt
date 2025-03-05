@@ -1,4 +1,4 @@
-package fe.linksheet.module.devicecompat.samsung
+package fe.linksheet.module.devicecompat.oneui
 
 import android.content.Context
 import android.content.Intent
@@ -10,33 +10,44 @@ import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 
-interface SamsungIntentCompatProvider {
+interface OneUiCompatProvider {
+    val isSamsungDevice: Boolean
+    fun readOneUiVersion(): Int?
+
     val isRequired: ResettableLazy<Boolean>
 
-    fun provideCompat(context: Context): SamsungIntentCompat
+    fun provideCompat(context: Context): OneUiCompat
 }
 
-class RealSamsungIntentCompatProvider(
+class RealOneUiCompatProvider(
     val infoService: SystemInfoService,
-) : SamsungIntentCompatProvider {
+) : OneUiCompatProvider {
+
+    override val isSamsungDevice: Boolean = infoService.build.manufacturer.contains("samsung", ignoreCase = true)
+
+    override fun readOneUiVersion(): Int? {
+        val result = runCatching { infoService.properties.get("ro.build.version.oneui") }
+        return result.map { it?.toIntOrNull() }.getOrNull()
+    }
 
     override val isRequired = resettableLazy {
-        with(infoService.build) {
-            manufacturer.contains("samsung", ignoreCase = true) && sdk == Build.VERSION_CODES.S
-        }
+        isSamsungDevice
+                && !infoService.isCustomRom
+                && infoService.build.sdk == Build.VERSION_CODES.S
+                && readOneUiVersion() != null
     }
 
-    override fun provideCompat(context: Context): SamsungIntentCompat = when {
-        !isRequired.value -> DefaultSamsungIntentCompat
-        else -> RealSamsungIntentCompat
+    override fun provideCompat(context: Context): OneUiCompat = when {
+        !isRequired.value -> DefaultOneUiIntentCompat
+        else -> RealOneUiIntentCompat
     }
 }
 
-interface SamsungIntentCompat {
+interface OneUiCompat {
     fun createAppOpenByDefaultSettingsIntent(packageName: String): Intent
 }
 
-object DefaultSamsungIntentCompat : SamsungIntentCompat {
+object DefaultOneUiIntentCompat : OneUiCompat {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun createAppOpenByDefaultSettingsIntent(packageName: String): Intent {
@@ -47,7 +58,7 @@ object DefaultSamsungIntentCompat : SamsungIntentCompat {
     }
 }
 
-object RealSamsungIntentCompat : SamsungIntentCompat {
+object RealOneUiIntentCompat : OneUiCompat {
     // Intent is broken on Samsung A12 (https://stackoverflow.com/a/72365164)
     private val intent = Intent("android.settings.MANAGE_DOMAIN_URLS")
 

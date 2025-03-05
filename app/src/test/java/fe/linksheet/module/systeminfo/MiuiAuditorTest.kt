@@ -1,14 +1,19 @@
-package fe.linksheet.systeminfo
+package fe.linksheet.module.systeminfo
 
 import android.os.Build
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.linksheet.RobolectricTest
-import fe.linksheet.systeminfo.device.*
 import fe.linksheet.module.devicecompat.miui.MiuiAuditor
-import fe.linksheet.module.systeminfo.DeviceInfo
-import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.module.systeminfo.device.Device
+import fe.linksheet.module.systeminfo.device.Xiaomi11TPro_A13
+import fe.linksheet.module.systeminfo.device.XiaomiMi5C
+import fe.linksheet.module.systeminfo.device.XiaomiRedmi2a
+import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A14
+import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A15
+import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote3
+import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote4
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config

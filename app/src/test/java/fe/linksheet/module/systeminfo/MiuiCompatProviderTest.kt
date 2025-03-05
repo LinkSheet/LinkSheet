@@ -1,4 +1,4 @@
-package fe.linksheet.systeminfo
+package fe.linksheet.module.systeminfo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
@@ -6,8 +6,11 @@ import assertk.assertions.isFalse
 import assertk.assertions.isTrue
 import fe.linksheet.UnitTest
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
-import fe.linksheet.module.systeminfo.SystemInfoService
-import fe.linksheet.systeminfo.device.*
+import fe.linksheet.module.systeminfo.device.Device
+import fe.linksheet.module.systeminfo.device.XiaomiMi5C
+import fe.linksheet.module.systeminfo.device.XiaomiRedmi2a
+import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A14
+import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote7Pro_DroidxA14
 import org.junit.runner.RunWith
 import kotlin.test.Test
 

@@ -18,9 +18,11 @@ class ExperimentsViewModel(
 ) : SavedStateViewModel<ExperimentSettingsRouteArg>(savedStateHandle, preferenceRepository) {
     val visibleExperiments = Experiments.experiments.filter { isVisible(it) }
 
-    val stateMap = mutableMapOf<String, StatePreference<Boolean>>().apply {
-        for (experiment in visibleExperiments) {
-            putAll(experiment.asState(experimentRepository))
+    val stateMap by lazy {
+        mutableMapOf<String, StatePreference<Boolean>>().apply {
+            for (experiment in visibleExperiments) {
+                putAll(experiment.asState(experimentRepository))
+            }
         }
     }
 

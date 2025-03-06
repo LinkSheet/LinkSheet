@@ -225,17 +225,18 @@ android {
 dependencies {
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
+
 //    implementation(project(":components"))
+//  dd
 //    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
     implementation(project(":bottom-sheet-new"))
     implementation(project(":scaffold"))
 
-    implementation(platform(Square.okHttp3.bom.withVersion("5.0.0-alpha.14")))
-    //noinspection UseTomlInstead
+//    implementation(platform(Square.okHttp3.bom))
     implementation(Square.okHttp3.android)
-    //noinspection UseTomlInstead
     implementation(Square.okHttp3.coroutines)
+//    implementation(Square.okHttp3.mockWebServer3)
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
     implementation(platform(AndroidX.compose.bom))
@@ -276,8 +277,11 @@ dependencies {
     implementation(Koin.compose)
     implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
-    implementation(COIL)
-    implementation(COIL.compose)
+    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-core:3.1.0")
+    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
     implementation("io.coil-kt.coil3:coil-network-ktor3:_")
 
     implementation("com.github.seancfoley:ipaddress:_")
@@ -345,14 +349,13 @@ dependencies {
     implementation("app.cash.zipline:zipline-loader-android:_")
 
     implementation("me.saket.unfurl:unfurl:_")
-    implementation("me.saket.unfurl:unfurl-social:_")
 //    implementation(libs.unfurl.social)
 
-    "proImplementation"(platform("io.github.jan-tennert.supabase:bom:_"))
-    "proImplementation"("io.github.jan-tennert.supabase:storage-kt:_")
-    "proImplementation"("io.github.jan-tennert.supabase:compose-auth-ui:_")
-    "proImplementation"("io.github.jan-tennert.supabase:gotrue-kt:_")
-    "proImplementation"(Ktor.client.android)
+//    "proImplementation"(platform("io.github.jan-tennert.supabase:bom:_"))
+//    "proImplementation"("io.github.jan-tennert.supabase:storage-kt:_")
+//    "proImplementation"("io.github.jan-tennert.supabase:compose-auth-ui:_")
+//    "proImplementation"("io.github.jan-tennert.supabase:gotrue-kt:_")
+//    "proImplementation"(Ktor.client.android)
 
     implementation("org.jsoup:jsoup:_")
 
@@ -376,8 +379,8 @@ dependencies {
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.room.testing)
     androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.0-beta03")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(AndroidX.test.uiAutomator)
     androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
     androidTestImplementation(kotlin("test"))
 

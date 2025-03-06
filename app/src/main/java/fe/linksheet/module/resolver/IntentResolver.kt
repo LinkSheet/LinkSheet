@@ -9,4 +9,6 @@ interface IntentResolver {
     val interactions: StateFlow<ResolverInteraction>
 
     suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult
+
+    suspend fun warmup()
 }

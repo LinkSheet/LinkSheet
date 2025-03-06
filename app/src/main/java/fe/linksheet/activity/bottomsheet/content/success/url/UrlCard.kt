@@ -1,5 +1,6 @@
 package fe.linksheet.activity.bottomsheet.content.success.url
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
@@ -22,10 +23,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImagePainter
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.SubcomposeAsyncImageContent
-import coil.request.ImageRequest
+import coil3.ImageLoader
+import coil3.SingletonImageLoader
+import coil3.compose.AsyncImagePainter
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.compose.SubcomposeAsyncImageContent
 import fe.android.compose.extension.thenIf
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
@@ -39,6 +42,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 fun UrlCard(
     uri: String,
     unfurlResult: UnfurlResult?,
+    imageLoader: ImageLoader?,
     onDoubleClick: (() -> Unit)? = null,
 ) {
     val data = when (unfurlResult) {
@@ -46,9 +50,12 @@ fun UrlCard(
         else -> UrlCardData(unfurlResult.title, unfurlResult.favicon, unfurlResult.thumbnail)
     }
 
+    Log.d("IMageLoader2", "$imageLoader")
+
     UrlCard(
         uri = uri,
         data = data,
+        imageLoader = imageLoader,
         onDoubleClick = onDoubleClick
     )
 }
@@ -64,11 +71,18 @@ data class UrlCardData(
 fun UrlCard(
     uri: String,
     data: UrlCardData? = null,
+    imageLoader: ImageLoader? = null,
     onDoubleClick: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     var showFullUrl by remember { mutableStateOf(false) }
 //    var expanded by remember { mutableStateOf(true) }
+
+    val platform = LocalPlatformContext.current
+    val imageLoader = remember {
+        Log.d("IMageLoader", "$imageLoader")
+        imageLoader ?: SingletonImageLoader.get(platform)
+    }
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
@@ -109,12 +123,13 @@ fun UrlCard(
                         .fillMaxWidth()
                         .heightIn(max = 200.dp)
                         .testTag("thumbnail"),
-                    model = ImageRequest.Builder(context).data(data.thumbnail).build(),
+                    model = data.thumbnail.toString(),
+                    imageLoader = imageLoader,
                     alignment = Alignment.Center,
                     contentScale = ContentScale.FillWidth,
                     contentDescription = ""
                 ) {
-                    val state = painter.state
+                    val state by painter.state.collectAsState()
                     if (state is AsyncImagePainter.State.Success) {
                         SubcomposeAsyncImageContent(modifier = Modifier.clip(CardDefaults.shape))
                     } else if (state is AsyncImagePainter.State.Empty || state is AsyncImagePainter.State.Loading) {
@@ -149,10 +164,16 @@ fun UrlCard(
                         modifier = Modifier
                             .size(16.dp)
                             .testTag("favicon"),
-                        model = ImageRequest.Builder(context).data(data.favicon).build(),
+                        // favicon has type Any -> unfurler passed HttpUrl -> call toString to ensure coil can handle it
+                        model = data.favicon.toString(),
+                        imageLoader = imageLoader,
                         contentDescription = ""
                     ) {
-                        val state = painter.state
+                        val state by painter.state.collectAsState()
+                        LaunchedEffect(key1 = state) {
+                            Log.d("UrlCard", "$state")
+                        }
+
                         if (state is AsyncImagePainter.State.Success) {
                             SubcomposeAsyncImageContent(
                                 modifier = Modifier.size(16.dp),
@@ -190,8 +211,10 @@ private class UrlCardPreviewProvider : PreviewParameterProvider<UrlCardData> {
     override val values: Sequence<UrlCardData> = sequenceOf(
         UrlCardData(
             title = "",
-            favicon =  Base64.decode("""AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAD/EAAA/0AAAP9AAAD/cAAA/4AAAP+AAAD/gAAA/4AAAP+AAAD/QAAA/0AAAP8Q////AP///wD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8AAAD/MAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/MAAA/1AAAP//AAD//wAA//8AAP//AAD//wAA//8QEP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//1BQ//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/gAAA//8AAP//AAD//wAA//8AAP//AAD/////////////wMD//yAg//8AAP//AAD//wAA//8AAP//AAD/gAAA/4AAAP//AAD//wAA//8AAP//AAD//wAA/////////////7Cw//8gIP//AAD//wAA//8AAP//AAD//wAA/4AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//0BA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/UAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/YAAA/zAAAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/zD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8A////AP///wAAAP8QAAD/QAAA/0AAAP+AAAD/gAAA/4AAAP+AAAD/gAAA/4AAAP9AAAD/QAAA/xD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AADAAwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAD//wAA//8AAA=="""),
-            thumbnail =  Base64.decode("""""")
+            favicon = Base64.decode(
+                """AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAD/EAAA/0AAAP9AAAD/cAAA/4AAAP+AAAD/gAAA/4AAAP+AAAD/QAAA/0AAAP8Q////AP///wD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8AAAD/MAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/MAAA/1AAAP//AAD//wAA//8AAP//AAD//wAA//8QEP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//1BQ//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/gAAA//8AAP//AAD//wAA//8AAP//AAD/////////////wMD//yAg//8AAP//AAD//wAA//8AAP//AAD/gAAA/4AAAP//AAD//wAA//8AAP//AAD//wAA/////////////7Cw//8gIP//AAD//wAA//8AAP//AAD//wAA/4AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//0BA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/UAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/YAAA/zAAAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/zD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8A////AP///wAAAP8QAAD/QAAA/0AAAP+AAAD/gAAA/4AAAP+AAAD/gAAA/4AAAP9AAAD/QAAA/xD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AADAAwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAD//wAA//8AAA=="""
+            ),
+            thumbnail = Base64.decode("""""")
         )
     )
 }

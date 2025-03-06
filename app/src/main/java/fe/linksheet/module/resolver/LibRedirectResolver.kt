@@ -12,6 +12,7 @@ import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 
 sealed interface LibRedirectResult {
@@ -26,12 +27,18 @@ class LibRedirectResolver(
     private val logger by injectLogger<LibRedirectResolver>()
 
     companion object {
-        private val libRedirectServices = LibRedirectLoader.loadBuiltInServices()
-        private val libRedirectInstances = LibRedirectLoader.loadBuiltInInstances()
+        private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }
+        private val libRedirectInstances by lazy { LibRedirectLoader.loadBuiltInInstances() }
 
         private val libRedirectZipline by lazy {
             LibRedirectResource.getLibRedirect().use { it.readBytes() }
         }
+    }
+
+    suspend fun warmup(): Unit = withContext(Dispatchers.IO) {
+        libRedirectServices
+        libRedirectInstances
+        libRedirectZipline
     }
 
     suspend fun resolve(uri: Uri, jsEngine: Boolean): LibRedirectResult {

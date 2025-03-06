@@ -24,11 +24,10 @@ import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
+import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.http.okHttpModule
-import fe.linksheet.module.http.requestModule
+import fe.linksheet.module.http.HttpModule
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
@@ -41,12 +40,10 @@ import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
 import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
-import fe.linksheet.module.resolver.urlresolver.cachedRequestModule
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
-import fe.linksheet.module.unfurler.unfurlerModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
@@ -118,16 +115,13 @@ open class LinkSheetApp : Application(), DependencyProvider {
             CompatModule,
             databaseModule,
             daoModule,
-            cachedRequestModule,
+            HttpModule,
             redirectResolveRequestModule,
             amp2HtmlResolveRequestModule,
             allRemoteResolveRequest,
             resolverModule,
             repositoryModule,
             viewModelModule,
-            requestModule,
-            okHttpModule,
-            unfurlerModule,
             downloaderModule,
             provideAnalyticsClient(),
             analyticsServiceModule,

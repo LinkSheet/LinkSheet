@@ -51,6 +51,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
+import kotlin.lazy
 
 @Stable
 class ImprovedIntentResolver(
@@ -132,7 +133,7 @@ class ImprovedIntentResolver(
 
         var uriResult = IntentParser.getUriFromIntent(intent)
 
-        if(uriResult.isFailure()) {
+        if (uriResult.isFailure()) {
             logger.error("Failed to parse intent ${intent.action}")
             return@scope IntentResolveResult.IntentParseFailed(uriResult.exception as UriException)
         }
@@ -149,11 +150,15 @@ class ImprovedIntentResolver(
         val useClearUrls = settings.useClearUrls()
         val useFastForwardRules = settings.useFastForwardRules()
 
-        val uriModifiers = resolveEmbeds || useClearUrls || useFastForwardRules
+        val shouldRunUriModifiers = resolveEmbeds || useClearUrls || useFastForwardRules
+        if (shouldRunUriModifiers) {
+            // TODO: We do an "eager" cache warmup in the activity anyway, do we still need this? Should we add a toggle for eager cache warmup?
+            warmup()
+        }
 
-        emitEventIf(uriModifiers, ResolveEvent.ApplyingLinkModifiers)
+        emitEventIf(shouldRunUriModifiers, ResolveEvent.ApplyingLinkModifiers)
 
-        uri = runUriModifiers(
+        uri = this@ImprovedIntentResolver.runUriModifiers(
             uri = uri,
             resolveEmbeds = resolveEmbeds,
             clearUrl = useClearUrls,
@@ -211,9 +216,9 @@ class ImprovedIntentResolver(
             return@scope fail("Failed to run resolvers", IntentResolveResult.ResolveUrlFailed)
         }
 
-        emitEventIf(uriModifiers, ResolveEvent.ApplyingLinkModifiers)
+        emitEventIf(shouldRunUriModifiers, ResolveEvent.ApplyingLinkModifiers)
 
-        uri = runUriModifiers(
+        uri = this@ImprovedIntentResolver.runUriModifiers(
             uri = resolvedUri,
             resolveEmbeds = resolveEmbeds,
             clearUrl = useClearUrls,
@@ -447,6 +452,10 @@ class ImprovedIntentResolver(
         return@withContext resolver.resolve(uri, jsEngine)
     }
 
+    fun <T> CoroutineScope.suspendLazy(initializer: suspend CoroutineScope.() -> T): Deferred<T> {
+        return async(start = CoroutineStart.LAZY, block = initializer)
+    }
+
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
         private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
@@ -455,8 +464,14 @@ class ImprovedIntentResolver(
         const val IntentKeyResolveRedirects = "resolve_redirects"
     }
 
-    private val clearUrls = clearUrlProviders?.let { ClearUrls(it) }
-    private val embedResolver = embedResolverConfig?.let { EmbedResolver(it) }
+    private val clearUrls by lazy { clearUrlProviders?.let { ClearUrls(it) } }
+    private val embedResolver by lazy { embedResolverConfig?.let { EmbedResolver(it) } }
+
+    override suspend fun warmup(): Unit = withContext(Dispatchers.IO) {
+        clearUrlProviders
+        embedResolverConfig
+        libRedirectResolver.warmup()
+    }
 
     private fun runUriModifiers(
         uri: Uri?,

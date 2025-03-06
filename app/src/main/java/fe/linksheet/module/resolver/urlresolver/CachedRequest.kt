@@ -1,16 +1,10 @@
 package fe.linksheet.module.resolver.urlresolver
 
 import fe.httpkt.Request
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.HashProcessor
-import org.koin.dsl.module
 import java.io.IOException
 import java.net.HttpURLConnection
-
-val cachedRequestModule = module {
-    single { CachedRequest(get(), createLogger<CachedRequest>()) }
-}
 
 interface CachedResponse {}
 

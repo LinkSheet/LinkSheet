@@ -1,14 +1,16 @@
 package fe.linksheet.module.analytics.client
 
 import android.os.Build
-import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.analytics.*
+import fe.linksheet.module.analytics.AnalyticsClient
+import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.TelemetryIdentityData
+import fe.linksheet.module.http.TaggedRequest
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -88,7 +90,7 @@ internal class AptabaseAnalyticsClient(
         val props: Map<String, Any>,
     )
 
-    private val request = Request {
+    private val request = TaggedRequest {
         apiKey?.let { addHeaderImpl("App-Key", apiKey) }
     }
 

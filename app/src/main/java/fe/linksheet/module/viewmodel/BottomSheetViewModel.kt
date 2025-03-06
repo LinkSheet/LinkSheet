@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
@@ -61,6 +62,7 @@ class BottomSheetViewModel(
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     val profileSwitcher: ProfileSwitcher,
     val intentResolver: IntentResolver,
+    val imageLoader: ImageLoader,
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
@@ -108,6 +110,10 @@ class BottomSheetViewModel(
 
     private val _resolveResultFlow = MutableStateFlow<IntentResolveResult>(IntentResolveResult.Pending)
     val resolveResultFlow = _resolveResultFlow.asStateFlow()
+
+    fun warmupAsync() = viewModelScope.launch {
+        intentResolver.warmup()
+    }
 
     fun resolveAsync(intent: SafeIntent, uri: Uri?) = viewModelScope.launch(Dispatchers.IO) {
         val resolveResult = intentResolver.resolve(intent, uri)

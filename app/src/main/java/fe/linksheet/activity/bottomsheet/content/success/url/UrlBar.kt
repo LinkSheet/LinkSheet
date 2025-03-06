@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import coil3.ImageLoader
 import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
 import fe.android.compose.icon.IconPainter
 import fe.android.compose.icon.iconPainter
@@ -50,6 +51,7 @@ import me.saket.unfurl.UnfurlResult
 fun UrlBarWrapper(
     result: IntentResolveResult.Default,
     profileSwitcher: ProfileSwitcher,
+    imageLoader: ImageLoader?,
     enableIgnoreLibRedirectButton: Boolean,
     enableSwitchProfile: Boolean,
     enableUrlCopiedToast: Boolean,
@@ -70,6 +72,7 @@ fun UrlBarWrapper(
 
     UrlBar(
         uri = uriString,
+        imageLoader = imageLoader,
         profiles = if (enableSwitchProfile) profileSwitcher.getProfiles() else null,
         switchProfile = { crossProfile, url ->
             controller.hideAndFinish()
@@ -150,6 +153,7 @@ fun UrlBarWrapper(
 @Composable
 fun UrlBar(
     uri: String,
+    imageLoader: ImageLoader?,
     unfurlResult: UnfurlResult?,
     profiles: List<CrossProfile>?,
     downloadable: DownloadCheckResult,
@@ -167,7 +171,11 @@ fun UrlBar(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        UrlCard(uri = uri, unfurlResult = unfurlResult, onDoubleClick = onDoubleClick)
+        UrlCard(
+            uri = uri,
+            imageLoader = imageLoader,
+            unfurlResult = unfurlResult, onDoubleClick = onDoubleClick
+        )
 
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -274,6 +282,7 @@ private fun UrlBarPreview() {
     UrlBar(
         uri = "https://developer.android.com/jetpack/compose/text/configure-layout",
         unfurlResult = null,
+        imageLoader = null,
         downloadable = DownloadCheckResult.NonDownloadable,
         libRedirected = null,
         copyUri = { /*TODO*/ },

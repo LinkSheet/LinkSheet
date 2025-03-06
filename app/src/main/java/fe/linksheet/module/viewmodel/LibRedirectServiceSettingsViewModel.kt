@@ -44,19 +44,23 @@ class LibRedirectServiceSettingsViewModel(
         }
     }
 
-    private val frontends = builtInServices[serviceKey]!!.frontends.mapNotNull {
-        val inst = builtInFrontendInstances[it.key]
-        if (inst.isNullOrEmpty()) return@mapNotNull null
+    private val frontends by lazy {
+        builtInServices[serviceKey]!!.frontends.mapNotNull {
+            val inst = builtInFrontendInstances[it.key]
+            if (inst.isNullOrEmpty()) return@mapNotNull null
 
-        it.key to BuiltInFrontendHolder(it.key, it.name, inst, inst.first())
-    }.toMap()
+            it.key to BuiltInFrontendHolder(it.key, it.name, inst, inst.first())
+        }.toMap()
+    }
 
-    val service: LibRedirectService = builtInServices[serviceKey]!!
-    private val fallback: LibRedirectDefault = LibRedirectDefault(
-        serviceKey,
-        service.defaultFrontend.key,
-        frontends[service.defaultFrontend.key]!!.defaultInstance
-    )
+    val service: LibRedirectService by lazy { builtInServices[serviceKey]!! }
+    private val fallback: LibRedirectDefault by lazy {
+        LibRedirectDefault(
+            serviceKey,
+            service.defaultFrontend.key,
+            frontends[service.defaultFrontend.key]!!.defaultInstance
+        )
+    }
 
     fun getFrontendByKey(key: String): BuiltInFrontendHolder? {
         return frontends[key]

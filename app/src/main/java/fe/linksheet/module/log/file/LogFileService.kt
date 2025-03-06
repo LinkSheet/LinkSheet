@@ -9,6 +9,8 @@ import fe.linksheet.module.log.file.entry.LogEntry
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.localizedString
 import fe.std.javatime.time.unixMillis
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.time.LocalDateTime
 
@@ -42,14 +44,16 @@ abstract class LogSession(
     val info: String,
 )
 
-internal class LogFileService(private val logDir: File, override val startupTime: LocalDateTime) : LogPersistService {
+internal class LogFileService(logDir: Lazy<File>, override val startupTime: LocalDateTime) : LogPersistService {
+    private val logDir by logDir
+
     companion object {
         private const val LOG_DIR = "logs"
         const val FILE_EXT = "log"
         const val FILE_EXT_V2 = "json"
 
-        fun getLogDir(context: Context): File {
-            return context.getDir(LOG_DIR, Context.MODE_PRIVATE)
+        fun getLogDir(context: Context): Lazy<File> {
+            return lazy { context.getDir(LOG_DIR, Context.MODE_PRIVATE) }
         }
     }
 
@@ -67,7 +71,6 @@ internal class LogFileService(private val logDir: File, override val startupTime
     }
 
     val logEntries = mutableListOf<LogEntry>()
-
 
     fun readLogFile(name: String): List<LogEntry> {
         val logFile = File(logDir, name)
@@ -108,12 +111,12 @@ internal class LogFileService(private val logDir: File, override val startupTime
         return session.file.delete()
     }
 
-    override suspend fun onAppInitialized(owner: LifecycleOwner) {
+    override suspend fun onAppInitialized(owner: LifecycleOwner) = withContext(Dispatchers.IO) {
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
         getLogSessions().filter { it.millis < startupMillis }.forEach { delete(it) }
     }
 
-    override suspend fun onStop() {
+    override suspend fun onStop() = withContext(Dispatchers.IO) {
         val immutable = logEntries.toList()
         if (immutable.isNotEmpty()) {
             LogFile.new(logDir).file.toJson(immutable)

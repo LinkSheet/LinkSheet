@@ -118,6 +118,10 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 }
         }
 
+        lifecycleScope.launch {
+            viewModel.warmupAsync()
+        }
+
         setInitialIntent(intent)
         setContent(edgeToEdge = true) {
             AppTheme { Wrapper() }
@@ -214,6 +218,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                         BottomSheetApps(
                             modifier = modifier,
                             result = resolveResult as IntentResolveResult.Default,
+                            imageLoader = viewModel.imageLoader,
                             enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
                             enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
                             profileSwitcher = viewModel.profileSwitcher,

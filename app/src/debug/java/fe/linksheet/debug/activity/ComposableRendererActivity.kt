@@ -161,7 +161,8 @@ class ComposableRendererActivity : ComponentActivity() {
                         title = "What Happens When China Invades America?",
                         favicon = "https://www.youtube.com/s/desktop/accca349/img/favicon.ico".toHttpUrlOrNull(),
                         thumbnail = "https://i.ytimg.com/vi/DEhphcTaVxM/maxresdefault.jpg".toHttpUrlOrNull(),
-                    )
+                    ),
+                    imageLoader = null,
                 )
             }
 
@@ -184,7 +185,8 @@ class ComposableRendererActivity : ComponentActivity() {
                         title = "Read You | F-Droid - Free and Open Source Android App Repository",
                         favicon = "https://f-droid.org/assets/apple-touch-icon_ypJwtCrcixeH_qV6LdcMYk1anFIR9o-_ufR__1wNdJY=.png".toHttpUrlOrNull(),
                         thumbnail = "https://f-droid.org/repo/me.ash.reader/en-US/icon_Bq9nQb_UzmI1DBSluSA8Q-d5tFo9dQWmyIyt69onHfo=.png".toHttpUrlOrNull(),
-                    )
+                    ),
+                    imageLoader = null,
                 )
             }
         }

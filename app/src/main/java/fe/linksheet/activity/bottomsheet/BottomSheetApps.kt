@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import app.linksheet.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.util.*
+import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
@@ -53,6 +54,7 @@ typealias Launch2 = (index: Int, info: ActivityAppInfo, type: ClickType, modifie
 fun BottomSheetApps(
     modifier: Modifier = Modifier,
     result: IntentResolveResult.Default,
+    imageLoader: ImageLoader?,
     enableIgnoreLibRedirectButton: Boolean,
     enableSwitchProfile: Boolean,
     profileSwitcher: ProfileSwitcher,
@@ -65,8 +67,8 @@ fun BottomSheetApps(
     appListSelectedIdx: Int,
     launchApp: LaunchApp,
     launch2: Launch2,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
-    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
+    isPrivateBrowser: (Boolean, ActivityAppInfo) -> KnownBrowser?,
+    showToast: (Int, Int, Boolean) -> Unit,
     copyUrl: (String, String) -> Unit,
     startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
     controller: BottomSheetStateController,
@@ -89,6 +91,7 @@ fun BottomSheetApps(
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 UrlBarWrapper(
+                    imageLoader = imageLoader,
                     profileSwitcher = profileSwitcher,
                     result = result,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
@@ -367,7 +370,8 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
             showPackage = false,
             previewUrl = true,
             hideBottomSheetChoiceButtons = state.hideBottomSheetChoiceButtons,
-            urlCardDoubleTap = false
+            urlCardDoubleTap = false,
+            imageLoader = null
         )
     }
 }

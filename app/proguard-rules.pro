@@ -108,6 +108,7 @@
 }
 
 -dontwarn fe.uribuilder.ParsedUri
+-dontwarn okhttp3.internal.Util
 
 -printmapping mapping.txt
 -printusage usage.txt

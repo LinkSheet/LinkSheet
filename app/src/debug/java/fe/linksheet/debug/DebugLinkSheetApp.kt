@@ -17,7 +17,21 @@ import org.koin.dsl.module
 
 class DebugLinkSheetApp : LinkSheetApp() {
     override fun onCreate() {
-        StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder().detectAll().build())
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+//                .penaltyDeath()
+                .build()
+        )
+
+        StrictMode.setVmPolicy(
+            StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+//                .penaltyDeath()
+                .build()
+        )
         super.onCreate()
     }
 

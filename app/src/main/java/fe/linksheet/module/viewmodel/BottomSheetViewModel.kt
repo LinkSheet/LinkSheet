@@ -117,6 +117,7 @@ class BottomSheetViewModel(
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             this.data = Uri.parse("package:${info.packageName}")
+            this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         })
     }
 
@@ -247,6 +248,8 @@ class BottomSheetViewModel(
         if (persist && privateBrowsingBrowser == null && intent.data != null) {
             persistSelectedIntent(viewIntent, always)
         }
+
+        viewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         return viewIntent
     }

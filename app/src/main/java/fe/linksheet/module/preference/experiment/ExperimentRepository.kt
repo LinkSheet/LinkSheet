@@ -1,12 +1,9 @@
 package fe.linksheet.module.preference.experiment
 
 import android.content.Context
-import fe.android.preference.helper.compose.StatePreferenceRepository
+import fe.composekit.preference.FlowPreferenceRepository
 
-class ExperimentRepository(val context: Context) : StatePreferenceRepository(context, "experiments") {
-    init {
-        Experiments.runMigrations(this)
-    }
+class ExperimentRepository(val context: Context) : FlowPreferenceRepository(context, "experiments") {
 
     fun hasExperiment(keys: Set<String>): Boolean {
         for (key in keys) {

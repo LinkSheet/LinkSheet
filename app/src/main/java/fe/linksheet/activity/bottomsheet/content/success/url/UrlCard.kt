@@ -50,8 +50,6 @@ fun UrlCard(
         else -> UrlCardData(unfurlResult.title, unfurlResult.favicon, unfurlResult.thumbnail)
     }
 
-    Log.d("IMageLoader2", "$imageLoader")
-
     UrlCard(
         uri = uri,
         data = data,
@@ -80,7 +78,6 @@ fun UrlCard(
 
     val platform = LocalPlatformContext.current
     val imageLoader = remember {
-        Log.d("IMageLoader", "$imageLoader")
         imageLoader ?: SingletonImageLoader.get(platform)
     }
 

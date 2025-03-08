@@ -2,6 +2,7 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
@@ -17,11 +18,11 @@ class PrivacySettingsViewModel(
     experimentsRepository: ExperimentRepository,
     private val analyticsService: BaseAnalyticsService,
 ) : BaseViewModel(preferenceRepository) {
-    val showAsReferrer = preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
-    val enableAnalytics = experimentsRepository.asState(Experiments.enableAnalytics)
+    val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
+    val enableAnalytics = experimentsRepository.asViewModelState(Experiments.enableAnalytics)
 
     @OptIn(SensitivePreference::class)
-    val telemetryLevel = preferenceRepository.asState(AppPreferences.telemetryLevel)
+    val telemetryLevel = preferenceRepository.asViewModelState(AppPreferences.telemetryLevel)
 
     fun updateTelemetryLevel(level: TelemetryLevel) {
         telemetryLevel(level)

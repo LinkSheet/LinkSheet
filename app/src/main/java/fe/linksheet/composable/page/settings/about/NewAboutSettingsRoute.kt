@@ -172,12 +172,12 @@ fun NewAboutSettingsRoute(
                         interaction.copy(viewModel.getBuildInfo(), FeedbackType.LongPress)
                     }
 
-                    if (devClicks == 7 && !viewModel.devModeEnabled()) {
-                        viewModel.devModeEnabled(true)
-                        coroutineScope.launch {
-                            context.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
-                        }
-                    }
+//                    if (devClicks == 7 && !viewModel.devModeEnabled()) {
+//                        viewModel.devModeEnabled(true)
+//                        coroutineScope.launch {
+//                            context.showToast(R.string.dev_mode_enabled, Toast.LENGTH_SHORT)
+//                        }
+//                    }
 
                     devClicks++
                 }

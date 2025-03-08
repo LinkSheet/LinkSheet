@@ -24,8 +24,8 @@ import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.ProvideContentColorTextStyle
 import fe.composekit.layout.dialog.AlertDialogFlowRow
 import fe.composekit.layout.dialog.AlertDialogFlowRowDefaults
+import fe.composekit.route.Route
 import fe.linksheet.R
-import fe.linksheet.navigation.Route
 import fe.linksheet.util.intent.parser.*
 
 

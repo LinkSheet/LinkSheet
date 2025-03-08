@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.CheckboxRow
@@ -73,11 +74,13 @@ fun BrowserCommonPackageSelectorRoute(
                     checked = newState[app] ?: storedState,
                     onCheckedChange = { newState[app] = it }
                 ) {
+                    val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+
                     BrowserIconTextRow(
                         app = app,
                         selected = storedState,
                         showSelectedText = false,
-                        alwaysShowPackageName = viewModel.alwaysShowPackageName()
+                        alwaysShowPackageName = alwaysShowPackageName
                     )
                 }
 

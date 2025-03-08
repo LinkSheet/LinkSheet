@@ -12,13 +12,18 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.redactor.DefaultRedactor
 import fe.linksheet.module.redactor.Redactor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.koin.dsl.module
 import kotlin.reflect.KClass
 
 val DefaultLogModule = module {
     single<Redactor, AppPreferenceRepository> { _, preferences ->
-        @OptIn(SensitivePreference::class)
-        val logKey = preferences.getOrPutInit(AppPreferences.logKey).decodeHexOrThrow()
+        // TODO: Not optimal
+        val logKey = runBlocking(Dispatchers.IO) {
+            @OptIn(SensitivePreference::class)
+            preferences.getOrPutInit(AppPreferences.logKey).decodeHexOrThrow()
+        }
 
         DefaultRedactor(logKey)
     }

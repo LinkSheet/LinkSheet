@@ -13,6 +13,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.composable.ui.ThemeV2
 import fe.android.version.AndroidVersion
+import fe.composekit.preference.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -24,7 +25,7 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
         if (AndroidVersion.isAtLeastApi31S()) {
             item(key = R.string.theme_enable_material_you, contentType = ContentType.SingleGroupItem) {
                 PreferenceSwitchListItem(
-                    preference = viewModel.themeMaterialYou,
+                    statePreference = viewModel.themeMaterialYou,
                     headlineContent = textContent(R.string.theme_enable_material_you),
                     supportingContent = textContent(R.string.theme_enable_material_you_explainer)
                 )
@@ -39,18 +40,20 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
                     shape = shape,
                     padding = padding,
                     value = item,
-                    preference = viewModel.themeV2,
+                    statePreference = viewModel.themeV2,
                     position = ContentPosition.Trailing,
                     headlineContent = textContent(item.id)
                 )
             }
 
             item(key = R.string.theme_enable_amoled) { padding, shape ->
+                val themeV2 = viewModel.themeV2.collectAsStateWithLifecycle()
+
                 PreferenceSwitchListItem(
-                    enabled = (viewModel.themeV2() == ThemeV2.System || viewModel.themeV2() == ThemeV2.Dark).toEnabledContentSet(),
+                    enabled = (themeV2 == ThemeV2.System || themeV2 == ThemeV2.Dark).toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.themeAmoled,
+                    statePreference = viewModel.themeAmoled,
                     headlineContent = textContent(R.string.theme_enable_amoled),
                     supportingContent = textContent(R.string.theme_enable_amoled_explainer)
                 )

@@ -6,26 +6,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.android.version.AndroidVersion
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.RouteNavItem
 import fe.composekit.component.list.item.RouteNavigateListItem
 import fe.composekit.layout.column.group
-import fe.linksheet.*
+import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.route.Route
+import fe.composekit.route.RouteNavItemNew
+import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.SettingsViewModel
-import fe.linksheet.navigation.aboutSettingsRoute
-import fe.linksheet.navigation.advancedSettingsRoute
-import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
-import fe.linksheet.navigation.bottomSheetSettingsRoute
-import fe.linksheet.navigation.browserSettingsRoute
-import fe.linksheet.navigation.debugSettingsRoute
-import fe.linksheet.navigation.devModeRoute
-import fe.linksheet.navigation.generalSettingsRoute
-import fe.linksheet.navigation.linksSettingsRoute
-import fe.linksheet.navigation.notificationSettingsRoute
-import fe.linksheet.navigation.privacySettingsRoute
-import fe.linksheet.navigation.themeSettingsRoute
+import fe.linksheet.navigation.*
 import org.koin.androidx.compose.koinViewModel
 
 internal object NewSettingsRouteData {
@@ -85,14 +76,14 @@ internal object NewSettingsRouteData {
     )
 
     val advanced = arrayOf(
-        RouteNavItem(
-            advancedSettingsRoute,
+        RouteNavItemNew(
+            AdvancedRoute,
             Icons.Outlined.Terminal.iconPainter,
             textContent(R.string.advanced),
             textContent(R.string.settings__subtitle_advanced),
         ),
-        RouteNavItem(
-            debugSettingsRoute,
+        RouteNavItemNew(
+            DebugRoute,
             Icons.Outlined.BugReport.iconPainter,
             textContent(R.string.debug),
             textContent(R.string.debug_explainer),
@@ -138,9 +129,10 @@ internal object NewSettingsRouteData {
 fun NewSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
+    navigateNew: (Route) -> Unit,
     viewModel: SettingsViewModel = koinViewModel(),
 ) {
-    val devMode = viewModel.devModeEnabled()
+    val devMode = viewModel.devModeEnabled.collectAsStateWithLifecycle()
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings),
@@ -166,7 +158,12 @@ fun NewSettingsRoute(
 
         group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
             items(array = NewSettingsRouteData.advanced) { data, padding, shape ->
-                RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
+                fe.composekit.route.RouteNavigateListItem(
+                    data = data,
+                    padding = padding,
+                    shape = shape,
+                    navigate = navigateNew
+                )
             }
 
             if (devMode) {

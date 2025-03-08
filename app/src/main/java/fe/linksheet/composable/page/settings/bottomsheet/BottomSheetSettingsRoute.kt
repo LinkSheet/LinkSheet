@@ -26,6 +26,7 @@ import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.preference.helper.Preference
 import fe.android.version.AndroidVersion
 import fe.android.preference.helper.compose.StateMappedPreference
 import fe.composekit.component.ContentType
@@ -35,6 +36,8 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.GroupValueProvider
+import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.navigation.Routes
 import fe.linksheet.activity.bottomsheet.TapConfig
@@ -69,9 +72,9 @@ fun BottomSheetSettingsRoute(
     val activity = LocalActivity.current
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange {
         if (!viewModel.usageStatsPermission.check()) {
-            viewModel.usageStatsSorting(false)
+            viewModel.usageStatsSorting.update(false)
         } else if (viewModel.wasTogglingUsageStatsSorting) {
-            viewModel.usageStatsSorting(true)
+            viewModel.usageStatsSorting.update(true)
             viewModel.wasTogglingUsageStatsSorting = false
         }
     }
@@ -87,7 +90,7 @@ fun BottomSheetSettingsRoute(
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.bottom_sheet), onBackPressed = onBackPressed) {
         item(key = R.string.display_grid_layout, contentType = ContentType.SingleGroupItem) {
             PreferenceSwitchListItem(
-                preference = viewModel.gridLayout,
+                statePreference = viewModel.gridLayout,
                 headlineContent = textContent(R.string.display_grid_layout),
                 supportingContent = textContent(R.string.display_grid_layout_explainer),
             )
@@ -97,17 +100,19 @@ fun BottomSheetSettingsRoute(
 
         group(size = 4 + if (AndroidVersion.isAtLeastApi30R()) 1 else 0) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
+                val updateStatsSorting = viewModel.usageStatsSorting.collectAsStateWithLifecycle()
+
                 SwitchListItem(
                     shape = shape,
                     padding = padding,
-                    checked = viewModel.usageStatsSorting(),
+                    checked = updateStatsSorting,
                     onCheckedChange = {
-                        if(activity != null) {
+                        if (activity != null) {
                             if (!viewModel.usageStatsPermission.check()) {
                                 viewModel.usageStatsPermission.request(activity)
                                 viewModel.wasTogglingUsageStatsSorting = true
                             } else {
-                                viewModel.usageStatsSorting(it)
+                                viewModel.usageStatsSorting.update(it)
                             }
                         }
                     },
@@ -125,7 +130,7 @@ fun BottomSheetSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.enableRequestPrivateBrowsingButton,
+                    statePreference = viewModel.enableRequestPrivateBrowsingButton,
                     headlineContent = textContent(id = R.string.enable_request_private_browsing_button),
                     supportingContent = textContent(
                         id = R.string.enable_request_private_browsing_button_explainer, browsers
@@ -137,7 +142,7 @@ fun BottomSheetSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.dontShowFilteredItem,
+                    statePreference = viewModel.dontShowFilteredItem,
                     headlineContent = textContent(R.string.dont_show_filtered_item),
                     supportingContent = textContent(R.string.dont_show_filtered_item_explainer),
                 )
@@ -147,7 +152,7 @@ fun BottomSheetSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.hideBottomSheetChoiceButtons,
+                    statePreference = viewModel.hideBottomSheetChoiceButtons,
                     headlineContent = textContent(R.string.hide_bottom_sheet_choice_buttons),
                     supportingContent = textContent(R.string.hide_bottom_sheet_choice_buttons_explainer),
                 )
@@ -159,7 +164,7 @@ fun BottomSheetSettingsRoute(
                         enabled = if (viewModel.profileSwitcher.canQuickToggle()) EnabledContent.all else EnabledContent.Main.set,
                         shape = shape,
                         padding = padding,
-                        preference = viewModel.bottomSheetProfileSwitcher,
+                        statePreference = viewModel.bottomSheetProfileSwitcher,
                         onContentClick = {
                             navigate(Routes.ProfileSwitching)
                         },
@@ -184,14 +189,16 @@ fun BottomSheetSettingsRoute(
 
         group(size = 4) {
             items(map = tapTypePreferences) { type, pref, padding, shape ->
-                TapConfigGroupItem(tapTypePreferences[type]!!, type, pref, padding, shape)
+//                val preference = tapTypePreferences[type]!!
+
+                TapConfigGroupItem(preference = pref, type = type,  padding = padding, shape = shape)
             }
 
             item(key = R.string.expand_on_app_select) { padding, shape ->
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.expandOnAppSelect,
+                    statePreference = viewModel.expandOnAppSelect,
                     headlineContent = textContent(R.string.expand_on_app_select),
                     supportingContent = textContent(R.string.expand_on_app_select_explainer),
                 )
@@ -205,7 +212,7 @@ fun BottomSheetSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.previewUrl,
+                    statePreference = viewModel.previewUrl,
                     headlineContent = textContent(R.string.preview_url),
                     supportingContent = textContent(R.string.preview_url_explainer),
                 )
@@ -215,7 +222,7 @@ fun BottomSheetSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.hideAfterCopying,
+                    statePreference = viewModel.hideAfterCopying,
                     headlineContent = textContent(R.string.hide_after_copying),
                     supportingContent = textContent(R.string.hide_after_copying_explainer),
                 )
@@ -225,13 +232,69 @@ fun BottomSheetSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.enableIgnoreLibRedirectButton,
+                    statePreference = viewModel.enableIgnoreLibRedirectButton,
                     headlineContent = textContent(R.string.enable_ignore_libredirect_button),
                     supportingContent = textContent(R.string.enable_ignore_libredirect_button_explainer),
                 )
             }
         }
     }
+}
+
+@Composable
+private fun TapConfigGroupItem(
+    preference: ViewModelStatePreference<TapConfig, TapConfig, Preference.Mapped<TapConfig, String>>,
+    type: TapType,
+    padding: PaddingValues,
+    shape: Shape,
+) {
+    val interaction = LocalHapticFeedbackInteraction.current
+
+    val state = rememberResultDialogState<TapConfig>()
+    val rotation by animateFloatAsState(targetValue = if (state.isOpen) 180f else 0f, label = "Arrow rotation")
+
+    ResultDialog(
+        state = state, onClose = { newConfig ->
+            preference.update(newConfig)
+            interaction.perform(FeedbackType.Confirm)
+        }) {
+        TapConfigDialog(
+            type = type,
+            currentConfig = preference.value,
+            onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
+            state::close
+        )
+    }
+
+    ClickableShapeListItem(
+        shape = shape,
+        padding = padding,
+        onClick = state::open,
+        role = Role.Button,
+        headlineContent = textContent(type.headline),
+        supportingContent = textContent(preference.value.id),
+        trailingContent = {
+            FilledIcon(
+                modifier = Modifier.rotate(rotation),
+                iconSize = 24.dp,
+                containerSize = 28.dp,
+                colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                ),
+                icon = Icons.Outlined.KeyboardArrowDown.iconPainter,
+                contentDescription = null
+            )
+
+
+//                        FilledTonalIconButton(onClick = {}) {
+//                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
+//                        }
+////                        FilledIcon(
+////                            imageVector = Icons.Outlined.Tune,
+////                            contentDescription = stringResource(id = R.string.settings)
+////                        )
+        }
+    )
 }
 
 @Composable

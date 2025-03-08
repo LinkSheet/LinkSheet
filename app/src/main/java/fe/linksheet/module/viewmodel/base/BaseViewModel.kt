@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel.base
 
 import androidx.lifecycle.ViewModel
-
+import androidx.lifecycle.viewModelScope
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 
@@ -9,7 +9,17 @@ abstract class BaseViewModel(
     preferenceRepository: AppPreferenceRepository,
 //  protected val stateCache: StateCache = StateCache()
 ) : ViewModel() {
-    val alwaysShowPackageName = preferenceRepository.asState(AppPreferences.alwaysShowPackageName)
+    val alwaysShowPackageName = preferenceRepository.asViewModelState(AppPreferences.alwaysShowPackageName)
+
+//    @JvmName
+//    public final fun asState(
+//        preference: Preference.Default<Boolean>
+//    ): MutablePreferenceState<Boolean, Boolean, Preference.Default<Boolean>>
+//
+//    fe.android.preference.helper.compose.StatePreferenceRepository
+
+
+
 
     init {
 //        Log.d("ViewModel", getTag())

@@ -4,6 +4,7 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.app.ActivityAppInfoSortGlue
 import fe.linksheet.module.preference.SensitivePreference
@@ -30,19 +31,17 @@ class PreferredBrowserViewModel(
     val type = MutableStateFlow(BrowserType.Normal)
 
     val unifiedPreferredBrowser =
-        preferenceRepository.asState(AppPreferences.unifiedPreferredBrowser)
+        preferenceRepository.asViewModelState(AppPreferences.unifiedPreferredBrowser)
 
-    private val browserMode = preferenceRepository.asState(AppPreferences.browserMode)
-
-    @OptIn(SensitivePreference::class)
-    private val selectedBrowser = preferenceRepository.asState(AppPreferences.selectedBrowser)
-
-    private val inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserMode)
+    private val browserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode)
 
     @OptIn(SensitivePreference::class)
-    private val selectedInAppBrowser = preferenceRepository.asState(
-        AppPreferences.selectedInAppBrowser
-    )
+    private val selectedBrowser = preferenceRepository.asViewModelState(AppPreferences.selectedBrowser)
+
+    private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserMode)
+
+    @OptIn(SensitivePreference::class)
+    private val selectedInAppBrowser = preferenceRepository.asViewModelState(AppPreferences.selectedInAppBrowser)
 
     private val whitelistedNormalBrowsersPackages = normalBrowsersRepository.getPackageSet()
     private val whitelistedInAppBrowsersPackages = inAppBrowsersRepository.getPackageSet()

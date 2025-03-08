@@ -8,6 +8,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
@@ -33,11 +34,13 @@ fun NewFollowRedirectsSettingsRoute(
     val darknets = remember {
         Darknet.entries.joinToString(separator = ", ") { it.displayName }
     }
+    val followRedirects = viewModel.followRedirects.collectAsStateWithLifecycle()
+    val contentSet = remember(followRedirects) { followRedirects.toEnabledContentSet() }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.follow_redirects), onBackPressed = onBackPressed) {
         item(key = R.string.follow_redirects, contentType = ContentType.SingleGroupItem) {
             PreferenceSwitchListItem(
-                preference = viewModel.followRedirects,
+                statePreference = viewModel.followRedirects,
                 headlineContent = textContent(R.string.follow_redirects),
                 supportingContent = annotatedStringResource(R.string.follow_redirects_explainer),
             )
@@ -48,22 +51,23 @@ fun NewFollowRedirectsSettingsRoute(
         group(size = 5 + if(LinkSheetAppConfig.isPro()) 1 else 0) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects().toEnabledContentSet(),
+                    enabled = contentSet,
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.followRedirectsLocalCache,
+                    statePreference = viewModel.followRedirectsLocalCache,
                     headlineContent = textContent(R.string.follow_redirects_local_cache),
                     supportingContent = textContent(R.string.follow_redirects_local_cache_explainer),
                 )
             }
 
             item(key = R.string.follow_only_known_trackers) { padding, shape ->
+                val followRedirectsExternalService = viewModel.followRedirectsExternalService.collectAsStateWithLifecycle()
                 // TODO: This settings should allow the user to add their own rules in the future, or at least display a _understandable_ list of known tracker domains
                 PreferenceSwitchListItem(
-                    enabled = (viewModel.followRedirects() && !viewModel.followRedirectsExternalService()).toEnabledContentSet(),
+                    enabled = (followRedirects && !followRedirectsExternalService).toEnabledContentSet(),
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.followOnlyKnownTrackers,
+                    statePreference = viewModel.followOnlyKnownTrackers,
 //                    onContentClick = { followRedirectsKnownTrackers.open(Unit) },
                     headlineContent = textContent(R.string.follow_only_known_trackers),
                     supportingContent = annotatedStringResource(R.string.follow_only_known_trackers_explainer),
@@ -72,10 +76,10 @@ fun NewFollowRedirectsSettingsRoute(
 
             item(key = R.string.allow_darknets) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects().toEnabledContentSet(),
+                    enabled = contentSet,
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.followRedirectsAllowsDarknets,
+                    statePreference = viewModel.followRedirectsAllowsDarknets,
                     headlineContent = textContent(R.string.allow_darknets),
                     supportingContent = textContent(id = R.string.follow_redirects_allow_darknets_explainer, darknets),
                 )
@@ -84,10 +88,10 @@ fun NewFollowRedirectsSettingsRoute(
             if(LinkSheetAppConfig.isPro()){
                 item(key = R.string.follow_redirects_external_service) { padding, shape ->
                     PreferenceSwitchListItem(
-                        enabled = (viewModel.followRedirects() && LinkSheetAppConfig.isPro()).toEnabledContentSet(),
+                        enabled = (followRedirects && LinkSheetAppConfig.isPro()).toEnabledContentSet(),
                         shape = shape,
                         padding = padding,
-                        preference = viewModel.followRedirectsExternalService,
+                        statePreference = viewModel.followRedirectsExternalService,
                         headlineContent = textContent(R.string.follow_redirects_external_service),
                         supportingContent = annotatedStringResource(R.string.follow_redirects_external_service_explainer),
                     )
@@ -96,23 +100,25 @@ fun NewFollowRedirectsSettingsRoute(
 
             item(key = R.string.settings_links_follow_redirects__title_skip_browser) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.followRedirects().toEnabledContentSet(),
+                    enabled = contentSet,
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.followRedirectsSkipBrowser,
+                    statePreference = viewModel.followRedirectsSkipBrowser,
                     headlineContent = textContent(R.string.settings_links_follow_redirects__title_skip_browser),
                     supportingContent = textContent(id = R.string.settings_links_follow_redirects__text_skip_browser),
                 )
             }
 
             item(key = R.string.request_timeout) { padding, shape ->
+                val requestTimeout = viewModel.requestTimeout.collectAsStateWithLifecycle()
+
                 SliderListItem(
-                    enabled = viewModel.followRedirects().toEnabledContentSet(),
+                    enabled = contentSet,
                     shape = shape,
                     padding = padding,
                     valueRange = 0f..30f,
-                    value = viewModel.followRedirectsTimeout().toFloat(),
-                    onValueChange = { viewModel.followRedirectsTimeout(it.toInt()) },
+                    value = requestTimeout.toFloat(),
+                    onValueChange = { viewModel.requestTimeout.update(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
                     headlineContent = textContent(R.string.request_timeout),
                     supportingContent = annotatedStringResource(R.string.request_timeout_explainer),

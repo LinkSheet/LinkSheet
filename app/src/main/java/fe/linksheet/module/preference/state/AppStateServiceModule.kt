@@ -1,23 +1,27 @@
 package fe.linksheet.module.preference.state
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.linksheet.extension.koin.service
 import fe.linksheet.module.log.Logger
+import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.preferenceRepositoryModule
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.dsl.module
 
 val AppStateServiceModule = module {
     includes(preferenceRepositoryModule)
     service<AppStateService> {
-        AppStateService(logger, scope.get(), scope.get())
+        AppStateService(logger, scope.get(), scope.get(), scope.get())
     }
 }
 
-class AppStateService(
+internal class AppStateService(
     val logger: Logger,
+    val preferenceRepository: AppPreferenceRepository,
     val appStateRepository: AppStateRepository,
     val experimentsRepository: ExperimentRepository,
 ) : LifecycleAwareService {
@@ -29,11 +33,17 @@ class AppStateService(
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
+        runMigrations()
         init(System.currentTimeMillis())
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun init(now: Long) {
+    suspend fun runMigrations() = withContext(Dispatchers.IO) {
+        AppStatePreferences.runMigrations(appStateRepository)
+        preferenceRepository.init()
+        Experiments.runMigrations(experimentsRepository)
+    }
+
+    suspend fun init(now: Long) = withContext(Dispatchers.IO) {
         val requiredUpdates = updates.filterKeys { !appStateRepository.hasStoredValue(it) }
         logger.info("Updates required: ${requiredUpdates.size}")
 

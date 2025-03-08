@@ -10,35 +10,42 @@ import fe.gson.extension.json.`object`.asArray
 import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.extension.android.bufferedReader
 import fe.linksheet.extension.android.bufferedWriter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ImportExportService(val context: Context) {
     @Throws(Exception::class)
-    private fun openDescriptor(uri: Uri, mode: String): ParcelFileDescriptor {
-        return context.contentResolver.openFileDescriptor(uri, mode) ?: throw Exception("Failed to open file!")
+    private fun openDescriptor(uri: Uri, mode: String): ParcelFileDescriptor? {
+        return context.contentResolver.openFileDescriptor(uri, mode)
     }
 
-    fun exportPreferencesToUri(uri: Uri, preferenceJson: String): Result<Unit> {
-        return runCatching {
-            openDescriptor(uri, "w").bufferedWriter().use { fos -> fos.write(preferenceJson) }
-        }
+    suspend fun exportPreferencesToUri(uri: Uri, preferenceJson: String) = withContext(Dispatchers.IO) {
+        openDescriptor(uri, "w")?.use { descriptor -> descriptor.bufferedWriter().write(preferenceJson) }
     }
 
-    fun importPreferencesFromUri(uri: Uri): Result<Map<String, String>> {
+    suspend fun importPreferencesFromUri(uri: Uri): Result<Map<String, String>> = withContext(Dispatchers.IO) {
         val parseResult = runCatching {
-            openDescriptor(uri, "r").bufferedReader().use { JsonParser.parseReader(it) }
+            openDescriptor(uri, "r")?.use { descriptor ->
+                JsonParser.parseReader(descriptor.bufferedReader())
+            }
         }
 
         if (parseResult.isFailure) {
-            return Result.failure(parseResult.exceptionOrNull()!!)
+            return@withContext Result.failure(parseResult.exceptionOrNull()!!)
         }
 
-        val jsonElement = parseResult.getOrNull()!!
+        val result = parseResult.getOrNull()
+        if (result == null) {
+            return@withContext Result.failure(Exception("Failed to read file!"))
+        }
+
+        val jsonElement = result
         val isLinkSheetPreferencesFile = jsonElement is JsonObject
                 && jsonElement.keySet().size == 1
                 && jsonElement.get("preferences") is JsonArray
 
         if (!isLinkSheetPreferencesFile) {
-            return Result.failure(Exception("Provided file is not a LinkSheet preferences export!"))
+            return@withContext Result.failure(Exception("Provided file is not a LinkSheet preferences export!"))
         }
 
         val preferences = jsonElement.asArray("preferences")
@@ -52,6 +59,6 @@ class ImportExportService(val context: Context) {
             name to value
         }.toMap()
 
-        return Result.success(map)
+        Result.success(map)
     }
 }

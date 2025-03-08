@@ -2,6 +2,7 @@ package fe.linksheet.composable.page.settings.link.downloader
 
 import android.Manifest
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
@@ -20,6 +21,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.android.version.AndroidVersion
+import fe.composekit.preference.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -30,6 +32,8 @@ fun NewDownloaderSettingsRoute(
     viewModel: DownloaderSettingsViewModel = koinViewModel(),
 ) {
     val writeExternalStoragePermissionState = downloaderPermissionState()
+    val enableDownloader = viewModel.enableDownloader.collectAsStateWithLifecycle()
+    val contentSet = remember(enableDownloader) { enableDownloader.toEnabledContentSet() }
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings_links_downloader__title_downloader),
@@ -37,11 +41,11 @@ fun NewDownloaderSettingsRoute(
     ) {
         item(key = R.string.enable_downloader, contentType = ContentType.SingleGroupItem) {
             SwitchListItem(
-                checked = viewModel.enableDownloader(),
+                checked = enableDownloader,
                 onCheckedChange = {
                     requestDownloadPermission(
                         writeExternalStoragePermissionState,
-                        viewModel.enableDownloader,
+                        { viewModel.enableDownloader.update(it) },
                         it
                     )
                 },
@@ -56,23 +60,25 @@ fun NewDownloaderSettingsRoute(
         group(size = 2) {
             item(key = R.string.downloader_url_mime_type) { padding, shape ->
                 PreferenceSwitchListItem(
-                    enabled = viewModel.enableDownloader().toEnabledContentSet(),
+                    enabled = contentSet,
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.downloaderCheckUrlMimeType,
+                    statePreference = viewModel.downloaderCheckUrlMimeType,
                     headlineContent = textContent(R.string.downloader_url_mime_type),
                     supportingContent = textContent(R.string.downloader_url_mime_type_explainer),
                 )
             }
 
             item(key = R.string.request_timeout) { padding, shape ->
+                val requestTimeout = viewModel.requestTimeout.collectAsStateWithLifecycle()
+
                 SliderListItem(
-                    enabled = viewModel.enableDownloader().toEnabledContentSet(),
+                    enabled = contentSet,
                     shape = shape,
                     padding = padding,
                     valueRange = 0f..30f,
-                    value = viewModel.requestTimeout().toFloat(),
-                    onValueChange = { viewModel.requestTimeout(it.toInt()) },
+                    value = requestTimeout.toFloat(),
+                    onValueChange = { viewModel.requestTimeout.update(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
                     headlineContent = textContent(R.string.request_timeout),
                     supportingContent = annotatedStringResource(R.string.request_timeout_explainer),
@@ -92,6 +98,17 @@ fun downloaderPermissionState() = rememberPermissionState(
 fun requestDownloadPermission(
     permissionState: PermissionState,
     state: StatePreference<Boolean>,
+    newState: Boolean,
+) {
+    if (!AndroidVersion.isAtLeastApi29Q() && !permissionState.status.isGranted) {
+        permissionState.launchPermissionRequest()
+    } else state(newState)
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+fun requestDownloadPermission(
+    permissionState: PermissionState,
+    state: (Boolean) -> Unit,
     newState: Boolean,
 ) {
     if (!AndroidVersion.isAtLeastApi29Q() && !permissionState.status.isGranted) {

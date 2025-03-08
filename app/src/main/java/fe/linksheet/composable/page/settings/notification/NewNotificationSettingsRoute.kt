@@ -8,34 +8,35 @@ import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.component.page.twoline.SwitchPreferenceItem
+import fe.linksheet.composable.component.page.twoline.SwitchPreferenceItemNew
 import fe.linksheet.composable.component.page.twoline.rememberTwoLinePreferenceGroup
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 private object NewNotificationSettingsRouteData {
-    fun init(vm: NotificationSettingsViewModel): List<SwitchPreferenceItem> {
+    fun init(vm: NotificationSettingsViewModel): List<SwitchPreferenceItemNew> {
         return listOf(
-            SwitchPreferenceItem(
+            SwitchPreferenceItemNew(
                 vm.urlCopiedToast,
                 textContent(R.string.url_copied_toast),
                 textContent(R.string.url_copied_toast_explainer),
             ),
-            SwitchPreferenceItem(
+            SwitchPreferenceItemNew(
                 vm.downloadStartedToast,
                 textContent(R.string.download_started_toast),
                 textContent(R.string.download_started_toast_explainer),
             ),
-            SwitchPreferenceItem(
+            SwitchPreferenceItemNew(
                 vm.openingWithAppToast,
                 textContent(R.string.opening_with_app_toast),
                 textContent(R.string.opening_with_app_toast_explainer),
             ),
-            SwitchPreferenceItem(
+            SwitchPreferenceItemNew(
                 vm.resolveViaToast,
                 textContent(R.string.resolve_via_toast),
                 textContent(R.string.resolve_via_toast_explainer),
             ),
-            SwitchPreferenceItem(
+            SwitchPreferenceItemNew(
                 vm.resolveViaFailedToast,
                 textContent(R.string.resolve_via_failed_toast),
                 textContent(R.string.resolve_via_failed_toast_explainer),
@@ -58,7 +59,7 @@ fun NewNotificationSettingsRoute(
             PreferenceSwitchListItem(
                 shape = shape,
                 padding = padding,
-                preference = data.preference,
+                statePreference = data.preference,
                 headlineContent = data.headlineContent,
                 supportingContent = data.subtitleContent,
             )

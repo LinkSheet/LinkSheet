@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.util.*
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 @Composable
@@ -27,6 +28,7 @@ fun ExportSettingsDialog(viewModel: ExportSettingsViewModel) {
 
     val context = LocalContext.current
     val contentResolver = context.contentResolver
+    val coroutineScope = rememberCoroutineScope()
 
     var includeLogHashKey by remember { mutableStateOf(false) }
     var includeHistory by remember { mutableStateOf(false) }
@@ -34,8 +36,10 @@ fun ExportSettingsDialog(viewModel: ExportSettingsViewModel) {
     val fileSelectedLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = {
-            if (it.resultCode == Activity.RESULT_OK) {
-                it.data?.data?.let { uri -> viewModel.exportPreferences(uri, includeLogHashKey) }
+            if (it.resultCode == Activity.RESULT_OK && it.data?.data != null) {
+                coroutineScope.launch {
+                    viewModel.exportPreferences(it.data!!.data!!, includeLogHashKey)
+                }
             }
         }
     )

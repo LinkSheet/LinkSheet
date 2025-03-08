@@ -22,10 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
 import fe.android.version.AndroidVersion
 import fe.linksheet.BuildConfig
-import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.extension.android.getFirstText
 import fe.linksheet.extension.android.resolveActivityCompat
@@ -53,7 +53,6 @@ import fe.linksheet.util.web.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.time.Duration
 
 
 class MainViewModel(
@@ -68,23 +67,15 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
 ) : BaseViewModel(preferenceRepository) {
-    val newDefaultsDismissed = appStateRepository.asState(AppStatePreferences.newDefaults_2024_12_29_InfoDismissed)
-
-    val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
+    val newDefaultsDismissed = appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2024_12_29_InfoDismissed)
 
     @OptIn(SensitivePreference::class)
-    val useTimeMs = preferenceRepository.get(AppPreferences.useTimeMs)
-    val showDiscordBanner = preferenceRepository.asState(AppPreferences.showDiscordBanner)
-    val donateCardDismissed = preferenceRepository.asState(AppPreferences.donateCardDismissed)
-    val themeV2 = preferenceRepository.asState(AppPreferences.themeV2)
+    val telemetryLevel = experimentRepository.asViewModelState(AppPreferences.telemetryLevel)
 
-    @OptIn(SensitivePreference::class)
-    val telemetryLevel = preferenceRepository.asState(AppPreferences.telemetryLevel)
+    val telemetryShowInfoDialog = experimentRepository.asViewModelState(AppPreferences.telemetryShowInfoDialog)
 
-    val telemetryShowInfoDialog = preferenceRepository.asState(AppPreferences.telemetryShowInfoDialog)
-
-    val editClipboard = experimentRepository.asState(Experiments.editClipboard)
-    val homeClipboardCard = preferenceRepository.asState(AppPreferences.homeClipboardCard)
+    val editClipboard = experimentRepository.asViewModelState(Experiments.editClipboard)
+    val homeClipboardCard = experimentRepository.asViewModelState(AppPreferences.homeClipboardCard)
 
     private val roleManager by lazy {
         if (AndroidVersion.isAtLeastApi26O()) {
@@ -98,7 +89,7 @@ class MainViewModel(
     val clipboardContent = _clipboardContent.asStateFlow()
 
     fun tryReadClipboard() {
-        if (!homeClipboardCard()) {
+        if (!homeClipboardCard.value) {
             _clipboardContent.tryEmit(null)
             return
         }
@@ -151,24 +142,9 @@ class MainViewModel(
     }
 
     fun updateTelemetryLevel(level: TelemetryLevel) {
-        telemetryLevel(level)
-        telemetryShowInfoDialog(false)
+        telemetryLevel.update(level)
+        telemetryShowInfoDialog.update(false)
         analyticsService.changeLevel(level)
-    }
-
-    fun formatUseTime(): Pair<Int?, Int?>? {
-        if (!LinkSheetAppConfig.showDonationBanner()) return null
-
-        val duration = Duration.ofMillis(useTimeMs)
-        val minutes = duration.toMinutesPart()
-        if (minutes < BuildConfig.DONATION_BANNER_MIN) return null
-
-        val hours = duration.toHoursPart()
-        if (hours > 0) {
-            return hours to null
-        }
-
-        return null to minutes
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)

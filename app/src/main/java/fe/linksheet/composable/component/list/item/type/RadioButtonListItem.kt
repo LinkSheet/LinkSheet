@@ -19,6 +19,8 @@ import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.EnabledContentSet
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.composekit.component.shape.CustomShapeDefaults
+import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
 
 @Composable
 fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
@@ -45,6 +47,43 @@ fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
         position = position,
         selected = preference() == value,
         onSelect = { preference(value) },
+        overlineContent = overlineContent,
+        headlineContent = headlineContent,
+        supportingContent = supportingContent,
+        otherContent = otherContent,
+        containerHeight = containerHeight,
+        innerPadding = innerPadding,
+        textOptions = textOptions
+    )
+}
+
+@Composable
+fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
+    enabled: EnabledContentSet = EnabledContent.all,
+    value: NT,
+    statePreference: ViewModelStatePreference<T, NT, P>,
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
+    colors: ListItemColors = ShapeListItemDefaults.colors(),
+    containerHeight: CustomListItemContainerHeight = CustomListItemDefaults.containerHeight(),
+    innerPadding: CustomListItemPadding = CustomListItemDefaults.padding(),
+    textOptions: CustomListItemTextOptions = CustomListItemDefaults.textOptions(),
+    position: ContentPosition,
+    headlineContent: TextContent,
+    overlineContent: TextContent? = null,
+    supportingContent: TextContent? = null,
+    otherContent: OptionalContent = null,
+) {
+    val preference = statePreference.collectAsStateWithLifecycle()
+
+    RadioButtonListItem(
+        enabled = enabled,
+        shape = shape,
+        padding = padding,
+        colors = colors,
+        position = position,
+        selected = preference == value,
+        onSelect = { statePreference.update(value) },
         overlineContent = overlineContent,
         headlineContent = headlineContent,
         supportingContent = supportingContent,

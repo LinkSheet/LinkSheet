@@ -13,6 +13,8 @@ import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.EnabledContentSet
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.component.shape.CustomShapeDefaults
+import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
 
 
 @Composable
@@ -33,6 +35,33 @@ fun PreferenceSwitchListItem(
         position = ContentPosition.Trailing,
         checked = preference(),
         onCheckedChange = { preference(it) },
+        overlineContent = overlineContent,
+        headlineContent = headlineContent,
+        supportingContent = supportingContent,
+        otherContent = otherContent
+    )
+}
+
+@Composable
+fun PreferenceSwitchListItem(
+    enabled: EnabledContentSet = EnabledContent.all,
+    statePreference: ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>,
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
+    headlineContent: TextContent,
+    overlineContent: TextContent? = null,
+    supportingContent: TextContent? = null,
+    otherContent: OptionalContent = null,
+) {
+    val preference = statePreference.collectAsStateWithLifecycle()
+
+    SwitchListItem(
+        enabled = enabled,
+        shape = shape,
+        padding = padding,
+        position = ContentPosition.Trailing,
+        checked = preference,
+        onCheckedChange = { statePreference.update(it) },
         overlineContent = overlineContent,
         headlineContent = headlineContent,
         supportingContent = supportingContent,

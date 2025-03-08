@@ -59,12 +59,12 @@ plugins {
 extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
 
-maybeResolveIncludingRootContext()?.rootProject {
+//maybeResolveIncludingRootContext()?.rootProject {
 //    refreshVersions {
 //        versionsPropertiesFile = rootDir.resolve("versions.properties")
 //        logger.info("Using versions file from $versionsPropertiesFile")
 //    }
-}
+//}
 
 include(":app", ":config")
 include(":bottom-sheet", ":bottom-sheet-new")

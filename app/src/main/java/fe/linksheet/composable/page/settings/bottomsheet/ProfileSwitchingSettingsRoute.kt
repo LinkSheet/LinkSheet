@@ -28,6 +28,7 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.group
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.profile.CrossProfile
@@ -42,6 +43,7 @@ fun ProfileSwitchingSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: ProfileSwitchingSettingsViewModel = koinViewModel(),
 ) {
+    val enabled = viewModel.enabled.collectAsStateWithLifecycle()
     val status by viewModel.status.collectAsStateWithLifecycle(ProfileStatus.Unsupported)
     val userProfileInfo by viewModel.userProfileInfo.collectAsStateWithLifecycle(null)
 
@@ -49,7 +51,7 @@ fun ProfileSwitchingSettingsRoute(
         status = status,
         userProfileInfo = userProfileInfo,
         isManagedProfile = viewModel.checkIsManagedProfile(),
-        enabled = viewModel.enabled(),
+        enabled = enabled,
         onEnable = viewModel.enabled,
         onBackPressed = onBackPressed,
         launchCrossProfileInteractSettings = viewModel::launchCrossProfileInteractSettings,

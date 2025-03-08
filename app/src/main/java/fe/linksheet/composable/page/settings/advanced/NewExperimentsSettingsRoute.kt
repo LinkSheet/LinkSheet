@@ -1,13 +1,15 @@
 package fe.linksheet.composable.page.settings.advanced
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -21,19 +23,18 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.icon.IconOffset
 import fe.composekit.component.list.item.ContentPosition
-import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
+import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun NewExperimentsSettingsRoute(
     onBackPressed: () -> Unit,
+    experiment: String?,
     viewModel: ExperimentsViewModel = koinViewModel(),
 ) {
-    val experiment by viewModel.experiment.collectOnIO()
     val enableExperimentDialog = dialogHelper<String, String, Unit>(
         fetch = { it },
         awaitFetchBeforeOpen = true,
@@ -75,15 +76,13 @@ fun NewExperimentsSettingsRoute(
             group(group.preferences.size) {
                 for (experimentPreference in group.preferences) {
                     val key = experimentPreference.preference.key
-                    val state = viewModel.stateMap[key]!!
+                    val preference = viewModel.stateMap[key]!!
 
                     item(key = key) { padding, shape ->
-                        SwitchListItem(
+                        PreferenceSwitchListItem(
                             shape = shape,
                             padding = padding,
-                            checked = state(),
-                            onCheckedChange = { state(it) },
-                            position = ContentPosition.Trailing,
+                            statePreference = preference,
                             headlineContent = content {
                                 Text(text = experimentPreference.displayName, overflow = TextOverflow.Ellipsis)
                             }

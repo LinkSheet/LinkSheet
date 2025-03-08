@@ -1,8 +1,7 @@
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
-import android.content.Context
-import fe.android.preference.helper.compose.asFunction
+import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.extension.koin.createLogger
@@ -23,8 +22,9 @@ import org.koin.dsl.module
 val resolverModule = module {
     single { BrowserResolver(getPackageManager(), get()) }
     single {
+        val experimentRepository = get<ExperimentRepository>()
         ImprovedBrowserHandler(
-            autoLaunchSingleBrowserExperiment = get<ExperimentRepository>().asFunction(Experiments.autoLaunchSingleBrowser),
+            autoLaunchSingleBrowserExperiment = experimentRepository.asFunction(Experiments.autoLaunchSingleBrowser),
         )
     }
     single {
@@ -120,11 +120,12 @@ data class PreviewSettings(
     val previewUrlSkipBrowser: () -> Boolean,
 )
 
+
 @OptIn(SensitivePreference::class)
 fun createSettings(
     prefRepo: AppPreferenceRepository,
     experimentRepository: ExperimentRepository
-): IntentResolverSettings {
+) : IntentResolverSettings{
     return IntentResolverSettings(
         useClearUrls = prefRepo.asFunction(AppPreferences.useClearUrls),
         useFastForwardRules = prefRepo.asFunction(AppPreferences.useFastForwardRules),

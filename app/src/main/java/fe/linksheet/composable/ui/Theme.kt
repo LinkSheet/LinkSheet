@@ -22,6 +22,7 @@ import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkConstants
@@ -96,16 +97,14 @@ fun AppTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
-    val themeV2 = themeSettingsViewModel.themeV2()
 
-    val colorScheme = themeV2.getColorScheme(
-        context,
-        systemDarkTheme,
-        themeSettingsViewModel.themeMaterialYou(),
-        themeSettingsViewModel.themeAmoled()
-    )
+    val themeV2 = themeSettingsViewModel.themeV2.collectAsStateWithLifecycle()
+    val materialYou = themeSettingsViewModel.themeMaterialYou.collectAsStateWithLifecycle()
+    val amoled = themeSettingsViewModel.themeAmoled.collectAsStateWithLifecycle()
 
-    val activity = context.findActivity()
+    val colorScheme = remember(themeV2, systemDarkTheme, materialYou, amoled) {
+        themeV2.getColorScheme(context, systemDarkTheme, materialYou, amoled)
+    }
 
     if (edgeToEdge && updateEdgeToEdge != null) {
         LaunchedEffect(key1 = themeV2) {

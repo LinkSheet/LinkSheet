@@ -8,6 +8,7 @@ import android.content.pm.getInstalledPackagesCompat
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.lifecycle.viewModelScope
 import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.android.isUserApp
@@ -29,7 +30,7 @@ class InAppBrowserSettingsViewModel(
     private val repository: DisableInAppBrowserInSelectedRepository,
     preferenceRepository: AppPreferenceRepository,
 ) : BrowserCommonViewModel(context, preferenceRepository) {
-    val inAppBrowserMode = preferenceRepository.asState(AppPreferences.inAppBrowserSettings)
+    val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserSettings)
 
     private val _searchFilter = MutableStateFlow("")
     val searchFilter = _searchFilter.asStateFlow()

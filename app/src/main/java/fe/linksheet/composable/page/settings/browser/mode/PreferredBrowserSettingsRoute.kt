@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.browser.BrowserCommonPackageSelectorData
 import fe.linksheet.composable.page.settings.browser.BrowserCommonRadioButtonRowData
@@ -40,8 +41,11 @@ fun PreferredBrowserSettingsRoute(
 
     val browsers by viewModel.browsers.collectOnIO()
     val type by viewModel.type.collectOnIO()
-    val browserMode by viewModel.browserModeState.collectOnIO()
-    val selectedBrowser by viewModel.selectedBrowserState.collectOnIO()
+    val browserModePreference by viewModel.browserModeState.collectOnIO()
+    val selectedBrowserPreference by viewModel.selectedBrowserState.collectOnIO()
+
+    val browserMode = browserModePreference?.collectAsStateWithLifecycle()
+    val selectedBrowser = selectedBrowserPreference?.collectAsStateWithLifecycle()
 
     val rows = remember {
         listOf(
@@ -61,23 +65,24 @@ fun PreferredBrowserSettingsRoute(
         headline = R.string.browser_mode,
         explainer = R.string.browser_mode_subtitle,
         onBackPressed = onBackPressed,
-        viewModel = viewModel,
         values = listOf(
             BrowserMode.AlwaysAsk,
             BrowserMode.None,
         ),
-        state = browserMode,
+        state = browserModePreference,
         rowKey = { it.value },
         rows = rows,
         header = {
+            val unifiedPreferredBrowser = viewModel.unifiedPreferredBrowser.collectAsStateWithLifecycle()
+
             SettingEnabledCardColumn(
-                checked = viewModel.unifiedPreferredBrowser(),
+                checked = unifiedPreferredBrowser,
                 onChange = { viewModel.unifiedPreferredBrowser(it) },
                 headline = stringResource(id = R.string.use_unified_preferred_browser),
                 subtitle = stringResource(id = R.string.use_unified_preferred_browser_explainer)
             )
             Column(modifier = Modifier.padding(horizontal = 10.dp)) {
-                if (!viewModel.unifiedPreferredBrowser()) {
+                if (!unifiedPreferredBrowser) {
                     FilterChips(
                         currentState = type,
                         onClick = { viewModel.type.value = it },
@@ -103,29 +108,31 @@ fun PreferredBrowserSettingsRoute(
             whitelistedBrowsersSettingsRoute
         )
     ) { browserState ->
-        if (browserState == null || browserMode == null || selectedBrowser == null) {
+        if (browserState == null || browserModePreference == null || selectedBrowserPreference == null) {
             item(key = "loader") {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
         } else {
+
             items(
                 items = browserState,
                 key = { it.flatComponentName },
                 contentType = { it.flatComponentName }
             ) { app ->
-                val selected = (browserMode!!)() == BrowserMode.SelectedBrowser
-                        && (selectedBrowser!!)() == app.packageName
-
+                val selected = browserMode == BrowserMode.SelectedBrowser && selectedBrowser == app.packageName
+//
                 RadioButtonRow(
                     selected = selected,
                     onClick = { viewModel.updateSelectedBrowser(app.packageName) },
                     onLongClick = { activity.startPackageInfoActivity(app) }
                 ) {
+                    val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+
                     BrowserIconTextRow(
                         app = app,
                         selected = selected,
                         showSelectedText = true,
-                        alwaysShowPackageName = viewModel.alwaysShowPackageName()
+                        alwaysShowPackageName = alwaysShowPackageName
                     )
                 }
             }

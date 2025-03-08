@@ -2,6 +2,7 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import fe.libredirectkt.LibRedirectInstance
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
@@ -25,7 +26,7 @@ class LibRedirectSettingsViewModel(
         }.thenBy { (service) -> service.name }
     }
 
-    val enableLibRedirect = preferenceRepository.asState(AppPreferences.enableLibRedirect)
+    val enableLibRedirect = preferenceRepository.asViewModelState(AppPreferences.enableLibRedirect)
 
     private val builtInServices = flowOfLazy { LibRedirectLoader.loadBuiltInServices() }
     private val builtinInstances = flowOfLazy {

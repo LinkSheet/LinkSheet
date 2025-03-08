@@ -45,32 +45,33 @@ import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
 import fe.android.version.AndroidVersion
+import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
+import fe.linksheet.navigation.AdvancedRoute
+import fe.linksheet.navigation.DebugRoute
+import fe.linksheet.navigation.ExperimentRoute
+import fe.linksheet.navigation.ExportImportRoute
+import fe.linksheet.navigation.LibRedirectRoute
+import fe.linksheet.navigation.LibRedirectServiceRoute
+import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.Routes
 import fe.linksheet.navigation.aboutSettingsRoute
-import fe.linksheet.navigation.advancedSettingsRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.appsSettingsRoute
 import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.bottomSheetSettingsRoute
 import fe.linksheet.navigation.browserSettingsRoute
 import fe.linksheet.navigation.creditsSettingsRoute
-import fe.linksheet.navigation.debugSettingsRoute
 import fe.linksheet.navigation.devModeRoute
 import fe.linksheet.navigation.donateSettingsRoute
 import fe.linksheet.navigation.downloaderSettingsRoute
-import fe.linksheet.navigation.experimentSettingsRoute
-import fe.linksheet.navigation.exportImportSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import fe.linksheet.navigation.generalSettingsRoute
 import fe.linksheet.navigation.inAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.navigation.inAppBrowserSettingsRoute
-import fe.linksheet.navigation.libRedirectServiceSettingsRoute
-import fe.linksheet.navigation.libRedirectSettingsRoute
 import fe.linksheet.navigation.linksSettingsRoute
 import fe.linksheet.navigation.loadDumpedPreferences
-import fe.linksheet.navigation.logTextViewerSettingsRoute
 import fe.linksheet.navigation.logViewerSettingsRoute
 import fe.linksheet.navigation.notificationSettingsRoute
 import fe.linksheet.navigation.preferredBrowserSettingsRoute
@@ -86,6 +87,7 @@ fun MainNavHost(
     // TODO: Refactor navController away
     navController: NavHostController,
     navigate: (String) -> Unit,
+    navigateNew: (Route) -> Unit,
     onBackPressed: () -> Unit,
 ) {
     NavHost(
@@ -98,6 +100,37 @@ fun MainNavHost(
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
             MarkdownViewerWrapper(onBackPressed = onBackPressed, title = titleStr, url = route.url)
+        }
+
+        animatedComposable<ExperimentRoute> { _, route ->
+            NewExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
+        }
+
+        animatedComposable<ExportImportRoute> { _, _ ->
+            ExportImportSettingsRoute(onBackPressed = onBackPressed)
+        }
+
+        animatedComposable<AdvancedRoute> { _, _ ->
+            NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
+        }
+
+        animatedComposable<DebugRoute> { _, _ ->
+            NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+        }
+
+        animatedComposable<LogTextViewerRoute> { _, route ->
+            NewLogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
+        }
+
+        animatedComposable<LibRedirectRoute> { _, route ->
+            NewLibRedirectSettingsRoute(
+                onBackPressed = onBackPressed,
+                navigate = navigateNew,
+            )
+        }
+
+        animatedComposable<LibRedirectServiceRoute> { _, route ->
+            NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
         }
 
         animatedComposable(route = Routes.AboutVersion) {
@@ -113,7 +146,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = settingsRoute) {
-            NewSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            NewSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navigateNew = navigateNew)
         }
 
         animatedComposable(route = appsSettingsRoute) {
@@ -151,20 +184,13 @@ fun MainNavHost(
         animatedComposable(route = linksSettingsRoute) {
             NewLinksSettingsRoute(
                 onBackPressed = onBackPressed,
-                navigate = navigate
+                navigate = navigate,
+                navigateNew = navigateNew
             )
         }
 
         animatedComposable(route = followRedirectsSettingsRoute) {
             NewFollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
-        }
-
-        animatedComposable(route = libRedirectSettingsRoute) {
-            NewLibRedirectSettingsRoute(onBackPressed = onBackPressed, navController = navController)
-        }
-
-        animatedArgumentRouteComposable(route = libRedirectServiceSettingsRoute) { _, _ ->
-            NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = downloaderSettingsRoute) {
@@ -179,38 +205,18 @@ fun MainNavHost(
             ThemeSettingsRoute(onBackPressed = onBackPressed)
         }
 
-        animatedComposable(route = advancedSettingsRoute) {
-            NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-        }
-
         animatedComposable(route = shizukuSettingsRoute) {
             ShizukuSettingsRoute(
                 navController = navController, onBackPressed = onBackPressed
             )
         }
 
-        animatedArgumentRouteComposable(route = experimentSettingsRoute) { _, _ ->
-            NewExperimentsSettingsRoute(onBackPressed = onBackPressed)
-        }
-
-        animatedComposable(route = exportImportSettingsRoute) {
-            ExportImportSettingsRoute(onBackPressed = onBackPressed)
-        }
-
-        animatedComposable(route = debugSettingsRoute) {
-            NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
-        }
-
         animatedComposable(route = logViewerSettingsRoute) {
-            NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
 
         animatedComposable(route = loadDumpedPreferences) {
             LoadDumpedPreferences(onBackPressed = onBackPressed)
-        }
-
-        animatedArgumentRouteComposable(route = logTextViewerSettingsRoute) { _, _ ->
-            NewLogTextSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = aboutSettingsRoute) {

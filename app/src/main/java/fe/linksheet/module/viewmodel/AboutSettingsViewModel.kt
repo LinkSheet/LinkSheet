@@ -12,7 +12,7 @@ class AboutSettingsViewModel(
     val gson: Gson,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    val devModeEnabled = preferenceRepository.asState(AppPreferences.devModeEnabled)
+    val devModeEnabled = preferenceRepository.asViewModelState(AppPreferences.devModeEnabled)
 
     fun getBuildInfo(): String {
         return gson.toJson(LinkSheetInfo.buildInfo)

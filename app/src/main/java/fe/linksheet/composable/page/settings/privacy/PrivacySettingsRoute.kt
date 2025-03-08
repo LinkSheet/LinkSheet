@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
@@ -19,16 +20,19 @@ fun PrivacySettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: PrivacySettingsViewModel = koinViewModel(),
 ) {
+    val telemetryLevel = viewModel.telemetryLevel.collectAsStateWithLifecycle()
     val analyticsDialog = rememberAnalyticDialog(
-        telemetryLevel = viewModel.telemetryLevel(),
+        telemetryLevel = telemetryLevel,
         onChanged = { viewModel.updateTelemetryLevel(it) }
     )
+
+    val enableAnalytics = viewModel.enableAnalytics.collectAsStateWithLifecycle()
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.privacy), onBackPressed = onBackPressed) {
         group(1) {
             item(key = R.string.show_linksheet_referrer) { padding, shape ->
                 PreferenceSwitchListItem(
-                    preference = viewModel.showAsReferrer,
+                    statePreference = viewModel.showAsReferrer,
                     shape = shape,
                     padding = padding,
                     headlineContent = textContent(R.string.show_linksheet_referrer),
@@ -37,7 +41,7 @@ fun PrivacySettingsRoute(
             }
         }
 
-        if (Build.IsDebug || viewModel.enableAnalytics()) {
+        if (Build.IsDebug || enableAnalytics) {
             divider(key = R.string.telemetry_configure_title, id = R.string.telemetry_configure_title)
 
             group(2) {
@@ -48,7 +52,7 @@ fun PrivacySettingsRoute(
                         onClick = analyticsDialog::open,
                         role = Role.Button,
                         headlineContent = textContent(R.string.telemetry_configure_type),
-                        supportingContent = textContent(viewModel.telemetryLevel().titleId)
+                        supportingContent = textContent(telemetryLevel.titleId)
                     )
                 }
 

@@ -24,6 +24,7 @@ import fe.android.compose.text.TextContent
 import fe.composekit.component.CommonDefaults
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.shape.CustomShapeDefaults
+import fe.composekit.route.Route
 import fe.std.javatime.time.localizedString
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.R
@@ -31,14 +32,13 @@ import fe.linksheet.composable.util.listState
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.navigation.logTextViewerSettingsRoute
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun NewLogSettingsRoute(
     onBackPressed: () -> Unit,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     viewModel: LogSettingsViewModel = koinViewModel(),
 ) {
     val interaction = LocalHapticFeedbackInteraction.current
@@ -107,22 +107,18 @@ fun NewLogSettingsRoute(
 @Composable
 private fun LogSessionListItem(
     logRoute: LogTextViewerRoute,
-    navigate: (String) -> Unit,
+    navigate: (Route) -> Unit,
     shape: Shape = CustomShapeDefaults.SingleShape,
     padding: PaddingValues = CommonDefaults.EmptyPadding,
     headline: TextContent,
     subtitle: OptionalTextContent,
     trailingContent: OptionalContent = null,
 ) {
-    val route = remember(logRoute) {
-        logTextViewerSettingsRoute.buildNavigation(logRoute)
-    }
-
     ClickableShapeListItem(
         shape = shape,
         padding = padding,
         role = Role.Button,
-        onClick = { navigate(route) },
+        onClick = { navigate(logRoute) },
         headlineContent = headline,
         supportingContent = subtitle,
         trailingContent = trailingContent

@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.util.DebugStatePublisher
 import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
@@ -49,13 +50,16 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                         viewModel.enqueueNavEvent(destination, args)
                     }
 
+                    val telemetryLevel = viewModel.telemetryLevel.collectAsStateWithLifecycle()
+                    val telemetryShowInfoDialog = viewModel.telemetryShowInfoDialog.collectAsStateWithLifecycle()
+
                     val analyticsDialog = rememberAnalyticDialog(
-                        telemetryLevel = viewModel.telemetryLevel(),
+                        telemetryLevel = telemetryLevel,
                         onChanged = { viewModel.updateTelemetryLevel(it) }
                     )
 
                     LaunchedEffect(key1 = Unit) {
-                        if (viewModel.telemetryShowInfoDialog()) {
+                        if (telemetryShowInfoDialog) {
                             analyticsDialog.open()
                         }
                     }
@@ -64,6 +68,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                 MainNavHost(
                     navController = navController,
                     navigate = { navController.navigate(it) },
+                    navigateNew = { navController.navigate(it) },
                     onBackPressed = { navController.popBackStack() }
                 )
 

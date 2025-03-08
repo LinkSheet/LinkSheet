@@ -301,11 +301,12 @@ dependencies {
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
-    implementation(Grrfe.std.process.core.withVersion("0.0.115"))
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
     implementation(Grrfe.std.stringbuilder)
     implementation(Grrfe.std.test)
+//    implementation(Grrfe.std.process.core)
+    implementation("com.gitlab.grrfe.kotlin-ext:process-core:0.0.115")
 
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
@@ -318,8 +319,6 @@ dependencies {
     implementation(_1fexd.libredirectkt)
     implementation(_1fexd.amp2html)
     implementation(_1fexd.embedResolve)
-
-//    implementation(platform(_1fexd.droidKit.bom))
 
     implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.compose.core)
@@ -337,6 +336,7 @@ dependencies {
     implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(_1fexd.composeKit.preference.core)
     implementation(_1fexd.composeKit.preference.compose.core)
+    implementation(_1fexd.composeKit.preference.compose.core2)
     implementation(_1fexd.composeKit.preference.compose.mock)
     implementation(_1fexd.composeKit.span.core)
     implementation(_1fexd.composeKit.span.compose)

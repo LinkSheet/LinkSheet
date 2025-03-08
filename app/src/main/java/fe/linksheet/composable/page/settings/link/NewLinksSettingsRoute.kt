@@ -7,6 +7,8 @@ import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotate
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.DividedSwitchListItem
+import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.route.Route
 import fe.linksheet.*
 import fe.linksheet.composable.page.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.page.settings.link.downloader.requestDownloadPermission
@@ -14,10 +16,10 @@ import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchL
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
+import fe.linksheet.navigation.LibRedirectRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
-import fe.linksheet.navigation.libRedirectSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -25,6 +27,7 @@ import org.koin.androidx.compose.koinViewModel
 fun NewLinksSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
+    navigateNew: (Route) -> Unit,
     viewModel: LinksSettingsViewModel = koinViewModel()
 ) {
     val writeExternalStoragePermissionState = downloaderPermissionState()
@@ -35,7 +38,7 @@ fun NewLinksSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.useClearUrls,
+                    statePreference = viewModel.useClearUrls,
                     headlineContent = textContent(R.string.use_clear_urls),
                     supportingContent = annotatedStringResource(R.string.use_clear_urls_explainer),
                 )
@@ -45,7 +48,7 @@ fun NewLinksSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.useFastForwardRules,
+                    statePreference = viewModel.useFastForwardRules,
                     headlineContent = textContent(R.string.fastfoward_rules),
                     supportingContent = annotatedStringResource(R.string.fastfoward_rules_explainer),
                 )
@@ -55,8 +58,8 @@ fun NewLinksSettingsRoute(
                 PreferenceDividedSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.enableLibRedirect,
-                    onContentClick = { navigate(libRedirectSettingsRoute) },
+                    statePreference = viewModel.enableLibRedirect,
+                    onContentClick = { navigateNew(LibRedirectRoute) },
                     headlineContent = textContent(R.string.enable_libredirect),
                     supportingContent = annotatedStringResource(R.string.enable_libredirect_explainer),
                 )
@@ -66,7 +69,7 @@ fun NewLinksSettingsRoute(
                 PreferenceDividedSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.followRedirects,
+                    statePreference = viewModel.followRedirects,
                     onContentClick = { navigate(followRedirectsSettingsRoute) },
                     headlineContent = textContent(R.string.follow_redirects),
                     supportingContent = annotatedStringResource(R.string.follow_redirects_explainer),
@@ -77,7 +80,7 @@ fun NewLinksSettingsRoute(
                 PreferenceDividedSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.enableAmp2Html,
+                    statePreference = viewModel.enableAmp2Html,
                     onContentClick = { navigate(amp2HtmlSettingsRoute) },
                     headlineContent = textContent(R.string.enable_amp2html),
                     supportingContent = annotatedStringResource(R.string.enable_amp2html_explainer),
@@ -85,10 +88,12 @@ fun NewLinksSettingsRoute(
             }
 
             item(key = R.string.enable_downloader) { padding, shape ->
+                val enableDownloader= viewModel.enableDownloader.collectAsStateWithLifecycle()
+
                 DividedSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    checked = viewModel.enableDownloader(),
+                    checked = enableDownloader,
                     onCheckedChange = {
                         requestDownloadPermission(
                             writeExternalStoragePermissionState,
@@ -107,7 +112,7 @@ fun NewLinksSettingsRoute(
                 PreferenceSwitchListItem(
                     shape = shape,
                     padding = padding,
-                    preference = viewModel.resolveEmbeds,
+                    statePreference = viewModel.resolveEmbeds,
                     headlineContent = textContent(R.string.resolve_embeds),
                     supportingContent = textContent(R.string.resolve_embeds_explainer),
                 )

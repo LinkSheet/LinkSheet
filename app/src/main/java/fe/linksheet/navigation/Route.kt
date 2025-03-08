@@ -7,6 +7,7 @@ import androidx.navigation.navDeepLink
 import fe.android.compose.route.util.*
 import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
+import fe.composekit.route.Route
 
 
 const val mainRoute = "main_route"
@@ -48,64 +49,25 @@ const val donateSettingsRoute = "donate_settings_route"
 
 const val themeSettingsRoute = "theme_settings_route"
 
-const val advancedSettingsRoute = "advanced_settings_route"
 const val shizukuSettingsRoute = "shizuku_settings_route"
 
-const val exportImportSettingsRoute = "export_import_settings_route"
 
-const val debugSettingsRoute = "debug_settings_route"
+//const val debugSettingsRoute = "debug_settings_route"
 const val logViewerSettingsRoute = "log_viewer_settings_route"
 const val loadDumpedPreferences = "log_dumped_reference_settings_route"
 
-@Keep
-data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
-    companion object : Route1<ExperimentSettingsRouteArg, String?>(
-        Argument(ExperimentSettingsRouteArg::experiment),
-        ::ExperimentSettingsRouteArg
-    )
-}
 
-val experimentSettingsRoute = ArgumentRoute(
-    "experiment_settings_route",
-    { it -> it.joinToString(separator = "/") { it } },
-    ExperimentSettingsRouteArg.arguments,
-    ExperimentSettingsRouteArg.createInstance,
-    listOf(navDeepLink { uriPattern = "linksheet://experiment/{experiment}" })
-)
+//val experimentSettingsRoute = ArgumentRoute(
+//    "experiment_settings_route",
+//    { it -> it.joinToString(separator = "/") { it } },
+//    ExperimentSettingsRouteArg.arguments,
+//    ExperimentSettingsRouteArg.createInstance,
+//    listOf(navDeepLink { uriPattern = "linksheet://experiment/{experiment}" })
+//)
 
 
-@Keep
-data class LogTextViewerRoute(
-    val id: String?,
-    val name: String,
-) : RouteData {
-    companion object : Route2<LogTextViewerRoute, String?, String>(
-        Argument(LogTextViewerRoute::id),
-        Argument(LogTextViewerRoute::name),
-        ::LogTextViewerRoute
-    )
-}
-
-val logTextViewerSettingsRoute = route(
-    "log_text_viewer_settings_route",
-    route = LogTextViewerRoute
-)
 
 const val linksSettingsRoute = "link_settings_route"
-const val libRedirectSettingsRoute = "lib_redirect_settings_route"
-
-@Keep
-data class LibRedirectServiceRoute(val serviceKey: String) : RouteData {
-    companion object : Route1<LibRedirectServiceRoute, String>(
-        Argument(LibRedirectServiceRoute::serviceKey),
-        ::LibRedirectServiceRoute
-    )
-}
-
-val libRedirectServiceSettingsRoute = route(
-    "lib_redirect_service_settings_route",
-    route = LibRedirectServiceRoute
-)
 
 const val followRedirectsSettingsRoute = "follow_redirects_settings_route"
 const val downloaderSettingsRoute = "downloader_settings_route"
@@ -122,8 +84,6 @@ const val appsWhichCanOpenLinksSettingsRoute = "apps_which_can_open_links_settin
 const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
 
-interface Route
-
 @Keep
 @Serializable
 data class TextEditorRoute(val text: String) : Route
@@ -137,6 +97,48 @@ data class MarkdownViewerRoute(
 ) : Route {
     constructor(wikiPage: WikiPage) : this(wikiPage.page, wikiPage.rawUrl, wikiPage.customTitle)
 }
+
+@Keep
+@Serializable
+data class ExperimentRoute(
+    val experiment: String? = null
+) : Route {
+    companion object {
+        val Empty = ExperimentRoute()
+    }
+}
+
+@Keep
+@Serializable
+data object ExportImportRoute : Route
+
+@Keep
+@Serializable
+data object AdvancedRoute : Route
+
+@Keep
+@Serializable
+data object DebugRoute : Route
+
+@Keep
+@Serializable
+data class LogTextViewerRoute(val id: String?, val name: String) : Route
+
+
+@Keep
+@Serializable
+data class LibRedirectServiceRoute(val serviceKey: String) : Route
+@Keep
+@Serializable
+data object LibRedirectRoute : Route
+
+//@Keep
+//data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
+//    companion object : Route1<ExperimentSettingsRouteArg, String?>(
+//        Argument(ExperimentSettingsRouteArg::experiment),
+//        ::ExperimentSettingsRouteArg
+//    )
+//}
 
 @Serializable
 data object MainRoute : Route

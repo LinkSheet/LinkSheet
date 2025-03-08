@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
@@ -53,6 +54,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     val clipboardManager = LocalClipboardManager.current
 
     val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
+    val newDefaultsDismissed = viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
@@ -152,7 +154,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (!viewModel.newDefaultsDismissed()) {
+            if (!newDefaultsDismissed) {
                 item(
                     key = R.string.settings_main_experiment_news__title_experiment_state_updated,
                     contentType = ContentType.ClickableAlert
@@ -162,7 +164,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                             navController.navigate(MarkdownViewerRoute(LinkSheet.WikiExperiments))
                         },
                         onDismiss = {
-                            viewModel.newDefaultsDismissed(true)
+                            viewModel.newDefaultsDismissed.update(true)
                         }
                     )
                 }
@@ -170,8 +172,10 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             if (clipboardUri != null) {
                 item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
+                    val editClipboard = viewModel.editClipboard.collectAsStateWithLifecycle()
+
                     OpenCopiedLink(
-                        editClipboard = viewModel.editClipboard(),
+                        editClipboard = editClipboard,
                         uri = clipboardUri!!,
                         navigate = { navController.navigate(it) }
                     )

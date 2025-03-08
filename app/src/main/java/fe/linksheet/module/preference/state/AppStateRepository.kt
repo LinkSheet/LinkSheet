@@ -1,10 +1,7 @@
 package fe.linksheet.module.preference.state
 
 import android.content.Context
-import fe.android.preference.helper.compose.StatePreferenceRepository
+import fe.composekit.preference.FlowPreferenceRepository
 
-class AppStateRepository(val context: Context) : StatePreferenceRepository(context, "app_state") {
-    init {
-        AppStatePreferences.runMigrations(this)
-    }
+class AppStateRepository(val context: Context) : FlowPreferenceRepository(context, "app_state") {
 }

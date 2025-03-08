@@ -29,6 +29,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetApps
 import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
@@ -148,7 +149,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             logger.info("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
             if (resolveResult != IntentResolveResult.Pending) {
                 // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
-                if (viewModel.improvedBottomSheetExpandFully()) {
+                if (viewModel.improvedBottomSheetExpandFully.value) {
                     sheetState.expand()
                 } else {
                     sheetState.partialExpand()
@@ -177,7 +178,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 //        sheetState
 //        if(sheetOpen){
         ImprovedBottomDrawer(
-            contentModifier = (if (viewModel.interceptAccidentalTaps()) {
+            contentModifier = (if (viewModel.interceptAccidentalTaps.value) {
                 Modifier.pointerInput(Unit) {
                     interceptTap { !sheetState.isAnimationRunning }
                 }
@@ -215,19 +216,32 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     }
 
                     is IntentResolveResult.Default -> {
+                        val enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
+                        val bottomSheetProfileSwitcher = viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
+                        val urlCopiedToast = viewModel.urlCopiedToast.collectAsStateWithLifecycle()
+                        val downloadStartedToast = viewModel.downloadStartedToast.collectAsStateWithLifecycle()
+                        val hideAfterCopying = viewModel.hideAfterCopying.collectAsStateWithLifecycle()
+                        val bottomSheetNativeLabel = viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
+                        val gridLayout = viewModel.gridLayout.collectAsStateWithLifecycle()
+                        val previewUrl = viewModel.previewUrl.collectAsStateWithLifecycle()
+                        val hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
+                        val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+                        val manualFollowRedirects = viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
+                        val improvedBottomSheetUrlDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap.collectAsStateWithLifecycle()
+
                         BottomSheetApps(
                             modifier = modifier,
                             result = resolveResult as IntentResolveResult.Default,
                             imageLoader = viewModel.imageLoader,
-                            enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton(),
-                            enableSwitchProfile = viewModel.bottomSheetProfileSwitcher(),
+                            enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
+                            enableSwitchProfile = bottomSheetProfileSwitcher,
                             profileSwitcher = viewModel.profileSwitcher,
-                            enableUrlCopiedToast = viewModel.urlCopiedToast(),
-                            enableDownloadStartedToast = viewModel.downloadStartedToast(),
-                            enableManualRedirect = viewModel.manualFollowRedirects(),
-                            hideAfterCopying = viewModel.hideAfterCopying(),
-                            bottomSheetNativeLabel = viewModel.bottomSheetNativeLabel(),
-                            gridLayout = viewModel.gridLayout(),
+                            enableUrlCopiedToast = urlCopiedToast,
+                            enableDownloadStartedToast = downloadStartedToast,
+                            enableManualRedirect = manualFollowRedirects,
+                            hideAfterCopying = hideAfterCopying,
+                            bottomSheetNativeLabel = bottomSheetNativeLabel,
+                            gridLayout = gridLayout,
                             appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
                             launchApp = { app, intent, modifier ->
                                 coroutineScope.launch {
@@ -257,10 +271,10 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                                 coroutineScope.launch { showToast(textId = textId, duration = duration) }
                             },
                             controller = controller,
-                            showPackage = viewModel.alwaysShowPackageName(),
-                            previewUrl = viewModel.previewUrl(),
-                            hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons(),
-                            urlCardDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap()
+                            showPackage = alwaysShowPackageName,
+                            previewUrl = previewUrl,
+                            hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
+                            urlCardDoubleTap = improvedBottomSheetUrlDoubleTap
                         )
                     }
 
@@ -329,12 +343,12 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
     private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): KnownBrowser? {
-        if (!viewModel.enableRequestPrivateBrowsingButton() || !hasUri) return null
+        if (!viewModel.enableRequestPrivateBrowsingButton.value || !hasUri) return null
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
     private suspend fun handleLaunch(intent: Intent) {
-        val showAsReferrer = viewModel.showAsReferrer()
+        val showAsReferrer = viewModel.showAsReferrer.value
 
         intent.putExtra(
             LinkSheetConnector.EXTRA_REFERRER,
@@ -402,7 +416,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        if (!viewModel.noBottomSheetStateSave()) {
+        if (!viewModel.noBottomSheetStateSave.value) {
             super.onSaveInstanceState(outState)
         }
     }

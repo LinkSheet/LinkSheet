@@ -67,41 +67,38 @@ class BottomSheetViewModel(
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
 
-    val hideAfterCopying = preferenceRepository.asState(AppPreferences.hideAfterCopying)
+    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.hideAfterCopying)
 
-    val urlCopiedToast = preferenceRepository.asState(AppPreferences.urlCopiedToast)
-    val downloadStartedToast = preferenceRepository.asState(AppPreferences.downloadStartedToast)
+    val urlCopiedToast = preferenceRepository.asViewModelState(AppPreferences.urlCopiedToast)
+    val downloadStartedToast = preferenceRepository.asViewModelState(AppPreferences.downloadStartedToast)
 
-    val gridLayout = preferenceRepository.asState(AppPreferences.gridLayout)
-    val resolveViaToast = preferenceRepository.asState(AppPreferences.resolveViaToast)
-    val resolveViaFailedToast = preferenceRepository.asState(AppPreferences.resolveViaFailedToast)
-    val previewUrl = preferenceRepository.asState(AppPreferences.previewUrl)
-    val enableRequestPrivateBrowsingButton = preferenceRepository.asState(
-        AppPreferences.enableRequestPrivateBrowsingButton
-    )
+    val gridLayout = preferenceRepository.asViewModelState(AppPreferences.gridLayout)
+    val resolveViaToast = preferenceRepository.asViewModelState(AppPreferences.resolveViaToast)
+    val resolveViaFailedToast = preferenceRepository.asViewModelState(AppPreferences.resolveViaFailedToast)
+    val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
+    val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.enableRequestPrivateBrowsingButton)
 
-    val showAsReferrer =
-        preferenceRepository.asState(AppPreferences.showLinkSheetAsReferrer)
-    val hideBottomSheetChoiceButtons = preferenceRepository.asState(AppPreferences.hideBottomSheetChoiceButtons)
-    val enableIgnoreLibRedirectButton = preferenceRepository.asState(AppPreferences.enableIgnoreLibRedirectButton)
+    val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
+    val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.hideBottomSheetChoiceButtons)
+    val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.enableIgnoreLibRedirectButton)
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!
     val downloadManager = context.getSystemService<DownloadManager>()!!
 
-    val bottomSheetProfileSwitcher = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
+    val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.bottomSheetProfileSwitcher)
 
-    val tapConfigSingle = preferenceRepository.asState(AppPreferences.tapConfigSingle)
-    val tapConfigDouble = preferenceRepository.asState(AppPreferences.tapConfigDouble)
-    val tapConfigLong = preferenceRepository.asState(AppPreferences.tapConfigLong)
-    val expandOnAppSelect = preferenceRepository.asState(AppPreferences.expandOnAppSelect)
-    val bottomSheetNativeLabel = preferenceRepository.asState(AppPreferences.bottomSheetNativeLabel)
+    val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.tapConfigSingle)
+    val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.tapConfigDouble)
+    val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.tapConfigLong)
+    val expandOnAppSelect = preferenceRepository.asViewModelState(AppPreferences.expandOnAppSelect)
+    val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheetNativeLabel)
 
-    val improvedBottomSheetExpandFully = experimentRepository.asState(Experiments.improvedBottomSheetExpandFully)
-    val improvedBottomSheetUrlDoubleTap = experimentRepository.asState(Experiments.improvedBottomSheetUrlDoubleTap)
-    val interceptAccidentalTaps = experimentRepository.asState(Experiments.interceptAccidentalTaps)
+    val improvedBottomSheetExpandFully = experimentRepository.asViewModelState(Experiments.improvedBottomSheetExpandFully)
+    val improvedBottomSheetUrlDoubleTap = experimentRepository.asViewModelState(Experiments.improvedBottomSheetUrlDoubleTap)
+    val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
 
-    val manualFollowRedirects = experimentRepository.asState(Experiments.manualFollowRedirects)
-    val noBottomSheetStateSave = experimentRepository.asState(Experiments.noBottomSheetStateSave)
+    val manualFollowRedirects = experimentRepository.asViewModelState(Experiments.manualFollowRedirects)
+    val noBottomSheetStateSave = experimentRepository.asViewModelState(Experiments.noBottomSheetStateSave)
 
     val appListSelectedIdx = mutableIntStateOf(-1)
 
@@ -124,22 +121,6 @@ class BottomSheetViewModel(
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             this.data = Uri.parse("package:${info.packageName}")
         })
-    }
-
-    private fun getResolveToastText(resolveModule: ResolveModule, result: Result<ResolveResultType>?): String? {
-        if (result == null) return null
-        val resolveResult = result.getOrNull()
-
-        val moduleName = resolveModule.getString(context)
-        if (resolveResult is ResolveResultType.Resolved && resolveViaToast.value) {
-            return context.getString(R.string.resolved_via, moduleName, resolveResult.getString(context))
-        }
-
-        if (resolveResult == null && resolveViaFailedToast.value) {
-            return resolveFailureString(moduleName, result.exceptionOrNull())
-        }
-
-        return null
     }
 
     private fun resolveFailureString(name: String, error: Any?): String {
@@ -316,7 +297,7 @@ class BottomSheetViewModel(
 
             TapConfig.SelectItem -> {
                 appListSelectedIdx.intValue = if (appListSelectedIdx.intValue != index) index else -1
-                if (appListSelectedIdx.intValue != -1 && !isExpanded && expandOnAppSelect()) {
+                if (appListSelectedIdx.intValue != -1 && !isExpanded && expandOnAppSelect.value) {
                     requestExpand()
                 }
             }

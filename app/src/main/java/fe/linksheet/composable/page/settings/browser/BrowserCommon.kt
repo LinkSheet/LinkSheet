@@ -15,14 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import fe.android.preference.helper.compose.StateMappedPreference
+import fe.android.preference.helper.Preference
+import fe.composekit.preference.ViewModelStatePreference
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.compose.items
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.resolver.DisplayActivityInfo
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -31,9 +30,8 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
     @StringRes headline: Int,
     @StringRes explainer: Int,
     onBackPressed: () -> Unit,
-    viewModel: BaseViewModel,
     values: List<T>,
-    state: StateMappedPreference<T, M>?,
+    state:  ViewModelStatePreference<T, T, Preference.Mapped<T, M>>?,
     rowKey: (T) -> String,
     rows: List<BrowserCommonRadioButtonRowData>,
     header: @Composable (ColumnScope.() -> Unit)? = null,
@@ -68,7 +66,6 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
                     BrowserCommonRadioButtonRow(
                         value = value,
                         state = state,
-                        viewModel = viewModel,
                         headlineId = row.headline,
                         subtitleId = row.subtitle,
                         clickHook = row.clickHook
@@ -85,7 +82,6 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
                             BrowserCommonRadioButtonRow(
                                 value = selectorData.value,
                                 state = state,
-                                viewModel = viewModel,
                                 headlineId = selectorData.headline,
                                 subtitleId = selectorData.subtitle
                             )
@@ -127,8 +123,7 @@ data class BrowserCommonRadioButtonRowData(
 fun <T : Any, M : Any> BrowserCommonRadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
-    state: StateMappedPreference<T, M>,
-    viewModel: BaseViewModel,
+    state: ViewModelStatePreference<T, T, Preference.Mapped<T, M>>,
     @StringRes headlineId: Int,
     @StringRes subtitleId: Int? = null,
     clickHook: (() -> Unit)? = null
@@ -136,8 +131,7 @@ fun <T : Any, M : Any> BrowserCommonRadioButtonRow(
     RadioButtonRow(
         modifier = modifier,
         value = value,
-        state = state,
-        viewModel = viewModel,
+        statePreference = state,
         clickHook = clickHook,
     ) {
         Texts(

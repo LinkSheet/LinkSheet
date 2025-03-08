@@ -2,31 +2,31 @@ package fe.linksheet.module.preference.app
 
 import android.content.Context
 import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.StatePreferenceRepository
-import fe.linksheet.util.buildconfig.LinkSheetAppConfig
+import fe.composekit.preference.FlowPreferenceRepository
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 
-class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(context), KoinComponent {
+class AppPreferenceRepository(val context: Context) : FlowPreferenceRepository(context), KoinComponent {
     private val logger by injectLogger<AppPreferenceRepository>()
-
-    private val followRedirectsExternalService = asState(AppPreferences.followRedirectsExternalService)
-    private val amp2HtmlExternalService = asState(AppPreferences.amp2HtmlExternalService)
 
     private val preferencesRequiringPermission by lazy {
         mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
     }
 
-    init {
+    suspend fun init(dispatcher: CoroutineDispatcher = Dispatchers.IO) = withContext(dispatcher) {
         // Ensure backwards compatibility as this feature was previously included in non-pro versions
         if (!LinkSheetAppConfig.isPro()) {
-            followRedirectsExternalService(false)
-            amp2HtmlExternalService(false)
+            put(AppPreferences.followRedirectsExternalService, false)
+            put(AppPreferences.amp2HtmlExternalService, false)
         }
 
-        AppPreferences.runMigrations(this)
+        AppPreferences.runMigrations(this@AppPreferenceRepository)
     }
 
     fun importPreferences(preferencesToImport: Map<String, String>): List<PermissionBoundPreference> {
@@ -52,7 +52,8 @@ class AppPreferenceRepository(val context: Context) : StatePreferenceRepository(
             // Forces refresh by reading new value from the preference file; In the future, maybe this should be updating
             // newValue to the RepositoryState instance directly, but that would require converting the
             // string value to the appropriate state type
-            stateCache.get(preference.key)?.forceRefresh()
+
+            cache.get(preference.key)?.reload()
 
             val requiredPermission = preferencesRequiringPermission[preference]
             if (requiredPermission?.check() == false) requiredPermission else null

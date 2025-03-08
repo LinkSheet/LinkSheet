@@ -9,6 +9,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.composekit.component.list.item.type.RadioButtonListItem
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
@@ -30,7 +31,7 @@ fun NewInAppBrowserSettingsRoute(
                     padding = padding,
                     shape = shape,
                     value = InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
-                    preference = viewModel.inAppBrowserMode,
+                    statePreference = viewModel.inAppBrowserMode,
                     position = ContentPosition.Leading,
                     headlineContent = textContent(R.string.use_app_settings),
                     supportingContent = textContent(R.string.use_app_settings_explainer)
@@ -42,7 +43,7 @@ fun NewInAppBrowserSettingsRoute(
                     padding = padding,
                     shape = shape,
                     value = InAppBrowserHandler.InAppBrowserMode.AlwaysDisableInAppBrowser,
-                    preference = viewModel.inAppBrowserMode,
+                    statePreference = viewModel.inAppBrowserMode,
                     position = ContentPosition.Leading,
                     headlineContent = textContent(R.string.always_disable),
                     supportingContent = textContent(R.string.always_disable_explainer)
@@ -50,10 +51,12 @@ fun NewInAppBrowserSettingsRoute(
             }
 
             item(key = R.string.disable_in_selected) { padding, shape ->
+                val inAppBrowserMode = viewModel.inAppBrowserMode.collectAsStateWithLifecycle()
+
                 RadioButtonListItem(
                     shape = shape,
                     padding = padding,
-                    selected = viewModel.inAppBrowserMode() == InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps,
+                    selected = inAppBrowserMode == InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps,
                     onSelect = { viewModel.inAppBrowserMode(InAppBrowserHandler.InAppBrowserMode.DisableInSelectedApps) },
                     position = ContentPosition.Leading,
                     headlineContent = textContent(R.string.disable_in_selected),

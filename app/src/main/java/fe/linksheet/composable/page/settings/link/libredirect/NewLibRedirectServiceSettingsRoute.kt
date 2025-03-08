@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.android.compose.extension.enabled
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -16,27 +17,43 @@ import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.kotlin.collectOnIO
+import fe.linksheet.feature.libredirect.FrontendState
 import fe.linksheet.module.database.entity.LibRedirectDefault
-import fe.linksheet.module.viewmodel.BuiltInFrontendHolder
 import fe.linksheet.module.viewmodel.LibRedirectServiceSettingsViewModel
 import fe.linksheet.util.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 
 @Composable
 fun NewLibRedirectServiceSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: LibRedirectServiceSettingsViewModel = koinViewModel(),
+    serviceKey: String?,
+    viewModel: LibRedirectServiceSettingsViewModel = koinViewModel(parameters = {
+        parametersOf(serviceKey)
+    }),
 ) {
-    val selected by viewModel.selected.collectOnIO()
+    LaunchedEffect(key1 = Unit) {
+        viewModel.loadSettings()
+    }
+
+    val settings by viewModel.settings.collectAsStateWithLifecycle()
+
+    val selectedFrontend by viewModel.selectedFrontend.collectOnIO()
     val enabled by viewModel.enabled.collectOnIO(false)
 
-    val instances = remember(selected) {
-        viewModel.getInstancesFor(selected?.frontendKey)
+    val selected = remember(selectedFrontend) {
+        selectedFrontend?.first
+    }
+    val selectedFrontendState = remember(selectedFrontend) { selectedFrontend?.second }
+
+    val instances = remember(selectedFrontend) {
+        selectedFrontend?.second?.instances ?: emptySet()
     }
 
     SaneScaffoldSettingsPage(
-        headline = stringResource(id = R.string.lib_redirect_service, viewModel.service.name),
+//        viewModel.service.name
+        headline = stringResource(id = R.string.lib_redirect_service, "fixme"),
         onBackPressed = onBackPressed
     ) {
         item(key = R.string.enabled, contentType = ContentType.SingleGroupItem) {
@@ -50,13 +67,17 @@ fun NewLibRedirectServiceSettingsRoute(
 
         divider(id = R.string.frontend)
 
-        if (selected != null) {
+        if (selected != null && selectedFrontendState != null) {
             item(key = "dropdown", contentType = ContentType.SingleGroupItem) {
+                val frontends = remember(settings) {
+                    settings?.frontends ?: emptyList()
+                }
+
                 FrontendDropdown(
                     enabled = enabled,
-                    selected = viewModel.getFrontendByKey(selected!!.frontendKey)!!,
-                    frontends = viewModel.getFrontends(),
-                    onChange = { newFrontend -> viewModel.updateFrontend(selected!!, newFrontend) }
+                    selected = selectedFrontendState,
+                    frontends = frontends,
+                    onChange = { newFrontend -> viewModel.resetServiceToFrontend(newFrontend) }
                 )
             }
         }
@@ -70,8 +91,8 @@ fun NewLibRedirectServiceSettingsRoute(
                         shape = shape,
                         padding = padding,
                         enabled = enabled.toEnabledContentSet(),
-                        selected = selected!!.instanceUrl == LibRedirectDefault.randomInstance,
-                        onSelect = { viewModel.updateInstance(selected!!, LibRedirectDefault.randomInstance) },
+                        selected = selected.instanceUrl == LibRedirectDefault.randomInstance,
+                        onSelect = { viewModel.updateInstance(selected, LibRedirectDefault.randomInstance) },
                         position = ContentPosition.Leading,
                         headlineContent = textContent(R.string.random_instance),
                         otherContent = null
@@ -84,8 +105,8 @@ fun NewLibRedirectServiceSettingsRoute(
                             shape = shape,
                             padding = padding,
                             enabled = enabled.toEnabledContentSet(),
-                            selected = selected!!.instanceUrl == instance,
-                            onSelect = { viewModel.updateInstance(selected!!, instance) },
+                            selected = selected.instanceUrl == instance,
+                            onSelect = { viewModel.updateInstance(selected, instance) },
                             position = ContentPosition.Leading,
                             headlineContent = text(HostUtil.cleanHttpsScheme(instance)),
                             otherContent = null
@@ -101,9 +122,9 @@ fun NewLibRedirectServiceSettingsRoute(
 @Composable
 private fun FrontendDropdown(
     enabled: Boolean,
-    selected: BuiltInFrontendHolder,
-    frontends: Iterable<BuiltInFrontendHolder>,
-    onChange: (String) -> Unit,
+    selected: FrontendState,
+    frontends: List<FrontendState>,
+    onChange: (FrontendState) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -127,9 +148,12 @@ private fun FrontendDropdown(
                 FrontendDropdownItem(
                     frontend = frontend,
                     onClick = {
-                        if (selected.key != frontend.key) {
-                            onChange(frontend.key)
+                        if (selected != frontend) {
+                            onChange(frontend)
                         }
+//                        if (selected.key != frontend.key) {
+//                            onChange(frontend.key)
+//                        }
 
                         expanded = false
                     }
@@ -141,7 +165,7 @@ private fun FrontendDropdown(
 
 @Composable
 private fun FrontendDropdownItem(
-    frontend: BuiltInFrontendHolder,
+    frontend: FrontendState,
     onClick: () -> Unit,
 ) {
     DropdownMenuItem(

@@ -22,14 +22,16 @@ import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 
 @Composable
 fun NewLogTextSettingsRoute(
     onBackPressed: () -> Unit,
-    viewModel: LogTextSettingsViewModel = koinViewModel(),
+    sessionId: String?,
+    sessionName: String,
+    viewModel: LogTextSettingsViewModel = koinViewModel(parameters = { parametersOf(sessionId) }),
 ) {
-    val sessionName by viewModel.sessionName.collectOnIO()
     val logEntries by viewModel.logEntries.collectOnIO()
     val listState = remember(logEntries?.size) {
         listState(logEntries)

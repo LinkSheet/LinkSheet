@@ -2,6 +2,7 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Activity
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.profile.CrossProfile
@@ -24,7 +25,7 @@ class ProfileSwitchingSettingsViewModel(
             profileSwitcher.getUserProfileInfo(it)
         }
 
-    val enabled = preferenceRepository.asState(AppPreferences.bottomSheetProfileSwitcher)
+    val enabled = preferenceRepository.asViewModelState(AppPreferences.bottomSheetProfileSwitcher)
 
     fun checkIsManagedProfile(): Boolean {
         return profileSwitcher.checkIsManagedProfile()

@@ -3,6 +3,8 @@ package fe.linksheet.module.preference.experiment
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.compose.StatePreference
+import fe.composekit.preference.ViewModelStatePreference
+import kotlinx.coroutines.CoroutineScope
 
 object Experiments : PreferenceDefinition(
     "experiment_drop_categories",
@@ -93,8 +95,8 @@ class ExperimentGroup(val name: String, val displayName: String = "Experiment $n
 
     val defaultValues: Map<String, Boolean> by lazy { _preferences.associate { it.preference.key to it.preference.default } }
 
-    fun asState(repository: ExperimentRepository): Map<String, StatePreference<Boolean>> {
-        return _preferences.associate { preference -> preference.preference.key to repository.asState(preference.preference) }
+    fun asState(repository: ExperimentRepository): Map<String, ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>> {
+        return _preferences.associate { preference -> preference.preference.key to repository.asViewModelState(preference.preference) }
     }
 
     val hidden: Boolean = false

@@ -8,6 +8,7 @@ import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -28,13 +29,29 @@ val viewModelModule = module {
     viewModelOf(::BottomSheetSettingsViewModel)
     viewModelOf(::LinksSettingsViewModel)
     viewModelOf(::LibRedirectSettingsViewModel)
-    viewModelOf(::LibRedirectServiceSettingsViewModel)
+    viewModel { parameters ->
+        LibRedirectServiceSettingsViewModel(
+            context = get(),
+            serviceKey = parameters.get(),
+            defaultRepository = get(),
+            stateRepository = get(),
+            preferenceRepository = get()
+        )
+    }
     viewModelOf(::BottomSheetViewModel)
     viewModelOf(::ThemeSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
     viewModelOf(::DownloaderSettingsViewModel)
     viewModelOf(::LogSettingsViewModel)
-    viewModelOf(::LogTextSettingsViewModel)
+    viewModel { parameters ->
+        LogTextSettingsViewModel(
+            context = get(),
+            sessionId = parameters.get(),
+            logViewCommon = get(),
+            preferenceRepository = get(),
+            logPersistService = get()
+        )
+    }
     viewModelOf(::CrashHandlerViewerViewModel)
     viewModelOf(::Amp2HtmlSettingsViewModel)
     viewModelOf(::FeatureFlagViewModel)

@@ -9,29 +9,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import fe.android.preference.helper.compose.StateMappedPreference
-import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.android.preference.helper.Preference
+import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
 
 
 @Composable
 fun <T : Any, M : Any> RadioButtonRow(
     modifier: Modifier = Modifier,
     value: T,
-    state: StateMappedPreference<T, M>,
-    viewModel: BaseViewModel,
+    statePreference: ViewModelStatePreference<T , T, Preference.Mapped<T, M>>,
     enabled: Boolean = true,
     clickHook: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
+    val state = statePreference.collectAsStateWithLifecycle()
+
     RadioButtonRow(
         modifier = modifier,
         enabled = enabled,
         onClick = {
-            state(value)
+            statePreference(value)
             clickHook?.invoke()
         },
         onLongClick = null,
-        selected = state() == value,
+        selected = state == value,
         content = content
     )
 }

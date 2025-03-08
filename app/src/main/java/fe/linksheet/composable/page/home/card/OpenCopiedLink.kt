@@ -20,7 +20,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.navigation.Route
+import fe.composekit.route.Route
 import fe.linksheet.navigation.TextEditorRoute
 
 

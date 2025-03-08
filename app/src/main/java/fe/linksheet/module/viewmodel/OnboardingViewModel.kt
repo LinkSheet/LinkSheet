@@ -1,6 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 
 
@@ -13,5 +14,5 @@ class OnboardingViewModel(
     val preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val firstRun = preferenceRepository.asState(AppPreferences.firstRun)
+    val firstRun = preferenceRepository.asViewModelState(AppPreferences.firstRun)
 }

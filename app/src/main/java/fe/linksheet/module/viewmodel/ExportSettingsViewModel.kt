@@ -25,8 +25,7 @@ class ExportSettingsViewModel(
 
     private val importExportService = ImportExportService(context)
 
-
-    fun importPreferences(uri: Uri): Result<List<PermissionBoundPreference>> {
+    suspend fun importPreferences(uri: Uri): Result<List<PermissionBoundPreference>> {
         val result = importExportService.importPreferencesFromUri(uri)
         if (result.isFailure) {
             return Result.failure(result.exceptionOrNull()!!)
@@ -36,7 +35,7 @@ class ExportSettingsViewModel(
     }
 
     @OptIn(SensitivePreference::class)
-    fun exportPreferences(uri: Uri, includeLogHashKey: Boolean) {
+    suspend fun exportPreferences(uri: Uri, includeLogHashKey: Boolean) {
         val set = AppPreferences.sensitivePreferences.toMutableSet()
         if (includeLogHashKey) {
             set.remove(AppPreferences.logKey)

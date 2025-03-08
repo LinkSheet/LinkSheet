@@ -535,4 +535,6 @@
     <string name="resolve_event__idle">Изчакване</string>
     <string name="settings_profile_switcher__title_no_profile">Не са налични профили</string>
     <string name="settings_profile_switcher__text_no_profile">Тази възможност е достъпна само при настроени (работни) профили на устройството.</string>
+    <string name="settings_home__title_clipboard_card">Карта на паметта за обмен</string>
+    <string name="settings_home__text_clipboard_card">Показване съдържанието на паметта за обмен на началната страница ако е адрес</string>
 </resources>

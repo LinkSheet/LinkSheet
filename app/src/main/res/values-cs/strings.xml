@@ -543,4 +543,6 @@
     <string name="resolve_event__idle">Nečinný</string>
     <string name="settings_profile_switcher__text_no_profile">Tato funkce je k dispozici pouze, pokud jste na svém zařízení nastavili (pracovní) profil.</string>
     <string name="settings_profile_switcher__title_no_profile">Nejsou dostupné žádné profily</string>
+    <string name="settings_home__title_clipboard_card">Karta schránky</string>
+    <string name="settings_home__text_clipboard_card">Zobrazit aktuální obsah schránky na domovské stránce, pokud se jedná o adresu</string>
 </resources>

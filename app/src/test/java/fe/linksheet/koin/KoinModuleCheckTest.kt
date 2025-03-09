@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import androidx.lifecycle.SavedStateHandle
+import coil3.ImageLoader
 import com.google.gson.Gson
 import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.UnitTest
+import fe.linksheet.feature.libredirect.LibRedirectSettingsUseCase
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.`package`.PackageLabelService
@@ -95,7 +97,7 @@ internal class KoinModuleCheckTest : UnitTest {
             OkHttpClient::class
         ),
         definition<AllRemoteResolveRequest>(Request::class),
-        definition<BrowserResolver>( PackageService::class),
+        definition<BrowserResolver>(PackageService::class),
         definition<InAppBrowserHandler>(DisableInAppBrowserInSelectedRepository::class),
         definition<RedirectUrlResolver>(
             RedirectResolveRequest::class, ResolvedRedirectRepository::class
@@ -129,7 +131,6 @@ internal class KoinModuleCheckTest : UnitTest {
         ),
         definition<PreferredAppSettingsViewModel>(PackageService::class),
         definition<PreferredBrowserViewModel>(BrowserResolver::class),
-        definition<BottomSheetViewModel>(IntentResolver::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
         definition<ExportSettingsViewModel>(Gson::class),
         definition<AboutSettingsViewModel>(Gson::class),
@@ -140,9 +141,11 @@ internal class KoinModuleCheckTest : UnitTest {
             SystemInfoService::class
         ),
         definition<MarkdownViewModel>(Request::class),
+        definition<LibRedirectServiceSettingsViewModel>(LibRedirectSettingsUseCase::class),
+        definition<BottomSheetViewModel>(ImageLoader::class, IntentResolver::class),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(CachedRequest::class),
-        definition<StatisticsService>(AppPreferenceRepository::class)
+        definition<StatisticsService>(AppPreferenceRepository::class),
     )
 
     @Test

@@ -369,6 +369,9 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
+    androidTestImplementation(Koin.test)
+    androidTestImplementation(Koin.junit4)
+    androidTestImplementation(Koin.android)
     androidTestImplementation(platform(AndroidX.compose.bom))
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)

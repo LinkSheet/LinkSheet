@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.android.compose.extension.enabled
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -51,9 +51,14 @@ fun NewLibRedirectServiceSettingsRoute(
         selectedFrontend?.second?.instances ?: emptySet()
     }
 
+    val resources = LocalContext.current.resources
+
+    val serviceName = remember(settings) {
+        resources.getString(R.string.lib_redirect_service, settings?.service?.name ?: "")
+    }
+
     SaneScaffoldSettingsPage(
-//        viewModel.service.name
-        headline = stringResource(id = R.string.lib_redirect_service, "fixme"),
+        headline = serviceName,
         onBackPressed = onBackPressed
     ) {
         item(key = R.string.enabled, contentType = ContentType.SingleGroupItem) {

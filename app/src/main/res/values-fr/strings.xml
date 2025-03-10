@@ -540,4 +540,6 @@
     <string name="settings_profile_switcher__text_no_profile">Cette fonctionnalité n\'est disponible que si un profil (professionnel) a été configuré sur votre appareil.</string>
     <string name="resolve_event__idle">Inactif</string>
     <string name="settings_profile_switcher__title_no_profile">Aucun profil(s) disponible</string>
+    <string name="settings_home__title_clipboard_card">Carte du presse-papiers</string>
+    <string name="settings_home__text_clipboard_card">Afficher le contenu actuel du presse-papiers sur la page d\'accueil s\'il s\'agit d\'une url</string>
 </resources>

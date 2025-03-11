@@ -362,10 +362,24 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
-    androidTestImplementation(Koin.test)
-    androidTestImplementation(Koin.junit4)
-    androidTestImplementation(Koin.android)
-    androidTestImplementation(platform(AndroidX.compose.bom))
+    val commonTestDependencies = arrayOf(
+        Koin.test,
+        Koin.junit4,
+        Koin.android,
+        KotlinX.coroutines.test,
+        AndroidX.room.testing,
+        Grrfe.std.test,
+        Grrfe.std.result.assert,
+        Testing.robolectric,
+        "com.willowtreeapps.assertk:assertk:_",
+        kotlin("test")
+    )
+
+    for (notation in commonTestDependencies) {
+        androidTestImplementation(notation)
+        testImplementation(notation)
+    }
+
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
@@ -373,24 +387,11 @@ dependencies {
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
-    androidTestImplementation(AndroidX.room.testing)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestImplementation(AndroidX.test.uiAutomator)
-    androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
-    androidTestImplementation(kotlin("test"))
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
 
-    testImplementation(AndroidX.room.testing)
-    testImplementation(Grrfe.std.result.assert)
-    testImplementation(Koin.test)
-    testImplementation(Koin.junit4)
-    testImplementation(Koin.android)
-    testImplementation(Testing.junit4)
-    testImplementation(Testing.robolectric)
-    testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
-    testImplementation(kotlin("test"))
-
 
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

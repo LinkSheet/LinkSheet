@@ -399,6 +399,12 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
+    testImplementation(CashApp.turbine)
+    testImplementation("org.mock-server:mockserver-client-java:_")
+    implementation(platform("org.testcontainers:testcontainers-bom:_"))
+    testImplementation("org.testcontainers:mockserver:_")
+    testImplementation("org.testcontainers:toxiproxy:_")
+
     val commonTestDependencies = arrayOf(
         Koin.test,
         Koin.junit4,
@@ -417,12 +423,6 @@ dependencies {
         testImplementation(notation)
     }
 
-    testImplementation(CashApp.turbine)
-    testImplementation("org.mock-server:mockserver-client-java:_")
-    implementation(platform("org.testcontainers:testcontainers-bom:_"))
-    testImplementation("org.testcontainers:mockserver:_")
-    testImplementation("org.testcontainers:toxiproxy:_")
-
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
@@ -431,6 +431,9 @@ dependencies {
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.test.uiAutomator)
+    androidTestImplementation(AndroidX.test.uiAutomator)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
 
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
 

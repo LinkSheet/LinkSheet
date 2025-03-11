@@ -415,6 +415,12 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
+    testImplementation(CashApp.turbine)
+    testImplementation("org.mock-server:mockserver-client-java:_")
+    implementation(platform("org.testcontainers:testcontainers-bom:_"))
+    testImplementation("org.testcontainers:mockserver:_")
+    testImplementation("org.testcontainers:toxiproxy:_")
+
     val commonTestDependencies = arrayOf(
         Koin.test,
         Koin.junit4,

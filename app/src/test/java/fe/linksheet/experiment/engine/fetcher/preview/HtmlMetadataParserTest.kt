@@ -10,10 +10,8 @@ import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.test.runTest
-import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import me.saket.unfurl.defaultOkHttpClient
-import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.jsoup.nodes.Element
 import org.junit.runner.RunWith
 import kotlin.test.Test
@@ -78,13 +76,15 @@ internal class HtmlMetadataParserTest : UnitTest {
         val document = response.parseHtmlBody()
         val result = HtmlMetadataParser().parse(document, document.html())
 
+        // TODO: Fix
         assertThat(result).isEqualTo(
-            UnfurlResult(
-                url = "https://www.getproactiv.ca/proactiv-solution-repairing-treatment/p/842944100695?productcode=842944100695".toHttpUrl(),
+            PreviewResult.RichPreviewResult(
+                url = "https://www.getproactiv.ca/proactiv-solution-repairing-treatment/p/842944100695?productcode=842944100695",
                 title = "Proactiv Solution® Repairing Treatment | Proactiv® Products",
                 description = "Our Repairing Treatment is a leave-on treatment formulated with prescription-grade benzoyl peroxide designed to penetrate pores to kill acne-causing bacteria.",
-                favicon = "https://www.getproactiv.ca/favicon.ico".toHttpUrl(),
-                thumbnail = "https://cdn-tp3.mozu.com/30113-50629/cms/50629/files/f050a010-0420-4a53-b898-d4c08db77eb9".toHttpUrl(),
+                favicon = "https://www.getproactiv.ca/favicon.ico",
+                thumbnail = "https://cdn-tp3.mozu.com/30113-50629/cms/50629/files/f050a010-0420-4a53-b898-d4c08db77eb9",
+                htmlText = ""
             )
         )
     }

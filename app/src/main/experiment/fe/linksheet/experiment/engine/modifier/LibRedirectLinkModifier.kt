@@ -6,11 +6,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class LibRedirectLinkModifier(
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val resolver: LibRedirectResolver,
-    private val jsEngine: () -> Boolean = { false }
+    private val useJsEngine: () -> Boolean = { false }
 ) : LinkModifier {
-    override suspend fun modify(data: ModifyInput): ModifyOutput? = withContext(dispatcher) {
+    override suspend fun warmup() = withContext(ioDispatcher) {
+        resolver.warmup()
+    }
+
+    override suspend fun modify(data: ModifyInput): ModifyOutput? = withContext(ioDispatcher) {
 //        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
 //        if (ignoreLibRedirectExtra) {
 //            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
@@ -18,7 +22,7 @@ class LibRedirectLinkModifier(
 
 //        if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
 
-        resolver.resolve(data.url, jsEngine())
+        resolver.resolve(data.url, useJsEngine())
         ModifyOutput(data.url)
     }
 }

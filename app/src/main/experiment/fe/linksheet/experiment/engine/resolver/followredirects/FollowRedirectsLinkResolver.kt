@@ -18,7 +18,7 @@ class FollowRedirectsLinkResolver(
     private val isTracker: (String) -> Boolean= { FastForward.isTracker(it) },
     private val allowDarknets: () -> Boolean,
     private val followOnlyKnownTrackers: () -> Boolean,
-    private val localCache: () -> Boolean,
+    private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
 
     private suspend fun insertCache(entryId: Long, result: FollowRedirectsResult) {
@@ -40,7 +40,7 @@ class FollowRedirectsLinkResolver(
             return ResolveOutput(data.url)
         }
 
-        val localCache = localCache()
+        val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data.url)
 
         if (localCache) {

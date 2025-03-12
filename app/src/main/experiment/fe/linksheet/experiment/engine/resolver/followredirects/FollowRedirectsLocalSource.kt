@@ -6,12 +6,9 @@ import fe.linksheet.extension.ktor.urlString
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest.Companion.parseRefreshHeader
 import fe.std.result.*
 import io.ktor.client.*
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import me.saket.unfurl.extension.HtmlMetadataUnfurlerExtension
 
 
 class FollowRedirectsLocalSource(private val client: HttpClient) : FollowRedirectsSource {

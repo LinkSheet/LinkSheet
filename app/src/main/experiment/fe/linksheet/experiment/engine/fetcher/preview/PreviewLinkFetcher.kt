@@ -6,18 +6,16 @@ import fe.linksheet.experiment.engine.fetcher.LinkFetcher
 import fe.linksheet.module.repository.CacheRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import me.saket.unfurl.Unfurler
 
-class PreviewFetcher(
+class PreviewLinkFetcher(
     private val source: PreviewSource,
     private val cacheRepository: CacheRepository,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val localCache: () -> Boolean,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val useLocalCache: () -> Boolean,
 ) : LinkFetcher {
 
     override suspend fun resolve(data: FetchInput): FetchOutput? {
-        val localCache = localCache()
+        val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data.url)
         if(localCache) {
             val previewCache = cacheRepository.getCachedPreview(entry.id)

@@ -5,14 +5,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DownloadFetcher(
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+class DownloadLinkFetcher(
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val downloader: Downloader,
     private val checkUrlMimeType: () -> Boolean = { false },
     private val requestTimeout: () -> Int = { 15 },
 ) : LinkFetcher {
 
-    override suspend fun resolve(data: FetchInput): FetchOutput? = withContext(dispatcher) {
+    override suspend fun resolve(data: FetchInput): FetchOutput? = withContext(ioDispatcher) {
         if (checkUrlMimeType()) {
             val result = downloader.checkIsNonHtmlFileEnding(data.url)
 //            if (result.isDownloadable()) return@withContext result

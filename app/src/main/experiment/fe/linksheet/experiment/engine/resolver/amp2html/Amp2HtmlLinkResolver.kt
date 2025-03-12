@@ -11,7 +11,7 @@ import fe.std.result.isFailure
 class Amp2HtmlLinkResolver(
     private val source: Amp2HtmlSource,
     private val cacheRepository: CacheRepository,
-    private val localCache: () -> Boolean,
+    private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
     private suspend fun insertCache(entryId: Long, result: Amp2HtmlResult) {
         cacheRepository.insertResolved(entryId, ResolveType.Amp2Html, result.url)
@@ -40,7 +40,7 @@ class Amp2HtmlLinkResolver(
     }
 
     override suspend fun resolve(data: ResolveInput): ResolveOutput? {
-        val localCache = localCache()
+        val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data.url)
 
         if (localCache) {

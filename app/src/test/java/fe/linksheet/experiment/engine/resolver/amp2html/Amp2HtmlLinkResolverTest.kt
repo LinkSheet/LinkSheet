@@ -61,7 +61,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         val resolver = Amp2HtmlLinkResolver(
             source = source,
             cacheRepository = cacheRepository,
-            localCache = { false }
+            useLocalCache = { false }
         )
 
         val result = resolver.resolve(ResolveInput(URL))
@@ -82,7 +82,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         val resolver = Amp2HtmlLinkResolver(
             source = createSource("https://not-from-cache.com", "<html></html>"),
             cacheRepository = cacheRepository,
-            localCache = { true }
+            useLocalCache = { true }
         )
 
         val testResolvedUrl = "https://linksheet.app"
@@ -120,7 +120,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
                 }
             },
             cacheRepository = cacheRepository,
-            localCache = { true }
+            useLocalCache = { true }
         )
 
         val entry = UrlEntry(1, url = URL)

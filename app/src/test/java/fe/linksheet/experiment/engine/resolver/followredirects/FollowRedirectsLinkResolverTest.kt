@@ -46,7 +46,7 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
             cacheRepository = cacheRepository,
             allowDarknets = { false },
             followOnlyKnownTrackers = { false },
-            localCache = { true }
+            useLocalCache = { true }
         )
 
         val result = resolver.resolve(ResolveInput(SHORT_URL))

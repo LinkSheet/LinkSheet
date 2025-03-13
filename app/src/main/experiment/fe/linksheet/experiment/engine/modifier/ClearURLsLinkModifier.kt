@@ -21,7 +21,7 @@ class ClearURLsLinkModifier(private val ioDispatcher: CoroutineDispatcher = Disp
     }
 
     override suspend fun modify(data: ModifyInput): ModifyOutput? {
-        val result = clearUrls?.clearUrl(data.url)?.first
-        return result?.let { ModifyOutput(it) }
+        val (uri, _) = clearUrls?.clearUrl(data.url) ?: return null
+        return ModifyOutput(uri)
     }
 }

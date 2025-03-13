@@ -14,10 +14,12 @@ data class PreviewCache(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String?,
     val description: String?,
-    val faviconType: String?,
-    val faviconUrl: ByteArray?,
-    val thumbnailType: String?,
-    val thumbnail: ByteArray?
+    val faviconUrl: String?,
+    val thumbnailUrl: String?
+//    val faviconType: String?,
+//    val faviconUrl: ByteArray?,
+//    val thumbnailType: String?,
+//    val thumbnail: ByteArray?
 ) {
 
 }

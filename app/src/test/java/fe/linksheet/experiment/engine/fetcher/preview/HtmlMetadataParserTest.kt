@@ -8,6 +8,7 @@ import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import assertk.tableOf
 import fe.linksheet.UnitTest
+import fe.linksheet.experiment.engine.fetcher.preview.HtmlPreviewResult.RichPreviewResult
 import kotlinx.coroutines.test.runTest
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -242,13 +243,13 @@ internal class HtmlMetadataParserTest : UnitTest {
         val result = HtmlMetadataParser().parse(document, document.html())
 
         assertThat(result)
-            .isInstanceOf<PreviewResult.RichPreviewResult>()
+            .isInstanceOf<RichPreviewResult>()
             .all {
-                prop(PreviewResult.RichPreviewResult::url).isEqualTo("https://tonsky.me/blog/diagrams")
-                prop(PreviewResult.RichPreviewResult::title).isEqualTo("Where Should Visual Programming Go?")
-                prop(PreviewResult.RichPreviewResult::description).isEqualTo("Visual programming and textual code should co-exist next to each other, not replace one another")
-                prop(PreviewResult.RichPreviewResult::favicon).isEqualTo("https://tonsky.me/i/favicon.png")
-                prop(PreviewResult.RichPreviewResult::thumbnail).isEqualTo("https://dynogee.com/gen?id=nm509093bpj50lv&title=Where+Should+Visual+Programming+Go%3F")
+                prop(RichPreviewResult::url).isEqualTo("https://tonsky.me/blog/diagrams")
+                prop(RichPreviewResult::title).isEqualTo("Where Should Visual Programming Go?")
+                prop(RichPreviewResult::description).isEqualTo("Visual programming and textual code should co-exist next to each other, not replace one another")
+                prop(RichPreviewResult::favicon).isEqualTo("https://tonsky.me/i/favicon.png")
+                prop(RichPreviewResult::thumbnail).isEqualTo("https://dynogee.com/gen?id=nm509093bpj50lv&title=Where+Should+Visual+Programming+Go%3F")
             }
     }
 }

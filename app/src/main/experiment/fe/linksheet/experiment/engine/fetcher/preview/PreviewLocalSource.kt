@@ -11,7 +11,10 @@ import io.ktor.client.*
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 
-class PreviewLocalSource(private val client: HttpClient) : PreviewSource {
+class PreviewLocalSource(
+    private val client: HttpClient,
+    private val htmlMetadataParser: HtmlMetadataParser = HtmlMetadataParser()
+) : PreviewSource {
 
     override suspend fun fetch(urlString: String): IResult<PreviewResult> {
         val result = tryCatch {
@@ -23,7 +26,7 @@ class PreviewLocalSource(private val client: HttpClient) : PreviewSource {
         }
 
         val response = result.value
-        if(!response.isHtml()) {
+        if (!response.isHtml()) {
             return PreviewResult.NonHtmlPage(urlString).success
         }
 
@@ -31,9 +34,7 @@ class PreviewLocalSource(private val client: HttpClient) : PreviewSource {
         return parseHtml(htmlText, urlString)
     }
 
-    private val htmlMetadataParser = HtmlMetadataParser()
-
-    suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewResult> {
+    override suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewResult> {
         val result = tryCatch { htmlMetadataParser.parse(htmlText, urlString) }
 
         return result

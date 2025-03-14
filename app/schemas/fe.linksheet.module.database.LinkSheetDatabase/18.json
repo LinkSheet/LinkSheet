@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "3f602328cb5c907e6c25f770645acc1d",
+    "identityHash": "8ee6d0dcc74ea093427e4e57604ba2af",
     "entities": [
       {
         "tableName": "openwith",
@@ -354,7 +354,7 @@
       },
       {
         "tableName": "preview_cache",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconType` TEXT, `faviconUrl` BLOB, `thumbnailType` TEXT, `thumbnail` BLOB, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconUrl` TEXT, `thumbnailUrl` TEXT, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -373,24 +373,14 @@
             "affinity": "TEXT"
           },
           {
-            "fieldPath": "faviconType",
-            "columnName": "faviconType",
-            "affinity": "TEXT"
-          },
-          {
             "fieldPath": "faviconUrl",
             "columnName": "faviconUrl",
-            "affinity": "BLOB"
-          },
-          {
-            "fieldPath": "thumbnailType",
-            "columnName": "thumbnailType",
             "affinity": "TEXT"
           },
           {
-            "fieldPath": "thumbnail",
-            "columnName": "thumbnail",
-            "affinity": "BLOB"
+            "fieldPath": "thumbnailUrl",
+            "columnName": "thumbnailUrl",
+            "affinity": "TEXT"
           }
         ],
         "primaryKey": {
@@ -544,7 +534,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3f602328cb5c907e6c25f770645acc1d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8ee6d0dcc74ea093427e4e57604ba2af')"
     ]
   }
 }

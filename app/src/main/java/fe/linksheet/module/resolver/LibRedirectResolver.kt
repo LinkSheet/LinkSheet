@@ -42,7 +42,11 @@ class LibRedirectResolver(
     }
 
     suspend fun resolve(uri: Uri, jsEngine: Boolean): LibRedirectResult {
-        val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
+        return resolve(uri.toString(), jsEngine)
+    }
+
+    suspend fun resolve(url: String, jsEngine: Boolean): LibRedirectResult {
+        val service = LibRedirect.findServiceForUrl(url, libRedirectServices)
         logger.debug("Using service: $service")
 
         if (service != null && stateRepository.isEnabled(service.key)) {
@@ -56,13 +60,13 @@ class LibRedirectResolver(
             }
 
             val redirected = if (jsEngine) {
-                redirectZipline(uri.toString(), frontendKey, instanceUrl)
-            } else LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
+                redirectZipline(url, frontendKey, instanceUrl)
+            } else LibRedirect.redirect(url, frontendKey, instanceUrl)
 
             logger.debug(redirected, HashProcessor.StringProcessor) { "Redirected to: $it" }
 
             if (redirected != null) {
-                return LibRedirectResult.Redirected(uri, Uri.parse(redirected))
+                return LibRedirectResult.Redirected(Uri.parse(url), Uri.parse(redirected))
             }
         }
 

@@ -11,22 +11,28 @@ import fe.stringbuilder.util.*
 
 @Entity(
     tableName = "amp2html_mapping",
-    primaryKeys = ["ampUrl", "canonicalUrl"]
+    primaryKeys = ["ampUrl"]
 )
 data class Amp2HtmlMapping(
     val ampUrl: String,
-    val canonicalUrl: String,
+    val canonicalUrl: String? = null,
     @ColumnInfo(defaultValue = "'true'")
     val isCacheHit: Boolean = true
 ) : ResolverEntity<Amp2HtmlMapping>, Redactable<Amp2HtmlMapping> {
     @Ignore
-    override val url: String = canonicalUrl
+    override val url: String? = canonicalUrl
 
     override fun buildString(builder: ProtectedStringBuilder) {
         builder.wrapped(Bracket.Curly) {
             separated(Separator.Comma) {
                 item { sensitive("ampUrl", StringUrl(ampUrl)) }
-                item { sensitive("canonicalUrl", StringUrl(canonicalUrl)) }
+                item {
+                    if (canonicalUrl != null) {
+                        sensitive("canonicalUrl", StringUrl(canonicalUrl))
+                    } else {
+                        append("canonicalUrl", "<null>")
+                    }
+                }
             }
         }
     }

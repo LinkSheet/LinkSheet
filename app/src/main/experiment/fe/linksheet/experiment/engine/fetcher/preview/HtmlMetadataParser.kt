@@ -62,7 +62,7 @@ class HtmlMetadataParser {
         val richThumbnail = parseThumbnailUrl(document)
 
         if (richTitle == null || richDescription == null || richFavicon == null || richThumbnail == null) {
-            return PreviewResult.SimplePreviewResult(
+            return HtmlPreviewResult.SimplePreviewResult(
                 url = url.toString(),
                 htmlText = htmlText,
                 title = document.title().ifBlank { null },
@@ -70,7 +70,7 @@ class HtmlMetadataParser {
             )
         }
 
-        return PreviewResult.RichPreviewResult(
+        return HtmlPreviewResult.RichPreviewResult(
             url = url.toString(),
             htmlText = htmlText,
             title = richTitle,

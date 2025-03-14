@@ -1,7 +1,6 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
 import fe.linksheet.experiment.engine.fetcher.FetchInput
-import fe.linksheet.experiment.engine.fetcher.FetchOutput
 import fe.linksheet.experiment.engine.fetcher.LinkFetcher
 import fe.linksheet.module.database.entity.cache.PreviewCache
 import fe.linksheet.module.repository.CacheRepository
@@ -23,19 +22,16 @@ class PreviewLinkFetcher(
         }
     }
 
-    private fun restoreResult(url: String, previewCache: PreviewCache): HtmlPreviewResult {
-        if (previewCache.thumbnailUrl == null && previewCache.description == null) {
-            return HtmlPreviewResult.SimplePreviewResult(
-                url = url,
-                htmlText = "",
-                title = previewCache.title,
-                favicon = previewCache.faviconUrl
-            )
-        }
-
-        return HtmlPreviewResult.RichPreviewResult(
+    private fun createFromCache(url: String, previewCache: PreviewCache, htmlText: String) = when {
+        previewCache.isRichPreview -> HtmlPreviewResult.SimplePreviewResult(
             url = url,
-            htmlText = "",
+            htmlText = htmlText,
+            title = previewCache.title,
+            favicon = previewCache.faviconUrl
+        )
+        else -> HtmlPreviewResult.RichPreviewResult(
+            url = url,
+            htmlText = htmlText,
             title = previewCache.title,
             description = previewCache.description,
             favicon = previewCache.faviconUrl,
@@ -43,37 +39,45 @@ class PreviewLinkFetcher(
         )
     }
 
+    private suspend fun handleCached(entryId: Long, url: String): PreviewResult? {
+        val cachedHtml = cacheRepository.getCachedHtml(entryId)
+        val previewCache = cacheRepository.getCachedPreview(entryId)
+        if (cachedHtml != null && previewCache != null) {
+            return createFromCache(url, previewCache, cachedHtml.content)
+        }
+
+        if (cachedHtml == null) {
+            return null
+        }
+
+        val result = source.parseHtml(cachedHtml.content, url)
+        if (result.isFailure()) {
+            return null
+        }
+
+        insertCache(entryId, result.value)
+        return result.value
+    }
+
     override suspend fun fetch(data: FetchInput): PreviewResult? {
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data.url)
         if (localCache) {
-            val previewCache = cacheRepository.getCachedPreview(entry.id)
-            if (previewCache != null) {
-                return restoreResult(data.url, previewCache)
-            }
-
-            val cachedHtml = cacheRepository.getCachedHtml(entry.id)
-            if(cachedHtml != null) {
-               source.parseHtml(cachedHtml.content, data.url)
+            val cachedPreview = handleCached(entry.id, data.url)
+            if (cachedPreview != null) {
+                return cachedPreview
             }
         }
 
         val result = source.fetch(data.url)
         if (result.isFailure()) {
-            TODO("Maybe we should return IResult from LinKFetcher's fetch(...) instead?")
-//            return FetchOutput(data.url)
+            TODO("Maybe we should return IResult from LinkFetcher's fetch(...) instead?")
         }
 
         if (localCache) {
             insertCache(entry.id, result.value)
         }
 
-
-        TODO()
-
-//        return withContext(dispatcher) {
-//            unfurler.unfurl(data.url)
-//            FetchOutput(data.url)
-//        }
+        return result.value
     }
 }

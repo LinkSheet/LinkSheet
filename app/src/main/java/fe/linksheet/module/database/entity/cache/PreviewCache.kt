@@ -2,6 +2,7 @@ package fe.linksheet.module.database.entity.cache
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -21,5 +22,6 @@ data class PreviewCache(
 //    val thumbnailType: String?,
 //    val thumbnail: ByteArray?
 ) {
-
+    @Ignore
+    val isRichPreview = description != null || thumbnailUrl != null
 }

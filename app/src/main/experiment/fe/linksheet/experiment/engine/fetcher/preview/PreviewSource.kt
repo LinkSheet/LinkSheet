@@ -5,7 +5,7 @@ import fe.std.result.IResult
 
 interface PreviewSource {
     suspend fun fetch(urlString: String): IResult<PreviewResult>
-    suspend fun parseHtml(htmlText: String, urlString: String)
+    suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewResult>
 }
 
 sealed class PreviewResult(val url: String) : FetchResult {

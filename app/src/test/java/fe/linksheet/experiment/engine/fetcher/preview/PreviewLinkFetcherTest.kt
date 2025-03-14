@@ -1,6 +1,9 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import assertk.assertThat
+import assertk.assertions.isInstanceOf
+import assertk.assertions.isNotNull
 import fe.linksheet.DatabaseTest
 import fe.linksheet.experiment.engine.fetcher.FetchInput
 import fe.linksheet.module.repository.CacheRepository
@@ -13,7 +16,7 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 internal class PreviewLinkFetcherTest : DatabaseTest() {
-    companion object{
+    companion object {
         private const val PREVIEW_URL = "https://linksheet.app"
     }
 
@@ -33,7 +36,7 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
             return PreviewResult.NonHtmlPage(PREVIEW_URL).success
         }
 
-        override suspend fun parseHtml(htmlText: String, urlString: String) {
+        override suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewResult> {
             TODO("Not yet implemented")
         }
     }
@@ -46,6 +49,7 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
             useLocalCache = { true }
         )
 
-       val result = fetcher.fetch(FetchInput(PREVIEW_URL))
+        val result = fetcher.fetch(FetchInput(PREVIEW_URL))
+        assertThat(result).isNotNull().isInstanceOf<PreviewResult.NonHtmlPage>()
     }
 }

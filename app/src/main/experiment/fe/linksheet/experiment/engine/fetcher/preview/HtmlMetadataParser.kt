@@ -56,24 +56,34 @@ class HtmlMetadataParser {
 
     fun parse(document: Document, htmlText: String): PreviewResult {
         val url = document.baseUri().toUrlOrThrow()
+        val urlStr = url.toString()
+
         val richTitle = parseTitle(document)
         val richDescription = parseDescription(document)
         val richFavicon = parseFaviconUrl(document)
         val richThumbnail = parseThumbnailUrl(document)
 
-        if (richTitle == null || richDescription == null || richFavicon == null || richThumbnail == null) {
+        val hasAnyRich = richTitle == null || richDescription == null || richFavicon == null || richThumbnail == null
+        val documentTitle = document.title().ifBlank { null }
+
+        if (documentTitle == null && !hasAnyRich) {
+            return PreviewResult.NoPreview(url = urlStr)
+        }
+
+        val title = richTitle ?: documentTitle
+        if (!hasAnyRich) {
             return HtmlPreviewResult.SimplePreviewResult(
-                url = url.toString(),
+                url = urlStr,
                 htmlText = htmlText,
-                title = document.title().ifBlank { null },
+                title = title,
                 favicon = fallbackFaviconUrl(url),
             )
         }
 
         return HtmlPreviewResult.RichPreviewResult(
-            url = url.toString(),
+            url = urlStr,
             htmlText = htmlText,
-            title = richTitle,
+            title = title,
             description = parseDescription(document),
             favicon = parseFaviconUrl(document) ?: fallbackFaviconUrl(url),
             thumbnail = parseThumbnailUrl(document)

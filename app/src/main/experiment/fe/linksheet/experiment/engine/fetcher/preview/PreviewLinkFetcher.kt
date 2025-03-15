@@ -63,15 +63,15 @@ class PreviewLinkFetcher(
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data.url)
         if (localCache) {
-            val cachedPreview = handleCached(entry.id, data.url)
+            val cachedPreview = handleCached(entry.id, entry.url)
             if (cachedPreview != null) {
                 return cachedPreview
             }
         }
 
-        val result = source.fetch(data.url)
+        val result = source.fetch(entry.url)
         if (result.isFailure()) {
-            TODO("Maybe we should return IResult from LinkFetcher's fetch(...) instead?")
+            return PreviewResult.NoPreview(entry.url)
         }
 
         if (localCache) {

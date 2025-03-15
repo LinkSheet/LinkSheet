@@ -9,6 +9,12 @@ interface PreviewSource {
 }
 
 sealed class PreviewResult(val url: String) : FetchResult {
+    class NoPreview(url: String) : PreviewResult(url) {
+        override fun toString(): String {
+            return "NoPreview(url='$url')"
+        }
+    }
+
     class NonHtmlPage(url: String) : PreviewResult(url) {
         override fun toString(): String {
             return "NonHtmlPage(url='$url')"

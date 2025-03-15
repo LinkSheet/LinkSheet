@@ -5,6 +5,7 @@ import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectNew
+import fe.libredirectkt.LibRedirectService
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.redactor.HashProcessor
@@ -15,12 +16,13 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import androidx.core.net.toUri
-import fe.libredirectkt.LibRedirectService
 
 sealed interface LibRedirectResult {
     class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
     data object NotRedirected : LibRedirectResult
 }
+
+typealias FrontendInstanceInfo = Pair<String, String>
 
 class LibRedirectResolver(
     private val defaultRepository: LibRedirectDefaultRepository,

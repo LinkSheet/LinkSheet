@@ -1,16 +1,13 @@
 package fe.linksheet.experiment.engine.resolver
 
-import android.net.Uri
+import fe.linksheet.experiment.engine.PipelineStep
+import fe.linksheet.experiment.engine.StepResult
 
-interface LinkResolver {
-   suspend fun resolve(data: ResolveInput): ResolveOutput?
+interface LinkResolver : PipelineStep<ResolveOutput> {
 }
 
-data class ResolveInput(val url: String) {
-   val uri by lazy { Uri.parse(url) }
-}
 
-data class ResolveOutput(val url: String)
+data class ResolveOutput(override val url: String) : StepResult
 
 
 

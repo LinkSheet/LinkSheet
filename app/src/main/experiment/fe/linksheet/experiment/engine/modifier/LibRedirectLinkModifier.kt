@@ -1,6 +1,7 @@
 package fe.linksheet.experiment.engine.modifier
 
 import android.net.Uri
+import fe.linksheet.experiment.engine.StepResult
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.LibRedirectResult
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,7 +18,7 @@ class LibRedirectLinkModifier(
         resolver.warmup()
     }
 
-    override suspend fun modify(data: ModifyInput): LibRedirectModifyOutput = withContext(ioDispatcher) {
+    override suspend fun run(url: String): LibRedirectModifyOutput = withContext(ioDispatcher) {
 //        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
 //        if (ignoreLibRedirectExtra) {
 //            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
@@ -25,19 +26,22 @@ class LibRedirectLinkModifier(
 
 //        if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
         val jsEngine = useJsEngine()
-        val result = resolver.resolve(data.url, jsEngine)
-        result.toModifyOutput()
+        val result = resolver.resolve(url, jsEngine)
+        result.toModifyOutput(url)
     }
 }
 
-sealed interface LibRedirectModifyOutput : ModifyResult {
-    data class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectModifyOutput
-    data object NotRedirected : LibRedirectModifyOutput
+sealed interface LibRedirectModifyOutput : StepResult {
+    data class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectModifyOutput {
+        override val url = redirectedUri.toString()
+    }
+
+    data class NotRedirected(override val url: String) : LibRedirectModifyOutput
 }
 
-fun LibRedirectResult.toModifyOutput(): LibRedirectModifyOutput {
-   return when(this) {
-       is LibRedirectResult.Redirected -> LibRedirectModifyOutput.Redirected(originalUri, redirectedUri)
-       LibRedirectResult.NotRedirected -> LibRedirectModifyOutput.NotRedirected
-   }
+fun LibRedirectResult.toModifyOutput(url: String): LibRedirectModifyOutput {
+    return when (this) {
+        is LibRedirectResult.Redirected -> LibRedirectModifyOutput.Redirected(originalUri, redirectedUri)
+        is LibRedirectResult.NotRedirected -> LibRedirectModifyOutput.NotRedirected(url)
+    }
 }

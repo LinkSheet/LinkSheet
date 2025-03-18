@@ -7,7 +7,6 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import fe.linksheet.DatabaseTest
-import fe.linksheet.experiment.engine.resolver.ResolveInput
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.UrlEntry
 import fe.linksheet.module.repository.CacheRepository
@@ -49,7 +48,7 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
             useLocalCache = { true }
         )
 
-        val result = resolver.resolve(ResolveInput(SHORT_URL))
+        val result = resolver.run(SHORT_URL)
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)

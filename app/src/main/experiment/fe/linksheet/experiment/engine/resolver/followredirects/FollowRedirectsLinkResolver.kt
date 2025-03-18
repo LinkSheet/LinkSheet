@@ -3,7 +3,6 @@ package fe.linksheet.experiment.engine.resolver.followredirects
 import android.net.Uri
 import fe.fastforwardkt.FastForward
 import fe.linksheet.experiment.engine.resolver.LinkResolver
-import fe.linksheet.experiment.engine.resolver.ResolveInput
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
@@ -29,19 +28,20 @@ class FollowRedirectsLinkResolver(
         }
     }
 
-    override suspend fun resolve(data: ResolveInput): ResolveOutput? {
-        val isTracker = isTracker(data.url)
+    override suspend fun run(url: String): ResolveOutput? {
+        val isTracker = isTracker(url)
         if(followOnlyKnownTrackers() && !isTracker) {
-            return ResolveOutput(data.url)
+            return ResolveOutput(url)
         }
 
-        val isDarknet = isDarknet(data.uri)
+        val uri = Uri.parse(url)
+        val isDarknet = isDarknet(uri)
         if (!allowDarknets() && isDarknet) {
-            return ResolveOutput(data.url)
+            return ResolveOutput(url)
         }
 
         val localCache = useLocalCache()
-        val entry = cacheRepository.getOrCreateCacheEntry(data.url)
+        val entry = cacheRepository.getOrCreateCacheEntry(url)
 
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.FollowRedirects)
@@ -50,9 +50,9 @@ class FollowRedirectsLinkResolver(
             }
         }
 
-        val result = source.resolve(data.url)
+        val result = source.resolve(url)
         if (result.isFailure()) {
-            return ResolveOutput(data.url)
+            return ResolveOutput(url)
         }
 
         if (localCache) {
@@ -61,38 +61,4 @@ class FollowRedirectsLinkResolver(
 
         return ResolveOutput(result.value.url)
     }
-
-//    private suspend fun runRedirectResolver(
-//        dispatcher: CoroutineDispatcher = Dispatchers.IO,
-//        resolveModuleStatus: ResolveModuleStatus,
-//        redirectResolver: RedirectUrlResolver,
-//        uri: Uri,
-//        canAccessInternet: Boolean = true,
-//        requestTimeout: Int,
-//        followRedirects: Boolean,
-//        followRedirectsExternalService: Boolean,
-//        followOnlyKnownTrackers: Boolean,
-//        followRedirectsLocalCache: Boolean,
-//        followRedirectsAllowDarknets: Boolean,
-//    ): Uri? = withContext(dispatcher) {
-//        logger.debug("Executing runRedirectResolver on ${Thread.currentThread().name}")
-//
-//        resolveModuleStatus.resolveIfEnabled(followRedirects, ResolveModule.Redirect, uri) { uriToResolve ->
-//            logger.debug("Inside redirect func, on ${Thread.currentThread().name}")
-//
-//            val resolvePredicate: ResolvePredicate = { uri ->
-//                (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(uri.toString())
-//            }
-//
-//            redirectResolver.resolve(
-//                uriToResolve,
-//                followRedirectsLocalCache,
-//                resolvePredicate,
-//                followRedirectsExternalService,
-//                requestTimeout,
-//                canAccessInternet,
-//                followRedirectsAllowDarknets
-//            )
-//        }
-//    }
 }

@@ -1,7 +1,6 @@
 package fe.linksheet.experiment.engine.resolver.amp2html
 
 import fe.linksheet.experiment.engine.resolver.LinkResolver
-import fe.linksheet.experiment.engine.resolver.ResolveInput
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
@@ -39,9 +38,9 @@ class Amp2HtmlLinkResolver(
         return ResolveOutput(result.url)
     }
 
-    override suspend fun resolve(data: ResolveInput): ResolveOutput? {
+    override suspend fun run(data: String): ResolveOutput? {
         val localCache = useLocalCache()
-        val entry = cacheRepository.getOrCreateCacheEntry(data.url)
+        val entry = cacheRepository.getOrCreateCacheEntry(data)
 
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.Amp2Html)
@@ -51,12 +50,12 @@ class Amp2HtmlLinkResolver(
 
             val cachedHtml = cacheRepository.getCachedHtml(entry.id)
             if (cachedHtml != null) {
-                val parsedUrlResult = source.parseHtml(cachedHtml.content, data.url)
-                return handleResult(entry.id, data.url, true, parsedUrlResult)
+                val parsedUrlResult = source.parseHtml(cachedHtml.content, data)
+                return handleResult(entry.id, data, true, parsedUrlResult)
             }
         }
 
-        val result = source.resolve(data.url)
-        return handleResult(entry.id, data.url, localCache, result)
+        val result = source.resolve(data)
+        return handleResult(entry.id, data, localCache, result)
     }
 }

@@ -1,18 +1,9 @@
 package fe.linksheet.experiment.engine.modifier
 
-interface LinkModifier<Output : ModifyResult> {
+import fe.linksheet.experiment.engine.PipelineStep
+import fe.linksheet.experiment.engine.StepResult
+
+sealed interface LinkModifier<out Result : StepResult> : PipelineStep<Result> {
    suspend fun warmup()
-   suspend fun modify(data: ModifyInput): Output?
 }
-
-interface ModifyResult {
-
-}
-
-data class ModifyInput(val url: String)
-
-data class ModifyOutput(val url: String)
-
-
-
 

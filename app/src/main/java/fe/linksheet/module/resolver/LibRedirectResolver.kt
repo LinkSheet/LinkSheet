@@ -105,5 +105,4 @@ class LibRedirectResolver(
             else -> default.instanceUrl
         }
     }
-
 }

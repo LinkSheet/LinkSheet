@@ -61,25 +61,29 @@ class Pipeline(
     private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
     private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
 
-    private suspend fun <Result : StepResult> handleStep(step: PipelineStep<Result>, url: String): String {
+    private suspend fun <Result : StepResult> runStep(
+        step: PipelineStep<Result>,
+        url: String
+    ): Pair<Boolean, String> {
         beforeStepHooks.forEach { it.onBeforeRun(step, url) }
 
         val result = step.run(url)
         val hasNewUrl = result != null && result.url != url
 
         afterStepHooks.forEach { it.onAfterRun(step, url, result) }
-        if (!hasNewUrl) return url
+        if (!hasNewUrl) return false to url
 
-        return when (step) {
-            is InPlaceStep -> result.url
-            else -> run(result.url)
-        }
+        return true to result.url
     }
 
     suspend fun run(url: String): String {
         var mutUrl = url
         for (step in steps) {
-            mutUrl = handleStep(step, mutUrl)
+            val (hasNewUrl, resultUrl) = runStep(step, mutUrl)
+            if (!hasNewUrl) continue
+
+            if (step !is InPlaceStep) return run(resultUrl)
+            mutUrl = resultUrl
         }
 
         return mutUrl

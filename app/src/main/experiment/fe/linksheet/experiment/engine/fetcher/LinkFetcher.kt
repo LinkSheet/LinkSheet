@@ -9,5 +9,3 @@ interface FetchResult {
 }
 
 data class FetchInput(val url: String)
-
-data class FetchOutput(val url: String)

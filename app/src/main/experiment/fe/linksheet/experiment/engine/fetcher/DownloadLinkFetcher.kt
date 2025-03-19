@@ -13,7 +13,7 @@ class DownloadLinkFetcher(
     private val requestTimeout: () -> Int = { 15 },
 ) : LinkFetcher<DownloadCheckFetchResult> {
 
-    override suspend fun fetch(data: FetchInput): DownloadCheckFetchResult = withContext(ioDispatcher) {
+    override suspend fun fetch(data: FetchInput) = withContext(ioDispatcher) {
         if (checkUrlMimeType()) {
             val result = downloader.checkIsNonHtmlFileEnding(data.url)
             if (result.isDownloadable()) {

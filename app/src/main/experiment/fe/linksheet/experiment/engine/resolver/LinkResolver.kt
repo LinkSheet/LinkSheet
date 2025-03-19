@@ -8,6 +8,3 @@ interface LinkResolver : PipelineStep<ResolveOutput> {
 
 
 data class ResolveOutput(override val url: String) : StepResult
-
-
-

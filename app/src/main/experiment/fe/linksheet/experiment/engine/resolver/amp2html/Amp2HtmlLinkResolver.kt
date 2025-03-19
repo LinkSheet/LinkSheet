@@ -6,8 +6,12 @@ import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.isFailure
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class Amp2HtmlLinkResolver(
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val source: Amp2HtmlSource,
     private val cacheRepository: CacheRepository,
     private val useLocalCache: () -> Boolean,
@@ -38,24 +42,24 @@ class Amp2HtmlLinkResolver(
         return ResolveOutput(result.url)
     }
 
-    override suspend fun run(data: String): ResolveOutput? {
+    override suspend fun run(data: String): ResolveOutput? = withContext(ioDispatcher) {
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data)
 
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.Amp2Html)
             if (resolvedUrl != null && resolvedUrl.result != null) {
-                return ResolveOutput(resolvedUrl.result)
+                return@withContext ResolveOutput(resolvedUrl.result)
             }
 
             val cachedHtml = cacheRepository.getCachedHtml(entry.id)
             if (cachedHtml != null) {
                 val parsedUrlResult = source.parseHtml(cachedHtml.content, data)
-                return handleResult(entry.id, data, true, parsedUrlResult)
+                return@withContext handleResult(entry.id, data, true, parsedUrlResult)
             }
         }
 
         val result = source.resolve(data)
-        return handleResult(entry.id, data, localCache, result)
+        handleResult(entry.id, data, localCache, result)
     }
 }

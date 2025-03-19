@@ -37,6 +37,7 @@ fun createPipeline(
             ),
             ClearURLsLinkModifier(ioDispatcher = ioDispatcher),
             FollowRedirectsLinkResolver(
+                ioDispatcher = ioDispatcher,
                 source = FollowRedirectsLocalSource(client = client),
                 cacheRepository = cacheRepository,
                 allowDarknets = { false },
@@ -44,6 +45,7 @@ fun createPipeline(
                 useLocalCache = { true }
             ),
             Amp2HtmlLinkResolver(
+                ioDispatcher = ioDispatcher,
                 source = Amp2HtmlLocalSource(client = client),
                 cacheRepository = cacheRepository,
                 useLocalCache = { true }

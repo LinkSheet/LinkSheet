@@ -16,6 +16,7 @@ import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
@@ -26,6 +27,8 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         private const val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html"
         private const val RESOLVED_URL = "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html"
     }
+
+    private val dispatcher = StandardTestDispatcher()
 
     private val cacheRepository by lazy {
         CacheRepository(
@@ -56,11 +59,12 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun `skip cache if disabled`() = runTest {
+    fun `skip cache if disabled`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
+            ioDispatcher = dispatcher,
             source = source,
             cacheRepository = cacheRepository,
-            useLocalCache = { false }
+            useLocalCache = { false },
         )
 
         val result = resolver.run(URL)
@@ -77,11 +81,12 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun `return cached url if present`() = runTest {
+    fun `return cached url if present`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
+            ioDispatcher = dispatcher,
             source = createSource("https://not-from-cache.com", "<html></html>"),
             cacheRepository = cacheRepository,
-            useLocalCache = { true }
+            useLocalCache = { true },
         )
 
         val testResolvedUrl = "https://linksheet.app"
@@ -99,9 +104,10 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     }
 
     @Test
-    fun `use cached html if present`() = runTest {
+    fun `use cached html if present`() = runTest(dispatcher) {
         val cachedHtml = "<html><body><h1>Cached html</h1></body></html>"
         val resolver = Amp2HtmlLinkResolver(
+            ioDispatcher = dispatcher,
             source = object : Amp2HtmlSource {
                 override suspend fun resolve(urlString: String): IResult<Amp2HtmlResult> {
                     return Amp2HtmlResult.NonAmpLink(urlString, "<html><body><h1>Html not from cache</h1></body></html>").success
@@ -119,7 +125,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
                 }
             },
             cacheRepository = cacheRepository,
-            useLocalCache = { true }
+            useLocalCache = { true },
         )
 
         val entry = UrlEntry(1, url = URL)

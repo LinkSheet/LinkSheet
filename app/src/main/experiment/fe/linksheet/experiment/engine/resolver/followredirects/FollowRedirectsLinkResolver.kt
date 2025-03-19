@@ -8,13 +8,17 @@ import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.util.web.Darknet
 import fe.std.result.isFailure
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class FollowRedirectsLinkResolver(
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val source: FollowRedirectsSource,
     private val cacheRepository: CacheRepository,
     private val isDarknet: (Uri) -> Boolean = { Darknet.getOrNull(it) != null },
-    private val isTracker: (String) -> Boolean= { FastForward.isTracker(it) },
+    private val isTracker: (String) -> Boolean = { FastForward.isTracker(it) },
     private val allowDarknets: () -> Boolean,
     private val followOnlyKnownTrackers: () -> Boolean,
     private val useLocalCache: () -> Boolean,
@@ -28,16 +32,16 @@ class FollowRedirectsLinkResolver(
         }
     }
 
-    override suspend fun run(url: String): ResolveOutput? {
+    override suspend fun run(url: String): ResolveOutput? = withContext(ioDispatcher) {
         val isTracker = isTracker(url)
         if(followOnlyKnownTrackers() && !isTracker) {
-            return ResolveOutput(url)
+            return@withContext ResolveOutput(url)
         }
 
         val uri = Uri.parse(url)
         val isDarknet = isDarknet(uri)
         if (!allowDarknets() && isDarknet) {
-            return ResolveOutput(url)
+            return@withContext ResolveOutput(url)
         }
 
         val localCache = useLocalCache()
@@ -46,19 +50,19 @@ class FollowRedirectsLinkResolver(
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.FollowRedirects)
             if (resolvedUrl != null && resolvedUrl.result != null) {
-                return ResolveOutput(resolvedUrl.result)
+                return@withContext ResolveOutput(resolvedUrl.result)
             }
         }
 
         val result = source.resolve(url)
         if (result.isFailure()) {
-            return ResolveOutput(url)
+            return@withContext ResolveOutput(url)
         }
 
         if (localCache) {
             insertCache(entry.id, result.value)
         }
 
-        return ResolveOutput(result.value.url)
+        ResolveOutput(result.value.url)
     }
 }

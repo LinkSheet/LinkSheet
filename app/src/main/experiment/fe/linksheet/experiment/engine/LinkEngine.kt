@@ -21,7 +21,7 @@ fun createPipeline(
     cacheRepository: CacheRepository,
 ): Pipeline {
     val hook = object : BeforeStepHook {
-        override fun <Result : StepResult> onBeforeRun(step: PipelineStep<Result>, mutUrl: String) {
+        override fun <Result : StepResult> onBeforeRun(step: PipelineStep<Result>, url: String) {
 
         }
     }
@@ -61,14 +61,14 @@ class Pipeline(
     private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
     private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
 
-    private suspend fun <Result : StepResult> handleStep(step: PipelineStep<Result>, mutUrl: String): String {
-        beforeStepHooks.forEach { it.onBeforeRun(step, mutUrl) }
+    private suspend fun <Result : StepResult> handleStep(step: PipelineStep<Result>, url: String): String {
+        beforeStepHooks.forEach { it.onBeforeRun(step, url) }
 
-        val result = step.run(mutUrl)
-        val hasNewUrl = result != null && result.url != mutUrl
+        val result = step.run(url)
+        val hasNewUrl = result != null && result.url != url
 
-        afterStepHooks.forEach { it.onAfterRun(step, mutUrl, result) }
-        if (!hasNewUrl) return mutUrl
+        afterStepHooks.forEach { it.onAfterRun(step, url, result) }
+        if (!hasNewUrl) return url
 
         return when (step) {
             is InPlaceStep -> result.url

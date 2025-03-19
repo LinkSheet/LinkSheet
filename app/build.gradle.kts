@@ -223,6 +223,7 @@ android {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-client-okhttp-jvm:3.1.1")
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 

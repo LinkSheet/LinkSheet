@@ -26,9 +26,9 @@ class ClearURLsLinkModifier(
         Unit
     }
 
-    override suspend fun run(url: String): ClearURLsModifyOutput? {
+    override suspend fun run(url: String) = withContext(ioDispatcher) {
         val result = clearUrls?.clearUrl(url)
-        return result?.let { (urls, operations) -> ClearURLsModifyOutput(urls, operations) }
+        result?.let { (urls, operations) -> ClearURLsModifyOutput(urls, operations) }
     }
 }
 

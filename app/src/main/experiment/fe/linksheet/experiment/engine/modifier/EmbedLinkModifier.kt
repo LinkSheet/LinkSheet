@@ -22,9 +22,9 @@ class EmbedLinkModifier(
         Unit
     }
 
-    override suspend fun run(url :String): EmbedLinkModifyOutput? {
+    override suspend fun run(url :String) = withContext(ioDispatcher) {
         val result = embedResolver?.resolve(url)
-        return result?.let { EmbedLinkModifyOutput(it) }
+        result?.let { EmbedLinkModifyOutput(it) }
     }
 }
 

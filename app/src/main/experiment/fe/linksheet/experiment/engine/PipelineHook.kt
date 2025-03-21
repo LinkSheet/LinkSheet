@@ -6,9 +6,9 @@ interface PipelineHook {
 }
 
 interface BeforeStepHook : PipelineHook {
-    fun <Result : StepResult> onBeforeRun(step: PipelineStep<Result>, url: String)
+    fun <R : StepResult> onBeforeRun(step: PipelineStep<R>, url: String)
 }
 
 interface AfterStepHook : PipelineHook {
-    fun <Result : StepResult> onAfterRun(step: PipelineStep<Result>, url: String, result: Result?)
+    fun <R : StepResult> onAfterRun(step: PipelineStep<R>, url: String, result: R?)
 }

@@ -23,7 +23,7 @@ fun createPipeline(
     cacheRepository: CacheRepository,
 ): Pipeline {
     val hook = object : BeforeStepHook {
-        override fun <Result : StepResult> onBeforeRun(step: PipelineStep<Result>, url: String) {
+        override fun <R : StepResult> onBeforeRun(step: PipelineStep<R>, url: String) {
 
         }
     }
@@ -68,8 +68,8 @@ class Pipeline(
     private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
     private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
 
-    private suspend fun <Result : StepResult> runStep(
-        step: PipelineStep<Result>,
+    private suspend fun <R : StepResult> runStep(
+        step: PipelineStep<R>,
         url: String
     ): Pair<Boolean, String> {
         beforeStepHooks.forEach { it.onBeforeRun(step, url) }

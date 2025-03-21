@@ -12,6 +12,8 @@ import fe.linksheet.module.resolver.LibRedirectResolver
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.isActive
 
 
 fun createPipeline(
@@ -60,6 +62,9 @@ class Pipeline(
     val steps: List<PipelineStep<*>>,
     val hooks: List<PipelineHook> = emptyList()
 ) {
+    // TODO: These should probably
+    // a) be invoked asynchronously
+    // b) have some sort of veto-capability?
     private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
     private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
 
@@ -78,16 +83,17 @@ class Pipeline(
         return true to result.url
     }
 
-    suspend fun run(url: String): String {
+    suspend fun run(url: String): String = coroutineScope scope@{
         var mutUrl = url
         for (step in steps) {
+            if (!isActive) break
             val (hasNewUrl, resultUrl) = runStep(step, mutUrl)
             if (!hasNewUrl) continue
 
-            if (step !is InPlaceStep) return run(resultUrl)
+            if (step !is InPlaceStep) return@scope run(resultUrl)
             mutUrl = resultUrl
         }
 
-        return mutUrl
+        mutUrl
     }
 }

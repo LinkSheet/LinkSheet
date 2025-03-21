@@ -33,6 +33,7 @@ import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
 import fe.linksheet.module.http.HttpModule
 import fe.linksheet.module.language.AppLocaleModule
+import fe.linksheet.module.http.HttpClientModule
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
@@ -130,6 +131,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             daoModule,
             HttpModule,
             RemoteConfigClientModule,
+            HttpClientModule,
             redirectResolveRequestModule,
             amp2HtmlResolveRequestModule,
             allRemoteResolveRequest,

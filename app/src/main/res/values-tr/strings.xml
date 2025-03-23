@@ -518,7 +518,7 @@
     <string name="generic__button_learn_more">Daha fazla bilgi</string>
     <string name="generic__button_dismiss">Yok say</string>
     <string name="settings_main_experiment_changelog__title_changelog">Deneyler değişiklik günlüğü</string>
-    <string name="settings__subtitle_advanced"><![CDATA[Experiments & Export/ImportDeneyler & Dışa/İçe aktarma]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[Deneyler & Dışa/İçe aktarma]]></string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Davranış değişiklikleri</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Bazı deneyler kaldırıldı ve artık varsayılan davranış haline geldi.</string>
     <string name="bottom_sheet__button_manual_redirect">Yönlendirmeleri takip et</string>
@@ -531,4 +531,10 @@
         <item quantity="other">%d varsayılan sunucu</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Tarayıcı</string>
+    <string name="generic__button_text_share">Paylaş</string>
+    <string name="settings_home__text_clipboard_card">Mevcut pano içeriği bir URL ise ana sayfada göster</string>
+    <string name="settings_home__title_clipboard_card">Pano kartı</string>
+    <string name="resolve_event__idle">Boşta</string>
+    <string name="settings_profile_switcher__title_no_profile">Hiçbir profil mevcut değil</string>
+    <string name="settings_profile_switcher__text_no_profile">Bu özellik yalnızca cihazınızda bir (iş) profili ayarlanmışsa kullanılabilir.</string>
 </resources>

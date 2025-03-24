@@ -55,4 +55,32 @@
     <string name="about_explainer">Pateicības, Licence, Saites, Versija</string>
     <string name="set_as_browser_done">LinkSheet ir iestatīts kā noklusētais pārlūks!</string>
     <string name="credits_explainer">Pateicības, Licencēšana</string>
+    <string name="github_explainer">Pirmkoda repozitorijs</string>
+    <string name="github">GitHub</string>
+    <string name="mastodon_redirect">MastodonRedirect</string>
+    <string name="donate_subtitle">Jaunināt uz <b>LinkSheet Pro</b></string>
+    <string name="error">Kļūda</string>
+    <string name="use_clear_urls_explainer">Izmanto eksperimentālo <annotation url-id="clearurls-github">ClearURLs</annotation> integrāciju (noņem izsekošanas parametrus no vietņu URL adresēm)</string>
+    <string name="follow_redirects_local_cache">Iespējot vietējo (lokālo) pāradresēšanas kešatmiņu</string>
+    <string name="theme">Motīvs</string>
+    <string name="open_copied_link">No starpliktuves</string>
+    <string name="paste">Ielīmēt</string>
+    <string name="checkmark">Atzīme</string>
+    <string name="links">Saites</string>
+    <string name="use_clear_urls">Lietot ClearURLs</string>
+    <string name="loading_link">Apstrādā saiti…</string>
+    <string name="follow_redirects">Sekot pāradresēšanām</string>
+    <string name="follow_redirects_external_service">Sekot pāradresēšanām, izmantojot ārējo pakalpojumu</string>
+    <string name="follow_only_known_trackers">Sekot tikai zināmiem izsekotājiem</string>
+    <string name="theme_explainer">Material You, tumšais motīvs, tīri melns režīms</string>
+    <string name="dark">Tumšs</string>
+    <string name="light">Gaišs</string>
+    <string name="enable_libredirect">Iespējot LibRedirect</string>
+    <string name="fastfoward_rules">Lietot FastForward noteikumus</string>
+    <string name="version">LinkSheet Versija</string>
+    <string name="links_explainer">ClearURLs, LibRedirect, Pāradresēšanas sekošana</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="ignore_libredirect">Ignorēt LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="follow_redirects_local_cache_explainer">Saglabāt pāradresēšanas rezultātu lokāli kešatmiņā</string>
 </resources>

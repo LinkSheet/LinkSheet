@@ -54,4 +54,5 @@
     <string name="about">Par lietotni</string>
     <string name="about_explainer">Pateicības, Licence, Saites, Versija</string>
     <string name="set_as_browser_done">LinkSheet ir iestatīts kā noklusētais pārlūks!</string>
+    <string name="credits_explainer">Pateicības, Licencēšana</string>
 </resources>

@@ -108,7 +108,7 @@ class RedirectResolveRequest(
     companion object {
         private val refreshHeaderRegex = Regex("(\\d+)(?:\\.\\d*)?[;,](?:URL=)?(.+)", RegexOption.IGNORE_CASE)
 
-        internal fun parseRefreshHeader(refreshHeader: String): Pair<Int, String>? {
+        internal fun parseRefreshHeader(refreshHeader: String): RefreshHeader? {
             fun unquoteHeader(value: String): String {
                 if (value.length <= 2) return value
 
@@ -129,3 +129,5 @@ class RedirectResolveRequest(
         }
     }
 }
+
+typealias RefreshHeader = Pair<Int, String>

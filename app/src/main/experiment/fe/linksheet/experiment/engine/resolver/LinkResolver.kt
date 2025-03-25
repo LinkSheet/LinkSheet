@@ -1,9 +1,9 @@
 package fe.linksheet.experiment.engine.resolver
 
-import fe.linksheet.experiment.engine.PipelineStep
+import fe.linksheet.experiment.engine.EngineStep
 import fe.linksheet.experiment.engine.StepResult
 
-interface LinkResolver : PipelineStep<ResolveOutput> {
+interface LinkResolver : EngineStep<ResolveOutput> {
 }
 
 

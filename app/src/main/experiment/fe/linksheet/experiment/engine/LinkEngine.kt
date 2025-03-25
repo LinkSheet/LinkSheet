@@ -21,14 +21,14 @@ fun createPipeline(
     client: HttpClient,
     libRedirectResolver: LibRedirectResolver,
     cacheRepository: CacheRepository,
-): Pipeline {
+): LinkEngine {
     val hook = object : BeforeStepHook {
-        override fun <R : StepResult> onBeforeRun(step: PipelineStep<R>, url: String) {
+        override fun <R : StepResult> onBeforeRun(step: EngineStep<R>, url: String) {
 
         }
     }
 
-    val pipeline = Pipeline(
+    val pipeline = LinkEngine(
         listOf(
             EmbedLinkModifier(
                 ioDispatcher = ioDispatcher
@@ -58,26 +58,26 @@ fun createPipeline(
     return pipeline
 }
 
-class Pipeline(
-    val steps: List<PipelineStep<*>>,
-    val hooks: List<PipelineHook> = emptyList()
+class LinkEngine(
+    val steps: List<EngineStep<*>>,
+//    val hooks: List<PipelineHook> = emptyList()
 ) {
-    // TODO: These should probably
-    // a) be invoked asynchronously
-    // b) have some sort of veto-capability?
-    private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
-    private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
+//    // TODO: These should probably
+//    // a) be invoked asynchronously
+//    // b) have some sort of veto-capability?
+//    private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
+//    private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
 
     private suspend fun <R : StepResult> runStep(
-        step: PipelineStep<R>,
+        step: EngineStep<R>,
         url: String
     ): Pair<Boolean, String> {
-        beforeStepHooks.forEach { it.onBeforeRun(step, url) }
+//        beforeStepHooks.forEach { it.onBeforeRun(step, url) }
 
         val result = step.run(url)
         val hasNewUrl = result != null && result.url != url
 
-        afterStepHooks.forEach { it.onAfterRun(step, url, result) }
+//        afterStepHooks.forEach { it.onAfterRun(step, url, result) }
         if (!hasNewUrl) return false to url
 
         return true to result.url
@@ -87,6 +87,7 @@ class Pipeline(
         var mutUrl = url
         for (step in steps) {
             if (!isActive) break
+
             val (hasNewUrl, resultUrl) = runStep(step, mutUrl)
             if (!hasNewUrl) continue
 

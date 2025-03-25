@@ -71,11 +71,11 @@ internal class PipelineTest : DatabaseTest() {
     fun test2() = runTest(dispatcher) {
         val client = HttpClient(OkHttp)
         val hook = object : BeforeStepHook {
-            override fun <Result : StepResult> onBeforeRun(step: PipelineStep<Result>, url: String) {
+            override fun <Result : StepResult> onBeforeRun(step: EngineStep<Result>, url: String) {
                 println("$step $url")
             }
         }
-        val pipeline = Pipeline(
+        val pipeline = LinkEngine(
             listOf(
                 EmbedLinkModifier(
                     ioDispatcher = dispatcher
@@ -96,7 +96,7 @@ internal class PipelineTest : DatabaseTest() {
                     useLocalCache = { true }
                 )
             ),
-            listOf(hook)
+//            listOf(hook)
         )
 
         val url = pipeline.run("https://t.co/Id9w9cFcQw")

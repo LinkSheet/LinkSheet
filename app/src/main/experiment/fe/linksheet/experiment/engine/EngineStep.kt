@@ -1,6 +1,6 @@
 package fe.linksheet.experiment.engine
 
-interface PipelineStep<out R : StepResult>{
+interface EngineStep<out R : StepResult>{
     suspend fun run(url: String): R?
 }
 

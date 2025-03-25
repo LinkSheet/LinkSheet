@@ -8,9 +8,10 @@ import assertk.fail
 import fe.linksheet.UnitTest
 import fe.std.result.assert.assertFailure
 import fe.std.result.assert.assertSuccess
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -32,7 +33,25 @@ internal class FollowRedirectsLocalSourceTest : UnitTest {
             }
         }
 
-        val source = FollowRedirectsLocalSource(HttpClient(mockEngine))
+        val client = HttpClient(mockEngine) {
+            install(HttpRequestRetry) {
+                retryOnServerErrors(maxRetries = 3)
+                exponentialDelay()
+            }
+            install(HttpTimeout) {
+                requestTimeoutMillis = 1000
+            }
+            install(Logging) {
+                level = LogLevel.ALL
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        println(message)
+                    }
+                }
+            }
+        }
+
+        val source = FollowRedirectsLocalSource(client)
         val result = source.resolve(INPUT)
 
         assertSuccess(result)

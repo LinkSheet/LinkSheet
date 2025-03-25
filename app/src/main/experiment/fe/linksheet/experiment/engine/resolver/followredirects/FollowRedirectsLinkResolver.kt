@@ -34,7 +34,7 @@ class FollowRedirectsLinkResolver(
 
     override suspend fun run(url: String): ResolveOutput? = withContext(ioDispatcher) {
         val isTracker = isTracker(url)
-        if(followOnlyKnownTrackers() && !isTracker) {
+        if (followOnlyKnownTrackers() && !isTracker) {
             return@withContext ResolveOutput(url)
         }
 

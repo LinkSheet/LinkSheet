@@ -50,11 +50,11 @@ class FollowRedirectsLocalSource(private val client: HttpClient) : FollowRedirec
 
     private fun HttpResponse.handleRefreshHeader(): String? {
         val refreshHeader = headers["refresh"] ?: return null
-        val parsedHeader = parseRefreshHeader(refreshHeader) ?: return null
+        val (delay, refreshUrl) = parseRefreshHeader(refreshHeader) ?: return null
+        if (delay != 0) return null
+        // Check if parsable
+        val ignored = parseUrl(refreshUrl) ?: return null
 
-        return parsedHeader
-            .takeIf { it.first == 0 }
-            ?.takeIf { parseUrl(it.second) != null }
-            ?.second
+        return refreshUrl
     }
 }

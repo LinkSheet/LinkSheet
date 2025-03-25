@@ -1,0 +1,104 @@
+package fe.linksheet.experiment.engine
+
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import assertk.assertions.isEqualTo
+import assertk.assertions.isInstanceOf
+import assertk.assertions.prop
+import eu.rekawek.toxiproxy.Proxy
+import eu.rekawek.toxiproxy.ToxiproxyClient
+import eu.rekawek.toxiproxy.model.ToxicDirection
+import fe.linksheet.UnitTest
+import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
+import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSourceTest
+import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsResult
+import fe.std.result.assert.assertSuccess
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockserver.client.MockServerClient
+import org.mockserver.model.HttpRequest.request
+import org.mockserver.model.HttpResponse.response
+import org.mockserver.model.HttpStatusCode
+import org.testcontainers.containers.MockServerContainer
+import org.testcontainers.containers.Network
+import org.testcontainers.containers.ToxiproxyContainer
+import org.testcontainers.utility.DockerImageName
+
+
+@RunWith(AndroidJUnit4::class)
+internal class ToxiproxyTest : UnitTest {
+
+    companion object {
+        private const val INPUT = "https://linksheet.app/redirect-me"
+        private const val TARGET = "https://linksheet.app/target"
+    }
+
+    @get:Rule
+    val network: Network = Network.newNetwork()
+
+    @get:Rule
+    val mockServerContainer = MockServerContainer(
+        DockerImageName.parse("mockserver/mockserver").withTag("mockserver-5.15.0")
+    )
+        .withExposedPorts(MockServerContainer.PORT)
+        .withNetwork(network)
+        .withNetworkAliases("mock-server")
+
+    @get:Rule
+    val toxiProxyContainer = ToxiproxyContainer("ghcr.io/shopify/toxiproxy:2.5.0")
+        .dependsOn(mockServerContainer)
+        .withNetwork(network)
+
+    private val dispatcher = StandardTestDispatcher()
+    private lateinit var toxiproxyClient: ToxiproxyClient
+    private lateinit var proxy: Proxy
+
+
+    @Before
+    fun setup() {
+        val mockServerClient = MockServerClient(mockServerContainer.host, mockServerContainer.serverPort)
+        mockServerClient
+            .`when`(request()
+                .withMethod("HEAD")
+                .withPath("/redirect-me")
+            )
+            .respond(response()
+                .withStatusCode(HttpStatusCode.TEMPORARY_REDIRECT_307.code())
+                .withHeader("Location", TARGET)
+            )
+        toxiproxyClient = ToxiproxyClient(toxiProxyContainer.host, toxiProxyContainer.controlPort)
+        proxy = toxiproxyClient.createProxy("mock-server", "0.0.0.0:8666", "mock-server:${MockServerContainer.PORT}")
+        proxy.toxics()
+            .latency("latency", ToxicDirection.DOWNSTREAM, 1_100)
+            .setJitter(100)
+    }
+
+    @Test
+    fun hello() = runTest(dispatcher) {
+        val ip = toxiProxyContainer.host
+        val port = toxiProxyContainer.getMappedPort(8666)
+
+        val url = "http://$ip:$port/redirect-me"
+
+//        mockServerClient.
+        // ...a GET request to '/person?name=peter' returns "Peter the person!"
+//            assertThat(SimpleHttpClient.responseFromMockserver(mockServer, "/person?name=peter"))
+//                .`as`("Expectation returns expected response body")
+//                .contains("Peter the person")
+
+        val client = HttpClient(OkHttp) {
+            followRedirects = false
+        }
+        val source = FollowRedirectsLocalSource(client)
+        val result = source.resolve(url)
+        assertSuccess(result)
+            .isInstanceOf<FollowRedirectsResult.LocationHeader>()
+            .prop(FollowRedirectsResult.LocationHeader::url)
+            .isEqualTo(TARGET)
+    }
+}

@@ -5,6 +5,7 @@ import android.net.Uri
 import fe.libredirectkt.LibRedirect
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectNew
+import fe.libredirectkt.LibRedirectService
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.redactor.HashProcessor
@@ -19,6 +20,8 @@ sealed interface LibRedirectResult {
     class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
     data object NotRedirected : LibRedirectResult
 }
+
+typealias FrontendInstanceInfo = Pair<String, String>
 
 class LibRedirectResolver(
     private val defaultRepository: LibRedirectDefaultRepository,
@@ -42,31 +45,49 @@ class LibRedirectResolver(
     }
 
     suspend fun resolve(uri: Uri, jsEngine: Boolean): LibRedirectResult {
-        val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
+        return resolve(uri.toString(), jsEngine)
+    }
+
+    suspend fun resolve(url: String, jsEngine: Boolean): LibRedirectResult {
+        val service = LibRedirect.findServiceForUrl(url, libRedirectServices)
         logger.debug("Using service: $service")
 
-        if (service != null && stateRepository.isEnabled(service.key)) {
-            val savedDefault = defaultRepository.getByServiceKey(service.key).firstOrNull()
-            val (frontendKey, instanceUrl) = if (savedDefault != null) {
-                savedDefault.frontendKey to getInstanceUrl(savedDefault)
-            } else {
-                service.defaultFrontend.key to LibRedirect.getDefaultInstanceForFrontend(
-                    service.defaultFrontend.key, libRedirectInstances
-                )!!
-            }
-
-            val redirected = if (jsEngine) {
-                redirectZipline(uri.toString(), frontendKey, instanceUrl)
-            } else LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
-
-            logger.debug(redirected, HashProcessor.StringProcessor) { "Redirected to: $it" }
-
-            if (redirected != null) {
-                return LibRedirectResult.Redirected(uri, Uri.parse(redirected))
-            }
+        if (service == null || !stateRepository.isEnabled(service.key)) {
+            return LibRedirectResult.NotRedirected
         }
 
-        return LibRedirectResult.NotRedirected
+        val savedDefault = defaultRepository.getByServiceKey(service.key).firstOrNull()
+        val info = getFrontendAndInstance(service, savedDefault)
+        val redirectedUrl = redirect(url, info, jsEngine)
+        logger.debug(redirectedUrl, HashProcessor.StringProcessor) { "Redirected to: $it" }
+
+        if (redirectedUrl == null) {
+            return LibRedirectResult.NotRedirected
+        }
+
+        return LibRedirectResult.Redirected(Uri.parse(url), Uri.parse(redirectedUrl))
+    }
+
+    private fun getFrontendAndInstance(
+        service: LibRedirectService,
+        savedDefault: LibRedirectDefault?
+    ): FrontendInstanceInfo {
+        return when {
+            savedDefault != null -> savedDefault.frontendKey to getInstanceUrl(savedDefault)
+            else -> {
+                val frontendKey = service.defaultFrontend.key
+                val instanceUrl = LibRedirect.getDefaultInstanceForFrontend(frontendKey, libRedirectInstances)!!
+                frontendKey to instanceUrl
+            }
+        }
+    }
+
+    private fun redirect(url: String, info: FrontendInstanceInfo, jsEngine: Boolean): String? {
+        val (frontendKey, instanceUrl) = info
+        return when {
+            jsEngine -> redirectZipline(url, frontendKey, instanceUrl)
+            else -> LibRedirect.redirect(url, frontendKey, instanceUrl)
+        }
     }
 
     private fun redirectZipline(url: String, frontendKey: String, instance: String): String? {
@@ -76,10 +97,12 @@ class LibRedirectResolver(
     }
 
     private fun getInstanceUrl(default: LibRedirectDefault): String {
-        return if (default.instanceUrl == LibRedirectDefault.randomInstance) {
-            libRedirectInstances.find { it.frontendKey == default.frontendKey }
-                ?.hosts?.random() ?: default.instanceUrl
-        } else default.instanceUrl
+        return when (default.instanceUrl) {
+            LibRedirectDefault.randomInstance -> {
+                val instance = libRedirectInstances.find { it.frontendKey == default.frontendKey }
+                instance?.hosts?.random() ?: default.instanceUrl
+            }
+            else -> default.instanceUrl
+        }
     }
-
 }

@@ -1,7 +1,6 @@
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies.MozillaComponents
-import fe.build.dependencies.PinnedVersions
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 import fe.buildlogic.extension.CurrentTagMode
@@ -223,6 +222,7 @@ android {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-client-okhttp-jvm:3.1.1")
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 
@@ -296,6 +296,7 @@ dependencies {
     implementation(JetBrains.ktor.client.okHttp)
     implementation(JetBrains.ktor.client.android)
     implementation(JetBrains.ktor.client.mock)
+    implementation(JetBrains.ktor.client.logging)
 
     implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
@@ -304,21 +305,10 @@ dependencies {
     implementation(Grrfe.std.result.core)
     implementation(Grrfe.std.uri)
     implementation(Grrfe.std.stringbuilder)
-    implementation(Grrfe.std.test)
-//    implementation(Grrfe.std.process.core)
-    implementation("com.gitlab.grrfe.kotlin-ext:process-core:0.0.115")
 
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.serialization.gson)
-    implementation(Grrfe.gsonExt.core)
-
-    implementation(_1fexd.clearUrl)
-    implementation(_1fexd.signify)
-    implementation(_1fexd.fastForward)
-    implementation(_1fexd.libredirectkt)
-    implementation(_1fexd.amp2html)
-    implementation(_1fexd.embedResolve)
 
     implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.compose.core)
@@ -340,6 +330,16 @@ dependencies {
     implementation(_1fexd.composeKit.preference.compose.mock)
     implementation(_1fexd.composeKit.span.core)
     implementation(_1fexd.composeKit.span.compose)
+
+    implementation(Grrfe.gsonExt.core)
+    implementation(Grrfe.gsonExt.koin)
+
+    implementation(_1fexd.clearUrl)
+    implementation(_1fexd.signify)
+    implementation(_1fexd.fastForward)
+    implementation(_1fexd.libredirectkt)
+    implementation(_1fexd.amp2html)
+    implementation(_1fexd.embedResolve)
 
     runtimeOnly(AndroidX.annotation)
 
@@ -369,10 +369,29 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
-    androidTestImplementation(Koin.test)
-    androidTestImplementation(Koin.junit4)
-    androidTestImplementation(Koin.android)
-    androidTestImplementation(platform(AndroidX.compose.bom))
+    val commonTestDependencies = arrayOf(
+        Koin.test,
+        Koin.junit4,
+        Koin.android,
+        KotlinX.coroutines.test,
+        AndroidX.room.testing,
+        Grrfe.std.test,
+        Grrfe.std.result.assert,
+        Testing.robolectric,
+        "com.willowtreeapps.assertk:assertk:_",
+        kotlin("test")
+    )
+
+    for (notation in commonTestDependencies) {
+        androidTestImplementation(notation)
+        testImplementation(notation)
+    }
+
+    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
+    implementation(platform("org.testcontainers:testcontainers-bom:1.20.6"))
+    testImplementation("org.testcontainers:mockserver")
+    testImplementation("org.testcontainers:toxiproxy")
+
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
@@ -380,24 +399,11 @@ dependencies {
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
-    androidTestImplementation(AndroidX.room.testing)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
     androidTestImplementation(AndroidX.test.uiAutomator)
-    androidTestImplementation("com.willowtreeapps.assertk:assertk:_")
-    androidTestImplementation(kotlin("test"))
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
 
-    testImplementation(AndroidX.room.testing)
-    testImplementation(Grrfe.std.result.assert)
-    testImplementation(Koin.test)
-    testImplementation(Koin.junit4)
-    testImplementation(Koin.android)
-    testImplementation(Testing.junit4)
-    testImplementation(Testing.robolectric)
-    testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
-    testImplementation(kotlin("test"))
-
 
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

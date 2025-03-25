@@ -382,6 +382,11 @@ dependencies {
         testImplementation(notation)
     }
 
+    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
+    implementation(platform("org.testcontainers:testcontainers-bom:1.20.6"))
+    testImplementation("org.testcontainers:mockserver")
+    testImplementation("org.testcontainers:toxiproxy")
+
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)

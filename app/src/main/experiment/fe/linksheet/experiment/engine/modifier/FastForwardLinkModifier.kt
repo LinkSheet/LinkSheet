@@ -1,7 +1,6 @@
 package fe.linksheet.experiment.engine.modifier
 
 import fe.fastforwardkt.FastForward
-import fe.linksheet.experiment.engine.PipelineStep
 import fe.linksheet.experiment.engine.StepResult
 
 class FastForwardLinkModifier : LinkModifier<FastForwardModifyOutput> {

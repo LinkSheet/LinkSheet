@@ -289,6 +289,7 @@ dependencies {
     implementation(JetBrains.ktor.client.okHttp)
     implementation(JetBrains.ktor.client.android)
     implementation(JetBrains.ktor.client.mock)
+    implementation(JetBrains.ktor.client.logging)
 
     implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)

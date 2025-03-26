@@ -277,12 +277,12 @@ dependencies {
     implementation(Koin.compose)
     implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
-    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
     implementation("io.coil-kt.coil3:coil-core:3.1.0")
     implementation("io.coil-kt.coil3:coil-compose:3.1.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
-    implementation("io.coil-kt.coil3:coil-network-ktor3:_")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+    implementation("io.coil-kt.coil3:coil-network-ktor3:3.1.0")
 
     implementation("com.github.seancfoley:ipaddress:_")
     implementation("io.github.fornewid:placeholder-material3:_")

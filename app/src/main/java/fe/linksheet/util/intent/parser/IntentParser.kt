@@ -3,6 +3,7 @@ package fe.linksheet.util.intent.parser
 import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
+import android.nfc.NfcAdapter
 import fe.linksheet.util.web.UriUtil
 import fe.std.result.Failure
 import fe.std.result.IResult
@@ -32,7 +33,7 @@ open class InternalIntentParser internal constructor(
     fun getUriFromIntent(intent: SafeIntent): IResult<Uri> {
         return when (val action = intent.action) {
             Intent.ACTION_SEND -> parseSendAction(intent)
-            Intent.ACTION_VIEW -> parseViewAction(intent)
+            Intent.ACTION_VIEW, NfcAdapter.ACTION_NDEF_DISCOVERED -> parseViewAction(intent)
             Intent.ACTION_PROCESS_TEXT -> parseProcessTextAction(intent)
             else -> Failure(UnsupportedIntentActionException(action))
         }

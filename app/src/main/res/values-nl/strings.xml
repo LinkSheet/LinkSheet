@@ -18,7 +18,7 @@
     <string name="opening_with_app">Openen met %s</string>
     <string name="default_apps">Standaardapps</string>
     <string name="set_as_browser">Als browser instellen</string>
-    <string name="apps_which_can_open_links">Links afhandelen</string>
+    <string name="apps_which_can_open_links">Geverifieerde linkverwerkers</string>
     <string name="copy_url">Kopiëren</string>
     <string name="no_preferred_apps_set_yet">Er zijn nog geen apps ingesteld als voorkeursapp.</string>
     <string name="search">Zoeken</string>
@@ -53,7 +53,7 @@
     <string name="normal">Normaal</string>
     <string name="enable_ignore_libredirect_button">Knop \"LibRedirect negeren\" tonen</string>
     <string name="debug">Debuggen</string>
-    <string name="debug_explainer">App-logs, reset links afhandelen</string>
+    <string name="debug_explainer">App-logs, geverifieerde linkverwerkers resetten</string>
     <string name="no_libredirect_services">Geen LibRedirect-diensten gevonden!</string>
     <string name="request_timeout">Time-out verbindingen</string>
     <string name="resolve_failed">%s mislukt: %s</string>
@@ -173,7 +173,7 @@
     <string name="pretend_to_be_app">Verzoeken voor native apps onderscheppen</string>
     <string name="domain_selection_confirmation_title">Domeinen kiezen?</string>
     <string name="shizuku_explainer_short">Schakel directe interactie met systeem-API\'s in</string>
-    <string name="apps_which_can_open_links_shizuku_explainer">De Shizuku-modus is geactiveerd: klik op een app om de automatische linkafhandeling in te stellen. Druk lang op een app voor het instellingenmenu \"Standaard openen\".</string>
+    <string name="apps_which_can_open_links_shizuku_explainer">De Shizuku-modus is geactiveerd: klik op een app om de automatische linkverwerking in te stellen. Druk lang op een app voor het instellingenmenu \"Standaard openen\".</string>
     <string name="shizuku_not_running_explainer">Shizuku wordt niet uitgevoerd. Klik hier om Shizuku te openen en volg de instructies om het te starten.</string>
     <string name="warning">Waarschuwing</string>
     <string name="shizuku_integration_no_permission_explainer">Klik hier om toestemming te vragen in Shizuku.</string>
@@ -317,7 +317,7 @@
     <string name="launch_onboarding_new">Nieuw introductiescherm starten</string>
     <string name="launch_onboarding__now_explainer">Test de nieuwe introductie</string>
     <string name="onboarding_1_title">LinkSheet als standaardbrowser instellen</string>
-    <string name="onboarding_1_subtitle">LinkSheet moet worden ingesteld als standaardbrowser om aangeklikte links te kunnen afhandelen</string>
+    <string name="onboarding_1_subtitle">LinkSheet moet worden ingesteld als standaardbrowser om aangeklikte links te kunnen verwerken</string>
     <string name="onboarding_1_card_explainer">LinkSheet kan niet functioneren zonder dat het de standaardbrowser is.</string>
     <string name="onboarding_2_request_shizuku_permission">Toestemming vragen</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Verberg de knoppen \"Eenmalig\" en \"Altijd\" in het paneel</string>
@@ -364,4 +364,72 @@
     <string name="no_action">Geen actie</string>
     <string name="tap_customization_dialog_text">Kies de actie die moet worden uitgevoerd</string>
     <string name="cancel">Annuleren</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d host: %s</item>
+        <item quantity="other">%d hosts: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d geverifieerde host</item>
+        <item quantity="other">%d geverifieerd hosts</item>
+    </plurals>
+    <string name="onboarding_0_subtitle">Kies ervoor om altijd een melding te krijgen bij het openen van een link, stel standaardbrowsers in en nog veel meer</string>
+    <string name="start_setup_explainer">De functionaliteit van LinkSheet vereist het aanpassen van enkele Android-instellingen. De volgende stappen leiden je door dit proces.</string>
+    <string name="onboarding_2_card_explainer">Shizuku stelt LinkSheet in staat om de standaardlinkverwerking van alle apps in één keer uit te schakelen, in plaats van dit handmatig voor elke app afzonderlijk te doen (wat de volgende stap is).</string>
+    <string name="onboarding_3_subtitle">Linkverwerkers moeten worden uitgeschakeld, zodat LinkSheet de links kan onderscheppen</string>
+    <string name="onboarding_3_title">Standaardlinkverwerkers uitschakelen</string>
+    <string name="onboarding_3_card_explainer">Google heeft geverifieerde app-links geïntroduceerd in Android 12, waardoor apps het eigendom van domeinen cryptografisch kunnen aantonen. Dit gedrag moet handmatig worden uitgeschakeld om LinkSheet in staat te stellen deze links te onderscheppen.</string>
+    <string name="onboarding_3_card_title">Linkverwerkers</string>
+    <string name="onboarding_3_button">Linkverwerkers uitschakelen</string>
+    <string name="onboarding_4_card_title">Linkverwerkers uitschakelen</string>
+    <string name="onboarding_4_card_explainer">Schakel linkverwerking uit voor alle domeinen die door LinkSheet moeten worden afgehandeld.</string>
+    <string name="onboarding_5_subtitle">LinkSheet is ingeschakeld</string>
+    <string name="onboarding_5_title">Helemaal klaar!</string>
+    <string name="onboarding_5_card_explainer">De basisconfiguratie die nodig is om LinkSheet te laten werken is voltooid. Ga naar de instellingen om te ontdekken wat LinkSheet nog meer te bieden heeft!</string>
+    <string name="telemetry_level_minimal_description">Statistieken geïnstalleerde versie</string>
+    <string name="telemetry_level_standard_description">Geaggregeerde gebruiksstatistieken</string>
+    <string name="telemetry_level_exhaustive_description">Gedetailleerde gebruiksstatistieken</string>
+    <string name="telemetry_configure_title">Telemetrie</string>
+    <string name="telemetry_configure_type">Niveau telemetrie</string>
+    <string name="telemetry_identifier_reset">Uniek ID resetten</string>
+    <string name="link_handle_failed">Er is een fout opgetreden</string>
+    <string name="link_handle_failed_text">LinkSheet kan deze mogelijk onjuiste link niet verwerken. Bewerk de link hieronder en probeer het opnieuw of zoek naar deze gegevens op het web.</string>
+    <string name="link_handle_failed_text_field_label">Opzoeken</string>
+    <string name="retry">Opnieuw proberen</string>
+    <string name="something_went_wrong">Er is iets misgegaan, probeer het opnieuw.</string>
+    <string name="resolve_activity_failure">Kon de app-activity niet vinden!</string>
+    <string name="reset_app_link_verification_status">Verificatiestatus van app-link resetten</string>
+    <string name="settings_shortcuts__title_link_handlers">Linkverwerkers</string>
+    <string name="settings_verified_link_handlers__text_user_apps">Gebruikersapps</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_all_short">Alles</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Ingeschakeld</string>
+    <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Uitgeschakeld</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Links verwerken toegestaan</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Links verwerken geblokkeerd</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet is correct ingesteld en klaar voor gebruik</string>
+    <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet is niet ingesteld als de standaardbrowser</string>
+    <string name="settings_main_setup_success__button_change_browser">Standaardbrowser</string>
+    <string name="settings_main_setup_success__button_set_default_browser">Als standaardbrowser instellen</string>
+    <string name="settings_main_setup_success__button_link_handlers">Linkverwerkers</string>
+    <string name="settings_verified_link_handlers__text_browser">Browser</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d ingeschakeld</item>
+        <item quantity="other">%d ingeschakeld</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d geverifieerd</item>
+        <item quantity="other">%d geverifieerd</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d ingeschakelde host</item>
+        <item quantity="other">%d ingeschakelde hosts</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d uitgeschakeld</item>
+        <item quantity="other">%d uitgeschakeld</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d uitgeschakelde host</item>
+        <item quantity="other">%d uitgeschakelde hosts</item>
+    </plurals>
+    <string name="verified_link_handlers">Geverifieerde linkverwerkers</string>
 </resources>

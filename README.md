@@ -78,7 +78,7 @@
 
 ## Nightly builds
 
-Github automatically builds a "nightly" version of LinkSheet on push (e.g. meaning one or more commits have occurred)
+Currently, LinkSheet uses a "nightly" "rolling release" model which allows for fast development iteration at the cost of stability; However, since this has proven to work quite well, there usually aren't any issues to be expected.
 
 <!--
 * Latest build is always available via [nightly.link](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)

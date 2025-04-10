@@ -46,7 +46,7 @@ val viewModelModule = module {
     viewModel { parameters ->
         LogTextSettingsViewModel(
             context = get(),
-            sessionId = parameters.get(),
+            sessionId = parameters[0],
             logViewCommon = get(),
             preferenceRepository = get(),
             logPersistService = get()

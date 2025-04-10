@@ -140,6 +140,7 @@ internal class KoinModuleCheckTest : UnitTest {
             Gson::class,
             SystemInfoService::class
         ),
+        definition<LogTextSettingsViewModel>(),
         definition<MarkdownViewModel>(Request::class),
         definition<LibRedirectServiceSettingsViewModel>(LibRedirectSettingsUseCase::class),
         definition<BottomSheetViewModel>(ImageLoader::class, IntentResolver::class),

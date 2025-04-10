@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
@@ -40,6 +41,15 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                item(key = "draw-borders") {
+                    val drawBorders = viewModel.drawBorders.collectAsStateWithLifecycle()
+
+                    DebugMenuButton(
+                        text = "Draw borders ($drawBorders)",
+                        onClick = { viewModel.drawBorders(!drawBorders) }
+                    )
+                }
+
                 item(key = "crash") {
                     FilledTonalButton(
                         colors = ButtonDefaults.filledTonalButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),

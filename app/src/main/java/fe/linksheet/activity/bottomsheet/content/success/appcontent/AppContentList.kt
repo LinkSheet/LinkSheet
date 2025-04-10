@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.util.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
@@ -30,6 +31,7 @@ import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.KnownBrowser
 
 @Composable
@@ -51,6 +53,7 @@ fun AppContentList(
     isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
+    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     val state = rememberLazyListState()
 
     AppContent(
@@ -63,7 +66,7 @@ fun AppContentList(
     ) { modifier ->
         LazyColumn(
             state = state,
-            modifier = modifier.debugBorder(1.dp, Color.Green)
+            modifier = modifier.debugBorder(debug.value, 1.dp, Color.Green)
         ) {
             itemsIndexed(
                 items = apps,

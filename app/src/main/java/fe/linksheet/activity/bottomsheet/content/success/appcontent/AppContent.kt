@@ -12,9 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.module.debug.LocalUiDebug
 
 @Composable
 fun AppContent(
@@ -26,8 +28,9 @@ fun AppContent(
     showToast: (Int, Int, Boolean) -> Unit,
     content: @Composable (Modifier) -> Unit,
 ) {
+    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     Column(
-        modifier = Modifier.debugBorder(1.dp, Color.Cyan),
+        modifier = Modifier.debugBorder(debug.value, 1.dp, Color.Cyan),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         content(

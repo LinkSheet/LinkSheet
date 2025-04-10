@@ -4,14 +4,17 @@ import android.os.StrictMode
 import app.linksheet.testing.Testing
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.debug.module.debug.RealDebugMenuSlotProvider
+import fe.linksheet.debug.module.debug.RealDebugPreferenceProvider
 import fe.linksheet.debug.module.devicecompat.DebugMiuiCompatProvider
+import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.debug.module.viewmodel.module.DebugViewModelModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
+import fe.linksheet.module.debug.DebugPreferenceProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
+import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -51,9 +54,11 @@ class DebugLinkSheetApp : LinkSheetApp() {
         else -> aptabaseAnalyticsClientModule
     }
 
-    override fun provideDebugMenu(): Module {
+    override fun provideDebugModule(): Module {
         return module {
+            single<DebugPreferenceRepository> { DebugPreferenceRepository(get()) }
             single<DebugMenuSlotProvider> { RealDebugMenuSlotProvider(get()) }
+            single<DebugPreferenceProvider> { RealDebugPreferenceProvider(get()) }
         }
     }
 }

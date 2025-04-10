@@ -24,10 +24,13 @@ import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
+import fe.linksheet.module.debug.DebugPreferenceProvider
+import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkConstants
 import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 import org.koin.core.annotation.KoinExperimentalAPI
 
 tailrec fun Context.findActivity(): Activity? = when (this) {
@@ -76,12 +79,14 @@ private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 fun BaseComponentActivity.AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     content: @Composable () -> Unit,
 ) {
     AppTheme(
         edgeToEdge = edgeToEdge,
         systemDarkTheme = systemDarkTheme,
         themeSettingsViewModel = themeSettingsViewModel,
+        debugPreferenceProvider = debugPreferenceProvider,
         updateEdgeToEdge = { status, nav -> enableEdgeToEdge(statusBarStyle = status, navigationBarStyle = nav) },
         content = content
     )
@@ -93,6 +98,7 @@ fun AppTheme(
     edgeToEdge: Boolean = true,
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     updateEdgeToEdge: ((SystemBarStyle, SystemBarStyle) -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
@@ -127,7 +133,8 @@ fun AppTheme(
         CompositionLocalProvider(
             LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
             LocalLinkAnnotationStyle provides linkAnnotationStyle,
-            LocalLinkTags provides LinkConstants.tags
+            LocalLinkTags provides LinkConstants.tags,
+            LocalUiDebug provides debugPreferenceProvider
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,

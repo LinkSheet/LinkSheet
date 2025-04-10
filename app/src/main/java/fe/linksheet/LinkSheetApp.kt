@@ -20,7 +20,9 @@ import fe.linksheet.module.app.PackageModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
+import fe.linksheet.module.debug.DebugPreferenceProvider
 import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
+import fe.linksheet.module.debug.NoOpDebugPreferenceProvider
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
@@ -130,7 +132,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             pasteServiceModule,
             ProfileSwitcherModule,
             AppStateServiceModule,
-            provideDebugMenu()
+            provideDebugModule()
         )
     }
 
@@ -145,9 +147,10 @@ open class LinkSheetApp : Application(), DependencyProvider {
         return DebugLogAnalyticsClient.module
     }
 
-    override fun provideDebugMenu(): Module {
+    override fun provideDebugModule(): Module {
         return module {
             single<DebugMenuSlotProvider> { NoOpDebugMenuSlotProvider }
+            single<DebugPreferenceProvider> { NoOpDebugPreferenceProvider }
         }
     }
 

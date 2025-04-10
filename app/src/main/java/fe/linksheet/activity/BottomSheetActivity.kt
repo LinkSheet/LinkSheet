@@ -44,6 +44,7 @@ import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.util.ReferrerHelper
@@ -175,6 +176,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 
+        val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
 //        sheetState
 //        if(sheetOpen){
         ImprovedBottomDrawer(
@@ -183,7 +185,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     interceptTap { !sheetState.isAnimationRunning }
                 }
             } else Modifier)
-                .debugBorder(1.dp, Color.Red),
+                .debugBorder(debug.value, 1.dp, Color.Red),
             landscape = landscape,
             // TODO: Replace with pref
             isBlackTheme = false,

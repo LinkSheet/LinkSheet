@@ -43,12 +43,12 @@ val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss"
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = Version.COMPILE_SDK
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = Version.MIN_SDK
-        targetSdk = Version.COMPILE_SDK
+        targetSdk = 35
 
         val now = System.currentTimeMillis()
         val provider = AndroidVersionStrategy(now)
@@ -241,10 +241,10 @@ dependencies {
 
     implementation(platform(AndroidX.compose.bom))
     implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.ui.withVersion("1.8.0-beta03"))
+    implementation(AndroidX.compose.ui.withVersion("1.8.0-rc03"))
     implementation(AndroidX.compose.ui.text)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3.withVersion("1.4.0-alpha09"))
+    implementation(AndroidX.compose.material3.withVersion("1.4.0-alpha12"))
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -305,12 +305,13 @@ dependencies {
     implementation(Grrfe.std.uri)
     implementation(Grrfe.std.stringbuilder)
     implementation(Grrfe.std.test)
-//    implementation(Grrfe.std.process.core)
-    implementation("com.gitlab.grrfe.kotlin-ext:process-core:0.0.115")
+    implementation(Grrfe.std.process.core)
 
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.serialization.gson)
+
+    implementation(platform(Grrfe.gsonExt.bom))
     implementation(Grrfe.gsonExt.core)
 
     implementation(_1fexd.clearUrl)

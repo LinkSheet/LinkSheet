@@ -65,6 +65,7 @@ object Experiments : PreferenceDefinition(
                 addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
                 addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
                 addPreference(ExperimentPreference("Disable bottom sheet state save", noBottomSheetStateSave))
+                addPreference(ExperimentPreference("Aggressive follow redirects", aggressiveFollowRedirects))
             },
 
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {

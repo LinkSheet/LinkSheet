@@ -2,7 +2,6 @@ package fe.linksheet.module.resolver.urlresolver.redirect
 
 import fe.composekit.preference.asFunction
 import fe.httpkt.Request
-import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
@@ -18,10 +17,14 @@ import org.koin.dsl.module
 
 val redirectResolveRequestModule = module {
     single<RedirectResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
+        val experimentRepository = scope.get<ExperimentRepository>()
         RedirectResolveRequest(
             "${LinkSheetAppConfig.supabaseHost()}/redirector",
             LinkSheetAppConfig.supabaseApiKey(),
-            request, cachedRequest, scope.get<OkHttpClient>()
+            request,
+            cachedRequest,
+            scope.get<OkHttpClient>(),
+            experimentRepository.asFunction(Experiments.aggressiveFollowRedirects)
         )
     }
 }

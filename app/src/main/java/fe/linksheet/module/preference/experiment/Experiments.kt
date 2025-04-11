@@ -34,6 +34,7 @@ object Experiments : PreferenceDefinition(
     val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
 
     val noBottomSheetStateSave = boolean("experiment_no_bottom_sheet_state_save")
+    val aggressiveFollowRedirects = boolean("experiment_aggressive_follow_redirects")
 
     // TODO: Enforce type
     init {

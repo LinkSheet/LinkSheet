@@ -1,11 +1,16 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
+import fe.composekit.preference.asFunction
 import fe.httpkt.Request
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.extension.koin.single
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
+import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -27,8 +32,13 @@ class RedirectResolveRequest(
     request: Request,
     private val urlResolverCache: CachedRequest,
     private val okHttpClient: OkHttpClient,
+    private val aggressiveExperiment: () -> Boolean = { false },
 ) : ResolveRequest(apiUrl, token, request, "redirect") {
     override fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
+        if (aggressiveExperiment()) {
+            return resolveAggressive(url)
+        }
+
         val req = okhttp3.Request.Builder().url(url).head().build()
 
         val headResult = sendRequest(req)
@@ -37,7 +47,6 @@ class RedirectResolveRequest(
         }
 
         val headResponse = headResult.getOrNull()!!
-
         val refreshHeaderUrl = headResponse.handleRefreshHeader()
         if (refreshHeaderUrl != null) {
             return ResolveResultType.Resolved.Local(refreshHeaderUrl).success()
@@ -53,6 +62,27 @@ class RedirectResolveRequest(
         }
 
         return getResult.getOrNull()!!.toSuccessResult()
+    }
+
+    private fun resolveAggressive(url: String): Result<ResolveResultType> {
+        val req = okhttp3.Request.Builder().url(url).get().build()
+
+        val result = sendRequest(req)
+        if (result.isFailure) {
+            return Result.failure(result.exceptionOrNull()!!)
+        }
+
+        val response = result.getOrNull()!!
+        if (response.isRedirect) {
+            return response.toSuccessResult()
+        }
+
+        val refreshHeaderUrl = response.handleRefreshHeader()
+        if (refreshHeaderUrl != null) {
+            return ResolveResultType.Resolved.Local(refreshHeaderUrl).success()
+        }
+
+        return response.toSuccessResult()
     }
 
     private fun Response.handleRefreshHeader(): String? {

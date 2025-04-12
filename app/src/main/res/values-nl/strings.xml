@@ -432,4 +432,29 @@
         <item quantity="other">%d uitgeschakelde hosts</item>
     </plurals>
     <string name="verified_link_handlers">Geverifieerde linkverwerkers</string>
+    <string name="reset_app_link_verification_status_toast">Opnieuw verifiëren aangevraagd</string>
+    <string name="switch_profile">Schakelen tussen profielen inschakelen</string>
+    <string name="customization">Aanpassingen</string>
+    <string name="settings__title_shortcuts">Snelkoppelingen</string>
+    <string name="settings_shortcuts__title_connected_apps">Verbonden apps</string>
+    <string name="settings__title_filter_apps">Apps filteren</string>
+    <string name="settings_notifications__divider_toasts">Toasts</string>
+    <string name="settings_credits__app_credit_reason_seal">Inspiratie</string>
+    <string name="settings_credits__app_credit_reason_gmsflags">Inspiratie</string>
+    <string name="bottom_sheet_loading_indicator__button_skip_job">Overslaan</string>
+    <string name="export_log_dialog__title_include_throwable">Crashlogs bijvoegen</string>
+    <string name="export_log_dialog__title_include_settings">Instellingen bijvoegen</string>
+    <string name="export_log_dialog__subtitle_include_settings">Aanbevolen</string>
+    <string name="generic__button_text_cancel">Annuleren</string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Log aangemaakt op: %s</string>
+    <string name="crash_viewer__subtitle_app_crashed">Oef, dat had niet mogen gebeuren!</string>
+    <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
+    <string name="settings_links_downloader__title_downloader">Downloader</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet is ingesteld</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet is nog niet ingesteld</string>
+    <string name="settings_main_setup_success__button_connected_apps">Verbonden apps</string>
+    <string name="settings_main_news__title_ui_overhaul">Nieuwe vormgeving</string>
+    <string name="settings_main_news__text_ui_overhaul">LinkSheet heeft een nieuw likje verf gekregen!</string>
+    <string name="settings_main_news__button_read_more">Meer informatie</string>
+    <string name="settings_shortcuts__title_default_browser">Standaardbrowser</string>
 </resources>

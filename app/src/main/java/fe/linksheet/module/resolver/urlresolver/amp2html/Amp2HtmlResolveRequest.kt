@@ -4,7 +4,6 @@ import android.util.Log
 import fe.amp2htmlkt.Amp2Html
 import fe.droidkit.koin.single
 import fe.httpkt.Request
-import fe.linksheet.extension.koin.single
 import fe.linksheet.extension.okhttp.isHtml
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.resolver.urlresolver.CachedRequest

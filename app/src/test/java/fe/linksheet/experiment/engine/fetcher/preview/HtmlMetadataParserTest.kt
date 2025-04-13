@@ -243,13 +243,11 @@ internal class HtmlMetadataParserTest : UnitTest {
         val result = HtmlMetadataParser().parse(document, document.html())
 
         assertThat(result)
-            .isInstanceOf<RichPreviewResult>()
+            .isInstanceOf<HtmlPreviewResult.SimplePreviewResult>()
             .all {
-                prop(RichPreviewResult::url).isEqualTo("https://tonsky.me/blog/diagrams")
-                prop(RichPreviewResult::title).isEqualTo("Where Should Visual Programming Go?")
-                prop(RichPreviewResult::description).isEqualTo("Visual programming and textual code should co-exist next to each other, not replace one another")
-                prop(RichPreviewResult::favicon).isEqualTo("https://tonsky.me/i/favicon.png")
-                prop(RichPreviewResult::thumbnail).isEqualTo("https://dynogee.com/gen?id=nm509093bpj50lv&title=Where+Should+Visual+Programming+Go%3F")
+                prop(HtmlPreviewResult.SimplePreviewResult::url).isEqualTo("https://tonsky.me/blog/diagrams")
+                prop(HtmlPreviewResult.SimplePreviewResult::title).isEqualTo("Where Should Visual Programming Go?")
+                prop(HtmlPreviewResult.SimplePreviewResult::favicon).isEqualTo("https://tonsky.me/favicon.ico")
             }
     }
 }

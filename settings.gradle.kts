@@ -1,6 +1,8 @@
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildsettings.extension.maybeResolveIncludingRootContext
+import fe.buildsettings.config.GradlePluginPortalRepository
+import fe.buildsettings.config.MavenRepository
+import fe.buildsettings.config.configureRepositories
 
 rootProject.name = "LinkSheet"
 
@@ -55,6 +57,14 @@ plugins {
     id("de.fayard.refreshVersions")
     id("com.gitlab.grrfe.build-settings-plugin")
 }
+
+configureRepositories(
+    MavenRepository.Google,
+    MavenRepository.MavenCentral,
+    MavenRepository.Jitpack,
+    MavenRepository.Mozilla,
+    GradlePluginPortalRepository
+)
 
 extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }

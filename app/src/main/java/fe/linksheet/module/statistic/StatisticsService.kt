@@ -2,7 +2,7 @@ package fe.linksheet.module.statistic
 
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
-import fe.linksheet.extension.koin.service
+import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences

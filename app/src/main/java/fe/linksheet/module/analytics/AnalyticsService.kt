@@ -1,8 +1,10 @@
 package fe.linksheet.module.analytics
 
 import androidx.lifecycle.LifecycleCoroutineScope
+import fe.android.lifecycle.koin.extension.applicationLifecycle
+import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.koin.service
+import fe.linksheet.extension.koin.logger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.preference.SensitivePreference

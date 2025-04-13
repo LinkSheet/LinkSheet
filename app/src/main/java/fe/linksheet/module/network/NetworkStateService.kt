@@ -6,7 +6,7 @@ import android.net.NetworkCapabilities
 import androidx.core.content.getSystemService
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
-import fe.linksheet.extension.koin.service
+import fe.android.lifecycle.koin.extension.service
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first

@@ -395,8 +395,6 @@ dependencies {
     androidTestImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.ext.junit.ktx)
     androidTestImplementation(AndroidX.test.uiAutomator)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
-    androidTestImplementation(AndroidX.compose.ui.testJunit4)
 
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
 

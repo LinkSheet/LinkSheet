@@ -8,6 +8,7 @@ import assertk.assertions.isNull
 import assertk.assertions.prop
 import fe.linksheet.DatabaseTest
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
+import fe.linksheet.experiment.engine.withTestRunContext
 import fe.linksheet.module.database.entity.cache.CachedHtml
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.cache.ResolvedUrl
@@ -67,7 +68,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
             useLocalCache = { false },
         )
 
-        val result = resolver.run(URL)
+        val result = withTestRunContext { resolver.runStep(URL) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
@@ -96,7 +97,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         database.urlEntryDao().insertReturningId(entry)
         database.resolvedUrlCacheDao().insertReturningId(resolved)
 
-        val result = resolver.run(entry.url)
+        val result = withTestRunContext { resolver.runStep(entry.url) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
@@ -134,7 +135,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         database.urlEntryDao().insertReturningId(entry)
         database.htmlCacheDao().insertReturningId(htmlCache)
 
-        val result = resolver.run(entry.url)
+        val result = withTestRunContext { resolver.runStep(entry.url) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)

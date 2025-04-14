@@ -41,6 +41,7 @@ pluginManagement {
 }
 
 plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
     id("de.fayard.refreshVersions")
     id("com.gitlab.grrfe.build-settings-plugin")
 }
@@ -50,7 +51,8 @@ configureRepositories(
     MavenRepository.MavenCentral,
     MavenRepository.Jitpack,
     MavenRepository.Mozilla,
-    GradlePluginPortalRepository
+    GradlePluginPortalRepository,
+    mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 )
 
 extra.properties["gradle.build.dir"]

@@ -1,3 +1,8 @@
+import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.common.version.CurrentTagMode
+import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
+import com.gitlab.grrfe.gradlebuild.common.version.asProvider
+import com.gitlab.grrfe.gradlebuild.common.version.closure
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies.MozillaComponents
@@ -7,7 +12,10 @@ import fe.buildlogic.common.CompilerOption
 import fe.buildlogic.common.PluginOption
 import fe.buildlogic.common.extension.addCompilerOptions
 import fe.buildlogic.common.extension.addPluginOptions
-import fe.buildlogic.extension.*
+import fe.buildlogic.extension.buildConfig
+import fe.buildlogic.extension.buildStringConfigField
+import fe.buildlogic.extension.getOrSystemEnv
+import fe.buildlogic.extension.readPropertiesOrNull
 import fe.buildlogic.version.AndroidVersionStrategy
 import java.time.Instant
 import java.time.LocalDateTime
@@ -25,7 +33,7 @@ plugins {
     id("androidx.room")
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
-    id("com.gitlab.grrfe.build-logic-plugin")
+    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 // Must be defined before the android block, or else it won't work
@@ -39,12 +47,12 @@ val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss"
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 35
+    compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
         applicationId = "fe.linksheet"
-        minSdk = Version.MIN_SDK
-        targetSdk = 35
+        minSdk = AndroidSdk.MIN_SDK
+        targetSdk = AndroidSdk.COMPILE_SDK
 
         val now = System.currentTimeMillis()
         val provider = AndroidVersionStrategy(now)
@@ -217,7 +225,7 @@ android {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp-jvm:3.1.1")
+    implementation("io.ktor:ktor-client-okhttp-jvm:_")
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 
@@ -272,12 +280,12 @@ dependencies {
     implementation(Koin.compose)
     implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
-    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
-    implementation("io.coil-kt.coil3:coil-core:3.1.0")
-    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
-    implementation("io.coil-kt.coil3:coil-network-ktor3:3.1.0")
+    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-core:_")
+    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
+    implementation("io.coil-kt.coil3:coil-network-ktor3:_")
 
     implementation("com.github.seancfoley:ipaddress:_")
     implementation("io.github.fornewid:placeholder-material3:_")
@@ -294,6 +302,7 @@ dependencies {
     implementation(JetBrains.ktor.client.logging)
 
     implementation(platform(Grrfe.std.bom))
+    androidTestImplementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
@@ -384,10 +393,10 @@ dependencies {
         testImplementation(notation)
     }
 
-    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
-    implementation(platform("org.testcontainers:testcontainers-bom:1.20.6"))
-    testImplementation("org.testcontainers:mockserver")
-    testImplementation("org.testcontainers:toxiproxy")
+    testImplementation("org.mock-server:mockserver-client-java:_")
+    implementation(platform("org.testcontainers:testcontainers-bom:_"))
+    testImplementation("org.testcontainers:mockserver:_")
+    testImplementation("org.testcontainers:toxiproxy:_")
 
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)

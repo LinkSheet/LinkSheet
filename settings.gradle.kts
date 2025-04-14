@@ -16,9 +16,9 @@ pluginManagement {
 
     plugins {
         id("de.fayard.refreshVersions") version "0.60.5"
+        id("net.nemerosa.versioning")
         id("com.android.library")
         id("org.jetbrains.kotlin.android")
-        id("net.nemerosa.versioning") version "3.1.0"
         id("androidx.navigation.safeargs") version "2.8.2"
     }
 
@@ -40,19 +40,6 @@ pluginManagement {
     }
 }
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
-        maven { url = uri("https://maven.mozilla.org/maven2") }
-        mavenLocal()
-    }
-}
-
 plugins {
     id("de.fayard.refreshVersions")
     id("com.gitlab.grrfe.build-settings-plugin")
@@ -68,13 +55,6 @@ configureRepositories(
 
 extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
-
-//maybeResolveIncludingRootContext()?.rootProject {
-//    refreshVersions {
-//        versionsPropertiesFile = rootDir.resolve("versions.properties")
-//        logger.info("Using versions file from $versionsPropertiesFile")
-//    }
-//}
 
 include(":app", ":config")
 include(":bottom-sheet", ":bottom-sheet-new")

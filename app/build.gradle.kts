@@ -3,6 +3,10 @@ import fe.build.dependencies.LinkSheet
 import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
+import fe.buildlogic.common.CompilerOption
+import fe.buildlogic.common.PluginOption
+import fe.buildlogic.common.extension.addCompilerOptions
+import fe.buildlogic.common.extension.addPluginOptions
 import fe.buildlogic.extension.*
 import fe.buildlogic.version.AndroidVersionStrategy
 import java.time.Instant
@@ -185,10 +189,8 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        compilerOptions.freeCompilerArgs.addAll(
-            "-Xwhen-guards",
-            "-P", "plugin:org.jetbrains.kotlin.parcelize:experimentalCodeGeneration=true"
-        )
+        addCompilerOptions(CompilerOption.WhenGuards)
+        addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
     }
 
     buildFeatures {

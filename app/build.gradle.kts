@@ -20,7 +20,10 @@ import fe.buildlogic.common.CompilerOption
 import fe.buildlogic.common.PluginOption
 import fe.buildlogic.common.extension.addCompilerOptions
 import fe.buildlogic.common.extension.addPluginOptions
-import fe.buildlogic.extension.*
+import fe.buildlogic.extension.buildConfig
+import fe.buildlogic.extension.buildStringConfigField
+import fe.buildlogic.extension.getOrSystemEnv
+import fe.buildlogic.extension.readPropertiesOrNull
 import fe.buildlogic.version.AndroidVersionStrategy
 import java.time.Instant
 import java.time.LocalDateTime
@@ -265,7 +268,7 @@ junitPlatform {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp-jvm:3.1.1")
+    implementation("io.ktor:ktor-client-okhttp-jvm:_")
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 

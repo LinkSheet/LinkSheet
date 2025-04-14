@@ -28,7 +28,9 @@ abstract class DatabaseTest : RobolectricTest {
     }
 
     @After
-    fun close() {
+    override fun stop() {
+        println("[DatabaseTest] stop")
+        super.stop()
         database.close()
     }
 }

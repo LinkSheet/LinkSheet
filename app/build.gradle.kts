@@ -20,7 +20,10 @@ import fe.buildlogic.common.CompilerOption
 import fe.buildlogic.common.PluginOption
 import fe.buildlogic.common.extension.addCompilerOptions
 import fe.buildlogic.common.extension.addPluginOptions
-import fe.buildlogic.extension.*
+import fe.buildlogic.extension.buildConfig
+import fe.buildlogic.extension.buildStringConfigField
+import fe.buildlogic.extension.getOrSystemEnv
+import fe.buildlogic.extension.readPropertiesOrNull
 import fe.buildlogic.version.AndroidVersionStrategy
 import java.time.Instant
 import java.time.LocalDateTime
@@ -248,7 +251,7 @@ android {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp-jvm:3.1.1")
+    implementation("io.ktor:ktor-client-okhttp-jvm:_")
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 
@@ -429,10 +432,10 @@ dependencies {
         testImplementation(notation)
     }
 
-    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
-    implementation(platform("org.testcontainers:testcontainers-bom:1.20.6"))
-    testImplementation("org.testcontainers:mockserver")
-    testImplementation("org.testcontainers:toxiproxy")
+    testImplementation("org.mock-server:mockserver-client-java:_")
+    implementation(platform("org.testcontainers:testcontainers-bom:_"))
+    testImplementation("org.testcontainers:mockserver:_")
+    testImplementation("org.testcontainers:toxiproxy:_")
 
     androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)

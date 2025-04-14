@@ -1,5 +1,7 @@
 package fe.linksheet.experiment.engine.resolver.amp2html
 
+import fe.linksheet.experiment.engine.EngineStepId
+import fe.linksheet.experiment.engine.EngineRunContext
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.ResolveType
@@ -16,6 +18,8 @@ class Amp2HtmlLinkResolver(
     private val cacheRepository: CacheRepository,
     private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
+    override val id = EngineStepId.Amp2Html
+
     private suspend fun insertCache(entryId: Long, result: Amp2HtmlResult) {
         cacheRepository.insertResolved(entryId, ResolveType.Amp2Html, result.url)
 
@@ -28,7 +32,7 @@ class Amp2HtmlLinkResolver(
         entryId: Long,
         url: String,
         localCache: Boolean,
-        result: IResult<Amp2HtmlResult>
+        result: IResult<Amp2HtmlResult>,
     ): ResolveOutput {
         if (result.isFailure()) {
             return ResolveOutput(url)
@@ -42,7 +46,7 @@ class Amp2HtmlLinkResolver(
         return ResolveOutput(result.url)
     }
 
-    override suspend fun run(data: String): ResolveOutput? = withContext(ioDispatcher) {
+    override suspend fun EngineRunContext.runStep(data: String): ResolveOutput? = withContext(ioDispatcher) {
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(data)
 

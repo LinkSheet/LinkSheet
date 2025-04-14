@@ -2,6 +2,8 @@ package fe.linksheet.experiment.engine.resolver.followredirects
 
 import android.net.Uri
 import fe.fastforwardkt.FastForward
+import fe.linksheet.experiment.engine.EngineStepId
+import fe.linksheet.experiment.engine.EngineRunContext
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.ResolveType
@@ -23,6 +25,7 @@ class FollowRedirectsLinkResolver(
     private val followOnlyKnownTrackers: () -> Boolean,
     private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
+    override val id = EngineStepId.FollowRedirects
 
     private suspend fun insertCache(entryId: Long, result: FollowRedirectsResult) {
         cacheRepository.insertResolved(entryId, ResolveType.FollowRedirects, result.url)
@@ -32,7 +35,7 @@ class FollowRedirectsLinkResolver(
         }
     }
 
-    override suspend fun run(url: String): ResolveOutput? = withContext(ioDispatcher) {
+    override suspend fun EngineRunContext.runStep(url: String): ResolveOutput? = withContext(ioDispatcher) {
         val isTracker = isTracker(url)
         if (followOnlyKnownTrackers() && !isTracker) {
             return@withContext ResolveOutput(url)

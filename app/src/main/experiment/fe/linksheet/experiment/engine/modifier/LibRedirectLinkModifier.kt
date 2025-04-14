@@ -1,6 +1,8 @@
 package fe.linksheet.experiment.engine.modifier
 
 import android.net.Uri
+import fe.linksheet.experiment.engine.EngineStepId
+import fe.linksheet.experiment.engine.EngineRunContext
 import fe.linksheet.experiment.engine.StepResult
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.LibRedirectResult
@@ -13,12 +15,13 @@ class LibRedirectLinkModifier(
     private val resolver: LibRedirectResolver,
     private val useJsEngine: () -> Boolean = { false }
 ) : LinkModifier<LibRedirectModifyOutput> {
+    override val id = EngineStepId.LibRedirect
 
     override suspend fun warmup() = withContext(ioDispatcher) {
         resolver.warmup()
     }
 
-    override suspend fun run(url: String): LibRedirectModifyOutput = withContext(ioDispatcher) {
+    override suspend fun EngineRunContext.runStep(url: String): LibRedirectModifyOutput = withContext(ioDispatcher) {
 //        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
 //        if (ignoreLibRedirectExtra) {
 //            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)

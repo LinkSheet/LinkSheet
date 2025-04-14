@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.engine
 
+import android.content.Intent
 import fe.linksheet.experiment.engine.modifier.ClearURLsLinkModifier
 import fe.linksheet.experiment.engine.modifier.EmbedLinkModifier
 import fe.linksheet.experiment.engine.modifier.LibRedirectLinkModifier
@@ -10,26 +11,20 @@ import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLo
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.resolver.LibRedirectResolver
 import io.ktor.client.*
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 
-fun createPipeline(
+@Suppress("FunctionName")
+fun DefaultLinkEngine(
     ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     client: HttpClient,
     libRedirectResolver: LibRedirectResolver,
     cacheRepository: CacheRepository,
 ): LinkEngine {
-    val hook = object : BeforeStepHook {
-        override fun <R : StepResult> onBeforeRun(step: EngineStep<R>, url: String) {
-
-        }
-    }
-
     val pipeline = LinkEngine(
-        listOf(
+        steps = listOf(
             EmbedLinkModifier(
                 ioDispatcher = ioDispatcher
             ),
@@ -60,21 +55,61 @@ fun createPipeline(
 
 class LinkEngine(
     val steps: List<EngineStep<*>>,
-//    val hooks: List<PipelineHook> = emptyList()
+    val rules: List<Rule<*, *>> = emptyList(),
+    val logger: EngineLogger = LogcatEngineLogger("LinkEngine"),
+    val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-//    // TODO: These should probably
-//    // a) be invoked asynchronously
-//    // b) have some sort of veto-capability?
-//    private val beforeStepHooks = hooks.filterIsInstance<BeforeStepHook>()
-//    private val afterStepHooks = hooks.filterIsInstance<AfterStepHook>()
+    private val scope = CoroutineScope(dispatcher) + CoroutineName("LinkEngine") + CoroutineExceptionHandler { _, e ->
+        println(e)
+    }
+    private val preProcessorRules = rules.filterIsInstance<PreprocessorRule>()
+    private val postProcessorRules = rules.filterIsInstance<PostprocessorRule>()
 
-    private suspend fun <R : StepResult> runStep(
+    private suspend inline fun <I : StepRuleInput, R : StepRuleResult, reified SR : StepRule<I, R>> findStepRule(
+        context: EngineRunContext,
+        stepId: EngineStepId,
+        input: I,
+    ): R? {
+        // TODO: Vetoes should allow vetoing only a single step, instead of terminating the entire process
+
+        // TODO: If we only ever have BeforeRule/AfterRule, these can be filtered before and stored
+        val filteredRules = rules
+            .asSequence()
+            .filterIsInstance<SR>()
+            .filter { stepId in it.steps }
+            .asIterable()
+        return processRules(context, filteredRules, input)
+    }
+
+    private suspend inline fun <I : RuleInput, R : EngineResult, reified SR : Rule<I, R>> processRules(
+        context: EngineRunContext,
+        filteredRules: Iterable<SR>,
+        input: I,
+    ): R? {
+        for (rule in filteredRules) {
+            val result = with(context) { rule.checkRule(input) }
+            if (result == null) continue
+            return result
+        }
+
+        return null
+    }
+
+    private val _events = MutableStateFlow<StepRuleInput?>(null)
+    val events = _events.asStateFlow()
+
+    private fun emitEvent(event: StepRuleInput) {
+        logger.debug { "Emitting event $event" }
+        _events.tryEmit(event)
+    }
+
+    private suspend fun <R : StepResult> processStep(
+        context: EngineRunContext,
         step: EngineStep<R>,
-        url: String
+        url: String,
     ): Pair<Boolean, String> {
 //        beforeStepHooks.forEach { it.onBeforeRun(step, url) }
-
-        val result = step.run(url)
+        val result = with(context) { step.runStep(url) }
         val hasNewUrl = result != null && result.url != url
 
 //        afterStepHooks.forEach { it.onAfterRun(step, url, result) }
@@ -83,18 +118,74 @@ class LinkEngine(
         return true to result.url
     }
 
-    suspend fun run(url: String): String = coroutineScope scope@{
+    private suspend fun process(
+        context: EngineRunContext,
+        url: String,
+        depth: Int = 0,
+    ): EngineResult = coroutineScope scope@{
         var mutUrl = url
         for (step in steps) {
             if (!isActive) break
+            val stepStart = StepStart(depth, step, mutUrl)
+            val beforeStepResult =
+                findStepRule<StepStart<*>, StepRuleResult, BeforeStepRule>(context, step.id, stepStart)
+            if (beforeStepResult is SkipStep) continue
+//            if (beforeStepResult is Terminate) return@scope TerminateResult(beforeStepResult)
 
-            val (hasNewUrl, resultUrl) = runStep(step, mutUrl)
+            emitEvent(stepStart)
+            val (hasNewUrl, resultUrl) = processStep(context, step, mutUrl)
+
+            val stepEnd = StepEnd(depth, step, url, hasNewUrl, resultUrl)
+            val afterStepResult = findStepRule<StepEnd<*>, StepRuleResult, AfterStepRule>(context, step.id, stepEnd)
+            if (afterStepResult is SkipStep) continue
+//            if (afterStepResult is Terminate) return@scope TerminateResult(afterStepResult)
+
+            emitEvent(stepEnd)
             if (!hasNewUrl) continue
 
-            if (step !is InPlaceStep) return@scope run(resultUrl)
+            if (step !is InPlaceStep) return@scope process(context, resultUrl, depth + 1)
             mutUrl = resultUrl
         }
 
-        mutUrl
+        UrlEngineResult(mutUrl)
+    }
+
+    suspend fun process(
+        url: String,
+        context: EngineRunContext = DefaultEngineRunContext()
+    ): ContextualEngineResult = coroutineScope scope@{
+        val preResult = processRules(context, preProcessorRules, PreProcessorInput(url))
+        if (preResult != null) return@scope context to preResult
+
+        val result = process(context, url, 0)
+        val resultUrl = (result as? UrlEngineResult)?.url ?: url
+
+        val postResult = processRules(context, postProcessorRules, PostProcessorInput(resultUrl, url))
+        if (postResult != null) return@scope context to postResult
+        context to result
     }
 }
+
+interface EngineRunContext {
+    suspend fun <R : StepResult> EngineStep<R>.runStep(url: String): R? {
+        return this@EngineRunContext.runStep(url)
+    }
+
+    suspend fun <I : RuleInput, R : EngineResult> Rule<I, R>.checkRule(input: I): R? {
+        return this@EngineRunContext.checkRule(input)
+    }
+}
+
+class DefaultEngineRunContext : EngineRunContext {
+}
+
+
+typealias ContextualEngineResult = Pair<EngineRunContext, EngineResult>
+
+interface EngineResult
+
+class IntentEngineResult(val intent: Intent) : EngineResult
+
+class UrlEngineResult(val url: String) : EngineResult
+
+

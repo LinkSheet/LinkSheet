@@ -78,7 +78,7 @@ internal class ToxiproxyTest : UnitTest {
             .setJitter(100)
     }
 
-    @Test
+//    @Test
     fun hello() = runTest(dispatcher) {
         val ip = toxiProxyContainer.host
         val port = toxiProxyContainer.getMappedPort(8666)

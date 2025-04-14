@@ -10,7 +10,8 @@ import org.robolectric.RuntimeEnvironment
 
 interface BaseUnitTest : KoinTest {
     @After
-    fun teardown() {
+    fun stop() {
+        println("[BaseUnitTest] stop")
         stopKoin()
     }
 }
@@ -25,6 +26,12 @@ interface UnitTest : BaseUnitTest {
     val applicationContext: Context
         get() = targetContext.applicationContext
 
+    @After
+    override fun stop() {
+        println("[UnitTest] stop")
+        // Doesn't propagate otherwise
+        super.stop()
+    }
 }
 
 interface RobolectricTest : BaseUnitTest {

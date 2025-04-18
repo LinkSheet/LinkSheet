@@ -206,6 +206,10 @@ android {
         buildConfig = true
     }
 
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     val androidTest by sourceSets
     androidTest.assets.srcDir("$projectDir/schemas")
 

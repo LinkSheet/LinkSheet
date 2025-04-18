@@ -9,16 +9,14 @@ import eu.rekawek.toxiproxy.ToxiproxyClient
 import eu.rekawek.toxiproxy.model.ToxicDirection
 import fe.linksheet.UnitTest
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
-import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSourceTest
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsResult
 import fe.std.result.assert.assertSuccess
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockserver.client.MockServerClient
 import org.mockserver.model.HttpRequest.request
@@ -78,7 +76,7 @@ internal class ToxiproxyTest : UnitTest {
             .setJitter(100)
     }
 
-//    @Test
+    @Test
     fun hello() = runTest(dispatcher) {
         val ip = toxiProxyContainer.host
         val port = toxiProxyContainer.getMappedPort(8666)

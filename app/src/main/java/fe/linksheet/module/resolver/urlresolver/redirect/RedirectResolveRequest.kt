@@ -1,15 +1,14 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
 import fe.composekit.preference.asFunction
+import fe.droidkit.koin.single
 import fe.httpkt.Request
-import fe.linksheet.extension.koin.single
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
-import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -109,7 +108,7 @@ class RedirectResolveRequest(
     companion object {
         private val refreshHeaderRegex = Regex("(\\d+)(?:\\.\\d*)?[;,](?:URL=)?(.+)", RegexOption.IGNORE_CASE)
 
-        internal fun parseRefreshHeader(refreshHeader: String): Pair<Int, String>? {
+        internal fun parseRefreshHeader(refreshHeader: String): RefreshHeader? {
             fun unquoteHeader(value: String): String {
                 if (value.length <= 2) return value
 
@@ -130,3 +129,5 @@ class RedirectResolveRequest(
         }
     }
 }
+
+typealias RefreshHeader = Pair<Int, String>

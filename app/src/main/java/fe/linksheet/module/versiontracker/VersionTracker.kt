@@ -4,9 +4,9 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.gson.FormattingStyle
 import com.google.gson.Gson
 import fe.android.lifecycle.LifecycleAwareService
+import fe.android.lifecycle.koin.extension.service
 import fe.gson.globalGsonModule
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.koin.service
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.AppStart
 import fe.linksheet.module.analytics.BaseAnalyticsService

@@ -29,6 +29,7 @@ import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
@@ -71,6 +72,8 @@ internal class KoinModuleCheckTest : UnitTest {
         Application::class,
         SavedStateHandle::class,
         Logger::class,
+        // TODO: Hook up CacheRepository to DI, then remove here
+        CacheRepository::class
     )
 
     private val injections = injectedParameters(
@@ -94,7 +97,7 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<Amp2HtmlResolveRequest>(
             Request::class,
             CachedRequest::class,
-            OkHttpClient::class
+            OkHttpClient::class,
         ),
         definition<AllRemoteResolveRequest>(Request::class),
         definition<BrowserResolver>(PackageService::class),

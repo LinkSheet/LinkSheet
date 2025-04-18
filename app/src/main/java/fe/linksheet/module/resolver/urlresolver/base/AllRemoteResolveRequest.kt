@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
+import fe.droidkit.koin.single
 import fe.httpkt.Request
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
-import fe.linksheet.extension.koin.single
 import org.koin.dsl.module
 
 

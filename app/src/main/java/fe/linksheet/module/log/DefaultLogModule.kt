@@ -1,9 +1,10 @@
 package fe.linksheet.module.log
 
+import fe.android.lifecycle.koin.extension.service
+import fe.droidkit.koin.factory
+import fe.droidkit.koin.single
 import fe.kotlin.extension.string.decodeHexOrThrow
-import fe.linksheet.extension.koin.factory
-import fe.linksheet.extension.koin.service
-import fe.linksheet.extension.koin.single
+import fe.linksheet.LinkSheetApp
 import fe.linksheet.module.log.file.LogFileService
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.internal.DefaultLoggerDelegate
@@ -29,7 +30,7 @@ val DefaultLogModule = module {
     }
     service<LogPersistService> {
         val logDir = LogFileService.getLogDir(applicationContext)
-        LogFileService(logDir, applicationContext.startupTime)
+        LogFileService(logDir, scope.get<LinkSheetApp>().startupTime)
     }
     factory<Logger, Redactor, LogPersistService> { params, redactor, logFileService ->
         val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, logFileService)

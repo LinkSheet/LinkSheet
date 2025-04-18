@@ -2,7 +2,8 @@ package fe.linksheet.module.preference.state
 
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
-import fe.linksheet.extension.koin.service
+import fe.android.lifecycle.koin.extension.service
+import fe.linksheet.extension.koin.logger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository

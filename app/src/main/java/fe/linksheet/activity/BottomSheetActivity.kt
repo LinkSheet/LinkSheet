@@ -1,9 +1,7 @@
 package fe.linksheet.activity
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,8 +11,6 @@ import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.fix.SheetValue
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +18,6 @@ import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Lifecycle
@@ -33,9 +28,10 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetApps
 import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
-import fe.linksheet.activity.bottomsheet.ImprovedBottomDrawer
+import fe.linksheet.activity.bottomsheet.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
+import fe.linksheet.activity.bottomsheet.impl.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.extension.android.setText
@@ -83,7 +79,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         // (and subsequently being written to latestNewIntent) and RESULT_CANCELED
         // * Hermit also sends RESULT_CANCELED for some reason, but doesn't provide a new intent first, meaning we can
         // still differentiate between a successful and a non-successful launch using the condition below
-        if (result.resultCode == Activity.RESULT_OK || latestNewIntent.value == null) {
+        if (result.resultCode == RESULT_OK || latestNewIntent.value == null) {
             finish()
         } else {
             showToast(
@@ -140,11 +136,12 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val currentIntent by intentFlow.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
-        val sheetState = rememberModalBottomSheetState(
-//            confirmValueChange = {
-//                if(it == SheetValue.Hidden) true else true
-//            }
-        )
+        val sheetState = rememberM3FixModalBottomSheetState()
+//        val sheetState = rememberModalBottomSheetState(
+////            confirmValueChange = {
+////                if(it == SheetValue.Hidden) true else true
+////            }
+//        )
 
         LaunchedEffect(key1 = resolveResult) {
             logger.info("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
@@ -172,21 +169,17 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             )
         }
 
-        val configuration = LocalConfiguration.current
-        val landscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
-
         val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
 //        sheetState
 //        if(sheetOpen){
-        ImprovedBottomDrawer(
+        M3FixModalBottomSheet(
             contentModifier = (if (viewModel.interceptAccidentalTaps.value) {
                 Modifier.pointerInput(Unit) {
-                    interceptTap { !sheetState.isAnimationRunning }
+                    interceptTap { !sheetState.isAnimationRunning() }
                 }
             } else Modifier)
                 .debugBorder(debug.value, 1.dp, Color.Red),
-            landscape = landscape,
+            debug = debug.value,
             // TODO: Replace with pref
             isBlackTheme = false,
             sheetState = sheetState,
@@ -253,7 +246,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                             launch2 = { index, info, type, modifier ->
                                 coroutineScope.launch {
                                     val intent = viewModel.handleClick(
-                                        this@BottomSheetActivity, index, sheetState.currentValue == SheetValue.Expanded,
+                                        this@BottomSheetActivity, index, sheetState.isExpanded(),
                                         { }, (resolveResult as IntentResolveResult.Default).intent, info, type, modifier
                                     )
 

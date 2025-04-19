@@ -1,5 +1,6 @@
 package fe.linksheet.activity.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.collection.valueIterator
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -74,6 +75,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
 
                 if (Build.IsDebug) {
                     LaunchedEffect(key1 = Unit) {
+                        @SuppressLint("RestrictedApi")
                         val graphNodes = navController.graph.nodes.valueIterator().asSequence().toList()
                         DebugStatePublisher.publishDebugState(NavGraphDebugState(graphNodes))
                     }

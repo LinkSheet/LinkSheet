@@ -25,10 +25,14 @@ pluginManagement {
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
-            val plugins = mapOf(
-                "com.gitlab.grrfe.build-settings-plugin" to "com.gitlab.grrfe.gradle-build:build-settings",
-                "com.gitlab.grrfe.build-logic-plugin" to "com.gitlab.grrfe.gradle-build:build-logic"
-            )
+            val plugins = arrayOf(
+                "build-settings-plugin" to "build-settings",
+                "build-logic-plugin" to "build-logic",
+                "new-build-logic-plugin" to "new-build-logic",
+                "library-build-plugin" to "new-build-logic"
+            ).associate { (artifact, project) ->
+                "com.gitlab.grrfe.$artifact" to "com.gitlab.grrfe.gradle-build:$project"
+            }
 
             resolutionStrategy {
                 eachPlugin {
@@ -40,20 +44,8 @@ pluginManagement {
     }
 }
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
-        maven { url = uri("https://maven.mozilla.org/maven2") }
-        mavenLocal()
-    }
-}
-
 plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
     id("de.fayard.refreshVersions")
     id("com.gitlab.grrfe.build-settings-plugin")
 }
@@ -63,18 +55,12 @@ configureRepositories(
     MavenRepository.MavenCentral,
     MavenRepository.Jitpack,
     MavenRepository.Mozilla,
-    GradlePluginPortalRepository
+    GradlePluginPortalRepository,
+    mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 )
 
 extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
-
-//maybeResolveIncludingRootContext()?.rootProject {
-//    refreshVersions {
-//        versionsPropertiesFile = rootDir.resolve("versions.properties")
-//        logger.info("Using versions file from $versionsPropertiesFile")
-//    }
-//}
 
 include(":app", ":config")
 include(":bottom-sheet", ":bottom-sheet-new")

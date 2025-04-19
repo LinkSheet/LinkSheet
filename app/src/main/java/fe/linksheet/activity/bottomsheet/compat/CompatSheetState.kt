@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.impl
+package fe.linksheet.activity.bottomsheet.compat
 
 interface CompatSheetState {
     fun isAnimationRunning(): Boolean

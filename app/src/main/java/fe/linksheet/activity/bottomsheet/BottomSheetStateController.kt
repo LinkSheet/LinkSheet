@@ -6,7 +6,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.material3.ExperimentalMaterial3Api
-import fe.linksheet.activity.bottomsheet.impl.CompatSheetState
+import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 import kotlinx.coroutines.CompletionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

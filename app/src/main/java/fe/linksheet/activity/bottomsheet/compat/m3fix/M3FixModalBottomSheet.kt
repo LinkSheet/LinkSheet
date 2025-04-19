@@ -9,10 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import fe.android.version.AndroidVersion
-import fe.linksheet.activity.bottomsheet.impl.m3fix.M3FixSheetState
-import fe.linksheet.activity.bottomsheet.impl.m3fix.rememberM3FixModalBottomSheetState
-import fe.linksheet.activity.bottomsheet.impl.m3fix.M3FixModalBottomSheetApi30
-import fe.linksheet.activity.bottomsheet.impl.m3fix.M3FixModalBottomSheetPreApi30
+import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixSheetState
+import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
+import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheetApi30
+import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheetPreApi30
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

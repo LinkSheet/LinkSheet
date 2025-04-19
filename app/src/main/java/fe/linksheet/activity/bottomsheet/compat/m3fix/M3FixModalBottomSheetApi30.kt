@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet.impl.m3fix
+package fe.linksheet.activity.bottomsheet.compat.m3fix
 
 import android.content.res.Configuration
 import androidx.compose.foundation.border

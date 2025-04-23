@@ -23,6 +23,7 @@ import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.downloader.Downloader
+import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.paste.PasteService
@@ -147,6 +148,9 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(CachedRequest::class),
         definition<StatisticsService>(AppPreferenceRepository::class),
+        definition<AppLocaleService>(List::class),
+        definition<LanguageSettingsViewModel>(AppLocaleService::class),
+        definition<SettingsViewModel>(AppLocaleService::class)
     )
 
     @Test

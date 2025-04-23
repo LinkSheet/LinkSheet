@@ -539,4 +539,7 @@
         <item quantity="one">%d default host</item>
         <item quantity="other">%d default hosts</item>
     </plurals>
+    <string name="settings_language__dialog_title">App language</string>
+    <string name="settings_language__text_system_language_with_language">%s (system language)</string>
+    <string name="settings_language__text_system_language">System language</string>
 </resources>

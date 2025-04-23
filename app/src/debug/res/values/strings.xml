@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_activity_composable_renderer" translatable="false">Renderer</string>
+    <string name="app_name">Hello World</string>
+    <string name="greeting">the world is beautiful</string>
+    <string name="en" translatable="false">English</string>
+    <string name="hi" translatable="false">हिन्दी</string>
+    <string name="fr" translatable="false">Français</string>
+    <string name="ja" translatable="false">日本語</string>
+    <string name="language">English</string>
 </resources>

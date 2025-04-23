@@ -41,6 +41,12 @@ val NewDefaultTypography = Typography()
 
 val HkGroteskSemiBold = TextStyle(fontFamily = HkGroteskFontFamily, fontWeight = FontWeight.SemiBold)
 
+val DialogTitleStyle = TextStyle(
+    fontFamily = HkGroteskFontFamily,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 18.sp,
+)
+
 // ListItem fonts
 // TypographyKeyTokens.BodyLarge
 // TypographyKeyTokens.BodyMedium
@@ -82,11 +88,7 @@ val NewTypography = Typography(
 
 @Deprecated(message = "Should no longer be used in new composables")
 val LegacyTypography = Typography(
-    titleLarge = TextStyle(
-        fontFamily = HkGroteskFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 18.sp,
-    )
+    titleLarge = DialogTitleStyle
 )
 
 private data class TypographyPreviewState(
@@ -133,7 +135,7 @@ private fun NewTypographyPreview_Medium(@PreviewParameter(MediumTypographyPrevie
 
 @Preview(group = "Large", showBackground = true, widthDp = 600)
 @Composable
-private fun NewTypographyPreview_Large(@PreviewParameter(LargeTypographyPreviewProvider ::class) state: TypographyPreviewState) {
+private fun NewTypographyPreview_Large(@PreviewParameter(LargeTypographyPreviewProvider::class) state: TypographyPreviewState) {
     NewTypographyPreviewBase(state = state)
 }
 

@@ -1,14 +1,14 @@
 package fe.linksheet.activity
 
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.util.UiEventReceiver
 
-open class BaseComponentActivity : ComponentActivity() {
+open class BaseComponentActivity : AppCompatActivity() {
     var edgeToEdge: Boolean = false
         private set
 

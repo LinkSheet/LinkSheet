@@ -54,7 +54,6 @@
 
         <activity
                 android:name=".activity.main.MainActivity"
-                android:configChanges="orientation"
                 android:exported="true"
                 android:launchMode="singleTask"
                 android:screenOrientation="unspecified"
@@ -78,21 +77,18 @@
         </activity>
         <activity
                 android:name=".activity.CrashHandlerActivity"
-                android:configChanges="orientation"
                 android:exported="true"
                 android:launchMode="singleTask"
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme" />
         <activity
                 android:name=".activity.TextEditorActivity"
-                android:configChanges="orientation"
                 android:excludeFromRecents="true"
                 android:exported="false"
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme" />
         <activity
                 android:name=".activity.SelectDomainsConfirmationActivity"
-                android:configChanges="orientation"
                 android:excludeFromRecents="true"
                 android:exported="false"
                 android:screenOrientation="unspecified"

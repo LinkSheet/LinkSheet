@@ -3,12 +3,17 @@ package fe.linksheet.composable.page.settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.RouteNavItem
 import fe.composekit.component.list.item.RouteNavigateListItem
+import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
@@ -66,13 +71,21 @@ internal object NewSettingsRouteData {
             Icons.Outlined.Palette.iconPainter,
             textContent(R.string.theme),
             textContent(R.string.theme_explainer),
-        ),
-        RouteNavItem(
-            privacySettingsRoute,
-            Icons.Outlined.PrivacyTip.iconPainter,
-            textContent(R.string.privacy),
-            textContent(R.string.privacy_settings_explainer),
         )
+    )
+
+    val languageRoute = RouteNavItemNew(
+        LanguageRoute,
+        Icons.Outlined.Language.iconPainter,
+        textContent(R.string.settings_language__dialog_title),
+        textContent(R.string.settings_language__text_system_language_with_language),
+    )
+
+    val privacyRoute = RouteNavItem(
+        privacySettingsRoute,
+        Icons.Outlined.PrivacyTip.iconPainter,
+        textContent(R.string.privacy),
+        textContent(R.string.privacy_settings_explainer),
     )
 
     val advanced = arrayOf(
@@ -150,15 +163,49 @@ fun NewSettingsRoute(
 
         divider(id = R.string.misc_settings)
 
-        group(array = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
-            RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
+        group(size = NewSettingsRouteData.miscellaneous.size + 2) {
+            items(array = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
+                RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
+            }
+
+            item(key = NewSettingsRouteData.languageRoute.key) { padding, shape ->
+                val appLocale by viewModel.currentLocale.collectAsStateWithLifecycle(
+                    minActiveState = Lifecycle.State.RESUMED,
+                    initialValue = null
+                )
+                DefaultTwoLineIconClickableShapeListItem(
+                    shape = shape,
+                    padding = padding,
+                    headlineContent = textContent(R.string.settings_language__dialog_title),
+                    supportingContent = when {
+                        appLocale != null && appLocale?.second == true -> {
+                            textContent(
+                                R.string.settings_language__text_system_language_with_language,
+                                appLocale!!.first.displayName
+                            )
+                        }
+                        else -> text(appLocale?.first?.displayName ?: "")
+                    },
+                    icon = Icons.Outlined.Language.iconPainter,
+                    onClick = { navigateNew(LanguageRoute) }
+                )
+            }
+
+            item(key = privacySettingsRoute) { padding, shape ->
+                RouteNavigateListItem(
+                    data = NewSettingsRouteData.privacyRoute,
+                    padding = padding,
+                    shape = shape,
+                    navigate = navigate
+                )
+            }
         }
 
         divider(id = R.string.advanced)
 
         group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
             items(array = NewSettingsRouteData.advanced) { data, padding, shape ->
-                fe.composekit.route.RouteNavigateListItem(
+                fe.composekit.route.RouteNavigateListItemNew(
                     data = data,
                     padding = padding,
                     shape = shape,

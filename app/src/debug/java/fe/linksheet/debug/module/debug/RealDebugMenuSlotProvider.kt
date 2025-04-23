@@ -21,6 +21,7 @@ import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
+import fe.linksheet.debug.activity.LocaleDebugActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
 import fe.linksheet.extension.compose.dashedBorder
 import fe.linksheet.module.debug.DebugMenuSlotProvider
@@ -41,6 +42,16 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                if(activity != null) {
+                    item(key = "locale") {
+                        FilledTonalActivityLauncher(
+                            activity = activity,
+                            text = "Locale",
+                            intent = createIntent(activity, LocaleDebugActivity::class)
+                        )
+                    }
+                }
+
                 item(key = "draw-borders") {
                     val drawBorders = viewModel.drawBorders.collectAsStateWithLifecycle()
 

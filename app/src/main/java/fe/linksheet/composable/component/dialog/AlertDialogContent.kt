@@ -25,7 +25,7 @@ fun AlertDialogContent(
     properties: DialogProperties = DialogProperties()
 ) {
     Surface(modifier = modifier, shape = shape, color = containerColor, tonalElevation = tonalElevation,) {
-        Column(modifier = Modifier.padding(DialogDefaults.DialogPadding)) {
+        Column(modifier = Modifier.padding(DialogDefaults.DialogBoxPadding)) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
                 Column {
 //                    Image(

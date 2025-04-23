@@ -66,7 +66,6 @@ const val loadDumpedPreferences = "log_dumped_reference_settings_route"
 //)
 
 
-
 const val linksSettingsRoute = "link_settings_route"
 
 const val followRedirectsSettingsRoute = "follow_redirects_settings_route"
@@ -101,7 +100,7 @@ data class MarkdownViewerRoute(
 @Keep
 @Serializable
 data class ExperimentRoute(
-    val experiment: String? = null
+    val experiment: String? = null,
 ) : Route {
     companion object {
         val Empty = ExperimentRoute()
@@ -124,13 +123,17 @@ data object DebugRoute : Route
 @Serializable
 data class LogTextViewerRoute(val id: String?, val name: String) : Route
 
-
 @Keep
 @Serializable
 data class LibRedirectServiceRoute(val serviceKey: String) : Route
+
 @Keep
 @Serializable
 data object LibRedirectRoute : Route
+
+@Keep
+@Serializable
+data object LanguageRoute : Route
 
 //@Keep
 //data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {

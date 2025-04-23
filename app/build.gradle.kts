@@ -72,6 +72,19 @@ android {
 
         val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
         resourceConfigurations.addAll(supportedLocales)
+        tasks.register("createLocaleConfig") {
+            val localeString = supportedLocales.joinToString(
+                separator = System.lineSeparator(),
+            ) { "\t<locale android:name=\"$it\" />" }
+
+            val xml = """<?xml version="1.0" encoding="utf-8"?>
+            |<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+            |$localeString 
+            |</locale-config>
+            """.trimMargin()
+
+            file("src/main/res/xml/locales_config.xml").writeText(xml)
+        }
 
         buildConfig {
             stringArray("SUPPORTED_LOCALES", supportedLocales)
@@ -246,12 +259,13 @@ dependencies {
 //    implementation(Square.okHttp3.mockWebServer3)
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
 
-    implementation(platform(AndroidX.compose.bom))
+//    implementation(platform(AndroidX.compose.bom))
+    implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.ui.withVersion("1.8.0-rc03"))
+    implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.text)
     implementation(AndroidX.compose.ui.toolingPreview)
-    implementation(AndroidX.compose.material3.withVersion("1.4.0-alpha12"))
+    implementation(AndroidX.compose.material3)
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
@@ -360,7 +374,7 @@ dependencies {
 
     implementation("me.saket.unfurl:unfurl:_")
 //    implementation(libs.unfurl.social)
-
+    implementation("com.github.nanihadesuka:LazyColumnScrollbar:_")
 //    "proImplementation"(platform("io.github.jan-tennert.supabase:bom:_"))
 //    "proImplementation"("io.github.jan-tennert.supabase:storage-kt:_")
 //    "proImplementation"("io.github.jan-tennert.supabase:compose-auth-ui:_")
@@ -397,6 +411,7 @@ dependencies {
         testImplementation(notation)
     }
 
+    testImplementation(CashApp.turbine)
     testImplementation("org.mock-server:mockserver-client-java:_")
     implementation(platform("org.testcontainers:testcontainers-bom:_"))
     testImplementation("org.testcontainers:mockserver:_")

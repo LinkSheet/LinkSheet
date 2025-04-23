@@ -40,6 +40,7 @@ val viewModelModule = module {
     }
     viewModelOf(::BottomSheetViewModel)
     viewModelOf(::ThemeSettingsViewModel)
+    viewModelOf(::LanguageSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
     viewModelOf(::DownloaderSettingsViewModel)
     viewModelOf(::LogSettingsViewModel)

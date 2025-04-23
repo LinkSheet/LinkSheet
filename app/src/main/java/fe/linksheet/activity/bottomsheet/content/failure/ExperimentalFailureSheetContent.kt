@@ -22,8 +22,7 @@ import fe.android.compose.dialog.helper.DialogMinWidth
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.ProvideContentColorTextStyle
-import fe.composekit.layout.dialog.AlertDialogFlowRow
-import fe.composekit.layout.dialog.AlertDialogFlowRowDefaults
+import fe.composekit.component.dialog.AlertDialogFlowRow
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.util.intent.parser.*
@@ -109,10 +108,7 @@ fun ExperimentalFailureSheetContent(
         }
 
         Box(modifier = Modifier.align(Alignment.End)) {
-            AlertDialogFlowRow(
-                mainAxisSpacing = AlertDialogFlowRowDefaults.MainAxisSpacing,
-                crossAxisSpacing = AlertDialogFlowRowDefaults.CrossAxisSpacing
-            ) {
+            AlertDialogFlowRow {
                 FilledTonalButton(
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                     onClick = { }

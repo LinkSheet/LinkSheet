@@ -18,7 +18,18 @@
         errorLine1="    contentModifier: Modifier,"
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/ImprovedBottomDrawer.kt"
+            file="src/main/java/fe/linksheet/activity/bottomsheet/ImprovedBottomDrawerNew.kt"
+            line="23"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ModifierParameter"
+        message="Modifier parameter should be named modifier"
+        errorLine1="    contentModifier: Modifier,"
+        errorLine2="    ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/fe/linksheet/activity/bottomsheet/impl/m3fix/M3FixModalBottomSheet.kt"
             line="20"
             column="5"/>
     </issue>
@@ -29,8 +40,8 @@
         errorLine1="    contentModifier: Modifier,"
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/ImprovedBottomDrawerNew.kt"
-            line="23"
+            file="src/main/java/fe/linksheet/activity/bottomsheet/impl/m3fix/M3FixModalBottomSheet.kt"
+            line="42"
             column="5"/>
     </issue>
 
@@ -252,6 +263,28 @@
             file="src/main/res/values-cs/strings.xml"
             line="536"
             column="5"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;greeting&quot; is not translated in &quot;de&quot; (German), &quot;hi&quot; (Hindi), &quot;be&quot; (Belarusian), &quot;ru&quot; (Russian), &quot;bg&quot; (Bulgarian), &quot;it&quot; (Italian), &quot;es&quot; (Spanish), &quot;zh&quot; (Chinese), &quot;ar&quot; (Arabic), &quot;pa&quot; (Punjabi), &quot;vi&quot; (Vietnamese), &quot;ia&quot; (Interlingua), &quot;pl&quot; (Polish), &quot;tr&quot; (Turkish), &quot;sr&quot; (Serbian)"
+        errorLine1="    &lt;string name=&quot;greeting&quot;>the world is beautiful&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="5"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;language&quot; is not translated in &quot;de&quot; (German), &quot;hi&quot; (Hindi), &quot;be&quot; (Belarusian), &quot;ru&quot; (Russian), &quot;bg&quot; (Bulgarian), &quot;it&quot; (Italian), &quot;es&quot; (Spanish), &quot;zh&quot; (Chinese), &quot;ar&quot; (Arabic), &quot;pa&quot; (Punjabi), &quot;vi&quot; (Vietnamese), &quot;ia&quot; (Interlingua), &quot;pl&quot; (Polish), &quot;tr&quot; (Turkish), &quot;sr&quot; (Serbian)"
+        errorLine1="    &lt;string name=&quot;language&quot;>English&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="10"
+            column="13"/>
     </issue>
 
     <issue
@@ -4056,7 +4089,7 @@
         errorLine2="         ~~~~~~~~">
         <location
             file="src/debug/AndroidManifest.xml"
-            line="39"
+            line="43"
             column="10"/>
     </issue>
 
@@ -4339,6 +4372,17 @@
             file="src/main/res/drawable/outline_domain_verification_24.xml"
             line="1"
             column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.hi` appears to be unused"
+        errorLine1="    &lt;string name=&quot;hi&quot; translatable=&quot;false&quot;>हिन्दी&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="7"
+            column="13"/>
     </issue>
 
     <issue
@@ -5238,7 +5282,7 @@
         errorLine2="                        ~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/activity/BottomSheetActivity.kt"
-            line="100"
+            line="96"
             column="25"/>
     </issue>
 
@@ -5310,17 +5354,6 @@
 
     <issue
         id="UseKtx"
-        message="Use the KTX extension function `String.toUri` instead?"
-        errorLine1="        val uri = Uri.parse(url)"
-        errorLine2="                  ~~~~~~~~~~~~~~">
-        <location
-            file="src/main/experiment/fe/linksheet/experiment/engine/resolver/followredirects/FollowRedirectsLinkResolver.kt"
-            line="44"
-            column="19"/>
-    </issue>
-
-    <issue
-        id="UseKtx"
         message="Use the KTX function `createBitmap` instead?"
         errorLine1="        val bitmap = Bitmap.createBitmap(width, height, config)"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
@@ -5337,7 +5370,7 @@
         errorLine2="                             ~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/module/resolver/ImprovedIntentResolver.kt"
-            line="499"
+            line="498"
             column="30"/>
     </issue>
 
@@ -5355,23 +5388,12 @@
     <issue
         id="UseKtx"
         message="Use the KTX extension function `String.toUri` instead?"
-        errorLine1="        return LibRedirectResult.Redirected(Uri.parse(url), Uri.parse(redirectedUrl))"
-        errorLine2="                                            ~~~~~~~~~~~~~~">
+        errorLine1="                return LibRedirectResult.Redirected(uri, Uri.parse(redirected))"
+        errorLine2="                                                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/module/resolver/LibRedirectResolver.kt"
-            line="68"
-            column="45"/>
-    </issue>
-
-    <issue
-        id="UseKtx"
-        message="Use the KTX extension function `String.toUri` instead?"
-        errorLine1="        return LibRedirectResult.Redirected(Uri.parse(url), Uri.parse(redirectedUrl))"
-        errorLine2="                                                            ~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/module/resolver/LibRedirectResolver.kt"
-            line="68"
-            column="61"/>
+            line="65"
+            column="58"/>
     </issue>
 
     <issue

@@ -12,6 +12,10 @@
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
         <activity
+                android:name=".debug.activity.LocaleDebugActivity"
+                android:exported="true"
+                android:theme="@style/AppTheme"/>
+        <activity
                 android:name=".debug.activity.LinkTestingActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>

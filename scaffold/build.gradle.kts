@@ -27,7 +27,8 @@ kotlin {
 }
 
 dependencies {
-    implementation(platform(AndroidX.compose.bom))
+    implementation(platform("androidx.compose:compose-bom-alpha:_"))
+
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.material3)

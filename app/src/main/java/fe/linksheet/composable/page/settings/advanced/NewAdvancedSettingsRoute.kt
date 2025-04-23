@@ -10,7 +10,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.layout.column.group
 import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
-import fe.composekit.route.RouteNavigateListItem
+import fe.composekit.route.RouteNavigateListItemNew
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.navigation.ExperimentRoute
@@ -40,7 +40,7 @@ fun NewAdvancedSettingsRoute(onBackPressed: () -> Unit, navigate: (Route) -> Uni
         onBackPressed = onBackPressed
     ) {
         group(array = NewAdvancedSettingsRouteData.items) { data, padding, shape ->
-            RouteNavigateListItem(
+            RouteNavigateListItemNew(
                 data = data,
                 shape = shape,
                 padding = padding,

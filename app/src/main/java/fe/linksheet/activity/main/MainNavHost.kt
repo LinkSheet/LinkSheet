@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.dialog
 import fe.linksheet.composable.page.home.HomePageRoute
 import fe.linksheet.composable.page.settings.NewSettingsRoute
 import fe.linksheet.composable.page.settings.about.DonateSettingsRoute
@@ -47,10 +48,12 @@ import fe.linksheet.navigation.addPageRoute
 import fe.android.version.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
+import fe.linksheet.composable.page.settings.language.LanguageDialogWrapper
 import fe.linksheet.navigation.AdvancedRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
 import fe.linksheet.navigation.ExportImportRoute
+import fe.linksheet.navigation.LanguageRoute
 import fe.linksheet.navigation.LibRedirectRoute
 import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.navigation.LogTextViewerRoute
@@ -131,6 +134,13 @@ fun MainNavHost(
 
         animatedComposable<LibRedirectServiceRoute> { _, route ->
             NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
+        }
+
+        dialog<LanguageRoute> {
+            LanguageDialogWrapper(
+                onBackPressed = onBackPressed,
+                navigate = navigateNew,
+            )
         }
 
         animatedComposable(route = Routes.AboutVersion) {

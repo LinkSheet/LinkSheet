@@ -537,4 +537,7 @@
     <string name="settings_profile_switcher__text_no_profile">Тази възможност е достъпна само при настроени (работни) профили на устройството.</string>
     <string name="settings_home__title_clipboard_card">Карта на паметта за обмен</string>
     <string name="settings_home__text_clipboard_card">Показване съдържанието на паметта за обмен на началната страница ако е адрес</string>
+    <string name="settings_language__dialog_title">Език на приложението</string>
+    <string name="settings_language__text_system_language_with_language">%s (език на системата)</string>
+    <string name="settings_language__text_system_language">Език на системата</string>
 </resources>

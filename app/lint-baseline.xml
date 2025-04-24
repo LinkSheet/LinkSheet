@@ -29,7 +29,7 @@
         errorLine1="    contentModifier: Modifier,"
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/impl/m3fix/M3FixModalBottomSheet.kt"
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
             line="20"
             column="5"/>
     </issue>
@@ -40,7 +40,7 @@
         errorLine1="    contentModifier: Modifier,"
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/impl/m3fix/M3FixModalBottomSheet.kt"
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
             line="42"
             column="5"/>
     </issue>
@@ -140,7 +140,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="60"
+            line="59"
             column="17"/>
     </issue>
 
@@ -151,7 +151,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="84"
+            line="82"
             column="17"/>
     </issue>
 
@@ -162,7 +162,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="91"
+            line="88"
             column="17"/>
     </issue>
 
@@ -173,7 +173,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="98"
+            line="94"
             column="17"/>
     </issue>
 
@@ -3115,6 +3115,39 @@
     </issue>
 
     <issue
+        id="MissingTranslation"
+        message="&quot;settings_language__dialog_title&quot; is not translated in &quot;de&quot; (German), &quot;hi&quot; (Hindi), &quot;be&quot; (Belarusian), &quot;ru&quot; (Russian), &quot;bg&quot; (Bulgarian), &quot;it&quot; (Italian), &quot;fr&quot; (French), &quot;es&quot; (Spanish), &quot;zh&quot; (Chinese), &quot;ar&quot; (Arabic), &quot;pa&quot; (Punjabi), &quot;vi&quot; (Vietnamese), &quot;ja&quot; (Japanese), &quot;ia&quot; (Interlingua), &quot;pl&quot; (Polish), &quot;tr&quot; (Turkish), &quot;sr&quot; (Serbian)"
+        errorLine1="    &lt;string name=&quot;settings_language__dialog_title&quot;>App language&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="542"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;settings_language__text_system_language_with_language&quot; is not translated in &quot;de&quot; (German), &quot;hi&quot; (Hindi), &quot;be&quot; (Belarusian), &quot;ru&quot; (Russian), &quot;bg&quot; (Bulgarian), &quot;it&quot; (Italian), &quot;fr&quot; (French), &quot;es&quot; (Spanish), &quot;zh&quot; (Chinese), &quot;ar&quot; (Arabic), &quot;pa&quot; (Punjabi), &quot;vi&quot; (Vietnamese), &quot;ja&quot; (Japanese), &quot;ia&quot; (Interlingua), &quot;pl&quot; (Polish), &quot;tr&quot; (Turkish), &quot;sr&quot; (Serbian)"
+        errorLine1="    &lt;string name=&quot;settings_language__text_system_language_with_language&quot;>%s (system language)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="543"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;settings_language__text_system_language&quot; is not translated in &quot;de&quot; (German), &quot;hi&quot; (Hindi), &quot;be&quot; (Belarusian), &quot;ru&quot; (Russian), &quot;bg&quot; (Bulgarian), &quot;it&quot; (Italian), &quot;fr&quot; (French), &quot;es&quot; (Spanish), &quot;zh&quot; (Chinese), &quot;ar&quot; (Arabic), &quot;pa&quot; (Punjabi), &quot;vi&quot; (Vietnamese), &quot;ja&quot; (Japanese), &quot;ia&quot; (Interlingua), &quot;pl&quot; (Polish), &quot;tr&quot; (Turkish), &quot;sr&quot; (Serbian)"
+        errorLine1="    &lt;string name=&quot;settings_language__text_system_language&quot;>System language&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="544"
+            column="13"/>
+    </issue>
+
+    <issue
         id="Typos"
         message="Repeated word &quot;die&quot; in message: possible typo"
         errorLine1="    &lt;string name=&quot;general_settings_explainer&quot;>Einstellungen, die die gesamte App betreffen&lt;/string>"
@@ -4018,17 +4051,6 @@
 
     <issue
         id="UnusedTranslation"
-        message="The language `fr (French)` is present in this project, but not declared in the `localeConfig` resource"
-        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="33"
-            column="35"/>
-    </issue>
-
-    <issue
-        id="UnusedTranslation"
         message="The language `hu (Hungarian)` is present in this project, but not declared in the `localeConfig` resource"
         errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
@@ -4100,7 +4122,7 @@
         errorLine2="         ~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="174"
+            line="170"
             column="10"/>
     </issue>
 
@@ -4376,12 +4398,34 @@
 
     <issue
         id="UnusedResources"
+        message="The resource `R.string.en` appears to be unused"
+        errorLine1="    &lt;string name=&quot;en&quot; translatable=&quot;false&quot;>English&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="6"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
         message="The resource `R.string.hi` appears to be unused"
         errorLine1="    &lt;string name=&quot;hi&quot; translatable=&quot;false&quot;>हिन्दी&lt;/string>"
         errorLine2="            ~~~~~~~~~">
         <location
             file="src/debug/res/values/strings.xml"
             line="7"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.fr` appears to be unused"
+        errorLine1="    &lt;string name=&quot;fr&quot; translatable=&quot;false&quot;>Français&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="8"
             column="13"/>
     </issue>
 
@@ -4404,6 +4448,28 @@
         <location
             file="src/main/res/values/strings.xml"
             line="9"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.ja` appears to be unused"
+        errorLine1="    &lt;string name=&quot;ja&quot; translatable=&quot;false&quot;>日本語&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="9"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.language` appears to be unused"
+        errorLine1="    &lt;string name=&quot;language&quot;>English&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/debug/res/values/strings.xml"
+            line="10"
             column="13"/>
     </issue>
 

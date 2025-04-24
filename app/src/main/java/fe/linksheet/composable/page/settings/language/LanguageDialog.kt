@@ -16,6 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import fe.android.compose.dialog.helper.result.ResultDialog
+import fe.android.compose.dialog.helper.result.ResultDialogState
+import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
@@ -30,7 +33,6 @@ import fe.composekit.component.dialog.DialogDefaults.DialogTitleBottomPadding
 import fe.composekit.component.dialog.DialogPaddingOptions
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
-import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.composable.ui.DialogTitleStyle
 import fe.linksheet.module.language.DisplayLocaleItem
@@ -42,12 +44,9 @@ import org.koin.compose.viewmodel.koinViewModel
 import java.util.*
 
 @Composable
-fun LanguageDialogWrapper(
-    onBackPressed: () -> Unit,
-    navigate: (Route) -> Unit,
+fun rememberLanguageDialog(
     viewModel: LanguageSettingsViewModel = koinViewModel(),
-) {
-    val interaction = LocalHapticFeedbackInteraction.current
+): ResultDialogState<LocaleItem> {
     val deviceLocale by viewModel.deviceLocaleFlow.collectAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
         initialValue = null
@@ -58,22 +57,38 @@ fun LanguageDialogWrapper(
     )
     val locales by viewModel.localesFlow.collectAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
-        initialValue = null
+        initialValue = emptyList()
     )
 
-    locales?.let {
+    return rememberLanguageDialog(
+        locales = locales,
+        deviceLocale = deviceLocale,
+        currentLocale = currentLocale,
+        onChanged = { viewModel.update(it) }
+    )
+}
+
+@Composable
+private fun rememberLanguageDialog(
+    locales: List<DisplayLocaleItem>,
+    deviceLocale: Locale?,
+    currentLocale: LocaleItem?,
+    onChanged: (LocaleItem) -> Unit,
+): ResultDialogState<LocaleItem> {
+    val interaction = LocalHapticFeedbackInteraction.current
+    val state = rememberResultDialogState<LocaleItem>()
+
+    ResultDialog(state = state, onClose = onChanged) {
         LanguageDialog(
-            locales = it,
+            locales = locales,
             deviceLocale = deviceLocale,
             currentLocale = currentLocale,
-            onDismiss = interaction.wrap(FeedbackType.Decline, onBackPressed),
-            onConfirm = { item ->
-                viewModel.update(item)
-                onBackPressed()
-                interaction.perform(FeedbackType.Confirm)
-            }
+            onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
+            onConfirm = interaction.wrap(FeedbackType.Confirm, state::close)
         )
     }
+
+    return state
 }
 
 @Composable

@@ -1,9 +1,11 @@
 package fe.linksheet.composable.page.settings
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -20,6 +22,8 @@ import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.composable.page.settings.language.rememberLanguageDialog
+import fe.linksheet.module.language.LocaleItem
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.navigation.*
 import org.koin.androidx.compose.koinViewModel
@@ -146,6 +150,7 @@ fun NewSettingsRoute(
     viewModel: SettingsViewModel = koinViewModel(),
 ) {
     val devMode = viewModel.devModeEnabled.collectAsStateWithLifecycle()
+    val languageDialog = rememberLanguageDialog()
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings),
@@ -173,21 +178,12 @@ fun NewSettingsRoute(
                     minActiveState = Lifecycle.State.RESUMED,
                     initialValue = null
                 )
-                DefaultTwoLineIconClickableShapeListItem(
+                LanguageListItem(
                     shape = shape,
                     padding = padding,
-                    headlineContent = textContent(R.string.settings_language__dialog_title),
-                    supportingContent = when {
-                        appLocale != null && appLocale?.second == true -> {
-                            textContent(
-                                R.string.settings_language__text_system_language_with_language,
-                                appLocale!!.first.displayName
-                            )
-                        }
-                        else -> text(appLocale?.first?.displayName ?: "")
-                    },
-                    icon = Icons.Outlined.Language.iconPainter,
-                    onClick = { navigateNew(LanguageRoute) }
+                    appLocale = appLocale?.first,
+                    isSystemLanguage = appLocale?.second == true,
+                    onClick = languageDialog::open
                 )
             }
 
@@ -231,4 +227,30 @@ fun NewSettingsRoute(
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
     }
+}
+
+@Composable
+private fun LanguageListItem(
+    shape: Shape,
+    padding: PaddingValues,
+    appLocale: LocaleItem?,
+    isSystemLanguage: Boolean,
+    onClick: () -> Unit
+) {
+    DefaultTwoLineIconClickableShapeListItem(
+        shape = shape,
+        padding = padding,
+        headlineContent = textContent(R.string.settings_language__dialog_title),
+        supportingContent = when {
+            appLocale != null && isSystemLanguage -> {
+                textContent(
+                    R.string.settings_language__text_system_language_with_language,
+                    appLocale.displayName
+                )
+            }
+            else -> text(appLocale?.displayName ?: "")
+        },
+        icon = Icons.Outlined.Language.iconPainter,
+        onClick = onClick
+    )
 }

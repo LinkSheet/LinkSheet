@@ -1,6 +1,7 @@
 package fe.linksheet.module.language
 
 import android.os.Build
+import android.os.Parcelable
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import fe.kotlin.extension.string.capitalize
@@ -10,6 +11,7 @@ import fe.std.result.IResult
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 import kotlinx.coroutines.flow.combine
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 
@@ -101,7 +103,7 @@ class AppLocaleService(
         val list = getDefaultLocaleList()
         val index = if (hasPerAppLocale()) 1 else 0
 
-        return list.get(index)!!
+        return list.get(index) ?: Locale.ENGLISH
     }
 
     fun update(it: LocaleItem) {
@@ -114,7 +116,8 @@ class AppLocaleService(
 
     fun getCurrentAppLocaleItem(): LocaleItem {
         val list = getDefaultLocaleList()
-        return createLocaleItem(list.get(0)!!)
+        val locale = list.takeIf { it.size() > 0 }?.get(0) ?: Locale.ENGLISH
+        return createLocaleItem(locale)
     }
 
     private fun createLocaleItem(locale: Locale): LocaleItem {
@@ -128,10 +131,11 @@ class AppLocaleService(
 }
 
 
+@Parcelize
 data class LocaleItem(
     val locale: Locale,
     val displayName: String,
-)
+) : Parcelable
 
 data class DisplayLocaleItem(
     val item: LocaleItem,

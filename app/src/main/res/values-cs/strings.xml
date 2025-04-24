@@ -545,4 +545,7 @@
     <string name="settings_profile_switcher__title_no_profile">Nejsou dostupné žádné profily</string>
     <string name="settings_home__title_clipboard_card">Karta schránky</string>
     <string name="settings_home__text_clipboard_card">Zobrazit aktuální obsah schránky na domovské stránce, pokud se jedná o adresu</string>
+    <string name="settings_language__dialog_title">Jazyk aplikace</string>
+    <string name="settings_language__text_system_language_with_language">%s (systémový jazyk)</string>
+    <string name="settings_language__text_system_language">Systémový jazyk</string>
 </resources>

@@ -537,4 +537,7 @@
     <string name="resolve_event__idle">Boşta</string>
     <string name="settings_profile_switcher__title_no_profile">Hiçbir profil mevcut değil</string>
     <string name="settings_profile_switcher__text_no_profile">Bu özellik yalnızca cihazınızda bir (iş) profili ayarlanmışsa kullanılabilir.</string>
+    <string name="settings_language__dialog_title">Uygulama dili</string>
+    <string name="settings_language__text_system_language_with_language">%s (sistem dili)</string>
+    <string name="settings_language__text_system_language">Sistem dili</string>
 </resources>

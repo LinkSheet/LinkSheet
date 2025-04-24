@@ -125,25 +125,27 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.WEB_SEARCH" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
             </intent-filter>
         </activity>
+        <activity-alias
+                android:enabled="false"
+                android:name=".intent.search"
+                android:exported="true"
+                android:targetActivity=".activity.BottomSheetActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.WEB_SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
 
         <activity-alias
                 android:name=".activity.bottomsheet.BottomSheetActivityContextMenuAction"
@@ -152,9 +154,7 @@
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity-alias>

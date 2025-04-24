@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.onboarding.OnboardingActivity
+import fe.linksheet.debug.activity.ComponentStateActivity
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
@@ -43,6 +44,14 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
         ) {
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
                 if(activity != null) {
+                    item(key = "component-state") {
+                        FilledTonalActivityLauncher(
+                            activity = activity,
+                            text = "Component state",
+                            intent = createIntent(activity, ComponentStateActivity::class)
+                        )
+                    }
+
                     item(key = "locale") {
                         FilledTonalActivityLauncher(
                             activity = activity,

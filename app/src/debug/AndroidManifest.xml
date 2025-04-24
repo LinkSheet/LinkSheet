@@ -16,6 +16,10 @@
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
         <activity
+                android:name=".debug.activity.ComponentStateActivity"
+                android:exported="true"
+                android:theme="@style/AppTheme"/>
+        <activity
                 android:name=".debug.activity.LinkTestingActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>

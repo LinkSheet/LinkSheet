@@ -14,26 +14,20 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.time.LocalDateTime
 
+@Suppress("FunctionName")
 fun DebugLogPersistService(startupTime: LocalDateTime = LocalDateTime.now()): LogPersistService {
     return object : LogPersistService {
         override val startupTime: LocalDateTime = startupTime
-
         override fun readEntries(sessionId: String?): List<LogEntry> = emptyList()
-
         override fun getLogSessions(): List<LogSession> = emptyList()
-
         override fun delete(sessionId: String): Boolean = true
-
         override fun write(entry: LogEntry) {}
     }
 }
 
-
 interface LogPersistService : LifecycleAwareService {
     val startupTime: LocalDateTime
-
     fun readEntries(sessionId: String?): List<LogEntry>
-
     fun getLogSessions(): List<LogSession>
     fun delete(sessionId: String): Boolean
     fun write(entry: LogEntry)
@@ -55,6 +49,13 @@ internal class LogFileService(logDir: Lazy<File>, override val startupTime: Loca
         fun getLogDir(context: Context): Lazy<File> {
             return lazy { context.getDir(LOG_DIR, Context.MODE_PRIVATE) }
         }
+
+        private fun createLogFile(file: File): LogFile? {
+            return file.nameWithoutExtension
+                .substringBefore(".")
+                .toLongOrNull()
+                ?.let { LogFile(file, it) }
+        }
     }
 
     data class LogFile(
@@ -65,7 +66,8 @@ internal class LogFileService(logDir: Lazy<File>, override val startupTime: Loca
         companion object {
             fun new(logDir: File): LogFile {
                 val millis = System.currentTimeMillis()
-                return LogFile(File(logDir, "$millis.$FILE_EXT_V2"), millis)
+                val file = File(logDir, "$millis.$FILE_EXT_V2")
+                return LogFile(file, millis)
             }
         }
     }
@@ -76,12 +78,14 @@ internal class LogFileService(logDir: Lazy<File>, override val startupTime: Loca
         val logFile = File(logDir, name)
 
         if (logFile.extension == FILE_EXT) {
-            return logFile
-                .readLines().filter { it.isNotEmpty() }
+            return logFile.readLines()
+                .filter { it.isNotEmpty() }
                 .mapNotNull { LogEntry.fromLogFileLine(it) }
         }
 
-        return logFile.fromJsonOrNull<List<LogEntry?>>()?.filterNotNull() ?: emptyList()
+        return logFile.fromJsonOrNull<List<LogEntry?>>()
+            ?.filterNotNull()
+            ?: emptyList()
     }
 
     override fun write(entry: LogEntry) {
@@ -96,10 +100,8 @@ internal class LogFileService(logDir: Lazy<File>, override val startupTime: Loca
         return logDir.listFiles()
             ?.filter { it.length() > 0L }
             ?.sortedDescending()
-            ?.mapNotNull {
-                val millis = it.nameWithoutExtension.substringBefore(".").toLongOrNull() ?: return@mapNotNull null
-                LogFile(it, millis)
-            } ?: emptyList()
+            ?.mapNotNull(::createLogFile)
+            ?: emptyList()
     }
 
     override fun delete(sessionId: String): Boolean {

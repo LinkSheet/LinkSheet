@@ -30,6 +30,7 @@ import kotlin.test.Test
 internal class RedirectResolveRequestTest : UnitTest {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
+            true,
             "test",
             Redactor(LogHasher.NoOpHasher),
             DebugLogPersistService()

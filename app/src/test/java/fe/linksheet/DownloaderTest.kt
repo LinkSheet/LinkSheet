@@ -22,6 +22,7 @@ import kotlin.test.assertIs
 internal class DownloaderTest : UnitTest {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
+            true,
             "test",
             Redactor(LogHasher.NoOpHasher),
             DebugLogPersistService()

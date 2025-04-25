@@ -8,7 +8,7 @@ data class PrefixMessageCardContent(
     val start: Long,
     val messages: MutableList<String> = mutableListOf()
 ) {
-    fun matches(logEntry: LogEntry): Boolean {
+    fun isSamePrefix(logEntry: LogEntry): Boolean {
         return prefix == logEntry.prefix
     }
 

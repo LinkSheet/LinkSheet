@@ -13,6 +13,7 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.redactor.DefaultRedactor
 import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.util.buildconfig.Build
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.koin.dsl.module
@@ -33,7 +34,7 @@ val DefaultLogModule = module {
         LogFileService(logDir, scope.get<LinkSheetApp>().startupTime)
     }
     factory<Logger, Redactor, LogPersistService> { params, redactor, logFileService ->
-        val delegate = DefaultLoggerDelegate(params.get<KClass<*>>(), redactor, logFileService)
+        val delegate = DefaultLoggerDelegate(Build.IsDebug, params.get<KClass<*>>(), redactor, logFileService)
         Logger(delegate)
     }
 }

@@ -68,32 +68,8 @@ fun NewLogTextSettingsRoute(
 
         listHelper(noItems = R.string.no_log_entries,
             listState = listState,
-            list = logEntries?.let { mergeEntries(it) },
+            list = logEntries?.let { viewModel.merger.mergeEntries(it) },
             listKey = { it.hashCode() }
         ) { logEntry, _, _ -> LogCard(logEntry) }
     }
-}
-
-private fun mergeEntries(logEntries: List<LogEntry>): List<PrefixMessageCardContent> {
-    val merged = mutableListOf<PrefixMessageCardContent>()
-    var last: PrefixMessageCardContent? = null
-    for (entry in logEntries) {
-        if (last != null) {
-            if (last.matches(entry)) {
-                last.add(entry)
-            } else {
-                merged.add(last)
-                last = null
-            }
-        } else {
-            last = PrefixMessageCardContent(entry.type, entry.prefix, entry.unixMillis)
-            last.add(entry)
-        }
-    }
-
-    if (last != null) {
-        merged.add(last)
-    }
-
-    return merged
 }

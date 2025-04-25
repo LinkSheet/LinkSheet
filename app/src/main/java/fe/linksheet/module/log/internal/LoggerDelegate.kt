@@ -9,6 +9,7 @@ import fe.linksheet.module.redactor.Redactor
 typealias ProduceMessage = (String) -> String
 
 abstract class LoggerDelegate(
+    private val isDebug: Boolean,
     private val prefix: String,
     val redactor: Redactor,
     private val logPersistService: LogPersistService
@@ -30,14 +31,15 @@ abstract class LoggerDelegate(
 
     private fun writeFileLogEntry(level: Level, fileLogEntry: FileLogEntry, subPrefix: String?) {
         val (plain, redacted) = fileLogEntry
-        logPersistService.write(
-            LogEntry.DefaultLogEntry(
-                level.code,
-                prefix = prefix + (subPrefix?.let { "/$it" } ?: ""),
-                message = plain,
-                redactedMessage = redacted
-            )
+        val prefix = prefix + (subPrefix?.let { "/$it" } ?: "")
+        val entry = LogEntry.DefaultLogEntry(
+            level.code,
+            prefix = prefix,
+            message = plain,
+            redactedMessage = redacted
         )
+
+        logPersistService.write(entry)
     }
 
     protected abstract fun <T> redactParameter(param: T, processor: HashProcessor<T>): RedactedParameter
@@ -47,6 +49,7 @@ abstract class LoggerDelegate(
     private val redactionCache = mutableMapOf<RedactionContext<*>, RedactedParameter>()
 
     private fun print(level: Level, logcat: Logcat, fileLogEntry: FileLogEntry, subPrefix: String? = null) {
+        if (level == Level.Debug && !isDebug) return
         printLogcat(level, logcat, subPrefix)
         writeFileLogEntry(level, fileLogEntry, subPrefix)
     }
@@ -72,10 +75,11 @@ abstract class LoggerDelegate(
     }
 
     fun log(level: Level, msg: String? = null, throwable: Throwable? = null, subPrefix: String? = null) {
+        val message = "$msg ${Log.getStackTraceString(throwable)}".trim()
         print(
             level,
             Logcat(msg, throwable),
-            FileLogEntry("$msg ${Log.getStackTraceString(throwable)}".trim()),
+            FileLogEntry(message, message),
             subPrefix
         )
     }

@@ -13,7 +13,7 @@ abstract class DatabaseTest : UnitTest {
     lateinit var database: LinkSheetDatabase
 
     fun createInMemoryTestDatabase(context: Context): LinkSheetDatabase {
-        val logger = Logger(DebugLoggerDelegate(DatabaseTest::class))
+        val logger = Logger(DebugLoggerDelegate(true, DatabaseTest::class))
         val database = Room
             .inMemoryDatabaseBuilder(context, LinkSheetDatabase::class.java)
             .configureAndBuild(logger)

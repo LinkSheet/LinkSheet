@@ -46,7 +46,7 @@ internal class AnalyticsService(
     }
 
     override suspend fun onResume() {
-        logger.info("Resume received, starting processor")
+        logger.debug("Resume received, starting processor")
         eventQueue.start()
     }
 

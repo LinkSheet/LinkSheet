@@ -6,16 +6,18 @@ import fe.linksheet.module.redactor.Redactor
 import kotlin.reflect.KClass
 
 class DefaultLoggerDelegate(
+    isDebug: Boolean,
     prefix: String,
     redactor: Redactor,
     logPersistService: LogPersistService
-) : LoggerDelegate(prefix, redactor, logPersistService) {
+) : LoggerDelegate(isDebug, prefix, redactor, logPersistService) {
 
     constructor(
+        isDebug: Boolean,
         clazz: KClass<*>,
         redactor: Redactor,
         logStorageService: LogPersistService,
-    ) : this(clazz.simpleName!!, redactor, logStorageService)
+    ) : this(isDebug, clazz.simpleName!!, redactor, logStorageService)
 
     override fun <T> redactParameter(param: T, processor: HashProcessor<T>): RedactedParameter {
         val plain = Redactor.NoOp.processToString(param, processor)

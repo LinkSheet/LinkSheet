@@ -545,4 +545,7 @@
     <string name="settings_profile_switcher__text_no_profile">Ова функција је доступна само ако је на вашем уређају подешен (радни) профил.</string>
     <string name="settings_home__title_clipboard_card">Картица привремене меморије</string>
     <string name="settings_home__text_clipboard_card">Приказивање тренутног садржаја привремене меморије на почетној страници, ако је URL адреса</string>
+    <string name="settings_language__dialog_title">Језик апликације</string>
+    <string name="settings_language__text_system_language_with_language">%s (системски језик)</string>
+    <string name="settings_language__text_system_language">Системски језик</string>
 </resources>

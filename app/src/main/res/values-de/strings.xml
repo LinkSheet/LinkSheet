@@ -227,4 +227,6 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku-Modus ist aktiviert, tippen Sie auf eine App, um ihre automatische Linkbehandlung umzuschalten. Tippen Sie lange auf eine App, um ihr \"Standardmäßig öffnen\"-Einstellungsmenü zu öffnen.</string>
     <string name="preferred_apps_settings">Bevorzugte Anwendungen für die von dir unterstützten Hosts festlegen</string>
     <string name="app_browsers_subtitle">Bevorzugte Apps, Browser-Einstellungen</string>
+    <string name="settings_language__text_system_language_with_language">%s (Systemsprache)</string>
+    <string name="settings_language__text_system_language">Systemsprache</string>
 </resources>

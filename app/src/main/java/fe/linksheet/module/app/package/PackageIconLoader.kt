@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 
+@Suppress("FunctionName")
 internal fun AndroidPackageIconLoaderModule(
     packageManager: PackageManager,
     activityManager: ActivityManager,

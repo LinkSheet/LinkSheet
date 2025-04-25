@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
+@Suppress("FunctionName")
 internal fun AndroidPackageServiceModule(
     context: Context,
     packageIconLoader: PackageIconLoader,

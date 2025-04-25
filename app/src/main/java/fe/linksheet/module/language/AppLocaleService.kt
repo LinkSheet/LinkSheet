@@ -12,8 +12,13 @@ import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 import kotlinx.coroutines.flow.combine
 import kotlinx.parcelize.Parcelize
+import org.koin.dsl.module
 import java.util.*
 
+
+val AppLocaleModule = module {
+    single { AndroidAppLocaleService() }
+}
 
 @Suppress("FunctionName")
 internal fun AndroidAppLocaleService(): AppLocaleService {

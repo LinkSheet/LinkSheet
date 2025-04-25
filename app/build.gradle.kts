@@ -242,7 +242,6 @@ android {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp-jvm:_")
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 
@@ -258,7 +257,7 @@ dependencies {
     implementation(Square.okHttp3.coroutines)
 //    implementation(Square.okHttp3.mockWebServer3)
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
-
+    implementation("io.ktor:ktor-client-okhttp-jvm:_")
 //    implementation(platform(AndroidX.compose.bom))
     implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.foundation)

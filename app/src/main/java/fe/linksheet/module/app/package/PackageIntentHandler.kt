@@ -11,6 +11,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.lib.flavors.LinkSheetApp.Compat
 import fe.linksheet.util.ResolveInfoFlags
 
+@Suppress("FunctionName")
 internal fun AndroidPackageIntentHandler(
     packageManager: PackageManager,
     checkReferrerExperiment: () -> Boolean,

@@ -61,7 +61,7 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
         assertThat(entry)
             .isNotNull()
             .all {
-                prop(UrlEntry::url).isEqualTo(SHORT_URL)
+                prop(UrlEntry::url).isEqualTo(SHORT_URL.toString())
                 prop(UrlEntry::timestamp).isEqualTo(unixMillisOf(2025))
             }
     }

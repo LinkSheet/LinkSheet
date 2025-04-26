@@ -1,6 +1,7 @@
 package fe.linksheet.experiment.engine
 
-import android.content.Intent
+import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
+import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.modifier.ClearURLsLinkModifier
 import fe.linksheet.experiment.engine.modifier.EmbedLinkModifier
 import fe.linksheet.experiment.engine.modifier.LibRedirectLinkModifier
@@ -8,6 +9,24 @@ import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLinkResolver
 import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLocalSource
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLinkResolver
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
+import fe.linksheet.experiment.engine.step.AfterStepRule
+import fe.linksheet.experiment.engine.step.BeforeStepRule
+import fe.linksheet.experiment.engine.rule.PostProcessorInput
+import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PreProcessorInput
+import fe.linksheet.experiment.engine.rule.PreprocessorRule
+import fe.linksheet.experiment.engine.rule.Rule
+import fe.linksheet.experiment.engine.rule.RuleInput
+import fe.linksheet.experiment.engine.step.SkipStep
+import fe.linksheet.experiment.engine.step.StepEnd
+import fe.linksheet.experiment.engine.step.StepRule
+import fe.linksheet.experiment.engine.step.StepRuleInput
+import fe.linksheet.experiment.engine.step.StepRuleResult
+import fe.linksheet.experiment.engine.step.StepStart
+import fe.linksheet.experiment.engine.step.EngineStep
+import fe.linksheet.experiment.engine.step.EngineStepId
+import fe.linksheet.experiment.engine.step.InPlaceStep
+import fe.linksheet.experiment.engine.step.StepResult
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.std.uri.StdUrl
@@ -57,7 +76,7 @@ fun DefaultLinkEngine(
 class LinkEngine(
     val steps: List<EngineStep<*>>,
     val rules: List<Rule<*, *>> = emptyList(),
-    val logger: EngineLogger = LogcatEngineLogger("LinkEngine"),
+    val logger: EngineLogger = AndroidEngineLogger("LinkEngine"),
     val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
     private val scope = CoroutineScope(dispatcher) + CoroutineName("LinkEngine") + CoroutineExceptionHandler { _, e ->
@@ -88,7 +107,7 @@ class LinkEngine(
         input: I,
     ): R? {
         for (rule in filteredRules) {
-            val result = with(context) { rule.checkRule(input) }
+            val result = with(rule) { context.checkRule(input) }
             if (result == null) continue
             return result
         }
@@ -109,11 +128,9 @@ class LinkEngine(
         step: EngineStep<R>,
         url: StdUrl,
     ): Pair<Boolean, StdUrl> {
-//        beforeStepHooks.forEach { it.onBeforeRun(step, url) }
-        val result = with(context) { step.runStep(url) }
+        val result = with(step) { context.runStep(url) }
         val hasNewUrl = result != null && result.url != url
 
-//        afterStepHooks.forEach { it.onAfterRun(step, url, result) }
         if (!hasNewUrl) return false to url
         return true to result.url
     }
@@ -131,7 +148,6 @@ class LinkEngine(
                 context, step.id, stepStart
             )
             if (beforeStepResult is SkipStep) continue
-//            if (beforeStepResult is Terminate) return@scope TerminateResult(beforeStepResult)
 
             emitEvent(stepStart)
             val (hasNewUrl, resultUrl) = processStep(context, step, mutUrl)
@@ -141,7 +157,6 @@ class LinkEngine(
                 context, step.id, stepEnd
             )
             if (afterStepResult is SkipStep) continue
-//            if (afterStepResult is Terminate) return@scope TerminateResult(afterStepResult)
 
             emitEvent(stepEnd)
             if (!hasNewUrl) continue
@@ -168,26 +183,3 @@ class LinkEngine(
         context to result
     }
 }
-
-interface EngineRunContext {
-    suspend fun <R : StepResult> EngineStep<R>.runStep(url: StdUrl): R? {
-        return this@EngineRunContext.runStep(url)
-    }
-
-    suspend fun <I : RuleInput, R : EngineResult> Rule<I, R>.checkRule(input: I): R? {
-        return this@EngineRunContext.checkRule(input)
-    }
-}
-
-class DefaultEngineRunContext : EngineRunContext {
-}
-
-
-typealias ContextualEngineResult = Pair<EngineRunContext, EngineResult>
-
-interface EngineResult
-
-class IntentEngineResult(val intent: Intent) : EngineResult
-class UrlEngineResult(val url: StdUrl) : EngineResult
-
-

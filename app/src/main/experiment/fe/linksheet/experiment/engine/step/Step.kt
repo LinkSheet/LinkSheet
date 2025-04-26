@@ -1,5 +1,6 @@
-package fe.linksheet.experiment.engine
+package fe.linksheet.experiment.engine.step
 
+import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.std.uri.StdUrl
 
 interface EngineStep<out R : StepResult> {

@@ -17,6 +17,6 @@ internal class ImprovedIntentResolverTest : BaseUnitTest {
         val config = BundledEmbedResolveConfigLoader.load().getOrNull()!!
         val resolved = EmbedResolver(config).resolve("https://fxtwitter.com/GrapheneOS/status/1805591682013876245")
 
-       assertThat(resolved).isEqualTo("https://twitter.com/GrapheneOS/status/1805591682013876245")
+        assertThat(resolved).isEqualTo("https://twitter.com/GrapheneOS/status/1805591682013876245")
     }
 }

@@ -51,6 +51,7 @@ internal class LinkEnginePostProcessorRuleTest : BaseLinkEngineTest() {
         assertResult(result)
             .isInstanceOf<UrlEngineResult>()
             .prop(UrlEngineResult::url)
+            .transform { it.toString() }
             .isEqualTo("https://linksheet.app")
     }
 

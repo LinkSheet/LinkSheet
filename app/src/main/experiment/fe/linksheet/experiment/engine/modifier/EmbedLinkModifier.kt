@@ -2,9 +2,9 @@ package fe.linksheet.experiment.engine.modifier
 
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
-import fe.linksheet.experiment.engine.EngineStepId
-import fe.linksheet.experiment.engine.EngineRunContext
-import fe.linksheet.experiment.engine.StepResult
+import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.step.EngineStepId
+import fe.linksheet.experiment.engine.step.StepResult
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher

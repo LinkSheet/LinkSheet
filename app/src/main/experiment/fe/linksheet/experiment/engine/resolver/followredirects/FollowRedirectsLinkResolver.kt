@@ -2,8 +2,8 @@ package fe.linksheet.experiment.engine.resolver.followredirects
 
 import android.net.Uri
 import fe.fastforwardkt.FastForward
-import fe.linksheet.experiment.engine.EngineStepId
-import fe.linksheet.experiment.engine.EngineRunContext
+import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.extension.std.toAndroidUri

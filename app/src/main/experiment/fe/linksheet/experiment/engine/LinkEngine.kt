@@ -10,6 +10,7 @@ import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLi
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.resolver.LibRedirectResolver
+import fe.std.uri.StdUrl
 import io.ktor.client.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -106,29 +107,29 @@ class LinkEngine(
     private suspend fun <R : StepResult> processStep(
         context: EngineRunContext,
         step: EngineStep<R>,
-        url: String,
-    ): Pair<Boolean, String> {
+        url: StdUrl,
+    ): Pair<Boolean, StdUrl> {
 //        beforeStepHooks.forEach { it.onBeforeRun(step, url) }
         val result = with(context) { step.runStep(url) }
         val hasNewUrl = result != null && result.url != url
 
 //        afterStepHooks.forEach { it.onAfterRun(step, url, result) }
         if (!hasNewUrl) return false to url
-
         return true to result.url
     }
 
     private suspend fun process(
         context: EngineRunContext,
-        url: String,
+        url: StdUrl,
         depth: Int = 0,
     ): EngineResult = coroutineScope scope@{
         var mutUrl = url
         for (step in steps) {
             if (!isActive) break
             val stepStart = StepStart(depth, step, mutUrl)
-            val beforeStepResult =
-                findStepRule<StepStart<*>, StepRuleResult, BeforeStepRule>(context, step.id, stepStart)
+            val beforeStepResult = findStepRule<StepStart<*>, StepRuleResult, BeforeStepRule>(
+                context, step.id, stepStart
+            )
             if (beforeStepResult is SkipStep) continue
 //            if (beforeStepResult is Terminate) return@scope TerminateResult(beforeStepResult)
 
@@ -136,7 +137,9 @@ class LinkEngine(
             val (hasNewUrl, resultUrl) = processStep(context, step, mutUrl)
 
             val stepEnd = StepEnd(depth, step, url, hasNewUrl, resultUrl)
-            val afterStepResult = findStepRule<StepEnd<*>, StepRuleResult, AfterStepRule>(context, step.id, stepEnd)
+            val afterStepResult = findStepRule<StepEnd<*>, StepRuleResult, AfterStepRule>(
+                context, step.id, stepEnd
+            )
             if (afterStepResult is SkipStep) continue
 //            if (afterStepResult is Terminate) return@scope TerminateResult(afterStepResult)
 
@@ -151,7 +154,7 @@ class LinkEngine(
     }
 
     suspend fun process(
-        url: String,
+        url: StdUrl,
         context: EngineRunContext = DefaultEngineRunContext()
     ): ContextualEngineResult = coroutineScope scope@{
         val preResult = processRules(context, preProcessorRules, PreProcessorInput(url))
@@ -167,7 +170,7 @@ class LinkEngine(
 }
 
 interface EngineRunContext {
-    suspend fun <R : StepResult> EngineStep<R>.runStep(url: String): R? {
+    suspend fun <R : StepResult> EngineStep<R>.runStep(url: StdUrl): R? {
         return this@EngineRunContext.runStep(url)
     }
 
@@ -185,7 +188,6 @@ typealias ContextualEngineResult = Pair<EngineRunContext, EngineResult>
 interface EngineResult
 
 class IntentEngineResult(val intent: Intent) : EngineResult
-
-class UrlEngineResult(val url: String) : EngineResult
+class UrlEngineResult(val url: StdUrl) : EngineResult
 
 

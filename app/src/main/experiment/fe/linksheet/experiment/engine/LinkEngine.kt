@@ -107,7 +107,9 @@ class LinkEngine(
         input: I,
     ): R? {
         for (rule in filteredRules) {
+            logger.debug { "Checking rule $rule with input $input" }
             val result = with(rule) { context.checkRule(input) }
+            logger.debug { "Rule result is $result" }
             if (result == null) continue
             return result
         }

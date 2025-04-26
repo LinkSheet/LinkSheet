@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ClearURLsLinkModifier(
+data class ClearURLsLinkModifier(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : LinkModifier<ClearURLsModifyOutput>, InPlaceStep {
     override val id = EngineStepId.ClearURLs

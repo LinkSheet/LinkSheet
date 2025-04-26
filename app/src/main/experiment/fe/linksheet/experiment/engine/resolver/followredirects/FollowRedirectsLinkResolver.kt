@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-class FollowRedirectsLinkResolver(
+data class FollowRedirectsLinkResolver(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val source: FollowRedirectsSource,
     private val cacheRepository: CacheRepository,

@@ -1,7 +1,7 @@
 package fe.linksheet.experiment.engine.resolver.amp2html
 
-import fe.linksheet.experiment.engine.EngineStepId
-import fe.linksheet.experiment.engine.EngineRunContext
+import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.module.database.entity.cache.ResolveType
@@ -48,9 +48,9 @@ class Amp2HtmlLinkResolver(
         return ResolveOutput(result.url)
     }
 
-    override suspend fun EngineRunContext.runStep(data: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
+    override suspend fun EngineRunContext.runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
         val localCache = useLocalCache()
-        val entry = cacheRepository.getOrCreateCacheEntry(data.toString())
+        val entry = cacheRepository.getOrCreateCacheEntry(url.toString())
 
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.Amp2Html)
@@ -60,12 +60,12 @@ class Amp2HtmlLinkResolver(
 
             val cachedHtml = cacheRepository.getCachedHtml(entry.id)
             if (cachedHtml != null) {
-                val parsedUrlResult = source.parseHtml(cachedHtml.content, data.toString())
-                return@withContext handleResult(entry.id, data, true, parsedUrlResult)
+                val parsedUrlResult = source.parseHtml(cachedHtml.content, url.toString())
+                return@withContext handleResult(entry.id, url, true, parsedUrlResult)
             }
         }
 
-        val result = source.resolve(data.toString())
-        handleResult(entry.id, data, localCache, result)
+        val result = source.resolve(url.toString())
+        handleResult(entry.id, url, localCache, result)
     }
 }

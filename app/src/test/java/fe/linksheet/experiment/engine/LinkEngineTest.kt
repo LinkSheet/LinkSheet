@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
+import fe.linksheet.experiment.engine.rule.BaseRuleEngineTest
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
@@ -18,7 +19,7 @@ import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class LinkEngineTest : BaseLinkEngineTest() {
+internal class LinkEngineTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
 
     private val cacheRepository by lazy {

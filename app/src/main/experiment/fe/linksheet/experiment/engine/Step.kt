@@ -1,15 +1,17 @@
 package fe.linksheet.experiment.engine
 
+import fe.std.uri.StdUrl
+
 interface EngineStep<out R : StepResult> {
     val id: EngineStepId
 
-    suspend fun EngineRunContext.runStep(url: String): R?
+    suspend fun EngineRunContext.runStep(url: StdUrl): R?
 }
 
 interface InPlaceStep
 
 interface StepResult {
-    val url: String
+    val url: StdUrl
 }
 
 enum class EngineStepId {

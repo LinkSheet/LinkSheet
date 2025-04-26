@@ -4,16 +4,18 @@ import fe.fastforwardkt.FastForward
 import fe.linksheet.experiment.engine.EngineStepId
 import fe.linksheet.experiment.engine.EngineRunContext
 import fe.linksheet.experiment.engine.StepResult
+import fe.std.uri.StdUrl
+import fe.std.uri.toStdUrlOrThrow
 
 class FastForwardLinkModifier : LinkModifier<FastForwardModifyOutput> {
     override val id = EngineStepId.FastForward
     override suspend fun warmup() {
     }
 
-    override suspend fun EngineRunContext.runStep(url: String): FastForwardModifyOutput? {
-        val result = FastForward.getRuleRedirect(url)
-        return result?.let { FastForwardModifyOutput(it) }
+    override suspend fun EngineRunContext.runStep(url: StdUrl): FastForwardModifyOutput? {
+        val result = FastForward.getRuleRedirect(url.toString())
+        return result?.let { FastForwardModifyOutput(it.toStdUrlOrThrow()) }
     }
 }
 
-data class FastForwardModifyOutput(override val url: String) : StepResult
+data class FastForwardModifyOutput(override val url: StdUrl) : StepResult

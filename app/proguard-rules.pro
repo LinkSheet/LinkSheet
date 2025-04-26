@@ -109,6 +109,8 @@
 
 -dontwarn fe.uribuilder.ParsedUri
 -dontwarn okhttp3.internal.Util
+-dontwarn fe.std.uri.Url
+-dontwarn fe.std.uri.UrlFactory
 -dontwarn io.ktor.client.network.sockets.TimeoutExceptionsCommonKt
 -dontwarn io.ktor.client.plugins.HttpTimeout$HttpTimeoutCapabilityConfiguration
 -dontwarn io.ktor.client.plugins.HttpTimeout$Plugin

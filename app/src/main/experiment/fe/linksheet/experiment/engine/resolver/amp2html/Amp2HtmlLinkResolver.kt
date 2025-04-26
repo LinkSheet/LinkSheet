@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class Amp2HtmlLinkResolver(
+data class Amp2HtmlLinkResolver(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val source: Amp2HtmlSource,
     private val cacheRepository: CacheRepository,

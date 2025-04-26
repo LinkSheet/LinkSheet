@@ -5,6 +5,8 @@ import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.linksheet.experiment.engine.EngineStepId
 import fe.linksheet.experiment.engine.EngineRunContext
 import fe.linksheet.experiment.engine.StepResult
+import fe.std.uri.StdUrl
+import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,10 +27,10 @@ class EmbedLinkModifier(
         Unit
     }
 
-    override suspend fun EngineRunContext.runStep(url :String) = withContext(ioDispatcher) {
-        val result = embedResolver?.resolve(url)
-        result?.let { EmbedLinkModifyOutput(it) }
+    override suspend fun EngineRunContext.runStep(url: StdUrl) = withContext(ioDispatcher) {
+        val result = embedResolver?.resolve(url.toString())
+        result?.let { EmbedLinkModifyOutput(it.toStdUrlOrThrow()) }
     }
 }
 
-data class EmbedLinkModifyOutput(override val url: String) : StepResult
+data class EmbedLinkModifyOutput(override val url: StdUrl) : StepResult

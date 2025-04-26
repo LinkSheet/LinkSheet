@@ -7,13 +7,13 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import fe.linksheet.DatabaseTest
-import fe.linksheet.experiment.engine.TestEngineRunContext
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.experiment.engine.withTestRunContext
 import fe.linksheet.module.database.entity.cache.UrlEntry
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.success
 import fe.std.time.unixMillisOf
+import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
@@ -21,7 +21,7 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
     companion object {
-        private const val SHORT_URL = "https://t.co/JvpSaTXZDi"
+        private val SHORT_URL = "https://t.co/JvpSaTXZDi".toStdUrlOrThrow()
         private const val RESOLVED_URL = "https://grumpy.website"
     }
 
@@ -54,9 +54,10 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
+            .transform { it.toString() }
             .isEqualTo(RESOLVED_URL)
 
-        val entry = database.urlEntryDao().getUrlEntry(SHORT_URL)
+        val entry = database.urlEntryDao().getUrlEntry(SHORT_URL.toString())
         assertThat(entry)
             .isNotNull()
             .all {

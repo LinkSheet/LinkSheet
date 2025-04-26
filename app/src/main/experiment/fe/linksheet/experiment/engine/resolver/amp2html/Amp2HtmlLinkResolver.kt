@@ -8,6 +8,8 @@ import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.isFailure
+import fe.std.uri.StdUrl
+import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,7 +23,7 @@ class Amp2HtmlLinkResolver(
     override val id = EngineStepId.Amp2Html
 
     private suspend fun insertCache(entryId: Long, result: Amp2HtmlResult) {
-        cacheRepository.insertResolved(entryId, ResolveType.Amp2Html, result.url)
+        cacheRepository.insertResolved(entryId, ResolveType.Amp2Html, result.url.toString())
 
         if (result is Amp2HtmlResult.NonAmpLink) {
             cacheRepository.insertHtml(entryId, result.htmlText)
@@ -30,7 +32,7 @@ class Amp2HtmlLinkResolver(
 
     private suspend fun handleResult(
         entryId: Long,
-        url: String,
+        url: StdUrl,
         localCache: Boolean,
         result: IResult<Amp2HtmlResult>,
     ): ResolveOutput {
@@ -46,24 +48,24 @@ class Amp2HtmlLinkResolver(
         return ResolveOutput(result.url)
     }
 
-    override suspend fun EngineRunContext.runStep(data: String): ResolveOutput? = withContext(ioDispatcher) {
+    override suspend fun EngineRunContext.runStep(data: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
         val localCache = useLocalCache()
-        val entry = cacheRepository.getOrCreateCacheEntry(data)
+        val entry = cacheRepository.getOrCreateCacheEntry(data.toString())
 
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.Amp2Html)
             if (resolvedUrl != null && resolvedUrl.result != null) {
-                return@withContext ResolveOutput(resolvedUrl.result)
+                return@withContext ResolveOutput(resolvedUrl.result.toStdUrlOrThrow())
             }
 
             val cachedHtml = cacheRepository.getCachedHtml(entry.id)
             if (cachedHtml != null) {
-                val parsedUrlResult = source.parseHtml(cachedHtml.content, data)
+                val parsedUrlResult = source.parseHtml(cachedHtml.content, data.toString())
                 return@withContext handleResult(entry.id, data, true, parsedUrlResult)
             }
         }
 
-        val result = source.resolve(data)
+        val result = source.resolve(data.toString())
         handleResult(entry.id, data, localCache, result)
     }
 }

@@ -17,6 +17,8 @@ import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
+import fe.std.uri.StdUrl
+import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
@@ -25,8 +27,8 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     companion object {
-        private const val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html"
-        private const val RESOLVED_URL = "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html"
+        private val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
+        private val RESOLVED_URL = "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
     }
 
     private val dispatcher = StandardTestDispatcher()
@@ -44,10 +46,10 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
 
     private val source = createSource(RESOLVED_URL, "<html></html>")
 
-    private fun createSource(resolvedUrl: String, fakeHtmlText: String): Amp2HtmlSource {
+    private fun createSource(resolvedUrl: StdUrl, fakeHtmlText: String): Amp2HtmlSource {
         return object : Amp2HtmlSource {
             override suspend fun resolve(urlString: String): IResult<Amp2HtmlResult> {
-                return Amp2HtmlResult.NonAmpLink(Companion.RESOLVED_URL, fakeHtmlText).success
+                return Amp2HtmlResult.NonAmpLink(RESOLVED_URL, fakeHtmlText).success
             }
 
             override suspend fun parseHtml(
@@ -74,7 +76,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
             .prop(ResolveOutput::url)
             .isEqualTo(RESOLVED_URL)
 
-        val entry = database.urlEntryDao().getUrlEntry(URL)
+        val entry = database.urlEntryDao().getUrlEntry(URL.toString())
         assertThat(entry).isNotNull()
 
         val resolved = database.resolvedUrlCacheDao().getResolved(entry!!.id, ResolveType.Amp2Html.id)
@@ -85,22 +87,23 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
     fun `return cached url if present`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
             ioDispatcher = dispatcher,
-            source = createSource("https://not-from-cache.com", "<html></html>"),
+            source = createSource("https://not-from-cache.com".toStdUrlOrThrow(), "<html></html>"),
             cacheRepository = cacheRepository,
             useLocalCache = { true },
         )
 
         val testResolvedUrl = "https://linksheet.app"
-        val entry = UrlEntry(1, url = URL)
+        val entry = UrlEntry(1, url = URL.toString())
         val resolved = ResolvedUrl(entry.id, ResolveType.Amp2Html.id, testResolvedUrl)
 
         database.urlEntryDao().insertReturningId(entry)
         database.resolvedUrlCacheDao().insertReturningId(resolved)
 
-        val result = withTestRunContext { resolver.runStep(entry.url) }
+        val result = withTestRunContext { resolver.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
+            .transform { it.toString() }
             .isEqualTo(testResolvedUrl)
     }
 
@@ -111,7 +114,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
             ioDispatcher = dispatcher,
             source = object : Amp2HtmlSource {
                 override suspend fun resolve(urlString: String): IResult<Amp2HtmlResult> {
-                    return Amp2HtmlResult.NonAmpLink(urlString, "<html><body><h1>Html not from cache</h1></body></html>").success
+                    return Amp2HtmlResult.NonAmpLink(urlString.toStdUrlOrThrow(), "<html><body><h1>Html not from cache</h1></body></html>").success
                 }
 
                 override suspend fun parseHtml(
@@ -119,26 +122,27 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
                     urlString: String
                 ): IResult<Amp2HtmlResult> {
                     if (htmlText == cachedHtml) {
-                        return Amp2HtmlResult.NonAmpLink("https://linksheet.app", htmlText).success
+                        return Amp2HtmlResult.NonAmpLink("https://linksheet.app".toStdUrlOrThrow(), htmlText).success
                     }
 
-                    return Amp2HtmlResult.NonAmpLink("https://not-from-cache.com", htmlText).success
+                    return Amp2HtmlResult.NonAmpLink("https://not-from-cache.com".toStdUrlOrThrow(), htmlText).success
                 }
             },
             cacheRepository = cacheRepository,
             useLocalCache = { true },
         )
 
-        val entry = UrlEntry(1, url = URL)
+        val entry = UrlEntry(1, url = URL.toString())
         val htmlCache = CachedHtml(entry.id, cachedHtml)
 
         database.urlEntryDao().insertReturningId(entry)
         database.htmlCacheDao().insertReturningId(htmlCache)
 
-        val result = withTestRunContext { resolver.runStep(entry.url) }
+        val result = withTestRunContext { resolver.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
+            .transform { it.toString() }
             .isEqualTo("https://linksheet.app")
     }
 }

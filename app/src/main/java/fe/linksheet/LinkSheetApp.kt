@@ -31,7 +31,6 @@ import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import fe.linksheet.module.downloader.downloaderModule
-import fe.linksheet.module.http.HttpModule
 import fe.linksheet.module.language.AppLocaleModule
 import fe.linksheet.module.http.HttpClientModule
 import fe.linksheet.module.log.DefaultLogModule

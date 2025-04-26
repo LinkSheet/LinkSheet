@@ -6,10 +6,13 @@ import fe.linksheet.experiment.engine.EngineStepId
 import fe.linksheet.experiment.engine.EngineRunContext
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
+import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.util.web.Darknet
 import fe.std.result.isFailure
+import fe.std.uri.StdUrl
+import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -35,29 +38,30 @@ class FollowRedirectsLinkResolver(
         }
     }
 
-    override suspend fun EngineRunContext.runStep(url: String): ResolveOutput? = withContext(ioDispatcher) {
-        val isTracker = isTracker(url)
+    override suspend fun EngineRunContext.runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
+        val urlString = url.toString()
+        val isTracker = isTracker(urlString)
         if (followOnlyKnownTrackers() && !isTracker) {
             return@withContext ResolveOutput(url)
         }
 
-        val uri = Uri.parse(url)
+        val uri = url.toAndroidUri()
         val isDarknet = isDarknet(uri)
         if (!allowDarknets() && isDarknet) {
             return@withContext ResolveOutput(url)
         }
 
         val localCache = useLocalCache()
-        val entry = cacheRepository.getOrCreateCacheEntry(url)
+        val entry = cacheRepository.getOrCreateCacheEntry(urlString)
 
         if (localCache) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.FollowRedirects)
             if (resolvedUrl != null && resolvedUrl.result != null) {
-                return@withContext ResolveOutput(resolvedUrl.result)
+                return@withContext ResolveOutput(resolvedUrl.result.toStdUrlOrThrow())
             }
         }
 
-        val result = source.resolve(url)
+        val result = source.resolve(urlString)
         if (result.isFailure()) {
             return@withContext ResolveOutput(url)
         }
@@ -66,6 +70,6 @@ class FollowRedirectsLinkResolver(
             insertCache(entry.id, result.value)
         }
 
-        ResolveOutput(result.value.url)
+        ResolveOutput(result.value.url.toStdUrlOrThrow())
     }
 }

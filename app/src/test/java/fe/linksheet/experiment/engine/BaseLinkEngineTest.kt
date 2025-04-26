@@ -4,6 +4,7 @@ import assertk.Assert
 import assertk.assertThat
 import fe.linksheet.DatabaseTest
 import fe.linksheet.experiment.engine.modifier.LinkModifier
+import fe.std.uri.StdUrl
 import org.junit.After
 
 abstract class BaseLinkEngineTest : DatabaseTest() {
@@ -27,18 +28,18 @@ abstract class BaseLinkEngineTest : DatabaseTest() {
 @Suppress("TestFunctionName")
 fun TestLinkModifier(
     id: EngineStepId,
-    block: suspend EngineRunContext.(String) -> StepTestResult? = { null },
+    block: suspend EngineRunContext.(StdUrl) -> StepTestResult? = { null },
 ): LinkModifier<StepTestResult> {
     return object : LinkModifier<StepTestResult> {
         override val id = id
         override suspend fun warmup() {}
-        override suspend fun EngineRunContext.runStep(url: String): StepTestResult? {
+        override suspend fun EngineRunContext.runStep(url: StdUrl): StepTestResult? {
             return block(url)
         }
     }
 }
 
-data class StepTestResult(override val url: String) : StepResult
+data class StepTestResult(override val url: StdUrl) : StepResult
 
 object TestEngineRunContext : EngineRunContext {
 

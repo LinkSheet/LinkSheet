@@ -131,7 +131,7 @@ class ImprovedIntentResolver(
             return@scope searchIntentResult
         }
 
-        var uriResult = IntentParser.getUriFromIntent(intent)
+        val uriResult = IntentParser.getUriFromIntent(intent)
 
         if (uriResult.isFailure()) {
             logger.error("Failed to parse intent ${intent.action}")

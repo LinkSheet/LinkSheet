@@ -139,4 +139,30 @@
     <string name="copy_to_clipboard">Salin ke papan klip</string>
     <string name="debug">Awakutu</string>
     <string name="enable_ignore_libredirect_button_explainer">Menampilkan tombol di lembar bawah jika URL telah dialihkan melalui LibRedirect, yang membuka URL asli sebagai gantinya</string>
+    <string name="debug_explainer">Log apl, penyetelan ulang penangan terverifikasi</string>
+    <string name="logs">Log</string>
+    <string name="options">Opsi</string>
+    <string name="services">Layanan</string>
+    <string name="no_libredirect_services">Tidak ditemukan layanan LibRedirect yang ada!</string>
+    <string name="current_session">Sesi saat ini</string>
+    <string name="log_files">Sesi yang lalu</string>
+    <string name="log_viewer">Penampil log</string>
+    <string name="request_timeout">Batas waktu permintaan</string>
+    <string name="request_timeout_explainer">Menentukan berapa detik LinkSheet akan menunggu hingga koneksi terbentuk. Menyetel nilainya ke 0 akan menonaktifkan batas waktu, tetapi ini tidak direkomendasikan.</string>
+    <string name="resolve_failed">%s gagal: %s</string>
+    <string name="no_browsers_found">Tidak ditemukan peramban yang ada.</string>
+    <string name="no_apps_found">Tidak ditemukan aplikasi yang ada.</string>
+    <string name="export">Ekspor</string>
+    <string name="export_log">Ekspor log</string>
+    <string name="enable_request_private_browsing_button">Aktifkan tombol \"Minta penjelajahan pribadi\"</string>
+    <string name="enable_request_private_browsing_button_explainer">Menampilkan tombol di sebelah peramban yang membuka URL yang diklik dalam mode penjelajahan pribadi. Peramban yang didukung: %s</string>
+    <string name="request_private_browsing">Pribadi</string>
+    <string name="log">Log</string>
+    <string name="redact_log">Kurangi isi log (direkomendasikan, menonaktifkan ini dapat membocorkan nama paket dan nama host)</string>
+    <string name="include_settings">Sertakan setelan (direkomendasikan)</string>
+    <string name="include_fingerprint">Sertakan sidik jari perangkat (direkomendasikan)</string>
+    <string name="no_logs_found">Tidak ditemukan log yang lalu!</string>
+    <string name="logs_explainer">Lihat log apl</string>
+    <string name="no_log_entries">Sesi ini tidak berisi log apa pun.</string>
+    <string name="log_privacy">Untuk mempelajari tentang privasi log, Anda bisa mengunjungi <annotation url-id="privacy-logs">tautan</annotation> ini.</string>
 </resources>

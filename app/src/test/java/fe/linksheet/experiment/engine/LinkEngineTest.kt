@@ -9,6 +9,7 @@ import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.std.time.unixMillisOf
+import fe.std.uri.toStdUrlOrThrow
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -58,10 +59,11 @@ internal class LinkEngineTest : BaseLinkEngineTest() {
             cacheRepository = cacheRepository
         )
 
-        val result = engine.process("https://t.co/Id9w9cFcQw")
+        val result = engine.process("https://t.co/Id9w9cFcQw".toStdUrlOrThrow())
         assertResult(result)
             .isInstanceOf<UrlEngineResult>()
             .prop(UrlEngineResult::url)
+            .transform { it.toString() }
             .isEqualTo("https://www.technologyreview.com/2021/03/26/1021318/google-security-shut-down-counter-terrorist-us-ally/")
     }
 }

@@ -400,17 +400,14 @@ dependencies {
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(KotlinX.serialization.json)
 
-    testImplementation(CashApp.turbine)
-    testImplementation("org.mock-server:mockserver-client-java:_")
-    implementation(platform("org.testcontainers:testcontainers-bom:_"))
-    testImplementation("org.testcontainers:mockserver:_")
-    testImplementation("org.testcontainers:toxiproxy:_")
 
     val commonTestDependencies = arrayOf(
         Koin.test,
         Koin.junit4,
         Koin.android,
         KotlinX.coroutines.test,
+        AndroidX.compose.ui.test.withVersion("1.9.0-alpha01"),
+        AndroidX.compose.ui.testJunit4.withVersion("1.9.0-alpha01"),
         AndroidX.room.testing,
         Grrfe.std.test,
         Grrfe.std.result.assert,
@@ -424,8 +421,9 @@ dependencies {
         testImplementation(notation)
     }
 
-    testImplementation("org.mock-server:mockserver-client-java:_")
+    testImplementation(CashApp.turbine)
     implementation(platform("org.testcontainers:testcontainers-bom:_"))
+    testImplementation("org.mock-server:mockserver-client-java:_")
     testImplementation("org.testcontainers:mockserver:_")
     testImplementation("org.testcontainers:toxiproxy:_")
 
@@ -440,7 +438,6 @@ dependencies {
     androidTestImplementation(AndroidX.test.uiAutomator)
 
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
-
 
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

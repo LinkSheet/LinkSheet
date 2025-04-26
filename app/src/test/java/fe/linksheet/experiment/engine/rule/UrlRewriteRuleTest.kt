@@ -1,9 +1,14 @@
-package fe.linksheet.experiment.engine
+package fe.linksheet.experiment.engine.rule
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
+import fe.linksheet.experiment.engine.EngineResult
+import fe.linksheet.experiment.engine.LinkEngine
+import fe.linksheet.experiment.engine.UrlEngineResult
+import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.std.uri.extension.new
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -12,15 +17,15 @@ import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class LinkEngineUrlRewriteRuleTest : BaseLinkEngineTest() {
+internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<LinkEnginePostProcessorRuleTest>()
-
-    private val hosts = setOf("reddit.com", "www.reddit.com")
-    private val newHost = "old.reddit.com"
+    private val testPrintLogger = createTestEngineLogger<UrlRewriteRuleTest>()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/407
     private val rule = object : PostprocessorRule {
+        private val hosts = setOf("reddit.com", "www.reddit.com")
+        private val newHost = "old.reddit.com"
+
         override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
             val url = input.resultUrl
             if (url.host !in hosts) return UrlEngineResult(url)

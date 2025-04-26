@@ -1,13 +1,19 @@
-package fe.linksheet.experiment.engine
+package fe.linksheet.experiment.engine.rule
 
 import assertk.Assert
 import assertk.assertThat
 import fe.linksheet.DatabaseTest
+import fe.linksheet.experiment.engine.ContextualEngineResult
+import fe.linksheet.experiment.engine.EngineLogger
+import fe.linksheet.experiment.engine.EngineResult
+import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.step.EngineStepId
+import fe.linksheet.experiment.engine.step.StepResult
 import fe.linksheet.experiment.engine.modifier.LinkModifier
 import fe.std.uri.StdUrl
 import org.junit.After
 
-abstract class BaseLinkEngineTest : DatabaseTest() {
+abstract class BaseRuleEngineTest : DatabaseTest() {
     inline fun <reified T> createTestEngineLogger() = object : EngineLogger(T::class.simpleName!!) {
         override fun debug(message: () -> String) {
             println(message())
@@ -45,6 +51,6 @@ object TestEngineRunContext : EngineRunContext {
 
 }
 
-suspend fun <R> withTestRunContext(block: suspend EngineRunContext.() -> R): R {
-    return TestEngineRunContext.block()
+suspend fun <T, R> withTestRunContext(it: T, block: suspend T.(EngineRunContext) -> R): R {
+    return it.block(TestEngineRunContext)
 }

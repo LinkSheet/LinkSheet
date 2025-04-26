@@ -1,7 +1,7 @@
 package fe.linksheet.experiment.engine.resolver
 
-import fe.linksheet.experiment.engine.EngineStep
-import fe.linksheet.experiment.engine.StepResult
+import fe.linksheet.experiment.engine.step.EngineStep
+import fe.linksheet.experiment.engine.step.StepResult
 import fe.std.uri.StdUrl
 
 interface LinkResolver : EngineStep<ResolveOutput> {

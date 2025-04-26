@@ -4,6 +4,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
+import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
+import fe.linksheet.experiment.engine.context.SourceAppExtra
 import fe.linksheet.experiment.engine.rule.BaseRuleEngineTest
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
@@ -61,6 +63,31 @@ internal class LinkEngineTest : BaseRuleEngineTest() {
         )
 
         val result = engine.process("https://t.co/Id9w9cFcQw".toStdUrlOrThrow())
+        assertResult(result)
+            .isInstanceOf<UrlEngineResult>()
+            .prop(UrlEngineResult::url)
+            .transform { it.toString() }
+            .isEqualTo("https://www.technologyreview.com/2021/03/26/1021318/google-security-shut-down-counter-terrorist-us-ally/")
+    }
+
+    @Test
+    fun test2() = runTest(dispatcher) {
+        val httpClient = HttpClient(OkHttp)
+
+        val engine = DefaultLinkEngine(
+            ioDispatcher = dispatcher,
+            client = httpClient,
+            libRedirectResolver = LibRedirectResolver(
+                defaultRepository = defaultRepository,
+                stateRepository = stateRepository
+            ),
+            cacheRepository = cacheRepository
+        )
+
+        val url = "https://t.co/Id9w9cFcQw".toStdUrlOrThrow()
+        val extra = SourceAppExtra("com.google.chrome")
+        val context = DefaultEngineRunContext(extra)
+        val result = engine.process(url, context)
         assertResult(result)
             .isInstanceOf<UrlEngineResult>()
             .prop(UrlEngineResult::url)

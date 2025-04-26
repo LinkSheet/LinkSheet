@@ -8,7 +8,7 @@ import fe.std.result.isFailure
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class PreviewLinkFetcher(
+data class PreviewLinkFetcher(
     private val source: PreviewSource,
     private val cacheRepository: CacheRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,

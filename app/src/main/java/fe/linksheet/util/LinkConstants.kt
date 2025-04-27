@@ -40,7 +40,7 @@ class LinkSheetLinkTags(
 
     override fun getById(id: String): String? {
         val newId = deprecated[id]
-        if(newId != null) return getById(newId)
+        if (newId != null) return getById(newId)
         return urlIds[id]
     }
 }
@@ -58,17 +58,30 @@ object LinkSheet {
     val Wiki = "$Repo/wiki"
     val WikiDeviceIssuesXiaomi = "${Wiki}/Device%E2%80%90specific-issues#xiaomimiui"
 
+    val WikiDeviceIssuesXiaomi2 = WikiPage(
+        "LinkSheet",
+        "LinkSheet",
+        "Device‐specific-issues",
+        id = "xiaomimiui"
+    )
+
     val WikiExperiments = WikiPage(
         "LinkSheet",
         "LinkSheet",
         "Changelog-(Experiments)",
-        R.string.settings_main_experiment_changelog__title_changelog
+        customTitle = R.string.settings_main_experiment_changelog__title_changelog
     )
 
     val CompatReleases = "$Org/compat/releases"
 }
 
-class WikiPage(val org: String, val repo: String, val page: String, @param:StringRes val customTitle: Int? = null) {
+class WikiPage(
+    val org: String,
+    val repo: String,
+    val page: String,
+    val id: String? = null,
+    @param:StringRes val customTitle: Int? = null
+) {
     val url = "https://github.com/$org/$repo/wiki/$page"
     val rawUrl = "https://raw.githubusercontent.com/wiki/$org/$repo/$page.md"
 }

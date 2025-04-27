@@ -40,9 +40,7 @@ val HttpModule = module {
     single<HttpClient> {
         HttpClient(OkHttp) {
             engine { preconfigured = get<OkHttpClient>() }
-            install(ContentNegotiation) {
-                gson()
-            }
+            install(ContentNegotiation) { gson() }
             install(ContentEncoding) {
                 deflate(1.0F)
                 gzip(0.9F)

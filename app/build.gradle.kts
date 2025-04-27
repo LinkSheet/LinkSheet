@@ -320,6 +320,7 @@ dependencies {
     implementation(JetBrains.ktor.client.logging)
     implementation(JetBrains.ktor.client.contentNegotiation)
     implementation(JetBrains.ktor.client.json)
+    implementation(JetBrains.ktor.client.encoding)
     implementation(JetBrains.ktor.plugins.serialization.gson)
     implementation("io.ktor:ktor-client-okhttp-jvm:_")
     testImplementation(JetBrains.ktor.client.mock)

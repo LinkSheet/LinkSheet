@@ -136,16 +136,19 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             }
 
             if (showMiuiAlert) {
-                MiuiCompatCardWrapper(onClick = {
-                    coroutineScope.launch {
-                        if (!viewModel.updateMiuiAutoStartAppOp(activity)) {
-                            activity?.showToast(
-                                textId = R.string.settings_main_miui_compat__text_request_failed,
-                                duration = Toast.LENGTH_LONG
-                            )
+                MiuiCompatCardWrapper(
+                    navigate = navController::navigate,
+                    onClick = {
+                        coroutineScope.launch {
+                            if (!viewModel.updateMiuiAutoStartAppOp(activity)) {
+                                activity?.showToast(
+                                    textId = R.string.settings_main_miui_compat__text_request_failed,
+                                    duration = Toast.LENGTH_LONG
+                                )
+                            }
                         }
                     }
-                })
+                )
             }
 
             if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {

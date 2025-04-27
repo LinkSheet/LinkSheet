@@ -3,14 +3,14 @@ package fe.linksheet
 import android.net.Uri
 import android.net.compatHost
 import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.util.web.HostUtil
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class HostPublicityTest : UnitTest {
     companion object {

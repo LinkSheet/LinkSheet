@@ -6,7 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
-import org.robolectric.RuntimeEnvironment
 
 interface BaseUnitTest : KoinTest {
     @After
@@ -25,9 +24,4 @@ interface UnitTest : BaseUnitTest {
     val applicationContext: Context
         get() = targetContext.applicationContext
 
-}
-
-interface RobolectricTest : BaseUnitTest {
-    val context: Context
-        get() = RuntimeEnvironment.getApplication().applicationContext
 }

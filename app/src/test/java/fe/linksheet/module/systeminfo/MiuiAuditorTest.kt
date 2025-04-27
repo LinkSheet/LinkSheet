@@ -1,29 +1,17 @@
 package fe.linksheet.module.systeminfo
 
-import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.RobolectricTest
+import fe.linksheet.UnitTest
 import fe.linksheet.module.devicecompat.miui.MiuiAuditor
-import fe.linksheet.module.systeminfo.device.Device
-import fe.linksheet.module.systeminfo.device.Xiaomi11TPro_A13
-import fe.linksheet.module.systeminfo.device.XiaomiMi5C
-import fe.linksheet.module.systeminfo.device.XiaomiRedmi2a
-import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A14
-import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A15
-import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote3
-import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote4
+import fe.linksheet.module.systeminfo.device.*
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.ConscryptMode
 import kotlin.test.Test
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-@ConscryptMode(ConscryptMode.Mode.OFF)
-internal class MiuiAuditorTest : RobolectricTest {
+@RunWith(AndroidJUnit4::class)
+internal class MiuiAuditorTest : UnitTest {
 
     @Test
     fun test() {
@@ -74,7 +62,7 @@ internal class MiuiAuditorTest : RobolectricTest {
                 val infoService = SystemInfoService(device)
 
                 val auditor = MiuiAuditor(infoService)
-                val audit = auditor.audit(context)
+                val audit = auditor.audit(applicationContext)
 
                 assertThat(audit.deviceInfo).isEqualTo(expectedDeviceInfo)
                 assertThat(audit.miui).isEqualTo(expectedMiui)

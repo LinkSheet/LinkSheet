@@ -26,6 +26,7 @@ import fe.linksheet.debug.activity.LocaleDebugActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
 import fe.linksheet.extension.compose.dashedBorder
 import fe.linksheet.module.debug.DebugMenuSlotProvider
+import fe.linksheet.module.remoteconfig.RemoteAssetFetcherWorker
 import fe.linksheet.navigation.Routes
 import kotlin.reflect.KClass
 
@@ -43,7 +44,15 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                if(activity != null) {
+                if (activity != null) {
+                    item(key = "remoteconfig-assets") {
+                        DebugMenuButton(
+                            text = "Fetch remote assets",
+                            onClick = {
+                                RemoteAssetFetcherWorker.enqueue(activity)
+                            }
+                        )
+                    }
                     item(key = "component-state") {
                         FilledTonalActivityLauncher(
                             activity = activity,

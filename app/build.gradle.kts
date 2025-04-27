@@ -105,6 +105,7 @@ android {
             )
 
             string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
+            string("API_HOST", localProperties.getOrSystemEnv("API_HOST"))
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -257,8 +258,6 @@ dependencies {
     implementation(Square.okHttp3.coroutines)
 //    implementation(Square.okHttp3.mockWebServer3)
     coreLibraryDesugaring(Android.tools.desugarJdkLibs)
-    implementation("io.ktor:ktor-client-okhttp-jvm:_")
-//    implementation(platform(AndroidX.compose.bom))
     implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.foundation)
     implementation(AndroidX.compose.ui)
@@ -283,6 +282,8 @@ dependencies {
 
     implementation(AndroidX.webkit)
     implementation(AndroidX.browser)
+    implementation(AndroidX.work.runtimeKtx)
+    testImplementation(AndroidX.work.testing)
 
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
@@ -295,6 +296,7 @@ dependencies {
 
     implementation(Koin.android)
     implementation(Koin.compose)
+    implementation(Koin.workManager)
     implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
     implementation("io.coil-kt.coil3:coil-compose:_")
@@ -315,8 +317,12 @@ dependencies {
     implementation(JetBrains.ktor.client.gson)
     implementation(JetBrains.ktor.client.okHttp)
     implementation(JetBrains.ktor.client.android)
-    implementation(JetBrains.ktor.client.mock)
     implementation(JetBrains.ktor.client.logging)
+    implementation(JetBrains.ktor.client.contentNegotiation)
+    implementation(JetBrains.ktor.client.json)
+    implementation(JetBrains.ktor.plugins.serialization.gson)
+    implementation("io.ktor:ktor-client-okhttp-jvm:_")
+    testImplementation(JetBrains.ktor.client.mock)
 
     implementation(platform(Grrfe.std.bom))
     androidTestImplementation(platform(Grrfe.std.bom))

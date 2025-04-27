@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildsettings.config.GradlePluginPortalRepository
@@ -16,24 +18,21 @@ pluginManagement {
 
     plugins {
         id("de.fayard.refreshVersions") version "0.60.5"
+        id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
         id("com.android.library")
         id("org.jetbrains.kotlin.android")
-        id("net.nemerosa.versioning") version "3.1.0"
+        id("net.nemerosa.versioning")
         id("androidx.navigation.safeargs") version "2.8.2"
     }
 
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
-            val plugins = arrayOf(
-                "build-settings-plugin" to "build-settings",
-                "build-logic-plugin" to "build-logic",
-                "new-build-logic-plugin" to "new-build-logic",
-                "library-build-plugin" to "new-build-logic"
-            ).associate { (artifact, project) ->
-                "com.gitlab.grrfe.$artifact" to "com.gitlab.grrfe.gradle-build:$project"
-            }
-
+            val plugins = extra.properties["gradle.build.plugins"]
+                .toString().trim().split(",")
+                .map { it.trim().split("=") }
+                .filter { it.size == 2 }
+                .associate { it[0] to it[1] }
             resolutionStrategy {
                 eachPlugin {
                     plugins[requested.id.id]?.let { useModule("$it:$gradleBuildVersion") }
@@ -45,8 +44,8 @@ pluginManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
     id("de.fayard.refreshVersions")
+    id("org.gradle.toolchains.foojay-resolver-convention")
     id("com.gitlab.grrfe.build-settings-plugin")
 }
 

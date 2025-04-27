@@ -7,6 +7,11 @@ import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.withStatsTag
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
+import io.ktor.client.plugins.compression.ContentEncoding
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.gson.gson
 import me.saket.unfurl.Unfurler
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -31,6 +36,18 @@ val HttpModule = module {
             .followRedirects(true)
             .followSslRedirects(true)
             .build()
+    }
+    single<HttpClient> {
+        HttpClient(OkHttp) {
+            engine { preconfigured = get<OkHttpClient>() }
+            install(ContentNegotiation) {
+                gson()
+            }
+            install(ContentEncoding) {
+                deflate(1.0F)
+                gzip(0.9F)
+            }
+        }
     }
     single<ImageLoader> {
         // There's probably a better way to do this

@@ -14,17 +14,14 @@ import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.DrawableIconPainter.Companion.drawable
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.span.helper.LocalLinkTags
 import fe.composekit.component.CommonDefaults
 import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.linksheet.*
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.util.GmsFlagsRepo
-import fe.linksheet.util.MastodonRedirectRepo
-import fe.linksheet.util.OpenLinkWithRepo
-import fe.linksheet.util.SealRepo
-
+import fe.linksheet.extension.openUri
 
 internal object NewCreditsSettingsRouteData {
     val apps = arrayOf(
@@ -32,25 +29,25 @@ internal object NewCreditsSettingsRouteData {
             drawable(R.drawable.app_openlinkwith),
             textContent(R.string.open_link_with),
             textContent(R.string.open_link_with_subtitle_2),
-            additional = OpenLinkWithRepo
+            additional = "github.repository.openlinkwith"
         ),
         ListItemData(
             drawable(R.drawable.app_mastodonredirect),
             textContent(R.string.mastodon_redirect),
             textContent(R.string.mastodon_redirect_subtitle_2),
-            additional = MastodonRedirectRepo
+            additional = "github.repository.mastodonredirect"
         ),
         ListItemData(
             drawable(R.drawable.app_seal),
             textContent(R.string.settings_credits__app_name_seal),
             textContent(R.string.settings_credits__app_credit_reason_seal),
-            additional = SealRepo
+            additional = "github.repository.seal"
         ),
         ListItemData(
             drawable(R.drawable.app_gmsflags),
             textContent(R.string.settings_credits__app_name_gmsflags),
             textContent(R.string.settings_credits__app_credit_reason_gmsflags),
-            additional = GmsFlagsRepo
+            additional = "github.repository.gmsflags"
         )
     )
 }
@@ -58,6 +55,7 @@ internal object NewCreditsSettingsRouteData {
 @Composable
 fun NewCreditsSettingsRoute(onBackPressed: () -> Unit) {
     val interaction = LocalHapticFeedbackInteraction.current
+    val linkTags = LocalLinkTags.current
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.credits), onBackPressed = onBackPressed) {
         group(array = NewCreditsSettingsRouteData.apps) { app, padding, shape ->
@@ -78,7 +76,7 @@ fun NewCreditsSettingsRoute(onBackPressed: () -> Unit) {
                     }
                 },
                 onClick = {
-                    interaction.openUri(app.additional!!, FeedbackType.LongPress)
+                    interaction.openUri(linkTags, app.additional!!, FeedbackType.LongPress)
                 }
             )
         }

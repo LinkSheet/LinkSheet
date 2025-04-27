@@ -1,33 +1,56 @@
 package fe.linksheet.util
 
+import android.util.Log
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Immutable
 import fe.android.span.helper.LinkTags
 import fe.linksheet.R
 
-object LinkConstants {
-    val tags = LinkTags(
-        urlIds = mapOf(
-            "fastforward-github" to FastForwardRepo,
-            "clearurls-github" to ClearURLsOrg,
-            "supabase-privacy" to "https://supabase.com/privacy",
-            "aptabase" to "https://aptabase.com",
-            "libredirect-github" to LibRedirectRepo,
-            "privacy-logs" to "${LinkSheet.Wiki}/Privacy#logs",
-            "privacy-exports" to "${LinkSheet.Wiki}/Privacy#exports",
-            "privacy-telemetry" to "${LinkSheet.Wiki}/Privacy#telemetry",
-            "privacy-amp2html" to "${LinkSheet.Wiki}/Privacy#amp2html",
-            "privacy-follow-redirects" to "${LinkSheet.Wiki}/Privacy#follow-redirects",
-            "privacy-downloader" to "${LinkSheet.Wiki}/Privacy#downloader",
-            "device-issues-xiaomi" to LinkSheet.WikiDeviceIssuesXiaomi
-        )
+@Immutable
+class LinkSheetLinkTags(
+    val urlAnnotationKey: String = "url",
+    val urlIdAnnotationKey: String = "url-id",
+    private val urlIds: LinkAssets
+) : LinkTags {
+    private val deprecated = mapOf(
+        "fastforward-github" to "github.repository.fastforward",
+        "clearurls-github" to "github.org.clearurls",
+        "supabase-privacy" to "web.supabase.privacy",
+        "aptabase" to "web.aptabase",
+        "libredirect-github" to "github.repository.libredirect",
+        "privacy-logs" to "github.linksheet.wiki.privacy.logs",
+        "privacy-exports" to "github.linksheet.wiki.privacy.exports",
+        "privacy-telemetry" to "github.linksheet.wiki.privacy.telemetry",
+        "privacy-amp2html" to "github.linksheet.wiki.privacy.amp2html",
+        "privacy-follow-redirects" to "github.linksheet.wiki.privacy.follow-redirects",
+        "privacy-downloader" to "github.linksheet.wiki.privacy.downloader",
+        "device-issues-xiaomi" to "github.linksheet.wiki.device-issues.xiaomi"
     )
+
+    override fun get(key: String, value: String): String? {
+        Log.d("LinkSheetLinkTags", "Looking up $key, $value")
+        val link = when (key) {
+            urlAnnotationKey -> value
+            urlIdAnnotationKey -> getById(value)
+            else -> return null
+        }
+
+        return link
+    }
+
+    override fun getById(id: String): String? {
+        val newId = deprecated[id]
+        if(newId != null) return getById(newId)
+        return urlIds[id]
+    }
 }
+
+typealias LinkAssets = Map<String, String>
 
 fun Github(user: String, repo: String? = null): String {
     val repoStr = repo?.let { "/$it" } ?: ""
     return "https://github.com/$user$repoStr"
 }
-
 
 object LinkSheet {
     val Org = Github("LinkSheet")
@@ -35,22 +58,20 @@ object LinkSheet {
     val Wiki = "$Repo/wiki"
     val WikiDeviceIssuesXiaomi = "${Wiki}/Device%E2%80%90specific-issues#xiaomimiui"
 
-    val WikiExperiments = WikiPage("LinkSheet", "LinkSheet", "Changelog-(Experiments)", R.string.settings_main_experiment_changelog__title_changelog)
+    val WikiExperiments = WikiPage(
+        "LinkSheet",
+        "LinkSheet",
+        "Changelog-(Experiments)",
+        R.string.settings_main_experiment_changelog__title_changelog
+    )
 
     val CompatReleases = "$Org/compat/releases"
 }
 
-class WikiPage(val org: String, val repo: String, val page: String, @StringRes val customTitle: Int? = null) {
+class WikiPage(val org: String, val repo: String, val page: String, @param:StringRes val customTitle: Int? = null) {
     val url = "https://github.com/$org/$repo/wiki/$page"
     val rawUrl = "https://raw.githubusercontent.com/wiki/$org/$repo/$page.md"
 }
 
-val OpenLinkWithRepo = Github("tasomaniac", "OpenLinkWith")
-val MastodonRedirectRepo = Github("zacharee", "MastodonRedirect")
-val SealRepo = Github("JunkFood02", "Seal")
-val GmsFlagsRepo = Github("polodarb", "GMS-Flags")
-val LibRedirectRepo = Github("libredirect", "libredirect")
-val ClearURLsOrg = Github("ClearURLs")
-val FastForwardRepo = Github("FastForwardTeam", "FastForward")
 
 const val ShizukuDownload = "https://shizuku.rikka.app/download"

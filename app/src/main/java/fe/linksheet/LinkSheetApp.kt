@@ -39,6 +39,7 @@ import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
+import fe.linksheet.module.remoteconfig.RemoteAssetFetcherModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
@@ -53,6 +54,7 @@ import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -99,6 +101,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             androidLogger()
             androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
+            workManagerFactory()
             modules(koinModules)
         }
 
@@ -120,6 +123,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             databaseModule,
             daoModule,
             HttpModule,
+            RemoteAssetFetcherModule,
             redirectResolveRequestModule,
             amp2HtmlResolveRequestModule,
             allRemoteResolveRequest,

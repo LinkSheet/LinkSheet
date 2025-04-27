@@ -165,4 +165,12 @@
     <string name="logs_explainer">Lihat log apl</string>
     <string name="no_log_entries">Sesi ini tidak berisi log apa pun.</string>
     <string name="log_privacy">Untuk mempelajari tentang privasi log, Anda bisa mengunjungi <annotation url-id="privacy-logs">tautan</annotation> ini.</string>
+    <string name="enable_all">Aktifkan semua</string>
+    <string name="disable_all">Matikan semua</string>
+    <string name="shizuku_integration_enabled_explainer">Integrasi Shizuku telah berhasil diaktifkan!</string>
+    <string name="shizuku_integration_no_permission_explainer">Klik disini untuk meminta izin Shizuku.</string>
+    <string name="shizuku_integration_not_setup_explainer">Meskipun tidak sepenuhnya diperlukan LinkSheet untuk berfungsi, Shizuku direkomendasikan. Klik disini untuk memasang.</string>
+    <string name="shizuku_integration">Integrasi Shizuku</string>
+    <string name="feature_flags_explainer">Aktifkan atau matikan fitur eksperimental</string>
+    <string name="shizuku_not_running_explainer">Shizuku tidak berjalan. Klik disini untuk membuka Shizuku, lalu ikuti panduan untuk menjalankannya.</string>
 </resources>

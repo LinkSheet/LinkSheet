@@ -542,4 +542,5 @@
     <string name="settings_language__dialog_title">App language</string>
     <string name="settings_language__text_system_language_with_language">%s (system language)</string>
     <string name="settings_language__text_system_language">System language</string>
+    <string name="generic__button_open_external">Open externally</string>
 </resources>

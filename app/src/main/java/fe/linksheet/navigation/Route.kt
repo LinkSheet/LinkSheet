@@ -92,9 +92,10 @@ data class TextEditorRoute(val text: String) : Route
 data class MarkdownViewerRoute(
     val title: String,
     val url: String,
-    @StringRes val customTitle: Int? = null,
+    val rawUrl: String = url,
+    @param:StringRes val customTitle: Int? = null,
 ) : Route {
-    constructor(wikiPage: WikiPage) : this(wikiPage.page, wikiPage.rawUrl, wikiPage.customTitle)
+    constructor(wikiPage: WikiPage) : this(wikiPage.page, wikiPage.url, wikiPage.rawUrl, wikiPage.customTitle)
 }
 
 @Keep

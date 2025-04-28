@@ -99,7 +99,12 @@ fun MainNavHost(
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
-            MarkdownViewerWrapper(onBackPressed = onBackPressed, title = titleStr, url = route.url)
+            MarkdownViewerWrapper(
+                title = titleStr,
+                url = route.url,
+                rawUrl = route.rawUrl,
+                onBackPressed = onBackPressed
+            )
         }
 
         animatedComposable<ExperimentRoute> { _, route ->

@@ -3,22 +3,30 @@ package fe.linksheet.composable.page.mdviewer
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.jeziellago.compose.markdowntext.MarkdownText
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
-import fe.linksheet.composable.component.appbar.SaneLargeTopAppBar
+import fe.linksheet.R
+import fe.linksheet.composable.component.appbar.SaneSmallTopAppBar
 import fe.linksheet.composable.ui.PreviewTheme
+import fe.linksheet.composable.util.debugBorder
+import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.viewmodel.MarkdownViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -26,38 +34,60 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarkdownViewerWrapper(
-    onBackPressed: () -> Unit,
     title: String,
     url: String,
+    rawUrl: String = url,
+    onBackPressed: () -> Unit,
     viewModel: MarkdownViewModel = koinViewModel(),
 ) {
-    var markdown by remember(url) { mutableStateOf<String?>(null) }
+    var markdown by remember(rawUrl) { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(key1 = url) {
-        markdown = viewModel.fetch(url)
+    LaunchedEffect(key1 = rawUrl) {
+        markdown = viewModel.fetch(rawUrl)
     }
 
-    MarkdownViewer(onBackPressed = onBackPressed, title = title, markdown = markdown)
+    val handler = LocalUriHandler.current
+    MarkdownViewer(
+        title = title,
+        markdown = markdown,
+        onBackPressed = onBackPressed,
+        onOpenExternally = {
+            handler.openUri(url)
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MarkdownViewer(
-    onBackPressed: () -> Unit,
     title: String,
     markdown: String? = null,
+    onBackPressed: () -> Unit,
+    onOpenExternally: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(
         rememberTopAppBarState(),
-        canScroll = { true }
+        canScroll = { false }
     )
 
+    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     SaneSettingsScaffold(
         topBar = {
-            SaneLargeTopAppBar(
+            SaneSmallTopAppBar(
                 headline = title,
                 enableBackButton = true,
                 onBackPressed = onBackPressed,
+                actions = {
+                    IconButton(
+                        modifier = Modifier.debugBorder(debug.value, 1.dp, Color.Red),
+                        onClick = onOpenExternally
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                            contentDescription = stringResource(R.string.generic__button_open_external),
+                        )
+                    }
+                },
                 scrollBehavior = scrollBehavior
             )
         }
@@ -208,9 +238,10 @@ private fun PreviewText(
 
     PreviewTheme {
         MarkdownViewer(
-            onBackPressed = {},
             title = title,
-            markdown = markdown
+            markdown = markdown,
+            onBackPressed = {},
+            onOpenExternally = {}
         )
     }
 }
@@ -221,9 +252,10 @@ private fun PreviewText(
 private fun PreviewLoading() {
     PreviewTheme {
         MarkdownViewer(
-            onBackPressed = {},
             title = "Experiments",
-            markdown = null
+            markdown = null,
+            onBackPressed = {},
+            onOpenExternally = {}
         )
     }
 }

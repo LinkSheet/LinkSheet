@@ -22,10 +22,14 @@ import kotlin.reflect.KProperty0
 //)
 
 val HkGroteskFontFamily = FontFamily(
-    Font(R.font.hkgroteskregular),
-    Font(R.font.hkgroteskmedium, FontWeight.Medium),
-    Font(R.font.hkgrotesksemibold, FontWeight.SemiBold),
-    Font(R.font.hkgroteskbold, FontWeight.Bold)
+//    Font(resId = R.font.hankengrotesk),
+//    Font(resId = R.font.hankengrotesk, weight = FontWeight.Medium),
+//    Font(resId = R.font.hankengrotesk, weight = FontWeight.SemiBold),
+//    Font(resId = R.font.hankengrotesk, weight = FontWeight.Bold)
+    Font(resId = R.font.hkgroteskregular, weight = FontWeight.Normal),
+    Font(resId = R.font.hkgroteskmedium, weight = FontWeight.Medium),
+    Font(resId = R.font.hkgrotesksemibold, weight = FontWeight.SemiBold),
+    Font(resId = R.font.hkgroteskbold, weight = FontWeight.Bold)
 )
 
 val PoppinsFontFamily = FontFamily(
@@ -39,7 +43,10 @@ val PoppinsFontFamily = FontFamily(
 
 val NewDefaultTypography = Typography()
 
-val HkGroteskSemiBold = TextStyle(fontFamily = HkGroteskFontFamily, fontWeight = FontWeight.SemiBold)
+val HkGroteskSemiBold = TextStyle(
+    fontFamily = HkGroteskFontFamily,
+    fontWeight = FontWeight.SemiBold
+)
 
 val DialogTitleStyle = TextStyle(
     fontFamily = HkGroteskFontFamily,
@@ -57,6 +64,24 @@ val DialogTitleStyle = TextStyle(
 // bodyMedium
 
 // Set of Material typography styles to start with
+//val TitleMedium = DefaultTextStyle.copy(
+//    fontFamily = TypeScaleTokens.TitleMediumFont,
+//    fontWeight = TypeScaleTokens.TitleMediumWeight,
+//    fontSize = TypeScaleTokens.TitleMediumSize,
+//    lineHeight = TypeScaleTokens.TitleMediumLineHeight,
+//    letterSpacing = TypeScaleTokens.TitleMediumTracking,
+//)
+
+// TypefaceTokens
+//val Plain = FontFamily.SansSerif
+// TypeTokens
+//val WeightMedium = FontWeight.Medium
+
+//val TitleMediumFont = TypefaceTokens.Plain
+//val TitleMediumLineHeight = 24.0.sp
+//val TitleMediumSize = 16.sp
+//val TitleMediumTracking = 0.2.sp
+//val TitleMediumWeight = TypefaceTokens.WeightMedium
 val NewTypography = Typography(
     titleLarge = NewDefaultTypography.titleLarge.merge(HkGroteskSemiBold).copy(
 //        fontFamily = HkGroteskFontFamily,
@@ -67,6 +92,7 @@ val NewTypography = Typography(
     titleMedium = NewDefaultTypography.titleMedium.merge(HkGroteskSemiBold).copy(
         fontSize = 16.sp,
         lineHeight = 22.sp
+//        lineHeight = 24.sp
     ),
     titleSmall = NewDefaultTypography.titleSmall.merge(HkGroteskSemiBold).copy(
 //        fontFamily = HkGroteskFontFamily,

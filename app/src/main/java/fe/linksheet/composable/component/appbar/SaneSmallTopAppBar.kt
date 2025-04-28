@@ -1,5 +1,6 @@
 package fe.linksheet.composable.component.appbar
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -14,7 +15,8 @@ fun SaneSmallTopAppBar(
     headline: String?,
     enableBackButton: Boolean,
     onBackPressed: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
+    actions: @Composable RowScope.() -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior?,
 ) {
     val title = rememberOptionalContent(headline) {
         SaneAppBarTitle(headline = it)
@@ -28,6 +30,7 @@ fun SaneSmallTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         title = title ?: {},
         navigationIcon = navigationIcon ?: {},
-        scrollBehavior = scrollBehavior
+        scrollBehavior = scrollBehavior,
+        actions = actions,
     )
 }

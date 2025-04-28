@@ -14,19 +14,22 @@ import fe.linksheet.composable.ui.HkGroteskFontFamily
 
 
 @Composable
-fun SaneAppBarTitle(headline: String) {
+fun SaneAppBarTitle(modifier: Modifier = Modifier, headline: String) {
     Text(
-        modifier = Modifier,
+        modifier = modifier,
+//        modifier = modifier.offset(y = (-1).dp),
         text = headline,
         fontFamily = HkGroteskFontFamily,
         fontWeight = FontWeight.SemiBold
     )
 }
 
-
 @Composable
-fun SaneAppBarBackButton(onBackPressed: () -> Unit) {
-    IconButton(onClick = onBackPressed) {
+fun SaneAppBarBackButton(
+    modifier: Modifier = Modifier,
+    onBackPressed: () -> Unit
+) {
+    IconButton(modifier = modifier, onClick = onBackPressed) {
         Icon(
             imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
             contentDescription = stringResource(R.string.back),

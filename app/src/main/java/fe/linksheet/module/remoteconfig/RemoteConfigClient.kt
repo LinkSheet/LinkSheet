@@ -57,14 +57,14 @@ class RemoteConfigClient(
 }
 
 class RemoteAssetFetcherWorker(
-    private val fetcher: RemoteConfigClient,
+    private val client: RemoteConfigClient,
     private val repository: RemoteConfigRepository,
     context: Context,
     parameters: WorkerParameters
 ) : CoroutineWorker(context, parameters) {
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
-        val result = tryCatch { fetcher.fetchLinkAssets() }
+        val result = tryCatch { client.fetchLinkAssets() }
         when {
             result.isFailure() -> Result.failure()
             else -> {
@@ -80,10 +80,8 @@ class RemoteAssetFetcherWorker(
         }
 
         fun build(): OneTimeWorkRequest {
-            val data = workDataOf()
             return OneTimeWorkRequestBuilder<RemoteAssetFetcherWorker>()
                 .setInitialDelay(0, TimeUnit.SECONDS)
-                .setInputData(data)
                 .build()
         }
     }

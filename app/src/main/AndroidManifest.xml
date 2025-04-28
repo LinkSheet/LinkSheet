@@ -104,7 +104,7 @@
                 android:windowSoftInputMode="adjustResize">
         </activity>
         <activity-alias
-                android:name=".intent.send"
+                android:name=".intent.SendIntentHandler"
                 android:exported="true"
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
@@ -114,7 +114,7 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-                android:name=".intent.view"
+                android:name=".intent.ViewIntentHandler"
                 android:exported="true"
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
@@ -129,7 +129,7 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-                android:name=".intent.view.mime"
+                android:name=".intent.ViewIntentWithMimeTypeHandler"
                 android:exported="true"
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
@@ -147,7 +147,7 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-                android:name=".intent.nfc"
+                android:name=".intent.NfcIntentHandler"
                 android:exported="true"
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
@@ -160,7 +160,7 @@
         </activity-alias>
         <activity-alias
                 android:enabled="false"
-                android:name=".intent.search"
+                android:name=".intent.SearchIntentHandler"
                 android:exported="true"
                 android:targetActivity=".activity.BottomSheetActivity">
             <intent-filter>
@@ -169,7 +169,7 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-                android:name=".action.contextmenu"
+                android:name=".action.ContextMenuActionHandler"
                 android:exported="true"
                 android:label="@string/open_with_linksheet"
                 android:targetActivity=".activity.BottomSheetActivity">

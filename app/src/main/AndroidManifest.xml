@@ -24,6 +24,10 @@
     <uses-permission android:name="moe.shizuku.manager.permission.API"/>
     <uses-permission android:name="moe.shizuku.manager.permission.Manager"/>
 
+    <permission android:name="${applicationId}.permission.INTERCONNECT"
+                android:label="@string/generic__label_permission_interconnect"
+                android:protectionLevel="dangerous" />
+
     <application
             android:name=".LinkSheetApp"
             android:allowBackup="true"
@@ -36,8 +40,7 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu">
-        <profileable
-                android:shell="true"/>
+        <profileable android:shell="true"/>
 
         <activity
                 android:name=".activity.onboarding.OnboardingActivity"
@@ -189,10 +192,18 @@
 <!--                <category android:name="androidx.browser.trusted.category.TrustedWebActivities" />-->
             </intent-filter>
         </service>
+
+        <!-- Interconnect -->
         <service android:name=".InterconnectService"
                  android:enabled="true"
                  android:exported="true"
-                 android:foregroundServiceType="specialUse">
+                 tools:ignore="ExportedService">
+        </service>
+        <service android:name=".service.InterconnectService2"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:foregroundServiceType="specialUse"
+                 android:permission="${applicationId}.permission.INTERCONNECT">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -200,6 +211,7 @@
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                       android:value="Binder Transactions"/>
         </service>
+
         <service android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
                  android:enabled="false"
                  android:exported="false">

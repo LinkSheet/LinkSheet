@@ -10,7 +10,7 @@ val ProfileSwitcherModule = module {
         CrossProfileAppsCompat(get())
     }
     single {
-        AndroidProfileSwitcherModule(
+        AndroidProfileSwitcher(
             appLabel = getResources().getString(string.app_name),
             crossProfileAppsCompat = get(),
             userManager = getSystemServiceOrThrow()

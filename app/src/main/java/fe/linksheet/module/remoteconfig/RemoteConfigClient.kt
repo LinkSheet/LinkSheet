@@ -23,7 +23,7 @@ import org.koin.dsl.module
 import java.util.concurrent.TimeUnit
 
 
-val RemoteAssetFetcherModule = module {
+val RemoteConfigClientModule = module {
     includes(HttpModule)
     singleOf(::RemoteConfigRepository)
     single { AndroidRemoteConfigClient(get()) }

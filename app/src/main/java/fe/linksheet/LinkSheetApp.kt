@@ -39,7 +39,7 @@ import fe.linksheet.module.paste.pasteServiceModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
-import fe.linksheet.module.remoteconfig.RemoteAssetFetcherModule
+import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
@@ -123,7 +123,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             databaseModule,
             daoModule,
             HttpModule,
-            RemoteAssetFetcherModule,
+            RemoteConfigClientModule,
             redirectResolveRequestModule,
             amp2HtmlResolveRequestModule,
             allRemoteResolveRequest,

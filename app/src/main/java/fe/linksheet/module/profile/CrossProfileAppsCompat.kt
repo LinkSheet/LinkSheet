@@ -13,7 +13,7 @@ import fe.android.version.AndroidVersion
 
 interface CrossProfileAppsCompat {
     fun getProfileInfo(userHandle: UserHandle): ProfileInfoCompat = UnsupportedProfileInfoCompat
-    fun getTargetUserProfiles(): List<UserHandle> = emptyList<UserHandle>()
+    fun getTargetUserProfiles(): List<UserHandle> = emptyList()
     fun canInteractAcrossProfiles(): Boolean = false
     fun canRequestInteractAcrossProfiles(): Boolean = false
     fun createRequestInteractAcrossProfilesIntent(): Intent? = null
@@ -76,6 +76,5 @@ private object CrossProfileAppsCompatImpl {
 }
 
 sealed interface ProfileInfoCompat
-
 data class RealProfileInfoCompat(val label: String, val drawable: Drawable) : ProfileInfoCompat
 data object UnsupportedProfileInfoCompat : ProfileInfoCompat

@@ -2,7 +2,6 @@ package fe.linksheet.module.profile
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.UserHandle
 import android.os.UserHandleHidden
 import android.os.UserManager
@@ -10,8 +9,10 @@ import androidx.compose.ui.graphics.ImageBitmap
 import dev.rikka.tools.refine.Refine
 import fe.android.version.AndroidVersion
 import fe.linksheet.extension.android.toImageBitmap
+import androidx.core.net.toUri
 
-internal fun AndroidProfileSwitcherModule(
+@Suppress("FunctionName")
+internal fun AndroidProfileSwitcher(
     appLabel: String,
     crossProfileAppsCompat: CrossProfileAppsCompat,
     userManager: UserManager
@@ -69,7 +70,7 @@ internal class RealProfileSwitcher(
 
     override fun getUserProfileInfo(status: ProfileStatus): UserProfileInfo? {
         val crossProfiles = getProfiles(status)
-        if(crossProfiles == null) return null
+        if (crossProfiles == null) return null
 
         val profiles = userManagerCompat.getUserProfiles().associateWith { Refine.unsafeCast<UserHandleHidden>(it) }
         val myUserId = userManagerCompat.getMyUserId()
@@ -103,8 +104,8 @@ internal class RealProfileSwitcher(
     }
 
     override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {
-        val switchIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).setComponent(activity.componentName)
-
+        val switchIntent = Intent(Intent.ACTION_VIEW, url.toUri())
+            .setComponent(activity.componentName)
         crossProfileAppsCompat.startActivity(switchIntent, profile.userHandle, activity)
     }
 
@@ -114,13 +115,14 @@ internal class RealProfileSwitcher(
 
     override fun getProfiles(status: ProfileStatus): List<CrossProfile>? {
         if (status !is ProfileStatus.Available) return null
-
-        return status.targetUserProfiles
-            .mapNotNull { toCrossProfile(it) }
+        return status.targetUserProfiles.mapNotNull(::toCrossProfile)
     }
 
     private fun trimLabel(label: String): String {
-        return label.indexOf(appLabel).takeIf { it != -1 }?.let { label.substring(0, it).trim() } ?: label
+        return label.indexOf(appLabel)
+            .takeIf { it != -1 }
+            ?.let { label.substring(0, it).trim() }
+            ?: label
     }
 
     private fun toCrossProfile(handle: UserHandle, id: Int): CrossProfile? {

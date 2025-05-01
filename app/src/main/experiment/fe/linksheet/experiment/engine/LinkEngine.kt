@@ -50,7 +50,8 @@ fun DefaultLinkEngine(
             ),
             LibRedirectLinkModifier(
                 ioDispatcher = ioDispatcher,
-                resolver = libRedirectResolver
+                resolver = libRedirectResolver,
+                useJsEngine = { false }
             ),
             ClearURLsLinkModifier(ioDispatcher = ioDispatcher),
             FollowRedirectsLinkResolver(

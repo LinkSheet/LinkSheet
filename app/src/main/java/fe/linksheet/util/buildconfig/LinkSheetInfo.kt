@@ -7,6 +7,7 @@ import fe.std.javatime.time.ISO8601DateTimeFormatter
 
 
 object LinkSheetInfo {
+    @Deprecated("Switch to SystemInfoService#buildInfo")
     val buildInfo = BuildInfo(
         BuildConfig.VERSION_NAME,
         BuildConfig.VERSION_CODE,

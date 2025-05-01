@@ -2,10 +2,14 @@ package fe.linksheet.module.remoteconfig
 
 import android.content.Context
 import androidx.work.*
+import fe.droidkit.koin.getResources
 import fe.linksheet.BuildConfig
+import fe.linksheet.R.string
 import fe.linksheet.module.http.HttpModule
+import fe.linksheet.module.systeminfo.BuildInfo
+import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.util.LinkAssets
-import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.linksheet.util.maybePrependProtocol
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
@@ -24,19 +28,24 @@ import java.util.concurrent.TimeUnit
 
 
 val RemoteConfigClientModule = module {
-    includes(HttpModule)
+    includes(HttpModule, SystemInfoServiceModule)
     singleOf(::RemoteConfigRepository)
-    single { AndroidRemoteConfigClient(get()) }
+    single {
+        AndroidRemoteConfigClient(
+            appName = getResources().getString(string.app_name),
+            buildInfo = get<SystemInfoService>().buildInfo,
+            client = get(),
+        )
+    }
     workerOf(::RemoteAssetFetcherWorker)
 }
 
 @Suppress("FunctionName")
-internal fun AndroidRemoteConfigClient(client: HttpClient): RemoteConfigClient {
-    val version = LinkSheetInfo.buildInfo.versionName
-    val userAgent = "LinkSheet/$version"
+internal fun AndroidRemoteConfigClient(appName: String, buildInfo: BuildInfo, client: HttpClient): RemoteConfigClient {
+    val version = buildInfo.versionName
     return RemoteConfigClient(
         apiHost = BuildConfig.API_HOST.maybePrependProtocol("https"),
-        userAgent = userAgent,
+        userAgent = "$appName/$version",
         client = client
     )
 }

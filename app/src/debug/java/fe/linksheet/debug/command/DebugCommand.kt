@@ -18,7 +18,8 @@ abstract class DebugCommand<T : DebugCommand<T>>(val action: String, command: KC
             ResetHistoryPreferredAppCommand,
             DumpPreferencesCommand,
             ViewUrlCommand,
-            DumpNavGraphCommand
+            DumpNavGraphCommand,
+            ImportPreferencesCommand,
         ).associateBy { it.action }
 
         fun tryHandle(context: Context, intent: Intent): Boolean {

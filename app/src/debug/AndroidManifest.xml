@@ -46,7 +46,8 @@
 
         <receiver
                 android:name=".debug.DebugBroadcastReceiver"
-                android:exported="true">
+                android:exported="true"
+                tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="fe.linksheet.debug.COPY_URL"/>
                 <action android:name="fe.linksheet.debug.RESOLVE_URL"/>
@@ -56,6 +57,7 @@
                 <action android:name="fe.linksheet.debug.DUMP_PREFERENCES"/>
                 <action android:name="fe.linksheet.debug.VIEW_URL"/>
                 <action android:name="fe.linksheet.debug.DUMP_NAV_GRAPH"/>
+                <action android:name="fe.linksheet.debug.IMPORT_PREFERENCES"/>
             </intent-filter>
         </receiver>
     </application>

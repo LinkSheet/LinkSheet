@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import fe.android.preference.helper.PreferenceDefinition
-import fe.android.preference.helper.PreferenceRepository
-import fe.android.preference.helper.compose.StatePreferenceRepository
 import fe.kotlin.extension.iterable.mapCatching
 import fe.kotlin.extension.iterable.onEachFailure
 import fe.kotlin.extension.iterable.toSuccess
@@ -14,13 +11,10 @@ import fe.linksheet.LinkSheetApp
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.util.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
+import fe.linksheet.debug.module.debug.MergedPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.flags.FeatureFlags
-import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -30,6 +24,15 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
     DebugBroadcastReceiver.UPDATE_PREF_BROADCAST, UpdatePreferenceCommand::class
 ) {
     private val app by inject<LinkSheetApp>()
+    private val repositories by lazy {
+        MergedPreferenceRepository(
+            logger = logger,
+            appPreferenceRepository = get<AppPreferenceRepository>(),
+            featureFlagRepository = get<FeatureFlagRepository>(),
+            experimentRepository = get<ExperimentRepository>(),
+            appStateRepository = get<AppStateRepository>()
+        )
+    }
 
     override fun handle(context: Context, intent: Intent) {
         val extras = requireNotNull(intent.extras) { "Extras must not be null" }
@@ -53,50 +56,10 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
 
     private fun update(extras: Bundle, key: String): String {
         val value = requireNotNull(extras.getString(key)) { "String value for '$key' is null" }
-        val repository = requireNotNull(repositories[key]) { "No repository found for '$key'" }
+        val repository = requireNotNull(repositories.getPreference(key)) { "No repository found for '$key'" }
 
         // TODO: Implement success in pref indicator in pref lib
         repository.set(key, value)
         return value
-    }
-
-    data class Repository(val definition: PreferenceDefinition, val preferenceRepository: PreferenceRepository) {
-        val allPreferences by lazy { definition.all.map { it.key } }
-
-        fun set(key: String, value: String) {
-            val pref = requireNotNull(definition.all[key]) { "'$key' is not defined in '$definition'" }
-            preferenceRepository.setStringValueToPreference(pref, value)
-
-            if (preferenceRepository is StatePreferenceRepository) {
-                preferenceRepository.stateCache.get(key)?.forceRefresh()
-            }
-        }
-    }
-
-    private val repositories by lazy {
-        val repositories = setOf(
-            Repository(AppPreferences, get<AppPreferenceRepository>()),
-            Repository(FeatureFlags, get<FeatureFlagRepository>()),
-            Repository(Experiments, get<ExperimentRepository>()),
-            Repository(AppStatePreferences, get<AppStateRepository>())
-        )
-
-        val merged = mutableMapOf<String, Repository>()
-
-        for (repository in repositories) {
-            for (key in repository.allPreferences) {
-                val existing = merged[key]
-                val putKey = if (existing != null) {
-                    val renamed = "${repository.preferenceRepository::class.java.simpleName}_$key"
-                    logger.error("The key '$key' is present in multiple preference definitions, renaming to $renamed")
-
-                    renamed
-                } else key
-
-                merged[putKey] = repository
-            }
-        }
-
-        merged
     }
 }

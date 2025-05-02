@@ -21,6 +21,7 @@ class DebugBroadcastReceiver : BroadcastReceiver(), KoinComponent {
         const val DUMP_PREFERENCES_BROADCAST = "fe.linksheet.debug.DUMP_PREFERENCES"
         const val VIEW_URL_BROADCAST = "fe.linksheet.debug.VIEW_URL"
         const val DUMP_NAV_GRAPH_BROADCAST = "fe.linksheet.debug.DUMP_NAV_GRAPH"
+        const val IMPORT_PREFERENCES_BROADCAST = "fe.linksheet.debug.IMPORT_PREFERENCES"
     }
 
     override fun onReceive(context: Context, intent: Intent) {

@@ -13,6 +13,7 @@ import fe.std.result.success
 import fe.std.result.tryCatch
 import mozilla.components.support.utils.SafeIntent
 import mozilla.components.support.utils.WebURLFinder
+import androidx.core.net.toUri
 
 object IntentParser : InternalIntentParser()
 
@@ -112,7 +113,7 @@ open class InternalIntentParser internal constructor(
         val str = text.toString()
         if (!UriUtil.isWebStrict(str, allowInsecure)) return Failure(NoUriFoundRecoverableException(str))
 
-        return tryCatch { Uri.parse(str) }.mapFailure {
+        return tryCatch { str.toUri() }.mapFailure {
             NoUriFoundRecoverableException(str, it)
         }
     }
@@ -133,9 +134,12 @@ private val NoUriFoundFailure = Failure<Uri>(NoUriFoundException)
 
 sealed class UriException : Exception()
 
-
 data object NoUriFoundException : UriException() {
     private fun readResolve(): Any = NoUriFoundException
+}
+
+data object UriParseException : UriException() {
+    private fun readResolve(): Any = UriParseException
 }
 
 data class NoUriFoundRecoverableException(val recoverable: String, val wrappedEx: Throwable? = null) : UriException() {

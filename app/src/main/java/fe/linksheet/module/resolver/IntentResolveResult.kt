@@ -32,7 +32,7 @@ sealed interface IntentResolveResult {
     ) : IntentResolveResult {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
 
-        private val referringPackageName = ReferrerHelper.getReferringPackage(referrer)
+        private val referringPackageName = ReferrerHelper.getReferringPackage(referrer)?.packageName
 
         val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
         val app = filteredItem ?: resolved.firstOrNull()

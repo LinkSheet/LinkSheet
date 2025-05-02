@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.engine.context
 
+import fe.linksheet.module.resolver.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import java.util.EnumSet
 
@@ -13,8 +14,8 @@ class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRun
 }
 
 @Suppress("FunctionName")
-fun DefaultEngineRunContext(vararg extras: EngineExtra): EngineRunContext {
-    return DefaultEngineRunContext(extras = extras.toSet())
+fun DefaultEngineRunContext(vararg extras: EngineExtra?): EngineRunContext {
+    return DefaultEngineRunContext(extras = extras.filterNotNull().toSet())
 }
 
 inline fun <reified E : EngineExtra> EngineRunContext.findExtraOrNull(): E? {
@@ -30,3 +31,7 @@ sealed interface EngineExtra {
 }
 
 data class SourceAppExtra(val appPackage: String) : EngineExtra
+
+fun AndroidAppPackage.toSourceAppExtra(): SourceAppExtra {
+    return SourceAppExtra(packageName)
+}

@@ -68,17 +68,18 @@ fun DefaultLinkEngine(
                 cacheRepository = cacheRepository,
                 useLocalCache = { true }
             )
-        )
+        ),
+        dispatcher = ioDispatcher
     )
 
     return pipeline
 }
 
 class LinkEngine(
-    val steps: List<EngineStep<*>>,
-    val rules: List<Rule<*, *>> = emptyList(),
-    val logger: EngineLogger = AndroidEngineLogger("LinkEngine"),
-    val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val steps: List<EngineStep<*>>,
+    private val rules: List<Rule<*, *>> = emptyList(),
+    private val logger: EngineLogger = AndroidEngineLogger("LinkEngine"),
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
     private val scope = CoroutineScope(dispatcher) + CoroutineName("LinkEngine") + CoroutineExceptionHandler { _, e ->
         println(e)

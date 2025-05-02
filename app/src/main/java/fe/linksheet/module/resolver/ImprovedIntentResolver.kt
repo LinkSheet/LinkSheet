@@ -63,7 +63,6 @@ class ImprovedIntentResolver(
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     private val packageInfoService: PackageService,
-    private val packageIntentHandler: PackageIntentHandler,
     private val appSorter: AppSorter,
     private val downloader: Downloader,
     private val redirectUrlResolver: RedirectUrlResolver,
@@ -272,7 +271,7 @@ class ImprovedIntentResolver(
             packageInfoService = packageInfoService,
             uri = uri
         )
-        val resolveList = packageIntentHandler.findHandlers(uri, referringPackage)
+        val resolveList = packageInfoService.findHandlers(uri, referringPackage)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -364,7 +363,7 @@ class ImprovedIntentResolver(
             .cloneIntent(Intent.ACTION_WEB_SEARCH, null, true)
             .putExtra(SearchManager.QUERY, query)
 
-        val resolvedList = packageIntentHandler.findHandlers(newIntent)
+        val resolvedList = packageInfoService.findHandlers(newIntent)
             .map { packageInfoService.toAppInfo(it, true) }
             .labelSorted()
 

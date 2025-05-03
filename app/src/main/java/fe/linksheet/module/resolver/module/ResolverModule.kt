@@ -1,4 +1,5 @@
 @file:OptIn(ExperimentalTime::class)
+@file:OptIn(ExperimentalUuidApi::class)
 
 package fe.linksheet.module.resolver.module
 
@@ -8,6 +9,8 @@ import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.intent.engine.DefaultLinkEngineIntentResolver
+import fe.linksheet.intent.engine.LinkEngineIntentResolver
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -24,6 +27,7 @@ import fe.linksheet.module.resolver.util.IntentLauncher
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
+import kotlin.uuid.ExperimentalUuidApi
 
 val resolverModule = module {
     single { BrowserResolver(getPackageManager(), get()) }
@@ -54,14 +58,18 @@ val resolverModule = module {
     singleOf(::LibRedirectResolver)
     single<IntentResolver> {
         val settings = createSettings(get(), get())
+        val experimentRepository = get<ExperimentRepository>()
 
-        ImprovedIntentResolver(
+        val linkEngineIntentResolver = DefaultLinkEngineIntentResolver(
             context = get(),
-            logger = createLogger<ImprovedIntentResolver>(),
+            logger = createLogger<LinkEngineIntentResolver>(),
+            client = get(),
             appSelectionHistoryRepository = get(),
             preferredAppRepository = get(),
             normalBrowsersRepository = get(),
             inAppBrowsersRepository = get(),
+            libRedirectDefaultRepository = get(),
+            libRedirectStateRepository = get(),
             packageInfoService = get(),
             appSorter = get(),
             downloader = get(),
@@ -70,9 +78,33 @@ val resolverModule = module {
             browserHandler = get(),
             inAppBrowserHandler = get(),
             libRedirectResolver = get(),
-            unfurler = get(),
+            cacheRepository = get(),
             networkStateService = get(),
             settings = settings
+        )
+
+        IntentResolverDelegate(
+            improvedIntentResolver = ImprovedIntentResolver(
+                context = get(),
+                logger = createLogger<ImprovedIntentResolver>(),
+                appSelectionHistoryRepository = get(),
+                preferredAppRepository = get(),
+                normalBrowsersRepository = get(),
+                inAppBrowsersRepository = get(),
+                packageInfoService = get(),
+                appSorter = get(),
+                downloader = get(),
+                redirectUrlResolver = get(),
+                amp2HtmlResolver = get(),
+                browserHandler = get(),
+                inAppBrowserHandler = get(),
+                libRedirectResolver = get(),
+                unfurler = get(),
+                networkStateService = get(),
+                settings = settings
+            ),
+            linkEngineIntentResolver = linkEngineIntentResolver,
+            useLinkEngine = experimentRepository.asFunction(Experiments.linkEngine)
         )
     }
 }
@@ -139,7 +171,7 @@ data class PreviewSettings(
 fun createSettings(
     prefRepo: AppPreferenceRepository,
     experimentRepository: ExperimentRepository
-) : IntentResolverSettings{
+): IntentResolverSettings {
     return IntentResolverSettings(
         useClearUrls = prefRepo.asFunction(AppPreferences.useClearUrls),
         useFastForwardRules = prefRepo.asFunction(AppPreferences.useFastForwardRules),

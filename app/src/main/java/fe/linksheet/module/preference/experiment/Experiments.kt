@@ -64,6 +64,9 @@ object Experiments : PreferenceDefinition(
     val expressiveLoadingSheet = boolean(
         key = "experiment_expressive_loading_sheet"
     )
+    val linkEngine = boolean(
+        key = "experiment_link_engine"
+    )
 
     val experiments = listOf(
         group(
@@ -90,6 +93,11 @@ object Experiments : PreferenceDefinition(
             name = "edit_clipboard",
             displayName = "Edit clipboard content on home page",
             experiment("Enable", editClipboard)
+        ),
+        group(
+            name = "link_engine",
+            displayName = "Link engine",
+            experiment("Use LinkEngine", linkEngine)
         )
     )
 

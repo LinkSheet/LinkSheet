@@ -548,4 +548,5 @@
     <string name="settings_language__dialog_title">Jazyk aplikace</string>
     <string name="settings_language__text_system_language_with_language">%s (systémový jazyk)</string>
     <string name="settings_language__text_system_language">Systémový jazyk</string>
+    <string name="generic__button_open_external">Otevřít externě</string>
 </resources>

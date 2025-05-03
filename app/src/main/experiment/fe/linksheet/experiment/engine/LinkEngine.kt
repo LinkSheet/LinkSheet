@@ -2,6 +2,7 @@ package fe.linksheet.experiment.engine
 
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
 import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.fetcher.LinkFetcher
 import fe.linksheet.experiment.engine.modifier.ClearURLsLinkModifier
 import fe.linksheet.experiment.engine.modifier.EmbedLinkModifier
 import fe.linksheet.experiment.engine.modifier.LibRedirectLinkModifier
@@ -78,6 +79,7 @@ fun DefaultLinkEngine(
 class LinkEngine(
     private val steps: List<EngineStep<*>>,
     private val rules: List<Rule<*, *>> = emptyList(),
+    private val fetchers: List<LinkFetcher<*>> = emptyList(),
     private val logger: EngineLogger = AndroidEngineLogger("LinkEngine"),
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
@@ -172,18 +174,44 @@ class LinkEngine(
         UrlEngineResult(mutUrl)
     }
 
-    suspend fun process(
+    private suspend fun process(
+        context: EngineRunContext,
         url: StdUrl,
-        context: EngineRunContext = DefaultEngineRunContext()
-    ): ContextualEngineResult = coroutineScope scope@{
+    ): EngineResult = coroutineScope scope@{
         val preResult = processRules(context, preProcessorRules, PreProcessorInput(url))
-        if (preResult != null) return@scope context to preResult
+        if (preResult != null) return@scope preResult
 
         val result = process(context, url, 0)
         val resultUrl = (result as? UrlEngineResult)?.url ?: url
 
         val postResult = processRules(context, postProcessorRules, PostProcessorInput(resultUrl, url))
-        if (postResult != null) return@scope context to postResult
+        if (postResult != null) return@scope postResult
+        result
+    }
+
+    private suspend fun fetch(
+        context: EngineRunContext,
+        resultUrl: StdUrl
+    ) = coroutineScope scope@{
+        for (fetcher in fetchers) {
+            if (!isActive) break
+            if (!context.confirm(fetcher.id)) continue
+            launch {
+                val result = fetcher.fetch(resultUrl)
+                context.put(fetcher.id, result)
+            }
+        }
+    }
+
+    suspend fun process(
+        url: StdUrl,
+        context: EngineRunContext = DefaultEngineRunContext()
+    ): ContextualEngineResult = coroutineScope scope@{
+        val result = process(context, url)
+        if (result is UrlEngineResult) {
+            fetch(context, result.url)
+        }
+
         context to result
     }
 }

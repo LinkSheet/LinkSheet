@@ -5,11 +5,11 @@ import assertk.assertThat
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotNull
 import fe.linksheet.DatabaseTest
-import fe.linksheet.experiment.engine.fetcher.FetchInput
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
+import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
@@ -49,7 +49,7 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
             useLocalCache = { true }
         )
 
-        val result = fetcher.fetch(FetchInput(PREVIEW_URL))
+        val result = fetcher.fetch(PREVIEW_URL.toStdUrlOrThrow())
         assertThat(result).isNotNull().isInstanceOf<PreviewResult.NonHtmlPage>()
     }
 }

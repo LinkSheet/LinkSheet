@@ -1,11 +1,16 @@
 package fe.linksheet.experiment.engine.fetcher
 
+import fe.std.uri.StdUrl
+
 interface LinkFetcher<Result : FetchResult> {
-    suspend fun fetch(data: FetchInput): Result?
+    val id: LinkFetcherId
+
+    suspend fun fetch(url: StdUrl): Result?
 }
 
-interface FetchResult {
+interface FetchResult
 
+enum class LinkFetcherId {
+    Download,
+    Preview
 }
-
-data class FetchInput(val url: String)

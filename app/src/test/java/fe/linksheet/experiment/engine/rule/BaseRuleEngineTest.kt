@@ -6,9 +6,12 @@ import fe.linksheet.DatabaseTest
 import fe.linksheet.experiment.engine.ContextualEngineResult
 import fe.linksheet.experiment.engine.EngineLogger
 import fe.linksheet.experiment.engine.EngineResult
+import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.context.EngineExtra
 import fe.linksheet.experiment.engine.context.EngineFlag
 import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.fetcher.FetchResult
+import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.step.StepResult
 import fe.linksheet.experiment.engine.modifier.LinkModifier
@@ -48,11 +51,15 @@ fun TestLinkModifier(
     }
 }
 
+val EmptyLinkEngine = LinkEngine(emptyList())
+
 data class StepTestResult(override val url: StdUrl) : StepResult
 
 object TestEngineRunContext : EngineRunContext {
     override val extras: Set<EngineExtra> = emptySet()
     override val flags: EnumSet<EngineFlag> = emptyEnumSet()
+    override fun put(id: LinkFetcherId, result: FetchResult?) {}
+    override fun confirm(fetcher: LinkFetcherId): Boolean = true
 }
 
 suspend fun <T, R> withTestRunContext(it: T, block: suspend T.(EngineRunContext) -> R): R {

@@ -6,8 +6,13 @@ import java.net.HttpURLConnection
 
 
 const val CONTENT_TYPE_HEADER = "Content-Type"
+
 fun HttpURLConnection.normalizedContentType(): String? {
-    return findHeader(CONTENT_TYPE_HEADER)?.values?.firstOrNull()?.substringBefore(";")?.lowercase()
+    return findHeader(CONTENT_TYPE_HEADER)?.values
+        ?.firstOrNull()
+        ?.toString()
+        ?.substringBefore(";")
+        ?.lowercase()
 }
 
 fun HttpURLConnection.isHtml(): Boolean {

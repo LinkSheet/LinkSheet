@@ -57,7 +57,6 @@ val resolverModule = module {
             get(),
             get(),
             get(),
-            get(),
             settings = settings
         )
     }

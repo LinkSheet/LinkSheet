@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import androidx.lifecycle.SavedStateHandle
+import androidx.work.WorkerParameters
 import coil3.ImageLoader
 import com.google.gson.Gson
 import fe.httpkt.HttpData
@@ -30,6 +31,7 @@ import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
+import fe.linksheet.module.remoteconfig.RemoteConfigRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
@@ -53,6 +55,9 @@ import fe.linksheet.module.systeminfo.SystemProperties
 import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
+import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
+import io.ktor.client.engine.HttpClientEngine
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -72,9 +77,11 @@ internal class KoinModuleCheckTest : UnitTest {
         Application::class,
         SavedStateHandle::class,
         Logger::class,
+        WorkerParameters::class,
     )
 
     private val injections = injectedParameters(
+        definition<HttpClient>(HttpClientEngine::class, HttpClientConfig::class),
         definition<SystemInfoService>(
             SystemProperties::class,
             BuildConstants::class
@@ -150,7 +157,8 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<StatisticsService>(AppPreferenceRepository::class),
         definition<AppLocaleService>(List::class),
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
-        definition<SettingsViewModel>(AppLocaleService::class)
+        definition<SettingsViewModel>(AppLocaleService::class),
+        definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
     )
 
     @Test

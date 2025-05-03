@@ -10,11 +10,11 @@ import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.util.mime.KnownMimeTypes
 import fe.linksheet.util.mime.MimeType
+import fe.std.uri.StdUrl
 import fe.stringbuilder.util.commaSeparated
 import fe.stringbuilder.util.curlyWrapped
 import org.koin.dsl.module
 import java.io.IOException
-import java.net.URL
 
 
 val downloaderModule = module {
@@ -24,7 +24,7 @@ val downloaderModule = module {
 }
 
 sealed class DownloadCheckResult : Redactable<DownloadCheckResult> {
-    class Downloadable(private val fileName: String, private val extension: String?) : DownloadCheckResult() {
+    class Downloadable(val fileName: String, val extension: String?) : DownloadCheckResult() {
         fun toFileName() = "$fileName.$extension"
 
         override fun process(builder: StringBuilder, redactor: Redactor) = builder.curlyWrapped {
@@ -59,17 +59,17 @@ class Downloader(private val cachedRequest: CachedRequest, private val logger: L
         private val extensionToMimeType = KnownMimeTypes.extensionToMimeType
     }
 
-    fun checkIsNonHtmlFileEnding(url: String): DownloadCheckResult {
-        val (fileName, ext) = Extension.getFileNameFromUrl(URL(url))
+    fun checkIsNonHtmlFileEnding(url: StdUrl): DownloadCheckResult {
+        val (fileName, ext) = Extension.getFileNameFromUrl(url.url)
         if (fileName == null || ext == null) return DownloadCheckResult.MimeTypeDetectionFailed
 
         val mimeType = extensionToMimeType[ext] ?: return DownloadCheckResult.MimeTypeDetectionFailed
         return checkMimeType(mimeType, fileName, ext)
     }
 
-    fun isNonHtmlContentUri(url: String, timeout: Int): DownloadCheckResult {
+    fun isNonHtmlContentUri(url: StdUrl, timeout: Int): DownloadCheckResult {
         val result = try {
-            cachedRequest.head(url, timeout, false)
+            cachedRequest.head(url.toString(), timeout, false)
         } catch (e: IOException) {
             logger.error(e)
             return DownloadCheckResult.NonDownloadable
@@ -78,9 +78,9 @@ class Downloader(private val cachedRequest: CachedRequest, private val logger: L
         if (!result.isHttpSuccess()) return DownloadCheckResult.NonDownloadable
 
         val contentType = result.normalizedContentType() ?: return DownloadCheckResult.NonDownloadable
-        val (fileName, _) = Extension.getFileNameFromUrl(URL(url))
+        val (fileName, _) = Extension.getFileNameFromUrl(url.url)
 
-        return checkMimeType(contentType, fileName ?: url, mimeTypeToExtension[contentType]?.firstOrNull())
+        return checkMimeType(contentType, fileName ?: url.toString(), mimeTypeToExtension[contentType]?.firstOrNull())
     }
 
     private fun checkMimeType(mimeType: String, fileName: String, extension: String?): DownloadCheckResult {

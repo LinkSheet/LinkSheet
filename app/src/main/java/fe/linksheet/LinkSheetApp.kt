@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.util.Log
+import androidx.work.WorkManager
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
 import fe.android.lifecycle.CurrentActivityObserver
@@ -101,7 +102,9 @@ open class LinkSheetApp : Application(), DependencyProvider {
             androidLogger()
             androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
-            workManagerFactory()
+            if(!WorkManager.isInitialized()) {
+                workManagerFactory()
+            }
             modules(koinModules)
         }
 

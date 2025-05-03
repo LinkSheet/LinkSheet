@@ -1,6 +1,5 @@
 package fe.linksheet
 
-import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.httpkt.Request
 import fe.linksheet.module.downloader.DownloadCheckResult
@@ -11,7 +10,8 @@ import fe.linksheet.module.log.internal.DefaultLoggerDelegate
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
-import org.junit.Test
+import fe.std.uri.toStdUrlOrThrow
+import kotlin.test.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -28,7 +28,7 @@ internal class DownloaderTest : UnitTest {
         private val logger = Logger(loggerDelegate)
         private val downloader = Downloader(
             CachedRequest(Request(), logger),
-            Logger(loggerDelegate)
+            logger
         )
     }
 
@@ -41,14 +41,14 @@ internal class DownloaderTest : UnitTest {
             DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/yeet.",
             DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com/.yeet",
         ).forEach { (expected, inputUrl) ->
-            assertEquals(expected, downloader.checkIsNonHtmlFileEnding(inputUrl))
+            assertEquals(expected, downloader.checkIsNonHtmlFileEnding(inputUrl.toStdUrlOrThrow()))
         }
 
         mapOf(
             "test.jpg" to "https://test.com/test.jpg",
             "test.yeet.jpg" to "https://test.com/test.yeet.jpg",
         ).forEach { (expectedFile, inputUrl) ->
-            val downloadable = downloader.checkIsNonHtmlFileEnding(inputUrl)
+            val downloadable = downloader.checkIsNonHtmlFileEnding(inputUrl.toStdUrlOrThrow())
             assertIs<DownloadCheckResult.Downloadable>(downloadable)
             assertEquals(expectedFile, downloadable.toFileName())
         }
@@ -57,14 +57,14 @@ internal class DownloaderTest : UnitTest {
     @Test
     fun testIsNonHtmlContentUri() {
         val downloadable = downloader.isNonHtmlContentUri(
-            "https://pbs.twimg.com/media/FyWt0wvWAAAxgYk?format=jpg&name=medium",
+            "https://pbs.twimg.com/media/FyWt0wvWAAAxgYk?format=jpg&name=medium".toStdUrlOrThrow(),
             15
         )
 
         assertIs<DownloadCheckResult.Downloadable>(downloadable)
         assertEquals("FyWt0wvWAAAxgYk.jpg", downloadable.toFileName())
 
-        val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com", 15)
+        val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com".toStdUrlOrThrow(), 15)
         assertIs<DownloadCheckResult.NonDownloadable>(nonDownloadable)
     }
 }

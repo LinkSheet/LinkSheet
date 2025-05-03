@@ -12,9 +12,9 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
+import fe.linksheet.extension.std.toStdUrlOrThrow
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.labelSorted
-import fe.linksheet.module.app.`package`.PackageIntentHandler
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -44,6 +44,7 @@ import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.util.intent.parser.UriException
 import fe.std.result.getOrNull
 import fe.std.result.isFailure
+import fe.std.uri.StdUrl
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -251,7 +252,7 @@ class ImprovedIntentResolver(
         val downloadable = checkDownloadable(
             downloader = downloader,
             enabled = enabledDownloader,
-            uri = uri,
+            url = uri.toStdUrlOrThrow(),
             checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType(),
             requestTimeout = settings.requestTimeout()
         )
@@ -417,18 +418,18 @@ class ImprovedIntentResolver(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         downloader: Downloader,
         enabled: Boolean,
-        uri: Uri,
+        url: StdUrl,
         checkUrlMimeType: Boolean,
         requestTimeout: Int,
     ): DownloadCheckResult = withContext(dispatcher) {
         if (!enabled) return@withContext DownloadCheckResult.NonDownloadable
 
         if (checkUrlMimeType) {
-            val result = downloader.checkIsNonHtmlFileEnding(uri.toString())
+            val result = downloader.checkIsNonHtmlFileEnding(url)
             if (result.isDownloadable()) return@withContext result
         }
 
-        downloader.isNonHtmlContentUri(uri.toString(), requestTimeout)
+        downloader.isNonHtmlContentUri(url, requestTimeout)
     }
 
     private suspend fun tryRunLibRedirect(

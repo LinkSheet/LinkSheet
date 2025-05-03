@@ -35,6 +35,7 @@ object Experiments : PreferenceDefinition(
 
     val noBottomSheetStateSave = boolean("experiment_no_bottom_sheet_state_save")
     val aggressiveFollowRedirects = boolean("experiment_aggressive_follow_redirects")
+    val linkEngine = boolean("experiment_link_engine")
 
     // TODO: Enforce type
     init {
@@ -71,6 +72,10 @@ object Experiments : PreferenceDefinition(
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {
                 addPreference(ExperimentPreference("Enable", editClipboard))
             },
+
+            ExperimentGroup("link_engine", "Link engine").apply {
+                addPreference(ExperimentPreference("Use LinkEngine", linkEngine))
+            }
         )
 
         finalize()

@@ -540,4 +540,5 @@
     <string name="settings_language__dialog_title">Език на приложението</string>
     <string name="settings_language__text_system_language_with_language">%s (език на системата)</string>
     <string name="settings_language__text_system_language">Език на системата</string>
+    <string name="generic__button_open_external">Отваряне с приложение</string>
 </resources>

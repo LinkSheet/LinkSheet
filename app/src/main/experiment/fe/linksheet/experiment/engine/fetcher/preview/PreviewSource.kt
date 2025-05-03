@@ -2,6 +2,9 @@ package fe.linksheet.experiment.engine.fetcher.preview
 
 import fe.linksheet.experiment.engine.fetcher.FetchResult
 import fe.std.result.IResult
+import me.saket.unfurl.UnfurlResult
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 interface PreviewSource {
     suspend fun fetch(urlString: String): IResult<PreviewResult>
@@ -45,5 +48,38 @@ sealed class HtmlPreviewResult(url: String, val htmlText: String) : PreviewResul
         override fun toString(): String {
             return "SimplePreviewResult(url='$url', htmlText='$htmlText', title=$title, favicon=$favicon)"
         }
+    }
+}
+
+fun PreviewResult.toUnfurlResult(): UnfurlResult {
+    return when(this) {
+        is HtmlPreviewResult.RichPreviewResult -> UnfurlResult(
+            url = url.toHttpUrl(),
+            title = title,
+            description = description,
+            favicon = favicon?.toHttpUrlOrNull(),
+            thumbnail = thumbnail?.toHttpUrlOrNull()
+        )
+        is HtmlPreviewResult.SimplePreviewResult -> UnfurlResult(
+            url = url.toHttpUrl(),
+            title = title,
+            description = null,
+            favicon = favicon?.toHttpUrlOrNull(),
+            thumbnail = null
+        )
+        is PreviewResult.NoPreview -> UnfurlResult(
+            url = url.toHttpUrl(),
+            title = null,
+            description = null,
+            favicon = null,
+            thumbnail = null
+        )
+        is PreviewResult.NonHtmlPage -> UnfurlResult(
+            url = url.toHttpUrl(),
+            title = null,
+            description = null,
+            favicon = null,
+            thumbnail = null
+        )
     }
 }

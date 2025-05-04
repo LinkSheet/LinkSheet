@@ -28,6 +28,7 @@ import fe.linksheet.experiment.engine.step.EngineStep
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.step.InPlaceStep
 import fe.linksheet.experiment.engine.step.StepResult
+import fe.linksheet.log.Logger
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.std.uri.StdUrl
@@ -80,9 +81,9 @@ class LinkEngine(
     private val steps: List<EngineStep<*>>,
     private val rules: List<Rule<*, *>> = emptyList(),
     private val fetchers: List<LinkFetcher<*>> = emptyList(),
-    private val logger: EngineLogger = AndroidEngineLogger("LinkEngine"),
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
+    private val logger = Logger("LinkEngine")
     private val scope = CoroutineScope(dispatcher) + CoroutineName("LinkEngine") + CoroutineExceptionHandler { _, e ->
         println(e)
     }
@@ -109,9 +110,9 @@ class LinkEngine(
         input: I,
     ): R? {
         for (rule in filteredRules) {
-            logger.debug { "Checking rule $rule with input $input" }
+            logger.debug("Checking rule $rule with input $input")
             val result = with(rule) { context.checkRule(input) }
-            logger.debug { "Rule result is $result" }
+            logger.debug("Rule result is $result")
             if (result == null) continue
             return result
         }
@@ -123,7 +124,7 @@ class LinkEngine(
     val events = _events.asStateFlow()
 
     private fun emitEvent(event: StepRuleInput) {
-        logger.debug { "Emitting event $event" }
+        logger.debug("Emitting event $event")
         _events.tryEmit(event)
     }
 
@@ -193,7 +194,7 @@ class LinkEngine(
     ) = coroutineScope scope@{
         for (fetcher in fetchers) {
             if (!isActive) break
-            logger.debug { "Fetching $fetcher" }
+            logger.debug("Fetching $fetcher")
             if (!context.confirm(fetcher.id)) continue
             launch {
                 val result = fetcher.fetch(resultUrl)

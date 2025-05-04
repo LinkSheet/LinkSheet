@@ -20,7 +20,6 @@ import kotlin.uuid.Uuid
 @RunWith(AndroidJUnit4::class)
 internal class EngineTrackTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<EngineTrackTest>()
 
     @Test
     fun test() = runTest(dispatcher) {

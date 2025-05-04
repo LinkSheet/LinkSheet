@@ -4,7 +4,6 @@ import assertk.Assert
 import assertk.assertThat
 import fe.linksheet.DatabaseTest
 import fe.linksheet.experiment.engine.ContextualEngineResult
-import fe.linksheet.experiment.engine.EngineLogger
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.context.EngineExtra
@@ -13,25 +12,18 @@ import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.context.SealedRunContext
 import fe.linksheet.experiment.engine.fetcher.FetchResult
 import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
+import fe.linksheet.experiment.engine.modifier.LinkModifier
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.step.StepResult
-import fe.linksheet.experiment.engine.modifier.LinkModifier
 import fe.std.extension.emptyEnumSet
 import fe.std.uri.StdUrl
 import org.junit.After
-import java.util.EnumSet
+import java.util.*
 
 abstract class BaseRuleEngineTest : DatabaseTest() {
-    inline fun <reified T> createTestEngineLogger() = object : EngineLogger(T::class.simpleName!!) {
-        override fun debug(message: () -> String) {
-            println(message())
-        }
-    }
-
     fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
         return assertThat(result.second)
     }
-
     @After
     override fun stop() {
         println("[BaseLinkEngineTest] stop")

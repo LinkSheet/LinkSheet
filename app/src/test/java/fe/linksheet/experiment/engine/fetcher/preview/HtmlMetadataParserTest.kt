@@ -1,11 +1,10 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import assertk.all
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isEqualToIgnoringGivenProperties
 import assertk.assertions.isInstanceOf
-import assertk.assertions.prop
 import assertk.tableOf
 import fe.linksheet.UnitTest
 import kotlinx.coroutines.test.runTest
@@ -241,13 +240,17 @@ internal class HtmlMetadataParserTest : UnitTest {
 
         val result = HtmlMetadataParser().parse(document, document.html())
 
-        assertThat(result)
-            .isInstanceOf<HtmlPreviewResult.SimplePreviewResult>()
-            .all {
-                prop(HtmlPreviewResult.SimplePreviewResult::url).isEqualTo("https://tonsky.me/blog/diagrams")
-                prop(HtmlPreviewResult.SimplePreviewResult::title).isEqualTo("Where Should Visual Programming Go?")
-                prop(HtmlPreviewResult.SimplePreviewResult::favicon).isEqualTo("https://tonsky.me/favicon.ico")
-            }
+        assertThat(result).isInstanceOf<HtmlPreviewResult.RichPreviewResult>().isEqualToIgnoringGivenProperties(
+            HtmlPreviewResult.RichPreviewResult(
+                url = "https://tonsky.me/blog/diagrams",
+                htmlText = "<< no-html >>",
+                title = "Where Should Visual Programming Go?",
+                description = "Visual programming and textual code should co-exist next to each other, not replace one another",
+                favicon = "https://tonsky.me/i/favicon.png",
+                thumbnail = "https://dynogee.com/gen?id=nm509093bpj50lv&title=Where+Should+Visual+Programming+Go%3F"
+            ),
+            HtmlPreviewResult.RichPreviewResult::htmlText
+        )
     }
 
     @Test
@@ -987,14 +990,16 @@ internal class HtmlMetadataParserTest : UnitTest {
         </body>
         </html>"""
         val result = HtmlMetadataParser().parse(html, "https://www.youtube.com/watch?v=x1J-gd0Z-RU")
-        assertThat(result)
-            .isInstanceOf<HtmlPreviewResult.RichPreviewResult>()
-            .all {
-                prop(HtmlPreviewResult.RichPreviewResult::url).isEqualTo("https://www.youtube.com/watch?v=x1J-gd0Z-RU")
-                prop(HtmlPreviewResult.RichPreviewResult::title).isEqualTo("Best Android Apps - April 2023!")
-                prop(HtmlPreviewResult.RichPreviewResult::description).isEqualTo("Get UPDF with 54% OFF and 2 FREE gifts (One License for Windows, Mac, iOS & Android):http://bit.ly/3lgZNft_______________________________________\u00AD\u00AD▣ HowToPer...")
-                prop(HtmlPreviewResult.RichPreviewResult::favicon).isEqualTo("https://www.youtube.com/s/desktop/3747f4fc/img/logos/favicon.ico")
-                prop(HtmlPreviewResult.RichPreviewResult::thumbnail).isEqualTo("https://i.ytimg.com/vi/x1J-gd0Z-RU/maxresdefault.jpg")
-            }
+
+        assertThat(result).isInstanceOf<HtmlPreviewResult.RichPreviewResult>().isEqualToIgnoringGivenProperties(
+            HtmlPreviewResult.RichPreviewResult(
+                url = "https://www.youtube.com/watch?v=x1J-gd0Z-RU", htmlText = "<< no-html >>",
+                title = "Best Android Apps - April 2023!",
+                description = "Get UPDF with 54% OFF and 2 FREE gifts (One License for Windows, Mac, iOS & Android):http://bit.ly/3lgZNft_______________________________________\u00AD\u00AD▣ HowToPer...",
+                favicon = "https://www.youtube.com/s/desktop/3747f4fc/img/logos/favicon.ico",
+                thumbnail = "https://i.ytimg.com/vi/x1J-gd0Z-RU/maxresdefault.jpg"
+            ),
+            HtmlPreviewResult.RichPreviewResult::htmlText
+        )
     }
 }

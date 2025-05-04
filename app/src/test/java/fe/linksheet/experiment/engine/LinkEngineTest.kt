@@ -24,7 +24,6 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class LinkEngineTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<LinkEngineTest>()
 
     private val cacheRepository by lazy {
         CacheRepository(
@@ -78,7 +77,6 @@ internal class LinkEngineTest : BaseRuleEngineTest() {
             steps = listOf(
                 ClearURLsLinkModifier(ioDispatcher = dispatcher)
             ),
-            logger = testPrintLogger
         )
 
         val url = "https://www.instagram.com/reel/42e3d61b7/?igsh=659e8fac5ca9ce8d009563a584fd5602d15ff100a1f21be4aa7ea2295625c4cc".toStdUrlOrThrow()

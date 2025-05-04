@@ -25,7 +25,6 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class EngineExtraTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<EngineExtraTest>()
 
     private val rule = object : PreprocessorRule {
         private val chromePackage = AndroidAppPackage("com.google.chrome")
@@ -46,7 +45,6 @@ internal class EngineExtraTest : BaseRuleEngineTest() {
             TestLinkModifier(EngineStepId.ClearURLs) { StepTestResult(it) }
         ),
         rules = listOf(rule),
-        logger = testPrintLogger,
         dispatcher = dispatcher,
     )
 

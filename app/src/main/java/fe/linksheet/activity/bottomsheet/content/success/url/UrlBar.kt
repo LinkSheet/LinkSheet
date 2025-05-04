@@ -156,7 +156,7 @@ fun UrlBar(
     imageLoader: ImageLoader?,
     unfurlResult: UnfurlResult?,
     profiles: List<CrossProfile>?,
-    downloadable: DownloadCheckResult,
+    downloadable: DownloadCheckResult?,
     libRedirected: LibRedirectResult.Redirected?,
     copyUri: (String) -> Unit,
     shareUri: (String) -> Unit,
@@ -209,7 +209,7 @@ fun UrlBar(
                 }
             }
 
-            if (downloadable.isDownloadable()) {
+            if (downloadable?.isDownloadable() == true) {
                 item {
                     UrlActionButton(
                         text = textContent(R.string.download),

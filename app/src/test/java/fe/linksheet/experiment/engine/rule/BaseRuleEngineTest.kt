@@ -10,6 +10,7 @@ import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.context.EngineExtra
 import fe.linksheet.experiment.engine.context.EngineFlag
 import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.context.SealedRunContext
 import fe.linksheet.experiment.engine.fetcher.FetchResult
 import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
 import fe.linksheet.experiment.engine.step.EngineStepId
@@ -58,8 +59,9 @@ data class StepTestResult(override val url: StdUrl) : StepResult
 object TestEngineRunContext : EngineRunContext {
     override val extras: Set<EngineExtra> = emptySet()
     override val flags: EnumSet<EngineFlag> = emptyEnumSet()
-    override fun put(id: LinkFetcherId, result: FetchResult?) {}
-    override fun confirm(fetcher: LinkFetcherId): Boolean = true
+    override fun <Result : FetchResult> put(id: LinkFetcherId<Result>, result: Result?) {}
+    override fun <Result : FetchResult> confirm(fetcher: LinkFetcherId<Result>): Boolean = true
+    override fun seal(): SealedRunContext = SealedRunContext(flags, emptyMap())
 }
 
 suspend fun <T, R> withTestRunContext(it: T, block: suspend T.(EngineRunContext) -> R): R {

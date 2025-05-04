@@ -94,8 +94,6 @@ class LinkEngine(
         stepId: EngineStepId,
         input: I,
     ): R? {
-        // TODO: Vetoes should allow vetoing only a single step, instead of terminating the entire process
-
         // TODO: If we only ever have BeforeRule/AfterRule, these can be filtered before and stored
         val filteredRules = rules
             .asSequence()
@@ -195,6 +193,7 @@ class LinkEngine(
     ) = coroutineScope scope@{
         for (fetcher in fetchers) {
             if (!isActive) break
+            logger.debug { "Fetching $fetcher" }
             if (!context.confirm(fetcher.id)) continue
             launch {
                 val result = fetcher.fetch(resultUrl)
@@ -212,6 +211,7 @@ class LinkEngine(
             fetch(context, result.url)
         }
 
-        context to result
+        val sealedContext = context.seal()
+        sealedContext to result
     }
 }

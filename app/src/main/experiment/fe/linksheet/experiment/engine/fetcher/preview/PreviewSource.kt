@@ -7,25 +7,25 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 interface PreviewSource {
-    suspend fun fetch(urlString: String): IResult<PreviewResult>
-    suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewResult>
+    suspend fun fetch(urlString: String): IResult<PreviewFetchResult>
+    suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewFetchResult>
 }
 
-sealed class PreviewResult(val url: String) : FetchResult {
-    class NoPreview(url: String) : PreviewResult(url) {
+sealed class PreviewFetchResult(val url: String) : FetchResult {
+    class NoPreview(url: String) : PreviewFetchResult(url) {
         override fun toString(): String {
             return "NoPreview(url='$url')"
         }
     }
 
-    class NonHtmlPage(url: String) : PreviewResult(url) {
+    class NonHtmlPage(url: String) : PreviewFetchResult(url) {
         override fun toString(): String {
             return "NonHtmlPage(url='$url')"
         }
     }
 }
 
-sealed class HtmlPreviewResult(url: String, val htmlText: String) : PreviewResult(url) {
+sealed class HtmlPreviewResult(url: String, val htmlText: String) : PreviewFetchResult(url) {
     class RichPreviewResult(
         url: String,
         htmlText: String,
@@ -51,7 +51,7 @@ sealed class HtmlPreviewResult(url: String, val htmlText: String) : PreviewResul
     }
 }
 
-fun PreviewResult.toUnfurlResult(): UnfurlResult {
+fun PreviewFetchResult.toUnfurlResult(): UnfurlResult {
     return when(this) {
         is HtmlPreviewResult.RichPreviewResult -> UnfurlResult(
             url = url.toHttpUrl(),
@@ -67,14 +67,14 @@ fun PreviewResult.toUnfurlResult(): UnfurlResult {
             favicon = favicon?.toHttpUrlOrNull(),
             thumbnail = null
         )
-        is PreviewResult.NoPreview -> UnfurlResult(
+        is PreviewFetchResult.NoPreview -> UnfurlResult(
             url = url.toHttpUrl(),
             title = null,
             description = null,
             favicon = null,
             thumbnail = null
         )
-        is PreviewResult.NonHtmlPage -> UnfurlResult(
+        is PreviewFetchResult.NonHtmlPage -> UnfurlResult(
             url = url.toHttpUrl(),
             title = null,
             description = null,

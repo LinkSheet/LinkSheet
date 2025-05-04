@@ -9,9 +9,7 @@ import fe.linksheet.experiment.engine.TrackSelector
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
 import fe.linksheet.experiment.engine.context.toSourceAppExtra
-import fe.linksheet.experiment.engine.fetcher.DownloadLinkFetcher
-import fe.linksheet.experiment.engine.fetcher.preview.PreviewLinkFetcher
-import fe.linksheet.experiment.engine.fetcher.preview.PreviewLocalSource
+import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
 import fe.linksheet.experiment.engine.fetcher.preview.toUnfurlResult
 import fe.linksheet.experiment.engine.fetcher.toFetchResult
 import fe.linksheet.extension.std.toAndroidUri
@@ -74,7 +72,7 @@ class LinkEngineIntentResolver(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    private val packageInfoService: PackageService,
+    private val packageService: PackageService,
     private val appSorter: AppSorter,
     private val downloader: Downloader,
     private val redirectUrlResolver: RedirectUrlResolver,
@@ -157,7 +155,7 @@ class LinkEngineIntentResolver(
         val startUrl = urlParseResult.value
         val referringPackage = ReferrerHelper.getReferringPackage(referrer)
 //        emitEvent(ResolveEvent.QueryingBrowsers)
-        val browsers = packageInfoService.findHttpBrowsable(null)
+        val browsers = packageService.findHttpBrowsable(null)
 
         val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
 
@@ -172,7 +170,7 @@ class LinkEngineIntentResolver(
         }
 
         val context = DefaultEngineRunContext(sourceAppExtra)
-        val (_, result) = track.engine.process(startUrl, context)
+        val (sealedContext, result) = track.engine.process(startUrl, context)
         if (result !is UrlEngineResult) {
             TODO("Handle this")
         }
@@ -180,14 +178,8 @@ class LinkEngineIntentResolver(
         val resultUrl = result.url
         val resultUri = resultUrl.toAndroidUri()
 
-        val downloadLinkFetcher = DownloadLinkFetcher(
-            ioDispatcher = Dispatchers.IO,
-            downloader = downloader,
-            checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType,
-            requestTimeout = settings.requestTimeout,
-        )
+        val downloadResult = sealedContext.get(LinkFetcherId.Download)
 
-        val downloadResult = downloadLinkFetcher.fetch(resultUrl)
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, resultUri, dropExtras)
@@ -195,16 +187,16 @@ class LinkEngineIntentResolver(
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(
             repository = preferredAppRepository,
-            packageInfoService = packageInfoService,
+            packageInfoService = packageService,
             uri = resultUri
         )
 
         val lastUsedApps = queryAppSelectionHistory(
             repository = appSelectionHistoryRepository,
-            packageInfoService = packageInfoService,
+            packageInfoService = packageService,
             uri = resultUri
         )
-        val resolveList = packageInfoService.findHandlers(resultUri, referringPackage?.packageName)
+        val resolveList = packageService.findHandlers(resultUri, referringPackage?.packageName)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -222,16 +214,9 @@ class LinkEngineIntentResolver(
             returnLastChosen = !settings.dontShowFilteredItem()
         )
 
-        val previewLinkFetcher = PreviewLinkFetcher(
-            ioDispatcher = Dispatchers.IO,
-            source = PreviewLocalSource(
-                client = client
-            ),
-            cacheRepository = cacheRepository,
-            useLocalCache = { true }
-        )
+        val previewResult = sealedContext.get(LinkFetcherId.Preview)?.toUnfurlResult()
+        logger.info("Preview result: $previewResult")
 
-        val previewResult = previewLinkFetcher.fetch(result.url)?.toUnfurlResult()
         // TODO: Return real
         val libRedirectResult = LibRedirectResult.NotRedirected
         val resolveStatus = ResolveModuleStatus()
@@ -246,7 +231,7 @@ class LinkEngineIntentResolver(
             appList.isSingleOption || appList.noBrowsersOnlySingleApp,
             resolveStatus,
             libRedirectResult,
-            downloadResult.toFetchResult()
+            downloadResult?.toFetchResult()
         )
     }
 

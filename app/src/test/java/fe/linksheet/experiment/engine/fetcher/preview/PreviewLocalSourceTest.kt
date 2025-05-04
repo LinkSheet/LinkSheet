@@ -4,18 +4,35 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
-import fe.linksheet.UnitTest
+import fe.linksheet.DatabaseTest
+import fe.linksheet.DefaultPrintLogger
+import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.assert.assertSuccess
+import fe.std.time.unixMillisOf
+import fe.std.uri.toStdUrlOrThrow
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
+import io.ktor.client.engine.okhttp.OkHttp
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class PreviewLocalSourceTest : UnitTest {
+internal class PreviewLocalSourceTest : DatabaseTest() {
     companion object {
         private const val URL = "https://linksheet.app"
+    }
+
+    private val cacheRepository by lazy {
+        CacheRepository(
+            database.htmlCacheDao(),
+            database.previewCacheDao(),
+            database.resolvedUrlCacheDao(),
+            database.resolveTypeDao(),
+            database.urlEntryDao(),
+            now = { unixMillisOf(2025) }
+        )
     }
 
     @Test
@@ -28,8 +45,25 @@ internal class PreviewLocalSourceTest : UnitTest {
         val result = source.fetch(URL)
 
         assertSuccess(result)
-            .isInstanceOf<PreviewResult.NonHtmlPage>()
-            .prop(PreviewResult.NonHtmlPage::url)
+            .isInstanceOf<PreviewFetchResult.NonHtmlPage>()
+            .prop(PreviewFetchResult.NonHtmlPage::url)
             .isEqualTo(URL)
+    }
+
+    @Test
+    fun test() = runTest {
+        val client = HttpClient(OkHttp)
+        val fetcher = PreviewLinkFetcher(
+            ioDispatcher = Dispatchers.IO,
+            source = PreviewLocalSource(
+                client = client,
+                logger = DefaultPrintLogger<PreviewLocalSourceTest>()
+            ),
+            cacheRepository = cacheRepository,
+            useLocalCache = { true }
+        )
+
+        val result = fetcher.fetch("https://www.youtube.com/watch?v=sozAABvDToY".toStdUrlOrThrow())
+        println(result)
     }
 }

@@ -1,7 +1,7 @@
 package fe.linksheet.module.repository
 
 import fe.linksheet.experiment.engine.fetcher.preview.HtmlPreviewResult
-import fe.linksheet.experiment.engine.fetcher.preview.PreviewResult
+import fe.linksheet.experiment.engine.fetcher.preview.PreviewFetchResult
 import fe.linksheet.module.database.dao.cache.*
 import fe.linksheet.module.database.entity.cache.CachedHtml
 import fe.linksheet.module.database.entity.cache.PreviewCache
@@ -67,8 +67,8 @@ class CacheRepository(
         htmlCacheDao.insert(CachedHtml(entryId, html))
     }
 
-    suspend fun insertPreview(entryId: Long, result: PreviewResult) {
-        if (result is PreviewResult.NonHtmlPage) {
+    suspend fun insertPreview(entryId: Long, result: PreviewFetchResult) {
+        if (result is PreviewFetchResult.NonHtmlPage) {
             // TODO: Should we cache the info that there has not been a cache hit?
             // TODO: Caching non-hits would obviously help an unnecessary round-trip to the remote host, but what would that mean
             // for situations where the preview is added at a later date? We would probably have to use some sort of TTL

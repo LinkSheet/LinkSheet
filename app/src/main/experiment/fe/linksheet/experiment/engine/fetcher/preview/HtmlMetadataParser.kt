@@ -49,12 +49,12 @@ class HtmlMetadataParser {
     fun parse(
         htmlText: String,
         baseUri: String,
-    ): PreviewResult {
+    ): PreviewFetchResult {
         val document = Jsoup.parse(htmlText, baseUri)
         return parse(document, htmlText)
     }
 
-    fun parse(document: Document, htmlText: String): PreviewResult {
+    fun parse(document: Document, htmlText: String): PreviewFetchResult {
         val url = document.baseUri().toUrlOrThrow()
         val urlStr = url.toString()
 
@@ -63,11 +63,11 @@ class HtmlMetadataParser {
         val richFavicon = parseFaviconUrl(document)
         val richThumbnail = parseThumbnailUrl(document)
 
-        val hasAnyRich = richTitle == null || richDescription == null || richFavicon == null || richThumbnail == null
+        val hasAnyRich = richTitle != null || richDescription != null || richFavicon != null || richThumbnail != null
         val documentTitle = document.title().ifBlank { null }
 
         if (documentTitle == null && !hasAnyRich) {
-            return PreviewResult.NoPreview(url = urlStr)
+            return PreviewFetchResult.NoPreview(url = urlStr)
         }
 
         val title = richTitle ?: documentTitle

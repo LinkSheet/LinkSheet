@@ -14,10 +14,10 @@ data class PreviewLinkFetcher(
     private val cacheRepository: CacheRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val useLocalCache: () -> Boolean,
-) : LinkFetcher<PreviewResult> {
+) : LinkFetcher<PreviewFetchResult> {
     override val id = LinkFetcherId.Preview
 
-    private suspend fun insertCache(entryId: Long, result: PreviewResult) {
+    private suspend fun insertCache(entryId: Long, result: PreviewFetchResult) {
         cacheRepository.insertPreview(entryId, result)
         if (result is HtmlPreviewResult) {
             cacheRepository.insertHtml(entryId, result.htmlText)
@@ -41,7 +41,7 @@ data class PreviewLinkFetcher(
         )
     }
 
-    private suspend fun handleCached(entryId: Long, url: String): PreviewResult? {
+    private suspend fun handleCached(entryId: Long, url: String): PreviewFetchResult? {
         val cachedHtml = cacheRepository.getCachedHtml(entryId)
         val previewCache = cacheRepository.getCachedPreview(entryId)
         if (cachedHtml != null && previewCache != null) {
@@ -61,7 +61,7 @@ data class PreviewLinkFetcher(
         return result.value
     }
 
-    override suspend fun fetch(url: StdUrl): PreviewResult? {
+    override suspend fun fetch(url: StdUrl): PreviewFetchResult? {
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(url.toString())
         if (localCache) {
@@ -73,7 +73,7 @@ data class PreviewLinkFetcher(
 
         val result = source.fetch(entry.url)
         if (result.isFailure()) {
-            return PreviewResult.NoPreview(entry.url)
+            return PreviewFetchResult.NoPreview(entry.url)
         }
 
         if (localCache) {

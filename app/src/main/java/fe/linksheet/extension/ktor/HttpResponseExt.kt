@@ -12,7 +12,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
 fun HttpResponse.isHtml(): Boolean {
-    return contentType() == ContentType.Text.Html
+    return ContentType.Text.Html == contentType()?.withoutParameters()
 }
 
 fun HttpResponse.urlString(): String {

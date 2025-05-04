@@ -32,11 +32,11 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
     }
 
     private val source = object : PreviewSource {
-        override suspend fun fetch(urlString: String): IResult<PreviewResult> {
-            return PreviewResult.NonHtmlPage(PREVIEW_URL).success
+        override suspend fun fetch(urlString: String): IResult<PreviewFetchResult> {
+            return PreviewFetchResult.NonHtmlPage(PREVIEW_URL).success
         }
 
-        override suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewResult> {
+        override suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewFetchResult> {
             TODO("Not yet implemented")
         }
     }
@@ -50,6 +50,6 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
         )
 
         val result = fetcher.fetch(PREVIEW_URL.toStdUrlOrThrow())
-        assertThat(result).isNotNull().isInstanceOf<PreviewResult.NonHtmlPage>()
+        assertThat(result).isNotNull().isInstanceOf<PreviewFetchResult.NonHtmlPage>()
     }
 }

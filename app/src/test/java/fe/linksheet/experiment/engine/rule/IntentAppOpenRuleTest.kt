@@ -23,7 +23,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<IntentAppOpenRuleTest>()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/428
     private val rule = object : PostprocessorRule {
@@ -46,7 +45,6 @@ internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
             TestLinkModifier(EngineStepId.ClearURLs) { StepTestResult(it) }
         ),
         rules = listOf(rule),
-        logger = testPrintLogger,
         dispatcher = dispatcher,
     )
 

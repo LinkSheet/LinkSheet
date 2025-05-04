@@ -14,7 +14,6 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class ProfileForwardRuleTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<ProfileForwardRuleTest>()
 
     private val rule = object : PreprocessorRule {
         private val workRelatedHost = "sso.mycompany.com"
@@ -33,7 +32,6 @@ internal class ProfileForwardRuleTest : BaseRuleEngineTest() {
             TestLinkModifier(EngineStepId.ClearURLs) { StepTestResult(it) }
         ),
         rules = listOf(rule),
-        logger = testPrintLogger,
         dispatcher = dispatcher,
     )
 

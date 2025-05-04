@@ -5,7 +5,6 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import fe.linksheet.DatabaseTest
-import fe.linksheet.DefaultPrintLogger
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.assert.assertSuccess
 import fe.std.time.unixMillisOf
@@ -56,8 +55,7 @@ internal class PreviewLocalSourceTest : DatabaseTest() {
         val fetcher = PreviewLinkFetcher(
             ioDispatcher = Dispatchers.IO,
             source = PreviewLocalSource(
-                client = client,
-                logger = DefaultPrintLogger<PreviewLocalSourceTest>()
+                client = client
             ),
             cacheRepository = cacheRepository,
             useLocalCache = { true }

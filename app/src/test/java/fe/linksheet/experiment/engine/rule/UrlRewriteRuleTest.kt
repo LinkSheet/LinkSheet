@@ -19,7 +19,6 @@ import kotlin.test.Test
 @RunWith(AndroidJUnit4::class)
 internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
-    private val testPrintLogger = createTestEngineLogger<UrlRewriteRuleTest>()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/407
     private val rule = object : PostprocessorRule {
@@ -41,7 +40,6 @@ internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
             TestLinkModifier(EngineStepId.ClearURLs) { StepTestResult(it) }
         ),
         rules = listOf(rule),
-        logger = testPrintLogger,
         dispatcher = dispatcher,
     )
 

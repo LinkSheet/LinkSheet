@@ -130,13 +130,11 @@ class LinkEngineIntentResolver(
         if (uriResult.isFailure()) {
             logger.error("Failed to parse intent ${intent.action}")
             return +uriResult.exception
-//            return@scope IntentResolveResult.IntentParseFailed(uriResult.exception as UriException)
         }
 
         val url = uriResult.value.toStdUrl()
         if (url == null) {
             return +UriParseException
-//            return@scope IntentResolveResult.IntentParseFailed(UriParseException)
         }
 
         return +url
@@ -154,7 +152,7 @@ class LinkEngineIntentResolver(
 
         val startUrl = urlParseResult.value
         val referringPackage = ReferrerHelper.getReferringPackage(referrer)
-//        emitEvent(ResolveEvent.QueryingBrowsers)
+        emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageService.findHttpBrowsable(null)
 
         val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()

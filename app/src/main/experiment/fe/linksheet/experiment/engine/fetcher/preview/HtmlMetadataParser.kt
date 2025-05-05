@@ -72,7 +72,7 @@ class HtmlMetadataParser {
 
         val title = richTitle ?: documentTitle
         if (!hasAnyRich) {
-            return HtmlPreviewResult.SimplePreviewResult(
+            return HtmlPreviewResult.Simple(
                 url = urlStr,
                 htmlText = htmlText,
                 title = title,
@@ -80,7 +80,7 @@ class HtmlMetadataParser {
             )
         }
 
-        return HtmlPreviewResult.RichPreviewResult(
+        return HtmlPreviewResult.Rich(
             url = urlStr,
             htmlText = htmlText,
             title = title,

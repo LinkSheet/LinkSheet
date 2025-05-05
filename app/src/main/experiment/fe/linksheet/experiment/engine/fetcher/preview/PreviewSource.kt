@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
+import androidx.room.TypeConverter
 import fe.linksheet.experiment.engine.fetcher.FetchResult
 import fe.std.result.IResult
 import me.saket.unfurl.UnfurlResult
@@ -11,62 +12,84 @@ interface PreviewSource {
     suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewFetchResult>
 }
 
-sealed class PreviewFetchResult(val url: String) : FetchResult {
-    class NoPreview(url: String) : PreviewFetchResult(url) {
-        override fun toString(): String {
-            return "NoPreview(url='$url')"
-        }
+enum class PreviewFetchResultId {
+    None,
+    NonHtml,
+    Simple,
+    Rich;
+
+    fun hasPreview(): Boolean {
+        return this == Simple || this == Rich
     }
 
-    class NonHtmlPage(url: String) : PreviewFetchResult(url) {
-        override fun toString(): String {
-            return "NonHtmlPage(url='$url')"
+    companion object Converter {
+        @TypeConverter
+        fun toInt(id: PreviewFetchResultId): Int {
+            return id.ordinal
+        }
+
+        @TypeConverter
+        fun toPreviewFetchResultId(ordinal: Int): PreviewFetchResultId {
+            return entries[ordinal]
         }
     }
 }
 
-sealed class HtmlPreviewResult(url: String, val htmlText: String) : PreviewFetchResult(url) {
-    class RichPreviewResult(
-        url: String,
-        htmlText: String,
+sealed interface PreviewFetchResult : FetchResult {
+    val id: PreviewFetchResultId
+    val url: String
+
+    data class NoPreview(override val url: String) : PreviewFetchResult {
+        override val id = PreviewFetchResultId.None
+    }
+
+    data class NonHtmlPage(override val url: String) : PreviewFetchResult {
+        override val id = PreviewFetchResultId.NonHtml
+    }
+}
+
+sealed interface HtmlPreviewResult : PreviewFetchResult {
+    val htmlText: String
+
+    data class Rich(
+        override val url: String,
+        override val htmlText: String,
         val title: String?,
         val description: String?,
         val favicon: String?,
         val thumbnail: String?,
-    ) : HtmlPreviewResult(url, htmlText) {
-        override fun toString(): String {
-            return "RichPreviewResult(url='$url', htmlText='$htmlText', title=$title, description=$description, favicon=$favicon, thumbnail=$thumbnail)"
-        }
+    ) : HtmlPreviewResult {
+        override val id = PreviewFetchResultId.Rich
     }
 
-    class SimplePreviewResult(
-        url: String,
-        htmlText: String,
+    data class Simple(
+        override val url: String,
+        override val htmlText: String,
         val title: String?,
         val favicon: String?
-    ) : HtmlPreviewResult(url, htmlText) {
-        override fun toString(): String {
-            return "SimplePreviewResult(url='$url', htmlText='$htmlText', title=$title, favicon=$favicon)"
-        }
+    ) : HtmlPreviewResult {
+        override val id = PreviewFetchResultId.Simple
     }
 }
 
 fun PreviewFetchResult.toUnfurlResult(): UnfurlResult {
-    return when(this) {
-        is HtmlPreviewResult.RichPreviewResult -> UnfurlResult(
+    return when (this) {
+        is HtmlPreviewResult.Rich -> UnfurlResult(
             url = url.toHttpUrl(),
             title = title,
             description = description,
             favicon = favicon?.toHttpUrlOrNull(),
             thumbnail = thumbnail?.toHttpUrlOrNull()
         )
-        is HtmlPreviewResult.SimplePreviewResult -> UnfurlResult(
+
+        is HtmlPreviewResult.Simple -> UnfurlResult(
             url = url.toHttpUrl(),
             title = title,
             description = null,
             favicon = favicon?.toHttpUrlOrNull(),
             thumbnail = null
         )
+
         is PreviewFetchResult.NoPreview -> UnfurlResult(
             url = url.toHttpUrl(),
             title = null,
@@ -74,6 +97,7 @@ fun PreviewFetchResult.toUnfurlResult(): UnfurlResult {
             favicon = null,
             thumbnail = null
         )
+
         is PreviewFetchResult.NonHtmlPage -> UnfurlResult(
             url = url.toHttpUrl(),
             title = null,

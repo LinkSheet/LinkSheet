@@ -2,6 +2,7 @@ package fe.linksheet.module.repository
 
 import fe.linksheet.experiment.engine.fetcher.preview.HtmlPreviewResult
 import fe.linksheet.experiment.engine.fetcher.preview.PreviewFetchResult
+import fe.linksheet.experiment.engine.fetcher.preview.PreviewFetchResultId
 import fe.linksheet.module.database.dao.cache.*
 import fe.linksheet.module.database.entity.cache.CachedHtml
 import fe.linksheet.module.database.entity.cache.PreviewCache
@@ -68,7 +69,7 @@ class CacheRepository(
     }
 
     suspend fun insertPreview(entryId: Long, result: PreviewFetchResult) {
-        if (result is PreviewFetchResult.NonHtmlPage) {
+        if (!result.id.hasPreview()) {
             // TODO: Should we cache the info that there has not been a cache hit?
             // TODO: Caching non-hits would obviously help an unnecessary round-trip to the remote host, but what would that mean
             // for situations where the preview is added at a later date? We would probably have to use some sort of TTL
@@ -76,7 +77,8 @@ class CacheRepository(
         }
 
         val cacheEntry = when (result) {
-            is HtmlPreviewResult.RichPreviewResult -> PreviewCache(
+            is HtmlPreviewResult.Rich -> PreviewCache(
+                resultId = PreviewFetchResultId.Rich,
                 id = entryId,
                 title = result.title,
                 description = result.description,
@@ -84,7 +86,8 @@ class CacheRepository(
                 thumbnailUrl = result.thumbnail
             )
 
-            is HtmlPreviewResult.SimplePreviewResult -> PreviewCache(
+            is HtmlPreviewResult.Simple -> PreviewCache(
+                resultId = PreviewFetchResultId.Simple,
                 id = entryId,
                 title = result.title,
                 description = null,

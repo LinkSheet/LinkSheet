@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "8ee6d0dcc74ea093427e4e57604ba2af",
+    "identityHash": "164800b78c0c5066900659b1bd542ed9",
     "entities": [
       {
         "tableName": "openwith",
@@ -354,7 +354,7 @@
       },
       {
         "tableName": "preview_cache",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconUrl` TEXT, `thumbnailUrl` TEXT, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconUrl` TEXT, `thumbnailUrl` TEXT, `resultId` INTEGER NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -381,6 +381,12 @@
             "fieldPath": "thumbnailUrl",
             "columnName": "thumbnailUrl",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "resultId",
+            "columnName": "resultId",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -534,7 +540,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8ee6d0dcc74ea093427e4e57604ba2af')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '164800b78c0c5066900659b1bd542ed9')"
     ]
   }
 }

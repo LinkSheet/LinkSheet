@@ -2,8 +2,9 @@ package fe.linksheet.module.database.entity.cache
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import fe.linksheet.experiment.engine.fetcher.preview.PreviewFetchResultId
 
 @Entity(
     tableName = "preview_cache",
@@ -11,17 +12,16 @@ import androidx.room.PrimaryKey
         ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
     ]
 )
+@TypeConverters(value = [PreviewFetchResultId.Converter::class])
 data class PreviewCache(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String?,
     val description: String?,
     val faviconUrl: String?,
-    val thumbnailUrl: String?
+    val thumbnailUrl: String?,
+    val resultId: PreviewFetchResultId
 //    val faviconType: String?,
 //    val faviconUrl: ByteArray?,
 //    val thumbnailType: String?,
 //    val thumbnail: ByteArray?
-) {
-    @Ignore
-    val isRichPreview = description != null || thumbnailUrl != null
-}
+)

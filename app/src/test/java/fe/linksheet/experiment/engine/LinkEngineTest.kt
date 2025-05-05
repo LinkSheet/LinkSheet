@@ -7,11 +7,13 @@ import assertk.assertions.prop
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
 import fe.linksheet.experiment.engine.context.SourceAppExtra
 import fe.linksheet.experiment.engine.modifier.ClearURLsLinkModifier
+import fe.linksheet.experiment.engine.modifier.EmbedLinkModifier
+import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLinkResolver
+import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLocalSource
+import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLinkResolver
+import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
 import fe.linksheet.experiment.engine.rule.BaseRuleEngineTest
 import fe.linksheet.module.repository.CacheRepository
-import fe.linksheet.module.repository.LibRedirectDefaultRepository
-import fe.linksheet.module.repository.LibRedirectStateRepository
-import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import io.ktor.client.*
@@ -36,31 +38,31 @@ internal class LinkEngineTest : BaseRuleEngineTest() {
         )
     }
 
-    private val defaultRepository by lazy {
-        LibRedirectDefaultRepository(
-            dao = database.libRedirectDefaultDao()
-        )
-    }
-
-    private val stateRepository by lazy {
-        LibRedirectStateRepository(
-            dao = database.libRedirectServiceStateDao()
-        )
-    }
-
     @Test
     fun test() = runTest(dispatcher) {
         // TODO: Test should not require real http
-        val httpClient = HttpClient(OkHttp)
+        val client = HttpClient(OkHttp)
 
-        val engine = DefaultLinkEngine(
-            ioDispatcher = dispatcher,
-            client = httpClient,
-            libRedirectResolver = LibRedirectResolver(
-                defaultRepository = defaultRepository,
-                stateRepository = stateRepository
+        val engine = LinkEngine(
+            steps = listOf(
+                EmbedLinkModifier(ioDispatcher = dispatcher),
+                ClearURLsLinkModifier(ioDispatcher = dispatcher),
+                FollowRedirectsLinkResolver(
+                    ioDispatcher = dispatcher,
+                    source = FollowRedirectsLocalSource(client = client),
+                    cacheRepository = cacheRepository,
+                    allowDarknets = { false },
+                    followOnlyKnownTrackers = { true },
+                    useLocalCache = { true }
+                ),
+                Amp2HtmlLinkResolver(
+                    ioDispatcher = dispatcher,
+                    source = Amp2HtmlLocalSource(client = client),
+                    cacheRepository = cacheRepository,
+                    useLocalCache = { true }
+                )
             ),
-            cacheRepository = cacheRepository
+            dispatcher = dispatcher
         )
 
         val result = engine.process("https://t.co/Id9w9cFcQw".toStdUrlOrThrow())

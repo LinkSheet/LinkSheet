@@ -25,8 +25,10 @@ import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import kotlin.time.ExperimentalTime
 import kotlin.uuid.ExperimentalUuidApi
 
+@OptIn(ExperimentalTime::class)
 val resolverModule = module {
     single { BrowserResolver(getPackageManager(), get()) }
     single {

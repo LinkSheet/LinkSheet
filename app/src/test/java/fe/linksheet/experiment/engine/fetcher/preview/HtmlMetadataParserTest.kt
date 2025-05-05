@@ -240,8 +240,8 @@ internal class HtmlMetadataParserTest : UnitTest {
 
         val result = HtmlMetadataParser().parse(document, document.html())
 
-        assertThat(result).isInstanceOf<HtmlPreviewResult.RichPreviewResult>().isEqualToIgnoringGivenProperties(
-            HtmlPreviewResult.RichPreviewResult(
+        assertThat(result).isInstanceOf<HtmlPreviewResult.Rich>().isEqualToIgnoringGivenProperties(
+            HtmlPreviewResult.Rich(
                 url = "https://tonsky.me/blog/diagrams",
                 htmlText = "<< no-html >>",
                 title = "Where Should Visual Programming Go?",
@@ -249,7 +249,7 @@ internal class HtmlMetadataParserTest : UnitTest {
                 favicon = "https://tonsky.me/i/favicon.png",
                 thumbnail = "https://dynogee.com/gen?id=nm509093bpj50lv&title=Where+Should+Visual+Programming+Go%3F"
             ),
-            HtmlPreviewResult.RichPreviewResult::htmlText
+            HtmlPreviewResult.Rich::htmlText
         )
     }
 
@@ -991,15 +991,15 @@ internal class HtmlMetadataParserTest : UnitTest {
         </html>"""
         val result = HtmlMetadataParser().parse(html, "https://www.youtube.com/watch?v=x1J-gd0Z-RU")
 
-        assertThat(result).isInstanceOf<HtmlPreviewResult.RichPreviewResult>().isEqualToIgnoringGivenProperties(
-            HtmlPreviewResult.RichPreviewResult(
+        assertThat(result).isInstanceOf<HtmlPreviewResult.Rich>().isEqualToIgnoringGivenProperties(
+            HtmlPreviewResult.Rich(
                 url = "https://www.youtube.com/watch?v=x1J-gd0Z-RU", htmlText = "<< no-html >>",
                 title = "Best Android Apps - April 2023!",
                 description = "Get UPDF with 54% OFF and 2 FREE gifts (One License for Windows, Mac, iOS & Android):http://bit.ly/3lgZNft_______________________________________\u00AD\u00AD▣ HowToPer...",
                 favicon = "https://www.youtube.com/s/desktop/3747f4fc/img/logos/favicon.ico",
                 thumbnail = "https://i.ytimg.com/vi/x1J-gd0Z-RU/maxresdefault.jpg"
             ),
-            HtmlPreviewResult.RichPreviewResult::htmlText
+            HtmlPreviewResult.Rich::htmlText
         )
     }
 }

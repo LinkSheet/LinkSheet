@@ -53,15 +53,17 @@ inline fun <reified E : EngineExtra> EngineRunContext.findExtraOrNull(): E? {
     return extras.filterIsInstance<E>().firstOrNull()
 }
 
+inline fun <reified E : EngineExtra> EngineRunContext.hasExtra(): Boolean {
+    return findExtraOrNull<E>() != null
+}
+
 enum class EngineFlag {
     DisablePreview
 }
 
-sealed interface EngineExtra {
-
-}
-
+sealed interface EngineExtra
 data class SourceAppExtra(val appPackage: String) : EngineExtra
+data object IgnoreLibRedirect : EngineExtra
 
 fun AndroidAppPackage.toSourceAppExtra(): SourceAppExtra {
     return SourceAppExtra(packageName)

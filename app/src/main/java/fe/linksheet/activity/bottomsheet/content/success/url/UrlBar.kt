@@ -131,7 +131,7 @@ fun UrlBarWrapper(
             controller.onNewIntent(
                 Intents.createSelfIntent(
                     redirectedResult.originalUri,
-                    bundleOf(LibRedirectDefault.libRedirectIgnore to true)
+                    bundleOf(LibRedirectDefault.IgnoreIntentKey to true)
                 )
             )
         },

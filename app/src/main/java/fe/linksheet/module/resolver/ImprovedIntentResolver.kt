@@ -443,9 +443,9 @@ class ImprovedIntentResolver(
     ): LibRedirectResult? = withContext(dispatcher) {
         if (!enabled) return@withContext null
 
-        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
+        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.IgnoreIntentKey, false)
         if (ignoreLibRedirectExtra) {
-            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
+            intent.extras?.remove(LibRedirectDefault.IgnoreIntentKey)
         }
 
         if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null

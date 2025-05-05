@@ -47,13 +47,9 @@ fun DefaultLinkEngineIntentResolver(
     preferredAppRepository: PreferredAppRepository,
     normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    libRedirectDefaultRepository: LibRedirectDefaultRepository,
-    libRedirectStateRepository: LibRedirectStateRepository,
     packageService: PackageService,
     appSorter: AppSorter,
     downloader: Downloader,
-    redirectUrlResolver: RedirectUrlResolver,
-    amp2HtmlResolver: Amp2HtmlUrlResolver,
     browserHandler: ImprovedBrowserHandler,
     inAppBrowserHandler: InAppBrowserHandler,
     libRedirectResolver: LibRedirectResolver,
@@ -79,13 +75,13 @@ fun DefaultLinkEngineIntentResolver(
                 cacheRepository = cacheRepository,
                 allowDarknets = settings.followRedirectsSettings.followRedirectsAllowDarknets,
                 followOnlyKnownTrackers = settings.followRedirectsSettings.followOnlyKnownTrackers,
-                useLocalCache = { true }
+                useLocalCache = settings.followRedirectsSettings.followRedirectsLocalCache
             ),
             Amp2HtmlLinkResolver(
                 ioDispatcher = dispatcher,
                 source = Amp2HtmlLocalSource(client = client),
                 cacheRepository = cacheRepository,
-                useLocalCache = { true }
+                useLocalCache = settings.amp2HtmlSettings.amp2HtmlLocalCache
             )
         ),
         fetchers = listOf(
@@ -123,13 +119,8 @@ fun DefaultLinkEngineIntentResolver(
         inAppBrowsersRepository = inAppBrowsersRepository,
         packageService = packageService,
         appSorter = appSorter,
-        downloader = downloader,
-        redirectUrlResolver = redirectUrlResolver,
-        amp2HtmlResolver = amp2HtmlResolver,
         browserHandler = browserHandler,
         inAppBrowserHandler = inAppBrowserHandler,
-        libRedirectResolver = libRedirectResolver,
-        cacheRepository = cacheRepository,
         networkStateService = networkStateService,
         selector = selector,
         settings = settings

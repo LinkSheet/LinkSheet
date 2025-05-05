@@ -13,7 +13,7 @@ data class DownloadLinkFetcher(
     private val checkUrlMimeType: () -> Boolean = { false },
     private val requestTimeout: () -> Int = { 15 },
 ) : LinkFetcher<DownloadCheckFetchResult> {
-    override val id = LinkFetcherId.Download
+    override val id = ContextResultId.Download
 
     override suspend fun fetch(url: StdUrl) = withContext(ioDispatcher) {
         if (checkUrlMimeType()) {

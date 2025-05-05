@@ -1,8 +1,10 @@
 package fe.linksheet.experiment.engine.modifier
 
 import fe.linksheet.experiment.engine.context.EngineRunContext
-import fe.linksheet.experiment.engine.context.IgnoreLibRedirect
+import fe.linksheet.experiment.engine.context.IgnoreLibRedirectExtra
 import fe.linksheet.experiment.engine.context.hasExtra
+import fe.linksheet.experiment.engine.fetcher.ContextResult
+import fe.linksheet.experiment.engine.fetcher.ContextResultId
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.step.StepResult
 import fe.linksheet.extension.std.toStdUrlOrThrow
@@ -25,20 +27,30 @@ data class LibRedirectLinkModifier(
     }
 
     override suspend fun EngineRunContext.runStep(url: StdUrl): LibRedirectModifyOutput = withContext(ioDispatcher) {
-        if (hasExtra<IgnoreLibRedirect>()) {
+        if (hasExtra<IgnoreLibRedirectExtra>()) {
             return@withContext LibRedirectModifyOutput.Ignored(url)
         }
 
         val jsEngine = useJsEngine()
         val result = resolver.resolve(url.toString(), jsEngine)
-        result.toModifyOutput(url)
+        val output = result.toModifyOutput(url)
+        val contextResult = result.wrapInContextResult()
+        put(ContextResultId.LibRedirect, contextResult)
+
+        output
     }
+}
+
+class LibRedirectContextResult(val wrapped: LibRedirectResult) : ContextResult
+
+private fun LibRedirectResult.wrapInContextResult(): LibRedirectContextResult {
+    return LibRedirectContextResult(this)
 }
 
 sealed interface LibRedirectModifyOutput : StepResult {
     data class Ignored(override val url: StdUrl) : LibRedirectModifyOutput
-    data class Redirected(val originalUri: StdUrl, val redirectedUri: StdUrl) : LibRedirectModifyOutput {
-        override val url = redirectedUri
+    data class Redirected(val originalUrl: StdUrl, val redirectedUrl: StdUrl) : LibRedirectModifyOutput {
+        override val url = redirectedUrl
     }
 
     data class NotRedirected(override val url: StdUrl) : LibRedirectModifyOutput

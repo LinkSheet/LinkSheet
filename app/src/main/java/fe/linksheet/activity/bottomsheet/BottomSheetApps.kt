@@ -46,6 +46,7 @@ import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
 import kotlinx.coroutines.CompletionHandler
+import kotlin.time.ExperimentalTime
 
 typealias LaunchApp = (ActivityAppInfo, Intent, ClickModifier) -> Unit
 typealias Launch2 = (index: Int, info: ActivityAppInfo, type: ClickType, modifier: ClickModifier) -> Unit
@@ -319,6 +320,7 @@ private fun BottomSheetAppsPreview_Grid(
     BottomSheetAppsBasePreview(state = state, gridLayout = true)
 }
 
+@OptIn(ExperimentalTime::class)
 @Composable
 private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean) {
     val appSorter = AppSorter(

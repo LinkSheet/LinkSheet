@@ -1,7 +1,7 @@
 package fe.linksheet.experiment.engine.context
 
-import fe.linksheet.experiment.engine.fetcher.FetchResult
-import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
+import fe.linksheet.experiment.engine.fetcher.ContextResult
+import fe.linksheet.experiment.engine.fetcher.ContextResultId
 import fe.linksheet.module.resolver.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import java.util.EnumSet
@@ -10,25 +10,29 @@ interface EngineRunContext {
     val extras: Set<EngineExtra>
     val flags: EnumSet<EngineFlag>
 
-    fun <Result : FetchResult> put(id: LinkFetcherId<Result>, result: Result?)
-    fun <Result : FetchResult> confirm(fetcher: LinkFetcherId<Result>): Boolean
+    fun <Result : ContextResult> put(id: ContextResultId<Result>, result: Result?)
+    fun <Result : ContextResult> confirm(fetcher: ContextResultId<Result>): Boolean
     fun seal(): SealedRunContext
 }
 
 class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRunContext {
     override val flags: EnumSet<EngineFlag> = emptyEnumSet()
-    private val results = mutableMapOf<LinkFetcherId<*>, FetchResult?>()
+    private val results = mutableMapOf<ContextResultId<*>, ContextResult?>()
 
     // TODO: Consider splitting into input data class, runtime context and SealedRunContext to avoid allowing mutations of [results]
     // from outside a LinkEngine run
-    override fun <Result : FetchResult> put(id: LinkFetcherId<Result>, result: Result?) {
+    override fun <Result : ContextResult> put(id: ContextResultId<Result>, result: Result?) {
         results[id] = result
     }
 
-    override fun <Result : FetchResult> confirm(fetcher: LinkFetcherId<Result>): Boolean {
+    // TODO: [ContextResultId.LibRedirect] works different than the other results, as it is obtained and stored in the
+    //  context via [LibRedirectLinkModifier] instead of being obtained from within [LinkEngine];
+    //  Is this fine? Do we need to add another level of abstraction?
+    override fun <Result : ContextResult> confirm(fetcher: ContextResultId<Result>): Boolean {
         return when (fetcher) {
-            LinkFetcherId.Download -> true
-            LinkFetcherId.Preview -> EngineFlag.DisablePreview !in flags
+            ContextResultId.Download -> true
+            ContextResultId.Preview -> EngineFlag.DisablePreview !in flags
+            ContextResultId.LibRedirect -> false
         }
     }
 
@@ -37,8 +41,9 @@ class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRun
     }
 }
 
-data class SealedRunContext(val flags: Set<EngineFlag>, private val results: Map<LinkFetcherId<*>, FetchResult?>) {
-    fun <Result : FetchResult> get(id: LinkFetcherId<Result>): Result? {
+data class SealedRunContext(val flags: Set<EngineFlag>, private val results: Map<ContextResultId<*>, ContextResult?>) {
+
+    operator fun <Result : ContextResult> get(id: ContextResultId<Result>): Result? {
         @Suppress("UNCHECKED_CAST")
         return results[id] as Result?
     }
@@ -47,6 +52,11 @@ data class SealedRunContext(val flags: Set<EngineFlag>, private val results: Map
 @Suppress("FunctionName")
 fun DefaultEngineRunContext(vararg extras: EngineExtra?): EngineRunContext {
     return DefaultEngineRunContext(extras = extras.filterNotNull().toSet())
+}
+
+@Suppress("FunctionName")
+fun DefaultEngineRunContext(builderAction: MutableSet<EngineExtra>.() -> Unit): EngineRunContext {
+    return DefaultEngineRunContext(buildSet(builderAction))
 }
 
 inline fun <reified E : EngineExtra> EngineRunContext.findExtraOrNull(): E? {
@@ -63,7 +73,7 @@ enum class EngineFlag {
 
 sealed interface EngineExtra
 data class SourceAppExtra(val appPackage: String) : EngineExtra
-data object IgnoreLibRedirect : EngineExtra
+data object IgnoreLibRedirectExtra : EngineExtra
 
 fun AndroidAppPackage.toSourceAppExtra(): SourceAppExtra {
     return SourceAppExtra(packageName)

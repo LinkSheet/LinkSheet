@@ -72,6 +72,7 @@ sealed interface HtmlPreviewResult : PreviewFetchResult {
     }
 }
 
+// TODO: This should eventually be removed once the Link engine is stable and the old resolver implementation has been removed
 fun PreviewFetchResult.toUnfurlResult(): UnfurlResult {
     return when (this) {
         is HtmlPreviewResult.Rich -> UnfurlResult(

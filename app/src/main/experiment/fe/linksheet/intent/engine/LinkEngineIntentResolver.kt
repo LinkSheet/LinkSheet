@@ -8,8 +8,9 @@ import fe.linksheet.experiment.engine.Input
 import fe.linksheet.experiment.engine.TrackSelector
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
+import fe.linksheet.experiment.engine.context.IgnoreLibRedirectExtra
 import fe.linksheet.experiment.engine.context.toSourceAppExtra
-import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
+import fe.linksheet.experiment.engine.fetcher.ContextResultId
 import fe.linksheet.experiment.engine.fetcher.preview.toUnfurlResult
 import fe.linksheet.experiment.engine.fetcher.toFetchResult
 import fe.linksheet.extension.std.toAndroidUri
@@ -17,6 +18,7 @@ import fe.linksheet.extension.std.toStdUrl
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
+import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.Downloader
@@ -34,7 +36,6 @@ import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.LibRedirectResolver
-import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.ResolverInteraction
@@ -157,9 +158,15 @@ class LinkEngineIntentResolver(
 
         val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
 
-//        emitEventIf(shouldRunUriModifiers, ResolveEvent.ApplyingLinkModifiers)
+        val ignoreLibRedirect = shouldIgnoreLibRedirect(intent, libRedirectSettings.enableIgnoreLibRedirectButton())
+        val context = DefaultEngineRunContext {
+            if (ignoreLibRedirect) {
+                add(IgnoreLibRedirectExtra)
+            }
 
-        val sourceAppExtra = referringPackage?.toSourceAppExtra()
+            referringPackage?.toSourceAppExtra()?.let(::add)
+        }
+
         val input = Input(startUrl, referringPackage)
         val track = trackSelector.find(input)
         if (track == null) {
@@ -167,7 +174,6 @@ class LinkEngineIntentResolver(
             return@scope IntentResolveResult.NoTrackFound
         }
 
-        val context = DefaultEngineRunContext(sourceAppExtra)
         val (sealedContext, result) = track.engine.process(startUrl, context)
         if (result !is UrlEngineResult) {
             TODO("Handle this")
@@ -176,7 +182,7 @@ class LinkEngineIntentResolver(
         val resultUrl = result.url
         val resultUri = resultUrl.toAndroidUri()
 
-        val downloadResult = sealedContext.get(LinkFetcherId.Download)
+        val downloadResult = sealedContext[ContextResultId.Download]
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
@@ -212,11 +218,10 @@ class LinkEngineIntentResolver(
             returnLastChosen = !settings.dontShowFilteredItem()
         )
 
-        val previewResult = sealedContext.get(LinkFetcherId.Preview)?.toUnfurlResult()
+        val previewResult = sealedContext[ContextResultId.Preview]?.toUnfurlResult()
         logger.info("Preview result: $previewResult")
 
-        // TODO: Return real
-        val libRedirectResult = LibRedirectResult.NotRedirected
+        val libRedirectResult = sealedContext[ContextResultId.LibRedirect]
         val resolveStatus = ResolveModuleStatus()
         return@scope IntentResolveResult.Default(
             newIntent,
@@ -228,7 +233,7 @@ class LinkEngineIntentResolver(
             app?.alwaysPreferred,
             appList.isSingleOption || appList.noBrowsersOnlySingleApp,
             resolveStatus,
-            libRedirectResult,
+            libRedirectResult?.wrapped,
             downloadResult?.toFetchResult()
         )
     }
@@ -263,6 +268,12 @@ class LinkEngineIntentResolver(
         BrowserMode.Whitelisted -> BrowserModeConfigHelper.Whitelisted(
             repository.getAll().firstOrNull()?.mapToSet { it.packageName }
         )
+    }
+
+    private fun shouldIgnoreLibRedirect(intent: SafeIntent, enableIgnoreLibRedirectButton: Boolean): Boolean {
+        if (!intent.getBooleanExtra(LibRedirectDefault.IgnoreIntentKey, false)) return false
+        intent.extras?.remove(LibRedirectDefault.IgnoreIntentKey)
+        return enableIgnoreLibRedirectButton
     }
 
     private suspend fun queryAppSelectionHistory(

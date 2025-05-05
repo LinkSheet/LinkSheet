@@ -10,8 +10,8 @@ import fe.linksheet.experiment.engine.context.EngineExtra
 import fe.linksheet.experiment.engine.context.EngineFlag
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.context.SealedRunContext
-import fe.linksheet.experiment.engine.fetcher.FetchResult
-import fe.linksheet.experiment.engine.fetcher.LinkFetcherId
+import fe.linksheet.experiment.engine.fetcher.ContextResult
+import fe.linksheet.experiment.engine.fetcher.ContextResultId
 import fe.linksheet.experiment.engine.modifier.LinkModifier
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.step.StepResult
@@ -24,6 +24,7 @@ abstract class BaseRuleEngineTest : DatabaseTest() {
     fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
         return assertThat(result.second)
     }
+
     @After
     override fun stop() {
         println("[BaseLinkEngineTest] stop")
@@ -51,8 +52,8 @@ data class StepTestResult(override val url: StdUrl) : StepResult
 object TestEngineRunContext : EngineRunContext {
     override val extras: Set<EngineExtra> = emptySet()
     override val flags: EnumSet<EngineFlag> = emptyEnumSet()
-    override fun <Result : FetchResult> put(id: LinkFetcherId<Result>, result: Result?) {}
-    override fun <Result : FetchResult> confirm(fetcher: LinkFetcherId<Result>): Boolean = true
+    override fun <Result : ContextResult> put(id: ContextResultId<Result>, result: Result?) {}
+    override fun <Result : ContextResult> confirm(fetcher: ContextResultId<Result>): Boolean = true
     override fun seal(): SealedRunContext = SealedRunContext(flags, emptyMap())
 }
 

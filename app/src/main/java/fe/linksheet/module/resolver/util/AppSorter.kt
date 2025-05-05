@@ -4,16 +4,21 @@ import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.module.clock.ClockProvider
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
-import java.util.concurrent.TimeUnit
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
+import kotlin.time.ExperimentalTime
 
-class AppSorter(
+@OptIn(ExperimentalTime::class)
+class AppSorter (
     private val queryAndAggregateUsageStats: (beginTime: Long, endTime: Long) -> Map<String, UsageStats>,
     private val toAppInfo: (ResolveInfo, browser: Boolean) -> ActivityAppInfo,
+    private val clockProvider: ClockProvider,
+    private val usageStatsPeriod: Duration = 14.days
 ) {
     private val emptyComparator: Comparator<ActivityAppInfo> = Comparator { _, _ -> 0 }
-    private val usageStatsPeriod = TimeUnit.DAYS.toMillis(14)
 
     fun sort(
         appList: FilteredBrowserList,
@@ -51,10 +56,11 @@ class AppSorter(
         return compareByDescending { app -> historyMap[app.packageName] ?: -1L }
     }
 
+    @OptIn(ExperimentalTime::class)
     private fun createUsageStatComparator(): Comparator<ActivityAppInfo> {
-        val now = System.currentTimeMillis()
+        val now = clockProvider.now()
         val sinceTime = now - usageStatsPeriod
-        val usageStatsMap = queryAndAggregateUsageStats(sinceTime, now)
+        val usageStatsMap = queryAndAggregateUsageStats(sinceTime.toEpochMilliseconds(), now.toEpochMilliseconds())
 
         return compareByDescending { app -> usageStatsMap[app.packageName]?.totalTimeInForeground ?: -1L }
     }

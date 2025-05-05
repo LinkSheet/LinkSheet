@@ -3,79 +3,13 @@ package fe.linksheet.experiment.engine
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.fetcher.LinkFetcher
-import fe.linksheet.experiment.engine.modifier.ClearURLsLinkModifier
-import fe.linksheet.experiment.engine.modifier.EmbedLinkModifier
-import fe.linksheet.experiment.engine.modifier.LibRedirectLinkModifier
-import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLinkResolver
-import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLocalSource
-import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLinkResolver
-import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
-import fe.linksheet.experiment.engine.step.AfterStepRule
-import fe.linksheet.experiment.engine.step.BeforeStepRule
-import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
-import fe.linksheet.experiment.engine.rule.PreProcessorInput
-import fe.linksheet.experiment.engine.rule.PreprocessorRule
-import fe.linksheet.experiment.engine.rule.Rule
-import fe.linksheet.experiment.engine.rule.RuleInput
-import fe.linksheet.experiment.engine.step.SkipStep
-import fe.linksheet.experiment.engine.step.StepEnd
-import fe.linksheet.experiment.engine.step.StepRule
-import fe.linksheet.experiment.engine.step.StepRuleInput
-import fe.linksheet.experiment.engine.step.StepRuleResult
-import fe.linksheet.experiment.engine.step.StepStart
-import fe.linksheet.experiment.engine.step.EngineStep
-import fe.linksheet.experiment.engine.step.EngineStepId
-import fe.linksheet.experiment.engine.step.InPlaceStep
-import fe.linksheet.experiment.engine.step.StepResult
+import fe.linksheet.experiment.engine.rule.*
+import fe.linksheet.experiment.engine.step.*
 import fe.linksheet.log.Logger
-import fe.linksheet.module.repository.CacheRepository
-import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.std.uri.StdUrl
-import io.ktor.client.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-
-
-@Suppress("FunctionName")
-fun DefaultLinkEngine(
-    ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    client: HttpClient,
-    libRedirectResolver: LibRedirectResolver,
-    cacheRepository: CacheRepository,
-): LinkEngine {
-    val pipeline = LinkEngine(
-        steps = listOf(
-            EmbedLinkModifier(
-                ioDispatcher = ioDispatcher
-            ),
-            LibRedirectLinkModifier(
-                ioDispatcher = ioDispatcher,
-                resolver = libRedirectResolver,
-                useJsEngine = { false }
-            ),
-            ClearURLsLinkModifier(ioDispatcher = ioDispatcher),
-            FollowRedirectsLinkResolver(
-                ioDispatcher = ioDispatcher,
-                source = FollowRedirectsLocalSource(client = client),
-                cacheRepository = cacheRepository,
-                allowDarknets = { false },
-                followOnlyKnownTrackers = { true },
-                useLocalCache = { true }
-            ),
-            Amp2HtmlLinkResolver(
-                ioDispatcher = ioDispatcher,
-                source = Amp2HtmlLocalSource(client = client),
-                cacheRepository = cacheRepository,
-                useLocalCache = { true }
-            )
-        ),
-        dispatcher = ioDispatcher
-    )
-
-    return pipeline
-}
 
 class LinkEngine(
     private val steps: List<EngineStep<*>>,

@@ -24,14 +24,14 @@ data class PreviewLinkFetcher(
         }
     }
 
-    private fun createFromCache(url: String, previewCache: PreviewCache, htmlText: String) = when {
-        previewCache.isRichPreview -> HtmlPreviewResult.SimplePreviewResult(
+    private fun createFromCache(url: String, previewCache: PreviewCache, htmlText: String) = when(previewCache.resultId) {
+        PreviewFetchResultId.Simple -> HtmlPreviewResult.Simple(
             url = url,
             htmlText = htmlText,
             title = previewCache.title,
             favicon = previewCache.faviconUrl
         )
-        else -> HtmlPreviewResult.RichPreviewResult(
+        PreviewFetchResultId.Rich -> HtmlPreviewResult.Rich(
             url = url,
             htmlText = htmlText,
             title = previewCache.title,
@@ -39,6 +39,8 @@ data class PreviewLinkFetcher(
             favicon = previewCache.faviconUrl,
             thumbnail = previewCache.thumbnailUrl
         )
+        // These are never actually cached, therefore we don't need to constructor data class instances
+        PreviewFetchResultId.None, PreviewFetchResultId.NonHtml -> null
     }
 
     private suspend fun handleCached(entryId: Long, url: String): PreviewFetchResult? {

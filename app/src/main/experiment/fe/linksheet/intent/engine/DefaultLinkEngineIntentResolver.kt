@@ -111,7 +111,7 @@ fun DefaultLinkEngineIntentResolver(
         predicate = { true },
         engine = pipeline
     )
-    val trackSelector = TrackSelector(tracks = listOf(track))
+    val selector = TrackSelector(tracks = listOf(track))
 
     return LinkEngineIntentResolver(
         context = context,
@@ -131,7 +131,7 @@ fun DefaultLinkEngineIntentResolver(
         libRedirectResolver = libRedirectResolver,
         cacheRepository = cacheRepository,
         networkStateService = networkStateService,
-        trackSelector = trackSelector,
+        selector = selector,
         settings = settings
     )
 }

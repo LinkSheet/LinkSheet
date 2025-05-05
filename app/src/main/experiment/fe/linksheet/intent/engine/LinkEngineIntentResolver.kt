@@ -46,6 +46,7 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
+import fe.linksheet.module.resolver.util.CustomTabInfo2
 import fe.linksheet.module.resolver.util.IntentSanitizer
 import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.util.intent.parser.IntentParser
@@ -83,7 +84,7 @@ class LinkEngineIntentResolver(
     private val libRedirectResolver: LibRedirectResolver,
     private val cacheRepository: CacheRepository,
     private val networkStateService: NetworkStateService,
-    private val trackSelector: TrackSelector,
+    private val selector: TrackSelector,
     private val settings: IntentResolverSettings,
 ) : IntentResolver {
     private val browserSettings = settings.browserSettings
@@ -168,13 +169,13 @@ class LinkEngineIntentResolver(
         }
 
         val input = Input(startUrl, referringPackage)
-        val track = trackSelector.find(input)
+        val track = selector.find(input)
         if (track == null) {
             // TODO: What do we do in this situation?
             return@scope IntentResolveResult.NoTrackFound
         }
 
-        val (sealedContext, result) = track.engine.process(startUrl, context)
+        val (sealedContext, result) = track.run(startUrl, context)
         if (result !is UrlEngineResult) {
             TODO("Handle this")
         }
@@ -185,8 +186,8 @@ class LinkEngineIntentResolver(
         val downloadResult = sealedContext[ContextResultId.Download]
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
-        val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
-        val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, resultUri, dropExtras)
+        val customTab = CustomTabHandler.getInfo2(intent, allowCustomTab)
+        val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, resultUri, customTab.dropExtras)
 
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(
@@ -203,7 +204,7 @@ class LinkEngineIntentResolver(
         val resolveList = packageService.findHandlers(resultUri, referringPackage?.packageName)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
-        val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
+        val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab is CustomTabInfo2.Allowed)
         val appList = browserHandler.filterBrowsers(
             config = browserModeConfigHelper,
             browsers = browserPackageMap,
@@ -218,22 +219,17 @@ class LinkEngineIntentResolver(
             returnLastChosen = !settings.dontShowFilteredItem()
         )
 
-        val previewResult = sealedContext[ContextResultId.Preview]?.toUnfurlResult()
-        logger.info("Preview result: $previewResult")
-
-        val libRedirectResult = sealedContext[ContextResultId.LibRedirect]
-        val resolveStatus = ResolveModuleStatus()
         return@scope IntentResolveResult.Default(
             newIntent,
             resultUri,
-            previewResult,
+            sealedContext[ContextResultId.Preview]?.toUnfurlResult(),
             referrer,
             sorted,
             filtered,
             app?.alwaysPreferred,
             appList.isSingleOption || appList.noBrowsersOnlySingleApp,
-            resolveStatus,
-            libRedirectResult?.wrapped,
+            ResolveModuleStatus(),
+            sealedContext[ContextResultId.LibRedirect]?.wrapped,
             downloadResult?.toFetchResult()
         )
     }

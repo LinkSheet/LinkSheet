@@ -46,35 +46,14 @@ class Logger(
     companion object {
         private val DEFAULT = Logger()
 
-        /**
-         * Send a DEBUG log message.
-         */
         fun debug(message: String, throwable: Throwable? = null) = DEFAULT.debug(message, throwable)
 
-        /**
-         * Send a INFO log message.
-         */
         fun info(message: String, throwable: Throwable? = null) = DEFAULT.info(message, throwable)
 
-        /**
-         * Send a WARN log message.
-         */
         fun warn(message: String, throwable: Throwable? = null) = DEFAULT.warn(message, throwable)
 
-        /**
-         * Send a ERROR log message.
-         */
         fun error(message: String, throwable: Throwable? = null) = DEFAULT.error(message, throwable)
 
-        /**
-         * Measure the time it takes to execute the provided block and print a log message before and
-         * after executing the block.
-         *
-         * Example log message:
-         *   ⇢ doSomething()
-         *   [..]
-         *   ⇠ doSomething() [12ms]
-         */
         fun measure(message: String, block: () -> Unit) {
             return DEFAULT.measure(message, block)
         }

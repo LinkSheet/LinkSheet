@@ -557,4 +557,8 @@
     <string name="settings_language__text_system_language_with_language">%s (język systemowy)</string>
     <string name="settings_language__text_system_language">Język systemowy</string>
     <string name="generic__button_open_external">Otwórz zewnętrznie</string>
+    <string name="export_settings__text_failure">Nie udało się stworzyć kopii ustawień!</string>
+    <string name="import_settings__text_success">Przywrócono!</string>
+    <string name="export_settings__text_success">Zapisano!</string>
+    <string name="import_settings__text_failure">Nie udało się przywrócić ustawień!</string>
 </resources>

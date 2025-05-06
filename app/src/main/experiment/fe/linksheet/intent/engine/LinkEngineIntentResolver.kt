@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.experiment.engine.Input
+import fe.linksheet.experiment.engine.EngineTrackInput
 import fe.linksheet.experiment.engine.TrackSelector
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
@@ -21,11 +21,9 @@ import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
-import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
-import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -35,15 +33,12 @@ import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.IntentResolver
-import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.module.BrowserSettings
 import fe.linksheet.module.resolver.module.IntentResolverSettings
-import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
-import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.CustomTabInfo2
@@ -163,8 +158,8 @@ class LinkEngineIntentResolver(
             referringPackage?.toSourceAppExtra()?.let(::add)
         }
 
-        val input = Input(startUrl, referringPackage)
-        val track = selector.find(input)
+        val input = EngineTrackInput(startUrl, referringPackage)
+        val track = selector.findTrack(input)
         if (track == null) {
             // TODO: What do we do in this situation?
             return@scope IntentResolveResult.NoTrackFound

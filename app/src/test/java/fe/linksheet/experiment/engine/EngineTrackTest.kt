@@ -38,8 +38,8 @@ internal class EngineTrackTest : BaseRuleEngineTest() {
         )
 
         val selector = TrackSelector(listOf(track1, track2))
-        val input = Input("https://linksheet.app/test".toStdUrlOrThrow(), null)
-        val track = selector.find(input)
+        val input = EngineTrackInput("https://linksheet.app/test".toStdUrlOrThrow(), null)
+        val track = selector.findTrack(input)
 
         assertThat(track)
             .isNotNull()

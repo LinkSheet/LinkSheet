@@ -1,9 +1,6 @@
 package fe.linksheet.composable.page.settings.advanced.exportimport
 
-import android.app.Activity
 import android.content.Intent
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.LocalTextStyle
@@ -18,31 +15,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.util.*
-import fe.linksheet.module.viewmodel.ExportSettingsViewModel
-import kotlinx.coroutines.launch
-import java.time.LocalDateTime
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 @Composable
-fun ExportSettingsDialog(viewModel: ExportSettingsViewModel) {
+fun ExportSettingsDialog(exportIntent: Intent, onResult: (FileSelectionResult, Boolean) -> Unit) {
     val historyFlag = false
-
     val context = LocalContext.current
-    val contentResolver = context.contentResolver
-    val coroutineScope = rememberCoroutineScope()
 
     var includeLogHashKey by remember { mutableStateOf(false) }
     var includeHistory by remember { mutableStateOf(false) }
 
-    val fileSelectedLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = {
-            if (it.resultCode == Activity.RESULT_OK && it.data?.data != null) {
-                coroutineScope.launch {
-                    viewModel.exportPreferences(it.data!!.data!!, includeLogHashKey)
-                }
-            }
-        }
-    )
+    val fileSelectedLauncher = rememberFileSelectedLauncher {
+        onResult(it, includeLogHashKey)
+    }
 
     DialogColumn {
         HeadlineText(headlineId = R.string.export_settings)
@@ -80,18 +66,7 @@ fun ExportSettingsDialog(viewModel: ExportSettingsViewModel) {
 
         BottomRow {
             TextButton(
-                onClick = {
-                    fileSelectedLauncher.launch(
-                        Intent(Intent.ACTION_CREATE_DOCUMENT)
-                            .addCategory(Intent.CATEGORY_OPENABLE)
-                            .putExtra(
-                                Intent.EXTRA_TITLE,
-                                context.getString(R.string.export_file_name, LocalDateTime.now())
-                            ).apply {
-                                type = "application/json"
-                            }
-                    )
-                }
+                onClick = { fileSelectedLauncher.launch(exportIntent) }
             ) {
                 Text(text = stringResource(id = R.string.export_to_file))
             }

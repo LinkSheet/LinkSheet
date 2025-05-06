@@ -1,13 +1,11 @@
 package fe.linksheet.composable.page.settings.advanced
 
-import android.app.Activity
-import android.net.Uri
-import androidx.activity.compose.LocalActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ImportExport
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.android.compose.icon.iconPainter
@@ -16,58 +14,69 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.page.settings.advanced.exportimport.ExportSettingsDialog
+import fe.linksheet.composable.page.settings.advanced.exportimport.FileSelectionResult
 import fe.linksheet.composable.page.settings.advanced.exportimport.ImportSettingsDialog
-import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
+import fe.std.result.isSuccess
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 @Composable
 fun ExportImportSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: ExportSettingsViewModel = koinViewModel(),
 ) {
-    val activity = LocalActivity.current
-
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val exportDialog = dialogHelper<Unit, Unit, Unit>(
         fetch = { },
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-        ExportSettingsDialog(viewModel = viewModel)
+        ExportSettingsDialog(exportIntent = viewModel.createExportIntent(), onResult = { result, includeLogHashKey ->
+            scope.launch {
+                when(result) {
+                    is FileSelectionResult.Ok ->{
+                        val result = viewModel.exportPreferences(result.uri, includeLogHashKey)
+                        val resId = if (result.isSuccess()) R.string.export_settings__text_success
+                        else R.string.export_settings__text_failure
+
+                        Toast.makeText(context, resId, Toast.LENGTH_LONG).show()
+                    }
+                    FileSelectionResult.Cancelled -> {}
+                }
+
+                close(Unit)
+            }
+        })
     }
 
-    val requestPermissionDialog =
-        dialogHelper<List<PermissionBoundPreference>, List<PermissionBoundPreference>, Unit>(
-            fetch = { it },
-            awaitFetchBeforeOpen = true,
-            dynamicHeight = true
-        ) { state, close ->
-//            ImportPermissionRequiredDialog(activity = activity, permissions = state, close = close)
-        }
-
-    val confirmImportDialog = dialogHelper<Uri, Uri, Result<List<PermissionBoundPreference>>>(
-        fetch = { it },
-//        onClose = { result ->
-//            if (result!!.isSuccess) {
-//                requestPermissionDialog.open(result.getOrNull()!!)
-//            }
-//        },
+    val confirmImportDialog = dialogHelper<Unit, Unit, Unit>(
+        fetch = { },
         awaitFetchBeforeOpen = true,
         dynamicHeight = true
     ) { state, close ->
-        ImportSettingsDialog(uri = state, close = close, viewModel = viewModel)
-    }
+        ImportSettingsDialog(importIntent = viewModel.createImportIntent(), onResult = { result ->
+            scope.launch {
+                when (result) {
+                    is FileSelectionResult.Ok -> {
+                        val result = viewModel.importPreferences(result.uri)
+                        val resId = if (result.isSuccess()) R.string.import_settings__text_success
+                        else R.string.import_settings__text_failure
 
-    val importFileLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                result.data?.data?.let {
-                    confirmImportDialog.open(it)
+                        Toast.makeText(context, resId, Toast.LENGTH_LONG).show()
+                    }
+
+                    FileSelectionResult.Cancelled -> {
+                    }
                 }
+
+                close(Unit)
             }
-        }
-    )
+        })
+    }
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.export_import_settings),
@@ -95,7 +104,7 @@ fun ExportImportSettingsRoute(
                     supportingContent = textContent(R.string.import_explainer),
                     icon = Icons.Outlined.ImportExport.iconPainter,
                     onClick = {
-                        importFileLauncher.launch(viewModel.importIntent)
+                        confirmImportDialog.open(Unit)
                     }
                 )
             }

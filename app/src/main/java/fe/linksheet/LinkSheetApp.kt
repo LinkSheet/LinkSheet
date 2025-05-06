@@ -18,6 +18,7 @@ import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.module.analytics.analyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.app.PackageModule
+import fe.linksheet.module.clock.ClockProviderModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
@@ -113,6 +114,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideKoinModules(): List<Module> {
         return listOf(
+            ClockProviderModule(),
             SystemInfoServiceModule,
             PackageModule,
             AppLocaleModule,

@@ -34,17 +34,15 @@ internal class TextEditorActivityTest {
 
     private fun Instrumentation.ActivityResult.assertValid(result: Int, text: String? = null) {
         assertThat(resultCode).isEqualTo(result)
-
-        if(text != null) {
-            val resultText = resultData.getStringExtra(TextEditorActivity.EXTRA_TEXT)
-            assertThat(resultText).isEqualTo(text)
-        }
+        if (text == null) return
+        val resultText = resultData.getStringExtra(TextEditorActivity.EXTRA_TEXT)
+        assertThat(resultText).isEqualTo(text)
     }
 
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun test__valid_edit() {
-        runAndroidComposeUiTest<TextEditorActivity>(
+        runAndroidComposeUiTest(
             activityLauncher = { launchActivityForResult<TextEditorActivity>(intent) }
         ) { scenario ->
             waitForIdle()
@@ -64,7 +62,7 @@ internal class TextEditorActivityTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun test__cancel() {
-        runAndroidComposeUiTest<TextEditorActivity>(
+        runAndroidComposeUiTest(
             activityLauncher = { launchActivityForResult<TextEditorActivity>(intent) }
         ) { scenario ->
             waitForIdle()

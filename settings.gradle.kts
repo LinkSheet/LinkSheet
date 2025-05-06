@@ -54,6 +54,7 @@ configureRepositories(
     MavenRepository.MavenCentral,
     MavenRepository.Jitpack,
     MavenRepository.Mozilla,
+    MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),
     GradlePluginPortalRepository,
     mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 )

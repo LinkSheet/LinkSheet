@@ -13,7 +13,7 @@ data class EngineTrack(
     private val predicate: EngineTrackPredicate,
     private val engine: LinkEngine
 ) {
-    fun matches(input: Input): Boolean {
+    fun matches(input: EngineTrackInput): Boolean {
         return predicate.evaluate(input)
     }
 
@@ -23,15 +23,15 @@ data class EngineTrack(
 }
 
 fun interface EngineTrackPredicate {
-    fun evaluate(input: Input): Boolean
+    fun evaluate(input: EngineTrackInput): Boolean
 }
 
-class Input(val url: StdUrl, val referrer: AndroidAppPackage?)
+class EngineTrackInput(val url: StdUrl, val referrer: AndroidAppPackage?)
 
 class TrackSelector(tracks: List<EngineTrack>) {
     private val tracks = tracks.sortedBy { it.position }
 
-    fun find(input: Input): EngineTrack? {
+    fun findTrack(input: EngineTrackInput): EngineTrack? {
         val track = tracks.firstOrNull { it.matches(input) }
         return track
     }

@@ -30,7 +30,8 @@ val resolverModule = module {
     single {
         AppSorter(
             queryAndAggregateUsageStats = getSystemServiceOrThrow<UsageStatsManager>()::queryAndAggregateUsageStats,
-            toAppInfo = get<PackageService>()::toAppInfo
+            toAppInfo = get<PackageService>()::toAppInfo,
+            clockProvider = get()
         )
     }
     singleOf(::InAppBrowserHandler)

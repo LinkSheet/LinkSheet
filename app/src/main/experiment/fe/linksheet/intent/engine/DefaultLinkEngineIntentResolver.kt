@@ -20,17 +20,14 @@ import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.CacheRepository
-import fe.linksheet.module.repository.LibRedirectDefaultRepository
-import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
+import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.module.IntentResolverSettings
-import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
-import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +53,7 @@ fun DefaultLinkEngineIntentResolver(
     cacheRepository: CacheRepository,
     networkStateService: NetworkStateService,
     settings: IntentResolverSettings,
-): LinkEngineIntentResolver {
+): IntentResolver {
     val dispatcher = Dispatchers.IO
     val pipeline = LinkEngine(
         steps = listOf(

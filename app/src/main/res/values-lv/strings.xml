@@ -83,4 +83,19 @@
     <string name="ignore_libredirect">Ignorēt LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="follow_redirects_local_cache_explainer">Saglabāt pāradresēšanas rezultātu lokāli kešatmiņā</string>
+    <string name="app_browsers">Lietotnes un pārlūki</string>
+    <string name="add">Pievienot</string>
+    <string name="select_an_app">Atlasiet lietotni</string>
+    <string name="close">Aizvērt</string>
+    <string name="dont_show_filtered_item">Nekad nerādīt sadaļu \"pēdējā atlasītā lietotne\"</string>
+    <string name="download">Lejupielādēt</string>
+    <string name="linksheet_download">LinkSheet lejupielāde</string>
+    <string name="in_app_browser">Lietotnes pārlūkā</string>
+    <string name="use_app_settings_explainer">Lietotnes izlemj, vai jāizmanto lietotnē iebūvēto pārlūku</string>
+    <string name="notifications">Uznirstošie ziņojumi un paziņojumi</string>
+    <string name="url_copied_toast">URL nokopēts</string>
+    <string name="url_copied_toast_explainer">Parādīt uznirstošo ziņojumu, kad lietotājs nokopē URL</string>
+    <string name="settings__title_filter_apps">Filtrēt lietotnes</string>
+    <string name="use_app_settings">Noklusējuma</string>
+    <string name="app_name">LinkSheet</string>
 </resources>

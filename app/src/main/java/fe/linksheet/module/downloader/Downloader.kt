@@ -1,6 +1,5 @@
 package fe.linksheet.module.downloader
 
-import android.webkit.MimeTypeMap
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.util.Extension
 import fe.linksheet.extension.java.normalizedContentType
@@ -9,6 +8,7 @@ import fe.linksheet.module.log.Logger
 import fe.linksheet.module.redactor.Redactable
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
+import fe.linksheet.util.mime.KnownMimeTypes
 import fe.linksheet.util.mime.MimeType
 import fe.std.uri.StdUrl
 import fe.stringbuilder.util.commaSeparated
@@ -53,13 +53,17 @@ sealed class DownloadCheckResult : Redactable<DownloadCheckResult> {
 
 
 class Downloader(private val cachedRequest: CachedRequest, private val logger: Logger) {
-    private val mimeTypeMap = MimeTypeMap.getSingleton()
+
+    companion object {
+        private val mimeTypeToExtension = KnownMimeTypes.mimeTypeToExtensions
+        private val extensionToMimeType = KnownMimeTypes.extensionToMimeType
+    }
 
     fun checkIsNonHtmlFileEnding(url: StdUrl): DownloadCheckResult {
         val (fileName, ext) = Extension.getFileNameFromUrl(url.url)
         if (fileName == null || ext == null) return DownloadCheckResult.MimeTypeDetectionFailed
 
-        val mimeType = mimeTypeMap.getMimeTypeFromExtension(ext) ?: return DownloadCheckResult.MimeTypeDetectionFailed
+        val mimeType = extensionToMimeType[ext] ?: return DownloadCheckResult.MimeTypeDetectionFailed
         return checkMimeType(mimeType, fileName, ext)
     }
 
@@ -76,7 +80,7 @@ class Downloader(private val cachedRequest: CachedRequest, private val logger: L
         val contentType = result.normalizedContentType() ?: return DownloadCheckResult.NonDownloadable
         val (fileName, _) = Extension.getFileNameFromUrl(url.url)
 
-        return checkMimeType(contentType, fileName ?: url.toString(), mimeTypeMap.getExtensionFromMimeType(contentType))
+        return checkMimeType(contentType, fileName ?: url.toString(), mimeTypeToExtension[contentType]?.firstOrNull())
     }
 
     private fun checkMimeType(mimeType: String, fileName: String, extension: String?): DownloadCheckResult {

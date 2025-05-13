@@ -548,4 +548,9 @@
     <string name="settings_language__dialog_title">Језик апликације</string>
     <string name="settings_language__text_system_language_with_language">%s (системски језик)</string>
     <string name="settings_language__text_system_language">Системски језик</string>
+    <string name="import_settings__text_success">Увезено!</string>
+    <string name="import_settings__text_failure">Увоз подешавања није успео!</string>
+    <string name="export_settings__text_failure">Извоз подешавања није успео!</string>
+    <string name="export_settings__text_success">Извезено!</string>
+    <string name="generic__button_open_external">Отвори спољно</string>
 </resources>

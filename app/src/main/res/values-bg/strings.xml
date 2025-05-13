@@ -541,4 +541,8 @@
     <string name="settings_language__text_system_language_with_language">%s (език на системата)</string>
     <string name="settings_language__text_system_language">Език на системата</string>
     <string name="generic__button_open_external">Отваряне с приложение</string>
+    <string name="import_settings__text_success">Внесено!</string>
+    <string name="import_settings__text_failure">Грешка при внасяне на настройки!</string>
+    <string name="export_settings__text_success">Изнесено!</string>
+    <string name="export_settings__text_failure">Грешка при изнасяне на настройки!</string>
 </resources>

@@ -292,8 +292,6 @@ dependencies {
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
 
-    implementation(AndroidX.test.ext.junit.ktx)
-
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(Koin.workManager)
@@ -404,10 +402,14 @@ dependencies {
         Koin.junit4,
         Koin.android,
         KotlinX.coroutines.test,
-        AndroidX.room.testing,
         Grrfe.std.test,
         Grrfe.std.result.assert,
         Testing.robolectric,
+        CashApp.turbine,
+        AndroidX.room.testing,
+        AndroidX.test.ext.junit.ktx,
+        AndroidX.compose.ui.test,
+        AndroidX.compose.ui.testJunit4,
         "com.willowtreeapps.assertk:assertk:_",
         kotlin("test")
     )
@@ -423,17 +425,13 @@ dependencies {
     testImplementation("org.testcontainers:mockserver:_")
     testImplementation("org.testcontainers:toxiproxy:_")
 
-    androidTestImplementation(AndroidX.test.core)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
-    androidTestImplementation(AndroidX.test.espresso.core)
     androidTestImplementation(AndroidX.test.rules)
-    androidTestImplementation(AndroidX.test.ext.junit)
-    androidTestImplementation(AndroidX.test.ext.junit.ktx)
-    androidTestImplementation(AndroidX.test.uiAutomator)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(Testing.robolectric)
 
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
-
 
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

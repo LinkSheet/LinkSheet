@@ -20,6 +20,6 @@ object PackageIdHelper {
         val targetActivity = activityInfo.targetActivity ?: ""
         val targetShortClass = getShortClassName(appPackage, targetActivity)
 
-        return componentName.flattenToShortString() + ":" + targetShortClass
+        return "${componentName.flattenToShortString()}:$targetShortClass"
     }
 }

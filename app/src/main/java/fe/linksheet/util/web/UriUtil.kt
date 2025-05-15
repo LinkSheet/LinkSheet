@@ -6,6 +6,7 @@ import android.util.Patterns
 import android.webkit.URLUtil
 import fe.kotlin.extension.iterable.mapToSet
 import mozilla.components.support.ktx.util.URLStringUtils
+import androidx.core.net.toUri
 
 object UriUtil {
     const val HTTP = "http"
@@ -19,7 +20,7 @@ object UriUtil {
         if (!isWebStrict(url)) return null
 
         return if (Patterns.WEB_URL.matcher(url).matches()) {
-            runCatching { Uri.parse(url) }.getOrNull()
+            runCatching { url.toUri() }.getOrNull()
         } else null
     }
 

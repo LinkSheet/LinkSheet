@@ -27,14 +27,16 @@ import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
+import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
+import fe.std.time.unixMillisOf
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.component.KoinComponent
-import java.time.LocalDateTime
 
 class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
     companion object {
         const val EXTRA_CRASH_EXCEPTION = "EXTRA_CRASH_EXCEPTION_TEXT"
+        const val EXTRA_CRASH_TIMESTAMP = "EXTRA_CRASH_TIMESTAMP"
     }
 
     private val logger by injectLogger<CrashHandlerActivity>()
@@ -45,8 +47,7 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
 
         val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
         logger.fatal(throwableString)
-
-        val timestamp = LocalDateTime.now().format(ISO8601DateTimeFormatter.DefaultFormat)
+        val timestamp = intent.getLongExtra(EXTRA_CRASH_TIMESTAMP, 0)
 
         setContent(edgeToEdge = true) {
             AppTheme {
@@ -59,12 +60,13 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
 @Composable
 fun CrashAppPageWrapper(
     viewModel: CrashHandlerViewerViewModel = koinViewModel(),
-    timestamp: String,
+    timestamp: Long,
     throwableString: String
 ) {
+    val strTime = timestamp.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
     val dialog = rememberExportLogDialog(
         logViewCommon = viewModel.logViewCommon,
-        name = timestamp,
+        name = strTime,
         fnLogEntries = {
             viewModel.logPersistService.readEntries(null)
         }
@@ -74,7 +76,7 @@ fun CrashAppPageWrapper(
 }
 
 @Composable
-fun CrashAppPage(timestamp: String, throwableString: String, openDialog: () -> Unit) {
+fun CrashAppPage(timestamp: Long, throwableString: String, openDialog: () -> Unit) {
     LogTextPageScaffold(
         headline = stringResource(id = R.string.app_name),
         onBackPressed = {},
@@ -103,7 +105,7 @@ fun CrashAppPage(timestamp: String, throwableString: String, openDialog: () -> U
                 logEntry = PrefixMessageCardContent(
                     type = "F",
                     prefix = "Crash",
-                    start = System.currentTimeMillis(),
+                    start = timestamp,
                     messages = mutableListOf(throwableString)
                 )
             )
@@ -114,5 +116,5 @@ fun CrashAppPage(timestamp: String, throwableString: String, openDialog: () -> U
 @Preview
 @Composable
 private fun CrashAppPagePreview() {
-    CrashAppPage(timestamp = "2025", throwableString = "Crash") { }
+    CrashAppPage(timestamp = unixMillisOf(2025), throwableString = "Crash") { }
 }

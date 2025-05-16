@@ -2,8 +2,7 @@ package fe.linksheet.activity.bottomsheet.content.success
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
-import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
 import fe.linksheet.module.app.ActivityAppInfo
@@ -19,13 +18,7 @@ fun AppContentRoot(
     hideChoiceButtons: Boolean,
     showNativeLabel: Boolean,
     showPackage: Boolean,
-    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
-    launch2: (
-        index: Int,
-        info: ActivityAppInfo,
-        type: ClickType,
-        modifier: ClickModifier,
-    ) -> Unit,
+    dispatch: (Interaction) -> Unit,
     isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
@@ -39,8 +32,7 @@ fun AppContentRoot(
             showPackage = showPackage,
             isPrivateBrowser = isPrivateBrowser,
             showToast = showToast,
-            launch = launch,
-            launch2 = launch2
+            dispatch = dispatch,
         )
     } else {
         AppContentList(
@@ -53,8 +45,7 @@ fun AppContentRoot(
             showNativeLabel = showNativeLabel,
             isPrivateBrowser = isPrivateBrowser,
             showToast = showToast,
-            launch = launch,
-            launch2 = launch2
+            dispatch = dispatch,
         )
     }
 }

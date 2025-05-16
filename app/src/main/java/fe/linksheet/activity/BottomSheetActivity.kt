@@ -38,12 +38,11 @@ import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.util.ReferrerHelper
+import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
 import kotlinx.coroutines.Dispatchers
@@ -109,7 +108,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 .mapNotNull { it as? IntentResolveResult.Default }
                 .filter { it.hasAutoLaunchApp && it.app != null }
                 .map {
-                    viewModel.makeOpenAppIntent(it.app!!, it.intent, it.isRegularPreferredApp, null, false)
+                    viewModel.makeOpenAppIntent(it.app!!, it.intent, referrer, it.isRegularPreferredApp, null, false)
                 }
                 .collectLatest {
                     handleLaunch(it)
@@ -161,11 +160,18 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
         val controller = remember {
             DefaultBottomSheetStateController(
-                this@BottomSheetActivity,
-                editorLauncher,
-                coroutineScope,
-                sheetState,
-                ::onNewIntent
+                activity = this@BottomSheetActivity,
+                editorLauncher = editorLauncher,
+                coroutineScope = coroutineScope,
+                drawerState = sheetState,
+                onNewIntent = ::onNewIntent,
+                dispatch = { interaction ->
+                    coroutineScope.launch {
+                        (resolveResult as? IntentResolveResult.Default)
+                            ?.let { viewModel.handle(this@BottomSheetActivity, it, interaction) }
+                            ?.let { handleLaunch(it) }
+                    }
+                }
             )
         }
 
@@ -238,23 +244,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                             bottomSheetNativeLabel = bottomSheetNativeLabel,
                             gridLayout = gridLayout,
                             appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
-                            launchApp = { app, intent, modifier ->
-                                coroutineScope.launch {
-                                    handleLaunch(viewModel.makeOpenAppIntent(app, intent, modifier))
-                                }
-                            },
-                            launch2 = { index, info, type, modifier ->
-                                coroutineScope.launch {
-                                    val intent = viewModel.handleClick(
-                                        this@BottomSheetActivity, index, sheetState.isExpanded(),
-                                        { }, (resolveResult as IntentResolveResult.Default).intent, info, type, modifier
-                                    )
-
-                                    if (intent != null) {
-                                        handleLaunch(intent)
-                                    }
-                                }
-                            },
                             copyUrl = { label, url ->
                                 viewModel.clipboardManager.setText(label, url)
                             },
@@ -342,30 +331,8 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
-    private suspend fun handleLaunch(intent: Intent) {
-        val showAsReferrer = viewModel.showAsReferrer.value
-
-        intent.putExtra(
-            LinkSheetConnector.EXTRA_REFERRER,
-            if (showAsReferrer) ReferrerHelper.createReferrer(this) else referrer
-        )
-
-        if (!showAsReferrer) {
-            intent.putExtra(Intent.EXTRA_REFERRER, referrer)
-        }
-
-//        if (loopDetector == null) {
-//            if (viewModel.safeStartActivity(activity, intent)) {
-//                finish()
-//            } else {
-//                showToast(R.string.resolve_activity_failure, uiThread = true)
-//            }
-//        } else {
-//            if (!loopDetector.start(intent)) {
-//                showToast(R.string.resolve_activity_failure, uiThread = true)
-//            }
-//        }
-        if (!start(intent)) {
+    private suspend fun handleLaunch(intent: LaunchIntent) {
+        if (!start(intent.intent)) {
             showToast(R.string.resolve_activity_failure, Toast.LENGTH_SHORT)
         }
     }

@@ -1,6 +1,5 @@
 package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
-import android.app.Activity
 import android.net.Uri
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -26,8 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.module.app.ActivityAppInfo
@@ -68,13 +69,7 @@ fun AppContentGrid(
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
     showPackage: Boolean,
-    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
-    launch2: (
-        index: Int,
-        info: ActivityAppInfo,
-        type: ClickType,
-        modifier: ClickModifier,
-    ) -> Unit,
+    dispatch: (Interaction) -> Unit,
     isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
@@ -88,7 +83,7 @@ fun AppContentGrid(
         hasPreferredApp = hasPreferredApp,
         hideChoiceButtons = hideChoiceButtons,
 //        showNativeLabel = showNativeLabel,
-        launch = launch,
+        dispatch = dispatch,
         showToast = showToast,
     ) { modifier ->
         LazyVerticalGrid(
@@ -103,7 +98,7 @@ fun AppContentGrid(
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
-                        launch2(index, info, type, modifier)
+                        dispatch(AppClickInteraction(index, info, type, modifier))
                     },
                     privateBrowser = privateBrowser,
                     showPackage = showPackage,

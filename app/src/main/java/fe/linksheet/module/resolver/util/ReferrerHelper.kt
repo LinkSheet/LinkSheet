@@ -13,4 +13,8 @@ object ReferrerHelper {
     fun createReferrer(context: Context): Uri {
         return Uri.fromParts(APP_SCHEME, context.packageName, null)
     }
+
+    fun createReferrer(packageName: String): Uri {
+        return Uri.fromParts(APP_SCHEME, packageName, null)
+    }
 }

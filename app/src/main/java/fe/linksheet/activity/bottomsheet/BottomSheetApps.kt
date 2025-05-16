@@ -51,8 +51,6 @@ import kotlinx.coroutines.CompletionHandler
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
-typealias LaunchApp = (ActivityAppInfo, Intent, ClickModifier) -> Unit
-typealias Launch2 = (index: Int, info: ActivityAppInfo, type: ClickType, modifier: ClickModifier) -> Unit
 
 @Composable
 fun BottomSheetApps(
@@ -69,8 +67,6 @@ fun BottomSheetApps(
     bottomSheetNativeLabel: Boolean,
     gridLayout: Boolean,
     appListSelectedIdx: Int,
-    launchApp: LaunchApp,
-    launch2: Launch2,
     isPrivateBrowser: (Boolean, ActivityAppInfo) -> KnownBrowser?,
     showToast: (Int, Int, Boolean) -> Unit,
     copyUrl: (String, String) -> Unit,
@@ -109,7 +105,6 @@ fun BottomSheetApps(
                     showToast = { id -> showToast(id, Toast.LENGTH_SHORT, false) },
                     copyUrl = copyUrl,
                     startDownload = startDownload,
-                    launchApp = launchApp
                 )
 
                 HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(0.25f))
@@ -127,7 +122,7 @@ fun BottomSheetApps(
                     showPackage = showPackage,
                     hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                     onClick = { _, modifier ->
-                        launchApp(result.filteredItem, result.intent, modifier)
+                        controller.dispatch(PreferredAppChoiceButtonInteraction(result.filteredItem, result.intent, modifier))
                     }
                 )
 
@@ -168,10 +163,7 @@ fun BottomSheetApps(
                 isPrivateBrowser = isPrivateBrowser,
                 showToast = showToast,
                 showNativeLabel = bottomSheetNativeLabel,
-                launch = { info, modifier ->
-                    launchApp(info, result.intent, modifier)
-                },
-                launch2 = launch2
+                dispatch = controller.dispatch
             )
         }
     }
@@ -196,6 +188,10 @@ object BottomSheetStateControllerStub : BottomSheetStateController {
     override fun hide(onCompletion: CompletionHandler?) {}
     override fun startActivity(intent: Intent) {}
     override fun finish() {}
+    override val dispatch: (Interaction) -> Unit
+        get() = {
+
+        }
 }
 
 private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
@@ -366,8 +362,6 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
             bottomSheetNativeLabel = false,
             gridLayout = gridLayout,
             appListSelectedIdx = -1,
-            launchApp = { info, intent, modifier -> },
-            launch2 = { index, info, type, modifier -> },
             isPrivateBrowser = { hasUri, info -> null },
             showToast = { textId, duration, uiThread -> },
             copyUrl = { label, url -> },

@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
@@ -24,7 +24,7 @@ fun AppContent(
     appListSelectedIdx: Int,
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
-    launch: (ActivityAppInfo, ClickModifier) -> Unit,
+    dispatch: (Interaction) -> Unit,
     showToast: (Int, Int, Boolean) -> Unit,
     content: @Composable (Modifier) -> Unit,
 ) {
@@ -48,7 +48,7 @@ fun AppContent(
                 NoPreferredAppChoiceButtons(
                     info = info,
                     selected = appListSelectedIdx,
-                    launch = launch,
+                    dispatch = dispatch,
                     showToast = showToast
                 )
             }
@@ -64,7 +64,7 @@ private fun AppContentPreview() {
         appListSelectedIdx = -1,
         hasPreferredApp = false,
         hideChoiceButtons = false,
-        launch = { _, _ -> },
+        dispatch = {  },
         showToast = { _, _, _ -> }
     ) { modifier ->
         LazyColumn(modifier = modifier) {

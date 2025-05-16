@@ -26,6 +26,7 @@ interface BottomSheetStateController {
     fun createChooser(intent: Intent): Intent {
         return intent
     }
+    val dispatch: (Interaction) -> Unit
 }
 
 class DefaultBottomSheetStateController(
@@ -33,7 +34,8 @@ class DefaultBottomSheetStateController(
     override val editorLauncher: ActivityResultLauncher<Intent>,
     val coroutineScope: CoroutineScope,
     val drawerState: CompatSheetState,
-    override val onNewIntent: (Intent) -> Unit
+    override val onNewIntent: (Intent) -> Unit,
+    override val dispatch: (Interaction) -> Unit,
 ) : BottomSheetStateController {
 
     override fun hideAndFinish() {

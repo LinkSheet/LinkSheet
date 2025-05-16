@@ -3,15 +3,17 @@ package fe.linksheet.activity.bottomsheet.content.success.appcontent
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.ChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.content.success.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.module.app.ActivityAppInfo
 
 @Composable
 fun NoPreferredAppChoiceButtons(
     info: ActivityAppInfo?,
     selected: Int,
-    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
+    dispatch: (Interaction) -> Unit,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit
 ) {
     ChoiceButtons(
@@ -22,7 +24,7 @@ fun NoPreferredAppChoiceButtons(
                 return@ChoiceButtons
             }
 
-            launch(info, modifier)
+            dispatch(ChoiceButtonInteraction(info, modifier))
         }
     )
 }

@@ -27,8 +27,10 @@ import app.linksheet.testing.util.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
@@ -43,13 +45,7 @@ fun AppContentList(
     hideChoiceButtons: Boolean,
     showNativeLabel: Boolean,
     showPackage: Boolean,
-    launch: (info: ActivityAppInfo, modifier: ClickModifier) -> Unit,
-    launch2: (
-        index: Int,
-        info: ActivityAppInfo,
-        type: ClickType,
-        modifier: ClickModifier,
-    ) -> Unit,
+    dispatch: (Interaction) -> Unit,
     isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
@@ -61,7 +57,7 @@ fun AppContentList(
         appListSelectedIdx = appListSelectedIdx,
         hasPreferredApp = hasPreferredApp,
         hideChoiceButtons = hideChoiceButtons,
-        launch = launch,
+        dispatch = dispatch,
         showToast = showToast,
     ) { modifier ->
         LazyColumn(
@@ -76,7 +72,7 @@ fun AppContentList(
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
-                        launch2(index, info, type, modifier)
+                        dispatch(AppClickInteraction(index, info, type, modifier))
                     },
                     preferred = false,
                     privateBrowser = isPrivateBrowser(uri != null, info),
@@ -181,8 +177,7 @@ private fun AppContentListPreviewBase(apps: List<ActivityAppInfo>) {
         hideChoiceButtons = false,
         showNativeLabel = false,
         showPackage = false,
-        launch = { _, _ -> },
-        launch2 = { _, _, _, _ -> },
+        dispatch = { },
         isPrivateBrowser = { _, _ -> null },
         showToast = { _, _, _ -> }
     )

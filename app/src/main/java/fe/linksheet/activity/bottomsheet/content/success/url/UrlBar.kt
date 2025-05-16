@@ -2,8 +2,11 @@ package fe.linksheet.activity.bottomsheet.content.success.url
 
 import android.content.ClipboardManager
 import android.content.Intent
-import android.os.Build
-import androidx.compose.foundation.layout.*
+import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -13,7 +16,10 @@ import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.rounded.DoubleArrow
-import androidx.compose.material3.*
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.ElevatedAssistChip
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -30,12 +36,11 @@ import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
-import fe.android.version.AndroidVersion
 import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.profile.CrossProfile
@@ -63,12 +68,11 @@ fun UrlBarWrapper(
     showToast: (Int) -> Unit,
     copyUrl: (String, String) -> Unit,
     startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
-    launchApp: (ActivityAppInfo, Intent, ClickModifier) -> Unit,
 ) {
     val uriString = result.uri.toString()
     val clipboardLabel = stringResource(id = R.string.generic__text_url)
     val context = LocalContext.current
-    val activity = androidx.activity.compose.LocalActivity.current
+    val activity = LocalActivity.current
 
     UrlBar(
         uri = uriString,
@@ -141,7 +145,7 @@ fun UrlBarWrapper(
         } else null,
         onDoubleClick = {
             if (result.app != null) {
-                launchApp(result.app, result.intent, ClickModifier.None)
+                controller.dispatch(PreferredAppChoiceButtonInteraction(result.app, result.intent, ClickModifier.None))
             }
 
             Unit

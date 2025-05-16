@@ -19,8 +19,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import coil3.ImageLoader
 import fe.linksheet.R
+import fe.linksheet.activity.BottomSheetActivity
+import fe.linksheet.activity.bottomsheet.AppClickInteraction
+import fe.linksheet.activity.bottomsheet.ChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.Interaction
+import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
@@ -40,8 +45,9 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.KnownBrowser
-import fe.linksheet.module.resolver.ResolveModule
-import fe.linksheet.module.resolver.urlresolver.ResolveResultType
+import fe.linksheet.module.resolver.util.IntentLauncher
+import fe.linksheet.module.resolver.util.LaunchIntent
+import fe.linksheet.module.resolver.util.LaunchMainIntent
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -63,6 +69,7 @@ class BottomSheetViewModel(
     val profileSwitcher: ProfileSwitcher,
     val intentResolver: IntentResolver,
     val imageLoader: ImageLoader,
+    val intentLauncher: IntentLauncher,
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
@@ -210,41 +217,45 @@ class BottomSheetViewModel(
     suspend fun makeOpenAppIntent(
         info: ActivityAppInfo,
         intent: Intent,
+        referrer: Uri?,
         always: Boolean = false,
         privateBrowsingBrowser: KnownBrowser? = null,
         persist: Boolean = true,
-    ): Intent {
+    ): LaunchIntent {
         // (Hopefully) temporary workaround since Github Mobile doesn't support the releases/latest route (https://github.com/orgs/community/discussions/136120)
         GithubWorkaround.tryFixUri(info.componentName, intent.data)?.let { fixedUri ->
             intent.data = fixedUri
         }
 
-        val viewIntent = Intent(Intent.ACTION_VIEW, intent.data)
-            .addCategory(Intent.CATEGORY_BROWSABLE).let { privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it }
-
-        val componentEnabled = context.packageManager.getComponentEnabledSetting(info.componentName)
-        if (componentEnabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-            return Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).apply {
-                selector = viewIntent.addCategory(Intent.CATEGORY_BROWSABLE).setPackage(info.packageName)
-            }
+        val launchIntent = intentLauncher.launch(info, intent, referrer, privateBrowsingBrowser)
+        if(launchIntent is LaunchMainIntent) {
+            return launchIntent
         }
 
-        viewIntent.component = info.componentName
+//        val viewIntent = Intent(Intent.ACTION_VIEW, intent.data)
+//            .addCategory(Intent.CATEGORY_BROWSABLE).let { privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it }
+
+//        val componentEnabled = context.packageManager.getComponentEnabledSetting(info.componentName)
+//        if (componentEnabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+//            return Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).apply {
+//                selector = viewIntent.addCategory(Intent.CATEGORY_BROWSABLE).setPackage(info.packageName)
+//            }
+//        }
+
 
         // Check for intent.data != null to make sure we don't attempt to persist web search intents
         if (persist && privateBrowsingBrowser == null && intent.data != null) {
-            persistSelectedIntent(viewIntent, always)
+            persistSelectedIntent(launchIntent.intent, always)
         }
 
-        viewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        return viewIntent
+        return launchIntent
     }
 
-    suspend fun makeOpenAppIntent(info: ActivityAppInfo, result: Intent, modifier: ClickModifier): Intent {
+    suspend fun makeOpenAppIntent(info: ActivityAppInfo, result: Intent, referrer: Uri?, modifier: ClickModifier): LaunchIntent {
         return makeOpenAppIntent(
             info,
             result,
+            referrer,
             modifier is ClickModifier.Always,
             (modifier as? ClickModifier.Private)?.browser,
             modifier !is ClickModifier.Private
@@ -272,7 +283,7 @@ class BottomSheetViewModel(
         info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
-    ): Deferred<Intent?> = ioAsync {
+    ): Deferred<LaunchIntent?> = ioAsync {
         handleClick(activity, index, isExpanded, requestExpand, result, info, type, modifier)
     }
 
@@ -285,13 +296,13 @@ class BottomSheetViewModel(
         info: ActivityAppInfo,
         type: ClickType,
         modifier: ClickModifier,
-    ): Intent? {
+    ): LaunchIntent? {
         val config = type.getPreference(modifier)
 
         when (config) {
             TapConfig.None -> {}
             TapConfig.OpenApp -> {
-                return makeOpenAppIntent(info, result, modifier)
+                return makeOpenAppIntent(info, result, activity.referrer, modifier)
             }
 
             TapConfig.OpenSettings -> {
@@ -316,6 +327,30 @@ class BottomSheetViewModel(
         } catch (e: ActivityNotFoundException) {
             logger.error(e)
             return false
+        }
+    }
+
+    suspend fun handle(activity: BottomSheetActivity, result: IntentResolveResult.Default, interaction: Interaction): LaunchIntent? {
+        return when(interaction) {
+            is AppClickInteraction -> {
+                handleClick(
+                    activity = activity,
+                    index = interaction.index,
+                    isExpanded = false,
+//                    isExpanded = sheetState.isExpanded(),
+                    requestExpand = { },
+                    result = result.intent,
+                    info = interaction.info,
+                    type = interaction.type,
+                    modifier = interaction.modifier
+                )
+            }
+            is ChoiceButtonInteraction -> {
+                makeOpenAppIntent(interaction.info, result.intent, activity.referrer)
+            }
+            is PreferredAppChoiceButtonInteraction -> {
+                makeOpenAppIntent(interaction.info, interaction.intent, activity.referrer)
+            }
         }
     }
 }

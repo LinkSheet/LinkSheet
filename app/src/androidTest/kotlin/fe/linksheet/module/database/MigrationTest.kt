@@ -23,7 +23,7 @@ internal class MigrationTest : UnitTest {
            close()
         }
 
-        val logger = Logger(DebugLoggerDelegate(MigrationTest::class))
+        val logger = Logger(DebugLoggerDelegate(true, MigrationTest::class))
 
         LinkSheetDatabase.create(targetContext, logger, testDb).apply {
             openHelper.writableDatabase.close()

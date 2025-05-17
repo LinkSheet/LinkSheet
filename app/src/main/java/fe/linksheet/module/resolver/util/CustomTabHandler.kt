@@ -11,7 +11,10 @@ object CustomTabHandler {
         val isCustomTab = intent.hasExtra(EXTRA_SESSION)
         if (!isCustomTab || !allowCustomTab) return CustomTabInfo(false, null)
 
-        val dropExtras = intent.extras?.keySet()?.filter { extra -> !extra.contains(EXTRA_INDICATOR) } ?: emptyList()
+        val dropExtras = intent.extras
+            ?.keySet()
+            ?.filter { !it.contains(EXTRA_INDICATOR) }
+            ?: emptyList()
 
         return CustomTabInfo(true, dropExtras)
     }

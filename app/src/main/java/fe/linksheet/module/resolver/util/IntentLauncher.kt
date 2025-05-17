@@ -4,55 +4,26 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import fe.composekit.preference.asFunction
-import fe.droidkit.koin.getPackageManager
-import fe.linksheet.BuildConfig
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.resolver.KnownBrowser
-import org.koin.core.module.Module
-import org.koin.dsl.module
-
-fun IntentLauncherModule(): Module {
-    return module {
-        single<IntentLauncher> {
-            DefaultIntentLauncher(
-                getComponentEnabledSetting = getPackageManager()::getComponentEnabledSetting,
-                showAsReferrer = get<AppPreferenceRepository>().asFunction(AppPreferences.showLinkSheetAsReferrer),
-                packageName = { BuildConfig.APPLICATION_ID }
-            )
-        }
-    }
-}
-
 
 interface IntentLauncher {
-    fun launch(
-        info: ActivityAppInfo, intent: Intent,
-        referrer: Uri?,
-        privateBrowsingBrowser: KnownBrowser? = null,
-    ): LaunchIntent
+    fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: KnownBrowser?): LaunchIntent
 }
 
 class DefaultIntentLauncher(
     val getComponentEnabledSetting: (ComponentName) -> Int,
     val showAsReferrer: () -> Boolean,
-    val packageName: () -> String,
+    val selfPackage: String,
 ) : IntentLauncher {
 
-    override fun launch(
-        info: ActivityAppInfo,
-        intent: Intent,
-        referrer: Uri?,
-        privateBrowsingBrowser: KnownBrowser?,
-    ): LaunchIntent {
+    override fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: KnownBrowser?): LaunchIntent {
         if (isComponentDisabled(info)) {
             return LaunchMainIntent(createMainIntent(intent, info.packageName))
         }
 
-        privateBrowsingBrowser?.requestPrivateBrowsing(intent)
+        browser?.requestPrivateBrowsing(intent)
 
         intent.component = info.componentName
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -60,12 +31,13 @@ class DefaultIntentLauncher(
         val showAsReferrer = showAsReferrer()
         intent.putExtra(
             LinkSheetConnector.EXTRA_REFERRER,
-            if (showAsReferrer) ReferrerHelper.createReferrer(packageName()) else referrer
+            if (showAsReferrer) ReferrerHelper.createReferrer(selfPackage) else referrer
         )
 
         if (!showAsReferrer) {
             intent.putExtra(Intent.EXTRA_REFERRER, referrer)
         }
+
         return LaunchViewIntent(intent)
     }
 

@@ -6,6 +6,7 @@ import fe.linksheet.R
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.StringResHolder
 import java.net.UnknownHostException
+import androidx.core.net.toUri
 
 class ResolveModuleStatus {
     private val _resolved = mutableMapOf<ResolveModule, Result<ResolveResultType>?>()
@@ -14,7 +15,7 @@ class ResolveModuleStatus {
     var globalFailure: GlobalFailure? = null
         private set
 
-    sealed class GlobalFailure(@StringRes override val id: Int, vararg arg: Any) : StringResHolder {
+    sealed class GlobalFailure(@param:StringRes override val id: Int, vararg arg: Any) : StringResHolder {
         data object NoInternet : GlobalFailure(R.string.no_internet_connection)
         class UnknownHost(val host: String) : GlobalFailure(R.string.unknown_host, host)
 
@@ -27,25 +28,25 @@ class ResolveModuleStatus {
         uri: Uri?,
         resolve: suspend (Uri) -> Result<ResolveResultType>?,
     ): Uri? {
-        if (enabled && uri != null && globalFailure == null) {
-            val resolveResult = resolve(uri)
-            _resolved[resolveModule] = resolveResult
+        if (!enabled || uri == null || globalFailure != null) return uri
 
-            val exception = resolveResult?.exceptionOrNull()
-            if (exception is UnknownHostException) {
-                globalFailure = GlobalFailure.UnknownHost(uri.host!!)
-                return uri
-            }
+        val resolveResult = resolve(uri)
+        _resolved[resolveModule] = resolveResult
 
-            val resultType = resolveResult?.getOrNull()
-            if (resultType is ResolveResultType.NoInternetConnection) {
-                globalFailure = GlobalFailure.NoInternet
-                return uri
-            }
+        val exception = resolveResult?.exceptionOrNull()
+        if (exception is UnknownHostException) {
+            globalFailure = GlobalFailure.UnknownHost(uri.host!!)
+            return uri
+        }
 
-            if (resultType is ResolveResultType.Resolved) {
-                return Uri.parse(resultType.url)
-            }
+        val resultType = resolveResult?.getOrNull()
+        if (resultType is ResolveResultType.NoInternetConnection) {
+            globalFailure = GlobalFailure.NoInternet
+            return uri
+        }
+
+        if (resultType is ResolveResultType.Resolved) {
+            return resultType.url.toUri()
         }
 
         return uri

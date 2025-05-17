@@ -59,6 +59,8 @@ import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*
+import androidx.core.net.toUri
+import fe.linksheet.module.resolver.workaround.GithubWorkaround
 
 class BottomSheetViewModel(
     val context: Application,
@@ -74,6 +76,8 @@ class BottomSheetViewModel(
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
 
+
+    val themeAmoled = preferenceRepository.asViewModelState(AppPreferences.themeAmoled)
     val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.hideAfterCopying)
 
     val urlCopiedToast = preferenceRepository.asViewModelState(AppPreferences.urlCopiedToast)
@@ -126,7 +130,7 @@ class BottomSheetViewModel(
 
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
         return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-            this.data = Uri.parse("package:${info.packageName}")
+            this.data = "package:${info.packageName}".toUri()
             this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         })
     }
@@ -181,11 +185,10 @@ class BottomSheetViewModel(
         }
     }
 
-    fun startDownload(resources: Resources, uri: String?, downloadable: DownloadCheckResult.Downloadable) {
-        val path =
-            "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
+    fun startDownload(resources: Resources, uri: String, downloadable: DownloadCheckResult.Downloadable) {
+        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
 
-        val request = DownloadManager.Request(Uri.parse(uri))
+        val request = DownloadManager.Request(uri.toUri())
             .setTitle(resources.getString(R.string.linksheet_download))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(
@@ -196,23 +199,6 @@ class BottomSheetViewModel(
         downloadManager.enqueue(request)
     }
 
-    object GithubWorkaround {
-        private val latestReleasesRegex = Regex(
-            "^((?:https?|github)://(?:.+\\.)?github\\.com/.+/.+/releases)/latest/?$"
-        )
-
-        private val `package` = ComponentName(
-            "com.github.android", "com.github.android.activities.DeepLinkActivity"
-        )
-
-        fun tryFixUri(componentName: ComponentName, uri: Uri?): Uri? {
-            if (componentName != `package`) return null
-
-            return uri
-                ?.let { latestReleasesRegex.matchEntire(it.toString()) }?.groupValues
-                ?.let { (_, releasesPath) -> Uri.parse(releasesPath) }
-        }
-    }
 
     suspend fun makeOpenAppIntent(
         info: ActivityAppInfo,
@@ -231,17 +217,6 @@ class BottomSheetViewModel(
         if(launchIntent is LaunchMainIntent) {
             return launchIntent
         }
-
-//        val viewIntent = Intent(Intent.ACTION_VIEW, intent.data)
-//            .addCategory(Intent.CATEGORY_BROWSABLE).let { privateBrowsingBrowser?.requestPrivateBrowsing(it) ?: it }
-
-//        val componentEnabled = context.packageManager.getComponentEnabledSetting(info.componentName)
-//        if (componentEnabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-//            return Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER).apply {
-//                selector = viewIntent.addCategory(Intent.CATEGORY_BROWSABLE).setPackage(info.packageName)
-//            }
-//        }
-
 
         // Check for intent.data != null to make sure we don't attempt to persist web search intents
         if (persist && privateBrowsingBrowser == null && intent.data != null) {

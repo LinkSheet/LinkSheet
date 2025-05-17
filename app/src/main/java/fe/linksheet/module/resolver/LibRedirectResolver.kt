@@ -14,6 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
+import androidx.core.net.toUri
+import fe.libredirectkt.LibRedirectService
 
 sealed interface LibRedirectResult {
     class Redirected(val originalUri: Uri, val redirectedUri: Uri) : LibRedirectResult
@@ -45,28 +47,34 @@ class LibRedirectResolver(
         val service = LibRedirect.findServiceForUrl(uri.toString(), libRedirectServices)
         logger.debug("Using service: $service")
 
-        if (service != null && stateRepository.isEnabled(service.key)) {
-            val savedDefault = defaultRepository.getByServiceKey(service.key).firstOrNull()
-            val (frontendKey, instanceUrl) = if (savedDefault != null) {
-                savedDefault.frontendKey to getInstanceUrl(savedDefault)
-            } else {
-                service.defaultFrontend.key to LibRedirect.getDefaultInstanceForFrontend(
-                    service.defaultFrontend.key, libRedirectInstances
-                )!!
-            }
+        if (service == null || !stateRepository.isEnabled(service.key)) return LibRedirectResult.NotRedirected
 
-            val redirected = if (jsEngine) {
-                redirectZipline(uri.toString(), frontendKey, instanceUrl)
-            } else LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
+        val savedDefault = defaultRepository.getByServiceKey(service.key).firstOrNull()
+        val (frontendKey, instanceUrl) = getFrontendAndInstance(service, savedDefault)
 
-            logger.debug(redirected, HashProcessor.StringProcessor) { "Redirected to: $it" }
+        val redirected = when {
+            jsEngine -> redirectZipline(uri.toString(), frontendKey, instanceUrl)
+            else -> LibRedirect.redirect(uri.toString(), frontendKey, instanceUrl)
+        }
 
-            if (redirected != null) {
-                return LibRedirectResult.Redirected(uri, Uri.parse(redirected))
-            }
+        logger.debug(redirected, HashProcessor.StringProcessor) { "Redirected to: $it" }
+
+        if (redirected != null) {
+            return LibRedirectResult.Redirected(uri, redirected.toUri())
         }
 
         return LibRedirectResult.NotRedirected
+    }
+
+    private fun getFrontendAndInstance(service: LibRedirectService, savedDefault: LibRedirectDefault?): Pair<String, String> {
+        return when (savedDefault) {
+            null -> {
+                val defaultFrontendKey = service.defaultFrontend.key
+                val url = LibRedirect.getDefaultInstanceForFrontend(defaultFrontendKey, libRedirectInstances)!!
+                defaultFrontendKey to url
+            }
+            else -> savedDefault.frontendKey to getInstanceUrl(savedDefault)
+        }
     }
 
     private fun redirectZipline(url: String, frontendKey: String, instance: String): String? {
@@ -76,10 +84,14 @@ class LibRedirectResolver(
     }
 
     private fun getInstanceUrl(default: LibRedirectDefault): String {
-        return if (default.instanceUrl == LibRedirectDefault.randomInstance) {
-            libRedirectInstances.find { it.frontendKey == default.frontendKey }
-                ?.hosts?.random() ?: default.instanceUrl
-        } else default.instanceUrl
-    }
+        if (default.instanceUrl != LibRedirectDefault.randomInstance) {
+            return default.instanceUrl
+        }
 
+        return libRedirectInstances
+            .find { it.frontendKey == default.frontendKey }
+            ?.hosts
+            ?.random()
+            ?: default.instanceUrl
+    }
 }

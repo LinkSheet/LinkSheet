@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import fe.linksheet.R
 import fe.linksheet.util.StringResHolder
 
-enum class ResolveEvent(@StringRes override val id: Int) : StringResHolder {
+enum class ResolveEvent(@param:StringRes override val id: Int) : StringResHolder {
     Idle(R.string.resolve_event__idle),
     Initialized(R.string.resolve_event__initialized),
     QueryingBrowsers(R.string.resolve_event__querying_browser_list),

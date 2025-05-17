@@ -47,7 +47,6 @@ import fe.linksheet.module.resolver.module.resolverModule
 import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
 import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
-import fe.linksheet.module.resolver.util.IntentLauncherModule
 import fe.linksheet.module.shizuku.shizukuHandlerModule
 import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
@@ -119,7 +118,6 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ClockProviderModule(),
             SystemInfoServiceModule,
             PackageModule,
-            IntentLauncherModule(),
             AppLocaleModule,
             networkStateServiceModule,
             shizukuHandlerModule,

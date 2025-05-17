@@ -7,17 +7,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerEvent
-import androidx.compose.ui.input.pointer.PointerEventPass
-import androidx.compose.ui.input.pointer.PointerInputScope
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Lifecycle
@@ -27,8 +21,10 @@ import androidx.lifecycle.lifecycleScope
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetApps
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
 import fe.linksheet.activity.bottomsheet.M3FixModalBottomSheet
+import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
@@ -42,29 +38,26 @@ import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
+import fe.linksheet.module.resolver.ResolveEvent
+import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+import androidx.core.net.toUri
 
 //import relocated.androidx.compose.material3.SheetValue
 //import relocated.androidx.compose.material3.rememberModalBottomSheetState
 
 // Must not be moved or renamed since LinkSheetCompat hardcodes the package/name
 class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
-    companion object {
-        val preferredAppItemHeight = 60.dp
-        val buttonPadding = 15.dp
-        val buttonRowHeight = 50.dp
-    }
-
     private val logger by injectLogger<BottomSheetActivity>()
     private val viewModel by viewModel<BottomSheetViewModel>()
 
@@ -90,11 +83,14 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
     val editorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK && result.data != null) {
-            val uri = result.data?.getStringExtra(TextEditorActivity.EXTRA_TEXT)
-                ?.let { Uri.parse(it) }
-            onNewIntent(Intents.createSelfIntent(uri))
-        }
+        if (result.resultCode != RESULT_OK || result.data == null) return@registerForActivityResult
+
+        val intent = result.data
+            ?.getStringExtra(TextEditorActivity.EXTRA_TEXT)
+            ?.toUri()
+            ?.let { Intents.createSelfIntent(it) }
+
+        onNewIntent(intent!!)
     }
 
     private val intentFlow = MutableStateFlow(initialIntent.value)
@@ -175,19 +171,16 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             )
         }
 
+        val themeAmoled = viewModel.themeAmoled.collectAsStateWithLifecycle()
+        val interceptAccidentalTaps= viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
         val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
-//        sheetState
-//        if(sheetOpen){
         M3FixModalBottomSheet(
-            contentModifier = (if (viewModel.interceptAccidentalTaps.value) {
-                Modifier.pointerInput(Unit) {
-                    interceptTap { !sheetState.isAnimationRunning() }
-                }
-            } else Modifier)
+            contentModifier = Modifier
+                .interceptTaps(sheetState, interceptAccidentalTaps)
                 .debugBorder(debug.value, 1.dp, Color.Red),
             debug = debug.value,
             // TODO: Replace with pref
-            isBlackTheme = false,
+            isBlackTheme = themeAmoled,
             sheetState = sheetState,
             shape = RoundedCornerShape(
                 topStart = 22.0.dp,
@@ -197,132 +190,111 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             ),
             hide = {
                 finish()
-//                sheetOpen = false
             },
             sheetContent = { modifier ->
-                when (resolveResult) {
-                    is IntentResolveResult.Pending -> {
-                        LoadingIndicatorSheetContent(
-                            modifier = modifier,
-                            event = event,
-                            interaction = interaction,
-                            requestExpand = {
-                                logger.info("Loading indicator: Pre-Request expand")
-                                coroutineScope.launch {
-                                    logger.info("Loading indicator: Request expand")
-                                    sheetState.expand()
-                                }
-                            }
-                        )
-                    }
-
-                    is IntentResolveResult.Default -> {
-                        val enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
-                        val bottomSheetProfileSwitcher = viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
-                        val urlCopiedToast = viewModel.urlCopiedToast.collectAsStateWithLifecycle()
-                        val downloadStartedToast = viewModel.downloadStartedToast.collectAsStateWithLifecycle()
-                        val hideAfterCopying = viewModel.hideAfterCopying.collectAsStateWithLifecycle()
-                        val bottomSheetNativeLabel = viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
-                        val gridLayout = viewModel.gridLayout.collectAsStateWithLifecycle()
-                        val previewUrl = viewModel.previewUrl.collectAsStateWithLifecycle()
-                        val hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
-                        val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
-                        val manualFollowRedirects = viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
-                        val improvedBottomSheetUrlDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap.collectAsStateWithLifecycle()
-
-                        BottomSheetApps(
-                            modifier = modifier,
-                            result = resolveResult as IntentResolveResult.Default,
-                            imageLoader = viewModel.imageLoader,
-                            enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
-                            enableSwitchProfile = bottomSheetProfileSwitcher,
-                            profileSwitcher = viewModel.profileSwitcher,
-                            enableUrlCopiedToast = urlCopiedToast,
-                            enableDownloadStartedToast = downloadStartedToast,
-                            enableManualRedirect = manualFollowRedirects,
-                            hideAfterCopying = hideAfterCopying,
-                            bottomSheetNativeLabel = bottomSheetNativeLabel,
-                            gridLayout = gridLayout,
-                            appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
-                            copyUrl = { label, url ->
-                                viewModel.clipboardManager.setText(label, url)
-                            },
-                            startDownload = { url, downloadable ->
-                                viewModel.startDownload(resources, url, downloadable)
-                            },
-                            isPrivateBrowser = ::isPrivateBrowser,
-                            showToast = { textId, duration, _ ->
-                                coroutineScope.launch { showToast(textId = textId, duration = duration) }
-                            },
-                            controller = controller,
-                            showPackage = alwaysShowPackageName,
-                            previewUrl = previewUrl,
-                            hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
-                            urlCardDoubleTap = improvedBottomSheetUrlDoubleTap
-                        )
-                    }
-
-                    is IntentResolveResult.IntentParseFailed -> {
-                        FailureSheetContentWrapper(
-                            modifier = modifier,
-                            exception = (resolveResult as IntentResolveResult.IntentParseFailed).exception,
-                            onShareClick = {},
-                            onCopyClick = {},
-                            onSearchClick = {
-
-                            }
-                        )
-                    }
-
-                    is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
-
-                    }
-
-                    is IntentResolveResult.WebSearch -> {
-
-                    }
-
-                    else -> {}
-                }
+                SheetContent(resolveResult, modifier, event, interaction, coroutineScope, sheetState, controller)
             }
         )
-//        }
     }
 
+    @Composable
+    private fun SheetContent(
+        resolveResult: IntentResolveResult,
+        modifier: Modifier,
+        event: ResolveEvent,
+        interaction: ResolverInteraction,
+        coroutineScope: CoroutineScope,
+        sheetState: CompatSheetState,
+        controller: BottomSheetStateController,
+    ) {
+        when (resolveResult) {
+            is IntentResolveResult.Pending -> {
+                LoadingIndicatorSheetContent(
+                    modifier = modifier,
+                    event = event,
+                    interaction = interaction,
+                    requestExpand = {
+                        logger.info("Loading indicator: Pre-Request expand")
+                        coroutineScope.launch {
+                            logger.info("Loading indicator: Request expand")
+                            sheetState.expand()
+                        }
+                    }
+                )
+            }
+
+            is IntentResolveResult.Default -> {
+                val enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
+                val bottomSheetProfileSwitcher = viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
+                val urlCopiedToast = viewModel.urlCopiedToast.collectAsStateWithLifecycle()
+                val downloadStartedToast = viewModel.downloadStartedToast.collectAsStateWithLifecycle()
+                val hideAfterCopying = viewModel.hideAfterCopying.collectAsStateWithLifecycle()
+                val bottomSheetNativeLabel = viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
+                val gridLayout = viewModel.gridLayout.collectAsStateWithLifecycle()
+                val previewUrl = viewModel.previewUrl.collectAsStateWithLifecycle()
+                val hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
+                val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+                val manualFollowRedirects = viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
+                val improvedBottomSheetUrlDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap.collectAsStateWithLifecycle()
+
+                BottomSheetApps(
+                    modifier = modifier,
+                    result = resolveResult,
+                    imageLoader = viewModel.imageLoader,
+                    enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
+                    enableSwitchProfile = bottomSheetProfileSwitcher,
+                    profileSwitcher = viewModel.profileSwitcher,
+                    enableUrlCopiedToast = urlCopiedToast,
+                    enableDownloadStartedToast = downloadStartedToast,
+                    enableManualRedirect = manualFollowRedirects,
+                    hideAfterCopying = hideAfterCopying,
+                    bottomSheetNativeLabel = bottomSheetNativeLabel,
+                    gridLayout = gridLayout,
+                    appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
+                    copyUrl = { label, url ->
+                        viewModel.clipboardManager.setText(label, url)
+                    },
+                    startDownload = { url, downloadable ->
+                        viewModel.startDownload(resources, url, downloadable)
+                    },
+                    isPrivateBrowser = ::isPrivateBrowser,
+                    showToast = { textId, duration, _ ->
+                        coroutineScope.launch { showToast(textId = textId, duration = duration) }
+                    },
+                    controller = controller,
+                    showPackage = alwaysShowPackageName,
+                    previewUrl = previewUrl,
+                    hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
+                    urlCardDoubleTap = improvedBottomSheetUrlDoubleTap
+                )
+            }
+
+            is IntentResolveResult.IntentParseFailed -> {
+                FailureSheetContentWrapper(
+                    modifier = modifier,
+                    exception = resolveResult.exception,
+                    onShareClick = {},
+                    onCopyClick = {},
+                    onSearchClick = {
+
+                    }
+                )
+            }
+
+            is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
+
+            }
+
+            is IntentResolveResult.WebSearch -> {
+
+            }
+        }
+    }
 
     private suspend fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT) {
         val text = getString(textId)
         withContext(Dispatchers.Main) {
             Toast.makeText(this@BottomSheetActivity, text, duration).show()
-        }
-    }
-
-
-    // https://stackoverflow.com/a/76168038
-    private suspend fun PointerInputScope.interceptTap(
-        pass: PointerEventPass = PointerEventPass.Initial,
-        shouldCancel: (PointerEvent) -> Boolean,
-    ) = coroutineScope {
-        awaitEachGesture {
-            val down = awaitFirstDown(pass = pass)
-            val downTime = System.currentTimeMillis()
-            val tapTimeout = viewConfiguration.longPressTimeoutMillis
-
-            do {
-                val event = awaitPointerEvent(pass)
-                if (shouldCancel(event)) break
-
-                val currentTime = System.currentTimeMillis()
-
-                if (event.changes.size != 1) break // More than one event: not a tap
-                if (currentTime - downTime >= tapTimeout) break // Too slow: not a tap
-
-                val change = event.changes[0]
-
-                if (change.id == down.id && !change.pressed) {
-                    change.consume()
-                }
-            } while (event.changes.any { it.id == down.id && it.pressed })
         }
     }
 

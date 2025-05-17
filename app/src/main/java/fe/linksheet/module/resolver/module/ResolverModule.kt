@@ -4,6 +4,7 @@ import android.app.usage.UsageStatsManager
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
+import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.preference.SensitivePreference
@@ -16,6 +17,8 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
+import fe.linksheet.module.resolver.util.DefaultIntentLauncher
+import fe.linksheet.module.resolver.util.IntentLauncher
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -34,6 +37,14 @@ val resolverModule = module {
             clockProvider = get()
         )
     }
+    single<IntentLauncher> {
+        val appPreferenceRepository = get<AppPreferenceRepository>()
+        DefaultIntentLauncher(
+            getComponentEnabledSetting = getPackageManager()::getComponentEnabledSetting,
+            showAsReferrer = appPreferenceRepository.asFunction(AppPreferences.showLinkSheetAsReferrer),
+            selfPackage = BuildConfig.APPLICATION_ID
+        )
+    }
     singleOf(::InAppBrowserHandler)
     singleOf(::RedirectUrlResolver)
     singleOf(::Amp2HtmlUrlResolver)
@@ -42,22 +53,22 @@ val resolverModule = module {
         val settings = createSettings(get(), get())
 
         ImprovedIntentResolver(
-            get(),
-            createLogger<ImprovedIntentResolver>(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
+            context = get(),
+            logger = createLogger<ImprovedIntentResolver>(),
+            appSelectionHistoryRepository = get(),
+            preferredAppRepository = get(),
+            normalBrowsersRepository = get(),
+            inAppBrowsersRepository = get(),
+            packageInfoService = get(),
+            appSorter = get(),
+            downloader = get(),
+            redirectUrlResolver = get(),
+            amp2HtmlResolver = get(),
+            browserHandler = get(),
+            inAppBrowserHandler = get(),
+            libRedirectResolver = get(),
+            unfurler = get(),
+            networkStateService = get(),
             settings = settings
         )
     }

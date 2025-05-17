@@ -22,10 +22,9 @@ import fe.std.result.tryCatch
 import fe.std.result.unaryPlus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
-import kotlin.time.toJavaInstant
 
 class ImportExportService(val context: Context, val clockProvider: ClockProvider) {
     companion object {
@@ -42,9 +41,8 @@ class ImportExportService(val context: Context, val clockProvider: ClockProvider
         private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm")
     }
 
-    fun createExportIntent(now: Instant = clockProvider.now()): Intent {
-        val zonedDateTime = now.toJavaInstant().atZone(clockProvider.zoneId)
-        val nowString = zonedDateTime.format(dateTimeFormatter)
+    fun createExportIntent(now: ZonedDateTime = clockProvider.nowZoned()): Intent {
+        val nowString = now.format(dateTimeFormatter)
         return Intent(exportIntent)
             .putExtra(
                 Intent.EXTRA_TITLE,

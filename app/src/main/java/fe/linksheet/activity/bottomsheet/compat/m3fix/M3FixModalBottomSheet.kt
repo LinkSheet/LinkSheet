@@ -28,7 +28,7 @@ fun M3FixModalBottomSheet(
     M3FixModalBottomSheet(
         contentModifier = contentModifier,
         debug = debug,
-        isBlackTheme,
+        isBlackTheme = isBlackTheme,
         sheetState = sheetState.state,
         shape = shape,
         hide = hide,

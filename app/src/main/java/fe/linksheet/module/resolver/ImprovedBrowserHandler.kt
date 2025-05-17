@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
-import fe.linksheet.extension.android.componentName
 import fe.linksheet.extension.android.activityDescriptor
+import fe.linksheet.extension.android.componentName
 
 class ImprovedBrowserHandler(
     private val autoLaunchSingleBrowserExperiment: () -> Boolean
@@ -45,7 +45,7 @@ class ImprovedBrowserHandler(
                 // TODO: Do we really need to use the component?
                 val isSingleOption = nonBrowsers.isEmpty()
                         && browsers.size == 1
-                        && browsers.values.singleOrNull()?.activityInfo?.componentName() == browserResolveInfo?.activityInfo?.componentName()
+                        && browsers.values.singleOrNull()?.activityInfo?.componentName == browserResolveInfo?.activityInfo?.componentName
 
                 FilteredBrowserList(
                     config.mode,

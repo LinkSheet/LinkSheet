@@ -4,13 +4,19 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsService
 import androidx.browser.customtabs.CustomTabsSessionToken
+import fe.linksheet.extension.koin.injectLogger
+import org.koin.core.component.KoinComponent
 
-class LinkSheetCustomTabsService : CustomTabsService() {
+class LinkSheetCustomTabsService : CustomTabsService(), KoinComponent {
+    private val logger by injectLogger<LinkSheetCustomTabsService>()
+
     override fun warmup(flags: Long): Boolean {
+        logger.debug("⇢ warmup($flags)")
         return true
     }
 
     override fun newSession(sessionToken: CustomTabsSessionToken): Boolean {
+        logger.debug("⇢ newSession($sessionToken)")
         return true
     }
 
@@ -20,19 +26,22 @@ class LinkSheetCustomTabsService : CustomTabsService() {
         extras: Bundle?,
         otherLikelyBundles: MutableList<Bundle>?,
     ): Boolean {
+        logger.debug("⇢ mayLaunchUrl($sessionToken, $url, $extras, $otherLikelyBundles)")
         return true
     }
 
     override fun extraCommand(commandName: String, args: Bundle?): Bundle? {
+        logger.debug("⇢ extraCommand($commandName, $args)")
         return null
     }
-
     override fun requestPostMessageChannel(sessionToken: CustomTabsSessionToken, postMessageOrigin: Uri): Boolean {
-        return false
+        logger.debug("⇢ requestPostMessageChannel($sessionToken, $postMessageOrigin)")
+        return true
     }
 
     override fun postMessage(sessionToken: CustomTabsSessionToken, message: String, extras: Bundle?): Int {
-        return RESULT_FAILURE_DISALLOWED
+        logger.debug("⇢ postMessage($sessionToken, $message, $extras)")
+        return RESULT_SUCCESS
     }
 
     override fun validateRelationship(
@@ -40,13 +49,18 @@ class LinkSheetCustomTabsService : CustomTabsService() {
         relation: Int,
         origin: Uri,
         extras: Bundle?,
-    ) = true
+    ): Boolean {
+        logger.debug("⇢ validateRelationship($sessionToken, $relation, $origin, $extras)")
+        return true
+    }
 
     override fun updateVisuals(sessionToken: CustomTabsSessionToken, bundle: Bundle?): Boolean {
-        return false
+        logger.debug("⇢ updateVisuals($sessionToken, $bundle)")
+        return true
     }
 
     override fun receiveFile(sessionToken: CustomTabsSessionToken, uri: Uri, purpose: Int, extras: Bundle?): Boolean {
-        return false
+        logger.debug("⇢ updateVisuals($sessionToken, $uri, $purpose, $extras)")
+        return true
     }
 }

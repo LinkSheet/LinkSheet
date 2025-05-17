@@ -17,8 +17,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import fe.composekit.core.putEnumExtra
 import fe.linksheet.util.ActivityInvoker
-import fe.linksheet.util.intent.putEnumExtra
 import fe.linksheet.util.runAndroidComposeUiTest
 import org.junit.runner.RunWith
 import kotlin.test.Test

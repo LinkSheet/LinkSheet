@@ -31,6 +31,7 @@ internal class PackageInfoServiceTest : UnitTest {
             packageLauncherService = DefaultPackageLauncherService { intent, flags -> emptyList() },
             packageIntentHandler = DefaultPackageIntentHandler(
                 queryIntentActivities = { _, _ -> emptyList() },
+                resolveActivity = { _, _ -> null },
                 isLinkSheetCompat = { false },
                 isSelf = { false },
                 checkReferrerExperiment = { false }

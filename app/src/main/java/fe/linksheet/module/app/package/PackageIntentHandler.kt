@@ -5,6 +5,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.pm.queryIntentActivitiesCompat
+import android.content.pm.resolveActivityCompat
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import fe.linksheet.BuildConfig
@@ -18,6 +19,7 @@ internal fun AndroidPackageIntentHandler(
 ): PackageIntentHandler {
     return DefaultPackageIntentHandler(
         queryIntentActivities = packageManager::queryIntentActivitiesCompat,
+        resolveActivity = packageManager::resolveActivityCompat,
         isLinkSheetCompat = { pkg -> Compat.isApp(pkg) != null },
         isSelf = { pkg -> BuildConfig.APPLICATION_ID == pkg },
         checkReferrerExperiment = checkReferrerExperiment,
@@ -25,6 +27,7 @@ internal fun AndroidPackageIntentHandler(
 }
 
 interface PackageIntentHandler {
+    fun isSelfDefaultBrowser(): Boolean
     fun findHttpBrowsable(packageName: String?): List<ResolveInfo>?
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
@@ -33,6 +36,7 @@ interface PackageIntentHandler {
 
 internal class DefaultPackageIntentHandler(
     val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
+    val resolveActivity: (Intent, ResolveInfoFlags) -> ResolveInfo?,
     val isLinkSheetCompat: (String) -> Boolean,
     val isSelf: (String) -> Boolean,
     val checkReferrerExperiment: () -> Boolean,
@@ -49,6 +53,14 @@ internal class DefaultPackageIntentHandler(
 
         private val httpSchemeUri: Uri = Uri.fromParts("http", "", "")
         private val httpsSchemeUri: Uri = Uri.fromParts("https", "", "")
+    }
+
+    override fun isSelfDefaultBrowser(): Boolean {
+        val intent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+        val resolveInfo = resolveActivity(intent, ResolveInfoFlags.MATCH_DEFAULT_ONLY)
+        val pkg = resolveInfo?.activityInfo?.packageName ?: return false
+        return isSelf(pkg)
     }
 
     internal fun Iterable<ResolveInfo>.filterLaunchable(): List<ResolveInfo> {

@@ -21,6 +21,7 @@ internal class PackageIntentHandlerTest : UnitTest {
     fun `test trampoline activity correctly handled`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
+            resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
             checkReferrerExperiment = { true },
@@ -38,6 +39,7 @@ internal class PackageIntentHandlerTest : UnitTest {
     fun `test non-exported activities are ignored`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> TurretPackageInfoFake.resolveInfos },
+            resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
             checkReferrerExperiment = { true },
@@ -53,6 +55,7 @@ internal class PackageIntentHandlerTest : UnitTest {
     fun `test find all http browsable`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> PackageInfoFakes.allBrowsers.flatResolveInfos() },
+            resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
             checkReferrerExperiment = { true },

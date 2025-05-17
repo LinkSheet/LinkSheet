@@ -35,6 +35,7 @@ import fe.linksheet.extension.kotlinx.RefreshableStateFlow
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
+import fe.linksheet.module.app.`package`.PackageIntentHandler
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
@@ -66,6 +67,7 @@ class MainViewModel(
     private val miuiCompatProvider: MiuiCompatProvider,
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
+    private val intentHandler: PackageIntentHandler,
 ) : BaseViewModel(preferenceRepository) {
     val newDefaultsDismissed = appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2024_12_29_InfoDismissed)
 
@@ -121,12 +123,8 @@ class MainViewModel(
         return result
     }
 
-    private val _defaultBrowser = { checkDefaultBrowser() }.asFlow()
+    private val _defaultBrowser = { intentHandler.isSelfDefaultBrowser() }.asFlow()
     val defaultBrowser = _defaultBrowser
-
-    private fun checkDefaultBrowser() = context.packageManager
-        .resolveActivityCompat(BrowserResolver.httpBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
-        ?.activityInfo?.packageName == BuildConfig.APPLICATION_ID
 
     fun launchIntent(activity: Activity?, intent: SettingsIntent): Boolean {
         if (activity == null) return false
@@ -147,62 +145,10 @@ class MainViewModel(
         analyticsService.changeLevel(level)
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    fun getRequestRoleBrowserIntent() = roleManager!!.createRequestRoleIntent(
-        RoleManager.ROLE_BROWSER
-    )
 
     enum class SettingsIntent(val action: String) {
         DefaultApps(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS),
         DomainUrls("android.settings.MANAGE_DOMAIN_URLS"),
         CrossProfileAccess("android.settings.MANAGE_CROSS_PROFILE_ACCESS")
-    }
-
-    enum class BrowserStatus(
-        @StringRes val headline: Int,
-        @StringRes val subtitle: Int,
-        val containerColor: @Composable () -> Color,
-        val color: @Composable () -> Color,
-        val icon: ImageVector,
-        @StringRes val iconDescription: Int,
-    ) {
-
-        Known(
-            R.string.at_least_one_known_browser_installed,
-            R.string.at_least_one_known_browser_installed_explainer,
-            { MaterialTheme.colorScheme.primaryContainer },
-            { MaterialTheme.colorScheme.onSurface },
-            Icons.Default.Public,
-            R.string.success
-        ),
-        Unknown(
-            R.string.at_least_one_unknown_browser_installer,
-            R.string.at_least_one_unknown_browser_installer_explainer,
-            { MaterialTheme.colorScheme.tertiaryContainer },
-            { MaterialTheme.colorScheme.onTertiaryContainer },
-            Icons.Default.Warning,
-            R.string.warning
-        ),
-        None(
-            R.string.no_browser_installed,
-            R.string.no_browser_installed_explainer,
-            { MaterialTheme.colorScheme.error },
-            { MaterialTheme.colorScheme.onError },
-            Icons.Default.Error,
-            R.string.error
-        );
-
-        companion object {
-            fun hasBrowser(browserStatus: BrowserStatus): Boolean {
-                return browserStatus == Unknown || browserStatus == Known
-            }
-        }
-    }
-
-    fun hasBrowser(): BrowserStatus {
-        val browsers = browserResolver.queryBrowsers()
-        if (browsers.isEmpty()) return BrowserStatus.None
-        if (browsers.any { KnownBrowser.isKnownBrowser(it.key) != null }) return BrowserStatus.Known
-        return BrowserStatus.Unknown
     }
 }

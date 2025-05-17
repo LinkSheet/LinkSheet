@@ -22,6 +22,7 @@ internal class PackageHandlerIntentFilterTest : UnitTest {
     companion object {
         private val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> listOf() },
+            resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
             checkReferrerExperiment = { true }

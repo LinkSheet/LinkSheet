@@ -9,7 +9,8 @@ sealed class BrowserMode(val value: String) {
     data object Whitelisted : BrowserMode("whitelisted")
 
     companion object : OptionTypeMapper<BrowserMode, String>(
-        { it.value }, { arrayOf(None, AlwaysAsk, SelectedBrowser, Whitelisted) }
+        key = { it.value },
+        options = { arrayOf(None, AlwaysAsk, SelectedBrowser, Whitelisted) }
     )
 
     override fun toString(): String {

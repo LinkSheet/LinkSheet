@@ -26,8 +26,11 @@ data class ConnectedNetwork(
         )
     }
 
-    val isConnected = networkCapabilities?.let { cap ->
-        isAvailable && !isBlocked && CAPABILITIES.all(cap::hasCapability) && TRANSPORTS.any(cap::hasTransport)
-    } ?: false
+    fun isConnected(): Boolean {
+        if (networkCapabilities == null) return false
+        return isAvailable && !isBlocked
+                && CAPABILITIES.all(networkCapabilities::hasCapability)
+                && TRANSPORTS.any(networkCapabilities::hasTransport)
+    }
 }
 

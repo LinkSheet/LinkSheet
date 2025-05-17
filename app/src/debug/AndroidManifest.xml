@@ -29,6 +29,10 @@
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
 
+        <activity
+                android:name=".debug.activity.WorkManagerActivity"
+                android:exported="true"
+                android:theme="@style/AppTheme"/>
         <!--        <activity android:name=".experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity"-->
 <!--                  android:exported="true"-->
 <!--                  android:theme="@style/DialogTheme">-->

@@ -46,11 +46,10 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
                 if (activity != null) {
                     item(key = "remoteconfig-assets") {
-                        DebugMenuButton(
-                            text = "Fetch remote assets",
-                            onClick = {
-                                RemoteAssetFetcherWorker.enqueue(activity)
-                            }
+                        FilledTonalActivityLauncher(
+                            activity = activity,
+                            text = "Work manager",
+                            intent = createIntent(activity, WorkManagerActivity::class)
                         )
                     }
                     item(key = "component-state") {

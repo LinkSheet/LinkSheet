@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import androidx.lifecycle.SavedStateHandle
+import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import coil3.ImageLoader
 import com.google.gson.Gson
@@ -16,9 +17,11 @@ import fe.linksheet.UnitTest
 import fe.linksheet.feature.libredirect.LibRedirectSettingsUseCase
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.app.PackageService
+import fe.linksheet.module.app.`package`.PackageIntentHandler
 import fe.linksheet.module.app.`package`.PackageLabelService
 import fe.linksheet.module.app.`package`.PackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
+import fe.linksheet.module.clock.ClockProvider
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
@@ -47,6 +50,8 @@ import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
+import fe.linksheet.module.resolver.util.AppSorter
+import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.module.systeminfo.BuildConstants
@@ -55,6 +60,7 @@ import fe.linksheet.module.systeminfo.SystemProperties
 import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
+import fe.linksheet.module.workmanager.WorkDelegatorService
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
@@ -64,8 +70,12 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.test.verify.definition
 import org.koin.test.verify.injectedParameters
 import org.koin.test.verify.verifyAll
+import java.time.ZoneId
+import kotlin.time.Clock
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalTime::class)
 internal class KoinModuleCheckTest : UnitTest {
     private val extraTypes = listOf(
         Context::class,
@@ -78,9 +88,14 @@ internal class KoinModuleCheckTest : UnitTest {
         SavedStateHandle::class,
         Logger::class,
         WorkerParameters::class,
+        Duration::class,
+        List::class,
+        Clock::class,
+        ZoneId::class
     )
 
     private val injections = injectedParameters(
+        definition<AppSorter>(ClockProvider::class),
         definition<HttpClient>(HttpClientEngine::class, HttpClientConfig::class),
         definition<SystemInfoService>(
             SystemProperties::class,
@@ -90,6 +105,7 @@ internal class KoinModuleCheckTest : UnitTest {
             DomainVerificationManagerCompat::class,
             PackageLabelService::class,
             PackageLauncherService::class,
+            PackageIntentHandler::class
         ),
         definition<Redactor>(LogHasher::class),
         definition<Logger>(LoggerDelegate::class),
@@ -130,7 +146,9 @@ internal class KoinModuleCheckTest : UnitTest {
             BaseAnalyticsService::class,
             MiuiCompatProvider::class,
             MiuiCompat::class,
-            DebugMenuSlotProvider::class
+            DebugMenuSlotProvider::class,
+            PackageIntentHandler::class,
+            WorkDelegatorService::class
         ),
         definition<VerifiedLinkHandlersViewModel>(
             ShizukuHandler::class,
@@ -140,7 +158,7 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<PreferredAppSettingsViewModel>(PackageService::class),
         definition<PreferredBrowserViewModel>(BrowserResolver::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
-        definition<ExportSettingsViewModel>(Gson::class),
+        definition<ExportSettingsViewModel>(Gson::class, ClockProvider::class),
         definition<AboutSettingsViewModel>(Gson::class),
         definition<DevSettingsViewModel>(
             ShizukuHandler::class,
@@ -151,7 +169,7 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<LogTextSettingsViewModel>(),
         definition<MarkdownViewModel>(Request::class),
         definition<LibRedirectServiceSettingsViewModel>(LibRedirectSettingsUseCase::class),
-        definition<BottomSheetViewModel>(ImageLoader::class, IntentResolver::class),
+        definition<BottomSheetViewModel>(ImageLoader::class, IntentResolver::class, IntentLauncher::class),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(CachedRequest::class),
         definition<StatisticsService>(AppPreferenceRepository::class),
@@ -159,6 +177,7 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
         definition<SettingsViewModel>(AppLocaleService::class),
         definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
+        definition<WorkDelegatorService>(WorkManager::class)
     )
 
     @Test

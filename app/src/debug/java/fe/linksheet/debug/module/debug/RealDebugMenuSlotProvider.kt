@@ -17,16 +17,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.onboarding.OnboardingActivity
+import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
 import fe.linksheet.debug.activity.ComponentStateActivity
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.debug.activity.LocaleDebugActivity
+import fe.linksheet.debug.activity.WorkManagerActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
 import fe.linksheet.extension.compose.dashedBorder
 import fe.linksheet.module.debug.DebugMenuSlotProvider
-import fe.linksheet.module.remoteconfig.RemoteAssetFetcherWorker
 import fe.linksheet.navigation.Routes
 import kotlin.reflect.KClass
 
@@ -44,6 +45,18 @@ class RealDebugMenuSlotProvider(private val viewModel: DebugViewModel) : DebugMe
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                item(key = "remote-config-dialog") {
+                    val result = rememberRemoteConfigDialog {
+                    }
+
+                    DebugMenuButton(
+                        text = "Remote config dialog",
+                        onClick = {
+                            result.open()
+                        }
+                    )
+                }
+
                 if (activity != null) {
                     item(key = "remoteconfig-assets") {
                         FilledTonalActivityLauncher(

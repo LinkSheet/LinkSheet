@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +35,7 @@ import fe.kotlin.extension.string.capitalize
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.module.remoteconfig.RemoteAssetFetcherWorker
-import fe.linksheet.module.workmanager.WorkService
+import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.core.component.KoinComponent
@@ -44,7 +43,7 @@ import org.koin.core.component.inject
 import java.util.UUID
 
 class WorkManagerActivity : BaseComponentActivity(), KoinComponent {
-    private val workService by inject<WorkService>()
+    private val workService by inject<WorkDelegatorService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +64,7 @@ class WorkManagerActivity : BaseComponentActivity(), KoinComponent {
 }
 
 @Composable
-private fun WorkManagerScreen(context: Context, workService: WorkService) {
+private fun WorkManagerScreen(context: Context, workService: WorkDelegatorService) {
     val infos by workService.workManager.getWorkInfosForUniqueWorkFlow(RemoteAssetFetcherWorker.tag)
         .collectAsStateWithLifecycle(
             initialValue = emptyList(),

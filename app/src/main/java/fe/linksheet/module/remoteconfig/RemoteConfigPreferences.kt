@@ -13,6 +13,7 @@ object RemoteConfigPreferences : PreferenceDefinition() {
             "github.linksheet.wiki.privacy.amp2html" to "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#amp2html",
             "github.linksheet.wiki.privacy.follow-redirects" to "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#follow-redirects",
             "github.linksheet.wiki.privacy.downloader" to "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#downloader",
+            "github.linksheet.wiki.privacy.remote-config" to "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#remote-config",
             "github.linksheet.wiki.device-issues.xiaomi" to "https://github.com/LinkSheet/LinkSheet/wiki/Device‐specific-issues#xiaomimiui",
             "github.repository.openlinkwith" to "https://github.com/tasomaniac/OpenLinkWith",
             "github.repository.mastodonredirect" to "https://github.com/zacharee/MastodonRedirect",

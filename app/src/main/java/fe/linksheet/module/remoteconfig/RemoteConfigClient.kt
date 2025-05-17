@@ -14,14 +14,14 @@ import fe.linksheet.util.maybePrependProtocol
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import io.ktor.client.*
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.request.headers
-import io.ktor.http.HttpHeaders
-import io.ktor.http.path
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.androidx.workmanager.dsl.workerOf
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.util.concurrent.TimeUnit
@@ -53,7 +53,7 @@ internal fun AndroidRemoteConfigClient(appName: String, buildInfo: BuildInfo, cl
 class RemoteConfigClient(
     private val apiHost: String,
     private val userAgent: String,
-    private val client: HttpClient
+    private val client: HttpClient,
 ) {
     suspend fun fetchLinkAssets(): LinkAssets {
         val response = client.get(urlString = apiHost) {
@@ -66,11 +66,11 @@ class RemoteConfigClient(
 }
 
 class RemoteAssetFetcherWorker(
-    private val client: RemoteConfigClient,
-    private val repository: RemoteConfigRepository,
     context: Context,
-    parameters: WorkerParameters
-) : CoroutineWorker(context, parameters) {
+    parameters: WorkerParameters,
+) : CoroutineWorker(context, parameters), KoinComponent {
+    private val client by inject<RemoteConfigClient>()
+    private val repository by inject<RemoteConfigRepository>()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val result = tryCatch { client.fetchLinkAssets() }
@@ -84,6 +84,8 @@ class RemoteAssetFetcherWorker(
     }
 
     companion object {
+        const val tag = "remote-assets"
+
         fun enqueue(context: Context) {
             WorkManager.getInstance(context).enqueue(build())
         }
@@ -91,6 +93,15 @@ class RemoteAssetFetcherWorker(
         fun build(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<RemoteAssetFetcherWorker>()
                 .setInitialDelay(0, TimeUnit.SECONDS)
+                .build()
+        }
+
+        fun buildPeriodicWorkRequest(): PeriodicWorkRequest {
+            return PeriodicWorkRequestBuilder<RemoteAssetFetcherWorker>(
+                repeatInterval = 1,
+                repeatIntervalTimeUnit = TimeUnit.DAYS
+            ).addTag(tag)
+                .setConstraints(Constraints(requiredNetworkType = NetworkType.CONNECTED))
                 .build()
         }
     }

@@ -150,6 +150,7 @@ object AppPreferences : PreferenceDefinition(
     val lastVersions = string("last_versions_v0")
 
     val homeClipboardCard = boolean("home_clipboard_card", true)
+    val remoteConfig = boolean("remote_config", false)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

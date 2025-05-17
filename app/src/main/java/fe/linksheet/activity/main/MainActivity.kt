@@ -17,6 +17,7 @@ import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
+import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
 import fe.linksheet.composable.ui.BoxAppHost
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination
@@ -45,6 +46,17 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                 }
 
                 AddIntentDeepLinkHandler(navController = navController)
+
+                val remoteConfigDialogDismissed = viewModel.remoteConfigDialogDismissed.collectAsStateWithLifecycle()
+                val remoteConfigDialog = rememberRemoteConfigDialog {
+                    viewModel.setRemoteConfig(it)
+                }
+
+                LaunchedEffect(key1 = Unit) {
+                    if (!remoteConfigDialogDismissed) {
+                        remoteConfigDialog.open()
+                    }
+                }
 
                 if (Build.IsDebug) {
                     navController.ObserveDestination { _, destination, args ->

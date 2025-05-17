@@ -30,7 +30,7 @@ class NetworkStateService(
     val currentNetwork = _currentNetwork.asStateFlow()
 
     val isNetworkConnected: Boolean
-        get() = _currentNetwork.value.isConnected
+        get() = _currentNetwork.value.isConnected()
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         connectivityManager.registerDefaultNetworkCallback(this)
@@ -38,7 +38,7 @@ class NetworkStateService(
 
     suspend fun awaitNetworkConnection(): ConnectedNetwork {
         return if (isNetworkConnected) _currentNetwork.value
-        else _currentNetwork.first { it.isConnected }
+        else _currentNetwork.first { it.isConnected() }
     }
 
     override fun onAvailable(network: Network) {

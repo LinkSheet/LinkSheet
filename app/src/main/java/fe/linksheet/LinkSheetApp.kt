@@ -52,12 +52,13 @@ import fe.linksheet.module.statistic.statisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.viewModelModule
+import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
-import org.koin.core.context.GlobalContext.startKoin
+import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -144,7 +145,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             pasteServiceModule,
             ProfileSwitcherModule,
             AppStateServiceModule,
-            provideDebugModule()
+            provideDebugModule(),
+            WorkDelegatorServiceModule()
         )
     }
 

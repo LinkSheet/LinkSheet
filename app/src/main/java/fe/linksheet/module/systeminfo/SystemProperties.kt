@@ -30,7 +30,7 @@ object RealSystemProperties : SystemProperties {
         }
 
         fun String.parseLine(): Pair<String, String>? {
-            val (wrappedKey, wrappedValue) = split(":")
+            val (wrappedKey, wrappedValue) = split(":").takeIf { it.size >= 2 } ?: return null
 
             val key = wrappedKey.unwrap() ?: return null
             val value = wrappedValue.unwrap() ?: return null
@@ -38,7 +38,7 @@ object RealSystemProperties : SystemProperties {
             return key to value
         }
 
-        return buildMap<String, String> {
+        return buildMap {
             launchProcess("getprop", invokeOnEmpty = false, config = AndroidStartConfig) {
                 it.parseLine()?.let { (key, value) -> put(key, value) }
             }

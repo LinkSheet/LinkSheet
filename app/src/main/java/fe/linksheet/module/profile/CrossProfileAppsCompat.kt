@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.UserHandle
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 
 interface CrossProfileAppsCompat {
     fun getProfileInfo(userHandle: UserHandle): ProfileInfoCompat = UnsupportedProfileInfoCompat

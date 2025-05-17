@@ -1,6 +1,6 @@
 package android.net
 
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import java.net.URI
 
 @JvmInline

@@ -10,7 +10,7 @@ import com.google.android.material.color.DynamicColors
 import fe.android.lifecycle.CurrentActivityObserver
 import fe.android.lifecycle.ProcessServiceRegistry
 import fe.android.lifecycle.koin.extension.applicationLifecycle
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.droidkit.koin.androidApplicationContext
 import fe.gson.context.GlobalGsonContext
 import fe.gson.globalGsonModule

@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.extension.android.getFirstText

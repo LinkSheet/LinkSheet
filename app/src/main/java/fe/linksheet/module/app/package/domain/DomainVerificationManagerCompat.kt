@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.pm.verify.domain.DomainVerificationManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 
 fun interface DomainVerificationManagerCompat {
     fun getDomainVerificationUserState(packageName: String): VerificationStateCompat?

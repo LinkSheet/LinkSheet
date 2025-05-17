@@ -44,7 +44,7 @@ import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
 import fe.linksheet.navigation.addPageRoute
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.navigation.AdvancedRoute

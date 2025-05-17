@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import kotlinx.coroutines.launch
 
 

@@ -1,7 +1,7 @@
 package android.content.pm
 
 import android.content.Intent
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.linksheet.util.ResolveInfoFlags
 
 

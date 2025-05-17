@@ -27,7 +27,7 @@ import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.Preference
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.android.preference.helper.compose.StateMappedPreference
 import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon

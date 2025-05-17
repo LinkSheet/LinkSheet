@@ -12,7 +12,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.composable.ui.ThemeV2
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 

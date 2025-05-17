@@ -8,7 +8,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import androidx.lifecycle.viewModelScope
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.kotlin.extension.iterable.mapToSet
 import fe.kotlin.extension.map.filterIf

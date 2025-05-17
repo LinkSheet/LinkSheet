@@ -12,7 +12,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.linksheet.extension.koin.injectLogger
 import org.koin.core.component.KoinComponent
 

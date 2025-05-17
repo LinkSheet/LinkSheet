@@ -7,7 +7,7 @@ import android.os.UserHandleHidden
 import android.os.UserManager
 import androidx.compose.ui.graphics.ImageBitmap
 import dev.rikka.tools.refine.Refine
-import fe.android.version.AndroidVersion
+import fe.composekit.core.AndroidVersion
 import fe.linksheet.extension.android.toImageBitmap
 import androidx.core.net.toUri
 

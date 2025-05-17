@@ -1,10 +1,10 @@
-package fe.linksheet
+package fe.linksheet.module.resolver.workaround
 
 import android.content.ComponentName
 import android.net.Uri
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.UnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -16,7 +16,7 @@ import kotlin.test.assertNull
 internal class GithubWorkaroundTest : UnitTest {
     @Test
     fun test() {
-        val notFixedUri = BottomSheetViewModel.GithubWorkaround.tryFixUri(
+        val notFixedUri = GithubWorkaround.tryFixUri(
             ComponentName("not.github", "not.github"),
             Uri.parse("https://github.com/LinkSheet/LinkSheet/releases/latest")
         )
@@ -36,7 +36,7 @@ internal class GithubWorkaroundTest : UnitTest {
         )
 
         for (input in matchingStrings) {
-            val fixedUri = BottomSheetViewModel.GithubWorkaround.tryFixUri(githubApp, Uri.parse(input))
+            val fixedUri = GithubWorkaround.tryFixUri(githubApp, Uri.parse(input))
             assertNotNull(fixedUri)
         }
     }

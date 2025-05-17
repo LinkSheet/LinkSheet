@@ -47,7 +47,7 @@ val ENABLE_RELEASES by Contexts.vars
 val ENABLE_PRO_BUILDS by Contexts.vars
 val NIGHTLY_REPO_URL by Contexts.vars
 val NIGHTLY_PRO_REPO_URL by Contexts.vars
-
+val API_HOST by Contexts.vars
 val BUILD_FLAVOR by Contexts.actionEnv
 val BUILD_TYPE by Contexts.actionEnv
 val BUILD_FLAVOR_TYPE by Contexts.actionEnv
@@ -180,7 +180,8 @@ fun JobBuilder<*>.createRelease(path: String, version: String, token: String, ni
             nightlyRepoVar.name to expr(nightlyRepoUrl),
             "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
             "BUILD_TYPE" to expr(BUILD_TYPE),
-            releaseNoteVar.name to expr(releaseNote)
+            releaseNoteVar.name to expr(releaseNote),
+
         ),
         `if` = expr { contains(ENABLE_RELEASES, "true") }
     )
@@ -243,6 +244,7 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
             "KEY_ALIAS" to expr { KEY_ALIAS },
             "KEY_PASSWORD" to expr { KEY_PASSWORD },
             "FLAVOR_CONFIG" to "",
+            "API_HOST" to expr(API_HOST)
         )
     )
 
@@ -254,7 +256,8 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
             "KEYSTORE_PASSWORD" to expr { KEYSTORE_PASSWORD },
             "KEY_ALIAS" to expr { KEY_ALIAS },
             "KEY_PASSWORD" to expr { KEY_PASSWORD },
-            "FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG)
+            "FLAVOR_CONFIG" to expr(PRO_FLAVOR_CONFIG),
+            "API_HOST" to expr(API_HOST)
         )
     )
 

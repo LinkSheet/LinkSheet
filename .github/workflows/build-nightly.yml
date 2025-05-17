@@ -52,6 +52,7 @@ jobs:
         KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
         FLAVOR_CONFIG: ''
+        API_HOST: '${{ vars.API_HOST }}'
       run: './gradlew assembleFossNightly'
     - id: 'step-8'
       env:
@@ -61,6 +62,7 @@ jobs:
         KEY_ALIAS: '${{ secrets.KEY_ALIAS }}'
         KEY_PASSWORD: '${{ secrets.KEY_PASSWORD }}'
         FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
+        API_HOST: '${{ vars.API_HOST }}'
       run: './gradlew assembleProNightly'
     - id: 'step-9'
       name: 'Get output file path'

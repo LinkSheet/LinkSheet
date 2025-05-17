@@ -8,8 +8,8 @@ import android.content.pm.CrossProfileApps
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
 import androidx.annotation.RequiresApi
-import androidx.core.content.getSystemService
 import fe.composekit.core.AndroidVersion
+import fe.linksheet.extension.android.getSystemServiceOrThrow
 
 interface CrossProfileAppsCompat {
     fun getProfileInfo(userHandle: UserHandle): ProfileInfoCompat = UnsupportedProfileInfoCompat
@@ -22,8 +22,8 @@ interface CrossProfileAppsCompat {
 }
 
 fun CrossProfileAppsCompat(context: Context) = when {
-    AndroidVersion.isAtLeastApi30R() -> CrossProfileAppsCompatImpl.Api30(context.getSystemService<CrossProfileApps>()!!)
-    AndroidVersion.isAtLeastApi28P() -> CrossProfileAppsCompatImpl.Api28(context.getSystemService<CrossProfileApps>()!!)
+    AndroidVersion.isAtLeastApi30R() -> CrossProfileAppsCompatImpl.Api30(context.getSystemServiceOrThrow<CrossProfileApps>())
+    AndroidVersion.isAtLeastApi28P() -> CrossProfileAppsCompatImpl.Api28(context.getSystemServiceOrThrow<CrossProfileApps>())
     else -> CrossProfileAppsCompatImpl.PreApi28
 }
 

@@ -30,6 +30,7 @@ import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.workmanager.WorkDelegatorService
+import fe.linksheet.navigation.loadDumpedPreferences
 import fe.linksheet.util.web.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
@@ -55,7 +56,7 @@ class MainViewModel(
 
     val telemetryShowInfoDialog = experimentRepository.asViewModelState(AppPreferences.telemetryShowInfoDialog)
     val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
-    val remoteConfig = appStateRepository.asViewModelState(AppPreferences.remoteConfig)
+    val remoteConfig = preferenceRepository.asViewModelState(AppPreferences.remoteConfig)
     val editClipboard = experimentRepository.asViewModelState(Experiments.editClipboard)
     val homeClipboardCard = experimentRepository.asViewModelState(AppPreferences.homeClipboardCard)
 
@@ -120,7 +121,7 @@ class MainViewModel(
     }
 
     fun setRemoteConfig(enabled: Boolean) {
-        telemetryShowInfoDialog(true)
+        remoteConfigDialogDismissed(true)
         remoteConfig(enabled)
         workDelegatorService.setRemoteConfig(enabled)
     }

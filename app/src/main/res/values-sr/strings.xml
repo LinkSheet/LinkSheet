@@ -58,7 +58,7 @@
     <string name="donate_explainer_crypto">Када донирате помоћу криптовалуте, пошаљите имејл на <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="use_app_settings_explainer">Апликација одлучује треба ли да се користи прегледач у апликацији</string>
     <string name="display_grid_layout_explainer">Прикажите мрежу уместо листе у доњем листу</string>
-    <string name="app_browsers">Апликације</string>
+    <string name="app_browsers">Апликације и прегледачи</string>
     <string name="no_apps_found">Није пронађена ниједна апликација.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet не може да отвори овај линк.</string>
@@ -553,4 +553,8 @@
     <string name="export_settings__text_failure">Извоз подешавања није успео!</string>
     <string name="export_settings__text_success">Извезено!</string>
     <string name="generic__button_open_external">Отвори спољно</string>
+    <string name="generic__button_text_enable">Омогући</string>
+    <string name="settings_remote_config__title_dialog">Удаљена конфигурација</string>
+    <string name="generic__button_text_disable">Онемогући</string>
+    <string name="settings_remote_config__text_content">LinkSheet може аутоматски да ажурира интерне конфигурационе и документационе ресурсе повезивањем са својим конфигурационим сервером. Да бисте сазнали више, додирните <annotation url-id="github.linksheet.wiki.privacy.remote-config">овде</annotation>.</string>
 </resources>

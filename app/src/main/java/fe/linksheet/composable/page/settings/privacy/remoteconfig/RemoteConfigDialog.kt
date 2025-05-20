@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Dns
+import androidx.compose.material.icons.rounded.Webhook
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -62,7 +62,7 @@ private fun RemoteConfigDialog(
             .padding(horizontal = 16.dp),
         icon = {
             Icon(
-                imageVector = Icons.Outlined.Dns,
+                imageVector = Icons.Rounded.Webhook,
                 contentDescription = null
             )
         },

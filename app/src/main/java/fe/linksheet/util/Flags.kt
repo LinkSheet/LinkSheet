@@ -1,5 +1,6 @@
 package fe.linksheet.util
 
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -8,9 +9,15 @@ import androidx.annotation.RequiresApi
 
 interface Flags {
     val value: Int
+    val inv: Int
+        get() = value.inv()
 
     operator fun contains(flag: Int): Boolean {
         return (value and flag) != 0
+    }
+
+    fun Int.remove(): Int {
+        return this.and(inv)
     }
 }
 
@@ -20,6 +27,10 @@ interface FlagCompanion<T : Flags> {
     fun select(vararg flags: T): T {
         val sum = flags.sumOf { it.value }
         return new(sum)
+    }
+
+    fun T.inv(): T {
+        return new(this@inv.inv)
     }
 }
 
@@ -50,7 +61,6 @@ value class ResolveInfoFlags(override val value: Int) : Flags {
     }
 }
 
-
 @JvmInline
 value class ApplicationInfoPrivateFlags(override val value: Int) : Flags {
     companion object : FlagCompanion<ApplicationInfoPrivateFlags> {
@@ -60,5 +70,17 @@ value class ApplicationInfoPrivateFlags(override val value: Int) : Flags {
         override val new: (Int) -> ApplicationInfoPrivateFlags = {
             ApplicationInfoPrivateFlags(it)
         }
+    }
+}
+
+@JvmInline
+value class IntentFlags(override val value: Int) : Flags {
+    companion object : FlagCompanion<IntentFlags> {
+        val EMPTY = IntentFlags(0)
+
+        val ACTIVITY_EXCLUDE_FROM_RECENTS = IntentFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+        val ACTIVITY_FORWARD_RESULT = IntentFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+
+        override val new: (Int) -> IntentFlags = { IntentFlags(it) }
     }
 }

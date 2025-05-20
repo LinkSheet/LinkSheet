@@ -554,7 +554,11 @@
     <string name="export_settings__text_success">Извезено!</string>
     <string name="generic__button_open_external">Отвори спољно</string>
     <string name="generic__button_text_enable">Омогући</string>
-    <string name="settings_remote_config__title_dialog">Удаљена конфигурација</string>
+    <string name="settings_remote_config__title_dialog">Омогућити удаљену конфигурацију?</string>
     <string name="generic__button_text_disable">Онемогући</string>
     <string name="settings_remote_config__text_content">LinkSheet може аутоматски да ажурира интерне конфигурационе и документационе ресурсе повезивањем са својим конфигурационим сервером. Да бисте сазнали више, додирните <annotation url-id="github.linksheet.wiki.privacy.remote-config">овде</annotation>.</string>
+    <string name="bottom_sheet__text_launch_illegal">Нелегални покушај лансирања!</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Лансирање није дозвољено!</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Непознати неуспех при лансирању!</string>
+    <string name="bottom_sheet__text_launch_failure_other">Лансирање није успело!</string>
 </resources>

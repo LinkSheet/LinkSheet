@@ -534,7 +534,7 @@
     <string name="settings_main_experiment_changelog__title_changelog">Dziennik zmian eksperymentów</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Zmiany zachowania</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Niektóre eksperymenty zostały usunięte i mają domyślne zachowanie.</string>
-    <string name="settings__subtitle_advanced"><![CDATA[Eksperymenty i import/eksport]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[Eksperymenty i kopia zapasowa]]></string>
     <string name="bottom_sheet__button_manual_redirect">Śledź przekierowania</string>
     <string name="app_host_dialog__title_hosts">Domyślne hosty</string>
     <string name="generic__button_text_save">Zapisz</string>
@@ -561,4 +561,8 @@
     <string name="import_settings__text_success">Przywrócono!</string>
     <string name="export_settings__text_success">Zapisano!</string>
     <string name="import_settings__text_failure">Nie udało się przywrócić ustawień!</string>
+    <string name="generic__button_text_enable">Włącz</string>
+    <string name="generic__button_text_disable">Wyłącz</string>
+    <string name="settings_remote_config__text_content">LinkSheet może automatycznie aktualizować wewnętrzne zasoby konfiguracji i dokumentacji, łącząc się ze swoim serwerem konfiguracji. Aby dowiedzieć się więcej, stuknij <annotation url-id="github.linksheet.wiki.privacy.remote-config">tutaj</annotation>.</string>
+    <string name="settings_remote_config__title_dialog">Zdalna konfiguracja</string>
 </resources>

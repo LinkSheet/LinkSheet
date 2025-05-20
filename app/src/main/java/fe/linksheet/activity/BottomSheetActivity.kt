@@ -1,8 +1,6 @@
 package fe.linksheet.activity
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -52,6 +49,10 @@ import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import androidx.core.net.toUri
+import fe.linksheet.activity.bottomsheet.LaunchFailure
+import fe.linksheet.activity.bottomsheet.LaunchHandler
+import fe.linksheet.activity.bottomsheet.LaunchResult
+import fe.linksheet.activity.bottomsheet.content.pending.M3ELoadingIndicatorSheetContent
 
 //import relocated.androidx.compose.material3.SheetValue
 //import relocated.androidx.compose.material3.rememberModalBottomSheetState
@@ -81,6 +82,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             )
         }
     }
+    private val launchHandler = LaunchHandler(launcher)
 
     val editorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode != RESULT_OK || result.data == null) return@registerForActivityResult
@@ -304,18 +306,19 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
     private suspend fun handleLaunch(intent: LaunchIntent) {
-        if (!start(intent.intent)) {
-            showToast(R.string.resolve_activity_failure, Toast.LENGTH_SHORT)
-        }
-    }
+        val result = launchHandler.start(intent.intent)
+        if(result !is LaunchFailure) return
 
-    fun start(intent: Intent): Boolean {
-        try {
-            launcher.launch(intent, ActivityOptionsCompat.makeBasic())
-            return true
-        } catch (e: ActivityNotFoundException) {
-            return false
+        logger.error(result.ex, "Launch failed: $result")
+        val textId = when (result) {
+            is LaunchResult.Illegal -> R.string.bottom_sheet__text_launch_illegal
+            is LaunchResult.NotAllowed -> R.string.bottom_sheet__text_launch_not_allowed
+            is LaunchResult.Other -> R.string.bottom_sheet__text_launch_failure_other
+            is LaunchResult.Unknown -> R.string.bottom_sheet__text_launch_failure_unknown
+            is LaunchResult.NotFound -> R.string.resolve_activity_failure
         }
+
+        showToast(textId)
     }
 
     override fun onStop() {

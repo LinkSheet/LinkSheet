@@ -551,4 +551,8 @@
     <string name="settings_remote_config__text_content">LinkSheet can automatically update internal configuration and documentation resources by connecting to its configuration server. To learn more, tap <annotation url-id="github.linksheet.wiki.privacy.remote-config">here</annotation>.</string>
     <string name="generic__button_text_enable">Enable</string>
     <string name="generic__button_text_disable">Disable</string>
+    <string name="bottom_sheet__text_launch_illegal">Illegal launch attempt!</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Launch not allowed!</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Unknown launch failure!</string>
+    <string name="bottom_sheet__text_launch_failure_other">Launch failed!</string>
 </resources>

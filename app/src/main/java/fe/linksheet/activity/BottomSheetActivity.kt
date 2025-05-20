@@ -174,7 +174,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
 
         val themeAmoled = viewModel.themeAmoled.collectAsStateWithLifecycle()
-        val interceptAccidentalTaps= viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
+        val interceptAccidentalTaps = viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
         val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
         M3FixModalBottomSheet(
             contentModifier = Modifier
@@ -211,18 +211,34 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     ) {
         when (resolveResult) {
             is IntentResolveResult.Pending -> {
-                LoadingIndicatorSheetContent(
-                    modifier = modifier,
-                    event = event,
-                    interaction = interaction,
-                    requestExpand = {
-                        logger.info("Loading indicator: Pre-Request expand")
-                        coroutineScope.launch {
-                            logger.info("Loading indicator: Request expand")
-                            sheetState.expand()
+                val expressiveLoadingSheet = viewModel.expressiveLoadingSheet.collectAsStateWithLifecycle()
+                if (expressiveLoadingSheet) {
+                    M3ELoadingIndicatorSheetContent(
+                        modifier = modifier,
+                        event = event,
+                        interaction = interaction,
+                        requestExpand = {
+                            logger.info("Loading indicator: Pre-Request expand")
+                            coroutineScope.launch {
+                                logger.info("Loading indicator: Request expand")
+                                sheetState.expand()
+                            }
                         }
-                    }
-                )
+                    )
+                } else {
+                    LoadingIndicatorSheetContent(
+                        modifier = modifier,
+                        event = event,
+                        interaction = interaction,
+                        requestExpand = {
+                            logger.info("Loading indicator: Pre-Request expand")
+                            coroutineScope.launch {
+                                logger.info("Loading indicator: Request expand")
+                                sheetState.expand()
+                            }
+                        }
+                    )
+                }
             }
 
             is IntentResolveResult.Default -> {

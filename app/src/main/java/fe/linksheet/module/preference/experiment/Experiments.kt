@@ -4,6 +4,7 @@ import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.compose.StatePreference
 import fe.composekit.preference.ViewModelStatePreference
+import fe.linksheet.util.buildconfig.Build
 import kotlinx.coroutines.CoroutineScope
 
 object Experiments : PreferenceDefinition(
@@ -35,6 +36,7 @@ object Experiments : PreferenceDefinition(
 
     val noBottomSheetStateSave = boolean("experiment_no_bottom_sheet_state_save")
     val aggressiveFollowRedirects = boolean("experiment_aggressive_follow_redirects")
+    val expressiveLoadingSheet = boolean("experiment_expressive_loading_sheet")
 
     // TODO: Enforce type
     init {
@@ -66,8 +68,10 @@ object Experiments : PreferenceDefinition(
                 addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
                 addPreference(ExperimentPreference("Disable bottom sheet state save", noBottomSheetStateSave))
                 addPreference(ExperimentPreference("Aggressive follow redirects", aggressiveFollowRedirects))
+                if (Build.IsDebug) {
+                    addPreference(ExperimentPreference("Expressive loading indicator", expressiveLoadingSheet))
+                }
             },
-
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {
                 addPreference(ExperimentPreference("Enable", editClipboard))
             },
@@ -98,7 +102,11 @@ class ExperimentGroup(val name: String, val displayName: String = "Experiment $n
     val defaultValues: Map<String, Boolean> by lazy { _preferences.associate { it.preference.key to it.preference.default } }
 
     fun asState(repository: ExperimentRepository): Map<String, ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>> {
-        return _preferences.associate { preference -> preference.preference.key to repository.asViewModelState(preference.preference) }
+        return _preferences.associate { preference ->
+            preference.preference.key to repository.asViewModelState(
+                preference.preference
+            )
+        }
     }
 
     val hidden: Boolean = false

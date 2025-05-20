@@ -110,7 +110,7 @@ class BottomSheetViewModel(
 
     val manualFollowRedirects = experimentRepository.asViewModelState(Experiments.manualFollowRedirects)
     val noBottomSheetStateSave = experimentRepository.asViewModelState(Experiments.noBottomSheetStateSave)
-
+    val expressiveLoadingSheet = experimentRepository.asViewModelState(Experiments.expressiveLoadingSheet)
     val appListSelectedIdx = mutableIntStateOf(-1)
 
     val events = intentResolver.events

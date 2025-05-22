@@ -20,7 +20,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.BottomSheetApps
 import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
-import fe.linksheet.activity.bottomsheet.M3FixModalBottomSheet
+import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
@@ -173,14 +173,14 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             )
         }
 
-        val themeAmoled = viewModel.themeAmoled.collectAsStateWithLifecycle()
-        val interceptAccidentalTaps = viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
-        val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
+        val themeAmoled by viewModel.themeAmoled.collectAsStateWithLifecycle()
+        val interceptAccidentalTaps by viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
+        val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
         M3FixModalBottomSheet(
             contentModifier = Modifier
                 .interceptTaps(sheetState, interceptAccidentalTaps)
-                .debugBorder(debug.value, 1.dp, Color.Red),
-            debug = debug.value,
+                .debugBorder(debug, 1.dp, Color.Red),
+            debug = debug,
             // TODO: Replace with pref
             isBlackTheme = themeAmoled,
             sheetState = sheetState,
@@ -211,7 +211,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     ) {
         when (resolveResult) {
             is IntentResolveResult.Pending -> {
-                val expressiveLoadingSheet = viewModel.expressiveLoadingSheet.collectAsStateWithLifecycle()
+                val expressiveLoadingSheet by viewModel.expressiveLoadingSheet.collectAsStateWithLifecycle()
                 if (expressiveLoadingSheet) {
                     M3ELoadingIndicatorSheetContent(
                         modifier = modifier,
@@ -242,18 +242,18 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             }
 
             is IntentResolveResult.Default -> {
-                val enableIgnoreLibRedirectButton = viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
-                val bottomSheetProfileSwitcher = viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
-                val urlCopiedToast = viewModel.urlCopiedToast.collectAsStateWithLifecycle()
-                val downloadStartedToast = viewModel.downloadStartedToast.collectAsStateWithLifecycle()
-                val hideAfterCopying = viewModel.hideAfterCopying.collectAsStateWithLifecycle()
-                val bottomSheetNativeLabel = viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
-                val gridLayout = viewModel.gridLayout.collectAsStateWithLifecycle()
-                val previewUrl = viewModel.previewUrl.collectAsStateWithLifecycle()
-                val hideBottomSheetChoiceButtons = viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
-                val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
-                val manualFollowRedirects = viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
-                val improvedBottomSheetUrlDoubleTap = viewModel.improvedBottomSheetUrlDoubleTap.collectAsStateWithLifecycle()
+                val enableIgnoreLibRedirectButton by viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
+                val bottomSheetProfileSwitcher by viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
+                val urlCopiedToast by viewModel.urlCopiedToast.collectAsStateWithLifecycle()
+                val downloadStartedToast by viewModel.downloadStartedToast.collectAsStateWithLifecycle()
+                val hideAfterCopying by viewModel.hideAfterCopying.collectAsStateWithLifecycle()
+                val bottomSheetNativeLabel by viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
+                val gridLayout by viewModel.gridLayout.collectAsStateWithLifecycle()
+                val previewUrl by viewModel.previewUrl.collectAsStateWithLifecycle()
+                val hideBottomSheetChoiceButtons by viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
+                val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+                val manualFollowRedirects by viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
+                val improvedBottomSheetUrlDoubleTap by viewModel.improvedBottomSheetUrlDoubleTap.collectAsStateWithLifecycle()
 
                 BottomSheetApps(
                     modifier = modifier,

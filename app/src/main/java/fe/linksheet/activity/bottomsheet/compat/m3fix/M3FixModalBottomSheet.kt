@@ -1,4 +1,4 @@
-package fe.linksheet.activity.bottomsheet
+package fe.linksheet.activity.bottomsheet.compat.m3fix
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.BottomSheetDefaults
@@ -9,10 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import fe.composekit.core.AndroidVersion
-import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixSheetState
-import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
-import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheetApi30
-import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheetPreApi30
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

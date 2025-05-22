@@ -149,7 +149,7 @@ fun NewSettingsRoute(
     navigateNew: (Route) -> Unit,
     viewModel: SettingsViewModel = koinViewModel(),
 ) {
-    val devMode = viewModel.devModeEnabled.collectAsStateWithLifecycle()
+    val devMode by viewModel.devModeEnabled.collectAsStateWithLifecycle()
     val languageDialog = rememberLanguageDialog()
 
     SaneScaffoldSettingsPage(

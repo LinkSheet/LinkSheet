@@ -2,14 +2,17 @@ package fe.linksheet.activity.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.collection.valueIterator
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.util.DebugStatePublisher
@@ -37,22 +40,27 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val navController = rememberNavController()
 
-                LaunchedEffect(key1 = eventState.value) {
-                    if (eventState.value is UiEvent.ShowSnackbar) {
-                        snackbarHostState.showSnackbar(message = (eventState.value as UiEvent.ShowSnackbar).text)
-                    } else if (eventState.value is UiEvent.NavigateTo) {
-                        navController.navigate((eventState.value as UiEvent.NavigateTo).route)
+                val uiEvent by events.collectAsStateWithLifecycle()
+                LaunchedEffect(key1 = uiEvent) {
+                    uiEvent?.let {
+                        when (it) {
+                            is UiEvent.ShowSnackbar -> snackbarHostState.showSnackbar(message = it.text)
+                            is UiEvent.NavigateTo -> navController.navigate(it.route)
+                        }
                     }
                 }
 
                 AddIntentDeepLinkHandler(navController = navController)
 
-                val remoteConfigDialogDismissed = viewModel.remoteConfigDialogDismissed.collectAsStateWithLifecycle()
-                val remoteConfigDialog = rememberRemoteConfigDialog {
-                    viewModel.setRemoteConfig(it)
-                }
+                val remoteConfigDialogDismissed by viewModel.remoteConfigDialogDismissed.collectAsStateWithLifecycle(
+                    // Assume true to avoid having to show, then quickly dismiss the dialog, once the actual state is emitted to the flow
+                    initialValue = true
+                )
+                val remoteConfigDialog = rememberRemoteConfigDialog(
+                    onChanged = { viewModel.setRemoteConfig(it) }
+                )
 
-                LaunchedEffect(key1 = Unit) {
+                LaunchedEffect(key1 = remoteConfigDialogDismissed) {
                     if (!remoteConfigDialogDismissed) {
                         remoteConfigDialog.open()
                     }
@@ -63,8 +71,8 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                         viewModel.enqueueNavEvent(destination, args)
                     }
 
-                    val telemetryLevel = viewModel.telemetryLevel.collectAsStateWithLifecycle()
-                    val telemetryShowInfoDialog = viewModel.telemetryShowInfoDialog.collectAsStateWithLifecycle()
+                    val telemetryLevel by viewModel.telemetryLevel.collectAsStateWithLifecycle()
+                    val telemetryShowInfoDialog by viewModel.telemetryShowInfoDialog.collectAsStateWithLifecycle()
 
                     val analyticsDialog = rememberAnalyticDialog(
                         telemetryLevel = telemetryLevel,

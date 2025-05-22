@@ -2,6 +2,7 @@ package fe.linksheet.composable.component.list.item.type
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Shape
 import fe.android.compose.content.OptionalContent
 import fe.android.compose.text.TextContent
@@ -53,7 +54,7 @@ fun PreferenceSwitchListItem(
     supportingContent: TextContent? = null,
     otherContent: OptionalContent = null,
 ) {
-    val preference = statePreference.collectAsStateWithLifecycle()
+    val preference by statePreference.collectAsStateWithLifecycle()
 
     SwitchListItem(
         enabled = enabled,

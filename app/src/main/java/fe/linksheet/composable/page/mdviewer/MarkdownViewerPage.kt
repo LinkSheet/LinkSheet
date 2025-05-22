@@ -70,7 +70,7 @@ private fun MarkdownViewer(
         canScroll = { false }
     )
 
-    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
+    val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     SaneSettingsScaffold(
         topBar = {
             SaneSmallTopAppBar(
@@ -79,7 +79,7 @@ private fun MarkdownViewer(
                 onBackPressed = onBackPressed,
                 actions = {
                     IconButton(
-                        modifier = Modifier.debugBorder(debug.value, 1.dp, Color.Red),
+                        modifier = Modifier.debugBorder(debug, 1.dp, Color.Red),
                         onClick = onOpenExternally
                     ) {
                         Icon(

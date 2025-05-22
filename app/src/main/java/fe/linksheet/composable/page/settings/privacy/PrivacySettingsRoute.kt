@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.settings.privacy
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -20,13 +21,13 @@ fun PrivacySettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: PrivacySettingsViewModel = koinViewModel(),
 ) {
-    val telemetryLevel = viewModel.telemetryLevel.collectAsStateWithLifecycle()
+    val telemetryLevel by viewModel.telemetryLevel.collectAsStateWithLifecycle()
     val analyticsDialog = rememberAnalyticDialog(
         telemetryLevel = telemetryLevel,
         onChanged = { viewModel.updateTelemetryLevel(it) }
     )
 
-    val enableAnalytics = viewModel.enableAnalytics.collectAsStateWithLifecycle()
+    val enableAnalytics by viewModel.enableAnalytics.collectAsStateWithLifecycle()
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.privacy), onBackPressed = onBackPressed) {
         group(1) {

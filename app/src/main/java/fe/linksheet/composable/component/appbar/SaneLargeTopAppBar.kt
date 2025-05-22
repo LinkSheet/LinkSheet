@@ -6,6 +6,7 @@ import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -23,10 +24,10 @@ fun SaneLargeTopAppBar(
     actions: @Composable RowScope.() -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
+    val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     val navigationIcon = rememberOptionalContent(enableBackButton) {
         SaneAppBarBackButton(
-            modifier = Modifier.debugBorder(debug.value, 1.dp, Color.Cyan),
+            modifier = Modifier.debugBorder(debug, 1.dp, Color.Cyan),
             onBackPressed = onBackPressed
         )
     }
@@ -41,7 +42,7 @@ fun SaneLargeTopAppBar(
         ),
         title = {
             SaneAppBarTitle(
-                modifier = Modifier.debugBorder(debug.value, 1.dp, Color.Green),
+                modifier = Modifier.debugBorder(debug, 1.dp, Color.Green),
                 headline = headline
             )
         },

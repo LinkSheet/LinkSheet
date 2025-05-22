@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.settings.link
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -88,7 +89,7 @@ fun NewLinksSettingsRoute(
             }
 
             item(key = R.string.enable_downloader) { padding, shape ->
-                val enableDownloader= viewModel.enableDownloader.collectAsStateWithLifecycle()
+                val enableDownloader by viewModel.enableDownloader.collectAsStateWithLifecycle()
 
                 DividedSwitchListItem(
                     shape = shape,

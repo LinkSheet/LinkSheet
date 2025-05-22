@@ -54,7 +54,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
     val clipboardManager = LocalClipboardManager.current
 
     val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
-    val newDefaultsDismissed = viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
+    val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
@@ -175,7 +175,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             if (clipboardUri != null) {
                 item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
-                    val editClipboard = viewModel.editClipboard.collectAsStateWithLifecycle()
+                    val editClipboard by viewModel.editClipboard.collectAsStateWithLifecycle()
 
                     OpenCopiedLink(
                         editClipboard = editClipboard,

@@ -43,7 +43,7 @@ fun ProfileSwitchingSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: ProfileSwitchingSettingsViewModel = koinViewModel(),
 ) {
-    val enabled = viewModel.enabled.collectAsStateWithLifecycle()
+    val enabled by viewModel.enabled.collectAsStateWithLifecycle()
     val status by viewModel.status.collectAsStateWithLifecycle(ProfileStatus.Unsupported)
     val userProfileInfo by viewModel.userProfileInfo.collectAsStateWithLifecycle(null)
 

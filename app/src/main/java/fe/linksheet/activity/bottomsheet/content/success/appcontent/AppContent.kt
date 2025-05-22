@@ -2,12 +2,13 @@ package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,9 +29,9 @@ fun AppContent(
     showToast: (Int, Int, Boolean) -> Unit,
     content: @Composable (Modifier) -> Unit,
 ) {
-    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
+    val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     Column(
-        modifier = Modifier.debugBorder(debug.value, 1.dp, Color.Cyan),
+        modifier = Modifier.debugBorder(debug, 1.dp, Color.Cyan),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         content(

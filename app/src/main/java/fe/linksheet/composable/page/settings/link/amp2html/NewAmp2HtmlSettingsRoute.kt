@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.settings.link.amp2html
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -28,7 +29,7 @@ fun NewAmp2HtmlSettingsRoute(
         Darknet.entries.joinToString(separator = ", ") { it.displayName }
     }
 
-    val enableAmp2Html = viewModel.enableAmp2Html.collectAsStateWithLifecycle()
+    val enableAmp2Html by viewModel.enableAmp2Html.collectAsStateWithLifecycle()
     val contentSet = remember(enableAmp2Html) { enableAmp2Html.toEnabledContentSet() }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.settings_links_amp2html__title_amp2html), onBackPressed = onBackPressed) {
@@ -91,7 +92,7 @@ fun NewAmp2HtmlSettingsRoute(
             }
 
             item(key = R.string.request_timeout) { padding, shape ->
-                val requestTimeout = viewModel.requestTimeout.collectAsStateWithLifecycle()
+                val requestTimeout by viewModel.requestTimeout.collectAsStateWithLifecycle()
 
                 SliderListItem(
                     enabled = contentSet,

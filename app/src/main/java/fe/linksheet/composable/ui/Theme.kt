@@ -104,9 +104,9 @@ fun AppTheme(
 ) {
     val context = LocalContext.current
 
-    val themeV2 = themeSettingsViewModel.themeV2.collectAsStateWithLifecycle()
-    val materialYou = themeSettingsViewModel.themeMaterialYou.collectAsStateWithLifecycle()
-    val amoled = themeSettingsViewModel.themeAmoled.collectAsStateWithLifecycle()
+    val themeV2 by themeSettingsViewModel.themeV2.collectAsStateWithLifecycle()
+    val materialYou by themeSettingsViewModel.themeMaterialYou.collectAsStateWithLifecycle()
+    val amoled by themeSettingsViewModel.themeAmoled.collectAsStateWithLifecycle()
 
     val colorScheme = remember(themeV2, systemDarkTheme, materialYou, amoled) {
         themeV2.getColorScheme(context, systemDarkTheme, materialYou, amoled)
@@ -129,7 +129,7 @@ fun AppTheme(
 
     val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
-    val linkAssets = themeSettingsViewModel.linkAssets.collectAsStateWithLifecycle()
+    val linkAssets by themeSettingsViewModel.linkAssets.collectAsStateWithLifecycle()
     KoinAndroidContext {
         CompositionLocalProvider(
             LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,

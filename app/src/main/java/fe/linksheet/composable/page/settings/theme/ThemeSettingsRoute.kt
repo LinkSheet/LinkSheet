@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.settings.theme
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
@@ -47,7 +48,7 @@ fun ThemeSettingsRoute(onBackPressed: () -> Unit, viewModel: ThemeSettingsViewMo
             }
 
             item(key = R.string.theme_enable_amoled) { padding, shape ->
-                val themeV2 = viewModel.themeV2.collectAsStateWithLifecycle()
+                val themeV2 by viewModel.themeV2.collectAsStateWithLifecycle()
 
                 PreferenceSwitchListItem(
                     enabled = (themeV2 == ThemeV2.System || themeV2 == ThemeV2.Dark).toEnabledContentSet(),

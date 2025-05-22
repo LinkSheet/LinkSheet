@@ -2,6 +2,7 @@ package fe.linksheet.composable.page.settings.link.downloader
 
 import android.Manifest
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -32,7 +33,7 @@ fun NewDownloaderSettingsRoute(
     viewModel: DownloaderSettingsViewModel = koinViewModel(),
 ) {
     val writeExternalStoragePermissionState = downloaderPermissionState()
-    val enableDownloader = viewModel.enableDownloader.collectAsStateWithLifecycle()
+    val enableDownloader by viewModel.enableDownloader.collectAsStateWithLifecycle()
     val contentSet = remember(enableDownloader) { enableDownloader.toEnabledContentSet() }
 
     SaneScaffoldSettingsPage(
@@ -70,7 +71,7 @@ fun NewDownloaderSettingsRoute(
             }
 
             item(key = R.string.request_timeout) { padding, shape ->
-                val requestTimeout = viewModel.requestTimeout.collectAsStateWithLifecycle()
+                val requestTimeout by viewModel.requestTimeout.collectAsStateWithLifecycle()
 
                 SliderListItem(
                     enabled = contentSet,

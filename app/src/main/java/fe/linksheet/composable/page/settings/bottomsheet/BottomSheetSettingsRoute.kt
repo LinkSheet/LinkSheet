@@ -100,7 +100,7 @@ fun BottomSheetSettingsRoute(
 
         group(size = 4 + if (AndroidVersion.isAtLeastApi30R()) 1 else 0) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
-                val updateStatsSorting = viewModel.usageStatsSorting.collectAsStateWithLifecycle()
+                val updateStatsSorting by viewModel.usageStatsSorting.collectAsStateWithLifecycle()
 
                 SwitchListItem(
                     shape = shape,

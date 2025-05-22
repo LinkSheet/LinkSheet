@@ -3,6 +3,7 @@ package fe.linksheet.composable.page.settings.browser.inapp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -51,7 +52,7 @@ fun NewInAppBrowserSettingsRoute(
             }
 
             item(key = R.string.disable_in_selected) { padding, shape ->
-                val inAppBrowserMode = viewModel.inAppBrowserMode.collectAsStateWithLifecycle()
+                val inAppBrowserMode by viewModel.inAppBrowserMode.collectAsStateWithLifecycle()
 
                 RadioButtonListItem(
                     shape = shape,

@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.settings.link.redirect
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -34,7 +35,7 @@ fun NewFollowRedirectsSettingsRoute(
     val darknets = remember {
         Darknet.entries.joinToString(separator = ", ") { it.displayName }
     }
-    val followRedirects = viewModel.followRedirects.collectAsStateWithLifecycle()
+    val followRedirects by viewModel.followRedirects.collectAsStateWithLifecycle()
     val contentSet = remember(followRedirects) { followRedirects.toEnabledContentSet() }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.follow_redirects), onBackPressed = onBackPressed) {
@@ -61,7 +62,7 @@ fun NewFollowRedirectsSettingsRoute(
             }
 
             item(key = R.string.follow_only_known_trackers) { padding, shape ->
-                val followRedirectsExternalService = viewModel.followRedirectsExternalService.collectAsStateWithLifecycle()
+                val followRedirectsExternalService by viewModel.followRedirectsExternalService.collectAsStateWithLifecycle()
                 // TODO: This settings should allow the user to add their own rules in the future, or at least display a _understandable_ list of known tracker domains
                 PreferenceSwitchListItem(
                     enabled = (followRedirects && !followRedirectsExternalService).toEnabledContentSet(),
@@ -110,7 +111,7 @@ fun NewFollowRedirectsSettingsRoute(
             }
 
             item(key = R.string.request_timeout) { padding, shape ->
-                val requestTimeout = viewModel.requestTimeout.collectAsStateWithLifecycle()
+                val requestTimeout by viewModel.requestTimeout.collectAsStateWithLifecycle()
 
                 SliderListItem(
                     enabled = contentSet,

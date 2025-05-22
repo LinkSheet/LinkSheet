@@ -74,7 +74,7 @@ fun BrowserCommonPackageSelectorRoute(
                     checked = newState[app] ?: storedState,
                     onCheckedChange = { newState[app] = it }
                 ) {
-                    val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+                    val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
 
                     BrowserIconTextRow(
                         app = app,

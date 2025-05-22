@@ -73,7 +73,7 @@ fun PreferredBrowserSettingsRoute(
         rowKey = { it.value },
         rows = rows,
         header = {
-            val unifiedPreferredBrowser = viewModel.unifiedPreferredBrowser.collectAsStateWithLifecycle()
+            val unifiedPreferredBrowser by viewModel.unifiedPreferredBrowser.collectAsStateWithLifecycle()
 
             SettingEnabledCardColumn(
                 checked = unifiedPreferredBrowser,
@@ -119,14 +119,14 @@ fun PreferredBrowserSettingsRoute(
                 key = { it.flatComponentName },
                 contentType = { it.flatComponentName }
             ) { app ->
-                val selected = browserMode == BrowserMode.SelectedBrowser && selectedBrowser == app.packageName
+                val selected = browserMode == BrowserMode.SelectedBrowser && selectedBrowser?.value == app.packageName
 //
                 RadioButtonRow(
                     selected = selected,
                     onClick = { viewModel.updateSelectedBrowser(app.packageName) },
                     onLongClick = { activity.startPackageInfoActivity(app) }
                 ) {
-                    val alwaysShowPackageName = viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+                    val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
 
                     BrowserIconTextRow(
                         app = app,

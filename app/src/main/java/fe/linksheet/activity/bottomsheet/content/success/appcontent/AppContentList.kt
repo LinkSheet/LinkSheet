@@ -13,6 +13,7 @@ import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,7 +50,7 @@ fun AppContentList(
     isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
-    val debug = LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
+    val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     val state = rememberLazyListState()
 
     AppContent(
@@ -62,7 +63,7 @@ fun AppContentList(
     ) { modifier ->
         LazyColumn(
             state = state,
-            modifier = modifier.debugBorder(debug.value, 1.dp, Color.Green)
+            modifier = modifier.debugBorder(debug, 1.dp, Color.Green)
         ) {
             itemsIndexed(
                 items = apps,

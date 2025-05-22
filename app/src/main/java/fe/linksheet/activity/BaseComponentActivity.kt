@@ -4,9 +4,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.util.UiEventReceiver
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 open class BaseComponentActivity : AppCompatActivity() {
     var edgeToEdge: Boolean = false
@@ -25,10 +26,10 @@ open class BaseComponentActivity : AppCompatActivity() {
 }
 
 open class UiEventReceiverBaseComponentActivity : BaseComponentActivity(), UiEventReceiver {
-    protected var eventState = mutableStateOf<UiEvent?>(null)
-        private set
+    private val _events = MutableStateFlow<UiEvent?>(null)
+    val events = _events.asStateFlow()
 
     override fun receive(event: UiEvent) {
-        eventState.value = event
+        _events.tryEmit(event)
     }
 }

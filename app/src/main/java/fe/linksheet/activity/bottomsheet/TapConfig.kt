@@ -9,7 +9,7 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-sealed class TapConfig(val name: String, @StringRes val stringRes: Int) : StringResHolder, Parcelable {
+sealed class TapConfig(val name: String, @param:StringRes val stringRes: Int) : StringResHolder, Parcelable {
     @IgnoredOnParcel
     override val id = stringRes
 

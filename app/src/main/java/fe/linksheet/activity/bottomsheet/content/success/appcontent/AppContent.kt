@@ -36,14 +36,15 @@ fun AppContent(
         content(
             Modifier
                 .fillMaxWidth()
-                .weight(1.0f, fill = false)
+                .weight(0.9f, fill = false)
         )
 
         if (!hasPreferredApp && !hideChoiceButtons) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(min = ButtonDefaults.MinHeight)
+                    .defaultMinSize(minHeight = ButtonDefaults.MinHeight)
+//                    .weight(0.1f, fill = true)
             ) {
                 NoPreferredAppChoiceButtons(
                     info = info,
@@ -56,9 +57,20 @@ fun AppContent(
     }
 }
 
+@Preview(showBackground = true, heightDp = 100)
+@Composable
+private fun AppContentPreviewSmallerHeight() {
+    AppContentPreviewBase()
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun AppContentPreview() {
+    AppContentPreviewBase()
+}
+
+@Composable
+private fun AppContentPreviewBase() {
     AppContent(
         info = null,
         appListSelectedIdx = -1,

@@ -47,7 +47,6 @@ object Experiments : PreferenceDefinition(
                 addPreference(ExperimentPreference("Open Graph preview", urlPreview))
                 addPreference(ExperimentPreference("Disable preview if referrer is browser", urlPreviewSkipBrowser))
             },
-
             ExperimentGroup("improved_bottom_sheet", "Improved bottom sheet").apply {
                 addPreference(ExperimentPreference("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully))
                 addPreference(ExperimentPreference("Double tap url to open app", improvedBottomSheetUrlDoubleTap))
@@ -68,9 +67,7 @@ object Experiments : PreferenceDefinition(
                 addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
                 addPreference(ExperimentPreference("Disable bottom sheet state save", noBottomSheetStateSave))
                 addPreference(ExperimentPreference("Aggressive follow redirects", aggressiveFollowRedirects))
-                if (Build.IsDebug) {
-                    addPreference(ExperimentPreference("Expressive loading indicator", expressiveLoadingSheet))
-                }
+                addPreference(ExperimentPreference("Expressive loading indicator", expressiveLoadingSheet))
             },
             ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {
                 addPreference(ExperimentPreference("Enable", editClipboard))

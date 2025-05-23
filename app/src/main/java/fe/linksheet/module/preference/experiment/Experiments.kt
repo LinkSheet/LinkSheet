@@ -2,10 +2,7 @@ package fe.linksheet.module.preference.experiment
 
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
-import fe.android.preference.helper.compose.StatePreference
 import fe.composekit.preference.ViewModelStatePreference
-import fe.linksheet.util.buildconfig.Build
-import kotlinx.coroutines.CoroutineScope
 
 object Experiments : PreferenceDefinition(
     "experiment_drop_categories",
@@ -16,64 +13,89 @@ object Experiments : PreferenceDefinition(
     "experiment_url_bar_switch_profile",
     "experiment_ui_overhaul"
 ) {
-    val experiments: List<ExperimentGroup>
+    val urlPreview = boolean(
+        key = "experiment_url_bar_preview"
+    )
+    val urlPreviewSkipBrowser = boolean(
+        key = "experiment_url_bar_preview_skip_browser"
+    )
 
-    val urlPreview = boolean("experiment_url_bar_preview")
-    val urlPreviewSkipBrowser = boolean("experiment_url_bar_preview_skip_browser")
+    val improvedBottomSheetExpandFully = boolean(
+        key = "experiment_impr_btm_sheet_expand_fully"
+    )
+    val improvedBottomSheetUrlDoubleTap = boolean(
+        key = "experiment_impr_btm_sheet_url_double_tap"
+    )
+    val autoLaunchSingleBrowser = boolean(
+        key = "experiment_improved_bottom_sheet_auto_launch_single_browser"
+    )
+    val interceptAccidentalTaps = boolean(
+        key = "experiment_intercept_accidental_taps",
+        default = true
+    )
+    val manualFollowRedirects = boolean(
+        key = "experiment_manual_follow_redirects",
+        default = false
+    )
 
-    val improvedBottomSheetExpandFully = boolean("experiment_impr_btm_sheet_expand_fully")
-    val improvedBottomSheetUrlDoubleTap = boolean("experiment_impr_btm_sheet_url_double_tap")
-    val autoLaunchSingleBrowser = boolean("experiment_improved_bottom_sheet_auto_launch_single_browser")
-    val interceptAccidentalTaps = boolean("experiment_intercept_accidental_taps", true)
-    val manualFollowRedirects = boolean("experiment_manual_follow_redirects", false)
+    val libRedirectJsEngine = boolean(
+        key = "experiment_enable_libredirect_js_engine"
+    )
 
-    val libRedirectJsEngine = boolean("experiment_enable_libredirect_js_engine")
+    val enableAnalytics = boolean(
+        key = "experiment_enable_analytics",
+        default = false
+    )
 
-    val enableAnalytics = boolean("experiment_enable_analytics", false)
+    val editClipboard = boolean(
+        key = "experiment_edit_clipboard",
+        default = true
+    )
+    val hideReferrerFromSheet = boolean(
+        key = "experiment_hide_referrer_from_sheet"
+    )
 
-    val editClipboard = boolean("experiment_edit_clipboard", true)
-    val hideReferrerFromSheet = boolean("experiment_hide_referrer_from_sheet")
+    val noBottomSheetStateSave = boolean(
+        key = "experiment_no_bottom_sheet_state_save"
+    )
+    val aggressiveFollowRedirects = boolean(
+        key = "experiment_aggressive_follow_redirects"
+    )
+    val expressiveLoadingSheet = boolean(
+        key = "experiment_expressive_loading_sheet"
+    )
 
-    val noBottomSheetStateSave = boolean("experiment_no_bottom_sheet_state_save")
-    val aggressiveFollowRedirects = boolean("experiment_aggressive_follow_redirects")
-    val expressiveLoadingSheet = boolean("experiment_expressive_loading_sheet")
+    val experiments = listOf(
+        group(
+            name = "enhanced_url_bar",
+            displayName = "Enhanced url bar",
+            experiment("Open Graph preview", urlPreview),
+            experiment("Disable preview if referrer is browser", urlPreviewSkipBrowser)
+        ),
+        group(
+            name = "improved_bottom_sheet",
+            displayName = "Improved bottom sheet",
+            experiment("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully),
+            experiment("Double tap url to open app", improvedBottomSheetUrlDoubleTap),
+            experiment("LibRedirect QuickJS engine", libRedirectJsEngine),
+            experiment("Hide referring app from results in bottom sheet", hideReferrerFromSheet),
+            experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
+            experiment("Auto-launch single browser", autoLaunchSingleBrowser),
+            experiment("Manual redirect resolving", manualFollowRedirects),
+            experiment("Disable bottom sheet state save", noBottomSheetStateSave),
+            experiment("Aggressive follow redirects", aggressiveFollowRedirects),
+            experiment("Expressive loading indicator", expressiveLoadingSheet)
+        ),
+        group(
+            name = "edit_clipboard",
+            displayName = "Edit clipboard content on home page",
+            experiment("Enable", editClipboard)
+        )
+    )
 
     // TODO: Enforce type
     init {
         enableAnalytics.migrate { repository, _ -> repository.put(enableAnalytics, false) }
-
-        experiments = listOf(
-            ExperimentGroup("enhanced_url_bar", "Enhanced url bar").apply {
-                addPreference(ExperimentPreference("Open Graph preview", urlPreview))
-                addPreference(ExperimentPreference("Disable preview if referrer is browser", urlPreviewSkipBrowser))
-            },
-            ExperimentGroup("improved_bottom_sheet", "Improved bottom sheet").apply {
-                addPreference(ExperimentPreference("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully))
-                addPreference(ExperimentPreference("Double tap url to open app", improvedBottomSheetUrlDoubleTap))
-                addPreference(ExperimentPreference("LibRedirect QuickJS engine", libRedirectJsEngine))
-                addPreference(
-                    ExperimentPreference(
-                        "Hide referring app from results in bottom sheet",
-                        hideReferrerFromSheet
-                    )
-                )
-                addPreference(
-                    ExperimentPreference(
-                        "Ignore accidental taps while sheet is animating",
-                        interceptAccidentalTaps
-                    )
-                )
-                addPreference(ExperimentPreference("Auto-launch single browser", autoLaunchSingleBrowser))
-                addPreference(ExperimentPreference("Manual redirect resolving", manualFollowRedirects))
-                addPreference(ExperimentPreference("Disable bottom sheet state save", noBottomSheetStateSave))
-                addPreference(ExperimentPreference("Aggressive follow redirects", aggressiveFollowRedirects))
-                addPreference(ExperimentPreference("Expressive loading indicator", expressiveLoadingSheet))
-            },
-            ExperimentGroup("edit_clipboard", "Edit clipboard content on home page").apply {
-                addPreference(ExperimentPreference("Enable", editClipboard))
-            },
-        )
-
         finalize()
     }
 
@@ -87,6 +109,20 @@ object Experiments : PreferenceDefinition(
         return active
     }
 }
+
+private fun group(name: String, displayName: String, vararg experiments: ExperimentPreference): ExperimentGroup {
+    val group = ExperimentGroup(name, displayName)
+    for (preference in experiments) {
+        group.addPreference(preference)
+    }
+
+    return group
+}
+
+private fun experiment(displayName: String, experiment: Preference.Boolean): ExperimentPreference {
+    return ExperimentPreference(displayName, experiment)
+}
+
 
 class ExperimentGroup(val name: String, val displayName: String = "Experiment $name") {
     private val _preferences = mutableListOf<ExperimentPreference>()

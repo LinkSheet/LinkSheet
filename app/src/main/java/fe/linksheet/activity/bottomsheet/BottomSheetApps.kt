@@ -1,7 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.app.Activity
-import android.app.usage.UsageStats
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -87,7 +86,11 @@ fun BottomSheetApps(
     ) {
         if (previewUrl && hasUri) {
             Column(
-                modifier = Modifier.padding(horizontal = 15.dp),
+                modifier = Modifier
+                    .padding(horizontal = 15.dp)
+//                    .wrapContentHeight()
+//                    .weight(0.2f, fill = false)
+                    ,
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 UrlBarWrapper(

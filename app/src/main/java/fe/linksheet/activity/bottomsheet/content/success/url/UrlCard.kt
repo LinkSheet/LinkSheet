@@ -1,6 +1,5 @@
 package fe.linksheet.activity.bottomsheet.content.success.url
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
@@ -12,6 +11,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
@@ -21,21 +22,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.preview.TestImageLoader
+import coil3.ColorImage
 import coil3.ImageLoader
 import coil3.SingletonImageLoader
 import coil3.compose.AsyncImagePainter
 import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.SubcomposeAsyncImageContent
-import fe.android.compose.extension.thenIf
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.material3.placeholder
 import io.github.fornewid.placeholder.material3.shimmer
 import me.saket.unfurl.UnfurlResult
-import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @Composable
@@ -127,25 +129,36 @@ fun UrlCard(
                     contentDescription = ""
                 ) {
                     val state by painter.state.collectAsState()
-                    if (state is AsyncImagePainter.State.Success) {
-                        SubcomposeAsyncImageContent(modifier = Modifier.clip(CardDefaults.shape))
-                    } else if (state is AsyncImagePainter.State.Empty || state is AsyncImagePainter.State.Loading) {
-                        Spacer(
-                            modifier = Modifier
-                                .requiredHeight(200.dp)
-                                .clip(CardDefaults.shape)
-                                .placeholder(
-                                    visible = true,
-                                    highlight = PlaceholderHighlight.shimmer(),
-                                )
-                        )
+                    when (state) {
+                        is AsyncImagePainter.State.Success -> {
+                            SubcomposeAsyncImageContent(modifier = Modifier.clip(CardDefaults.shape))
+                        }
+
+                        is AsyncImagePainter.State.Empty, is AsyncImagePainter.State.Loading -> {
+                            Spacer(
+                                modifier = Modifier
+                                    .requiredHeight(200.dp)
+                                    .clip(CardDefaults.shape)
+                                    .placeholder(
+                                        visible = true,
+                                        highlight = PlaceholderHighlight.shimmer(),
+                                    )
+                            )
+                        }
+
+                        is AsyncImagePainter.State.Error -> {
+                        }
                     }
                 }
             }
 
             Row(
                 modifier = Modifier
-                    .thenIf(!showFullUrl && data == null) { it.height(60.dp) }
+                    .heightIn(
+                        min = 60.dp,
+                        max = if (!showFullUrl && data == null) 60.dp else Dp.Unspecified
+                    )
+//                    .thenIf(!showFullUrl && data == null) { it.heightIn(min = 60.dp) }
                     .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -167,10 +180,6 @@ fun UrlCard(
                         contentDescription = ""
                     ) {
                         val state by painter.state.collectAsState()
-                        LaunchedEffect(key1 = state) {
-                            Log.d("UrlCard", "$state")
-                        }
-
                         if (state is AsyncImagePainter.State.Success) {
                             SubcomposeAsyncImageContent(
                                 modifier = Modifier.size(16.dp),
@@ -203,15 +212,33 @@ fun UrlCard(
     }
 }
 
-private class UrlCardPreviewProvider : PreviewParameterProvider<UrlCardData> {
+class UrlCardPreviewData(
+    val url: String,
+    val data: UrlCardData?,
+)
+
+private class UrlCardPreviewProvider : PreviewParameterProvider<UrlCardPreviewData> {
     @OptIn(ExperimentalEncodingApi::class)
-    override val values: Sequence<UrlCardData> = sequenceOf(
-        UrlCardData(
-            title = "",
-            favicon = Base64.decode(
-                """AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAD/EAAA/0AAAP9AAAD/cAAA/4AAAP+AAAD/gAAA/4AAAP+AAAD/QAAA/0AAAP8Q////AP///wD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8AAAD/MAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/MAAA/1AAAP//AAD//wAA//8AAP//AAD//wAA//8QEP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//1BQ//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/gAAA//8AAP//AAD//wAA//8AAP//AAD/////////////wMD//yAg//8AAP//AAD//wAA//8AAP//AAD/gAAA/4AAAP//AAD//wAA//8AAP//AAD//wAA/////////////7Cw//8gIP//AAD//wAA//8AAP//AAD//wAA/4AAAP+AAAD//wAA//8AAP//AAD//wAA//8AAP//4OD//0BA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP+AAAD/UAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD/YAAA/zAAAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/zD///8AAAD/YAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA/2D///8A////AP///wAAAP8QAAD/QAAA/0AAAP+AAAD/gAAA/4AAAP+AAAD/gAAA/4AAAP9AAAD/QAAA/xD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AADAAwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAD//wAA//8AAA=="""
-            ),
-            thumbnail = Base64.decode("""""")
+    override val values: Sequence<UrlCardPreviewData> = sequenceOf(
+        UrlCardPreviewData(
+            url = "https://www.youtube.com/watch?v=EwpDg9hfZeY",
+            data = UrlCardData(
+                title = "Top 15 Best Android Apps - March 2025!",
+                favicon = "6jdOxUfMlrA",
+                thumbnail = "6jdOxUfMlrA"
+            )
+        ),
+        UrlCardPreviewData(
+            url = "https://www.youtube.com/watch?v=EwpDg9hfZeY",
+            data = UrlCardData(
+                title = "Top 20 Best Android Apps - April 2025!",
+                favicon = "EwpDg9hfZeY",
+                thumbnail = "EwpDg9hfZeY",
+            )
+        ),
+        UrlCardPreviewData(
+            url = "https://linksheet.app",
+            data = null
         )
     )
 }
@@ -219,11 +246,14 @@ private class UrlCardPreviewProvider : PreviewParameterProvider<UrlCardData> {
 @OptIn(ExperimentalEncodingApi::class)
 @Composable
 @Preview
-private fun UrlCardPreview(@PreviewParameter(UrlCardPreviewProvider::class) data: UrlCardData) {
+private fun UrlCardPreview(@PreviewParameter(UrlCardPreviewProvider::class) data: UrlCardPreviewData) {
+    val imageLoader = TestImageLoader(LocalContext.current) {
+        default(ColorImage(Color.Blue.toArgb()))
+    }
+
     UrlCard(
-        uri = "https://www.youtube.com/watch?v=DEhphcTaVxM",
-        data = data
-//            thumbnail = "https://i.ytimg.com/vi/DEhphcTaVxM/maxresdefault.jpg".toHttpUrlOrNull(),
-//        )
+        uri = data.url,
+        data = data.data,
+        imageLoader = imageLoader
     )
 }

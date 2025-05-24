@@ -92,7 +92,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         Duration::class,
         List::class,
         Clock::class,
-        ZoneId::class
+        ZoneId::class,
         // TODO: Hook up CacheRepository to DI, then remove here
         CacheRepository::class
     )

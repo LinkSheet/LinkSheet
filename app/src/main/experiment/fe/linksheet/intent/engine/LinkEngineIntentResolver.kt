@@ -121,7 +121,7 @@ class LinkEngineIntentResolver(
         val uriResult = IntentParser.getUriFromIntent(intent)
         if (uriResult.isFailure()) {
             logger.error("Failed to parse intent ${intent.action}")
-            return +uriResult.exception
+            return +uriResult
         }
 
         val url = uriResult.value.toStdUrl()

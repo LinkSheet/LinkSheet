@@ -6,8 +6,11 @@ import android.net.Uri
 object ReferrerHelper {
     private const val APP_SCHEME: String = "android-app"
 
-    fun getReferringPackage(uri: Uri?): String? {
-        return if (uri?.scheme == APP_SCHEME) uri.host else null
+    fun getReferringPackage(uri: Uri?): AndroidAppPackage? {
+        return when (uri?.scheme) {
+            APP_SCHEME if uri.host != null ->  AndroidAppPackage(uri.host!!)
+            else -> null
+        }
     }
 
     fun createReferrer(context: Context): Uri {
@@ -18,3 +21,6 @@ object ReferrerHelper {
         return Uri.fromParts(APP_SCHEME, packageName, null)
     }
 }
+
+@JvmInline
+value class AndroidAppPackage(val packageName: String)

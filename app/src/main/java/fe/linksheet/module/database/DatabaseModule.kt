@@ -8,11 +8,17 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.database.dao.*
+import fe.linksheet.module.database.dao.cache.HtmlCacheDao
+import fe.linksheet.module.database.dao.cache.PreviewCacheDao
+import fe.linksheet.module.database.dao.cache.ResolveTypeDao
+import fe.linksheet.module.database.dao.cache.ResolvedUrlCacheDao
+import fe.linksheet.module.database.dao.cache.UrlEntryDao
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
 import fe.linksheet.module.database.entity.*
+import fe.linksheet.module.database.entity.cache.*
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
@@ -33,8 +39,9 @@ val databaseModule = module {
         PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
+        CachedHtml::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntry::class
     ],
-    version = 17,
+    version = 18,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -45,7 +52,9 @@ val databaseModule = module {
         AutoMigration(from = 8, to = 9),
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
-        AutoMigration(from = 11, to = 12)
+        AutoMigration(from = 11, to = 12),
+        AutoMigration(from = 12, to = 13),
+        AutoMigration(from = 17, to = 18)
     ],
     exportSchema = true
 )
@@ -59,6 +68,11 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
+    abstract fun htmlCacheDao(): HtmlCacheDao
+    abstract fun previewCacheDao(): PreviewCacheDao
+    abstract fun resolvedUrlCacheDao(): ResolvedUrlCacheDao
+    abstract fun resolveTypeDao(): ResolveTypeDao
+    abstract fun urlEntryDao(): UrlEntryDao
 
     companion object {
         private fun buildMigrations(logger: Logger): Array<Migration> {
@@ -68,7 +82,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
         }
 
         fun Builder<LinkSheetDatabase>.configureAndBuild(logger: Logger): LinkSheetDatabase {
-            return this
+            return addCallback(KnownInitCallback(ResolveType))
                 .addMigrations(*buildMigrations(logger))
                 .build()
         }

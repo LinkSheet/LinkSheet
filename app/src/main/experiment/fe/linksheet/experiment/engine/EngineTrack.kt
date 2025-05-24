@@ -26,7 +26,7 @@ fun interface EngineTrackPredicate {
     fun evaluate(input: EngineTrackInput): Boolean
 }
 
-class EngineTrackInput(val url: StdUrl, val referrer: AndroidAppPackage?)
+data class EngineTrackInput(val url: StdUrl, val referrer: AndroidAppPackage?)
 
 class TrackSelector(tracks: List<EngineTrack>) {
     private val tracks = tracks.sortedBy { it.position }

@@ -299,13 +299,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 )
             }
 
-            is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {
-
-            }
-
-            is IntentResolveResult.WebSearch -> {
-
-            }
+            is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {}
+            is IntentResolveResult.WebSearch -> {}
+            IntentResolveResult.NoTrackFound -> {}
         }
     }
 

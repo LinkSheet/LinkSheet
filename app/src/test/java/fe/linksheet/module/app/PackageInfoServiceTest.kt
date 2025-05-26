@@ -4,20 +4,20 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.ImageFakes
 import app.linksheet.testing.fake.PackageInfoFakes
-import fe.linksheet.UnitTest
 import fe.linksheet.module.app.`package`.DefaultPackageIconLoader
 import fe.linksheet.module.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.module.app.`package`.DefaultPackageLabelService
 import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
+import fe.linksheet.testlib.core.BaseUnitTest
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageInfoServiceTest : UnitTest {
+internal class PackageInfoServiceTest : BaseUnitTest {
 
     @Test
     fun test() {

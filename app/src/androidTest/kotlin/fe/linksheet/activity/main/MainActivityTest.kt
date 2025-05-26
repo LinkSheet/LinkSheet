@@ -1,44 +1,30 @@
+@file:OptIn(ExperimentalTestApi::class)
+
 package fe.linksheet.activity.main
 
-import android.util.Log
-import androidx.collection.forEach
-import androidx.collection.valueIterator
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.printToLog
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.ComposeNavigator
-import androidx.navigation.compose.DialogNavigator
-import fe.linksheet.UnitTest
-import org.junit.Rule
+import android.content.Intent
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.core.net.toUri
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.Until
+import fe.linksheet.testlib.instrument.ui.UiTest
+import fe.linksheet.testlib.instrument.ui.AppInteractor
+import fe.linksheet.util.intent.buildIntent
 import kotlin.test.Test
 
-internal class MainActivityTest : UnitTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+internal class MainActivityTest : UiTest {
+    private val interactor = AppInteractor(device, targetContext)
 
     @Test
     fun test() {
-//        val navHostController =     NavHostController(applicationContext).apply {
-////            navigatorProvider.addNavigator(ComposeNavGraphNavigator(navigatorProvider))
-//            navigatorProvider.addNavigator(ComposeNavigator())
-//            navigatorProvider.addNavigator(DialogNavigator())
-//        }
-//
-//        composeTestRule.setContent {
-//            MainNavHost(
-//                navController = navHostController,
-//                navigate = navHostController::navigate,
-//                onBackPressed = navHostController::popBackStack
-//            )
-//        }
-//
-//        composeTestRule.onRoot().printToLog("currentLabelExists")
+        interactor.launch()
+        interactor.dismissDialogs()
+        interactor.setAsDefaultBrowser()
+        interactor.stop()
 
+        val intent = buildIntent(Intent.ACTION_VIEW, "https://linksheet.app".toUri())
+        interactor.startApp(intent)
 
-//        for(node in navHostController.graph.nodes.valueIterator()){
-//            Log.d("MainActivityTest", "Trying nav to $node")
-////            navHostController.navigate(node.route)
-//        }
+        device.wait(Until.hasObject(By.pkg(device.launcherPackageName).depth(0)), 10_000)
     }
 }

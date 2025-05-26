@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
@@ -21,6 +23,7 @@ import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import kotlin.time.ExperimentalTime
 
 val resolverModule = module {
     single { BrowserResolver(getPackageManager(), get()) }
@@ -34,7 +37,7 @@ val resolverModule = module {
         AppSorter(
             queryAndAggregateUsageStats = getSystemServiceOrThrow<UsageStatsManager>()::queryAndAggregateUsageStats,
             toAppInfo = get<PackageService>()::toAppInfo,
-            clockProvider = get()
+            clock = get()
         )
     }
     single<IntentLauncher> {

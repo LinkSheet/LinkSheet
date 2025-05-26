@@ -7,6 +7,7 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
+import fe.linksheet.extension.android.getSystemServiceOrThrow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -16,8 +17,7 @@ import org.koin.dsl.module
 
 val networkStateServiceModule = module {
     service<NetworkStateService> {
-        val connectivityManager = applicationContext.getSystemService<ConnectivityManager>()!!
-
+        val connectivityManager = applicationContext.getSystemServiceOrThrow<ConnectivityManager>()
         NetworkStateService(connectivityManager)
     }
 }

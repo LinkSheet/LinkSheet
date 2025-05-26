@@ -2,11 +2,11 @@ package fe.linksheet.module.remoteconfig
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import fe.linksheet.UnitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.LinkAssets
 import kotlin.test.Test
 
-internal class RemoteConfigPreferencesTest : UnitTest {
+internal class RemoteConfigPreferencesTest : BaseUnitTest {
     private val linkAssets: LinkAssets = mapOf("hello" to "world", "foo" to "bar")
     private val serialized = """{"hello":"world","foo":"bar"}"""
 

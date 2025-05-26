@@ -1,8 +1,8 @@
-package fe.linksheet
+package fe.linksheet.module.preference
 
 import assertk.assertThat
 import assertk.assertions.isCloseTo
-import fe.linksheet.module.preference.Bucket
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.percent
 import kotlin.test.Test
 

@@ -6,10 +6,11 @@ import fe.linksheet.module.database.LinkSheetDatabase
 import fe.linksheet.module.database.LinkSheetDatabase.Companion.configureAndBuild
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
+import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.After
 import org.junit.Before
 
-abstract class DatabaseTest : UnitTest {
+abstract class DatabaseTest : RobolectricTest {
     lateinit var database: LinkSheetDatabase
 
     fun createInMemoryTestDatabase(context: Context): LinkSheetDatabase {

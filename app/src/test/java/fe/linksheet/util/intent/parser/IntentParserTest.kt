@@ -6,18 +6,18 @@ import android.nfc.NfcAdapter
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import fe.linksheet.UnitTest
+import fe.linksheet.testlib.core.RobolectricTest
 import fe.linksheet.util.intent.buildIntent
 import fe.std.result.assert.assertSuccess
 import fe.std.result.getOrNull
 import fe.std.test.TestFunction
 import fe.std.test.tableTest
 import mozilla.components.support.utils.toSafeIntent
+import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class IntentParserTest : UnitTest {
+internal class IntentParserTest : RobolectricTest {
     @Test
     fun `test nfc intent correctly handled`() {
         val uri = Uri.parse("https://linksheet.app")

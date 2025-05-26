@@ -4,7 +4,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.kotlin.extension.string.encodeBase64OrNull
-import fe.linksheet.BaseUnitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.test.Test
 

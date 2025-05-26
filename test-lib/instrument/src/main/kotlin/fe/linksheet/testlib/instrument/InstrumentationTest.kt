@@ -1,27 +1,20 @@
-package fe.linksheet
+package fe.linksheet.testlib.instrument
 
 import android.app.Instrumentation
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.After
-import org.koin.core.context.stopKoin
-import org.koin.test.KoinTest
+import fe.linksheet.testlib.core.BaseUnitTest
 
-interface BaseUnitTest : KoinTest {
-    @After
-    fun teardown() {
-        stopKoin()
-    }
-}
-
-interface UnitTest : BaseUnitTest {
+interface InstrumentationTest : BaseUnitTest {
     val instrumentation: Instrumentation
         get() = InstrumentationRegistry.getInstrumentation()
+
+    val context: Context
+        get() = instrumentation.context
 
     val targetContext: Context
         get() = instrumentation.targetContext
 
     val applicationContext: Context
         get() = targetContext.applicationContext
-
 }

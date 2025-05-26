@@ -32,7 +32,6 @@ import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.extension.android.componentName
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.clock.ClockProvider
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.profile.CrossProfile
@@ -45,7 +44,6 @@ import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
-import fe.std.javatime.time.Timezone
 import kotlinx.coroutines.CompletionHandler
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -328,7 +326,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
     val appSorter = AppSorter(
         queryAndAggregateUsageStats = { _, _ -> emptyMap() },
         toAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
-        clockProvider = ClockProvider(Clock.System, Timezone.Utc)
+        clock = Clock.System
     )
 
     val (sorted, filtered) = appSorter.sort(

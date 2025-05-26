@@ -1,23 +1,22 @@
-package fe.linksheet
+package fe.linksheet.module.downloader
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.httpkt.Request
-import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.file.DebugLogPersistService
 import fe.linksheet.module.log.internal.DefaultLoggerDelegate
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
+import fe.linksheet.testlib.core.RobolectricTest
 import fe.std.uri.toStdUrlOrThrow
-import kotlin.test.Test
+import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 @RunWith(AndroidJUnit4::class)
-internal class DownloaderTest : UnitTest {
+internal class DownloaderTest : RobolectricTest {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
             true,

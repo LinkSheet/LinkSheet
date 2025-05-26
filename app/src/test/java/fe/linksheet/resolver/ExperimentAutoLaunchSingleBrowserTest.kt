@@ -12,18 +12,18 @@ import assertk.all
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.*
-import fe.linksheet.UnitTest
 import fe.linksheet.module.resolver.AutoLaunchSingleBrowserExperiment
 import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.browser.BrowserMode
+import fe.linksheet.testlib.core.RobolectricTest
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class ExperimentAutoLaunchSingleBrowserTest : UnitTest {
+internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
     companion object {
         private val whitelistedNull = BrowserModeConfigHelper.Whitelisted(null)
         private val whitelistedEmpty = BrowserModeConfigHelper.Whitelisted(emptySet())

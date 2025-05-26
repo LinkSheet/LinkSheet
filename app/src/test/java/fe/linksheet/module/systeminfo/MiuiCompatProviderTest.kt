@@ -4,18 +4,18 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
-import fe.linksheet.UnitTest
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
 import fe.linksheet.module.systeminfo.device.Device
 import fe.linksheet.module.systeminfo.device.XiaomiMi5C
 import fe.linksheet.module.systeminfo.device.XiaomiRedmi2a
 import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A14
 import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote7Pro_DroidxA14
+import fe.linksheet.testlib.core.RobolectricTest
+import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class MiuiCompatProviderTest : UnitTest {
+internal class MiuiCompatProviderTest : RobolectricTest {
     private fun Device.isProviderRequired(): Boolean {
         val service = SystemInfoService(this)
         val provider = RealMiuiCompatProvider(service)

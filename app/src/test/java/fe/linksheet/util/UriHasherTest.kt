@@ -1,13 +1,13 @@
-package fe.linksheet
+package fe.linksheet.util
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.util.CryptoUtil
+import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import javax.crypto.Mac
 
 @RunWith(AndroidJUnit4::class)
-internal class UriHasherTest : UnitTest {
+internal class UriHasherTest : BaseUnitTest {
     private val mac: Mac
 
     init {

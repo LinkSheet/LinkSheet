@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.testlib.instrument
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.AndroidComposeUiTest
@@ -22,7 +22,7 @@ fun <A : ComponentActivity> runAndroidComposeUiTest(
     block: AndroidComposeUiTest<A>.(ActivityScenario<A>) -> Unit
 ) {
     var scenario: ActivityScenario<A>? = null
-    val environment = AndroidComposeUiTestEnvironment<A>(effectContext) {
+    val environment = AndroidComposeUiTestEnvironment(effectContext) {
         requireNotNull(scenario) {
             "ActivityScenario has not yet been launched, or has already finished. Make sure that " +
                     "any call to ComposeUiTest.setContent() and AndroidComposeUiTest.getActivity() " +

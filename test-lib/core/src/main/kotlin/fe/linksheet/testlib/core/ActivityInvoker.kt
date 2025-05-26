@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package fe.linksheet.testlib.core
 
 import android.app.Activity
 import android.app.Instrumentation
@@ -6,7 +6,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.test.platform.app.InstrumentationRegistry
-import kotlin.jvm.java
 
 object ActivityInvoker {
     val instrumentation: Instrumentation by lazy { InstrumentationRegistry.getInstrumentation() }

@@ -2,15 +2,15 @@ package fe.linksheet.module.database
 
 import androidx.room.testing.MigrationTestHelper
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.UnitTest
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
+import fe.linksheet.testlib.instrument.InstrumentationTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class MigrationTest : UnitTest {
+internal class MigrationTest : InstrumentationTest {
     private val testDb = "migration-test"
 
     @get:Rule
@@ -20,7 +20,7 @@ internal class MigrationTest : UnitTest {
 
     private fun runTest(version: Int) {
         helper.createDatabase(testDb, version).apply {
-           close()
+            close()
         }
 
         val logger = Logger(DebugLoggerDelegate(true, MigrationTest::class))

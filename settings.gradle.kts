@@ -5,6 +5,7 @@ import fe.build.dependencies._1fexd
 import fe.buildsettings.config.GradlePluginPortalRepository
 import fe.buildsettings.config.MavenRepository
 import fe.buildsettings.config.configureRepositories
+import fe.buildsettings.extension.includeProject
 
 rootProject.name = "LinkSheet"
 
@@ -65,6 +66,8 @@ include(":app", ":config")
 include(":bottom-sheet", ":bottom-sheet-new")
 include(":scaffold")
 include(":hidden-api")
+includeProject(":test-instrument", "test-lib/instrument")
+includeProject(":test-core", "test-lib/core")
 
 buildSettings {
     substitutes {

@@ -40,14 +40,9 @@ fun TextEditorPage(
     val inputMethodManager = rememberSystemService<InputMethodManager>()
 
     var text by rememberSaveable { mutableStateOf(initialText) }
-    var isValid by rememberSaveable { mutableStateOf(validator.isValid(text)) }
-
-    LaunchedEffect(text) {
-        isValid = validator.isValid(text)
-    }
+    val isValid = rememberSaveable(text) { validator.isValid(text) }
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
     SaneSettingsScaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
@@ -77,6 +72,9 @@ fun TextEditorPage(
     }
 }
 
+const val EDITOR_APP_BAR_DONE_TEST_TAG = "editor_app_bar__done_test_tag"
+const val EDITOR_APP_BAR_CANCEL_TEST_TAG = "editor_app_bar__cancel_test_tag"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditorAppBar(
@@ -96,14 +94,14 @@ private fun EditorAppBar(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Button(
-                    modifier = Modifier.testTag("done"),
+                    modifier = Modifier.testTag(EDITOR_APP_BAR_DONE_TEST_TAG),
                     enabled = enabled, onClick = onDone
                 ) {
                     Text(text = stringResource(id = R.string.generic__button_text_done))
                 }
 
                 TextButton(
-                    modifier = Modifier.testTag("cancel"),
+                    modifier = Modifier.testTag(EDITOR_APP_BAR_CANCEL_TEST_TAG),
                     onClick = onDismiss
                 ) {
                     Text(text = stringResource(id = R.string.generic__button_text_cancel))

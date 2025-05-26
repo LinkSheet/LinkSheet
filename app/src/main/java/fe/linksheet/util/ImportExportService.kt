@@ -14,7 +14,6 @@ import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.R
 import fe.linksheet.extension.android.bufferedReader
 import fe.linksheet.extension.android.bufferedWriter
-import fe.linksheet.module.clock.ClockProvider
 import fe.linksheet.util.intent.buildIntent
 import fe.std.result.StdResult
 import fe.std.result.isFailure
@@ -22,11 +21,14 @@ import fe.std.result.tryCatch
 import fe.std.result.unaryPlus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.time.ZonedDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
+import kotlin.time.toJavaInstant
 
-class ImportExportService(val context: Context, val clockProvider: ClockProvider) {
+class ImportExportService(val context: Context, val clock: Clock, val zoneId: ZoneId) {
     companion object {
         val ImportIntent = buildIntent(Intent.ACTION_OPEN_DOCUMENT) {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -41,8 +43,8 @@ class ImportExportService(val context: Context, val clockProvider: ClockProvider
         private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm")
     }
 
-    fun createExportIntent(now: ZonedDateTime = clockProvider.nowZoned()): Intent {
-        val nowString = now.format(dateTimeFormatter)
+    fun createExportIntent(now: Instant = clock.now()): Intent {
+        val nowString = now.toJavaInstant().atZone(zoneId).format(dateTimeFormatter)
         return Intent(exportIntent)
             .putExtra(
                 Intent.EXTRA_TITLE,

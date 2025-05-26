@@ -9,7 +9,6 @@ import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import assertk.tableOf
 import fe.httpkt.Request
-import fe.linksheet.UnitTest
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.file.DebugLogPersistService
 import fe.linksheet.module.log.internal.DefaultLoggerDelegate
@@ -17,17 +16,18 @@ import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
+import fe.linksheet.testlib.core.RobolectricTest
 import okhttp3.OkHttpClient
 import okhttp3.mock.MockInterceptor
 import okhttp3.mock.head
 import okhttp3.mock.rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class RedirectResolveRequestTest : UnitTest {
+internal class RedirectResolveRequestTest : RobolectricTest {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
             true,

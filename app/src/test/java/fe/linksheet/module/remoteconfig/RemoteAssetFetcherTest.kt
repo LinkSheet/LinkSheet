@@ -1,21 +1,18 @@
 package fe.linksheet.module.remoteconfig
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.UnitTest
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.mock.MockEngine
-import io.ktor.client.engine.mock.respond
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
-import io.ktor.http.headersOf
-import io.ktor.serialization.gson.gson
+import fe.linksheet.testlib.core.BaseUnitTest
+import io.ktor.client.*
+import io.ktor.client.engine.mock.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.http.*
+import io.ktor.serialization.gson.*
 import kotlinx.coroutines.test.runTest
+import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class RemoteAssetFetcherTest : UnitTest {
+internal class RemoteAssetFetcherTest : BaseUnitTest {
     @Test
     fun test() = runTest {
         val assetsJson = """{

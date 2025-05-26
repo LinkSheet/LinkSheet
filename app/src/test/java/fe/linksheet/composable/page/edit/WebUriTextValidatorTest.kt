@@ -1,15 +1,19 @@
 package fe.linksheet.composable.page.edit
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.BaseUnitTest
+import fe.linksheet.testlib.core.RobolectricTest
+import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.Test
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-internal class WebUriTextValidatorTest : BaseUnitTest {
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+internal class WebUriTextValidatorTest : RobolectricTest {
 
     @Test
     fun `test web uri text validator`() {

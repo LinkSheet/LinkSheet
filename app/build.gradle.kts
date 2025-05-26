@@ -34,6 +34,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("de.mannodermaus.android-junit5")
 }
 
 // Must be defined before the android block, or else it won't work
@@ -224,6 +225,17 @@ android {
         baseline = file("lint-baseline.xml")
     }
 
+    testOptions {
+        unitTests.all { test ->
+            test.testLogging {
+                test.outputs.upToDateWhen { false }
+                events("passed", "skipped", "failed", "standardOut", "standardError")
+                showCauses = true
+                showExceptions = true
+            }
+        }
+    }
+
     val androidTest by sourceSets
     androidTest.assets.srcDir("$projectDir/schemas")
 
@@ -242,16 +254,23 @@ android {
     }
 }
 
+junitPlatform {
+    instrumentationTests {
+        version.set("1.7.0")
+        includeExtensions.set(true)
+    }
+}
+
 dependencies {
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
 
-//    implementation(project(":components"))
-//  dd
-//    implementation(project(":compose-util"))
     implementation(project(":bottom-sheet"))
     implementation(project(":bottom-sheet-new"))
     implementation(project(":scaffold"))
+
+    testImplementation(project(":test-core"))
+    androidTestImplementation(project(":test-instrument"))
 
 //    implementation(platform(Square.okHttp3.bom))
     implementation(Square.okHttp3.android)
@@ -297,13 +316,13 @@ dependencies {
     implementation(Koin.workManager)
     implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
-    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
-    implementation("io.coil-kt.coil3:coil-core:3.2.0")
-    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
-    implementation("io.coil-kt.coil3:coil-network-ktor3:3.2.0")
-    implementation("io.coil-kt.coil3:coil-test:3.2.0")
+    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-core:_")
+    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:_")
+    implementation("io.coil-kt.coil3:coil-network-ktor3:_")
+    implementation("io.coil-kt.coil3:coil-test:_")
 
     implementation("com.github.seancfoley:ipaddress:_")
     implementation("io.github.fornewid:placeholder-material3:_")
@@ -412,7 +431,8 @@ dependencies {
         AndroidX.compose.ui.test,
         AndroidX.compose.ui.testJunit4,
         "com.willowtreeapps.assertk:assertk:_",
-        kotlin("test")
+        kotlin("test"),
+        AndroidX.test.espresso.core
     )
 
     for (notation in commonTestDependencies) {
@@ -426,14 +446,22 @@ dependencies {
     testImplementation("org.testcontainers:mockserver:_")
     testImplementation("org.testcontainers:toxiproxy:_")
 
+    testRuntimeOnly(Testing.junit.jupiter.engine)
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:_")
+    testImplementation(Testing.junit4)
+
+    testImplementation(Testing.junit.jupiter.api)
+    testRuntimeOnly(Testing.junit.jupiter.engine)
+    testImplementation(Testing.junit.jupiter.params)
+
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
-    androidTestImplementation(Testing.robolectric)
-
+    androidTestImplementation(Testing.junit.jupiter.params)
+    androidTestImplementation("de.mannodermaus.junit5:android-test-compose:_")
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
-
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)
     debugImplementation(AndroidX.compose.ui.testManifest)

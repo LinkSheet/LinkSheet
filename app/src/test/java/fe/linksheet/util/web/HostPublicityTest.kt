@@ -1,10 +1,10 @@
-package fe.linksheet
+package fe.linksheet.util.web
 
 import android.net.Uri
 import android.net.compatHost
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.util.web.HostUtil
+import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class HostPublicityTest : UnitTest {
+internal class HostPublicityTest : RobolectricTest {
     companion object {
         private val data = mapOf(
             "localhost" to false,

@@ -7,6 +7,7 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.android.span.helper.formatter.SpanFormatter
+import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -14,7 +15,7 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class SpanFormatterTest : UnitTest {
+internal class SpanFormatterTest : RobolectricTest {
 
     private fun compareHtml(
         input: SpannableStringBuilder.() -> Unit,

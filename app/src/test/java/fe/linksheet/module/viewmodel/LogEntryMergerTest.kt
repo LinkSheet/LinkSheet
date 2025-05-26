@@ -9,15 +9,16 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.prop
 import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.module.log.file.entry.LogEntry
+import fe.linksheet.testlib.core.BaseUnitTest
 import kotlin.test.Test
 
-internal class LogEntryMergerTest {
+internal class LogEntryMergerTest : BaseUnitTest {
     private fun Assert<PrefixMessageCardContent>.assertContent(prefix: String, type: String, messages: Int) {
-       all {
-           prop(PrefixMessageCardContent::prefix).isEqualTo(prefix)
-           prop(PrefixMessageCardContent::type).isEqualTo(type)
-           prop(PrefixMessageCardContent::messages).hasSize(messages)
-       }
+        all {
+            prop(PrefixMessageCardContent::prefix).isEqualTo(prefix)
+            prop(PrefixMessageCardContent::type).isEqualTo(type)
+            prop(PrefixMessageCardContent::messages).hasSize(messages)
+        }
     }
 
     @Test

@@ -1,4 +1,4 @@
-package fe.linksheet
+package fe.linksheet.module.versiontracker
 
 import assertk.assertAll
 import assertk.assertThat
@@ -7,7 +7,7 @@ import assertk.assertions.isNull
 import com.google.gson.GsonBuilder
 import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.module.systeminfo.BuildInfo
-import fe.linksheet.module.versiontracker.LastVersionService
+import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 

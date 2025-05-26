@@ -8,75 +8,73 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.launchActivityForResult
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
-import androidx.test.espresso.action.ViewActions.replaceText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import de.mannodermaus.junit5.compose.createAndroidComposeExtension
 import fe.composekit.core.putEnumExtra
-import fe.linksheet.util.ActivityInvoker
-import fe.linksheet.util.runAndroidComposeUiTest
-import org.junit.runner.RunWith
-import kotlin.test.Test
+import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_CANCEL_TEST_TAG
+import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_DONE_TEST_TAG
+import fe.linksheet.testlib.core.ActivityInvoker
+import fe.linksheet.testlib.core.BaseUnitTest
+import org.junit.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
-@RunWith(AndroidJUnit4::class)
-internal class TextEditorActivityTest {
-
-    private val intent = ActivityInvoker.getIntentForActivity<TextEditorActivity> {
-        putExtra(TextEditorActivity.EXTRA_TEXT, "hello world")
-        putEnumExtra(TextEditorActivity.EXTRA_SOURCE, TextEditorActivity.ExtraSource.ClipboardCard)
-        putEnumExtra(TextEditorActivity.EXTRA_VALIDATOR, TextEditorActivity.ExtraValidator.WebUriTextValidator)
+@OptIn(ExperimentalTestApi::class)
+internal class TextEditorActivityTest : BaseUnitTest {
+    @JvmField
+    @RegisterExtension
+    val extension = createAndroidComposeExtension {
+        launchActivityForResult(ActivityInvoker.getIntentForActivity<TextEditorActivity> {
+            putExtra(TextEditorActivity.Companion.EXTRA_TEXT, INPUT_TEXT)
+            putEnumExtra(TextEditorActivity.Companion.EXTRA_SOURCE, TextEditorActivity.ExtraSource.ClipboardCard)
+            putEnumExtra(
+                TextEditorActivity.Companion.EXTRA_VALIDATOR,
+                TextEditorActivity.ExtraValidator.WebUriTextValidator
+            )
+        })
     }
+
+    private val INPUT_TEXT = "Hello World"
+    private val INPUT_URL = "https://linksheet.app"
 
     private fun Instrumentation.ActivityResult.assertValid(result: Int, text: String? = null) {
         assertThat(resultCode).isEqualTo(result)
 
-        if(text != null) {
-            val resultText = resultData.getStringExtra(TextEditorActivity.EXTRA_TEXT)
-            assertThat(resultText).isEqualTo(text)
-        }
+        if (text == null) return
+        val resultText = resultData.getStringExtra(TextEditorActivity.Companion.EXTRA_TEXT)
+        assertThat(resultText).isEqualTo(text)
     }
 
-    @OptIn(ExperimentalTestApi::class)
     @Test
-    fun test__valid_edit() {
-        runAndroidComposeUiTest<TextEditorActivity>(
-            activityLauncher = { launchActivityForResult<TextEditorActivity>(intent) }
-        ) { scenario ->
-            waitForIdle()
-            onView(isAssignableFrom(EditText::class.java))
-                .check(matches(withText("hello world")))
-                .perform(replaceText("https://foobar.com"), closeSoftKeyboard())
+    fun testValidEdit() = extension.use {
+        waitForIdle()
+        Espresso.onView(ViewMatchers.isAssignableFrom(EditText::class.java))
+            .check(ViewAssertions.matches(ViewMatchers.withText(INPUT_TEXT)))
+            .perform(ViewActions.replaceText(INPUT_URL), ViewActions.closeSoftKeyboard())
 
-            waitForIdle()
-            onNodeWithTag("done")
-                .assertIsEnabled()
-                .performClick()
+        waitForIdle()
+        onNodeWithTag(EDITOR_APP_BAR_DONE_TEST_TAG)
+            .assertIsEnabled()
+            .performClick()
 
-            scenario.result.assertValid(Activity.RESULT_OK, "https://foobar.com")
-        }
+        extension.scenario.result.assertValid(Activity.RESULT_OK, INPUT_URL)
     }
 
-    @OptIn(ExperimentalTestApi::class)
     @Test
-    fun test__cancel() {
-        runAndroidComposeUiTest<TextEditorActivity>(
-            activityLauncher = { launchActivityForResult<TextEditorActivity>(intent) }
-        ) { scenario ->
-            waitForIdle()
-            onView(isAssignableFrom(EditText::class.java))
-                .check(matches(withText("hello world")))
+    fun testCancel() = extension.use {
+        waitForIdle()
+        Espresso.onView(ViewMatchers.isAssignableFrom(EditText::class.java))
+            .check(ViewAssertions.matches(ViewMatchers.withText(INPUT_TEXT)))
 
-            waitForIdle()
-            onNodeWithTag("cancel")
-                .assertIsEnabled()
-                .performClick()
+        waitForIdle()
+        onNodeWithTag(EDITOR_APP_BAR_CANCEL_TEST_TAG)
+            .assertIsEnabled()
+            .performClick()
 
-            scenario.result.assertValid(Activity.RESULT_CANCELED)
-        }
+        extension.scenario.result.assertValid(Activity.RESULT_CANCELED)
     }
 }

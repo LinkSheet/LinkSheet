@@ -4,13 +4,14 @@ import androidx.core.os.LocaleListCompat
 import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.*
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.assert.assertSuccess
 import fe.std.test.tableTest
 import kotlinx.coroutines.test.runTest
 import java.util.*
 import kotlin.test.Test
 
-internal class AppLocaleServiceTest {
+internal class AppLocaleServiceTest : BaseUnitTest {
     companion object {
         private fun createLocale(language: String, region: String): Locale.Builder {
             return Locale.Builder()

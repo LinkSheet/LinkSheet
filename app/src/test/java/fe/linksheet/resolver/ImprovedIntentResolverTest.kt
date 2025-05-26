@@ -5,7 +5,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
-import fe.linksheet.BaseUnitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
 

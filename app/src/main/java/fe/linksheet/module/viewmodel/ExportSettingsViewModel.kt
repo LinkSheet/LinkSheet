@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
-import fe.linksheet.module.clock.ClockProvider
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -18,16 +17,19 @@ import fe.std.result.IResult
 import fe.std.result.StdResult
 import fe.std.result.isFailure
 import fe.std.result.unaryPlus
+import java.time.ZoneId
+import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 class ExportSettingsViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
     val gson: Gson,
-    clockProvider: ClockProvider
+    clock: Clock,
+    zoneId: ZoneId,
 ) : BaseViewModel(preferenceRepository) {
 
-    private val importExportService = ImportExportService(context, clockProvider)
+    private val importExportService = ImportExportService(context, clock, zoneId)
 
     fun createImportIntent(): Intent {
         return ImportExportService.ImportIntent

@@ -13,7 +13,6 @@ import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.UnitTest
 import fe.linksheet.feature.libredirect.LibRedirectSettingsUseCase
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.app.PackageService
@@ -21,7 +20,6 @@ import fe.linksheet.module.app.`package`.PackageIntentHandler
 import fe.linksheet.module.app.`package`.PackageLabelService
 import fe.linksheet.module.app.`package`.PackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
-import fe.linksheet.module.clock.ClockProvider
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
@@ -61,9 +59,9 @@ import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.module.workmanager.WorkDelegatorService
-import io.ktor.client.HttpClient
-import io.ktor.client.HttpClientConfig
-import io.ktor.client.engine.HttpClientEngine
+import fe.linksheet.testlib.core.BaseUnitTest
+import io.ktor.client.*
+import io.ktor.client.engine.*
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -76,7 +74,7 @@ import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalTime::class)
-internal class KoinModuleCheckTest : UnitTest {
+internal class KoinModuleCheckTest : BaseUnitTest {
     private val extraTypes = listOf(
         Context::class,
         PackageManager::class,
@@ -95,7 +93,7 @@ internal class KoinModuleCheckTest : UnitTest {
     )
 
     private val injections = injectedParameters(
-        definition<AppSorter>(ClockProvider::class),
+        definition<AppSorter>(Clock::class),
         definition<HttpClient>(HttpClientEngine::class, HttpClientConfig::class),
         definition<SystemInfoService>(
             SystemProperties::class,
@@ -158,7 +156,7 @@ internal class KoinModuleCheckTest : UnitTest {
         definition<PreferredAppSettingsViewModel>(PackageService::class),
         definition<PreferredBrowserViewModel>(BrowserResolver::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
-        definition<ExportSettingsViewModel>(Gson::class, ClockProvider::class),
+        definition<ExportSettingsViewModel>(Gson::class, Clock::class, ZoneId::class),
         definition<AboutSettingsViewModel>(Gson::class),
         definition<DevSettingsViewModel>(
             ShizukuHandler::class,

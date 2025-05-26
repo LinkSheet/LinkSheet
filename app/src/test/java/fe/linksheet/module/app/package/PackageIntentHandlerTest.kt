@@ -10,12 +10,12 @@ import app.linksheet.testing.util.flatResolveInfos
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isNotNull
-import fe.linksheet.UnitTest
+import fe.linksheet.testlib.core.RobolectricTest
+import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class PackageIntentHandlerTest : UnitTest {
+internal class PackageIntentHandlerTest : RobolectricTest {
 
     @Test
     fun `test trampoline activity correctly handled`() {

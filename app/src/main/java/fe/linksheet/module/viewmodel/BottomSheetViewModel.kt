@@ -204,9 +204,9 @@ class BottomSheetViewModel(
         info: ActivityAppInfo,
         intent: Intent,
         referrer: Uri?,
-        always: Boolean = false,
-        privateBrowsingBrowser: KnownBrowser? = null,
-        persist: Boolean = true,
+        always: Boolean,
+        privateBrowsingBrowser: KnownBrowser?,
+        persist: Boolean,
     ): LaunchIntent {
         // (Hopefully) temporary workaround since Github Mobile doesn't support the releases/latest route (https://github.com/orgs/community/discussions/136120)
         GithubWorkaround.tryFixUri(info.componentName, intent.data)?.let { fixedUri ->
@@ -214,7 +214,7 @@ class BottomSheetViewModel(
         }
 
         val launchIntent = intentLauncher.launch(info, intent, referrer, privateBrowsingBrowser)
-        if(launchIntent is LaunchMainIntent) {
+        if (launchIntent is LaunchMainIntent) {
             return launchIntent
         }
 
@@ -224,17 +224,6 @@ class BottomSheetViewModel(
         }
 
         return launchIntent
-    }
-
-    suspend fun makeOpenAppIntent(info: ActivityAppInfo, result: Intent, referrer: Uri?, modifier: ClickModifier): LaunchIntent {
-        return makeOpenAppIntent(
-            info,
-            result,
-            referrer,
-            modifier is ClickModifier.Always,
-            (modifier as? ClickModifier.Private)?.browser,
-            modifier !is ClickModifier.Private
-        )
     }
 
     private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {
@@ -249,19 +238,6 @@ class BottomSheetViewModel(
         }.value
     }
 
-    fun handleClickAsync(
-        activity: Activity,
-        index: Int,
-        isExpanded: Boolean,
-        requestExpand: () -> Unit,
-        result: Intent,
-        info: ActivityAppInfo,
-        type: ClickType,
-        modifier: ClickModifier,
-    ): Deferred<LaunchIntent?> = ioAsync {
-        handleClick(activity, index, isExpanded, requestExpand, result, info, type, modifier)
-    }
-
     suspend fun handleClick(
         activity: Activity,
         index: Int,
@@ -273,59 +249,68 @@ class BottomSheetViewModel(
         modifier: ClickModifier,
     ): LaunchIntent? {
         val config = type.getPreference(modifier)
+        if (config is TapConfig.OpenApp) {
+            return makeOpenAppIntent(
+                info = info,
+                intent = result,
+                referrer = activity.referrer,
+                always = modifier is ClickModifier.Always,
+                privateBrowsingBrowser = (modifier as? ClickModifier.Private)?.browser,
+                persist = modifier !is ClickModifier.Private
+            )
+        }
 
-        when (config) {
-            TapConfig.None -> {}
-            TapConfig.OpenApp -> {
-                return makeOpenAppIntent(info, result, activity.referrer, modifier)
+        if (config is TapConfig.OpenSettings) {
+            startPackageInfoActivity(activity, info)
+            return null
+        }
+
+        if (config is TapConfig.SelectItem) {
+            appListSelectedIdx.intValue = if (appListSelectedIdx.intValue != index) index else -1
+            if (appListSelectedIdx.intValue != -1 && !isExpanded && expandOnAppSelect.value) {
+                requestExpand()
             }
 
-            TapConfig.OpenSettings -> {
-                startPackageInfoActivity(activity, info)
-            }
-
-            TapConfig.SelectItem -> {
-                appListSelectedIdx.intValue = if (appListSelectedIdx.intValue != index) index else -1
-                if (appListSelectedIdx.intValue != -1 && !isExpanded && expandOnAppSelect.value) {
-                    requestExpand()
-                }
-            }
+            return null
         }
 
         return null
     }
 
-    fun safeStartActivity(activity: Activity, intent: Intent): Boolean {
-        try {
-            activity.startActivity(intent)
-            return true
-        } catch (e: ActivityNotFoundException) {
-            logger.error(e)
-            return false
-        }
-    }
-
-    suspend fun handle(activity: BottomSheetActivity, result: IntentResolveResult.Default, interaction: Interaction): LaunchIntent? {
-        return when(interaction) {
-            is AppClickInteraction -> {
-                handleClick(
-                    activity = activity,
-                    index = interaction.index,
-                    isExpanded = false,
+    suspend fun handle(
+        activity: BottomSheetActivity,
+        result: IntentResolveResult.Default,
+        interaction: Interaction,
+    ): LaunchIntent? {
+        if (interaction is AppClickInteraction) {
+            return handleClick(
+                activity = activity,
+                index = interaction.index,
+                isExpanded = false,
 //                    isExpanded = sheetState.isExpanded(),
-                    requestExpand = { },
-                    result = result.intent,
-                    info = interaction.info,
-                    type = interaction.type,
-                    modifier = interaction.modifier
-                )
-            }
-            is ChoiceButtonInteraction -> {
-                makeOpenAppIntent(interaction.info, result.intent, activity.referrer)
-            }
-            is PreferredAppChoiceButtonInteraction -> {
-                makeOpenAppIntent(interaction.info, interaction.intent, activity.referrer)
-            }
+                requestExpand = { },
+                result = result.intent,
+                info = interaction.info,
+                type = interaction.type,
+                modifier = interaction.modifier
+            )
         }
+
+        if (interaction is ChoiceButtonInteraction || interaction is PreferredAppChoiceButtonInteraction) {
+            val modifier = interaction.modifier
+            return makeOpenAppIntent(
+                info = interaction.info,
+                intent = result.intent,
+                referrer = activity.referrer,
+                always = modifier == ClickModifier.Always,
+                privateBrowsingBrowser = when (modifier) {
+                    is ClickModifier.Private -> modifier.browser
+                    else -> null
+                },
+                persist = modifier !is ClickModifier.Private
+            )
+        }
+
+        return null
     }
 }

@@ -98,7 +98,7 @@ fun AppContentGrid(
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
-                        dispatch(AppClickInteraction(index, info, type, modifier))
+                        dispatch(AppClickInteraction(info, modifier, index, type))
                     },
                     privateBrowser = privateBrowser,
                     showPackage = showPackage,

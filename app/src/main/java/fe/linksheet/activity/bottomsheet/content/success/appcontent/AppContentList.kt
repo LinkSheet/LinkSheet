@@ -73,7 +73,7 @@ fun AppContentList(
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
                     onClick = { type, modifier ->
-                        dispatch(AppClickInteraction(index, info, type, modifier))
+                        dispatch(AppClickInteraction(info, modifier, index, type))
                     },
                     preferred = false,
                     privateBrowser = isPrivateBrowser(uri != null, info),

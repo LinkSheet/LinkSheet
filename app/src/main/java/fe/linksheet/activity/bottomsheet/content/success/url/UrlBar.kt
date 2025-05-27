@@ -145,7 +145,7 @@ fun UrlBarWrapper(
         } else null,
         onDoubleClick = {
             if (result.app != null) {
-                controller.dispatch(PreferredAppChoiceButtonInteraction(result.app, result.intent, ClickModifier.None))
+                controller.dispatch(PreferredAppChoiceButtonInteraction(result.app, ClickModifier.None, result.intent))
             }
 
             Unit

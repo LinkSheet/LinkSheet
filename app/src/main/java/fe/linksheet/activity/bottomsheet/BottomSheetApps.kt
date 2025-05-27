@@ -123,7 +123,7 @@ fun BottomSheetApps(
                     showPackage = showPackage,
                     hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                     onClick = { _, modifier ->
-                        controller.dispatch(PreferredAppChoiceButtonInteraction(result.filteredItem, result.intent, modifier))
+                        controller.dispatch(PreferredAppChoiceButtonInteraction(result.filteredItem, modifier, result.intent))
                     }
                 )
 

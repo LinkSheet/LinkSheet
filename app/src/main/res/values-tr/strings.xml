@@ -548,5 +548,9 @@
     <string name="generic__button_text_enable">Etkinleştir</string>
     <string name="generic__button_text_disable">Devre dışı bırak</string>
     <string name="settings_remote_config__text_content">LinkSheet, otomatik olarak yapılandırma sunucusuna bağlanarak dahili yapılandırmayı ve dokümantasyonu güncelleyebilir. Daha fazla bilgi için <annotation url-id="github.linksheet.wiki.privacy.remote-config">buraya</annotation> dokunun.</string>
-    <string name="settings_remote_config__title_dialog">Uzak yapılandırma</string>
+    <string name="settings_remote_config__title_dialog">Uzak yapılandırma etkinleştirilsin mi?</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Başlatmaya izin verilmiyor!</string>
+    <string name="bottom_sheet__text_launch_failure_other">Başlatma başarısız!</string>
+    <string name="bottom_sheet__text_launch_illegal">İzin verilmeyen başlatma girişimi!</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Bilinmeyen başlatma hatası!</string>
 </resources>

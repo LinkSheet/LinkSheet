@@ -13,9 +13,11 @@ import io.github.typesafegithub.workflows.actions.actions.Checkout
 import io.github.typesafegithub.workflows.actions.actions.SetupJava
 import io.github.typesafegithub.workflows.actions.actions.UploadArtifact
 import io.github.typesafegithub.workflows.actions.gradle.ActionsSetupGradle
+import io.github.typesafegithub.workflows.domain.JobOutputs
 import io.github.typesafegithub.workflows.domain.RunnerType.UbuntuLatest
 import io.github.typesafegithub.workflows.domain.Shell
 import io.github.typesafegithub.workflows.domain.actions.CustomAction
+import io.github.typesafegithub.workflows.domain.actions.CustomLocalAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
 import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
 import io.github.typesafegithub.workflows.dsl.JobBuilder
@@ -24,6 +26,7 @@ import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
 import io.github.typesafegithub.workflows.yaml.ConsistencyCheckJobConfig
+import kotlin.collections.mapOf
 
 
 val KEYSTORE_FILE by Contexts.secrets
@@ -52,12 +55,8 @@ val BUILD_FLAVOR by Contexts.actionEnv
 val BUILD_TYPE by Contexts.actionEnv
 val BUILD_FLAVOR_TYPE by Contexts.actionEnv
 
-val setupAndroid = CustomAction(
-    actionOwner = "android-actions",
-    actionName = "setup-android",
-    actionVersion = "v3",
-)
-
+val fossBaseOutPathExpr = "app/build/outputs/apk/foss/nightly"
+val proBaseOutPathExpr = "app/build/outputs/apk/pro/nightly"
 val base64ToFile = CustomAction(
     actionOwner = "timheuer",
     actionName = "base64-to-file",
@@ -65,16 +64,6 @@ val base64ToFile = CustomAction(
     inputs = mapOf(
         "fileName" to "keystore.jks",
         "encodedString" to expr(KEYSTORE_FILE)
-    )
-)
-
-val emulatorRunner = CustomAction(
-    actionOwner = "reactivecircus",
-    actionName = "android-emulator-runner",
-    actionVersion = "v2",
-    inputs = mapOf(
-        "api-level" to "34",
-        "script" to "./gradlew connectedAndroidTest"
     )
 )
 
@@ -198,11 +187,10 @@ fun JobBuilder<*>.createRelease(
             "BUILD_TYPE" to expr(BUILD_TYPE),
             releaseNoteVar.name to expr(releaseNote),
         ),
-        `if` = expr { contains(ENABLE_RELEASES, "true") }
     )
 }
 
-fun JobBuilder<*>.parseOutput(baseOutPathExpr: String): Pair<String, String> {
+fun JobBuilder<*>.parseOutput(baseOutPathExpr: String): BuildResult {
     val jsonContentVar = Variable("json_content")
 
     val cmdGetJsonContent = bash {
@@ -243,13 +231,15 @@ fun JobBuilder<*>.parseOutput(baseOutPathExpr: String): Pair<String, String> {
         )
     )
 
-    val versionCodeExpr = expr(outputFilePathStep.outputs[versionCodeVar.name])
-    val apkPathExpr = "$baseOutPathExpr/${expr(outputFilePathStep.outputs[outputFileVar.name])}"
-
-    return versionCodeExpr to apkPathExpr
+    return BuildResult(
+        outputFilePathStep.outputs[versionCodeVar.name],
+        outputFilePathStep.outputs[outputFileVar.name]
+    )
 }
 
-fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, String>, Pair<String, String>> {
+class BuildResult(val versionCode: String, val apkName: String)
+
+fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<BuildResult, BuildResult> {
     run(
         command = "./gradlew assembleFossNightly",
         env = mapOf(
@@ -276,13 +266,37 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<Pair<String, Strin
         )
     )
 
-    val fossBaseOutPathExpr = "app/build/outputs/apk/foss/nightly"
-    val proBaseOutPathExpr = "app/build/outputs/apk/pro/nightly"
 
     val foss = parseOutput(fossBaseOutPathExpr)
     val pro = parseOutput(proBaseOutPathExpr)
 
     return foss to pro
+}
+
+fun JobBuilder<*>.setupAndroid() {
+    uses(
+        action = Checkout(
+            submodules = true,
+            fetchDepth = Checkout.FetchDepth.Infinite,
+            fetchTags = true
+        )
+    )
+
+    uses(
+        action = SetupJava(
+            javaVersion = "21",
+            distribution = SetupJava.Distribution.Zulu,
+            cache = SetupJava.BuildPlatform.Gradle
+        )
+    )
+    uses(
+        action = CustomAction(
+            actionOwner = "android-actions",
+            actionName = "setup-android",
+            actionVersion = "v3",
+        )
+    )
+    uses(action = ActionsSetupGradle())
 }
 
 workflow(
@@ -304,7 +318,19 @@ workflow(
         it.toString().substringBeforeLast(".main.kts") + ".yml"
     }
 ) {
-    job(id = "build", runsOn = UbuntuLatest) {
+    val unitTestJob = job(
+        id = "unit-tests",
+        name = "Unit tests",
+        runsOn = UbuntuLatest
+    ) {
+        setupAndroid()
+        run(command = "./gradlew test")
+    }
+    val integrationTestJob = job(
+        id = "integration-tests",
+        name = "Integration tests",
+        runsOn = UbuntuLatest
+    ) {
         run(
             name = "Enable KVM",
             shell = Shell.Bash,
@@ -312,52 +338,90 @@ workflow(
 sudo udevadm control --reload-rules
 sudo udevadm trigger --name-match=kvm"""
         )
+
+        setupAndroid()
+
+        val apiLevel = 35
+        val avdInfoStep = uses(
+            action = CustomLocalAction(
+                actionPath = "./.github/actions/get-avd-info",
+                inputs = mapOf(
+                    "api-level" to "$apiLevel",
+                )
+            ),
+        )
+
+        uses(
+            action = CustomAction(
+                actionOwner = "reactivecircus",
+                actionName = "android-emulator-runner",
+                actionVersion = "v2",
+                inputs = mapOf(
+                    "api-level" to "$apiLevel",
+                    "arch" to expr(avdInfoStep.outputs["arch"]),
+                    "target" to expr(avdInfoStep.outputs["target"]),
+                    "script" to "./gradlew connectedAndroidTest"
+                )
+            ),
+        )
+    }
+    val buildReleaseJob = job(
+        id = "build-release",
+        name = "Build release",
+        runsOn = UbuntuLatest,
+        needs = listOf(unitTestJob, integrationTestJob),
+        outputs = object : JobOutputs() {
+            var fossVersionCode by output()
+            var proVersionCode by output()
+            var fossApkName by output()
+            var proApkName by output()
+        },
+    ) {
         run(name = "Install JQ", command = "sudo apt-get install jq -y")
-        uses(
-            action = Checkout(
-                submodules = true,
-                fetchDepth = Checkout.FetchDepth.Infinite,
-                fetchTags = true
-            )
-        )
-
-        uses(
-            action = SetupJava(
-                javaVersion = "21",
-                distribution = SetupJava.Distribution.Zulu,
-                cache = SetupJava.BuildPlatform.Gradle
-            )
-        )
-
-        uses(action = setupAndroid)
+        setupAndroid()
         val androidKeyStore = uses(action = base64ToFile)
-        uses(action = ActionsSetupGradle())
-
-        run(command = "./gradlew test")
-        uses(action = emulatorRunner)
 
         val (foss, pro) = buildFlavor(androidKeyStore.outputs["filePath"])
-        val (fossVersionCodeExpr, fossApkPathExpr) = foss
-        val (proVersionCodeExpr, proApkPathExpr) = pro
 
         uses(
             action = UploadArtifact(
                 name = "linksheet-nightly",
-                path = listOf(fossApkPathExpr, "app/build/outputs/mapping/${expr(BUILD_FLAVOR_TYPE)}/*.txt")
+                path = listOf(
+                    fossBaseOutPathExpr + "/" + expr(foss.apkName),
+                    "app/build/outputs/mapping/${expr(BUILD_FLAVOR_TYPE)}/*.txt"
+                )
             )
         )
 
+        jobOutputs.fossVersionCode = foss.versionCode
+        jobOutputs.fossApkName = foss.apkName
+        jobOutputs.proVersionCode = pro.versionCode
+        jobOutputs.proApkName = pro.apkName
+    }
+
+    job(
+        id = "create-release",
+        name = "Create release",
+        runsOn = UbuntuLatest,
+        needs = listOf(buildReleaseJob),
+        `if` = expr { contains(ENABLE_RELEASES, "true") }
+    ) {
         val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
         val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
 
-        createRelease(fossApkPathExpr, fossVersionCodeExpr, NIGHTLY_REPO_ACCESS_TOKEN, NIGHTLY_REPO_URL, releaseNote)
         createRelease(
-            proApkPathExpr,
-            proVersionCodeExpr,
+            fossBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.fossApkName),
+            buildReleaseJob.outputs.fossVersionCode,
+            NIGHTLY_REPO_ACCESS_TOKEN,
+            NIGHTLY_REPO_URL,
+            releaseNote
+        )
+        createRelease(
+            proBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.proApkName),
+            buildReleaseJob.outputs.proVersionCode,
             NIGHTLY_PRO_REPO_ACCESS_TOKEN,
             NIGHTLY_PRO_REPO_URL,
             releaseNote
         )
     }
 }
-

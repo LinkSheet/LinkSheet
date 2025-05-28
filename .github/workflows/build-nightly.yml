@@ -36,7 +36,7 @@ jobs:
     - id: 'step-3'
       uses: 'gradle/actions/setup-gradle@v3'
     - id: 'step-4'
-      run: './gradlew test'
+      run: './gradlew testFossReleaseUnitTest'
   integration-tests:
     name: 'Integration tests'
     runs-on: 'ubuntu-latest'
@@ -74,7 +74,7 @@ jobs:
         api-level: '35'
         arch: '${{ steps.step-5.outputs.arch }}'
         target: '${{ steps.step-5.outputs.target }}'
-        script: './gradlew connectedAndroidTest'
+        script: './gradlew connectedFossReleaseAndroidTest'
   build-release:
     name: 'Build release'
     runs-on: 'ubuntu-latest'

@@ -197,8 +197,7 @@ fun JobBuilder<*>.createRelease(
             "BUILD_FLAVOR" to expr(BUILD_FLAVOR),
             "BUILD_TYPE" to expr(BUILD_TYPE),
             releaseNoteVar.name to expr(releaseNote),
-
-            ),
+        ),
         `if` = expr { contains(ENABLE_RELEASES, "true") }
     )
 }

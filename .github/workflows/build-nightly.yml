@@ -15,7 +15,30 @@ env:
   BUILD_TYPE: 'nightly'
   BUILD_FLAVOR_TYPE: 'fossNightly'
 jobs:
-  build:
+  unit-tests:
+    name: 'Unit tests'
+    runs-on: 'ubuntu-latest'
+    steps:
+    - id: 'step-0'
+      uses: 'actions/checkout@v4'
+      with:
+        fetch-depth: '0'
+        fetch-tags: 'true'
+        submodules: 'true'
+    - id: 'step-1'
+      uses: 'actions/setup-java@v4'
+      with:
+        java-version: '21'
+        distribution: 'zulu'
+        cache: 'gradle'
+    - id: 'step-2'
+      uses: 'android-actions/setup-android@v3'
+    - id: 'step-3'
+      uses: 'gradle/actions/setup-gradle@v3'
+    - id: 'step-4'
+      run: './gradlew test'
+  integration-tests:
+    name: 'Integration tests'
     runs-on: 'ubuntu-latest'
     steps:
     - id: 'step-0'
@@ -26,41 +49,69 @@ jobs:
         sudo udevadm control --reload-rules
         sudo udevadm trigger --name-match=kvm
     - id: 'step-1'
-      name: 'Install JQ'
-      run: 'sudo apt-get install jq -y'
-    - id: 'step-2'
       uses: 'actions/checkout@v4'
       with:
         fetch-depth: '0'
         fetch-tags: 'true'
         submodules: 'true'
-    - id: 'step-3'
+    - id: 'step-2'
       uses: 'actions/setup-java@v4'
       with:
         java-version: '21'
         distribution: 'zulu'
         cache: 'gradle'
-    - id: 'step-4'
+    - id: 'step-3'
       uses: 'android-actions/setup-android@v3'
+    - id: 'step-4'
+      uses: 'gradle/actions/setup-gradle@v3'
+    - id: 'step-5'
+      uses: './.github/actions/get-avd-info'
+      with:
+        api-level: '35'
+    - id: 'step-6'
+      uses: 'reactivecircus/android-emulator-runner@v2'
+      with:
+        api-level: '35'
+        arch: '${{ steps.step-5.outputs.arch }}'
+        target: '${{ steps.step-5.outputs.target }}'
+        script: './gradlew connectedAndroidTest'
+  build-release:
+    name: 'Build release'
+    runs-on: 'ubuntu-latest'
+    needs:
+    - 'unit-tests'
+    - 'integration-tests'
+    outputs:
+      fossVersionCode: '${{ steps.step-8.outputs.VERSION_CODE }}'
+      fossApkName: '${{ steps.step-8.outputs.OUTPUT_FILE }}'
+      proVersionCode: '${{ steps.step-9.outputs.VERSION_CODE }}'
+      proApkName: '${{ steps.step-9.outputs.OUTPUT_FILE }}'
+    steps:
+    - id: 'step-0'
+      name: 'Install JQ'
+      run: 'sudo apt-get install jq -y'
+    - id: 'step-1'
+      uses: 'actions/checkout@v4'
+      with:
+        fetch-depth: '0'
+        fetch-tags: 'true'
+        submodules: 'true'
+    - id: 'step-2'
+      uses: 'actions/setup-java@v4'
+      with:
+        java-version: '21'
+        distribution: 'zulu'
+        cache: 'gradle'
+    - id: 'step-3'
+      uses: 'android-actions/setup-android@v3'
+    - id: 'step-4'
+      uses: 'gradle/actions/setup-gradle@v3'
     - id: 'step-5'
       uses: 'timheuer/base64-to-file@v1'
       with:
         fileName: 'keystore.jks'
         encodedString: '${{ secrets.KEYSTORE_FILE }}'
     - id: 'step-6'
-      uses: 'gradle/actions/setup-gradle@v3'
-    - id: 'step-7'
-      run: './gradlew test'
-    - id: 'step-8'
-      uses: './.github/actions/get-avd-info'
-      api-level: '35'
-    - id: 'step-9'
-      uses: 'reactivecircus/android-emulator-runner@v2'
-      api-level: '35'
-      arch: 'steps.step-8.outputs.arch'
-      target: 'steps.step-8.outputs.target'
-      script: './gradlew connectedAndroidTest'
-    - id: 'step-10'
       env:
         GITHUB_WORKFLOW_RUN_ID: '${{ github.run_id }}'
         KEYSTORE_FILE_PATH: '${{ steps.step-5.outputs.filePath }}'
@@ -70,7 +121,7 @@ jobs:
         FLAVOR_CONFIG: ''
         API_HOST: '${{ vars.API_HOST }}'
       run: './gradlew assembleFossNightly'
-    - id: 'step-11'
+    - id: 'step-7'
       env:
         GITHUB_WORKFLOW_RUN_ID: '${{ github.run_id }}'
         KEYSTORE_FILE_PATH: '${{ steps.step-5.outputs.filePath }}'
@@ -80,7 +131,7 @@ jobs:
         FLAVOR_CONFIG: '${{ secrets.PRO_FLAVOR_CONFIG }}'
         API_HOST: '${{ vars.API_HOST }}'
       run: './gradlew assembleProNightly'
-    - id: 'step-12'
+    - id: 'step-8'
       name: 'Get output file path'
       env:
         OUTPUT_METADATA_JSON: 'app/build/outputs/apk/foss/nightly/output-metadata.json'
@@ -89,7 +140,7 @@ jobs:
         json_content=$(cat "$OUTPUT_METADATA_JSON")
         echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
         echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
-    - id: 'step-13'
+    - id: 'step-9'
       name: 'Get output file path'
       env:
         OUTPUT_METADATA_JSON: 'app/build/outputs/apk/pro/nightly/output-metadata.json'
@@ -98,14 +149,21 @@ jobs:
         json_content=$(cat "$OUTPUT_METADATA_JSON")
         echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
         echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
-    - id: 'step-14'
+    - id: 'step-10'
       uses: 'actions/upload-artifact@v4'
       with:
         name: 'linksheet-nightly'
         path: |-
-          app/build/outputs/apk/foss/nightly/${{ steps.step-12.outputs.OUTPUT_FILE }}
+          app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}
           app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
-    - id: 'step-15'
+  create-release:
+    name: 'Create release'
+    runs-on: 'ubuntu-latest'
+    needs:
+    - 'build-release'
+    if: '${{ contains(vars.ENABLE_RELEASES, true) }}'
+    steps:
+    - id: 'step-0'
       uses: '1fexd/gh-create-release-notes@0.0.11'
       with:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
@@ -113,27 +171,25 @@ jobs:
         nightly-repo: '${{ vars.NIGHTLY_REPO_URL }}'
         last-commit-sha: '${{ github.event.before }}'
         commit-sha: '${{ github.sha }}'
-    - id: 'step-16'
+    - id: 'step-1'
       env:
-        APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ steps.step-12.outputs.OUTPUT_FILE }}'
+        APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ needs.build-release.outputs.fossApkName }}'
         NIGHTLY_TAG: '${{ github.ref }}'
-        VERSION_CODE: '${{ steps.step-12.outputs.VERSION_CODE }}'
+        VERSION_CODE: 'needs.build-release.outputs.fossVersionCode'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
         BUILD_TYPE: '${{ env.BUILD_TYPE }}'
-        RELEASE_NOTE: '${{ steps.step-15.outputs.releaseNote }}'
+        RELEASE_NOTE: '${{ steps.step-0.outputs.releaseNote }}'
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
-      if: '${{ contains(vars.ENABLE_RELEASES, true) }}'
-    - id: 'step-17'
+    - id: 'step-2'
       env:
-        APK_FILE: 'app/build/outputs/apk/pro/nightly/${{ steps.step-13.outputs.OUTPUT_FILE }}'
+        APK_FILE: 'app/build/outputs/apk/pro/nightly/${{ needs.build-release.outputs.proApkName }}'
         NIGHTLY_TAG: '${{ github.ref }}'
-        VERSION_CODE: '${{ steps.step-13.outputs.VERSION_CODE }}'
+        VERSION_CODE: 'needs.build-release.outputs.proVersionCode'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_PRO_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
         BUILD_TYPE: '${{ env.BUILD_TYPE }}'
-        RELEASE_NOTE: '${{ steps.step-15.outputs.releaseNote }}'
+        RELEASE_NOTE: '${{ steps.step-0.outputs.releaseNote }}'
       run: 'gh release create -R "$NIGHTLY_REPO" -t "$VERSION_CODE" "$NIGHTLY_TAG" "$APK_FILE" --latest --notes "$RELEASE_NOTE"'
-      if: '${{ contains(vars.ENABLE_RELEASES, true) }}'

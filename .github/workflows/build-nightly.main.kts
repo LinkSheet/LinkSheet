@@ -307,7 +307,7 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
         runsOn = UbuntuLatest
     ) {
         setupAndroid()
-        run(command = "./gradlew test")
+        run(command = "./gradlew testFossReleaseUnitTest")
     }
     val integrationTestJob = job(
         id = "integration-tests",
@@ -343,7 +343,7 @@ sudo udevadm trigger --name-match=kvm"""
                     "api-level" to "$apiLevel",
                     "arch" to expr(avdInfoStep.outputs["arch"]),
                     "target" to expr(avdInfoStep.outputs["target"]),
-                    "script" to "./gradlew connectedAndroidTest"
+                    "script" to "./gradlew connectedFossReleaseAndroidTest"
                 )
             ),
         )

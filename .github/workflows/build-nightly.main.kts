@@ -16,6 +16,7 @@ import io.github.typesafegithub.workflows.actions.gradle.ActionsSetupGradle
 import io.github.typesafegithub.workflows.domain.RunnerType.UbuntuLatest
 import io.github.typesafegithub.workflows.domain.Shell
 import io.github.typesafegithub.workflows.domain.actions.CustomAction
+import io.github.typesafegithub.workflows.domain.actions.CustomLocalAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
 import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
 import io.github.typesafegithub.workflows.dsl.JobBuilder
@@ -24,6 +25,7 @@ import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
 import io.github.typesafegithub.workflows.yaml.ConsistencyCheckJobConfig
+import kotlin.collections.mapOf
 
 
 val KEYSTORE_FILE by Contexts.secrets
@@ -68,15 +70,17 @@ val base64ToFile = CustomAction(
     )
 )
 
+val avdInfo = CustomLocalAction(
+    actionPath = "./.github/actions/get-avd-info",
+
+    )
+
 val emulatorRunner = CustomAction(
     actionOwner = "reactivecircus",
     actionName = "android-emulator-runner",
     actionVersion = "v2",
-    inputs = mapOf(
-        "api-level" to "34",
-        "script" to "./gradlew connectedAndroidTest"
+
     )
-)
 
 val nightlyReleaseNotes = CustomAction(
     actionOwner = "1fexd",
@@ -334,7 +338,24 @@ sudo udevadm trigger --name-match=kvm"""
         uses(action = ActionsSetupGradle())
 
         run(command = "./gradlew test")
-        uses(action = emulatorRunner)
+
+        val apiLevel = 35
+        val avdInfoStep = uses(
+            action = avdInfo,
+            _customArguments = mapOf(
+                "api-level" to "$apiLevel",
+            )
+        )
+
+        uses(
+            action = emulatorRunner,
+            _customArguments = mapOf(
+                "api-level" to "$apiLevel",
+                "arch" to avdInfoStep.outputs["arch"],
+                "target" to avdInfoStep.outputs["target"],
+                "script" to "./gradlew connectedAndroidTest"
+            )
+        )
 
         val (foss, pro) = buildFlavor(androidKeyStore.outputs["filePath"])
         val (fossVersionCodeExpr, fossApkPathExpr) = foss

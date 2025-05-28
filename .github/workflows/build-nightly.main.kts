@@ -68,6 +68,16 @@ val base64ToFile = CustomAction(
     )
 )
 
+val emulatorRunner = CustomAction(
+    actionOwner = "reactivecircus",
+    actionName = "android-emulator-runner",
+    actionVersion = "v2",
+    inputs = mapOf(
+        "api-level" to "34",
+        "script" to "./gradlew connectedAndroidTest"
+    )
+)
+
 val nightlyReleaseNotes = CustomAction(
     actionOwner = "1fexd",
     actionName = "gh-create-release-notes",
@@ -167,7 +177,13 @@ val apkFileVar = Variable("APK_FILE")
 val releaseNoteVar = Variable("RELEASE_NOTE")
 
 
-fun JobBuilder<*>.createRelease(path: String, version: String, token: String, nightlyRepoUrl: String, releaseNote: String) {
+fun JobBuilder<*>.createRelease(
+    path: String,
+    version: String,
+    token: String,
+    nightlyRepoUrl: String,
+    releaseNote: String,
+) {
     run(
         command = bash {
             exec("gh release create -R ${nightlyRepoVar()} -t ${versionCodeVar()} ${nightlyTagVar()} ${apkFileVar()} --latest --notes ${releaseNoteVar()}")
@@ -182,7 +198,7 @@ fun JobBuilder<*>.createRelease(path: String, version: String, token: String, ni
             "BUILD_TYPE" to expr(BUILD_TYPE),
             releaseNoteVar.name to expr(releaseNote),
 
-        ),
+            ),
         `if` = expr { contains(ENABLE_RELEASES, "true") }
     )
 }
@@ -290,6 +306,13 @@ workflow(
     }
 ) {
     job(id = "build", runsOn = UbuntuLatest) {
+        run(
+            name = "Enable KVM",
+            shell = Shell.Bash,
+            command = """echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger --name-match=kvm"""
+        )
         run(name = "Install JQ", command = "sudo apt-get install jq -y")
         uses(
             action = Checkout(
@@ -312,6 +335,7 @@ workflow(
         uses(action = ActionsSetupGradle())
 
         run(command = "./gradlew test")
+        uses(action = emulatorRunner)
 
         val (foss, pro) = buildFlavor(androidKeyStore.outputs["filePath"])
         val (fossVersionCodeExpr, fossApkPathExpr) = foss
@@ -328,7 +352,13 @@ workflow(
         val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
 
         createRelease(fossApkPathExpr, fossVersionCodeExpr, NIGHTLY_REPO_ACCESS_TOKEN, NIGHTLY_REPO_URL, releaseNote)
-        createRelease(proApkPathExpr, proVersionCodeExpr, NIGHTLY_PRO_REPO_ACCESS_TOKEN, NIGHTLY_PRO_REPO_URL, releaseNote)
+        createRelease(
+            proApkPathExpr,
+            proVersionCodeExpr,
+            NIGHTLY_PRO_REPO_ACCESS_TOKEN,
+            NIGHTLY_PRO_REPO_URL,
+            releaseNote
+        )
     }
 }
 

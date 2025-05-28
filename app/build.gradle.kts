@@ -98,6 +98,7 @@ android {
             long("BUILT_AT", now)
             string("COMMIT", commit)
             string("BRANCH", branch)
+            boolean("IS_CI", System.getenv("CI")?.toBooleanStrictOrNull() == true)
             string("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
             string("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
             boolean(

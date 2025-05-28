@@ -52,7 +52,7 @@ import androidx.core.net.toUri
 import fe.linksheet.activity.bottomsheet.LaunchFailure
 import fe.linksheet.activity.bottomsheet.LaunchHandler
 import fe.linksheet.activity.bottomsheet.LaunchResult
-import fe.linksheet.activity.bottomsheet.content.pending.M3ELoadingIndicatorSheetContent
+import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
 
 //import relocated.androidx.compose.material3.SheetValue
 //import relocated.androidx.compose.material3.rememberModalBottomSheetState
@@ -212,33 +212,18 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         when (resolveResult) {
             is IntentResolveResult.Pending -> {
                 val expressiveLoadingSheet by viewModel.expressiveLoadingSheet.collectAsStateWithLifecycle()
-                if (expressiveLoadingSheet) {
-                    M3ELoadingIndicatorSheetContent(
-                        modifier = modifier,
-                        event = event,
-                        interaction = interaction,
-                        requestExpand = {
-                            logger.info("Loading indicator: Pre-Request expand")
-                            coroutineScope.launch {
-                                logger.info("Loading indicator: Request expand")
-                                sheetState.expand()
-                            }
+                LoadingIndicatorWrapper(
+                    expressiveLoadingSheet = expressiveLoadingSheet,
+                    event = event,
+                    interaction = interaction,
+                    requestExpand = {
+                        logger.info("Loading indicator: Pre-Request expand")
+                        coroutineScope.launch {
+                            logger.info("Loading indicator: Request expand")
+                            sheetState.expand()
                         }
-                    )
-                } else {
-                    LoadingIndicatorSheetContent(
-                        modifier = modifier,
-                        event = event,
-                        interaction = interaction,
-                        requestExpand = {
-                            logger.info("Loading indicator: Pre-Request expand")
-                            coroutineScope.launch {
-                                logger.info("Loading indicator: Request expand")
-                                sheetState.expand()
-                            }
-                        }
-                    )
-                }
+                    }
+                )
             }
 
             is IntentResolveResult.Default -> {
@@ -323,7 +308,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
     private suspend fun handleLaunch(intent: LaunchIntent) {
         val result = launchHandler.start(intent.intent)
-        if(result !is LaunchFailure) return
+        if (result !is LaunchFailure) return
 
         logger.error(result.ex, "Launch failed: $result")
         val textId = when (result) {

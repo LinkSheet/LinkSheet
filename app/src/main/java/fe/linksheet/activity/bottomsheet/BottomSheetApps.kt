@@ -340,7 +340,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
         intent = Intent(),
         uri = Uri.parse("https://google.com"),
         unfurlResult = null,
-        referrer = null,
+        referringPackageName = null,
         resolved = sorted,
         filteredItem = filtered,
         alwaysPreferred = state.lastChosen.alwaysPreferred,

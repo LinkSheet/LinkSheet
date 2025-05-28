@@ -7,6 +7,7 @@ import android.net.Uri
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
+import fe.linksheet.util.AndroidUriHelper
 
 interface IntentLauncher {
     fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: KnownBrowser?): LaunchIntent
@@ -31,7 +32,7 @@ class DefaultIntentLauncher(
         val showAsReferrer = showAsReferrer()
         intent.putExtra(
             LinkSheetConnector.EXTRA_REFERRER,
-            if (showAsReferrer) ReferrerHelper.createReferrer(selfPackage) else referrer
+            if (showAsReferrer) AndroidUriHelper.create(AndroidUriHelper.Type.Package, selfPackage) else referrer
         )
 
         if (!showAsReferrer) {

@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.compose.runtime.Stable
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.module.resolver.util.ReferrerHelper
 import fe.linksheet.util.intent.parser.UriException
 import me.saket.unfurl.UnfurlResult
 
@@ -21,7 +20,7 @@ sealed interface IntentResolveResult {
         val intent: Intent,
         val uri: Uri?,
         val unfurlResult: UnfurlResult?,
-        referrer: Uri?,
+        referringPackageName: String?,
         val resolved: List<ActivityAppInfo>,
         val filteredItem: ActivityAppInfo?,
         alwaysPreferred: Boolean?,
@@ -32,7 +31,6 @@ sealed interface IntentResolveResult {
     ) : IntentResolveResult {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
 
-        private val referringPackageName = ReferrerHelper.getReferringPackage(referrer)
 
         val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
         val app = filteredItem ?: resolved.firstOrNull()

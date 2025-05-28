@@ -4,17 +4,14 @@ package fe.linksheet.module.viewmodel
 import android.app.Activity
 import android.app.Application
 import android.app.DownloadManager
-import android.content.ActivityNotFoundException
 import android.content.ClipboardManager
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.core.content.getSystemService
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import coil3.ImageLoader
@@ -27,7 +24,6 @@ import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.TapConfig
-import fe.linksheet.extension.android.ioAsync
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.app.ActivityAppInfo
@@ -49,7 +45,6 @@ import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchMainIntent
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -60,7 +55,12 @@ import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*
 import androidx.core.net.toUri
+import fe.android.preference.helper.Preference
+import fe.composekit.preference.ViewModelStatePreference
+import fe.linksheet.extension.android.getSystemServiceOrThrow
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
+import fe.linksheet.util.AndroidUriHelper
+import fe.linksheet.util.intent.buildIntent
 
 class BottomSheetViewModel(
     val context: Application,
@@ -75,44 +75,34 @@ class BottomSheetViewModel(
     val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
-
+    val clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>()
+    val downloadManager = context.getSystemServiceOrThrow<DownloadManager>()
 
     val themeAmoled = preferenceRepository.asViewModelState(AppPreferences.themeAmoled)
     val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.hideAfterCopying)
-
     val urlCopiedToast = preferenceRepository.asViewModelState(AppPreferences.urlCopiedToast)
     val downloadStartedToast = preferenceRepository.asViewModelState(AppPreferences.downloadStartedToast)
-
     val gridLayout = preferenceRepository.asViewModelState(AppPreferences.gridLayout)
     val resolveViaToast = preferenceRepository.asViewModelState(AppPreferences.resolveViaToast)
     val resolveViaFailedToast = preferenceRepository.asViewModelState(AppPreferences.resolveViaFailedToast)
     val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.enableRequestPrivateBrowsingButton)
-
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.hideBottomSheetChoiceButtons)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.enableIgnoreLibRedirectButton)
-
-    val clipboardManager = context.getSystemService<ClipboardManager>()!!
-    val downloadManager = context.getSystemService<DownloadManager>()!!
-
     val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.bottomSheetProfileSwitcher)
-
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.tapConfigSingle)
     val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.tapConfigDouble)
     val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.tapConfigLong)
     val expandOnAppSelect = preferenceRepository.asViewModelState(AppPreferences.expandOnAppSelect)
     val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheetNativeLabel)
-
     val improvedBottomSheetExpandFully = experimentRepository.asViewModelState(Experiments.improvedBottomSheetExpandFully)
     val improvedBottomSheetUrlDoubleTap = experimentRepository.asViewModelState(Experiments.improvedBottomSheetUrlDoubleTap)
     val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
-
     val manualFollowRedirects = experimentRepository.asViewModelState(Experiments.manualFollowRedirects)
     val noBottomSheetStateSave = experimentRepository.asViewModelState(Experiments.noBottomSheetStateSave)
     val expressiveLoadingSheet = experimentRepository.asViewModelState(Experiments.expressiveLoadingSheet)
     val appListSelectedIdx = mutableIntStateOf(-1)
-
     val events = intentResolver.events
     val interactions = intentResolver.interactions
 
@@ -129,15 +119,14 @@ class BottomSheetViewModel(
     }
 
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
-        return context.startActivityWithConfirmation(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-            this.data = "package:${info.packageName}".toUri()
-            this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        })
-    }
+        val intent = buildIntent(
+            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+            uri = AndroidUriHelper.create(AndroidUriHelper.Type.Package, info.packageName)
+        ) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
 
-    private fun resolveFailureString(name: String, error: Any?): String {
-        val str = if (error is Throwable) "${error::class.java.simpleName}(${error.message})" else error.toString()
-        return context.getString(R.string.resolve_failed, name, str)
+        return context.startActivityWithConfirmation(intent)
     }
 
     private val Intent.pkgCmp: Pair<String?, ComponentName?>
@@ -199,7 +188,6 @@ class BottomSheetViewModel(
         downloadManager.enqueue(request)
     }
 
-
     suspend fun makeOpenAppIntent(
         info: ActivityAppInfo,
         intent: Intent,
@@ -226,7 +214,9 @@ class BottomSheetViewModel(
         return launchIntent
     }
 
-    private fun ClickType.getPreference(modifier: ClickModifier): TapConfig {
+    fun ClickType.pickPreference(
+        modifier: ClickModifier,
+    ): TapConfig {
         if (modifier is ClickModifier.Private || modifier is ClickModifier.Always) {
             return TapConfig.OpenApp
         }
@@ -248,7 +238,7 @@ class BottomSheetViewModel(
         type: ClickType,
         modifier: ClickModifier,
     ): LaunchIntent? {
-        val config = type.getPreference(modifier)
+        val config = type.pickPreference(modifier)
         if (config is TapConfig.OpenApp) {
             return makeOpenAppIntent(
                 info = info,
@@ -302,11 +292,8 @@ class BottomSheetViewModel(
                 info = interaction.info,
                 intent = result.intent,
                 referrer = activity.referrer,
-                always = modifier == ClickModifier.Always,
-                privateBrowsingBrowser = when (modifier) {
-                    is ClickModifier.Private -> modifier.browser
-                    else -> null
-                },
+                always = modifier is ClickModifier.Always,
+                privateBrowsingBrowser = (modifier as? ClickModifier.Private)?.browser,
                 persist = modifier !is ClickModifier.Private
             )
         }

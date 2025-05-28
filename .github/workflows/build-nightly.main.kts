@@ -1,7 +1,7 @@
 #!/usr/bin/env kotlin
 
 @file:Repository("https://repo.maven.apache.org/maven2/")
-@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.0.1")
+@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.4.0")
 @file:Repository("https://bindings.krzeminski.it")
 @file:DependsOn("actions:checkout:v4")
 @file:DependsOn("actions:setup-java:v4")
@@ -21,6 +21,7 @@ import io.github.typesafegithub.workflows.domain.actions.CustomLocalAction
 import io.github.typesafegithub.workflows.domain.triggers.Push
 import io.github.typesafegithub.workflows.domain.triggers.WorkflowDispatch
 import io.github.typesafegithub.workflows.dsl.JobBuilder
+import io.github.typesafegithub.workflows.dsl.WorkflowBuilder
 import io.github.typesafegithub.workflows.dsl.expressions.Contexts
 import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
@@ -99,11 +100,11 @@ fun cmdQuote(name: String): String {
 
 
 fun subshell(cmd: String): String {
-    return "\$($cmd)"
+    return "$($cmd)"
 }
 
 class Variable(val name: String) {
-    private val quoted = cmdQuote("\$$name")
+    private val quoted = cmdQuote("$$name")
 
     operator fun invoke(): String {
         return quoted
@@ -299,25 +300,7 @@ fun JobBuilder<*>.setupAndroid() {
     uses(action = ActionsSetupGradle())
 }
 
-workflow(
-    name = "Build nightly APK",
-    env = mapOf(
-        "BUILD_FLAVOR" to "foss",
-        "BUILD_TYPE" to "nightly",
-        "BUILD_FLAVOR_TYPE" to "fossNightly"
-    ),
-    on = listOf(
-        WorkflowDispatch(), Push(
-            tags = listOf("nightly-*"),
-            pathsIgnore = listOf("*.md")
-        )
-    ),
-    consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
-    sourceFile = __FILE__,
-    targetFileName = __FILE__.toPath().fileName?.let {
-        it.toString().substringBeforeLast(".main.kts") + ".yml"
-    }
-) {
+fun WorkflowBuilder.setupWorkflow(release: Boolean) {
     val unitTestJob = job(
         id = "unit-tests",
         name = "Unit tests",
@@ -399,29 +382,67 @@ sudo udevadm trigger --name-match=kvm"""
         jobOutputs.proApkName = pro.apkName
     }
 
-    job(
-        id = "create-release",
-        name = "Create release",
-        runsOn = UbuntuLatest,
-        needs = listOf(buildReleaseJob),
-        `if` = expr { contains(ENABLE_RELEASES, "true") }
-    ) {
-        val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
-        val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
+    if (release) {
+        job(
+            id = "create-release",
+            name = "Create release",
+            runsOn = UbuntuLatest,
+            needs = listOf(buildReleaseJob),
+            `if` = expr { contains(ENABLE_RELEASES, "true") }
+        ) {
+            val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
+            val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
 
-        createRelease(
-            fossBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.fossApkName),
-            buildReleaseJob.outputs.fossVersionCode,
-            NIGHTLY_REPO_ACCESS_TOKEN,
-            NIGHTLY_REPO_URL,
-            releaseNote
-        )
-        createRelease(
-            proBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.proApkName),
-            buildReleaseJob.outputs.proVersionCode,
-            NIGHTLY_PRO_REPO_ACCESS_TOKEN,
-            NIGHTLY_PRO_REPO_URL,
-            releaseNote
-        )
+            createRelease(
+                fossBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.fossApkName),
+                buildReleaseJob.outputs.fossVersionCode,
+                NIGHTLY_REPO_ACCESS_TOKEN,
+                NIGHTLY_REPO_URL,
+                releaseNote
+            )
+            createRelease(
+                proBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.proApkName),
+                buildReleaseJob.outputs.proVersionCode,
+                NIGHTLY_PRO_REPO_ACCESS_TOKEN,
+                NIGHTLY_PRO_REPO_URL,
+                releaseNote
+            )
+        }
     }
 }
+
+val env = mapOf(
+    "BUILD_FLAVOR" to "foss",
+    "BUILD_TYPE" to "nightly",
+    "BUILD_FLAVOR_TYPE" to "fossNightly"
+)
+val on = listOf(
+    WorkflowDispatch(), Push(
+        tags = listOf("nightly-*"),
+        pathsIgnore = listOf("*.md")
+    )
+)
+
+workflow(
+    name = "Build nightly APK",
+    env = env,
+    on = on,
+    consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
+    sourceFile = __FILE__,
+    targetFileName = __FILE__.toPath().fileName?.let {
+        it.toString().substringBeforeLast(".main.kts") + ".yml"
+    },
+    block = { setupWorkflow(true) }
+)
+
+workflow(
+    name = "Build nightly APK (nopublish)",
+    env = env,
+    on = on,
+    consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
+    sourceFile = __FILE__,
+    targetFileName = __FILE__.toPath().fileName?.let {
+        it.toString().substringBeforeLast(".main.kts") + "-nopublish.yml"
+    },
+    block = { setupWorkflow(false) }
+)

@@ -2,7 +2,7 @@
 # If you want to modify the workflow, please change the Kotlin file and regenerate this YAML file.
 # Generated with https://github.com/typesafegithub/github-workflows-kt
 
-name: 'Build nightly APK'
+name: 'Build nightly APK (nopublish)'
 on:
   workflow_dispatch: {}
   push:

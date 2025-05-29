@@ -542,4 +542,20 @@
     <string name="settings_profile_switcher__title_no_profile">Aucun profil(s) disponible</string>
     <string name="settings_home__title_clipboard_card">Carte du presse-papiers</string>
     <string name="settings_home__text_clipboard_card">Afficher le contenu actuel du presse-papiers sur la page d\'accueil s\'il s\'agit d\'une url</string>
+    <string name="export_settings__text_failure">Échec de l\'exportation des paramètres !</string>
+    <string name="import_settings__text_success">Importé !</string>
+    <string name="import_settings__text_failure">Échec de l\'importation des paramètres !</string>
+    <string name="settings_remote_config__title_dialog">Activer la configuration à distance ?</string>
+    <string name="bottom_sheet__text_launch_failure_other">Lancement échoué !</string>
+    <string name="export_settings__text_success">Exporté !</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Échec de lancement inconnu !</string>
+    <string name="generic__button_open_external">Ouverture externe</string>
+    <string name="settings_remote_config__text_content">LinkSheet peut mettre à jour automatiquement les ressources de configuration et de documentation internes en se connectant à son serveur de configuration. Pour en savoir plus, cliquez <annotation url-id="github.linksheet.wiki.privacy.remote-config">ici</annotation>.</string>
+    <string name="generic__button_text_enable">Activer</string>
+    <string name="generic__button_text_disable">Désactiver</string>
+    <string name="settings_language__dialog_title">Langue de l\'app</string>
+    <string name="settings_language__text_system_language_with_language">%s (langue du système)</string>
+    <string name="settings_language__text_system_language">Langue du système</string>
+    <string name="bottom_sheet__text_launch_illegal">Tentative de lancement illégale !</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Lancement non autorisé !</string>
 </resources>

@@ -72,11 +72,12 @@ extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
 
 include(":app", ":config")
-include(":bottom-sheet", ":bottom-sheet-new")
-include(":scaffold")
-include(":hidden-api")
 includeProject(":test-instrument", "test-lib/instrument")
 includeProject(":test-core", "test-lib/core")
+includeProject(":scaffold", "lib/scaffold")
+includeProject(":bottom-sheet", "lib/bottom-sheet")
+includeProject(":bottom-sheet-new", "lib/bottom-sheet-new")
+includeProject(":hidden-api", "lib/hidden-api")
 
 buildSettings {
     substitutes {

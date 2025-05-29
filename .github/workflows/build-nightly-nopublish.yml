@@ -74,7 +74,7 @@ jobs:
         api-level: '35'
         arch: '${{ steps.step-5.outputs.arch }}'
         target: '${{ steps.step-5.outputs.target }}'
-        script: './gradlew connectedFossReleaseAndroidTest'
+        script: './gradlew connectedAndroidTest'
   build-release:
     name: 'Build release'
     runs-on: 'ubuntu-latest'

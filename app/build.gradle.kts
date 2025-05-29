@@ -111,6 +111,7 @@ android {
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
         testOptions.unitTests.isIncludeAndroidResources = true
 
         vectorDrawables {
@@ -257,7 +258,6 @@ android {
 
 junitPlatform {
     instrumentationTests {
-        version.set("1.7.0")
         includeExtensions.set(true)
     }
 }
@@ -455,6 +455,7 @@ dependencies {
     testRuntimeOnly(Testing.junit.jupiter.engine)
     testImplementation(Testing.junit.jupiter.params)
 
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.12.2")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)

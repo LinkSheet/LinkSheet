@@ -20,10 +20,16 @@ android {
     buildFeatures {
         buildConfig = true
     }
-}
 
-kotlin {
-    jvmToolchain(Version.JVM)
+    kotlin {
+        jvmToolchain(Version.JVM)
+    }
+
+    packaging {
+        resources {
+            excludes += setOf("META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module", "META-INF/*.md")
+        }
+    }
 }
 
 dependencies {

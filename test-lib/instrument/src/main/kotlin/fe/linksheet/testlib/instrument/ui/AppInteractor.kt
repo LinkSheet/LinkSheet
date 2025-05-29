@@ -12,7 +12,7 @@ class AppInteractor(
     private val device: UiDevice,
     private val targetContext: Context,
 ) {
-    private val targetPackageName = targetContext.packageName
+    val targetPackageName = targetContext.packageName
     private val targetLaunchIntent = targetContext.packageManager.getLaunchIntentForPackage(targetPackageName)
 
     fun launch() {

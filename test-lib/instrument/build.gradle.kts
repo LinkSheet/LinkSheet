@@ -36,8 +36,8 @@ dependencies {
     implementation(AndroidX.compose.ui.testJunit4)
 
     implementation(AndroidX.test.ext.junit.ktx)
-    api("androidx.test.uiautomator:uiautomator:2.3.0")
-    implementation("androidx.activity:activity-ktx:1.10.1")
+    api(AndroidX.test.uiAutomator)
+    implementation(AndroidX.activity.ktx)
     implementation(AndroidX.activity.compose)
     implementation(AndroidX.core.ktx)
 }

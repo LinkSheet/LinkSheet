@@ -455,8 +455,8 @@ dependencies {
     testRuntimeOnly(Testing.junit.jupiter.engine)
     testImplementation(Testing.junit.jupiter.params)
 
-    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.12.2")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
+    androidTestImplementation(Testing.junit.jupiter.api)
+    androidTestImplementation(AndroidX.test.uiAutomator)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
